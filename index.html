@@ -110,7 +110,7 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="hud">
-    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">RELOAD</span></div>
+    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">ARMS</span></div>
     <div id="timeLine">Day · 06:00</div>
     <div id="tacticalLine">NVG off · Laser off</div>
     <div id="stats">
@@ -122,8 +122,8 @@
       <div class="label">Marine HP</div>
       <div id="hpBarBg"><div id="hpBarFill"></div></div>
     </div>
-    <div id="ammo">Minigun · Ammo 300/300 · Grena 3 · Shift run · Scroll/Q/E · R reload · M mute</div>
-    <div id="hint">WASD move · Mouse aim · Shift run · RMB zoom · LMB fire · Space jump · Esc pause · N NVG · Z laser · Scroll/Q/E weapons · G/F · 1/2/3 build · 4 expand · R · M</div>
+    <div id="ammo">Minigun · Ammo 300/300 · Grena 3 · Scroll/Q/E · B build · R · M</div>
+    <div id="hint">WASD · Mouse aim · Shift run · RMB zoom · LMB fire · Space · Esc · N NVG · Z laser · Scroll/Q/E weapons · B build · 1/2/3 buildable · 4 expand · G/F · R · M · Shotgun/Rev/Sniper/GL/Saw</div>
     <div id="placeBanner"></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
@@ -538,13 +538,20 @@
         else if (!spinningUp && lastSpinWasUp) { lastSpinWasUp = false; spinDown(); }
       }
 
+      function chainsawBuzz() {
+        playNoise({ dur: 0.09, vol: 0.11, filterFreq: 900, filterType: 'bandpass' });
+        playTone({ freq: 95, type: 'sawtooth', dur: 0.08, vol: 0.07, slideTo: 70 });
+        playTone({ freq: 140, type: 'square', dur: 0.05, vol: 0.04 });
+      }
+
       return {
         unlock, toggleMute, isMuted, setMuted,
         fire, emptyClick, reloadStart, reloadDone,
         jump, nvgClick, coin, leafHit, treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
-        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak
+        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak,
+        chainsawBuzz
       };
     })();
 
@@ -1981,6 +1988,241 @@
       return gun;
     }
 
+    function makeShotgun() {
+      const gun = new THREE.Group();
+      const receiver = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.13, 0.42), gunMetal);
+      receiver.position.set(0, 0.02, 0.02);
+      receiver.castShadow = true;
+      gun.add(receiver);
+      const stock = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.11, 0.28), gunDark);
+      stock.position.set(0, 0.01, -0.32);
+      gun.add(stock);
+      const grip = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.16, 0.08), gunDark);
+      grip.position.set(0, -0.1, -0.06);
+      grip.rotation.x = 0.28;
+      gun.add(grip);
+      const pump = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.09, 0.22), gunMid);
+      pump.position.set(0, -0.02, 0.28);
+      gun.add(pump);
+      gun.userData.pump = pump;
+      gun.userData.basePumpPos = pump.position.clone();
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.032, 0.55, 10), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.03, 0.58);
+      gun.add(barrel);
+      const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.4, 8), gunDark);
+      tube.rotation.x = Math.PI / 2;
+      tube.position.set(0, -0.04, 0.5);
+      gun.add(tube);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
+      flash.position.set(0, 0.03, 0.88);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 3.2);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.006, 0.006, 7, 4),
+        new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 })
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.03, 4.4);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 0.9;
+      gun.userData.laserLen = 7;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.03, 0.88);
+      return gun;
+    }
+
+    function makeSniper() {
+      const gun = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.12, 0.5), gunMetal);
+      body.position.set(0, 0.02, -0.05);
+      body.castShadow = true;
+      gun.add(body);
+      const stock = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.11, 0.32), gunDark);
+      stock.position.set(0, 0.02, -0.42);
+      gun.add(stock);
+      const grip = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.16, 0.07), gunDark);
+      grip.position.set(0, -0.1, -0.12);
+      grip.rotation.x = 0.25;
+      gun.add(grip);
+      const mag = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.14, 0.08), gunAccent);
+      mag.position.set(0, -0.12, 0.02);
+      gun.add(mag);
+      gun.userData.mag = mag;
+      gun.userData.baseMagPos = mag.position.clone();
+      gun.userData.baseMagRot = mag.rotation.clone();
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.022, 0.95, 10), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.04, 0.65);
+      gun.add(barrel);
+      const brake = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.028, 0.1, 8), gunMid);
+      brake.rotation.x = Math.PI / 2;
+      brake.position.set(0, 0.04, 1.15);
+      gun.add(brake);
+      const scope = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.28, 10), gunDark);
+      scope.rotation.x = Math.PI / 2;
+      scope.position.set(0, 0.14, 0.05);
+      gun.add(scope);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.055, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
+      flash.position.set(0, 0.04, 1.22);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 3.5);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.005, 0.005, 10, 4),
+        new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 })
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.04, 6.2);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 1.2;
+      gun.userData.laserLen = 10;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.04, 1.22);
+      return gun;
+    }
+
+    function makeLauncher() {
+      const gun = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.16, 0.4), gunMetal);
+      body.position.set(0, 0.02, 0);
+      body.castShadow = true;
+      gun.add(body);
+      const stock = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.22), gunDark);
+      stock.position.set(0, 0.02, -0.3);
+      gun.add(stock);
+      const grip = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.16, 0.08), gunDark);
+      grip.position.set(0, -0.1, -0.05);
+      grip.rotation.x = 0.3;
+      gun.add(grip);
+      const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.12, 12), gunMid);
+      drum.rotation.z = Math.PI / 2;
+      drum.position.set(0, -0.02, 0.12);
+      gun.add(drum);
+      gun.userData.drum = drum;
+      gun.userData.baseDrumRot = drum.rotation.clone();
+      gun.userData.mag = drum;
+      gun.userData.baseMagPos = drum.position.clone();
+      gun.userData.baseMagRot = drum.rotation.clone();
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.05, 0.45, 10), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.04, 0.45);
+      gun.add(barrel);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 6), new THREE.MeshBasicMaterial({ color: 0xff9966, transparent: true, opacity: 0 }));
+      flash.position.set(0, 0.04, 0.72);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xff8844, 0, 3);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.006, 0.006, 6, 4),
+        new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 })
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.04, 3.7);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 0.72;
+      gun.userData.laserLen = 6;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.04, 0.72);
+      return gun;
+    }
+
+    function makeChainsaw() {
+      const gun = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.16, 0.32), gunMetal);
+      body.position.set(0, 0.02, -0.05);
+      body.castShadow = true;
+      gun.add(body);
+      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.14, 0.08), gunDark);
+      handle.position.set(0, -0.1, -0.12);
+      handle.rotation.x = 0.2;
+      gun.add(handle);
+      const topHandle = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.018, 6, 12, Math.PI), gunDark);
+      topHandle.rotation.z = Math.PI / 2;
+      topHandle.position.set(0, 0.14, -0.02);
+      gun.add(topHandle);
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.08, 0.55), gunMid);
+      bar.position.set(0, 0.02, 0.38);
+      gun.add(bar);
+      const blade = new THREE.Group();
+      blade.position.set(0, 0.02, 0.38);
+      for (let i = 0; i < 8; i++) {
+        const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.025, 0.04), bladeMat);
+        tooth.position.set(0, Math.sin(i / 8 * Math.PI * 2) * 0.05, -0.22 + i * 0.06);
+        blade.add(tooth);
+      }
+      gun.add(blade);
+      gun.userData.bladeSpin = blade;
+      gun.userData.flash = null;
+      gun.userData.flashLight = null;
+      gun.userData.laser = null;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.02, 0.65);
+      return gun;
+    }
+
+    function makeRevolver() {
+      const gun = new THREE.Group();
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.22), gunMetal);
+      frame.position.set(0, 0.04, 0.02);
+      frame.castShadow = true;
+      gun.add(frame);
+      const grip = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.16, 0.09), woodMat);
+      grip.position.set(0, -0.08, -0.04);
+      grip.rotation.x = 0.28;
+      gun.add(grip);
+      const cylinder = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.08, 12), gunMid);
+      cylinder.rotation.z = Math.PI / 2;
+      cylinder.position.set(0, 0.02, 0.02);
+      gun.add(cylinder);
+      gun.userData.cylinder = cylinder;
+      gun.userData.baseCylinderRot = cylinder.rotation.clone();
+      gun.userData.mag = cylinder;
+      gun.userData.baseMagPos = cylinder.position.clone();
+      gun.userData.baseMagRot = cylinder.rotation.clone();
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.28, 8), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.05, 0.24);
+      gun.add(barrel);
+      const hammer = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.05, 0.04), gunDark);
+      hammer.position.set(0, 0.1, -0.08);
+      gun.add(hammer);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.045, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
+      flash.position.set(0, 0.05, 0.4);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 2.8);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.005, 0.005, 6, 4),
+        new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 })
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.05, 3.4);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 0.4;
+      gun.userData.laserLen = 6;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.05, 0.4);
+      return gun;
+    }
+
     function makeKnife() {
       const g = new THREE.Group();
       const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.028, 0.14, 8), woodMat);
@@ -2412,36 +2654,75 @@
     pistol.visible = false;
     weaponMount.add(pistol);
 
+    const shotgun = makeShotgun();
+    shotgun.position.set(0.0, -0.01, -0.04);
+    shotgun.scale.setScalar(0.95);
+    shotgun.visible = false;
+    weaponMount.add(shotgun);
+
+    const revolver = makeRevolver();
+    revolver.position.set(0.02, -0.02, -0.06);
+    revolver.scale.setScalar(1.08);
+    revolver.visible = false;
+    weaponMount.add(revolver);
+
+    const sniper = makeSniper();
+    sniper.position.set(0.0, 0.0, -0.06);
+    sniper.scale.setScalar(0.9);
+    sniper.visible = false;
+    weaponMount.add(sniper);
+
+    const launcher = makeLauncher();
+    launcher.position.set(0.0, -0.02, -0.04);
+    launcher.scale.setScalar(0.92);
+    launcher.visible = false;
+    weaponMount.add(launcher);
+
+    const chainsaw = makeChainsaw();
+    chainsaw.position.set(0.0, -0.04, -0.02);
+    chainsaw.scale.setScalar(1.0);
+    chainsaw.visible = false;
+    weaponMount.add(chainsaw);
+
     const knife = makeKnife();
     knife.position.set(0.0, -0.05, 0.05);
     knife.scale.setScalar(1.15);
     weaponMount.add(knife);
 
-    const weaponMeshes = { minigun, m4, pistol };
-    const WEAPON_ORDER = ['minigun', 'm4', 'pistol'];
+    const weaponMeshes = { minigun, m4, pistol, shotgun, revolver, sniper, launcher, chainsaw };
+    const WEAPON_ORDER = ['minigun', 'm4', 'pistol', 'shotgun', 'revolver', 'sniper', 'launcher', 'chainsaw'];
     let weaponIndex = 0;
     let currentWeapon = 'minigun';
 
     const WEAPON_STATS = {
       minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
       m4: { name: 'M4', maxAmmo: 30, reload: 1.4, interval: 0.1, damage: 16, spin: false, auto: true },
-      pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.0, interval: 0.28, damage: 18, spin: false, auto: true }
+      pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.0, interval: 0.28, damage: 18, spin: false, auto: true },
+      shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
+      revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
+      sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.2, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
+      launcher: { name: 'Launcher', maxAmmo: 6, reload: 2.0, interval: 0.55, damage: 55, spin: false, auto: false, explosive: true },
+      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 1.85 }
     };
-    let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12 };
+    let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
     let grenades = 3;
     const MAX_GRENADES = 5;
+    let prevMouseFireHeld = false;
 
     function getActiveGun() {
-      if (currentWeapon === 'm4') return m4;
-      if (currentWeapon === 'pistol') return pistol;
-      return minigun;
+      return weaponMeshes[currentWeapon] || minigun;
     }
 
     const WEAPON_MOUNT_BASE = { x: 0.36, y: 0.92, z: 0.38 };
     const GUN_BASE = {
       minigun: { pos: minigun.position.clone(), rot: minigun.rotation.clone() },
       m4: { pos: m4.position.clone(), rot: m4.rotation.clone() },
-      pistol: { pos: pistol.position.clone(), rot: pistol.rotation.clone() }
+      pistol: { pos: pistol.position.clone(), rot: pistol.rotation.clone() },
+      shotgun: { pos: shotgun.position.clone(), rot: shotgun.rotation.clone() },
+      revolver: { pos: revolver.position.clone(), rot: revolver.rotation.clone() },
+      sniper: { pos: sniper.position.clone(), rot: sniper.rotation.clone() },
+      launcher: { pos: launcher.position.clone(), rot: launcher.rotation.clone() },
+      chainsaw: { pos: chainsaw.position.clone(), rot: chainsaw.rotation.clone() }
     };
     let reloadArmOff = { x: 0, y: 0, z: 0 };
     let reloadMountOff = { rx: 0, ry: 0, rz: 0, y: 0 };
@@ -2487,6 +2768,15 @@
         }
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.copy(gun.userData.baseSlidePos);
+        }
+        if (gun.userData.pump && gun.userData.basePumpPos) {
+          gun.userData.pump.position.copy(gun.userData.basePumpPos);
+        }
+        if (gun.userData.cylinder && gun.userData.baseCylinderRot) {
+          gun.userData.cylinder.rotation.copy(gun.userData.baseCylinderRot);
+        }
+        if (gun.userData.drum && gun.userData.baseDrumRot) {
+          gun.userData.drum.rotation.copy(gun.userData.baseDrumRot);
         }
       }
     }
@@ -2660,7 +2950,72 @@
             mag.rotation.z = 0;
           }
         }
+      } else if (currentWeapon === 'shotgun') {
+        const tipUp = _seg(progress, 0.0, 0.15);
+        const tipDown = _seg(progress, 0.75, 0.95);
+        const tip = tipUp * (1 - tipDown);
+        const pumpBack = _seg(progress, 0.2, 0.45);
+        const pumpFwd = _seg(progress, 0.55, 0.8);
+        const pump = pumpBack * (1 - pumpFwd);
+        gun.rotation.x = -0.18 * tip;
+        reloadMountOff.rx = -0.2 * tip;
+        reloadArmOff.x = -0.35 * tip;
+        if (gun.userData.pump && gun.userData.basePumpPos) {
+          const p = gun.userData.pump;
+          p.position.set(
+            gun.userData.basePumpPos.x,
+            gun.userData.basePumpPos.y,
+            gun.userData.basePumpPos.z - 0.12 * pump
+          );
+        }
+      } else if (currentWeapon === 'revolver') {
+        const tipUp = _seg(progress, 0.0, 0.12);
+        const tipDown = _seg(progress, 0.78, 0.96);
+        const tip = tipUp * (1 - tipDown);
+        gun.rotation.x = -0.25 * tip;
+        gun.rotation.z = 0.35 * tip;
+        reloadMountOff.rx = -0.22 * tip;
+        reloadMountOff.rz = 0.2 * tip;
+        reloadArmOff.x = -0.3 * tip;
+        if (gun.userData.cylinder) {
+          gun.userData.cylinder.rotation.x = progress * Math.PI * 4;
+        }
+      } else if (currentWeapon === 'sniper') {
+        const tiltUp = _seg(progress, 0.0, 0.12);
+        const tiltDown = _seg(progress, 0.7, 0.92);
+        const tilt = tiltUp * (1 - tiltDown);
+        const drop = _seg(progress, 0.08, 0.3);
+        const holdGone = progress >= 0.3 && progress < 0.48;
+        const slam = _seg(progress, 0.48, 0.72);
+        reloadMountOff.rx = -0.28 * tilt;
+        gun.rotation.x = -0.2 * tilt;
+        reloadArmOff.x = -0.45 * tilt - 0.2 * drop + 0.4 * slam;
+        if (gun.userData.mag && gun.userData.baseMagPos) {
+          const mag = gun.userData.mag;
+          const bp = gun.userData.baseMagPos;
+          if (holdGone) {
+            mag.visible = false;
+            mag.position.set(bp.x, bp.y - 0.4, bp.z);
+          } else if (progress < 0.3) {
+            mag.visible = true;
+            mag.position.set(bp.x, bp.y - 0.4 * drop, bp.z);
+          } else {
+            mag.visible = true;
+            mag.position.set(bp.x, bp.y - 0.4 * (1 - slam), bp.z);
+          }
+        }
+      } else if (currentWeapon === 'launcher') {
+        const tipUp = _seg(progress, 0.0, 0.14);
+        const tipDown = _seg(progress, 0.72, 0.94);
+        const tip = tipUp * (1 - tipDown);
+        gun.rotation.x = -0.22 * tip;
+        reloadMountOff.rx = -0.24 * tip;
+        reloadArmOff.x = -0.35 * tip;
+        if (gun.userData.drum) {
+          gun.userData.drum.rotation.x = progress * Math.PI * 2;
+        }
       }
+      // chainsaw: no reload anim
 
       weaponMount.position.set(
         WEAPON_MOUNT_BASE.x,
@@ -2678,19 +3033,20 @@
     function setWeapon(idx) {
       weaponIndex = ((idx % WEAPON_ORDER.length) + WEAPON_ORDER.length) % WEAPON_ORDER.length;
       currentWeapon = WEAPON_ORDER[weaponIndex];
-      minigun.visible = currentWeapon === 'minigun';
-      m4.visible = currentWeapon === 'm4';
-      pistol.visible = currentWeapon === 'pistol';
+      for (const name of WEAPON_ORDER) {
+        if (weaponMeshes[name]) weaponMeshes[name].visible = (name === currentWeapon);
+      }
       knife.visible = false;
       reloading = false;
       reloadTimer = 0;
       resetReloadAnim();
       fireCooldown = 0;
+      prevMouseFireHeld = false;
       updateAmmoHud();
     }
 
     function cycleWeapon(dir) {
-      if (!gameStarted || gameOver || won || placeMode || paused) return;
+      if (!gameStarted || gameOver || won || placeMode || buildMode || paused) return;
       setWeapon(weaponIndex + dir);
     }
 
@@ -2764,6 +3120,9 @@
     ghostGroup.visible = false;
     scene.add(ghostGroup);
     let placeMode = null; // 'barricade' | 'light' | 'heavy' | null
+    let buildMode = false;
+    const BUILD_ORDER = ['barricade', 'light', 'heavy'];
+    let buildIndex = 0;
     let ghostValid = false;
 
     function clearGhostChildren() {
@@ -2889,11 +3248,18 @@
       if (!gameStarted || gameOver || won) return;
       if (mode && paused) return;
       placeMode = mode;
+      if (mode) {
+        buildMode = true;
+        const bi = BUILD_ORDER.indexOf(mode);
+        if (bi >= 0) buildIndex = bi;
+        mouseFireHeld = false;
+        fireHeld = false;
+      }
       rebuildGhost();
       if (mode) {
         const names = { barricade: 'Barricade', light: 'Light turret', heavy: 'Heavy turret' };
         const cost = COST[mode];
-        placeBannerEl.textContent = 'Place ' + names[mode] + ' (' + cost + '¢) · LMB confirm · RMB/Esc cancel';
+        placeBannerEl.textContent = 'Build: ' + names[mode] + ' (' + cost + '¢) · Scroll cycle · B/Esc exit · LMB place';
         placeBannerEl.classList.add('on');
       } else {
         placeBannerEl.classList.remove('on');
@@ -2902,7 +3268,25 @@
     }
 
     function cancelPlaceMode() {
+      buildMode = false;
       setPlaceMode(null);
+    }
+
+    function toggleBuildMode() {
+      if (!gameStarted || gameOver || won || paused) return;
+      if (buildMode || placeMode) {
+        cancelPlaceMode();
+      } else {
+        const mode = BUILD_ORDER[buildIndex] || 'barricade';
+        setPlaceMode(mode);
+      }
+    }
+
+    function cycleBuild(dir) {
+      if (!gameStarted || gameOver || won || paused) return;
+      if (!buildMode && !placeMode) return;
+      buildIndex = ((buildIndex + dir) % BUILD_ORDER.length + BUILD_ORDER.length) % BUILD_ORDER.length;
+      setPlaceMode(BUILD_ORDER[buildIndex]);
     }
 
     function getPlacePoint() {
@@ -3419,6 +3803,7 @@
       if (e.code === 'KeyZ') { toggleLasers(); e.preventDefault(); }
       if (e.code === 'KeyQ') { cycleWeapon(-1); e.preventDefault(); }
       if (e.code === 'KeyE') { cycleWeapon(1); e.preventDefault(); }
+      if (e.code === 'KeyB') { toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
       if (e.code === 'Digit1' || e.code === 'Numpad1') { setPlaceMode('barricade'); e.preventDefault(); }
@@ -3430,7 +3815,7 @@
         if (paused) {
           setPaused(false);
         } else if (gameStarted && !gameOver && !won) {
-          if (placeMode) cancelPlaceMode();
+          if (placeMode || buildMode) cancelPlaceMode();
           else setPaused(true);
         } else {
           cancelPlaceMode();
@@ -3472,18 +3857,25 @@
       if (reloading) {
         ammoEl.classList.remove('empty');
         ammoEl.textContent = st.name + ' · Reloading… · Grena ' + grenades;
+      } else if (st.melee) {
+        ammoEl.classList.remove('empty');
+        ammoEl.innerHTML = st.name + ' · Ammo <span id="ammoCount">∞</span>/CHAINSW · Grena ' + grenades +
+          ' · Hold LMB · Scroll/Q/E · B build · G · F · M';
       } else {
-        ammoEl.innerHTML = st.name + ' · Ammo <span id="ammoCount">' + ammo + '</span>/' + st.maxAmmo +
-          ' · Grena ' + grenades + ' · LMB fire · Shift run · Scroll/Q/E · G · F · R · M';
-        if (ammo <= 0) ammoEl.classList.add('empty');
+        const maxLabel = Number.isFinite(st.maxAmmo) ? st.maxAmmo : '∞';
+        const ammoLabel = Number.isFinite(ammo) ? ammo : '∞';
+        ammoEl.innerHTML = st.name + ' · Ammo <span id="ammoCount">' + ammoLabel + '</span>/' + maxLabel +
+          ' · Grena ' + grenades + ' · LMB fire · Scroll/Q/E · B build · G · F · R · M';
+        if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
     }
     updateAmmoHud();
 
     function startReload() {
-      if (!gameStarted || reloading || paused || gameOver || won || placeMode) return;
+      if (!gameStarted || reloading || paused || gameOver || won || placeMode || buildMode) return;
       const st = WEAPON_STATS[currentWeapon];
+      if (st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return;
       if (ammoByWeapon[currentWeapon] >= st.maxAmmo) return;
       reloading = true;
       reloadTimer = st.reload;
@@ -3613,8 +4005,13 @@
     addEventListener('blur', () => { mouseFireHeld = false; zoomHeld = false; });
     renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
     renderer.domElement.addEventListener('wheel', (e) => {
-      if (!gameStarted || gameOver || won || placeMode || paused) return;
+      if (!gameStarted || gameOver || won || paused) return;
       e.preventDefault();
+      if (buildMode || placeMode) {
+        if (e.deltaY < 0) cycleBuild(1);
+        else if (e.deltaY > 0) cycleBuild(-1);
+        return;
+      }
       if (e.deltaY < 0) cycleWeapon(1);
       else if (e.deltaY > 0) cycleWeapon(-1);
     }, { passive: false });
@@ -3706,10 +4103,98 @@
       }
     }
 
+    function aimDirWithSpread(spread) {
+      const d = getAimDir().clone();
+      if (!spread) return d;
+      const rx = (Math.random() - 0.5) * 2 * spread;
+      const rz = (Math.random() - 0.5) * 2 * spread;
+      d.x += rx;
+      d.z += rz;
+      d.y += (Math.random() - 0.5) * spread * 0.35;
+      return d.normalize();
+    }
+
+    function fireLauncherShell() {
+      const origin = getMuzzleWorld().clone();
+      const dir = getAimDir().clone();
+      const mesh = new THREE.Group();
+      const body = new THREE.Mesh(
+        new THREE.SphereGeometry(0.09, 10, 8),
+        new THREE.MeshStandardMaterial({ color: 0x6a4a20, roughness: 0.55, metalness: 0.45 })
+      );
+      body.castShadow = true; mesh.add(body);
+      const tip = new THREE.Mesh(
+        new THREE.ConeGeometry(0.06, 0.12, 8),
+        new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.7, roughness: 0.35 })
+      );
+      tip.rotation.x = Math.PI / 2;
+      tip.position.z = 0.1;
+      mesh.add(tip);
+      mesh.position.copy(origin);
+      scene.add(mesh);
+      grenadesInFlight.push({
+        mesh,
+        pos: origin.clone(),
+        vx: dir.x * 16,
+        vy: 4.5,
+        vz: dir.z * 16,
+        age: 0,
+        fuse: 1.05
+      });
+    }
+
+    function chainsawTick() {
+      const gun = getActiveGun();
+      if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += 1.2;
+      AudioSys.chainsawBuzz();
+      const st = WEAPON_STATS.chainsaw;
+      const reach = st.reach || 1.85;
+      const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        const dx = z.mesh.position.x - player.position.x;
+        const dz = z.mesh.position.z - player.position.z;
+        const d = Math.hypot(dx, dz);
+        if (d < reach + z.radius) {
+          const dot = (dx * fx + dz * fz) / (d || 1);
+          if (dot > 0.4) {
+            damageZombie(z, st.damage);
+            spawnBlood(z.mesh.position.x, z.mesh.position.y + 1, z.mesh.position.z, fx, fz, 3);
+          }
+        }
+      }
+      for (const t of trees) {
+        if ((!t.alive && !t.stump) || t.falling) continue;
+        const dx = t.x - player.position.x;
+        const dz = t.z - player.position.z;
+        const d = Math.hypot(dx, dz);
+        if (d < reach + t.trunkRadius) {
+          const dot = (dx * fx + dz * fz) / (d || 1);
+          if (dot > 0.35) damageTree(t, t.x, t.z, 1, fx, fz);
+        }
+      }
+    }
+
     function tryFire(dt) {
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
-      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !uiBlocksFire();
+      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire();
+      const edge = fireHeld && !prevMouseFireHeld;
+      prevMouseFireHeld = fireHeld;
+
+      if (st.melee) {
+        barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+        if (!fireHeld || won || gameOver || !gameStarted) return;
+        fireCooldown -= dt;
+        if (fireCooldown <= 0) {
+          fireCooldown = st.interval;
+          chainsawTick();
+        } else if (fireHeld) {
+          const gun = getActiveGun();
+          if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += dt * 18;
+        }
+        return;
+      }
 
       if (st.spin) {
         if (!fireHeld || reloading || ammo <= 0 || won || gameOver || !gameStarted) {
@@ -3734,17 +4219,29 @@
           if (ammoByWeapon.minigun <= 0) { fireHeld = false; updateAmmoHud(); break; }
         }
       } else {
-        // M4 / pistol: auto while held, different intervals
-        if (!fireHeld || reloading || ammo <= 0 || won || gameOver || !gameStarted) {
-          barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
-          if (fireHeld && !reloading && ammo <= 0) AudioSys.emptyClick();
+        // Auto (M4/pistol) or semi (shotgun/revolver/sniper/launcher)
+        barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
+        fireCooldown -= dt;
+        if (reloading || won || gameOver || !gameStarted) return;
+        if (ammo <= 0) {
+          if (fireHeld && edge) AudioSys.emptyClick();
           return;
         }
-        fireCooldown -= dt;
-        if (fireCooldown <= 0) {
+        if (!fireHeld) return;
+        const canShoot = st.auto ? (fireCooldown <= 0) : (edge && fireCooldown <= 0);
+        if (canShoot) {
           fireCooldown = st.interval;
           ammoByWeapon[currentWeapon] -= 1;
-          spawnProjectile(false, null, null, st.damage, 0.5);
+          if (st.explosive) {
+            fireLauncherShell();
+          } else if (st.pellets) {
+            const n = st.pellets;
+            for (let i = 0; i < n; i++) {
+              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, 0.35);
+            }
+          } else {
+            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, st.name === 'Sniper' ? 0.7 : 0.5);
+          }
           triggerMuzzleFlash();
           AudioSys.fire();
           updateAmmoHud();
@@ -4665,7 +5162,10 @@
       for (const c of coinPickups) { c.taken = false; c.mesh.visible = true; }
       playerHp = PLAYER_MAX_HP;
       hurtFlash = 0;
-      ammoByWeapon = { minigun: 300, m4: 30, pistol: 12 };
+      ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
+      buildMode = false;
+      buildIndex = 0;
+      prevMouseFireHeld = false;
       grenades = 3;
       setWeapon(0);
       reloading = false;
@@ -4766,9 +5266,12 @@
 
       // FOV lerp before aim so raycast uses current zoom FOV
       {
-        const wantZoom = zoomHeld && gameStarted && !placeMode;
-        const fovTarget = wantZoom ? FOV_ZOOM : FOV_DEFAULT;
-        const distTarget = wantZoom ? CAM_DIST_ZOOM : CAM_DIST_DEFAULT;
+        const wantZoom = zoomHeld && gameStarted && !placeMode && !buildMode;
+        const sniperZoom = currentWeapon === 'sniper';
+        const fovZoom = sniperZoom ? 28 : FOV_ZOOM;
+        const distZoom = sniperZoom ? 4.6 : CAM_DIST_ZOOM;
+        const fovTarget = wantZoom ? fovZoom : FOV_DEFAULT;
+        const distTarget = wantZoom ? distZoom : CAM_DIST_DEFAULT;
         const zoomLerp = 1 - Math.pow(0.0008, dt);
         camFovCurrent += (fovTarget - camFovCurrent) * zoomLerp;
         camDistCurrent += (distTarget - camDistCurrent) * zoomLerp;
