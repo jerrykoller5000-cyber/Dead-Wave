@@ -161,6 +161,12 @@
       mix-blend-mode: multiply;
     }
     #nvgOverlay.on { display: block; }
+    /* Corner falloff. Costs nothing and pulls the eye to the middle of the frame. */
+    #vignette {
+      position: fixed; inset: 0; pointer-events: none; z-index: 2;
+      background: radial-gradient(ellipse at center,
+        rgba(0,0,0,0) 55%, rgba(0,0,0,0.07) 80%, rgba(0,0,0,0.22) 100%);
+    }
     #perf {
       display: none; position: absolute; bottom: 22px; right: 20px;
       background: rgba(8,12,24,.6); border: 1px solid rgba(255,255,255,.15);
@@ -177,6 +183,7 @@
 </head>
 <body>
   <div id="nvgOverlay"></div>
+  <div id="vignette"></div>
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
@@ -908,9 +915,10 @@
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x87b7ff);
-    scene.fog = new THREE.Fog(0x87b7ff, 140, 320);
+    scene.fog = new THREE.Fog(0x87b7ff, 190, 640);
 
-    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 600);
+    // Far plane reaches the mountain backdrop rather than clipping it away.
+    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1600);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(innerWidth, innerHeight);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -934,8 +942,11 @@
     sun.shadow.camera.right = SHADOW_HALF;
     sun.shadow.camera.top = SHADOW_HALF;
     sun.shadow.camera.bottom = -SHADOW_HALF;
-    sun.shadow.bias = -0.0006;
-    sun.shadow.normalBias = 0.5;
+    // The varied terrain self-shadows badly at low bias — the whole valley floor picks
+    // up a ~25% acne wash. A generous normal bias clears it without detaching the
+    // shadows props actually cast.
+    sun.shadow.bias = -0.0001;
+    sun.shadow.normalBias = 1.4;
     scene.add(sun);
     scene.add(sun.target);
     const sunDir = new THREE.Vector3(0, 1, 0.3).normalize();
@@ -947,8 +958,131 @@
     const laserMuzzleLight = new THREE.PointLight(0xff3344, 0, 3.5, 2);
     scene.add(laserMuzzleLight);
 
+    // === Sky ===
+    // A gradient dome with a real sun disc, a moon and stars that fade in at dusk. It
+    // replaces the flat background colour, so the horizon has depth and the light in the
+    // sky agrees with the light on the ground.
+    const skyUniforms = {
+      uTop: { value: new THREE.Color(0x2f6fd0) },
+      uMid: { value: new THREE.Color(0x87b7ff) },
+      uHorizon: { value: new THREE.Color(0xd8e8ff) },
+      uSunDir: { value: new THREE.Vector3(0, 1, 0) },
+      uSunTint: { value: new THREE.Color(0xfff0cf) },
+      uSunSize: { value: 0.9 },
+      uNight: { value: 0 },
+      uMoonDir: { value: new THREE.Vector3(0, -1, 0) }
+    };
+    const skyMat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      depthWrite: false,
+      fog: false,
+      uniforms: skyUniforms,
+      vertexShader: `
+        varying vec3 vDir;
+        void main() {
+          vDir = normalize(position);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uTop, uMid, uHorizon, uSunTint;
+        uniform vec3 uSunDir, uMoonDir;
+        uniform float uSunSize, uNight;
+        varying vec3 vDir;
+
+        // Hash for the star field.
+        float hash13(vec3 p) {
+          p = fract(p * 0.3183099 + vec3(0.71, 0.113, 0.259));
+          p *= 17.0;
+          return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+        }
+
+        void main() {
+          vec3 dir = normalize(vDir);
+          float h = clamp(dir.y, -1.0, 1.0);
+
+          // Two-stage vertical gradient: bright band at the horizon, deeper blue up top.
+          vec3 col = mix(uHorizon, uMid, smoothstep(0.0, 0.32, h));
+          col = mix(col, uTop, smoothstep(0.28, 0.85, h));
+
+          // Broad scattering halo around the sun, then the disc itself.
+          float sd = max(dot(dir, uSunDir), 0.0);
+          col += uSunTint * pow(sd, 8.0) * 0.35 * (1.0 - uNight);
+          col += uSunTint * pow(sd, 220.0) * 1.4 * (1.0 - uNight);
+          float disc = smoothstep(0.9994, 0.9997, dot(dir, uSunDir) * uSunSize + (1.0 - uSunSize));
+          col += uSunTint * disc * 3.0 * (1.0 - uNight);
+
+          // Stars: only above the horizon, only after dusk.
+          if (uNight > 0.01 && h > 0.0) {
+            vec3 cell = floor(dir * 320.0);
+            float s = hash13(cell);
+            float star = smoothstep(0.9975, 0.9999, s);
+            float twinkle = 0.65 + 0.35 * sin(s * 90.0);
+            col += vec3(star * twinkle) * uNight * smoothstep(0.0, 0.22, h) * 1.6;
+          }
+
+          // Moon.
+          float md = max(dot(dir, uMoonDir), 0.0);
+          col += vec3(0.75, 0.80, 0.95) * pow(md, 700.0) * 2.2 * uNight;
+          col += vec3(0.35, 0.42, 0.60) * pow(md, 14.0) * 0.18 * uNight;
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `
+    });
+    // Palette the dome lerps through over the day.
+    const SKY_DUSK_LOW = new THREE.Color(0xff9a52);
+    const SKY_DUSK_MID = new THREE.Color(0xc4693f);
+    const SKY_SUN_LOW = new THREE.Color(0xffb56a);
+    const SKY_NIGHT_LOW = new THREE.Color(0x0b1424);
+    const SKY_NIGHT_MID = new THREE.Color(0x060c18);
+    const SKY_NIGHT_TOP = new THREE.Color(0x02040a);
+    const skyDome = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 24), skyMat);
+    skyDome.scale.setScalar(1350);
+    skyDome.frustumCulled = false;
+    skyDome.renderOrder = -1000;
+    scene.add(skyDome);
+
+    // Low-poly cloud banks drifting overhead.
+    const cloudGroup = new THREE.Group();
+    cloudGroup.frustumCulled = false;
+    scene.add(cloudGroup);
+    const cloudMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff, roughness: 1, metalness: 0,
+      // Emissive keeps them reading as bright cloud rather than grey rock once the sun
+      // drops; the day/night pass scales it.
+      emissive: 0xffffff, emissiveIntensity: 0.55,
+      transparent: true, opacity: 0.8, depthWrite: false, fog: false
+    });
+    // Deferred: mergeParts lives with the prop helpers further down.
+    function buildClouds() {
+      const rnd = mulberry32(0xc10d5);
+      const parts = [];
+      const puffGeo = new THREE.IcosahedronGeometry(1, 1);
+      for (let c = 0; c < 30; c++) {
+        const a = rnd() * Math.PI * 2;
+        const rad = 120 + rnd() * 860;
+        const cx = Math.cos(a) * rad, cz = Math.sin(a) * rad;
+        // High and flat, so they sit above the peaks instead of looming over the valley.
+        const cy = 430 + rnd() * 190;
+        const n = 5 + Math.floor(rnd() * 6);
+        for (let i = 0; i < n; i++) {
+          const puff = new THREE.Mesh(puffGeo, cloudMat);
+          const s = 42 + rnd() * 66;
+          puff.position.set(cx + (rnd() - 0.5) * 210, cy + (rnd() - 0.5) * 24, cz + (rnd() - 0.5) * 210);
+          puff.scale.set(s, s * (0.22 + rnd() * 0.14), s * (0.75 + rnd() * 0.6));
+          parts.push(puff);
+        }
+      }
+      const merged = mergeParts(parts, cloudMat);
+      merged.frustumCulled = false;
+      merged.renderOrder = -900;
+      cloudGroup.add(merged);
+    }
+
     // Day/night cycle (separate from wave Day N) — ~830s full cycle (10× prior ~83s)
-    let worldTime = 0.25; // 0..1, 0=midnight, 0.25=dawn (~06:00), 0.5≈noon-ish on clock
+    // 0..1 across a full day: 0 = midnight, 0.25 = 06:00 sunrise, 0.5 = noon.
+    let worldTime = 0.4; // mid-morning
     const DAY_CYCLE_SPEED = 0.0012; // full cycle ~833s real-time
     let isNight = false;
     let hoursSinceDawn = 0; // game hours since last dawn
@@ -975,7 +1109,9 @@
     }
 
     function resetDayClockForMatch() {
-      worldTime = 0.25; // dawn ~06:00
+      // Start mid-morning (09:36) so a match opens in good light and has a full day to
+      // run before dusk, rather than starting at the sunrise line.
+      worldTime = 0.4;
       hoursSinceDawn = 0;
       hoursSinceMatchStart = 0;
       matchClockRunning = true;
@@ -986,7 +1122,9 @@
     function updateDayNight(dt) {
       const prevTime = worldTime;
       worldTime = (worldTime + DAY_CYCLE_SPEED * dt) % 1;
-      const ang = worldTime * Math.PI * 2;
+      // Quarter-turn offset so the clock agrees with the sky: 00:00 midnight, 06:00
+      // sunrise, 12:00 overhead, 18:00 sunset. Without it "noon" landed at dusk.
+      const ang = (worldTime - 0.25) * Math.PI * 2;
       const dayFactor = Math.max(0, Math.sin(ang));
       const naturalNight = dayFactor < NIGHT_DAY_FACTOR;
 
@@ -1040,14 +1178,39 @@
         scene.fog.near = 50;
         scene.fog.far = 160;
       } else {
-        sun.intensity = 0.15 + visualFactor * 1.2;
-        hemi.intensity = 0.25 + visualFactor * 0.85;
+        // More sun, less fill. A strong hemisphere light washes out every slope, which
+        // is what made the new landform read flat.
+        sun.intensity = 0.18 + visualFactor * 1.55;
+        hemi.intensity = 0.18 + visualFactor * 0.5;
         moon.intensity = 0.05;
         ambientFill.intensity = 0.04;
-        scene.fog.near = 140;
-        scene.fog.far = 320;
+        // Wide enough to show the ridgeline; haze still stacks up over distance.
+        scene.fog.near = 190;
+        scene.fog.far = 640;
       }
       sunDir.set(Math.cos(ang), Math.max(0.35, Math.sin(ang)), 0.3).normalize();
+
+      // Drive the sky dome from the same cycle so the painted sun sits where the light
+      // is actually coming from, and the dome tints with the ground.
+      {
+        const nightMix = 1 - Math.min(1, visualFactor / 0.42);
+        skyUniforms.uSunDir.value.copy(sunDir);
+        // Moon rides opposite the sun.
+        skyUniforms.uMoonDir.value.set(-Math.cos(ang), Math.max(0.2, -Math.sin(ang) * 0.6 + 0.45), -0.3).normalize();
+        skyUniforms.uNight.value = nvgActive ? 0.25 : nightMix;
+        const dusk = Math.max(0, 1 - Math.abs(visualFactor - 0.34) / 0.3);
+        skyUniforms.uHorizon.value.setHex(0xd8e8ff).lerp(SKY_DUSK_LOW, dusk).lerp(SKY_NIGHT_LOW, nightMix);
+        skyUniforms.uMid.value.setHex(0x87b7ff).lerp(SKY_DUSK_MID, dusk * 0.8).lerp(SKY_NIGHT_MID, nightMix);
+        skyUniforms.uTop.value.setHex(0x2f6fd0).lerp(SKY_NIGHT_TOP, nightMix);
+        skyUniforms.uSunTint.value.setHex(0xfff0cf).lerp(SKY_SUN_LOW, dusk);
+        cloudMat.opacity = 0.8 * (0.16 + 0.84 * (1 - nightMix));
+        cloudMat.emissiveIntensity = 0.22 + 0.5 * (1 - nightMix);
+        cloudMat.color.setHex(0xffffff).lerp(SKY_DUSK_LOW, dusk * 0.7);
+        cloudMat.emissive.setHex(0xffffff).lerp(SKY_DUSK_LOW, dusk * 0.85);
+        // Distant geometry should fade into the sky it is standing against, so the fog
+        // takes the dome's horizon colour rather than a separate constant.
+        if (hurtFlash <= 0 && !nvgActive) scene.fog.color.copy(skyUniforms.uHorizon.value);
+      }
 
       timeLineEl.textContent = (isNight ? 'Night' : 'Day') + ' · ' + formatGameClock() +
         (zombieGraceActive() ? ' · Grace' : '');
@@ -1064,21 +1227,63 @@
     let expandLevel = 0;
     function expandCost() { return 14 + expandLevel * 12; }
 
-    // STREAM_*, HILL_*
-    // Stream polyline (NW→SE, bends around central hill — not through spawn)
-    const STREAM_CTRL = [
-      { x: -210, z: 95 },
-      { x: -140, z: 72 },
-      { x: -75, z: 58 },
-      { x: -15, z: 50 },
-      { x: 35, z: 32 },
-      { x: 85, z: -10 },
-      { x: 140, z: -70 },
-      { x: 210, z: -145 }
-    ];
-    const STREAM_WIDTH = 4.2;
-    const HILL_PEAK = 2.2;
-    const HILL_RADIUS = 55;
+    // The world extends well past the playable disc so the horizon is real geometry
+    // instead of a cut-off circle. Everything beyond LAND_MAX is scenery.
+    const TERRAIN_RADIUS = 430;
+
+    // --- Noise primitives -------------------------------------------------------
+    // Value noise with quintic smoothing. Cheap, deterministic, no tables to ship.
+    function hash2(ix, iz) {
+      let h = Math.imul(ix, 374761393) + Math.imul(iz, 668265263);
+      h = Math.imul(h ^ (h >>> 13), 1274126177);
+      return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+    }
+
+    function vnoise(x, z) {
+      const xi = Math.floor(x), zi = Math.floor(z);
+      const xf = x - xi, zf = z - zi;
+      const u = xf * xf * xf * (xf * (xf * 6 - 15) + 10);
+      const v = zf * zf * zf * (zf * (zf * 6 - 15) + 10);
+      const a = hash2(xi, zi), b = hash2(xi + 1, zi);
+      const c = hash2(xi, zi + 1), d = hash2(xi + 1, zi + 1);
+      const top = a + (b - a) * u;
+      const bot = c + (d - c) * u;
+      return top + (bot - top) * v;
+    }
+
+    // Fractal brownian motion, returns -1..1.
+    function fbm(x, z, oct, lac = 2.03, gain = 0.5) {
+      let sum = 0, amp = 0.5, norm = 0, fx = x, fz = z;
+      for (let i = 0; i < oct; i++) {
+        sum += amp * (vnoise(fx, fz) * 2 - 1);
+        norm += amp;
+        amp *= gain;
+        fx *= lac; fz *= lac;
+      }
+      return sum / norm;
+    }
+
+    // Ridged multifractal, returns 0..1. Creates creased ridge lines rather than blobs.
+    function ridged(x, z, oct, lac = 2.07, gain = 0.5) {
+      let sum = 0, amp = 0.5, norm = 0, fx = x, fz = z;
+      for (let i = 0; i < oct; i++) {
+        const n = 1 - Math.abs(vnoise(fx, fz) * 2 - 1);
+        sum += amp * n * n;
+        norm += amp;
+        amp *= gain;
+        fx *= lac; fz *= lac;
+      }
+      return sum / norm;
+    }
+
+    function smoothstep01(t) {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      return t * t * (3 - 2 * t);
+    }
+    function smoothBand(edge0, edge1, x) {
+      return smoothstep01((x - edge0) / (edge1 - edge0));
+    }
 
     function distPointToSeg(px, pz, ax, az, bx, bz) {
       const abx = bx - ax, abz = bz - az;
@@ -1090,42 +1295,257 @@
       return Math.hypot(px - qx, pz - qz);
     }
 
-    function distToStream(x, z) {
+    // --- World layout -----------------------------------------------------------
+    // A lake in the south-west, fed by a river that drops out of the eastern highlands.
+    const LAKE = { x: -138, z: -104, r: 58, level: -3.4 };
+    // How far out from the lake centre the basin is allowed to hold water.
+    const LAKE_FILL = LAKE.r * 1.85;
+    const RIVER_WIDTH = 5.0;
+    const RIVER_CTRL = [
+      { x: 232, z: 132 },
+      { x: 178, z: 104 },
+      { x: 126, z: 84 },
+      { x: 72, z: 74 },
+      { x: 18, z: 70 },
+      { x: -38, z: 56 },
+      { x: -86, z: 24 },
+      { x: -114, z: -26 },
+      { x: -124, z: -72 }
+    ];
+    // Kept for callers that predate the rename.
+    const STREAM_CTRL = RIVER_CTRL;
+    const STREAM_WIDTH = RIVER_WIDTH;
+
+    // Warped distance to the lake centre, so the shoreline has bays and spits instead
+    // of being a perfect circle.
+    function lakeDist(x, z) {
+      const wx = x + fbm(x * 0.019 + 3.3, z * 0.019 - 1.7, 2) * 13;
+      const wz = z + fbm(x * 0.019 - 5.1, z * 0.019 + 2.9, 2) * 13;
+      return Math.hypot(wx - LAKE.x, wz - LAKE.z);
+    }
+
+    function distToRiver(x, z) {
       let best = Infinity;
-      for (let i = 0; i < STREAM_CTRL.length - 1; i++) {
-        const a = STREAM_CTRL[i], b = STREAM_CTRL[i + 1];
+      for (let i = 0; i < RIVER_CTRL.length - 1; i++) {
+        const a = RIVER_CTRL[i], b = RIVER_CTRL[i + 1];
         const d = distPointToSeg(x, z, a.x, a.z, b.x, b.z);
         if (d < best) best = d;
       }
       return best;
     }
+    const distToStream = distToRiver;
+
+    // Cumulative arc length per control point, so a position along the river maps to a
+    // bed height.
+    const RIVER_ARC = [0];
+    for (let i = 1; i < RIVER_CTRL.length; i++) {
+      const a = RIVER_CTRL[i - 1], b = RIVER_CTRL[i];
+      RIVER_ARC.push(RIVER_ARC[i - 1] + Math.hypot(b.x - a.x, b.z - a.z));
+    }
+    const RIVER_LEN = RIVER_ARC[RIVER_ARC.length - 1];
+    const riverBed = new Float32Array(RIVER_CTRL.length);
+
+    // Where along the river (0..1) the closest point lies, plus the distance to it.
+    function riverProject(x, z) {
+      let bestD = Infinity, bestS = 0;
+      for (let i = 0; i < RIVER_CTRL.length - 1; i++) {
+        const a = RIVER_CTRL[i], b = RIVER_CTRL[i + 1];
+        const abx = b.x - a.x, abz = b.z - a.z;
+        const ab2 = abx * abx + abz * abz || 1e-8;
+        let t = ((x - a.x) * abx + (z - a.z) * abz) / ab2;
+        t = Math.max(0, Math.min(1, t));
+        const qx = a.x + abx * t, qz = a.z + abz * t;
+        const d = Math.hypot(x - qx, z - qz);
+        if (d < bestD) {
+          bestD = d;
+          bestS = (RIVER_ARC[i] + t * (RIVER_ARC[i + 1] - RIVER_ARC[i])) / RIVER_LEN;
+        }
+      }
+      return { d: bestD, s: bestS };
+    }
+
+    function riverBedAt(s) {
+      const f = Math.max(0, Math.min(1, s)) * (RIVER_CTRL.length - 1);
+      const i = Math.min(RIVER_CTRL.length - 2, Math.floor(f));
+      const t = f - i;
+      return riverBed[i] + (riverBed[i + 1] - riverBed[i]) * t;
+    }
+
+    // --- Terrain composition ----------------------------------------------------
+    // Layered so each piece has one job: a broad landform, ridge lines, fine detail,
+    // a flattened core around spawn, and a mountain wall past the play area.
+    function terrainBase(x, z) {
+      const r = Math.hypot(x, z);
+
+      // Domain warp bends every later layer, killing the grid-aligned look that plain
+      // fbm has.
+      const wx = x + fbm(x * 0.0042 + 11.3, z * 0.0042 - 7.1, 3) * 34;
+      const wz = z + fbm(x * 0.0042 - 3.7, z * 0.0042 + 5.9, 3) * 34;
+
+      // Broad rolling landform.
+      let h = fbm(wx * 0.0072, wz * 0.0072, 5) * 12.5;
+
+      // Ridge lines, fading in away from the middle so spawn stays open.
+      const ridgeAmt = smoothBand(40, 140, r);
+      const rg = ridged(wx * 0.0056 + 3.1, wz * 0.0056 - 2.4, 4);
+      h += rg * rg * 15.0 * ridgeAmt;
+
+      // Medium bumps and fine surface detail.
+      h += fbm(wx * 0.021, wz * 0.021, 3) * 2.2;
+      h += fbm(x * 0.052, z * 0.052, 2) * 0.55;
+
+      // Broad basin cradling the lake so it reads as a valley, not a crater.
+      const lakeD = lakeDist(x, z);
+      h -= 8.5 * smoothstep01(1 - lakeD / (LAKE.r * 2.5));
+
+      // Settle the core. Only the immediate spawn is properly level — beyond that the
+      // ground keeps most of its roll so the playable bowl still has shape to it.
+      const core = 1 - smoothBand(14, 62, r);
+      h = h * (1 - core) + (h * 0.4 + 0.5) * core;
+
+      // Mountain wall past the playable disc. This is the map edge — you see a horizon
+      // of peaks instead of the world simply stopping. The front line wanders, so the
+      // range has bays and headlands rather than being a uniform ring.
+      const wallStart = Math.max(220, 232 + fbm(wx * 0.0022 + 5.5, wz * 0.0022 - 2.2, 2) * 42);
+      const wall = smoothBand(wallStart, wallStart + 100, r);
+      if (wall > 0) {
+        const mr = ridged(wx * 0.0034 - 9.2, wz * 0.0034 + 4.6, 5);
+        const peaks = Math.pow(mr, 1.5) * 135;
+        h += wall * (peaks + (r - wallStart) * 0.36);
+        // Snow-line crags: extra high-frequency relief up top only.
+        h += wall * fbm(wx * 0.016, wz * 0.016, 3) * 8.0;
+      }
+
+      // Lake bowl.
+      if (lakeD < LAKE.r) {
+        const t = 1 - lakeD / LAKE.r;
+        const blend = smoothstep01(t * 2.3);
+        const floor = LAKE.level - 3.8 * smoothstep01(t * 1.35);
+        h += (floor - h) * blend;
+      }
+
+      return h;
+    }
+
+    // River is carved after the base so its bed can be forced monotonically downhill.
+    function carveRiver(x, z, h) {
+      const bandOuter = RIVER_WIDTH * 3.2;
+      const p = riverProject(x, z);
+      if (p.d > bandOuter) return h;
+      const bed = riverBedAt(p.s);
+      // Channel floor, then a wider valley shoulder easing into the banks.
+      const chan = 1 - smoothstep01(p.d / RIVER_WIDTH);
+      const shoulder = 1 - smoothstep01(p.d / bandOuter);
+      let out = h + (bed + 3.0 - h) * shoulder * 0.55;
+      out = out + (bed - out) * chan;
+      return out;
+    }
+
+    function terrainRaw(x, z) {
+      return carveRiver(x, z, terrainBase(x, z));
+    }
+
+    // Force the river to lose height from source to mouth. Without this a river carved
+    // straight onto noise runs uphill wherever the terrain happens to rise.
+    (function solveRiverBed() {
+      let prev = Infinity;
+      for (let i = 0; i < RIVER_CTRL.length; i++) {
+        const c = RIVER_CTRL[i];
+        const natural = terrainBase(c.x, c.z) - 1.6;
+        const drop = i === 0 ? 0 : (RIVER_ARC[i] - RIVER_ARC[i - 1]) * 0.012;
+        riverBed[i] = i === 0 ? natural : Math.min(natural, prev - drop);
+        prev = riverBed[i];
+      }
+      // Mouth sits just under the lake surface so the two water bodies meet cleanly.
+      const mouth = LAKE.level - 0.7;
+      if (riverBed[riverBed.length - 1] > mouth) {
+        const last = riverBed.length - 1;
+        const fix = riverBed[last] - mouth;
+        for (let i = 0; i <= last; i++) {
+          riverBed[i] -= fix * (i / last);
+        }
+      }
+    })();
+
+    // --- Cached heightfield -----------------------------------------------------
+    // terrainRaw() costs ~20 noise evaluations. Gameplay samples height hundreds of
+    // times a frame, so bake it once and bilinear-sample. The render mesh reads the
+    // same data, which keeps what you see and what you collide with identical.
+    const HF_SPACING = 1.0;
+    const HF_EXTENT = 252;
+    const HF_N = Math.round((HF_EXTENT * 2) / HF_SPACING) + 1;
+    const heightField = new Float32Array(HF_N * HF_N);
+    let heightFieldReady = false;
+
+    function buildHeightField() {
+      for (let j = 0; j < HF_N; j++) {
+        const z = -HF_EXTENT + j * HF_SPACING;
+        const row = j * HF_N;
+        for (let i = 0; i < HF_N; i++) {
+          heightField[row + i] = terrainRaw(-HF_EXTENT + i * HF_SPACING, z);
+        }
+      }
+      heightFieldReady = true;
+    }
+    buildHeightField();
 
     function sampleHeight(x, z) {
-      const r2 = x * x + z * z;
-      // Central gaussian hill
-      let h = HILL_PEAK * Math.exp(-r2 / (2 * HILL_RADIUS * HILL_RADIUS * 0.38));
-      // Gentle ridges / bumps (~60% of prior amplitudes)
-      h += 0.33 * Math.sin(x * 0.045) * Math.cos(z * 0.038);
-      h += 0.21 * Math.sin((x + z) * 0.028);
-      h += 0.17 * Math.cos(x * 0.07 - z * 0.05);
-      h += 0.11 * Math.sin(x * 0.12) * Math.sin(z * 0.09);
-      // Stream trench (smoothstep so banks blend instead of creasing)
-      const ds = distToStream(x, z);
-      if (ds < STREAM_WIDTH) {
-        const t = 1 - ds / STREAM_WIDTH;
-        h -= 0.9 * t * t * (3 - 2 * t);
+      if (heightFieldReady) {
+        const fx = (x + HF_EXTENT) / HF_SPACING;
+        const fz = (z + HF_EXTENT) / HF_SPACING;
+        if (fx >= 0 && fz >= 0 && fx < HF_N - 1 && fz < HF_N - 1) {
+          const i = fx | 0, j = fz | 0;
+          const tx = fx - i, tz = fz - j;
+          const k = j * HF_N + i;
+          const h00 = heightField[k], h10 = heightField[k + 1];
+          const h01 = heightField[k + HF_N], h11 = heightField[k + HF_N + 1];
+          const a = h00 + (h10 - h00) * tx;
+          const b = h01 + (h11 - h01) * tx;
+          return a + (b - a) * tz;
+        }
       }
-      return h;
+      return terrainRaw(x, z);
+    }
+
+    // Water surface height at a point, or null on dry land.
+    function waterLevelAt(x, z) {
+      // The lake fills whatever sits below its surface inside the basin, rather than
+      // being a fixed circle — so the shoreline is decided by the terrain itself.
+      if (lakeDist(x, z) < LAKE_FILL) {
+        if (sampleHeight(x, z) < LAKE.level) return LAKE.level;
+      }
+      const p = riverProject(x, z);
+      if (p.d < RIVER_WIDTH * 1.15) {
+        const surf = riverBedAt(p.s) + 1.05;
+        if (sampleHeight(x, z) < surf) return surf;
+      }
+      return null;
+    }
+
+    // How deep a point is under water, 0 when dry.
+    function waterDepthAt(x, z) {
+      const w = waterLevelAt(x, z);
+      return w === null ? 0 : Math.max(0, w - sampleHeight(x, z));
     }
 
     // Surface normal from finite differences — used to lay decals/props flat on slopes.
     const AXIS_Z = new THREE.Vector3(0, 0, 1);
+    const AXIS_Y = new THREE.Vector3(0, 1, 0);
     const _nrmA = new THREE.Vector3();
     function terrainNormal(x, z, out) {
-      const e = 0.6;
+      const e = 0.8;
       const hL = sampleHeight(x - e, z), hR = sampleHeight(x + e, z);
       const hD = sampleHeight(x, z - e), hU = sampleHeight(x, z + e);
       return (out || _nrmA).set(hL - hR, 2 * e, hD - hU).normalize();
+    }
+
+    // Steepness as 0 (flat) .. 1 (vertical).
+    function terrainSlope(x, z) {
+      const e = 0.8;
+      const hL = sampleHeight(x - e, z), hR = sampleHeight(x + e, z);
+      const hD = sampleHeight(x, z - e), hU = sampleHeight(x, z + e);
+      const gx = (hR - hL) / (2 * e), gz = (hU - hD) / (2 * e);
+      return Math.min(1, Math.hypot(gx, gz) / 2.2);
     }
 
     // Ground height the marine's boots rest on. Sampling only the centre point left the
@@ -1173,38 +1593,103 @@
     // entire map from a single centre vertex — so the rendered surface bore almost no
     // relation to sampleHeight() and everything sank into or floated above it.)
     // Expanding land only re-tints vertex colours; the surface never changes.
-    const TERRAIN_RADIUS = LAND_MAX + 8;
-    const TERRAIN_RINGS = 208;
-    const TERRAIN_SEGS = 384;
-    const TERRAIN_RING_POW = 1.3; // packs rings tighter near the middle of the map
+    const TERRAIN_RINGS = 260;
+    const TERRAIN_SEGS = 512;
+    const TERRAIN_RING_POW = 1.55; // packs rings tighter near the middle of the map
     const TERRAIN_VERTS = 1 + TERRAIN_RINGS * TERRAIN_SEGS;
 
     const groundBaseColors = new Float32Array(TERRAIN_VERTS * 3);
     const groundVertRadius = new Float32Array(TERRAIN_VERTS);
 
-    const cGrassA = new THREE.Color(0x3f9a5a);
-    const cGrassB = new THREE.Color(0x4aad68);
-    const cGrassC = new THREE.Color(0x357a4a);
-    const cMud = new THREE.Color(0x5a6e48);
-    const cBank = new THREE.Color(0x6b7a52);
+    // Biome palette. Ground colour is chosen by altitude, steepness and moisture rather
+    // than a single noise band, so the map reads as places instead of texture.
+    const cGrassLush = new THREE.Color(0x4f9e4a);
+    const cGrassMid = new THREE.Color(0x5aa85c);
+    const cGrassDry = new THREE.Color(0x8a9b4e);
+    const cMeadow = new THREE.Color(0x6fb85d);
+    const cGrassDeep = new THREE.Color(0x4a9c4f);
+    const cDirt = new THREE.Color(0x6b5539);
+    const cRock = new THREE.Color(0x7d7b76);
+    const cRockDark = new THREE.Color(0x565a5e);
+    const cScree = new THREE.Color(0x8d8a83);
+    const cSnow = new THREE.Color(0xeef3f7);
+    const cSand = new THREE.Color(0xc2b489);
+    const cSilt = new THREE.Color(0x6d6448);
     const cLocked = new THREE.Color(0x24382c);
     const _terrCol = new THREE.Color();
+    const _terrCol2 = new THREE.Color();
 
     function terrainColorAt(wx, wz, h, out) {
-      // n spans roughly ±2, so the old unclamped (n+1)*0.5 fed lerp alphas outside
-      // 0..1 and extrapolated past the palette into negative RGB — that is what the
-      // big scorched-looking blotches on the grass were.
-      const n = Math.sin(wx * 0.31) * Math.cos(wz * 0.27) + Math.sin((wx + wz) * 0.11);
-      const t = Math.max(0, Math.min(1, (n + 1) * 0.5));
-      if (t < 0.5) out.copy(cGrassA).lerp(cGrassB, t * 2);
-      else out.copy(cGrassB).lerp(cGrassC, (t - 0.5) * 2);
-      const ds = distToStream(wx, wz);
-      if (ds < STREAM_WIDTH + 1.8) {
-        const bankT = 1 - Math.min(1, ds / (STREAM_WIDTH + 1.8));
-        out.lerp(ds < STREAM_WIDTH * 0.85 ? cMud : cBank, bankT * 0.75);
+      const slope = terrainSlope(wx, wz);
+      const r = Math.hypot(wx, wz);
+
+      // Moisture: high near water, low on exposed high ground, plus large-scale drift
+      // so meadows and dry patches form regions rather than speckle.
+      const riverD = distToRiver(wx, wz);
+      const lakeD = lakeDist(wx, wz);
+      let moisture = 0.5 + fbm(wx * 0.0065 + 21.7, wz * 0.0065 - 13.2, 3) * 0.42;
+      moisture += 0.45 * smoothstep01(1 - riverD / 26);
+      moisture += 0.40 * smoothstep01(1 - lakeD / (LAKE.r + 30));
+      moisture -= smoothBand(6, 30, h) * 0.45;
+      moisture = Math.max(0, Math.min(1, moisture));
+
+      // Grass base, drier as moisture drops.
+      out.copy(cGrassDry).lerp(cGrassMid, smoothstep01(moisture * 1.5));
+      if (moisture > 0.62) out.lerp(cGrassLush, smoothstep01((moisture - 0.62) / 0.38));
+
+      // Two scales of patchiness. Without this, flat open ground reads as one solid
+      // sheet of green no matter how good the landform underneath is.
+      const patchBig = fbm(wx * 0.011 + 61.3, wz * 0.011 - 44.1, 2);
+      out.lerp(cMeadow, Math.max(0, patchBig) * 0.34);
+      out.lerp(cGrassDeep, Math.max(0, -patchBig) * 0.24);
+      const patch = fbm(wx * 0.045, wz * 0.045, 2);
+      out.lerp(cGrassDry, Math.max(0, patch) * 0.17);
+      out.multiplyScalar(1 + patch * 0.07);
+
+      // Slope: soil shows through on inclines, bare rock on anything steep.
+      out.lerp(cDirt, smoothBand(0.24, 0.46, slope) * 0.85);
+      const rocky = smoothBand(0.40, 0.66, slope);
+      if (rocky > 0) {
+        const grain = fbm(wx * 0.09, wz * 0.09, 2);
+        _terrCol2.copy(cRock).lerp(cRockDark, 0.5 + grain * 0.5);
+        out.lerp(_terrCol2, rocky);
       }
-      // Slightly browner on hill slopes
-      if (h > 1.2) out.lerp(cBank, Math.min(0.35, (h - 1.2) * 0.12));
+
+      // High ground turns to scree then snow.
+      const alt = smoothBand(34, 62, h);
+      if (alt > 0) out.lerp(cScree, alt * 0.8);
+      const snow = smoothBand(58, 84, h + fbm(wx * 0.012, wz * 0.012, 2) * 9);
+      // Snow only settles where it is not near-vertical.
+      if (snow > 0) out.lerp(cSnow, snow * (1 - smoothBand(0.55, 0.8, slope)));
+
+      // Shorelines: a real sand beach at the lake, silt along the river.
+      const beach = smoothstep01(1 - Math.abs(h - LAKE.level - 0.5) / 2.4) *
+                    smoothstep01(1 - lakeD / LAKE_FILL);
+      const siltBand = smoothstep01(1 - riverD / (RIVER_WIDTH + 3.2)) * 0.85;
+      if (beach > siltBand) out.lerp(cSand, beach);
+      else if (siltBand > 0) out.lerp(cSilt, siltBand * 0.8);
+
+      // Underwater beds read darker and siltier.
+      const depth = Math.max(0, (waterLevelAt(wx, wz) ?? h) - h);
+      if (depth > 0) {
+        out.lerp(cSilt, Math.min(0.65, depth * 0.35));
+        out.multiplyScalar(1 - Math.min(0.45, depth * 0.12));
+      }
+
+      // Cheap cavity shading: compare against the local average so gullies darken and
+      // ridge crests catch light. Gives the mesh depth without a single extra light.
+      const e = 3.4;
+      const avg = (sampleHeight(wx - e, wz) + sampleHeight(wx + e, wz) +
+                   sampleHeight(wx, wz - e) + sampleHeight(wx, wz + e)) * 0.25;
+      // Weighted so crests brighten more than hollows darken — symmetric shading here
+      // just drains light out of the whole valley floor.
+      const cavity = Math.max(-1, Math.min(1, (h - avg) * 0.42));
+      out.multiplyScalar(1 + cavity * (cavity > 0 ? 0.24 : 0.11));
+
+      // Distant peaks drift toward the sky so the far ridgeline sits back in the haze.
+      const far = smoothBand(250, TERRAIN_RADIUS, r);
+      if (far > 0) out.lerp(cSnow, far * 0.10);
+
       return out;
     }
 
@@ -1277,8 +1762,11 @@
     function updateLandTint() {
       const attr = ground.geometry.attributes.color;
       const arr = attr.array;
+      // With the whole map unlocked there is nothing to grey out, and tinting would
+      // just drain the colour from the mountain backdrop.
+      const tintActive = landRadius < LAND_MAX - 0.01;
       for (let i = 0; i < TERRAIN_VERTS; i++) {
-        const over = groundVertRadius[i] - landRadius;
+        const over = tintActive ? groundVertRadius[i] - landRadius : -1;
         const k = over <= 0 ? 0 : Math.min(1, over / 6) * 0.62;
         const i3 = i * 3;
         if (k === 0) {
@@ -1295,33 +1783,36 @@
     }
     updateLandTint();
 
-    // === Stream ===
-    // One continuous ribbon whose surface follows the carved trench. The old version
-    // was a handful of flat planes up to 75 units long, which sliced straight through
-    // every hill and bank they crossed.
+    // === Water ===
+    // A lake fed by a river. Both surfaces are real meshes that sit in the carved bed,
+    // and both ripple — the vertex wave is driven from the animation loop.
     const streamGroup = new THREE.Group();
     scene.add(streamGroup);
+    // Anything registered here gets leaned about by the wind loop.
+    const windSwayables = [];
     const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x3a8ec8, roughness: 0.18, metalness: 0.55,
-      transparent: true, opacity: 0.72, depthWrite: false
+      color: 0x2f7fb8, roughness: 0.14, metalness: 0.5,
+      transparent: true, opacity: 0.80, depthWrite: false,
+      side: THREE.DoubleSide
     });
-    const WATER_DEPTH_OFFSET = 0.32; // above the trench floor, so banks bury the edges
+    const waterWaveTargets = [];
 
-    function buildStreamStations(step = 2) {
+    function buildRiverStations(step = 3) {
       const pts = [];
-      for (let i = 0; i < STREAM_CTRL.length - 1; i++) {
-        const a = STREAM_CTRL[i], b = STREAM_CTRL[i + 1];
+      for (let i = 0; i < RIVER_CTRL.length - 1; i++) {
+        const a = RIVER_CTRL[i], b = RIVER_CTRL[i + 1];
         const n = Math.max(1, Math.round(Math.hypot(b.x - a.x, b.z - a.z) / step));
         for (let k = 0; k < n; k++) {
           const t = k / n;
           pts.push({ x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t });
         }
       }
-      const last = STREAM_CTRL[STREAM_CTRL.length - 1];
+      const last = RIVER_CTRL[RIVER_CTRL.length - 1];
       pts.push({ x: last.x, z: last.z });
       for (const p of pts) {
         p.r = Math.hypot(p.x, p.z);
-        p.y = sampleHeight(p.x, p.z) + WATER_DEPTH_OFFSET;
+        // Surface rides the solved bed, so the river runs downhill the whole way.
+        p.y = riverBedAt(riverProject(p.x, p.z).s) + 1.05;
       }
       // Averaged tangents give a mitred ribbon with no overlap at the bends.
       for (let i = 0; i < pts.length; i++) {
@@ -1334,16 +1825,16 @@
       return pts;
     }
 
-    function buildStreamMesh() {
-      const pts = buildStreamStations(2);
-      const half = STREAM_WIDTH;
+    function buildRiverMesh() {
+      const pts = buildRiverStations(3);
+      const half = RIVER_WIDTH * 1.25;
       const positions = [];
       const indices = [];
       const rowOf = new Int32Array(pts.length).fill(-1);
       let rows = 0;
       for (let i = 0; i < pts.length; i++) {
         const p = pts[i];
-        if (p.r > TERRAIN_RADIUS - 2) continue;
+        if (p.r > TERRAIN_RADIUS - 6) continue;
         rowOf[i] = rows++;
         positions.push(p.x - p.nx * half, p.y, p.z - p.nz * half);
         positions.push(p.x + p.nx * half, p.y, p.z + p.nz * half);
@@ -1359,13 +1850,50 @@
       geo.setIndex(indices);
       geo.computeVertexNormals();
       const mesh = new THREE.Mesh(geo, waterMat);
-      mesh.renderOrder = 1;
+      mesh.renderOrder = 2;
       streamGroup.add(mesh);
+      waterWaveTargets.push({ mesh, base: Float32Array.from(geo.attributes.position.array), amp: 0.055, freq: 0.9 });
+    }
+
+    // Lake surface, tessellated so it can ripple and so its rim can tuck under the bank.
+    function buildLakeMesh() {
+      const rings = 26, segs = 72;
+      const positions = [];
+      const indices = [];
+      positions.push(LAKE.x, LAKE.level, LAKE.z);
+      for (let i = 1; i <= rings; i++) {
+        // Covers the whole basin. The surplus sits below the banks and is hidden by the
+        // terrain, so the waterline is exactly where the ground crosses the surface.
+        const rr = LAKE_FILL * Math.pow(i / rings, 0.9);
+        for (let j = 0; j < segs; j++) {
+          const a = (j / segs) * Math.PI * 2;
+          positions.push(LAKE.x + Math.cos(a) * rr, LAKE.level, LAKE.z + Math.sin(a) * rr);
+        }
+      }
+      for (let j = 0; j < segs; j++) {
+        indices.push(0, 1 + ((j + 1) % segs), 1 + j);
+      }
+      for (let i = 1; i < rings; i++) {
+        const inner = 1 + (i - 1) * segs, outer = 1 + i * segs;
+        for (let j = 0; j < segs; j++) {
+          const j2 = (j + 1) % segs;
+          indices.push(inner + j, inner + j2, outer + j2);
+          indices.push(inner + j, outer + j2, outer + j);
+        }
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geo.setIndex(indices);
+      geo.computeVertexNormals();
+      const mesh = new THREE.Mesh(geo, waterMat);
+      mesh.renderOrder = 2;
+      streamGroup.add(mesh);
+      waterWaveTargets.push({ mesh, base: Float32Array.from(geo.attributes.position.array), amp: 0.09, freq: 0.55 });
     }
 
     function scatterStreamPebbles() {
       const rnd = mulberry32(0x5eab17);
-      const pts = buildStreamStations(6);
+      const pts = buildRiverStations(7);
       const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x8a9098, roughness: 0.9, metalness: 0.05 });
       const geos = [
         new THREE.DodecahedronGeometry(0.2, 0),
@@ -1373,13 +1901,13 @@
         new THREE.DodecahedronGeometry(0.15, 0)
       ];
       for (let i = 1; i < pts.length - 1; i++) {
-        if (rnd() < 0.45) continue;
+        if (rnd() < 0.4) continue;
         const p = pts[i];
         const side = rnd() < 0.5 ? 1 : -1;
-        const off = STREAM_WIDTH * (0.82 + rnd() * 0.25);
+        const off = RIVER_WIDTH * (0.95 + rnd() * 0.35);
         const bx = p.x + p.nx * side * off;
         const bz = p.z + p.nz * side * off;
-        if (Math.hypot(bx, bz) > TERRAIN_RADIUS - 4) continue;
+        if (Math.hypot(bx, bz) > LAND_MAX) continue;
         const peb = new THREE.Mesh(geos[i % geos.length], pebbleMat);
         peb.position.set(bx, sampleHeight(bx, bz) - 0.04, bz);
         peb.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
@@ -1388,45 +1916,86 @@
         streamGroup.add(peb);
       }
     }
-    buildStreamMesh();
-    scatterStreamPebbles();
 
-    // === Land boundary ===
-    // A low berm whose vertices sit on the terrain, replacing the old torus pinned to a
-    // single averaged height and the flat "locked" ring that sliced through every hill.
-    const boundaryMat = new THREE.MeshStandardMaterial({
-      color: 0x2e6b44, roughness: 0.9, metalness: 0.04, side: THREE.DoubleSide
-    });
-    function buildBoundaryGeometry(radius) {
-      const segs = 256;
-      const positions = new Float32Array((segs + 1) * 9);
-      const indices = [];
-      for (let j = 0; j <= segs; j++) {
-        const a = (j / segs) * Math.PI * 2;
-        const ca = Math.cos(a), sa = Math.sin(a);
-        const xi = ca * (radius - 0.55), zi = sa * (radius - 0.55);
-        const xo = ca * (radius + 0.55), zo = sa * (radius + 0.55);
-        const hi = sampleHeight(xi, zi);
-        const ho = sampleHeight(xo, zo);
-        const b = j * 9;
-        positions[b] = xi; positions[b + 1] = hi - 0.08; positions[b + 2] = zi;
-        positions[b + 3] = ca * radius; positions[b + 4] = Math.max(hi, ho) + 0.6; positions[b + 5] = sa * radius;
-        positions[b + 6] = xo; positions[b + 7] = ho - 0.08; positions[b + 8] = zo;
+    // Reed clumps in the shallows read as life around the water.
+    function scatterReeds() {
+      const rnd = mulberry32(0x9eed5);
+      const reedMat = new THREE.MeshStandardMaterial({
+        vertexColors: true, roughness: 0.95, side: THREE.DoubleSide
+      });
+      const reedA = new THREE.MeshStandardMaterial({ color: 0x6f8c3a });
+      const reedB = new THREE.MeshStandardMaterial({ color: 0x8aa54a });
+      let placed = 0;
+      for (let tries = 0; tries < 2600 && placed < 190; tries++) {
+        const a = rnd() * Math.PI * 2;
+        const rr = LAKE.r * 0.6 + rnd() * (LAKE.r * 0.62);
+        const x = LAKE.x + Math.cos(a) * rr;
+        const z = LAKE.z + Math.sin(a) * rr;
+        const depth = waterDepthAt(x, z);
+        if (depth < 0.15 || depth > 1.3) continue;
+        const parts = [];
+        const n = 4 + Math.floor(rnd() * 5);
+        for (let i = 0; i < n; i++) {
+          const blade = new THREE.Mesh(
+            new THREE.PlaneGeometry(0.09, 1.0 + rnd() * 0.9),
+            rnd() > 0.5 ? reedA : reedB
+          );
+          blade.position.set((rnd() - 0.5) * 0.5, 0.55 + rnd() * 0.35, (rnd() - 0.5) * 0.5);
+          blade.rotation.y = rnd() * Math.PI;
+          blade.rotation.z = (rnd() - 0.5) * 0.5;
+          parts.push(blade);
+        }
+        const clump = mergeParts(parts, reedMat);
+        clump.position.set(x, sampleHeight(x, z), z);
+        scene.add(clump);
+        windSwayables.push({ mesh: clump, phase: rnd() * 6.28, amount: 0.10 });
+        placed++;
       }
-      for (let j = 0; j < segs; j++) {
-        const a0 = j * 3, b0 = (j + 1) * 3;
-        indices.push(a0, b0, b0 + 1, a0, b0 + 1, a0 + 1);
-        indices.push(a0 + 1, b0 + 1, b0 + 2, a0 + 1, b0 + 2, a0 + 2);
-      }
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geo.setIndex(indices);
-      geo.computeVertexNormals();
-      return geo;
     }
-    const boundary = new THREE.Mesh(buildBoundaryGeometry(landRadius), boundaryMat);
-    boundary.receiveShadow = true;
-    scene.add(boundary);
+
+    buildRiverMesh();
+    buildLakeMesh();
+    scatterStreamPebbles();
+    // scatterReeds() runs later — it needs the prop-merging helpers.
+
+    // --- Wind -------------------------------------------------------------------
+    // A single gust value drives trees, grass, reeds and drifting leaves, so the whole
+    // world leans together instead of every prop wobbling on its own clock.
+    const wind = { dirX: 1, dirZ: 0, strength: 0.5, time: 0 };
+    function updateWind(dt) {
+      wind.time += dt;
+      const t = wind.time;
+      wind.strength = 0.5 + 0.32 * Math.sin(t * 0.21) + 0.18 * Math.sin(t * 0.73 + 1.3);
+      const turn = Math.sin(t * 0.055) * 0.55 + 0.6;
+      wind.dirX = Math.cos(turn);
+      wind.dirZ = Math.sin(turn);
+    }
+
+    function updateWindSway() {
+      const t = wind.time;
+      for (const s of windSwayables) {
+        const g = Math.sin(t * 1.9 + s.phase) * 0.6 + Math.sin(t * 0.87 + s.phase * 1.7) * 0.4;
+        const k = s.amount * wind.strength * g;
+        s.mesh.rotation.x = k * wind.dirZ;
+        s.mesh.rotation.z = -k * wind.dirX;
+      }
+    }
+
+    // Ripple the water surfaces. Cheap vertex wave, no shader required.
+    function updateWater(t) {
+      for (const w of waterWaveTargets) {
+        const attr = w.mesh.geometry.attributes.position;
+        const arr = attr.array;
+        const base = w.base;
+        for (let i = 0; i < arr.length; i += 3) {
+          const x = base[i], z = base[i + 2];
+          arr[i + 1] = base[i + 1] +
+            Math.sin(x * 0.42 + t * w.freq * 2.1) * w.amp +
+            Math.sin(z * 0.31 - t * w.freq * 1.5) * w.amp * 0.8;
+        }
+        attr.needsUpdate = true;
+      }
+    }
 
     function seatPropY(obj, x, z, footprint = 0, yOff = 0) {
       obj.position.y = groundMinAround(x, z, footprint) + yOff;
@@ -1447,10 +2016,10 @@
 
     // Expanding land no longer rebuilds the world — it just moves the boundary and
     // lifts the tint, so props keep their exact positions.
+    // The mountain wall past the play radius is the map edge now, so there is no berm
+    // to move — expanding only lifts the tint.
     function refreshLandMesh() {
       updateLandTint();
-      boundary.geometry.dispose();
-      boundary.geometry = buildBoundaryGeometry(landRadius);
       landREl.textContent = String(Math.round(landRadius));
     }
 
@@ -1539,6 +2108,7 @@
       g.position.set(x, groundMinAround(x, z, 0.25), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'grass', x, z });
+      windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.16 });
     }
 
     function makeBush(x, z, rnd) {
@@ -1552,6 +2122,7 @@
       g.position.set(x, groundMinAround(x, z, 0.3), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'bush', x, z });
+      windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.05 });
     }
 
     function makeFern(x, z, rnd) {
@@ -1568,18 +2139,40 @@
       g.position.set(x, groundMinAround(x, z, 0.2), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'fern', x, z });
+      windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.11 });
     }
 
     // Seeded and built once over the whole map — expanding land used to reshuffle every
     // tuft to a new random spot, which made the ground visibly "crawl".
+    // Ground cover follows the land: lush near water, sparse on dry high ground, and
+    // nothing at all in the water or on anything you could not stand on.
+    function plantable(x, z, maxSlope = 0.45) {
+      if (waterDepthAt(x, z) > 0.02) return false;
+      if (terrainSlope(x, z) > maxSlope) return false;
+      return true;
+    }
+
+    function moistureAt(x, z) {
+      const riverD = distToRiver(x, z);
+      const lakeD = Math.hypot(x - LAKE.x, z - LAKE.z);
+      const h = sampleHeight(x, z);
+      let m = 0.5 + fbm(x * 0.0065 + 21.7, z * 0.0065 - 13.2, 3) * 0.42;
+      m += 0.45 * smoothstep01(1 - riverD / 26);
+      m += 0.40 * smoothstep01(1 - lakeD / (LAKE.r + 30));
+      m -= smoothBand(6, 30, h) * 0.45;
+      return Math.max(0, Math.min(1, m));
+    }
+
     function rebuildFoliage() {
       clearFoliage();
       const rnd = mulberry32(0xf0117a6e);
+      // Ground cover stops at the playable edge; the mountains beyond read as bare rock.
+      const spread = LAND_MAX + 10;
       function randSpot(minR) {
-        for (let tries = 0; tries < 20; tries++) {
+        for (let tries = 0; tries < 24; tries++) {
           const a = rnd() * Math.PI * 2;
           // Biased inward so the playable middle stays lush without flooding the map.
-          const r = minR + Math.pow(rnd(), 1.45) * (TERRAIN_RADIUS - minR - 6);
+          const r = minR + Math.pow(rnd(), 1.2) * (spread - minR);
           const x = Math.cos(a) * r, z = Math.sin(a) * r;
           if (r > 2.2) return [x, z];
         }
@@ -1587,18 +2180,137 @@
       }
       for (let i = 0; i < MAX_GRASS; i++) {
         const [x, z] = randSpot(0.5);
-        if (distToStream(x, z) < STREAM_WIDTH * 0.7) continue;
+        if (!plantable(x, z, 0.5)) continue;
+        // Grass thins out on dry ground.
+        if (rnd() > 0.25 + moistureAt(x, z) * 0.9) continue;
         makeGrassTuft(x, z, rnd);
       }
       for (let i = 0; i < MAX_BUSH; i++) {
         const [x, z] = randSpot(2);
-        if (distToStream(x, z) < STREAM_WIDTH + 0.5) continue;
+        if (!plantable(x, z, 0.42)) continue;
+        if (rnd() > 0.3 + moistureAt(x, z) * 0.8) continue;
         makeBush(x, z, rnd);
       }
       for (let i = 0; i < MAX_FERN; i++) {
         const [x, z] = randSpot(1.5);
-        if (distToStream(x, z) < STREAM_WIDTH * 0.85) continue;
+        if (!plantable(x, z, 0.4)) continue;
+        // Ferns want shade and damp — they cluster near the water.
+        if (rnd() > moistureAt(x, z) * 1.15) continue;
         makeFern(x, z, rnd);
+      }
+    }
+
+    // --- Impact motes (footfall dust, water splash, ambient drift) ---------------
+    // Shared geometry and materials; particles shrink out instead of fading so no
+    // per-particle material is needed.
+    const motes = [];
+    const MAX_MOTES = 260;
+    const moteGeo = new THREE.SphereGeometry(0.08, 4, 3);
+    const dustMat = new THREE.MeshBasicMaterial({
+      color: 0xc6b48f, transparent: true, opacity: 0.5, depthWrite: false
+    });
+    const splashMat = new THREE.MeshBasicMaterial({
+      color: 0xcfeaff, transparent: true, opacity: 0.85, depthWrite: false
+    });
+    const emberMat = new THREE.MeshBasicMaterial({
+      color: 0xffd27a, transparent: true, opacity: 0.9, depthWrite: false
+    });
+
+    function spawnMote(x, y, z, mat, opts) {
+      if (motes.length >= MAX_MOTES) return;
+      const mesh = new THREE.Mesh(moteGeo, mat);
+      mesh.position.set(x, y, z);
+      const scale = opts.scale;
+      mesh.scale.setScalar(scale);
+      scene.add(mesh);
+      motes.push({
+        mesh, scale,
+        vx: opts.vx, vy: opts.vy, vz: opts.vz,
+        grav: opts.grav, drag: opts.drag,
+        age: 0, life: opts.life, grow: !!opts.grow
+      });
+    }
+
+    function spawnDust(x, y, z, count) {
+      for (let i = 0; i < count; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const s = 0.5 + Math.random() * 1.1;
+        spawnMote(x + (Math.random() - 0.5) * 0.4, y + 0.06, z + (Math.random() - 0.5) * 0.4, dustMat, {
+          vx: Math.cos(a) * s, vy: 0.5 + Math.random() * 0.8, vz: Math.sin(a) * s,
+          grav: 2.2, drag: 2.4, life: 0.55 + Math.random() * 0.4,
+          scale: 1.1 + Math.random() * 1.2, grow: true
+        });
+      }
+    }
+
+    function spawnSplash(x, y, z, count, power = 1) {
+      for (let i = 0; i < count; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const s = (0.9 + Math.random() * 1.8) * power;
+        spawnMote(x + (Math.random() - 0.5) * 0.35, y + 0.05, z + (Math.random() - 0.5) * 0.35, splashMat, {
+          vx: Math.cos(a) * s, vy: (2.0 + Math.random() * 2.6) * power, vz: Math.sin(a) * s,
+          grav: 13, drag: 0.5, life: 0.45 + Math.random() * 0.35,
+          scale: 0.55 + Math.random() * 0.7
+        });
+      }
+    }
+
+    function spawnEmbers(x, y, z, count, power = 1) {
+      for (let i = 0; i < count; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const s = (1.2 + Math.random() * 2.4) * power;
+        spawnMote(x, y, z, emberMat, {
+          vx: Math.cos(a) * s, vy: (1.5 + Math.random() * 3.2) * power, vz: Math.sin(a) * s,
+          grav: 7, drag: 1.1, life: 0.5 + Math.random() * 0.6,
+          scale: 0.4 + Math.random() * 0.6
+        });
+      }
+    }
+
+    // Ambient life around the player: pollen drifting in daylight, fireflies after
+    // dark. Costs almost nothing and makes the air feel occupied.
+    let ambientCd = 0;
+    function updateAmbientLife(dt) {
+      if (!gameStarted) return;
+      ambientCd -= dt;
+      if (ambientCd > 0) return;
+      ambientCd = 0.12;
+      if (motes.length > MAX_MOTES * 0.6) return;
+      const a = Math.random() * Math.PI * 2;
+      const r = 3 + Math.random() * 14;
+      const x = player.position.x + Math.cos(a) * r;
+      const z = player.position.z + Math.sin(a) * r;
+      const g = sampleHeight(x, z);
+      if (isNight) {
+        spawnMote(x, g + 0.5 + Math.random() * 1.8, z, emberMat, {
+          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.3, vz: (Math.random() - 0.5) * 0.35,
+          grav: 0, drag: 0.1, life: 1.6 + Math.random() * 1.4, scale: 0.28 + Math.random() * 0.2
+        });
+      } else {
+        spawnMote(x, g + 0.4 + Math.random() * 2.4, z, dustMat, {
+          vx: wind.dirX * wind.strength * 0.9, vy: 0.12 + Math.random() * 0.2, vz: wind.dirZ * wind.strength * 0.9,
+          grav: 0.05, drag: 0.02, life: 2.2 + Math.random() * 1.6, scale: 0.22 + Math.random() * 0.2
+        });
+      }
+    }
+
+    function updateMotes(dt) {
+      for (let i = motes.length - 1; i >= 0; i--) {
+        const m = motes[i];
+        m.age += dt;
+        const t = m.age / m.life;
+        if (t >= 1) {
+          scene.remove(m.mesh);
+          motes.splice(i, 1);
+          continue;
+        }
+        m.vy -= m.grav * dt;
+        const d = Math.max(0, 1 - m.drag * dt);
+        m.vx *= d; m.vz *= d;
+        m.mesh.position.x += m.vx * dt;
+        m.mesh.position.y += m.vy * dt;
+        m.mesh.position.z += m.vz * dt;
+        m.mesh.scale.setScalar(m.scale * (1 - t) * (m.grow ? 0.5 + t : 1));
       }
     }
 
@@ -1637,14 +2349,23 @@
         d.mesh.position.x += d.vx * dt;
         d.mesh.position.y += d.vy * dt;
         d.mesh.position.z += d.vz * dt;
-        d.mesh.rotation.x += dt * 4;
-        d.mesh.rotation.z += dt * 3;
+        d.mesh.rotation.x += dt * 4 * (1 + Math.abs(d.vx));
+        d.mesh.rotation.z += dt * 3 * (1 + Math.abs(d.vz));
         {
-          const gh = sampleHeight(d.mesh.position.x, d.mesh.position.z) + 0.05;
+          const px = d.mesh.position.x, pz = d.mesh.position.z;
+          const gh = sampleHeight(px, pz) + 0.05;
           if (d.mesh.position.y < gh) {
             d.mesh.position.y = gh;
-            d.vy *= -0.25;
-            d.vx *= 0.6; d.vz *= 0.6;
+            // Reflect off the actual surface so chunks tumble downhill rather than
+            // pogoing straight up wherever they land.
+            const v = reflectOnTerrain(px, pz, d.vx, d.vy, d.vz, 0.28, 0.62);
+            d.vx = v.x; d.vy = v.y; d.vz = v.z;
+            if (Math.abs(d.vy) < 0.6) d.vy = 0;
+            const wet = waterDepthAt(px, pz);
+            if (wet > 0.05 && !d.splashed) {
+              d.splashed = true;
+              spawnSplash(px, gh + wet, pz, 3, 0.7);
+            }
           }
         }
         const fade = Math.max(0, 1 - d.age / d.life);
@@ -2388,25 +3109,30 @@
       rocks.push(rec);
       return rec;
     }
-    // scatterRocks — seeded, inside LAND_MAX, clear of stream/spawn
+    // scatterRocks — seeded, biased onto steep and high ground where scree collects
     function scatterRocks() {
       const rnd = mulberry32(0x70c45e);
       const placed = [];
-      const target = 70;
+      const target = 150;
       const spawnClear = 12;
-      const edgeMargin = 4;
+      const outer = LAND_MAX + 22;
       let attempts = 0;
       while (placed.length < target && attempts < target * 50) {
         attempts++;
         const ang = rnd() * Math.PI * 2;
-        const rad = Math.sqrt(rnd()) * (LAND_MAX - edgeMargin);
+        const rad = Math.sqrt(rnd()) * outer;
         const x = Math.cos(ang) * rad;
         const z = Math.sin(ang) * rad;
         if (landDist(x, z) < spawnClear) continue;
-        if (landDist(x, z) > LAND_MAX - edgeMargin) continue;
-        if (distToStream(x, z) < STREAM_WIDTH + 0.9) continue;
+        if (waterDepthAt(x, z) > 0.35) continue;
+        if (distToRiver(x, z) < RIVER_WIDTH + 0.9) continue;
+        // Boulders gather where the ground breaks up: steep faces and high altitude.
+        const slope = terrainSlope(x, z);
+        const h = sampleHeight(x, z);
+        const likely = 0.16 + slope * 1.5 + smoothBand(18, 44, h) * 0.9;
+        if (rnd() > likely) continue;
         let s = 0.65 + rnd() * 0.85;
-        if (rnd() < 0.1) s = 1.25 + rnd() * 0.4;
+        if (rnd() < 0.12) s = 1.3 + rnd() * 0.9; // occasional erratics
         const minSpace = 3.2 + s * 1.15;
         let ok = true;
         for (const p of placed) {
@@ -2761,26 +3487,49 @@
     }
 
     // scatterTrees / scatterRocks / updateLandPropVisibility
+    // Species follow the land rather than being picked at random: conifers take the
+    // cold high ground, broadleaves the damp lowlands, birch the middle, and autumn
+    // colour shows up on dry exposed slopes.
+    function treeKindFor(h, moisture, slope, rnd) {
+      const alpine = smoothBand(16, 34, h);
+      if (rnd() < alpine) return 'pine';
+      if (moisture > 0.68 && rnd() < 0.75) return 'oak';
+      if (moisture < 0.34 && rnd() < 0.6) return 'autumn';
+      if (slope > 0.3 && rnd() < 0.5) return 'pine';
+      return rnd() < 0.45 ? 'birch' : (rnd() < 0.6 ? 'oak' : 'autumn');
+    }
+
     function scatterTrees() {
       const rnd = mulberry32(0x7e44a1);
-      const kinds = ['pine', 'oak', 'autumn', 'birch'];
       const placed = [];
-      const target = 240;
+      // Woodland runs past the play boundary so the treeline climbs into the foothills.
+      const outer = LAND_MAX + 26;
+      const target = 430;
       const spawnClear = 15;
       let attempts = 0;
       while (placed.length < target && attempts < target * 40) {
         attempts++;
         const ang = rnd() * Math.PI * 2;
-        const rad = Math.sqrt(rnd()) * (LAND_MAX - 4);
+        const rad = Math.sqrt(rnd()) * outer;
         const x = Math.cos(ang) * rad;
         const z = Math.sin(ang) * rad;
         if (landDist(x, z) < spawnClear) continue;
-        const ds = distToStream(x, z);
-        if (ds < STREAM_WIDTH + 1.2) continue; // keep stream path open
-        if (ds < STREAM_WIDTH + 3.5 && rnd() < 0.55) continue; // sparser banks
+        // No trees in the water, on cliffs, or above the treeline.
+        if (waterDepthAt(x, z) > 0.02) continue;
+        const slope = terrainSlope(x, z);
+        if (slope > 0.5) continue;
+        const h = sampleHeight(x, z);
+        if (h > 46) continue;
+        if (h > 30 && rnd() < smoothBand(30, 46, h)) continue; // thins toward the treeline
+        const ds = distToRiver(x, z);
+        if (ds < RIVER_WIDTH + 1.6) continue; // keep the river open
+        if (ds < RIVER_WIDTH + 4.5 && rnd() < 0.5) continue; // sparser banks
+        const moisture = moistureAt(x, z);
+        // Forest density tracks moisture, so you get glades and thickets.
+        if (rnd() > 0.22 + moisture * 1.0) continue;
         let scale = 0.55 + rnd() * 1.3;
-        if (rnd() < 0.04) scale = 1.85 + rnd() * 0.25; // rare giants ~2.1
-        const minSpace = 4.2 + scale * 1.4;
+        if (rnd() < 0.045) scale = 1.85 + rnd() * 0.35; // rare giants
+        const minSpace = 4.0 + scale * 1.35;
         let ok = true;
         for (const p of placed) {
           if (Math.hypot(x - p.x, z - p.z) < Math.min(minSpace, (p.minSpace + minSpace) * 0.5)) {
@@ -2788,8 +3537,9 @@
           }
         }
         if (!ok) continue;
-        const kind = kinds[Math.floor(rnd() * kinds.length)];
-        const lean = (rnd() - 0.5) * 0.14;
+        const kind = treeKindFor(h, moisture, slope, rnd);
+        // Trees lean away from the slope they grow on, like they chased the light.
+        const lean = (rnd() - 0.5) * 0.12 + slope * 0.16;
         placed.push({ x, z, kind, scale, lean, minSpace });
       }
       for (const p of placed) makeTree(p.x, p.z, p);
@@ -5256,6 +6006,8 @@
     }
     updateCoinHud();
     rebuildFoliage();
+    scatterReeds();
+    buildClouds();
     reseatAllProps();
     // --- Builds: barricades & turrets ---
     const builds = [];
@@ -7248,6 +8000,13 @@
       scene.remove(g.mesh);
       AudioSys.grenadeBoom();
       spawnChunks(x, y, z, 0x555555, 10, 6);
+      // Blast feedback: fireball motes, a ring of kicked-up ground, and a shake that
+      // falls off with distance from the player.
+      spawnEmbers(x, y + 0.2, z, 16, 1.4);
+      if (waterDepthAt(x, z) > 0.1) spawnSplash(x, y + 0.2, z, 16, 1.6);
+      else spawnDust(x, y, z, 12);
+      const shakeDist = Math.hypot(x - player.position.x, z - player.position.z);
+      addShake(Math.max(0, 0.95 - shakeDist * 0.07));
       // AoE damage — shell uses launcher st.damage; Key-G throwable keeps legacy 55
       const AOE = 4.5;
       const baseDmg = (g.damage != null) ? g.damage : 55;
@@ -7301,8 +8060,18 @@
           const gh = sampleHeight(g.pos.x, g.pos.z) + 0.12;
           if (g.pos.y < gh) {
             g.pos.y = gh;
-            g.vy *= -0.35;
-            g.vx *= 0.7; g.vz *= 0.7;
+            // Grenades bounce off the surface they actually hit, so they roll into
+            // hollows and kick sideways off banks.
+            const v = reflectOnTerrain(g.pos.x, g.pos.z, g.vx, g.vy, g.vz, 0.34, 0.72);
+            g.vx = v.x; g.vy = v.y; g.vz = v.z;
+            if (Math.abs(g.vy) < 0.8) g.vy = 0;
+            const wet = waterDepthAt(g.pos.x, g.pos.z);
+            if (wet > 0.08 && !g.splashed) {
+              g.splashed = true;
+              spawnSplash(g.pos.x, gh + wet, g.pos.z, 7, 0.9);
+              // Water kills the bounce.
+              g.vx *= 0.25; g.vz *= 0.25; g.vy = 0;
+            }
           }
         }
         g.mesh.position.copy(g.pos);
@@ -8048,8 +8817,36 @@
         if (tactics === 'weave' && z.rushT > 0) spd *= 1.35;
         if (z.crawling) spd = z.baseSpeed * 0.35;
 
-        let mx = z.mesh.position.x + (graceFreeze ? 0 : nx * spd * dt);
-        let mz = z.mesh.position.z + (graceFreeze ? 0 : nz * spd * dt);
+        const zx = z.mesh.position.x, zz = z.mesh.position.z;
+        const hHere = sampleHeight(zx, zz);
+
+        // Steer around ground they cannot climb. Probing ahead and then to each side
+        // is enough to make the horde flow around bluffs instead of grinding into them.
+        let sx = nx, sz = nz;
+        const probe = 1.8;
+        const climbAhead = sampleHeight(zx + nx * probe, zz + nz * probe) - hHere;
+        if (climbAhead > 0.85) {
+          const lx = -nz, lz = nx;
+          const cl = sampleHeight(zx + (nx * 0.5 + lx) * probe, zz + (nz * 0.5 + lz) * probe) - hHere;
+          const cr = sampleHeight(zx + (nx * 0.5 - lx) * probe, zz + (nz * 0.5 - lz) * probe) - hHere;
+          const side = cl < cr ? 1 : -1;
+          sx = nx * 0.45 - nz * side * 0.9;
+          sz = nz * 0.45 + nx * side * 0.9;
+          const sl = Math.hypot(sx, sz) || 1;
+          sx /= sl; sz /= sl;
+        }
+
+        // Climbing costs pace, wading costs more.
+        if (climbAhead > 0) spd *= Math.max(0.4, 1 - climbAhead * 0.55);
+        const zDepth = waterDepthAt(zx, zz);
+        if (zDepth > 0.1) {
+          spd *= 1 - Math.min(0.65, zDepth * 0.45);
+          if (Math.random() < dt * 2.2) spawnSplash(zx, hHere + zDepth, zz, 2, 0.45);
+        }
+
+        // Knockback is already handled downstream by the stagger impulse.
+        let mx = zx + (graceFreeze ? 0 : sx * spd * dt);
+        let mz = zz + (graceFreeze ? 0 : sz * spd * dt);
 
         // Soft barricades — brutes shrug them off more
         const softStr = tactics === 'tank' ? 0.25 : 0.85;
@@ -8092,7 +8889,8 @@
         z.mesh.position.x = mx;
         z.mesh.position.z = mz;
         z.mesh.position.y = sampleHeight(mx, mz);
-        z.mesh.rotation.y = Math.atan2(nx, nz);
+        // Face the way they are actually travelling, including any detour around a bluff.
+        z.mesh.rotation.y = Math.atan2(sx, sz);
 
         // Walk cycle — skip missing limbs
         const parts = z.partsLost || emptyPartsLost();
@@ -8242,6 +9040,52 @@
 
     const GRAVITY = 18;
     let vy = 0, grounded = true;
+
+    // --- Player physics ---------------------------------------------------------
+    // Velocity-based rather than teleport-per-frame: the marine now carries momentum,
+    // loses pace climbing, picks it up descending, wades through water and loses his
+    // footing on anything genuinely steep.
+    const PHYS = {
+      walk: 7.4,
+      run: 11.8,
+      accelGround: 15,      // exponential approach rate, per second
+      accelStop: 12,
+      accelAir: 3.0,
+      jumpVel: 7.9,
+      coyote: 0.12,         // grace period to still jump just after leaving ground
+      jumpBuffer: 0.15,     // press slightly early and it still fires on landing
+      slideSlope: 0.60,     // terrainSlope above which footing goes
+      slideAccel: 19,
+      waterDrag: 0.62
+    };
+    let velX = 0, velZ = 0;
+    let coyoteT = 0, jumpBufferT = 0, wasGrounded = true;
+    let waterWade = 0;
+    let stepDist = 0;
+    const _physN = new THREE.Vector3();
+
+    // Camera shake, fed by explosions, hard landings and heavy weapons.
+    let shakeAmp = 0, shakeTime = 0;
+    function addShake(amount) {
+      shakeAmp = Math.min(1.4, shakeAmp + amount);
+    }
+
+    // Bounce a velocity off the real surface normal. Debris used to only ever reverse
+    // its Y, so nothing ever skittered down a slope.
+    const _bnN = new THREE.Vector3();
+    const _bnV = { x: 0, y: 0, z: 0 };
+    function reflectOnTerrain(x, z, vx, vy2, vz, restitution, friction) {
+      const n = terrainNormal(x, z, _bnN);
+      const vn = vx * n.x + vy2 * n.y + vz * n.z;
+      if (vn < 0) {
+        const j = (1 + restitution) * vn;
+        vx -= j * n.x; vy2 -= j * n.y; vz -= j * n.z;
+      }
+      _bnV.x = vx * friction;
+      _bnV.y = vy2;
+      _bnV.z = vz * friction;
+      return _bnV;
+    }
     const camOffset = new THREE.Vector3(0, 6.8, 8);
     const camLook = new THREE.Vector3();
     const tmp = new THREE.Vector3();
@@ -8424,7 +9268,7 @@
       phase = 'idle'; day = 0;
       house.active = false; house.group.visible = false; house.hp = house.maxHp;
       player.position.set(0, sampleHeight(0, 0), 0);
-      worldTime = 0.25;
+      worldTime = 0.4;
       hoursSinceDawn = 0;
       hoursSinceMatchStart = 0;
       matchClockRunning = false;
@@ -8510,20 +9354,64 @@
         // Invert A/D vs classic: matches Jerry's feel (A=right-of-aim, D=left-of-aim with rx,rz)
         const strafe = (keys.ArrowLeft || keys.KeyA ? 1 : 0) + (keys.ArrowRight || keys.KeyD ? -1 : 0);
         const running = !!(keys.ShiftLeft || keys.ShiftRight);
-        const speed = running ? 11 : 7;
         const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
         const rx = Math.cos(aimYaw), rz = -Math.sin(aimYaw);
-        let moving = false;
+
+        // Desired direction from input.
+        let wishX = 0, wishZ = 0, moving = false;
         if (forward !== 0 || strafe !== 0) {
-          let mx = fx * forward + rx * strafe;
-          let mz = fz * forward + rz * strafe;
-          const len = Math.hypot(mx, mz);
-          if (len > 1e-6) {
-            mx /= len; mz /= len;
-            player.position.x += mx * speed * dt;
-            player.position.z += mz * speed * dt;
-            moving = true;
+          wishX = fx * forward + rx * strafe;
+          wishZ = fz * forward + rz * strafe;
+          const len = Math.hypot(wishX, wishZ);
+          if (len > 1e-6) { wishX /= len; wishZ /= len; moving = true; }
+        }
+
+        const px0 = player.position.x, pz0 = player.position.z;
+        const nrm = terrainNormal(px0, pz0, _physN);
+        const slope = terrainSlope(px0, pz0);
+
+        // Grade along the direction of travel: positive uphill, negative downhill.
+        const grade = moving ? -(wishX * nrm.x + wishZ * nrm.z) / Math.max(0.2, nrm.y) : 0;
+        const slopeMul = grade > 0
+          ? 1 - Math.min(0.62, grade * 0.55)
+          : 1 + Math.min(0.16, -grade * 0.18);
+
+        // Wading costs pace, and deep water costs a lot.
+        const depth = waterDepthAt(px0, pz0);
+        waterWade += (Math.min(1, depth / 1.5) - waterWade) * Math.min(1, dt * 6);
+        const waterMul = 1 - waterWade * PHYS.waterDrag;
+
+        const targetSpeed = (running ? PHYS.run : PHYS.walk) * slopeMul * waterMul;
+        const tX = moving ? wishX * targetSpeed : 0;
+        const tZ = moving ? wishZ * targetSpeed : 0;
+        const rate = grounded ? (moving ? PHYS.accelGround : PHYS.accelStop) : PHYS.accelAir;
+        const k = 1 - Math.exp(-rate * dt);
+        velX += (tX - velX) * k;
+        velZ += (tZ - velZ) * k;
+
+        // Too steep to stand on: gravity takes over and drags you downhill.
+        if (grounded && slope > PHYS.slideSlope) {
+          const slide = Math.min(1, (slope - PHYS.slideSlope) / 0.28);
+          velX += nrm.x * PHYS.slideAccel * slide * dt;
+          velZ += nrm.z * PHYS.slideAccel * slide * dt;
+        }
+
+        player.position.x += velX * dt;
+        player.position.z += velZ * dt;
+        const groundSpeed = Math.hypot(velX, velZ);
+        moving = groundSpeed > 0.6;
+
+        // Footfalls: dust on dry ground, ripples in the shallows.
+        if (grounded) {
+          stepDist += groundSpeed * dt;
+          const stride = running ? 2.5 : 2.0;
+          if (stepDist > stride) {
+            stepDist = 0;
+            if (depth > 0.06) spawnSplash(px0, sampleHeight(px0, pz0) + depth, pz0, 4, 0.5);
+            else if (groundSpeed > 4) spawnDust(px0, sampleHeight(px0, pz0), pz0, 2);
           }
+        } else {
+          stepDist = 0;
         }
         // Always face aim so weaponMount +Z tracks mouse
         player.rotation.y = aimYaw;
@@ -8561,10 +9449,18 @@
         updateWaveSystem(dt);
         updateTurrets(dt);
         updateZombies(dt);
-        // Jump when grounded (always stand)
-        if (keys.Space && grounded) {
-          vy = 7.5; grounded = false; AudioSys.jump();
+        // Jump with coyote time and input buffering, so a press just before landing or
+        // just after stepping off a lip still works.
+        if (keys.Space) jumpBufferT = PHYS.jumpBuffer;
+        if (jumpBufferT > 0 && coyoteT > 0 && waterWade < 0.75) {
+          vy = PHYS.jumpVel * (1 - waterWade * 0.35);
+          grounded = false;
+          coyoteT = 0;
+          jumpBufferT = 0;
+          AudioSys.jump();
         }
+        // Releasing early cuts the arc short — a short hop instead of a full jump.
+        if (!keys.Space && vy > 3.2) vy = 3.2;
       } else {
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
         updateMarinePose(dt, false, false);
@@ -8596,6 +9492,17 @@
       updateCasings(dt);
       updateDroppedMags(dt);
       if (gameStarted) resolveTreeCollisions(dt);
+      updateMotes(dt);
+      updateAmbientLife(dt);
+      updateWind(dt);
+      updateWindSway();
+      updateWater(wind.time);
+      // Dome rides with the camera; clouds drift downwind and wrap so they never run out.
+      skyDome.position.copy(camera.position);
+      cloudGroup.position.x += wind.dirX * wind.strength * 2.2 * dt;
+      cloudGroup.position.z += wind.dirZ * wind.strength * 2.2 * dt;
+      if (Math.abs(cloudGroup.position.x) > 500) cloudGroup.position.x *= -1;
+      if (Math.abs(cloudGroup.position.z) > 500) cloudGroup.position.z *= -1;
       updateTreeFade(dt);
       updateTreeSway(dt);
       updateFallingTrees(dt);
@@ -8611,6 +9518,7 @@
         const groundY = playerGroundY(player.position.x, player.position.z);
         if (!gameStarted) {
           player.position.y = groundY;
+          velX = 0; velZ = 0; vy = 0;
         } else if (grounded && vy <= 0) {
           // stick to surface while walking (no clip / no sink)
           player.position.y = groundY;
@@ -8619,13 +9527,29 @@
           vy -= GRAVITY * dt;
           player.position.y += vy * dt;
           if (player.position.y <= groundY) {
+            const impact = -vy;
             player.position.y = groundY;
             vy = 0;
             grounded = true;
+            // Landing knocks the wind out of your momentum and kicks up the ground.
+            if (impact > 5.5) {
+              const px = player.position.x, pz = player.position.z;
+              const wet = waterDepthAt(px, pz);
+              if (wet > 0.06) spawnSplash(px, groundY + wet, pz, 10, 1.1);
+              else spawnDust(px, groundY, pz, 6);
+              addShake(Math.min(0.5, (impact - 5.5) * 0.06));
+              const brake = Math.max(0.55, 1 - (impact - 5.5) * 0.05);
+              velX *= brake; velZ *= brake;
+            }
           } else {
             grounded = false;
           }
         }
+        // Coyote / buffer timers ride on the resolved grounded state.
+        if (grounded) coyoteT = PHYS.coyote;
+        else coyoteT = Math.max(0, coyoteT - dt);
+        jumpBufferT = Math.max(0, jumpBufferT - dt);
+        wasGrounded = grounded;
       }
 
       updateCashDrops(dt);
@@ -8683,6 +9607,23 @@
         player.position.y + 1.5 + bobY * 0.5,
         player.position.z + Math.cos(aimYaw) * 4 * lookBlend
       );
+      // Shake displaces the camera and its aim point together, so the world jolts
+      // without the view swinging off target.
+      if (shakeAmp > 0.0015) {
+        shakeTime += dt * 34;
+        const sx = Math.sin(shakeTime * 1.7) * Math.sin(shakeTime * 0.63);
+        const sy = Math.sin(shakeTime * 2.3 + 1.7) * Math.sin(shakeTime * 0.51);
+        const sz = Math.sin(shakeTime * 1.9 + 3.1) * Math.sin(shakeTime * 0.77);
+        const a = shakeAmp * 0.55;
+        camera.position.x += sx * a;
+        camera.position.y += sy * a * 0.7;
+        camera.position.z += sz * a;
+        camLook.x += sx * a * 0.35;
+        camLook.z += sz * a * 0.35;
+        shakeAmp *= Math.exp(-4.2 * dt);
+      } else {
+        shakeAmp = 0;
+      }
       camera.lookAt(camLook);
       renderer.render(scene, camera);
       if (showPerf && !window.TT) {
