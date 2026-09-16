@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">UZI</span></div>
+      <div id="title">Tiny Trek <span class="badge">GRIP</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -2853,10 +2853,16 @@
       armRG.add(elbowRG);
       g.add(armRG);
 
-      // Weapon mount (player-local grip; keeps muzzle/laser math simple)
+      // Weapon mount on right-hand grip so gun follows arm/elbow during reload & walk
+      const gripR = new THREE.Group();
+      gripR.position.set(-0.01, -0.26, 0.12); // slightly forward of palm (gloveR)
+      elbowRG.add(gripR);
       const weaponMount = new THREE.Group();
-      weaponMount.position.set(0.36, 0.92, 0.38);
-      g.add(weaponMount);
+      // Hand-local base: matches old torso (0.36, 0.92, 0.38) + forward muzzle at rest
+      weaponMount.position.set(0.12826, 0.15981, -0.10022);
+      weaponMount.rotation.set(1.23359, 0.24103, 0.08361);
+      gripR.add(weaponMount);
+      g.userData.gripR = gripR;
       g.userData.weaponMount = weaponMount;
       g.userData.armLG = armLG;
       g.userData.armRG = armRG;
@@ -3125,7 +3131,7 @@
         }
       }
 
-      weaponMount.position.set(0.36, 0.92, 0.38);
+      // weaponMount parented to gripR — follows arm/elbow; no torso pin
     }
 
     const minigun = makeMinigun();
@@ -3212,7 +3218,7 @@
       return weaponMeshes[currentWeapon] || minigun;
     }
 
-    const WEAPON_MOUNT_BASE = { x: 0.36, y: 0.92, z: 0.38 };
+    const WEAPON_MOUNT_BASE = { x: 0.12826, y: 0.15981, z: -0.10022, rx: 1.23359, ry: 0.24103, rz: 0.08361 };
     const GUN_BASE = {
       minigun: { pos: minigun.position.clone(), rot: minigun.rotation.clone() },
       m4: { pos: m4.position.clone(), rot: m4.rotation.clone() },
@@ -3251,7 +3257,7 @@
       reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
       reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
       weaponMount.position.set(WEAPON_MOUNT_BASE.x, WEAPON_MOUNT_BASE.y, WEAPON_MOUNT_BASE.z);
-      weaponMount.rotation.set(0, 0, 0);
+      weaponMount.rotation.set(WEAPON_MOUNT_BASE.rx, WEAPON_MOUNT_BASE.ry, WEAPON_MOUNT_BASE.rz);
       const elbowL = marine.userData.elbowLG;
       const elbowR = marine.userData.elbowRG;
       if (elbowL) elbowL.rotation.set(ELBOW_L_BASE.x, ELBOW_L_BASE.y, ELBOW_L_BASE.z);
@@ -3298,12 +3304,17 @@
       const elbowL = marine.userData.elbowLG;
 
       function applyReloadPose() {
+        // Hand-local base + modest reload tilt (gun follows arm via gripR parent)
         weaponMount.position.set(
           WEAPON_MOUNT_BASE.x,
           WEAPON_MOUNT_BASE.y + reloadMountOff.y,
           WEAPON_MOUNT_BASE.z
         );
-        weaponMount.rotation.set(reloadMountOff.rx, reloadMountOff.ry, reloadMountOff.rz);
+        weaponMount.rotation.set(
+          WEAPON_MOUNT_BASE.rx + reloadMountOff.rx,
+          WEAPON_MOUNT_BASE.ry + reloadMountOff.ry,
+          WEAPON_MOUNT_BASE.rz + reloadMountOff.rz
+        );
         if (armR) {
           armR.rotation.x += reloadArmOff.x;
           armR.rotation.y += reloadArmOff.y;
@@ -4763,8 +4774,9 @@
         weaponMount.position.x = WEAPON_MOUNT_BASE.x + (Math.random() - 0.5) * 0.022;
         weaponMount.position.y = WEAPON_MOUNT_BASE.y + reloadMountOff.y + (Math.random() - 0.5) * 0.016;
         weaponMount.position.z = WEAPON_MOUNT_BASE.z + (Math.random() - 0.5) * 0.012;
-        weaponMount.rotation.z = reloadMountOff.rz + (Math.random() - 0.5) * 0.05;
-        weaponMount.rotation.x = reloadMountOff.rx + (Math.random() - 0.5) * 0.03;
+        weaponMount.rotation.x = WEAPON_MOUNT_BASE.rx + reloadMountOff.rx + (Math.random() - 0.5) * 0.03;
+        weaponMount.rotation.y = WEAPON_MOUNT_BASE.ry + reloadMountOff.ry;
+        weaponMount.rotation.z = WEAPON_MOUNT_BASE.rz + reloadMountOff.rz + (Math.random() - 0.5) * 0.05;
         fireCooldown -= dt;
         if (fireCooldown <= 0) {
           fireCooldown = st.interval;
