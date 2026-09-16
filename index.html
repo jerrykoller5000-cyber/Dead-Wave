@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">GRIP</span></div>
+      <div id="title">Tiny Trek <span class="badge">PISTOL</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -436,6 +436,11 @@
       function reloadDone() {
         playTone({ freq: 520, type: 'square', dur: 0.06, vol: 0.1 });
         playTone({ freq: 660, type: 'square', dur: 0.05, vol: 0.08, when: 0.05 });
+      }
+      function slideRack() {
+        playTone({ freq: 320, type: 'triangle', dur: 0.05, vol: 0.09, slideTo: 160 });
+        playNoise({ dur: 0.045, vol: 0.06, filterFreq: 2200, filterType: 'bandpass' });
+        playTone({ freq: 480, type: 'square', dur: 0.035, vol: 0.07, when: 0.06 });
       }
       function jump() { playTone({ freq: 300, type: 'triangle', dur: 0.08, vol: 0.08, slideTo: 420 }); }
       function nvgClick() {
@@ -758,7 +763,7 @@
 
       return {
         unlock, toggleMute, isMuted, setMuted,
-        fire, emptyClick, reloadStart, reloadDone,
+        fire, emptyClick, reloadStart, reloadDone, slideRack,
         jump, nvgClick, coin, leafHit, treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
@@ -3201,7 +3206,7 @@
     const WEAPON_STATS = {
       minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
       m4: { name: 'M4', maxAmmo: 30, reload: 1.4, interval: 0.1, damage: 16, spin: false, auto: true },
-      pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.0, interval: 0.28, damage: 18, spin: false, auto: true },
+      pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.35, interval: 0.28, damage: 18, spin: false, auto: true },
       uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.35, interval: 1 / 14, damage: 12, spin: false, auto: true },
       shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
       revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
@@ -3450,51 +3455,96 @@
           }
         }
       } else if (currentWeapon === 'pistol') {
-        const tiltUp = _seg(progress, 0.0, 0.10);
-        const tiltDown = _seg(progress, 0.72, 0.94);
-        const tilt = tiltUp * (1 - tiltDown);
-        const drop = _seg(progress, 0.05, 0.26);
-        const holdGone = progress >= 0.26 && progress < 0.40;
-        const insert = _seg(progress, 0.40, 0.62);
-        const insertSettle = _seg(progress, 0.62, 0.72);
-        const slidePull = _seg(progress, 0.38, 0.52);
-        const slideRack = _seg(progress, 0.78, 0.90);
-        const slideAmt = slidePull * (1 - slideRack);
-        reloadMountOff.rx = -0.16 * tilt;
-        reloadMountOff.rz = 0.06 * tilt;
-        gun.rotation.x = -0.16 * tilt;
-        reloadArmOff.x = -0.1 * tilt;
-        reloadElbowOffR.x = -0.55 * tilt - 0.28 * drop + 0.4 * insert;
-        reloadElbowOffR.y = 0.08 * tilt;
-        reloadElbowOffL.x = -0.18 * tilt;
+        // Real-life empty reload (RH grip stays on gun / gripR):
+        // present magwell → eject → LH fetch → seat → rack slide → recover
+        const present = _seg(progress, 0.0, 0.18);
+        const recover = _seg(progress, 0.90, 1.0);
+        const tilt = present * (1 - recover);
+
+        // Mag: eject 0.10–0.32, clear/gone ~0.30–0.42, insert+seat 0.42–0.68, settle→0.74
+        const drop = _seg(progress, 0.10, 0.32);
+        const holdGone = progress >= 0.30 && progress < 0.42;
+        const insert = _seg(progress, 0.42, 0.68);
+        const insertSettle = _seg(progress, 0.68, 0.74);
+
+        // LH: fetch pouch → guide to well → slap seat → overhand rack (post-seat)
+        const fetchDown = _pulse(progress, 0.28, 0.36, 0.44); // reach chest pouch
+        const fetchUp = _seg(progress, 0.38, 0.48);           // bring mag up to well
+        const slap = _pulse(progress, 0.55, 0.64, 0.72);      // palm-heel seat
+        const rackPull = _seg(progress, 0.72, 0.88);
+        const rackFwd = _seg(progress, 0.88, 0.96);
+        const slideAmt = rackPull * (1 - rackFwd);
+        const rackHand = _pulse(progress, 0.70, 0.80, 0.96);  // LH over slide
+
+        if (!reloadSlideCuePlayed && progress >= 0.72 && AudioSys.slideRack) {
+          reloadSlideCuePlayed = true;
+          AudioSys.slideRack();
+        }
+
+        // Modest hand-local mount tilt only (magwell to support / slight muzzle-up).
+        // Drive presentation with R shoulder/elbow — gun stays parented to gripR.
+        reloadMountOff.rx = -0.12 * tilt;   // slight muzzle-up
+        reloadMountOff.rz = 0.10 * tilt;    // roll magwell toward LH
+        reloadMountOff.y = -0.012 * tilt;   // tuck slightly in
+
+        // Right hand: hold pistol through the motion (bring-in, not fighting the mag)
+        reloadArmOff.x = -0.16 * tilt;      // shoulder assists pull-in
+        reloadArmOff.z = -0.06 * tilt;
+        reloadElbowOffR.x = -0.72 * tilt - 0.12 * drop;
+        reloadElbowOffR.y = 0.10 * tilt;
+        reloadElbowOffR.z = -0.08 * tilt;
+
+        // Left hand: grab → guide → slap → rack
+        reloadArmOffL.x = -0.22 * fetchDown - 0.12 * fetchUp - 0.08 * slap - 0.18 * rackHand;
+        reloadArmOffL.y = 0.12 * fetchDown + 0.06 * fetchUp;
+        reloadArmOffL.z = 0.18 * fetchDown + 0.10 * fetchUp + 0.08 * rackHand;
+        reloadElbowOffL.x =
+          -0.85 * fetchDown - 0.55 * fetchUp - 0.95 * slap - 0.70 * rackHand * rackPull;
+        reloadElbowOffL.y = 0.14 * fetchDown + 0.08 * rackHand;
+        reloadElbowOffL.z = 0.10 * fetchUp - 0.12 * slap;
+
+        // Keep mesh local pose — orientation comes from gripR / mount, not floating gun.rot
+        const base = GUN_BASE.pistol;
+        if (base) {
+          gun.position.copy(base.pos);
+          gun.rotation.copy(base.rot);
+        }
+
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.set(
             gun.userData.baseSlidePos.x,
             gun.userData.baseSlidePos.y,
-            gun.userData.baseSlidePos.z - 0.12 * slideAmt
+            gun.userData.baseSlidePos.z - 0.13 * slideAmt
           );
         }
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
+          const dropY = 0.38;
           if (holdGone) {
             mag.visible = false;
-            mag.position.set(bp.x, bp.y - 0.36, bp.z);
+            mag.position.set(bp.x, bp.y - dropY, bp.z + 0.04);
             mag.rotation.x = 0;
             mag.rotation.z = 0;
-          } else if (progress < 0.26) {
+          } else if (progress < 0.30) {
+            // Eject: gravity-ish fall + tiny rearward kick
             mag.visible = true;
-            mag.position.set(bp.x + 0.025 * drop, bp.y - 0.34 * drop, bp.z);
-            mag.rotation.x = 0.7 * drop;
-            mag.rotation.z = 0.2 * drop;
+            mag.position.set(
+              bp.x + 0.02 * drop,
+              bp.y - dropY * drop,
+              bp.z + 0.05 * drop
+            );
+            mag.rotation.x = 0.65 * drop;
+            mag.rotation.z = 0.18 * drop;
           } else {
+            // Fresh mag rises into well; short overshoot slam then settle
             mag.visible = true;
-            const over = 0.02;
+            const over = 0.022;
             let yOff;
-            if (progress < 0.62) yOff = -0.34 * (1 - insert) + over * insert;
+            if (progress < 0.68) yOff = -dropY * (1 - insert) + over * insert;
             else yOff = over * (1 - insertSettle);
             mag.position.set(bp.x, bp.y + yOff, bp.z);
-            mag.rotation.x = 0.15 * (1 - Math.max(insert, insertSettle));
+            mag.rotation.x = 0.12 * (1 - Math.max(insert, insertSettle));
             mag.rotation.z = 0;
           }
         }
@@ -4387,6 +4437,7 @@
     // --- Shooting / ammo ---
     let reloading = false;
     let reloadTimer = 0;
+    let reloadSlideCuePlayed = false;
     let fireHeld = false;
     let fireCooldown = 0;
     let barrelSpin = 0;
@@ -4438,6 +4489,7 @@
       if (ammoByWeapon[currentWeapon] >= st.maxAmmo) return;
       reloading = true;
       reloadTimer = st.reload;
+      reloadSlideCuePlayed = false;
       fireHeld = false;
       updateAmmoHud();
       AudioSys.reloadStart();
