@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">CARBINE</span></div>
+      <div id="title">Tiny Trek <span class="badge">WHEEL</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -1672,6 +1672,62 @@
       });
     }
 
+    function spawnRevolverEjectCasing(index, total) {
+      // Dump spent brass from open cylinder (world space) — reload only, not per-shot
+      const cfg = CASING_WEAPONS.revolver;
+      if (!cfg) return;
+      if (casings.length >= MAX_CASINGS) recycleOldestCasing();
+      const gun = weaponMeshes.revolver || getActiveGun();
+      if (!gun) return;
+      gun.updateMatrixWorld(true);
+      const cyl = gun.userData.cylinder;
+      if (cyl) {
+        cyl.updateMatrixWorld(true);
+        cyl.getWorldPosition(_casingPos);
+      } else {
+        _casingPos.set(cfg.ox, cfg.oy, cfg.oz);
+        gun.localToWorld(_casingPos);
+      }
+      // Fan casings slightly around the cylinder
+      const fan = (index - (total - 1) * 0.5) * 0.018;
+      _casingPos.x += fan;
+      _casingPos.y += 0.01 + Math.random() * 0.02;
+      const tint = 0xb08a3a + (Math.random() * 0x181008 | 0);
+      const mat = new THREE.MeshStandardMaterial({
+        color: tint, metalness: 0.92, roughness: 0.28, transparent: true, opacity: 1
+      });
+      const mesh = new THREE.Mesh(casingGeo, mat);
+      mesh.position.copy(_casingPos);
+      mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      mesh.castShadow = false;
+      gun.getWorldQuaternion(_casingQuat);
+      mesh.quaternion.copy(_casingQuat);
+      mesh.rotateZ(Math.PI * 0.5);
+      mesh.rotateX((Math.random() - 0.5) * 1.4);
+      scene.add(mesh);
+      // Dump downward/outward from open gate
+      _casingVel.set(
+        1.4 + Math.random() * 1.6 + fan * 40,
+        0.6 + Math.random() * 1.1,
+        -0.3 - Math.random() * 0.8
+      );
+      _casingVel.applyQuaternion(_casingQuat);
+      casings.push({
+        mesh,
+        vx: _casingVel.x,
+        vy: _casingVel.y,
+        vz: _casingVel.z,
+        ax: (Math.random() - 0.5) * 20,
+        ay: (Math.random() - 0.5) * 24,
+        az: (Math.random() - 0.5) * 20,
+        age: 0,
+        life: 1.8 + Math.random() * 1.0,
+        bounced: false,
+        settled: false
+      });
+      if (index === 0 && AudioSys.brassTink) AudioSys.brassTink();
+    }
+
     function updateCasings(dt) {
       for (let i = casings.length - 1; i >= 0; i--) {
         const c = casings[i];
@@ -2784,6 +2840,7 @@
       gun.add(cylinder);
       gun.userData.cylinder = cylinder;
       gun.userData.baseCylinderRot = cylinder.rotation.clone();
+      gun.userData.baseCylinderPos = cylinder.position.clone();
       gun.userData.mag = cylinder;
       gun.userData.baseMagPos = cylinder.position.clone();
       gun.userData.baseMagRot = cylinder.rotation.clone();
@@ -2794,6 +2851,9 @@
       const hammer = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.05, 0.04), gunDark);
       hammer.position.set(0, 0.1, -0.08);
       gun.add(hammer);
+      gun.userData.hammer = hammer;
+      gun.userData.baseHammerRot = hammer.rotation.clone();
+      gun.userData.baseHammerPos = hammer.position.clone();
       const flash = new THREE.Mesh(new THREE.SphereGeometry(0.045, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
       flash.position.set(0, 0.05, 0.4);
       gun.add(flash);
@@ -3320,7 +3380,9 @@
     weaponMount.add(shotgun);
 
     const revolver = makeRevolver();
-    revolver.position.set(0.02, -0.02, -0.06);
+    // Grip mesh at (0,-0.08,-0.04) — lift so palm holds the grip (pistol playbook)
+    revolver.position.set(0.0, 0.07, 0.035);
+    revolver.rotation.set(0.0, 0.0, 0.0);
     revolver.scale.setScalar(1.08);
     revolver.visible = false;
     weaponMount.add(revolver);
@@ -3386,11 +3448,14 @@
     const UZI_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.075, rz: 0.055 };
     // Rifle-ish but shorter than sniper — between pistol and sniper
     const M4_MOUNT_BASE = { x: 0.0, y: 0.017, z: 0.017, rx: 1.05, ry: 0.06, rz: 0.05 };
+    // Single-action wheelgun — same palm-local seat as pistol
+    const REVOLVER_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.08, rz: 0.06 };
     function getWeaponMountBase() {
       if (currentWeapon === 'pistol') return PISTOL_MOUNT_BASE;
       if (currentWeapon === 'sniper') return SNIPER_MOUNT_BASE;
       if (currentWeapon === 'uzi') return UZI_MOUNT_BASE;
       if (currentWeapon === 'm4') return M4_MOUNT_BASE;
+      if (currentWeapon === 'revolver') return REVOLVER_MOUNT_BASE;
       return WEAPON_MOUNT_BASE;
     }
     const GUN_BASE = {
@@ -3442,6 +3507,7 @@
       // Sniper lingers; M4 medium; Uzi chatters back fast; pistol/others snap
       const rate =
         currentWeapon === 'sniper' ? 9 :
+        currentWeapon === 'revolver' ? 10.5 :
         currentWeapon === 'm4' ? 12 :
         currentWeapon === 'uzi' ? 16 :
         14;
@@ -3528,6 +3594,23 @@
       applyWeaponMountPose();
     }
 
+    function kickRevolverRecoil() {
+      // Heavy single-action kick — stout muzzle climb, medium-slow decay (~10.5/s)
+      recoilKick.rx += -0.32 - Math.random() * 0.08; // ~-0.32..-0.40
+      recoilKick.rz += (Math.random() - 0.5) * 0.075;
+      recoilKick.ry += (Math.random() - 0.5) * 0.03;
+      recoilKick.z += -0.030 - Math.random() * 0.012;
+      recoilKick.y += -0.014 - Math.random() * 0.006;
+      recoilKick.x += (Math.random() - 0.5) * 0.007;
+      recoilKick.rx = Math.max(-0.58, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.11, Math.min(0.11, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.15, Math.min(0.15, recoilKick.rz));
+      recoilKick.x = Math.max(-0.04, Math.min(0.04, recoilKick.x));
+      recoilKick.y = Math.max(-0.048, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.065, Math.min(0.02, recoilKick.z));
+      applyWeaponMountPose();
+    }
+
     function _clamp01(t) { return Math.max(0, Math.min(1, t)); }
     function _smooth(t) { t = _clamp01(t); return t * t * (3 - 2 * t); }
     function _seg(progress, a, b) {
@@ -3585,6 +3668,11 @@
         }
         if (gun.userData.cylinder && gun.userData.baseCylinderRot) {
           gun.userData.cylinder.rotation.copy(gun.userData.baseCylinderRot);
+          if (gun.userData.baseCylinderPos) gun.userData.cylinder.position.copy(gun.userData.baseCylinderPos);
+        }
+        if (gun.userData.hammer && gun.userData.baseHammerRot) {
+          gun.userData.hammer.rotation.copy(gun.userData.baseHammerRot);
+          if (gun.userData.baseHammerPos) gun.userData.hammer.position.copy(gun.userData.baseHammerPos);
         }
         if (gun.userData.drum && gun.userData.baseDrumRot) {
           gun.userData.drum.rotation.copy(gun.userData.baseDrumRot);
@@ -3645,7 +3733,7 @@
       }
 
       const st = WEAPON_STATS[currentWeapon];
-      const dur = Math.max(0.05, st.reload);
+      const dur = Math.max(0.05, reloadAnimDuration || st.reload);
       const progress = _clamp01(1 - reloadTimer / dur);
       const gun = getActiveGun();
 
@@ -3931,19 +4019,83 @@
           );
         }
       } else if (currentWeapon === 'revolver') {
-        const tipUp = _seg(progress, 0.0, 0.12);
-        const tipDown = _seg(progress, 0.78, 0.96);
-        const tip = tipUp * (1 - tipDown);
-        gun.rotation.x = -0.14 * tip;
-        gun.rotation.z = 0.22 * tip;
-        reloadMountOff.rx = -0.12 * tip;
-        reloadMountOff.rz = 0.12 * tip;
-        reloadArmOff.x = -0.08 * tip;
-        reloadElbowOffR.x = -0.5 * tip;
-        reloadElbowOffR.z = 0.15 * tip;
-        reloadElbowOffL.x = -0.2 * tip;
+        // Real cylinder reload — RH locked (pistol playbook). No elbow tumble / full 360 spin.
+        // Phases over dynamic duration (0.55 + need*0.38):
+        //   Open 0.00–0.18 | Eject ~0.16–0.28 | Load 0.28–0.78 | Close 0.78–1.00
+        const need = Math.max(1, revolverReloadNeed || 1);
+        const openAmt = _seg(progress, 0.0, 0.16) * (1 - _seg(progress, 0.80, 0.96));
+        const tip = _seg(progress, 0.0, 0.14) * (1 - _seg(progress, 0.84, 1.0));
+        const ejector = _pulse(progress, 0.14, 0.20, 0.28);
+        const closeAmt = _seg(progress, 0.78, 0.96);
+        const hammerCock = _pulse(progress, 0.88, 0.94, 1.0);
+
+        // Load loop: equal slices across 0.28–0.78
+        const loadStart = 0.28;
+        const loadEnd = 0.78;
+        let insertPulse = 0;
+        let chamberStep = 0;
+        if (progress >= loadStart && progress < loadEnd) {
+          const t = (progress - loadStart) / (loadEnd - loadStart);
+          const idx = Math.min(need - 1, Math.floor(t * need));
+          const local = t * need - idx;
+          insertPulse = Math.sin(_clamp01(local) * Math.PI);
+          chamberStep = idx + _smooth(local);
+        } else if (progress >= loadEnd) {
+          chamberStep = need;
+        }
+
+        // Modest mount tip-back only — zero RH arm/elbow tumble
+        reloadMountOff.rx = -0.16 * tip;
+        reloadMountOff.rz = 0.05 * tip;
+        reloadMountOff.y = 0.008 * tip;
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+
+        // LH: open assist + per-round insert beats + close nudge
+        reloadArmOffL.x = -0.10 * openAmt - 0.16 * insertPulse - 0.06 * closeAmt;
+        reloadArmOffL.y = 0.08 * openAmt + 0.05 * insertPulse;
+        reloadArmOffL.z = 0.14 * openAmt + 0.10 * insertPulse + 0.05 * closeAmt;
+        reloadElbowOffL.x = -0.55 * openAmt - 0.85 * insertPulse - 0.25 * closeAmt;
+        reloadElbowOffL.y = 0.10 * openAmt + 0.08 * insertPulse;
+        reloadElbowOffL.z = 0.12 * openAmt - 0.06 * insertPulse;
+
+        const base = GUN_BASE.revolver;
+        if (base) {
+          gun.position.copy(base.pos);
+          gun.rotation.copy(base.rot);
+        }
+
+        // Swing-out cylinder gate (lateral + yaw) — readable, not a weapon spin
         if (gun.userData.cylinder) {
-          gun.userData.cylinder.rotation.x = progress * Math.PI * 4;
+          const cyl = gun.userData.cylinder;
+          const bp = gun.userData.baseCylinderPos || gun.userData.baseMagPos;
+          const br = gun.userData.baseCylinderRot || gun.userData.baseMagRot;
+          if (bp && br) {
+            const swing = openAmt;
+            cyl.position.set(
+              bp.x + 0.095 * swing + 0.012 * ejector,
+              bp.y - 0.008 * swing,
+              bp.z + 0.01 * swing
+            );
+            cyl.rotation.set(
+              br.x + chamberStep * (Math.PI * 2 / 6) * 0.35,
+              br.y + 1.15 * swing,
+              br.z
+            );
+          }
+        }
+
+        // Optional ejector-rod nudge during eject window
+        if (gun.userData.hammer && gun.userData.baseHammerRot) {
+          const hm = gun.userData.hammer;
+          hm.rotation.x = gun.userData.baseHammerRot.x - 0.55 * hammerCock;
+        }
+
+        // Eject only spent casings once cylinder is open
+        if (!revolverEjectDone && progress >= 0.18) {
+          revolverEjectDone = true;
+          const n = Math.max(0, revolverReloadSpent | 0);
+          for (let i = 0; i < n; i++) spawnRevolverEjectCasing(i, n);
         }
       } else if (currentWeapon === 'sniper') {
         // RH locked (same rule as pistol) — tip-back for magwell only; LH fetch/seat; bolt after seat.
@@ -4866,8 +5018,13 @@
     // --- Shooting / ammo ---
     let reloading = false;
     let reloadTimer = 0;
+    let reloadAnimDuration = 1.8;
     let reloadSlideCuePlayed = false;
     let reloadMagDropped = false;
+    let revolverSpent = 0;
+    let revolverReloadNeed = 0;
+    let revolverReloadSpent = 0;
+    let revolverEjectDone = false;
     let fireHeld = false;
     let fireCooldown = 0;
     let barrelSpin = 0;
@@ -4918,9 +5075,24 @@
       if (st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return;
       if (ammoByWeapon[currentWeapon] >= st.maxAmmo) return;
       reloading = true;
-      reloadTimer = st.reload;
       reloadSlideCuePlayed = false;
       reloadMagDropped = false;
+      revolverEjectDone = false;
+      if (currentWeapon === 'revolver') {
+        const ammo = ammoByWeapon.revolver | 0;
+        const need = Math.max(1, 6 - ammo);
+        revolverReloadNeed = need;
+        // Prefer tracked spent; fall back to empty chambers
+        revolverReloadSpent = Math.max(0, Math.min(6, revolverSpent || need));
+        // Scale with rounds to insert: 1 round quick, 6 clearly longer
+        reloadTimer = 0.55 + need * 0.38;
+        reloadAnimDuration = reloadTimer;
+      } else {
+        reloadTimer = st.reload;
+        reloadAnimDuration = st.reload;
+        revolverReloadNeed = 0;
+        revolverReloadSpent = 0;
+      }
       fireHeld = false;
       updateAmmoHud();
       AudioSys.reloadStart();
@@ -5347,7 +5519,11 @@
             spawnCasing(currentWeapon); // one brass per shotgun pull, not per pellet
           } else {
             spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, st.name === 'Sniper' ? 0.7 : 0.5);
-            spawnCasing(currentWeapon);
+            // Revolver keeps brass in the cylinder until reload eject
+            if (currentWeapon !== 'revolver') spawnCasing(currentWeapon);
+          }
+          if (currentWeapon === 'revolver') {
+            revolverSpent = Math.min(6, Math.max(revolverSpent + 1, 6 - (ammoByWeapon.revolver | 0)));
           }
           triggerMuzzleFlash();
           AudioSys.fire();
@@ -5355,6 +5531,7 @@
           if (currentWeapon === 'sniper') kickSniperRecoil();
           if (currentWeapon === 'uzi') kickUziRecoil();
           if (currentWeapon === 'm4') kickM4Recoil();
+          if (currentWeapon === 'revolver') kickRevolverRecoil();
           updateAmmoHud();
         }
       }
@@ -6292,6 +6469,11 @@
       recoilKick.rx = recoilKick.ry = recoilKick.rz = 0;
       pistolSlideKick = 0;
       reloadMagDropped = false;
+      revolverSpent = 0;
+      revolverReloadNeed = 0;
+      revolverReloadSpent = 0;
+      revolverEjectDone = false;
+      reloadAnimDuration = 1.8;
 
       bank = 20;
       expandLevel = 0;
@@ -6454,6 +6636,10 @@
             reloadTimer = 0;
             const st = WEAPON_STATS[currentWeapon];
             ammoByWeapon[currentWeapon] = st.maxAmmo;
+            if (currentWeapon === 'revolver') revolverSpent = 0;
+            revolverReloadNeed = 0;
+            revolverReloadSpent = 0;
+            revolverEjectDone = false;
             resetReloadAnim();
             updateAmmoHud();
             AudioSys.reloadDone();
