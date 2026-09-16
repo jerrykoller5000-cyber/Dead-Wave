@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">BALL</span></div>
+      <div id="title">Tiny Trek <span class="badge" id="modeBadge" style="display:none"></span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -207,7 +207,7 @@
     <div id="modeSelect" class="show">
       <div class="card">
         <h2>Tiny Trek</h2>
-        <p>Pick a mode. Survive days of outbreak zombies, build defenses, expand land with coins.</p>
+        <p>Pick a mode. Survive days of outbreak zombies, build defenses with coins.</p>
         <div class="modes">
           <button id="modeHunt" type="button">Hunt the player</button>
           <button id="modeDefend" class="secondary" type="button">Defend the house</button>
@@ -257,7 +257,7 @@
             <ul>
               <li>B — enter / exit build mode</li>
               <li>Scroll — cycle buildable · 1 barricade · 2 light · 3 heavy</li>
-              <li>4 — expand land (costs coins) · LMB place · Esc exit build</li>
+              <li>LMB place · Esc exit build</li>
             </ul>
             <h3>Misc</h3>
             <ul>
@@ -316,7 +316,15 @@
     const perfEl = document.getElementById('perf');
 
     // Add ?debug=1 to the URL for a live FPS / draw-call readout.
-    const showPerf = new URLSearchParams(location.search).has('debug');
+    const urlParams = new URLSearchParams(location.search);
+    const showPerf = urlParams.has('debug');
+    {
+      const badge = document.getElementById('modeBadge');
+      if (badge) {
+        if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
+        else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
+      }
+    }
     if (showPerf) perfEl.classList.add('on');
     let perfAccum = 0, perfFrames = 0;
 
@@ -936,7 +944,7 @@
     const LAND_MIN = 120;
     const LAND_MAX = 220;
     const LAND_STEP = 20;
-    let landRadius = LAND_MIN;
+    let landRadius = LAND_MAX; // expand disabled — full map open
     let expandLevel = 0;
     function expandCost() { return 14 + expandLevel * 12; }
 
@@ -1536,24 +1544,29 @@
     // --- Blood FX ---
     const bloodParticles = [];
     const bloodDecals = [];
-    const MAX_BLOOD_P = 60;
-    const MAX_BLOOD_D = 40;
+    const MAX_BLOOD_P = 90;
+    const MAX_BLOOD_D = 50;
     const bloodGeo = new THREE.SphereGeometry(0.06, 4, 4);
     const decalGeo = new THREE.CircleGeometry(0.28, 8);
 
-    function spawnBlood(x, y, z, dirX = 0, dirZ = 0, amount = 6) {
+    function spawnBlood(x, y, z, dirX = 0, dirZ = 0, amount = 6, force = 1) {
       const n = Math.min(amount, MAX_BLOOD_P - bloodParticles.length);
+      const dlen = Math.hypot(dirX, dirZ) || 0;
+      const nx = dlen > 0.01 ? dirX / dlen : 0;
+      const nz = dlen > 0.01 ? dirZ / dlen : 0;
       for (let i = 0; i < n; i++) {
         const mat = new THREE.MeshBasicMaterial({ color: 0x8b0000, transparent: true, opacity: 0.95 });
         const mesh = new THREE.Mesh(bloodGeo, mat);
-        mesh.position.set(x, y, z);
+        mesh.position.set(x + (Math.random() - 0.5) * 0.15, y + (Math.random() - 0.5) * 0.2, z + (Math.random() - 0.5) * 0.15);
+        mesh.scale.setScalar(0.7 + Math.random() * 0.9);
         scene.add(mesh);
+        const spray = (1.6 + Math.random() * 2.4) * force;
         bloodParticles.push({
           mesh,
-          vx: dirX * 2 + (Math.random() - 0.5) * 3,
-          vy: 1 + Math.random() * 3,
-          vz: dirZ * 2 + (Math.random() - 0.5) * 3,
-          age: 0, life: 0.5 + Math.random() * 0.4
+          vx: nx * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
+          vy: 1.2 + Math.random() * 3.5 * force,
+          vz: nz * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
+          age: 0, life: 0.45 + Math.random() * 0.55
         });
       }
       if (bloodDecals.length >= MAX_BLOOD_D) {
@@ -1604,7 +1617,91 @@
       }
     }
 
-    // --- Ejecting brass casings (firearms) ---
+    // --- Gore gib pieces (limb/torso chunks from explosive / chainsaw kills) ---
+    const gibPieces = [];
+    const MAX_GIB = 55;
+    const gibBoxGeo = new THREE.BoxGeometry(0.22, 0.28, 0.18);
+    const gibCapGeo = new THREE.CapsuleGeometry(0.08, 0.22, 3, 6);
+
+    function spawnGibBurst(x, y, z, skinColor, eyeColor, dirX, dirZ, style = 'explosive') {
+      const outward = Math.hypot(dirX, dirZ) > 0.05;
+      const ox = outward ? dirX / Math.hypot(dirX, dirZ) : 0;
+      const oz = outward ? dirZ / Math.hypot(dirX, dirZ) : 0;
+      const count = style === 'explosive' ? 9 : (style === 'chainsaw' ? 7 : (style === 'pellet' ? 4 : 2));
+      const impulse = style === 'explosive' ? 7.5 : (style === 'chainsaw' ? 5.5 : 3.5);
+      for (let i = 0; i < count && gibPieces.length < MAX_GIB; i++) {
+        const useCap = i % 3 !== 0;
+        const col = (i === 0 && eyeColor) ? eyeColor : skinColor;
+        const mat = new THREE.MeshStandardMaterial({
+          color: col, roughness: 0.88, metalness: 0.05, transparent: true, opacity: 1,
+          emissive: i === 0 ? (eyeColor || 0x330000) : 0x220000, emissiveIntensity: i === 0 ? 0.35 : 0.08
+        });
+        const mesh = new THREE.Mesh(useCap ? gibCapGeo : gibBoxGeo, mat);
+        mesh.castShadow = true;
+        mesh.position.set(x + (Math.random() - 0.5) * 0.35, y + 0.3 + Math.random() * 0.7, z + (Math.random() - 0.5) * 0.35);
+        mesh.scale.set(
+          0.7 + Math.random() * 0.9,
+          0.8 + Math.random() * 1.1,
+          0.7 + Math.random() * 0.9
+        );
+        mesh.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6);
+        scene.add(mesh);
+        const ang = Math.random() * Math.PI * 2;
+        const sp = impulse * (0.45 + Math.random());
+        let vx = Math.cos(ang) * sp;
+        let vz = Math.sin(ang) * sp;
+        if (outward) {
+          vx += ox * impulse * (0.4 + Math.random() * 0.6);
+          vz += oz * impulse * (0.4 + Math.random() * 0.6);
+        }
+        if (style === 'chainsaw') {
+          vx += ox * 4; vz += oz * 4;
+        }
+        gibPieces.push({
+          mesh,
+          vx, vy: 2.5 + Math.random() * impulse * 0.85, vz,
+          life: 1.6 + Math.random() * 1.0,
+          age: 0,
+          spinX: (Math.random() - 0.5) * 10,
+          spinZ: (Math.random() - 0.5) * 10
+        });
+      }
+    }
+
+    function spawnFleshChunks(x, y, z, dirX, dirZ, color, n = 3) {
+      spawnGibBurst(x, y, z, color, 0x660000, dirX, dirZ, 'pellet');
+      // trim extras if overcount — spawnGibBurst already caps
+      void n;
+    }
+
+    function updateGibs(dt) {
+      for (let i = gibPieces.length - 1; i >= 0; i--) {
+        const g = gibPieces[i];
+        g.age += dt;
+        g.vy -= 15 * dt;
+        g.mesh.position.x += g.vx * dt;
+        g.mesh.position.y += g.vy * dt;
+        g.mesh.position.z += g.vz * dt;
+        g.mesh.rotation.x += g.spinX * dt;
+        g.mesh.rotation.z += g.spinZ * dt;
+        const gh = sampleHeight(g.mesh.position.x, g.mesh.position.z) + 0.06;
+        if (g.mesh.position.y < gh) {
+          g.mesh.position.y = gh;
+          g.vy *= -0.28;
+          g.vx *= 0.55; g.vz *= 0.55;
+          g.spinX *= 0.7; g.spinZ *= 0.7;
+        }
+        const fade = Math.max(0, 1 - g.age / g.life);
+        g.mesh.material.opacity = fade;
+        if (g.age >= g.life) {
+          scene.remove(g.mesh);
+          g.mesh.material.dispose();
+          gibPieces.splice(i, 1);
+        }
+      }
+    }
+
+        // --- Ejecting brass casings (firearms) ---
     const casings = [];
     const MAX_CASINGS = 100;
     const casingGeo = new THREE.CylinderGeometry(0.012, 0.013, 0.038, 6);
@@ -4736,8 +4833,7 @@
     }
     function updateCoinHud() {
       coinsEl.textContent = String(bank);
-      if (landRadius >= LAND_MAX) landREl.textContent = String(Math.round(landRadius)) + ' (max)';
-      else landREl.textContent = String(Math.round(landRadius)) + ' · 4 expand ' + expandCost() + '¢';
+      landREl.textContent = String(Math.round(landRadius)) + ' · Land open';
     }
     updateCoinHud();
     rebuildFoliage();
@@ -5088,115 +5184,365 @@
       const t = ZOMBIE_TYPES[typeKey] || ZOMBIE_TYPES.shambler;
       const g = new THREE.Group();
       const s = t.scale;
-      const skin = new THREE.MeshStandardMaterial({ color: t.color, roughness: 0.92, metalness: 0.05 });
-      const bodyH = 0.85 * s;
-      // Legs for readable silhouette
-      for (const sx of [-0.14, 0.14]) {
-        const leg = new THREE.Mesh(new THREE.BoxGeometry(0.14 * s, 0.55 * s, 0.16 * s), skin);
-        leg.position.set(sx * s, 0.28 * s, 0);
-        leg.castShadow = true; g.add(leg);
-      }
-      const body = new THREE.Mesh(
-        new THREE.BoxGeometry(0.55 * s, bodyH, 0.35 * s),
-        skin
-      );
-      body.position.y = 0.85 * s;
-      if (t.hunch) {
-        body.rotation.x = t.hunch * 0.5;
-        body.position.y = 0.7 * s;
-        body.position.z = 0.1;
-      }
-      body.castShadow = true;
-      g.add(body);
+      const skinCol = t.color;
+      const skin = new THREE.MeshStandardMaterial({ color: skinCol, roughness: 0.92, metalness: 0.05 });
+      const clothA = new THREE.MeshStandardMaterial({ color: skinCol, roughness: 0.95, metalness: 0.02 });
+      const clothB = new THREE.MeshStandardMaterial({ color: 0x3a3a38, roughness: 0.9 });
 
-      if (t.armored) {
-        const armor = new THREE.Mesh(
-          new THREE.BoxGeometry(0.62 * s, 0.7 * s, 0.2 * s),
-          new THREE.MeshStandardMaterial({ color: 0x3a3a42, metalness: 0.55, roughness: 0.45 })
-        );
-        armor.position.set(0, 1.0 * s, 0.12 * s);
-        g.add(armor);
+      // --- Articulated skeleton (hips root) ---
+      const hips = new THREE.Group();
+      hips.position.y = 0.55 * s;
+      g.add(hips);
+
+      const torso = new THREE.Group();
+      torso.position.y = 0.28 * s;
+      hips.add(torso);
+
+      // Legs pivot at hips
+      const legLG = new THREE.Group();
+      legLG.position.set(-0.13 * s, -0.02 * s, 0);
+      hips.add(legLG);
+      const legRG = new THREE.Group();
+      legRG.position.set(0.13 * s, -0.02 * s, 0);
+      hips.add(legRG);
+
+      const thighGeo = new THREE.BoxGeometry(0.16 * s, 0.38 * s, 0.18 * s);
+      const shinGeo = new THREE.BoxGeometry(0.14 * s, 0.36 * s, 0.16 * s);
+      const bootGeo = new THREE.BoxGeometry(0.16 * s, 0.1 * s, 0.24 * s);
+
+      function buildLeg(parent, side) {
+        const thigh = new THREE.Mesh(thighGeo, skin.clone());
+        thigh.position.y = -0.18 * s;
+        thigh.castShadow = true;
+        parent.add(thigh);
+        const shinG = new THREE.Group();
+        shinG.position.y = -0.38 * s;
+        parent.add(shinG);
+        const shin = new THREE.Mesh(shinGeo, skin.clone());
+        shin.position.y = -0.16 * s;
+        shin.castShadow = true;
+        shinG.add(shin);
+        const boot = new THREE.Mesh(bootGeo, new THREE.MeshStandardMaterial({
+          color: typeKey === 'construction' ? 0x4a3a28 : (typeKey === 'military' ? 0x2a3024 : 0x2a2220),
+          roughness: 0.85
+        }));
+        boot.position.set(0, -0.36 * s, 0.04 * s);
+        boot.castShadow = true;
+        shinG.add(boot);
+        parent.userData.shinG = shinG;
+        parent.userData.thigh = thigh;
+        return parent;
       }
-      if (t.tactical) {
+      buildLeg(legLG, -1);
+      buildLeg(legRG, 1);
+
+      // Torso body
+      let torsoW = 0.5 * s, torsoH = 0.55 * s, torsoD = 0.32 * s;
+      if (typeKey === 'brute') { torsoW = 0.72 * s; torsoH = 0.62 * s; torsoD = 0.42 * s; }
+      if (typeKey === 'feral') { torsoW = 0.38 * s; torsoH = 0.48 * s; torsoD = 0.26 * s; }
+      if (typeKey === 'military') { torsoW = 0.52 * s; torsoH = 0.52 * s; torsoD = 0.34 * s; }
+      const torsoMesh = new THREE.Mesh(
+        new THREE.BoxGeometry(torsoW, torsoH, torsoD),
+        clothA.clone()
+      );
+      torsoMesh.position.y = 0.22 * s;
+      torsoMesh.castShadow = true;
+      torso.add(torsoMesh);
+      torso.userData.bodyMat = torsoMesh.material;
+
+      // Arms
+      const armLG = new THREE.Group();
+      const armRG = new THREE.Group();
+      const shoulderY = 0.42 * s;
+      const shoulderX = (typeKey === 'brute' ? 0.42 : 0.32) * s;
+      armLG.position.set(-shoulderX, shoulderY, 0);
+      armRG.position.set(shoulderX, shoulderY, 0);
+      torso.add(armLG, armRG);
+
+      function buildArm(parent, side, droop) {
+        const upper = new THREE.Mesh(
+          new THREE.BoxGeometry((typeKey === 'brute' ? 0.18 : 0.13) * s, 0.36 * s, 0.14 * s),
+          skin.clone()
+        );
+        upper.position.y = -0.16 * s;
+        upper.castShadow = true;
+        parent.add(upper);
+        const elbowG = new THREE.Group();
+        elbowG.position.y = -0.34 * s;
+        parent.add(elbowG);
+        const fore = new THREE.Mesh(
+          new THREE.BoxGeometry((typeKey === 'feral' ? 0.1 : 0.12) * s, 0.34 * s, (typeKey === 'feral' ? 0.1 : 0.12) * s),
+          skin.clone()
+        );
+        fore.position.y = -0.14 * s;
+        fore.castShadow = true;
+        elbowG.add(fore);
+        if (typeKey === 'feral') {
+          // Claws
+          for (let c = 0; c < 3; c++) {
+            const claw = new THREE.Mesh(
+              new THREE.BoxGeometry(0.03 * s, 0.16 * s, 0.03 * s),
+              new THREE.MeshStandardMaterial({ color: 0x1a1a14, roughness: 0.6, metalness: 0.2 })
+            );
+            claw.position.set((c - 1) * 0.05 * s, -0.34 * s, 0.04 * s);
+            claw.rotation.x = 0.4;
+            elbowG.add(claw);
+          }
+        }
+        parent.userData.elbowG = elbowG;
+        parent.userData.upper = upper;
+        parent.rotation.x = droop;
+        parent.userData.baseRotX = droop;
+        return parent;
+      }
+      const armDroop = typeKey === 'feral' ? -1.15 : (typeKey === 'shambler' ? -0.85 : (typeKey === 'military' ? -0.25 : -0.45));
+      buildArm(armLG, -1, armDroop);
+      buildArm(armRG, 1, armDroop + (typeKey === 'shambler' ? 0.15 : 0));
+
+      // Head
+      const head = new THREE.Group();
+      const headY = typeKey === 'feral' ? 0.55 * s : 0.58 * s;
+      head.position.set(0, headY, typeKey === 'feral' ? 0.12 * s : 0);
+      torso.add(head);
+      const headMesh = new THREE.Mesh(
+        new THREE.BoxGeometry(
+          (typeKey === 'brute' ? 0.42 : 0.34) * s,
+          (typeKey === 'brute' ? 0.4 : 0.34) * s,
+          (typeKey === 'feral' ? 0.38 : 0.34) * s
+        ),
+        new THREE.MeshStandardMaterial({ color: 0x1a1814, roughness: 0.95 })
+      );
+      headMesh.castShadow = true;
+      head.add(headMesh);
+
+      // Eyes (glowing)
+      const eyeMat = new THREE.MeshStandardMaterial({
+        color: t.eye, emissive: t.eye, emissiveIntensity: 0.85, roughness: 0.4
+      });
+      const eyeGeo = new THREE.SphereGeometry(0.045 * s, 6, 6);
+      const eyeL = new THREE.Mesh(eyeGeo, eyeMat);
+      const eyeR = new THREE.Mesh(eyeGeo, eyeMat.clone());
+      const eyeZ = (typeKey === 'feral' ? 0.2 : 0.18) * s;
+      eyeL.position.set(-0.09 * s, 0.04 * s, eyeZ);
+      eyeR.position.set(0.09 * s, 0.04 * s, eyeZ);
+      head.add(eyeL, eyeR);
+
+      // --- Type gear ---
+      if (typeKey === 'shambler') {
+        // Torn shirt scraps
+        const rag = new THREE.Mesh(
+          new THREE.BoxGeometry(0.48 * s, 0.35 * s, 0.08 * s),
+          new THREE.MeshStandardMaterial({ color: 0x6a5a48, roughness: 1 })
+        );
+        rag.position.set(0, 0.15 * s, 0.18 * s);
+        torso.add(rag);
+        torso.rotation.x = 0.12;
+      }
+
+      if (typeKey === 'construction') {
+        // Hi-vis vest
         const vest = new THREE.Mesh(
-          new THREE.BoxGeometry(0.58 * s, 0.45 * s, 0.15 * s),
+          new THREE.BoxGeometry(0.54 * s, 0.42 * s, 0.12 * s),
+          new THREE.MeshStandardMaterial({ color: 0xff7a00, roughness: 0.7, emissive: 0x331100, emissiveIntensity: 0.15 })
+        );
+        vest.position.set(0, 0.2 * s, 0.2 * s);
+        vest.castShadow = true;
+        torso.add(vest);
+        const stripe = new THREE.Mesh(
+          new THREE.BoxGeometry(0.5 * s, 0.06 * s, 0.04 * s),
+          new THREE.MeshStandardMaterial({ color: 0xffee55, roughness: 0.5, emissive: 0x887700, emissiveIntensity: 0.3 })
+        );
+        stripe.position.set(0, 0.28 * s, 0.26 * s);
+        torso.add(stripe);
+        // Hardhat
+        const hat = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.2 * s, 0.22 * s, 0.14 * s, 8),
+          new THREE.MeshStandardMaterial({ color: 0xf5c542, roughness: 0.55, metalness: 0.25 })
+        );
+        hat.position.y = 0.24 * s;
+        hat.castShadow = true;
+        head.add(hat);
+        const brim = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.28 * s, 0.28 * s, 0.03 * s, 8),
+          new THREE.MeshStandardMaterial({ color: 0xe0b030, roughness: 0.55 })
+        );
+        brim.position.set(0, 0.16 * s, 0.04 * s);
+        head.add(brim);
+        // Wrench in right hand
+        const wrench = new THREE.Mesh(
+          new THREE.BoxGeometry(0.07 * s, 0.07 * s, 0.42 * s),
+          new THREE.MeshStandardMaterial({ color: 0x9aa0a8, metalness: 0.75, roughness: 0.35 })
+        );
+        wrench.position.set(0, -0.32 * s, 0.12 * s);
+        wrench.rotation.x = -0.5;
+        armRG.userData.elbowG.add(wrench);
+        g.userData.wrench = wrench;
+      }
+
+      if (typeKey === 'brute') {
+        // Scrap armor plates
+        const plateMat = new THREE.MeshStandardMaterial({ color: 0x3a3a42, metalness: 0.6, roughness: 0.4 });
+        for (const [px, py, pz, sx, sy, sz] of [
+          [0, 0.25 * s, 0.24 * s, 0.7 * s, 0.35 * s, 0.08 * s],
+          [-0.28 * s, 0.15 * s, 0.1 * s, 0.12 * s, 0.4 * s, 0.35 * s],
+          [0.28 * s, 0.15 * s, 0.1 * s, 0.12 * s, 0.4 * s, 0.35 * s]
+        ]) {
+          const plate = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, sz), plateMat.clone());
+          plate.position.set(px, py, pz);
+          plate.castShadow = true;
+          torso.add(plate);
+        }
+        // KEEP OUT / hazard stripe
+        const sign = new THREE.Mesh(
+          new THREE.BoxGeometry(0.55 * s, 0.2 * s, 0.04 * s),
+          new THREE.MeshStandardMaterial({ color: 0xcc2200, roughness: 0.65, emissive: 0x440000, emissiveIntensity: 0.2 })
+        );
+        sign.position.set(0, 0.12 * s, 0.28 * s);
+        torso.add(sign);
+        const haz = new THREE.Mesh(
+          new THREE.BoxGeometry(0.5 * s, 0.06 * s, 0.03 * s),
+          new THREE.MeshStandardMaterial({ color: 0xffcc00, roughness: 0.5 })
+        );
+        haz.position.set(0, 0.02 * s, 0.3 * s);
+        torso.add(haz);
+        torso.rotation.x = 0.05;
+      }
+
+      if (typeKey === 'feral') {
+        // Deep hunch + spiky silhouette
+        hips.rotation.x = 0.35;
+        torso.rotation.x = 0.45;
+        head.rotation.x = -0.35;
+        head.position.z = 0.22 * s;
+        // Spikes along spine
+        for (let i = 0; i < 4; i++) {
+          const spike = new THREE.Mesh(
+            new THREE.ConeGeometry(0.05 * s, 0.18 * s, 4),
+            new THREE.MeshStandardMaterial({ color: 0x2a3020, roughness: 0.8 })
+          );
+          spike.position.set(0, 0.05 * s + i * 0.1 * s, -0.16 * s);
+          spike.rotation.x = Math.PI;
+          torso.add(spike);
+        }
+        // Longer limbs — stretch shin groups
+        legLG.userData.shinG.scale.y = 1.15;
+        legRG.userData.shinG.scale.y = 1.15;
+        armLG.userData.elbowG.scale.y = 1.2;
+        armRG.userData.elbowG.scale.y = 1.2;
+      }
+
+      if (typeKey === 'military') {
+        // Tactical vest + pouches + helmet
+        const vest = new THREE.Mesh(
+          new THREE.BoxGeometry(0.56 * s, 0.4 * s, 0.16 * s),
           new THREE.MeshStandardMaterial({ color: 0x2f3828, roughness: 0.85 })
         );
-        vest.position.set(0, 1.0 * s, 0.2 * s);
-        g.add(vest);
+        vest.position.set(0, 0.2 * s, 0.18 * s);
+        vest.castShadow = true;
+        torso.add(vest);
+        for (const sx of [-0.14, 0.14]) {
+          const pouch = new THREE.Mesh(
+            new THREE.BoxGeometry(0.12 * s, 0.1 * s, 0.08 * s),
+            new THREE.MeshStandardMaterial({ color: 0x3a4334, roughness: 0.8 })
+          );
+          pouch.position.set(sx * s, 0.05 * s, 0.28 * s);
+          torso.add(pouch);
+        }
         const helm = new THREE.Mesh(
-          new THREE.BoxGeometry(0.4 * s, 0.18 * s, 0.42 * s),
-          new THREE.MeshStandardMaterial({ color: 0x3a4334, roughness: 0.75, metalness: 0.2 })
+          new THREE.BoxGeometry(0.38 * s, 0.16 * s, 0.4 * s),
+          new THREE.MeshStandardMaterial({ color: 0x3a4334, roughness: 0.7, metalness: 0.25 })
         );
-        helm.position.set(0, 1.55 * s, 0);
-        g.add(helm);
+        helm.position.set(0, 0.22 * s, 0.02 * s);
+        helm.castShadow = true;
+        head.add(helm);
+        const rim = new THREE.Mesh(
+          new THREE.BoxGeometry(0.4 * s, 0.04 * s, 0.42 * s),
+          new THREE.MeshStandardMaterial({ color: 0x2a3024, roughness: 0.75 })
+        );
+        rim.position.set(0, 0.14 * s, 0.02 * s);
+        head.add(rim);
+        // Upright disciplined stance
+        torso.rotation.x = -0.02;
       }
 
-      const headY = t.hunch ? 1.15 * s : 1.45 * s;
-      const headMesh = new THREE.Mesh(
-        new THREE.BoxGeometry(0.36 * s, 0.36 * s, 0.36 * s),
-        new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.95 })
-      );
-      headMesh.position.y = headY;
-      if (t.hunch) headMesh.position.z = 0.25;
-      headMesh.castShadow = true;
-      g.add(headMesh);
-
-      if (t.hardhat) {
-        const hat = new THREE.Mesh(
-          new THREE.CylinderGeometry(0.22 * s, 0.24 * s, 0.14 * s, 8),
-          new THREE.MeshStandardMaterial({ color: 0xf5c542, roughness: 0.6, metalness: 0.2 })
-        );
-        hat.position.set(0, headY + 0.22 * s, 0);
-        g.add(hat);
-        const brim = new THREE.Mesh(
-          new THREE.CylinderGeometry(0.3 * s, 0.3 * s, 0.03 * s, 8),
-          new THREE.MeshStandardMaterial({ color: 0xe0b030, roughness: 0.6 })
-        );
-        brim.position.set(0, headY + 0.16 * s, 0.05);
-        g.add(brim);
-      }
-
-      if (t.keepOut) {
-        const sign = new THREE.Mesh(
-          new THREE.BoxGeometry(0.5 * s, 0.22 * s, 0.04),
-          new THREE.MeshStandardMaterial({ color: 0xcc2200, roughness: 0.7 })
-        );
-        sign.position.set(0, 0.85 * s, 0.28 * s);
-        g.add(sign);
-      }
-
-      const eyeMat = new THREE.MeshBasicMaterial({ color: t.eye });
-      const e1 = new THREE.Mesh(new THREE.BoxGeometry(0.08 * s, 0.08 * s, 0.05), eyeMat);
-      const e2 = e1.clone();
-      e1.position.set(-0.1 * s, headY, (t.hunch ? 0.4 : 0.2) * s);
-      e2.position.set(0.1 * s, headY, (t.hunch ? 0.4 : 0.2) * s);
-      g.add(e1, e2);
-
-      const armMat = new THREE.MeshStandardMaterial({ color: t.color, roughness: 0.9 });
-      const armL = new THREE.Mesh(new THREE.BoxGeometry(0.14 * s, 0.55 * s, 0.14 * s), armMat);
-      const armR = armL.clone();
-      armL.position.set(-0.4 * s, 1.05 * s, 0.05);
-      armR.position.set(0.4 * s, 1.05 * s, 0.05);
-      armL.rotation.x = t.hunch ? -1.0 : -0.4;
-      armR.rotation.x = t.hunch ? -1.0 : -0.4;
-      g.add(armL, armR);
-
-      if (t.wrench) {
-        const wrench = new THREE.Mesh(
-          new THREE.BoxGeometry(0.08, 0.08, 0.45),
-          new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.7, roughness: 0.4 })
-        );
-        wrench.position.set(0.45 * s, 0.55 * s, 0.25);
-        wrench.rotation.x = -0.8;
-        g.add(wrench);
-      }
-
-      g.userData.armL = armL;
-      g.userData.armR = armR;
+      // Store articulated refs
+      g.userData.hips = hips;
+      g.userData.torso = torso;
+      g.userData.head = head;
+      g.userData.armLG = armLG;
+      g.userData.armRG = armRG;
+      g.userData.legLG = legLG;
+      g.userData.legRG = legRG;
+      g.userData.eyes = [eyeL, eyeR];
+      g.userData.eyeMats = [eyeL.material, eyeR.material];
+      g.userData.bodyMats = [torsoMesh.material];
+      g.userData.armL = armLG; // back-compat aliases
+      g.userData.armR = armRG;
       g.userData.typeKey = typeKey;
-      g.userData.hitH = (t.hunch ? 1.4 : 1.7) * s;
+      g.userData.hitH = (typeKey === 'feral' ? 1.35 : (typeKey === 'brute' ? 2.05 : 1.7)) * s;
+      g.userData.gibbed = false;
+      g.userData.baseHipsY = hips.position.y;
+      g.userData.skinColor = skinCol;
+      g.userData.eyeColor = t.eye;
+      // Rest pose snapshots for reset
+      g.userData.rest = {
+        hipsRX: hips.rotation.x, hipsRY: hips.rotation.y, hipsRZ: hips.rotation.z,
+        torsoRX: torso.rotation.x, torsoRY: torso.rotation.y, torsoRZ: torso.rotation.z,
+        headRX: head.rotation.x,
+        armLRX: armLG.rotation.x, armLRZ: armLG.rotation.z,
+        armRRX: armRG.rotation.x, armRRZ: armRG.rotation.z,
+        legLRX: legLG.rotation.x, legRRX: legRG.rotation.x,
+        armLBase: armLG.userData.baseRotX || 0,
+        armRBase: armRG.userData.baseRotX || 0
+      };
       return g;
+    }
+
+    function resetZombieMesh(mesh) {
+      if (!mesh || !mesh.userData) return;
+      const ud = mesh.userData;
+      ud.gibbed = false;
+      mesh.visible = true;
+      mesh.scale.set(1, 1, 1);
+      mesh.rotation.set(0, mesh.rotation.y, 0);
+      // Unhide all children (gib detach may have hidden parts)
+      mesh.traverse((ch) => {
+        ch.visible = true;
+        if (ch.isMesh && ch.material) {
+          if (ch.material.emissiveIntensity != null && ch.userData && ch.userData._hitFlash) {
+            ch.material.emissiveIntensity = ch.userData._baseEmissive || 0;
+          }
+        }
+      });
+      const r = ud.rest;
+      if (r && ud.hips) {
+        ud.hips.rotation.set(r.hipsRX, r.hipsRY, r.hipsRZ);
+        ud.hips.position.y = ud.baseHipsY || ud.hips.position.y;
+        ud.torso.rotation.set(r.torsoRX, r.torsoRY, r.torsoRZ);
+        ud.head.rotation.x = r.headRX;
+        ud.armLG.rotation.set(r.armLRX, 0, r.armLRZ || 0);
+        ud.armRG.rotation.set(r.armRRX, 0, r.armRRZ || 0);
+        ud.legLG.rotation.set(r.legLRX, 0, 0);
+        ud.legRG.rotation.set(r.legRRX, 0, 0);
+        if (ud.armLG.userData.elbowG) ud.armLG.userData.elbowG.rotation.set(0, 0, 0);
+        if (ud.armRG.userData.elbowG) ud.armRG.userData.elbowG.rotation.set(0, 0, 0);
+        if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.set(0, 0, 0);
+        if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.set(0, 0, 0);
+      }
+      // Reset eye glow
+      if (ud.eyeMats) {
+        for (const m of ud.eyeMats) {
+          m.emissiveIntensity = 0.85;
+          m.opacity = 1;
+          m.transparent = false;
+        }
+      }
+      if (ud.bodyMats) {
+        for (const m of ud.bodyMats) {
+          if (m.emissive) m.emissive.setHex(0x000000);
+          m.emissiveIntensity = 0;
+        }
+      }
     }
 
     function pickZombieType(dayNum) {
@@ -5237,9 +5583,11 @@
       const def = ZOMBIE_TYPES[tk];
       let mesh = poolFor(tk).pop();
       if (!mesh) mesh = makeZombieMesh(tk);
+      else resetZombieMesh(mesh);
       mesh.visible = true;
       mesh.position.set(x, sampleHeight(x, z), z);
       mesh.scale.setScalar(1);
+      mesh.rotation.set(0, 0, 0);
       if (!mesh.parent) scene.add(mesh);
       const zom = {
         mesh, x, z, typeKey: tk,
@@ -5249,20 +5597,89 @@
         brute: tk === 'brute',
         reward: def.reward,
         bob: Math.random() * Math.PI * 2,
+        walkPhase: Math.random() * Math.PI * 2,
         hitH: mesh.userData.hitH || 1.45,
-        meleeMult: tk === 'construction' ? 1.5 : 1
+        meleeMult: tk === 'construction' ? 1.5 : 1,
+        hitReact: 0,
+        hitDirX: 0, hitDirZ: 0,
+        staggerVX: 0, staggerVZ: 0,
+        flashT: 0,
+        dying: false,
+        deathKind: null,
+        deathT: 0,
+        deathDirX: 0, deathDirZ: 0
       };
       zombies.push(zom);
       return zom;
     }
 
-    function killZombie(z, award = true) {
+    function disposeZombieMesh(mesh) {
+      if (!mesh) return;
+      scene.remove(mesh);
+      mesh.traverse((ch) => {
+        if (!ch.isMesh) return;
+        if (ch.material) {
+          const mats = Array.isArray(ch.material) ? ch.material : [ch.material];
+          for (const m of mats) { try { m.dispose(); } catch (_) {} }
+        }
+        // Geometries are tiny per-zombie allocations — dispose if present
+        if (ch.geometry) { try { ch.geometry.dispose(); } catch (_) {} }
+      });
+    }
+
+    function killZombie(z, award = true, deathInfo = null) {
       if (!z.alive) return;
       z.alive = false;
-      spawnBlood(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, 0, 0, 8);
-      z.mesh.visible = false;
-      scene.remove(z.mesh);
-      poolFor(z.typeKey).push(z.mesh);
+      const info = deathInfo || { kind: 'generic', dir: { x: 0, z: 0 } };
+      const kind = info.kind || 'generic';
+      const dx = (info.dir && info.dir.x) || 0;
+      const dz = (info.dir && info.dir.z) || 0;
+      const px = z.mesh.position.x, py = z.mesh.position.y, pz = z.mesh.position.z;
+      const skin = z.mesh.userData.skinColor || 0x8a7a60;
+      const eye = z.mesh.userData.eyeColor || 0x88ff44;
+      const hitY = py + (z.hitH || 1.4) * 0.55;
+
+      if (kind === 'explosive') {
+        spawnBlood(px, hitY, pz, dx, dz, 22, 1.8);
+        spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'explosive');
+        z.mesh.userData.gibbed = true;
+        z.mesh.visible = false;
+        scene.remove(z.mesh);
+        disposeZombieMesh(z.mesh);
+        // do not pool gibbed mesh
+      } else if (kind === 'chainsaw') {
+        spawnBlood(px, hitY, pz, dx, dz, 18, 1.5);
+        spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'chainsaw');
+        // Split torso visual — hide legs, tip upper
+        z.mesh.userData.gibbed = true;
+        if (z.mesh.userData.hips) z.mesh.userData.hips.visible = false;
+        z.mesh.visible = false;
+        scene.remove(z.mesh);
+        disposeZombieMesh(z.mesh);
+      } else if (kind === 'pellet') {
+        spawnBlood(px, hitY, pz, dx, dz, 16, 1.4);
+        if (Math.random() < 0.45) spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'pellet');
+        // Collapse tip-over then pool after brief death anim via dying flag handled inline
+        z.mesh.userData.gibbed = false;
+        // Tip over quickly then pool
+        z.mesh.rotation.z = (dx >= 0 ? -1 : 1) * 1.2;
+        z.mesh.rotation.x = 0.9;
+        z.mesh.visible = false;
+        scene.remove(z.mesh);
+        poolFor(z.typeKey).push(z.mesh);
+      } else if (kind === 'melee') {
+        spawnBlood(px, hitY, pz, dx, dz, 8, 0.9);
+        z.mesh.visible = false;
+        scene.remove(z.mesh);
+        poolFor(z.typeKey).push(z.mesh);
+      } else {
+        // bullet / generic — bloody collapse
+        spawnBlood(px, hitY, pz, dx, dz, 12, 1.2);
+        z.mesh.visible = false;
+        scene.remove(z.mesh);
+        poolFor(z.typeKey).push(z.mesh);
+      }
+
       const i = zombies.indexOf(z);
       if (i >= 0) zombies.splice(i, 1);
       if (award) {
@@ -5275,12 +5692,17 @@
     function clearZombies() {
       for (const z of zombies.slice()) {
         z.alive = false;
-        z.mesh.visible = false;
-        scene.remove(z.mesh);
-        poolFor(z.typeKey).push(z.mesh);
+        if (z.mesh && z.mesh.userData && z.mesh.userData.gibbed) {
+          disposeZombieMesh(z.mesh);
+        } else if (z.mesh) {
+          z.mesh.visible = false;
+          scene.remove(z.mesh);
+          poolFor(z.typeKey).push(z.mesh);
+        }
       }
       zombies.length = 0;
     }
+
     // --- Day / wave system ---
     let day = 0;
     let phase = 'idle';
@@ -5408,16 +5830,8 @@
     }
 
     function tryExpandLand() {
-      if (!gameStarted || gameOver || won || paused) return;
-      if (landRadius >= LAND_MAX) { AudioSys.invalid(); return; }
-      const cost = expandCost();
-      if (bank < cost) { AudioSys.invalid(); return; }
-      bank -= cost;
-      expandLevel += 1;
-      landRadius = Math.min(LAND_MAX, landRadius + LAND_STEP);
-      refreshLandMesh();
-      updateCoinHud();
-      AudioSys.expand();
+      // Land expansion disabled for now — full map already open.
+      return;
     }
 
     // --- Input ---
@@ -5811,7 +6225,7 @@
       return Math.min(2.5, Math.max(0.15, st.range / st.speed));
     }
 
-    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null) {
+    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null, kind = 'bullet') {
       const o = origin ? origin.clone() : getMuzzleWorld().clone();
       const d = dir ? dir.clone().normalize() : getAimDir().clone();
       const mesh = new THREE.Mesh(tracerGeo, tracerMatFor(color));
@@ -5823,7 +6237,8 @@
         mesh, pos: o.clone(), prev: o.clone(), dir: d,
         speed: spd,
         life, age: 0, hit: false, damage,
-        fromTurret
+        fromTurret,
+        kind: kind || 'bullet'
       });
     }
 
@@ -6006,8 +6421,7 @@
         if (d < reach + z.radius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
           if (dot > 0.4) {
-            damageZombie(z, st.damage);
-            spawnBlood(z.mesh.position.x, z.mesh.position.y + 1, z.mesh.position.z, fx, fz, 3);
+            damageZombie(z, st.damage, { kind: 'chainsaw', dir: { x: fx, z: fz } });
             hitSomething = true;
           }
         }
@@ -6117,7 +6531,7 @@
           } else if (st.pellets) {
             const n = st.pellets;
             for (let i = 0; i < n; i++) {
-              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, projectileLifeFor(st), null, st.speed);
+              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, projectileLifeFor(st), null, st.speed, 'pellet');
             }
             // Pump shotgun: red hull ejects on pump-back — no gold brass here
           } else {
@@ -6199,7 +6613,10 @@
         const d = Math.hypot(zom.mesh.position.x - x, zom.mesh.position.z - z);
         if (d < AOE) {
           const dmg = Math.round(baseDmg * (1 - d / AOE));
-          damageZombie(zom, Math.max(12, dmg));
+          {
+            const blast = dirToward(x, z, zom.mesh.position.x, zom.mesh.position.z);
+            damageZombie(zom, Math.max(12, dmg), { kind: 'explosive', dir: blast });
+          }
         }
       }
       for (const rock of rocks) {
@@ -6276,8 +6693,7 @@
         if (d < reach + z.radius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
           if (dot > 0.35) {
-            damageZombie(z, 28);
-            spawnBlood(z.mesh.position.x, z.mesh.position.y + 1, z.mesh.position.z, fx, fz, 6);
+            damageZombie(z, 28, { kind: 'melee', dir: { x: fx, z: fz } });
           }
         }
       }
@@ -6437,14 +6853,49 @@
       for (const ch of tree.canopy.children) ch.castShadow = true;
     }
 
-    function damageZombie(z, amount) {
+    function damageZombie(z, amount, info = null) {
       if (!z.alive) return;
+      const kind = (info && info.kind) || 'generic';
+      let dx = (info && info.dir && info.dir.x) || 0;
+      let dz = (info && info.dir && info.dir.z) || 0;
+      const dlen = Math.hypot(dx, dz);
+      if (dlen > 0.01) { dx /= dlen; dz /= dlen; }
+      else { dx = 0; dz = 0; }
+
       z.hp -= amount;
       AudioSys.zombieHit();
-      spawnBlood(z.mesh.position.x, z.mesh.position.y + 1.0, z.mesh.position.z, 0, 0, 4);
-      z.mesh.scale.setScalar(1.08);
-      setTimeout(() => { if (z.mesh) z.mesh.scale.setScalar(1); }, 50);
-      if (z.hp <= 0) killZombie(z, true);
+
+      const hitY = z.mesh.position.y + (z.hitH || 1.4) * 0.55;
+      const sprayAmt = kind === 'pellet' ? 10 : (kind === 'explosive' ? 14 : (kind === 'chainsaw' ? 8 : 6));
+      const force = kind === 'explosive' ? 1.6 : (kind === 'pellet' ? 1.35 : 1);
+      spawnBlood(z.mesh.position.x, hitY, z.mesh.position.z, dx, dz, sprayAmt, force);
+
+      if (z.hp > 0 && amount >= 18 && kind !== 'melee' && kind !== 'explosive') {
+        spawnFleshChunks(
+          z.mesh.position.x, hitY, z.mesh.position.z, dx, dz,
+          z.mesh.userData.skinColor || 0x8a7a60, 2
+        );
+      }
+
+      // Hit react — flinch lean + stagger kickback (dt-driven, no setTimeout pop)
+      z.hitReact = Math.min(0.45, 0.12 + amount * 0.008);
+      z.hitDirX = dx; z.hitDirZ = dz;
+      const kick = (kind === 'explosive' ? 4.5 : (kind === 'pellet' ? 2.2 : (kind === 'chainsaw' ? 1.4 : 1.8)));
+      z.staggerVX = dx * kick * (0.6 + Math.min(1.2, amount / 30));
+      z.staggerVZ = dz * kick * (0.6 + Math.min(1.2, amount / 30));
+      z.flashT = 0.14;
+
+      // Brief emissive flash on torso
+      const mats = z.mesh.userData.bodyMats;
+      if (mats) {
+        for (const m of mats) {
+          if (!m.emissive) continue;
+          m.emissive.setHex(0xff2222);
+          m.emissiveIntensity = 0.65;
+        }
+      }
+
+      if (z.hp <= 0) killZombie(z, true, { kind, dir: { x: dx, z: dz } });
     }
 
     function updateProjectiles(dt) {
@@ -6477,7 +6928,7 @@
           if (t !== null && t < hitZT) { hitZT = t; hitZ = z; }
         }
         if (hitZ) {
-          damageZombie(hitZ, p.damage);
+          damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z } });
           p.hit = true;
           scene.remove(p.mesh);
           projectiles.splice(i, 1);
@@ -6901,16 +7352,83 @@
           const s = (landRadius - 1.2) / rr;
           mx *= s; mz *= s;
         }
+        // Stagger from hits
+        if (z.staggerVX || z.staggerVZ) {
+          mx += z.staggerVX * dt;
+          mz += z.staggerVZ * dt;
+          z.staggerVX *= Math.max(0, 1 - 8 * dt);
+          z.staggerVZ *= Math.max(0, 1 - 8 * dt);
+          if (Math.hypot(z.staggerVX, z.staggerVZ) < 0.05) { z.staggerVX = 0; z.staggerVZ = 0; }
+        }
         z.mesh.position.x = mx;
         z.mesh.position.z = mz;
         z.mesh.position.y = sampleHeight(mx, mz);
         z.mesh.rotation.y = Math.atan2(nx, nz);
-        z.bob += dt * (z.typeKey === 'feral' ? 14 : 8);
-        const armSwing = Math.sin(z.bob) * 0.35;
-        if (z.mesh.userData.armL) {
-          z.mesh.userData.armL.rotation.x = -0.4 + armSwing;
-          z.mesh.userData.armR.rotation.x = -0.4 - armSwing;
+
+        // Walk cycle — opposite legs + arms; cadence by type
+        const moving = !graceFreeze && Math.hypot(z.staggerVX, z.staggerVZ) < 1.5;
+        const cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'military' ? 7.5 : 7));
+        if (moving) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
+        z.bob = (z.bob || 0) + dt * (z.typeKey === 'brute' ? 4 : 6);
+        const phase = z.walkPhase || 0;
+        const swing = Math.sin(phase);
+        const swing2 = Math.sin(phase + Math.PI); // opposite
+        const amp = z.typeKey === 'feral' ? 0.7 : (z.typeKey === 'brute' ? 0.35 : 0.5);
+        const ud = z.mesh.userData;
+        const rest = ud.rest || {};
+        const armBaseL = rest.armLBase != null ? rest.armLBase : -0.4;
+        const armBaseR = rest.armRBase != null ? rest.armRBase : -0.4;
+
+        if (ud.legLG) {
+          ud.legLG.rotation.x = swing * amp;
+          ud.legRG.rotation.x = swing2 * amp;
+          if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = Math.max(0, -swing) * amp * 0.6;
+          if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = Math.max(0, -swing2) * amp * 0.6;
         }
+        if (ud.armLG) {
+          const armAmp = z.typeKey === 'shambler' ? 0.25 : 0.45;
+          ud.armLG.rotation.x = armBaseL + swing2 * armAmp;
+          ud.armRG.rotation.x = armBaseR + swing * armAmp;
+          if (ud.armLG.userData.elbowG) ud.armLG.userData.elbowG.rotation.x = Math.sin(phase * 0.5) * 0.15;
+          if (ud.armRG.userData.elbowG) ud.armRG.userData.elbowG.rotation.x = Math.sin(phase * 0.5 + 1) * 0.15;
+        }
+        // Heavy bob for brutes / light for ferals
+        if (ud.hips) {
+          const bobAmp = z.typeKey === 'brute' ? 0.05 : (z.typeKey === 'feral' ? 0.02 : 0.03);
+          ud.hips.position.y = (ud.baseHipsY || ud.hips.position.y) + Math.abs(Math.sin(phase)) * bobAmp * (z.typeKey === 'brute' ? 1.4 : 1);
+        }
+
+        // Hit react flinch — lean torso away from shot, decay
+        if (z.hitReact > 0) {
+          z.hitReact = Math.max(0, z.hitReact - dt);
+          const t = z.hitReact / 0.35;
+          const lean = Math.min(1, t) * 0.55;
+          if (ud.torso) {
+            // Lean in hit direction in local space (approx via z rotation + x)
+            ud.torso.rotation.x = (rest.torsoRX || 0) - lean * 0.35;
+            ud.torso.rotation.z = (z.hitDirX || 0) * lean * 0.5;
+          }
+          if (ud.head) ud.head.rotation.x = (rest.headRX || 0) - lean * 0.25;
+        } else if (ud.torso && rest) {
+          if (rest.torsoRX != null) ud.torso.rotation.x = rest.torsoRX;
+          ud.torso.rotation.z = 0;
+          if (ud.head && rest.headRX != null) ud.head.rotation.x = rest.headRX;
+        }
+
+        // Flash decay
+        if (z.flashT > 0) {
+          z.flashT = Math.max(0, z.flashT - dt);
+          const mats = ud.bodyMats;
+          if (mats) {
+            const inten = (z.flashT / 0.14) * 0.65;
+            for (const m of mats) {
+              if (!m.emissive) continue;
+              m.emissiveIntensity = inten;
+              if (inten <= 0.01) { m.emissive.setHex(0x000000); m.emissiveIntensity = 0; }
+            }
+          }
+        }
+
         z.attackCd -= dt;
         if (!zombieGraceActive()) {
           if (gameMode === 'defend' && house.active) {
@@ -7080,6 +7598,8 @@
       bloodParticles.length = 0;
       for (const b of bloodDecals) { scene.remove(b.mesh); b.mesh.material.dispose(); }
       bloodDecals.length = 0;
+      for (const g of gibPieces) { scene.remove(g.mesh); g.mesh.material.dispose(); }
+      gibPieces.length = 0;
       for (const c of casings) { scene.remove(c.mesh); c.mesh.material.dispose(); }
       casings.length = 0;
       clearDroppedMags();
@@ -7104,7 +7624,7 @@
 
       bank = 20;
       expandLevel = 0;
-      landRadius = LAND_MIN;
+      landRadius = LAND_MAX;
       refreshLandMesh();
       updateCoinHud();
       collectedPickups = 0;
@@ -7319,6 +7839,7 @@
       updateGrenades(dt);
       updateDebris(dt);
       updateBlood(dt);
+      updateGibs(dt);
       updateCasings(dt);
       updateDroppedMags(dt);
       if (gameStarted) resolveTreeCollisions(dt);
