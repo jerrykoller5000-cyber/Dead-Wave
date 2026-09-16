@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">PUMP</span></div>
+      <div id="title">Tiny Trek <span class="badge">KICK2</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3582,7 +3582,7 @@
       // Sniper lingers; M4 medium; Uzi chatters back fast; pistol/others snap
       const rate =
         currentWeapon === 'sniper' ? 9 :
-        currentWeapon === 'shotgun' ? 10 :
+        currentWeapon === 'shotgun' ? 8 :
         currentWeapon === 'revolver' ? 10.5 :
         currentWeapon === 'm4' ? 12 :
         currentWeapon === 'uzi' ? 16 :
@@ -3688,19 +3688,19 @@
     }
 
     function kickShotgunRecoil() {
-      // Heavy punchy kick — between M4 and sniper (a touch more), decay ~10/s
-      recoilKick.rx += -0.28 - Math.random() * 0.07; // ~-0.28..-0.35
-      recoilKick.rz += (Math.random() - 0.5) * 0.07;
-      recoilKick.ry += (Math.random() - 0.5) * 0.028;
-      recoilKick.z += -0.026 - Math.random() * 0.01;
-      recoilKick.y += -0.013 - Math.random() * 0.006;
-      recoilKick.x += (Math.random() - 0.5) * 0.006;
-      recoilKick.rx = Math.max(-0.52, Math.min(0.05, recoilKick.rx));
-      recoilKick.ry = Math.max(-0.10, Math.min(0.10, recoilKick.ry));
-      recoilKick.rz = Math.max(-0.14, Math.min(0.14, recoilKick.rz));
-      recoilKick.x = Math.max(-0.038, Math.min(0.038, recoilKick.x));
-      recoilKick.y = Math.max(-0.046, Math.min(0.02, recoilKick.y));
-      recoilKick.z = Math.max(-0.058, Math.min(0.02, recoilKick.z));
+      // Heavier punch — stronger climb + push-back, slower settle (~8/s)
+      recoilKick.rx += -0.40 - Math.random() * 0.10; // ~-0.40..-0.50
+      recoilKick.rz += (Math.random() - 0.5) * 0.10;
+      recoilKick.ry += (Math.random() - 0.5) * 0.04;
+      recoilKick.z += -0.040 - Math.random() * 0.014;
+      recoilKick.y += -0.020 - Math.random() * 0.008;
+      recoilKick.x += (Math.random() - 0.5) * 0.01;
+      recoilKick.rx = Math.max(-0.68, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.14, Math.min(0.14, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.18, Math.min(0.18, recoilKick.rz));
+      recoilKick.x = Math.max(-0.05, Math.min(0.05, recoilKick.x));
+      recoilKick.y = Math.max(-0.06, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.08, Math.min(0.02, recoilKick.z));
       applyWeaponMountPose();
     }
 
@@ -3715,25 +3715,43 @@
       const gun = weaponMeshes.shotgun;
       shotgunPumpT += dt / Math.max(0.05, SHOTGUN_PUMP_DUR);
       const t = shotgunPumpT;
-      // forend back → forward
-      const back = _seg(t, 0.04, 0.40);
-      const fwd = _seg(t, 0.48, 0.92);
-      const pumpAmt = back * (1 - fwd);
+      // Clear back stroke → hold open → slam forward (more readable)
+      let pumpAmt = 0;
+      if (t < 0.32) pumpAmt = _seg(t, 0.02, 0.28);
+      else if (t < 0.52) pumpAmt = 1;
+      else pumpAmt = 1 - _seg(t, 0.52, 0.94);
       if (gun && gun.userData.pump && gun.userData.basePumpPos && !reloading) {
+        const bp = gun.userData.basePumpPos;
         gun.userData.pump.position.set(
-          gun.userData.basePumpPos.x,
-          gun.userData.basePumpPos.y,
-          gun.userData.basePumpPos.z - 0.13 * pumpAmt
+          bp.x,
+          bp.y - 0.012 * pumpAmt,
+          bp.z - 0.28 * pumpAmt
         );
       }
-      // Eject red spent hull on pump-back
-      if (!shotgunPumpEjected && t >= 0.22) {
+      // LH racks forend; RH locked; slight muzzle tip (offsets applied by applyReloadPose)
+      if (!reloading) {
+        reloadArmOffL.x = -0.18 * pumpAmt;
+        reloadArmOffL.y = 0.05 * pumpAmt;
+        reloadArmOffL.z = 0.10 * pumpAmt;
+        reloadElbowOffL.x = -0.70 * pumpAmt;
+        reloadElbowOffL.y = 0.05 * pumpAmt;
+        reloadElbowOffL.z = 0.18 * pumpAmt;
+        reloadMountOff.rx = -0.14 * pumpAmt;
+        reloadMountOff.y = -0.016 * pumpAmt;
+      }
+      // Eject red spent hull once forend is fully back
+      if (!shotgunPumpEjected && t >= 0.28) {
         shotgunPumpEjected = true;
         spawnShotgunShell();
       }
       if (t >= 1) {
         shotgunPumping = false;
         shotgunPumpT = 1;
+        if (!reloading) {
+          reloadArmOffL.x = reloadArmOffL.y = reloadArmOffL.z = 0;
+          reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
+          reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
+        }
         if (gun && gun.userData.pump && gun.userData.basePumpPos && !reloading) {
           gun.userData.pump.position.copy(gun.userData.basePumpPos);
         }
@@ -3822,7 +3840,6 @@
       const elbowR = marine.userData.elbowRG;
       const elbowL = marine.userData.elbowLG;
       decayRecoil(dt);
-      updateShotgunPump(dt);
 
       function applyReloadPose() {
         // Hand-local base + reload tilt + recoil kick (gun follows arm via gripR parent)
@@ -3850,14 +3867,18 @@
       }
 
       if (!reloading) {
-        const k = Math.min(1, dt * 12);
-        reloadArmOff.x *= (1 - k); reloadArmOff.y *= (1 - k); reloadArmOff.z *= (1 - k);
-        reloadArmOffL.x *= (1 - k); reloadArmOffL.y *= (1 - k); reloadArmOffL.z *= (1 - k);
-        reloadElbowOffR.x *= (1 - k); reloadElbowOffR.y *= (1 - k); reloadElbowOffR.z *= (1 - k);
-        reloadElbowOffL.x *= (1 - k); reloadElbowOffL.y *= (1 - k); reloadElbowOffL.z *= (1 - k);
-        reloadMountOff.rx *= (1 - k); reloadMountOff.ry *= (1 - k);
-        reloadMountOff.rz *= (1 - k); reloadMountOff.y *= (1 - k);
+        if (!shotgunPumping) {
+          const k = Math.min(1, dt * 12);
+          reloadArmOff.x *= (1 - k); reloadArmOff.y *= (1 - k); reloadArmOff.z *= (1 - k);
+          reloadArmOffL.x *= (1 - k); reloadArmOffL.y *= (1 - k); reloadArmOffL.z *= (1 - k);
+          reloadElbowOffR.x *= (1 - k); reloadElbowOffR.y *= (1 - k); reloadElbowOffR.z *= (1 - k);
+          reloadElbowOffL.x *= (1 - k); reloadElbowOffL.y *= (1 - k); reloadElbowOffL.z *= (1 - k);
+          reloadMountOff.rx *= (1 - k); reloadMountOff.ry *= (1 - k);
+          reloadMountOff.rz *= (1 - k); reloadMountOff.y *= (1 - k);
+        }
+        updateShotgunPump(dt);
         const quiet =
+          !shotgunPumping &&
           Math.abs(reloadArmOff.x) < 1e-4 && Math.abs(reloadMountOff.rx) < 1e-4 &&
           Math.abs(reloadElbowOffR.x) < 1e-4 && Math.abs(reloadElbowOffL.x) < 1e-4;
         if (quiet) resetReloadAnim();
@@ -5229,7 +5250,7 @@
     let shotgunPumping = false;
     let shotgunPumpT = 0;
     let shotgunPumpEjected = false;
-    const SHOTGUN_PUMP_DUR = 0.34; // short forend cycle inside fire interval 0.7
+    const SHOTGUN_PUMP_DUR = 0.50; // readable forend cycle (fire locked while pumping)
     let fireHeld = false;
     let fireCooldown = 0;
     let barrelSpin = 0;
