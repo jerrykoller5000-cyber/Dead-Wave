@@ -1,0 +1,6 @@
+# Local HTTP server output from "Play Tiny Trek.bat"
+server.log
+server-error.log
+
+# Scratch files
+.tmp-*
