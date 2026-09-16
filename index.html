@@ -93,6 +93,13 @@
       mix-blend-mode: multiply;
     }
     #nvgOverlay.on { display: block; }
+    #perf {
+      display: none; position: absolute; bottom: 22px; right: 20px;
+      background: rgba(8,12,24,.6); border: 1px solid rgba(255,255,255,.15);
+      padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;
+      font-family: ui-monospace, Consolas, monospace; white-space: pre; line-height: 1.5;
+    }
+    #perf.on { display: block; }
     #nvgOverlay::after {
       content: ''; position: absolute; inset: 0;
       background: rgba(40, 180, 60, 0.18);
@@ -118,6 +125,7 @@
     <div id="ammo">Minigun · Ammo 300/300 · Grena 3 · Shift run · Scroll/Q/E · R reload · M mute</div>
     <div id="hint">WASD move · Mouse aim · Shift run · RMB zoom · LMB fire · Space jump · Esc pause · N NVG · Z laser · Scroll/Q/E weapons · G/F · 1/2/3 build · 4 expand · R · M</div>
     <div id="placeBanner"></div>
+    <div id="perf"></div>
     <div id="modeSelect" class="show">
       <div class="card">
         <h2>Tiny Trek</h2>
@@ -177,6 +185,12 @@
     const modeHuntBtn = document.getElementById('modeHunt');
     const modeDefendBtn = document.getElementById('modeDefend');
     const hintEl = document.getElementById('hint');
+    const perfEl = document.getElementById('perf');
+
+    // Add ?debug=1 to the URL for a live FPS / draw-call readout.
+    const showPerf = new URLSearchParams(location.search).has('debug');
+    if (showPerf) perfEl.classList.add('on');
+    let perfAccum = 0, perfFrames = 0;
 
     // --- Audio (Web Audio: doom/metal-ish BGM + SFX) ---
     const AudioSys = (() => {
@@ -553,6 +567,7 @@
     renderer.setSize(innerWidth, innerHeight);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     document.body.appendChild(renderer.domElement);
 
     const hemi = new THREE.HemisphereLight(0xddeeff, 0x445566, 1.1);
@@ -560,14 +575,22 @@
     const sun = new THREE.DirectionalLight(0xfff2d6, 1.35);
     sun.position.set(18, 28, 10);
     sun.castShadow = true;
-    sun.shadow.mapSize.set(1536, 1536);
+    sun.shadow.mapSize.set(2048, 2048);
     sun.shadow.camera.near = 1;
-    sun.shadow.camera.far = 220;
-    sun.shadow.camera.left = -80;
-    sun.shadow.camera.right = 80;
-    sun.shadow.camera.top = 80;
-    sun.shadow.camera.bottom = -80;
+    sun.shadow.camera.far = 170;
+    // A tight frustum that travels with the player. It used to be a fixed 160-unit box
+    // around the origin, which on a 240-unit map meant blocky self-shadow blotches near
+    // spawn and no shadows at all further out.
+    const SHADOW_HALF = 34;
+    sun.shadow.camera.left = -SHADOW_HALF;
+    sun.shadow.camera.right = SHADOW_HALF;
+    sun.shadow.camera.top = SHADOW_HALF;
+    sun.shadow.camera.bottom = -SHADOW_HALF;
+    sun.shadow.bias = -0.0006;
+    sun.shadow.normalBias = 0.5;
     scene.add(sun);
+    scene.add(sun.target);
+    const sunDir = new THREE.Vector3(0, 1, 0.3).normalize();
     const moon = new THREE.DirectionalLight(0x8899cc, 0);
     moon.position.set(-12, 20, -8);
     scene.add(moon);
@@ -651,7 +674,7 @@
       hemi.intensity = 0.25 + visualFactor * 0.85;
       moon.intensity = lightNight ? (0.55 * (1 - dayFactor)) : 0.05;
       ambientFill.intensity = lightNight ? 0.18 : 0.04;
-      sun.position.set(Math.cos(ang) * 90, Math.max(12, Math.sin(ang) * 100), 30);
+      sunDir.set(Math.cos(ang), Math.max(0.35, Math.sin(ang)), 0.3).normalize();
 
       timeLineEl.textContent = (isNight ? 'Night' : 'Day') + ' · ' + formatGameClock() +
         (zombieGraceActive() ? ' · Grace' : '');
@@ -713,13 +736,42 @@
       h += 0.21 * Math.sin((x + z) * 0.028);
       h += 0.17 * Math.cos(x * 0.07 - z * 0.05);
       h += 0.11 * Math.sin(x * 0.12) * Math.sin(z * 0.09);
-      // Stream trench
+      // Stream trench (smoothstep so banks blend instead of creasing)
       const ds = distToStream(x, z);
       if (ds < STREAM_WIDTH) {
         const t = 1 - ds / STREAM_WIDTH;
-        h -= 0.85 * t * t;
+        h -= 0.9 * t * t * (3 - 2 * t);
       }
       return h;
+    }
+
+    // Surface normal from finite differences — used to lay decals/props flat on slopes.
+    const AXIS_Z = new THREE.Vector3(0, 0, 1);
+    const _nrmA = new THREE.Vector3();
+    function terrainNormal(x, z, out) {
+      const e = 0.6;
+      const hL = sampleHeight(x - e, z), hR = sampleHeight(x + e, z);
+      const hD = sampleHeight(x, z - e), hU = sampleHeight(x, z + e);
+      return (out || _nrmA).set(hL - hR, 2 * e, hD - hU).normalize();
+    }
+
+    // Ground height the marine's boots rest on. Sampling only the centre point left the
+    // downhill foot hanging in the air on every slope.
+    function playerGroundY(x, z) {
+      return groundMinAround(x, z, 0.3);
+    }
+
+    // Lowest ground inside a footprint. Props sit on this so nothing floats on a slope.
+    function groundMinAround(x, z, r) {
+      let m = sampleHeight(x, z);
+      if (r > 0.05) {
+        for (let i = 0; i < 6; i++) {
+          const a = (i / 6) * Math.PI * 2;
+          const h = sampleHeight(x + Math.cos(a) * r, z + Math.sin(a) * r);
+          if (h < m) m = h;
+        }
+      }
+      return m;
     }
 
     // landDist / inLand / clampToLand — shared land-bound helpers
@@ -732,15 +784,6 @@
       const s = maxR / d;
       return { x: x * s, z: z * s };
     }
-    function sampleRimHeight(radius) {
-      let sum = 0;
-      const n = 16;
-      for (let i = 0; i < n; i++) {
-        const a = (i / n) * Math.PI * 2;
-        sum += sampleHeight(Math.cos(a) * radius, Math.sin(a) * radius);
-      }
-      return sum / n;
-    }
     function mulberry32(a) {
       return function() {
         let t = (a += 0x6D2B79F5);
@@ -750,277 +793,439 @@
       };
     }
 
-    // buildGroundGeometry, ground mesh, rim, lockedRing
-    function buildGroundGeometry(radius) {
-      const geo = new THREE.CircleGeometry(radius, 192);
-      // Bake circle into XZ plane (Y up) so mesh needs no rotation.x
-      geo.rotateX(-Math.PI / 2);
-      const pos = geo.attributes.position;
-      const cols = pos.count;
-      const colors = new Float32Array(cols * 3);
-      const cA = new THREE.Color(0x3f9a5a);
-      const cB = new THREE.Color(0x4aad68);
-      const cC = new THREE.Color(0x357a4a);
-      const cMud = new THREE.Color(0x5a6e48);
-      const cBank = new THREE.Color(0x6b7a52);
-      for (let i = 0; i < cols; i++) {
-        const wx = pos.getX(i);
-        const wz = pos.getZ(i);
-        const h = sampleHeight(wx, wz);
-        pos.setY(i, h);
-        const n = Math.sin(wx * 0.31) * Math.cos(wz * 0.27) + Math.sin((wx + wz) * 0.11);
-        const t = (n + 1) * 0.5;
-        let col = t < 0.5 ? cA.clone().lerp(cB, t * 2) : cB.clone().lerp(cC, (t - 0.5) * 2);
-        const ds = distToStream(wx, wz);
-        if (ds < STREAM_WIDTH + 1.8) {
-          const bankT = 1 - Math.min(1, ds / (STREAM_WIDTH + 1.8));
-          col.lerp(ds < STREAM_WIDTH * 0.85 ? cMud : cBank, bankT * 0.75);
-        }
-        // Slightly browner on hill slopes
-        if (h > 1.2) col.lerp(cBank, Math.min(0.35, (h - 1.2) * 0.12));
-        colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    // === Ground mesh ===
+    // A tessellated radial grid covering the whole world, built once. Every vertex is
+    // placed with sampleHeight(), so what you see is exactly what gameplay collides
+    // against. (The old mesh was a CircleGeometry — a 192-triangle fan spanning the
+    // entire map from a single centre vertex — so the rendered surface bore almost no
+    // relation to sampleHeight() and everything sank into or floated above it.)
+    // Expanding land only re-tints vertex colours; the surface never changes.
+    const TERRAIN_RADIUS = LAND_MAX + 8;
+    const TERRAIN_RINGS = 208;
+    const TERRAIN_SEGS = 384;
+    const TERRAIN_RING_POW = 1.3; // packs rings tighter near the middle of the map
+    const TERRAIN_VERTS = 1 + TERRAIN_RINGS * TERRAIN_SEGS;
+
+    const groundBaseColors = new Float32Array(TERRAIN_VERTS * 3);
+    const groundVertRadius = new Float32Array(TERRAIN_VERTS);
+
+    const cGrassA = new THREE.Color(0x3f9a5a);
+    const cGrassB = new THREE.Color(0x4aad68);
+    const cGrassC = new THREE.Color(0x357a4a);
+    const cMud = new THREE.Color(0x5a6e48);
+    const cBank = new THREE.Color(0x6b7a52);
+    const cLocked = new THREE.Color(0x24382c);
+    const _terrCol = new THREE.Color();
+
+    function terrainColorAt(wx, wz, h, out) {
+      // n spans roughly ±2, so the old unclamped (n+1)*0.5 fed lerp alphas outside
+      // 0..1 and extrapolated past the palette into negative RGB — that is what the
+      // big scorched-looking blotches on the grass were.
+      const n = Math.sin(wx * 0.31) * Math.cos(wz * 0.27) + Math.sin((wx + wz) * 0.11);
+      const t = Math.max(0, Math.min(1, (n + 1) * 0.5));
+      if (t < 0.5) out.copy(cGrassA).lerp(cGrassB, t * 2);
+      else out.copy(cGrassB).lerp(cGrassC, (t - 0.5) * 2);
+      const ds = distToStream(wx, wz);
+      if (ds < STREAM_WIDTH + 1.8) {
+        const bankT = 1 - Math.min(1, ds / (STREAM_WIDTH + 1.8));
+        out.lerp(ds < STREAM_WIDTH * 0.85 ? cMud : cBank, bankT * 0.75);
       }
-      pos.needsUpdate = true;
+      // Slightly browner on hill slopes
+      if (h > 1.2) out.lerp(cBank, Math.min(0.35, (h - 1.2) * 0.12));
+      return out;
+    }
+
+    function buildGroundGeometry() {
+      const rings = TERRAIN_RINGS, segs = TERRAIN_SEGS;
+      const positions = new Float32Array(TERRAIN_VERTS * 3);
+      const colors = new Float32Array(TERRAIN_VERTS * 3);
+
+      const h0 = sampleHeight(0, 0);
+      positions[1] = h0;
+      terrainColorAt(0, 0, h0, _terrCol);
+      groundBaseColors[0] = _terrCol.r;
+      groundBaseColors[1] = _terrCol.g;
+      groundBaseColors[2] = _terrCol.b;
+
+      for (let i = 1; i <= rings; i++) {
+        const r = TERRAIN_RADIUS * Math.pow(i / rings, TERRAIN_RING_POW);
+        for (let j = 0; j < segs; j++) {
+          const a = (j / segs) * Math.PI * 2;
+          const x = Math.cos(a) * r, z = Math.sin(a) * r;
+          const h = sampleHeight(x, z);
+          const vi = 1 + (i - 1) * segs + j;
+          positions[vi * 3] = x;
+          positions[vi * 3 + 1] = h;
+          positions[vi * 3 + 2] = z;
+          terrainColorAt(x, z, h, _terrCol);
+          groundBaseColors[vi * 3] = _terrCol.r;
+          groundBaseColors[vi * 3 + 1] = _terrCol.g;
+          groundBaseColors[vi * 3 + 2] = _terrCol.b;
+          groundVertRadius[vi] = r;
+        }
+      }
+
+      const indices = new Uint32Array((segs + (rings - 1) * segs * 2) * 3);
+      let k = 0;
+      for (let j = 0; j < segs; j++) {
+        indices[k++] = 0;
+        indices[k++] = 1 + ((j + 1) % segs);
+        indices[k++] = 1 + j;
+      }
+      for (let i = 1; i < rings; i++) {
+        const inner = 1 + (i - 1) * segs;
+        const outer = 1 + i * segs;
+        for (let j = 0; j < segs; j++) {
+          const j2 = (j + 1) % segs;
+          const a = inner + j, b = inner + j2, c = outer + j2, d = outer + j;
+          indices[k++] = a; indices[k++] = b; indices[k++] = c;
+          indices[k++] = a; indices[k++] = c; indices[k++] = d;
+        }
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      geo.setIndex(new THREE.BufferAttribute(indices, 1));
       geo.computeVertexNormals();
+      geo.computeBoundingSphere();
       return geo;
     }
 
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0xffffff, roughness: 0.92, metalness: 0.02, vertexColors: true
     });
-    const ground = new THREE.Mesh(buildGroundGeometry(landRadius), groundMat);
-    ground.rotation.set(0, 0, 0);
+    const ground = new THREE.Mesh(buildGroundGeometry(), groundMat);
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // rebuildStreamMesh / streamGroup
+    // Land outside the purchased radius stays visible but is tinted, so expanding
+    // reveals ground you could already see rather than popping new scenery in.
+    function updateLandTint() {
+      const attr = ground.geometry.attributes.color;
+      const arr = attr.array;
+      for (let i = 0; i < TERRAIN_VERTS; i++) {
+        const over = groundVertRadius[i] - landRadius;
+        const k = over <= 0 ? 0 : Math.min(1, over / 6) * 0.62;
+        const i3 = i * 3;
+        if (k === 0) {
+          arr[i3] = groundBaseColors[i3];
+          arr[i3 + 1] = groundBaseColors[i3 + 1];
+          arr[i3 + 2] = groundBaseColors[i3 + 2];
+        } else {
+          arr[i3] = groundBaseColors[i3] * (1 - k) + cLocked.r * k;
+          arr[i3 + 1] = groundBaseColors[i3 + 1] * (1 - k) + cLocked.g * k;
+          arr[i3 + 2] = groundBaseColors[i3 + 2] * (1 - k) + cLocked.b * k;
+        }
+      }
+      attr.needsUpdate = true;
+    }
+    updateLandTint();
+
+    // === Stream ===
+    // One continuous ribbon whose surface follows the carved trench. The old version
+    // was a handful of flat planes up to 75 units long, which sliced straight through
+    // every hill and bank they crossed.
     const streamGroup = new THREE.Group();
     scene.add(streamGroup);
     const waterMat = new THREE.MeshStandardMaterial({
       color: 0x3a8ec8, roughness: 0.18, metalness: 0.55,
-      transparent: true, opacity: 0.65, depthWrite: false
+      transparent: true, opacity: 0.72, depthWrite: false
     });
-    function rebuildStreamMesh() {
-      while (streamGroup.children.length) {
-        const c = streamGroup.children.pop();
-        streamGroup.remove(c);
-        if (c.geometry) c.geometry.dispose();
-      }
+    const WATER_DEPTH_OFFSET = 0.32; // above the trench floor, so banks bury the edges
+
+    function buildStreamStations(step = 2) {
+      const pts = [];
       for (let i = 0; i < STREAM_CTRL.length - 1; i++) {
         const a = STREAM_CTRL[i], b = STREAM_CTRL[i + 1];
-        const dx = b.x - a.x, dz = b.z - a.z;
-        const len = Math.hypot(dx, dz) || 1;
-        const midX = (a.x + b.x) * 0.5, midZ = (a.z + b.z) * 0.5;
-        if (landDist(midX, midZ) > LAND_MAX + 20) continue;
-        const plane = new THREE.Mesh(
-          new THREE.PlaneGeometry(STREAM_WIDTH * 1.55, len + 1.2),
-          waterMat
-        );
-        plane.rotation.x = -Math.PI / 2;
-        plane.rotation.z = Math.atan2(dx, dz);
-        const hy = sampleHeight(midX, midZ) + 0.08;
-        plane.position.set(midX, hy, midZ);
-        plane.receiveShadow = true;
-        streamGroup.add(plane);
-        // Soft overlapping pads for bends
-        const pad = new THREE.Mesh(
-          new THREE.CircleGeometry(STREAM_WIDTH * 0.85, 16),
-          waterMat
-        );
-        pad.rotation.x = -Math.PI / 2;
-        pad.position.set(a.x, sampleHeight(a.x, a.z) + 0.07, a.z);
-        streamGroup.add(pad);
-      }
-      // Light bank pebbles
-      const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x8a9098, roughness: 0.9, metalness: 0.05 });
-      for (let i = 0; i < STREAM_CTRL.length - 1; i++) {
-        const a = STREAM_CTRL[i], b = STREAM_CTRL[i + 1];
-        for (let k = 0; k < 3; k++) {
-          const t = (k + 0.35) / 3;
-          const px = a.x + (b.x - a.x) * t;
-          const pz = a.z + (b.z - a.z) * t;
-          if (landDist(px, pz) > LAND_MAX - 5) continue;
-          const side = (k % 2 === 0) ? 1 : -1;
-          const dx = b.x - a.x, dz = b.z - a.z;
-          const len = Math.hypot(dx, dz) || 1;
-          const nx = -dz / len, nz = dx / len;
-          const bx = px + nx * side * (STREAM_WIDTH * 0.55 + 0.4);
-          const bz = pz + nz * side * (STREAM_WIDTH * 0.55 + 0.4);
-          if (landDist(bx, bz) > LAND_MAX - 2) continue;
-          if (!inLand(bx, bz, 2)) continue;
-          const peb = new THREE.Mesh(new THREE.DodecahedronGeometry(0.18 + (k % 3) * 0.06, 0), pebbleMat);
-          peb.position.set(bx, sampleHeight(bx, bz) + 0.1, bz);
-          peb.rotation.set(Math.random(), Math.random(), Math.random());
-          peb.castShadow = true;
-          streamGroup.add(peb);
+        const n = Math.max(1, Math.round(Math.hypot(b.x - a.x, b.z - a.z) / step));
+        for (let k = 0; k < n; k++) {
+          const t = k / n;
+          pts.push({ x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t });
         }
       }
+      const last = STREAM_CTRL[STREAM_CTRL.length - 1];
+      pts.push({ x: last.x, z: last.z });
+      for (const p of pts) {
+        p.r = Math.hypot(p.x, p.z);
+        p.y = sampleHeight(p.x, p.z) + WATER_DEPTH_OFFSET;
+      }
+      // Averaged tangents give a mitred ribbon with no overlap at the bends.
+      for (let i = 0; i < pts.length; i++) {
+        const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+        const tx = b.x - a.x, tz = b.z - a.z;
+        const len = Math.hypot(tx, tz) || 1;
+        pts[i].nx = -tz / len;
+        pts[i].nz = tx / len;
+      }
+      return pts;
     }
-    rebuildStreamMesh();
 
-    const rimMat = new THREE.MeshStandardMaterial({ color: 0x2e6b44, roughness: 0.88, metalness: 0.05 });
-    const rim = new THREE.Mesh(new THREE.TorusGeometry(landRadius + 0.35, 0.55, 10, 128), rimMat);
-    rim.rotation.x = Math.PI / 2;
-    rim.position.y = sampleRimHeight(landRadius) + 0.12;
-    scene.add(rim);
+    function buildStreamMesh() {
+      const pts = buildStreamStations(2);
+      const half = STREAM_WIDTH;
+      const positions = [];
+      const indices = [];
+      const rowOf = new Int32Array(pts.length).fill(-1);
+      let rows = 0;
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        if (p.r > TERRAIN_RADIUS - 2) continue;
+        rowOf[i] = rows++;
+        positions.push(p.x - p.nx * half, p.y, p.z - p.nz * half);
+        positions.push(p.x + p.nx * half, p.y, p.z + p.nz * half);
+      }
+      for (let i = 0; i < pts.length - 1; i++) {
+        const r0 = rowOf[i], r1 = rowOf[i + 1];
+        if (r0 < 0 || r1 < 0 || r1 !== r0 + 1) continue;
+        const a = r0 * 2, b = r0 * 2 + 1, c = r1 * 2 + 1, d = r1 * 2;
+        indices.push(a, b, c, a, c, d);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geo.setIndex(indices);
+      geo.computeVertexNormals();
+      const mesh = new THREE.Mesh(geo, waterMat);
+      mesh.renderOrder = 1;
+      streamGroup.add(mesh);
+    }
 
-    const lockedMat = new THREE.MeshStandardMaterial({
-      color: 0x2a4a34, roughness: 1, transparent: true, opacity: 0.35
+    function scatterStreamPebbles() {
+      const rnd = mulberry32(0x5eab17);
+      const pts = buildStreamStations(6);
+      const pebbleMat = new THREE.MeshStandardMaterial({ color: 0x8a9098, roughness: 0.9, metalness: 0.05 });
+      const geos = [
+        new THREE.DodecahedronGeometry(0.2, 0),
+        new THREE.DodecahedronGeometry(0.28, 0),
+        new THREE.DodecahedronGeometry(0.15, 0)
+      ];
+      for (let i = 1; i < pts.length - 1; i++) {
+        if (rnd() < 0.45) continue;
+        const p = pts[i];
+        const side = rnd() < 0.5 ? 1 : -1;
+        const off = STREAM_WIDTH * (0.82 + rnd() * 0.25);
+        const bx = p.x + p.nx * side * off;
+        const bz = p.z + p.nz * side * off;
+        if (Math.hypot(bx, bz) > TERRAIN_RADIUS - 4) continue;
+        const peb = new THREE.Mesh(geos[i % geos.length], pebbleMat);
+        peb.position.set(bx, sampleHeight(bx, bz) - 0.04, bz);
+        peb.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
+        peb.castShadow = true;
+        peb.receiveShadow = true;
+        streamGroup.add(peb);
+      }
+    }
+    buildStreamMesh();
+    scatterStreamPebbles();
+
+    // === Land boundary ===
+    // A low berm whose vertices sit on the terrain, replacing the old torus pinned to a
+    // single averaged height and the flat "locked" ring that sliced through every hill.
+    const boundaryMat = new THREE.MeshStandardMaterial({
+      color: 0x2e6b44, roughness: 0.9, metalness: 0.04, side: THREE.DoubleSide
     });
-    const lockedRing = new THREE.Mesh(
-      new THREE.RingGeometry(landRadius + 0.05, LAND_MAX + 0.1, 96),
-      lockedMat
-    );
-    lockedRing.rotation.x = -Math.PI / 2;
-    lockedRing.position.y = 0.02;
-    scene.add(lockedRing);
+    function buildBoundaryGeometry(radius) {
+      const segs = 256;
+      const positions = new Float32Array((segs + 1) * 9);
+      const indices = [];
+      for (let j = 0; j <= segs; j++) {
+        const a = (j / segs) * Math.PI * 2;
+        const ca = Math.cos(a), sa = Math.sin(a);
+        const xi = ca * (radius - 0.55), zi = sa * (radius - 0.55);
+        const xo = ca * (radius + 0.55), zo = sa * (radius + 0.55);
+        const hi = sampleHeight(xi, zi);
+        const ho = sampleHeight(xo, zo);
+        const b = j * 9;
+        positions[b] = xi; positions[b + 1] = hi - 0.08; positions[b + 2] = zi;
+        positions[b + 3] = ca * radius; positions[b + 4] = Math.max(hi, ho) + 0.6; positions[b + 5] = sa * radius;
+        positions[b + 6] = xo; positions[b + 7] = ho - 0.08; positions[b + 8] = zo;
+      }
+      for (let j = 0; j < segs; j++) {
+        const a0 = j * 3, b0 = (j + 1) * 3;
+        indices.push(a0, b0, b0 + 1, a0, b0 + 1, a0 + 1);
+        indices.push(a0 + 1, b0 + 1, b0 + 2, a0 + 1, b0 + 2, a0 + 2);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geo.setIndex(indices);
+      geo.computeVertexNormals();
+      return geo;
+    }
+    const boundary = new THREE.Mesh(buildBoundaryGeometry(landRadius), boundaryMat);
+    boundary.receiveShadow = true;
+    scene.add(boundary);
 
-    function seatPropY(obj, x, z, yOff = 0) {
-      obj.position.y = sampleHeight(x, z) + yOff;
+    function seatPropY(obj, x, z, footprint = 0, yOff = 0) {
+      obj.position.y = groundMinAround(x, z, footprint) + yOff;
     }
 
     function reseatAllProps() {
-      if (typeof trees !== "undefined") {
-        for (const t of trees) {
-          if (t.group) seatPropY(t.group, t.x, t.z);
-          if (t.stumpMesh) seatPropY(t.stumpMesh, t.x, t.z);
-        }
+      for (const t of trees) {
+        if (t.group) seatPropY(t.group, t.x, t.z, t.trunkRadius * 2.2);
+        if (t.stumpMesh) seatPropY(t.stumpMesh, t.x, t.z, t.trunkRadius * 1.4);
       }
-      if (typeof rocks !== "undefined") {
-        for (const rock of rocks) {
-          if (rock.mesh) seatPropY(rock.mesh, rock.x, rock.z);
-        }
+      for (const rock of rocks) {
+        if (rock.mesh) seatPropY(rock.mesh, rock.x, rock.z, rock.radius * 0.9, -0.08);
       }
-      if (typeof foliage !== "undefined") {
-        for (const f of foliage) {
-          if (f.mesh) seatPropY(f.mesh, f.x, f.z);
-        }
+      for (const f of foliage) {
+        if (f.mesh) seatPropY(f.mesh, f.x, f.z, 0.25);
       }
     }
 
-    // refreshLandMesh (ground, rim, fog, shadows, prop visibility, stream)
+    // Expanding land no longer rebuilds the world — it just moves the boundary and
+    // lifts the tint, so props keep their exact positions.
     function refreshLandMesh() {
-      ground.geometry.dispose();
-      ground.geometry = buildGroundGeometry(landRadius);
-      ground.rotation.set(0, 0, 0);
-      rim.geometry.dispose();
-      rim.geometry = new THREE.TorusGeometry(landRadius + 0.35, 0.55, 10, 128);
-      rim.position.y = sampleRimHeight(landRadius) + 0.12;
-      lockedRing.geometry.dispose();
-      if (landRadius >= LAND_MAX - 0.01) {
-        lockedRing.visible = false;
-      } else {
-        lockedRing.visible = true;
-        lockedRing.geometry = new THREE.RingGeometry(landRadius + 0.05, LAND_MAX + 0.1, 96);
-      }
+      updateLandTint();
+      boundary.geometry.dispose();
+      boundary.geometry = buildBoundaryGeometry(landRadius);
       landREl.textContent = String(Math.round(landRadius));
-      scene.fog.near = landRadius * 0.55;
-      scene.fog.far = landRadius + 100;
-      // Keep sun shadow frustum roughly around playable area
-      const sh = Math.min(120, landRadius * 0.55);
-      sun.shadow.camera.left = -sh;
-      sun.shadow.camera.right = sh;
-      sun.shadow.camera.top = sh;
-      sun.shadow.camera.bottom = -sh;
-      sun.shadow.camera.far = landRadius + 80;
-      sun.shadow.camera.updateProjectionMatrix();
-      if (typeof rebuildStreamMesh === "function") rebuildStreamMesh();
-      if (typeof updateLandPropVisibility === "function") updateLandPropVisibility();
-      else if (typeof updateTreeLandVisibility === "function") updateTreeLandVisibility();
-      if (typeof rebuildFoliage === "function") rebuildFoliage();
-      reseatAllProps();
     }
 
     // === Terrain props (trees, rocks, foliage) ===
+
+    // Bakes a handful of small meshes into one vertex-coloured mesh. Props used to be
+    // groups of 3–18 separate meshes each, which is thousands of draw calls once the
+    // whole map is visible.
+    const _mpMat = new THREE.Matrix4();
+    const _mpNrm = new THREE.Matrix3();
+    const _mpV = new THREE.Vector3();
+    function mergeParts(parts, material, opts = {}) {
+      const prepared = [];
+      let total = 0;
+      for (const p of parts) {
+        const geo = p.geometry.index ? p.geometry.toNonIndexed() : p.geometry;
+        total += geo.attributes.position.count;
+        prepared.push({ geo, mesh: p });
+      }
+      const positions = new Float32Array(total * 3);
+      const normals = new Float32Array(total * 3);
+      const colors = new Float32Array(total * 3);
+      let o = 0;
+      for (const { geo, mesh } of prepared) {
+        mesh.updateMatrix();
+        _mpMat.copy(mesh.matrix);
+        _mpNrm.getNormalMatrix(_mpMat);
+        const pos = geo.attributes.position;
+        const nrm = geo.attributes.normal;
+        const col = mesh.material.color;
+        for (let i = 0; i < pos.count; i++) {
+          const w = (o + i) * 3;
+          _mpV.fromBufferAttribute(pos, i).applyMatrix4(_mpMat);
+          positions[w] = _mpV.x; positions[w + 1] = _mpV.y; positions[w + 2] = _mpV.z;
+          if (nrm) {
+            _mpV.fromBufferAttribute(nrm, i).applyMatrix3(_mpNrm).normalize();
+            normals[w] = _mpV.x; normals[w + 1] = _mpV.y; normals[w + 2] = _mpV.z;
+          }
+          colors[w] = col.r; colors[w + 1] = col.g; colors[w + 2] = col.b;
+        }
+        o += pos.count;
+      }
+      const merged = new THREE.BufferGeometry();
+      merged.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      merged.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+      merged.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      merged.computeBoundingSphere();
+      const out = new THREE.Mesh(merged, material);
+      out.castShadow = !!opts.castShadow;
+      out.receiveShadow = !!opts.receiveShadow;
+      return out;
+    }
+
     // --- Foliage (capped) ---
     const foliage = [];
-    const MAX_GRASS = 220;
-    const MAX_BUSH = 48;
-    const MAX_FERN = 56;
+    const MAX_GRASS = 420;
+    const MAX_BUSH = 120;
+    const MAX_FERN = 140;
     const grassMat = new THREE.MeshStandardMaterial({ color: 0x4caf50, roughness: 0.95, side: THREE.DoubleSide });
     const grassMat2 = new THREE.MeshStandardMaterial({ color: 0x6bbf4e, roughness: 0.95, side: THREE.DoubleSide });
     const bushMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32, roughness: 1 });
     const fernMat = new THREE.MeshStandardMaterial({ color: 0x66bb6a, roughness: 0.9, side: THREE.DoubleSide });
+    const foliageMat = new THREE.MeshStandardMaterial({
+      vertexColors: true, roughness: 0.95, side: THREE.DoubleSide
+    });
 
     function clearFoliage() {
-      for (const f of foliage) scene.remove(f.mesh);
+      for (const f of foliage) {
+        scene.remove(f.mesh);
+        f.mesh.geometry.dispose();
+      }
       foliage.length = 0;
     }
 
-    function makeGrassTuft(x, z) {
-      const g = new THREE.Group();
-      const n = 3 + Math.floor(Math.random() * 3);
+    function makeGrassTuft(x, z, rnd) {
+      const parts = [];
+      const n = 3 + Math.floor(rnd() * 3);
       for (let i = 0; i < n; i++) {
-        const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.08, 0.28 + Math.random() * 0.2), Math.random() > 0.5 ? grassMat : grassMat2);
-        blade.position.set((Math.random() - 0.5) * 0.2, 0.14, (Math.random() - 0.5) * 0.2);
-        blade.rotation.y = Math.random() * Math.PI;
-        blade.rotation.z = (Math.random() - 0.5) * 0.35;
-        g.add(blade);
+        const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.08, 0.28 + rnd() * 0.2), rnd() > 0.5 ? grassMat : grassMat2);
+        blade.position.set((rnd() - 0.5) * 0.2, 0.14, (rnd() - 0.5) * 0.2);
+        blade.rotation.y = rnd() * Math.PI;
+        blade.rotation.z = (rnd() - 0.5) * 0.35;
+        parts.push(blade);
       }
-      g.position.set(x, sampleHeight(x, z), z);
+      const g = mergeParts(parts, foliageMat);
+      g.position.set(x, groundMinAround(x, z, 0.25), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'grass', x, z });
     }
 
-    function makeBush(x, z) {
-      const g = new THREE.Group();
+    function makeBush(x, z, rnd) {
+      const parts = [];
       for (let i = 0; i < 3; i++) {
-        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.25 + Math.random() * 0.15, 10, 8), bushMat);
-        puff.position.set((Math.random() - 0.5) * 0.35, 0.22 + Math.random() * 0.1, (Math.random() - 0.5) * 0.35);
-        puff.castShadow = true;
-        g.add(puff);
+        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.25 + rnd() * 0.15, 8, 6), bushMat);
+        puff.position.set((rnd() - 0.5) * 0.35, 0.22 + rnd() * 0.1, (rnd() - 0.5) * 0.35);
+        parts.push(puff);
       }
-      g.position.set(x, sampleHeight(x, z), z);
+      const g = mergeParts(parts, foliageMat, { castShadow: true });
+      g.position.set(x, groundMinAround(x, z, 0.3), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'bush', x, z });
     }
 
-    function makeFern(x, z) {
-      const g = new THREE.Group();
+    function makeFern(x, z, rnd) {
+      const parts = [];
       for (let i = 0; i < 5; i++) {
         const leaf = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.4), fernMat);
-        const ang = (i / 5) * Math.PI * 2;
+        const ang = (i / 5) * Math.PI * 2 + rnd();
         leaf.position.set(Math.cos(ang) * 0.12, 0.2, Math.sin(ang) * 0.12);
         leaf.rotation.y = ang;
         leaf.rotation.x = -0.6;
-        g.add(leaf);
+        parts.push(leaf);
       }
-      g.position.set(x, sampleHeight(x, z), z);
+      const g = mergeParts(parts, foliageMat);
+      g.position.set(x, groundMinAround(x, z, 0.2), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'fern', x, z });
     }
 
+    // Seeded and built once over the whole map — expanding land used to reshuffle every
+    // tuft to a new random spot, which made the ground visibly "crawl".
     function rebuildFoliage() {
       clearFoliage();
-      const area = Math.PI * landRadius * landRadius;
-      // Density scaled down vs area so huge map stays FPS-friendly
-      const grassN = Math.min(MAX_GRASS, Math.floor(60 + area * 0.0022));
-      const bushN = Math.min(MAX_BUSH, Math.floor(12 + area * 0.00035));
-      const fernN = Math.min(MAX_FERN, Math.floor(14 + area * 0.0004));
-      function randInLand(minR = 1.5) {
+      const rnd = mulberry32(0xf0117a6e);
+      function randSpot(minR) {
         for (let tries = 0; tries < 20; tries++) {
-          const a = Math.random() * Math.PI * 2;
-          const r = minR + Math.random() * (landRadius - minR - 0.8);
+          const a = rnd() * Math.PI * 2;
+          // Biased inward so the playable middle stays lush without flooding the map.
+          const r = minR + Math.pow(rnd(), 1.45) * (TERRAIN_RADIUS - minR - 6);
           const x = Math.cos(a) * r, z = Math.sin(a) * r;
-          if (landDist(x, z) > 2.2) return [x, z];
+          if (r > 2.2) return [x, z];
         }
         return [3, 3];
       }
-      for (let i = 0; i < grassN; i++) {
-        const [x, z] = randInLand(0.5);
+      for (let i = 0; i < MAX_GRASS; i++) {
+        const [x, z] = randSpot(0.5);
         if (distToStream(x, z) < STREAM_WIDTH * 0.7) continue;
-        makeGrassTuft(x, z);
+        makeGrassTuft(x, z, rnd);
       }
-      for (let i = 0; i < bushN; i++) {
-        const [x, z] = randInLand(2);
+      for (let i = 0; i < MAX_BUSH; i++) {
+        const [x, z] = randSpot(2);
         if (distToStream(x, z) < STREAM_WIDTH + 0.5) continue;
-        makeBush(x, z);
+        makeBush(x, z, rnd);
       }
-      for (let i = 0; i < fernN; i++) {
-        const [x, z] = randInLand(1.5);
+      for (let i = 0; i < MAX_FERN; i++) {
+        const [x, z] = randSpot(1.5);
         if (distToStream(x, z) < STREAM_WIDTH * 0.85) continue;
-        makeFern(x, z);
+        makeFern(x, z, rnd);
       }
     }
 
@@ -1107,12 +1312,16 @@
         scene.remove(old.mesh);
         old.mesh.material.dispose();
       }
-      const dmat = new THREE.MeshBasicMaterial({ color: 0x5c0000, transparent: true, opacity: 0.75, depthWrite: false });
+      const dmat = new THREE.MeshBasicMaterial({
+        color: 0x5c0000, transparent: true, opacity: 0.75, depthWrite: false,
+        polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+      });
       const decal = new THREE.Mesh(decalGeo, dmat);
-      decal.rotation.x = -Math.PI / 2;
       {
+        // Laid along the surface normal — flat decals used to slice into any slope.
         const dx = x + (Math.random() - 0.5) * 0.4, dz = z + (Math.random() - 0.5) * 0.4;
-        decal.position.set(dx, sampleHeight(dx, dz) + 0.03, dz);
+        decal.quaternion.setFromUnitVectors(AXIS_Z, terrainNormal(dx, dz));
+        decal.position.set(dx, sampleHeight(dx, dz) + 0.06, dz);
       }
       decal.scale.setScalar(0.6 + Math.random() * 0.8);
       scene.add(decal);
@@ -1128,7 +1337,7 @@
         b.mesh.position.y += b.vy * dt;
         b.mesh.position.z += b.vz * dt;
         b.mesh.material.opacity = Math.max(0, 1 - b.age / b.life);
-        if (b.age >= b.life || b.mesh.position.y < 0) {
+        if (b.age >= b.life || b.mesh.position.y < sampleHeight(b.mesh.position.x, b.mesh.position.z)) {
           scene.remove(b.mesh);
           b.mesh.material.dispose();
           bloodParticles.splice(i, 1);
@@ -1149,35 +1358,27 @@
     // --- Destructible rocks ---
     // --- Rocks ---
     const rocks = [];
-    function makeRock(x, z, s = 1) {
-      const g = new THREE.Group();
-      const mat = new THREE.MeshStandardMaterial({
-        color: 0x7a8699, roughness: 0.88, metalness: 0.08
-      });
-      const mat2 = new THREE.MeshStandardMaterial({
-        color: 0x5e6878, roughness: 0.92, metalness: 0.05
-      });
-      const core = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55 * s, 1), mat);
+    const rockMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9, metalness: 0.07 });
+    const rockCoreMat = new THREE.MeshStandardMaterial({ color: 0x7a8699 });
+    const rockChunkMat = new THREE.MeshStandardMaterial({ color: 0x5e6878 });
+    const rockMossMat = new THREE.MeshStandardMaterial({ color: 0x4a7a3a });
+    function makeRock(x, z, s = 1, rot = 0) {
+      const core = new THREE.Mesh(new THREE.DodecahedronGeometry(0.55 * s, 1), rockCoreMat);
       core.position.y = 0.35 * s;
-      core.castShadow = true; core.receiveShadow = true;
-      g.add(core);
-      const chunk = new THREE.Mesh(new THREE.IcosahedronGeometry(0.32 * s, 0), mat2);
+      const chunk = new THREE.Mesh(new THREE.IcosahedronGeometry(0.32 * s, 0), rockChunkMat);
       chunk.position.set(0.28 * s, 0.22 * s, -0.15 * s);
-      chunk.castShadow = true; chunk.receiveShadow = true;
-      g.add(chunk);
-      const moss = new THREE.Mesh(
-        new THREE.SphereGeometry(0.18 * s, 8, 6),
-        new THREE.MeshStandardMaterial({ color: 0x4a7a3a, roughness: 1 })
-      );
+      const moss = new THREE.Mesh(new THREE.SphereGeometry(0.18 * s, 8, 6), rockMossMat);
       moss.scale.set(1.4, 0.45, 1.0);
       moss.position.set(-0.15 * s, 0.42 * s, 0.2 * s);
-      g.add(moss);
-      g.position.set(x, sampleHeight(x, z), z);
-      g.rotation.y = Math.random() * Math.PI * 2;
+      const g = mergeParts([core, chunk, moss], rockMat, { castShadow: true, receiveShadow: true });
+      // Sunk to the low point of its own footprint so it never perches on a slope.
+      g.position.set(x, groundMinAround(x, z, 0.55 * s) - 0.08, z);
+      g.rotation.y = rot;
       scene.add(g);
       const rec = {
         mesh: g, x, z, s,
         radius: 0.55 * s,
+        height: 0.95 * s,
         hp: Math.round(18 + s * 10),
         maxHp: Math.round(18 + s * 10),
         alive: true
@@ -1189,7 +1390,7 @@
     function scatterRocks() {
       const rnd = mulberry32(0x70c45e);
       const placed = [];
-      const target = 34;
+      const target = 70;
       const spawnClear = 12;
       const edgeMargin = 4;
       let attempts = 0;
@@ -1212,9 +1413,9 @@
           }
         }
         if (!ok) continue;
-        placed.push({ x, z, s, minSpace });
+        placed.push({ x, z, s, minSpace, rot: rnd() * Math.PI * 2 });
       }
-      for (const p of placed) makeRock(p.x, p.z, p.s);
+      for (const p of placed) makeRock(p.x, p.z, p.s, p.rot);
       return placed.length;
     }
     const ROCK_SCATTER_COUNT = scatterRocks();
@@ -1240,6 +1441,7 @@
     ];
     const barkDarkMat = new THREE.MeshStandardMaterial({ color: 0x2e1c0e, roughness: 0.98 });
     const mossMat = new THREE.MeshStandardMaterial({ color: 0x4a7a3a, roughness: 1 });
+    const birchRingMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 1 });
 
     const paletteSets = {
       pine: [0x1a5c2e, 0x247040, 0x1f6b38, 0x2d8a4a],
@@ -1248,12 +1450,18 @@
       birch: [0x6bbf59, 0x8fd46b, 0x57a846, 0xa3e635]
     };
 
+    // Per-tree unique mats so canopy fade opacity is not shared across trees.
+    // They start fully opaque: leaving `transparent` on permanently pushed all 240
+    // canopies into the sorted transparent pass, where they occluded each other in the
+    // wrong order and cost far more to draw.
     function matsFrom(colors) {
-      // Per-tree unique mats so canopy fade opacity is not shared across trees
       return colors.map((c) => new THREE.MeshStandardMaterial({
-        color: c, roughness: 0.85, transparent: true, opacity: 1, depthWrite: true
+        color: c, roughness: 0.85, transparent: false, opacity: 1, depthWrite: true
       }));
     }
+
+    // Bark/root/branch geometry merges into one vertex-coloured mesh per tree.
+    const woodMergedMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95 });
 
     const trees = [];
     const fallingLeaves = [];
@@ -1307,6 +1515,7 @@
 
       const g = new THREE.Group();
       const canopy = new THREE.Group();
+      const trunkParts = [];
       const bark = barkMats[Math.floor(Math.random() * barkMats.length)];
       const leafColors = paletteSets[kind] || paletteSets.pine;
       const leafMats = matsFrom(leafColors);
@@ -1321,9 +1530,7 @@
           bark
         );
         trunk.position.y = trunkH / 2;
-        trunk.castShadow = true;
-        trunk.receiveShadow = true;
-        g.add(trunk);
+        trunkParts.push(trunk);
 
         for (let i = 0; i < 3; i++) {
           const root = new THREE.Mesh(
@@ -1334,7 +1541,7 @@
           root.position.set(Math.cos(ang) * trunkR * 0.6, 0.1 * scale, Math.sin(ang) * trunkR * 0.6);
           root.rotation.z = Math.cos(ang) * 0.85;
           root.rotation.x = Math.sin(ang) * 0.85;
-          g.add(root);
+          trunkParts.push(root);
         }
 
         canopyBottom = trunkH * 0.55;
@@ -1361,8 +1568,7 @@
           bark
         );
         trunk.position.y = trunkH / 2;
-        trunk.castShadow = true;
-        g.add(trunk);
+        trunkParts.push(trunk);
 
         for (let i = 0; i < 5; i++) {
           const ang = (i / 5) * Math.PI * 2 + 0.2;
@@ -1373,13 +1579,13 @@
           root.position.set(Math.cos(ang) * trunkR * 0.75, 0.12 * scale, Math.sin(ang) * trunkR * 0.75);
           root.rotation.z = Math.cos(ang) * 1.0;
           root.rotation.x = Math.sin(ang) * 1.0;
-          g.add(root);
+          trunkParts.push(root);
         }
 
         const moss = new THREE.Mesh(new THREE.SphereGeometry(trunkR * 0.5, 8, 8), mossMat);
         moss.scale.set(1.3, 0.35, 0.7);
         moss.position.set(trunkR * 0.5, trunkH * 0.4, 0);
-        g.add(moss);
+        trunkParts.push(moss);
 
         for (let i = 0; i < 4; i++) {
           const ang = i * 1.7;
@@ -1390,8 +1596,7 @@
           branch.position.set(Math.cos(ang) * trunkR, trunkH * (0.55 + i * 0.08), Math.sin(ang) * trunkR);
           branch.rotation.z = Math.cos(ang) * 1.15;
           branch.rotation.x = -Math.sin(ang) * 1.15;
-          branch.castShadow = true;
-          g.add(branch);
+          trunkParts.push(branch);
         }
 
         canopyBottom = trunkH * 0.85;
@@ -1422,8 +1627,7 @@
           bark
         );
         trunk.position.y = trunkH / 2;
-        trunk.castShadow = true;
-        g.add(trunk);
+        trunkParts.push(trunk);
 
         canopyBottom = trunkH * 0.75;
         canopyTop = trunkH + 2.2 * scale;
@@ -1457,16 +1661,15 @@
           barkMats[2]
         );
         trunk.position.y = trunkH / 2;
-        trunk.castShadow = true;
-        g.add(trunk);
+        trunkParts.push(trunk);
         for (let i = 0; i < 6; i++) {
           const ring = new THREE.Mesh(
             new THREE.TorusGeometry(trunkR * 0.9, 0.02 * scale, 5, 14),
-            new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 1 })
+            birchRingMat
           );
           ring.rotation.x = Math.PI / 2;
           ring.position.y = 0.4 * scale + i * 0.4 * scale;
-          g.add(ring);
+          trunkParts.push(ring);
         }
 
         canopyBottom = trunkH * 0.7;
@@ -1481,7 +1684,7 @@
           branch.position.set(Math.cos(ang) * trunkR, trunkH * (0.6 + i * 0.07), Math.sin(ang) * trunkR);
           branch.rotation.z = Math.cos(ang) * 1.3;
           branch.rotation.x = -Math.sin(ang) * 1.3;
-          g.add(branch);
+          trunkParts.push(branch);
           const tuft = new THREE.Mesh(
             new THREE.IcosahedronGeometry(0.55 * scale, 0),
             leafMats[i % leafMats.length]
@@ -1502,8 +1705,11 @@
         canopy.add(crown);
       }
 
+      const woodMesh = mergeParts(trunkParts, woodMergedMat, { castShadow: true, receiveShadow: true });
+      g.add(woodMesh);
       g.add(canopy);
-      g.position.set(x, sampleHeight(x, z), z);
+      // Seated on the low point of the root flare so trunks never hover over a slope.
+      g.position.set(x, groundMinAround(x, z, trunkR * 2.2), z);
       g.rotation.y = Math.random() * Math.PI * 2;
       if (lean) g.rotation.z = lean;
       scene.add(g);
@@ -1526,6 +1732,7 @@
         canopyTop,
         leafMats,
         canopyFade: 1,
+        canopyTransparent: false,
         sway: 0,
         swayVel: 0,
         leafCooldown: 0,
@@ -1545,18 +1752,8 @@
         stump: false,
         stumpHp: 10,
         stumpMesh: null,
-        trunkMesh: null
+        trunkMesh: woodMesh
       };
-      // Tag first trunk-like child for stump conversion
-      for (const ch of g.children) {
-        if (ch !== canopy && ch.isMesh) { tree.trunkMesh = ch; break; }
-        if (ch !== canopy && ch.isGroup) {
-          for (const c2 of ch.children) {
-            if (c2.isMesh) { tree.trunkMesh = c2; break; }
-          }
-        }
-        if (tree.trunkMesh) break;
-      }
       trees.push(tree);
       return tree;
     }
@@ -1598,20 +1795,12 @@
     }
     const TREE_SCATTER_COUNT = scatterTrees();
 
-    function updateTreeLandVisibility() {
-      for (const t of trees) {
-        t.group.visible = inLand(t.x, t.z, -1.5);
-      }
-    }
-    function updateRockLandVisibility() {
-      for (const rock of rocks) {
-        if (!rock.alive) continue;
-        rock.mesh.visible = inLand(rock.x, rock.z, 0.5);
-      }
-    }
+    // Scenery stays drawn across the whole map. It used to be hidden outside the
+    // purchased radius, so half the world simply vanished behind an invisible circle
+    // and popped back in whenever you expanded.
     function updateLandPropVisibility() {
-      updateTreeLandVisibility();
-      updateRockLandVisibility();
+      for (const t of trees) t.group.visible = true;
+      for (const rock of rocks) if (rock.alive) rock.mesh.visible = true;
     }
     updateLandPropVisibility();
 
@@ -1679,6 +1868,8 @@
       laser.rotation.x = Math.PI / 2;
       laser.position.set(0, 0, 0.27 + barrelLen + 4);
       gun.add(laser);
+      gun.userData.laserBaseZ = 0.27 + barrelLen;
+      gun.userData.laserLen = 8;
       gun.userData.barrelAssembly = barrelAssembly;
       gun.userData.ammoBox = ammoBox;
       gun.userData.mag = ammoBox;
@@ -1734,6 +1925,8 @@
       laser.rotation.x = Math.PI / 2;
       laser.position.set(0, 0.02, 5);
       gun.add(laser);
+      gun.userData.laserBaseZ = 1;
+      gun.userData.laserLen = 8;
       gun.userData.flash = flash;
       gun.userData.flashLight = flashLight;
       gun.userData.laser = laser;
@@ -1778,6 +1971,8 @@
       laser.rotation.x = Math.PI / 2;
       laser.position.set(0, 0.05, 3.3);
       gun.add(laser);
+      gun.userData.laserBaseZ = 0.3;
+      gun.userData.laserLen = 6;
       gun.userData.flash = flash;
       gun.userData.flashLight = flashLight;
       gun.userData.laser = laser;
@@ -2490,7 +2685,7 @@
       g.visible = false; scene.add(g); house.group = g; return g;
     }
     makeHouse();
-    house.group.position.y = sampleHeight(0, 0);
+    house.group.position.y = groundMinAround(0, 0, 1.8);
 
     let bank = 20;
     const coinPickups = [];
@@ -2677,10 +2872,19 @@
     }
 
     function overlapsBlocked(x, z, radius) {
-      // trees
+      // trees + stumps
       for (const t of trees) {
+        if (t.stump && t.stumpMesh) {
+          if (Math.hypot(x - t.x, z - t.z) < radius + t.trunkRadius + 0.25) return true;
+          continue;
+        }
         if (!t.alive && !t.falling) continue;
         if (Math.hypot(x - t.x, z - t.z) < radius + t.trunkRadius + 0.35) return true;
+      }
+      // rocks — these were ignored entirely, so builds could be dropped inside boulders
+      for (const rock of rocks) {
+        if (!rock.alive) continue;
+        if (Math.hypot(x - rock.x, z - rock.z) < radius + rock.radius + 0.25) return true;
       }
       // builds
       for (const b of builds) {
@@ -2693,10 +2897,24 @@
       return false;
     }
 
+    // Height range across a footprint — used to reject ground too steep to build on.
+    function groundSpread(x, z, r) {
+      let lo = Infinity, hi = -Infinity;
+      for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2;
+        const h = sampleHeight(x + Math.cos(a) * r, z + Math.sin(a) * r);
+        if (h < lo) lo = h;
+        if (h > hi) hi = h;
+      }
+      return hi - lo;
+    }
+
     function validatePlace(x, z) {
       const r = Math.hypot(x, z);
-      if (r > landRadius - 0.8) return false;
+      if (r > landRadius - 1.6) return false;
       const footprint = placeMode === 'barricade' ? 0.7 : (placeMode === 'heavy' ? 0.75 : 0.55);
+      if (distToStream(x, z) < STREAM_WIDTH * 0.9) return false;
+      if (groundSpread(x, z, footprint) > 0.6) return false;
       if (overlapsBlocked(x, z, footprint)) return false;
       return true;
     }
@@ -2739,7 +2957,7 @@
         radius = 0.75;
         type = 'heavy';
       }
-      mesh.position.set(x, sampleHeight(x, z), z);
+      mesh.position.set(x, groundMinAround(x, z, radius * 0.85), z);
       scene.add(mesh);
       const b = {
         mesh, x, z, type, hp, maxHp: hp, radius,
@@ -2763,7 +2981,8 @@
     function updateGhostPreview() {
       if (!placeMode) return;
       const pt = getPlacePoint();
-      ghostGroup.position.set(pt.x, sampleHeight(pt.x, pt.z), pt.z);
+      const footprint = placeMode === 'barricade' ? 0.7 : (placeMode === 'heavy' ? 0.75 : 0.55);
+      ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
       ghostValid = validatePlace(pt.x, pt.z) && bank >= COST[placeMode];
       const mat = ghostGroup.userData.mat;
       if (mat) {
@@ -2775,7 +2994,14 @@
     // --- Zombies: 5 outbreak types ---
     const zombies = [];
     const MAX_ZOMBIES = 36;
-    const zombiePool = [];
+    // Pooled per type. A single shared pool meant a mismatched mesh was dropped on the
+    // floor (never disposed, never reused) every time the wave mix changed.
+    const zombiePool = new Map();
+    function poolFor(typeKey) {
+      let list = zombiePool.get(typeKey);
+      if (!list) { list = []; zombiePool.set(typeKey, list); }
+      return list;
+    }
 
     const ZOMBIE_TYPES = {
       shambler: {
@@ -2951,13 +3177,9 @@
       if (zombies.length >= MAX_ZOMBIES) return null;
       const tk = typeKey || pickZombieType(day);
       const def = ZOMBIE_TYPES[tk];
-      let mesh = zombiePool.pop();
-      if (!mesh || mesh.userData.typeKey !== tk) {
-        if (mesh) scene.remove(mesh);
-        mesh = makeZombieMesh(tk);
-      }
+      let mesh = poolFor(tk).pop();
+      if (!mesh) mesh = makeZombieMesh(tk);
       mesh.visible = true;
-      mesh.userData.typeKey = tk;
       mesh.position.set(x, sampleHeight(x, z), z);
       mesh.scale.setScalar(1);
       if (!mesh.parent) scene.add(mesh);
@@ -2979,10 +3201,10 @@
     function killZombie(z, award = true) {
       if (!z.alive) return;
       z.alive = false;
-      spawnBlood(z.mesh.position.x, 0.9, z.mesh.position.z, 0, 0, 8);
+      spawnBlood(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, 0, 0, 8);
       z.mesh.visible = false;
       scene.remove(z.mesh);
-      zombiePool.push(z.mesh);
+      poolFor(z.typeKey).push(z.mesh);
       const i = zombies.indexOf(z);
       if (i >= 0) zombies.splice(i, 1);
       if (award) {
@@ -2997,7 +3219,7 @@
         z.alive = false;
         z.mesh.visible = false;
         scene.remove(z.mesh);
-        zombiePool.push(z.mesh);
+        poolFor(z.typeKey).push(z.mesh);
       }
       zombies.length = 0;
     }
@@ -3073,11 +3295,12 @@
       spawnCd -= dt;
       if (spawnCd > 0) return;
       spawnCd = 0.55 + Math.random() * 0.45;
+      // Spawn inside the boundary berm, then shove clear of any prop at that spot so
+      // nobody arrives embedded in a tree trunk.
       const ang = Math.random() * Math.PI * 2;
-      const rr = landRadius - 0.6;
-      const bx = Math.cos(ang) * rr;
-      const bz = Math.sin(ang) * rr;
-      if (spawnZombie(bx, bz)) waveSpawned += 1;
+      const rr = landRadius - 3 - Math.random() * 2;
+      const spot = resolveStaticProps(Math.cos(ang) * rr, Math.sin(ang) * rr, 0.8);
+      if (spawnZombie(spot.x, spot.z)) waveSpawned += 1;
     }
 
     const PLAYER_MAX_HP = 100;
@@ -3088,7 +3311,7 @@
       if (gameOver || won || !gameStarted) return;
       playerHp -= amount;
       hurtFlash = 0.2;
-      spawnBlood(player.position.x, Math.max(0.25, getStanceEyeY() * 0.7), player.position.z, 0, 0, 5);
+      spawnBlood(player.position.x, player.position.y + getStanceEyeY() * 0.7, player.position.z, 0, 0, 5);
       AudioSys.playerHurt();
       updateHpHud();
       if (playerHp <= 0) {
@@ -3373,19 +3596,28 @@
       return muzzleDir;
     }
 
+    // Tracer materials are cached per colour; turret shots used to allocate and dispose
+    // a fresh material for every single bullet.
+    const tracerMatCache = new Map();
+    function tracerMatFor(color) {
+      if (color == null) return tracerMat;
+      let m = tracerMatCache.get(color);
+      if (!m) { m = new THREE.MeshBasicMaterial({ color }); tracerMatCache.set(color, m); }
+      return m;
+    }
+
     function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null) {
       const o = origin ? origin.clone() : getMuzzleWorld().clone();
       const d = dir ? dir.clone().normalize() : getAimDir().clone();
-      const mat = color ? new THREE.MeshBasicMaterial({ color }) : tracerMat;
-      const mesh = new THREE.Mesh(tracerGeo, mat);
+      const mesh = new THREE.Mesh(tracerGeo, tracerMatFor(color));
       mesh.position.copy(o);
-      mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), d);
+      mesh.quaternion.setFromUnitVectors(AXIS_Z, d);
       scene.add(mesh);
       projectiles.push({
         mesh, pos: o.clone(), prev: o.clone(), dir: d,
         speed: fromTurret ? 55 : 70,
         life, age: 0, hit: false, damage,
-        fromTurret, ownMat: !!color
+        fromTurret
       });
     }
 
@@ -3401,13 +3633,33 @@
       if (light) light.intensity = 2.8;
     }
 
+    // How far the aim ray travels before the ground gets in the way.
+    function aimRangeToTerrain(maxLen) {
+      const originY = player.position.y + 1.0;
+      const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+      const step = 0.75;
+      for (let d = step; d <= maxLen; d += step) {
+        const sx = player.position.x + fx * d;
+        const sz = player.position.z + fz * d;
+        if (originY < sampleHeight(sx, sz)) return Math.max(0.6, d - step);
+      }
+      return maxLen;
+    }
+
     function updateLasers() {
       for (const name of WEAPON_ORDER) {
         const gun = weaponMeshes[name];
-        if (!gun || !gun.userData.laser) continue;
+        const laser = gun && gun.userData.laser;
+        if (!laser) continue;
         // User toggle (default OFF); independent of day/night
         const on = lasersEnabled && gun.visible && gameStarted && !placeMode;
-        gun.userData.laser.material.opacity = on ? 0.55 : 0;
+        laser.material.opacity = on ? 0.55 : 0;
+        if (!on) continue;
+        // Trim the beam at the first hill instead of letting it spear through terrain.
+        const full = gun.userData.laserLen;
+        const len = Math.min(full, aimRangeToTerrain(full));
+        laser.scale.y = len / full;
+        laser.position.z = gun.userData.laserBaseZ + len * 0.5;
       }
     }
 
@@ -3519,14 +3771,13 @@
         if ((!t.alive && !t.stump) || t.falling) continue;
         const d = Math.hypot(t.x - x, t.z - z);
         if (d < AOE * 0.85) {
-          if (t.stump) damageStump(t, 20, dirToward(x, z, t.x, t.z));
+          const blast = dirToward(x, z, t.x, t.z);
+          if (t.stump) damageStump(t, 20, blast);
           else {
             // shred then trunk
             t.leafHealth = 0;
             for (const p of t.canopy.children) p.visible = false;
-            damageTree(t, t.x, t.z, 1, dirToward(x, z, t.x, t.z).x, dirToward(x, z, t.x, t.z).z);
-            damageTree(t, t.x, t.z, 1, dirToward(x, z, t.x, t.z).x, dirToward(x, z, t.x, t.z).z);
-            damageTree(t, t.x, t.z, 1, dirToward(x, z, t.x, t.z).x, dirToward(x, z, t.x, t.z).z);
+            for (let k = 0; k < 3; k++) damageTree(t, t.x, t.z, 1, blast.x, blast.z);
           }
         }
       }
@@ -3580,7 +3831,7 @@
           const dot = (dx * fx + dz * fz) / (d || 1);
           if (dot > 0.35) {
             damageZombie(z, 28);
-            spawnBlood(z.mesh.position.x, 1, z.mesh.position.z, fx, fz, 6);
+            spawnBlood(z.mesh.position.x, z.mesh.position.y + 1, z.mesh.position.z, fx, fz, 6);
           }
         }
       }
@@ -3602,21 +3853,20 @@
       return bestT;
     }
 
+    const stumpRingMat = new THREE.MeshStandardMaterial({ color: 0xd4b896, roughness: 0.85 });
     function makeStumpMesh(tree) {
-      const g = new THREE.Group();
       const stump = new THREE.Mesh(
         new THREE.CylinderGeometry(tree.trunkRadius * 1.1, tree.trunkRadius * 1.25, 0.5, 14),
         barkMats[0]
       );
       stump.position.y = 0.25;
-      stump.castShadow = true; stump.receiveShadow = true;
-      g.add(stump);
       const rings = new THREE.Mesh(
         new THREE.CylinderGeometry(tree.trunkRadius * 1.05, tree.trunkRadius * 1.05, 0.04, 14),
-        new THREE.MeshStandardMaterial({ color: 0xd4b896, roughness: 0.85 })
+        stumpRingMat
       );
-      rings.position.y = 0.5; g.add(rings);
-      g.position.set(tree.x, sampleHeight(tree.x, tree.z), tree.z);
+      rings.position.y = 0.5;
+      const g = mergeParts([stump, rings], woodMergedMat, { castShadow: true, receiveShadow: true });
+      g.position.set(tree.x, groundMinAround(tree.x, tree.z, tree.trunkRadius * 1.4), tree.z);
       scene.add(g);
       return g;
     }
@@ -3624,14 +3874,16 @@
     function damageStump(tree, amount, dir) {
       if (!tree.stump || !tree.stumpMesh) return;
       tree.stumpHp -= amount;
+      const chunkY = tree.stumpMesh.position.y + 0.3;
       if (tree.stumpHp <= 0) {
-        spawnChunks(tree.x, 0.3, tree.z, 0x5c3a1e, 7, 4);
+        spawnChunks(tree.x, chunkY, tree.z, 0x5c3a1e, 7, 4);
         scene.remove(tree.stumpMesh);
+        tree.stumpMesh.geometry.dispose();
         tree.stumpMesh = null;
         tree.stump = false;
         AudioSys.rockBreak();
       } else {
-        spawnChunks(tree.x, 0.3, tree.z, 0x5c3a1e, 2, 2);
+        spawnChunks(tree.x, chunkY, tree.z, 0x5c3a1e, 2, 2);
       }
     }
 
@@ -3711,8 +3963,8 @@
       tree.stump = false;
       tree.stumpHp = 10;
       if (!tree.group.parent) scene.add(tree.group);
-      tree.group.visible = inLand(tree.x, tree.z, -1.5);
-      tree.group.position.set(tree.x, sampleHeight(tree.x, tree.z), tree.z);
+      tree.group.visible = true;
+      tree.group.position.set(tree.x, groundMinAround(tree.x, tree.z, tree.trunkRadius * 2.2), tree.z);
       tree.group.rotation.set(tree.baseRotX, tree.baseRotY, tree.baseRotZ);
       tree.canopy.scale.set(1, 1, 1);
       tree.canopy.rotation.set(0, 0, 0);
@@ -3729,17 +3981,21 @@
       tree.swayVel = 0;
       tree.leafCooldown = 0;
       tree.canopyFade = 1;
+      tree.canopyTransparent = false;
       for (const mat of tree.leafMats) {
         mat.opacity = 1;
+        mat.transparent = false;
         mat.depthWrite = true;
+        mat.needsUpdate = true;
       }
+      for (const ch of tree.canopy.children) ch.castShadow = true;
     }
 
     function damageZombie(z, amount) {
       if (!z.alive) return;
       z.hp -= amount;
       AudioSys.zombieHit();
-      spawnBlood(z.mesh.position.x, 1.0, z.mesh.position.z, 0, 0, 4);
+      spawnBlood(z.mesh.position.x, z.mesh.position.y + 1.0, z.mesh.position.z, 0, 0, 4);
       z.mesh.scale.setScalar(1.08);
       setTimeout(() => { if (z.mesh) z.mesh.scale.setScalar(1); }, 50);
       if (z.hp <= 0) killZombie(z, true);
@@ -3751,7 +4007,6 @@
         p.age += dt;
         if (p.hit || p.age >= p.life) {
           scene.remove(p.mesh);
-          if (p.ownMat) p.mesh.material.dispose();
           projectiles.splice(i, 1);
           continue;
         }
@@ -3765,9 +4020,13 @@
         let hitZ = null, hitZT = 2;
         for (const z of zombies) {
           if (!z.alive) continue;
+          // Hit volumes are anchored to the entity's own ground height. They used to run
+          // from absolute y=0, so anything standing on the 2.2-unit central hill sat
+          // completely outside its own hitbox and could not be shot.
+          const zy = z.mesh.position.y;
           const t = segmentHitsCylinder(
             p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
-            z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, 0, z.hitH || 1.45
+            z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, zy, zy + (z.hitH || 1.45)
           );
           if (t !== null && t < hitZT) { hitZT = t; hitZ = z; }
         }
@@ -3775,7 +4034,6 @@
           damageZombie(hitZ, p.damage);
           p.hit = true;
           scene.remove(p.mesh);
-          if (p.ownMat) p.mesh.material.dispose();
           projectiles.splice(i, 1);
           continue;
         }
@@ -3784,9 +4042,10 @@
         let hitRock = null, hitRT = 2;
         for (const rock of rocks) {
           if (!rock.alive || !rock.mesh.visible) continue;
+          const ry = rock.mesh.position.y;
           const t = segmentHitsCylinder(
             p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
-            rock.x, rock.z, rock.radius, 0, rock.s * 1.1
+            rock.x, rock.z, rock.radius, ry, ry + rock.height
           );
           if (t !== null && t < hitRT) { hitRT = t; hitRock = rock; }
         }
@@ -3794,7 +4053,6 @@
           damageRock(hitRock, p.damage * 0.5, p.dir.x, p.dir.z);
           p.hit = true;
           scene.remove(p.mesh);
-          if (p.ownMat) p.mesh.material.dispose();
           projectiles.splice(i, 1);
           continue;
         }
@@ -3803,7 +4061,7 @@
         let hitTree = null, hitT = 2, hitY = p.pos.y;
         for (const t of trees) {
           if (t.stump && t.stumpMesh) {
-            const baseY = t.group.position.y;
+            const baseY = t.stumpMesh.position.y;
             const ts = segmentHitsCylinder(
               p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
               t.x, t.z, t.trunkRadius + 0.15, baseY, baseY + 0.55
@@ -3840,14 +4098,20 @@
           damageTree(hitTree, hx, hz, hitY, p.dir.x, p.dir.z);
           p.hit = true;
           scene.remove(p.mesh);
-          if (p.ownMat) p.mesh.material.dispose();
           projectiles.splice(i, 1);
           continue;
         }
 
-        if (Math.hypot(p.pos.x, p.pos.z) > landRadius + 4 || p.pos.y < -1 || p.pos.y > 12) {
+        // Terrain. Bullets used to fly straight through hills.
+        if (p.pos.y <= sampleHeight(p.pos.x, p.pos.z)) {
+          spawnChunks(p.pos.x, p.pos.y + 0.05, p.pos.z, 0x6b6250, 2, 2);
           scene.remove(p.mesh);
-          if (p.ownMat) p.mesh.material.dispose();
+          projectiles.splice(i, 1);
+          continue;
+        }
+
+        if (Math.hypot(p.pos.x, p.pos.z) > TERRAIN_RADIUS || p.pos.y > 20) {
+          scene.remove(p.mesh);
           projectiles.splice(i, 1);
         }
       }
@@ -3862,6 +4126,39 @@
         const minD = b.radius + entR;
         if (dist < minD) {
           const push = (minD - dist) * 0.55 * strength;
+          x += (dx / dist) * push;
+          z += (dz / dist) * push;
+        }
+      }
+      return { x, z };
+    }
+
+    // Pushes a circle out of trunks, stumps and rocks. Shared by the player and the
+    // horde — zombies used to walk straight through every solid prop on the map.
+    function resolveStaticProps(entX, entZ, entR) {
+      let x = entX, z = entZ;
+      for (const t of trees) {
+        const solid = (t.stump && t.stumpMesh) ? t.trunkRadius * 1.15
+          : ((t.alive && !t.falling) ? t.trunkRadius : 0);
+        if (solid <= 0) continue;
+        const minD = solid + entR;
+        const dx = x - t.x, dz = z - t.z;
+        if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+        const dist = Math.hypot(dx, dz) || 0.0001;
+        if (dist < minD) {
+          const push = minD - dist;
+          x += (dx / dist) * push;
+          z += (dz / dist) * push;
+        }
+      }
+      for (const rock of rocks) {
+        if (!rock.alive) continue;
+        const minD = rock.radius + entR;
+        const dx = x - rock.x, dz = z - rock.z;
+        if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+        const dist = Math.hypot(dx, dz) || 0.0001;
+        if (dist < minD) {
+          const push = minD - dist;
           x += (dx / dist) * push;
           z += (dz / dist) * push;
         }
@@ -3887,46 +4184,64 @@
 
     function updateTreeFade(dt) {
       const px = player.position.x, pz = player.position.z;
+      // Direction from the player out to the camera, so we can also clear any canopy
+      // parked between the two — that was the main thing hiding the marine.
+      const sx = camera.position.x - px, sz = camera.position.z - pz;
+      const segLen = Math.hypot(sx, sz) || 1;
+      const ux = sx / segLen, uz = sz / segLen;
       const fadeNear = 2.5;
-      const fadeOpacity = 0.28;
+      const fadeOpacity = 0.22;
       for (const t of trees) {
         if (!t.group.visible || !t.alive || t.falling || t.stump) continue;
-        const dist = Math.hypot(px - t.x, pz - t.z);
+        const dx = t.x - px, dz = t.z - pz;
+        const dist = Math.hypot(dx, dz);
+        let want = 1;
         const reach = t.canopyRadius + fadeNear;
-        if (dist > reach * 2) {
-          if (t.canopyFade < 0.999) {
-            t.canopyFade = Math.min(1, t.canopyFade + dt * 3.5);
-            applyCanopyFade(t);
+        if (dist < reach) want = fadeOpacity + (1 - fadeOpacity) * (dist / reach);
+        if (dist < segLen + t.canopyRadius + 1) {
+          const along = dx * ux + dz * uz;
+          if (along > 0.4 && along < segLen + 1.5) {
+            const perp = Math.abs(dx * uz - dz * ux);
+            const block = t.canopyRadius * 0.95;
+            if (perp < block) {
+              const w = fadeOpacity + (1 - fadeOpacity) * (perp / block);
+              if (w < want) want = w;
+            }
           }
-          continue;
         }
-        const want = dist < reach ? fadeOpacity + (1 - fadeOpacity) * Math.min(1, dist / reach) : 1;
-        // Lerp toward target
-        t.canopyFade += (want - t.canopyFade) * Math.min(1, dt * 8);
+        if (want >= 0.999 && t.canopyFade >= 0.999) continue;
+        t.canopyFade += (want - t.canopyFade) * Math.min(1, dt * 9);
+        if (Math.abs(want - t.canopyFade) < 0.004) t.canopyFade = want;
         applyCanopyFade(t);
       }
     }
 
     function applyCanopyFade(t) {
-      const op = t.canopyFade;
-      const faded = op < 0.98;
+      const faded = t.canopyFade < 0.985;
+      // `transparent` only flips at the boundary: setting needsUpdate every frame (as
+      // this used to) forces three.js to rebuild the shader program each time.
+      const flip = faded !== t.canopyTransparent;
       for (const mat of t.leafMats) {
-        mat.opacity = op;
-        mat.transparent = true;
-        mat.depthWrite = !faded;
-        mat.needsUpdate = true;
+        mat.opacity = faded ? t.canopyFade : 1;
+        if (flip) {
+          mat.transparent = faded;
+          mat.depthWrite = !faded;
+          mat.needsUpdate = true;
+        }
       }
-      // Soften canopy mesh cast when faded
-      t.canopy.traverse((ch) => {
-        if (ch.isMesh) ch.castShadow = !faded || op > 0.7;
-      });
+      if (flip) {
+        t.canopyTransparent = faded;
+        for (const ch of t.canopy.children) ch.castShadow = !faded;
+      }
     }
 
     function resolveTreeCollisions(dt) {
-      const px = player.position.x, pz = player.position.z;
       const py = player.position.y + getStanceEyeY() * 0.75;
       for (const t of trees) {
         if (!t.group.visible) continue;
+        // Read the live position each pass — using a snapshot taken before the loop
+        // meant overlapping props double-counted their pushes.
+        const px = player.position.x, pz = player.position.z;
         if (t.stump && t.stumpMesh) {
           const dx = px - t.x, dz = pz - t.z;
           const dist = Math.hypot(dx, dz) || 0.0001;
@@ -4070,10 +4385,20 @@
         b.mesh.rotation.y = ang;
         if (b.fireCd <= 0) {
           b.fireCd = b.fireInterval;
-          const origin = new THREE.Vector3(b.x, b.mesh.userData.muzzleLocal.y, b.z);
-          origin.x += Math.sin(ang) * (b.type === 'heavy' ? 1.15 : 0.75);
-          origin.z += Math.cos(ang) * (b.type === 'heavy' ? 1.15 : 0.75);
-          const dir = new THREE.Vector3(Math.sin(ang), 0.02, Math.cos(ang));
+          // muzzleLocal.y is turret-local; it needs the build's terrain height added or
+          // turrets on raised ground shoot out of the dirt.
+          const reach = b.type === 'heavy' ? 1.15 : 0.75;
+          const origin = new THREE.Vector3(
+            b.x + Math.sin(ang) * reach,
+            b.mesh.position.y + b.mesh.userData.muzzleLocal.y,
+            b.z + Math.cos(ang) * reach
+          );
+          // Lead the shot at the target's torso so height differences don't matter.
+          const dir = new THREE.Vector3(
+            best.mesh.position.x - origin.x,
+            best.mesh.position.y + (best.hitH || 1.45) * 0.55 - origin.y,
+            best.mesh.position.z - origin.z
+          ).normalize();
           spawnProjectile(true, origin, dir, b.damage, 0.55, b.type === 'heavy' ? 0xff8800 : 0x66ddff);
           const f = b.mesh.userData.flash;
           if (f) { f.material.opacity = 1; b.flashT = 0.06; }
@@ -4106,6 +4431,17 @@
         mx = slid.x; mz = slid.z;
         slid = resolveHardBuildCollisions(mx, mz, z.radius);
         mx = slid.x; mz = slid.z;
+        slid = resolveStaticProps(mx, mz, z.radius);
+        mx = slid.x; mz = slid.z;
+        if (house.active) {
+          const hx = mx - house.group.position.x, hz = mz - house.group.position.z;
+          const hd = Math.hypot(hx, hz) || 0.0001;
+          const hMin = house.radius + z.radius;
+          if (hd < hMin) {
+            mx += (hx / hd) * (hMin - hd);
+            mz += (hz / hd) * (hMin - hd);
+          }
+        }
         for (const b of builds.slice()) {
           if (b.type !== 'barricade') continue;
           const bd = Math.hypot(mx - b.x, mz - b.z);
@@ -4115,8 +4451,8 @@
           }
         }
         const rr = Math.hypot(mx, mz);
-        if (rr > landRadius - 0.4) {
-          const s = (landRadius - 0.4) / rr;
+        if (rr > landRadius - 1.2) {
+          const s = (landRadius - 1.2) / rr;
           mx *= s; mz *= s;
         }
         z.mesh.position.x = mx;
@@ -4152,6 +4488,31 @@
             }
           }
         }
+      }
+      // Keep the horde from collapsing into one overlapping stack.
+      for (let i = 0; i < zombies.length; i++) {
+        const a = zombies[i];
+        if (!a.alive) continue;
+        for (let j = i + 1; j < zombies.length; j++) {
+          const b = zombies[j];
+          if (!b.alive) continue;
+          const dx = b.mesh.position.x - a.mesh.position.x;
+          const dz = b.mesh.position.z - a.mesh.position.z;
+          const minD = a.radius + b.radius;
+          if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+          const dist = Math.hypot(dx, dz) || 0.0001;
+          if (dist >= minD) continue;
+          const push = (minD - dist) * 0.5;
+          const ux = dx / dist, uz = dz / dist;
+          a.mesh.position.x -= ux * push; a.mesh.position.z -= uz * push;
+          b.mesh.position.x += ux * push; b.mesh.position.z += uz * push;
+        }
+      }
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        z.x = z.mesh.position.x;
+        z.z = z.mesh.position.z;
+        z.mesh.position.y = sampleHeight(z.x, z.z);
       }
       updateWaveHud();
     }
@@ -4239,7 +4600,7 @@
       AudioSys.resetBlip();
       for (const b of builds.slice()) removeBuild(b);
       clearZombies();
-      for (const p of projectiles) { scene.remove(p.mesh); if (p.ownMat) p.mesh.material.dispose(); }
+      for (const p of projectiles) scene.remove(p.mesh);
       projectiles.length = 0;
       for (const g of grenadesInFlight) scene.remove(g.mesh);
       grenadesInFlight.length = 0;
@@ -4352,6 +4713,10 @@
       }
 
       updateDayNight(dt);
+      // Shadow frustum rides along with the player.
+      sun.position.copy(player.position).addScaledVector(sunDir, 85);
+      sun.target.position.copy(player.position);
+      sun.target.updateMatrixWorld();
       updateLasers();
       if (knifeCd > 0) knifeCd -= dt;
       if (grenadeCd > 0) grenadeCd -= dt;
@@ -4454,7 +4819,7 @@
         player.position.z = c.z;
       }
       {
-        const groundY = sampleHeight(player.position.x, player.position.z);
+        const groundY = playerGroundY(player.position.x, player.position.z);
         if (!gameStarted) {
           player.position.y = groundY;
         } else if (grounded && vy <= 0) {
@@ -4507,9 +4872,38 @@
         player.position.y + camY + bobY,
         player.position.z - Math.cos(camYaw) * camDistCurrent
       );
-      // Never sink camera under terrain mesh
-      desired.y = Math.max(desired.y, sampleHeight(desired.x, desired.z) + 1.4);
-      camera.position.lerp(desired, 1 - Math.pow(0.002, dt));
+      // Third-person camera collision: walk from the marine's head out to the ideal
+      // camera spot and stop short at the first point where ground would cut across the
+      // view. Previously only the endpoint was height-checked, so any rise between the
+      // two simply swallowed the player.
+      const CAM_CLEAR = 1.1;
+      const headX = player.position.x;
+      const headY = player.position.y + 1.6;
+      const headZ = player.position.z;
+      const CAM_STEPS = 10;
+      let clearT = 1;
+      for (let i = 1; i <= CAM_STEPS; i++) {
+        const t = i / CAM_STEPS;
+        const sx = headX + (desired.x - headX) * t;
+        const sy = headY + (desired.y - headY) * t;
+        const sz = headZ + (desired.z - headZ) * t;
+        if (sy < sampleHeight(sx, sz) + CAM_CLEAR) { clearT = (i - 1) / CAM_STEPS; break; }
+      }
+      if (clearT < 1) {
+        clearT = Math.max(0.2, clearT);
+        desired.set(
+          headX + (desired.x - headX) * clearT,
+          headY + (desired.y - headY) * clearT,
+          headZ + (desired.z - headZ) * clearT
+        );
+      }
+      desired.y = Math.max(desired.y, sampleHeight(desired.x, desired.z) + CAM_CLEAR);
+      camera.position.lerp(desired, 1 - Math.pow(clearT < 1 ? 0.00002 : 0.002, dt));
+      {
+        // Hard floor so the lerp itself can never dip the camera through a hillside.
+        const camFloor = sampleHeight(camera.position.x, camera.position.z) + CAM_CLEAR;
+        if (camera.position.y < camFloor) camera.position.y = camFloor;
+      }
       const lookBlend = 0.35;
       // Look a bit further forward so ground doesn't fill the frame; eye ~1.5
       camLook.set(
@@ -4519,6 +4913,22 @@
       );
       camera.lookAt(camLook);
       renderer.render(scene, camera);
+      if (showPerf && !window.TT) {
+        window.TT = { THREE, scene, renderer, camera, sun, hemi, moon, ground, player, trees, rocks, foliage, zombies, builds, sampleHeight };
+      }
+      if (showPerf) {
+        perfAccum += dt;
+        perfFrames += 1;
+        if (perfAccum >= 0.4) {
+          const info = renderer.info.render;
+          perfEl.textContent =
+            'fps   ' + Math.round(perfFrames / perfAccum) +
+            '\ndraws ' + info.calls +
+            '\ntris  ' + (info.triangles / 1000).toFixed(0) + 'k' +
+            '\nzombs ' + zombies.length;
+          perfAccum = 0; perfFrames = 0;
+        }
+      }
       requestAnimationFrame(tick);
     }
     tick();
