@@ -110,7 +110,7 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="hud">
-    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">PAUSE</span></div>
+    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">RELOAD</span></div>
     <div id="timeLine">Day · 06:00</div>
     <div id="tacticalLine">NVG off · Laser off</div>
     <div id="stats">
@@ -2527,95 +2527,138 @@
       reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
 
       if (currentWeapon === 'minigun') {
-        // Tip barrels up/back, ammo box tilt, settle at end; spin handled by fire system
-        const tip = _pulse(progress, 0.0, 0.22, 0.92);
-        const boxTilt = _pulse(progress, 0.12, 0.4, 0.78);
+        // Tip up → hold mid-reload → ease settle; ammo box open/hold/snap shut; spin-down
+        const tipUp = _seg(progress, 0.0, 0.16);
+        const tipDown = _seg(progress, 0.78, 0.96);
+        const tip = tipUp * (1 - tipDown); // plateau while tipUp=1 and tipDown=0
+        const boxOpen = _seg(progress, 0.10, 0.28);
+        const boxShut = _seg(progress, 0.70, 0.82); // snappy shut
+        const box = boxOpen * (1 - boxShut);
         if (gun.userData.barrelAssembly) {
-          gun.userData.barrelAssembly.rotation.x = -0.42 * tip;
-          gun.userData.barrelAssembly.rotation.y = 0.08 * tip;
+          gun.userData.barrelAssembly.rotation.x = -0.55 * tip;
+          gun.userData.barrelAssembly.rotation.y = 0.1 * tip;
         }
-        gun.rotation.x = -0.18 * tip;
-        gun.position.y = GUN_BASE.minigun.pos.y + 0.04 * tip;
-        gun.position.z = GUN_BASE.minigun.pos.z - 0.05 * tip;
+        gun.rotation.x = -0.26 * tip;
+        gun.position.y = GUN_BASE.minigun.pos.y + 0.055 * tip;
+        gun.position.z = GUN_BASE.minigun.pos.z - 0.07 * tip;
         if (gun.userData.ammoBox && gun.userData.baseAmmoPos) {
-          gun.userData.ammoBox.position.set(
-            gun.userData.baseAmmoPos.x + 0.04 * boxTilt,
-            gun.userData.baseAmmoPos.y - 0.06 * boxTilt,
-            gun.userData.baseAmmoPos.z
+          const ab = gun.userData.ammoBox;
+          ab.visible = true;
+          ab.position.set(
+            gun.userData.baseAmmoPos.x + 0.06 * box,
+            gun.userData.baseAmmoPos.y - 0.09 * box,
+            gun.userData.baseAmmoPos.z + 0.02 * box
           );
-          gun.userData.ammoBox.rotation.z = (gun.userData.baseAmmoRot?.z || 0.12) + 0.55 * boxTilt;
-          gun.userData.ammoBox.rotation.x = 0.35 * boxTilt;
+          ab.rotation.z = (gun.userData.baseAmmoRot?.z || 0.12) + 0.85 * box;
+          ab.rotation.x = 0.5 * box;
         }
-        reloadMountOff.rx = -0.12 * tip;
-        reloadArmOff.x = -0.2 * tip;
+        reloadMountOff.rx = -0.16 * tip;
+        reloadArmOff.x = -0.28 * tip;
         // Force spin-down while reloading
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * 1.4 * dt);
       } else if (currentWeapon === 'm4') {
-        // Classic mag swap: drop → pause → slam; weapon tilt + right arm assist
-        const tilt = _pulse(progress, 0.0, 0.18, 0.95);
-        const drop = _seg(progress, 0.08, 0.38);
-        const holdGone = progress >= 0.38 && progress < 0.52;
-        const slam = _seg(progress, 0.52, 0.82);
-        reloadMountOff.rx = -0.22 * tilt;
-        reloadMountOff.rz = 0.12 * tilt;
-        reloadMountOff.y = -0.03 * tilt;
-        gun.rotation.x = -0.15 * tilt;
-        gun.rotation.z = 0.1 * tilt;
-        reloadArmOff.x = -0.45 * tilt - 0.25 * drop + 0.35 * slam;
-        reloadArmOff.z = -0.2 * tilt;
+        // Mag: drop → gone → slam with overshoot/settle; stronger tilt on drop, settle on slam
+        const tiltUp = _seg(progress, 0.0, 0.12);
+        const tiltDown = _seg(progress, 0.58, 0.88);
+        const tilt = tiltUp * (1 - tiltDown);
+        const drop = _seg(progress, 0.06, 0.32);
+        const holdGone = progress >= 0.32 && progress < 0.48;
+        const slam = _seg(progress, 0.48, 0.70);
+        const settle = _seg(progress, 0.70, 0.86);
+        reloadMountOff.rx = -0.34 * tilt;
+        reloadMountOff.rz = 0.16 * tilt;
+        reloadMountOff.y = -0.045 * tilt;
+        gun.rotation.x = -0.22 * tilt;
+        gun.rotation.z = 0.14 * tilt;
+        // Arm: reach on drop, clear beat on slam, relax on settle
+        reloadArmOff.x = -0.55 * tilt - 0.32 * drop + 0.55 * slam - 0.18 * settle;
+        reloadArmOff.z = -0.28 * tilt;
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
+          const bp = gun.userData.baseMagPos;
           if (holdGone) {
             mag.visible = false;
-            mag.position.set(gun.userData.baseMagPos.x, gun.userData.baseMagPos.y - 0.45, gun.userData.baseMagPos.z + 0.05);
-          } else if (progress < 0.38) {
+            mag.position.set(bp.x, bp.y - 0.5, bp.z + 0.06);
+            mag.rotation.x = 0;
+            mag.rotation.z = 0;
+          } else if (progress < 0.32) {
             mag.visible = true;
             mag.position.set(
-              gun.userData.baseMagPos.x + 0.04 * drop,
-              gun.userData.baseMagPos.y - 0.42 * drop,
-              gun.userData.baseMagPos.z + 0.06 * drop
+              bp.x + 0.05 * drop,
+              bp.y - 0.48 * drop,
+              bp.z + 0.08 * drop
             );
-            mag.rotation.x = 0.5 * drop;
-            mag.rotation.z = 0.35 * drop;
+            mag.rotation.x = 0.65 * drop;
+            mag.rotation.z = 0.4 * drop;
           } else {
-            // Slam new mag up (appear from below)
+            // Slam from below with slight overshoot past seat, then settle
             mag.visible = true;
-            const up = slam;
-            mag.position.set(
-              gun.userData.baseMagPos.x,
-              gun.userData.baseMagPos.y - 0.4 * (1 - up),
-              gun.userData.baseMagPos.z
-            );
-            mag.rotation.x = 0.25 * (1 - up);
+            const over = 0.03;
+            let yOff;
+            if (progress < 0.70) {
+              yOff = -0.45 * (1 - slam) + over * slam; // ends at +over
+            } else {
+              yOff = over * (1 - settle);
+            }
+            mag.position.set(bp.x, bp.y + yOff, bp.z);
+            mag.rotation.x = 0.2 * (1 - Math.max(slam, settle));
             mag.rotation.z = 0;
           }
         }
       } else if (currentWeapon === 'pistol') {
-        // Snappy slide + mag drop/tilt matching ~1.0s reload
-        const tilt = _pulse(progress, 0.0, 0.15, 0.9);
-        const slideBack = _pulse(progress, 0.05, 0.28, 0.72);
-        const magDrop = _pulse(progress, 0.12, 0.35, 0.78);
-        reloadMountOff.rx = -0.28 * tilt;
-        reloadMountOff.rz = 0.08 * tilt;
-        gun.rotation.x = -0.25 * tilt;
-        reloadArmOff.x = -0.35 * tilt;
-        reloadArmOff.y = 0.08 * tilt;
+        // Snappy ~1s: mag drop → gone → insert; slide pull mid, rack snap near end
+        const tiltUp = _seg(progress, 0.0, 0.10);
+        const tiltDown = _seg(progress, 0.72, 0.94);
+        const tilt = tiltUp * (1 - tiltDown);
+        const drop = _seg(progress, 0.05, 0.26);
+        const holdGone = progress >= 0.26 && progress < 0.40;
+        const insert = _seg(progress, 0.40, 0.62);
+        const insertSettle = _seg(progress, 0.62, 0.72);
+        const slidePull = _seg(progress, 0.38, 0.52);
+        const slideRack = _seg(progress, 0.78, 0.90); // snap forward near end
+        const slideAmt = slidePull * (1 - slideRack);
+        reloadMountOff.rx = -0.32 * tilt;
+        reloadMountOff.rz = 0.1 * tilt;
+        gun.rotation.x = -0.3 * tilt;
+        reloadArmOff.x = -0.4 * tilt - 0.15 * drop + 0.28 * insert;
+        reloadArmOff.y = 0.1 * tilt;
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.set(
             gun.userData.baseSlidePos.x,
             gun.userData.baseSlidePos.y,
-            gun.userData.baseSlidePos.z - 0.1 * slideBack
+            gun.userData.baseSlidePos.z - 0.12 * slideAmt
           );
         }
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
-          mag.visible = true;
-          mag.position.set(
-            gun.userData.baseMagPos.x + 0.02 * magDrop,
-            gun.userData.baseMagPos.y - 0.28 * magDrop,
-            gun.userData.baseMagPos.z
-          );
-          mag.rotation.x = 0.55 * magDrop;
+          const bp = gun.userData.baseMagPos;
+          if (holdGone) {
+            mag.visible = false;
+            mag.position.set(bp.x, bp.y - 0.36, bp.z);
+            mag.rotation.x = 0;
+            mag.rotation.z = 0;
+          } else if (progress < 0.26) {
+            mag.visible = true;
+            mag.position.set(
+              bp.x + 0.025 * drop,
+              bp.y - 0.34 * drop,
+              bp.z
+            );
+            mag.rotation.x = 0.7 * drop;
+            mag.rotation.z = 0.2 * drop;
+          } else {
+            mag.visible = true;
+            const over = 0.02;
+            let yOff;
+            if (progress < 0.62) {
+              yOff = -0.34 * (1 - insert) + over * insert;
+            } else {
+              yOff = over * (1 - insertSettle);
+            }
+            mag.position.set(bp.x, bp.y + yOff, bp.z);
+            mag.rotation.x = 0.15 * (1 - Math.max(insert, insertSettle));
+            mag.rotation.z = 0;
+          }
         }
       }
 
