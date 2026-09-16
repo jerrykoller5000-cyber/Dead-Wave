@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">KICK</span></div>
+      <div id="title">Tiny Trek <span class="badge">SNIPER</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -1734,6 +1734,7 @@
       const mesh = new THREE.Mesh(droppedMagGeo, mat);
       mesh.position.copy(_dropMagPos);
       mesh.quaternion.copy(_dropMagQuat);
+      if (currentWeapon === 'sniper') mesh.scale.set(0.95, 1.18, 1.02);
       mesh.castShadow = false;
       scene.add(mesh);
       // Fall mostly down + slight outward tumble in world space
@@ -2576,6 +2577,18 @@
       scope.rotation.x = Math.PI / 2;
       scope.position.set(0, 0.14, 0.05);
       gun.add(scope);
+      // Bolt handle (right-side) — cycles after mag seat on reload
+      const bolt = new THREE.Group();
+      const boltShaft = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.018, 0.09), gunMid);
+      bolt.add(boltShaft);
+      const boltKnob = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.016, 0.016), gunAccent);
+      boltKnob.position.set(0.04, 0.012, 0.02);
+      bolt.add(boltKnob);
+      bolt.position.set(0.055, 0.055, -0.18);
+      gun.add(bolt);
+      gun.userData.bolt = bolt;
+      gun.userData.baseBoltPos = bolt.position.clone();
+      gun.userData.baseBoltRot = bolt.rotation.clone();
       const flash = new THREE.Mesh(new THREE.SphereGeometry(0.055, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
       flash.position.set(0, 0.04, 1.22);
       gun.add(flash);
@@ -3177,7 +3190,9 @@
       if (hip) hip.rotation.x = 0;
 
       // Aim brace: slight extra elbow bend when zoomed
+      // Sniper: light LH forend brace in idle/hold (does not affect pistol)
       const aimBrace = zoomHeld ? 0.12 : 0;
+      const sniperForend = (currentWeapon === 'sniper' && !reloading) ? 0.14 : 0;
 
       if (moving && grounded) {
         const cadence = running ? 16 : 11;
@@ -3189,9 +3204,9 @@
         if (legL) { legL.rotation.x = legBend + swing; legL.rotation.z = 0; }
         if (legR) { legR.rotation.x = legBend - swing; legR.rotation.z = 0; }
         if (armL) {
-          armL.rotation.x = ARM_L_BASE.x - swing * armAmp;
+          armL.rotation.x = ARM_L_BASE.x - swing * armAmp - sniperForend * 0.55;
           armL.rotation.y = ARM_L_BASE.y;
-          armL.rotation.z = ARM_L_BASE.z;
+          armL.rotation.z = ARM_L_BASE.z + sniperForend * 0.2;
         }
         if (armR) {
           armR.rotation.x = ARM_R_BASE.x + swing * armAmp;
@@ -3200,7 +3215,7 @@
         }
         // Elbows bend opposite to shoulder swing (natural gait)
         if (elbowL) {
-          elbowL.rotation.x = ELBOW_L_BASE.x + swing * elbowAmp - aimBrace;
+          elbowL.rotation.x = ELBOW_L_BASE.x + swing * elbowAmp - aimBrace - sniperForend;
           elbowL.rotation.y = ELBOW_L_BASE.y;
           elbowL.rotation.z = ELBOW_L_BASE.z;
         }
@@ -3225,9 +3240,9 @@
           legR.rotation.z *= Math.max(0, 1 - dt * 8);
         }
         if (armL) {
-          armL.rotation.x += (ARM_L_BASE.x - armL.rotation.x) * k;
+          armL.rotation.x += (ARM_L_BASE.x - sniperForend * 0.55 - armL.rotation.x) * k;
           armL.rotation.y = ARM_L_BASE.y;
-          armL.rotation.z = ARM_L_BASE.z;
+          armL.rotation.z = ARM_L_BASE.z + sniperForend * 0.2;
         }
         if (armR) {
           armR.rotation.x += (ARM_R_BASE.x - armR.rotation.x) * k;
@@ -3235,7 +3250,7 @@
           armR.rotation.z = ARM_R_BASE.z;
         }
         if (elbowL) {
-          elbowL.rotation.x += (ELBOW_L_BASE.x - aimBrace - elbowL.rotation.x) * k;
+          elbowL.rotation.x += (ELBOW_L_BASE.x - aimBrace - sniperForend - elbowL.rotation.x) * k;
           elbowL.rotation.y = ELBOW_L_BASE.y;
           elbowL.rotation.z = ELBOW_L_BASE.z;
         }
@@ -3287,8 +3302,10 @@
     weaponMount.add(revolver);
 
     const sniper = makeSniper();
-    sniper.position.set(0.0, 0.0, -0.06);
-    sniper.scale.setScalar(0.9);
+    // Grip mesh at (0,-0.1,-0.12) — lift/forward so palm holds pistol-grip; stock runs aft
+    sniper.position.set(0.0, 0.09, 0.14);
+    sniper.rotation.set(0.0, 0.0, 0.0);
+    sniper.scale.setScalar(0.88);
     sniper.visible = false;
     weaponMount.add(sniper);
 
@@ -3322,7 +3339,7 @@
       uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.35, interval: 1 / 14, damage: 12, spin: false, auto: true },
       shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
       revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
-      sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.2, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
+      sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.35, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
       launcher: { name: 'Launcher', maxAmmo: 6, reload: 2.0, interval: 0.55, damage: 55, spin: false, auto: false, explosive: true },
       chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 1.85 }
     };
@@ -3336,11 +3353,15 @@
     }
 
     // Default mount still matches old chest float for other guns.
-    // Pistol uses a true palm-local mount so it sits in the right hand (not off to the left).
+    // Pistol / sniper use a true palm-local mount so the gun sits in the right hand (not chest-float).
     const WEAPON_MOUNT_BASE = { x: 0.12826, y: 0.15981, z: -0.10022, rx: 1.23359, ry: 0.24103, rz: 0.08361 };
     const PISTOL_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.08, rz: 0.06 };
+    // Same forward-pitch idea as pistol; slightly quieter roll for a longer rifle hold
+    const SNIPER_MOUNT_BASE = { x: 0.0, y: 0.015, z: 0.015, rx: 1.05, ry: 0.05, rz: 0.04 };
     function getWeaponMountBase() {
-      return currentWeapon === 'pistol' ? PISTOL_MOUNT_BASE : WEAPON_MOUNT_BASE;
+      if (currentWeapon === 'pistol') return PISTOL_MOUNT_BASE;
+      if (currentWeapon === 'sniper') return SNIPER_MOUNT_BASE;
+      return WEAPON_MOUNT_BASE;
     }
     const GUN_BASE = {
       minigun: { pos: minigun.position.clone(), rot: minigun.rotation.clone() },
@@ -3388,7 +3409,9 @@
     }
 
     function decayRecoil(dt) {
-      const k = Math.min(1, dt * 14);
+      // Sniper kicks linger longer (heavier rifle); pistol/others snap back faster
+      const rate = currentWeapon === 'sniper' ? 9 : 14;
+      const k = Math.min(1, dt * rate);
       recoilKick.x *= (1 - k);
       recoilKick.y *= (1 - k);
       recoilKick.z *= (1 - k);
@@ -3417,6 +3440,23 @@
       pistolSlideKick = Math.min(0.048, pistolSlideKick + 0.032);
       applyWeaponMountPose();
       applyPistolFireSlide();
+    }
+
+    function kickSniperRecoil() {
+      // Heavier than pistol: bigger muzzle climb, stronger push-back, higher clamp
+      recoilKick.rx += -0.30 - Math.random() * 0.08; // ~-0.30..-0.38
+      recoilKick.rz += (Math.random() - 0.5) * 0.07;
+      recoilKick.ry += (Math.random() - 0.5) * 0.025;
+      recoilKick.z += -0.028 - Math.random() * 0.01;
+      recoilKick.y += -0.012 - Math.random() * 0.006;
+      recoilKick.x += (Math.random() - 0.5) * 0.006;
+      recoilKick.rx = Math.max(-0.55, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.10, Math.min(0.10, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.14, Math.min(0.14, recoilKick.rz));
+      recoilKick.x = Math.max(-0.04, Math.min(0.04, recoilKick.x));
+      recoilKick.y = Math.max(-0.045, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.06, Math.min(0.02, recoilKick.z));
+      applyWeaponMountPose();
     }
 
     function _clamp01(t) { return Math.max(0, Math.min(1, t)); }
@@ -3466,6 +3506,10 @@
         }
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.copy(gun.userData.baseSlidePos);
+        }
+        if (gun.userData.bolt && gun.userData.baseBoltPos) {
+          gun.userData.bolt.position.copy(gun.userData.baseBoltPos);
+          if (gun.userData.baseBoltRot) gun.userData.bolt.rotation.copy(gun.userData.baseBoltRot);
         }
         if (gun.userData.pump && gun.userData.basePumpPos) {
           gun.userData.pump.position.copy(gun.userData.basePumpPos);
@@ -3751,29 +3795,95 @@
           gun.userData.cylinder.rotation.x = progress * Math.PI * 4;
         }
       } else if (currentWeapon === 'sniper') {
-        const tiltUp = _seg(progress, 0.0, 0.12);
-        const tiltDown = _seg(progress, 0.7, 0.92);
-        const tilt = tiltUp * (1 - tiltDown);
-        const drop = _seg(progress, 0.08, 0.3);
-        const holdGone = progress >= 0.3 && progress < 0.48;
-        const slam = _seg(progress, 0.48, 0.72);
-        reloadMountOff.rx = -0.14 * tilt;
-        gun.rotation.x = -0.12 * tilt;
-        reloadArmOff.x = -0.1 * tilt;
-        reloadElbowOffR.x = -0.6 * tilt - 0.35 * drop + 0.5 * slam;
-        reloadElbowOffL.x = -0.22 * tilt;
+        // RH locked (same rule as pistol) — tip-back for magwell only; LH fetch/seat; bolt after seat.
+        const present = _seg(progress, 0.0, 0.16);
+        const recover = _seg(progress, 0.92, 1.0);
+        const tilt = present * (1 - recover);
+
+        const drop = _seg(progress, 0.08, 0.28);
+        const holdGone = progress >= 0.28 && progress < 0.42;
+        const insert = _seg(progress, 0.42, 0.58);
+        const insertSettle = _seg(progress, 0.58, 0.64);
+
+        const fetchDown = _pulse(progress, 0.24, 0.32, 0.40);
+        const fetchUp = _seg(progress, 0.34, 0.44);
+        const slap = _pulse(progress, 0.48, 0.56, 0.64);
+
+        // Bolt cycle after mag seated: lift → pull → push → close
+        const boltLift = _seg(progress, 0.64, 0.72);
+        const boltPull = _seg(progress, 0.70, 0.80);
+        const boltPush = _seg(progress, 0.80, 0.90);
+        const boltClose = _seg(progress, 0.88, 0.96);
+        const boltOpen = boltLift * (1 - boltClose);
+        const boltBack = boltPull * (1 - boltPush);
+        const boltHand = _pulse(progress, 0.62, 0.76, 0.96);
+
+        if (!reloadSlideCuePlayed && progress >= 0.66 && AudioSys.slideRack) {
+          reloadSlideCuePlayed = true;
+          AudioSys.slideRack();
+        }
+        if (!reloadMagDropped && progress >= 0.12) {
+          reloadMagDropped = true;
+          spawnDroppedMag();
+        }
+
+        // Slight tip-back only — zero RH arm/elbow tumble
+        reloadMountOff.rx = -0.20 * tilt;
+        reloadMountOff.rz = 0.04 * tilt;
+        reloadMountOff.y = 0;
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+
+        // Left hand: fetch → seat → assist bolt
+        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.08 * slap - 0.14 * boltHand;
+        reloadArmOffL.y = 0.10 * fetchDown + 0.05 * fetchUp;
+        reloadArmOffL.z = 0.16 * fetchDown + 0.08 * fetchUp + 0.10 * boltHand;
+        reloadElbowOffL.x =
+          -0.80 * fetchDown - 0.50 * fetchUp - 0.90 * slap - 0.55 * boltHand * boltBack;
+        reloadElbowOffL.y = 0.12 * fetchDown + 0.10 * boltHand;
+        reloadElbowOffL.z = 0.08 * fetchUp - 0.10 * slap + 0.08 * boltOpen;
+
+        const base = GUN_BASE.sniper;
+        if (base) {
+          gun.position.copy(base.pos);
+          gun.rotation.copy(base.rot);
+        }
+
+        if (gun.userData.bolt && gun.userData.baseBoltPos) {
+          const bolt = gun.userData.bolt;
+          const bp = gun.userData.baseBoltPos;
+          const br = gun.userData.baseBoltRot || { x: 0, y: 0, z: 0 };
+          bolt.position.set(bp.x, bp.y + 0.01 * boltOpen, bp.z - 0.09 * boltBack);
+          bolt.rotation.set(br.x, br.y, (br.z || 0) + 1.05 * boltOpen);
+        }
+
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
+          const dropY = 0.42;
           if (holdGone) {
             mag.visible = false;
-            mag.position.set(bp.x, bp.y - 0.4, bp.z);
-          } else if (progress < 0.3) {
+            mag.position.set(bp.x, bp.y - dropY, bp.z + 0.04);
+            mag.rotation.x = 0;
+            mag.rotation.z = 0;
+          } else if (progress < 0.28) {
             mag.visible = true;
-            mag.position.set(bp.x, bp.y - 0.4 * drop, bp.z);
+            mag.position.set(
+              bp.x + 0.02 * drop,
+              bp.y - dropY * drop,
+              bp.z + 0.05 * drop
+            );
+            mag.rotation.x = 0.55 * drop;
+            mag.rotation.z = 0.16 * drop;
           } else {
             mag.visible = true;
-            mag.position.set(bp.x, bp.y - 0.4 * (1 - slam), bp.z);
+            const over = 0.024;
+            let yOff;
+            if (progress < 0.58) yOff = -dropY * (1 - insert) + over * insert;
+            else yOff = over * (1 - insertSettle);
+            mag.position.set(bp.x, bp.y + yOff, bp.z);
+            mag.rotation.x = 0.12 * (1 - Math.max(insert, insertSettle));
+            mag.rotation.z = 0;
           }
         }
       } else if (currentWeapon === 'launcher') {
@@ -5061,6 +5171,7 @@
           triggerMuzzleFlash();
           AudioSys.fire();
           if (currentWeapon === 'pistol') kickPistolRecoil();
+          if (currentWeapon === 'sniper') kickSniperRecoil();
           updateAmmoHud();
         }
       }
