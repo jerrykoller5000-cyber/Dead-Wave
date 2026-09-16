@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">KICK2</span></div>
+      <div id="title">Tiny Trek <span class="badge">RACK</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3715,45 +3715,73 @@
       const gun = weaponMeshes.shotgun;
       shotgunPumpT += dt / Math.max(0.05, SHOTGUN_PUMP_DUR);
       const t = shotgunPumpT;
-      // Clear back stroke → hold open → slam forward (more readable)
+      // Back → hold open → slam forward
       let pumpAmt = 0;
-      if (t < 0.32) pumpAmt = _seg(t, 0.02, 0.28);
-      else if (t < 0.52) pumpAmt = 1;
-      else pumpAmt = 1 - _seg(t, 0.52, 0.94);
-      if (gun && gun.userData.pump && gun.userData.basePumpPos && !reloading) {
-        const bp = gun.userData.basePumpPos;
-        gun.userData.pump.position.set(
-          bp.x,
-          bp.y - 0.012 * pumpAmt,
-          bp.z - 0.28 * pumpAmt
-        );
+      if (t < 0.30) pumpAmt = _seg(t, 0.02, 0.26);
+      else if (t < 0.50) pumpAmt = 1;
+      else pumpAmt = 1 - _seg(t, 0.50, 0.94);
+
+      const travel = 0.24; // forend slide distance
+      const base = GUN_BASE.shotgun;
+
+      if (gun && !reloading) {
+        // Pump mesh slides rearward on the tube
+        if (gun.userData.pump && gun.userData.basePumpPos) {
+          const bp = gun.userData.basePumpPos;
+          gun.userData.pump.position.set(bp.x, bp.y, bp.z - travel * pumpAmt);
+        }
+        // Keep RH on the forend: slide the receiver FORWARD through the grip
+        // so the pump stays under the hand (gun is parented to gripR).
+        // Tip LEFT only — never big arm/elbow deltas (those 360 the gripR mount).
+        if (base) {
+          gun.position.set(
+            base.pos.x - 0.01 * pumpAmt,
+            base.pos.y + 0.008 * pumpAmt,
+            base.pos.z + travel * pumpAmt
+          );
+          gun.rotation.set(
+            base.rot.x - 0.04 * pumpAmt,
+            base.rot.y + 0.02 * pumpAmt,
+            base.rot.z + 0.32 * pumpAmt // tilt left while racking
+          );
+        }
+        // RH locked to grip/pump — zero tumble offsets
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+        // LH braces stock lightly (support, not the rack)
+        reloadArmOffL.x = -0.06 * pumpAmt;
+        reloadArmOffL.y = 0.03 * pumpAmt;
+        reloadArmOffL.z = 0.04 * pumpAmt;
+        reloadElbowOffL.x = -0.18 * pumpAmt;
+        reloadElbowOffL.y = 0;
+        reloadElbowOffL.z = 0.05 * pumpAmt;
+        // Mount: tiny left roll only — align skipped while pumping
+        reloadMountOff.rx = -0.03 * pumpAmt;
+        reloadMountOff.ry = 0;
+        reloadMountOff.rz = 0.10 * pumpAmt;
+        reloadMountOff.y = 0.004 * pumpAmt;
       }
-      // LH racks forend; RH locked; slight muzzle tip (offsets applied by applyReloadPose)
-      if (!reloading) {
-        reloadArmOffL.x = -0.18 * pumpAmt;
-        reloadArmOffL.y = 0.05 * pumpAmt;
-        reloadArmOffL.z = 0.10 * pumpAmt;
-        reloadElbowOffL.x = -0.70 * pumpAmt;
-        reloadElbowOffL.y = 0.05 * pumpAmt;
-        reloadElbowOffL.z = 0.18 * pumpAmt;
-        reloadMountOff.rx = -0.14 * pumpAmt;
-        reloadMountOff.y = -0.016 * pumpAmt;
-      }
-      // Eject red spent hull once forend is fully back
-      if (!shotgunPumpEjected && t >= 0.28) {
+
+      if (!shotgunPumpEjected && t >= 0.26) {
         shotgunPumpEjected = true;
         spawnShotgunShell();
       }
       if (t >= 1) {
         shotgunPumping = false;
         shotgunPumpT = 1;
-        if (!reloading) {
+        if (gun && !reloading) {
+          if (base) {
+            gun.position.copy(base.pos);
+            gun.rotation.copy(base.rot);
+          }
+          if (gun.userData.pump && gun.userData.basePumpPos) {
+            gun.userData.pump.position.copy(gun.userData.basePumpPos);
+          }
+          reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
           reloadArmOffL.x = reloadArmOffL.y = reloadArmOffL.z = 0;
+          reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
           reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
           reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
-        }
-        if (gun && gun.userData.pump && gun.userData.basePumpPos && !reloading) {
-          gun.userData.pump.position.copy(gun.userData.basePumpPos);
         }
       }
     }
@@ -5250,7 +5278,7 @@
     let shotgunPumping = false;
     let shotgunPumpT = 0;
     let shotgunPumpEjected = false;
-    const SHOTGUN_PUMP_DUR = 0.50; // readable forend cycle (fire locked while pumping)
+    const SHOTGUN_PUMP_DUR = 0.46; // rack cycle; fire locked while pumping
     let fireHeld = false;
     let fireCooldown = 0;
     let barrelSpin = 0;
@@ -5629,7 +5657,7 @@
     // Orient weaponMount so the active gun muzzle (+Z) points at aimTarget.
     // Called every frame after mount/reload/recoil pose; skipped while reloading / melee / menus.
     function alignWeaponToAim() {
-      if (!gameStarted || gameOver || won || paused || reloading || placeMode || buildMode) return;
+      if (!gameStarted || gameOver || won || paused || reloading || shotgunPumping || placeMode || buildMode) return;
       if (uiBlocksFire()) return;
       const st = WEAPON_STATS[currentWeapon];
       if (!st || st.melee) return; // chainsaw / melee — leave mount alone
