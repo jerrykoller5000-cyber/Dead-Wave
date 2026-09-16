@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">TILT</span></div>
+      <div id="title">Tiny Trek <span class="badge">KICK</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -535,6 +535,15 @@
         playTone({ freq: 1400 + Math.random() * 500, type: 'triangle', dur: 0.025, vol: 0.018 });
         playNoise({ dur: 0.02, vol: 0.012, filterFreq: 3200, filterType: 'bandpass' });
       }
+      let magThudCd = 0;
+      function magThud() {
+        const c = ensure();
+        if (!c || muted) return;
+        if (c.currentTime < magThudCd) return;
+        magThudCd = c.currentTime + 0.18;
+        playTone({ freq: 110 + Math.random() * 40, type: 'sine', dur: 0.05, vol: 0.035, slideTo: 55 });
+        playNoise({ dur: 0.04, vol: 0.02, filterFreq: 420, filterType: 'lowpass' });
+      }
 
       // Doom/metal-ish dark riff + pulse drums
       const RIFF = [
@@ -767,7 +776,7 @@
         jump, nvgClick, coin, leafHit, treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
-        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak, brassTink,
+        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak, brassTink, magThud,
         chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning
       };
     })();
@@ -1684,6 +1693,107 @@
           scene.remove(c.mesh);
           c.mesh.material.dispose();
           casings.splice(i, 1);
+        }
+      }
+    }
+
+    // --- Dropped pistol magazines (reload eject) ---
+    const droppedMags = [];
+    const MAX_DROPPED_MAGS = 12;
+    const droppedMagGeo = new THREE.BoxGeometry(0.055, 0.12, 0.08);
+    const _dropMagPos = new THREE.Vector3();
+    const _dropMagVel = new THREE.Vector3();
+    const _dropMagQuat = new THREE.Quaternion();
+
+    function recycleOldestDroppedMag() {
+      if (!droppedMags.length) return;
+      const old = droppedMags.shift();
+      scene.remove(old.mesh);
+      old.mesh.material.dispose();
+    }
+
+    function clearDroppedMags() {
+      for (const m of droppedMags) {
+        scene.remove(m.mesh);
+        m.mesh.material.dispose();
+      }
+      droppedMags.length = 0;
+    }
+
+    function spawnDroppedMag() {
+      const gun = getActiveGun();
+      if (!gun || !gun.userData.mag) return;
+      if (droppedMags.length >= MAX_DROPPED_MAGS) recycleOldestDroppedMag();
+      gun.updateMatrixWorld(true);
+      gun.userData.mag.updateMatrixWorld(true);
+      gun.userData.mag.getWorldPosition(_dropMagPos);
+      gun.userData.mag.getWorldQuaternion(_dropMagQuat);
+      const mat = gunAccent.clone();
+      mat.transparent = true;
+      mat.opacity = 1;
+      const mesh = new THREE.Mesh(droppedMagGeo, mat);
+      mesh.position.copy(_dropMagPos);
+      mesh.quaternion.copy(_dropMagQuat);
+      mesh.castShadow = false;
+      scene.add(mesh);
+      // Fall mostly down + slight outward tumble in world space
+      _dropMagVel.set(
+        (Math.random() - 0.5) * 0.9,
+        -0.4 - Math.random() * 0.5,
+        (Math.random() - 0.5) * 0.9
+      );
+      droppedMags.push({
+        mesh,
+        vx: _dropMagVel.x,
+        vy: _dropMagVel.y,
+        vz: _dropMagVel.z,
+        ax: (Math.random() - 0.5) * 10,
+        ay: (Math.random() - 0.5) * 8,
+        az: (Math.random() - 0.5) * 10,
+        age: 0,
+        life: 3.2 + Math.random() * 1.2,
+        bounced: false,
+        settled: false
+      });
+    }
+
+    function updateDroppedMags(dt) {
+      for (let i = droppedMags.length - 1; i >= 0; i--) {
+        const m = droppedMags[i];
+        m.age += dt;
+        if (!m.settled) {
+          m.vy -= 16 * dt;
+          m.mesh.position.x += m.vx * dt;
+          m.mesh.position.y += m.vy * dt;
+          m.mesh.position.z += m.vz * dt;
+          m.mesh.rotation.x += m.ax * dt;
+          m.mesh.rotation.y += m.ay * dt;
+          m.mesh.rotation.z += m.az * dt;
+          const gh = sampleHeight(m.mesh.position.x, m.mesh.position.z) + 0.04;
+          if (m.mesh.position.y < gh) {
+            m.mesh.position.y = gh;
+            if (!m.bounced) {
+              m.bounced = true;
+              m.vy = Math.abs(m.vy) * 0.22 + 0.25;
+              m.vx *= 0.45;
+              m.vz *= 0.45;
+              m.ax *= 0.4; m.ay *= 0.4; m.az *= 0.4;
+              if (AudioSys.magThud) AudioSys.magThud();
+            } else {
+              m.settled = true;
+              m.vy = 0; m.vx = 0; m.vz = 0;
+              m.ax = 0; m.ay = 0; m.az = 0;
+            }
+          }
+        }
+        const fadeStart = m.life * 0.6;
+        if (m.age > fadeStart) {
+          m.mesh.material.opacity = Math.max(0, 1 - (m.age - fadeStart) / (m.life - fadeStart));
+        }
+        if (m.age >= m.life) {
+          scene.remove(m.mesh);
+          m.mesh.material.dispose();
+          droppedMags.splice(i, 1);
         }
       }
     }
@@ -3248,6 +3358,66 @@
     let reloadElbowOffR = { x: 0, y: 0, z: 0 };
     let reloadElbowOffL = { x: 0, y: 0, z: 0 };
     let reloadMountOff = { rx: 0, ry: 0, rz: 0, y: 0 };
+    // Pistol-only viewmodel kick (applied on top of mount base + reloadMountOff)
+    let recoilKick = { x: 0, y: 0, z: 0, rx: 0, ry: 0, rz: 0 };
+    let pistolSlideKick = 0;
+
+    function applyWeaponMountPose() {
+      const mb = getWeaponMountBase();
+      weaponMount.position.set(
+        mb.x + recoilKick.x,
+        mb.y + reloadMountOff.y + recoilKick.y,
+        mb.z + recoilKick.z
+      );
+      weaponMount.rotation.set(
+        mb.rx + reloadMountOff.rx + recoilKick.rx,
+        mb.ry + reloadMountOff.ry + recoilKick.ry,
+        mb.rz + reloadMountOff.rz + recoilKick.rz
+      );
+    }
+
+    function applyPistolFireSlide() {
+      if (currentWeapon !== 'pistol' || reloading) return;
+      const gun = pistol;
+      if (!gun || !gun.userData.slide || !gun.userData.baseSlidePos) return;
+      gun.userData.slide.position.set(
+        gun.userData.baseSlidePos.x,
+        gun.userData.baseSlidePos.y,
+        gun.userData.baseSlidePos.z - pistolSlideKick
+      );
+    }
+
+    function decayRecoil(dt) {
+      const k = Math.min(1, dt * 14);
+      recoilKick.x *= (1 - k);
+      recoilKick.y *= (1 - k);
+      recoilKick.z *= (1 - k);
+      recoilKick.rx *= (1 - k);
+      recoilKick.ry *= (1 - k);
+      recoilKick.rz *= (1 - k);
+      pistolSlideKick *= (1 - Math.min(1, dt * 13));
+      if (pistolSlideKick < 1e-4) pistolSlideKick = 0;
+    }
+
+    function kickPistolRecoil() {
+      // Muzzle tips up (negative rx), tiny roll, push back in hand-local -z/-y
+      recoilKick.rx += -0.17 - Math.random() * 0.04; // ~-0.17..-0.21
+      recoilKick.rz += (Math.random() - 0.5) * 0.055;
+      recoilKick.ry += (Math.random() - 0.5) * 0.02;
+      recoilKick.z += -0.015 - Math.random() * 0.006;
+      recoilKick.y += -0.008 - Math.random() * 0.004;
+      recoilKick.x += (Math.random() - 0.5) * 0.004;
+      // Clamp so stacked kicks can't flip the mount
+      recoilKick.rx = Math.max(-0.36, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.08, Math.min(0.08, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.12, Math.min(0.12, recoilKick.rz));
+      recoilKick.x = Math.max(-0.03, Math.min(0.03, recoilKick.x));
+      recoilKick.y = Math.max(-0.035, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.04, Math.min(0.02, recoilKick.z));
+      pistolSlideKick = Math.min(0.048, pistolSlideKick + 0.032);
+      applyWeaponMountPose();
+      applyPistolFireSlide();
+    }
 
     function _clamp01(t) { return Math.max(0, Math.min(1, t)); }
     function _smooth(t) { t = _clamp01(t); return t * t * (3 - 2 * t); }
@@ -3269,9 +3439,7 @@
       reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
       reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
       reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
-      const mb = getWeaponMountBase();
-      weaponMount.position.set(mb.x, mb.y, mb.z);
-      weaponMount.rotation.set(mb.rx, mb.ry, mb.rz);
+      applyWeaponMountPose();
       const elbowL = marine.userData.elbowLG;
       const elbowR = marine.userData.elbowRG;
       if (elbowL) elbowL.rotation.set(ELBOW_L_BASE.x, ELBOW_L_BASE.y, ELBOW_L_BASE.z);
@@ -3309,6 +3477,7 @@
           gun.userData.drum.rotation.copy(gun.userData.baseDrumRot);
         }
       }
+      applyPistolFireSlide();
     }
 
     function updateReloadAnim(dt) {
@@ -3316,20 +3485,11 @@
       const armL = marine.userData.armLG;
       const elbowR = marine.userData.elbowRG;
       const elbowL = marine.userData.elbowLG;
+      decayRecoil(dt);
 
       function applyReloadPose() {
-        // Hand-local base + modest reload tilt (gun follows arm via gripR parent)
-        const mb = getWeaponMountBase();
-        weaponMount.position.set(
-          mb.x,
-          mb.y + reloadMountOff.y,
-          mb.z
-        );
-        weaponMount.rotation.set(
-          mb.rx + reloadMountOff.rx,
-          mb.ry + reloadMountOff.ry,
-          mb.rz + reloadMountOff.rz
-        );
+        // Hand-local base + reload tilt + recoil kick (gun follows arm via gripR parent)
+        applyWeaponMountPose();
         if (armR) {
           armR.rotation.x += reloadArmOff.x;
           armR.rotation.y += reloadArmOff.y;
@@ -3364,7 +3524,10 @@
           Math.abs(reloadArmOff.x) < 1e-4 && Math.abs(reloadMountOff.rx) < 1e-4 &&
           Math.abs(reloadElbowOffR.x) < 1e-4 && Math.abs(reloadElbowOffL.x) < 1e-4;
         if (quiet) resetReloadAnim();
-        else applyReloadPose();
+        else {
+          applyReloadPose();
+          applyPistolFireSlide();
+        }
         return;
       }
 
@@ -3487,6 +3650,11 @@
         if (!reloadSlideCuePlayed && progress >= 0.72 && AudioSys.slideRack) {
           reloadSlideCuePlayed = true;
           AudioSys.slideRack();
+        }
+        // Eject world mag once when drop window begins (~0.12)
+        if (!reloadMagDropped && progress >= 0.12) {
+          reloadMagDropped = true;
+          spawnDroppedMag();
         }
 
         // Slight tip-back only (no big arm/elbow deltas — those caused a full spin on gripR)
@@ -4437,6 +4605,7 @@
     let reloading = false;
     let reloadTimer = 0;
     let reloadSlideCuePlayed = false;
+    let reloadMagDropped = false;
     let fireHeld = false;
     let fireCooldown = 0;
     let barrelSpin = 0;
@@ -4489,6 +4658,7 @@
       reloading = true;
       reloadTimer = st.reload;
       reloadSlideCuePlayed = false;
+      reloadMagDropped = false;
       fireHeld = false;
       updateAmmoHud();
       AudioSys.reloadStart();
@@ -4890,6 +5060,7 @@
           }
           triggerMuzzleFlash();
           AudioSys.fire();
+          if (currentWeapon === 'pistol') kickPistolRecoil();
           updateAmmoHud();
         }
       }
@@ -5819,6 +5990,11 @@
       bloodDecals.length = 0;
       for (const c of casings) { scene.remove(c.mesh); c.mesh.material.dispose(); }
       casings.length = 0;
+      clearDroppedMags();
+      recoilKick.x = recoilKick.y = recoilKick.z = 0;
+      recoilKick.rx = recoilKick.ry = recoilKick.rz = 0;
+      pistolSlideKick = 0;
+      reloadMagDropped = false;
 
       bank = 20;
       expandLevel = 0;
@@ -6021,6 +6197,7 @@
       updateDebris(dt);
       updateBlood(dt);
       updateCasings(dt);
+      updateDroppedMags(dt);
       if (gameStarted) resolveTreeCollisions(dt);
       updateTreeFade(dt);
       updateTreeSway(dt);
