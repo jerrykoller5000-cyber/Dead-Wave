@@ -122,7 +122,7 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="hud">
-    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">SAW</span></div>
+    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">BRASS</span></div>
     <div id="timeLine">Day · 06:00</div>
     <div id="tacticalLine">NVG off · Laser off</div>
     <div id="stats">
@@ -264,6 +264,7 @@
       let emptyClickCd = 0;
       let leafSfxCd = 0;
       let trunkBumpCd = 0;
+      let brassTinkCd = 0;
 
       function ensure() {
         if (ctx) return ctx;
@@ -464,6 +465,14 @@
       function rockBreak() {
         playNoise({ dur: 0.2, vol: 0.16, filterFreq: 500, filterType: 'bandpass' });
         playTone({ freq: 90, type: 'square', dur: 0.12, vol: 0.08, slideTo: 40 });
+      }
+      function brassTink() {
+        const c = ensure();
+        if (!c || muted) return;
+        if (c.currentTime < brassTinkCd) return;
+        brassTinkCd = c.currentTime + 0.07;
+        playTone({ freq: 1400 + Math.random() * 500, type: 'triangle', dur: 0.025, vol: 0.018 });
+        playNoise({ dur: 0.02, vol: 0.012, filterFreq: 3200, filterType: 'bandpass' });
       }
 
       // Doom/metal-ish dark riff + pulse drums
@@ -697,7 +706,7 @@
         jump, nvgClick, coin, leafHit, treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
-        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak,
+        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak, brassTink,
         chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning
       };
     })();
@@ -1505,6 +1514,114 @@
           scene.remove(d.mesh);
           d.mesh.material.dispose();
           bloodDecals.splice(i, 1);
+        }
+      }
+    }
+
+    // --- Ejecting brass casings (firearms) ---
+    const casings = [];
+    const MAX_CASINGS = 100;
+    const casingGeo = new THREE.CylinderGeometry(0.012, 0.013, 0.038, 6);
+    const _casingPos = new THREE.Vector3();
+    const _casingVel = new THREE.Vector3();
+    const _casingQuat = new THREE.Quaternion();
+    const CASING_WEAPONS = {
+      minigun:  { sx: 0.72, sy: 0.72, sz: 0.9,  ox: 0.09, oy: 0.03, oz: 0.12 },
+      m4:       { sx: 1.0,  sy: 1.0,  sz: 1.15, ox: 0.08, oy: 0.04, oz: 0.04 },
+      pistol:   { sx: 0.62, sy: 0.62, sz: 0.72, ox: 0.055, oy: 0.06, oz: 0.02 },
+      shotgun:  { sx: 1.2,  sy: 1.2,  sz: 0.82, ox: 0.09, oy: 0.05, oz: 0.18 },
+      revolver: { sx: 0.68, sy: 0.68, sz: 0.78, ox: 0.055, oy: 0.05, oz: 0.0 },
+      sniper:   { sx: 1.05, sy: 1.05, sz: 1.28, ox: 0.08, oy: 0.05, oz: 0.08 }
+    };
+
+    function recycleOldestCasing() {
+      if (!casings.length) return;
+      const old = casings.shift();
+      scene.remove(old.mesh);
+      old.mesh.material.dispose();
+    }
+
+    function spawnCasing(weaponId) {
+      const cfg = CASING_WEAPONS[weaponId];
+      if (!cfg) return;
+      if (casings.length >= MAX_CASINGS) recycleOldestCasing();
+      const gun = getActiveGun();
+      gun.updateMatrixWorld(true);
+      // Ejection port: right side of receiver (gun +X), mid body — not the muzzle
+      _casingPos.set(cfg.ox, cfg.oy, cfg.oz);
+      gun.localToWorld(_casingPos);
+      const tint = 0xb08a3a + (Math.random() * 0x181008 | 0);
+      const mat = new THREE.MeshStandardMaterial({
+        color: tint, metalness: 0.92, roughness: 0.28, transparent: true, opacity: 1
+      });
+      const mesh = new THREE.Mesh(casingGeo, mat);
+      mesh.position.copy(_casingPos);
+      mesh.scale.set(cfg.sx, cfg.sy, cfg.sz);
+      mesh.castShadow = false;
+      gun.getWorldQuaternion(_casingQuat);
+      mesh.quaternion.copy(_casingQuat);
+      mesh.rotateZ(Math.PI * 0.5);
+      mesh.rotateX((Math.random() - 0.5) * 1.2);
+      scene.add(mesh);
+      // Right + up + slight back in gun local, then to world
+      _casingVel.set(
+        2.2 + Math.random() * 1.8,
+        1.8 + Math.random() * 1.6,
+        -0.6 - Math.random() * 1.0
+      );
+      _casingVel.applyQuaternion(_casingQuat);
+      casings.push({
+        mesh,
+        vx: _casingVel.x,
+        vy: _casingVel.y,
+        vz: _casingVel.z,
+        ax: (Math.random() - 0.5) * 18,
+        ay: (Math.random() - 0.5) * 22,
+        az: (Math.random() - 0.5) * 18,
+        age: 0,
+        life: 1.6 + Math.random() * 0.9,
+        bounced: false,
+        settled: false
+      });
+    }
+
+    function updateCasings(dt) {
+      for (let i = casings.length - 1; i >= 0; i--) {
+        const c = casings[i];
+        c.age += dt;
+        if (!c.settled) {
+          c.vy -= 16 * dt;
+          c.mesh.position.x += c.vx * dt;
+          c.mesh.position.y += c.vy * dt;
+          c.mesh.position.z += c.vz * dt;
+          c.mesh.rotation.x += c.ax * dt;
+          c.mesh.rotation.y += c.ay * dt;
+          c.mesh.rotation.z += c.az * dt;
+          const gh = sampleHeight(c.mesh.position.x, c.mesh.position.z) + 0.02;
+          if (c.mesh.position.y < gh) {
+            c.mesh.position.y = gh;
+            if (!c.bounced) {
+              c.bounced = true;
+              c.vy = Math.abs(c.vy) * 0.28 + 0.4;
+              c.vx *= 0.55;
+              c.vz *= 0.55;
+              c.ax *= 0.5; c.ay *= 0.5; c.az *= 0.5;
+              if (AudioSys.brassTink) AudioSys.brassTink();
+            } else {
+              c.settled = true;
+              c.vy = 0; c.vx = 0; c.vz = 0;
+              c.ax = 0; c.ay = 0; c.az = 0;
+            }
+          }
+        }
+        const fadeStart = c.life * 0.55;
+        if (c.age > fadeStart) {
+          c.mesh.material.opacity = Math.max(0, 1 - (c.age - fadeStart) / (c.life - fadeStart));
+        }
+        if (c.age >= c.life) {
+          scene.remove(c.mesh);
+          c.mesh.material.dispose();
+          casings.splice(i, 1);
         }
       }
     }
@@ -4454,6 +4571,7 @@
           fireCooldown += st.interval;
           ammoByWeapon.minigun -= 1;
           spawnProjectile(false, null, null, st.damage, 0.45);
+          spawnCasing('minigun');
           triggerMuzzleFlash();
           AudioSys.fire();
           updateAmmoHud();
@@ -4480,8 +4598,10 @@
             for (let i = 0; i < n; i++) {
               spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, 0.35);
             }
+            spawnCasing(currentWeapon); // one brass per shotgun pull, not per pellet
           } else {
             spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, st.name === 'Sniper' ? 0.7 : 0.5);
+            spawnCasing(currentWeapon);
           }
           triggerMuzzleFlash();
           AudioSys.fire();
@@ -5412,6 +5532,8 @@
       bloodParticles.length = 0;
       for (const b of bloodDecals) { scene.remove(b.mesh); b.mesh.material.dispose(); }
       bloodDecals.length = 0;
+      for (const c of casings) { scene.remove(c.mesh); c.mesh.material.dispose(); }
+      casings.length = 0;
 
       bank = 20;
       expandLevel = 0;
@@ -5613,6 +5735,7 @@
       updateGrenades(dt);
       updateDebris(dt);
       updateBlood(dt);
+      updateCasings(dt);
       if (gameStarted) resolveTreeCollisions(dt);
       updateTreeFade(dt);
       updateTreeSway(dt);
