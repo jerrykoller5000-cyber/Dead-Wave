@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">AIM</span></div>
+      <div id="title">Tiny Trek <span class="badge">TILT</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3465,44 +3465,36 @@
           }
         }
       } else if (currentWeapon === 'pistol') {
-        // Real-life empty reload (RH grip stays on gun / gripR):
-        // present magwell → eject → LH fetch → seat → rack slide → recover
+        // RH stays in idle grip pose — gun parented to gripR must NOT tumble.
+        // Only a slight muzzle-up tip for magwell access; LH does mag + slide work.
         const present = _seg(progress, 0.0, 0.18);
         const recover = _seg(progress, 0.90, 1.0);
         const tilt = present * (1 - recover);
 
-        // Mag: eject 0.10–0.32, clear/gone ~0.30–0.42, insert+seat 0.42–0.68, settle→0.74
         const drop = _seg(progress, 0.10, 0.32);
         const holdGone = progress >= 0.30 && progress < 0.42;
         const insert = _seg(progress, 0.42, 0.68);
         const insertSettle = _seg(progress, 0.68, 0.74);
 
-        // LH: fetch pouch → guide to well → slap seat → overhand rack (post-seat)
-        const fetchDown = _pulse(progress, 0.28, 0.36, 0.44); // reach chest pouch
-        const fetchUp = _seg(progress, 0.38, 0.48);           // bring mag up to well
-        const slap = _pulse(progress, 0.55, 0.64, 0.72);      // palm-heel seat
+        const fetchDown = _pulse(progress, 0.28, 0.36, 0.44);
+        const fetchUp = _seg(progress, 0.38, 0.48);
+        const slap = _pulse(progress, 0.55, 0.64, 0.72);
         const rackPull = _seg(progress, 0.72, 0.88);
         const rackFwd = _seg(progress, 0.88, 0.96);
         const slideAmt = rackPull * (1 - rackFwd);
-        const rackHand = _pulse(progress, 0.70, 0.80, 0.96);  // LH over slide
+        const rackHand = _pulse(progress, 0.70, 0.80, 0.96);
 
         if (!reloadSlideCuePlayed && progress >= 0.72 && AudioSys.slideRack) {
           reloadSlideCuePlayed = true;
           AudioSys.slideRack();
         }
 
-        // Modest hand-local mount tilt only (magwell to support / slight muzzle-up).
-        // Drive presentation with R shoulder/elbow — gun stays parented to gripR.
-        reloadMountOff.rx = -0.12 * tilt;   // slight muzzle-up
-        reloadMountOff.rz = 0.10 * tilt;    // roll magwell toward LH
-        reloadMountOff.y = -0.012 * tilt;   // tuck slightly in
-
-        // Right hand: hold pistol through the motion (bring-in, not fighting the mag)
-        reloadArmOff.x = -0.16 * tilt;      // shoulder assists pull-in
-        reloadArmOff.z = -0.06 * tilt;
-        reloadElbowOffR.x = -0.72 * tilt - 0.12 * drop;
-        reloadElbowOffR.y = 0.10 * tilt;
-        reloadElbowOffR.z = -0.08 * tilt;
+        // Slight tip-back only (no big arm/elbow deltas — those caused a full spin on gripR)
+        reloadMountOff.rx = -0.22 * tilt;  // muzzle tips up a little
+        reloadMountOff.rz = 0.05 * tilt;   // tiny magwell roll toward LH
+        reloadMountOff.y = 0;
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
 
         // Left hand: grab → guide → slap → rack
         reloadArmOffL.x = -0.22 * fetchDown - 0.12 * fetchUp - 0.08 * slap - 0.18 * rackHand;
@@ -3513,7 +3505,6 @@
         reloadElbowOffL.y = 0.14 * fetchDown + 0.08 * rackHand;
         reloadElbowOffL.z = 0.10 * fetchUp - 0.12 * slap;
 
-        // Keep mesh local pose — orientation comes from gripR / mount, not floating gun.rot
         const base = GUN_BASE.pistol;
         if (base) {
           gun.position.copy(base.pos);
@@ -3537,7 +3528,6 @@
             mag.rotation.x = 0;
             mag.rotation.z = 0;
           } else if (progress < 0.30) {
-            // Eject: gravity-ish fall + tiny rearward kick
             mag.visible = true;
             mag.position.set(
               bp.x + 0.02 * drop,
@@ -3547,7 +3537,6 @@
             mag.rotation.x = 0.65 * drop;
             mag.rotation.z = 0.18 * drop;
           } else {
-            // Fresh mag rises into well; short overshoot slam then settle
             mag.visible = true;
             const over = 0.022;
             let yOff;
