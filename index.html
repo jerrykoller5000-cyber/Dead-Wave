@@ -164,7 +164,7 @@
   <div id="nvgOverlay"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">HAND</span></div>
+      <div id="title">Tiny Trek <span class="badge">AIM</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3153,7 +3153,7 @@
     const pistol = makePistol();
     // Grip mesh sits at (0,-0.08,-0.02) in gun space — lift so palm holds the grip
     pistol.position.set(0.0, 0.07, 0.03);
-    pistol.rotation.set(0.05, 0.0, 0.0);
+    pistol.rotation.set(0.0, 0.0, 0.0);
     pistol.scale.setScalar(1.05);
     pistol.visible = false;
     weaponMount.add(pistol);
@@ -3228,7 +3228,7 @@
     // Default mount still matches old chest float for other guns.
     // Pistol uses a true palm-local mount so it sits in the right hand (not off to the left).
     const WEAPON_MOUNT_BASE = { x: 0.12826, y: 0.15981, z: -0.10022, rx: 1.23359, ry: 0.24103, rz: 0.08361 };
-    const PISTOL_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: -0.35, ry: 0.12, rz: 0.08 };
+    const PISTOL_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.08, rz: 0.06 };
     function getWeaponMountBase() {
       return currentWeapon === 'pistol' ? PISTOL_MOUNT_BASE : WEAPON_MOUNT_BASE;
     }
