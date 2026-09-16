@@ -8,9 +8,24 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1020; font-family: system-ui, sans-serif; user-select: none; -webkit-user-select: none; }
     canvas { display: block; }
+    /* Gameplay hides OS cursor; menus/buttons keep pointer via their own rules */
+    body.playing, body.playing canvas, body.playing #hud { cursor: none; }
     #hud {
       position: fixed; inset: 0; pointer-events: none;
       color: #f4f7ff; text-shadow: 0 1px 3px rgba(0,0,0,.55);
+    }
+    #reticle {
+      position: fixed; left: 0; top: 0; width: 16px; height: 16px;
+      margin-left: -8px; margin-top: -8px;
+      pointer-events: none; z-index: 4; display: none;
+      /* soft white/cyan cross + center dot with dark outline */
+      background:
+        radial-gradient(circle at center, rgba(180,240,255,0.95) 0 1.6px, transparent 1.8px),
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/16px 2px no-repeat,
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/2px 16px no-repeat,
+        linear-gradient(rgba(200,240,255,0.92), rgba(200,240,255,0.92)) center/14px 1.5px no-repeat,
+        linear-gradient(rgba(200,240,255,0.92), rgba(200,240,255,0.92)) center/1.5px 14px no-repeat;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.85));
     }
     .glass {
       background: rgba(8,12,24,.58); border: 1px solid rgba(255,255,255,.14);
@@ -162,9 +177,10 @@
 </head>
 <body>
   <div id="nvgOverlay"></div>
+  <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">SNIPER</span></div>
+      <div id="title">Tiny Trek <span class="badge">CARBINE</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3190,9 +3206,13 @@
       if (hip) hip.rotation.x = 0;
 
       // Aim brace: slight extra elbow bend when zoomed
-      // Sniper: light LH forend brace in idle/hold (does not affect pistol)
+      // Sniper / M4: light LH forend brace in idle/hold (does not affect pistol/uzi)
       const aimBrace = zoomHeld ? 0.12 : 0;
-      const sniperForend = (currentWeapon === 'sniper' && !reloading) ? 0.14 : 0;
+      const sniperForend = (
+        (currentWeapon === 'sniper' && !reloading) ? 0.14 :
+        (currentWeapon === 'm4' && !reloading) ? 0.12 :
+        0
+      );
 
       if (moving && grounded) {
         const cadence = running ? 16 : 11;
@@ -3270,7 +3290,9 @@
     weaponMount.add(minigun);
 
     const m4 = makeM4();
-    m4.position.set(0.0, 0.0, -0.02);
+    // Grip mesh at (0,-0.12,-0.08) — lift/forward so palm holds pistol-grip; stock runs aft
+    m4.position.set(0.0, 0.10, 0.08);
+    m4.rotation.set(0.0, 0.0, 0.0);
     m4.scale.setScalar(0.92);
     m4.visible = false;
     weaponMount.add(m4);
@@ -3284,7 +3306,9 @@
     weaponMount.add(pistol);
 
     const uzi = makeUzi();
-    uzi.position.set(0.01, -0.01, -0.04);
+    // Grip mesh at (0,-0.1,-0.02) — lift so palm holds grip; long stick mag hangs down
+    uzi.position.set(0.0, 0.08, 0.03);
+    uzi.rotation.set(0.0, 0.0, 0.0);
     uzi.scale.setScalar(1.0);
     uzi.visible = false;
     weaponMount.add(uzi);
@@ -3334,9 +3358,9 @@
 
     const WEAPON_STATS = {
       minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
-      m4: { name: 'M4', maxAmmo: 30, reload: 1.4, interval: 0.1, damage: 16, spin: false, auto: true },
+      m4: { name: 'M4', maxAmmo: 30, reload: 1.55, interval: 0.1, damage: 16, spin: false, auto: true },
       pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.35, interval: 0.28, damage: 18, spin: false, auto: true },
-      uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.35, interval: 1 / 14, damage: 12, spin: false, auto: true },
+      uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.4, interval: 1 / 14, damage: 12, spin: false, auto: true },
       shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
       revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
       sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.35, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
@@ -3358,9 +3382,15 @@
     const PISTOL_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.08, rz: 0.06 };
     // Same forward-pitch idea as pistol; slightly quieter roll for a longer rifle hold
     const SNIPER_MOUNT_BASE = { x: 0.0, y: 0.015, z: 0.015, rx: 1.05, ry: 0.05, rz: 0.04 };
+    // Compact SMG in hand — pistol-like palm mount
+    const UZI_MOUNT_BASE = { x: 0.0, y: 0.02, z: 0.02, rx: 1.05, ry: 0.075, rz: 0.055 };
+    // Rifle-ish but shorter than sniper — between pistol and sniper
+    const M4_MOUNT_BASE = { x: 0.0, y: 0.017, z: 0.017, rx: 1.05, ry: 0.06, rz: 0.05 };
     function getWeaponMountBase() {
       if (currentWeapon === 'pistol') return PISTOL_MOUNT_BASE;
       if (currentWeapon === 'sniper') return SNIPER_MOUNT_BASE;
+      if (currentWeapon === 'uzi') return UZI_MOUNT_BASE;
+      if (currentWeapon === 'm4') return M4_MOUNT_BASE;
       return WEAPON_MOUNT_BASE;
     }
     const GUN_BASE = {
@@ -3409,8 +3439,12 @@
     }
 
     function decayRecoil(dt) {
-      // Sniper kicks linger longer (heavier rifle); pistol/others snap back faster
-      const rate = currentWeapon === 'sniper' ? 9 : 14;
+      // Sniper lingers; M4 medium; Uzi chatters back fast; pistol/others snap
+      const rate =
+        currentWeapon === 'sniper' ? 9 :
+        currentWeapon === 'm4' ? 12 :
+        currentWeapon === 'uzi' ? 16 :
+        14;
       const k = Math.min(1, dt * rate);
       recoilKick.x *= (1 - k);
       recoilKick.y *= (1 - k);
@@ -3456,6 +3490,41 @@
       recoilKick.x = Math.max(-0.04, Math.min(0.04, recoilKick.x));
       recoilKick.y = Math.max(-0.045, Math.min(0.02, recoilKick.y));
       recoilKick.z = Math.max(-0.06, Math.min(0.02, recoilKick.z));
+      applyWeaponMountPose();
+    }
+
+    function kickUziRecoil() {
+      // SMG chatter: smaller per-shot than pistol, stacks a bit; very slight cyclic climb
+      recoilKick.rx += -0.095 - Math.random() * 0.03; // ~-0.095..-0.125
+      recoilKick.rx += -0.012; // light cyclic climb while auto
+      recoilKick.rz += (Math.random() - 0.5) * 0.045;
+      recoilKick.ry += (Math.random() - 0.5) * 0.018;
+      recoilKick.z += -0.010 - Math.random() * 0.004;
+      recoilKick.y += -0.005 - Math.random() * 0.003;
+      recoilKick.x += (Math.random() - 0.5) * 0.0035;
+      recoilKick.rx = Math.max(-0.42, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.08, Math.min(0.08, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.11, Math.min(0.11, recoilKick.rz));
+      recoilKick.x = Math.max(-0.028, Math.min(0.028, recoilKick.x));
+      recoilKick.y = Math.max(-0.032, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.036, Math.min(0.02, recoilKick.z));
+      applyWeaponMountPose();
+    }
+
+    function kickM4Recoil() {
+      // Medium kick — between pistol and sniper
+      recoilKick.rx += -0.22 - Math.random() * 0.05; // ~-0.22..-0.27
+      recoilKick.rz += (Math.random() - 0.5) * 0.06;
+      recoilKick.ry += (Math.random() - 0.5) * 0.022;
+      recoilKick.z += -0.020 - Math.random() * 0.008;
+      recoilKick.y += -0.010 - Math.random() * 0.005;
+      recoilKick.x += (Math.random() - 0.5) * 0.005;
+      recoilKick.rx = Math.max(-0.46, Math.min(0.05, recoilKick.rx));
+      recoilKick.ry = Math.max(-0.09, Math.min(0.09, recoilKick.ry));
+      recoilKick.rz = Math.max(-0.13, Math.min(0.13, recoilKick.rz));
+      recoilKick.x = Math.max(-0.035, Math.min(0.035, recoilKick.x));
+      recoilKick.y = Math.max(-0.040, Math.min(0.02, recoilKick.y));
+      recoilKick.z = Math.max(-0.050, Math.min(0.02, recoilKick.z));
       applyWeaponMountPose();
     }
 
@@ -3616,58 +3685,140 @@
         reloadElbowOffR.x = -0.55 * tip - 0.25 * box;
         reloadElbowOffL.x = -0.2 * tip;
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * 1.4 * dt);
-      } else if (currentWeapon === 'm4' || currentWeapon === 'uzi') {
-        // Mag drop → gone → slam; snappier stages for uzi
-        const snappy = currentWeapon === 'uzi';
-        const tDropEnd = snappy ? 0.28 : 0.32;
-        const tGoneEnd = snappy ? 0.42 : 0.48;
-        const tSlamEnd = snappy ? 0.66 : 0.70;
-        const tSettleEnd = snappy ? 0.82 : 0.86;
-        const tiltUp = _seg(progress, 0.0, snappy ? 0.10 : 0.12);
-        const tiltDown = _seg(progress, snappy ? 0.55 : 0.58, snappy ? 0.86 : 0.88);
-        const tilt = tiltUp * (1 - tiltDown);
-        const drop = _seg(progress, 0.05, tDropEnd);
-        const holdGone = progress >= tDropEnd && progress < tGoneEnd;
-        const slam = _seg(progress, tGoneEnd, tSlamEnd);
-        const settle = _seg(progress, tSlamEnd, tSettleEnd);
-        reloadMountOff.rx = -0.18 * tilt;
-        reloadMountOff.rz = 0.08 * tilt;
-        reloadMountOff.y = -0.025 * tilt;
-        gun.rotation.x = -0.12 * tilt;
-        gun.rotation.z = 0.08 * tilt;
-        // Shoulder assists lightly; elbows do the mag grab / slam
-        reloadArmOff.x = -0.14 * tilt;
-        reloadArmOff.z = -0.08 * tilt;
-        reloadElbowOffR.x = -0.7 * tilt - 0.45 * drop + 0.65 * slam - 0.15 * settle;
-        reloadElbowOffR.z = -0.12 * tilt;
-        reloadElbowOffL.x = -0.25 * tilt - 0.15 * drop + 0.2 * slam;
-        reloadArmOffL.x = -0.08 * tilt;
+      } else if (currentWeapon === 'uzi') {
+        // RH locked (pistol playbook) — tip-back only; LH fetch/seat; snappy SMG timing
+        const present = _seg(progress, 0.0, 0.14);
+        const recover = _seg(progress, 0.88, 1.0);
+        const tilt = present * (1 - recover);
+
+        const drop = _seg(progress, 0.08, 0.28);
+        const holdGone = progress >= 0.28 && progress < 0.40;
+        const insert = _seg(progress, 0.40, 0.62);
+        const insertSettle = _seg(progress, 0.62, 0.70);
+
+        const fetchDown = _pulse(progress, 0.24, 0.32, 0.40);
+        const fetchUp = _seg(progress, 0.34, 0.44);
+        const slap = _pulse(progress, 0.52, 0.60, 0.70);
+
+        if (!reloadMagDropped && progress >= 0.12) {
+          reloadMagDropped = true;
+          spawnDroppedMag();
+        }
+
+        reloadMountOff.rx = -0.20 * tilt;
+        reloadMountOff.rz = 0.05 * tilt;
+        reloadMountOff.y = 0;
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+
+        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.10 * slap;
+        reloadArmOffL.y = 0.11 * fetchDown + 0.05 * fetchUp;
+        reloadArmOffL.z = 0.16 * fetchDown + 0.08 * fetchUp;
+        reloadElbowOffL.x = -0.82 * fetchDown - 0.52 * fetchUp - 0.95 * slap;
+        reloadElbowOffL.y = 0.12 * fetchDown;
+        reloadElbowOffL.z = 0.08 * fetchUp - 0.12 * slap;
+
+        const base = GUN_BASE.uzi;
+        if (base) {
+          gun.position.copy(base.pos);
+          gun.rotation.copy(base.rot);
+        }
+
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
-          const dropY = snappy ? 0.42 : 0.48;
+          const dropY = 0.42;
           if (holdGone) {
             mag.visible = false;
             mag.position.set(bp.x, bp.y - dropY, bp.z + 0.05);
             mag.rotation.x = 0;
             mag.rotation.z = 0;
-          } else if (progress < tDropEnd) {
+          } else if (progress < 0.28) {
             mag.visible = true;
             mag.position.set(
-              bp.x + 0.04 * drop,
+              bp.x + 0.03 * drop,
               bp.y - dropY * drop,
-              bp.z + 0.06 * drop
+              bp.z + 0.05 * drop
             );
             mag.rotation.x = 0.55 * drop;
-            mag.rotation.z = 0.32 * drop;
+            mag.rotation.z = 0.28 * drop;
           } else {
             mag.visible = true;
-            const over = snappy ? 0.025 : 0.03;
+            const over = 0.024;
             let yOff;
-            if (progress < tSlamEnd) yOff = -dropY * (1 - slam) + over * slam;
-            else yOff = over * (1 - settle);
+            if (progress < 0.62) yOff = -dropY * (1 - insert) + over * insert;
+            else yOff = over * (1 - insertSettle);
             mag.position.set(bp.x, bp.y + yOff, bp.z);
-            mag.rotation.x = 0.15 * (1 - Math.max(slam, settle));
+            mag.rotation.x = 0.12 * (1 - Math.max(insert, insertSettle));
+            mag.rotation.z = 0;
+          }
+        }
+      } else if (currentWeapon === 'm4') {
+        // RH locked — tip-back for magwell; LH fetch/seat slam; closed-bolt (no bolt cycle)
+        const present = _seg(progress, 0.0, 0.15);
+        const recover = _seg(progress, 0.90, 1.0);
+        const tilt = present * (1 - recover);
+
+        const drop = _seg(progress, 0.08, 0.28);
+        const holdGone = progress >= 0.28 && progress < 0.42;
+        const insert = _seg(progress, 0.42, 0.64);
+        const insertSettle = _seg(progress, 0.64, 0.74);
+
+        const fetchDown = _pulse(progress, 0.24, 0.32, 0.40);
+        const fetchUp = _seg(progress, 0.34, 0.44);
+        const slap = _pulse(progress, 0.50, 0.60, 0.72);
+
+        if (!reloadMagDropped && progress >= 0.12) {
+          reloadMagDropped = true;
+          spawnDroppedMag();
+        }
+
+        reloadMountOff.rx = -0.20 * tilt;
+        reloadMountOff.rz = 0.04 * tilt;
+        reloadMountOff.y = 0;
+        reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+        reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+
+        // Left hand: fetch → seat slam
+        reloadArmOffL.x = -0.20 * fetchDown - 0.10 * fetchUp - 0.12 * slap;
+        reloadArmOffL.y = 0.10 * fetchDown + 0.05 * fetchUp;
+        reloadArmOffL.z = 0.16 * fetchDown + 0.08 * fetchUp;
+        reloadElbowOffL.x = -0.80 * fetchDown - 0.50 * fetchUp - 1.05 * slap;
+        reloadElbowOffL.y = 0.12 * fetchDown;
+        reloadElbowOffL.z = 0.08 * fetchUp - 0.14 * slap;
+
+        const base = GUN_BASE.m4;
+        if (base) {
+          gun.position.copy(base.pos);
+          gun.rotation.copy(base.rot);
+        }
+
+        if (gun.userData.mag && gun.userData.baseMagPos) {
+          const mag = gun.userData.mag;
+          const bp = gun.userData.baseMagPos;
+          const dropY = 0.46;
+          if (holdGone) {
+            mag.visible = false;
+            mag.position.set(bp.x, bp.y - dropY, bp.z + 0.05);
+            mag.rotation.x = 0;
+            mag.rotation.z = 0;
+          } else if (progress < 0.28) {
+            mag.visible = true;
+            mag.position.set(
+              bp.x + 0.03 * drop,
+              bp.y - dropY * drop,
+              bp.z + 0.05 * drop
+            );
+            mag.rotation.x = 0.55 * drop;
+            mag.rotation.z = 0.22 * drop;
+          } else {
+            mag.visible = true;
+            const over = 0.028;
+            let yOff;
+            if (progress < 0.64) yOff = -dropY * (1 - insert) + over * insert;
+            else yOff = over * (1 - insertSettle);
+            mag.position.set(bp.x, bp.y + yOff, bp.z);
+            mag.rotation.x = 0.12 * (1 - Math.max(insert, insertSettle));
             mag.rotation.z = 0;
           }
         }
@@ -4649,6 +4800,7 @@
       winTitleEl.textContent = victory ? 'You did it!' : 'Game over';
       winMsgEl.textContent = msg || (victory ? 'Nice work.' : 'Try again?');
       winEl.classList.add('show');
+      syncReticleVisibility();
       if (victory) AudioSys.win();
       else AudioSys.gameOver();
     }
@@ -4805,12 +4957,35 @@
       return current + Math.sign(diff) * step;
     }
 
+    const reticleEl = document.getElementById('reticle');
+
+    function updateReticleFromEvent(e) {
+      if (!reticleEl) return;
+      reticleEl.style.left = e.clientX + 'px';
+      reticleEl.style.top = e.clientY + 'px';
+    }
+
+    function syncReticleVisibility() {
+      const menuUp =
+        modeSelectEl.classList.contains('show') ||
+        winEl.classList.contains('show') ||
+        pauseEl.classList.contains('show') ||
+        paused;
+      const playing = gameStarted && !gameOver && !won && !menuUp;
+      document.body.classList.toggle('playing', playing);
+      if (reticleEl) {
+        reticleEl.style.display = (playing && pointerOnCanvas) ? 'block' : 'none';
+      }
+    }
+
     function updatePointerFromEvent(e) {
       const rect = renderer.domElement.getBoundingClientRect();
       if (rect.width <= 0 || rect.height <= 0) return;
       aimPointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       aimPointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       pointerOnCanvas = true;
+      updateReticleFromEvent(e);
+      syncReticleVisibility();
     }
 
     function raycastTerrain(ray, out) {
@@ -4880,6 +5055,12 @@
       pointerOnCanvas = false;
       mouseFireHeld = false;
       zoomHeld = false;
+      syncReticleVisibility();
+    });
+    addEventListener('pointermove', (e) => {
+      updateReticleFromEvent(e);
+      // Keep reticle following even if aim ray only updates on canvas
+      if (pointerOnCanvas) syncReticleVisibility();
     });
 
     renderer.domElement.addEventListener('mousedown', (e) => {
@@ -5172,6 +5353,8 @@
           AudioSys.fire();
           if (currentWeapon === 'pistol') kickPistolRecoil();
           if (currentWeapon === 'sniper') kickSniperRecoil();
+          if (currentWeapon === 'uzi') kickUziRecoil();
+          if (currentWeapon === 'm4') kickM4Recoil();
           updateAmmoHud();
         }
       }
@@ -6020,6 +6203,7 @@
         if (!gameStarted || gameOver || won) return;
         paused = true;
         pauseEl.classList.add('show');
+        syncReticleVisibility();
         showPauseTips(false);
         mouseFireHeld = false;
         zoomHeld = false;
@@ -6030,6 +6214,7 @@
       } else {
         paused = false;
         pauseEl.classList.remove('show');
+        syncReticleVisibility();
         showPauseTips(false);
       }
     }
@@ -6054,6 +6239,7 @@
       setPaused(false);
       modeSelectEl.classList.remove('show');
       winEl.classList.remove('show');
+      syncReticleVisibility();
       house.active = (mode === 'defend');
       house.group.visible = house.active;
       house.hp = house.maxHp;
@@ -6152,6 +6338,7 @@
       paused = false;
       pauseEl.classList.remove('show');
       gameStarted = false; gameMode = null;
+      syncReticleVisibility();
       phase = 'idle'; day = 0;
       house.active = false; house.group.visible = false; house.hp = house.maxHp;
       player.position.set(0, sampleHeight(0, 0), 0);
@@ -6274,6 +6461,7 @@
         }
         updateReloadAnim(dt);
         tryFire(dt);
+        syncReticleVisibility();
         updateGhostPreview();
         updateWaveSystem(dt);
         updateTurrets(dt);
