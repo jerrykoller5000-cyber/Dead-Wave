@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">WHEEL</span></div>
+      <div id="title">Tiny Trek <span class="badge">AIM</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -5043,6 +5043,16 @@
     const tracerMat = new THREE.MeshBasicMaterial({ color: 0xffe08a });
     const muzzleWorld = new THREE.Vector3();
     const muzzleDir = new THREE.Vector3();
+    // Aim-align scratch (reused; no per-frame alloc)
+    const _alignCurDir = new THREE.Vector3();
+    const _alignDesired = new THREE.Vector3();
+    const _alignMuzzle = new THREE.Vector3();
+    const _alignDeltaQ = new THREE.Quaternion();
+    const _alignWorldQ = new THREE.Quaternion();
+    const _alignParentQ = new THREE.Quaternion();
+    const _alignLocalQ = new THREE.Quaternion();
+    const _laserOrigin = new THREE.Vector3();
+    const _laserDir = new THREE.Vector3();
 
     function updateAmmoHud() {
       const st = WEAPON_STATS[currentWeapon];
@@ -5281,8 +5291,13 @@
     }
 
     function getAimDir() {
-      muzzleDir.set(Math.sin(aimYaw), 0, Math.cos(aimYaw)).normalize();
-      return muzzleDir;
+      // 3D aim: muzzle → reticle terrain hit (aimTarget). Fallback horizontal yaw.
+      const m = getMuzzleWorld();
+      muzzleDir.subVectors(aimTarget, m);
+      if (muzzleDir.lengthSq() < 1e-6) {
+        muzzleDir.set(Math.sin(aimYaw), 0, Math.cos(aimYaw));
+      }
+      return muzzleDir.normalize();
     }
 
     // Tracer materials are cached per colour; turret shots used to allocate and dispose
@@ -5322,17 +5337,19 @@
       if (light) light.intensity = 2.8;
     }
 
-    // How far the aim ray travels before the ground gets in the way.
-    function aimRangeToTerrain(maxLen) {
-      const originY = player.position.y + 1.0;
-      const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+    // Cast from muzzle along a 3D aim dir; trim where the ray dips under terrain.
+    function aimRangeToTerrain(maxLen, origin, dir) {
+      const o = origin || _laserOrigin.copy(getMuzzleWorld());
+      const d = dir || _laserDir.copy(getAimDir());
       const step = 0.75;
-      for (let d = step; d <= maxLen; d += step) {
-        const sx = player.position.x + fx * d;
-        const sz = player.position.z + fz * d;
-        if (originY < sampleHeight(sx, sz)) return Math.max(0.6, d - step);
+      const lim = Math.max(0.6, maxLen);
+      for (let t = step; t <= lim; t += step) {
+        const sx = o.x + d.x * t;
+        const sy = o.y + d.y * t;
+        const sz = o.z + d.z * t;
+        if (sy < sampleHeight(sx, sz)) return Math.max(0.6, t - step);
       }
-      return maxLen;
+      return lim;
     }
 
     function updateLasers() {
@@ -5344,12 +5361,68 @@
         const on = lasersEnabled && gun.visible && gameStarted && !placeMode;
         laser.material.opacity = on ? 0.55 : 0;
         if (!on) continue;
-        // Trim the beam at the first hill instead of letting it spear through terrain.
+        // Beam length: muzzle → aimTarget (reticle), clamp to laserLen; terrain trim along that ray.
+        // Gun is aim-aligned so child laser along +Z already points at the hit.
         const full = gun.userData.laserLen;
-        const len = Math.min(full, aimRangeToTerrain(full));
+        gun.updateMatrixWorld(true);
+        _laserOrigin.copy(gun.userData.muzzleLocal);
+        gun.localToWorld(_laserOrigin);
+        _laserDir.subVectors(aimTarget, _laserOrigin);
+        const distSq = _laserDir.lengthSq();
+        let len;
+        if (distSq < 1e-8) {
+          len = Math.min(full, aimRangeToTerrain(full, _laserOrigin, getAimDir()));
+        } else {
+          const dist = Math.sqrt(distSq);
+          _laserDir.multiplyScalar(1 / dist);
+          len = Math.min(full, dist, aimRangeToTerrain(Math.min(full, dist), _laserOrigin, _laserDir));
+        }
+        len = Math.max(0.05, len);
         laser.scale.y = len / full;
         laser.position.z = gun.userData.laserBaseZ + len * 0.5;
       }
+    }
+
+    // Orient weaponMount so the active gun muzzle (+Z) points at aimTarget.
+    // Called every frame after mount/reload/recoil pose; skipped while reloading / melee / menus.
+    function alignWeaponToAim() {
+      if (!gameStarted || gameOver || won || paused || reloading || placeMode || buildMode) return;
+      if (uiBlocksFire()) return;
+      const st = WEAPON_STATS[currentWeapon];
+      if (!st || st.melee) return; // chainsaw / melee — leave mount alone
+      const gun = getActiveGun();
+      if (!gun || !gun.visible) return;
+
+      weaponMount.updateMatrixWorld(true);
+      gun.updateMatrixWorld(true);
+
+      gun.getWorldDirection(_alignCurDir);
+      _alignMuzzle.copy(gun.userData.muzzleLocal);
+      gun.localToWorld(_alignMuzzle);
+
+      _alignDesired.subVectors(aimTarget, _alignMuzzle);
+      if (_alignDesired.lengthSq() < 1e-6) return;
+      _alignDesired.normalize();
+
+      // setFromUnitVectors is unstable for near-opposite vectors
+      if (_alignCurDir.dot(_alignDesired) < -0.999) return;
+
+      _alignDeltaQ.setFromUnitVectors(_alignCurDir, _alignDesired);
+
+      weaponMount.getWorldQuaternion(_alignWorldQ);
+      _alignWorldQ.premultiply(_alignDeltaQ); // worldQ = delta * worldQ
+
+      const parent = weaponMount.parent;
+      if (parent) {
+        parent.updateMatrixWorld(true);
+        parent.getWorldQuaternion(_alignParentQ);
+        _alignLocalQ.copy(_alignParentQ).invert().multiply(_alignWorldQ);
+      } else {
+        _alignLocalQ.copy(_alignWorldQ);
+      }
+      weaponMount.quaternion.copy(_alignLocalQ);
+      weaponMount.rotation.setFromQuaternion(_alignLocalQ);
+      weaponMount.updateMatrixWorld(true);
     }
 
     function aimDirWithSpread(spread) {
@@ -6584,7 +6657,6 @@
       sun.position.copy(player.position).addScaledVector(sunDir, 85);
       sun.target.position.copy(player.position);
       sun.target.updateMatrixWorld();
-      updateLasers();
       if (knifeCd > 0) knifeCd -= dt;
       if (grenadeCd > 0) grenadeCd -= dt;
 
@@ -6646,7 +6718,11 @@
           }
         }
         updateReloadAnim(dt);
+        alignWeaponToAim();
         tryFire(dt);
+        // Recoil kicks re-apply mount euler; re-align so muzzle stays on reticle
+        alignWeaponToAim();
+        updateLasers();
         syncReticleVisibility();
         updateGhostPreview();
         updateWaveSystem(dt);
@@ -6660,6 +6736,8 @@
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
         updateMarinePose(dt, false, false);
         updateReloadAnim(dt);
+        alignWeaponToAim();
+        updateLasers();
       }
 
       barrelSpin += barrelSpinVel * dt;
