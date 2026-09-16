@@ -41,12 +41,6 @@
       max-width: 42vw;
     }
     #ammo.empty { color: #ff8a7a; }
-    #hint {
-      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
-      background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
-      padding: 10px 16px; border-radius: 999px; font-size: 11px; white-space: nowrap;
-      max-width: 92vw; overflow: hidden; text-overflow: ellipsis;
-    }
     #modeSelect, #win, #pause {
       display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
       background: rgba(6,10,22,.72); pointer-events: auto; z-index: 5;
@@ -57,6 +51,24 @@
       padding: 28px 32px; border-radius: 16px; text-align: center; max-width: 420px;
       box-shadow: 0 20px 60px rgba(0,0,0,.45);
     }
+    #pause .card { max-width: 460px; width: min(460px, 92vw); }
+    #pause .card.tips-open { max-width: 520px; }
+    #pause button.secondary { background: #7cdea0; }
+    #pauseTipsView { display: none; text-align: left; }
+    #pauseTipsView.on { display: block; }
+    #pauseMainView.hide { display: none; }
+    #pauseTipsView h3 {
+      font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+      opacity: 0.7; margin: 14px 0 6px; font-weight: 700;
+    }
+    #pauseTipsView h3:first-child { margin-top: 0; }
+    #pauseTipsScroll {
+      max-height: min(52vh, 360px); overflow-y: auto; padding-right: 6px;
+      font-size: 13px; line-height: 1.45; opacity: 0.92;
+    }
+    #pauseTipsScroll ul { margin: 0 0 2px 18px; padding: 0; }
+    #pauseTipsScroll li { margin: 2px 0; }
+    #pauseTipsView .modes { margin-top: 14px; }
     #modeSelect h2, #win h2, #pause h2 { font-size: 28px; margin-bottom: 8px; }
     #modeSelect p, #win p, #pause p { opacity: .85; margin-bottom: 14px; line-height: 1.4; }
     #modeSelect .modes, #pause .modes { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
@@ -110,7 +122,7 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="hud">
-    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">ARMS</span></div>
+    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">SAW</span></div>
     <div id="timeLine">Day · 06:00</div>
     <div id="tacticalLine">NVG off · Laser off</div>
     <div id="stats">
@@ -122,8 +134,7 @@
       <div class="label">Marine HP</div>
       <div id="hpBarBg"><div id="hpBarFill"></div></div>
     </div>
-    <div id="ammo">Minigun · Ammo 300/300 · Grena 3 · Scroll/Q/E · B build · R · M</div>
-    <div id="hint">WASD · Mouse aim · Shift run · RMB zoom · LMB fire · Space · Esc · N NVG · Z laser · Scroll/Q/E weapons · B build · 1/2/3 buildable · 4 expand · G/F · R · M · Shotgun/Rev/Sniper/GL/Saw</div>
+    <div id="ammo">Minigun · Ammo 300/300 · Grena 3</div>
     <div id="placeBanner"></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
@@ -144,12 +155,53 @@
       </div>
     </div>
     <div id="pause">
-      <div class="card">
-        <h2>Paused</h2>
-        <p>Game frozen. Resume or quit back to the mode menu.</p>
-        <div class="modes">
-          <button id="resumeBtn" type="button">Resume</button>
-          <button id="quitMenuBtn" class="danger" type="button">Quit to menu</button>
+      <div class="card" id="pauseCard">
+        <div id="pauseMainView">
+          <h2>Paused</h2>
+          <p>Game frozen. Resume, check tips, or quit back to the mode menu.</p>
+          <div class="modes">
+            <button id="resumeBtn" type="button">Resume</button>
+            <button id="tipsBtn" class="secondary" type="button">Tips</button>
+            <button id="quitMenuBtn" class="danger" type="button">Quit to menu</button>
+          </div>
+        </div>
+        <div id="pauseTipsView">
+          <h2>Tips</h2>
+          <div id="pauseTipsScroll">
+            <h3>Movement</h3>
+            <ul>
+              <li>WASD / arrows — move</li>
+              <li>Shift — run</li>
+              <li>Space — jump</li>
+              <li>Mouse — aim · RMB — zoom</li>
+            </ul>
+            <h3>Combat</h3>
+            <ul>
+              <li>LMB — fire / hold chainsaw</li>
+              <li>G — grenade · F — knife</li>
+              <li>R — reload</li>
+            </ul>
+            <h3>Weapons</h3>
+            <ul>
+              <li>Scroll / Q / E — cycle weapons</li>
+              <li>Minigun, M4, Pistol, Shotgun, Revolver, Sniper, Launcher, Chainsaw</li>
+            </ul>
+            <h3>Build</h3>
+            <ul>
+              <li>B — enter / exit build mode</li>
+              <li>Scroll — cycle buildable · 1 barricade · 2 light · 3 heavy</li>
+              <li>4 — expand land (costs coins) · LMB place · Esc exit build</li>
+            </ul>
+            <h3>Misc</h3>
+            <ul>
+              <li>Esc — pause / resume</li>
+              <li>N — night vision · Z — laser sight</li>
+              <li>M — mute</li>
+            </ul>
+          </div>
+          <div class="modes">
+            <button id="tipsBackBtn" type="button">Back</button>
+          </div>
         </div>
       </div>
     </div>
@@ -181,10 +233,14 @@
     const pauseEl = document.getElementById('pause');
     const resumeBtn = document.getElementById('resumeBtn');
     const quitMenuBtn = document.getElementById('quitMenuBtn');
+    const tipsBtn = document.getElementById('tipsBtn');
+    const tipsBackBtn = document.getElementById('tipsBackBtn');
+    const pauseCard = document.getElementById('pauseCard');
+    const pauseMainView = document.getElementById('pauseMainView');
+    const pauseTipsView = document.getElementById('pauseTipsView');
     const placeBannerEl = document.getElementById('placeBanner');
     const modeHuntBtn = document.getElementById('modeHunt');
     const modeDefendBtn = document.getElementById('modeDefend');
-    const hintEl = document.getElementById('hint');
     const perfEl = document.getElementById('perf');
 
     // Add ?debug=1 to the URL for a live FPS / draw-call readout.
@@ -237,7 +293,7 @@
       function setMuted(m) {
         muted = !!m;
         applyMuteGains();
-        if (muted) stopMusic();
+        if (muted) { stopMusic(); chainsawStop(); }
         else if (unlocked) startMusic();
       }
 
@@ -538,11 +594,102 @@
         else if (!spinningUp && lastSpinWasUp) { lastSpinWasUp = false; spinDown(); }
       }
 
-      function chainsawBuzz() {
-        playNoise({ dur: 0.09, vol: 0.11, filterFreq: 900, filterType: 'bandpass' });
-        playTone({ freq: 95, type: 'sawtooth', dur: 0.08, vol: 0.07, slideTo: 70 });
-        playTone({ freq: 140, type: 'square', dur: 0.05, vol: 0.04 });
+      // Continuous chainsaw idle/rev loop (sustained oscillators; stop cleanly)
+      let sawLoop = null; // { osc, osc2, noise, filt, gain, rev }
+      let sawGritCd = 0;
+
+      function chainsawStop() {
+        if (!sawLoop) return;
+        const nodes = sawLoop;
+        sawLoop = null;
+        const c = ctx;
+        if (c) {
+          const t = c.currentTime;
+          try {
+            nodes.gain.gain.cancelScheduledValues(t);
+            nodes.gain.gain.setTargetAtTime(0.0001, t, 0.04);
+          } catch (_) {}
+          const stopAt = t + 0.12;
+          try { nodes.osc.stop(stopAt); } catch (_) {}
+          try { nodes.osc2.stop(stopAt); } catch (_) {}
+          try { nodes.noise.stop(stopAt); } catch (_) {}
+          setTimeout(() => {
+            for (const n of [nodes.osc, nodes.osc2, nodes.noise, nodes.filt, nodes.gain]) {
+              try { n.disconnect(); } catch (_) {}
+            }
+          }, 180);
+        } else {
+          for (const n of [nodes.osc, nodes.osc2, nodes.noise, nodes.filt, nodes.gain]) {
+            try { n.stop && n.stop(); } catch (_) {}
+            try { n.disconnect(); } catch (_) {}
+          }
+        }
       }
+
+      function chainsawStart() {
+        const c = ensure();
+        if (!c || muted) return;
+        if (c.state === 'suspended') c.resume().catch(() => {});
+        if (sawLoop) return;
+        const t0 = c.currentTime;
+        const osc = c.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(72, t0);
+        const osc2 = c.createOscillator();
+        osc2.type = 'square';
+        osc2.frequency.setValueAtTime(36, t0);
+        const buf = noiseBuffer(2.0);
+        const noise = c.createBufferSource();
+        if (buf) {
+          noise.buffer = buf;
+          noise.loop = true;
+        }
+        const filt = c.createBiquadFilter();
+        filt.type = 'bandpass';
+        filt.frequency.setValueAtTime(700, t0);
+        filt.Q.value = 0.9;
+        const gain = c.createGain();
+        gain.gain.setValueAtTime(0.0001, t0);
+        gain.gain.exponentialRampToValueAtTime(0.045, t0 + 0.06);
+        osc.connect(filt);
+        osc2.connect(filt);
+        if (buf) noise.connect(filt);
+        filt.connect(gain);
+        gain.connect(sfxGain);
+        osc.start(t0);
+        osc2.start(t0);
+        if (buf) noise.start(t0);
+        sawLoop = { osc, osc2, noise, filt, gain, rev: 0 };
+      }
+
+      function chainsawSetRev(amount) {
+        amount = Math.max(0, Math.min(1, +amount || 0));
+        if (!sawLoop || !ctx) return;
+        const t = ctx.currentTime;
+        sawLoop.rev = amount;
+        const freq = 68 + amount * 58;
+        const freq2 = 34 + amount * 28;
+        const vol = 0.032 + amount * 0.1;
+        const filtF = 550 + amount * 950;
+        try {
+          sawLoop.osc.frequency.setTargetAtTime(freq, t, 0.07);
+          sawLoop.osc2.frequency.setTargetAtTime(freq2, t, 0.07);
+          sawLoop.filt.frequency.setTargetAtTime(filtF, t, 0.09);
+          sawLoop.gain.gain.cancelScheduledValues(t);
+          sawLoop.gain.gain.setTargetAtTime(muted ? 0.0001 : vol, t, 0.06);
+        } catch (_) {}
+      }
+
+      function chainsawGrit() {
+        const c = ensure();
+        if (!c || muted) return;
+        if (c.currentTime < sawGritCd) return;
+        sawGritCd = c.currentTime + 0.09;
+        playNoise({ dur: 0.07, vol: 0.13, filterFreq: 650, filterType: 'bandpass' });
+        playTone({ freq: 85, type: 'sawtooth', dur: 0.05, vol: 0.07, slideTo: 48 });
+      }
+
+      function isChainsawRunning() { return !!sawLoop; }
 
       return {
         unlock, toggleMute, isMuted, setMuted,
@@ -551,7 +698,7 @@
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
         waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak,
-        chainsawBuzz
+        chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning
       };
     })();
 
@@ -2142,35 +2289,92 @@
 
     function makeChainsaw() {
       const gun = new THREE.Group();
-      const body = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.16, 0.32), gunMetal);
-      body.position.set(0, 0.02, -0.05);
+      // Engine body (thicker) with cooling slots + side panel
+      const bodyMat = gunMetal.clone();
+      bodyMat.emissive = new THREE.Color(0xff6611);
+      bodyMat.emissiveIntensity = 0;
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.2, 0.38), bodyMat);
+      body.position.set(0, 0.04, -0.08);
       body.castShadow = true;
       gun.add(body);
-      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.14, 0.08), gunDark);
-      handle.position.set(0, -0.1, -0.12);
-      handle.rotation.x = 0.2;
-      gun.add(handle);
-      const topHandle = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.018, 6, 12, Math.PI), gunDark);
-      topHandle.rotation.z = Math.PI / 2;
-      topHandle.position.set(0, 0.14, -0.02);
-      gun.add(topHandle);
-      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.08, 0.55), gunMid);
-      bar.position.set(0, 0.02, 0.38);
-      gun.add(bar);
-      const blade = new THREE.Group();
-      blade.position.set(0, 0.02, 0.38);
-      for (let i = 0; i < 8; i++) {
-        const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.025, 0.04), bladeMat);
-        tooth.position.set(0, Math.sin(i / 8 * Math.PI * 2) * 0.05, -0.22 + i * 0.06);
-        blade.add(tooth);
+      const sidePanel = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.16, 0.28), gunMid);
+      sidePanel.position.set(0.14, 0.04, -0.08);
+      gun.add(sidePanel);
+      for (let i = 0; i < 4; i++) {
+        const slot = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.012, 0.028), gunDark);
+        slot.position.set(0, 0.12 - i * 0.035, -0.22);
+        gun.add(slot);
       }
-      gun.add(blade);
-      gun.userData.bladeSpin = blade;
+      // Rear handle / grip
+      const rearHandle = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.18, 0.1), gunDark);
+      rearHandle.position.set(0, -0.1, -0.18);
+      rearHandle.rotation.x = 0.28;
+      gun.add(rearHandle);
+      // Front wrap-around handle
+      const frontBar = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.03, 0.03), gunDark);
+      frontBar.position.set(0, 0.18, 0.02);
+      gun.add(frontBar);
+      const frontPostL = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.12, 0.03), gunDark);
+      frontPostL.position.set(-0.1, 0.12, 0.02);
+      gun.add(frontPostL);
+      const frontPostR = frontPostL.clone();
+      frontPostR.position.x = 0.1;
+      gun.add(frontPostR);
+      // Throttle trigger + pull-cord knob
+      const trigger = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.05, 0.045), gunAccent);
+      trigger.position.set(0.02, -0.02, -0.1);
+      gun.add(trigger);
+      const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.06, 6), gunDark);
+      cord.rotation.z = Math.PI / 2;
+      cord.position.set(-0.14, 0.02, -0.22);
+      gun.add(cord);
+      const knob = new THREE.Mesh(new THREE.SphereGeometry(0.028, 8, 8), gunMid);
+      knob.position.set(-0.18, 0.02, -0.22);
+      gun.add(knob);
+      // Guide bar
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.1, 0.72), gunMid);
+      bar.position.set(0, 0.04, 0.42);
+      bar.castShadow = true;
+      gun.add(bar);
+      const barTip = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.08, 0.06), gunDark);
+      barTip.position.set(0, 0.04, 0.78);
+      gun.add(barTip);
+      // Chain teeth as looping strip along bar edge
+      const chainGroup = new THREE.Group();
+      chainGroup.position.set(0, 0.04, 0.42);
+      const toothCount = 22;
+      const halfZ = 0.34;
+      const halfY = 0.055;
+      for (let i = 0; i < toothCount; i++) {
+        const u = i / toothCount;
+        const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.022, 0.032), bladeMat);
+        // Perimeter: top -> tip -> bottom -> rear
+        let y, z;
+        if (u < 0.4) {
+          const t = u / 0.4;
+          y = halfY; z = -halfZ + t * (halfZ * 2);
+        } else if (u < 0.5) {
+          const t = (u - 0.4) / 0.1;
+          y = halfY - t * (halfY * 2); z = halfZ;
+        } else if (u < 0.9) {
+          const t = (u - 0.5) / 0.4;
+          y = -halfY; z = halfZ - t * (halfZ * 2);
+        } else {
+          const t = (u - 0.9) / 0.1;
+          y = -halfY + t * (halfY * 2); z = -halfZ;
+        }
+        tooth.position.set(0, y, z);
+        chainGroup.add(tooth);
+      }
+      gun.add(chainGroup);
+      gun.userData.bladeSpin = chainGroup;
+      gun.userData.chainGroup = chainGroup;
+      gun.userData.heatMat = bodyMat;
       gun.userData.flash = null;
       gun.userData.flashLight = null;
       gun.userData.laser = null;
       gun.userData.barrelAssembly = null;
-      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.02, 0.65);
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.04, 0.82);
       return gun;
     }
 
@@ -2679,8 +2883,8 @@
     weaponMount.add(launcher);
 
     const chainsaw = makeChainsaw();
-    chainsaw.position.set(0.0, -0.04, -0.02);
-    chainsaw.scale.setScalar(1.0);
+    chainsaw.position.set(0.0, -0.05, -0.04);
+    chainsaw.scale.setScalar(1.18);
     chainsaw.visible = false;
     weaponMount.add(chainsaw);
 
@@ -2693,6 +2897,7 @@
     const WEAPON_ORDER = ['minigun', 'm4', 'pistol', 'shotgun', 'revolver', 'sniper', 'launcher', 'chainsaw'];
     let weaponIndex = 0;
     let currentWeapon = 'minigun';
+    let sawHudRunning = false;
 
     const WEAPON_STATS = {
       minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
@@ -3042,6 +3247,10 @@
       resetReloadAnim();
       fireCooldown = 0;
       prevMouseFireHeld = false;
+      AudioSys.chainsawStop();
+      const saw = weaponMeshes.chainsaw;
+      if (saw && saw.userData.heatMat) saw.userData.heatMat.emissiveIntensity = 0;
+      sawHudRunning = false;
       updateAmmoHud();
     }
 
@@ -3259,7 +3468,7 @@
       if (mode) {
         const names = { barricade: 'Barricade', light: 'Light turret', heavy: 'Heavy turret' };
         const cost = COST[mode];
-        placeBannerEl.textContent = 'Build: ' + names[mode] + ' (' + cost + '¢) · Scroll cycle · B/Esc exit · LMB place';
+        placeBannerEl.textContent = 'Build: ' + names[mode] + ' (' + cost + '¢)';
         placeBannerEl.classList.add('on');
       } else {
         placeBannerEl.classList.remove('on');
@@ -3763,6 +3972,7 @@
       won = victory;
       setPaused(false);
       stopFiring();
+      AudioSys.chainsawStop();
       cancelPlaceMode();
       winTitleEl.textContent = victory ? 'You did it!' : 'Game over';
       winMsgEl.textContent = msg || (victory ? 'Nice work.' : 'Try again?');
@@ -3859,13 +4069,12 @@
         ammoEl.textContent = st.name + ' · Reloading… · Grena ' + grenades;
       } else if (st.melee) {
         ammoEl.classList.remove('empty');
-        ammoEl.innerHTML = st.name + ' · Ammo <span id="ammoCount">∞</span>/CHAINSW · Grena ' + grenades +
-          ' · Hold LMB · Scroll/Q/E · B build · G · F · M';
+        const running = AudioSys.isChainsawRunning && AudioSys.isChainsawRunning();
+        ammoEl.textContent = st.name + (running ? ' · Running' : '') + ' · Grena ' + grenades;
       } else {
         const maxLabel = Number.isFinite(st.maxAmmo) ? st.maxAmmo : '∞';
         const ammoLabel = Number.isFinite(ammo) ? ammo : '∞';
-        ammoEl.innerHTML = st.name + ' · Ammo <span id="ammoCount">' + ammoLabel + '</span>/' + maxLabel +
-          ' · Grena ' + grenades + ' · LMB fire · Scroll/Q/E · B build · G · F · R · M';
+        ammoEl.textContent = st.name + ' · Ammo ' + ammoLabel + '/' + maxLabel + ' · Grena ' + grenades;
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
@@ -3884,7 +4093,13 @@
       AudioSys.reloadStart();
     }
 
-    function stopFiring() { fireHeld = false; }
+    function stopFiring() {
+      fireHeld = false;
+      AudioSys.chainsawStop();
+      const saw = weaponMeshes.chainsaw;
+      if (saw && saw.userData.heatMat) saw.userData.heatMat.emissiveIntensity = 0;
+      if (sawHudRunning) { sawHudRunning = false; updateAmmoHud(); }
+    }
 
     // --- Mouse aim (ray vs terrain height) + LMB fire ---
     const aimRaycaster = new THREE.Raycaster();
@@ -4145,11 +4360,11 @@
 
     function chainsawTick() {
       const gun = getActiveGun();
-      if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += 1.2;
-      AudioSys.chainsawBuzz();
+      if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += 1.85;
       const st = WEAPON_STATS.chainsaw;
       const reach = st.reach || 1.85;
       const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+      let hitSomething = false;
       for (const z of zombies) {
         if (!z.alive) continue;
         const dx = z.mesh.position.x - player.position.x;
@@ -4160,6 +4375,7 @@
           if (dot > 0.4) {
             damageZombie(z, st.damage);
             spawnBlood(z.mesh.position.x, z.mesh.position.y + 1, z.mesh.position.z, fx, fz, 3);
+            hitSomething = true;
           }
         }
       }
@@ -4170,9 +4386,13 @@
         const d = Math.hypot(dx, dz);
         if (d < reach + t.trunkRadius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
-          if (dot > 0.35) damageTree(t, t.x, t.z, 1, fx, fz);
+          if (dot > 0.35) {
+            damageTree(t, t.x, t.z, 1, fx, fz);
+            hitSomething = true;
+          }
         }
       }
+      if (hitSomething) AudioSys.chainsawGrit();
     }
 
     function tryFire(dt) {
@@ -4184,15 +4404,36 @@
 
       if (st.melee) {
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * dt);
-        if (!fireHeld || won || gameOver || !gameStarted) return;
+        const gun = getActiveGun();
+        if (!fireHeld || won || gameOver || !gameStarted) {
+          AudioSys.chainsawStop();
+          if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 0;
+          if (sawHudRunning) { sawHudRunning = false; updateAmmoHud(); }
+          // Idle chain wobble while equipped
+          if (gun.userData.bladeSpin && currentWeapon === 'chainsaw' && gameStarted && !won && !gameOver) {
+            gun.userData.bladeSpin.rotation.z += Math.sin(performance.now() * 0.008) * dt * 0.6;
+          }
+          return;
+        }
+        AudioSys.chainsawStart();
+        AudioSys.chainsawSetRev(1);
+        if (gun.userData.heatMat) {
+          gun.userData.heatMat.emissiveIntensity = 0.22 + Math.sin(performance.now() * 0.02) * 0.06;
+        }
+        // Mount vibration / arm shake while cutting
+        weaponMount.position.x = WEAPON_MOUNT_BASE.x + (Math.random() - 0.5) * 0.022;
+        weaponMount.position.y = WEAPON_MOUNT_BASE.y + reloadMountOff.y + (Math.random() - 0.5) * 0.016;
+        weaponMount.position.z = WEAPON_MOUNT_BASE.z + (Math.random() - 0.5) * 0.012;
+        weaponMount.rotation.z = reloadMountOff.rz + (Math.random() - 0.5) * 0.05;
+        weaponMount.rotation.x = reloadMountOff.rx + (Math.random() - 0.5) * 0.03;
         fireCooldown -= dt;
         if (fireCooldown <= 0) {
           fireCooldown = st.interval;
           chainsawTick();
-        } else if (fireHeld) {
-          const gun = getActiveGun();
-          if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += dt * 18;
+        } else {
+          if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += dt * 28;
         }
+        if (!sawHudRunning) { sawHudRunning = true; updateAmmoHud(); }
         return;
       }
 
@@ -5075,29 +5316,47 @@
     const camLook = new THREE.Vector3();
     const tmp = new THREE.Vector3();
 
+    function showPauseTips(on) {
+      if (on) {
+        pauseMainView.classList.add('hide');
+        pauseTipsView.classList.add('on');
+        pauseCard.classList.add('tips-open');
+      } else {
+        pauseMainView.classList.remove('hide');
+        pauseTipsView.classList.remove('on');
+        pauseCard.classList.remove('tips-open');
+      }
+    }
+
     function setPaused(on) {
       if (on) {
         if (!gameStarted || gameOver || won) return;
         paused = true;
         pauseEl.classList.add('show');
+        showPauseTips(false);
         mouseFireHeld = false;
         zoomHeld = false;
         stopFiring();
+        AudioSys.chainsawStop();
         // Clear held movement keys so resume doesn't surge
         for (const k of Object.keys(keys)) keys[k] = false;
       } else {
         paused = false;
         pauseEl.classList.remove('show');
+        showPauseTips(false);
       }
     }
 
     function quitToMenu() {
       setPaused(false);
       pauseEl.classList.remove('show');
+      AudioSys.chainsawStop();
       resetGame();
     }
 
     resumeBtn.addEventListener('click', () => setPaused(false));
+    tipsBtn.addEventListener('click', () => showPauseTips(true));
+    tipsBackBtn.addEventListener('click', () => showPauseTips(false));
     quitMenuBtn.addEventListener('click', quitToMenu);
 
     function startMode(mode) {
@@ -5137,6 +5396,7 @@
     modeDefendBtn.addEventListener('click', () => startMode('defend'));
 
     function resetGame() {
+      AudioSys.chainsawStop();
       AudioSys.resetBlip();
       for (const b of builds.slice()) removeBuild(b);
       clearZombies();
@@ -5238,6 +5498,7 @@
         mouseFireHeld = false;
         zoomHeld = false;
         fireHeld = false;
+        if (AudioSys.isChainsawRunning && AudioSys.isChainsawRunning()) AudioSys.chainsawStop();
         updateLasers();
         {
           const fovTarget = FOV_DEFAULT;
