@@ -322,7 +322,8 @@
     {
       const badge = document.getElementById('modeBadge');
       if (badge) {
-        if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
+        if (urlParams.has('night')) { badge.textContent = 'NIGHT'; badge.style.display = ''; }
+        else if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
         else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
       }
@@ -439,8 +440,95 @@
       }
 
       function fire() {
+        // Generic fallback crack (prefer fireWeapon)
         playNoise({ dur: 0.04, vol: 0.12, filterFreq: 2200, filterType: 'bandpass' });
         playTone({ freq: 180, type: 'sawtooth', dur: 0.05, vol: 0.08, slideTo: 90 });
+      }
+      function fireWeapon(id) {
+        switch (id) {
+          case 'pistol':
+            // Sharp short crack
+            playNoise({ dur: 0.028, vol: 0.14, filterFreq: 3200, filterType: 'bandpass' });
+            playTone({ freq: 420, type: 'square', dur: 0.035, vol: 0.09, slideTo: 140 });
+            playTone({ freq: 90, type: 'sine', dur: 0.04, vol: 0.05, slideTo: 55 });
+            break;
+          case 'revolver':
+            // Deeper heavier boom
+            playNoise({ dur: 0.07, vol: 0.18, filterFreq: 900, filterType: 'lowpass' });
+            playTone({ freq: 120, type: 'sawtooth', dur: 0.1, vol: 0.14, slideTo: 45 });
+            playTone({ freq: 70, type: 'sine', dur: 0.14, vol: 0.1, slideTo: 35 });
+            playNoise({ dur: 0.04, vol: 0.06, filterFreq: 2400, filterType: 'bandpass', when: 0.02 });
+            break;
+          case 'm4':
+            // Mid rifle crack
+            playNoise({ dur: 0.038, vol: 0.13, filterFreq: 2100, filterType: 'bandpass' });
+            playTone({ freq: 240, type: 'sawtooth', dur: 0.055, vol: 0.1, slideTo: 95 });
+            playTone({ freq: 160, type: 'square', dur: 0.03, vol: 0.05 });
+            break;
+          case 'uzi':
+            // Light rapid smack
+            playNoise({ dur: 0.022, vol: 0.1, filterFreq: 2800, filterType: 'bandpass' });
+            playTone({ freq: 380, type: 'square', dur: 0.025, vol: 0.07, slideTo: 160 });
+            break;
+          case 'minigun':
+            // Buzzier short burp / lower thud
+            playNoise({ dur: 0.03, vol: 0.11, filterFreq: 1600, filterType: 'bandpass' });
+            playTone({ freq: 95, type: 'sawtooth', dur: 0.045, vol: 0.08, slideTo: 55 });
+            playTone({ freq: 55, type: 'sine', dur: 0.05, vol: 0.06 });
+            break;
+          case 'shotgun':
+            // Loud boom + low body
+            playNoise({ dur: 0.12, vol: 0.22, filterFreq: 550, filterType: 'lowpass' });
+            playTone({ freq: 85, type: 'sawtooth', dur: 0.16, vol: 0.16, slideTo: 32 });
+            playNoise({ dur: 0.06, vol: 0.1, filterFreq: 1800, filterType: 'bandpass', when: 0.015 });
+            playTone({ freq: 48, type: 'sine', dur: 0.2, vol: 0.1, slideTo: 28 });
+            break;
+          case 'sniper':
+            // Loud sharp crack + echoey tail
+            playNoise({ dur: 0.05, vol: 0.18, filterFreq: 2600, filterType: 'bandpass' });
+            playTone({ freq: 320, type: 'square', dur: 0.06, vol: 0.14, slideTo: 90 });
+            playTone({ freq: 110, type: 'sawtooth', dur: 0.12, vol: 0.09, slideTo: 50 });
+            playTone({ freq: 220, type: 'triangle', dur: 0.22, vol: 0.05, when: 0.08, slideTo: 80 });
+            playNoise({ dur: 0.18, vol: 0.06, filterFreq: 900, filterType: 'bandpass', when: 0.1 });
+            break;
+          case 'launcher':
+            // Hollow thunk / whoosh (boom on explode)
+            playTone({ freq: 140, type: 'sine', dur: 0.08, vol: 0.1, slideTo: 70 });
+            playNoise({ dur: 0.1, vol: 0.1, filterFreq: 700, filterType: 'lowpass' });
+            playTone({ freq: 60, type: 'triangle', dur: 0.14, vol: 0.08, slideTo: 35 });
+            playNoise({ dur: 0.12, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.04 });
+            break;
+          default:
+            fire();
+        }
+      }
+      function shotgunPump() {
+        // Mechanical back-forward scrape
+        playNoise({ dur: 0.07, vol: 0.09, filterFreq: 1400, filterType: 'bandpass' });
+        playTone({ freq: 260, type: 'triangle', dur: 0.06, vol: 0.08, slideTo: 140 });
+        playTone({ freq: 180, type: 'square', dur: 0.04, vol: 0.06, when: 0.055 });
+        playNoise({ dur: 0.035, vol: 0.05, filterFreq: 900, filterType: 'lowpass', when: 0.05 });
+      }
+      function revolverCylinder() {
+        // Open/close click
+        playTone({ freq: 480 + Math.random() * 80, type: 'square', dur: 0.03, vol: 0.07 });
+        playNoise({ dur: 0.03, vol: 0.045, filterFreq: 2200, filterType: 'bandpass' });
+        playTone({ freq: 220, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.02, slideTo: 160 });
+      }
+      function revolverSpin() {
+        playTone({ freq: 340, type: 'triangle', dur: 0.05, vol: 0.055, slideTo: 520 });
+        playNoise({ dur: 0.04, vol: 0.035, filterFreq: 1800, filterType: 'bandpass' });
+      }
+      function launcherDrum() {
+        // Heavier drum open/close
+        playTone({ freq: 140, type: 'sine', dur: 0.07, vol: 0.08, slideTo: 90 });
+        playNoise({ dur: 0.06, vol: 0.07, filterFreq: 500, filterType: 'lowpass' });
+        playTone({ freq: 90, type: 'triangle', dur: 0.05, vol: 0.05, when: 0.03 });
+      }
+      function launcherShellInsert() {
+        playTone({ freq: 160, type: 'sine', dur: 0.05, vol: 0.07, slideTo: 70 });
+        playNoise({ dur: 0.045, vol: 0.055, filterFreq: 650, filterType: 'lowpass' });
+        playTone({ freq: 110, type: 'triangle', dur: 0.04, vol: 0.045, when: 0.025 });
       }
       function emptyClick() {
         const c = ensure();
@@ -798,7 +886,8 @@
 
       return {
         unlock, toggleMute, isMuted, setMuted,
-        fire, emptyClick, reloadStart, reloadDone, slideRack,
+        fire, fireWeapon, emptyClick, reloadStart, reloadDone, slideRack,
+        shotgunPump, revolverCylinder, revolverSpin, launcherDrum, launcherShellInsert,
         jump, nvgClick, coin, leafHit, treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
@@ -855,6 +944,8 @@
     scene.add(moon);
     const ambientFill = new THREE.AmbientLight(0x223344, 0.05);
     scene.add(ambientFill);
+    const laserMuzzleLight = new THREE.PointLight(0xff3344, 0, 3.5, 2);
+    scene.add(laserMuzzleLight);
 
     // Day/night cycle (separate from wave Day N) — ~830s full cycle (10× prior ~83s)
     let worldTime = 0.25; // 0..1, 0=midnight, 0.25=dawn (~06:00), 0.5≈noon-ish on clock
@@ -917,22 +1008,45 @@
 
       const skyDay = new THREE.Color(0x87b7ff);
       const skyDusk = new THREE.Color(0xc47a4a);
-      const skyNight = new THREE.Color(0x0a1020);
+      // Near black-blue when night is active without NVG
+      const skyNight = new THREE.Color(0x020508);
       let sky;
       // Lighting follows natural curve; when night blocked by grace, keep dusk-ish day
       const lightNight = isNight;
       const visualFactor = lightNight ? dayFactor : Math.max(dayFactor, NIGHT_DAY_FACTOR);
+      const nvgActive = lightNight && nvgDown;
       if (visualFactor > 0.55) sky = skyDay.clone();
       else if (visualFactor > 0.28) sky = skyDusk.clone().lerp(skyDay, (visualFactor - 0.28) / 0.27);
       else sky = skyNight.clone().lerp(skyDusk, visualFactor / 0.28);
-      if (hurtFlash <= 0 && !(nvgDown && isNight)) {
+      if (hurtFlash <= 0 && !nvgActive) {
         scene.background.copy(sky);
         scene.fog.color.copy(sky);
       }
-      sun.intensity = 0.15 + visualFactor * 1.2;
-      hemi.intensity = 0.25 + visualFactor * 0.85;
-      moon.intensity = lightNight ? (0.55 * (1 - dayFactor)) : 0.05;
-      ambientFill.intensity = lightNight ? 0.18 : 0.04;
+      if (lightNight && !nvgActive) {
+        // Scary dark — struggle to see zombies/terrain without N
+        const nightAmt = 1 - Math.min(1, dayFactor / Math.max(0.001, NIGHT_DAY_FACTOR));
+        sun.intensity = 0.02 + nightAmt * 0.06;          // ~0.02–0.08
+        hemi.intensity = 0.08 + nightAmt * 0.07;         // ~0.08–0.15
+        ambientFill.intensity = 0.02 + nightAmt * 0.04;  // ~0.02–0.06
+        moon.intensity = 0.25 + nightAmt * 0.15;         // ~0.25–0.4
+        scene.fog.near = 18 + (1 - nightAmt) * 12;       // ~18–30
+        scene.fog.far = 55 + (1 - nightAmt) * 25;        // ~55–80 — tight visibility
+      } else if (lightNight && nvgActive) {
+        // Base night still dark; NVG boost applied in updateNvgVisual
+        sun.intensity = 0.04;
+        hemi.intensity = 0.18;
+        ambientFill.intensity = 0.08;
+        moon.intensity = 0.38;
+        scene.fog.near = 50;
+        scene.fog.far = 160;
+      } else {
+        sun.intensity = 0.15 + visualFactor * 1.2;
+        hemi.intensity = 0.25 + visualFactor * 0.85;
+        moon.intensity = 0.05;
+        ambientFill.intensity = 0.04;
+        scene.fog.near = 140;
+        scene.fog.far = 320;
+      }
       sunDir.set(Math.cos(ang), Math.max(0.35, Math.sin(ang)), 0.3).normalize();
 
       timeLineEl.textContent = (isNight ? 'Night' : 'Day') + ' · ' + formatGameClock() +
@@ -3625,9 +3739,12 @@
       if (activeGreen && hurtFlash <= 0) {
         scene.background.setHex(0x061808);
         scene.fog.color.setHex(0x0a2010);
-        ambientFill.intensity = Math.max(ambientFill.intensity, 0.45);
-        hemi.intensity = Math.max(hemi.intensity, 0.55);
-        moon.intensity = Math.max(moon.intensity, 0.35);
+        // NVG clearly helps — scene not pitch black under green vision
+        ambientFill.intensity = Math.max(ambientFill.intensity, 0.55);
+        hemi.intensity = Math.max(hemi.intensity, 0.7);
+        moon.intensity = Math.max(moon.intensity, 0.48);
+        scene.fog.near = Math.min(scene.fog.near, 55);
+        scene.fog.far = Math.max(scene.fog.far, 170);
       }
     }
 
@@ -4095,6 +4212,8 @@
       shotgunPumping = true;
       shotgunPumpT = 0;
       shotgunPumpEjected = false;
+      shotgunPumpSfxBack = false;
+      shotgunPumpSfxFwd = false;
     }
 
     function updateShotgunPump(dt) {
@@ -4107,6 +4226,14 @@
       if (t < 0.30) pumpAmt = _seg(t, 0.02, 0.26);
       else if (t < 0.50) pumpAmt = 1;
       else pumpAmt = 1 - _seg(t, 0.50, 0.94);
+      if (!shotgunPumpSfxBack && t >= 0.04) {
+        shotgunPumpSfxBack = true;
+        if (AudioSys.shotgunPump) AudioSys.shotgunPump();
+      }
+      if (!shotgunPumpSfxFwd && t >= 0.50) {
+        shotgunPumpSfxFwd = true;
+        if (AudioSys.shotgunPump) AudioSys.shotgunPump();
+      }
 
       const travel = 0.24; // forend slide distance
       const base = GUN_BASE.shotgun;
@@ -4616,6 +4743,14 @@
           const pb = _seg(progress, 0.80, 0.90);
           const pf = _seg(progress, 0.90, 0.98);
           chamberPump = pb * (1 - pf);
+          if (!reloadOpenCuePlayed && progress >= 0.80) {
+            reloadOpenCuePlayed = true;
+            if (AudioSys.shotgunPump) AudioSys.shotgunPump();
+          }
+          if (!reloadCloseCuePlayed && progress >= 0.90) {
+            reloadCloseCuePlayed = true;
+            if (AudioSys.shotgunPump) AudioSys.shotgunPump();
+          }
         }
 
         // Modest tip for tube port access — zero RH arm/elbow tumble
@@ -4745,6 +4880,23 @@
           revolverEjectDone = true;
           const n = Math.max(0, revolverReloadSpent | 0);
           for (let i = 0; i < n; i++) spawnRevolverEjectCasing(i, n);
+        }
+        if (!reloadOpenCuePlayed && progress >= 0.06) {
+          reloadOpenCuePlayed = true;
+          if (AudioSys.revolverCylinder) AudioSys.revolverCylinder();
+        }
+        if (progress >= loadStart && progress < loadEnd) {
+          const tIns = (progress - loadStart) / (loadEnd - loadStart);
+          const idx = Math.min(need - 1, Math.floor(tIns * need));
+          if (idx > reloadInsertCueIdx) {
+            reloadInsertCueIdx = idx;
+            if (AudioSys.revolverSpin) AudioSys.revolverSpin();
+            else if (AudioSys.magThud) AudioSys.magThud();
+          }
+        }
+        if (!reloadCloseCuePlayed && progress >= 0.82) {
+          reloadCloseCuePlayed = true;
+          if (AudioSys.revolverCylinder) AudioSys.revolverCylinder();
         }
       } else if (currentWeapon === 'sniper') {
         // RH locked (same rule as pistol) — tip-back for magwell only; LH fetch/seat; bolt after seat.
@@ -4909,6 +5061,22 @@
           const nn = Math.max(0, launcherReloadSpent | 0);
           for (let i = 0; i < nn; i++) spawnLauncherEjectCasing(i, nn);
         }
+        if (!reloadOpenCuePlayed && progress >= 0.06) {
+          reloadOpenCuePlayed = true;
+          if (AudioSys.launcherDrum) AudioSys.launcherDrum();
+        }
+        if (progress >= loadStart && progress < loadEnd) {
+          const tIns = (progress - loadStart) / (loadEnd - loadStart);
+          const idx = Math.min(need - 1, Math.floor(tIns * need));
+          if (idx > reloadInsertCueIdx) {
+            reloadInsertCueIdx = idx;
+            if (AudioSys.launcherShellInsert) AudioSys.launcherShellInsert();
+          }
+        }
+        if (!reloadCloseCuePlayed && progress >= 0.82) {
+          reloadCloseCuePlayed = true;
+          if (AudioSys.launcherDrum) AudioSys.launcherDrum();
+        }
       }
       // chainsaw: no reload anim
 
@@ -4983,11 +5151,13 @@
     let bank = 0;
     const cashDrops = [];
     const cashBillMat = new THREE.MeshStandardMaterial({
-      color: 0x2f8a4a, emissive: 0x0a3a18, emissiveIntensity: 0.35, roughness: 0.65, metalness: 0.05
+      color: 0x2f8a4a, emissive: 0x33ff66, emissiveIntensity: 0.75, roughness: 0.65, metalness: 0.05
     });
     const cashBandMat = new THREE.MeshStandardMaterial({
-      color: 0xd4b84a, emissive: 0x443300, emissiveIntensity: 0.2, roughness: 0.7
+      color: 0xd4b84a, emissive: 0x665500, emissiveIntensity: 0.35, roughness: 0.7
     });
+    const CASH_EMISSIVE_BASE = 0.75;
+    const CASH_EMISSIVE_AMP = 0.55;
 
     function makeCashStackMesh(value) {
       const g = new THREE.Group();
@@ -5000,12 +5170,17 @@
         bill.position.y = i * 0.03;
         bill.rotation.y = (i - layers * 0.5) * 0.04;
         bill.castShadow = true;
+        bill.userData.cashGlow = true;
+        bill.userData.emissiveBase = CASH_EMISSIVE_BASE;
         g.add(bill);
       }
       const band = new THREE.Mesh(new THREE.BoxGeometry(0.12, layers * 0.03 + 0.02, 0.24), cashBandMat.clone());
       band.position.y = (layers - 1) * 0.015;
+      band.userData.cashGlow = true;
+      band.userData.emissiveBase = 0.35;
       g.add(band);
       g.userData.bob = Math.random() * Math.PI * 2;
+      g.userData.baseScale = 1;
       return g;
     }
 
@@ -5041,8 +5216,17 @@
         c.age += dt;
         c.mesh.userData.bob = (c.mesh.userData.bob || 0) + dt * 2.2;
         const base = sampleHeight(c.mesh.position.x, c.mesh.position.z);
-        c.mesh.position.y = base + 0.12 + Math.sin(c.mesh.userData.bob) * 0.06;
+        // Obvious hover bob + slight scale pulse (day and night)
+        const pulse = Math.sin(c.age * 6);
+        c.mesh.position.y = base + 0.12 + Math.sin(c.mesh.userData.bob) * 0.09 + pulse * 0.025;
         c.mesh.rotation.y += dt * 0.8;
+        const sc = 1 + pulse * 0.06;
+        c.mesh.scale.setScalar(sc);
+        c.mesh.traverse((ch) => {
+          if (!ch.isMesh || !ch.userData.cashGlow || !ch.material) return;
+          const b = ch.userData.emissiveBase != null ? ch.userData.emissiveBase : CASH_EMISSIVE_BASE;
+          ch.material.emissiveIntensity = b + pulse * CASH_EMISSIVE_AMP;
+        });
         if (!gameStarted || gameOver || won) continue;
         const dx = c.mesh.position.x - player.position.x;
         const dz = c.mesh.position.z - player.position.z;
@@ -6302,6 +6486,11 @@
     });
 
     // --- Shooting / ammo ---
+    let shotgunPumpSfxBack = false;
+    let shotgunPumpSfxFwd = false;
+    let reloadOpenCuePlayed = false;
+    let reloadCloseCuePlayed = false;
+    let reloadInsertCueIdx = -1;
     let reloading = false;
     let reloadTimer = 0;
     let reloadAnimDuration = 1.8;
@@ -6382,6 +6571,9 @@
       if (ammoByWeapon[currentWeapon] >= st.maxAmmo) return;
       reloading = true;
       reloadSlideCuePlayed = false;
+      reloadOpenCuePlayed = false;
+      reloadCloseCuePlayed = false;
+      reloadInsertCueIdx = -1;
       reloadMagDropped = false;
       revolverEjectDone = false;
       launcherEjectDone = false;
@@ -6692,21 +6884,39 @@
     }
 
     function updateLasers() {
+      let anyLaserLit = false;
       for (const name of WEAPON_ORDER) {
         const gun = weaponMeshes[name];
         const laser = gun && gun.userData.laser;
         if (!laser) continue;
-        // User toggle (default OFF); independent of day/night
-        const on = lasersEnabled && gun.visible && gameStarted && !placeMode;
-        laser.material.opacity = on ? 0.55 : 0;
-        if (!on) continue;
-        // Beam length: muzzle → aimTarget (reticle), clamp to laserLen (or weapon range for active gun); terrain trim.
-        // Gun is aim-aligned so child laser along +Z already points at the hit.
-        let full = gun.userData.laserLen;
-        if (name === currentWeapon) {
-          const lst = WEAPON_STATS[name];
-          if (lst && lst.range > 0) full = lst.range;
+        // Only the active visible gun shows a beam (inactive: opacity 0 + scale reset)
+        const isActive = name === currentWeapon && gun.visible;
+        const st = WEAPON_STATS[name];
+        const melee = st && st.melee;
+        const on = lasersEnabled && isActive && !melee && gameStarted && !placeMode && !gameOver && !won;
+        if (!on) {
+          laser.material.opacity = 0;
+          laser.scale.y = 0.01;
+          laser.position.z = gun.userData.laserBaseZ;
+          if (gun.userData._laserSmoothLen != null) gun.userData._laserSmoothLen = 0;
+          continue;
         }
+        // Night: bright additive red; day: moderate visible beam
+        const nightBeam = isNight;
+        laser.material.transparent = true;
+        laser.material.depthWrite = false;
+        if (nightBeam) {
+          laser.material.color.setHex(0xff3355);
+          laser.material.opacity = 0.92;
+          laser.material.blending = THREE.AdditiveBlending;
+        } else {
+          laser.material.color.setHex(0xff2222);
+          laser.material.opacity = 0.55;
+          laser.material.blending = THREE.NormalBlending;
+        }
+        // Beam length: muzzle → aimTarget; cylinder rotated X PI/2 so scale.y is along +Z beam
+        let full = gun.userData.laserLen;
+        if (st && st.range > 0) full = st.range;
         gun.updateMatrixWorld(true);
         _laserOrigin.copy(gun.userData.muzzleLocal);
         gun.localToWorld(_laserOrigin);
@@ -6721,9 +6931,20 @@
           len = Math.min(full, dist, aimRangeToTerrain(Math.min(full, dist), _laserOrigin, _laserDir));
         }
         len = Math.max(0.05, len);
+        // Smooth length to kill jitter from aim/terrain fights
+        const prev = gun.userData._laserSmoothLen != null ? gun.userData._laserSmoothLen : len;
+        len = prev + (len - prev) * 0.35;
+        gun.userData._laserSmoothLen = len;
         laser.scale.y = len / full;
         laser.position.z = gun.userData.laserBaseZ + len * 0.5;
+        if (nightBeam) {
+          laserMuzzleLight.intensity = 0.35;
+          laserMuzzleLight.distance = 3.2;
+          laserMuzzleLight.position.copy(_laserOrigin);
+          anyLaserLit = true;
+        }
       }
+      if (!anyLaserLit) laserMuzzleLight.intensity = 0;
     }
 
     // Orient weaponMount so the active gun muzzle (+Z) points at aimTarget.
@@ -6928,7 +7149,7 @@
           spawnCasing('minigun');
           kickMinigunRecoil();
           triggerMuzzleFlash();
-          AudioSys.fire();
+          AudioSys.fireWeapon('minigun');
           updateAmmoHud();
           if (ammoByWeapon.minigun <= 0) { fireHeld = false; updateAmmoHud(); break; }
         }
@@ -6968,7 +7189,7 @@
             launcherSpent = Math.min(6, Math.max(launcherSpent + 1, 6 - (ammoByWeapon.launcher | 0)));
           }
           triggerMuzzleFlash();
-          AudioSys.fire();
+          AudioSys.fireWeapon(currentWeapon);
           if (currentWeapon === 'pistol') kickPistolRecoil();
           if (currentWeapon === 'sniper') kickSniperRecoil();
           if (currentWeapon === 'uzi') kickUziRecoil();
