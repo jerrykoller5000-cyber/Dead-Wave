@@ -180,7 +180,7 @@
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
-      <div id="title">Tiny Trek <span class="badge">GL</span></div>
+      <div id="title">Tiny Trek <span class="badge">BALL</span></div>
       <div id="stats">
         <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
@@ -3569,15 +3569,15 @@
     let sawHudRunning = false;
 
     const WEAPON_STATS = {
-      minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
-      m4: { name: 'M4', maxAmmo: 30, reload: 1.55, interval: 0.1, damage: 16, spin: false, auto: true },
-      pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.35, interval: 0.28, damage: 18, spin: false, auto: true },
-      uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.4, interval: 1 / 14, damage: 12, spin: false, auto: true },
-      shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
-      revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
-      sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.35, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
-      launcher: { name: 'Launcher', maxAmmo: 6, reload: 2.0, interval: 0.55, damage: 55, spin: false, auto: false, explosive: true },
-      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 1.85 }
+      minigun:  { name: 'Minigun',  maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 10, speed: 90,  range: 50,  spin: true,  auto: true },
+      m4:       { name: 'M4',       maxAmmo: 30,  reload: 1.55, interval: 0.1,    damage: 19, speed: 100, range: 75,  spin: false, auto: true },
+      pistol:   { name: 'Pistol',   maxAmmo: 12,  reload: 1.35, interval: 0.28,   damage: 24, speed: 75,  range: 40,  spin: false, auto: true },
+      uzi:      { name: 'Uzi',      maxAmmo: 32,  reload: 1.4,  interval: 1 / 14, damage: 11, speed: 80,  range: 35,  spin: false, auto: true },
+      shotgun:  { name: 'Shotgun',  maxAmmo: 8,   reload: 1.6,  interval: 0.7,    damage: 9,  speed: 60,  range: 22,  spin: false, auto: false, pellets: 7, spread: 0.14 },
+      revolver: { name: 'Revolver', maxAmmo: 6,   reload: 1.8,  interval: 0.45,   damage: 52, speed: 80,  range: 50,  spin: false, auto: false, spread: 0.02 },
+      sniper:   { name: 'Sniper',   maxAmmo: 5,   reload: 2.35, interval: 0.9,    damage: 92, speed: 130, range: 125, spin: false, auto: false, spread: 0.004 },
+      launcher: { name: 'Launcher', maxAmmo: 6,   reload: 2.0,  interval: 0.55,   damage: 80, speed: 32,  range: 62,  spin: false, auto: false, explosive: true },
+      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 17, spin: false, auto: true, melee: true, reach: 2.05 }
     };
     let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
     let grenades = 3;
@@ -5806,16 +5806,22 @@
       return m;
     }
 
-    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null) {
+    function projectileLifeFor(st) {
+      if (!st || !(st.speed > 0) || !(st.range > 0)) return 0.5;
+      return Math.min(2.5, Math.max(0.15, st.range / st.speed));
+    }
+
+    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null) {
       const o = origin ? origin.clone() : getMuzzleWorld().clone();
       const d = dir ? dir.clone().normalize() : getAimDir().clone();
       const mesh = new THREE.Mesh(tracerGeo, tracerMatFor(color));
       mesh.position.copy(o);
       mesh.quaternion.setFromUnitVectors(AXIS_Z, d);
       scene.add(mesh);
+      const spd = (speed != null && speed > 0) ? speed : (fromTurret ? 55 : 70);
       projectiles.push({
         mesh, pos: o.clone(), prev: o.clone(), dir: d,
-        speed: fromTurret ? 55 : 70,
+        speed: spd,
         life, age: 0, hit: false, damage,
         fromTurret
       });
@@ -5857,9 +5863,13 @@
         const on = lasersEnabled && gun.visible && gameStarted && !placeMode;
         laser.material.opacity = on ? 0.55 : 0;
         if (!on) continue;
-        // Beam length: muzzle → aimTarget (reticle), clamp to laserLen; terrain trim along that ray.
+        // Beam length: muzzle → aimTarget (reticle), clamp to laserLen (or weapon range for active gun); terrain trim.
         // Gun is aim-aligned so child laser along +Z already points at the hit.
-        const full = gun.userData.laserLen;
+        let full = gun.userData.laserLen;
+        if (name === currentWeapon) {
+          const lst = WEAPON_STATS[name];
+          if (lst && lst.range > 0) full = lst.range;
+        }
         gun.updateMatrixWorld(true);
         _laserOrigin.copy(gun.userData.muzzleLocal);
         gun.localToWorld(_laserOrigin);
@@ -5934,8 +5944,11 @@
 
     function fireLauncherShell() {
       // 40mm grenade round (cartridge) — NOT the throwable Key-G hand grenade
+      const st = WEAPON_STATS.launcher;
       const origin = getMuzzleWorld().clone();
       const dir = getAimDir().clone();
+      const spd = (st.speed > 0) ? st.speed : 32;
+      const fuse = (st.fuse > 0) ? st.fuse : projectileLifeFor(st);
       const mesh = new THREE.Group();
       // Short fat OD-green body (cylinder along +Z)
       const body = new THREE.Mesh(
@@ -5968,11 +5981,12 @@
       grenadesInFlight.push({
         mesh,
         pos: origin.clone(),
-        vx: dir.x * 16,
-        vy: 4.5,
-        vz: dir.z * 16,
+        vx: dir.x * spd,
+        vy: dir.y * spd * 0.35 + 3.2, // modest arc on 40mm shell
+        vz: dir.z * spd,
         age: 0,
-        fuse: 1.05,
+        fuse,
+        damage: st.damage,
         isShell: true // 40mm launcher round — distinct from Key-G throwable
       });
     }
@@ -6074,7 +6088,7 @@
         while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {
           fireCooldown += st.interval;
           ammoByWeapon.minigun -= 1;
-          spawnProjectile(false, null, null, st.damage, 0.45);
+          spawnProjectile(false, null, null, st.damage, projectileLifeFor(st), null, st.speed);
           spawnCasing('minigun');
           kickMinigunRecoil();
           triggerMuzzleFlash();
@@ -6103,11 +6117,11 @@
           } else if (st.pellets) {
             const n = st.pellets;
             for (let i = 0; i < n; i++) {
-              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, 0.35);
+              spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, projectileLifeFor(st), null, st.speed);
             }
             // Pump shotgun: red hull ejects on pump-back — no gold brass here
           } else {
-            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, st.name === 'Sniper' ? 0.7 : 0.5);
+            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, projectileLifeFor(st), null, st.speed);
             // Revolver keeps brass in the cylinder until reload eject
             if (currentWeapon !== 'revolver') spawnCasing(currentWeapon);
           }
@@ -6177,13 +6191,14 @@
       scene.remove(g.mesh);
       AudioSys.grenadeBoom();
       spawnChunks(x, y, z, 0x555555, 10, 6);
-      // AoE damage
+      // AoE damage — shell uses launcher st.damage; Key-G throwable keeps legacy 55
       const AOE = 4.5;
+      const baseDmg = (g.damage != null) ? g.damage : 55;
       for (const zom of zombies.slice()) {
         if (!zom.alive) continue;
         const d = Math.hypot(zom.mesh.position.x - x, zom.mesh.position.z - z);
         if (d < AOE) {
-          const dmg = Math.round(55 * (1 - d / AOE));
+          const dmg = Math.round(baseDmg * (1 - d / AOE));
           damageZombie(zom, Math.max(12, dmg));
         }
       }
