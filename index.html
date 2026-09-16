@@ -137,11 +137,30 @@
     #pause button.danger { background: #e86a6a; color: #1a0808; }
     #modeSelect button:hover, #win button:hover, #pause button:hover { filter: brightness(1.08); }
     #placeBanner {
-      display: none; position: absolute; top: 14px; right: 16px;
+      display: none; position: absolute; top: 14px; right: 196px;
       background: rgba(8,12,24,.62); border: 1px solid rgba(255,255,255,.16);
       padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
       max-width: 220px;
     }
+    #minimap {
+      position: absolute; top: 14px; right: 16px; width: 164px; height: 164px;
+      border: 1px solid rgba(255,255,255,.22); border-radius: 10px;
+      background: rgba(8,12,24,.5); image-rendering: pixelated;
+    }
+    #bigBanner {
+      position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+      text-align: center; opacity: 0; transition: opacity 0.45s ease;
+      pointer-events: none; white-space: nowrap;
+    }
+    #bigBanner .t {
+      font-size: 34px; font-weight: 800; letter-spacing: 0.06em;
+      text-shadow: 0 2px 10px rgba(0,0,0,.75);
+    }
+    #bigBanner .s {
+      font-size: 15px; font-weight: 600; opacity: .92; margin-top: 4px;
+      text-shadow: 0 1px 6px rgba(0,0,0,.7);
+    }
+    #bigBanner.show { opacity: 1; }
     #placeBanner.on { display: block; }
     #timeLine {
       background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
@@ -167,6 +186,13 @@
       background: radial-gradient(ellipse at center,
         rgba(0,0,0,0) 55%, rgba(0,0,0,0.07) 80%, rgba(0,0,0,0.22) 100%);
     }
+    /* Damage feedback. Used to recolour scene.background, which the sky dome now
+       covers, so it moved to a screen-space flash. */
+    #hurtFlash {
+      position: fixed; inset: 0; pointer-events: none; z-index: 3; opacity: 0;
+      background: radial-gradient(ellipse at center,
+        rgba(255,60,50,0.10) 30%, rgba(200,16,10,0.42) 100%);
+    }
     #perf {
       display: none; position: absolute; bottom: 22px; right: 20px;
       background: rgba(8,12,24,.6); border: 1px solid rgba(255,255,255,.15);
@@ -184,6 +210,7 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="vignette"></div>
+  <div id="hurtFlash"></div>
   <div id="reticle" aria-hidden="true"></div>
   <div id="hud">
     <div id="hudTopLeft" class="glass">
@@ -210,6 +237,8 @@
       <div id="grenadeChips"><span class="gchip">G×3</span></div>
     </div>
     <div id="placeBanner"></div>
+    <canvas id="minimap" width="164" height="164"></canvas>
+    <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
       <div class="card">
@@ -263,9 +292,10 @@
             <h3>Build</h3>
             <ul>
               <li>B — enter / exit build mode</li>
-              <li>Scroll — cycle buildable · 1 barricade · 2 light · 3 heavy</li>
+              <li>Scroll or 1–6: barricade · wall · spikes · light · flame · heavy</li>
               <li>LMB place · Esc exit build</li>
-              <li>Earn cash from kill drops — no free starting cash</li>
+              <li>T — repair nearby build · X — sell for scrap</li>
+              <li>Earn cash from kills and supply drops — waves attack from the bearings shown on the map</li>
             </ul>
             <h3>Misc</h3>
             <ul>
@@ -322,6 +352,7 @@
     const modeHuntBtn = document.getElementById('modeHunt');
     const modeDefendBtn = document.getElementById('modeDefend');
     const perfEl = document.getElementById('perf');
+    const hurtFlashEl = document.getElementById('hurtFlash');
 
     // Add ?debug=1 to the URL for a live FPS / draw-call readout.
     const urlParams = new URLSearchParams(location.search);
@@ -891,6 +922,57 @@
 
       function isChainsawRunning() { return !!sawLoop; }
 
+      // --- New-world SFX ---
+      function spit() {
+        playNoise({ dur: 0.12, vol: 0.12, filterFreq: 700, filterType: 'bandpass' });
+        playTone({ freq: 220, type: 'sawtooth', dur: 0.14, vol: 0.07, slideTo: 90 });
+      }
+      function acidHit() {
+        playNoise({ dur: 0.2, vol: 0.14, filterFreq: 1200, filterType: 'bandpass' });
+        playTone({ freq: 340, type: 'triangle', dur: 0.18, vol: 0.07, slideTo: 120 });
+      }
+      function scream() {
+        playTone({ freq: 620, type: 'sawtooth', dur: 0.55, vol: 0.16, slideTo: 1450 });
+        playTone({ freq: 880, type: 'square', dur: 0.4, vol: 0.07, slideTo: 1800, when: 0.08 });
+        playNoise({ dur: 0.4, vol: 0.08, filterFreq: 2600, filterType: 'bandpass', when: 0.05 });
+      }
+      function bossSlam() {
+        playNoise({ dur: 0.4, vol: 0.26, filterFreq: 140, filterType: 'lowpass' });
+        playTone({ freq: 55, type: 'sine', dur: 0.5, vol: 0.22, slideTo: 26 });
+      }
+      function bossRoar() {
+        playTone({ freq: 90, type: 'sawtooth', dur: 0.9, vol: 0.2, slideTo: 45 });
+        playTone({ freq: 140, type: 'square', dur: 0.7, vol: 0.1, slideTo: 60, when: 0.1 });
+        playNoise({ dur: 0.7, vol: 0.12, filterFreq: 320, filterType: 'lowpass', when: 0.05 });
+      }
+      function spikeSnap() {
+        playTone({ freq: 900, type: 'square', dur: 0.03, vol: 0.09 });
+        playNoise({ dur: 0.04, vol: 0.09, filterFreq: 3200, filterType: 'highpass' });
+      }
+      function flameBurst() {
+        const c = ensure();
+        if (!c || muted) return;
+        if (c.currentTime < (flameBurst._cd || 0)) return;
+        flameBurst._cd = c.currentTime + 0.16;
+        playNoise({ dur: 0.18, vol: 0.09, filterFreq: 900, filterType: 'lowpass' });
+      }
+      function crateLand() {
+        playNoise({ dur: 0.18, vol: 0.18, filterFreq: 220, filterType: 'lowpass' });
+        playTone({ freq: 120, type: 'triangle', dur: 0.16, vol: 0.12, slideTo: 60 });
+      }
+      function pickup() {
+        [520, 700, 1040].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.07, vol: 0.09, when: i * 0.06 }));
+      }
+      function repairClank() {
+        playTone({ freq: 620, type: 'square', dur: 0.05, vol: 0.1 });
+        playTone({ freq: 480, type: 'square', dur: 0.06, vol: 0.08, when: 0.07 });
+        playNoise({ dur: 0.05, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', when: 0.02 });
+      }
+      function sellChime() {
+        playTone({ freq: 700, type: 'triangle', dur: 0.08, vol: 0.1 });
+        playTone({ freq: 520, type: 'triangle', dur: 0.1, vol: 0.09, when: 0.07 });
+      }
+
       return {
         unlock, toggleMute, isMuted, setMuted,
         fire, fireWeapon, emptyClick, reloadStart, reloadDone, slideRack,
@@ -899,7 +981,9 @@
         win, resetBlip, noteSpin, startMusic, stopMusic,
         place, invalid, turretShot, zombieHit, zombieDeath,
         waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak, brassTink, magThud,
-        chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning
+        chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning,
+        spit, acidHit, scream, bossSlam, bossRoar, spikeSnap, flameBurst,
+        crateLand, pickup, repairClank, sellChime
       };
     })();
 
@@ -1549,9 +1633,12 @@
     }
 
     // Ground height the marine's boots rest on. Sampling only the centre point left the
-    // downhill foot hanging in the air on every slope.
+    // downhill foot hanging in the air on every slope. Decks (bridges, the dock)
+    // override terrain when they're just overhead.
     function playerGroundY(x, z) {
-      return groundMinAround(x, z, 0.3);
+      const g = groundMinAround(x, z, 0.3);
+      const p = platformHeightAt(x, z);
+      return (p !== null && p > g && p - g < 4.4) ? p : g;
     }
 
     // Lowest ground inside a footprint. Props sit on this so nothing floats on a slope.
@@ -1584,6 +1671,170 @@
         t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
         return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       };
+    }
+
+    // === Points of interest ===
+    // The valley gets inhabited: campsites, ruins, a watchtower, a dock, a graveyard
+    // and two river bridges. Locations are solved here (before the ground bakes) so the
+    // dirt paths connecting them can be painted into the terrain colours. The meshes
+    // themselves are built later, once the prop helpers exist.
+    const worldSolids = [];   // { x, z, radius, y0, y1 } — blocks movement, builds, bullets
+    const platforms = [];     // { x, z, hw, hl, yaw, deckY } — walkable decks
+    const campfires = [];     // { x, z, y, light } — flicker at night
+    const POI = { campsites: [], cabins: [], tower: null, graveyard: null, dock: null, bridges: [] };
+    const PATHS = [];         // polylines of {x,z} painted as worn dirt
+
+    function addSolid(x, z, radius, y0, y1) {
+      worldSolids.push({ x, z, radius, y0, y1 });
+    }
+
+    // Deck height at a point, or null when not on any platform.
+    function platformHeightAt(x, z) {
+      for (const p of platforms) {
+        const dx = x - p.x, dz = z - p.z;
+        const ca = Math.cos(-p.yaw), sa = Math.sin(-p.yaw);
+        const lx = dx * ca - dz * sa;
+        const lz = dx * sa + dz * ca;
+        if (Math.abs(lx) <= p.hw && Math.abs(lz) <= p.hl) return p.deckY;
+      }
+      return null;
+    }
+
+    // Ground for anything that walks: terrain, unless a deck is just overhead. The
+    // ceiling covers a bridge spanning a carved river channel.
+    function entityGroundY(x, z) {
+      const g = sampleHeight(x, z);
+      const p = platformHeightAt(x, z);
+      return (p !== null && p > g && p - g < 4.4) ? p : g;
+    }
+
+    // Interpolated point + tangent along the river at arc fraction s.
+    function riverPointAt(s) {
+      const target = Math.max(0, Math.min(1, s)) * RIVER_LEN;
+      for (let i = 0; i < RIVER_CTRL.length - 1; i++) {
+        if (RIVER_ARC[i + 1] >= target) {
+          const a = RIVER_CTRL[i], b = RIVER_CTRL[i + 1];
+          const t = (target - RIVER_ARC[i]) / (RIVER_ARC[i + 1] - RIVER_ARC[i]);
+          const len = Math.hypot(b.x - a.x, b.z - a.z) || 1;
+          return {
+            x: a.x + (b.x - a.x) * t,
+            z: a.z + (b.z - a.z) * t,
+            tx: (b.x - a.x) / len,
+            tz: (b.z - a.z) / len
+          };
+        }
+      }
+      const last = RIVER_CTRL[RIVER_CTRL.length - 1];
+      return { x: last.x, z: last.z, tx: 1, tz: 0 };
+    }
+
+    (function planPOIs() {
+      const rnd = mulberry32(0x9015eed);
+      const taken = [{ x: 0, z: 0, sep: 26 }]; // keep spawn clear
+
+      function findSpot(rMin, rMax, maxSlope, sep) {
+        for (let tries = 0; tries < 400; tries++) {
+          const a = rnd() * Math.PI * 2;
+          const r = rMin + rnd() * (rMax - rMin);
+          const x = Math.cos(a) * r, z = Math.sin(a) * r;
+          if (waterDepthAt(x, z) > 0.02) continue;
+          if (terrainSlope(x, z) > maxSlope) continue;
+          if (distToRiver(x, z) < RIVER_WIDTH + 6) continue;
+          let ok = true;
+          for (const t of taken) {
+            if (Math.hypot(x - t.x, z - t.z) < Math.max(sep, t.sep)) { ok = false; break; }
+          }
+          if (!ok) continue;
+          taken.push({ x, z, sep });
+          return { x, z };
+        }
+        return null;
+      }
+
+      for (let i = 0; i < 3; i++) {
+        const s = findSpot(40, 115, 0.22, 42);
+        if (s) POI.campsites.push(s);
+      }
+      for (let i = 0; i < 2; i++) {
+        const s = findSpot(60, 160, 0.2, 48);
+        if (s) POI.cabins.push(s);
+      }
+      POI.tower = findSpot(90, 170, 0.26, 44);
+      POI.graveyard = findSpot(70, 150, 0.18, 44);
+
+      // Dock: walk from the lake centre toward spawn until the ground breaks water.
+      {
+        const dLen = Math.hypot(LAKE.x, LAKE.z) || 1;
+        const dirX = -LAKE.x / dLen, dirZ = -LAKE.z / dLen;
+        for (let d = 8; d < LAKE_FILL + 20; d += 1) {
+          const x = LAKE.x + dirX * d, z = LAKE.z + dirZ * d;
+          if (sampleHeight(x, z) > LAKE.level + 0.15) {
+            POI.dock = { x, z, yaw: Math.atan2(-dirX, -dirZ) };
+            break;
+          }
+        }
+      }
+
+      // Bridges: two crossings where the river runs inside the play area.
+      for (const s of [0.42, 0.66]) {
+        const p = riverPointAt(s);
+        if (Math.hypot(p.x, p.z) > landRadius - 18) continue;
+        POI.bridges.push({
+          x: p.x, z: p.z,
+          yaw: Math.atan2(-p.tz, p.tx) // deck runs perpendicular to the flow
+        });
+      }
+
+      // Paths: worn tracks from spawn out to the landmarks. A leg that would ford the
+      // river is routed through the nearest bridge instead.
+      function crossesRiver(ax, az, bx, bz) {
+        const n = 14;
+        for (let i = 1; i < n; i++) {
+          const t = i / n;
+          if (distToRiver(ax + (bx - ax) * t, az + (bz - az) * t) < RIVER_WIDTH + 0.5) return true;
+        }
+        return false;
+      }
+      function addPath(tx, tz) {
+        if (!crossesRiver(0, 0, tx, tz)) {
+          PATHS.push([{ x: 0, z: 0 }, { x: tx, z: tz }]);
+          return;
+        }
+        let bridge = null, bd = 1e9;
+        for (const b of POI.bridges) {
+          const d = Math.hypot(b.x - tx, b.z - tz);
+          if (d < bd) { bd = d; bridge = b; }
+        }
+        if (bridge) {
+          PATHS.push([{ x: 0, z: 0 }, { x: bridge.x, z: bridge.z }, { x: tx, z: tz }]);
+        }
+      }
+      for (const c of POI.campsites) addPath(c.x, c.z);
+      if (POI.dock) addPath(POI.dock.x, POI.dock.z);
+      if (POI.graveyard) addPath(POI.graveyard.x, POI.graveyard.z);
+      if (POI.tower) addPath(POI.tower.x, POI.tower.z);
+    })();
+
+    function distToPath(x, z) {
+      let best = Infinity;
+      for (const line of PATHS) {
+        for (let i = 0; i < line.length - 1; i++) {
+          const d = distPointToSeg(x, z, line[i].x, line[i].z, line[i + 1].x, line[i + 1].z);
+          if (d < best) best = d;
+        }
+      }
+      return best;
+    }
+
+    // Clearance test so scattered props stay out of the landmarks' yards.
+    function nearPOI(x, z, clearance = 9) {
+      for (const c of POI.campsites) if (Math.hypot(x - c.x, z - c.z) < clearance) return true;
+      for (const c of POI.cabins) if (Math.hypot(x - c.x, z - c.z) < clearance) return true;
+      if (POI.tower && Math.hypot(x - POI.tower.x, z - POI.tower.z) < clearance) return true;
+      if (POI.graveyard && Math.hypot(x - POI.graveyard.x, z - POI.graveyard.z) < clearance + 2) return true;
+      if (POI.dock && Math.hypot(x - POI.dock.x, z - POI.dock.z) < clearance + 3) return true;
+      for (const b of POI.bridges) if (Math.hypot(x - b.x, z - b.z) < clearance + 3) return true;
+      return false;
     }
 
     // === Ground mesh ===
@@ -1668,6 +1919,15 @@
       const siltBand = smoothstep01(1 - riverD / (RIVER_WIDTH + 3.2)) * 0.85;
       if (beach > siltBand) out.lerp(cSand, beach);
       else if (siltBand > 0) out.lerp(cSilt, siltBand * 0.8);
+
+      // Worn dirt tracks between the landmarks — ragged edges so they read as trodden
+      // ground rather than painted lines.
+      const pd = distToPath(wx, wz);
+      if (pd < 3.4) {
+        const wobble = 1 + fbm(wx * 0.14, wz * 0.14, 2) * 0.5;
+        const wear = 1 - smoothstep01(pd / (1.7 * wobble));
+        if (wear > 0) out.lerp(cDirt, wear * 0.62);
+      }
 
       // Underwater beds read darker and siltier.
       const depth = Math.max(0, (waterLevelAt(wx, wz) ?? h) - h);
@@ -1958,6 +2218,501 @@
     scatterStreamPebbles();
     // scatterReeds() runs later — it needs the prop-merging helpers.
 
+    // === POI construction ===
+    // Meshes for the landmarks planned above. Each landmark merges into a handful of
+    // draw calls and registers its own colliders.
+    const poiMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.85 });
+    const emberGlowMat = new THREE.MeshStandardMaterial({
+      color: 0xff5a1a, emissive: 0xff6a22, emissiveIntensity: 1.4, roughness: 0.8
+    });
+
+    function poiBox(parts, mat, w, h, d, x, y, z, ry = 0, rz = 0, rx = 0) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      m.position.set(x, y, z);
+      m.rotation.set(rx, ry, rz);
+      parts.push(m);
+      return m;
+    }
+
+    function buildCampsite(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      // Seat at centre ground; each tent then levels onto its own patch, so the small
+      // clutter around the fire doesn't sink on sloped sites.
+      const gy = sampleHeight(cx, cz) - 0.04;
+      const parts = [];
+      const canvas = new THREE.MeshStandardMaterial({ color: 0x8c7a4f });
+      const canvasDark = new THREE.MeshStandardMaterial({ color: 0x6e5f3c });
+      const wood = new THREE.MeshStandardMaterial({ color: 0x6b4a2a });
+      const woodDark = new THREE.MeshStandardMaterial({ color: 0x4a331e });
+      const stone = new THREE.MeshStandardMaterial({ color: 0x777470 });
+      const char = new THREE.MeshStandardMaterial({ color: 0x24201c });
+
+      // Two A-frame tents facing the fire. Panels are sized so their top edges meet at
+      // the ridge instead of crossing through each other.
+      const baseAng = rnd() * Math.PI * 2;
+      for (let i = 0; i < 2; i++) {
+        const a = baseAng + (i === 0 ? 0 : Math.PI * (0.65 + rnd() * 0.7));
+        const tx = Math.cos(a) * 3.6, tz = Math.sin(a) * 3.6;
+        // Level each tent onto the ground it actually stands on.
+        const dy = sampleHeight(cx + tx, cz + tz) - gy - 0.05;
+        const face = Math.atan2(-tx, -tz); // ridge points at the fire
+        const roll = 0.72, pw = 1.4;
+        const off = (pw / 2) * Math.cos(roll) * 0.92;
+        const py = 0.28 + (pw / 2) * Math.sin(roll);
+        // local +x in world after yaw:
+        const lxX = Math.cos(face), lxZ = -Math.sin(face);
+        const mat = i ? canvas : canvasDark;
+        poiBox(parts, mat, pw, 0.07, 2.5, tx - lxX * off, dy + py, tz - lxZ * off, face, roll);
+        poiBox(parts, mat, pw, 0.07, 2.5, tx + lxX * off, dy + py, tz + lxZ * off, face, -roll);
+        // Back sheet + ridge pole.
+        const rzX = Math.sin(face), rzZ = Math.cos(face);
+        poiBox(parts, canvasDark, 1.5, 1.0, 0.07, tx - rzX * 1.18, dy + 0.5, tz - rzZ * 1.18, face);
+        poiBox(parts, wood, 0.08, 0.08, 2.7, tx, dy + 0.28 + (pw / 2) * Math.sin(roll) + 0.32, tz, face);
+        addSolid(cx + tx, cz + tz, 1.1, gy, gy + 1.6);
+      }
+
+      // Fire ring, charred logs, seating.
+      for (let i = 0; i < 7; i++) {
+        const a = (i / 7) * Math.PI * 2 + rnd() * 0.3;
+        poiBox(parts, stone, 0.28, 0.22, 0.24, Math.cos(a) * 0.62, 0.1, Math.sin(a) * 0.62, rnd() * 3);
+      }
+      poiBox(parts, char, 0.62, 0.13, 0.14, 0.05, 0.12, 0, 0.5);
+      poiBox(parts, char, 0.58, 0.13, 0.14, -0.05, 0.14, 0.05, 2.2);
+      for (let i = 0; i < 2; i++) {
+        const a = rnd() * Math.PI * 2;
+        const lx = Math.cos(a) * 1.7, lz = Math.sin(a) * 1.7;
+        const log = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 1.5, 7), wood);
+        log.position.set(lx, 0.19, lz);
+        log.rotation.set(Math.PI / 2, 0, a + Math.PI / 2);
+        parts.push(log);
+      }
+      // Supply crates.
+      const crateDy = sampleHeight(cx + 2.4, cz - 1.6) - gy - 0.03;
+      const crateA = poiBox(parts, woodDark, 0.7, 0.7, 0.7, 2.4, crateDy + 0.35, -1.6, rnd());
+      poiBox(parts, wood, 0.55, 0.55, 0.55, 2.35, crateDy + 0.98, -1.5, rnd());
+      addSolid(cx + crateA.position.x, cz + crateA.position.z, 0.6, gy, gy + 1.4);
+      addSolid(cx, cz, 0.62, gy, gy + 0.45); // fire ring
+
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      scene.add(mesh);
+
+      // Embers + firelight.
+      const ember = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.34, 6), emberGlowMat);
+      ember.position.set(cx, gy + 0.2, cz);
+      scene.add(ember);
+      const light = new THREE.PointLight(0xff8c3a, 0, 11, 2);
+      light.position.set(cx, gy + 1.0, cz);
+      scene.add(light);
+      campfires.push({ x: cx, z: cz, y: gy, light, phase: rnd() * 9 });
+    }
+
+    function buildCabin(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      const gy = groundMinAround(cx, cz, 1.6) - 0.06;
+      const yaw = rnd() * Math.PI * 2;
+      const parts = [];
+      const plank = new THREE.MeshStandardMaterial({ color: 0x77573a });
+      const plankOld = new THREE.MeshStandardMaterial({ color: 0x5c4630 });
+      const stone = new THREE.MeshStandardMaterial({ color: 0x6f6d68 });
+
+      poiBox(parts, plankOld, 5.0, 0.28, 4.0, 0, 0.14, 0);                 // slab
+      poiBox(parts, plank, 5.0, 2.0, 0.24, 0, 1.14, -1.9);                 // back wall
+      poiBox(parts, plank, 0.24, 2.0, 3.9, -2.4, 1.14, 0);                 // left wall
+      poiBox(parts, plankOld, 0.24, 1.2, 1.4, 2.4, 0.74, -1.2);            // right stub
+      poiBox(parts, plankOld, 0.24, 0.8, 1.0, 2.4, 0.54, 1.3);             // right stub 2
+      // Collapsed roof: one panel still leaning, planks spilled inside.
+      poiBox(parts, plankOld, 3.4, 0.14, 3.0, -0.9, 2.15, -0.6, 0, 0.42);
+      for (let i = 0; i < 4; i++) {
+        poiBox(parts, rnd() < 0.5 ? plank : plankOld, 0.34, 0.1, 2.6 + rnd(), 0.6 + rnd() * 1.2, 0.45 + i * 0.1, rnd() - 0.5, rnd() * 2, 0, rnd() * 0.4);
+      }
+      const chim = poiBox(parts, stone, 0.72, 2.9, 0.72, 1.7, 1.45, -1.5);
+      poiBox(parts, stone, 0.9, 0.3, 0.9, 1.7, 0.15, -1.5);
+
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      g.position.set(cx, gy, cz);
+      g.rotation.y = yaw;
+      scene.add(g);
+
+      // Colliders, rotated into world space.
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const w = (lx, lz, r, h) => addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy, gy + h);
+      w(-1.6, -1.9, 0.8, 2.2); w(0, -1.9, 0.8, 2.2); w(1.6, -1.9, 0.8, 2.2);   // back wall
+      w(-2.4, -1.1, 0.75, 2.2); w(-2.4, 0.9, 0.75, 2.2);                        // left wall
+      w(2.4, -1.2, 0.6, 1.6);                                                    // right stub
+      w(1.7, -1.5, 0.6, 3.0);                                                    // chimney
+    }
+
+    function buildWatchtower(cx, cz) {
+      const gy = groundMinAround(cx, cz, 1.6);
+      const parts = [];
+      const wood = new THREE.MeshStandardMaterial({ color: 0x6b4a2a });
+      const woodDark = new THREE.MeshStandardMaterial({ color: 0x503722 });
+      for (const [lx, lz] of [[-1.1, -1.1], [1.1, -1.1], [-1.1, 1.1], [1.1, 1.1]]) {
+        poiBox(parts, wood, 0.26, 5.6, 0.26, lx, 2.8, lz, 0, lx * 0.045, -lz * 0.045);
+      }
+      // Cross braces
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 0, 1.7, -1.14, 0, 0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 0, 1.7, 1.14, 0, -0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, -1.14, 1.7, 0, 0, 0, 0.72);
+      poiBox(parts, woodDark, 0.14, 3.2, 0.14, 1.14, 1.7, 0, 0, 0, -0.72);
+      poiBox(parts, wood, 3.0, 0.2, 3.0, 0, 5.5, 0);                       // deck
+      for (const [lx, lz, w2, d2] of [[0, -1.45, 3.0, 0.12], [0, 1.45, 3.0, 0.12], [-1.45, 0, 0.12, 3.0], [1.45, 0, 0.12, 3.0]]) {
+        poiBox(parts, woodDark, w2, 0.75, d2, lx, 6.0, lz);
+      }
+      const roof = new THREE.Mesh(new THREE.ConeGeometry(2.5, 1.3, 4), woodDark);
+      roof.position.set(0, 7.4, 0);
+      roof.rotation.y = Math.PI / 4;
+      parts.push(roof);
+
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      scene.add(mesh);
+      addSolid(cx, cz, 1.75, gy, gy + 5.4);
+      // Lantern up top — reads from right across the valley at night.
+      const light = new THREE.PointLight(0xffb066, 0, 16, 2);
+      light.position.set(cx, gy + 6.1, cz);
+      scene.add(light);
+      campfires.push({ x: cx, z: cz, y: gy + 5.6, light, phase: 2.1, lantern: true });
+    }
+
+    function buildGraveyard(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      const gy = sampleHeight(cx, cz) - 0.04;
+      const parts = [];
+      const stone = new THREE.MeshStandardMaterial({ color: 0x8a8a84 });
+      const stoneOld = new THREE.MeshStandardMaterial({ color: 0x6e6e66 });
+      const deadwood = new THREE.MeshStandardMaterial({ color: 0x4a3a2c });
+      let big = 0;
+      for (let i = 0; i < 9; i++) {
+        const gx = ((i % 3) - 1) * 2.6 + (rnd() - 0.5) * 0.9;
+        const gz = (Math.floor(i / 3) - 1) * 2.4 + (rnd() - 0.5) * 0.9;
+        // Each stone stands on its own ground.
+        const dy = sampleHeight(cx + gx, cz + gz) - gy - 0.06;
+        const h = 0.55 + rnd() * 0.5;
+        const tilt = (rnd() - 0.5) * 0.5;
+        poiBox(parts, rnd() < 0.5 ? stone : stoneOld, 0.5, h, 0.14, gx, dy + h * 0.5, gz, rnd() * 0.4, tilt);
+        if (h > 0.8 && big < 4) { big++; addSolid(cx + gx, cz + gz, 0.32, gy, gy + h + 0.2); }
+      }
+      // Bare dead tree watching over the plots.
+      const treeDy = sampleHeight(cx - 3.4, cz - 2.8) - gy - 0.08;
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.28, 3.4, 7), deadwood);
+      trunk.position.set(-3.4, treeDy + 1.7, -2.8);
+      trunk.rotation.z = 0.12;
+      parts.push(trunk);
+      for (let i = 0; i < 4; i++) {
+        const a = rnd() * Math.PI * 2;
+        poiBox(parts, deadwood, 0.1, 1.3, 0.1, -3.4 + Math.cos(a) * 0.6, treeDy + 3.1 + rnd() * 0.5, -2.8 + Math.sin(a) * 0.6, 0, Math.cos(a) * 1.0, Math.sin(a) * 0.8);
+      }
+      addSolid(cx - 3.4, cz - 2.8, 0.4, gy, gy + 3.4);
+
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      scene.add(mesh);
+    }
+
+    function buildDock(d) {
+      const parts = [];
+      const plank = new THREE.MeshStandardMaterial({ color: 0x77573a });
+      const post = new THREE.MeshStandardMaterial({ color: 0x54402a });
+      const deckY = LAKE.level + 0.55;
+      const len = 9.5, hw = 1.15;
+      // Deck slats.
+      for (let i = 0; i < 12; i++) {
+        poiBox(parts, plank, hw * 2, 0.12, 0.62, 0, 0, -len / 2 + 0.45 + i * 0.78, 0, 0, 0);
+      }
+      // Posts marching out into the water.
+      for (const lz of [-len / 2 + 0.5, 0, len / 2 - 0.5]) {
+        for (const lx of [-hw + 0.1, hw - 0.1]) {
+          const p = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.14, 3.4, 6), post);
+          p.position.set(lx, -1.55, lz);
+          parts.push(p);
+        }
+      }
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      // Rowboat tied alongside.
+      const boatParts = [];
+      poiBox(boatParts, plank, 1.1, 0.35, 2.6, hw + 1.2, -0.32, -1.2);
+      poiBox(boatParts, post, 1.1, 0.3, 0.5, hw + 1.2, -0.22, -2.55, 0, 0, 0.5);
+      poiBox(boatParts, post, 0.9, 0.1, 0.28, hw + 1.2, -0.1, -1.0);
+      const boat = mergeParts(boatParts, poiMat, { castShadow: true });
+      g.add(boat);
+      g.position.set(d.x, deckY, d.z);
+      g.rotation.y = d.yaw;
+      scene.add(g);
+      platforms.push({ x: d.x, z: d.z, hw, hl: len / 2, yaw: d.yaw, deckY: deckY + 0.08 });
+    }
+
+    function buildBridge(b) {
+      const halfLen = 8.2, hw = 1.35;
+      // Highest ground anywhere along the crossing decides the deck height, so the
+      // planks clear the banks and the bed alike.
+      let crest = -Infinity;
+      for (let t = -1; t <= 1; t += 0.25) {
+        crest = Math.max(crest, sampleHeight(
+          b.x + Math.sin(b.yaw) * halfLen * t,
+          b.z + Math.cos(b.yaw) * halfLen * t
+        ));
+      }
+      const deckY = crest + 0.3;
+      const parts = [];
+      const plank = new THREE.MeshStandardMaterial({ color: 0x7a5a38 });
+      const plankDark = new THREE.MeshStandardMaterial({ color: 0x5a4128 });
+      // Slatted deck.
+      for (let i = 0; i < 21; i++) {
+        poiBox(parts, i % 3 ? plank : plankDark, hw * 2, 0.14, 0.62, 0, 0, -halfLen + 0.4 + i * 0.79);
+      }
+      // Rails + posts.
+      for (const side of [-1, 1]) {
+        poiBox(parts, plankDark, 0.1, 0.1, halfLen * 2, side * (hw - 0.06), 0.92, 0);
+        for (const lz of [-halfLen + 0.4, -halfLen / 2, 0, halfLen / 2, halfLen - 0.4]) {
+          poiBox(parts, plank, 0.13, 0.95, 0.13, side * (hw - 0.06), 0.45, lz);
+        }
+      }
+      // Piles down into the riverbed.
+      for (const lz of [-halfLen * 0.55, 0, halfLen * 0.55]) {
+        for (const side of [-1, 1]) {
+          const p = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 4.4, 6), plankDark);
+          p.position.set(side * (hw - 0.2), -2.1, lz);
+          parts.push(p);
+        }
+      }
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      g.position.set(b.x, deckY, b.z);
+      g.rotation.y = b.yaw;
+      scene.add(g);
+      platforms.push({ x: b.x, z: b.z, hw: hw - 0.15, hl: halfLen, yaw: b.yaw, deckY: deckY + 0.09 });
+      // End posts block the corners so traffic funnels onto the deck.
+      const cy = Math.cos(b.yaw), sy = Math.sin(b.yaw);
+      for (const [lx, lz] of [[-hw, -halfLen], [hw, -halfLen], [-hw, halfLen], [hw, halfLen]]) {
+        addSolid(b.x + lx * cy + lz * sy, b.z - lx * sy + lz * cy, 0.24, deckY - 1, deckY + 1.4);
+      }
+    }
+
+    function buildPOIMeshes() {
+      let seed = 0xca3b1e;
+      for (const c of POI.campsites) buildCampsite(c.x, c.z, seed += 101);
+      for (const c of POI.cabins) buildCabin(c.x, c.z, seed += 101);
+      if (POI.tower) buildWatchtower(POI.tower.x, POI.tower.z);
+      if (POI.graveyard) buildGraveyard(POI.graveyard.x, POI.graveyard.z, seed += 101);
+      if (POI.dock) buildDock(POI.dock);
+      for (const b of POI.bridges) buildBridge(b);
+    }
+
+    // === Big announcements + minimap ===
+    const bigBannerEl = document.getElementById('bigBanner');
+    const bigBannerT = bigBannerEl.querySelector('.t');
+    const bigBannerS = bigBannerEl.querySelector('.s');
+    let bannerTimer = 0;
+
+    function showBanner(title, sub = '', dur = 3.4, color = '#f4f7ff') {
+      bigBannerT.textContent = title;
+      bigBannerT.style.color = color;
+      bigBannerS.textContent = sub;
+      bigBannerEl.classList.add('show');
+      bannerTimer = dur;
+    }
+
+    function updateBanner(dt) {
+      if (bannerTimer > 0) {
+        bannerTimer -= dt;
+        if (bannerTimer <= 0) bigBannerEl.classList.remove('show');
+      }
+    }
+
+    // Compass name for a world direction (map north is +z).
+    function compassName(dx, dz) {
+      const names = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+      let deg = Math.atan2(dx, dz) * 180 / Math.PI;
+      if (deg < 0) deg += 360;
+      return names[Math.round(deg / 45) % 8];
+    }
+
+    // The minimap bakes the landscape once, then blits it with live blips on top.
+    const minimapEl = document.getElementById('minimap');
+    const minimapCtx = minimapEl.getContext('2d');
+    const MAP_R = 235; // world radius covered by the map
+    const mapBake = document.createElement('canvas');
+    mapBake.width = 164; mapBake.height = 164;
+
+    function worldToMap(x, z) {
+      return {
+        x: (x + MAP_R) / (2 * MAP_R) * mapBake.width,
+        y: (MAP_R - z) / (2 * MAP_R) * mapBake.height
+      };
+    }
+
+    function bakeMinimap() {
+      const ctx = mapBake.getContext('2d');
+      const img = ctx.createImageData(mapBake.width, mapBake.height);
+      const d = img.data;
+      for (let py = 0; py < mapBake.height; py++) {
+        for (let px = 0; px < mapBake.width; px++) {
+          const wx = (px / mapBake.width) * 2 * MAP_R - MAP_R;
+          const wz = MAP_R - (py / mapBake.height) * 2 * MAP_R;
+          const i = (py * mapBake.width + px) * 4;
+          if (Math.hypot(wx, wz) > MAP_R) { d[i + 3] = 0; continue; }
+          const h = sampleHeight(wx, wz);
+          let r, g, b;
+          if (waterLevelAt(wx, wz) !== null) {
+            r = 38; g = 92; b = 150;
+          } else if (h > 34) {
+            const t = Math.min(1, (h - 34) / 40);
+            r = 120 + t * 120; g = 120 + t * 122; b = 118 + t * 128;
+          } else {
+            const t = Math.max(0, Math.min(1, (h + 8) / 26));
+            r = 58 + t * 46; g = 118 + t * 26; b = 58 + t * 8;
+            if (distToPath(wx, wz) < 1.9) { r = 122; g = 92; b = 58; }
+          }
+          d[i] = r; d[i + 1] = g; d[i + 2] = b; d[i + 3] = 235;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+      // Static landmark markers.
+      function mark(x, z, color) {
+        const p = worldToMap(x, z);
+        ctx.fillStyle = color;
+        ctx.fillRect(p.x - 1.5, p.y - 1.5, 3, 3);
+      }
+      for (const c of POI.campsites) mark(c.x, c.z, '#ffb347');
+      for (const c of POI.cabins) mark(c.x, c.z, '#c9a17c');
+      if (POI.tower) mark(POI.tower.x, POI.tower.z, '#e6d27a');
+      if (POI.graveyard) mark(POI.graveyard.x, POI.graveyard.z, '#b9b9c9');
+      for (const b of POI.bridges) mark(b.x, b.z, '#d9c7a0');
+    }
+
+    let minimapTick = 0;
+    function drawMinimap(dt) {
+      minimapTick -= dt;
+      if (minimapTick > 0) return;
+      minimapTick = 0.12;
+      const ctx = minimapCtx;
+      ctx.clearRect(0, 0, minimapEl.width, minimapEl.height);
+      ctx.drawImage(mapBake, 0, 0);
+
+      // Threat direction: a red arc on the rim while a wave is inbound.
+      if (gameStarted && phase !== 'idle' && waveBearings.length && !waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.9)';
+        ctx.lineWidth = 3;
+        for (const bAng of waveBearings) {
+          // World spawn dir is (cos a, sin a); canvas is x-right, z-up flipped.
+          const ca = Math.atan2(-Math.sin(bAng), Math.cos(bAng));
+          ctx.beginPath();
+          ctx.arc(minimapEl.width / 2, minimapEl.height / 2, minimapEl.width / 2 - 4, ca - 0.45, ca + 0.45);
+          ctx.stroke();
+        }
+      } else if (gameStarted && phase !== 'idle' && waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.7)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(minimapEl.width / 2, minimapEl.height / 2, minimapEl.width / 2 - 4, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      function blip(x, z, color, size = 2) {
+        const p = worldToMap(x, z);
+        ctx.fillStyle = color;
+        ctx.fillRect(p.x - size / 2, p.y - size / 2, size, size);
+      }
+      for (const b of builds) blip(b.x, b.z, '#5ad8ff', 2);
+      if (house.active) blip(house.group.position.x, house.group.position.z, '#7cdea0', 4);
+      for (const s of supplyDrops) {
+        if (s.state !== 'gone') blip(s.x, s.z, (performance.now() % 700 < 350) ? '#ffe066' : '#ffaa00', 4);
+      }
+      for (const z of zombies) {
+        if (z.alive) blip(z.mesh.position.x, z.mesh.position.z, z.typeKey === 'colossus' ? '#ff2222' : '#ff6655', z.typeKey === 'colossus' ? 4 : 2);
+      }
+      // Player arrow.
+      const pp = worldToMap(player.position.x, player.position.z);
+      ctx.save();
+      ctx.translate(pp.x, pp.y);
+      ctx.rotate(aimYaw); // local "up" lands on the world facing with north-up mapping
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, -4); ctx.lineTo(2.6, 3); ctx.lineTo(-2.6, 3);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      // North tag.
+      ctx.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx.font = '9px sans-serif';
+      ctx.fillText('N', minimapEl.width / 2 - 3, 10);
+    }
+
+    // Bird flocks turning lazy circles over the valley. They scatter nothing and fix
+    // nothing — the sky just shouldn't be dead.
+    const birdFlocks = [];
+    function buildBirds() {
+      const rnd = mulberry32(0xb14d5);
+      const birdMat = new THREE.MeshBasicMaterial({ color: 0x1c1e24 });
+      const anchors = [
+        { x: 0, z: 0 }, { x: LAKE.x + 30, z: LAKE.z + 20 }, { x: 90, z: 90 }
+      ];
+      for (let f = 0; f < 3; f++) {
+        const parts = [];
+        const n = 4 + ((rnd() * 4) | 0);
+        for (let i = 0; i < n; i++) {
+          const bx = (rnd() - 0.5) * 5, by = (rnd() - 0.5) * 1.6, bz = (rnd() - 0.5) * 6;
+          const wl = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.03, 0.18), birdMat);
+          wl.position.set(bx - 0.26, by, bz);
+          wl.rotation.z = 0.5;
+          const wr = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.03, 0.18), birdMat);
+          wr.position.set(bx + 0.26, by, bz);
+          wr.rotation.z = -0.5;
+          parts.push(wl, wr);
+        }
+        const mesh = mergeParts(parts, new THREE.MeshBasicMaterial({ vertexColors: true }));
+        mesh.frustumCulled = false;
+        scene.add(mesh);
+        birdFlocks.push({
+          mesh,
+          cx: anchors[f].x, cz: anchors[f].z,
+          radius: 36 + rnd() * 30,
+          height: 26 + rnd() * 16,
+          ang: rnd() * Math.PI * 2,
+          speed: (0.05 + rnd() * 0.05) * (rnd() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    function updateBirds(dt) {
+      for (const f of birdFlocks) {
+        f.ang += f.speed * dt;
+        const x = f.cx + Math.cos(f.ang) * f.radius;
+        const z = f.cz + Math.sin(f.ang) * f.radius;
+        f.mesh.position.set(x, f.height + Math.sin(f.ang * 3) * 2.5, z);
+        // Face along the direction of travel around the circle.
+        f.mesh.rotation.y = -f.ang + (f.speed > 0 ? 0 : Math.PI);
+        f.mesh.rotation.z = Math.sin(wind.time * 1.5 + f.ang * 4) * 0.14; // wing tilt
+      }
+    }
+
+    // Firelight flicker + drifting embers, active from dusk to dawn.
+    let emberCd = 0;
+    function updateCampfires(dt) {
+      const dark = isNight || skyUniforms.uNight.value > 0.35;
+      emberCd -= dt;
+      for (const f of campfires) {
+        f.phase += dt * (f.lantern ? 3 : 9);
+        const flick = Math.sin(f.phase) * 0.5 + Math.sin(f.phase * 2.7) * 0.3;
+        f.light.intensity = dark ? (f.lantern ? 1.5 + flick * 0.15 : 2.4 + flick * 0.8) : 0;
+        if (!f.lantern && dark && emberCd <= 0 &&
+            Math.hypot(f.x - player.position.x, f.z - player.position.z) < 45) {
+          spawnMote(f.x + (Math.random() - 0.5) * 0.4, f.y + 0.45, f.z + (Math.random() - 0.5) * 0.4, emberMat, {
+            vx: (Math.random() - 0.5) * 0.4, vy: 1.1 + Math.random() * 0.9, vz: (Math.random() - 0.5) * 0.4,
+            grav: -0.3, drag: 0.4, life: 0.9 + Math.random() * 0.8, scale: 0.3 + Math.random() * 0.25
+          });
+          emberCd = 0.12;
+        }
+      }
+    }
+
     // --- Wind -------------------------------------------------------------------
     // A single gust value drives trees, grass, reeds and drifting leaves, so the whole
     // world leans together instead of every prop wobbling on its own clock.
@@ -2149,6 +2904,8 @@
     function plantable(x, z, maxSlope = 0.45) {
       if (waterDepthAt(x, z) > 0.02) return false;
       if (terrainSlope(x, z) > maxSlope) return false;
+      if (nearPOI(x, z, 6)) return false;
+      if (distToPath(x, z) < 1.4) return false;
       return true;
     }
 
@@ -2276,6 +3033,13 @@
       if (ambientCd > 0) return;
       ambientCd = 0.12;
       if (motes.length > MAX_MOTES * 0.6) return;
+      // Fish breaking the surface when you're near the lake.
+      if (Math.random() < 0.06 && lakeDist(player.position.x, player.position.z) < LAKE_FILL + 40) {
+        const fa = Math.random() * Math.PI * 2;
+        const fr = Math.random() * LAKE.r * 0.85;
+        const fx = LAKE.x + Math.cos(fa) * fr, fz = LAKE.z + Math.sin(fa) * fr;
+        if (waterLevelAt(fx, fz) !== null) spawnSplash(fx, LAKE.level + 0.05, fz, 4, 0.8);
+      }
       const a = Math.random() * Math.PI * 2;
       const r = 3 + Math.random() * 14;
       const x = player.position.x + Math.cos(a) * r;
@@ -3126,6 +3890,7 @@
         if (landDist(x, z) < spawnClear) continue;
         if (waterDepthAt(x, z) > 0.35) continue;
         if (distToRiver(x, z) < RIVER_WIDTH + 0.9) continue;
+        if (nearPOI(x, z, 8) || distToPath(x, z) < 1.8) continue;
         // Boulders gather where the ground breaks up: steep faces and high altitude.
         const slope = terrainSlope(x, z);
         const h = sampleHeight(x, z);
@@ -3524,6 +4289,7 @@
         const ds = distToRiver(x, z);
         if (ds < RIVER_WIDTH + 1.6) continue; // keep the river open
         if (ds < RIVER_WIDTH + 4.5 && rnd() < 0.5) continue; // sparser banks
+        if (nearPOI(x, z, 10) || distToPath(x, z) < 2.2) continue;
         const moisture = moistureAt(x, z);
         // Forest density tracks moisture, so you get glades and thickets.
         if (rnd() > 0.22 + moisture * 1.0) continue;
@@ -6008,18 +6774,26 @@
     rebuildFoliage();
     scatterReeds();
     buildClouds();
+    buildPOIMeshes();
+    buildBirds();
+    bakeMinimap();
     reseatAllProps();
     // --- Builds: barricades & turrets ---
     const builds = [];
-    const COST = { barricade: 5, light: 12, heavy: 22 };
+    const COST = { barricade: 5, wall: 8, spikes: 6, light: 12, flame: 18, heavy: 22 };
+    const BUILD_NAMES = {
+      barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap',
+      light: 'Light turret', flame: 'Flame turret', heavy: 'Heavy turret'
+    };
+    const BUILD_FOOTPRINT = { barricade: 0.7, wall: 0.95, spikes: 0.8, light: 0.55, flame: 0.55, heavy: 0.75 };
     const PLACE_DIST = 4.0;
 
     const ghostGroup = new THREE.Group();
     ghostGroup.visible = false;
     scene.add(ghostGroup);
-    let placeMode = null; // 'barricade' | 'light' | 'heavy' | null
+    let placeMode = null; // key of BUILD_ORDER, or null
     let buildMode = false;
-    const BUILD_ORDER = ['barricade', 'light', 'heavy'];
+    const BUILD_ORDER = ['barricade', 'wall', 'spikes', 'light', 'flame', 'heavy'];
     let buildIndex = 0;
     let ghostValid = false;
 
@@ -6127,6 +6901,80 @@
       return g;
     }
 
+    function makeWallMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const wood = matOverride || new THREE.MeshStandardMaterial({ color: 0x7a5c38, roughness: 0.85 });
+      const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 });
+      // Stout palisade block: planks, cross-brace, capping strip.
+      for (let i = 0; i < 5; i++) {
+        const plank = new THREE.Mesh(new THREE.BoxGeometry(0.34, 1.7 + (i % 2) * 0.16, 0.18), wood);
+        plank.position.set(-0.72 + i * 0.36, 0.86 + (i % 2) * 0.08, 0);
+        plank.castShadow = true;
+        g.add(plank);
+      }
+      const brace = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.14, 0.1), metal);
+      brace.position.set(0, 1.1, 0.14);
+      brace.rotation.z = 0.08;
+      g.add(brace);
+      const brace2 = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.14, 0.1), metal);
+      brace2.position.set(0, 0.45, 0.14);
+      brace2.rotation.z = -0.06;
+      g.add(brace2);
+      const foot = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.14, 0.6), metal);
+      foot.position.y = 0.07;
+      g.add(foot);
+      return g;
+    }
+
+    function makeSpikesMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const plateMat = matOverride || new THREE.MeshStandardMaterial({ color: 0x4a4f57, metalness: 0.5, roughness: 0.55 });
+      const spikeMat = matOverride || new THREE.MeshStandardMaterial({ color: 0x9aa4ae, metalness: 0.75, roughness: 0.3 });
+      const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.95, 0.1, 8), plateMat);
+      plate.position.y = 0.05;
+      plate.receiveShadow = true;
+      g.add(plate);
+      for (let i = 0; i < 9; i++) {
+        const a = (i / 9) * Math.PI * 2;
+        const r = i % 3 === 0 ? 0.2 : 0.55;
+        const spike = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.5 + (i % 2) * 0.16, 5), spikeMat);
+        spike.position.set(Math.cos(a) * r, 0.32, Math.sin(a) * r);
+        spike.rotation.set((Math.random() - 0.5) * 0.25, 0, (Math.random() - 0.5) * 0.25);
+        spike.castShadow = true;
+        g.add(spike);
+      }
+      return g;
+    }
+
+    function makeFlameTurretMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const tankMat = matOverride || new THREE.MeshStandardMaterial({ color: 0xb33a2a, metalness: 0.45, roughness: 0.45 });
+      const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.6, roughness: 0.45 });
+      const pilot = matOverride || new THREE.MeshStandardMaterial({
+        color: 0xffaa33, emissive: 0xff7711, emissiveIntensity: 0.9, roughness: 0.4
+      });
+      const base = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.6, 0.25, 10), metal);
+      base.position.y = 0.12;
+      base.castShadow = true;
+      g.add(base);
+      const tank = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.85, 12), tankMat);
+      tank.position.y = 0.72;
+      tank.castShadow = true;
+      g.add(tank);
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(0.32, 12, 8), tankMat);
+      cap.position.y = 1.15;
+      g.add(cap);
+      const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.11, 0.55, 8), metal);
+      nozzle.rotation.x = Math.PI / 2;
+      nozzle.position.set(0, 0.9, 0.5);
+      g.add(nozzle);
+      const flameTip = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 5), pilot);
+      flameTip.position.set(0, 0.9, 0.8);
+      g.add(flameTip);
+      g.userData.muzzleLocal = new THREE.Vector3(0, 0.9, 0.8);
+      return g;
+    }
+
     function rebuildGhost() {
       clearGhostChildren();
       if (!placeMode) { ghostGroup.visible = false; return; }
@@ -6135,7 +6983,10 @@
       });
       let mesh;
       if (placeMode === 'barricade') mesh = makeBarricadeMesh(ghostMat);
+      else if (placeMode === 'wall') mesh = makeWallMesh(ghostMat);
+      else if (placeMode === 'spikes') mesh = makeSpikesMesh(ghostMat);
       else if (placeMode === 'light') mesh = makeLightTurretMesh(ghostMat);
+      else if (placeMode === 'flame') mesh = makeFlameTurretMesh(ghostMat);
       else mesh = makeHeavyTurretMesh(ghostMat);
       ghostGroup.add(mesh);
       ghostGroup.userData.mat = ghostMat;
@@ -6155,9 +7006,9 @@
       }
       rebuildGhost();
       if (mode) {
-        const names = { barricade: 'Barricade', light: 'Light turret', heavy: 'Heavy turret' };
         const cost = COST[mode];
-        placeBannerEl.textContent = 'Build: ' + names[mode] + ' (' + cost + '¢)';
+        placeBannerEl.textContent = 'Build ' + (BUILD_ORDER.indexOf(mode) + 1) + '/6: ' +
+          BUILD_NAMES[mode] + ' ($' + cost + ') · T repair · X sell';
         placeBannerEl.classList.add('on');
       } else {
         placeBannerEl.classList.remove('on');
@@ -6215,6 +7066,12 @@
       for (const b of builds) {
         if (Math.hypot(x - b.x, z - b.z) < radius + b.radius + 0.25) return true;
       }
+      // landmark structures
+      for (const ws of worldSolids) {
+        if (Math.hypot(x - ws.x, z - ws.z) < radius + ws.radius + 0.2) return true;
+      }
+      // no building on bridge or dock decks
+      if (platformHeightAt(x, z) !== null) return true;
       // house
       if (house.active && Math.hypot(x - house.group.position.x, z - house.group.position.z) < radius + house.radius) return true;
       // player
@@ -6237,11 +7094,48 @@
     function validatePlace(x, z) {
       const r = Math.hypot(x, z);
       if (r > landRadius - 1.6) return false;
-      const footprint = placeMode === 'barricade' ? 0.7 : (placeMode === 'heavy' ? 0.75 : 0.55);
+      const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
       if (distToStream(x, z) < STREAM_WIDTH * 0.9) return false;
+      if (waterDepthAt(x, z) > 0.05) return false;
       if (groundSpread(x, z, footprint) > 0.6) return false;
       if (overlapsBlocked(x, z, footprint)) return false;
       return true;
+    }
+
+    // T — patch up the closest damaged structure; cost scales with the damage.
+    function repairNearestBuild() {
+      if (!gameStarted || gameOver || won || paused) return;
+      let best = null, bd = 7;
+      for (const b of builds) {
+        if (b.hp >= b.maxHp - 0.5) continue;
+        const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
+        if (d < bd) { bd = d; best = b; }
+      }
+      if (!best) { AudioSys.invalid(); return; }
+      const cost = Math.max(1, Math.ceil((best.maxHp - best.hp) * 0.12));
+      if (bank < cost) { AudioSys.invalid(); return; }
+      bank -= cost;
+      best.hp = best.maxHp;
+      updateCoinHud();
+      AudioSys.repairClank();
+      spawnDust(best.x, best.mesh.position.y + 0.6, best.z, 4);
+    }
+
+    // X — scrap the closest structure for a partial refund weighted by its condition.
+    function sellNearestBuild() {
+      if (!gameStarted || gameOver || won || paused) return;
+      let best = null, bd = 7;
+      for (const b of builds) {
+        const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
+        if (d < bd) { bd = d; best = b; }
+      }
+      if (!best) { AudioSys.invalid(); return; }
+      const refund = Math.max(1, Math.ceil((COST[best.type] || 5) * 0.6 * (best.hp / best.maxHp)));
+      bank += refund;
+      spawnDust(best.x, best.mesh.position.y + 0.5, best.z, 5);
+      removeBuild(best);
+      updateCoinHud();
+      AudioSys.sellChime();
     }
 
     function tryPlace() {
@@ -6264,34 +7158,55 @@
       updateGhostPreview();
     }
 
+    // Shared HP-bar bits: one green fill + dark back, billboarded per build when hurt.
+    const barBgGeo = new THREE.PlaneGeometry(1.0, 0.13);
+    const barFgGeo = new THREE.PlaneGeometry(0.94, 0.08);
+    const barBgMat = new THREE.MeshBasicMaterial({ color: 0x151a20, transparent: true, opacity: 0.8, depthWrite: false });
+    const barFgMat = new THREE.MeshBasicMaterial({ color: 0x51d86a, depthWrite: false, transparent: true, opacity: 0.95 });
+
+    const BUILD_STATS = {
+      barricade: { hp: 40, radius: 0.75, barY: 1.5 },
+      wall: { hp: 130, radius: 0.95, barY: 2.2 },
+      spikes: { hp: 70, radius: 0.85, barY: 1.1 },
+      light: { hp: 30, radius: 0.55, barY: 1.9, range: 11, fireInterval: 0.28, damage: 8 },
+      flame: { hp: 34, radius: 0.55, barY: 1.8, range: 7.5, fireInterval: 0.25, damage: 5 },
+      heavy: { hp: 55, radius: 0.75, barY: 1.9, range: 14, fireInterval: 0.7, damage: 22 }
+    };
+
     function spawnBuild(kind, x, z) {
-      let mesh, hp, radius, type;
-      if (kind === 'barricade') {
-        mesh = makeBarricadeMesh();
-        hp = 40;
-        radius = 0.75;
-        type = 'barricade';
-      } else if (kind === 'light') {
-        mesh = makeLightTurretMesh();
-        hp = 30;
-        radius = 0.55;
-        type = 'light';
-      } else {
-        mesh = makeHeavyTurretMesh();
-        hp = 55;
-        radius = 0.75;
-        type = 'heavy';
-      }
-      mesh.position.set(x, groundMinAround(x, z, radius * 0.85), z);
+      const st = BUILD_STATS[kind] || BUILD_STATS.barricade;
+      let mesh;
+      if (kind === 'barricade') mesh = makeBarricadeMesh();
+      else if (kind === 'wall') mesh = makeWallMesh();
+      else if (kind === 'spikes') mesh = makeSpikesMesh();
+      else if (kind === 'light') mesh = makeLightTurretMesh();
+      else if (kind === 'flame') mesh = makeFlameTurretMesh();
+      else mesh = makeHeavyTurretMesh();
+      mesh.position.set(x, groundMinAround(x, z, st.radius * 0.85), z);
+      // Walls face across the approach: turn broadside to the player who placed them.
+      if (kind === 'wall') mesh.rotation.y = aimYaw + Math.PI / 2;
       scene.add(mesh);
+
+      const barGroup = new THREE.Group();
+      barGroup.add(new THREE.Mesh(barBgGeo, barBgMat));
+      const barFg = new THREE.Mesh(barFgGeo, barFgMat);
+      barFg.position.z = 0.004;
+      barGroup.add(barFg);
+      barGroup.visible = false;
+      barGroup.renderOrder = 5;
+      scene.add(barGroup);
+
       const b = {
-        mesh, x, z, type, hp, maxHp: hp, radius,
-        range: type === 'light' ? 11 : (type === 'heavy' ? 14 : 0),
+        mesh, x, z, type: kind, hp: st.hp, maxHp: st.hp, radius: st.radius,
+        yaw: kind === 'wall' ? mesh.rotation.y : 0,
+        range: st.range || 0,
         fireCd: 0,
-        fireInterval: type === 'light' ? 0.28 : 0.7,
-        damage: type === 'light' ? 8 : 22,
+        fireInterval: st.fireInterval || 0.7,
+        damage: st.damage || 0,
         flashT: 0,
-        soft: type === 'barricade'
+        soft: kind === 'barricade',
+        barY: st.barY,
+        bar: barGroup, barFg
       };
       builds.push(b);
       return b;
@@ -6299,14 +7214,34 @@
 
     function removeBuild(b) {
       scene.remove(b.mesh);
+      if (b.bar) scene.remove(b.bar);
       const i = builds.indexOf(b);
       if (i >= 0) builds.splice(i, 1);
     }
 
+    // Floating condition bars — only shown once something has taken a hit.
+    function updateBuildBars() {
+      for (const b of builds) {
+        if (!b.bar) continue;
+        const hurt = b.hp < b.maxHp - 0.5;
+        b.bar.visible = hurt;
+        if (!hurt) continue;
+        const frac = Math.max(0, b.hp / b.maxHp);
+        b.bar.position.set(b.x, b.mesh.position.y + b.barY, b.z);
+        b.bar.quaternion.copy(camera.quaternion);
+        b.barFg.scale.x = Math.max(0.02, frac);
+        b.barFg.position.x = -(1 - frac) * 0.47;
+        b.barFg.material = frac > 0.5 ? barFgMat : barFgLowMat;
+      }
+    }
+    const barFgLowMat = new THREE.MeshBasicMaterial({ color: 0xe0563e, depthWrite: false, transparent: true, opacity: 0.95 });
+
     function updateGhostPreview() {
       if (!placeMode) return;
       const pt = getPlacePoint();
-      const footprint = placeMode === 'barricade' ? 0.7 : (placeMode === 'heavy' ? 0.75 : 0.55);
+      const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
+      if (placeMode === 'wall') ghostGroup.rotation.y = aimYaw + Math.PI / 2;
+      else ghostGroup.rotation.y = 0;
       ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
       ghostValid = validatePlace(pt.x, pt.z) && bank >= COST[placeMode];
       const mat = ghostGroup.userData.mat;
@@ -6348,6 +7283,18 @@
       brute: {
         name: 'Brute', hp: 85, speed: 1.85, radius: 0.64, damage: 16, reward: 8, cashDrop: 8,
         armor: 0.28, scale: 1.38, color: 0x6b2a2a, eye: 0xff2222, hunch: 0, armored: true, keepOut: true, tactics: 'tank'
+      },
+      spitter: {
+        name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 6, cashDrop: 6,
+        armor: 0, scale: 1.05, color: 0x8fa04c, eye: 0xccff22, hunch: 0, tactics: 'spit'
+      },
+      screamer: {
+        name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 7, cashDrop: 7,
+        armor: 0, scale: 0.96, color: 0xd8cabb, eye: 0xff55ff, hunch: 0, tactics: 'scream'
+      },
+      colossus: {
+        name: 'Colossus', hp: 520, speed: 1.6, radius: 1.05, damage: 30, reward: 60, cashDrop: 60,
+        armor: 0.32, scale: 2.3, color: 0x5a3030, eye: 0xff3300, hunch: 0, tactics: 'boss'
       }
     };
 
@@ -6409,9 +7356,11 @@
 
       // Torso body
       let torsoW = 0.5 * s, torsoH = 0.55 * s, torsoD = 0.32 * s;
-      if (typeKey === 'brute') { torsoW = 0.72 * s; torsoH = 0.62 * s; torsoD = 0.42 * s; }
+      if (typeKey === 'brute' || typeKey === 'colossus') { torsoW = 0.72 * s; torsoH = 0.62 * s; torsoD = 0.42 * s; }
       if (typeKey === 'feral') { torsoW = 0.38 * s; torsoH = 0.48 * s; torsoD = 0.26 * s; }
       if (typeKey === 'military') { torsoW = 0.52 * s; torsoH = 0.52 * s; torsoD = 0.34 * s; }
+      if (typeKey === 'spitter') { torsoW = 0.56 * s; torsoH = 0.52 * s; torsoD = 0.4 * s; }
+      if (typeKey === 'screamer') { torsoW = 0.36 * s; torsoH = 0.58 * s; torsoD = 0.24 * s; }
       const torsoMesh = new THREE.Mesh(
         new THREE.BoxGeometry(torsoW, torsoH, torsoD),
         clothA.clone()
@@ -6693,6 +7642,97 @@
         torso.add(pad);
       }
 
+      if (typeKey === 'spitter') {
+        // Bloated acid gut, glowing boils, dripping jaw.
+        const gutMat = new THREE.MeshStandardMaterial({
+          color: 0xa4b357, roughness: 0.75, emissive: 0x3a4a08, emissiveIntensity: 0.35
+        });
+        const gut = new THREE.Mesh(new THREE.SphereGeometry(0.34 * s, 10, 8), gutMat);
+        gut.scale.set(1.15, 1.0, 1.1);
+        gut.position.set(0, 0.08 * s, 0.16 * s);
+        gut.castShadow = true;
+        torso.add(gut);
+        const boilMat = new THREE.MeshStandardMaterial({
+          color: 0xd6ff45, emissive: 0xa8e422, emissiveIntensity: 0.8, roughness: 0.5
+        });
+        for (let i = 0; i < 4; i++) {
+          const boil = new THREE.Mesh(new THREE.SphereGeometry((0.05 + Math.random() * 0.04) * s, 6, 5), boilMat);
+          const a = Math.random() * Math.PI * 2;
+          boil.position.set(Math.cos(a) * 0.3 * s, (0.02 + Math.random() * 0.25) * s, 0.18 * s + Math.sin(a) * 0.14 * s);
+          torso.add(boil);
+        }
+        const jaw = new THREE.Mesh(
+          new THREE.BoxGeometry(0.2 * s, 0.14 * s, 0.16 * s),
+          new THREE.MeshStandardMaterial({ color: 0x8fae37, emissive: 0x445c08, emissiveIntensity: 0.5, roughness: 0.6 })
+        );
+        jaw.position.set(0, -0.14 * s, 0.14 * s);
+        head.add(jaw);
+        torso.rotation.x = 0.1;
+      }
+
+      if (typeKey === 'screamer') {
+        // Gaunt frame, unhinged jaw, exposed ribs — built to be heard before seen.
+        const jawMat = new THREE.MeshStandardMaterial({
+          color: 0xff7add, emissive: 0xcc2299, emissiveIntensity: 0.7, roughness: 0.5
+        });
+        const maw = new THREE.Mesh(new THREE.BoxGeometry(0.2 * s, 0.3 * s, 0.12 * s), jawMat);
+        maw.position.set(0, -0.22 * s, 0.12 * s);
+        head.add(maw);
+        const ribMat = new THREE.MeshStandardMaterial({ color: 0xcfc3ae, roughness: 0.7 });
+        for (let i = 0; i < 4; i++) {
+          const rib = new THREE.Mesh(new THREE.BoxGeometry(0.34 * s, 0.035 * s, 0.05 * s), ribMat);
+          rib.position.set(0, (0.3 - i * 0.1) * s, 0.14 * s);
+          torso.add(rib);
+        }
+        // Arms thrown wide.
+        armLG.rotation.z = 0.9;
+        armRG.rotation.z = -0.9;
+        head.rotation.x = -0.25;
+      }
+
+      if (typeKey === 'colossus') {
+        // Boss silhouette: rebar-and-plate scrap armor, road-sign pauldron, chains.
+        const plateMat = new THREE.MeshStandardMaterial({ color: 0x3c3c46, metalness: 0.55, roughness: 0.45 });
+        for (const [px2, py2, pz2, sx2, sy2, sz2] of [
+          [0, 0.28 * s, 0.24 * s, 0.74 * s, 0.4 * s, 0.09 * s],
+          [-0.3 * s, 0.14 * s, 0.08 * s, 0.14 * s, 0.44 * s, 0.36 * s],
+          [0.3 * s, 0.14 * s, 0.08 * s, 0.14 * s, 0.44 * s, 0.36 * s],
+          [0, 0.3 * s, -0.22 * s, 0.6 * s, 0.34 * s, 0.08 * s]
+        ]) {
+          const plate = new THREE.Mesh(new THREE.BoxGeometry(sx2, sy2, sz2), plateMat);
+          plate.position.set(px2, py2, pz2);
+          plate.castShadow = true;
+          torso.add(plate);
+        }
+        const pauldron = new THREE.Mesh(
+          new THREE.BoxGeometry(0.34 * s, 0.1 * s, 0.34 * s),
+          new THREE.MeshStandardMaterial({ color: 0xcc7700, roughness: 0.55, metalness: 0.3 })
+        );
+        pauldron.position.set(0.36 * s, 0.52 * s, 0);
+        torso.add(pauldron);
+        for (let i = 0; i < 5; i++) {
+          const spike = new THREE.Mesh(
+            new THREE.ConeGeometry(0.05 * s, 0.2 * s, 5),
+            new THREE.MeshStandardMaterial({ color: 0x2a2a30, metalness: 0.5, roughness: 0.4 })
+          );
+          spike.position.set((-0.3 + i * 0.15) * s, 0.52 * s, -0.1 * s);
+          torso.add(spike);
+        }
+        // Glowing fissures across the hide.
+        const crackMat = new THREE.MeshStandardMaterial({
+          color: 0xff5522, emissive: 0xff3300, emissiveIntensity: 0.9, roughness: 0.6
+        });
+        for (let i = 0; i < 3; i++) {
+          const crack = new THREE.Mesh(new THREE.BoxGeometry(0.05 * s, 0.34 * s, 0.03 * s), crackMat);
+          crack.position.set((-0.18 + i * 0.18) * s, 0.1 * s, 0.235 * s);
+          crack.rotation.z = (Math.random() - 0.5) * 0.6;
+          torso.add(crack);
+        }
+        armLG.scale.set(1.25, 1.15, 1.25);
+        armRG.scale.set(1.25, 1.15, 1.25);
+        torso.rotation.x = 0.08;
+      }
+
       // Store articulated refs
       g.userData.hips = hips;
       g.userData.torso = torso;
@@ -6707,7 +7747,7 @@
       g.userData.armL = armLG; // back-compat aliases
       g.userData.armR = armRG;
       g.userData.typeKey = typeKey;
-      g.userData.hitH = (typeKey === 'feral' ? 1.35 : (typeKey === 'brute' ? 2.05 : 1.7)) * s;
+      g.userData.hitH = (typeKey === 'feral' ? 1.35 : (typeKey === 'brute' || typeKey === 'colossus' ? 2.05 : 1.7)) * s;
       g.userData.gibbed = false;
       g.userData.dismembered = false;
       g.userData.partsLost = { armL: false, armR: false, legL: false, legR: false, head: false };
@@ -6795,7 +7835,7 @@
       if (dayNum === 4) {
         return ['military', 'shambler', 'feral', 'brute', 'military', 'construction', 'feral', 'shambler', 'military'];
       }
-      // day 5+: escalate with pressure types + fodder
+      // day 5+: escalate with pressure types + fodder, seasoned with specialists
       const n = zombiesForDay(dayNum);
       const mix = [];
       for (let i = 0; i < n; i++) {
@@ -6807,6 +7847,11 @@
         else if (t < 0.82) mix.push('brute');
         else mix.push(Math.random() < 0.5 ? 'feral' : 'military');
       }
+      // Specialists: spitters shell your line, screamers make everything worse.
+      const spitters = Math.min(3, 1 + Math.floor((dayNum - 4) / 2));
+      for (let i = 0; i < spitters; i++) mix[2 + i * 4] = 'spitter';
+      if (dayNum >= 6) mix[Math.min(mix.length - 1, 5)] = 'screamer';
+      if (dayNum >= 9 && mix.length > 9) mix[9] = 'screamer';
       // Shuffle lightly so bursts aren't perfectly sorted
       for (let i = mix.length - 1; i > 0; i--) {
         if (Math.random() < 0.35) {
@@ -7004,6 +8049,10 @@
         const cash = z.cashDrop != null ? z.cashDrop : (z.reward || 2);
         spawnCashDrop(px, pz, cash);
         AudioSys.zombieDeath();
+        if (z.typeKey === 'colossus') {
+          showBanner('COLOSSUS DOWN', '+$' + cash + ' bounty', 3.2, '#ffd24a');
+          addShake(0.45);
+        }
       }
     }
 
@@ -7045,16 +8094,37 @@
       return Math.round(5 + n * 2.2 + Math.max(0, n - 5) * 1.4);
     }
 
+    // Direction control: most days the horde comes from announced compass bearings, so
+    // there is a front line to build against. Some days it doesn't.
+    let waveBearings = [];
+    let waveSurround = false;
+
     function startPrep() {
+      if (day >= 1 && gameStarted) {
+        showBanner('DAY ' + day + ' CLEARED', 'Use the prep time — repair, build, resupply', 3, '#7cdea0');
+      }
       day += 1;
       phase = 'prep';
       prepTimer = PREP_TIME;
       waveQueue = waveComposition(day);
+      // A colossus fronts every fifth day.
+      if (day % 5 === 0) waveQueue.push('colossus');
       waveTotal = waveQueue.length;
       waveSpawned = 0;
       zombiesRemaining = waveTotal;
       burstLeft = 0;
       ambushCd = 4 + Math.random() * 6;
+
+      // Pick the assault axis for the coming wave.
+      waveBearings = [];
+      waveSurround = day >= 6 && day % 3 === 0 && day % 5 !== 0;
+      if (!waveSurround) {
+        waveBearings.push(Math.random() * Math.PI * 2);
+        if (day >= 4 && day % 2 === 0) {
+          waveBearings.push(waveBearings[0] + Math.PI * (0.55 + Math.random() * 0.6));
+        }
+      }
+
       // Bonus grenade every few days
       if (day > 1 && day % 2 === 0) grenades = Math.min(MAX_GRENADES, grenades + 1);
       updateWaveHud();
@@ -7066,6 +8136,16 @@
       spawnCd = 0.25;
       burstLeft = Math.min(3, waveTotal);
       AudioSys.waveStart();
+      const boss = waveQueue.includes('colossus');
+      const from = waveSurround
+        ? 'They\'re coming from every direction'
+        : 'From the ' + waveBearings.map(a => compassName(Math.cos(a), Math.sin(a))).join(' and the ');
+      showBanner(
+        'DAY ' + day + ' — HORDE INBOUND',
+        from + (boss ? ' — something enormous walks with them' : ''),
+        4.2,
+        boss ? '#ff6a55' : '#f4f7ff'
+      );
       updateWaveHud();
     }
 
@@ -7134,7 +8214,10 @@
         sx = player.position.x - Math.sin(behind) * dist;
         sz = player.position.z - Math.cos(behind) * dist;
       } else {
-        const ang = Math.random() * Math.PI * 2;
+        // Clustered around the announced bearings, unless it's a surround day.
+        let ang;
+        if (waveSurround || waveBearings.length === 0) ang = Math.random() * Math.PI * 2;
+        else ang = waveBearings[(Math.random() * waveBearings.length) | 0] + (Math.random() - 0.5) * 0.6;
         const rr = landRadius - 3 - Math.random() * 2;
         sx = Math.cos(ang) * rr;
         sz = Math.sin(ang) * rr;
@@ -7142,6 +8225,104 @@
       const spot = resolveStaticProps(sx, sz, 0.8);
       const tk = waveQueue.length ? waveQueue.shift() : pickZombieType(day);
       if (spawnZombie(spot.x, spot.z, tk)) waveSpawned += 1;
+    }
+
+    // === Supply drops ===
+    // A crate parachutes in every couple of minutes. Cash, a grenade and a patch-up for
+    // whoever bothers to walk out and claim it — a reason to leave the safe ground.
+    const supplyDrops = [];
+    let supplyCd = 50;
+    const crateMat = new THREE.MeshStandardMaterial({ color: 0x8a6a35, roughness: 0.8 });
+    const crateBandMat = new THREE.MeshStandardMaterial({ color: 0xd8b24a, roughness: 0.55, metalness: 0.3 });
+    const chuteMat = new THREE.MeshStandardMaterial({
+      color: 0xe86a3a, roughness: 0.9, side: THREE.DoubleSide
+    });
+    const beaconMat = new THREE.MeshBasicMaterial({
+      color: 0xffd24a, transparent: true, opacity: 0.35, depthWrite: false
+    });
+
+    function spawnSupplyDrop() {
+      // A landable spot within sprinting distance of the player.
+      let x = 0, z = 0, ok = false;
+      for (let tries = 0; tries < 40 && !ok; tries++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = 22 + Math.random() * 34;
+        x = player.position.x + Math.cos(a) * r;
+        z = player.position.z + Math.sin(a) * r;
+        ok = Math.hypot(x, z) < landRadius - 8 &&
+             waterDepthAt(x, z) < 0.05 &&
+             terrainSlope(x, z) < 0.4 &&
+             !nearPOI(x, z, 6);
+      }
+      if (!ok) return;
+
+      const g = new THREE.Group();
+      const crate = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.0, 1.0), crateMat);
+      crate.castShadow = true;
+      g.add(crate);
+      const band = new THREE.Mesh(new THREE.BoxGeometry(1.04, 0.16, 1.04), crateBandMat);
+      g.add(band);
+      const chute = new THREE.Mesh(new THREE.ConeGeometry(1.9, 1.4, 8, 1, true), chuteMat);
+      chute.position.y = 2.3;
+      g.add(chute);
+      // Beacon column so it reads across the map.
+      const beacon = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.5, 30, 8, 1, true), beaconMat);
+      beacon.position.y = 15;
+      g.add(beacon);
+      const gy = sampleHeight(x, z);
+      g.position.set(x, gy + 60, z);
+      scene.add(g);
+      supplyDrops.push({ group: g, chute, beacon, x, z, gy, state: 'falling', age: 0, life: 75 });
+      showBanner('SUPPLY DROP INBOUND', 'Marked on your map — ' + compassName(x - player.position.x, z - player.position.z) + ' of you', 3, '#ffe066');
+    }
+
+    function updateSupplyDrops(dt) {
+      if (gameStarted && !gameOver && !won) {
+        supplyCd -= dt;
+        if (supplyCd <= 0) {
+          supplyCd = 85 + Math.random() * 35;
+          spawnSupplyDrop();
+        }
+      }
+      for (let i = supplyDrops.length - 1; i >= 0; i--) {
+        const s = supplyDrops[i];
+        if (s.state === 'falling') {
+          s.group.position.y -= 6.5 * dt;
+          s.group.rotation.y += dt * 0.4;
+          s.chute.rotation.y -= dt * 0.7;
+          if (s.group.position.y <= s.gy + 0.5) {
+            s.group.position.y = s.gy + 0.5;
+            s.state = 'landed';
+            s.chute.visible = false;
+            AudioSys.crateLand();
+            spawnDust(s.x, s.gy, s.z, 8);
+          }
+        } else if (s.state === 'landed') {
+          s.age += dt;
+          s.beacon.material.opacity = 0.22 + Math.sin(s.age * 5) * 0.14;
+          const pd = Math.hypot(s.x - player.position.x, s.z - player.position.z);
+          if (gameStarted && !gameOver && !won && pd < 2.4) {
+            const cashGain = 16 + day * 2;
+            bank += cashGain;
+            grenades = Math.min(MAX_GRENADES, grenades + 1);
+            playerHp = Math.min(PLAYER_MAX_HP, playerHp + 25);
+            updateCoinHud();
+            updateAmmoHud();
+            updateHpHud();
+            AudioSys.pickup();
+            showBanner('SUPPLIES CLAIMED', '+$' + cashGain + ' · +1 grenade · +25 HP', 2.6, '#7cdea0');
+            s.state = 'gone';
+            scene.remove(s.group);
+            supplyDrops.splice(i, 1);
+            continue;
+          }
+          if (s.age > s.life) {
+            s.state = 'gone';
+            scene.remove(s.group);
+            supplyDrops.splice(i, 1);
+          }
+        }
+      }
     }
 
     const PLAYER_MAX_HP = 100;
@@ -7214,10 +8395,14 @@
       if (e.code === 'KeyB') { toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
-      if (e.code === 'Digit1' || e.code === 'Numpad1') { setPlaceMode('barricade'); e.preventDefault(); }
-      if (e.code === 'Digit2' || e.code === 'Numpad2') { setPlaceMode('light'); e.preventDefault(); }
-      if (e.code === 'Digit3' || e.code === 'Numpad3') { setPlaceMode('heavy'); e.preventDefault(); }
-      if (e.code === 'Digit4' || e.code === 'Numpad4') { tryExpandLand(); e.preventDefault(); }
+      for (let bi = 0; bi < BUILD_ORDER.length; bi++) {
+        if (e.code === 'Digit' + (bi + 1) || e.code === 'Numpad' + (bi + 1)) {
+          setPlaceMode(BUILD_ORDER[bi]);
+          e.preventDefault();
+        }
+      }
+      if (e.code === 'KeyT') { repairNearestBuild(); e.preventDefault(); }
+      if (e.code === 'KeyX') { sellNearestBuild(); e.preventDefault(); }
       if (e.code === 'Escape') {
         e.preventDefault();
         if (paused) {
@@ -8427,6 +9612,28 @@
           continue;
         }
 
+        // Landmark structures: tent poles, cabin walls, bridge posts and the like.
+        let hitSolid = false;
+        for (const ws of worldSolids) {
+          const dxs = p.pos.x - ws.x, dzs = p.pos.z - ws.z;
+          const lim = ws.radius + 0.8;
+          if (dxs > lim || dxs < -lim || dzs > lim || dzs < -lim) continue;
+          const t = segmentHitsCylinder(
+            p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
+            ws.x, ws.z, ws.radius, ws.y0, ws.y1
+          );
+          if (t !== null) {
+            spawnChunks(p.pos.x, p.pos.y, p.pos.z, 0x6b5a3e, 2, 2);
+            hitSolid = true;
+            break;
+          }
+        }
+        if (hitSolid) {
+          scene.remove(p.mesh);
+          projectiles.splice(i, 1);
+          continue;
+        }
+
         // Terrain. Bullets used to fly straight through hills.
         if (p.pos.y <= sampleHeight(p.pos.x, p.pos.z)) {
           spawnChunks(p.pos.x, p.pos.y + 0.05, p.pos.z, 0x6b6250, 2, 2);
@@ -8488,13 +9695,28 @@
           z += (dz / dist) * push;
         }
       }
+      // Landmark structures — but only when actually at their height. A bridge post
+      // shouldn't shove someone walking on the deck above it.
+      for (const ws of worldSolids) {
+        const minD = ws.radius + entR;
+        const dx = x - ws.x, dz = z - ws.z;
+        if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+        const footY = entityGroundY(x, z);
+        if (footY > ws.y1 - 0.3) continue;
+        const dist = Math.hypot(dx, dz) || 0.0001;
+        if (dist < minD) {
+          const push = minD - dist;
+          x += (dx / dist) * push;
+          z += (dz / dist) * push;
+        }
+      }
       return { x, z };
     }
 
     function resolveHardBuildCollisions(entX, entZ, entR) {
       let x = entX, z = entZ;
       for (const b of builds) {
-        if (b.type === 'barricade') continue;
+        if (b.type === 'barricade' || b.type === 'spikes') continue;
         const dx = x - b.x, dz = z - b.z;
         const dist = Math.hypot(dx, dz) || 0.0001;
         const minD = b.radius + entR;
@@ -8690,7 +9912,54 @@
 
     function updateTurrets(dt) {
       for (const b of builds) {
-        if (b.type === 'barricade') continue;
+        if (b.type === 'barricade' || b.type === 'wall' || b.type === 'spikes') continue;
+
+        // Flame turret: short reach, hits everything in the cone, sets it alight.
+        if (b.type === 'flame') {
+          let best = null, bestD = b.range;
+          for (const z of zombies) {
+            if (!z.alive) continue;
+            const d = Math.hypot(z.mesh.position.x - b.x, z.mesh.position.z - b.z);
+            if (d < bestD) { bestD = d; best = z; }
+          }
+          if (!best) continue;
+          const ang = Math.atan2(best.mesh.position.x - b.x, best.mesh.position.z - b.z);
+          b.mesh.rotation.y = ang;
+          b.fireCd -= dt;
+          if (b.fireCd <= 0) {
+            b.fireCd = b.fireInterval;
+            AudioSys.flameBurst();
+            // Everything in the cone catches.
+            for (const z of zombies) {
+              if (!z.alive) continue;
+              const dx = z.mesh.position.x - b.x, dz = z.mesh.position.z - b.z;
+              const d = Math.hypot(dx, dz);
+              if (d > b.range) continue;
+              let diff = Math.atan2(dx, dz) - ang;
+              while (diff > Math.PI) diff -= Math.PI * 2;
+              while (diff < -Math.PI) diff += Math.PI * 2;
+              if (Math.abs(diff) > 0.5) continue;
+              z.burnT = Math.max(z.burnT || 0, 1.3);
+              damageZombie(z, b.damage, { kind: 'generic', dir: { x: dx / (d || 1), z: dz / (d || 1) } });
+            }
+            // Tongue of fire.
+            const fy = b.mesh.position.y + 0.9;
+            for (let k = 0; k < 4; k++) {
+              const t = 0.2 + Math.random() * 0.8;
+              spawnMote(
+                b.x + Math.sin(ang + (Math.random() - 0.5) * 0.4) * b.range * t,
+                fy + (Math.random() - 0.5) * 0.4,
+                b.z + Math.cos(ang + (Math.random() - 0.5) * 0.4) * b.range * t,
+                emberMat, {
+                  vx: Math.sin(ang) * 2, vy: 0.6 + Math.random(), vz: Math.cos(ang) * 2,
+                  grav: -0.4, drag: 0.8, life: 0.35 + Math.random() * 0.25, scale: 0.5 + Math.random() * 0.5
+                }
+              );
+            }
+          }
+          continue;
+        }
+
         if (b.flashT > 0) {
           b.flashT -= dt;
           const f = b.mesh.userData.flash;
@@ -8732,12 +10001,112 @@
       }
     }
 
+    // --- Spitter acid: lobbed globs that burst into caustic pools -----------------
+    const acidGlobs = [];
+    const acidPools = [];
+    const acidGlobMat = new THREE.MeshStandardMaterial({
+      color: 0xb8e030, emissive: 0x86b312, emissiveIntensity: 0.9, roughness: 0.4
+    });
+    const acidGlobGeo = new THREE.SphereGeometry(0.16, 8, 6);
+    const acidPoolGeo = new THREE.CircleGeometry(1.5, 12);
+    const acidMoteMat = new THREE.MeshBasicMaterial({
+      color: 0xc8f04a, transparent: true, opacity: 0.85, depthWrite: false
+    });
+
+    function spawnAcidGlob(z, tx, tz) {
+      const ox = z.mesh.position.x, oz = z.mesh.position.z;
+      const oy = z.mesh.position.y + (z.hitH || 1.5) * 0.72;
+      // Lead the player slightly so standing still is punished.
+      const lead = 0.55;
+      const aimX = tx + velX * lead * (Math.random() * 0.8), aimZ = tz + velZ * lead * (Math.random() * 0.8);
+      const T = 1.0 + Math.hypot(aimX - ox, aimZ - oz) * 0.022;
+      const ty = sampleHeight(aimX, aimZ);
+      const mesh = new THREE.Mesh(acidGlobGeo, acidGlobMat);
+      mesh.position.set(ox, oy, oz);
+      scene.add(mesh);
+      acidGlobs.push({
+        mesh,
+        x: ox, y: oy, z: oz,
+        vx: (aimX - ox) / T,
+        vy: (ty - oy) / T + 0.5 * 16 * T,
+        vz: (aimZ - oz) / T,
+        age: 0
+      });
+      AudioSys.spit();
+    }
+
+    function updateAcid(dt) {
+      for (let i = acidGlobs.length - 1; i >= 0; i--) {
+        const g = acidGlobs[i];
+        g.age += dt;
+        g.vy -= 16 * dt;
+        g.x += g.vx * dt; g.y += g.vy * dt; g.z += g.vz * dt;
+        g.mesh.position.set(g.x, g.y, g.z);
+        const gh = entityGroundY(g.x, g.z);
+        if (g.y <= gh + 0.1 || g.age > 6) {
+          scene.remove(g.mesh);
+          acidGlobs.splice(i, 1);
+          AudioSys.acidHit();
+          // Burst spray.
+          for (let k = 0; k < 6; k++) {
+            spawnMote(g.x, gh + 0.15, g.z, acidMoteMat, {
+              vx: (Math.random() - 0.5) * 3, vy: 1.5 + Math.random() * 2, vz: (Math.random() - 0.5) * 3,
+              grav: 10, drag: 0.4, life: 0.4 + Math.random() * 0.3, scale: 0.5 + Math.random() * 0.4
+            });
+          }
+          // Direct hit hurts immediately, then the ground stays bad news for a while.
+          const pd = Math.hypot(g.x - player.position.x, g.z - player.position.z);
+          if (pd < 1.6 && Math.abs(player.position.y - gh) < 2.2) damagePlayer(9);
+          const mat = new THREE.MeshBasicMaterial({
+            color: 0x9ccc22, transparent: true, opacity: 0.55, depthWrite: false,
+            polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+          });
+          const pool = new THREE.Mesh(acidPoolGeo, mat);
+          pool.quaternion.setFromUnitVectors(AXIS_Z, terrainNormal(g.x, g.z));
+          pool.position.set(g.x, gh + 0.06, g.z);
+          scene.add(pool);
+          acidPools.push({ mesh: pool, mat, x: g.x, z: g.z, y: gh, age: 0, life: 4.2, tick: 0 });
+        }
+      }
+      for (let i = acidPools.length - 1; i >= 0; i--) {
+        const p = acidPools[i];
+        p.age += dt;
+        p.mat.opacity = 0.55 * Math.max(0, 1 - p.age / p.life);
+        p.tick -= dt;
+        if (p.tick <= 0) {
+          p.tick = 0.33;
+          const pd = Math.hypot(p.x - player.position.x, p.z - player.position.z);
+          if (pd < 1.6 && Math.abs(player.position.y - p.y) < 1.6) damagePlayer(3);
+          for (const b of builds.slice()) {
+            if (Math.hypot(p.x - b.x, p.z - b.z) < 1.7) {
+              b.hp -= 2.2;
+              if (b.hp <= 0) removeBuild(b);
+            }
+          }
+          if (Math.random() < 0.6) {
+            spawnMote(p.x + (Math.random() - 0.5) * 2, p.y + 0.1, p.z + (Math.random() - 0.5) * 2, acidMoteMat, {
+              vx: 0, vy: 0.5 + Math.random() * 0.4, vz: 0,
+              grav: 0.2, drag: 0.5, life: 0.5, scale: 0.35
+            });
+          }
+        }
+        if (p.age >= p.life) {
+          scene.remove(p.mesh);
+          p.mat.dispose();
+          acidPools.splice(i, 1);
+        }
+      }
+    }
+
     function updateZombies(dt) {
       zombiesRemaining = Math.max(0, waveTotal - waveSpawned) + zombies.length;
       if (phase === 'wave' && waveSpawned >= waveTotal) {
         zombiesRemaining = zombies.length;
         if (zombies.length === 0) startPrep();
       }
+      // Deaths from damage-over-time (spikes, fire) are queued and settled after the
+      // walk loop, so nothing splices the array we are iterating.
+      const dotKills = [];
       for (const z of zombies) {
         if (!z.alive) continue;
         const tactics = z.tactics || 'direct';
@@ -8757,7 +10126,7 @@
         if (tactics === 'smash') {
           let best = null, bestD = 1e9;
           for (const b of builds) {
-            if (b.type !== 'barricade' || b.hp <= 0) continue;
+            if ((b.type !== 'barricade' && b.type !== 'wall') || b.hp <= 0) continue;
             const d = Math.hypot(b.x - z.mesh.position.x, b.z - z.mesh.position.z);
             if (d < bestD) { bestD = d; best = b; }
           }
@@ -8816,6 +10185,9 @@
         if (z.sprintT > 0) { z.sprintT -= dt; spd *= 1.55; }
         if (tactics === 'weave' && z.rushT > 0) spd *= 1.35;
         if (z.crawling) spd = z.baseSpeed * 0.35;
+        // Screamer war-cry buff and trap slows.
+        if (z.buffT > 0) { z.buffT -= dt; spd *= 1.4; }
+        if (z.slowT > 0) { z.slowT -= dt; spd *= 0.5; }
 
         const zx = z.mesh.position.x, zz = z.mesh.position.z;
         const hHere = sampleHeight(zx, zz);
@@ -8844,6 +10216,98 @@
           if (Math.random() < dt * 2.2) spawnSplash(zx, hHere + zDepth, zz, 2, 0.45);
         }
 
+        // Spitter: artillery. Holds a firing line, retreats if crowded, lobs acid.
+        if (tactics === 'spit' && !graceFreeze && !z.crawling) {
+          z.spitCd = (z.spitCd || 1.5) - dt;
+          if (dist < 8.5) { sx = -sx; sz = -sz; spd = z.baseSpeed * 0.85; }
+          else if (dist < 21) spd = 0;
+          if (dist < 23 && dist > 4 && z.spitCd <= 0) {
+            z.spitCd = 3.4 + Math.random() * 1.5;
+            spawnAcidGlob(z, tx, tz);
+          }
+        }
+
+        // Screamer: freezes, howls, and the whole field gets faster while friends
+        // claw their way up nearby. Kill it first.
+        if (tactics === 'scream' && !graceFreeze) {
+          z.screamCd = (z.screamCd || 3) - dt;
+          if (z.screamT > 0) {
+            z.screamT -= dt;
+            spd = 0;
+            if (z.mesh.userData.head) z.mesh.userData.head.rotation.x = -0.7 + Math.sin(z.screamT * 30) * 0.1;
+          } else if (dist < 32 && z.screamCd <= 0) {
+            z.screamT = 1.2;
+            z.screamCd = 13 + Math.random() * 5;
+            AudioSys.scream();
+            addShake(0.12);
+            for (const o of zombies) {
+              if (!o.alive || o === z) continue;
+              if (Math.hypot(o.mesh.position.x - zx, o.mesh.position.z - zz) < 28) {
+                o.buffT = Math.max(o.buffT || 0, 6);
+              }
+            }
+            let called = 0;
+            for (let k = 0; k < 3 && zombies.length < MAX_ZOMBIES; k++) {
+              const a2 = Math.random() * Math.PI * 2;
+              const rr2 = 13 + Math.random() * 8;
+              const spot2 = resolveStaticProps(zx + Math.cos(a2) * rr2, zz + Math.sin(a2) * rr2, 0.8);
+              if (waterDepthAt(spot2.x, spot2.z) > 1) continue;
+              if (spawnZombie(spot2.x, spot2.z, Math.random() < 0.6 ? 'shambler' : 'feral')) {
+                spawnDust(spot2.x, sampleHeight(spot2.x, spot2.z), spot2.z, 5);
+                called++;
+              }
+            }
+          }
+        }
+
+        // Colossus: wind up and flatten everything in a circle.
+        if (tactics === 'boss' && !graceFreeze) {
+          if (z.slamWind > 0) {
+            z.slamWind -= dt;
+            spd = 0;
+            if (z.mesh.userData.armLG) z.mesh.userData.armLG.rotation.x = -2.4;
+            if (z.mesh.userData.armRG) z.mesh.userData.armRG.rotation.x = -2.4;
+            if (z.slamWind <= 0) {
+              AudioSys.bossSlam();
+              const sd = Math.hypot(zx - player.position.x, zz - player.position.z);
+              addShake(Math.max(0.25, 1.0 - sd * 0.03));
+              spawnDust(zx, hHere, zz, 14);
+              spawnChunks(zx, hHere + 0.2, zz, 0x6b6250, 8, 5);
+              if (sd < 5.2) {
+                damagePlayer(26);
+                // Shove the marine off his feet.
+                const kx = (player.position.x - zx) / (sd || 1), kz = (player.position.z - zz) / (sd || 1);
+                velX += kx * 14; velZ += kz * 14;
+                if (grounded) { vy = 5; grounded = false; }
+              }
+              for (const b of builds.slice()) {
+                if (Math.hypot(b.x - zx, b.z - zz) < 5.4) {
+                  b.hp -= 65;
+                  if (b.hp <= 0) removeBuild(b);
+                }
+              }
+              if (house.active && Math.hypot(house.group.position.x - zx, house.group.position.z - zz) < house.radius + 4.6) {
+                damageHouse(24);
+              }
+            }
+          } else {
+            z.slamCd = (z.slamCd || 3) - dt;
+            let wantSlam = dist < 3.6;
+            if (!wantSlam) {
+              let nearBuilds = 0;
+              for (const b of builds) {
+                if (Math.hypot(b.x - zx, b.z - zz) < 3.8) nearBuilds++;
+              }
+              wantSlam = nearBuilds >= 2;
+            }
+            if (wantSlam && z.slamCd <= 0) {
+              z.slamWind = 0.75;
+              z.slamCd = 4.2;
+              AudioSys.bossRoar();
+            }
+          }
+        }
+
         // Knockback is already handled downstream by the stagger impulse.
         let mx = zx + (graceFreeze ? 0 : sx * spd * dt);
         let mz = zz + (graceFreeze ? 0 : sz * spd * dt);
@@ -8866,13 +10330,46 @@
           }
         }
         for (const b of builds.slice()) {
-          if (b.type !== 'barricade') continue;
           const bd = Math.hypot(mx - b.x, mz - b.z);
-          if (bd < b.radius + z.radius + 0.35) {
-            const smash = 4 * dt * (z.brute ? 2.1 : 1) * (z.meleeMult || 1);
-            b.hp -= smash;
-            if (b.hp <= 0) removeBuild(b);
+          const isBoss = tactics === 'boss';
+          if (b.type === 'barricade' || b.type === 'wall' || (isBoss && b.type !== 'spikes')) {
+            if (bd < b.radius + z.radius + 0.35) {
+              // Walls are tougher per-hit; the colossus goes through everything.
+              const rate = (b.type === 'wall' ? 2.6 : 4) * (z.brute ? 2.1 : 1) *
+                           (z.meleeMult || 1) * (isBoss ? 6 : 1);
+              b.hp -= rate * dt;
+              if (b.hp <= 0) {
+                spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 6, 4);
+                removeBuild(b);
+              }
+            }
+          } else if (b.type === 'spikes' && !z.crawling) {
+            // Walking over spikes shreds feet: damage + slow, and the trap wears out.
+            if (bd < b.radius + z.radius * 0.5) {
+              z.slowT = 0.35;
+              z.hp -= 11 * dt;
+              b.hp -= 4.5 * dt;
+              if (Math.random() < dt * 5) {
+                spawnBlood(mx, z.mesh.position.y + 0.25, mz, 0, 0, 2, 0.6);
+                AudioSys.spikeSnap();
+              }
+              if (z.hp <= 0) dotKills.push(z);
+              if (b.hp <= 0) removeBuild(b);
+            }
           }
+        }
+
+        // Fire sticks. Burn ticks even after leaving the cone.
+        if (z.burnT > 0) {
+          z.burnT -= dt;
+          z.hp -= 8 * dt;
+          if (Math.random() < dt * 7) {
+            spawnMote(zx, z.mesh.position.y + 0.7 + Math.random() * 0.8, zz, emberMat, {
+              vx: (Math.random() - 0.5) * 0.6, vy: 1.2 + Math.random(), vz: (Math.random() - 0.5) * 0.6,
+              grav: -0.2, drag: 0.5, life: 0.5 + Math.random() * 0.4, scale: 0.3 + Math.random() * 0.25
+            });
+          }
+          if (z.hp <= 0) dotKills.push(z);
         }
         const rr = Math.hypot(mx, mz);
         if (rr > landRadius - 1.2) {
@@ -8888,14 +10385,14 @@
         }
         z.mesh.position.x = mx;
         z.mesh.position.z = mz;
-        z.mesh.position.y = sampleHeight(mx, mz);
+        z.mesh.position.y = entityGroundY(mx, mz);
         // Face the way they are actually travelling, including any detour around a bluff.
         z.mesh.rotation.y = Math.atan2(sx, sz);
 
         // Walk cycle — skip missing limbs
         const parts = z.partsLost || emptyPartsLost();
         const moving = !graceFreeze && Math.hypot(z.staggerVX, z.staggerVZ) < 1.5;
-        let cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'military' ? 7.5 : 7));
+        let cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'colossus' ? 3.8 : (z.typeKey === 'military' ? 7.5 : 7)));
         if (z.crawling) cadence *= 0.55;
         if (moving) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
         z.bob = (z.bob || 0) + dt * (z.typeKey === 'brute' ? 4 : 6);
@@ -8934,6 +10431,13 @@
           let hipsY = (ud.baseHipsY || 0.55) + Math.abs(Math.sin(phase)) * bobAmp * (z.typeKey === 'brute' ? 1.4 : 1);
           if (z.crawling) hipsY *= 0.45;
           ud.hips.position.y = hipsY;
+        }
+
+        // Slam tell: both arms high overhead while the colossus winds up.
+        if (z.slamWind > 0) {
+          if (ud.armLG && !parts.armL) ud.armLG.rotation.x = -2.5;
+          if (ud.armRG && !parts.armR) ud.armRG.rotation.x = -2.5;
+          if (ud.torso) ud.torso.rotation.x = -0.2;
         }
 
         // Attack windup tell
@@ -8998,6 +10502,9 @@
           }
         }
       }
+      for (const z of dotKills) {
+        if (z.alive) killZombie(z, true, { kind: 'generic', dir: { x: 0, z: 0 } });
+      }
       // Keep the horde from collapsing into one overlapping stack.
       for (let i = 0; i < zombies.length; i++) {
         const a = zombies[i];
@@ -9021,7 +10528,7 @@
         if (!z.alive) continue;
         z.x = z.mesh.position.x;
         z.z = z.mesh.position.z;
-        z.mesh.position.y = sampleHeight(z.x, z.z);
+        z.mesh.position.y = entityGroundY(z.x, z.z);
       }
       updateWaveHud();
     }
@@ -9177,6 +10684,17 @@
       AudioSys.resetBlip();
       for (const b of builds.slice()) removeBuild(b);
       clearZombies();
+      for (const s of supplyDrops) scene.remove(s.group);
+      supplyDrops.length = 0;
+      supplyCd = 50;
+      for (const g of acidGlobs) scene.remove(g.mesh);
+      acidGlobs.length = 0;
+      for (const p of acidPools) { scene.remove(p.mesh); p.mat.dispose(); }
+      acidPools.length = 0;
+      waveBearings = [];
+      waveSurround = false;
+      bigBannerEl.classList.remove('show');
+      bannerTimer = 0;
       for (const p of projectiles) scene.remove(p.mesh);
       projectiles.length = 0;
       for (const g of grenadesInFlight) scene.remove(g.mesh);
@@ -9494,6 +11012,13 @@
       if (gameStarted) resolveTreeCollisions(dt);
       updateMotes(dt);
       updateAmbientLife(dt);
+      updateBanner(dt);
+      updateCampfires(dt);
+      updateAcid(dt);
+      updateSupplyDrops(dt);
+      updateBuildBars();
+      updateBirds(dt);
+      drawMinimap(dt);
       updateWind(dt);
       updateWindSway();
       updateWater(wind.time);
@@ -9556,7 +11081,9 @@
 
       if (hurtFlash > 0) {
         hurtFlash -= dt;
-        if (hurtFlash > 0) scene.background.setHex(0xaa3344);
+        hurtFlashEl.style.opacity = String(Math.max(0, hurtFlash / 0.2));
+      } else if (hurtFlashEl.style.opacity !== '0') {
+        hurtFlashEl.style.opacity = '0';
       }
 
       // Cam follow (FOV already updated earlier this frame for aim)
@@ -9627,7 +11154,13 @@
       camera.lookAt(camLook);
       renderer.render(scene, camera);
       if (showPerf && !window.TT) {
-        window.TT = { THREE, scene, renderer, camera, sun, hemi, moon, ground, player, trees, rocks, foliage, zombies, builds, sampleHeight };
+        window.TT = {
+          THREE, scene, renderer, camera, sun, hemi, moon, ground, player,
+          trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
+          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, worldSolids,
+          // Debug-only: jump the clock (0 midnight, 0.25 sunrise, 0.5 noon, 0.75 dusk).
+          setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; }
+        };
       }
       if (showPerf) {
         perfAccum += dt;

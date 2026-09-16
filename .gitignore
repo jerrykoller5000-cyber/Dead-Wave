@@ -2,5 +2,7 @@
 server.log
 server-error.log
 
-# Scratch files
+# Scratch files (syntax-check helpers both agents use)
 .tmp-*
+.syntax*
+.chk.mjs
