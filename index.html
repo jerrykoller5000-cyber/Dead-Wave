@@ -12,35 +12,76 @@
       position: fixed; inset: 0; pointer-events: none;
       color: #f4f7ff; text-shadow: 0 1px 3px rgba(0,0,0,.55);
     }
+    .glass {
+      background: rgba(8,12,24,.58); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px; backdrop-filter: blur(6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.28);
+    }
+    #hudTopLeft {
+      position: absolute; top: 14px; left: 16px; width: 248px;
+      padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px;
+    }
     #title {
-      position: absolute; top: 18px; left: 20px;
-      font-size: 22px; font-weight: 700; letter-spacing: 0.02em;
+      font-size: 18px; font-weight: 700; letter-spacing: 0.03em;
+      display: flex; align-items: center; gap: 8px; line-height: 1.1;
+    }
+    #title .badge {
+      font-size: 10px; background: #3d5a80; color: #dceaf8;
+      padding: 3px 7px; border-radius: 999px; text-shadow: none;
+      font-weight: 700; border: 1px solid #2a4060; letter-spacing: 0.06em;
     }
     #stats {
-      position: absolute; top: 48px; left: 20px; font-size: 14px; opacity: 0.95; line-height: 1.45;
+      font-size: 12px; opacity: 0.92; line-height: 1.35;
+      display: flex; flex-direction: column; gap: 2px;
     }
-    #hpBarWrap {
-      position: absolute; top: 118px; left: 20px; width: 220px;
-      background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
-      border-radius: 8px; padding: 6px 8px 8px; font-size: 12px;
-    }
-    #hpBarWrap .label { margin-bottom: 4px; font-weight: 600; }
+    #stats .stat-row { opacity: 0.95; }
+    #hpBarWrap { width: 100%; }
     #hpBarBg {
-      height: 12px; border-radius: 6px; background: rgba(0,0,0,.45);
-      overflow: hidden; border: 1px solid rgba(255,255,255,.12);
+      position: relative; height: 16px; border-radius: 8px;
+      background: rgba(0,0,0,.5); overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
     }
     #hpBarFill {
-      height: 100%; width: 100%; background: linear-gradient(90deg, #ef4444, #22c55e);
+      height: 100%; width: 100%;
+      background: linear-gradient(90deg, #c02626 0%, #eab308 45%, #22c55e 100%);
       transform-origin: left center; transition: width 0.12s linear;
     }
+    #hpNum {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+      text-shadow: 0 1px 2px rgba(0,0,0,.75); pointer-events: none;
+    }
+    #hpExtra {
+      margin-top: 4px; font-size: 11px; opacity: 0.78; font-weight: 600;
+      min-height: 14px;
+    }
+    #centerHud {
+      position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      pointer-events: none;
+    }
     #ammo {
-      position: absolute; bottom: 22px; left: 20px;
-      font-size: 14px; font-weight: 600;
-      background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
-      padding: 8px 14px; border-radius: 10px; letter-spacing: 0.02em;
-      max-width: 42vw;
+      position: absolute; bottom: 18px; left: 16px;
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px; min-width: 200px; max-width: 46vw;
+    }
+    #ammoCount {
+      font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1; min-width: 1.6em; text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    #ammoMeta { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+    #ammoWeapon { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; }
+    #ammoDetail { font-size: 11px; opacity: 0.8; font-weight: 600; }
+    #grenadeChips { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+    .gchip {
+      font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 999px;
+      background: rgba(110,168,255,.18); border: 1px solid rgba(110,168,255,.35);
+      color: #cfe0ff; letter-spacing: 0.03em;
     }
     #ammo.empty { color: #ff8a7a; }
+    #ammo.empty #ammoCount { color: #ff8a7a; }
+    #ammo.empty .gchip { border-color: rgba(255,138,122,.4); background: rgba(255,80,60,.12); }
     #modeSelect, #win, #pause {
       display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
       background: rgba(6,10,22,.72); pointer-events: auto; z-index: 5;
@@ -81,18 +122,18 @@
     #pause button.danger { background: #e86a6a; color: #1a0808; }
     #modeSelect button:hover, #win button:hover, #pause button:hover { filter: brightness(1.08); }
     #placeBanner {
-      display: none; position: absolute; top: 18px; right: 20px;
-      background: rgba(8,12,24,.65); border: 1px solid rgba(255,255,255,.18);
-      padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      display: none; position: absolute; top: 14px; right: 16px;
+      background: rgba(8,12,24,.62); border: 1px solid rgba(255,255,255,.16);
+      padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
+      max-width: 220px;
     }
     #placeBanner.on { display: block; }
     #timeLine {
-      position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
       background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
-      padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      white-space: nowrap;
     }
     #tacticalLine {
-      position: absolute; top: 48px; left: 50%; transform: translateX(-50%);
       background: rgba(8,12,24,.5); border: 1px solid rgba(255,255,255,.12);
       padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600;
       letter-spacing: 0.02em; white-space: nowrap;
@@ -122,19 +163,29 @@
 <body>
   <div id="nvgOverlay"></div>
   <div id="hud">
-    <div id="title">Tiny Trek <span style="font-size:11px;background:#3d5a80;color:#dceaf8;padding:3px 7px;border-radius:999px;vertical-align:middle;text-shadow:none;font-weight:700;border:1px solid #2a4060">BRASS</span></div>
-    <div id="timeLine">Day · 06:00</div>
-    <div id="tacticalLine">NVG off · Laser off</div>
-    <div id="stats">
-      Coins: <span id="coins">0</span> · Bank · Land r<span id="landR">120</span><br>
-      <span id="waveLine">Day — · Prep</span><br>
-      <span id="hpLine">HP: —</span>
+    <div id="hudTopLeft" class="glass">
+      <div id="title">Tiny Trek <span class="badge">UZI</span></div>
+      <div id="stats">
+        <div class="stat-row">Coins <span id="coins">0</span> · Land r<span id="landR">120</span></div>
+        <div id="waveLine" class="stat-row">Day — · Prep</div>
+      </div>
+      <div id="hpBarWrap">
+        <div id="hpBarBg"><div id="hpBarFill"></div><span id="hpNum">—</span></div>
+        <div id="hpExtra"></div>
+      </div>
     </div>
-    <div id="hpBarWrap">
-      <div class="label">Marine HP</div>
-      <div id="hpBarBg"><div id="hpBarFill"></div></div>
+    <div id="centerHud">
+      <div id="timeLine">Day · 06:00</div>
+      <div id="tacticalLine">NVG off · Laser off</div>
     </div>
-    <div id="ammo">Minigun · Ammo 300/300 · Grena 3</div>
+    <div id="ammo" class="glass">
+      <div id="ammoCount">300</div>
+      <div id="ammoMeta">
+        <div id="ammoWeapon">Minigun</div>
+        <div id="ammoDetail">300 / 300</div>
+      </div>
+      <div id="grenadeChips"><span class="gchip">G×3</span></div>
+    </div>
     <div id="placeBanner"></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
@@ -184,7 +235,7 @@
             <h3>Weapons</h3>
             <ul>
               <li>Scroll / Q / E — cycle weapons</li>
-              <li>Minigun, M4, Pistol, Shotgun, Revolver, Sniper, Launcher, Chainsaw</li>
+              <li>Minigun, M4, Pistol, Uzi, Shotgun, Revolver, Sniper, Launcher, Chainsaw</li>
             </ul>
             <h3>Build</h3>
             <ul>
@@ -219,7 +270,8 @@
     const coinsEl = document.getElementById('coins');
     const landREl = document.getElementById('landR');
     const waveLineEl = document.getElementById('waveLine');
-    const hpLineEl = document.getElementById('hpLine');
+    const hpExtraEl = document.getElementById('hpExtra');
+    const hpNumEl = document.getElementById('hpNum');
     const hpBarFill = document.getElementById('hpBarFill');
     const timeLineEl = document.getElementById('timeLine');
     const tacticalLineEl = document.getElementById('tacticalLine');
@@ -229,6 +281,10 @@
     const winMsgEl = document.getElementById('winMsg');
     const againBtn = document.getElementById('again');
     const ammoEl = document.getElementById('ammo');
+    const ammoCountEl = document.getElementById('ammoCount');
+    const ammoWeaponEl = document.getElementById('ammoWeapon');
+    const ammoDetailEl = document.getElementById('ammoDetail');
+    const grenadeChipsEl = document.getElementById('grenadeChips');
     const modeSelectEl = document.getElementById('modeSelect');
     const pauseEl = document.getElementById('pause');
     const resumeBtn = document.getElementById('resumeBtn');
@@ -1529,6 +1585,7 @@
       minigun:  { sx: 0.72, sy: 0.72, sz: 0.9,  ox: 0.09, oy: 0.03, oz: 0.12 },
       m4:       { sx: 1.0,  sy: 1.0,  sz: 1.15, ox: 0.08, oy: 0.04, oz: 0.04 },
       pistol:   { sx: 0.62, sy: 0.62, sz: 0.72, ox: 0.055, oy: 0.06, oz: 0.02 },
+      uzi:      { sx: 0.7,  sy: 0.7,  sz: 0.85, ox: 0.07, oy: 0.05, oz: 0.06 },
       shotgun:  { sx: 1.2,  sy: 1.2,  sz: 0.82, ox: 0.09, oy: 0.05, oz: 0.18 },
       revolver: { sx: 0.68, sy: 0.68, sz: 0.78, ox: 0.055, oy: 0.05, oz: 0.0 },
       sniper:   { sx: 1.05, sy: 1.05, sz: 1.28, ox: 0.08, oy: 0.05, oz: 0.08 }
@@ -2252,6 +2309,78 @@
       return gun;
     }
 
+
+    function makeUzi() {
+      const gun = new THREE.Group();
+      // Short SMG receiver
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.12, 0.36), gunMetal);
+      body.position.set(0, 0.02, 0.04);
+      body.castShadow = true;
+      gun.add(body);
+      // Top bolt / rearsight rail
+      const topRail = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.035, 0.22), gunDark);
+      topRail.position.set(0, 0.1, 0.02);
+      gun.add(topRail);
+      const rearSight = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.045, 0.03), gunAccent);
+      rearSight.position.set(0, 0.125, -0.08);
+      gun.add(rearSight);
+      const frontSight = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.04, 0.02), gunAccent);
+      frontSight.position.set(0, 0.11, 0.2);
+      gun.add(frontSight);
+      // Folding stock stub
+      const stock = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.06, 0.14), gunDark);
+      stock.position.set(0, 0.04, -0.22);
+      stock.rotation.x = -0.15;
+      gun.add(stock);
+      const stockFold = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.12), gunMid);
+      stockFold.position.set(0.04, 0.05, -0.16);
+      stockFold.rotation.y = 0.45;
+      gun.add(stockFold);
+      // Grip
+      const grip = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.16, 0.08), gunDark);
+      grip.position.set(0, -0.1, -0.02);
+      grip.rotation.x = 0.22;
+      gun.add(grip);
+      // Long stick mag
+      const mag = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.28, 0.08), gunAccent);
+      mag.position.set(0, -0.22, 0.06);
+      mag.rotation.x = 0.08;
+      gun.add(mag);
+      gun.userData.mag = mag;
+      gun.userData.baseMagPos = mag.position.clone();
+      gun.userData.baseMagRot = mag.rotation.clone();
+      // Short barrel + shroud
+      const shroud = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.16), gunMid);
+      shroud.position.set(0, 0.03, 0.26);
+      gun.add(shroud);
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.18, 8), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.03, 0.38);
+      gun.add(barrel);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 }));
+      flash.position.set(0, 0.03, 0.48);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 2.8);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.005, 0.005, 7, 4),
+        new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 })
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.03, 4.0);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 0.45;
+      gun.userData.laserLen = 7;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.03, 0.48);
+      gun.userData.slide = null;
+      return gun;
+    }
+
     function makeShotgun() {
       const gun = new THREE.Group();
       const receiver = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.13, 0.42), gunMetal);
@@ -2686,20 +2815,24 @@
       hydration.position.set(0.22, 1.0, -0.2);
       g.add(hydration);
 
-      // --- Arms (posed to hold weapon) ---
+      // --- Arms with elbow joints (posed to hold weapon) ---
+      // arm*G = shoulder pivot; elbow*G = elbow pivot holding forearm + glove
       const armLG = new THREE.Group();
       armLG.position.set(-0.34, 1.08, 0.02);
       armLG.rotation.set(-0.85, 0.15, 0.55);
       const upperL = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.32, 0.14), camoGreen));
       upperL.position.set(0, -0.12, 0);
       armLG.add(upperL);
+      const elbowLG = new THREE.Group();
+      elbowLG.position.set(0, -0.28, 0);
+      elbowLG.rotation.set(-0.35, 0, 0);
       const lowerL = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.28, 0.12), camoTan));
-      lowerL.position.set(0.02, -0.38, 0.06);
-      lowerL.rotation.x = -0.35;
-      armLG.add(lowerL);
+      lowerL.position.set(0.02, -0.12, 0.04);
+      elbowLG.add(lowerL);
       const gloveL = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.1, 0.12), gloveMat));
-      gloveL.position.set(0.02, -0.52, 0.12);
-      armLG.add(gloveL);
+      gloveL.position.set(0.02, -0.26, 0.08);
+      elbowLG.add(gloveL);
+      armLG.add(elbowLG);
       g.add(armLG);
 
       const armRG = new THREE.Group();
@@ -2708,13 +2841,16 @@
       const upperR = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.32, 0.14), camoTan));
       upperR.position.set(0, -0.12, 0);
       armRG.add(upperR);
+      const elbowRG = new THREE.Group();
+      elbowRG.position.set(0, -0.28, 0);
+      elbowRG.rotation.set(-0.2, 0, 0);
       const lowerR = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.28, 0.12), camoGreen));
-      lowerR.position.set(-0.01, -0.38, 0.05);
-      lowerR.rotation.x = -0.2;
-      armRG.add(lowerR);
+      lowerR.position.set(-0.01, -0.12, 0.03);
+      elbowRG.add(lowerR);
       const gloveR = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.1, 0.12), gloveMat));
-      gloveR.position.set(-0.01, -0.52, 0.1);
-      armRG.add(gloveR);
+      gloveR.position.set(-0.01, -0.26, 0.07);
+      elbowRG.add(gloveR);
+      armRG.add(elbowRG);
       g.add(armRG);
 
       // Weapon mount (player-local grip; keeps muzzle/laser math simple)
@@ -2724,6 +2860,10 @@
       g.userData.weaponMount = weaponMount;
       g.userData.armLG = armLG;
       g.userData.armRG = armRG;
+      g.userData.elbowLG = elbowLG;
+      g.userData.elbowRG = elbowRG;
+      g.userData.forearmLG = elbowLG;
+      g.userData.forearmRG = elbowRG;
       g.userData.legLG = legLG;
       g.userData.legRG = legRG;
       g.userData.hip = hip;
@@ -2842,9 +2982,11 @@
     const CAM_DIST_ZOOM = 5.5;
     let camDistCurrent = CAM_DIST_DEFAULT;
 
-    // Base arm pose (weapon hold)
+    // Base arm / elbow pose (weapon hold)
     const ARM_L_BASE = { x: -0.85, y: 0.15, z: 0.55 };
     const ARM_R_BASE = { x: -1.05, y: -0.05, z: -0.25 };
+    const ELBOW_L_BASE = { x: -0.35, y: 0, z: 0 };
+    const ELBOW_R_BASE = { x: -0.2, y: 0, z: 0 };
 
     function updateTacticalHud() {
       if (!tacticalLineEl) return;
@@ -2889,6 +3031,8 @@
       const legR = marine.userData.legRG;
       const armL = marine.userData.armLG;
       const armR = marine.userData.armRG;
+      const elbowL = marine.userData.elbowLG;
+      const elbowR = marine.userData.elbowRG;
       const nvg = marine.userData.nvgPivot;
       const hip = marine.userData.hip;
 
@@ -2911,10 +3055,14 @@
       marine.rotation.x = 0;
       if (hip) hip.rotation.x = 0;
 
+      // Aim brace: slight extra elbow bend when zoomed
+      const aimBrace = zoomHeld ? 0.12 : 0;
+
       if (moving && grounded) {
         const cadence = running ? 16 : 11;
         const amp = running ? 0.72 : 0.55;
-        const armAmp = running ? 0.32 : 0.22;
+        const armAmp = running ? 0.22 : 0.14;
+        const elbowAmp = running ? 0.18 : 0.12;
         walkPhase += dt * cadence;
         const swing = Math.sin(walkPhase) * amp;
         if (legL) { legL.rotation.x = legBend + swing; legL.rotation.z = 0; }
@@ -2929,29 +3077,51 @@
           armR.rotation.y = ARM_R_BASE.y;
           armR.rotation.z = ARM_R_BASE.z;
         }
+        // Elbows bend opposite to shoulder swing (natural gait)
+        if (elbowL) {
+          elbowL.rotation.x = ELBOW_L_BASE.x + swing * elbowAmp - aimBrace;
+          elbowL.rotation.y = ELBOW_L_BASE.y;
+          elbowL.rotation.z = ELBOW_L_BASE.z;
+        }
+        if (elbowR) {
+          elbowR.rotation.x = ELBOW_R_BASE.x - swing * elbowAmp - aimBrace * 0.6;
+          elbowR.rotation.y = ELBOW_R_BASE.y;
+          elbowR.rotation.z = ELBOW_R_BASE.z;
+        }
         walkBob = Math.sin(walkPhase * 2) * (running ? 0.09 : 0.06);
       } else {
         // Idle settle (or airborne tuck)
         walkPhase *= Math.max(0, 1 - dt * 4);
         walkBob *= Math.max(0, 1 - dt * 6);
         const targetLeg = legBend + jumpTuck;
+        const k = Math.min(1, dt * 8);
         if (legL) {
-          legL.rotation.x += (targetLeg - legL.rotation.x) * Math.min(1, dt * 8);
+          legL.rotation.x += (targetLeg - legL.rotation.x) * k;
           legL.rotation.z *= Math.max(0, 1 - dt * 8);
         }
         if (legR) {
-          legR.rotation.x += (targetLeg - legR.rotation.x) * Math.min(1, dt * 8);
+          legR.rotation.x += (targetLeg - legR.rotation.x) * k;
           legR.rotation.z *= Math.max(0, 1 - dt * 8);
         }
         if (armL) {
-          armL.rotation.x += (ARM_L_BASE.x - armL.rotation.x) * Math.min(1, dt * 8);
+          armL.rotation.x += (ARM_L_BASE.x - armL.rotation.x) * k;
           armL.rotation.y = ARM_L_BASE.y;
           armL.rotation.z = ARM_L_BASE.z;
         }
         if (armR) {
-          armR.rotation.x += (ARM_R_BASE.x - armR.rotation.x) * Math.min(1, dt * 8);
+          armR.rotation.x += (ARM_R_BASE.x - armR.rotation.x) * k;
           armR.rotation.y = ARM_R_BASE.y;
           armR.rotation.z = ARM_R_BASE.z;
+        }
+        if (elbowL) {
+          elbowL.rotation.x += (ELBOW_L_BASE.x - aimBrace - elbowL.rotation.x) * k;
+          elbowL.rotation.y = ELBOW_L_BASE.y;
+          elbowL.rotation.z = ELBOW_L_BASE.z;
+        }
+        if (elbowR) {
+          elbowR.rotation.x += (ELBOW_R_BASE.x - aimBrace * 0.6 - elbowR.rotation.x) * k;
+          elbowR.rotation.y = ELBOW_R_BASE.y;
+          elbowR.rotation.z = ELBOW_R_BASE.z;
         }
       }
 
@@ -2974,6 +3144,12 @@
     pistol.scale.setScalar(1.05);
     pistol.visible = false;
     weaponMount.add(pistol);
+
+    const uzi = makeUzi();
+    uzi.position.set(0.01, -0.01, -0.04);
+    uzi.scale.setScalar(1.0);
+    uzi.visible = false;
+    weaponMount.add(uzi);
 
     const shotgun = makeShotgun();
     shotgun.position.set(0.0, -0.01, -0.04);
@@ -3010,8 +3186,8 @@
     knife.scale.setScalar(1.15);
     weaponMount.add(knife);
 
-    const weaponMeshes = { minigun, m4, pistol, shotgun, revolver, sniper, launcher, chainsaw };
-    const WEAPON_ORDER = ['minigun', 'm4', 'pistol', 'shotgun', 'revolver', 'sniper', 'launcher', 'chainsaw'];
+    const weaponMeshes = { minigun, m4, pistol, uzi, shotgun, revolver, sniper, launcher, chainsaw };
+    const WEAPON_ORDER = ['minigun', 'm4', 'pistol', 'uzi', 'shotgun', 'revolver', 'sniper', 'launcher', 'chainsaw'];
     let weaponIndex = 0;
     let currentWeapon = 'minigun';
     let sawHudRunning = false;
@@ -3020,13 +3196,14 @@
       minigun: { name: 'Minigun', maxAmmo: 300, reload: 1.15, interval: 1 / 12, damage: 12, spin: true, auto: true },
       m4: { name: 'M4', maxAmmo: 30, reload: 1.4, interval: 0.1, damage: 16, spin: false, auto: true },
       pistol: { name: 'Pistol', maxAmmo: 12, reload: 1.0, interval: 0.28, damage: 18, spin: false, auto: true },
+      uzi: { name: 'Uzi', maxAmmo: 32, reload: 1.35, interval: 1 / 14, damage: 12, spin: false, auto: true },
       shotgun: { name: 'Shotgun', maxAmmo: 8, reload: 1.6, interval: 0.7, damage: 10, spin: false, auto: false, pellets: 7, spread: 0.14 },
       revolver: { name: 'Revolver', maxAmmo: 6, reload: 1.8, interval: 0.45, damage: 40, spin: false, auto: false, spread: 0.02 },
       sniper: { name: 'Sniper', maxAmmo: 5, reload: 2.2, interval: 0.9, damage: 62, spin: false, auto: false, spread: 0.004 },
       launcher: { name: 'Launcher', maxAmmo: 6, reload: 2.0, interval: 0.55, damage: 55, spin: false, auto: false, explosive: true },
       chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 1.85 }
     };
-    let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
+    let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
     let grenades = 3;
     const MAX_GRENADES = 5;
     let prevMouseFireHeld = false;
@@ -3040,6 +3217,7 @@
       minigun: { pos: minigun.position.clone(), rot: minigun.rotation.clone() },
       m4: { pos: m4.position.clone(), rot: m4.rotation.clone() },
       pistol: { pos: pistol.position.clone(), rot: pistol.rotation.clone() },
+      uzi: { pos: uzi.position.clone(), rot: uzi.rotation.clone() },
       shotgun: { pos: shotgun.position.clone(), rot: shotgun.rotation.clone() },
       revolver: { pos: revolver.position.clone(), rot: revolver.rotation.clone() },
       sniper: { pos: sniper.position.clone(), rot: sniper.rotation.clone() },
@@ -3047,6 +3225,9 @@
       chainsaw: { pos: chainsaw.position.clone(), rot: chainsaw.rotation.clone() }
     };
     let reloadArmOff = { x: 0, y: 0, z: 0 };
+    let reloadArmOffL = { x: 0, y: 0, z: 0 };
+    let reloadElbowOffR = { x: 0, y: 0, z: 0 };
+    let reloadElbowOffL = { x: 0, y: 0, z: 0 };
     let reloadMountOff = { rx: 0, ry: 0, rz: 0, y: 0 };
 
     function _clamp01(t) { return Math.max(0, Math.min(1, t)); }
@@ -3065,9 +3246,16 @@
 
     function resetReloadAnim() {
       reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+      reloadArmOffL.x = reloadArmOffL.y = reloadArmOffL.z = 0;
+      reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+      reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
       reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
       weaponMount.position.set(WEAPON_MOUNT_BASE.x, WEAPON_MOUNT_BASE.y, WEAPON_MOUNT_BASE.z);
       weaponMount.rotation.set(0, 0, 0);
+      const elbowL = marine.userData.elbowLG;
+      const elbowR = marine.userData.elbowRG;
+      if (elbowL) elbowL.rotation.set(ELBOW_L_BASE.x, ELBOW_L_BASE.y, ELBOW_L_BASE.z);
+      if (elbowR) elbowR.rotation.set(ELBOW_R_BASE.x, ELBOW_R_BASE.y, ELBOW_R_BASE.z);
       for (const name of WEAPON_ORDER) {
         const gun = weaponMeshes[name];
         const base = GUN_BASE[name];
@@ -3105,27 +3293,52 @@
 
     function updateReloadAnim(dt) {
       const armR = marine.userData.armRG;
-      if (!reloading) {
-        // Ease leftover offsets back if any
-        const k = Math.min(1, dt * 12);
-        reloadArmOff.x *= (1 - k);
-        reloadArmOff.y *= (1 - k);
-        reloadArmOff.z *= (1 - k);
-        reloadMountOff.rx *= (1 - k);
-        reloadMountOff.ry *= (1 - k);
-        reloadMountOff.rz *= (1 - k);
-        reloadMountOff.y *= (1 - k);
-        if (Math.abs(reloadArmOff.x) < 1e-4 && Math.abs(reloadMountOff.rx) < 1e-4) {
-          resetReloadAnim();
-        } else {
-          weaponMount.position.y = WEAPON_MOUNT_BASE.y + reloadMountOff.y;
-          weaponMount.rotation.set(reloadMountOff.rx, reloadMountOff.ry, reloadMountOff.rz);
-          if (armR) {
-            armR.rotation.x += reloadArmOff.x;
-            armR.rotation.y += reloadArmOff.y;
-            armR.rotation.z += reloadArmOff.z;
-          }
+      const armL = marine.userData.armLG;
+      const elbowR = marine.userData.elbowRG;
+      const elbowL = marine.userData.elbowLG;
+
+      function applyReloadPose() {
+        weaponMount.position.set(
+          WEAPON_MOUNT_BASE.x,
+          WEAPON_MOUNT_BASE.y + reloadMountOff.y,
+          WEAPON_MOUNT_BASE.z
+        );
+        weaponMount.rotation.set(reloadMountOff.rx, reloadMountOff.ry, reloadMountOff.rz);
+        if (armR) {
+          armR.rotation.x += reloadArmOff.x;
+          armR.rotation.y += reloadArmOff.y;
+          armR.rotation.z += reloadArmOff.z;
         }
+        if (armL) {
+          armL.rotation.x += reloadArmOffL.x;
+          armL.rotation.y += reloadArmOffL.y;
+          armL.rotation.z += reloadArmOffL.z;
+        }
+        if (elbowR) {
+          elbowR.rotation.x += reloadElbowOffR.x;
+          elbowR.rotation.y += reloadElbowOffR.y;
+          elbowR.rotation.z += reloadElbowOffR.z;
+        }
+        if (elbowL) {
+          elbowL.rotation.x += reloadElbowOffL.x;
+          elbowL.rotation.y += reloadElbowOffL.y;
+          elbowL.rotation.z += reloadElbowOffL.z;
+        }
+      }
+
+      if (!reloading) {
+        const k = Math.min(1, dt * 12);
+        reloadArmOff.x *= (1 - k); reloadArmOff.y *= (1 - k); reloadArmOff.z *= (1 - k);
+        reloadArmOffL.x *= (1 - k); reloadArmOffL.y *= (1 - k); reloadArmOffL.z *= (1 - k);
+        reloadElbowOffR.x *= (1 - k); reloadElbowOffR.y *= (1 - k); reloadElbowOffR.z *= (1 - k);
+        reloadElbowOffL.x *= (1 - k); reloadElbowOffL.y *= (1 - k); reloadElbowOffL.z *= (1 - k);
+        reloadMountOff.rx *= (1 - k); reloadMountOff.ry *= (1 - k);
+        reloadMountOff.rz *= (1 - k); reloadMountOff.y *= (1 - k);
+        const quiet =
+          Math.abs(reloadArmOff.x) < 1e-4 && Math.abs(reloadMountOff.rx) < 1e-4 &&
+          Math.abs(reloadElbowOffR.x) < 1e-4 && Math.abs(reloadElbowOffL.x) < 1e-4;
+        if (quiet) resetReloadAnim();
+        else applyReloadPose();
         return;
       }
 
@@ -3134,91 +3347,98 @@
       const progress = _clamp01(1 - reloadTimer / dur);
       const gun = getActiveGun();
 
-      // Defaults each frame
       reloadArmOff.x = reloadArmOff.y = reloadArmOff.z = 0;
+      reloadArmOffL.x = reloadArmOffL.y = reloadArmOffL.z = 0;
+      reloadElbowOffR.x = reloadElbowOffR.y = reloadElbowOffR.z = 0;
+      reloadElbowOffL.x = reloadElbowOffL.y = reloadElbowOffL.z = 0;
       reloadMountOff.rx = reloadMountOff.ry = reloadMountOff.rz = reloadMountOff.y = 0;
 
       if (currentWeapon === 'minigun') {
-        // Tip up → hold mid-reload → ease settle; ammo box open/hold/snap shut; spin-down
-        const tipUp = _seg(progress, 0.0, 0.16);
-        const tipDown = _seg(progress, 0.78, 0.96);
-        const tip = tipUp * (1 - tipDown); // plateau while tipUp=1 and tipDown=0
-        const boxOpen = _seg(progress, 0.10, 0.28);
-        const boxShut = _seg(progress, 0.70, 0.82); // snappy shut
+        const tipUp = _seg(progress, 0.0, 0.18);
+        const tipDown = _seg(progress, 0.76, 0.96);
+        const tip = tipUp * (1 - tipDown);
+        const boxOpen = _seg(progress, 0.12, 0.30);
+        const boxShut = _seg(progress, 0.68, 0.84);
         const box = boxOpen * (1 - boxShut);
         if (gun.userData.barrelAssembly) {
-          gun.userData.barrelAssembly.rotation.x = -0.55 * tip;
-          gun.userData.barrelAssembly.rotation.y = 0.1 * tip;
+          gun.userData.barrelAssembly.rotation.x = -0.42 * tip;
+          gun.userData.barrelAssembly.rotation.y = 0.08 * tip;
         }
-        gun.rotation.x = -0.26 * tip;
-        gun.position.y = GUN_BASE.minigun.pos.y + 0.055 * tip;
-        gun.position.z = GUN_BASE.minigun.pos.z - 0.07 * tip;
+        gun.rotation.x = -0.18 * tip;
+        gun.position.y = GUN_BASE.minigun.pos.y + 0.04 * tip;
+        gun.position.z = GUN_BASE.minigun.pos.z - 0.05 * tip;
         if (gun.userData.ammoBox && gun.userData.baseAmmoPos) {
           const ab = gun.userData.ammoBox;
           ab.visible = true;
           ab.position.set(
-            gun.userData.baseAmmoPos.x + 0.06 * box,
-            gun.userData.baseAmmoPos.y - 0.09 * box,
+            gun.userData.baseAmmoPos.x + 0.05 * box,
+            gun.userData.baseAmmoPos.y - 0.08 * box,
             gun.userData.baseAmmoPos.z + 0.02 * box
           );
-          ab.rotation.z = (gun.userData.baseAmmoRot?.z || 0.12) + 0.85 * box;
-          ab.rotation.x = 0.5 * box;
+          ab.rotation.z = (gun.userData.baseAmmoRot?.z || 0.12) + 0.75 * box;
+          ab.rotation.x = 0.4 * box;
         }
-        reloadMountOff.rx = -0.16 * tip;
-        reloadArmOff.x = -0.28 * tip;
-        // Force spin-down while reloading
+        reloadMountOff.rx = -0.1 * tip;
+        reloadArmOff.x = -0.12 * tip;
+        reloadElbowOffR.x = -0.55 * tip - 0.25 * box;
+        reloadElbowOffL.x = -0.2 * tip;
         barrelSpinVel = Math.max(0, barrelSpinVel - SPIN_DECEL * 1.4 * dt);
-      } else if (currentWeapon === 'm4') {
-        // Mag: drop → gone → slam with overshoot/settle; stronger tilt on drop, settle on slam
-        const tiltUp = _seg(progress, 0.0, 0.12);
-        const tiltDown = _seg(progress, 0.58, 0.88);
+      } else if (currentWeapon === 'm4' || currentWeapon === 'uzi') {
+        // Mag drop → gone → slam; snappier stages for uzi
+        const snappy = currentWeapon === 'uzi';
+        const tDropEnd = snappy ? 0.28 : 0.32;
+        const tGoneEnd = snappy ? 0.42 : 0.48;
+        const tSlamEnd = snappy ? 0.66 : 0.70;
+        const tSettleEnd = snappy ? 0.82 : 0.86;
+        const tiltUp = _seg(progress, 0.0, snappy ? 0.10 : 0.12);
+        const tiltDown = _seg(progress, snappy ? 0.55 : 0.58, snappy ? 0.86 : 0.88);
         const tilt = tiltUp * (1 - tiltDown);
-        const drop = _seg(progress, 0.06, 0.32);
-        const holdGone = progress >= 0.32 && progress < 0.48;
-        const slam = _seg(progress, 0.48, 0.70);
-        const settle = _seg(progress, 0.70, 0.86);
-        reloadMountOff.rx = -0.34 * tilt;
-        reloadMountOff.rz = 0.16 * tilt;
-        reloadMountOff.y = -0.045 * tilt;
-        gun.rotation.x = -0.22 * tilt;
-        gun.rotation.z = 0.14 * tilt;
-        // Arm: reach on drop, clear beat on slam, relax on settle
-        reloadArmOff.x = -0.55 * tilt - 0.32 * drop + 0.55 * slam - 0.18 * settle;
-        reloadArmOff.z = -0.28 * tilt;
+        const drop = _seg(progress, 0.05, tDropEnd);
+        const holdGone = progress >= tDropEnd && progress < tGoneEnd;
+        const slam = _seg(progress, tGoneEnd, tSlamEnd);
+        const settle = _seg(progress, tSlamEnd, tSettleEnd);
+        reloadMountOff.rx = -0.18 * tilt;
+        reloadMountOff.rz = 0.08 * tilt;
+        reloadMountOff.y = -0.025 * tilt;
+        gun.rotation.x = -0.12 * tilt;
+        gun.rotation.z = 0.08 * tilt;
+        // Shoulder assists lightly; elbows do the mag grab / slam
+        reloadArmOff.x = -0.14 * tilt;
+        reloadArmOff.z = -0.08 * tilt;
+        reloadElbowOffR.x = -0.7 * tilt - 0.45 * drop + 0.65 * slam - 0.15 * settle;
+        reloadElbowOffR.z = -0.12 * tilt;
+        reloadElbowOffL.x = -0.25 * tilt - 0.15 * drop + 0.2 * slam;
+        reloadArmOffL.x = -0.08 * tilt;
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
+          const dropY = snappy ? 0.42 : 0.48;
           if (holdGone) {
             mag.visible = false;
-            mag.position.set(bp.x, bp.y - 0.5, bp.z + 0.06);
+            mag.position.set(bp.x, bp.y - dropY, bp.z + 0.05);
             mag.rotation.x = 0;
             mag.rotation.z = 0;
-          } else if (progress < 0.32) {
+          } else if (progress < tDropEnd) {
             mag.visible = true;
             mag.position.set(
-              bp.x + 0.05 * drop,
-              bp.y - 0.48 * drop,
-              bp.z + 0.08 * drop
+              bp.x + 0.04 * drop,
+              bp.y - dropY * drop,
+              bp.z + 0.06 * drop
             );
-            mag.rotation.x = 0.65 * drop;
-            mag.rotation.z = 0.4 * drop;
+            mag.rotation.x = 0.55 * drop;
+            mag.rotation.z = 0.32 * drop;
           } else {
-            // Slam from below with slight overshoot past seat, then settle
             mag.visible = true;
-            const over = 0.03;
+            const over = snappy ? 0.025 : 0.03;
             let yOff;
-            if (progress < 0.70) {
-              yOff = -0.45 * (1 - slam) + over * slam; // ends at +over
-            } else {
-              yOff = over * (1 - settle);
-            }
+            if (progress < tSlamEnd) yOff = -dropY * (1 - slam) + over * slam;
+            else yOff = over * (1 - settle);
             mag.position.set(bp.x, bp.y + yOff, bp.z);
-            mag.rotation.x = 0.2 * (1 - Math.max(slam, settle));
+            mag.rotation.x = 0.15 * (1 - Math.max(slam, settle));
             mag.rotation.z = 0;
           }
         }
       } else if (currentWeapon === 'pistol') {
-        // Snappy ~1s: mag drop → gone → insert; slide pull mid, rack snap near end
         const tiltUp = _seg(progress, 0.0, 0.10);
         const tiltDown = _seg(progress, 0.72, 0.94);
         const tilt = tiltUp * (1 - tiltDown);
@@ -3227,13 +3447,15 @@
         const insert = _seg(progress, 0.40, 0.62);
         const insertSettle = _seg(progress, 0.62, 0.72);
         const slidePull = _seg(progress, 0.38, 0.52);
-        const slideRack = _seg(progress, 0.78, 0.90); // snap forward near end
+        const slideRack = _seg(progress, 0.78, 0.90);
         const slideAmt = slidePull * (1 - slideRack);
-        reloadMountOff.rx = -0.32 * tilt;
-        reloadMountOff.rz = 0.1 * tilt;
-        gun.rotation.x = -0.3 * tilt;
-        reloadArmOff.x = -0.4 * tilt - 0.15 * drop + 0.28 * insert;
-        reloadArmOff.y = 0.1 * tilt;
+        reloadMountOff.rx = -0.16 * tilt;
+        reloadMountOff.rz = 0.06 * tilt;
+        gun.rotation.x = -0.16 * tilt;
+        reloadArmOff.x = -0.1 * tilt;
+        reloadElbowOffR.x = -0.55 * tilt - 0.28 * drop + 0.4 * insert;
+        reloadElbowOffR.y = 0.08 * tilt;
+        reloadElbowOffL.x = -0.18 * tilt;
         if (gun.userData.slide && gun.userData.baseSlidePos) {
           gun.userData.slide.position.set(
             gun.userData.baseSlidePos.x,
@@ -3251,22 +3473,15 @@
             mag.rotation.z = 0;
           } else if (progress < 0.26) {
             mag.visible = true;
-            mag.position.set(
-              bp.x + 0.025 * drop,
-              bp.y - 0.34 * drop,
-              bp.z
-            );
+            mag.position.set(bp.x + 0.025 * drop, bp.y - 0.34 * drop, bp.z);
             mag.rotation.x = 0.7 * drop;
             mag.rotation.z = 0.2 * drop;
           } else {
             mag.visible = true;
             const over = 0.02;
             let yOff;
-            if (progress < 0.62) {
-              yOff = -0.34 * (1 - insert) + over * insert;
-            } else {
-              yOff = over * (1 - insertSettle);
-            }
+            if (progress < 0.62) yOff = -0.34 * (1 - insert) + over * insert;
+            else yOff = over * (1 - insertSettle);
             mag.position.set(bp.x, bp.y + yOff, bp.z);
             mag.rotation.x = 0.15 * (1 - Math.max(insert, insertSettle));
             mag.rotation.z = 0;
@@ -3279,9 +3494,11 @@
         const pumpBack = _seg(progress, 0.2, 0.45);
         const pumpFwd = _seg(progress, 0.55, 0.8);
         const pump = pumpBack * (1 - pumpFwd);
-        gun.rotation.x = -0.18 * tip;
-        reloadMountOff.rx = -0.2 * tip;
-        reloadArmOff.x = -0.35 * tip;
+        gun.rotation.x = -0.1 * tip;
+        reloadMountOff.rx = -0.1 * tip;
+        reloadArmOff.x = -0.08 * tip;
+        reloadElbowOffR.x = -0.35 * tip - 0.55 * pump;
+        reloadElbowOffL.x = -0.15 * tip - 0.2 * pump;
         if (gun.userData.pump && gun.userData.basePumpPos) {
           const p = gun.userData.pump;
           p.position.set(
@@ -3294,11 +3511,14 @@
         const tipUp = _seg(progress, 0.0, 0.12);
         const tipDown = _seg(progress, 0.78, 0.96);
         const tip = tipUp * (1 - tipDown);
-        gun.rotation.x = -0.25 * tip;
-        gun.rotation.z = 0.35 * tip;
-        reloadMountOff.rx = -0.22 * tip;
-        reloadMountOff.rz = 0.2 * tip;
-        reloadArmOff.x = -0.3 * tip;
+        gun.rotation.x = -0.14 * tip;
+        gun.rotation.z = 0.22 * tip;
+        reloadMountOff.rx = -0.12 * tip;
+        reloadMountOff.rz = 0.12 * tip;
+        reloadArmOff.x = -0.08 * tip;
+        reloadElbowOffR.x = -0.5 * tip;
+        reloadElbowOffR.z = 0.15 * tip;
+        reloadElbowOffL.x = -0.2 * tip;
         if (gun.userData.cylinder) {
           gun.userData.cylinder.rotation.x = progress * Math.PI * 4;
         }
@@ -3309,9 +3529,11 @@
         const drop = _seg(progress, 0.08, 0.3);
         const holdGone = progress >= 0.3 && progress < 0.48;
         const slam = _seg(progress, 0.48, 0.72);
-        reloadMountOff.rx = -0.28 * tilt;
-        gun.rotation.x = -0.2 * tilt;
-        reloadArmOff.x = -0.45 * tilt - 0.2 * drop + 0.4 * slam;
+        reloadMountOff.rx = -0.14 * tilt;
+        gun.rotation.x = -0.12 * tilt;
+        reloadArmOff.x = -0.1 * tilt;
+        reloadElbowOffR.x = -0.6 * tilt - 0.35 * drop + 0.5 * slam;
+        reloadElbowOffL.x = -0.22 * tilt;
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
@@ -3330,26 +3552,18 @@
         const tipUp = _seg(progress, 0.0, 0.14);
         const tipDown = _seg(progress, 0.72, 0.94);
         const tip = tipUp * (1 - tipDown);
-        gun.rotation.x = -0.22 * tip;
-        reloadMountOff.rx = -0.24 * tip;
-        reloadArmOff.x = -0.35 * tip;
+        gun.rotation.x = -0.12 * tip;
+        reloadMountOff.rx = -0.12 * tip;
+        reloadArmOff.x = -0.08 * tip;
+        reloadElbowOffR.x = -0.48 * tip;
+        reloadElbowOffL.x = -0.18 * tip;
         if (gun.userData.drum) {
           gun.userData.drum.rotation.x = progress * Math.PI * 2;
         }
       }
       // chainsaw: no reload anim
 
-      weaponMount.position.set(
-        WEAPON_MOUNT_BASE.x,
-        WEAPON_MOUNT_BASE.y + reloadMountOff.y,
-        WEAPON_MOUNT_BASE.z
-      );
-      weaponMount.rotation.set(reloadMountOff.rx, reloadMountOff.ry, reloadMountOff.rz);
-      if (armR) {
-        armR.rotation.x += reloadArmOff.x;
-        armR.rotation.y += reloadArmOff.y;
-        armR.rotation.z += reloadArmOff.z;
-      }
+      applyReloadPose();
     }
 
     function setWeapon(idx) {
@@ -4029,14 +4243,17 @@
 
     function updateHpHud() {
       if (!gameStarted) {
-        hpLineEl.textContent = 'HP: —';
+        if (hpNumEl) hpNumEl.textContent = '—';
+        if (hpExtraEl) hpExtraEl.textContent = '';
         hpBarFill.style.width = '100%';
         return;
       }
-      let s = 'You: ' + Math.max(0, Math.ceil(playerHp)) + '/' + PLAYER_MAX_HP;
-      if (house.active) s += ' · House: ' + Math.max(0, Math.ceil(house.hp)) + '/' + house.maxHp;
-      if (placeMode) s += ' · Building';
-      hpLineEl.textContent = s;
+      const you = Math.max(0, Math.ceil(playerHp));
+      if (hpNumEl) hpNumEl.textContent = you + ' / ' + PLAYER_MAX_HP;
+      let extra = '';
+      if (house.active) extra = 'House ' + Math.max(0, Math.ceil(house.hp)) + '/' + house.maxHp;
+      if (placeMode) extra = (extra ? extra + ' · ' : '') + 'Building';
+      if (hpExtraEl) hpExtraEl.textContent = extra;
       const pct = Math.max(0, Math.min(1, playerHp / PLAYER_MAX_HP)) * 100;
       hpBarFill.style.width = pct + '%';
     }
@@ -4181,17 +4398,22 @@
     function updateAmmoHud() {
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
+      if (grenadeChipsEl) grenadeChipsEl.innerHTML = '<span class="gchip">G×' + grenades + '</span>';
+      if (ammoWeaponEl) ammoWeaponEl.textContent = st.name;
       if (reloading) {
         ammoEl.classList.remove('empty');
-        ammoEl.textContent = st.name + ' · Reloading… · Grena ' + grenades;
+        if (ammoCountEl) ammoCountEl.textContent = '…';
+        if (ammoDetailEl) ammoDetailEl.textContent = 'Reloading';
       } else if (st.melee) {
         ammoEl.classList.remove('empty');
         const running = AudioSys.isChainsawRunning && AudioSys.isChainsawRunning();
-        ammoEl.textContent = st.name + (running ? ' · Running' : '') + ' · Grena ' + grenades;
+        if (ammoCountEl) ammoCountEl.textContent = '∞';
+        if (ammoDetailEl) ammoDetailEl.textContent = running ? 'Running' : 'Ready';
       } else {
         const maxLabel = Number.isFinite(st.maxAmmo) ? st.maxAmmo : '∞';
         const ammoLabel = Number.isFinite(ammo) ? ammo : '∞';
-        ammoEl.textContent = st.name + ' · Ammo ' + ammoLabel + '/' + maxLabel + ' · Grena ' + grenades;
+        if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
+        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + maxLabel;
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
@@ -5544,7 +5766,7 @@
       for (const c of coinPickups) { c.taken = false; c.mesh.visible = true; }
       playerHp = PLAYER_MAX_HP;
       hurtFlash = 0;
-      ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
+      ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, chainsaw: Infinity };
       buildMode = false;
       buildIndex = 0;
       prevMouseFireHeld = false;
