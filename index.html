@@ -3046,7 +3046,14 @@
       mesh.position.set(s.x, gy, s.z);
       mesh.rotation.y = s.yaw || 0;
       scene.add(mesh);
-      addSolid(s.x, s.z, 0.2, gy, gy + 1.6);
+      const lm = {
+        kind: 'sign', x: s.x, z: s.z, gy,
+        hp: SIGN_MAX_HP, maxHp: SIGN_MAX_HP, alive: true,
+        mesh, colliders: [], debrisColor: s.kind === 'keepout' ? 0x8f3028 : 0x9f8428,
+        rubbleRadius: 0.55
+      };
+      lm.colliders.push(addSolid(s.x, s.z, 0.24, gy, gy + 1.7, lm));
+      landmarks.push(lm);
     }
 
     function buildSandbagBarricade(cx, cz, seed) {
@@ -3108,6 +3115,7 @@
     const GRAVEYARD_MAX_HP = 110;
     const SHED_MAX_HP = 70;
     const FENCE_MAX_HP = 50;
+    const SIGN_MAX_HP = 18;
     const TOWER_LADDER_OUT = 2.25;  // ladder stands this far out from centre — clear of the base collider (radius 1.75 + player radius 0.42)
     const TOWER_LADDER_R = 0.95;    // how close you need to walk to grab it
     const TOWER_DECK_HALF = 1.4;    // deck footprint half-width once you're up top
