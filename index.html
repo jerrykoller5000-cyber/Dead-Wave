@@ -444,6 +444,7 @@
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
         else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
         else if (urlParams.has('poi')) { badge.textContent = 'POI'; badge.style.display = ''; }
+        else if (urlParams.has('solid')) { badge.textContent = 'SOLID'; badge.style.display = ''; }
       }
     }
     if (showPerf) perfEl.classList.add('on');
@@ -1773,7 +1774,7 @@
     // dirt paths connecting them can be painted into the terrain colours. The meshes
     // themselves are built later, once the prop helpers exist.
     const worldSolids = [];   // { x, z, radius, y0, y1, landmark } — blocks movement, builds, bullets
-    const landmarks = [];     // destructible buildings (cabins, the watchtower, campsites, the graveyard) — shared hp/collapse handling
+    const landmarks = [];     // destructible landmarks (cabins, tower, campsites, graveyard, sheds, fences) — shared hp/collapse handling
     const platforms = [];     // { x, z, hw, hl, yaw, deckY } — walkable decks
     const campfires = [];     // { x, z, y, light } — flicker at night
     const POI = { campsites: [], cabins: [], tower: null, graveyard: null, dock: null, bridges: [], sheds: [], wrecks: [], mast: null, fences: [], signs: [], sandbags: null };
@@ -2864,6 +2865,8 @@
       w(0, -1.25, 0.7, 1.8);
       w(-1.53, 0, 0.55, 1.8);
       w(1.53, 0, 0.5, 1.7);
+      w(-0.58, 1.25, 0.48, 1.55);
+      w(0.58, 1.25, 0.46, 1.45);
       w(-1.9, 1.35, 0.35, 1.0); // barrel
       landmarks.push(lm);
       return lm;
@@ -2873,12 +2876,19 @@
       const rnd = mulberry32(seed);
       const dx = bx - ax, dz = bz - az;
       const len = Math.hypot(dx, dz) || 1;
-      const ux = dx / len, uz = dz / len;
       const parts = [];
       const postMat = new THREE.MeshStandardMaterial({ color: 0x5a442c });
       const railMat = new THREE.MeshStandardMaterial({ color: 0x6e5536 });
       const postN = Math.max(3, Math.round(len / 2.2));
       const gy0 = sampleHeight(ax, az);
+      const midX = (ax + bx) * 0.5, midZ = (az + bz) * 0.5;
+      const gyMid = sampleHeight(midX, midZ);
+      const lm = {
+        kind: 'fence', x: midX, z: midZ, gy: gyMid, ax, az, bx, bz,
+        hp: FENCE_MAX_HP, maxHp: FENCE_MAX_HP, alive: true,
+        mesh: null, colliders: [], debrisColor: 0x5a442c,
+        rubbleRadius: Math.min(4.5, Math.max(1.2, len * 0.35))
+      };
       for (let i = 0; i <= postN; i++) {
         const t = i / postN;
         const px = ax + dx * t, pz = az + dz * t;
@@ -2896,23 +2906,27 @@
         const ph = 0.95 + rnd() * 0.25;
         const lean = (rnd() - 0.5) * 0.15;
         poiBox(parts, postMat, 0.14, ph, 0.14, px - ax, gy - gy0 + ph * 0.5, pz - az, 0, lean);
-        addSolid(px, pz, 0.18, gy, gy + ph); // posts only — walk through gaps
+        // Posts only — walk through gaps; tagged so bullets damage the whole run.
+        lm.colliders.push(addSolid(px, pz, 0.18, gy, gy + ph, lm));
         // Rails toward next standing post (approximate).
         if (i < postN && rnd() < 0.75) {
           const t2 = (i + 1) / postN;
           const qx = ax + dx * t2, qz = az + dz * t2;
-          const midX = (px + qx) * 0.5 - ax, midZ = (pz + qz) * 0.5 - az;
+          const midLocalX = (px + qx) * 0.5 - ax, midLocalZ = (pz + qz) * 0.5 - az;
           const seg = Math.hypot(qx - px, qz - pz);
           const yaw = Math.atan2(qx - px, qz - pz);
           const gy2 = sampleHeight(qx, qz) - 0.04;
           const midY = (gy + gy2) * 0.5 - gy0;
-          if (rnd() < 0.85) poiBox(parts, railMat, 0.08, 0.08, seg * 0.92, midX, midY + 0.72, midZ, yaw);
-          if (rnd() < 0.7) poiBox(parts, railMat, 0.08, 0.08, seg * 0.9, midX, midY + 0.38, midZ, yaw, (rnd() - 0.5) * 0.25);
+          if (rnd() < 0.85) poiBox(parts, railMat, 0.08, 0.08, seg * 0.92, midLocalX, midY + 0.72, midLocalZ, yaw);
+          if (rnd() < 0.7) poiBox(parts, railMat, 0.08, 0.08, seg * 0.9, midLocalX, midY + 0.38, midLocalZ, yaw, (rnd() - 0.5) * 0.25);
         }
       }
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       mesh.position.set(ax, gy0, az);
       scene.add(mesh);
+      lm.mesh = mesh;
+      landmarks.push(lm);
+      return lm;
     }
 
     function buildWreck(cx, cz, seed) {
@@ -3042,7 +3056,7 @@
       const bag = new THREE.MeshStandardMaterial({ color: 0x7a6e4e });
       const bagDark = new THREE.MeshStandardMaterial({ color: 0x5c5340 });
       const wood = new THREE.MeshStandardMaterial({ color: 0x5a4630 });
-      // Abandoned sandbags + a couple of barricade planks near cabin (scenery only).
+      // Abandoned sandbags + a couple of solid barricade planks near cabin.
       const ox = 3.8 + rnd(), oz = -2.4 - rnd();
       for (let i = 0; i < 5; i++) {
         const lx = ox + (i % 3) * 0.55 - 0.5;
@@ -3058,10 +3072,13 @@
       mesh.position.set(cx, gy, cz);
       mesh.rotation.y = yaw;
       scene.add(mesh);
-      // Soft scenery blockers on the pile only.
+      // Soft scenery blockers on the pile + planks (low wall).
       const cy = Math.cos(yaw), sy = Math.sin(yaw);
       const wx = cx + ox * cy + oz * sy, wz = cz - ox * sy + oz * cy;
-      addSolid(wx, wz, 0.9, gy, gy + 0.7);
+      addSolid(wx, wz, 0.95, gy, gy + 0.75);
+      const px = cx + (ox - 0.1) * cy + (oz + 1.2) * sy;
+      const pz = cz - (ox - 0.1) * sy + (oz + 1.2) * cy;
+      addSolid(px, pz, 0.7, gy, gy + 0.65);
     }
 
     function buildPOIMeshes() {
@@ -3080,16 +3097,17 @@
       if (POI.sandbags) buildSandbagBarricade(POI.sandbags.x, POI.sandbags.z, seed += 101);
     }
 
-    // === Destructible landmarks (cabins, the watchtower, campsites, the graveyard) ===
+    // === Destructible landmarks (cabins, tower, campsites, graveyard, sheds, fences) ===
     // Player fire chips away at a structure's shared hp pool; once it runs out the
     // whole thing hides and a rubble pile takes its place. Plain scenery (bridge posts,
-    // the dock) is untouched — addSolid() only tags a collider with a landmark when the
-    // structure that owns it opts in.
+    // the dock, wrecks, mast, signs, sandbags) is untouched — addSolid() only tags a
+    // collider with a landmark when the structure that owns it opts in.
     const CABIN_MAX_HP = 150;
     const TOWER_MAX_HP = 260;
     const CAMPSITE_MAX_HP = 90;
     const GRAVEYARD_MAX_HP = 110;
     const SHED_MAX_HP = 70;
+    const FENCE_MAX_HP = 50;
     const TOWER_LADDER_OUT = 2.25;  // ladder stands this far out from centre — clear of the base collider (radius 1.75 + player radius 0.42)
     const TOWER_LADDER_R = 0.95;    // how close you need to walk to grab it
     const TOWER_DECK_HALF = 1.4;    // deck footprint half-width once you're up top
@@ -3131,9 +3149,22 @@
         if (i >= 0) worldSolids.splice(i, 1);
       }
       lm.colliders.length = 0;
-      spawnChunks(lm.x, lm.gy + 2.0, lm.z, lm.debrisColor || 0x6b5a3e, 18, 5);
-      spawnChunks(lm.x, lm.gy + 0.5, lm.z, lm.debrisColor || 0x6b5a3e, 12, 3);
-      spawnDust(lm.x, lm.gy, lm.z, 12);
+      if (lm.kind === 'fence' && lm.ax != null) {
+        const fdx = lm.bx - lm.ax, fdz = lm.bz - lm.az;
+        const flen = Math.hypot(fdx, fdz) || 1;
+        const steps = Math.max(3, Math.round(flen / 2.2));
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const px = lm.ax + fdx * t, pz = lm.az + fdz * t;
+          const gy = sampleHeight(px, pz);
+          spawnChunks(px, gy + 0.7, pz, lm.debrisColor || 0x5a442c, 5, 3);
+          if (i % 2 === 0) spawnDust(px, gy, pz, 4);
+        }
+      } else {
+        spawnChunks(lm.x, lm.gy + 2.0, lm.z, lm.debrisColor || 0x6b5a3e, 18, 5);
+        spawnChunks(lm.x, lm.gy + 0.5, lm.z, lm.debrisColor || 0x6b5a3e, 12, 3);
+        spawnDust(lm.x, lm.gy, lm.z, 12);
+      }
       const shakeDist = Math.hypot(lm.x - player.position.x, lm.z - player.position.z);
       addShake(Math.max(0.2, 0.6 - shakeDist * 0.02));
       AudioSys.rockBreak();
@@ -3144,6 +3175,33 @@
     // obstacle to matter, but nothing you could climb or hide behind any more.
     function buildLandmarkRubble(lm) {
       const parts = [];
+      if (lm.kind === 'fence' && lm.ax != null) {
+        const fdx = lm.bx - lm.ax, fdz = lm.bz - lm.az;
+        const flen = Math.hypot(fdx, fdz) || 1;
+        const n = Math.max(8, Math.round(flen * 2.2));
+        for (let i = 0; i < n; i++) {
+          const t = Math.random();
+          const lx = lm.ax + fdx * t - lm.x + (Math.random() - 0.5) * 0.35;
+          const lz = lm.az + fdz * t - lm.z + (Math.random() - 0.5) * 0.35;
+          const w = 0.22 + Math.random() * 0.4;
+          poiBox(parts, Math.random() < 0.5 ? rubbleWood : rubbleWoodLight,
+            w, 0.12 + Math.random() * 0.16, w * (0.5 + Math.random() * 0.9),
+            lx, sampleHeight(lm.x + lx, lm.z + lz) - lm.gy + 0.06 + Math.random() * 0.12, lz,
+            Math.random() * Math.PI, (Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.4);
+        }
+        const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+        mesh.position.set(lm.x, lm.gy, lm.z);
+        scene.add(mesh);
+        lm.rubbleMesh = mesh;
+        const steps = Math.max(2, Math.round(flen / 3));
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const px = lm.ax + fdx * t, pz = lm.az + fdz * t;
+          const gy = sampleHeight(px, pz);
+          lm.colliders.push(addSolid(px, pz, 0.32, gy, gy + 0.5, null));
+        }
+        return;
+      }
       const n = 12 + Math.floor(Math.random() * 8);
       const rad = lm.rubbleRadius || 1.8;
       for (let i = 0; i < n; i++) {
@@ -4755,11 +4813,12 @@
       return !!(weather && (weather.raining || weather.intensity > 0.12));
     }
 
-    function killWildlife(w, color) {
+    function killWildlife(w, color, dirX = 0, dirZ = 0) {
       if (!w || !w.alive) return;
       w.alive = false;
       const p = w.mesh.position;
       spawnChunks(p.x, p.y, p.z, color || 0xaa8866, 2, 1.5);
+      spawnBlood(p.x, p.y + 0.08, p.z, dirX || 0, dirZ || 0, 8, 0.95);
       disposeWildMesh(w.mesh);
       w.mesh = null;
     }
@@ -5168,7 +5227,7 @@
           const dy = w.mesh.position.y - (player.position.y + 0.9);
           if (Math.abs(dy) > 2.8) continue;
           const dot = (dx * fx + dz * fz) / (d || 1);
-          if (dot > minDot) killWildlife(w, item.col);
+          if (dot > minDot) killWildlife(w, item.col, fx, fz);
         }
       }
     }
@@ -11532,6 +11591,19 @@
       // AoE damage — shell uses launcher st.damage; Key-G throwable keeps legacy 55
       const AOE = 4.5;
       const baseDmg = (g.damage != null) ? g.damage : 55;
+      for (const lm of landmarks) {
+        if (!lm.alive) continue;
+        // Fence runs use their nearest point so long runs take damage where the blast lands.
+        let tx = lm.x, tz = lm.z;
+        if (lm.kind === 'fence' && lm.ax != null) {
+          const fdx = lm.bx - lm.ax, fdz = lm.bz - lm.az;
+          const fl2 = fdx * fdx + fdz * fdz || 1;
+          const ft = Math.max(0, Math.min(1, ((x - lm.ax) * fdx + (z - lm.az) * fdz) / fl2));
+          tx = lm.ax + fdx * ft; tz = lm.az + fdz * ft;
+        }
+        const d = Math.hypot(tx - x, tz - z);
+        if (d < AOE) damageLandmark(lm, Math.max(12, Math.round(baseDmg * (1 - d / AOE))));
+      }
       for (const zom of zombies.slice()) {
         if (!zom.alive) continue;
         const d = Math.hypot(zom.mesh.position.x - x, zom.mesh.position.z - z);
@@ -11552,17 +11624,17 @@
       for (const w of birds.slice()) {
         if (!w.alive || !w.mesh) continue;
         if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
-          killWildlife(w, 0x887766);
+          killWildlife(w, 0x887766, w.mesh.position.x - x, w.mesh.position.z - z);
       }
       for (const w of rabbits.slice()) {
         if (!w.alive || !w.mesh) continue;
         if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
-          killWildlife(w, 0x8b6a4a);
+          killWildlife(w, 0x8b6a4a, w.mesh.position.x - x, w.mesh.position.z - z);
       }
       for (const w of frogs.slice()) {
         if (!w.alive || !w.mesh) continue;
         if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
-          killWildlife(w, 0x3d8b4a);
+          killWildlife(w, 0x3d8b4a, w.mesh.position.x - x, w.mesh.position.z - z);
       }
       for (const rock of rocks) {
         if (!rock.alive || !rock.mesh.visible) continue;
@@ -11949,7 +12021,7 @@
           const hitW = hitWildlifeSegment(p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z);
           if (hitW) {
             const col = hitW.kind === 'frog' ? 0x3d8b4a : (hitW.kind === 'rabbit' ? 0x8b6a4a : 0x887766);
-            killWildlife(hitW.target, col);
+            killWildlife(hitW.target, col, p.dir.x, p.dir.z);
             p.hit = true;
             scene.remove(p.mesh);
             projectiles.splice(i, 1);
@@ -12022,8 +12094,8 @@
         }
 
         // Landmark structures: tent poles, cabin walls, bridge posts and the like. Ones
-        // tagged with a `landmark` (cabins, the watchtower) take real damage and can be
-        // shot down; everything else just sparks like scenery always has.
+        // tagged with a `landmark` (cabins, tower, sheds, fences, etc.) take real damage
+        // and can be shot down; everything else just sparks like scenery always has.
         let hitSolid = false;
         for (const ws of worldSolids) {
           const dxs = p.pos.x - ws.x, dzs = p.pos.z - ws.z;
