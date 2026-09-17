@@ -2906,13 +2906,42 @@
 
     // --- Foliage (capped) ---
     const foliage = [];
-    const MAX_GRASS = 420;
-    const MAX_BUSH = 120;
-    const MAX_FERN = 140;
+    const MAX_GRASS = 3200;
+    const MAX_BUSH = 260;
+    const MAX_FERN = 260;
+    const MAX_FLOWER = 340;
+    const MAX_MUSHROOM = 110;
+    const MAX_CLUTTER = 220;
     const grassMat = new THREE.MeshStandardMaterial({ color: 0x4caf50, roughness: 0.95, side: THREE.DoubleSide });
     const grassMat2 = new THREE.MeshStandardMaterial({ color: 0x6bbf4e, roughness: 0.95, side: THREE.DoubleSide });
+    const grassMat3 = new THREE.MeshStandardMaterial({ color: 0x8fae4a, roughness: 0.95, side: THREE.DoubleSide });
+    const grassMats = [grassMat, grassMat, grassMat2, grassMat3];
     const bushMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32, roughness: 1 });
+    const bushMat2 = new THREE.MeshStandardMaterial({ color: 0x357a38, roughness: 1 });
+    const blossomMat = new THREE.MeshStandardMaterial({ color: 0xf3d9e8, roughness: 0.85 });
     const fernMat = new THREE.MeshStandardMaterial({ color: 0x66bb6a, roughness: 0.9, side: THREE.DoubleSide });
+    const stemMat = new THREE.MeshStandardMaterial({ color: 0x4d8a3f, roughness: 0.9, side: THREE.DoubleSide });
+    const mushCapMats = [
+      new THREE.MeshStandardMaterial({ color: 0xc0392b, roughness: 0.7 }),
+      new THREE.MeshStandardMaterial({ color: 0xa9694a, roughness: 0.85 }),
+      new THREE.MeshStandardMaterial({ color: 0xd9a441, roughness: 0.8 })
+    ];
+    const mushDotMat = new THREE.MeshStandardMaterial({ color: 0xf5f0e6, roughness: 0.8 });
+    const mushStemMat = new THREE.MeshStandardMaterial({ color: 0xe8dcc0, roughness: 0.85 });
+    const twigMat = new THREE.MeshStandardMaterial({ color: 0x5c4326, roughness: 1 });
+    const pebbleMat2 = new THREE.MeshStandardMaterial({ color: 0x8b8f88, roughness: 0.9 });
+    // Wildflower colour palettes — petal + centre — picked as a pair per cluster.
+    const FLOWER_PALETTES = [
+      { petal: 0xffffff, center: 0xf4c542 }, // daisy
+      { petal: 0xf4c542, center: 0x8a5a1a }, // buttercup
+      { petal: 0xb389d4, center: 0xf4c542 }, // lavender
+      { petal: 0xe1495a, center: 0x3a1a12 }, // poppy
+      { petal: 0xf28fb0, center: 0xf4c542 }  // pink wildflower
+    ];
+    const FLOWER_MATS = FLOWER_PALETTES.map(p => ({
+      petal: new THREE.MeshStandardMaterial({ color: p.petal, roughness: 0.7 }),
+      center: new THREE.MeshStandardMaterial({ color: p.center, roughness: 0.6 })
+    }));
     const foliageMat = new THREE.MeshStandardMaterial({
       vertexColors: true, roughness: 0.95, side: THREE.DoubleSide
     });
@@ -2925,18 +2954,22 @@
       foliage.length = 0;
     }
 
-    function makeGrassTuft(x, z, rnd) {
+    function makeGrassTuft(x, z, rnd, moisture = 0.5) {
       const parts = [];
-      const n = 3 + Math.floor(rnd() * 3);
+      const n = 7 + Math.floor(rnd() * 7);
+      // Parched ground leans gold, lush ground leans green — same palette either way,
+      // just weighted differently so the transition between them reads naturally.
+      const mats = moisture < 0.45 ? [grassMat3, grassMat3, grassMat2] : grassMats;
       for (let i = 0; i < n; i++) {
-        const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.08, 0.28 + rnd() * 0.2), rnd() > 0.5 ? grassMat : grassMat2);
-        blade.position.set((rnd() - 0.5) * 0.2, 0.14, (rnd() - 0.5) * 0.2);
+        const bh = 0.22 + rnd() * 0.32;
+        const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.07 + rnd() * 0.03, bh), mats[(rnd() * mats.length) | 0]);
+        blade.position.set((rnd() - 0.5) * 0.58, bh * 0.5 - 0.03, (rnd() - 0.5) * 0.58);
         blade.rotation.y = rnd() * Math.PI;
-        blade.rotation.z = (rnd() - 0.5) * 0.35;
+        blade.rotation.z = (rnd() - 0.5) * 0.4;
         parts.push(blade);
       }
       const g = mergeParts(parts, foliageMat);
-      g.position.set(x, groundMinAround(x, z, 0.25), z);
+      g.position.set(x, groundMinAround(x, z, 0.3), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'grass', x, z });
       windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.16 });
@@ -2944,10 +2977,22 @@
 
     function makeBush(x, z, rnd) {
       const parts = [];
-      for (let i = 0; i < 3; i++) {
-        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.25 + rnd() * 0.15, 8, 6), bushMat);
-        puff.position.set((rnd() - 0.5) * 0.35, 0.22 + rnd() * 0.1, (rnd() - 0.5) * 0.35);
+      const bmat = rnd() < 0.5 ? bushMat : bushMat2;
+      const n = 4 + Math.floor(rnd() * 2);
+      for (let i = 0; i < n; i++) {
+        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.24 + rnd() * 0.17, 8, 6), bmat);
+        puff.position.set((rnd() - 0.5) * 0.42, 0.2 + rnd() * 0.16, (rnd() - 0.5) * 0.42);
         parts.push(puff);
+      }
+      // A little under a third bloom with tiny blossom dots dotted through the leaves.
+      if (rnd() < 0.28) {
+        const dots = 4 + Math.floor(rnd() * 5);
+        for (let i = 0; i < dots; i++) {
+          const dot = new THREE.Mesh(new THREE.SphereGeometry(0.045 + rnd() * 0.025, 5, 4), blossomMat);
+          const a = rnd() * Math.PI * 2, r = 0.18 + rnd() * 0.28;
+          dot.position.set(Math.cos(a) * r, 0.28 + rnd() * 0.2, Math.sin(a) * r);
+          parts.push(dot);
+        }
       }
       const g = mergeParts(parts, foliageMat, { castShadow: true });
       g.position.set(x, groundMinAround(x, z, 0.3), z);
@@ -2958,10 +3003,11 @@
 
     function makeFern(x, z, rnd) {
       const parts = [];
-      for (let i = 0; i < 5; i++) {
-        const leaf = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.4), fernMat);
-        const ang = (i / 5) * Math.PI * 2 + rnd();
-        leaf.position.set(Math.cos(ang) * 0.12, 0.2, Math.sin(ang) * 0.12);
+      const n = 6 + Math.floor(rnd() * 3);
+      for (let i = 0; i < n; i++) {
+        const leaf = new THREE.Mesh(new THREE.PlaneGeometry(0.2 + rnd() * 0.08, 0.38 + rnd() * 0.14), fernMat);
+        const ang = (i / n) * Math.PI * 2 + rnd();
+        leaf.position.set(Math.cos(ang) * 0.13, 0.2, Math.sin(ang) * 0.13);
         leaf.rotation.y = ang;
         leaf.rotation.x = -0.6;
         parts.push(leaf);
@@ -2971,6 +3017,88 @@
       scene.add(g);
       foliage.push({ mesh: g, kind: 'fern', x, z });
       windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.11 });
+    }
+
+    // Small wildflower clusters — a splash of colour through the meadow band, between
+    // the dry high ground and the damp fern country by the water.
+    function makeFlowerCluster(x, z, rnd) {
+      const pal = FLOWER_MATS[(rnd() * FLOWER_MATS.length) | 0];
+      const parts = [];
+      const n = 2 + Math.floor(rnd() * 3);
+      for (let i = 0; i < n; i++) {
+        const fx = (rnd() - 0.5) * 0.4, fz = (rnd() - 0.5) * 0.4;
+        const stemH = 0.16 + rnd() * 0.14;
+        const stem = new THREE.Mesh(new THREE.PlaneGeometry(0.03, stemH), stemMat);
+        stem.position.set(fx, stemH * 0.5, fz);
+        stem.rotation.y = rnd() * Math.PI;
+        parts.push(stem);
+        const bloom = new THREE.Mesh(new THREE.SphereGeometry(0.07 + rnd() * 0.03, 6, 5), pal.petal);
+        bloom.position.set(fx, stemH + 0.02, fz);
+        bloom.scale.y = 0.55;
+        parts.push(bloom);
+        const center = new THREE.Mesh(new THREE.SphereGeometry(0.03, 5, 4), pal.center);
+        center.position.set(fx, stemH + 0.05, fz);
+        parts.push(center);
+      }
+      const g = mergeParts(parts, foliageMat);
+      g.position.set(x, groundMinAround(x, z, 0.25), z);
+      scene.add(g);
+      foliage.push({ mesh: g, kind: 'flower', x, z });
+      windSwayables.push({ mesh: g, phase: rnd() * 6.28, amount: 0.13 });
+    }
+
+    // Toadstools tucked in the shade — same damp corners the ferns like.
+    function makeMushroomCluster(x, z, rnd) {
+      const parts = [];
+      const n = 2 + Math.floor(rnd() * 3);
+      const capMat = mushCapMats[(rnd() * mushCapMats.length) | 0];
+      for (let i = 0; i < n; i++) {
+        const mx = (rnd() - 0.5) * 0.3, mz = (rnd() - 0.5) * 0.3;
+        const s = 0.5 + rnd() * 0.6;
+        const stemH = 0.14 * s;
+        const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.02 * s, 0.028 * s, stemH, 5), mushStemMat);
+        stem.position.set(mx, stemH * 0.5, mz);
+        parts.push(stem);
+        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.09 * s, 8, 5, 0, Math.PI * 2, 0, Math.PI * 0.55), capMat);
+        cap.position.set(mx, stemH, mz);
+        parts.push(cap);
+        if (capMat === mushCapMats[0] && rnd() < 0.7) {
+          for (let d = 0; d < 3; d++) {
+            const dot = new THREE.Mesh(new THREE.SphereGeometry(0.014 * s, 4, 4), mushDotMat);
+            const a = rnd() * Math.PI * 2, r = 0.04 * s;
+            dot.position.set(mx + Math.cos(a) * r, stemH + 0.05 * s, mz + Math.sin(a) * r);
+            parts.push(dot);
+          }
+        }
+      }
+      const g = mergeParts(parts, foliageMat);
+      g.position.set(x, groundMinAround(x, z, 0.15), z);
+      scene.add(g);
+      foliage.push({ mesh: g, kind: 'mushroom', x, z });
+    }
+
+    // Forest-floor texture: twigs and pebbles with no motion of their own.
+    function makeClutter(x, z, rnd) {
+      const parts = [];
+      const n = 1 + Math.floor(rnd() * 3);
+      for (let i = 0; i < n; i++) {
+        if (rnd() < 0.5) {
+          const twig = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.018, 0.22 + rnd() * 0.18, 5), twigMat);
+          twig.position.set((rnd() - 0.5) * 0.5, 0.02, (rnd() - 0.5) * 0.5);
+          twig.rotation.z = Math.PI / 2;
+          twig.rotation.y = rnd() * Math.PI;
+          parts.push(twig);
+        } else {
+          const peb = new THREE.Mesh(new THREE.DodecahedronGeometry(0.05 + rnd() * 0.05, 0), pebbleMat2);
+          peb.position.set((rnd() - 0.5) * 0.5, 0.03, (rnd() - 0.5) * 0.5);
+          peb.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
+          parts.push(peb);
+        }
+      }
+      const g = mergeParts(parts, foliageMat);
+      g.position.set(x, groundMinAround(x, z, 0.2), z);
+      scene.add(g);
+      foliage.push({ mesh: g, kind: 'clutter', x, z });
     }
 
     // Seeded and built once over the whole map — expanding land used to reshuffle every
@@ -3014,14 +3142,16 @@
       for (let i = 0; i < MAX_GRASS; i++) {
         const [x, z] = randSpot(0.5);
         if (!plantable(x, z, 0.5)) continue;
-        // Grass thins out on dry ground.
-        if (rnd() > 0.25 + moistureAt(x, z) * 0.9) continue;
-        makeGrassTuft(x, z, rnd);
+        // Thins out on dry ground, but never bare — even parched dirt keeps a
+        // scrubby minimum so nowhere on the walkable map reads as empty.
+        const m = moistureAt(x, z);
+        if (rnd() > 0.42 + m * 0.55) continue;
+        makeGrassTuft(x, z, rnd, m);
       }
       for (let i = 0; i < MAX_BUSH; i++) {
         const [x, z] = randSpot(2);
         if (!plantable(x, z, 0.42)) continue;
-        if (rnd() > 0.3 + moistureAt(x, z) * 0.8) continue;
+        if (rnd() > 0.22 + moistureAt(x, z) * 0.72) continue;
         makeBush(x, z, rnd);
       }
       for (let i = 0; i < MAX_FERN; i++) {
@@ -3030,6 +3160,30 @@
         // Ferns want shade and damp — they cluster near the water.
         if (rnd() > moistureAt(x, z) * 1.15) continue;
         makeFern(x, z, rnd);
+      }
+      // Wildflowers like it neither bone-dry nor waterlogged — the meadow band
+      // between the fern country and the dry high ground.
+      for (let i = 0; i < MAX_FLOWER; i++) {
+        const [x, z] = randSpot(1);
+        if (!plantable(x, z, 0.42)) continue;
+        const m = moistureAt(x, z);
+        if (m < 0.3 || m > 0.85) continue;
+        if (rnd() > 0.55) continue;
+        makeFlowerCluster(x, z, rnd);
+      }
+      // Mushrooms want the same shade and damp as ferns.
+      for (let i = 0; i < MAX_MUSHROOM; i++) {
+        const [x, z] = randSpot(1);
+        if (!plantable(x, z, 0.4)) continue;
+        if (rnd() > moistureAt(x, z) * 0.9) continue;
+        makeMushroomCluster(x, z, rnd);
+      }
+      // Twigs and pebbles: generic forest-floor texture, everywhere walkable.
+      for (let i = 0; i < MAX_CLUTTER; i++) {
+        const [x, z] = randSpot(1);
+        if (!plantable(x, z, 0.48)) continue;
+        if (rnd() > 0.7) continue;
+        makeClutter(x, z, rnd);
       }
     }
 
