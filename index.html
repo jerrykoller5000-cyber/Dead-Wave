@@ -443,6 +443,7 @@
         else if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
         else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
+        else if (urlParams.has('poi')) { badge.textContent = 'POI'; badge.style.display = ''; }
       }
     }
     if (showPerf) perfEl.classList.add('on');
@@ -1775,7 +1776,7 @@
     const landmarks = [];     // destructible buildings (cabins, the watchtower, campsites, the graveyard) — shared hp/collapse handling
     const platforms = [];     // { x, z, hw, hl, yaw, deckY } — walkable decks
     const campfires = [];     // { x, z, y, light } — flicker at night
-    const POI = { campsites: [], cabins: [], tower: null, graveyard: null, dock: null, bridges: [] };
+    const POI = { campsites: [], cabins: [], tower: null, graveyard: null, dock: null, bridges: [], sheds: [], wrecks: [], mast: null, fences: [], signs: [], sandbags: null };
     const PATHS = [];         // polylines of {x,z} painted as worn dirt
 
     // `landmark` tags this collider as belonging to a destructible building (see
@@ -1886,6 +1887,31 @@
         });
       }
 
+      // Ruined sheds — smaller than cabins, mid-range scatter.
+      for (let i = 0; i < 3; i++) {
+        const s = findSpot(45, 130, 0.24, 28);
+        if (s) POI.sheds.push(s);
+      }
+
+      // Crashed truck wrecks — off roads but findable.
+      for (let i = 0; i < 2; i++) {
+        const s = findSpot(50, 140, 0.28, 36);
+        if (s) POI.wrecks.push(s);
+      }
+
+      // Radio mast — skinny lattice silhouette for navigation.
+      POI.mast = findSpot(80, 165, 0.22, 40);
+
+      // Warning / story props (cheap juice near graveyard, wrecks, one cabin).
+      if (POI.graveyard) {
+        POI.signs.push({ x: POI.graveyard.x + 4.2, z: POI.graveyard.z - 3.0, kind: 'keepout', yaw: 0.4 });
+        POI.signs.push({ x: POI.graveyard.x - 3.6, z: POI.graveyard.z + 3.8, kind: 'hazard', yaw: -0.7 });
+      }
+      for (const w of POI.wrecks) {
+        POI.signs.push({ x: w.x + 3.4, z: w.z + 2.2, kind: 'hazard', yaw: 1.1 });
+      }
+      if (POI.cabins[0]) POI.sandbags = { x: POI.cabins[0].x, z: POI.cabins[0].z };
+
       // Paths: worn tracks from spawn out to the landmarks. A leg that would ford the
       // river is routed through the nearest bridge instead.
       function crossesRiver(ax, az, bx, bz) {
@@ -1914,6 +1940,44 @@
       if (POI.dock) addPath(POI.dock.x, POI.dock.z);
       if (POI.graveyard) addPath(POI.graveyard.x, POI.graveyard.z);
       if (POI.tower) addPath(POI.tower.x, POI.tower.z);
+      // One worn track each toward the new landmarks (keeps path count reasonable).
+      if (POI.sheds[0]) addPath(POI.sheds[0].x, POI.sheds[0].z);
+      if (POI.wrecks[0]) addPath(POI.wrecks[0].x, POI.wrecks[0].z);
+      if (POI.mast) addPath(POI.mast.x, POI.mast.z);
+
+      // Broken fence runs near camps/cabins and along a path corridor.
+      {
+        const fr = mulberry32(0xf3ace01);
+        const anchors = [...POI.campsites, ...POI.cabins];
+        for (let i = 0; i < Math.min(3, anchors.length); i++) {
+          const a = anchors[i];
+          const ang = fr() * Math.PI * 2;
+          const len = 9 + fr() * 9;
+          const ox = Math.cos(ang) * (5.5 + fr() * 2.5);
+          const oz = Math.sin(ang) * (5.5 + fr() * 2.5);
+          const dir = ang + 1.15;
+          POI.fences.push({
+            ax: a.x + ox, az: a.z + oz,
+            bx: a.x + ox + Math.cos(dir) * len,
+            bz: a.z + oz + Math.sin(dir) * len,
+            seed: (fr() * 1e9) | 0
+          });
+        }
+        if (PATHS.length) {
+          const line = PATHS[Math.min(1, PATHS.length - 1)];
+          const a = line[0], b = line[line.length - 1];
+          const dx = b.x - a.x, dz = b.z - a.z;
+          const plen = Math.hypot(dx, dz) || 1;
+          const nx = -dz / plen, nz = dx / plen;
+          const off = 3.2 + fr() * 1.8;
+          const t0 = 0.32, t1 = 0.52;
+          POI.fences.push({
+            ax: a.x + dx * t0 + nx * off, az: a.z + dz * t0 + nz * off,
+            bx: a.x + dx * t1 + nx * off, bz: a.z + dz * t1 + nz * off,
+            seed: (fr() * 1e9) | 0
+          });
+        }
+      }
     })();
 
     function distToPath(x, z) {
@@ -1935,6 +1999,9 @@
       if (POI.graveyard && Math.hypot(x - POI.graveyard.x, z - POI.graveyard.z) < clearance + 2) return true;
       if (POI.dock && Math.hypot(x - POI.dock.x, z - POI.dock.z) < clearance + 3) return true;
       for (const b of POI.bridges) if (Math.hypot(x - b.x, z - b.z) < clearance + 3) return true;
+      for (const s of POI.sheds) if (Math.hypot(x - s.x, z - s.z) < clearance) return true;
+      for (const w of POI.wrecks) if (Math.hypot(x - w.x, z - w.z) < clearance + 1) return true;
+      if (POI.mast && Math.hypot(x - POI.mast.x, z - POI.mast.z) < clearance) return true;
       return false;
     }
 
@@ -2750,6 +2817,253 @@
       }
     }
 
+
+    function buildShed(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      const gy = groundMinAround(cx, cz, 1.2) - 0.05;
+      const yaw = rnd() * Math.PI * 2;
+      const parts = [];
+      const wood = new THREE.MeshStandardMaterial({ color: 0x6a5236 });
+      const woodOld = new THREE.MeshStandardMaterial({ color: 0x4e3c28 });
+      const corr = new THREE.MeshStandardMaterial({ color: 0x6e6860, metalness: 0.35, roughness: 0.55 });
+      const rust = new THREE.MeshStandardMaterial({ color: 0x7a4a2e, metalness: 0.4, roughness: 0.65 });
+      const metal = new THREE.MeshStandardMaterial({ color: 0x555850, metalness: 0.5, roughness: 0.5 });
+
+      // Compact corrugated/wood shed footprint (~3.2 x 2.6).
+      poiBox(parts, woodOld, 3.2, 0.18, 2.6, 0, 0.09, 0);
+      poiBox(parts, wood, 3.2, 1.7, 0.14, 0, 0.95, -1.25);          // back
+      poiBox(parts, woodOld, 0.14, 1.7, 2.5, -1.53, 0.95, 0);         // left
+      poiBox(parts, corr, 0.12, 1.55, 2.4, 1.53, 0.9, -0.05);         // right corrugated
+      // Door askew on the front (gap + tilted door panel).
+      poiBox(parts, wood, 0.9, 1.45, 0.08, -0.55, 0.82, 1.28, 0, 0, 0.18);
+      poiBox(parts, woodOld, 0.72, 1.35, 0.07, 0.55, 0.78, 1.22, 0.55, 0.12, -0.08);
+      // Leaning roof panel + missing corner.
+      poiBox(parts, corr, 3.4, 0.08, 2.8, -0.1, 1.95, -0.15, 0, 0.28);
+      poiBox(parts, woodOld, 0.9, 0.08, 1.4, 1.1, 1.55, 0.7, rnd() * 0.6, 0.5);
+      // Tools leaning + rust barrel.
+      poiBox(parts, metal, 0.06, 1.25, 0.06, 1.9, 0.7, 0.9, 0, 0.35);
+      poiBox(parts, wood, 0.08, 0.9, 0.08, 2.05, 0.5, 1.15, 0, -0.45);
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.3, 0.85, 8), rust);
+      barrel.position.set(-1.9, 0.45, 1.35);
+      barrel.rotation.z = 0.12;
+      parts.push(barrel);
+
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      g.position.set(cx, gy, cz);
+      g.rotation.y = yaw;
+      scene.add(g);
+
+      const lm = {
+        kind: 'shed', x: cx, z: cz, gy, hp: SHED_MAX_HP, maxHp: SHED_MAX_HP, alive: true,
+        mesh: g, colliders: [], debrisColor: 0x5a4630, rubbleRadius: 1.5
+      };
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const w = (lx, lz, r, h) => lm.colliders.push(addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy, gy + h, lm));
+      w(0, -1.25, 0.7, 1.8);
+      w(-1.53, 0, 0.55, 1.8);
+      w(1.53, 0, 0.5, 1.7);
+      w(-1.9, 1.35, 0.35, 1.0); // barrel
+      landmarks.push(lm);
+      return lm;
+    }
+
+    function buildFenceRun(ax, az, bx, bz, seed) {
+      const rnd = mulberry32(seed);
+      const dx = bx - ax, dz = bz - az;
+      const len = Math.hypot(dx, dz) || 1;
+      const ux = dx / len, uz = dz / len;
+      const parts = [];
+      const postMat = new THREE.MeshStandardMaterial({ color: 0x5a442c });
+      const railMat = new THREE.MeshStandardMaterial({ color: 0x6e5536 });
+      const postN = Math.max(3, Math.round(len / 2.2));
+      const gy0 = sampleHeight(ax, az);
+      for (let i = 0; i <= postN; i++) {
+        const t = i / postN;
+        const px = ax + dx * t, pz = az + dz * t;
+        const gy = sampleHeight(px, pz) - 0.04;
+        // Gaps / collapsed sections — skip some posts and rails.
+        const collapsed = rnd() < 0.22 || (i > 0 && i < postN && rnd() < 0.12);
+        if (collapsed) {
+          // Fallen post / rail on ground.
+          if (rnd() < 0.7) {
+            poiBox(parts, postMat, 0.12, 0.12, 1.1 + rnd() * 0.6,
+              px - ax, gy - gy0 + 0.1, pz - az, rnd() * 3, 0.2 + rnd() * 0.5, (rnd() - 0.5) * 0.4);
+          }
+          continue;
+        }
+        const ph = 0.95 + rnd() * 0.25;
+        const lean = (rnd() - 0.5) * 0.15;
+        poiBox(parts, postMat, 0.14, ph, 0.14, px - ax, gy - gy0 + ph * 0.5, pz - az, 0, lean);
+        addSolid(px, pz, 0.18, gy, gy + ph); // posts only — walk through gaps
+        // Rails toward next standing post (approximate).
+        if (i < postN && rnd() < 0.75) {
+          const t2 = (i + 1) / postN;
+          const qx = ax + dx * t2, qz = az + dz * t2;
+          const midX = (px + qx) * 0.5 - ax, midZ = (pz + qz) * 0.5 - az;
+          const seg = Math.hypot(qx - px, qz - pz);
+          const yaw = Math.atan2(qx - px, qz - pz);
+          const gy2 = sampleHeight(qx, qz) - 0.04;
+          const midY = (gy + gy2) * 0.5 - gy0;
+          if (rnd() < 0.85) poiBox(parts, railMat, 0.08, 0.08, seg * 0.92, midX, midY + 0.72, midZ, yaw);
+          if (rnd() < 0.7) poiBox(parts, railMat, 0.08, 0.08, seg * 0.9, midX, midY + 0.38, midZ, yaw, (rnd() - 0.5) * 0.25);
+        }
+      }
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(ax, gy0, az);
+      scene.add(mesh);
+    }
+
+    function buildWreck(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      const gy = groundMinAround(cx, cz, 2.0) - 0.08;
+      const yaw = rnd() * Math.PI * 2;
+      const tilt = 0.18 + rnd() * 0.12;
+      const roll = (rnd() - 0.5) * 0.2;
+      const parts = [];
+      const body = new THREE.MeshStandardMaterial({ color: 0x4a5560, metalness: 0.45, roughness: 0.55 });
+      const bodyDark = new THREE.MeshStandardMaterial({ color: 0x2f363c, metalness: 0.4, roughness: 0.6 });
+      const rust = new THREE.MeshStandardMaterial({ color: 0x6b3d28, metalness: 0.35, roughness: 0.7 });
+      const tire = new THREE.MeshStandardMaterial({ color: 0x1a1a1a });
+      const wood = new THREE.MeshStandardMaterial({ color: 0x6b5539 });
+
+      // Cab + bed, tilted into dirt.
+      poiBox(parts, body, 2.2, 1.35, 2.0, 0, 1.05, -1.6);           // cab
+      poiBox(parts, bodyDark, 2.0, 0.55, 1.1, 0, 1.85, -1.55);      // roof
+      poiBox(parts, rust, 2.15, 0.7, 3.2, 0, 0.75, 1.3);            // bed
+      poiBox(parts, bodyDark, 2.25, 0.35, 0.2, 0, 1.15, 2.85);      // tailgate askew
+      // Flat tires.
+      for (const [lx, lz] of [[-1.0, -2.1], [1.0, -2.1], [-1.05, 0.6], [1.05, 2.2]]) {
+        const wh = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.28, 8), tire);
+        wh.rotation.z = Math.PI / 2;
+        wh.position.set(lx, 0.22, lz);
+        wh.rotation.x = (rnd() - 0.5) * 0.3;
+        parts.push(wh);
+      }
+      // Spilled cargo crates.
+      for (let i = 0; i < 3; i++) {
+        const sx = 1.4 + rnd() * 2.2, sz = 2.0 + rnd() * 2.5;
+        poiBox(parts, wood, 0.55 + rnd() * 0.25, 0.45 + rnd() * 0.2, 0.55 + rnd() * 0.25,
+          sx * (rnd() < 0.5 ? 1 : -1), 0.28, sz, rnd() * 2, (rnd() - 0.5) * 0.5);
+      }
+      poiBox(parts, rust, 0.5, 0.55, 0.5, -2.0, 0.3, 1.8, rnd());
+
+      const g = new THREE.Group();
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      g.add(mesh);
+      g.position.set(cx, gy, cz);
+      g.rotation.set(tilt, yaw, roll);
+      scene.add(g);
+
+      // Permanent scenery collision (not destructible).
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const solid = (lx, lz, r, h0, h1) => addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy + h0, gy + h1);
+      solid(0, -1.5, 1.2, 0, 2.0);
+      solid(0, 1.2, 1.3, 0, 1.4);
+      solid(1.6, 2.2, 0.45, 0, 0.7);
+      solid(-1.8, 1.6, 0.4, 0, 0.7);
+    }
+
+    function buildRadioMast(cx, cz) {
+      const gy = groundMinAround(cx, cz, 1.0);
+      const parts = [];
+      const steel = new THREE.MeshStandardMaterial({ color: 0x8a9098, metalness: 0.65, roughness: 0.4 });
+      const steelDark = new THREE.MeshStandardMaterial({ color: 0x5a6068, metalness: 0.6, roughness: 0.45 });
+      const dishMat = new THREE.MeshStandardMaterial({ color: 0xc8ccd0, metalness: 0.5, roughness: 0.35 });
+      const mastH = 14.5;
+      // Skinny lattice: four legs + cross braces.
+      const leg = 0.55;
+      for (const [lx, lz] of [[-leg, -leg], [leg, -leg], [-leg, leg], [leg, leg]]) {
+        poiBox(parts, steel, 0.1, mastH, 0.1, lx, mastH * 0.5, lz, 0, lx * 0.02, -lz * 0.02);
+      }
+      for (let y = 1.5; y < mastH - 0.5; y += 2.2) {
+        poiBox(parts, steelDark, leg * 2, 0.07, 0.07, 0, y, -leg);
+        poiBox(parts, steelDark, leg * 2, 0.07, 0.07, 0, y, leg);
+        poiBox(parts, steelDark, 0.07, 0.07, leg * 2, -leg, y, 0);
+        poiBox(parts, steelDark, 0.07, 0.07, leg * 2, leg, y, 0);
+        poiBox(parts, steelDark, 0.07, 2.0, 0.07, 0, y + 0.9, -leg, 0, 0.9);
+        poiBox(parts, steelDark, 0.07, 2.0, 0.07, 0, y + 0.9, leg, 0, -0.9);
+      }
+      // Dish + whip antenna near top.
+      const dish = new THREE.Mesh(new THREE.CircleGeometry(0.85, 12), dishMat);
+      dish.position.set(0.9, mastH - 2.2, 0);
+      dish.rotation.y = Math.PI / 2;
+      dish.rotation.z = -0.35;
+      parts.push(dish);
+      poiBox(parts, steel, 0.06, 1.8, 0.06, 0, mastH + 0.6, 0);
+      poiBox(parts, steelDark, 1.4, 0.12, 1.4, 0, 0.08, 0); // base pad
+
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      scene.add(mesh);
+      addSolid(cx, cz, 0.85, gy, gy + mastH * 0.55);
+
+      // Blinking red beacon — night-visible nav light.
+      const light = new THREE.PointLight(0xff2211, 0, 28, 2);
+      light.position.set(cx, gy + mastH + 0.4, cz);
+      scene.add(light);
+      const bulb = new THREE.Mesh(
+        new THREE.SphereGeometry(0.18, 8, 8),
+        new THREE.MeshStandardMaterial({ color: 0xff2200, emissive: 0xff1100, emissiveIntensity: 1.6 })
+      );
+      bulb.position.copy(light.position);
+      scene.add(bulb);
+      campfires.push({ x: cx, z: cz, y: gy + mastH, light, phase: 0, beacon: true, bulb });
+    }
+
+    function buildWarningSign(s) {
+      const gy = sampleHeight(s.x, s.z) - 0.03;
+      const parts = [];
+      const post = new THREE.MeshStandardMaterial({ color: 0x4a4034 });
+      const board = new THREE.MeshStandardMaterial({
+        color: s.kind === 'keepout' ? 0xb83a2e : 0xc9a12a, roughness: 0.7
+      });
+      poiBox(parts, post, 0.08, 1.55, 0.08, 0, 0.78, 0);
+      poiBox(parts, board, 0.9, 0.55, 0.06, 0, 1.45, 0.02);
+      // Simple stripe / X mark via thin bars.
+      if (s.kind === 'keepout') {
+        poiBox(parts, post, 0.7, 0.06, 0.04, 0, 1.45, 0.06, 0.6);
+        poiBox(parts, post, 0.7, 0.06, 0.04, 0, 1.45, 0.06, -0.6);
+      } else {
+        poiBox(parts, post, 0.55, 0.08, 0.04, 0, 1.45, 0.06);
+      }
+      const mesh = mergeParts(parts, poiMat, { castShadow: true });
+      mesh.position.set(s.x, gy, s.z);
+      mesh.rotation.y = s.yaw || 0;
+      scene.add(mesh);
+      addSolid(s.x, s.z, 0.2, gy, gy + 1.6);
+    }
+
+    function buildSandbagBarricade(cx, cz, seed) {
+      const rnd = mulberry32(seed);
+      const yaw = rnd() * Math.PI * 2;
+      const parts = [];
+      const bag = new THREE.MeshStandardMaterial({ color: 0x7a6e4e });
+      const bagDark = new THREE.MeshStandardMaterial({ color: 0x5c5340 });
+      const wood = new THREE.MeshStandardMaterial({ color: 0x5a4630 });
+      // Abandoned sandbags + a couple of barricade planks near cabin (scenery only).
+      const ox = 3.8 + rnd(), oz = -2.4 - rnd();
+      for (let i = 0; i < 5; i++) {
+        const lx = ox + (i % 3) * 0.55 - 0.5;
+        const lz = oz + Math.floor(i / 3) * 0.5;
+        const dy = sampleHeight(cx + lx, cz + lz) - sampleHeight(cx, cz);
+        poiBox(parts, i % 2 ? bag : bagDark, 0.7, 0.32, 0.4, lx, dy + 0.18, lz, rnd() * 0.4);
+      }
+      poiBox(parts, bagDark, 0.65, 0.3, 0.38, ox + 0.3, 0.48, oz + 0.1, 0.2);
+      poiBox(parts, wood, 1.6, 0.12, 0.14, ox - 0.2, 0.55, oz + 1.1, 0.3, 0.15);
+      poiBox(parts, wood, 1.2, 0.12, 0.14, ox + 0.8, 0.35, oz + 1.4, -0.5, 0.4);
+      const gy = sampleHeight(cx, cz);
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(cx, gy, cz);
+      mesh.rotation.y = yaw;
+      scene.add(mesh);
+      // Soft scenery blockers on the pile only.
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const wx = cx + ox * cy + oz * sy, wz = cz - ox * sy + oz * cy;
+      addSolid(wx, wz, 0.9, gy, gy + 0.7);
+    }
+
     function buildPOIMeshes() {
       let seed = 0xca3b1e;
       for (const c of POI.campsites) buildCampsite(c.x, c.z, seed += 101);
@@ -2758,6 +3072,12 @@
       if (POI.graveyard) buildGraveyard(POI.graveyard.x, POI.graveyard.z, seed += 101);
       if (POI.dock) buildDock(POI.dock);
       for (const b of POI.bridges) buildBridge(b);
+      for (const s of POI.sheds) buildShed(s.x, s.z, seed += 101);
+      for (const w of POI.wrecks) buildWreck(w.x, w.z, seed += 101);
+      if (POI.mast) buildRadioMast(POI.mast.x, POI.mast.z);
+      for (const f of POI.fences) buildFenceRun(f.ax, f.az, f.bx, f.bz, f.seed);
+      for (const s of POI.signs) buildWarningSign(s);
+      if (POI.sandbags) buildSandbagBarricade(POI.sandbags.x, POI.sandbags.z, seed += 101);
     }
 
     // === Destructible landmarks (cabins, the watchtower, campsites, the graveyard) ===
@@ -2769,6 +3089,7 @@
     const TOWER_MAX_HP = 260;
     const CAMPSITE_MAX_HP = 90;
     const GRAVEYARD_MAX_HP = 110;
+    const SHED_MAX_HP = 70;
     const TOWER_LADDER_OUT = 2.25;  // ladder stands this far out from centre — clear of the base collider (radius 1.75 + player radius 0.42)
     const TOWER_LADDER_R = 0.95;    // how close you need to walk to grab it
     const TOWER_DECK_HALF = 1.4;    // deck footprint half-width once you're up top
@@ -3035,6 +3356,10 @@
       if (POI.tower) mark(POI.tower.x, POI.tower.z, '#e6d27a');
       if (POI.graveyard) mark(POI.graveyard.x, POI.graveyard.z, '#b9b9c9');
       for (const b of POI.bridges) mark(b.x, b.z, '#d9c7a0');
+      for (const s of POI.sheds) mark(s.x, s.z, '#9a7b5a');
+      for (const w of POI.wrecks) mark(w.x, w.z, '#6a8aaa');
+      if (POI.mast) mark(POI.mast.x, POI.mast.z, '#ff4466');
+      if (POI.dock) mark(POI.dock.x, POI.dock.z, '#5a9ccc');
     }
 
     let minimapTick = 0;
@@ -3150,6 +3475,13 @@
       emberCd -= dt;
       for (const f of campfires) {
         if (f.dead) { f.light.intensity = 0; continue; }
+        if (f.beacon) {
+          f.phase += dt;
+          const on = (f.phase % 1.0) < 0.65;
+          f.light.intensity = dark && on ? 3.2 : 0;
+          if (f.bulb && f.bulb.material) f.bulb.material.emissiveIntensity = dark && on ? 2.2 : 0.15;
+          continue;
+        }
         f.phase += dt * (f.lantern ? 3 : 9);
         const flick = Math.sin(f.phase) * 0.5 + Math.sin(f.phase * 2.7) * 0.3;
         f.light.intensity = dark ? (f.lantern ? 1.5 + flick * 0.15 : 2.4 + flick * 0.8) : 0;
