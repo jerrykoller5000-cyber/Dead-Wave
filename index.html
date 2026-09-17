@@ -3807,6 +3807,7 @@
         mesh,
         hp: 1,
         alive: true,
+        hiddenForRain: false,
         mode: kind === 'bee' ? 'wander' : 'fly',
         target: picked ? { x: picked.pad.x, y: picked.pad.y, z: picked.pad.z } : null,
         vel: { x: (Math.random() - 0.5) * 2, y: 0, z: (Math.random() - 0.5) * 2 },
@@ -3816,6 +3817,10 @@
         hoverAng: Math.random() * Math.PI * 2,
         inspect: kind === 'bee' ? (0.3 + Math.random() * 0.5) : 0
       });
+      if (bugsShouldHide()) {
+        mesh.visible = false;
+        bugs[bugs.length - 1].hiddenForRain = true;
+      }
     }
 
     function spawnBugs() {
@@ -3889,11 +3894,38 @@
       if (b.kind === 'bee') b.inspect = 0.5 + Math.random() * 0.9;
     }
 
+    function bugsShouldHide() {
+      // Shelter during rain storms — intensity ramps in/out with weather system
+      return !!(weather && (weather.raining || weather.intensity > 0.08));
+    }
+
     function updateBugs(dt) {
       if (!bugs.length) return;
+      const hide = bugsShouldHide();
       for (let i = bugs.length - 1; i >= 0; i--) {
         const b = bugs[i];
         if (!b.alive || !b.mesh) { bugs.splice(i, 1); continue; }
+        // Disappear / shelter while raining; come back when it clears
+        if (hide) {
+          if (b.mesh.visible) {
+            b.mesh.visible = false;
+            b.hiddenForRain = true;
+            b.vel.x = b.vel.y = b.vel.z = 0;
+          }
+          continue;
+        }
+        if (b.hiddenForRain) {
+          b.hiddenForRain = false;
+          b.mesh.visible = true;
+          // Pop back into a short takeoff so they don't teleport onto flowers mid-rain
+          b.mode = 'takeoff';
+          b.landTimer = 0.4 + Math.random() * 0.5;
+          b.vel.y = b.kind === 'bee' ? 2.4 : 1.5;
+          b.vel.x = (Math.random() - 0.5) * 2;
+          b.vel.z = (Math.random() - 0.5) * 2;
+          const h = sampleHeight(b.mesh.position.x, b.mesh.position.z);
+          if (b.mesh.position.y < h + 0.6) b.mesh.position.y = h + 0.8 + Math.random() * 0.6;
+        }
         const isBee = b.kind === 'bee';
         b.phase += dt;
 
@@ -3981,7 +4013,7 @@
     function hitBugsSegment(ax, ay, az, bx, by, bz) {
       let best = null, bestT = 2;
       for (const b of bugs) {
-        if (!b.alive || !b.mesh) continue;
+        if (!b.alive || !b.mesh || !b.mesh.visible || b.hiddenForRain) continue;
         const p = b.mesh.position;
         const t = segmentHitsCylinder(ax, ay, az, bx, by, bz, p.x, p.z, BUG_HIT_R, p.y - 0.12, p.y + 0.18);
         if (t !== null && t < bestT) { bestT = t; best = b; }
@@ -3991,7 +4023,7 @@
 
     function meleeBugs(reach, fx, fz, minDot) {
       for (const b of bugs) {
-        if (!b.alive || !b.mesh) continue;
+        if (!b.alive || !b.mesh || !b.mesh.visible || b.hiddenForRain) continue;
         const dx = b.mesh.position.x - player.position.x;
         const dz = b.mesh.position.z - player.position.z;
         const d = Math.hypot(dx, dz);
