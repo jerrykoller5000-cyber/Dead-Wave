@@ -4,15 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tiny Trek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Tactical field-HUD palette: dark olive glass, amber for primary actions,
+         sage for secondary/safe actions, red for danger. Kept separate from the
+         world's own greens so panels read as UI, not terrain. */
+      --ink: #eef2e2;
+      --ink-dim: #b7c2a8;
+      --panel-bg: rgba(15,19,13,.66);
+      --panel-bg-solid: #12160e;
+      --panel-border: rgba(206,222,150,.24);
+      --accent: #d8c25a;
+      --accent-ink: #1c1608;
+      --accent-2: #74c9ae;
+      --accent-2-ink: #06201a;
+      --danger: #dd5b4c;
+      --danger-ink: #2a0906;
+      --font-display: 'Black Ops One', 'Chakra Petch', system-ui, sans-serif;
+      --font-hud: 'Chakra Petch', system-ui, sans-serif;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; background: #0b1020; font-family: system-ui, sans-serif; user-select: none; -webkit-user-select: none; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0d08; font-family: var(--font-hud); user-select: none; -webkit-user-select: none; }
     canvas { display: block; }
     /* Gameplay hides OS cursor; menus/buttons keep pointer via their own rules */
     body.playing, body.playing canvas, body.playing #hud { cursor: none; }
     #hud {
       position: fixed; inset: 0; pointer-events: none;
-      color: #f4f7ff; text-shadow: 0 1px 3px rgba(0,0,0,.55);
+      color: var(--ink); text-shadow: 0 1px 3px rgba(0,0,0,.6);
     }
     #reticle {
       position: fixed; left: 0; top: 0; width: 16px; height: 16px;
@@ -27,48 +48,73 @@
         linear-gradient(rgba(200,240,255,0.92), rgba(200,240,255,0.92)) center/1.5px 14px no-repeat;
       filter: drop-shadow(0 0 1px rgba(0,0,0,0.85));
     }
+    /* Tactical panel: clipped top-right / bottom-left corners + a small accent
+       tab, standing in for the old fully-rounded "glassmorphism" card. */
     .glass {
-      background: rgba(8,12,24,.58); border: 1px solid rgba(255,255,255,.14);
-      border-radius: 12px; backdrop-filter: blur(6px);
-      box-shadow: 0 8px 24px rgba(0,0,0,.28);
+      position: relative;
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.32);
+    }
+    .glass::before {
+      content: ''; position: absolute; left: 0; top: 0; width: 34px; height: 3px;
+      background: var(--accent);
     }
     #hudTopLeft {
       position: absolute; top: 14px; left: 16px; width: 248px;
-      padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px;
+      padding: 12px 14px 13px; display: flex; flex-direction: column; gap: 9px;
     }
     #title {
-      font-size: 18px; font-weight: 700; letter-spacing: 0.03em;
+      font-family: var(--font-display); font-size: 17px; font-weight: 400;
+      letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent);
       display: flex; align-items: center; gap: 8px; line-height: 1.1;
+      text-shadow: 0 1px 0 rgba(0,0,0,.6);
     }
     #title .badge {
-      font-size: 10px; background: #3d5a80; color: #dceaf8;
-      padding: 3px 7px; border-radius: 999px; text-shadow: none;
-      font-weight: 700; border: 1px solid #2a4060; letter-spacing: 0.06em;
+      font-family: var(--font-hud); font-size: 10px; background: var(--accent-2); color: var(--accent-2-ink);
+      padding: 3px 8px; border-radius: 3px; text-shadow: none;
+      font-weight: 700; letter-spacing: 0.08em;
     }
     #stats {
-      font-size: 12px; opacity: 0.92; line-height: 1.35;
+      font-size: 12px; opacity: 0.92; line-height: 1.4;
       display: flex; flex-direction: column; gap: 2px;
+      font-weight: 500;
     }
     #stats .stat-row { opacity: 0.95; }
+    #stats .stat-row .label { color: var(--ink-dim); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 3px; }
+    #coins { color: var(--accent); font-weight: 700; }
+    #landStat { display: none; }
     #hpBarWrap { width: 100%; }
+    #hpLabel {
+      font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-dim); margin-bottom: 3px; font-weight: 600;
+    }
     #hpBarBg {
-      position: relative; height: 16px; border-radius: 8px;
-      background: rgba(0,0,0,.5); overflow: hidden;
+      position: relative; height: 15px;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+      background: rgba(0,0,0,.55); overflow: hidden;
       border: 1px solid rgba(255,255,255,.12);
     }
     #hpBarFill {
       height: 100%; width: 100%;
-      background: linear-gradient(90deg, #c02626 0%, #eab308 45%, #22c55e 100%);
+      background: linear-gradient(90deg, #b32424 0%, #d69a1f 45%, #4fae3d 100%);
       transform-origin: left center; transition: width 0.12s linear;
+      position: relative;
+    }
+    /* Gauge ticks: a faint 10%-step overlay so the bar reads as instrumentation. */
+    #hpBarBg::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(90deg, rgba(0,0,0,.28) 0 1px, transparent 1px 10%);
     }
     #hpNum {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
-      text-shadow: 0 1px 2px rgba(0,0,0,.75); pointer-events: none;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
+      text-shadow: 0 1px 2px rgba(0,0,0,.8); pointer-events: none;
     }
     #hpExtra {
-      margin-top: 4px; font-size: 11px; opacity: 0.78; font-weight: 600;
-      min-height: 14px;
+      margin-top: 4px; font-size: 11px; opacity: 0.8; font-weight: 600;
+      min-height: 14px; color: var(--ink-dim);
     }
     #centerHud {
       position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
@@ -78,44 +124,49 @@
     #ammo {
       position: absolute; bottom: 18px; left: 16px;
       display: flex; align-items: center; gap: 12px;
-      padding: 10px 14px; min-width: 200px; max-width: 46vw;
+      padding: 10px 16px 10px 14px; min-width: 200px; max-width: 46vw;
     }
     #ammoCount {
-      font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
-      line-height: 1; min-width: 1.6em; text-align: center;
+      font-family: var(--font-hud); font-size: 30px; font-weight: 700; letter-spacing: -0.01em;
+      line-height: 1; min-width: 1.5em; text-align: center; color: var(--accent);
       font-variant-numeric: tabular-nums;
     }
     #ammoMeta { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-    #ammoWeapon { font-size: 13px; font-weight: 700; letter-spacing: 0.03em; }
-    #ammoDetail { font-size: 11px; opacity: 0.8; font-weight: 600; }
+    #ammoWeapon { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    #ammoDetail { font-size: 11px; opacity: 0.82; font-weight: 600; letter-spacing: 0.02em; }
     #grenadeChips { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
     .gchip {
-      font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 999px;
-      background: rgba(110,168,255,.18); border: 1px solid rgba(110,168,255,.35);
-      color: #cfe0ff; letter-spacing: 0.03em;
+      font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 3px;
+      background: rgba(116,201,174,.16); border: 1px solid rgba(116,201,174,.4);
+      color: var(--accent-2); letter-spacing: 0.04em;
     }
-    #ammo.empty { color: #ff8a7a; }
-    #ammo.empty #ammoCount { color: #ff8a7a; }
-    #ammo.empty .gchip { border-color: rgba(255,138,122,.4); background: rgba(255,80,60,.12); }
+    #ammo.empty { color: #ff9282; }
+    #ammo.empty #ammoCount { color: #ff9282; }
+    #ammo.empty .gchip { border-color: rgba(255,138,122,.45); background: rgba(255,80,60,.14); }
     #modeSelect, #win, #pause {
       display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
-      background: rgba(6,10,22,.72); pointer-events: auto; z-index: 5;
+      background: rgba(5,7,4,.76); pointer-events: auto; z-index: 5;
     }
     #modeSelect.show, #win.show, #pause.show { display: flex; }
     #modeSelect .card, #win .card, #pause .card {
-      background: #141a2e; border: 1px solid rgba(255,255,255,.18);
-      padding: 28px 32px; border-radius: 16px; text-align: center; max-width: 420px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      position: relative;
+      background: var(--panel-bg-solid); border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+      padding: 30px 34px; text-align: center; max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    #modeSelect .card::before, #win .card::before, #pause .card::before {
+      content: ''; position: absolute; left: 0; top: 0; width: 56px; height: 4px;
+      background: var(--accent);
     }
     #pause .card { max-width: 460px; width: min(460px, 92vw); }
     #pause .card.tips-open { max-width: 520px; }
-    #pause button.secondary { background: #7cdea0; }
     #pauseTipsView { display: none; text-align: left; }
     #pauseTipsView.on { display: block; }
     #pauseMainView.hide { display: none; }
     #pauseTipsView h3 {
-      font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
-      opacity: 0.7; margin: 14px 0 6px; font-weight: 700;
+      font-family: var(--font-hud); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); opacity: 0.95; margin: 14px 0 6px; font-weight: 700;
     }
     #pauseTipsView h3:first-child { margin-top: 0; }
     #pauseTipsScroll {
@@ -125,53 +176,76 @@
     #pauseTipsScroll ul { margin: 0 0 2px 18px; padding: 0; }
     #pauseTipsScroll li { margin: 2px 0; }
     #pauseTipsView .modes { margin-top: 14px; }
-    #modeSelect h2, #win h2, #pause h2 { font-size: 28px; margin-bottom: 8px; }
-    #modeSelect p, #win p, #pause p { opacity: .85; margin-bottom: 14px; line-height: 1.4; }
+    #modeSelect h2, #win h2, #pause h2 {
+      font-family: var(--font-display); font-size: 24px; font-weight: 400;
+      letter-spacing: 0.03em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 10px;
+    }
+    #modeSelect p, #win p, #pause p { opacity: .85; margin-bottom: 14px; line-height: 1.45; }
     #modeSelect .modes, #pause .modes { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
     #modeSelect button, #win button, #pause button {
-      pointer-events: auto; cursor: pointer; border: 0; border-radius: 999px;
-      padding: 12px 18px; font-weight: 600; font-size: 15px;
-      background: #6ea8ff; color: #081018;
+      pointer-events: auto; cursor: pointer; border: 0;
+      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+      padding: 13px 18px; font-family: var(--font-hud); font-weight: 700; font-size: 14px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: var(--accent); color: var(--accent-ink);
     }
-    #modeSelect button.secondary { background: #7cdea0; }
-    #pause button.danger { background: #e86a6a; color: #1a0808; }
-    #modeSelect button:hover, #win button:hover, #pause button:hover { filter: brightness(1.08); }
+    #modeSelect button .sub, #pause button .sub {
+      display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+      text-transform: none; opacity: 0.72; margin-top: 2px;
+    }
+    #modeSelect button.secondary, #pause button.secondary { background: var(--accent-2); color: var(--accent-2-ink); }
+    #pause button.danger { background: var(--danger); color: var(--danger-ink); }
+    #modeSelect button:hover, #win button:hover, #pause button:hover { filter: brightness(1.1); }
     #placeBanner {
       display: none; position: absolute; top: 14px; right: 196px;
-      background: rgba(8,12,24,.62); border: 1px solid rgba(255,255,255,.16);
-      padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      padding: 7px 12px; font-size: 12px; font-weight: 600;
       max-width: 220px;
     }
-    #minimap {
+    #minimapFrame {
       position: absolute; top: 14px; right: 16px; width: 164px; height: 164px;
-      border: 1px solid rgba(255,255,255,.22); border-radius: 10px;
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 8px 24px rgba(0,0,0,.32);
+    }
+    #minimap {
+      display: block; width: 100%; height: 100%;
       background: rgba(8,12,24,.5); image-rendering: pixelated;
     }
+    /* Corner brackets: the map reads as an instrument, not a rounded photo. */
+    #minimapFrame::before, #minimapFrame::after,
+    #minimapFrame .br, #minimapFrame .bl {
+      content: ''; position: absolute; width: 12px; height: 12px; pointer-events: none;
+    }
+    #minimapFrame::before { left: -1px; top: -1px; border-left: 2px solid var(--accent); border-top: 2px solid var(--accent); }
+    #minimapFrame::after { right: -1px; bottom: -1px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    #minimapFrame .br { right: -1px; top: -1px; border-right: 2px solid var(--accent); border-top: 2px solid var(--accent); }
+    #minimapFrame .bl { left: -1px; bottom: -1px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
     #bigBanner {
       position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
       text-align: center; opacity: 0; transition: opacity 0.45s ease;
-      pointer-events: none; white-space: nowrap;
+      pointer-events: none; max-width: min(90vw, 640px);
     }
     #bigBanner .t {
-      font-size: 34px; font-weight: 800; letter-spacing: 0.06em;
-      text-shadow: 0 2px 10px rgba(0,0,0,.75);
+      font-family: var(--font-display); font-size: 30px; font-weight: 400; letter-spacing: 0.05em;
+      text-transform: uppercase; white-space: nowrap;
+      text-shadow: 0 2px 10px rgba(0,0,0,.8);
     }
     #bigBanner .s {
-      font-size: 15px; font-weight: 600; opacity: .92; margin-top: 4px;
+      font-size: 15px; font-weight: 600; opacity: .92; margin-top: 5px;
       text-shadow: 0 1px 6px rgba(0,0,0,.7);
     }
     #bigBanner.show { opacity: 1; }
     #placeBanner.on { display: block; }
-    #timeLine {
-      background: rgba(8,12,24,.55); border: 1px solid rgba(255,255,255,.15);
-      padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 600;
-      white-space: nowrap;
+    #timeLine, #tacticalLine {
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      border-left: 3px solid var(--accent);
+      padding: 5px 14px; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.03em; white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
-    #tacticalLine {
-      background: rgba(8,12,24,.5); border: 1px solid rgba(255,255,255,.12);
-      padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600;
-      letter-spacing: 0.02em; white-space: nowrap;
-    }
+    #tacticalLine { font-size: 11px; border-left-color: var(--accent-2); }
     #nvgOverlay {
       display: none; position: fixed; inset: 0; pointer-events: none; z-index: 3;
       background:
@@ -195,8 +269,8 @@
     }
     #perf {
       display: none; position: absolute; bottom: 22px; right: 20px;
-      background: rgba(8,12,24,.6); border: 1px solid rgba(255,255,255,.15);
-      padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      padding: 6px 10px; border-radius: 4px; font-size: 11px; font-weight: 600;
       font-family: ui-monospace, Consolas, monospace; white-space: pre; line-height: 1.5;
     }
     #perf.on { display: block; }
@@ -216,10 +290,12 @@
     <div id="hudTopLeft" class="glass">
       <div id="title">Tiny Trek <span class="badge" id="modeBadge" style="display:none"></span></div>
       <div id="stats">
-        <div class="stat-row">Cash <span id="coins">0</span> · Land r<span id="landR">120</span></div>
+        <div class="stat-row"><span class="label">Cash</span>$<span id="coins">0</span></div>
         <div id="waveLine" class="stat-row">Day — · Prep</div>
+        <div id="landStat" class="stat-row">Land r<span id="landR">120</span></div>
       </div>
       <div id="hpBarWrap">
+        <div id="hpLabel">Health</div>
         <div id="hpBarBg"><div id="hpBarFill"></div><span id="hpNum">—</span></div>
         <div id="hpExtra"></div>
       </div>
@@ -237,16 +313,16 @@
       <div id="grenadeChips"><span class="gchip">G×3</span></div>
     </div>
     <div id="placeBanner"></div>
-    <canvas id="minimap" width="164" height="164"></canvas>
+    <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
     <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
       <div class="card">
         <h2>Tiny Trek</h2>
-        <p>Pick a mode. Survive days of outbreak zombies, build defenses with cash. Kill zombies for cash drops.</p>
+        <p>Choose how you survive the outbreak. Earn cash from kills and supply drops, then spend it on barricades and turrets to hold the line.</p>
         <div class="modes">
-          <button id="modeHunt" type="button">Hunt the player</button>
-          <button id="modeDefend" class="secondary" type="button">Defend the house</button>
+          <button id="modeHunt" type="button">Hunted<span class="sub">No base — the horde tracks you across the open map</span></button>
+          <button id="modeDefend" class="secondary" type="button">Defend the House<span class="sub">Dig in and protect a fixed base from every wave</span></button>
         </div>
       </div>
     </div>
