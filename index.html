@@ -436,7 +436,8 @@
     {
       const badge = document.getElementById('modeBadge');
       if (badge) {
-        if (urlParams.has('night')) { badge.textContent = 'NIGHT'; badge.style.display = ''; }
+        if (urlParams.has('music')) { badge.textContent = 'MUSIC'; badge.style.display = ''; }
+        else if (urlParams.has('night')) { badge.textContent = 'NIGHT'; badge.style.display = ''; }
         else if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
         else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
@@ -773,14 +774,32 @@
         playNoise({ dur: 0.04, vol: 0.02, filterFreq: 420, filterType: 'lowpass' });
       }
 
-      // Doom/metal-ish dark riff + pulse drums
-      const RIFF = [
-        82.41, 82.41, 0, 98.00, 82.41, 0, 73.42, 82.41,
-        110.00, 82.41, 0, 98.00, 73.42, 0, 65.41, 82.41,
-        87.31, 87.31, 0, 103.83, 87.31, 0, 77.78, 87.31,
-        116.54, 87.31, 0, 103.83, 77.78, 0, 69.30, 87.31
+      // Bit-tune soundtrack pack (assets/music) — cycles tracks while unmuted
+      const MUSIC_TRACKS = [
+        'assets/music/01_red_horizon.mp3',
+        'assets/music/02_neon_bunker.mp3',
+        'assets/music/03_ash_circuit.mp3',
+        'assets/music/04_iron_cadence.mp3',
+        'assets/music/05_spark_run.mp3',
+        'assets/music/06_cold_corridor.mp3',
+        'assets/music/07_heavy_signal.mp3',
+        'assets/music/08_alarm_grid.mp3',
+        'assets/music/09_odd_orbit.mp3',
+        'assets/music/10_brass_shuffle.mp3',
+        'assets/music/11_swarm_static.mp3',
+        'assets/music/12_dust_blues.mp3',
+        'assets/music/13_low_dirge.mp3',
+        'assets/music/14_overclock.mp3',
+        'assets/music/15_tear_through.mp3',
+        'assets/music/16_hollow_choir.mp3',
+        'assets/music/17_blue_arc.mp3',
+        'assets/music/18_final_glyph.mp3',
+        'assets/music/19_bay_sprint.mp3',
+        'assets/music/20_exit_pulse.mp3'
       ];
-      const STEP = 0.16;
+      let musicEl = null;
+      let musicTrack = Math.floor(Math.random() * MUSIC_TRACKS.length);
+      const MUSIC_VOL = 0.38;
 
       function clearMusicNodes() {
         for (const n of musicOscs) {
@@ -794,107 +813,48 @@
         }
       }
 
-      function scheduleMusicStep() {
-        if (!musicPlaying || !ctx || muted) return;
-        const t0 = ctx.currentTime;
-        const ri = musicStep % RIFF.length;
-        const note = RIFF[ri];
+      function ensureMusicEl() {
+        if (musicEl) return musicEl;
+        musicEl = new Audio();
+        musicEl.preload = 'auto';
+        musicEl.volume = MUSIC_VOL;
+        musicEl.addEventListener('ended', () => {
+          if (!musicPlaying || muted) return;
+          musicTrack = (musicTrack + 1) % MUSIC_TRACKS.length;
+          playCurrentMusicTrack();
+        });
+        musicEl.addEventListener('error', () => {
+          if (!musicPlaying || muted) return;
+          musicTrack = (musicTrack + 1) % MUSIC_TRACKS.length;
+          setTimeout(() => {
+            if (musicPlaying && !muted) playCurrentMusicTrack();
+          }, 250);
+        });
+        return musicEl;
+      }
 
-        // Heavy palm-muted style saw riff
-        if (note > 0) {
-          const osc = ctx.createOscillator();
-          const g = ctx.createGain();
-          const filt = ctx.createBiquadFilter();
-          osc.type = 'sawtooth';
-          osc.frequency.value = note;
-          filt.type = 'lowpass';
-          filt.frequency.setValueAtTime(900, t0);
-          filt.frequency.exponentialRampToValueAtTime(350, t0 + STEP * 0.7);
-          g.gain.setValueAtTime(0.0001, t0);
-          g.gain.exponentialRampToValueAtTime(0.32, t0 + 0.01);
-          g.gain.exponentialRampToValueAtTime(0.0001, t0 + STEP * 0.85);
-          osc.connect(filt); filt.connect(g); g.connect(musicGain);
-          osc.start(t0); osc.stop(t0 + STEP);
-          musicOscs.push(osc);
-
-          // Octave growl
-          const o2 = ctx.createOscillator();
-          const g2 = ctx.createGain();
-          o2.type = 'square';
-          o2.frequency.value = note * 0.5;
-          g2.gain.setValueAtTime(0.0001, t0);
-          g2.gain.exponentialRampToValueAtTime(0.14, t0 + 0.012);
-          g2.gain.exponentialRampToValueAtTime(0.0001, t0 + STEP * 0.9);
-          o2.connect(g2); g2.connect(musicGain);
-          o2.start(t0); o2.stop(t0 + STEP);
-          musicOscs.push(o2);
-        }
-
-        // Kick on 0,4,8,...
-        if (musicStep % 4 === 0) {
-          const kick = ctx.createOscillator();
-          const kg = ctx.createGain();
-          kick.type = 'sine';
-          kick.frequency.setValueAtTime(140, t0);
-          kick.frequency.exponentialRampToValueAtTime(45, t0 + 0.12);
-          kg.gain.setValueAtTime(0.0001, t0);
-          kg.gain.exponentialRampToValueAtTime(0.55, t0 + 0.005);
-          kg.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.18);
-          kick.connect(kg); kg.connect(musicGain);
-          kick.start(t0); kick.stop(t0 + 0.2);
-          musicOscs.push(kick);
-        }
-        // Snare-ish noise on 2,6,...
-        if (musicStep % 4 === 2) {
-          const buf = noiseBuffer(0.12);
-          if (buf) {
-            const src = ctx.createBufferSource();
-            src.buffer = buf;
-            const filt = ctx.createBiquadFilter();
-            filt.type = 'bandpass';
-            filt.frequency.value = 1800;
-            const g = ctx.createGain();
-            g.gain.setValueAtTime(0.0001, t0);
-            g.gain.exponentialRampToValueAtTime(0.28, t0 + 0.005);
-            g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.1);
-            src.connect(filt); filt.connect(g); g.connect(musicGain);
-            src.start(t0); src.stop(t0 + 0.12);
-          }
-        }
-        // Hi-hat ticks
-        if (musicStep % 2 === 1) {
-          const buf = noiseBuffer(0.04);
-          if (buf) {
-            const src = ctx.createBufferSource();
-            src.buffer = buf;
-            const filt = ctx.createBiquadFilter();
-            filt.type = 'highpass';
-            filt.frequency.value = 6000;
-            const g = ctx.createGain();
-            g.gain.setValueAtTime(0.0001, t0);
-            g.gain.exponentialRampToValueAtTime(0.1, t0 + 0.002);
-            g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.035);
-            src.connect(filt); filt.connect(g); g.connect(musicGain);
-            src.start(t0); src.stop(t0 + 0.04);
-          }
-        }
-
-        if (musicOscs.length > 32) musicOscs = musicOscs.slice(-10);
-        musicStep += 1;
-        musicStepTimer = setTimeout(scheduleMusicStep, STEP * 1000);
+      function playCurrentMusicTrack() {
+        const el = ensureMusicEl();
+        const src = MUSIC_TRACKS[musicTrack % MUSIC_TRACKS.length];
+        el.src = src;
+        el.volume = MUSIC_VOL;
+        const p = el.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
       }
 
       function startMusic() {
-        const c = ensure();
-        if (!c || muted || musicPlaying) return;
+        ensure(); // unlock AudioContext for SFX
+        if (muted || musicPlaying) return;
         musicPlaying = true;
-        musicStep = 0;
-        clearMusicNodes();
-        scheduleMusicStep();
+        clearMusicNodes(); // kill any leftover synth nodes
+        playCurrentMusicTrack();
       }
       function stopMusic() {
         musicPlaying = false;
         clearMusicNodes();
+        if (musicEl) {
+          try { musicEl.pause(); } catch (_) {}
+        }
       }
       function noteSpin(spinningUp) {
         if (spinningUp && !lastSpinWasUp) { lastSpinWasUp = true; spinUp(); }
