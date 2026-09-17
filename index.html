@@ -445,6 +445,7 @@
         else if (urlParams.has('ballistics')) { badge.textContent = 'BALL'; badge.style.display = ''; }
         else if (urlParams.has('poi')) { badge.textContent = 'POI'; badge.style.display = ''; }
         else if (urlParams.has('solid')) { badge.textContent = 'SOLID'; badge.style.display = ''; }
+        else if (urlParams.has('paths')) { badge.textContent = 'PATHS'; badge.style.display = ''; }
       }
     }
     if (showPerf) perfEl.classList.add('on');
@@ -1981,15 +1982,35 @@
       }
     })();
 
-    function distToPath(x, z) {
-      let best = Infinity;
+    // Closest path sample: unsigned distance plus signed lateral offset (left/right of
+    // the segment direction) so colour can paint twin wheel ruts instead of a flat smear.
+    const _pathInfo = { d: Infinity, lat: 0 };
+    function pathInfoAt(x, z) {
+      let best = Infinity, bestLat = 0;
       for (const line of PATHS) {
         for (let i = 0; i < line.length - 1; i++) {
-          const d = distPointToSeg(x, z, line[i].x, line[i].z, line[i + 1].x, line[i + 1].z);
-          if (d < best) best = d;
+          const ax = line[i].x, az = line[i].z, bx = line[i + 1].x, bz = line[i + 1].z;
+          const dx = bx - ax, dz = bz - az;
+          const len2 = dx * dx + dz * dz;
+          let t = len2 > 1e-8 ? ((x - ax) * dx + (z - az) * dz) / len2 : 0;
+          t = Math.max(0, Math.min(1, t));
+          const px = ax + dx * t, pz = az + dz * t;
+          const ex = x - px, ez = z - pz;
+          const d = Math.hypot(ex, ez);
+          if (d < best) {
+            best = d;
+            // Perp of segment (dx,dz) is (-dz, dx); sign tells which side of the track.
+            const len = Math.sqrt(len2) || 1;
+            bestLat = (-dz * ex + dx * ez) / len;
+          }
         }
       }
-      return best;
+      _pathInfo.d = best;
+      _pathInfo.lat = bestLat;
+      return _pathInfo;
+    }
+    function distToPath(x, z) {
+      return pathInfoAt(x, z).d;
     }
 
     // Clearance test so scattered props stay out of the landmarks' yards.
@@ -2029,6 +2050,10 @@
     const cMeadow = new THREE.Color(0x6fb85d);
     const cGrassDeep = new THREE.Color(0x4a9c4f);
     const cDirt = new THREE.Color(0x6b5539);
+    const cPathPacked = new THREE.Color(0x5a4630);   // hard-packed centre
+    const cPathDust = new THREE.Color(0x8a734f);     // dusty shoulder
+    const cPathMud = new THREE.Color(0x4a3a28);      // damp ruts
+    const cPathGravel = new THREE.Color(0x9a8b72);   // pale stone flecks
     const cRock = new THREE.Color(0x7d7b76);
     const cRockDark = new THREE.Color(0x565a5e);
     const cScree = new THREE.Color(0x8d8a83);
@@ -2089,13 +2114,39 @@
       if (beach > siltBand) out.lerp(cSand, beach);
       else if (siltBand > 0) out.lerp(cSilt, siltBand * 0.8);
 
-      // Worn dirt tracks between the landmarks — ragged edges so they read as trodden
-      // ground rather than painted lines.
-      const pd = distToPath(wx, wz);
-      if (pd < 3.4) {
-        const wobble = 1 + fbm(wx * 0.14, wz * 0.14, 2) * 0.5;
-        const wear = 1 - smoothstep01(pd / (1.7 * wobble));
-        if (wear > 0) out.lerp(cDirt, wear * 0.62);
+      // Footpaths: packed centre, twin ruts, dusty shoulders, gravel flecks. Colour only —
+      // path distance never feeds height, so the mesh stays exactly where it was.
+      const pi = pathInfoAt(wx, wz);
+      if (pi.d < 4.2) {
+        const edgeNoise = fbm(wx * 0.16 + 3.1, wz * 0.16 - 7.4, 2);
+        const halfW = 1.55 + edgeNoise * 0.55;          // ragged verge width
+        const wear = 1 - smoothstep01(pi.d / halfW);
+        if (wear > 0.02) {
+          // Soft grass→dirt transition on the shoulder.
+          out.lerp(cPathDust, wear * 0.38);
+          // Hard-packed strip down the middle.
+          const pack = 1 - smoothstep01(Math.abs(pi.lat) / 0.95);
+          out.lerp(cPathPacked, wear * pack * 0.55);
+          // Twin wheel / boot ruts either side of centre.
+          const rutHalf = 0.62 + edgeNoise * 0.12;
+          const rutW = 0.32;
+          const rutL = Math.exp(-((pi.lat - rutHalf) * (pi.lat - rutHalf)) / (2 * rutW * rutW));
+          const rutR = Math.exp(-((pi.lat + rutHalf) * (pi.lat + rutHalf)) / (2 * rutW * rutW));
+          const ruts = Math.min(1, (rutL + rutR) * wear);
+          out.lerp(cPathMud, ruts * 0.72);
+          // Sparse gravel / pale stone flecks along the bed.
+          const gravel = fbm(wx * 0.55 + 19.2, wz * 0.55 - 11.7, 2);
+          if (gravel > 0.42) {
+            out.lerp(cPathGravel, wear * (gravel - 0.42) * 1.4);
+          }
+          // Occasional damp puddle blotches (still flat colour, no height dip).
+          const mudPatch = fbm(wx * 0.07 - 4.2, wz * 0.07 + 8.9, 2);
+          if (mudPatch > 0.55 && Math.abs(pi.lat) < 1.1) {
+            out.lerp(cPathMud, wear * (mudPatch - 0.55) * 1.1);
+          }
+          // Slight darkening so tracks read even under bright sun.
+          out.multiplyScalar(1 - wear * 0.06);
+        }
       }
 
       // Underwater beds read darker and siltier.
@@ -2582,10 +2633,7 @@
       for (const [lx, lz, w2, d2] of [[0, -1.45, 3.0, 0.12], [0, 1.45, 3.0, 0.12], [-1.45, 0, 0.12, 3.0], [1.45, 0, 0.12, 3.0]]) {
         poiBox(parts, woodDark, w2, 0.75, d2, lx, 6.0, lz);
       }
-      const roof = new THREE.Mesh(new THREE.ConeGeometry(2.5, 1.3, 4), woodDark);
-      roof.position.set(0, 7.4, 0);
-      roof.rotation.y = Math.PI / 4;
-      parts.push(roof);
+      // Open deck — no roof, so you can see the lantern and climb clear.
 
       // A ladder up the south face, planted just clear of the tower's own collision
       // cylinder so climbing it never has to fight the collision that keeps you off
