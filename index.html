@@ -438,6 +438,7 @@
       if (badge) {
         if (urlParams.has('music')) { badge.textContent = 'MUSIC'; badge.style.display = ''; }
         else if (urlParams.has('bugs')) { badge.textContent = 'BUGS'; badge.style.display = ''; }
+        else if (urlParams.has('wild')) { badge.textContent = 'WILD'; badge.style.display = ''; }
         else if (urlParams.has('night')) { badge.textContent = 'NIGHT'; badge.style.display = ''; }
         else if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
@@ -1462,8 +1463,15 @@
     // --- World layout -----------------------------------------------------------
     // A lake in the south-west, fed by a river that drops out of the eastern highlands.
     const LAKE = { x: -138, z: -104, r: 58, level: -3.4 };
-    // How far out from the lake centre the basin is allowed to hold water.
-    const LAKE_FILL = LAKE.r * 1.85;
+    // How far out from the lake centre the basin is allowed to hold water. This used
+    // to be 1.85x — generous enough that ordinary terrain roll far from the true
+    // shore could occasionally dip below LAKE.level on its own, which the "anywhere
+    // below the surface counts as lake" fill rule then rendered as a second,
+    // disconnected patch of water (a hard vertical wall of it, cutting across dry
+    // ground where you'd expect a shoreline). Shrinking the radius shrinks how much
+    // unrelated terrain is even eligible to be mistaken for the lake, while 1.3x still
+    // leaves real margin beyond the hard-carved shore at LAKE.r for its natural wobble.
+    const LAKE_FILL = LAKE.r * 1.3;
     const RIVER_WIDTH = 5.0;
     const RIVER_CTRL = [
       { x: 232, z: 132 },
@@ -1714,11 +1722,16 @@
 
     // Ground height the marine's boots rest on. Sampling only the centre point left the
     // downhill foot hanging in the air on every slope. Decks (bridges, the dock)
-    // override terrain when they're just overhead.
+    // override terrain when they're just overhead. The height-difference cap used to
+    // be 4.4 — fine for the dock, but a bridge deck is set by the *highest* point
+    // along its whole crossing ("so the planks clear the banks and the bed alike"),
+    // so anywhere the river channel underneath runs deeper than that near mid-span,
+    // the deck lost to the riverbed and the player sank straight through the planks.
+    // Being inside a deck's footprint at all is reason enough to stand on the deck.
     function playerGroundY(x, z) {
       const g = groundMinAround(x, z, 0.3);
       const p = platformHeightAt(x, z);
-      return (p !== null && p > g && p - g < 4.4) ? p : g;
+      return (p !== null && p > g && p - g < 60) ? p : g;
     }
 
     // Lowest ground inside a footprint. Props sit on this so nothing floats on a slope.
@@ -1788,11 +1801,12 @@
     }
 
     // Ground for anything that walks: terrain, unless a deck is just overhead. The
-    // ceiling covers a bridge spanning a carved river channel.
+    // ceiling covers a bridge spanning a carved river channel. See playerGroundY for
+    // why the cap is generous rather than the old, too-tight 4.4.
     function entityGroundY(x, z) {
       const g = sampleHeight(x, z);
       const p = platformHeightAt(x, z);
-      return (p !== null && p > g && p - g < 4.4) ? p : g;
+      return (p !== null && p > g && p - g < 60) ? p : g;
     }
 
     // Interpolated point + tangent along the river at arc fraction s.
@@ -2202,6 +2216,17 @@
       waterWaveTargets.push({ mesh, base: Float32Array.from(geo.attributes.position.array), amp: 0.055, freq: 0.9 });
     }
 
+    // Solid, unlit wall dropping away from the lake mesh's outer rim. The rippling
+    // surface above is a flat disc far bigger than the true shoreline ("the surplus
+    // sits below the banks and is hidden by the terrain"), and from a distant ridge
+    // that assumption can fail — a dip in the mountain wall beyond the lake lets you
+    // sight past the terrain that's supposed to hide the disc, so its edge reads as a
+    // flat sheet floating in the fog with open air (or sky) visible underneath it.
+    // This skirt means that instead of open air, what's under the rim is a believable
+    // drop into darkness. DoubleSide because which face ends up "outward" depends on
+    // which direction the failure is spotted from.
+    const lakeSkirtMat = new THREE.MeshBasicMaterial({ color: 0x0a1a22, side: THREE.DoubleSide, fog: true });
+
     // Lake surface, tessellated so it can ripple and so its rim can tuck under the bank.
     function buildLakeMesh() {
       const rings = 26, segs = 72;
@@ -2236,6 +2261,26 @@
       mesh.renderOrder = 2;
       streamGroup.add(mesh);
       waterWaveTargets.push({ mesh, base: Float32Array.from(geo.attributes.position.array), amp: 0.09, freq: 0.55 });
+
+      // The skirt itself: a ring of quads at the outer rim, dropping straight down.
+      const skirtDepth = 60; // comfortably past any terrain low point on the map
+      const skirtPos = [];
+      const skirtIdx = [];
+      for (let j = 0; j <= segs; j++) {
+        const a = (j % segs) / segs * Math.PI * 2;
+        const x = LAKE.x + Math.cos(a) * LAKE_FILL, z = LAKE.z + Math.sin(a) * LAKE_FILL;
+        skirtPos.push(x, LAKE.level, z, x, LAKE.level - skirtDepth, z);
+      }
+      for (let j = 0; j < segs; j++) {
+        const a0 = j * 2, b0 = j * 2 + 1, a1 = (j + 1) * 2, b1 = (j + 1) * 2 + 1;
+        skirtIdx.push(a0, b0, b1, a0, b1, a1);
+      }
+      const skirtGeo = new THREE.BufferGeometry();
+      skirtGeo.setAttribute('position', new THREE.Float32BufferAttribute(skirtPos, 3));
+      skirtGeo.setIndex(skirtIdx);
+      const skirtMesh = new THREE.Mesh(skirtGeo, lakeSkirtMat);
+      skirtMesh.renderOrder = 1;
+      streamGroup.add(skirtMesh);
     }
 
     function scatterStreamPebbles() {
@@ -2587,6 +2632,25 @@
           parts.push(p);
         }
       }
+      // Landward abutment: the deck is pinned to a fixed height just above the
+      // waterline, but the shore it starts from (the landward half of the deck sits
+      // over dry ground, not water) keeps climbing further inland — without this the
+      // deck's rear half increasingly buried itself in, or hovered over, the rising
+      // bank instead of meeting it cleanly.
+      {
+        const cy = Math.cos(d.yaw), sy = Math.sin(d.yaw);
+        const bankX = d.x - (len / 2) * sy, bankZ = d.z - (len / 2) * cy;
+        const bankY = sampleHeight(bankX, bankZ);
+        const gap = Math.abs(bankY - deckY);
+        if (gap > 0.15) {
+          const wedgeLen = Math.min(4, 1.5 + gap * 0.6);
+          const top = Math.max(bankY, deckY) - deckY;
+          const bot = Math.min(bankY, deckY) - deckY - 0.4;
+          const wedge = new THREE.Mesh(new THREE.BoxGeometry(hw * 2 - 0.1, top - bot, wedgeLen), post);
+          wedge.position.set(0, (top + bot) / 2, -(len / 2 + wedgeLen / 2 - 0.4));
+          parts.push(wedge);
+        }
+      }
       const g = new THREE.Group();
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       g.add(mesh);
@@ -2601,6 +2665,10 @@
       g.rotation.y = d.yaw;
       scene.add(g);
       platforms.push({ x: d.x, z: d.z, hw, hl: len / 2, yaw: d.yaw, deckY: deckY + 0.08 });
+      // The rowboat had no collision at all — you could walk straight through its hull.
+      const cy2 = Math.cos(d.yaw), sy2 = Math.sin(d.yaw);
+      const boatLx = hw + 1.2, boatLz = -1.7;
+      addSolid(d.x + boatLx * cy2 + boatLz * sy2, d.z - boatLx * sy2 + boatLz * cy2, 1.1, deckY - 0.6, deckY + 0.3);
     }
 
     function buildBridge(b) {
@@ -2637,6 +2705,24 @@
           parts.push(p);
         }
       }
+      // Abutments: the deck sits at ONE flat height set by the single highest point
+      // anywhere along the crossing, so on an uneven crossing the real bank at either
+      // end can end up well below (or occasionally above) that flat height — leaving a
+      // visible gap under the planks, or the planks burying themselves in the bank.
+      // Fill that difference with a solid wedge at each end so there's always ground
+      // (or a believable timber footing) right where the deck meets the bank.
+      for (const end of [-1, 1]) {
+        const bankY = sampleHeight(b.x + Math.sin(b.yaw) * halfLen * end, b.z + Math.cos(b.yaw) * halfLen * end);
+        const gap = Math.abs(bankY - deckY);
+        if (gap > 0.15) {
+          const wedgeLen = Math.min(4.5, 1.5 + gap * 0.6);
+          const top = Math.max(bankY, deckY) - deckY;
+          const bot = Math.min(bankY, deckY) - deckY - 0.4; // dig in a little so it never leaves its own sliver of a gap
+          const wedge = new THREE.Mesh(new THREE.BoxGeometry(hw * 2 - 0.1, top - bot, wedgeLen), plankDark);
+          wedge.position.set(0, (top + bot) / 2, end * (halfLen + wedgeLen / 2 - 0.4));
+          parts.push(wedge);
+        }
+      }
       const g = new THREE.Group();
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       g.add(mesh);
@@ -2648,6 +2734,19 @@
       const cy = Math.cos(b.yaw), sy = Math.sin(b.yaw);
       for (const [lx, lz] of [[-hw, -halfLen], [hw, -halfLen], [-hw, halfLen], [hw, halfLen]]) {
         addSolid(b.x + lx * cy + lz * sy, b.z - lx * sy + lz * cy, 0.24, deckY - 1, deckY + 1.4);
+      }
+      // The rails themselves were purely visual — nothing stopped you walking straight
+      // through them off the side. Line both rails with overlapping colliders (waist
+      // height, so they don't block standing on the deck itself) so the guardrail
+      // actually keeps you on the bridge.
+      const railR = 0.5, railStep = 0.8;
+      const railN = Math.max(1, Math.round((halfLen * 2 - 0.6) / railStep));
+      for (const side of [-1, 1]) {
+        const lx = side * (hw - 0.06);
+        for (let i = 0; i <= railN; i++) {
+          const lz = -halfLen + 0.3 + (i / railN) * (halfLen * 2 - 0.6);
+          addSolid(b.x + lx * cy + lz * sy, b.z - lx * sy + lz * cy, railR, deckY + 0.35, deckY + 1.3);
+        }
       }
     }
 
@@ -2682,6 +2781,11 @@
     let tower = null;          // set by buildWatchtower(), if the map rolled one
     let climbingTower = false; // true while riding the ladder
     let onTowerDeck = false;   // true while standing on top
+    // True while out of your depth in the lake/river. Read by tryFire (no shooting
+    // while swimming) and updateMarinePose (paddle animation instead of the walk
+    // cycle). Set once per frame from the movement code, which already works out
+    // depth vs. actual height for exactly this purpose.
+    let playerSwimming = false;
 
     const rubbleWood = new THREE.MeshStandardMaterial({ color: 0x4a331e });
     const rubbleWoodLight = new THREE.MeshStandardMaterial({ color: 0x6b4a2a });
@@ -3220,13 +3324,58 @@
     }
 
     // --- Puddles gathering on flat, dry ground -------------------------------------
+    // A puddle used to be a perfectly round, flat-colour, hard-edged disc — every one
+    // identical, stamped onto the ground with no blending at the rim. Instead, bake a
+    // handful of soft, irregular "puddle blob" textures once (a noisy outline, a
+    // radial gradient from a bright reflective centre out to fully transparent at the
+    // edge) and hand each puddle instance one of them, so puddles read as wet patches
+    // rather than decals.
     const PUDDLE_MAX = 40;
-    const puddleGeo = new THREE.CircleGeometry(1, 18);
+    const PUDDLE_TEX_COUNT = 5;
+    function makePuddleTexture(seed) {
+      const size = 128;
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const rnd = mulberry32(seed);
+      const cx = size / 2, cy = size / 2;
+      const n = 12;
+      const pts = [];
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2;
+        const r = (0.66 + rnd() * 0.3) * (size * 0.46);
+        pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+      }
+      // Smooth the noisy control points into a blob outline via quadratics through
+      // each edge's midpoint — the same trick as a rounded, randomised polygon.
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const p0 = pts[i % n], p1 = pts[(i + 1) % n];
+        const mx = (p0[0] + p1[0]) / 2, my = (p0[1] + p1[1]) / 2;
+        if (i === 0) ctx.moveTo(mx, my); else ctx.quadraticCurveTo(p0[0], p0[1], mx, my);
+      }
+      ctx.closePath();
+      ctx.save();
+      ctx.clip();
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, size * 0.48);
+      grad.addColorStop(0, 'rgba(206,226,236,0.95)');
+      grad.addColorStop(0.5, 'rgba(112,152,174,0.88)');
+      grad.addColorStop(0.8, 'rgba(58,88,108,0.6)');
+      grad.addColorStop(1, 'rgba(40,62,78,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, size, size);
+      ctx.restore();
+      return new THREE.CanvasTexture(canvas);
+    }
+    const puddleTextures = [];
+    for (let i = 0; i < PUDDLE_TEX_COUNT; i++) puddleTextures.push(makePuddleTexture(0xf00d + i * 733));
+
+    const puddleGeo = new THREE.CircleGeometry(1, 24);
     puddleGeo.rotateX(-Math.PI / 2);
     const puddles = [];
     for (let i = 0; i < PUDDLE_MAX; i++) {
       const mat = new THREE.MeshStandardMaterial({
-        color: 0x35617f, roughness: 0.1, metalness: 0.6,
+        map: puddleTextures[i % PUDDLE_TEX_COUNT], color: 0xffffff, roughness: 0.12, metalness: 0.55,
         transparent: true, opacity: 0, depthWrite: false
       });
       const mesh = new THREE.Mesh(puddleGeo, mat);
@@ -3257,6 +3406,11 @@
               free.x = x; free.z = z;
               free.wetness = 0.03;
               free.baseR = 1.1 + Math.random() * 2.1;
+              // Fresh blob shape + orientation each time a puddle is (re)used, so the
+              // small shared texture pool doesn't read as repetition.
+              free.mat.map = puddleTextures[(Math.random() * PUDDLE_TEX_COUNT) | 0];
+              free.mat.needsUpdate = true;
+              free.mesh.rotation.y = Math.random() * Math.PI * 2;
               break;
             }
           }
@@ -3276,7 +3430,7 @@
           p.mesh.position.set(p.x, sampleHeight(p.x, p.z) + 0.02, p.z);
           const s = p.baseR * (0.3 + 0.7 * p.wetness);
           p.mesh.scale.set(s, 1, s);
-          p.mat.opacity = 0.5 * p.wetness;
+          p.mat.opacity = 0.62 * p.wetness;
         }
       }
     }
@@ -3672,6 +3826,7 @@
         makeClutter(x, z, rnd);
       }
       spawnBugs();
+      spawnWildlife();
     }
 
     // --- Bees & butterflies (Tiny Trek critters) --------------------------------
@@ -4032,6 +4187,656 @@
           if (Math.abs(dy) > 2.2) continue;
           const dot = (dx * fx + dz * fz) / (d || 1);
           if (dot > minDot) killBug(b);
+        }
+      }
+    }
+
+    // --- Ambient wildlife (birds / rabbits / frogs) -----------------------------
+    // Fill the world with non-combat critters. Prefer scare/flee; 1HP shootable
+    // like bugs (tiny puff, no cash). Mirrors bugs[] spawn/update/hit patterns.
+    const birds = [];
+    const rabbits = [];
+    const frogs = [];
+    const MAX_BIRDS = 14;
+    const MAX_RABBITS = 9;
+    const MAX_FROGS = 8;
+    const BIRD_HIT_R = 0.28;
+    const RABBIT_HIT_R = 0.22;
+    const FROG_HIT_R = 0.16;
+    const WILD_PLAYER_SCARE_R = 8;
+
+    const birdBodyMats = [
+      new THREE.MeshStandardMaterial({ color: 0x6b5a48, roughness: 0.85 }),
+      new THREE.MeshStandardMaterial({ color: 0x8a8a8a, roughness: 0.82 }),
+      new THREE.MeshStandardMaterial({ color: 0xd8d4cc, roughness: 0.78 }),
+      new THREE.MeshStandardMaterial({ color: 0x4a4038, roughness: 0.88 })
+    ];
+    const birdWingMat = new THREE.MeshStandardMaterial({
+      color: 0x5a5048, roughness: 0.8, side: THREE.DoubleSide
+    });
+    const rabbitBodyMat = new THREE.MeshStandardMaterial({ color: 0x8b6a4a, roughness: 0.85 });
+    const rabbitEarMat = new THREE.MeshStandardMaterial({ color: 0xa07858, roughness: 0.8 });
+    const rabbitBellyMat = new THREE.MeshStandardMaterial({ color: 0xc4a882, roughness: 0.9 });
+    const frogBodyMat = new THREE.MeshStandardMaterial({ color: 0x3d8b4a, roughness: 0.7 });
+    const frogEyeMat = new THREE.MeshStandardMaterial({ color: 0x1a1a12, roughness: 0.5 });
+
+    function makeBirdMesh() {
+      const g = new THREE.Group();
+      const bodyMat = birdBodyMats[(Math.random() * birdBodyMats.length) | 0];
+      const body = new THREE.Mesh(new THREE.SphereGeometry(0.09, 6, 5), bodyMat);
+      body.scale.set(1, 0.75, 1.35);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.045, 5, 4), bodyMat);
+      head.position.set(0, 0.02, 0.1);
+      const beak = new THREE.Mesh(
+        new THREE.ConeGeometry(0.015, 0.05, 4),
+        new THREE.MeshStandardMaterial({ color: 0xc48a3a, roughness: 0.7 })
+      );
+      beak.rotation.x = Math.PI / 2;
+      beak.position.set(0, 0.015, 0.145);
+      const wingL = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.02, 0.08), birdWingMat);
+      const wingR = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.02, 0.08), birdWingMat);
+      wingL.geometry.translate(-0.08, 0, 0);
+      wingR.geometry.translate(0.08, 0, 0);
+      wingL.position.set(-0.02, 0.01, 0);
+      wingR.position.set(0.02, 0.01, 0);
+      g.add(body, head, beak, wingL, wingR);
+      const s = 0.85 + Math.random() * 0.35;
+      g.scale.setScalar(s);
+      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
+      g.userData.wingL = wingL;
+      g.userData.wingR = wingR;
+      return g;
+    }
+
+    function makeRabbitMesh() {
+      const g = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.SphereGeometry(0.11, 6, 5), rabbitBodyMat);
+      body.scale.set(1.1, 0.85, 1.35);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.07, 5, 4), rabbitBodyMat);
+      head.position.set(0, 0.06, 0.12);
+      const belly = new THREE.Mesh(new THREE.SphereGeometry(0.07, 5, 4), rabbitBellyMat);
+      belly.scale.set(0.9, 0.7, 1);
+      belly.position.set(0, -0.02, 0.02);
+      const earL = new THREE.Mesh(new THREE.CapsuleGeometry(0.018, 0.08, 3, 5), rabbitEarMat);
+      const earR = new THREE.Mesh(new THREE.CapsuleGeometry(0.018, 0.08, 3, 5), rabbitEarMat);
+      earL.position.set(-0.035, 0.14, 0.1);
+      earR.position.set(0.035, 0.14, 0.1);
+      earL.rotation.z = 0.15; earR.rotation.z = -0.15;
+      g.add(body, belly, head, earL, earR);
+      const s = 0.75 + Math.random() * 0.3;
+      g.scale.setScalar(s);
+      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
+      return g;
+    }
+
+    function makeFrogMesh() {
+      const g = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 5), frogBodyMat);
+      body.scale.set(1.15, 0.7, 1.25);
+      const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.018, 4, 3), frogEyeMat);
+      const eyeR = new THREE.Mesh(new THREE.SphereGeometry(0.018, 4, 3), frogEyeMat);
+      eyeL.position.set(-0.035, 0.045, 0.045);
+      eyeR.position.set(0.035, 0.045, 0.045);
+      g.add(body, eyeL, eyeR);
+      const s = 0.7 + Math.random() * 0.35;
+      g.scale.setScalar(s);
+      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
+      return g;
+    }
+
+    function disposeWildMesh(mesh) {
+      if (!mesh) return;
+      scene.remove(mesh);
+      mesh.traverse(ch => {
+        if (!ch.isMesh) return;
+        if (ch.geometry) { try { ch.geometry.dispose(); } catch (_) {} }
+        if (ch.material &&
+            ch.material !== birdWingMat && ch.material !== rabbitBodyMat &&
+            ch.material !== rabbitEarMat && ch.material !== rabbitBellyMat &&
+            ch.material !== frogBodyMat && ch.material !== frogEyeMat &&
+            birdBodyMats.indexOf(ch.material) < 0) {
+          try { ch.material.dispose(); } catch (_) {}
+        }
+      });
+    }
+
+    function clearWildlife() {
+      for (const b of birds) disposeWildMesh(b.mesh);
+      for (const r of rabbits) disposeWildMesh(r.mesh);
+      for (const f of frogs) disposeWildMesh(f.mesh);
+      birds.length = 0;
+      rabbits.length = 0;
+      frogs.length = 0;
+    }
+
+    function wildRandLandSpot(minR, maxR) {
+      for (let tries = 0; tries < 24; tries++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = minR + Math.random() * (maxR - minR);
+        const x = Math.cos(a) * r;
+        const z = Math.sin(a) * r;
+        if (!inLand(x, z, 2.5)) continue;
+        return { x, z };
+      }
+      return { x: (Math.random() - 0.5) * 20, z: (Math.random() - 0.5) * 20 };
+    }
+
+    function spawnOneBird() {
+      if (birds.length >= MAX_BIRDS) return;
+      const spot = wildRandLandSpot(10, Math.min(55, landRadius * 0.45));
+      const gh = sampleHeight(spot.x, spot.z);
+      const cruise = 3.5 + Math.random() * 4.5;
+      const mesh = makeBirdMesh();
+      mesh.position.set(spot.x, gh + cruise, spot.z);
+      scene.add(mesh);
+      const ang = Math.random() * Math.PI * 2;
+      birds.push({
+        mesh, hp: 1, alive: true,
+        mode: 'cruise',
+        scareT: 0,
+        phase: Math.random() * Math.PI * 2,
+        cruiseH: cruise,
+        cx: spot.x, cz: spot.z,
+        orbitR: 6 + Math.random() * 14,
+        orbitAng: ang,
+        orbitSpd: (0.18 + Math.random() * 0.22) * (Math.random() < 0.5 ? 1 : -1),
+        vel: { x: 0, y: 0, z: 0 },
+        wx: spot.x + Math.cos(ang) * 8, wz: spot.z + Math.sin(ang) * 8
+      });
+    }
+
+    function spawnOneRabbit() {
+      if (rabbits.length >= MAX_RABBITS) return;
+      let x, z, ok = false;
+      for (let t = 0; t < 30; t++) {
+        const spot = wildRandLandSpot(8, Math.min(50, landRadius * 0.4));
+        x = spot.x; z = spot.z;
+        if (distToStream(x, z) > STREAM_WIDTH * 1.2) { ok = true; break; }
+      }
+      if (!ok) return;
+      const gh = sampleHeight(x, z);
+      const mesh = makeRabbitMesh();
+      mesh.position.set(x, gh + 0.12, z);
+      scene.add(mesh);
+      rabbits.push({
+        mesh, hp: 1, alive: true,
+        mode: 'idle',
+        scareT: 0, hideT: 0,
+        phase: Math.random() * Math.PI * 2,
+        hopCd: 0.4 + Math.random() * 1.2,
+        vel: { x: 0, y: 0, z: 0 },
+        facing: Math.random() * Math.PI * 2,
+        hiddenForRain: false
+      });
+      if (groundCrittersShouldHide()) {
+        mesh.visible = false;
+        rabbits[rabbits.length - 1].hiddenForRain = true;
+      }
+    }
+
+    function spawnOneFrog() {
+      if (frogs.length >= MAX_FROGS) return;
+      let x, z, ok = false;
+      const lo = STREAM_WIDTH * 1.05, hi = STREAM_WIDTH * 3.0;
+      for (let t = 0; t < 40; t++) {
+        const spot = wildRandLandSpot(6, Math.min(60, landRadius * 0.5));
+        const d = distToStream(spot.x, spot.z);
+        if (d >= lo && d <= hi) { x = spot.x; z = spot.z; ok = true; break; }
+      }
+      if (!ok) return;
+      const gh = sampleHeight(x, z);
+      const mesh = makeFrogMesh();
+      mesh.position.set(x, gh + 0.06, z);
+      scene.add(mesh);
+      frogs.push({
+        mesh, hp: 1, alive: true,
+        mode: 'sit',
+        scareT: 0, hideT: 0,
+        phase: Math.random() * Math.PI * 2,
+        hopCd: 1.0 + Math.random() * 2.5,
+        vel: { x: 0, y: 0, z: 0 },
+        facing: Math.random() * Math.PI * 2,
+        hiddenForRain: false,
+        dayQuiet: Math.random() < 0.55
+      });
+      const fr = frogs[frogs.length - 1];
+      if (groundCrittersShouldHide()) {
+        mesh.visible = false;
+        fr.hiddenForRain = true;
+      } else if (!isNight && fr.dayQuiet) {
+        mesh.visible = false;
+        fr.mode = 'dayhide';
+      }
+    }
+
+    function spawnWildlife() {
+      clearWildlife();
+      const nb = 10 + ((Math.random() * 5) | 0); // 10-14
+      const nr = 6 + ((Math.random() * 4) | 0);  // 6-9
+      const nf = 5 + ((Math.random() * 4) | 0);  // 5-8
+      for (let i = 0; i < Math.min(nb, MAX_BIRDS); i++) spawnOneBird();
+      for (let i = 0; i < Math.min(nr, MAX_RABBITS); i++) spawnOneRabbit();
+      for (let i = 0; i < Math.min(nf, MAX_FROGS); i++) spawnOneFrog();
+    }
+
+    function groundCrittersShouldHide() {
+      return !!(weather && (weather.raining || weather.intensity > 0.12));
+    }
+
+    function killWildlife(w, color) {
+      if (!w || !w.alive) return;
+      w.alive = false;
+      const p = w.mesh.position;
+      spawnChunks(p.x, p.y, p.z, color || 0xaa8866, 2, 1.5);
+      disposeWildMesh(w.mesh);
+      w.mesh = null;
+    }
+
+    function scareWildlife(wx, wz, radius, strength) {
+      const R = radius || 14;
+      const S = strength == null ? 1 : strength;
+      for (const b of birds) {
+        if (!b.alive || !b.mesh) continue;
+        const dx = b.mesh.position.x - wx;
+        const dz = b.mesh.position.z - wz;
+        const d = Math.hypot(dx, dz);
+        if (d > R) continue;
+        const fall = 1 - d / R;
+        const nx = (dx / (d || 1));
+        const nz = (dz / (d || 1));
+        b.mode = 'scatter';
+        b.scareT = 2.2 + Math.random() * 1.8;
+        b.vel.x = nx * (7 + 10 * S * fall) + (Math.random() - 0.5) * 3;
+        b.vel.z = nz * (7 + 10 * S * fall) + (Math.random() - 0.5) * 3;
+        b.vel.y = 4 + 6 * S * fall + Math.random() * 3;
+      }
+      for (const r of rabbits) {
+        if (!r.alive || !r.mesh || !r.mesh.visible) continue;
+        const dx = r.mesh.position.x - wx;
+        const dz = r.mesh.position.z - wz;
+        const d = Math.hypot(dx, dz);
+        if (d > R * 0.85) continue;
+        const fall = 1 - d / (R * 0.85);
+        const nx = dx / (d || 1), nz = dz / (d || 1);
+        r.mode = 'bolt';
+        r.scareT = 1.4 + Math.random() * 1.2;
+        r.hideT = 0;
+        r.vel.x = nx * (9 + 8 * S * fall);
+        r.vel.z = nz * (9 + 8 * S * fall);
+        r.vel.y = 2.5 + Math.random() * 1.5;
+        r.facing = Math.atan2(nx, nz);
+      }
+      for (const f of frogs) {
+        if (!f.alive || !f.mesh || !f.mesh.visible) continue;
+        const dx = f.mesh.position.x - wx;
+        const dz = f.mesh.position.z - wz;
+        const d = Math.hypot(dx, dz);
+        if (d > R * 0.7) continue;
+        // Jump toward stream (water) then hide
+        let sx = 0, sz = 0;
+        {
+          // Approximate stream direction: move to lower distToStream
+          const step = 0.8;
+          let best = distToStream(f.mesh.position.x, f.mesh.position.z);
+          for (let k = 0; k < 8; k++) {
+            const a = (k / 8) * Math.PI * 2;
+            const tx = f.mesh.position.x + Math.cos(a) * step;
+            const tz = f.mesh.position.z + Math.sin(a) * step;
+            const dd = distToStream(tx, tz);
+            if (dd < best) { best = dd; sx = Math.cos(a); sz = Math.sin(a); }
+          }
+        }
+        if (sx === 0 && sz === 0) {
+          sx = dx / (d || 1); sz = dz / (d || 1);
+        }
+        f.mode = 'flee';
+        f.scareT = 0.6 + Math.random() * 0.5;
+        f.hideT = 2.5 + Math.random() * 2;
+        f.vel.x = sx * (4 + 3 * S);
+        f.vel.z = sz * (4 + 3 * S);
+        f.vel.y = 3.2 + Math.random() * 1.5;
+        f.facing = Math.atan2(sx, sz);
+      }
+    }
+
+    function updateWildlife(dt) {
+      const px = player.position.x, pz = player.position.z;
+      const hideGround = groundCrittersShouldHide();
+      const night = !!(typeof isNight !== 'undefined' && isNight);
+
+      // --- Birds ---
+      for (let i = birds.length - 1; i >= 0; i--) {
+        const b = birds[i];
+        if (!b.alive || !b.mesh) { birds.splice(i, 1); continue; }
+        b.phase += dt;
+        const wl = b.mesh.userData.wingL, wr = b.mesh.userData.wingR;
+        const flap = b.mode === 'scatter' ? 28 : 12;
+        if (wl && wr) {
+          const a = Math.sin(b.phase * flap) * (b.mode === 'scatter' ? 0.9 : 0.55);
+          wl.rotation.z = a; wr.rotation.z = -a;
+        }
+        // Player proximity scare (this bird only)
+        {
+          const dP = Math.hypot(b.mesh.position.x - px, b.mesh.position.z - pz);
+          if (dP < WILD_PLAYER_SCARE_R && b.mode !== 'scatter') {
+            const dx = b.mesh.position.x - px, dz = b.mesh.position.z - pz;
+            const inv = 1 / (dP || 1);
+            b.mode = 'scatter';
+            b.scareT = 2.0 + Math.random() * 1.5;
+            b.vel.x = dx * inv * 8 + (Math.random() - 0.5) * 2;
+            b.vel.z = dz * inv * 8 + (Math.random() - 0.5) * 2;
+            b.vel.y = 5 + Math.random() * 3;
+          }
+        }
+        if (b.mode === 'scatter') {
+          b.scareT -= dt;
+          b.mesh.position.x += b.vel.x * dt;
+          b.mesh.position.y += b.vel.y * dt;
+          b.mesh.position.z += b.vel.z * dt;
+          b.vel.y -= 2.5 * dt;
+          b.vel.x *= Math.exp(-0.4 * dt);
+          b.vel.z *= Math.exp(-0.4 * dt);
+          if (b.scareT <= 0) {
+            b.mode = 'cruise';
+            b.cx = b.mesh.position.x;
+            b.cz = b.mesh.position.z;
+            b.orbitAng = Math.random() * Math.PI * 2;
+            b.cruiseH = 3.5 + Math.random() * 4;
+          }
+        } else {
+          // Gentle orbit / waypoint wander
+          b.orbitAng += b.orbitSpd * dt;
+          const tx = b.cx + Math.cos(b.orbitAng) * b.orbitR;
+          const tz = b.cz + Math.sin(b.orbitAng) * b.orbitR;
+          const gh = sampleHeight(tx, tz);
+          let targetY = gh + b.cruiseH;
+          if (weather && weather.intensity > 0.2) targetY = gh + Math.max(2.2, b.cruiseH * 0.55);
+          const dx = tx - b.mesh.position.x;
+          const dy = targetY - b.mesh.position.y;
+          const dz = tz - b.mesh.position.z;
+          const k = Math.min(1, dt * 1.8);
+          b.vel.x += (dx * 0.9 - b.vel.x) * k;
+          b.vel.y += (dy * 0.7 - b.vel.y) * k;
+          b.vel.z += (dz * 0.9 - b.vel.z) * k;
+          b.mesh.position.x += b.vel.x * dt;
+          b.mesh.position.y += b.vel.y * dt;
+          b.mesh.position.z += b.vel.z * dt;
+        }
+        const c = clampToLand(b.mesh.position.x, b.mesh.position.z, 2);
+        b.mesh.position.x = c.x; b.mesh.position.z = c.z;
+        const gh2 = sampleHeight(b.mesh.position.x, b.mesh.position.z);
+        if (b.mesh.position.y < gh2 + 1.2) {
+          b.mesh.position.y = gh2 + 1.2;
+          b.vel.y = Math.max(0, b.vel.y);
+        }
+        const spd = Math.hypot(b.vel.x, b.vel.z);
+        if (spd > 0.2) b.mesh.rotation.y = Math.atan2(b.vel.x, b.vel.z);
+      }
+
+      // --- Rabbits ---
+      for (let i = rabbits.length - 1; i >= 0; i--) {
+        const r = rabbits[i];
+        if (!r.alive || !r.mesh) { rabbits.splice(i, 1); continue; }
+        if (hideGround) {
+          if (r.mesh.visible) {
+            r.mesh.visible = false;
+            r.hiddenForRain = true;
+            r.vel.x = r.vel.y = r.vel.z = 0;
+          }
+          continue;
+        }
+        if (r.hiddenForRain) {
+          r.hiddenForRain = false;
+          r.mesh.visible = true;
+          r.mode = 'idle';
+          r.hopCd = 0.5 + Math.random();
+        }
+        {
+          const dP = Math.hypot(r.mesh.position.x - px, r.mesh.position.z - pz);
+          if (dP < WILD_PLAYER_SCARE_R * 0.7 && r.mode !== 'bolt' && r.mode !== 'hide') {
+            const dx = r.mesh.position.x - px, dz = r.mesh.position.z - pz;
+            const inv = 1 / (dP || 1);
+            r.mode = 'bolt';
+            r.scareT = 1.4 + Math.random();
+            r.vel.x = dx * inv * 10;
+            r.vel.z = dz * inv * 10;
+            r.vel.y = 2.5 + Math.random();
+            r.facing = Math.atan2(dx, dz);
+          }
+        }
+        r.phase += dt;
+        if (r.mode === 'bolt') {
+          r.scareT -= dt;
+          r.mesh.position.x += r.vel.x * dt;
+          r.mesh.position.z += r.vel.z * dt;
+          r.mesh.position.y += r.vel.y * dt;
+          r.vel.y -= 14 * dt;
+          const gh = sampleHeight(r.mesh.position.x, r.mesh.position.z);
+          if (r.mesh.position.y <= gh + 0.12) {
+            r.mesh.position.y = gh + 0.12;
+            r.vel.y = 2.2 + Math.random();
+            r.vel.x *= 0.92; r.vel.z *= 0.92;
+          }
+          if (r.scareT <= 0) {
+            r.mode = 'hide';
+            r.hideT = 1.5 + Math.random() * 1.5;
+            r.vel.x = r.vel.y = r.vel.z = 0;
+            r.mesh.visible = false;
+          }
+        } else if (r.mode === 'hide') {
+          r.hideT -= dt;
+          if (r.hideT <= 0) {
+            r.mode = 'idle';
+            r.mesh.visible = true;
+            r.hopCd = 0.3 + Math.random() * 0.8;
+          }
+          continue;
+        } else {
+          r.hopCd -= dt;
+          if (r.hopCd <= 0) {
+            const ang = r.facing + (Math.random() - 0.5) * 1.4;
+            r.facing = ang;
+            r.vel.x = Math.sin(ang) * (2.2 + Math.random() * 1.5);
+            r.vel.z = Math.cos(ang) * (2.2 + Math.random() * 1.5);
+            r.vel.y = 2.4 + Math.random() * 1.2;
+            r.hopCd = 0.7 + Math.random() * 1.6;
+          }
+          r.mesh.position.x += r.vel.x * dt;
+          r.mesh.position.z += r.vel.z * dt;
+          r.mesh.position.y += r.vel.y * dt;
+          r.vel.y -= 16 * dt;
+          r.vel.x *= Math.exp(-2.5 * dt);
+          r.vel.z *= Math.exp(-2.5 * dt);
+        }
+        // Prefer staying off deep water
+        if (distToStream(r.mesh.position.x, r.mesh.position.z) < STREAM_WIDTH * 1.05) {
+          const away = Math.atan2(r.mesh.position.x, r.mesh.position.z); // crude
+          r.mesh.position.x += Math.sin(away) * 0.4;
+          r.mesh.position.z += Math.cos(away) * 0.4;
+        }
+        const c = clampToLand(r.mesh.position.x, r.mesh.position.z, 2);
+        r.mesh.position.x = c.x; r.mesh.position.z = c.z;
+        const gh = sampleHeight(r.mesh.position.x, r.mesh.position.z);
+        if (r.mesh.position.y < gh + 0.12) {
+          r.mesh.position.y = gh + 0.12;
+          r.vel.y = 0;
+        }
+        r.mesh.rotation.y = r.facing;
+      }
+
+      // --- Frogs ---
+      for (let i = frogs.length - 1; i >= 0; i--) {
+        const f = frogs[i];
+        if (!f.alive || !f.mesh) { frogs.splice(i, 1); continue; }
+        if (hideGround) {
+          if (f.mesh.visible) {
+            f.mesh.visible = false;
+            f.hiddenForRain = true;
+            f.vel.x = f.vel.y = f.vel.z = 0;
+          }
+          continue;
+        }
+        if (f.hiddenForRain) {
+          f.hiddenForRain = false;
+          f.mode = night || !f.dayQuiet ? 'sit' : 'dayhide';
+          f.mesh.visible = f.mode !== 'dayhide';
+          f.hopCd = 0.5 + Math.random();
+        }
+        // Day: quieter / often hidden; night: active
+        if (!night && f.dayQuiet && f.mode !== 'flee' && f.mode !== 'hide') {
+          f.mode = 'dayhide';
+          f.mesh.visible = false;
+          continue;
+        }
+        if (night && f.mode === 'dayhide') {
+          f.mode = 'sit';
+          f.mesh.visible = true;
+          f.hopCd = 0.2 + Math.random() * 0.6;
+        }
+        {
+          const dP = Math.hypot(f.mesh.position.x - px, f.mesh.position.z - pz);
+          if (dP < 5 && f.mesh.visible && f.mode !== 'flee' && f.mode !== 'hide') {
+            // Leap toward stream then hide
+            let sx = 0, sz = 0, best = distToStream(f.mesh.position.x, f.mesh.position.z);
+            for (let k = 0; k < 8; k++) {
+              const a = (k / 8) * Math.PI * 2;
+              const dd = distToStream(f.mesh.position.x + Math.cos(a) * 0.8, f.mesh.position.z + Math.sin(a) * 0.8);
+              if (dd < best) { best = dd; sx = Math.cos(a); sz = Math.sin(a); }
+            }
+            if (!sx && !sz) { sx = (f.mesh.position.x - px) / (dP || 1); sz = (f.mesh.position.z - pz) / (dP || 1); }
+            f.mode = 'flee';
+            f.scareT = 0.55 + Math.random() * 0.4;
+            f.hideT = 2.2 + Math.random() * 1.5;
+            f.vel.x = sx * 5; f.vel.z = sz * 5; f.vel.y = 3.2;
+            f.facing = Math.atan2(sx, sz);
+          }
+        }
+        f.phase += dt;
+        if (f.mode === 'flee') {
+          f.scareT -= dt;
+          f.mesh.position.x += f.vel.x * dt;
+          f.mesh.position.z += f.vel.z * dt;
+          f.mesh.position.y += f.vel.y * dt;
+          f.vel.y -= 18 * dt;
+          const gh = sampleHeight(f.mesh.position.x, f.mesh.position.z);
+          if (f.mesh.position.y <= gh + 0.05) {
+            f.mesh.position.y = gh + 0.05;
+            f.vel.y = 0;
+          }
+          if (f.scareT <= 0) {
+            f.mode = 'hide';
+            f.mesh.visible = false;
+            f.vel.x = f.vel.y = f.vel.z = 0;
+          }
+        } else if (f.mode === 'hide') {
+          f.hideT -= dt;
+          if (f.hideT <= 0) {
+            f.mode = 'sit';
+            f.mesh.visible = true;
+            f.hopCd = 0.8 + Math.random();
+          }
+          continue;
+        } else if (f.mode === 'dayhide') {
+          continue;
+        } else {
+          // sit / hop along bank
+          const hopMul = night ? 1.0 : 0.35;
+          f.hopCd -= dt * (night ? 1.4 : 0.6);
+          if (f.hopCd <= 0) {
+            // Prefer staying in stream band
+            let ang = f.facing + (Math.random() - 0.5) * 1.2;
+            const d0 = distToStream(f.mesh.position.x, f.mesh.position.z);
+            const mid = STREAM_WIDTH * 2;
+            if (d0 < STREAM_WIDTH * 1.1 || d0 > STREAM_WIDTH * 2.8) {
+              let bestA = ang, bestScore = 1e9;
+              for (let k = 0; k < 6; k++) {
+                const a = Math.random() * Math.PI * 2;
+                const tx = f.mesh.position.x + Math.sin(a) * 1.2;
+                const tz = f.mesh.position.z + Math.cos(a) * 1.2;
+                const score = Math.abs(distToStream(tx, tz) - mid);
+                if (score < bestScore) { bestScore = score; bestA = a; }
+              }
+              ang = bestA;
+            }
+            f.facing = ang;
+            const spd = (1.6 + Math.random() * 1.4) * hopMul * (night ? 1.3 : 1);
+            f.vel.x = Math.sin(ang) * spd;
+            f.vel.z = Math.cos(ang) * spd;
+            f.vel.y = (2.0 + Math.random() * 1.4) * (night ? 1.15 : 0.85);
+            f.hopCd = (night ? 0.45 : 1.4) + Math.random() * (night ? 1.1 : 2.5);
+            f.mode = 'hop';
+          }
+          f.mesh.position.x += f.vel.x * dt;
+          f.mesh.position.z += f.vel.z * dt;
+          f.mesh.position.y += f.vel.y * dt;
+          f.vel.y -= 20 * dt;
+          f.vel.x *= Math.exp(-3 * dt);
+          f.vel.z *= Math.exp(-3 * dt);
+          const gh = sampleHeight(f.mesh.position.x, f.mesh.position.z);
+          if (f.mesh.position.y <= gh + 0.05) {
+            f.mesh.position.y = gh + 0.05;
+            f.vel.y = 0;
+            if (f.mode === 'hop' && Math.hypot(f.vel.x, f.vel.z) < 0.3) f.mode = 'sit';
+          }
+        }
+        const c = clampToLand(f.mesh.position.x, f.mesh.position.z, 1.5);
+        f.mesh.position.x = c.x; f.mesh.position.z = c.z;
+        f.mesh.rotation.y = f.facing;
+        // Tiny bob when sitting
+        if (f.mode === 'sit') {
+          const gh = sampleHeight(f.mesh.position.x, f.mesh.position.z);
+          f.mesh.position.y = gh + 0.05 + Math.sin(f.phase * 3) * 0.01;
+        }
+      }
+    }
+
+    function hitWildlifeSegment(ax, ay, az, bx, by, bz) {
+      let best = null, bestT = 2, bestKind = null;
+      for (const b of birds) {
+        if (!b.alive || !b.mesh || !b.mesh.visible) continue;
+        const p = b.mesh.position;
+        const t = segmentHitsCylinder(ax, ay, az, bx, by, bz, p.x, p.z, BIRD_HIT_R, p.y - 0.1, p.y + 0.15);
+        if (t !== null && t < bestT) { bestT = t; best = b; bestKind = 'bird'; }
+      }
+      for (const r of rabbits) {
+        if (!r.alive || !r.mesh || !r.mesh.visible || r.hiddenForRain) continue;
+        const p = r.mesh.position;
+        const t = segmentHitsCylinder(ax, ay, az, bx, by, bz, p.x, p.z, RABBIT_HIT_R, p.y - 0.05, p.y + 0.22);
+        if (t !== null && t < bestT) { bestT = t; best = r; bestKind = 'rabbit'; }
+      }
+      for (const f of frogs) {
+        if (!f.alive || !f.mesh || !f.mesh.visible || f.hiddenForRain) continue;
+        const p = f.mesh.position;
+        const t = segmentHitsCylinder(ax, ay, az, bx, by, bz, p.x, p.z, FROG_HIT_R, p.y - 0.04, p.y + 0.12);
+        if (t !== null && t < bestT) { bestT = t; best = f; bestKind = 'frog'; }
+      }
+      return best ? { target: best, kind: bestKind } : null;
+    }
+
+    function meleeWildlife(reach, fx, fz, minDot) {
+      const hitList = [];
+      for (const b of birds) {
+        if (!b.alive || !b.mesh || !b.mesh.visible) continue;
+        hitList.push({ w: b, col: 0x887766, yOff: 0.5 });
+      }
+      for (const r of rabbits) {
+        if (!r.alive || !r.mesh || !r.mesh.visible || r.hiddenForRain) continue;
+        hitList.push({ w: r, col: 0x8b6a4a, yOff: 0.15 });
+      }
+      for (const f of frogs) {
+        if (!f.alive || !f.mesh || !f.mesh.visible || f.hiddenForRain) continue;
+        hitList.push({ w: f, col: 0x3d8b4a, yOff: 0.08 });
+      }
+      for (const item of hitList) {
+        const w = item.w;
+        const dx = w.mesh.position.x - player.position.x;
+        const dz = w.mesh.position.z - player.position.z;
+        const d = Math.hypot(dx, dz);
+        if (d < reach + 0.25) {
+          const dy = w.mesh.position.y - (player.position.y + 0.9);
+          if (Math.abs(dy) > 2.8) continue;
+          const dot = (dx * fx + dz * fz) / (d || 1);
+          if (dot > minDot) killWildlife(w, item.col);
         }
       }
     }
@@ -5239,26 +6044,36 @@
         trunk.position.y = trunkH / 2;
         trunkParts.push(trunk);
 
-        canopyBottom = trunkH * 0.75;
+        // A central mass sitting right on the trunk's top, then a ring around/above
+        // it, then a small crown — the other species all keep something low and wide
+        // enough to bridge the trunk into the canopy; this one used to skip straight
+        // to a ring of puffs starting well above the trunk top with nothing centred
+        // over the trunk's own axis, leaving a visible gap of open air beneath it.
+        canopyBottom = trunkH * 0.5;
         canopyTop = trunkH + 2.2 * scale;
         canopyRadius = 1.85 * scale;
+        const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.05 * scale, 0), leafMats[0]);
+        core.position.y = trunkH * 0.8;
+        core.castShadow = true;
+        core.userData.baseScale = 1;
+        canopy.add(core);
         for (let i = 0; i < 6; i++) {
           const ang = (i / 6) * Math.PI * 2;
           const puff = new THREE.Mesh(
-            new THREE.IcosahedronGeometry(0.75 * scale + Math.random() * 0.25 * scale, 0),
+            new THREE.IcosahedronGeometry(0.7 * scale + Math.random() * 0.25 * scale, 0),
             leafMats[i % leafMats.length]
           );
           puff.position.set(
-            Math.cos(ang) * 0.7 * scale,
-            trunkH + 0.85 * scale + (i % 2) * 0.45 * scale,
-            Math.sin(ang) * 0.7 * scale
+            Math.cos(ang) * 0.75 * scale,
+            trunkH * 0.95 + (i % 2) * 0.4 * scale,
+            Math.sin(ang) * 0.75 * scale
           );
           puff.castShadow = true;
           puff.userData.baseScale = 1;
           canopy.add(puff);
         }
-        const top = new THREE.Mesh(new THREE.IcosahedronGeometry(0.95 * scale, 1), leafMats[0]);
-        top.position.y = trunkH + 1.5 * scale;
+        const top = new THREE.Mesh(new THREE.IcosahedronGeometry(0.85 * scale, 1), leafMats[1 % leafMats.length]);
+        top.position.y = trunkH + 0.9 * scale;
         top.castShadow = true;
         top.userData.baseScale = 1;
         canopy.add(top);
@@ -6348,8 +7163,20 @@
     const FOV_DEFAULT = 60;
     const FOV_ZOOM = 38;
     const CAM_DIST_DEFAULT = 8;
-    const CAM_DIST_ZOOM = 5.5;
+    // Zoom used to yank the camera in by 30% (8 -> 5.5) on top of narrowing the FOV
+    // from 60 to 38 — the two effects stacked, so aiming made the world (and the
+    // marine) suddenly loom much bigger than a simple zoom should feel. The FOV
+    // narrowing now does almost all of the work; distance only eases in slightly.
+    const CAM_DIST_ZOOM = 7.2;
     let camDistCurrent = CAM_DIST_DEFAULT;
+    // Camera orbit angle, eased toward aimYaw rather than snapped to it. aimYaw itself
+    // still snaps instantly (needed for precise mouse aim), but the camera used to
+    // read that raw angle directly, so a fast flick to aim behind you made the desired
+    // camera point jump to the opposite side of the player — and since only the
+    // *position* was lerped (in a straight line, not an arc), the camera swept right
+    // through the marine on its way around. Smoothing the angle itself instead makes
+    // the camera orbit around the player in a real arc.
+    let camYawCurrent = 0;
 
     // Base arm / elbow pose (weapon hold)
     const ARM_L_BASE = { x: -0.85, y: 0.15, z: 0.55 };
@@ -6398,7 +7225,7 @@
 
     function getStanceEyeY() { return EYE_Y; }
 
-    function updateMarinePose(dt, moving, running) {
+    function updateMarinePose(dt, moving, running, swimming) {
       const legL = marine.userData.legLG;
       const legR = marine.userData.legRG;
       const armL = marine.userData.armLG;
@@ -6407,6 +7234,11 @@
       const elbowR = marine.userData.elbowRG;
       const nvg = marine.userData.nvgPivot;
       const hip = marine.userData.hip;
+
+      // Holster whatever gun is equipped while swimming — tryFire is already gated on
+      // playerSwimming so it can't actually be fired, but it was still visibly dangling
+      // from your hand the whole time you were paddling.
+      weaponMount.visible = !swimming;
 
       // NVG flip animation
       const nvgTarget = nvgDown ? 1 : 0;
@@ -6436,7 +7268,39 @@
         0
       );
 
-      if (moving && grounded) {
+      if (swimming) {
+        // Flutter-kick legs, arms stroking forward, body pitched into the water —
+        // distinct from the on-foot walk cycle so wading out past your depth actually
+        // reads as swimming rather than walking in place underwater.
+        const cadence = 9;
+        walkPhase += dt * cadence;
+        const kick = Math.sin(walkPhase) * 0.4;
+        if (legL) { legL.rotation.x = legBend + kick; legL.rotation.z = 0; }
+        if (legR) { legR.rotation.x = legBend - kick; legR.rotation.z = 0; }
+        const stroke = Math.sin(walkPhase * 0.5);
+        if (armL) {
+          armL.rotation.x = ARM_L_BASE.x - 1.0 + stroke * 0.35;
+          armL.rotation.y = ARM_L_BASE.y;
+          armL.rotation.z = ARM_L_BASE.z;
+        }
+        if (armR) {
+          armR.rotation.x = ARM_R_BASE.x - 1.0 - stroke * 0.35;
+          armR.rotation.y = ARM_R_BASE.y;
+          armR.rotation.z = ARM_R_BASE.z;
+        }
+        if (elbowL) {
+          elbowL.rotation.x = ELBOW_L_BASE.x - 0.45;
+          elbowL.rotation.y = ELBOW_L_BASE.y;
+          elbowL.rotation.z = ELBOW_L_BASE.z;
+        }
+        if (elbowR) {
+          elbowR.rotation.x = ELBOW_R_BASE.x - 0.45;
+          elbowR.rotation.y = ELBOW_R_BASE.y;
+          elbowR.rotation.z = ELBOW_R_BASE.z;
+        }
+        marine.rotation.x = 0.34;
+        walkBob = Math.sin(walkPhase * 2) * 0.05;
+      } else if (moving && grounded) {
         const cadence = running ? 16 : 11;
         const amp = running ? 0.72 : 0.55;
         const armAmp = running ? 0.22 : 0.14;
@@ -9921,6 +10785,7 @@
         flash.scale.setScalar(1.2 + Math.random() * 0.6);
       }
       if (light) light.intensity = 2.8;
+      scareWildlife(player.position.x, player.position.z, 16, 1.0);
     }
 
     // Cast from muzzle along a 3D aim dir; trim where the ray dips under terrain.
@@ -10146,13 +11011,22 @@
         meleeBugs(reach, fx, fz, 0.4);
         if (bugs.filter(b => b.alive).length < before) hitSomething = true;
       }
-      if (hitSomething) AudioSys.chainsawGrit();
+      {
+        const beforeW = birds.filter(b => b.alive).length + rabbits.filter(r => r.alive).length + frogs.filter(f => f.alive).length;
+        meleeWildlife(reach, fx, fz, 0.4);
+        const afterW = birds.filter(b => b.alive).length + rabbits.filter(r => r.alive).length + frogs.filter(f => f.alive).length;
+        if (afterW < beforeW) hitSomething = true;
+      }
+      if (hitSomething) {
+        AudioSys.chainsawGrit();
+        scareWildlife(player.position.x, player.position.z, 10, 0.85);
+      }
     }
 
     function tryFire(dt) {
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
-      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire();
+      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming;
       const edge = fireHeld && !prevMouseFireHeld;
       prevMouseFireHeld = fireHeld;
 
@@ -10270,7 +11144,7 @@
     }
 
     function throwGrenade() {
-      if (!gameStarted || gameOver || won || placeMode || paused || grenadeCd > 0) return;
+      if (!gameStarted || gameOver || won || placeMode || paused || grenadeCd > 0 || playerSwimming) return;
       if (grenades <= 0) { AudioSys.emptyClick(); return; }
       grenades -= 1;
       grenadeCd = 0.6;
@@ -10342,6 +11216,22 @@
         const d = Math.hypot(b.mesh.position.x - x, b.mesh.position.z - z);
         if (d < AOE * 0.75) killBug(b);
       }
+      scareWildlife(x, z, AOE * 3.5, 1.4);
+      for (const w of birds.slice()) {
+        if (!w.alive || !w.mesh) continue;
+        if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
+          killWildlife(w, 0x887766);
+      }
+      for (const w of rabbits.slice()) {
+        if (!w.alive || !w.mesh) continue;
+        if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
+          killWildlife(w, 0x8b6a4a);
+      }
+      for (const w of frogs.slice()) {
+        if (!w.alive || !w.mesh) continue;
+        if (Math.hypot(w.mesh.position.x - x, w.mesh.position.z - z) < AOE * 0.7)
+          killWildlife(w, 0x3d8b4a);
+      }
       for (const rock of rocks) {
         if (!rock.alive || !rock.mesh.visible) continue;
         const d = Math.hypot(rock.x - x, rock.z - z);
@@ -10412,7 +11302,7 @@
     }
 
     function knifeAttack() {
-      if (!gameStarted || gameOver || won || placeMode || paused || knifeCd > 0) return;
+      if (!gameStarted || gameOver || won || placeMode || paused || knifeCd > 0 || playerSwimming) return;
       knifeCd = 0.45;
       knife.visible = true;
       knife.rotation.y = -0.6;
@@ -10432,6 +11322,8 @@
         }
       }
       meleeBugs(reach, fx, fz, 0.35);
+      meleeWildlife(reach, fx, fz, 0.35);
+      scareWildlife(player.position.x, player.position.z, 8, 0.45);
       setTimeout(() => { knife.visible = false; knife.rotation.y = 0; }, 180);
     }
     function segmentHitsCylinder(ax, ay, az, bx, by, bz, cx, cz, radius, y0, y1) {
@@ -10499,21 +11391,41 @@
         spawnFallingLeaves(tree, dirX, dirZ, 3 + Math.floor(Math.random() * 4));
         const ratio = Math.max(0, tree.leafHealth / tree.leafHealthMax);
         const pieces = tree.canopy.children;
+        // Ordered mostly top-down (with a little randomness mixed in so it doesn't
+        // look like uniform layers peeling away) rather than fully random — a purely
+        // random order could easily leave a single high, outlying puff as the last
+        // piece standing with nothing left below it, floating with no visible
+        // connection to the trunk. Stripping from the top means whatever survives is
+        // always among the lowest, trunk-hugging pieces.
+        if (!tree.leafHideOrder) {
+          const jitteredY = pieces.map(p => p.position.y + (Math.random() - 0.5) * 0.6);
+          tree.leafHideOrder = pieces.map((_, i) => i);
+          tree.leafHideOrder.sort((a, bIdx) => jitteredY[bIdx] - jitteredY[a]);
+        }
         const hideCount = Math.floor((1 - ratio) * pieces.length);
+        const prevHideCount = tree.leafHiddenCount || 0;
         for (let i = 0; i < pieces.length; i++) {
-          const p = pieces[i];
-          if (i < hideCount) p.visible = false;
-          else {
+          const p = pieces[tree.leafHideOrder[i]];
+          if (i < hideCount) {
+            if (i >= prevHideCount && p.visible) {
+              // A newly-knocked-off chunk gets its own little debris burst right where
+              // it was, instead of just blinking out of existence.
+              const wp = new THREE.Vector3();
+              p.getWorldPosition(wp);
+              const col = (p.material && p.material.color) ? p.material.color.getHex() : 0x5b7a3a;
+              spawnChunks(wp.x, wp.y, wp.z, col, 3, 1.6);
+            }
+            p.visible = false;
+          } else {
             p.visible = true;
             const shrink = 0.45 + ratio * 0.55;
             const base = p.userData.baseScale || 1;
             p.scale.setScalar(base * shrink);
           }
         }
-        tree.canopy.scale.setScalar(0.55 + ratio * 0.45);
+        tree.leafHiddenCount = hideCount;
         if (tree.leafHealth <= 0) {
           for (const p of pieces) p.visible = false;
-          tree.canopy.scale.setScalar(0.2);
           spawnFallingLeaves(tree, dirX, dirZ, 10 + Math.floor(Math.random() * 6));
         }
         return;
@@ -10573,6 +11485,8 @@
       tree.falling = false;
       tree.fallT = 0;
       tree.leafHealth = tree.leafHealthMax;
+      tree.leafHiddenCount = 0;
+      tree.leafHideOrder = null;
       tree.health = tree.healthMax;
       tree.sway = 0;
       tree.swayVel = 0;
@@ -10691,6 +11605,19 @@
           const hitBug = hitBugsSegment(p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z);
           if (hitBug) {
             killBug(hitBug);
+            p.hit = true;
+            scene.remove(p.mesh);
+            projectiles.splice(i, 1);
+            continue;
+          }
+        }
+
+        // Wildlife (1 HP, no cash)
+        {
+          const hitW = hitWildlifeSegment(p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z);
+          if (hitW) {
+            const col = hitW.kind === 'frog' ? 0x3d8b4a : (hitW.kind === 'rabbit' ? 0x8b6a4a : 0x887766);
+            killWildlife(hitW.target, col);
             p.hit = true;
             scene.remove(p.mesh);
             projectiles.splice(i, 1);
@@ -10856,13 +11783,18 @@
         }
       }
       // Landmark structures — but only when actually at their height. A bridge post
-      // shouldn't shove someone walking on the deck above it.
+      // shouldn't shove someone walking on the deck above it, and — the bug that had
+      // zombies stacking up uselessly beside a bridge instead of finding a way around
+      // — a bridge *rail* shouldn't block someone standing on the ground well below
+      // it either. Only entities whose vertical span plausibly overlaps the collider
+      // get pushed.
       for (const ws of worldSolids) {
         const minD = ws.radius + entR;
         const dx = x - ws.x, dz = z - ws.z;
         if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
         const footY = entityGroundY(x, z);
         if (footY > ws.y1 - 0.3) continue;
+        if (footY + 2.2 < ws.y0) continue;
         const dist = Math.hypot(dx, dz) || 0.0001;
         if (dist < minD) {
           const push = minD - dist;
@@ -11015,6 +11947,7 @@
         const dx = player.position.x - ws.x, dz = player.position.z - ws.z;
         if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
         if (player.position.y > ws.y1 - 0.3) continue;
+        if (player.position.y + 2.2 < ws.y0) continue;
         const dist = Math.hypot(dx, dz) || 0.0001;
         if (dist < minD) {
           const push = minD - dist;
@@ -11870,6 +12803,7 @@
       walkPhase = 0;
       walkBob = 0;
       aimYaw = 0;
+      camYawCurrent = 0;
       zoomHeld = false;
       // lasersEnabled persists across matches (session)
       startPrep();
@@ -11968,10 +12902,11 @@
       barrelSpinVel = 0;
       flashTimer = 0;
       updateAmmoHud();
-      aimYaw = 0; vy = 0; grounded = true;
+      aimYaw = 0; camYawCurrent = 0; vy = 0; grounded = true;
       cancelPlaceMode();
       for (const t of trees) restoreTree(t);
       spawnBugs();
+      spawnWildlife();
       for (const rock of rocks) {
         if (!rock.alive) {
           rock.alive = true;
@@ -12003,6 +12938,7 @@
       walkPhase = 0;
       walkBob = 0;
       aimYaw = 0;
+      camYawCurrent = 0;
       zoomHeld = false;
       marine.position.y = 0;
       marine.rotation.x = 0;
@@ -12110,6 +13046,7 @@
         const depth = waterDepthAt(px0, pz0);
         const waterLevel = waterLevelAt(px0, pz0);
         const swimming = depth > 1.3 && player.position.y < waterLevel + 0.6;
+        playerSwimming = swimming;
 
         let targetSpeed = 0;
         if (swimming) {
@@ -12164,10 +13101,12 @@
         } else if (!grounded) {
           stepDist = 0;
         }
+        } else {
+          playerSwimming = false; // riding the ladder — never swimming at the same time
         }
         // Always face aim so weaponMount +Z tracks mouse
         player.rotation.y = aimYaw;
-        updateMarinePose(dt, moving, running && moving);
+        updateMarinePose(dt, moving, running && moving, playerSwimming);
         if (reloading) {
           reloadTimer -= dt;
           if (reloadTimer <= 0) {
@@ -12256,6 +13195,7 @@
       updateTowerBar();
       updateBirds(dt);
       updateBugs(dt);
+      updateWildlife(dt);
       drawMinimap(dt);
       updateWind(dt);
       updateWindSway();
@@ -12347,6 +13287,20 @@
             grounded = false;
           }
         }
+        // Decks have an underside too. Standing on the ground below or beside a
+        // bridge/dock used to let your head (and the camera, and the gun) poke
+        // straight up through the planks since nothing checked for a ceiling — only
+        // for a floor. Only kicks in when you're clearly underneath, not on top.
+        if (!climbingTower && !onTowerDeck) {
+          const deckHere = platformHeightAt(player.position.x, player.position.z);
+          if (deckHere !== null && player.position.y < deckHere - 0.5) {
+            const underside = deckHere - 0.16;
+            if (player.position.y + 1.7 > underside) {
+              player.position.y = underside - 1.7;
+              if (vy > 0) vy = 0;
+            }
+          }
+        }
         // Coyote / buffer timers ride on the resolved grounded state.
         if (climbingTower) {
           coyoteT = 0;
@@ -12371,7 +13325,13 @@
       // Cam follow (FOV already updated earlier this frame for aim)
       const camY = CAM_Y;
       const bobY = (gameStarted && grounded) ? walkBob * 0.35 : 0;
-      let camYaw = aimYaw;
+      // Ease the orbit angle toward aimYaw the short way around instead of snapping to
+      // it — see camYawCurrent's declaration for why.
+      let yawDelta = aimYaw - camYawCurrent;
+      yawDelta = ((yawDelta + Math.PI) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2) - Math.PI;
+      const yawLerp = 1 - Math.pow(0.0006, dt);
+      camYawCurrent += yawDelta * yawLerp;
+      const camYaw = camYawCurrent;
       const desired = tmp.set(
         player.position.x - Math.sin(camYaw) * camDistCurrent,
         player.position.y + camY + bobY,
