@@ -2051,8 +2051,8 @@
     // Anything registered here gets leaned about by the wind loop.
     const windSwayables = [];
     const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x2f7fb8, roughness: 0.14, metalness: 0.5,
-      transparent: true, opacity: 0.80, depthWrite: false,
+      color: 0x2474b0, roughness: 0.08, metalness: 0.65,
+      transparent: true, opacity: 0.72, depthWrite: false,
       side: THREE.DoubleSide
     });
     const waterWaveTargets = [];
@@ -3009,6 +3009,44 @@
           grav: 13, drag: 0.5, life: 0.45 + Math.random() * 0.35,
           scale: 0.55 + Math.random() * 0.7
         });
+      }
+    }
+
+        const ripples = [];
+    const MAX_RIPPLES = 64;
+    const rippleGeo = new THREE.RingGeometry(0.85, 1.0, 16);
+    rippleGeo.rotateX(-Math.PI / 2);
+
+    function spawnRipple(x, y, z, scale = 1.0, life = 1.2) {
+      if (ripples.length >= MAX_RIPPLES) {
+        const oldest = ripples.shift();
+        scene.remove(oldest.mesh);
+        oldest.mesh.geometry.dispose();
+        oldest.mesh.material.dispose();
+      }
+      const mat = new THREE.MeshBasicMaterial({
+        color: 0x90c3e8, transparent: true, opacity: 0.55, depthWrite: false, side: THREE.DoubleSide
+      });
+      const mesh = new THREE.Mesh(rippleGeo, mat);
+      mesh.position.set(x, y + 0.02, z);
+      mesh.scale.setScalar(scale);
+      scene.add(mesh);
+      ripples.push({ mesh, scale, life, age: 0, opacity: 0.55 });
+    }
+
+    function updateRipples(dt) {
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.age += dt;
+        const t = r.age / r.life;
+        if (t >= 1) {
+          scene.remove(r.mesh);
+          r.mesh.material.dispose();
+          ripples.splice(i, 1);
+          continue;
+        }
+        r.mesh.scale.setScalar(r.scale * (1.0 + t * 3.5));
+        r.mesh.material.opacity = r.opacity * (1.0 - t);
       }
     }
 
@@ -5220,6 +5258,7 @@
     let nvgDown = false;
     let lasersEnabled = false; // default OFF; Z toggles (session)
     let walkPhase = 0;
+    let playerSwimRippleT = 0;
     let walkBob = 0;
     let nvgFlip = 0; // 0=up, 1=down
     let aimYaw = 0;
@@ -8851,9 +8890,13 @@
           laser.material.opacity = 0.55;
           laser.material.blending = THREE.NormalBlending;
         }
-        // Beam length: muzzle → aimTarget; cylinder rotated X PI/2 so scale.y is along +Z beam
-        let full = gun.userData.laserLen;
-        if (st && st.range > 0) full = st.range;
+        // Beam length: muzzle → aimTarget; cylinder rotated X PI/2 so scale.y is along +Z beam.
+        // `nativeLen` is the cylinder's actual built height — scale.y must be relative to
+        // that, not to the weapon's range, or the mesh shrinks to a tiny fraction of itself
+        // and only a short dash near the middle of the intended beam ever renders.
+        const nativeLen = gun.userData.laserLen;
+        let maxLen = nativeLen;
+        if (st && st.range > 0) maxLen = st.range;
         gun.updateMatrixWorld(true);
         _laserOrigin.copy(gun.userData.muzzleLocal);
         gun.localToWorld(_laserOrigin);
@@ -8861,18 +8904,18 @@
         const distSq = _laserDir.lengthSq();
         let len;
         if (distSq < 1e-8) {
-          len = Math.min(full, aimRangeToTerrain(full, _laserOrigin, getAimDir()));
+          len = Math.min(maxLen, aimRangeToTerrain(maxLen, _laserOrigin, getAimDir()));
         } else {
           const dist = Math.sqrt(distSq);
           _laserDir.multiplyScalar(1 / dist);
-          len = Math.min(full, dist, aimRangeToTerrain(Math.min(full, dist), _laserOrigin, _laserDir));
+          len = Math.min(maxLen, dist, aimRangeToTerrain(Math.min(maxLen, dist), _laserOrigin, _laserDir));
         }
         len = Math.max(0.05, len);
         // Smooth length to kill jitter from aim/terrain fights
         const prev = gun.userData._laserSmoothLen != null ? gun.userData._laserSmoothLen : len;
         len = prev + (len - prev) * 0.35;
         gun.userData._laserSmoothLen = len;
-        laser.scale.y = len / full;
+        laser.scale.y = len / nativeLen;
         laser.position.z = gun.userData.laserBaseZ + len * 0.5;
         if (nightBeam) {
           laserMuzzleLight.intensity = 0.35;
@@ -9188,7 +9231,11 @@
       // Blast feedback: fireball motes, a ring of kicked-up ground, and a shake that
       // falls off with distance from the player.
       spawnEmbers(x, y + 0.2, z, 16, 1.4);
-      if (waterDepthAt(x, z) > 0.1) spawnSplash(x, y + 0.2, z, 16, 1.6);
+      const explosionWet = waterDepthAt(x, z);
+      if (explosionWet > 0.1) {
+        spawnSplash(x, y + 0.2, z, 24, 2.2); // Powerful underwater blast splash!
+        spawnRipple(x, sampleHeight(x, z) + explosionWet, z, 2.4, 1.8); // Huge explosion ripple ring!
+      }
       else spawnDust(x, y, z, 12);
       const shakeDist = Math.hypot(x - player.position.x, z - player.position.z);
       addShake(Math.max(0, 0.95 - shakeDist * 0.07));
@@ -9254,6 +9301,7 @@
             if (wet > 0.08 && !g.splashed) {
               g.splashed = true;
               spawnSplash(g.pos.x, gh + wet, g.pos.z, 7, 0.9);
+              spawnRipple(g.pos.x, gh + wet, g.pos.z, 0.9, 1.3);
               // Water kills the bounce.
               g.vx *= 0.25; g.vz *= 0.25; g.vy = 0;
             }
@@ -9632,6 +9680,13 @@
           scene.remove(p.mesh);
           projectiles.splice(i, 1);
           continue;
+        }
+
+        // Water Impact. Bullets splash and ripple when breaking surface.
+        const wl = waterLevelAt(p.pos.x, p.pos.z);
+        if (wl !== null && p.pos.y <= wl && p.prev.y > wl) {
+          spawnSplash(p.pos.x, wl + 0.02, p.pos.z, 3, 0.45);
+          spawnRipple(p.pos.x, wl, p.pos.z, 0.4, 0.8);
         }
 
         // Terrain. Bullets used to fly straight through hills.
@@ -10208,11 +10263,15 @@
           sx /= sl; sz /= sl;
         }
 
-        // Climbing costs pace, wading costs more.
+        // Climbing costs pace, wading/swimming costs speed.
         if (climbAhead > 0) spd *= Math.max(0.4, 1 - climbAhead * 0.55);
         const zDepth = waterDepthAt(zx, zz);
-        if (zDepth > 0.1) {
-          spd *= 1 - Math.min(0.65, zDepth * 0.45);
+        const zSwimming = (zDepth > 1.3);
+        
+        if (zSwimming) {
+          spd = z.baseSpeed * 0.72; // Swimming zombies swim fast!
+        } else if (zDepth > 0.1) {
+          spd *= 1 - Math.min(0.65, zDepth * 0.45); // wading slowed down
           if (Math.random() < dt * 2.2) spawnSplash(zx, hHere + zDepth, zz, 2, 0.45);
         }
 
@@ -10385,13 +10444,33 @@
         }
         z.mesh.position.x = mx;
         z.mesh.position.z = mz;
-        z.mesh.position.y = entityGroundY(mx, mz);
-        // Face the way they are actually travelling, including any detour around a bluff.
-        z.mesh.rotation.y = Math.atan2(sx, sz);
+        if (zDepth > 1.3) {
+          // Floating smoothly on the surface of deep water!
+          const floatY = sampleHeight(mx, mz) + zDepth - 1.15 * z.scale;
+          z.mesh.position.y += (floatY - z.mesh.position.y) * Math.min(1, dt * 5);
+        } else {
+          z.mesh.position.y = entityGroundY(mx, mz);
+        }
 
-        // Walk cycle — skip missing limbs
+        // Walk cycle — skip missing limbs. Computed here (not just below, where the
+        // animation code uses it) because the ripple check right after also needs it.
         const parts = z.partsLost || emptyPartsLost();
         const moving = !graceFreeze && Math.hypot(z.staggerVX, z.staggerVZ) < 1.5;
+
+        // Spawn swimming ripples for active zombies
+        if (zDepth > 0.05 && moving) {
+          z.swimRippleT = (z.swimRippleT || 0) - dt;
+          if (z.swimRippleT <= 0) {
+            z.swimRippleT = 0.35 + Math.random() * 0.15;
+            const rY = sampleHeight(mx, mz) + zDepth;
+            spawnRipple(mx, rY, mz, zSwimming ? 1.0 * z.scale : 0.55 * z.scale, 1.0);
+            if (zSwimming && Math.random() < 0.4) {
+              spawnSplash(mx, rY, mz, 1, 0.35);
+            }
+          }
+        }
+        // Face the way they are actually travelling, including any detour around a bluff.
+        z.mesh.rotation.y = Math.atan2(sx, sz);
         let cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'colossus' ? 3.8 : (z.typeKey === 'military' ? 7.5 : 7)));
         if (z.crawling) cadence *= 0.55;
         if (moving) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
@@ -10894,12 +10973,34 @@
           ? 1 - Math.min(0.62, grade * 0.55)
           : 1 + Math.min(0.16, -grade * 0.18);
 
-        // Wading costs pace, and deep water costs a lot.
+        // Wading costs pace, and deep water costs swimming. Gated on actual height too —
+        // depth is a column property of (x,z) alone, so without this a jump or fall that
+        // merely passes over deep water would count as swimming while still in the air.
         const depth = waterDepthAt(px0, pz0);
-        waterWade += (Math.min(1, depth / 1.5) - waterWade) * Math.min(1, dt * 6);
-        const waterMul = 1 - waterWade * PHYS.waterDrag;
+        const waterLevel = waterLevelAt(px0, pz0);
+        const swimming = depth > 1.3 && player.position.y < waterLevel + 0.6;
 
-        const targetSpeed = (running ? PHYS.run : PHYS.walk) * slopeMul * waterMul;
+        let targetSpeed = 0;
+        if (swimming) {
+          targetSpeed = running ? 6.8 : 4.5; // swimming speeds
+        } else {
+          waterWade += (Math.min(1, depth / 1.5) - waterWade) * Math.min(1, dt * 6);
+          const waterMul = 1 - waterWade * PHYS.waterDrag;
+          targetSpeed = (running ? PHYS.run : PHYS.walk) * slopeMul * waterMul;
+        }
+
+        // Spawn swimming water ripples
+        if (depth > 0.05) {
+          playerSwimRippleT = (playerSwimRippleT || 0) - dt;
+          if (playerSwimRippleT <= 0) {
+            playerSwimRippleT = running ? 0.22 : 0.35;
+            const rY = waterLevel || player.position.y;
+            spawnRipple(px0, rY, pz0, swimming ? 1.3 : 0.7, swimming ? 1.3 : 0.9);
+            if (swimming) {
+              spawnSplash(px0, rY, pz0, 2, 0.4);
+            }
+          }
+        }
         const tX = moving ? wishX * targetSpeed : 0;
         const tZ = moving ? wishZ * targetSpeed : 0;
         const rate = grounded ? (moving ? PHYS.accelGround : PHYS.accelStop) : PHYS.accelAir;
@@ -11011,6 +11112,7 @@
       updateDroppedMags(dt);
       if (gameStarted) resolveTreeCollisions(dt);
       updateMotes(dt);
+      updateRipples(dt);
       updateAmbientLife(dt);
       updateBanner(dt);
       updateCampfires(dt);
@@ -11033,7 +11135,7 @@
       updateFallingTrees(dt);
       updateFallingLeaves(dt);
 
-      // Order: move → collisions → clamp XZ → ground stick
+      // Order: move ? collisions ? clamp XZ ? ground stick
       {
         const c = clampToLand(player.position.x, player.position.z, 1.5);
         player.position.x = c.x;
@@ -11041,9 +11143,29 @@
       }
       {
         const groundY = playerGroundY(player.position.x, player.position.z);
+        const depth = waterDepthAt(player.position.x, player.position.z);
+        const waterLevel = waterLevelAt(player.position.x, player.position.z);
+        const swimming = depth > 1.3 && player.position.y < waterLevel + 0.6;
+
         if (!gameStarted) {
           player.position.y = groundY;
           velX = 0; velZ = 0; vy = 0;
+        } else if (swimming) {
+          // Buoyancy: a damped spring pulling toward the float line, not gravity-then-
+          // snap. Symmetric above and below so a dive settles instead of bouncing.
+          const floatY = waterLevel - 1.25;
+          const diff = floatY - player.position.y;
+          vy += (diff * 18 - vy * 7.5) * dt;
+          player.position.y += vy * dt;
+
+          // Clamp to lakebed so they dont plunge below terrain
+          if (player.position.y <= groundY) {
+            player.position.y = groundY;
+            vy = 0;
+            grounded = true;
+          } else {
+            grounded = false;
+          }
         } else if (grounded && vy <= 0) {
           // stick to surface while walking (no clip / no sink)
           player.position.y = groundY;
@@ -11071,13 +11193,13 @@
           }
         }
         // Coyote / buffer timers ride on the resolved grounded state.
-        if (grounded) coyoteT = PHYS.coyote;
+        if (grounded || swimming) coyoteT = PHYS.coyote;
         else coyoteT = Math.max(0, coyoteT - dt);
         jumpBufferT = Math.max(0, jumpBufferT - dt);
-        wasGrounded = grounded;
+        wasGrounded = grounded || swimming;
       }
 
-      updateCashDrops(dt);
+            updateCashDrops(dt);
 
       if (hurtFlash > 0) {
         hurtFlash -= dt;
