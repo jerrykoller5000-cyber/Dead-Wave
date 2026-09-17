@@ -437,6 +437,7 @@
       const badge = document.getElementById('modeBadge');
       if (badge) {
         if (urlParams.has('music')) { badge.textContent = 'MUSIC'; badge.style.display = ''; }
+        else if (urlParams.has('bugs')) { badge.textContent = 'BUGS'; badge.style.display = ''; }
         else if (urlParams.has('night')) { badge.textContent = 'NIGHT'; badge.style.display = ''; }
         else if (urlParams.has('horde')) { badge.textContent = 'HORDE'; badge.style.display = ''; }
         else if (urlParams.has('gore')) { badge.textContent = 'GORE'; badge.style.display = ''; }
@@ -492,7 +493,7 @@
       function setMuted(m) {
         muted = !!m;
         applyMuteGains();
-        if (muted) { stopMusic(); chainsawStop(); }
+        if (muted) { stopMusic(); chainsawStop(); rainStop(); }
         else if (unlocked) startMusic();
       }
 
@@ -1009,6 +1010,48 @@
         playTone({ freq: 520, type: 'triangle', dur: 0.1, vol: 0.09, when: 0.07 });
       }
 
+      // Rain ambience: a filtered noise loop whose volume/brightness tracks the
+      // weather system's 0..1 intensity, the same shape as the chainsaw loop above.
+      let rainLoop = null;
+      function rainStart() {
+        const c = ensure();
+        if (!c || rainLoop) return;
+        const t0 = c.currentTime;
+        const buf = noiseBuffer(2.5);
+        const noise = c.createBufferSource();
+        if (buf) { noise.buffer = buf; noise.loop = true; }
+        const filt = c.createBiquadFilter();
+        filt.type = 'bandpass';
+        filt.frequency.setValueAtTime(3000, t0);
+        filt.Q.value = 0.5;
+        const gain = c.createGain();
+        gain.gain.setValueAtTime(0.0001, t0);
+        if (buf) noise.connect(filt);
+        filt.connect(gain);
+        gain.connect(sfxGain);
+        if (buf) noise.start(t0);
+        rainLoop = { noise, filt, gain };
+      }
+      function rainSetIntensity(amount) {
+        amount = Math.max(0, Math.min(1, +amount || 0));
+        if (!rainLoop || !ctx) return;
+        const t = ctx.currentTime;
+        const vol = muted ? 0.0001 : 0.018 + amount * 0.08;
+        try {
+          rainLoop.gain.gain.setTargetAtTime(vol, t, 0.45);
+          rainLoop.filt.frequency.setTargetAtTime(2400 + amount * 1600, t, 0.6);
+        } catch (_) {}
+      }
+      function rainStop() {
+        if (!rainLoop || !ctx) return;
+        const t = ctx.currentTime;
+        try { rainLoop.gain.gain.setTargetAtTime(0.0001, t, 0.5); } catch (_) {}
+        const nodes = rainLoop;
+        rainLoop = null;
+        setTimeout(() => { try { nodes.noise.stop(); } catch (_) {} }, 900);
+      }
+      function isRainRunning() { return !!rainLoop; }
+
       return {
         unlock, toggleMute, isMuted, setMuted,
         fire, fireWeapon, emptyClick, reloadStart, reloadDone, slideRack,
@@ -1019,7 +1062,8 @@
         waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, rockBreak, brassTink, magThud,
         chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning,
         spit, acidHit, scream, bossSlam, bossRoar, spikeSnap, flameBurst,
-        crateLand, pickup, repairClank, sellChime
+        crateLand, pickup, repairClank, sellChime,
+        rainStart, rainStop, rainSetIntensity, isRainRunning
       };
     })();
 
@@ -1333,7 +1377,7 @@
       }
 
       timeLineEl.textContent = (isNight ? 'Night' : 'Day') + ' · ' + formatGameClock() +
-        (zombieGraceActive() ? ' · Grace' : '');
+        (zombieGraceActive() ? ' · Grace' : '') + (weather.raining ? ' · Rain' : '');
       updateNvgVisual();
       updateTacticalHud();
     }
@@ -1714,14 +1758,21 @@
     // and two river bridges. Locations are solved here (before the ground bakes) so the
     // dirt paths connecting them can be painted into the terrain colours. The meshes
     // themselves are built later, once the prop helpers exist.
-    const worldSolids = [];   // { x, z, radius, y0, y1 } — blocks movement, builds, bullets
+    const worldSolids = [];   // { x, z, radius, y0, y1, landmark } — blocks movement, builds, bullets
+    const landmarks = [];     // destructible buildings (cabins, the watchtower, campsites, the graveyard) — shared hp/collapse handling
     const platforms = [];     // { x, z, hw, hl, yaw, deckY } — walkable decks
     const campfires = [];     // { x, z, y, light } — flicker at night
     const POI = { campsites: [], cabins: [], tower: null, graveyard: null, dock: null, bridges: [] };
     const PATHS = [];         // polylines of {x,z} painted as worn dirt
 
-    function addSolid(x, z, radius, y0, y1) {
-      worldSolids.push({ x, z, radius, y0, y1 });
+    // `landmark` tags this collider as belonging to a destructible building (see
+    // damageLandmark below) so a bullet or the tower siege can find its way back to an
+    // hp pool. Plain scenery (tents, gravestones, bridge posts) passes nothing and stays
+    // exactly as indestructible as it always was.
+    function addSolid(x, z, radius, y0, y1, landmark = null) {
+      const s = { x, z, radius, y0, y1, landmark };
+      worldSolids.push(s);
+      return s;
     }
 
     // Deck height at a point, or null when not on any platform.
@@ -2275,6 +2326,10 @@
       // Seat at centre ground; each tent then levels onto its own patch, so the small
       // clutter around the fire doesn't sink on sloped sites.
       const gy = sampleHeight(cx, cz) - 0.04;
+      const lm = {
+        kind: 'campsite', x: cx, z: cz, gy, hp: CAMPSITE_MAX_HP, maxHp: CAMPSITE_MAX_HP, alive: true,
+        mesh: null, colliders: [], debrisColor: 0x8c7a4f, rubbleRadius: 3.0
+      };
       const parts = [];
       const canvas = new THREE.MeshStandardMaterial({ color: 0x8c7a4f });
       const canvasDark = new THREE.MeshStandardMaterial({ color: 0x6e5f3c });
@@ -2304,7 +2359,7 @@
         const rzX = Math.sin(face), rzZ = Math.cos(face);
         poiBox(parts, canvasDark, 1.5, 1.0, 0.07, tx - rzX * 1.18, dy + 0.5, tz - rzZ * 1.18, face);
         poiBox(parts, wood, 0.08, 0.08, 2.7, tx, dy + 0.28 + (pw / 2) * Math.sin(roll) + 0.32, tz, face);
-        addSolid(cx + tx, cz + tz, 1.1, gy, gy + 1.6);
+        lm.colliders.push(addSolid(cx + tx, cz + tz, 1.1, gy, gy + 1.6, lm));
       }
 
       // Fire ring, charred logs, seating.
@@ -2326,21 +2381,29 @@
       const crateDy = sampleHeight(cx + 2.4, cz - 1.6) - gy - 0.03;
       const crateA = poiBox(parts, woodDark, 0.7, 0.7, 0.7, 2.4, crateDy + 0.35, -1.6, rnd());
       poiBox(parts, wood, 0.55, 0.55, 0.55, 2.35, crateDy + 0.98, -1.5, rnd());
-      addSolid(cx + crateA.position.x, cz + crateA.position.z, 0.6, gy, gy + 1.4);
-      addSolid(cx, cz, 0.62, gy, gy + 0.45); // fire ring
+      lm.colliders.push(addSolid(cx + crateA.position.x, cz + crateA.position.z, 0.6, gy, gy + 1.4, lm));
+      lm.colliders.push(addSolid(cx, cz, 0.62, gy, gy + 0.45, lm)); // fire ring
 
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       mesh.position.set(cx, gy, cz);
       scene.add(mesh);
+      lm.mesh = mesh;
 
       // Embers + firelight.
       const ember = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.34, 6), emberGlowMat);
       ember.position.set(cx, gy + 0.2, cz);
       scene.add(ember);
+      lm.emberMesh = ember;
       const light = new THREE.PointLight(0xff8c3a, 0, 11, 2);
       light.position.set(cx, gy + 1.0, cz);
       scene.add(light);
-      campfires.push({ x: cx, z: cz, y: gy, light, phase: rnd() * 9 });
+      lm.light = light;
+      const cf = { x: cx, z: cz, y: gy, light, phase: rnd() * 9 };
+      campfires.push(cf);
+      lm.campfire = cf;
+
+      landmarks.push(lm);
+      return lm;
     }
 
     function buildCabin(cx, cz, seed) {
@@ -2372,13 +2435,21 @@
       g.rotation.y = yaw;
       scene.add(g);
 
+      const lm = {
+        kind: 'cabin', x: cx, z: cz, gy, hp: CABIN_MAX_HP, maxHp: CABIN_MAX_HP, alive: true,
+        mesh: g, colliders: [], debrisColor: 0x6b5539, rubbleRadius: 2.1
+      };
+
       // Colliders, rotated into world space.
       const cy = Math.cos(yaw), sy = Math.sin(yaw);
-      const w = (lx, lz, r, h) => addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy, gy + h);
+      const w = (lx, lz, r, h) => lm.colliders.push(addSolid(cx + lx * cy + lz * sy, cz - lx * sy + lz * cy, r, gy, gy + h, lm));
       w(-1.6, -1.9, 0.8, 2.2); w(0, -1.9, 0.8, 2.2); w(1.6, -1.9, 0.8, 2.2);   // back wall
       w(-2.4, -1.1, 0.75, 2.2); w(-2.4, 0.9, 0.75, 2.2);                        // left wall
       w(2.4, -1.2, 0.6, 1.6);                                                    // right stub
       w(1.7, -1.5, 0.6, 3.0);                                                    // chimney
+
+      landmarks.push(lm);
+      return lm;
     }
 
     function buildWatchtower(cx, cz) {
@@ -2403,20 +2474,65 @@
       roof.rotation.y = Math.PI / 4;
       parts.push(roof);
 
+      // A ladder up the south face, planted just clear of the tower's own collision
+      // cylinder so climbing it never has to fight the collision that keeps you off
+      // the base. A short landing bridges the gap to the deck edge up top.
+      for (const lx of [-0.35, 0.35]) {
+        poiBox(parts, woodDark, 0.08, 5.5, 0.08, lx, 2.85, -TOWER_LADDER_OUT);
+      }
+      for (let i = 0; i < 15; i++) {
+        poiBox(parts, wood, 0.78, 0.07, 0.07, 0, 0.35 + i * 0.36, -TOWER_LADDER_OUT);
+      }
+      poiBox(parts, woodDark, 0.9, 0.12, TOWER_LADDER_OUT - 1.4, 0, 5.56, -(TOWER_LADDER_OUT + 1.4) / 2);
+
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       mesh.position.set(cx, gy, cz);
       scene.add(mesh);
-      addSolid(cx, cz, 1.75, gy, gy + 5.4);
+
+      const towerObj = {
+        kind: 'tower', x: cx, z: cz, gy, hp: TOWER_MAX_HP, maxHp: TOWER_MAX_HP, alive: true,
+        mesh, colliders: [], debrisColor: 0x6b4a2a, rubbleRadius: 2.4,
+        deckY: gy + 5.62, ladderX: cx, ladderZ: cz - TOWER_LADDER_OUT, idleT: 0
+      };
+      towerObj.colliders.push(addSolid(cx, cz, 1.75, gy, gy + 5.4, towerObj));
+
       // Lantern up top — reads from right across the valley at night.
       const light = new THREE.PointLight(0xffb066, 0, 16, 2);
       light.position.set(cx, gy + 6.1, cz);
       scene.add(light);
       campfires.push({ x: cx, z: cz, y: gy + 5.6, light, phase: 2.1, lantern: true });
+      towerObj.light = light;
+
+      // A small floating condition bar, shown only once it's actually taken a hit —
+      // built from its own assets rather than the barricade HUD's, which aren't
+      // defined yet at the point the world generates.
+      const barGroup = new THREE.Group();
+      barGroup.add(new THREE.Mesh(
+        new THREE.PlaneGeometry(1.0, 0.1),
+        new THREE.MeshBasicMaterial({ color: 0x151a20, transparent: true, opacity: 0.8, depthWrite: false })
+      ));
+      const barFgMat = new THREE.MeshBasicMaterial({ color: 0x51d86a, depthWrite: false, transparent: true, opacity: 0.95 });
+      const barFg = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.08), barFgMat);
+      barFg.position.z = 0.004;
+      barGroup.add(barFg);
+      barGroup.visible = false;
+      barGroup.renderOrder = 5;
+      scene.add(barGroup);
+      towerObj.bar = barGroup;
+      towerObj.barFg = barFg;
+      towerObj.barFgMat = barFgMat;
+
+      tower = towerObj;
+      landmarks.push(towerObj);
     }
 
     function buildGraveyard(cx, cz, seed) {
       const rnd = mulberry32(seed);
       const gy = sampleHeight(cx, cz) - 0.04;
+      const lm = {
+        kind: 'graveyard', x: cx, z: cz, gy, hp: GRAVEYARD_MAX_HP, maxHp: GRAVEYARD_MAX_HP, alive: true,
+        mesh: null, colliders: [], debrisColor: 0x8a8a84, rubbleRadius: 3.0
+      };
       const parts = [];
       const stone = new THREE.MeshStandardMaterial({ color: 0x8a8a84 });
       const stoneOld = new THREE.MeshStandardMaterial({ color: 0x6e6e66 });
@@ -2430,7 +2546,7 @@
         const h = 0.55 + rnd() * 0.5;
         const tilt = (rnd() - 0.5) * 0.5;
         poiBox(parts, rnd() < 0.5 ? stone : stoneOld, 0.5, h, 0.14, gx, dy + h * 0.5, gz, rnd() * 0.4, tilt);
-        if (h > 0.8 && big < 4) { big++; addSolid(cx + gx, cz + gz, 0.32, gy, gy + h + 0.2); }
+        if (h > 0.8 && big < 4) { big++; lm.colliders.push(addSolid(cx + gx, cz + gz, 0.32, gy, gy + h + 0.2, lm)); }
       }
       // Bare dead tree watching over the plots.
       const treeDy = sampleHeight(cx - 3.4, cz - 2.8) - gy - 0.08;
@@ -2442,11 +2558,15 @@
         const a = rnd() * Math.PI * 2;
         poiBox(parts, deadwood, 0.1, 1.3, 0.1, -3.4 + Math.cos(a) * 0.6, treeDy + 3.1 + rnd() * 0.5, -2.8 + Math.sin(a) * 0.6, 0, Math.cos(a) * 1.0, Math.sin(a) * 0.8);
       }
-      addSolid(cx - 3.4, cz - 2.8, 0.4, gy, gy + 3.4);
+      lm.colliders.push(addSolid(cx - 3.4, cz - 2.8, 0.4, gy, gy + 3.4, lm));
 
       const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
       mesh.position.set(cx, gy, cz);
       scene.add(mesh);
+      lm.mesh = mesh;
+
+      landmarks.push(lm);
+      return lm;
     }
 
     function buildDock(d) {
@@ -2539,6 +2659,196 @@
       if (POI.graveyard) buildGraveyard(POI.graveyard.x, POI.graveyard.z, seed += 101);
       if (POI.dock) buildDock(POI.dock);
       for (const b of POI.bridges) buildBridge(b);
+    }
+
+    // === Destructible landmarks (cabins, the watchtower, campsites, the graveyard) ===
+    // Player fire chips away at a structure's shared hp pool; once it runs out the
+    // whole thing hides and a rubble pile takes its place. Plain scenery (bridge posts,
+    // the dock) is untouched — addSolid() only tags a collider with a landmark when the
+    // structure that owns it opts in.
+    const CABIN_MAX_HP = 150;
+    const TOWER_MAX_HP = 260;
+    const CAMPSITE_MAX_HP = 90;
+    const GRAVEYARD_MAX_HP = 110;
+    const TOWER_LADDER_OUT = 2.25;  // ladder stands this far out from centre — clear of the base collider (radius 1.75 + player radius 0.42)
+    const TOWER_LADDER_R = 0.95;    // how close you need to walk to grab it
+    const TOWER_DECK_HALF = 1.4;    // deck footprint half-width once you're up top
+    const TOWER_CLIMB_SPEED = 3.6;
+    const TOWER_SIEGE_RADIUS = 3.0; // zombies this close to the base count as attacking it
+    const TOWER_DPS_PER_ZOMBIE = 5.5;
+    const TOWER_REGEN_RATE = 5;     // hp/sec once nothing is pounding on it
+    const TOWER_REGEN_DELAY = 3;    // seconds of peace before it starts healing
+
+    let tower = null;          // set by buildWatchtower(), if the map rolled one
+    let climbingTower = false; // true while riding the ladder
+    let onTowerDeck = false;   // true while standing on top
+
+    const rubbleWood = new THREE.MeshStandardMaterial({ color: 0x4a331e });
+    const rubbleWoodLight = new THREE.MeshStandardMaterial({ color: 0x6b4a2a });
+
+    function damageLandmark(lm, amount) {
+      if (!lm || !lm.alive) return;
+      lm.hp -= amount;
+      if (lm.hp <= 0) destroyLandmark(lm);
+    }
+
+    function destroyLandmark(lm) {
+      if (!lm || !lm.alive) return;
+      lm.alive = false;
+      lm.hp = 0;
+      if (lm.mesh) lm.mesh.visible = false;
+      if (lm.light) lm.light.intensity = 0;
+      if (lm.bar) lm.bar.visible = false;
+      if (lm.emberMesh) lm.emberMesh.visible = false;
+      if (lm.campfire) lm.campfire.dead = true; // stop updateCampfires from re-lighting a doused camp
+      for (const s of lm.colliders) {
+        const i = worldSolids.indexOf(s);
+        if (i >= 0) worldSolids.splice(i, 1);
+      }
+      lm.colliders.length = 0;
+      spawnChunks(lm.x, lm.gy + 2.0, lm.z, lm.debrisColor || 0x6b5a3e, 18, 5);
+      spawnChunks(lm.x, lm.gy + 0.5, lm.z, lm.debrisColor || 0x6b5a3e, 12, 3);
+      spawnDust(lm.x, lm.gy, lm.z, 12);
+      const shakeDist = Math.hypot(lm.x - player.position.x, lm.z - player.position.z);
+      addShake(Math.max(0.2, 0.6 - shakeDist * 0.02));
+      AudioSys.rockBreak();
+      buildLandmarkRubble(lm);
+    }
+
+    // A low, jumbled pile of debris left where the building stood — still enough of an
+    // obstacle to matter, but nothing you could climb or hide behind any more.
+    function buildLandmarkRubble(lm) {
+      const parts = [];
+      const n = 12 + Math.floor(Math.random() * 8);
+      const rad = lm.rubbleRadius || 1.8;
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = Math.random() * rad;
+        const w = 0.3 + Math.random() * 0.55;
+        poiBox(parts, Math.random() < 0.5 ? rubbleWood : rubbleWoodLight,
+          w, 0.16 + Math.random() * 0.2, w * (0.6 + Math.random() * 0.9),
+          Math.cos(a) * r, 0.08 + Math.random() * 0.14, Math.sin(a) * r,
+          Math.random() * Math.PI, (Math.random() - 0.5) * 0.4, (Math.random() - 0.5) * 0.4);
+      }
+      const mesh = mergeParts(parts, poiMat, { castShadow: true, receiveShadow: true });
+      mesh.position.set(lm.x, lm.gy, lm.z);
+      scene.add(mesh);
+      lm.rubbleMesh = mesh;
+      lm.colliders.push(addSolid(lm.x, lm.z, rad * 0.55, lm.gy, lm.gy + 0.7, null));
+    }
+
+    // Floating hp readout above the tower, shown only once it's been hit. Billboards to
+    // the camera every frame so it always reads flat-on regardless of where you're
+    // shooting from.
+    function updateTowerBar() {
+      if (!tower || !tower.bar) return;
+      const hurt = tower.alive && tower.hp < tower.maxHp - 0.5;
+      tower.bar.visible = hurt;
+      if (!hurt) return;
+      const frac = Math.max(0, tower.hp / tower.maxHp);
+      tower.bar.position.set(tower.x, tower.deckY + 1.6, tower.z);
+      tower.bar.quaternion.copy(camera.quaternion);
+      tower.barFg.scale.x = Math.max(0.02, frac);
+      tower.barFg.position.x = -(1 - frac) * 0.47;
+      tower.barFgMat.color.setHex(frac > 0.35 ? 0x51d86a : 0xe0563e);
+    }
+
+    // Climbing the watchtower: walk up to the ladder and hold forward to grab it, hold
+    // forward/back to go up/down, and stepping onto the deck at the top hands control
+    // back to normal ground movement (with the deck standing in for the ground). There
+    // is no separate "climb down" ritual required to get off — the deck has no fall
+    // damage under it, so hopping off any edge works just as well as backing down the
+    // ladder.
+    function updateTowerClimb(dt) {
+      if (!tower || !tower.alive) {
+        if (climbingTower || onTowerDeck) {
+          climbingTower = false;
+          onTowerDeck = false;
+          grounded = false;
+        }
+        return;
+      }
+
+      if (climbingTower) {
+        const climbDir = (keys.ArrowUp || keys.KeyW ? 1 : 0) - (keys.ArrowDown || keys.KeyS ? 1 : 0);
+        player.position.x = tower.ladderX;
+        player.position.z = tower.ladderZ;
+        player.position.y += climbDir * TOWER_CLIMB_SPEED * dt;
+        velX = 0; velZ = 0; vy = 0;
+        if (player.position.y <= tower.gy) {
+          player.position.y = tower.gy;
+          climbingTower = false;
+          grounded = true;
+        } else if (player.position.y >= tower.deckY) {
+          player.position.set(tower.x, tower.deckY, tower.z - (TOWER_DECK_HALF - 0.25));
+          climbingTower = false;
+          onTowerDeck = true;
+          grounded = true;
+        }
+        return;
+      }
+
+      if (!onTowerDeck) {
+        const dLadder = Math.hypot(player.position.x - tower.ladderX, player.position.z - tower.ladderZ);
+        const wantsUp = keys.ArrowUp || keys.KeyW;
+        if (dLadder < TOWER_LADDER_R && grounded && wantsUp && Math.abs(player.position.y - tower.gy) < 0.6) {
+          climbingTower = true;
+          player.position.x = tower.ladderX;
+          player.position.z = tower.ladderZ;
+          player.position.y = tower.gy + 0.05;
+          velX = 0; velZ = 0; vy = 0;
+        }
+      }
+    }
+
+    // Zombies that pile up at the tower's base while someone is using it are treated as
+    // laying siege to it — enough of them at once will bring it down. Leave it alone and
+    // it slowly repairs itself instead of decaying forever on its own.
+    function updateTowerSiege(dt) {
+      if (!tower || !tower.alive) return;
+      const occupied = onTowerDeck || climbingTower;
+      if (!occupied) {
+        tower.idleT += dt;
+        if (tower.idleT > TOWER_REGEN_DELAY && tower.hp < tower.maxHp) {
+          tower.hp = Math.min(tower.maxHp, tower.hp + TOWER_REGEN_RATE * dt);
+        }
+        return;
+      }
+      tower.idleT = 0;
+      let attackers = 0;
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        const d = Math.hypot(z.mesh.position.x - tower.x, z.mesh.position.z - tower.z);
+        if (d < TOWER_SIEGE_RADIUS + z.radius) attackers++;
+      }
+      if (attackers <= 0) return;
+      tower.hp -= attackers * TOWER_DPS_PER_ZOMBIE * dt;
+      if (Math.random() < dt * Math.min(3, attackers)) {
+        spawnDust(tower.x + (Math.random() - 0.5) * 2.6, tower.gy + 0.4, tower.z + (Math.random() - 0.5) * 2.6, 3);
+      }
+      if (tower.hp <= 0) collapseTower();
+    }
+
+    // The tower comes down: whoever was up there rides it down and eats a heavy hit
+    // for not climbing off in time.
+    function collapseTower() {
+      if (!tower || !tower.alive) return;
+      const playerWasUp = onTowerDeck || climbingTower;
+      destroyLandmark(tower);
+      AudioSys.bossSlam();
+      onTowerDeck = false;
+      climbingTower = false;
+      if (playerWasUp) {
+        grounded = false;
+        vy = 2.2;
+        const away = Math.hypot(player.position.x - tower.x, player.position.z - tower.z) || 1;
+        velX += ((player.position.x - tower.x) / away) * 4.5;
+        velZ += ((player.position.z - tower.z) / away) * 4.5;
+        damagePlayer(PLAYER_MAX_HP * 0.7);
+        showBanner('THE TOWER COLLAPSED!', 'You should have climbed down sooner…', 3, '#ff6a4a');
+      } else {
+        showBanner('The watchtower has collapsed', '', 2.6, '#f4b46a');
+      }
     }
 
     // === Big announcements + minimap ===
@@ -2735,6 +3045,7 @@
       const dark = isNight || skyUniforms.uNight.value > 0.35;
       emberCd -= dt;
       for (const f of campfires) {
+        if (f.dead) { f.light.intensity = 0; continue; }
         f.phase += dt * (f.lantern ? 3 : 9);
         const flick = Math.sin(f.phase) * 0.5 + Math.sin(f.phase * 2.7) * 0.3;
         f.light.intensity = dark ? (f.lantern ? 1.5 + flick * 0.15 : 2.4 + flick * 0.8) : 0;
@@ -2785,6 +3096,221 @@
             Math.sin(z * 0.31 - t * w.freq * 1.5) * w.amp * 0.8;
         }
         attr.needsUpdate = true;
+      }
+    }
+
+    // === Weather (rain & fog) ===
+    // A rare, randomly-timed shower system: streaks fall in a volume that rides with
+    // the camera, ripples dot the lake and river where drops land, puddles bloom on
+    // flat dry ground and dry back out once the sky clears, and the fog thickens into a
+    // close, grey murk while it lasts. Everything here reads off `weather.intensity`,
+    // an eased 0..1 value, so fading in and out is just one lerp per system.
+    const RAIN_FOG_COLOR = new THREE.Color(0x8b96a3);
+    const _rainFogTmp = new THREE.Color();
+    const _rainObj = new THREE.Object3D();
+
+    const weather = {
+      raining: false,
+      intensity: 0,      // eased 0..1 — drives fog, light, rain opacity and rain audio
+      rainTimeLeft: 0,
+      // First shower can arrive a little sooner than the usual gap between storms.
+      timer: 70 + Math.random() * 90
+    };
+
+    function scheduleNextRain() {
+      // Long, randomised dry spell so storms read as an occasional event, not a metronome.
+      weather.timer = 100 + Math.random() * 170; // ~1.5–4.5 minutes between showers
+    }
+
+    // --- Falling rain streaks ----------------------------------------------------
+    const RAIN_MAX = 520;
+    const RAIN_RADIUS = 52;
+    const RAIN_HEIGHT = 42;
+    const RAIN_BASE = -12; // dips below camera height so streaks reach the ground near the player
+    const rainGeo = new THREE.CylinderGeometry(0.01, 0.022, 1, 3, 1, true);
+    const rainMat = new THREE.MeshBasicMaterial({
+      color: 0xaecdee, transparent: true, opacity: 0, depthWrite: false, fog: false
+    });
+    const rainMesh = new THREE.InstancedMesh(rainGeo, rainMat, RAIN_MAX);
+    rainMesh.frustumCulled = false;
+    rainMesh.visible = false;
+    scene.add(rainMesh);
+    const rainDrops = [];
+    for (let i = 0; i < RAIN_MAX; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = Math.sqrt(Math.random()) * RAIN_RADIUS;
+      rainDrops.push({
+        x: Math.cos(a) * r, z: Math.sin(a) * r,
+        y: RAIN_BASE + Math.random() * RAIN_HEIGHT,
+        speed: 24 + Math.random() * 12,
+        len: 0.65 + Math.random() * 0.7
+      });
+    }
+
+    function updateRain(dt) {
+      const on = weather.intensity > 0.01;
+      rainMesh.visible = on;
+      if (!on) return;
+      const cx = camera.position.x, cz = camera.position.z, cy = camera.position.y;
+      // A gentle slant with the wind rather than dead-vertical rain.
+      const tiltX = wind.dirZ * 0.16, tiltZ = -wind.dirX * 0.16;
+      // Light showers thin the streak count out instead of just fading everything —
+      // reads more like a drizzle than a see-through downpour.
+      const shown = Math.max(40, Math.round(RAIN_MAX * (0.25 + weather.intensity * 0.75)));
+      for (let i = 0; i < RAIN_MAX; i++) {
+        const d = rainDrops[i];
+        if (i < shown) {
+          d.y -= d.speed * dt;
+          if (d.y < RAIN_BASE) {
+            d.y += RAIN_HEIGHT;
+            const a = Math.random() * Math.PI * 2;
+            const r = Math.sqrt(Math.random()) * RAIN_RADIUS;
+            d.x = Math.cos(a) * r; d.z = Math.sin(a) * r;
+          }
+          _rainObj.position.set(cx + d.x, cy + d.y, cz + d.z);
+          _rainObj.rotation.set(tiltX, 0, tiltZ);
+          _rainObj.scale.set(1, d.len, 1);
+        } else {
+          // Parked far below rather than shrunk to zero — cheaper than resizing the
+          // instance buffer, and avoids a visible pop when the shower intensifies.
+          _rainObj.position.set(cx, cy - 400, cz);
+          _rainObj.rotation.set(0, 0, 0);
+          _rainObj.scale.set(1, 1, 1);
+        }
+        _rainObj.updateMatrix();
+        rainMesh.setMatrixAt(i, _rainObj.matrix);
+      }
+      rainMesh.instanceMatrix.needsUpdate = true;
+      rainMat.opacity = 0.4 * weather.intensity;
+    }
+
+    // --- Fog, light & cloud response ----------------------------------------------
+    // Runs after updateDayNight has set this frame's baseline, so rain always layers
+    // on top of the natural cycle instead of fighting it frame to frame.
+    function updateWeatherFog() {
+      const k = weather.intensity;
+      if (k < 0.001 || hurtFlash > 0) return;
+      scene.fog.near += (Math.min(scene.fog.near, 9) - scene.fog.near) * k;
+      scene.fog.far += (85 - scene.fog.far) * k;
+      _rainFogTmp.copy(scene.fog.color).lerp(RAIN_FOG_COLOR, k * 0.8);
+      scene.fog.color.copy(_rainFogTmp);
+      sun.intensity *= (1 - k * 0.35);
+      hemi.intensity *= (1 - k * 0.12);
+      cloudMat.opacity = Math.min(1, cloudMat.opacity + k * 0.5);
+      cloudMat.emissiveIntensity *= (1 - k * 0.55);
+      cloudMat.color.lerp(RAIN_FOG_COLOR, k * 0.5);
+    }
+
+    // --- Droplets landing on open water --------------------------------------------
+    let rainDropletCd = 0;
+    function updateRainDroplets(dt) {
+      if (weather.intensity < 0.05) return;
+      rainDropletCd -= dt;
+      if (rainDropletCd > 0) return;
+      rainDropletCd = Math.max(0.05, 0.3 - weather.intensity * 0.22);
+      for (let i = 0; i < 2; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = Math.random() * 44;
+        const x = player.position.x + Math.cos(a) * r;
+        const z = player.position.z + Math.sin(a) * r;
+        const wl = waterLevelAt(x, z);
+        if (wl === null) continue;
+        spawnRipple(x, wl + 0.01, z, 0.14 + Math.random() * 0.14, 0.4 + Math.random() * 0.3);
+      }
+    }
+
+    // --- Puddles gathering on flat, dry ground -------------------------------------
+    const PUDDLE_MAX = 40;
+    const puddleGeo = new THREE.CircleGeometry(1, 18);
+    puddleGeo.rotateX(-Math.PI / 2);
+    const puddles = [];
+    for (let i = 0; i < PUDDLE_MAX; i++) {
+      const mat = new THREE.MeshStandardMaterial({
+        color: 0x35617f, roughness: 0.1, metalness: 0.6,
+        transparent: true, opacity: 0, depthWrite: false
+      });
+      const mesh = new THREE.Mesh(puddleGeo, mat);
+      mesh.visible = false;
+      mesh.renderOrder = 1;
+      scene.add(mesh);
+      puddles.push({ mesh, mat, x: 0, z: 0, baseR: 1, wetness: 0, active: false });
+    }
+    let puddleSpawnCd = 0;
+
+    function updatePuddles(dt) {
+      const raining = weather.intensity > 0.04;
+      if (raining) {
+        puddleSpawnCd -= dt;
+        if (puddleSpawnCd <= 0) {
+          puddleSpawnCd = 0.35 + Math.random() * 0.3;
+          const free = puddles.find(p => !p.active);
+          if (free) {
+            for (let tries = 0; tries < 8; tries++) {
+              const a = Math.random() * Math.PI * 2;
+              const r = 6 + Math.random() * 40;
+              const x = player.position.x + Math.cos(a) * r;
+              const z = player.position.z + Math.sin(a) * r;
+              if (!inLand(x, z, 4)) continue;
+              if (terrainSlope(x, z) > 0.09) continue;
+              if (waterDepthAt(x, z) > 0.02) continue;
+              free.active = true;
+              free.x = x; free.z = z;
+              free.wetness = 0.03;
+              free.baseR = 1.1 + Math.random() * 2.1;
+              break;
+            }
+          }
+        }
+      }
+      for (const p of puddles) {
+        if (!p.active) continue;
+        p.wetness += (raining ? 0.05 + weather.intensity * 0.09 : -0.045) * dt;
+        if (p.wetness <= 0 && !raining) {
+          p.active = false;
+          p.mesh.visible = false;
+          continue;
+        }
+        p.wetness = Math.min(1, Math.max(0, p.wetness));
+        p.mesh.visible = p.wetness > 0.02;
+        if (p.mesh.visible) {
+          p.mesh.position.set(p.x, sampleHeight(p.x, p.z) + 0.02, p.z);
+          const s = p.baseR * (0.3 + 0.7 * p.wetness);
+          p.mesh.scale.set(s, 1, s);
+          p.mat.opacity = 0.5 * p.wetness;
+        }
+      }
+    }
+
+    // --- Top-level driver -----------------------------------------------------------
+    function updateWeather(dt) {
+      if (!gameStarted) { rainMesh.visible = false; return; }
+      if (!weather.raining) {
+        weather.timer -= dt;
+        if (weather.timer <= 0) {
+          weather.raining = true;
+          weather.rainTimeLeft = 22 + Math.random() * 48; // a shower lasts ~20s–70s
+        }
+      } else {
+        weather.rainTimeLeft -= dt;
+        if (weather.rainTimeLeft <= 0) {
+          weather.raining = false;
+          scheduleNextRain();
+        }
+      }
+      const target = weather.raining ? 1 : 0;
+      weather.intensity += (target - weather.intensity) * Math.min(1, dt / 4);
+      if (weather.intensity < 0.001) weather.intensity = 0;
+
+      updateRain(dt);
+      updateWeatherFog();
+      updateRainDroplets(dt);
+      updatePuddles(dt);
+
+      if (weather.intensity > 0.01) {
+        if (AudioSys.isRainRunning && !AudioSys.isRainRunning()) AudioSys.rainStart();
+        if (AudioSys.rainSetIntensity) AudioSys.rainSetIntensity(weather.intensity);
+      } else if (AudioSys.isRainRunning && AudioSys.isRainRunning()) {
+        AudioSys.rainStop();
       }
     }
 
@@ -3144,6 +3670,337 @@
         if (!plantable(x, z, 0.48)) continue;
         if (rnd() > 0.7) continue;
         makeClutter(x, z, rnd);
+      }
+      spawnBugs();
+    }
+
+    // --- Bees & butterflies (Tiny Trek critters) --------------------------------
+    // Land on flower pads (bush tops as fallback), flutter / forage, die in 1 HP.
+    const bugs = [];
+    const MAX_BUGS = 24;
+    const BUG_HIT_R = 0.24;
+    let _bugPads = [];
+
+    const beeYellowMat = new THREE.MeshStandardMaterial({ color: 0xf0c040, roughness: 0.72 });
+    const beeBlackMat = new THREE.MeshStandardMaterial({ color: 0x1a1a18, roughness: 0.85 });
+    const beeWingMat = new THREE.MeshStandardMaterial({
+      color: 0xddeeff, transparent: true, opacity: 0.35, side: THREE.DoubleSide, depthWrite: false
+    });
+    const butteBodyMat = new THREE.MeshStandardMaterial({ color: 0x2a2418, roughness: 0.8 });
+    const BUTTE_WING_COLORS = [0xff8c2a, 0x3a7cff, 0xffe066, 0xb44dff, 0xff5577, 0x44ddaa];
+
+    function listFlowerPads() {
+      const pads = [];
+      for (const f of foliage) {
+        if (f.kind !== 'flower' || !f.mesh) continue;
+        const y = sampleHeight(f.x, f.z) + 0.42 + Math.random() * 0.12;
+        pads.push({ x: f.x, y, z: f.z });
+      }
+      if (pads.length < 6) {
+        for (const f of foliage) {
+          if (f.kind !== 'bush' || !f.mesh) continue;
+          const y = sampleHeight(f.x, f.z) + 0.48 + Math.random() * 0.1;
+          pads.push({ x: f.x, y, z: f.z });
+          if (pads.length >= 18) break;
+        }
+      }
+      return pads;
+    }
+
+    function refreshBugPads() {
+      _bugPads = listFlowerPads();
+    }
+
+    function makeBeeMesh() {
+      const g = new THREE.Group();
+      const s = 0.14 + Math.random() * 0.04;
+      const b1 = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.045, 0.08), beeYellowMat);
+      const b2 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.04, 0.035), beeBlackMat);
+      b2.position.z = 0.035;
+      const b3 = new THREE.Mesh(new THREE.BoxGeometry(0.048, 0.038, 0.03), beeYellowMat);
+      b3.position.z = 0.065;
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.024, 5, 4), beeBlackMat);
+      head.position.z = -0.05;
+      const wingL = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.04), beeWingMat);
+      const wingR = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.04), beeWingMat);
+      wingL.position.set(-0.035, 0.025, 0);
+      wingR.position.set(0.035, 0.025, 0);
+      g.add(b1, b2, b3, head, wingL, wingR);
+      g.scale.setScalar(s / 0.15);
+      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
+      g.userData.wingL = wingL;
+      g.userData.wingR = wingR;
+      g.userData.kind = 'bee';
+      return g;
+    }
+
+    function makeButterflyMesh() {
+      const g = new THREE.Group();
+      const s = 0.22 + Math.random() * 0.08;
+      const col = BUTTE_WING_COLORS[(Math.random() * BUTTE_WING_COLORS.length) | 0];
+      const wingMat = new THREE.MeshStandardMaterial({
+        color: col, transparent: true, opacity: 0.85, side: THREE.DoubleSide, roughness: 0.55, depthWrite: false
+      });
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.012, 0.12, 5), butteBodyMat);
+      body.rotation.x = Math.PI / 2;
+      const wingL = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.1), wingMat);
+      const wingR = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.1), wingMat);
+      wingL.geometry.translate(-0.07, 0, 0);
+      wingR.geometry.translate(0.07, 0, 0);
+      wingL.position.set(0, 0.008, 0);
+      wingR.position.set(0, 0.008, 0);
+      g.add(body, wingL, wingR);
+      g.scale.setScalar(s / 0.25);
+      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
+      g.userData.wingL = wingL;
+      g.userData.wingR = wingR;
+      g.userData.wingMat = wingMat;
+      g.userData.kind = 'butterfly';
+      return g;
+    }
+
+    function clearBugs() {
+      for (const b of bugs) {
+        if (!b.mesh) continue;
+        scene.remove(b.mesh);
+        b.mesh.traverse(ch => {
+          if (!ch.isMesh) return;
+          if (ch.geometry) { try { ch.geometry.dispose(); } catch (_) {} }
+          if (ch.material && ch.material !== beeYellowMat && ch.material !== beeBlackMat &&
+              ch.material !== beeWingMat && ch.material !== butteBodyMat) {
+            try { ch.material.dispose(); } catch (_) {}
+          }
+        });
+      }
+      bugs.length = 0;
+    }
+
+    function pickBugPad(excludeIdx) {
+      if (!_bugPads.length) refreshBugPads();
+      if (!_bugPads.length) return null;
+      let idx = (Math.random() * _bugPads.length) | 0;
+      if (_bugPads.length > 1 && idx === excludeIdx) idx = (idx + 1) % _bugPads.length;
+      return { pad: _bugPads[idx], idx };
+    }
+
+    function spawnOneBug(kind) {
+      if (bugs.length >= MAX_BUGS) return;
+      if (!_bugPads.length) refreshBugPads();
+      const mesh = kind === 'bee' ? makeBeeMesh() : makeButterflyMesh();
+      const picked = pickBugPad(-1);
+      let x, z;
+      if (picked) {
+        x = picked.pad.x + (Math.random() - 0.5) * 4;
+        z = picked.pad.z + (Math.random() - 0.5) * 4;
+      } else {
+        const a = Math.random() * Math.PI * 2;
+        const r = 8 + Math.random() * Math.min(40, landRadius * 0.35);
+        x = Math.cos(a) * r;
+        z = Math.sin(a) * r;
+      }
+      const gh = sampleHeight(x, z);
+      const y = gh + 0.6 + Math.random() * 1.4;
+      mesh.position.set(x, y, z);
+      scene.add(mesh);
+      bugs.push({
+        kind,
+        mesh,
+        hp: 1,
+        alive: true,
+        mode: kind === 'bee' ? 'wander' : 'fly',
+        target: picked ? { x: picked.pad.x, y: picked.pad.y, z: picked.pad.z } : null,
+        vel: { x: (Math.random() - 0.5) * 2, y: 0, z: (Math.random() - 0.5) * 2 },
+        phase: Math.random() * Math.PI * 2,
+        landTimer: 0,
+        flowerIdx: picked ? picked.idx : -1,
+        hoverAng: Math.random() * Math.PI * 2,
+        inspect: kind === 'bee' ? (0.3 + Math.random() * 0.5) : 0
+      });
+    }
+
+    function spawnBugs() {
+      clearBugs();
+      refreshBugPads();
+      let n = 18 + ((Math.random() * 11) | 0); // 18-28
+      if (typeof isNight !== 'undefined' && isNight) n = Math.max(10, Math.floor(n * 0.65));
+      n = Math.min(n, MAX_BUGS);
+      const nBees = Math.round(n * 0.4);
+      for (let i = 0; i < nBees; i++) spawnOneBug('bee');
+      for (let i = nBees; i < n; i++) spawnOneBug('butterfly');
+    }
+
+    function killBug(b) {
+      if (!b || !b.alive) return;
+      b.alive = false;
+      const p = b.mesh.position;
+      const col = b.kind === 'bee' ? 0xffdd44 : 0xff8844;
+      spawnChunks(p.x, p.y, p.z, col, 3, 2.2);
+      spawnChunks(p.x, p.y, p.z, 0xffaa66, 2, 1.6);
+      scene.remove(b.mesh);
+      b.mesh.traverse(ch => {
+        if (!ch.isMesh) return;
+        if (ch.geometry) { try { ch.geometry.dispose(); } catch (_) {} }
+        if (ch.material && ch.material !== beeYellowMat && ch.material !== beeBlackMat &&
+            ch.material !== beeWingMat && ch.material !== butteBodyMat) {
+          try { ch.material.dispose(); } catch (_) {}
+        }
+      });
+      b.mesh = null;
+    }
+
+    function bugSeekTarget(b, dt, speed, wobble) {
+      if (!b.target) return 99;
+      const px = b.mesh.position.x, py = b.mesh.position.y, pz = b.mesh.position.z;
+      const dx = b.target.x - px, dy = b.target.y - py, dz = b.target.z - pz;
+      const dist = Math.hypot(dx, dy, dz) || 1;
+      const nx = dx / dist, ny = dy / dist, nz = dz / dist;
+      const wx = Math.sin(b.phase * 1.7) * wobble;
+      const wy = Math.sin(b.phase * 2.3 + 1.1) * wobble * 0.55;
+      const wz = Math.cos(b.phase * 1.3) * wobble;
+      const k = Math.min(1, dt * 3.5);
+      b.vel.x += (nx * speed + wx - b.vel.x) * k;
+      b.vel.y += (ny * speed * 0.7 + wy - b.vel.y) * Math.min(1, dt * 3.2);
+      b.vel.z += (nz * speed + wz - b.vel.z) * k;
+      return dist;
+    }
+
+    function bugClampFlight(b) {
+      const c = clampToLand(b.mesh.position.x, b.mesh.position.z, 2.5);
+      b.mesh.position.x = c.x;
+      b.mesh.position.z = c.z;
+      const gh = sampleHeight(b.mesh.position.x, b.mesh.position.z);
+      if (b.mode !== 'land') {
+        const minY = gh + 0.4, maxY = gh + 2.5;
+        if (b.mesh.position.y < minY) { b.mesh.position.y = minY; b.vel.y = Math.max(0, b.vel.y); }
+        if (b.mesh.position.y > maxY) { b.mesh.position.y = maxY; b.vel.y = Math.min(0, b.vel.y); }
+      }
+    }
+
+    function bugPickNewFlower(b) {
+      const picked = pickBugPad(b.flowerIdx);
+      if (!picked) {
+        b.target = null;
+        b.mode = 'wander';
+        return;
+      }
+      b.flowerIdx = picked.idx;
+      b.target = { x: picked.pad.x, y: picked.pad.y, z: picked.pad.z };
+      b.mode = b.kind === 'bee' ? 'wander' : 'fly';
+      if (b.kind === 'bee') b.inspect = 0.5 + Math.random() * 0.9;
+    }
+
+    function updateBugs(dt) {
+      if (!bugs.length) return;
+      for (let i = bugs.length - 1; i >= 0; i--) {
+        const b = bugs[i];
+        if (!b.alive || !b.mesh) { bugs.splice(i, 1); continue; }
+        const isBee = b.kind === 'bee';
+        b.phase += dt;
+
+        const wl = b.mesh.userData.wingL, wr = b.mesh.userData.wingR;
+        if (wl && wr) {
+          if (b.mode === 'land') {
+            const a = Math.sin(b.phase * (isBee ? 18 : 6)) * (isBee ? 0.08 : 0.04);
+            wl.rotation.z = a; wr.rotation.z = -a;
+          } else if (isBee) {
+            const a = Math.sin(b.phase * 42) * 0.55;
+            wl.rotation.z = a; wr.rotation.z = -a;
+          } else {
+            const a = Math.sin(b.phase * 16) * 0.85;
+            wl.rotation.z = a; wr.rotation.z = -a;
+          }
+        }
+
+        if (b.mode === 'land') {
+          b.landTimer -= dt;
+          if (b.target) {
+            const k = Math.min(1, dt * 8);
+            b.mesh.position.x += (b.target.x - b.mesh.position.x) * k;
+            b.mesh.position.y += (b.target.y - b.mesh.position.y) * k;
+            b.mesh.position.z += (b.target.z - b.mesh.position.z) * k;
+          }
+          b.vel.x *= 0.85; b.vel.y *= 0.85; b.vel.z *= 0.85;
+          if (b.landTimer <= 0) {
+            b.mode = 'takeoff';
+            b.vel.y = isBee ? 2.8 : 1.6;
+            b.vel.x += (Math.random() - 0.5) * 2;
+            b.vel.z += (Math.random() - 0.5) * 2;
+            b.landTimer = 0.35 + Math.random() * 0.4;
+          }
+        } else if (b.mode === 'takeoff') {
+          b.landTimer -= dt;
+          b.mesh.position.x += b.vel.x * dt;
+          b.mesh.position.y += b.vel.y * dt;
+          b.mesh.position.z += b.vel.z * dt;
+          b.vel.y -= 1.2 * dt;
+          if (b.landTimer <= 0) bugPickNewFlower(b);
+        } else {
+          if (!b.target) bugPickNewFlower(b);
+          let dist = 99;
+          if (isBee) {
+            if (b.inspect > 0 && b.target) {
+              b.inspect -= dt;
+              b.hoverAng += dt * 4.5;
+              const r = 0.35;
+              const hx = b.target.x + Math.cos(b.hoverAng) * r;
+              const hz = b.target.z + Math.sin(b.hoverAng * 2) * r * 0.6;
+              const hy = b.target.y + 0.25 + Math.sin(b.hoverAng * 3) * 0.12;
+              const saved = b.target;
+              b.target = { x: hx, y: hy, z: hz };
+              dist = bugSeekTarget(b, dt, 5.5, 1.8);
+              b.target = saved;
+              if (b.inspect <= 0) b.mode = 'fly';
+            } else {
+              dist = bugSeekTarget(b, dt, 6.2, 1.2);
+              if (dist < 0.35) {
+                b.mode = 'land';
+                b.landTimer = 0.8 + Math.random() * 1.2;
+                b.vel.x = b.vel.y = b.vel.z = 0;
+              }
+            }
+          } else {
+            dist = bugSeekTarget(b, dt, 2.8, 2.4);
+            b.vel.y += Math.sin(b.phase * 3.1) * 0.4 * dt;
+            if (dist < 0.4) {
+              b.mode = 'land';
+              b.landTimer = 2 + Math.random() * 4;
+              b.vel.x = b.vel.y = b.vel.z = 0;
+            }
+          }
+          b.mesh.position.x += b.vel.x * dt;
+          b.mesh.position.y += b.vel.y * dt;
+          b.mesh.position.z += b.vel.z * dt;
+        }
+
+        bugClampFlight(b);
+        const spd = Math.hypot(b.vel.x, b.vel.z);
+        if (spd > 0.15) b.mesh.rotation.y = Math.atan2(b.vel.x, b.vel.z);
+      }
+    }
+
+    function hitBugsSegment(ax, ay, az, bx, by, bz) {
+      let best = null, bestT = 2;
+      for (const b of bugs) {
+        if (!b.alive || !b.mesh) continue;
+        const p = b.mesh.position;
+        const t = segmentHitsCylinder(ax, ay, az, bx, by, bz, p.x, p.z, BUG_HIT_R, p.y - 0.12, p.y + 0.18);
+        if (t !== null && t < bestT) { bestT = t; best = b; }
+      }
+      return best;
+    }
+
+    function meleeBugs(reach, fx, fz, minDot) {
+      for (const b of bugs) {
+        if (!b.alive || !b.mesh) continue;
+        const dx = b.mesh.position.x - player.position.x;
+        const dz = b.mesh.position.z - player.position.z;
+        const d = Math.hypot(dx, dz);
+        if (d < reach + 0.2) {
+          const dy = b.mesh.position.y - (player.position.y + 0.9);
+          if (Math.abs(dy) > 2.2) continue;
+          const dot = (dx * fx + dz * fz) / (d || 1);
+          if (dot > minDot) killBug(b);
+        }
       }
     }
 
@@ -9252,6 +10109,11 @@
           }
         }
       }
+      {
+        const before = bugs.filter(b => b.alive).length;
+        meleeBugs(reach, fx, fz, 0.4);
+        if (bugs.filter(b => b.alive).length < before) hitSomething = true;
+      }
       if (hitSomething) AudioSys.chainsawGrit();
     }
 
@@ -9443,6 +10305,11 @@
           }
         }
       }
+      for (const b of bugs.slice()) {
+        if (!b.alive || !b.mesh) continue;
+        const d = Math.hypot(b.mesh.position.x - x, b.mesh.position.z - z);
+        if (d < AOE * 0.75) killBug(b);
+      }
       for (const rock of rocks) {
         if (!rock.alive || !rock.mesh.visible) continue;
         const d = Math.hypot(rock.x - x, rock.z - z);
@@ -9532,6 +10399,7 @@
           }
         }
       }
+      meleeBugs(reach, fx, fz, 0.35);
       setTimeout(() => { knife.visible = false; knife.rotation.y = 0; }, 180);
     }
     function segmentHitsCylinder(ax, ay, az, bx, by, bz, cx, cz, radius, y0, y1) {
@@ -9786,6 +10654,18 @@
           continue;
         }
 
+        // Bees / butterflies (1 HP)
+        {
+          const hitBug = hitBugsSegment(p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z);
+          if (hitBug) {
+            killBug(hitBug);
+            p.hit = true;
+            scene.remove(p.mesh);
+            projectiles.splice(i, 1);
+            continue;
+          }
+        }
+
         // Rocks
         let hitRock = null, hitRT = 2;
         for (const rock of rocks) {
@@ -9850,7 +10730,9 @@
           continue;
         }
 
-        // Landmark structures: tent poles, cabin walls, bridge posts and the like.
+        // Landmark structures: tent poles, cabin walls, bridge posts and the like. Ones
+        // tagged with a `landmark` (cabins, the watchtower) take real damage and can be
+        // shot down; everything else just sparks like scenery always has.
         let hitSolid = false;
         for (const ws of worldSolids) {
           const dxs = p.pos.x - ws.x, dzs = p.pos.z - ws.z;
@@ -9862,6 +10744,7 @@
           );
           if (t !== null) {
             spawnChunks(p.pos.x, p.pos.y, p.pos.z, 0x6b5a3e, 2, 2);
+            if (ws.landmark && !p.fromTurret) damageLandmark(ws.landmark, p.damage);
             hitSolid = true;
             break;
           }
@@ -10084,6 +10967,23 @@
         const dx = player.position.x - rock.x, dz = player.position.z - rock.z;
         const dist = Math.hypot(dx, dz) || 0.0001;
         const minD = rock.radius + PLAYER_RADIUS;
+        if (dist < minD) {
+          const push = minD - dist;
+          player.position.x += (dx / dist) * push;
+          player.position.z += (dz / dist) * push;
+        }
+      }
+      // Landmark structures (cabins, the watchtower, campsite tents, graveyard stones,
+      // bridge posts) — these used to only block zombies, so the player could walk
+      // straight through every building on the map. Skipped once you're actually up on
+      // top of one (the tower deck), checked against real height rather than the
+      // terrain under you, since a platform like that isn't part of the terrain.
+      for (const ws of worldSolids) {
+        const minD = ws.radius + PLAYER_RADIUS;
+        const dx = player.position.x - ws.x, dz = player.position.z - ws.z;
+        if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+        if (player.position.y > ws.y1 - 0.3) continue;
+        const dist = Math.hypot(dx, dz) || 0.0001;
         if (dist < minD) {
           const push = minD - dist;
           player.position.x += (dx / dist) * push;
@@ -10758,16 +11658,20 @@
             z.attackWindup = 0.22;
             z._pendingAttack = { type, dmg };
           };
+          // Vertical reach on top of the horizontal check — without it a zombie stuck at
+          // the foot of the watchtower (or any other height difference) could still
+          // "melee" a player standing well out of its actual reach above it.
+          const pdy = Math.abs(player.position.y - z.mesh.position.y);
           if (gameMode === 'defend' && house.active) {
             const hd = Math.hypot(mx - house.group.position.x, mz - house.group.position.z);
             if (hd < house.radius + z.radius + 0.15) tryWindup('house', z.damage, 0.9);
           } else {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
-            if (pd < z.radius + PLAYER_RADIUS + 0.15) tryWindup('player', z.damage, 0.85);
+            if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < 2.3) tryWindup('player', z.damage, 0.85);
           }
           if (gameMode === 'defend') {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
-            if (pd < z.radius + PLAYER_RADIUS + 0.1) tryWindup('player', Math.ceil(z.damage * 0.6), 0.85);
+            if (pd < z.radius + PLAYER_RADIUS + 0.1 && pdy < 2.3) tryWindup('player', Math.ceil(z.damage * 0.6), 0.85);
           }
         }
       }
@@ -11035,6 +11939,7 @@
       aimYaw = 0; vy = 0; grounded = true;
       cancelPlaceMode();
       for (const t of trees) restoreTree(t);
+      spawnBugs();
       for (const rock of rocks) {
         if (!rock.alive) {
           rock.alive = true;
@@ -11137,6 +12042,7 @@
 
       if (gameStarted && !gameOver && !won) {
         updateMouseAim(dt);
+        updateTowerClimb(dt);
         const forward = (keys.ArrowUp || keys.KeyW ? 1 : 0) + (keys.ArrowDown || keys.KeyS ? -1 : 0);
         // Invert A/D vs classic: matches Jerry's feel (A=right-of-aim, D=left-of-aim with rx,rz)
         const strafe = (keys.ArrowLeft || keys.KeyA ? 1 : 0) + (keys.ArrowRight || keys.KeyD ? -1 : 0);
@@ -11153,6 +12059,9 @@
           if (len > 1e-6) { wishX /= len; wishZ /= len; moving = true; }
         }
 
+        // Riding the ladder owns position.x/y/z outright (see updateTowerClimb) — the
+        // usual ground/water movement below would otherwise fight it every frame.
+        if (!climbingTower) {
         const px0 = player.position.x, pz0 = player.position.z;
         const nrm = terrainNormal(px0, pz0, _physN);
         const slope = terrainSlope(px0, pz0);
@@ -11210,8 +12119,9 @@
         const groundSpeed = Math.hypot(velX, velZ);
         moving = groundSpeed > 0.6;
 
-        // Footfalls: dust on dry ground, ripples in the shallows.
-        if (grounded) {
+        // Footfalls: dust on dry ground, ripples in the shallows. (Skipped on the tower
+        // deck — the real ground down at its base isn't where your boots actually are.)
+        if (grounded && !onTowerDeck) {
           stepDist += groundSpeed * dt;
           const stride = running ? 2.5 : 2.0;
           if (stepDist > stride) {
@@ -11219,8 +12129,9 @@
             if (depth > 0.06) spawnSplash(px0, sampleHeight(px0, pz0) + depth, pz0, 4, 0.5);
             else if (groundSpeed > 4) spawnDust(px0, sampleHeight(px0, pz0), pz0, 2);
           }
-        } else {
+        } else if (!grounded) {
           stepDist = 0;
+        }
         }
         // Always face aim so weaponMount +Z tracks mouse
         player.rotation.y = aimYaw;
@@ -11258,6 +12169,7 @@
         updateWaveSystem(dt);
         updateTurrets(dt);
         updateZombies(dt);
+        updateTowerSiege(dt);
         // Jump with coyote time and input buffering, so a press just before landing or
         // just after stepping off a lip still works.
         if (keys.Space) jumpBufferT = PHYS.jumpBuffer;
@@ -11309,11 +12221,14 @@
       updateAcid(dt);
       updateSupplyDrops(dt);
       updateBuildBars();
+      updateTowerBar();
       updateBirds(dt);
+      updateBugs(dt);
       drawMinimap(dt);
       updateWind(dt);
       updateWindSway();
       updateWater(wind.time);
+      updateWeather(dt);
       // Dome rides with the camera; clouds drift downwind and wrap so they never run out.
       skyDome.position.copy(camera.position);
       cloudGroup.position.x += wind.dirX * wind.strength * 2.2 * dt;
@@ -11326,18 +12241,35 @@
       updateFallingLeaves(dt);
 
       // Order: move ? collisions ? clamp XZ ? ground stick
-      {
+      if (!climbingTower) {
         const c = clampToLand(player.position.x, player.position.z, 1.5);
         player.position.x = c.x;
         player.position.z = c.z;
       }
+      // Stepping past the deck's edge drops you — there's no fall damage in this game,
+      // so hopping off is a perfectly good way down and doesn't need its own ritual.
+      // This has to run before ground resolution, using this frame's already-updated
+      // x/z, or the generic "stick to ground" branch below would snap you straight down
+      // to the terrain under the tower instead of actually falling.
+      if (onTowerDeck) {
+        const tdx = player.position.x - tower.x, tdz = player.position.z - tower.z;
+        if (!tower.alive || Math.abs(tdx) > TOWER_DECK_HALF || Math.abs(tdz) > TOWER_DECK_HALF) {
+          onTowerDeck = false;
+          grounded = false;
+        }
+      }
       {
-        const groundY = playerGroundY(player.position.x, player.position.z);
+        let groundY = playerGroundY(player.position.x, player.position.z);
+        if (onTowerDeck) groundY = tower.deckY;
         const depth = waterDepthAt(player.position.x, player.position.z);
         const waterLevel = waterLevelAt(player.position.x, player.position.z);
-        const swimming = depth > 1.3 && player.position.y < waterLevel + 0.6;
+        const swimming = !climbingTower && depth > 1.3 && player.position.y < waterLevel + 0.6;
 
-        if (!gameStarted) {
+        if (climbingTower) {
+          // Height is owned entirely by updateTowerClimb() this frame — nothing to
+          // resolve here, and no gravity fighting it.
+          vy = 0;
+        } else if (!gameStarted) {
           player.position.y = groundY;
           velX = 0; velZ = 0; vy = 0;
         } else if (swimming) {
@@ -11357,7 +12289,8 @@
             grounded = false;
           }
         } else if (grounded && vy <= 0) {
-          // stick to surface while walking (no clip / no sink)
+          // stick to surface while walking (no clip / no sink) — groundY is the tower
+          // deck's height while you're standing on it, terrain everywhere else.
           player.position.y = groundY;
           vy = 0;
         } else {
@@ -11383,10 +12316,15 @@
           }
         }
         // Coyote / buffer timers ride on the resolved grounded state.
-        if (grounded || swimming) coyoteT = PHYS.coyote;
-        else coyoteT = Math.max(0, coyoteT - dt);
+        if (climbingTower) {
+          coyoteT = 0;
+        } else if (grounded || swimming) {
+          coyoteT = PHYS.coyote;
+        } else {
+          coyoteT = Math.max(0, coyoteT - dt);
+        }
         jumpBufferT = Math.max(0, jumpBufferT - dt);
-        wasGrounded = grounded || swimming;
+        wasGrounded = (grounded || swimming) && !climbingTower;
       }
 
             updateCashDrops(dt);
