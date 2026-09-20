@@ -1,0 +1,252 @@
+TINY TREK — FINAL PASS: STABILITY, PERFORMANCE, FIDELITY, PHYSICS
+Checkpoint 32 · index.html
+================================================================================
+
+This pass was different from the earlier ones: for the first time the game was
+running on YOUR machine — a browser pane in the Claude desktop app, on your
+NVIDIA (Blackwell) GPU — with real frame timings and screenshots. Everything below
+was measured there, not in the headless harness. That changed the diagnosis
+completely, and it also caught a bug the harness could never have seen.
+
+
+THE FLOATING ORANGE CANOPIES
+--------------------------------------------------------------------------------
+Real, and mine. The instanced-canopy change from cp26 was wrong on a real GPU:
+three's WebGPU renderer builds one uniform buffer of instance matrices per
+compiled program, and since every canopy's material is structurally identical,
+every tree with the same blob count drew with the FIRST such tree's matrices and
+colours. Autumn crowns over birches. The harness models the renderer's contracts,
+not its bugs.
+
+Backed out for merged geometry instead: each canopy is one vertex-coloured mesh
+(the same path the trunks already use, which cannot have that problem), with
+each blob's vertex range remembered. Destroying a blob collapses its vertices to
+a point; shrinking the survivors scales theirs. One draw per canopy — better than
+instancing's two — and progressive leaf destruction works exactly as before.
+
+
+WHERE THE FRAME ACTUALLY WENT
+--------------------------------------------------------------------------------
+On your machine the frame was ~13.4ms of pure CPU time inside three's WebGPU
+renderer, roughly 5µs per draw call, with the GPU nearly idle. The whole problem
+was draw count. Measured in a forest view:
+
+  grass tufts                        1,746 of 2,745 draws (64%)
+  tree canopies                        ~210
+  trunks                               ~209
+  everything else                      ~580
+
+So:
+
+· Ground cover is merged into 30m cells (grass, bushes, ferns, flowers, mushrooms,
+  twigs together), ~270 draws instead of ~2,500. The wind sway moved into the
+  vertex shader: each vertex carries its tuft's sway amount × its height above the
+  tuft's base and its tuft's phase, and a TSL positionNode pushes it along the
+  wind. The field moves the way it did. Verified on your GPU by cranking the wind
+  to 60 and watching the blades smear sideways.
+
+· Zombie bodies compacted from ~31 meshes to ~15 (16 → 11 shadow casters). Every
+  rigid segment between joints is merged into one vertex-coloured mesh; every
+  joint still articulates. Dismemberment, hit-flash and corpses all work through
+  the merged parts. Verified visually — a lineup of every type looks identical.
+
+· Corpses stop casting shadows once they're flat (a sliver nobody sees, ~200
+  shadow draws saved with eighteen corpses down).
+
+  forest view      draws 2,745 → ~1,150     render CPU 13.4ms → ~5.6ms
+  20-zombie wave, flamethrower, all weapons: ~11–13ms render, 60fps
+
+
+THE "RANDOM HICCUPS" — ROOT CAUSE, FROM THREE'S OWN SOURCE
+--------------------------------------------------------------------------------
+Even with the frame under budget, a wave still had four to eight frames over
+50ms, up to 180ms. Profiling the renderer's internals on your machine put every
+one of them in `Nodes.getForRender`: a full WGSL shader build, ~30ms each.
+
+Reading three@0.175.0's source for the cache key explained why they kept
+happening:
+
+1. The material cache key hashes every numeric material property as "zero or
+   not zero". So `emissiveIntensity` 1 (fresh body) vs 0.65 (hit-flash) is ONE
+   variant, but 0 (flash faded) is ANOTHER; `metalness` 0 vs 0.05 is another;
+   `transparent` true/false another. A zombie body goes through three of these
+   in its life; a severed limb — which cloned the body's material and set it
+   transparent — was a fourth.
+
+2. `Nodes.delete()` decrements a use count on the compiled variant and EVICTS IT
+   FROM THE CACHE when the count reaches zero. Disposing a material deletes its
+   render objects. Severed limbs, falling leaves, shotgun shells and junked
+   corpses were all cloning and disposing materials — so each time the last one
+   on the field expired, its shader was thrown away, and the next one rebuilt
+   it. Mid-fight. Every time. That is what "hiccups at seemingly random" was.
+
+Fixes, all verified by watching the cache size on your machine:
+
+· Nothing transient is disposed any more. Severed limbs share the body's
+  materials (they sink into the ground instead of fading, which needed no
+  per-limb opacity). Falling leaves and shotgun shells are pooled. Every zombie
+  body is recycled, dismembered or not — stumps are tagged and stripped on reset
+  instead of the whole body being thrown away and rebuilt.
+
+· A staged fight runs behind the start menu at load, with the canvas hidden:
+  every zombie type spawned, shot (flash on), flash faded, killed every way
+  there is (corpse, gibs, severed limbs), plus brass, tracers, fire, acid and
+  drops — then a second, live one for ~2 seconds driven by the real loop. It
+  has to run from inside the loop: staged from module load it left variants
+  uncompiled that the loop's first fight then built, for reasons I could not
+  pin down and stopped chasing once running it from a tick fixed it.
+
+  shader variants compiled at menu:     58
+  new variants during a 20-zombie wave:  1   (was 8, each ~30ms)
+  frames over 50ms in that wave:         0   (was 4–8)
+
+
+FIDELITY
+--------------------------------------------------------------------------------
+· Bloom. The scene renders to a texture and a threshold bloom is added: fire,
+  muzzle flashes, tracers, lasers, zombie eyes and the kiosk screen are pushed
+  above 1.0 so they bleed, and the low-poly mid-tones don't. Night with the
+  flamethrower and glowing eyes is the shot to see. (A cleaner selective bloom
+  off an emissive render target was tried first; on a real GPU every material
+  that doesn't write an emissive output invalidates the multi-target pipeline.)
+
+· Hemispheric shading on canopies: baked into the vertex colours while merging —
+  undersides a little darker, tops a little lighter, plus a mild vertical
+  gradient. Low-poly foliage reads as solid.
+
+· Contact shading: a soft dark pool baked into the ground under every tree and a
+  tighter one under every rock. The sun throws the hard shadow; this is the
+  ambient half that makes things look planted rather than placed.
+
+· ACES tone mapping was tried and left off — a modest gain that would have
+  re-graded the look you tuned. One line to enable if you want it.
+
+
+PHYSICS AND ANIMATION
+--------------------------------------------------------------------------------
+The existing animation layer turned out to be thorough already (walk cycles with
+knees and elbows, secondary motion, limps, spider gaits, topple deaths with
+flailing limbs, hit flinch, attack swings, hurt reactions). Two things were
+clearly missing:
+
+· Tree falls. A felled tree rotated at a constant rate and vanished the instant
+  it hit 90°. Now it accelerates on t², hits the ground with dust along the
+  trunk and a distance-scaled shake, crushes anything in the strip it lands on
+  (zombies take heavy damage and are floored; you take 35 and a "TIMBER" banner),
+  and lies there ~20s before sinking away. Probe covers all of it.
+
+· Knockdowns. Explosions floor anything short of a colossus; a point-blank
+  shotgun blast floors the small types. The body topples about its own feet in
+  the direction of the push (hit from the front, falls backward), lies helpless
+  ~1–1.5s, then gets up. Brutes only go down to explosives. Cooldown so a
+  grenade spam can't keep the horde permanently flat. Probe covers direction,
+  resistance, cooldown, dying while down, and clean recycling.
+
+
+VERIFICATION
+--------------------------------------------------------------------------------
+· 28 headless probes pass (two new: probe-treefall, probe-knockdown; probe-canopy
+  rewritten for merged geometry; probe-perf extended with foliage, water and
+  bloom checks; probe-renderer checks the post path).
+· Every fallback switch tested, including all of them at once.
+· Six-round combat soak: scene plateaus, zero errors.
+· On your GPU: floating canopies gone; grass sways; water ripples; bloom
+  renders; zombies of every type look right; knockdowns and tree falls seen;
+  20-zombie wave with every weapon at 60fps with zero frames over 50ms.
+
+Not verified: how it FEELS. I can measure frames and read pixels; I cannot play
+it. Your brother can.
+
+
+WHAT'S LEFT, IF YOU EVER COME BACK TO IT
+--------------------------------------------------------------------------------
+· One shader variant still compiles during the first fight of a session (~30ms,
+  once). Not worth another hour.
+· The spider is still 33 meshes (eight legs, two joints each). Fine unless you
+  spawn a lot of them.
+· Three's WebGPU renderer costs ~5µs of CPU per draw. Below ~700 draws it doesn't
+  matter; the way to buy more headroom would be merging more of the static world
+  (rocks, POI props) the way the foliage was merged.
+
+
+FILES
+--------------------------------------------------------------------------------
+  index.html              the game (cp29)
+  index.dev.html          the same build — safe to delete
+  README.txt              controls, kiosk, build menu, URL switches, renderer notes
+  PERFORMANCE-REPORT.txt  this file
+
+================================================================================
+CHECKPOINT 31 ADDENDUM — THE LAST 45 MINUTES
+================================================================================
+Everything below landed after cp29, on top of the grass-trampling build (cp30):
+
+GEAR AND ARMOR
+  The marine's helmet, plate carrier (with its pouches, radio and patch), knee and
+  elbow pads, and the NVG mount are now registered as gear parts on the model and
+  are hidden until bought under U > Gear. Night vision can't be bought before the
+  helmet (its rails are the mount). A bare head got a cropped-hair cap and the belt
+  got two mag pouches so the un-armoured marine still reads as a soldier.
+  Armor is a pool (helmet 25 / vest 50 / pads 15) shown as a steel-blue ARMOR bar
+  directly under health. damagePlayer() sends 65% of each hit to armor while any
+  is left; fully-soaked hits spark instead of bleeding and ring the plates. Kiosk
+  "Repair armor" row; full repair at each new day. Pads shorten the dodge-roll
+  cooldown. Toggling the parts' `visible` flag creates no new shader variants (the
+  materials were already compiled; the pre-roll makes hidden meshes visible), so
+  buying gear mid-game costs nothing — verified on the GPU: 58 variants before and
+  after.
+
+MACHETE
+  U > Upgrades, $85. Same F key, same swing animation; the knife group now holds
+  two models and shows one. Stats: 1.8m/28dmg/0.45s/35° (knife) → 2.7m/62dmg/0.55s
+  and a wider arc. Its own whoosh and a wet chop on contact.
+
+SOUNDTRACK — REPLACED
+  The old assets/music pack was 20 three-minute loops of the same eight bars each
+  (measured: 0.97–0.98 spectral self-similarity between any two 8-second windows,
+  near-constant loudness), all bright chiptune, picked at random and cycled
+  regardless of what was happening. That is the monotony you heard.
+  The new score is generated by tools/compose.py — a small arranger and synth in
+  numpy: 15 tracks in seven mood pools (menu, day, night, fight, boss, fallen,
+  dawn), each with a chord progression in its own key/mode, a section form that
+  adds and drops layers (pads, bass, arps, plucked strings, e-piano, bells, lead,
+  drums), a motif-based lead line that snaps to chord tones on strong beats and
+  cadences on the root/fifth, section-end fills, dotted-eighth delay and a
+  Schroeder reverb, then a soft bus compressor. Measured: 8-second windows of the
+  new fight tracks correlate at ~0.5 (variety), loudness swings ×3 between
+  breakdown and climax, and the mix is bass-forward but not boomy (A-weighted:
+  ~30% sub/bass, ~30% mids, ~20% presence).
+  In the game a music director (AudioSys.updateMusic) reads the state every frame
+  and crossfades two <audio> decks: menu → day/night prep → fight (instant, with a
+  horn stinger; boss variant on blood moons / colossus days) → "Day N cleared"
+  fanfare → back to prep. Calm moods hold 6s so dusk can't flap the music; leaving
+  the menu or a fight is immediate. No track repeats back to back; calm pools rest
+  2.5–6.5s between tracks. Music ducks at low health, in the shop and when paused.
+
+AMBIENCE AND SFX
+  A continuous bed (AudioSys.ambienceStart/updateAmbience): two wind layers that
+  gust on a slow wander and get leafier in the forest, a river layer by distance to
+  the water, two trilled cricket voices after dark with irregular bursts, birds by
+  day, owls and distant groans at night, thunder in the rain. Every one-shot can
+  now pan and send to a convolution reverb (a synthetic 1.6s outdoor impulse), and
+  the guns got low-end tails and reverb sends sized to the weapon: pistol a slap,
+  shotgun a wide splash, sniper a rolling echo. Grenades patter debris; felled
+  trees creak, crack, thump and shed leaves; wave starts are a long horn over a hit.
+
+ALSO
+  Sprint FOV kick (+5° at a flat sprint, eased) and zombie trampling: the four
+  nearest walking zombies bend grass exactly like the player, through four extra
+  vec3 uniforms in the foliage shader.
+
+VERIFIED
+  30 headless probes (new: probe-gear covering the unlock order, visibility, armor
+  soak, repair and machete reach) and a live check on your GPU: no console errors,
+  music cues switch correctly (menu → fight_run_the_line on the first wave), armor
+  bar shows/hides with ownership, bare/armoured marine both render, 60 fps.
+
+CP32 (last 20 minutes)
+  Music and SFX volume sliders on the title screen (AudioSys.setMusicVolume /
+  setSfxVolume, saved in localStorage). The un-armoured marine got a field cap
+  (crown, band, brim, badge), an H-harness chest rig with two pouches, chest
+  pockets with button flaps, a name tape and a neck gaiter; the cap and harness
+  are the inverse sets of the helmet and carrier, so buying armour swaps them out.

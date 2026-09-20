@@ -1,4 +1,4 @@
-# Local HTTP server output from "Play Tiny Trek.bat"
+# Local HTTP server output from "Play Dead-Wave.bat"
 server.log
 server-error.log
 
@@ -6,3 +6,9 @@ server-error.log
 .tmp-*
 .syntax*
 .chk.mjs
+
+# Local-only
+__pycache__/
+.claude/settings.local.json
+index.dev.html
+Claude outputs/
