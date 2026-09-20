@@ -48,6 +48,26 @@
         linear-gradient(rgba(200,240,255,0.92), rgba(200,240,255,0.92)) center/1.5px 14px no-repeat;
       filter: drop-shadow(0 0 1px rgba(0,0,0,0.85));
     }
+    /* Shot line-of-sight (see updateShotLos): green when the round would actually
+       reach the zombie under the cursor, red when a trunk, rock or rise is in the
+       way. The cross keeps its dark outline in both so it stays readable against
+       grass and sky; only the bright strokes and the centre dot change colour. */
+    #reticle.los-clear {
+      background:
+        radial-gradient(circle at center, rgba(150,255,170,0.98) 0 1.8px, transparent 2px),
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/16px 2px no-repeat,
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/2px 16px no-repeat,
+        linear-gradient(rgba(120,250,150,0.95), rgba(120,250,150,0.95)) center/14px 1.5px no-repeat,
+        linear-gradient(rgba(120,250,150,0.95), rgba(120,250,150,0.95)) center/1.5px 14px no-repeat;
+    }
+    #reticle.los-blocked {
+      background:
+        radial-gradient(circle at center, rgba(255,120,105,0.98) 0 1.8px, transparent 2px),
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/16px 2px no-repeat,
+        linear-gradient(rgba(12,18,28,0.9), rgba(12,18,28,0.9)) center/2px 16px no-repeat,
+        linear-gradient(rgba(255,110,95,0.95), rgba(255,110,95,0.95)) center/14px 1.5px no-repeat,
+        linear-gradient(rgba(255,110,95,0.95), rgba(255,110,95,0.95)) center/1.5px 14px no-repeat;
+    }
     /* Tactical panel: clipped top-right / bottom-left corners + a small accent
        tab, standing in for the old fully-rounded "glassmorphism" card. */
     .glass {
@@ -207,6 +227,23 @@
       background: rgba(116,201,174,.16); border: 1px solid rgba(116,201,174,.4);
       color: var(--accent-2); letter-spacing: 0.04em;
     }
+    /* Empty-magazine prompt. The ammo panel turning red in the bottom-left corner is
+       easy to miss with a horde on you, so this sits just under the middle of the
+       screen where you are already looking. */
+    #reloadPrompt {
+      position: absolute; left: 50%; top: 58%; transform: translateX(-50%);
+      display: none; padding: 5px 14px;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #ffd24a; background: rgba(12,18,28,.62);
+      border: 1px solid rgba(255,210,74,.5);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      text-shadow: 0 1px 4px rgba(0,0,0,.8);
+      animation: reloadPulse 0.85s ease-in-out infinite;
+    }
+    #reloadPrompt.show { display: block; }
+    #reloadPrompt.dry { color: #ff9282; border-color: rgba(255,146,130,.55); }
+    @keyframes reloadPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.42; } }
+    @media (prefers-reduced-motion: reduce) { #reloadPrompt { animation: none; } }
     #ammo.empty { color: #ff9282; }
     #ammo.empty #ammoCount { color: #ff9282; }
     #ammo.empty .gchip { border-color: rgba(255,138,122,.45); background: rgba(255,80,60,.14); }
@@ -541,6 +578,7 @@
       </div>
       <div id="grenadeChips"><span class="gchip">G×3</span></div>
     </div>
+    <div id="reloadPrompt"></div>
     <div id="placeBanner"></div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
     <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
@@ -612,6 +650,9 @@
           </div>
           <div class="settingRow">
             <span>Prep</span><button id="skipPrepToggle" class="settingBtn" type="button">Skip prep time: off</button>
+          </div>
+          <div class="settingRow">
+            <span>Overlay</span><button id="perfHudToggle" class="settingBtn" type="button">FPS &amp; hardware: off</button>
           </div>
           <div class="modes">
             <button id="settingsBackBtn" type="button">Back</button>
@@ -727,6 +768,7 @@
     const winMsgEl = document.getElementById('winMsg');
     const againBtn = document.getElementById('again');
     const ammoEl = document.getElementById('ammo');
+    const reloadPromptEl = document.getElementById('reloadPrompt');
     const ammoCountEl = document.getElementById('ammoCount');
     const ammoWeaponEl = document.getElementById('ammoWeapon');
     const ammoDetailEl = document.getElementById('ammoDetail');
@@ -767,7 +809,10 @@
       window.cancelAnimationFrame = (id) => clearTimeout(id);
       window.__nativeRAF = nativeRAF;
     }
-    const showPerf = urlParams.has('debug');
+    // Perf overlay: ?debug=1 forces it on, and it is also a remembered setting under
+    // Esc > Settings so it can be turned on mid-run without touching the URL.
+    let showPerf = urlParams.has('debug');
+    try { if (localStorage.getItem('tt_perf_hud') === '1') showPerf = true; } catch (_) {}
     {
       const badge = document.getElementById('modeBadge');
       if (badge) {
@@ -793,6 +838,43 @@
     // worst hovering just above the frame budget.
     let perfLastMs = 0, perfWorstMs = 0, perfHitches = 0, perfShownWorst = 0;
     const HITCH_MS = 50;
+    // Hardware line for the overlay. The GPU string comes from a throwaway WebGL
+    // context because it is the one query that works the same whichever backend the
+    // game itself came up on; WebGPU's own adapter info is async and less specific.
+    // Resolved once and cached — several of these calls are not cheap.
+    let hwInfoCache = null;
+    function hardwareInfo() {
+      if (hwInfoCache) return hwInfoCache;
+      let gpu = 'unknown';
+      try {
+        const c = document.createElement('canvas');
+        const gl = c.getContext('webgl2') || c.getContext('webgl');
+        if (gl) {
+          const ext = gl.getExtension('WEBGL_debug_renderer_info');
+          if (ext) gpu = String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) || 'unknown');
+          try { gl.getExtension('WEBGL_lose_context')?.loseContext(); } catch (_) {}
+        }
+      } catch (_) {}
+      // Vendor strings are long and full of noise: "ANGLE (NVIDIA, NVIDIA GeForce
+      // RTX 4050 Laptop GPU (0x000028A1) Direct3D11 vs_5_0 ps_5_0, D3D11)". The
+      // middle comma-separated field is the actual adapter; splitting on ", " beats
+      // a regex here because the adapter name has its own brackets in it —
+      // "Intel(R) UHD Graphics 620" — which a naive character class truncates.
+      const m = gpu.match(/^ANGLE \((.*)\)$/);
+      if (m) {
+        const parts = m[1].split(', ');
+        if (parts.length >= 2) gpu = parts[1];
+      }
+      gpu = gpu.replace(/\s*\(0x[0-9A-Fa-f]+\)/, '').replace(/\s+Direct3D.*$/, '')
+               .replace(/\s*\((R|TM)\)/g, '').trim();
+      if (gpu.length > 30) gpu = gpu.slice(0, 29) + '…';
+      hwInfoCache = {
+        gpu,
+        cores: navigator.hardwareConcurrency || 0,
+        mem: navigator.deviceMemory || 0
+      };
+      return hwInfoCache;
+    }
 
     // --- Audio (Web Audio: doom/metal-ish BGM + SFX) ---
     const AudioSys = (() => {
@@ -10920,7 +11002,11 @@
       // ever drew it. It now one-shots every piece of fodder (shambler 24, feral 15,
       // screamer 28, leaper 30, spitter/bomber 34), swings half again as fast, and
       // sweeps nearly a half-circle so it clears a crowd instead of one body.
-      knife:   { reach: 3.2, dmg: 45, cd: 0.30, arc: 0.05, name: 'Knife' },
+      // 45 left the knife one damage short of a drowned and short of a spider once
+      // its armour was applied, so the swing that should have saved you didn't. 54
+      // clears every mid-tier body in one sweep; only the military zombie, the brute
+      // and the colossus need a second.
+      knife:   { reach: 3.5, dmg: 54, cd: 0.28, arc: 0.05, name: 'Knife' },
       machete: { reach: 3.8, dmg: 85, cd: 0.40, arc: -0.05, name: 'Machete' }
     };
     function bladeStats() { return macheteOwned ? BLADE_STATS.machete : BLADE_STATS.knife; }
@@ -10962,11 +11048,16 @@
       uzi:      { name: 'Uzi',      maxAmmo: 32,  reload: 1.4,  interval: 1 / 14, damage: 11, speed: 80,  range: 35,  spin: false, auto: true },
       shotgun:  { name: 'Shotgun',  maxAmmo: 8,   reload: 1.6,  interval: 0.7,    damage: 9,  speed: 60,  range: 22,  spin: false, auto: false, pellets: 7, spread: 0.14 },
       revolver: { name: 'Revolver', maxAmmo: 6,   reload: 1.8,  interval: 0.45,   damage: 52, speed: 80,  range: 50,  spin: false, auto: false, spread: 0.02 },
-      sniper:   { name: 'Sniper',   maxAmmo: 5,   reload: 2.35, interval: 0.9,    damage: 92, speed: 130, range: 125, spin: false, auto: false, spread: 0.004 },
+      // pierce: how many extra bodies the round carries on through after the first.
+      // 3 means it can kill four zombies lined up, each one costing PIERCE_FALLOFF.
+      sniper:   { name: 'Sniper',   maxAmmo: 5,   reload: 2.35, interval: 0.9,    damage: 92, speed: 130, range: 125, spin: false, auto: false, spread: 0.004, pierce: 3 },
       launcher: { name: 'Launcher', maxAmmo: 6,   reload: 2.0,  interval: 0.55,   damage: 80, speed: 32,  range: 62,  spin: false, auto: false, explosive: true },
       // maxAmmo is fuel units per tank; each 0.08s tick burns half a unit (~9.6s of flame).
       flamer:   { name: 'Flamethrower', maxAmmo: 60, reload: 2.4, interval: 0.08, damage: 4, speed: 0, range: 7.5, spin: false, auto: true, flamer: true },
-      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 17, spin: false, auto: true, melee: true, reach: 2.05 }
+      // reach/arc widened from 2.05m and ±66°: at the old size a shambler could stand
+      // just off your shoulder, outside the cone, and chew on you while the saw was
+      // screaming. It now sweeps a full half-circle at arm's length plus a body.
+      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 17, spin: false, auto: true, melee: true, reach: 3.1, arc: -0.05 }
     };
     let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, flamer: 60, chainsaw: Infinity };
     let grenades = 3;
@@ -12521,7 +12612,19 @@
     });
     const CASH_EMISSIVE_BASE = 0.75;
     const CASH_EMISSIVE_AMP = 0.55;
-    const CASH_LIFE = 60;
+    const CASH_LIFE = 30;
+    // Loose change. Every body used to drop a stack of its own, which at 10x horde
+    // size carpeted the field in cash and made the walk pay for itself several times
+    // over. Small payouts now go into a pool and only hit the ground once they are
+    // worth the detour; anything already worth picking up still drops where it died.
+    const CASH_DROP_MIN = 14;
+    let cashPool = 0;
+    function awardCash(x, z, amount) {
+      if (amount <= 0) return;
+      if (amount >= CASH_DROP_MIN) { spawnCashDrop(x, z, amount); return; }
+      cashPool += amount;
+      if (cashPool >= CASH_DROP_MIN) { spawnCashDrop(x, z, Math.round(cashPool)); cashPool = 0; }
+    }
 
     function makeCashStackMesh(value) {
       const g = new THREE.Group();
@@ -12558,6 +12661,7 @@
     }
 
     function clearCashDrops() {
+      cashPool = 0;
       for (const c of cashDrops) {
         scene.remove(c.mesh);
         c.mesh.traverse((ch) => {
@@ -13893,51 +13997,51 @@
     const ZOMBIE_PACE = 1.15;
     const ZOMBIE_TYPES = {
       shambler: {
-        name: 'Shambler', hp: 24, speed: 3.19, radius: 0.42, damage: 6, reward: 6, cashDrop: 6,
+        name: 'Shambler', hp: 24, speed: 3.19, radius: 0.42, damage: 6, reward: 3, cashDrop: 3,
         armor: 0, scale: 1, color: 0xd4c4a8, eye: 0x88ff44, hunch: 0, tactics: 'direct'
       },
       feral: {
-        name: 'Feral', hp: 15, speed: 5.4, radius: 0.37, damage: 7, reward: 9, cashDrop: 9,
+        name: 'Feral', hp: 15, speed: 5.4, radius: 0.37, damage: 7, reward: 5, cashDrop: 5,
         armor: 0, scale: 0.88, color: 0x8a9a6a, eye: 0xccff44, hunch: 0.55, tactics: 'flank'
       },
       // (The construction worker is gone — he looked terrible.)
       leaper: {
-        name: 'Leaper', hp: 30, speed: 4.2, radius: 0.42, damage: 10, reward: 14, cashDrop: 14,
+        name: 'Leaper', hp: 30, speed: 4.2, radius: 0.42, damage: 10, reward: 8, cashDrop: 8,
         armor: 0, scale: 0.92, color: 0xcfc6bc, eye: 0xffe040, hunch: 1, tactics: 'leap'
       },
       spider: {
-        name: 'Spider', hp: 44, speed: 3.0, radius: 0.62, damage: 8, reward: 20, cashDrop: 20,
+        name: 'Spider', hp: 44, speed: 3.0, radius: 0.62, damage: 8, reward: 13, cashDrop: 13,
         armor: 0.08, scale: 1.0, color: 0xa39a84, eye: 0xff3b6b, hunch: 0, tactics: 'spit', spider: true
       },
       drowned: {
-        name: 'Drowned', hp: 40, speed: 2.4, radius: 0.44, damage: 10, reward: 13, cashDrop: 13,
+        name: 'Drowned', hp: 40, speed: 2.4, radius: 0.44, damage: 10, reward: 8, cashDrop: 8,
         armor: 0.04, scale: 0.98, color: 0x3f8a80, eye: 0xc8fff0, hunch: 0.1, tactics: 'direct', aquatic: true
       },
       military: {
-        name: 'Military', hp: 50, speed: 3.15, radius: 0.46, damage: 12, reward: 15, cashDrop: 15,
+        name: 'Military', hp: 50, speed: 3.15, radius: 0.46, damage: 12, reward: 10, cashDrop: 10,
         armor: 0.12, scale: 1.08, color: 0x4a5540, eye: 0x44ff88, hunch: 0, tactical: true, tactics: 'weave'
       },
       brute: {
-        name: 'Brute', hp: 85, speed: 1.85, radius: 0.64, damage: 16, reward: 24, cashDrop: 24,
+        name: 'Brute', hp: 85, speed: 1.85, radius: 0.64, damage: 16, reward: 17, cashDrop: 17,
         armor: 0.28, scale: 1.38, color: 0x6b2a2a, eye: 0xff2222, hunch: 0, armored: true, keepOut: true, tactics: 'tank'
       },
       spitter: {
         // No longer spits — lobbing acid is the spider's job now. It walks in at its
         // normal pace and then closes the last 15m at a quarter speed: a slow, obvious
         // creep you can shoot off the field before it reaches you.
-        name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 18, cashDrop: 18,
+        name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 12, cashDrop: 12,
         armor: 0, scale: 1.05, color: 0x8fa04c, eye: 0xccff22, hunch: 0, tactics: 'creep'
       },
       screamer: {
-        name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 21, cashDrop: 21,
+        name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 14, cashDrop: 14,
         armor: 0, scale: 0.96, color: 0xd8cabb, eye: 0xff55ff, hunch: 0, tactics: 'scream'
       },
       bomber: {
-        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 18, cashDrop: 18,
+        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 12, cashDrop: 12,
         armor: 0, scale: 1.1, color: 0x8f9c4a, eye: 0xffee44, hunch: 0.15, tactics: 'bomb', fat: true
       },
       colossus: {
-        name: 'Colossus', hp: 520, speed: 1.6, radius: 1.05, damage: 30, reward: 180, cashDrop: 180,
+        name: 'Colossus', hp: 520, speed: 1.6, radius: 1.05, damage: 30, reward: 140, cashDrop: 140,
         armor: 0.32, scale: 2.3, color: 0x5a3030, eye: 0xff3300, hunch: 0, tactics: 'boss'
       }
     };
@@ -15319,7 +15423,7 @@
         matchStats.kills += 1;
         const mult = registerKill();
         const cash = Math.round((z.cashDrop != null ? z.cashDrop : (z.reward || 2)) * mult * cashMult() * (bloodMoon ? 1.5 : 1));
-        spawnCashDrop(px, pz, cash);
+        awardCash(px, pz, cash);
         if (Math.random() < medDropChance(z.typeKey)) spawnMedDrop(px + 0.6, pz + 0.4);
         AudioSys.zombieDeath();
         if (z.typeKey === 'colossus') {
@@ -15999,6 +16103,33 @@
     const _laserOrigin = new THREE.Vector3();
     const _laserDir = new THREE.Vector3();
 
+    // Empty-magazine prompt: "reload" while there are still spares to reload from,
+    // "no ammo" once the reserve is gone as well, since those need different actions
+    // from the player (press R vs. walk to the kiosk).
+    function updateReloadPrompt() {
+      if (!reloadPromptEl) return;
+      const st = WEAPON_STATS[currentWeapon];
+      const ammo = ammoByWeapon[currentWeapon];
+      let show = '', dry = false;
+      if (gameStarted && !gameOver && !won && !reloading && !st.melee && Number.isFinite(ammo)) {
+        if (st.flamer) {
+          if (ammo <= 0) { show = (reserveAmmo[currentWeapon] | 0) > 0 ? 'Reload · R' : 'No fuel'; dry = !((reserveAmmo[currentWeapon] | 0) > 0); }
+        } else if (ammo <= 0) {
+          const res = reserveAmmo[currentWeapon] | 0;
+          show = res > 0 ? 'Reload · R' : 'No ammo · kiosk';
+          dry = res <= 0;
+        }
+      }
+      // Called every frame (state can change without the ammo count moving — dying
+      // with an empty magazine, for one), so only touch the DOM when it actually differs.
+      if (show === _reloadPromptShown) return;
+      _reloadPromptShown = show;
+      reloadPromptEl.textContent = show;
+      reloadPromptEl.classList.toggle('show', !!show);
+      reloadPromptEl.classList.toggle('dry', dry);
+    }
+    let _reloadPromptShown = null;
+
     function updateAmmoHud() {
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
@@ -16024,6 +16155,7 @@
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
+      updateReloadPrompt();
     }
     updateAmmoHud();
     let noAmmoFlashT = 0;
@@ -16262,6 +16394,74 @@
       return best;
     }
 
+    // --- Shot line-of-sight -----------------------------------------------------
+    // The reticle sits where the CAMERA ray lands, but the bullet leaves the muzzle,
+    // so a shot can be stopped by a trunk or a rise the camera looks straight over —
+    // you aim at a zombie, the round hits a tree, and nothing on screen said so.
+    // This walks the muzzle→target segment against exactly what a bullet collides
+    // with (terrain, trunks, canopies, rocks — see updateProjectiles) and the reticle
+    // is coloured from the result: green on a zombie you can actually hit, red when
+    // something is in the way.
+    const _losFrom = new THREE.Vector3();
+    function shotBlocked(from, to) {
+      const dx = to.x - from.x, dy = to.y - from.y, dz = to.z - from.z;
+      const flat = Math.hypot(dx, dz);
+      if (flat < 0.4) return false;
+      // Terrain: step along the line and see whether the ground climbs above it. The
+      // tolerance keeps a shot that grazes a slope from reading as blocked.
+      const steps = Math.min(40, Math.max(5, Math.ceil(flat / 1.5)));
+      for (let i = 1; i < steps; i++) {
+        const u = i / steps;
+        if (from.y + dy * u < sampleHeight(from.x + dx * u, from.z + dz * u) - 0.25) return true;
+      }
+      const segMinX = Math.min(from.x, to.x), segMaxX = Math.max(from.x, to.x);
+      const segMinZ = Math.min(from.z, to.z), segMaxZ = Math.max(from.z, to.z);
+      for (const rock of rocks) {
+        if (!rock.alive || !rock.mesh.visible) continue;
+        if (rock.x + rock.radius < segMinX || rock.x - rock.radius > segMaxX ||
+            rock.z + rock.radius < segMinZ || rock.z - rock.radius > segMaxZ) continue;
+        const ry = rock.mesh.position.y;
+        if (segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z,
+            rock.x, rock.z, rock.radius, ry, ry + rock.height) !== null) return true;
+      }
+      for (const t of trees) {
+        const tr = (t.canopyRadius || t.trunkRadius) + 0.4;
+        if (t.x + tr < segMinX || t.x - tr > segMaxX || t.z + tr < segMinZ || t.z - tr > segMaxZ) continue;
+        if (t.stump && t.stumpMesh) {
+          const baseY = t.stumpMesh.position.y;
+          if (segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z,
+              t.x, t.z, t.trunkRadius + 0.15, baseY, baseY + 0.55) !== null) return true;
+          continue;
+        }
+        if (!t.alive || t.falling) continue;
+        const baseY = t.group.position.y;
+        if (t.leafHealth > 0 && segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z,
+            t.x, t.z, t.canopyRadius * 0.9, baseY + t.canopyBottom * 0.65, baseY + t.canopyTop) !== null) return true;
+        if (segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z,
+            t.x, t.z, t.trunkRadius + 0.12, baseY, baseY + t.canopyBottom + 0.4) !== null) return true;
+      }
+      return false;
+    }
+    // '' neutral · 'clear' a zombie you can hit · 'blocked' something is in the way
+    let losState = '';
+    let losSkip = 0;
+    function updateShotLos(onZombie) {
+      // Every other frame: it is a handful of segment tests against the same props
+      // the bullets walk, and the answer cannot change meaningfully in 16ms.
+      if (--losSkip > 0) return;
+      losSkip = 2;
+      let next = '';
+      if (gameStarted && !gameOver && !won && !paused && !placeMode && !buildMode && !mortarMounted) {
+        _losFrom.copy(getMuzzleWorld());
+        if (shotBlocked(_losFrom, aimTarget)) next = 'blocked';
+        else if (onZombie) next = 'clear';
+      }
+      if (next === losState) return;
+      losState = next;
+      reticleEl.classList.toggle('los-clear', next === 'clear');
+      reticleEl.classList.toggle('los-blocked', next === 'blocked');
+    }
+
     function updateMouseAim(dt) {
       if (!pointerOnCanvas) return;
       let ndcX = aimPointerNdc.x, ndcY = aimPointerNdc.y;
@@ -16301,6 +16501,7 @@
       } else {
         aimTarget.copy(aimHit);
       }
+      updateShotLos(zt !== Infinity);
       const dx = aimTarget.x - player.position.x;
       const dz = aimTarget.z - player.position.z;
       if (dx * dx + dz * dz < 0.04) return;
@@ -16467,7 +16668,7 @@
       else scene.remove(mesh);
     }
 
-    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null, kind = 'bullet') {
+    function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null, kind = 'bullet', pierce = 0) {
       if (!fromTurret) damage = damage * dmgMult();
       const o = origin ? origin.clone() : getMuzzleWorld().clone();
       const d = dir ? dir.clone().normalize() : getAimDir().clone();
@@ -16480,7 +16681,11 @@
         speed: spd,
         life, age: 0, hit: false, damage,
         fromTurret,
-        kind: kind || 'bullet'
+        kind: kind || 'bullet',
+        // Bodies this round can still punch through, and the ones it already has —
+        // a zombie the segment clipped this frame must not be hit again next frame.
+        pierce: pierce | 0,
+        pierced: null
       });
     }
 
@@ -16816,6 +17021,7 @@
       if (gun.userData.bladeSpin) gun.userData.bladeSpin.rotation.z += 1.85;
       const st = WEAPON_STATS.chainsaw;
       const reach = st.reach || 1.85;
+      const arc = st.arc != null ? st.arc : 0.4;
       const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
       let hitSomething = false;
       for (const z of zombies) {
@@ -16825,7 +17031,7 @@
         const d = Math.hypot(dx, dz);
         if (d < reach + z.radius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
-          if (dot > 0.4) {
+          if (dot > arc) {
             damageZombie(z, st.damage * dmgMult(), { kind: 'chainsaw', dir: { x: fx, z: fz } });
             hitSomething = true;
           }
@@ -17266,7 +17472,7 @@
             }
             // Pump shotgun: red hull ejects on pump-back — no gold brass here
           } else {
-            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, projectileLifeFor(st), null, st.speed);
+            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, projectileLifeFor(st), null, st.speed, 'bullet', st.pierce || 0);
             // Revolver keeps brass in the cylinder until reload eject
             if (currentWeapon !== 'revolver') spawnCasing(currentWeapon);
           }
@@ -17561,7 +17767,13 @@
           }
         }
       }
-      if (hits && macheteOwned) { AudioSys.macheteChop(); addShake(0.08); }
+      // Hit confirmation. The plain knife used to land completely silently — the only
+      // sound was the whoosh it made on a miss too — so a swing that actually killed
+      // something read exactly like one that hit air.
+      if (hits) {
+        AudioSys.macheteChop();
+        addShake(macheteOwned ? 0.08 : 0.05);
+      }
       meleeBugs(reach, fx, fz, bs.arc);
       meleeWildlife(reach, fx, fz, bs.arc);
       scareWildlife(player.position.x, player.position.z, 8, 0.45);
@@ -17955,7 +18167,10 @@
       z.hitReact = Math.min(0.45, 0.12 + dmg * 0.008);
       z.hitDirX = dx; z.hitDirZ = dz;
       maybeKnockDown(z, kind, dmg, dx, dz);
-      const kick = (kind === 'explosive' ? 4.5 : (kind === 'pellet' ? 2.2 : (kind === 'chainsaw' ? 1.4 : 1.8)));
+      // A blade swing shoves bodies off you — that is the whole point of drawing it
+      // with a zombie already in your face, and the reason the knife used to feel
+      // pointless was that a kill left the next one standing exactly where it was.
+      const kick = (kind === 'explosive' ? 4.5 : (kind === 'melee' ? 5.2 : (kind === 'pellet' ? 2.2 : (kind === 'chainsaw' ? 1.4 : 1.8))));
       z.staggerVX = dx * kick * (0.6 + Math.min(1.2, dmg / 30));
       z.staggerVZ = dz * kick * (0.6 + Math.min(1.2, dmg / 30));
       z.flashT = 0.14;
@@ -17971,6 +18186,12 @@
 
       if (z.hp <= 0) killZombie(z, true, { kind, dir: { x: dx, z: dz } });
     }
+
+    // Each body a penetrating round passes through bleeds this much off its damage,
+    // so a sniper lined up on a column kills the first few and wounds the rest
+    // rather than wiping the whole file for free.
+    const PIERCE_FALLOFF = 0.85;
+    const _pierceHits = [];
 
     function updateProjectiles(dt) {
       for (let i = projectiles.length - 1; i >= 0; i--) {
@@ -17988,18 +18209,58 @@
         p.pos.z += p.dir.z * step;
         p.mesh.position.copy(p.pos);
 
-        let hitZ = null, hitZT = 2;
-        for (const z of zombies) {
-          if (!z.alive) continue;
-          // Hit volumes are anchored to the entity's own ground height. They used to run
-          // from absolute y=0, so anything standing on the 2.2-unit central hill sat
-          // completely outside its own hitbox and could not be shot.
-          const zy = z.mesh.position.y;
-          const t = segmentHitsCylinder(
-            p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
-            z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, zy, zy + (z.hitH || 1.45)
-          );
-          if (t !== null && t < hitZT) { hitZT = t; hitZ = z; }
+        let hitZ = null, hitZT = 2, pierceSpent = false;
+        if (p.pierce > 0) {
+          // Penetrating round: resolve every body the segment crosses this frame,
+          // nearest first, instead of stopping at the first one. At 130 m/s a frame's
+          // travel is ~2m, so a tight column can fall inside a single step and the
+          // one-hit-per-frame version would have missed most of it. `pierced`
+          // remembers what it has already gone through, so a zombie straddling two
+          // frames' worth of travel cannot be hit twice by the same round.
+          _pierceHits.length = 0;
+          for (const z of zombies) {
+            if (!z.alive) continue;
+            if (p.pierced && p.pierced.has(z)) continue;
+            const zy = z.mesh.position.y;
+            const t = segmentHitsCylinder(
+              p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
+              z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, zy, zy + (z.hitH || 1.45)
+            );
+            if (t !== null) _pierceHits.push({ z, t });
+          }
+          if (_pierceHits.length) {
+            _pierceHits.sort((a, b) => a.t - b.t);
+            if (!p.pierced) p.pierced = new Set();
+            for (const h of _pierceHits) {
+              const hy = p.prev.y + (p.pos.y - p.prev.y) * h.t;
+              damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy });
+              p.pierced.add(h.z);
+              if (p.pierce <= 0) { pierceSpent = true; break; } // that was the last body it can take
+              p.pierce -= 1;
+              p.damage *= PIERCE_FALLOFF;
+            }
+          }
+          // Damage is already applied above, so this stops the round without going
+          // through the single-hit path below (which would resolve it a second time).
+          if (pierceSpent) {
+            p.hit = true;
+            releaseTracerMesh(p.mesh);
+            projectiles.splice(i, 1);
+            continue;
+          }
+        } else {
+          for (const z of zombies) {
+            if (!z.alive) continue;
+            // Hit volumes are anchored to the entity's own ground height. They used to run
+            // from absolute y=0, so anything standing on the 2.2-unit central hill sat
+            // completely outside its own hitbox and could not be shot.
+            const zy = z.mesh.position.y;
+            const t = segmentHitsCylinder(
+              p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
+              z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, zy, zy + (z.hitH || 1.45)
+            );
+            if (t !== null && t < hitZT) { hitZT = t; hitZ = z; }
+          }
         }
         if (hitZ) {
           const hy = p.prev.y + (p.pos.y - p.prev.y) * hitZT;
@@ -19663,6 +19924,23 @@
     // Camera settings apply live — both are read straight out of the frame loop. Turning
     // both off gives the plain fixed rig: no pan, manual tilt back on middle-drag.
     {
+      {
+        const perfBtn = document.getElementById('perfHudToggle');
+        if (perfBtn) {
+          const syncPerf = () => {
+            perfBtn.textContent = 'FPS & hardware: ' + (showPerf ? 'on' : 'off');
+            perfBtn.classList.toggle('on', showPerf);
+          };
+          perfBtn.addEventListener('click', () => {
+            showPerf = !showPerf;
+            try { localStorage.setItem('tt_perf_hud', showPerf ? '1' : '0'); } catch (_) {}
+            perfEl.classList.toggle('on', showPerf);
+            if (showPerf) { perfWorstMs = 0; perfHitches = 0; perfAccum = 0; perfFrames = 0; }
+            syncPerf();
+          });
+          syncPerf();
+        }
+      }
       const followBtn = document.getElementById('followCursorToggle');
       const tiltBtns = document.querySelectorAll('#autoTiltSeg button');
       const syncFollow = () => {
@@ -19995,6 +20273,7 @@
       sun.target.updateMatrixWorld();
       if (knifeCd > 0) knifeCd -= dt;
       if (noAmmoFlashT > 0) noAmmoFlashT -= dt;
+      updateReloadPrompt(); // state can change without the ammo count moving (death, quit)
       if (grenadeCd > 0) grenadeCd -= dt;
       if (rollCd > 0) rollCd -= dt;
 
@@ -20632,8 +20911,14 @@
           const draws = info.drawCalls != null ? info.drawCalls : (info.calls != null ? info.calls : 0);
           const tris = info.triangles != null ? info.triangles : 0;
           perfShownWorst = perfWorstMs;
+          const hw = hardwareInfo();
           perfEl.textContent =
-            'rend  ' + rendererBackend +
+            'gpu   ' + hw.gpu +
+            '\ncpu   ' + (hw.cores ? hw.cores + ' threads' : '—') + (hw.mem ? ' · ' + hw.mem + 'GB' : '') +
+            '\nres   ' + Math.round(window.innerWidth * (window.devicePixelRatio || 1)) + 'x' +
+              Math.round(window.innerHeight * (window.devicePixelRatio || 1)) +
+              ' @' + (window.devicePixelRatio || 1).toFixed(2) + 'x' +
+            '\nrend  ' + rendererBackend +
             '\nfps   ' + Math.round(perfFrames / perfAccum) +
             '\nworst ' + perfShownWorst.toFixed(0) + 'ms' +
             '\nhitch ' + perfHitches +
