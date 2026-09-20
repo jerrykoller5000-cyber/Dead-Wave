@@ -14514,8 +14514,17 @@
       const ring = mortarArc.userData.ring;
       ring.position.set(sol.tx, sol.ty + 0.06, sol.tz);
       mortarArc.visible = true;
-      // Tube tracks the aim.
+      // Tube tracks the aim in both axes. It used to swing to the bearing but hold one
+      // fixed elevation whatever the range, so the barrel and the arc it was drawing
+      // openly disagreed. The tube is a +Y cylinder tipped forward, so its rotation.x
+      // is the launch elevation minus a right angle.
       b.mesh.rotation.y = Math.atan2(sol.tx - b.x, sol.tz - b.z);
+      const tube = b.mesh.userData.tube;
+      if (tube) {
+        const elev = Math.atan2(sol.vy, Math.hypot(sol.vx, sol.vz));
+        const want = Math.max(0.70, Math.min(1.48, elev)) - Math.PI / 2;
+        tube.rotation.x += (want - tube.rotation.x) * 0.18;   // eased: the tube swings, it does not snap
+      }
     }
     function mountMortar(b) {
       if (mortarMounted || mortarCarried || placeMode) return;
@@ -14554,9 +14563,10 @@
         mesh, pos: new THREE.Vector3(sol.sx, sol.sy, sol.sz), prev: new THREE.Vector3(sol.sx, sol.sy, sol.sz),
         vx: sol.vx, vy: sol.vy, vz: sol.vz, age: 0, fuse: sol.T + 2.5, damage: MORTAR_DAMAGE, isShell: true
       });
-      // Tube kick + report
-      if (b.mesh.userData.tube) b.mesh.userData.tube.position.y -= 0.12;
-      b.kickT = 0.18;
+      // Tube kick + report. The tube drops on the shot and rides back up; it used to
+      // step down and then snap back to its rest height in one frame.
+      b.kickT = 0.26;
+      mortarLoadT = 0.45;
       spawnDust(b.x, b.mesh.position.y + 1.0, b.z, 4);
       spawnEmbers(sol.sx, sol.sy, sol.sz, 4, 0.8);
       addShake(0.35);
@@ -14591,12 +14601,48 @@
       placeBannerEl.textContent = '';
       AudioSys.place();
     }
+    // How long since the last shell went down the tube — drives the loading motion.
+    let mortarLoadT = 0;
+    // Manning a mortar used to leave the marine standing at ease beside it with his
+    // gun simply hidden. He now crouches into the tube with both hands at the muzzle,
+    // and reaches up and drops a shell in on every shot.
+    function updateMortarCrewPose() {
+      if (!mortarMounted) return;
+      const ud = marine.userData;
+      const armL = ud.armLG, armR = ud.armRG, elbowL = ud.elbowLG, elbowR = ud.elbowRG;
+      const torso = ud.torsoG, head = ud.headG;
+      // 1 while the shell is being lifted and dropped, 0 at rest on the tube.
+      const load = mortarLoadT > 0 ? Math.sin((mortarLoadT / 0.45) * Math.PI) : 0;
+      const lift = Math.max(0, Math.min(1, load));
+      if (torso) { torso.rotation.x = 0.30 - lift * 0.22; torso.rotation.z = 0; }
+      if (head) head.rotation.x = 0.18 - lift * 0.3;
+      // Both arms forward and up into the muzzle; they rise together to feed it.
+      for (const [arm, elbow, sgn] of [[armR, elbowR, 1], [armL, elbowL, -1]]) {
+        if (!arm) continue;
+        arm.rotation.x = -1.05 - lift * 0.55;
+        arm.rotation.z = sgn * (0.26 - lift * 0.1);
+        arm.rotation.y = 0;
+        if (elbow) elbow.rotation.x = -0.85 + lift * 0.45;
+      }
+      // Knees bent, weight down behind the baseplate.
+      if (ud.legLG) ud.legLG.rotation.x = 0.42;
+      if (ud.legRG) ud.legRG.rotation.x = 0.30;
+      if (ud.kneeLG) ud.kneeLG.rotation.x = -0.80;
+      if (ud.kneeRG) ud.kneeRG.rotation.x = -0.62;
+    }
+
     function updateMortar(dt) {
       if (mortarFireCd > 0) mortarFireCd -= dt;
+      if (mortarLoadT > 0) mortarLoadT = Math.max(0, mortarLoadT - dt);
       for (const b of builds) {
         if (b.type !== 'mortar' || !b.kickT) continue;
         b.kickT -= dt;
-        if (b.kickT <= 0 && b.mesh.userData.tube) { b.mesh.userData.tube.position.y = 0.62; b.kickT = 0; }
+        const tube = b.mesh.userData.tube;
+        if (b.kickT <= 0) { b.kickT = 0; if (tube) tube.position.y = 0.62; continue; }
+        // Instant drop, eased return — a recoil that reads as weight rather than a
+        // one-frame teleport back to rest.
+        const k = b.kickT / 0.26;
+        if (tube) tube.position.y = 0.62 - 0.16 * k * k;
       }
       if (mortarMounted) {
         if (!builds.includes(mortarMounted) || gameOver || won) { dismountMortar(); return; }
@@ -21555,6 +21601,7 @@
         // Always face aim so weaponMount +Z tracks mouse
         player.rotation.y = aimYaw;
         updateMarinePose(dt, moving, running && !crouching && moving, playerSwimming);
+        updateMortarCrewPose();
         if (reloading) {
           reloadTimer -= dt;
           if (reloadTimer <= 0) {

@@ -138,6 +138,17 @@ Everything you place lands in a 2 m cell on one fixed lattice covering the map, 
 cell, and `R` turns it a quarter turn at a time. Condition bars show on every structure while a
 build ghost is up, not only on ones already damaged.
 
+**Panels** — walls, sandbag walls and barricades — are built to the cell. Each spans it exactly and
+carries a post centred on the cell boundary, so two neighbours put a post in the same place and it
+reads as one continuous post; that is also what closes an L corner. A run takes the height of the
+piece it is laid against and the buried skirt swallows the ground falling away underneath, so a
+wall reads as one wall rather than a staircase; only a drop deeper than the skirt breaks the run.
+Walls carry a flat capping strip at a fixed height — that is the surface platforms will stand on.
+Barricades get the span and the posts but no cap: nothing will ever stand on one.
+
+Panels collide as an oriented box rather than a circle, so neighbouring pieces share an edge and a
+run has no slot in it.
+
 Zombies attack structures. The player always comes first — one that can reach you hits you — but
 anything that cannot get to you turns on whatever of yours is in the way, turrets included.
 Brutes and the colossus put their weight behind it and go through a wall fast. Spikes and mines
