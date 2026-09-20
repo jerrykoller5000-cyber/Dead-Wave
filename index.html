@@ -8231,6 +8231,9 @@
     const CASING_WEAPONS = {
       minigun:  { sx: 0.72, sy: 0.72, sz: 0.9,  ox: 0.09, oy: 0.03, oz: 0.12 },
       m4:       { sx: 1.0,  sy: 1.0,  sz: 1.15, ox: 0.08, oy: 0.04, oz: 0.04 },
+      // Fatter 7.62 case than the M4's, and a hull rather than brass for the AA-12.
+      ak:       { sx: 1.15, sy: 1.15, sz: 1.2,  ox: 0.085, oy: 0.045, oz: 0.05 },
+      aa12:     { sx: 1.2,  sy: 1.2,  sz: 0.82, ox: 0.085, oy: 0.05, oz: 0.1 },
       pistol:   { sx: 0.62, sy: 0.62, sz: 0.72, ox: 0.055, oy: 0.06, oz: 0.02 },
       uzi:      { sx: 0.7,  sy: 0.7,  sz: 0.85, ox: 0.07, oy: 0.05, oz: 0.06 },
       shotgun:  { sx: 1.2,  sy: 1.2,  sz: 0.82, ox: 0.09, oy: 0.05, oz: 0.18 },
@@ -9404,6 +9407,161 @@
       gun.userData.laser = laser;
       gun.userData.barrelAssembly = null;
       gun.userData.muzzleLocal = new THREE.Vector3(0, 0.02, 0.98);
+      gun.userData.slide = null;
+      return gun;
+    }
+
+
+    // AK-pattern rifle. Reads apart from the M4 at a glance: wood furniture, the
+    // deep curved magazine, and the gas tube sitting above the barrel.
+    function makeAk() {
+      const gun = new THREE.Group();
+      const body = new THREE.Mesh(rbox(0.12, 0.15, 0.5), gunMetal);
+      body.castShadow = true;
+      gun.add(body);
+      // Dust cover, so the top line is not just a flat slab
+      const cover = new THREE.Mesh(rbox(0.105, 0.045, 0.34), gunMid);
+      cover.position.set(0, 0.095, 0.02);
+      gun.add(cover);
+      const stock = new THREE.Mesh(rbox(0.09, 0.13, 0.34), woodMat);
+      stock.position.set(0, -0.015, -0.4);
+      stock.rotation.x = -0.05;
+      gun.add(stock);
+      const grip = new THREE.Mesh(rbox(0.07, 0.19, 0.085), woodMat);
+      grip.position.set(0, -0.14, -0.1);
+      grip.rotation.x = 0.34;
+      gun.add(grip);
+      // The banana mag: two boxes at slightly different angles fake the curve far
+      // more cheaply than a lathed profile, and at this scale it reads the same.
+      const mag = new THREE.Group();
+      const magTop = new THREE.Mesh(rbox(0.06, 0.16, 0.1), gunAccent);
+      magTop.position.set(0, -0.07, 0.005);
+      magTop.rotation.x = -0.16;
+      mag.add(magTop);
+      const magBot = new THREE.Mesh(rbox(0.058, 0.13, 0.095), gunAccent);
+      magBot.position.set(0, -0.19, 0.045);
+      magBot.rotation.x = -0.42;
+      mag.add(magBot);
+      mag.position.set(0, -0.06, 0.04);
+      gun.add(mag);
+      gun.userData.mag = mag;
+      gun.userData.baseMagPos = mag.position.clone();
+      gun.userData.baseMagRot = mag.rotation.clone();
+      const handguard = new THREE.Mesh(rbox(0.105, 0.1, 0.3), woodMat);
+      handguard.position.set(0, -0.005, 0.38);
+      gun.add(handguard);
+      const gasTube = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.3, 8), gunDark);
+      gasTube.rotation.x = Math.PI / 2;
+      gasTube.position.set(0, 0.075, 0.38);
+      gun.add(gasTube);
+      const gasBlock = new THREE.Mesh(rbox(0.05, 0.08, 0.06), gunMid);
+      gasBlock.position.set(0, 0.05, 0.53);
+      gun.add(gasBlock);
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.023, 0.023, 0.4, 10), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, -0.005, 0.72);
+      gun.add(barrel);
+      const brake = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.032, 0.09, 10), gunDark);
+      brake.rotation.x = Math.PI / 2;
+      brake.position.set(0, -0.005, 0.95);
+      gun.add(brake);
+      const frontSight = new THREE.Mesh(rbox(0.035, 0.075, 0.04), gunDark);
+      frontSight.position.set(0, 0.07, 0.84);
+      gun.add(frontSight);
+      const rearSight = new THREE.Mesh(rbox(0.05, 0.03, 0.06), gunDark);
+      rearSight.position.set(0, 0.13, -0.08);
+      gun.add(rearSight);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.065, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 })));
+      flash.position.set(0, -0.005, 1.02);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 3.5);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.006, 0.006, 8, 4),
+        glowMat(new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 }), 2.0)
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, -0.005, 5);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 1;
+      gun.userData.laserLen = 8;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, -0.005, 1.02);
+      gun.userData.slide = null;
+      return gun;
+    }
+
+    // Automatic shotgun. Slab-sided receiver and a fat drum, so it never reads as
+    // the pump gun even in a thumbnail on the weapon wheel.
+    function makeAa12() {
+      const gun = new THREE.Group();
+      const body = new THREE.Mesh(rbox(0.14, 0.18, 0.52), gunMid);
+      body.castShadow = true;
+      gun.add(body);
+      const rail = new THREE.Mesh(rbox(0.06, 0.035, 0.34), gunDark);
+      rail.position.set(0, 0.11, 0.04);
+      gun.add(rail);
+      const stock = new THREE.Mesh(rbox(0.1, 0.14, 0.3), gunDark);
+      stock.position.set(0, -0.005, -0.4);
+      gun.add(stock);
+      const grip = new THREE.Mesh(rbox(0.075, 0.19, 0.09), gunDark);
+      grip.position.set(0, -0.16, -0.1);
+      grip.rotation.x = 0.3;
+      gun.add(grip);
+      // Drum, lying on its side under the receiver
+      const mag = new THREE.Group();
+      const drum = new THREE.Mesh(new THREE.CylinderGeometry(0.135, 0.135, 0.1, 16), gunAccent);
+      drum.rotation.z = Math.PI / 2;
+      mag.add(drum);
+      const drumFace = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.115, 12), gunDark);
+      drumFace.rotation.z = Math.PI / 2;
+      mag.add(drumFace);
+      const neck = new THREE.Mesh(rbox(0.07, 0.09, 0.1), gunAccent);
+      neck.position.set(0, 0.13, 0);
+      mag.add(neck);
+      mag.position.set(0, -0.23, 0.06);
+      gun.add(mag);
+      gun.userData.mag = mag;
+      gun.userData.baseMagPos = mag.position.clone();
+      gun.userData.baseMagRot = mag.rotation.clone();
+      const handguard = new THREE.Mesh(rbox(0.11, 0.1, 0.26), gunMetal);
+      handguard.position.set(0, -0.015, 0.36);
+      gun.add(handguard);
+      const shroud = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.34, 10), gunDark);
+      shroud.rotation.x = Math.PI / 2;
+      shroud.position.set(0, 0.015, 0.62);
+      gun.add(shroud);
+      const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.2, 10), gunAccent);
+      barrel.rotation.x = Math.PI / 2;
+      barrel.position.set(0, 0.015, 0.84);
+      gun.add(barrel);
+      const port = new THREE.Mesh(rbox(0.02, 0.05, 0.12), gunDark);
+      port.position.set(0.072, 0.045, 0.1);
+      gun.add(port);
+      const flash = new THREE.Mesh(new THREE.SphereGeometry(0.08, 6, 6), glowMat(new THREE.MeshBasicMaterial({ color: 0xffcc66, transparent: true, opacity: 0 })));
+      flash.position.set(0, 0.015, 0.98);
+      gun.add(flash);
+      const flashLight = new THREE.PointLight(0xffaa44, 0, 3.4);
+      flashLight.position.copy(flash.position);
+      gun.add(flashLight);
+      const laser = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.006, 0.006, 7, 4),
+        glowMat(new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0 }), 2.0)
+      );
+      laser.rotation.x = Math.PI / 2;
+      laser.position.set(0, 0.015, 4.4);
+      gun.add(laser);
+      gun.userData.laserBaseZ = 0.95;
+      gun.userData.laserLen = 7;
+      gun.userData.flash = flash;
+      gun.userData.flashLight = flashLight;
+      gun.userData.laser = laser;
+      gun.userData.barrelAssembly = null;
+      gun.userData.muzzleLocal = new THREE.Vector3(0, 0.015, 0.98);
       gun.userData.slide = null;
       return gun;
     }
@@ -10977,6 +11135,22 @@
     m4.visible = false;
     weaponMount.add(m4);
 
+    const ak = makeAk();
+    // Grip mesh at (0,-0.14,-0.10) — lift/forward so the palm takes the pistol grip
+    ak.position.set(0.0, 0.11, 0.09);
+    ak.rotation.set(0.0, 0.0, 0.0);
+    ak.scale.setScalar(0.92);
+    ak.visible = false;
+    weaponMount.add(ak);
+
+    const aa12 = makeAa12();
+    // Sits a touch lower than the rifles: the drum needs clearance under the receiver
+    aa12.position.set(0.0, 0.12, 0.09);
+    aa12.rotation.set(0.0, 0.0, 0.0);
+    aa12.scale.setScalar(0.9);
+    aa12.visible = false;
+    weaponMount.add(aa12);
+
     const pistol = makePistol();
     // Grip mesh sits at (0,-0.08,-0.02) in gun space — lift so palm holds the grip
     pistol.position.set(0.0, 0.07, 0.03);
@@ -11062,7 +11236,7 @@
       if (knife.userData.macheteModel) knife.userData.macheteModel.visible = macheteOwned;
     }
 
-    const weaponMeshes = { minigun, m4, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
+    const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
 
     // === Light-count stability ==================================================
     // Every gun used to carry its own muzzle PointLight as a child, and switching
@@ -11081,7 +11255,7 @@
       if (own.parent) own.parent.remove(own); // drop the per-gun light entirely
       gun.userData.flashLight = muzzleFlashLight; // same field name, shared target
     }
-    const WEAPON_ORDER = ['minigun', 'm4', 'pistol', 'uzi', 'shotgun', 'revolver', 'sniper', 'launcher', 'flamer', 'chainsaw'];
+    const WEAPON_ORDER = ['minigun', 'm4', 'ak', 'pistol', 'uzi', 'shotgun', 'aa12', 'revolver', 'sniper', 'launcher', 'flamer', 'chainsaw'];
     let weaponIndex = 0;
     let currentWeapon = 'minigun';
     const SWAP_DUR = 0.28;
@@ -11091,6 +11265,13 @@
     const WEAPON_STATS = {
       minigun:  { name: 'Minigun',  maxAmmo: 300, reload: 1.15, interval: 1 / 15, damage: 10, speed: 90,  range: 50,  spin: true,  auto: true },
       m4:       { name: 'M4',       maxAmmo: 30,  reload: 1.55, interval: 0.1,    damage: 19, speed: 100, range: 75,  spin: false, auto: true },
+      // Hits harder than the M4 and reaches about as far, but it is slower to run
+      // dry, slower to reload and throws a looser group: the trade is per-shot
+      // weight against the M4's rate and precision.
+      ak:       { name: 'AK-47',    maxAmmo: 30,  reload: 2.0,  interval: 0.11,   damage: 27, speed: 100, range: 70,  spin: false, auto: true, spread: 0.016 },
+      // Full-auto shotgun: a 20-round drum of five-pellet shells. Each shell is
+      // weaker than the pump's seven, but it keeps sending them.
+      aa12:     { name: 'AA-12',    maxAmmo: 20,  reload: 2.6,  interval: 0.19,   damage: 7,  speed: 60,  range: 24,  spin: false, auto: true, pellets: 5, spread: 0.17 },
       pistol:   { name: 'Pistol',   maxAmmo: 12,  reload: 1.35, interval: 0.28,   damage: 24, speed: 75,  range: 40,  spin: false, auto: true },
       uzi:      { name: 'Uzi',      maxAmmo: 32,  reload: 1.4,  interval: 1 / 14, damage: 11, speed: 80,  range: 35,  spin: false, auto: true },
       shotgun:  { name: 'Shotgun',  maxAmmo: 8,   reload: 1.6,  interval: 0.7,    damage: 9,  speed: 60,  range: 22,  spin: false, auto: false, pellets: 7, spread: 0.14 },
@@ -11106,7 +11287,7 @@
       // screaming. It now sweeps a full half-circle at arm's length plus a body.
       chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 17, spin: false, auto: true, melee: true, reach: 3.1, arc: -0.05 }
     };
-    let ammoByWeapon = { minigun: 300, m4: 30, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, flamer: 60, chainsaw: Infinity };
+    let ammoByWeapon = { minigun: 300, m4: 30, ak: 30, aa12: 20, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, flamer: 60, chainsaw: Infinity };
     let grenades = 3;
     const MAX_GRENADES = 5;
     // Health is scarce now: natural regen only ever climbs back to 40% of max, and
@@ -11125,22 +11306,24 @@
     // Weapons are unlocked one-time; ammo is a finite reserve behind the magazine
     // (reloads draw from it, and it's only restocked at the kiosk during prep);
     // extended mags are a per-weapon one-time upgrade; the chainsaw burns fuel.
-    const WEAPON_PRICE = { pistol: 0, uzi: 70, shotgun: 110, m4: 160, revolver: 140, sniper: 230, launcher: 300, minigun: 360, flamer: 210, chainsaw: 190 };
+    const WEAPON_PRICE = { pistol: 0, uzi: 70, shotgun: 110, m4: 160, ak: 195, revolver: 140, sniper: 230, aa12: 340, launcher: 300, minigun: 360, flamer: 210, chainsaw: 190 };
     const WEAPON_BLURB = {
       pistol: 'Sidearm. Reliable, slow.', uzi: 'Spray-and-pray SMG. Short range, fast.', shotgun: 'Seven-pellet pump. Devastating up close.',
       m4: 'Full-auto rifle. The workhorse.', revolver: 'Six heavy rounds. One-taps most things.', sniper: 'True scope, 2X/4X/6X. Headshots from across the map.',
+      ak: 'Harder-hitting full-auto rifle. Slower and looser than the M4, but every round counts for more.',
+      aa12: 'Full-auto shotgun off a 20-round drum. Five pellets a shell and no pump to work — it hoses a corridor.',
       launcher: '40mm contact-fused grenades. Six in the drum.', minigun: '300-round spin-up. Melts hordes.', chainsaw: 'No ammo, just gas. Hold to cut.',
       flamer: 'Hold to hose a stream of burning fuel, about 7m. It sticks to what it hits, sets the ground alight — including under you — and fizzles out in water. Burning zombies spread it to whatever they touch.'
     };
     // { rounds per pack, price } — chainsaw buys seconds of fuel.
-    const AMMO_PACK = { pistol: { n: 24, cost: 6 }, uzi: { n: 64, cost: 11 }, shotgun: { n: 16, cost: 12 }, m4: { n: 60, cost: 15 }, revolver: { n: 12, cost: 11 }, sniper: { n: 10, cost: 20 }, launcher: { n: 6, cost: 34 }, minigun: { n: 300, cost: 34 }, chainsaw: { n: 45, cost: 14 }, mortar: { n: 4, cost: 26 }, flamer: { n: 60, cost: 18 } };
+    const AMMO_PACK = { pistol: { n: 24, cost: 6 }, uzi: { n: 64, cost: 11 }, shotgun: { n: 16, cost: 12 }, m4: { n: 60, cost: 15 }, ak: { n: 60, cost: 18 }, aa12: { n: 20, cost: 20 }, revolver: { n: 12, cost: 11 }, sniper: { n: 10, cost: 20 }, launcher: { n: 6, cost: 34 }, minigun: { n: 300, cost: 34 }, chainsaw: { n: 45, cost: 14 }, mortar: { n: 4, cost: 26 }, flamer: { n: 60, cost: 18 } };
     // Reserve caps: a handful of magazines' worth, so you can't front-load a whole run.
-    const RESERVE_CAP = { pistol: 96, uzi: 192, shotgun: 48, m4: 180, revolver: 36, sniper: 30, launcher: 18, minigun: 900, mortar: 16, flamer: 240 };
-    const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
+    const RESERVE_CAP = { pistol: 96, uzi: 192, shotgun: 48, m4: 180, ak: 180, aa12: 100, revolver: 36, sniper: 30, launcher: 18, minigun: 900, mortar: 16, flamer: 240 };
+    const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
     let weaponOwned = { pistol: true };
-    let reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
+    let reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, ak: 0, aa12: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
     let extMag = {};                   // weapon key -> true once bought
     let sawFuel = SAW_FUEL_BASE;
     let sawTankUpgraded = false;
@@ -11184,7 +11367,7 @@
     }
     function resetEconomy() {
       weaponOwned = { pistol: true };
-      reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
+      reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, ak: 0, aa12: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
       extMag = {};
       sawFuel = SAW_FUEL_BASE;
       sawTankUpgraded = false;
@@ -11231,6 +11414,9 @@
     const LAUNCHER_MOUNT_BASE = { x: 0.0, y: 0.018, z: 0.018, rx: 1.05, ry: 0.06, rz: 0.05 };
     // Minigun — hand-seated (not chest-float); slightly lower for bulk
     const MINIGUN_MOUNT_BASE = { x: 0.0, y: 0.012, z: 0.01, rx: 1.05, ry: 0.05, rz: 0.04 };
+    // AK / AA-12 — same rifle-ish palm seat as the M4
+    const AK_MOUNT_BASE = { x: 0.0, y: 0.017, z: 0.017, rx: 1.05, ry: 0.06, rz: 0.05 };
+    const AA12_MOUNT_BASE = { x: 0.0, y: 0.016, z: 0.016, rx: 1.05, ry: 0.055, rz: 0.045 };
     // Chainsaw — light hand seat only (melee already polished)
     const CHAINSAW_MOUNT_BASE = { x: 0.0, y: 0.015, z: 0.012, rx: 1.05, ry: 0.055, rz: 0.045 };
     function getWeaponMountBase() {
@@ -11238,6 +11424,8 @@
       if (currentWeapon === 'sniper') return SNIPER_MOUNT_BASE;
       if (currentWeapon === 'uzi') return UZI_MOUNT_BASE;
       if (currentWeapon === 'm4') return M4_MOUNT_BASE;
+      if (currentWeapon === 'ak') return AK_MOUNT_BASE;
+      if (currentWeapon === 'aa12') return AA12_MOUNT_BASE;
       if (currentWeapon === 'revolver') return REVOLVER_MOUNT_BASE;
       if (currentWeapon === 'shotgun') return SHOTGUN_MOUNT_BASE;
       if (currentWeapon === 'launcher') return LAUNCHER_MOUNT_BASE;
@@ -11248,6 +11436,8 @@
     const GUN_BASE = {
       minigun: { pos: minigun.position.clone(), rot: minigun.rotation.clone() },
       m4: { pos: m4.position.clone(), rot: m4.rotation.clone() },
+      ak: { pos: ak.position.clone(), rot: ak.rotation.clone() },
+      aa12: { pos: aa12.position.clone(), rot: aa12.rotation.clone() },
       pistol: { pos: pistol.position.clone(), rot: pistol.rotation.clone() },
       uzi: { pos: uzi.position.clone(), rot: uzi.rotation.clone() },
       shotgun: { pos: shotgun.position.clone(), rot: shotgun.rotation.clone() },
@@ -11815,8 +12005,12 @@
             mag.rotation.z = 0;
           }
         }
-      } else if (currentWeapon === 'm4') {
-        // RH locked — tip-back for magwell; LH fetch/seat slam; closed-bolt (no bolt cycle)
+      } else if (currentWeapon === 'm4' || currentWeapon === 'ak' || currentWeapon === 'aa12') {
+        // Every mag-fed long gun runs the same beats: tip back for the magwell, drop
+        // the empty, left hand fetches and slams the fresh one home. Only how far the
+        // magazine has to travel differs — an AK mag is deeper than an M4's and the
+        // AA-12's drum deeper still, and a drum is slower to line up.
+        const deep = currentWeapon === 'aa12' ? 0.60 : (currentWeapon === 'ak' ? 0.52 : 0.46);
         const present = _seg(progress, 0.0, 0.15);
         const recover = _seg(progress, 0.90, 1.0);
         const tilt = present * (1 - recover);
@@ -11849,7 +12043,7 @@
         reloadElbowOffL.y = 0.12 * fetchDown;
         reloadElbowOffL.z = 0.08 * fetchUp - 0.14 * slap;
 
-        const base = GUN_BASE.m4;
+        const base = GUN_BASE[currentWeapon];
         if (base) {
           gun.position.copy(base.pos);
           gun.rotation.copy(base.rot);
@@ -11858,7 +12052,7 @@
         if (gun.userData.mag && gun.userData.baseMagPos) {
           const mag = gun.userData.mag;
           const bp = gun.userData.baseMagPos;
-          const dropY = 0.46;
+          const dropY = deep;
           if (holdGone) {
             mag.visible = false;
             mag.position.set(bp.x, bp.y - dropY, bp.z + 0.05);
@@ -16121,6 +16315,8 @@
       uzi: '<rect x="5" y="6.8" width="8.4" height="4.2" rx=".5"/><rect x="13.2" y="7.9" width="6.4" height="1.9" rx=".4"/><rect x="6.6" y="11" width="3.2" height="6.6" rx=".4"/><path d="M10.8 11h2.9l1.4 3.2h-2.9z"/>',
       shotgun: '<rect x="2" y="8.6" width="17.5" height="2.2" rx=".4"/><rect x="8.2" y="10.8" width="4.6" height="1.9" rx=".3"/><path d="M2 10.8h3.4l-1.7 4.6H.6z"/><rect x="17" y="7.4" width="2" height="3.2" rx=".3"/>',
       m4: '<rect x="2.6" y="8.4" width="16.8" height="2.4" rx=".4"/><rect x="6.4" y="6.4" width="6.4" height="2" rx=".4"/><path d="M9.2 10.8h3.2l.8 5.4h-3.2z"/><path d="M2.6 10.8h3l-1.4 4.2H1.2z"/>',
+      ak: '<rect x="2.6" y="8" width="16.4" height="2.6" rx=".4"/><path d="M8.8 10.6h3.4l1 5.6h-3.4z"/><path d="M11.4 13.2h3.2l.7 4.2h-3.2z" opacity=".85"/><rect x="2.6" y="10.6" width="3.2" height="1.9" rx=".3"/><path d="M2.6 10.6h3.2l-1.3 4h-3z"/><rect x="13.6" y="6.4" width="5.6" height="1.5" rx=".3"/><rect x="18.4" y="7.6" width="3" height="3.4" rx=".4"/>',
+      aa12: '<rect x="3" y="7" width="13.4" height="4.2" rx=".6"/><rect x="6.6" y="5.4" width="6.4" height="1.6" rx=".4"/><circle cx="10.4" cy="15.4" r="3.6"/><rect x="9.2" y="10.8" width="2.4" height="2.4"/><path d="M4.6 11.2h3.2l-1.2 5h-3z"/><rect x="16.4" y="8" width="5" height="2.2" rx=".5"/>',
       revolver: '<rect x="3.4" y="8.4" width="12" height="2.6" rx=".5"/><circle cx="9.4" cy="11.4" r="2.9"/><path d="M5.6 12.6h3.6L7.6 18.4H4z"/><rect x="15" y="8.8" width="4.6" height="1.9" rx=".4"/>',
       sniper: '<rect x="1.6" y="9.2" width="19" height="2" rx=".4"/><rect x="7.4" y="5.6" width="7.6" height="2.4" rx=".6"/><rect x="9.6" y="8" width="1.6" height="1.4"/><path d="M4.6 11.2h3.2l-1.4 5.4H2.8z"/><rect x="18.4" y="8.2" width="1.8" height="4" rx=".3"/>',
       launcher: '<rect x="2.4" y="8" width="15" height="4.4" rx="2.2"/><circle cx="19.2" cy="10.2" r="2.6"/><path d="M6.4 12.4h3.4L8.4 18h-3.4z"/><rect x="11.6" y="5.8" width="4.4" height="2.2" rx=".5"/>',
@@ -17156,6 +17352,8 @@
       revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.08, -0.04], fore: [-0.05, -0.1, -0.02] },
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.1, -0.02], fore: [0, -0.13, 0.06] },
       m4:       { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.11, -0.08], fore: [0, -0.05, 0.16] },
+      ak:       { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.14, -0.10], fore: [0, -0.05, 0.38] },
+      aa12:     { twist: 0.7, hold: [-0.24, -0.13, 0.26], grip: [0, -0.16, -0.10], fore: [0, -0.04, 0.36] },
       shotgun:  { twist: 0.7, hold: [-0.24, -0.12, 0.24], grip: [0, -0.1, -0.06], fore: 'pump' },
       sniper:   { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.1, -0.12], fore: [0, -0.05, 0.13] },
       launcher: { twist: 0.7, hold: [-0.24, -0.14, 0.26], grip: [0, -0.1, -0.05], fore: [0, -0.1, 0.14] },
@@ -17818,7 +18016,9 @@
             for (let i = 0; i < n; i++) {
               spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, projectileLifeFor(st), null, st.speed, 'pellet');
             }
-            // Pump shotgun: red hull ejects on pump-back — no gold brass here
+            // Pump shotgun: red hull ejects on pump-back — no gold brass here.
+            // The AA-12 has no pump to work, so it throws its hull on the shot.
+            if (currentWeapon === 'aa12') spawnCasing('aa12');
           } else {
             spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, projectileLifeFor(st), null, st.speed, 'bullet', st.pierce || 0);
             // Revolver keeps brass in the cylinder until reload eject
