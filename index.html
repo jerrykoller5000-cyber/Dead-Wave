@@ -11315,15 +11315,45 @@
       launcher: '40mm contact-fused grenades. Six in the drum.', minigun: '300-round spin-up. Melts hordes.', chainsaw: 'No ammo, just gas. Hold to cut.',
       flamer: 'Hold to hose a stream of burning fuel, about 7m. It sticks to what it hits, sets the ground alight — including under you — and fizzles out in water. Burning zombies spread it to whatever they touch.'
     };
-    // { rounds per pack, price } — chainsaw buys seconds of fuel.
-    const AMMO_PACK = { pistol: { n: 24, cost: 6 }, uzi: { n: 64, cost: 11 }, shotgun: { n: 16, cost: 12 }, m4: { n: 60, cost: 15 }, ak: { n: 60, cost: 18 }, aa12: { n: 20, cost: 20 }, revolver: { n: 12, cost: 11 }, sniper: { n: 10, cost: 20 }, launcher: { n: 6, cost: 34 }, minigun: { n: 300, cost: 34 }, chainsaw: { n: 45, cost: 14 }, mortar: { n: 4, cost: 26 }, flamer: { n: 60, cost: 18 } };
+    // --- Ammunition is held by calibre, not by gun -----------------------------
+    // "Uzi rounds" and "Pistol rounds" were two separate piles of the same 9mm, which
+    // meant buying the same ammunition twice and a kiosk tab that grew a line per gun.
+    // The reserve is keyed by what the round actually is, so a box of 9mm feeds the
+    // pistol and the Uzi alike, and the tab lists eight calibres instead of a dozen guns.
+    const AMMO_CALIBER = {
+      pistol: '9mm', uzi: '9mm',
+      m4: '5.56mm',
+      ak: '7.62mm',
+      shotgun: '12ga', aa12: '12ga',
+      revolver: '.44', sniper: '.338',
+      launcher: '40mm',
+      minigun: '7.62 belt',   // linked belt, not the AK's box mags
+      mortar: '60mm',
+      flamer: 'Fuel'
+    };
+    // Tab order, and the guns each one feeds (built once, below).
+    const CALIBER_ORDER = ['9mm', '5.56mm', '7.62mm', '.44', '.338', '12ga', '40mm', '7.62 belt', 'Fuel', '60mm'];
+    const CALIBER_UNIT = { Fuel: 'fuel', '60mm': 'shells', '40mm': 'grenades', '12ga': 'shells' };
+    function caliberOf(w) { return AMMO_CALIBER[w] || w; }
+    function caliberUnit(c) { return CALIBER_UNIT[c] || 'rounds'; }
+    function gunsUsing(c) { return WEAPON_ORDER.filter((w) => weaponOwned[w] && caliberOf(w) === c); }
+    // { rounds per pack, price } per calibre — chainsaw gas is priced on its own below.
+    const AMMO_PACK = {
+      '9mm': { n: 60, cost: 10 }, '5.56mm': { n: 60, cost: 15 }, '7.62mm': { n: 60, cost: 18 },
+      '.44': { n: 12, cost: 11 }, '.338': { n: 10, cost: 20 }, '12ga': { n: 20, cost: 15 },
+      '40mm': { n: 6, cost: 34 }, '7.62 belt': { n: 300, cost: 34 }, 'Fuel': { n: 60, cost: 18 },
+      '60mm': { n: 4, cost: 26 }, chainsaw: { n: 45, cost: 14 }
+    };
     // Reserve caps: a handful of magazines' worth, so you can't front-load a whole run.
-    const RESERVE_CAP = { pistol: 96, uzi: 192, shotgun: 48, m4: 180, ak: 180, aa12: 100, revolver: 36, sniper: 30, launcher: 18, minigun: 900, mortar: 16, flamer: 240 };
+    const RESERVE_CAP = {
+      '9mm': 220, '5.56mm': 180, '7.62mm': 180, '.44': 36, '.338': 30,
+      '12ga': 110, '40mm': 18, '7.62 belt': 900, 'Fuel': 240, '60mm': 16
+    };
     const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
     let weaponOwned = { pistol: true };
-    let reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, ak: 0, aa12: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
+    let reserveAmmo = { '9mm': 36, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
     let extMag = {};                   // weapon key -> true once bought
     let sawFuel = SAW_FUEL_BASE;
     let sawTankUpgraded = false;
@@ -11333,7 +11363,15 @@
       if (!Number.isFinite(base)) return base;
       return extMag[w] ? Math.round(base * 1.5) : base;
     }
-    function reserveCap(w) { return (RESERVE_CAP[w] || 0) * (extMag[w] ? 1.5 : 1); }
+    // Takes a calibre OR a weapon; an extended mag on any gun that eats this calibre
+    // buys the deeper reserve for all of them.
+    function reserveCap(k) {
+      const c = AMMO_CALIBER[k] || k;
+      let ext = false;
+      for (const w of WEAPON_ORDER) if (caliberOf(w) === c && extMag[w]) { ext = true; break; }
+      return (RESERVE_CAP[c] || 0) * (ext ? 1.5 : 1);
+    }
+    function reserveOf(w) { return reserveAmmo[caliberOf(w)] | 0; }
     // Armour pieces carry an armor value; together they make the armor pool that
     // soaks part of every hit before health does (see damagePlayer). The helmet is
     // also the NVG mount, so night vision needs it first.
@@ -11367,7 +11405,7 @@
     }
     function resetEconomy() {
       weaponOwned = { pistol: true };
-      reserveAmmo = { pistol: 36, uzi: 0, shotgun: 0, m4: 0, ak: 0, aa12: 0, revolver: 0, sniper: 0, launcher: 0, minigun: 0, mortar: 0, flamer: 0 };
+      reserveAmmo = { '9mm': 36, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
       extMag = {};
       sawFuel = SAW_FUEL_BASE;
       sawTankUpgraded = false;
@@ -11382,7 +11420,7 @@
     }
     // Debug/probe hook: hand over the full arsenal so the older weapon probes still run.
     function grantAllWeapons() {
-      for (const w of WEAPON_ORDER) { weaponOwned[w] = true; if (RESERVE_CAP[w]) reserveAmmo[w] = reserveCap(w); }
+      for (const w of WEAPON_ORDER) { weaponOwned[w] = true; const c = caliberOf(w); if (RESERVE_CAP[c]) reserveAmmo[c] = reserveCap(c); }
       sawFuel = sawFuelMax();
       gearOwned = { helmet: true, vest: true, pads: true, nvg: true, laser: true, flashlight: true };
       playerArmor = armorMax();
@@ -13003,7 +13041,7 @@
     ];
     const SHOP_HINT = {
       weapons: 'One-time unlocks. Bought guns join the Q rotation and come with one loaded magazine.',
-      ammo: 'Spare rounds live behind the magazine — R pulls from them. You can only restock here, so buy for the wave you expect.',
+      ammo: 'Held by calibre, not by gun: a box of 9mm feeds the pistol and the Uzi alike. R pulls from the reserve, and you can only restock here.',
       gear: 'Tactical kit. Nothing here is issued; the nights are dark until you pay for eyes.',
       upgrades: 'Per-weapon improvements for guns you own. Extended mags are +50% (the revolver and launcher can\'t take one).',
       perks: 'Permanent for this run. Costs climb per rank so the last rank of anything is a real decision.',
@@ -13044,29 +13082,39 @@
             owned ? null : () => buyWeapon(w), owned ? 'owned' : '');
         }
       } else if (shopTab === 'ammo') {
-        let any = false;
-        for (const w of WEAPON_ORDER) {
-          if (!weaponOwned[w]) continue;
-          any = true;
-          const pk = AMMO_PACK[w];
-          if (w === 'chainsaw') {
-            const full = sawFuel >= sawFuelMax() - 0.01;
-            shopRow('Chainsaw gas', Math.round(sawFuel) + 's / ' + Math.round(sawFuelMax()) + 's', '+' + pk.n + ' seconds of cutting. Tops off at the tank cap.',
-              full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(w));
-            continue;
-          }
-          const res = reserveAmmo[w] | 0, cap = reserveCap(w);
+        const cals = stockedCalibers();
+        const sawShort = weaponOwned.chainsaw && sawFuel < sawFuelMax() - 0.01;
+        const plan = ammoRestockPlan();
+        // Restock-everything line, up top where it is the first thing you reach for.
+        if (cals.length || weaponOwned.chainsaw) {
+          let affordable = 0, cost = 0;
+          if (devInfiniteCash) { affordable = plan.length; cost = plan.reduce((a, r) => a + r.cost, 0); }
+          else { let left = bank; for (const r of plan) { if (left >= r.cost) { left -= r.cost; affordable++; cost += r.cost; } } }
+          shopRow('Restock everything', plan.length ? plan.length + ' short' : 'all full',
+            plan.length
+              ? 'One pack of every calibre you are short of, cheapest first, and round again while the money lasts.'
+              : 'Every reserve is at its cap.',
+            plan.length ? (affordable ? '$' + cost : 'NO CASH') : 'FULL',
+            plan.length > 0 && affordable > 0, () => buyAllAmmo(), plan.length ? '' : 'owned');
+        }
+        for (const c of cals) {
+          const pk = AMMO_PACK[c];
+          const res = reserveAmmo[c] | 0, cap = reserveCap(c);
           const full = res >= cap;
-          const unit = w === 'flamer' ? 'fuel' : 'rounds';
-          shopRow(WEAPON_STATS[w].name + (w === 'flamer' ? ' fuel tank' : ' rounds'), res + ' / ' + cap + ' spare', '+' + pk.n + ' ' + unit + ' to the reserve' + (full ? ' — reserve is full.' : '.'),
-            full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(w));
+          const guns = gunsUsing(c).map((w) => WEAPON_STATS[w].name);
+          const feeds = c === '60mm' ? 'Feeds the mortar.'
+            : (guns.length ? 'Feeds ' + guns.join(' and ') + '.' : '');
+          shopRow(c, res + ' / ' + cap + ' spare',
+            '+' + pk.n + ' ' + caliberUnit(c) + ' to the reserve. ' + feeds + (full ? ' Reserve is full.' : ''),
+            full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(c));
         }
-        if (buildUnlocked.mortar) {
-          any = true;
-          const res = reserveAmmo.mortar | 0, cap = reserveCap('mortar'), pk = AMMO_PACK.mortar;
-          shopRow('Mortar shells', res + ' / ' + cap + ' spare', '+' + pk.n + ' shells for the tube.', res >= cap ? 'FULL' : '$' + pk.cost, res < cap && bank >= pk.cost, () => buyAmmo('mortar'));
+        if (weaponOwned.chainsaw) {
+          const pk = AMMO_PACK.chainsaw;
+          shopRow('Chainsaw gas', Math.round(sawFuel) + 's / ' + Math.round(sawFuelMax()) + 's',
+            '+' + pk.n + ' seconds of cutting. Tops off at the tank cap.',
+            sawShort ? '$' + pk.cost : 'FULL', sawShort && bank >= pk.cost, () => buyAmmo('chainsaw'));
         }
-        if (!any) shopRow('Nothing to feed', '', 'Buy a gun first.', '—', false, null);
+        if (!cals.length && !weaponOwned.chainsaw) shopRow('Nothing to feed', '', 'Buy a gun first.', '\u2014', false, null);
       } else if (shopTab === 'gear') {
         shopRow('Medkit', medkits + ' / ' + MAX_MEDKITS + ' carried', 'H to use: heals 60% of max health. Natural regen only ever climbs back to 40%.',
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
@@ -13140,19 +13188,65 @@
       updateAmmoHud();
       renderShop();
     }
-    function buyAmmo(w) {
-      const pk = AMMO_PACK[w];
-      if (!pk || !(weaponOwned[w] || (w === 'mortar' && buildUnlocked.mortar))) return;
-      if (w === 'chainsaw') {
-        if (sawFuel >= sawFuelMax() - 0.01 || !spend(pk.cost)) return;
+    // Takes a calibre key ('9mm', '12ga', ...) or the literal 'chainsaw'. Older
+    // callers passing a weapon key still work: caliberOf maps them across.
+    function buyAmmo(key, quiet) {
+      const c = AMMO_CALIBER[key] || key;
+      const pk = AMMO_PACK[c];
+      if (!pk) return false;
+      if (c === 'chainsaw') {
+        if (sawFuel >= sawFuelMax() - 0.01 || !spend(pk.cost)) return false;
         sawFuel = Math.min(sawFuelMax(), sawFuel + pk.n);
       } else {
-        const cap = reserveCap(w);
-        if ((reserveAmmo[w] | 0) >= cap || !spend(pk.cost)) return;
-        reserveAmmo[w] = Math.min(cap, (reserveAmmo[w] | 0) + pk.n);
+        const cap = reserveCap(c);
+        if ((reserveAmmo[c] | 0) >= cap || !spend(pk.cost)) return false;
+        reserveAmmo[c] = Math.min(cap, (reserveAmmo[c] | 0) + pk.n);
       }
-      updateAmmoHud();
+      if (!quiet) { updateAmmoHud(); renderShop(); }
+      return true;
+    }
+
+    // Which calibres the kiosk should offer: whatever the guns you own eat, plus
+    // mortar shells once the tube's plans are bought.
+    function stockedCalibers() {
+      const out = [];
+      for (const c of CALIBER_ORDER) {
+        if (c === '60mm') { if (buildUnlocked.mortar) out.push(c); continue; }
+        if (WEAPON_ORDER.some((w) => weaponOwned[w] && caliberOf(w) === c)) out.push(c);
+      }
+      return out;
+    }
+
+    // "Buy all": one pack of everything that is short, cheapest first so a thin
+    // wallet fills the most lines rather than emptying itself on one. It keeps
+    // going round until nothing more is affordable, so a fat wallet tops everything
+    // off instead of buying one pack of each.
+    function ammoRestockPlan() {
+      const rows = [];
+      for (const c of stockedCalibers()) {
+        const pk = AMMO_PACK[c];
+        if ((reserveAmmo[c] | 0) < reserveCap(c)) rows.push({ key: c, cost: pk.cost });
+      }
+      if (weaponOwned.chainsaw && sawFuel < sawFuelMax() - 0.01) rows.push({ key: 'chainsaw', cost: AMMO_PACK.chainsaw.cost });
+      rows.sort((a, b) => a.cost - b.cost);
+      return rows;
+    }
+    function buyAllAmmo() {
+      let bought = 0, spentTotal = 0;
+      for (let pass = 0; pass < 40; pass++) {
+        const rows = ammoRestockPlan();
+        if (!rows.length) break;
+        let any = false;
+        for (const r of rows) {
+          if (!devInfiniteCash && bank < r.cost) continue;
+          if (buyAmmo(r.key, true)) { bought++; spentTotal += r.cost; any = true; }
+        }
+        if (!any) break;
+      }
+      if (bought) { AudioSys.pickup(); updateAmmoHud(); }
+      else AudioSys.invalid();
       renderShop();
+      return { bought, spentTotal };
     }
     function buyGear(gr) {
       if (gearOwned[gr.key]) return;
@@ -14183,7 +14277,7 @@
       mouseFireHeld = false; fireHeld = false;
       weaponMount.visible = false;
       for (const k of Object.keys(keys)) keys[k] = false;
-      showBanner('MORTAR MANNED', 'LMB fire at the reticle · E dismount · T shoulder it · ' + (reserveAmmo.mortar | 0) + ' shells', 2.4, '#ffd24a');
+      showBanner('MORTAR MANNED', 'LMB fire at the reticle · E dismount · T shoulder it · ' + (reserveAmmo['60mm'] | 0) + ' shells', 2.4, '#ffd24a');
     }
     function dismountMortar() {
       if (!mortarMounted) return;
@@ -14194,8 +14288,8 @@
     function fireMortar() {
       const b = mortarMounted;
       if (!b || mortarFireCd > 0) return;
-      if ((reserveAmmo.mortar | 0) <= 0) { AudioSys.emptyClick(); showBanner('NO MORTAR SHELLS', 'Sold under Ammo at the kiosk', 1.6, '#ffb347'); mortarFireCd = 0.4; return; }
-      reserveAmmo.mortar -= 1;
+      if ((reserveAmmo['60mm'] | 0) <= 0) { AudioSys.emptyClick(); showBanner('NO MORTAR SHELLS', 'Sold under Ammo at the kiosk', 1.6, '#ffb347'); mortarFireCd = 0.4; return; }
+      reserveAmmo['60mm'] -= 1;
       mortarFireCd = MORTAR_INTERVAL;
       const sol = mortarSolve(b);
       const mesh = acquireProjectileMesh('mortar', () => {
@@ -16358,7 +16452,7 @@
           let meta;
           if (!owned) meta = '$' + WEAPON_PRICE[key];
           else if (st.melee) meta = Math.max(0, Math.ceil(sawFuel)) + 's gas';
-          else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + (reserveAmmo[key] | 0);
+          else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);
           out.push({ key, name: st.name, meta, locked: !owned, current: key === currentWeapon });
         }
       } else {
@@ -16658,9 +16752,9 @@
       let show = '', dry = false;
       if (gameStarted && !gameOver && !won && !reloading && !st.melee && Number.isFinite(ammo)) {
         if (st.flamer) {
-          if (ammo <= 0) { show = (reserveAmmo[currentWeapon] | 0) > 0 ? 'Reload · R' : 'No fuel'; dry = !((reserveAmmo[currentWeapon] | 0) > 0); }
+          if (ammo <= 0) { const r = reserveOf(currentWeapon); show = r > 0 ? 'Reload · R' : 'No fuel'; dry = r <= 0; }
         } else if (ammo <= 0) {
-          const res = reserveAmmo[currentWeapon] | 0;
+          const res = reserveOf(currentWeapon);
           show = res > 0 ? 'Reload · R' : 'No ammo · kiosk';
           dry = res <= 0;
         }
@@ -16694,7 +16788,7 @@
         // Loaded / reserve. The reserve is what the kiosk sells; the magazine is what
         // the reload pulls out of it.
         const ammoLabel = Number.isFinite(ammo) ? Math.ceil(ammo) : '∞';
-        const res = reserveAmmo[currentWeapon] | 0;
+        const res = reserveOf(currentWeapon);
         if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
         if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' spare';
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
@@ -16715,7 +16809,7 @@
       const st = WEAPON_STATS[currentWeapon];
       if (st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return;
       if (ammoByWeapon[currentWeapon] >= magSize(currentWeapon)) return;
-      if ((reserveAmmo[currentWeapon] | 0) <= 0) { AudioSys.emptyClick(); flashNoAmmo(); return; }
+      if (reserveOf(currentWeapon) <= 0) { AudioSys.emptyClick(); flashNoAmmo(); return; }
       reloading = true;
       reloadSlideCuePlayed = false;
       reloadOpenCuePlayed = false;
@@ -16729,7 +16823,7 @@
       shotgunPumpEjected = false;
       if (currentWeapon === 'revolver') {
         const ammo = ammoByWeapon.revolver | 0;
-        const need = Math.max(1, Math.min(6 - ammo, reserveAmmo.revolver | 0));
+        const need = Math.max(1, Math.min(6 - ammo, reserveOf('revolver')));
         revolverReloadNeed = need;
         // Prefer tracked spent; fall back to empty chambers
         revolverReloadSpent = Math.max(0, Math.min(6, revolverSpent || need));
@@ -16742,7 +16836,7 @@
         launcherReloadSpent = 0;
       } else if (currentWeapon === 'launcher') {
         const ammo = ammoByWeapon.launcher | 0;
-        const need = Math.max(1, Math.min(6 - ammo, reserveAmmo.launcher | 0));
+        const need = Math.max(1, Math.min(6 - ammo, reserveOf('launcher')));
         launcherReloadNeed = need;
         launcherReloadSpent = Math.max(0, Math.min(6, launcherSpent || need));
         // Slightly slower than revolver — bigger 40mm rounds
@@ -16754,7 +16848,7 @@
         shotgunReloadStartedEmpty = false;
       } else if (currentWeapon === 'shotgun') {
         const ammo = ammoByWeapon.shotgun | 0;
-        const need = Math.max(1, Math.min(magSize('shotgun') - ammo, reserveAmmo.shotgun | 0));
+        const need = Math.max(1, Math.min(magSize('shotgun') - ammo, reserveOf('shotgun')));
         shotgunReloadNeed = need;
         shotgunReloadStartedEmpty = ammo === 0;
         // Scale with empties: 1 shell quick, 8 clearly long
@@ -17957,7 +18051,7 @@
         if (gun.userData.pilot) gun.userData.pilot.emissiveIntensity = 1.2 + Math.sin(performance.now() * 0.02) * 0.5;
         fireCooldown -= dt;
         if (reloading || won || gameOver || !gameStarted) { flamerOn = false; return; }
-        if (ammo <= 0) { if (fireHeld && edge) { AudioSys.emptyClick(); if ((reserveAmmo.flamer | 0) <= 0) flashNoAmmo(); else startReload(); } flamerOn = false; return; }
+        if (ammo <= 0) { if (fireHeld && edge) { AudioSys.emptyClick(); if (reserveOf('flamer') <= 0) flashNoAmmo(); else startReload(); } flamerOn = false; return; }
         if (!fireHeld) { flamerOn = false; return; }
         flamerOn = true;
         while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {
@@ -21006,9 +21100,9 @@
             reloadTimer = 0;
             // Top the magazine up from the finite reserve — no more free refills.
             const have = ammoByWeapon[currentWeapon] | 0;
-            const take = Math.min(magSize(currentWeapon) - have, reserveAmmo[currentWeapon] | 0);
+            const take = Math.min(magSize(currentWeapon) - have, reserveOf(currentWeapon));
             ammoByWeapon[currentWeapon] = have + Math.max(0, take);
-            reserveAmmo[currentWeapon] = Math.max(0, (reserveAmmo[currentWeapon] | 0) - Math.max(0, take));
+            reserveAmmo[caliberOf(currentWeapon)] = Math.max(0, reserveOf(currentWeapon) - Math.max(0, take));
             if (currentWeapon === 'revolver') revolverSpent = Math.max(0, 6 - (ammoByWeapon.revolver | 0));
             if (currentWeapon === 'launcher') launcherSpent = Math.max(0, 6 - (ammoByWeapon.launcher | 0));
             revolverReloadNeed = 0;
