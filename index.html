@@ -244,45 +244,46 @@
     #reloadPrompt.dry { color: #ff9282; border-color: rgba(255,146,130,.55); }
     @keyframes reloadPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.42; } }
     @media (prefers-reduced-motion: reduce) { #reloadPrompt { animation: none; } }
-    /* Radial wheels (hold Q / hold B). Laid out as a ring of slots rather than
-       pie wedges: the label and its cost have somewhere to live, and every slot
-       keeps its position whether or not you have bought the thing yet. */
+    /* Radial wheels (hold Q / hold B). A real segmented ring: wedges drawn as SVG
+       arcs around a hub, one icon per wedge, the selected one reaching further out
+       and lit. Wedge geometry is generated from the slot count, so a 10-slot
+       weapon ring and an 11-slot build ring are both exactly symmetrical without
+       anyone hand-placing anything. */
     #wheel { position: absolute; inset: 0; display: none; z-index: 6; pointer-events: none; }
     #wheel.show { display: block; }
     #wheelDim {
       position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(5,7,4,.20) 0 22%, rgba(5,7,4,.66) 64%);
+      background: radial-gradient(circle at 50% 50%, rgba(5,7,4,.16) 0 20%, rgba(5,7,4,.70) 62%);
     }
-    #wheelRing { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
-    .wheelSlot {
-      position: absolute; width: 120px; margin-left: -60px; margin-top: -25px;
-      padding: 6px 8px 7px; text-align: center;
-      background: rgba(12,18,28,.86); border: 1px solid var(--panel-border);
-      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-      transition: transform .08s ease, border-color .08s ease, background .08s ease;
+    #wheelStage {
+      position: absolute; left: 50%; top: 50%; width: 470px; height: 470px;
+      margin: -235px 0 0 -235px;
     }
-    .wheelSlot .n {
-      font-size: 12px; font-weight: 700; letter-spacing: .05em;
-      text-transform: uppercase; color: var(--ink); line-height: 1.15;
+    #wheelSvg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .wSeg {
+      fill: rgba(10,15,22,.80); stroke: rgba(190,215,240,.13); stroke-width: 1;
+      transition: fill .07s linear, stroke .07s linear;
     }
-    .wheelSlot .m { font-size: 10px; opacity: .72; margin-top: 2px; font-variant-numeric: tabular-nums; }
-    .wheelSlot.locked { opacity: .40; }
-    .wheelSlot.sel {
-      border-color: var(--accent); background: rgba(255,210,74,.16); transform: scale(1.14);
-    }
-    .wheelSlot.sel .n { color: var(--accent); }
-    .wheelSlot.locked.sel { border-color: #ffb347; background: rgba(255,179,71,.14); }
-    .wheelSlot.locked.sel .n { color: #ffb347; }
+    .wSeg.sel { fill: rgba(255,210,74,.20); stroke: rgba(255,210,74,.85); stroke-width: 1.4; }
+    .wSeg.locked { fill: rgba(10,15,22,.55); }
+    .wSeg.locked.sel { fill: rgba(255,179,71,.16); stroke: rgba(255,179,71,.8); }
+    .wIcon { fill: rgba(226,238,250,.80); transition: fill .07s linear; pointer-events: none; }
+    .wIcon.sel { fill: var(--accent); }
+    .wIcon.locked { fill: rgba(226,238,250,.26); }
+    .wIcon.locked.sel { fill: #ffb347; }
     #wheelHub {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: 200px; text-align: center;
+      width: 158px; text-align: center; pointer-events: none;
     }
     #wheelHubName {
-      font-family: var(--font-display); font-size: 17px; letter-spacing: .04em;
-      text-transform: uppercase; color: var(--accent);
+      font-family: var(--font-display); font-size: 18px; letter-spacing: .04em;
+      line-height: 1.1; text-transform: uppercase; color: var(--accent);
     }
-    #wheelHubMeta { font-size: 11px; opacity: .8; margin-top: 3px; }
-    @media (prefers-reduced-motion: reduce) { .wheelSlot { transition: none; } }
+    #wheelHubMeta {
+      font-size: 12px; font-weight: 600; opacity: .85; margin-top: 5px; line-height: 1.3;
+      font-variant-numeric: tabular-nums;
+    }
+    @media (prefers-reduced-motion: reduce) { .wSeg, .wIcon, .wNum { transition: none; } }
     #ammo.empty { color: #ff9282; }
     #ammo.empty #ammoCount { color: #ff9282; }
     #ammo.empty .gchip { border-color: rgba(255,138,122,.45); background: rgba(255,80,60,.14); }
@@ -620,8 +621,10 @@
     <div id="reloadPrompt"></div>
     <div id="wheel" aria-hidden="true">
       <div id="wheelDim"></div>
-      <div id="wheelRing"></div>
-      <div id="wheelHub"><div id="wheelHubName"></div><div id="wheelHubMeta"></div></div>
+      <div id="wheelStage">
+        <svg id="wheelSvg" viewBox="-235 -235 470 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div id="wheelHub"><div id="wheelHubName"></div><div id="wheelHubMeta"></div></div>
+      </div>
     </div>
     <div id="placeBanner"></div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
@@ -15977,10 +15980,13 @@
     // from under your muscle memory. Picking one you have not bought explains what
     // it costs instead of silently doing nothing.
     const wheelEl = document.getElementById('wheel');
-    const wheelRingEl = document.getElementById('wheelRing');
+    const wheelSvgEl = document.getElementById('wheelSvg');
     const wheelHubNameEl = document.getElementById('wheelHubName');
     const wheelHubMetaEl = document.getElementById('wheelHubMeta');
-    const WHEEL_RADIUS = 170;     // px from centre to slot centre
+    const WHEEL_R_IN = 84;        // hub edge
+    const WHEEL_R_OUT = 188;      // wedge outer edge
+    const WHEEL_R_POP = 206;      // outer edge of the wedge you are pointing at
+    const WHEEL_GAP_DEG = 1.5;    // half-gap between neighbouring wedges
     const WHEEL_DEADZONE = 48;    // inside this, the hub keeps whatever is selected
     const WHEEL_TAP_MS = 190;     // a flick this short falls back to the old one-key behaviour
     let wheelKind = null;         // 'weapon' | 'build' | null
@@ -15990,6 +15996,46 @@
     let wheelMovedOut = false;
     function wheelIsOpen() { return wheelKind !== null; }
     function wheelNowMs() { return (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now(); }
+
+    // Flat 24x24 silhouettes, one per slot, drawn in a single fill so a wedge can
+    // tint its icon by selection state alone. Schematic on purpose: at 34px across
+    // a recognisable outline reads far better than detail does.
+    const WHEEL_ICONS = {
+      pistol: '<rect x="2.5" y="8" width="13" height="3.4" rx=".5"/><path d="M5.6 11.4h4.3L8.2 18.4H4.1z"/><rect x="15.2" y="8.7" width="5" height="2" rx=".4"/>',
+      uzi: '<rect x="5" y="6.8" width="8.4" height="4.2" rx=".5"/><rect x="13.2" y="7.9" width="6.4" height="1.9" rx=".4"/><rect x="6.6" y="11" width="3.2" height="6.6" rx=".4"/><path d="M10.8 11h2.9l1.4 3.2h-2.9z"/>',
+      shotgun: '<rect x="2" y="8.6" width="17.5" height="2.2" rx=".4"/><rect x="8.2" y="10.8" width="4.6" height="1.9" rx=".3"/><path d="M2 10.8h3.4l-1.7 4.6H.6z"/><rect x="17" y="7.4" width="2" height="3.2" rx=".3"/>',
+      m4: '<rect x="2.6" y="8.4" width="16.8" height="2.4" rx=".4"/><rect x="6.4" y="6.4" width="6.4" height="2" rx=".4"/><path d="M9.2 10.8h3.2l.8 5.4h-3.2z"/><path d="M2.6 10.8h3l-1.4 4.2H1.2z"/>',
+      revolver: '<rect x="3.4" y="8.4" width="12" height="2.6" rx=".5"/><circle cx="9.4" cy="11.4" r="2.9"/><path d="M5.6 12.6h3.6L7.6 18.4H4z"/><rect x="15" y="8.8" width="4.6" height="1.9" rx=".4"/>',
+      sniper: '<rect x="1.6" y="9.2" width="19" height="2" rx=".4"/><rect x="7.4" y="5.6" width="7.6" height="2.4" rx=".6"/><rect x="9.6" y="8" width="1.6" height="1.4"/><path d="M4.6 11.2h3.2l-1.4 5.4H2.8z"/><rect x="18.4" y="8.2" width="1.8" height="4" rx=".3"/>',
+      launcher: '<rect x="2.4" y="8" width="15" height="4.4" rx="2.2"/><circle cx="19.2" cy="10.2" r="2.6"/><path d="M6.4 12.4h3.4L8.4 18h-3.4z"/><rect x="11.6" y="5.8" width="4.4" height="2.2" rx=".5"/>',
+      minigun: '<rect x="6.4" y="6.6" width="4.6" height="10.8" rx="1"/><rect x="11" y="7.6" width="9.6" height="1.7" rx=".4"/><rect x="11" y="11" width="9.6" height="1.7" rx=".4"/><rect x="11" y="14.4" width="9.6" height="1.7" rx=".4"/><circle cx="4.6" cy="12" r="3"/>',
+      flamer: '<rect x="2.6" y="6.6" width="5.2" height="9.4" rx="2.4"/><rect x="7.8" y="9.6" width="7.6" height="2.4" rx=".5"/><path d="M15.4 8.4c3 1 4.6 2.2 5.6 3.8-1.6-.6-2.8-.7-4-.4 1.2-1.2 1-2.4-1.6-3.4z"/><path d="M6 16h3.4l-1 2.6H5.4z"/>',
+      chainsaw: '<rect x="2.4" y="7.6" width="7.4" height="6" rx="1.2"/><path d="M9.8 8.8h9.4a1.6 1.6 0 0 1 0 3.2H9.8z"/><path d="M10.6 7.8h1.6v1h-1.6zm2.6 0h1.6v1h-1.6zm2.6 0h1.6v1h-1.6z"/><path d="M4.6 13.6h3.6l-.8 3.8H4z"/>',
+      barricade: '<path d="M3.6 4.8 5.9 3l14.5 14.5-2.3 1.9z"/><path d="M20.4 6.7 18.1 4.8 3.6 19.3l2.3 1.9z" opacity=".85"/><rect x="2" y="19.6" width="20" height="2.4" rx=".6"/>',
+      wall: '<rect x="2.4" y="5" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="10.2" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="15.4" width="19.2" height="4.4" rx=".5"/>',
+      sandbag: '<rect x="3" y="13.6" width="7.4" height="4.2" rx="2"/><rect x="11.4" y="13.6" width="7.4" height="4.2" rx="2"/><rect x="7.2" y="8.8" width="7.4" height="4.2" rx="2"/><rect x="3" y="18.8" width="16" height="2.4" rx=".6"/>',
+      spikes: '<path d="M3 19 6 7l3 12zm6.5 0 3-12 3 12z"/><path d="M16 19l2.6-9 2.4 9z"/><rect x="1.6" y="19" width="21" height="2.4" rx=".6"/>',
+      barrel: '<rect x="6" y="3.4" width="12" height="17.2" rx="2.4"/><rect x="5.2" y="7.4" width="13.6" height="1.8"/><rect x="5.2" y="14.6" width="13.6" height="1.8"/>',
+      mine: '<path d="M3 16.4a9 9 0 0 1 18 0z"/><rect x="1.6" y="16.4" width="20.8" height="2.2" rx=".6"/><rect x="11" y="3.6" width="2" height="4"/><circle cx="12" cy="3.2" r="1.8"/>',
+      lure: '<rect x="11" y="7" width="2" height="12"/><rect x="6.4" y="19" width="11.2" height="2.2" rx=".6"/><circle cx="12" cy="4.6" r="3"/><path d="M4.6 5.4 7 7.2M19.4 5.4 17 7.2" stroke="currentColor" stroke-width="1.6" fill="none"/>',
+      light: '<rect x="8.2" y="14" width="7.6" height="5" rx=".8"/><rect x="5.6" y="19" width="12.8" height="2.2" rx=".6"/><rect x="10.6" y="8.6" width="4.2" height="5.4" rx=".6"/><rect x="14.4" y="10" width="6.6" height="1.8" rx=".4"/>',
+      flame: '<rect x="8.2" y="14" width="7.6" height="5" rx=".8"/><rect x="5.6" y="19" width="12.8" height="2.2" rx=".6"/><rect x="9.6" y="9.6" width="4.6" height="4.4" rx=".6"/><path d="M14.4 7.4c3.4 1.4 5 3.2 5.8 5.4-1.8-.9-3.2-1.1-4.6-.7 1.4-1.6 1.2-3.1-1.2-4.7z"/>',
+      heavy: '<rect x="6.6" y="13.4" width="10.8" height="5.6" rx=".8"/><rect x="4" y="19" width="16" height="2.4" rx=".6"/><rect x="9.6" y="6.6" width="5.6" height="6.8" rx=".8"/><rect x="14.8" y="8.4" width="7.2" height="2.6" rx=".5"/>',
+      mortar: '<path d="M7.2 19.4 16.4 4.6l3.4 2.1-9.2 14.8z"/><rect x="3" y="19.2" width="16" height="2.4" rx=".6"/><path d="M5.4 19.2 9 13.6l1.8 1.1-2.6 4.5z" opacity=".8"/>'
+    };
+
+    // Wedge path: outer arc from a0 to a1, back along the inner arc. Angles in
+    // radians, zero at twelve o'clock, growing clockwise (screen y is down).
+    function wheelWedgePath(a0, a1, rIn, rOut) {
+      const px = (r, a) => [(Math.sin(a) * r).toFixed(2), (-Math.cos(a) * r).toFixed(2)];
+      const [x0o, y0o] = px(rOut, a0), [x1o, y1o] = px(rOut, a1);
+      const [x1i, y1i] = px(rIn, a1), [x0i, y0i] = px(rIn, a0);
+      const big = (a1 - a0) > Math.PI ? 1 : 0;
+      return 'M' + x0o + ',' + y0o +
+             'A' + rOut + ',' + rOut + ' 0 ' + big + ' 1 ' + x1o + ',' + y1o +
+             'L' + x1i + ',' + y1i +
+             'A' + rIn + ',' + rIn + ' 0 ' + big + ' 0 ' + x0i + ',' + y0i + 'Z';
+    }
 
     function buildWheelItems(kind) {
       const out = [];
@@ -16018,7 +16064,14 @@
     }
 
     function syncWheelSelection() {
-      for (let i = 0; i < wheelItems.length; i++) wheelItems[i].el.classList.toggle('sel', i === wheelSel);
+      for (let i = 0; i < wheelItems.length; i++) {
+        const w = wheelItems[i], on = i === wheelSel;
+        w.seg.classList.toggle('sel', on);
+        w.icon.classList.toggle('sel', on);
+        // The pointed-at wedge reaches further out. Swapping between two prebuilt
+        // paths keeps the inner edge exactly on the hub, which a transform would not.
+        w.seg.setAttribute('d', w.seg.getAttribute(on ? 'data-dsel' : 'data-dnorm'));
+      }
       const it = wheelSel >= 0 ? wheelItems[wheelSel] : null;
       wheelHubNameEl.textContent = it ? it.name : '—';
       wheelHubMetaEl.textContent = !it ? ''
@@ -16035,19 +16088,37 @@
       wheelMovedOut = false;
       // Start on what is already in hand, so letting go without pointing changes nothing.
       wheelSel = wheelItems.findIndex((it) => it.current);
-      wheelRingEl.textContent = '';
       const n = wheelItems.length;
+      const span = Math.PI * 2 / n;
+      const gap = WHEEL_GAP_DEG * Math.PI / 180;
+      // Icon only, dead centre of the wedge. Counts and prices used to sit in every
+      // wedge as well, which meant eleven little strings at eleven different
+      // rotations and the ring read as clutter; the hub names the one you are
+      // pointing at instead, which is the only one you are reading anyway.
+      const rIcon = (WHEEL_R_IN + WHEEL_R_OUT) / 2;
+      const ICON = 54;
+      let svg = '';
       for (let i = 0; i < n; i++) {
-        const a = -Math.PI / 2 + i * (Math.PI * 2 / n); // slot 0 at twelve o'clock, clockwise
-        const el = document.createElement('div');
-        el.className = 'wheelSlot' + (wheelItems[i].locked ? ' locked' : '');
-        el.style.left = (Math.cos(a) * WHEEL_RADIUS).toFixed(1) + 'px';
-        el.style.top = (Math.sin(a) * WHEEL_RADIUS).toFixed(1) + 'px';
-        const nm = document.createElement('div'); nm.className = 'n'; nm.textContent = wheelItems[i].name;
-        const mt = document.createElement('div'); mt.className = 'm'; mt.textContent = wheelItems[i].meta;
-        el.appendChild(nm); el.appendChild(mt);
-        wheelRingEl.appendChild(el);
-        wheelItems[i].el = el;
+        const it = wheelItems[i];
+        const mid = i * span;                    // slot 0 at twelve o'clock, clockwise
+        const a0 = mid - span / 2 + gap, a1 = mid + span / 2 - gap;
+        const lock = it.locked ? ' locked' : '';
+        svg += '<path class="wSeg' + lock + '" data-i="' + i + '"' +
+               ' d="' + wheelWedgePath(a0, a1, WHEEL_R_IN, WHEEL_R_OUT) + '"' +
+               ' data-dsel="' + wheelWedgePath(a0, a1, WHEEL_R_IN, WHEEL_R_POP) + '"' +
+               ' data-dnorm="' + wheelWedgePath(a0, a1, WHEEL_R_IN, WHEEL_R_OUT) + '"/>';
+        const ix = Math.sin(mid) * rIcon, iy = -Math.cos(mid) * rIcon;
+        const glyph = WHEEL_ICONS[it.key] || '';
+        svg += '<g class="wIcon' + lock + '" data-i="' + i + '"' +
+               ' transform="translate(' + (ix - ICON / 2).toFixed(1) + ',' + (iy - ICON / 2).toFixed(1) + ') scale(' + (ICON / 24).toFixed(3) + ')">' +
+               glyph + '</g>';
+      }
+      wheelSvgEl.innerHTML = svg;
+      const segs = wheelSvgEl.querySelectorAll('.wSeg');
+      const icons = wheelSvgEl.querySelectorAll('.wIcon');
+      for (let i = 0; i < n; i++) {
+        wheelItems[i].seg = segs[i];
+        wheelItems[i].icon = icons[i];
       }
       wheelEl.classList.add('show');
       mouseFireHeld = false;
@@ -16083,7 +16154,7 @@
       wheelItems = [];
       wheelSel = -1;
       wheelEl.classList.remove('show');
-      wheelRingEl.textContent = '';
+      wheelSvgEl.innerHTML = '';
       if (!commit) return;
       // A quick tap that never left the hub keeps the old single-key behaviour:
       // Q steps to the next gun, B toggles the ghost on and off.
