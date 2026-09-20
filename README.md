@@ -77,8 +77,6 @@ index.html               the whole game
 Play Dead-Wave.bat       Windows launcher (local server + Edge on the fast GPU)
 assets/
   soundtrack/            the 15 tracks the game plays
-  UAL1_Standard.glb      Quaternius animation library (CC0), currently unused
-  UAL1_License.txt
 tools/
   compose.py, synth.py   offline generator for the soundtrack (numpy, scipy)
 docs/                    reference documentation, plus images/ (key art)
@@ -88,6 +86,5 @@ docs/                    reference documentation, plus images/ (key art)
 ## Credits
 
 - Built with [Three.js](https://threejs.org) (WebGPURenderer and TSL).
-- `assets/UAL1_Standard.glb` is the Universal Animation Library by
-  [Quaternius](https://quaternius.com), released under CC0.
+- Every character is built and animated procedurally in `index.html`; there are no model files.
 - The soundtrack is composed and rendered by the scripts in `tools/`.

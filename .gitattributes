@@ -4,5 +4,4 @@
 *.bat text eol=crlf
 
 *.mp3 binary
-*.glb binary
 *.png binary
