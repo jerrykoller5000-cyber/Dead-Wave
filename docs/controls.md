@@ -21,10 +21,10 @@ same way.
 | Mouse | Aim anywhere, 360 degrees. The marine turns to face the reticle |
 | `LMB` | Fire. Hold for the chainsaw and flamethrower |
 | `RMB` | Zoom. A real first-person scope on the sniper rifle |
-| `Q` | Cycle weapons |
-| `R` | Reload (from spare rounds bought at the kiosk) |
+| Hold `Q` | Weapon wheel: time slows, point at a gun, release to draw it. A quick tap steps to the next one |
+| `R` | Reload from the reserve. While a build ghost is up it cycles the axis lock instead |
 | `G` | Grenade. Your own grenades hurt you |
-| `F` | Knife, left hand: 3.2 m reach, 45 damage, 0.30 s, +/-87 degree arc |
+| `F` | Knife, left hand: 3.5 m reach, 54 damage, 0.28 s, +/-87 degree arc |
 | `H` | Use a medkit |
 
 The reticle locks onto a zombie's body when it is over one, and aims into the sky above the
@@ -32,7 +32,8 @@ skyline. The camera does not turn with your aim, so nothing moves under the reti
 move the mouse and shots land on it.
 
 The knife one-shots Shamblers, ferals, Leapers, Screamers, Spitters and Bombers, and sweeps a
-crowd. The Machete (kiosk, Upgrades tab) replaces it: 3.8 m reach, 85 damage, 0.40 s, +/-93 degree arc.
+crowd, and every blade hit shoves bodies back hard enough to buy the space it was meant to.
+The Machete (kiosk, Upgrades tab) replaces it: 3.8 m reach, 85 damage, 0.40 s, +/-93 degree arc.
 
 ### Sniper scope
 
@@ -47,7 +48,8 @@ toward the screen edge to swing further.
 | Key | Action |
 | --- | --- |
 | `E` | Whatever the prompt at the bottom of the screen says (below) |
-| `B` | Build mode |
+| Hold `B` | Build wheel, the same way. A quick tap enters or leaves build mode |
+| `Y` | Switch between one gun and two, once you own the pair (pistol, Uzi, revolver) |
 | `T` / `X` | Repair / sell the nearest build |
 | `Enter` | During prep: skip the countdown and start the wave now |
 
@@ -57,9 +59,16 @@ toward the screen edge to swing further.
 leaves it, `T` shoulders it to carry it (no weapons while carrying, and you are slower), and
 `LMB` or `E` sets it down. You are rooted while manning it.
 
-**Build mode** (`B`): `1`-`9`, `0`, `-` pick barricade / wall / sandbag / spikes / fuel drum /
-mine / decoy beacon / light / flame / heavy / mortar. The wheel cycles builds. The barricade is
-free; the rest need their blueprint first (kiosk, Blueprints tab), and placing still costs per piece.
+**The build wheel** (hold `B`) holds all eleven: barricade, wall, sandbag, spikes, fuel drum,
+mine, decoy beacon, light, flame, heavy, mortar. Every slot is always in the same place whether or
+not you own it, so buying a blueprint never moves the others; locked ones sit greyed with their
+price and say so if you pick them. The barricade is free, the rest need their plans from the
+kiosk, and placing still costs per piece.
+
+**Placement snaps to a 1 m grid**, with the piece's facing snapped to 90 degrees, and a patch of
+the lattice is drawn under the ghost so you can see where it will land. `R` cycles the axis lock:
+free, locked east-west, locked north-south. Locked, each new piece holds the last one's row or
+column, which is how you get a straight fence instead of a wobbly line with gaps in it.
 
 ## Gear
 
@@ -83,8 +92,8 @@ free; the rest need their blueprint first (kiosk, Blueprints tab), and placing s
 | Middle drag | Rotate the camera. Dragging up/down also tilts, when Auto tilt is Off |
 | Middle click | Cycle the sniper scope magnification (without a drag) |
 
-The wheel changes meaning in two modes: in build mode it cycles builds, and while scoped it dials
-the sniper's magnification.
+The scroll wheel only ever zooms now, in build mode as everywhere else — except while scoped,
+where it dials the sniper's magnification.
 
 **Auto tilt** (Esc > Settings > Camera: Off / Gentle / Strong, default Gentle). The tilt is the
 terrain's job. Ground rising ahead drops the camera so you look up the hill (about 39 degrees

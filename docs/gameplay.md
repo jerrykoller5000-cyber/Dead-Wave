@@ -8,13 +8,33 @@ terminal a few strides from the spawn clearing (a yellow square on the minimap).
 | Tab | What it sells |
 | --- | --- |
 | Weapons | One-time unlocks, each arriving loaded |
-| Ammo | Spare rounds behind the magazine (only sold here); chainsaw buys seconds of gas; mortar shells |
+| Ammo | Held by calibre, not by gun. Only sold here. "Restock everything" tops up every calibre you are short of, cheapest first |
 | Gear | Night vision, laser, flashlight, and armor |
-| Upgrades | Extended mags (+50%, except revolver and launcher), bigger chainsaw tank, machete |
+| Upgrades | Extended mags (+50%, except revolver and launcher), bigger chainsaw tank, machete, and a second gun for the pistol, Uzi or revolver |
 | Perks | Vitality, Stopping power, Quick hands, Fleet foot, Scavenger, Grenadier. 5 ranks each |
 | Blueprints | A build type only appears in the `B` menu once its plans are bought |
 
 The ammo HUD reads `loaded / mag · N spare`. Out of spares mid-wave means out of ammo, so plan for it.
+
+### Calibres
+
+Ammunition belongs to the round, not the gun: one box of 9mm feeds the pistol and the Uzi, one of
+12ga feeds the pump and the AA-12. The minigun keeps its own line as 7.62 belt rather than sharing
+the AK's box magazines. An extended magazine is still bought per gun, but the deeper reserve it
+buys applies to everything eating that calibre.
+
+| Calibre | Feeds |
+| --- | --- |
+| 9mm | Pistol, Uzi |
+| 5.56mm | M4 |
+| 7.62mm | AK-47 |
+| .44 | Revolver |
+| .338 | Sniper |
+| 12ga | Shotgun, AA-12 |
+| 40mm | Launcher |
+| 7.62 belt | Minigun |
+| Fuel | Flamethrower |
+| 60mm | Mortar |
 
 ## Waves, days and prep
 
@@ -32,7 +52,7 @@ The ammo HUD reads `loaded / mag · N spare`. Out of spares mid-wave means out o
   constant is the density knob if a machine cannot hold it; see its comment in `index.html` for
   what was measured and why the numbers are soft.
 - **Kill streaks.** Chain kills within 2.6 s: 5 / 10 / 20 / 30 in a row pay x1.5 / x2 / x3 / x4 cash.
-- **Cash drops** last 60 seconds. They pulse slowly, then faster as the clock runs down, then shrink away.
+- **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs down, then shrink away.
 - **Airdrops** are rare (every 4-7 minutes) and money only, a bounty for walking out to them.
 
 ## Defending the base
@@ -80,6 +100,18 @@ The gun is placed with its grip at the hold and pointed at the reticle, and both
 onto it with a two-bone IK, with a bladed torso twist for the long guns so the support arm can
 reach. On a reload the support hand goes foregrip, mag well, belt pouch, mag well, foregrip.
 
+**AK-47** (kiosk, $195). Hits harder than the M4 — 27 a round against 19 — and reaches about as
+far, but it cycles slower, takes a second longer to reload and throws a looser group. Per-shot
+weight traded against rate and precision.
+
+**AA-12** (kiosk, $340). A full-auto shotgun off a 20-round drum: five pellets a shell against the
+pump's seven, but no pump to work between them. It hoses a corridor.
+
+**Dual wield** (kiosk, Upgrades: pistol $120, Uzi $155, revolver $185). Buys a second gun for the
+off hand; `Y` switches between one and two. Two guns alternate, so the pair puts rounds out twice
+as fast and carries twice the loaded ammunition — against a noticeably wider group, a reload half
+again as long, and no free hand, so no grenades and no blade until you switch back.
+
 **Flamethrower** (kiosk, $210). Hold to hose fire. Fuel tanks are the ammo (60 units, about 10 s
 of flame; the "bigger tank" upgrade adds 50%). The fire is a stream of burning fuel blobs
 (about 72 a second): they leave the nozzle at about 17 m/s plus your own speed, slow under drag,
@@ -93,6 +125,15 @@ light whatever they are pressed against. Damage per zombie is capped at one hit 
 Nozzle flare, a firelight on the surroundings and a faint rumble while firing.
 
 ## Builds
+
+Everything you place lands on a 1 m grid with its facing snapped to 90 degrees, and `R` locks the
+run to one axis so a wall follows the piece before it. Condition bars show on every structure
+while a build ghost is up, not only on ones already damaged.
+
+Zombies attack structures. The player always comes first — one that can reach you hits you — but
+anything that cannot get to you turns on whatever of yours is in the way, turrets included.
+Brutes and the colossus put their weight behind it and go through a wall fast. Spikes and mines
+are not targets: they are meant to be walked over, which is their whole job.
 
 - **Fuel drums** are a blueprint: place one, shoot it with the pack beside it, stand back. They chain.
 - **Mines** go off under the first zombie on them.

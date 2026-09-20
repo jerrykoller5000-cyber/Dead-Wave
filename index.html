@@ -8254,7 +8254,7 @@
       const cfg = CASING_WEAPONS[weaponId];
       if (!cfg) return;
       if (casings.length >= MAX_CASINGS) recycleOldestCasing();
-      const gun = getActiveGun();
+      const gun = firingGun();
       gun.updateMatrixWorld(true);
       // Ejection port: right side of receiver (gun +X), mid body — not the muzzle
       _casingPos.set(cfg.ox, cfg.oy, cfg.oz);
@@ -11238,6 +11238,71 @@
 
     const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
 
+    // === Dual wield =============================================================
+    // A second gun in the off hand for the three one-handers. Bought per weapon at
+    // the kiosk, then toggled with Y, because carrying two is a trade rather than a
+    // straight upgrade: twice the rate of fire and twice the loaded rounds, against
+    // a looser group, a longer reload, and no hand free for a grenade or the knife.
+    const DUAL_CAPABLE = { pistol: 1, uzi: 1, revolver: 1 };
+    const DUAL_PRICE = { pistol: 120, uzi: 155, revolver: 185 };
+    let dualOwned = {};        // weapon key -> bought
+    let dualActive = false;    // the toggle, shared across all three
+    let akimboHand = 0;        // which hand fires the next round
+    function dualCapable(w) { return !!DUAL_CAPABLE[w]; }
+    function akimboOn() { return dualActive && dualCapable(currentWeapon) && !!dualOwned[currentWeapon]; }
+    // A second mount under the left hand, mirroring the one the right hand carries.
+    const offhandMount = new THREE.Group();
+    (marine.userData.gripL || weaponMount).add(offhandMount);
+    const offhandMeshes = {};
+    for (const k of Object.keys(DUAL_CAPABLE)) {
+      const m = weaponMeshes[k].clone(true);
+      // The clone drags along a copy of the muzzle light; the scene's light count has
+      // to stay fixed (see the light-stability notes), so strip it back out.
+      const doomed = [];
+      m.traverse((o) => { if (o.isLight) doomed.push(o); });
+      for (const d of doomed) d.parent.remove(d);
+      m.userData = Object.assign({}, weaponMeshes[k].userData);
+      m.userData.flashLight = null;
+      m.visible = false;
+      offhandMount.add(m);
+      offhandMeshes[k] = m;
+    }
+    function syncOffhandVisibility() {
+      const on = akimboOn();
+      for (const k of Object.keys(offhandMeshes)) offhandMeshes[k].visible = on && k === currentWeapon;
+      offhandMount.visible = on;
+    }
+    // The hand that fires the next round: everything that reads a muzzle — the
+    // projectile origin, the flash, the ejected case — goes through this, while the
+    // pose and reload animation stay on the right-hand gun.
+    function firingGun() {
+      const off = offhandMeshes[currentWeapon];
+      return (akimboOn() && akimboHand === 1 && off) ? off : getActiveGun();
+    }
+    function toggleDualWield() {
+      if (!gameStarted || gameOver || won || paused) return;
+      if (!dualCapable(currentWeapon)) {
+        AudioSys.invalid();
+        showBanner('NO SECOND GUN', WEAPON_STATS[currentWeapon].name + ' is a two-handed weapon', 1.4, '#ffb347');
+        return;
+      }
+      if (!dualOwned[currentWeapon]) {
+        AudioSys.invalid();
+        showBanner('AKIMBO NOT BOUGHT', WEAPON_STATS[currentWeapon].name + ' pair costs $' + DUAL_PRICE[currentWeapon] + ' (kiosk, Upgrades)', 1.8, '#ffb347');
+        return;
+      }
+      dualActive = !dualActive;
+      akimboHand = 0;
+      // The magazine count doubles or halves with the second gun, so clamp what is
+      // loaded rather than leaving a count the gun cannot hold.
+      ammoByWeapon[currentWeapon] = Math.min(ammoByWeapon[currentWeapon], magSize(currentWeapon));
+      syncOffhandVisibility();
+      applyBladeModel();
+      AudioSys.magThud();
+      showBanner(dualActive ? 'AKIMBO' : 'SINGLE', dualActive ? 'Two guns up — no grenades, no blade' : 'Back to one gun', 1.2, '#ffd24a');
+      updateAmmoHud();
+    }
+
     // === Light-count stability ==================================================
     // Every gun used to carry its own muzzle PointLight as a child, and switching
     // weapons toggles gun.visible — which changes the set of lights the renderer
@@ -11361,7 +11426,10 @@
     function magSize(w) {
       const base = WEAPON_STATS[w].maxAmmo;
       if (!Number.isFinite(base)) return base;
-      return extMag[w] ? Math.round(base * 1.5) : base;
+      let n = extMag[w] ? Math.round(base * 1.5) : base;
+      // Two guns carry two magazines, and a reload fills both.
+      if (dualActive && DUAL_CAPABLE[w] && dualOwned[w]) n *= 2;
+      return n;
     }
     // Takes a calibre OR a weapon; an extended mag on any gun that eats this calibre
     // buys the deeper reserve for all of them.
@@ -11407,6 +11475,9 @@
       weaponOwned = { pistol: true };
       reserveAmmo = { '9mm': 36, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
       extMag = {};
+      dualOwned = {};
+      dualActive = false;
+      akimboHand = 0;
       sawFuel = SAW_FUEL_BASE;
       sawTankUpgraded = false;
       gearOwned = GEAR_NONE();
@@ -11422,6 +11493,7 @@
     function grantAllWeapons() {
       for (const w of WEAPON_ORDER) { weaponOwned[w] = true; const c = caliberOf(w); if (RESERVE_CAP[c]) reserveAmmo[c] = reserveCap(c); }
       sawFuel = sawFuelMax();
+      for (const k of Object.keys(DUAL_CAPABLE)) dualOwned[k] = true;
       gearOwned = { helmet: true, vest: true, pads: true, nvg: true, laser: true, flashlight: true };
       playerArmor = armorMax();
       applyGearVisibility();
@@ -12589,6 +12661,8 @@
         if (weaponMeshes[name]) weaponMeshes[name].visible = (name === currentWeapon);
       }
       knife.visible = false;
+      akimboHand = 0;
+      if (typeof syncOffhandVisibility === 'function') syncOffhandVisibility();
       knifeAnimT = 0; // cancel any in-progress slash pose so updateKnifeAnim doesn't flip it back visible next frame
       reloading = false;
       reloadTimer = 0;
@@ -13144,6 +13218,14 @@
               sawTankUpgraded ? null : () => buySawTank(), sawTankUpgraded ? 'owned' : '');
             continue;
           }
+          if (DUAL_CAPABLE[w]) {
+            any = true;
+            const got = !!dualOwned[w];
+            const price = DUAL_PRICE[w];
+            shopRow(WEAPON_STATS[w].name + ' pair', got ? 'owned' : 'akimbo',
+              'A second ' + WEAPON_STATS[w].name + ' for the off hand. Y switches between one and two: twice the rate of fire and twice the loaded rounds, for a wider group, a slower reload, and no hand free for a grenade or the blade.',
+              got ? 'OWNED' : '$' + price, !got && bank >= price, got ? null : () => buyDualWield(w), got ? 'owned' : '');
+          }
           if (!EXT_MAG_PRICE[w]) continue;
           any = true;
           const owned = !!extMag[w];
@@ -13247,6 +13329,14 @@
       else AudioSys.invalid();
       renderShop();
       return { bought, spentTotal };
+    }
+    function buyDualWield(w) {
+      if (dualOwned[w] || !DUAL_CAPABLE[w] || !weaponOwned[w]) return;
+      if (!spend(DUAL_PRICE[w])) return;
+      dualOwned[w] = true;
+      AudioSys.magThud();
+      showBanner(WEAPON_STATS[w].name.toUpperCase() + ' PAIR', 'Y switches between one gun and two', 2.0, '#ffd24a');
+      renderShop();
     }
     function buyGear(gr) {
       if (gearOwned[gr.key]) return;
@@ -16626,6 +16716,7 @@
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
       if (e.code === 'KeyV') { tryRoll(); e.preventDefault(); }
+      if (e.code === 'KeyY') { toggleDualWield(); e.preventDefault(); }
       if (e.code === 'KeyT') { if (mortarMounted) shoulderMortar(); else repairNearestBuild(); e.preventDefault(); }
       if (e.code === 'KeyX') { sellNearestBuild(); e.preventDefault(); }
       if (e.code === 'Escape') {
@@ -16663,6 +16754,7 @@
     let reloading = false;
     let reloadTimer = 0;
     let reloadAnimDuration = 1.8;
+    let akimboReloadMult = 1;
     let reloadSlideCuePlayed = false;
     let reloadMagDropped = false;
     let revolverSpent = 0;
@@ -16809,6 +16901,8 @@
       const st = WEAPON_STATS[currentWeapon];
       if (st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return;
       if (ammoByWeapon[currentWeapon] >= magSize(currentWeapon)) return;
+      // Two magazines, one pair of hands: swapping both takes half again as long.
+      akimboReloadMult = akimboOn() ? 1.5 : 1;
       if (reserveOf(currentWeapon) <= 0) { AudioSys.emptyClick(); flashNoAmmo(); return; }
       reloading = true;
       reloadSlideCuePlayed = false;
@@ -16868,8 +16962,10 @@
         shotgunReloadNeed = 0;
         shotgunReloadStartedEmpty = false;
       }
-      reloadTimer *= reloadMult();
-      reloadAnimDuration *= reloadMult();
+      // Quick hands, then the akimbo penalty: two magazines take half again as long
+      // whichever route above set the timer.
+      reloadTimer *= reloadMult() * akimboReloadMult;
+      reloadAnimDuration *= reloadMult() * akimboReloadMult;
       fireHeld = false;
       updateAmmoHud();
       AudioSys.reloadStart();
@@ -17252,7 +17348,7 @@
     quitMenuBtn.addEventListener('mousedown', (e) => { e.stopPropagation(); });
 
     function getMuzzleWorld() {
-      const gun = getActiveGun();
+      const gun = firingGun();
       gun.updateMatrixWorld(true);
       muzzleWorld.copy(gun.userData.muzzleLocal);
       gun.localToWorld(muzzleWorld);
@@ -17329,7 +17425,7 @@
 
     function triggerMuzzleFlash() {
       flashTimer = 0.045;
-      const gun = getActiveGun();
+      const gun = firingGun();
       const flash = gun.userData.flash;
       const light = gun.userData.flashLight;
       if (flash) {
@@ -17527,7 +17623,13 @@
       const shoulderW = _hv.anchor.copy(armR.position); torso.localToWorld(shoulderW);
       const dxz = Math.hypot(aimTarget.x - shoulderW.x, aimTarget.z - shoulderW.z);
       const pitch = Math.max(-0.75, Math.min(0.6, Math.atan2(aimTarget.y - shoulderW.y, Math.max(0.5, dxz))));
-      const off = _hv.origin.set(H.hold[0], H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
+      // A two-handed hold pulls the gun onto the body centreline, which is exactly
+      // where the off-hand gun wants to be as well — mirroring that offset put both
+      // pistols in the same 4cm of space. Akimbo pulls in far less, so each gun stays
+      // under its own shoulder and the pair reads as two guns.
+      const aki = akimboOn();
+      const holdX = aki ? -0.10 : H.hold[0];
+      const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
       off.y += walkBob * 0.25;
       const anchor = _hv.anchor.copy(armR.position).add(off);
       torso.localToWorld(anchor);
@@ -17565,6 +17667,32 @@
       _hm.c.copy(weaponMount.parent.matrixWorld).invert().multiply(_hm.a); // mount local
       _hm.c.decompose(weaponMount.position, weaponMount.quaternion, weaponMount.scale);
       weaponMount.updateMatrixWorld(true);
+
+      // Akimbo: the left hand is not supporting this gun, it is pointing its own.
+      // Mirror the hold across the torso centreline, solve the arm onto it, then place
+      // the off-hand gun the same way the main one was placed above.
+      if (akimboOn()) {
+        const offGun = offhandMeshes[currentWeapon];
+        if (offGun) {
+          const offL = _hv.origin.set(-holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
+          offL.y += walkBob * 0.25;
+          const anchorL = _hv.b.copy(armL.position).add(offL);
+          torso.localToWorld(anchorL);
+          solveArmIK(armL, ud.elbowLG, _HAND_L, anchorL, _POLE_L, k);
+          armL.updateMatrixWorld(true);
+          offGun.getWorldScale(_hScale);
+          const gripL2 = _hv.f.set(H.grip[0], H.grip[1], H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun);
+          const originL = _hv.origin.copy(anchorL).sub(gripL2);
+          _hm.a.compose(originL, _hq.gun, _hScale);
+          _hm.b.compose(offGun.position, offGun.quaternion, offGun.scale).invert();
+          _hm.a.multiply(_hm.b);
+          _hm.c.copy(offhandMount.parent.matrixWorld).invert().multiply(_hm.a);
+          _hm.c.decompose(offhandMount.position, offhandMount.quaternion, offhandMount.scale);
+          offhandMount.updateMatrixWorld(true);
+        }
+        holdWL += (0 - holdWL) * Math.min(1, dt * 16);
+        return;
+      }
 
       // Support hand: on the foregrip / pump / handle — or through a magazine change
       // while reloading. Off while the knife is out.
@@ -18100,7 +18228,8 @@
         if (!fireHeld) return;
         const canShoot = st.auto ? (fireCooldown <= 0) : (edge && fireCooldown <= 0);
         if (canShoot) {
-          fireCooldown = st.interval;
+          // Two guns alternate, so the pair puts rounds out twice as fast.
+          fireCooldown = akimboOn() ? st.interval * 0.5 : st.interval;
           ammoByWeapon[currentWeapon] -= 1;
           if (st.explosive) {
             fireLauncherShell();
@@ -18114,10 +18243,13 @@
             // The AA-12 has no pump to work, so it throws its hull on the shot.
             if (currentWeapon === 'aa12') spawnCasing('aa12');
           } else {
-            spawnProjectile(false, null, aimDirWithSpread(st.spread || 0), st.damage, projectileLifeFor(st), null, st.speed, 'bullet', st.pierce || 0);
+            // One-handed and unsupported: the pair throws a noticeably wider group.
+            const spr = akimboOn() ? (st.spread || 0) * 2.0 + 0.028 : (st.spread || 0);
+            spawnProjectile(false, null, aimDirWithSpread(spr), st.damage, projectileLifeFor(st), null, st.speed, 'bullet', st.pierce || 0);
             // Revolver keeps brass in the cylinder until reload eject
             if (currentWeapon !== 'revolver') spawnCasing(currentWeapon);
           }
+          if (akimboOn()) akimboHand ^= 1;
           if (currentWeapon === 'revolver') {
             revolverSpent = Math.min(6, Math.max(revolverSpent + 1, 6 - (ammoByWeapon.revolver | 0)));
           }
@@ -18143,6 +18275,7 @@
 
     function throwGrenade() {
       if (!gameStarted || gameOver || won || placeMode || paused || grenadeCd > 0 || playerSwimming || mortarMounted || mortarCarried) return;
+      if (akimboOn()) { AudioSys.invalid(); showBanner('BOTH HANDS FULL', 'Y goes back to one gun', 1.2, '#ffb347'); return; }
       if (grenades <= 0) { AudioSys.emptyClick(); return; }
       grenades -= 1;
       grenadeCd = 0.6;
@@ -18389,6 +18522,8 @@
 
     function knifeAttack() {
       if (!gameStarted || gameOver || won || placeMode || paused || knifeCd > 0 || playerSwimming || mortarMounted || mortarCarried) return;
+      // Both hands are full.
+      if (akimboOn()) { AudioSys.invalid(); showBanner('BOTH HANDS FULL', 'Y goes back to one gun', 1.2, '#ffb347'); return; }
       const bs = bladeStats();
       knifeCd = bs.cd;
       knifeAnimT = KNIFE_ANIM_DUR; // drives the actual held-knife slash pose in updateKnifeAnim

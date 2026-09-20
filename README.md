@@ -50,9 +50,9 @@ WebGL2 by itself.
 | `WASD` / arrows | Move (screen-relative). `Shift` run, `Space` jump |
 | Mouse | Aim anywhere, 360 degrees. `LMB` fire, `RMB` zoom or scope |
 | `V` / `C` | Dodge roll / crouch |
-| `Q` `R` `G` `F` | Cycle weapons / reload / grenade / knife |
+| Hold `Q` / `B` | Weapon wheel / build wheel — time slows, point, release |
 | `E` | Action key: kiosk, mortar, and whatever the on-screen prompt says |
-| `B` | Build mode. `T` / `X` repair / sell the nearest build |
+| `R` `G` `F` `Y` | Reload / grenade / knife / switch one gun or two |
 | `H` | Use a medkit |
 | `Enter` | Skip the prep countdown |
 | `Esc` | Pause and Settings (volume, look, graphics, camera, fullscreen) |
