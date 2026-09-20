@@ -12,3 +12,4 @@ __pycache__/
 .claude/settings.local.json
 index.dev.html
 Claude outputs/
+Commit and Push.bat

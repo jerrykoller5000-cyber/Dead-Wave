@@ -1,4 +1,4 @@
-"""Generative soundtrack for Tiny Trek.
+"""Generative soundtrack for Dead-Wave.
 
 Each track is a real arrangement: a key and chord progression, a song form built
 from sections (intro / verse / chorus / break / climax / outro) that add and drop

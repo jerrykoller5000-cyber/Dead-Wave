@@ -1,0 +1,8 @@
+# Normalise line endings on commit; .bat files must be CRLF on checkout or cmd.exe
+# can mis-read labels (Play Dead-Wave.bat uses goto :defaultbrowser).
+* text=auto
+*.bat text eol=crlf
+
+*.mp3 binary
+*.glb binary
+*.png binary
