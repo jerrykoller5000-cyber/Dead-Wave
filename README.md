@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/images/dead-wave-key-art.jpg" alt="Dead-Wave key art: a blocky marine firing a rifle from behind a crate as glowing-eyed zombies close in under a red moon" width="560">
+</p>
+
 # Dead-Wave
 
 A top-down zombie survival game that runs in your browser. Hold a log cabin against wave after
@@ -77,7 +81,7 @@ assets/
   UAL1_License.txt
 tools/
   compose.py, synth.py   offline generator for the soundtrack (numpy, scipy)
-docs/                    reference documentation
+docs/                    reference documentation, plus images/ (key art)
 .claude/launch.json      dev-server config for Claude Code's preview pane
 ```
 
