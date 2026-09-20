@@ -38,7 +38,7 @@
     #reticle {
       position: fixed; left: 0; top: 0; width: 16px; height: 16px;
       margin-left: -8px; margin-top: -8px;
-      pointer-events: none; z-index: 4; display: none;
+      pointer-events: none; z-index: 7; display: none;
       /* soft white/cyan cross + center dot with dark outline */
       background:
         radial-gradient(circle at center, rgba(180,240,255,0.95) 0 1.6px, transparent 1.8px),
@@ -244,6 +244,45 @@
     #reloadPrompt.dry { color: #ff9282; border-color: rgba(255,146,130,.55); }
     @keyframes reloadPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.42; } }
     @media (prefers-reduced-motion: reduce) { #reloadPrompt { animation: none; } }
+    /* Radial wheels (hold Q / hold B). Laid out as a ring of slots rather than
+       pie wedges: the label and its cost have somewhere to live, and every slot
+       keeps its position whether or not you have bought the thing yet. */
+    #wheel { position: absolute; inset: 0; display: none; z-index: 6; pointer-events: none; }
+    #wheel.show { display: block; }
+    #wheelDim {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(5,7,4,.20) 0 22%, rgba(5,7,4,.66) 64%);
+    }
+    #wheelRing { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+    .wheelSlot {
+      position: absolute; width: 120px; margin-left: -60px; margin-top: -25px;
+      padding: 6px 8px 7px; text-align: center;
+      background: rgba(12,18,28,.86); border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: transform .08s ease, border-color .08s ease, background .08s ease;
+    }
+    .wheelSlot .n {
+      font-size: 12px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--ink); line-height: 1.15;
+    }
+    .wheelSlot .m { font-size: 10px; opacity: .72; margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .wheelSlot.locked { opacity: .40; }
+    .wheelSlot.sel {
+      border-color: var(--accent); background: rgba(255,210,74,.16); transform: scale(1.14);
+    }
+    .wheelSlot.sel .n { color: var(--accent); }
+    .wheelSlot.locked.sel { border-color: #ffb347; background: rgba(255,179,71,.14); }
+    .wheelSlot.locked.sel .n { color: #ffb347; }
+    #wheelHub {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 200px; text-align: center;
+    }
+    #wheelHubName {
+      font-family: var(--font-display); font-size: 17px; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    #wheelHubMeta { font-size: 11px; opacity: .8; margin-top: 3px; }
+    @media (prefers-reduced-motion: reduce) { .wheelSlot { transition: none; } }
     #ammo.empty { color: #ff9282; }
     #ammo.empty #ammoCount { color: #ff9282; }
     #ammo.empty .gchip { border-color: rgba(255,138,122,.45); background: rgba(255,80,60,.14); }
@@ -579,6 +618,11 @@
       <div id="grenadeChips"><span class="gchip">G×3</span></div>
     </div>
     <div id="reloadPrompt"></div>
+    <div id="wheel" aria-hidden="true">
+      <div id="wheelDim"></div>
+      <div id="wheelRing"></div>
+      <div id="wheelHub"><div id="wheelHubName"></div><div id="wheelHubMeta"></div></div>
+    </div>
     <div id="placeBanner"></div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
     <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
@@ -667,7 +711,7 @@
               <li>Space — jump · V — dodge roll (can't be hurt mid-roll)</li>
               <li>C — crouch: slower, but tighter groups and a lower silhouette</li>
               <li>Mouse — aim anywhere around you; the marine turns to face the reticle while the camera holds still, so shots land where it sits</li>
-              <li>Scroll wheel — zoom the camera in / out (in build mode it picks builds; scoped, it dials the magnification)</li>
+              <li>Scroll wheel — zoom the camera in / out (scoped, it dials the magnification)</li>
               <li>Hold the middle mouse button and drag — rotate the camera</li>
               <li>The tilt looks after itself: the view lifts to look up a hill ahead, drops into a dip, and rises over ground behind you instead of crowding the marine</li>
               <li>The camera slides toward the cursor once you point past the middle of the screen, so you see more of what you're aiming at</li>
@@ -679,7 +723,7 @@
               <li>RMB — zoom (a real scope on the sniper) · middle click — sniper scope 2X / 4X / 6X</li>
               <li>G — grenade · F — knife (or the machete, once bought)</li>
               <li>H — use a medkit. Health only regenerates back to 40% on its own</li>
-              <li>Q — cycle weapons</li>
+              <li>Hold Q — weapon wheel: time slows, point at a gun, let go to draw it · tap Q to step to the next one</li>
             </ul>
             <h3>Action key (E)</h3>
             <ul>
@@ -688,8 +732,8 @@
             </ul>
             <h3>Building</h3>
             <ul>
-              <li>B — enter / exit build mode · LMB place · Esc leave build mode</li>
-              <li>In build mode, the scroll wheel or 1–9 / 0 / - : barricade · wall · sandbag · spikes · fuel drum · mine · decoy · light · flame · heavy · mortar. The barricade is free; the rest appear once you buy the blueprint</li>
+              <li>Hold B — build wheel: point at a build, let go to pick it · tap B to enter / leave build mode · LMB place</li>
+              <li>The build wheel holds all eleven: barricade · wall · sandbag · spikes · fuel drum · mine · decoy · light · flame · heavy · mortar. The barricade is free; the rest stay greyed out with their price until you buy the blueprint</li>
               <li>T — repair the nearest build · X — sell it</li>
               <li>Fuel drums: place one, shoot it when the horde is beside it, stand well back — they chain</li>
             </ul>
@@ -13462,10 +13506,8 @@
       }
       rebuildGhost();
       if (mode) {
-        const cost = COST[mode];
-        const owned = BUILD_ORDER.filter((k) => buildUnlocked[k]);
-        placeBannerEl.textContent = 'Build ' + (owned.indexOf(mode) + 1) + '/' + owned.length + ': ' +
-          BUILD_NAMES[mode] + ' ($' + cost + ') · T repair · X sell';
+        placeBannerEl.textContent = BUILD_NAMES[mode] + ' ($' + COST[mode] + ')' +
+          ' · hold B to switch · T repair · X sell';
         placeBannerEl.classList.add('on');
       } else {
         placeBannerEl.classList.remove('on');
@@ -13495,17 +13537,6 @@
         if (!buildUnlocked[mode]) mode = firstUnlockedBuild();
         setPlaceMode(mode);
       }
-    }
-
-    function cycleBuild(dir) {
-      if (!gameStarted || gameOver || won || paused || mortarCarried) return;
-      if (!buildMode && !placeMode) return;
-      // Skip straight over blueprints you haven't bought.
-      for (let guard = 0; guard < BUILD_ORDER.length; guard++) {
-        buildIndex = ((buildIndex + dir) % BUILD_ORDER.length + BUILD_ORDER.length) % BUILD_ORDER.length;
-        if (buildUnlocked[BUILD_ORDER[buildIndex]]) break;
-      }
-      setPlaceMode(BUILD_ORDER[buildIndex]);
     }
 
     function getPlacePoint() {
@@ -15938,6 +15969,142 @@
       KeyW: false, KeyS: false, KeyA: false, KeyD: false, Space: false,
       ShiftLeft: false, ShiftRight: false, KeyC: false
     };
+    // === Radial wheels (weapons, builds) ========================================
+    // Hold Q or B: the clock drops to a crawl, a ring of slots comes up, and the
+    // slot the cursor points at from screen centre is taken when the key is let go.
+    // Both wheels list EVERY slot, owned or not, so a gun or a build is always in
+    // the same place on the ring - buying something never shuffles the layout out
+    // from under your muscle memory. Picking one you have not bought explains what
+    // it costs instead of silently doing nothing.
+    const wheelEl = document.getElementById('wheel');
+    const wheelRingEl = document.getElementById('wheelRing');
+    const wheelHubNameEl = document.getElementById('wheelHubName');
+    const wheelHubMetaEl = document.getElementById('wheelHubMeta');
+    const WHEEL_RADIUS = 170;     // px from centre to slot centre
+    const WHEEL_DEADZONE = 48;    // inside this, the hub keeps whatever is selected
+    const WHEEL_TAP_MS = 190;     // a flick this short falls back to the old one-key behaviour
+    let wheelKind = null;         // 'weapon' | 'build' | null
+    let wheelItems = [];
+    let wheelSel = -1;
+    let wheelOpenedAt = 0;
+    let wheelMovedOut = false;
+    function wheelIsOpen() { return wheelKind !== null; }
+    function wheelNowMs() { return (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now(); }
+
+    function buildWheelItems(kind) {
+      const out = [];
+      if (kind === 'weapon') {
+        for (const key of WEAPON_ORDER) {
+          const st = WEAPON_STATS[key];
+          const owned = !!weaponOwned[key];
+          let meta;
+          if (!owned) meta = '$' + WEAPON_PRICE[key];
+          else if (st.melee) meta = Math.max(0, Math.ceil(sawFuel)) + 's gas';
+          else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + (reserveAmmo[key] | 0);
+          out.push({ key, name: st.name, meta, locked: !owned, current: key === currentWeapon });
+        }
+      } else {
+        const focus = placeMode || BUILD_ORDER[buildIndex] || 'barricade';
+        for (const key of BUILD_ORDER) {
+          const unlocked = !!buildUnlocked[key];
+          out.push({
+            key, name: BUILD_NAMES[key],
+            meta: unlocked ? '$' + COST[key] : 'plans $' + BUILD_UNLOCK_PRICE[key],
+            locked: !unlocked, current: key === focus
+          });
+        }
+      }
+      return out;
+    }
+
+    function syncWheelSelection() {
+      for (let i = 0; i < wheelItems.length; i++) wheelItems[i].el.classList.toggle('sel', i === wheelSel);
+      const it = wheelSel >= 0 ? wheelItems[wheelSel] : null;
+      wheelHubNameEl.textContent = it ? it.name : '—';
+      wheelHubMetaEl.textContent = !it ? ''
+        : (it.locked ? (wheelKind === 'weapon' ? 'Not bought · kiosk ' + it.meta : 'No blueprint · kiosk ' + it.meta) : it.meta);
+    }
+
+    function openWheel(kind) {
+      if (!gameStarted || gameOver || won || paused || shopOpen || devConsoleOpen) return false;
+      if (mortarMounted || mortarCarried) return false; // hands are on the tube
+      if (wheelKind === kind) return true;
+      wheelKind = kind;
+      wheelItems = buildWheelItems(kind);
+      wheelOpenedAt = wheelNowMs();
+      wheelMovedOut = false;
+      // Start on what is already in hand, so letting go without pointing changes nothing.
+      wheelSel = wheelItems.findIndex((it) => it.current);
+      wheelRingEl.textContent = '';
+      const n = wheelItems.length;
+      for (let i = 0; i < n; i++) {
+        const a = -Math.PI / 2 + i * (Math.PI * 2 / n); // slot 0 at twelve o'clock, clockwise
+        const el = document.createElement('div');
+        el.className = 'wheelSlot' + (wheelItems[i].locked ? ' locked' : '');
+        el.style.left = (Math.cos(a) * WHEEL_RADIUS).toFixed(1) + 'px';
+        el.style.top = (Math.sin(a) * WHEEL_RADIUS).toFixed(1) + 'px';
+        const nm = document.createElement('div'); nm.className = 'n'; nm.textContent = wheelItems[i].name;
+        const mt = document.createElement('div'); mt.className = 'm'; mt.textContent = wheelItems[i].meta;
+        el.appendChild(nm); el.appendChild(mt);
+        wheelRingEl.appendChild(el);
+        wheelItems[i].el = el;
+      }
+      wheelEl.classList.add('show');
+      mouseFireHeld = false;
+      fireHeld = false;
+      syncWheelSelection();
+      return true;
+    }
+
+    function wheelPointerMove(clientX, clientY) {
+      if (!wheelIsOpen()) return;
+      const dx = clientX - window.innerWidth / 2;
+      const dy = clientY - window.innerHeight / 2;
+      if (Math.hypot(dx, dy) < WHEEL_DEADZONE) return;
+      wheelMovedOut = true;
+      const n = wheelItems.length;
+      // Bearing measured the same way the ring is laid out: 0 at the top, clockwise.
+      let a = Math.atan2(dy, dx) + Math.PI / 2;
+      a = ((a % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+      const idx = Math.round(a / (Math.PI * 2 / n)) % n;
+      if (idx !== wheelSel) {
+        wheelSel = idx;
+        syncWheelSelection();
+        AudioSys.brassTink();
+      }
+    }
+
+    function closeWheel(commit) {
+      if (!wheelIsOpen()) return;
+      const kind = wheelKind, sel = wheelSel, moved = wheelMovedOut;
+      const heldMs = wheelNowMs() - wheelOpenedAt;
+      const items = wheelItems;
+      wheelKind = null;
+      wheelItems = [];
+      wheelSel = -1;
+      wheelEl.classList.remove('show');
+      wheelRingEl.textContent = '';
+      if (!commit) return;
+      // A quick tap that never left the hub keeps the old single-key behaviour:
+      // Q steps to the next gun, B toggles the ghost on and off.
+      if (!moved && heldMs < WHEEL_TAP_MS) {
+        if (kind === 'weapon') cycleWeapon(1); else toggleBuildMode();
+        return;
+      }
+      const it = sel >= 0 ? items[sel] : null;
+      if (!it) return;
+      if (kind === 'weapon') {
+        if (it.locked) {
+          AudioSys.invalid();
+          showBanner(it.name.toUpperCase() + ' — NOT BOUGHT', 'Buy it at the kiosk ($' + WEAPON_PRICE[it.key] + ')', 1.6, '#ffb347');
+          return;
+        }
+        if (it.key !== currentWeapon) setWeapon(WEAPON_ORDER.indexOf(it.key));
+      } else {
+        setPlaceMode(it.key); // refuses and explains on its own when the plans are missing
+      }
+    }
+
     addEventListener('keydown', (e) => {
       // The dev console swallows everything while it's up.
       if (devConsoleOpen) {
@@ -15975,25 +16142,17 @@
       if (e.code === 'KeyZ') { toggleLasers(); e.preventDefault(); }
       if (e.code === 'KeyL') { toggleFlashlight(); e.preventDefault(); }
       if (e.code === 'KeyH') { useMedkit(); e.preventDefault(); }
-      if (e.code === 'KeyQ') { cycleWeapon(1); e.preventDefault(); }
+      if (e.code === 'KeyQ') { if (!e.repeat && !openWheel('weapon')) cycleWeapon(1); e.preventDefault(); }
       if (e.code === 'KeyE') { if (!e.repeat) doAction(); e.preventDefault(); }
-      if (e.code === 'KeyB') { toggleBuildMode(); e.preventDefault(); }
+      if (e.code === 'KeyB') { if (!e.repeat && !openWheel('build')) toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
       if (e.code === 'KeyV') { tryRoll(); e.preventDefault(); }
-      for (let bi = 0; bi < BUILD_ORDER.length; bi++) {
-        // 1-9, then 0 and - for the tenth and eleventh slots.
-        const codeA = bi < 9 ? 'Digit' + (bi + 1) : (bi === 9 ? 'Digit0' : 'Minus');
-        const codeB = bi < 9 ? 'Numpad' + (bi + 1) : (bi === 9 ? 'Numpad0' : 'NumpadSubtract');
-        if (e.code === codeA || e.code === codeB) {
-          setPlaceMode(BUILD_ORDER[bi]);
-          e.preventDefault();
-        }
-      }
       if (e.code === 'KeyT') { if (mortarMounted) shoulderMortar(); else repairNearestBuild(); e.preventDefault(); }
       if (e.code === 'KeyX') { sellNearestBuild(); e.preventDefault(); }
       if (e.code === 'Escape') {
         e.preventDefault();
+        if (wheelIsOpen()) { closeWheel(false); return; }
         // Settings first: from the pause menu Esc steps back to it rather than unpausing
         // the whole game, and from the title screen it just closes the panel.
         if (settingsFrom) {
@@ -16009,6 +16168,8 @@
       }
     });
     addEventListener('keyup', (e) => {
+      if (e.code === 'KeyQ' && wheelKind === 'weapon') { closeWheel(true); e.preventDefault(); }
+      if (e.code === 'KeyB' && wheelKind === 'build') { closeWheel(true); e.preventDefault(); }
       if (e.code in keys) {
         keys[e.code] = false;
         e.preventDefault();
@@ -16305,10 +16466,13 @@
     function updatePointerFromEvent(e) {
       const rect = renderer.domElement.getBoundingClientRect();
       if (rect.width <= 0 || rect.height <= 0) return;
-      aimPointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      aimPointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       pointerOnCanvas = true;
       updateReticleFromEvent(e);
+      // With a wheel up the cursor is picking a slot, not aiming: leave aimPointerNdc
+      // where it was so the marine still faces the same way once the ring closes.
+      if (wheelIsOpen()) { wheelPointerMove(e.clientX, e.clientY); syncReticleVisibility(); return; }
+      aimPointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      aimPointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       syncReticleVisibility();
     }
 
@@ -16510,7 +16674,7 @@
     }
 
     function uiBlocksFire() {
-      return winEl.classList.contains('show') || modeSelectEl.classList.contains('show') || pauseEl.classList.contains('show') || paused || shopOpen;
+      return winEl.classList.contains('show') || modeSelectEl.classList.contains('show') || pauseEl.classList.contains('show') || paused || shopOpen || wheelIsOpen();
     }
 
     renderer.domElement.addEventListener('pointermove', (e) => {
@@ -16531,6 +16695,7 @@
     addEventListener('pointermove', (e) => {
       updateReticleFromEvent(e);
       // Keep reticle following even if aim ray only updates on canvas
+      if (wheelIsOpen()) wheelPointerMove(e.clientX, e.clientY);
       if (pointerOnCanvas) syncReticleVisibility();
     });
 
@@ -16584,11 +16749,6 @@
     renderer.domElement.addEventListener('wheel', (e) => {
       if (!gameStarted || gameOver || won || paused) return;
       e.preventDefault();
-      if (buildMode || placeMode) {
-        if (e.deltaY < 0) cycleBuild(1);
-        else if (e.deltaY > 0) cycleBuild(-1);
-        return;
-      }
       // Line-mode deltas (Firefox) are ~33x smaller than pixel deltas.
       const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
       // Scoped, a dolly change is invisible (the scope branch in tick() overwrites the
@@ -20242,6 +20402,13 @@
       if (slowMoT > 0) {
         slowMoT -= dt;
         dt *= 0.32;
+      }
+      // A wheel is a decision, not a pause: the horde keeps coming, just slowly
+      // enough to read eleven labels. Anything that should have shut the ring
+      // (dying, the shop opening) closes it here rather than leaving it stuck up.
+      if (wheelIsOpen()) {
+        if (gameOver || won || paused || shopOpen) closeWheel(false);
+        else dt *= 0.16;
       }
 
       // Pause: freeze sim, keep rendering a still frame
