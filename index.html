@@ -13230,6 +13230,24 @@
     const ghostGroup = new THREE.Group();
     ghostGroup.visible = false;
     scene.add(ghostGroup);
+    // A patch of the lattice under the ghost, so "it snapped" is something you can
+    // see rather than infer. Built once at load and only ever toggled visible:
+    // putting geometry into the scene mid-wave is what the renderer notes warn about.
+    const buildGridHelper = (() => {
+      const half = 7, step = 1.0, pts = [];
+      for (let i = -half; i <= half; i++) {
+        pts.push(i * step, 0, -half * step, i * step, 0, half * step);
+        pts.push(-half * step, 0, i * step, half * step, 0, i * step);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+      const mat = new THREE.LineBasicMaterial({ color: 0x8fd6ff, transparent: true, opacity: 0.17, depthWrite: false });
+      const lines = new THREE.LineSegments(geo, mat);
+      lines.visible = false;
+      lines.renderOrder = 2;
+      scene.add(lines);
+      return lines;
+    })();
     let placeMode = null; // key of BUILD_ORDER, or null
     let buildMode = false;
     const BUILD_ORDER = ['barricade', 'wall', 'sandbag', 'spikes', 'barrel', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
@@ -13283,17 +13301,40 @@
       const legMat = matOverride || new THREE.MeshStandardMaterial({ color: 0x4b5563, metalness: 0.6, roughness: 0.4 });
       const bodyMat = matOverride || new THREE.MeshStandardMaterial({ color: 0x9ca3af, metalness: 0.7, roughness: 0.35 });
       const accent = matOverride || new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0ea5e9, emissiveIntensity: 0.4 });
+      // The old base was three thin cylinders splayed by an Euler pair, which does
+      // not tilt a leg outward so much as skew it: the feet ended up off the ground
+      // at different heights and the whole turret read as hovering over a tripod.
+      // A plate that sits ON the ground, three stubby feet reaching past it, and a
+      // solid column up to the pedestal.
+      const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.40, 0.09, 12), legMat);
+      plate.position.y = 0.045;
+      plate.castShadow = true; plate.receiveShadow = true;
+      g.add(plate);
       for (let i = 0; i < 3; i++) {
-        const ang = (i / 3) * Math.PI * 2;
-        const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.07, 1.1, 6), legMat);
-        leg.position.set(Math.cos(ang) * 0.45, 0.45, Math.sin(ang) * 0.45);
-        leg.rotation.z = Math.cos(ang) * 0.45;
-        leg.rotation.x = Math.sin(ang) * 0.45;
-        leg.castShadow = true;
-        g.add(leg);
+        const ang = (i / 3) * Math.PI * 2 + Math.PI / 6;
+        const foot = new THREE.Mesh(rbox(0.30, 0.07, 0.15, 0.025), legMat);
+        foot.position.set(Math.cos(ang) * 0.38, 0.035, Math.sin(ang) * 0.38);
+        foot.rotation.y = -ang;
+        foot.castShadow = true;
+        g.add(foot);
+        // A short brace from the foot up to the column, so the join reads as built
+        // rather than as two parts overlapping.
+        const brace = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.045, 0.52, 6), legMat);
+        brace.position.set(Math.cos(ang) * 0.20, 0.30, Math.sin(ang) * 0.20);
+        brace.rotation.z = -Math.cos(ang) * 0.52;
+        brace.rotation.x = Math.sin(ang) * 0.52;
+        g.add(brace);
       }
+      const column = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.135, 0.86, 10), bodyMat);
+      column.position.y = 0.50;
+      column.castShadow = true;
+      g.add(column);
+      const collar = new THREE.Mesh(new THREE.CylinderGeometry(0.155, 0.155, 0.06, 12), legMat);
+      collar.position.y = 0.80;
+      g.add(collar);
       const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 0.25, 14), bodyMat);
       pedestal.position.y = 0.95;
+      pedestal.castShadow = true;
       g.add(pedestal);
       // Everything above the pedestal sits on a pitch pivot so the gun can tilt at
       // its target and rock back on recoil.
@@ -13509,13 +13550,19 @@
       }
       rebuildGhost();
       if (mode) {
-        placeBannerEl.textContent = BUILD_NAMES[mode] + ' ($' + COST[mode] + ')' +
-          ' · hold B to switch · T repair · X sell';
-        placeBannerEl.classList.add('on');
+        refreshPlaceBanner();
       } else {
         placeBannerEl.classList.remove('on');
         placeBannerEl.textContent = '';
       }
+    }
+
+    function refreshPlaceBanner() {
+      if (!placeMode) { placeBannerEl.classList.remove('on'); placeBannerEl.textContent = ''; return; }
+      const lock = buildAxis === 'free' ? 'free' : (buildAxis === 'x' ? 'locked E-W' : 'locked N-S');
+      placeBannerEl.textContent = BUILD_NAMES[placeMode] + ' ($' + COST[placeMode] + ')' +
+        ' · hold B to switch · R axis: ' + lock + ' · T repair · X sell';
+      placeBannerEl.classList.add('on');
     }
 
     function cancelPlaceMode() {
@@ -13528,6 +13575,9 @@
         return;
       }
       buildMode = false;
+      buildAxis = 'free';
+      buildAnchor = null;
+      buildGridHelper.visible = false;
       setPlaceMode(null);
     }
 
@@ -13542,13 +13592,41 @@
       }
     }
 
+    // --- Placement grid -------------------------------------------------------
+    // Free placement made a straight fence line essentially impossible: every piece
+    // landed wherever the aim ray happened to be, so a perimeter came out as a wobbly
+    // dotted curve with gaps the horde walked through. Everything now lands on a 1m
+    // lattice, and R locks the run to one axis so a wall follows the piece before it
+    // instead of drifting off it.
+    const BUILD_GRID = 1.0;
+    let buildAxis = 'free';            // 'free' | 'x' | 'z'
+    let buildAnchor = null;            // last piece placed; the locked axis holds to it
+    function snapToGrid(v) { return Math.round(v / BUILD_GRID) * BUILD_GRID; }
+    // Walls and sandbags turn broadside to you, but on a grid they have to agree with
+    // it, or a "straight" run comes out as a row of slightly different angles.
+    function snapYaw(a) { return Math.round(a / (Math.PI / 2)) * (Math.PI / 2); }
+    function cycleBuildAxis() {
+      if (!placeMode) return;
+      buildAxis = buildAxis === 'free' ? 'x' : (buildAxis === 'x' ? 'z' : 'free');
+      // Lock on from where you are standing when there is no piece to follow yet.
+      if (buildAxis !== 'free' && !buildAnchor) {
+        buildAnchor = { x: snapToGrid(player.position.x), z: snapToGrid(player.position.z) };
+      }
+      AudioSys.brassTink();
+      refreshPlaceBanner();
+    }
+
     function getPlacePoint() {
       const fx = Math.sin(aimYaw);
       const fz = Math.cos(aimYaw);
-      return {
-        x: player.position.x + fx * PLACE_DIST,
-        z: player.position.z + fz * PLACE_DIST
-      };
+      let x = snapToGrid(player.position.x + fx * PLACE_DIST);
+      let z = snapToGrid(player.position.z + fz * PLACE_DIST);
+      // Axis lock pins the other coordinate to the run you are building.
+      if (buildAnchor) {
+        if (buildAxis === 'x') z = buildAnchor.z;
+        else if (buildAxis === 'z') x = buildAnchor.x;
+      }
+      return { x, z };
     }
 
     function overlapsBlocked(x, z, radius) {
@@ -13658,6 +13736,7 @@
       bank -= cost;
       updateCoinHud();
       spawnBuild(placeMode, pt.x, pt.z);
+      buildAnchor = { x: pt.x, z: pt.z };
       AudioSys.place();
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -13767,8 +13846,8 @@
       else mesh = makeHeavyTurretMesh();
       mesh.position.set(x, groundMinAround(x, z, st.radius * 0.85), z);
       // Walls face across the approach: turn broadside to the player who placed them.
-      if (kind === 'wall' || kind === 'sandbag') mesh.rotation.y = aimYaw + Math.PI / 2;
-      if (kind === 'mortar') mesh.rotation.y = aimYaw;
+      if (kind === 'wall' || kind === 'sandbag') mesh.rotation.y = snapYaw(aimYaw + Math.PI / 2);
+      if (kind === 'mortar') mesh.rotation.y = snapYaw(aimYaw);
       scene.add(mesh);
 
       const barGroup = new THREE.Group();
@@ -13796,6 +13875,35 @@
       };
       builds.push(b);
       return b;
+    }
+
+    // What the horde will stop and swing at. Spikes and mines are meant to be walked
+    // over (that is their whole job) and a fuel drum is a landmark rather than a
+    // build, so neither is a target. Turrets are, which they were not before: the old
+    // contact grind left them untouchable by anything short of the colossus.
+    const BUILD_ATTACKABLE = { barricade: 1, wall: 1, sandbag: 1, mortar: 1, lure: 1, light: 1, flame: 1, heavy: 1 };
+    function nearestAttackableBuild(x, z, zr) {
+      let best = null, bd = Infinity;
+      for (const b of builds) {
+        if (b.hp <= 0 || !BUILD_ATTACKABLE[b.type]) continue;
+        const d = Math.hypot(b.x - x, b.z - z);
+        if (d < b.radius + zr + 0.35 && d < bd) { bd = d; best = b; }
+      }
+      return best;
+    }
+
+    // One path for "a build took damage", so the dust, the sound and the wreck are
+    // the same however it happened.
+    function damageBuild(b, dmg) {
+      if (!b || b.hp <= 0 || builds.indexOf(b) < 0) return; // it may have died mid-windup
+      b.hp -= dmg;
+      b.flashT = 0.12;
+      spawnDust(b.x, b.mesh.position.y + 0.5, b.z, 2);
+      AudioSys.rockBreak();
+      if (b.hp <= 0) {
+        spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 7, 4);
+        removeBuild(b);
+      }
     }
 
     const LURE_LIFE = 20;
@@ -13976,13 +14084,16 @@
       return false;
     }
 
-    // Floating condition bars — only shown once something has taken a hit.
+    // Floating condition bars. Shown once something has taken a hit, and on
+    // everything at once while a ghost is up, so you can read the state of a
+    // perimeter before deciding where the next piece goes.
     function updateBuildBars() {
+      const surveying = !!placeMode;
       for (const b of builds) {
         if (!b.bar) continue;
         const hurt = b.hp < b.maxHp - 0.5;
-        b.bar.visible = hurt;
-        if (!hurt) continue;
+        b.bar.visible = hurt || surveying;
+        if (!b.bar.visible) continue;
         const frac = Math.max(0, b.hp / b.maxHp);
         b.bar.position.set(b.x, b.mesh.position.y + b.barY, b.z);
         b.bar.quaternion.copy(camera.quaternion);
@@ -13994,10 +14105,15 @@
     const barFgLowMat = new THREE.MeshBasicMaterial({ color: 0xe0563e, depthWrite: false, transparent: true, opacity: 0.95 });
 
     function updateGhostPreview() {
-      if (!placeMode) return;
+      if (!placeMode) { if (buildGridHelper.visible) buildGridHelper.visible = false; return; }
       const pt = getPlacePoint();
+      // The lattice rides the ghost, lifted clear of the ground so it is not
+      // z-fighting the terrain it is drawn over.
+      buildGridHelper.visible = true;
+      buildGridHelper.position.set(snapToGrid(pt.x), sampleHeight(pt.x, pt.z) + 0.06, snapToGrid(pt.z));
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
-      if (placeMode === 'wall') ghostGroup.rotation.y = aimYaw + Math.PI / 2;
+      if (placeMode === 'wall' || placeMode === 'sandbag') ghostGroup.rotation.y = snapYaw(aimYaw + Math.PI / 2);
+      else if (placeMode === 'mortar') ghostGroup.rotation.y = snapYaw(aimYaw);
       else ghostGroup.rotation.y = 0;
       ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
       ghostValid = validatePlace(pt.x, pt.z) && bank >= COST[placeMode];
@@ -16207,7 +16323,8 @@
       // Movement keys are ignored while manning the mortar. Clearing them afterwards
       // (updateMortar) came too late: the frame's movement had already used them.
       if (e.code in keys) { if (!mortarMounted) keys[e.code] = true; e.preventDefault(); }
-      if (e.code === 'KeyR') { startReload(); e.preventDefault(); }
+      // R is the axis lock while a ghost is up: there is nothing to reload mid-place.
+      if (e.code === 'KeyR') { if (placeMode) cycleBuildAxis(); else startReload(); e.preventDefault(); }
       if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
       if (e.code === 'KeyN') { toggleNvg(); e.preventDefault(); }
       if (e.code === 'KeyZ') { toggleLasers(); e.preventDefault(); }
@@ -19592,19 +19709,7 @@
         }
         for (const b of builds.slice()) {
           const bd = Math.hypot(mx - b.x, mz - b.z);
-          const isBoss = tactics === 'boss';
-          if (b.type === 'barricade' || b.type === 'wall' || b.type === 'sandbag' || b.type === 'mortar' || b.type === 'lure' || (isBoss && b.type !== 'spikes' && b.type !== 'mine')) {
-            if (bd < b.radius + z.radius + 0.35) {
-              // Walls are tougher per-hit; the colossus goes through everything.
-              const rate = (b.type === 'wall' ? 2.6 : (b.type === 'sandbag' ? 3.2 : 4)) * (z.brute ? 2.1 : 1) *
-                           (z.meleeMult || 1) * (isBoss ? 6 : 1);
-              b.hp -= rate * dt;
-              if (b.hp <= 0) {
-                spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 6, 4);
-                removeBuild(b);
-              }
-            }
-          } else if (b.type === 'spikes' && !z.crawling) {
+          if (b.type === 'spikes' && !z.crawling) {
             // Walking over spikes shreds feet: damage + slow, and the trap wears out.
             if (bd < b.radius + z.radius * 0.5) {
               z.slowT = 0.35;
@@ -19850,6 +19955,7 @@
             const atk = z._pendingAttack;
             z._pendingAttack = null;
             if (atk.type === 'house') damageHouse(atk.dmg);
+            else if (atk.type === 'build') damageBuild(atk.build, atk.dmg);
             else damagePlayer(atk.dmg);
             z.swingT = 0.28;
           }
@@ -19908,12 +20014,12 @@
 
         z.attackCd -= dt;
         if (!zombieGraceActive() && z.attackWindup <= 0 && !rising && tactics !== 'bomb') {
-          const tryWindup = (type, dmg, cd) => {
+          const tryWindup = (type, dmg, cd, build) => {
             if (z.attackCd > 0) return;
             z.attackCd = cd;
             z.attackWindup = 0.22;
             z.swingSide = Math.random() < 0.5 ? -1 : 1;
-            z._pendingAttack = { type, dmg };
+            z._pendingAttack = { type, dmg, build: build || null };
           };
           // Vertical reach on top of the horizontal check — without it a zombie stuck at
           // the foot of the watchtower (or any other height difference) could still
@@ -19925,6 +20031,18 @@
           } else {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
             if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < 2.3) tryWindup('player', z.damage, 0.85);
+            else {
+              // You are out of reach, so whatever of yours is in the way gets it
+              // instead. The player always wins the check above: defences are what
+              // they turn on only when they cannot get to you.
+              const hit = nearestAttackableBuild(mx, mz, z.radius);
+              if (hit) {
+                // Structures give way to weight: a brute puts its shoulder through
+                // what a shambler only dents, and the colossus barely notices.
+                const heft = (z.brute ? 2.2 : 1) * (tactics === 'boss' ? 5 : 1) * (z.meleeMult || 1);
+                tryWindup('build', Math.max(2, Math.round(z.damage * heft)), 0.95, hit);
+              }
+            }
           }
           if (gameMode === 'defend') {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
