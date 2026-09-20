@@ -12,7 +12,10 @@ profile is what makes the flag stick even when Edge is already open. Without Edg
 falls back to the default browser. The permanent alternative is Windows Settings > System >
 Display > Graphics > (your browser) > High performance.
 
-Graphics quality (Esc > Settings: Low / Medium / High / Max)
+Settings are reachable from the title screen as well as Esc mid-match - one panel, shown
+from both places (volume, look sensitivity, graphics, camera, fullscreen, skip prep).
+
+Graphics quality (Settings: Low / Medium / High / Max)
   Picked automatically on first run (Intel integrated -> Low, anything else -> High) until you
   choose one; your choice is remembered. Applies live. Resolution, shadow resolution and
   ground-cover distance switch instantly; MSAA and bloom rebuild the post chain; turning the
@@ -116,18 +119,31 @@ Controls
                  so nothing moves under the reticle when you move the mouse and shots land on
                  it. The reticle locks onto a zombie's body when it's over one, and above the
                  skyline it aims into the sky.
-  Wheel          look up / down: tilts the camera between near-overhead (~75°) and low
-                 (~20°, horizon and hilltops in view). Kept between matches.
-  1 / 2          zoom the camera in / out: 6 m to 24 m from the marine (default 12 m). In build
-                 mode the number keys pick builds instead, so 1 / 2 are barricade / wall there.
-  Middle drag    rotate the camera (drag up/down also tilts). A middle click without a drag
-                 cycles the sniper scope magnification: 2X / 4X / 6X.
-  Look sens.     Esc > Settings > Look (0.25x - 3x): wheel and middle-drag speed, and how far
-                 the sniper reticle throws while scoped.
+  Wheel          zoom the camera in / out: 6 m to 24 m from the marine (default 12 m). In
+                 build mode it cycles builds; scoped, it dials the sniper's magnification.
+                 1 / 2 are barricade / wall again.
+  Auto tilt      the tilt is the terrain's job now, not the wheel's (Esc > Settings > Camera:
+                 Off / Gentle / Strong, default Gentle). Ground rising ahead drops the camera
+                 so you look up the hill (~39° facing a climb against ~50° on the flat), a
+                 drop ahead raises it (~59°), and ground behind the camera lifts it over the
+                 lip instead of hauling it in against the marine's back. Off gives the old
+                 manual tilt back on middle-drag.
+  Follow cursor  Esc > Settings > Camera (default on). The view slides toward where you point
+                 once the cursor leaves the middle ~18% of the screen, capped at 3 m. It is a
+                 pure pan - the heading and angle never change - and it is applied after the
+                 camera's follow lerp rather than through it, which is what keeps it from
+                 dragging the ground out from under a reticle you have just put on a zombie
+                 (through the lerp that cost 2 shots in 12; after it, 16/16).
+  Middle drag    rotate the camera (drag up/down also tilts, when auto tilt is Off). A middle
+                 click without a drag cycles the sniper scope magnification: 2X / 4X / 6X.
+  Look sens.     Esc > Settings > Look (0.25x - 3x): middle-drag speed, and how far the
+                 sniper reticle throws while scoped.
   LMB            fire / hold for the chainsaw and flamethrower        RMB  zoom (real scope on the sniper)
   Q              cycle weapons R      reload      G  grenade      F  knife (left hand;
-                 knife: 2.8m reach, 28 damage, ±75° arc; the Machete from the kiosk's
-                 Upgrades tab replaces it: 3.4m reach, 62 damage, ±81° arc)
+                 knife: 3.2m reach, 45 damage, 0.30s, ±87° arc - one-shots shamblers,
+                 ferals, leapers, screamers, spitters and bombers, and sweeps a crowd;
+                 the Machete from the kiosk's Upgrades tab replaces it: 3.8m reach,
+                 85 damage, 0.40s, ±93° arc)
   H              use a medkit (bought at the kiosk, or a rare enemy drop heals on touch)
   E              the action key - whatever the prompt at the bottom of the screen says:
                    at the kiosk: open it (E or Esc closes it; time stops while it's open). Its
@@ -176,13 +192,25 @@ Systems
   Airdrops       rare now (every 4-7 minutes) and money only - a bounty for walking out to it.
   Defend mode    the cabin is 1.65x bigger with a health bar floating over the roof; no zombies
                  rise within ~100 ft of it, so the fight comes to you from outside the clearing.
-  Horde pace     every zombie type runs 15% faster than it used to.
+  Horde pace     every zombie type runs 15% faster than it used to, and the Shambler another
+                 25% on top (2.55 -> 3.19 m/s) - the fodder keeps up with you now.
+  Horde size     every wave carries 10x the bodies. The extra nine tenths are all Shamblers:
+                 the specialist counts are unchanged, just spread through a much longer
+                 wave, so the horde grew without the field filling up with brutes. Day 7
+                 goes 30 bodies to 300, still with 2 bombers / 4 brutes / 2 spiders /
+                 2 spitters / 1 screamer. Spawn cadence is about 3.5 a second to match, and
+                 MAX_ZOMBIES (how many stand on the field at once) went 36 -> 48. That
+                 constant is the density knob if a machine can't hold it - see its comment
+                 in index.html for what was measured and why the numbers are soft.
   Enemies        the construction worker is gone. New from day 2-3: Leapers (pale, run on all fours,
                  jump 5-14m onto you - sidestep the landing), the Drowned (fish-people that only ever
                  surface from the river; fast in the water, sluggish on land), and from day 4-5
                  Spiders (a pale zombie crawling on six human limbs - two pairs of arms and its
                  legs - with its head out front; hang back at 7-15m and shoot webbing that slows you - kill them
-                 first). Bombers are fat now: bigger belly, bigger blast radius.
+                 first). Bombers are fat now: bigger belly, bigger blast radius, and 20%
+                 quicker (3.6 -> 4.32 m/s) before their close-range sprint. Spitters no
+                 longer throw acid - lobbing things is the spider's job - they walk in and
+                 then crawl the last 15m at a quarter speed.
   Armor          the marine starts in a field cap, shirt and H-harness chest rig. Helmet ($70, +25), Plate carrier ($120, +50)
                  and Knee & elbow pads ($50, +15) are bought in the kiosk's Gear tab; each one appears on
                  the model when bought and adds to the ARMOR bar under health. Armor soaks 65% of
