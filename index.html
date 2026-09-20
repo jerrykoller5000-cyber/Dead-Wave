@@ -15529,6 +15529,11 @@
           if (ch.material.emissiveIntensity != null && ch.userData && ch.userData._hitFlash) {
             ch.material.emissiveIntensity = ch.userData._baseEmissive || 0;
           }
+          // Undo the charring from a body that burned (see beginCorpse). Without
+          // this the pool hands the blackened mesh straight back out and the next
+          // zombie of that type rises already burnt.
+          const pc = ch.material.userData && ch.material.userData._preCharColor;
+          if (pc != null) { ch.material.color.setHex(pc); ch.material.userData._preCharColor = null; }
         }
       });
       const r = ud.rest;
@@ -15871,6 +15876,24 @@
     function beginCorpse(z, dx, dz) {
       const mesh = z.mesh;
       if (!mesh) return false;
+      // Died on fire: the body stays charred. Materials are per-zombie (the hit flash
+      // tints them individually), so darkening these does not blacken the whole horde,
+      // and the mesh is re-skinned by resetZombieMesh when the pool hands it back out.
+      if ((z.burnT || 0) > 0 && mesh.userData.bodyMats) {
+        for (const m of mesh.userData.bodyMats) {
+          if (m.color) {
+            if (!m.userData) m.userData = {};
+            if (m.userData._preCharColor == null) m.userData._preCharColor = m.color.getHex();
+            m.color.multiplyScalar(0.18);
+          }
+          if (m.emissive) { m.emissive.setHex(0x000000); m.emissiveIntensity = 0; }
+        }
+        spawnScorch(mesh.position.x, mesh.position.z, 0.55 + Math.random() * 0.25);
+        for (let i = 0; i < 5; i++) {
+          spawnMote(mesh.position.x + (Math.random() - 0.5) * 0.6, mesh.position.y + 0.8 + Math.random() * 0.5, mesh.position.z + (Math.random() - 0.5) * 0.6,
+            smokeMat, { vx: 0, vy: 0.7 + Math.random() * 0.6, vz: 0, grav: 0.05, drag: 0.5, life: 1.3 + Math.random(), scale: 0.5, grow: true });
+        }
+      }
       z.mesh = null; // the corpse list owns it now
       const yaw = mesh.rotation.y;
       let lx, lz;
@@ -18144,6 +18167,33 @@
     const groundFireDiscGeo = new THREE.CircleGeometry(1.1, 14);
     const groundFirePool = [];
 
+    // --- Scorch ----------------------------------------------------------------
+    // What a fire leaves behind. Pooled and capped like the blood decals, laid along
+    // the surface normal so they sit on a slope instead of slicing through it, and
+    // they stay for the rest of the match: a field you burned should still look burned
+    // when the next wave walks over it.
+    const scorchDecals = [];
+    const MAX_SCORCH = 90;
+    const scorchGeo = new THREE.CircleGeometry(1.25, 12);
+    const _scorchMats = [];
+    function scorchMatPool() {
+      if (_scorchMats.length < 14) {
+        const m = new THREE.MeshBasicMaterial({ color: 0x140f0c, transparent: true, opacity: 0.55, depthWrite: false });
+        _scorchMats.push(m);
+        return m;
+      }
+      return _scorchMats[(Math.random() * _scorchMats.length) | 0];
+    }
+    function spawnScorch(x, z, scale) {
+      if (scorchDecals.length >= MAX_SCORCH) releaseEffectMesh(scorchDecals.shift());
+      const d = acquireEffectMesh(scorchGeo, scorchMatPool(), MAX_SCORCH + 6);
+      d.quaternion.setFromUnitVectors(AXIS_Z, terrainNormal(x, z));
+      d.position.set(x, sampleHeight(x, z) + 0.045, z);
+      d.scale.setScalar(scale || (0.8 + Math.random() * 0.5));
+      scorchDecals.push(d);
+    }
+    function clearScorch() { for (const d of scorchDecals) releaseEffectMesh(d); scorchDecals.length = 0; }
+
     function spawnGroundFire(x, z) {
       for (const f of groundFires) if (Math.hypot(f.x - x, f.z - z) < 1.5) { f.age = Math.min(f.age, GROUND_FIRE_LIFE * 0.35); return f; }
       const y = sampleHeight(x, z);
@@ -18160,9 +18210,26 @@
       const disc = g.userData.disc;
       disc.visible = true;
       g.position.set(x, y, z);
-      const f = { x, z, y, mesh: g, disc, age: 0, hurtT: 0 };
+      // spreadT: fire creeps outward on a beat rather than every frame, and only
+      // while it is young — an old patch has burned what there was to burn.
+      // Every patch gets its own turn and size, or a spreading fire reads as a row of
+      // identical stamped circles rather than one uneven burn.
+      disc.rotation.z = Math.random() * Math.PI * 2;
+      const f = { x, z, y, mesh: g, disc, age: 0, hurtT: 0, spreadT: 0.8 + Math.random() * 0.7, scorched: false,
+                  sizeVar: 0.75 + Math.random() * 0.5, flick: Math.random() * 6.28 };
       groundFires.push(f);
       return f;
+    }
+    // Cap on how much of the map can be alight at once. Fire that spreads without a
+    // ceiling turns into a map-wide grass simulation and eats the frame.
+    const MAX_GROUND_FIRES = 44;
+    // Where fire will not go: water, the stream, and bare rock. Everything else on
+    // this map is grass or leaf litter and burns happily.
+    function fireCanSpreadTo(x, z) {
+      if (Math.hypot(x, z) > landRadius - 1) return false;
+      if (waterDepthAt(x, z) > 0.02) return false;
+      if (distToStream(x, z) < STREAM_WIDTH * 0.8) return false;
+      return true;
     }
     function releaseGroundFire(f) {
       f.mesh.visible = false;
@@ -18174,12 +18241,44 @@
       for (let i = groundFires.length - 1; i >= 0; i--) {
         const f = groundFires[i];
         f.age += dt;
+        // Lay the scorch down a little before the flame dies, so the ground is already
+        // blackening under it rather than a mark appearing out of nowhere.
+        if (!f.scorched && f.age > GROUND_FIRE_LIFE * 0.55) { f.scorched = true; spawnScorch(f.x, f.z, 0.9 + Math.random() * 0.5); }
         if (f.age >= GROUND_FIRE_LIFE) { releaseGroundFire(f); groundFires.splice(i, 1); continue; }
+        // --- Spread ---
+        // Young fire creeps outward; rain puts a stop to it. Each beat tries one
+        // patch at a arm's length out, which is slow enough to watch a line of fire
+        // walk across grass and cheap enough to not care about.
+        f.spreadT -= dt;
+        if (f.spreadT <= 0) {
+          f.spreadT = 0.7 + Math.random() * 0.8;
+          const young = f.age < GROUND_FIRE_LIFE * 0.6;
+          const wet = weather.intensity || 0;   // a shower damps the spread right down
+          if (young && groundFires.length < MAX_GROUND_FIRES && Math.random() < 0.7 * (1 - wet)) {
+            // Further than the 1.5m radius spawnGroundFire merges within, or a tight
+            // cluster only ever refreshes itself and the blaze never walks anywhere.
+            const a = Math.random() * Math.PI * 2, r = 2.3 + Math.random() * 0.9;
+            const nx = f.x + Math.cos(a) * r, nz = f.z + Math.sin(a) * r;
+            // Uphill spreads a touch more readily than down, the way a real one does.
+            if (fireCanSpreadTo(nx, nz) && sampleHeight(nx, nz) > f.y - 0.9) spawnGroundFire(nx, nz);
+          }
+          // Anything wooden standing in it catches.
+          for (const t of trees) {
+            if (!t.alive || t.falling) continue;
+            if (Math.hypot(t.x - f.x, t.z - f.z) < (t.trunkRadius || 0.3) + 1.5) igniteTree(t);
+          }
+        }
         const life = 1 - f.age / GROUND_FIRE_LIFE;
-        const flick = 0.75 + Math.sin(f.age * 23 + f.x) * 0.25;
+        // Two offset sines rather than one: a single beat had every patch pulsing in
+        // step, which read as a flicker of the whole screen instead of of the fire.
+        const flick = 0.72 + Math.sin(f.age * 23 + f.flick) * 0.18 + Math.sin(f.age * 7.3 + f.flick * 2) * 0.10;
         requestEffectLight(f.x, f.y + 0.8, f.z, 0xff7a2a, (0.6 + 1.4 * life) * flick, 8);
-        f.disc.scale.setScalar(0.6 + life * 0.5);
-        f.disc.material.opacity = 0.2 + 0.4 * life;
+        // Fire flares as it takes hold and shrinks back as it dies, rather than only
+        // ever fading out at a fixed size.
+        const grow = Math.min(1, f.age / 0.7);
+        f.disc.scale.setScalar((0.45 + life * 0.6) * f.sizeVar * (0.6 + 0.4 * grow) * flick);
+        f.disc.rotation.z += dt * 0.35;
+        f.disc.material.opacity = (0.22 + 0.45 * life) * (0.85 + 0.15 * flick);
         if (Math.random() < dt * 14 * (0.3 + life)) {
           spawnMote(f.x + (Math.random() - 0.5) * 1.4, f.y + 0.1, f.z + (Math.random() - 0.5) * 1.4, emberMat, {
             vx: (Math.random() - 0.5) * 0.5, vy: 1.0 + Math.random() * 1.4, vz: (Math.random() - 0.5) * 0.5,
@@ -18786,6 +18885,41 @@
       tree.health -= 1;
       spawnFallingLeaves(tree, dirX, dirZ, 2 + Math.floor(Math.random() * 3));
       if (tree.health <= 0) beginTreeFall(tree, dirX, dirZ);
+    }
+
+    // A tree that catches keeps burning on its own: it drops leaf health, throws
+    // embers, seeds fire at its foot so the blaze walks on, and eventually goes over.
+    function igniteTree(t) {
+      if (!t.alive || t.falling) return;
+      if ((t.burnT || 0) > 0) return;
+      t.burnT = 7 + Math.random() * 4;
+    }
+    function updateBurningTrees(dt) {
+      for (const t of trees) {
+        if (!t.burnT || t.burnT <= 0) continue;
+        if (!t.alive || t.falling) { t.burnT = 0; continue; }
+        t.burnT -= dt;
+        const baseY = t.group.position.y;
+        // Canopy goes first — leaves are what actually burn.
+        if (t.leafHealth > 0) t.leafHealth = Math.max(0, t.leafHealth - dt * 3.5);
+        if (Math.random() < dt * 9) {
+          spawnMote(t.x + (Math.random() - 0.5) * 2, baseY + 1.6 + Math.random() * 3, t.z + (Math.random() - 0.5) * 2, emberMat, {
+            vx: (Math.random() - 0.5) * 1.2, vy: 1.8 + Math.random() * 2.2, vz: (Math.random() - 0.5) * 1.2,
+            grav: -0.4, drag: 0.7, life: 0.7 + Math.random() * 0.7, scale: 0.3 + Math.random() * 0.4
+          });
+        }
+        if (Math.random() < dt * 2.5) {
+          spawnMote(t.x, baseY + 3.5, t.z, smokeMat, { vx: 0, vy: 1.6, vz: 0, grav: 0.1, drag: 0.4, life: 1.8, scale: 1.1, grow: true });
+        }
+        requestEffectLight(t.x, baseY + 2.0, t.z, 0xff7a2a, 1.6 + Math.sin(t.burnT * 11) * 0.5, 11);
+        // Keeps the ground under it alight, which is how the fire gets past the trunk.
+        if (Math.random() < dt * 0.55 && groundFires.length < MAX_GROUND_FIRES) spawnGroundFire(t.x, t.z);
+        if (t.burnT <= 0) {
+          const a = Math.random() * Math.PI * 2;
+          spawnScorch(t.x, t.z, 1.5);
+          beginTreeFall(t, Math.cos(a), Math.sin(a));
+        }
+      }
     }
 
     function beginTreeFall(tree, dirX, dirZ) {
@@ -21526,6 +21660,7 @@
 
       updateMortar(dt);
       updateGroundFires(dt);
+      updateBurningTrees(dt);
       assignEffectLights(); // hand the shared pool to whatever asked for a glow this frame
       updateCashDrops(dt);
       updateMedDrops(dt);

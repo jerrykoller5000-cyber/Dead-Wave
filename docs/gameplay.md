@@ -124,6 +124,14 @@ zombies they hit, igniting them. A body in front shields the ones behind; burnin
 light whatever they are pressed against. Damage per zombie is capped at one hit per weapon tick.
 Nozzle flare, a firelight on the surroundings and a faint rumble while firing.
 
+**Fire spreads.** A patch of burning ground creeps outward while it is young, a little
+more readily uphill than down, and will not cross water, the stream or bare map edge. A
+shower damps it right down, and there is a hard ceiling on how much of the map can be
+alight at once. Anything wooden standing in it catches: a burning tree drops its canopy,
+throws embers, keeps the ground at its foot alight so the blaze walks on, and eventually
+goes over. Burnt ground stays burnt — scorch marks are laid as the flame dies and remain
+for the rest of the match — and a zombie that dies on fire leaves a charred body behind.
+
 ## Builds
 
 Everything you place lands in a 2 m cell on one fixed lattice covering the map, one piece per
