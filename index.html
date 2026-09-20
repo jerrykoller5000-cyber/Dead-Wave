@@ -660,6 +660,8 @@
               <li>Zombies are the flashing red dots on the minimap</li>
               <li>Bombers (glowing gut) sprint and detonate — shoot them before they reach your line, ideally next to other zombies</li>
               <li>Leapers run on all fours and jump 5–14m onto you — sidestep the landing. Spiders — crawling zombies with six limbs — hang back and web you (slowed): kill them first</li>
+              <li>Spitters (bloated, olive) don't throw anything any more — they walk in and then crawl the last 15m. Easy targets, but they keep coming</li>
+              <li>Most of a wave is plain shamblers, and there are a lot of them. Your blade costs nothing: F one-shots shamblers, ferals, leapers and spitters through a near half-circle sweep</li>
               <li>The drowned only ever come up out of the river and are fast in the water — don't fight near the banks</li>
               <li>Flamethrower: the stream sticks to what it hits and fizzles in water; burning zombies light whatever they touch, and the ground keeps burning — including under you</li>
             </ul>
@@ -667,7 +669,7 @@
             <ul>
               <li>Esc — pause / resume · M — mute · F11 — fullscreen</li>
               <li>N — night vision (needs the helmet) · Z — laser sight · L — gun flashlight (all bought at the kiosk)</li>
-              <li>Settings: volume, look sensitivity, graphics quality, fullscreen, skip prep time</li>
+              <li>Settings: volume, look sensitivity, graphics quality, camera, fullscreen, skip prep time — from the title screen or Esc</li>
             </ul>
             <h3>Testing</h3>
             <ul>
@@ -10913,8 +10915,13 @@
     const BLADE_STATS = {
       // reach is to the zombie's edge (its radius is added); arc is the minimum cosine
       // off your facing (0.25 ≈ ±75°).
-      knife:   { reach: 2.8, dmg: 28, cd: 0.45, arc: 0.25, name: 'Knife' },
-      machete: { reach: 3.4, dmg: 62, cd: 0.55, arc: 0.15, name: 'Machete' }
+      // The knife used to do 28 at 0.45s (62 dps) through a ±75° arc, which was worse
+      // than the starting pistol and took two swings to drop a shambler — so nobody
+      // ever drew it. It now one-shots every piece of fodder (shambler 24, feral 15,
+      // screamer 28, leaper 30, spitter/bomber 34), swings half again as fast, and
+      // sweeps nearly a half-circle so it clears a crowd instead of one body.
+      knife:   { reach: 3.2, dmg: 45, cd: 0.30, arc: 0.05, name: 'Knife' },
+      machete: { reach: 3.8, dmg: 85, cd: 0.40, arc: -0.05, name: 'Machete' }
     };
     function bladeStats() { return macheteOwned ? BLADE_STATS.machete : BLADE_STATS.knife; }
     function applyBladeModel() {
@@ -13865,7 +13872,14 @@
 
     // --- Zombies: 5 outbreak types ---
     const zombies = [];
-    const MAX_ZOMBIES = 36;
+    // How many can be on the field at once — the density knob for the 10x horde. Nudged
+    // from 36 to 48 so a ten-times-longer wave reads as a bigger crowd and not just a
+    // longer trickle. 48 and not more: with the whole field piled on the player, 90 cost
+    // over half the frame rate against 36, while 36 vs 48 was inside the noise. (Those
+    // A/Bs were taken in the desktop app's preview pane, which is not a usable absolute
+    // benchmark — the *unmodified* build measures ~9.5fps there at its own 36 cap — so
+    // only the large gaps are trustworthy. Judge the real numbers from the launcher.)
+    const MAX_ZOMBIES = 48;
     // Pooled per type. A single shared pool meant a mismatched mesh was dropped on the
     // floor (never disposed, never reused) every time the wave mix changed.
     const zombiePool = new Map();
@@ -13879,7 +13893,7 @@
     const ZOMBIE_PACE = 1.15;
     const ZOMBIE_TYPES = {
       shambler: {
-        name: 'Shambler', hp: 24, speed: 2.55, radius: 0.42, damage: 6, reward: 6, cashDrop: 6,
+        name: 'Shambler', hp: 24, speed: 3.19, radius: 0.42, damage: 6, reward: 6, cashDrop: 6,
         armor: 0, scale: 1, color: 0xd4c4a8, eye: 0x88ff44, hunch: 0, tactics: 'direct'
       },
       feral: {
@@ -13908,15 +13922,18 @@
         armor: 0.28, scale: 1.38, color: 0x6b2a2a, eye: 0xff2222, hunch: 0, armored: true, keepOut: true, tactics: 'tank'
       },
       spitter: {
+        // No longer spits — lobbing acid is the spider's job now. It walks in at its
+        // normal pace and then closes the last 15m at a quarter speed: a slow, obvious
+        // creep you can shoot off the field before it reaches you.
         name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 18, cashDrop: 18,
-        armor: 0, scale: 1.05, color: 0x8fa04c, eye: 0xccff22, hunch: 0, tactics: 'spit'
+        armor: 0, scale: 1.05, color: 0x8fa04c, eye: 0xccff22, hunch: 0, tactics: 'creep'
       },
       screamer: {
         name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 21, cashDrop: 21,
         armor: 0, scale: 0.96, color: 0xd8cabb, eye: 0xff55ff, hunch: 0, tactics: 'scream'
       },
       bomber: {
-        name: 'Bomber', hp: 34, speed: 3.6, radius: 0.58, damage: 0, reward: 18, cashDrop: 18,
+        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 18, cashDrop: 18,
         armor: 0, scale: 1.1, color: 0x8f9c4a, eye: 0xffee44, hunch: 0.15, tactics: 'bomb', fat: true
       },
       colossus: {
@@ -14833,15 +14850,29 @@
       }
     }
 
+    // Every wave carries ten times the bodies it used to. The extra nine tenths are all
+    // shamblers — the specialist counts are exactly what they were, just spread thinner
+    // through a much longer wave, so the horde got bigger without the field filling up
+    // with brutes and spitters. The originals are dealt out evenly rather than left at
+    // the front, or the whole back half of a wave would be nothing but fodder.
+    const HORDE_MULT = 10;
+    function swellWithFodder(mix) {
+      const n = mix.length;
+      if (n === 0 || HORDE_MULT <= 1) return mix;
+      const out = new Array(n * HORDE_MULT).fill('shambler');
+      for (let i = 0; i < n; i++) out[Math.floor((i + 0.5) * HORDE_MULT)] = mix[i];
+      return out;
+    }
+
     function waveComposition(dayNum) {
       // Scripted mixes by day — returns ordered type keys for the wave
-      if (dayNum <= 1) return ['shambler', 'shambler'];
-      if (dayNum === 2) return ['shambler', 'shambler', 'feral', 'shambler', 'feral'];
+      if (dayNum <= 1) return swellWithFodder(['shambler', 'shambler']);
+      if (dayNum === 2) return swellWithFodder(['shambler', 'shambler', 'feral', 'shambler', 'feral']);
       if (dayNum === 3) {
-        return ['shambler', 'leaper', 'shambler', 'feral', 'leaper', 'shambler', 'drowned', 'shambler', 'feral', 'leaper'];
+        return swellWithFodder(['shambler', 'leaper', 'shambler', 'feral', 'leaper', 'shambler', 'drowned', 'shambler', 'feral', 'leaper']);
       }
       if (dayNum === 4) {
-        return ['military', 'shambler', 'feral', 'brute', 'military', 'drowned', 'leaper', 'feral', 'shambler', 'military', 'drowned', 'spider', 'leaper'];
+        return swellWithFodder(['military', 'shambler', 'feral', 'brute', 'military', 'drowned', 'leaper', 'feral', 'shambler', 'military', 'drowned', 'spider', 'leaper']);
       }
       // day 5+: escalate with pressure types + fodder, seasoned with specialists
       const n = zombiesForDay(dayNum);
@@ -14856,7 +14887,7 @@
         else if (t < 0.84) mix.push('brute');
         else mix.push(Math.random() < 0.5 ? 'leaper' : 'military');
       }
-      // Specialists: spitters shell your line, screamers make everything worse,
+      // Specialists: spitters creep the last stretch, screamers make everything worse,
       // bombers punish a tight line of defences.
       const spitters = Math.min(3, 1 + Math.floor((dayNum - 4) / 2));
       for (let i = 0; i < spitters; i++) mix[2 + i * 4] = 'spitter';
@@ -14873,7 +14904,7 @@
           const tmp = mix[i]; mix[i] = mix[j]; mix[j] = tmp;
         }
       }
-      return mix;
+      return swellWithFodder(mix);
     }
 
     function pickZombieType(dayNum) {
@@ -15506,14 +15537,17 @@
       }
 
       if (burstLeft <= 0) {
-        // Short gap between bursts
-        spawnCd = 1.1 + Math.random() * 0.9;
-        burstLeft = 2 + ((Math.random() * 3) | 0);
-        if (day >= 4) burstLeft += 1;
+        // Short gap between bursts. Cadence is ~3x what it was: a wave carries ten
+        // times the bodies now, and at the old trickle the field never filled and a
+        // night would have taken ten times as long to clear. The MAX_ZOMBIES cap and
+        // the field-full backoff below are what actually hold the line.
+        spawnCd = 0.5 + Math.random() * 0.6;
+        burstLeft = 5 + ((Math.random() * 5) | 0);
+        if (day >= 4) burstLeft += 2;
         return;
       }
 
-      spawnCd = 0.28 + Math.random() * 0.35;
+      spawnCd = 0.1 + Math.random() * 0.12;
       burstLeft -= 1;
 
       let sx, sz;
@@ -15546,7 +15580,11 @@
           if (rr2 > landRadius - 3) { sx *= (landRadius - 3) / rr2; sz *= (landRadius - 3) / rr2; }
         }
       }
-      const tk = waveQueue.length ? waveQueue.shift() : pickZombieType(day);
+      // Peek, don't shift: spawnZombie returns null once the field is full, and taking
+      // the entry off the queue first threw that type away. The wave then ran short of
+      // its scripted mix and fell through to pickZombieType, which is how specialists
+      // turned up in waves that weren't supposed to have any. It only shifts on success.
+      const tk = waveQueue.length ? waveQueue[0] : pickZombieType(day);
       if (tk === 'drowned') {
         // Fish-people only ever come up out of the water: find a deep spot on the
         // river reasonably near the action and surface there instead.
@@ -15554,7 +15592,14 @@
         if (ws) { sx = ws.x; sz = ws.z; }
       }
       const spot = tk === 'drowned' ? { x: sx, z: sz } : resolveStaticProps(sx, sz, 0.8);
-      if (spawnZombie(spot.x, spot.z, tk)) waveSpawned += 1;
+      if (spawnZombie(spot.x, spot.z, tk)) {
+        waveSpawned += 1;
+        if (waveQueue.length) waveQueue.shift();
+      } else {
+        // Field full — come straight back rather than burning the burst on nothing.
+        spawnCd = 0.35;
+        burstLeft += 1;
+      }
     }
 
     // === Supply drops ===
@@ -15901,7 +15946,7 @@
     let flashTimer = 0;
     let knifeCd = 0;
     let knifeAnimT = 0; // counts down through the visible slash arc (separate from knifeCd's attack-rate gate)
-    const KNIFE_ANIM_DUR = 0.32;
+    const KNIFE_ANIM_DUR = 0.26; // under the fastest blade cooldown, so swings never overlap
     let grenadeCd = 0;
 
     const projectiles = [];
@@ -18921,6 +18966,12 @@
             z.spitCd = (z.spider ? 2.3 : 3.4) + Math.random() * 1.5;
             spawnAcidGlob(z, tx, tz);
           }
+        }
+
+        // Spitter: walks in like anything else, then drops to a crawl for the last
+        // stretch. Keeps the pressure of a body coming at you without the ranged acid.
+        if (tactics === 'creep' && !graceFreeze && !z.crawling) {
+          if (Math.hypot(tx - zx, tz - zz) < 15) spd *= 0.25;
         }
 
         // Bomber: a suicide sprint. Detonates on contact with you, the house or a
