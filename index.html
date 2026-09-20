@@ -13624,7 +13624,40 @@
       barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap', sandbag: 'Sandbag wall', barrel: 'Fuel drum', mine: 'Land mine', lure: 'Decoy beacon',
       light: 'Light turret', flame: 'Flame turret', heavy: 'Heavy turret', mortar: 'Mortar'
     };
-    const BUILD_FOOTPRINT = { barricade: 0.7, wall: 0.95, spikes: 0.8, sandbag: 0.85, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
+    const BUILD_FOOTPRINT = { barricade: 0.95, wall: 0.95, spikes: 0.8, sandbag: 0.95, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
+    // Panel pieces fill their cell, so they collide as an oriented box rather than as a
+    // circle. A circle of radius 0.95 in a 2m cell leaves a 10cm slot at every joint,
+    // which is exactly the gap you could slip through between two barricades. Half
+    // extents: along the run, and across its thickness.
+    const BUILD_BOX = {
+      wall:      { hx: 1.0, hz: 0.30 },
+      sandbag:   { hx: 1.0, hz: 0.34 },
+      barricade: { hx: 1.0, hz: 0.20 }
+    };
+    // Vertical step for panel pieces. Tops have to line up for the platforms that will
+    // stand on them later, so a panel sits on a half-metre shelf rather than wherever
+    // the ground happens to be; its buried skirt covers the difference.
+    const BUILD_STEP_Y = 0.5;
+    // A run of panels should read as one wall, not as a terraced staircase, so a piece
+    // laid against an existing one takes ITS height: the buried skirt swallows the
+    // ground falling away underneath. Only a real drop breaks the run — past what the
+    // skirt can hide, it steps down and starts a new level.
+    function buildBaseY(kind, x, z, r, gx, gz) {
+      const g = groundMinAround(x, z, r);
+      if (!BUILD_BOX[kind]) return g;
+      let base = Math.floor(g / BUILD_STEP_Y) * BUILD_STEP_Y;
+      if (gx != null) {
+        let best = null;
+        for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nb = cellOccupant(gx + dx, gz + dz);
+          if (!nb || !BUILD_BOX[nb.type] || nb.baseY == null) continue;
+          if (best == null || nb.baseY > best) best = nb.baseY;
+        }
+        // Follow the neighbour unless it would leave this piece hanging in the air.
+        if (best != null && best <= g + 0.55) base = best;
+      }
+      return base;
+    }
     const PLACE_DIST = 4.0;
 
     const ghostGroup = new THREE.Group();
@@ -13700,24 +13733,41 @@
       }
     }
 
+    // Barricade: the cheap option. Spans the cell like the others so a line of them
+    // has no holes — three loose beams on a hub left gaps you could simply walk
+    // between — but it is an obstacle, not a platform: no capping strip, nothing will
+    // ever stand on top of it.
+    const BARRICADE_TOP = 1.4;
     function makeBarricadeMesh(matOverride = null) {
       const g = new THREE.Group();
       const mat = matOverride || new THREE.MeshStandardMaterial({ color: 0x6b7280, metalness: 0.62, roughness: 0.4 });
       const rust = matOverride || new THREE.MeshStandardMaterial({ color: 0x5a4030, metalness: 0.45, roughness: 0.7 });
-      const beamGeo = new THREE.BoxGeometry(0.16, 0.16, 1.85);
-      for (let i = 0; i < 3; i++) {
-        const beam = new THREE.Mesh(beamGeo, i === 1 ? rust : mat);
-        beam.castShadow = true;
-        if (i === 0) { beam.rotation.set(0.55, 0, 0.55); }
-        else if (i === 1) { beam.rotation.set(-0.55, Math.PI / 3, 0.2); }
-        else { beam.rotation.set(0.2, -Math.PI / 3, -0.55); }
-        beam.position.y = 0.55;
-        g.add(beam);
+      // Uprights on the cell boundaries, so neighbours share them exactly as the wall does.
+      for (const sx of [-WALL_SPAN / 2, WALL_SPAN / 2]) {
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.17, BARRICADE_TOP + 0.5, 0.22), mat);
+        post.position.set(sx, (BARRICADE_TOP + 0.5) / 2 - 0.5, 0);
+        post.castShadow = true;
+        g.add(post);
       }
-      const hub = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 10), mat);
-      hub.position.y = 0.55; hub.castShadow = true; g.add(hub);
-      const basePlate = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.4, 0.08, 10), rust);
-      basePlate.position.y = 0.04; g.add(basePlate);
+      // Two rails plus a crossed X: enough steel across the opening that nothing walks
+      // through the middle of a panel.
+      for (const y of [0.35, BARRICADE_TOP - 0.12]) {
+        const rail = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.15, 0.17), y > 1 ? mat : rust);
+        rail.position.set(0, y, 0);
+        rail.castShadow = true;
+        g.add(rail);
+      }
+      const diag = Math.hypot(WALL_SPAN, BARRICADE_TOP - 0.5);
+      for (const sgn of [1, -1]) {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(diag, 0.13, 0.14), rust);
+        bar.position.set(0, (BARRICADE_TOP + 0.35) / 2, 0.02);
+        bar.rotation.z = sgn * Math.atan2(BARRICADE_TOP - 0.5, WALL_SPAN);
+        bar.castShadow = true;
+        g.add(bar);
+      }
+      const skirt = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.55, 0.24), mat);
+      skirt.position.set(0, -0.12, 0);
+      g.add(skirt);
       return g;
     }
 
@@ -13851,28 +13901,51 @@
       return g;
     }
 
+    // Wall-like pieces are built to the cell, not to taste: exactly BUILD_GRID across,
+    // a flat top at a fixed height (there will be platforms standing on these), and a
+    // post centred on each cell BOUNDARY so two neighbours put a post in the same place
+    // and it reads as one continuous post rather than two ends meeting. That is also
+    // what makes an L corner close up: the perpendicular piece's post lands on the same
+    // boundary the straight run's did. The skirt below zero is buried — on a slope it
+    // stops daylight showing under the piece.
+    const WALL_SPAN = 2.0;      // = BUILD_GRID
+    const WALL_TOP = 2.0;       // flat top, same for every wall
+    const WALL_SKIRT = 0.7;     // buried, hides uneven ground
     function makeWallMesh(matOverride = null) {
       const g = new THREE.Group();
       const wood = matOverride || new THREE.MeshStandardMaterial({ color: 0x7a5c38, roughness: 0.85 });
       const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 });
-      // Stout palisade block: planks, cross-brace, capping strip.
-      for (let i = 0; i < 5; i++) {
-        const plank = new THREE.Mesh(new THREE.BoxGeometry(0.34, 1.7 + (i % 2) * 0.16, 0.18), wood);
-        plank.position.set(-0.72 + i * 0.36, 0.86 + (i % 2) * 0.08, 0);
+      // Planks run the full span with no end margin, so a neighbour's planks start
+      // exactly where these stop.
+      const N = 6, pw = WALL_SPAN / N;
+      for (let i = 0; i < N; i++) {
+        const h = WALL_TOP - 0.18 + WALL_SKIRT;
+        const plank = new THREE.Mesh(new THREE.BoxGeometry(pw * 0.98, h, 0.2), wood);
+        plank.position.set(-WALL_SPAN / 2 + pw * (i + 0.5), h / 2 - WALL_SKIRT, 0);
         plank.castShadow = true;
         g.add(plank);
       }
-      const brace = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.14, 0.1), metal);
-      brace.position.set(0, 1.1, 0.14);
-      brace.rotation.z = 0.08;
-      g.add(brace);
-      const brace2 = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.14, 0.1), metal);
-      brace2.position.set(0, 0.45, 0.14);
-      brace2.rotation.z = -0.06;
-      g.add(brace2);
-      const foot = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.14, 0.6), metal);
-      foot.position.y = 0.07;
-      g.add(foot);
+      // Capping strip: the flat surface a platform will later sit on.
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.18, 0.44), wood);
+      cap.position.y = WALL_TOP - 0.09;
+      cap.castShadow = true;
+      g.add(cap);
+      for (const y of [0.55, 1.35]) {
+        const brace = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.13, 0.1), metal);
+        brace.position.set(0, y, 0.16);
+        g.add(brace);
+      }
+      // Boundary posts. Half of each sits in this cell and half in the neighbour's, so
+      // the two halves coincide instead of doubling up.
+      for (const sx of [-WALL_SPAN / 2, WALL_SPAN / 2]) {
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.26, WALL_TOP + WALL_SKIRT, 0.5), metal);
+        post.position.set(sx, (WALL_TOP + WALL_SKIRT) / 2 - WALL_SKIRT, 0);
+        post.castShadow = true;
+        g.add(post);
+        const capPost = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.12, 0.56), metal);
+        capPost.position.set(sx, WALL_TOP + 0.05, 0);
+        g.add(capPost);
+      }
       return g;
     }
 
@@ -14175,7 +14248,9 @@
       }
       bank -= cost;
       updateCoinHud();
+      _pendingCell.gx = pt.gx; _pendingCell.gz = pt.gz;
       const made = spawnBuild(placeMode, pt.x, pt.z);
+      _pendingCell.gx = null; _pendingCell.gz = null;
       if (made) { made.gx = pt.gx; made.gz = pt.gz; buildCells.set(cellKey(pt.gx, pt.gz), made); }
       AudioSys.place();
       // stay in place mode for multi-place
@@ -14201,17 +14276,30 @@
       mortar: { hp: 80, radius: 0.6, barY: 1.4 }
     };
     // Builds the horde bashes through (walls) vs. ones it just walks past.
-    const BUILD_BLOCKS = { wall: true, sandbag: true, mortar: true, light: true, flame: true, heavy: true, lure: true };
+    const BUILD_BLOCKS = { wall: true, sandbag: true, barricade: true, mortar: true, light: true, flame: true, heavy: true, lure: true };
 
+    // Same rule as the wall: full span, flat top, courses that meet a neighbour's
+    // exactly. Low cover, so it stops at SANDBAG_TOP rather than reaching wall height.
+    const SANDBAG_TOP = 1.05;
     function makeSandbagMesh(matOverride = null) {
       const g = new THREE.Group();
       const bag = matOverride || new THREE.MeshStandardMaterial({ color: 0x8a7c5a, roughness: 0.98 });
-      for (let row = 0; row < 3; row++) {
-        const n = 3 - (row % 2 ? 1 : 0);
+      const rows = 4, rh = SANDBAG_TOP / rows;
+      for (let row = 0; row < rows; row++) {
+        // Alternate courses are offset by half a bag, and the half-bags at the ends
+        // pair up with the neighbour cell's to complete the bond.
+        const odd = row % 2 === 1;
+        const n = odd ? 5 : 4;
+        const bw = WALL_SPAN / 4;
         for (let i = 0; i < n; i++) {
-          const m = new THREE.Mesh(rbox(0.52, 0.22, 0.34, 0.06), bag);
-          m.position.set((i - (n - 1) / 2) * 0.54, 0.11 + row * 0.21, (row % 2) * 0.03);
-          m.rotation.y = (Math.random() - 0.5) * 0.12;
+          const cx = odd ? (-WALL_SPAN / 2 + i * bw) : (-WALL_SPAN / 2 + bw * (i + 0.5));
+          // End bags on an offset course are half-width so nothing pokes into the
+          // next cell.
+          const half = odd && (i === 0 || i === n - 1);
+          const w = half ? bw * 0.5 : bw * 0.96;
+          const px = half ? (i === 0 ? cx + bw * 0.25 : cx - bw * 0.25) : cx;
+          const m = new THREE.Mesh(rbox(w, rh * 0.94, 0.5, 0.06), bag);
+          m.position.set(px, rh * (row + 0.5), 0);
           m.castShadow = true; m.receiveShadow = true;
           g.add(m);
         }
@@ -14266,6 +14354,10 @@
       return g;
     }
 
+    // Which cell spawnBuild is filling. Set by tryPlace just before the call, so the
+    // height lookup can see the neighbours; anything spawning a build another way
+    // (debug hooks, the mortar set-down) simply gets the ungraded ground height.
+    const _pendingCell = { gx: null, gz: null };
     function spawnBuild(kind, x, z) {
       const st = BUILD_STATS[kind] || BUILD_STATS.barricade;
       let mesh;
@@ -14284,7 +14376,8 @@
         return buildBarrel(x, z, aimYaw + (Math.random() - 0.5) * 0.4);
       }
       else mesh = makeHeavyTurretMesh();
-      mesh.position.set(x, groundMinAround(x, z, st.radius * 0.85), z);
+      const baseY = buildBaseY(kind, x, z, st.radius * 0.85, _pendingCell.gx, _pendingCell.gz);
+      mesh.position.set(x, baseY, z);
       // Walls face across the approach: turn broadside to the player who placed them.
       // Everything takes the rotation the ghost was showing, so what you saw is what
       // goes down. Round things simply do not care.
@@ -14303,6 +14396,7 @@
       const b = {
         mesh, x, z, type: kind, hp: st.hp, maxHp: st.hp, radius: st.radius,
         yaw: mesh.rotation.y,
+        baseY,
         range: st.range || 0,
         fireCd: 0,
         fireInterval: st.fireInterval || 0.7,
@@ -14568,7 +14662,7 @@
       }
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
       ghostGroup.rotation.y = buildYawRad();
-      ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
+      ghostGroup.position.set(pt.x, buildBaseY(placeMode, pt.x, pt.z, footprint * 0.85, pt.gx, pt.gz), pt.z);
       const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
       const broke = bank < COST[placeMode];
       ghostValid = !why && !broke;
@@ -19482,7 +19576,27 @@
     function resolveHardBuildCollisions(entX, entZ, entR) {
       let x = entX, z = entZ;
       for (const b of builds) {
-        if (b.type === 'barricade' || b.type === 'spikes' || b.type === 'mine') continue;
+        // Walked over, not into.
+        if (b.type === 'spikes' || b.type === 'mine') continue;
+        const box = BUILD_BOX[b.type];
+        if (box) {
+          // Oriented box: rotate into the panel's frame, push out of the nearer face.
+          // Neighbouring panels share an edge exactly, so a run has no slot in it.
+          const c = Math.cos(-b.yaw), sn = Math.sin(-b.yaw);
+          const rx = (x - b.x) * c - (z - b.z) * sn;
+          const rz = (x - b.x) * sn + (z - b.z) * c;
+          const ox = box.hx + entR - Math.abs(rx);
+          const oz = box.hz + entR - Math.abs(rz);
+          if (ox > 0 && oz > 0) {
+            let px = rx, pz = rz;
+            if (ox < oz) px = rx + (rx < 0 ? -ox : ox);
+            else pz = rz + (rz < 0 ? -oz : oz);
+            const cb = Math.cos(b.yaw), sb = Math.sin(b.yaw);
+            x = b.x + px * cb - pz * sb;
+            z = b.z + px * sb + pz * cb;
+          }
+          continue;
+        }
         const dx = x - b.x, dz = z - b.z;
         const dist = Math.hypot(dx, dz) || 0.0001;
         const minD = b.radius + entR;
