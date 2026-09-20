@@ -231,14 +231,15 @@
     #pauseTipsView { display: none; text-align: left; }
     #pauseTipsView.on { display: block; }
     #pauseSettingsView { display: none; }
-    #pauseSettingsView.on { display: block; }
+    /* Five rows plus the sliders is tall enough to overrun a short window. */
+    #pauseSettingsView.on { display: block; max-height: 82vh; overflow-y: auto; }
     #pauseSettingsView .volumes { flex-direction: column; align-items: center; gap: 12px; margin-bottom: 4px; }
     #pauseSettingsView .volumes input[type=range] { width: 200px; }
     .settingRow {
       display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px;
       font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim);
     }
-    .settingRow span { min-width: 44px; text-align: right; }
+    .settingRow span { min-width: 70px; text-align: right; }
     /* Scoped under the view id: #pause button (id + element) would otherwise win and
        paint every option the same accent yellow, hiding which one is selected. */
     #pauseSettingsView .settingBtn, #pauseSettingsView .seg button {
@@ -551,6 +552,7 @@
         <div class="modes">
           <button id="modeHunt" type="button">Hunted<span class="sub">No base — the horde tracks you across the open map</span></button>
           <button id="modeDefend" class="secondary" type="button">Defend the House<span class="sub">Dig in and protect a fixed base from every wave</span></button>
+          <button id="menuSettingsBtn" class="secondary" type="button">Settings<span class="sub">Volume, look, graphics, camera — all available on Esc mid-match too</span></button>
         </div>
       </div>
     </div>
@@ -597,6 +599,15 @@
             </div>
           </div>
           <div class="settingRow">
+            <span>Camera</span><button id="followCursorToggle" class="settingBtn" type="button">Follow cursor: on</button>
+          </div>
+          <div class="settingRow">
+            <span>Auto tilt</span>
+            <div class="seg" id="autoTiltSeg">
+              <button type="button" data-tilt="off">Off</button><button type="button" data-tilt="gentle">Gentle</button><button type="button" data-tilt="strong">Strong</button>
+            </div>
+          </div>
+          <div class="settingRow">
             <span>Screen</span><button id="fullscreenToggle" class="settingBtn" type="button">Fullscreen: off</button>
           </div>
           <div class="settingRow">
@@ -615,10 +626,11 @@
               <li>Space — jump · V — dodge roll (can't be hurt mid-roll)</li>
               <li>C — crouch: slower, but tighter groups and a lower silhouette</li>
               <li>Mouse — aim anywhere around you; the marine turns to face the reticle while the camera holds still, so shots land where it sits</li>
-              <li>Scroll wheel — look up / down (tilts the camera from overhead down toward the horizon)</li>
-              <li>1 / 2 — zoom the camera in / out (in build mode they pick builds instead)</li>
+              <li>Scroll wheel — zoom the camera in / out (in build mode it picks builds; scoped, it dials the magnification)</li>
               <li>Hold the middle mouse button and drag — rotate the camera</li>
-              <li>Look sensitivity is under Esc &gt; Settings</li>
+              <li>The tilt looks after itself: the view lifts to look up a hill ahead, drops into a dip, and rises over ground behind you instead of crowding the marine</li>
+              <li>The camera slides toward the cursor once you point past the middle of the screen, so you see more of what you're aiming at</li>
+              <li>Esc &gt; Settings &gt; Camera turns both off (with auto tilt off, middle-drag up / down tilts by hand again). Look sensitivity is there too</li>
             </ul>
             <h3>Combat</h3>
             <ul>
@@ -10285,16 +10297,45 @@
     // the cursor through 360° instead, so the ground under a still reticle stays put and
     // shots land on it. (The camera used to swing round after the aim, which slid the
     // world under the reticle — shots went where it had been.) Middle-drag rotates the
-    // heading; the wheel tilts the view between near-overhead and a low angle that
-    // shows the horizon ("look up / down"), always at the same comfortable distance.
+    // heading, the wheel zooms, and the tilt looks after itself (see camElevAuto).
     let camYawCurrent = 0, camYawTarget = 0;
-    // Camera distance: 1 zooms in, 2 zooms out (outside build mode), eased.
+    // Camera distance: the mouse wheel zooms in / out (outside build mode), eased.
     const CAM_R_DEFAULT = 12, CAM_R_MIN = 6, CAM_R_MAX = 24;
     let camRTarget = CAM_R_DEFAULT, camRCurrent = CAM_R_DEFAULT;
     function zoomCamera(steps) { camRTarget = Math.max(CAM_R_MIN, Math.min(CAM_R_MAX, camRTarget * Math.pow(0.85, steps))); }
     const CAM_ELEV_MIN = 0.35, CAM_ELEV_MAX = 1.31, CAM_ELEV_DEFAULT = 0.8; // ~20°, ~75°, ~46°
     let camElev = CAM_ELEV_DEFAULT, camElevCurrent = CAM_ELEV_DEFAULT;
-    // Look sensitivity (Esc > Settings): scales how fast middle-drag and the wheel turn and tilt.
+    // Auto tilt (Esc > Settings > Camera). The tilt used to be yours to scroll; now the
+    // terrain drives it, and manual tilt only comes back when this is Off. Two jobs:
+    //   - slope: ground rising ahead drops the elevation so you look up the hill, ground
+    //     falling away raises it so you look down into the dip;
+    //   - anti-clip: ground behind the camera raises it over the lip instead of hauling
+    //     the camera in against the marine's back, which is what the old pull-in did.
+    // Offset from camElev, in radians, eased over ~1s so it never snaps.
+    const AUTO_TILT_STRENGTH = { off: 0, gentle: 0.6, strong: 1.15 };
+    const AT_AHEAD = 6;   // metres sampled ahead for the slope job
+    const AT_TAU = 0.35;  // ease base per second (~0.95s to settle)
+    let autoTiltMode = 'gentle', camElevAuto = 0;
+    try { const m = localStorage.getItem('tt_auto_tilt'); if (m && AUTO_TILT_STRENGTH[m] !== undefined) autoTiltMode = m; } catch (_) {}
+    // Follow cursor (Esc > Settings > Camera): the view slides toward where you point,
+    // past a dead zone in the middle of the screen. It is a pure pan — heading and angle
+    // never change — and it settles in ~0.1s, because a slower slide moves the ground
+    // out from under a reticle you have just put on a zombie (measured: at 0.26s, two
+    // shots in three missed). Driven from the cursor's SCREEN position, not the world
+    // point under it: the screen position doesn't move when the camera pans, so the pan
+    // target holds still and converges. World-derived pan feeds back on itself and creeps.
+    const PAN_MAX = 3.0, PAN_DEAD = 0.18, PAN_TAU = 0.1;
+    let followCursor = true, camPanX = 0, camPanZ = 0, camPanAppliedX = 0, camPanAppliedZ = 0;
+    try { const f = localStorage.getItem('tt_cam_follow'); if (f !== null) followCursor = f === '1'; } catch (_) {}
+    // Tilt, zoom and pan used to survive a restart, so the next match could open 24m out
+    // at a steep manual tilt and snap on the first frame. Reset them with the heading.
+    function resetCameraRig() {
+      camElev = camElevCurrent = CAM_ELEV_DEFAULT;
+      camElevAuto = 0;
+      camRTarget = camRCurrent = CAM_R_DEFAULT;
+      camPanX = camPanZ = camPanAppliedX = camPanAppliedZ = 0;
+    }
+    // Look sensitivity (Esc > Settings): scales how fast middle-drag turns and tilts.
     let lookSens = 1;
     try { const s = +localStorage.getItem('tt_look_sens'); if (s >= 0.25 && s <= 3) lookSens = s; } catch (_) {}
 
@@ -15768,7 +15809,9 @@
         if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
         return;
       }
-      if (paused && e.code !== 'Escape') {
+      // settingsFrom covers the panel opened from the title screen, where nothing is
+      // "paused" because no match has started yet.
+      if ((paused || settingsFrom) && e.code !== 'Escape') {
         if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
         if (e.code in keys) e.preventDefault();
         return;
@@ -15789,11 +15832,6 @@
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
       if (e.code === 'KeyV') { tryRoll(); e.preventDefault(); }
-      // 1 / 2 zoom the camera in / out — except in build mode, where they still pick builds.
-      if (!buildMode && !placeMode) {
-        if (e.code === 'Digit1' || e.code === 'Numpad1') { zoomCamera(1); e.preventDefault(); return; }
-        if (e.code === 'Digit2' || e.code === 'Numpad2') { zoomCamera(-1); e.preventDefault(); return; }
-      }
       for (let bi = 0; bi < BUILD_ORDER.length; bi++) {
         // 1-9, then 0 and - for the tenth and eleventh slots.
         const codeA = bi < 9 ? 'Digit' + (bi + 1) : (bi === 9 ? 'Digit0' : 'Minus');
@@ -15807,7 +15845,11 @@
       if (e.code === 'KeyX') { sellNearestBuild(); e.preventDefault(); }
       if (e.code === 'Escape') {
         e.preventDefault();
-        if (paused) {
+        // Settings first: from the pause menu Esc steps back to it rather than unpausing
+        // the whole game, and from the title screen it just closes the panel.
+        if (settingsFrom) {
+          closeSettings();
+        } else if (paused) {
           setPaused(false);
         } else if (gameStarted && !gameOver && !won) {
           if (placeMode || buildMode) cancelPlaceMode();
@@ -16132,9 +16174,13 @@
     }
 
     const AIM_SKY_DIST = 110;
-    // Look controls: the wheel tilts, middle-drag rotates (and tilts). Both scale with
-    // the Look sensitivity setting.
-    function tiltCamera(dElev) { camElev = Math.max(CAM_ELEV_MIN, Math.min(CAM_ELEV_MAX, camElev + dElev)); }
+    // Look controls: the wheel zooms, middle-drag rotates (and tilts, but only while auto
+    // tilt is Off — otherwise the two would fight). Both scale with the Look sensitivity
+    // setting.
+    function tiltCamera(dElev) {
+      if (autoTiltMode !== 'off') return;
+      camElev = Math.max(CAM_ELEV_MIN, Math.min(CAM_ELEV_MAX, camElev + dElev));
+    }
     function rotateCamera(dYaw) { camYawTarget += dYaw; }
     // Distance along the ray to the middle of the nearest zombie it passes through, or
     // Infinity. The chord's midpoint rather than its entry point: the shot leaves from
@@ -16271,7 +16317,7 @@
       mmbDrag.x = e.clientX; mmbDrag.y = e.clientY;
       if (!gameStarted || paused) return;
       rotateCamera(-dx * 0.006 * lookSens);
-      tiltCamera(dy * 0.004 * lookSens);
+      if (autoTiltMode === 'off') tiltCamera(dy * 0.004 * lookSens);
     });
     addEventListener('mouseup', (e) => {
       if (e.button === 0) mouseFireHeld = false;
@@ -16297,10 +16343,21 @@
         else if (e.deltaY > 0) cycleBuild(-1);
         return;
       }
-      // Look up / down: scroll up tips the view toward the horizon, down toward overhead.
-      // ~7° per mouse notch at 1x; line-mode deltas (Firefox) are ~33x smaller.
+      // Line-mode deltas (Firefox) are ~33x smaller than pixel deltas.
       const dy = e.deltaMode === 1 ? e.deltaY * 33 : e.deltaY;
-      tiltCamera(Math.max(-0.3, Math.min(0.3, dy * 0.0012 * lookSens)));
+      // Scoped, a dolly change is invisible (the scope branch in tick() overwrites the
+      // camera position outright), so the wheel dials magnification instead — same cycle
+      // the middle-click gives.
+      if (scopeAmt > 0.5 && currentWeapon === 'sniper') {
+        if (Math.abs(dy) > 1) {
+          scopeZoomLevel = (scopeZoomLevel + (dy < 0 ? 1 : SCOPE_ZOOM_FOV.length - 1)) % SCOPE_ZOOM_FOV.length;
+          updateScopeZoomHud();
+        }
+        return;
+      }
+      // Zoom: scroll up pulls the camera in, down pushes it out. One mouse notch
+      // (~100px) is one zoom step; trackpad deltas come through as fractions of one.
+      zoomCamera(Math.max(-3, Math.min(3, -dy / 100)));
     }, { passive: false });
     renderer.domElement.addEventListener('selectstart', (e) => e.preventDefault());
     winEl.addEventListener('mousedown', (e) => { e.stopPropagation(); mouseFireHeld = false; stopFiring(); });
@@ -19457,10 +19514,30 @@
       pauseCard.classList.toggle('tips-open', view === 'tips');
     }
 
+    // Settings opens from two places — the title screen and the pause menu — but there is
+    // only ever one copy of the panel: every control is looked up by id, and the CSS that
+    // keeps these buttons readable is scoped to #pauseSettingsView, so a duplicate would
+    // bind nothing and look wrong. From the menu the #pause overlay is shown *without*
+    // pausing (there is no match yet); settingsFrom remembers the way in so Back and Esc
+    // go back where you came from.
+    let settingsFrom = null;
+    function openSettings(from) {
+      settingsFrom = from;
+      if (from === 'menu') pauseEl.classList.add('show');
+      showPauseView('settings');
+    }
+    function closeSettings() {
+      const from = settingsFrom;
+      settingsFrom = null;
+      if (from === 'menu') pauseEl.classList.remove('show');
+      showPauseView('main');
+    }
+
     function setPaused(on) {
       if (on) {
         if (!gameStarted || gameOver || won) return;
         paused = true;
+        settingsFrom = null;
         pauseEl.classList.add('show');
         syncReticleVisibility();
         showPauseView('main');
@@ -19472,6 +19549,7 @@
         for (const k of Object.keys(keys)) keys[k] = false;
       } else {
         paused = false;
+        settingsFrom = null;
         pauseEl.classList.remove('show');
         syncReticleVisibility();
         showPauseView('main');
@@ -19488,8 +19566,9 @@
     resumeBtn.addEventListener('click', () => setPaused(false));
     tipsBtn.addEventListener('click', () => showPauseView('tips'));
     tipsBackBtn.addEventListener('click', () => showPauseView('main'));
-    settingsBtn.addEventListener('click', () => showPauseView('settings'));
-    settingsBackBtn.addEventListener('click', () => showPauseView('main'));
+    settingsBtn.addEventListener('click', () => openSettings('pause'));
+    settingsBackBtn.addEventListener('click', closeSettings);
+    document.getElementById('menuSettingsBtn').addEventListener('click', () => openSettings('menu'));
     quitMenuBtn.addEventListener('click', quitToMenu);
 
     // Graphics presets apply live. Resolution, shadow resolution and draw distance cost
@@ -19528,6 +19607,33 @@
         try { localStorage.setItem('tt_look_sens', String(lookSens)); } catch (_) {}
         show();
       });
+    }
+
+    // Camera settings apply live — both are read straight out of the frame loop. Turning
+    // both off gives the plain fixed rig: no pan, manual tilt back on middle-drag.
+    {
+      const followBtn = document.getElementById('followCursorToggle');
+      const tiltBtns = document.querySelectorAll('#autoTiltSeg button');
+      const syncFollow = () => {
+        followBtn.textContent = 'Follow cursor: ' + (followCursor ? 'on' : 'off');
+        followBtn.classList.toggle('on', followCursor);
+      };
+      const syncTilt = () => { for (const b of tiltBtns) b.classList.toggle('on', b.dataset.tilt === autoTiltMode); };
+      followBtn.addEventListener('click', () => {
+        followCursor = !followCursor;
+        try { localStorage.setItem('tt_cam_follow', followCursor ? '1' : '0'); } catch (_) {}
+        syncFollow();
+      });
+      for (const b of tiltBtns) b.addEventListener('click', () => {
+        autoTiltMode = b.dataset.tilt;
+        try { localStorage.setItem('tt_auto_tilt', autoTiltMode); } catch (_) {}
+        // Switching to Off hands the tilt back where the terrain had left it, so the view
+        // doesn't jump; camElevAuto then eases out to nothing.
+        if (autoTiltMode === 'off') camElev = Math.max(CAM_ELEV_MIN, Math.min(CAM_ELEV_MAX, camElev + camElevAuto));
+        syncTilt();
+      });
+      syncFollow();
+      syncTilt();
     }
 
     const skipPrepBtn = document.getElementById('skipPrepToggle');
@@ -19577,6 +19683,7 @@
       walkBob = 0;
       aimYaw = 0;
       camYawCurrent = camYawTarget = 0;
+      resetCameraRig();
       zoomHeld = false;
       // lasersEnabled persists across matches (session)
       startPrep();
@@ -19681,7 +19788,7 @@
       barrelSpinVel = 0;
       flashTimer = 0;
       updateAmmoHud();
-      aimYaw = 0; camYawCurrent = camYawTarget = 0; vy = 0; grounded = true;
+      aimYaw = 0; camYawCurrent = camYawTarget = 0; resetCameraRig(); vy = 0; grounded = true;
       cancelPlaceMode();
       for (const t of trees) restoreTree(t);
       spawnBugs();
@@ -19718,6 +19825,7 @@
       walkBob = 0;
       aimYaw = 0;
       camYawCurrent = camYawTarget = 0;
+      resetCameraRig();
       zoomHeld = false;
       marine.position.y = -ROLL_PIVOT_Y;
       marine.rotation.x = 0;
@@ -20242,20 +20350,60 @@
 
       // Cam follow (FOV already updated earlier this frame for aim)
       const bobY = (gameStarted && grounded) ? walkBob * 0.35 : 0;
-      // Heading and tilt ease toward what middle-drag and the wheel asked for; aiming
-      // never touches either (see camYawCurrent's declaration).
+      // Heading eases toward what middle-drag asked for; aiming never touches it
+      // (see camYawCurrent's declaration).
       camYawCurrent += (camYawTarget - camYawCurrent) * (1 - Math.pow(0.00005, dt));
-      camElevCurrent += (camElev - camElevCurrent) * (1 - Math.pow(0.001, dt));
       const camYaw = camYawCurrent;
       const fwdX = Math.sin(camYaw), fwdZ = Math.cos(camYaw); // screen-up, on the ground
-
-      // Orbit: fixed distance, tilt from the wheel, heading from middle-drag, centred on
-      // the marine. Deliberately no look-ahead toward the cursor: any pan driven by the
-      // cursor slides the world under the reticle the moment you move it onto a target,
-      // and measured, that turned two shots in three into misses. Moving the mouse
-      // changes nothing but the reticle; the wheel is how you see farther.
       const CAM_PIVOT_Y = 1.3 - POSE.crouch * 0.5;
+      const CAM_CLEAR = 1.1; // how far the camera stays clear of the ground
       camRCurrent += (camRTarget - camRCurrent) * (1 - Math.pow(0.002, dt));
+
+      // Auto tilt: the terrain picks the elevation offset (see camElevAuto's declaration).
+      const atStrength = AUTO_TILT_STRENGTH[autoTiltMode] || 0;
+      let atWant = 0;
+      if (atStrength > 0) {
+        // Slope job: how steeply the ground climbs the way you are looking.
+        const h0 = sampleHeight(player.position.x, player.position.z);
+        const hA = sampleHeight(player.position.x + fwdX * AT_AHEAD, player.position.z + fwdZ * AT_AHEAD);
+        const grade = Math.max(-0.6, Math.min(0.6, (hA - h0) / AT_AHEAD));
+        atWant = -grade * 0.5;
+        // Anti-clip job: the elevation that would clear whatever is behind the camera.
+        const bx = player.position.x - fwdX * camRCurrent, bz = player.position.z - fwdZ * camRCurrent;
+        const gBehind = Math.max(
+          sampleHeight(bx, bz),
+          sampleHeight((player.position.x + bx) * 0.5, (player.position.z + bz) * 0.5)
+        );
+        const elevNeed = Math.asin(Math.max(-1, Math.min(1,
+          (gBehind + CAM_CLEAR - (player.position.y + CAM_PIVOT_Y)) / Math.max(1, camRCurrent))));
+        atWant += Math.max(0, elevNeed - camElev);
+        atWant *= atStrength * (1 - scopeAmt); // held still while scoped
+      }
+      camElevAuto += (atWant - camElevAuto) * (1 - Math.pow(AT_TAU, dt));
+      if (atStrength === 0 && Math.abs(camElevAuto) < 0.001) camElevAuto = 0;
+      const camElevWant = Math.max(CAM_ELEV_MIN, Math.min(CAM_ELEV_MAX, camElev + camElevAuto));
+      camElevCurrent += (camElevWant - camElevCurrent) * (1 - Math.pow(0.001, dt));
+
+      // Follow cursor: slide toward where you point (see camPanX's declaration). Pure
+      // pan — the same offset goes on the camera and on what it looks at, so heading and
+      // angle are untouched and only the framing moves.
+      {
+        let panX = 0, panZ = 0;
+        const r = Math.hypot(aimPointerNdc.x, aimPointerNdc.y);
+        if (followCursor && gameStarted && !paused && r > PAN_DEAD) {
+          const mag = Math.min(1, (r - PAN_DEAD) / (1 - PAN_DEAD)) * PAN_MAX * (1 - scopeAmt) / r;
+          const sx = aimPointerNdc.x * mag;          // screen-right, world (-cos, sin)
+          const sy = aimPointerNdc.y * mag * 0.8;    // screen-up, foreshortened
+          panX = -Math.cos(camYaw) * sx + fwdX * sy;
+          panZ = Math.sin(camYaw) * sx + fwdZ * sy;
+        }
+        const k = 1 - Math.exp(-dt / PAN_TAU);
+        camPanX += (panX - camPanX) * k;
+        camPanZ += (panZ - camPanZ) * k;
+      }
+
+      // Orbit: eased distance from the wheel, elevation from auto tilt, heading from
+      // middle-drag, centred on the marine (plus the cursor pan).
       const camR = camRCurrent * (camDistCurrent / CAM_DIST_DEFAULT); // RMB zoom pulls in a touch
       const camH = camR * Math.cos(camElevCurrent), camV = camR * Math.sin(camElevCurrent);
       const desired = tmp.set(
@@ -20267,7 +20415,6 @@
       // camera spot and stop short at the first point where ground would cut across the
       // view. Previously only the endpoint was height-checked, so any rise between the
       // two simply swallowed the player.
-      const CAM_CLEAR = 1.1;
       const headX = player.position.x;
       const headY = player.position.y + 1.6;
       const headZ = player.position.z;
@@ -20280,7 +20427,10 @@
         const sz = headZ + (desired.z - headZ) * t;
         if (sy < sampleHeight(sx, sz) + CAM_CLEAR) { clearT = (i - 1) / CAM_STEPS; break; }
       }
-      if (clearT < 1) {
+      // With auto tilt on, the anti-clip job has already raised the camera over the rise,
+      // so don't also haul it in toward the marine's back — that pull-in *is* the "camera
+      // gets too close" complaint. The floors below stay as the last-resort net.
+      if (clearT < 1 && atStrength === 0) {
         clearT = Math.max(0.2, clearT);
         desired.set(
           headX + (desired.x - headX) * clearT,
@@ -20289,13 +20439,25 @@
         );
       }
       desired.y = Math.max(desired.y, sampleHeight(desired.x, desired.z) + CAM_CLEAR);
+      // The cursor pan goes on *after* the follow lerp, not into `desired`. Fed through
+      // the lerp the two lags stacked and the view was still sliding ~600ms after the
+      // cursor landed, which cost 2 shots in 12 on a target the reticle was already on;
+      // applied here the pan's own ease is the only lag and it is over before you can
+      // pull the trigger. Last frame's offset comes back off first, so the lerp always
+      // works on the unpanned position instead of chasing its own output.
+      camera.position.x -= camPanAppliedX;
+      camera.position.z -= camPanAppliedZ;
       camera.position.lerp(desired, 1 - Math.pow(clearT < 1 ? 0.00002 : 0.002, dt));
+      camera.position.x += camPanX;
+      camera.position.z += camPanZ;
+      camPanAppliedX = camPanX;
+      camPanAppliedZ = camPanZ;
       {
-        // Hard floor so the lerp itself can never dip the camera through a hillside.
+        // Hard floor so neither the lerp nor the pan can dip the camera through a hillside.
         const camFloor = sampleHeight(camera.position.x, camera.position.z) + CAM_CLEAR;
         if (camera.position.y < camFloor) camera.position.y = camFloor;
       }
-      camLook.set(player.position.x, player.position.y + CAM_PIVOT_Y + bobY * 0.5, player.position.z);
+      camLook.set(player.position.x + camPanX, player.position.y + CAM_PIVOT_Y + bobY * 0.5, player.position.z + camPanZ);
       // Tilting below the default also tips the view itself upward, up to about level at
       // the lowest setting — that's what puts hilltops and the horizon on screen. The
       // framing clamp below stops it short of losing the marine.
