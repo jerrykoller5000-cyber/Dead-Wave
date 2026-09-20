@@ -126,9 +126,9 @@ Nozzle flare, a firelight on the surroundings and a faint rumble while firing.
 
 ## Builds
 
-Everything you place lands on a 1 m grid with its facing snapped to 90 degrees, and `R` locks the
-run to one axis so a wall follows the piece before it. Condition bars show on every structure
-while a build ghost is up, not only on ones already damaged.
+Everything you place lands in a 2 m cell on one fixed lattice covering the map, one piece per
+cell, and `R` turns it a quarter turn at a time. Condition bars show on every structure while a
+build ghost is up, not only on ones already damaged.
 
 Zombies attack structures. The player always comes first — one that can reach you hits you — but
 anything that cannot get to you turns on whatever of yours is in the way, turrets included.

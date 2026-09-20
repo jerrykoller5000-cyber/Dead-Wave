@@ -459,12 +459,26 @@
       padding: 12px 16px; font-family: var(--font-hud); font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
       text-transform: uppercase; background: var(--accent-2); color: var(--accent-2-ink);
     }
+    /* Build-mode bar. It used to be a 220px box wedged between the minimap and the
+       edge of the screen, where nobody found it and nothing told you how to get out
+       of build mode. Bottom centre, above the ammo panel, with the keys spelled out. */
     #placeBanner {
-      display: none; position: absolute; top: 14px; right: 196px;
+      display: none; position: absolute; bottom: 86px; left: 50%; transform: translateX(-50%);
       background: var(--panel-bg); border: 1px solid var(--panel-border);
-      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-      padding: 7px 12px; font-size: 12px; font-weight: 600;
-      max-width: 220px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      padding: 8px 16px; font-size: 12px; font-weight: 600;
+      white-space: nowrap; letter-spacing: .01em;
+    }
+    #placeBanner.on { display: block; }
+    #placeBanner b {
+      color: var(--accent); font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; margin-right: 6px;
+    }
+    #placeBanner i {
+      display: inline-block; font-style: normal; font-weight: 700; font-size: 10.5px;
+      margin: 0 5px 0 14px; padding: 2px 6px; border-radius: 3px;
+      background: rgba(159,220,255,.16); border: 1px solid rgba(159,220,255,.32);
+      color: #d6f0ff;
     }
     #minimapFrame {
       position: absolute; top: 14px; right: 16px; width: 164px; height: 164px;
@@ -13608,23 +13622,48 @@
     const ghostGroup = new THREE.Group();
     ghostGroup.visible = false;
     scene.add(ghostGroup);
-    // A patch of the lattice under the ghost, so "it snapped" is something you can
-    // see rather than infer. Built once at load and only ever toggled visible:
-    // putting geometry into the scene mid-wave is what the renderer notes warn about.
+    // The lattice, drawn around the marine rather than around the cursor: it used to
+    // trail the ghost, which made the grid itself look like it was sliding and told
+    // you nothing about where the cells actually are. Lines sit on cell BOUNDARIES
+    // (offset half a cell from the centres), so a piece fills a square you can see
+    // rather than balancing on an intersection. Built once at load and only toggled
+    // visible — putting geometry into the scene mid-wave is what the renderer notes
+    // warn about — and it follows the ground, so it drapes over a slope instead of
+    // slicing through it.
+    const BUILD_GRID_CELLS = 9; // cells out from the marine in each direction
     const buildGridHelper = (() => {
-      const half = 7, step = 1.0, pts = [];
-      for (let i = -half; i <= half; i++) {
-        pts.push(i * step, 0, -half * step, i * step, 0, half * step);
-        pts.push(-half * step, 0, i * step, half * step, 0, i * step);
+      const n = BUILD_GRID_CELLS, G = 2.0, half = n * G, pts = [];
+      const SEG = 4; // segments per cell, so a line can bend with the terrain
+      for (let i = -n; i <= n; i++) {
+        const a = i * G + G / 2;
+        for (let k = 0; k < n * 2 * SEG; k++) {
+          const b0 = -half + (k / SEG) * G / 1, b1 = -half + ((k + 1) / SEG) * G / 1;
+          if (b1 > half) break;
+          pts.push(a, 0, b0, a, 0, b1);
+          pts.push(b0, 0, a, b1, 0, a);
+        }
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-      const mat = new THREE.LineBasicMaterial({ color: 0x8fd6ff, transparent: true, opacity: 0.17, depthWrite: false });
+      const mat = new THREE.LineBasicMaterial({ color: 0x9fdcff, transparent: true, opacity: 0.20, depthWrite: false });
       const lines = new THREE.LineSegments(geo, mat);
       lines.visible = false;
       lines.renderOrder = 2;
       scene.add(lines);
       return lines;
+    })();
+    const _gridBase = buildGridHelper.geometry.getAttribute('position').array.slice();
+    // The cell you are pointing at, filled green or red. This is the actual answer to
+    // "will it go here", which a ghost tinted the same colour as the grass was not.
+    const buildCellMark = (() => {
+      const g = new THREE.PlaneGeometry(1.92, 1.92);
+      g.rotateX(-Math.PI / 2);
+      const m = new THREE.MeshBasicMaterial({ color: 0x22c55e, transparent: true, opacity: 0.22, depthWrite: false });
+      const mesh = new THREE.Mesh(g, m);
+      mesh.visible = false;
+      mesh.renderOrder = 3;
+      scene.add(mesh);
+      return mesh;
     })();
     let placeMode = null; // key of BUILD_ORDER, or null
     let buildMode = false;
@@ -13937,9 +13976,13 @@
 
     function refreshPlaceBanner() {
       if (!placeMode) { placeBannerEl.classList.remove('on'); placeBannerEl.textContent = ''; return; }
-      const lock = buildAxis === 'free' ? 'free' : (buildAxis === 'x' ? 'locked E-W' : 'locked N-S');
-      placeBannerEl.textContent = BUILD_NAMES[placeMode] + ' ($' + COST[placeMode] + ')' +
-        ' · hold B to switch · R axis: ' + lock + ' · T repair · X sell';
+      const facing = ['N', 'E', 'S', 'W'][buildYaw];
+      placeBannerEl.innerHTML =
+        '<b>' + BUILD_NAMES[placeMode] + '</b> $' + COST[placeMode] +
+        '<i>R</i> rotate (' + facing + ')' +
+        '<i>LMB</i> place' +
+        '<i>T</i> repair<i>X</i> sell' +
+        '<i>B</i> exit build mode';
       placeBannerEl.classList.add('on');
     }
 
@@ -13953,9 +13996,8 @@
         return;
       }
       buildMode = false;
-      buildAxis = 'free';
-      buildAnchor = null;
       buildGridHelper.visible = false;
+      buildCellMark.visible = false;
       setPlaceMode(null);
     }
 
@@ -13970,41 +14012,44 @@
       }
     }
 
-    // --- Placement grid -------------------------------------------------------
-    // Free placement made a straight fence line essentially impossible: every piece
-    // landed wherever the aim ray happened to be, so a perimeter came out as a wobbly
-    // dotted curve with gaps the horde walked through. Everything now lands on a 1m
-    // lattice, and R locks the run to one axis so a wall follows the piece before it
-    // instead of drifting off it.
-    const BUILD_GRID = 1.0;
-    let buildAxis = 'free';            // 'free' | 'x' | 'z'
-    let buildAnchor = null;            // last piece placed; the locked axis holds to it
-    function snapToGrid(v) { return Math.round(v / BUILD_GRID) * BUILD_GRID; }
-    // Walls and sandbags turn broadside to you, but on a grid they have to agree with
-    // it, or a "straight" run comes out as a row of slightly different angles.
-    function snapYaw(a) { return Math.round(a / (Math.PI / 2)) * (Math.PI / 2); }
-    function cycleBuildAxis() {
+    // --- The build lattice ------------------------------------------------------
+    // One fixed lattice over the whole map, not a patch that trails the cursor: cell
+    // (gx,gz) is always the same two metres of ground whoever is standing where, so a
+    // piece laid down today lines up with one laid down from the far side tomorrow.
+    // 2m because that is exactly how wide a wall section is (its foot is a 2.0 box),
+    // so a run of them meets edge to edge with no gap for the horde to walk through.
+    // One piece per cell, like a brick in a course.
+    const BUILD_GRID = 2.0;
+    const BUILD_REACH = 9.0;           // how far from the marine you can lay a piece
+    let buildYaw = 0;                  // quarter turns, 0..3 — R rotates the piece
+    function gridIndex(v) { return Math.round(v / BUILD_GRID); }
+    function gridCentre(i) { return i * BUILD_GRID; }
+    function snapToGrid(v) { return gridCentre(gridIndex(v)); }
+    function cellKey(gx, gz) { return gx + ',' + gz; }
+    // Cell -> the build standing in it. Kept alongside `builds` rather than derived,
+    // because placement asks this question every frame while the ghost is up.
+    const buildCells = new Map();
+    function cellOccupant(gx, gz) { return buildCells.get(cellKey(gx, gz)) || null; }
+    function rotateBuild() {
       if (!placeMode) return;
-      buildAxis = buildAxis === 'free' ? 'x' : (buildAxis === 'x' ? 'z' : 'free');
-      // Lock on from where you are standing when there is no piece to follow yet.
-      if (buildAxis !== 'free' && !buildAnchor) {
-        buildAnchor = { x: snapToGrid(player.position.x), z: snapToGrid(player.position.z) };
-      }
+      buildYaw = (buildYaw + 1) & 3;
       AudioSys.brassTink();
       refreshPlaceBanner();
     }
+    function buildYawRad() { return buildYaw * Math.PI / 2; }
 
+    // Where the piece would land: the cell under the reticle, pulled back to arm's
+    // reach if you are pointing further than you can build. Aiming at the cell you
+    // want beats the old fixed distance ahead of the marine — laying a square meant
+    // walking a circle before, because the piece always went four metres forward.
     function getPlacePoint() {
-      const fx = Math.sin(aimYaw);
-      const fz = Math.cos(aimYaw);
-      let x = snapToGrid(player.position.x + fx * PLACE_DIST);
-      let z = snapToGrid(player.position.z + fz * PLACE_DIST);
-      // Axis lock pins the other coordinate to the run you are building.
-      if (buildAnchor) {
-        if (buildAxis === 'x') z = buildAnchor.z;
-        else if (buildAxis === 'z') x = buildAnchor.x;
-      }
-      return { x, z };
+      let tx = aimTarget.x, tz = aimTarget.z;
+      const dx = tx - player.position.x, dz = tz - player.position.z;
+      const d = Math.hypot(dx, dz);
+      if (d > BUILD_REACH) { tx = player.position.x + dx / d * BUILD_REACH; tz = player.position.z + dz / d * BUILD_REACH; }
+      else if (d < 0.8) { tx = player.position.x + Math.sin(aimYaw) * 2.2; tz = player.position.z + Math.cos(aimYaw) * 2.2; }
+      const gx = gridIndex(tx), gz = gridIndex(tz);
+      return { x: gridCentre(gx), z: gridCentre(gz), gx, gz };
     }
 
     function overlapsBlocked(x, z, radius) {
@@ -14022,10 +14067,11 @@
         if (!rock.alive) continue;
         if (Math.hypot(x - rock.x, z - rock.z) < radius + rock.radius + 0.25) return true;
       }
-      // builds
-      for (const b of builds) {
-        if (Math.hypot(x - b.x, z - b.z) < radius + b.radius + 0.25) return true;
-      }
+      // Builds are NOT checked here any more. Two pieces used to need
+      // radius + radius + 0.25 between them, which for 0.95-radius walls is 2.15m —
+      // more than the 2m cell pitch, so the grid physically could not produce the
+      // touching run it exists to produce. One piece per cell (see buildCells) is the
+      // rule now, and neighbouring cells are meant to touch.
       // landmark structures
       for (const ws of worldSolids) {
         if (Math.hypot(x - ws.x, z - ws.z) < radius + ws.radius + 0.2) return true;
@@ -14051,15 +14097,21 @@
       return hi - lo;
     }
 
-    function validatePlace(x, z) {
-      const r = Math.hypot(x, z);
-      if (r > landRadius - 1.6) return false;
+    // Why a cell is refused, so the ghost can say which of these it is rather than
+    // just going red and leaving you to guess.
+    function placeRefusal(x, z, gx, gz) {
+      if (Math.hypot(x, z) > landRadius - 1.6) return 'off the map';
+      if (gx != null && cellOccupant(gx, gz)) return 'cell taken';
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
-      if (distToStream(x, z) < STREAM_WIDTH * 0.9) return false;
-      if (waterDepthAt(x, z) > 0.05) return false;
-      if (groundSpread(x, z, footprint) > 0.6) return false;
-      if (overlapsBlocked(x, z, footprint)) return false;
-      return true;
+      if (distToStream(x, z) < STREAM_WIDTH * 0.9) return 'too close to the water';
+      if (waterDepthAt(x, z) > 0.05) return 'in the water';
+      // Rough ground: a 2m piece needs its whole footprint on something close to level.
+      if (groundSpread(x, z, footprint) > 0.6) return 'ground too rough';
+      if (overlapsBlocked(x, z, footprint)) return 'something in the way';
+      return null;
+    }
+    function validatePlace(x, z, gx, gz) {
+      return !placeRefusal(x, z, gx, gz);
     }
 
     // T — patch up the closest damaged structure; cost scales with the damage.
@@ -14101,8 +14153,10 @@
     function tryPlace() {
       if (!placeMode || !gameStarted || gameOver || won) return;
       const pt = getPlacePoint();
-      if (!ghostValid || !validatePlace(pt.x, pt.z)) {
+      const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
+      if (!ghostValid || why) {
         AudioSys.invalid();
+        showBanner('CAN\u0027T BUILD THERE', why ? why.charAt(0).toUpperCase() + why.slice(1) : 'No room', 1.2, '#ffb347');
         return;
       }
       if (mortarCarried && placeMode === 'mortar') { setDownMortar(pt.x, pt.z); return; }
@@ -14113,8 +14167,8 @@
       }
       bank -= cost;
       updateCoinHud();
-      spawnBuild(placeMode, pt.x, pt.z);
-      buildAnchor = { x: pt.x, z: pt.z };
+      const made = spawnBuild(placeMode, pt.x, pt.z);
+      if (made) { made.gx = pt.gx; made.gz = pt.gz; buildCells.set(cellKey(pt.gx, pt.gz), made); }
       AudioSys.place();
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -14224,8 +14278,9 @@
       else mesh = makeHeavyTurretMesh();
       mesh.position.set(x, groundMinAround(x, z, st.radius * 0.85), z);
       // Walls face across the approach: turn broadside to the player who placed them.
-      if (kind === 'wall' || kind === 'sandbag') mesh.rotation.y = snapYaw(aimYaw + Math.PI / 2);
-      if (kind === 'mortar') mesh.rotation.y = snapYaw(aimYaw);
+      // Everything takes the rotation the ghost was showing, so what you saw is what
+      // goes down. Round things simply do not care.
+      mesh.rotation.y = buildYawRad();
       scene.add(mesh);
 
       const barGroup = new THREE.Group();
@@ -14239,7 +14294,7 @@
 
       const b = {
         mesh, x, z, type: kind, hp: st.hp, maxHp: st.hp, radius: st.radius,
-        yaw: kind === 'wall' ? mesh.rotation.y : 0,
+        yaw: mesh.rotation.y,
         range: st.range || 0,
         fireCd: 0,
         fireInterval: st.fireInterval || 0.7,
@@ -14286,6 +14341,7 @@
 
     const LURE_LIFE = 20;
     function removeBuild(b) {
+      if (b.gx != null && cellOccupant(b.gx, b.gz) === b) buildCells.delete(cellKey(b.gx, b.gz));
       if (b === mortarMounted) dismountMortar();
       scene.remove(b.mesh);
       if (b.bar) scene.remove(b.bar);
@@ -14483,22 +14539,37 @@
     const barFgLowMat = new THREE.MeshBasicMaterial({ color: 0xe0563e, depthWrite: false, transparent: true, opacity: 0.95 });
 
     function updateGhostPreview() {
-      if (!placeMode) { if (buildGridHelper.visible) buildGridHelper.visible = false; return; }
-      const pt = getPlacePoint();
-      // The lattice rides the ghost, lifted clear of the ground so it is not
-      // z-fighting the terrain it is drawn over.
-      buildGridHelper.visible = true;
-      buildGridHelper.position.set(snapToGrid(pt.x), sampleHeight(pt.x, pt.z) + 0.06, snapToGrid(pt.z));
-      const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
-      if (placeMode === 'wall' || placeMode === 'sandbag') ghostGroup.rotation.y = snapYaw(aimYaw + Math.PI / 2);
-      else if (placeMode === 'mortar') ghostGroup.rotation.y = snapYaw(aimYaw);
-      else ghostGroup.rotation.y = 0;
-      ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
-      ghostValid = validatePlace(pt.x, pt.z) && bank >= COST[placeMode];
-      const mat = ghostGroup.userData.mat;
-      if (mat) {
-        mat.color.setHex(ghostValid ? 0x22c55e : 0xef4444);
+      if (!placeMode) {
+        if (buildGridHelper.visible) buildGridHelper.visible = false;
+        if (buildCellMark.visible) buildCellMark.visible = false;
+        return;
       }
+      const pt = getPlacePoint();
+      // Lattice centred on the marine's own cell and draped over the ground, so it
+      // reads as part of the world rather than a decal skating across it.
+      const cx = snapToGrid(player.position.x), cz = snapToGrid(player.position.z);
+      buildGridHelper.visible = true;
+      buildGridHelper.position.set(cx, 0, cz);
+      {
+        const attr = buildGridHelper.geometry.getAttribute('position');
+        const arr = attr.array;
+        for (let i = 0; i < arr.length; i += 3) {
+          arr[i + 1] = sampleHeight(cx + _gridBase[i], cz + _gridBase[i + 2]) + 0.05;
+        }
+        attr.needsUpdate = true;
+      }
+      const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
+      ghostGroup.rotation.y = buildYawRad();
+      ghostGroup.position.set(pt.x, groundMinAround(pt.x, pt.z, footprint * 0.85), pt.z);
+      const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
+      const broke = bank < COST[placeMode];
+      ghostValid = !why && !broke;
+      const mat = ghostGroup.userData.mat;
+      if (mat) mat.color.setHex(ghostValid ? 0x22c55e : 0xef4444);
+      buildCellMark.visible = true;
+      buildCellMark.position.set(pt.x, sampleHeight(pt.x, pt.z) + 0.07, pt.z);
+      buildCellMark.material.color.setHex(ghostValid ? 0x22c55e : 0xef4444);
+      buildCellMark.material.opacity = ghostValid ? 0.22 : 0.30;
     }
 
 
@@ -16703,8 +16774,8 @@
       // Movement keys are ignored while manning the mortar. Clearing them afterwards
       // (updateMortar) came too late: the frame's movement had already used them.
       if (e.code in keys) { if (!mortarMounted) keys[e.code] = true; e.preventDefault(); }
-      // R is the axis lock while a ghost is up: there is nothing to reload mid-place.
-      if (e.code === 'KeyR') { if (placeMode) cycleBuildAxis(); else startReload(); e.preventDefault(); }
+      // R turns the piece while a ghost is up: there is nothing to reload mid-place.
+      if (e.code === 'KeyR') { if (placeMode) rotateBuild(); else startReload(); e.preventDefault(); }
       if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
       if (e.code === 'KeyN') { toggleNvg(); e.preventDefault(); }
       if (e.code === 'KeyZ') { toggleLasers(); e.preventDefault(); }

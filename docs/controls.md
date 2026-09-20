@@ -65,10 +65,17 @@ not you own it, so buying a blueprint never moves the others; locked ones sit gr
 price and say so if you pick them. The barricade is free, the rest need their plans from the
 kiosk, and placing still costs per piece.
 
-**Placement snaps to a 1 m grid**, with the piece's facing snapped to 90 degrees, and a patch of
-the lattice is drawn under the ghost so you can see where it will land. `R` cycles the axis lock:
-free, locked east-west, locked north-south. Locked, each new piece holds the last one's row or
-column, which is how you get a straight fence instead of a wobbly line with gaps in it.
+**Placement is a lattice of 2 m cells over the whole map**, one piece per cell, like bricks in a
+course. 2 m because that is exactly how wide a wall section is, so a run of them meets edge to
+edge with no gap for the horde to walk through. You aim at the cell you want rather than placing
+a fixed distance ahead, out to 9 m, and the cell under the reticle is filled green or red so you
+can see the answer before you commit. `R` turns the piece a quarter turn at a time, which is how
+you take a corner. A cell is refused if it already holds something, if the ground is too rough or
+too steep, if it is in or beside the water, or if a tree, rock or building is in the way — and
+the refusal says which.
+
+The bar along the bottom of the screen lists the keys while you are building, including `B` to
+leave build mode.
 
 ## Gear
 
