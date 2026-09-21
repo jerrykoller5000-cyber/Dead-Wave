@@ -2758,6 +2758,43 @@
     }
     buildHeightField();
 
+    // --- Flat apron around the spawn clearing -----------------------------------
+    // Building on natural ground was the root of half the placement trouble: cells
+    // were refused as "too rough", and a wall run stepped down a hillside instead of
+    // standing as one wall. The ground you actually build on is now level out to
+    // BUILD_APRON_R and blended back into the real terrain over the feather beyond,
+    // so there is no cliff at the edge of it.
+    const BUILD_APRON_R = 100;
+    const BUILD_APRON_FEATHER = 60;
+    (function flattenBuildApron() {
+      const cx = 0, cz = 0;
+      const reach = BUILD_APRON_R + BUILD_APRON_FEATHER;
+      const ci = Math.round((cx + HF_EXTENT) / HF_SPACING);
+      const cj = Math.round((cz + HF_EXTENT) / HF_SPACING);
+      const target = heightField[cj * HF_N + ci];
+      const i0 = Math.max(0, Math.floor((cx - reach + HF_EXTENT) / HF_SPACING));
+      const i1 = Math.min(HF_N - 1, Math.ceil((cx + reach + HF_EXTENT) / HF_SPACING));
+      const j0 = Math.max(0, Math.floor((cz - reach + HF_EXTENT) / HF_SPACING));
+      const j1 = Math.min(HF_N - 1, Math.ceil((cz + reach + HF_EXTENT) / HF_SPACING));
+      for (let j = j0; j <= j1; j++) {
+        const wz = -HF_EXTENT + j * HF_SPACING;
+        for (let i = i0; i <= i1; i++) {
+          const wx = -HF_EXTENT + i * HF_SPACING;
+          const d = Math.hypot(wx - cx, wz - cz);
+          if (d > reach) continue;
+          // The river channel is the one thing left alone, or the apron dams it.
+          // Everything else levels: an earlier version also spared any dip more than
+          // 2m below the target, which on a spawn sitting even slightly high meant a
+          // quarter of the apron stayed lumpy.
+          if (distToRiver(wx, wz) < RIVER_WIDTH * 1.15) continue;
+          const k = j * HF_N + i;
+          const natural = heightField[k];
+          const w = d <= BUILD_APRON_R ? 1 : 1 - smoothstep01((d - BUILD_APRON_R) / BUILD_APRON_FEATHER);
+          heightField[k] = natural + (target - natural) * w;
+        }
+      }
+    })();
+
     function sampleHeight(x, z) {
       if (heightFieldReady) {
         const fx = (x + HF_EXTENT) / HF_SPACING;
@@ -3612,6 +3649,56 @@
       color: 0xffffff, roughness: 0.92, metalness: 0.02, vertexColors: true
     });
     const ground = new THREE.Mesh(buildGroundGeometry(), groundMat);
+
+    // --- Reshaping the ground at runtime ----------------------------------------
+    // The shovel writes into the heightfield, which is what gameplay actually
+    // collides against, then repairs the rendered surface to match. The terrain mesh
+    // is a 133k-vertex radial grid with no spatial index, so this walks the whole
+    // vertex list — fine for a thing the player does with a click, and out of the
+    // question every frame. Colour is recomputed too, or levelled ground keeps the
+    // steep-slope tint it had when it was a hillside.
+    function reshapeGround(cx, cz, radius, targetY, feather) {
+      const R = radius, F = feather;
+      const reach = R + F;
+      // 1. the heightfield
+      const i0 = Math.max(0, Math.floor((cx - reach + HF_EXTENT) / HF_SPACING));
+      const i1 = Math.min(HF_N - 1, Math.ceil((cx + reach + HF_EXTENT) / HF_SPACING));
+      const j0 = Math.max(0, Math.floor((cz - reach + HF_EXTENT) / HF_SPACING));
+      const j1 = Math.min(HF_N - 1, Math.ceil((cz + reach + HF_EXTENT) / HF_SPACING));
+      for (let j = j0; j <= j1; j++) {
+        const wz = -HF_EXTENT + j * HF_SPACING;
+        for (let i = i0; i <= i1; i++) {
+          const wx = -HF_EXTENT + i * HF_SPACING;
+          const d = Math.hypot(wx - cx, wz - cz);
+          if (d > reach) continue;
+          if (distToRiver(wx, wz) < RIVER_WIDTH * 1.15) continue;
+          const k = j * HF_N + i;
+          const w = d <= R ? 1 : 1 - smoothstep01((d - R) / F);
+          heightField[k] += (targetY - heightField[k]) * w;
+        }
+      }
+      // 2. the surface you can see
+      const geo = ground.geometry;
+      const pos = geo.getAttribute('position');
+      const arr = pos.array;
+      const col = geo.getAttribute('color');
+      const carr = col ? col.array : null;
+      for (let vi = 0; vi < TERRAIN_VERTS; vi++) {
+        const x = arr[vi * 3], z = arr[vi * 3 + 2];
+        if (Math.abs(x - cx) > reach || Math.abs(z - cz) > reach) continue;
+        if (Math.hypot(x - cx, z - cz) > reach) continue;
+        const h = sampleHeight(x, z);
+        arr[vi * 3 + 1] = h;
+        terrainColorAt(x, z, h, _terrCol);
+        groundBaseColors[vi * 3] = _terrCol.r;
+        groundBaseColors[vi * 3 + 1] = _terrCol.g;
+        groundBaseColors[vi * 3 + 2] = _terrCol.b;
+        if (carr) { carr[vi * 3] = _terrCol.r; carr[vi * 3 + 1] = _terrCol.g; carr[vi * 3 + 2] = _terrCol.b; }
+      }
+      pos.needsUpdate = true;
+      if (col) col.needsUpdate = true;
+      geo.computeVertexNormals();
+    }
     ground.receiveShadow = true;
     scene.add(ground);
 
@@ -13619,12 +13706,12 @@
     }
     // --- Builds: barricades & turrets ---
     const builds = [];
-    const COST = { barricade: 8, wall: 14, spikes: 12, sandbag: 10, barrel: 18, mine: 14, lure: 30, light: 24, flame: 36, heavy: 45, mortar: 60 };
+    const COST = { shovel: 4, barricade: 8, wall: 14, spikes: 12, sandbag: 10, barrel: 18, mine: 14, lure: 30, light: 24, flame: 36, heavy: 45, mortar: 60 };
     const BUILD_NAMES = {
-      barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap', sandbag: 'Sandbag wall', barrel: 'Fuel drum', mine: 'Land mine', lure: 'Decoy beacon',
+      shovel: 'Shovel', barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap', sandbag: 'Sandbag wall', barrel: 'Fuel drum', mine: 'Land mine', lure: 'Decoy beacon',
       light: 'Light turret', flame: 'Flame turret', heavy: 'Heavy turret', mortar: 'Mortar'
     };
-    const BUILD_FOOTPRINT = { barricade: 0.95, wall: 0.95, spikes: 0.8, sandbag: 0.95, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
+    const BUILD_FOOTPRINT = { shovel: 0.95, barricade: 0.95, wall: 0.95, spikes: 0.8, sandbag: 0.95, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
     // Panel pieces fill their cell, so they collide as an oriented box rather than as a
     // circle. A circle of radius 0.95 in a 2m cell leaves a 10cm slot at every joint,
     // which is exactly the gap you could slip through between two barricades. Half
@@ -13708,21 +13795,25 @@
     })();
     let placeMode = null; // key of BUILD_ORDER, or null
     let buildMode = false;
-    const BUILD_ORDER = ['barricade', 'wall', 'sandbag', 'spikes', 'barrel', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
+    // 'shovel' is in the wheel but is not a structure: it levels the cell instead of
+    // filling it. Free, always available, and the only entry that can be used on a
+    // cell that already holds something.
+    const BUILD_ORDER = ['shovel', 'barricade', 'wall', 'sandbag', 'spikes', 'barrel', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
     let buildIndex = 0;
     let ghostValid = false;
     // Blueprints: a build type only shows up in the B menu once its plans have been
     // bought at the kiosk. Placing one still costs COST[type] per piece.
-    const BUILD_UNLOCK_PRICE = { barricade: 0, wall: 25, sandbag: 20, spikes: 30, barrel: 40, mine: 45, lure: 70, light: 55, flame: 75, heavy: 110, mortar: 120 };
+    const BUILD_UNLOCK_PRICE = { shovel: 0, barricade: 0, wall: 25, sandbag: 20, spikes: 30, barrel: 40, mine: 45, lure: 70, light: 55, flame: 75, heavy: 110, mortar: 120 };
     const BUILD_BLURB = {
+      shovel: 'Levels the cell you point at, and blends it into the ground around it. Rough or sloping ground refuses a build; this is how you fix it. Works on a cell that already has something standing in it.',
       barricade: 'Cheap steel beams. Slows and soaks.', wall: 'Solid log wall. Real stopping power.', sandbag: 'Low, tough cover. Cheap to line a lane with.',
       spikes: 'Bleeds anything that walks over it.', barrel: 'Fuel drum. Shoot it when the pack is beside it; chains into its neighbours.',
       mine: 'Buried charge. Goes off under the first thing that steps on it.', lure: 'Flashing, screaming beacon. The horde chases it instead of you for 20s, then it burns out.',
       light: 'Auto-turret. Cheap, chattery, fine vs. shamblers.', flame: 'Short-range fire cone. Crowds hate it.', heavy: 'Slow, hard-hitting sentry gun.',
       mortar: 'Crew-served tube. E to mount, LMB lobs a shell at the reticle (arc shown), T to shoulder it and carry it elsewhere. Shells sold under Ammo.'
     };
-    let buildUnlocked = { barricade: true };
-    function resetBuildUnlocks() { buildUnlocked = { barricade: true }; buildIndex = 0; }
+    let buildUnlocked = { barricade: true, shovel: true };
+    function resetBuildUnlocks() { buildUnlocked = { barricade: true, shovel: true }; buildIndex = 0; }
     function unlockAllBuilds() { for (const k of BUILD_ORDER) buildUnlocked[k] = true; }
     function firstUnlockedBuild() { return BUILD_ORDER.find((k) => buildUnlocked[k]) || 'barricade'; }
 
@@ -13738,38 +13829,42 @@
     // between — but it is an obstacle, not a platform: no capping strip, nothing will
     // ever stand on top of it.
     const BARRICADE_TOP = 1.4;
-    function makeBarricadeMesh(matOverride = null) {
-      const g = new THREE.Group();
-      const mat = matOverride || new THREE.MeshStandardMaterial({ color: 0x6b7280, metalness: 0.62, roughness: 0.4 });
-      const rust = matOverride || new THREE.MeshStandardMaterial({ color: 0x5a4030, metalness: 0.45, roughness: 0.7 });
-      // Uprights on the cell boundaries, so neighbours share them exactly as the wall does.
-      for (const sx of [-WALL_SPAN / 2, WALL_SPAN / 2]) {
-        const post = new THREE.Mesh(new THREE.BoxGeometry(0.17, BARRICADE_TOP + 0.5, 0.22), mat);
-        post.position.set(sx, (BARRICADE_TOP + 0.5) / 2 - 0.5, 0);
+    const BARRICADE_SPEC = {
+      mats(mo) {
+        return {
+          steel: mo || new THREE.MeshStandardMaterial({ color: 0x6b7280, metalness: 0.62, roughness: 0.4 }),
+          rust: mo || new THREE.MeshStandardMaterial({ color: 0x5a4030, metalness: 0.45, roughness: 0.7 })
+        };
+      },
+      hub(g, mo) {
+        const m = BARRICADE_SPEC.mats(mo);
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.22, BARRICADE_TOP + 0.5, 0.22), m.steel);
+        post.position.y = (BARRICADE_TOP + 0.5) / 2 - 0.5;
         post.castShadow = true;
         g.add(post);
+      },
+      arm(a, mo) {
+        const m = BARRICADE_SPEC.mats(mo);
+        const L = WALL_SPAN / 2 - 0.11, mid = 0.11 + L / 2;
+        for (const y of [0.35, BARRICADE_TOP - 0.12]) {
+          const rail = new THREE.Mesh(new THREE.BoxGeometry(0.17, 0.15, L), y > 1 ? m.steel : m.rust);
+          rail.position.set(0, y, mid);
+          rail.castShadow = true;
+          a.add(rail);
+        }
+        const diag = Math.hypot(L, BARRICADE_TOP - 0.5);
+        for (const sgn of [1, -1]) {
+          const bar = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.12, diag), m.rust);
+          bar.position.set(0.02, (BARRICADE_TOP + 0.35) / 2, mid);
+          bar.rotation.x = sgn * Math.atan2(BARRICADE_TOP - 0.5, L);
+          a.add(bar);
+        }
+        const skirt = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.55, L), m.steel);
+        skirt.position.set(0, -0.12, mid);
+        a.add(skirt);
       }
-      // Two rails plus a crossed X: enough steel across the opening that nothing walks
-      // through the middle of a panel.
-      for (const y of [0.35, BARRICADE_TOP - 0.12]) {
-        const rail = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.15, 0.17), y > 1 ? mat : rust);
-        rail.position.set(0, y, 0);
-        rail.castShadow = true;
-        g.add(rail);
-      }
-      const diag = Math.hypot(WALL_SPAN, BARRICADE_TOP - 0.5);
-      for (const sgn of [1, -1]) {
-        const bar = new THREE.Mesh(new THREE.BoxGeometry(diag, 0.13, 0.14), rust);
-        bar.position.set(0, (BARRICADE_TOP + 0.35) / 2, 0.02);
-        bar.rotation.z = sgn * Math.atan2(BARRICADE_TOP - 0.5, WALL_SPAN);
-        bar.castShadow = true;
-        g.add(bar);
-      }
-      const skirt = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.55, 0.24), mat);
-      skirt.position.set(0, -0.12, 0);
-      g.add(skirt);
-      return g;
-    }
+    };
+    function makeBarricadeMesh(matOverride = null) { return makePanelMesh(BARRICADE_SPEC, matOverride); }
 
     function makeLightTurretMesh(matOverride = null) {
       const g = new THREE.Group();
@@ -13908,46 +14003,86 @@
     // what makes an L corner close up: the perpendicular piece's post lands on the same
     // boundary the straight run's did. The skirt below zero is buried — on a slope it
     // stops daylight showing under the piece.
+    // --- Panels are a hub with four arms ----------------------------------------
+    // A thin panel centred in its cell cannot turn a corner: two perpendicular
+    // neighbours each run down the middle of their own cell and their centrelines
+    // never meet, which is why an L came out as two walls with a notch bitten out of
+    // the join. So a panel is not a slab any more. It is a post at the cell CENTRE
+    // with up to four arms reaching out to the cell edges, and only the arms facing a
+    // neighbour are shown. Two panels side by side each grow an arm toward the other
+    // and they meet exactly on the shared edge; a corner grows two arms at right
+    // angles out of the same hub, so it is welded by construction. Tees and
+    // crossroads fall out of the same rule, and four walls around a room close up
+    // into a house.
     const WALL_SPAN = 2.0;      // = BUILD_GRID
     const WALL_TOP = 2.0;       // flat top, same for every wall
     const WALL_SKIRT = 0.7;     // buried, hides uneven ground
-    function makeWallMesh(matOverride = null) {
+    const PANEL_DIRS = [[0, -1], [1, 0], [0, 1], [-1, 0]]; // N, E, S, W, in cell steps
+
+    // Arms are authored pointing +Z and rotated into place, so a piece type only has
+    // to describe one of them.
+    function makePanelMesh(spec, matOverride) {
       const g = new THREE.Group();
-      const wood = matOverride || new THREE.MeshStandardMaterial({ color: 0x7a5c38, roughness: 0.85 });
-      const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 });
-      // Planks run the full span with no end margin, so a neighbour's planks start
-      // exactly where these stop.
-      const N = 6, pw = WALL_SPAN / N;
-      for (let i = 0; i < N; i++) {
-        const h = WALL_TOP - 0.18 + WALL_SKIRT;
-        const plank = new THREE.Mesh(new THREE.BoxGeometry(pw * 0.98, h, 0.2), wood);
-        plank.position.set(-WALL_SPAN / 2 + pw * (i + 0.5), h / 2 - WALL_SKIRT, 0);
-        plank.castShadow = true;
-        g.add(plank);
+      const arms = [];
+      spec.hub(g, matOverride);
+      for (let d = 0; d < 4; d++) {
+        const arm = new THREE.Group();
+        // Arms are authored pointing +Z, and PANEL_DIRS is N,E,S,W. Rotating +Z by y
+        // sends it to (sin y, 0, cos y), so south is 0, east is a quarter turn, north
+        // is a half. Getting this wrong points every arm away from the neighbour it is
+        // supposed to be reaching for, which looks exactly like the gaps it was meant
+        // to close.
+        arm.rotation.y = (2 - d) * Math.PI / 2;
+        spec.arm(arm, matOverride);
+        arm.visible = false;
+        g.add(arm);
+        arms.push(arm);
       }
-      // Capping strip: the flat surface a platform will later sit on.
-      const cap = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.18, 0.44), wood);
-      cap.position.y = WALL_TOP - 0.09;
-      cap.castShadow = true;
-      g.add(cap);
-      for (const y of [0.55, 1.35]) {
-        const brace = new THREE.Mesh(new THREE.BoxGeometry(WALL_SPAN, 0.13, 0.1), metal);
-        brace.position.set(0, y, 0.16);
-        g.add(brace);
-      }
-      // Boundary posts. Half of each sits in this cell and half in the neighbour's, so
-      // the two halves coincide instead of doubling up.
-      for (const sx of [-WALL_SPAN / 2, WALL_SPAN / 2]) {
-        const post = new THREE.Mesh(new THREE.BoxGeometry(0.26, WALL_TOP + WALL_SKIRT, 0.5), metal);
-        post.position.set(sx, (WALL_TOP + WALL_SKIRT) / 2 - WALL_SKIRT, 0);
-        post.castShadow = true;
-        g.add(post);
-        const capPost = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.12, 0.56), metal);
-        capPost.position.set(sx, WALL_TOP + 0.05, 0);
-        g.add(capPost);
-      }
+      g.userData.arms = arms;
+      g.userData.panel = true;
       return g;
     }
+
+    const WALL_SPEC = {
+      mats(mo) {
+        return {
+          wood: mo || new THREE.MeshStandardMaterial({ color: 0x7a5c38, roughness: 0.85 }),
+          metal: mo || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 })
+        };
+      },
+      hub(g, mo) {
+        const m = WALL_SPEC.mats(mo);
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.44, WALL_TOP + WALL_SKIRT, 0.44), m.metal);
+        post.position.y = (WALL_TOP + WALL_SKIRT) / 2 - WALL_SKIRT;
+        post.castShadow = true;
+        g.add(post);
+        const cap = new THREE.Mesh(new THREE.BoxGeometry(0.54, 0.14, 0.54), m.metal);
+        cap.position.y = WALL_TOP + 0.06;
+        g.add(cap);
+      },
+      arm(a, mo) {
+        const m = WALL_SPEC.mats(mo);
+        const L = WALL_SPAN / 2 - 0.22, mid = 0.22 + L / 2;
+        const N = 3, pw = L / N;
+        for (let i = 0; i < N; i++) {
+          const h = WALL_TOP - 0.18 + WALL_SKIRT;
+          const plank = new THREE.Mesh(new THREE.BoxGeometry(0.2, h, pw * 0.98), m.wood);
+          plank.position.set(0, h / 2 - WALL_SKIRT, 0.22 + pw * (i + 0.5));
+          plank.castShadow = true;
+          a.add(plank);
+        }
+        const cap = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.18, L), m.wood);
+        cap.position.set(0, WALL_TOP - 0.09, mid);
+        cap.castShadow = true;
+        a.add(cap);
+        for (const y of [0.55, 1.35]) {
+          const brace = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.13, L), m.metal);
+          brace.position.set(0.16, y, mid);
+          a.add(brace);
+        }
+      }
+    };
+    function makeWallMesh(matOverride = null) { return makePanelMesh(WALL_SPEC, matOverride); }
 
     function makeSpikesMesh(matOverride = null) {
       const g = new THREE.Group();
@@ -14013,6 +14148,7 @@
         color: 0x22c55e, transparent: true, opacity: 0.45, depthWrite: false
       });
       let mesh;
+      if (placeMode === 'shovel') { ghostGroup.visible = false; ghostGroup.userData.mat = ghostMat; return; }
       if (placeMode === 'barricade') mesh = makeBarricadeMesh(ghostMat);
       else if (placeMode === 'wall') mesh = makeWallMesh(ghostMat);
       else if (placeMode === 'spikes') mesh = makeSpikesMesh(ghostMat);
@@ -14182,6 +14318,13 @@
     // just going red and leaving you to guess.
     function placeRefusal(x, z, gx, gz) {
       if (Math.hypot(x, z) > landRadius - 1.6) return 'off the map';
+      // The shovel reshapes ground rather than occupying it, so a full cell is fine;
+      // it only refuses where there is nothing to dig.
+      if (placeMode === 'shovel') {
+        if (waterDepthAt(x, z) > 0.05) return 'in the water';
+        if (distToStream(x, z) < STREAM_WIDTH * 0.9) return 'too close to the water';
+        return null;
+      }
       if (gx != null && cellOccupant(gx, gz)) return 'cell taken';
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
       if (distToStream(x, z) < STREAM_WIDTH * 0.9) return 'too close to the water';
@@ -14195,14 +14338,22 @@
       return !placeRefusal(x, z, gx, gz);
     }
 
-    // T — patch up the closest damaged structure; cost scales with the damage.
+    // T — patch up a damaged structure; cost scales with the damage. Same rule as
+    // selling: while a ghost is up it is the cell under the cursor.
     function repairNearestBuild() {
       if (!gameStarted || gameOver || won || paused) return;
-      let best = null, bd = 7;
-      for (const b of builds) {
-        if (b.hp >= b.maxHp - 0.5) continue;
-        const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
-        if (d < bd) { bd = d; best = b; }
+      let best = null;
+      if (placeMode) {
+        const pt = getPlacePoint();
+        const hit = cellOccupant(pt.gx, pt.gz);
+        if (hit && hit.hp < hit.maxHp - 0.5) best = hit;
+      } else {
+        let bd = 7;
+        for (const b of builds) {
+          if (b.hp >= b.maxHp - 0.5) continue;
+          const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
+          if (d < bd) { bd = d; best = b; }
+        }
       }
       if (!best) { AudioSys.invalid(); return; }
       const cost = Math.max(1, Math.ceil((best.maxHp - best.hp) * 0.12));
@@ -14214,13 +14365,26 @@
       spawnDust(best.x, best.mesh.position.y + 0.6, best.z, 4);
     }
 
-    // X — scrap the closest structure for a partial refund weighted by its condition.
+    // X — scrap a structure for a partial refund weighted by its condition. While
+    // a ghost is up this is the cell you are pointing at, not "whatever happens to be
+    // nearest", which used to sell the wrong piece out of a tight run.
     function sellNearestBuild() {
       if (!gameStarted || gameOver || won || paused) return;
-      let best = null, bd = 7;
-      for (const b of builds) {
-        const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
-        if (d < bd) { bd = d; best = b; }
+      let best = null;
+      if (placeMode) {
+        const pt = getPlacePoint();
+        best = cellOccupant(pt.gx, pt.gz);
+        if (!best) {
+          AudioSys.invalid();
+          showBanner('NOTHING THERE', 'Point at the piece you want to scrap', 1.1, '#ffb347');
+          return;
+        }
+      } else {
+        let bd = 7;
+        for (const b of builds) {
+          const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
+          if (d < bd) { bd = d; best = b; }
+        }
       }
       if (!best) { AudioSys.invalid(); return; }
       const refund = Math.max(1, Math.ceil((COST[best.type] || 5) * 0.6 * (best.hp / best.maxHp)));
@@ -14241,6 +14405,25 @@
         return;
       }
       if (mortarCarried && placeMode === 'mortar') { setDownMortar(pt.x, pt.z); return; }
+      if (placeMode === 'shovel') {
+        if (!spend(COST.shovel)) { AudioSys.invalid(); return; }
+        updateCoinHud();
+        // Level to the middle of what the cell already is, so digging a slope meets it
+        // half way rather than dropping a step into the hillside.
+        const target = sampleHeight(pt.x, pt.z);
+        reshapeGround(pt.x, pt.z, BUILD_GRID * 0.62, target, BUILD_GRID * 0.7);
+        // Anything standing in or beside it has to sit back down on the new ground.
+        for (const b of builds) {
+          if (Math.hypot(b.x - pt.x, b.z - pt.z) > BUILD_GRID * 1.6) continue;
+          const st = BUILD_STATS[b.type] || BUILD_STATS.barricade;
+          b.baseY = buildBaseY(b.type, b.x, b.z, st.radius * 0.85, b.gx, b.gz);
+          b.mesh.position.y = b.baseY;
+        }
+        spawnDust(pt.x, sampleHeight(pt.x, pt.z) + 0.3, pt.z, 7);
+        AudioSys.place();
+        updateGhostPreview();
+        return;
+      }
       const cost = COST[placeMode];
       if (bank < cost) {
         AudioSys.invalid();
@@ -14251,7 +14434,11 @@
       _pendingCell.gx = pt.gx; _pendingCell.gz = pt.gz;
       const made = spawnBuild(placeMode, pt.x, pt.z);
       _pendingCell.gx = null; _pendingCell.gz = null;
-      if (made) { made.gx = pt.gx; made.gz = pt.gz; buildCells.set(cellKey(pt.gx, pt.gz), made); }
+      if (made) {
+        made.gx = pt.gx; made.gz = pt.gz;
+        buildCells.set(cellKey(pt.gx, pt.gz), made);
+        refreshPanelNeighbourhood(pt.gx, pt.gz);
+      }
       AudioSys.place();
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -14281,31 +14468,36 @@
     // Same rule as the wall: full span, flat top, courses that meet a neighbour's
     // exactly. Low cover, so it stops at SANDBAG_TOP rather than reaching wall height.
     const SANDBAG_TOP = 1.05;
-    function makeSandbagMesh(matOverride = null) {
-      const g = new THREE.Group();
-      const bag = matOverride || new THREE.MeshStandardMaterial({ color: 0x8a7c5a, roughness: 0.98 });
-      const rows = 4, rh = SANDBAG_TOP / rows;
-      for (let row = 0; row < rows; row++) {
-        // Alternate courses are offset by half a bag, and the half-bags at the ends
-        // pair up with the neighbour cell's to complete the bond.
-        const odd = row % 2 === 1;
-        const n = odd ? 5 : 4;
-        const bw = WALL_SPAN / 4;
-        for (let i = 0; i < n; i++) {
-          const cx = odd ? (-WALL_SPAN / 2 + i * bw) : (-WALL_SPAN / 2 + bw * (i + 0.5));
-          // End bags on an offset course are half-width so nothing pokes into the
-          // next cell.
-          const half = odd && (i === 0 || i === n - 1);
-          const w = half ? bw * 0.5 : bw * 0.96;
-          const px = half ? (i === 0 ? cx + bw * 0.25 : cx - bw * 0.25) : cx;
-          const m = new THREE.Mesh(rbox(w, rh * 0.94, 0.5, 0.06), bag);
-          m.position.set(px, rh * (row + 0.5), 0);
+    const SANDBAG_SPEC = {
+      bagMat(mo) { return mo || new THREE.MeshStandardMaterial({ color: 0x8a7c5a, roughness: 0.98 }); },
+      hub(g, mo) {
+        const bag = SANDBAG_SPEC.bagMat(mo);
+        const rows = 4, rh = SANDBAG_TOP / rows;
+        for (let r = 0; r < rows; r++) {
+          const m = new THREE.Mesh(rbox(0.58, rh * 0.94, 0.58, 0.07), bag);
+          m.position.y = rh * (r + 0.5);
+          m.rotation.y = (r % 2) * 0.35;
           m.castShadow = true; m.receiveShadow = true;
           g.add(m);
         }
+      },
+      arm(a, mo) {
+        const bag = SANDBAG_SPEC.bagMat(mo);
+        const rows = 4, rh = SANDBAG_TOP / rows;
+        const L = WALL_SPAN / 2 - 0.29;
+        for (let r = 0; r < rows; r++) {
+          // Two bags on one course, three on the next, so the bond staggers up.
+          const n = r % 2 ? 3 : 2, bw = L / n;
+          for (let i = 0; i < n; i++) {
+            const m = new THREE.Mesh(rbox(0.5, rh * 0.94, bw * 0.95, 0.06), bag);
+            m.position.set(0, rh * (r + 0.5), 0.29 + bw * (i + 0.5));
+            m.castShadow = true; m.receiveShadow = true;
+            a.add(m);
+          }
+        }
       }
-      return g;
-    }
+    };
+    function makeSandbagMesh(matOverride = null) { return makePanelMesh(SANDBAG_SPEC, matOverride); }
     function makeBarrelBuildMesh(matOverride = null) {
       const g = new THREE.Group();
       const body = new THREE.Mesh(barrelGeo, matOverride || barrelRedMat);
@@ -14427,6 +14619,37 @@
       return best;
     }
 
+    // Which arms a panel should be showing. A panel with no panel neighbours still
+    // has to look like a wall section, so it falls back to the two arms along its own
+    // rotation — R is what picks that for a lone piece or the end of a run.
+    function refreshPanelLinks(b) {
+      if (!b || !b.mesh || !b.mesh.userData.panel || b.gx == null) return;
+      const arms = b.mesh.userData.arms;
+      let any = false;
+      // The mesh is rotated by b.yaw, so a world direction has to be expressed in the
+      // mesh's own frame before picking an arm.
+      const turns = ((Math.round(b.yaw / (Math.PI / 2)) % 4) + 4) % 4;
+      for (let d = 0; d < 4; d++) {
+        const [dx, dz] = PANEL_DIRS[d];
+        const nb = cellOccupant(b.gx + dx, b.gz + dz);
+        const on = !!(nb && nb.mesh && nb.mesh.userData.panel);
+        if (on) any = true;
+        arms[(d - turns + 4) % 4].visible = on;
+      }
+      if (!any) {
+        // Standing alone: show the pair that runs along the way it is facing.
+        arms[0].visible = true;
+        arms[2].visible = true;
+      }
+    }
+    // Re-link a cell and the four around it, which is everything a single placement or
+    // removal can change.
+    function refreshPanelNeighbourhood(gx, gz) {
+      if (gx == null) return;
+      refreshPanelLinks(cellOccupant(gx, gz));
+      for (const [dx, dz] of PANEL_DIRS) refreshPanelLinks(cellOccupant(gx + dx, gz + dz));
+    }
+
     // One path for "a build took damage", so the dust, the sound and the wreck are
     // the same however it happened.
     function damageBuild(b, dmg) {
@@ -14443,12 +14666,15 @@
 
     const LURE_LIFE = 20;
     function removeBuild(b) {
-      if (b.gx != null && cellOccupant(b.gx, b.gz) === b) buildCells.delete(cellKey(b.gx, b.gz));
+      const _wasCell = (b.gx != null && cellOccupant(b.gx, b.gz) === b) ? { gx: b.gx, gz: b.gz } : null;
+      if (_wasCell) buildCells.delete(cellKey(b.gx, b.gz));
       if (b === mortarMounted) dismountMortar();
       scene.remove(b.mesh);
       if (b.bar) scene.remove(b.bar);
       const i = builds.indexOf(b);
       if (i >= 0) builds.splice(i, 1);
+      // The neighbours have lost an arm's worth of company.
+      if (_wasCell) refreshPanelNeighbourhood(_wasCell.gx, _wasCell.gz);
     }
 
     // === Mortar ===
@@ -16749,6 +16975,7 @@
       minigun: '<rect x="6.4" y="6.6" width="4.6" height="10.8" rx="1"/><rect x="11" y="7.6" width="9.6" height="1.7" rx=".4"/><rect x="11" y="11" width="9.6" height="1.7" rx=".4"/><rect x="11" y="14.4" width="9.6" height="1.7" rx=".4"/><circle cx="4.6" cy="12" r="3"/>',
       flamer: '<rect x="2.6" y="6.6" width="5.2" height="9.4" rx="2.4"/><rect x="7.8" y="9.6" width="7.6" height="2.4" rx=".5"/><path d="M15.4 8.4c3 1 4.6 2.2 5.6 3.8-1.6-.6-2.8-.7-4-.4 1.2-1.2 1-2.4-1.6-3.4z"/><path d="M6 16h3.4l-1 2.6H5.4z"/>',
       chainsaw: '<rect x="2.4" y="7.6" width="7.4" height="6" rx="1.2"/><path d="M9.8 8.8h9.4a1.6 1.6 0 0 1 0 3.2H9.8z"/><path d="M10.6 7.8h1.6v1h-1.6zm2.6 0h1.6v1h-1.6zm2.6 0h1.6v1h-1.6z"/><path d="M4.6 13.6h3.6l-.8 3.8H4z"/>',
+      shovel: '<rect x="10.6" y="2.6" width="2.8" height="10" rx=".5"/><rect x="8.6" y="1.6" width="6.8" height="1.8" rx=".6"/><path d="M7.4 12.2h9.2l-1.1 5.2a3.8 3.8 0 0 1-3.5 2.8 3.8 3.8 0 0 1-3.5-2.8z"/>',
       barricade: '<path d="M3.6 4.8 5.9 3l14.5 14.5-2.3 1.9z"/><path d="M20.4 6.7 18.1 4.8 3.6 19.3l2.3 1.9z" opacity=".85"/><rect x="2" y="19.6" width="20" height="2.4" rx=".6"/>',
       wall: '<rect x="2.4" y="5" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="10.2" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="15.4" width="19.2" height="4.4" rx=".5"/>',
       sandbag: '<rect x="3" y="13.6" width="7.4" height="4.2" rx="2"/><rect x="11.4" y="13.6" width="7.4" height="4.2" rx="2"/><rect x="7.2" y="8.8" width="7.4" height="4.2" rx="2"/><rect x="3" y="18.8" width="16" height="2.4" rx=".6"/>',
@@ -19626,20 +19853,33 @@
         if (b.type === 'spikes' || b.type === 'mine') continue;
         const box = BUILD_BOX[b.type];
         if (box) {
-          // Oriented box: rotate into the panel's frame, push out of the nearer face.
-          // Neighbouring panels share an edge exactly, so a run has no slot in it.
-          const c = Math.cos(-b.yaw), sn = Math.sin(-b.yaw);
-          const rx = (x - b.x) * c - (z - b.z) * sn;
-          const rz = (x - b.x) * sn + (z - b.z) * c;
-          const ox = box.hx + entR - Math.abs(rx);
-          const oz = box.hz + entR - Math.abs(rz);
-          if (ox > 0 && oz > 0) {
-            let px = rx, pz = rz;
-            if (ox < oz) px = rx + (rx < 0 ? -ox : ox);
-            else pz = rz + (rz < 0 ? -oz : oz);
-            const cb = Math.cos(b.yaw), sb = Math.sin(b.yaw);
-            x = b.x + px * cb - pz * sb;
-            z = b.z + px * sb + pz * cb;
+          // A panel is a hub plus whichever arms are showing, so it collides as that
+          // shape: a box on the hub, and a box per visible arm reaching to the cell
+          // edge. Arms run along world axes, so each is a plain AABB. Two panels'
+          // facing arms share an edge exactly, which is what closes the slot you could
+          // slip through between neighbours.
+          const hub = box.hz + entR;
+          if (Math.abs(x - b.x) < hub && Math.abs(z - b.z) < hub) {
+            const ox = hub - Math.abs(x - b.x), oz = hub - Math.abs(z - b.z);
+            if (ox < oz) x = b.x + (x < b.x ? -hub : hub);
+            else z = b.z + (z < b.z ? -hub : hub);
+          }
+          const arms = b.mesh && b.mesh.userData.arms;
+          if (arms) {
+            const turns = ((Math.round(b.yaw / (Math.PI / 2)) % 4) + 4) % 4;
+            for (let d = 0; d < 4; d++) {
+              if (!arms[(d - turns + 4) % 4].visible) continue;
+              const [dx, dz] = PANEL_DIRS[d];
+              // Centre of the arm's span, half way from hub to cell edge.
+              const ax = b.x + dx * (BUILD_GRID / 4), az = b.z + dz * (BUILD_GRID / 4);
+              const hx = (dx ? BUILD_GRID / 4 : box.hz) + entR;
+              const hz = (dz ? BUILD_GRID / 4 : box.hz) + entR;
+              const ddx = x - ax, ddz = z - az;
+              if (Math.abs(ddx) >= hx || Math.abs(ddz) >= hz) continue;
+              const ox = hx - Math.abs(ddx), oz = hz - Math.abs(ddz);
+              if (ox < oz) x = ax + (ddx < 0 ? -hx : hx);
+              else z = az + (ddz < 0 ? -hz : hz);
+            }
           }
           continue;
         }

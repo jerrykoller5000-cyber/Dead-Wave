@@ -138,9 +138,16 @@ Everything you place lands in a 2 m cell on one fixed lattice covering the map, 
 cell, and `R` turns it a quarter turn at a time. Condition bars show on every structure while a
 build ghost is up, not only on ones already damaged.
 
-**Panels** — walls, sandbag walls and barricades — are built to the cell. Each spans it exactly and
-carries a post centred on the cell boundary, so two neighbours put a post in the same place and it
-reads as one continuous post; that is also what closes an L corner. A run takes the height of the
+The ground within 100 m of the spawn clearing is levelled flat (blended back into the real terrain
+over the 60 m beyond), so the area you actually build in does not refuse half its cells for being
+too rough. Only the river channel is left alone — flattening it would dam it.
+
+**Panels** — walls, sandbag walls and barricades — are a post at the cell centre with up to four
+arms reaching out to the cell edges, and only the arms facing a neighbour are shown. Two panels
+side by side each grow an arm toward the other and meet exactly on the shared edge; a corner grows
+two arms at right angles out of the same hub, so it is welded rather than two ends almost
+touching. Tees and crossroads fall out of the same rule, and four walls around a room close up
+into a house. A run takes the height of the
 piece it is laid against and the buried skirt swallows the ground falling away underneath, so a
 wall reads as one wall rather than a staircase; only a drop deeper than the skirt breaks the run.
 Walls carry a flat capping strip at a fixed height — that is the surface platforms will stand on.

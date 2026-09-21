@@ -50,7 +50,7 @@ toward the screen edge to swing further.
 | `E` | Whatever the prompt at the bottom of the screen says (below) |
 | Hold `B` | Build wheel, the same way. A quick tap enters or leaves build mode |
 | `Y` | Switch between one gun and two, once you own the pair (pistol, Uzi, revolver) |
-| `T` / `X` | Repair / sell the nearest build |
+| `T` / `X` | Repair / sell. While a build ghost is up these act on the cell you are pointing at, not the nearest piece |
 | `Enter` | During prep: skip the countdown and start the wave now |
 
 **`E` at the kiosk** opens it (`E` or `Esc` closes it; time stops while it is open). It trades mid-wave too.
@@ -59,8 +59,11 @@ toward the screen edge to swing further.
 leaves it, `T` shoulders it to carry it (no weapons while carrying, and you are slower), and
 `LMB` or `E` sets it down. You are rooted while manning it.
 
-**The build wheel** (hold `B`) holds all eleven: barricade, wall, sandbag, spikes, fuel drum,
-mine, decoy beacon, light, flame, heavy, mortar. Every slot is always in the same place whether or
+**The build wheel** (hold `B`) holds twelve: the shovel, then barricade, wall, sandbag, spikes,
+fuel drum, mine, decoy beacon, light, flame, heavy, mortar. The **shovel** ($4) is not a structure
+— it levels the cell you point at and blends it into the ground around it. Rough or sloping
+ground refuses a build; this is how you fix it, and it is the one entry that works on a cell that
+already has something standing in it. Every slot is always in the same place whether or
 not you own it, so buying a blueprint never moves the others; locked ones sit greyed with their
 price and say so if you pick them. The barricade is free, the rest need their plans from the
 kiosk, and placing still costs per piece.
