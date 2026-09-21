@@ -15299,7 +15299,9 @@
         // its head and flail at thin air instead of chewing the wall it is touching.
         if (zy != null) {
           const bot = b.mesh.position.y, top = bot + pieceHeight(b.type);
-          if (bot > zy + ZOMBIE_REACH_Y || top < zy - 0.3) continue;
+          // Nor anything it is standing on: a zombie on a roof used to claw at the
+          // floor under its own feet, and at the walls holding that floor up.
+          if (bot > zy + ZOMBIE_REACH_Y || top <= zy + 0.1) continue;
         }
         const d = Math.hypot(b.x - x, b.z - z);
         if (d < b.radius + zr + 0.35 && d < bd) { bd = d; best = b; }
