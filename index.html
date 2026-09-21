@@ -982,9 +982,25 @@
         masterGain = ctx.createGain();
         masterGain.gain.value = 1;
         masterGain.connect(ctx.destination);
+        // The mix. Everything used to share one SFX bus, so a rain bed, the wind and
+        // the river sat at the same level as — and in the same 2-4 kHz band as — the
+        // crack of a rifle, and nothing gave way when you fired. Now:
+        //   weapons  guns, impacts, reloads, blades, explosions — lifted, and they duck
+        //            the other two for a moment every time they fire (see duckForShot);
+        //   fx       zombies, the marine, UI;
+        //   ambience wind, rain, river, crickets, birds, thunder — pulled right down.
+        // All three meet at the user's SFX fader, then a gentle compressor glues them
+        // and keeps a grenade in a crowd from clipping.
+        glue = ctx.createDynamicsCompressor();
+        glue.threshold.value = -16; glue.knee.value = 10; glue.ratio.value = 3.5;
+        glue.attack.value = 0.004; glue.release.value = 0.2;
+        glue.connect(masterGain);
         sfxGain = ctx.createGain();
         sfxGain.gain.value = 0.5 * userSfx;
-        sfxGain.connect(masterGain);
+        sfxGain.connect(glue);
+        weapBus = ctx.createGain(); weapBus.gain.value = BUS_WEAP; weapBus.connect(sfxGain);
+        fxBus = ctx.createGain(); fxBus.gain.value = BUS_FX; fxBus.connect(sfxGain);
+        ambBus = ctx.createGain(); ambBus.gain.value = BUS_AMB; ambBus.connect(sfxGain);
         musicGain = ctx.createGain();
         musicGain.gain.value = 0.14;
         musicGain.connect(masterGain);
@@ -1003,6 +1019,36 @@
         return ctx;
       }
       let reverbNode = null, reverbGain = null;
+      let glue = null, weapBus = null, fxBus = null, ambBus = null;
+      const BUS_WEAP = 1.35, BUS_FX = 0.8, BUS_AMB = 0.5;
+      // Which bus the next playTone/playNoise lands on; set by onBus() around a voice.
+      let routeBus = null;
+      function outBus() { return routeBus || fxBus || sfxGain; }
+      // Momentary ducking when something fires: ambience dips hard and fast, the music
+      // (an <audio> element, see updateMusic) by musicDuck, both easing back after.
+      let musicShotDuck = 1;
+      function duckForShot(ambDepth, musicDepth, hold = 0.06) {
+        if (!ctx || !ambBus) return;
+        const t = ctx.currentTime;
+        try {
+          ambBus.gain.cancelScheduledValues(t);
+          ambBus.gain.setValueAtTime(Math.max(0.0001, ambBus.gain.value), t);
+          ambBus.gain.linearRampToValueAtTime(BUS_AMB * ambDepth, t + 0.012);
+          ambBus.gain.setTargetAtTime(BUS_AMB, t + 0.012 + hold, 0.35);
+        } catch (_) {}
+        musicShotDuck = Math.min(musicShotDuck, musicDepth);
+      }
+      function onBus(bus, fn, duck) {
+        return function (...args) {
+          const prev = routeBus;
+          routeBus = bus === 'weap' ? weapBus : (bus === 'amb' ? ambBus : fxBus);
+          try { return fn.apply(null, args); }
+          finally {
+            routeBus = prev;
+            if (duck) { const d = typeof duck === 'function' ? duck(...args) : duck; if (d) duckForShot(d[0], d[1], d[2]); }
+          }
+        };
+      }
       // User volume settings (pause > settings sliders), remembered per browser.
       let userSfx = 0.8, userMusic = 0.3;
       try {
@@ -1095,7 +1141,7 @@
         g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
         osc.connect(g);
         const out = pan ? panNode(g, pan) : g;
-        out.connect(sfxGain);
+        out.connect(outBus());
         sendToReverb(out, rev);
         osc.start(t0); osc.stop(t0 + dur + 0.02);
       }
@@ -1118,7 +1164,7 @@
         g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
         src.connect(filt); filt.connect(g);
         const out = pan ? panNode(g, pan) : g;
-        out.connect(sfxGain);
+        out.connect(outBus());
         sendToReverb(out, rev);
         src.start(t0); src.stop(t0 + dur + 0.02);
       }
@@ -1160,6 +1206,22 @@
             playTone({ freq: 240, type: 'sawtooth', dur: 0.055, vol: 0.1, slideTo: 95, rev: 0.25 });
             playTone({ freq: 160, type: 'square', dur: 0.03, vol: 0.05 });
             playNoise({ dur: 0.12, vol: 0.035, filterFreq: 600, filterType: 'lowpass', when: 0.015 });
+            break;
+          case 'ak':
+            // 7.62: lower and fatter than the M4's snap, with more push behind it.
+            playNoise({ dur: 0.045, vol: 0.16, filterFreq: 1700, filterType: 'bandpass', rev: 0.45 });
+            playNoise({ dur: 0.02, vol: 0.06, filterFreq: 4200, filterType: 'bandpass' });
+            playTone({ freq: 190, type: 'sawtooth', dur: 0.07, vol: 0.12, slideTo: 70, rev: 0.28 });
+            playTone({ freq: 75, type: 'sine', dur: 0.09, vol: 0.09, slideTo: 42 });
+            playNoise({ dur: 0.16, vol: 0.045, filterFreq: 520, filterType: 'lowpass', when: 0.015 });
+            break;
+          case 'aa12':
+            // Auto shotgun: the pump gun's boom, shorter and tighter so a burst stays a
+            // string of blasts instead of one long roar.
+            playNoise({ dur: 0.08, vol: 0.2, filterFreq: 600, filterType: 'lowpass', rev: 0.45 });
+            playTone({ freq: 95, type: 'sawtooth', dur: 0.1, vol: 0.13, slideTo: 38, rev: 0.25 });
+            playNoise({ dur: 0.045, vol: 0.09, filterFreq: 1900, filterType: 'bandpass', when: 0.01, rev: 0.35 });
+            playTone({ freq: 52, type: 'sine', dur: 0.14, vol: 0.09, slideTo: 30 });
             break;
           case 'uzi':
             // Light rapid smack.
@@ -1306,9 +1368,117 @@
         playNoise({ dur: 0.035, vol: 0.09, filterFreq: 1800, filterType: 'bandpass' });
         playTone({ freq: 240, type: 'square', dur: 0.04, vol: 0.06 });
       }
-      function zombieHit() {
-        playNoise({ dur: 0.05, vol: 0.1, filterFreq: 600, filterType: 'bandpass' });
-        playTone({ freq: 140, type: 'sawtooth', dur: 0.06, vol: 0.07, slideTo: 70 });
+      // Flesh hit: a thump you feel, a wet slap, and a little grit. It fires for every
+      // pellet and every flame tick, so it is rate-limited, and it scales and pans with
+      // where the body is. Heavier kinds hit heavier.
+      let fleshCd = 0;
+      function zombieHit(v = 1, pan = 0, heavy = false) {
+        const c = ensure();
+        if (!c || muted || v < 0.03) return;
+        if (c.currentTime < fleshCd) return;
+        fleshCd = c.currentTime + 0.028;
+        const k = heavy ? 1.35 : 1;
+        playTone({ freq: (heavy ? 95 : 120) + Math.random() * 20, type: 'sine', dur: 0.07, vol: 0.13 * v * k, slideTo: 48, pan });
+        playNoise({ dur: 0.05, vol: 0.12 * v * k, filterFreq: 950 + Math.random() * 300, filterType: 'bandpass', q: 1.3, pan });
+        playNoise({ dur: 0.07, vol: 0.05 * v, filterFreq: 420, filterType: 'lowpass', when: 0.012, pan });
+        playTone({ freq: 150, type: 'sawtooth', dur: 0.05, vol: 0.04 * v, slideTo: 70, pan });
+      }
+      // Bullet meeting the world. `surface`: dirt, wood, rock, metal, water, sand.
+      let impactCd = 0;
+      function bulletImpact(surface, v = 1, pan = 0) {
+        const c = ensure();
+        if (!c || muted || v < 0.03) return;
+        if (c.currentTime < impactCd) return;
+        impactCd = c.currentTime + 0.022;
+        const p = 0.9 + Math.random() * 0.25;
+        if (surface === 'rock' || surface === 'metal') {
+          const metal = surface === 'metal';
+          playNoise({ dur: 0.025, vol: 0.13 * v, filterFreq: (metal ? 4200 : 3200) * p, filterType: 'bandpass', q: 2, pan });
+          playTone({ freq: (metal ? 2400 : 1500) * p, type: 'triangle', dur: metal ? 0.18 : 0.05, vol: (metal ? 0.07 : 0.05) * v, slideTo: (metal ? 1900 : 900) * p, pan, rev: 0.3 });
+          // The odd ricochet whine off stone and steel.
+          if (Math.random() < (metal ? 0.35 : 0.22)) playTone({ freq: 2600 * p, type: 'sine', dur: 0.28, vol: 0.045 * v, slideTo: 900 * p, when: 0.015, pan, rev: 0.45 });
+        } else if (surface === 'wood') {
+          playTone({ freq: 210 * p, type: 'triangle', dur: 0.06, vol: 0.12 * v, slideTo: 120 * p, pan });
+          playNoise({ dur: 0.04, vol: 0.09 * v, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.5, pan });
+          playNoise({ dur: 0.06, vol: 0.035 * v, filterFreq: 2600 * p, filterType: 'bandpass', when: 0.01, pan });
+        } else if (surface === 'water') {
+          playNoise({ dur: 0.07, vol: 0.08 * v, filterFreq: 1300 * p, filterType: 'bandpass', pan });
+          playTone({ freq: 600 * p, type: 'sine', dur: 0.06, vol: 0.05 * v, slideTo: 1400 * p, when: 0.01, pan });
+        } else if (surface === 'sand') {
+          playNoise({ dur: 0.08, vol: 0.1 * v, filterFreq: 700 * p, filterType: 'lowpass', pan });
+          playNoise({ dur: 0.05, vol: 0.04 * v, filterFreq: 2400 * p, filterType: 'bandpass', when: 0.01, pan });
+        } else {
+          // dirt: a dull thud and the patter of what it kicked up
+          playTone({ freq: 90 * p, type: 'sine', dur: 0.06, vol: 0.1 * v, slideTo: 45, pan });
+          playNoise({ dur: 0.05, vol: 0.09 * v, filterFreq: 520 * p, filterType: 'lowpass', pan });
+          playNoise({ dur: 0.09, vol: 0.035 * v, filterFreq: 1900 * p, filterType: 'bandpass', when: 0.02, pan });
+        }
+      }
+      // A blade that lands: the zip of the edge and a wet chunk.
+      function knifeHit() {
+        playNoise({ dur: 0.05, vol: 0.14, filterFreq: 800, filterType: 'bandpass', q: 1.4, when: 0.03 });
+        playTone({ freq: 190, type: 'sawtooth', dur: 0.06, vol: 0.07, slideTo: 80, when: 0.03 });
+        playNoise({ dur: 0.08, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
+      }
+      // Gore: a limb or head coming away (small) or a body bursting (big).
+      let goreCd = 0;
+      function gore(v = 1, pan = 0, big = false) {
+        const c = ensure();
+        if (!c || muted || v < 0.04) return;
+        if (c.currentTime < goreCd) return;
+        goreCd = c.currentTime + (big ? 0.05 : 0.035);
+        const k = big ? 1.4 : 1;
+        playNoise({ dur: big ? 0.22 : 0.12, vol: 0.14 * v * k, filterFreq: 650 + Math.random() * 250, filterType: 'bandpass', q: 0.9, pan });
+        playTone({ freq: big ? 70 : 110, type: 'sine', dur: big ? 0.2 : 0.1, vol: 0.11 * v * k, slideTo: 38, pan });
+        playNoise({ dur: 0.06, vol: 0.06 * v, filterFreq: 1800, filterType: 'bandpass', when: 0.02, pan });
+        // spatter landing
+        const n = big ? 5 : 2;
+        for (let i = 0; i < n; i++) playNoise({ dur: 0.025, vol: (0.02 + Math.random() * 0.025) * v, filterFreq: 900 + Math.random() * 1400, filterType: 'bandpass', when: 0.12 + Math.random() * 0.35, pan: Math.max(-1, Math.min(1, pan + (Math.random() - 0.5) * 0.6)) });
+      }
+      function grenadeThrow() {
+        playTone({ freq: 1500, type: 'square', dur: 0.02, vol: 0.05 });                       // pin
+        playNoise({ dur: 0.18, vol: 0.09, filterFreq: 1300, filterType: 'bandpass', when: 0.05 }); // throw whoosh
+        playTone({ freq: 900, type: 'triangle', dur: 0.03, vol: 0.04, when: 0.06 });          // spoon flying off
+      }
+      let bounceCd = 0;
+      function grenadeBounce(v = 1, pan = 0) {
+        const c = ensure();
+        if (!c || muted || v < 0.04) return;
+        if (c.currentTime < bounceCd) return;
+        bounceCd = c.currentTime + 0.08;
+        playTone({ freq: 700 + Math.random() * 200, type: 'triangle', dur: 0.05, vol: 0.06 * v, slideTo: 450, pan });
+        playNoise({ dur: 0.04, vol: 0.05 * v, filterFreq: 500, filterType: 'lowpass', pan });
+      }
+      // Footfall of something heavy: brute, demon, colossus.
+      let stompCd = 0;
+      function heavyStep(v = 1, pan = 0, huge = false) {
+        const c = ensure();
+        if (!c || muted || v < 0.05) return;
+        if (c.currentTime < stompCd) return;
+        stompCd = c.currentTime + 0.06;
+        playTone({ freq: huge ? 42 : 58, type: 'sine', dur: huge ? 0.3 : 0.16, vol: (huge ? 0.2 : 0.12) * v, slideTo: huge ? 26 : 34, pan });
+        playNoise({ dur: huge ? 0.2 : 0.1, vol: (huge ? 0.1 : 0.06) * v, filterFreq: 240, filterType: 'lowpass', pan, rev: huge ? 0.3 : 0 });
+      }
+      // A zombie clawing up out of the ground nearby: earth tearing and a rasp.
+      let emergeCd = 0;
+      function emerge(v = 1, pan = 0) {
+        const c = ensure();
+        if (!c || muted || v < 0.05) return;
+        if (c.currentTime < emergeCd) return;
+        emergeCd = c.currentTime + 0.25;
+        playNoise({ dur: 0.5, vol: 0.08 * v, filterFreq: 330, filterType: 'lowpass', attack: 0.08, pan });
+        for (let i = 0; i < 3; i++) playNoise({ dur: 0.04, vol: 0.04 * v, filterFreq: 1200 + Math.random() * 900, filterType: 'bandpass', when: 0.1 + i * 0.12 + Math.random() * 0.05, pan });
+        playTone({ freq: 85 + Math.random() * 25, type: 'sawtooth', dur: 0.45, vol: 0.05 * v, slideTo: 60, when: 0.25, attack: 0.08, pan, rev: 0.3 });
+      }
+      // The kiosk hatch: a roll-up shutter going up (open) or down (close).
+      function shutter(open) {
+        for (let i = 0; i < 6; i++) playNoise({ dur: 0.025, vol: 0.05, filterFreq: 1700 + i * (open ? 120 : -90), filterType: 'bandpass', when: i * 0.04 });
+        playTone({ freq: open ? 180 : 140, type: 'square', dur: 0.05, vol: 0.05, when: 0.25, slideTo: open ? 120 : 90 });
+      }
+      function medkit() {
+        playNoise({ dur: 0.12, vol: 0.08, filterFreq: 2800, filterType: 'bandpass' });            // velcro
+        playNoise({ dur: 0.35, vol: 0.05, filterFreq: 5000, filterType: 'highpass', when: 0.15, attack: 0.05 }); // spray / hiss
+        playTone({ freq: 640, type: 'sine', dur: 0.12, vol: 0.05, when: 0.5, slideTo: 880 });
       }
       // Idle horde groans: a low sawtooth wobble with a breathy noise tail, pitched
       // per body so a crowd doesn't chorus.
@@ -1348,9 +1518,18 @@
         playTone({ freq: f * 1.5, type: 'triangle', dur: 0.2, vol: 0.09, when: 0.1 });
         playTone({ freq: f * 2, type: 'square', dur: 0.14, vol: 0.04, when: 0.2 });
       }
-      function zombieDeath() {
-        playNoise({ dur: 0.15, vol: 0.14, filterFreq: 400, filterType: 'lowpass' });
-        playTone({ freq: 100, type: 'sawtooth', dur: 0.18, vol: 0.09, slideTo: 45 });
+      // Death: the last rattle, then the body hitting the ground.
+      let deathCd = 0;
+      function zombieDeath(v = 1, pan = 0, heavy = false) {
+        const c = ensure();
+        if (!c || muted || v < 0.03) return;
+        if (c.currentTime < deathCd) return;
+        deathCd = c.currentTime + 0.03;
+        playNoise({ dur: 0.15, vol: 0.13 * v, filterFreq: 400, filterType: 'lowpass', pan });
+        playTone({ freq: 100, type: 'sawtooth', dur: 0.18, vol: 0.08 * v, slideTo: 45, pan });
+        const fall = heavy ? 0.42 : 0.3;
+        playTone({ freq: heavy ? 55 : 72, type: 'sine', dur: heavy ? 0.22 : 0.12, vol: (heavy ? 0.16 : 0.1) * v, slideTo: 32, when: fall, pan });
+        playNoise({ dur: 0.1, vol: 0.07 * v, filterFreq: 300, filterType: 'lowpass', when: fall, pan });
       }
       function waveStart(boss) {
         // A long horn over a deep hit; the boss version drops a fifth and doubles up.
@@ -1446,7 +1625,10 @@
         fallen: ['end_fallen'],
         dawn:   ['end_dawn']
       };
-      const MOOD_GAIN = { menu: 0.75, day: 0.7, night: 0.7, fight: 0.95, boss: 1.0, fallen: 0.85, dawn: 0.85 };
+      // Fight and boss came down (0.95 / 1.0): the score should drive a fight, not sit
+      // on top of the guns.
+      const MOOD_GAIN = { menu: 0.75, day: 0.7, night: 0.7, fight: 0.78, boss: 0.85, fallen: 0.85, dawn: 0.85 };
+      const deckBase = [0, 0];      // per-deck volume before the momentary shot duck
       const MUSIC_VOL = 0.3;
       const decks = [null, null];   // two <audio> elements
       let deckIdx = 0;              // which deck is "front"
@@ -1479,6 +1661,7 @@
         el.src = src;
         el.loop = false;
         el.volume = Math.min(1, startGain);
+        deckBase[i] = el.volume;
         const p = el.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
       }
@@ -1523,14 +1706,19 @@
         }
         const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.6 : 1) * (state.shop ? 0.8 : 1);
         duck += (targetDuck - duck) * Math.min(1, dt * 2.5);
+        // Shot duck: set instantly by duckForShot, eased back here (~0.6 s). Applied
+        // after the crossfade slew, which is far too slow to follow a gunshot.
+        musicShotDuck += (1 - musicShotDuck) * Math.min(1, dt * 1.8);
         for (let i = 0; i < 2; i++) {
           const el = decks[i];
           if (!el) continue;
           const goal = wantGain[i] * MUSIC_VOL * userMusic * (MOOD_GAIN[mood] || 0.8) * duck;
-          const cur = el.volume;
+          const cur = deckBase[i];
           let v = cur + Math.sign(goal - cur) * Math.min(Math.abs(goal - cur), fadeSpeed * MUSIC_VOL * dt);
           v = Math.max(0, Math.min(1, v));
-          if (Math.abs(v - cur) > 0.0005) el.volume = v;
+          deckBase[i] = v;
+          const out = Math.max(0, Math.min(1, v * musicShotDuck));
+          if (Math.abs(out - el.volume) > 0.0005) el.volume = out;
           if (i !== deckIdx && v <= 0.0006 && !el.paused) { try { el.pause(); } catch (_) {} }
         }
       }
@@ -1628,7 +1816,7 @@
         osc2.connect(filt);
         if (buf) noise.connect(filt);
         filt.connect(gain);
-        gain.connect(sfxGain);
+        gain.connect(weapBus || sfxGain);
         osc.start(t0);
         osc2.start(t0);
         if (buf) noise.start(t0);
@@ -1735,7 +1923,7 @@
         gain.gain.setValueAtTime(0.0001, t0);
         if (buf) noise.connect(filt);
         filt.connect(gain);
-        gain.connect(sfxGain);
+        gain.connect(ambBus || sfxGain);
         if (buf) noise.start(t0);
         rainLoop = { noise, filt, gain };
       }
@@ -1743,7 +1931,9 @@
         amount = Math.max(0, Math.min(1, +amount || 0));
         if (!rainLoop || !ctx) return;
         const t = ctx.currentTime;
-        const vol = muted ? 0.0001 : 0.018 + amount * 0.08;
+        // Was 0.018 + 0.08: a heavy shower was a wall of 3 kHz noise right where a
+        // gunshot's crack lives. It sits under the fight now (and on the ducked bus).
+        const vol = muted ? 0.0001 : 0.012 + amount * 0.048;
         try {
           rainLoop.gain.gain.setTargetAtTime(vol, t, 0.45);
           rainLoop.filt.frequency.setTargetAtTime(2400 + amount * 1600, t, 0.6);
@@ -1776,7 +1966,7 @@
           const filt = c.createBiquadFilter();
           filt.type = filterType; filt.frequency.value = freq; filt.Q.value = q;
           const g = c.createGain(); g.gain.value = 0.0001;
-          src.connect(filt); filt.connect(g); g.connect(sfxGain);
+          src.connect(filt); filt.connect(g); g.connect(ambBus || sfxGain);
           if (buf) src.start(t0);
           return { src, filt, g, vol };
         };
@@ -1793,7 +1983,7 @@
           const am = c.createGain(); am.gain.value = 0.5;
           trill.connect(tg); tg.connect(am.gain);
           const g = c.createGain(); g.gain.value = 0.0001;
-          osc.connect(am); am.connect(g); g.connect(sfxGain);
+          osc.connect(am); am.connect(g); g.connect(ambBus || sfxGain);
           osc.start(t0); trill.start(t0);
           crickets.push({ osc, trill, g, vol: 0.012, on: false, timer: Math.random() * 3 });
         }
@@ -1822,7 +2012,11 @@
           setG(cr, (st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) : 0.0001, 0.25);
         }
         if (muted) return;
-        // one-shots
+        // one-shots, all on the ambience bus
+        const prevBus = routeBus; routeBus = ambBus;
+        try { ambienceOneShots(st, dt); } finally { routeBus = prevBus; }
+      }
+      function ambienceOneShots(st, dt) {
         if (!st.night && st.rain < 0.5) {
           amb.birdT -= dt;
           if (amb.birdT <= 0) { birdChirp(); amb.birdT = 3 + Math.random() * 9; }
@@ -1875,20 +2069,40 @@
         playNoise({ dur: 1.2, vol: 0.03, filterFreq: 600, filterType: 'lowpass', attack: 0.5, rev: 0.8 });
       }
 
+      // Duck depths [ambience, music, hold s] per shot: bigger guns push the rest of the
+      // mix further down. Explosions hardest of all.
+      const SHOT_DUCK = {
+        pistol: [0.5, 0.78], uzi: [0.55, 0.8], revolver: [0.35, 0.62], m4: [0.45, 0.7], ak: [0.4, 0.66],
+        minigun: [0.5, 0.72], shotgun: [0.3, 0.58, 0.08], aa12: [0.35, 0.62], sniper: [0.25, 0.52, 0.12],
+        launcher: [0.45, 0.7]
+      };
+      const BIG = [0.18, 0.42, 0.25];
+      const W = (fn, duck) => onBus('weap', fn, duck);
+      const A = (fn) => onBus('amb', fn);
       return {
         unlock, toggleMute, isMuted, setMuted,
-        fire, fireWeapon, emptyClick, reloadStart, reloadDone, slideRack,
-        shotgunPump, revolverCylinder, revolverSpin, launcherDrum, launcherShellInsert,
-        jump, nvgClick, coin, leafHit, treeFell, trunkBump,
+        fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
+        emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
+        shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
+        launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
+        jump, nvgClick, coin, leafHit: W(leafHit), treeFell, trunkBump,
         win, resetBlip, noteSpin, startMusic, stopMusic,
-        place, invalid, turretShot, zombieHit, zombieDeath, groan, headshot, dodgeRoll, streak, footstep, heartbeat,
-        waveStart, expand, gameOver, playerHurt, grenadeBoom, knifeSwing, macheteSwing, macheteChop, armorDon, armorHit, rockBreak, brassTink, magThud,
-        chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit, isChainsawRunning,
-        spit, acidHit, scream, bossSlam, bossRoar, spikeSnap, flameBurst,
+        place, invalid, turretShot: W(turretShot, [0.7, 0.88]), zombieHit: W(zombieHit), zombieDeath: W(zombieDeath),
+        groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
+        waveStart, expand, gameOver, playerHurt, grenadeBoom: W(grenadeBoom, BIG), knifeSwing: W(knifeSwing),
+        macheteSwing: W(macheteSwing), macheteChop: W(macheteChop), armorDon, armorHit, rockBreak: W(rockBreak),
+        brassTink: W(brassTink), magThud: W(magThud),
+        chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit: W(chainsawGrit), isChainsawRunning,
+        spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]),
         crateLand, pickup, repairClank, sellChime,
+        bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
+        grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit,
+        // Read-only view of the mix, for tests and the perf overlay.
+        mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
         rainStart, rainStop, rainSetIntensity, isRainRunning,
         updateMusic, musicState, setMood, setSfxVolume, setMusicVolume, getVolumes,
-        ambienceStart, updateAmbience, birdChirp, owlHoot, thunder, dayCleared, distantGroan
+        ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), dayCleared,
+        distantGroan: A(distantGroan)
       };
     })();
 
@@ -8261,6 +8475,7 @@
     }
 
     function spawnGibBurst(x, y, z, skinColor, eyeColor, dirX, dirZ, style = 'explosive') {
+      { const sa = sndAt(x, z); AudioSys.gore(sa.v, sa.pan, style === 'explosive'); }
       const outward = Math.hypot(dirX, dirZ) > 0.05;
       const ox = outward ? dirX / Math.hypot(dirX, dirZ) : 0;
       const oz = outward ? dirZ / Math.hypot(dirX, dirZ) : 0;
@@ -8393,6 +8608,7 @@
     }
 
     function detachZombiePart(z, partKey, dirX, dirZ) {
+      if (z && z.mesh) { const sa = sndAt(z.mesh.position.x, z.mesh.position.z); AudioSys.gore(sa.v, sa.pan, false); }
       if (!z || !z.mesh) return false;
       if (!z.partsLost) z.partsLost = emptyPartsLost();
       if (z.partsLost[partKey]) return false;
@@ -13756,6 +13972,7 @@
       }
       shopOpen = true;
       paused = true;
+      AudioSys.shutter(true);
       pauseEl.classList.remove('show');
       shopEl.classList.add('show');
       syncReticleVisibility();
@@ -13769,6 +13986,7 @@
     function closeShop() {
       if (!shopOpen) return;
       shopOpen = false;
+      AudioSys.shutter(false);
       shopEl.classList.remove('show');
       paused = false;
       syncReticleVisibility();
@@ -17176,6 +17394,7 @@
       mesh.userData.gibbed = false;
       if (riseDur > 0) {
         const gy = sampleHeight(x, z);
+        { const sa = sndAt(x, z, 28); if (sa.v > 0.05) AudioSys.emerge(sa.v, sa.pan); }
         mesh.position.y = gy - (zom.hitH || 1.5) * 1.05;
         spawnDust(x, gy, z, 4);
         spawnChunks(x, gy + 0.1, z, 0x5a4a34, 5, 2.5);
@@ -17511,7 +17730,10 @@
         const cash = Math.round((z.cashDrop != null ? z.cashDrop : (z.reward || 2)) * mult * cashMult() * (bloodMoon ? 1.5 : 1));
         awardCash(px, pz, cash);
         if (Math.random() < medDropChance(z.typeKey)) spawnMedDrop(px + 0.6, pz + 0.4);
-        AudioSys.zombieDeath();
+        {
+          const sa = sndAt(px, pz);
+          AudioSys.zombieDeath(sa.v, sa.pan, z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus');
+        }
         if (z.typeKey === 'colossus') {
           showBanner('COLOSSUS DOWN', '+$' + cash + ' bounty', 3.2, '#ffd24a');
           addShake(0.45);
@@ -17943,7 +18165,7 @@
       if (playerHp >= PLAYER_MAX_HP - 0.5) { AudioSys.invalid(); return; }
       medkits -= 1;
       playerHp = Math.min(PLAYER_MAX_HP, playerHp + PLAYER_MAX_HP * 0.6);
-      AudioSys.pickup();
+      AudioSys.medkit();
       updateHpHud();
       updateAmmoHud();
     }
@@ -19973,6 +20195,7 @@
       if (grenades <= 0) { AudioSys.emptyClick(); return; }
       grenades -= 1;
       grenadeCd = 0.6;
+      AudioSys.grenadeThrow();
       updateAmmoHud();
       const origin = player.position.clone();
       origin.y += getStanceEyeY();
@@ -20183,6 +20406,7 @@
               exploded = true;
             } else {
               g.pos.y = gh;
+              if (g.vy < -1.5) { const sa = sndAt(g.pos.x, g.pos.z, 30); AudioSys.grenadeBounce(sa.v * Math.min(1, -g.vy / 6), sa.pan); }
               // Grenades bounce off the surface they actually hit, so they roll into
               // hollows and kick sideways off banks.
               const v = reflectOnTerrain(g.pos.x, g.pos.z, g.vx, g.vy, g.vz, 0.34, 0.72);
@@ -20242,7 +20466,8 @@
       // sound was the whoosh it made on a miss too — so a swing that actually killed
       // something read exactly like one that hit air.
       if (hits) {
-        AudioSys.macheteChop();
+        // The knife gets its own lighter stab; the heavy chop is the machete's.
+        if (macheteOwned) AudioSys.macheteChop(); else AudioSys.knifeHit();
         addShake(macheteOwned ? 0.08 : 0.05);
       }
       meleeBugs(reach, fx, fz, bs.arc);
@@ -20613,6 +20838,20 @@
       return z.knockSign * flat * k;
     }
 
+    // Volume and pan for a sound at a world point, heard from the marine: full up
+    // close, fading to nothing at `range`, panned along the screen's own left-right
+    // (screen-right is world (-cos yaw, sin yaw)). Shared result object; read it at once.
+    const _snd = { v: 0, pan: 0 };
+    function sndAt(x, z, range = 45) {
+      const dx = x - player.position.x, dz = z - player.position.z;
+      const d = Math.hypot(dx, dz);
+      const f = Math.max(0, 1 - d / range);
+      _snd.v = Math.pow(f, 1.6);
+      const side = d > 0.01 ? (dx * -Math.cos(camYawCurrent) + dz * Math.sin(camYawCurrent)) / d : 0;
+      _snd.pan = Math.max(-0.85, Math.min(0.85, side * Math.min(1, d / 5)));
+      return _snd;
+    }
+
     function damageZombie(z, amount, info = null) {
       if (!z.alive) return;
       const kind = (info && info.kind) || 'generic';
@@ -20629,7 +20868,10 @@
       if (z.partsLost && z.partsLost.head) dmg *= 1.15;
 
       z.hp -= dmg;
-      AudioSys.zombieHit();
+      {
+        const sa = sndAt(z.mesh.position.x, z.mesh.position.z);
+        AudioSys.zombieHit(sa.v, sa.pan, kind === 'pellet' || kind === 'explosive' || z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus');
+      }
 
       const hitH = z.hitH || 1.4;
       // Approximate upper hit from projectile aim height if provided
@@ -20875,6 +21117,13 @@
             if (t !== null && t < hitBT) { hitBT = t; hitB = b; }
           }
           if (hitB) {
+            {
+              const sa = sndAt(hitB.x, hitB.z);
+              const tp = hitB.type;
+              const surf = (tp === 'sandbag') ? 'sand'
+                : (tp === 'light' || tp === 'flame' || tp === 'heavy' || tp === 'mortar' || tp === 'wire' || tp === 'railing') ? 'metal' : 'wood';
+              AudioSys.bulletImpact(surf, sa.v, sa.pan);
+            }
             // Stopped, not chewed: a round that meets your own wall ends there and
             // leaves it as it was.
             spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * hitBT, p.prev.y + (p.pos.y - p.prev.y) * hitBT,
@@ -20892,6 +21141,7 @@
           const t = segmentHitsBox(p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
             house.group.position.x, hy0 + hh / 2, house.group.position.z, house.half, hh / 2, house.half);
           if (t !== null) {
+            { const sa = sndAt(p.pos.x, p.pos.z); AudioSys.bulletImpact('wood', sa.v, sa.pan); }
             spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * t, p.prev.y + (p.pos.y - p.prev.y) * t,
                         p.prev.z + (p.pos.z - p.prev.z) * t, 0x7a5a3a, 2, 2);
             p.hit = true;
@@ -20921,6 +21171,7 @@
           );
           if (t !== null && t < hitRT) { hitRT = t; hitRock = rock; }
         }
+        if (hitRock) { const sa = sndAt(hitRock.x, hitRock.z); AudioSys.bulletImpact('rock', sa.v, sa.pan); }
         if (hitRock && !p.fromTurret) {
           damageRock(hitRock, p.damage * 0.5, p.dir.x, p.dir.z);
           p.hit = true;
@@ -20968,6 +21219,7 @@
           }
           }
         }
+        if (hitTree) { const sa = sndAt(hitTree.x, hitTree.z); AudioSys.bulletImpact('wood', sa.v * 0.8, sa.pan); }
         if (hitTree && !p.fromTurret) {
           const hx = p.prev.x + (p.pos.x - p.prev.x) * hitT;
           const hz = p.prev.z + (p.pos.z - p.prev.z) * hitT;
@@ -20992,6 +21244,7 @@
           );
           if (t !== null) {
             spawnChunks(p.pos.x, p.pos.y, p.pos.z, 0x6b5a3e, 2, 2);
+            { const sa = sndAt(ws.x, ws.z); AudioSys.bulletImpact('wood', sa.v, sa.pan); }
             if (ws.landmark && !p.fromTurret) damageLandmark(ws.landmark, p.damage);
             hitSolid = true;
             break;
@@ -21006,12 +21259,14 @@
         // Water Impact. Bullets splash and ripple when breaking surface.
         const wl = waterLevelAt(p.pos.x, p.pos.z);
         if (wl !== null && p.pos.y <= wl && p.prev.y > wl) {
+          { const sa = sndAt(p.pos.x, p.pos.z); AudioSys.bulletImpact('water', sa.v, sa.pan); }
           spawnSplash(p.pos.x, wl + 0.02, p.pos.z, 3, 0.45);
           spawnRipple(p.pos.x, wl, p.pos.z, 0.4, 0.8);
         }
 
         // Terrain. Bullets used to fly straight through hills.
         if (p.pos.y <= sampleHeight(p.pos.x, p.pos.z)) {
+          if (waterLevelAt(p.pos.x, p.pos.z) === null) { const sa = sndAt(p.pos.x, p.pos.z); AudioSys.bulletImpact('dirt', sa.v, sa.pan); }
           spawnChunks(p.pos.x, p.pos.y + 0.05, p.pos.z, 0x6b6250, 2, 2);
           releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
@@ -22478,10 +22733,20 @@
             if (pitch === 0) z.mesh.rotation.order = 'XYZ';
           }
         }
-        let cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'leaper' ? 12 : (z.typeKey === 'spider' ? 13 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'colossus' ? 3.8 : (z.typeKey === 'military' ? 7.5 : 7)))));
+        let cadence = z.typeKey === 'feral' ? 11 : (z.typeKey === 'leaper' ? 12 : (z.typeKey === 'spider' ? 13 : (z.typeKey === 'brute' ? 5.5 : (z.typeKey === 'demon' ? 6 : (z.typeKey === 'colossus' ? 3.8 : (z.typeKey === 'military' ? 7.5 : 7))))));
         if (z.crawling) cadence *= 0.55;
+        if (z.chargeT > 0) cadence *= 2.4;
         cadence *= z.gaitMul || 1;
         if (moving) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
+        // Heavy things you hear coming: a footfall every half stride.
+        if (moving && (z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus')) {
+          const fi = Math.floor((z.walkPhase || 0) / Math.PI);
+          if (fi !== z.footIdx) {
+            z.footIdx = fi;
+            const sa = sndAt(z.mesh.position.x, z.mesh.position.z, z.typeKey === 'colossus' ? 55 : 32);
+            if (sa.v > 0.05) AudioSys.heavyStep(sa.v, sa.pan, z.typeKey === 'colossus');
+          }
+        }
         z.bob = (z.bob || 0) + dt * (z.typeKey === 'brute' ? 4 : 6);
         const phase = z.walkPhase || 0;
         const swing = Math.sin(phase);

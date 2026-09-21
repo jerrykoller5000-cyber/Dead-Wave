@@ -244,6 +244,29 @@ directions, so they stay on the rim however far out the horde is.
 **`Tab`** opens the full map: the whole world, north-up, with the minimap's reach drawn as a
 dashed ring around you. `Tab` or `Esc` closes it. It does not pause the game.
 
+## Sound
+
+**The mix.** Gunfire and what it hits sit on top. Sound runs on three buses — weapons (guns,
+impacts, reloads, blades, explosions), effects (zombies, the marine, UI) and ambience (wind, rain,
+river, crickets, birds, thunder) — into the SFX volume and a gentle compressor that glues them and
+keeps a grenade in a crowd from clipping. The weapons bus is lifted and the ambience bus is pulled
+well down; rain in particular used to be a wall of noise in exactly the band a gunshot's crack
+lives in. Every shot also ducks the ambience and the music for a moment — a pistol a little, a
+shotgun or sniper a lot, an explosion hardest — and they ease back over about half a second, so a
+fight in a storm still leads with the guns. The music sits a little lower during waves.
+
+**What you hear.** Each gun has its own voice (the AK-47 and AA-12 used to share a generic crack).
+Bullets sound off whatever they hit: a thud and patter in dirt, a knock in wood (trees, your
+walls, the cabin), a tick and the odd ricochet whine off rock, a ping off metal turrets, a soft
+thump in sandbags, a plip in water. Hits on zombies have a proper flesh thump, heavier for
+brutes, demons, the colossus and shotgun pellets; limbs and heads coming off squelch, bodies
+bursting more so; a death ends with the body hitting the ground. The knife has its own stab (the
+heavy chop is the machete's). Brutes, demons and the colossus have footfalls you hear coming —
+demons' quicken into a gallop when they charge — and zombies clawing out of the ground nearby
+tear the earth up audibly. Grenades have a pin and a throw and clink when they bounce. The kiosk
+hatch rattles its shutter open and shut; a medkit is velcro and a hiss. Everything positional is
+panned left/right as the screen sees it and fades with distance.
+
 ## Ambience
 
 Wind through the trees (louder in the forest, gusting), the river when you are near it, birds by
