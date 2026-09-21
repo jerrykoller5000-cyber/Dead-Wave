@@ -12,7 +12,7 @@ square on the maps).
 | Ammo | Held by calibre, not by gun. Only sold here. "Restock everything" tops up every calibre you are short of, cheapest first |
 | Gear | Night vision, laser, flashlight, and armor |
 | Upgrades | Extended mags (+50%, except revolver and launcher), bigger chainsaw tank, machete, and a second gun for the pistol, Uzi or revolver |
-| Perks | Vitality, Stopping power, Quick hands, Fleet foot, Scavenger, Grenadier. 5 ranks each |
+| Perks | Vitality (+20 HP), Stopping power (+12% damage), Quick hands (12% faster reloads), Fleet foot (+5% speed), Scavenger (+12% cash), Grenadier (+1 grenade and +8% blast radius). 5 ranks each |
 | Blueprints | A build type only appears in the `B` menu once its plans are bought |
 
 The ammo HUD reads `loaded / mag · N spare`. Out of spares mid-wave means out of ammo, so plan for it.

@@ -13802,9 +13802,12 @@
       { key: 'vitality', name: 'Vitality', desc: '+20 max health per rank (heals to full)', base: 45 },
       { key: 'power', name: 'Stopping power', desc: '+12% damage from every weapon per rank', base: 60 },
       { key: 'hands', name: 'Quick hands', desc: 'Reloads and pump/cylinder work 12% faster per rank', base: 50 },
-      { key: 'legs', name: 'Fleet foot', desc: '+7% walk and run speed per rank', base: 50 },
-      { key: 'scavenger', name: 'Scavenger', desc: '+20% cash from kills per rank', base: 65 },
-      { key: 'grenadier', name: 'Grenadier', desc: '+1 grenade capacity per rank, and a fresh grenade each new day', base: 55 }
+      // Fleet foot was +7%/rank: at +35% you simply outwalked the horde, which made it
+      // the one mandatory perk. Scavenger was +20%/rank: on the 10x horde each rank
+      // paid for itself inside a day and the economy pass would have been for nothing.
+      { key: 'legs', name: 'Fleet foot', desc: '+5% walk and run speed per rank', base: 50 },
+      { key: 'scavenger', name: 'Scavenger', desc: '+12% cash from kills per rank', base: 65 },
+      { key: 'grenadier', name: 'Grenadier', desc: '+1 grenade capacity and +8% blast radius per rank, and a fresh grenade each new day', base: 55 }
     ];
     const PERK_MAX = 5;
     const perkLevels = { vitality: 0, power: 0, hands: 0, legs: 0, scavenger: 0, grenadier: 0 };
@@ -13812,8 +13815,8 @@
     function perkCost(p) { return Math.round(p.base * (1 + perkLvl(p.key) * 0.85)); }
     function dmgMult() { return 1 + perkLvl('power') * 0.12; }
     function reloadMult() { return 1 / (1 + perkLvl('hands') * 0.12); }
-    function speedMult() { return 1 + perkLvl('legs') * 0.07; }
-    function cashMult() { return 1 + perkLvl('scavenger') * 0.2; }
+    function speedMult() { return 1 + perkLvl('legs') * 0.05; }
+    function cashMult() { return 1 + perkLvl('scavenger') * 0.12; }
     function maxGrenades() { return MAX_GRENADES + perkLvl('grenadier'); }
     function resetPerks() { for (const k of Object.keys(perkLevels)) perkLevels[k] = 0; PLAYER_MAX_HP = 100; }
     const shopEl = document.getElementById('shop');
@@ -20409,7 +20412,10 @@
       const shakeDist = Math.hypot(x - player.position.x, z - player.position.z);
       addShake(Math.max(0, 0.95 - shakeDist * 0.07));
       // AoE damage — shell uses launcher st.damage; Key-G throwable keeps legacy 55
-      const AOE = 4.5;
+      // Grenadier widens your own thrown grenades (not shells or bomber blasts):
+      // +8% radius per rank, which at the damage falloff below is worth more than it
+      // sounds — the perk was a dead pick next to raw damage.
+      const AOE = 4.5 * ((g.damage == null) ? 1 + perkLvl('grenadier') * 0.08 : 1);
       const baseDmg = (g.damage != null) ? g.damage : 55 * dmgMult();
       // Your own blast hurts you too. Stand back, or roll.
       if (shakeDist < AOE && Math.abs(player.position.y - y) < 3) damagePlayer(Math.round(Math.max(6, baseDmg * 0.55 * (1 - shakeDist / AOE))));
