@@ -244,6 +244,21 @@ directions, so they stay on the rim however far out the horde is.
 **`Tab`** opens the full map: the whole world, north-up, with the minimap's reach drawn as a
 dashed ring around you. `Tab` or `Esc` closes it. It does not pause the game.
 
+## Gore
+
+Bullets bleed a body where they land; heavy rounds (anything doing 14+, and some shotgun
+pellets) also go through — a spray out of the far side and a streak of spatter on the ground
+behind. A headshot bursts in a puff of red mist as well as pieces. A severed limb or head pumps
+blood from the stump in weakening pulses for a couple of seconds; a zombie that is badly hurt or
+missing parts leaves a trail of drips as it walks. Droplets that reach the ground leave a mark
+where they land, and every mark dries from wet red to dark brown and stays about 45 s before
+shrinking away, so a fight leaves the ground it happened on stained. Kill something at arm's
+length and some of it lands on you: a few blots at the screen edges, never over the middle.
+
+It is cheap: all the droplets are one draw call and all the ground marks another (they used to be
+a mesh each, ~140 draws, and a mark lasted 4 s), so there can be up to 260 droplets and 360 marks
+at once for less than the old cost.
+
 ## Sound
 
 **The mix.** Gunfire and what it hits sit on top. Sound runs on three buses — weapons (guns,

@@ -559,6 +559,14 @@
       position: fixed; inset: 0; pointer-events: none; z-index: 3; opacity: 0;
       background: radial-gradient(ellipse at center, rgba(120,0,0,0) 48%, rgba(150,10,10,0.35) 82%, rgba(120,0,0,0.6) 100%);
     }
+    /* Close-kill spatter: a few blots near the screen edges, never over the middle
+       where you are aiming. Built and faded in splatScreen(). */
+    #bloodScreen { position: fixed; inset: 0; pointer-events: none; z-index: 3; opacity: 0; }
+    #bloodScreen i {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 45% 40%, rgba(120,6,4,.85) 0 35%, rgba(90,4,3,.55) 55%, rgba(60,0,0,0) 72%);
+      filter: blur(0.6px);
+    }
     #hurtFlash {
       position: fixed; inset: 0; pointer-events: none; z-index: 3; opacity: 0;
       background: radial-gradient(ellipse at center,
@@ -610,6 +618,7 @@
   <div id="nvgOverlay"></div>
   <div id="vignette"></div>
   <div id="hurtFlash"></div>
+  <div id="bloodScreen" aria-hidden="true"></div>
   <div id="lowHp"></div>
   <div id="scopeOverlay" aria-hidden="true"></div>
   <div id="scopeZoomLabel" aria-hidden="true">2X</div>
@@ -871,6 +880,31 @@
     const modeDefendBtn = document.getElementById('modeDefend');
     const perfEl = document.getElementById('perf');
     const hurtFlashEl = document.getElementById('hurtFlash');
+    const bloodScreenEl = document.getElementById('bloodScreen');
+    let bloodScreenT = 0, bloodScreenPeak = 0;
+    function splatScreen(k = 1) {
+      if (!bloodScreenEl) return;
+      // A fresh set of blots each time, hugging the edges.
+      let html = '';
+      const n = 3 + ((Math.random() * 3) | 0);
+      for (let i = 0; i < n; i++) {
+        const edge = (Math.random() * 4) | 0;
+        const along = 5 + Math.random() * 90;
+        const size = 70 + Math.random() * 150;
+        const x = edge === 0 ? -size * 0.3 : (edge === 1 ? innerWidth - size * 0.7 : along / 100 * innerWidth);
+        const y = edge === 2 ? -size * 0.3 : (edge === 3 ? innerHeight - size * 0.7 : along / 100 * innerHeight);
+        html += '<i style="left:' + x.toFixed(0) + 'px;top:' + y.toFixed(0) + 'px;width:' + size.toFixed(0) + 'px;height:' + (size * (0.7 + Math.random() * 0.5)).toFixed(0) + 'px"></i>';
+      }
+      bloodScreenEl.innerHTML = html;
+      bloodScreenPeak = 0.55 * k;
+      bloodScreenT = 1.3;
+      bloodScreenEl.style.opacity = String(bloodScreenPeak);
+    }
+    function updateBloodScreen(dt) {
+      if (bloodScreenT <= 0) return;
+      bloodScreenT -= dt;
+      bloodScreenEl.style.opacity = String(Math.max(0, bloodScreenPeak * Math.min(1, bloodScreenT / 1.0)));
+    }
     const scopeOverlayEl = document.getElementById('scopeOverlay');
     const scopeZoomLabelEl = document.getElementById('scopeZoomLabel');
     function updateScopeZoomHud() {
@@ -8356,81 +8390,184 @@
     }
 
     // --- Blood FX ---
-    const bloodParticles = [];
-    const bloodDecals = [];
-    // One material per concurrent decal, reused forever (see makeMatPool).
-    const decalMatPool = makeMatPool(28, () => new THREE.MeshBasicMaterial({
-      color: 0x5c0000, transparent: true, opacity: 0.75, depthWrite: false,
+    // Droplets and ground marks are two InstancedMeshes: one draw call for every
+    // droplet in the air and one for every mark on the ground. They used to be a mesh
+    // (and a pooled material) each — up to 90 droplets and 50 marks, ~140 draws — and
+    // a mark lasted four seconds, so a fight left nothing behind. Now there can be far
+    // more of both for less: marks are fixed ring-buffer slots that stay ~45 s, dry from
+    // wet red to dark brown as they age, and shrink away at the end instead of fading
+    // (no per-mark opacity needed), and a droplet that lands leaves a spatter where it
+    // fell. The counts stay at MAX always, unused slots scaled to nothing, so the
+    // shaders compile at load rather than on the first kill.
+    const MAX_BLOOD_P = 260;
+    const MAX_BLOOD_D = 360;
+    const BLOOD_DECAL_LIFE = 45;
+    const bloodParticles = [];   // { x, y, z, vx, vy, vz, age, life, s }
+    const bloodDecals = [];      // ring-buffer slots, see addBloodDecal
+    const bloodGeo = new THREE.SphereGeometry(0.06, 5, 4);
+    const decalGeo = new THREE.CircleGeometry(0.28, 10);
+    const _bm = new THREE.Matrix4(), _bq = new THREE.Quaternion(), _bs = new THREE.Vector3(), _bp = new THREE.Vector3();
+    const _bZero = new THREE.Matrix4().makeScale(0, 0, 0);
+    const bloodDropMesh = new THREE.InstancedMesh(bloodGeo, new THREE.MeshBasicMaterial({ color: 0x7a0000 }), MAX_BLOOD_P);
+    bloodDropMesh.frustumCulled = false;
+    for (let i = 0; i < MAX_BLOOD_P; i++) bloodDropMesh.setMatrixAt(i, _bZero);
+    scene.add(bloodDropMesh);
+    const bloodDecalMesh = new THREE.InstancedMesh(decalGeo, new THREE.MeshBasicMaterial({
+      color: 0xffffff, transparent: true, opacity: 0.88, depthWrite: false,
       polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
-    }));
-    const MAX_BLOOD_P = 90;
-    // One material per concurrent blood particle, reused forever (see makeMatPool).
-    const bloodMatPool = makeMatPool(MAX_BLOOD_P, () => new THREE.MeshBasicMaterial({ color: 0x8b0000, transparent: true, opacity: 0.95 }));
-    const MAX_BLOOD_D = 50;
-    const bloodGeo = new THREE.SphereGeometry(0.06, 4, 4);
-    const decalGeo = new THREE.CircleGeometry(0.28, 8);
+    }), MAX_BLOOD_D);
+    bloodDecalMesh.frustumCulled = false;
+    bloodDecalMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(MAX_BLOOD_D * 3), 3);
+    for (let i = 0; i < MAX_BLOOD_D; i++) { bloodDecalMesh.setMatrixAt(i, _bZero); bloodDecalMesh.instanceColor.setXYZ(i, 0.5, 0, 0); }
+    scene.add(bloodDecalMesh);
+    const BLOOD_WET = new THREE.Color(0x8e0a06), BLOOD_DRY = new THREE.Color(0x2c0a06), _bc = new THREE.Color();
+    let decalNext = 0, decalColorT = 0;
+
+    // A mark on the ground. `grow` seconds to spread to full size (0 = at once).
+    function addBloodDecal(x, z, size, grow = 0, life = BLOOD_DECAL_LIFE) {
+      if (waterLevelAt(x, z) !== null) return; // nothing lies on water
+      const i = decalNext;
+      decalNext = (decalNext + 1) % MAX_BLOOD_D;
+      let d = bloodDecals[i];
+      if (!d) { d = bloodDecals[i] = { q: new THREE.Quaternion(), i }; }
+      d.x = x; d.z = z;
+      // Stacked marks get a hair of height each so overlapping pools don't z-fight.
+      d.y = sampleHeight(x, z) + 0.05 + (i % 7) * 0.002;
+      // Along the ground's normal, spun about it so no two look stamped out alike.
+      d.q.setFromUnitVectors(AXIS_Z, terrainNormal(x, z));
+      _bq.setFromAxisAngle(AXIS_Z, Math.random() * Math.PI * 2);
+      d.q.multiply(_bq);
+      d.s = size; d.sx = 0.75 + Math.random() * 0.5; d.grow = grow; d.age = 0; d.life = life; d.live = true;
+      _bc.copy(BLOOD_WET);
+      bloodDecalMesh.instanceColor.setXYZ(i, _bc.r, _bc.g, _bc.b);
+      bloodDecalMesh.instanceColor.needsUpdate = true;
+      writeDecal(d);
+    }
+    function writeDecal(d) {
+      let k = 1;
+      if (d.grow > 0) k *= Math.min(1, 0.3 + 0.7 * d.age / d.grow);
+      const tail = d.life - d.age;
+      if (tail < 3) k *= Math.max(0, tail / 3);
+      _bp.set(d.x, d.y, d.z);
+      _bs.set(d.s * d.sx * k, d.s * k, 1);
+      _bm.compose(_bp, d.q, _bs);
+      bloodDecalMesh.setMatrixAt(d.i, _bm);
+      bloodDecalMesh.instanceMatrix.needsUpdate = true;
+    }
+
+    function emitBloodDrop(x, y, z, vx, vy, vz, life, s) {
+      if (bloodParticles.length >= MAX_BLOOD_P) bloodParticles.shift();
+      bloodParticles.push({ x, y, z, vx, vy, vz, age: 0, life, s });
+    }
 
     function spawnBlood(x, y, z, dirX = 0, dirZ = 0, amount = 6, force = 1) {
-      const n = Math.min(amount, MAX_BLOOD_P - bloodParticles.length);
       const dlen = Math.hypot(dirX, dirZ) || 0;
       const nx = dlen > 0.01 ? dirX / dlen : 0;
       const nz = dlen > 0.01 ? dirZ / dlen : 0;
-      for (let i = 0; i < n; i++) {
-        const mat = bloodMatPool();
-        mat.opacity = 0.95; // pooled: reset what the previous user faded
-        const mesh = acquireEffectMesh(bloodGeo, mat, MAX_BLOOD_P + 8);
-        mesh.position.set(x + (Math.random() - 0.5) * 0.15, y + (Math.random() - 0.5) * 0.2, z + (Math.random() - 0.5) * 0.15);
-        mesh.scale.setScalar(0.7 + Math.random() * 0.9);
+      for (let i = 0; i < amount; i++) {
         const spray = (1.6 + Math.random() * 2.4) * force;
-        bloodParticles.push({
-          mesh,
-          vx: nx * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
-          vy: 1.2 + Math.random() * 3.5 * force,
-          vz: nz * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
-          age: 0, life: 0.45 + Math.random() * 0.55
-        });
+        emitBloodDrop(
+          x + (Math.random() - 0.5) * 0.15, y + (Math.random() - 0.5) * 0.2, z + (Math.random() - 0.5) * 0.15,
+          nx * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
+          1.2 + Math.random() * 3.5 * force,
+          nz * spray * (0.7 + Math.random() * 1.4) + (Math.random() - 0.5) * 2.2,
+          0.45 + Math.random() * 0.55, 0.7 + Math.random() * 0.9);
       }
-      if (bloodDecals.length >= MAX_BLOOD_D) {
-        const old = bloodDecals.shift();
-        releaseEffectMesh(old.mesh);
+      addBloodDecal(x + (Math.random() - 0.5) * 0.4, z + (Math.random() - 0.5) * 0.4, 0.6 + Math.random() * 0.8);
+    }
+
+    // Exit wound: a heavy round carries a spray out of the far side, low and fast along
+    // its line, and paints a streak on the ground behind the body.
+    function spawnExitSpray(x, y, z, dirX, dirZ, power = 1) {
+      const dl = Math.hypot(dirX, dirZ) || 1, nx = dirX / dl, nz = dirZ / dl;
+      const n = Math.round(6 + 6 * power);
+      for (let i = 0; i < n; i++) {
+        const sp = (4 + Math.random() * 5) * (0.7 + power * 0.5);
+        const side = (Math.random() - 0.5) * 1.6;
+        emitBloodDrop(x + nx * 0.3, y + (Math.random() - 0.3) * 0.25, z + nz * 0.3,
+          nx * sp - nz * side, 0.6 + Math.random() * 2.2, nz * sp + nx * side,
+          0.35 + Math.random() * 0.4, 0.6 + Math.random() * 0.8);
       }
-      // Decals fade individually, so each keeps its own material — but from a pool
-      // bounded by MAX_BLOOD_D, not one minted per hit.
-      const decal = acquireEffectMesh(decalGeo, decalMatPool(), MAX_BLOOD_D + 4);
-      decal.material.opacity = 0.75;
-      {
-        // Laid along the surface normal — flat decals used to slice into any slope.
-        const dx = x + (Math.random() - 0.5) * 0.4, dz = z + (Math.random() - 0.5) * 0.4;
-        decal.quaternion.setFromUnitVectors(AXIS_Z, terrainNormal(dx, dz));
-        decal.position.set(dx, sampleHeight(dx, dz) + 0.06, dz);
+      const marks = 2 + Math.round(power * 2);
+      for (let k = 0; k < marks; k++) {
+        const d = 0.7 + k * (0.55 + Math.random() * 0.45) * (0.8 + power * 0.4);
+        const w = (Math.random() - 0.5) * 0.5;
+        addBloodDecal(x + nx * d - nz * w, z + nz * d + nx * w, (1.1 - k * 0.2) * (0.6 + Math.random() * 0.5) * (0.8 + power * 0.3));
       }
-      decal.scale.setScalar(0.6 + Math.random() * 0.8);
-      bloodDecals.push({ mesh: decal, age: 0, life: 4 });
+    }
+
+    // A pulse from a stump: up and out, a little each beat.
+    function spawnSpurt(x, y, z, dirX, dirZ, strength = 1) {
+      const n = 3 + ((Math.random() * 3) | 0);
+      for (let i = 0; i < n; i++) {
+        emitBloodDrop(x, y, z,
+          dirX * (1.4 + Math.random() * 1.6) * strength + (Math.random() - 0.5) * 0.8,
+          (2.4 + Math.random() * 2.2) * strength,
+          dirZ * (1.4 + Math.random() * 1.6) * strength + (Math.random() - 0.5) * 0.8,
+          0.5 + Math.random() * 0.4, 0.6 + Math.random() * 0.6);
+      }
     }
 
     function updateBlood(dt) {
+      // Droplets: integrate, draw packed at the front of the instance buffer, and the
+      // ones that reach the ground leave a spatter behind about a third of the time.
+      let n = 0;
       for (let i = bloodParticles.length - 1; i >= 0; i--) {
         const b = bloodParticles[i];
         b.age += dt;
         b.vy -= 12 * dt;
-        b.mesh.position.x += b.vx * dt;
-        b.mesh.position.y += b.vy * dt;
-        b.mesh.position.z += b.vz * dt;
-        b.mesh.material.opacity = Math.max(0, 1 - b.age / b.life);
-        if (b.age >= b.life || b.mesh.position.y < sampleHeight(b.mesh.position.x, b.mesh.position.z)) {
-          releaseEffectMesh(b.mesh);
-          b.mesh.material.dispose(); // pooled materials no-op this (see poolProof)
+        b.x += b.vx * dt; b.y += b.vy * dt; b.z += b.vz * dt;
+        const gy = sampleHeight(b.x, b.z);
+        if (b.age >= b.life || b.y < gy) {
+          if (b.y < gy + 0.1 && Math.random() < 0.35) addBloodDecal(b.x, b.z, 0.22 + Math.random() * 0.3);
           bloodParticles.splice(i, 1);
         }
       }
-      for (let i = bloodDecals.length - 1; i >= 0; i--) {
-        const d = bloodDecals[i];
+      for (const b of bloodParticles) {
+        const sc = b.s * (1 - 0.55 * b.age / b.life);
+        _bp.set(b.x, b.y, b.z);
+        _bs.set(sc, sc * 1.3, sc);
+        _bq.identity();
+        _bm.compose(_bp, _bq, _bs);
+        bloodDropMesh.setMatrixAt(n++, _bm);
+      }
+      for (let i = n; i < (bloodDropMesh.userData.lastN || MAX_BLOOD_P); i++) bloodDropMesh.setMatrixAt(i, _bZero);
+      bloodDropMesh.userData.lastN = n;
+      bloodDropMesh.instanceMatrix.needsUpdate = true;
+      // Marks: only the ones changing size are rewritten; the drying colour is swept
+      // twice a second.
+      decalColorT -= dt;
+      const sweep = decalColorT <= 0;
+      if (sweep) decalColorT = 0.5;
+      for (const d of bloodDecals) {
+        if (!d || !d.live) continue;
         d.age += dt;
-        d.mesh.material.opacity = Math.max(0, 0.75 * (1 - d.age / d.life));
-        if (d.age >= d.life) {
-          releaseEffectMesh(d.mesh);
-          bloodDecals.splice(i, 1);
+        if (d.age >= d.life) { d.live = false; bloodDecalMesh.setMatrixAt(d.i, _bZero); bloodDecalMesh.instanceMatrix.needsUpdate = true; continue; }
+        if ((d.grow > 0 && d.age < d.grow + dt) || d.life - d.age < 3) writeDecal(d);
+        if (sweep) {
+          _bc.copy(BLOOD_WET).lerp(BLOOD_DRY, Math.min(1, d.age / 20));
+          bloodDecalMesh.instanceColor.setXYZ(d.i, _bc.r, _bc.g, _bc.b);
         }
+      }
+      if (sweep) bloodDecalMesh.instanceColor.needsUpdate = true;
+    }
+
+    function clearBlood() {
+      bloodParticles.length = 0;
+      for (let i = 0; i < MAX_BLOOD_P; i++) bloodDropMesh.setMatrixAt(i, _bZero);
+      bloodDropMesh.instanceMatrix.needsUpdate = true;
+      for (const d of bloodDecals) if (d) { d.live = false; bloodDecalMesh.setMatrixAt(d.i, _bZero); }
+      bloodDecalMesh.instanceMatrix.needsUpdate = true;
+    }
+
+    // Headshot: the head goes in a puff of red mist as well as pieces.
+    const bloodMistMat = new THREE.MeshBasicMaterial({ color: 0x6e0606, transparent: true, opacity: 0.4, depthWrite: false });
+    function spawnBloodMist(x, y, z, dirX, dirZ) {
+      for (let i = 0; i < 6; i++) {
+        spawnMote(x + (Math.random() - 0.5) * 0.3, y + (Math.random() - 0.5) * 0.3, z + (Math.random() - 0.5) * 0.3, bloodMistMat, {
+          vx: dirX * 1.6 + (Math.random() - 0.5) * 1.4, vy: 0.4 + Math.random() * 0.9, vz: dirZ * 1.6 + (Math.random() - 0.5) * 1.4,
+          grav: 0.6, drag: 1.6, life: 0.5 + Math.random() * 0.4, scale: 0.45 + Math.random() * 0.4, grow: true
+        });
       }
     }
 
@@ -8601,6 +8738,7 @@
     }
 
     const PART_KEYS = ['armL', 'armR', 'legL', 'legR', 'head'];
+    const _bleedP = new THREE.Vector3();
     const PART_UD = { armL: 'armLG', armR: 'armRG', legL: 'legLG', legR: 'legRG', head: 'head' };
 
     function emptyPartsLost() {
@@ -8631,6 +8769,8 @@
       }
       z.partsLost[partKey] = true;
       z.mesh.userData.dismembered = true;
+      // The stump pumps for a couple of seconds (see bleedStumps).
+      z.bleedT = 2.4; z.bleedPart = partKey; z.bleedPulse = 0.05;
       z.mesh.userData.partsLost = z.partsLost;
       const jetY = worldPos.y;
       spawnBlood(worldPos.x, jetY, worldPos.z, dirX || 0, dirZ || 0, 10, 1.4);
@@ -20900,6 +21040,11 @@
       const sprayAmt = kind === 'pellet' ? 12 : (kind === 'explosive' ? 16 : (kind === 'chainsaw' ? 10 : 7));
       const force = kind === 'explosive' ? 1.7 : (kind === 'pellet' ? 1.4 : 1.05);
       spawnBlood(z.mesh.position.x, hitY, z.mesh.position.z, dx, dz, sprayAmt, force);
+      // Heavy rounds go through: spray out the back and a streak on the ground behind.
+      if ((kind === 'bullet' && dmg >= 14) || (kind === 'pellet' && Math.random() < 0.3)) {
+        spawnExitSpray(z.mesh.position.x, hitY, z.mesh.position.z, dx, dz, Math.min(1.6, dmg / 30));
+      }
+      if (headshot) spawnBloodMist(z.mesh.position.x, z.mesh.position.y + hitH * 0.88, z.mesh.position.z, dx, dz);
 
       if (z.hp > 0) {
         tryDismemberOnHit(z, dmg, kind, dx, dz, upperHit);
@@ -20932,7 +21077,11 @@
         }
       }
 
-      if (z.hp <= 0) killZombie(z, true, { kind, dir: { x: dx, z: dz } });
+      if (z.hp <= 0) {
+        // Arm's length: some of it lands on you.
+        if (Math.hypot(z.mesh.position.x - player.position.x, z.mesh.position.z - player.position.z) < 2.6) splatScreen(kind === 'explosive' || kind === 'pellet' || kind === 'chainsaw' ? 1 : 0.7);
+        killZombie(z, true, { kind, dir: { x: dx, z: dz } });
+      }
     }
 
     // Segment vs axis-aligned box, as a slab test. Returns the entry fraction along
@@ -22635,6 +22784,31 @@
           }
         }
 
+        // Stumps pump: a pulse every fifth of a second, weakening, for a couple of
+        // seconds after a limb or the head comes off.
+        if (z.bleedT > 0) {
+          z.bleedT -= dt;
+          z.bleedPulse -= dt;
+          if (z.bleedPulse <= 0) {
+            z.bleedPulse = 0.17 + Math.random() * 0.08;
+            const grp = z.mesh.userData[PART_UD[z.bleedPart]];
+            if (grp) {
+              grp.getWorldPosition(_bleedP);
+              const sx2 = _bleedP.x - mx, sz2 = _bleedP.z - mz, sl = Math.hypot(sx2, sz2) || 1;
+              const up = z.bleedPart === 'head';
+              spawnSpurt(_bleedP.x, _bleedP.y, _bleedP.z, up ? 0 : sx2 / sl, up ? 0 : sz2 / sl, 0.5 + 0.5 * (z.bleedT / 2.4));
+            }
+          }
+        }
+        // Badly hurt or missing parts: a trail of drips behind it as it walks.
+        if ((z.hp < z.maxHp * 0.45 || z.mesh.userData.dismembered) && Math.hypot(mx - zx, mz - zz) > 0.002) {
+          z.dripT = (z.dripT || Math.random() * 0.4) - dt;
+          if (z.dripT <= 0) {
+            z.dripT = 0.3 + Math.random() * 0.35;
+            addBloodDecal(mx + (Math.random() - 0.5) * 0.4, mz + (Math.random() - 0.5) * 0.4, 0.14 + Math.random() * 0.16, 0, 28);
+          }
+        }
+
         // Fire sticks. Burn ticks even after leaving the cone.
         if (z.burnT > 0) {
           z.burnT -= dt;
@@ -23351,10 +23525,7 @@
       fallingLeaves.length = 0;
       for (const d of debris) { releaseEffectMesh(d.mesh); d.mesh.material.dispose(); }
       debris.length = 0;
-      for (const b of bloodParticles) { releaseEffectMesh(b.mesh); b.mesh.material.dispose(); }
-      bloodParticles.length = 0;
-      for (const b of bloodDecals) { releaseEffectMesh(b.mesh); }
-      bloodDecals.length = 0;
+      clearBlood();
       for (const g of gibPieces) {
         releaseEffectMesh(g.mesh);
         // A limb gib's mesh is a cloned Group with no .material of its own, and pooled
@@ -23985,6 +24156,7 @@
       updateFlashlight();
 
       updateLowHp(dt);
+      updateBloodScreen(dt);
       if (hurtFlash > 0) {
         hurtFlash -= dt;
         hurtFlashEl.style.opacity = String(Math.max(0, hurtFlash / 0.2));
@@ -24444,12 +24616,11 @@
       }
       _warmZombies.length = 0;
       for (const m of motes.splice(0)) releaseMoteMesh(m.mesh);
-      for (const b of bloodParticles.splice(0)) releaseEffectMesh(b.mesh);
+      clearBlood();
       for (const d of debris.splice(0)) releaseEffectMesh(d.mesh);
       for (const g of gibPieces.splice(0)) releaseEffectMesh(g.mesh);
       for (const r of ripples.splice(0)) releaseRippleMesh(r.mesh);
       for (const p of projectiles.splice(0)) releaseTracerMesh(p.mesh);
-      for (const b of bloodDecals.splice(0)) releaseEffectMesh(b.mesh);
       for (const c of casings.splice(0)) releaseEffectMesh(c.mesh);
       clearFlameStream();
     }
@@ -24462,12 +24633,11 @@
       for (const c of casings.splice(0)) releaseEffectMesh(c.mesh);
       for (const g of grenadesInFlight.splice(0)) releaseProjectileMesh(g.mesh);
       for (const m of motes.splice(0)) releaseMoteMesh(m.mesh);
-      for (const b of bloodParticles.splice(0)) releaseEffectMesh(b.mesh);
+      clearBlood();
       for (const d of debris.splice(0)) releaseEffectMesh(d.mesh);
       for (const g of gibPieces.splice(0)) releaseEffectMesh(g.mesh);
       for (const r of ripples.splice(0)) releaseRippleMesh(r.mesh);
       for (const p of projectiles.splice(0)) releaseTracerMesh(p.mesh);
-      for (const b of bloodDecals.splice(0)) releaseEffectMesh(b.mesh);
       for (const L of fallingLeaves.splice(0)) releaseEffectMesh(L.mesh);
     }
 
