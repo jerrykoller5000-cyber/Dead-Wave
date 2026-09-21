@@ -38,8 +38,9 @@ WebGL2 by itself.
   Screamers, Bombers, Brutes and the Colossus.
 - **Build.** Barricades, walls, sandbags, spikes, fuel drums, mines, decoy beacons, lights, a manned
   mortar and more.
-- **Hands-on combat.** Two-handed weapon holds, a dodge roll, headshots, knockdowns, kill-streak
-  cash multipliers, a real first-person sniper scope and a fuel-blob flamethrower.
+- **Hands-on combat.** Two-handed weapon holds, a dodge roll, headshots, knockdowns, a real
+  first-person sniper scope and a fuel-blob flamethrower. Kill streaks pay extra cash and grant
+  powers while they hold — faster feet, quick reloads, free rounds, thick skin.
 - **Sound.** A mood-driven soundtrack of 15 generated tracks that changes with the fight, plus
   ambience that follows where you are (wind, river, birds, crickets, thunder).
 
@@ -54,6 +55,7 @@ WebGL2 by itself.
 | `E` | Action key: kiosk, mortar, and whatever the on-screen prompt says |
 | `R` `G` `F` `Y` | Reload / grenade / knife / switch one gun or two |
 | `H` | Use a medkit |
+| `Tab` | Full map (the minimap shows the 50 m around you, turned with the camera) |
 | `Enter` | Skip the prep countdown |
 | `Esc` | Pause and Settings (volume, look, graphics, camera, fullscreen) |
 | Wheel | Zoom the camera, 6 m to 24 m |
