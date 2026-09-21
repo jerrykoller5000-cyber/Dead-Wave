@@ -17570,24 +17570,36 @@
     }
 
     // === Kill streaks ===
-    // Chain kills inside a short window to multiply the cash they drop. The window
-    // is short enough that only real pressure keeps a streak alive.
+    // Chain kills inside a short window. Each tier still pays extra cash, but far less
+    // than it used to (x1.5/2/3/4 on a 10x horde printed money and drowned the shop) —
+    // the real reward now is what your body does WHILE the streak holds:
+    //   5+   RAMPAGE      x1.25 cash · +10% move speed
+    //   10+  MASSACRE     x1.5 cash · reloads 25% faster
+    //   20+  UNSTOPPABLE  x2 cash · ~1 shot in 3 doesn't spend a round
+    //   30+  GODLIKE      x2.5 cash · a quarter of all damage shrugged off
+    // Lose the streak, lose the powers: the buffs make holding it easier, which is the
+    // loop that makes chasing it fun. Milestones also kick a beat of slow motion.
     let combo = 0, comboT = 0, comboBest = 0, comboPopT = 0;
     const COMBO_WINDOW = 2.6;
     const comboEl = document.getElementById('combo');
     const comboNumEl = comboEl ? comboEl.querySelector('.n') : null;
     const comboMultEl = comboEl ? comboEl.querySelector('.m') : null;
     const comboBarEl = comboEl ? comboEl.querySelector('.bar i') : null;
-    function comboMult() { return combo >= 30 ? 4 : combo >= 20 ? 3 : combo >= 10 ? 2 : combo >= 5 ? 1.5 : 1; }
+    function comboMult() { return combo >= 30 ? 2.5 : combo >= 20 ? 2 : combo >= 10 ? 1.5 : combo >= 5 ? 1.25 : 1; }
+    // The streak powers, read wherever the base stat is applied.
+    function streakSpeedMult() { return combo >= 5 ? 1.1 : 1; }
+    function streakReloadMult() { return combo >= 10 ? 0.75 : 1; }
+    function streakSavesRound() { return combo >= 20 && Math.random() < 0.34; }
+    function streakResist() { return combo >= 30 ? 0.25 : 0; }
     function registerKill() {
       combo += 1;
       comboT = COMBO_WINDOW;
       comboPopT = 0.12;
       if (combo > comboBest) comboBest = combo;
-      if (combo === 5) { showBanner('RAMPAGE', '5 kill streak · x1.5 cash', 1.6, '#ffd24a'); AudioSys.streak(0); }
-      else if (combo === 10) { showBanner('MASSACRE', '10 kill streak · x2 cash', 1.8, '#ff9a3c'); AudioSys.streak(1); }
-      else if (combo === 20) { showBanner('UNSTOPPABLE', '20 kill streak · x3 cash', 2.2, '#ff5544'); AudioSys.streak(2); }
-      else if (combo === 30) { showBanner('GODLIKE', '30 kill streak · x4 cash', 2.6, '#ff2a6a'); AudioSys.streak(3); }
+      if (combo === 5) { showBanner('RAMPAGE', '5 streak · x1.25 cash · faster feet', 1.6, '#ffd24a'); AudioSys.streak(0); }
+      else if (combo === 10) { showBanner('MASSACRE', '10 streak · x1.5 cash · quick reloads', 1.8, '#ff9a3c'); AudioSys.streak(1); triggerSlowMo(0.45); }
+      else if (combo === 20) { showBanner('UNSTOPPABLE', '20 streak · x2 cash · rounds on the house', 2.2, '#ff5544'); AudioSys.streak(2); triggerSlowMo(0.65); }
+      else if (combo === 30) { showBanner('GODLIKE', '30 streak · x2.5 cash · a quarter of all damage shrugged off', 2.6, '#ff2a6a'); AudioSys.streak(3); triggerSlowMo(0.85); }
       return comboMult();
     }
     function updateCombo(dt) {
@@ -17604,7 +17616,8 @@
         comboEl.classList.toggle('hot', combo >= 10);
         if (comboNumEl) comboNumEl.textContent = combo + '×';
         const m = comboMult();
-        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' cash') : '';
+        const power = combo >= 30 ? 'thick skin' : combo >= 20 ? 'free rounds' : combo >= 10 ? 'quick hands' : combo >= 5 ? 'fast feet' : '';
+        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' cash · ' + power) : '';
         if (comboBarEl) comboBarEl.style.transform = 'scaleX(' + Math.max(0, comboT / COMBO_WINDOW).toFixed(3) + ')';
       }
     }
@@ -18259,6 +18272,8 @@
       // Armour takes the first ARMOR_ABSORB of a hit while there is any left; the
       // rest goes to health. A hit that is fully soaked still counts as being hurt
       // (regen delay, flash) — the plates ring, you flinch.
+      // GODLIKE (30+ streak): a quarter of everything shrugged off before the armour.
+      if (streakResist() > 0) amount = Math.round(amount * (1 - streakResist()));
       let toHp = amount;
       let soaked = 0;
       if (playerArmor > 0) {
@@ -18904,8 +18919,8 @@
       }
       // Quick hands, then the akimbo penalty: two magazines take half again as long
       // whichever route above set the timer.
-      reloadTimer *= reloadMult() * akimboReloadMult;
-      reloadAnimDuration *= reloadMult() * akimboReloadMult;
+      reloadTimer *= reloadMult() * akimboReloadMult * streakReloadMult();
+      reloadAnimDuration *= reloadMult() * akimboReloadMult * streakReloadMult();
       fireHeld = false;
       updateAmmoHud();
       AudioSys.reloadStart();
@@ -20262,7 +20277,7 @@
         if (barrelSpinVel < SPIN_MAX * 0.35) return;
         while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {
           fireCooldown += st.interval;
-          ammoByWeapon.minigun -= 1;
+          if (!streakSavesRound()) ammoByWeapon.minigun -= 1;
           spawnProjectile(false, null, null, st.damage, projectileLifeFor(st), null, st.speed);
           spawnCasing('minigun');
           kickMinigunRecoil();
@@ -20286,7 +20301,7 @@
         if (canShoot) {
           // Two guns alternate, so the pair puts rounds out twice as fast.
           fireCooldown = akimboOn() ? st.interval * 0.5 : st.interval;
-          ammoByWeapon[currentWeapon] -= 1;
+          if (!streakSavesRound()) ammoByWeapon[currentWeapon] -= 1;
           if (st.explosive) {
             fireLauncherShell();
             // Launcher keeps brass in the drum until reload eject — no per-shot casing
@@ -23848,7 +23863,7 @@
           waterWade += (Math.min(1, depth / 1.5) - waterWade) * Math.min(1, dt * 6);
           const waterMul = 1 - waterWade * PHYS.waterDrag;
           if (playerWebT > 0) playerWebT -= dt;
-          targetSpeed = (crouching ? PHYS.crouch : (moveRunning ? PHYS.run : PHYS.walk)) * speedMult() * slopeMul * waterMul * (mortarCarried ? 0.62 : 1) * (playerWebT > 0 ? 0.5 : 1);
+          targetSpeed = (crouching ? PHYS.crouch : (moveRunning ? PHYS.run : PHYS.walk)) * speedMult() * streakSpeedMult() * slopeMul * waterMul * (mortarCarried ? 0.62 : 1) * (playerWebT > 0 ? 0.5 : 1);
         }
 
         // Spawn swimming water ripples
@@ -24379,6 +24394,7 @@
           acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffReady, ms: ffLastMs, ox: ffOX, oz: ffOZ }), updateFlowField, flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           setFlow: (on) => { flowEnabled = !!on; },
+          getCombo: () => combo, setCombo: (n) => { combo = n | 0; comboT = COMBO_WINDOW; },
           ffDistAt: (x, z) => { const k = ffIndex(x, z); return k < 0 ? null : ffDist[k]; }, ffBlockedAt: (x, z) => { const k = ffIndex(x, z); return k < 0 ? null : ffBlocked[k]; },
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,

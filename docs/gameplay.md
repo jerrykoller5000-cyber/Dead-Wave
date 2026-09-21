@@ -52,7 +52,11 @@ buys applies to everything eating that calibre.
   about 3.5 a second, and `MAX_ZOMBIES` (how many stand on the field at once) went 36 to 48. That
   constant is the density knob if a machine cannot hold it; see its comment in `index.html` for
   what was measured and why the numbers are soft.
-- **Kill streaks.** Chain kills within 2.6 s: 5 / 10 / 20 / 30 in a row pay x1.5 / x2 / x3 / x4 cash.
+- **Kill streaks.** Chain kills within 2.6 s. Each tier pays extra cash — x1.25 / x1.5 / x2 /
+  x2.5 at 5 / 10 / 20 / 30 — but the real reward is what your body does while the streak holds:
+  5+ *Rampage* (+10% move speed), 10+ *Massacre* (reloads 25% faster), 20+ *Unstoppable* (about
+  one shot in three doesn't spend a round), 30+ *Godlike* (a quarter of all damage shrugged off).
+  Lose the streak, lose the powers. Milestones kick a beat of slow motion.
 - **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs down, then shrink away.
 - **Airdrops** are rare (every 4-7 minutes) and money only, a bounty for walking out to them.
 
