@@ -81,6 +81,14 @@ roof. It smokes and loses its window boards as it takes damage. No zombies rise 
   the wind-up, so a sidestep or a roll makes it charge straight past. Fire barely touches them
   (a fifth of normal burn). Unlike brutes, bullets work — they have 130 HP and light armour.
 - **Brutes** only go down to explosives. **The Colossus** is the boss, and ignores decoy beacons.
+- **Pathfinding.** The horde finds its way to you round obstacles rather than walking a
+  straight line into them. A few times a second a flow field is built outward from you over the
+  160 m around you: trees, rocks, buildings, the house and your builds are walls, slopes too steep
+  to climb are cut, bridges are flat walkways with their rails as sides, deep water costs extra.
+  A zombie chasing you walks downhill on it — round the end of your wall line, through the gap,
+  along the valley. If there is no way to you at all (you have walled yourself in), they come
+  straight at you and tear into whatever is in the way. A body that is still pinned for over a
+  second gets a sidestep, unless it is standing at one of your builds chewing on it.
 - **Knockdowns.** An explosion floors anything short of a colossus; a point-blank shotgun blast
   floors the small types. They topple, lie helpless for a moment and get back up. This cannot be chained.
 - **Headshots.** Bullets in the top of the body do bonus damage and usually take the head off.
