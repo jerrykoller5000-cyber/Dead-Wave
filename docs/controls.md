@@ -59,11 +59,13 @@ toward the screen edge to swing further.
 leaves it, `T` shoulders it to carry it (no weapons while carrying, and you are slower), and
 `LMB` or `E` sets it down. You are rooted while manning it.
 
-**The build wheel** (hold `B`) holds twelve: the shovel, then barricade, wall, sandbag, spikes,
-fuel drum, mine, decoy beacon, light, flame, heavy, mortar. The **shovel** ($4) is not a structure
+**The build wheel** (hold `B`) holds nineteen: the shovel, then barricade, wall, window, door,
+sandbag, platform, floor, stairs, barbed wire, railing, spikes, fuel drum, mine, decoy beacon,
+light, flame, heavy, mortar. The **shovel** ($4) is not a structure
 — it levels the cell you point at and blends it into the ground around it. Rough or sloping
 ground refuses a build; this is how you fix it, and it is the one entry that works on a cell that
-already has something standing in it. Every slot is always in the same place whether or
+already has something standing in it, reseating the pieces on top onto the new ground rather
+than knocking them down. Every slot is always in the same place whether or
 not you own it, so buying a blueprint never moves the others; locked ones sit greyed with their
 price and say so if you pick them. The barricade is free, the rest need their plans from the
 kiosk, and placing still costs per piece.
@@ -72,10 +74,13 @@ kiosk, and placing still costs per piece.
 course. 2 m because that is exactly how wide a wall section is, so a run of them meets edge to
 edge with no gap for the horde to walk through. You aim at the cell you want rather than placing
 a fixed distance ahead, out to 9 m, and the cell under the reticle is filled green or red so you
-can see the answer before you commit. `R` turns the piece a quarter turn at a time, which is how
-you take a corner. A cell is refused if it already holds something, if the ground is too rough or
-too steep, if it is in or beside the water, or if a tree, rock or building is in the way — and
-the refusal says which.
+can see the answer before you commit. The aim finds your builds too: point at a wall and the
+ghost goes on top of the wall, not on the grass behind it. `R` turns the piece a quarter turn at a
+time, which is how you take a corner, and picks which edge a railing or which way a flight of
+stairs faces. A cell is refused if it is full, if the ground is too rough or too steep, if it is in
+or beside the water, if a tree, rock or building is in the way, or if the piece has nothing to
+stand on — and the refusal says which ("needs a wall under it", "too far from anything to hold it
+up").
 
 The bar along the bottom of the screen lists the keys while you are building, including `B` to
 leave build mode.

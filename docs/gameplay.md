@@ -134,13 +134,51 @@ for the rest of the match — and a zombie that dies on fire leaves a charred bo
 
 ## Builds
 
-Everything you place lands in a 2 m cell on one fixed lattice covering the map, one piece per
-cell, and `R` turns it a quarter turn at a time. Condition bars show on every structure while a
-build ghost is up, not only on ones already damaged.
+Everything you place lands in a 2 m cell on one fixed lattice covering the map, and `R` turns it
+a quarter turn at a time. Condition bars show on every structure while a build ghost is up, not
+only on ones already damaged.
 
-The ground within 100 m of the spawn clearing is levelled flat (blended back into the real terrain
-over the 60 m beyond), so the area you actually build in does not refuse half its cells for being
-too rough. Only the river channel is left alone — flattening it would dam it.
+**Your own weapons never hurt what you built.** A round that meets your wall stops there and
+leaves it alone; your grenades and your fuel drums spare your defences. Only the horde and what it
+throws wears them down. Builds do block your fire, so leave yourself a window.
+
+The ground within 20 m of the spawn clearing is levelled flat (blended back into the real terrain
+over the 28 m beyond), so the area you build in first does not refuse half its cells for being too
+rough. The river is left alone and the blend eases into its banks rather than cutting a cliff.
+
+### Levels and stacking
+
+A cell is a column up to three storeys high (2 m each). Every piece has one rule saying what it
+may stand on, and the game reads that one table for placing, for the ghost, for the refusal
+message and for what falls when something breaks — so the pieces fit together the same way
+everywhere:
+
+| Piece | Stands on | Notes |
+| --- | --- | --- |
+| Wall | ground, wall, platform, floor | At most two walls stacked in one column |
+| Sandbag wall | ground, wall, platform, floor | Half height. On a wall it adds to the wall's condition |
+| Barricade, spikes, mine, fuel drum | ground | Nothing stands on a barricade |
+| Platform | wall | A walkable deck on the wall's cap |
+| Floor | wall, platform, or a neighbouring wall/floor | Spans open space up to 2 cells from support, so it roofs a room |
+| Stairs | ground, platform, floor | Take the whole cell; you and the horde both climb them. The sides are solid |
+| Barbed wire | ground, wall, sandbags, platform, floor | Half height, shoot over it. Blocks the way, and cuts whatever tears at it |
+| Railing | platform, floor | Runs along the deck edge `R` picks |
+| Turrets, mortar, decoy | ground, platform, floor | Sit on the deck, not a storey above it |
+| Window, door | an existing wall | Cut an opening in it; see below |
+
+Wire, railings, sandbags, platforms and floors all strengthen the wall under them while they are
+there, and give that back when they are sold or destroyed.
+
+**Windows and doors** are not pieces of their own: they cut an opening into a wall that is already
+standing. A window leaves a sill — rounds fired above it pass, and the horde still cannot climb
+through. A door lets you walk through and nothing else. Both weaken the wall, a door more.
+
+**If something breaks, what it was holding comes down.** Destroy a wall and the platform, turret
+or wall stacked on it falls with it. A floor spanning open space falls when the wall it rests on
+goes, and the floors leaning on that one follow, from the broken edge inward.
+
+Selling (`X`) and repair (`T`) act on the top piece of the cell you point at. Selling refunds
+the opening too if you had cut a window or door into it.
 
 **Panels** — walls, sandbag walls and barricades — are a post at the cell centre with up to four
 arms reaching out to the cell edges, and only the arms facing a neighbour are shown. Two panels
