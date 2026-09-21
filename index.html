@@ -784,7 +784,7 @@
             <ul>
               <li>Prep — Enter starts the wave early; Settings can skip prep time altogether</li>
               <li>Waves come from the bearings marked in red on the map rim</li>
-              <li>Chain kills fast for a streak: 5 / 10 / 20 / 30 in a row multiplies the cash they drop</li>
+              <li>Chain kills fast for a streak: 5 / 10 / 20 / 30 pay extra cash AND grant powers while it holds — faster feet, quick reloads, free rounds, thick skin. Lose the streak, lose the powers</li>
               <li>Minimap: the 50 m around you, turned so up is always the way the camera faces (W). Zombies are the flashing red dots; red arcs on the rim are where the wave comes from</li>
               <li>Tab — full map of the whole area, north-up</li>
               <li>Bombers (glowing gut) sprint and detonate — shoot them before they reach your line, ideally next to other zombies</li>
@@ -6044,6 +6044,21 @@
         }
       }
       drawMapBlips(ctx, toFull, sz);
+      // Landmark names, only on the big map where there is room for words.
+      {
+        ctx.font = '600 ' + Math.round(11 * sz) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        ctx.lineWidth = 3 * sz; ctx.strokeStyle = 'rgba(0,0,0,0.75)';
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+        const label = (x, z, name) => { const q = toFull(x, z); ctx.strokeText(name, q.x, q.y + 6 * sz); ctx.fillText(name, q.x, q.y + 6 * sz); };
+        label(house.group.position.x, house.group.position.z, 'CABIN');
+        if (POI.tower) label(POI.tower.x, POI.tower.z, 'WATCHTOWER');
+        if (POI.graveyard) label(POI.graveyard.x, POI.graveyard.z, 'GRAVEYARD');
+        if (POI.mast) label(POI.mast.x, POI.mast.z, 'RADIO MAST');
+        if (POI.dock) label(POI.dock.x, POI.dock.z, 'DOCK');
+        POI.cabins.forEach((c, i) => label(c.x, c.z, 'HUT'));
+        POI.bridges.forEach((b) => label(b.x, b.z, 'BRIDGE'));
+      }
       mapArrow(ctx, pp, mapRotForYaw(aimYaw), 1.4 * sz);
       ctx.font = 'bold ' + Math.round(22 * sz) + 'px sans-serif';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -13748,7 +13763,7 @@
         const c = cashDrops[i];
         if (c.taken) { cashDrops.splice(i, 1); continue; }
         c.age += dt;
-        // Dropped cash keeps for 60 seconds. It pulses slowly at first and the pulse
+        // Dropped cash keeps for CASH_LIFE seconds. It pulses slowly at first and the pulse
         // keeps speeding up as the clock runs out, then it's gone — go and get it.
         if (c.age >= CASH_LIFE) {
           scene.remove(c.mesh);
