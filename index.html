@@ -2764,8 +2764,10 @@
     // standing as one wall. The ground you actually build on is now level out to
     // BUILD_APRON_R and blended back into the real terrain over the feather beyond,
     // so there is no cliff at the edge of it.
-    const BUILD_APRON_R = 100;
-    const BUILD_APRON_FEATHER = 60;
+    // 20m: the spawn clearing and the kiosk, not the countryside. At 100m the apron
+    // ran right up to the river and met the preserved channel as a sheer cut bank.
+    const BUILD_APRON_R = 20;
+    const BUILD_APRON_FEATHER = 28;
     (function flattenBuildApron() {
       const cx = 0, cz = 0;
       const reach = BUILD_APRON_R + BUILD_APRON_FEATHER;
@@ -2782,14 +2784,17 @@
           const wx = -HF_EXTENT + i * HF_SPACING;
           const d = Math.hypot(wx - cx, wz - cz);
           if (d > reach) continue;
-          // The river channel is the one thing left alone, or the apron dams it.
-          // Everything else levels: an earlier version also spared any dip more than
-          // 2m below the target, which on a spawn sitting even slightly high meant a
-          // quarter of the apron stayed lumpy.
-          if (distToRiver(wx, wz) < RIVER_WIDTH * 1.15) continue;
+          // The river channel is left alone or the apron dams it — but it has to be
+          // let go of GRADUALLY. Skipping it with a hard cutoff flattened the land
+          // right to the bank and then dropped straight into the untouched channel,
+          // which is the cliff face in the screenshots. The apron's pull now fades out
+          // over a band either side of the water, so the bank keeps its natural slope.
+          const rd = distToRiver(wx, wz);
+          const riverKeep = smoothstep01((rd - RIVER_WIDTH * 1.1) / 14);
+          if (riverKeep <= 0) continue;
           const k = j * HF_N + i;
           const natural = heightField[k];
-          const w = d <= BUILD_APRON_R ? 1 : 1 - smoothstep01((d - BUILD_APRON_R) / BUILD_APRON_FEATHER);
+          const w = (d <= BUILD_APRON_R ? 1 : 1 - smoothstep01((d - BUILD_APRON_R) / BUILD_APRON_FEATHER)) * riverKeep;
           heightField[k] = natural + (target - natural) * w;
         }
       }
@@ -2939,9 +2944,9 @@
     // so anywhere the river channel underneath runs deeper than that near mid-span,
     // the deck lost to the riverbed and the player sank straight through the planks.
     // Being inside a deck's footprint at all is reason enough to stand on the deck.
-    function playerGroundY(x, z) {
+    function playerGroundY(x, z, maxY) {
       const g = groundMinAround(x, z, 0.3);
-      const p = platformHeightAt(x, z);
+      const p = platformHeightAt(x, z, maxY);
       return (p !== null && p > g && p - g < 60) ? p : g;
     }
 
@@ -3001,7 +3006,14 @@
     }
 
     // Deck height at a point, or null when not on any platform.
-    function platformHeightAt(x, z) {
+    // `maxY`, when given, is the highest surface the caller can step onto from where it
+    // is: decks above that are overhead and ignored. Without it this returned the FIRST
+    // deck under a point with no idea how high you were, which is harmless for a lone
+    // bridge but means walking into a building puts you on its roof. With stacked
+    // floors there can be several decks over one spot, so this takes the highest one
+    // you can actually reach rather than whichever happened to be registered first.
+    function platformHeightAt(x, z, maxY) {
+      let best = null;
       for (const p of platforms) {
         const dx = x - p.x, dz = z - p.z;
         // World -> deck-local. This has to be the exact inverse of the transform three
@@ -3019,17 +3031,39 @@
         const c = Math.cos(p.yaw), s = Math.sin(p.yaw);
         const lx = dx * c - dz * s;
         const lz = dx * s + dz * c;
-        if (Math.abs(lx) <= p.hw && Math.abs(lz) <= p.hl) return p.deckY;
+        if (Math.abs(lx) <= p.hw && Math.abs(lz) <= p.hl) {
+          // `rise` makes a deck a ramp instead of a shelf: the surface climbs from
+          // deckY at the near edge to deckY + rise at the far one. Stairs are just a
+          // ramp, which means the player and the horde both walk up them through the
+          // ground-height path they already use, rather than needing their own
+          // pathing.
+          const y = p.rise ? p.deckY + p.rise * (lz / p.hl * 0.5 + 0.5) : p.deckY;
+          if (maxY != null && y > maxY) continue;
+          if (best === null || y > best) best = y;
+        }
       }
-      return null;
+      return best;
     }
 
     // Ground for anything that walks: terrain, unless a deck is just overhead. The
     // ceiling covers a bridge spanning a carved river channel. See playerGroundY for
     // why the cap is generous rather than the old, too-tight 4.4.
-    function entityGroundY(x, z) {
+    const STEP_UP = 0.75;
+
+    // Is this point on a ramp — a flight of stairs — rather than a shelf or the ground?
+    function onRamp(x, z) {
+      for (const p of platforms) {
+        if (!p.rise) continue;
+        const dx = x - p.x, dz = z - p.z;
+        const c = Math.cos(p.yaw), s2 = Math.sin(p.yaw);
+        if (Math.abs(dx * c - dz * s2) <= p.hw && Math.abs(dx * s2 + dz * c) <= p.hl) return true;
+      }
+      return false;
+    }
+
+    function entityGroundY(x, z, maxY) {
       const g = sampleHeight(x, z);
-      const p = platformHeightAt(x, z);
+      const p = platformHeightAt(x, z, maxY);
       return (p !== null && p > g && p - g < 60) ? p : g;
     }
 
@@ -3671,9 +3705,10 @@
           const wx = -HF_EXTENT + i * HF_SPACING;
           const d = Math.hypot(wx - cx, wz - cz);
           if (d > reach) continue;
-          if (distToRiver(wx, wz) < RIVER_WIDTH * 1.15) continue;
+          const keep = smoothstep01((distToRiver(wx, wz) - RIVER_WIDTH * 1.1) / 8);
+          if (keep <= 0) continue;
           const k = j * HF_N + i;
-          const w = d <= R ? 1 : 1 - smoothstep01((d - R) / F);
+          const w = (d <= R ? 1 : 1 - smoothstep01((d - R) / F)) * keep;
           heightField[k] += (targetY - heightField[k]) * w;
         }
       }
@@ -13706,12 +13741,12 @@
     }
     // --- Builds: barricades & turrets ---
     const builds = [];
-    const COST = { shovel: 4, barricade: 8, wall: 14, spikes: 12, sandbag: 10, barrel: 18, mine: 14, lure: 30, light: 24, flame: 36, heavy: 45, mortar: 60 };
+    const COST = { shovel: 4, window: 10, door: 14, platform: 22, floor: 26, stairs: 30, wire: 9, railing: 12, barricade: 8, wall: 14, spikes: 12, sandbag: 10, barrel: 18, mine: 14, lure: 30, light: 24, flame: 36, heavy: 45, mortar: 60 };
     const BUILD_NAMES = {
-      shovel: 'Shovel', barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap', sandbag: 'Sandbag wall', barrel: 'Fuel drum', mine: 'Land mine', lure: 'Decoy beacon',
+      shovel: 'Shovel', window: 'Window', door: 'Door', platform: 'Platform', floor: 'Floor', stairs: 'Stairs', wire: 'Barbed wire', railing: 'Railing', barricade: 'Barricade', wall: 'Wall', spikes: 'Spike trap', sandbag: 'Sandbag wall', barrel: 'Fuel drum', mine: 'Land mine', lure: 'Decoy beacon',
       light: 'Light turret', flame: 'Flame turret', heavy: 'Heavy turret', mortar: 'Mortar'
     };
-    const BUILD_FOOTPRINT = { shovel: 0.95, barricade: 0.95, wall: 0.95, spikes: 0.8, sandbag: 0.95, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
+    const BUILD_FOOTPRINT = { shovel: 0.95, window: 0.95, door: 0.95, platform: 0.95, floor: 0.95, stairs: 0.95, wire: 0.9, railing: 0.9, barricade: 0.95, wall: 0.95, spikes: 0.8, sandbag: 0.95, barrel: 0.45, mine: 0.4, lure: 0.4, light: 0.55, flame: 0.55, heavy: 0.75, mortar: 0.6 };
     // Panel pieces fill their cell, so they collide as an oriented box rather than as a
     // circle. A circle of radius 0.95 in a 2m cell leaves a 10cm slot at every joint,
     // which is exactly the gap you could slip through between two barricades. Half
@@ -13798,14 +13833,21 @@
     // 'shovel' is in the wheel but is not a structure: it levels the cell instead of
     // filling it. Free, always available, and the only entry that can be used on a
     // cell that already holds something.
-    const BUILD_ORDER = ['shovel', 'barricade', 'wall', 'sandbag', 'spikes', 'barrel', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
+    const BUILD_ORDER = ['shovel', 'barricade', 'wall', 'window', 'door', 'sandbag', 'platform', 'floor', 'stairs', 'wire', 'railing', 'spikes', 'barrel', 'mine', 'lure', 'light', 'flame', 'heavy', 'mortar'];
     let buildIndex = 0;
     let ghostValid = false;
     // Blueprints: a build type only shows up in the B menu once its plans have been
     // bought at the kiosk. Placing one still costs COST[type] per piece.
-    const BUILD_UNLOCK_PRICE = { shovel: 0, barricade: 0, wall: 25, sandbag: 20, spikes: 30, barrel: 40, mine: 45, lure: 70, light: 55, flame: 75, heavy: 110, mortar: 120 };
+    const BUILD_UNLOCK_PRICE = { shovel: 0, window: 45, door: 55, platform: 60, floor: 70, stairs: 65, wire: 35, railing: 40, barricade: 0, wall: 25, sandbag: 20, spikes: 30, barrel: 40, mine: 45, lure: 70, light: 55, flame: 75, heavy: 110, mortar: 120 };
     const BUILD_BLURB = {
       shovel: 'Levels the cell you point at, and blends it into the ground around it. Rough or sloping ground refuses a build; this is how you fix it. Works on a cell that already has something standing in it.',
+      window: 'Cuts a firing slit into a wall that is already up: shoot out over the sill, and the horde still cannot get through. Weakens the wall.',
+      door: 'Cuts a doorway into a standing wall. You walk through; the horde does not. Weakens the wall more than a window does.',
+      platform: 'A deck on top of a wall. Stand on it, and put a turret or anything else up there. Adds to the wall it caps.',
+      floor: 'Solid boards on a wall or platform: a floor for the storey above and a roof for the one below.',
+      stairs: 'Takes the whole cell and ramps up a storey. Anything that walks can use them \u2014 including the horde, so mind where you put them.',
+      wire: 'Half height, so you shoot straight over it. Goes on bare ground, or straight onto a wall or sandbags with no deck needed. Cuts anything that comes through it, and comes apart quickly.',
+      railing: 'Half-height rail for a platform edge: stops you walking off and you still shoot over the top.',
       barricade: 'Cheap steel beams. Slows and soaks.', wall: 'Solid log wall. Real stopping power.', sandbag: 'Low, tough cover. Cheap to line a lane with.',
       spikes: 'Bleeds anything that walks over it.', barrel: 'Fuel drum. Shoot it when the pack is beside it; chains into its neighbours.',
       mine: 'Buried charge. Goes off under the first thing that steps on it.', lure: 'Flashing, screaming beacon. The horde chases it instead of you for 20s, then it burns out.',
@@ -14064,22 +14106,37 @@
         const m = WALL_SPEC.mats(mo);
         const L = WALL_SPAN / 2 - 0.22, mid = 0.22 + L / 2;
         const N = 3, pw = L / N;
+        // Split at the sill so an opening can take out one half and leave the other:
+        // a window drops the upper run and leaves a wall you shoot over, a door drops
+        // both and leaves the cap standing as a lintel.
+        const lower = new THREE.Group(), upper = new THREE.Group();
+        a.add(lower); a.add(upper);
+        const SILL = 0.95;
         for (let i = 0; i < N; i++) {
-          const h = WALL_TOP - 0.18 + WALL_SKIRT;
-          const plank = new THREE.Mesh(new THREE.BoxGeometry(0.2, h, pw * 0.98), m.wood);
-          plank.position.set(0, h / 2 - WALL_SKIRT, 0.22 + pw * (i + 0.5));
-          plank.castShadow = true;
-          a.add(plank);
+          const lz = 0.22 + pw * (i + 0.5);
+          const hLo = SILL + WALL_SKIRT;
+          const lo = new THREE.Mesh(new THREE.BoxGeometry(0.2, hLo, pw * 0.98), m.wood);
+          lo.position.set(0, hLo / 2 - WALL_SKIRT, lz);
+          lo.castShadow = true;
+          lower.add(lo);
+          const hUp = WALL_TOP - 0.18 - SILL;
+          const up = new THREE.Mesh(new THREE.BoxGeometry(0.2, hUp, pw * 0.98), m.wood);
+          up.position.set(0, SILL + hUp / 2, lz);
+          up.castShadow = true;
+          upper.add(up);
         }
         const cap = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.18, L), m.wood);
         cap.position.set(0, WALL_TOP - 0.09, mid);
         cap.castShadow = true;
         a.add(cap);
-        for (const y of [0.55, 1.35]) {
-          const brace = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.13, L), m.metal);
-          brace.position.set(0.16, y, mid);
-          a.add(brace);
-        }
+        const brLo = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.13, L), m.metal);
+        brLo.position.set(0.16, 0.55, mid);
+        lower.add(brLo);
+        const brUp = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.13, L), m.metal);
+        brUp.position.set(0.16, 1.35, mid);
+        upper.add(brUp);
+        a.userData.lower = lower;
+        a.userData.upper = upper;
       }
     };
     function makeWallMesh(matOverride = null) { return makePanelMesh(WALL_SPEC, matOverride); }
@@ -14148,7 +14205,9 @@
         color: 0x22c55e, transparent: true, opacity: 0.45, depthWrite: false
       });
       let mesh;
-      if (placeMode === 'shovel') { ghostGroup.visible = false; ghostGroup.userData.mat = ghostMat; return; }
+      if (placeMode === 'shovel' || placeMode === 'window' || placeMode === 'door') {
+        ghostGroup.visible = false; ghostGroup.userData.mat = ghostMat; return;
+      }
       if (placeMode === 'barricade') mesh = makeBarricadeMesh(ghostMat);
       else if (placeMode === 'wall') mesh = makeWallMesh(ghostMat);
       else if (placeMode === 'spikes') mesh = makeSpikesMesh(ghostMat);
@@ -14159,6 +14218,11 @@
       else if (placeMode === 'mine') mesh = makeMineMesh(ghostMat);
       else if (placeMode === 'lure') mesh = makeLureMesh(ghostMat);
       else if (placeMode === 'mortar') mesh = makeMortarMesh(ghostMat);
+      else if (placeMode === 'platform') mesh = makePlatformMesh(ghostMat);
+      else if (placeMode === 'floor') mesh = makeFloorMesh(ghostMat);
+      else if (placeMode === 'stairs') mesh = makeStairsMesh(ghostMat);
+      else if (placeMode === 'wire') mesh = makeWireMesh(ghostMat);
+      else if (placeMode === 'railing') mesh = makeRailingMesh(ghostMat);
       else mesh = makeHeavyTurretMesh(ghostMat);
       ghostGroup.add(mesh);
       ghostGroup.userData.mat = ghostMat;
@@ -14266,13 +14330,33 @@
       sandbag:   { slot: 'base', on: ['ground', 'wall', 'platform', 'floor'], height: 1.05, armour: 25 },
       barricade: { slot: 'base', on: ['ground'], height: 1.4 },
       spikes:    { slot: 'base', on: ['ground'], height: 0.3 },
-      mortar:    { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.2 },
-      lure:      { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.7 },
+      // Things that stand ON a surface are objects: on bare ground they sit at the
+      // bottom of the column, on a deck they sit on the deck — not a whole storey above
+      // it, which is where a turret ended up while it was a 'base' piece and stacked
+      // into the next level instead.
+      mortar:    { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.2 },
+      lure:      { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.7 },
       mine:      { slot: 'base', on: ['ground'], height: 0.15 },
       barrel:    { slot: 'base', on: ['ground'], height: 1.0 },
-      light:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.35 },
-      flame:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.3 },
-      heavy:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.5 }
+      light:     { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.35 },
+      flame:     { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.3 },
+      heavy:     { slot: 'object', on: ['ground', 'platform', 'floor'], height: 1.5 },
+      // A deck on top of a wall. Thin, so what stands on it is still at storey height.
+      platform:  { slot: 'base', on: ['wall'], height: 0.25, deck: true, armour: 15 },
+      // The same idea in solid boards: a floor for the storey above, a roof for the
+      // one below.
+      floor:     { slot: 'base', on: ['wall', 'platform'], height: 0.25, deck: true, armour: 20 },
+      // Takes the whole cell and ramps a storey. Anything that walks can use it.
+      stairs:    { slot: 'base', on: ['ground', 'platform', 'floor'], height: LEVEL_H, ramp: true },
+      // Half height, so you shoot over it. Goes on the bare ground, on a wall or
+      // sandbags without needing a deck, or on a platform.
+      wire:      { slot: 'top', on: ['ground', 'wall', 'sandbag', 'platform', 'floor'], height: 1.0, armour: 8, bites: 7 },
+      railing:   { slot: 'top', on: ['platform', 'floor'], height: 1.0, armour: 5 },
+      // Not occupants: these cut an opening into a wall that is already standing. A
+      // window leaves a sill you shoot over, a door leaves a lintel you walk under.
+      // Both weaken the wall, which is the trade for being able to use it.
+      window:    { slot: 'modifier', on: ['wall'], height: 0, weakens: 30 },
+      door:      { slot: 'modifier', on: ['wall'], height: 0, weakens: 45 }
     };
     function ruleFor(kind) { return BUILD_RULES[kind] || null; }
     function pieceHeight(kind) { const r = ruleFor(kind); return r ? r.height : 1.0; }
@@ -14323,19 +14407,35 @@
     function resolveTarget(kind, gx, gz) {
       const rule = ruleFor(kind);
       if (!rule) return { refusal: 'cannot be built' };
+      // A modifier does not take a slot; it changes a piece that is already there.
+      if (rule.slot === 'modifier') {
+        for (let lv = 0; lv <= MAX_LEVEL; lv++) {
+          const b = cellOccupant(gx, gz, lv, 'base');
+          if (!b || rule.on.indexOf(b.type) < 0) continue;
+          if (b.opening) continue;
+          return { level: lv, slot: 'modifier', target: b };
+        }
+        return { refusal: 'needs a plain wall to cut into' };
+      }
       let last = null;
       for (let lv = 0; lv <= MAX_LEVEL; lv++) {
         if (cellOccupant(gx, gz, lv, rule.slot)) { last = 'cell taken'; continue; }
         const why = supportRefusal(kind, rule, gx, gz, lv);
         if (!why) return { level: lv, slot: rule.slot };
-        last = why;
+        // Keep the first real reason. Walking up an empty column otherwise always ends
+        // on 'nothing under it', which is true and useless when the actual problem was
+        // that the cell was already full.
+        if (!last || last === 'nothing under it') last = why;
       }
+      if (cellOccupant(gx, gz, 0, rule.slot)) return { refusal: 'cell taken' };
       return { refusal: last || 'no room' };
     }
 
     // Is there something at this level for the piece to stand on?
     function supportRefusal(kind, rule, gx, gz, lv) {
       if (rule.slot === 'base') {
+        // You cannot slide a wall in under a turret that is already standing there.
+        if (cellOccupant(gx, gz, lv, 'object') || cellOccupant(gx, gz, lv, 'top')) return 'something already standing there';
         if (lv === 0) return rule.on.indexOf('ground') < 0 ? 'needs something under it' : null;
         const under = cellOccupant(gx, gz, lv - 1, 'base');
         if (!under) return 'nothing under it';
@@ -14355,12 +14455,18 @@
     // Ground height of a cell-level: the column's own base plus a storey per level,
     // and for a 'top' or 'object' piece, the height of whatever it is standing on.
     function slotY(kind, gx, gz, lv, slot, groundY) {
-      let y = groundY + lv * LEVEL_H;
-      if (slot !== 'base') {
-        const base = cellOccupant(gx, gz, lv, 'base');
-        if (base) y = base.mesh.position.y + pieceHeight(base.type);
+      // A stacked piece sits on the actual top of whatever is under it, never on a
+      // height worked out from the terrain. Walls are levelled onto a half-metre shelf
+      // (see buildBaseY) while other pieces read the raw ground, so computing a level-1
+      // height as ground + one storey put a platform a third of a metre clear of the
+      // wall it was meant to cap.
+      if (slot === 'base') {
+        if (lv === 0) return groundY;
+        const under = cellOccupant(gx, gz, lv - 1, 'base');
+        return under ? under.mesh.position.y + pieceHeight(under.type) : groundY + lv * LEVEL_H;
       }
-      return y;
+      const base = cellOccupant(gx, gz, lv, 'base');
+      return base ? base.mesh.position.y + pieceHeight(base.type) : groundY;
     }
     function rotateBuild() {
       if (!placeMode) return;
@@ -14568,6 +14674,11 @@
 
     const BUILD_STATS = {
       barricade: { hp: 40, radius: 0.75, barY: 1.5 },
+      platform: { hp: 70, radius: 0.95, barY: 0.6 },
+      floor: { hp: 85, radius: 0.95, barY: 0.6 },
+      stairs: { hp: 60, radius: 0.95, barY: 1.4 },
+      wire: { hp: 22, radius: 0.9, barY: 1.2 },
+      railing: { hp: 30, radius: 0.9, barY: 1.2 },
       wall: { hp: 130, radius: 0.95, barY: 2.2 },
       spikes: { hp: 70, radius: 0.85, barY: 1.1 },
       light: { hp: 30, radius: 0.55, barY: 1.9, range: 11, fireInterval: 0.28, damage: 8 },
@@ -14579,7 +14690,7 @@
       mortar: { hp: 80, radius: 0.6, barY: 1.4 }
     };
     // Builds the horde bashes through (walls) vs. ones it just walks past.
-    const BUILD_BLOCKS = { wall: true, sandbag: true, barricade: true, mortar: true, light: true, flame: true, heavy: true, lure: true };
+    const BUILD_BLOCKS = { wall: true, sandbag: true, barricade: true, mortar: true, light: true, flame: true, heavy: true, lure: true, wire: true, railing: true };
 
     // Same rule as the wall: full span, flat top, courses that meet a neighbour's
     // exactly. Low cover, so it stops at SANDBAG_TOP rather than reaching wall height.
@@ -14621,6 +14732,113 @@
       if (!matOverride) for (const y of [0.12, 0.82]) { const rim = new THREE.Mesh(barrelRimGeo, barrelRimMat); rim.position.y = y; g.add(rim); }
       return g;
     }
+    // A deck: open grating on a frame, thin enough that what stands on it is still
+    // at storey height.
+    function makePlatformMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x5b636e, metalness: 0.7, roughness: 0.4 });
+      const deck = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID, 0.1, BUILD_GRID), steel);
+      deck.position.y = 0.2; deck.castShadow = true; deck.receiveShadow = true;
+      g.add(deck);
+      // Grating: a few slats proud of the deck so it does not read as a slab.
+      for (let i = 0; i < 5; i++) {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID * 0.94, 0.04, 0.1), steel);
+        bar.position.set(0, 0.27, -0.72 + i * 0.36);
+        g.add(bar);
+      }
+      for (const sx of [-1, 1]) {
+        const beam = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.22, BUILD_GRID), steel);
+        beam.position.set(sx * (BUILD_GRID / 2 - 0.06), 0.09, 0);
+        g.add(beam);
+      }
+      return g;
+    }
+    function makeFloorMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const wood = matOverride || new THREE.MeshStandardMaterial({ color: 0x7a5c38, roughness: 0.85 });
+      const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 });
+      for (let i = 0; i < 6; i++) {
+        const plank = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID * 0.98, 0.12, BUILD_GRID / 6 * 0.94), wood);
+        plank.position.set(0, 0.19, -BUILD_GRID / 2 + BUILD_GRID / 6 * (i + 0.5));
+        plank.castShadow = true; plank.receiveShadow = true;
+        g.add(plank);
+      }
+      for (const sz of [-1, 1]) {
+        const joist = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID, 0.14, 0.14), metal);
+        joist.position.set(0, 0.07, sz * (BUILD_GRID / 2 - 0.07));
+        g.add(joist);
+      }
+      return g;
+    }
+    // Ramps one storey across the cell. The treads are cosmetic; what the player and
+    // the horde actually walk on is the sloped deck registered in `platforms`.
+    function makeStairsMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const wood = matOverride || new THREE.MeshStandardMaterial({ color: 0x6f5334, roughness: 0.88 });
+      const metal = matOverride || new THREE.MeshStandardMaterial({ color: 0x555b63, metalness: 0.55, roughness: 0.5 });
+      const N = 7, run = BUILD_GRID / N, rise = LEVEL_H / N;
+      for (let i = 0; i < N; i++) {
+        const tread = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID * 0.86, rise * 0.9, run * 1.02), wood);
+        tread.position.set(0, rise * (i + 0.5), -BUILD_GRID / 2 + run * (i + 0.5));
+        tread.castShadow = true; tread.receiveShadow = true;
+        g.add(tread);
+      }
+      for (const sx of [-1, 1]) {
+        const stringer = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.16, Math.hypot(BUILD_GRID, LEVEL_H)), metal);
+        stringer.position.set(sx * (BUILD_GRID * 0.45), LEVEL_H / 2, 0);
+        stringer.rotation.x = -Math.atan2(LEVEL_H, BUILD_GRID);
+        g.add(stringer);
+      }
+      return g;
+    }
+    // Half height and mostly air: you shoot over it, it shreds whatever pushes through.
+    function makeWireMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x8b8f96, metalness: 0.75, roughness: 0.45 });
+      for (const sx of [-1, 0, 1]) {
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.0, 0.08), steel);
+        post.position.set(sx * (BUILD_GRID / 2 - 0.08), 0.5, 0);
+        post.castShadow = true;
+        g.add(post);
+      }
+      // Three strands, each a coil of short angled barbs.
+      for (const y of [0.35, 0.65, 0.92]) {
+        const strand = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID, 0.035, 0.035), steel);
+        strand.position.set(0, y, 0);
+        g.add(strand);
+        for (let i = 0; i < 7; i++) {
+          const barb = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.13, 0.02), steel);
+          barb.position.set(-BUILD_GRID / 2 + BUILD_GRID / 7 * (i + 0.5), y, 0);
+          barb.rotation.z = (i % 2 ? 1 : -1) * 0.7;
+          barb.rotation.x = 0.5;
+          g.add(barb);
+        }
+      }
+      return g;
+    }
+    function makeRailingMesh(matOverride = null) {
+      const g = new THREE.Group();
+      const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x6a7280, metalness: 0.7, roughness: 0.4 });
+      for (const sx of [-1, 1]) {
+        const post = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.0, 0.1), steel);
+        post.position.set(sx * (BUILD_GRID / 2 - 0.05), 0.5, 0);
+        post.castShadow = true;
+        g.add(post);
+      }
+      for (const y of [0.52, 0.95]) {
+        const rail = new THREE.Mesh(new THREE.BoxGeometry(BUILD_GRID, 0.09, 0.09), steel);
+        rail.position.set(0, y, 0);
+        rail.castShadow = true;
+        g.add(rail);
+      }
+      for (let i = 1; i < 4; i++) {
+        const baluster = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.95, 0.06), steel);
+        baluster.position.set(-BUILD_GRID / 2 + BUILD_GRID / 4 * i, 0.48, 0);
+        g.add(baluster);
+      }
+      return g;
+    }
+
     function makeMineMesh(matOverride = null) {
       const g = new THREE.Group();
       const body = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.38, 0.12, 14), matOverride || new THREE.MeshStandardMaterial({ color: 0x3f4a3a, metalness: 0.5, roughness: 0.55 }));
@@ -14674,6 +14892,39 @@
       return g;
     }
 
+    // Cut a window or a door into a wall that is already up: hide the run of planks
+    // the opening takes out, and mark the wall so bullets and bodies know about it.
+    function applyOpening(b, kind) {
+      if (!b || b.opening) return;
+      b.opening = kind;
+      const arms = b.mesh.userData.arms || [];
+      for (const a of arms) {
+        if (a.userData.upper) a.userData.upper.visible = kind !== 'window';
+        if (a.userData.lower) a.userData.lower.visible = kind !== 'door';
+      }
+      const rule = ruleFor(kind);
+      const cut = rule ? rule.weakens : 0;
+      b.maxHp = Math.max(10, b.maxHp - cut);
+      b.hp = Math.min(b.hp, b.maxHp);
+      AudioSys.repairClank();
+    }
+
+    // Stairs lead UP to something. If a neighbouring cell holds a raised piece at this
+    // level — a wall top, a platform — the high end of the flight is turned to meet
+    // it, so laying stairs against a wall just works instead of climbing off into
+    // thin air on the far side. With nothing to lead to, R's rotation stands.
+    // The flight rises toward its own +Z, which a Y rotation sends to (sin y, cos y).
+    function stairsYawFor(gx, gz, lv) {
+      let best = null, bestTop = -Infinity;
+      for (const [dx, dz] of PANEL_DIRS) {
+        const nb = cellOccupant(gx + dx, gz + dz, lv, 'base');
+        if (!nb || nb.type === 'stairs') continue;
+        const top = nb.mesh.position.y + pieceHeight(nb.type);
+        if (top > bestTop) { bestTop = top; best = Math.atan2(dx, dz); }
+      }
+      return best;
+    }
+
     // The one way a piece gets built into the grid: work out where it goes, make it,
     // record it in the cell map, let it strengthen what it stands on, and re-link the
     // neighbourhood. tryPlace used to do all of this inline, which meant nothing else
@@ -14681,6 +14932,7 @@
     function placeBuildAt(kind, gx, gz) {
       const tgt = resolveTarget(kind, gx, gz);
       if (tgt.refusal) return null;
+      if (tgt.slot === 'modifier') { applyOpening(tgt.target, kind); return tgt.target; }
       _pendingCell.gx = gx; _pendingCell.gz = gz;
       _pendingCell.level = tgt.level | 0; _pendingCell.slot = tgt.slot || 'base';
       const made = spawnBuild(kind, gridCentre(gx), gridCentre(gz));
@@ -14689,6 +14941,10 @@
       made.gx = gx; made.gz = gz;
       made.level = tgt.level | 0;
       made.slot = tgt.slot || 'base';
+      if (made.type === 'stairs') {
+        const y = stairsYawFor(gx, gz, made.level);
+        if (y !== null) { made.yaw = y; made.mesh.rotation.y = y; }
+      }
       buildCells.set(cellKey(made.gx, made.gz, made.level, made.slot), made);
       // Anything that props up what it is standing on makes that piece tougher:
       // sandbags heaped against a wall really are more wall to chew through.
@@ -14697,6 +14953,24 @@
         const under = cellOccupant(made.gx, made.gz, made.level - 1, 'base') ||
                       cellOccupant(made.gx, made.gz, made.level, 'base');
         if (under && under !== made) { under.maxHp += rule.armour; under.hp += rule.armour; }
+      }
+      // Decks and ramps join the walkable set, which is what the player AND the horde
+      // already read their ground height from — so a platform is something you stand
+      // on and stairs are something anything can climb, without either needing its own
+      // pathing.
+      const rule2 = ruleFor(made.type);
+      if (rule2 && (rule2.deck || rule2.ramp)) {
+        made.deck = {
+          // A hair PAST the cell edge, not short of it. Two neighbouring decks at
+          // 0.98 each left a 4cm strip where neither applied, and anything crossing
+          // it dropped to the ground for a frame. A little overlap is harmless now
+          // that the highest reachable deck wins.
+          x: made.x, z: made.z, hw: BUILD_GRID / 2 + 0.02, hl: BUILD_GRID / 2 + 0.02,
+          yaw: made.yaw || 0,
+          deckY: made.mesh.position.y + (rule2.ramp ? 0.05 : rule2.height),
+          rise: rule2.ramp ? LEVEL_H : 0
+        };
+        platforms.push(made.deck);
       }
       refreshPanelNeighbourhood(gx, gz, made.level);
       return made;
@@ -14718,6 +14992,11 @@
       else if (kind === 'mine') mesh = makeMineMesh();
       else if (kind === 'lure') mesh = makeLureMesh();
       else if (kind === 'mortar') mesh = makeMortarMesh();
+      else if (kind === 'platform') mesh = makePlatformMesh();
+      else if (kind === 'floor') mesh = makeFloorMesh();
+      else if (kind === 'stairs') mesh = makeStairsMesh();
+      else if (kind === 'wire') mesh = makeWireMesh();
+      else if (kind === 'railing') mesh = makeRailingMesh();
       else if (kind === 'barrel') {
         // A placed drum is a landmark, exactly like the ones that used to litter the
         // map: shoot it and it goes up, chaining into anything beside it.
@@ -14782,7 +15061,7 @@
     // over (that is their whole job) and a fuel drum is a landmark rather than a
     // build, so neither is a target. Turrets are, which they were not before: the old
     // contact grind left them untouchable by anything short of the colossus.
-    const BUILD_ATTACKABLE = { barricade: 1, wall: 1, sandbag: 1, mortar: 1, lure: 1, light: 1, flame: 1, heavy: 1 };
+    const BUILD_ATTACKABLE = { barricade: 1, wall: 1, sandbag: 1, mortar: 1, lure: 1, light: 1, flame: 1, heavy: 1, platform: 1, floor: 1, stairs: 1, wire: 1, railing: 1 };
     function nearestAttackableBuild(x, z, zr) {
       let best = null, bd = Infinity;
       for (const b of builds) {
@@ -14818,6 +15097,14 @@
         // Standing alone: show the pair that runs along the way it is facing.
         arms[0].visible = true;
         arms[2].visible = true;
+      }
+      // Re-apply whatever was cut into it: relinking only decides which ARMS show,
+      // not which halves of them, and it must not quietly fill a doorway back in.
+      if (b.opening) {
+        for (const a of arms) {
+          if (a.userData.upper) a.userData.upper.visible = b.opening !== 'window';
+          if (a.userData.lower) a.userData.lower.visible = b.opening !== 'door';
+        }
       }
     }
     // Re-link a cell and the four around it, which is everything a single placement or
@@ -14871,6 +15158,11 @@
       if (b === mortarMounted) dismountMortar();
       scene.remove(b.mesh);
       if (b.bar) scene.remove(b.bar);
+      if (b.deck) {
+        const di = platforms.indexOf(b.deck);
+        if (di >= 0) platforms.splice(di, 1);
+        b.deck = null;
+      }
       const i = builds.indexOf(b);
       if (i >= 0) builds.splice(i, 1);
       // The neighbours have lost an arm's worth of company.
@@ -15150,6 +15442,11 @@
       }
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
       ghostGroup.rotation.y = buildYawRad();
+      if (placeMode === 'stairs') {
+        const t = resolveTarget('stairs', pt.gx, pt.gz);
+        const y = t.refusal ? null : stairsYawFor(pt.gx, pt.gz, t.level | 0);
+        if (y !== null) ghostGroup.rotation.y = y;
+      }
       ghostGroup.position.set(pt.x, buildBaseY(placeMode, pt.x, pt.z, footprint * 0.85, pt.gx, pt.gz), pt.z);
       const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
       const broke = bank < COST[placeMode];
@@ -17191,6 +17488,13 @@
       minigun: '<rect x="6.4" y="6.6" width="4.6" height="10.8" rx="1"/><rect x="11" y="7.6" width="9.6" height="1.7" rx=".4"/><rect x="11" y="11" width="9.6" height="1.7" rx=".4"/><rect x="11" y="14.4" width="9.6" height="1.7" rx=".4"/><circle cx="4.6" cy="12" r="3"/>',
       flamer: '<rect x="2.6" y="6.6" width="5.2" height="9.4" rx="2.4"/><rect x="7.8" y="9.6" width="7.6" height="2.4" rx=".5"/><path d="M15.4 8.4c3 1 4.6 2.2 5.6 3.8-1.6-.6-2.8-.7-4-.4 1.2-1.2 1-2.4-1.6-3.4z"/><path d="M6 16h3.4l-1 2.6H5.4z"/>',
       chainsaw: '<rect x="2.4" y="7.6" width="7.4" height="6" rx="1.2"/><path d="M9.8 8.8h9.4a1.6 1.6 0 0 1 0 3.2H9.8z"/><path d="M10.6 7.8h1.6v1h-1.6zm2.6 0h1.6v1h-1.6zm2.6 0h1.6v1h-1.6z"/><path d="M4.6 13.6h3.6l-.8 3.8H4z"/>',
+      window: '<rect x="2.4" y="4" width="19.2" height="16" rx=".6" opacity=".35"/><rect x="2.4" y="13" width="19.2" height="7" rx=".6"/><rect x="2.4" y="3.2" width="19.2" height="2.2" rx=".5"/><rect x="11" y="5.4" width="2" height="7.6"/>',
+      door: '<rect x="2.4" y="3.2" width="19.2" height="2.4" rx=".5"/><rect x="2.4" y="5.6" width="5.4" height="15"/><rect x="16.2" y="5.6" width="5.4" height="15"/><rect x="8.6" y="6.4" width="6.8" height="14" rx=".4" opacity=".4"/><circle cx="13.8" cy="13.6" r=".9"/>',
+      platform: '<rect x="2" y="8.6" width="20" height="2.6" rx=".4"/><path d="M3 8.6h2v1H3zm4 0h2v1H7zm4 0h2v1h-2zm4 0h2v1h-2zm4 0h2v1h-2z"/><rect x="4" y="11.2" width="2.2" height="9.4"/><rect x="17.8" y="11.2" width="2.2" height="9.4"/>',
+      floor: '<rect x="2" y="9" width="20" height="3" rx=".4"/><path d="M6 9v3M10 9v3M14 9v3M18 9v3" stroke="#000" stroke-opacity=".35" stroke-width=".7" fill="none"/><path d="M2 12.6h20v1.6H2z" opacity=".6"/><path d="M5 4.6 12 2l7 2.6v1.6H5z" opacity=".75"/>',
+      stairs: '<path d="M2 20.4h4.4v-3.6h4.4v-3.6h4.4V9.6h4.4V6H22v14.4z"/>',
+      wire: '<rect x="3" y="8" width="1.6" height="12"/><rect x="19.4" y="8" width="1.6" height="12"/><path d="M3 11.4h18M3 15h18M3 18.4h18" stroke="currentColor" stroke-width="1" fill="none"/><path d="M7 10.4l1.4 2M12 10.4l1.4 2M17 10.4l1.4 2M9.4 14l1.4 2M14.4 14l1.4 2M7 17.4l1.4 2M12 17.4l1.4 2M17 17.4l1.4 2" stroke="currentColor" stroke-width="1.1" fill="none"/>',
+      railing: '<rect x="2.4" y="8" width="19.2" height="2" rx=".5"/><rect x="2.4" y="13.4" width="19.2" height="1.6" rx=".4"/><rect x="2.6" y="8" width="1.8" height="12.4"/><rect x="19.6" y="8" width="1.8" height="12.4"/><rect x="8" y="10" width="1.2" height="10.4"/><rect x="11.4" y="10" width="1.2" height="10.4"/><rect x="14.8" y="10" width="1.2" height="10.4"/>',
       shovel: '<rect x="10.6" y="2.6" width="2.8" height="10" rx=".5"/><rect x="8.6" y="1.6" width="6.8" height="1.8" rx=".6"/><path d="M7.4 12.2h9.2l-1.1 5.2a3.8 3.8 0 0 1-3.5 2.8 3.8 3.8 0 0 1-3.5-2.8z"/>',
       barricade: '<path d="M3.6 4.8 5.9 3l14.5 14.5-2.3 1.9z"/><path d="M20.4 6.7 18.1 4.8 3.6 19.3l2.3 1.9z" opacity=".85"/><rect x="2" y="19.6" width="20" height="2.4" rx=".6"/>',
       wall: '<rect x="2.4" y="5" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="10.2" width="19.2" height="4.4" rx=".5"/><rect x="2.4" y="15.4" width="19.2" height="4.4" rx=".5"/>',
@@ -17277,7 +17581,10 @@
       // rotations and the ring read as clutter; the hub names the one you are
       // pointing at instead, which is the only one you are reading anyway.
       const rIcon = (WHEEL_R_IN + WHEEL_R_OUT) / 2;
-      const ICON = 54;
+      // Icons shrink as the ring fills up. At 54px they fit ten wedges comfortably;
+      // the build ring holds nineteen now, and at a fixed size neighbouring icons ran
+      // into each other. Sized off the arc length each wedge actually gets.
+      const ICON = Math.max(30, Math.min(54, (Math.PI * 2 * rIcon / n) * 0.72));
       let svg = '';
       for (let i = 0; i < n; i++) {
         const it = wheelItems[i];
@@ -19787,7 +20094,13 @@
     // Where a round meets this structure, or null. Panels are tested as their hub and
     // visible arms; everything else as the box around its footprint.
     function segmentHitsBuild(b, ax, ay, az, bx, by, bz) {
-      const y0 = b.mesh.position.y, hy = pieceHeight(b.type) / 2, cy = y0 + hy;
+      const y0 = b.mesh.position.y;
+      let full = pieceHeight(b.type);
+      // A window leaves only the sill in the way, so a round over it goes through; a
+      // doorway stops nothing at all.
+      if (b.opening === 'window') full = 0.95;
+      else if (b.opening === 'door') return null;
+      const hy = full / 2, cy = y0 + hy;
       const box = BUILD_BOX[b.type];
       if (!box) {
         const r = b.radius || 0.6;
@@ -20139,11 +20452,25 @@
       return { x, z };
     }
 
-    function resolveHardBuildCollisions(entX, entZ, entR) {
+    function resolveHardBuildCollisions(entX, entZ, entR, isPlayer, entY) {
       let x = entX, z = entZ;
       for (const b of builds) {
         // Walked over, not into.
         if (b.type === 'spikes' || b.type === 'mine') continue;
+        // Collision is 2D, so without this a wall shoved you back out of its cell even
+        // when you were standing on the platform ON TOP of it — you climbed the stairs
+        // and then could not step onto the deck. Anything whose top is at or below your
+        // feet is under you, not in your way.
+        if (entY != null && entY >= b.mesh.position.y + pieceHeight(b.type) - 0.3) continue;
+        // And anything wholly above your head is not in your way either: the floor of
+        // the storey over you, say.
+        if (entY != null && b.mesh.position.y > entY + 1.9) continue;
+        // Decks are stood on, not walked into — that is what platformHeightAt is for.
+        const rl = ruleFor(b.type);
+        if (rl && (rl.deck || rl.ramp)) continue;
+        // A door is yours: you walk through it, the horde still has to come round or
+        // chew through the wall it is cut into.
+        if (b.opening === 'door' && isPlayer) continue;
         const box = BUILD_BOX[b.type];
         if (box) {
           // A panel is a hub plus whichever arms are showing, so it collides as that
@@ -20370,7 +20697,7 @@
         }
       }
       let p = resolveSoftBarricades(player.position.x, player.position.z, PLAYER_RADIUS, 1);
-      p = resolveHardBuildCollisions(p.x, p.z, PLAYER_RADIUS);
+      p = resolveHardBuildCollisions(p.x, p.z, PLAYER_RADIUS, true, player.position.y);
       player.position.x = p.x; player.position.z = p.z;
       if (house.active) {
         const dx = player.position.x - house.group.position.x;
@@ -20489,7 +20816,11 @@
           if (!on) { spawnDust(b.x, b.mesh.position.y + 1.4, b.z, 3); removeBuild(b); }
           continue;
         }
-        if (b.type === 'barricade' || b.type === 'wall' || b.type === 'spikes' || b.type === 'sandbag' || b.type === 'mortar') continue;
+        // Only things that shoot get turret behaviour. This used to be a list of the
+        // things that DON'T, so every new piece fell through to it by default: the
+        // platforms, stairs and railings all picked up the idle scanning sweep and
+        // spun on the spot. A range is what makes something a turret.
+        if (!(b.range > 0)) continue;
         if (b.mesh) { turretRecoil(b, dt); b.scanBase = b.scanBase == null ? b.mesh.rotation.y : b.scanBase; }
 
         // Flame turret: short reach, hits everything in the cone, sets it alight.
@@ -20837,12 +21168,19 @@
         // "steer around" a bridge it was already standing on.
         let sx = nx, sz = nz;
         const probe = 1.8;
-        const zGroundHere = entityGroundY(zx, zz);
-        const climbAhead = entityGroundY(zx + nx * probe, zz + nz * probe) - zGroundHere;
-        if (climbAhead > 0.85) {
+        // Probes look for decks within reach of THIS zombie's footing too, so the floor
+        // of the storey above does not read as a cliff it has to walk round.
+        const zReach = z.mesh.position.y + STEP_UP + 1.2;
+        const zGroundHere = entityGroundY(zx, zz, zReach);
+        const climbAhead = entityGroundY(zx + nx * probe, zz + nz * probe, zReach) - zGroundHere;
+        // Stairs are a climb you are MEANT to take. A 45-degree flight rises 1.8m over
+        // this probe, well past the 0.85m that marks a bluff, so without this the horde
+        // treated every staircase as a cliff face and walked round it.
+        const rampAhead = onRamp(zx + nx * probe, zz + nz * probe) || onRamp(zx + nx * 0.6, zz + nz * 0.6) || onRamp(zx, zz);
+        if (climbAhead > 0.85 && !rampAhead) {
           const lx = -nz, lz = nx;
-          const cl = entityGroundY(zx + (nx * 0.5 + lx) * probe, zz + (nz * 0.5 + lz) * probe) - zGroundHere;
-          const cr = entityGroundY(zx + (nx * 0.5 - lx) * probe, zz + (nz * 0.5 - lz) * probe) - zGroundHere;
+          const cl = entityGroundY(zx + (nx * 0.5 + lx) * probe, zz + (nz * 0.5 + lz) * probe, zReach) - zGroundHere;
+          const cr = entityGroundY(zx + (nx * 0.5 - lx) * probe, zz + (nz * 0.5 - lz) * probe, zReach) - zGroundHere;
           const side = cl < cr ? 1 : -1;
           sx = nx * 0.45 - nz * side * 0.9;
           sz = nz * 0.45 + nx * side * 0.9;
@@ -21029,7 +21367,7 @@
         const softStr = tactics === 'tank' ? 0.25 : 0.85;
         let slid = resolveSoftBarricades(mx, mz, z.radius, softStr);
         mx = slid.x; mz = slid.z;
-        slid = resolveHardBuildCollisions(mx, mz, z.radius);
+        slid = resolveHardBuildCollisions(mx, mz, z.radius, false, z.mesh.position.y);
         mx = slid.x; mz = slid.z;
         slid = resolveStaticProps(mx, mz, z.radius);
         mx = slid.x; mz = slid.z;
@@ -21108,7 +21446,7 @@
           const floatY = sampleHeight(mx, mz) + zDepth - 1.15 * z.scale;
           z.mesh.position.y += (floatY - z.mesh.position.y) * Math.min(1, dt * 5);
         } else {
-          z.mesh.position.y = entityGroundY(mx, mz);
+          z.mesh.position.y = entityGroundY(mx, mz, z.mesh.position.y + STEP_UP);
         }
         if (z.leapT > 0 && z.leapDur) {
           const u = 1 - z.leapT / z.leapDur;
@@ -21290,7 +21628,18 @@
             const atk = z._pendingAttack;
             z._pendingAttack = null;
             if (atk.type === 'house') damageHouse(atk.dmg);
-            else if (atk.type === 'build') damageBuild(atk.build, atk.dmg);
+            else if (atk.type === 'build') {
+              // Barbed wire bites back: tearing at it costs the zombie doing the tearing.
+              // Little enough that wire alone will not hold a wave, which is the point
+              // of it being cheap and quick to come apart.
+              const rl = atk.build && ruleFor(atk.build.type);
+              if (rl && rl.bites && z.alive) {
+                z.hp -= rl.bites;
+                spawnBlood(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, 0, 0, 3, 0.5);
+                if (z.hp <= 0) dotKills.push(z);
+              }
+              damageBuild(atk.build, atk.dmg);
+            }
             else damagePlayer(atk.dmg);
             z.swingT = 0.28;
           }
@@ -22280,7 +22629,7 @@
         }
       }
       {
-        let groundY = playerGroundY(player.position.x, player.position.z);
+        let groundY = playerGroundY(player.position.x, player.position.z, player.position.y + STEP_UP);
         if (onTowerDeck) groundY = tower.deckY;
         const depth = waterDepthAt(player.position.x, player.position.z);
         const waterLevel = waterLevelAt(player.position.x, player.position.z);
