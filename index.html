@@ -21658,66 +21658,76 @@
       return { x, z };
     }
 
-    // === Zombie pathfinding: a flow field toward the player ===========================
+    // === Zombie pathfinding: flow fields toward what the horde wants ==================
     // Zombies used to walk a straight line at their target and rely on collision to
     // slide them round whatever was in the way. That works for a lone tree trunk, but a
     // cabin, a rock face or a wall run met head-on just pinned them there, grinding.
     //
-    // A few times a second this runs Dijkstra outward from the player over a grid around
-    // them, with every obstacle (trees, rocks, landmark buildings, the house, your builds)
+    // A few times a second Dijkstra runs outward from a destination over a grid around
+    // it, with every obstacle (trees, rocks, landmark buildings, the cabin, your builds)
     // marked blocked — inflated by a zombie's half-width so a path never asks a body to
     // squeeze through a slot it can't — and climbs steeper than a zombie can manage cut.
-    // Every cell then knows how far it is from the player by the best walkable route,
-    // and a zombie just walks downhill on that: round the building, through the gap in
-    // your wall line, along the valley instead of into the bluff. One field serves the
-    // whole horde, so the cost doesn't grow with the number of zombies.
+    // Every cell then knows how far it is from the destination by the best walkable
+    // route, and a zombie just walks downhill on that: round the building, through the
+    // gap in your wall line, along the valley instead of into the bluff. One field
+    // serves the whole horde, so the cost doesn't grow with the number of zombies.
     //
-    // If there is no route at all — you have walled yourself in — a zombie gets no
-    // direction from the field and falls back to walking straight at you, which is what
+    // There are two destinations, so there are two fields: one from the player (every
+    // mode), and in Defend the House one from the cabin — seeded from a ring of cells
+    // around its walls, since the middle of the footprint is itself blocked. Without
+    // the second field, every zombie that had picked the house for a target fell back
+    // to straight-line walking and the whole pathfinding fix skipped half of one mode.
+    //
+    // If there is no route at all — the destination is walled in — a zombie gets no
+    // direction from the field and falls back to walking straight in, which is what
     // makes it turn on the builds in the way. That is the design, not a failure.
-    const FF_CELL = 1.25, FF_N = 128;          // 160 m square centred on the player
+    const FF_CELL = 1.25, FF_N = 128;          // 160 m square centred on the destination
     const FF_CLEAR = 0.45;                     // obstacle inflation: a zombie's half-width
     const FF_CLIMB = 0.47;                     // max rise per metre (the bluff threshold)
     const FF_PERIOD = 0.4;                     // seconds between rebuilds
     const FF_CELLS = FF_N * FF_N;
-    const ffBlocked = new Uint8Array(FF_CELLS);
-    const ffH = new Float32Array(FF_CELLS);
-    const ffWet = new Uint8Array(FF_CELLS);
-    const ffDist = new Float32Array(FF_CELLS);
+    // The heap is scratch shared by both fields; everything else is per-field state.
     const ffHeapK = new Float32Array(FF_CELLS * 8), ffHeapV = new Int32Array(FF_CELLS * 8);
-    let ffOX = 1e9, ffOZ = 1e9;                // world position of the grid's corner
-    let ffTimer = 0, ffReady = false, ffLastMs = 0;
     const FF_NB = [[1, 0, 1], [-1, 0, 1], [0, 1, 1], [0, -1, 1], [1, 1, Math.SQRT2], [1, -1, Math.SQRT2], [-1, 1, Math.SQRT2], [-1, -1, Math.SQRT2]];
+    function makeFF() {
+      return {
+        blocked: new Uint8Array(FF_CELLS), h: new Float32Array(FF_CELLS),
+        wet: new Uint8Array(FF_CELLS), dist: new Float32Array(FF_CELLS),
+        ox: 1e9, oz: 1e9, timer: 0, ready: false, lastMs: 0
+      };
+    }
+    const ffPlayer = makeFF();
+    const ffHouse = makeFF();
 
-    function ffIndex(x, z) {
-      const i = Math.floor((x - ffOX) / FF_CELL), j = Math.floor((z - ffOZ) / FF_CELL);
+    function ffIndexOf(F, x, z) {
+      const i = Math.floor((x - F.ox) / FF_CELL), j = Math.floor((z - F.oz) / FF_CELL);
       if (i < 0 || j < 0 || i >= FF_N || j >= FF_N) return -1;
       return j * FF_N + i;
     }
-    function ffMarkCircle(cx, cz, r) {
+    function ffMarkCircle(F, cx, cz, r) {
       const rr = r + FF_CLEAR;
-      const i0 = Math.max(0, Math.floor((cx - rr - ffOX) / FF_CELL)), i1 = Math.min(FF_N - 1, Math.floor((cx + rr - ffOX) / FF_CELL));
-      const j0 = Math.max(0, Math.floor((cz - rr - ffOZ) / FF_CELL)), j1 = Math.min(FF_N - 1, Math.floor((cz + rr - ffOZ) / FF_CELL));
+      const i0 = Math.max(0, Math.floor((cx - rr - F.ox) / FF_CELL)), i1 = Math.min(FF_N - 1, Math.floor((cx + rr - F.ox) / FF_CELL));
+      const j0 = Math.max(0, Math.floor((cz - rr - F.oz) / FF_CELL)), j1 = Math.min(FF_N - 1, Math.floor((cz + rr - F.oz) / FF_CELL));
       for (let j = j0; j <= j1; j++) {
-        const wz = ffOZ + (j + 0.5) * FF_CELL - cz;
+        const wz = F.oz + (j + 0.5) * FF_CELL - cz;
         for (let i = i0; i <= i1; i++) {
-          const wx = ffOX + (i + 0.5) * FF_CELL - cx;
-          if (wx * wx + wz * wz < rr * rr) ffBlocked[j * FF_N + i] = 1;
+          const wx = F.ox + (i + 0.5) * FF_CELL - cx;
+          if (wx * wx + wz * wz < rr * rr) F.blocked[j * FF_N + i] = 1;
         }
       }
     }
 
-    function updateFlowField(dt, force) {
-      ffTimer -= dt;
-      if (ffTimer > 0 && !force) return;
-      ffTimer = FF_PERIOD;
+    // Rebuild one field centred on (px, pz). seedR 0 seeds the one cell under the
+    // destination (unblocking it if an obstacle's margin covers it); seedR > 0 seeds
+    // every open cell within that ring — how the house field starts outside its own
+    // blocked footprint.
+    function updateFlowFieldOn(F, px, pz, seedR) {
       const t0 = performance.now();
-      const px = player.position.x, pz = player.position.z;
       const half = FF_N * FF_CELL / 2;
       const ox = Math.floor((px - half) / FF_CELL) * FF_CELL, oz = Math.floor((pz - half) / FF_CELL) * FF_CELL;
       // Terrain only changes where the grid moves to, so heights are resampled only then.
-      if (ox !== ffOX || oz !== ffOZ) {
-        ffOX = ox; ffOZ = oz;
+      if (ox !== F.ox || oz !== F.oz) {
+        F.ox = ox; F.oz = oz;
         for (let j = 0; j < FF_N; j++) {
           const wz = oz + (j + 0.5) * FF_CELL;
           for (let i = 0; i < FF_N; i++) {
@@ -21732,26 +21742,26 @@
               const dx = wx - pf.x, dz = wz - pf.z, c = Math.cos(pf.yaw), sn = Math.sin(pf.yaw);
               if (Math.abs(dx * c - dz * sn) <= pf.hw && Math.abs(dx * sn + dz * c) <= pf.hl && pf.deckY > h) h = pf.deckY;
             }
-            ffH[k] = h;
-            ffWet[k] = waterDepthAt(wx, wz) > 1.3 ? 1 : 0;
+            F.h[k] = h;
+            F.wet[k] = waterDepthAt(wx, wz) > 1.3 ? 1 : 0;
           }
         }
       }
-      ffBlocked.fill(0);
+      F.blocked.fill(0);
       const inGrid = (x, z, r) => x + r > ox && x - r < ox + FF_N * FF_CELL && z + r > oz && z - r < oz + FF_N * FF_CELL;
       for (const t of trees) {
         const solid = (t.stump && t.stumpMesh) ? t.trunkRadius * 1.15 : ((t.alive && !t.falling) ? t.trunkRadius : 0);
-        if (solid > 0 && inGrid(t.x, t.z, solid + 1)) ffMarkCircle(t.x, t.z, solid);
+        if (solid > 0 && inGrid(t.x, t.z, solid + 1)) ffMarkCircle(F, t.x, t.z, solid);
       }
-      for (const r of rocks) if (r.alive && inGrid(r.x, r.z, r.radius + 1)) ffMarkCircle(r.x, r.z, r.radius);
+      for (const r of rocks) if (r.alive && inGrid(r.x, r.z, r.radius + 1)) ffMarkCircle(F, r.x, r.z, r.radius);
       for (const ws of worldSolids) {
         if (!inGrid(ws.x, ws.z, ws.radius + 1)) continue;
         // Same height test resolveStaticProps uses: a bridge rail overhead or a post
         // under a deck doesn't block someone walking on the ground.
-        const wk = ffIndex(ws.x, ws.z);
-        const footY = wk >= 0 ? ffH[wk] : sampleHeight(ws.x, ws.z);
+        const wk = ffIndexOf(F, ws.x, ws.z);
+        const footY = wk >= 0 ? F.h[wk] : sampleHeight(ws.x, ws.z);
         if (footY > ws.y1 - 0.3 || footY + 2.2 < ws.y0) continue;
-        ffMarkCircle(ws.x, ws.z, ws.radius);
+        ffMarkCircle(F, ws.x, ws.z, ws.radius);
       }
       if (house.present) {
         // The square footprint, inflated like everything else.
@@ -21760,7 +21770,7 @@
         const j0 = Math.max(0, Math.floor((cz - h - oz) / FF_CELL)), j1 = Math.min(FF_N - 1, Math.floor((cz + h - oz) / FF_CELL));
         for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
           const wx = ox + (i + 0.5) * FF_CELL, wz = oz + (j + 0.5) * FF_CELL;
-          if (Math.abs(wx - cx) < h && Math.abs(wz - cz) < h) ffBlocked[j * FF_N + i] = 1;
+          if (Math.abs(wx - cx) < h && Math.abs(wz - cz) < h) F.blocked[j * FF_N + i] = 1;
         }
       }
       // Builds: every cell near one is tested against the exact shape a body collides
@@ -21775,28 +21785,43 @@
           const wz = oz + (j + 0.5) * FF_CELL;
           for (let i = i0; i <= i1; i++) {
             const k = j * FF_N + i;
-            if (ffBlocked[k]) continue;
+            if (F.blocked[k]) continue;
             const wx = ox + (i + 0.5) * FF_CELL;
-            const r = pushOutOfBuild(b, wx, wz, FF_CLEAR, false, ffH[k]);
-            if (r.x !== wx || r.z !== wz) ffBlocked[k] = 1;
+            const r = pushOutOfBuild(b, wx, wz, FF_CLEAR, false, F.h[k]);
+            if (r.x !== wx || r.z !== wz) F.blocked[k] = 1;
           }
         }
       }
-      // Dijkstra from the player's cell outward. An edge is walked by a zombie heading
-      // TOWARD the player, i.e. from the far cell into the near one, so the climb that
-      // matters is near minus far.
-      ffDist.fill(Infinity);
-      const src = ffIndex(px, pz);
-      ffReady = false;
-      if (src < 0) return;
-      ffDist[src] = 0;
+      // Dijkstra outward from the seed(s). An edge is walked by a zombie heading
+      // TOWARD the destination, i.e. from the far cell into the near one, so the climb
+      // that matters is near minus far.
+      F.dist.fill(Infinity);
+      F.ready = false;
       let n = 0;
       const push = (key, v) => {
         let c = n++;
         while (c > 0) { const p = (c - 1) >> 1; if (ffHeapK[p] <= key) break; ffHeapK[c] = ffHeapK[p]; ffHeapV[c] = ffHeapV[p]; c = p; }
         ffHeapK[c] = key; ffHeapV[c] = v;
       };
-      push(0, src);
+      if (seedR > 0) {
+        const i0 = Math.max(0, Math.floor((px - seedR - ox) / FF_CELL)), i1 = Math.min(FF_N - 1, Math.floor((px + seedR - ox) / FF_CELL));
+        const j0 = Math.max(0, Math.floor((pz - seedR - oz) / FF_CELL)), j1 = Math.min(FF_N - 1, Math.floor((pz + seedR - oz) / FF_CELL));
+        for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+          const k = j * FF_N + i;
+          if (F.blocked[k]) continue;
+          const wx = ox + (i + 0.5) * FF_CELL - px, wz = oz + (j + 0.5) * FF_CELL - pz;
+          if (wx * wx + wz * wz > seedR * seedR) continue;
+          F.dist[k] = 0;
+          push(0, k);
+        }
+        if (n === 0) return;
+      } else {
+        const src = ffIndexOf(F, px, pz);
+        if (src < 0) return;
+        F.blocked[src] = 0; // the destination itself is always reachable
+        F.dist[src] = 0;
+        push(0, src);
+      }
       while (n > 0) {
         const key = ffHeapK[0], cur = ffHeapV[0];
         const lk = ffHeapK[--n], lv = ffHeapV[n];
@@ -21809,24 +21834,41 @@
           ffHeapK[c] = ffHeapK[m]; ffHeapV[c] = ffHeapV[m]; c = m;
         }
         ffHeapK[c] = lk; ffHeapV[c] = lv;
-        if (key > ffDist[cur]) continue;
-        const ci = cur % FF_N, cj = (cur / FF_N) | 0, ch = ffH[cur];
+        if (key > F.dist[cur]) continue;
+        const ci = cur % FF_N, cj = (cur / FF_N) | 0, ch = F.h[cur];
         for (let q = 0; q < 8; q++) {
           const nb = FF_NB[q];
           const ni = ci + nb[0], nj = cj + nb[1];
           if (ni < 0 || nj < 0 || ni >= FF_N || nj >= FF_N) continue;
           const k = nj * FF_N + ni;
-          if (ffBlocked[k] && k !== src) continue;
+          if (F.blocked[k]) continue;
           // No cutting a corner past a blocked cell diagonally.
-          if (nb[2] > 1 && (ffBlocked[cj * FF_N + ni] || ffBlocked[nj * FF_N + ci])) continue;
+          if (nb[2] > 1 && (F.blocked[cj * FF_N + ni] || F.blocked[nj * FF_N + ci])) continue;
           const len = nb[2] * FF_CELL;
-          if (ch - ffH[k] > FF_CLIMB * len) continue;
-          const d = key + len * (ffWet[k] ? 2.5 : 1);
-          if (d < ffDist[k]) { ffDist[k] = d; push(d, k); }
+          if (ch - F.h[k] > FF_CLIMB * len) continue;
+          const d = key + len * (F.wet[k] ? 2.5 : 1);
+          if (d < F.dist[k]) { F.dist[k] = d; push(d, k); }
         }
       }
-      ffReady = true;
-      ffLastMs = performance.now() - t0;
+      F.ready = true;
+      F.lastMs = performance.now() - t0;
+    }
+
+    function updateFlowFields(dt, force) {
+      ffPlayer.timer -= dt;
+      if (ffPlayer.timer <= 0 || force) {
+        ffPlayer.timer = FF_PERIOD;
+        updateFlowFieldOn(ffPlayer, player.position.x, player.position.z, 0);
+      }
+      if (gameMode === 'defend' && house.active) {
+        ffHouse.timer -= dt;
+        if (ffHouse.timer <= 0 || force) {
+          ffHouse.timer = FF_PERIOD;
+          // half + FF_CLEAR blocks out to 3.45; the nearest open cell CENTRES on this
+          // grid sit at ~4.42 from the middle, so the ring reaches past them.
+          updateFlowFieldOn(ffHouse, house.group.position.x, house.group.position.z, house.half + 2.1);
+        }
+      }
     }
 
     // Walk-downhill direction for a body at (x, z). False when the field has nothing to
@@ -21834,13 +21876,13 @@
     // steering.
     const _ffOut = { x: 0, z: 0 };
     let flowEnabled = true; // debug A/B switch (TT.setFlow)
-    function flowDir(x, z) {
-      if (!ffReady || !flowEnabled) return false;
-      const k = ffIndex(x, z);
+    function flowDirOn(F, x, z) {
+      if (!F.ready || !flowEnabled) return false;
+      const k = ffIndexOf(F, x, z);
       if (k < 0) return false;
       const ci = k % FF_N, cj = (k / FF_N) | 0;
       let tk = -1;
-      if (ffDist[k] === Infinity) {
+      if (F.dist[k] === Infinity) {
         // Shoved into an obstacle's margin (or somewhere the field never reached).
         // Step out to the NEAREST open cell rather than the lowest-scoring one: the
         // lowest is often just across the wall, and aiming there walks it straight
@@ -21851,32 +21893,34 @@
             const ni = ci + di, nj = cj + dj;
             if (ni < 0 || nj < 0 || ni >= FF_N || nj >= FF_N) continue;
             const kk = nj * FF_N + ni;
-            if (ffDist[kk] === Infinity) continue;
-            const wx = ffOX + (ni + 0.5) * FF_CELL - x, wz = ffOZ + (nj + 0.5) * FF_CELL - z;
+            if (F.dist[kk] === Infinity) continue;
+            const wx = F.ox + (ni + 0.5) * FF_CELL - x, wz = F.oz + (nj + 0.5) * FF_CELL - z;
             const d2 = wx * wx + wz * wz;
             if (d2 < bd) { bd = d2; tk = kk; }
           }
         }
         if (tk < 0) return false;
       } else {
-        let best = ffDist[k];
+        let best = F.dist[k];
         for (let q = 0; q < 8; q++) {
           const nb = FF_NB[q];
           const ni = ci + nb[0], nj = cj + nb[1];
           if (ni < 0 || nj < 0 || ni >= FF_N || nj >= FF_N) continue;
           // Same no-corner-cutting rule the field was built with.
-          if (nb[2] > 1 && (ffBlocked[cj * FF_N + ni] || ffBlocked[nj * FF_N + ci])) continue;
+          if (nb[2] > 1 && (F.blocked[cj * FF_N + ni] || F.blocked[nj * FF_N + ci])) continue;
           const kk = nj * FF_N + ni;
-          if (ffDist[kk] < best) { best = ffDist[kk]; tk = kk; }
+          if (F.dist[kk] < best) { best = F.dist[kk]; tk = kk; }
         }
         if (tk < 0) return false;
       }
-      const tx = ffOX + ((tk % FF_N) + 0.5) * FF_CELL, tz = ffOZ + (((tk / FF_N) | 0) + 0.5) * FF_CELL;
+      const tx = F.ox + ((tk % FF_N) + 0.5) * FF_CELL, tz = F.oz + (((tk / FF_N) | 0) + 0.5) * FF_CELL;
       const dx = tx - x, dz = tz - z, l = Math.hypot(dx, dz);
       if (l < 1e-4) return false;
       _ffOut.x = dx / l; _ffOut.z = dz / l;
       return true;
     }
+    function flowDir(x, z) { return flowDirOn(ffPlayer, x, z); }
+    function houseFlowDir(x, z) { return flowDirOn(ffHouse, x, z); }
 
     function updateTreeFade(dt) {
       const px = player.position.x, pz = player.position.z;
@@ -22404,7 +22448,7 @@
 
     let groanThrottle = 0;
     function updateZombies(dt) {
-      if (zombies.length) updateFlowField(dt);
+      if (zombies.length) updateFlowFields(dt);
       zombiesRemaining = Math.max(0, waveTotal - waveSpawned) + zombies.length;
       if (phase === 'wave' && waveSpawned >= waveTotal) {
         zombiesRemaining = zombies.length;
@@ -22531,11 +22575,15 @@
         // this probe, well past the 0.85m that marks a bluff, so without this the horde
         // treated every staircase as a cliff face and walked round it.
         const rampAhead = onRamp(zx + nx * probe, zz + nz * probe) || onRamp(zx + nx * 0.6, zz + nz * 0.6) || onRamp(zx, zz);
-        // Chasing the player (or a point a few metres off them): follow the flow field
-        // round whatever is in the way. Anything else — the house, a decoy, a wide
-        // flank — keeps the local steering below.
+        // Chasing the player (or a point a few metres off them): follow the player's
+        // flow field round whatever is in the way. Marching on the cabin in Defend:
+        // follow the cabin's own field. Anything else — a decoy, a wide flank — keeps
+        // the local steering below.
         let flowed = false;
-        if (!lured && dist > 2.4 && Math.hypot(tx - px0, tz - pz0) < 4.5 && flowDir(zx, zz)) {
+        const flowGot = !lured && dist > 2.4 &&
+          (Math.hypot(tx - px0, tz - pz0) < 4.5 ? flowDir(zx, zz)
+            : (house.active && Math.hypot(tx - hx0, tz - hz0) < 4.5 && houseFlowDir(zx, zz)));
+        if (flowGot) {
           // Eased over ~0.1 s so stepping cell to cell doesn't read as a twitch.
           const e = Math.min(1, dt * 10);
           z.flowX = (z.flowX == null ? _ffOut.x : z.flowX + (_ffOut.x - z.flowX) * e);
@@ -24419,10 +24467,13 @@
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
           acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getRendererBackend: () => rendererBackend, TSL,
-          flowField: () => ({ ready: ffReady, ms: ffLastMs, ox: ffOX, oz: ffOZ }), updateFlowField, flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
+          flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
+          updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
+          houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           setFlow: (on) => { flowEnabled = !!on; },
           getCombo: () => combo, setCombo: (n) => { combo = n | 0; comboT = COMBO_WINDOW; },
-          ffDistAt: (x, z) => { const k = ffIndex(x, z); return k < 0 ? null : ffDist[k]; }, ffBlockedAt: (x, z) => { const k = ffIndex(x, z); return k < 0 ? null : ffBlocked[k]; },
+          ffDistAt: (x, z) => { const k = ffIndexOf(ffPlayer, x, z); return k < 0 ? null : ffPlayer.dist[k]; }, ffBlockedAt: (x, z) => { const k = ffIndexOf(ffPlayer, x, z); return k < 0 ? null : ffPlayer.blocked[k]; },
+          ffHouseDistAt: (x, z) => { const k = ffIndexOf(ffHouse, x, z); return k < 0 ? null : ffHouse.dist[k]; },
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
           CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope,
