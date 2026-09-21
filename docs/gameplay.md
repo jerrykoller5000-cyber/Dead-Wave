@@ -208,12 +208,18 @@ are not targets: they are meant to be walked over, which is their whole job.
   ground with a thump, crushes anything under the trunk (you included, so watch where they fall),
   and lies there for about 20 s before sinking away.
 
-## Minimap
+## Maps
 
-North-up, east on the right (the same handedness as the view). White arrow: where you face. Pale
-wedge: what the camera shows. Zombies: big red dots that flash (about 2 Hz) with a glow behind
-them, the colossus larger. Yellow square: the kiosk. Cyan: your builds. Red arcs on the rim: where
-the wave is coming from.
+**Minimap** (top right) shows only the 50 m around you, with a faint ring at 25 m. It turns
+with the camera, so map-up is always screen-up — `W` walks you up the map whichever way you have
+swung the view — and the compass letters ride the rim so north is always findable. White arrow:
+where you face. Pale wedge: what the camera shows. Zombies: big red dots that flash (about 2 Hz)
+with a glow behind them; brutes, demons and the colossus larger. Yellow square: the kiosk. Green:
+the house. Cyan: your builds. Red arcs on the rim: the bearing the wave is coming from — those are
+directions, so they stay on the rim however far out the horde is.
+
+**`Tab`** opens the full map: the whole world, north-up, with the minimap's reach drawn as a
+dashed ring around you. `Tab` or `Esc` closes it. It does not pause the game.
 
 ## Ambience
 

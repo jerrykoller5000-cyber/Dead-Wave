@@ -498,6 +498,22 @@
     #minimapFrame::after { right: -1px; bottom: -1px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
     #minimapFrame .br { right: -1px; top: -1px; border-right: 2px solid var(--accent); border-top: 2px solid var(--accent); }
     #minimapFrame .bl { left: -1px; bottom: -1px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    /* Full map (Tab). Sits over the game without pausing it and takes no clicks. */
+    #fullMap {
+      display: none; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+      align-items: center; justify-content: center; background: rgba(4,6,4,.45);
+    }
+    #fullMap.show { display: flex; }
+    #fullMap .card {
+      background: var(--panel-bg-solid); border: 1px solid var(--panel-border); padding: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5); text-align: center;
+    }
+    #fullMapCanvas { display: block; }
+    #fullMap .legend {
+      margin-top: 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim);
+    }
+    #fullMap .legend i { display: inline-block; width: 9px; height: 9px; margin: 0 4px 0 6px; vertical-align: -1px; }
+    #fullMap .legend b { color: var(--accent); }
     #bigBanner {
       position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
       text-align: center; opacity: 0; transition: opacity 0.45s ease;
@@ -642,6 +658,7 @@
     </div>
     <div id="placeBanner"></div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
+    <div id="fullMap" aria-hidden="true"><div class="card"><canvas id="fullMapCanvas"></canvas><div class="legend"><b>Tab</b> close · <i style="background:#ff3030"></i>zombies · <i style="background:#ffd24a"></i>kiosk · <i style="background:#7cdea0"></i>house · <i style="background:#5ad8ff"></i>builds · dashed ring: minimap reach (50 m)</div></div></div>
     <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
@@ -759,7 +776,8 @@
               <li>Prep — Enter starts the wave early; Settings can skip prep time altogether</li>
               <li>Waves come from the bearings marked in red on the map rim</li>
               <li>Chain kills fast for a streak: 5 / 10 / 20 / 30 in a row multiplies the cash they drop</li>
-              <li>Zombies are the flashing red dots on the minimap</li>
+              <li>Minimap: the 50 m around you, turned so up is always the way the camera faces (W). Zombies are the flashing red dots; red arcs on the rim are where the wave comes from</li>
+              <li>Tab — full map of the whole area, north-up</li>
               <li>Bombers (glowing gut) sprint and detonate — shoot them before they reach your line, ideally next to other zombies</li>
               <li>Leapers run on all fours and jump 5–14m onto you — sidestep the landing. Spiders — crawling zombies with six limbs — hang back and web you (slowed): kill them first</li>
               <li>Spitters (bloated, olive) don't throw anything any more — they walk in and then crawl the last 15m. Easy targets, but they keep coming</li>
@@ -5476,39 +5494,43 @@
       return names[Math.round(deg / 45) % 8];
     }
 
-    // The minimap bakes the landscape once, then blits it with live blips on top.
-    // North-up, and mirrored in x to match the view: facing north, world -x is on
-    // screen-right, so it is east and sits on the map's right. (It used to put +x on the
-    // right, which made the player arrow turn the opposite way to the camera.)
-    // Drawn at 2x the CSS size so lines and letters stay sharp on scaled displays.
+    // Two maps share one baked landscape.
+    //  - The minimap (top right) is local: 50 m around the marine, and it turns with the
+    //    camera so map-up is always screen-up — W on the keyboard is up on the map, whatever
+    //    way you have swung the view. It used to be the whole world, north-up, with the
+    //    marine a speck and every direction needing a mental rotation to match the screen.
+    //  - Tab brings up the full map: the whole world, north-up, for finding your way.
+    // The wave's bearing arcs stay on the minimap's rim — they are directions, not places,
+    // so they are right however far away the horde is.
+    // The bake is north-up and mirrored in x to match the view: facing north, world -x is
+    // on screen-right, so east sits on the map's right.
     const minimapEl = document.getElementById('minimap');
     const minimapCtx = minimapEl.getContext('2d');
-    const MAP_R = 235; // world radius covered by the map
-    const MAP_PX = 328;
+    const MAP_R = 235;          // world radius the bake covers
+    const MAP_PX = 328;         // minimap canvas (2x its CSS size, so lines stay sharp)
+    const MINI_R = 50;          // world radius the minimap shows
+    const BAKE_PX = 1024;       // ~2.2 px per metre: still crisp blown up to 50 m
     minimapEl.width = MAP_PX; minimapEl.height = MAP_PX;
     const mapBake = document.createElement('canvas');
-    mapBake.width = MAP_PX; mapBake.height = MAP_PX;
-
-    function worldToMap(x, z) {
-      return {
-        x: (MAP_R - x) / (2 * MAP_R) * MAP_PX,
-        y: (MAP_R - z) / (2 * MAP_R) * MAP_PX
-      };
+    mapBake.width = BAKE_PX; mapBake.height = BAKE_PX;
+    const bakeScale = BAKE_PX / (2 * MAP_R); // bake px per metre
+    function worldToBake(x, z) {
+      return { x: (MAP_R - x) * bakeScale, y: (MAP_R - z) * bakeScale };
     }
     // Canvas angle of a world heading given as a yaw (facing = (sin yaw, cos yaw)), for
-    // shapes drawn pointing up: rotate(this).
+    // shapes drawn pointing up on a north-up map: rotate(this).
     const mapRotForYaw = (yaw) => -yaw;
 
     function bakeMinimap() {
       const ctx = mapBake.getContext('2d');
-      const img = ctx.createImageData(mapBake.width, mapBake.height);
+      const img = ctx.createImageData(BAKE_PX, BAKE_PX);
       const d = img.data;
-      for (let py = 0; py < mapBake.height; py++) {
-        for (let px = 0; px < mapBake.width; px++) {
-          const wx = MAP_R - (px / mapBake.width) * 2 * MAP_R;
-          const wz = MAP_R - (py / mapBake.height) * 2 * MAP_R;
-          const i = (py * mapBake.width + px) * 4;
-          if (Math.hypot(wx, wz) > MAP_R) { d[i + 3] = 0; continue; }
+      for (let py = 0; py < BAKE_PX; py++) {
+        const wz = MAP_R - (py + 0.5) / bakeScale;
+        for (let px = 0; px < BAKE_PX; px++) {
+          const wx = MAP_R - (px + 0.5) / bakeScale;
+          const i = (py * BAKE_PX + px) * 4;
+          if (wx * wx + wz * wz > MAP_R * MAP_R) { d[i + 3] = 0; continue; }
           const h = sampleHeight(wx, wz);
           let r, g, b;
           if (waterLevelAt(wx, wz) !== null) {
@@ -5519,19 +5541,36 @@
           } else {
             const t = Math.max(0, Math.min(1, (h + 8) / 26));
             r = 58 + t * 46; g = 118 + t * 26; b = 58 + t * 8;
-            if (distToPath(wx, wz) < 1.9) { r = 122; g = 92; b = 58; }
           }
-          d[i] = r; d[i + 1] = g; d[i + 2] = b; d[i + 3] = 235;
+          // A touch of hillshade so relief reads when it is blown up on the minimap.
+          const hx = sampleHeight(wx - 1.5, wz) - h, hz = sampleHeight(wx, wz - 1.5) - h;
+          const shade = Math.max(0.78, Math.min(1.18, 1 + (hx + hz) * 0.06));
+          d[i] = r * shade; d[i + 1] = g * shade; d[i + 2] = b * shade; d[i + 3] = 235;
         }
       }
       ctx.putImageData(img, 0, 0);
+      // Tracks are stroked rather than tested per pixel: at this resolution a per-pixel
+      // distance-to-every-segment test cost more than the rest of the bake put together.
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(BAKE_PX / 2, BAKE_PX / 2, MAP_R * bakeScale, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.strokeStyle = 'rgb(156,138,104)'; // tan, not rust: must never be mistaken for a zombie blip
+      ctx.lineWidth = 3.8 * bakeScale;
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      for (const line of PATHS) {
+        ctx.beginPath();
+        line.forEach((p, k) => { const q = worldToBake(p.x, p.z); if (k) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); });
+        ctx.stroke();
+      }
+      ctx.restore();
       // Static landmark markers.
       function mark(x, z, color) {
-        const p = worldToMap(x, z);
+        const p = worldToBake(x, z);
         ctx.fillStyle = 'rgba(0,0,0,0.55)';
-        ctx.fillRect(p.x - 3.5, p.y - 3.5, 7, 7);
+        ctx.fillRect(p.x - 6, p.y - 6, 12, 12);
         ctx.fillStyle = color;
-        ctx.fillRect(p.x - 2.5, p.y - 2.5, 5, 5);
+        ctx.fillRect(p.x - 4.5, p.y - 4.5, 9, 9);
       }
       for (const c of POI.campsites) mark(c.x, c.z, '#ffb347');
       for (const c of POI.cabins) mark(c.x, c.z, '#c9a17c');
@@ -5544,26 +5583,140 @@
       if (POI.dock) mark(POI.dock.x, POI.dock.z, '#5a9ccc');
     }
 
+    // Shared blip drawing. `toMap(x, z)` returns canvas coords (or null to skip).
+    function mapDot(ctx, p, color, r) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r + 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+    function mapSquare(ctx, p, color, s) {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)';
+      ctx.fillRect(p.x - s / 2 - 1.2, p.y - s / 2 - 1.2, s + 2.4, s + 2.4);
+      ctx.fillStyle = color;
+      ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
+    }
+    function mapArrow(ctx, p, rot, k) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(rot);
+      ctx.scale(k, k);
+      ctx.beginPath();
+      ctx.moveTo(0, -9); ctx.lineTo(6, 6); ctx.lineTo(0, 3); ctx.lineTo(-6, 6);
+      ctx.closePath();
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(0,0,0,0.85)';
+      ctx.stroke();
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.restore();
+    }
+    // Every live blip, in whatever projection the caller hands in.
+    function drawMapBlips(ctx, toMap, sz) {
+      for (const b of builds) { const p = toMap(b.x, b.z); if (p) mapSquare(ctx, p, '#5ad8ff', 4 * sz); }
+      if (house.active) { const p = toMap(house.group.position.x, house.group.position.z); if (p) mapSquare(ctx, p, '#7cdea0', 9 * sz); }
+      { const p = toMap(KIOSK.x, KIOSK.z); if (p) mapSquare(ctx, p, '#ffd24a', 7 * sz); }
+      for (const s of supplyDrops) {
+        if (s.state === 'gone') continue;
+        const p = toMap(s.x, s.z);
+        if (p) mapSquare(ctx, p, (performance.now() % 700 < 350) ? '#ffe066' : '#ffaa00', 8 * sz);
+      }
+      // Zombies: big red dots that flash (~2 Hz) with a glow behind them, so they read
+      // at a glance against any terrain. Brutes, demons and the colossus are drawn larger.
+      const pulse = 0.5 + 0.5 * Math.sin(performance.now() * 0.001 * Math.PI * 2 * 2.1);
+      const core = 'rgb(255,' + Math.round(20 + pulse * 50) + ',' + Math.round(20 + pulse * 40) + ')';
+      const dim = 'rgb(' + Math.round(150 + pulse * 105) + ',0,0)';
+      const glow = 'rgba(255,30,30,' + (0.12 + pulse * 0.3).toFixed(2) + ')';
+      for (const z of zombies) {
+        if (!z.alive) continue;
+        const p = toMap(z.mesh.position.x, z.mesh.position.z);
+        if (!p) continue;
+        const big = z.typeKey === 'colossus' ? 1.65 : (z.typeKey === 'brute' || z.typeKey === 'demon' ? 1.2 : 1);
+        const r = 4.6 * big * sz;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r * (1.5 + pulse * 0.9), 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+        mapDot(ctx, p, pulse > 0.5 ? core : dim, r);
+      }
+    }
+
     let minimapTick = 0;
     function drawMinimap(dt) {
+      if (fullMapOpen) drawFullMap(dt);
       minimapTick -= dt;
       if (minimapTick > 0) return;
-      minimapTick = 0.05;
+      minimapTick = 1 / 30;
       const ctx = minimapCtx;
       const W = MAP_PX, C = W / 2, RIM = C - 7;
+      const px = player.position.x, pz = player.position.z;
+      const yaw = camYawCurrent;
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const k = (C - 4) / MINI_R;                 // canvas px per metre
+      // World -> minimap: screen-right is world (-cos yaw, sin yaw), screen-up is
+      // (sin yaw, cos yaw), exactly the axes WASD moves along.
+      const toLocal = (x, z) => {
+        const dx = x - px, dz = z - pz;
+        const lx = -dx * cy + dz * sy, ly = dx * sy + dz * cy;
+        if (lx * lx + ly * ly > MINI_R * MINI_R) return null; // only what is within 50 m
+        return { x: C + lx * k, y: C - ly * k };
+      };
       ctx.clearRect(0, 0, W, W);
-      ctx.drawImage(mapBake, 0, 0);
+      ctx.save();
+      ctx.beginPath(); ctx.arc(C, C, C - 1.5, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = 'rgba(8,12,24,0.85)';
+      ctx.fillRect(0, 0, W, W);
+      // Terrain: the bake, turned by the camera heading and blown up to 50 m.
+      // (Bake +x is world -x and bake +y is world -z; under this map those land on
+      // (cos yaw, sin yaw) and (-sin yaw, cos yaw) — a plain rotation by +yaw.)
+      {
+        const pb = worldToBake(px, pz);
+        ctx.save();
+        ctx.translate(C, C);
+        ctx.rotate(yaw);
+        ctx.scale(k / bakeScale, k / bakeScale);
+        ctx.translate(-pb.x, -pb.y);
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(mapBake, 0, 0);
+        ctx.restore();
+      }
+      // Range rings at 25 m and the 50 m edge, so distance reads off the map.
+      ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(C, C, 25 * k, 0, Math.PI * 2); ctx.stroke();
+      // View cone: the camera always looks up this map, so it never turns.
+      {
+        const hfov = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * camera.aspect);
+        const reach = 30 * k;
+        const g = ctx.createRadialGradient(C, C, 4, C, C, reach);
+        g.addColorStop(0, 'rgba(255,255,255,0.24)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(C, C);
+        ctx.arc(C, C, reach, -Math.PI / 2 - hfov / 2, -Math.PI / 2 + hfov / 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+      drawMapBlips(ctx, toLocal, 1);
+      ctx.restore();
+
       ctx.strokeStyle = 'rgba(10,14,8,0.85)';
       ctx.lineWidth = 3;
       ctx.beginPath(); ctx.arc(C, C, C - 1.5, 0, Math.PI * 2); ctx.stroke();
 
       // Threat direction: a red arc on the rim while a wave is inbound.
+      const rimAngle = (wx, wz) => Math.atan2(-(wx * sy + wz * cy), -wx * cy + wz * sy);
       if (gameStarted && phase !== 'idle' && waveBearings.length && !waveSurround) {
         ctx.strokeStyle = 'rgba(255,70,60,0.95)';
         ctx.lineWidth = 6;
         for (const bAng of waveBearings) {
-          // Spawn direction is world (cos a, sin a); mirrored x, flipped z on the canvas.
-          const ca = Math.atan2(-Math.sin(bAng), -Math.cos(bAng));
+          const ca = rimAngle(Math.cos(bAng), Math.sin(bAng)); // spawn direction is (cos a, sin a)
           ctx.beginPath();
           ctx.arc(C, C, RIM, ca - 0.45, ca + 0.45);
           ctx.stroke();
@@ -5576,93 +5729,80 @@
         ctx.stroke();
       }
 
-      const pp = worldToMap(player.position.x, player.position.z);
-      // View cone: roughly what the camera is showing, so the map lines up with the screen.
-      {
-        const hfov = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * camera.aspect);
-        const reach = 44;
-        ctx.save();
-        ctx.translate(pp.x, pp.y);
-        ctx.rotate(mapRotForYaw(camYawCurrent));
-        const g = ctx.createRadialGradient(0, 0, 4, 0, 0, reach);
-        g.addColorStop(0, 'rgba(255,255,255,0.30)');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.arc(0, 0, reach, -Math.PI / 2 - hfov / 2, -Math.PI / 2 + hfov / 2);
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
-      }
+      // Marine in the middle, arrow pointing where he faces relative to the view.
+      mapArrow(ctx, { x: C, y: C }, yaw - aimYaw, 1);
 
-      function dot(x, z, color, r) {
-        const p = worldToMap(x, z);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r + 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,0,0,0.7)';
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
-      }
-      function square(x, z, color, s) {
-        const p = worldToMap(x, z);
-        ctx.fillStyle = 'rgba(0,0,0,0.7)';
-        ctx.fillRect(p.x - s / 2 - 1.2, p.y - s / 2 - 1.2, s + 2.4, s + 2.4);
-        ctx.fillStyle = color;
-        ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s);
-      }
-      for (const b of builds) square(b.x, b.z, '#5ad8ff', 4);
-      if (house.active) square(house.group.position.x, house.group.position.z, '#7cdea0', 9);
-      square(KIOSK.x, KIOSK.z, '#ffd24a', 7);
-      for (const s of supplyDrops) {
-        if (s.state !== 'gone') square(s.x, s.z, (performance.now() % 700 < 350) ? '#ffe066' : '#ffaa00', 8);
-      }
-      // Zombies: big red dots that flash (~2 Hz) with a glow behind them, so they read
-      // at a glance against any terrain. The colossus is drawn larger.
-      {
-        const pulse = 0.5 + 0.5 * Math.sin(performance.now() * 0.001 * Math.PI * 2 * 2.1);
-        const core = 'rgb(255,' + Math.round(20 + pulse * 50) + ',' + Math.round(20 + pulse * 40) + ')';
-        const dim = 'rgb(' + Math.round(150 + pulse * 105) + ',0,0)';
-        for (const z of zombies) {
-          if (!z.alive) continue;
-          const r = z.typeKey === 'colossus' ? 7.5 : 4.6;
-          const p = worldToMap(z.mesh.position.x, z.mesh.position.z);
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, r * (1.5 + pulse * 0.9), 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,30,30,' + (0.12 + pulse * 0.3).toFixed(2) + ')';
-          ctx.fill();
-          dot(z.mesh.position.x, z.mesh.position.z, pulse > 0.5 ? core : dim, r);
-        }
-      }
-
-      // Player arrow, pointing where the marine faces.
-      ctx.save();
-      ctx.translate(pp.x, pp.y);
-      ctx.rotate(mapRotForYaw(aimYaw));
-      ctx.beginPath();
-      ctx.moveTo(0, -9); ctx.lineTo(6, 6); ctx.lineTo(0, 3); ctx.lineTo(-6, 6);
-      ctx.closePath();
-      ctx.lineJoin = 'round';
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = 'rgba(0,0,0,0.85)';
-      ctx.stroke();
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-      ctx.restore();
-
-      // Compass letters just inside the rim.
+      // Compass letters ride the rim so north is always findable.
       ctx.font = 'bold 17px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.lineWidth = 3.5;
       ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-      const inset = 17;
-      for (const [label, x, y] of [['N', C, inset], ['E', W - inset, C], ['S', C, W - inset], ['W', inset, C]]) {
+      const inset = C - 17;
+      for (const [label, wx, wz] of [['N', 0, 1], ['E', -1, 0], ['S', 0, -1], ['W', 1, 0]]) {
+        const a = rimAngle(wx, wz);
+        const x = C + Math.cos(a) * inset, y = C + Math.sin(a) * inset;
         ctx.strokeText(label, x, y);
         ctx.fillStyle = label === 'N' ? '#ffd24a' : 'rgba(255,255,255,0.85)';
+        ctx.fillText(label, x, y);
+      }
+    }
+
+    // --- Full map (Tab) ---------------------------------------------------------------
+    const fullMapEl = document.getElementById('fullMap');
+    const fullMapCanvas = document.getElementById('fullMapCanvas');
+    const fullMapCtx = fullMapCanvas.getContext('2d');
+    let fullMapOpen = false, fullMapTick = 0;
+    function setFullMap(on) {
+      fullMapOpen = !!on;
+      fullMapEl.classList.toggle('show', fullMapOpen);
+      if (fullMapOpen) { fullMapTick = 0; drawFullMap(0); }
+    }
+    function drawFullMap(dt) {
+      fullMapTick -= dt;
+      if (fullMapTick > 0) return;
+      fullMapTick = 1 / 20;
+      const css = Math.round(Math.min(innerWidth * 0.86, innerHeight * 0.8));
+      const W = Math.round(css * Math.min(2, devicePixelRatio || 1));
+      if (fullMapCanvas.width !== W) {
+        fullMapCanvas.width = W; fullMapCanvas.height = W;
+        fullMapCanvas.style.width = css + 'px'; fullMapCanvas.style.height = css + 'px';
+      }
+      const ctx = fullMapCtx;
+      const C = W / 2;
+      const s = W / BAKE_PX;
+      const sz = W / 600;                      // blip size relative to a ~600 px map
+      const toFull = (x, z) => { const p = worldToBake(x, z); return { x: p.x * s, y: p.y * s }; };
+      ctx.clearRect(0, 0, W, W);
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(mapBake, 0, 0, W, W);
+      ctx.strokeStyle = 'rgba(10,14,8,0.9)';
+      ctx.lineWidth = 4 * sz;
+      ctx.beginPath(); ctx.arc(C, C, C - 2 * sz, 0, Math.PI * 2); ctx.stroke();
+      // The minimap's reach, so the two maps visibly relate.
+      const pp = toFull(player.position.x, player.position.z);
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.setLineDash([6 * sz, 5 * sz]);
+      ctx.lineWidth = 1.5 * sz;
+      ctx.beginPath(); ctx.arc(pp.x, pp.y, MINI_R * bakeScale * s, 0, Math.PI * 2); ctx.stroke();
+      ctx.setLineDash([]);
+      if (gameStarted && phase !== 'idle' && waveBearings.length && !waveSurround) {
+        ctx.strokeStyle = 'rgba(255,70,60,0.95)';
+        ctx.lineWidth = 9 * sz;
+        for (const bAng of waveBearings) {
+          const ca = Math.atan2(-Math.sin(bAng), -Math.cos(bAng));
+          ctx.beginPath(); ctx.arc(C, C, C - 10 * sz, ca - 0.3, ca + 0.3); ctx.stroke();
+        }
+      }
+      drawMapBlips(ctx, toFull, sz);
+      mapArrow(ctx, pp, mapRotForYaw(aimYaw), 1.4 * sz);
+      ctx.font = 'bold ' + Math.round(22 * sz) + 'px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 4 * sz; ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+      const inset = 26 * sz;
+      for (const [label, x, y] of [['N', C, inset], ['E', W - inset, C], ['S', C, W - inset], ['W', inset, C]]) {
+        ctx.strokeText(label, x, y);
+        ctx.fillStyle = label === 'N' ? '#ffd24a' : 'rgba(255,255,255,0.9)';
         ctx.fillText(label, x, y);
       }
     }
@@ -13566,6 +13706,7 @@
     // The kiosk is a place: you have to walk up to it (E). It can also keep hours — see
     // KIOSK_PREP_ONLY, currently off. The sim freezes while the menu is up.
     function openShop(force = false) {
+      if (fullMapOpen) setFullMap(false);
       if (!gameStarted || gameOver || won || shopOpen) return;
       if (!force) {
         if (!nearKiosk()) { AudioSys.invalid(); showBanner('FIND THE KIOSK', 'The yellow terminal near the spawn clearing (yellow square on the map)', 1.8, '#ffb347'); return; }
@@ -17684,6 +17825,7 @@
     }
 
     function endGame(victory, msg) {
+      if (fullMapOpen) setFullMap(false);
       if (gameOver || won) return;
       gameOver = !victory;
       won = victory;
@@ -17955,6 +18097,13 @@
         if (e.code in keys) e.preventDefault();
         return;
       }
+      // Tab: the full map. Always swallowed so the browser never moves focus off the game.
+      if (e.code === 'Tab') {
+        e.preventDefault();
+        if (!e.repeat && gameStarted && !gameOver && !won) setFullMap(!fullMapOpen);
+        return;
+      }
+      if (e.code === 'Escape' && fullMapOpen) { setFullMap(false); e.preventDefault(); return; }
       if ((e.code === 'Enter' || e.code === 'NumpadEnter') && phase === 'prep') { skipPrep(); e.preventDefault(); return; }
       // Movement keys are ignored while manning the mortar. Clearing them afterwards
       // (updateMortar) came too late: the frame's movement had already used them.
@@ -22194,6 +22343,7 @@
     function setPaused(on) {
       if (on) {
         if (!gameStarted || gameOver || won) return;
+        if (fullMapOpen) setFullMap(false);
         paused = true;
         settingsFrom = null;
         pauseEl.classList.add('show');
@@ -22374,6 +22524,7 @@
     modeDefendBtn.addEventListener('click', () => startMode('defend'));
 
     function resetGame() {
+      if (fullMapOpen) setFullMap(false);
       AudioSys.chainsawStop();
       AudioSys.resetBlip();
       // Quietly: clearing the field for a new match is not a demolition, and every

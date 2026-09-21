@@ -52,6 +52,7 @@ toward the screen edge to swing further.
 | `Y` | Switch between one gun and two, once you own the pair (pistol, Uzi, revolver) |
 | `T` / `X` | Repair / sell. While a build ghost is up these act on the cell you are pointing at, not the nearest piece |
 | `Enter` | During prep: skip the countdown and start the wave now |
+| `Tab` | Full map (north-up, whole world). `Tab` or `Esc` closes it; the game keeps running |
 
 **`E` at the kiosk** opens it (`E` or `Esc` closes it; time stops while it is open). It trades mid-wave too.
 
