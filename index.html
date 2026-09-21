@@ -14504,7 +14504,14 @@
       if (!rule) return { refusal: 'cannot be built' };
       // A modifier does not take a slot; it changes a piece that is already there.
       if (rule.slot === 'modifier') {
-        for (let lv = 0; lv <= MAX_LEVEL; lv++) {
+        // The wall on YOUR storey first: standing on the first floor, a window goes in
+        // the wall beside you, not the one at ground level you cannot see from there.
+        // Then upward from the ground, so a second click cuts the next wall up.
+        const here = Math.max(0, Math.min(MAX_LEVEL,
+          Math.round((player.position.y - sampleHeight(gx * BUILD_GRID, gz * BUILD_GRID)) / LEVEL_H)));
+        const order = [here];
+        for (let lv = 0; lv <= MAX_LEVEL; lv++) if (lv !== here) order.push(lv);
+        for (const lv of order) {
           const b = cellOccupant(gx, gz, lv, 'base');
           if (!b || rule.on.indexOf(b.type) < 0) continue;
           if (b.opening) continue;
@@ -15702,7 +15709,8 @@
       // platform, on the platform for a turret — not on the grass under all of it.
       const _gTgt = resolveTarget(placeMode, pt.gx, pt.gz);
       const _gGround = buildBaseY(placeMode, pt.x, pt.z, footprint * 0.85, pt.gx, pt.gz);
-      const _gY = (_gTgt.refusal || _gTgt.slot === 'modifier') ? _gGround
+      const _gY = _gTgt.refusal ? _gGround
+        : _gTgt.slot === 'modifier' ? _gTgt.target.mesh.position.y   // on the wall it cuts
         : slotY(placeMode, pt.gx, pt.gz, _gTgt.level | 0, _gTgt.slot, _gGround);
       ghostGroup.position.set(pt.x, _gY, pt.z);
       const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
