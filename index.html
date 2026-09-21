@@ -3049,6 +3049,25 @@
     // ceiling covers a bridge spanning a carved river channel. See playerGroundY for
     // why the cap is generous rather than the old, too-tight 4.4.
     const STEP_UP = 0.75;
+    const PLAYER_HEAD = 1.7;
+
+    // The underside of the lowest deck overhead, or null. "Overhead" is a deck whose
+    // top is clearly above your feet, so one you are stepping onto never counts, and
+    // ramps never do — you walk up those, not under them.
+    function deckCeilingAt(x, z, feetY) {
+      let best = null;
+      for (const p of platforms) {
+        if (p.rise) continue;
+        if (p.deckY <= feetY + 0.5) continue;
+        const dx = x - p.x, dz = z - p.z;
+        const c = Math.cos(p.yaw), s = Math.sin(p.yaw);
+        const lx = dx * c - dz * s, lz = dx * s + dz * c;
+        if (Math.abs(lx) > p.hw || Math.abs(lz) > p.hl) continue;
+        const u = p.under != null ? p.under : p.deckY - 0.16;
+        if (best === null || u < best) best = u;
+      }
+      return best;
+    }
     // How far up (or down) a zombie can reach to hit the player. Under a platform deck,
     // over a single step.
     const ZOMBIE_REACH_Y = 1.45;
@@ -13797,7 +13816,11 @@
     function buildBaseY(kind, x, z, r, gx, gz) {
       const g = groundMinAround(x, z, r);
       if (!BUILD_BOX[kind]) return g;
-      let base = Math.floor(g / BUILD_STEP_Y) * BUILD_STEP_Y;
+      // The NEAREST shelf, not the one below. Rounding down sank a wall up to half a
+      // metre into the ground, and inside a roofed room that left as little as 1.5m
+      // of headroom: the roof sat on your head and you could not jump. The skirt
+      // reaches 0.7m down, so floating a piece up to 0.25m hides just as well.
+      let base = Math.round(g / BUILD_STEP_Y) * BUILD_STEP_Y;
       if (gx != null) {
         let best = null;
         for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
@@ -14829,6 +14852,12 @@
           m.castShadow = true; m.receiveShadow = true;
           g.add(m);
         }
+        // A buried course, like a wall's skirt: a panel can sit a little above the
+        // ground (nearest shelf, or following its neighbour's height) and this fills
+        // the gap underneath. Kept thinner than a deck, so on a floor it stays hidden.
+        const foot = new THREE.Mesh(rbox(0.6, 0.22, 0.6, 0.05), bag);
+        foot.position.y = -0.11;
+        g.add(foot);
       },
       arm(a, mo) {
         const bag = SANDBAG_SPEC.bagMat(mo);
@@ -14844,6 +14873,9 @@
             a.add(m);
           }
         }
+        const foot = new THREE.Mesh(rbox(0.52, 0.22, L, 0.05), bag);
+        foot.position.set(0, -0.11, 0.29 + L / 2);
+        a.add(foot);
       }
     };
     function makeSandbagMesh(matOverride = null) { return makePanelMesh(SANDBAG_SPEC, matOverride); }
@@ -15156,6 +15188,7 @@
           x: made.x, z: made.z, hw: BUILD_GRID / 2 + 0.02, hl: BUILD_GRID / 2 + 0.02,
           yaw: made.yaw || 0,
           deckY: made.mesh.position.y + (rule2.ramp ? 0.05 : rule2.height),
+          under: made.mesh.position.y,
           rise: rule2.ramp ? LEVEL_H : 0
         };
         platforms.push(made.deck);
@@ -22893,7 +22926,14 @@
         }
       }
       {
-        let groundY = playerGroundY(player.position.x, player.position.z, player.position.y + STEP_UP);
+        // Work out the ceiling FIRST. Jumping inside a roofed room used to rise far
+        // enough that the roof came within step reach of your feet, and the ground
+        // lookup put you on top of it: a jump was a way onto the roof through it.
+        const ceilY = (climbingTower || onTowerDeck) ? null
+          : deckCeilingAt(player.position.x, player.position.z, player.position.y);
+        let reachY = player.position.y + STEP_UP;
+        if (ceilY !== null) reachY = Math.min(reachY, ceilY - 0.05);
+        let groundY = playerGroundY(player.position.x, player.position.z, reachY);
         if (onTowerDeck) groundY = tower.deckY;
         const depth = waterDepthAt(player.position.x, player.position.z);
         const waterLevel = waterLevelAt(player.position.x, player.position.z);
@@ -22953,15 +22993,11 @@
         // bridge/dock used to let your head (and the camera, and the gun) poke
         // straight up through the planks since nothing checked for a ceiling — only
         // for a floor. Only kicks in when you're clearly underneath, not on top.
-        if (!climbingTower && !onTowerDeck) {
-          const deckHere = platformHeightAt(player.position.x, player.position.z);
-          if (deckHere !== null && player.position.y < deckHere - 0.5) {
-            const underside = deckHere - 0.16;
-            if (player.position.y + 1.7 > underside) {
-              player.position.y = underside - 1.7;
-              if (vy > 0) vy = 0;
-            }
-          }
+        // It is the LOWEST deck over you that counts: under a two-storey house the
+        // highest deck is the top roof, and that let your head through the first floor.
+        if (ceilY !== null && player.position.y + PLAYER_HEAD > ceilY) {
+          player.position.y = Math.max(groundY, ceilY - PLAYER_HEAD);
+          if (vy > 0) vy = 0;
         }
         // Coyote / buffer timers ride on the resolved grounded state.
         if (climbingTower) {
