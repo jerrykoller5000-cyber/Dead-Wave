@@ -17629,7 +17629,11 @@
     function updateCombo(dt) {
       if (combo > 0) {
         comboT -= dt;
-        if (comboT <= 0) { combo = 0; comboT = 0; }
+        if (comboT <= 0) {
+          // A streak worth powers deserves a note when it dies with them.
+          if (combo >= 10 && gameStarted && !gameOver && !won) showHitPing('STREAK LOST — ' + combo + '×', '#8a93a5');
+          combo = 0; comboT = 0;
+        }
       }
       if (comboPopT > 0) comboPopT -= dt;
       if (!comboEl) return;
