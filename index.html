@@ -13736,7 +13736,7 @@
       if (gx != null) {
         let best = null;
         for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-          const nb = cellOccupant(gx + dx, gz + dz);
+          const nb = cellOccupant(gx + dx, gz + dz, 0, 'base');
           if (!nb || !BUILD_BOX[nb.type] || nb.baseY == null) continue;
           if (best == null || nb.baseY > best) best = nb.baseY;
         }
@@ -14242,11 +14242,126 @@
     function gridIndex(v) { return Math.round(v / BUILD_GRID); }
     function gridCentre(i) { return i * BUILD_GRID; }
     function snapToGrid(v) { return gridCentre(gridIndex(v)); }
-    function cellKey(gx, gz) { return gx + ',' + gz; }
+    // === What can go where ======================================================
+    // Every placeable is described by one row here instead of by branches scattered
+    // through placeRefusal, spawnBuild and the linker. Adding a piece should be a row
+    // plus a mesh, not an edit in six places.
+    //
+    // A cell is (gx, gz, level). Each level has three slots:
+    //   base   the load-bearing piece   — wall, sandbag, barricade, platform, floor
+    //   top    a half-height addition standing on the base — wire, railing
+    //   object something free-standing sitting on a floor — turrets, mines, drums
+    // so a wall can carry barbed wire on its head AND a platform above it without the
+    // two fighting over the same slot.
+    //
+    //   slot     which of the three it fills
+    //   on       what it will stand on: 'ground', or the type of the piece beneath
+    //   height   how far its top is above its own base — what the next thing up sits on
+    //   maxStack for 'base' pieces, how many of this type may stack in one column
+    //   armour   how much it adds to the hp of the piece it is standing on
+    const LEVEL_H = 2.0;      // one storey; matches WALL_TOP so a wall IS a storey
+    const MAX_LEVEL = 2;      // ground plus two = three storeys
+    const BUILD_RULES = {
+      wall:      { slot: 'base', on: ['ground', 'wall', 'platform', 'floor'], height: 2.0,  maxStack: 2 },
+      sandbag:   { slot: 'base', on: ['ground', 'wall', 'platform', 'floor'], height: 1.05, armour: 25 },
+      barricade: { slot: 'base', on: ['ground'], height: 1.4 },
+      spikes:    { slot: 'base', on: ['ground'], height: 0.3 },
+      mortar:    { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.2 },
+      lure:      { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.7 },
+      mine:      { slot: 'base', on: ['ground'], height: 0.15 },
+      barrel:    { slot: 'base', on: ['ground'], height: 1.0 },
+      light:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.35 },
+      flame:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.3 },
+      heavy:     { slot: 'base', on: ['ground', 'platform', 'floor'], height: 1.5 }
+    };
+    function ruleFor(kind) { return BUILD_RULES[kind] || null; }
+    function pieceHeight(kind) { const r = ruleFor(kind); return r ? r.height : 1.0; }
+    // Panels are the pieces that link into runs and take part in the arm system.
+    function isPanel(kind) { return !!BUILD_BOX[kind]; }
+
+    function cellKey(gx, gz, lv, slot) { return gx + ',' + gz + ',' + (lv | 0) + ',' + (slot || 'base'); }
     // Cell -> the build standing in it. Kept alongside `builds` rather than derived,
     // because placement asks this question every frame while the ghost is up.
     const buildCells = new Map();
-    function cellOccupant(gx, gz) { return buildCells.get(cellKey(gx, gz)) || null; }
+    // The piece in one slot of one cell-level. Defaults to the base slot at ground
+    // level, which is what almost every caller wants.
+    function cellOccupant(gx, gz, lv, slot) { return buildCells.get(cellKey(gx, gz, lv || 0, slot || 'base')) || null; }
+    // The tallest level in this column that holds anything, or -1.
+    function columnTop(gx, gz) {
+      for (let lv = MAX_LEVEL; lv >= 0; lv--) {
+        for (const slot of ['base', 'top', 'object']) if (cellOccupant(gx, gz, lv, slot)) return lv;
+      }
+      return -1;
+    }
+    // How many of `kind` are stacked directly under this level in the same column.
+    function stackedBelow(gx, gz, lv, kind) {
+      let n = 0;
+      for (let l = lv - 1; l >= 0; l--) {
+        const b = cellOccupant(gx, gz, l, 'base');
+        if (!b || b.type !== kind) break;
+        n++;
+      }
+      return n;
+    }
+
+    // Where a piece of this kind would go in this column: the lowest level whose slot
+    // is free and whose support it can stand on. Returns { level, slot } or { refusal }.
+    // This is the single place that answers "can that go there", so the ghost, the
+    // click and any future auto-builder all agree.
+    // The highest thing standing in a column — what you are actually looking at when
+    // you point at a cell, and so what X scraps and T patches.
+    function topmostInCell(gx, gz) {
+      for (let lv = MAX_LEVEL; lv >= 0; lv--) {
+        for (const sl of ['top', 'object', 'base']) {
+          const o = cellOccupant(gx, gz, lv, sl);
+          if (o) return o;
+        }
+      }
+      return null;
+    }
+
+    function resolveTarget(kind, gx, gz) {
+      const rule = ruleFor(kind);
+      if (!rule) return { refusal: 'cannot be built' };
+      let last = null;
+      for (let lv = 0; lv <= MAX_LEVEL; lv++) {
+        if (cellOccupant(gx, gz, lv, rule.slot)) { last = 'cell taken'; continue; }
+        const why = supportRefusal(kind, rule, gx, gz, lv);
+        if (!why) return { level: lv, slot: rule.slot };
+        last = why;
+      }
+      return { refusal: last || 'no room' };
+    }
+
+    // Is there something at this level for the piece to stand on?
+    function supportRefusal(kind, rule, gx, gz, lv) {
+      if (rule.slot === 'base') {
+        if (lv === 0) return rule.on.indexOf('ground') < 0 ? 'needs something under it' : null;
+        const under = cellOccupant(gx, gz, lv - 1, 'base');
+        if (!under) return 'nothing under it';
+        if (rule.on.indexOf(under.type) < 0) return 'will not stand on ' + BUILD_NAMES[under.type].toLowerCase();
+        if (rule.maxStack && stackedBelow(gx, gz, lv, kind) >= rule.maxStack) return 'stacked as high as it goes';
+        return null;
+      }
+      // 'top' and 'object' ride on the base of their OWN level, or the bare ground.
+      const base = cellOccupant(gx, gz, lv, 'base');
+      if (!base) {
+        if (lv !== 0) return 'nothing under it';
+        return rule.on.indexOf('ground') < 0 ? 'needs something under it' : null;
+      }
+      return rule.on.indexOf(base.type) < 0 ? 'will not sit on ' + BUILD_NAMES[base.type].toLowerCase() : null;
+    }
+
+    // Ground height of a cell-level: the column's own base plus a storey per level,
+    // and for a 'top' or 'object' piece, the height of whatever it is standing on.
+    function slotY(kind, gx, gz, lv, slot, groundY) {
+      let y = groundY + lv * LEVEL_H;
+      if (slot !== 'base') {
+        const base = cellOccupant(gx, gz, lv, 'base');
+        if (base) y = base.mesh.position.y + pieceHeight(base.type);
+      }
+      return y;
+    }
     function rotateBuild() {
       if (!placeMode) return;
       buildYaw = (buildYaw + 1) & 3;
@@ -14325,7 +14440,14 @@
         if (distToStream(x, z) < STREAM_WIDTH * 0.9) return 'too close to the water';
         return null;
       }
-      if (gx != null && cellOccupant(gx, gz)) return 'cell taken';
+      // Which level and slot this would land in, and why not if it would not.
+      if (gx != null) {
+        const t = resolveTarget(placeMode, gx, gz);
+        if (t.refusal) return t.refusal;
+        // Ground checks only bite at the bottom of a column; a piece going onto a
+        // wall at level 1 does not care what the grass under it looks like.
+        if (t.level > 0) return null;
+      }
       const footprint = BUILD_FOOTPRINT[placeMode] || 0.7;
       if (distToStream(x, z) < STREAM_WIDTH * 0.9) return 'too close to the water';
       if (waterDepthAt(x, z) > 0.05) return 'in the water';
@@ -14345,7 +14467,7 @@
       let best = null;
       if (placeMode) {
         const pt = getPlacePoint();
-        const hit = cellOccupant(pt.gx, pt.gz);
+        const hit = topmostInCell(pt.gx, pt.gz);
         if (hit && hit.hp < hit.maxHp - 0.5) best = hit;
       } else {
         let bd = 7;
@@ -14373,7 +14495,7 @@
       let best = null;
       if (placeMode) {
         const pt = getPlacePoint();
-        best = cellOccupant(pt.gx, pt.gz);
+        best = topmostInCell(pt.gx, pt.gz);
         if (!best) {
           AudioSys.invalid();
           showBanner('NOTHING THERE', 'Point at the piece you want to scrap', 1.1, '#ffb347');
@@ -14431,14 +14553,8 @@
       }
       bank -= cost;
       updateCoinHud();
-      _pendingCell.gx = pt.gx; _pendingCell.gz = pt.gz;
-      const made = spawnBuild(placeMode, pt.x, pt.z);
-      _pendingCell.gx = null; _pendingCell.gz = null;
-      if (made) {
-        made.gx = pt.gx; made.gz = pt.gz;
-        buildCells.set(cellKey(pt.gx, pt.gz), made);
-        refreshPanelNeighbourhood(pt.gx, pt.gz);
-      }
+      const made = placeBuildAt(placeMode, pt.gx, pt.gz);
+      if (!made) { AudioSys.invalid(); return; }
       AudioSys.place();
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -14531,25 +14647,65 @@
 
       return g;
     }
-    function makeMortarMesh(matOverride = null) {
+    // `collapsed` is the carrying configuration: legs folded flat along the tube and
+    // the baseplate swung up against it, so what goes on the shoulder is one bundle
+    // rather than a deployed mortar floating at an angle.
+    function makeMortarMesh(matOverride = null, collapsed = false) {
       const g = new THREE.Group();
       const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.6, roughness: 0.5 });
       const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.46, 0.08, 12), steel);
-      plate.position.y = 0.04; g.add(plate);
+      if (collapsed) { plate.position.set(0, 0.16, -0.1); plate.rotation.x = Math.PI / 2; }
+      else plate.position.y = 0.04;
+      g.add(plate);
       const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12), matOverride || gunMetal);
-      tube.position.set(0, 0.62, 0.18); tube.rotation.x = -0.72; g.add(tube);
+      if (collapsed) { tube.position.set(0, 0.62, 0); tube.rotation.x = 0; }
+      else { tube.position.set(0, 0.62, 0.18); tube.rotation.x = -0.72; }
       tube.castShadow = true;
+      g.add(tube);
       g.userData.tube = tube;
       const bipod = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.9, 6), steel);
-      bipod.position.set(0.3, 0.45, -0.25); bipod.rotation.z = 0.5; bipod.rotation.x = 0.35; g.add(bipod);
-      const bipod2 = bipod.clone(); bipod2.position.x = -0.3; bipod2.rotation.z = -0.5; g.add(bipod2);
+      if (collapsed) { bipod.position.set(0.14, 0.62, 0.02); bipod.rotation.set(0, 0, 0); }
+      else { bipod.position.set(0.3, 0.45, -0.25); bipod.rotation.z = 0.5; bipod.rotation.x = 0.35; }
+      g.add(bipod);
+      const bipod2 = bipod.clone();
+      bipod2.position.x = -bipod.position.x;
+      if (!collapsed) bipod2.rotation.z = -0.5;
+      g.add(bipod2);
       return g;
+    }
+
+    // The one way a piece gets built into the grid: work out where it goes, make it,
+    // record it in the cell map, let it strengthen what it stands on, and re-link the
+    // neighbourhood. tryPlace used to do all of this inline, which meant nothing else
+    // could put a piece down correctly — including the tests.
+    function placeBuildAt(kind, gx, gz) {
+      const tgt = resolveTarget(kind, gx, gz);
+      if (tgt.refusal) return null;
+      _pendingCell.gx = gx; _pendingCell.gz = gz;
+      _pendingCell.level = tgt.level | 0; _pendingCell.slot = tgt.slot || 'base';
+      const made = spawnBuild(kind, gridCentre(gx), gridCentre(gz));
+      _pendingCell.gx = null; _pendingCell.gz = null; _pendingCell.level = 0; _pendingCell.slot = 'base';
+      if (!made) return null;
+      made.gx = gx; made.gz = gz;
+      made.level = tgt.level | 0;
+      made.slot = tgt.slot || 'base';
+      buildCells.set(cellKey(made.gx, made.gz, made.level, made.slot), made);
+      // Anything that props up what it is standing on makes that piece tougher:
+      // sandbags heaped against a wall really are more wall to chew through.
+      const rule = ruleFor(made.type);
+      if (rule && rule.armour) {
+        const under = cellOccupant(made.gx, made.gz, made.level - 1, 'base') ||
+                      cellOccupant(made.gx, made.gz, made.level, 'base');
+        if (under && under !== made) { under.maxHp += rule.armour; under.hp += rule.armour; }
+      }
+      refreshPanelNeighbourhood(gx, gz, made.level);
+      return made;
     }
 
     // Which cell spawnBuild is filling. Set by tryPlace just before the call, so the
     // height lookup can see the neighbours; anything spawning a build another way
     // (debug hooks, the mortar set-down) simply gets the ungraded ground height.
-    const _pendingCell = { gx: null, gz: null };
+    const _pendingCell = { gx: null, gz: null, level: 0, slot: 'base' };
     function spawnBuild(kind, x, z) {
       const st = BUILD_STATS[kind] || BUILD_STATS.barricade;
       let mesh;
@@ -14568,7 +14724,9 @@
         return buildBarrel(x, z, aimYaw + (Math.random() - 0.5) * 0.4);
       }
       else mesh = makeHeavyTurretMesh();
-      const baseY = buildBaseY(kind, x, z, st.radius * 0.85, _pendingCell.gx, _pendingCell.gz);
+      const groundY = buildBaseY(kind, x, z, st.radius * 0.85, _pendingCell.gx, _pendingCell.gz);
+      const baseY = _pendingCell.gx == null ? groundY
+        : slotY(kind, _pendingCell.gx, _pendingCell.gz, _pendingCell.level, _pendingCell.slot, groundY);
       mesh.position.set(x, baseY, z);
       // Walls face across the approach: turn broadside to the player who placed them.
       // Everything takes the rotation the ghost was showing, so what you saw is what
@@ -14604,6 +14762,22 @@
       return b;
     }
 
+    // The first structure standing between two points, or null. Only asked when a
+    // zombie already has the player in reach, so it runs rarely and can afford to
+    // walk the whole list.
+    function buildBetween(ax, ay, az, bx, by, bz) {
+      let best = null, bt = 2;
+      for (const b of builds) {
+        if (b.hp <= 0 || !BUILD_ATTACKABLE[b.type]) continue;
+        const r = (BUILD_BOX[b.type] ? BUILD_GRID / 2 : (b.radius || 0.6)) + 0.1;
+        if (b.x + r < Math.min(ax, bx) || b.x - r > Math.max(ax, bx) ||
+            b.z + r < Math.min(az, bz) || b.z - r > Math.max(az, bz)) continue;
+        const t = segmentHitsBuild(b, ax, ay, az, bx, by, bz);
+        if (t !== null && t < bt) { bt = t; best = b; }
+      }
+      return best;
+    }
+
     // What the horde will stop and swing at. Spikes and mines are meant to be walked
     // over (that is their whole job) and a fuel drum is a landmark rather than a
     // build, so neither is a target. Turrets are, which they were not before: the old
@@ -14626,13 +14800,17 @@
       if (!b || !b.mesh || !b.mesh.userData.panel || b.gx == null) return;
       const arms = b.mesh.userData.arms;
       let any = false;
+      const lv = b.level | 0;
       // The mesh is rotated by b.yaw, so a world direction has to be expressed in the
       // mesh's own frame before picking an arm.
       const turns = ((Math.round(b.yaw / (Math.PI / 2)) % 4) + 4) % 4;
       for (let d = 0; d < 4; d++) {
         const [dx, dz] = PANEL_DIRS[d];
-        const nb = cellOccupant(b.gx + dx, b.gz + dz);
-        const on = !!(nb && nb.mesh && nb.mesh.userData.panel);
+        // Same type, same level. A sandbag run used to grow an arm into the wall
+        // beside it, which is where those odd sandbag slices between a wall and a
+        // sandbag line came from — and it also filled the gap you want a turret in.
+        const nb = cellOccupant(b.gx + dx, b.gz + dz, lv, 'base');
+        const on = !!(nb && nb.type === b.type && nb.mesh && nb.mesh.userData.panel);
         if (on) any = true;
         arms[(d - turns + 4) % 4].visible = on;
       }
@@ -14644,10 +14822,11 @@
     }
     // Re-link a cell and the four around it, which is everything a single placement or
     // removal can change.
-    function refreshPanelNeighbourhood(gx, gz) {
+    function refreshPanelNeighbourhood(gx, gz, lv) {
       if (gx == null) return;
-      refreshPanelLinks(cellOccupant(gx, gz));
-      for (const [dx, dz] of PANEL_DIRS) refreshPanelLinks(cellOccupant(gx + dx, gz + dz));
+      const l = lv | 0;
+      refreshPanelLinks(cellOccupant(gx, gz, l, 'base'));
+      for (const [dx, dz] of PANEL_DIRS) refreshPanelLinks(cellOccupant(gx + dx, gz + dz, l, 'base'));
     }
 
     // One path for "a build took damage", so the dust, the sound and the wreck are
@@ -14666,15 +14845,36 @@
 
     const LURE_LIFE = 20;
     function removeBuild(b) {
-      const _wasCell = (b.gx != null && cellOccupant(b.gx, b.gz) === b) ? { gx: b.gx, gz: b.gz } : null;
-      if (_wasCell) buildCells.delete(cellKey(b.gx, b.gz));
+      const _lv = b.level | 0, _slot = b.slot || 'base';
+      const _wasCell = (b.gx != null && cellOccupant(b.gx, b.gz, _lv, _slot) === b) ? { gx: b.gx, gz: b.gz, lv: _lv } : null;
+      if (_wasCell) buildCells.delete(cellKey(b.gx, b.gz, _lv, _slot));
+      // Pull the floor out and everything standing on it comes down: the rest of this
+      // level's slots, then every level above. Gathered first, because removeBuild
+      // recurses and would otherwise mutate what it is walking.
+      if (_wasCell && _slot === 'base') {
+        const doomed = [];
+        for (const sl of ['top', 'object']) {
+          const o = cellOccupant(b.gx, b.gz, _lv, sl);
+          if (o) doomed.push(o);
+        }
+        for (let l = _lv + 1; l <= MAX_LEVEL; l++) {
+          for (const sl of ['base', 'top', 'object']) {
+            const o = cellOccupant(b.gx, b.gz, l, sl);
+            if (o) doomed.push(o);
+          }
+        }
+        for (const o of doomed) {
+          spawnChunks(o.x, o.mesh.position.y + 0.5, o.z, 0x6b5a3e, 5, 3);
+          removeBuild(o);
+        }
+      }
       if (b === mortarMounted) dismountMortar();
       scene.remove(b.mesh);
       if (b.bar) scene.remove(b.bar);
       const i = builds.indexOf(b);
       if (i >= 0) builds.splice(i, 1);
       // The neighbours have lost an arm's worth of company.
-      if (_wasCell) refreshPanelNeighbourhood(_wasCell.gx, _wasCell.gz);
+      if (_wasCell) refreshPanelNeighbourhood(_wasCell.gx, _wasCell.gz, _wasCell.lv);
     }
 
     // === Mortar ===
@@ -14699,10 +14899,13 @@
       mortarArc.visible = false;
       scene.add(mortarArc);
     }
-    const carriedMortarMesh = makeMortarMesh();
-    carriedMortarMesh.scale.setScalar(0.8);
-    carriedMortarMesh.position.set(-0.32, 0.55, -0.35);
-    carriedMortarMesh.rotation.set(0.3, 0, 0.9);
+    // Broken down and slung over the right shoulder, muzzle up and back, the way a
+    // tube actually gets carried. It used to be the deployed mortar, bipod and all,
+    // hanging off him at an angle.
+    const carriedMortarMesh = makeMortarMesh(null, true);
+    carriedMortarMesh.scale.setScalar(0.78);
+    carriedMortarMesh.position.set(0.2, 1.06, -0.12);
+    carriedMortarMesh.rotation.set(-0.55, 0.22, 0.34);
     carriedMortarMesh.visible = false;
     player.add(carriedMortarMesh);
     function nearestMortar(maxD) {
@@ -14829,6 +15032,8 @@
     }
     // How long since the last shell went down the tube — drives the loading motion.
     let mortarLoadT = 0;
+    // The bearing the marine faces while crewing: the tube's, not the reticle's.
+    let mortarFaceYaw = 0;
     // Manning a mortar used to leave the marine standing at ease beside it with his
     // gun simply hidden. He now crouches into the tube with both hands at the muzzle,
     // and reaches up and drops a shell in on every shot.
@@ -14877,6 +15082,17 @@
         if (Math.hypot(player.position.x - m.x, player.position.z - m.z) > MORTAR_MAN_RANGE) { dismountMortar(); return; }
         for (const k of Object.keys(keys)) keys[k] = false; // rooted while manning it
         updateMortarArc();
+        // Stand behind the tube and stay there. Mounting planted the marine once and
+        // then let the tube swing away from under him as it tracked the aim, which is
+        // why he ended up standing beside it facing the wrong way.
+        {
+          const yaw = m.mesh.rotation.y;
+          m.mesh.updateMatrixWorld(true);
+          player.position.x = m.x - Math.sin(yaw) * 1.05;
+          player.position.z = m.z - Math.cos(yaw) * 1.05;
+          player.position.y = sampleHeight(player.position.x, player.position.z);
+          mortarFaceYaw = yaw;
+        }
         if (mouseFireHeld) { fireMortar(); mouseFireHeld = false; }
       }
     }
@@ -19544,6 +19760,57 @@
       if (z.hp <= 0) killZombie(z, true, { kind, dir: { x: dx, z: dz } });
     }
 
+    // Segment vs axis-aligned box, as a slab test. Returns the entry fraction along
+    // the segment, or null. Used to stop bullets at structures: a panel is a hub plus
+    // whichever arms are showing, and every one of those is world-axis-aligned, so a
+    // handful of slab tests covers the real shape exactly.
+    function segmentHitsBox(ax, ay, az, bx, by, bz, cx, cy, cz, hx, hy, hz) {
+      let t0 = 0, t1 = 1;
+      const d = [bx - ax, by - ay, bz - az];
+      const o = [ax - cx, ay - cy, az - cz];
+      const h = [hx, hy, hz];
+      for (let i = 0; i < 3; i++) {
+        if (Math.abs(d[i]) < 1e-8) {
+          if (o[i] < -h[i] || o[i] > h[i]) return null;
+          continue;
+        }
+        let ta = (-h[i] - o[i]) / d[i];
+        let tb = (h[i] - o[i]) / d[i];
+        if (ta > tb) { const s2 = ta; ta = tb; tb = s2; }
+        if (ta > t0) t0 = ta;
+        if (tb < t1) t1 = tb;
+        if (t0 > t1) return null;
+      }
+      return t0;
+    }
+
+    // Where a round meets this structure, or null. Panels are tested as their hub and
+    // visible arms; everything else as the box around its footprint.
+    function segmentHitsBuild(b, ax, ay, az, bx, by, bz) {
+      const y0 = b.mesh.position.y, hy = pieceHeight(b.type) / 2, cy = y0 + hy;
+      const box = BUILD_BOX[b.type];
+      if (!box) {
+        const r = b.radius || 0.6;
+        return segmentHitsBox(ax, ay, az, bx, by, bz, b.x, cy, b.z, r, hy, r);
+      }
+      let best = null;
+      const hub = segmentHitsBox(ax, ay, az, bx, by, bz, b.x, cy, b.z, box.hz, hy, box.hz);
+      if (hub !== null) best = hub;
+      const arms = b.mesh.userData.arms;
+      if (arms) {
+        const turns = ((Math.round(b.yaw / (Math.PI / 2)) % 4) + 4) % 4;
+        for (let d = 0; d < 4; d++) {
+          if (!arms[(d - turns + 4) % 4].visible) continue;
+          const [dx, dz] = PANEL_DIRS[d];
+          const t = segmentHitsBox(ax, ay, az, bx, by, bz,
+            b.x + dx * (BUILD_GRID / 4), cy, b.z + dz * (BUILD_GRID / 4),
+            dx ? BUILD_GRID / 4 : box.hz, hy, dz ? BUILD_GRID / 4 : box.hz);
+          if (t !== null && (best === null || t < best)) best = t;
+        }
+      }
+      return best;
+    }
+
     // Each body a penetrating round passes through bleeds this much off its damage,
     // so a sniper lined up on a column kills the first few and wounds the rest
     // rather than wiping the whole file for free.
@@ -19646,6 +19913,32 @@
           if (hitW) {
             const col = hitW.kind === 'frog' ? 0x3d8b4a : (hitW.kind === 'rabbit' ? 0x8b6a4a : 0x887766);
             killWildlife(hitW.target, col, p.dir.x, p.dir.z);
+            p.hit = true;
+            releaseTracerMesh(p.mesh);
+            projectiles.splice(i, 1);
+            continue;
+          }
+        }
+
+        // Structures. Bullets used to pass straight through anything you had built,
+        // so a wall stopped the horde but not their own covering fire — or yours.
+        // Turret rounds are exempt, or a turret would shoot the wall it stands behind.
+        if (!p.fromTurret) {
+          let hitB = null, hitBT = 2;
+          for (const b of builds) {
+            if (b.hp <= 0) continue;
+            const r = (BUILD_BOX[b.type] ? BUILD_GRID / 2 : (b.radius || 0.6)) + 0.1;
+            if (b.x + r < Math.min(p.prev.x, p.pos.x) || b.x - r > Math.max(p.prev.x, p.pos.x) ||
+                b.z + r < Math.min(p.prev.z, p.pos.z) || b.z - r > Math.max(p.prev.z, p.pos.z)) continue;
+            const t = segmentHitsBuild(b, p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z);
+            if (t !== null && t < hitBT) { hitBT = t; hitB = b; }
+          }
+          if (hitB) {
+            // Your own rounds chew your defences a little, which is the cost of
+            // firing through a gap you should have left yourself.
+            damageBuild(hitB, p.damage * 0.25);
+            spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * hitBT, p.prev.y + (p.pos.y - p.prev.y) * hitBT,
+                        p.prev.z + (p.pos.z - p.prev.z) * hitBT, 0x6b5a3e, 2, 2);
             p.hit = true;
             releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
@@ -21072,8 +21365,17 @@
             if (hd < house.radius + z.radius + 0.15) tryWindup('house', z.damage, 0.9);
           } else {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
-            if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < 2.3) tryWindup('player', z.damage, 0.85);
-            else {
+            if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < 2.3) {
+              // Standing right behind your own wall used to make you the target
+              // anyway: the reach test is pure distance and knew nothing about what
+              // was in between, so a line of zombies swung THROUGH the wall at you
+              // and the wall itself took nothing. Whatever of yours is in the way
+              // gets hit instead — which is what a wall is for.
+              const inTheWay = buildBetween(mx, z.mesh.position.y + 0.9, mz,
+                                            player.position.x, player.position.y + 0.9, player.position.z);
+              if (inTheWay) tryWindup('build', z.damage, 0.95, inTheWay);
+              else tryWindup('player', z.damage, 0.85);
+            } else {
               // You are out of reach, so whatever of yours is in the way gets it
               // instead. The player always wins the check above: defences are what
               // they turn on only when they cannot get to you.
@@ -21839,7 +22141,8 @@
           crouching = false; // can't crouch on a ladder
         }
         // Always face aim so weaponMount +Z tracks mouse
-        player.rotation.y = aimYaw;
+        // Crewing the mortar turns you to the tube, not to where the shell is going.
+        player.rotation.y = mortarMounted ? mortarFaceYaw : aimYaw;
         updateMarinePose(dt, moving, running && !crouching && moving, playerSwimming);
         updateMortarCrewPose();
         if (reloading) {
@@ -22292,7 +22595,7 @@
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
           CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope,
           waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
-          groundFires, getMortarMounted: () => mortarMounted, getMortarCarried: () => mortarCarried, mountMortar, nearestMortar,
+          groundFires, damageBuild, removeBuild, placeBuildAt, resolveTarget, cellOccupant, topmostInCell, getMortarMounted: () => mortarMounted, getMortarCarried: () => mortarCarried, mountMortar, nearestMortar,
           useMedkit, buyMedkit, getMedkits: () => medkits, spawnMedDrop, medDrops, spawnCashDrop, cashDrops, explodeGrenade, getHp: () => playerHp, setHp: (v) => { playerHp = v; updateHpHud(); },
           // Debug-only: jump the clock (0 midnight, 0.25 sunrise, 0.5 noon, 0.75 dusk).
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
