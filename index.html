@@ -3049,6 +3049,9 @@
     // ceiling covers a bridge spanning a carved river channel. See playerGroundY for
     // why the cap is generous rather than the old, too-tight 4.4.
     const STEP_UP = 0.75;
+    // How far up (or down) a zombie can reach to hit the player. Under a platform deck,
+    // over a single step.
+    const ZOMBIE_REACH_Y = 1.45;
 
     // Is this point on a ramp — a flight of stairs — rather than a shelf or the ground?
     function onRamp(x, z) {
@@ -5152,9 +5155,12 @@
         });
       }
       explodeGrenade({ pos: { x, y, z }, mesh: _bombDummy, damage: 70 }); // (hurts you too — see explodeGrenade)
-      for (const b of builds.slice()) {
-        const d = Math.hypot(b.x - x, b.z - z);
-        if (d < 4) { b.hp -= 20 + 70 * (1 - d / 4); if (b.hp <= 0) { spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 6, 4); removeBuild(b); } }
+      // A fuel drum is a trap you placed, so its blast spares what you built — it used
+      // to flatten the wall it was stood beside, which is exactly where you put one.
+      // Placed drums sit in the build grid; free the cell now it is gone, or that spot
+      // stayed "taken" for the rest of the match.
+      if (lm.gx != null && cellOccupant(lm.gx, lm.gz, lm.level | 0, lm.slot || 'base') === lm) {
+        buildCells.delete(cellKey(lm.gx, lm.gz, lm.level | 0, lm.slot || 'base'));
       }
       if (house.active && Math.hypot(house.group.position.x - x, house.group.position.z - z) < house.radius + 3.8) damageHouse(22);
       // Scorched drum stays behind as a low obstacle-free wreck.
@@ -13751,6 +13757,30 @@
     // circle. A circle of radius 0.95 in a 2m cell leaves a 10cm slot at every joint,
     // which is exactly the gap you could slip through between two barricades. Half
     // extents: along the run, and across its thickness.
+    const BUILD_GRID_HALF_FOR_THIN = 1.0;   // half a 2m cell; see BUILD_GRID
+    // Barriers that are a line, not a block: they collide — and stop rounds — as a thin
+    // box along their run, offset `edge` toward the side their rotation faces. They
+    // used to collide as a 0.9m circle, which filled most of the cell: a railing on a
+    // platform stopped you standing on the platform, and a strand of wire was a pillar.
+    // Half height, so a round fired over the top of one clears it, which is the point.
+    const BUILD_THIN = {
+      wire:    { depth: 0.14, edge: 0 },
+      railing: { depth: 0.12, edge: BUILD_GRID_HALF_FOR_THIN - 0.08 }
+    };
+    // Build yaws are always quarter turns, so a thin barrier is an axis-aligned box in
+    // world space: the long axis swaps between X and Z, and the edge offset follows the
+    // way it faces — (sin y, cos y), matching how the meshes are rotated.
+    function thinBoxFor(b) {
+      const spec = BUILD_THIN[b.type];
+      if (!spec) return null;
+      const q = ((Math.round((b.yaw || 0) / (Math.PI / 2)) % 4) + 4) % 4;
+      const alongX = q === 0 || q === 2;
+      const ox = Math.round(Math.sin(q * Math.PI / 2)) * spec.edge;
+      const oz = Math.round(Math.cos(q * Math.PI / 2)) * spec.edge;
+      return { cx: b.x + ox, cz: b.z + oz,
+               hx: alongX ? BUILD_GRID_HALF_FOR_THIN : spec.depth,
+               hz: alongX ? spec.depth : BUILD_GRID_HALF_FOR_THIN };
+    }
     const BUILD_BOX = {
       wall:      { hx: 1.0, hz: 0.30 },
       sandbag:   { hx: 1.0, hz: 0.34 },
@@ -14398,7 +14428,10 @@
       for (let lv = MAX_LEVEL; lv >= 0; lv--) {
         for (const sl of ['top', 'object', 'base']) {
           const o = cellOccupant(gx, gz, lv, sl);
-          if (o) return o;
+          // Only real builds. A placed fuel drum lives in the grid but is a landmark,
+          // and "selling" one used to hide its mesh and leave its collider standing
+          // as an invisible wall. A drum is got rid of by shooting it.
+          if (o && builds.indexOf(o) >= 0) return o;
         }
       }
       return null;
@@ -14480,7 +14513,38 @@
     // reach if you are pointing further than you can build. Aiming at the cell you
     // want beats the old fixed distance ahead of the marine — laying a square meant
     // walking a circle before, because the piece always went four metres forward.
+    // The build you are pointing at, if there is one nearer than the ground. The aim
+    // ray used to see only terrain and zombies, so pointing at the top of a wall went
+    // straight through it to the grass BEHIND — a different, empty cell — and there
+    // was no way to aim a platform, a second wall or a turret at what you had built.
+    // Each build is tested as its whole cell column, so aiming is forgiving; and only
+    // a hit nearer than the ground counts, or pointing at grass in front of a wall
+    // would pick the wall behind it.
+    function pickBuildCellOnRay() {
+      const ray = aimRaycaster.ray;
+      if (!ray || !ray.direction) return null;
+      const o = ray.origin, d = ray.direction, L = 240;
+      const ex = o.x + d.x * L, ey = o.y + d.y * L, ez = o.z + d.z * L;
+      const limit = Number.isFinite(aimGroundDist) ? aimGroundDist / L : 1;
+      let best = null, bt = limit;
+      for (const b of builds) {
+        if (b.gx == null) continue;
+        const y0 = b.mesh.position.y, top = y0 + pieceHeight(b.type);
+        const hy = Math.max(0.2, (top - y0) / 2);
+        const t = segmentHitsBox(o.x, o.y, o.z, ex, ey, ez,
+          gridCentre(b.gx), y0 + hy, gridCentre(b.gz), BUILD_GRID / 2, hy, BUILD_GRID / 2);
+        if (t !== null && t < bt) { bt = t; best = b; }
+      }
+      return best;
+    }
+
     function getPlacePoint() {
+      if (placeMode) {
+        const hit = pickBuildCellOnRay();
+        if (hit && Math.hypot(gridCentre(hit.gx) - player.position.x, gridCentre(hit.gz) - player.position.z) <= BUILD_REACH + 1.5) {
+          return { x: gridCentre(hit.gx), z: gridCentre(hit.gz), gx: hit.gx, gz: hit.gz };
+        }
+      }
       let tx = aimTarget.x, tz = aimTarget.z;
       const dx = tx - player.position.x, dz = tz - player.position.z;
       const d = Math.hypot(dx, dz);
@@ -14615,7 +14679,10 @@
         }
       }
       if (!best) { AudioSys.invalid(); return; }
-      const refund = Math.max(1, Math.ceil((COST[best.type] || 5) * 0.6 * (best.hp / best.maxHp)));
+      // What went into it comes back, a window or door included — that used to be
+      // simply lost when the wall it was cut into was scrapped.
+      const spent = (COST[best.type] || 5) + (best.opening ? (COST[best.opening] || 0) : 0);
+      const refund = Math.max(1, Math.ceil(spent * 0.6 * (best.hp / best.maxHp)));
       bank += refund;
       spawnDust(best.x, best.mesh.position.y + 0.5, best.z, 5);
       removeBuild(best);
@@ -14640,13 +14707,11 @@
         // half way rather than dropping a step into the hillside.
         const target = sampleHeight(pt.x, pt.z);
         reshapeGround(pt.x, pt.z, BUILD_GRID * 0.62, target, BUILD_GRID * 0.7);
-        // Anything standing in or beside it has to sit back down on the new ground.
-        for (const b of builds) {
-          if (Math.hypot(b.x - pt.x, b.z - pt.z) > BUILD_GRID * 1.6) continue;
-          const st = BUILD_STATS[b.type] || BUILD_STATS.barricade;
-          b.baseY = buildBaseY(b.type, b.x, b.z, st.radius * 0.85, b.gx, b.gz);
-          b.mesh.position.y = b.baseY;
-        }
+        // Anything standing in or beside it has to sit back down on the new ground —
+        // the whole column, bottom up. This used to drop EVERY nearby piece to ground
+        // height, so digging beside a wall put its platform, and the turret on it, down
+        // on the grass while the walkable deck stayed floating where they had been.
+        for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) reseatColumn(pt.gx + dx, pt.gz + dz);
         spawnDust(pt.x, sampleHeight(pt.x, pt.z) + 0.3, pt.z, 7);
         AudioSys.place();
         updateGhostPreview();
@@ -14655,12 +14720,15 @@
       const cost = COST[placeMode];
       if (bank < cost) {
         AudioSys.invalid();
+        showBanner('NOT ENOUGH CASH', BUILD_NAMES[placeMode] + ' costs $' + cost, 1.1, '#ffb347');
         return;
       }
-      bank -= cost;
-      updateCoinHud();
+      // Build first, THEN charge. The money used to come off before placement, so
+      // anything that refused at the last moment took your cash and left nothing.
       const made = placeBuildAt(placeMode, pt.gx, pt.gz);
       if (!made) { AudioSys.invalid(); return; }
+      bank -= cost;
+      updateCoinHud();
       AudioSys.place();
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -14816,8 +14884,14 @@
       }
       return g;
     }
+    // Sits on the deck EDGE its rotation faces, not across the middle of the deck —
+    // a rail down the centre of a platform is just a thing to trip over, and it split
+    // the one cell you had to stand on in half. R picks the edge.
     function makeRailingMesh(matOverride = null) {
+      const outer = new THREE.Group();
       const g = new THREE.Group();
+      g.position.z = BUILD_THIN.railing.edge;
+      outer.add(g);
       const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x6a7280, metalness: 0.7, roughness: 0.4 });
       for (const sx of [-1, 1]) {
         const post = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.0, 0.1), steel);
@@ -14836,7 +14910,7 @@
         baluster.position.set(-BUILD_GRID / 2 + BUILD_GRID / 4 * i, 0.48, 0);
         g.add(baluster);
       }
-      return g;
+      return outer;
     }
 
     function makeMineMesh(matOverride = null) {
@@ -14925,6 +14999,29 @@
       return best;
     }
 
+    // Put a column back on its ground after the ground has moved: each level on the one
+    // beneath it, each top or object on its own level's base, and every walkable deck
+    // moved to match.
+    function reseatColumn(gx, gz) {
+      for (let lv = 0; lv <= MAX_LEVEL; lv++) {
+        const b = cellOccupant(gx, gz, lv, 'base');
+        if (b && builds.indexOf(b) >= 0) {
+          const st = BUILD_STATS[b.type] || BUILD_STATS.barricade;
+          const groundY = buildBaseY(b.type, b.x, b.z, st.radius * 0.85, gx, gz);
+          const y = slotY(b.type, gx, gz, lv, 'base', groundY);
+          b.mesh.position.y = y;
+          b.baseY = y;
+          const r = ruleFor(b.type);
+          if (b.deck && r) b.deck.deckY = y + (r.ramp ? 0.05 : r.height);
+        }
+        for (const sl of ['top', 'object']) {
+          const o = cellOccupant(gx, gz, lv, sl);
+          if (!o || builds.indexOf(o) < 0) continue;
+          o.mesh.position.y = slotY(o.type, gx, gz, lv, sl, sampleHeight(o.x, o.z));
+        }
+      }
+    }
+
     // The one way a piece gets built into the grid: work out where it goes, make it,
     // record it in the cell map, let it strengthen what it stands on, and re-link the
     // neighbourhood. tryPlace used to do all of this inline, which meant nothing else
@@ -14952,7 +15049,12 @@
       if (rule && rule.armour) {
         const under = cellOccupant(made.gx, made.gz, made.level - 1, 'base') ||
                       cellOccupant(made.gx, made.gz, made.level, 'base');
-        if (under && under !== made) { under.maxHp += rule.armour; under.hp += rule.armour; }
+        if (under && under !== made) {
+          under.maxHp += rule.armour; under.hp += rule.armour;
+          // Remember it, so taking the sandbags OFF takes the bonus off again. It used
+          // to stay, so stacking and scrapping a course of bags was a free hp farm.
+          made.armourOn = under; made.armourAmt = rule.armour;
+        }
       }
       // Decks and ramps join the walkable set, which is what the player AND the horde
       // already read their ground height from — so a platform is something you stand
@@ -15118,12 +15220,19 @@
 
     // One path for "a build took damage", so the dust, the sound and the wreck are
     // the same however it happened.
-    function damageBuild(b, dmg) {
+    // `source` says who did it. Your own weapons never hurt what you built: a stray
+    // round, your fuel drum going up beside a wall, your grenade landing short. Only
+    // the horde and what it throws wears your defences down. `quiet` is for damage
+    // that ticks (acid), which would otherwise play a crunch several times a second.
+    function damageBuild(b, dmg, source, quiet) {
+      if (source === 'player') return;
       if (!b || b.hp <= 0 || builds.indexOf(b) < 0) return; // it may have died mid-windup
       b.hp -= dmg;
       b.flashT = 0.12;
-      spawnDust(b.x, b.mesh.position.y + 0.5, b.z, 2);
-      AudioSys.rockBreak();
+      if (!quiet) {
+        spawnDust(b.x, b.mesh.position.y + 0.5, b.z, 2);
+        AudioSys.rockBreak();
+      }
       if (b.hp <= 0) {
         spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 7, 4);
         removeBuild(b);
@@ -15131,7 +15240,13 @@
     }
 
     const LURE_LIFE = 20;
-    function removeBuild(b) {
+    function removeBuild(b, quiet) {
+      if (b.armourOn && builds.indexOf(b.armourOn) >= 0) {
+        const t = b.armourOn;
+        t.maxHp = Math.max(1, t.maxHp - b.armourAmt);
+        t.hp = Math.min(t.hp, t.maxHp);
+      }
+      b.armourOn = null;
       const _lv = b.level | 0, _slot = b.slot || 'base';
       const _wasCell = (b.gx != null && cellOccupant(b.gx, b.gz, _lv, _slot) === b) ? { gx: b.gx, gz: b.gz, lv: _lv } : null;
       if (_wasCell) buildCells.delete(cellKey(b.gx, b.gz, _lv, _slot));
@@ -15151,8 +15266,8 @@
           }
         }
         for (const o of doomed) {
-          spawnChunks(o.x, o.mesh.position.y + 0.5, o.z, 0x6b5a3e, 5, 3);
-          removeBuild(o);
+          if (!quiet) spawnChunks(o.x, o.mesh.position.y + 0.5, o.z, 0x6b5a3e, 5, 3);
+          removeBuild(o, quiet);
         }
       }
       if (b === mortarMounted) dismountMortar();
@@ -15311,7 +15426,11 @@
     }
     function setDownMortar(x, z) {
       if (!mortarCarried) return;
-      const b = spawnBuild('mortar', x, z);
+      // Through placeBuildAt like everything else, so a set-down mortar claims its
+      // cell, can go up onto a platform, and is found by sell and repair. It used to
+      // be spawned loose, and you could then build a wall straight through it.
+      let b = placeBuildAt('mortar', gridIndex(x), gridIndex(z));
+      if (!b) b = spawnBuild('mortar', x, z);
       b.hp = Math.min(b.maxHp, mortarCarried.hp);
       mortarCarried = null;
       carriedMortarMesh.visible = false;
@@ -15382,7 +15501,9 @@
           m.mesh.updateMatrixWorld(true);
           player.position.x = m.x - Math.sin(yaw) * 1.05;
           player.position.z = m.z - Math.cos(yaw) * 1.05;
-          player.position.y = sampleHeight(player.position.x, player.position.z);
+          // At the level the tube stands on — a mortar can sit on a platform now, and
+          // pinning the crew to ground height dragged him off the deck and under it.
+          player.position.y = playerGroundY(player.position.x, player.position.z, m.mesh.position.y + STEP_UP);
           mortarFaceYaw = yaw;
         }
         if (mouseFireHeld) { fireMortar(); mouseFireHeld = false; }
@@ -15447,14 +15568,20 @@
         const y = t.refusal ? null : stairsYawFor(pt.gx, pt.gz, t.level | 0);
         if (y !== null) ghostGroup.rotation.y = y;
       }
-      ghostGroup.position.set(pt.x, buildBaseY(placeMode, pt.x, pt.z, footprint * 0.85, pt.gx, pt.gz), pt.z);
+      // The ghost goes where the click would put it — on top of the wall for a
+      // platform, on the platform for a turret — not on the grass under all of it.
+      const _gTgt = resolveTarget(placeMode, pt.gx, pt.gz);
+      const _gGround = buildBaseY(placeMode, pt.x, pt.z, footprint * 0.85, pt.gx, pt.gz);
+      const _gY = (_gTgt.refusal || _gTgt.slot === 'modifier') ? _gGround
+        : slotY(placeMode, pt.gx, pt.gz, _gTgt.level | 0, _gTgt.slot, _gGround);
+      ghostGroup.position.set(pt.x, _gY, pt.z);
       const why = placeRefusal(pt.x, pt.z, pt.gx, pt.gz);
       const broke = bank < COST[placeMode];
       ghostValid = !why && !broke;
       const mat = ghostGroup.userData.mat;
       if (mat) mat.color.setHex(ghostValid ? 0x22c55e : 0xef4444);
       buildCellMark.visible = true;
-      buildCellMark.position.set(pt.x, sampleHeight(pt.x, pt.z) + 0.07, pt.z);
+      buildCellMark.position.set(pt.x, _gY + 0.07, pt.z);
       buildCellMark.material.color.setHex(ghostValid ? 0x22c55e : 0xef4444);
       buildCellMark.material.opacity = ghostValid ? 0.22 : 0.30;
     }
@@ -16729,10 +16856,7 @@
       if (pd < 4.4) damagePlayer(Math.round(7 + 23 * (1 - pd / 4.4)));
       for (const b of builds.slice()) {
         const d = Math.hypot(b.x - x, b.z - zz);
-        if (d < 3.8) {
-          b.hp -= 15 + 70 * (1 - d / 3.8);
-          if (b.hp <= 0) { spawnChunks(b.x, b.mesh.position.y + 0.6, b.z, 0x6b5a3e, 6, 4); removeBuild(b); }
-        }
+        if (d < 3.8) damageBuild(b, 15 + 70 * (1 - d / 3.8), 'enemy');
       }
       if (house.active && Math.hypot(house.group.position.x - x, house.group.position.z - zz) < house.radius + 3.6) damageHouse(18);
       if (AudioSys.acidHit) AudioSys.acidHit();
@@ -17973,6 +18097,9 @@
 
     // --- Mouse aim (ray vs terrain height) + LMB fire ---
     const aimRaycaster = new THREE.Raycaster();
+    // How far the aim ray travelled before meeting the ground, so build mode can tell
+    // whether a structure is in front of that point or behind it.
+    let aimGroundDist = Infinity;
     const aimPointerNdc = new THREE.Vector2(0, 0);
     const aimHit = new THREE.Vector3();
     const aimTarget = new THREE.Vector3();
@@ -18212,6 +18339,7 @@
       // aim, so it now aims at a far point along the ray instead.
       let groundT = Infinity;
       if (raycastTerrain(ray, aimHit)) groundT = aimHit.distanceTo(ray.origin);
+      aimGroundDist = groundT;
       // Then any zombie in front of that: the reticle over a body aims at the body, not
       // the ground behind it. Same cylinders the bullets use (see updateProjectiles).
       const zt = rayPickZombie(ray, groundT);
@@ -20101,6 +20229,8 @@
       if (b.opening === 'window') full = 0.95;
       else if (b.opening === 'door') return null;
       const hy = full / 2, cy = y0 + hy;
+      const thin = thinBoxFor(b);
+      if (thin) return segmentHitsBox(ax, ay, az, bx, by, bz, thin.cx, cy, thin.cz, thin.hx, hy, thin.hz);
       const box = BUILD_BOX[b.type];
       if (!box) {
         const r = b.radius || 0.6;
@@ -20247,9 +20377,8 @@
             if (t !== null && t < hitBT) { hitBT = t; hitB = b; }
           }
           if (hitB) {
-            // Your own rounds chew your defences a little, which is the cost of
-            // firing through a gap you should have left yourself.
-            damageBuild(hitB, p.damage * 0.25);
+            // Stopped, not chewed: a round that meets your own wall ends there and
+            // leaves it as it was.
             spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * hitBT, p.prev.y + (p.pos.y - p.prev.y) * hitBT,
                         p.prev.z + (p.pos.z - p.prev.z) * hitBT, 0x6b5a3e, 2, 2);
             p.hit = true;
@@ -20467,10 +20596,47 @@
         if (entY != null && b.mesh.position.y > entY + 1.9) continue;
         // Decks are stood on, not walked into — that is what platformHeightAt is for.
         const rl = ruleFor(b.type);
-        if (rl && (rl.deck || rl.ramp)) continue;
+        if (rl && rl.deck) continue;
+        // A flight of stairs is a solid wedge: you walk onto it from the low end and up
+        // it, but its sides and back are walls. With no collision you could step onto
+        // only the bottom of it (anything higher is past the step limit) and then walk
+        // straight THROUGH the tall part. So it blocks you unless you are already up
+        // on the ramp at the point you are standing.
+        if (rl && rl.ramp) {
+          if (!b.deck) continue;
+          const d = b.deck;
+          const c = Math.cos(d.yaw), sn2 = Math.sin(d.yaw);
+          const lx = (x - d.x) * c - (z - d.z) * sn2, lz = (x - d.x) * sn2 + (z - d.z) * c;
+          const hw = d.hw + entR, hl = d.hl + entR;
+          if (Math.abs(lx) >= hw || Math.abs(lz) >= hl) continue;
+          const lzc = Math.max(-d.hl, Math.min(d.hl, lz));
+          const surf = d.deckY + d.rise * (lzc / d.hl * 0.5 + 0.5);
+          if (entY == null || entY >= surf - 0.45) continue;   // on it, or low enough to step on
+          // Push out of whichever side is nearest — but never out the front: that is
+          // the way on.
+          const ox = hw - Math.abs(lx), ozBack = hl - lz, ozFront = hl + lz;
+          let px = lx, pz = lz;
+          if (ox < ozBack && ox < ozFront) px = lx < 0 ? -hw : hw;
+          else if (ozBack < ozFront) pz = hl;
+          else pz = -hl;
+          x = d.x + px * c + pz * sn2;
+          z = d.z - px * sn2 + pz * c;
+          continue;
+        }
         // A door is yours: you walk through it, the horde still has to come round or
         // chew through the wall it is cut into.
         if (b.opening === 'door' && isPlayer) continue;
+        const thin = thinBoxFor(b);
+        if (thin) {
+          const hx = thin.hx + entR, hz = thin.hz + entR;
+          const ddx = x - thin.cx, ddz = z - thin.cz;
+          if (Math.abs(ddx) < hx && Math.abs(ddz) < hz) {
+            const ox = hx - Math.abs(ddx), oz = hz - Math.abs(ddz);
+            if (ox < oz) x = thin.cx + (ddx < 0 ? -hx : hx);
+            else z = thin.cz + (ddz < 0 ? -hz : hz);
+          }
+          continue;
+        }
         const box = BUILD_BOX[b.type];
         if (box) {
           // A panel is a hub plus whichever arms are showing, so it collides as that
@@ -21029,10 +21195,7 @@
           const pd = Math.hypot(p.x - player.position.x, p.z - player.position.z);
           if (pd < 1.6 && Math.abs(player.position.y - p.y) < 1.6) damagePlayer(3);
           for (const b of builds.slice()) {
-            if (Math.hypot(p.x - b.x, p.z - b.z) < 1.7) {
-              b.hp -= 2.2;
-              if (b.hp <= 0) removeBuild(b);
-            }
+            if (Math.hypot(p.x - b.x, p.z - b.z) < 1.7) damageBuild(b, 2.2, 'enemy', true);
           }
           if (Math.random() < 0.6) {
             spawnMote(p.x + (Math.random() - 0.5) * 2, p.y + 0.1, p.z + (Math.random() - 0.5) * 2, acidMoteMat, {
@@ -21328,10 +21491,7 @@
                 if (grounded) { vy = 5; grounded = false; }
               }
               for (const b of builds.slice()) {
-                if (Math.hypot(b.x - zx, b.z - zz) < 5.4) {
-                  b.hp -= 65;
-                  if (b.hp <= 0) removeBuild(b);
-                }
+                if (Math.hypot(b.x - zx, b.z - zz) < 5.4) damageBuild(b, 65, 'enemy');
               }
               if (house.active && Math.hypot(house.group.position.x - zx, house.group.position.z - zz) < house.radius + 4.6) {
                 damageHouse(24);
@@ -21638,7 +21798,7 @@
                 spawnBlood(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, 0, 0, 3, 0.5);
                 if (z.hp <= 0) dotKills.push(z);
               }
-              damageBuild(atk.build, atk.dmg);
+              damageBuild(atk.build, atk.dmg, 'enemy');
             }
             else damagePlayer(atk.dmg);
             z.swingT = 0.28;
@@ -21714,7 +21874,11 @@
             if (hd < house.radius + z.radius + 0.15) tryWindup('house', z.damage, 0.9);
           } else {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
-            if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < 2.3) {
+            // Vertical reach: a zombie claws at what it can get its hands on. 2.3m let
+            // one on the ground reach a player standing on a platform (deck 2.25m up),
+            // so the platform protected nothing and there was no reason for the horde
+            // to find the stairs. They have to come up to you now.
+            if (pd < z.radius + PLAYER_RADIUS + 0.15 && pdy < ZOMBIE_REACH_Y) {
               // Standing right behind your own wall used to make you the target
               // anyway: the reach test is pure distance and knew nothing about what
               // was in between, so a line of zombies swung THROUGH the wall at you
@@ -21739,7 +21903,7 @@
           }
           if (gameMode === 'defend') {
             const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
-            if (pd < z.radius + PLAYER_RADIUS + 0.1 && pdy < 2.3) tryWindup('player', Math.ceil(z.damage * 0.6), 0.85);
+            if (pd < z.radius + PLAYER_RADIUS + 0.1 && pdy < ZOMBIE_REACH_Y) tryWindup('player', Math.ceil(z.damage * 0.6), 0.85);
           }
         }
       }
@@ -22072,7 +22236,10 @@
     function resetGame() {
       AudioSys.chainsawStop();
       AudioSys.resetBlip();
-      for (const b of builds.slice()) removeBuild(b);
+      // Quietly: clearing the field for a new match is not a demolition, and every
+      // collapsing stack used to throw a shower of debris over the fresh start.
+      for (const b of builds.slice()) removeBuild(b, true);
+      buildCells.clear();
       clearZombies();
       for (const s of supplyDrops) scene.remove(s.group);
       supplyDrops.length = 0;
