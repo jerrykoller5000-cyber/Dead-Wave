@@ -14375,7 +14375,11 @@
       platform:  { slot: 'base', on: ['wall'], height: 0.25, deck: true, armour: 15 },
       // The same idea in solid boards: a floor for the storey above, a roof for the
       // one below.
-      floor:     { slot: 'base', on: ['wall', 'platform'], height: 0.25, deck: true, armour: 20 },
+      // `spans`: a floor does not need a wall directly under it. It can rest its edge on
+      // the top of a wall next door, or reach out from another floor, up to FLOOR_SPAN
+      // cells from something solid — which is what lets you roof over a room instead
+      // of only capping the walls round it.
+      floor:     { slot: 'base', on: ['wall', 'platform'], height: 0.25, deck: true, armour: 20, spans: true },
       // Takes the whole cell and ramps a storey. Anything that walks can use it.
       stairs:    { slot: 'base', on: ['ground', 'platform', 'floor'], height: LEVEL_H, ramp: true },
       // Half height, so you shoot over it. Goes on the bare ground, on a wall or
@@ -14389,6 +14393,41 @@
       door:      { slot: 'modifier', on: ['wall'], height: 0, weakens: 45 }
     };
     function ruleFor(kind) { return BUILD_RULES[kind] || null; }
+    // How many cells a floor may reach out over open space from something solid. Two
+    // roofs a room with three cells of floor between its walls; it also stops a player
+    // walking a deck out across the map on nothing.
+    const FLOOR_SPAN = 2;
+
+    // How far this cell is from solid support at this level, or null if too far:
+    //   0  a wall or platform directly beneath it
+    //   1  resting on the top of a wall in the next cell, or next to a depth-0 deck
+    //   n  next to a deck of depth n-1
+    // Decks carry their depth once placed, so this is one look at the four neighbours.
+    function floorSpanDepth(gx, gz, lv) {
+      if (lv <= 0) return null;
+      const under = cellOccupant(gx, gz, lv - 1, 'base');
+      if (under && (under.type === 'wall' || under.type === 'platform')) return 0;
+      let best = Infinity;
+      for (const [dx, dz] of PANEL_DIRS) {
+        const w = cellOccupant(gx + dx, gz + dz, lv - 1, 'base');
+        if (w && w.type === 'wall') best = Math.min(best, 1);
+        const d = cellOccupant(gx + dx, gz + dz, lv, 'base');
+        if (d && (d.type === 'floor' || d.type === 'platform') && d.spanDepth != null) best = Math.min(best, d.spanDepth + 1);
+      }
+      return best <= FLOOR_SPAN ? best : null;
+    }
+    // Where a floor with nothing under it sits: level with the tops of what it rests on.
+    function floorSpanY(gx, gz, lv) {
+      for (const [dx, dz] of PANEL_DIRS) {
+        const w = cellOccupant(gx + dx, gz + dz, lv - 1, 'base');
+        if (w && w.type === 'wall') return w.mesh.position.y + pieceHeight(w.type);
+      }
+      for (const [dx, dz] of PANEL_DIRS) {
+        const d = cellOccupant(gx + dx, gz + dz, lv, 'base');
+        if (d && (d.type === 'floor' || d.type === 'platform')) return d.mesh.position.y;
+      }
+      return null;
+    }
     function pieceHeight(kind) { const r = ruleFor(kind); return r ? r.height : 1.0; }
     // Panels are the pieces that link into runs and take part in the arm system.
     function isPanel(kind) { return !!BUILD_BOX[kind]; }
@@ -14458,10 +14497,19 @@
         // Keep the first real reason. Walking up an empty column otherwise always ends
         // on 'nothing under it', which is true and useless when the actual problem was
         // that the cell was already full.
-        if (!last || last === 'nothing under it') last = why;
+        if (!last || last === 'nothing under it' || last.indexOf('too far') === 0) last = why;
       }
       if (cellOccupant(gx, gz, 0, rule.slot)) return { refusal: 'cell taken' };
       return { refusal: last || 'no room' };
+    }
+
+    // "needs a wall under it", "needs a platform or floor under it": built from the
+    // rule, so a new piece gets a sensible message without anyone writing one.
+    function needsMessage(rule) {
+      const names = rule.on.filter((k) => k !== 'ground').map((k) => BUILD_NAMES[k] ? BUILD_NAMES[k].toLowerCase() : k);
+      if (!names.length) return 'needs open ground';
+      const list = names.length === 1 ? names[0] : names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1];
+      return 'needs a ' + list + ' under it';
     }
 
     // Is there something at this level for the piece to stand on?
@@ -14469,9 +14517,13 @@
       if (rule.slot === 'base') {
         // You cannot slide a wall in under a turret that is already standing there.
         if (cellOccupant(gx, gz, lv, 'object') || cellOccupant(gx, gz, lv, 'top')) return 'something already standing there';
-        if (lv === 0) return rule.on.indexOf('ground') < 0 ? 'needs something under it' : null;
+        if (lv === 0) return rule.on.indexOf('ground') < 0 ? needsMessage(rule) : null;
         const under = cellOccupant(gx, gz, lv - 1, 'base');
-        if (!under) return 'nothing under it';
+        if (!under) {
+          // A floor can bridge open space if the structure around it will hold it.
+          if (rule.spans && floorSpanDepth(gx, gz, lv) !== null) return null;
+          return rule.spans ? 'too far from anything to hold it up' : needsMessage(rule);
+        }
         if (rule.on.indexOf(under.type) < 0) return 'will not stand on ' + BUILD_NAMES[under.type].toLowerCase();
         if (rule.maxStack && stackedBelow(gx, gz, lv, kind) >= rule.maxStack) return 'stacked as high as it goes';
         return null;
@@ -14479,8 +14531,8 @@
       // 'top' and 'object' ride on the base of their OWN level, or the bare ground.
       const base = cellOccupant(gx, gz, lv, 'base');
       if (!base) {
-        if (lv !== 0) return 'nothing under it';
-        return rule.on.indexOf('ground') < 0 ? 'needs something under it' : null;
+        if (lv !== 0) return needsMessage(rule);
+        return rule.on.indexOf('ground') < 0 ? needsMessage(rule) : null;
       }
       return rule.on.indexOf(base.type) < 0 ? 'will not sit on ' + BUILD_NAMES[base.type].toLowerCase() : null;
     }
@@ -14496,7 +14548,9 @@
       if (slot === 'base') {
         if (lv === 0) return groundY;
         const under = cellOccupant(gx, gz, lv - 1, 'base');
-        return under ? under.mesh.position.y + pieceHeight(under.type) : groundY + lv * LEVEL_H;
+        if (under) return under.mesh.position.y + pieceHeight(under.type);
+        const span = floorSpanY(gx, gz, lv);
+        return span !== null ? span : groundY + lv * LEVEL_H;
       }
       const base = cellOccupant(gx, gz, lv, 'base');
       return base ? base.mesh.position.y + pieceHeight(base.type) : groundY;
@@ -14999,6 +15053,34 @@
       return best;
     }
 
+    // Drop any spanning floor near (gx,gz) that no longer has support, repeatedly, so a
+    // roof comes down from the edge that lost its wall inward rather than hanging.
+    function settleSpans(gx, gz) {
+      for (let guard = 0; guard < 12; guard++) {
+        let fell = false;
+        for (let dx = -FLOOR_SPAN - 1; dx <= FLOOR_SPAN + 1; dx++) {
+          for (let dz = -FLOOR_SPAN - 1; dz <= FLOOR_SPAN + 1; dz++) {
+            for (let lv = 1; lv <= MAX_LEVEL; lv++) {
+              const f = cellOccupant(gx + dx, gz + dz, lv, 'base');
+              if (!f || f.type !== 'floor' || builds.indexOf(f) < 0) continue;
+              // Recompute as if this floor were not there to lean on itself.
+              const keep = f.spanDepth; f.spanDepth = null;
+              const d = floorSpanDepth(gx + dx, gz + dz, lv);
+              if (d === null) {
+                spawnChunks(f.x, f.mesh.position.y + 0.2, f.z, 0x6b5a3e, 6, 3);
+                removeBuild(f);
+                fell = true;
+              } else {
+                f.spanDepth = d;
+              }
+              if (d !== null && keep == null) f.spanDepth = d;
+            }
+          }
+        }
+        if (!fell) break;
+      }
+    }
+
     // Put a column back on its ground after the ground has moved: each level on the one
     // beneath it, each top or object on its own level's base, and every walkable deck
     // moved to match.
@@ -15038,6 +15120,10 @@
       made.gx = gx; made.gz = gz;
       made.level = tgt.level | 0;
       made.slot = tgt.slot || 'base';
+      if (made.type === 'floor' || made.type === 'platform') {
+        const dd = made.type === 'platform' ? 0 : floorSpanDepth(gx, gz, made.level);
+        made.spanDepth = dd === null ? 0 : dd;
+      }
       if (made.type === 'stairs') {
         const y = stairsYawFor(gx, gz, made.level);
         if (y !== null) { made.yaw = y; made.mesh.rotation.y = y; }
@@ -15164,10 +15250,17 @@
     // build, so neither is a target. Turrets are, which they were not before: the old
     // contact grind left them untouchable by anything short of the colossus.
     const BUILD_ATTACKABLE = { barricade: 1, wall: 1, sandbag: 1, mortar: 1, lure: 1, light: 1, flame: 1, heavy: 1, platform: 1, floor: 1, stairs: 1, wire: 1, railing: 1 };
-    function nearestAttackableBuild(x, z, zr) {
+    function nearestAttackableBuild(x, z, zr, zy) {
       let best = null, bd = Infinity;
       for (const b of builds) {
         if (b.hp <= 0 || !BUILD_ATTACKABLE[b.type]) continue;
+        // Only what is within reach up or down. A wall and the platform on it share a
+        // cell, so a zombie on the ground could otherwise pick the deck two metres over
+        // its head and flail at thin air instead of chewing the wall it is touching.
+        if (zy != null) {
+          const bot = b.mesh.position.y, top = bot + pieceHeight(b.type);
+          if (bot > zy + ZOMBIE_REACH_Y || top < zy - 0.3) continue;
+        }
         const d = Math.hypot(b.x - x, b.z - z);
         if (d < b.radius + zr + 0.35 && d < bd) { bd = d; best = b; }
       }
@@ -15282,6 +15375,10 @@
       if (i >= 0) builds.splice(i, 1);
       // The neighbours have lost an arm's worth of company.
       if (_wasCell) refreshPanelNeighbourhood(_wasCell.gx, _wasCell.gz, _wasCell.lv);
+      // A floor bridging open space may have been leaning on this. Re-check the decks
+      // around it, and keep going while anything falls — dropping the one nearest the
+      // wall can leave the next one out with nothing to hold it either.
+      if (_wasCell && !quiet) settleSpans(_wasCell.gx, _wasCell.gz);
     }
 
     // === Mortar ===
@@ -21892,7 +21989,7 @@
               // You are out of reach, so whatever of yours is in the way gets it
               // instead. The player always wins the check above: defences are what
               // they turn on only when they cannot get to you.
-              const hit = nearestAttackableBuild(mx, mz, z.radius);
+              const hit = nearestAttackableBuild(mx, mz, z.radius, z.mesh.position.y);
               if (hit) {
                 // Structures give way to weight: a brute puts its shoulder through
                 // what a shambler only dents, and the colossus barely notices.
