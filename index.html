@@ -12026,7 +12026,7 @@
     // kiosk and carried (H to use).
     let medkits = 0;
     const MAX_MEDKITS = 3;
-    const MEDKIT_PRICE = 55;
+    const MEDKIT_PRICE = 65;
     const REGEN_CAP_FRAC = 0.4;
     const REGEN_RATE = 2.2;         // hp per second, once the hurt timer has cleared
     const REGEN_DELAY = 5;          // seconds after the last hit before regen starts
@@ -12037,7 +12037,10 @@
     // Weapons are unlocked one-time; ammo is a finite reserve behind the magazine
     // (reloads draw from it, and it's only restocked at the kiosk during prep);
     // extended mags are a per-weapon one-time upgrade; the chainsaw burns fuel.
-    const WEAPON_PRICE = { pistol: 0, uzi: 70, shotgun: 110, m4: 160, ak: 195, revolver: 140, sniper: 230, aa12: 340, launcher: 300, minigun: 360, flamer: 210, chainsaw: 190 };
+    // The top-end guns cost a little more than they did: with kill income cut to a
+    // trickle per body (see ZOMBIE_TYPES), the late arsenal should be a saved-for
+    // milestone, not day-6 pocket change.
+    const WEAPON_PRICE = { pistol: 0, uzi: 70, shotgun: 110, m4: 160, ak: 195, revolver: 140, sniper: 260, aa12: 380, launcher: 340, minigun: 420, flamer: 210, chainsaw: 190 };
     const WEAPON_BLURB = {
       pistol: 'Sidearm. Reliable, slow.', uzi: 'Spray-and-pray SMG. Short range, fast.', shotgun: 'Seven-pellet pump. Devastating up close.',
       m4: 'Full-auto rifle. The workhorse.', revolver: 'Six heavy rounds. One-taps most things.', sniper: 'True scope, 2X/4X/6X. Headshots from across the map.',
@@ -12069,11 +12072,14 @@
     function caliberUnit(c) { return CALIBER_UNIT[c] || 'rounds'; }
     function gunsUsing(c) { return WEAPON_ORDER.filter((w) => weaponOwned[w] && caliberOf(w) === c); }
     // { rounds per pack, price } per calibre — chainsaw gas is priced on its own below.
+    // Roughly a third dearer across the board: ammunition was near-free ($10 for 60
+    // rounds of 9mm against a day's income of hundreds), so upkeep never entered into
+    // a buying decision. It should sting a little to hose a wave with the minigun.
     const AMMO_PACK = {
-      '9mm': { n: 60, cost: 10 }, '5.56mm': { n: 60, cost: 15 }, '7.62mm': { n: 60, cost: 18 },
-      '.44': { n: 12, cost: 11 }, '.338': { n: 10, cost: 20 }, '12ga': { n: 20, cost: 15 },
-      '40mm': { n: 6, cost: 34 }, '7.62 belt': { n: 300, cost: 34 }, 'Fuel': { n: 60, cost: 18 },
-      '60mm': { n: 4, cost: 26 }, chainsaw: { n: 45, cost: 14 }
+      '9mm': { n: 60, cost: 14 }, '5.56mm': { n: 60, cost: 20 }, '7.62mm': { n: 60, cost: 24 },
+      '.44': { n: 12, cost: 15 }, '.338': { n: 10, cost: 28 }, '12ga': { n: 20, cost: 20 },
+      '40mm': { n: 6, cost: 44 }, '7.62 belt': { n: 300, cost: 48 }, 'Fuel': { n: 60, cost: 24 },
+      '60mm': { n: 4, cost: 34 }, chainsaw: { n: 45, cost: 18 }
     };
     // Reserve caps: a handful of magazines' worth, so you can't front-load a whole run.
     const RESERVE_CAP = {
@@ -13677,7 +13683,7 @@
     // size carpeted the field in cash and made the walk pay for itself several times
     // over. Small payouts now go into a pool and only hit the ground once they are
     // worth the detour; anything already worth picking up still drops where it died.
-    const CASH_DROP_MIN = 14;
+    const CASH_DROP_MIN = 8;
     let cashPool = 0;
     function awardCash(x, z, amount) {
       if (amount <= 0) return;
@@ -16304,47 +16310,47 @@
     const ZOMBIE_PACE = 1.15;
     const ZOMBIE_TYPES = {
       shambler: {
-        name: 'Shambler', hp: 24, speed: 3.19, radius: 0.42, damage: 6, reward: 3, cashDrop: 3,
+        name: 'Shambler', hp: 24, speed: 3.19, radius: 0.42, damage: 6, reward: 1, cashDrop: 1,
         armor: 0, scale: 1, color: 0xd4c4a8, eye: 0x88ff44, hunch: 0, tactics: 'direct'
       },
       feral: {
-        name: 'Feral', hp: 15, speed: 5.4, radius: 0.37, damage: 7, reward: 5, cashDrop: 5,
+        name: 'Feral', hp: 15, speed: 5.4, radius: 0.37, damage: 7, reward: 4, cashDrop: 4,
         armor: 0, scale: 0.88, color: 0x8a9a6a, eye: 0xccff44, hunch: 0.55, tactics: 'flank'
       },
       // (The construction worker is gone — he looked terrible.)
       leaper: {
-        name: 'Leaper', hp: 30, speed: 4.2, radius: 0.42, damage: 10, reward: 8, cashDrop: 8,
+        name: 'Leaper', hp: 30, speed: 4.2, radius: 0.42, damage: 10, reward: 6, cashDrop: 6,
         armor: 0, scale: 0.92, color: 0xcfc6bc, eye: 0xffe040, hunch: 1, tactics: 'leap'
       },
       spider: {
-        name: 'Spider', hp: 44, speed: 3.0, radius: 0.62, damage: 8, reward: 13, cashDrop: 13,
+        name: 'Spider', hp: 44, speed: 3.0, radius: 0.62, damage: 8, reward: 10, cashDrop: 10,
         armor: 0.08, scale: 1.0, color: 0xa39a84, eye: 0xff3b6b, hunch: 0, tactics: 'spit', spider: true
       },
       drowned: {
-        name: 'Drowned', hp: 40, speed: 2.4, radius: 0.44, damage: 10, reward: 8, cashDrop: 8,
+        name: 'Drowned', hp: 40, speed: 2.4, radius: 0.44, damage: 10, reward: 6, cashDrop: 6,
         armor: 0.04, scale: 0.98, color: 0x3f8a80, eye: 0xc8fff0, hunch: 0.1, tactics: 'direct', aquatic: true
       },
       military: {
-        name: 'Military', hp: 50, speed: 3.15, radius: 0.46, damage: 12, reward: 10, cashDrop: 10,
+        name: 'Military', hp: 50, speed: 3.15, radius: 0.46, damage: 12, reward: 8, cashDrop: 8,
         armor: 0.12, scale: 1.08, color: 0x4a5540, eye: 0x44ff88, hunch: 0, tactical: true, tactics: 'weave'
       },
       brute: {
-        name: 'Brute', hp: 85, speed: 1.85, radius: 0.64, damage: 16, reward: 17, cashDrop: 17,
+        name: 'Brute', hp: 85, speed: 1.85, radius: 0.64, damage: 16, reward: 14, cashDrop: 14,
         armor: 0.28, scale: 1.38, color: 0x6b2a2a, eye: 0xff2222, hunch: 0, armored: true, keepOut: true, tactics: 'tank'
       },
       spitter: {
         // No longer spits — lobbing acid is the spider's job now. It walks in at its
         // normal pace and then closes the last 15m at a quarter speed: a slow, obvious
         // creep you can shoot off the field before it reaches you.
-        name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 12, cashDrop: 12,
+        name: 'Spitter', hp: 34, speed: 2.45, radius: 0.46, damage: 9, reward: 9, cashDrop: 9,
         armor: 0, scale: 1.05, color: 0x8fa04c, eye: 0xccff22, hunch: 0, tactics: 'creep'
       },
       screamer: {
-        name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 14, cashDrop: 14,
+        name: 'Screamer', hp: 28, speed: 3.5, radius: 0.4, damage: 6, reward: 11, cashDrop: 11,
         armor: 0, scale: 0.96, color: 0xd8cabb, eye: 0xff55ff, hunch: 0, tactics: 'scream'
       },
       bomber: {
-        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 12, cashDrop: 12,
+        name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58, damage: 0, reward: 9, cashDrop: 9,
         armor: 0, scale: 1.1, color: 0x8f9c4a, eye: 0xffee44, hunch: 0.15, tactics: 'bomb', fat: true
       },
       // Demon: a brute that came up from somewhere worse. Horned, spined, cracked with
@@ -16353,12 +16359,12 @@
       // do: it is meant to be the big thing you shoot at, not the one you need a
       // launcher for.
       demon: {
-        name: 'Demon', hp: 130, speed: 2.5, radius: 0.66, damage: 18, reward: 24, cashDrop: 24,
+        name: 'Demon', hp: 130, speed: 2.5, radius: 0.66, damage: 18, reward: 20, cashDrop: 20,
         armor: 0.18, scale: 1.46, color: 0x8e1c12, eye: 0xffb020, hunch: 0.2, tactics: 'charge',
         fireResist: 0.8
       },
       colossus: {
-        name: 'Colossus', hp: 520, speed: 1.6, radius: 1.05, damage: 30, reward: 140, cashDrop: 140,
+        name: 'Colossus', hp: 520, speed: 1.6, radius: 1.05, damage: 30, reward: 120, cashDrop: 120,
         armor: 0.32, scale: 2.3, color: 0x5a3030, eye: 0xff3300, hunch: 0, tactics: 'boss'
       }
     };

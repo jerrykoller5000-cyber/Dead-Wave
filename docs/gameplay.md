@@ -57,7 +57,15 @@ buys applies to everything eating that calibre.
   5+ *Rampage* (+10% move speed), 10+ *Massacre* (reloads 25% faster), 20+ *Unstoppable* (about
   one shot in three doesn't spend a round), 30+ *Godlike* (a quarter of all damage shrugged off).
   Lose the streak, lose the powers. Milestones kick a beat of slow motion.
-- **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs down, then shrink away.
+- **The economy.** The horde itself pays a trickle — a shambler is worth $1 — and the dangerous
+  types carry the bounties ($4-20; the colossus $120). Measured base income through day 12 is
+  about $6,700 against a catalogue (every gun, blueprint, perk rank and piece of gear) plus
+  ammunition upkeep of roughly $12,800, so buying one thing genuinely means not buying another.
+  Ammunition is about a third dearer than it was and the late guns cost more, so upkeep is part
+  of every decision.
+- **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk ($8+)
+  rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs
+  down, then shrink away.
 - **Airdrops** are rare (every 4-7 minutes) and money only, a bounty for walking out to them.
 
 ## The cabin
