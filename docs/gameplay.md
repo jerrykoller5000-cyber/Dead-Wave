@@ -73,6 +73,13 @@ roof. It smokes and loses its window boards as it takes damage. No zombies rise 
   chain-react with other zombies.
 - **Spitters** no longer throw acid, since lobbing things is the Spider's job. They walk in and
   then crawl the last 15 m at a quarter speed.
+- **Demons** (from day 6; one, a second from day 9, a third from day 12, and two more on every
+  blood moon): red, horned, spined and cracked with glowing embers — a brute from somewhere
+  worse. They plod in, then stop, lower their heads and roar (about half a second, and the ember
+  cracks flare) before charging in a straight line at about 9 m/s. A charge that connects hits
+  for about 30 and throws you roughly 3 m; one that hits a build batters it. The line is locked at
+  the wind-up, so a sidestep or a roll makes it charge straight past. Fire barely touches them
+  (a fifth of normal burn). Unlike brutes, bullets work — they have 130 HP and light armour.
 - **Brutes** only go down to explosives. **The Colossus** is the boss, and ignores decoy beacons.
 - **Knockdowns.** An explosion floors anything short of a colossus; a point-blank shotgun blast
   floors the small types. They topple, lie helpless for a moment and get back up. This cannot be chained.
