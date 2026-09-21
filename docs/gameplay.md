@@ -2,8 +2,9 @@
 
 ## Loadout and the kiosk
 
-You start with a pistol, a knife and $40. Everything else is bought at the kiosk: the yellow
-terminal a few strides from the spawn clearing (a yellow square on the minimap).
+You start with a pistol, a knife and $40, at the foot of your cabin's porch steps. Everything else
+is bought at the kiosk: a steel supply hatch built into the east wall of the cabin (a yellow
+square on the maps).
 
 | Tab | What it sells |
 | --- | --- |
@@ -55,11 +56,18 @@ buys applies to everything eating that calibre.
 - **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs down, then shrink away.
 - **Airdrops** are rare (every 4-7 minutes) and money only, a bounty for walking out to them.
 
-## Defending the base
+## The cabin
 
-The base is a log cabin, 1.65x bigger than it used to be, with a health bar floating over the
-roof. It smokes and loses its window boards as it takes damage. No zombies rise within about
-100 ft of it, so the fight comes to you from outside the clearing.
+The log cabin stands in the spawn clearing in **both** modes. In Hunted it is just a building — no
+health bar, the horde doesn't go for it and blasts don't hurt it — with the kiosk in its east wall.
+In Defend the House it is the objective, with a health bar floating over the roof; it smokes and
+loses its window boards as it takes damage, and no zombies rise within about 100 ft of it.
+
+It sits on the build lattice: its stone plinth is exactly 6 m square, three 2 m build cells a side,
+centred on a cell, and it collides as that square (it used to be a 3 m circle round a square
+house). So a wall you build beside it lands flush against it, and you can run your defences
+straight off its corners. The porch and its two steps are walkable, the porch posts and the
+sandbag lines are solid, and its walls stop bullets — yours and anything else's.
 
 ## Enemies
 

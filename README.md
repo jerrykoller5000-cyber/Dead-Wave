@@ -33,7 +33,7 @@ WebGL2 by itself.
 - **Waves and days.** Two minutes of prep between waves, then the horde. Every fourth day is a
   Blood Moon: red sky, a faster horde, x1.5 cash.
 - **The kiosk.** Start with a pistol, a knife and $40. Weapons, ammo, armor, gear, upgrades, perks
-  and build blueprints are all bought at the yellow terminal near the spawn clearing.
+  and build blueprints are all bought at the supply hatch in your cabin's east wall.
 - **A big, varied horde.** Shamblers in the hundreds, plus Leapers, the Drowned, Spiders, Spitters,
   Screamers, Bombers, Brutes and the Colossus.
 - **Build.** Barricades, walls, sandbags, spikes, fuel drums, mines, decoy beacons, lights, a manned
