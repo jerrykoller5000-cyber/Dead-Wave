@@ -754,7 +754,7 @@
             <h3>Combat</h3>
             <ul>
               <li>LMB — fire / hold for the chainsaw and flamethrower · R — reload</li>
-              <li>RMB — zoom (a real scope on the sniper) · middle click — sniper scope 2X / 4X / 6X</li>
+              <li>RMB — zoom. On the sniper it raises a real scope on whatever the reticle is on; the mouse then moves the scope directly (push to the screen edge to swing further). Wheel or middle click — 2X / 4X / 6X</li>
               <li>G — grenade · F — knife (or the machete, once bought)</li>
               <li>H — use a medkit. Health only regenerates back to 40% on its own</li>
               <li>Hold Q — weapon wheel: time slows, point at a gun, let go to draw it · tap Q to step to the next one</li>
@@ -18393,19 +18393,37 @@
     const aimHit = new THREE.Vector3();
     const aimTarget = new THREE.Vector3();
     const _scopedNdc = new THREE.Vector2(0, 0);
-    // Sniper scope magnification: a middle click cycles 2x / 4x / 6x (see the mouseup
-    // handler below). FOV per level, and a per-level mouse-sensitivity fraction —
-    // higher power gets a lot of extra damping on top of what the narrower FOV
-    // already gives for free, since a hand tremor reads huge at 6x. On top of that,
-    // SCOPE_ZOOM_EASE_RATE gives the reticle actual weight: instead of snapping to
-    // wherever the (damped) cursor is pointing every single frame, it settles there
-    // over time like a real scope does, which is what actually makes it possible to
-    // hold something in the sight picture instead of it darting past.
+    // Sniper scope. Magnification: the wheel or a middle click, 2x / 4x / 6x.
+    //
+    // How it aims. The scope used to look *at* aimTarget while aimTarget was the cursor
+    // raycast *through that same scoped camera* — a feedback loop. Any cursor offset
+    // from centre turned the view, which moved the ray, which turned the view again:
+    // the mouse behaved like a joystick, the picture drifted whenever the hand was
+    // still off-centre, and the only way to stop was to put the cursor back exactly in
+    // the middle. Damping and easing layered on top only made that loop slower.
+    //
+    // Now it is open-loop. Scoping in anchors on whatever the reticle was on, and from
+    // then on the mouse moves the scope by position: the world under the crosshair
+    // tracks the hand (SCOPE_GAIN 1 would be exactly 1:1 at every magnification), and a
+    // still hand is a still picture. Near the screen edge the view keeps swinging that
+    // way (SCOPE_EDGE), which is how you turn further than the screen allows.
     let scopeZoomLevel = 0;
     const SCOPE_ZOOM_FOV = [24, 13, 9];
-    const SCOPE_ZOOM_SENS = [0.42, 0.24, 0.16];
-    const SCOPE_ZOOM_EASE_RATE = [10, 6, 4.2];
     const SCOPE_ZOOM_LABELS = ['2X', '4X', '6X'];
+    const SCOPE_GAIN = 1.25;   // scope turn per unit of cursor travel, relative to 1:1
+    const SCOPE_EDGE = 0.8;    // NDC radius past which the view keeps swinging
+    let sniperScopingNow = false;
+    let scopeAnchor = null;    // { nx, ny, yaw, pitch } set when the scope comes up
+    let scopeYaw = 0, scopePitch = 0;
+    const scopeDir = new THREE.Vector3(0, 0, 1);
+    function setScopeZoomLevel(level) {
+      level = Math.max(0, Math.min(SCOPE_ZOOM_FOV.length - 1, level));
+      if (level === scopeZoomLevel) return;
+      scopeZoomLevel = level;
+      // Re-anchor so the picture doesn't jump when the throw per unit of cursor changes.
+      if (scopeAnchor) scopeAnchor = { nx: aimPointerNdc.x, ny: aimPointerNdc.y, yaw: scopeYaw, pitch: scopePitch };
+      updateScopeZoomHud();
+    }
     let pointerOnCanvas = false;
     let mouseFireHeld = false;
     // Snap aim for crisp TPS feel (no laggy turnToward)
@@ -18608,21 +18626,49 @@
       reticleEl.classList.toggle('los-blocked', next === 'blocked');
     }
 
+    // Scoped aim: turn the cursor's travel since scope-in into a scope direction.
+    function updateScopeDir(dt) {
+      if (!sniperScopingNow) { scopeAnchor = null; return false; }
+      if (!scopeAnchor) {
+        // The scope comes up on exactly what the third-person reticle was on.
+        const m = getMuzzleWorld();
+        const dx = aimTarget.x - m.x, dy = aimTarget.y - m.y, dz = aimTarget.z - m.z;
+        scopeYaw = Math.atan2(dx, dz);
+        scopePitch = Math.atan2(dy, Math.hypot(dx, dz));
+        scopeAnchor = { nx: aimPointerNdc.x, ny: aimPointerNdc.y, yaw: scopeYaw, pitch: scopePitch };
+      }
+      const half = THREE.MathUtils.degToRad(SCOPE_ZOOM_FOV[scopeZoomLevel]) / 2;
+      const g = SCOPE_GAIN * lookSens;
+      const nx = aimPointerNdc.x, ny = aimPointerNdc.y;
+      // Edge swing: past SCOPE_EDGE the anchor itself drifts, up to about one field of
+      // view a second at the very edge, so the turn accumulates and survives the hand
+      // coming back in.
+      const ex = Math.abs(nx) > SCOPE_EDGE ? Math.sign(nx) * (Math.abs(nx) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
+      const ey = Math.abs(ny) > SCOPE_EDGE ? Math.sign(ny) * (Math.abs(ny) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
+      scopeAnchor.yaw -= ex * half * 2 * dt;
+      scopeAnchor.pitch += ey * half * 2 * dt;
+      // Screen-right turns you toward decreasing yaw (facing +z, screen-right is -x).
+      scopeYaw = scopeAnchor.yaw - (nx - scopeAnchor.nx) * half * camera.aspect * g;
+      scopePitch = scopeAnchor.pitch + (ny - scopeAnchor.ny) * half * g;
+      if (scopePitch > 1.2) { scopeAnchor.pitch -= scopePitch - 1.2; scopePitch = 1.2; }
+      if (scopePitch < -1.2) { scopeAnchor.pitch -= scopePitch + 1.2; scopePitch = -1.2; }
+      const cp = Math.cos(scopePitch);
+      scopeDir.set(Math.sin(scopeYaw) * cp, Math.sin(scopePitch), Math.cos(scopeYaw) * cp);
+      return true;
+    }
+
     function updateMouseAim(dt) {
       if (!pointerOnCanvas) return;
-      let ndcX = aimPointerNdc.x, ndcY = aimPointerNdc.y;
-      if (scopeAmt > 0.002) {
-        // Scoped: the reticle lives near screen-centre and the view is heavily
-        // magnified, so the raw cursor offset needs less throw for the same aim
-        // swing or the smallest hand tremor sends the crosshair flying. Pull the
-        // effective cursor position toward centre by the current zoom level's
-        // sensitivity fraction, eased in with the scope itself.
-        const sens = Math.min(1, SCOPE_ZOOM_SENS[scopeZoomLevel] * lookSens);
-        const k = 1 - scopeAmt * (1 - sens);
-        ndcX *= k; ndcY *= k;
+      const scoped = updateScopeDir(dt);
+      if (scoped) {
+        // The ray runs down the scope's own line from the muzzle, which is where the
+        // bullet leaves: what sits under the crosshair is what gets hit.
+        aimRaycaster.ray.origin.copy(getMuzzleWorld());
+        aimRaycaster.ray.direction.copy(scopeDir);
+      } else {
+        _scopedNdc.set(aimPointerNdc.x, aimPointerNdc.y);
+        aimRaycaster.setFromCamera(_scopedNdc, camera);
       }
-      _scopedNdc.set(ndcX, ndcY);
-      aimRaycaster.setFromCamera(_scopedNdc, camera);
       const ray = aimRaycaster.ray;
       // Terrain first; a cursor above the skyline used to hit nothing and freeze the
       // aim, so it now aims at a far point along the ray instead.
@@ -18634,20 +18680,7 @@
       const zt = rayPickZombie(ray, groundT);
       if (zt !== Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, zt);
       else if (groundT === Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, AIM_SKY_DIST);
-      if (scopeAmt > 0.002) {
-        // Scoped: ease toward the raw raycast hit instead of teleporting onto it
-        // every frame. The camera looks straight at aimTarget while scoped (see
-        // updateScope), so this is what actually gives the reticle weight/settle —
-        // the sensitivity damping above only shrinks how far the target CAN move,
-        // this controls how fast it's allowed to get there. Slower at higher zoom.
-        const rate = SCOPE_ZOOM_EASE_RATE[scopeZoomLevel];
-        const ease = 1 - Math.exp(-rate * dt);
-        aimTarget.x += (aimHit.x - aimTarget.x) * ease;
-        aimTarget.y += (aimHit.y - aimTarget.y) * ease;
-        aimTarget.z += (aimHit.z - aimTarget.z) * ease;
-      } else {
-        aimTarget.copy(aimHit);
-      }
+      aimTarget.copy(aimHit);
       updateShotLos(zt !== Infinity);
       const dx = aimTarget.x - player.position.x;
       const dz = aimTarget.z - player.position.z;
@@ -18722,8 +18755,7 @@
         // A plain click cycles the sniper scope's magnification — whether or not the
         // scope is raised, so it can be dialled in before you commit.
         if (!wasDrag && gameStarted && !gameOver && !won && !paused && !placeMode && !buildMode && currentWeapon === 'sniper') {
-          scopeZoomLevel = (scopeZoomLevel + 1) % SCOPE_ZOOM_FOV.length;
-          updateScopeZoomHud();
+          setScopeZoomLevel(scopeZoomLevel >= SCOPE_ZOOM_FOV.length - 1 ? 0 : scopeZoomLevel + 1);
         }
       }
     });
@@ -18738,10 +18770,9 @@
       // camera position outright), so the wheel dials magnification instead — same cycle
       // the middle-click gives.
       if (scopeAmt > 0.5 && currentWeapon === 'sniper') {
-        if (Math.abs(dy) > 1) {
-          scopeZoomLevel = (scopeZoomLevel + (dy < 0 ? 1 : SCOPE_ZOOM_FOV.length - 1)) % SCOPE_ZOOM_FOV.length;
-          updateScopeZoomHud();
-        }
+        // Up for more power, down for less, stopping at the ends (it used to wrap, so
+        // one scroll too many threw you from 6X back to 2X).
+        if (Math.abs(dy) > 1) setScopeZoomLevel(scopeZoomLevel + (dy < 0 ? 1 : -1));
         return;
       }
       // Zoom: scroll up pulls the camera in, down pushes it out. One mouse notch
@@ -22794,6 +22825,7 @@
         // over-the-shoulder zoom.
         const sniperScoping = wantZoom && sniperZoom && !playerSwimming && !climbingTower &&
           rollT <= 0 && !shopOpen;
+        sniperScopingNow = sniperScoping;
         const fovZoom = sniperZoom ? SCOPE_ZOOM_FOV[scopeZoomLevel] : FOV_ZOOM;
         const distZoom = sniperZoom ? 4.6 : CAM_DIST_ZOOM;
         // A few degrees wider at a full sprint: the world opens up and the speed reads.
@@ -23335,7 +23367,10 @@
       if (scopeAmt > 0.0005) {
         const sMuzzle = getMuzzleWorld();
         const smx = sMuzzle.x, smy = sMuzzle.y, smz = sMuzzle.z;
-        const sDir = getAimDir();
+        // Look down the scope's own line (see updateScopeDir), not at aimTarget: the hit
+        // point jumps between near and far things as the crosshair crosses them, and a
+        // camera aimed at it would jump with it. While lowering, fall back to the gun.
+        const sDir = sniperScopingNow && scopeAnchor ? scopeDir : getAimDir();
         const sdx = sDir.x, sdy = sDir.y, sdz = sDir.z;
         const SCOPE_BACK = 0.4;
         const scopeX = smx - sdx * SCOPE_BACK;
@@ -23345,9 +23380,9 @@
         camera.position.x += (scopeX - camera.position.x) * se;
         camera.position.y += (scopeY - camera.position.y) * se;
         camera.position.z += (scopeZ - camera.position.z) * se;
-        camLook.x += (aimTarget.x - camLook.x) * se;
-        camLook.y += (aimTarget.y - camLook.y) * se;
-        camLook.z += (aimTarget.z - camLook.z) * se;
+        camLook.x += (scopeX + sdx * 60 - camLook.x) * se;
+        camLook.y += (scopeY + sdy * 60 - camLook.y) * se;
+        camLook.z += (scopeZ + sdz * 60 - camLook.z) * se;
       }
       // Hide the shooter's own body once the scope's mostly raised — at this range
       // it would just be the inside of an arm filling the screen. Restored the

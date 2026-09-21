@@ -37,11 +37,17 @@ The Machete (kiosk, Upgrades tab) replaces it: 3.8 m reach, 85 damage, 0.40 s, +
 
 ### Sniper scope
 
-`RMB` with the sniper out drops to a first-person scope view (vignette, mil-dot reticle, your own
-body hidden). A middle click cycles 2X / 4X / 6X, or use the wheel. Mouse sensitivity is damped
-while scoped, more at higher magnification, and the reticle eases onto where you point instead of
-snapping there, so 6X is deliberately slow and heavy. Nudge the mouse to track a target; push it
-toward the screen edge to swing further.
+`RMB` with the sniper out raises a first-person scope (vignette, mil-dot reticle, your own body
+hidden). It comes up on whatever the reticle was on, so point first, then scope.
+
+While scoped the mouse moves the scope directly: the world under the crosshair follows your hand,
+and a still hand is a still picture. Near the edge of the screen the view keeps swinging that
+way (about 18 degrees a second at 2X, slower at higher power), which is how you turn further than
+the screen allows; the turn is kept when you bring the hand back in. Shots go exactly where the
+crosshair is.
+
+The wheel steps the power up and down, 2X / 4X / 6X, stopping at the ends; a middle click cycles
+it. Changing power keeps the picture centred where it was. Look sensitivity scales the scope too.
 
 ## Action key and the world
 
