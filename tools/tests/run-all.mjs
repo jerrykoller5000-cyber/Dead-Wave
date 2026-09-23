@@ -99,7 +99,17 @@ async function runOne(name) {
         try { await page.send('Page.bringToFront', {}); } catch { /* already in front */ }
       }
       await page.evaluate(fs.readFileSync(path.join(HERE, 'lib.js'), 'utf8'));
-      const out = await page.evaluate(code);
+      // A probe that soaks (t19 used to sit for two minutes) must not hold a worker until
+      // the DevTools call itself gives up. 75s covers a real match start plus a short swarm.
+      let timer;
+      const running = page.evaluate(code).finally(() => clearTimeout(timer));
+      running.catch(() => {});
+      const out = await Promise.race([
+        running,
+        new Promise((_, reject) => {
+          timer = setTimeout(() => reject(new Error('time limit: check still running after 75s')), 75000);
+        })
+      ]);
       const text = typeof out === 'string' ? out : JSON.stringify(out);
       raw = String(text ?? '');
       lines = raw.split('\n').map((l) => l.trim()).filter(Boolean);

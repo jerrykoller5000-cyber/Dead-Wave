@@ -41,12 +41,12 @@ const VIEWS = [
    })()`],
   ['bridge-east', `({ x: 56 + 14, y: TT.sampleHeight(56, 72) + 9, z: 72 + 14, tx: 56, ty: TT.sampleHeight(56, 72) + 1, tz: 72, fov: 50 })`],
   ['bridge-west', `({ x: -46 + 14, y: TT.sampleHeight(-46, 50) + 9, z: 50 + 14, tx: -46, ty: TT.sampleHeight(-46, 50) + 1, tz: 50, fov: 50 })`],
-  // Steeply down on the pit, high enough to hold the whole rune ring. NOT straight down:
-  // lookAt() with the view along the up vector is degenerate and the camera ends up
-  // pointing at the sky, which is exactly what the first version of this shot produced.
+  // Claude's pit camera (CU-7): closer than the first framing, aimed at the funnel
+  // floor rather than the surface, so the rune ring reads through the water. Not straight
+  // down — lookAt() along the up vector is degenerate and the camera points at the sky.
   ['pit', `(() => {
      const L = TT.LAKE_HOLE;
-     return { x: L.x + 15, y: -3.4 + 26, z: L.z + 15, tx: L.x, ty: -3.4, tz: L.z, fov: 55 };
+     return { x: L.x + 12, y: -3.4 + 16, z: L.z + 12, tx: L.x, ty: -3.4 - 5, tz: L.z, fov: 50 };
    })()`],
   // Each cave from three sides. Distances and heights are Claude's numbers.
   ...CAVE_THEMES.flatMap((theme) => [

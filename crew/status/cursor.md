@@ -4,12 +4,14 @@ state: idle
 model: Grok 4.7 (switched from Opus 5 on 2026-09-23)
 task: —
 touching: —
-since: 2026-09-23T21:53Z
-next: CU-7 pit camera
+since: 2026-09-23T22:03Z
+next: CU-4 the split
 blocked-on: —
-last-report: handoffs/2026-09-23-cursor-cu8.md
+last-report: handoffs/2026-09-23-cursor-cu7.md
 
 ## Notes
+
+CU-7: `pit` in tools/shoot.mjs is Claude's funnel camera. Each npm test check stops at 75s. Antigravity has the shot request (AG-2). `pre-split/pit.png` is not in the repo.
 
 CU-8: test pages open as their own windows (`visible`), `startMatch` is in tools/tests/lib.js, and crew/tests.json is written by the runner. ChatGPT cannot get past `CDP timeout: Page.enable`; Cursor runs npm test for him at commit time.
 
