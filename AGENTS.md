@@ -9,28 +9,58 @@ Grokbot and Claude. Jerry has the final say. Claude leads.
 
 ## Every session: check in, work, check out
 
-You won't remember earlier sessions. The crew board remembers for you.
+You won't remember earlier sessions. The crew board remembers for you. Jerry watches it all on
+the crew panel, so what you log is how he knows what you're doing.
 
-1. **Look.** Run `node crew/crew.mjs`, or read `crew/status/*.md`. It shows who is active, what
-   they are on and which files they are in. Then read `crew/BOARD.md`: Jerry's orders, the
-   lead's decisions, and your queue. Read your own card, `crew/status/<you>.md`, for the notes
-   you left yourself.
+1. **Look.** Run `node crew/crew.mjs`. It shows who is active and in which files, open
+   questions, and reviews waiting. Then read `crew/BOARD.md` (Jerry's orders, the decisions,
+   your queue) and your own card, `crew/status/<you>.md`, for the notes you left yourself.
 2. **Answer first.** Look in `handoffs/requests.md` for anything addressed to you, and answer
    it in place (`DONE`, `WONT (why)` or `LATER (phase)`).
-3. **Check in.** Take the top open task in your queue, unless it is blocked, and run:
+3. **Check in.** `node crew/crew.mjs next <you>` names your next task. Then:
    `node crew/crew.mjs in <you> <task-id> "<what>" --touch "<file (part)>, <file>"`.
-   It refuses if another active agent is already in one of those files. Then wait, or take
-   another task. Never work around it.
-4. **Work.** Only in your own files (the table below), and only on that task.
-5. **Check out.** Write your handoff note, then run:
-   `node crew/crew.mjs out <you> --report handoffs/YYYY-MM-DD-<you>-<task>.md --next "<id> <what>"`.
-   If you are stuck, use `--blocked "<on what>"` instead. Put anything the next session should
-   know in the Notes section of your card.
+   - It ticks the task ▶ on the board.
+   - It refuses if another active agent is already in one of those files. Then wait, or take
+     another task. Never work around it.
+   - Don't list the shared files (`crew/LOG.md`, `crew/QUESTIONS.md`, `handoffs/requests.md`):
+     everyone appends to those.
+4. **Work, and say what's happening.** Only in your own files (the table below), and only on
+   that task. Whenever you find or finish something, roughly every 10-15 minutes:
+   `node crew/crew.mjs note <you> "<one line: what you found or finished>"`.
+   That line is what Jerry sees on your card while you work.
+5. **Check out.** Write your handoff note in the template below, then:
+   `node crew/crew.mjs out <you> --report handoffs/YYYY-MM-DD-<you>-<task>.md --done`.
+   - `--done` ticks the task ✓. Leave it off if the task isn't finished.
+   - Add `--review "<why>"` if you changed what a test expects, or anything else the lead
+     should look at.
+   - Stuck? Use `--blocked "<on what>"` instead.
+   - Put anything your next session should know in the Notes section of your card.
+6. **Keep going.** Take the next task and go round again. Don't stop to ask Jerry whether to
+   continue. Stop only when:
+   - your queue is empty;
+   - you're blocked; or
+   - you need a decision only Jerry can make. Then run
+     `node crew/crew.mjs ask <you> "<the question>"`, which puts it at the top of his panel,
+     and work on something else meanwhile.
 
-If you can't run Node, make the same changes by hand. Edit your card's header lines, and
-append one line to `crew/LOG.md` in its format, with UTC time. Claude works that way.
+**Asking another agent for something:**
+`node crew/crew.mjs request <you> <them> "<title>" "<body>"` (or `--body-file <path>`). It
+appends to `handoffs/requests.md` in UTF-8. Don't use PowerShell's `Add-Content`: it mangles
+`·` and `→`.
 
-Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`.
+**If you can't run Node,** make the same changes by hand:
+- edit your card's header lines;
+- append one line to `crew/LOG.md` in its format, with UTC time;
+- tick your own task's box on the board.
+Claude works that way.
+
+**If you can't run `npm test`,** write "not run" and why under Tests:, and Cursor runs it
+before committing. ChatGPT's runner does not get past Chrome: `CDP timeout: Page.enable`
+in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
+He writes "not run" and Cursor runs the suite for him at commit time.
+
+Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`. Task ids: `CL-`, `CU-`,
+`GP-`, `GB-`.
 
 ## Who owns what
 
@@ -60,8 +90,10 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
    three-way merge onto the new version.
 5. **The split freeze.** While Cursor has the freeze on (the panel shows **SPLIT FREEZE ON**),
    nobody else edits `index.html`. Use that time for specs and tests in new files.
-6. **Only Cursor commits and pushes.** Nobody else touches git or GitHub. Cursor pushes
-   `feature/Phis-changes` at the end of every session, after the checks in rule 7.
+6. **Only Cursor commits and pushes.** Nobody else touches git or GitHub. At the end of each of
+   his own tasks, Cursor commits the finished work that is waiting: everything checked out
+   since the last commit, never a file an active agent is still in. After the checks in
+   rule 7 he pushes `feature/Phis-changes`. The panel shows what's waiting.
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
    - Anything visible has before-and-after shots from `tools/shoot.mjs`
@@ -83,7 +115,8 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     - 60 fps with 48 zombies, from the standard view.
     - No CDN dependencies, and no build step: the game runs straight from the folder.
 13. **Report honestly.** Say what failed and what you couldn't verify. Never skip, weaken or
-    delete a test to make it pass; a stale test goes to its owner.
+    delete a test to make it pass; a stale test goes to its owner. If you change what a test
+    expects, check out with `--review` so the lead looks at it (D-7).
 14. **One task per check-in and per handoff.** Keep changes small and reviewable. No drive-by
     refactors outside your own area.
 
@@ -96,6 +129,9 @@ Files:            <paths>
 Tests:            npm test → <pass/fail counts>; new tests: <names>
 Screenshots:      <paths from tools/shoot.mjs, before and after>
 Not verified:     <anything you could not check, and why>
-Requests:         <asks for other owners, also added to handoffs/requests.md>
+Requests:         <asks for other owners, sent with crew.mjs request>
 Contract changes: <none | what, approved by Claude on date>
 ```
+
+The panel shows `Changed:` and `Not verified:` for every report, so keep them to a sentence or
+two that Jerry can read at a glance.

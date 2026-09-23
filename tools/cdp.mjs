@@ -193,12 +193,19 @@ export async function launch({ headless = true, args = [] } = {}) {
   return {
     exe,
     async newPage({ width = 1280, height = 720 } = {}) {
-      const { targetId } = await conn.send('Target.createTarget', { url: 'about:blank' });
+      // A background tab never gets animation frames, and the suite used to leave every
+      // page but one in that state. Each check gets its own window, brought forward, so
+      // document.visibilityState stays visible.
+      const { targetId } = await conn.send('Target.createTarget', {
+        url: 'about:blank', newWindow: true, background: false, width, height
+      });
       const { sessionId } = await conn.send('Target.attachToTarget', { targetId, flatten: true });
       const page = new Page(conn, sessionId);
       await page.send('Page.enable', {});
       await page.send('Runtime.enable', {});
       await page.send('Log.enable', {});
+      try { await page.send('Page.bringToFront', {}); } catch { /* headless has nothing to raise */ }
+      try { await page.send('Page.setWebLifecycleState', { state: 'active' }); } catch { /* older Chrome */ }
       await page.setViewport(width, height);
       return page;
     },

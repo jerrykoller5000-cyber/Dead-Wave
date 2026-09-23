@@ -4,12 +4,18 @@ state: idle
 model: Grok 4.7 (switched from Opus 5 on 2026-09-23)
 task: —
 touching: —
-since: 2026-09-23T20:43Z
-next: CU-2 Fast title
+since: 2026-09-23T21:53Z
+next: CU-7 pit camera
 blocked-on: —
-last-report: handoffs/2026-09-23-cursor-cu1.md
+last-report: handoffs/2026-09-23-cursor-cu8.md
 
 ## Notes
+
+CU-8: test pages open as their own windows (`visible`), `startMatch` is in tools/tests/lib.js, and crew/tests.json is written by the runner. ChatGPT cannot get past `CDP timeout: Page.enable`; Cursor runs npm test for him at commit time.
+
+CU-2 is in the working copy of index.html (boot) and is not committed: Grokbot and ChatGPT were still in other parts of that file. Next session: commit index.html only once they have checked out, and do not take their test or ui files with it.
+
+Foreground title 6.8 s warm, background 10.8 s warm. The 5 s warm budget is the world build (~6.5 s to the first frame), not the staged fight. Cold cache was not measured.
 
 Written by Claude for the handover to Grok 4.7; Cursor, this card is yours from now on.
 

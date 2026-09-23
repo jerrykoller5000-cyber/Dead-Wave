@@ -14,6 +14,7 @@
 //
 // Each check gets a fresh page — they mutate the world (fell trees, spawn waves, kill the
 // player) and would otherwise poison each other.
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -93,6 +94,11 @@ async function runOne(name) {
     if (!ready) {
       note = 'window.TT never appeared: ' + (page.errors[0] || 'no page error reported').split('\n')[0];
     } else {
+      const vis = await page.evaluate('document.visibilityState');
+      if (vis === 'hidden') {
+        try { await page.send('Page.bringToFront', {}); } catch { /* already in front */ }
+      }
+      await page.evaluate(fs.readFileSync(path.join(HERE, 'lib.js'), 'utf8'));
       const out = await page.evaluate(code);
       const text = typeof out === 'string' ? out : JSON.stringify(out);
       raw = String(text ?? '');
@@ -167,4 +173,28 @@ if (failing.length || broken.length) {
 // handoffs/requests.md and assigned to their owners; failing the whole suite on them would
 // make the suite useless as a signal for everyone else (AGENTS.md rule 13: never delete or
 // weaken a test to make the run green).
+let commit = '';
+try { commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { /* no git */ }
+const testsPath = path.join(ROOT, 'crew', 'tests.json');
+let files = {};
+try {
+  const prev = JSON.parse(fs.readFileSync(testsPath, 'utf8'));
+  if (prev && prev.files && typeof prev.files === 'object') files = prev.files;
+} catch { /* first run */ }
+// A full run replaces the record. A named run updates only the files it actually ran,
+// so a spot check does not wipe everyone else's results off the panel.
+if (!wanted.length) files = {};
+for (const r of results) files[r.name] = { pass: r.pass, fail: r.fail };
+const listed = Object.values(files);
+const sumPass = listed.reduce((n, r) => n + (r.pass || 0), 0);
+const sumFail = listed.reduce((n, r) => n + (r.fail || 0), 0);
+fs.mkdirSync(path.join(ROOT, 'crew'), { recursive: true });
+fs.writeFileSync(testsPath, JSON.stringify({
+  at: new Date().toISOString(),
+  commit,
+  pass: wanted.length ? sumPass : totalPass,
+  fail: wanted.length ? sumFail : totalFail,
+  cannotRun: broken.length,
+  files
+}, null, 2) + '\n');
 process.exit(broken.length ? 1 : 0);
