@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dead Wave</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Both typefaces are self-hosted in vendor/fonts. Same two faces the game always
+       used; they came off fonts.googleapis.com, which meant the first paint waited on a
+       third party and the game could not start offline at all. -->
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
   <style>
     :root {
       /* Tactical field-HUD palette: dark olive glass, amber for primary actions,
@@ -941,14 +942,20 @@
     </div>
   </div>
   <!--
-    Three.js version lives here and nowhere else. Bumping it is a one-line edit (change
-    all three URLs together); if a future release breaks something, drop the number back
-    and reload. 0.175.0 is a settled release with the WebGPU renderer and TSL both stable.
+    Three.js is vendored into vendor/three/, so the game runs with the network off and can
+    never be broken by a CDN. The version lives here and nowhere else: to change it, replace
+    the files in vendor/three/ (three.core.js, three.webgpu.js, three.tsl.js and the addons
+    below) and leave this map alone. 0.175.0 is a settled release with the WebGPU renderer
+    and TSL both stable.
 
     Note "three" points at the WEBGPU build, not three.module.js. That build is a
     superset — it re-exports the whole core plus WebGPURenderer and the node materials —
     so mapping the bare specifier at it keeps exactly one copy of the library in memory.
     Importing 'three' and 'three/webgpu' from two different files would load two.
+
+    three.webgpu.js pulls in ./three.core.js beside it, and three.tsl.js and the addons
+    import the bare "three/webgpu" and "three/tsl" specifiers, which is why all four
+    entries below have to be present and agree.
   -->
   <script src="assets/intro/opening.js"></script>
   <script src="assets/intro/menu-camera.js"></script>
@@ -958,10 +965,10 @@
   <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.webgpu.js",
-      "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.175.0/build/three.tsl.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.175.0/examples/jsm/"
+      "three": "./vendor/three/three.webgpu.js",
+      "three/webgpu": "./vendor/three/three.webgpu.js",
+      "three/tsl": "./vendor/three/three.tsl.js",
+      "three/addons/": "./vendor/three/addons/"
     }
   }
   </script>
