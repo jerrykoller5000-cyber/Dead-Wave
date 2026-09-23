@@ -65,7 +65,7 @@ class Connection {
       }
     });
   }
-  send(method, params = {}, sessionId) {
+  send(method, params = {}, sessionId, timeoutMs = 120000) {
     const id = this.nextId++;
     const payload = { id, method, params };
     if (sessionId) payload.sessionId = sessionId;
@@ -77,7 +77,7 @@ class Connection {
           this.pending.delete(id);
           reject(new Error('CDP timeout: ' + method));
         }
-      }, 120000);
+      }, timeoutMs);
     });
   }
   onEvent(fn) { this.listeners.push(fn); }
@@ -109,7 +109,7 @@ class Page {
       }
     });
   }
-  send(method, params) { return this.conn.send(method, params, this.sessionId); }
+  send(method, params, timeoutMs) { return this.conn.send(method, params, this.sessionId, timeoutMs); }
   async setViewport(width, height, dsf = 1) {
     await this.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dsf, mobile: false });
   }
@@ -121,10 +121,10 @@ class Page {
     while (!this._loaded && Date.now() - t0 < timeout) await sleep(50);
   }
   // Evaluates an expression and returns its value. Awaits promises.
-  async evaluate(expression) {
+  async evaluate(expression, timeoutMs = 120000) {
     const res = await this.send('Runtime.evaluate', {
       expression, returnByValue: true, awaitPromise: true, userGesture: true
-    });
+    }, timeoutMs);
     if (res.exceptionDetails) {
       const d = res.exceptionDetails;
       const text = (d.exception && (d.exception.description || d.exception.value)) || d.text;
