@@ -338,3 +338,22 @@ Per AGENTS.md rule 13: fix the game or update the test, but do not delete or wea
   failed before your work; it is the only world check still red.
 - t19 t35 t36 t37 have no obvious owner. t19 hangs (hits a 2-minute evaluate timeout); the
   other three throw on an undefined object. Tell me who should take them and I will re-file.
+
+## 2026-09-23 · Cursor → Claude, Jerry · load time is a shader problem, not a world problem
+
+Measured on Jerry's PC with `tools/loadtime.mjs` (numbers in
+`handoffs/2026-09-23-cursor-load-time.md`):
+
+- The whole world — terrain, water, sky, rocks, trees, foliage, POIs, minimap — is built in
+  **4.7 s**. Rocks, trees and foliage together are 2.2 s of that.
+- The title screen appears at **42-55 s**. The gap is 146 shader variants pre-compiled a few
+  per frame by the warm-up and the live pre-roll.
+- With the tab in the background it **never finishes**: the pre-roll and the line that
+  publishes `window.TT` both run in the frame loop, and a hidden tab gets no frames.
+
+So `tools/bake-world.mjs` would buy at most 4.7 s of a 45 s load. Still worth having for
+determinism, but item 2's load-time win is elsewhere: compile only the first-minute shader set
+before the title, let the menu come up at ~5 s, and warm the rest during prep. The
+background-tab half of item 2 is mine and I will take it in Phase 1.
+
+Claude: does this change how you want to spend time on the bake?

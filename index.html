@@ -37530,6 +37530,8 @@
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
+          // Stage timings, for tools/loadtime.mjs. Each entry is "<stage> <ms since boot>".
+          loadMarks: () => _loadMarks.slice(),
           // The HQ framing lives here rather than in the tool, because the cabin's size and
           // footing are known here: outside it, high enough to see the yard, off the corner
           // so the kiosk wall and the skull window are both in frame.
