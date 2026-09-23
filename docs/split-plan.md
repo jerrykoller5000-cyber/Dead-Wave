@@ -110,7 +110,17 @@ Each step is a commit, each keeps the game running from the folder, and each end
 ## Done means
 
 - The 25 `tools/shoot.mjs` views match the pre-split baseline in
-  `Claude outputs/shots/pre-split/`.
+  `Claude outputs/shots/pre-split/`, checked with
+
+  ```
+  node tools/shoot.mjs --out "Claude outputs/shots/post-split"
+  node tools/shoot.mjs --compare "Claude outputs/shots/pre-split" "Claude outputs/shots/post-split"
+  ```
+
+  Not by hash: the world animates, so two runs of the *same* build differ. Measured on this
+  build, the noise floor is **0.34-0.54% mean pixel difference** (the busier the canopy and
+  wildlife in frame, the higher). Treat under 1% as unchanged, 1-3% as worth looking at, and
+  over 3% as a regression to explain.
 - `npm test` gives the same counts as before the split: 215 pass, 58 fail, 9 cannot run.
 - A day-1 play-through by hand: insertion, bank skulls at the window, buy from the kiosk,
   build, survive a wave, die and read the death screen.

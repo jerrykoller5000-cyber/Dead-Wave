@@ -83,6 +83,56 @@ if (argv.includes('--list')) {
   for (const [name] of VIEWS) console.log(name);
   process.exit(0);
 }
+
+// --compare <dirA> <dirB>: how different are two sets of shots?
+//
+// A byte or hash comparison is useless here: the world animates (wind in the canopies, water,
+// wildlife, drifting cloud), so two runs of the same build differ by a few hundred bytes out
+// of 900 KB and never match exactly. What matters is whether a change moved the *picture*, so
+// this measures mean and worst-case pixel difference. Done in the browser because that is the
+// only PNG decoder available without adding a dependency.
+if (argv.includes('--compare')) {
+  const ci = argv.indexOf('--compare');
+  const dirA = argv[ci + 1], dirB = argv[ci + 2];
+  if (!dirA || !dirB) { console.error('usage: --compare <dirA> <dirB>'); process.exit(2); }
+  const listA = new Set(fs.readdirSync(path.join(ROOT, dirA)).filter((f) => f.endsWith('.png')));
+  const names = fs.readdirSync(path.join(ROOT, dirB)).filter((f) => f.endsWith('.png') && listA.has(f));
+  if (!names.length) { console.error('no shots in common between those folders'); process.exit(2); }
+  const srv = await serve(ROOT, 0);
+  const br = await launch({ headless: true });
+  const pg = await br.newPage({ width: 200, height: 200 });
+  await pg.goto(`${srv.origin}/tools/blank.html`, { waitUntil: 'none' });
+  await pg.evaluate('document.title = "compare"');
+  let worst = 0;
+  console.log(`comparing ${names.length} view(s): ${dirA} → ${dirB}\n`);
+  console.log('view                   mean%   max%  verdict');
+  for (const n of names) {
+    const res = await pg.evaluate(`(async () => {
+      const load = (u) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = u; });
+      const [a, b] = await Promise.all([load(${JSON.stringify('/' + dirA + '/' + n)}), load(${JSON.stringify('/' + dirB + '/' + n)})]);
+      if (a.width !== b.width || a.height !== b.height) return { sizeMismatch: true };
+      const c = document.createElement('canvas'); c.width = a.width; c.height = a.height;
+      const x = c.getContext('2d', { willReadFrequently: true });
+      x.drawImage(a, 0, 0); const pa = x.getImageData(0, 0, c.width, c.height).data;
+      x.clearRect(0, 0, c.width, c.height);
+      x.drawImage(b, 0, 0); const pb = x.getImageData(0, 0, c.width, c.height).data;
+      let sum = 0, max = 0, n2 = 0;
+      for (let i = 0; i < pa.length; i += 4) {
+        const d = (Math.abs(pa[i] - pb[i]) + Math.abs(pa[i+1] - pb[i+1]) + Math.abs(pa[i+2] - pb[i+2])) / 3;
+        sum += d; if (d > max) max = d; n2++;
+      }
+      return { mean: sum / n2 / 255 * 100, max: max / 255 * 100 };
+    })()`);
+    if (res.sizeMismatch) { console.log(`${n.replace('.png','').padEnd(22)}   —      —    DIFFERENT SIZE`); worst = 100; continue; }
+    worst = Math.max(worst, res.mean);
+    const verdict = res.mean < 0.5 ? 'same (animation noise)' : res.mean < 3 ? 'CHANGED slightly' : 'CHANGED';
+    console.log(`${n.replace('.png','').padEnd(22)} ${res.mean.toFixed(2).padStart(6)} ${res.max.toFixed(1).padStart(6)}  ${verdict}`);
+  }
+  await br.close(); await srv.close();
+  console.log(`\nworst mean difference: ${worst.toFixed(2)}%`);
+  console.log('Under ~0.5% is the noise floor for this game: wind, water and wildlife move between runs.');
+  process.exit(worst >= 3 ? 1 : 0);
+}
 const show = argv.includes('--show');
 const outIdx = argv.indexOf('--out');
 const outDir = outIdx >= 0 ? argv[outIdx + 1] : path.join('Claude outputs', 'shots');
