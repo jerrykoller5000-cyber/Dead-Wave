@@ -26,11 +26,15 @@ const headless = argv.includes('--headless');
 const cold = argv.includes('--cold');
 const runsIdx = argv.indexOf('--runs');
 const RUNS = runsIdx >= 0 ? Math.max(1, Number(argv[runsIdx + 1]) || 1) : 1;
+// --page lets this measure a candidate build (say a patched index.dev.html) without touching
+// index.html, which matters while the split freeze is on.
+const pageIdx = argv.indexOf('--page');
+const PAGE = pageIdx >= 0 ? argv[pageIdx + 1] : 'index.html';
 const TIMEOUT = 420000;
 
 const server = await serve(ROOT, 0);
 const browser = await launch({ headless });
-const url = `${server.origin}/index.html?debug=1${headless ? '&renderer=webgl' : ''}`;
+const url = `${server.origin}/${PAGE}?debug=1${headless ? '&renderer=webgl' : ''}`;
 console.log(`loadtime: ${headless ? 'headless (SwiftShader)' : 'headed (real GPU)'}`
   + `, tab ${background ? 'in the BACKGROUND' : 'in front'}`
   + `, cache ${cold ? 'cold' : 'warm'}`);
