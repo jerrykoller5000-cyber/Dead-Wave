@@ -1051,6 +1051,28 @@
       scopeZoomLabelEl.textContent = SCOPE_ZOOM_LABELS[scopeZoomLevel];
     }
 
+    // --- Screenshot views (tools/shoot.mjs) -------------------------------------
+    // Every camera in the game writes to the same camera object — the play rig, the menu
+    // orbit, the death cines, the scripted kills — and whichever runs last before the frame
+    // is drawn wins. So a tool that wants a repeatable shot cannot simply set the camera and
+    // hope; it sets this, and applyShotView() runs after all of them, immediately before the
+    // draw. Null unless a tool sets it, and one branch on a null in the frame loop is free.
+    let shotView = null;
+    function setShotView(v) {
+      shotView = v ? {
+        x: +v.x, y: +v.y, z: +v.z,
+        tx: +(v.tx ?? 0), ty: +(v.ty ?? 0), tz: +(v.tz ?? 0),
+        fov: v.fov ? +v.fov : 55
+      } : null;
+    }
+    const _shotLook = new THREE.Vector3();
+    function applyShotView() {
+      if (!shotView) return;
+      camera.position.set(shotView.x, shotView.y, shotView.z);
+      camera.lookAt(_shotLook.set(shotView.tx, shotView.ty, shotView.tz));
+      if (camera.fov !== shotView.fov) { camera.fov = shotView.fov; camera.updateProjectionMatrix(); }
+    }
+
     // Add ?debug=1 to the URL for a live FPS / draw-call readout.
     const urlParams = new URLSearchParams(location.search);
     // ?raf=timer — debug only. Drives the frame loop from a timer instead of
@@ -37483,6 +37505,7 @@
       scriptedKillCamera();
       cineCamera();
       camera.lookAt(camLook);
+      // (the shot view, if a tool has set one, is applied last — see applyShotView)
       // Leave warm-up staging intact behind the opaque opening, then hide the marine.
       player.visible = gameStarted || !_preRollDone || !!_liveRoll;
       if (!gameStarted && _preRollDone && !_liveRoll) {
@@ -37490,6 +37513,7 @@
         sun.position.copy(menuCamera.focus).addScaledVector(sunDir, 85);
         sun.target.position.copy(menuCamera.focus);
       }
+      applyShotView();
       skyDome.position.copy(camera.position);
       renderFrame();
       if (showPerf && !window.TT) {
@@ -37503,6 +37527,19 @@
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, worldSolids,
           // Debug-only: caves, the sinkhole and the scripted kills.
           LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
+          // night shot does not mean waiting out a day.
+          setShotView, getShotView: () => shotView,
+          // The HQ framing lives here rather than in the tool, because the cabin's size and
+          // footing are known here: outside it, high enough to see the yard, off the corner
+          // so the kiosk wall and the skull window are both in frame.
+          shotHQ: () => {
+            const gy = house.group ? house.group.position.y : sampleHeight(0, 0);
+            return { x: HQ_HALF * 3.4, y: gy + HQ_H * 2.4, z: HQ_HALF * 4.2,
+              tx: 0, ty: gy + HQ_H * 0.45, tz: 0, fov: 50 };
+          },
+          setWorldTime: (t) => { worldTime = ((+t % 1) + 1) % 1; updateDayNight(0); },
+          getWorldTime: () => worldTime,
           killZombie, damageZombie, damageHouse, damagePlayer, house, corpses, gibPieces,
           landmarks, damageLandmark, buyPerk, PERKS, perkLevels, addCash: (n) => { bank += n; updateCoinHud(); }, getBank: () => bank, getMaxHp: () => PLAYER_MAX_HP,
           aimTarget, getCrouching: () => crouching,
