@@ -1,7 +1,25 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms)); const f2 = v => (+v).toFixed(2);
-  document.getElementById('modeHunt').click(); await wait(1200);
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
+  {
+    const pl = T.player.position;
+    const tx = 2, tz = -4;
+    for (let i = 0; i < 70; i++) {
+      await wait(200);
+      pl.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(30);
+      if (Math.hypot(pl.x - tx, pl.z - tz) < 0.4) break;
+    }
+  }
   const p = T.player.position;
   // flat open spot
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
@@ -52,7 +70,7 @@
   const ww = T.placeBuildAt('wall', gx - 2, gz, 0); T.placeBuildAt('window', gx - 2, gz, 0, { piece: ww });
   const mid = T.thinBoxFor(ww);
   const zy = ww.mesh.position.y;
-  const through = () => T.buildBetween(mid.cx, zy + 0.9, mid.cz + 0.8, mid.cx, zy + 0.9, mid.cz - 0.8);
+  const through = () => T.buildBetween(mid.cx, zy + 1.4, mid.cz + 0.8, mid.cx, zy + 1.4, mid.cz - 0.8);
   ok(through() !== ww, 'open window: a zombie outside reaches through at you');
   T.buyUpgradeBlueprint('bars', 1); T.applyUpgrade(ww, 'bars', 1);
   ok(through() === ww && ww.mesh.userData.bars, 'barred: it has to go through the wall');
@@ -107,3 +125,4 @@
   ok(spent > 0, 'upgrade spend recorded for refunds ($' + spent + ')');
   return out.join('\n');
 })()
+

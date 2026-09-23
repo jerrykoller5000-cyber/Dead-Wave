@@ -1,7 +1,26 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
+  {
+    const pl = T.player.position;
+    const tx = 2, tz = -4;
+    for (let i = 0; i < 70; i++) {
+      await wait(200);
+      pl.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(30);
+      if (Math.hypot(pl.x - tx, pl.z - tz) < 0.4) break;
+    }
+  }
+  A.unlock && A.unlock();
   const calls = []; const spy = (name) => { const f = A[name]; A[name] = function (...a) { calls.push([name, ...a, performance.now()]); return f.apply(this, a); }; };
   for (const n of ['turretServos', 'mineBeep', 'buildHit', 'buildBreak', 'buildSound', 'zombieVoice', 'nvgToggle', 'nvgHum', 'kioskBuy', 'kioskTab', 'doorSound', 'footstepWood', 'grenadeBoom']) spy(n);
   const count = (n, f) => calls.filter(c => c[0] === n && (!f || f(c))).length;
@@ -11,9 +30,10 @@
   const gx = T.gridIndex(p.x) + 3, gz = T.gridIndex(p.z);
   const mine = T.placeBuildAt('mine', gx, gz);
   ok(!!mine, 'mine laid');
+  if (T.skipGrace) T.skipGrace();
   const z = T.spawnZombie(T.gridCentre(gx), T.gridCentre(gz), 'shambler', true);
-  const tb = performance.now(); await wait(40);
-  let beepT = null; for (let i = 0; i < 20 && beepT == null; i++) { const c = calls.find(c => c[0] === 'mineBeep'); if (c) beepT = c[c.length - 1]; else await wait(20); }
+  await wait(40);
+  let beepT = null; for (let i = 0; i < 40 && beepT == null; i++) { const c = calls.find(c => c[0] === 'mineBeep'); if (c) beepT = c[c.length - 1]; else await wait(40); }
   ok(beepT != null && T.builds.includes(mine), 'stepped on: it beeps and has not gone off yet');
   await wait(500);
   ok(!T.builds.includes(mine), 'and then it goes off');
@@ -54,14 +74,37 @@
   await wait(1500);
   const lv = calls.filter(c => c[0] === 'turretServos' && c[1] && c[1].length).map(c => c[1][0].level);
   ok(lv.length && Math.max(...lv) > 0.01, 'turret servo whirrs as it sweeps (peak ' + Math.max(...lv).toFixed(2) + ')');
-  // zombie voices by state
+  // zombie voices by state — swarm starts on a 50 m ring; voices only fire under 30 m,
+  // and only as chase while moving. Pull a mixed pack in close (still rising otherwise
+  // eats the first second) and wait until chase voices show up.
   calls.length = 0;
   T.runDevCommand('godmode'); T.runDevCommand('swarm');
-  await wait(9000);
-  const v = calls.filter(c => c[0] === 'zombieVoice');
-  const kinds = new Set(v.map(c => c[1])), states = new Set(v.map(c => c[2]));
+  if (T.skipGrace) T.skipGrace();
+  {
+    const pack = T.zombies.filter(z => z.alive);
+    const types = [...new Set(pack.map(z => z.typeKey))];
+    let i = 0;
+    for (const tk of types) {
+      const z = pack.find(z => z.typeKey === tk && z.alive);
+      if (!z) continue;
+      const a = (i++ / Math.max(1, types.length)) * Math.PI * 2;
+      const r = 8 + (i % 3);
+      z.riseT = 0; z.riseDur = 0;
+      z.mesh.position.set(p.x + Math.cos(a) * r, T.sampleHeight(p.x + Math.cos(a) * r, p.z + Math.sin(a) * r), p.z + Math.sin(a) * r);
+      z.x = z.mesh.position.x; z.z = z.mesh.position.z;
+      z.huntPlayer = true;
+    }
+  }
+  let kinds = new Set(), states = new Set(), v = [];
+  for (let i = 0; i < 60; i++) {
+    await wait(200);
+    v = calls.filter(c => c[0] === 'zombieVoice');
+    kinds = new Set(v.map(c => c[1])); states = new Set(v.map(c => c[2]));
+    if (kinds.size >= 5 && states.has('chase')) break;
+  }
   out.push('  voices: ' + v.length + ' kinds ' + [...kinds].join(',') + ' states ' + [...states].join(','));
   ok(kinds.size >= 5 && states.has('chase'), 'zombies sound off by type and by what they are doing');
   ok(count('buildHit') > 0 || count('buildBreak') > 0 || true, 'builds under attack: ' + count('buildHit') + ' hits, ' + count('buildBreak') + ' breaks');
   return out.join('\n');
 })()
+

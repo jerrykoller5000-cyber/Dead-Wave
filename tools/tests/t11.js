@@ -1,8 +1,16 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  // Play refuses with no callsign; wait until prep so scripted builds see a live match.
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
   document.getElementById('modeHunt').click();
-  await wait(1200);
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
   T.unlockAllBuilds(); T.addCash(100000);
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
   const p = T.player.position; const gx = T.gridIndex(p.x) + 3, gz = T.gridIndex(p.z);
@@ -13,19 +21,25 @@
   const pl = T.placeBuildAt('platform', gx, Z);
   const rails = [0, 1, 2, 3].map(q => T.placeBuildAt('railing', gx, Z, q, { lv: 1 }));
   ok(pl && rails.every(r => r && r.level === 1), 'platform with four railings: ' + rails.map(r => r && r.slot + '@' + r.level));
+  const padH = T.ruleFor('platform').height;
+  const rimH = T.ruleFor('platform').edgeH;
   const tur = T.placeBuildAt('light', gx, Z, 0, { lv: 1 });
-  ok(tur && tur.level === 1 && Math.abs(tur.mesh.position.y - pl.mesh.position.y - 0.4) < 1e-6, 'turret on the raised pad');
-  ok(Math.abs(rails[0].mesh.position.y - pl.mesh.position.y - 0.25) < 1e-6, 'railings on the rim');
-  // floor, platform on floor, no floor on platform
+  ok(tur && tur.level === 1 && Math.abs(tur.mesh.position.y - pl.mesh.position.y - padH) < 1e-6, 'turret on the raised pad');
+  ok(Math.abs(rails[0].mesh.position.y - pl.mesh.position.y - rimH) < 1e-6, 'railings on the rim');
+  // floor on the walls (forceLv: marine is still on the ground, so plain place would boardwalk at 0),
+  // then platform bolted onto that floor; only one platform per floor.
   const Z2 = gz - 9;
   T.placeBuildAt('wall', gx, Z2, 0);
-  const fl = T.placeBuildAt('floor', gx, Z2);
+  const fl = T.placeBuildAt('floor', gx, Z2, 0, { forceLv: 1 });
   const pof = T.placeBuildAt('platform', gx, Z2);
-  ok(fl && pof && pof.level === 2 && pof.spanDepth === null, 'platform on a floor');
+  ok(fl && fl.level === 1 && pof && pof.level === 2 && pof.spanDepth === null, 'platform on a floor');
   ok(!T.placeBuildAt('platform', gx, Z2), 'only one platform per floor: ' + T.resolveTarget('platform', gx, Z2).refusal);
+  // A floor may boardwalk at ground under a tower, but will not stand on a platform deck.
   const Z3 = gz - 12;
   T.placeBuildAt('wall', gx, Z3, 0); T.placeBuildAt('platform', gx, Z3);
-  ok(!T.placeBuildAt('floor', gx, Z3), 'no floor on a platform: ' + T.resolveTarget('floor', gx, Z3).refusal);
+  const onPlat = T.resolveTarget('floor', gx, Z3, 0, { forceLv: 2 });
+  ok(!!onPlat.refusal && /platform/i.test(onPlat.refusal), 'no floor on a platform: ' + onPlat.refusal);
+  ok(!T.placeBuildAt('floor', gx, Z3, 0, { forceLv: 2 }), 'placeBuildAt refuses floor on platform');
   // stacked walls
   const s1 = T.placeBuildAt('wall', gx + 3, Z, 0);
   const s2 = T.placeBuildAt('wall', gx + 3, Z, 0);

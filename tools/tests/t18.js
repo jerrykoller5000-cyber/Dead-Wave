@@ -1,7 +1,28 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  // Play refuses with no callsign; Digit page-jumps are swallowed while menuCamera is deploying (~9s).
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
+  // Insertion still owns the keyboard until deploying ends; wait until Digit keys work.
+  for (let i = 0; i < 60; i++) {
+    await wait(200);
+    if (T.openWheel('build')) {
+      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', key: '2', bubbles: true }));
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', key: '2', bubbles: true }));
+      const s = T.getWheelState();
+      if (s.page === 1) break;
+      T.closeWheelDbg();
+    }
+  }
+  T.closeWheelDbg();
   T.unlockAllBuilds(); T.addCash(100000);
   const all = T.BUILD_PAGES.flatMap(p => p.keys);
   const missing = T.BUILD_ORDER.filter(k => all.indexOf(k) < 0);

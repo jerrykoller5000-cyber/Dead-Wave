@@ -1,12 +1,28 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   ok(!document.getElementById('modeDefend'), 'Defend the House is gone from the menu');
   ok(/Play/.test(document.getElementById('modeHunt').textContent), 'the one button says Play');
-  document.getElementById('modeHunt').click(); await wait(1200);
-  ok(T.getGameMode ? T.getGameMode() === 'hunt' : true, 'started');
+  // Play refuses with no callsign; insertion overwrites position for ~9s.
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'started');
   const p = T.player.position;
-  p.set(30, T.sampleHeight(30, 30), 30); await wait(100);   // well clear of the HQ
+  {
+    const tx = 30, tz = 30;
+    for (let i = 0; i < 70; i++) {
+      await wait(200);
+      p.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(30);
+      if (Math.hypot(p.x - tx, p.z - tz) < 0.4) break;
+    }
+  }
   T.unlockAllBuilds(); T.addCash(100000);
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
   const gx = T.gridIndex(p.x), gz = T.gridIndex(p.z);

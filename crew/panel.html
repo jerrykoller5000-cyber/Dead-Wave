@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead-Wave Crew</title>
+<link rel="icon" href="data:,">
+<!--
+  The crew panel: a live view of crew/BOARD.md, crew/status/*.md, crew/LOG.md and
+  handoffs/requests.md. It only reads them. Open it with "crew/Open Crew Panel.bat", or serve
+  the game folder yourself and go to /crew/panel.html. It refreshes every 10 seconds.
+-->
+<style>
+  :root {
+    --bg: #f4f3ef; --panel: #ffffff; --ink: #1d1f1c; --muted: #6b6f66; --line: #dedcd4;
+    --active: #2f8f4e; --idle: #8a8d86; --blocked: #c07a12; --away: #5b6b8c; --danger: #c0392b;
+    --chip: #eeede7; --accent: #b4452f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121411; --panel: #1b1e1a; --ink: #e7e8e2; --muted: #9a9e94; --line: #2e322c;
+      --active: #4cc06f; --idle: #7d8279; --blocked: #e0a03a; --away: #8ea2cf; --danger: #ef6b5b;
+      --chip: #262a24; --accent: #e0705a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.5 "Chakra Petch", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 20px;
+    padding: 18px 24px 10px; }
+  h1 { margin: 0; font-size: 22px; letter-spacing: .04em; }
+  h1 span { color: var(--accent); }
+  .freeze { font-weight: 700; padding: 3px 10px; border-radius: 999px; font-size: 12px;
+    letter-spacing: .06em; background: var(--chip); color: var(--muted); }
+  .freeze.on { background: var(--danger); color: #fff; }
+  .stamp { color: var(--muted); font-size: 12px; margin-left: auto; }
+  main { padding: 0 24px 32px; display: grid; gap: 16px; }
+  .alerts:empty { display: none; }
+  .alert { background: color-mix(in srgb, var(--danger) 14%, var(--panel)); border: 1px solid var(--danger);
+    border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; }
+  .agents { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+    border-top: 4px solid var(--idle); min-width: 0; }
+  .card.active { border-top-color: var(--active); }
+  .card.blocked { border-top-color: var(--blocked); }
+  .card.away { border-top-color: var(--away); }
+  .card h2 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .pill { font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 2px 8px; border-radius: 999px;
+    color: #fff; background: var(--idle); }
+  .active .pill { background: var(--active); } .blocked .pill { background: var(--blocked); } .away .pill { background: var(--away); }
+  .model { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+  .task { font-weight: 600; margin: 4px 0; overflow-wrap: anywhere; }
+  .row { font-size: 12.5px; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere; }
+  .row b { color: var(--ink); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .chip { background: var(--chip); border-radius: 4px; padding: 1px 6px; font: 12px ui-monospace, Consolas, monospace; }
+  .stale { color: var(--danger); font-weight: 600; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+  section.box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; min-width: 0; }
+  section.box > h3 { margin: 0 0 8px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .md h2, .md h3, .md h4 { font-size: 14px; margin: 12px 0 4px; }
+  .md p { margin: 6px 0; } .md ul { margin: 4px 0; padding-left: 18px; } .md li { margin: 2px 0; }
+  .md code, .log code { font: 12px ui-monospace, Consolas, monospace; background: var(--chip); padding: 0 4px; border-radius: 3px; }
+  a { color: var(--accent); }
+  .q li { list-style: none; margin-left: -18px; }
+  .q .mark { display: inline-block; width: 22px; font-weight: 700; }
+  .q .done { color: var(--muted); text-decoration: line-through; }
+  .q .doing .mark { color: var(--active); } .q .blocked .mark { color: var(--blocked); }
+  .log { font-size: 12.5px; margin: 0; padding: 0; list-style: none; }
+  .log li { padding: 4px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+  .log .who { font-weight: 700; } .log .kind { font-size: 11px; font-weight: 700; padding: 0 5px; border-radius: 3px; background: var(--chip); }
+  .log .IN { color: var(--active); } .log .BLOCKED { color: var(--blocked); }
+  .muted { color: var(--muted); }
+  .offline { max-width: 640px; margin: 40px auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; }
+  @media (max-width: 520px) { header, main { padding-left: 16px; padding-right: 16px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>DEAD<span>-</span>WAVE CREW</h1>
+  <span class="freeze" id="freeze">split freeze off</span>
+  <span class="stamp" id="stamp">loading…</span>
+</header>
+<main id="main">
+  <div class="alerts" id="alerts"></div>
+  <div class="agents" id="agents"></div>
+  <div class="grid2">
+    <section class="box"><h3>Orders from Jerry</h3><div class="md" id="orders"></div></section>
+    <section class="box"><h3>Decisions</h3><div class="md" id="decisions"></div></section>
+  </div>
+  <div class="grid2">
+    <section class="box"><h3>Queues</h3><div class="md q" id="queues"></div></section>
+    <section class="box"><h3>Log</h3><ul class="log" id="log"></ul>
+      <h3 style="margin-top:16px">Latest requests</h3><div class="md" id="requests"></div></section>
+  </div>
+</main>
+<script>
+const AGENTS = [['claude', 'Claude'], ['cursor', 'Cursor'], ['chatgpt', 'ChatGPT'], ['grokbot', 'Grokbot']];
+const STALE_HOURS = 8;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const inline = (s) => esc(s)
+  .replace(/`([^`]+)`/g, '<code>$1</code>')
+  .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+// Enough Markdown for this board: headings, nested bullets, paragraphs, bold, code, links.
+function md(text) {
+  const out = []; let para = []; const stack = [];
+  const flush = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
+  const closeTo = (depth) => { while (stack.length > depth) { out.push('</li></ul>'); stack.pop(); } };
+  for (const raw of text.replace(/\r\n/g, '\n').split('\n')) {
+    const h = /^(#{2,4})\s+(.*)$/.exec(raw);
+    const li = /^(\s*)(?:[-*]|(\d+)\.)\s+(.*)$/.exec(raw);
+    if (h) { flush(); closeTo(0); out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); continue; }
+    if (li) {
+      flush();
+      const depth = Math.floor(li[1].length / 2) + 1;
+      if (stack.length >= depth) { closeTo(depth); out.push('</li>'); } else { while (stack.length < depth) { out.push('<ul>'); stack.push(1); } }
+      let body = (li[2] ? li[2] + '. ' : '') + li[3], cls = '';
+      const m = /^\[( |x|>|!|~)\]\s*(.*)$/.exec(body);
+      if (m) {
+        const map = { ' ': ['todo', '○'], x: ['done', '✓'], '>': ['doing', '▶'], '!': ['blocked', '!'], '~': ['done', '–'] };
+        cls = map[m[1]][0]; body = `<span class="mark">${map[m[1]][1]}</span><span>${inline(m[2])}</span>`;
+        out.push(`<li class="${cls}">${body}`);
+      } else out.push('<li>' + inline(body));
+      continue;
+    }
+    if (!raw.trim()) { flush(); continue; }
+    if (stack.length && /^\s{2,}\S/.test(raw)) { out[out.length - 1] += ' ' + inline(raw.trim()); continue; }
+    closeTo(0); para.push(raw.trim());
+  }
+  flush(); closeTo(0);
+  return out.join('\n');
+}
+function section(board, title) {
+  const re = new RegExp('^## ' + title + '\\s*$', 'm');
+  const m = re.exec(board); if (!m) return '';
+  const rest = board.slice(m.index + m[0].length);
+  const end = rest.search(/^## /m);
+  return end < 0 ? rest : rest.slice(0, end);
+}
+function parseStatus(text) {
+  const f = {};
+  for (const line of text.replace(/\r\n/g, '\n').split('\n')) {
+    if (line.startsWith('## ')) break;
+    const m = /^([a-z-]+):\s*(.*)$/.exec(line); if (m) f[m[1]] = m[2].trim();
+  }
+  return f;
+}
+const hoursSince = (iso) => { const t = Date.parse(iso); return Number.isFinite(t) ? (Date.now() - t) / 36e5 : null; };
+function ago(iso) {
+  const h = hoursSince(iso); if (h === null) return iso || '—';
+  if (h < 1 / 60) return 'just now'; if (h < 1) return Math.round(h * 60) + ' min ago';
+  if (h < 48) return h.toFixed(1).replace(/\.0$/, '') + ' h ago'; return Math.round(h / 24) + ' days ago';
+}
+const list = (s) => {
+  if (!s || s === '—') return [];
+  const out = []; let cur = '', depth = 0;
+  for (const ch of s) {
+    if (ch === '(') depth++; else if (ch === ')') depth = Math.max(0, depth - 1);
+    if (ch === ',' && depth === 0) { out.push(cur); cur = ''; } else cur += ch;
+  }
+  out.push(cur);
+  return out.map((x) => x.trim()).filter(Boolean);
+};
+const fileOf = (t) => t.replace(/\s*\(.*\)\s*$/, '').replace(/\\/g, '/').toLowerCase();
+const partOf = (t) => { const m = /\(([^)]*)\)\s*$/.exec(t); return m ? m[1].trim().toLowerCase() : ''; };
+function clash(a, b) {
+  const x = fileOf(a), y = fileOf(b);
+  if (x === y) { const p = partOf(a), q = partOf(b); const ps = p.split(',').map((v) => v.trim()), qs = q.split(',').map((v) => v.trim()); return !p || !q || /freeze/.test(p) || /freeze/.test(q) || ps.some((v) => qs.includes(v)); }
+  const dir = (p) => p.endsWith('/') || p.endsWith('/*'), stem = (p) => p.replace(/\*$/, '');
+  return (dir(x) && y.startsWith(stem(x))) || (dir(y) && x.startsWith(stem(y)));
+}
+async function get(path) {
+  const r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!r.ok) throw new Error(path + ' ' + r.status);
+  return r.text();
+}
+
+async function refresh() {
+  let board, log = '', reqs = '';
+  try { board = await get('BOARD.md'); }
+  catch (e) {
+    document.getElementById('alerts').innerHTML = `<div class="offline"><h2>The panel needs the game folder served</h2>
+      <p>Browsers won't let a page opened straight from disk read other files. Double-click
+      <code>crew/Open Crew Panel.bat</code>, or run <code>node tools/serve.mjs 8971</code> in the
+      game folder and open <code>http://127.0.0.1:8971/crew/panel.html</code>.</p>
+      <p class="muted">Or read <code>crew/BOARD.md</code> and <code>crew/status/</code> directly. (${esc(e.message)})</p></div>`;
+    document.getElementById('stamp').textContent = 'offline · retrying every 10 s';
+    return;
+  }
+  const statuses = await Promise.all(AGENTS.map(async ([id]) => { try { return parseStatus(await get('status/' + id + '.md')); } catch { return {}; } }));
+  try { log = await get('LOG.md'); } catch {}
+  try { reqs = await get('../handoffs/requests.md'); } catch {}
+
+  const alerts = []; const active = [];
+  const cards = AGENTS.map(([id, name], i) => {
+    const f = statuses[i]; const st = (f.state || 'unknown').toLowerCase();
+    const stale = st === 'active' && (hoursSince(f.since) ?? 0) > STALE_HOURS;
+    if (stale) alerts.push(`${name} checked in ${ago(f.since)} and never checked out. Stale?`);
+    if (st === 'active') active.push([name, f]);
+    const chips = list(f.touching).map((t) => `<span class="chip">${esc(t)}</span>`).join('');
+    const report = f['last-report'] && f['last-report'] !== '—' ? `<a href="../${esc(f['last-report'])}">${esc(f['last-report'])}</a>` : '—';
+    return `<div class="card ${esc(st)}">
+      <h2>${name} <span class="pill">${esc(st.toUpperCase())}</span></h2>
+      <div class="model">${esc(f.model || '')}</div>
+      <div class="task">${st === 'active' || st === 'blocked' ? esc(f.task || '—') : '<span class="muted">No task</span>'}</div>
+      ${st === 'active' ? `<div class="row">since <b>${esc(ago(f.since))}</b>${stale ? ' <span class="stale">· stale?</span>' : ''}</div>
+        <div class="row">touching</div><div class="chips">${chips || '<span class="muted">—</span>'}</div>` : ''}
+      ${st === 'blocked' ? `<div class="row">blocked on <b>${esc(f['blocked-on'] || '—')}</b></div>` : ''}
+      ${st !== 'active' ? `<div class="row">last seen <b>${esc(ago(f.since))}</b></div>` : ''}
+      <div class="row">next <b>${esc(f.next || '—')}</b></div>
+      <div class="row">last report ${report}</div>
+    </div>`;
+  });
+  for (let i = 0; i < active.length; i++) for (let j = i + 1; j < active.length; j++)
+    for (const a of list(active[i][1].touching)) for (const b of list(active[j][1].touching))
+      if (clash(a, b)) alerts.push(`Clash: ${active[i][0]} (${a}) and ${active[j][0]} (${b}) are both in the same file.`);
+  const freezer = active.find(([, f]) => /freeze/i.test(f.touching || ''));
+  const fz = document.getElementById('freeze');
+  fz.textContent = freezer ? `SPLIT FREEZE ON · ${freezer[0]}` : 'split freeze off';
+  fz.classList.toggle('on', !!freezer);
+
+  document.getElementById('agents').innerHTML = cards.join('');
+  document.getElementById('alerts').innerHTML = alerts.map((a) => `<div class="alert">${esc(a)}</div>`).join('');
+  document.getElementById('orders').innerHTML = md(section(board, 'Orders from Jerry'));
+  document.getElementById('decisions').innerHTML = md(section(board, 'Decisions'));
+  document.getElementById('queues').innerHTML = md(section(board, 'Queues').replace(/^Work top to bottom.*\n(.*\n)*?\n/m, ''));
+  const lines = log.split('\n').filter((l) => l.startsWith('- ')).slice(-25).reverse();
+  document.getElementById('log').innerHTML = lines.map((l) => {
+    const [t, who, kind, ...rest] = l.slice(2).split(' · ');
+    const when = Date.parse(t) ? new Date(Date.parse(t)).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : t;
+    return `<li><span class="muted">${esc(when)}</span> <span class="who">${esc(who || '')}</span> <span class="kind ${esc(kind || '')}">${esc(kind || '')}</span> ${inline(rest.join(' · '))}</li>`;
+  }).join('') || '<li class="muted">Nothing yet.</li>';
+  const heads = [...reqs.matchAll(/^## (.+)$/gm)].map((m) => m[1]).slice(-8).reverse();
+  document.getElementById('requests').innerHTML = heads.length ? '<ul>' + heads.map((h) => '<li>' + inline(h) + '</li>').join('') + '</ul><p class="muted">Full list: <code>handoffs/requests.md</code></p>' : '<p class="muted">None.</p>';
+  document.getElementById('stamp').textContent = 'updated ' + new Date().toLocaleTimeString() + ' · refreshes every 10 s';
+}
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>

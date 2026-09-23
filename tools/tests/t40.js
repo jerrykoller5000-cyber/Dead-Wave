@@ -14,7 +14,13 @@
   ok(!!z._fireSet && z._fireSet.parent === z.mesh && z._fireSet.visible, 'burning zombie carries flames');
   const fl = z._fireSet && z._fireSet.children[0];
   ok(fl && fl.scale.y > 0.05, 'flames sized (' + (fl ? fl.scale.y.toFixed(2) : '-') + ')');
-  await wait(3200);
+  // Zombies don't update at all for the first seconds of a hunt (no burn tick, no AI), so a
+  // fixed 3.2 s wait failed before the burn had even started. Wait for it to start counting
+  // down, then for it to run out, then check the flames are gone (2026-09-23).
+  { const b0 = z.burnT; for (let i = 0; i < 60 && z.burnT >= b0; i++) await wait(250); }
+  ok(z.burnT < 3, 'burn counts down once zombies are updating (' + z.burnT.toFixed(2) + ')');
+  for (let i = 0; i < 40 && z.burnT > 0; i++) await wait(250);
+  await wait(400);
   ok(!z._fireSet, 'flames come off when it stops burning');
   const gf = T.spawnGroundFire(p.x + 3, p.z - 3);
   await wait(500);

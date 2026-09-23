@@ -1,13 +1,31 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1500);
+  // Play refuses with no callsign. During menuCamera.deploying the game loop skips
+  // updateCashDrops, so wait until a far teleport sticks (not the porch spawn).
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started && T.getPhase() === 'prep', 'the match opens in prep');
   const p = T.player.position;
+  {
+    const tx = 18, tz = 18;
+    for (let i = 0; i < 80; i++) {
+      await wait(200);
+      p.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(40);
+      if (Math.hypot(p.x - tx, p.z - tz) < 0.4) break;
+    }
+  }
   ok(T.house.half === 5 && T.house.group.visible, 'the HQ stands: a 10 m square');
   ok(T.house.muzzles.length === 8 && T.house.strobes.length === 4, 'eight flare barrels and four strobes');
   ok(Math.abs(T.KIOSK.x + 5.02) < 0.01, 'kiosk on the west wall');
   // no clock: prep holds
-  ok(T.getPhase() === 'prep', 'the match opens in prep');
   await wait(2500);
   ok(T.getPhase() === 'prep', 'and it stays there: no countdown');
   // a kill drops a skull of that kind
@@ -17,9 +35,13 @@
   T.killZombie(z, true, { kind: 'bullet', dir: { x: 0, z: 1 } });
   const drop = T.cashDrops.find(c => c.skull);
   ok(drop && drop.skull === 'military' && drop.value >= 8, 'a military zombie drops a military skull worth $' + (drop && drop.value));
-  // walk onto it
-  p.set(drop.mesh.position.x, p.y, drop.mesh.position.z); await wait(300);
-  const bag = T.getSkullBag();
+  // walk onto it (poll: one frame of updateCashDrops is enough once insertion ended)
+  let bag = T.getSkullBag();
+  for (let i = 0; i < 40 && bag.count < 1; i++) {
+    p.set(drop.mesh.position.x, T.sampleHeight(drop.mesh.position.x, drop.mesh.position.z), drop.mesh.position.z);
+    await wait(50);
+    bag = T.getSkullBag();
+  }
   ok(bag.count === 1 && T.getBank() === bank0, 'picked up: 1 skull in the bag ($' + bag.value + '), bank untouched');
   const val = bag.value;
   // to the window

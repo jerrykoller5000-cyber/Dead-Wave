@@ -1,7 +1,25 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms)); const f2 = v => v.toFixed(2);
-  document.getElementById('modeHunt').click(); await wait(1200);
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
+  {
+    const pl = T.player.position;
+    const tx = 2, tz = -4;
+    for (let i = 0; i < 70; i++) {
+      await wait(200);
+      pl.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(30);
+      if (Math.hypot(pl.x - tx, pl.z - tz) < 0.4) break;
+    }
+  }
   const p = T.player.position;
   // --- gameplay: a fence blocks building until it is knocked down
   const fence = T.landmarks.find(l => l.kind === 'fence' && l.alive && l.colliders.length);
@@ -10,7 +28,7 @@
   const gx = T.gridIndex(c.x), gz = T.gridIndex(c.z);
   T.setPlaceMode('floor');
   // stand beside it, facing it
-  const sx = c.x - 1.3, sz = c.z; p.set(sx, T.sampleHeight(sx, sz), sz); await wait(100);
+  const sx = c.x - 1.3, sz = c.z; p.set(sx, T.sampleHeight(sx, sz), sz); await wait(150);
   const why = T.placeRefusalFor('floor', gx, gz);
   ok(/fence in the way/.test(why || ''), 'a fence blocks building: "' + why + '"');
   T.setPlaceMode(null);

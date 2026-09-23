@@ -1,7 +1,25 @@
-(async () => {
+﻿(async () => {
   const T = window.TT; const A = T.AudioSys; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  const nameEl = document.getElementById('playerName');
+  if (nameEl) nameEl.value = 'TestMarine';
+  document.getElementById('modeHunt').click();
+  let started = false;
+  for (let i = 0; i < 80; i++) {
+    await wait(200);
+    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
+  }
+  ok(started, 'match reached prep after Play');
+  {
+    const pl = T.player.position;
+    const tx = 2, tz = -4;
+    for (let i = 0; i < 70; i++) {
+      await wait(200);
+      pl.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(30);
+      if (Math.hypot(pl.x - tx, pl.z - tz) < 0.4) break;
+    }
+  }
   A.unlock && A.unlock();
   // spy
   const calls = []; const spy = (name) => { const f = A[name]; A[name] = function (...a) { calls.push([name, ...a]); return f.apply(this, a); }; };
@@ -23,11 +41,17 @@
   const W = T.WEAPON_ORDER || ['minigun','m4','ak','pistol','uzi','shotgun','aa12','revolver','sniper','launcher','flamer','chainsaw'];
   T.runDevCommand('bigtex shooter');
   const owned = T.getWeaponOwned(); for (const w of W) owned[w] = true;
-  T.setWeapon(W.indexOf('chainsaw')); await wait(1200);
+  T.setWeapon(W.indexOf('chainsaw'));
+  // Pull-start is ~0.62s before the idle loop exists; poll until running or timeout.
+  let running = false;
+  for (let i = 0; i < 40; i++) {
+    await wait(100);
+    if (A.isChainsawRunning()) { running = true; break; }
+  }
   ok(T.getCurrentWeapon() === 'chainsaw' && T.getSawFuel() > 0, 'chainsaw in hand with fuel (' + T.getSawFuel() + ')');
-  ok(A.isChainsawRunning(), 'engine idling after the pull-start');
+  ok(running, 'engine idling after the pull-start');
   ok(count('chainsawEngine', c => c[1] === true) > 0, 'engine asked on every frame');
-  T.setWeapon(W.indexOf('pistol')); await wait(300);
+  T.setWeapon(W.indexOf('pistol')); await wait(400);
   ok(!A.isChainsawRunning(), 'put away: engine shuts off');
   // reloads: each gun's cues play in order
   const res = [];
