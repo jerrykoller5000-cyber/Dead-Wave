@@ -144,6 +144,79 @@ def inst_bell(freq, n, r=1.2):
     return x * env
 
 
+# ------------------------------------------------------------------ guitars
+# A distorted guitar is not a saw with more gain. Three things make it read as a
+# guitar: several strings very slightly out of tune with each other and struck a few
+# milliseconds apart, hard asymmetric clipping ahead of a speaker cabinet, and a pick
+# attack with more high end than the sustain. All three are here.
+def _gtr_raw(freq, n, strings=(0.0, 4.0, -3.0), spread_ms=2.6, wave='saw'):
+    x = np.zeros(n)
+    for i, det in enumerate(strings):
+        off = int(SR * spread_ms / 1000.0 * i)
+        if off >= n:
+            continue
+        body = osc_saw(freq, n - off, det) if wave == 'saw' else osc_square(freq, n - off, pw=0.42, phase=det / 97)
+        x[off:] += body * (1.0 - 0.12 * i)
+    return x / len(strings)
+
+
+def inst_gtr_chug(freq, n, gain=34.0, tight=1.0, presence=1.0):
+    """Palm-muted chug: a short, thick note that stops. The muted string is the
+    engine of every riff here, so its envelope is deliberately percussive."""
+    env = adsr(n, 0.002, 0.055 / tight, 0.16, 0.05)
+    pick = np.exp(-t_axis(n) * 150) * 0.5
+    x = _gtr_raw(freq, n, strings=(0.0, 3.5, -2.5, 6.0), spread_ms=1.8)
+    x += osc_square(freq / 2, n, pw=0.5) * 0.45          # the low string ringing under it
+    x = x * (1.0 + pick)
+    x = fuzz(x, gain=gain, bias=0.05)
+    x = cabinet(x, presence=presence, thump=1.15)
+    return x * env
+
+
+def inst_gtr_power(freq, n, gain=30.0, presence=1.0, sus=0.72):
+    """Held power chord: root plus fifth plus octave, ringing."""
+    env = adsr(n, 0.004, 0.22, sus, 0.16)
+    x = _gtr_raw(freq, n, strings=(0.0, 4.0, -3.0), spread_ms=3.2)
+    x += _gtr_raw(freq * 2 ** (7 / 12), n, strings=(0.0, -4.0), spread_ms=4.5) * 0.85
+    x += _gtr_raw(freq * 2, n, strings=(0.0,), spread_ms=0) * 0.4
+    x = fuzz(x, gain=gain, bias=0.07)
+    x = cabinet(x, presence=presence)
+    return x * env
+
+
+def inst_gtr_lead(freq, n, gain=26.0, vib=22, a=0.01, r=0.3, s=0.8):
+    """Screaming lead: narrow, singing, with vibrato and a squealing upper harmonic."""
+    env = adsr(n, a, 0.1, s, r)
+    x = additive_saw(freq, n, max_h=16, roll=0.9, vib_cents=vib, vib_delay=0.08) * 0.9
+    x += additive_saw(freq * 2 ** (12 / 1200), n, max_h=10, roll=1.1, vib_cents=vib) * 0.4
+    x += osc_sine(freq * 3, n) * 0.12                    # pinched harmonic edge
+    x = fuzz(x, gain=gain, bias=0.03)
+    x = cabinet(x, presence=1.25)
+    x = bandpass(x, 240, 5200) * 1.25                    # the mid hump a lead sits in
+    return x * env
+
+
+def inst_gtr_tremolo(freq, n, rate_hz=16.0, gain=28.0):
+    """Tremolo-picked single note — the blast-beat companion. Amplitude is chopped at
+    the picking rate, which is why it reads as picking rather than a held note."""
+    t = t_axis(n)
+    x = _gtr_raw(freq, n, strings=(0.0, 3.0, -3.0), spread_ms=2.0)
+    pick = 0.55 + 0.45 * np.abs(np.sin(np.pi * rate_hz * t))
+    x = fuzz(x * pick, gain=gain, bias=0.04)
+    x = cabinet(x, presence=1.1)
+    return x * adsr(n, 0.006, 0.2, 0.85, 0.12)
+
+
+def inst_squeal(freq, n):
+    """Dive/squeal stinger: a harmonic that bends up and off, for section starts."""
+    t = t_axis(n)
+    bend = freq * (1 + 2.5 * np.clip(t / (len(t) / SR), 0, 1) ** 2)
+    ph = np.cumsum(bend / SR)
+    x = np.sin(2 * np.pi * ph) + 0.5 * np.sin(4 * np.pi * ph)
+    x = fuzz(x, gain=18, bias=0.02)
+    return cabinet(x, presence=1.4) * adsr(n, 0.01, 0.2, 0.7, 0.3)
+
+
 # ----------------------------------------------------------------- patterns
 DRUM_STYLES = {
     # (kind, beat, velocity)
@@ -200,6 +273,57 @@ DRUM_STYLES = {
     'heartbeat': {
         'kick_deep': [(0, 0.8), (0.6, 0.55)],
     },
+    # --- metal kits -----------------------------------------------------------
+    # Double bass under a backbeat: the workhorse. Kick on every 8th, snare 2 and 4,
+    # ride/china marking the bar.
+    'dbl8': {
+        'kick_metal': [(i * 0.5, 1.0 if i % 2 == 0 else 0.8) for i in range(8)],
+        'snare_metal': [(1, 1.0), (3, 1.0)],
+        'ride': [(i * 0.5, 0.38 if i % 2 == 0 else 0.26) for i in range(8)],
+        'china': [(0, 0.5)],
+    },
+    # Full 16th double bass — the "everything is on fire" kit.
+    'dbl16': {
+        'kick_metal': [(i * 0.25, 1.0 if i % 4 == 0 else (0.82 if i % 2 == 0 else 0.7)) for i in range(16)],
+        'snare_metal': [(1, 1.0), (3, 1.0)],
+        'crash': [(0, 0.45)],
+        'ride': [(i * 0.5, 0.3) for i in range(8)],
+    },
+    # Thrash: driving 8ths on the kick with the snare on every beat.
+    'thrash': {
+        'kick_metal': [(i * 0.5, 0.95 if i % 2 == 0 else 0.7) for i in range(8)],
+        'snare_metal': [(0.5, 0.75), (1, 1.0), (2.5, 0.75), (3, 1.0)],
+        'hat': [(i * 0.25, [0.45, 0.2, 0.34, 0.2][i % 4]) for i in range(16)],
+        'china': [(2, 0.4)],
+    },
+    # Blast beat: kick and snare alternating 16ths. Used in short bursts only.
+    'blast': {
+        'kick_metal': [(i * 0.25, 0.9) for i in range(0, 16, 2)],
+        'snare_metal': [(i * 0.25, 0.85) for i in range(1, 16, 2)],
+        'crash': [(0, 0.5), (2, 0.35)],
+    },
+    # Gallop: the dm—dm-dm figure. Kick pattern is what makes a riff "ride".
+    'gallop': {
+        'kick_metal': [(0, 1.0), (0.75, 0.8), (1, 0.85), (2, 1.0), (2.75, 0.8), (3, 0.85)],
+        'snare_metal': [(1, 0.95), (3, 1.0)],
+        'ride': [(i * 0.5, 0.34 if i % 2 == 0 else 0.24) for i in range(8)],
+        'china': [(0, 0.42)],
+    },
+    # Half-time slam: huge, slow, room for the riff to breathe. Doom's groove gear.
+    'slam': {
+        'kick_metal': [(0, 1.0), (0.75, 0.7), (2.5, 0.95)],
+        'snare_metal': [(2, 1.0)],
+        'tom_floor': [(3.5, 0.7), (3.75, 0.7)],
+        'china': [(0, 0.55)],
+        'ride': [(1, 0.3), (3, 0.3)],
+    },
+    # Stomp: two-feel with a floor tom pushing it, for choruses.
+    'stomp': {
+        'kick_metal': [(0, 1.0), (1.5, 0.75), (2, 0.9), (3.5, 0.8)],
+        'snare_metal': [(1, 1.0), (3, 1.0)],
+        'tom_floor': [(2.5, 0.55)],
+        'crash': [(0, 0.4), (2, 0.3)],
+    },
 }
 
 BASS_STYLES = {
@@ -210,6 +334,26 @@ BASS_STYLES = {
     'halves': lambda b, root, fifth, octv: [(b + 0, 1.9, root, 0.9), (b + 2, 1.9, fifth if (b // 4) % 2 else root, 0.8)],
     'walk': lambda b, root, fifth, octv: [(b + 0, 0.9, root, 0.9), (b + 1, 0.9, root, 0.6), (b + 2, 0.9, fifth, 0.8), (b + 3, 0.9, octv, 0.6)],
     'doom': lambda b, root, fifth, octv: [(b + 0, 1.7, root, 1.0), (b + 2, 0.45, root, 0.8), (b + 2.5, 1.4, root - 12 if root > 36 else root, 0.9)],
+    # Metal bass locks to the kick rather than playing its own line.
+    'gallop': lambda b, root, fifth, octv: [(b + 0, 0.7, root, 1.0), (b + 0.75, 0.22, root, 0.85), (b + 1, 0.45, root, 0.9),
+                                            (b + 2, 0.7, root, 1.0), (b + 2.75, 0.22, root, 0.85), (b + 3, 0.45, fifth, 0.9)],
+    'chug8': lambda b, root, fifth, octv: [(b + i * 0.5, 0.42, root if i != 6 else fifth, 0.95 if i % 2 == 0 else 0.78) for i in range(8)],
+    'pedal16': lambda b, root, fifth, octv: [(b + i * 0.25, 0.2, root, 1.0 if i % 4 == 0 else 0.72) for i in range(16)],
+    'slam': lambda b, root, fifth, octv: [(b + 0, 1.4, root, 1.0), (b + 0.75, 0.2, root, 0.8), (b + 2.5, 1.4, root, 0.95)],
+}
+
+# Riff shapes: (beat, duration, scale-step from the chord root). The step is what makes
+# a riff a riff — the chromatic b2 and the tritone are most of the menace in this genre.
+RIFFS = {
+    'chug8':    [(i * 0.5, 0.42, 0) for i in range(8)],
+    'chug16':   [(i * 0.25, 0.2, 0) for i in range(16)],
+    'gallop':   [(0, 0.6, 0), (0.75, 0.2, 0), (1, 0.4, 0), (2, 0.6, 0), (2.75, 0.2, 0), (3, 0.4, 0)],
+    'stab':     [(0, 0.9, 0), (1.5, 0.45, 0), (2.5, 0.45, 1), (3, 0.9, 0)],
+    'climb':    [(0, 0.45, 0), (0.5, 0.45, 0), (1, 0.45, 1), (1.5, 0.45, 0), (2, 0.45, 3), (2.5, 0.45, 0), (3, 0.45, 4), (3.5, 0.45, 0)],
+    'slam':     [(0, 1.6, 0), (2, 0.5, 0), (2.5, 0.5, 1), (3, 0.9, 0)],
+    'trem':     [(0, 4.0, 0)],
+    'drop':     [(0, 0.9, 0), (1, 0.4, 0), (1.5, 0.4, -1), (2, 0.9, 0), (3, 0.5, -2), (3.5, 0.45, 0)],
+    'march':    [(0, 0.9, 0), (1, 0.9, 0), (2, 0.9, 0), (3, 0.45, 0), (3.5, 0.45, 1)],
 }
 
 ARP_PATTERNS = {
@@ -309,7 +453,7 @@ class Track:
             deg, size = prog[b % len(prog)]
             chords_by_bar.append(self.key.chord(deg, size, o.get('chord_oct', 0)))
 
-        layers = {k: np.zeros((2, n)) for k in ['pad', 'bass', 'drums', 'arp', 'lead', 'pluck', 'keys', 'choir', 'bell']}
+        layers = {k: np.zeros((2, n)) for k in ['pad', 'bass', 'drums', 'arp', 'lead', 'pluck', 'keys', 'choir', 'bell', 'rhythm', 'gtr_lead']}
         rev_send = np.zeros((2, n))
         dly_send = np.zeros((2, n))
 
@@ -380,17 +524,29 @@ class Track:
                                 continue
                             dk = 'hat_open' if kind == 'open' else kind
                             var = int(rng.integers(0, 3)) if dk == 'tom' else 0
-                            g = {'kick': 0.95, 'kick_deep': 1.0, 'snare': 0.72, 'snare_big': 0.85, 'hat': 0.34, 'hat_open': 0.26, 'clap': 0.5, 'ride': 0.34, 'tom': 0.6, 'shaker': 0.3, 'rim': 0.38, 'boom': 0.9}[dk]
-                            pan = {'hat': 0.25, 'hat_open': 0.25, 'shaker': -0.3, 'ride': 0.35, 'rim': -0.2, 'tom': (var - 1) * 0.4}.get(dk, 0.0)
-                            jitter = 0.0 if dk in ('kick', 'kick_deep') else 0.004
+                            g = {'kick': 0.95, 'kick_deep': 1.0, 'snare': 0.72, 'snare_big': 0.85, 'hat': 0.34,
+                                 'hat_open': 0.26, 'clap': 0.5, 'ride': 0.34, 'tom': 0.6, 'shaker': 0.3,
+                                 'rim': 0.38, 'boom': 0.9, 'kick_metal': 0.92, 'snare_metal': 0.8,
+                                 'crash': 0.42, 'china': 0.4, 'tom_floor': 0.62}[dk]
+                            pan = {'hat': 0.25, 'hat_open': 0.25, 'shaker': -0.3, 'ride': 0.35, 'rim': -0.2,
+                                   'tom': (var - 1) * 0.4, 'crash': -0.45, 'china': 0.5, 'tom_floor': -0.35}.get(dk, 0.0)
+                            jitter = 0.0 if dk in ('kick', 'kick_deep', 'kick_metal') else 0.004
                             add_at(layers['drums'], drum(dk, var), smp(humanize(beat0 + beat, jitter)), g * vel * dv * (0.9 + 0.1 * rng.random()), pan)
-                            if dk in ('snare', 'snare_big', 'clap'):
+                            if dk in ('snare', 'snare_big', 'clap', 'snare_metal', 'crash', 'china'):
                                 add_at(rev_send, drum(dk, var), smp(beat0 + beat), g * vel * dv * 0.35, pan)
                     if fill_bar and ds not in ('light', 'brush'):
                         # fill: snare 16ths ramping up, or a tom roll on heavier kits
                         if ds in ('half', 'doom'):
                             for i, beat in enumerate(np.arange(3.0, 4.0, 0.25)):
                                 add_at(layers['drums'], drum('tom', 2 - min(2, i // 2)), smp(beat0 + beat), 0.5 + 0.12 * i, (1 - i) * 0.3)
+                        elif ds in ('dbl8', 'dbl16', 'thrash', 'blast', 'gallop', 'slam', 'stomp'):
+                            # Metal fills are 32nd snare bursts into a floor-tom triplet,
+                            # and they land on a china on the next bar's downbeat.
+                            for i, beat in enumerate(np.arange(3.0, 3.5, 0.125)):
+                                add_at(layers['drums'], drum('snare_metal'), smp(beat0 + beat), 0.5 + 0.09 * i, -0.1)
+                            for i, beat in enumerate(np.arange(3.5, 4.0, 0.1667)):
+                                add_at(layers['drums'], drum('tom_floor'), smp(beat0 + beat), 0.7 - 0.06 * i, -0.3 + i * 0.3)
+                            add_at(layers['drums'], drum('china'), smp(beat0 + 4), 0.5, 0.45)
                         else:
                             for i, beat in enumerate(np.arange(3.0, 4.0, 0.25)):
                                 add_at(layers['drums'], drum('snare'), smp(beat0 + beat), 0.35 + 0.1 * i, 0)
@@ -398,6 +554,44 @@ class Track:
                             add_at(layers['drums'], drum('boom'), smp(beat0 + 4), 0.55, 0)
                     elif ds in ('half', 'doom', 'pulse') and bi % 4 == 0:
                         add_at(layers['drums'], drum('boom'), smp(beat0), 0.4 * dv, 0)
+
+                # ---- rhythm guitar
+                # Two tracks hard left and right at slightly different gains: a single
+                # centred guitar sounds like a synth patch, two panned ones sound like a
+                # band. Muted chugs stay dry and tight; held chords ring and get reverb.
+                rf = sec.get('riff')
+                if rf:
+                    pat = RIFFS[rf] if isinstance(rf, str) else rf
+                    gtr_oct = o.get('gtr_oct', -1)
+                    gain = o.get('gtr_gain', 32) * (0.85 + 0.3 * energy)
+                    hold = sec.get('riff_hold')
+                    for (beat, dur, step) in pat:
+                        deg = self.key.nearest_deg(root) + step
+                        m = self.key.deg(deg) + 12 * gtr_oct
+                        nn = smp(dur) + int(0.09 * SR)
+                        vel = 0.95 if (beat % 1 == 0) else 0.8
+                        for side, pan in ((0, -0.72), (1, 0.72)):
+                            det = 1.0 if side == 0 else 2 ** (3.5 / 1200)   # the two amps detuned
+                            if hold:
+                                sig = inst_gtr_power(midi_to_hz(m) * det, nn, gain=gain * 0.9,
+                                                     presence=o.get('gtr_presence', 1.0))
+                            elif rf == 'trem':
+                                sig = inst_gtr_tremolo(midi_to_hz(m) * det, nn,
+                                                       rate_hz=o.get('trem_rate', 16), gain=gain)
+                            else:
+                                sig = inst_gtr_chug(midi_to_hz(m) * det, nn, gain=gain,
+                                                    tight=o.get('gtr_tight', 1.0),
+                                                    presence=o.get('gtr_presence', 1.0))
+                            add_at(layers['rhythm'], sig, smp(humanize(beat0 + beat, 0.0035)),
+                                   vel * (0.92 if side else 1.0), pan)
+                        if hold:
+                            add_at(rev_send, sig, smp(beat0 + beat), vel * 0.22, 0)
+                    # A china/squeal accent on the downbeat of a section keeps the riff
+                    # from sounding like it started mid-thought.
+                    if bi == 0 and sec.get('squeal'):
+                        sq = inst_squeal(midi_to_hz(root + 12), int(0.9 * SR))
+                        add_at(layers['gtr_lead'], sq, smp(beat0), 0.5, 0.2)
+                        add_at(dly_send, sq, smp(beat0), 0.4, 0.2)
 
                 # ---- arp
                 if sec.get('arp'):
@@ -444,6 +638,26 @@ class Track:
                     add_at(layers['bell'], sig, smp(beat0 + (0 if bi % 4 == 0 else 2)), 0.5, 0.4 if bi % 4 else -0.4)
                     add_at(rev_send, sig, smp(beat0), 0.5, 0)
 
+            # ---- guitar lead: the same melody generator, played through an amp, and
+            # doubled a fifth up on the loudest sections because harmonised leads are
+            # the genre's signature.
+            if sec.get('gtr_lead'):
+                ev, lead_motif = gen_melody(rng, self.key, chords_by_bar, bar, sec['bars'],
+                                            lo=o.get('gtr_lead_lo', 57), hi=o.get('gtr_lead_hi', 79),
+                                            density=sec.get('lead_density', 0.95),
+                                            motif=lead_motif if sec.get('gtr_lead') != 'new' else None)
+                harm = sec.get('gtr_harm')
+                for (beat, dur, m, vel) in ev:
+                    nn = smp(dur) + int(0.35 * SR)
+                    sig = inst_gtr_lead(midi_to_hz(m), nn, gain=o.get('gtr_lead_gain', 26), vib=o.get('gtr_vib', 22))
+                    add_at(layers['gtr_lead'], sig, smp(humanize(beat, 0.005)), vel, -0.12)
+                    add_at(dly_send, sig, smp(beat), vel * 0.35, -0.12)
+                    add_at(rev_send, sig, smp(beat), vel * 0.22, -0.12)
+                    if harm:
+                        hm = self.key.deg(self.key.nearest_deg(m) + 2)   # a third/fifth up in key
+                        sig2 = inst_gtr_lead(midi_to_hz(hm), nn, gain=o.get('gtr_lead_gain', 26), vib=o.get('gtr_vib', 22))
+                        add_at(layers['gtr_lead'], sig2, smp(humanize(beat, 0.006)), vel * 0.8, 0.3)
+
             # ---- lead: a phrase across the whole section
             if sec.get('lead'):
                 ev, lead_motif = gen_melody(rng, self.key, chords_by_bar, bar, sec['bars'], lo=o.get('lead_lo', 64), hi=o.get('lead_hi', 84), density=sec.get('lead_density', 0.95), motif=lead_motif if sec.get('lead') != 'new' else None)
@@ -457,13 +671,18 @@ class Track:
 
         # ---- mix
         g = o.get('gains', {})
-        G = {'pad': 0.24, 'bass': 0.26, 'drums': 0.5, 'arp': 0.2, 'lead': 0.26, 'pluck': 0.26, 'keys': 0.26, 'choir': 0.26, 'bell': 0.18}
+        G = {'pad': 0.24, 'bass': 0.26, 'drums': 0.5, 'arp': 0.2, 'lead': 0.26, 'pluck': 0.26, 'keys': 0.26,
+             'choir': 0.26, 'bell': 0.18, 'rhythm': 0.34, 'gtr_lead': 0.24}
         G.update(g)
         for k in ('arp', 'lead', 'pluck', 'keys'):
             G[k] *= 1.35
         G['bass'] *= 0.75
         mix = np.zeros((2, n))
         for k, buf in layers.items():
+            if k == 'rhythm':
+                # Guitars get out of the way below ~95Hz. The kick and the bass own that
+                # octave; leaving the rhythm track in it is what makes a metal mix mud.
+                buf = np.stack([highpass(buf[0], 95), highpass(buf[1], 95)])
             mix += buf * G[k]
         rev_send += layers['pad'] * G['pad'] * o.get('pad_rev', 0.6)
         rev_send += layers['choir'] * G['choir'] * 0.8
@@ -598,6 +817,153 @@ track('boss_colossus', 90, Key(46, 'phrygian'), [(0, 4), (1, 3), (0, 4), (1, 3),
        S(8, pad=1, choir=1, bass='doom', drums='doom', arp=1, lead=1, energy=0.9), S(8, pad=1, choir=1, bass='drive16', drums='drive', arp=1, lead=1, lead_density=1.0, energy=1.0), S(4, pad=1, choir=1, drums='heartbeat', energy=0.35)],
       seed=137, arp='sync', arp_rate=0.5, arp_oct=-1, bass_fc_lo=110, bass_fc_hi=800, bass_drive=2.2, lead_fc=2800, lead_vib=9, lead_lo=55, lead_hi=74,
       rev_size=1.6, rev_wet=0.65, gains={'choir': 0.24, 'arp': 0.1, 'lead': 0.18, 'drums': 0.65, 'bass': 0.34})
+
+# --- METAL: WAVE COMBAT -----------------------------------------------------
+# The brief was Doom meets the existing score: the same keys, the same patient pads and
+# the same motif writing, but with the guitars carrying the riff and the kit doing the
+# driving. Each of these keeps a pad underneath so it still belongs to the soundtrack it
+# came from — that bed is the thread between the quiet tracks and these.
+
+# Mid-tempo chug in phrygian: the first thing you hear when a wave starts.
+track('metal_breach_the_line', 116, Key(45, 'phrygian'), [(0, 4), (0, 4), (1, 3), (0, 4), (0, 4), (5, 4), (1, 3), (6, 3)],
+      [S(2, pad=1, drums='pulse', energy=0.4, squeal=1),
+       S(8, pad=1, riff='chug8', bass='chug8', drums='dbl8', energy=0.7, squeal=1),
+       S(8, pad=1, riff='gallop', bass='gallop', drums='gallop', energy=0.8),
+       S(8, pad=1, riff='stab', bass='chug8', drums='stomp', gtr_lead=1, energy=0.9),
+       S(4, pad=1, riff='slam', bass='slam', drums='slam', energy=0.75),
+       S(8, pad=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0, squeal=1),
+       S(8, pad=1, riff='drop', bass='gallop', drums='gallop', gtr_lead=1, energy=0.85),
+       S(4, pad=1, riff='slam', bass='slam', drums='slam', energy=0.6)],
+      seed=211, pad_fc=800, pad_fc_energy=1200, pad_oct=0, bass_fc_lo=150, bass_fc_hi=1400, bass_drive=2.4,
+      gtr_oct=-1, gtr_gain=34, gtr_presence=1.05, gtr_lead_lo=57, gtr_lead_hi=79, gtr_vib=20,
+      rev_size=0.8, rev_wet=0.3, dly_beats=0.5, dly_fb=0.3,
+      gains={'rhythm': 0.38, 'gtr_lead': 0.26, 'drums': 0.62, 'bass': 0.3, 'pad': 0.14})
+
+# The fast one. Gallop and thrash, harmonised leads over the top: rip and tear.
+track('metal_rip_and_tear', 168, Key(43, 'phrygian'), [(0, 4), (0, 4), (1, 3), (5, 4), (0, 4), (0, 4), (6, 3), (1, 3)],
+      [S(2, drums='thrash', riff='chug16', energy=0.65, squeal=1),
+       S(8, pad=1, riff='gallop', bass='gallop', drums='thrash', energy=0.85),
+       S(8, pad=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, energy=0.95, squeal=1),
+       S(4, pad=1, riff='trem', bass='pedal16', drums='blast', energy=1.0),
+       S(8, pad=1, riff='climb', bass='gallop', drums='thrash', gtr_lead=1, gtr_harm=1, energy=1.0),
+       S(4, pad=1, riff='slam', bass='slam', drums='slam', energy=0.7),
+       S(8, pad=1, riff='gallop', bass='gallop', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0, squeal=1),
+       S(4, riff='chug16', bass='pedal16', drums='thrash', energy=0.9)],
+      seed=223, pad_fc=900, pad_fc_energy=1400, bass_fc_lo=160, bass_fc_hi=1600, bass_drive=2.6,
+      gtr_oct=-1, gtr_gain=38, gtr_tight=1.25, gtr_presence=1.15, trem_rate=21,
+      gtr_lead_lo=60, gtr_lead_hi=84, gtr_vib=26, gtr_lead_gain=30,
+      rev_size=0.7, rev_wet=0.26, dly_beats=0.375, dly_fb=0.26,
+      gains={'rhythm': 0.4, 'gtr_lead': 0.27, 'drums': 0.66, 'bass': 0.3, 'pad': 0.1})
+
+# Groove/slam: heavy, half-time, mean. For when the line is holding but only just.
+track('metal_siege_engine', 96, Key(41, 'minor'), [(0, 4), (0, 4), (3, 4), (0, 4), (0, 4), (5, 4), (6, 3), (0, 4)],
+      [S(2, pad=1, drums='heartbeat', energy=0.35),
+       S(8, pad=1, riff='slam', bass='slam', drums='slam', energy=0.7, squeal=1),
+       S(8, pad=1, riff='stab', bass='chug8', drums='stomp', energy=0.8),
+       S(8, pad=1, choir=1, riff='march', bass='chug8', drums='dbl8', gtr_lead=1, energy=0.9),
+       S(4, pad=1, riff='slam', bass='slam', drums='slam', energy=0.72),
+       S(8, pad=1, choir=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0, squeal=1),
+       S(8, pad=1, riff='drop', bass='chug8', drums='stomp', energy=0.82),
+       S(4, pad=1, drums='slam', riff='slam', bass='slam', energy=0.6)],
+      seed=227, pad_fc=700, pad_fc_energy=1000, bass_fc_lo=120, bass_fc_hi=1100, bass_drive=2.5,
+      gtr_oct=-2, gtr_gain=36, gtr_tight=0.8, gtr_presence=0.95, gtr_lead_lo=55, gtr_lead_hi=76, gtr_vib=18,
+      rev_size=1.0, rev_wet=0.34,
+      gains={'rhythm': 0.4, 'gtr_lead': 0.24, 'drums': 0.64, 'bass': 0.32, 'pad': 0.14, 'choir': 0.16})
+
+# Tremolo and blast beats: the wave that does not stop coming.
+track('metal_the_horde', 148, Key(46, 'aeolian_b5'), [(0, 4), (1, 3), (0, 4), (6, 3), (0, 4), (1, 3), (5, 4), (4, 3)],
+      [S(2, pad=1, riff='trem', drums='pulse', energy=0.5),
+       S(8, pad=1, riff='trem', bass='pedal16', drums='blast', energy=0.9),
+       S(8, pad=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, energy=0.95),
+       S(8, pad=1, riff='climb', bass='gallop', drums='thrash', energy=0.9, squeal=1),
+       S(4, pad=1, choir=1, riff='slam', bass='slam', drums='slam', energy=0.7),
+       S(8, pad=1, riff='trem', bass='pedal16', drums='blast', gtr_lead=1, gtr_harm=1, energy=1.0),
+       S(8, pad=1, riff='gallop', bass='gallop', drums='gallop', gtr_lead=1, energy=0.92),
+       S(4, pad=1, riff='chug8', bass='chug8', drums='dbl8', energy=0.75)],
+      seed=229, pad_fc=850, pad_fc_energy=1300, pad_shimmer=0.12, bass_fc_lo=150, bass_fc_hi=1500, bass_drive=2.5,
+      gtr_oct=-1, gtr_gain=37, gtr_presence=1.1, trem_rate=19, gtr_lead_lo=59, gtr_lead_hi=82, gtr_vib=24,
+      rev_size=0.85, rev_wet=0.3,
+      gains={'rhythm': 0.39, 'gtr_lead': 0.26, 'drums': 0.65, 'bass': 0.3, 'pad': 0.12, 'choir': 0.14})
+
+# The long one, for a wave you are losing: starts almost like the calm score and ends
+# with everything at once.
+track('metal_last_stand', 124, Key(48, 'harm_minor'), [(0, 4), (5, 4), (0, 4), (4, 3), (0, 4), (3, 4), (1, 3), (4, 3)],
+      [S(4, pad=1, keys=1, energy=0.3),
+       S(8, pad=1, keys=1, bass='halves', drums='pulse', energy=0.45),
+       S(8, pad=1, riff='chug8', bass='chug8', drums='dbl8', energy=0.75, squeal=1),
+       S(8, pad=1, choir=1, riff='march', bass='gallop', drums='gallop', gtr_lead=1, energy=0.88),
+       S(4, pad=1, riff='slam', bass='slam', drums='slam', energy=0.72),
+       S(8, pad=1, choir=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0, squeal=1),
+       S(8, pad=1, choir=1, riff='climb', bass='gallop', drums='thrash', gtr_lead=1, gtr_harm=1, energy=1.0),
+       S(6, pad=1, choir=1, riff='slam', bass='slam', drums='slam', energy=0.65)],
+      seed=233, pad_fc=800, pad_fc_energy=1200, pad_a=0.8, bass_fc_lo=140, bass_fc_hi=1300, bass_drive=2.3,
+      gtr_oct=-1, gtr_gain=33, gtr_presence=1.0, gtr_lead_lo=57, gtr_lead_hi=81, gtr_vib=22,
+      rev_size=1.1, rev_wet=0.36, dly_beats=0.75,
+      gains={'rhythm': 0.36, 'gtr_lead': 0.25, 'drums': 0.62, 'bass': 0.3, 'pad': 0.15, 'choir': 0.18, 'keys': 0.16})
+
+# --- METAL: BOSS / BLOOD MOON ----------------------------------------------
+# The two boss tracks stay slow and enormous — the difference from the fight pool is that
+# these have room in them, and a choir over the top.
+track('metal_blood_moon', 88, Key(40, 'phrygian'), [(0, 4), (0, 4), (1, 3), (1, 3), (0, 4), (5, 4), (6, 3), (1, 3)],
+      [S(4, pad=1, choir=1, drums='heartbeat', bass='slow', energy=0.4),
+       S(8, pad=1, choir=1, riff='slam', bass='slam', drums='slam', energy=0.72, squeal=1),
+       S(8, pad=1, choir=1, riff='march', bass='chug8', drums='dbl8', gtr_lead=1, energy=0.85),
+       S(8, pad=1, choir=1, riff='stab', bass='chug8', drums='stomp', energy=0.88),
+       S(4, pad=1, choir=1, drums='heartbeat', bass='slow', bell=1, energy=0.4),
+       S(8, pad=1, choir=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0, squeal=1),
+       S(8, pad=1, choir=1, riff='slam', bass='slam', drums='slam', gtr_lead=1, energy=0.9),
+       S(4, pad=1, choir=1, drums='heartbeat', energy=0.4)],
+      seed=239, pad_fc=650, pad_fc_energy=900, bass_fc_lo=110, bass_fc_hi=950, bass_drive=2.6,
+      gtr_oct=-2, gtr_gain=35, gtr_tight=0.75, gtr_presence=0.9, gtr_lead_lo=53, gtr_lead_hi=76, gtr_vib=16,
+      rev_size=1.5, rev_wet=0.5,
+      gains={'rhythm': 0.38, 'gtr_lead': 0.24, 'drums': 0.66, 'bass': 0.34, 'pad': 0.16, 'choir': 0.22, 'bell': 0.1})
+
+track('metal_titan', 82, Key(38, 'minor'), [(0, 4), (0, 4), (5, 4), (0, 4), (0, 4), (3, 4), (1, 3), (6, 3)],
+      [S(4, pad=1, choir=1, drums='heartbeat', energy=0.35),
+       S(8, pad=1, choir=1, riff='slam', bass='slam', drums='slam', energy=0.75, squeal=1),
+       S(8, pad=1, choir=1, riff='drop', bass='chug8', drums='stomp', gtr_lead=1, energy=0.85),
+       S(8, pad=1, choir=1, riff='march', bass='gallop', drums='dbl8', energy=0.9),
+       S(4, pad=1, choir=1, bass='slow', drums='heartbeat', energy=0.4),
+       S(8, pad=1, choir=1, riff='chug16', bass='pedal16', drums='dbl16', gtr_lead=1, gtr_harm=1, energy=1.0),
+       S(8, pad=1, choir=1, riff='slam', bass='slam', drums='slam', gtr_lead=1, energy=0.92, squeal=1),
+       S(4, pad=1, choir=1, drums='heartbeat', energy=0.35)],
+      seed=241, pad_fc=600, pad_fc_energy=850, bass_fc_lo=100, bass_fc_hi=880, bass_drive=2.8,
+      gtr_oct=-2, gtr_gain=36, gtr_tight=0.7, gtr_presence=0.85, gtr_lead_lo=50, gtr_lead_hi=74, gtr_vib=14,
+      rev_size=1.6, rev_wet=0.55,
+      gains={'rhythm': 0.38, 'gtr_lead': 0.23, 'drums': 0.66, 'bass': 0.35, 'pad': 0.16, 'choir': 0.22})
+
+# --- PEACETIME ADDITIONS ----------------------------------------------------
+# More room in the calm pools so the quiet stretches do not repeat, and one track that
+# sits between calm and fight for the moment a wave is cleared but the day is not over.
+track('day_long_grass', 88, Key(53, 'dorian'), [(0, 4), (4, 3), (3, 4), (5, 4), (0, 4), (2, 4), (6, 3), (4, 3)],
+      [S(4, pad=1, pluck=1, energy=0.25), S(8, pad=1, pluck=1, bass='slow', energy=0.35),
+       S(8, pad=1, keys=1, bass='halves', drums='brush', bell=1, energy=0.45),
+       S(8, pad=1, pluck=1, bass='walk', drums='light', arp=1, lead=1, lead_density=0.7, energy=0.6),
+       S(8, pad=1, keys=1, bass='halves', drums='brush', energy=0.42),
+       S(8, pad=1, pluck=1, bass='walk', drums='light', arp=1, lead=1, energy=0.62),
+       S(6, pad=1, pluck=1, energy=0.28)],
+      seed=251, pad_fc=1050, pad_a=0.85, bass_soft=1, pluck_beats=[0, 1, 2.5], arp='updown', arp_rate=0.5,
+      lead_fc=2700, lead_vib=9, lead_lo=65, lead_hi=79, rev_size=1.2, rev_wet=0.55,
+      gains={'pluck': 0.25, 'keys': 0.2, 'arp': 0.09, 'lead': 0.14, 'bell': 0.1, 'drums': 0.4})
+
+track('night_long_watch', 76, Key(41, 'minor'), [(0, 4), (5, 4), (0, 4), (1, 3), (3, 4), (5, 4), (6, 3), (4, 3)],
+      [S(4, pad=1, energy=0.2), S(8, pad=1, bass='slow', bell=1, energy=0.32),
+       S(8, pad=1, bass='halves', drums='heartbeat', keys=1, energy=0.4),
+       S(8, pad=1, bass='syncop', drums='pulse', arp=1, energy=0.5),
+       S(8, pad=1, bass='slow', keys=1, bell=1, energy=0.34),
+       S(8, pad=1, bass='halves', drums='half', arp=1, lead=1, lead_density=0.6, energy=0.55),
+       S(4, pad=1, energy=0.2)],
+      seed=257, pad_fc=580, pad_fc_energy=700, pad_a=1.2, bass_fc_hi=460, bass_drive=1.1,
+      arp='down', arp_rate=0.5, arp_oct=-1, lead_fc=2000, lead_vib=6, lead_lo=55, lead_hi=69,
+      rev_size=1.7, rev_wet=0.72, gains={'keys': 0.17, 'arp': 0.09, 'lead': 0.11, 'bell': 0.12, 'drums': 0.42})
+
+# Wave cleared: the guitars drop out, the kit keeps a pulse, and it resolves. Short.
+track('aftermath_hold', 100, Key(50, 'dorian'), [(0, 4), (5, 4), (3, 4), (4, 3)],
+      [S(2, pad=1, energy=0.3), S(8, pad=1, keys=1, bass='halves', drums='light', bell=1, energy=0.5),
+       S(8, pad=1, keys=1, bass='walk', drums='brush', lead=1, lead_density=0.7, energy=0.6),
+       S(4, pad=1, keys=1, energy=0.3)],
+      seed=263, pad_fc=1000, pad_a=0.7, bass_soft=1, lead_fc=2600, lead_vib=8, lead_lo=62, lead_hi=76,
+      rev_size=1.3, rev_wet=0.6, gains={'keys': 0.22, 'lead': 0.14, 'bell': 0.12, 'drums': 0.4})
 
 # --- STINGERS ---------------------------------------------------------------
 track('end_fallen', 66, Key(45, 'minor'), [(0, 4), (5, 4), (3, 4), (4, 3)],
