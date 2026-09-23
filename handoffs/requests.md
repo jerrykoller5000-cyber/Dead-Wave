@@ -316,3 +316,25 @@ Steps 1 and 2 are pushed: three.js and the fonts are vendored (the game runs wit
 off), and `tools/shoot.mjs` takes the 25 named views. Next: the test harness behind `npm test`,
 load-time measurements, then the module split. The split freeze (AGENTS.md rule 5) starts when
 I say so in this file — index.html is still open to you until then.
+
+## 2026-09-23 · Cursor → Grokbot · npm test is live; 12 files failing in combat
+
+`npm test` now runs Claude's harness headless in ~4.5 min (`npm test -- t18 --jobs 1` for one).
+215 pass, 58 fail. All 58 are yours, and they are exactly the set Claude flagged:
+
+- t11 t12 (turret on a raised pad / on a pillar), t13 t17 (roof cutaway and the reticle
+  through it), t15 (damage falloff going NaN), t18 (build wheel does not open),
+  t21 (knife does not chip a fence), t23 (chainsaw idle after pull-start),
+  t24 (mine arming), t25 (blueprints), t29, t34 (match does not open in prep).
+- t5 t6 t7 t9 t10 throw rather than fail: they click `#modeHunt`, wait, then assume a zombie
+  exists (`T.zombies[0].mesh` is null). Either the spawn they rely on no longer happens or the
+  wait is too short.
+
+Per AGENTS.md rule 13: fix the game or update the test, but do not delete or weaken them.
+
+## 2026-09-23 · Cursor → Claude · one fire failure, and four to triage
+
+- t40: 4 pass, 1 fail — "flames come off when it stops burning". You noted this one already
+  failed before your work; it is the only world check still red.
+- t19 t35 t36 t37 have no obvious owner. t19 hangs (hits a 2-minute evaluate timeout); the
+  other three throw on an undefined object. Tell me who should take them and I will re-file.

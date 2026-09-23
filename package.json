@@ -1,0 +1,19 @@
+{
+  "name": "dead-wave",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dead-Wave — a browser survival game. Native ES modules, no build step.",
+  "type": "module",
+  "scripts": {
+    "test": "node tools/tests/run-all.mjs",
+    "shoot": "node tools/shoot.mjs",
+    "serve": "node tools/serve.mjs 8971"
+  },
+  "comment": [
+    "No dependencies, on purpose. The game runs straight from this folder with no build",
+    "step (AGENTS.md rule 12), and the tools drive Chrome over the DevTools Protocol using",
+    "Node's built-in WebSocket, so a clean clone can run npm test with nothing installed",
+    "and no network. Node 22 or newer."
+  ],
+  "engines": { "node": ">=22" }
+}
