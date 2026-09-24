@@ -19859,6 +19859,97 @@
       else if (a === 'stairs') toggleStairs(nearestFoldStairs());
       else if (a) interactMortar();
     }
+
+    // D-17 / CU-11. Any site can be asked; only one hold timer runs, on the site
+    // that was reachable when E went down.
+    let objEDown = false, objEPressed = false;
+    let objHoldId = null, objHoldSeconds = 0, objCancelId = null, objCancel = null, objDamaged = false;
+    function getObjectiveProps() { return objectiveProps; }
+    function objectiveModalOpen() {
+      return paused || shopOpen || placeMode || buildMode || wheelIsOpen() || hqBriefingOpen
+        || !!scriptedKill || !!(menuCamera && menuCamera.deploying);
+    }
+    function objectiveReach(prop) {
+      const approach = prop.approach;
+      const px = player.position.x, py = player.position.y, pz = player.position.z;
+      const distance = Math.hypot(px - approach.x, pz - approach.z);
+      const dead = gameOver || won || playerHp <= 0;
+      let blockedBy = null;
+      if (dead) blockedBy = 'dead';
+      else if (objectiveModalOpen()) blockedBy = 'modal';
+      else if (Math.abs(py - approach.y) > 1.25) blockedBy = 'height';
+      else if (distance > 1.6) blockedBy = 'distance';
+      else if (actionTarget()) blockedBy = 'busy';
+      else {
+        const ay = py + 0.9, by = approach.y + 0.9;
+        for (const b of builds) {
+          if (b.alive === false) continue;
+          if (segmentHitsBuild(b, px, ay, pz, approach.x, by, approach.z) !== null) { blockedBy = 'wall'; break; }
+        }
+        if (!blockedBy) {
+          for (const s of worldSolids) {
+            if (Math.hypot(s.x - prop.centre.x, s.z - prop.centre.z) < 1.4) continue;
+            if (segmentHitsCylinder(px, ay, pz, approach.x, by, approach.z, s.x, s.z, s.radius, s.y0, s.y1) !== null) { blockedBy = 'wall'; break; }
+          }
+        }
+      }
+      return { approach: { x: approach.x, y: approach.y, z: approach.z }, distance, reachable: !blockedBy, blockedBy };
+    }
+    function armObjectiveHold() {
+      if (objHoldId) return;
+      const props = objectiveProps && objectiveProps.props;
+      let best = null, bestD = 1.6;
+      if (props) for (const pid of Object.keys(props)) {
+        const r = objectiveReach(props[pid]);
+        if (r.reachable && r.distance <= bestD) { best = pid; bestD = r.distance; }
+      }
+      if (best) { objHoldId = best; objHoldSeconds = 0; objCancel = null; objCancelId = null; }
+    }
+    function stepObjectiveInteraction(dt) {
+      const dead = gameOver || won || playerHp <= 0;
+      const modal = objectiveModalOpen();
+      if (objDamaged) {
+        objCancel = dead ? 'death' : 'damage'; objCancelId = objHoldId;
+        objHoldId = null; objHoldSeconds = 0; objDamaged = false;
+      } else if (!objEDown) {
+        if (objHoldId) { objCancel = 'released'; objCancelId = objHoldId; }
+        objHoldId = null; objHoldSeconds = 0;
+      } else if (dead) {
+        objCancel = 'death'; objCancelId = objHoldId; objHoldId = null; objHoldSeconds = 0;
+      } else if (modal) {
+        objCancel = 'modal'; objCancelId = objHoldId; objHoldId = null; objHoldSeconds = 0;
+      } else if (!objHoldId && objEPressed) {
+        const props = objectiveProps && objectiveProps.props;
+        let best = null, bestD = 1.6;
+        if (props) for (const pid of Object.keys(props)) {
+          const r = objectiveReach(props[pid]);
+          if (r.reachable && r.distance <= bestD) { best = pid; bestD = r.distance; }
+        }
+        if (best) { objHoldId = best; objHoldSeconds = 0; objCancel = null; objCancelId = null; }
+      } else if (objHoldId) {
+        const prop = objectiveProps && objectiveProps.props && objectiveProps.props[objHoldId];
+        if (!prop || !objectiveReach(prop).reachable) {
+          objCancel = 'left'; objCancelId = objHoldId; objHoldId = null; objHoldSeconds = 0;
+        } else if (gameStarted && !paused) objHoldSeconds += dt;
+      }
+    }
+    function getObjectiveInteraction(id) {
+      const props = objectiveProps && objectiveProps.props;
+      const prop = props && props[id];
+      if (!prop) return null;
+      const reach = objectiveReach(prop);
+      return {
+        id,
+        approach: reach.approach,
+        distance: reach.distance,
+        reachable: reach.reachable,
+        blockedBy: reach.blockedBy,
+        ePressed: objEPressed,
+        eHeld: objEDown,
+        holdSeconds: id === objHoldId ? objHoldSeconds : 0,
+        cancelled: id === objCancelId ? objCancel : null
+      };
+    }
     // --- Builds: barricades & turrets ---
     const builds = [];
     // === Spatial index of builds =====================================================
@@ -26130,6 +26221,266 @@
       };
     }
 
+    // === GB-16: objectives combat side ========================================
+    // (a) radio defenders once/run; (b) capacity-aware grants; (c) player-damaged
+    // event for hold-E interrupt. ChatGPT owns objective UI/state.
+    const RADIO_OBJECTIVE_ID = 'objective:radio-repair';
+    const RADIO_DEFENDER = {
+      id: RADIO_OBJECTIVE_ID,
+      // Spec fallback centre (CL-6 / GP-8). Live objectiveProps override when present.
+      cx: -149.87, cy: 0.38, cz: -1.15,
+      triggerR: 24,
+      rMin: 8, rMax: 12,
+      minPlayerSep: 8,
+      count: 2,
+      typeKey: 'shambler'
+    };
+    let radioDefendersFired = false;
+    let radioDefendersPending = false;
+    let radioDefendersSpawned = 0;
+    const supplyGrantReceipts = Object.create(null);
+
+    function radioCentre() {
+      try {
+        const props = objectiveProps && objectiveProps.props;
+        const p = props && props[RADIO_OBJECTIVE_ID];
+        if (p && p.centre) return { x: p.centre.x, y: p.centre.y, z: p.centre.z };
+      } catch (_) {}
+      return { x: RADIO_DEFENDER.cx, y: RADIO_DEFENDER.cy, z: RADIO_DEFENDER.cz };
+    }
+
+    function resetObjectiveCombat() {
+      radioDefendersFired = false;
+      radioDefendersPending = false;
+      radioDefendersSpawned = 0;
+      for (const k of Object.keys(supplyGrantReceipts)) delete supplyGrantReceipts[k];
+    }
+
+    function isNavValidSpawn(x, z) {
+      if (!Number.isFinite(x) || !Number.isFinite(z)) return false;
+      if (waterDepthAt(x, z) > 0.35) return false;
+      if (terrainSlope(x, z) > 0.55) return false;
+      try {
+        const k = ffIndexOf(ffPlayer, x, z);
+        if (k >= 0 && ffPlayer.blocked[k]) return false;
+      } catch (_) {}
+      return true;
+    }
+
+    function isOutsideImmediateView(x, z) {
+      const dx = x - player.position.x, dz = z - player.position.z;
+      const d = Math.hypot(dx, dz) || 1;
+      const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
+      const dot = (dx / d) * fx + (dz / d) * fz;
+      return dot < Math.cos(70 * Math.PI / 180);
+    }
+
+    function pickRadioDefenderSeat(cx, cz, taken) {
+      const px = player.position.x, pz = player.position.z;
+      for (let attempt = 0; attempt < 48; attempt++) {
+        const a = Math.random() * Math.PI * 2;
+        const r = RADIO_DEFENDER.rMin + Math.random() * (RADIO_DEFENDER.rMax - RADIO_DEFENDER.rMin);
+        const x = cx + Math.cos(a) * r;
+        const z = cz + Math.sin(a) * r;
+        if (Math.hypot(x - px, z - pz) < RADIO_DEFENDER.minPlayerSep) continue;
+        if (!isOutsideImmediateView(x, z)) continue;
+        if (!isNavValidSpawn(x, z)) continue;
+        let clash = false;
+        for (const t of taken) if (Math.hypot(x - t.x, z - t.z) < 2.2) { clash = true; break; }
+        if (clash) continue;
+        return { x, z };
+      }
+      return null;
+    }
+
+    function trySpawnRadioDefenders() {
+      if (radioDefendersFired && !radioDefendersPending) {
+        return { spawned: 0, deferred: false, reason: 'already' };
+      }
+      const need = RADIO_DEFENDER.count - radioDefendersSpawned;
+      if (need <= 0) {
+        radioDefendersFired = true;
+        radioDefendersPending = false;
+        return { spawned: 0, deferred: false, reason: 'complete' };
+      }
+      const live = zombies.filter((z) => z.alive).length;
+      const room = Math.max(0, MAX_ZOMBIES - live);
+      if (room <= 0) {
+        radioDefendersPending = true;
+        return { spawned: 0, deferred: true, reason: 'capped' };
+      }
+      const c = radioCentre();
+      const taken = [];
+      let spawned = 0;
+      const want = Math.min(need, room);
+      for (let i = 0; i < want; i++) {
+        const seat = pickRadioDefenderSeat(c.x, c.z, taken);
+        if (!seat) {
+          radioDefendersPending = true;
+          return { spawned, deferred: true, reason: 'no-seat', centre: c };
+        }
+        const z = spawnZombie(seat.x, seat.z, RADIO_DEFENDER.typeKey, false, true);
+        if (!z) {
+          radioDefendersPending = true;
+          return { spawned, deferred: true, reason: 'spawn-null', centre: c };
+        }
+        z.objectiveId = RADIO_OBJECTIVE_ID;
+        z.objectiveRole = 'defender';
+        z.fromWave = false;
+        taken.push(seat);
+        spawned++;
+        radioDefendersSpawned++;
+      }
+      if (radioDefendersSpawned >= RADIO_DEFENDER.count) {
+        radioDefendersFired = true;
+        radioDefendersPending = false;
+      } else {
+        radioDefendersPending = true;
+      }
+      return { spawned, deferred: radioDefendersPending, reason: radioDefendersPending ? 'partial' : 'ok', centre: c };
+    }
+
+    function spawnObjectiveDefenders(opts) {
+      const siteId = (opts && opts.siteId) || RADIO_OBJECTIVE_ID;
+      if (siteId !== RADIO_OBJECTIVE_ID && siteId !== 'radio') {
+        return { spawned: 0, deferred: false, reason: 'unsupported-site' };
+      }
+      if (opts && opts.reset) resetObjectiveCombat();
+      return trySpawnRadioDefenders();
+    }
+
+    function tickObjectiveCombat() {
+      if (!gameStarted || gameOver || won) return;
+      if (radioDefendersFired && !radioDefendersPending) return;
+      const c = radioCentre();
+      const d = Math.hypot(player.position.x - c.x, player.position.z - c.z);
+      if (!radioDefendersFired && !radioDefendersPending && d > RADIO_DEFENDER.triggerR) return;
+      trySpawnRadioDefenders();
+    }
+
+    function getRadioDefenderState() {
+      const alive = zombies.filter((z) => z.alive && z.objectiveId === RADIO_OBJECTIVE_ID).length;
+      return {
+        siteId: RADIO_OBJECTIVE_ID,
+        fired: radioDefendersFired,
+        pending: radioDefendersPending,
+        spawned: radioDefendersSpawned,
+        alive,
+        centre: radioCentre()
+      };
+    }
+
+    function listOwnedAmmoPackChoices() {
+      const out = [];
+      for (const c of CALIBER_ORDER) {
+        if (!gunsUsing(c).length) continue;
+        if (c === 'Fuel' && !weaponOwned.flamer) continue;
+        if (c === '60mm' && !buildUnlocked.mortar) continue;
+        const pk = AMMO_PACK[c];
+        if (!pk) continue;
+        out.push({
+          id: 'ammo:' + c,
+          caliber: c,
+          packQty: pk.n,
+          cost: pk.cost,
+          reserve: reserveAmmo[c] | 0,
+          cap: reserveCap(c),
+          weapons: gunsUsing(c).slice()
+        });
+      }
+      if (weaponOwned.chainsaw) {
+        const pk = AMMO_PACK.chainsaw;
+        if (pk) out.push({
+          id: 'ammo:chainsaw',
+          caliber: 'chainsaw',
+          packQty: pk.n,
+          cost: pk.cost,
+          reserve: sawFuel,
+          cap: sawFuelMax(),
+          weapons: ['chainsaw']
+        });
+      }
+      return out;
+    }
+
+    function applyOneSupply(id, qty) {
+      const want = Math.max(0, qty | 0);
+      if (want <= 0) return { id, accepted: 0, remaining: 0 };
+      if (id === 'medkit' || id === 'medpen' || id === 'MedPen' || id === 'medkits') {
+        const space = Math.max(0, MAX_MEDKITS - medkits);
+        const take = Math.min(space, want);
+        medkits += take;
+        return { id: 'medkit', accepted: take, remaining: want - take };
+      }
+      if (id === 'grenade' || id === 'grenades') {
+        const space = Math.max(0, maxGrenades() - grenades);
+        const take = Math.min(space, want);
+        grenades += take;
+        return { id: 'grenade', accepted: take, remaining: want - take };
+      }
+      let cal = id;
+      if (id.startsWith('ammo:')) cal = id.slice(5);
+      if (cal === 'chainsaw' || cal === 'saw') {
+        const space = Math.max(0, sawFuelMax() - sawFuel);
+        const take = Math.min(space, want);
+        sawFuel += take;
+        return { id: 'ammo:chainsaw', accepted: take, remaining: want - take };
+      }
+      if (!AMMO_PACK[cal]) return { id, accepted: 0, remaining: want, error: 'unknown' };
+      const cap = reserveCap(cal);
+      const have = reserveAmmo[cal] | 0;
+      const space = Math.max(0, cap - have);
+      const take = Math.min(space, want);
+      reserveAmmo[cal] = have + take;
+      return { id: 'ammo:' + cal, accepted: take, remaining: want - take };
+    }
+
+    function grantSupply(opts) {
+      const receiptId = opts && opts.receiptId;
+      const items = (opts && opts.items) || [];
+      const source = (opts && opts.source) || 'objective';
+      if (!receiptId) return { ok: false, error: 'receiptId-required' };
+      if (supplyGrantReceipts[receiptId]) {
+        return Object.assign({}, supplyGrantReceipts[receiptId], { alreadyApplied: true });
+      }
+      const accepted = [];
+      const remaining = [];
+      for (const it of items) {
+        const r = applyOneSupply(it.id, it.qty == null ? 1 : it.qty);
+        if (r.accepted > 0) accepted.push({ id: r.id, qty: r.accepted });
+        if (r.remaining > 0) remaining.push({ id: r.id, qty: r.remaining });
+      }
+      try { updateAmmoHud(); } catch (_) {}
+      const result = { ok: true, receiptId, source, accepted, remaining, alreadyApplied: false };
+      supplyGrantReceipts[receiptId] = result;
+      return result;
+    }
+
+    function grantBuildBlueprint(id) {
+      if (!id || typeof id !== 'string') return { id, alreadyOwned: false, granted: false, error: 'bad-id' };
+      if (buildUnlocked[id]) return { id, alreadyOwned: true, granted: false };
+      buildUnlocked[id] = true;
+      return { id, alreadyOwned: false, granted: true };
+    }
+
+    /** Test helper for GB-16 (d): cross the 60s stuck threshold once on a guardian. */
+    function pulseGuardianFailsafeForTest(z) {
+      if (!z || z.typeKey !== 'guardian' || !z.alive) return null;
+      const dProg = Math.hypot(z.mesh.position.x - player.position.x, z.mesh.position.z - player.position.z);
+      z.guardianProgressT = 0;
+      z.guardianStuckRepath = (z.guardianStuckRepath || 0) + 1;
+      if (z.guardianStuckRepath <= 1) {
+        z.unstickT = 1.5;
+        z.flankSide = -(z.flankSide || 1);
+        z.guardianBestDist = dProg;
+        return { stage: 'repath', stuckRepath: z.guardianStuckRepath, retreat: !!z.guardianRetreat };
+      }
+      z.guardianRetreat = true;
+      z.guardianStuckRepath = 0;
+      return { stage: 'retreat', stuckRepath: z.guardianStuckRepath, retreat: !!z.guardianRetreat };
+    }
+
+
     function startPrep() {
       if (day >= 1 && gameStarted) {
         showBanner('DAY ' + day + ' CLEARED', 'Use the prep — repair, build, resupply, turn in skulls' + (comboBest >= 5 ? ' · best streak ' + comboBest : ''), 3, '#7cdea0');
@@ -27061,6 +27412,13 @@
       playerHp -= toHp;
       sinceHurt = 0;
       hurtFlash = soaked > toHp ? 0.12 : 0.2;
+      // GB-16 (c): ChatGPT hold-E radio repair listens; any landed hit (incl. armour soak) interrupts.
+      objDamaged = true;
+      publishUI('player-damaged', {
+        cause, amount, toHp, soaked,
+        hp: playerHp, armor: playerArmor,
+        fatal: playerHp <= 0
+      });
       const attackerPos = attacker?.mesh?.position || attacker?.position;
       let dx = attackerPos ? attackerPos.x - player.position.x : Math.sin(aimYaw);
       let dz = attackerPos ? attackerPos.z - player.position.z : Math.cos(aimYaw);
@@ -29193,7 +29551,7 @@
       if (e.code === 'KeyL') { toggleFlashlight(); e.preventDefault(); }
       if (e.code === 'KeyH') { useMedkit(); e.preventDefault(); }
       if (e.code === 'KeyQ') { if (!e.repeat && !openWheel('weapon')) cycleWeapon(1); e.preventDefault(); }
-      if (e.code === 'KeyE') { if (!e.repeat) doAction(); e.preventDefault(); }
+      if (e.code === 'KeyE') { objEDown = true; if (!e.repeat) { objEPressed = true; armObjectiveHold(); doAction(); } e.preventDefault(); }
       if (e.code === 'KeyB') { if (!e.repeat && !openWheel('build')) toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
@@ -29233,6 +29591,7 @@
         updateScrapMark(null);
         e.preventDefault();
       }
+      if (e.code === 'KeyE') objEDown = false;
       if (e.code in keys) {
         keys[e.code] = false;
         e.preventDefault();
@@ -35340,6 +35699,7 @@
       guardianFirstBloodDone = false;
       guardianNightActive = false;
       guardianCaveIndex = -1;
+      resetObjectiveCombat();
       resetPerks();
       resetEconomy();
       bank = 40; // seed money: one decision in the first prep, not a shopping spree
@@ -35734,6 +36094,7 @@
       }
       playerFrameStart.copy(player.position);
       let dt = Math.min(clock.getDelta(), 0.05);
+      try { stepObjectiveInteraction(dt); } catch (e) {}
       try { updateAudioDirection(dt); } catch (_) {}
       if (menuCamera.deploying) {
         menuCamera.advance(dt);
@@ -36035,6 +36396,7 @@
         updateWaveSystem(dt);
         updateTurrets(dt);
         updateZombies(dt);
+        tickObjectiveCombat();
         updateCorpses(dt);
         updateCombo(dt);
         updateHitPing(dt);
@@ -36428,11 +36790,12 @@
         sun.target.position.copy(menuCamera.focus);
       }
       applyShotView();
+      objEPressed = false;
       skyDome.position.copy(camera.position);
       renderFrame();
       if (showPerf && !window.TT) {
         window.TT = {
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
@@ -36471,7 +36834,7 @@
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
