@@ -66,6 +66,10 @@ try{
  assert(await page.locator('#win').isVisible());
  const after=await page.evaluate(()=>({day:TT.getDay(),bank:TT.getBank(),log:localStorage.getItem('tt_death_log'),body:document.body.className}));
  assert.deepEqual(after,before);assert.deepEqual(errors,[]);
+ // Wait for the restored DOM to paint before capturing the compositor image.
+ await page.waitForFunction(()=>Number(getComputedStyle(document.querySelector('#win .card')).opacity)>.95);
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ await page.waitForTimeout(150);
  await page.screenshot({path:path.join(shots,'restored.png')});
  await page.locator('[data-replay="tentacle"]').click();await page.waitForTimeout(400);
  assert(await page.evaluate(()=>TT.isScriptedDeathReplay()&&TT.getScriptedKill().t>0),'catalogue starts actual pit replay');
@@ -73,5 +77,8 @@ try{
  assert(await page.locator('#win').isVisible());
  assert(await page.locator('[data-replay="tentacle"]').evaluate(el=>el===document.activeElement));
  assert.deepEqual(await page.evaluate(()=>({day:TT.getDay(),bank:TT.getBank(),log:localStorage.getItem('tt_death_log'),body:document.body.className})),before);
+ await page.waitForFunction(()=>Number(getComputedStyle(document.querySelector('#win .card')).opacity)>.95);
+ assert.deepEqual(errors,[]);
+ await page.screenshot({path:path.join(shots,'aborted.png')});
  console.log('PASS GP-13 production UI and natural playback, no bank/day/profile changes. Stand-in renderer; real graphics need crew QA.');
 }finally{if(browser)await browser.close();server.close();}

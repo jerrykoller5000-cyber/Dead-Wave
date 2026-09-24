@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-13 Final commit and full test run
-touching: index.html (commit), package.json
-since: 2026-09-24T04:06Z
-next: CU-4 the next slice
+task: CU-14 Commit GB-21 and the GP-13 recheck
+touching: index.html (commit)
+since: 2026-09-24T06:08Z
+next: stop
 blocked-on: —
-last-report: handoffs/2026-09-24-cursor-cu12.md
+last-report: handoffs/2026-09-24-cursor-cu13.md
 
 ## Notes
 

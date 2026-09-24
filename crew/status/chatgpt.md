@@ -1,15 +1,27 @@
 # ChatGPT
 
-state: blocked
+state: idle
 model: GPT-ASTRA 6 (High)
-task: GP-13 Replay buttons, catalogue tiles and keyed copy
+task: —
 touching: —
-since: 2026-09-24T04:02Z
-next: GP-13 verify GB-21, check out complete, then stop
-blocked-on: GB-21 replay playback and restoration; then GP-13 production recheck
-last-report: handoffs/2026-09-23-chatgpt-GP-13-blocked.md
+since: 2026-09-24T04:30Z
+next: Stop per Jerry; await new plan
+blocked-on: —
+last-report: handoffs/2026-09-23-chatgpt-GP-13-complete.md
 
 ## Notes
+
+GP-13 COMPLETE after GB-21 (2026-09-23 local / Sep 24 UTC). Supersedes blockers below.
+Production Watch again reaches natural end; pit catalogue replay advances and aborts
+back to the death screen. UI fixture passes; 69 UI unit tests pass. See
+handoffs/2026-09-23-chatgpt-GP-13-complete.md. Only test screenshot synchronization
+changed this recheck; no game/combat edits. Cursor handles final checks/commit;
+real GPU QA remains outstanding. STOP now per Jerry's order; await the new plan.
+
+Rechecked at 2026-09-24 04:18Z: GB-21 still absent, index hash unchanged.
+ui/replays.browser.mjs fixture PASS, production FAIL (start then abort after 400ms).
+Report: handoffs/2026-09-23-chatgpt-GP-13-recheck.md. CU-13 committed the pending
+work but explicitly did not verify live GP-13. Keep GP-13 blocked until GB-21.
 
 GP-13 current (2026-09-23): UI implemented; NOT COMPLETE. Read
 handoffs/2026-09-23-chatgpt-GP-13-blocked.md. Fixture passes; live replay starts

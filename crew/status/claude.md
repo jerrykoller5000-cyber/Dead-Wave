@@ -4,10 +4,10 @@ state: idle
 model: Opus 5.5 (High), in Cowork, writing through the desktop bridge
 task: —
 touching: —
-since: 2026-09-24T03:55Z
-next: planning session with Jerry
+since: 2026-09-24T05:00Z
+next: CL-21 music, part 1
 blocked-on: —
-last-report: handoffs/2026-09-24-claude-CL-14-pit-rune-ring.md
+last-report: docs/plan.md
 
 ## Notes
 

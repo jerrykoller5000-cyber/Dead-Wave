@@ -28776,10 +28776,15 @@
       const replay = !!(opts && opts.replay);
       if (scriptedKill) return;
       if (!replay && (cine || gameOver || won || !gameStarted)) return;
+      // GB-21 / D-18: capture death-screen pose/camera/classes/cine BEFORE any mutation
+      // so finish/abort can put them back exactly (including after an abort).
+      let replayRestore = null;
+      if (replay) replayRestore = snapshotScriptedDeathReplay();
       if (replay && cine) {
-        // Burial / other cine still up on the death screen — clear it so the replay owns the shot.
+        // Burial / other cine still up on the death screen — pause it so the replay owns the shot.
+        // Object kept on restore so cineCamera can take over again after.
         cine = null;
-        document.body.classList.remove('cine', 'cinebars');
+        document.body.classList.remove('cine', 'cinebars', 'cinepanel');
         if (cineFadeEl) cineFadeEl.style.opacity = '0';
       } else if (cine) return;
       if (shopOpen) closeShop();
@@ -28790,6 +28795,33 @@
       AudioSys.chainsawStop();
       scopeAmt = 0;
       rollT = 0;
+      // GB-21: stage the marine at the grab spot before p0 is captured (replay only).
+      if (replay) {
+        if (kind === 'cave' && cave) {
+          const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw);
+          const rx = Math.cos(cave.yaw), rz = -Math.sin(cave.yaw);
+          const skew = cave.design ? cave.design.skew * 1.2 : 0;
+          // Mouth lip, same frame as checkScriptedKillTriggers (lz just inside the lip).
+          const lx = skew, lz = 0.15;
+          const x = cave.x + rx * lx + fx * lz;
+          const z = cave.z + rz * lx + fz * lz;
+          player.position.set(x, sampleHeight(x, z), z);
+          player.rotation.y = cave.yaw;
+          aimYaw = cave.yaw;
+        } else if (kind === 'tentacle') {
+          // Deterministic approach inside grabR (no world seeding — fixed angle).
+          const ang = 0.7;
+          const r = LAKE_HOLE.grabR * 0.72;
+          const x = LAKE_HOLE.x + Math.sin(ang) * r;
+          const z = LAKE_HOLE.z + Math.cos(ang) * r;
+          player.position.set(x, Math.min(sampleHeight(x, z), LAKE.level - 0.85), z);
+          player.rotation.y = ang + Math.PI;
+          aimYaw = ang + Math.PI;
+        }
+        marine.visible = true;
+        marine.rotation.set(0, 0, 0);
+        marine.position.y = -ROLL_PIVOT_Y;
+      }
       // He may arrive mid-swim, pitched flat by the swimming pose; put him back on his
       // feet once so the grab starts from a clean stance, then holster the weapon.
       updateMarinePose(0.016, false, false, false);
@@ -28853,7 +28885,7 @@
       if (replay) {
         sk.replay = true;
         sk.replayId = (opts && opts.replayId) || (kind === 'cave' ? 'cave' : 'tentacle');
-        sk.restore = snapshotScriptedDeathReplay();
+        sk.restore = replayRestore || snapshotScriptedDeathReplay();
         for (const z of zombies) {
           if (z.mesh) { sk.restore.zombieVis.push({ z, vis: !!z.mesh.visible }); z.mesh.visible = false; }
         }
@@ -28885,7 +28917,9 @@
     }
     function updateScriptedKill(dt) {
       if (!scriptedKill) return;
-      if (gameOver || won) { abortScriptedKill(); return; }   // the house fell mid-scene
+      // Live kill only: house fell / endGame mid-scene. Replay runs on the death
+      // screen with gameOver already true (GB-21 / D-18).
+      if (!scriptedKill.replay && (gameOver || won)) { abortScriptedKill(); return; }
       scriptedKill.t += dt;
       updateScriptedKillRig(dt);
       if (scriptedKill && scriptedKill.t >= 8.9) finishScriptedKill();
@@ -29273,12 +29307,14 @@
         look: camLook.clone(),
         bodyCine: document.body.classList.contains('cine'),
         bodyBars: document.body.classList.contains('cinebars'),
+        bodyPanel: document.body.classList.contains('cinepanel'),
         weaponVis: weaponMount.visible,
         marineVis: marine.visible,
         fade: cineFadeEl ? String(cineFadeEl.style.opacity || '0') : '0',
         lastDeathCause,
         lastDeathPlace,
         playerHp,
+        cine, // burial cine object (paused for replay); restored so cineCamera wins again
         zombieVis: []
       };
     }
@@ -29287,8 +29323,11 @@
       player.position.copy(r.playerPos);
       camera.position.copy(r.camPos);
       camLook.copy(r.look);
+      // Put the burial cine back so cineCamera overrides cam-follow after restore (GB-21).
+      cine = r.cine || null;
       document.body.classList.toggle('cine', !!r.bodyCine);
       document.body.classList.toggle('cinebars', !!r.bodyBars);
+      document.body.classList.toggle('cinepanel', !!r.bodyPanel);
       weaponMount.visible = !!r.weaponVis;
       marine.visible = !!r.marineVis;
       if (cineFadeEl) cineFadeEl.style.opacity = r.fade;

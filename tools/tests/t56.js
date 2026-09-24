@@ -1,6 +1,7 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  const near = (a, b, eps) => Math.abs(a - b) <= eps;
   const snapTt = () => {
     const o = {};
     for (let i = 0; i < localStorage.length; i++) {
@@ -24,6 +25,20 @@
     ok(a.director === b.director, label + ': waveDirector frozen');
     ok(a.tt === b.tt, label + ': all tt_* keys frozen');
     ok(a.cause === b.cause, label + ': lastDeathCause frozen');
+  };
+  // GB-21: player / camera / body classes must match pre-replay after end or abort.
+  const snapPose = () => ({
+    px: T.player.position.x, py: T.player.position.y, pz: T.player.position.z,
+    cx: T.camera.position.x, cy: T.camera.position.y, cz: T.camera.position.z,
+    cine: document.body.classList.contains('cine'),
+    bars: document.body.classList.contains('cinebars')
+  });
+  const samePose = (a, b, label) => {
+    ok(near(a.px, b.px, 0.05) && near(a.py, b.py, 0.05) && near(a.pz, b.pz, 0.05),
+      label + ': player pose restored');
+    ok(near(a.cx, b.cx, 0.15) && near(a.cy, b.cy, 0.15) && near(a.cz, b.cz, 0.15),
+      label + ': camera restored');
+    ok(a.cine === b.cine && a.bars === b.bars, label + ': body cine/cinebars restored');
   };
   try {
     ok(typeof T.listScriptedDeathReplays === 'function', 'listScriptedDeathReplays exported');
@@ -65,24 +80,50 @@
     };
     window.addEventListener('dw-game', onEv);
 
+    // --- GB-21: natural end with real frames ---
+    const poseBeforeEnd = snapPose();
     const r1 = T.beginScriptedDeathReplay('cave');
     ok(!!r1 && r1.ok === true, 'begin cave replay ok');
     ok(T.isScriptedDeathReplay() === true, 'isScriptedDeathReplay true mid-replay');
-    T.finishScriptedKill();
-    await wait(40);
-    ok(T.isScriptedDeathReplay() === false, 'isScriptedDeathReplay false after end');
+    // Grab spot: marine should leave the death-screen pose immediately.
+    {
+      const mid = snapPose();
+      const moved = Math.hypot(mid.px - poseBeforeEnd.px, mid.pz - poseBeforeEnd.pz) > 1.0;
+      ok(moved, 'cave replay stages marine at grab spot');
+    }
+    // Let the cine run to its natural end (~8.9 s); poll so we do not force-finish.
+    let naturalEnd = false;
+    for (let i = 0; i < 120; i++) {
+      await wait(100);
+      if (!T.isScriptedDeathReplay() && phases.indexOf('end') >= 0) { naturalEnd = true; break; }
+    }
+    ok(naturalEnd, 'cave replay reached natural end via real frames');
     ok(phases[0] === 'start' && phases.indexOf('end') >= 0, 'dw-game start+end phases');
+    ok(T.isScriptedDeathReplay() === false, 'isScriptedDeathReplay false after end');
+    // One more frame so cineCamera / restore settle after finish.
+    await wait(80);
+    samePose(poseBeforeEnd, snapPose(), 'after natural end');
     same(before, snapRun(), 'after finish');
 
+    // --- GB-21: abort mid-way with real frames ---
     phases = [];
     const beforeAbort = snapRun();
+    const poseBeforeAbort = snapPose();
     const r2 = T.beginScriptedDeathReplay('tentacle');
     ok(!!r2 && r2.ok === true, 'begin tentacle replay ok');
     ok(T.isScriptedDeathReplay() === true, 'replay true before abort');
+    // Let ~2 s of real frames run so the abort is mid-cine, not instant.
+    let survived = true;
+    for (let i = 0; i < 20; i++) {
+      await wait(100);
+      if (!T.isScriptedDeathReplay()) { survived = false; break; }
+    }
+    ok(survived && T.isScriptedDeathReplay() === true, 'tentacle replay survived ~2s of real frames');
     T.abortScriptedKill();
-    await wait(40);
+    await wait(80);
     ok(T.isScriptedDeathReplay() === false, 'replay false after abort');
     ok(phases[0] === 'start' && phases.indexOf('abort') >= 0, 'dw-game start+abort phases');
+    samePose(poseBeforeAbort, snapPose(), 'after abort');
     same(beforeAbort, snapRun(), 'after abort');
 
     window.removeEventListener('dw-game', onEv);
