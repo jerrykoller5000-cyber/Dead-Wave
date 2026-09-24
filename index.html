@@ -713,7 +713,6 @@
   <link rel="stylesheet" href="ui/wave-preview.css">
   <link rel="stylesheet" href="ui/prep-checklist.css">
   <link rel="stylesheet" href="ui/objectives.css">
-  <link rel="stylesheet" href="ui/replays.css">
 </head>
 <body class="opening frontend">
   <div id="opening" data-phase="video" aria-label="Dead Wave opening">
@@ -986,7 +985,6 @@
     import { createPrepRepairReader } from './ui/prep-repairs.js';
     import { createGuardianReward } from './game/economy.js';
     import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
-    import { mountDeathReplays } from './ui/replays.js';
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
     } from './core/math.js';
@@ -1019,7 +1017,6 @@
     const winTitleEl = document.getElementById('winTitle');
     const winMsgEl = document.getElementById('winMsg');
     const againBtn = document.getElementById('again');
-    let deathReplayUI = null;
     const ammoEl = document.getElementById('ammo');
     const reloadPromptEl = document.getElementById('reloadPrompt');
     const ammoCountEl = document.getElementById('ammoCount');
@@ -1137,6 +1134,24 @@
     // worst hovering just above the frame budget.
     let perfLastMs = 0, perfWorstMs = 0, perfHitches = 0, perfShownWorst = 0;
     const HITCH_MS = 50;
+    const perfSamples = [];
+    function perfWindow() {
+      const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+      while (perfSamples.length && now - perfSamples[0].t > 1000) perfSamples.shift();
+      if (!perfSamples.length) return { fps: 0, low: 0, worst: 0, hitches: perfHitches, frames: 0 };
+      const ms = perfSamples.map((s) => s.ms);
+      const avg = ms.reduce((a, b) => a + b, 0) / ms.length;
+      const slow = ms.slice().sort((a, b) => b - a);
+      const n = Math.max(1, Math.ceil(slow.length * 0.01));
+      const lowMs = slow.slice(0, n).reduce((a, b) => a + b, 0) / n;
+      return { fps: 1000 / avg, low: 1000 / lowMs, worst: slow[0], hitches: perfHitches, frames: ms.length };
+    }
+    function resetPerf() {
+      perfSamples.length = 0;
+      perfLastMs = 0;
+      perfWorstMs = 0;
+      perfHitches = 0;
+    }
     // Hardware line for the overlay. The GPU string comes from a throwaway WebGL
     // context because it is the one query that works the same whichever backend the
     // game itself came up on; WebGPU's own adapter info is async and less specific.
@@ -16404,10 +16419,10 @@
     // --- Ammunition is held by calibre, not by gun -----------------------------
     // "Uzi rounds" and "Pistol rounds" were two separate piles of the same 9mm, which
     // meant buying the same ammunition twice and a kiosk tab that grew a line per gun.
-    // The reserve is keyed by what the round actually is, so a box of 9mm feeds the
-    // pistol and the Uzi alike, and the tab lists eight calibres instead of a dozen guns.
+    // The reserve is keyed by the round. GB-23: pistol is .45; Uzi stays on 9mm.
+    // Shared calibres (12ga, etc.) still feed every gun that eats them.
     const AMMO_CALIBER = {
-      pistol: '9mm', uzi: '9mm',
+      pistol: '.45', uzi: '9mm',
       m4: '5.56mm',
       ak: '7.62mm',
       shotgun: '12ga', aa12: '12ga',
@@ -16418,7 +16433,7 @@
       flamer: 'Fuel'
     };
     // Tab order, and the guns each one feeds (built once, below).
-    const CALIBER_ORDER = ['9mm', '5.56mm', '7.62mm', '.44', '.338', '12ga', '40mm', '7.62 belt', 'Fuel', '60mm'];
+    const CALIBER_ORDER = ['.45', '9mm', '5.56mm', '7.62mm', '.44', '.338', '12ga', '40mm', '7.62 belt', 'Fuel', '60mm'];
     const CALIBER_UNIT = { Fuel: 'fuel', '60mm': 'shells', '40mm': 'grenades', '12ga': 'shells' };
     function caliberOf(w) { return AMMO_CALIBER[w] || w; }
     function caliberUnit(c) { return CALIBER_UNIT[c] || 'rounds'; }
@@ -16428,21 +16443,21 @@
     // rounds of 9mm against a day's income of hundreds), so upkeep never entered into
     // a buying decision. It should sting a little to hose a wave with the minigun.
     const AMMO_PACK = {
-      '9mm': { n: 60, cost: 14 }, '5.56mm': { n: 60, cost: 20 }, '7.62mm': { n: 60, cost: 24 },
+      '.45': { n: 36, cost: 12 }, '9mm': { n: 60, cost: 14 }, '5.56mm': { n: 60, cost: 20 }, '7.62mm': { n: 60, cost: 24 },
       '.44': { n: 12, cost: 15 }, '.338': { n: 10, cost: 28 }, '12ga': { n: 20, cost: 20 },
       '40mm': { n: 6, cost: 44 }, '7.62 belt': { n: 300, cost: 48 }, 'Fuel': { n: 60, cost: 24 },
       '60mm': { n: 4, cost: 34 }, chainsaw: { n: 45, cost: 18 }
     };
     // Reserve caps: a handful of magazines' worth, so you can't front-load a whole run.
     const RESERVE_CAP = {
-      '9mm': 220, '5.56mm': 180, '7.62mm': 180, '.44': 36, '.338': 30,
+      '.45': 120, '9mm': 220, '5.56mm': 180, '7.62mm': 180, '.44': 36, '.338': 30,
       '12ga': 110, '40mm': 18, '7.62 belt': 900, 'Fuel': 240, '60mm': 16
     };
     const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
     let weaponOwned = { pistol: true };
-    let reserveAmmo = { '9mm': 36, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
+    let reserveAmmo = { '.45': 36, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
     let extMag = {};                   // weapon key -> true once bought
     let sawFuel = SAW_FUEL_BASE;
     let sawTankUpgraded = false;
@@ -16497,7 +16512,7 @@
     }
     function resetEconomy() {
       weaponOwned = { pistol: true };
-      reserveAmmo = { '9mm': 36, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
+      reserveAmmo = { '.45': 36, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
       extMag = {};
       dualOwned = {};
       dualActive = false;
@@ -19025,6 +19040,20 @@
         try { devConsoleInput.blur(); } catch (_) {}
       }
     }
+    function spawnMegaswarm(n) {
+      const count = Math.max(1, n | 0);
+      const rnd = mulberry32(15);
+      const cx = 0, cz = 18;
+      let made = 0;
+      for (let i = 0; i < count; i++) {
+        const a = rnd() * Math.PI * 2;
+        const r = 4 + rnd() * 18;
+        const z = spawnZombie(cx + Math.cos(a) * r, cz + Math.sin(a) * r, 'shambler', true, true);
+        if (z) made++;
+      }
+      resetPerf();
+      return made;
+    }
     function runDevCommand(raw) {
       const cmd = String(raw || '').replace(/[`~]/g, '').trim().toLowerCase().replace(/\s+/g, ' ');
       if (!cmd) return;
@@ -19059,6 +19088,10 @@
       } else if (cmd === 'godmode off') {
         devGodMode = false;
         showBanner('GODMODE OFF', '', 1.8, '#ffb347');
+      } else if (cmd === 'megaswarm' || cmd.indexOf('megaswarm ') === 0) {
+        const n = cmd === 'megaswarm' ? 500 : (parseInt(cmd.slice(10), 10) || 500);
+        const made = spawnMegaswarm(n);
+        showBanner('MEGASWARM', made + ' shamblers', 2.2, '#ffb347');
       } else if (cmd === 'bench') {
         devBench();
       } else if (cmd === 'nodead') {
@@ -23640,6 +23673,24 @@
       const sx = b.x, sz = b.z, sy = b.mesh.position.y + 1.1;
       let dx = aimTarget.x - sx, dz = aimTarget.z - sz;
       let range = Math.hypot(dx, dz) || 0.001;
+      // GB-24: clamp yaw swing so aim cannot whip into the rear hemisphere. Aiming
+      // "back at the marine" used to spin him around the plate every frame (he is
+      // always re-anchored behind the muzzle); with RMB zoom the camera chased it.
+      {
+        // While crewed, clamp against the camera heading so the tube cannot aim
+        // back into the third-person view (arc reading as "at the marine").
+        const prevYaw = (mortarMounted === b) ? camYawCurrent : b.mesh.rotation.y;
+        let ang = Math.atan2(dx, dz);
+        let dAng = ang - prevYaw;
+        while (dAng > Math.PI) dAng -= Math.PI * 2;
+        while (dAng < -Math.PI) dAng += Math.PI * 2;
+        const maxSwing = Math.PI * 0.55;
+        if (Math.abs(dAng) > maxSwing) {
+          ang = prevYaw + Math.sign(dAng) * maxSwing;
+          dx = Math.sin(ang) * range;
+          dz = Math.cos(ang) * range;
+        }
+      }
       const clamped = Math.max(MORTAR_MIN_RANGE, Math.min(MORTAR_MAX_RANGE, range));
       dx *= clamped / range; dz *= clamped / range; range = clamped;
       const tx = sx + dx, tz = sz + dz;
@@ -23718,6 +23769,7 @@
     function mountMortar(b) {
       if (mortarMounted || mortarCarried || placeMode || !canReachMortar(b)) return;
       mortarMounted = b;
+      mortarMountYaw = b.mesh.rotation.y;
       player.position.x = b.x - Math.sin(b.mesh.rotation.y) * 1.1;
       player.position.z = b.z - Math.cos(b.mesh.rotation.y) * 1.1;
       mouseFireHeld = false; fireHeld = false;
@@ -23806,6 +23858,7 @@
     let mortarLoadT = 0;
     // The bearing the marine faces while crewing: the tube's, not the reticle's.
     let mortarFaceYaw = 0;
+    let mortarMountYaw = 0; // GB-24: aim clamped to this bearing while crewed
     // Manning a mortar used to leave the marine standing at ease beside it with his
     // gun simply hidden. He now crouches into the tube with both hands at the muzzle,
     // and reaches up and drops a shell in on every shot.
@@ -23860,8 +23913,11 @@
         {
           const yaw = m.mesh.rotation.y;
           m.mesh.updateMatrixWorld(true);
-          player.position.x = m.x - Math.sin(yaw) * 1.05;
-          player.position.z = m.z - Math.cos(yaw) * 1.05;
+          const tx = m.x - Math.sin(yaw) * 1.05;
+          const tz = m.z - Math.cos(yaw) * 1.05;
+          const k = Math.min(1, 10 * dt);
+          player.position.x += (tx - player.position.x) * k;
+          player.position.z += (tz - player.position.z) * k;
           // At the level the tube stands on — a mortar can sit on a platform now, and
           // pinning the crew to ground height dragged him off the deck and under it.
           player.position.y = playerGroundY(player.position.x, player.position.z, m.mesh.position.y + STEP_UP);
@@ -28772,21 +28828,8 @@
       for (const m of root.userData.extraMats || []) m.dispose();
     }
     const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG'];
-    function beginScriptedKill(kind, cave, opts) {
-      const replay = !!(opts && opts.replay);
-      if (scriptedKill) return;
-      if (!replay && (cine || gameOver || won || !gameStarted)) return;
-      // GB-21 / D-18: capture death-screen pose/camera/classes/cine BEFORE any mutation
-      // so finish/abort can put them back exactly (including after an abort).
-      let replayRestore = null;
-      if (replay) replayRestore = snapshotScriptedDeathReplay();
-      if (replay && cine) {
-        // Burial / other cine still up on the death screen — pause it so the replay owns the shot.
-        // Object kept on restore so cineCamera can take over again after.
-        cine = null;
-        document.body.classList.remove('cine', 'cinebars', 'cinepanel');
-        if (cineFadeEl) cineFadeEl.style.opacity = '0';
-      } else if (cine) return;
+    function beginScriptedKill(kind, cave) {
+      if (scriptedKill || cine || gameOver || won || !gameStarted) return;
       if (shopOpen) closeShop();
       if (wheelIsOpen()) closeWheel(false);
       cancelPlaceMode();
@@ -28795,41 +28838,12 @@
       AudioSys.chainsawStop();
       scopeAmt = 0;
       rollT = 0;
-      // GB-21: stage the marine at the grab spot before p0 is captured (replay only).
-      if (replay) {
-        if (kind === 'cave' && cave) {
-          const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw);
-          const rx = Math.cos(cave.yaw), rz = -Math.sin(cave.yaw);
-          const skew = cave.design ? cave.design.skew * 1.2 : 0;
-          // Mouth lip, same frame as checkScriptedKillTriggers (lz just inside the lip).
-          const lx = skew, lz = 0.15;
-          const x = cave.x + rx * lx + fx * lz;
-          const z = cave.z + rz * lx + fz * lz;
-          player.position.set(x, sampleHeight(x, z), z);
-          player.rotation.y = cave.yaw;
-          aimYaw = cave.yaw;
-        } else if (kind === 'tentacle') {
-          // Deterministic approach inside grabR (no world seeding — fixed angle).
-          const ang = 0.7;
-          const r = LAKE_HOLE.grabR * 0.72;
-          const x = LAKE_HOLE.x + Math.sin(ang) * r;
-          const z = LAKE_HOLE.z + Math.cos(ang) * r;
-          player.position.set(x, Math.min(sampleHeight(x, z), LAKE.level - 0.85), z);
-          player.rotation.y = ang + Math.PI;
-          aimYaw = ang + Math.PI;
-        }
-        marine.visible = true;
-        marine.rotation.set(0, 0, 0);
-        marine.position.y = -ROLL_PIVOT_Y;
-      }
       // He may arrive mid-swim, pitched flat by the swimming pose; put him back on his
       // feet once so the grab starts from a clean stance, then holster the weapon.
       updateMarinePose(0.016, false, false, false);
       weaponMount.visible = false;
-      if (!replay) {
       lastDeathCause = kind === 'cave' ? 'caveguard' : 'tentacles';
       lastDeathPlace = kind === 'cave' ? cave.name : 'Underwater Pit';
-      }
       document.body.classList.add('cine', 'cinebars');
       syncReticleVisibility();
       const ud = marine.userData;
@@ -28882,14 +28896,6 @@
         const ol = Math.hypot(ox, oz) || 1; ox /= ol; oz /= ol;
         sk.out = { x: ox, z: oz };
       }
-      if (replay) {
-        sk.replay = true;
-        sk.replayId = (opts && opts.replayId) || (kind === 'cave' ? 'cave' : 'tentacle');
-        sk.restore = replayRestore || snapshotScriptedDeathReplay();
-        for (const z of zombies) {
-          if (z.mesh) { sk.restore.zombieVis.push({ z, vis: !!z.mesh.visible }); z.mesh.visible = false; }
-        }
-      }
       scriptedKill = sk;
       updateScriptedKillRig(0);
     }
@@ -28917,9 +28923,7 @@
     }
     function updateScriptedKill(dt) {
       if (!scriptedKill) return;
-      // Live kill only: house fell / endGame mid-scene. Replay runs on the death
-      // screen with gameOver already true (GB-21 / D-18).
-      if (!scriptedKill.replay && (gameOver || won)) { abortScriptedKill(); return; }
+      if (gameOver || won) { abortScriptedKill(); return; }
       scriptedKill.t += dt;
       updateScriptedKillRig(dt);
       if (scriptedKill && scriptedKill.t >= 8.9) finishScriptedKill();
@@ -29259,11 +29263,6 @@
     function finishScriptedKill() {
       const sk = cleanupScriptedKill();
       if (!sk) return;
-      if (sk.replay) {
-        applyScriptedDeathReplayRestore(sk.restore);
-        publishUI('scripted-death-replay', { id: sk.replayId, phase: 'end' });
-        return;
-      }
       // For the cave: leave the body where it was thrown. For the lake it stays afloat
       // over the hole; the burial scene parks the (hidden) player somewhere sensible.
       if (sk.kind === 'cave' && sk.landAt) { player.position.copy(sk.landAt); player.position.y = sampleHeight(sk.landAt.x, sk.landAt.z); }
@@ -29275,18 +29274,10 @@
       if (cine) { cine.t = Math.max(cine.t, CINE.black - 0.01); if (cineFadeEl) cineFadeEl.style.opacity = '1'; }
     }
     function abortScriptedKill() {
-      const sk = scriptedKill;
-      const wasReplay = !!(sk && sk.replay);
-      const restore = sk && sk.restore;
-      const replayId = sk && sk.replayId;
       // resetGame / mode change while the scene ran: put everything back, no death.
       if (cleanupScriptedKill() && !cine) {
         document.body.classList.remove('cine', 'cinebars');
         if (cineFadeEl) cineFadeEl.style.opacity = '0';
-      }
-      if (wasReplay && restore) {
-        applyScriptedDeathReplayRestore(restore);
-        publishUI('scripted-death-replay', { id: replayId, phase: 'abort' });
       }
     }
     // Trigger checks, run from the live-sim block in tick(): stepping into a cave
@@ -29294,101 +29285,7 @@
     // the only exemption — a roll or armour does not save you.
     let sinkholeRippleT = 0;
     
-    // === GB-20 / D-18: scripted-death replays (combat side) ==================
-    // ChatGPT owns Watch-again chrome (GP-13). Combat owns cine + state freeze.
-    const SCRIPTED_DEATH_REPLAYS = [
-      { id: 'cave', causeKey: 'caveguard', labelKey: 'replay.cave.title', descriptionKey: 'replay.cave.blurb' },
-      { id: 'tentacle', causeKey: 'tentacles', labelKey: 'replay.tentacle.title', descriptionKey: 'replay.tentacle.blurb' }
-    ];
-    function snapshotScriptedDeathReplay() {
-      return {
-        playerPos: player.position.clone(),
-        camPos: camera.position.clone(),
-        look: camLook.clone(),
-        bodyCine: document.body.classList.contains('cine'),
-        bodyBars: document.body.classList.contains('cinebars'),
-        bodyPanel: document.body.classList.contains('cinepanel'),
-        weaponVis: weaponMount.visible,
-        marineVis: marine.visible,
-        fade: cineFadeEl ? String(cineFadeEl.style.opacity || '0') : '0',
-        lastDeathCause,
-        lastDeathPlace,
-        playerHp,
-        cine, // burial cine object (paused for replay); restored so cineCamera wins again
-        zombieVis: []
-      };
-    }
-    function applyScriptedDeathReplayRestore(r) {
-      if (!r) return;
-      player.position.copy(r.playerPos);
-      camera.position.copy(r.camPos);
-      camLook.copy(r.look);
-      // Put the burial cine back so cineCamera overrides cam-follow after restore (GB-21).
-      cine = r.cine || null;
-      document.body.classList.toggle('cine', !!r.bodyCine);
-      document.body.classList.toggle('cinebars', !!r.bodyBars);
-      document.body.classList.toggle('cinepanel', !!r.bodyPanel);
-      weaponMount.visible = !!r.weaponVis;
-      marine.visible = !!r.marineVis;
-      if (cineFadeEl) cineFadeEl.style.opacity = r.fade;
-      lastDeathCause = r.lastDeathCause;
-      lastDeathPlace = r.lastDeathPlace;
-      playerHp = r.playerHp;
-      updateHpHud();
-      for (const row of r.zombieVis || []) {
-        if (row.z && row.z.mesh) row.z.mesh.visible = !!row.vis;
-      }
-      velX = velZ = 0; vy = 0;
-    }
-    function listScriptedDeathReplays() {
-      const seen = loadDeathLog();
-      return SCRIPTED_DEATH_REPLAYS.map((r) => ({
-        id: r.id,
-        causeKey: r.causeKey,
-        unlocked: seen.indexOf(r.causeKey) >= 0,
-        labelKey: r.labelKey,
-        descriptionKey: r.descriptionKey
-      }));
-    }
-    function isScriptedDeathReplay() {
-      return !!(scriptedKill && scriptedKill.replay);
-    }
-    function canReplayScriptedDeath(id) {
-      const meta = SCRIPTED_DEATH_REPLAYS.find((r) => r.id === id);
-      if (!meta) return false;
-      if (loadDeathLog().indexOf(meta.causeKey) < 0) return false;
-      if (scriptedKill) return false;
-      // Burial cine may still be up on the death screen; that is fine for Watch again.
-      if (cine && !gameOver) return false;
-      if (won) return false;
-      if (gameStarted && !gameOver) return false;
-      return true;
-    }
-    function pickScriptedDeathReplayCave(opts) {
-      if (opts && opts.caveIndex != null && POI.caves[opts.caveIndex]) return POI.caves[opts.caveIndex];
-      if (lastDeathPlace) {
-        const byName = POI.caves.find((c) => c && c.name === lastDeathPlace);
-        if (byName) return byName;
-      }
-      return POI.caves.find((c) => c && c.theme === 'chalk') || POI.caves[0] || null;
-    }
-    function beginScriptedDeathReplay(id, opts) {
-      if (id !== 'cave' && id !== 'tentacle') return { ok: false, reason: 'unknown' };
-      if (scriptedKill) return { ok: false, reason: 'busy' };
-      if (won || (gameStarted && !gameOver)) return { ok: false, reason: 'alive' };
-      // Burial cine on the death screen is cleared inside beginScriptedKill(replay).
-      const meta = SCRIPTED_DEATH_REPLAYS.find((r) => r.id === id);
-      if (!meta || loadDeathLog().indexOf(meta.causeKey) < 0) return { ok: false, reason: 'locked' };
-      const kind = id === 'cave' ? 'cave' : 'tentacle';
-      const cave = kind === 'cave' ? pickScriptedDeathReplayCave(opts || {}) : null;
-      if (kind === 'cave' && !cave) return { ok: false, reason: 'unknown' };
-      beginScriptedKill(kind, cave, { replay: true, replayId: id });
-      if (!scriptedKill || !scriptedKill.replay) return { ok: false, reason: 'busy' };
-      publishUI('scripted-death-replay', { id, phase: 'start' });
-      return { ok: true };
-    }
-
-function checkScriptedKillTriggers(dt) {
+    function checkScriptedKillTriggers(dt) {
       sinkholeRippleT -= dt;
       if (sinkholeRippleT <= 0) {
         // The tell: the water over the hole never sits quite still.
@@ -29457,10 +29354,6 @@ function checkScriptedKillTriggers(dt) {
         log.appendChild(grid);
         winMsgEl.appendChild(log);
       }
-      if (!deathReplayUI) deathReplayUI = mountDeathReplays({ panel: winEl, again: againBtn,
-        list: listScriptedDeathReplays, canReplay: canReplayScriptedDeath,
-        begin: beginScriptedDeathReplay, isPlaying: isScriptedDeathReplay });
-      deathReplayUI.update({ cause, victory });
       // A death is buried first (see startDeathCine); the panel comes up over the grave.
       if (!victory && gameStarted) {
         winTitleEl.textContent = 'Rest easy, ' + (session.name || 'Unknown Marine');
@@ -36339,6 +36232,7 @@ function checkScriptedKillTriggers(dt) {
         const nowMs = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
         if (perfLastMs) {
           const frameMs = nowMs - perfLastMs;
+          perfSamples.push({ t: nowMs, ms: frameMs });
           if (frameMs > perfWorstMs) perfWorstMs = frameMs;
           if (frameMs > HITCH_MS) perfHitches++;
         }
@@ -36417,7 +36311,7 @@ function checkScriptedKillTriggers(dt) {
 
       // FOV lerp before aim so raycast uses current zoom FOV
       {
-        const wantZoom = zoomHeld && gameStarted && !gameOver && !won && !reloading && !placeMode && !buildMode;
+        const wantZoom = zoomHeld && gameStarted && !gameOver && !won && !reloading && !placeMode && !buildMode && !mortarMounted;
         const sniperZoom = currentWeapon === 'sniper';
         // Sniper RMB is a real scope: full first-person, eye pressed to the glass,
         // rather than just a tighter third-person pull-in (see the camera block
@@ -37049,15 +36943,15 @@ function checkScriptedKillTriggers(dt) {
       renderFrame();
       if (showPerf && !window.TT) {
         window.TT = {
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
-          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
+          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, listScriptedDeathReplays, canReplayScriptedDeath, beginScriptedDeathReplay, isScriptedDeathReplay, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
@@ -37084,7 +36978,7 @@ function checkScriptedKillTriggers(dt) {
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, buyExtMag, GEAR, WEAPON_PRICE, AMMO_PACK, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, buyExtMag, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
@@ -37130,6 +37024,7 @@ function checkScriptedKillTriggers(dt) {
           const tris = info.triangles != null ? info.triangles : 0;
           perfShownWorst = perfWorstMs;
           const hw = hardwareInfo();
+          const snap = perfWindow();
           perfEl.textContent =
             'gpu   ' + hw.gpu +
             '\ncpu   ' + (hw.cores ? hw.cores + ' threads' : '—') + (hw.mem ? ' · ' + hw.mem + 'GB' : '') +
@@ -37137,9 +37032,10 @@ function checkScriptedKillTriggers(dt) {
               Math.round(window.innerHeight * (window.devicePixelRatio || 1)) +
               ' @' + (window.devicePixelRatio || 1).toFixed(2) + 'x' +
             '\nrend  ' + rendererBackend +
-            '\nfps   ' + Math.round(perfFrames / perfAccum) +
-            '\nworst ' + perfShownWorst.toFixed(0) + 'ms' +
-            '\nhitch ' + perfHitches +
+            '\nfps   ' + Math.round(snap.fps) +
+            '\nlow   ' + Math.round(snap.low) +
+            '\nworst ' + snap.worst.toFixed(0) + 'ms' +
+            '\nhitch ' + snap.hitches +
             '\ndraws ' + draws +
             '\ntris  ' + (tris / 1000).toFixed(0) + 'k' +
             '\nzombs ' + zombies.length;
