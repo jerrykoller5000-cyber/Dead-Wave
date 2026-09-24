@@ -40,7 +40,8 @@ async function startMatch(page) {
   })()`);
   const prep = await page.waitFor(`window.TT.getPhase && window.TT.getPhase() === 'prep'`, { timeout: 30000 });
   if (!prep) throw new Error('match never reached prep');
-  await page.evaluate('new Promise(r => setTimeout(r, 10000))');
+  const landed = await page.waitFor(`!document.body.classList.contains('deploying')`, { timeout: 180000 });
+  if (!landed) throw new Error('insertion never finished');
 }
 
 try {
@@ -61,11 +62,13 @@ try {
   } else if (SCENARIO === 'day5') {
     await startMatch(page);
     const wave = await page.evaluate(`(() => {
-      TT.setDay(5);
+      TT.setDay(4);
+      TT.startPrep();
       TT.skipPrep();
-      return { day: TT.getDay(), phase: TT.getPhase() };
+      const preview = TT.getWavePreview(TT.getDay());
+      return { day: TT.getDay(), phase: TT.getPhase(), preview };
     })()`);
-    console.log(`bench: day ${wave.day} phase ${wave.phase}`);
+    console.log(`bench: day ${wave.day} phase ${wave.phase} preview ${JSON.stringify(wave.preview)}`);
   } else if (SCENARIO === 'build') {
     await startMatch(page);
     const placed = await page.evaluate(`(() => {
@@ -73,17 +76,20 @@ try {
       const p = TT.player.position;
       const gx = TT.gridIndex(p.x), gz = TT.gridIndex(p.z);
       TT.setPlaceMode('wall');
-      let n = 0;
-      for (let i = 0; i < 10; i++) {
-        const tx = TT.gridCentre(gx + 2 + i), tz = TT.gridCentre(gz + 3);
-        const c = TT.camera.position;
+      const c = TT.camera.position;
+      const tz = TT.gridCentre(gz + 3);
+      const aim = (gxCell) => {
+        const tx = TT.gridCentre(gxCell);
         const ty = TT.sampleHeight(tx, tz);
         TT.setAimRay(c.x, c.y, c.z, tx - c.x, ty - c.y, tz - c.z);
-        const before = TT.builds.length;
-        TT.beginPlaceClick();
-        if (TT.builds.length > before) n++;
-      }
-      return n;
+      };
+      aim(gx - 4);
+      TT.beginPlaceClick();
+      aim(gx + 5);
+      TT.updateGhostPreview();
+      const before = TT.builds.length;
+      TT.commitBuildDrag();
+      return TT.builds.length - before;
     })()`);
     console.log(`bench: placed ${placed} walls`);
   } else {
@@ -93,11 +99,18 @@ try {
   await page.evaluate('TT.resetPerf()');
   const t0 = Date.now();
   let last = null;
+  let paced = null;
   while (Date.now() - t0 < SECONDS * 1000) {
     last = await page.evaluate('TT.perfSnapshot()');
+    if (last && last.fps > 0) paced = last;
     await new Promise((r) => setTimeout(r, 1000));
   }
-  const snap = last || { fps: 0, low: 0, worst: 0, hitches: 0 };
+  const snap = {
+    fps: (paced || last || { fps: 0 }).fps,
+    low: (paced || last || { low: 0 }).low,
+    worst: (last || { worst: 0 }).worst,
+    hitches: (last || { hitches: 0 }).hitches
+  };
   console.log(`fps    ${snap.fps.toFixed(1)}`);
   console.log(`low    ${snap.low.toFixed(1)}   (1% low)`);
   console.log(`worst  ${snap.worst.toFixed(1)} ms`);
