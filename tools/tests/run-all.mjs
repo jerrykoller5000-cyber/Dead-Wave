@@ -27,7 +27,7 @@ const ROOT = path.resolve(HERE, '..', '..');
 // Which tests belong to whom, for the failure report. AGENTS.md rule 13: failures are
 // assigned, never deleted or weakened.
 const OWNERS = [
-  [/^t(11|12|13|15|17|18|21|23|24|25|29|34)$/, 'Grokbot (builds, wheel, turrets, pillars)'],
+  [/^t(11|12|13|15|17|18|21|23|24|25|29|34|49|51)$/, 'Grokbot (builds, wheel, turrets, pillars)'],
   [/^t(39|40|41|42|44|45)$|^tfish$/, 'Claude (world, trees, fire, caves, water, fish)'],
   [/^t(0|1|2|3|4|5|6|6a|7|8|9|10)$/, 'Grokbot (combat core)'],
   [/^t(14|16|19|20|22|26|27|28|30|31|32|33|35|36|37|38)$/, 'unassigned — triage']
@@ -55,6 +55,9 @@ function buildTestPage() {
   // test.html sits in tools/tests/, so the game's own relative paths need a root-relative
   // prefix to keep resolving against the repo root.
   out = out.replace(/(\s(?:src|href)=")(?!https?:|\/|data:|#)/g, '$1/');
+  // Inline module imports are resolved from test.html's folder. Point them at the repo root.
+  // The import map's "./fakethree.mjs" is not an import-from, so it stays next to test.html.
+  out = out.replace(/from (['"])\.\//g, 'from $1/');
   const file = path.join(HERE, 'test.html');
   fs.writeFileSync(file, out);
   return file;

@@ -708,6 +708,10 @@
     }
   </style>
   <link rel="stylesheet" href="assets/intro/opening.css">
+  <link rel="stylesheet" href="ui/loading.css">
+  <link rel="stylesheet" href="ui/coach.css">
+  <link rel="stylesheet" href="ui/wave-preview.css">
+  <link rel="stylesheet" href="ui/prep-checklist.css">
 </head>
 <body class="opening frontend">
   <div id="opening" data-phase="video" aria-label="Dead Wave opening">
@@ -854,9 +858,6 @@
           <div class="settingRow">
             <span>Screen</span><button id="fullscreenToggle" class="settingBtn" type="button">Fullscreen: off</button>
           </div>
-          <div class="settingRow" hidden aria-hidden="true">
-            <span>Prep</span><button id="skipPrepToggle" class="settingBtn" type="button">Skip prep time: off</button>
-          </div>
           <div class="settingRow">
             <span>Overlay</span><button id="perfHudToggle" class="settingBtn" type="button">FPS &amp; hardware: off</button>
           </div>
@@ -958,6 +959,10 @@
     entries below have to be present and agree.
   -->
   <script src="assets/intro/opening.js"></script>
+  <script type="module" src="ui/loading.js"></script>
+  <script type="module" src="ui/coach.js"></script>
+  <script type="module" src="ui/wave-preview.js"></script>
+  <script type="module" src="ui/prep-checklist.js"></script>
   <script src="assets/intro/menu-camera.js"></script>
   <script src="assets/intro/airborne.js"></script>
   <script src="assets/world/campsites.js"></script>
@@ -974,6 +979,10 @@
   </script>
   <script type="module">
     import * as THREE from 'three';
+    import { createPrepRepairReader } from './ui/prep-repairs.js';
+    import {
+      hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
+    } from './core/math.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -3884,69 +3893,7 @@
     // instead of a cut-off circle. Everything beyond LAND_MAX is scenery.
     const TERRAIN_RADIUS = 430;
 
-    // --- Noise primitives -------------------------------------------------------
-    // Value noise with quintic smoothing. Cheap, deterministic, no tables to ship.
-    function hash2(ix, iz) {
-      let h = Math.imul(ix, 374761393) + Math.imul(iz, 668265263);
-      h = Math.imul(h ^ (h >>> 13), 1274126177);
-      return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
-    }
-
-    function vnoise(x, z) {
-      const xi = Math.floor(x), zi = Math.floor(z);
-      const xf = x - xi, zf = z - zi;
-      const u = xf * xf * xf * (xf * (xf * 6 - 15) + 10);
-      const v = zf * zf * zf * (zf * (zf * 6 - 15) + 10);
-      const a = hash2(xi, zi), b = hash2(xi + 1, zi);
-      const c = hash2(xi, zi + 1), d = hash2(xi + 1, zi + 1);
-      const top = a + (b - a) * u;
-      const bot = c + (d - c) * u;
-      return top + (bot - top) * v;
-    }
-
-    // Fractal brownian motion, returns -1..1.
-    function fbm(x, z, oct, lac = 2.03, gain = 0.5) {
-      let sum = 0, amp = 0.5, norm = 0, fx = x, fz = z;
-      for (let i = 0; i < oct; i++) {
-        sum += amp * (vnoise(fx, fz) * 2 - 1);
-        norm += amp;
-        amp *= gain;
-        fx *= lac; fz *= lac;
-      }
-      return sum / norm;
-    }
-
-    // Ridged multifractal, returns 0..1. Creates creased ridge lines rather than blobs.
-    function ridged(x, z, oct, lac = 2.07, gain = 0.5) {
-      let sum = 0, amp = 0.5, norm = 0, fx = x, fz = z;
-      for (let i = 0; i < oct; i++) {
-        const n = 1 - Math.abs(vnoise(fx, fz) * 2 - 1);
-        sum += amp * n * n;
-        norm += amp;
-        amp *= gain;
-        fx *= lac; fz *= lac;
-      }
-      return sum / norm;
-    }
-
-    function smoothstep01(t) {
-      if (t <= 0) return 0;
-      if (t >= 1) return 1;
-      return t * t * (3 - 2 * t);
-    }
-    function smoothBand(edge0, edge1, x) {
-      return smoothstep01((x - edge0) / (edge1 - edge0));
-    }
-
-    function distPointToSeg(px, pz, ax, az, bx, bz) {
-      const abx = bx - ax, abz = bz - az;
-      const apx = px - ax, apz = pz - az;
-      const ab2 = abx * abx + abz * abz || 1e-8;
-      let t = (apx * abx + apz * abz) / ab2;
-      t = Math.max(0, Math.min(1, t));
-      const qx = ax + abx * t, qz = az + abz * t;
-      return Math.hypot(px - qx, pz - qz);
-    }
+    // Noise, smoothing, segment distance and mulberry32 live in core/math.js.
 
     // --- World layout -----------------------------------------------------------
     // A lake in the south-west, fed by a river that drops out of the eastern highlands.
@@ -4402,6 +4349,26 @@
       return w === null ? 0 : Math.max(0, w - sampleHeight(x, z));
     }
 
+    // Everything combat needs to know about the water at a point, in one call:
+    //   level    the water surface's height, or null on dry ground
+    //   depth    metres of water over the ground (0 when dry)
+    //   wading   0 on dry ground, rising to 1 at SWIM_DEPTH, where a body starts to swim
+    //   current  { x, z } in m/s: the river's flow here (0, 0 on the lake and on land)
+    //   speed    the length of current
+    // A bridge or dock over the water isn't taken into account: check the deck first
+    // (platformHeightAt) if the body could be standing on one.
+    const SWIM_DEPTH = 1.3;
+    function waterAt(x, z) {
+      const level = waterLevelAt(x, z);
+      const depth = level === null ? 0 : Math.max(0, level - sampleHeight(x, z));
+      let cx = 0, cz = 0, speed = 0;
+      if (depth > 0) {
+        speed = waterCurrentAt(x, z);
+        if (speed > 0) { const [dx, dz] = riverFlowDir(riverProject(x, z).s); cx = dx * speed; cz = dz * speed; }
+      }
+      return { level, depth, wading: Math.min(1, depth / SWIM_DEPTH), current: { x: cx, z: cz }, speed };
+    }
+
     // Surface normal from finite differences — used to lay decals/props flat on slopes.
     const AXIS_Z = new THREE.Vector3(0, 0, 1);
     const AXIS_Y = new THREE.Vector3(0, 1, 0);
@@ -4458,14 +4425,6 @@
       if (d <= maxR || d < 1e-8) return { x, z };
       const s = maxR / d;
       return { x: x * s, z: z * s };
-    }
-    function mulberry32(a) {
-      return function() {
-        let t = (a += 0x6D2B79F5);
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
     }
 
     // === Points of interest ===
@@ -7787,19 +7746,82 @@
       ctx.fillStyle = glow; ctx.fillRect(0, 0, 64, 64);
     }
     const caveEyeTexture = new THREE.CanvasTexture(caveEyeCanvas);
+    let _caveEyesLast = 0;
     function updateCaveEyes() {
       const now = performance.now() * 0.001;
+      const dt = _caveEyesLast ? Math.min(0.1, now - _caveEyesLast) : 0;
+      _caveEyesLast = now;
       for (const c of POI.caves) {
         if (!c.eyeRig) continue;
+        const warn = c.warnLevel || 0;
         const distance = Math.hypot(player.position.x - c.x, player.position.z - c.z);
-        const reveal = THREE.MathUtils.smoothstep(27 - distance, 0, 19);
+        // Close up the eyes fade in as always. A warned cave (caveWarn) shows them from
+        // much farther away, brighter, and at level 2 wide open and pulsing.
+        const near = THREE.MathUtils.smoothstep(27 - distance, 0, 19);
+        const far = warn === 2 ? THREE.MathUtils.smoothstep(140 - distance, 0, 40)
+          : warn === 1 ? THREE.MathUtils.smoothstep(70 - distance, 0, 30) : 0;
+        const reveal = Math.max(near, far);
+        const bright = warn === 2 ? 1.9 + 0.35 * Math.sin(now * 7) : warn === 1 ? 1.35 : 1;
+        // From across the map a 0.2 m eye is under a pixel; the halo grows with distance.
+        const grow = warn > 0 ? 1 + Math.max(0, distance - 27) / 45 : 1;
         const blinking = (now + c.eyePhase) % 4.7;
-        const lid = blinking < 0.105 || (blinking > 0.27 && blinking < 0.35) ? 0.06 : 1;
+        const lid = warn === 2 ? 1 : blinking < 0.105 || (blinking > 0.27 && blinking < 0.35) ? 0.06 : 1;
         c.eyeRig.visible = reveal > 0.01 && !(scriptedKill && scriptedKill.cave === c);
         for (const eye of c.eyeSprites) {
-          eye.material.opacity = reveal * (eye.userData.halo ? 0.47 : 0.92) * lid;
-          eye.scale.y = eye.userData.baseHeight * (0.1 + 0.9 * lid);
+          const ud = eye.userData;
+          if (ud.baseWidth === undefined) ud.baseWidth = eye.scale.x;
+          const s = ud.halo ? grow * (1 + (bright - 1) * 0.8) : Math.min(grow, 1.6);
+          eye.material.opacity = Math.min(1, reveal * (ud.halo ? 0.47 : 0.92) * lid * bright);
+          eye.scale.x = ud.baseWidth * s;
+          eye.scale.y = ud.baseHeight * s * (0.1 + 0.9 * lid);
         }
+        // Dust drifting out of the mouth: a thin haze at level 1, a steady stream at 2.
+        if (warn > 0 && dt > 0) {
+          c.warnDustT = (c.warnDustT || 0) - dt;
+          if (c.warnDustT <= 0) {
+            c.warnDustT = warn === 2 ? 0.12 : 0.7;
+            caveMouthDust(c, warn === 2 ? 3 : 1, warn === 2 ? 1.1 : 0.5);
+          }
+        }
+      }
+    }
+
+    // === Cave warnings (for the wave director) =====================================
+    // caveWarn(cave, level). `cave` is a POI.caves object, its index, or its id
+    // ('cave:<theme>', e.g. 'cave:wet'). Levels:
+    //   0  off
+    //   1  this cave is getting ready: eyes seen from ~70 m and brighter, a haze of dust
+    //   2  the wave is coming out of it now: bright, staring eyes seen from ~140 m, a
+    //      burst of dust and then a steady stream
+    // Setting the level a cave already has does nothing; a level holds until you set
+    // another. Each change fires a window 'dw-cave-warn' event
+    // { id, index, level } for the minimap. Returns false for an unknown cave.
+    function findCave(cave) {
+      if (cave && typeof cave === 'object') return POI.caves.includes(cave) ? cave : null;
+      if (typeof cave === 'number') return POI.caves[cave] || null;
+      if (typeof cave === 'string') { const t = cave.replace(/^cave:/, ''); return POI.caves.find((c) => c.theme === t) || null; }
+      return null;
+    }
+    function caveWarn(cave, level) {
+      const c = findCave(cave);
+      if (!c) return false;
+      const lv = Math.max(0, Math.min(2, Math.round(+level || 0)));
+      if ((c.warnLevel || 0) === lv) return true;
+      c.warnLevel = lv;
+      c.warnDustT = 0;
+      if (lv === 2) caveMouthDust(c, 26, 1.6);
+      try { window.dispatchEvent(new CustomEvent('dw-cave-warn', { detail: { id: 'cave:' + c.theme, index: POI.caves.indexOf(c), level: lv } })); } catch (_) {}
+      return true;
+    }
+    function caveMouthDust(c, count, power) {
+      const L = caveLocal(c), w = (c.design && c.design.w) || 3;
+      for (let i = 0; i < count; i++) {
+        const [x, z] = L.toWorld((Math.random() - 0.5) * w * 1.2, 0.3 + Math.random() * 1.2);
+        const out = (0.6 + Math.random() * 1.4) * power, side = (Math.random() - 0.5) * 0.8 * power;
+        spawnMote(x, c.gy + 0.1 + Math.random() * 0.4, z, dustMat, {
+          vx: L.fx * out + L.rx * side, vy: 0.25 + Math.random() * 0.5 * power, vz: L.fz * out + L.rz * side,
+          grav: 0.6, drag: 1.3, life: 1.4 + Math.random() * 1.2, scale: 1.4 + Math.random() * 1.6, grow: true
+        });
       }
     }
 
@@ -9461,9 +9483,26 @@
       return ({ ranger: 'RANGER CAMP', hikers: 'HIKERS CAMP', trapper: 'TRAPPER CAMP' })[c.style] || 'CAMPSITE';
     }
     // Every live blip, in whatever projection the caller hands in.
+    const uiCaveWarnings = new Map();
+    window.addEventListener('dw-cave-warn', ({ detail }) => {
+      if (!detail || !Number.isInteger(detail.index) || detail.index < 0) return;
+      if (detail.level === 1 || detail.level === 2) uiCaveWarnings.set(detail.index, detail.level);
+      else uiCaveWarnings.delete(detail.index);
+    });
     function drawMapBlips(ctx, toMap, sz) {
+      for (const [index, level] of uiCaveWarnings) {
+        const cave = POI.caves[index]; if (!cave) continue;
+        const p = toMap(cave.x, cave.z); if (!p) continue;
+        const radius = (7 + (1 + Math.sin(performance.now() * (level === 2 ? .006 : .003))) * 2) * sz;
+        ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = level === 2 ? '#ff755e' : '#ead399'; ctx.lineWidth = 2 * sz; ctx.stroke(); ctx.restore();
+      }
       for (const b of builds) { const p = toMap(b.x, b.z); if (p) mapSquare(ctx, p, '#5ad8ff', 4 * sz); }
       if (house.present) { const p = toMap(house.group.position.x, house.group.position.z); if (p) mapSquare(ctx, p, '#7cdea0', 9 * sz); }
+      if (skullBag.count > 0) {
+        const p = toMap(HQ_WINDOW_FRONT.x, HQ_WINDOW_FRONT.z);
+        if (p) { ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, 11 * sz, 0, Math.PI * 2); ctx.strokeStyle = '#ead399'; ctx.lineWidth = 2 * sz; ctx.stroke(); ctx.restore(); }
+      }
       { const p = toMap(KIOSK.x, KIOSK.z); if (p) mapSquare(ctx, p, '#ffd24a', 7 * sz); }
       for (const s of supplyDrops) {
         if (s.state === 'gone') continue;
@@ -15141,21 +15180,6 @@
       geo.computeBoundingSphere();
       return geo;
     }
-    // Cheap deterministic 3-D value noise for lumpy clumps and bark streaks.
-    function hash3(x, y, z) {
-      let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263) ^ Math.imul(z | 0, 1274126177);
-      h = Math.imul(h ^ (h >>> 13), 1103515245);
-      return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
-    }
-    function vnoise3(x, y, z) {
-      const x0 = Math.floor(x), y0 = Math.floor(y), z0 = Math.floor(z);
-      const fx = x - x0, fy = y - y0, fz = z - z0;
-      const sx = fx * fx * (3 - 2 * fx), sy = fy * fy * (3 - 2 * fy), sz = fz * fz * (3 - 2 * fz);
-      const L = (a, b, t) => a + (b - a) * t;
-      const c = (i, j, k) => hash3(x0 + i, y0 + j, z0 + k);
-      return L(L(L(c(0, 0, 0), c(1, 0, 0), sx), L(c(0, 1, 0), c(1, 1, 0), sx), sy),
-               L(L(c(0, 0, 1), c(1, 0, 1), sx), L(c(0, 1, 1), c(1, 1, 1), sx), sy), sz);
-    }
 
     // Unit geosphere: an icosahedron split once (80 faces), as index triples into a
     // shared vertex list so a clump's displacement keeps it watertight.
@@ -15873,6 +15897,264 @@
       for (const rock of rocks) if (rock.alive) rock.mesh.visible = true;
     }
     updateLandPropVisibility();
+
+    // === Tree batches (CL-10) =====================================================
+    // Every tree used to be two draws (trunk, canopy) whether it stood 5 m or 240 m
+    // away: about 860 of the scene's draws were trees. Far trees never move, burn or
+    // fade, so they are drawn from merged copies instead: the map is cut into 64 m
+    // cells, and each cell holds one wood mesh and one canopy mesh, baked in world
+    // space, with the same shared tree materials (so no new pipelines).
+    //
+    // A tree is "live", drawn from its own meshes exactly as before, while it is within
+    // the shadow square around the player (sway, fade, shadows and every hit happen
+    // there), or from the moment anything about it changes: shot, burnt, felled,
+    // trimmed, faded, hidden, moved or removed. Going live collapses the tree's vertex
+    // range in its cell to a point (degenerate triangles draw nothing); going back
+    // rewrites the range from the tree's own geometry. A tree only goes back once it is
+    // far away, pristine, and has never changed or has been through restoreTree.
+    //
+    // Nothing else in the game needs to know: the tree's group, meshes and state stay
+    // where they always were. Only its trunk and canopy meshes are hidden while its
+    // batch copy draws it. ?trees=single turns batching off.
+    const TREE_BATCH_OFF = /[?&]trees=single(&|=|$)/i.test(location.search) || CANOPY_LEGACY;
+    const TB_CELL = 64;
+    // Live inside SHADOW_NEAR + 4 (the square the shadow LOD uses), back to the batch
+    // outside SHADOW_NEAR + 10. Read at run time: SHADOW_NEAR is declared further down.
+    const TB_LIVE_PAD_IN = 4, TB_LIVE_PAD_OUT = 10;
+    const TB_MOVES_PER_FRAME = 12;
+    let tbFrame = 0;
+    const treeBatchCells = new Map();
+    const treeBatchMembers = [];
+    let treeBatchesBuilt = false;
+    const _tbNM = new THREE.Matrix3();
+
+    // Everything that could make a tree look different from its batch copy. Written
+    // into a reused array, so the per-frame check allocates nothing.
+    const TB_SNAP_N = 20;
+    const _tbScratch = new Array(TB_SNAP_N);
+    function tbSnapshot(t, out = new Array(TB_SNAP_N)) {
+      const g = t.group;
+      out[0] = t.alive; out[1] = t.falling; out[2] = !!t.stump; out[3] = !!t.log;
+      out[4] = t.leafHealth; out[5] = t.health; out[6] = t.burnT || 0; out[7] = t.smoulder || 0;
+      out[8] = t.trimStage || 0; out[9] = !!t.canopyTransparent; out[10] = g.visible; out[11] = g.parent;
+      out[12] = g.position.x; out[13] = g.position.y; out[14] = g.position.z;
+      out[15] = g.rotation.x; out[16] = g.rotation.y; out[17] = g.rotation.z;
+      out[18] = t.canopy.scale.x; out[19] = t.leafHiddenCount || 0;
+      return out;
+    }
+    function tbSame(a, b) {
+      for (let i = 0; i < TB_SNAP_N; i++) if (a[i] !== b[i]) return false;
+      return true;
+    }
+    // The meshes a batch copies. Crown wood rides on the canopy group, so it is baked
+    // with the canopy at rest (the breeze is live-only).
+    function tbParts(t) {
+      const wood = [t.trunkMesh];
+      for (const m of t.woodMeshes || []) if (m !== t.trunkMesh) wood.push(m);
+      return { wood, leaf: t.canopyMeshes ? t.canopyMeshes.slice() : [] };
+    }
+    function tbVertCount(list) { let n = 0; for (const m of list) n += m.geometry.attributes.position.count; return n; }
+
+    function tbNewCell(key) {
+      return { key, wood: { n: 0, mesh: null, mat: treeWoodMat }, leaf: { n: 0, mesh: null, mat: treeCanopyMat }, members: [] };
+    }
+    function tbAlloc(part) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(part.n * 3), 3));
+      geo.setAttribute('normal', new THREE.BufferAttribute(new Float32Array(part.n * 3), 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(part.n * 3), 3));
+      geo.setAttribute('ember', new THREE.BufferAttribute(new Float32Array(part.n), 1));
+      return geo;
+    }
+    // Writes one tree's meshes into its range, in world space, canopy at rest.
+    function tbWrite(m, part, start, list) {
+      const g = m.tree;
+      const rz = g.canopy.rotation.z, rx = g.canopy.rotation.x;
+      g.canopy.rotation.z = 0; g.canopy.rotation.x = 0;
+      g.group.updateMatrixWorld(true);
+      const geo = part.mesh.geometry;
+      const P = geo.attributes.position.array, N = geo.attributes.normal.array;
+      const C = geo.attributes.color.array, E = geo.attributes.ember.array;
+      let o = start;
+      for (const mesh of list) {
+        const a = mesh.geometry.attributes;
+        const pos = a.position.array, nrm = a.normal ? a.normal.array : null;
+        const col = a.color ? a.color.array : null, emb = a.ember ? a.ember.array : null;
+        // Matrix maths inlined: 1.7 million vertices go through here at load, and a
+        // Vector3 call per vertex is several times slower than plain arithmetic.
+        const e = mesh.matrixWorld.elements;
+        const q = _tbNM.getNormalMatrix(mesh.matrixWorld).elements;
+        const n = a.position.count;
+        for (let i = 0; i < n; i++) {
+          const k = i * 3, w = (o + i) * 3;
+          const x = pos[k], y = pos[k + 1], z = pos[k + 2];
+          P[w] = e[0] * x + e[4] * y + e[8] * z + e[12];
+          P[w + 1] = e[1] * x + e[5] * y + e[9] * z + e[13];
+          P[w + 2] = e[2] * x + e[6] * y + e[10] * z + e[14];
+          if (nrm) {
+            const nx = nrm[k], ny = nrm[k + 1], nz = nrm[k + 2];
+            let ax = q[0] * nx + q[3] * ny + q[6] * nz, ay = q[1] * nx + q[4] * ny + q[7] * nz, az = q[2] * nx + q[5] * ny + q[8] * nz;
+            const l = Math.hypot(ax, ay, az) || 1;
+            N[w] = ax / l; N[w + 1] = ay / l; N[w + 2] = az / l;
+          } else { N[w] = 0; N[w + 1] = 1; N[w + 2] = 0; }
+          if (col) { C[w] = col[k]; C[w + 1] = col[k + 1]; C[w + 2] = col[k + 2]; } else { C[w] = C[w + 1] = C[w + 2] = 1; }
+          E[o + i] = emb ? emb[i] : 0;
+        }
+        o += n;
+      }
+      g.canopy.rotation.z = rz; g.canopy.rotation.x = rx; // matrices refresh with the next frame
+    }
+    function tbTouch(part, start, count, all) {
+      const attrs = all ? ['position', 'normal', 'color', 'ember'] : ['position'];
+      for (const name of attrs) {
+        const a = part.mesh.geometry.attributes[name];
+        // Only this tree's range goes up (three clears the ranges after each upload).
+        if (typeof a.addUpdateRange === 'function') a.addUpdateRange(start * a.itemSize, count * a.itemSize);
+        a.needsUpdate = true;
+      }
+    }
+    // Hides the tree in its cell: every vertex of its range to one point.
+    function tbCollapse(part, start, count) {
+      if (!count) return;
+      const P = part.mesh.geometry.attributes.position.array;
+      const x = P[start * 3], y = P[start * 3 + 1], z = P[start * 3 + 2];
+      for (let i = start; i < start + count; i++) { P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z; }
+      tbTouch(part, start, count, false);
+    }
+    function tbShowOwn(m, on) {
+      for (const mesh of m.wood) mesh.visible = on;
+      for (const mesh of m.leaf) mesh.visible = on;
+    }
+    function tbGoLive(m, why) {
+      if (!m.inBatch) return;
+      m.inBatch = false;
+      m.tree._tbInBatch = false;
+      if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
+      tbCollapse(m.cell.wood, m.woodStart, m.woodCount);
+      tbCollapse(m.cell.leaf, m.leafStart, m.leafCount);
+      tbShowOwn(m, true);
+    }
+    function tbGoBatch(m) {
+      if (m.inBatch) return;
+      tbWrite(m, m.cell.wood, m.woodStart, m.wood);
+      tbWrite(m, m.cell.leaf, m.leafStart, m.leaf);
+      tbTouch(m.cell.wood, m.woodStart, m.woodCount, true);
+      tbTouch(m.cell.leaf, m.leafStart, m.leafCount, true);
+      tbShowOwn(m, false);
+      m.inBatch = true;
+      m.tree._tbInBatch = true;
+      m.dirty = false;
+      m.snap = tbSnapshot(m.tree);
+    }
+
+    let treeBatchBuildMs = 0;
+    function buildTreeBatches() {
+      treeBatchesBuilt = true;
+      if (TREE_BATCH_OFF) return;
+      const t0 = performance.now();
+      // Plan: which trees, which cell, which ranges.
+      for (const t of trees) {
+        if (!t.group || !t.group.parent || !t.group.visible || !t.trunkMesh || !t.canopy) continue;
+        if (!t.alive || t.falling || t.stump) continue;
+        const key = Math.floor(t.x / TB_CELL) + ',' + Math.floor(t.z / TB_CELL);
+        let cell = treeBatchCells.get(key);
+        if (!cell) { cell = tbNewCell(key); treeBatchCells.set(key, cell); }
+        const { wood, leaf } = tbParts(t);
+        const m = {
+          tree: t, cell, wood, leaf,
+          woodStart: cell.wood.n, woodCount: tbVertCount(wood),
+          leafStart: cell.leaf.n, leafCount: tbVertCount(leaf),
+          inBatch: false, dirty: false, snap: null
+        };
+        cell.wood.n += m.woodCount;
+        cell.leaf.n += m.leafCount;
+        cell.members.push(m);
+        treeBatchMembers.push(m);
+      }
+      // Build: one wood mesh and one canopy mesh per cell, every tree written in.
+      for (const cell of treeBatchCells.values()) {
+        for (const part of [cell.wood, cell.leaf]) {
+          if (!part.n) continue;
+          part.mesh = new THREE.Mesh(tbAlloc(part), part.mat);
+          part.mesh.castShadow = false;                      // shadows stay with the live trees (SHADOW_NEAR)
+          part.mesh.receiveShadow = part === cell.wood;      // as the trunks it copies
+          part.mesh.userData.treeBatch = cell.key;
+          part.mesh.matrixAutoUpdate = false;
+        }
+        for (const m of cell.members) {
+          tbWrite(m, cell.wood, m.woodStart, m.wood);
+          if (cell.leaf.mesh) tbWrite(m, cell.leaf, m.leafStart, m.leaf);
+          m.inBatch = true;
+          m.tree._tbInBatch = true;
+          m.snap = tbSnapshot(m.tree);
+          tbShowOwn(m, false);
+        }
+        // Bounds from one pass over the positions (three's computeBoundingSphere makes
+        // two passes with a Vector3 per vertex). The sphere is the box's, a little loose,
+        // which only matters to frustum culling.
+        for (const part of [cell.wood, cell.leaf]) {
+          if (!part.mesh) continue;
+          const P = part.mesh.geometry.attributes.position.array;
+          let x0 = Infinity, y0 = Infinity, z0 = Infinity, x1 = -Infinity, y1 = -Infinity, z1 = -Infinity;
+          for (let i = 0; i < P.length; i += 3) {
+            const x = P[i], y = P[i + 1], z = P[i + 2];
+            if (x < x0) x0 = x; if (x > x1) x1 = x;
+            if (y < y0) y0 = y; if (y > y1) y1 = y;
+            if (z < z0) z0 = z; if (z > z1) z1 = z;
+          }
+          const geo = part.mesh.geometry;
+          geo.boundingBox = new THREE.Box3(new THREE.Vector3(x0, y0, z0), new THREE.Vector3(x1, y1, z1));
+          geo.boundingSphere = new THREE.Sphere(new THREE.Vector3((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2),
+            Math.hypot(x1 - x0, y1 - y0, z1 - z0) / 2);
+          scene.add(part.mesh);
+        }
+      }
+      treeBatchBuildMs = performance.now() - t0;
+      // Anything already near the player starts live (the player exists by now: the
+      // batches are built late in the load).
+      if (typeof player !== 'undefined' && player) for (let i = 0; i < 40; i++) updateTreeBatches();
+    }
+
+    // Once a frame, after the world has moved: which trees draw from their own meshes.
+    const treeBatchTiming = { calls: 0, ms: 0, maxMs: 0, swaps: 0 };
+    function updateTreeBatches() {
+      if (!treeBatchesBuilt) { if (trees.length) buildTreeBatches(); return; }
+      if (TREE_BATCH_OFF) return;
+      const t0 = performance.now();
+      updateTreeBatchesInner();
+      const ms = performance.now() - t0;
+      treeBatchTiming.calls++; treeBatchTiming.ms += ms; if (ms > treeBatchTiming.maxMs) treeBatchTiming.maxMs = ms;
+    }
+    function updateTreeBatchesInner() {
+      const px = player.position.x, pz = player.position.z;
+      const liveIn = SHADOW_NEAR + TB_LIVE_PAD_IN, liveOut = SHADOW_NEAR + TB_LIVE_PAD_OUT;
+      // A changed tree swaps at once. Swaps for distance alone are spread over frames
+      // (a teleport or the insertion drop moves the player hundreds of metres at once),
+      // since a batch copy and the tree's own meshes look the same.
+      let moves = TB_MOVES_PER_FRAME;
+      // The change check runs on a third of the batched trees each frame: a far tree that
+      // is hit shows its batch copy for at most two more frames, and the check costs a
+      // third as much.
+      const slice = (tbFrame++) % 3;
+      for (let i = 0; i < treeBatchMembers.length; i++) {
+        const m = treeBatchMembers[i], t = m.tree;
+        const d = Math.max(Math.abs(t.x - px), Math.abs(t.z - pz));
+        if (m.inBatch) {
+          if (i % 3 === slice && !tbSame(m.snap, tbSnapshot(t, _tbScratch))) tbGoLive(m, 'changed');
+          else if (d < liveIn && moves > 0) { moves--; tbGoLive(m, 'near'); }
+        } else if (d > liveOut && moves > 0) {
+          if (t._tbRestored) { m.dirty = false; t._tbRestored = false; }
+          if (!m.dirty && t.alive && !t.falling && !t.stump && !t.log && t.group.visible && t.group.parent &&
+              !t.canopyTransparent && !(t.burnT > 0) && !(t.smoulder > 0)) { moves--; tbGoBatch(m); }
+        }
+      }
+    }
+    function treeBatchStats() {
+      let live = 0, batched = 0, cells = 0, meshes = 0, dirty = 0;
+      for (const m of treeBatchMembers) { if (m.inBatch) batched++; else live++; if (m.dirty) dirty++; }
+      for (const c of treeBatchCells.values()) { cells++; if (c.wood.mesh) meshes++; if (c.leaf.mesh) meshes++; }
+      return { off: TREE_BATCH_OFF, built: treeBatchesBuilt, buildMs: Math.round(treeBatchBuildMs), frameMsAvg: +(treeBatchTiming.ms / Math.max(1, treeBatchTiming.calls)).toFixed(3), frameMsMax: +treeBatchTiming.maxMs.toFixed(2), calls: treeBatchTiming.calls, trees: trees.length, members: treeBatchMembers.length, batched, live, dirty, cells, meshes };
+    }
 
     // --- Weapons (shared mats) ---
     const gunMetal = new THREE.MeshStandardMaterial({ color: 0x3a3f48, metalness: 0.75, roughness: 0.38 });
@@ -20467,6 +20749,7 @@
             // Into the bag: worth nothing until the HQ has processed it.
             skullBag.count += 1; skullBag.value += c.value;
             updateSkullHud();
+            publishUI('skull-pickup', { count: 1, value: c.value, carriedCount: skullBag.count, carriedValue: skullBag.value });
             AudioSys.skullPickup();
             scene.remove(c.mesh);
             dropSkullRing(c);
@@ -20522,6 +20805,41 @@
     const shopTabsEl = document.getElementById('shopTabs');
     const shopHintEl = document.getElementById('shopHint');
     let shopOpen = false;
+    // D-8: committed economy/HQ facts, consumed by UI without reaching into combat.
+    let uiRunId = 0, uiEventId = 0;
+    const FIELD_INTEL_COST = 120;
+    let fieldIntelOwned = false;
+    function publishUI(type, details = {}) {
+      window.dispatchEvent(new CustomEvent('dw-game', { detail: { type, runId: uiRunId, eventId: ++uiEventId, ...details } }));
+    }
+    const readPrepRepairs = createPrepRepairReader({ getTarget: getRepairTarget, getSnapshot: getRepairSnapshot });
+    let prepUISampleTime = 0;
+    function publishPrepState(dt = 0, force = false) {
+      prepUISampleTime += Math.max(0, dt);
+      if (!force && prepUISampleTime < 0.25) return;
+      prepUISampleTime = 0;
+      const enabled = gameStarted && !gameOver && !won && !devNoZombies;
+      publishUI('prep-state', { day, phase: enabled ? phase : 'inactive',
+        active: enabled && !paused && !shopOpen, cash: bank, skulls: skullBag.count,
+        pendingCount: hq.pendingCount, pendingReceiptId: hq.pendingCount ? hq.receiptId : null,
+        alarm: !!hq.seq, canAlarm: enabled && !hq.seq,
+        ammo: phase === 'prep' ? WEAPON_ORDER.filter(w => weaponOwned[w] && AMMO_PACK[caliberOf(w)]).map(w => ({
+          id: w, owned: true, calibre: caliberOf(w), loaded: ammoByWeapon[w] || 0,
+          reserve: reserveOf(w), threshold: WEAPON_STATS[w].maxAmmo, cost: AMMO_PACK[caliberOf(w)].cost
+        })) : [],
+        // D-11: target selection and repair completion come from the combat owner.
+        repairs: readPrepRepairs({ runId: uiRunId, day, phase: enabled ? phase : 'inactive' }) });
+    }
+    function reportPurchase(itemId, cashSpent, source = 'kiosk') {
+      if (gameStarted && !devInfiniteCash && cashSpent > 0) publishUI('purchase-delivered', { itemId, quantity: 1, cashSpent, source, cashAfter: bank });
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type !== 'intel-purchase-request' || !shopOpen || shopTab !== 'upgrades' || !gameStarted || gameOver || won || fieldIntelOwned) return;
+      if (!spend(FIELD_INTEL_COST)) return;
+      fieldIntelOwned = true;
+      reportPurchase('field-intel', FIELD_INTEL_COST);
+      renderShop();
+    });
     let shopTab = 'weapons';
     const SHOP_TABS = [
       ['weapons', 'Weapons'], ['ammo', 'Ammo'], ['gear', 'Gear'], ['upgrades', 'Upgrades'], ['perks', 'Perks'], ['build', 'Blueprints'], ['fortify', 'Fortify']
@@ -20680,6 +20998,7 @@
             owned ? 'OWNED' : '$' + price, !owned && bank >= price, owned ? null : () => buyBuild(k), owned ? 'owned' : '');
         }
       }
+      publishUI('shop-render', { tab: shopTab, cash: bank, intelOwned: fieldIntelOwned, container: shopListEl });
     }
     function spend(cost) {
       if (bank < cost) { AudioSys.invalid(); return false; }
@@ -20693,6 +21012,7 @@
       weaponOwned[w] = true;
       if (w === 'chainsaw') sawFuel = sawFuelMax();
       else ammoByWeapon[w] = magSize(w); // it arrives loaded
+      reportPurchase('weapon:' + w, WEAPON_PRICE[w]);
       showBanner(WEAPON_STATS[w].name.toUpperCase() + ' ACQUIRED', 'Q to bring it up', 1.8, '#7cdea0');
       updateAmmoHud();
       renderShop();
@@ -20712,6 +21032,7 @@
         reserveAmmo[c] = Math.min(cap, (reserveAmmo[c] | 0) + pk.n);
       }
       if (!quiet) { updateAmmoHud(); renderShop(); }
+      reportPurchase('ammo:' + c, pk.cost);
       return true;
     }
 
@@ -20761,6 +21082,7 @@
       if (dualOwned[w] || !DUAL_CAPABLE[w] || !weaponOwned[w]) return;
       if (!spend(DUAL_PRICE[w])) return;
       dualOwned[w] = true;
+      reportPurchase('dual:' + w, DUAL_PRICE[w]);
       AudioSys.magThud();
       showBanner(WEAPON_STATS[w].name.toUpperCase() + ' PAIR', 'Y switches between one gun and two', 2.0, '#ffd24a');
       renderShop();
@@ -20774,13 +21096,16 @@
       applyGearVisibility();
       updateTacticalHud();
       updateHpHud();
+      reportPurchase('gear:' + gr.key, gr.cost);
       renderShop();
     }
     function repairArmor() {
       const missing = armorMax() - playerArmor;
       if (missing <= 0.5) { AudioSys.invalid(); return; }
-      if (!spend(armorRepairCost())) return;
+      const paid = armorRepairCost();
+      if (!spend(paid)) return;
       playerArmor = armorMax();
+      reportPurchase('armor-repair', paid, 'repair');
       AudioSys.armorDon();
       updateHpHud();
       renderShop();
@@ -20788,6 +21113,7 @@
     function buyExtMag(w) {
       if (extMag[w] || !EXT_MAG_PRICE[w] || !spend(EXT_MAG_PRICE[w])) return;
       extMag[w] = true;
+      reportPurchase('magazine:' + w, EXT_MAG_PRICE[w]);
       updateAmmoHud();
       renderShop();
     }
@@ -20796,17 +21122,20 @@
       macheteOwned = true;
       applyBladeModel();
       AudioSys.macheteSwing();
+      reportPurchase('machete', MACHETE_PRICE);
       renderShop();
     }
     function buySawTank() {
       if (sawTankUpgraded || !spend(SAW_TANK_PRICE)) return;
       sawTankUpgraded = true;
+      reportPurchase('saw-tank', SAW_TANK_PRICE);
       updateAmmoHud();
       renderShop();
     }
     function buyBuild(k) {
       if (buildUnlocked[k] || !spend(BUILD_UNLOCK_PRICE[k])) return;
       buildUnlocked[k] = true;
+      reportPurchase('blueprint:' + k, BUILD_UNLOCK_PRICE[k]);
       renderShop();
     }
     function buyPerk(p) {
@@ -20817,6 +21146,7 @@
       perkLevels[p.key] = lvl + 1;
       if (p.key === 'vitality') { PLAYER_MAX_HP = 100 + perkLevels.vitality * 20; playerHp = PLAYER_MAX_HP; updateHpHud(); }
       if (p.key === 'grenadier') { grenades = Math.min(maxGrenades(), grenades + 1); updateAmmoHud(); }
+      reportPurchase('perk:' + p.key, cost);
       AudioSys.kioskBuy();
       updateCoinHud();
       renderShop();
@@ -20934,9 +21264,13 @@
         devNoZombies = true;
         clearZombies();
         waveQueue = [];
+        caveByIndex = [];
+        wavePreview = null;
         waveSpawned = 0;
         waveTotal = 0;
         zombiesRemaining = 0;
+        if (typeof warnActiveCaves === 'function') warnActiveCaves(0);
+        else if (typeof caveWarn === 'function' && POI.caves) for (let i = 0; i < POI.caves.length; i++) caveWarn(i, 0);
         updateWaveHud();
         showBanner('NODEAD', 'Zombies and waves disabled', 2.4, '#7cdea0');
       } else if (cmd === 'swarm') {
@@ -21455,6 +21789,8 @@
       skullBag = { count: 0, value: 0 };
       updateSkullHud();
       hq.dep = 'open'; hq.depT = 0;
+      hq.receiptId = 'deposit:' + uiRunId + ':' + (uiEventId + 1);
+      publishUI('deposit-accepted', { receiptId: hq.receiptId, count: hq.pendingCount, value: hq.pendingValue });
       AudioSys.shutter(true);
     }
     const _bagMat = new THREE.MeshStandardMaterial({ color: 0x6b5a3a, roughness: 0.95 });
@@ -21514,6 +21850,7 @@
         if (S.depT > HQ_PROCESS_S) {
           S.dep = 'green'; S.depT = 0; S.greenT = HQ_GREEN_HOLD;
           bank += S.pendingValue;
+          publishUI('deposit-complete', { receiptId: S.receiptId, count: S.pendingCount, value: S.pendingValue, cashAfter: bank });
           matchStats.skullsTurnedIn = (matchStats.skullsTurnedIn || 0) + S.pendingCount;
           updateCoinHud();
           AudioSys.hqDing();
@@ -21545,6 +21882,36 @@
     }
     const HQ_PROCESS_S = 3.4;
 
+    // UI-owned modal adapter; the existing alarm keeps every gameplay guard.
+    let hqBriefingOpen = false, hqBriefingWasPaused = false;
+    function closeHQBriefing() {
+      if (!hqBriefingOpen) return;
+      hqBriefingOpen = false;
+      setPaused(hqBriefingWasPaused);
+      publishUI('briefing-closed');
+    }
+    function openHQBriefing() {
+      publishPrepState(0, true);
+      if (!gameStarted || gameOver || won || hqBriefingOpen || !nearHQPanel()) return;
+      const director = getWaveDirectorState();
+      let preview = null;
+      try { preview = getWavePreview(director.day); } catch (error) { console.warn('Dead-Wave briefing unavailable:', error); }
+      hqBriefingWasPaused = paused; hqBriefingOpen = true;
+      setPaused(true);
+      publishUI('briefing-open', { day: director.day, phase: director.phase,
+        preview, intelOwned: fieldIntelOwned,
+        alarmActive: !!hq.seq, disabled: devNoZombies });
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (!hqBriefingOpen) return;
+      if (detail?.type === 'briefing-close-request') closeHQBriefing();
+      else if (detail?.type === 'alarm-request') {
+        if (!gameStarted || gameOver || won || phase !== 'prep' || hq.seq || devNoZombies || !nearHQPanel()) return;
+        closeHQBriefing();
+        hqStartWave();
+      }
+    });
+
     // Sound the alarm: three klaxon blasts, eight flares in four colours out of the
     // launcher on the tower, the corner strobes going for five seconds, then the wave.
     function hqStartWave() {
@@ -21553,6 +21920,7 @@
       if (devNoZombies) { AudioSys.invalid(); showBanner('NODEAD IS ON', 'Waves are switched off', 1.2, '#ffb347'); return; }
       endZombieGrace();
       hq.seq = { t: 0, fired: 0 };
+      publishUI('alarm-started', { day });
       AudioSys.klaxon();
       addShake(0.1);
       showBanner('ALARM', 'Day ' + day + ' \u2014 they heard that', 2.2, '#ff5a44');
@@ -21622,6 +21990,10 @@
       }
     }
     function resetHQ() {
+      closeHQBriefing();
+      fieldIntelOwned = false;
+      uiRunId++;
+      publishUI('run-reset');
       if (hq.bag) scene.remove(hq.bag);
       for (const f of hq.flares) scene.remove(f.mesh);
       hq.flares.length = 0;
@@ -21639,6 +22011,7 @@
     const kioskPromptEl = document.getElementById('kioskPrompt');
     let kioskPromptShown = false;
     function updateKioskPrompt(dt) {
+      publishPrepState(dt);
       const t = performance.now() * 0.001;
       const sc = KIOSK.group.userData.screen;
       const okNow = kioskOpenAllowed();
@@ -21650,6 +22023,9 @@
       if (kioskPromptEl) {
         // One prompt for whatever E would do right now (see actionTarget).
         const a = shopOpen ? null : actionTarget();
+        publishUI('hud-state', { dt, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
+          nearWindow: a === 'hqWindow', skulls: skullBag.count,
+          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' });
         let text = '';
         if (a === 'kiosk') text = okNow ? 'E — Supply kiosk' : 'Kiosk locked — opens during prep';
         else if (a === 'hqWindow') {
@@ -21667,6 +22043,7 @@
         const show = !!text;
         if (show !== kioskPromptShown) { kioskPromptShown = show; kioskPromptEl.classList.toggle('on', show); }
         if (show && kioskPromptEl.textContent !== text) kioskPromptEl.textContent = text;
+        if (a === 'hqPanel') publishUI('hq-prompt', { element: kioskPromptEl, alarm: !!hq.seq });
       }
     }
     // E is the action key. Something already under way (carrying or manning the mortar)
@@ -21694,7 +22071,7 @@
     function doAction() {
       const a = actionTarget();
       if (a === 'hqWindow') hqDeposit();
-      else if (a === 'hqPanel') hqStartWave();
+      else if (a === 'hqPanel') openHQBriefing();
       else if (a === 'kiosk') openShop();
       else if (a === 'door') toggleDoor(nearestDoor());
       else if (a === 'stairs') toggleStairs(nearestFoldStairs());
@@ -23008,17 +23385,42 @@
       const slot = slotFor(rule, q);
       let last = null;
       const levels = [];
-      // A floor goes on the storey the marine is standing on: on the ground while he
-      // is on the ground (a boardwalk, even inside a walled room), up on the walls as a
-      // roof or walkway while he is up on a deck. Whichever it is, the other storey is
-      // still tried after it, so a floor aimed where only one fits still goes down.
+      // Floors (decks that can also sit on the ground): honour the aim level first,
+      // then any storey walls/pillars can already hold, then a boardwalk at the
+      // marine's feet. A grounded marine aiming at wall tops must roof those walls
+      // — not drop a boardwalk under them (GB-8). forceLv still pins scripted builds.
       const groundDeck = rule.deck && rule.on.indexOf('ground') >= 0;
       if (opts && opts.forceLv != null) levels.push(opts.forceLv);   // scripted builds
       else if (groundDeck) {
         const up = playerUpstairs();
-        if (!up) levels.push(0);
-        for (let lv = 1; lv <= MAX_LEVEL; lv++) levels.push(lv);
-        if (up) levels.push(0);
+        const pushLv = (lv) => { if (lv >= 0 && lv <= MAX_LEVEL && levels.indexOf(lv) < 0) levels.push(lv); };
+        // Aim level: a wall/edge hit reports the wall's own level; the floor belongs
+        // on the storey that wall carries (one up) unless a deck is already there.
+        let prefer = null;
+        if (opts && opts.lv != null) {
+          prefer = opts.lv | 0;
+          if (opts.piece && (opts.piece.slot || 'base') !== 'base' && prefer === (opts.piece.level | 0)
+              && !cellOccupant(gx, gz, prefer + 1, 'base')) prefer = prefer + 1;
+          pushLv(prefer);
+        }
+        // Supported elevated storeys beat a boardwalk so "floor on those walls"
+        // from the yard does what it looks like.
+        for (let lv = 1; lv <= MAX_LEVEL; lv++) {
+          if (structureTop(gx, gz, lv) !== null || floorSpanDepth(gx, gz, lv) !== null) pushLv(lv);
+        }
+        // Aiming at a platform: never fall through to a boardwalk under it.
+        const aimPlatform = opts && opts.piece && opts.piece.type === 'platform';
+        const aimElevated = prefer != null && prefer > 0;
+        if (up) {
+          for (let lv = 1; lv <= MAX_LEVEL; lv++) pushLv(lv);
+          if (!aimPlatform) pushLv(0);
+        } else if (aimElevated) {
+          // Wall-top / elevated aim: roof or refuse — never quietly boardwalk the gap.
+          for (let lv = 1; lv <= MAX_LEVEL; lv++) pushLv(lv);
+        } else {
+          pushLv(0);
+          for (let lv = 1; lv <= MAX_LEVEL; lv++) pushLv(lv);
+        }
       } else {
         if (opts && opts.lv != null && opts.lv >= 0 && opts.lv <= MAX_LEVEL) levels.push(opts.lv);
         for (let lv = 0; lv <= MAX_LEVEL; lv++) if (levels.indexOf(lv) < 0) levels.push(lv);
@@ -23185,7 +23587,11 @@
       }
       const thin = thinBoxFor(b);
       if (thin) return segmentHitsBox(ax, ay, az, bx, by, bz, thin.cx, y0 + h / 2, thin.cz, thin.hx, h / 2, thin.hz);
-      const r = Math.max(0.3, b.radius || 0.5);
+      // Pillars are thin posts (collision radius 0.2): aim pick uses a fatter shaft so a
+      // reticle on the visible post or cap still registers, not only a dead-centre hit.
+      const r = (b.type === 'pillar' || b.slot === 'ptop')
+        ? Math.max(0.55, b.radius || 0.5)
+        : Math.max(0.3, b.radius || 0.5);
       return segmentHitsBox(ax, ay, az, bx, by, bz, b.x, y0 + h / 2, b.z, r, h / 2, r);
     }
     // The piece under the reticle, nearer than the ground, or null. `seeThroughRails`
@@ -23198,8 +23604,14 @@
       if (!ray || !ray.direction) return null;
       const o = ray.origin, d = ray.direction, L = 240;
       const ex = o.x + d.x * L, ey = o.y + d.y * L, ez = o.z + d.z * L;
-      const limit = Number.isFinite(aimGroundDist) ? aimGroundDist / L + 0.002 : 1;
-      let best = null, bt = limit;
+      // Builds must be nearer than the ground, or grass in front of a wall would pick
+      // the wall behind it. Pillars are an exception: a shallow side-aim often tags the
+      // slope at the post's feet a metre before the shaft, so allow them a short way
+      // past the terrain hit (still well inside build reach).
+      const groundT = Number.isFinite(aimGroundDist) ? aimGroundDist / L : 1;
+      const limit = groundT + 0.002;
+      const pillarLimit = groundT + 2.5 / L;
+      let best = null, bt = pillarLimit;
       for (const b of builds) {
         if (b.gx == null) continue;
         if (seeThroughRails && (b.type === 'railing' || b.type === 'wire')) continue;
@@ -23210,7 +23622,22 @@
           if (y1 <= band[0] || y0 >= band[1]) continue;
         }
         const t = pickHitT(b, o.x, o.y, o.z, ex, ey, ez);
-        if (t !== null && t < bt) { bt = t; best = b; }
+        if (t === null) continue;
+        const isPillar = b.type === 'pillar' || b.slot === 'ptop';
+        const lim = isPillar ? pillarLimit : limit;
+        if (t >= lim) continue;
+        // When placing a turret, a floor's AABB reaches the corner the post stands
+        // on, so a side-aim along that seam can tag the deck a hair before the shaft.
+        // Prefer the pillar when the two hits are nearly co-incident. Other place
+        // modes keep the nearer hit so aiming a floor at that square still works.
+        const near = 0.6 / L;
+        const wantPillar = !!(placeMode && PILLAR_TOP_KINDS[placeMode]);
+        if (!best || t < bt) {
+          if (wantPillar && best && (best.type === 'pillar' || best.slot === 'ptop') && !isPillar && t > bt - near) { /* keep pillar */ }
+          else { bt = t; best = b; }
+        } else if (wantPillar && isPillar && best && (best.type === 'floor' || best.type === 'platform') && t < bt + near) {
+          bt = t; best = b;
+        }
       }
       return best;
     }
@@ -23253,9 +23680,12 @@
         }
         if (hit && Math.hypot(gridCentre(hit.gx) - player.position.x, gridCentre(hit.gz) - player.position.z) <= BUILD_REACH + 1.5) {
           // The level you are pointing at: a deck's own; for a wall carrying a deck,
-          // that deck; otherwise the piece's.
+          // that deck; for a floor/platform aimed at a bare wall, the storey on top.
           let lv = hit.level | 0;
-          if ((hit.slot || 'base') !== 'base' && cellOccupant(hit.gx, hit.gz, lv + 1, 'base')) lv += 1;
+          if ((hit.slot || 'base') !== 'base') {
+            if (cellOccupant(hit.gx, hit.gz, lv + 1, 'base')) lv += 1;
+            else if (placeMode === 'floor' || placeMode === 'platform') lv += 1;
+          }
           return { x: gridCentre(hit.gx), z: gridCentre(hit.gz), gx: hit.gx, gz: hit.gz, lv, hit };
         }
       }
@@ -23265,6 +23695,27 @@
       if (d > BUILD_REACH) { tx = player.position.x + dx / d * BUILD_REACH; tz = player.position.z + dz / d * BUILD_REACH; }
       else if (d < 0.8) { tx = player.position.x + Math.sin(aimYaw) * 2.2; tz = player.position.z + Math.cos(aimYaw) * 2.2; }
       const gx = gridIndex(tx), gz = gridIndex(tz);
+      // Edge walls no longer fill the cell, so a reticle aimed at wall-top height
+      // often misses the thin mesh. setAimRay pins aimTarget to the terrain hit, so
+      // read the ray's height over this cell instead of aimTarget.y.
+      if (placeMode === 'floor' || placeMode === 'platform') {
+        const ray = aimRaycaster.ray;
+        const cx = gridCentre(gx), cz = gridCentre(gz);
+        const horiz = Math.hypot(ray.direction.x, ray.direction.z);
+        const aimY = horiz > 1e-6
+          ? ray.origin.y + ray.direction.y * (Math.hypot(cx - ray.origin.x, cz - ray.origin.z) / horiz)
+          : aimTarget.y;
+        for (let storey = 0; storey < MAX_LEVEL; storey++) {
+          const wt = wallsTop(gx, gz, storey);
+          if (wt !== null && aimY >= wt - 0.35) {
+            return { x: cx, z: cz, gx, gz, lv: storey + 1 };
+          }
+        }
+        const ptCap = pillarTopFor(gx, gz, 1);
+        if (ptCap !== null && aimY >= ptCap - 0.35) {
+          return { x: cx, z: cz, gx, gz, lv: 1 };
+        }
+      }
       return { x: gridCentre(gx), z: gridCentre(gz), gx, gz };
     }
 
@@ -23397,25 +23848,72 @@
 
     // T — patch up a damaged structure; cost scales with the damage. Same rule as
     // selling: while a ghost is up it is the cell under the cursor.
-    function repairNearestBuild() {
-      if (!gameStarted || gameOver || won || paused) return;
+    // Read-only repair target helpers for prep checklist (GP-7): same reach rules as T.
+    function repairCostOf(b) {
+      return Math.max(1, Math.ceil((b.maxHp - b.hp) * 0.12));
+    }
+    function repairIdOf(b) {
+      const gx = b.gx != null ? b.gx : Math.round(b.x);
+      const gz = b.gz != null ? b.gz : Math.round(b.z);
+      const slot = b.slot || 'base';
+      const lv = b.level | 0;
+      const open = b.opening ? (':' + b.opening) : '';
+      return b.type + '@' + gx + ',' + gz + ':' + slot + ':L' + lv + open;
+    }
+    function findRepairCandidate(maxDist) {
+      const lim = maxDist == null ? 7 : maxDist;
       let best = null;
       if (placeMode) {
         const hit = scrapTarget();
         if (hit && hit.hp < hit.maxHp - 0.5) best = hit;
       } else {
-        let bd = 7;
+        let bd = lim;
         for (const b of builds) {
           if (b.hp >= b.maxHp - 0.5) continue;
           const d = Math.hypot(b.x - player.position.x, b.z - player.position.z);
           if (d < bd) { bd = d; best = b; }
         }
       }
+      return best;
+    }
+    function repairSnapshotOf(b) {
+      // Full HP still returns a snapshot (cost 0) so UI can distinguish
+      // successful repair from destruction. Null only when the build is gone.
+      if (!b || builds.indexOf(b) < 0) return null;
+      const full = b.hp >= b.maxHp - 0.5;
+      const cost = full ? 0 : repairCostOf(b);
+      return {
+        id: repairIdOf(b),
+        type: b.type,
+        x: b.x,
+        z: b.z,
+        hp: b.hp,
+        maxHp: b.maxHp,
+        cost,
+        affordable: full || bank >= cost,
+        reachable: true
+      };
+    }
+    function getRepairTarget(maxDist) {
+      return repairSnapshotOf(findRepairCandidate(maxDist));
+    }
+    function getRepairSnapshot(id) {
+      if (!id) return null;
+      for (const b of builds) {
+        if (repairIdOf(b) === id) return repairSnapshotOf(b);
+      }
+      return null;
+    }
+    function repairNearestBuild() {
+      if (!gameStarted || gameOver || won || paused) return;
+      const best = findRepairCandidate(7);
       if (!best) { AudioSys.invalid(); return; }
-      const cost = Math.max(1, Math.ceil((best.maxHp - best.hp) * 0.12));
+      const cost = repairCostOf(best);
       if (bank < cost) { AudioSys.invalid(); return; }
       bank -= cost;
       best.hp = best.maxHp;
+      // GB-11: paid repair lands -> purchase-delivered (same hook as place/upgrade).
+      reportPurchase(best.type, cost, 'repair');
       updateCoinHud();
       AudioSys.repairClank();
       spawnDust(best.x, best.mesh.position.y + 0.6, best.z, 4);
@@ -23489,6 +23987,7 @@
           return;
         }
         if (!spend(COST.shovel)) { AudioSys.invalid(); return; }
+        reportPurchase('shovel', COST.shovel, 'build');
         updateCoinHud();
         // A rabbit mound in the cell is dug out and filled in first.
         const bu = burrowInCell(pt.x, pt.z, BUILD_GRID / 2 + 0.3);
@@ -23523,6 +24022,7 @@
       if (!made) { AudioSys.invalid(); return; }
       bank -= cost;
       updateCoinHud();
+      reportPurchase(placeMode, cost, 'build');
       AudioSys.buildSound(placeMode === 'window' || placeMode === 'door' ? placeMode : (placeMode === 'gate' ? 'barricade' : made.type));
       // stay in place mode for multi-place
       updateGhostPreview();
@@ -24278,6 +24778,7 @@
       if ((upgradeOwned[track] | 0) + 1 !== tier) return;
       if (!spend(UPGRADE_TRACKS[track].bp[tier])) return;
       upgradeOwned[track] = tier;
+      reportPurchase('upgrade-blueprint:' + track + ':' + tier, UPGRADE_TRACKS[track].bp[tier]);
       renderShop();
     }
 
@@ -24470,6 +24971,7 @@
       bank -= plan.cost;
       b.upgradeSpent = (b.upgradeSpent || 0) + plan.cost;
       updateCoinHud();
+      reportPurchase((plan.track || b.type) + ':' + (plan.to | 0), plan.cost, 'upgrade');
       applyUpgrade(b, plan.track, plan.to);
       spawnDust(b.x, b.mesh.position.y + 0.8, b.z, 6);
       AudioSys.repairClank();
@@ -25666,8 +26168,24 @@
           const open = prevLv != null && !cellOccupant(c.gx, c.gz, prevLv, 'base') && !cellOccupant(c.gx, c.gz, prevLv - 1, 'base');
           if (c.why && prevDepth !== null && prevDepth < FLOOR_SPAN && open) {
             c.why = null; c.y = prevY; prevDepth += 1;
+          } else if (c.why && opts && opts.lv > 0) {
+            // Far wall on this drag holds a roof within FLOOR_SPAN even before the
+            // commit's multi-pass places that end (preview would otherwise stay red).
+            const want = opts.lv | 0;
+            for (const o of cells) {
+              if (o === c) continue;
+              if (structureTop(o.gx, o.gz, want) === null) continue;
+              const dist = Math.abs(o.gx - c.gx) + Math.abs(o.gz - c.gz);
+              if (dist > 0 && dist <= FLOOR_SPAN) {
+                c.why = null;
+                c.y = ghostYAt('floor', c.gx, c.gz, yaw, { forceLv: want });
+                prevDepth = dist; prevLv = want; prevY = c.y;
+                break;
+              }
+            }
+            if (c.why) prevDepth = null;
           } else if (!c.why) {
-            const t = resolveTarget('floor', c.gx, c.gz, yaw);
+            const t = resolveTarget('floor', c.gx, c.gz, yaw, opts);
             const d = t.refusal ? null : floorSpanDepth(c.gx, c.gz, t.level | 0);
             prevDepth = d === null ? 0 : d; prevLv = t.level; prevY = c.y;
           } else prevDepth = null;
@@ -25745,7 +26263,7 @@
       }
       if (DRAG_KINDS[placeMode] && !mortarCarried) {
         const pt = getPlacePoint();
-        buildDrag = { gx: pt.gx, gz: pt.gz, lv: pt.hit ? pt.lv : null, edge: pt.hit ? edgeIndexOf(pt.hit) : null };
+        buildDrag = { gx: pt.gx, gz: pt.gz, lv: pt.lv != null ? pt.lv : null, edge: pt.hit ? edgeIndexOf(pt.hit) : null };
         updateGhostPreview();
         return;
       }
@@ -25782,6 +26300,7 @@
         if (bank < it.plan.cost) break;
         bank -= it.plan.cost; spent += it.plan.cost;
         it.b.upgradeSpent = (it.b.upgradeSpent || 0) + it.plan.cost;
+        reportPurchase((it.plan.track || it.b.type) + ':' + (it.plan.to | 0), it.plan.cost, 'upgrade');
         applyUpgrade(it.b, it.plan.track, it.plan.to);
         done++;
       }
@@ -25806,14 +26325,27 @@
       const opts = drag.lv != null ? { lv: drag.lv } : null;
       const cost = COST[placeMode];
       let built = 0, why = null, broke = false;
-      for (const c of cells) {
-        if (bank < cost) { broke = true; break; }
-        const r = placeRefusal(gridCentre(c.gx), gridCentre(c.gz), c.gx, c.gz, yaw, opts);
-        if (r) { why = why || r; continue; }
-        const made = placeBuildAt(placeMode, c.gx, c.gz, yaw, opts);
-        if (!made) { why = why || 'no room'; continue; }
-        bank -= cost;
-        built++;
+      // Floors spanning wall-to-wall: a cell near the far wall only resolves after
+      // that end is placed, so walk the line in passes until nothing new lands.
+      const pending = cells.slice();
+      let guard = pending.length + 2;
+      while (pending.length && guard--) {
+        let progress = false;
+        for (let i = 0; i < pending.length; ) {
+          if (bank < cost) { broke = true; pending.length = 0; break; }
+          const c = pending[i];
+          const r = placeRefusal(gridCentre(c.gx), gridCentre(c.gz), c.gx, c.gz, yaw, opts);
+          if (r) { why = why || r; i++; continue; }
+          const made = placeBuildAt(placeMode, c.gx, c.gz, yaw, opts);
+          if (!made) { why = why || 'no room'; i++; continue; }
+          bank -= cost;
+          reportPurchase(placeMode, cost, 'build');
+          built++;
+          pending.splice(i, 1);
+          progress = true;
+          why = null;
+        }
+        if (!progress) break;
       }
       updateCoinHud();
       if (built) AudioSys.buildSound(placeMode); else AudioSys.invalid();
@@ -26069,6 +26601,59 @@
         armor: 1, scale: 1.52, color: 0xc9cfc0, eye: 0xbdf3ff, hunch: 0.75, tactics: 'direct'
       }
     };
+
+
+    // === Cave roles (combat-phase1 §2 / GB-4) ========================================
+    // Theme → trait mods applied when a zombie walks out of that mouth. Single table —
+    // no theme if-soup in AI. Drowned (caveIndex -1) stay aquatic-only; caveguard is
+    // never spawned from the horde table.
+    const CLIMB_HEIGHT = 1.1; // climbers vault builds / solids at or under this height
+    const CAVE_ROLES = {
+      wet:   { trait: 'douse',    speedMul: 0.85, fireResistAdd: 0.22, douseRadius: 1.8, douseAgePerSec: 2.4 },
+      iron:  { trait: 'armoured', speedMul: 0.92, armorAdd: 0.10 },
+      root:  { trait: 'climber',  climbHeight: CLIMB_HEIGHT },
+      shale: { trait: 'cleft',    speedMul: 1.08, preferTactics: 'flank' },
+      chalk: { trait: 'bone',     hpMul: 0.90, headshotMul: 1.35 },
+      hill:  { trait: 'barrow',   hpMul: 1.08 } // burial surge: slightly tougher fodder/tanks
+    };
+    function roleForCave(theme) {
+      if (!theme) return null;
+      return CAVE_ROLES[theme] || null;
+    }
+    /** Stamp + apply Phase-1 trait mods onto a freshly spawned zombie. Idempotent. */
+    function applyCaveRole(z, theme) {
+      if (!z || !theme) return z;
+      const role = roleForCave(theme);
+      if (!role) return z;
+      z.caveTrait = role.trait;
+      z.caveTheme = theme;
+      if (role.speedMul != null) {
+        z.speed *= role.speedMul;
+        z.baseSpeed *= role.speedMul;
+      }
+      if (role.armorAdd) z.armor = (z.armor || 0) + role.armorAdd;
+      if (role.fireResistAdd) z.fireResist = Math.min(0.95, (z.fireResist || 0) + role.fireResistAdd);
+      if (role.hpMul != null && role.hpMul !== 1) {
+        z.hp = Math.max(1, Math.round(z.hp * role.hpMul));
+        z.maxHp = Math.max(z.hp, Math.round(z.maxHp * role.hpMul));
+      }
+      if (role.headshotMul) z.headshotMul = role.headshotMul;
+      if (role.preferTactics && (z.tactics === 'direct' || !z.tactics)) z.tactics = role.preferTactics;
+      if (role.trait === 'climber') {
+        z.climber = true;
+        z.climbHeight = role.climbHeight != null ? role.climbHeight : CLIMB_HEIGHT;
+      }
+      if (role.douseRadius) z.douseRadius = role.douseRadius;
+      if (role.douseAgePerSec) z.douseAgePerSec = role.douseAgePerSec;
+      return z;
+    }
+    function climberCanVaultBuild(b, climbMax) {
+      if (!b || climbMax == null) return false;
+      // Full walls / gated openings stay walls; only low cover is vaultable.
+      if (b.type === 'wall' || b.type === 'gate' || b.type === 'door' || b.type === 'pillar') return false;
+      const h = pieceHeight(b.type);
+      return h > 0 && h <= climbMax;
+    }
 
     function makeZombieMesh(typeKey) {
       const t = ZOMBIE_TYPES[typeKey] || ZOMBIE_TYPES.shambler;
@@ -27638,14 +28223,11 @@
     let spawnCd = 0;
     let zombiesRemaining = 0;
     const PREP_TIME = 120; // was 12 — a real window to shop, build and reposition in
-    // "Skip prep time" setting: every prep collapses to a short countdown instead, long
-    // enough for the day-cleared banner to read before the horn.
-    const AUTO_SKIP_PREP_S = 5;
-    let autoSkipPrep = false;
-    try { autoSkipPrep = localStorage.getItem('tt_skip_prep') === '1'; } catch (_) {}
     const HOUSE_SPAWN_EXCLUSION = 30.5; // metres — about 100 feet
 
     let waveQueue = [];
+    let caveByIndex = []; // parallel to waveQueue: POI.caves index or -1 (drowned)
+    let wavePreview = null; // frozen WavePreview for current prep/wave day
     let burstLeft = 0;
     let ambushCd = 0;
 
@@ -27689,24 +28271,91 @@
       // mouths now, so a bearing is always one of the six cave directions — the red
       // arcs on the map rim point at real doors, not empty grass.
       waveBearings = [];
+      let assaultCaveIndices = [];
       waveSurround = day >= 6 && day % 3 === 0 && day % 5 !== 0;
       if (!waveSurround) {
         if (POI.caves.length) {
-          const first = POI.caves[(Math.random() * POI.caves.length) | 0];
+          const firstIdx = (Math.random() * POI.caves.length) | 0;
+          const first = POI.caves[firstIdx];
+          assaultCaveIndices.push(firstIdx);
           waveBearings.push(first.ang);
           if (day >= 4 && day % 2 === 0 && POI.caves.length > 1) {
             // A second mouth, from the far side of the compass when there is one.
-            const across = POI.caves.filter((c) => {
+            const across = [];
+            for (let i = 0; i < POI.caves.length; i++) {
+              if (i === firstIdx) continue;
+              const c = POI.caves[i];
               const d = Math.abs(Math.atan2(Math.sin(c.ang - first.ang), Math.cos(c.ang - first.ang)));
-              return d > Math.PI * 0.45;
-            });
-            const pool = across.length ? across : POI.caves.filter((c) => c !== first);
-            waveBearings.push(pool[(Math.random() * pool.length) | 0].ang);
+              if (d > Math.PI * 0.45) across.push(i);
+            }
+            const pool = across.length ? across : POI.caves.map((_, i) => i).filter((i) => i !== firstIdx);
+            const secondIdx = pool[(Math.random() * pool.length) | 0];
+            assaultCaveIndices.push(secondIdx);
+            waveBearings.push(POI.caves[secondIdx].ang);
           }
         } else {
           waveBearings.push(Math.random() * Math.PI * 2);
         }
+      } else if (POI.caves.length) {
+        // Surround: every mouth is fair game; distribute across all six below.
+        assaultCaveIndices = POI.caves.map((_, i) => i);
+        waveBearings = POI.caves.map((c) => c.ang);
       }
+
+      // Freeze the spawn plan once for this day (GB-3 / combat-phase1 §1).
+      // spawnWaveBatch consumes caveByIndex in lockstep with waveQueue — no re-roll
+      // of cave at spawn (ambush option A may only retarget within caveIndices).
+      {
+        const assault = assaultCaveIndices.length ? assaultCaveIndices : [];
+        const planCaves = [];
+        let rr = 0;
+        for (let i = 0; i < waveQueue.length; i++) {
+          const tk = waveQueue[i];
+          if (tk === 'drowned') { planCaves.push(-1); continue; }
+          if (!assault.length) { planCaves.push(-1); continue; }
+          planCaves.push(assault[rr % assault.length]);
+          rr += 1;
+        }
+        caveByIndex = planCaves.slice();
+        const used = [];
+        for (const ci of planCaves) {
+          if (ci >= 0 && !used.includes(ci)) used.push(ci);
+        }
+        const buckets = new Map();
+        for (let i = 0; i < waveQueue.length; i++) {
+          const typeKey = waveQueue[i];
+          const caveIndex = planCaves[i];
+          const key = typeKey + '\0' + caveIndex;
+          let b = buckets.get(key);
+          if (!b) {
+            const cave = caveIndex >= 0 ? POI.caves[caveIndex] : null;
+            b = {
+              typeKey,
+              count: 0,
+              caveIndex,
+              caveTheme: cave ? (cave.theme || null) : null,
+              caveName: cave ? (cave.name || null) : null
+            };
+            buckets.set(key, b);
+          }
+          b.count += 1;
+        }
+        wavePreview = {
+          day,
+          bloodMoon: !!bloodMoon,
+          surround: !!waveSurround,
+          hasColossus: waveQueue.includes('colossus'),
+          total: waveQueue.length,
+          caveIndices: used.slice(),
+          bearings: waveBearings.slice(),
+          byTypeAndCave: Array.from(buckets.values()),
+          queue: waveQueue.slice(),
+          caveByIndex: planCaves.slice()
+        };
+      }
+
+      // GB-4 / CL-4: prep = level 1 on assault mouths (clears prior wave's 2→0 first).
+      warnActiveCaves(1);
 
       // Bonus grenade every few days (every day with the Grenadier perk)
       if (day > 1 && (day % 2 === 0 || perkLvl('grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
@@ -27714,10 +28363,52 @@
       updateAmmoHud();
     }
 
+    /** @returns {WavePreview|null} current frozen plan; null if idle / no plan yet */
+    function getWavePreview(dayNum) {
+      if (!wavePreview) return null;
+      if (dayNum != null && dayNum !== wavePreview.day) return null;
+      return wavePreview;
+    }
+    function getWaveDirectorState() {
+      return {
+        phase,
+        day,
+        prepTimer,
+        bloodMoon: !!bloodMoon,
+        surround: !!waveSurround,
+        waveQueue: waveQueue.slice(),
+        caveByIndex: caveByIndex.slice(),
+        wavePreview,
+        waveTotal,
+        waveSpawned,
+        zombiesRemaining,
+        waveBearings: waveBearings.slice(),
+        spawnCd,
+        burstLeft,
+        ambushCd
+      };
+    }
+    function getActiveCaveIndices() {
+      return wavePreview ? wavePreview.caveIndices.slice() : [];
+    }
+    /** Clear every mouth to 0, then set active assault caves to level (GB-4 / CL-4). */
+    function warnActiveCaves(level) {
+      if (typeof caveWarn !== 'function' || !POI.caves) return;
+      for (let i = 0; i < POI.caves.length; i++) caveWarn(i, 0);
+      if (level === 0) return;
+      const idxs = getActiveCaveIndices();
+      for (const i of idxs) {
+        if (i >= 0) caveWarn(i, level);
+      }
+    }
+
     function beginWave() {
       phase = 'wave';
       spawnCd = 0.25;
       burstLeft = Math.min(3, waveTotal);
+      // Level 2 as the wave starts (CL-4): all active mouths pulse together. Idempotent.
+      // Clearer than per-first-spawn; drowned never appear in caveIndices.
+      warnActiveCaves(2);
       const boss = waveQueue.includes('colossus');
       AudioSys.waveStart(boss || bloodMoon);
       const from = waveSurround
@@ -27746,7 +28437,7 @@
       prepTimerEl.classList.toggle('on', show);
       if (!show) { prepTimerEl.classList.remove('warn', 'crit'); return; }
       // No countdown any more: the next wave comes when you call it.
-      prepLabelEl.textContent = hq.seq ? 'Alarm sounding' : 'Prep — day ' + day + ' · ' + waveTotal + ' coming';
+      publishUI('prep-label', { element: prepLabelEl, alarm: !!hq.seq, day, total: waveTotal, intelOwned: fieldIntelOwned });
       prepClockEl.textContent = hq.seq ? 'INBOUND' : 'READY';
       prepBarEl.style.transform = 'scaleX(1)';
       prepTimerEl.classList.remove('warn');
@@ -27765,8 +28456,7 @@
         return;
       }
       if (phase === 'prep') {
-        const pt = Math.max(0, prepTimer);
-        waveLineEl.textContent = 'Wave Day ' + day + ' · Prep · Next: ' + waveTotal + ' · start at the HQ';
+        publishUI('prep-hud', { element: waveLineEl, day, total: waveTotal, intelOwned: fieldIntelOwned });
       } else if (phase === 'wave') {
         waveLineEl.textContent = 'Wave Day ' + day + ' · Zombies left: ' + zombiesRemaining + graceTag;
       } else {
@@ -27847,28 +28537,45 @@
       // turned up in waves that weren't supposed to have any. It only shifts on success.
       const tk = waveQueue.length ? waveQueue[0] : pickZombieType(day);
       // Where the body comes from: the drowned surface out of the sinkhole in the lake
-      // bed and swim in; everyone else walks out of a cave mouth. An "ambush" is the
-      // mouth nearest you rather than a spawn conjured at your back.
+      // bed and swim in; everyone else walks out of a cave mouth. Cave index comes from
+      // the frozen prep plan (caveByIndex[0] <-> waveQueue[0]); ambush option A may only
+      // retarget to a mouth already listed in wavePreview.caveIndices.
       let sx, sz, cave = null;
+      const plannedCaveIdx = (waveQueue.length && caveByIndex.length) ? caveByIndex[0] : -1;
       if (tk === 'drowned') {
         const ws = pickWaterSpawn();
         sx = ws.x; sz = ws.z;
       } else if (POI.caves.length) {
         if (ambush) {
+          const allowed = (wavePreview && wavePreview.caveIndices && wavePreview.caveIndices.length)
+            ? wavePreview.caveIndices
+            : [...new Set(caveByIndex.filter((i) => i >= 0))];
           let bd = Infinity;
-          for (const c of POI.caves) { const d = Math.hypot(c.x - player.position.x, c.z - player.position.z); if (d < bd) { bd = d; cave = c; } }
-        } else if (waveSurround || waveBearings.length === 0) {
-          cave = POI.caves[(Math.random() * POI.caves.length) | 0];
-        } else {
-          const want = waveBearings[(Math.random() * waveBearings.length) | 0];
-          let bd = Infinity;
-          for (const c of POI.caves) { const d = Math.abs(Math.atan2(Math.sin(c.ang - want), Math.cos(c.ang - want))); if (d < bd) { bd = d; cave = c; } }
+          for (const i of allowed) {
+            const c = POI.caves[i];
+            if (!c) continue;
+            const d = Math.hypot(c.x - player.position.x, c.z - player.position.z);
+            if (d < bd) { bd = d; cave = c; }
+          }
+          if (!cave && plannedCaveIdx >= 0) cave = POI.caves[plannedCaveIdx] || null;
+        } else if (plannedCaveIdx >= 0) {
+          cave = POI.caves[plannedCaveIdx] || null;
         }
-        // Just inside the drip line, in the dark, already on its feet.
-        const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw), crx = Math.cos(cave.yaw), crz = -Math.sin(cave.yaw);
-        const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = -1.4 + Math.random() * 1.2;
-        sx = cave.x + crx * lx + fx * lz;
-        sz = cave.z + crz * lx + fz * lz;
+        if (cave) {
+          // Just inside the drip line, in the dark, already on its feet.
+          const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw), crx = Math.cos(cave.yaw), crz = -Math.sin(cave.yaw);
+          const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = -1.4 + Math.random() * 1.2;
+          sx = cave.x + crx * lx + fx * lz;
+          sz = cave.z + crz * lx + fz * lz;
+        } else {
+          // Planned open-ground / missing cave: old rim spawn.
+          let ang;
+          if (waveSurround || waveBearings.length === 0) ang = Math.random() * Math.PI * 2;
+          else ang = waveBearings[(Math.random() * waveBearings.length) | 0] + (Math.random() - 0.5) * 0.6;
+          const rr = landRadius - 3 - Math.random() * 2;
+          sx = Math.cos(ang) * rr;
+          sz = Math.sin(ang) * rr;
+        }
       } else {
         // No caves rolled (should not happen): the old open-ground rim spawn.
         let ang;
@@ -27881,9 +28588,16 @@
       const spot = (cave || tk === 'drowned') ? { x: sx, z: sz } : resolveStaticProps(sx, sz, 0.8);
       const spawned = spawnZombie(spot.x, spot.z, tk, false, !!cave);
       if (spawned) {
-        if (cave) spawned.mesh.rotation.y = cave.yaw;   // step out facing the map, not the wall
+        if (cave) {
+          spawned.mesh.rotation.y = cave.yaw;   // step out facing the map, not the wall
+          applyCaveRole(spawned, cave.theme);   // GB-4 cave roles from mouth theme
+        }
+        // drowned: caveIndex -1 — aquatic only; no cave role / no caveWarn
         waveSpawned += 1;
-        if (waveQueue.length) waveQueue.shift();
+        if (waveQueue.length) {
+          waveQueue.shift();
+          if (caveByIndex.length) caveByIndex.shift();
+        }
       } else {
         // Field full — come straight back rather than burning the burst on nothing.
         spawnCd = 0.35;
@@ -28470,6 +29184,7 @@
     function buyMedkit() {
       if (medkits >= MAX_MEDKITS || !spend(MEDKIT_PRICE)) return;
       medkits += 1;
+      reportPurchase('medpen', MEDKIT_PRICE);
       updateAmmoHud();
       renderShop();
     }
@@ -33482,7 +34197,10 @@
     // ground (its clumps flattened where they hit), branches snap off in a spray of bark
     // and leaves, and while it lies there its leaves wilt brown.
     const TREE_FALL_G = 14;
-    const TREE_LOG_LIE = 22;       // seconds the log stays before sinking
+    // Felled trees block lanes (Phase 2, "a world that reacts"): a log lies for two
+    // minutes, solid to the player, zombies and bullets (addLogSolids), then sinks away.
+    // It was 22 s, too short to matter in a fight.
+    const TREE_LOG_LIE = 120;      // seconds the log stays before sinking
     const TREE_LOG_SINK = 1.6;     // seconds it takes to sink
     const _fallQ = new THREE.Quaternion(), _fallAxis = new THREE.Vector3(), _fallV = new THREE.Vector3();
     const _baseQ = new THREE.Quaternion(), _fallE = new THREE.Euler();
@@ -33729,6 +34447,7 @@
             // The stump is a proper, shootable stump from here on.
             t.stump = true;
             t.stumpHp = 10;
+            addLogSolids(t);
           }
           continue;
         }
@@ -33737,6 +34456,7 @@
         t.wiltT = (t.wiltT || 0) - dt;
         if (t.wiltT <= 0 && t.leafHealth > 0) { t.wiltT = 0.6; wiltCanopy(t, Math.min(1, t.logT / TREE_LOG_LIE) * 0.7); }
         if (t.logT > TREE_LOG_LIE) {
+          removeLogSolids(t);
           const s = Math.min(1, (t.logT - TREE_LOG_LIE) / TREE_LOG_SINK);
           t.group.position.y = t.logBaseY - s * (t.trunkRadius * 2 + 1.2);
           if (s >= 1) {
@@ -33750,7 +34470,38 @@
       }
     }
 
+    // A lying log is a row of short solids along the trunk, from the stump to where the
+    // crown starts, at the height the trunk actually lies (it can rest propped on its
+    // crown). Tagged kind 'log' with the tree, so combat can tell them apart. Climbers
+    // compare y1 - y0 with their climb height; see handoffs/requests.md. Each change
+    // fires a window 'dw-log' event so the flow field can be rebuilt.
+    function addLogSolids(t) {
+      removeLogSolids(t);
+      const rest = t.fallRest || Math.PI / 2, s = Math.sin(rest), c = Math.cos(rest);
+      const baseY = t.group.position.y, hinge = t.fallHinge || stumpHeightOf(t);
+      const r = Math.max(0.35, t.trunkRadius + 0.2);
+      const reach = Math.max(1.2, Math.min((t.canopyBottom || t.canopyTop * 0.5) - hinge + (t.canopyRadius || 1) * 0.4, t.canopyTop - hinge));
+      t.logSolids = [];
+      for (let d = 0.6; d <= reach; d += 0.8) {
+        const x = t.x + t.fallDirX * d * s, z = t.z + t.fallDirZ * d * s;
+        const ground = sampleHeight(x, z), mid = baseY + hinge + d * c;
+        const y0 = Math.min(ground, mid - t.trunkRadius) - 0.1;
+        const y1 = Math.max(ground + 0.5, mid + t.trunkRadius + 0.15);
+        const sol = addSolid(x, z, r, y0, y1);
+        sol.kind = 'log'; sol.tree = t;
+        t.logSolids.push(sol);
+      }
+      try { window.dispatchEvent(new CustomEvent('dw-log', { detail: { tree: trees.indexOf(t), state: 'down', solids: t.logSolids.length } })); } catch (_) {}
+    }
+    function removeLogSolids(t) {
+      if (!t.logSolids) return;
+      for (const sol of t.logSolids) { const i = worldSolids.indexOf(sol); if (i >= 0) worldSolids.splice(i, 1); }
+      t.logSolids = null;
+      try { window.dispatchEvent(new CustomEvent('dw-log', { detail: { tree: trees.indexOf(t), state: 'gone', solids: 0 } })); } catch (_) {}
+    }
+
     function restoreTree(tree) {
+      removeLogSolids(tree);
       tree.burnT = 0;
       tree.smoulder = 0;
       hideTreeFire(tree);
@@ -33800,6 +34551,7 @@
       tree.canopyTransparent = false;
       for (const mat of tree.leafMats) mat.opacity = 1;
       for (const ch of tree.canopy.children) if (ch.isMesh) ch.castShadow = true;
+      tree._tbRestored = true; // CL-10: pristine again, so it may rejoin its batch once far away
     }
 
     // === Knockdown ==============================================================
@@ -33888,7 +34640,7 @@
       // more, and is far more likely to take the head clean off.
       const headshot = (kind === 'bullet' || kind === 'pellet') && hitFrac > 0.78 && !(z.partsLost && z.partsLost.head) && info && info.hitY != null;
       if (headshot) {
-        const bonus = dmg * (kind === 'pellet' ? 0.5 : 0.85);
+        const bonus = dmg * (kind === 'pellet' ? 0.5 : 0.85) * (z.headshotMul || 1);
         z.hp -= bonus;
         dmg += bonus;
         matchStats.headshots += 1;
@@ -34333,12 +35085,20 @@
         const ncx = t ? Math.max(t.cx - t.hx, Math.min(t.cx + t.hx, x)) : b.x;
         const ncz = t ? Math.max(t.cz - t.hz, Math.min(t.cz + t.hz, z)) : b.z;
         const dx = x - ncx, dz = z - ncz;
-        const dist = Math.hypot(dx, dz) || 0.0001;
+        let dist = Math.hypot(dx, dz);
         const minD = (t ? 0.3 : b.radius) + entR;     // a line only needs a narrow cushion
         if (dist < minD) {
+          // Deep inside the thin slab (dist ~ 0) has no radial direction — shove along
+          // the short face normal so a body on the line still feels the soft give.
+          let nx, nz;
+          if (dist > 1e-5) { nx = dx / dist; nz = dz / dist; }
+          else if (t) {
+            if (t.hx <= t.hz) { nx = (x >= t.cx ? 1 : -1); nz = 0; dist = 0; }
+            else { nx = 0; nz = (z >= t.cz ? 1 : -1); dist = 0; }
+          } else { nx = 1; nz = 0; dist = 0; }
           const push = (minD - dist) * 0.55 * strength;
-          x += (dx / dist) * push;
-          z += (dz / dist) * push;
+          x += nx * push;
+          z += nz * push;
         }
       }
       return { x, z };
@@ -34506,7 +35266,7 @@
       return pbDone(x, z);
     }
 
-    function resolveHardBuildCollisions(entX, entZ, entR, isPlayer, entY) {
+    function resolveHardBuildCollisions(entX, entZ, entR, isPlayer, entY, climbMax) {
       let x = entX, z = entZ;
       // Nothing reaches more than a cell-half plus a body's width from its own cell
       // centre, so a cheap box test skips almost every build on the map. Every zombie
@@ -34514,6 +35274,8 @@
       const reach = BUILD_GRID * 0.75 + entR + 0.2;
       for (const b of buildsNear(x, z, reach, _nearHard)) {
         if (Math.abs(b.x - x) > reach || Math.abs(b.z - z) > reach) continue;
+        // Root/climber vault: low cover under climbMax (sandbag/wire …) is walkable.
+        if (!isPlayer && climbMax != null && typeof climberCanVaultBuild === 'function' && climberCanVaultBuild(b, climbMax)) continue;
         const r = pushOutOfBuild(b, x, z, entR, isPlayer, entY);
         x = r.x; z = r.z;
       }
@@ -34723,6 +35485,11 @@
         updateFlowFieldOn(ffPlayer, player.position.x, player.position.z, 0);
       }
     }
+
+    // Felled logs (CL-5) push kind:'log' solids into worldSolids and fire 'dw-log'.
+    // Force a flow-field rebuild so zombies path around the trunk instead of waiting
+    // up to FF_PERIOD (and pushing along a solid the field still thinks is open).
+    window.addEventListener('dw-log', () => { try { updateFlowFields(0, true); } catch (_) {} });
 
     // Walk-downhill direction for a body at (x, z). False when the field has nothing to
     // say (off the grid, or no route from here), which leaves the caller on its own
@@ -35565,16 +36332,15 @@
           sx /= sl; sz /= sl;
         }
 
-        // Climbing costs pace, wading/swimming costs speed. Depth alone doesn't know a
-        // zombie is crossing a bridge deck well above the water rather than actually
-        // in the river below it — gated on height the same way the player's own swim
-        // check is (see the "swimming" const further down in tick()), or every
-        // crossing over water deeper than 1.3m got treated as a swim and had its
-        // vertical position dragged down to the water surface out from under it.
-        const zDepth = waterDepthAt(zx, zz);
-        const zWaterLevel = waterLevelAt(zx, zz);
+        // Climbing costs pace, wading/swimming costs speed. waterAt packs depth,
+        // wading (0..1 at SWIM_DEPTH) and the river current; height-gate on the deck
+        // the same way the player's swim check does, or a bridge crossing would yank
+        // a zombie down to the surface.
+        const zWater = waterAt(zx, zz);
+        const zDepth = zWater.depth;
+        const zWaterLevel = zWater.level;
         const zOnDeck = zWaterLevel !== null && z.mesh.position.y > zWaterLevel + 0.6;
-        const zSwimming = zDepth > 1.3 && !zOnDeck;
+        const zSwimming = zWater.wading >= 1 && !zOnDeck;
 
         if (zSwimming) {
           // The drowned are in their element in the water; everyone else paddles.
@@ -35806,12 +36572,21 @@
         }
         let mx = zx + ((graceFreeze || rising) ? 0 : sx * spd * dt);
         let mz = zz + ((graceFreeze || rising) ? 0 : sz * spd * dt);
+        // River current carries bodies downstream while they wade or swim (GB-9).
+        // Aquatic types fight it a little; everyone else drifts with the flow.
+        if (!graceFreeze && !rising && !zOnDeck && zDepth > 0.1 && zWater.speed > 0) {
+          const carry = z.aquatic ? 0.45 : 1;
+          mx += zWater.current.x * dt * carry;
+          mz += zWater.current.z * dt * carry;
+        }
 
         // Soft barricades — brutes shrug them off more
         const softStr = tactics === 'tank' ? 0.25 : 0.85;
-        let slid = resolveSoftBarricades(mx, mz, z.radius, softStr);
+        let slid = (z.climber && pieceHeight('barricade') <= (z.climbHeight || CLIMB_HEIGHT))
+          ? { x: mx, z: mz }
+          : resolveSoftBarricades(mx, mz, z.radius, softStr);
         mx = slid.x; mz = slid.z;
-        slid = resolveHardBuildCollisions(mx, mz, z.radius, false, z.mesh.position.y);
+        slid = resolveHardBuildCollisions(mx, mz, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
         mx = slid.x; mz = slid.z;
         slid = resolveStaticProps(mx, mz, z.radius, z.mesh.position.y);
         mx = slid.x; mz = slid.z;
@@ -35846,6 +36621,13 @@
           }
         }
 
+        // Wet-cave douse: damp nearby ground fires (combat-owned; Claude §5).
+        if (z.caveTrait === 'douse' && groundFires && groundFires.length) {
+          const dr = z.douseRadius || 1.8, damp = (z.douseAgePerSec || 2.4) * dt;
+          for (const f of groundFires) {
+            if (Math.hypot(f.x - zx, f.z - zz) < dr + z.radius) f.age += damp;
+          }
+        }
         // Fire sticks. Burn ticks even after leaving the cone.
         if (z.burnT > 0) {
           z.burnT -= dt;
@@ -36526,17 +37308,9 @@
       syncTilt();
     }
 
-    const skipPrepBtn = document.getElementById('skipPrepToggle');
-    function syncSkipPrepBtn() {
-      skipPrepBtn.textContent = 'Skip prep time: ' + (autoSkipPrep ? 'on' : 'off');
-      skipPrepBtn.classList.toggle('on', autoSkipPrep);
-    }
-    skipPrepBtn.addEventListener('click', () => {
-      autoSkipPrep = !autoSkipPrep;
-      try { localStorage.setItem('tt_skip_prep', autoSkipPrep ? '1' : '0'); } catch (_) {}
-      syncSkipPrepBtn();
-    });
-    syncSkipPrepBtn();
+    // Retire the unused preference without touching other settings or saved progress.
+    // Preparation remains player-controlled at the HQ alarm panel.
+    try { localStorage.removeItem('tt_skip_prep'); } catch (_) {}
 
     const menuCamera = window.createMenuCamera({THREE, camera, height: sampleHeight, POI, fade: document.getElementById('menuCameraFade')});
     function validatedPlayerName() {
@@ -36962,6 +37736,7 @@
       updateTreeSway(dt);
       updateFallingTrees(dt);
       updateFallingLeaves(dt);
+      updateTreeBatches();
     }
     function tick() {
       maybePreRollFromLoop();
@@ -37677,13 +38452,13 @@
       renderFrame();
       if (showPerf && !window.TT) {
         window.TT = {
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
-          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, worldSolids,
+          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
           LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
@@ -37716,7 +38491,7 @@
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
@@ -37726,7 +38501,7 @@
           ffHouseDistAt: (x, z) => { const k = ffIndexOf(ffHouse, x, z); return k < 0 ? null : ffHouse.dist[k]; },
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
-          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope,
+          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
           waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
           groundFires, damageBuild, removeBuild, placeBuildAt, resolveTarget, cellOccupant, topmostInCell, getMortarMounted: () => mortarMounted,
           // Debug-only: build-mode probes (placement, drag, doors, the delete highlight).
@@ -37859,11 +38634,131 @@
     // measured on the real GPU, the same fight staged before the loop started left
     // eight shader variants uncompiled that the loop's first real fight then built
     // mid-frame (25–30ms each), while staged from a running tick it left none.
-    // Whatever differs in the loop's state, the fix is to stage it there. It runs on
-    // the third tick, behind the mode menu, with the canvas hidden for that one tick
-    // so the staged bodies never show.
-    let _preRollTick = 0, _preRollDone = false;
+    // Whatever differs in the loop's state, the fix is to stage it there.
+    //
+    // The title does not wait for the whole of that fight (D-2, GB-2). It opens on the
+    // first tick. Set A — shambler, feral, the pistol, a grenade, a knife, and the three
+    // ways those kill — then warms one stage per tick behind the menu, so the opening can
+    // paint. The full roster keeps compiling after that.
+    let _preRollTick = 0, _preRollDone = false, _titleReleased = false, _setA = null, _setADone = false, _menuGap = 0;
+    // One stage of the first-minute set. Returns true when the set is finished.
+    // The canvas is hidden only for this stage's own frame and restored before the tick
+    // presents the menu, so the staged bodies never show.
+    function stepSetA() {
+      if (!_setA) _setA = { step: 0, zs: [], px: player.position.x, pz: player.position.z };
+      const s = _setA;
+      const canvas = renderer.domElement;
+      const prevVis = canvas.style.visibility;
+      canvas.style.visibility = 'hidden';
+      try {
+        if (s.step === 0) {
+          for (const key of ['shambler', 'shambler', 'feral']) {
+            const z = spawnZombie(s.px + s.zs.length * 1.2, s.pz + 6, key);
+            if (z) { z.riseT = 0; s.zs.push(z); }
+          }
+          warmFrame('a-fresh');
+        } else if (s.step === 1) {
+          for (const z of s.zs) { z.hp = 9999; damageZombie(z, 1, { kind: 'generic', dir: { x: 0, z: 1 } }); }
+          warmFrame('a-flash');
+        } else if (s.step === 2) {
+          for (const z of s.zs) {
+            z.flashT = 0;
+            const mats = z.mesh && z.mesh.userData.bodyMats;
+            if (mats) for (const m of mats) { m.emissive.setHex(0x000000); m.emissiveIntensity = 0; }
+          }
+          warmFrame('a-faded');
+        } else if (s.step >= 3 && s.step <= 5) {
+          const kinds = ['generic', 'melee', 'explosive'];
+          const z = s.zs[s.step - 3];
+          if (z) {
+            z.hp = 1;
+            killZombie(z, false, { kind: kinds[s.step - 3], dir: { x: 0.7, z: 0.7 } });
+            warmFrame('a-kill-' + kinds[s.step - 3]);
+            for (const g of gibPieces.splice(0)) releaseEffectMesh(g.mesh);
+          }
+        } else if (s.step === 6) {
+          const px = s.px, pz = s.pz;
+          try { spawnCasing('pistol'); } catch (e) {}
+          try { spawnProjectile(false, null, null, 10, 0.45, null, null, 'bullet', 0); } catch (e) {}
+          try { triggerMuzzleFlash(); } catch (e) {}
+          try { spawnDust(px, sampleHeight(px, pz), pz, 3); } catch (e) {}
+          try { spawnSplash(px, sampleHeight(px, pz), pz, 3, 0.5); } catch (e) {}
+          try { spawnRipple(px, sampleHeight(px, pz), pz); } catch (e) {}
+          try { spawnCashDrop(px + 1, pz + 1, 5); spawnMedDrop(px - 1, pz + 1); } catch (e) {}
+          // throwGrenade refuses to fire until a match is running. Flip that for one call
+          // so the real grenade mesh is the one that gets compiled, then put the flags back.
+          const wasStarted = gameStarted, nades = grenades;
+          try {
+            gameStarted = true; grenades = Math.max(1, grenades);
+            throwGrenade();
+          } catch (e) {}
+          gameStarted = wasStarted; grenades = nades; grenadeCd = 0;
+          try { updateAmmoHud(); } catch (e) {}
+          try {
+            flashTimer = 0;
+            const gun = firingGun();
+            if (gun && gun.userData) {
+              gun.userData.flashT = 0;
+              gun.userData.slideKick = 0;
+              if (gun.userData.flash) gun.userData.flash.material.opacity = 0;
+              if (gun.userData.flashLight) gun.userData.flashLight.intensity = 0;
+            }
+            muzzleFlashLight.intensity = 0;
+          } catch (e) {}
+          warmFrame('a-fx');
+        } else {
+          for (const c of corpses) c.t += 0.5;
+          warmFrame('a-corpse');
+          finishEffectWarmup();
+        }
+      } catch (e) {
+        console.info('Dead-Wave: first-minute warm-up skipped.', e);
+        try { finishEffectWarmup(); } catch (e2) {}
+        _setA = null;
+        return true;
+      } finally {
+        canvas.style.visibility = prevVis;
+      }
+      s.step++;
+      if (s.step > 7) { _setA = null; return true; }
+      return false;
+    }
+    function releaseTitle() {
+      if (_titleReleased) return;
+      _titleReleased = true;
+      // The menu comes up now. The load channel stays on its last step until set A has
+      // actually drawn, so `ready` means the first minute is warm (D-2), not merely that
+      // the overlay gave up.
+      window.DWOpening?.ready();
+      try {
+        const nb = renderer._nodes && renderer._nodes.nodeBuilderCache;
+        console.info('Dead-Wave title: menu up after ' + _warmStats.frames + ' warm frames, ' + (nb ? nb.size : '?') + ' variants | ' + _warmStats.trace.join(' '));
+      } catch (e) {}
+    }
+    function finishFirstMinuteLoad() {
+      try { DWLoad._endStep('warmup'); DWLoad._stopWatchingErrors(); } catch (e) {}
+      try {
+        const nb = renderer._nodes && renderer._nodes.nodeBuilderCache;
+        console.info('Dead-Wave first minute: ' + (nb ? nb.size : '?') + ' variants after ' + _warmStats.frames + ' warm frames | ' + _warmStats.trace.join(' '));
+      } catch (e) {}
+    }
     function maybePreRollFromLoop() {
+      // Open the menu before any staged frame, so the opening's dissolve is not stuck
+      // behind the first-minute renders.
+      if (!_titleReleased) {
+        releaseTitle();
+        // A hidden tab clamps timers to about a second and the pump would otherwise
+        // run straight into the staged fight, so the opening's dissolve never gets a
+        // turn. Leave a short gap with nothing heavy in it.
+        _menuGap = performance.now() + 1200;
+        return;
+      }
+      if (performance.now() < _menuGap) return;
+      if (!_setADone) {
+        _setADone = stepSetA();
+        if (_setADone) finishFirstMinuteLoad();
+        return;
+      }
       if (_preRollDone) return;
       _preRollTick++;
       if (_preRollTick < 3) return;
@@ -37880,11 +38775,15 @@
       for (const o of culled) o.frustumCulled = true;
       for (const o of hidden) o.visible = false;
       finishEffectWarmup();
+      // The menu is already up, so the canvas stays on for the menu camera. The live
+      // fight still runs (it is what compiles the variants the staged frames miss) but
+      // compileLiveRollFrame draws it off the presented view.
+      if (_titleReleased) canvas.style.visibility = prevVis;
       // Second stage: a short REAL fight, run by the loop itself over the next couple
-      // of seconds behind the menu, canvas still hidden. The synchronous staging above
-      // catches almost everything; whatever the live loop does differently (and on the
-      // real GPU there was a handful of variants it still built in the first fight),
-      // this catches, because it *is* the live loop.
+      // of seconds behind the menu. The synchronous staging above catches almost
+      // everything; whatever the live loop does differently (and on the real GPU there
+      // was a handful of variants it still built in the first fight), this catches,
+      // because it *is* the live loop.
       _liveRoll = { tick: 0, zs: [], prevVis, canvas };
       try {
         const px = player.position.x, pz = player.position.z;
@@ -37899,7 +38798,9 @@
       finishEffectWarmup();
       DWLoad._endStep('warmup');
       DWLoad._stopWatchingErrors();
-      window.DWOpening?.ready();
+      // The menu already opened after the first-minute warm-up (releaseTitle). This is
+      // only the fallback for a load where that never ran.
+      if (!_titleReleased) window.DWOpening?.ready();
       // Visible: restore on the next frame, after the cleanup has drawn. Hidden: nothing
       // is drawn to see, and rAF would not run until the tab came back.
       if (document.visibilityState === 'hidden') lr.canvas.style.visibility = lr.prevVis;
@@ -37927,6 +38828,43 @@
         updateCorpses(1 / 60);
         if (lr.tick >= 110) endLivePreRoll();
       } catch (e) { console.info('Dead-Wave: live pre-roll stopped early.', e); endLivePreRoll(); }
+    }
+    // One extra frame of the live fight, aimed at it, then those meshes are hidden so
+    // the menu camera's present is the world the player actually sees. Both presents
+    // land before the browser composites, so only the menu shot shows.
+    function compileLiveRollFrame() {
+      const lr = _liveRoll;
+      if (!lr || !_titleReleased) return;
+      const cam = camera;
+      const pose = { p: cam.position.clone(), q: cam.quaternion.clone(), fov: cam.fov };
+      const meshes = [];
+      const add = (mesh) => {
+        if (!mesh) return;
+        meshes.push(mesh);
+        mesh.visible = true;
+        mesh.frustumCulled = false;
+      };
+      for (const z of lr.zs) add(z.mesh);
+      for (const c of corpses) { add(c.mesh); add(c.pool); }
+      for (const g of gibPieces) add(g.mesh);
+      for (const f of groundFires) add(f.mesh);
+      const anchor = lr.zs.find((z) => z.mesh) || corpses[0];
+      const pos = anchor && anchor.mesh && anchor.mesh.position;
+      try {
+        if (pos) {
+          cam.position.set(pos.x + 7, pos.y + 4, pos.z + 7);
+          cam.lookAt(pos);
+          cam.updateProjectionMatrix();
+          renderFrame();
+        }
+      } catch (e) { /* the menu frame still has to present */ }
+      finally {
+        for (const mesh of meshes) { mesh.visible = false; mesh.frustumCulled = true; }
+        cam.position.copy(pose.p);
+        cam.quaternion.copy(pose.q);
+        cam.fov = pose.fov;
+        cam.updateProjectionMatrix();
+      }
     }
 
     // The staged fight. Everything here is a real game call, so whatever a real fight
@@ -38004,6 +38942,7 @@
       for (const L of fallingLeaves.splice(0)) releaseEffectMesh(L.mesh);
     }
 
+    buildTreeBatches(); // CL-10: after every tree is placed, before the warm-up compiles the scene
     await loadMark('contact shading + rest of setup');
     await whileHiddenFramesRun(() => initPostProcessing());
     warmEffectPools();
@@ -38069,8 +39008,8 @@
     // the tab is hidden and the pre-roll is unfinished, the same tick is pumped from
     // MessageChannel messages; as soon as the tab shows, the loop has it again. Bounded:
     // the pre-roll is about 113 ticks, and the pump stops the moment it ends.
-    const preRollPending = () => !_preRollDone || !!_liveRoll;
-    let _preRollPumping = false;
+    const preRollPending = () => !_titleReleased || !_setADone || !_preRollDone || !!_liveRoll;
+    let _preRollPumping = false, _preRollThrows = 0;
     function pumpPreRollWhileHidden() {
       if (_preRollPumping || !preRollPending() || document.visibilityState !== 'hidden') return;
       _preRollPumping = true;
@@ -38078,7 +39017,16 @@
       const stop = () => { _preRollPumping = false; ch.port1.close(); };
       ch.port1.onmessage = () => {
         if (!preRollPending() || document.visibilityState !== 'hidden') { stop(); return; }
-        try { tick(); } catch (e) { console.info('Dead-Wave: hidden-tab pre-roll stopped.', e); stop(); return; }
+        // One thrown tick used to kill the pump. Under the stand-in renderer the first
+        // tick throws, the page is hidden so the real loop never runs, and the load
+        // then crawls on throttled timers. Keep going, say so once, and stop only when
+        // it is clearly not going to recover.
+        try { tick(); _preRollThrows = 0; }
+        catch (e) {
+          _preRollThrows++;
+          if (_preRollThrows === 1) console.info('Dead-Wave: hidden-tab pre-roll tick threw; still pumping.', e);
+          if (_preRollThrows >= 30) { console.info('Dead-Wave: hidden-tab pre-roll stopped after 30 thrown ticks.'); stop(); return; }
+        }
         ch.port2.postMessage(0);
       };
       ch.port2.postMessage(0);
