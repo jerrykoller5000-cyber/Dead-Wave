@@ -1,0 +1,23 @@
+/* The legacy opening controller keeps its gate; this replaces only its progress display. */
+#opening[data-load-ui] .opening-load > p,
+#opening[data-load-ui] .load-track { display: none; }
+#opening[data-load-ui] .opening-load { width: min(380px, 82vw); bottom: 9vh; }
+.dw-load-stages { font: 10px var(--font-hud); color: #aab1a1; }
+#opening .dw-load-headline { color: #d5d6c9; letter-spacing: .12em; margin: 0 0 14px; line-height: 1.5; }
+.dw-load-stages ul { list-style: none; padding: 0; margin: 0; }
+.dw-load-stages li { display: grid; grid-template-columns: 1fr auto; gap: 5px 16px; padding: 6px 0; border-top: 1px solid #9cab901f; }
+.dw-load-state { color: #92988a; font-variant-numeric: tabular-nums; }
+.dw-load-stages li[data-state="active"] { color: #e0dfd0; }
+.dw-load-stages li[data-state="complete"] .dw-load-state { color: #a8bb95; }
+.dw-load-stages li[data-state="failed"] .dw-load-state,
+.dw-load-stages[data-state="failed"] .dw-load-headline { color: #e19b86; }
+.dw-load-stages progress { grid-column: 1 / -1; width: 100%; height: 2px; border: 0; accent-color: #a84b3d; background: #30362c; }
+.dw-load-stages progress[hidden] { display: none; }
+.dw-load-stages progress::-webkit-progress-bar { background: #30362c; }
+.dw-load-stages progress::-webkit-progress-value { background: #a84b3d; }
+@media (max-height: 650px) {
+  #opening[data-load-ui][data-phase="loading"] .opening-title,
+  #opening[data-load-ui][data-phase="error"] .opening-title { transform: translateY(-65px); }
+  #opening[data-load-ui] .opening-load { bottom: 65px; }
+  .dw-load-stages li { padding: 4px 0; }
+}

@@ -55,13 +55,28 @@
   ok(T.hq.dep === 'process' && T.getBank() === bank0, 'machinery running, no cash yet');
   await wait(4000);
   ok(T.hq.dep === 'green' && T.getBank() === bank0 + val, 'ding: light green, +$' + (T.getBank() - bank0));
-  // the panel starts the wave
+  // GP-5: panel E opens the briefing; only explicit Sound alarm starts hqStartWave
   p.set(T.HQ_PANEL_FRONT.x, T.sampleHeight(T.HQ_PANEL_FRONT.x, T.HQ_PANEL_FRONT.z), T.HQ_PANEL_FRONT.z); await wait(200);
-  ok(T.actionTarget() === 'hqPanel', 'at the panel, E means: sound the alarm');
+  ok(T.actionTarget() === 'hqPanel', 'at the panel, E means: open HQ briefing');
   T.doAction();
+  await wait(100);
+  const briefing = document.getElementById('hqBriefing');
+  ok(!!briefing && briefing.open === true && !T.hq.seq, 'briefing open after E; alarm not started');
+  const alarmBtn = briefing && [...briefing.querySelectorAll('button')].find(b => /Sound alarm/i.test(b.textContent || ''));
+  ok(!!alarmBtn && !alarmBtn.disabled, 'Sound alarm button present and enabled');
+  if (alarmBtn) alarmBtn.click();
+  await wait(100);
   ok(!!T.hq.seq && T.getPhase() === 'prep', 'alarm sounding, wave not yet');
   await wait(1800);
-  const lit = T.house.strobes.some(s => s.mat.emissiveIntensity > 1) || true;
+  // GB-15: real strobes-on check (was const lit = ... || true never asserted).
+  // updateHQSequence pulses emissiveIntensity 6 with a short duty cycle while seq.t < 5;
+  // poll so a headless sample is not stuck between flashes.
+  let lit = false;
+  for (let i = 0; i < 40 && !lit; i++) {
+    lit = T.house.strobes.some(s => s.mat.emissiveIntensity > 1);
+    if (!lit) await wait(50);
+  }
+  ok(lit, 'strobes flash during the alarm sequence');
   ok(T.hq.flares.length > 0, 'flares in the air: ' + T.hq.flares.length);
   await wait(4200);
   ok(T.getPhase() === 'wave' && !T.hq.seq && T.hq.flares.length === 0, 'five seconds on, the wave is on and the flares have burst');

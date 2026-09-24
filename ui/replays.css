@@ -1,0 +1,8 @@
+#win.replay-active { display:none !important; }
+#watchAgain[hidden], .replay-status[hidden] { display:none; }
+#watchAgain { margin:8px 8px 0 0; }
+#winMsg .deathlog button.replay-tile { display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-family:inherit; letter-spacing:inherit; text-transform:none; margin:0; border-radius:0; box-shadow:none; animation:none; }
+#winMsg .deathlog .replay-verb { font-size:9px; text-transform:uppercase; letter-spacing:.05em; color:#d8c25a; }
+#winMsg .deathlog button.replay-tile:hover { background:#34412c; border-color:#e4d48c; }
+#watchAgain:focus-visible, #winMsg .deathlog button.replay-tile:focus-visible { outline:2px solid #f1dda0; outline-offset:3px; }
+.replay-status { color:#e0cb90; font-size:12px; }

@@ -7,7 +7,8 @@
   "scripts": {
     "test": "node tools/tests/run-all.mjs",
     "shoot": "node tools/shoot.mjs",
-    "serve": "node tools/serve.mjs 8971"
+    "serve": "node tools/serve.mjs 8971",
+    "crew": "node crew/crew.mjs"
   },
   "comment": [
     "No dependencies, on purpose. The game runs straight from this folder with no build",

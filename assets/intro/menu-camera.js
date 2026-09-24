@@ -54,6 +54,7 @@ window.createMenuCamera = ({THREE, camera, height, POI, fade}) => {
       if(t===1){
         deployment=null;fade.style.opacity='0';document.body.classList.remove('deploying');
         document.getElementById('hud').inert=false;d.finish();
+      window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'controls-ready' } }));
       }
     }
   };

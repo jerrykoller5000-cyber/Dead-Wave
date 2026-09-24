@@ -1,4 +1,4 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play refuses with no callsign; tryPlace also no-ops until the match has started.
@@ -47,12 +47,34 @@
   ok(four.every(f => f && f.level === 1), 'floors in all four squares round it');
   ok(four.every(f => Math.abs(f.mesh.position.y - (pil.mesh.position.y + 2)) < 1e-6), 'floors sit on the pillar cap');
   ok(!T.placeBuildAt('platform', X + 1, Z - 1), 'unbraced: no deck one square further out (' + T.resolveTarget('platform', X + 1, Z - 1).refusal + ')');
-  // Turret on the pillar cap. Aim-from-the-side is brittle in the harness (a flat ray
-  // often hits terrain before the post, so getPlacePoint never sees the pillar). The
-  // scripted path with { piece } is the same resolveTarget branch tryPlace uses when
-  // the reticle does land on it.
-  const tt = T.placeBuildAt('heavy', X, Z, 0, { piece: pil });
-  ok(tt && tt.slot === 'ptop' && Math.abs(tt.x - pil.x) < 1e-9, 'turret on the pillar (' + (tt && tt.slot) + ')');
+  // Turret on the pillar cap via the real aim path (getPlacePoint -> tryPlace).
+  // Floors cover the cap from above, so aim from the side at mid-post / toward the
+  // cap. Move the marine next to the post so reach matches a real placement.
+  T.setPlaceMode('heavy');
+  p.set(pil.x - 4, T.sampleHeight(pil.x - 4, pil.z) + 1.6, pil.z);
+  await wait(50);
+  // Prefer a shallow eye-to-cap aim (the case that used to hit grass before the post).
+  T.setAimRay(pil.x - 4, p.y + 0.1, pil.z, 4, (pil.mesh.position.y + 1.8) - (p.y + 0.1), 0);
+  T.updateGhostPreview();
+  let ppt = T.getPlacePoint();
+  if (!(ppt.hit && ppt.hit.type === 'pillar')) {
+    // Fallback angle: flat mid-shaft (still the live aim path).
+    T.setAimRay(pil.x - 3, pil.mesh.position.y + 1.0, pil.z, 3, 0, 0);
+    T.updateGhostPreview();
+    ppt = T.getPlacePoint();
+  }
+  const nT = T.builds.length;
+  T.tryPlace();
+  let tt = T.builds[T.builds.length - 1];
+  ok(T.builds.length === nT + 1, 'turret on the pillar: exactly one piece added (' + (T.builds.length - nT) + ')');
+  const aimedOk = T.builds.length === nT + 1 && tt && tt.slot === 'ptop' && Math.abs(tt.x - pil.x) < 1e-9;
+  ok(aimedOk, 'turret on the pillar via aim (' + (tt && tt.slot) + ', hit ' + (ppt.hit && ppt.hit.type) + ')');
+  // Secondary sanity: the scripted { piece } branch resolveTarget uses when the reticle
+  // lands on a post (same path tryPlace takes). Pillar already has a turret, so this
+  // must refuse — proves the branch without placing a second piece.
+  const ptopBusy = T.resolveTarget('light', X, Z, 0, { piece: pil });
+  ok(!!ptopBusy.refusal && /turret|pillar/i.test(ptopBusy.refusal), 'direct resolveTarget({ piece: pillar }) still wired (' + ptopBusy.refusal + ')');
+  if (!aimedOk) tt = T.placeBuildAt('heavy', X, Z, 0, { piece: pil });
   ok(!T.placeBuildAt('wall', X, Z, 0, { lv: 0, piece: pil }) || true, '(walls ignore pillars)');
   // braced pillar: wall within 3 squares -> 12
   const X2 = gx - 3, Z2 = gz + 4;
@@ -79,18 +101,19 @@
   ok(gf && gf.level === 0 && gf.deck && Math.abs(gf.deck.deckY - gf.mesh.position.y - floorH) < 1e-6, 'floor on bare ground');
   const tg = T.placeBuildAt('light', gx - 6, gz - 6);
   ok(tg && tg.level === 0 && Math.abs(tg.mesh.position.y - gf.mesh.position.y - floorH) < 1e-6, 'turret on the ground floor');
-  // walled room with ground floor, roof on the walls
+  // walled room with ground floor, roof via elevated aim (D-12: no default roofing)
   const rx = gx + 5, rz = gz + 5;
+  p.set(T.gridCentre(rx), T.sampleHeight(T.gridCentre(rx), T.gridCentre(rz)), T.gridCentre(rz));
   const gf2 = T.placeBuildAt('floor', rx, rz);
   const ws = [0, 1, 2, 3].map(q => T.placeBuildAt('wall', rx, rz, q));
-  const roof = T.placeBuildAt('floor', rx, rz, 0, { forceLv: 1 });
-  ok(gf2 && ws.every(Boolean) && roof && roof.level === 1 && Math.abs(roof.mesh.position.y - (ws[0].mesh.position.y + 2)) < 1e-6, 'room: ground floor, walls on it, roof on the walls (roof y-wall y ' + (roof ? f2(roof.mesh.position.y - ws[0].mesh.position.y) : '-') + ')');
+  const roof = T.placeBuildAt('floor', rx, rz, 0, { lv: 1 });
+  ok(gf2 && gf2.level === 0 && ws.every(Boolean) && roof && roof.level === 1 && Math.abs(roof.mesh.position.y - (ws[0].mesh.position.y + 2)) < 1e-6, 'room: ground floor, walls on it, roof aimed at wall tops (roof y-wall y ' + (roof ? f2(roof.mesh.position.y - ws[0].mesh.position.y) : '-') + ')');
   // --- platform pad height = 75% of railing
   const pw = T.placeBuildAt('wall', gx - 6, gz + 2, 0); const pp = T.placeBuildAt('platform', gx - 6, gz + 2);
   ok(Math.abs(pp.deck2.deckY - pp.mesh.position.y - 0.72 * 0.75) < 1e-6, 'platform pad at 75% of a railing (' + f2(pp.deck2.deckY - pp.mesh.position.y) + ')');
   // --- stairs grow to reach a floor above
   const sx = gx - 3, sz = gz - 6;
-  T.placeBuildAt('wall', sx, sz, 0); p.y = T.sampleHeight(p.x, p.z) + 3; const hf = T.placeBuildAt('floor', sx, sz, 0, { forceLv: 1 });
+  T.placeBuildAt('wall', sx, sz, 0); p.y = T.sampleHeight(p.x, p.z) + 3; const hf = T.placeBuildAt('floor', sx, sz);
   const stairs = T.placeBuildAt('stairs', sx, sz + 1);
   const topY = stairs.deck.deckY + stairs.deck.rise;
   ok(stairs && Math.abs(topY - hf.deck.deckY) < 1e-6, 'stairs reach the floor exactly (top ' + f2(topY) + ' floor ' + f2(hf.deck.deckY) + ', rise ' + f2(stairs.rise || 0) + ')');

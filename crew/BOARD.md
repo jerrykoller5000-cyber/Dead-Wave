@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-23, 22:02 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-24, 02:25 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -14,26 +14,50 @@ Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
 **Told to "check in with the crew work board and complete your tasks"?** This is the board.
 1. Read `AGENTS.md` if you haven't this session. It has the rules, and its "Every session"
    steps say exactly how to check in, post notes and check out.
-2. Run `node crew/crew.mjs next <you>` (`claude`, `cursor`, `chatgpt`, `grokbot`, `opencode`,
+2. Run `node crew/crew.mjs next <you>` (`claude`, `cursor`, `chatgpt`, `grokbot`,
    `antigravity`) for your
    first task, or read your queue below.
 3. Work the queue top to bottom, one check-in and one handoff per task, until it's empty or
    you're blocked. Don't stop to ask Jerry whether to continue.
 
-Where each of you is (2026-09-23 night, after OpenCode and Antigravity joined, D-9):
+Where each of you is (2026-09-24, 03:55 UTC). **Jerry's stopping point (see Orders): finish only what's listed for you here, then check out.** **The freeze is off.** Cursor paused the split
+after two slices (`core/math.js`, `core/geometry.js`), and from now on it goes a slice at a
+time (D-15). Between slices `index.html` is open again, one agent per part, as before.
 
 | Agent | Now / start with | Then |
 | --- | --- | --- |
-| Cursor | CU-7 pit camera and probe time limits (in progress) | CU-4 the split, then CU-5 |
-| Grokbot | GB-10 t34 for the HQ briefing (in progress) | GB-11 purchase events, GB-5, GB-9 logs |
-| ChatGPT | GP-5 HQ briefing | GP-4 the coach (unblocked), GP-8 Phase 2 design, GP-7 prep checklist |
-| Claude | CL-10 instanced trees | CL-11 night lighting, CL-12 objective props |
-| OpenCode | OC-1 `controls-ready` (unblocks ChatGPT's GP-4) | OC-2, OC-3, then OC-4 every session |
-| Antigravity | AG-1 run the game, baseline shots | AG-2, AG-3, AG-4, AG-5 |
+| Cursor | CU-13 once ChatGPT and Grokbot have checked out: commit everything, full `npm test`, push | stop |
+| Grokbot | GB-21 the replay puts the camera back | stop |
+| ChatGPT | GP-13 (already started): the replay chrome, finished once GB-21 makes replays play | stop |
+| Claude | reviews, contracts; CL-11 parked for the planning session | stop |
+| Antigravity | AG-7b, AG-8, and ChatGPT's GP-12 shots | stop |
+
+## Waiting on
+
+The panel's "Right now" box draws this. Claude keeps it current: one line for each thing that
+others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A line whose task
+ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
+a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
+
+- **ChatGPT** · GP-13 the replay chrome · waiting: Grokbot
+- **Cursor** · CU-13 the final commit and full test run · waiting: ChatGPT, Grokbot
+
 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-24, 03:55Z · A good stopping point.** Jerry is re-assessing the game after work, and
+  then he and Claude set the future vision: goals we can actually reach, and where the game goes.
+  So: finish only what the "Where each of you is" table lists for you, then check out and start
+  nothing new. Cursor goes last (CU-13): commit everything, run the full `npm test`, push, and
+  put the commit and the numbers in his handoff. Anything else on the board waits for the new plan.
+
+- **2026-09-24 — Antigravity now runs on Claude Sonnet 4.6, and every check-in names its
+  model** so everyone can track who is running what (D-14).
+
+- **2026-09-23 — OpenCode leaves the crew.** Jerry doesn't think it will help much with this
+  project. Its finished work stays (OC-1 to OC-3); its standing job goes back to Cursor (D-10).
 
 - **2026-09-23 — Two new crew members.** OpenCode (Nemotron 3.5 Lightning, in a terminal) and
   Antigravity (Gemini 3.8 Flash, in an editor with a browser). They lighten everyone's
@@ -62,7 +86,73 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
-- **D-9 · Six agents; tasks by strength.**
+- **D-18 · Scripted-death replays (GB-18) are approved** as written in `docs/specs/replays.md`, with
+  three additions. v1 is the cave grab and the pit haul only, unlocked by `tt_death_log`, free,
+  started from the death screen's Watch again (A) and a found tile in the death catalogue (B); the
+  HQ/title archive (C) waits. The hard bans in §5 stand. Additions: (1) a replay writes no profile
+  stats either (best day, kills, anything in localStorage), not just the death log; (2) the replay
+  puts the player at the grab spot and puts every pose, camera and class back exactly after,
+  including when it's aborted; (3) any randomness in the cine may differ between replays, but the
+  world may not: no call that seeds or moves world things (rule 10). Grokbot builds the combat
+  side (GB-20), then ChatGPT the button, tile and strings (GP-13).
+- **D-17 · Cursor's objective interaction (CU-10) is approved** as proposed in `handoffs/requests.md`:
+  `getObjectiveInteraction(id)` → `{ id, approach, distance, reachable, blockedBy, ePressed, eHeld,
+  holdSeconds, cancelled }`, reachable within 1.6 m of the approach and 1.25 m of its height,
+  with no build in the way, no other E target and no modal. One clarification: any id can be
+  asked any time (the map's reachable flags need all seven); only the hold timer follows a
+  single site, the one being held. Cursor builds it (CU-11).
+- **D-16 · Grokbot's GB-16 helpers are contracts, with three fixes.** `spawnObjectiveDefenders`,
+  `getRadioDefenderState`, `RADIO_DEFENDER`, `grantSupply`, `listOwnedAmmoPackChoices`,
+  `grantBuildBlueprint` and the `player-damaged` event are approved as written in
+  `docs/contracts.md`. `grantBuildBlueprint` returns `{ id, alreadyOwned, granted }`, which
+  replaces the string answer I gave for GB-16 (e). The three fixes (GB-17):
+  (1) saw fuel is fractional, and `grantSupply` must not round it down (`qty | 0` does today);
+  (2) ammo for a calibre the player owns no weapon for is refused, the whole quantity returned
+  as remaining; (3) `guardian-first-blood` fires only for a guardian from a guardian night's plan
+  in an ordinary run, never one spawned by a debug command, and it carries the kill position
+  `{ x, z }`.
+- **D-15 · The split goes a slice at a time.** Cursor paused after two slices so the freeze
+  could come off, and that is how it continues: he turns the freeze on for one slice (one
+  section of `index.html` into its module), runs the tests, checks out, and the file opens
+  again. Until a section's slice lands, its owner keeps working in it inside `index.html`,
+  one agent per part. Tasks no longer wait "after the split".
+- **D-14 · Every check-in names its model.** `crew.mjs in` now requires `--model "<the model this
+  session runs on>"` and refuses without it. The model goes on the agent's card and the panel,
+  the IN line in the log says `on <model>`, and a change of model gets its own MODEL line.
+  Model names come out of `AGENTS.md`: the card is where each agent's model lives. Claude, who
+  checks in by hand, writes the same. Antigravity is on Claude Sonnet 4.6 from now on. D-9's
+  cautions were about Gemini Flash, so its role stays the crew's eyes for now, and Jerry can
+  widen it.
+- **D-13 · The guardian night (GB-13 spec) is approved, with two changes.** Day 6 and every
+  6th day after it, from the chalk cave, a fightable `guardian` (never `caveguard`), replacing
+  surround and colossus on those nights; Blood Moon still stacks. The changes:
+  (1) cave warnings as on every night: `caveWarn` 1 at prep, 2 at `beginWave`, 0 when it
+  ends. A whole prep at level 2 is minutes of heavy dust, and the briefing already carries
+  the urgency. (2) A stuck guardian must not hold the night forever: if it makes no progress
+  toward the player for 60 s, it re-paths, and if that fails it walks back out of its mouth.
+  The first-blood reward's economy side is ChatGPT's call. Implementation (GB-14) waits for
+  the split.
+- **D-12 · Floors follow aim.** Aim at the ground, or give no aim, and a floor goes at your
+  feet. Aim at the wall tops or a platform, and it goes on the storey above. So t13's
+  "ground floor in a walled square" is right, and a test that wants a roof must aim for it
+  (`setAimRay` or `opts.lv`), not rely on the default. Grokbot: GB-12, after the split.
+- **D-11 · The repair helpers are contracts.** `getRepairTarget()` (damaged builds only, the
+  same reach as T) and `getRepairSnapshot(id)` (the target at full HP with `cost: 0`; `null`
+  only when it is gone) are approved as Grokbot's production exports for ChatGPT's prep
+  checklist. ChatGPT applies his three-line hook now. Claude records both in
+  `docs/contracts.md` (CL-13). Known gap, accepted for now: ids reuse the cell, so removing
+  a build and rebuilding it between two samples reads as the same target.
+- **D-10 · OpenCode leaves; five agents.** On Jerry's order.
+  - **What it finished stays:** `controls-ready` (OC-1), `npm run crew` (OC-2) and the
+    first `docs/contracts.md` (OC-3).
+  - **Contracts:** Claude reviews and keeps `docs/contracts.md` from now on (CL-13), since
+    Claude approves every contract anyway.
+  - **Test runs:** back to how they were before D-9. Cursor runs the full suite at commit
+    time, including for anyone whose handoff says "Tests: not run" (ChatGPT's machine can't
+    run it).
+  - **Its name is off the panel, `crew.mjs` and `AGENTS.md`.** Its card stays in
+    `crew/status/` as a record and is no longer read.
+- **D-9 · Six agents; tasks by strength.** (OpenCode's part is superseded by D-10.)
   - **OpenCode is the runner and clerk.** A small, fast model in a terminal: excellent at
     exact, bounded jobs with a command that proves them, weak at holding a huge file or
     reasoning across many.
@@ -193,7 +283,24 @@ Work top to bottom unless something is blocked. `[ ]` to do, `[>]` in progress, 
 - [~] **CU-3** `docs/contracts.md`: moved to OpenCode (OC-3, D-9).
 - [~] **CU-9** controls-ready: moved to OpenCode (OC-1, D-9). The GP-3 markup is approved by Claude.
 - [~] **CU-6** `npm run crew`: moved to OpenCode (OC-2, D-9).
-- [ ] **CU-4** The split (`docs/split-plan.md`), in one sitting, with the freeze on.
+- [>] **CU-4** The split (`docs/split-plan.md`), a slice at a time (D-15): freeze on for each slice,
+  off between them. Done so far: `core/math.js`, `core/geometry.js`.
+- [x] **CU-10** Objective interaction, for ChatGPT's GP-11 (his request): a production snapshot per
+  objective approach point (`getObjectiveProps()` in `docs/contracts.md`): whether the player can
+  actually use it from where they stand (reachable, not through walls), whether E is pressed or
+  held, and what cancels a hold (damage, death, a modal opening, walking off). Propose the shape
+  in `handoffs/requests.md`; Claude approves it into `docs/contracts.md`.
+- [x] **CU-11** Build `getObjectiveInteraction(id)` as approved (D-17), with a test, in your
+  interaction code. ChatGPT's GP-11 waits on it. Accepted 02:40Z: Claude held E for 0.7 s in a
+  probe, the timer ran (0.69 s), stayed 0 on the fuel stand, and walking off cancelled with 'left'.
+- [x] **CU-12** Tighten t55. "hold timer exists" (`holdSeconds === 0 || holdSeconds >= 0`) is
+  always true, and "does not follow a second site" is checked the instant E goes down, when every
+  timer is 0 anyway. Hold for ~0.7 s, then check the radio's timer is above 0.3 and the fuel
+  stand's is 0; add a walk-off check ('left'). Claude's probe of exactly this passes today.
+- [>] **CU-13** The stopping point (Jerry, 03:55Z). When ChatGPT (GP-13) and Grokbot (GB-21) have
+  checked out: commit everything that isn't committed (CL-14, GB-17, GB-19, GB-20, GB-21, GP-12,
+  GP-11, GP-13, your audio/loader slices), run the full `npm test`, push, and write the commit, the
+  numbers and any failures in your handoff. Then stop.
 - [ ] **CU-5** Phase 1 core: the collider grid, the on-screen error card, a save at the start of
   each day.
 
@@ -221,18 +328,69 @@ Work top to bottom unless something is blocked. `[ ]` to do, `[>]` in progress, 
   - Confirm the corner-door change in t5 was intended.
   - Check out with `--review`.
 - [x] **GB-4** Cave roles table, and calling `caveWarn` once Claude ships it (CL-4).
-- [>] **GB-10** t34 for ChatGPT's HQ briefing (GP-5): E now opens the briefing, and only its
+- [x] **GB-10** t34 for ChatGPT's HQ briefing (GP-5): E now opens the briefing, and only its
   Sound alarm button starts the wave. Assert the dialog opens and `!hq.seq`, click Sound
   alarm, then keep every existing strobe, flare and wave check. Check out with `--review`.
   (Grokbot started this at 22:02 under his GB-5 check-in.)
-- [ ] **GB-11** D-8 `purchase-delivered`: emit `dw-game` `{ type: 'purchase-delivered', itemId,
+- [x] **GB-11** D-8 `purchase-delivered`: emit `dw-game` `{ type: 'purchase-delivered', itemId,
   cashSpent, source: 'build' | 'upgrade' }` after a piece is placed or a paid upgrade or
   repair lands (ChatGPT's coach needs it for the first-purchase lesson).
-- [>] **GB-5** Floors, stairs, bridges and cover behave as they look, with a test for each fix.
-- [ ] **GB-9** Felled trees now lie for 120 s as solids tagged `kind: 'log'` (CL-5). Rebuild the flow
+- [x] **GB-5** Floors, stairs, bridges and cover behave as they look, with a test for each fix.
+- [x] **GB-9** Felled trees now lie for 120 s as solids tagged `kind: 'log'` (CL-5). Rebuild the flow
   field when `'dw-log'` fires, so zombies path round a log instead of pushing along it. Switch
   the zombie update's wading and swimming checks to `waterAt(x, z)`, which also gives the
   current if you want zombies carried downstream.
+- [x] **GB-13** The guardian night (order of work, step 8), **spec only**: write
+  `docs/specs/combat-phase2.md`: which night, where it comes from, how the player reads it
+  coming (cave warnings, the HQ briefing), how it is beaten, what it drops. Send it to Claude
+  and ChatGPT for review. No `index.html` until the split lands.
+- [x] **GB-15** Two test fixes, tests only, so they're safe during the freeze:
+  (a) t34: `const lit = ... || true` is never asserted. Make the strobes-on check a real `ok()`,
+  or say in the handoff why it can't be checked headless. (b) t43 "queue drained in lockstep"
+  fails about 1 run in 6: extra shamblers are alive that didn't come from the queue. Find where
+  they come from, and make the check count only zombies spawned from the plan.
+- [x] **GB-12** Floors follow aim (D-12): without an elevated aim, a grounded
+  floor in a walled square goes at the player's feet. t13 stays as it is; fix any of t5, t6,
+  t11 or t12 that relied on the default by making it aim. Check out with `--review`.
+- [x] **GB-14** The guardian night (D-13, `docs/specs/combat-phase2.md`), after GB-12, using
+  ChatGPT's GP-10 keys, with the two D-13 changes and the spec's six acceptance checks as a new test.
+- [x] **GB-16** The objectives' combat side (`docs/specs/objectives-phase2.md`, "Delivery checks"):
+  (a) the radio's two Shambler defenders, once per run on first approach within 24 m, from
+  nav-valid spots 8–12 m round the cabinet, at least 8 m from the player and out of view,
+  deferred when capped; (b) capacity-aware grants that return the accepted quantity and the
+  remainder (MedPens, grenades, ammo and fuel packs); (c) a `dw-game` event when the player
+  takes damage, so the radio's hold-E repair can be interrupted. (d) From the GB-14 review:
+  t53 has no check for the stuck-guardian failsafe; add one. (e) Approved, for ChatGPT's GP-12:
+  `grantBuildBlueprint(id)` in your builds section, returning `'granted'` or `'already-owned'`,
+  with no Cash and no purchase event. Send ChatGPT the shapes of (b), (c) and (e).
+- [x] **GB-17** The three D-16 fixes: fractional saw fuel in `grantSupply`; refuse ammo for
+  calibres with no owned weapon; first-blood only from a planned guardian in an ordinary run,
+  with the kill position. A test for each (t54, t53). Approved 03:05Z: Claude re-ran t53 68/0,
+  t54 32/0 and t55 10/0 on the device file; `x, z` are the kill spot, the same one the cash drops at.
+- [x] **GB-18** Scripted-death replays, **spec only** (Jerry's order of work, step 8, second half;
+  `combat-phase2.md` §8 left it for later). One short doc, `docs/specs/replays.md`: which scripted
+  deaths can be replayed (cave grab, the others you own), where the player starts one (the death
+  screen? the HQ?), what it costs or unlocks, what state it must not touch (the run, the bank,
+  the wave plan, rule 10), and which parts are ChatGPT's (the button, the strings). Propose, don't
+  build; Claude approves it into a decision.
+- [x] **GB-19** `getGuardianAlive()` for ChatGPT's boss pip on the minimap (`combat-phase2.md`
+  §3.4): `null` when no guardian is planned or alive, else `{ x, z, hp, hpMax, caveIndex }`. Small,
+  in your zombies section, with a test. Tell ChatGPT the shape.
+- [x] **GB-20** Build the scripted-death replays as approved (D-18, `docs/specs/replays.md` §6):
+  `listScriptedDeathReplays`, `canReplayScriptedDeath`, `beginScriptedDeathReplay`,
+  `isScriptedDeathReplay` and the `dw-game` `scripted-death-replay` event, in your scripted-kill
+  code. The test is §8's: bank, `day`, `waveQueue`, `wavePreview` and every `tt_*` localStorage key
+  deep-equal before and after a forced replay, and after an aborted one. Send ChatGPT the shapes.
+  Reviewed 03:55Z: APIs recorded, but the replays don't play yet: GB-21.
+- [ ] **GB-21** Make the replays actually play (D-18). ChatGPT read the code and my probe agrees:
+  (a) `updateScriptedKill` aborts on `gameOver || won`, and a replay starts on the death screen with
+  `gameOver` true, so the next frame aborts it: the cine never plays. (b) `beginScriptedKill(replay)`
+  snapshots the pose after it has already cleared the burial cine and added the cine classes, and it
+  never moves the marine to the grab spot. (c) So the camera isn't put back: on the death screen it
+  sits at (-94.56, 3.68, 102.15), after a replay or an abort at (-94.96, 10.40, 90.30), and with no
+  replay it doesn't move. Fix all three, and make t56 let real frames run: one replay to its natural
+  end ('end' phase), one aborted mid-way, each comparing player, camera and `body` classes with the
+  values from before the replay began.
 
 
 Grokbot: you don't need GitHub access. Only Cursor touches git. Work in the local folder.
@@ -249,18 +407,37 @@ Grokbot: you don't need GitHub access. Only Cursor touches git. Work in the loca
   changes when `ready` fires).
 - [x] **GP-4** The first-minute coach (`docs/specs/ui-phase1.md` §2). Unblocked: OpenCode's
   `controls-ready` (OC-1) is in `assets/intro/menu-camera.js`.
-- [!] **GP-5** The HQ wave-preview panel, after GB-3.
-- [>] **GP-8** The Phase 2 objectives design handoff that CL-12 waits on
+- [x] **GP-5** The HQ wave-preview panel, after GB-3.
+- [x] **GP-8** The Phase 2 objectives design handoff that CL-12 waits on
   (`docs/specs/ui-phase1.md`, "Phase 2 design"): for each of the seven sites, the prop
   list with rough sizes, what the player does there, the reward, and the strings keys.
   Use the positions from `handoffs/2026-09-23-claude-CL-6-objective-sites.md`.
   Hand it off to Claude.
-- [ ] **GP-7** The prep checklist (`docs/specs/ui-phase1.md` §6), in your HUD and HQ
+- [x] **GP-7** The prep checklist (`docs/specs/ui-phase1.md` §6), in your HUD and HQ
   sections. Ship bank, ammo, repair and alarm first. `prep.fortify` needs a reachable
   target area from Grokbot: ask him for it and leave that slot out until he answers.
   Fewer than three goals is fine.
+  **Unblocked (D-11):** apply the three-line hook from `handoffs/2026-09-23-chatgpt-GP-7-repair.md`,
+  check in `index.html (HUD prep)`, and check out quickly so Cursor can start the split.
+- [x] **GP-9** The objectives UI, as new files only (`ui/objectives.js`, its CSS, its test): the
+  markers, the HUD tracker and the strings for the seven sites in your GP-8 design, built
+  against a stub of the site list. Wiring waits for the split and Claude's props (CL-12).
 
-### OpenCode — runner and clerk (Nemotron 3.5 Lightning)
+- [x] **GP-10** The guardian night's strings in `ui/strings.js` (freeze-safe): the keys in
+  `docs/specs/combat-phase2.md` §3.3 and the first-blood reward in §5, as your guardian review
+  settled them. Keys only; the wiring comes with GB-14 after the split.
+
+- [x] **GP-11** The objectives, wired. CU-11 and CL-15 are both in: your state machine, one tracked
+  objective, rewards and receipts, driving the props through the objective contract
+  (`docs/specs/objectives-phase2.md`, your GP-9 UI).
+- [!] **GP-13** The replay chrome (D-18), once GB-20 is in: Watch again on the death screen for a
+  cave or pit death, a clickable found tile in the death catalogue, the `replay.*` strings, and
+  hiding Try again while `scripted-death-replay` is running.
+- [x] **GP-12** The guardian first-blood receipt (Grokbot's request): on `dw-game`
+  `guardian-first-blood`, once per run, the free mortar blueprint if it isn't owned, else +80
+  skull value to bank at the HQ. Never direct Cash, never a purchase event.
+
+### OpenCode — left the crew on 2026-09-23 (D-10). Kept here as a record.
 
 How you work: one small task at a time.
 - **Check before you touch anything.** Read the task's files first, and check that no
@@ -281,13 +458,13 @@ How you work: one small task at a time.
     - `npm test -- t18 --jobs 1` (it plays through an insertion)
     - `grep -n "controls-ready" assets/intro/menu-camera.js`
   - **Then:** `node crew/crew.mjs request opencode chatgpt "controls-ready is in (OC-1)" "<the grep line>"`.
-- [ ] **OC-2** `npm run crew` (was CU-6):
+- [x] **OC-2** `npm run crew` (was CU-6):
   - **What:** in `package.json`, add `"crew": "node crew/crew.mjs"` to `"scripts"`, after
     `"serve"`. Mind the comma on the line before.
   - **Proof:**
     - `node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"`
     - `npm run crew`
-- [ ] **OC-3** `docs/contracts.md` (was CU-3):
+- [x] **OC-3** `docs/contracts.md` (was CU-3). Claude keeps it from here (CL-13):
   - **What:** one section per export or event that crosses an owner's boundary, each with:
     name, owner, signature or shape, events it fires, the date approved, and the source
     handoff.
@@ -300,7 +477,7 @@ How you work: one small task at a time.
     - `handoffs/2026-09-23-grokbot-GB-3.md` (getWavePreview)
   - **Copy, don't invent.** Where a source is unclear, write "unclear, asked" and send
     Claude a request.
-- [ ] **OC-4** Test watch, every session:
+- [~] **OC-4** Test watch: back to Cursor at commit time (D-10).
   - **Run the suite:** `npm test` once (about 5 minutes). It writes `crew/tests.json`, which
     the panel shows. Your first run matters: nobody has run the full suite since Cursor's
     CU-8 changed how checks open, so say plainly if the runner itself misbehaves.
@@ -311,7 +488,7 @@ How you work: one small task at a time.
   - **Handoffs with "Tests: not run":** when someone checks out like that, run the tests they
     name and post the result the same way. ChatGPT's machine can't run the suite at all
     (AGENTS.md), so his handoffs are the usual case.
-### Antigravity — the crew's eyes (Gemini 3.8 Flash)
+### Antigravity — the crew's eyes (model: see its card)
 
 How you work:
 - **Serve the game:** run `npm run serve` in a terminal, then open
@@ -323,13 +500,13 @@ How you work:
 - **Send findings to the owner:** `node crew/crew.mjs request antigravity <owner> "<what's wrong>" "<steps, expected, seen, screenshot path>"`.
 - **Never edit game code.** Not `index.html`, `assets/`, `ui/` or `tools/`.
 
-- [>] **AG-1** Baseline:
+- [x] **AG-1** Baseline:
   - Get the game to the title screen in your browser, and write down how long it took.
   - Screenshot: the title; the HQ; the pit (TT.LAKE_HOLE, from the bank); the shale cave
     from the front.
   - Put in `qa/README.md` exactly how you run and screenshot the game, so your next
     session can repeat it.
-- [ ] **AG-2** Claude's world changes, seen for real (report to Claude):
+- [x] **AG-2** Claude's world changes, seen for real (report to Claude):
   - (a) **The pit:** the rune ring should glow up through the water from the bank and
     from above (CL-1).
   - (b) **The cave warnings:** `TT.caveWarn('cave:shale', 1)` then `2` then `0`. Watch from
@@ -337,16 +514,36 @@ How you work:
     much or too little? (CL-4)
   - (c) **A felled tree:** fell a tree near you with `TT.beginTreeFall(tree, 1, 0)`. Can you
     walk through the log? Do shots stop on it? After two minutes it should sink. (CL-5)
-- [ ] **AG-3** Grokbot's build fixes, in real play (report to Grokbot):
+- [x] **AG-3** Grokbot's build fixes, in real play (report to Grokbot):
   - (a) Put a turret on a low pillar by aiming at it from the side (GB-7).
   - (b) Standing on the ground inside four walls, aim a floor at the wall tops: do you get
     a roof, or a walkway at your feet? (GB-8; check after Grokbot checks it out.)
-- [ ] **AG-4** ChatGPT's screens (report to ChatGPT):
+- [x] **AG-4** ChatGPT's screens (report to ChatGPT):
   - The loading screen's stages as the game loads (GP-3).
   - Settings with no Skip prep row (GP-2).
   - Once they're checked out: the first-minute coach (GP-4) and the HQ briefing (GP-5).
 - [ ] **AG-5** Shots on request, standing. Anyone can send you `"shots: <what>"`. Answer with
   the images and one line on what you see.
+- [x] **AG-6** Claude's tree batches (CL-10), on a real GPU, once they land. Walk from the HQ
+  out to the edge of the map and back. Look for trees that pop, vanish, flicker, change
+  colour, or appear twice as the player passes about 45 m from them. Shoot and burn a
+  tree 100 m away with the scope. Report the frame rate before and after (`?trees=single`
+  turns batching off, for the "before").
+- [x] **AG-6b** Redo the tree shots with batching on. The first set was taken while `index.html`
+  was briefly broken (a column of the game's source code shows down the left of every
+  batch-on picture), and from different spots than the batching-off pictures. Take on and off
+  from the same camera positions, and look at each picture before you describe it.
+- [x] **AG-7** ChatGPT's screens, from his two requests: the GP-7 prep checklist in the live game
+  (HUD and HQ, bank/ammo/repair/alarm ticks), then the GP-9 objectives fixture at
+  `/ui/objectives.fixture.html` at desktop width and 390 px. Report to ChatGPT.
+- [ ] **AG-7b** The GP-7 prep checklist again: Play, wait until `body` no longer has `deploying`
+  (the landing), then check the goals and tick them (bank, ammo, repair, alarm). Report to
+  ChatGPT.
+- [ ] **AG-8** The pit's rune ring on a real GPU (CL-14). `node tools/shoot.mjs pit`, then two
+  more by hand: from the lake bank at eye height, and from straight overhead (about 30 m up).
+  Compare with Claude's headless shots in `qa/shots/cl14/`. Say whether both rings read as
+  writing, and whether the dark jagged bits cutting into the inner ring are there on the GPU too
+  (on WebGL they are the funnel's bed showing through). Report to Claude.
 
 ### Claude — lead; the world and wildlife
 
@@ -360,9 +557,24 @@ How you work:
 - [x] **CL-5** `waterAt(x, z)` (depth, wading, current) and felled logs as colliders.
 - [x] **CL-6** Checked ChatGPT's seven objective sites: all approved, medical-convoy moved 0.8 m
   (`handoffs/2026-09-23-claude-CL-6-objective-sites.md`).
-- [ ] **CL-10** Instanced trees: draw calls down, the same trees on screen.
-- [ ] **CL-11** Night readability: HQ windows, campsite lanterns, moonlight on the water.
-- [ ] **CL-12** Place the seven objective props once ChatGPT's Phase 2 design handoff lands.
+- [x] **CL-10** Tree batches: far trees draw from 51 merged cells; tree draws ~860 → ~190
+  (`handoffs/2026-09-23-claude-CL-10-tree-batches.md`).
+- [~] **CL-11** Night readability: HQ windows, campsite lanterns, moonlight on the water. Parked for
+  Jerry's planning session: it's a design question first (how dark should night be, with NVG on N?).
+- [x] **CL-12** The seven objective props, as a new file, `assets/world/objective-props.js`
+  (`handoffs/2026-09-24-claude-CL-12-objective-props.md`). Test t52.
+- [x] **CL-15** Wire the objective props into the world (shared `poiMat`), and
+  write the objective contract in `docs/contracts.md` with ChatGPT's GP-9 snapshot.
+- [x] **CL-16** Trees face the same way every load (`handoffs/2026-09-24-claude-CL-16-seeded-tree-yaw.md`). `makeTree` turns each tree with
+  `Math.random()`, so the forest is rotated differently on every load: the world isn't
+  deterministic (rule 10), and AG-6b's on and off pictures show the same tree turned two ways.
+  Seed the turn from the tree's position.
+- [x] **CL-14** (`handoffs/2026-09-24-claude-CL-14-pit-rune-ring.md`) The pit's rune ring draws through the water on a real GPU (AG-2), but from above
+  it reads as a few faint cyan specks. Make it read from the bank and from overhead.
+- [x] **CL-13** Keep `docs/contracts.md` (D-10). Done for now: owners, pre-split locations, the D-8
+  events, the D-11 repair helpers and the tree-batch rule are in. Kept up as contracts change. Review OpenCode's first version: give every
+  entry an owner and its location before the split (all of these live in `index.html` today,
+  not `world/*` yet), and add the D-8 `dw-game` events and the tree-batch exports.
 - [~] **CL-7** The world bake: parked by D-2.
 
 ## Where things live

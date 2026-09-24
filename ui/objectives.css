@@ -1,0 +1,26 @@
+.objective-markers { position:absolute; inset:0; pointer-events:none; }
+#objectiveMapSurface { position:relative; display:inline-block; vertical-align:top; }
+#objectiveHud { position:absolute; right:16px; top:194px; width:260px; max-width:calc(100vw - 32px); z-index:3; pointer-events:auto; }
+body.playing #objectiveHud, body.playing #objectiveHud *, body.playing #objectiveMapSurface button { cursor:pointer; }
+body.opening #objectiveHud, body.frontend #objectiveHud, body.deploying #objectiveHud, body.cine #objectiveHud, body.briefing #objectiveHud { display:none; }
+@media(max-width:600px){#objectiveHud{right:12px;width:210px;top:190px;}}
+.objective-markers[hidden], .objective-tracker[hidden], .objective-notice[hidden], .objective-tracker [hidden] { display:none; }
+.objective-marker { position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:6px; border:1px solid #c5b37a; border-radius:4px; color:#e5d6a6; background:#101a14f5; box-shadow:0 2px 6px #0008; pointer-events:auto; cursor:pointer; }
+.objective-marker svg { display:block; width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linejoin:round; stroke-linecap:round; }
+.objective-marker[aria-pressed="true"] { color:#0e1711; background:#e0cb90; box-shadow:0 0 0 3px #e0cb9033; }
+.objective-marker:hover { border-color:#fff1c6; }
+.objective-marker:focus-visible, .objective-tracker button:focus-visible { outline:2px solid #fff0b8; outline-offset:4px; }
+.objective-tracker { box-sizing:border-box; max-width:300px; width:100%; padding:16px; border-left:2px solid #b9a26a; background:#0b120ff5; color:#d8ddcc; font:12px/1.55 var(--font-hud,system-ui,sans-serif); box-shadow:0 8px 26px #0003; }
+.objective-tracker h2 { margin:0 0 5px; color:#e0c98c; font:600 15px/1.35 var(--font-hud,system-ui,sans-serif); }
+.objective-distance { display:block; margin-bottom:12px; font-variant-numeric:tabular-nums; color:#a8b3a1; }
+.objective-tracker p { margin:9px 0; }
+.objective-status { color:#dbc690; }
+.objective-choice { display:block; margin:10px 0; color:#a8b3a1; }
+.objective-choice select { display:block; box-sizing:border-box; max-width:100%; width:100%; margin-top:5px; padding:7px; border:1px solid #77856866; background:#1c291f; color:#d4ddc8; font:inherit; }
+.objective-choice select:focus-visible { outline:2px solid #fff0b8; outline-offset:2px; }
+.objective-choice select:disabled { opacity:.75; }
+.objective-prompt { color:#a4cfb1; padding-top:8px; border-top:1px solid #6f7a6440; }
+.objective-tracker progress { width:100%; height:6px; accent-color:#d3bb78; margin:3px 0 8px; }
+.objective-tracker button { display:block; border:1px solid #77856866; padding:7px 10px; margin-top:14px; background:#1c291f; color:#d4ddc8; font:inherit; cursor:pointer; }
+.objective-notice { max-width:300px; padding:10px 14px; background:#101a14ee; border-left:2px solid #819b70; color:#d2ddc8; font:12px/1.5 var(--font-hud,system-ui,sans-serif); }
+@media(max-width:500px) { .objective-tracker { max-width:none; padding:12px; } .objective-tracker h2 { font-size:14px; } }

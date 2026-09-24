@@ -1,0 +1,9 @@
+#firstMinuteCoach { position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); width: max-content; max-width: min(420px, 88vw); box-sizing: border-box; padding: 12px 17px; border-left: 2px solid #c3a35d; background: #09100be8; color: #dedfd0; font: 12px/1.5 var(--font-hud); box-shadow: 0 6px 22px #0005; pointer-events: none; z-index: 4; }
+#firstMinuteCoach[hidden] { display: none; }
+#firstMinuteCoach strong, #firstMinuteCoach span { display: block; }
+#firstMinuteCoach strong { color: #ead399; font-size: 12px; font-weight: 600; }
+#firstMinuteCoach span { color: #c0c7b6; margin-top: 3px; }
+#firstMinuteCoach span[hidden] { display: none; }
+body.cine #firstMinuteCoach, body.deploying #firstMinuteCoach,
+body.frontend #firstMinuteCoach, body.opening #firstMinuteCoach { display: none; }
+@media (max-height: 540px) { #firstMinuteCoach { bottom: 137px; padding: 8px 12px; } }

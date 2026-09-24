@@ -1,0 +1,16 @@
+#hqBriefing { position: fixed; inset: 0; margin: auto; width: min(540px, 88vw); max-height: 82vh; box-sizing: border-box; padding: 25px; border: 1px solid #677254; border-top: 2px solid #c3a35d; background: #0b110e; color: #d9dfcf; font: 13px/1.55 var(--font-hud); box-shadow: 0 22px 100px #000a; }
+#hqBriefing::backdrop { background: #020705bf; }
+#hqBriefing h2 { margin: 0 0 20px; font-size: 21px; color: #e2d1a1; }
+#hqBriefing h3 { margin: 0 0 6px; font-size: 13px; color: #e1e6d6; }
+#hqBriefing section { padding: 14px 0; border-top: 1px solid #87917b33; }
+#hqBriefing p { margin: 5px 0; }
+#hqBriefing .briefing-muted { color: #a0ae94; font-size: 12px; }
+#hqBriefing .briefing-warning { color: #e4a28a; }
+#hqBriefing .briefing-total { border-top: 1px solid #87917b33; padding-top: 13px; color: #e2d1a1; }
+#hqBriefing footer { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid #87917b44; margin-top: 23px; padding-top: 17px; }
+#hqBriefing button { font: 600 12px var(--font-hud); padding: 11px 14px; background: #243024; color: #e2dfc5; border: 1px solid #84917366; cursor: pointer; }
+#hqBriefing button:focus-visible { outline: 2px solid #e2d1a1; outline-offset: 3px; }
+#hqBriefing button:disabled { color: #87917b; opacity: .65; cursor: default; }
+body.briefing #pause { visibility: hidden; }
+body.briefing #firstMinuteCoach { display: none; }
+@media(max-width:500px) { #hqBriefing { padding: 18px; } }

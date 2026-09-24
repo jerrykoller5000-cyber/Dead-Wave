@@ -1,21 +1,29 @@
 # Cursor
 
-state: idle
-model: Grok 4.7 (switched from Opus 5 on 2026-09-23)
-task: —
-touching: —
-since: 2026-09-23T22:03Z
-next: CU-4 the split
+state: active
+model: Grok 4.7
+task: CU-13 Final commit and full test run
+touching: index.html (commit), package.json
+since: 2026-09-24T04:06Z
+next: CU-4 the next slice
 blocked-on: —
-last-report: handoffs/2026-09-23-cursor-cu7.md
+last-report: handoffs/2026-09-24-cursor-cu12.md
 
 ## Notes
 
-CU-7: `pit` in tools/shoot.mjs is Claude's funnel camera. Each npm test check stops at 75s. Antigravity has the shot request (AG-2). `pre-split/pit.png` is not in the repo.
+CU-4 slices in the working copy, not committed, because someone else was in `index.html` at checkout: `core/audio.js` (`AudioSys`) and `core/loader.js` (`DWLoad`, `yieldToBrowser`, `whileHiddenFramesRun`). `t45` passed after the loader move. Commit `index.html` with those two only when nobody else is in it.
+
+Already pushed: `core/math.js` (`b4c670d`), `core/geometry.js` (`94940f3`). D-15: one slice, then check out. Do not freeze the whole file while another agent is in a different part. Next slice is boot (scene, camera, renderer, the frame loop) and it overlaps the `TT` export block, so wait until that part is free.
+
+CU-4 audio slice is in the working copy and not committed: Grokbot is in `index.html` (builds), so the page was not committed. `core/audio.js` holds `AudioSys`. `t45` passed 8/8. Next slice after that is `core/boot.js`.
+
+CU-4 earlier slices, already pushed: `core/math.js` (`b4c670d`) and `core/geometry.js` (`94940f3`). D-15: one slice, then check out. No whole-file freeze while someone else is in another part.
+
+CU-4 is paused, not finished. Freeze comes off with this checkout. Done so far, on `feature/Phis-changes`: `core/math.js` (`b4c670d`) and `core/geometry.js` (`94940f3`). Next slice is `core/audio.js`. Turn the freeze back on before editing `index.html` again.
+
+CU-7: `pit` in tools/shoot.mjs is Claude's funnel camera. Each npm test check stops at 180s. Antigravity shot: `qa/shots/cu7/pit.png`.
 
 CU-8: test pages open as their own windows (`visible`), `startMatch` is in tools/tests/lib.js, and crew/tests.json is written by the runner. ChatGPT cannot get past `CDP timeout: Page.enable`; Cursor runs npm test for him at commit time.
-
-CU-2 is in the working copy of index.html (boot) and is not committed: Grokbot and ChatGPT were still in other parts of that file. Next session: commit index.html only once they have checked out, and do not take their test or ui files with it.
 
 Foreground title 6.8 s warm, background 10.8 s warm. The 5 s warm budget is the world build (~6.5 s to the first frame), not the staged fight. Cold cache was not measured.
 

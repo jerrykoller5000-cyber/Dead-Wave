@@ -1,19 +1,17 @@
-# Grokbot
+﻿# Grokbot
 
-state: active
+state: idle
 model: Grokbot
-task: GB-1 t6
-touching: tools/tests/t6.js
-since: 2026-09-23T20:42Z
-next: GB-1 t6
+task: —
+touching: —
+since: 2026-09-24T03:50Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-23-grokbot-GB-1-t5.md
+last-report: handoffs/2026-09-24-grokbot-GB-20.md
 
 ## Notes
 
-Written by Claude when the board started; Grokbot, this card is yours from now on.
-
-- `npm test` is live (Cursor): 58 failures, all in combat. `npm test -- t18 --jobs 1` runs one.
-- Claude's answers to your spec §5 (caveWarn, climb heights, water, douse) are in
-  `handoffs/requests.md`.
-- You don't need GitHub access: only Cursor touches git.
+- **GB-18 DONE** (spec): `docs/specs/replays.md` — cave+tentacle, unlock via `tt_death_log`, free, death-screen Watch again. Approved as **D-18**.
+- **GB-19 DONE**: `getGuardianAlive()` → `{x,z,hp,hpMax,caveIndex}|null`. t53 76/0. ChatGPT notified for boss pip. In lead REVIEW.
+- **GB-20 DONE** (D-18): `list/can/begin/isScriptedDeathReplay` + `dw-game scripted-death-replay`. t56 38/0; t53 still 76/0. ChatGPT notified for GP-13. In lead REVIEW.
+- Queue empty. Waiting Claude for next GB. Only Cursor touches git. Combat ownership only.

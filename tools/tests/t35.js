@@ -1,7 +1,12 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1500);
+  document.getElementById('playerName').value = 'Supply Tester';
+  document.getElementById('modeHunt').click();
+  for (let i = 0; i < 80 && T.getPhase() !== 'prep'; i++) await wait(200);
+  ok(T.getPhase() === 'prep', 'named player starts preparation');
+  if (T.getPhase() !== 'prep') return out.join('\n');
+  await wait(9000); // Let the real parachute insertion finish before walking/healing.
   const p = T.player.position;
   // --- MedPens ---
   ok(T.getMedkits() === 0, 'start with no MedPens');
@@ -21,6 +26,7 @@
   T.spawnSupplyDrop();
   ok(T.supplyPlanes.length === planes0 + 1, 'a cargo plane is on its way in');
   const pl = T.supplyPlanes[T.supplyPlanes.length - 1];
+  if (!pl) return out.join('\n');
   let saw = { free: false, chute: false, landed: false }, t0 = performance.now();
   while (performance.now() - t0 < 30000) {
     await wait(100);
@@ -31,13 +37,37 @@
   ok(saw.free && saw.chute && saw.landed, 'freefall → chute → landed: ' + JSON.stringify(saw));
   const s = T.supplyDrops[T.supplyDrops.length - 1];
   ok(s && Math.hypot(s.x - pl.x, s.z - pl.z) < 6, 'landed near the mark (' + (s ? Math.hypot(s.x - pl.x, s.z - pl.z).toFixed(1) : '?') + ' m)');
-  ok(s && s.chute.visible && s.beacon.visible, 'canopy slumped beside it, beacon up');
+  ok(!!s && s.state === 'landed', 'crate remains available on the ground');
+  if (!s || s.state !== 'landed') return out.join('\n');
+  const cloth = s.chute?.userData.cloth;
+  ok(!!cloth && s.chute.visible, 'landed crate retains its visible cloth canopy');
+  ok(!!s.strobe && s.strobe.visible && s.strobe.parent === s.lid && !s.beacon, 'protected strobe attached to lid replaces the old beam');
+  if (!cloth || !s.strobe) return out.join('\n');
+  ok(cloth.gores.every(g => [0x505b32, 0x606a3e].includes(g.mesh.material.color.getHex())), 'parachute cloth is olive drab');
+  const canopyY = cloth.canopy.position.y;
+  let bright = false, dim = false;
+  const pulseStart = performance.now();
+  while (performance.now() - pulseStart < 2800) {
+    await wait(20);
+    const intensity = s.strobe.material.emissiveIntensity;
+    bright ||= intensity > 1; dim ||= intensity < 0.2;
+  }
+  ok(bright && dim, 'landed strobe flashes and returns to dim');
+  ok(cloth.complete && cloth.canopy.position.y < canopyY && cloth.canopy.position.x > 2,
+    'canopy settles beside the crate after touchdown');
+  ok(cloth.gores.every(g => g.folded && g.mesh.geometry.attributes.position.array.some((v, i) => Math.abs(v - g.original[i]) > 0.05)),
+    'cloth geometry crumples instead of retaining the inflated shape');
   const r0 = T.getReserve()['9mm'];
   p.set(s.x + 0.5, T.sampleHeight(s.x, s.z), s.z); await wait(400);
   ok(s.state === 'open', 'walked up: crate opens');
   ok(T.getBank() === bank0, 'no cash in it');
   ok(T.getMedkits() >= 1, 'MedPens inside: now ' + T.getMedkits());
   if (r0 != null) ok(T.getReserve()['9mm'] > r0, '9mm restocked ' + r0 + ' → ' + T.getReserve()['9mm']);
+  ok(s.strobe.material.emissiveIntensity === 0, 'claim switches off the strobe');
+  await wait(900);
+  const fade = s.group.userData.fadeMaterials;
+  ok(T.supplyDrops.includes(s) && fade?.length > 0 && fade.every(e => e.mat.opacity < e.opacity && e.mat.opacity > 0),
+    'empty crate visibly fades before removal');
   await wait(6500);
   ok(!T.supplyDrops.includes(s), 'empty crate cleared away');
   await wait(4000);

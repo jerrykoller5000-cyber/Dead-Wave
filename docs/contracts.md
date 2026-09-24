@@ -118,6 +118,48 @@ Owner: Grokbot. Callers: ChatGPT's briefing, HQ and economy. Spec: `docs/specs/c
 - A guardian that makes no progress towards the player for 60 s re-paths, then walks back out
   of the chalk mouth.
 
+## Objectives, combat side (GB-16, approved D-16, 2026-09-24)
+
+Owner: Grokbot. Callers: ChatGPT's objectives (GP-11) and economy (GP-12). On `TT` today;
+after the split, exports of the combat modules.
+
+- `spawnObjectiveDefenders({ siteId: 'objective:radio-repair', reset? })` →
+  `{ spawned, deferred, reason, centre? }`. Also fires by itself, once a run, when the player
+  first comes within 24 m of the radio: two Shamblers from nav-valid spots 8–12 m out, at
+  least 8 m from the player and out of view; deferred when capped. `getRadioDefenderState()` →
+  `{ siteId, fired, pending, spawned, alive, centre }`. `RADIO_DEFENDER` holds the numbers.
+- `grantSupply({ receiptId, items: [{ id, qty }], source })` →
+  `{ ok, receiptId, source, accepted: [{ id, qty }], remaining: [{ id, qty }], alreadyApplied }`.
+  Ids: `medkit`, `grenade`, `ammo:<calibre>`, `ammo:chainsaw`. Capacity-aware; the same
+  `receiptId` again returns the first answer with `alreadyApplied: true` and grants nothing.
+  Saw fuel keeps fractions; ammo for a calibre with no owned weapon is refused (all remaining).
+- `listOwnedAmmoPackChoices()` → `[{ id, caliber, packQty, cost, reserve, cap, weapons }]`, owned
+  weapons only.
+- `grantBuildBlueprint(id)` → `{ id, alreadyOwned, granted }`. Unlocks a build blueprint with no
+  Cash and no purchase event (GP-12's mortar).
+- `dw-game` `{ type: 'player-damaged', cause, amount, toHp, soaked, hp, armor, fatal }` on every
+  hit that lands, armour soak included. Interrupts the radio's hold-E repair.
+- `guardian-first-blood` (see Guardian night) fires only for a guardian from a guardian night's
+  plan in an ordinary run, and carries the kill position `{ x, z }`.
+
+## Objective interaction (CU-10, approved D-17, 2026-09-24)
+
+Owner: Cursor. Caller: ChatGPT's objectives (GP-11).
+
+- `getObjectiveInteraction(id)` → `null` for an unknown id or no props; else `{ id, approach,
+  distance, reachable, blockedBy, ePressed, eHeld, holdSeconds, cancelled }`.
+- `reachable`: within 1.6 m of the approach horizontally and 1.25 m vertically; no solid build
+  between the player and the approach (the radio cabinet and fuel stand themselves don't
+  count); no other E target (`blockedBy: 'busy'`); alive; no modal (paused, shop, place or
+  build mode, the build wheel, the HQ briefing, a death cine, deploying).
+- `blockedBy`: `null | 'distance' | 'height' | 'wall' | 'busy' | 'dead' | 'modal'`.
+- `ePressed` is true on the frame E goes down; `eHeld` while it's down. `holdSeconds` counts
+  gameplay seconds of holding E at a site that stays reachable. Only the site being held keeps a
+  timer; any id can be asked at any time.
+- `cancelled`: `null | 'released' | 'left' | 'damage' | 'death' | 'modal'` (damage is Grokbot's
+  `player-damaged`); a cancel zeroes `holdSeconds`. ChatGPT sets the thresholds (the radio
+  repair is 6 s). It changes nothing: no state, no spending, no movement.
+
 ## Tree batches (CL-10, 2026-09-23)
 
 Owner: Claude. Internal to the world: nobody else calls it. Listed so other owners know the
@@ -181,5 +223,34 @@ Owner: Cursor. Callers: the whole game, through `AudioSys` in `core/audio.js`. T
 The music director (what plays when) stays in the page until the UI slice. No game state inside
 the module; it reads `window.DWOpening` for the opening mute.
 
+## Guardian position (GB-19, 2026-09-24)
 
+Owner: Grokbot (zombies section). Caller: ChatGPT's minimap boss pip.
 
+- `getGuardianAlive()` → `null` unless the wave plan has a guardian (`wavePreview.hasGuardian`)
+  and one is alive; else `{ x, z, hp, hpMax, caveIndex }` from the live guardian. Read-only.
+
+## Scripted-death replays (GB-20, approved D-18, 2026-09-24)
+
+Owner: Grokbot (scripted deaths). Caller: ChatGPT's death screen (GP-13). Spec:
+`docs/specs/replays.md`.
+
+- `listScriptedDeathReplays()` → `[{ id: 'cave' | 'tentacle', causeKey, unlocked, labelKey,
+  descriptionKey }]`; `unlocked` comes from `tt_death_log` (`caveguard`, `tentacles`).
+- `canReplayScriptedDeath(id)` → boolean: unlocked, nothing scripted running, not in a live run
+  (the death screen or the title).
+- `beginScriptedDeathReplay(id, opts?)` → `{ ok: true }` or `{ ok: false, reason: 'unknown' |
+  'busy' | 'alive' | 'locked' }`. `opts.caveIndex` picks the cave; else the cave named in the last
+  death, else the chalk cave.
+- `isScriptedDeathReplay()` → true while a replay runs.
+- `dw-game` `{ type: 'scripted-death-replay', id, phase: 'start' | 'end' | 'abort' }`.
+- A replay never calls `endGame`, never writes `tt_*`, and leaves the day, bank, wave plan and
+  world as they were (t56). It must also play on the death screen and put the player, camera and
+  `body` classes back: GB-21.
+
+## Guardian first-blood reward (GP-12, 2026-09-24)
+
+Owner: ChatGPT (`game/economy.js` and its listener in the page). Consumes `guardian-first-blood`
+(D-16, GB-17): only `planned: true` with a finite `x, z`, once per run. Grants the mortar blueprint
+through `grantBuildBlueprint`, or one 80-value skull drop at `x, z` if it's owned. No Cash, no
+purchase event. No new export.

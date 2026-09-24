@@ -1,4 +1,4 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play refuses with no callsign; wait until prep so scripted builds see a live match.
@@ -26,20 +26,21 @@
   const tur = T.placeBuildAt('light', gx, Z, 0, { lv: 1 });
   ok(tur && tur.level === 1 && Math.abs(tur.mesh.position.y - pl.mesh.position.y - padH) < 1e-6, 'turret on the raised pad');
   ok(Math.abs(rails[0].mesh.position.y - pl.mesh.position.y - rimH) < 1e-6, 'railings on the rim');
-  // floor on the walls (forceLv: marine is still on the ground, so plain place would boardwalk at 0),
+  // floor on the walls: D-12 needs elevated aim (opts.lv) for a roof from the ground;
   // then platform bolted onto that floor; only one platform per floor.
   const Z2 = gz - 9;
   T.placeBuildAt('wall', gx, Z2, 0);
-  const fl = T.placeBuildAt('floor', gx, Z2, 0, { forceLv: 1 });
+  const fl = T.placeBuildAt('floor', gx, Z2, 0, { lv: 1 });
   const pof = T.placeBuildAt('platform', gx, Z2);
-  ok(fl && fl.level === 1 && pof && pof.level === 2 && pof.spanDepth === null, 'platform on a floor');
+  ok(fl && fl.level === 1 && pof && pof.level === 2 && pof.spanDepth === null, 'platform on a floor (aimed roof)');
   ok(!T.placeBuildAt('platform', gx, Z2), 'only one platform per floor: ' + T.resolveTarget('platform', gx, Z2).refusal);
-  // A floor may boardwalk at ground under a tower, but will not stand on a platform deck.
+  // A floor will not stand on a platform deck (unforced + forceLv sanity).
   const Z3 = gz - 12;
   T.placeBuildAt('wall', gx, Z3, 0); T.placeBuildAt('platform', gx, Z3);
-  const onPlat = T.resolveTarget('floor', gx, Z3, 0, { forceLv: 2 });
-  ok(!!onPlat.refusal && /platform/i.test(onPlat.refusal), 'no floor on a platform: ' + onPlat.refusal);
-  ok(!T.placeBuildAt('floor', gx, Z3, 0, { forceLv: 2 }), 'placeBuildAt refuses floor on platform');
+  const platHere = T.cellOccupant(gx, Z3, 1, 'base');
+  const onPlat = T.resolveTarget('floor', gx, Z3, 0, { lv: 1, piece: platHere });
+  ok(!!onPlat.refusal && /platform/i.test(onPlat.refusal), 'no floor aimed at a platform: ' + onPlat.refusal);
+  ok(!T.placeBuildAt('floor', gx, Z3, 0, { forceLv: 2 }), 'forceLv placeBuildAt refuses floor on platform');
   // stacked walls
   const s1 = T.placeBuildAt('wall', gx + 3, Z, 0);
   const s2 = T.placeBuildAt('wall', gx + 3, Z, 0);

@@ -17,6 +17,19 @@
   const waterRO = Math.max(...T.waterSurfaceTargets.map(w => w.mesh.renderOrder));
   const runes = pit.children.filter(o => o.isMesh && o.userData.pitRunes);
   ok(runes.length >= 2 && runes.every(o => o.renderOrder > waterRO), 'pit runes draw after the lake surface (' + runes.map(o => o.renderOrder).join(',') + ' vs water ' + waterRO + ')');
+  // CL-14: the rings face up. Their triangles were wound the other way, so from above the
+  // back faces were culled and the pit showed a few slivers instead of the writing.
+  let up = 0, tri = 0;
+  for (const o of runes) {
+    const p = o.geometry.attributes.position, ix = o.geometry.index; if (!ix) continue;
+    const I = ix.array || ix;
+    for (let k = 0; k + 2 < I.length; k += 3) {
+      const a = I[k], b = I[k + 1], c = I[k + 2];
+      const e1x = p.getX(b) - p.getX(a), e1z = p.getZ(b) - p.getZ(a), e2x = p.getX(c) - p.getX(a), e2z = p.getZ(c) - p.getZ(a);
+      if (e1z * e2x - e1x * e2z > 0) up++; tri++;
+    }
+  }
+  ok(tri > 100 && up / tri > 0.95, 'pit rune rings face up (' + up + ' of ' + tri + ' triangles)');
   // The grab still plays.
   document.getElementById('playerName').value = 'Jerry';
   document.getElementById('modeHunt').click(); await wait(2500);

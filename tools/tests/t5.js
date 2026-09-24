@@ -1,4 +1,4 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const wallAt = (gx, gz, lv = 0) => {
@@ -47,14 +47,20 @@
   const rise = padH - rimH;
   ok(plat && plat.deck && plat.deck2 && Math.abs(plat.deck2.deckY - plat.deck.deckY - rise) < 1e-6, 'two decks: rim and raised pad (Δ' + rise.toFixed(2) + ')');
   const Z2 = pgz - 9;
-  T.placeBuildAt('wall', X, Z2); const fl = T.placeBuildAt('floor', X, Z2, 0, { forceLv: 1 });
+  T.placeBuildAt('wall', X, Z2); const fl = T.placeBuildAt('floor', X, Z2, 0, { lv: 1 });
   const pOnF = T.placeBuildAt('platform', X, Z2);
+  ok(!!fl && fl.level === 1, 'floor aimed at wall tops roofs at level 1 (D-12)');
   ok(!!fl && !!pOnF, 'platform on a floor');
   ok(!T.placeBuildAt('platform', X, Z2), 'second platform on that floor refused: ' + T.resolveTarget('platform', X, Z2).refusal);
   ok(pOnF && pOnF.spanDepth === null, 'floor-mounted platform is not span support');
   const Z3 = pgz - 12;
   T.placeBuildAt('wall', X, Z3); T.placeBuildAt('platform', X, Z3);
-  ok(!T.placeBuildAt('floor', X, Z3, 0, { forceLv: 2 }), 'floor on a platform refused: ' + T.resolveTarget('floor', X, Z3, 0, { forceLv: 2 }).refusal);
+  // Aiming at the platform deck (or forceLv above it) must refuse; a bare grounded
+  // place can still boardwalk at lv0 under the tower, which is a different intent.
+  const platHere = T.cellOccupant(X, Z3, 1, 'base');
+  const aimPlat = T.resolveTarget('floor', X, Z3, 0, { lv: 1, piece: platHere });
+  ok(!!aimPlat.refusal, 'floor aimed at a platform refused: ' + aimPlat.refusal);
+  ok(!T.placeBuildAt('floor', X, Z3, 0, { forceLv: 2 }), 'forceLv floor on a platform refused: ' + T.resolveTarget('floor', X, Z3, 0, { forceLv: 2 }).refusal);
   ok(!!T.placeBuildAt('light', X, Z2, 0, { lv: 2 }), 'turret on floor-mounted platform');
   const Zr = pgz + 6;
   T.placeBuildAt('wall', X, Zr); T.placeBuildAt('wall', X, Zr + 1);
@@ -107,14 +113,14 @@
   ok(Math.abs(leaf) > 1.4, 'leaf swung ' + leaf.toFixed(2));
   T.doAction(); for (let i = 0; i < 40; i++) T.updateDoors(1 / 60);
   ok(!T.doorIsOpen(dw), 'door shut again');
-  // Corner L: current rules cut any plain wall (no special corner refuse). Assert a
-  // second door still needs a plain wall — the corner wall already has no opening yet,
-  // so it can be cut; after cutting, a second cut is refused.
+  // Corner L: INTENDED for edge walls. Hub-and-arm walls refused a corner door; edge
+  // walls are plain panels with no hub, so any uncut wall (including a corner cell) can
+  // take a door. A second cut on the same panel is still refused.
   const Xc = pgx - 8, Zc = pgz + 3;
   T.placeBuildAt('wall', Xc, Zc, 0); T.placeBuildAt('wall', Xc + 1, Zc, 0); T.placeBuildAt('wall', Xc, Zc + 1, 1);
   const cornerHost = wallAt(Xc, Zc, 0);
   const cornerDoor = T.placeBuildAt('door', Xc, Zc, 0, { piece: cornerHost });
-  ok(!!cornerDoor && cornerDoor.opening === 'door', 'a corner-cell wall can take a door (edge walls, no hub arms)');
+  ok(!!cornerDoor && cornerDoor.opening === 'door', 'a corner-cell wall can take a door (edge walls, intended)');
   ok(!T.placeBuildAt('door', Xc, Zc, 0, { piece: cornerDoor }), 'second cut refused: ' + T.resolveTarget('door', Xc, Zc, 0, { piece: cornerDoor }).refusal);
   } catch (e) {
     out.push('FAIL threw: ' + (e && e.message));

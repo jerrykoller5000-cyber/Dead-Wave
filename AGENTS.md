@@ -1,7 +1,11 @@
 # AGENTS.md — how the Dead-Wave crew works
 
-Every agent reads this first, every session: Cursor (Grok 4.7), ChatGPT (GPT-ASTRA 6),
-Grokbot and Claude. Jerry has the final say. Claude leads.
+Every agent reads this first, every session: Cursor, ChatGPT, Grokbot, Claude and
+Antigravity. Jerry has the final say. Claude leads.
+
+Jerry moves agents between models, so no model is written into this file. The model each
+agent runs on is on its card (`crew/status/<you>.md`) and on the panel, and every check-in
+says it (D-14).
 
 - Repo: jerrykoller5000-cyber/Dead-Wave
 - Branch: `feature/Phis-changes`
@@ -18,7 +22,10 @@ the crew panel, so what you log is how he knows what you're doing.
 2. **Answer first.** Look in `handoffs/requests.md` for anything addressed to you, and answer
    it in place (`DONE`, `WONT (why)` or `LATER (phase)`).
 3. **Check in.** `node crew/crew.mjs next <you>` names your next task. Then:
-   `node crew/crew.mjs in <you> <task-id> "<what>" --touch "<file (part)>, <file>"`.
+   `node crew/crew.mjs in <you> <task-id> "<what>" --model "<your model>" --touch "<file (part)>, <file>"`.
+   - `--model` is required: the model this session actually runs on, as your editor or app
+     names it (for example `"Claude Sonnet 4.6"`). Not sure? Say so: `"unsure (editor says X)"`.
+     A new model is logged as a MODEL line, so Jerry can see who ran what.
    - It ticks the task ▶ on the board.
    - It refuses if another active agent is already in one of those files. Then wait, or take
      another task. Never work around it.
@@ -49,7 +56,7 @@ appends to `handoffs/requests.md` in UTF-8. Don't use PowerShell's `Add-Content`
 `·` and `→`.
 
 **If you can't run Node,** make the same changes by hand:
-- edit your card's header lines;
+- edit your card's header lines, `model:` included;
 - append one line to `crew/LOG.md` in its format, with UTC time;
 - tick your own task's box on the board.
 Claude works that way.
@@ -59,17 +66,18 @@ before committing. ChatGPT's runner does not get past Chrome: `CDP timeout: Page
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
 He writes "not run" and Cursor runs the suite for him at commit time.
 
-Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`. Task ids: `CL-`, `CU-`,
-`GP-`, `GB-`.
+Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
+`antigravity`. Task ids: `CL-`, `CU-`, `GP-`, `GB-`, `AG-`.
 
 ## Who owns what
 
 | Agent | Owns | Files |
 | --- | --- | --- |
-| Cursor (Grok 4.7) | Integration, git, tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
+| Cursor | Integration, git, tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
 | Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting | `world/*`, `life/*`, `assets/world/*`, `crew/BOARD.md`, this file |
 | Grokbot | Combat: zombies, the wave director, enemy roles, builds and turrets, weapons, scripted deaths | `combat/*` |
 | ChatGPT | What the player reads and decides: HUD, menus, shop, onboarding, text, economy, objectives, audio cues | `ui/*`, `game/economy.js`, `game/objectives.js` |
+| Antigravity | The crew's eyes: plays the real game in a real browser, takes screenshots, checks every visible change, reports what it sees | `qa/*` (reports and screenshots). No game code. |
 
 Until the split lands, "files" means the matching sections of `index.html`. Several agents
 can work in it at once, one per part: name your part in `--touch`, for example
@@ -119,6 +127,22 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     expects, check out with `--review` so the lead looks at it (D-7).
 14. **One task per check-in and per handoff.** Keep changes small and reviewable. No drive-by
     refactors outside your own area.
+15. **Show your proof.** "Done" and "it works" need evidence in the handoff: the command you
+    ran with the lines of output that show it passed, or a screenshot path. A claim with no
+    proof counts as not verified.
+
+## Playing to strengths
+
+Five agents, each good at something different. The board gives each one tasks that fit.
+- **Claude, Cursor, ChatGPT and Grokbot** take the big, cross-cutting work inside
+  `index.html` and their modules.
+- **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
+  change goes through it: the pit, the cave warnings, the loading screen, the build aiming.
+  It reports with screenshots and never edits game code.
+- **Owners, ask for help:**
+  - `node crew/crew.mjs request <you> antigravity "shots: <what>" "<how to set it up>"`
+    when you need eyes on something.
+  - If you can't run the tests, write "Tests: not run" and Cursor runs them at commit time.
 
 ## Handoff note template (`handoffs/YYYY-MM-DD-<agent>-<task>.md`)
 

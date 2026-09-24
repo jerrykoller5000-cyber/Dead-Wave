@@ -712,6 +712,8 @@
   <link rel="stylesheet" href="ui/coach.css">
   <link rel="stylesheet" href="ui/wave-preview.css">
   <link rel="stylesheet" href="ui/prep-checklist.css">
+  <link rel="stylesheet" href="ui/objectives.css">
+  <link rel="stylesheet" href="ui/replays.css">
 </head>
 <body class="opening frontend">
   <div id="opening" data-phase="video" aria-label="Dead Wave opening">
@@ -786,7 +788,8 @@
     </div>
     <div id="placeBanner"></div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
-    <div id="fullMap" aria-hidden="true"><div class="card"><canvas id="fullMapCanvas"></canvas><div class="legend"><b>Tab</b> close · <i style="background:#ff3030"></i>zombies · <i style="background:#ffd24a"></i>kiosk · <i style="background:#7cdea0"></i>HQ · <i style="background:#5ad8ff"></i>builds · dashed ring: minimap reach (50 m)</div></div></div>
+    <div id="fullMap" aria-hidden="true"><div class="card"><div id="objectiveMapSurface"><canvas id="fullMapCanvas"></canvas></div><div class="legend"><b>Tab</b> close · <i style="background:#ff3030"></i>zombies · <i style="background:#ffd24a"></i>kiosk · <i style="background:#7cdea0"></i>HQ · <i style="background:#5ad8ff"></i>builds · dashed ring: minimap reach (50 m)<br><span id="objectiveMapLegend"></span></div></div></div>
+    <div id="objectiveHud"></div>
     <div id="bigBanner"><div class="t"></div><div class="s"></div></div>
     <div id="perf"></div>
     <div id="modeSelect" class="show">
@@ -981,6 +984,9 @@
   <script type="module">
     import * as THREE from 'three';
     import { createPrepRepairReader } from './ui/prep-repairs.js';
+    import { createGuardianReward } from './game/economy.js';
+    import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
+    import { mountDeathReplays } from './ui/replays.js';
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
     } from './core/math.js';
@@ -1013,6 +1019,7 @@
     const winTitleEl = document.getElementById('winTitle');
     const winMsgEl = document.getElementById('winMsg');
     const againBtn = document.getElementById('again');
+    let deathReplayUI = null;
     const ammoEl = document.getElementById('ammo');
     const reloadPromptEl = document.getElementById('reloadPrompt');
     const ammoCountEl = document.getElementById('ammoCount');
@@ -6806,7 +6813,9 @@
       }
       for (let j = 0; j < rows; j++) for (let i = 0; i < segs; i++) {
         const a = j * (segs + 1) + i, b = a + 1, c = a + segs + 1, d = c + 1;
-        idx.push(a, c, b, b, c, d);
+        // CL-14: counter-clockwise seen from above, so the band faces up. It was the other
+        // way round, the back faces were culled, and from above only a few slivers showed.
+        idx.push(a, b, c, b, d, c);
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
@@ -7384,12 +7393,19 @@
     }
     // Every live blip, in whatever projection the caller hands in.
     const uiCaveWarnings = new Map();
+    let objectiveRuntime = null;
     window.addEventListener('dw-cave-warn', ({ detail }) => {
       if (!detail || !Number.isInteger(detail.index) || detail.index < 0) return;
       if (detail.level === 1 || detail.level === 2) uiCaveWarnings.set(detail.index, detail.level);
       else uiCaveWarnings.delete(detail.index);
     });
     function drawMapBlips(ctx, toMap, sz) {
+      if (objectiveRuntime && ctx !== fullMapCtx) for (const marker of objectiveRuntime.markers()) {
+        const p = toMap(marker.position.x, marker.position.z); if (!p) continue;
+        mapSquare(ctx, p, marker.selected ? '#fff1bd' : '#d3bb78', 8 * sz);
+        if (marker.selected) { ctx.save(); ctx.strokeStyle = '#fff1bd'; ctx.lineWidth = 2 * sz;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 8 * sz, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
+      }
       for (const [index, level] of uiCaveWarnings) {
         const cave = POI.caves[index]; if (!cave) continue;
         const p = toMap(cave.x, cave.z); if (!p) continue;
@@ -18399,7 +18415,9 @@
       ring.rotation.x = -Math.PI / 2;
       ring.position.set(mesh.position.x, y - 0.08, mesh.position.z);
       scene.add(ring);
-      cashDrops.push({ mesh, ring, value: v, taken: false, age: 0, skull: kind || 'shambler' });
+      const drop = { mesh, ring, value: v, taken: false, age: 0, skull: kind || 'shambler' };
+      cashDrops.push(drop);
+      return drop;
     }
     const _skullRingGeo = new THREE.RingGeometry(0.3, 0.46, 28);
     // Every dropped skull blinks together: a hard white flash about once a second,
@@ -18573,6 +18591,28 @@
     function publishUI(type, details = {}) {
       window.dispatchEvent(new CustomEvent('dw-game', { detail: { type, runId: uiRunId, eventId: ++uiEventId, ...details } }));
     }
+    // GP-12 / D-16: consume a confirmed planned kill once; never charge or grant Cash.
+    const guardianReward = createGuardianReward({ runId: uiRunId,
+      grantBlueprint: id => {
+        const result = grantBuildBlueprint(id);
+        return result.granted ? 'granted' : result.alreadyOwned ? 'already-owned' : null;
+      },
+      dropSkulls: ({ runId, receiptId, value, x, z }) => {
+        const id = String(runId) + ':' + receiptId;
+        const drop = spawnSkullDrop(x, z, value, 'guardian');
+        drop.rewardReceipt = id;
+        return id;
+      },
+      onDelivered: receipt => {
+        renderShop();
+        showBanner(dwText('reward.guardianFirstBlood'), dwText(receipt.reward === 'mortar-blueprint'
+          ? 'reward.guardianBlueprint' : 'reward.guardianSkulls'), 4, '#e0cb90');
+      }
+    });
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type === 'run-reset') guardianReward.reset(detail.runId);
+      else if (detail?.type === 'guardian-first-blood') guardianReward.consume(detail);
+    });
     const readPrepRepairs = createPrepRepairReader({ getTarget: getRepairTarget, getSnapshot: getRepairSnapshot });
     let prepUISampleTime = 0;
     function publishPrepState(dt = 0, force = false) {
@@ -19795,6 +19835,15 @@
     const kioskPromptEl = document.getElementById('kioskPrompt');
     let kioskPromptShown = false;
     function updateKioskPrompt(dt) {
+      if (gameStarted && !objectiveRuntime) {
+        document.getElementById('objectiveMapLegend').textContent = dwText('objectives.mapLegend');
+        objectiveRuntime = mountObjectiveRuntime({ runId: uiRunId, getProps: getObjectiveProps,
+          getInteraction: getObjectiveInteraction, listChoices: listOwnedAmmoPackChoices, grantSupply,
+          getPlayer: () => ({ x: player.position.x, z: player.position.z, caliber: caliberOf(currentWeapon),
+            active: gameStarted && !gameOver && !won && !paused && !shopOpen }),
+          mapRoot: document.getElementById('objectiveMapSurface'), hudRoot: document.getElementById('objectiveHud'),
+          project: p => ({ x: (MAP_R - p.x) / (2 * MAP_R), y: (MAP_R - p.z) / (2 * MAP_R) }) });
+      }
       publishPrepState(dt);
       const t = performance.now() * 0.001;
       const sc = KIOSK.group.userData.screen;
@@ -26100,14 +26149,19 @@
           showBanner(dwText(GUARDIAN_KEYS.name).toUpperCase() + ' DOWN', '+$' + cash + ' in skulls — turn them in at HQ', 3.2, '#bdf3ff');
           addShake(0.4);
           triggerSlowMo(1.0);
-          // First-blood: combat proposes; ChatGPT economy owns receipt/grant (no direct Cash).
+          // First-blood: only a planned guardian from a guardian night (never debug spawn).
+          // Combat proposes; ChatGPT economy owns receipt/grant (no direct Cash). D-16 / GB-17.
           const playerCredit = !info.defense;
-          if (playerCredit && !guardianFirstBloodDone) {
+          const plannedGuardian = !!z.guardianPlanned;
+          if (playerCredit && plannedGuardian && !guardianFirstBloodDone) {
             guardianFirstBloodDone = true;
             publishUI('guardian-first-blood', {
               receiptId: 'guardian-night-first',
               typeKey: 'guardian',
               playerCredit: true,
+              planned: true,
+              x: px,
+              z: pz,
               propose: 'mortar-blueprint-or-80-skulls',
               keys: Object.assign({}, GUARDIAN_KEYS),
               titleKey: GUARDIAN_KEYS.firstBlood,
@@ -26119,6 +26173,7 @@
           publishUI('guardian-killed', {
             typeKey: 'guardian',
             playerCredit,
+            planned: plannedGuardian,
             cash,
             firstBloodDone: !!guardianFirstBloodDone,
             keys: Object.assign({}, GUARDIAN_KEYS)
@@ -26222,6 +26277,21 @@
         keys: GUARDIAN_KEYS
       };
     }
+
+    /** Boss pip for ChatGPT minimap (GB-19). null unless a guardian night is planned AND one is alive. */
+    function getGuardianAlive() {
+      if (!wavePreview || !wavePreview.hasGuardian) return null;
+      const alive = zombies.find((z) => z.alive && z.typeKey === 'guardian');
+      if (!alive || !alive.mesh) return null;
+      return {
+        x: alive.mesh.position.x,
+        z: alive.mesh.position.z,
+        hp: alive.hp,
+        hpMax: alive.maxHp,
+        caveIndex: (alive.caveIndex != null && alive.caveIndex >= 0) ? alive.caveIndex : wavePreview.guardianCaveIndex
+      };
+    }
+
 
     // === GB-16: objectives combat side ========================================
     // (a) radio defenders once/run; (b) capacity-aware grants; (c) player-damaged
@@ -26405,8 +26475,20 @@
       return out;
     }
 
+    function canAcceptAmmoCaliber(cal) {
+      if (cal === 'chainsaw' || cal === 'saw') return !!weaponOwned.chainsaw;
+      if (cal === 'Fuel') return !!weaponOwned.flamer;
+      if (cal === '60mm') return !!buildUnlocked.mortar;
+      if (!AMMO_PACK[cal]) return false;
+      return gunsUsing(cal).length > 0;
+    }
+
     function applyOneSupply(id, qty) {
-      const want = Math.max(0, qty | 0);
+      let cal = id;
+      if (typeof id === 'string' && id.startsWith('ammo:')) cal = id.slice(5);
+      const isSaw = (id === 'ammo:chainsaw' || cal === 'chainsaw' || cal === 'saw');
+      // D-16 / GB-17: saw fuel stays fractional; other supplies stay whole units.
+      const want = isSaw ? Math.max(0, Number(qty) || 0) : Math.max(0, qty | 0);
       if (want <= 0) return { id, accepted: 0, remaining: 0 };
       if (id === 'medkit' || id === 'medpen' || id === 'MedPen' || id === 'medkits') {
         const space = Math.max(0, MAX_MEDKITS - medkits);
@@ -26420,15 +26502,20 @@
         grenades += take;
         return { id: 'grenade', accepted: take, remaining: want - take };
       }
-      let cal = id;
-      if (id.startsWith('ammo:')) cal = id.slice(5);
-      if (cal === 'chainsaw' || cal === 'saw') {
+      if (isSaw) {
+        if (!canAcceptAmmoCaliber('chainsaw')) {
+          return { id: 'ammo:chainsaw', accepted: 0, remaining: want, error: 'unowned' };
+        }
         const space = Math.max(0, sawFuelMax() - sawFuel);
         const take = Math.min(space, want);
         sawFuel += take;
         return { id: 'ammo:chainsaw', accepted: take, remaining: want - take };
       }
       if (!AMMO_PACK[cal]) return { id, accepted: 0, remaining: want, error: 'unknown' };
+      // D-16 / GB-17: refuse ammo for a calibre with no owned weapon (whole qty remaining).
+      if (!canAcceptAmmoCaliber(cal)) {
+        return { id: 'ammo:' + cal, accepted: 0, remaining: want, error: 'unowned' };
+      }
       const cap = reserveCap(cal);
       const have = reserveAmmo[cal] | 0;
       const space = Math.max(0, cap - have);
@@ -26436,7 +26523,6 @@
       reserveAmmo[cal] = have + take;
       return { id: 'ammo:' + cal, accepted: take, remaining: want - take };
     }
-
     function grantSupply(opts) {
       const receiptId = opts && opts.receiptId;
       const items = (opts && opts.items) || [];
@@ -26878,6 +26964,7 @@
           if (tk !== 'guardian') applyCaveRole(spawned, cave.theme);
         }
         if (tk === 'guardian') {
+          spawned.guardianPlanned = true; // from guardian night's plan (ordinary run)
           spawned.guardianProgressT = 0;
           spawned.guardianBestDist = Infinity;
           spawned.guardianStuckRepath = 0;
@@ -28685,8 +28772,16 @@
       for (const m of root.userData.extraMats || []) m.dispose();
     }
     const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG'];
-    function beginScriptedKill(kind, cave) {
-      if (scriptedKill || cine || gameOver || won || !gameStarted) return;
+    function beginScriptedKill(kind, cave, opts) {
+      const replay = !!(opts && opts.replay);
+      if (scriptedKill) return;
+      if (!replay && (cine || gameOver || won || !gameStarted)) return;
+      if (replay && cine) {
+        // Burial / other cine still up on the death screen — clear it so the replay owns the shot.
+        cine = null;
+        document.body.classList.remove('cine', 'cinebars');
+        if (cineFadeEl) cineFadeEl.style.opacity = '0';
+      } else if (cine) return;
       if (shopOpen) closeShop();
       if (wheelIsOpen()) closeWheel(false);
       cancelPlaceMode();
@@ -28699,8 +28794,10 @@
       // feet once so the grab starts from a clean stance, then holster the weapon.
       updateMarinePose(0.016, false, false, false);
       weaponMount.visible = false;
+      if (!replay) {
       lastDeathCause = kind === 'cave' ? 'caveguard' : 'tentacles';
       lastDeathPlace = kind === 'cave' ? cave.name : 'Underwater Pit';
+      }
       document.body.classList.add('cine', 'cinebars');
       syncReticleVisibility();
       const ud = marine.userData;
@@ -28752,6 +28849,14 @@
         let ox = sk.p0.x - LAKE.x, oz = sk.p0.z - LAKE.z;
         const ol = Math.hypot(ox, oz) || 1; ox /= ol; oz /= ol;
         sk.out = { x: ox, z: oz };
+      }
+      if (replay) {
+        sk.replay = true;
+        sk.replayId = (opts && opts.replayId) || (kind === 'cave' ? 'cave' : 'tentacle');
+        sk.restore = snapshotScriptedDeathReplay();
+        for (const z of zombies) {
+          if (z.mesh) { sk.restore.zombieVis.push({ z, vis: !!z.mesh.visible }); z.mesh.visible = false; }
+        }
       }
       scriptedKill = sk;
       updateScriptedKillRig(0);
@@ -29120,6 +29225,11 @@
     function finishScriptedKill() {
       const sk = cleanupScriptedKill();
       if (!sk) return;
+      if (sk.replay) {
+        applyScriptedDeathReplayRestore(sk.restore);
+        publishUI('scripted-death-replay', { id: sk.replayId, phase: 'end' });
+        return;
+      }
       // For the cave: leave the body where it was thrown. For the lake it stays afloat
       // over the hole; the burial scene parks the (hidden) player somewhere sensible.
       if (sk.kind === 'cave' && sk.landAt) { player.position.copy(sk.landAt); player.position.y = sampleHeight(sk.landAt.x, sk.landAt.z); }
@@ -29131,17 +29241,115 @@
       if (cine) { cine.t = Math.max(cine.t, CINE.black - 0.01); if (cineFadeEl) cineFadeEl.style.opacity = '1'; }
     }
     function abortScriptedKill() {
+      const sk = scriptedKill;
+      const wasReplay = !!(sk && sk.replay);
+      const restore = sk && sk.restore;
+      const replayId = sk && sk.replayId;
       // resetGame / mode change while the scene ran: put everything back, no death.
       if (cleanupScriptedKill() && !cine) {
         document.body.classList.remove('cine', 'cinebars');
         if (cineFadeEl) cineFadeEl.style.opacity = '0';
+      }
+      if (wasReplay && restore) {
+        applyScriptedDeathReplayRestore(restore);
+        publishUI('scripted-death-replay', { id: replayId, phase: 'abort' });
       }
     }
     // Trigger checks, run from the live-sim block in tick(): stepping into a cave
     // mouth, or swimming over the sinkhole, starts the scene. Godmode (a dev tool) is
     // the only exemption — a roll or armour does not save you.
     let sinkholeRippleT = 0;
-    function checkScriptedKillTriggers(dt) {
+    
+    // === GB-20 / D-18: scripted-death replays (combat side) ==================
+    // ChatGPT owns Watch-again chrome (GP-13). Combat owns cine + state freeze.
+    const SCRIPTED_DEATH_REPLAYS = [
+      { id: 'cave', causeKey: 'caveguard', labelKey: 'replay.cave.title', descriptionKey: 'replay.cave.blurb' },
+      { id: 'tentacle', causeKey: 'tentacles', labelKey: 'replay.tentacle.title', descriptionKey: 'replay.tentacle.blurb' }
+    ];
+    function snapshotScriptedDeathReplay() {
+      return {
+        playerPos: player.position.clone(),
+        camPos: camera.position.clone(),
+        look: camLook.clone(),
+        bodyCine: document.body.classList.contains('cine'),
+        bodyBars: document.body.classList.contains('cinebars'),
+        weaponVis: weaponMount.visible,
+        marineVis: marine.visible,
+        fade: cineFadeEl ? String(cineFadeEl.style.opacity || '0') : '0',
+        lastDeathCause,
+        lastDeathPlace,
+        playerHp,
+        zombieVis: []
+      };
+    }
+    function applyScriptedDeathReplayRestore(r) {
+      if (!r) return;
+      player.position.copy(r.playerPos);
+      camera.position.copy(r.camPos);
+      camLook.copy(r.look);
+      document.body.classList.toggle('cine', !!r.bodyCine);
+      document.body.classList.toggle('cinebars', !!r.bodyBars);
+      weaponMount.visible = !!r.weaponVis;
+      marine.visible = !!r.marineVis;
+      if (cineFadeEl) cineFadeEl.style.opacity = r.fade;
+      lastDeathCause = r.lastDeathCause;
+      lastDeathPlace = r.lastDeathPlace;
+      playerHp = r.playerHp;
+      updateHpHud();
+      for (const row of r.zombieVis || []) {
+        if (row.z && row.z.mesh) row.z.mesh.visible = !!row.vis;
+      }
+      velX = velZ = 0; vy = 0;
+    }
+    function listScriptedDeathReplays() {
+      const seen = loadDeathLog();
+      return SCRIPTED_DEATH_REPLAYS.map((r) => ({
+        id: r.id,
+        causeKey: r.causeKey,
+        unlocked: seen.indexOf(r.causeKey) >= 0,
+        labelKey: r.labelKey,
+        descriptionKey: r.descriptionKey
+      }));
+    }
+    function isScriptedDeathReplay() {
+      return !!(scriptedKill && scriptedKill.replay);
+    }
+    function canReplayScriptedDeath(id) {
+      const meta = SCRIPTED_DEATH_REPLAYS.find((r) => r.id === id);
+      if (!meta) return false;
+      if (loadDeathLog().indexOf(meta.causeKey) < 0) return false;
+      if (scriptedKill) return false;
+      // Burial cine may still be up on the death screen; that is fine for Watch again.
+      if (cine && !gameOver) return false;
+      if (won) return false;
+      if (gameStarted && !gameOver) return false;
+      return true;
+    }
+    function pickScriptedDeathReplayCave(opts) {
+      if (opts && opts.caveIndex != null && POI.caves[opts.caveIndex]) return POI.caves[opts.caveIndex];
+      if (lastDeathPlace) {
+        const byName = POI.caves.find((c) => c && c.name === lastDeathPlace);
+        if (byName) return byName;
+      }
+      return POI.caves.find((c) => c && c.theme === 'chalk') || POI.caves[0] || null;
+    }
+    function beginScriptedDeathReplay(id, opts) {
+      if (id !== 'cave' && id !== 'tentacle') return { ok: false, reason: 'unknown' };
+      if (scriptedKill) return { ok: false, reason: 'busy' };
+      if (won || (gameStarted && !gameOver)) return { ok: false, reason: 'alive' };
+      // Burial cine on the death screen is cleared inside beginScriptedKill(replay).
+      const meta = SCRIPTED_DEATH_REPLAYS.find((r) => r.id === id);
+      if (!meta || loadDeathLog().indexOf(meta.causeKey) < 0) return { ok: false, reason: 'locked' };
+      const kind = id === 'cave' ? 'cave' : 'tentacle';
+      const cave = kind === 'cave' ? pickScriptedDeathReplayCave(opts || {}) : null;
+      if (kind === 'cave' && !cave) return { ok: false, reason: 'unknown' };
+      beginScriptedKill(kind, cave, { replay: true, replayId: id });
+      if (!scriptedKill || !scriptedKill.replay) return { ok: false, reason: 'busy' };
+      publishUI('scripted-death-replay', { id, phase: 'start' });
+      return { ok: true };
+    }
+
+function checkScriptedKillTriggers(dt) {
       sinkholeRippleT -= dt;
       if (sinkholeRippleT <= 0) {
         // The tell: the water over the hole never sits quite still.
@@ -29200,6 +29408,7 @@
         const grid = document.createElement('span'); grid.className = 'dl';
         for (const k of keys) {
           const d = document.createElement('b'); d.className = 'd';
+          d.dataset.deathCause = k;
           const found = seen.indexOf(k) >= 0;
           d.textContent = found ? DEATH_WAYS[k].label : '???';
           if (found) d.classList.add('got');
@@ -29209,6 +29418,10 @@
         log.appendChild(grid);
         winMsgEl.appendChild(log);
       }
+      if (!deathReplayUI) deathReplayUI = mountDeathReplays({ panel: winEl, again: againBtn,
+        list: listScriptedDeathReplays, canReplay: canReplayScriptedDeath,
+        begin: beginScriptedDeathReplay, isPlaying: isScriptedDeathReplay });
+      deathReplayUI.update({ cause, victory });
       // A death is buried first (see startDeathCine); the panel comes up over the grave.
       if (!victory && gameStarted) {
         winTitleEl.textContent = 'Rest easy, ' + (session.name || 'Unknown Marine');
@@ -36805,7 +37018,7 @@
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, listScriptedDeathReplays, canReplayScriptedDeath, beginScriptedDeathReplay, isScriptedDeathReplay, getScriptedKill: () => scriptedKill, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
@@ -36836,7 +37049,7 @@
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),

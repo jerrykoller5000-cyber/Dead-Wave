@@ -834,6 +834,7 @@ const messages = {
   "enemy.bomber.name": "Bomber",
   "enemy.demon.name": "Demon",
   "enemy.colossus.name": "Colossus",
+  "enemy.guardian.name": "Guardian",
   "enemy.caveguard.name": "Cave Guardian",
 
   // streak
@@ -955,6 +956,24 @@ const messages = {
   "wavePreview.inProgress": "Wave under way",
   "wavePreview.upgrade": "Field Intel",
   "wavePreview.upgradeDescription": "See every enemy type, count and approach at the HQ panel.",
+  "wavePreview.prompt": "{interact} — HQ briefing",
+  "wavePreview.unknownSource": "Unconfirmed approach",
+  "wavePreview.unknownBearing": "Bearing unconfirmed",
+  "wavePreview.lake": "Lake",
+  "wavePreview.perimeter": "Outer perimeter",
+  "wavePreview.colossus": "Colossus detected",
+  "wavePreview.guardianNight": "Guardian night",
+  "wavePreview.guardianFromCave": "From {source}",
+  "wavePreview.guardianUrgent": "A Guardian is coming from {source}.",
+  "wavePreview.prep": "Preparation",
+  "wavePreview.hudBasic": "Wave Day {day} · Prep · HQ briefing",
+  "wavePreview.hudFull": "Wave Day {day} · Prep · Next: {count} · HQ briefing",
+  "wavePreview.prepDay": "Prep — day {day}",
+
+  // Guardian first-blood reward; announce only the confirmed economy result.
+  "reward.guardianFirstBlood": "First Guardian defeated",
+  "reward.guardianBlueprint": "Mortar blueprint unlocked",
+  "reward.guardianSkulls": "+80 skull value — bank it at the HQ window",
 
   // objectives
   "objectives.track": "Track",
@@ -963,6 +982,10 @@ const messages = {
   "objectives.repairing": "Restoring signal…",
   "objectives.interrupted": "Repair interrupted",
   "objectives.claim": "Take supplies",
+  "objectives.choosePack": "Choose supplies",
+  "objectives.holdRepair": "Hold {interact} for 6 seconds to restore the radio",
+  "objectives.mapLegend": "Gold markers: supplies · select one to track",
+  "objectives.packChoice": "{calibre} · {pack}",
   "objectives.full": "Inventory full — supplies remain",
   "objectives.claimed": "Supplies collected",
   "objectives.unavailable": "Site unavailable",
@@ -1117,6 +1140,17 @@ const messages = {
   "a11y.wavePreview": "Wave briefing",
 
   // fieldIntel
+  "replay.watchAgain": "Watch again",
+  "replay.watch": "Watch",
+  "replay.watchNamed": "Watch {name}",
+  "replay.locked": "Discover this ending to watch it again.",
+  "replay.cave.title": "Cave grab",
+  "replay.cave.blurb": "Something waits beyond the light.",
+  "replay.tentacle.title": "Underwater Pit",
+  "replay.tentacle.blurb": "The water takes what it wants.",
+  "replay.busy": "Replay already playing.",
+  "replay.unavailable": "Replay unavailable right now.",
+
   "fieldIntel.name": "Field Intel",
   "fieldIntel.description": "See every enemy type, count and approach at the HQ panel.",
 };
