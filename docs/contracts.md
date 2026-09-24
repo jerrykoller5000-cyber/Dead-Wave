@@ -121,3 +121,12 @@ moved out of `index.html` with no behaviour change. No Three and no game state.
 - `smoothstep01`, `smoothBand`, `distPointToSeg`
 - `mulberry32(seed)` — returns a deterministic 0..1 function
 
+## Geometry (CU-4 step 2, 2026-09-24)
+
+Owner: Cursor. Callers: world props and the marine mesh. From `core/geometry.js`. Same code as before, now imported. Depends only on three.
+
+- `mergeParts(parts, material, opts)` — bake small meshes into one vertex-coloured mesh
+- `addCast(mesh)`, `rbox(w, h, d, r, seg)`, `rmesh(w, h, d, mat, r)` — beveled boxes
+- `boxProjectUV(pos, uv)` — camo UVs at one repeat per 0.42 m
+
+
