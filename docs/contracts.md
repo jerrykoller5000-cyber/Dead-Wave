@@ -101,6 +101,23 @@ injection, never `window.TT`). From `handoffs/2026-09-23-grokbot-REQ-gp7-repair-
   build removed and rebuilt between two samples reads as the same target.
 - A paid repair reports `purchase-delivered` with `source: 'repair'`.
 
+## Guardian night (GB-14, approved D-13, 2026-09-24)
+
+Owner: Grokbot. Callers: ChatGPT's briefing, HQ and economy. Spec: `docs/specs/combat-phase2.md`.
+
+- `isGuardianNight(day?)` → true on day 6 and every 6th day after. Guardian nights replace
+  surround and colossus; Blood Moon still stacks.
+- `getWavePreview()` adds `hasGuardian`, `guardianNight`, `guardianCaveIndex`,
+  `guardianCaveTheme` and `guardianKeys` (ChatGPT's GP-10 string keys). Nothing is removed.
+- `getGuardianState()` → `{ planned, alive, caveIndex, hp, maxHp, firstBloodDone }` or `null`.
+- `dw-game` `{ type: 'guardian-first-blood', receiptId: 'guardian-night-first', ... }` fires once
+  per run on the first player-credited guardian kill; ChatGPT's economy grants the reward
+  (the mortar blueprint if not owned, else +80 skull value; never direct Cash).
+  `'guardian-killed'` fires on every guardian kill.
+- `caveWarn` on guardian nights as on any night: 1 at prep, 2 at `beginWave`, 0 at the end.
+- A guardian that makes no progress towards the player for 60 s re-paths, then walks back out
+  of the chalk mouth.
+
 ## Tree batches (CL-10, 2026-09-23)
 
 Owner: Claude. Internal to the world: nobody else calls it. Listed so other owners know the
@@ -110,6 +127,35 @@ merged copies; any change to a tree's state, visibility or position makes it dra
 within two frames, and `restoreTree` lets it rejoin its copy. Don't set `visible` on a tree's
 trunk or canopy mesh: the batches own that flag. Debug on `TT`: `treeBatchStats()`,
 `getTreeBatches()`. `?trees=single` turns batching off.
+
+## Objective props and sites (CL-15, approved 2026-09-24)
+
+Owner: Claude (the props and where they stand). Caller: ChatGPT's objectives (GP-11), which
+own the state machine, rewards, receipts and the tracked-objective UI (GP-9). Design:
+`docs/specs/objectives-phase2.md`. Sites: `handoffs/2026-09-23-claude-CL-6-objective-sites.md`.
+Built at load by the world from `assets/world/objective-props.js`, before the minimap bake.
+
+- `getObjectiveProps()` → `{ group, props, stateFor }`, or `null` if the file failed to load.
+  - `props[id]` for each of the seven ids (`objective:radio-repair`, `objective:medical-convoy`,
+    `objective:ranger-cache`, `objective:hikers-cache`, `objective:trapper-cache`,
+    `objective:fuel-depot`, `objective:wreck-salvage`) is
+    `{ id, kind, centre: {x,y,z}, approach: {x,y,z}, facing, states, state, exists, setState(name) }`.
+  - `approach` is where the player stands to use it (0.75 m kept clear); `facing` is the
+    player's yaw looking at it from there. Reachability of the approach is Cursor's to add.
+  - `states`: radio `broken | repaired`; fuel `stocked | partial | empty`; the five caches
+    `closed | open | empty`. `setState(name)` shows that state's prebuilt mesh (no rebuild)
+    and returns false for an unknown name. The radio's light follows (amber, then green).
+  - `stateFor(objectiveState, id, remaining)` maps GP-8's states onto those:
+    undiscovered / available / active → the first state; ready-to-claim, or `remaining` → open
+    (fuel: partial; radio: repaired); claimed → empty (radio: repaired). `unavailable` or an
+    unknown id → `null`: leave the prop as it is.
+  - `exists` is always true today. No prop can be destroyed yet; if that changes, it goes
+    false and GP-8's `unavailable` path applies.
+- The GP-9 snapshot takes each site's `position: {x, z}` from `centre`, and `reachable` from
+  Cursor's interaction check at `approach`. Objective state lives with ChatGPT, not in the
+  props, and is saved by Cursor's run save (CU-5); the props are redrawn from it on load.
+- Two props have colliders (the radio cabinet and the fuel stand); the five small cases have
+  none. Ground cover is cleared within 1.3 m of each prop.
 
 ## Math (CU-4 step 1, 2026-09-24)
 
@@ -128,5 +174,12 @@ Owner: Cursor. Callers: world props and the marine mesh. From `core/geometry.js`
 - `mergeParts(parts, material, opts)` — bake small meshes into one vertex-coloured mesh
 - `addCast(mesh)`, `rbox(w, h, d, r, seg)`, `rmesh(w, h, d, mat, r)` — beveled boxes
 - `boxProjectUV(pos, uv)` — camo UVs at one repeat per 0.42 m
+
+## Audio (CU-4 slice, 2026-09-24)
+
+Owner: Cursor. Callers: the whole game, through `AudioSys` in `core/audio.js`. The engine only.
+The music director (what plays when) stays in the page until the UI slice. No game state inside
+the module; it reads `window.DWOpening` for the opening mute.
+
 
 
