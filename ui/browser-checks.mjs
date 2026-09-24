@@ -86,14 +86,14 @@ try {
   } else if(prepMode) {
     await page.waitForFunction(()=>!document.getElementById('prepChecklist').hidden);
     assert.equal(await page.locator('#prepChecklist summary').textContent(),'Prep 0/1');await shot('collapsed');
-    await page.evaluate(()=>uiProbe.spawnSkullDrop(TT.player.position.x,TT.player.position.z,12,'shambler'));
+    await page.evaluate(()=>{uiProbe.spawnSkullDrop(TT.player.position.x,TT.player.position.z,12,'shambler');});
     await page.waitForFunction(()=>TT.getSkullBag().count===1);
-    await page.evaluate(()=>{TT.getAmmo().pistol=0;TT.getReserve()['9mm']=0;uiProbe.startPrep();uiProbe.publishPrepState(0,true);});
+    await page.evaluate(()=>{TT.getAmmo().pistol=0;TT.getReserve()['.45']=0;uiProbe.startPrep();uiProbe.publishPrepState(0,true);});
     await page.waitForFunction(()=>document.querySelector('#prepChecklist summary').textContent==='Prep 0/3');
     await page.locator('#prepChecklist summary').click();await shot('three-pending');
     const bounds=await page.locator('#prepChecklist').boundingBox();assert(bounds.x>=0&&bounds.y>=0);
     await page.setViewportSize({width:390,height:640});await shot('mobile');await page.setViewportSize({width:1280,height:720});
-    await page.evaluate(()=>{TT.buyAmmo('9mm');uiProbe.publishPrepState(0,true);});
+    await page.evaluate(()=>{TT.buyAmmo('.45');uiProbe.publishPrepState(0,true);});
     assert.equal(await page.locator('#prepChecklist [data-goal="ammo:pistol"]').getAttribute('data-state'),'done');
     await page.evaluate(()=>{const p=TT.HQ_WINDOW_FRONT;TT.player.position.set(p.x,TT.sampleHeight(p.x,p.z),p.z);});
     await page.waitForFunction(()=>TT.actionTarget()==='hqWindow');await page.evaluate(()=>TT.doAction());
@@ -130,7 +130,7 @@ try {
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('dw.coach.v1')).banked),false);await shot('processing');
     await page.waitForFunction(()=>TT.hq.dep==='green');assert.equal(await page.evaluate(()=>TT.getBank()),cash+12);
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('dw.coach.v1')).banked),true);
-    await page.evaluate(()=>TT.buyAmmo('9mm'));
+    await page.evaluate(()=>TT.buyAmmo('.45'));
     await page.waitForFunction(()=>!document.getElementById('firstMinuteCoach').hidden&&document.querySelector('#firstMinuteCoach strong').textContent==='Purchase ready.');await shot('purchase');
     console.log('PASS coach: real pickup, pending versus completed bank credit, profile persistence and paid ammo delivery.');
   } else {

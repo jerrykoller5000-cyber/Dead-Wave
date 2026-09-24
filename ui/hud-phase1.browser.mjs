@@ -2,11 +2,11 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';import {serve} from '../tools/serve.mjs';
 const {chromium}=createRequire(import.meta.url)('playwright');
-const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before'),ember=process.argv.includes('--ember');
-const shots=path.join(root,'Claude outputs/shots',ember?'gp17':'gp16');fs.mkdirSync(shots,{recursive:true});
+const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before'),ember=process.argv.includes('--ember'),edges=process.argv.includes('--edges');
+const shots=path.join(root,'Claude outputs/shots',edges?'gp23':ember?'gp17':'gp16');fs.mkdirSync(shots,{recursive:true});
 let src=fs.readFileSync(path.join(root,'index.html'),'utf8')
  .replace(/<script type="importmap">[\s\S]*?<\/script>/,()=>'<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>')
- .replace('window.TT = {',()=>`window.hudProbe={streak:()=>{combo=12;comboT=100;},alarm:v=>{hq.seq=v?{t:0,fired:0}:null;},day4:()=>{day=3;startPrep();},wave:()=>{phase='wave';}};window.TT = {`);
+ .replace('window.TT = {',()=>`window.hudProbe={streak:()=>{combo=12;comboT=100;},notice:()=>{showBanner('FIELD SUPPLIES','Return to the HQ window to bank your skulls',100);ammoByWeapon.pistol=0;updateAmmoHud();spawnSkullDrop(player.position.x,player.position.z,12,'shambler');},alarm:v=>{hq.seq=v?{t:0,fired:0}:null;},day4:()=>{day=3;startPrep();},wave:()=>{phase='wave';}};window.TT = {`);
 const server=await serve(root,0);let browser;
 try{
  browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
@@ -20,6 +20,7 @@ try{
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:30000});
  await page.evaluate(()=>{TT.runDevCommand('godmode');hudProbe.streak();});
  await page.waitForFunction(()=>document.getElementById('combo').classList.contains('show'));
+ if(edges){await page.evaluate(()=>hudProbe.notice());await page.waitForTimeout(500);}
  for(const [name,width,height] of [['desktop',1280,720],['small',390,844]]){
    await page.setViewportSize({width,height});await page.waitForTimeout(200);
    await page.screenshot({path:path.join(shots,(before?'before-':'after-')+name+'.png')});
@@ -29,6 +30,13 @@ try{
      assert(r.x+r.width<=c.x||c.x+c.width<=r.x||r.y+r.height<=c.y||c.y+c.height<=r.y,'Ready and streak do not overlap');
      const p=await page.locator('#prepChecklist').boundingBox();assert(!p||p.y>=r.y+r.height,'checklist follows Ready');
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+     if(edges){
+       for(const sel of ['#centerHud','#combo','#bigBanner','#reloadPrompt','#firstMinuteCoach','#objectiveHud','#kioskPrompt','#placeBanner']){
+         const el=page.locator(sel);if(!await el.isVisible())continue;const b=await el.boundingBox();if(!b?.height)continue;
+         assert(b.x+b.width<=width*.34||b.x>=width*.66||b.y+b.height<=height*.4||b.y>=height*.6,sel+' leaves the central aiming corridor clear');
+       }
+       const a=await page.locator('#hudTopLeft').boundingBox(),m=await page.locator('#minimapFrame').boundingBox();assert(a.x+a.width<=m.x,'health and map stay separate');
+     }
    }
  }
  if(ember){

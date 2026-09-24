@@ -347,6 +347,7 @@ const messages = {
   "shop.tabs.upgrades": "Upgrades",
   "shop.tabs.perks": "Perks",
   "shop.tabs.build": "Blueprints",
+  "shop.tabs.builds": "Builds",
   "shop.tabs.fortify": "Fortify",
   "shop.hint.weapons": "One-time unlocks. Bought guns join the {weaponWheel} rotation and come with one loaded magazine.",
   "shop.hint.ammo": "The pistol uses .45; the Uzi uses 9mm. Guns of the same calibre share a reserve. {reload} reloads from it. Buy individual packs below or fill your reserves with Restock all.",

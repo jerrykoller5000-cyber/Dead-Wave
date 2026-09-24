@@ -35,9 +35,10 @@ Named in the briefing the day before, each with its own music:
 
 ## Progression
 
-Start slow, like Call of Duty Zombies. Day 1 is a handful of slow shamblers, so the player learns
-to shoot, loot and build before it ramps up. The economy is rebalanced against that curve, not
-separately.
+Start slow, like Call of Duty Zombies, but keep the horde sizes (Jerry, 2026-09-24): day 1 is 20
+bodies, day 3 is 100. The slow start comes from how tough and fast they are, how many are up at
+once and what kills pay (skulls), not from fewer bodies. Proposals: GB-29 (difficulty), GP-25
+(economy).
 
 ## Phases
 
@@ -66,7 +67,7 @@ After each phase Jerry plays it for real. That's the test that counts.
 
 ### Phase 2: the first hour
 
-- The slower wave curve and an economy pass.
+- The difficulty curve and the skull economy, with horde sizes unchanged (GB-29, GP-25).
 - The kiosk sorted into tabs, with ammo for the guns you own first.
 - The HUD tidied: the center of the screen kept clear.
 - A tutorial day: offered on your first run only, with Skip, remembered, and replayable from the

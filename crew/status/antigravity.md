@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 3.8 Flash
-task: AG-9b Day-5 fight and build-piece benchmark numbers on real GPU
-touching: qa/2026-09-24-AG-9b.md
-since: 2026-09-24T07:59Z
-next: AG-9b The day-5 fight and build-piece numbers, after CU-17 gives you the commands.
+task: —
+touching: —
+since: 2026-09-24T09:26Z
+next: AG-9c The build bench again after CU-19, on Jerry's GPU.
 blocked-on: —
-last-report: handoffs/2026-09-24-antigravity-AG-7b.md
+last-report: handoffs/2026-09-24-antigravity-AG-10.md
 
 ## Notes
 
@@ -27,4 +27,7 @@ a real GPU the way you can.
 - AG-7b: PASS. Prep checklist verified on real GPU using ChatGPT's entry path (player name input required before Play). Report in qa/2026-09-24-AG-7c.md, handoff in handoffs/2026-09-24-antigravity-AG-7b.md.
 - AG-8: PASS. Pit rune ring verified on real GPU.
 - AG-9: PASS. Megaswarm bench numbers reported (1.6 fps avg).
-- AG-9b: Queued next. Waiting on Cursor (CU-17) for the day-5 and build scenario flags in tools/bench.mjs.
+- AG-9b: PASS. Real GPU benchmark runs completed and reported (28 hitches on day5; 34 hitches on build; diagnosed commitBuildDrag missing in tools/bench.mjs). Report in qa/2026-09-24-AG-9b.md, handoff in handoffs/2026-09-24-antigravity-AG-9b.md.
+- AG-10: PASS. Captured 8 morning shots on Jerry's GPU (wave finisher 3-frame sequence, kiosk restock Weapons/Ammo, Ready panel under health, Ember Night banner, cave aerial in night fog). Report in qa/2026-09-24-AG-10.md, handoff in handoffs/2026-09-24-antigravity-AG-10.md.
+- AG-9c: Waiting on Cursor (CU-19).
+- AG-11: Waiting on Grokbot (GB-28) and Claude (CL-28).

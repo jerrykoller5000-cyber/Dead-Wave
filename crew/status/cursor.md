@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-5 Commit the waiting phase-1 work now that index.html is free
-touching: index.html, core/audio.js, assets/soundtrack, ui, game/economy.js, tools/tests, docs/contracts.md
-since: 2026-09-24T08:34Z
-next: CU-5 day-start save
+task: CU-23 Restore point: commit and push what's on disk
+touching: index.html, core/audio.js, tools/tests, ui, docs, qa, crew/BOARD.md
+since: 2026-09-24T15:44Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-24-cursor-cu5-grid.md
+last-report: handoffs/2026-09-24-cursor-cu5-save.md
 
 ## Notes
 

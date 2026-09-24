@@ -18,7 +18,13 @@
   T.setHp(30); T.useMedkit();
   ok(T.getMedPenT() > 0 && T.medPenHand.visible && T.getGestureT() > 0, 'H: pen in hand, jab gesture playing ' + [T.getMedPenT(), T.medPenHand.visible, T.getGestureT()]);
   ok(T.getHp() < 35, 'no heal on the keypress (' + T.getHp() + ')');
-  await wait(1100);
+  // MEDPEN_T is 0.8s (hide at <=0.05). Heal lands ~0.34s in; pen should be gone by ~0.75s
+  // of *game* time. tick() caps dt at 0.05, so under hitching a fixed 1.1s wall wait can
+  // advance only ~0.5s of sim (heal yes, pen still in hand). Poll until unequipped.
+  {
+    const jabDeadline = performance.now() + 3000;
+    while (performance.now() < jabDeadline && (T.medPenHand.visible || T.getMedPenT() > 0)) await wait(50);
+  }
   ok(T.getHp() >= 89 && T.getMedkits() === 0 && !T.medPenHand.visible, 'jab lands: health ' + Math.round(T.getHp()) + ', pen gone');
   // --- Airdrop ---
   const bank0 = T.getBank();
@@ -57,12 +63,15 @@
     'canopy settles beside the crate after touchdown');
   ok(cloth.gores.every(g => g.folded && g.mesh.geometry.attributes.position.array.some((v, i) => Math.abs(v - g.original[i]) > 0.05)),
     'cloth geometry crumples instead of retaining the inflated shape');
-  const r0 = T.getReserve()['9mm'];
+  // GB-23: the starter pistol uses .45; the unowned Uzi keeps its separate 9mm reserve.
+  const r0 = T.getReserve()['.45'], uzi0 = T.getReserve()['9mm'];
+  ok(T.caliberOf('pistol') === '.45' && Number.isFinite(r0), 'pistol has its own .45 reserve');
   p.set(s.x + 0.5, T.sampleHeight(s.x, s.z), s.z); await wait(400);
   ok(s.state === 'open', 'walked up: crate opens');
   ok(T.getBank() === bank0, 'no cash in it');
   ok(T.getMedkits() >= 1, 'MedPens inside: now ' + T.getMedkits());
-  if (r0 != null) ok(T.getReserve()['9mm'] > r0, '9mm restocked ' + r0 + ' → ' + T.getReserve()['9mm']);
+  ok(T.getReserve()['.45'] > r0, '.45 restocked ' + r0 + ' → ' + T.getReserve()['.45']);
+  ok(T.getReserve()['9mm'] === uzi0, 'unowned Uzi 9mm reserve stays unchanged');
   ok(s.strobe.material.emissiveIntensity === 0, 'claim switches off the strobe');
   await wait(900);
   const fade = s.group.userData.fadeMaterials;

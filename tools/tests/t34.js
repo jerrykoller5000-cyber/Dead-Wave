@@ -1,6 +1,8 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  // GB-34: poll instead of fixed waits (same helper as t60/t61) -- wall-clock lags under --jobs 2+.
+  const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
   // Play refuses with no callsign. During menuCamera.deploying the game loop skips
   // updateCashDrops, so wait until a far teleport sticks (not the porch spawn).
   const nameEl = document.getElementById('playerName');
@@ -25,7 +27,7 @@
   ok(T.house.half === 5 && T.house.group.visible, 'the HQ stands: a 10 m square');
   ok(T.house.muzzles.length === 8 && T.house.strobes.length === 4, 'eight flare barrels and four strobes');
   ok(Math.abs(T.KIOSK.x + 5.02) < 0.01, 'kiosk on the west wall');
-  // no clock: prep holds
+  // no clock: prep holds (intentional fixed wait -- proving nothing triggers)
   await wait(2500);
   ok(T.getPhase() === 'prep', 'and it stays there: no countdown');
   // a kill drops a skull of that kind
@@ -49,11 +51,13 @@
   ok(T.actionTarget() === 'hqWindow', 'at the window, E means: turn in skulls');
   T.doAction();
   ok(T.hq.dep === 'open' && T.getSkullBag().count === 0, 'the shutter opens and the bag goes');
-  await wait(900);
+  // GB-34: deposit sequence advances on game time; under --jobs 2+ wall waits miss stages.
+  await until(() => T.hq.dep === 'throw' || T.hq.dep === 'close' || T.hq.dep === 'process', 8000);
   ok(T.hq.dep === 'throw' || T.hq.dep === 'close' || T.hq.dep === 'process', 'thrown in (' + T.hq.dep + ')');
-  await wait(1200);
+  await until(() => T.hq.dep === 'process', 8000);
   ok(T.hq.dep === 'process' && T.getBank() === bank0, 'machinery running, no cash yet');
-  await wait(4000);
+  // GB-34 amend (Claude review): green can land before cash under --jobs 3; poll both.
+  await until(() => T.hq.dep === 'green' && T.getBank() === bank0 + val, 12000);
   ok(T.hq.dep === 'green' && T.getBank() === bank0 + val, 'ding: light green, +$' + (T.getBank() - bank0));
   // GP-5: panel E opens the briefing; only explicit Sound alarm starts hqStartWave
   p.set(T.HQ_PANEL_FRONT.x, T.sampleHeight(T.HQ_PANEL_FRONT.x, T.HQ_PANEL_FRONT.z), T.HQ_PANEL_FRONT.z); await wait(200);
@@ -67,18 +71,16 @@
   if (alarmBtn) alarmBtn.click();
   await wait(100);
   ok(!!T.hq.seq && T.getPhase() === 'prep', 'alarm sounding, wave not yet');
-  await wait(1800);
-  // GB-15: real strobes-on check (was const lit = ... || true never asserted).
-  // updateHQSequence pulses emissiveIntensity 6 with a short duty cycle while seq.t < 5;
-  // poll so a headless sample is not stuck between flashes.
+  // GB-15 + GB-34: poll strobes/flares/wave (no fixed 1.8s/4.2s waits under jobs>1).
   let lit = false;
-  for (let i = 0; i < 40 && !lit; i++) {
+  for (let i = 0; i < 80 && !lit; i++) {
     lit = T.house.strobes.some(s => s.mat.emissiveIntensity > 1);
     if (!lit) await wait(50);
   }
   ok(lit, 'strobes flash during the alarm sequence');
+  await until(() => T.hq.flares.length > 0, 8000);
   ok(T.hq.flares.length > 0, 'flares in the air: ' + T.hq.flares.length);
-  await wait(4200);
+  await until(() => T.getPhase() === 'wave' && !T.hq.seq && T.hq.flares.length === 0, 15000);
   ok(T.getPhase() === 'wave' && !T.hq.seq && T.hq.flares.length === 0, 'five seconds on, the wave is on and the flares have burst');
   ok(T.house.strobes.every(s => s.mat.emissiveIntensity < 0.1), 'strobes off again');
   return out.join('\n');

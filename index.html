@@ -454,13 +454,18 @@
     }
     #shop h2 span { font-family: var(--font-hud); font-size: 14px; color: var(--ink); letter-spacing: 0.04em; }
     #shop p.hint { font-size: 12px; opacity: .75; margin-bottom: 12px; min-height: 16px; }
-    #shopTabs { display: flex; gap: 4px; margin: 10px 0 8px; flex-wrap: wrap; }
-    #shopTabs button {
+    #shopTabs { display: flex; gap: 4px; margin: 10px 0 8px; }
+    #shopTabs button, #shopSubtabs button {
       pointer-events: auto; cursor: pointer; border: 1px solid rgba(206,222,150,.18); background: rgba(255,255,255,.04);
       color: var(--ink); font-family: var(--font-hud); font-weight: 700; font-size: 11.5px; letter-spacing: 0.06em;
       text-transform: uppercase; padding: 7px 11px;
     }
     #shopTabs button.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    #shopTabs button { flex: 1; min-width: 0; padding: 8px 4px; letter-spacing: .02em; }
+    #shopSubtabs { display: flex; gap: 6px; margin-bottom: 8px; }
+    #shopSubtabs[hidden] { display: none; }
+    #shopSubtabs button { padding: 5px 8px; font-size: 10px; background: transparent; border-color: transparent; }
+    #shopSubtabs button.on { color: var(--accent); border-bottom-color: var(--accent); }
     .perk.owned { opacity: .72; }
     #prepTimer {
       display: none; position: static; text-align: left; pointer-events: none;
@@ -714,6 +719,7 @@
   <link rel="stylesheet" href="ui/wave-preview.css">
   <link rel="stylesheet" href="ui/prep-checklist.css">
   <link rel="stylesheet" href="ui/objectives.css">
+  <link rel="stylesheet" href="ui/hud-layout.css">
   <style>
     #errorCard {
       position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 80;
@@ -794,11 +800,11 @@
         </div>
         <div id="hpExtra"></div>
       </div>
+      <div id="centerHud">
+        <div id="timeLine">Day · 06:00</div>
+        <div id="tacticalLine">NVG off · Laser off</div>
+      </div>
       <div id="prepTimer"><div class="label">Prep — ready when you are</div><div class="clock">READY</div><div class="track"><i></i></div><div class="skip">Start the wave at the HQ panel (E)</div></div>
-    </div>
-    <div id="centerHud">
-      <div id="timeLine">Day · 06:00</div>
-      <div id="tacticalLine">NVG off · Laser off</div>
     </div>
     <div id="devConsole"><span class="caret">&gt;</span><input id="devConsoleInput" type="text" autocomplete="off" spellcheck="false" /></div>
     <div id="combo"><div class="n">2</div><div class="l">Kill streak</div><div class="m"></div><div class="bar"><i></i></div></div>
@@ -809,8 +815,8 @@
         <div id="ammoDetail">300 / 300</div>
       </div>
       <div id="grenadeChips"><span class="gchip">G×3</span></div>
+      <div id="reloadPrompt"></div>
     </div>
-    <div id="reloadPrompt"></div>
     <div id="wheel" aria-hidden="true">
       <div id="wheelDim"></div>
       <div id="wheelStage">
@@ -818,7 +824,10 @@
         <div id="wheelHub"><div id="wheelHubName"></div><div id="wheelHubMeta"></div></div>
       </div>
     </div>
-    <div id="placeBanner"></div>
+    <div id="hudNotices">
+      <div id="kioskPrompt"></div>
+      <div id="placeBanner"></div>
+    </div>
     <div id="minimapFrame"><span class="br"></span><span class="bl"></span><canvas id="minimap" width="164" height="164"></canvas></div>
     <div id="fullMap" aria-hidden="true"><div class="card"><div id="objectiveMapSurface"><canvas id="fullMapCanvas"></canvas></div><div class="legend"><b>Tab</b> close · <i style="background:#ff3030"></i>zombies · <i style="background:#ffd24a"></i>kiosk · <i style="background:#7cdea0"></i>HQ · <i style="background:#5ad8ff"></i>builds · dashed ring: minimap reach (50 m)<br><span id="objectiveMapLegend"></span></div></div></div>
     <div id="objectiveHud"></div>
@@ -850,12 +859,12 @@
       <div class="card">
         <h2>Supply Kiosk <span>Cash $<em id="shopCash">0</em></span></h2>
         <div id="shopTabs"></div>
+        <div id="shopSubtabs" hidden></div>
         <p class="hint" id="shopHint"></p>
         <div id="shopList"></div>
         <div class="modes"><button id="shopClose" type="button">Back to the fight (E / Esc)</button></div>
       </div>
     </div>
-    <div id="kioskPrompt"></div>
     <div id="pause">
       <div class="card" id="pauseCard">
         <div id="pauseMainView">
@@ -1293,6 +1302,10 @@
     let won = false;
 
     const scene = new THREE.Scene();
+    // CL-28 (D-23): the scene itself never moves. Left on auto, it re-marks its own matrix
+    // every frame and that forces every object below it to redo its world matrix, moving or
+    // not. Off, only what actually moves (or is still on auto) pays for it.
+    scene.matrixAutoUpdate = false;
     scene.background = new THREE.Color(0x87b7ff);
     scene.fog = new THREE.Fog(0x87b7ff, 190, 640);
 
@@ -7017,6 +7030,11 @@
     // etc.) since the path-routing code needs it before this point in the file.
     const TOWER_LADDER_R = 0.95;    // how close you need to walk to grab it
     const TOWER_DECK_HALF = 1.4;    // deck footprint half-width once you're up top
+    // CL-19 (Jerry): the deck's railings stop you. They stand at ±1.43 (bars 0.1 thick) and
+    // top out 0.86 m above the deck; the south side has a 1.09 m gap where the ladder lands.
+    const TOWER_RAIL_IN = 1.43 - 0.05;   // inner face of the rails
+    const TOWER_RAIL_TOP = 0.86;         // above the deck: jump higher than this and you clear them
+    const TOWER_GAP_HALF = 0.3;          // centre-line corridor through the ladder gap
     const TOWER_CLIMB_SPEED = 3.6;
     const TOWER_SIEGE_RADIUS = 3.0; // zombies this close to the base count as attacking it
     const TOWER_DPS_PER_ZOMBIE = 5.5;
@@ -8073,8 +8091,6 @@
     const puddleTextures = [];
     for (let i = 0; i < PUDDLE_TEX_COUNT; i++) puddleTextures.push(makePuddleTexture(0xf00d + i * 733));
 
-    const puddleGeo = new THREE.CircleGeometry(1, 24);
-    puddleGeo.rotateX(-Math.PI / 2);
     // One material per blob texture, built once. A puddle picking a new shape used to
     // swap the texture on its own material and set needsUpdate, which rebuilds that
     // material's pipeline — a hitch every time it rained. Now each puddle just points
@@ -8088,14 +8104,63 @@
         transparent: true, opacity: 0, depthWrite: false
       }));
     }
+    // CL-18 (Jerry): puddles came out as half circles. A flat disc at the centre's height
+    // sinks its downhill half into any slope, and the ground mesh is not flat even where
+    // the slope test passes. Now each puddle is its own small disc draped over the ground:
+    // a centre, three rings of 24, every vertex at the ground's height under it. It is
+    // re-draped only when its radius has grown enough to matter.
+    const PUD_SEG = 24, PUD_RINGS = 3, PUD_VERTS = 1 + PUD_SEG * PUD_RINGS, PUD_LIFT = 0.035;
+    const _pudIndex = (() => {
+      const idx = [];
+      for (let k = 0; k < PUD_SEG; k++) idx.push(0, 1 + (k + 1) % PUD_SEG, 1 + k);
+      for (let r = 0; r < PUD_RINGS - 1; r++) for (let k = 0; k < PUD_SEG; k++) {
+        const a = 1 + r * PUD_SEG + k, b = 1 + r * PUD_SEG + (k + 1) % PUD_SEG, c = a + PUD_SEG, d = b + PUD_SEG;
+        idx.push(a, b, c, b, d, c);
+      }
+      return idx;
+    })();
+    function makePuddleGeo() {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(PUD_VERTS * 3), 3));
+      const nrm = new Float32Array(PUD_VERTS * 3);
+      for (let i = 0; i < PUD_VERTS; i++) nrm[i * 3 + 1] = 1;
+      geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+      geo.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(PUD_VERTS * 2), 2));
+      geo.setIndex(_pudIndex);
+      return geo;
+    }
+    function drapePuddle(p, radius) {
+      const geo = p.mesh.geometry, P = geo.attributes.position.array, UV = geo.attributes.uv.array;
+      const rot = p.uvRot || 0;
+      P[0] = p.x; P[1] = sampleHeight(p.x, p.z) + PUD_LIFT; P[2] = p.z; UV[0] = 0.5; UV[1] = 0.5;
+      let lo = P[1], hi = P[1];
+      for (let r = 0; r < PUD_RINGS; r++) {
+        const f = (r + 1) / PUD_RINGS;
+        for (let k = 0; k < PUD_SEG; k++) {
+          const a = (k / PUD_SEG) * Math.PI * 2, i = 1 + r * PUD_SEG + k;
+          const x = p.x + Math.cos(a) * radius * f, z = p.z + Math.sin(a) * radius * f;
+          const y = sampleHeight(x, z) + PUD_LIFT;
+          P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z;
+          if (y < lo) lo = y; if (y > hi) hi = y;
+          UV[i * 2] = 0.5 + 0.5 * f * Math.cos(a + rot); UV[i * 2 + 1] = 0.5 + 0.5 * f * Math.sin(a + rot);
+        }
+      }
+      geo.attributes.position.needsUpdate = true;
+      geo.attributes.uv.needsUpdate = true;
+      geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(p.x, (lo + hi) / 2, p.z), radius + (hi - lo));
+      p.drawR = radius;
+    }
     const puddles = [];
     for (let i = 0; i < PUDDLE_MAX; i++) {
       const mat = puddleMatPool[i];
-      const mesh = new THREE.Mesh(puddleGeo, mat);
+      mat.polygonOffset = true; mat.polygonOffsetFactor = -2; mat.polygonOffsetUnits = -2;
+      const mesh = new THREE.Mesh(makePuddleGeo(), mat);
       mesh.visible = false;
       mesh.renderOrder = 1;
+      mesh.frustumCulled = true;
+      mesh.matrixAutoUpdate = false;   // world-space vertices at the origin
       scene.add(mesh);
-      puddles.push({ mesh, mat, x: 0, z: 0, baseR: 1, wetness: 0, active: false });
+      puddles.push({ mesh, mat, x: 0, z: 0, baseR: 1, wetness: 0, active: false, drawR: 0, uvRot: 0 });
     }
     let puddleSpawnCd = 0;
 
@@ -8113,7 +8178,7 @@
               const x = player.position.x + Math.cos(a) * r;
               const z = player.position.z + Math.sin(a) * r;
               if (!inLand(x, z, 4)) continue;
-              if (terrainSlope(x, z) > 0.09) continue;
+              if (terrainSlope(x, z) > 0.05) continue;   // CL-18: water gathers on the flat (was 0.09)
               if (waterDepthAt(x, z) > 0.02) continue;
               free.active = true;
               free.x = x; free.z = z;
@@ -8123,7 +8188,8 @@
               // small shared texture pool doesn't read as repetition.
               // Rotation alone re-randomises how the blob reads, without touching the
               // material (see puddleMatPool): no texture swap, no pipeline rebuild.
-              free.mesh.rotation.y = Math.random() * Math.PI * 2;
+              free.uvRot = Math.random() * Math.PI * 2;   // (CL-18: turned in UV, the mesh is draped)
+              free.drawR = 0;
               break;
             }
           }
@@ -8140,9 +8206,8 @@
         p.wetness = Math.min(1, Math.max(0, p.wetness));
         p.mesh.visible = p.wetness > 0.02;
         if (p.mesh.visible) {
-          p.mesh.position.set(p.x, sampleHeight(p.x, p.z) + 0.02, p.z);
           const s = p.baseR * (0.3 + 0.7 * p.wetness);
-          p.mesh.scale.set(s, 1, s);
+          if (Math.abs(s - p.drawR) > Math.max(0.05, s * 0.04)) drapePuddle(p, s);
           p.mat.opacity = 0.62 * p.wetness;
         }
       }
@@ -8460,6 +8525,7 @@
         mesh.castShadow = cell.castShadow;
         mesh.receiveShadow = false;
         mesh.userData.spans = cell.spans || [];
+        mesh.matrixAutoUpdate = false;       // CL-28: world-space geometry at the origin; never moves
         scene.add(mesh);
         foliageChunks.push(mesh);
       }
@@ -13927,7 +13993,23 @@
       if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
       tbCollapse(m.cell.wood, m.woodStart, m.woodCount);
       tbCollapse(m.cell.leaf, m.leafStart, m.leafCount);
+      tbFreeze(m.tree, false);
       tbShowOwn(m, true);
+    }
+    // CL-28 (D-23): a batched tree is drawn from its cell's mesh, so its own objects (the
+    // group, the canopy, every trunk, branch and leaf mesh) are only there to be swapped
+    // back in. Freeze their matrices while batched so the frame's matrix pass skips them,
+    // and hand them back when the tree goes live. Anything that changes a batched tree
+    // changes its snapshot, and a changed tree goes live within three frames.
+    function tbFreeze(t, on) {
+      const g = t.group;
+      if (!g) return;
+      if (on) {
+        g.traverse((o) => { if (o.matrixAutoUpdate) { o.updateMatrix(); o.matrixAutoUpdate = false; o.userData._tbFrozen = true; } });
+        g.updateMatrixWorld(true);
+      } else {
+        g.traverse((o) => { if (o.userData._tbFrozen) { o.matrixAutoUpdate = true; o.userData._tbFrozen = false; } });
+      }
     }
     function tbGoBatch(m) {
       if (m.inBatch) return;
@@ -13940,6 +14022,7 @@
       m.tree._tbInBatch = true;
       m.dirty = false;
       m.snap = tbSnapshot(m.tree);
+      tbFreeze(m.tree, true);
     }
 
     let treeBatchBuildMs = 0;
@@ -13983,6 +14066,7 @@
           m.tree._tbInBatch = true;
           m.snap = tbSnapshot(m.tree);
           tbShowOwn(m, false);
+          tbFreeze(m.tree, true);
         }
         // Bounds from one pass over the positions (three's computeBoundingSphere makes
         // two passes with a Vector3 per vertex). The sphere is the box's, a little loose,
@@ -15413,14 +15497,59 @@
       }
       hlAdd(rmesh(0.4, 0.025, 0.012, strapMat, 0.005), 0, 1.585, 0.0).rotation.x = -0.1;      // goggle strap round the shell
 
-      // Skull-jaw mask (dark shell + white jaw print, a strap round the back).
-      hAdd(rmesh(0.25, 0.16, 0.12, maskDark, 0.045), 0, 1.32, 0.155);
-      hAdd(rmesh(0.2, 0.06, 0.04, jawPrint, 0.014), 0, 1.28, 0.215);
-      for (let i = -2; i <= 2; i++) hAdd(rmesh(0.028, 0.035, 0.02, jawPrint, 0.006), i * 0.035, 1.315, 0.225);
-      hAdd(rmesh(0.27, 0.03, 0.2, strapMat, 0.008), 0, 1.35, -0.03);                             // mask strap
-      // Eyes: dark sockets under the brow, a glint in each.
+      // Face (CL-32, Jerry): what shows above the mask when he has no helmet or goggles on.
+      // Eyes with whites, brown irises, pupils and a catchlight, set in shaded sockets under
+      // heavy lids; brows angled down at the middle; a nose bridge, cheekbones, sideburns,
+      // and an old scar through the left brow.
+      const skinShade = new THREE.MeshStandardMaterial({ color: 0x9c7f5e, roughness: 0.9 });
+      const scarMat = new THREE.MeshStandardMaterial({ color: 0xcfb28e, roughness: 0.6 });
+      const glintMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
       const eyeMat = new THREE.MeshBasicMaterial({ color: 0x0a0a0a });
-      for (const sx of [-0.06, 0.06]) hAdd(new THREE.Mesh(rbox(0.065, 0.035, 0.03, 0.008), eyeMat), sx, 1.42, 0.14);
+      const hRot = (mesh, rx, ry, rz) => { mesh.rotation.set(rx, ry, rz); return mesh; };
+      for (const sx of [-1, 1]) {
+        const ex = sx * 0.06;
+        hAdd(rmesh(0.074, 0.046, 0.012, skinShade, 0.01), ex, 1.419, 0.144);                  // socket shadow
+        hAdd(rmesh(0.05, 0.024, 0.012, jawPrint, 0.009), ex, 1.419, 0.148);                    // white of the eye
+        hAdd(rmesh(0.022, 0.022, 0.008, hairMat, 0.008), ex - sx * 0.003, 1.419, 0.153);       // iris (looking a touch inward)
+        hAdd(new THREE.Mesh(rbox(0.011, 0.011, 0.006, 0.004), eyeMat), ex - sx * 0.003, 1.419, 0.156);   // pupil
+        hAdd(new THREE.Mesh(rbox(0.005, 0.005, 0.003, 0.001), glintMat), ex - sx * 0.003 + 0.004, 1.423, 0.1585);  // catchlight
+        hRot(hAdd(rmesh(0.06, 0.013, 0.016, skinMat, 0.006), ex, 1.4325, 0.152), 0.25, 0, 0);  // heavy upper lid
+        hAdd(rmesh(0.052, 0.008, 0.01, skinShade, 0.004), ex, 1.4045, 0.151);                  // under the eye
+        hRot(hAdd(rmesh(0.072, 0.017, 0.02, hairMat, 0.007), ex + sx * 0.004, 1.4545, 0.162), 0, 0, sx * 0.16);   // brow
+        hAdd(rmesh(0.05, 0.022, 0.03, skinMat, 0.01), sx * 0.082, 1.398, 0.138);               // cheekbone
+        hAdd(rmesh(0.018, 0.06, 0.035, hairMat, 0.006), sx * 0.127, 1.405, 0.045);             // sideburn
+        hAdd(rmesh(0.012, 0.035, 0.02, skinShade, 0.005), sx * 0.142, 1.4, 0.0);               // inner ear
+      }
+      hAdd(rmesh(0.03, 0.05, 0.03, skinMat, 0.01), 0, 1.428, 0.158);                           // nose bridge
+      hAdd(rmesh(0.02, 0.012, 0.012, skinShade, 0.004), 0, 1.44, 0.158);                       // frown line between the brows
+      hRot(hAdd(rmesh(0.006, 0.036, 0.004, scarMat, 0.002), -0.076, 1.449, 0.171), 0, 0, 0.3);   // scar through the left brow
+      // Skull-jaw mask (CL-32: more detail). A dark shell that wraps round the cheeks, a chin
+      // cup and a nose ridge; the skull printed on it in bone white — cheekbones, nasal
+      // cavity, two rows of teeth and the chin; a filter vent in each cheek plate with
+      // slats; rivets; the strap and its buckles round the back.
+      hAdd(rmesh(0.25, 0.16, 0.12, maskDark, 0.045), 0, 1.32, 0.155);                           // shell
+      hAdd(rmesh(0.16, 0.06, 0.1, maskDark, 0.03), 0, 1.24, 0.15);                              // chin cup
+      hRot(hAdd(rmesh(0.07, 0.02, 0.045, maskDark, 0.009), 0, 1.398, 0.195), 0.35, 0, 0);       // nose ridge
+      for (const sx of [-1, 1]) {
+        const ry = sx * 0.45, nx = Math.sin(ry), nz = Math.cos(ry);
+        const px = sx * 0.125, pz = 0.12;
+        hRot(hAdd(rmesh(0.06, 0.13, 0.1, maskDark, 0.03), px, 1.315, pz), 0, ry, 0);            // cheek plate
+        const vx = px + nx * 0.052, vz = pz + nz * 0.052;
+        hRot(hAdd(cyl(0.026, 0.026, 0.02, nvgMat, 14), vx, 1.305, vz), Math.PI / 2, 0, -ry);   // filter vent
+        for (const dy of [-0.012, 0, 0.012]) hRot(hAdd(rmesh(0.042, 0.005, 0.006, maskDark, 0.002), vx + nx * 0.011, 1.305 + dy, vz + nz * 0.011), 0, ry, 0);   // vent slats
+        for (const ry2 of [1.365, 1.255]) hRot(hAdd(cyl(0.008, 0.008, 0.012, nvgMat, 8), px + nx * 0.049, ry2, pz + nz * 0.049), Math.PI / 2, 0, -ry);   // rivets
+        hAdd(rmesh(0.014, 0.036, 0.03, nvgMat, 0.004), sx * 0.137, 1.35, 0.05);                 // strap buckle
+        // Printed bone: cheekbones and the two sides of the nasal cavity.
+        hRot(hAdd(rmesh(0.045, 0.016, 0.008, jawPrint, 0.004), sx * 0.062, 1.37, 0.215), 0, sx * 0.3, sx * 0.2);
+        hRot(hAdd(rmesh(0.011, 0.032, 0.008, jawPrint, 0.003), sx * 0.018, 1.372, 0.217), 0, 0, -sx * 0.4);
+      }
+      for (let i = 0; i < 6; i++) {
+        const tx = -0.0625 + i * 0.025;
+        hAdd(rmesh(0.021, 0.03, 0.01, jawPrint, 0.005), tx, 1.337, 0.218);                      // upper teeth
+        hAdd(rmesh(0.021, 0.027, 0.01, jawPrint, 0.005), tx, 1.3, 0.218);                       // lower teeth
+      }
+      hAdd(rmesh(0.12, 0.018, 0.01, jawPrint, 0.004), 0, 1.264, 0.214);                          // chin
+      hAdd(rmesh(0.27, 0.03, 0.2, strapMat, 0.008), 0, 1.35, -0.03);                             // mask strap
 
       // Bake rigid parts together (see mergeRigidMeshes); the hip is animated on its own.
       mergeRigidMeshes(g, gearParts, new Set([hip]));
@@ -16222,16 +16351,11 @@
     const BLADE_STATS = {
       // reach is to the zombie's edge (its radius is added); arc is the minimum cosine
       // off your facing (0.25 ≈ ±75°).
-      // The knife used to do 28 at 0.45s (62 dps) through a ±75° arc, which was worse
-      // than the starting pistol and took two swings to drop a shambler — so nobody
-      // ever drew it. It now one-shots every piece of fodder (shambler 24, feral 15,
-      // screamer 28, leaper 30, spitter/bomber 34), swings half again as fast, and
-      // sweeps nearly a half-circle so it clears a crowd instead of one body.
-      // 45 left the knife one damage short of a drowned and short of a spider once
-      // its armour was applied, so the swing that should have saved you didn't. 54
-      // clears every mid-tier body in one sweep; only the military zombie, the brute
-      // and the colossus need a second.
-      knife:   { reach: 3.5, dmg: 54, cd: 0.28, arc: 0.05, name: 'Knife' },
+      // GB-31 (Jerry: knife far too strong). Measured before: dmg 54 / cd 0.28 (193 DPS),
+      // reach 3.5, arc minDot 0.05 (~±87°), one swing killed 6/12 frontal shamblers.
+      // After: dmg 22 / cd 0.42 (52 DPS), reach 2.4, arc 0.40 (~±66°), max 2 hits/swing.
+      // Shambler takes 2 swings; feral still one-shots. Panic tool, not a crowd clear.
+            knife:   { reach: 2.4, dmg: 22, cd: 0.42, arc: 0.40, maxHits: 2, name: 'Knife' },
       machete: { reach: 3.8, dmg: 85, cd: 0.40, arc: -0.05, name: 'Machete' }
     };
     function bladeStats() { return macheteOwned ? BLADE_STATS.machete : BLADE_STATS.knife; }
@@ -18692,9 +18816,9 @@
       reportPurchase('field-intel', FIELD_INTEL_COST);
       renderShop();
     });
-    let shopTab = 'weapons';
+    let shopTab = 'ammo';
     const SHOP_TABS = [
-      ['weapons', 'Weapons'], ['ammo', 'Ammo'], ['gear', 'Gear'], ['upgrades', 'Upgrades'], ['perks', 'Perks'], ['build', 'Blueprints'], ['fortify', 'Fortify']
+      ['weapons', ['weapons', 'upgrades']], ['ammo', ['ammo']], ['build', ['build', 'fortify']], ['gear', ['gear', 'perks']]
     ];
     const SHOP_HINT = {
       weapons: 'One-time unlocks. Bought guns join the Q rotation and come with one loaded magazine.',
@@ -18721,19 +18845,25 @@
       shopCashEl.textContent = devInfiniteCash ? '∞' : String(bank);
       shopListEl.innerHTML = '';
       if (shopTabsEl) {
-        shopTabsEl.innerHTML = '';
-        for (const [key, label] of SHOP_TABS) {
+        const sub = document.getElementById('shopSubtabs');
+        const group = SHOP_TABS.find(([, pages]) => pages.includes(shopTab)) || SHOP_TABS[1];
+        shopTabsEl.replaceChildren(); sub.replaceChildren(); sub.hidden = group[1].length < 2;
+        const addTab = (parent, key, label, selected) => {
           const b = document.createElement('button');
-          b.type = 'button'; b.textContent = label;
-          if (key === shopTab) b.classList.add('on');
-          b.addEventListener('click', () => { if (shopTab !== key) AudioSys.kioskTab(); shopTab = key; renderShop(); });
-          shopTabsEl.appendChild(b);
-        }
+          b.type = 'button'; b.textContent = label; b.dataset.shopPage = key;
+          b.setAttribute('aria-pressed', String(selected));
+          if (selected) b.classList.add('on');
+          b.addEventListener('click', () => { if (shopTab !== key) AudioSys.kioskTab(); shopTab = key; shopListEl.scrollTop = 0; renderShop();
+            document.querySelector('#' + parent.id + ' [data-shop-page="' + key + '"]')?.focus(); });
+          parent.appendChild(b);
+        };
+        for (const [key] of SHOP_TABS) addTab(shopTabsEl, key, dwText(key === 'build' ? 'shop.tabs.builds' : 'shop.tabs.' + key), group[0] === key);
+        for (const key of group[1]) if (!sub.hidden) addTab(sub, key, dwText('shop.tabs.' + key), shopTab === key);
       }
       if (shopHintEl) shopHintEl.textContent = SHOP_HINT[shopTab] || '';
       if (shopTab === 'weapons') {
         renderRestockAll();
-        for (const w of WEAPON_ORDER) {
+        for (const w of [...WEAPON_ORDER].sort((a,b) => Number(!weaponOwned[a]) - Number(!weaponOwned[b]))) {
           const price = WEAPON_PRICE[w];
           const owned = !!weaponOwned[w];
           const row = shopRow(WEAPON_STATS[w].name, owned ? 'owned' : '', WEAPON_BLURB[w],
@@ -18753,7 +18883,7 @@
           actions.append(row.querySelector('button'), restock); row.append(actions);
         }
       } else if (shopTab === 'ammo') {
-        const cals = stockedCalibers();
+        const cals = stockedCalibers().sort((a,b) => Number(b === caliberOf(currentWeapon)) - Number(a === caliberOf(currentWeapon)));
         const sawShort = weaponOwned.chainsaw && sawFuel < sawFuelMax() - 0.01;
         renderRestockAll();
         for (const c of cals) {
@@ -18763,9 +18893,10 @@
           const guns = gunsUsing(c).map((w) => WEAPON_STATS[w].name);
           const feeds = c === '60mm' ? 'Feeds the mortar.'
             : (guns.length ? 'Feeds ' + guns.join(' and ') + '.' : '');
-          shopRow(c, res + ' / ' + cap + ' spare',
+          const row = shopRow(c, res + ' / ' + cap + ' spare',
             '+' + pk.n + ' ' + caliberUnit(c) + ' to the reserve. ' + feeds + (full ? ' Reserve is full.' : ''),
             full ? 'FULL' : '$' + pk.cost, !full && bank >= pk.cost, () => buyAmmo(c));
+          row.dataset.ammo = c;
         }
         if (weaponOwned.chainsaw) {
           const pk = AMMO_PACK.chainsaw;
@@ -19815,6 +19946,9 @@
       hq.seq = { t: 0, fired: 0 };
       publishUI('alarm-started', { day });
       AudioSys.klaxon();
+      // CL-29 (Jerry): the ground rumbles and the camera shakes for three seconds.
+      if (AudioSys.alarmRumble) AudioSys.alarmRumble(ALARM_RUMBLE_S);
+      alarmShakeT = ALARM_RUMBLE_S;
       addShake(0.1);
       showBanner('ALARM', 'Day ' + day + ' \u2014 they heard that', 2.2, '#ff5a44');
     }
@@ -25592,6 +25726,32 @@
     const _czV = new THREE.Vector3();
     const _czN = new THREE.Vector3();
     const _czNM = new THREE.Matrix3();
+    // GB-28 / D-23: past ~40 m from the camera, zombies drop shadows and freeze joint
+    // matrices so updateMatrixWorld / shadow maps don't walk every limb.
+    const ZOMBIE_FAR_M = 40;
+    function setZombieRenderLod(mesh, far) {
+      if (!mesh) return;
+      mesh.traverse((o) => {
+        if (o.isMesh) o.castShadow = !far;
+      });
+      const ud = mesh.userData || {};
+      const joints = [ud.hips, ud.torso, ud.head, ud.armLG, ud.armRG, ud.legLG, ud.legRG];
+      for (const j of joints) {
+        if (!j) continue;
+        j.traverse((c) => {
+          if (c.isObject3D) c.matrixAutoUpdate = !far;
+        });
+      }
+      mesh.matrixAutoUpdate = true;
+      if (!far) mesh.updateMatrixWorld(true);
+    }
+    function syncZombieFarLod(z) {
+      if (!z || !z.mesh) return;
+      const far = Math.hypot(z.mesh.position.x - camera.position.x, z.mesh.position.z - camera.position.z) > ZOMBIE_FAR_M;
+      if (far === !!z.farLod) return;
+      z.farLod = far;
+      setZombieRenderLod(z.mesh, far);
+    }
     function compactZombieMesh(g) {
       const ud = g.userData;
       const keep = new Set([...(ud.eyeMats || []), ...(ud.pulseMats || [])]);
@@ -26041,31 +26201,79 @@
         if (el.animate) el.animate([{ opacity: 0 }, { opacity: 1, offset: 0.12 }, { opacity: 0.35, offset: 0.45 }, { opacity: 0 }], { duration: 900, easing: 'ease-out' });
       } catch (_) {}
     }
+    // CL-31 (Jerry): a fast 360 around the body for the first 70% of the sting, zooming
+    // in as it goes; then a slow pan and push onto the marine's face for the last 30%;
+    // then 0.8 s easing back to the play camera. The camera never goes inside the ground,
+    // a build or a solid: if the line from what it looks at to where it wants to be is
+    // blocked, it comes in short of the block.
+    const FIN_ORBIT = 0.7, FIN_RETURN_S = 0.8;
+    const _finFace = new THREE.Vector3(), _finFwd = new THREE.Vector3(), _finA = new THREE.Vector3(), _finALook = new THREE.Vector3(), _finB = new THREE.Vector3();
+    function finisherClip(look, pos) {
+      // Pull pos back towards look until nothing solid sits between them.
+      let t = 1;
+      const ax = look.x, ay = look.y, az = look.z, bx = pos.x, by = pos.y, bz = pos.z;
+      const midX = (ax + bx) / 2, midZ = (az + bz) / 2, reach = Math.hypot(bx - ax, bz - az) / 2 + 3;
+      for (const w of worldSolids) {
+        if (Math.abs(w.x - midX) > reach + w.radius || Math.abs(w.z - midZ) > reach + w.radius) continue;
+        const h = segmentHitsCylinder(ax, ay, az, bx, by, bz, w.x, w.z, w.radius + 0.25, w.y0, w.y1);
+        if (h !== null && h < t) t = h;
+      }
+      for (const b of builds) {
+        if (b.alive === false || !b.mesh) continue;
+        if (Math.abs(b.x - midX) > reach + 2 || Math.abs(b.z - midZ) > reach + 2) continue;
+        const h = segmentHitsBuild(b, ax, ay, az, bx, by, bz);
+        if (h !== null && h < t) t = h;
+      }
+      if (t < 1) {
+        const k = Math.max(0.15, t - 0.08);
+        pos.set(ax + (bx - ax) * k, ay + (by - ay) * k, az + (bz - az) * k);
+      }
+      const g = sampleHeight(pos.x, pos.z);
+      if (pos.y < g + 0.45) pos.y = g + 0.45;
+      return pos;
+    }
     function waveFinisherCamera() {
       const F = waveFinisher;
       if (!F) return;
       if (gameOver || won || !gameStarted) { waveFinisher = null; return; }
       const t = (performance.now() - F.t0) / 1000;
-      if (t >= F.dur) { waveFinisher = null; return; }
+      if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; return; }
       const m = F.mesh;
       if (m && m.parent) { F.x = m.position.x; F.y = m.position.y; F.z = m.position.z; }
       if (!F.set) {
-        // Come in from the side the camera is already on, so the move reads as a push-in.
-        let sx = camera.position.x - F.x, sz = camera.position.z - F.z;
-        const h = Math.hypot(sx, sz) || 1;
-        F.sx = sx / h; F.sz = sz / h; F.set = true;
+        // Start the orbit from the side the camera is already on.
+        F.a0 = Math.atan2(camera.position.z - F.z, camera.position.x - F.x);
+        F.set = true;
       }
-      const a = t * 0.1;                        // a slow drift round the body
-      const cx = F.sx * Math.cos(a) - F.sz * Math.sin(a), cz = F.sx * Math.sin(a) + F.sz * Math.cos(a);
-      const gy = sampleHeight(F.x, F.z);
-      _finTgt.set(F.x, Math.max(F.y, gy) + 0.6, F.z);
-      _finPos.set(F.x + cx * 3.6, Math.max(F.y, gy) + 1.7, F.z + cz * 3.6);
-      const gc = sampleHeight(_finPos.x, _finPos.z);
-      if (_finPos.y < gc + 0.9) _finPos.y = gc + 0.9;
-      const ease = (u) => u * u * (3 - 2 * u);
-      const w = Math.min(ease(Math.min(1, t / 0.6)), ease(Math.max(0, Math.min(1, (F.dur - t) / 0.9))));
-      camera.position.lerp(_finPos, w);
-      camLook.lerp(_finTgt, w);
+      const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
+      const gy = Math.max(F.y, sampleHeight(F.x, F.z));
+      const tA = F.dur * FIN_ORBIT;
+      // Phase A: the 360.
+      const u = Math.min(1, t / tA);
+      const ang = F.a0 + Math.PI * 2 * ease(u);
+      const rad = 4.6 - 1.8 * ease(u);                 // zooming in as it circles
+      _finALook.set(F.x, gy + 0.55, F.z);
+      _finA.set(F.x + Math.cos(ang) * rad, gy + 1.5 - 0.4 * ease(u), F.z + Math.sin(ang) * rad);
+      finisherClip(_finALook, _finA);
+      let wantPos = _finA, wantLook = _finALook;
+      if (t > tA) {
+        // Phase B: pan and push onto the marine's face.
+        const hg = marine.userData.headG;
+        // The eyes: 0.2 above the head pivot, just in front of it (scale-safe).
+        if (hg) { hg.updateWorldMatrix(true, false); hg.localToWorld(_finFace.set(0, 0.2, 0.1)); } else _finFace.copy(player.position).setY(player.position.y + 1.42);
+        _finFwd.set(Math.sin(player.rotation.y), 0, Math.cos(player.rotation.y));
+        _finPos.copy(_finFace).addScaledVector(_finFwd, 0.85);
+        _finPos.y += 0.04;
+        finisherClip(_finFace, _finPos);
+        const v = ease((t - tA) / Math.max(0.1, F.dur - tA));
+        _finB.copy(_finA).lerp(_finPos, v);            // (no aliasing: lerpVectors into an argument breaks here)
+        _finTgt.copy(_finALook).lerp(_finFace, Math.min(1, v * 1.4));
+        wantPos = _finB; wantLook = _finTgt;
+      }
+      // In over 0.4 s at the start, out over FIN_RETURN_S after the sting.
+      const w = Math.min(ease(t / 0.4), 1 - ease((t - F.dur) / FIN_RETURN_S));
+      camera.position.lerp(wantPos, w);
+      camLook.lerp(wantLook, w);
     }
 
     // === Bomber blast ===
@@ -26970,7 +27178,6 @@
     }
 
     function beginWave() {
-      retreatActiveCavePokes();
       phase = 'wave';
       spawnCd = 0.25;
       burstLeft = Math.min(3, waveTotal);
@@ -28982,6 +29189,7 @@
         arm.userData.phase = k * 1.71;
         arm.userData.baseYaw = baseYaw;
         arm.userData.restY = LAKE.level - 11.5;
+        arm.visible = false;   // CL-20: shown from the burst on (updateTentacleKill)
         g.add(arm); g.userData.arms.push(arm);
       }
       scene.add(g);
@@ -29041,6 +29249,7 @@
         // he actually is, takes an ankle, and hauls him in — which is the whole point of
         // swimming near it, and it means the grab comes from the side he swam in from.
         sk.ring = makeTentacleRing();
+        if (AudioSys.pitRumble) AudioSys.pitRumble(1);   // CL-22: the pit wakes
         // The direction he came in on: his own heading if he was moving, else the line
         // from the pit out to him.
         let ax = velX, az = velZ;
@@ -29327,6 +29536,8 @@
         const arms = sk.ring.userData.arms;
         for (let i = 0; i < arms.length; i++) {
           const arm = arms[i];
+          // CL-20: nothing of it shows before the water bursts.
+          arm.visible = t >= 0.05;
           const holder = sk.grabArms.indexOf(arm) >= 0;
           const lead = holder ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(arm.userData.phase));
           // Out of the abyss, and back down into it as it hauls him under.
@@ -29451,11 +29662,68 @@
     // mouth, or swimming over the sinkhole, starts the scene. Godmode (a dev tool) is
     // the only exemption — a roll or armour does not save you.
     let sinkholeRippleT = 0;
+    // CL-20: bubbles over the pit. Something down there breathes: a thin column of bubbles
+    // rises out of the well over the hole and pops on the surface with a small ring. Only
+    // while the marine is within PIT_BUBBLE_NEAR; past that the pool sleeps, hidden.
+    const PIT_BUBBLE_N = 22, PIT_BUBBLE_NEAR = 95;
+    let pitBubbles = null, pitBubblesOn = false;
+    function makePitBubbles() {
+      const mat = new THREE.MeshBasicMaterial({ color: 0xd4f4ff, transparent: true, opacity: 0.6, depthWrite: false });
+      const geo = new THREE.SphereGeometry(1, 8, 6);
+      const list = [];
+      for (let i = 0; i < PIT_BUBBLE_N; i++) {
+        const m = new THREE.Mesh(geo, mat);
+        m.visible = false; m.frustumCulled = true;
+        scene.add(m);
+        list.push({ m, y: 0, x: 0, z: 0, v: 0, r: 0, wob: 0, wait: Math.random() * 3, pop: 0 });
+      }
+      return list;
+    }
+    function pitBubbleRespawn(b) {
+      const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * LAKE_HOLE.r * 0.28;
+      b.x = LAKE_HOLE.x + Math.cos(a) * rr; b.z = LAKE_HOLE.z + Math.sin(a) * rr;
+      b.y = LAKE.level - 2.4 - Math.random() * 1.2;
+      b.v = 0.7 + Math.random() * 0.8;
+      b.r = 0.045 + Math.random() * 0.08;
+      b.wob = Math.random() * 6.28;
+      b.pop = 0;
+      b.m.scale.setScalar(b.r);
+    }
+    function updatePitBubbles(dt) {
+      const near = Math.hypot(player.position.x - LAKE_HOLE.x, player.position.z - LAKE_HOLE.z) < PIT_BUBBLE_NEAR;
+      if (!near) {
+        if (pitBubblesOn) { for (const b of pitBubbles) b.m.visible = false; pitBubblesOn = false; }
+        return;
+      }
+      if (!pitBubbles) pitBubbles = makePitBubbles();
+      pitBubblesOn = true;
+      const lvl = LAKE.level;
+      for (const b of pitBubbles) {
+        if (b.wait > 0) { b.wait -= dt; if (b.wait <= 0) { pitBubbleRespawn(b); b.m.visible = true; } else continue; }
+        if (b.pop > 0) {
+          // On the surface: a little dome for a moment, then gone.
+          b.pop -= dt;
+          b.m.scale.set(b.r * 1.3, b.r * 0.55, b.r * 1.3);
+          if (b.pop <= 0) { b.m.visible = false; b.wait = 0.2 + Math.random() * 2.4; }
+          continue;
+        }
+        b.y += b.v * dt;
+        b.wob += dt * 5;
+        const x = b.x + Math.sin(b.wob) * 0.05, z = b.z + Math.cos(b.wob * 0.8) * 0.05;
+        if (b.y >= lvl - 0.01) {
+          b.m.position.set(b.x, lvl + 0.01, b.z);
+          b.pop = 0.22 + Math.random() * 0.2;
+          if (Math.random() < 0.45) spawnRipple(b.x, lvl + 0.01, b.z, 0.22 + b.r * 2, 0.9);
+        } else {
+          b.m.position.set(x, b.y, z);
+        }
+      }
+    }
     
 
-    // === GB-26 / D-22: shoot into a cave → fightable guardian comes out =========
-    const CAVE_POKE_HITS = 3, CAVE_POKE_WINDOW = 1.5, CAVE_POKE_LEASH = 28, CAVE_POKE_LOS = 4, CAVE_POKE_MAX_DAY = 2;
-    let cavePokeNow = 0, cavePokeDayCount = 0;
+    // === GB-32 / D-25: shoot into a cave -> immortal cave grab (scripted death) ===
+    const CAVE_POKE_HITS = 3, CAVE_POKE_WINDOW = 1.5, CAVE_POKE_RANGE = 45;
+    let cavePokeNow = 0;
     let cavePokeHitLog = [];
     const cavePokeUsedCaves = new Set();
     function caveMouthFrame(c, x, z) {
@@ -29483,33 +29751,39 @@
       }
       return false;
     }
+    // D-25: within 45 m, in front of the mouth, not occluded by a build.
+    function playerInCavePokeLos(c) {
+      const px = player.position.x, pz = player.position.z, py = player.position.y;
+      const d = Math.hypot(px - c.x, pz - c.z);
+      if (!(d > 0.8 && d <= CAVE_POKE_RANGE)) return false;
+      if (Math.abs(py - c.gy) > 10) return false;
+      const f = caveMouthFrame(c, px, pz);
+      if (f.lz < -0.5) return false; // inside / behind the lip
+      // Frontal cone (~70 deg half-angle) when standing out front.
+      if (f.lz > 0.2 && Math.abs(f.lx - f.skew) > f.lz * 2.75 + f.half) return false;
+      const ay = c.gy + 1.15, by = py + 1.0;
+      for (const b of builds) {
+        if (b.alive === false) continue;
+        if (segmentHitsBuild(b, c.x, ay, c.z, px, by, pz) !== null) return false;
+      }
+      return true;
+    }
     function resetCavePokeDay() {
       cavePokeUsedCaves.clear();
-      cavePokeDayCount = 0;
       cavePokeHitLog.length = 0;
-    }
-    // D-22 / GB-27: poked guardians return when the alarm sounds (beginWave), not at prep.
-    function retreatActiveCavePokes() {
-      for (const z of zombies) {
-        if (!z.alive || z.typeKey !== 'guardian') continue;
-        if (!(z.cavePoke || z.cavePokeAwake) || z.guardianRetreat) continue;
-        z.guardianRetreat = true;
-        publishCaveGuardian(z.caveIndex, z.mesh.position.x, z.mesh.position.z, 'retreat');
-      }
     }
     function publishCaveGuardian(caveIndex, x, z, phase) {
       publishUI('cave-guardian', { caveIndex, x, z, phase });
     }
     function noteCaveMouthHit(caveIndex, opts) {
       if (!gameStarted || gameOver || won || scriptedKill || !POI.caves) return false;
-      // GB-27: prep (daytime explore) and wave; blocked while a modal is open.
       if (phase !== 'wave' && phase !== 'prep') return false;
       if (typeof objectiveModalOpen === 'function' && objectiveModalOpen()) return false;
       const c = POI.caves[caveIndex];
       if (!c) return false;
       if (playerInCaveGrabBand(c)) return false;
-      if (cavePokeUsedCaves.has(caveIndex) || cavePokeDayCount >= CAVE_POKE_MAX_DAY) return false;
-      if (zombies.some((z) => z.alive && z.typeKey === 'guardian' && (z.cavePoke || z.cavePokeAwake) && z.caveIndex === caveIndex)) return false;
+      if (cavePokeUsedCaves.has(caveIndex)) return false;
+      if (!playerInCavePokeLos(c)) return false;
       if (opts && opts.explosive) return triggerCavePoke(caveIndex);
       cavePokeHitLog.push({ t: cavePokeNow, caveIndex });
       cavePokeHitLog = cavePokeHitLog.filter((h) => cavePokeNow - h.t <= CAVE_POKE_WINDOW);
@@ -29523,100 +29797,61 @@
     function triggerCavePoke(caveIndex) {
       if (phase !== 'wave' && phase !== 'prep') return false;
       if (typeof objectiveModalOpen === 'function' && objectiveModalOpen()) return false;
+      if (scriptedKill || gameOver || won || !gameStarted) return false;
       const c = POI.caves[caveIndex];
-      if (!c || cavePokeUsedCaves.has(caveIndex) || cavePokeDayCount >= CAVE_POKE_MAX_DAY) return false;
+      if (!c || cavePokeUsedCaves.has(caveIndex)) return false;
       if (playerInCaveGrabBand(c)) return false;
+      if (!playerInCavePokeLos(c)) return false;
+      // D-25: aggro cue for Claude's screech, then the existing immortal cave cutscene.
       publishCaveGuardian(caveIndex, c.x, c.z, 'aggro');
-      // Guardian night: wake the planned one instead of adding another (D-22).
-      const planned = zombies.find((z) => z.alive && z.typeKey === 'guardian' && z.guardianPlanned &&
-        (z.caveIndex === caveIndex || (guardianNightActive && caveIndex === guardianCaveIndex)));
-      if (planned) {
-        planned.guardianRetreat = false;
-        planned.guardianProgressT = 0;
-        planned.guardianBestDist = Infinity;
-        planned.cavePokeAwake = true;
-        planned.cavePokeLeashOrigin = { x: c.x, z: c.z };
-        planned.cavePokeLosT = 0;
-        cavePokeUsedCaves.add(caveIndex);
-        cavePokeDayCount += 1;
-        publishCaveGuardian(caveIndex, planned.mesh.position.x, planned.mesh.position.z, 'emerge');
-        return true;
-      }
-      const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
-      const crx = Math.cos(c.yaw), crz = -Math.sin(c.yaw);
-      const lx = c.design ? c.design.skew * 1.2 : 0, lz = -1.6;
-      const sx = c.x + crx * lx + fx * lz, sz = c.z + crz * lx + fz * lz;
-      const spawned = spawnZombie(sx, sz, 'guardian', true, true);
-      if (!spawned) return false;
-      spawned.caveIndex = caveIndex;
-      spawned.guardianPlanned = false;
-      spawned.cavePoke = true;
-      const full = (ZOMBIE_TYPES.guardian && ZOMBIE_TYPES.guardian.cashDrop != null) ? ZOMBIE_TYPES.guardian.cashDrop : 150;
-      spawned.cashDrop = Math.round(full * 0.5);
-      spawned.reward = spawned.cashDrop;
-      spawned.guardianProgressT = 0;
-      spawned.guardianBestDist = Infinity;
-      spawned.guardianStuckRepath = 0;
-      spawned.guardianRetreat = false;
-      spawned.cavePokeLeashOrigin = { x: c.x, z: c.z };
-      spawned.cavePokeLosT = 0;
-      spawned.mesh.rotation.y = c.yaw;
       cavePokeUsedCaves.add(caveIndex);
-      cavePokeDayCount += 1;
-      publishCaveGuardian(caveIndex, sx, sz, 'emerge');
-      return true;
-    }
-    function despawnCavePokeGuardian(z) {
-      if (!z) return;
-      const ci = z.caveIndex;
-      const ox = z.cavePokeLeashOrigin ? z.cavePokeLeashOrigin.x : (ci >= 0 && POI.caves[ci] ? POI.caves[ci].x : z.mesh.position.x);
-      const oz = z.cavePokeLeashOrigin ? z.cavePokeLeashOrigin.z : (ci >= 0 && POI.caves[ci] ? POI.caves[ci].z : z.mesh.position.z);
-      z.alive = false;
-      if (z.mesh) {
-        z.mesh.visible = false;
-        scene.remove(z.mesh);
-        resetZombieMesh(z.mesh);
-        poolFor('guardian').push(z.mesh);
+      beginScriptedKill('cave', c);
+      if (!scriptedKill) {
+        cavePokeUsedCaves.delete(caveIndex);
+        return false;
       }
-      const idx = zombies.indexOf(z);
-      if (idx >= 0) zombies.splice(idx, 1);
-      publishCaveGuardian(ci, ox, oz, 'retreat');
+      return true;
     }
     function updateCavePoke(dt) {
       cavePokeNow += dt;
-      for (const z of zombies.slice()) {
-        if (!z.alive || z.typeKey !== 'guardian') continue;
-        if (!z.cavePoke && !z.cavePokeAwake) continue;
-        const origin = z.cavePokeLeashOrigin || (z.caveIndex >= 0 && POI.caves[z.caveIndex]
-          ? { x: POI.caves[z.caveIndex].x, z: POI.caves[z.caveIndex].z } : null);
-        if (!origin) continue;
-        const zx = z.mesh.position.x, zz = z.mesh.position.z;
-        const distMouth = Math.hypot(zx - origin.x, zz - origin.z);
-        const dPlayer = Math.hypot(zx - player.position.x, zz - player.position.z);
-        if (dPlayer > 42) z.cavePokeLosT = (z.cavePokeLosT || 0) + dt;
-        else z.cavePokeLosT = 0;
-        if ((z.cavePoke || z.cavePokeAwake) && !z.guardianRetreat) z.speed = (z.baseSpeed || z.speed) * 1.15;
-        else if (z.cavePoke || z.cavePokeAwake) z.speed = z.baseSpeed || z.speed;
-        if (!z.guardianRetreat && (distMouth > CAVE_POKE_LEASH || (z.cavePokeLosT || 0) >= CAVE_POKE_LOS || gameOver)) {
-          z.guardianRetreat = true;
-          publishCaveGuardian(z.caveIndex, zx, zz, 'retreat');
-        }
-        if (z.guardianRetreat && distMouth < 2.6) {
-          if (z.cavePoke) despawnCavePokeGuardian(z);
-          else { z.cavePokeAwake = false; z.guardianRetreat = false; z.cavePokeLosT = 0; }
-        }
-      }
     }
     function getCavePokeState() {
       return {
-        dayCount: cavePokeDayCount,
+        dayCount: cavePokeUsedCaves.size,
         used: [...cavePokeUsedCaves],
         hits: cavePokeHitLog.map((h) => ({ caveIndex: h.caveIndex, age: cavePokeNow - h.t })),
         now: cavePokeNow
       };
     }
 
+    // CL-22: the places that are alive. A cave you stand near breathes now and then; the pit
+    // rumbles under the lake when you are near it; a poked cave's guardian screeches from
+    // the mouth before it comes for you (D-25, the 'aggro' cue).
+    let worldVoiceT = { cave: 6, pit: 4 };
+    function updateWorldVoices(dt) {
+      worldVoiceT.cave -= dt; worldVoiceT.pit -= dt;
+      const px = player.position.x, pz = player.position.z;
+      if (worldVoiceT.cave <= 0) {
+        worldVoiceT.cave = 10 + Math.random() * 8;
+        let best = null, bd = 38;
+        for (const c of POI.caves || []) { const d = Math.hypot(c.x - px, c.z - pz); if (d < bd) { bd = d; best = c; } }
+        if (best && AudioSys.caveGroan) { const s = sndAt(best.x, best.z, 40); AudioSys.caveGroan(s.v, s.pan); }
+      }
+      if (worldVoiceT.pit <= 0) {
+        worldVoiceT.pit = 9 + Math.random() * 6;
+        const d = Math.hypot(LAKE_HOLE.x - px, LAKE_HOLE.z - pz);
+        if (d < 75 && AudioSys.pitRumble) { const s = sndAt(LAKE_HOLE.x, LAKE_HOLE.z, 75); AudioSys.pitRumble(s.v * 0.6, s.pan); }
+      }
+    }
+    window.addEventListener('dw-game', (e) => {
+      const d = e.detail;
+      if (!d || d.type !== 'cave-guardian' || d.phase !== 'aggro' || !AudioSys.caveScreech) return;
+      const s = sndAt(d.x, d.z, 120);
+      AudioSys.caveScreech(Math.max(0.45, s.v), s.pan);
+    });
     function checkScriptedKillTriggers(dt) {
+      updatePitBubbles(dt);
+      updateWorldVoices(dt);
       sinkholeRippleT -= dt;
       if (sinkholeRippleT <= 0) {
         // The tell: the water over the hole never sits quite still.
@@ -32414,6 +32649,9 @@
       const reach = bs.reach;
       const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
       let hits = 0;
+      const maxHits = bs.maxHits != null ? bs.maxHits : Infinity;
+      // Nearest-first so the two (or so) hits are the ones in your face, not a far flanker.
+      const meleeMarks = [];
       for (const z of zombies) {
         if (!z.alive) continue;
         const dx = z.mesh.position.x - player.position.x;
@@ -32421,11 +32659,14 @@
         const d = Math.hypot(dx, dz);
         if (d < reach + z.radius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
-          if (dot > bs.arc) {
-            damageZombie(z, bs.dmg * dmgMult(), { kind: 'melee', dir: { x: fx, z: fz } });
-            hits++;
-          }
+          if (dot > bs.arc) meleeMarks.push({ z, d, dx, dz });
         }
+      }
+      meleeMarks.sort((a, b) => a.d - b.d);
+      for (const m of meleeMarks) {
+        if (hits >= maxHits) break;
+        damageZombie(m.z, bs.dmg * dmgMult(), { kind: 'melee', dir: { x: fx, z: fz } });
+        hits++;
       }
       // Hit confirmation. The plain knife used to land completely silently — the only
       // sound was the whoosh it made on a miss too — so a swing that actually killed
@@ -34581,6 +34822,7 @@
     function updateTreeSway(dt) {
       for (const t of trees) {
         if (!t.alive || t.falling) continue;
+        if (t._tbInBatch) continue;   // CL-28: drawn from its batch at rest; a hit sends it live first
         t.swayVel += -t.sway * 18 * dt;
         t.swayVel *= Math.exp(-5 * dt);
         t.sway += t.swayVel * dt;
@@ -35036,6 +35278,7 @@
       groanThrottle -= dt;
       for (const z of zombies) {
         if (!z.alive) continue;
+        syncZombieFarLod(z);
         const tactics = z.tactics || 'direct';
         const px0 = player.position.x, pz0 = player.position.z;
         const hx0 = house.active ? house.group.position.x : 0;
@@ -35636,7 +35879,7 @@
 
         const vr = ud.variant || {};
         const limpK = vr.limp || 0;
-        if (ud.crawlLimbs) {
+        if (!z.farLod && ud.crawlLimbs) {
           // Alternating tripods. While a limb is up (sin > 0) it swings forward about the
           // body's vertical, rises about the body's forward axis, and folds at the joint;
           // on the ground it drags back. All applied on top of the rest pose each frame.
@@ -35652,7 +35895,7 @@
             L.knee.quaternion.copy(_crawlQa).multiply(L.kneeQ);
           }
         }
-        if (ud.legLG) {
+        if (!z.farLod && ud.legLG) {
           if (!parts.legL) {
             ud.legLG.rotation.x = swing * amp * (1 - limpK * 0.55);
             if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = Math.max(0, -swing) * amp * 0.6;
@@ -36009,6 +36252,9 @@
 
     // Camera shake, fed by explosions, hard landings and heavy weapons.
     let shakeAmp = 0, shakeTime = 0;
+    // CL-29: the alarm's rumble holds the shake up for three seconds, easing off in the last one.
+    const ALARM_RUMBLE_S = 3;
+    let alarmShakeT = 0;
     function addShake(amount) {
       shakeAmp = Math.min(1.4, shakeAmp + amount);
     }
@@ -37026,6 +37272,22 @@
       // This has to run before ground resolution, using this frame's already-updated
       // x/z, or the generic "stick to ground" branch below would snap you straight down
       // to the terrain under the tower instead of actually falling.
+      if (onTowerDeck && tower.alive && player.position.y < tower.deckY + TOWER_RAIL_TOP) {
+        // CL-19: the railings hold you on the deck, except through the ladder gap.
+        const lim = TOWER_RAIL_IN - PLAYER_RADIUS;
+        let tdx = player.position.x - tower.x, tdz = player.position.z - tower.z;
+        let cx, cz;
+        if (tdz < -lim && Math.abs(tdx) <= TOWER_GAP_HALF + 0.12) {
+          // Lined up with the ladder gap: go on through (off the south edge is the way down),
+          // kept to the gap's line so the posts either side still stop you.
+          cx = Math.max(-TOWER_GAP_HALF, Math.min(TOWER_GAP_HALF, tdx)); cz = tdz;
+        } else {
+          cx = Math.max(-lim, Math.min(lim, tdx)); cz = Math.max(-lim, Math.min(lim, tdz));
+        }
+        if (cx !== tdx) velX = 0;
+        if (cz !== tdz) velZ = 0;
+        player.position.x = tower.x + cx; player.position.z = tower.z + cz;
+      }
       if (onTowerDeck) {
         const tdx = player.position.x - tower.x, tdz = player.position.z - tower.z;
         if (!tower.alive || Math.abs(tdx) > TOWER_DECK_HALF || Math.abs(tdz) > TOWER_DECK_HALF) {
@@ -37328,6 +37590,10 @@
       // Shake displaces the camera and its aim point together, so the world jolts
       // without the view swinging off target. Damped while scoped — at scope FOV a
       // full-strength shake would fling the reticle wildly off the target.
+      if (alarmShakeT > 0) {
+        alarmShakeT = Math.max(0, alarmShakeT - dt);
+        shakeAmp = Math.max(shakeAmp, 0.3 * Math.min(1, alarmShakeT / 1.0));
+      }
       if (shakeAmp > 0.0015) {
         shakeTime += dt * 34;
         const sx = Math.sin(shakeTime * 1.7) * Math.sin(shakeTime * 0.63);
@@ -37362,14 +37628,14 @@
       if (showPerf && !window.TT) {
         window.TT = {
           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
-          knifeAttack, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
+          knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getSlowMo: () => slowMoT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,

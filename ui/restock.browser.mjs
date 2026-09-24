@@ -2,8 +2,8 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';import {serve} from '../tools/serve.mjs';
 const {chromium}=createRequire(import.meta.url)('playwright');
-const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before');
-const shots=path.join(root,'Claude outputs/shots/gp18');fs.mkdirSync(shots,{recursive:true});
+const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before'),phase2=process.argv.includes('--phase2');
+const shots=path.join(root,'Claude outputs/shots',phase2?'gp22':'gp18');fs.mkdirSync(shots,{recursive:true});
 const src=fs.readFileSync(path.join(root,'index.html'),'utf8')
  .replace(/<script type="importmap">[\s\S]*?<\/script>/,()=>'<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>')
  .replace('window.TT = {',()=>`window.stockProbe={
@@ -22,10 +22,17 @@ try{
  await page.waitForFunction(()=>document.getElementById('opening').hidden);
  await page.fill('#playerName','Restock Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:30000});
- await page.evaluate(()=>{stockProbe.setup();TT.openShop(true);window.stockReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')stockReceipts.push(e);});});
  const shot=name=>page.screenshot({path:path.join(shots,(before?'before-':'after-')+name+'.png')});
+ await page.evaluate(()=>TT.openShop(true));await shot('entry');
+ if(phase2&&!before){
+   assert.equal(await page.locator('#shopTabs button.on').textContent(),'Ammo');
+   assert.deepEqual(await page.locator('#shopTabs button').allTextContents(),['Weapons','Ammo','Builds','Gear']);
+   assert.equal(await page.locator('[data-ammo]').first().getAttribute('data-ammo'),'.45');
+ }
+ await page.evaluate(()=>{stockProbe.setup();TT.setShopTabDbg('weapons');window.stockReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')stockReceipts.push(e);});});
  await shot('weapons');
  if(!before){
+   if(phase2)assert.equal(await page.locator('[data-weapon]').first().getAttribute('data-weapon'),'pistol');
    const pistol=page.locator('[data-weapon="pistol"] [data-restock]');
    assert.equal(await pistol.textContent(),'Restock $36');
    assert(await page.locator('[data-weapon="m4"] [data-restock]').isDisabled());
@@ -51,5 +58,16 @@ try{
  if(!before){assert.match(await page.locator('#shopHint').textContent(),/pistol uses \.45/);assert.equal(await page.locator('[data-restock-all] button').textContent(),'Restock $88');}
  await page.evaluate(()=>TT.setShopTabDbg('weapons'));await page.setViewportSize({width:390,height:844});await shot('small');
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ if(phase2&&!before){
+   assert.equal(await page.locator('#shopTabs button').count(),4);
+   const y=await page.locator('#shopTabs button').evaluateAll(bs=>bs.map(b=>Math.round(b.getBoundingClientRect().y)));assert(y.every(v=>v===y[0]),'four categories fit in one row at 390px');
+   await page.locator('#shopTabs button').filter({hasText:/^Builds$/}).click();assert(await page.locator('#shopSubtabs button').filter({hasText:'Fortify'}).isVisible());
+   await page.locator('#shopSubtabs button').filter({hasText:'Fortify'}).click();assert.match(await page.locator('#shopList').innerText(),/blueprint/i);await shot('builds');
+   await page.locator('#shopTabs button').filter({hasText:/^Gear$/}).click();assert.match(await page.locator('#shopList').textContent(),/MedPen/);
+   await page.locator('#shopSubtabs button').filter({hasText:'Perks'}).click();assert(await page.locator('#shopList .pips').count()>0);await shot('gear');
+   await page.locator('#shopTabs button').filter({hasText:/^Weapons$/}).click();
+   await page.locator('#shopSubtabs button').filter({hasText:'Upgrades'}).click();assert(await page.locator('[data-item="field-intel"]').isVisible());await shot('upgrades');
+   await page.locator('#shopTabs button').filter({hasText:/^Ammo$/}).click();assert.equal(await page.locator('[data-ammo]').first().getAttribute('data-ammo'),'.45');await shot('ammo-small');
+ }
  assert.deepEqual(errors,[]);console.log(before?'Captured GP-18 before shots.':'PASS GP-18 actual kiosk: scoped .45 purchase/cost/receipts, no free magazine reload, unowned/full/shortfall guards, Restock all shared-calibre dedup + fractional fuel, no partial spend, both tabs and 390px, no page errors.');
 }finally{if(browser)await browser.close();server.close();}

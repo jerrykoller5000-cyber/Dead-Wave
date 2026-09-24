@@ -778,7 +778,9 @@ export const AudioSys = (() => {
   //   - Calm music between fights. Changing it fades the old one right out, then fades the
   //     new one in. The briefing board halves whatever is playing while it's open.
   //   - The alarm cuts the music. The alarm sting plays alone; the moment it ends the wave's
-  //     fight track loops: 40% with nobody within 150 m, climbing to full at 20 m (CL-26).
+  //     fight track (by day, CL-27: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2,
+  //     16+ Tier 3) fades in from silence over 10 s to 50% (CL-30), then loops: 50% with
+  //     nobody within 150 m, climbing to full at 20 m.
   //   - The last kill of a wave is the finisher (CL-26): the fight track is cut dead, the
   //     relief sting plays with every other sound cleared, while the page runs the red
   //     pulse, the slow motion and the kill cam; the moment the sting ends the regular calm
@@ -804,6 +806,14 @@ export const AudioSys = (() => {
   const MUSIC_GAIN = {};     // track -> loudness multiplier (Jerry's tracks are boosted)
   // Day fights: a track per horde size. sizes[i] is the smallest horde that gets tracks[i].
   const DAY_FIGHT = { tracks: ['day_skirmish_b', 'day_skirmish_a', 'fight_1a', 'fight_2a', 'fight_3a'], sizes: [1, 4, 9, 16, 26] };
+  // Waves: a track per day (Jerry, CL-27). from is the first day that gets the track. Until the
+  // special nights have their own music, they play their day's track too.
+  let WAVE_BY_DAY = [{ from: 1, track: 'day_skirmish_b' }, { from: 3, track: 'day_skirmish_a' }, { from: 8, track: 'fight_1a' }, { from: 12, track: 'fight_2a' }, { from: 16, track: 'fight_3a' }];
+  function waveTrackForDay(d) {
+    let t = null;
+    for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
+    return t;
+  }
   let manifestLoaded = false;
   function loadMusicManifest() {
     if (manifestLoaded || typeof fetch !== 'function') return;
@@ -816,6 +826,9 @@ export const AudioSys = (() => {
       if (m.hits && typeof m.hits === 'object') for (const k of Object.keys(m.hits)) if (isFinite(+m.hits[k])) MUSIC_HITS[k] = +m.hits[k];
       if (m.stings && typeof m.stings === 'object') for (const k of Object.keys(m.stings)) if (typeof m.stings[k] === 'string') MUSIC_STINGS[k] = m.stings[k];
       if (m.gain && typeof m.gain === 'object') for (const k of Object.keys(m.gain)) if (isFinite(+m.gain[k]) && +m.gain[k] > 0) MUSIC_GAIN[k] = +m.gain[k];
+      if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
+        WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
+      }
       const df = m.dayFight;
       if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
         DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
@@ -823,8 +836,9 @@ export const AudioSys = (() => {
     }).catch(() => {});
   }
   const MUSIC_VOL = 0.3;
-  const FIGHT_FLOOR = 0.4;           // the fight track with nobody within PROX_FAR (CL-26)
-  const FIGHT_IN_RANGE = 0.4;        // ... with one at PROX_FAR: a smooth climb from there
+  const FIGHT_FLOOR = 0.5;           // the fight track with nobody within PROX_FAR (CL-30)
+  const FIGHT_IN_RANGE = 0.5;        // ... with one at PROX_FAR: a smooth climb from there
+  const FIGHT_FADE_IN_S = 10;        // after the alarm sting: 0 to the floor over 10 s (CL-30)
   const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
   const GAP_AFTER_ALARM = 0;         // the fight starts the moment the alarm sting ends
   const FAST_FADE_S = 0.35;          // the fight making way for the relief sting
@@ -842,7 +856,9 @@ export const AudioSys = (() => {
   let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | release | relief | end
   let dayBand = -1;         // the day fight's track index
   let pendingDay = -1;      // a day-fight band waiting for the deck to fade out
-  let lastCalm = 'day';     // the calm pool the story wants, for after the relief sting
+  let lastCalm = 'day';
+  let lastDay = 1;          // the day the story is on, for the wave's track
+  let lastDeckError = null; // the last load error, for the tests     // the calm pool the story wants, for after the relief sting
   let mood = null;          // the pool the deck is playing from
   let nextMood = null;      // a calm pool waiting for the deck to fade out
   let gapT = 0;             // silence left (after the alarm sting, between calm tracks)
@@ -880,6 +896,7 @@ export const AudioSys = (() => {
     // A real load failure moves on; an abort (a new src replacing one still loading) is not one.
     deck.addEventListener('error', () => {
       const e = deck.error;
+      lastDeckError = { code: e ? e.code : 0, src: deck.src, track: deckTrack };
       if (!deckTrack || (e && e.code === 1)) return;
       if (deck.src && !deck.src.endsWith('/' + deckTrack + '.mp3')) return;
       deckTrack = null; gapT = 1.5;
@@ -1021,10 +1038,10 @@ export const AudioSys = (() => {
   function startFight() {
     stage = 'fight';
     mood = 'fight';
-    const name = pickTrack('fight');
+    const name = waveTrackForDay(lastDay) || pickTrack('fight');
     const hit = MUSIC_HITS[name] || 0;
-    // In at once at the floor; proximity does the rest.
-    startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+    // CL-30 (Jerry): a 10 s fade in from silence to the floor; proximity does the rest.
+    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE_IN_S });
   }
   // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
   // then the calm music fades back in slowly the moment the sting ends.
@@ -1064,6 +1081,7 @@ export const AudioSys = (() => {
   function updateMusic(dt, state) {
     const started = !!state.started;
     const phaseNow = state.phase;
+    if (state.day) lastDay = state.day;
     // The last kill: the wave hands back to prep with the run still on.
     const cleared = prevStarted && started && !state.over && !state.won && prevPhase === 'wave' && phaseNow === 'prep';
     const waveBegan = started && prevPhase !== 'wave' && phaseNow === 'wave';
@@ -1198,7 +1216,8 @@ export const AudioSys = (() => {
   function musicState() {
     return {
       stage, mood, nextMood, front: deck && deckTrack ? deck.src : null, frontTime: deck ? deck.currentTime : 0,
-      deckTrack, deckLevel, volume: deck ? deck.volume : 0, prox, briefDuck, briefingOpen,
+      deckTrack, deckLevel, volume: deck ? deck.volume : 0, prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
+      waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
       sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
       lastCue: lastCue ? Object.assign({}, lastCue) : null,
       pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),
@@ -2133,6 +2152,51 @@ export const AudioSys = (() => {
       playNoise({ dur: 0.12, vol: 0.06, filterFreq: 180, filterType: 'lowpass', when: w, rev: 0.3 });
     }
   }
+  // CL-29: the alarm's rumble, a deep sub-bass swell and a ground roar for `sec` seconds.
+  function alarmRumble(sec = 3) {
+    const c = ensure(); if (!c || muted) return;
+    playTone({ freq: 34, type: 'sine', dur: sec, vol: 0.3, slideTo: 30, attack: 0.25 });
+    playTone({ freq: 47, type: 'sine', dur: sec * 0.9, vol: 0.18, slideTo: 41, attack: 0.35 });
+    playNoise({ dur: sec, vol: 0.2, filterFreq: 95, filterType: 'lowpass', attack: 0.4, rev: 0.3 });
+    playNoise({ dur: sec * 0.8, vol: 0.06, filterFreq: 220, filterType: 'bandpass', q: 1.2, attack: 0.6 });
+  }
+  // CL-22: the cave guardian's warning when a poke sets it off (D-25): a torn, rising shriek
+  // over a chest-deep snarl, from the mouth's side. v is distance loudness, pan its side.
+  function caveScreech(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0.25, Math.min(1, v));
+    playTone({ freq: 70, type: 'sawtooth', dur: 1.5, vol: 0.14 * v, slideTo: 48, attack: 0.08, pan, rev: 0.7 });
+    playNoise({ dur: 1.4, vol: 0.12 * v, filterFreq: 260, filterType: 'bandpass', q: 1.6, attack: 0.1, pan, rev: 0.8 });
+    for (const [f0, f1, when, vol] of [[620, 1450, 0.12, 0.08], [880, 1900, 0.18, 0.06], [540, 1250, 0.3, 0.05]]) {
+      playTone({ freq: f0, type: 'sawtooth', dur: 0.75, vol: vol * v, slideTo: f1, when, attack: 0.05, pan, rev: 0.9 });
+      playTone({ freq: f1, type: 'square', dur: 0.55, vol: vol * 0.5 * v, slideTo: f0 * 0.7, when: when + 0.7, attack: 0.02, pan, rev: 0.9 });
+    }
+    playNoise({ dur: 0.9, vol: 0.08 * v, filterFreq: 3200, filterType: 'bandpass', q: 3, when: 0.15, attack: 0.08, pan, rev: 0.9 });
+  }
+  // CL-22: a cave breathing, now and then, when you are close to one: a long low moan.
+  function caveGroan(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0, Math.min(1, v)); if (v < 0.05) return;
+    const f = rr(46, 62);
+    playTone({ freq: f, type: 'sawtooth', dur: 2.6, vol: 0.07 * v, slideTo: f * 0.78, attack: 0.7, pan, rev: 0.9 });
+    playTone({ freq: f * 1.5, type: 'sine', dur: 2.2, vol: 0.04 * v, slideTo: f * 1.2, attack: 0.9, pan, rev: 0.9 });
+    playNoise({ dur: 2.4, vol: 0.05 * v, filterFreq: 180, filterType: 'lowpass', attack: 0.8, pan, rev: 0.9 });
+  }
+  // CL-22: the pit under the lake. Near it, a slow deep rumble with bubbles breaking in it;
+  // when the grab starts, the same thing at full strength.
+  function pitRumble(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0, Math.min(1, v)); if (v < 0.04) return;
+    const dur = 1.8 + v * 1.4;
+    playTone({ freq: 31, type: 'sine', dur, vol: 0.28 * v, slideTo: 27, attack: 0.4, pan });
+    playTone({ freq: 44, type: 'sine', dur: dur * 0.8, vol: 0.14 * v, slideTo: 38, attack: 0.5, pan });
+    playNoise({ dur, vol: 0.14 * v, filterFreq: 110, filterType: 'lowpass', attack: 0.5, pan, rev: 0.4 });
+    const n = 3 + Math.floor(v * 6);
+    for (let i = 0; i < n; i++) {
+      const f = rr(260, 520), w = 0.2 + Math.random() * dur * 0.8;
+      playTone({ freq: f, type: 'sine', dur: 0.07, vol: 0.05 * v, slideTo: f * 1.9, when: w, attack: 0.005, pan, rev: 0.5 });
+    }
+  }
   // A flare going up: the thump of the launch and a falling whistle.
   function flareWhistle() {
     const c = ensure(); if (!c || muted) return;
@@ -2198,7 +2262,7 @@ export const AudioSys = (() => {
     chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit: W(chainsawGrit), isChainsawRunning,
     chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
     turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
-    zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
+    zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
     spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
     crateLand, pickup, repairClank, sellChime,
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),

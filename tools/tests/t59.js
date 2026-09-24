@@ -4,15 +4,15 @@
   try {
     ok(typeof T.noteCaveMouthHit === 'function' && typeof T.triggerCavePoke === 'function', 'poke APIs exported');
     ok(typeof T.getCavePokeState === 'function', 'getCavePokeState exported');
-    ok(typeof T.beginWave === 'function', 'beginWave exported');
+    ok(typeof T.beginScriptedKill === 'function', 'beginScriptedKill exported');
 
-    await startMatch(T, 'Poke');
+    await startMatch(T, 'PokeGrab');
     ok(T.getPhase && T.getPhase() === 'prep', 'startMatch leaves prep');
 
     const caves = T.POI.caves;
-    ok(caves.length >= 2, 'at least two caves');
-    T.player.position.set(0, T.sampleHeight(0, 0), 0);
-    await wait(100);
+    ok(caves && caves.length >= 2, 'at least two caves');
+    const i0 = 0, i1 = 1;
+    const c0 = caves[i0], c1 = caves[i1];
 
     let phases = [];
     const onEv = (ev) => {
@@ -20,68 +20,65 @@
     };
     window.addEventListener('dw-game', onEv);
 
-    const i0 = 0, i1 = 1;
-
-    // --- GB-27: prep poke (daytime exploring) ---
-    phases = [];
-    const ph1 = T.noteCaveMouthHit(i0);
-    const ph2 = T.noteCaveMouthHit(i0);
-    const ph3 = T.noteCaveMouthHit(i0);
-    ok(ph1 === false && ph2 === false, 'prep: first two hits no spawn');
-    ok(ph3 === true, 'prep: third hit triggers poke');
+    // Park in front of cave 0 within 45 m (outward along yaw), outside the grab band.
+    const placeFront = (c, dist) => {
+      const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
+      const x = c.x + fx * dist, z = c.z + fz * dist;
+      T.player.position.set(x, T.sampleHeight(x, z), z);
+    };
+    placeFront(c0, 12);
     await wait(80);
-    let gPrep = T.zombies.find((z) => z.alive && z.typeKey === 'guardian' && z.cavePoke);
-    ok(!!gPrep, 'prep poke guardian spawned');
-    ok(!!gPrep && gPrep.guardianPlanned === false && gPrep.cashDrop === 75, 'prep: planned:false half cash');
-    ok(phases.some((p) => p.indexOf('aggro:') === 0) && phases.some((p) => p.indexOf('emerge:') === 0),
-      'prep: aggro+emerge (' + phases.join(',') + ')');
 
-    // --- GB-27: alarm return (beginWave), not prep ---
+    // Far away: should refuse (out of range / LoS).
+    T.player.position.set(0, T.sampleHeight(0, 0), 0);
+    await wait(40);
+    ok(T.triggerCavePoke(i0) === false, 'refuse when player far from mouth');
+
+    placeFront(c0, 12);
+    await wait(40);
+
+    // Three-hit window then grab.
     phases = [];
-    if (gPrep) {
-      // Pull it into the open so retreat is visible before mouth despawn.
-      const c0 = caves[i0];
-      gPrep.mesh.position.set(c0.x + Math.sin(c0.yaw) * 12, T.sampleHeight(c0.x, c0.z), c0.z + Math.cos(c0.yaw) * 12);
-      gPrep.x = gPrep.mesh.position.x; gPrep.z = gPrep.mesh.position.z;
-      T.beginWave();
-      await wait(80);
-      ok(!!gPrep.guardianRetreat || phases.some((p) => p.indexOf('retreat:') === 0),
-        'alarm (beginWave) forces retreat');
-      // Finish return so the slot frees for later wave cases.
-      gPrep.guardianRetreat = true;
-      gPrep.mesh.position.set(c0.x - Math.sin(c0.yaw) * 1.2, c0.gy, c0.z - Math.cos(c0.yaw) * 1.2);
-      for (let i = 0; i < 50; i++) {
-        await wait(40);
-        if (!gPrep.alive || T.zombies.indexOf(gPrep) < 0) break;
-      }
-      ok(!gPrep.alive || T.zombies.indexOf(gPrep) < 0, 'despawned after alarm return');
-    } else {
-      ok(false, 'no prep guardian for alarm return');
-      ok(false, 'despawned after alarm return');
-    }
+    const h1 = T.noteCaveMouthHit(i0);
+    const h2 = T.noteCaveMouthHit(i0);
+    const h3 = T.noteCaveMouthHit(i0);
+    ok(h1 === false && h2 === false, 'first two hits do not grab');
+    ok(h3 === true, 'third hit triggers immortal grab');
+    ok(!!T.getScriptedKill && T.getScriptedKill() && T.getScriptedKill().kind === 'cave',
+      'scripted cave kill running');
+    ok(phases.some((p) => p === 'aggro:' + i0), 'cave-guardian aggro event');
+    ok(!T.zombies.some((z) => z.cavePoke || z.cavePokeAwake), 'no fightable poke guardian spawned');
+    ok(T.getCavePokeState().used.indexOf(i0) >= 0, 'cave marked used for the day');
 
-    // Day counters persist across alarm (same calendar day); cave 0 already used.
-    ok(T.getCavePokeState().dayCount === 1 && T.getCavePokeState().used.indexOf(i0) >= 0, 'dayCount still 1 after alarm');
-    ok(T.triggerCavePoke(i0) === false, 'same cave still blocked after alarm');
+    // Same cave blocked while / after (once per cave per day).
+    ok(T.triggerCavePoke(i0) === false, 'same cave blocked after poke');
 
-    // --- wave path still works on a second cave ---
-    ok(T.getPhase() === 'wave', 'in wave after beginWave');
+    // Abort the cine so we can poke another cave (test harness).
+    if (T.abortScriptedKill) T.abortScriptedKill();
+    await wait(60);
+    ok(!T.getScriptedKill(), 'cine aborted for second cave');
+
+    // Second cave still allowed (once-per-cave, not a global 2-cap).
+    placeFront(c1, 12);
+    await wait(40);
     phases = [];
-    ok(T.triggerCavePoke(i1) === true, 'wave: second cave poke ok');
-    const g1 = T.zombies.find((z) => z.alive && z.cavePoke && z.caveIndex === i1);
-    ok(!!g1, 'wave poke guardian alive');
-    if (g1) {
-      T.killZombie(g1, true, { kind: 'bullet', dir: { x: 0, z: 1 } });
-      await wait(60);
-      ok(phases.some((p) => p.indexOf('death:') === 0), 'death phase on kill');
-    } else ok(false, 'missing g1 for death phase');
-    ok(T.getCavePokeState().dayCount === 2, 'dayCount is 2');
-    ok(T.triggerCavePoke(i0) === false && T.triggerCavePoke(i1) === false, 'two-a-day cap blocks further pokes');
-    ok(T.noteCaveMouthHit(i0, { explosive: true }) === false, 'explosive also blocked at day cap');
+    ok(T.triggerCavePoke(i1) === true, 'second cave poke ok');
+    ok(!!T.getScriptedKill() && T.getScriptedKill().kind === 'cave', 'second cave grab running');
+    ok(phases.some((p) => p === 'aggro:' + i1), 'second aggro event');
+    if (T.abortScriptedKill) T.abortScriptedKill();
+    await wait(40);
 
-    // Leash still works: reset day via startPrep then poke in wave... keep it simple —
-    // re-open day with a fresh reset by calling startPrep then beginWave again would bump day.
-    // Spot-check leash on a fresh poke after clearing used set is out of scope for GB-27 adds.
+    ok(T.triggerCavePoke(i0) === false && T.triggerCavePoke(i1) === false, 'both caves spent for the day');
+    ok(T.noteCaveMouthHit(i0, { explosive: true }) === false, 'explosive also blocked when spent');
+
+    // Day reset frees caves again.
+    if (T.startPrep) T.startPrep();
+    await wait(40);
+    placeFront(c0, 12);
+    await wait(40);
+    ok(T.getCavePokeState().used.length === 0, 'startPrep clears used caves');
+    ok(T.triggerCavePoke(i0) === true, 'poke works again after day reset');
+    if (T.abortScriptedKill) T.abortScriptedKill();
 
     window.removeEventListener('dw-game', onEv);
   } catch (e) {

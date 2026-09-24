@@ -1,0 +1,46 @@
+/* Gameplay information follows the screen edges; aiming feedback and deliberate
+   modal views (scope, map and wheels) keep their existing behavior. */
+#centerHud { position:static; transform:none; align-items:stretch; gap:3px; }
+#timeLine, #tacticalLine { white-space:normal; padding:4px 6px; font-size:10px; }
+#combo { top:260px; bottom:auto; left:auto; right:16px; width:240px; align-items:flex-end; text-align:right; transform:scale(.9); transform-origin:top right; }
+#combo.show { transform:scale(1); }
+#combo.pop { transform:scale(1.08); }
+#bigBanner { top:192px; left:auto; right:16px; width:260px; max-width:none; transform:none; text-align:right; }
+#bigBanner .t { white-space:normal; overflow-wrap:anywhere; font-size:21px; }
+#bigBanner .s { font-size:12px; line-height:1.4; }
+#objectiveHud { top:350px; max-height:calc(100vh - 458px); overflow:auto; }
+#ammo { display:grid; grid-template-columns:auto 1fr auto; max-width:calc(100vw - 32px); }
+#reloadPrompt { position:static; transform:none; grid-column:1 / -1; font-size:11px; padding:5px 8px; }
+#hudNotices { position:absolute; left:16px; bottom:112px; width:248px; display:flex; flex-direction:column; gap:6px; max-height:30vh; overflow:auto; }
+#hudNotices #firstMinuteCoach, #hudNotices #kioskPrompt, #hudNotices #placeBanner { position:static; transform:none; width:100%; max-width:none; box-sizing:border-box; white-space:normal; }
+#hudNotices #firstMinuteCoach { padding:10px; }
+#hudNotices #placeBanner { padding:8px 10px; line-height:1.5; }
+#hudNotices #placeBanner i { margin:2px 4px; }
+#hudNotices #kioskPrompt { font-size:11px; letter-spacing:.03em; }
+@media(max-width:600px) {
+  #hudTopLeft { top:12px; left:12px; width:calc(50vw - 18px); padding:9px; gap:6px; }
+  #title { font-size:14px; }
+  #stats { font-size:10px; }
+  #hpExtra:empty { display:none; }
+  #prepTimer { padding-top:6px; }
+  #prepTimer .clock { font-size:18px; }
+  #prepTimer .label, #prepTimer .skip { font-size:8px; letter-spacing:.04em; }
+  #prepChecklist { max-height:22vh; overflow:auto; }
+  #minimapFrame { top:12px; right:12px; width:94px; height:94px; }
+  #bigBanner { top:120px; right:12px; width:calc(50vw - 18px); }
+  #bigBanner .t { font-size:17px; }
+  #bigBanner .s { font-size:10px; }
+  #combo { top:230px; bottom:auto; right:12px; width:calc(50vw - 18px); transform-origin:top right; }
+  #combo .n { font-size:23px; }
+  #combo .l { font-size:8px; }
+  #combo .m { font-size:9px; }
+  #ammo { left:12px; bottom:12px; width:calc(100vw - 24px); min-width:0; max-width:none; padding:8px 10px; gap:6px 10px; }
+  #ammoCount { font-size:24px; }
+  #ammoWeapon { font-size:11px; }
+  #hudNotices, #objectiveHud { left:12px; right:auto; top:auto; bottom:110px; width:calc(100vw - 24px); max-height:20vh; overflow:auto; }
+  /* A tracked objective already explains its E action; suppress duplicate hints
+     only in this narrow layout. Reload stays with ammunition and is never hidden. */
+  body:has(.objective-tracker:not([hidden])) #hudNotices #firstMinuteCoach,
+  body:has(.objective-tracker:not([hidden])) #hudNotices #kioskPrompt { display:none; }
+  body:has(#placeBanner.on) #objectiveHud { display:none; }
+}

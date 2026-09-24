@@ -63,7 +63,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  const hud = document.getElementById('hud');
+  const hud = document.getElementById('hudNotices') || document.getElementById('hud');
   if (hud) {
     const coach = createCoach({ load: () => localStorage.getItem(COACH_STORAGE_KEY), save: value => localStorage.setItem(COACH_STORAGE_KEY, value) });
     const panel = document.createElement('aside'); panel.id = 'firstMinuteCoach'; panel.hidden = true;

@@ -267,17 +267,18 @@ Owner: Claude (the music director in `core/audio.js`); Cursor owns the engine ar
 - The page's audio-direction state also carries `ember` (Ember Night), `guardian` (any guardian
   up) and `special` (phase 3's special night: 'fog', 'swarm', 'siegenight', 'silent', or null).
 
-## Cave pokes (GB-26, D-22, 2026-09-24)
+## Cave pokes: the immortal grab (GB-32, D-25, 2026-09-24; replaces GB-26/D-22)
 
 Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sounds; tests.
 - `noteCaveMouthHit(caveIndex, opts?)` → true when this hit starts a poke (three hits into one
   mouth within 1.5 s, or `{ explosive: true }`). Not while the player is in the grab band.
-- `triggerCavePoke(caveIndex)` → true if a guardian came out; `getCavePokeState()` →
-  `{ dayCount, used }` (once per cave per day, two a day).
-- A poked guardian is `planned: false`, drops 75 cash, never fires first-blood.
-- `dw-game` `{ type: 'cave-guardian', caveIndex, x, z, phase: 'aggro' | 'emerge' | 'retreat' | 'death' }`.
-- Pokes work in prep and in a wave, not while a modal is open; a poked guardian goes back into
-  the dark when the alarm sounds (GB-27).
+- `triggerCavePoke(caveIndex)` → true when the grab started. It needs: prep or a wave, no modal open,
+  no scripted kill running, the player within 45 m with a clear line to the mouth, and outside the
+  grab band. It publishes `dw-game` `{ type: 'cave-guardian', caveIndex, x, z, phase: 'aggro' }`,
+  then `beginScriptedKill('cave', cave)`. The guardian is immortal and the cave cutscene plays.
+- `getCavePokeState()` → `{ dayCount, used }`: once per cave per day, cleared by `startPrep`.
+- Gone with D-22: the fightable poked guardian, its 75-cash drop, and the `emerge`, `retreat` and
+  `death` phases. Sounds bind to `aggro` only (CL-22).
 
 ## Wave finisher (CL-26, 2026-09-24)
 

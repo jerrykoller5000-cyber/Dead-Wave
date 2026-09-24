@@ -1,5 +1,5 @@
 {
-  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. fight: the track every wave loops (Tier 1). dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. Claude keeps this file.",
+  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. Claude keeps this file.",
   "pools": {
     "fight": [
       "fight_1a"
@@ -97,5 +97,27 @@
       16,
       26
     ]
-  }
+  },
+  "waveByDay": [
+    {
+      "from": 1,
+      "track": "day_skirmish_b"
+    },
+    {
+      "from": 3,
+      "track": "day_skirmish_a"
+    },
+    {
+      "from": 8,
+      "track": "fight_1a"
+    },
+    {
+      "from": 12,
+      "track": "fight_2a"
+    },
+    {
+      "from": 16,
+      "track": "fight_3a"
+    }
+  ]
 }

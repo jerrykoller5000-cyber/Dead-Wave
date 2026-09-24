@@ -4,12 +4,26 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-24T07:44Z
-next: Queue empty; await next assignment
+since: 2026-09-24T09:47Z
+next: Queue empty; await Claude/Jerry assignment
 blocked-on: —
-last-report: handoffs/2026-09-24-chatgpt-GP-20.md
+last-report: handoffs/2026-09-24-chatgpt-GP-24.md
 
 ## Notes
+
+2026-09-24 09:47Z: GP-21 through GP-25 checked out, board rechecked, queue empty.
+GP-21 t35 now explicitly follows pistol .45: 28/0. GP-22 four kiosk categories,
+owned ammo default/held calibre first, all purchases retained. GP-23 moves status
+to screen edges; desktop/390px, coach and seven-objective browser checks PASS;
+73 unit tests PASS. GP-24 tutorial proposal and GP-25 economy proposal/model ready
+for morning review, NOT implemented. Tutorial lesson uses 8-Cash starting barricade
+(corrected blueprint-cost oversight). Economy leaves hordes unchanged and flags
+weak-aim/collection deficits plus mid-wave ammo-return burden. Reports:
+handoffs/2026-09-24-chatgpt-GP-{21,22,23,24,25}.md.
+Cursor owns npm test/commit; Antigravity owns real-GPU and tools/shoot comparison.
+Shared npm/shoot not run here per CDP limitation. Supplemental --prep waits for
+wave after alarm and timed out; Claude notified. Mobile debug performance overlay
+still overlaps lower HUD; Cursor requested to handle it. No git operations.
 
 2026-09-24 GP-20 complete: objective claimed -> approved musicCue('objective'),
 once per completion. Browser assertions cover partial/full inventory, repeated E,
