@@ -10,7 +10,9 @@
   const nVis = () => t.leafPieces.filter(p => T.leafPieceVisible(p)).length;
   const v0 = nVis();
   for (let i = 0; i < 6; i++) T.damageTree(t, t.x, t.z, 3, 1, 0);
-  await wait(400);
+  // Knocked-off clumps pop over a few frames; on a loaded machine that takes longer than
+  // 400 ms, so wait for it (up to 2 s). Same check as before.
+  for (let i = 0; i < 10 && nVis() >= v0; i++) await wait(200);
   ok(nVis() < v0, 'shooting strips clumps (' + v0 + ' -> ' + nVis() + ')');
   for (let i = 0; i < 40 && t.alive; i++) T.damageTree(t, t.x, t.z, 1, 1, 0);
   ok(!t.alive && t.falling, 'enough hits fells it');
