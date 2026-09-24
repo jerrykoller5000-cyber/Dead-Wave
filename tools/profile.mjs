@@ -28,7 +28,10 @@ try {
   await page.goto(url, { waitUntil: 'none' });
   await page.waitFor('!!window.TT && !!window.TT.spawnZombie', { timeout: 180000 });
   for (let i = 0; i < 2; i++) {
-    await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); })()`);
+    await page.evaluate(`(() => {
+      if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting();
+      else { const b = document.getElementById('openingSkip'); if (b) b.click(); }
+    })()`);
     await page.evaluate('new Promise(r => setTimeout(r, 200))');
   }
   await page.waitFor('window.DWOpening.active === false', { timeout: 120000 });

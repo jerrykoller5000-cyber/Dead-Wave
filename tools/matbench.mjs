@@ -9,7 +9,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const poll = async (expr, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { if (await page.evaluate(expr)) return true; } catch {} await sleep(500); } return false; };
 await page.goto(`${server.origin}/index.html?debug=1&raf=timer&renderer=webgl`, { timeout: 120000 });
 await poll('!!window.DWOpening', 60000);
-for (let i = 0; i < 2; i++) { await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`); await sleep(300); }
+for (let i = 0; i < 2; i++) { await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); else { const b = document.getElementById('openingSkip'); if (b) b.click(); } return true; })()`); await sleep(300); }
 await poll('!!window.TT', 300000);
 await poll('window.DWOpening.active === false', 120000);
 await sleep(3000);

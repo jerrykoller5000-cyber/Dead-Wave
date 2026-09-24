@@ -160,7 +160,7 @@ try {
   // the world is built.
   await page.waitFor('!!window.DWOpening', { timeout: 60000 });
   for (let i = 0; i < 2; i++) {
-    await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
+    await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') { DWOpening.dismissForTesting(); return true; } const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
     await page.evaluate('new Promise(r => setTimeout(r, 300))');
   }
   const ready = await page.waitFor('!!window.TT', { timeout: 300000 });
@@ -170,7 +170,7 @@ try {
   // which is the one honest signal that the canvas is visible.
   const uncovered = await page.waitFor('window.DWOpening.active === false', { timeout: 120000 });
   if (!uncovered) {
-    await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
+    await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') { DWOpening.dismissForTesting(); return true; } const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
     await page.waitFor('window.DWOpening.active === false', { timeout: 60000 });
   }
   await page.evaluate('new Promise(r => setTimeout(r, 700))');   // let the hand-over fade end

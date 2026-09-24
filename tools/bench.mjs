@@ -49,7 +49,10 @@ try {
   await page.goto(url, { waitUntil: 'none' });
   await page.waitFor('!!window.DWOpening', { timeout: 60000 });
   for (let i = 0; i < 2; i++) {
-    await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); })()`);
+    await page.evaluate(`(() => {
+      if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting();
+      else { const b = document.getElementById('openingSkip'); if (b) b.click(); }
+    })()`);
     await page.evaluate('new Promise(r => setTimeout(r, 250))');
   }
   const ready = await page.waitFor('!!window.TT && !!window.TT.spawnMegaswarm', { timeout: 180000 });
@@ -98,23 +101,21 @@ try {
 
   await page.evaluate('TT.resetPerf()');
   const t0 = Date.now();
-  let last = null;
-  let paced = null;
+  const windows = [];
   while (Date.now() - t0 < SECONDS * 1000) {
-    last = await page.evaluate('TT.perfSnapshot()');
-    if (last && last.fps > 0) paced = last;
+    const snap = await page.evaluate('TT.perfSnapshot()');
+    if (snap) windows.push(snap);
     await new Promise((r) => setTimeout(r, 1000));
   }
-  const snap = {
-    fps: (paced || last || { fps: 0 }).fps,
-    low: (paced || last || { low: 0 }).low,
-    worst: (last || { worst: 0 }).worst,
-    hitches: (last || { hitches: 0 }).hitches
-  };
-  console.log(`fps    ${snap.fps.toFixed(1)}`);
-  console.log(`low    ${snap.low.toFixed(1)}   (1% low)`);
-  console.log(`worst  ${snap.worst.toFixed(1)} ms`);
-  console.log(`hitch  ${snap.hitches}   (frames over 50 ms)`);
+  const tail = windows.slice(-10);
+  const paced = tail.filter((w) => w.fps > 0);
+  const use = paced.length ? paced : tail;
+  const avg = (key) => use.reduce((sum, w) => sum + (w[key] || 0), 0) / (use.length || 1);
+  const final = windows.at(-1) || { worst: 0, hitches: 0 };
+  console.log(`fps    ${avg('fps').toFixed(1)}   (mean of last ${use.length} s)`);
+  console.log(`low    ${avg('low').toFixed(1)}   (1% low, same windows)`);
+  console.log(`worst  ${final.worst.toFixed(1)} ms`);
+  console.log(`hitch  ${final.hitches}   (frames over 50 ms, whole run)`);
 } finally {
   await browser.close();
   await server.close();

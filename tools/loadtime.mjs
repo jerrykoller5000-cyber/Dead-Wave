@@ -61,7 +61,10 @@ try {
     // Skip the opening video so the measurement is the world build, not the title card.
     await page.waitFor('!!window.DWOpening', { timeout: 60000 });
     for (let i = 0; i < 2; i++) {
-      await page.evaluate(`(() => { const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
+      await page.evaluate(`(() => {
+        if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') { DWOpening.dismissForTesting(); return true; }
+        const b = document.getElementById('openingSkip'); if (b) b.click(); return true;
+      })()`);
       await page.evaluate('new Promise(r => setTimeout(r, 250))');
     }
 
