@@ -19913,6 +19913,11 @@
             active: gameStarted && !gameOver && !won && !paused && !shopOpen }),
           mapRoot: document.getElementById('objectiveMapSurface'), hudRoot: document.getElementById('objectiveHud'),
           project: p => ({ x: (MAP_R - p.x) / (2 * MAP_R), y: (MAP_R - p.z) / (2 * MAP_R) }) });
+        if (pendingObjectiveRestore) {
+          try { objectiveRuntime.restore(pendingObjectiveRestore); } catch (_) {}
+          pendingObjectiveRestore = null;
+          writeDayStart();
+        }
       }
       publishPrepState(dt);
       const t = performance.now() * 0.001;
@@ -26724,8 +26729,68 @@
     }
 
 
+    // The morning ledger. Written when a day begins. Play again comes back to it.
+    // Quitting to the menu throws it away. Builds and the world are not in it.
+    const DAY_START_KEY = 'tt_day_start';
+    let quietPrep = false;
+    let pendingObjectiveRestore = null;
+    function readDayStart() {
+      try {
+        const raw = localStorage.getItem(DAY_START_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (_) { return null; }
+    }
+    function clearDayStart() {
+      pendingObjectiveRestore = null;
+      try { localStorage.removeItem(DAY_START_KEY); } catch (_) {}
+    }
+    function writeDayStart() {
+      if (!gameStarted || phase !== 'prep') return null;
+      const ammo = {};
+      for (const k of Object.keys(ammoByWeapon)) {
+        const n = ammoByWeapon[k];
+        if (Number.isFinite(n)) ammo[k] = n;
+      }
+      const blob = {
+        v: 1,
+        day,
+        bank,
+        fieldIntelOwned: !!fieldIntelOwned,
+        reserveAmmo: Object.assign({}, reserveAmmo),
+        ammoByWeapon: ammo,
+        weaponOwned: Object.assign({}, weaponOwned),
+        sawFuel,
+        receipts: Object.assign({}, supplyGrantReceipts),
+        guardianFirstBloodDone: !!guardianFirstBloodDone,
+        objectives: objectiveRuntime ? objectiveRuntime.save() : null
+      };
+      try { localStorage.setItem(DAY_START_KEY, JSON.stringify(blob)); } catch (_) {}
+      return blob;
+    }
+    function applyDayStart(saved) {
+      if (!saved || saved.v !== 1) return false;
+      if (Number.isFinite(saved.bank)) bank = saved.bank;
+      fieldIntelOwned = !!saved.fieldIntelOwned;
+      if (saved.reserveAmmo) reserveAmmo = Object.assign(reserveAmmo, saved.reserveAmmo);
+      if (saved.ammoByWeapon) {
+        for (const k of Object.keys(saved.ammoByWeapon)) {
+          if (Number.isFinite(saved.ammoByWeapon[k])) ammoByWeapon[k] = saved.ammoByWeapon[k];
+        }
+      }
+      if (saved.weaponOwned) weaponOwned = Object.assign(weaponOwned, saved.weaponOwned);
+      if (Number.isFinite(saved.sawFuel)) sawFuel = saved.sawFuel;
+      if (saved.receipts) {
+        for (const k of Object.keys(supplyGrantReceipts)) delete supplyGrantReceipts[k];
+        Object.assign(supplyGrantReceipts, saved.receipts);
+      }
+      guardianFirstBloodDone = !!saved.guardianFirstBloodDone;
+      pendingObjectiveRestore = saved.objectives || null;
+      try { updateCoinHud(); updateAmmoHud(); } catch (_) {}
+      return true;
+    }
+
     function startPrep() {
-      if (day >= 1 && gameStarted) {
+      if (day >= 1 && gameStarted && !quietPrep) {
         showBanner('DAY ' + day + ' CLEARED', 'Use the prep — repair, build, resupply, turn in skulls' + (comboBest >= 5 ? ' · best streak ' + comboBest : ''), 3, '#7cdea0');
         triggerSlowMo(0.7);
         AudioSys.dayCleared();
@@ -26859,6 +26924,7 @@
 
       // Bonus grenade every few days (every day with the Grenadier perk)
       if (day > 1 && (day % 2 === 0 || perkLvl('grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
+      writeDayStart();
       updateWaveHud();
       updateAmmoHud();
     }
@@ -36018,6 +36084,7 @@
     }
 
     function quitToMenu() {
+      clearDayStart();
       setPaused(false);
       pauseEl.classList.remove('show');
       AudioSys.chainsawStop();
@@ -36184,6 +36251,7 @@
       resetObjectiveCombat();
       resetPerks();
       resetEconomy();
+      const resume = readDayStart();
       bank = 40; // seed money: one decision in the first prep, not a shopping spree
       medkits = 0; sinceHurt = 999; clearMedDrops();
       updateCoinHud();
@@ -36199,7 +36267,13 @@
       resetCameraRig();
       zoomHeld = false;
       // lasersEnabled persists across matches (session)
-      startPrep();
+      if (resume && resume.v === 1 && (resume.day | 0) >= 1) {
+        applyDayStart(resume);
+        quietPrep = true;
+        day = Math.max(0, (resume.day | 0) - 1);
+        startPrep();
+        quietPrep = false;
+      } else startPrep();
       updateHpHud();
       updateWaveHud();
       updateTacticalHud();
@@ -37337,7 +37411,7 @@
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
           CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
-          waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
+          waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day, saveDayStart: () => writeDayStart(), loadDayStart: () => applyDayStart(readDayStart()), clearDayStart,
           groundFires, damageBuild, removeBuild, placeBuildAt, resolveTarget, cellOccupant, topmostInCell, getMortarMounted: () => mortarMounted,
           // Debug-only: build-mode probes (placement, drag, doors, the delete highlight).
           setPlaceMode, tryPlace, getPlacePoint, updateGhostPreview, pushOutOfBuild, resolveHardBuildCollisions, unlockAllBuilds,
