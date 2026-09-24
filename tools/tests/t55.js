@@ -23,14 +23,17 @@
     T.player.position.set(a.x, a.y, a.z);
     pressE();
     const held = T.getObjectiveInteraction('objective:radio-repair');
-    ok(held.eHeld === true && held.ePressed === true, 'E down is pressed and held ' + held.eHeld + '/' + held.ePressed + ' cancel=' + held.cancelled);
-    ok(held.holdSeconds === 0 || held.holdSeconds >= 0, 'hold timer exists');
+    ok(held.eHeld === true && held.ePressed === true, 'E down is pressed and held ' + held.eHeld + '/' + held.ePressed);
+    await wait(700);
+    const timed = T.getObjectiveInteraction('objective:radio-repair');
     const fuel = T.getObjectiveInteraction('objective:fuel-depot');
-    ok(fuel.holdSeconds === 0, 'hold timer does not follow a second site');
-    upE();
+    ok(timed.holdSeconds > 0.3, 'radio hold ran: ' + timed.holdSeconds.toFixed(2));
+    ok(fuel.holdSeconds === 0, 'fuel hold stays 0: ' + fuel.holdSeconds);
+    T.player.position.set(a.x + 3, a.y, a.z);
     await wait(80);
-    const dropped = T.getObjectiveInteraction('objective:radio-repair');
-    ok(dropped.eHeld === false && dropped.cancelled === 'released', 'letting go cancels: ' + dropped.cancelled);
+    const left = T.getObjectiveInteraction('objective:radio-repair');
+    ok(left.cancelled === 'left', 'walking off cancels: ' + left.cancelled);
+    upE();
   } catch (e) {
     out.push('FAIL threw: ' + (e && e.message));
   }
