@@ -1,6 +1,6 @@
-#prepChecklist { position:absolute; top:206px; left:16px; width:230px; max-width:calc(100vw - 32px); box-sizing:border-box; color:#d2d8cc; background:#0b100def; border-left:2px solid #988453; font:12px/1.5 var(--font-hud); pointer-events:auto; z-index:3; }
+#prepChecklist { position:relative; width:100%; box-sizing:border-box; color:#d2d8cc; border-top:1px solid #98845366; font:12px/1.5 var(--font-hud); pointer-events:auto; }
 #prepChecklist[hidden] { display:none; }
-#prepChecklist summary { padding:8px 12px; cursor:pointer; color:#dbc695; }
+#prepChecklist summary { padding:8px 0 0; cursor:pointer; color:#dbc695; }
 #prepChecklist summary:focus-visible { outline:2px solid #dbc695; outline-offset:2px; }
 .prep-goals { list-style:none; margin:0; padding:6px 12px 12px; }
 .prep-goals li { display:flex; gap:9px; padding:5px 0; }
@@ -12,5 +12,4 @@
 .briefing-prep .prep-goals { padding-left:0; }
 body.playing #prepChecklist, body.playing #prepChecklist * { cursor:pointer; }
 body.opening #prepChecklist, body.frontend #prepChecklist, body.deploying #prepChecklist, body.cine #prepChecklist, body.briefing #prepChecklist { display:none; }
-@media(max-width:600px) { #prepChecklist { top:auto; bottom:205px; width:210px; left:12px; font-size:11px; } }
-@media(max-height:540px) and (min-width:601px) { #prepChecklist { top:auto; bottom:12px; } }
+@media(max-width:600px) { #prepChecklist { font-size:11px; } }

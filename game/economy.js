@@ -1,5 +1,25 @@
-// Guardian reward only. Existing banking/kiosk code remains in the economy section
-// of index.html until Cursor's split. No Cash or paid-purchase path is used here.
+// Economy helpers. Banking/kiosk integration remains in index.html until the split.
+// Quote whole existing ammo packs, counting a shared reserve only once. Inventory,
+// caps and pack prices come from combat; this function never mutates them.
+export function quoteRestock(reserves) {
+  const seen=new Set(), rows=[];
+  for(const r of reserves) {
+    const {key,current,capacity,quantity,price,tolerance=0}=r;
+    if(typeof key!=='string'||!key||![current,capacity,quantity,price,tolerance].every(Number.isFinite)||
+      current<0||capacity<0||quantity<=0||!Number.isSafeInteger(price)||price<=0||tolerance<0||tolerance>=quantity)
+      throw new TypeError('Invalid restock reserve');
+    if(seen.has(key))continue;
+    seen.add(key);
+    const packs=Math.max(0,Math.ceil((capacity-current-tolerance)/quantity));
+    if(!Number.isSafeInteger(packs)||!Number.isSafeInteger(packs*price))throw new RangeError('Restock quote too large');
+    if(packs)rows.push({key,packs,cost:packs*price});
+  }
+  const cost=rows.reduce((n,r)=>n+r.cost,0);
+  if(!Number.isSafeInteger(cost))throw new RangeError('Restock total too large');
+  return {rows,cost};
+}
+
+// Guardian reward delivery does not use the paid-purchase path.
 const RECEIPT = 'guardian-night-first';
 const validRun = id => (typeof id==='string'&&id.length>0)||(Number.isSafeInteger(id)&&id>=0);
 const clone = value => structuredClone(value);

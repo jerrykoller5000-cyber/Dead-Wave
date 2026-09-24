@@ -1,6 +1,6 @@
 import { text, hasText } from './strings.js';
 
-const CALIBRES = { '9mm':'9mm', '5.56mm':'556', '7.62mm':'762', '.44':'44', '.338':'338',
+const CALIBRES = { '9mm':'9mm', '.45':'45', '5.56mm':'556', '7.62mm':'762', '.44':'44', '.338':'338',
   '12ga':'12ga', '40mm':'40mm', '7.62 belt':'belt762', Fuel:'fuel', '60mm':'60mm' };
 const amount = value => Number.isFinite(value) && value >= 0;
 const validAmmo = a => a && a.owned === true && Object.hasOwn(CALIBRES,a.calibre) && typeof a.id === 'string' &&
@@ -88,7 +88,7 @@ export function renderPrepRows(container, view, doc = document) {
 }
 
 export function mountPrepChecklist({doc=document,bus=window}={}) {
-  const hud=doc.getElementById('hud');if(!hud)return;
+  const hud=doc.getElementById('hudTopLeft')||doc.getElementById('hud');if(!hud)return;
   const controller=createPrepChecklist(), panel=doc.createElement('details'), summary=doc.createElement('summary'), list=doc.createElement('ul');
   panel.id='prepChecklist';panel.hidden=true;panel.setAttribute('aria-label',text('a11y.prep'));
   list.className='prep-goals';panel.append(summary,list);hud.append(panel);

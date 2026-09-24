@@ -13,3 +13,6 @@ __pycache__/
 index.dev.html
 Claude outputs/
 Commit and Push.bat
+# Jerry's Suno originals (WAV, ~550 MB). The game plays the mp3s made from them.
+assets/soundtrack/incoming/*.wav
+

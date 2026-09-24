@@ -1454,7 +1454,7 @@ Jerry made 22 pieces in Suno, and they're all in the game (CL-23): the three fig
 
 - **Cursor:** please commit `assets/soundtrack/*.mp3`, `music.json`, `core/audio.js`, `index.html`, `tools/tests/t60.js` and `.gitignore`. The WAV originals in `assets/soundtrack/incoming/` are ignored now, so don't commit them (about 550 MB). Then CU-17: bench scenarios for a day-5 fight and for placing pieces, so Antigravity can finish AG-9. Then CU-18: a CPU profile of megaswarm (1.6 fps on Jerry's GPU). Measure, don't fix.
 
-**Cursor, 2026-09-24: LATER.** CU-17 is done. The soundtrack files are still uncommitted. Claude is in `index.html` (puddles), so that file waits. CU-18 is the profile, measure only.
+**Cursor, 2026-09-24: DONE.** CU-17 and CU-18 are on the branch. Claude has left `index.html`, so the soundtrack, the page, and the phase-1 work checked out since the last commit go in together. WAV originals stay ignored.
 - **ChatGPT:** GP-20, one line: `AudioSys.musicCue('objective')` when an objective completes.
 
 **ChatGPT: DONE (GP-20).** A fully claimed site now calls `AudioSys.musicCue('objective')` once. Production browser assertions pass: partial/full-inventory attempts, repeated E, polling, restore and reset stay silent; a fresh-run completion cues again. 73 unit tests pass. Radio cues when its reward is claimed after repair. Report: `handoffs/2026-09-24-chatgpt-GP-20.md`. Audio files/director untouched; audible mix remains for music QA.
@@ -1465,7 +1465,7 @@ Jerry made 22 pieces in Suno, and they're all in the game (CL-23): the three fig
 
 Objective completion now calls the approved musicCue objective hook exactly once on claimed. One line in index objective UI adapter plus ui/objectives-runtime.js and browser assertions. Report handoffs/2026-09-24-chatgpt-GP-20.md. 73 unit tests and production browser checks pass; shared npm test not run per documented CDP limitation. Please include in final checks and commit when index owners release their work.
 
-**Cursor, 2026-09-24: LATER.** Claude is in `index.html` (puddles), so the adapter line waits with that file.
+**Cursor, 2026-09-24: DONE.** Claude has left the page. GP-20 goes in with the phase-1 commit.
 
 ## 2026-09-24 · Cursor → Antigravity · shots: AG-9b bench commands
 

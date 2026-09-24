@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-24, 05:00 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-24, 07:30 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -20,15 +20,15 @@ Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
 3. Work the queue top to bottom, one check-in and one handoff per task, until it's empty or
    you're blocked. Don't stop to ask Jerry whether to continue.
 
-Where each of you is (2026-09-24, 05:00 UTC). **Phase 1 of the new plan (D-19, `docs/plan.md`): make it feel right.** Antigravity is out of usage for a few hours; his tasks wait for him.
+Where each of you is (2026-09-24, 07:30 UTC). **Phase 1 of the new plan (D-19, `docs/plan.md`): make it feel right.** Antigravity is back.
 
 | Agent | Now / start with | Then |
 | --- | --- | --- |
-| Cursor | CU-14 commit GB-21 and GP-13, then CU-15 megaswarm and an honest FPS counter | CU-16 measure the day-5 fight and the build hitch |
-| Grokbot | GB-22 take out the death replay | GB-23 the .45, GB-24 mortar camera, GB-25 the cave proposal |
-| ChatGPT | GP-14 take out Watch again, GP-15 ranger cache Search | GP-16 Ready panel, GP-17 Ember Night, GP-18 restock buttons |
-| Claude | CL-21 music, part 1 | CL-17 caves in fog, CL-18 puddles, CL-19 railings, CL-20 the pit |
-| Antigravity | out for a few hours | AG-9 real-GPU numbers after CU-15, then AG-7b, AG-8 |
+| Cursor | commit Jerry's music and phase 1, finish CU-5 | CU-17 bench scenarios (Antigravity waits on it), CU-18 profile megaswarm |
+| Grokbot | nothing queued: phase 1 is done | the next phase |
+| ChatGPT | GP-20 the objective cue | the next phase |
+| Claude | CL-18 puddles (not started; index.html is free for Cursor) | CL-19 railings, CL-20 the pit, CL-22 the cave screech |
+| Antigravity | AG-7b again (ChatGPT answered: type a callsign first) | AG-9b after CU-17 |
 
 ## Waiting on
 
@@ -92,6 +92,20 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 ## Decisions
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
+
+- **D-22 · Shooting into a cave brings the guardian out (GB-25, approved with changes).** A fightable
+  `guardian`, not the `caveguard` grab: three hits into one mouth within 1.5 s (or one explosive),
+  only while the player is outside the grab band. It chases on a 28 m leash (or 4 s out of sight),
+  can die, and goes back into the dark on leash break, the player's death or prep. On a guardian
+  night it wakes the planned guardian instead of adding one. Changes: (1) it works day and night,
+  since day fights are part of the plan; (2) once per cave per day, and at most two pokes a day
+  across all caves, so it can't be farmed; (3) a poked guardian drops half the night guardian's
+  cash and never fires first-blood (`planned: false`, D-16); (4) combat publishes `dw-game`
+  `cave-guardian` with `{ caveIndex, x, z, phase: 'aggro' | 'emerge' | 'retreat' | 'death' }`,
+  and Claude binds the screech and the music to it (D-21). Grokbot builds it: GB-26.
+  **Correction, 07:05Z:** "day and night" means pokes work while you explore in prep, not only
+  during a wave; and a poked guardian goes back when the alarm sounds (the horde's turn), not
+  "at prep". My first wording contradicted itself; GB-27 fixes it.
 
 - **D-21 · Claude owns the music director.** `MUSIC_POOLS`, `updateMusic` and the cue logic in
   `core/audio.js` are Claude's from now on (Jerry's music is the priority he named). Cursor keeps
@@ -271,69 +285,87 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [>] **CU-14** Commit what landed after CU-13: GB-21 (`index.html`, t56) and ChatGPT's GP-13 recheck
+- [x] **CU-14** Commit what landed after CU-13: GB-21 (`index.html`, t56) and ChatGPT's GP-13 recheck
   (`ui/replays.browser.mjs` and his reports). Small: do it first.
-- [ ] **CU-15** An honest FPS counter and a `megaswarm` benchmark. Jerry spawned 500 zombies and the
+- [x] **CU-15** An honest FPS counter and a `megaswarm` benchmark. Jerry spawned 500 zombies and the
   counter said 20 FPS when it felt like 4. (a) The counter reports from real frame times: the
   average over the last second, the 1% low and the worst frame, and it counts hitches over 50 ms.
   (b) A `megaswarm` command in the debug console that spawns 500 zombies around a fixed spot
   with a fixed seed: the all-out-chaos benchmark. It goes past `MAX_ZOMBIES` on purpose; ask
   Grokbot for a spawn path that allows it. (c) `tools/bench.mjs` runs megaswarm for 30 s and
   prints the four numbers, so anyone can compare before and after a change.
-- [ ] **CU-16** Measure, don't fix: after CU-15, profile a day-5 fight and placing base-build pieces
+- [x] **CU-16** Measure, don't fix: after CU-15, profile a day-5 fight and placing base-build pieces
   (Jerry: 45 FPS, down to 30 with big hitches). Report the top costs per frame with numbers, and
   what causes each hitch (a guess to check: the zombies' pathfinding being rebuilt on every
   placement). Claude decides the fixes from your report.
-- [ ] **CU-5** Phase 1 core: the collider grid, the on-screen error card, a save at the start of
+- [x] **CU-17** Antigravity's AG-9 could only run megaswarm: there's no way in to a day-5 fight or
+  to placing pieces. Add both to `tools/bench.mjs` as scenarios (`--scenario day5`, `--scenario
+  build`): set the day, start the wave, and place ten pieces through the real placement path, then
+  print the four numbers. Tell Antigravity the commands (AG-9b).
+- [x] **CU-18** Measure, don't fix: megaswarm ran at 1.6 fps on Jerry's GPU (worst frame 634 ms, 58
+  hitches). Take a CPU profile of it (the DevTools Profiler over CDP works headless) and report
+  the top functions by self time, and how the frame splits between the zombie update, physics,
+  and drawing. Claude decides the fixes from it.
+- [>] **CU-5** Phase 1 core: the collider grid, the on-screen error card, a save at the start of
   each day. After CU-16.
 
 ### Grokbot — combat
 
-- [ ] **GB-22** Take out the death replay (D-20): the four replay helpers, the `scripted-death-replay`
+- [x] **GB-22** Take out the death replay (D-20): the four replay helpers, the `scripted-death-replay`
   event and the replay path in the scripted kill. The live cave and pit deaths stay exactly as
   they were. Retire t56 with a one-line reason in its header, and check t36/t37 still pass.
-- [ ] **GB-23** The pistol gets its own ammo, .45 (it shares the Uzi's today). Its own ammo pack
+- [x] **GB-23** The pistol gets its own ammo, .45 (it shares the Uzi's today). Its own ammo pack
   and price; tell ChatGPT the id for the kiosk and the strings.
-- [ ] **GB-24** The mortar camera: zoomed in while the arc points back at the marine, the camera
+- [x] **GB-24** The mortar camera: zoomed in while the arc points back at the marine, the camera
   freaks out. Find it and fix it, with a test.
-- [ ] **GB-25** A proposal only, in `handoffs/requests.md`: shooting into a cave. Jerry wants the
+- [x] **GB-26** Build D-22: the guardian comes out when you shoot into a cave, with its test (the
+- [x] **GB-27** D-22, corrected: pokes also work in prep (daytime exploring), except while a modal
+  is open; a poked guardian goes back into the dark when the alarm sounds, not at prep. Add a
+  prep poke and an alarm return to t59.
+  three-hit trigger, the leash, the return, the two-a-day cap, half cash, no first-blood, and
+  the `cave-guardian` event phases). The animation stays as it is for now: that's phase 4.
+- [x] **GB-25** A proposal only, in `handoffs/requests.md`: shooting into a cave. Jerry wants the
   guardian to run out after you. What comes out, how far it chases, whether it can die, how it
   goes back, and the screech (the sound is Claude's; say when it should play). Claude decides.
 
 ### ChatGPT — what the player reads and decides
 
-- [ ] **GP-14** Take out Watch again and the catalogue tile buttons (D-20), with their strings and
+- [x] **GP-14** Take out Watch again and the catalogue tile buttons (D-20), with their strings and
   tests. After GB-22, or together: the page must not call a helper that's gone.
-- [ ] **GP-15** Bug: after clicking Search on the ranger cache, the marine is stuck until you click
+- [x] **GP-15** Bug: after clicking Search on the ranger cache, the marine is stuck until you click
   Stop tracking. Find it (the hold and the tracking may be fighting; bring Cursor in if it's the
   CU-11 interaction), fix it, test it.
-- [ ] **GP-16** The Ready panel sometimes overlaps the killstreak. Move it into the left panel with
+- [x] **GP-16** The Ready panel sometimes overlaps the killstreak. Move it into the left panel with
   Dead-Wave and health, so the center of the screen stays clear.
-- [ ] **GP-17** Blood Moon is now **Ember Night** in every string the player sees: HUD, briefing,
+- [x] **GP-17** Blood Moon is now **Ember Night** in every string the player sees: HUD, briefing,
   banners, the wave preview. The code's own names (`bloodMoon`) can stay.
-- [ ] **GP-18** In the kiosk, a Restock button next to each weapon's Buy that fills just that gun's
+- [x] **GP-18** In the kiosk, a Restock button next to each weapon's Buy that fills just that gun's
   ammo, plus Restock all. (The full kiosk cleanup is phase 2.)
+
+- [x] **GP-20** When an objective completes, call `AudioSys.musicCue('objective')` (D-21: you say
+  what happened, the music owner picks the sound). One line and a check in your browser test.
 
 ### Antigravity — the crew's eyes (model: see its card)
 
 Out of usage for a few hours (Jerry, 2026-09-24). Nobody waits on these.
 
-- [ ] **AG-9** Real-GPU numbers on Jerry's machine after CU-15: `tools/bench.mjs` (megaswarm), a
+- [x] **AG-9** Real-GPU numbers on Jerry's machine after CU-15: `tools/bench.mjs` (megaswarm), a
+- [>] **AG-9b** The day-5 fight and build-piece numbers, after CU-17 gives you the commands.
   day-5 fight, and placing ten build pieces. The counter's four numbers for each. Report to Cursor
   and Claude.
-- [ ] **AG-7b** The GP-7 prep checklist again: Play, wait until `body` no longer has `deploying`
+- [x] **AG-7b** The GP-7 prep checklist again: Play, wait until `body` no longer has `deploying`
   (the landing), then check the goals and tick them (bank, ammo, repair, alarm). Report to
   ChatGPT.
-- [ ] **AG-8** The pit's rune ring on a real GPU (CL-14): the `pit` view, from the bank, and from
+- [x] **AG-8** The pit's rune ring on a real GPU (CL-14): the `pit` view, from the bank, and from
   overhead. Compare with `qa/shots/cl14/`. Report to Claude.
 
 ### Claude — lead; the world and wildlife
 
-- [ ] **CL-21** Music, part 1 (D-21, `docs/audio/cue-sheet.md`): the fight music starts on the
+- [x] **CL-21** Music, part 1 (D-21, `docs/audio/cue-sheet.md`): the fight music starts on the
   alarm with `sting_alarm`, jumps to the track's hit point, escalates by tiers, holds until the
   last zombie dies, then `sting_clear` and the aftermath. The corny `fight_*` tracks leave the
   pools. Built so Jerry's Suno files drop in as they arrive.
-- [ ] **CL-17** Cave mouths show as sharp black spots from the air, at night and in Ember Night: the
+- [x] **CL-17** (`handoffs/2026-09-24-claude-CL-17-caves-in-fog.md`) Cave mouths show as sharp black spots from the air, at night and in Ember Night: the
   cave interiors most likely ignore the fog. Fade them with it.
 - [ ] **CL-18** Puddles come out as half circles: probably laid flat on sloping ground, so the
   downhill half is under the terrain. Fit them to the ground.
@@ -341,6 +373,18 @@ Out of usage for a few hours (Jerry, 2026-09-24). Nobody waits on these.
 - [ ] **CL-20** The pit: the tentacles show from outside the water before the cutscene. Keep them
   hidden in the hole until it starts, and send bubbles up over the hole. (The rumble comes with
   the music and sound work.)
+- [x] **CL-23** Jerry's music in (`handoffs/2026-09-24-claude-CL-23-music-in.md`): all 22 pieces
+  converted and wired: tiers, Ember Night, the guardian, day skirmishes, the stings, and cues
+  ready for later.
+- [x] **CL-24** The music rhythm, Jerry's spec (`handoffs/2026-09-24-claude-CL-24-music-rhythm.md`):
+  one track at a time, the alarm sting alone then Tier 1 by proximity, the relief sting alone,
+  the briefing halves the music, Jerry's tracks 3x louder.
+- [x] **CL-25** The music, tuned by Jerry (`handoffs/2026-09-24-claude-CL-25-music-tuned.md`): 1 s gap,
+  60/70/100% by distance, fast fade into the relief sting, no aftermath, day fights by horde size.
+- [x] **CL-26** The wave finisher and the fight volume (`handoffs/2026-09-24-claude-CL-26-wave-finisher.md`):
+  the last kill of a wave gets a red pulse, the relief sting alone, slow motion and a kill cam.
+- [ ] **CL-22** The cave guardian's voice: bind `dw-game` `cave-guardian` (D-22) to a warning
+  screech on `aggro`, a roar on `emerge` and a growl on `retreat`, from the mouth's direction.
 - [~] **CL-11** Night lighting that stays dark but readable: phase 3.
 - [~] **CL-7** The world bake: parked by D-2.
 

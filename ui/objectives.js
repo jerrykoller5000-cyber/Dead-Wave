@@ -147,7 +147,9 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
   stop.addEventListener('click',()=>{model.untrack();paint();onTrack(null);layer.focus({preventScroll:true});});
   function guard(e) {
     if(e.type==='keydown'||e.type==='keyup') {
-      if(e.target===choice&&e.code!=='Escape'){e.stopPropagation();return;}
+      // Keep native selector navigation, but let movement/interact return focus
+      // to gameplay. Swallowing every key trapped the marine until Untrack.
+      if(e.target===choice&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Home','End','PageUp','PageDown','Enter','Space','Tab'].includes(e.code)){e.stopPropagation();return;}
       if(!['Enter','Space','Tab','Escape'].includes(e.code)){doc.activeElement?.blur();return;}
       if(e.type==='keydown'&&e.code==='Escape'){e.preventDefault();doc.activeElement?.blur();}
     }

@@ -55,7 +55,7 @@
 
     const choices = T.listOwnedAmmoPackChoices();
     ok(Array.isArray(choices), 'b) listOwnedAmmoPackChoices returns array');
-    ok(choices.some((c) => c.caliber === '9mm' || c.id === 'ammo:9mm'), 'b) 9mm choice present');
+    ok(choices.some((c) => c.caliber === '.45' || c.id === 'ammo:.45'), 'b) .45 choice present (starter pistol, GB-23)');
 
     const bp = T.grantBuildBlueprint('mortar');
     ok(!!bp && (bp.granted === true || bp.alreadyOwned === true), 'b) grantBuildBlueprint mortar');

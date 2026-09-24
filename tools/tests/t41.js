@@ -30,6 +30,10 @@
     }
   }
   ok(tri > 100 && up / tri > 0.95, 'pit rune rings face up (' + up + ' of ' + tri + ' triangles)');
+  // CL-17: the cave interiors take the fog, so a far mouth fades with the hill round it.
+  let blacks = 0, fogged = 0;
+  T.scene.traverse(o => { const m = o.material; if (o.isMesh && m && m.color && m.color.r === 0 && m.color.g === 0 && m.color.b === 0 && m.side === T.THREE.DoubleSide && !m.map) { blacks++; if (m.fog !== false) fogged++; } });
+  ok(blacks > 0 && fogged === blacks, 'cave interiors take the fog (' + fogged + ' of ' + blacks + ')');
   // The grab still plays.
   document.getElementById('playerName').value = 'Jerry';
   document.getElementById('modeHunt').click(); await wait(2500);

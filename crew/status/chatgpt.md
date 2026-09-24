@@ -4,12 +4,37 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-24T04:30Z
-next: Stop per Jerry; await new plan
+since: 2026-09-24T07:44Z
+next: Queue empty; await next assignment
 blocked-on: —
-last-report: handoffs/2026-09-23-chatgpt-GP-13-complete.md
+last-report: handoffs/2026-09-24-chatgpt-GP-20.md
 
 ## Notes
+
+2026-09-24 GP-20 complete: objective claimed -> approved musicCue('objective'),
+once per completion. Browser assertions cover partial/full inventory, repeated E,
+restore, polling, reset and new-run completion; PASS. All 73 unit tests PASS.
+Report handoffs/2026-09-24-chatgpt-GP-20.md. Audible mix and shared npm suite remain
+for the music owner/QA and Cursor. No audio director/files touched. Queue empty.
+
+2026-09-24 check-in after phase 1 approval: queue still empty; no new game work
+authorized until next phase. Answered Antigravity AG-7b in requests and
+handoffs/2026-09-24-chatgpt-AG-7b-entry.md: QA omitted the required player name.
+Current Play/insertion/Ready path reconfirmed by ui/hud-phase1.browser.mjs PASS.
+Provided real bank/ammo/repair/alarm paths and data-state completion attribute.
+Older ui/browser-checks.mjs --prep still uses 9mm for pistol; flagged in instructions,
+not silently rewritten while the queue is closed. Real-GPU QA remains Antigravity's.
+
+2026-09-24: NEW PLAN GP-14 through GP-18 COMPLETE. This supersedes the GP-13 stop
+and replay notes below: replay UI/code was deliberately removed under D-20.
+Cache selector movement fixed; .45 supported; Ready moved into health panel;
+Ember Night copy applied; kiosk per-weapon/full-quote Restock all implemented.
+73 UI/economy unit tests pass. Production stand-in browser checks pass for cache,
+death UI, Ready/alarm, Ember Night briefing and kiosk purchases. Reports:
+handoffs/2026-09-24-chatgpt-GP-{14,15,16,17,18}.md. Cursor owns final npm test/commit;
+real GPU/tools-shoot/performance not verified here. GP-18 asks lead to review
+full-quote-or-nothing Restock all instead of the former partial spending loop.
+Queue empty after GP-18; follow the board for the next assignment.
 
 GP-13 COMPLETE after GB-21 (2026-09-23 local / Sep 24 UTC). Supersedes blockers below.
 Production Watch again reaches natural end; pit catalogue replay advances and aborts

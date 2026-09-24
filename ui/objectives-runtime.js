@@ -17,11 +17,11 @@ function description(pack,amount=pack?.quantity) {
   return {key:'shop.ammo.pack',params:{quantity:Math.round(amount*100)/100,unit:text('ammo.unit.'+unit)}};
 }
 function choiceDescription(pack) {
-  const keys={'5.56mm':'556','7.62mm':'762','.44':'44','.338':'338','7.62 belt':'belt762',Fuel:'fuel'};
+  const keys={'.45':'45','5.56mm':'556','7.62mm':'762','.44':'44','.338':'338','7.62 belt':'belt762',Fuel:'fuel'};
   const calibre=pack.caliber==='chainsaw'?text('weapon.chainsaw.name'):text('calibre.'+(keys[pack.caliber]||pack.caliber));
   const d=description(pack);return {key:'objectives.packChoice',params:{calibre,pack:text(d.key,d.params)}};
 }
-export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,getPlayer,mapRoot,hudRoot,project}) {
+export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,getPlayer,mapRoot,hudRoot,project,onComplete=()=>{}}) {
   const model=createObjectives(runId),choices=new Map();
   let damageRevision=0,lastNear=null,disposed=false,frame=0,lastPoll=0,lastPaint='',lastSnapshot=null;
   const view=mountObjectives({mapRoot,hudRoot,project,onChoose:(id,choice)=>{choices.set(id,choice);lastPaint='';update();}});
@@ -58,7 +58,7 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
         const result=grantSupply({receiptId,source:'objective',items:[{id:request.pack.id==='medpen'?'medkit':request.pack.id,qty:request.quantity}]});
         if(result?.ok) {
           const accepted=result.accepted.reduce((n,item)=>n+item.qty,0),remaining=result.remaining.reduce((n,item)=>n+item.qty,0);
-          model.settleClaim({...request,accepted,remaining});
+          if(model.settleClaim({...request,accepted,remaining})&&model.snapshot().sites.find(s=>s.id===site.id).state==='claimed')onComplete(site.id);
         }
       }
       state=model.snapshot();

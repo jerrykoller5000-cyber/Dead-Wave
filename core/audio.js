@@ -40,7 +40,12 @@ export const AudioSys = (() => {
     glue.connect(masterGain);
     sfxGain = ctx.createGain();
     sfxGain.gain.value = 0.5 * userSfx;
-    sfxGain.connect(glue);
+    // CL-26: the relief sting clears every other sound. soloGain sits after the SFX fader
+    // so the user's volume and the solo never fight over one gain.
+    soloGain = ctx.createGain();
+    soloGain.gain.value = 1;
+    sfxGain.connect(soloGain);
+    soloGain.connect(glue);
     weapBus = ctx.createGain(); weapBus.gain.value = BUS_WEAP; weapBus.connect(sfxGain);
     fxBus = ctx.createGain(); fxBus.gain.value = BUS_FX; fxBus.connect(sfxGain);
     ambBus = ctx.createGain(); ambBus.gain.value = BUS_AMB; ambBus.connect(sfxGain);
@@ -62,7 +67,7 @@ export const AudioSys = (() => {
     return ctx;
   }
   let reverbNode = null, reverbGain = null;
-  let glue = null, weapBus = null, fxBus = null, ambBus = null;
+  let glue = null, weapBus = null, fxBus = null, ambBus = null, soloGain = null;
   const BUS_WEAP = 1.35, BUS_FX = 0.8, BUS_AMB = 0.5;
   // Which bus the next playTone/playNoise lands on; set by onBus() around a voice.
   let routeBus = null;
@@ -764,187 +769,403 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.04, vol: 0.02, filterFreq: 420, filterType: 'lowpass' });
   }
 
-  // --- Music director ---
-  // The soundtrack lives in assets/soundtrack (rendered by tools/compose.py) as
-  // mood pools. The director picks a pool from the game state — menu, day prep,
-  // night prep, fight, blood moon / colossus, and the two endings — and crossfades
-  // between two decks whenever the mood changes, so a wave starting is a real
-  // musical cue rather than whatever track happened to be next.
-  const SOUNDTRACK = 'assets/soundtrack/';
-  // The pools are the score's vocabulary; picking between them is the direction.
+  // Resolved from this module (core/audio.js), so it's right from any page, the test pages
+  // in tools/tests/ included.
+  const SOUNDTRACK = (() => { try { return new URL('../assets/soundtrack/', import.meta.url).href; } catch (_) { return 'assets/soundtrack/'; } })();
+  // --- The music director (owner: Claude, D-21) --------------------------------------
   //
-  // The quiet half of the soundtrack is unchanged and it is what the game sounds like
-  // most of the time — the calm pools were also split in two, because a first-light
-  // prep and the last prep before a blood moon should not draw from the same drawer.
-  // The fight side is new: the same keys and the same patient pads with guitars
-  // carrying the riff, in three weights, so a wave escalates musically as it
-  // escalates on the ground rather than playing one intensity for six minutes.
-  //
-  //   skirmish  the old fight tracks — early waves, a handful of bodies
-  //   assault   the metal pool — a real wave, the line under pressure
-  //   overrun   the fastest and heaviest — you are losing, or nearly
-  //   siege     metal at boss weight — blood moon, colossus
-  //   aftermath one short track for the minute after a wave breaks
+  // Jerry's rhythm (CL-24, tuned in CL-25, 2026-09-24). One piece of music at a time, never two:
+  //   - Calm music between fights. Changing it fades the old one right out, then fades the
+  //     new one in. The briefing board halves whatever is playing while it's open.
+  //   - The alarm cuts the music. The alarm sting plays alone; the moment it ends the wave's
+  //     fight track loops: 40% with nobody within 150 m, climbing to full at 20 m (CL-26).
+  //   - The last kill of a wave is the finisher (CL-26): the fight track is cut dead, the
+  //     relief sting plays with every other sound cleared, while the page runs the red
+  //     pulse, the slow motion and the kill cam; the moment the sting ends the regular calm
+  //     music starts fading back in, slowly. A day fight still ends with a fast fade.
+  //   - A fight in daylight (no alarm) picks its track by horde size, smallest to largest:
+  //     day skirmish B, day skirmish A, Tier 1, Tier 2, Tier 3. It steps up if the horde
+  //     grows, never down, and ends like a wave: fast fade, relief sting, calm.
+  // The pools, hit points, stings, per-track gains and the day-fight sizes are in
+  // assets/soundtrack/music.json, so this file doesn't change when the music does.
   const MUSIC_POOLS = {
     menu:     ['menu_treeline'],
     dawnprep: ['day_morning_watch', 'day_long_grass'],
     day:      ['day_riverside', 'day_open_ground', 'day_long_grass', 'day_morning_watch'],
     dusk:     ['night_lanterns', 'night_long_watch'],
     night:    ['night_embers', 'night_lanterns', 'night_long_watch'],
-    skirmish: ['fight_breach', 'fight_wire', 'fight_ash_wind'],
-    assault:  ['metal_breach_the_line', 'metal_siege_engine', 'metal_the_horde', 'fight_run_the_line', 'fight_teeth'],
-    overrun:  ['metal_rip_and_tear', 'metal_the_horde', 'metal_last_stand'],
-    siege:    ['metal_blood_moon', 'metal_titan', 'boss_red_sky', 'boss_colossus'],
+    fight:    ['metal_breach_the_line'],
     aftermath:['aftermath_hold'],
     fallen:   ['end_fallen'],
     dawn:     ['end_dawn']
   };
-  // The heavy pools are mixed a touch lower than they were written: guitars occupy the
-  // same band as the guns, and the guns have to win.
-  const MOOD_GAIN = {
-    menu: 0.75, dawnprep: 0.7, day: 0.7, dusk: 0.7, night: 0.7,
-    skirmish: 0.76, assault: 0.72, overrun: 0.74, siege: 0.8,
-    aftermath: 0.72, fallen: 0.85, dawn: 0.85
-  };
-  // Pools that are a fight. Used for gapless playback, faster crossfades and to
-  // decide whether a mood change is urgent enough to interrupt.
-  const HOT_MOODS = { skirmish: 1, assault: 1, overrun: 1, siege: 1 };
-  const deckBase = [0, 0];      // per-deck volume before the momentary shot duck
-  const MUSIC_VOL = 0.3;
-  const decks = [null, null];   // two <audio> elements
-  let deckIdx = 0;              // which deck is "front"
-  let mood = null;              // current pool name
-  let moodT = 0;                // seconds since the mood was set
-  let lastTrack = {};           // pool -> last file played (no immediate repeats)
-  let gapT = 0;                 // silence left before the next calm track
-  let duck = 1;                 // 0..1 external ducking (low health, pause)
-  let fadeSpeed = 0.45;         // gain units per second
-  const wantGain = [0, 0];      // per-deck target gains
-
-  function makeDeck() {
-    const el = new Audio();
-    el.preload = 'auto';
-    el.volume = 0;
-    el.addEventListener('ended', () => { onDeckEnded(el); });
-    el.addEventListener('error', () => { onDeckEnded(el, true); });
-    return el;
+  const MUSIC_HITS = {};     // track -> seconds where it hits (fights start and loop there)
+  const MUSIC_STINGS = {};   // cue -> track
+  const MUSIC_GAIN = {};     // track -> loudness multiplier (Jerry's tracks are boosted)
+  // Day fights: a track per horde size. sizes[i] is the smallest horde that gets tracks[i].
+  const DAY_FIGHT = { tracks: ['day_skirmish_b', 'day_skirmish_a', 'fight_1a', 'fight_2a', 'fight_3a'], sizes: [1, 4, 9, 16, 26] };
+  let manifestLoaded = false;
+  function loadMusicManifest() {
+    if (manifestLoaded || typeof fetch !== 'function') return;
+    manifestLoaded = true;
+    fetch(SOUNDTRACK + 'music.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).then((m) => {
+      if (!m || typeof m !== 'object') return;
+      if (m.pools && typeof m.pools === 'object') {
+        for (const k of Object.keys(m.pools)) if (Array.isArray(m.pools[k]) && m.pools[k].length) MUSIC_POOLS[k] = m.pools[k].slice();
+      }
+      if (m.hits && typeof m.hits === 'object') for (const k of Object.keys(m.hits)) if (isFinite(+m.hits[k])) MUSIC_HITS[k] = +m.hits[k];
+      if (m.stings && typeof m.stings === 'object') for (const k of Object.keys(m.stings)) if (typeof m.stings[k] === 'string') MUSIC_STINGS[k] = m.stings[k];
+      if (m.gain && typeof m.gain === 'object') for (const k of Object.keys(m.gain)) if (isFinite(+m.gain[k]) && +m.gain[k] > 0) MUSIC_GAIN[k] = +m.gain[k];
+      const df = m.dayFight;
+      if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
+        DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
+      }
+    }).catch(() => {});
   }
+  const MUSIC_VOL = 0.3;
+  const FIGHT_FLOOR = 0.4;           // the fight track with nobody within PROX_FAR (CL-26)
+  const FIGHT_IN_RANGE = 0.4;        // ... with one at PROX_FAR: a smooth climb from there
+  const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
+  const GAP_AFTER_ALARM = 0;         // the fight starts the moment the alarm sting ends
+  const FAST_FADE_S = 0.35;          // the fight making way for the relief sting
+  const DAY_FIGHT_RANGE = 100;       // a zombie this close in daylight prep starts a day fight
+  const FADE_OUT_S = 2.0;            // calm music making way
+  const FADE_IN_S = 6.0;             // calm music arriving
+  const FADE_IN_SLOW_S = 12.0;       // the first music after the relief sting: very slow
+
+  let deck = null;          // the one <audio> element that plays music
+  let deckTrack = null;     // what it's playing
+  let deckLevel = 0;        // 0..1 fade level
+  let deckTarget = 0;       // where the fade is heading
+  let deckRate = 1;         // fade speed, level units per second
+  let deckLoopAt = -1;      // >= 0: loop from here when it ends (the fight)
+  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | release | relief | end
+  let dayBand = -1;         // the day fight's track index
+  let pendingDay = -1;      // a day-fight band waiting for the deck to fade out
+  let lastCalm = 'day';     // the calm pool the story wants, for after the relief sting
+  let mood = null;          // the pool the deck is playing from
+  let nextMood = null;      // a calm pool waiting for the deck to fade out
+  let gapT = 0;             // silence left (after the alarm sting, between calm tracks)
+  let prox = FIGHT_FLOOR;   // 0.6..1, how close the nearest zombie is
+  let briefingOpen = false;
+  let briefDuck = 1;
+  let duck = 1;             // pause, shop, low health
+  let lastTrack = {};       // pool -> last track (no immediate repeats)
+  let sting = null;         // the one <audio> element for stings: never under music
+  let stingName = null;     // the cue playing, or null
+  let stingLeft = 0;        // seconds until it counts as finished, if 'ended' never comes
+  let stingNext = null;     // what to do when it finishes
+  let alarmPending = false;
+  let finalePending = false;  // the page's finisher asked for the cut and the sting
+  let soloOn = false;
+  let prevPhase = null, prevStarted = false;
+  let lastCue = null, cueCount = 0;
+  let overlapFrames = 0;    // frames with a sting and audible music together (must stay 0)
+
+  function trackUrl(name) { return SOUNDTRACK + name + '.mp3'; }
+  function gainOf(name) { return MUSIC_GAIN[name] || 1; }
   function pickTrack(pool) {
     const list = MUSIC_POOLS[pool] || MUSIC_POOLS.menu;
-    let choice = list[Math.floor(Math.random() * list.length)];
+    let choice = lastTrack[pool] === undefined ? list[0] : list[Math.floor(Math.random() * list.length)];
     if (list.length > 1 && choice === lastTrack[pool]) choice = list[(list.indexOf(choice) + 1 + Math.floor(Math.random() * (list.length - 1))) % list.length];
     lastTrack[pool] = choice;
-    return SOUNDTRACK + choice + '.mp3';
+    return choice;
   }
-  function playOnDeck(i, src, startGain) {
-    if (!decks[i]) decks[i] = makeDeck();
-    const el = decks[i];
-    el.src = src;
+  function ensureDeck() {
+    if (deck) return deck;
+    deck = new Audio();
+    deck.preload = 'auto';
+    deck.volume = 0;
+    deck.addEventListener('ended', onDeckEnded);
+    // A real load failure moves on; an abort (a new src replacing one still loading) is not one.
+    deck.addEventListener('error', () => {
+      const e = deck.error;
+      if (!deckTrack || (e && e.code === 1)) return;
+      if (deck.src && !deck.src.endsWith('/' + deckTrack + '.mp3')) return;
+      deckTrack = null; gapT = 1.5;
+    });
+    return deck;
+  }
+  function stopDeck() {
+    if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
+    deckTrack = null; deckLevel = 0; deckTarget = 0; deckLoopAt = -1;
+  }
+  // Start a track on the deck. from: seconds in; level/target/seconds: the fade.
+  function startDeck(name, opts) {
+    const el = ensureDeck();
+    const o = opts || {};
+    try { el.pause(); } catch (_) {}
+    el.src = trackUrl(name);
     el.loop = false;
-    el.volume = Math.min(1, startGain);
-    deckBase[i] = el.volume;
+    deckTrack = name;
+    deckLevel = o.level != null ? o.level : 0;
+    deckTarget = 1;
+    deckRate = 1 / Math.max(0.05, o.fadeIn || FADE_IN_S);
+    deckLoopAt = o.loopAt != null ? o.loopAt : -1;
+    const from = o.from || 0;
+    if (from > 0) {
+      const seek = () => { try { if (el.duration && from < el.duration - 5) el.currentTime = from; } catch (_) {} };
+      if (el.readyState >= 1) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
+    }
+    el.volume = 0;
     const p = el.play();
     if (p && typeof p.catch === 'function') p.catch(() => {});
   }
-  function onDeckEnded(el, failed) {
+  function onDeckEnded() {
     if (!musicPlaying || muted) return;
-    const i = decks.indexOf(el);
-    if (i !== deckIdx || !mood) return;      // the back deck finishing is just a fade tail
-    if (mood === 'fallen' || mood === 'dawn') return; // endings play once
-    // Calm pools breathe between tracks; fights run straight on.
-    gapT = failed ? 1.5 : (HOT_MOODS[mood] ? 0.25 : 2.5 + Math.random() * 4);
+    if (deckLoopAt >= 0 && deck) {             // the fight loops from its hit
+      try { deck.currentTime = deckLoopAt; } catch (_) {}
+      const p = deck.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
+      return;
+    }
+    deckTrack = null; deckLevel = 0;
+    if (mood === 'fallen' || mood === 'dawn') return;                         // endings play once
+    gapT = 2.5 + Math.random() * 4;                                           // calm pools breathe
   }
-  function setMood(next, fast) {
-    if (next === mood) return;
-    mood = next;
-    moodT = 0;
-    gapT = 0;
-    if (!musicPlaying || muted) return;
-    // swap decks: the old front fades out, the new one fades in
-    wantGain[deckIdx] = 0;
-    deckIdx = 1 - deckIdx;
-    fadeSpeed = fast ? 1.2 : 0.4;
-    playOnDeck(deckIdx, pickTrack(mood), 0.0001);
-    wantGain[deckIdx] = 1;
+  // A sting plays alone. Whatever else is on is cut first; then() runs when it's over.
+  function playSting(name, then) {
+    stopDeck();
+    stopSting();
+    const file = MUSIC_STINGS[name];
+    cueCount++;
+    lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
+    stingNext = then || null;
+    if (!file || !musicPlaying || muted) { finishSting(); return; }
+    try {
+      if (!sting) {
+        sting = new Audio();
+        sting.addEventListener('ended', () => { if (stingName) finishSting(); });
+        sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) finishSting(); });
+      }
+      sting.src = trackUrl(file);
+      stingName = name;
+      stingLeft = 9;          // until its length is known; covers a blocked play() too
+      sting.addEventListener('loadedmetadata', () => { if (stingName === name && sting.duration) stingLeft = sting.duration + 0.25; }, { once: true });
+      sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file) * briefDuck));
+      const p = sting.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch (_) { finishSting(); }
+  }
+  function stopSting() {
+    if (sting) { try { sting.pause(); } catch (_) {} }
+    stingName = null; stingLeft = 0;
+    setSolo(false);
+  }
+  // Everything but the music off (or back on). Ramped, so it's a clean cut, not a click.
+  function setSolo(on) {
+    if (soloOn === on) return;
+    soloOn = on;
+    if (!soloGain || !ctx) return;
+    try {
+      const t = ctx.currentTime;
+      soloGain.gain.cancelScheduledValues(t);
+      soloGain.gain.setValueAtTime(Math.max(0.0001, soloGain.gain.value), t);
+      soloGain.gain.linearRampToValueAtTime(on ? 0.0001 : 1, t + (on ? 0.06 : 0.6));
+    } catch (_) {}
+  }
+  // The finisher: the fight is cut dead, the relief sting plays with nothing else heard.
+  function startFinale() {
+    finalePending = false;
+    stopDeck();
+    stage = 'relief';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    playSting('clear', () => {
+      stage = 'calm';
+      mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
+    });
+    if (stingName === 'clear') setSolo(true);
+  }
+  // How long a cue runs, so the page can time its slow motion to it.
+  const cueLens = {};
+  function cueLength(name) {
+    const file = MUSIC_STINGS[name];
+    if (!file) return 0;
+    if (cueLens[file]) return cueLens[file];
+    try {
+      const el = new Audio(); el.preload = 'metadata';
+      el.addEventListener('loadedmetadata', () => { if (el.duration && isFinite(el.duration)) cueLens[file] = el.duration; }, { once: true });
+      el.src = trackUrl(file);
+    } catch (_) {}
+    return 0;
+  }
+  function finishSting() {
+    stopSting();
+    const next = stingNext; stingNext = null;
+    if (next) next();
+  }
+  // Small cues for other owners' moments (D-21): 'achievement', 'airdrop', 'objective',
+  // 'poi_cleared'. They're a couple of seconds, played like a sound effect, so they don't
+  // stop the music; the fight and the two stings above are the only music moments.
+  let cueEl = null;
+  function musicCue(name) {
+    if (typeof name !== 'string' || !name) return;
+    const file = MUSIC_STINGS[name];
+    cueCount++;
+    lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
+    if (!file || !musicPlaying || muted) return;
+    try {
+      if (!cueEl) cueEl = new Audio();
+      cueEl.src = trackUrl(file);
+      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file)));
+      const p = cueEl.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch (_) {}
+  }
+  function startAlarm() {
+    alarmPending = false;
+    dayBand = -1; pendingDay = -1;
+    stage = 'alarm';
+    mood = null; nextMood = null;
+    playSting('alarm', () => { stage = 'gap'; gapT = GAP_AFTER_ALARM; });
+  }
+  function startFight() {
+    stage = 'fight';
+    mood = 'fight';
+    const name = pickTrack('fight');
+    const hit = MUSIC_HITS[name] || 0;
+    // In at once at the floor; proximity does the rest.
+    startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+  }
+  // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
+  // then the calm music fades back in slowly the moment the sting ends.
+  function startRelease() {
+    stage = 'release';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    deckTarget = 0; deckRate = 1 / FAST_FADE_S;
+  }
+  function startRelief() {
+    stopDeck();
+    stage = 'relief';
+    playSting('clear', () => {
+      stage = 'calm';
+      mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
+    });
+  }
+  function bandFor(size) {
+    let b = 0;
+    for (let i = 0; i < DAY_FIGHT.sizes.length; i++) if (size >= DAY_FIGHT.sizes[i]) b = i;
+    return b;
+  }
+  function startDayTrack(band) {
+    stage = 'dayfight';
+    dayBand = band; pendingDay = -1;
+    mood = 'dayfight';
+    const name = DAY_FIGHT.tracks[band];
+    const hit = MUSIC_HITS[name] || 0;
+    startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+  }
+  function calmMoodFor(state) {
+    if (!state.started) return 'menu';
+    if (state.night) return state.dusk ? 'dusk' : 'night';
+    return state.dawn ? 'dawnprep' : 'day';
   }
   // Called every frame by the game loop with the current state.
-  //
-  // The mood used to be a straight read of the phase: wave means fight, otherwise day
-  // or night. That gave the same music to three shamblers on day one and to forty
-  // bodies plus a colossus on day nine. It now scores the situation and picks a weight
-  // from it — how many are up, how close the nearest is, how hurt you are, what day it
-  // is — and lets go of a fight gradually once the wave is broken, so the last shot of
-  // a wave is not followed by an instant cut back to birdsong.
-  let heat = 0;          // 0..1 smoothed combat intensity
-  let peace = 0;         // seconds since the last fight ended
-  let hadFight = false;  // has there been a fight to be the aftermath OF
   function updateMusic(dt, state) {
+    const started = !!state.started;
+    const phaseNow = state.phase;
+    // The last kill: the wave hands back to prep with the run still on.
+    const cleared = prevStarted && started && !state.over && !state.won && prevPhase === 'wave' && phaseNow === 'prep';
+    const waveBegan = started && prevPhase !== 'wave' && phaseNow === 'wave';
+    prevPhase = phaseNow; prevStarted = started;
+    if (!started) briefingOpen = false;
     if (!musicPlaying || muted) return;
-    moodT += dt;
-    // --- how bad is it right now ---
-    const live = state.threat || 0;                 // zombies alive
-    const near = state.nearest == null ? 999 : state.nearest;
-    let target = 0;
-    if (state.phase === 'wave') {
-      target = 0.34
-        + Math.min(0.3, live / 26)                  // weight of numbers
-        + (near < 14 ? 0.18 : (near < 30 ? 0.08 : 0))
-        + Math.min(0.12, Math.max(0, (state.day - 2)) * 0.02)
-        + (state.lowHp ? 0.2 : 0);
-      if (state.boss) target = Math.max(target, 0.95);
-    }
-    // Heat climbs quickly and falls slowly: a lull mid-wave should not drop the score
-    // out from under you, but a wave ending should be allowed to release it.
-    const rate = target > heat ? 2.6 : 0.45;
-    heat += (target - heat) * Math.min(1, dt * rate);
-    if (state.phase === 'wave' && live > 0) { peace = 0; hadFight = true; } else peace += dt;
-    if (!state.started) { hadFight = false; heat = 0; peace = 999; }
 
-    let want = 'menu';
-    if (!state.started) want = 'menu';
-    else if (state.over && !state.won) want = 'fallen';
-    else if (state.won) want = 'dawn';
-    else if (state.boss) want = 'siege';
-    else if (state.phase === 'wave' && (live > 0 || heat > 0.3)) {
-      want = heat > 0.82 ? 'overrun' : (heat > 0.5 ? 'assault' : 'skirmish');
-    } else if (hadFight && peace < 24 && state.started && !state.shop) {
-      // The minute after the wave breaks gets its own track rather than snapping
-      // straight back to the calm pool.
-      want = 'aftermath';
-    } else if (state.night) {
-      want = state.dusk ? 'dusk' : 'night';
-    } else {
-      want = state.dawn ? 'dawnprep' : 'day';
+    // --- what the story says ---
+    if (!started) {
+      if (stage !== 'calm' || mood !== 'menu') { if (stage !== 'calm') { stopSting(); stage = 'calm'; } nextMood = 'menu'; }
+    } else if (state.over && !state.won) {
+      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'fallen'; startDeck(pickTrack('fallen'), { level: 0, fadeIn: 1 }); }
+    } else if (state.won) {
+      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'dawn'; startDeck(pickTrack('dawn'), { level: 0, fadeIn: 1 }); }
+    } else if (finalePending) {
+      startFinale();
+    } else if (alarmPending || (waveBegan && stage !== 'alarm' && stage !== 'gap' && stage !== 'fight')) {
+      startAlarm();
+    } else if (cleared && (stage === 'alarm' || stage === 'gap' || stage === 'fight')) {
+      if (stage === 'fight') startRelease(); else { stopSting(); startRelief(); }
+    } else if (stage === 'end' || stage === 'idle') {
+      stage = 'calm'; mood = null;
     }
-    const hot = !!HOT_MOODS[want], wasHot = !!HOT_MOODS[mood];
-    const urgent = hot || wasHot || want === 'fallen' || want === 'dawn' || want === 'menu' || mood === 'menu';
-    // Escalating inside a fight waits a bar or two: without this, heat hovering on a
-    // threshold would flip between two metal tracks every few seconds.
-    const hold = (hot && wasHot) ? 18 : (urgent ? 0 : 6);
-    if (want !== mood && moodT > hold) setMood(want, hot || wasHot);
-    // gap between calm tracks
-    if (gapT > 0) {
-      gapT -= dt;
-      if (gapT <= 0 && mood) playOnDeck(deckIdx, pickTrack(mood), 0.0001), wantGain[deckIdx] = 1;
+    lastCalm = calmMoodFor(state);
+    // --- a fight in daylight: no alarm, zombies in prep ---
+    const liveN = state.threat || 0;
+    const nearD = state.nearest == null ? 999 : state.nearest;
+    if (started && !state.over && !state.won && state.phase === 'prep') {
+      if (stage === 'calm' && liveN > 0 && nearD < DAY_FIGHT_RANGE) {
+        pendingDay = bandFor(liveN);
+        stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
+        if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; }
+      } else if (stage === 'dayfight') {
+        if (liveN === 0) startRelease();
+        else {
+          const b = bandFor(liveN);
+          const cur = pendingDay >= 0 ? pendingDay : dayBand;
+          if (b > cur) { pendingDay = b; if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; } }   // step up, never down
+        }
+      }
     }
-    const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.6 : 1) * (state.shop ? 0.8 : 1);
+    if (stage === 'calm') {
+      const want = lastCalm;
+      if (want !== mood) nextMood = want;
+    }
+    // --- the fast fades finishing ---
+    if (stage === 'release' && (!deckTrack || deckLevel <= 0.001)) startRelief();
+    if (stage === 'dayfight' && pendingDay >= 0 && (!deckTrack || deckLevel <= 0.001)) { stopDeck(); startDayTrack(pendingDay); }
+
+    // --- the sting (alone) ---
+    if (stingName) {
+      stingLeft -= dt;
+      if (stingLeft <= 0) finishSting();
+      else if (sting) sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(MUSIC_STINGS[stingName] || '') * briefDuck));
+    }
+    // --- the gap after the alarm sting ---
+    if (stage === 'gap') { gapT -= dt; if (gapT <= 0) startFight(); }
+    // --- calm music: fade the old one right out, then the new one in ---
+    if (stage === 'calm') {
+      if (nextMood && deckTrack) { deckTarget = 0; deckRate = 1 / FADE_OUT_S; if (deckLevel <= 0.001) { stopDeck(); } }
+      if (nextMood && !deckTrack) { mood = nextMood; nextMood = null; gapT = 0; startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S }); }
+      else if (!deckTrack && mood && gapT > 0) { gapT -= dt; if (gapT <= 0) startDeck(pickTrack(mood), { level: 0, fadeIn: 3 }); }
+      else if (!deckTrack && mood && gapT <= 0 && !nextMood) startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
+    }
+    // --- the fight follows the nearest zombie ---
+    const live = state.threat || 0;
+    const near = state.nearest == null ? 999 : state.nearest;
+    const k = Math.max(0, Math.min(1, (PROX_FAR - near) / (PROX_FAR - PROX_NEAR)));
+    const proxTarget = live > 0 && near <= PROX_FAR ? FIGHT_IN_RANGE + (1 - FIGHT_IN_RANGE) * k : FIGHT_FLOOR;
+    prox += (proxTarget - prox) * Math.min(1, dt * 1.5);
+
+    // --- levels ---
+    const briefTarget = briefingOpen && started ? 0.5 : 1;
+    briefDuck += (briefTarget - briefDuck) * Math.min(1, dt * 2);
+    const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.8 : 1) * (state.shop ? 0.8 : 1);
     duck += (targetDuck - duck) * Math.min(1, dt * 2.5);
-    // Shot duck: set instantly by duckForShot, eased back here (~0.6 s). Applied
-    // after the crossfade slew, which is far too slow to follow a gunshot.
     musicShotDuck += (1 - musicShotDuck) * Math.min(1, dt * 1.8);
-    for (let i = 0; i < 2; i++) {
-      const el = decks[i];
-      if (!el) continue;
-      const goal = wantGain[i] * MUSIC_VOL * userMusic * (MOOD_GAIN[mood] || 0.8) * duck;
-      const cur = deckBase[i];
-      let v = cur + Math.sign(goal - cur) * Math.min(Math.abs(goal - cur), fadeSpeed * MUSIC_VOL * dt);
-      v = Math.max(0, Math.min(1, v));
-      deckBase[i] = v;
-      const out = Math.max(0, Math.min(1, v * musicShotDuck));
-      if (Math.abs(out - el.volume) > 0.0005) el.volume = out;
-      if (i !== deckIdx && v <= 0.0006 && !el.paused) { try { el.pause(); } catch (_) {} }
+    if (deckLevel !== deckTarget) {
+      const step = deckRate * dt;
+      deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
     }
+    if (deck && deckTrack) {
+      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release') ? prox : 1;
+      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * briefDuck * duck * musicShotDuck;
+      const out = Math.max(0, Math.min(1, v));
+      if (Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
+    }
+    if (stingName && deck && deckTrack && deck.volume > 0.001 && !deck.paused) overlapFrames++;
   }
+  // The alarm and the briefing board, from the page's 'dw-game' events (D-8).
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('dw-game', (ev) => {
+      const d = ev && ev.detail;
+      if (!d) return;
+      if (d.type === 'alarm-started') alarmPending = true;
+      else if (d.type === 'wave-last-kill') finalePending = true;
+      else if (d.type === 'briefing-open') briefingOpen = true;
+      else if (d.type === 'briefing-closed') briefingOpen = false;
+      else if (d.type === 'run-reset') { briefingOpen = false; alarmPending = false; }
+    });
+  }
+  function setMood(next) { if (MUSIC_POOLS[next]) { stage = 'calm'; nextMood = next; } }
 
   function clearMusicNodes() {
     for (const n of musicOscs) {
@@ -962,18 +1183,28 @@ export const AudioSys = (() => {
     ensure(); // unlock AudioContext for SFX
     if (muted || musicPlaying) return;
     musicPlaying = true;
+    loadMusicManifest();
     clearMusicNodes(); // kill any leftover synth nodes
-    // (Re)start whatever the current mood is on the front deck.
-    const m = mood || 'menu';
-    mood = null;
-    setMood(m, false);
+    stopDeck(); stopSting();
+    // The next updateMusic picks up the story from the game state.
+    stage = 'idle'; mood = null; nextMood = null; gapT = 0;
+    setTimeout(() => { try { cueLength('clear'); } catch (_) {} }, 1500);   // learn the sting's length early
   }
   function stopMusic() {
     musicPlaying = false;
     clearMusicNodes();
-    for (const el of decks) { if (el) { try { el.pause(); } catch (_) {} } }
+    stopDeck(); stopSting();
   }
-  function musicState() { return { mood, front: decks[deckIdx] ? decks[deckIdx].src : null, playing: musicPlaying, volume: decks[deckIdx] ? decks[deckIdx].volume : 0 }; }
+  function musicState() {
+    return {
+      stage, mood, nextMood, front: deck && deckTrack ? deck.src : null, frontTime: deck ? deck.currentTime : 0,
+      deckTrack, deckLevel, volume: deck ? deck.volume : 0, prox, briefDuck, briefingOpen,
+      sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
+      lastCue: lastCue ? Object.assign({}, lastCue) : null,
+      pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),
+      stings: Object.assign({}, MUSIC_STINGS), gains: Object.assign({}, MUSIC_GAIN)
+    };
+  }
   function noteSpin(spinningUp) {
     if (spinningUp && !lastSpinWasUp) { lastSpinWasUp = true; spinUp(); }
     else if (!spinningUp && lastSpinWasUp) { lastSpinWasUp = false; spinDown(); }
@@ -1975,7 +2206,7 @@ export const AudioSys = (() => {
     // Read-only view of the mix, for tests and the perf overlay.
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
-    updateMusic, musicState, setMood, setSfxVolume, setMusicVolume, getVolumes,
+    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes,
     ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), dayCleared,
     distantGroan: A(distantGroan)
   };

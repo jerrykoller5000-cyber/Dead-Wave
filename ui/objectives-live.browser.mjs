@@ -16,8 +16,9 @@ src=src.replace(/<script type="importmap">[\s\S]*?<\/script>/,()=>'<script type=
    state:()=>objectiveRuntime?.read(), update:()=>objectiveRuntime?.update(),
    markers:()=>objectiveRuntime?.markers(),
    med:n=>{medkits=n===null?MAX_MEDKITS-1:n;return medkits;},
-   ammoGap:n=>{reserveAmmo['9mm']=reserveCap('9mm')-n;return reserveAmmo['9mm'];},
+   ammoGap:n=>{reserveAmmo['.45']=reserveCap('.45')-n;return reserveAmmo['.45'];},
    intel:()=>fieldIntelOwned,
+   save:()=>objectiveRuntime.save(),restore:blob=>objectiveRuntime.restore(blob),
    emptyGrenades:()=>{grenades=0;},
    reset:()=>resetHQ()
  }; window.TT = {`);
@@ -33,6 +34,7 @@ try {
  await page.waitForFunction(()=>document.getElementById('opening').hidden);
  await page.fill('#playerName','Objective Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>window.gp11?.state()&&!document.body.classList.contains('deploying'),null,{timeout:30000});
+ await page.evaluate(()=>{window.objectiveCues=[];const original=TT.AudioSys.musicCue;TT.AudioSys.musicCue=function(name){if(name==='objective')objectiveCues.push(name);return original.call(this,name);};});
  await page.evaluate(()=>TT.runDevCommand('godmode'));
  await page.screenshot({path:path.join(shots,'before.png')});
  const id=name=>'objective:'+name;
@@ -68,21 +70,32 @@ try {
  assert.equal(await page.evaluate(()=>TT.getMedkits()),before+1);
  assert.equal((await state('medical-convoy')).remaining,1);
  assert.equal((await state('medical-convoy')).feedback,'partial');
+ assert.equal(await page.evaluate(()=>objectiveCues.length),0,'partial supply and radio repair awaiting claim are not complete');
  await page.screenshot({path:path.join(shots,'partial.png')});
  await page.keyboard.press('KeyE');await page.waitForTimeout(200);
  assert.equal((await state('medical-convoy')).feedback,'full');
+ assert.equal(await page.evaluate(()=>objectiveCues.length),0,'full inventory does not play completion');
  assert.match(await page.locator('#objectiveHud').innerText(),/Supplies remaining: \+1 MedPen/);
  await page.evaluate(()=>gp11.med(0));await page.keyboard.press('KeyE');await page.waitForTimeout(200);
  assert.equal(await page.evaluate(()=>TT.getMedkits()),1);
  assert.equal((await state('medical-convoy')).state,'claimed');
  await page.keyboard.press('KeyE');assert.equal(await page.evaluate(()=>TT.getMedkits()),1);
+ assert.equal(await page.evaluate(()=>objectiveCues.length),1,'one cue for completed claim; none for repeat E');
  assert.equal(await page.evaluate(()=>TT.getObjectiveProps().props['objective:medical-convoy'].state),'empty');
  await visit('ranger-cache');
+ await page.locator('#objectiveHud select').focus();
+ const posBefore=await page.evaluate(()=>({x:TT.player.position.x,z:TT.player.position.z}));
+ await page.keyboard.down('KeyD');await page.waitForTimeout(600);await page.keyboard.up('KeyD');
+ const moved=await page.evaluate(p=>Math.hypot(TT.player.position.x-p.x,TT.player.position.z-p.z),posBefore);
+ assert(moved>.5,'cache selection must release WASD to gameplay without Stop tracking');
+ await visit('ranger-cache');
+ await page.locator('#objectiveHud select').focus();
  const ammoBefore=await page.evaluate(()=>gp11.ammoGap(10));
  await page.keyboard.press('KeyE');await page.waitForTimeout(200);
- assert.equal(await page.evaluate(()=>TT.getReserve()['9mm']),ammoBefore+10);
- assert.equal((await state('ranger-cache')).remaining,50);
+ assert.equal(await page.evaluate(()=>TT.getReserve()['.45']),ammoBefore+10);
+ assert.equal((await state('ranger-cache')).remaining,26);
  assert(await page.locator('#objectiveHud select').isDisabled(),'partial pack locks choice');
+ assert.equal(await page.evaluate(()=>objectiveCues.length),1,'partial ammo grant does not play completion');
  await page.setViewportSize({width:390,height:844});
  await page.screenshot({path:path.join(shots,'mobile.png')});
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
@@ -94,12 +107,25 @@ try {
    const row=await state(name);
    assert.equal(row.state,'claimed',name);
  }
+ assert.equal(await page.evaluate(()=>objectiveCues.length),6,'one cue for each completed site');
+ assert(await page.evaluate(()=>gp11.restore(gp11.save())));await page.waitForTimeout(200);
+ assert.equal(await page.evaluate(()=>objectiveCues.length),6,'restoring and polling completed objectives stay silent');
  const run=await page.evaluate(()=>gp11.state().runId);
  await page.evaluate(()=>gp11.reset());await page.waitForTimeout(200);
  assert.notEqual(await page.evaluate(()=>gp11.state().runId),run);
  assert.equal(await page.evaluate(()=>gp11.state().revealed),false);
  assert.equal((await state('medical-convoy')).remaining,null);
+ assert.equal(await page.evaluate(()=>objectiveCues.length),6,'reset stays silent');
+ await visit('medical-convoy');await page.evaluate(()=>gp11.med(0));await page.keyboard.press('KeyE');await page.waitForTimeout(200);
+ assert.equal((await state('medical-convoy')).state,'claimed');
+ assert.equal(await page.evaluate(()=>objectiveCues.length),7,'completion can cue again in a fresh run');
+ await page.evaluate(()=>{TT.runDevCommand('godmode off');TT.beginScriptedKill('cave',TT.POI.caves[0]);TT.finishScriptedKill();});
+ await page.keyboard.press('Space');await page.waitForFunction(()=>document.querySelector('#win.show'));
+ assert.equal(await page.locator('#watchAgain, .replay-tile').count(),0,'D-20 replay controls removed');
+ assert(await page.locator('#winMsg .deathlog').isVisible(),'death catalogue retained');
+ await page.screenshot({path:path.join(shots,'death-no-replay.png')});
  assert.deepEqual(errors,[]);
- console.log('PASS GP-11 production integration: real E hold/release, damage cancellation, seven radio reveals, map tracking, partial/full/exact remaining supply claims, no repeat grants, pack lock, prop states, reset and mobile overflow.');
+ console.log('PASS GP-11/15 production integration: real E hold/release, damage cancellation, all seven sites, focused-selector movement and E, .45 partial supply/lock, map, reset, mobile overflow; GP-14 death catalogue retained without replay controls.');
  console.log('Renderer is a stand-in; real GPU, route playthrough and frame/load budgets remain for crew QA.');
+ console.log('PASS GP-20 objective music cue: exactly once per completed claim; partial/full/repeated E/restore/poll/reset stay silent; new-run completion cues again.');
 }finally{if(browser)await browser.close();server.close();}

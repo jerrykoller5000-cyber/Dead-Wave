@@ -4,10 +4,10 @@ state: idle
 model: Opus 5.5 (High), in Cowork, writing through the desktop bridge
 task: —
 touching: —
-since: 2026-09-24T05:00Z
-next: CL-21 music, part 1
+since: 2026-09-24T08:50Z
+next: CL-18 puddles
 blocked-on: —
-last-report: docs/plan.md
+last-report: handoffs/2026-09-24-claude-CL-26-wave-finisher.md
 
 ## Notes
 

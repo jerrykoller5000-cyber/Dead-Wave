@@ -230,23 +230,16 @@ Owner: Grokbot (zombies section). Caller: ChatGPT's minimap boss pip.
 - `getGuardianAlive()` → `null` unless the wave plan has a guardian (`wavePreview.hasGuardian`)
   and one is alive; else `{ x, z, hp, hpMax, caveIndex }` from the live guardian. Read-only.
 
-## Scripted-death replays (GB-20, approved D-18, 2026-09-24)
+## Scripted-death replays: withdrawn (D-20, 2026-09-24)
 
-Owner: Grokbot (scripted deaths). Caller: ChatGPT's death screen (GP-13). Spec:
-`docs/specs/replays.md`.
+The replay helpers and the `scripted-death-replay` event were removed by GB-22 (Jerry's call:
+only two deaths have a cutscene). Nobody may call them. `tt_death_log` and the death catalogue stay.
 
-- `listScriptedDeathReplays()` → `[{ id: 'cave' | 'tentacle', causeKey, unlocked, labelKey,
-  descriptionKey }]`; `unlocked` comes from `tt_death_log` (`caveguard`, `tentacles`).
-- `canReplayScriptedDeath(id)` → boolean: unlocked, nothing scripted running, not in a live run
-  (the death screen or the title).
-- `beginScriptedDeathReplay(id, opts?)` → `{ ok: true }` or `{ ok: false, reason: 'unknown' |
-  'busy' | 'alive' | 'locked' }`. `opts.caveIndex` picks the cave; else the cave named in the last
-  death, else the chalk cave.
-- `isScriptedDeathReplay()` → true while a replay runs.
-- `dw-game` `{ type: 'scripted-death-replay', id, phase: 'start' | 'end' | 'abort' }`.
-- A replay never calls `endGame`, never writes `tt_*`, and leaves the day, bank, wave plan and
-  world as they were (t56). It must also play on the death screen and put the player, camera and
-  `body` classes back: GB-21.
+## Pistol ammo (GB-23, 2026-09-24)
+
+Owner: Grokbot (weapons). The pistol has its own calibre, `.45` (the Uzi keeps 9mm): pack
+`{ n: 36, cost: 12 }`, reserve cap 120, and a new run starts with 36 rounds of it. `grantSupply`
+takes `ammo:.45`. UI text: `calibre.45` in `ui/strings.js` (ChatGPT, GP-19).
 
 ## Guardian first-blood reward (GP-12, 2026-09-24)
 
@@ -254,3 +247,43 @@ Owner: ChatGPT (`game/economy.js` and its listener in the page). Consumes `guard
 (D-16, GB-17): only `planned: true` with a finite `x, z`, once per run. Grants the mortar blueprint
 through `grantBuildBlueprint`, or one 80-value skull drop at `x, z` if it's owned. No Cash, no
 purchase event. No new export.
+
+## Music director (CL-21, D-21, 2026-09-24)
+
+Owner: Claude (the music director in `core/audio.js`); Cursor owns the engine around it.
+- The director listens for `dw-game` `alarm-started` (published by the HQ alarm) and starts the
+  fight on it. Whoever changes how a wave is started must keep publishing it.
+- A wave ending (the phase going `wave` → `prep` with the run still on) is the last kill: the
+  release cue fires there. Nothing else may flip the phase back to prep mid-wave.
+- `assets/soundtrack/music.json` holds pools, hit points and stings; names are relative to
+  `assets/soundtrack/`, without `.mp3`. Claude keeps it.
+- The director also reads `briefing-open` and `briefing-closed` (the music halves while the
+  briefing is open, CL-24). Keep publishing them.
+- `AudioSys.musicState()` → `{ stage, mood, deckTrack, deckLevel, volume, prox, briefDuck, sting,
+  overlapFrames, lastCue, pools, hits, stings, gains, ... }`, read-only, for tests and the overlay.
+  `stage` is calm | alarm | gap | fight | relief | after | end.
+- `AudioSys.musicCue(name)`: other owners say what happened ('achievement', 'airdrop',
+  'objective', 'poi_cleared'); the director picks the sound (CL-23).
+- The page's audio-direction state also carries `ember` (Ember Night), `guardian` (any guardian
+  up) and `special` (phase 3's special night: 'fog', 'swarm', 'siegenight', 'silent', or null).
+
+## Cave pokes (GB-26, D-22, 2026-09-24)
+
+Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sounds; tests.
+- `noteCaveMouthHit(caveIndex, opts?)` → true when this hit starts a poke (three hits into one
+  mouth within 1.5 s, or `{ explosive: true }`). Not while the player is in the grab band.
+- `triggerCavePoke(caveIndex)` → true if a guardian came out; `getCavePokeState()` →
+  `{ dayCount, used }` (once per cave per day, two a day).
+- A poked guardian is `planned: false`, drops 75 cash, never fires first-blood.
+- `dw-game` `{ type: 'cave-guardian', caveIndex, x, z, phase: 'aggro' | 'emerge' | 'retreat' | 'death' }`.
+- Pokes work in prep and in a wave, not while a modal is open; a poked guardian goes back into
+  the dark when the alarm sounds (GB-27).
+
+## Wave finisher (CL-26, 2026-09-24)
+
+Owner: Claude. The last kill of a wave (the plan spent, nobody left alive) runs the finisher in the
+page: red pulse, slow motion for the relief sting's length, a kill cam on the body.
+- `dw-game` `{ type: 'wave-last-kill', x, z, typeKey, duration }`: the music director cuts the
+  fight, plays `sting_clear` alone and silences every other sound until it ends.
+- `AudioSys.cueLength(name)` → seconds (0 until it's known); the finisher uses it for its length.
+- Test hooks: `TT.getWaveFinisher()`, `TT.getSlowMo()`, `TT.drainWavePlanDbg()`.
