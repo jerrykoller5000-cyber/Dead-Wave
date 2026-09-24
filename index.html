@@ -26201,13 +26201,13 @@
         if (el.animate) el.animate([{ opacity: 0 }, { opacity: 1, offset: 0.12 }, { opacity: 0.35, offset: 0.45 }, { opacity: 0 }], { duration: 900, easing: 'ease-out' });
       } catch (_) {}
     }
-    // CL-31 (Jerry): a fast 360 around the body for the first 70% of the sting, zooming
-    // in as it goes; then a slow pan and push onto the marine's face for the last 30%;
-    // then 0.8 s easing back to the play camera. The camera never goes inside the ground,
-    // a build or a solid: if the line from what it looks at to where it wants to be is
-    // blocked, it comes in short of the block.
-    const FIN_ORBIT = 0.7, FIN_RETURN_S = 0.8;
-    const _finFace = new THREE.Vector3(), _finFwd = new THREE.Vector3(), _finA = new THREE.Vector3(), _finALook = new THREE.Vector3(), _finB = new THREE.Vector3();
+    // CL-31, revised by CL-33 (Jerry): a 360 around the body for the whole relief sting,
+    // zooming in as it goes, then 0.8 s easing back to the play camera. (The push onto the
+    // marine's face for the last 30% is gone: it did not look as good as hoped.) The camera
+    // never goes inside the ground, a build or a solid: if the line from the body to where
+    // it wants to be is blocked, it comes in short of the block.
+    const FIN_RETURN_S = 0.8;
+    const _finA = new THREE.Vector3(), _finALook = new THREE.Vector3();
     function finisherClip(look, pos) {
       // Pull pos back towards look until nothing solid sits between them.
       let t = 1;
@@ -26247,29 +26247,14 @@
       }
       const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
       const gy = Math.max(F.y, sampleHeight(F.x, F.z));
-      const tA = F.dur * FIN_ORBIT;
-      // Phase A: the 360.
-      const u = Math.min(1, t / tA);
+      // The 360, over the whole sting.
+      const u = Math.min(1, t / F.dur);
       const ang = F.a0 + Math.PI * 2 * ease(u);
       const rad = 4.6 - 1.8 * ease(u);                 // zooming in as it circles
       _finALook.set(F.x, gy + 0.55, F.z);
       _finA.set(F.x + Math.cos(ang) * rad, gy + 1.5 - 0.4 * ease(u), F.z + Math.sin(ang) * rad);
       finisherClip(_finALook, _finA);
-      let wantPos = _finA, wantLook = _finALook;
-      if (t > tA) {
-        // Phase B: pan and push onto the marine's face.
-        const hg = marine.userData.headG;
-        // The eyes: 0.2 above the head pivot, just in front of it (scale-safe).
-        if (hg) { hg.updateWorldMatrix(true, false); hg.localToWorld(_finFace.set(0, 0.2, 0.1)); } else _finFace.copy(player.position).setY(player.position.y + 1.42);
-        _finFwd.set(Math.sin(player.rotation.y), 0, Math.cos(player.rotation.y));
-        _finPos.copy(_finFace).addScaledVector(_finFwd, 0.85);
-        _finPos.y += 0.04;
-        finisherClip(_finFace, _finPos);
-        const v = ease((t - tA) / Math.max(0.1, F.dur - tA));
-        _finB.copy(_finA).lerp(_finPos, v);            // (no aliasing: lerpVectors into an argument breaks here)
-        _finTgt.copy(_finALook).lerp(_finFace, Math.min(1, v * 1.4));
-        wantPos = _finB; wantLook = _finTgt;
-      }
+      const wantPos = _finA, wantLook = _finALook;
       // In over 0.4 s at the start, out over FIN_RETURN_S after the sting.
       const w = Math.min(ease(t / 0.4), 1 - ease((t - F.dur) / FIN_RETURN_S));
       camera.position.lerp(wantPos, w);
@@ -26937,8 +26922,8 @@
     }
 
 
-    // The morning ledger. Written when a day begins. Play again comes back to it.
-    // Quitting to the menu throws it away. Builds and the world are not in it.
+    // The morning ledger. Tests can save and load it. Play, and Play again, always
+    // start a new run on day 1. They do not resume it.
     const DAY_START_KEY = 'tt_day_start';
     let quietPrep = false;
     let pendingObjectiveRestore = null;
@@ -36497,7 +36482,7 @@
       resetObjectiveCombat();
       resetPerks();
       resetEconomy();
-      const resume = readDayStart();
+      clearDayStart();
       bank = 40; // seed money: one decision in the first prep, not a shopping spree
       medkits = 0; sinceHurt = 999; clearMedDrops();
       updateCoinHud();
@@ -36513,13 +36498,7 @@
       resetCameraRig();
       zoomHeld = false;
       // lasersEnabled persists across matches (session)
-      if (resume && resume.v === 1 && (resume.day | 0) >= 1) {
-        applyDayStart(resume);
-        quietPrep = true;
-        day = Math.max(0, (resume.day | 0) - 1);
-        startPrep();
-        quietPrep = false;
-      } else startPrep();
+      startPrep();
       updateHpHud();
       updateWaveHud();
       updateTacticalHud();

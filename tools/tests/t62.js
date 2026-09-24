@@ -1,4 +1,4 @@
-// t62 — CU-5: the morning ledger round-trips cash. Quitting clears it.
+// t62 — CU-5 / CU-25: the morning ledger round-trips cash. Play does not resume it.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   try {
