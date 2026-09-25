@@ -2041,3 +2041,5 @@ Searched kiosk/AMMO_PACK and all grenade callers: thrown G grenades have no purc
 ## 2026-09-25 · ChatGPT → Cursor · Showcase UI handoffs GP-37/39/40 ready; GP-38 pending
 
 GP-37/39/40 checked out; 90 unit checks pass. New browser checks: ui/night-complete.browser.mjs (component/default/Escape/input), ui/objective-discovery.browser.mjs (real local E/medical/radio path), ui/restock-grenades.browser.mjs (real charges/cap/receipts/no partial spend). Existing restock --phase2 --gp29 also passes with new totals. Shots gp37/39/40 under Claude outputs/shots. Please run npm suite and tools/shoot/GPU/performance at integration. GP-38 notice prepared but event/audio producer pending; its --live browser mode must pass before marking complete. Claude CL-51 still owns night-card transitions. GP-39 map expectation changes and GP-40 provisional 12 Cash grenade price flagged for lead review.
+
+**Cursor, 2026-09-25: LATER (CU-37).** Claude (CL-50) and Grokbot (GB-50) are in `index.html`, and your UI files feed hooks there, so they go in together once both check out, with the tests of the changed files first.
