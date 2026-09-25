@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 07:30 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 08:55 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -29,6 +29,7 @@ Loop feel comes first (D-35). Work your queue top to bottom, one check-in and on
 "after XX-n" waits for it. Don't stop to ask Jerry whether to go on.
 - **Grokbot** · GB-55 · handoffs/2026-09-25-grokbot-GB-55.md
 - **Grokbot** · GB-56 · handoffs/2026-09-25-grokbot-GB-56.md
+- **Grokbot** · GB-57 · handoffs/2026-09-25-grokbot-GB-57.md
 - **Grokbot** · GB-50 · handoffs/2026-09-25-grokbot-GB-50.md
 - **Grokbot** · GB-51 · handoffs/2026-09-25-grokbot-GB-51.md
 - **Grokbot** · GB-52 · handoffs/2026-09-25-grokbot-GB-52.md
@@ -44,6 +45,8 @@ Loop feel comes first (D-35). Work your queue top to bottom, one check-in and on
 - **ChatGPT** · GP-39 · handoffs/2026-09-25-chatgpt-GP-39.md
 - **ChatGPT** · GP-40 · handoffs/2026-09-25-chatgpt-GP-40.md
 - **ChatGPT** · GP-41 · handoffs/2026-09-25-chatgpt-GP-41.md
+- **ChatGPT** · GP-42 · handoffs/2026-09-25-chatgpt-GP-42.md
+- **ChatGPT** · GP-43 · handoffs/2026-09-25-chatgpt-GP-43.md
 - **Claude** · CL-50 · handoffs/2026-09-25-claude-CL-50.md
 - **Claude** · CL-49 · handoffs/2026-09-25-claude-CL-49.md
 - **Claude** · CL-51 · handoffs/2026-09-25-claude-CL-51.md
@@ -67,6 +70,10 @@ a card blocked on another agent, and a next task that says "after the split" or 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-25, 08:50Z · "Go with what you think."** Jerry went to sleep and left the two open questions to Claude.
+  Q-1: the load budget is met by the splash (D-36). Daytime ideas 1 and 2 go in for Saturday: tonight's scouting
+  report on the HQ board, and bounties on the HQ board (D-37; handoffs/2026-09-25-claude-CL-54.md). GB-57, GP-42, GP-43.
 
 - **2026-09-25, 06:00Z · The showcase (Saturday).** Jerry played day 1: the music is sounding really nice (CL-38 is
   a go). He shows the game on Saturday, so tonight is the fundamentals of the core loop and performance. Claude runs
@@ -189,6 +196,13 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-37 · Daytime: a scouting report and bounties (Claude, for Jerry).** In prep the HQ board shows tonight's plan
+  (the caves, the pushes, the trick), and tonight's caves are marked on the minimap. From night 2 the board also posts one
+  or two bounties: a camp held by guards sized to the night; clear it before the alarm for a reward. Both live only on
+  the HQ board and the minimap (GP-39: nothing pops up by itself). CL-54 has the reasons.
+- **D-36 · The load budget is met by the splash (Claude, for Jerry).** The splash can't be skipped and runs about 14 s;
+  the game is ready under it at 6-7 s on Jerry's GPU. No shader-compile move before Saturday; CU-36 keeps only the
+  first-use stall fixes.
 - **D-35 · Loop feel first (Jerry).** If the night runs out, the flow from the alarm to the next morning (CL-49,
   CL-50, CL-51, GP-37, GB-50) is what must be in for Saturday; then audio, then balance, then the rest.
 - **D-34 · The end of a night is a choice (Jerry).** The last kill leads to the **Night N Complete** card with Next Night
@@ -438,21 +452,21 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-40** Grokbot's GB-55 finding: `startMatch` in tools/tests/lib.js waits a fixed 10 s, but the insertion is 9 s of
+- [x] **CU-40** Grokbot's GB-55 finding: `startMatch` in tools/tests/lib.js waits a fixed 10 s, but the insertion is 9 s of
   game time and on a slow box it still owns the camera. Make it wait for the insertion to end (or add a TT.isDeploying()),
   so every test gets it (t4, t58, t75 to t79).
-- [>] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
+- [x] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
   `node tools/shoot.mjs pit lake-shore` plus two closer views over the pit funnel at noon (the little black specks Jerry
   sees over the runes: what are they?), and a play-through of one alarm (the sky shot), one last kill (the 3 s finisher)
   and both buttons on the Night Complete card, with shots or a short capture. Report to Claude.
-- [>] **CU-36** **Performance for Saturday.** The one-time stalls first (was GB-48): the finisher's two emissive variants
+- [x] **CU-36** **Performance for Saturday.** The one-time stalls first (was GB-48): the finisher's two emissive variants
   (CU-29) and the goggles' post effect (CU-35) compiled in the staged pre-roll, so nothing hitches the first
   time. Then the warm title time (7-8 s against 5 s) and anything the day 1-10 run below shows. Measure in a
   visible window on the real GPU.
-- [ ] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
+- [>] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
   then commit and push (rule 6; Claude commits too, so check in with `--touch "git"`). A flake gets rerun
   alone before anyone chases it.
-- [ ] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
+- [x] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
   Antigravity is out): fps per night, the worst frames, what felt wrong, shots of each alarm and each finisher.
   Report to Claude.
 - [x] **CU-28** **S1 for the suite (CU-A1).** The test page dismisses the splash once `window.TT` exists
@@ -534,6 +548,12 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   to 20 with a scripted marine at the HQ (godmode off where you can, on where you must) and log each night's length, the
   pushes and breathers, the worst pile-ups, stuck or lost zombies, and what killed him. Fix what drags or breaks; put the
   table in the handoff for ChatGPT's GP-41 and for Claude.
+- [ ] **GB-57** **After GB-56. Bounties, the combat side (D-37).** From night 2, each prep picks one or two POIs
+  (not the one nearest the HQ, not the same as yesterday's) and posts guards there like GB-43, sized to the night: 3-4
+  early, up to 6-8 with a specialist later. Publish `bounty-posted` {kind, index, reward, guards} when they're placed and
+  `bounty-done` {kind, index, reward} on that post's `poi-cleared`, and pay the reward then (skulls into the bag, so it
+  still has to be banked). Rewards from GP-41's table (ask ChatGPT). A bounty that isn't cleared by the alarm just ends:
+  its guards join nobody and go. Contract in docs/contracts.md for ChatGPT. New test, `--review`.
 - [x] **GB-50** **S1 for Saturday (Jerry, item 6).** Zombies clip through the marine when they attack. Hold every attacker
   on a contact ring round the marine (they crowd him, they never stand inside him), and make a hit **land**: the
   marine is knocked back along the blow (a short slide, more for a brute), stumbles for a beat (a lurch in the
@@ -657,7 +677,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   stop appearing on their own: nothing about a site shows until the marine is close enough to see its **E** prompt.
   The E prompt stays. Coach lines that point at a site go too, except GP-35's first line on day 1.
 - [x] **GP-40** **Restock all ammo** refills the grenades too, at the grenades' price (Jerry).
-- [>] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
+- [x] **GP-42** **Tonight's scouting report (D-37).** In prep, the HQ board (the briefing) shows tonight's plan from
+  `TT.getWavePreview().night`, frozen at prep: the caves by name, how many pushes, the trick in a few words ("runners
+  from two caves", "a bomber pack"), and the rest nights marked as rests. Tonight's caves get a small mark on the
+  minimap during prep. Nothing pops up (GP-39): the report is where the player goes to read it.
+- [ ] **GP-43** **After GB-57. Bounties on the HQ board (D-37).** List the day's bounties on the board: the camp's
+  name, the reward, "before the alarm". Once the board has been read, the camp gets a minimap mark. On `bounty-done`, a
+  small notice in GP-38's stack ("Bounty: Trapper's Camp +40 skulls"). A bounty still open at the alarm quietly drops off.
+- [x] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
   what the next one needs you to buy. Every night should leave the player able to buy one thing that matters, and
   the kiosk's prices should climb with the waves. Work from GB-53's table; agree weapon numbers with Grokbot
   (GB-52). Numbers in the handoff.

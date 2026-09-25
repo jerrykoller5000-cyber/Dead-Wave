@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-39 Pit specks at noon; alarm sky, 3 s finisher, Night Complete card, with shots
-touching: qa/shots/2026-09-25-CU-39, qa/run-cu39.mjs, qa/2026-09-25-CU-39.md
-since: 2026-09-25T08:06Z
-next: CU-36 Performance for Saturday. The one-time stalls first (was GB-
+task: CU-37 Commit the batch that doesn't touch index.html (GB-55, crew files)
+touching: git
+since: 2026-09-25T09:08Z
+next: CU-37 Integration, all night. Every time a batch of tasks lands: t
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-CU-32.md
+last-report: handoffs/2026-09-25-cursor-CU-38.md
 
 ## Notes
 

@@ -2,12 +2,12 @@
 
 state: active
 model: Grokbot
-task: GB-55 t4 camera check on the live game: re-base like t58
-touching: tools/tests/t4.js
-since: 2026-09-25T08:04Z
-next: —
+task: GB-56 Play nights 1-20 headless: log length, pushes, pile-ups, stuck, deaths; fix combat drags
+touching: tools/nightsim.mjs (new harness), index.html (combat fixes found by the run)
+since: 2026-09-25T08:13Z
+next: GB-56 Play the 20 nights through, headless. With GB-53's plans, GB
 blocked-on: —
-last-report: handoffs/2026-09-25-grokbot-GB-49.md
+last-report: handoffs/2026-09-25-grokbot-GB-55.md
 
 ## Notes
 

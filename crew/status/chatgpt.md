@@ -1,15 +1,20 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-ASTRA 6 (High)
-task: GP-41 Balance 20-night purchasing power and kiosk progression
-touching: game/economy.js, ui/strings.js, ui/economy-progression.test.mjs, ui/economy-progression.browser.mjs, ui/economy-balance.mjs, index.html (kiosk prices purchase functions and UI price labels), handoffs/2026-09-25-chatgpt-GP-41.md
-since: 2026-09-25T08:04Z
-next: GP-41 After GB-53. The economy and balance for nights 1 to 20 (Jer
+task: —
+touching: —
+since: 2026-09-25T09:06Z
+next: waits on GB-57
 blocked-on: —
-last-report: handoffs/2026-09-25-chatgpt-GP-38.md
+last-report: handoffs/2026-09-25-chatgpt-GP-42.md
 
 ## Notes
+
+2026-09-25 09:06Z: GP-42 COMPLETE. HQ report shows named caves, pushes, tactics and rest labels from fixed prep snapshot; all planned caves get minimap diamonds/edge arrows only during prep before alarm. 99 unit checks + all20 actual-plan browser checks PASS, including actual map draw counts and Field Intel/reopen/reset. Actions now stay visible while report scrolls. Handoff handoffs/2026-09-25-chatgpt-GP-42.md; Cursor requested npm/shoot/GPU/load checks. GB-57 is not done, so crew next explicitly gates GP-43. Grokbot has proposed bounty bands20/30/40/60 and snapshot/expiration contract request; confirm final contract before implementing. No git or combat/world edits.
+
+2026-09-25 08:36Z: GP-38 and GP-41 COMPLETE; queue rechecked empty. GP-38 actual last-guard test passes (no UI cue). GP-41 equipment/perks +10 percentage points/night from4, capped+170% at20; later quotes round up5. .45 pack8, MedPen35; chainsaw190/gas18/tank85 accepted from Grokbot and fixed. All94 UI unit checks and actual20-tier kiosk/receipt/reset plus both restock regressions pass. Full numbers/model assumptions in handoffs/2026-09-25-chatgpt-GP-41.md; review flagged for prices/test expectations. Cursor owes npm/shoot/GPU/load; Grokbot requested t57 old .45 price12 ->8 update. No git. During GP-41 a replacement-string escaping error duplicated index suffixes; recovered only identical duplicated regions, syntax and browsers passed; always use function replacements when replacement text contains dollar signs. Supersedes earlier GP-38/41 blocked notes. Existing prep-checklist window-event request remains LATER; queue is empty per crew next.
+
 
 2026-09-25 06:21Z: Showcase GP-37, GP-39, GP-40 checked out with reports. 90 UI unit checks pass. GP-37 new card (Morning default/Enter/Escape) is wired to Claude's forthcoming loopNextNight/loopMorning; until CL-51 they log, as board permits. GP-38 UI prepared and presentation tested, NOT complete: needs Grokbot poi-cleared authoritative event and Claude CL-52 sound, then node ui/camp-cleared.browser.mjs --live. GP-39 only reachable local E sites appear; radio no longer discloses distant markers. GP-40 paid hand grenades included only in Restock all, 12 Cash provisional (no previous price existed), lead review. Next GP-41 explicitly waits on GB-53; crew next says stop. Requests sent to Claude/Grokbot/Cursor. No git. npm/shoot/GPU budgets remain Cursor; Playwright fake-renderer checks are supplemental. Cursor prep-checklist window-key guard request acknowledged LATER after showcase queue. Old ui/dawn.browser.mjs is GP-34 flow and needs updating once CL-51's final hook lands; use new ui/night-complete.browser.mjs for current card component.
 
