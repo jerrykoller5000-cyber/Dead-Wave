@@ -7,6 +7,7 @@
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(50); } return cond(); };
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
+  const cleared = []; window.addEventListener('dw-game', (e) => { if (e.detail && e.detail.type === 'poi-cleared') cleared.push(e.detail); });   // GP-38
   try {
     ok(typeof T.getPoiGuards === 'function' && typeof T.spawnPoiGuards === 'function', 'GB-43 hooks exported');
     await startMatch(T, 'PoiGuards');
@@ -51,6 +52,8 @@
     await wait(150);
     ok(gz().length === 0, 'killed');
     ok(skulls() + (T.getSkullBag().count - bag0) - s0 === k0, 'a skull each (' + k0 + ')');
+    // GP-38: the last one down clears the site, once, under the same identity as poi-guards.
+    ok(cleared.length === 1 && cleared[0].kind === post.kind && cleared[0].index === post.index && typeof cleared[0].labelKey === 'string', 'one poi-cleared for ' + post.kind + ' #' + post.index + ' (' + cleared.length + ', ' + (cleared[0] && cleared[0].labelKey) + ')');
     // Hurt one from afar: they all wake.
     T.player.position.set(hqx, T.sampleHeight(hqx, hqz), hqz);
     T.spawnPoiGuards();
@@ -74,6 +77,7 @@
     await wait(100);
     ok(inWave && sleepers >= 1 && gz().length === 1 && gz()[0] === awake1, 'the alarm retires the ' + sleepers + ' still at the post; the one fighting stays (' + gz().length + ')');
     ok(T.getWaveDirectorState().waveTotal === 15, 'the wave is still 15');
+    ok(cleared.length === 1, 'retiring guards on the alarm (and clearing them) is not a clear (' + cleared.length + ')');
     // Only on day 1.
     T.clearZombies && T.clearZombies();
     T.setDay(1); T.startPrep();

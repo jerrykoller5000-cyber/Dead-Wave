@@ -438,7 +438,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
+- [>] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
   `node tools/shoot.mjs pit lake-shore` plus two closer views over the pit funnel at noon (the little black specks Jerry
   sees over the runes: what are they?), and a play-through of one alarm (the sky shot), one last kill (the 3 s finisher)
   and both buttons on the Night Complete card, with shots or a short capture. Report to Claude.
@@ -647,14 +647,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   eyebrow; the title is "Night {n} Complete"; the night's numbers stay; two buttons, **Next Night** and **Proceed to
   Morning** (Proceed is the default). Next Night calls `loopNextNight()` and Proceed calls `loopMorning()` (Claude
   adds both in `index.html` with CL-51; until then they log). Keep the pause and the input guard. Esc is Proceed.
-- [>] **GP-38** A small **camp cleared** banner when the last zombie at a POI dies (Jerry): the camp's name and
+- [x] **GP-38** A small **camp cleared** banner when the last zombie at a POI dies (Jerry): the camp's name and
   "Cleared", two seconds, out of the way. Claude's new two-second stinger plays with it (CL-52); publish a
   `poi-cleared` game event with the POI's name if there isn't one.
 - [x] **GP-39** No day missions popping up by themselves (Jerry). "Check the ranger camp", "medical supplies" and the like
   stop appearing on their own: nothing about a site shows until the marine is close enough to see its **E** prompt.
   The E prompt stays. Coach lines that point at a site go too, except GP-35's first line on day 1.
 - [x] **GP-40** **Restock all ammo** refills the grenades too, at the grenades' price (Jerry).
-- [ ] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
+- [>] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
   what the next one needs you to buy. Every night should leave the player able to buy one thing that matters, and
   the kiosk's prices should climb with the waves. Work from GB-53's table; agree weapon numbers with Grokbot
   (GB-52). Numbers in the handoff.

@@ -42,17 +42,17 @@ export function createObjectiveTracker() {
     for(const id of duplicates)next.delete(id);
     sequence=snapshot.sequence;active=snapshot.active===true;player=point(snapshot.player)?{x:snapshot.player.x,z:snapshot.player.z}:null;sites=next;
     if(trackedId&&!OPEN.has(sites.get(trackedId)?.state)) {
-      notice=text(sites.get(trackedId)?.state==='claimed'?'objectives.claimed':'objectives.unavailable');trackedId=null;
+      notice='';trackedId=null;
     }
     return true;
   }
   function track(id) {
-    if(!active||!OPEN.has(sites.get(id)?.state))return false;
+    if(!active||!OPEN.has(sites.get(id)?.state)||!sites.get(id)?.reachable)return false;
     trackedId=id;notice='';return true;
   }
   function untrack(){trackedId=null;notice='';}
   function read() {
-    const markers=[...sites.values()].filter(s=>OPEN.has(s.state)).map(site=>{
+    const markers=[...sites.values()].filter(s=>OPEN.has(s.state)&&s.reachable).map(site=>{
       const def=DEFS.get(site.id),title=text(def.titleKey);
       const distance=player?Math.round(Math.hypot(site.position.x-player.x,site.position.z-player.z)):null;
       return {id:site.id,icon:def.icon,title,position:{...site.position},selected:site.id===trackedId,distance,

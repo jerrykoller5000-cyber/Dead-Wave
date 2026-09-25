@@ -1,15 +1,18 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-ASTRA 6 (High)
-task: —
-touching: —
-since: 2026-09-25T04:08Z
-next: —
+task: GP-41 Balance 20-night purchasing power and kiosk progression
+touching: game/economy.js, ui/strings.js, ui/economy-progression.test.mjs, ui/economy-progression.browser.mjs, ui/economy-balance.mjs, index.html (kiosk prices purchase functions and UI price labels), handoffs/2026-09-25-chatgpt-GP-41.md
+since: 2026-09-25T08:04Z
+next: GP-41 After GB-53. The economy and balance for nights 1 to 20 (Jer
 blocked-on: —
-last-report: handoffs/2026-09-25-chatgpt-GP-36.md
+last-report: handoffs/2026-09-25-chatgpt-GP-38.md
 
 ## Notes
+
+2026-09-25 06:21Z: Showcase GP-37, GP-39, GP-40 checked out with reports. 90 UI unit checks pass. GP-37 new card (Morning default/Enter/Escape) is wired to Claude's forthcoming loopNextNight/loopMorning; until CL-51 they log, as board permits. GP-38 UI prepared and presentation tested, NOT complete: needs Grokbot poi-cleared authoritative event and Claude CL-52 sound, then node ui/camp-cleared.browser.mjs --live. GP-39 only reachable local E sites appear; radio no longer discloses distant markers. GP-40 paid hand grenades included only in Restock all, 12 Cash provisional (no previous price existed), lead review. Next GP-41 explicitly waits on GB-53; crew next says stop. Requests sent to Claude/Grokbot/Cursor. No git. npm/shoot/GPU budgets remain Cursor; Playwright fake-renderer checks are supplemental. Cursor prep-checklist window-key guard request acknowledged LATER after showcase queue. Old ui/dawn.browser.mjs is GP-34 flow and needs updating once CL-51's final hook lands; use new ui/night-complete.browser.mjs for current card component.
+
 
 2026-09-25 04:08Z: GP-33/34/35/36 COMPLETE. GP-33 real kill/pickup proof: 8
 kills -> 8 skulls worth9, coach visible. GP-34 dawn card runs after camera return,

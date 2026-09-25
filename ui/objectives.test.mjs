@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { OBJECTIVE_SITES,createObjectiveTracker,projectObjectiveMarkers } from './objectives.js';
 const radio='objective:radio-repair',ranger='objective:ranger-cache';
-const site=(id=radio,extra={})=>({id,state:'available',position:{x:30,z:40},reward:{key:'supply.medpens',params:{count:2}},...extra});
+const site=(id=radio,extra={})=>({id,state:'available',reachable:true,position:{x:30,z:40},reward:{key:'supply.medpens',params:{count:2}},...extra});
 const snapshot=(extra={})=>({runId:'one',sequence:0,active:true,player:{x:0,z:0},sites:[site()],...extra});
 test('seven canonical keyed sites; only discovered nonterminal sites get markers',()=>{
   assert.equal(OBJECTIVE_SITES.length,7);assert.equal(new Set(OBJECTIVE_SITES.map(s=>s.id)).size,7);
@@ -11,16 +11,16 @@ test('seven canonical keyed sites; only discovered nonterminal sites get markers
 });
 test('one tracked site, real distance, no reachability invented from proximity',()=>{
   const c=createObjectiveTracker();c.update(snapshot({sites:[site(),site(ranger)]}));
-  c.track(radio);assert.equal(c.read().tracker.distance,50);assert.equal(c.read().tracker.prompt,'');
+  c.track(radio);assert.equal(c.read().tracker.distance,50);assert.equal(c.read().tracker.prompt,'Hold E for 6 seconds to restore the radio');
   c.track(ranger);assert.equal(c.read().markers.filter(m=>m.selected).length,1);assert.equal(c.read().tracker.id,ranger);
   c.untrack();assert.equal(c.read().tracker,null);
 });
-test('completed or removed tracked target clears tracking with honest status',()=>{
-  for(const [state,notice] of [['claimed','Supplies collected'],['unavailable','Site unavailable']]){
+test('completed or removed tracked target clears tracking without remote announcements',()=>{
+  for(const [state,notice] of [['claimed',''],['unavailable','']]){
     const c=createObjectiveTracker();c.update(snapshot());c.track(radio);
     c.update(snapshot({sequence:1,sites:[site(radio,{state})]}));assert.equal(c.read().tracker,null);assert.equal(c.read().notice,notice);assert.equal(c.read().markers.length,0);
   }
-  const c=createObjectiveTracker();c.update(snapshot());c.track(radio);c.update(snapshot({sequence:1,sites:[]}));assert.equal(c.read().notice,'Site unavailable');
+  const c=createObjectiveTracker();c.update(snapshot());c.track(radio);c.update(snapshot({sequence:1,sites:[]}));assert.equal(c.read().notice,'');
 });
 test('repair progress is supplied, clamped and indeterminate when absent; interruption is explicit',()=>{
   const c=createObjectiveTracker();c.update(snapshot({sites:[site(radio,{state:'active',progress:.5,reachable:true})]}));c.track(radio);
@@ -60,4 +60,11 @@ test('map projection belongs to caller; off-map and invalid projections are omit
   assert.equal(projectObjectiveMarkers(markers,()=>({x:.2,y:.7}))[0].mapX,.2);
   for(const p of [null,{x:NaN,y:0},{x:1.1,y:.5},{x:0,y:-1}])assert.deepEqual(projectObjectiveMarkers(markers,()=>p),[]);
   assert.deepEqual(projectObjectiveMarkers(markers,null),[]);
+});
+
+test('only an owner-reachable site can appear; departure hides even a previously tracked or radio-revealed site',()=>{
+ const c=createObjectiveTracker();c.update(snapshot({sites:[site(radio,{reachable:false})]}));assert.equal(c.track(radio),false);assert.deepEqual(c.read().markers,[]);
+ c.update(snapshot({sequence:1}));assert(c.track(radio));assert(c.read().tracker.prompt);
+ c.update(snapshot({sequence:2,sites:[site(radio,{reachable:false})]}));assert.deepEqual(c.read().markers,[]);assert.equal(c.read().tracker,null);assert.equal(c.read().notice,'');
+ c.update(snapshot({sequence:3}));assert(c.read().tracker.prompt);
 });

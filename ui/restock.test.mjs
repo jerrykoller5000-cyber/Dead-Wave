@@ -24,3 +24,11 @@ test('invalid data cannot produce free, negative or unsafe restock prices',()=>{
    assert.throws(()=>quoteRestock([{...pistol,...bad}]),TypeError);
  assert.throws(()=>quoteRestock([{...pistol,capacity:Number.MAX_SAFE_INTEGER,price:999}]),RangeError);
 });
+
+test('hand grenades add one paid unit per missing slot, including Grenadier capacity',()=>{
+ const grenade={key:'hand-grenade',current:2,capacity:5,quantity:1,price:12};
+ assert.deepEqual(quoteRestock([grenade]),{cost:36,rows:[{key:'hand-grenade',packs:3,cost:36}]});
+ assert.equal(quoteRestock([pistol,grenade]).cost,72);
+ assert.equal(quoteRestock([{...grenade,current:0,capacity:8}]).cost,96);
+ assert.equal(quoteRestock([{...grenade,current:8}]).cost,0);
+});

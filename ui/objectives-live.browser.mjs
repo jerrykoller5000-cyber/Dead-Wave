@@ -59,13 +59,12 @@ try {
  await page.waitForFunction(()=>gp11.state().revealed,null,{timeout:15000});
  await page.keyboard.up('KeyE');
  assert.equal((await state('radio-repair')).state,'ready-to-claim');
- assert.equal(await page.evaluate(()=>gp11.markers().length),7);
+ assert.equal(await page.evaluate(()=>gp11.markers().length),1);
  assert.equal(await page.evaluate(()=>gp11.intel()),false,'radio does not unlock Field Intel');
  assert.equal(await page.evaluate(()=>TT.getObjectiveProps().props['objective:radio-repair'].state),'repaired');
  await page.screenshot({path:path.join(shots,'radio.png')});
  await page.keyboard.press('Tab');
- await page.locator('[data-site="objective:medical-convoy"]').click();
- assert.match(await page.locator('#objectiveHud').innerText(),/medical/i);
+ assert.equal(await page.locator('[data-site="objective:medical-convoy"]').count(),0,'GP-39: distant medical site stays hidden even after radio repair');
  await page.screenshot({path:path.join(shots,'map.png')});
  await page.keyboard.press('Escape');await page.keyboard.press('Tab');
  await visit('medical-convoy');

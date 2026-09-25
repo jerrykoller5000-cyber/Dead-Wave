@@ -3,7 +3,10 @@
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const near = (a, b, eps) => Math.abs(a - b) <= eps;
   try {
-    document.getElementById('modeHunt').click(); await wait(1200);
+    // GB-49: the shared start (lib.js). A bare Play click with a 1.2 s wait left the insertion
+    // flying the camera (94 m out, 88 m jumps) for the whole check.
+    await startMatch(T, 'Mortar');
+    T.clearZombies && T.clearZombies();
     const p = T.player.position;
     for (const t of T.trees) { t.alive = false; t.stump = false; }
     for (const r of T.rocks) r.alive = false;
@@ -41,12 +44,24 @@
     ok(!nan, 'camera/player positions stay finite');
     // Impact must stay on the camera-forward side of the tube (not behind into the view).
     const toImpactX = sol.tx - m.x, toImpactZ = sol.tz - m.z;
-    // camYawCurrent is not exported; use camera→player as view forward.
-    const viewX = p.x - T.camera.position.x, viewZ = p.z - T.camera.position.z;
+    // GB-49: the camera's own heading. Camera-to-marine stopped being the view once the
+    // follow-cursor pan (camPanX) slid the camera and its look point toward the reticle:
+    // aiming west pushed the camera west of him, and camera-to-marine swung ~40 deg east.
+    const look = T.camera.getWorldDirection(new T.camera.position.constructor());
+    const viewX = look.x, viewZ = look.z;
     const vLen = Math.hypot(viewX, viewZ) || 1;
     const iLen = Math.hypot(toImpactX, toImpactZ) || 1;
     const dot = (toImpactX * viewX + toImpactZ * viewZ) / (vLen * iLen);
     ok(dot > -0.25, 'arc does not point back into the camera/marine view (dot=' + dot.toFixed(2) + ')');
+    // GB-49: and straight back past the camera, the case the clamp is for.
+    T.setAimTargetDbg(p.x - look.x * 20, p.z - look.z * 20);
+    for (let i = 0; i < 10; i++) { T.updateMortarArc(); await wait(33); }
+    {
+      const lk = T.camera.getWorldDirection(new T.camera.position.constructor()), sb = T.mortarSolve(m);
+      const bx = sb.tx - m.x, bz = sb.tz - m.z;
+      const db = (bx * lk.x + bz * lk.z) / ((Math.hypot(bx, bz) || 1) * (Math.hypot(lk.x, lk.z) || 1));
+      ok(db > -0.25, 'aimed straight back at the camera, the arc is held to the side (dot=' + db.toFixed(2) + ')');
+    }
     ok(maxPlayerJump < 1.2, 'marine footing does not teleport (max jump ' + maxPlayerJump.toFixed(2) + 'm/frame)');
     ok(maxCamJump < 4.0, 'camera does not freak (max jump ' + maxCamJump.toFixed(2) + 'm/frame)');
     // Zoom while mounted must not pull FOV/dist the way free aim does.

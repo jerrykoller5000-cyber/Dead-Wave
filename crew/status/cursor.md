@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-34 Full npm test, then commit and push everything checked out
-touching: git
-since: 2026-09-25T04:54Z
-next: CU-34 After CU-35: full `npm test` on Jerry's PC, commit and push
+task: CU-39 Pit specks at noon; alarm sky, 3 s finisher, Night Complete card, with shots
+touching: qa/shots/2026-09-25-CU-39, qa/run-cu39.mjs, qa/2026-09-25-CU-39.md
+since: 2026-09-25T08:06Z
+next: CU-36 Performance for Saturday. The one-time stalls first (was GB-
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-CU-35.md
+last-report: handoffs/2026-09-25-cursor-CU-32.md
 
 ## Notes
 

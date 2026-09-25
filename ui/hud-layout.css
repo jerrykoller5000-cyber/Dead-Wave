@@ -52,7 +52,6 @@
 /* Dawn is a deliberate, brief modal after the finisher returns the camera. */
 #dawnCard { position:fixed; inset:0; margin:auto; box-sizing:border-box; width:min(480px,calc(100vw - 32px)); max-height:calc(100dvh - 32px); overflow:auto; padding:28px; color:#dedecb; background:#0c1511; border:1px solid #818662; border-top:3px solid #cab673; font-family:var(--font-hud); font-size:14px; line-height:1.5; box-shadow:0 16px 80px #0008; }
 #dawnCard::backdrop { background:#06100bb8; }
-#dawnCard .dawn-eyebrow { margin:0; font-size:10px; letter-spacing:.22em; color:#a7ad8d; }
 #dawnCard h2 { margin:4px 0 24px; color:#e2d3a2; font-size:25px; }
 #dawnCard dl { margin:0; }
 #dawnCard dl div { display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid #5d6b4f55; padding:10px 0; }
@@ -60,8 +59,14 @@
 #dawnCard dd { margin:0; font-size:23px; line-height:1.2; color:#f1ecd9; font-variant-numeric:tabular-nums; }
 #dawnCard .dawn-tip { margin:22px 0; color:#b5beaa; }
 #dawnCard footer { display:flex; justify-content:space-between; gap:12px; }
+#dawnCard footer button { flex:1; }
 #dawnCard button { padding:10px 14px; border:1px solid #778368; color:#e2e5d1; background:#263326; font:inherit; cursor:pointer; }
 #dawnCard button.primary { color:#131b12; background:#c6bb82; border-color:#c6bb82; }
 #dawnCard button:focus-visible { outline:2px solid #f0dfa3; outline-offset:3px; }
 body.dawn #pause, body.dawn #firstMinuteCoach, body.dawn #bigBanner, body.dawn #objectiveHud { visibility:hidden; }
 @media(max-width:440px) { #dawnCard { padding:22px; } #dawnCard h2 { font-size:23px; } #dawnCard footer { flex-wrap:wrap; } }
+
+/* Brief local reward notice stays in the edge stack, away from the reticle. */
+#campCleared { padding:8px 10px; color:#cbd3ae; background:#0c1915e8; border-left:2px solid #94aa77; font:12px/1.4 var(--font-hud); }
+#campCleared[hidden] { display:none; }
+body:is(.opening,.frontend,.deploying,.cine,.dawn) #campCleared { display:none; }

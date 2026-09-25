@@ -14,21 +14,20 @@ export function createNightRecord() {
  };
 }
 
-export function mountDawn({doc=document,bus=window,onContinue=()=>{},onSkip=()=>{},onShow=()=>{}}={}) {
+export function mountDawn({doc=document,bus=window,onMorning=()=>{},onNextNight=()=>{},onShow=()=>{}}={}) {
  const dialog=doc.createElement('dialog');dialog.id='dawnCard';dialog.setAttribute('aria-labelledby','dawnTitle');
- const eyebrow=doc.createElement('p');eyebrow.className='dawn-eyebrow';eyebrow.textContent=text('dawn.eyebrow');
  const heading=doc.createElement('h2');heading.id='dawnTitle';const stats=doc.createElement('dl');
  for(const key of ['kills','skulls','best']){const row=doc.createElement('div'),label=doc.createElement('dt'),value=doc.createElement('dd');label.textContent=text('dawn.'+key);value.dataset.stat=key;row.append(label,value);stats.append(row);}
  const tip=doc.createElement('p');tip.className='dawn-tip';const footer=doc.createElement('footer');
- const skip=doc.createElement('button'),next=doc.createElement('button');skip.type=next.type='button';skip.textContent=text('dawn.skip');next.textContent=text('dawn.continue');next.className='primary';
- footer.append(skip,next);dialog.append(eyebrow,heading,stats,tip,footer);doc.body.append(dialog);let returnFocus=null,shown=null;
+ const skip=doc.createElement('button'),next=doc.createElement('button');skip.type=next.type='button';skip.textContent=text('dawn.nextNight');next.textContent=text('dawn.morning');next.className='primary';
+ footer.append(skip,next);dialog.append(heading,stats,tip,footer);doc.body.append(dialog);let returnFocus=null,shown=null;
  function close(){if(!dialog.open)return false;dialog.close();shown=null;doc.body.classList.remove('dawn');if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});return true;}
- function skipCard(){if(close())onSkip();}
- next.addEventListener('click',()=>{if(close())onContinue();});skip.addEventListener('click',skipCard);
- dialog.addEventListener('cancel',e=>{e.preventDefault();skipCard();});
+ function proceed(){if(close())onMorning();}
+ next.addEventListener('click',proceed);skip.addEventListener('click',()=>{if(close())onNextNight();});
+ dialog.addEventListener('cancel',e=>{e.preventDefault();proceed();});
  for(const type of ['keydown','keyup','mousedown','mouseup','wheel','contextmenu'])bus.addEventListener(type,e=>{
   if(!dialog.open)return;e.stopImmediatePropagation();
-  if(type==='keydown'&&e.code==='Escape'){e.preventDefault();if(!e.repeat)skipCard();}
+  if(type==='keydown'&&e.code==='Escape'){e.preventDefault();if(!e.repeat)proceed();}
  },true);
  return {close,dialog,addPickups(n){
   if(!dialog.open||!shown||!count(n))return;shown.skulls+=n;

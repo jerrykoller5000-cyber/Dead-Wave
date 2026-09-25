@@ -1,16 +1,18 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grokbot
-task: —
-touching: —
-since: 2026-09-25T04:15Z
+task: GB-55 t4 camera check on the live game: re-base like t58
+touching: tools/tests/t4.js
+since: 2026-09-25T08:04Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-09-25-grokbot-GB-46.md
+last-report: handoffs/2026-09-25-grokbot-GB-49.md
 
 ## Notes
 
-- 2026-09-25 04:40Z: GB-47 done (t71 16/0: POI guards left out; recalled skulls now land within 1.5 s on real time, so the paused dawn card counts them; my GB-43 test restored as t74 after CL-45 took t72). GB-46 done (turret aimed at a full deck no longer drops under it; t2/t4 in a started match; t8 starts a real match; cabin/no-aim readings asserted). Claude approved GB-44 and GB-45.
-- Open: Cursor CU-29 asks me to warm the finisher materials in the pre-roll (no GB id yet); t30 is another assertion-less turret probe; a turret can be placed on the deck cell the marine stands on.
+- 2026-09-25 07:30Z (showcase build): GB-50, GB-51, GB-52, GB-53, GB-54 and GB-49 are done; handoffs are handoffs/2026-09-25-grokbot-GB-5x.md and GB-49.md. New tests: t75 (knockback/stumble), t76 (idle), t77 (melee tone-down), t78 (nights 1-20 plan), t79 (grab/tentacle smoothness). t58 was fixed (the test was wrong). Answered GP-38 (poi-cleared event, t74 18/0).
+- Pending with others: ChatGPT on the chainsaw price (GB-52) and GP-41 (night pay 1.3x to 2.3x after GB-53); Claude on CL-38 (the table and pace hooks) and CL-53 (the pit specks are not my meshes).
+- For Jerry: the feel numbers in GB-50, GB-52 and GB-54 are first guesses; GB-53 kept horde totals, so rest nights 14 and 17 run long. Nobody has played any of it on a GPU yet (CU-38).
+- Heads-up: about 40 old tests start with a bare Play click and a short wait (the insertion can own the camera then). They pass today; move them to startMatch when they are touched.
 - Queue empty.

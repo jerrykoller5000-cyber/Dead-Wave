@@ -4,7 +4,8 @@
   try {
     ok(!!T.BLADE_STATS && !!T.BLADE_STATS.knife, 'BLADE_STATS exported');
     const k = T.BLADE_STATS.knife;
-    ok(k.dmg === 22 && k.cd === 0.42 && k.reach === 2.4 && k.arc === 0.40 && k.maxHits === 2,
+    // GB-52: the recovery went from 0.42 to 0.55 s (Jerry: still a bit too strong).
+    ok(k.dmg === 22 && k.cd === 0.55 && k.reach === 2.4 && k.arc === 0.40 && k.maxHits === 2,
       'knife stats nerfed (dmg/cd/reach/arc/maxHits) got ' + JSON.stringify(k));
 
     await startMatch(T, 'Knife');

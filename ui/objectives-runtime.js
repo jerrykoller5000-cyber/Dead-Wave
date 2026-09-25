@@ -41,7 +41,7 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
     model.update({runId:current.runId,active,damageRevision,targetId:near?.id,
       held:!!radio?.eHeld&&radio.cancelled===null,holdSeconds:radio?.holdSeconds,
       sites:facts.map(f=>({id:f.id,exists:!!f.prop?.exists,
-        discovered:active&&f.interaction?.distance<=24,reachable:!!f.interaction?.reachable}))});
+        discovered:active&&f.interaction?.reachable===true,reachable:!!f.interaction?.reachable}))});
     let state=model.snapshot();
     const choosePack=(site)=>{
       if(site.pack)return site.pack;
