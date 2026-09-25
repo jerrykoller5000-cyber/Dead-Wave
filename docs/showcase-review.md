@@ -28,7 +28,7 @@ Likelihood means the chance of hitting it in a 20-minute demo.
 - **Unit tests.** `node --test ui/*.test.mjs`: 99 pass, 0 fail.
 - **Renames in `d78e7b3`.** `finGrade`, `poiPostList`, `placePostGuards`, `wakePoiGuards(reason, post)`, `weaponPrice` and `equipmentPrice` all resolve, with no stale callers.
 - **Equipment prices.** `equipmentPrice` throws on a non-integer price or on night 0. Every price table is whole numbers, and the shop, the weapon wheel and the akimbo banner are only reachable with `day >= 1`.
-- **The loop.** From reading the code, the Night Complete card runs each choice once, even with a double click, Enter plus a click, or Esc. `loopNextNight`, `loopMorning` and `hqStartWave` refuse while an alarm or a shot is running. `startPrep` advances the day by exactly 1. The finisher fires once and clears its classes and the canvas filter on game over and reset.
+- **The loop.** The Night Complete card runs each choice once. In the test page, two clicks and an Enter on Proceed to Morning moved day 1 to 2 with no alarm. The same on Next Night moved day 2 to 3 with exactly one alarm. `loopNextNight`, `loopMorning` and `hqStartWave` refuse while an alarm or a shot is running. `startPrep` advances the day by exactly 1. The finisher fires once and clears its classes and the canvas filter on game over and reset.
 - **Restart.** Play again runs `resetGame` then `startMode`. It resets the alarm, the shots, the finisher, slow motion, the sky, the card, the bounties (`run-reset`), the briefing and pause. The real-game run saw day 0 and `idle` on the title, then a clean day 1.
 - **Bounties.** Nothing can throw: missing landmarks, no candidates and zero guards are all handled. A bounty can't pay twice or pay after it expires. Guards are gone before the wave, so they can't stall a night.
 - **Scouting.** `getWavePreview` is cheap and returns null for day 0 and for mismatched days. `POI.caves` has no holes. `buildScoutingReport` handles rest nights and unknown tricks. The minimap redraws at most 30 times a second.
@@ -41,12 +41,21 @@ Chromium at `/opt/pw-browsers/chromium`. It had to run with `--no-sandbox` throu
 `node tools/tests/run-all.mjs t41 t60 t61 t72 t80 t81 t82 t83 --jobs 2`: 8 checks, 141 pass, 2 fail.
 The two failures are t41 (row 8) and t80 (row 5). t60 37/0, t61 22/0, t72 26/0, t81 5/0, t82 4/0, t83 31/0.
 
-After the fixes: see the pull request description for the regression run.
+After the fixes, the tests that touch the loop, the alarm and death:
+`run-all.mjs t34 t37 t60 t61 t69 t70 t71 t72 t73 t74 t81 t82 t83 --jobs 2`: 13 checks, **246 pass, 0 fail**.
+
+**The real game, headless.** Software rendering (WebGL2, about 1 fps) ran two runs:
+
+- run 1: night 1, Proceed to Morning, night 2 with a bounty, Next Night, then death on night 3;
+- Play again;
+- run 2: night 1, double-clicked Proceed to Morning, night 2, Next Night.
+
+**0 page errors.** The 6 console warnings are all WebGPU-unavailable or software-driver notes.
 
 The runner rewrites `crew/tests.json`. That change was discarded and is not committed.
 
 ## Not verified
 
-- **Anything on a real GPU.** The headless run used software rendering at about 1 fps, too slow for timing checks. Its page-error count is still pending.
+- **Anything on a real GPU.** The headless run used software rendering at about 1 fps, too slow for timing or visual checks.
 - **Frame rate** with bounty guards in prep, from night 2, now that the flow field runs through prep.
-- **The full `npm test` suite.** Only the eight tests above, plus the regression set in the pull request.
+- **The full `npm test` suite.** Only the tests listed above were run.
