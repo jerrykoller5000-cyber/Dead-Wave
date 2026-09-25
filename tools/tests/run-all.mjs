@@ -101,6 +101,10 @@ async function runOne(name) {
       if (vis === 'hidden') {
         try { await page.send('Page.bringToFront', {}); } catch { /* already in front */ }
       }
+      // The splash has no Skip button (GP-27). Music and the HUD wait on it, so clear it
+      // from code the way the other tools do.
+      await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); })()`);
+      await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 30000 });
       await page.evaluate(fs.readFileSync(path.join(HERE, 'lib.js'), 'utf8'));
       // t37 walks seven burials and each one waits out the insertion, so a 75s cap
       // cut it off mid-test. Three minutes still stops a probe that would otherwise sit.
