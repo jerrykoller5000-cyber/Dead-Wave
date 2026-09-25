@@ -2,8 +2,9 @@
 // before the check, so a test can call startMatch(T, 'Name') without pasting the recipe.
 //
 // Play does nothing without a callsign. Prep is not the same as control: the insertion
-// still owns the marine for about nine seconds after the phase flips, and anything that
-// waits on the live loop has to sit that out.
+// still owns the marine for about nine seconds of game time after the phase flips, longer
+// on a slow machine. The insertion camera takes `deploying` off the body when it hands
+// control back, so that is what this waits for.
 async function startMatch(T, name) {
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const nameEl = document.getElementById('playerName');
@@ -16,6 +17,13 @@ async function startMatch(T, name) {
     if (T.getPhase && T.getPhase() === 'prep') { prep = true; break; }
   }
   if (!prep) throw new Error('startMatch: the match never reached prep');
-  await wait(10000);
+  await wait(300);
+  let landed = false;
+  for (let i = 0; i < 600; i++) {
+    if (!document.body.classList.contains('deploying')) { landed = true; break; }
+    await wait(100);
+  }
+  if (!landed) throw new Error('startMatch: the insertion still had the camera after 60 s');
+  await wait(300);
 }
 globalThis.startMatch = startMatch;
