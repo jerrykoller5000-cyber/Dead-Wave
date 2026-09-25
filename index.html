@@ -714,7 +714,7 @@
     }
   </style>
   <!-- Bump the opening asset version whenever opening.css or opening.js changes. -->
-  <link rel="stylesheet" href="assets/intro/opening.css?v=gp28">
+  <link rel="stylesheet" href="assets/intro/opening.css?v=gp32">
   <link rel="stylesheet" href="ui/loading.css">
   <link rel="stylesheet" href="ui/coach.css">
   <link rel="stylesheet" href="ui/wave-preview.css">
@@ -785,16 +785,16 @@
     <div id="hudTopLeft" class="glass">
       <div id="title">Dead Wave <span class="badge" id="modeBadge" style="display:none"></span></div>
       <div id="stats">
-        <div class="stat-row"><span class="label">Cash</span>$<span id="coins">0</span></div>
-        <div class="stat-row"><span class="label">Skulls</span><span id="skulls">0</span></div>
-        <div id="waveLine" class="stat-row">Day — · Prep</div>
+        <div class="stat-row"><span class="label" data-dw-text="hud.cash"></span>$<span id="coins">0</span></div>
+        <div class="stat-row"><span class="label" data-dw-text="hud.skulls"></span><span id="skulls">0</span></div>
+        <div id="waveLine" class="stat-row"></div>
         <div id="landStat" class="stat-row">Land r<span id="landR">120</span></div>
       </div>
       <div id="hpBarWrap">
-        <div id="hpLabel">Health</div>
+        <div id="hpLabel" data-dw-text="hud.health"></div>
         <div id="hpBarBg"><div id="hpBarFill"></div><span id="hpNum">—</span></div>
         <div id="armorBarWrap" style="display:none">
-          <div id="armorLabel">Armor</div>
+          <div id="armorLabel" data-dw-text="hud.armor"></div>
           <div id="armorBarBg"><div id="armorBarFill"></div><span id="armorNum">—</span></div>
         </div>
         <div id="hpExtra"></div>
@@ -803,10 +803,10 @@
         <div id="timeLine">Day · 06:00</div>
         <div id="tacticalLine">NVG off · Laser off</div>
       </div>
-      <div id="prepTimer"><div class="label">Prep — ready when you are</div><div class="clock">READY</div><div class="track"><i></i></div><div class="skip">Start the wave at the HQ panel (E)</div></div>
+      <div id="prepTimer"><div class="label"></div><div class="clock"></div><div class="track"><i></i></div><div class="skip" data-dw-text="prep.start"></div></div>
     </div>
     <div id="devConsole"><span class="caret">&gt;</span><input id="devConsoleInput" type="text" autocomplete="off" spellcheck="false" /></div>
-    <div id="combo"><div class="n">2</div><div class="l">Kill streak</div><div class="m"></div><div class="bar"><i></i></div></div>
+    <div id="combo"><div class="n">2</div><div class="l" data-dw-text="hud.killStreak"></div><div class="m"></div><div class="bar"><i></i></div></div>
     <div id="ammo" class="glass">
       <div id="ammoCount">300</div>
       <div id="ammoMeta">
@@ -834,15 +834,15 @@
     <div id="perf"></div>
     <div id="modeSelect" class="show">
       <div class="menu-content">
-        <h2 class="dw-wordmark">Dead<br><span>Wave</span></h2>
+        <h2 class="dw-wordmark" data-dw-wordmark></h2>
         <div class="modes">
-          <button id="modeHunt" type="button">Play</button>
-          <button id="menuSettingsBtn" class="secondary" type="button">Settings</button>
-          <button id="menuQuitBtn" class="danger" type="button">Quit</button>
+          <button id="modeHunt" type="button" data-dw-text="menu.play"></button>
+          <button id="menuSettingsBtn" class="secondary" type="button" data-dw-text="settings.title"></button>
+          <button id="menuQuitBtn" class="danger" type="button" data-dw-text="menu.quit"></button>
         </div>
-        <label id="nameRow"><span>Callsign</span><input id="playerName" type="text" maxlength="18" placeholder="Enter your name" required aria-describedby="nameError" autocomplete="off" spellcheck="false"><span id="nameError" role="status"></span></label>
+        <label id="nameRow"><span data-dw-text="menu.callsign"></span><input id="playerName" type="text" maxlength="18" placeholder="" data-dw-placeholder="menu.namePlaceholder" required aria-describedby="nameError" autocomplete="off" spellcheck="false"><span id="nameError" role="status"></span></label>
       </div>
-      <div class="menu-footer"><span><i class="signal-dot"></i>Signal established</span></div>
+      <div class="menu-footer"><span><i class="signal-dot"></i><span data-dw-text="menu.signal"></span></span></div>
     </div>
     <div id="cine"><div class="bar top"></div><div class="bar bot"></div><div class="fade"></div><div class="cap"></div><div class="skip">Space — skip</div></div>
     <div id="win">
@@ -865,119 +865,119 @@
     <div id="pause">
       <div class="card" id="pauseCard">
         <div id="pauseMainView">
-          <h2>Paused</h2>
-          <p>Game frozen. Resume, change settings, check the tips, or quit back to the main menu.</p>
+          <h2 data-dw-text="pause.title"></h2>
+          <p data-dw-text="pause.description"></p>
           <div class="modes">
-            <button id="resumeBtn" type="button">Resume</button>
-            <button id="settingsBtn" class="secondary" type="button">Settings</button>
-            <button id="tipsBtn" class="secondary" type="button">Tips</button>
-            <button id="quitMenuBtn" class="danger" type="button">Quit to menu</button>
+            <button id="resumeBtn" type="button" data-dw-text="pause.resume"></button>
+            <button id="settingsBtn" class="secondary" type="button" data-dw-text="settings.title"></button>
+            <button id="tipsBtn" class="secondary" type="button" data-dw-text="pause.tips"></button>
+            <button id="quitMenuBtn" class="danger" type="button" data-dw-text="pause.quit"></button>
           </div>
         </div>
         <div id="pauseSettingsView">
-          <h2>Settings</h2>
+          <h2 data-dw-text="settings.title"></h2>
           <div class="volumes">
-            <label><span>Music</span><input id="volMusic" type="range" min="0" max="100" value="30"><b id="volMusicNum">30</b></label>
-            <label><span>SFX</span><input id="volSfx" type="range" min="0" max="100" value="80"><b id="volSfxNum">80</b></label>
-            <label><span>Look</span><input id="lookSens" type="range" min="25" max="300" step="5" value="100"><b id="lookSensNum">1.0x</b></label>
+            <label><span data-dw-text="settings.music"></span><input id="volMusic" type="range" min="0" max="100" value="30"><b id="volMusicNum">30</b></label>
+            <label><span data-dw-text="settings.sfx"></span><input id="volSfx" type="range" min="0" max="100" value="80"><b id="volSfxNum">80</b></label>
+            <label><span data-dw-text="settings.look"></span><input id="lookSens" type="range" min="25" max="300" step="5" value="100"><b id="lookSensNum">1.0x</b></label>
           </div>
           <div class="settingRow">
-            <span>Graphics</span>
+            <span data-dw-text="settings.graphics"></span>
             <div class="seg" id="gfxPresets">
-              <button type="button" data-gfx="low">Low</button><button type="button" data-gfx="medium">Medium</button><button type="button" data-gfx="high">High</button><button type="button" data-gfx="max">Max</button>
+              <button type="button" data-gfx="low" data-dw-text="settings.low"></button><button type="button" data-gfx="medium" data-dw-text="settings.medium"></button><button type="button" data-gfx="high" data-dw-text="settings.high"></button><button type="button" data-gfx="max" data-dw-text="settings.max"></button>
             </div>
           </div>
           <div class="settingRow">
-            <span>Camera</span><button id="followCursorToggle" class="settingBtn" type="button">Follow cursor: on</button>
+            <span data-dw-text="settings.camera"></span><button id="followCursorToggle" class="settingBtn" type="button"></button>
           </div>
           <div class="settingRow">
-            <span>Auto tilt</span>
+            <span data-dw-text="settings.autoTilt"></span>
             <div class="seg" id="autoTiltSeg">
-              <button type="button" data-tilt="off">Off</button><button type="button" data-tilt="gentle">Gentle</button><button type="button" data-tilt="strong">Strong</button>
+              <button type="button" data-tilt="off" data-dw-text="settings.tiltOff"></button><button type="button" data-tilt="gentle" data-dw-text="settings.tiltGentle"></button><button type="button" data-tilt="strong" data-dw-text="settings.tiltStrong"></button>
             </div>
           </div>
           <div class="settingRow">
-            <span>Screen</span><button id="fullscreenToggle" class="settingBtn" type="button">Fullscreen: off</button>
+            <span data-dw-text="settings.screen"></span><button id="fullscreenToggle" class="settingBtn" type="button"></button>
           </div>
           <div class="settingRow">
-            <span>Overlay</span><button id="perfHudToggle" class="settingBtn" type="button">FPS &amp; hardware: off</button>
+            <span data-dw-text="settings.overlay"></span><button id="perfHudToggle" class="settingBtn" type="button"></button>
           </div>
           <div class="modes">
-            <button id="settingsBackBtn" type="button">Back</button>
+            <button id="settingsBackBtn" type="button" data-dw-text="common.back"></button>
           </div>
         </div>
         <div id="pauseTipsView">
-          <h2>Tips</h2>
+          <h2 data-dw-text="pause.tips"></h2>
           <div id="pauseTipsScroll">
-            <h3>Movement &amp; looking</h3>
+            <h3 data-dw-text="tips.movement.title"></h3>
             <ul>
-              <li>WASD / arrows — move: W is up the screen, whichever way you're aiming · Shift — run</li>
-              <li>Space — jump · V — dodge roll (can't be hurt mid-roll)</li>
-              <li>C — crouch: slower, but tighter groups and a lower silhouette</li>
-              <li>Mouse — aim anywhere around you; the marine turns to face the reticle while the camera holds still, so shots land where it sits</li>
-              <li>Scroll wheel — zoom the camera in / out (scoped, it dials the magnification)</li>
-              <li>Hold the middle mouse button and drag — rotate the camera</li>
-              <li>The tilt looks after itself: the view lifts to look up a hill ahead, drops into a dip, and rises over ground behind you instead of crowding the marine</li>
-              <li>The camera slides toward the cursor once you point past the middle of the screen, so you see more of what you're aiming at</li>
-              <li>Esc &gt; Settings &gt; Camera turns both off (with auto tilt off, middle-drag up / down tilts by hand again). Look sensitivity is there too</li>
+              <li data-dw-text="tips.movement.move"></li>
+              <li data-dw-text="tips.movement.jump"></li>
+              <li data-dw-text="tips.movement.crouch"></li>
+              <li data-dw-text="tips.movement.aim"></li>
+              <li data-dw-text="tips.movement.zoom"></li>
+              <li data-dw-text="tips.movement.camera"></li>
+              <li data-dw-text="tips.movement.tilt"></li>
+              <li data-dw-text="tips.movement.followCursor"></li>
+              <li data-dw-text="tips.movement.cameraSettings"></li>
             </ul>
-            <h3>Combat</h3>
+            <h3 data-dw-text="tips.combat.title"></h3>
             <ul>
-              <li>LMB — fire / hold for the chainsaw and flamethrower · R — reload</li>
-              <li>RMB — zoom. On the sniper it raises a real scope on whatever the reticle is on; the mouse then moves the scope directly (push to the screen edge to swing further). Wheel or middle click — 2X / 4X / 6X</li>
-              <li>G — grenade · F — knife (or the machete, once bought)</li>
-              <li>H — jab a MedPen (heals 60%). Health only regenerates back to 40% on its own</li>
-              <li>Hold Q — weapon wheel: time slows, point at a gun, let go to draw it · tap Q to step to the next one</li>
+              <li data-dw-text="tips.combat.fire"></li>
+              <li data-dw-text="tips.combat.scope"></li>
+              <li data-dw-text="tips.combat.grenade"></li>
+              <li data-dw-text="tips.combat.medpen"></li>
+              <li data-dw-text="tips.combat.weapons"></li>
             </ul>
-            <h3>Action key (E)</h3>
+            <h3 data-dw-text="tips.interaction.title"></h3>
             <ul>
-              <li>E at the kiosk (the supply hatch in the east wall of the cabin, yellow square on the map) — weapons, ammo, gear, upgrades, perks, blueprints. Open any time; time stops while you shop. E or Esc closes it</li>
-              <li>E at the HQ skull window (front of the cabin) — turn in collected skulls for Cash. Kill → pick up glowing skulls → turn in → spend at the kiosk</li>
-              <li>E at the HQ start panel (front wall) — sound the alarm to start the next wave. Prep lasts until you call it</li>
-              <li>E at a mortar — man it: LMB lobs a shell at the reticle (dotted arc), E leaves it, T shoulders it to carry it (no weapons while carrying; LMB or E sets it down)</li>
+              <li data-dw-text="tips.interaction.kiosk"></li>
+              <li data-dw-text="tips.interaction.bank"></li>
+              <li data-dw-text="tips.interaction.alarm"></li>
+              <li data-dw-text="tips.interaction.mortar"></li>
             </ul>
-            <h3>Building</h3>
+            <h3 data-dw-text="tips.building.title"></h3>
             <ul>
-              <li>Hold B — build wheel (paged): Structure · Defenses · Turrets. Point at a build, let go to pick it · tap B to enter / leave build mode · LMB place</li>
-              <li>Blueprints unlock builds in the B menu (kiosk → Blueprints). Barricade, shovel, and Upgrade start unlocked; placing most pieces still costs Cash. Fortify blueprints upgrade walls, doors, turrets, and more</li>
-              <li>T — repair the nearest build · X — sell / scrap it (hold X in build mode to preview a scrap box)</li>
-              <li>Fuel drums: place one, shoot it when the horde is beside it, stand well back — they chain</li>
+              <li data-dw-text="tips.building.wheel"></li>
+              <li data-dw-text="tips.building.blueprints"></li>
+              <li data-dw-text="tips.building.repair"></li>
+              <li data-dw-text="tips.building.drums"></li>
             </ul>
-            <h3>Waves &amp; enemies</h3>
+            <h3 data-dw-text="tips.waves.title"></h3>
             <ul>
-              <li>Prep — no countdown: start the wave at the HQ panel (E). Enter only reminds you</li>
-              <li>Waves pour out of the six cave mouths at the map rim — the red arcs on the map point at the mouths in use. You can't build within 25m of a mouth, and do NOT walk into one: something lives in there, and it does not lose</li>
-              <li>Chain kills fast for a streak: 5 / 10 / 20 / 30 raise skull value AND grant powers while it holds — faster feet, quick reloads, free rounds, thick skin. Lose the streak, lose the powers</li>
-              <li>Minimap: the 50 m around you, turned so up is always the way the camera faces (W). Zombies are the flashing red dots; red arcs on the rim are where the wave comes from</li>
-              <li>Tab — full map of the whole area, north-up</li>
-              <li>Bombers (glowing gut) sprint and detonate — shoot them before they reach your line, ideally next to other zombies</li>
-              <li>Leapers run on all fours and jump 5–14m onto you — sidestep the landing. Spiders — crawling zombies with six limbs — hang back and web you (slowed): kill them first</li>
-              <li>Demons (red, horned, from day 6 — more on Ember Night) stop and roar before they charge in a straight line: sidestep or roll when you hear it. Fire barely hurts them; bullets do</li>
-              <li>Spitters (bloated, olive) don't spit — they walk in and then crawl the last 15m. Easy targets, but they keep coming</li>
-              <li>Most of a wave is plain shamblers, and there are a lot of them. Your blade costs nothing: F one-shots shamblers, ferals, leapers and spitters through a near half-circle sweep</li>
-              <li>The drowned only ever come up out of the Underwater Pit in the lake bed and are fast in the water — don't fight near the banks, and never swim over the pit itself: the thing that owns it takes swimmers whole</li>
-              <li>Flamethrower: the stream sticks to what it hits and fizzles in water; burning zombies light whatever they touch, and the ground keeps burning — including under you</li>
+              <li data-dw-text="tips.waves.prep"></li>
+              <li data-dw-text="tips.waves.caves"></li>
+              <li data-dw-text="tips.waves.streak"></li>
+              <li data-dw-text="tips.waves.minimap"></li>
+              <li data-dw-text="tips.waves.map"></li>
+              <li data-dw-text="tips.waves.bombers"></li>
+              <li data-dw-text="tips.waves.leapers"></li>
+              <li data-dw-text="tips.waves.demons"></li>
+              <li data-dw-text="tips.waves.spitters"></li>
+              <li data-dw-text="tips.waves.blade"></li>
+              <li data-dw-text="tips.waves.drowned"></li>
+              <li data-dw-text="tips.waves.flamer"></li>
             </ul>
-            <h3>Cash &amp; skulls</h3>
+            <h3 data-dw-text="tips.economy.title"></h3>
             <ul>
-              <li>Kills drop skulls (pooled for small payouts). Pick them up — the HUD Skulls line shows how many you carry and what they are worth</li>
-              <li>Turn skulls in at the HQ window (E) to convert them to Cash. The Supply Kiosk and builds spend Cash only</li>
-              <li>Starting Cash is a small seed for the first prep. Supply drops can dump ammo and MedPens; rare cash stacks still go straight to the bank</li>
+              <li data-dw-text="tips.economy.skulls"></li>
+              <li data-dw-text="tips.economy.bank"></li>
+              <li data-dw-text="tips.economy.supplies"></li>
             </ul>
-            <h3>Misc</h3>
+            <h3 data-dw-text="tips.misc.title"></h3>
             <ul>
-              <li>Esc — pause / resume · M — mute · F11 — fullscreen</li>
-              <li>N — night vision (needs the helmet) · Z — laser sight · L — gun flashlight (all bought at the kiosk)</li>
-              <li>Settings: volume, look sensitivity, graphics quality, camera, fullscreen — from the title screen or Esc</li>
+              <li data-dw-text="tips.misc.pause"></li>
+              <li data-dw-text="tips.misc.gear"></li>
+              <li data-dw-text="tips.misc.settings"></li>
             </ul>
-            <h3>Testing</h3>
+            <h3 data-dw-text="tips.testing.title"></h3>
             <ul>
-              <li>~ opens the dev console: "bigtex shooter" for unlimited cash, "broke" to turn it off</li>
-              <li>URL switches: ?debug=1 perf overlay · ?renderer=webgl WebGL2 fallback · ?sky=flat plain sky</li>
+              <li data-dw-text="tips.testing.commands"></li>
+              <li data-dw-text="tips.testing.switches"></li>
             </ul>
           </div>
           <div class="modes">
-            <button id="tipsBackBtn" type="button">Back</button>
+            <button id="tipsBackBtn" type="button" data-dw-text="common.back"></button>
           </div>
         </div>
       </div>
@@ -1022,7 +1022,7 @@
   <script type="module">
     import * as THREE from 'three';
     import { createPrepRepairReader } from './ui/prep-repairs.js';
-    import { createGuardianReward, quoteRestock } from './game/economy.js';
+    import { createGuardianReward, quoteRestock, createSkullValueAccumulator } from './game/economy.js';
     import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
@@ -1066,6 +1066,12 @@
     const pauseEl = document.getElementById('pause');
     const resumeBtn = document.getElementById('resumeBtn');
     const quitMenuBtn = document.getElementById('quitMenuBtn');
+    // Keyed text is inserted as text, never HTML; all labels share the catalogue.
+    for (const el of document.querySelectorAll('[data-dw-text]')) el.textContent = dwText(el.dataset.dwText);
+    for (const el of document.querySelectorAll('[data-dw-placeholder]')) el.placeholder = dwText(el.dataset.dwPlaceholder);
+    const wordmark = document.querySelector('[data-dw-wordmark]');
+    const wordmarkSecond = document.createElement('span'); wordmarkSecond.textContent = dwText('menu.titleSecond');
+    wordmark.replaceChildren(document.createTextNode(dwText('menu.titleFirst')), document.createElement('br'), wordmarkSecond);
     const tipsBtn = document.getElementById('tipsBtn');
     const tipsBackBtn = document.getElementById('tipsBackBtn');
     const settingsBtn = document.getElementById('settingsBtn');
@@ -1263,7 +1269,7 @@
       function sync() {
         if (!fullscreenToggleBtn) return;
         const on = isOn();
-        fullscreenToggleBtn.textContent = supported ? ('Fullscreen: ' + (on ? 'on' : 'off')) : 'Fullscreen unavailable';
+        fullscreenToggleBtn.textContent = supported ? dwText('settings.fullscreen', {state:dwText(on ? 'common.on' : 'common.off')}) : dwText('settings.fullscreenUnavailable');
         fullscreenToggleBtn.classList.toggle('on', on);
         fullscreenToggleBtn.disabled = !supported;
       }
@@ -1721,10 +1727,60 @@
       return matchClockRunning && hoursSinceMatchStart < ZOMBIE_GRACE_HOURS;
     }
 
+    // CL-45 / D-28 (Jerry): the sky follows the loop. Prep is daylight: the clock runs from
+    // the morning and holds in the late afternoon, before dusk, however long you take. The
+    // alarm brings the night on; the wave is fought at night; the last kill's finisher runs
+    // the sky round to the dawn, and the next prep starts in the morning. Outside a match
+    // (the title) the clock runs free as it always did.
+    const SKY_MORNING_AT = 0.33;   // 07:55, where a match starts
+    const SKY_PREP_HOLD = 0.68;    // 16:19: prep holds here, in the long light before dusk
+    const SKY_NIGHT_AT = 0.92;     // 22:05: where the alarm takes the sky
+    const SKY_NIGHT_MAX = 0.995;   // the night drifts on during a wave, never into the dawn
+    const SKY_DAWN_AT = 0.31;      // 07:26: where the finisher leaves it (just past first light)
+    const ALARM_NIGHT_S = 5.0;     // the alarm's klaxon, flares and strobes
+    const skyLoop = { mode: 'free', tween: null };   // mode: free | prep | wave | dawn
+    // The turn of the sky runs on the wall clock, not the game's dt, so it lands exactly when
+    // the alarm or the finisher ends even through slow motion.
+    function skyTo(target, seconds) {
+      const span = (((target - worldTime) % 1) + 1) % 1;   // always forward, through midnight
+      if (span < 0.0005) { skyLoop.tween = null; return; }
+      skyLoop.tween = { from: worldTime, to: target, span, t0: performance.now(), dur: Math.max(0.05, seconds) };
+    }
+    function advanceSkyClock(dt) {
+      const S = skyLoop, w = worldTime;
+      if (S.tween) {
+        const T = S.tween;
+        const u = Math.min(1, (performance.now() - T.t0) / 1000 / T.dur), e = u * u * (3 - 2 * u);
+        if (u >= 1) S.tween = null;
+        return (T.from + T.span * e) % 1;
+      }
+      if (S.mode === 'prep') {
+        if (w >= SKY_PREP_HOLD && w < SKY_NIGHT_AT) return w;           // held before dusk
+        const n = (w + DAY_CYCLE_SPEED * dt) % 1;
+        return (w < SKY_PREP_HOLD && n >= SKY_PREP_HOLD) ? SKY_PREP_HOLD : n;
+      }
+      if (S.mode === 'wave') {
+        const n = w + DAY_CYCLE_SPEED * 0.25 * dt;
+        return (w >= SKY_NIGHT_AT - 0.05 && n <= SKY_NIGHT_MAX) ? n : w;
+      }
+      if (S.mode === 'dawn') return w;                                    // the finisher owns it
+      return (w + DAY_CYCLE_SPEED * dt) % 1;
+    }
+    // The dawn breaks while the finisher's camera circles the last body: it runs for the
+    // relief sting's length, and so does the turn of the sky (the finisher tells everyone
+    // with 'wave-last-kill', so this doesn't have to live inside it).
+    window.addEventListener('dw-game', (ev) => {
+      const d = ev && ev.detail;
+      if (!d || d.type !== 'wave-last-kill' || skyLoop.mode === 'free') return;
+      skyLoop.mode = 'dawn';
+      skyTo(SKY_DAWN_AT, (isFinite(+d.duration) && +d.duration > 0 ? +d.duration : 7.5) + 0.4);
+    });
+
     function resetDayClockForMatch() {
-      // Start mid-morning (09:36) so a match opens in good light and has a full day to
-      // run before dusk, rather than starting at the sunrise line.
-      worldTime = 0.4;
+      // CL-45: a match opens in the morning light; prep then runs to the late afternoon
+      // and holds there (see advanceSkyClock).
+      worldTime = SKY_MORNING_AT;
+      skyLoop.mode = 'prep'; skyLoop.tween = null;
       hoursSinceDawn = 0;
       hoursSinceMatchStart = 0;
       matchClockRunning = true;
@@ -1734,7 +1790,7 @@
 
     function updateDayNight(dt) {
       const prevTime = worldTime;
-      worldTime = (worldTime + DAY_CYCLE_SPEED * dt) % 1;
+      worldTime = advanceSkyClock(dt);
       // Quarter-turn offset so the clock agrees with the sky: 00:00 midnight, 06:00
       // sunrise, 12:00 overhead, 18:00 sunset. Without it "noon" landed at dusk.
       const ang = (worldTime - 0.25) * Math.PI * 2;
@@ -1754,7 +1810,9 @@
       }
       wasNaturalNight = naturalNight;
 
-      const nightAllowed = hoursSinceDawn >= DAWN_GRACE_HOURS;
+      // In a match the loop decides when it's night (CL-45), so the old dawn grace only
+      // applies to the free-running title clock.
+      const nightAllowed = skyLoop.mode !== 'free' || hoursSinceDawn >= DAWN_GRACE_HOURS;
       isNight = naturalNight && nightAllowed;
 
       const skyDay = new THREE.Color(0x87b7ff);
@@ -1839,8 +1897,8 @@
         if (skyMat.userData && skyMat.userData.flatFallback) skyMat.color.copy(skyUniforms.uMid.value);
       }
 
-      timeLineEl.textContent = (isNight ? 'Night' : 'Day') + ' · ' + formatGameClock() +
-        (zombieGraceActive() ? ' · Grace' : '') + (weather.raining ? ' · Rain' : '') + (bloodMoon ? ' · ' + dwText('hud.bloodMoon') : '');
+      timeLineEl.textContent = dwText('hud.time', {period: dwText(isNight ? 'hud.night' : 'hud.day'), time: formatGameClock()}) +
+        (zombieGraceActive() ? ' · ' + dwText('hud.grace') : '') + (weather.raining ? ' · ' + dwText('hud.rain') : '') + (bloodMoon ? ' · ' + dwText('hud.bloodMoon') : '');
       updateNvgVisual();
       updateTacticalHud();
     }
@@ -16674,6 +16732,7 @@
       }
     }
     function resetEconomy() {
+      skullLedger.reset();   // GP-33: a new run starts with no carried fraction
       weaponOwned = { pistol: true };
       reserveAmmo = { '.45': START_RESERVE_45, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
       extMag = {};
@@ -18573,11 +18632,20 @@
     // worth the detour; anything already worth picking up still drops where it died.
     const CASH_DROP_MIN = 8;
     let cashPool = 0;
+    // GP-33 (approved): kill rewards settle in whole skull value and the fractions carry over,
+    // so a x1.25 streak really pays a quarter more. Reset only for a new run (resetEconomy).
+    const skullLedger = createSkullValueAccumulator();
+    // GB-42 (GP-A1, GB-A3): day-1 skulls you can see and keep. On day 1 every kill drops its own
+    // skull (no pooling), skulls don't expire while the wave is on, and at the finisher the ones
+    // still on the ground fly to the marine. SKULL_KEEP_DAYS widens it to later days if wanted.
+    const SKULL_KEEP_DAYS = 1, SKULL_RECALL_MS = 2500;
+    let skullRecallUntil = 0;
+    function skullKeepDay() { return day >= 1 && day <= SKULL_KEEP_DAYS; }
     // What a kill is worth drops as a skull of the thing that died — same pooling, same
     // frequency and the same life on the ground as the cash it replaced.
     function awardCash(x, z, amount, kind) {
       if (amount <= 0) return;
-      if (amount >= CASH_DROP_MIN) { spawnSkullDrop(x, z, amount, kind); return; }
+      if (amount >= CASH_DROP_MIN || skullKeepDay()) { spawnSkullDrop(x, z, amount, kind); return; }   // GB-42: no pooling on day 1
       cashPool += amount;
       if (cashPool >= CASH_DROP_MIN) { spawnSkullDrop(x, z, Math.round(cashPool), kind); cashPool = 0; }
     }
@@ -18648,6 +18716,7 @@
 
     function clearCashDrops() {
       cashPool = 0;
+    skullRecallUntil = 0;
       for (const c of cashDrops) {
         scene.remove(c.mesh);
         dropSkullRing(c);
@@ -18670,7 +18739,30 @@
       for (let i = cashDrops.length - 1; i >= 0; i--) {
         const c = cashDrops[i];
         if (c.taken) { cashDrops.splice(i, 1); continue; }
-        c.age += dt;
+        // GB-42: the finisher calls the day's loose skulls in; they fly to the marine and bag themselves.
+        if (c.skull && !c.fly && performance.now() < skullRecallUntil) { c.fly = true; dropSkullRing(c); }
+        if (c.fly) {
+          const fdx = player.position.x - c.mesh.position.x, fdz = player.position.z - c.mesh.position.z;
+          const fd = Math.hypot(fdx, fdz);
+          const step = Math.min(fd, (16 + fd * 0.6) * dt);
+          if (fd > 0.001) { c.mesh.position.x += fdx / fd * step; c.mesh.position.z += fdz / fd * step; }
+          c.mesh.position.y = sampleHeight(c.mesh.position.x, c.mesh.position.z) + 0.9 + Math.min(2.5, (fd - step) * 0.08);
+          c.mesh.rotation.y += dt * 6;
+          c.mesh.scale.setScalar(1.35);
+          if (gameStarted && !gameOver && !won && fd - step < 1.1) {
+            c.taken = true;
+            skullBag.count += 1; skullBag.value += c.value;
+            updateSkullHud();
+            publishUI('skull-pickup', { count: 1, value: c.value, carriedCount: skullBag.count, carriedValue: skullBag.value, recalled: true });
+            AudioSys.skullPickup();
+            scene.remove(c.mesh);
+            cashDrops.splice(i, 1);
+          }
+          continue;
+        }
+        // GB-42: on a keep day a skull holds its time while the wave is on.
+        if (c.skull && phase === 'wave' && skullKeepDay()) c.age = Math.min(c.age, CASH_LIFE * 0.6);
+        else c.age += dt;
         // Dropped cash keeps for CASH_LIFE seconds. It pulses slowly at first and the pulse
         // keeps speeding up as the clock runs out, then it's gone — go and get it.
         if (c.age >= CASH_LIFE) {
@@ -18863,10 +18955,10 @@
         for (const [key] of SHOP_TABS) addTab(shopTabsEl, key, dwText(key === 'build' ? 'shop.tabs.builds' : 'shop.tabs.' + key), group[0] === key);
         for (const key of group[1]) if (!sub.hidden) addTab(sub, key, dwText('shop.tabs.' + key), shopTab === key);
       }
-      if (shopHintEl) shopHintEl.textContent = SHOP_HINT[shopTab] || '';
+      if (shopHintEl) shopHintEl.textContent = (SHOP_HINT[shopTab] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '');
       if (shopTab === 'weapons') {
         renderRestockAll();
-        for (const w of [...WEAPON_ORDER].sort((a,b) => Number(!weaponOwned[a]) - Number(!weaponOwned[b]))) {
+        for (const w of [...WEAPON_ORDER].sort((a,b) => Number(!weaponOwned[a]) - Number(!weaponOwned[b]) || WEAPON_PRICE[a] - WEAPON_PRICE[b])) {
           const price = WEAPON_PRICE[w];
           const owned = !!weaponOwned[w];
           const row = shopRow(WEAPON_STATS[w].name, owned ? 'owned' : '', WEAPON_BLURB[w],
@@ -19952,13 +20044,15 @@
       if (devNoZombies) { AudioSys.invalid(); showBanner('NODEAD IS ON', 'Waves are switched off', 1.2, '#ffb347'); return; }
       endZombieGrace();
       hq.seq = { t: 0, fired: 0 };
+      // CL-45: the night comes down over the alarm.
+      skyLoop.mode = 'wave'; skyTo(SKY_NIGHT_AT, ALARM_NIGHT_S);
       publishUI('alarm-started', { day });
       AudioSys.klaxon();
       // CL-29 (Jerry): the ground rumbles and the camera shakes for three seconds.
       if (AudioSys.alarmRumble) AudioSys.alarmRumble(ALARM_RUMBLE_S);
       alarmShakeT = ALARM_RUMBLE_S;
       addShake(0.1);
-      showBanner('ALARM', 'Day ' + day + ' \u2014 they heard that', 2.2, '#ff5a44');
+      showBanner(dwText('hq.alarm'), dwText('hq.heard', {day}), 2.2, '#ff5a44');
     }
     const HQ_STROBE_S = 5;
     function updateHQSequence(dt) {
@@ -20081,7 +20175,7 @@
         else if (a === 'hqWindow') {
           if (hq.dep === 'open' || hq.dep === 'throw' || hq.dep === 'close' || hq.dep === 'process') text = 'Processing skulls\u2026';
           else text = skullBag.count ? 'E — Turn in ' + skullBag.count + ' skull' + (skullBag.count === 1 ? '' : 's') + ' ($' + skullBag.value + ')' : 'Skull window — bring skulls to turn in';
-        } else if (a === 'hqPanel') text = hq.seq ? 'Alarm sounding\u2026' : (phase === 'prep' ? 'E — Sound the alarm: start the wave' : 'Wave under way');
+        } else if (a === 'hqPanel') text = dwText(hq.seq ? 'hq.alarmSounding' : phase === 'prep' ? 'hq.start' : 'hq.inProgress');
         else if (a === 'mountMortar') text = 'E — Man the mortar';
         else if (a === 'door') { const d = nearestDoor(); text = d && d.doorOpen ? 'E — Close the door' : 'E — Open the door'; }
         else if (a === 'stairs') { const st = nearestFoldStairs(); text = st && st.folded ? 'E — Lower the stairs' : 'E — Raise the stairs'; }
@@ -25899,9 +25993,12 @@
       return out;
     }
 
+    // GB-40 / D-29: day 1 is 15 shamblers; 7 or 8 of them claw up out of the ground (GROUND_RISE
+    // in the working caveByIndex; -1 plus groundByIndex in the preview).
+    const DAY1_TOTAL = 15, DAY1_GROUND_MIN = 7, GROUND_RISE = -2;
     function waveComposition(dayNum) {
       // Scripted mixes by day — returns ordered type keys for the wave
-      if (dayNum <= 1) return swellWithFodder(['shambler', 'shambler']);
+      if (dayNum <= 1) return new Array(DAY1_TOTAL).fill('shambler');   // GB-40 / D-29: day 1 is 15
       if (dayNum === 2) return swellWithFodder(['shambler', 'shambler', 'feral', 'shambler', 'feral']);
       if (dayNum === 3) {
         return swellWithFodder(['shambler', 'leaper', 'shambler', 'feral', 'leaper', 'shambler', 'drowned', 'shambler', 'feral', 'leaper']);
@@ -26186,6 +26283,7 @@
     // body and follows it. Then the camera eases back to the marine. Waves only: a day
     // fight ends with the director's quick fade.
     let waveFinisher = null;
+    let finisherJustEnded = false;   // CL-41: startPrep knows the finisher was the payoff
     const _finPos = new THREE.Vector3(), _finTgt = new THREE.Vector3();
     function beginWaveFinisher(z, x, y, zz) {
       const len = (AudioSys.cueLength && AudioSys.cueLength('clear')) || 7.2;
@@ -26194,6 +26292,7 @@
       slowMoT = Math.max(slowMoT, dur);
       finisherFlash();
       publishUI('wave-last-kill', { x, z: zz, typeKey: z.typeKey, duration: dur });
+      if (skullKeepDay()) skullRecallUntil = performance.now() + SKULL_RECALL_MS;   // GB-42: loose skulls fly to the marine
     }
     let _finFlashEl = null;
     function finisherFlash() {
@@ -26245,7 +26344,7 @@
       if (!F) return;
       if (gameOver || won || !gameStarted) { waveFinisher = null; return; }
       const t = (performance.now() - F.t0) / 1000;
-      if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; return; }
+      if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; finisherJustEnded = true; return; }
       const m = F.mesh;
       if (m && m.parent) { F.x = m.position.x; F.y = m.position.y; F.z = m.position.z; }
       if (!F.set) {
@@ -26493,7 +26592,7 @@
         // spike trap or a strand of wire takes down still pays, but at the base rate.
         const mult = info.defense ? 1 : registerKill();
         z._defenseKill = false;
-        const cash = Math.round((z.cashDrop != null ? z.cashDrop : (z.reward || 2)) * mult * cashMult() * (bloodMoon ? 1.5 : 1));
+        const cash = skullLedger.credit((z.cashDrop != null ? z.cashDrop : (z.reward || 2)) * mult * cashMult() * (bloodMoon ? 1.5 : 1));   // GP-33: fractions carry
         awardCash(px, pz, cash, z.typeKey);
         if (Math.random() < medDropChance(z.typeKey)) spawnMedDrop(px + 0.6, pz + 0.4);
         {
@@ -26567,6 +26666,8 @@
     let phase = 'idle';
     let prepTimer = 0;
     let waveTotal = 0;
+    let poiGuardsDue = false;   // GB-43: day-1 POI guards waiting to be placed
+    let waveSpawnLog = [];   // GB-40: where each wave body came from (tests)
     let waveSpawned = 0;
     let spawnCd = 0;
     let zombiesRemaining = 0;
@@ -26992,12 +27093,21 @@
 
     function startPrep() {
       if (day >= 1 && gameStarted && !quietPrep) {
-        showBanner('DAY ' + day + ' CLEARED', 'Use the prep — repair, build, resupply, turn in skulls' + (comboBest >= 5 ? ' · best streak ' + comboBest : ''), 3, '#7cdea0');
-        triggerSlowMo(0.7);
-        AudioSys.dayCleared();
+        showBanner(dwText('wave.cleared', { day }), comboBest >= 5 ? dwText('wave.prepBest', { streak: comboBest }) : dwText('wave.prep'), 3, '#7cdea0');
+        // CL-41: the finisher (slow motion, the relief sting) has just been the payoff; the
+        // old fanfare and second slow-down only play when a wave ended without one.
+        if (!finisherJustEnded) { triggerSlowMo(0.7); AudioSys.dayCleared(); }
+      }
+      finisherJustEnded = false;
+      // CL-45: prep is daylight. After a finisher the sky is already at dawn; otherwise
+      // (a wave ended some other way) bring the morning up quickly.
+      if (skyLoop.mode !== 'free') {
+        skyLoop.mode = 'prep';
+        const toDawn = skyLoop.tween && Math.abs(skyLoop.tween.to - SKY_DAWN_AT) < 1e-6;
+        if (isNight && !toDawn) skyTo(SKY_DAWN_AT, 3);
       }
       day += 1;
-      resetCavePokeDay();
+      resetCavePokeDay(day === 1);   // GB-44: day 1 is a new run
       phase = 'prep';
       prepTimer = PREP_TIME;
       if (armorMax() > 0 && playerArmor < armorMax()) { playerArmor = armorMax(); updateHpHud(); }
@@ -27019,6 +27129,7 @@
       waveTotal = waveQueue.length;
       waveSpawned = 0;
       zombiesRemaining = waveTotal;
+      waveSpawnLog = [];
       burstLeft = 0;
       ambushCd = 4 + Math.random() * 6;
 
@@ -27066,10 +27177,16 @@
       {
         const assault = assaultCaveIndices.length ? assaultCaveIndices : [];
         const planCaves = [];
+        const groundSet = new Set();
+        if (day === 1 && !guardianNightActive && waveQueue.length) {
+          const gn = Math.min(waveQueue.length, DAY1_GROUND_MIN + ((Math.random() * 2) | 0));
+          for (let g = 0; g < gn; g++) groundSet.add(Math.min(waveQueue.length - 1, Math.round(g * waveQueue.length / gn)));
+        }
         let rr = 0;
         for (let i = 0; i < waveQueue.length; i++) {
           const tk = waveQueue[i];
           if (tk === 'drowned') { planCaves.push(-1); continue; }
+          if (groundSet.has(i)) { planCaves.push(GROUND_RISE); continue; }
           if (!assault.length) { planCaves.push(-1); continue; }
           planCaves.push(assault[rr % assault.length]);
           rr += 1;
@@ -27082,8 +27199,9 @@
         const buckets = new Map();
         for (let i = 0; i < waveQueue.length; i++) {
           const typeKey = waveQueue[i];
-          const caveIndex = planCaves[i];
-          const key = typeKey + '\0' + caveIndex;
+          const ground = planCaves[i] === GROUND_RISE;
+          const caveIndex = ground ? -1 : planCaves[i];
+          const key = typeKey + '\0' + (ground ? 'g' : caveIndex);
           let b = buckets.get(key);
           if (!b) {
             const cave = caveIndex >= 0 ? POI.caves[caveIndex] : null;
@@ -27096,6 +27214,7 @@
             };
             buckets.set(key, b);
           }
+          if (ground) b.ground = true;   // GB-40: the ones that claw up
           b.count += 1;
         }
         const gTheme = (guardianCaveIndex >= 0 && POI.caves[guardianCaveIndex])
@@ -27116,12 +27235,18 @@
           bearings: waveBearings.slice(),
           byTypeAndCave: Array.from(buckets.values()),
           queue: waveQueue.slice(),
-          caveByIndex: planCaves.slice()
+          caveByIndex: planCaves.map((c) => (c === GROUND_RISE ? -1 : c)),
+          groundByIndex: planCaves.map((c) => c === GROUND_RISE),
+          groundRisers: groundSet.size
         };
       }
 
       // GB-4 / CL-4: prep = level 1 on assault mouths (clears prior wave's 2→0 first).
       warnActiveCaves(1);
+      // GB-43 / D-32: day 1's first fight before the alarm, two or three shamblers guarding the
+      // POI nearest the HQ.
+      // Spawned from updateZombies once the load pre-roll is over: its cleanup clears every zombie.
+      poiGuardsDue = day === 1 && !devNoZombies;
 
       // Bonus grenade every few days (every day with the Grenadier perk)
       if (day > 1 && (day % 2 === 0 || perkLvl('grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
@@ -27163,16 +27288,25 @@
     function warnActiveCaves(level) {
       if (typeof caveWarn !== 'function' || !POI.caves) return;
       for (let i = 0; i < POI.caves.length; i++) caveWarn(i, 0);
-      if (level === 0) return;
-      const idxs = getActiveCaveIndices();
-      for (const i of idxs) {
-        if (i >= 0) caveWarn(i, level);
+      if (level !== 0) {
+        const idxs = getActiveCaveIndices();
+        for (const i of idxs) {
+          if (i >= 0) caveWarn(i, level);
+        }
       }
+      reapplyCavePokeEyes();   // GB-44: a poke warning's eyes stay open through this
     }
 
     function beginWave() {
       phase = 'wave';
+      // CL-45: a wave is fought at night. The alarm has normally brought it on already;
+      // a wave started any other way (skip, tests) gets a quick nightfall.
+      if (skyLoop.mode !== 'free') {
+        if (skyLoop.mode !== 'wave') { skyLoop.mode = 'wave'; if (!isNight) skyTo(SKY_NIGHT_AT, 2.5); }
+      }
       spawnCd = 0.25;
+      // GB-43: guards still at their post when the alarm sounds go back into the dark; the wave is the briefing's 15.
+      retirePoiGuards();
       burstLeft = Math.min(3, waveTotal);
       // Level 2 as the wave starts (CL-4): all active mouths pulse together. Idempotent.
       // Clearer than per-first-spawn; drowned never appear in caveIndices.
@@ -27180,11 +27314,11 @@
       const boss = waveQueue.includes('colossus') || waveQueue.includes('guardian');
       AudioSys.waveStart(boss || bloodMoon);
       const from = waveSurround
-        ? 'They\'re coming from every direction'
-        : 'From ' + waveBearings.map((a) => {
+        ? dwText('wave.surround')
+        : dwText('wave.from', {sources: waveBearings.map((a) => {
           const cave = caveNearestBearing(a);
-          return cave ? cave.name : 'the ' + compassName(Math.cos(a), Math.sin(a));
-        }).join(' and ');
+          return cave ? cave.name : dwText('wave.compassSource', {bearing: compassName(Math.cos(a), Math.sin(a))});
+        }).reduce((first, second) => first ? dwText('common.and', {first, second}) : second, '')});
       if (guardianNightActive) {
         const cave = guardianCaveIndex >= 0 ? POI.caves[guardianCaveIndex] : null;
         const source = cave && cave.name ? cave.name : from;
@@ -27196,8 +27330,8 @@
         );
       } else {
         showBanner(
-          'DAY ' + day + ' — HORDE INBOUND',
-          from + (boss ? ' — something enormous walks with them' : ''),
+          dwText('wave.inbound', {day}),
+          boss ? dwText('wave.boss', {approach: from}) : from,
           4.2,
           boss ? '#ff6a55' : '#f4f7ff'
         );
@@ -27217,7 +27351,7 @@
       if (!show) { prepTimerEl.classList.remove('warn', 'crit'); return; }
       // No countdown any more: the next wave comes when you call it.
       publishUI('prep-label', { element: prepLabelEl, alarm: !!hq.seq, day, total: waveTotal, intelOwned: fieldIntelOwned });
-      prepClockEl.textContent = hq.seq ? 'INBOUND' : 'READY';
+      prepClockEl.textContent = dwText(hq.seq ? 'prep.inbound' : 'prep.readyStatus');
       prepBarEl.style.transform = 'scaleX(1)';
       prepTimerEl.classList.remove('warn');
       prepTimerEl.classList.toggle('crit', !!hq.seq);
@@ -27226,20 +27360,20 @@
     function updateWaveHud() {
       updatePrepTimerHud();
       if (!gameStarted) {
-        waveLineEl.textContent = 'Wave Day — · Press Play';
+        waveLineEl.textContent = dwText('hud.wave.menu');
         return;
       }
-      const graceTag = zombieGraceActive() ? ' · Z-Grace' : '';
+      const withGrace = line => zombieGraceActive() ? dwText('hud.wave.grace', {line}) : line;
       if (devNoZombies) {
-        waveLineEl.textContent = 'Wave Day ' + day + ' · No waves (nodead)';
+        waveLineEl.textContent = dwText('hud.wave.disabled', {day});
         return;
       }
       if (phase === 'prep') {
         publishUI('prep-hud', { element: waveLineEl, day, total: waveTotal, intelOwned: fieldIntelOwned });
       } else if (phase === 'wave') {
-        waveLineEl.textContent = 'Wave Day ' + day + ' · Zombies left: ' + zombiesRemaining + graceTag;
+        waveLineEl.textContent = withGrace(dwText('hud.wave.active', {day, remaining:zombiesRemaining}));
       } else {
-        waveLineEl.textContent = 'Wave Day ' + day + graceTag;
+        waveLineEl.textContent = withGrace(dwText('hud.wave.idle', {day}));
       }
     }
 
@@ -27281,6 +27415,94 @@
       return { x: LAKE_HOLE.x, z: LAKE_HOLE.z };
     }
 
+    // GB-40 / D-29: day 1's ground half claws up in the treeline 35-60 m from the HQ, out of the
+    // camera's view and never within 25 m of the marine.
+    const GROUND_RISE_MIN = 35, GROUND_RISE_MAX = 60, GROUND_RISE_CLEAR = 25;
+    const _gbView = new THREE.Vector3();
+    function pointInCameraView(x, y, z) {
+      _gbView.set(x, y, z).project(camera);
+      return _gbView.z > -1 && _gbView.z < 1 && Math.abs(_gbView.x) < 1.08 && Math.abs(_gbView.y) < 1.08;
+    }
+    function groundRiseSpotOk(x, z) {
+      const hd = Math.hypot(x, z);
+      if (hd < GROUND_RISE_MIN || hd > GROUND_RISE_MAX) return false;
+      if (Math.hypot(x - player.position.x, z - player.position.z) < GROUND_RISE_CLEAR) return false;
+      if (waterDepthAt(x, z) > 0.05) return false;
+      const gy = sampleHeight(x, z);
+      if (pointInCameraView(x, gy + 0.3, z) || pointInCameraView(x, gy + 1.8, z)) return false;
+      if (POI.caves) for (const c of POI.caves) if (Math.hypot(x - c.x, z - c.z) < 6) return false;
+      return true;
+    }
+    function pickGroundRiseSpot() {
+      const cands = [];
+      for (const t of trees) {
+        if (!t || t.alive === false || t.stump || t.falling) continue;
+        const d = Math.hypot(t.x, t.z);
+        if (d >= GROUND_RISE_MIN - 3 && d <= GROUND_RISE_MAX + 3) cands.push(t);
+      }
+      for (let k = 0; k < 60 && cands.length; k++) {
+        const t = cands[(Math.random() * cands.length) | 0];
+        const a = Math.random() * Math.PI * 2, r = (t.trunkRadius || 0.3) + 1 + Math.random() * 1.5;
+        const p = resolveStaticProps(t.x + Math.cos(a) * r, t.z + Math.sin(a) * r, 0.8);
+        if (groundRiseSpotOk(p.x, p.z)) return { x: p.x, z: p.z, tree: true };
+      }
+      for (let k = 0; k < 60; k++) {
+        const a = Math.random() * Math.PI * 2, r = GROUND_RISE_MIN + Math.random() * (GROUND_RISE_MAX - GROUND_RISE_MIN);
+        const p = resolveStaticProps(Math.cos(a) * r, Math.sin(a) * r, 0.8);
+        if (groundRiseSpotOk(p.x, p.z)) return { x: p.x, z: p.z, tree: false };
+      }
+      return null;
+    }
+    
+    // GB-43 / D-32: the POI guards. They stand at their post, facing out, until the marine comes
+    // within POI_GUARD_WAKE, one of them is hurt or killed, or the alarm sounds; then all of them
+    // come for him like any shambler. Normal kills, normal skulls.
+    const POI_GUARD_WAKE = 18;
+    let poiGuardPost = null;
+    function nearestHqPoi() {
+      const list = [];
+      const add = (kind, arr) => { (arr || []).forEach((p, i) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z)) list.push({ kind, index: i, x: p.x, z: p.z }); }); };
+      add('campsite', POI.campsites); add('cabin', POI.cabins); add('shed', POI.sheds); add('wreck', POI.wrecks);
+      add('tower', [POI.tower]); add('graveyard', [POI.graveyard]); add('mast', [POI.mast]); add('dock', [POI.dock]);
+      let best = null;
+      for (const p of list) { p.dist = Math.hypot(p.x, p.z); if (!best || p.dist < best.dist) best = p; }
+      return best;
+    }
+    function spawnPoiGuards() {
+      poiGuardPost = null;
+      const post = nearestHqPoi();
+      if (!post) return 0;
+      const n = 2 + (Math.random() < 0.5 ? 1 : 0);
+      const a0 = Math.random() * Math.PI * 2;
+      let made = 0;
+      for (let k = 0; k < n; k++) {
+        const a = a0 + (k / n) * Math.PI * 2, r = 2.5 + Math.random() * 2;
+        let p = resolveStaticProps(post.x + Math.cos(a) * r, post.z + Math.sin(a) * r, 0.8);
+        if (waterDepthAt(p.x, p.z) > 0.2) p = { x: post.x, z: post.z };
+        const g = spawnZombie(p.x, p.z, 'shambler', true, true);
+        if (!g) continue;
+        g.poiGuard = post; g.poiAwake = false; g.caveIndex = -1;
+        g.mesh.rotation.y = Math.atan2(p.x - post.x, p.z - post.z);   // facing out from the post
+        made++;
+      }
+      post.n = made;
+      poiGuardPost = post;
+      publishUI('poi-guards', { kind: post.kind, index: post.index, x: post.x, z: post.z, dist: post.dist, count: made });
+      return made;
+    }
+    function retirePoiGuards() {
+      for (const o of zombies.slice()) {
+        if (!o.poiGuard || o.poiAwake || !o.alive) continue;
+        o.alive = false;
+        recycleOrDisposeZombie(o);
+        const k = zombies.indexOf(o);
+        if (k >= 0) zombies.splice(k, 1);
+      }
+    }
+    function wakePoiGuards(reason) {
+      for (const o of zombies) if (o.poiGuard && !o.poiAwake) { o.poiAwake = true; o.poiWake = reason; }
+    }
+    
     function spawnWaveBatch(dt) {
       if (phase !== 'wave') return;
       if (zombieGraceActive()) return; // 1 game-hour no-zombie grace
@@ -27333,8 +27555,16 @@
       // the frozen prep plan (caveByIndex[0] <-> waveQueue[0]); ambush option A may only
       // retarget to a mouth already listed in wavePreview.caveIndices.
       let sx, sz, cave = null;
-      const plannedCaveIdx = (waveQueue.length && caveByIndex.length) ? caveByIndex[0] : -1;
-      if (tk === 'drowned') {
+      let plannedCaveIdx = (waveQueue.length && caveByIndex.length) ? caveByIndex[0] : -1;
+      let groundSpot = null;
+      if (plannedCaveIdx === GROUND_RISE) {
+        // GB-40: no hidden spot right now (the marine is out in the ring looking round): walk out of the cave instead.
+        groundSpot = pickGroundRiseSpot();
+        if (!groundSpot) plannedCaveIdx = (wavePreview && wavePreview.caveIndices && wavePreview.caveIndices.length) ? wavePreview.caveIndices[0] : -1;
+      }
+      if (groundSpot) {
+        sx = groundSpot.x; sz = groundSpot.z;
+      } else if (tk === 'drowned') {
         const ws = pickWaterSpawn();
         sx = ws.x; sz = ws.z;
       } else if (POI.caves.length) {
@@ -27356,9 +27586,11 @@
         if (cave) {
           // Just inside the drip line, in the dark, already on its feet.
           const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw), crx = Math.cos(cave.yaw), crz = -Math.sin(cave.yaw);
-          const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = -1.4 + Math.random() * 1.2;
+          const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = Math.hypot(player.position.x - cave.x, player.position.z - cave.z) < 8 ? -3.6 + Math.random() * 0.5 : -1.4 + Math.random() * 1.2;   // GB-40 (GB-A7): deeper when the marine is at the mouth
           sx = cave.x + crx * lx + fx * lz;
           sz = cave.z + crz * lx + fz * lz;
+          // GB-40 (GB-A7): never on top of him; hold the burst a moment instead.
+          if (Math.hypot(player.position.x - sx, player.position.z - sz) < 2.5) { spawnCd = 0.35; burstLeft += 1; return; }
         } else {
           // Planned open-ground / missing cave: old rim spawn.
           let ang;
@@ -27380,11 +27612,12 @@
       const spot = (cave || tk === 'drowned') ? { x: sx, z: sz } : resolveStaticProps(sx, sz, 0.8);
       const spawned = spawnZombie(spot.x, spot.z, tk, false, !!cave);
       if (spawned) {
-        spawned.caveIndex = plannedCaveIdx;
+        spawned.caveIndex = groundSpot ? -1 : plannedCaveIdx;
+        if (groundSpot) spawned.groundRise = true;
         if (cave) {
           spawned.mesh.rotation.y = cave.yaw;   // step out facing the map, not the wall
           // Guardian keeps its own boss stats (no chalk bone hpMul).
-          if (tk !== 'guardian') applyCaveRole(spawned, cave.theme);
+          if (tk !== 'guardian' && day !== 1) applyCaveRole(spawned, cave.theme);   // GB-40 / D-29: no cave role on day 1
         }
         if (tk === 'guardian') {
           spawned.guardianPlanned = true; // from guardian night's plan (ordinary run)
@@ -27395,6 +27628,8 @@
         }
         // drowned: caveIndex -1 — aquatic only; no cave role / no caveWarn
         waveSpawned += 1;
+        waveSpawnLog.push({ tk, ci: spawned.caveIndex, ground: !!groundSpot, x: spot.x, z: spot.z, pd: Math.hypot(spot.x - player.position.x, spot.z - player.position.z), hq: Math.hypot(spot.x, spot.z), inView: !!groundSpot && pointInCameraView(spot.x, sampleHeight(spot.x, spot.z) + 1, spot.z) });
+        if (waveSpawnLog.length > 400) waveSpawnLog.shift();
         if (waveQueue.length) {
           waveQueue.shift();
           if (caveByIndex.length) caveByIndex.shift();
@@ -29740,6 +29975,50 @@
     let cavePokeNow = 0;
     let cavePokeHitLog = [];
     const cavePokeUsedCaves = new Set();
+    // GB-44 (D-32, revises D-26): the first poke of a run is only a warning. The screech
+    // (the same 'aggro' cue, with warning: true), the eyes wide open in the mouth
+    // (caveWarn level 2 for CAVE_WARN_EYES_S, then back to what the director had) and a
+    // nudge of the camera. Nothing comes out. Rounds of the same burst that land inside
+    // CAVE_WARN_GRACE do nothing; after that the next poke of any cave comes for him.
+    // The warning is once a run: it survives the days and clears on day 1 (a new run).
+    const CAVE_WARN_GRACE = 2.5, CAVE_WARN_EYES_S = 3, CAVE_WARN_SHAKE = 0.45;
+    let cavePokeWarned = false;
+    let cavePokeWarn = null;   // { caveIndex, t, prior, shake }
+    function caveWarningBeat(caveIndex, c) {
+      cavePokeWarned = true;
+      const d = Math.hypot(player.position.x - c.x, player.position.z - c.z);
+      const shake = CAVE_WARN_SHAKE * Math.max(0.4, 1 - d / 30);
+      cavePokeWarn = { caveIndex, t: cavePokeNow, shake };
+      publishCaveGuardian(caveIndex, c.x, c.z, 'aggro', true);
+      c.pokeEyes = true;
+      c.pokeEyesPrior = c.warnLevel || 0;
+      if (typeof caveWarn === 'function') caveWarn(caveIndex, 2);
+      addShake(shake);
+      return true;
+    }
+    function endCavePokeEyes(restore) {
+      if (!POI.caves) return;
+      for (let i = 0; i < POI.caves.length; i++) {
+        const c = POI.caves[i];
+        if (!c.pokeEyes) continue;
+        c.pokeEyes = false;
+        if (restore && typeof caveWarn === 'function' && (c.warnLevel || 0) === 2) caveWarn(i, c.pokeEyesPrior || 0);
+      }
+    }
+    function updateCaveWarnBeat() {
+      if (cavePokeWarn && cavePokeNow - cavePokeWarn.t >= CAVE_WARN_EYES_S) endCavePokeEyes(true);
+    }
+    // warnActiveCaves (the director) resets every mouth; a warning's eyes outlast that,
+    // and go back to the director's new level when they close.
+    function reapplyCavePokeEyes() {
+      if (!POI.caves || typeof caveWarn !== 'function') return;
+      for (let i = 0; i < POI.caves.length; i++) {
+        const c = POI.caves[i];
+        if (!c.pokeEyes) continue;
+        c.pokeEyesPrior = c.warnLevel || 0;
+        caveWarn(i, 2);
+      }
+    }
     function caveMouthFrame(c, x, z) {
       const dx = x - c.x, dz = z - c.z;
       const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
@@ -29782,12 +30061,15 @@
       }
       return true;
     }
-    function resetCavePokeDay() {
+    function resetCavePokeDay(newRun) {
       cavePokeUsedCaves.clear();
       cavePokeHitLog.length = 0;
+      endCavePokeEyes(false);   // the day's warnActiveCaves sets the mouths afresh
+      cavePokeWarn = null;
+      if (newRun) cavePokeWarned = false;   // GB-44: once a run
     }
-    function publishCaveGuardian(caveIndex, x, z, phase) {
-      publishUI('cave-guardian', { caveIndex, x, z, phase });
+    function publishCaveGuardian(caveIndex, x, z, phase, warning) {
+      publishUI('cave-guardian', { caveIndex, x, z, phase, warning: !!warning });
     }
     function noteCaveMouthHit(caveIndex, opts) {
       if (!gameStarted || gameOver || won || scriptedKill || !POI.caves) return false;
@@ -29797,6 +30079,7 @@
       if (!c) return false;
       if (playerInCaveGrabBand(c)) return false;
       if (cavePokeUsedCaves.has(caveIndex)) return false;
+      if (caveBusyWithWave(caveIndex)) return false;   // GB-39
       if (!playerInCavePokeLos(c)) return false;
       if (opts && opts.explosive) return triggerCavePoke(caveIndex);
       cavePokeHitLog.push({ t: cavePokeNow, caveIndex });
@@ -29808,27 +30091,54 @@
       }
       return false;
     }
+    // GB-39 (GB-A1): fighting the wave at its own cave must not poke it. During a wave,
+    // an assault cave (the preview's caves, or any still planned) is off limits while the
+    // wave is still spawning, and any cave is while a zombie stands in its mouth.
+    function caveBusyWithWave(caveIndex) {
+      if (phase !== 'wave') return false;
+      const c = POI.caves && POI.caves[caveIndex];
+      if (!c) return false;
+      const planned = (wavePreview && wavePreview.caveIndices) || [];
+      const assault = planned.indexOf(caveIndex) >= 0 || caveByIndex.indexOf(caveIndex) >= 0;
+      if (assault && waveSpawned < waveTotal) return true;
+      for (const z of zombies) {
+        if (!z.alive || !z.mesh) continue;
+        if (pointInCaveMouthShot(c, z.mesh.position.x, c.gy + 1, z.mesh.position.z)) return true;
+      }
+      return false;
+    }
     function triggerCavePoke(caveIndex) {
       if (phase !== 'wave' && phase !== 'prep') return false;
       if (typeof objectiveModalOpen === 'function' && objectiveModalOpen()) return false;
       if (scriptedKill || gameOver || won || !gameStarted) return false;
       const c = POI.caves[caveIndex];
       if (!c || cavePokeUsedCaves.has(caveIndex)) return false;
+      if (caveBusyWithWave(caveIndex)) return false;   // GB-39
       if (playerInCaveGrabBand(c)) return false;
       if (!playerInCavePokeLos(c)) return false;
       // GB-35: aggro cue for Claude's screech, then it comes out after him (the chase
       // below). One guardian out at a time.
       if (caveChase) return false;
-      publishCaveGuardian(caveIndex, c.x, c.z, 'aggro');
+      // GB-44 (D-32): the first poke of the run only warns; the rest of that burst lands
+      // in the grace and does nothing.
+      if (cavePokeWarn && cavePokeNow - cavePokeWarn.t < CAVE_WARN_GRACE) return false;
+      if (!cavePokeWarned) return caveWarningBeat(caveIndex, c);
+      publishCaveGuardian(caveIndex, c.x, c.z, 'aggro', false);
       cavePokeUsedCaves.add(caveIndex);
       return startCaveChase(caveIndex, c);
     }
     function updateCavePoke(dt) {
       cavePokeNow += dt;
+      updateCaveWarnBeat();
       updateCaveChase(dt);
     }
     function getCavePokeState() {
+      const w = cavePokeWarn;
       return {
+        warned: cavePokeWarned,
+        warning: w ? { caveIndex: w.caveIndex, age: cavePokeNow - w.t, shake: w.shake,
+          eyes: !!(POI.caves && POI.caves[w.caveIndex] && POI.caves[w.caveIndex].pokeEyes) } : null,
+        grace: CAVE_WARN_GRACE, eyesFor: CAVE_WARN_EYES_S,
         dayCount: cavePokeUsedCaves.size,
         used: [...cavePokeUsedCaves],
         hits: cavePokeHitLog.map((h) => ({ caveIndex: h.caveIndex, age: cavePokeNow - h.t })),
@@ -29853,7 +30163,7 @@
       g.position.set(c.x - fx * 2.8, c.gy, c.z - fz * 2.8);
       g.rotation.y = c.yaw;
       g.visible = true;
-      caveChase = { caveIndex, cave: c, g, t: 0, speed: CAVE_CHASE_SPEED, ran: 0 };
+      caveChase = { caveIndex, cave: c, g, t: 0, speed: CAVE_CHASE_SPEED, ran: 0, smashed: 0, steered: 0, slowT: 0 };
       return true;
     }
     function abortCaveChase() {
@@ -29867,6 +30177,60 @@
       const h = sampleHeight(x, z);
       return ((x - c.x) * Math.sin(c.yaw) + (z - c.z) * Math.cos(c.yaw)) < 0.6 ? Math.max(h, c.gy) : h;
     }
+    // GB-44 (GB-A8): it goes round the world's static props (trunks, stumps, rocks,
+    // landmark solids at its height) and crashes through your builds. The steer looks
+    // CAVE_CHASE_LOOK ahead for the nearest prop in the way and bends round it; the
+    // shared push-out (resolveStaticProps) keeps it off whatever it still brushes. A
+    // build it runs into is smashed flat (damageBuild for all its hp, so whatever stood
+    // on it comes down too) and costs it a stumble of CAVE_SMASH_SLOW.
+    const CAVE_GUARD_R = 0.6, CAVE_CHASE_LOOK = 3.5, CAVE_SMASH_SLOW = 0.14;
+    const _caveSmashNear = [];
+    function caveChasePropR(o, footY) {
+      if (o.trunkRadius != null) return (o.stump && o.stumpMesh) ? o.trunkRadius * 1.15 : ((o.alive && !o.falling) ? o.trunkRadius : 0);
+      if (o.y0 != null) return (footY > o.y1 - 0.3 || footY + 2.2 < o.y0) ? 0 : (o.radius || 0);
+      return o.alive ? (o.radius || 0) : 0;
+    }
+    function caveChaseSteer(x, z, footY, ux, uz) {
+      let best = null, bt = Infinity;
+      for (const o of propsNear(x, z, CAVE_CHASE_LOOK)) {
+        const r = caveChasePropR(o, footY);
+        if (!(r > 0)) continue;
+        const ox = o.x - x, oz = o.z - z;
+        const t = ox * ux + oz * uz;
+        if (t <= -r * 0.5 || t > CAVE_CHASE_LOOK + r) continue;
+        const px = ox - ux * t, pz = oz - uz * t;
+        const perp = Math.hypot(px, pz), clear = r + CAVE_GUARD_R + 0.3;
+        if (perp >= clear) continue;
+        if (t < bt) { bt = t; best = { px, pz, perp, clear }; }
+      }
+      if (!best) return null;
+      let sx = -uz, sz = ux;   // dead ahead: pass it on the left
+      if (best.perp > 1e-3) { sx = -best.px / best.perp; sz = -best.pz / best.perp; }
+      const w = 2.4 * (best.clear - best.perp) / best.clear + 0.35;
+      const nx = ux + sx * w, nz = uz + sz * w, n = Math.hypot(nx, nz) || 1;
+      return { x: nx / n, z: nz / n };
+    }
+    function caveChaseSmash(ch, x, z, y) {
+      const reach = BUILD_GRID * 0.75 + CAVE_GUARD_R + 0.2;
+      const hits = [];
+      for (const b of buildsNear(x, z, reach, _caveSmashNear)) {
+        if (!b || b.hp <= 0 || hits.indexOf(b) >= 0 || builds.indexOf(b) < 0) continue;
+        if (Math.abs(b.x - x) > reach || Math.abs(b.z - z) > reach) continue;
+        const r = pushOutOfBuild(b, x, z, CAVE_GUARD_R, false, y);
+        if (Math.abs(r.x - x) + Math.abs(r.z - z) < 1e-4) continue;
+        hits.push(b);
+      }
+      for (const b of hits) {
+        if (b.hp <= 0 || builds.indexOf(b) < 0) continue;   // came down with an earlier one
+        spawnChunks(b.x, b.mesh.position.y + 0.9, b.z, 0x6b5a3e, 10, 6);
+        damageBuild(b, b.hp + 1, 'guardian');
+        const dp = Math.hypot(player.position.x - b.x, player.position.z - b.z);
+        addShake(0.5 * Math.max(0, 1 - dp / 25));
+        ch.slowT = CAVE_SMASH_SLOW;
+        ch.smashed++;
+      }
+      return hits.length;
+    }
     function updateCaveChase(dt) {
       const ch = caveChase;
       if (!ch) return;
@@ -29877,9 +30241,26 @@
       const d = Math.hypot(dx, dz);
       const going = ch.t > CAVE_CHASE_OUT_DELAY;   // the screech first, then it comes
       if (going && d > 1e-4) {
-        const step = Math.min(Math.max(0, d - CAVE_CHASE_GRAB_R * 0.6), ch.speed * dt);
-        g.position.x += dx / d * step; g.position.z += dz / d * step;
-        ch.ran += step;
+        // GB-44: in short steps, so a thin wall can't slip between two frames.
+        let left = Math.min(Math.max(0, d - CAVE_CHASE_GRAB_R * 0.6), ch.speed * (ch.slowT > 0 ? 0.3 : 1) * dt);
+        ch.slowT = Math.max(0, ch.slowT - dt);
+        for (let guard = 0; left > 1e-4 && guard < 40; guard++) {
+          const step = Math.min(0.4, left); left -= step;
+          const px = g.position.x, pz = g.position.z;
+          let ux = player.position.x - px, uz = player.position.z - pz;
+          const ud = Math.hypot(ux, uz);
+          if (ud < 1e-4) break;
+          ux /= ud; uz /= ud;
+          // Out past the lip the world's props apply; inside, the cave is its own room.
+          const out = ((px - c.x) * Math.sin(c.yaw) + (pz - c.z) * Math.cos(c.yaw)) > 0.6;
+          if (out) { const sv = caveChaseSteer(px, pz, g.position.y, ux, uz); if (sv) { ux = sv.x; uz = sv.z; ch.steered++; } }
+          let nx = px + ux * step, nz = pz + uz * step;
+          if (out) { const r = resolveStaticProps(nx, nz, CAVE_GUARD_R, g.position.y); nx = r.x; nz = r.z; }
+          caveChaseSmash(ch, nx, nz, g.position.y);
+          g.position.x = nx; g.position.z = nz;
+          g.position.y = caveGroundAt(c, nx, nz);
+          ch.ran += Math.hypot(nx - px, nz - pz);
+        }
       }
       g.position.y = caveGroundAt(c, g.position.x, g.position.z);
       if (d > 1e-4) g.rotation.y = Math.atan2(dx, dz);
@@ -29912,7 +30293,7 @@
       if (!ch) return null;
       return {
         caveIndex: ch.caveIndex, t: ch.t, speed: ch.speed, playerRun: PHYS.run,
-        x: ch.g.position.x, z: ch.g.position.z,
+        x: ch.g.position.x, z: ch.g.position.z, ran: ch.ran, smashed: ch.smashed, steered: ch.steered,
         dist: Math.hypot(player.position.x - ch.g.position.x, player.position.z - ch.g.position.z)
       };
     }
@@ -30100,7 +30481,13 @@
           const d = document.createElement('b'); d.className = 'd';
           d.dataset.deathCause = k;
           const found = seen.indexOf(k) >= 0;
-          d.textContent = found ? DEATH_WAYS[k].label : '???';
+          if (found) d.textContent = DEATH_WAYS[k].label;
+          else {
+            d.classList.add('locked');
+            d.setAttribute('aria-label', dwText('gameOver.unknownDeath'));
+            d.title = dwText('gameOver.unknownDeath');
+            d.innerHTML = '<svg viewBox="0 0 16 18" width="12" height="14" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="7" width="12" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 10v3" stroke="currentColor" stroke-width="1.5"/></svg>';
+          }
           if (found) d.classList.add('got');
           if (k === cause) { d.classList.add('now'); d.title = DEATH_WAYS[k].line; }
           grid.appendChild(d);
@@ -34000,12 +34387,18 @@
     const PIERCE_FALLOFF = 0.85;
     const _pierceHits = [];
 
+    // GB-39: a round that went through a cave mouth pokes it when it ends, unless it hit a zombie.
+    function endRoundPoke(p) {
+      if (p.cavePokeCi != null && !p.hitZombie) noteCaveMouthHit(p.cavePokeCi, null);
+      p.cavePokeCi = null;
+    }
     function updateProjectiles(dt) {
       for (let i = projectiles.length - 1; i >= 0; i--) {
         const p = projectiles[i];
         p.age += dt;
         if (p.hit || p.age >= p.life) {
-          releaseTracerMesh(p.mesh);
+          // GB-39: a round that went into a mouth pokes it only if it never hit a zombie.
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
@@ -34020,7 +34413,7 @@
         if (!p.fromTurret && POI.caves) {
           for (let ci = 0; ci < POI.caves.length; ci++) {
             if (segmentHitsCaveMouthShot(POI.caves[ci], p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z)) {
-              noteCaveMouthHit(ci, null);
+              if (p.cavePokeCi == null) p.cavePokeCi = ci;   // GB-39: judged when the round ends
               break;
             }
           }
@@ -34050,7 +34443,7 @@
             if (!p.pierced) p.pierced = new Set();
             for (const h of _pierceHits) {
               const hy = p.prev.y + (p.pos.y - p.prev.y) * h.t;
-              damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
+              p.hitZombie = true; damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
               p.pierced.add(h.z);
               if (p.pierce <= 0) { pierceSpent = true; break; } // that was the last body it can take
               p.pierce -= 1;
@@ -34061,7 +34454,7 @@
           // through the single-hit path below (which would resolve it a second time).
           if (pierceSpent) {
             p.hit = true;
-            releaseTracerMesh(p.mesh);
+            endRoundPoke(p); releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
             continue;
           }
@@ -34081,9 +34474,9 @@
         }
         if (hitZ) {
           const hy = p.prev.y + (p.pos.y - p.prev.y) * hitZT;
-          damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
+          p.hitZombie = true; damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
           p.hit = true;
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
@@ -34094,7 +34487,7 @@
           if (hitBug) {
             killBug(hitBug);
             p.hit = true;
-            releaseTracerMesh(p.mesh);
+            endRoundPoke(p); releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
             continue;
           }
@@ -34107,7 +34500,7 @@
             const col = hitW.kind === 'frog' ? 0x3d8b4a : (hitW.kind === 'rabbit' ? 0x8b6a4a : 0x887766);
             killWildlife(hitW.target, col, p.dir.x, p.dir.z);
             p.hit = true;
-            releaseTracerMesh(p.mesh);
+            endRoundPoke(p); releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
             continue;
           }
@@ -34142,7 +34535,7 @@
             spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * hitBT, p.prev.y + (p.pos.y - p.prev.y) * hitBT,
                         p.prev.z + (p.pos.z - p.prev.z) * hitBT, 0x6b5a3e, 2, 2);
             p.hit = true;
-            releaseTracerMesh(p.mesh);
+            endRoundPoke(p); releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
             continue;
           }
@@ -34158,7 +34551,7 @@
             spawnChunks(p.prev.x + (p.pos.x - p.prev.x) * t, p.prev.y + (p.pos.y - p.prev.y) * t,
                         p.prev.z + (p.pos.z - p.prev.z) * t, 0x7a5a3a, 2, 2);
             p.hit = true;
-            releaseTracerMesh(p.mesh);
+            endRoundPoke(p); releaseTracerMesh(p.mesh);
             projectiles.splice(i, 1);
             continue;
           }
@@ -34188,7 +34581,7 @@
         if (hitRock && !p.fromTurret) {
           damageRock(hitRock, p.damage * 0.5, p.dir.x, p.dir.z);
           p.hit = true;
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
@@ -34238,7 +34631,7 @@
           const hz = p.prev.z + (p.pos.z - p.prev.z) * hitT;
           damageTree(hitTree, hx, hz, hitY, p.dir.x, p.dir.z);
           p.hit = true;
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
@@ -34264,7 +34657,7 @@
           }
         }
         if (hitSolid) {
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
@@ -34281,13 +34674,13 @@
         if (p.pos.y <= sampleHeight(p.pos.x, p.pos.z)) {
           if (waterLevelAt(p.pos.x, p.pos.z) === null) { const sa = sndAt(p.pos.x, p.pos.z); AudioSys.bulletImpact('dirt', sa.v, sa.pan); }
           spawnChunks(p.pos.x, p.pos.y + 0.05, p.pos.z, 0x6b6250, 2, 2);
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
           continue;
         }
 
         if (Math.hypot(p.pos.x, p.pos.z) > TERRAIN_RADIUS || p.pos.y > 20) {
-          releaseTracerMesh(p.mesh);
+          endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
         }
       }
@@ -35453,20 +35846,33 @@
 
     let groanThrottle = 0;
     function updateZombies(dt) {
+      if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
       if (zombies.length) updateFlowFields(dt);
       zombiesRemaining = Math.max(0, waveTotal - waveSpawned) + zombies.length;
       if (phase === 'wave' && waveSpawned >= waveTotal) {
         zombiesRemaining = zombies.length;
-        if (zombies.length === 0) startPrep();
+        // CL-41: the next prep starts when the finisher hands the camera back, not
+        // underneath it (the day number, the banner and the prep label all wait for it).
+        if (zombies.length === 0 && !waveFinisher) startPrep();
       }
       // Deaths from damage-over-time (spikes, fire) are queued and settled after the
       // walk loop, so nothing splices the array we are iterating.
       const dotKills = [];
       const bombQueue = [];
       groanThrottle -= dt;
+      const poiPhase = phase;   // GB-43: the loop body declares its own `phase` further down
       for (const z of zombies) {
         if (!z.alive) continue;
         syncZombieFarLod(z);
+        // GB-43: a POI guard holds its post until woken.
+        if (z.poiGuard && !z.poiAwake) {
+          const gd = Math.hypot(player.position.x - z.mesh.position.x, player.position.z - z.mesh.position.z);
+          const lost = zombies.filter((o) => o.poiGuard === z.poiGuard && o.alive).length < (z.poiGuard.n || 0);
+          if (poiPhase === 'wave') wakePoiGuards('alarm');
+          else if (z.hp < z.maxHp || lost) wakePoiGuards('hit');
+          else if (gd < POI_GUARD_WAKE) wakePoiGuards('near');
+          else { z.mesh.rotation.y += Math.sin(performance.now() * 0.0004 + (z.bob || 0)) * dt * 0.25; continue; }
+        }
         const tactics = z.tactics || 'direct';
         const px0 = player.position.x, pz0 = player.position.z;
         const hx0 = house.active ? house.group.position.x : 0;
@@ -35551,7 +35957,7 @@
         }
 
         const nx = dx / dist, nz = dz / dist;
-        const graceFreeze = zombieGraceActive();
+        const graceFreeze = zombieGraceActive() && !(z.poiGuard && z.poiAwake);   // GB-43: a woken POI guard fights in the grace
         let spd = z.speed * (bloodMoon ? 1.2 : 1);
         if (z.sprintT > 0) { z.sprintT -= dt; spd *= 1.55; }
         if (tactics === 'weave' && z.rushT > 0) spd *= 1.35;
@@ -36281,7 +36687,7 @@
         }
 
         z.attackCd -= dt;
-        if (!zombieGraceActive() && z.attackWindup <= 0 && !rising && tactics !== 'bomb') {
+        if ((!zombieGraceActive() || (z.poiGuard && z.poiAwake)) && z.attackWindup <= 0 && !rising && tactics !== 'bomb') {   // GB-43
           const tryWindup = (type, dmg, cd, build) => {
             if (z.attackCd > 0) return;
             z.attackCd = cd;
@@ -36539,7 +36945,7 @@
           try { window.open('', '_self'); window.close(); } catch (_) {}
         }
         if (!window.closed) {
-          document.documentElement.innerHTML = '<body style="margin:0;background:#0a0c10;color:#c8d0dc;font:16px/1.5 system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center"><p style="opacity:.85">You can close this window.</p></body>';
+          document.documentElement.innerHTML = '<body style="margin:0;background:#0a0c10;color:#c8d0dc;font:16px/1.5 system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center"><p style="opacity:.85">' + dwText('menu.closeWindow') + '</p></body>';
         }
       }, 120);
     });
@@ -36590,7 +36996,7 @@
         const perfBtn = document.getElementById('perfHudToggle');
         if (perfBtn) {
           const syncPerf = () => {
-            perfBtn.textContent = 'FPS & hardware: ' + (showPerf ? 'on' : 'off');
+            perfBtn.textContent = dwText('settings.performance', {state:dwText(showPerf ? 'common.on' : 'common.off')});
             perfBtn.classList.toggle('on', showPerf);
           };
           perfBtn.addEventListener('click', () => {
@@ -36606,7 +37012,7 @@
       const followBtn = document.getElementById('followCursorToggle');
       const tiltBtns = document.querySelectorAll('#autoTiltSeg button');
       const syncFollow = () => {
-        followBtn.textContent = 'Follow cursor: ' + (followCursor ? 'on' : 'off');
+        followBtn.textContent = dwText('settings.followCursor', {state:dwText(followCursor ? 'common.on' : 'common.off')});
         followBtn.classList.toggle('on', followCursor);
       };
       const syncTilt = () => { for (const b of tiltBtns) b.classList.toggle('on', b.dataset.tilt === autoTiltMode); };
@@ -36636,7 +37042,7 @@
       const name = cleanName(playerNameEl.value);
       if (!/[\p{L}\p{N}]/u.test(name)) {
         playerNameEl.setAttribute('aria-invalid', 'true');
-        document.getElementById('nameError').textContent = 'Enter your name to play.';
+        document.getElementById('nameError').textContent = dwText('menu.nameRequired');
         playerNameEl.focus();
         return null;
       }
@@ -36894,6 +37300,8 @@
       house.active = false; house.hp = house.maxHp;
       player.position.set(0, sampleHeight(0, 0), 0);
       worldTime = 0.4;
+      skyLoop.mode = 'free'; skyLoop.tween = null;
+      waveFinisher = null; finisherJustEnded = false;
       hoursSinceDawn = 0;
       hoursSinceMatchStart = 0;
       matchClockRunning = false;
@@ -36985,8 +37393,9 @@
       let boss = bloodMoon, live = 0, nearest = null, guardianUp = false;
       const apx = player.position.x, apz = player.position.z;
       for (const z of zombies) {
-        if (!z.alive) continue;
-        live++;
+if (!z.alive) continue;
+if (z.poiGuard && !z.poiAwake) continue;   // GB-43: a POI guard at its post is not a fight yet
+live++;
         if (z.typeKey === 'colossus' || z.typeKey === 'guardian') boss = true;
         if (z.typeKey === 'guardian') guardianUp = true;
         if (z.mesh) {
@@ -36996,6 +37405,9 @@
       }
       a.threat = live;
       a.nearest = nearest;
+      // CL-42: the section player follows the wave: how many are left, and whether they're all out.
+      a.remaining = phase === 'wave' ? zombiesRemaining : 0;
+      a.spawnedAll = phase === 'wave' && waveSpawned >= waveTotal;
       a.boss = boss && phase === 'wave' ? true : (bloodMoon && phase === 'wave');
       // CL-23: the music tells Ember Night and a guardian (planned or poked) apart from the
       // colossus. special is for phase 3's special nights: 'fog', 'swarm', 'siegenight', 'silent'.
@@ -37810,7 +38222,7 @@
       renderFrame();
       if (showPerf && !window.TT) {
         window.TT = {
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
@@ -37818,7 +38230,7 @@
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,

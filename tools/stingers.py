@@ -3,6 +3,18 @@
   python3 stingers.py out/   ->  sting_*.wav and cue_*.wav
 Each one is a short, finished phrase: it plays alone (the director cuts all music first).
 The alarm ends on E, where the day-1 song begins.
+
+CL-43 (Jerry: "make the stingers for day 1 as good as possible"), with D-28 the sky following
+the loop:
+  alarm  is now the nightfall too: exactly two bars of the song's tempo (5.0 s) while the sky
+         goes dark over the alarm's five seconds, the siren in the first bar, the night coming
+         down in the second (the hook's notes falling E-D-C-B over the engine waking), and the
+         band's hit on E landing on the downbeat of bar three, the moment night is down.
+  clear  is now the dawn too: the finisher's slow motion and the sky's turn to morning both run
+         for exactly its length (7.5 s, three bars at 76). The hook, slowed, lifts from E minor
+         to E major while a pad swells up under it like the light, and it ends on a ringing E
+         major chord with a sunrise arpeggio on top.
+  dawn   is now a short cue (2.6 s): the dawn card's chime (GP-34).
 """
 import sys, os
 import numpy as np
@@ -72,47 +84,83 @@ E3, E4, G4, A4, B4, C5, D5, E5, Fs5, G5, B5, E6 = 52, 64, 67, 69, 71, 72, 74, 76
 
 
 def s_alarm():
-    """A chip air-raid siren: the pulse lead wailing E-B-E up the octave over a snare march,
-    then the band hits on E. 6.4 s."""
-    b, s = buf(6.4), buf(6.4)
-    # siren: a pitch-swept pulse, three wails
-    n = at(4.2); t = np.arange(n) / SR
-    f = midi_to_hz(64) * 2 ** ((7 + 5 * np.sin(2 * np.pi * t / 1.4 - np.pi / 2)) / 12)
-    ph = np.cumsum(f / SR) % 1.0
-    sir = np.where(ph < 0.25, 1.0, -1.0) + 0.6 * np.where((ph * 2.0 + 0.1) % 1 < 0.125, 1.0, -1.0)
-    sir = lowpass(sir, 4000) * np.minimum(1, t / 0.3)
-    add_at(b, sir * 0.35, 0, 1.0, -0.15); add_at(s, sir * 0.2, 0, 1.0, 0.15)
-    # march: snare on every beat at 96 bpm, kick doubles in the last bar, tightening
+    """The alarm and the nightfall: two bars at 96 (5.0 s) and the hit's ring. 6.3 s."""
     spb = 60 / 96
-    for k in range(7):
-        snare(b, k * spb, 0.35 + 0.08 * k, big=False)
-        kick(b, k * spb, 0.5 + 0.05 * k)
+    L = 6.3
+    b, s = buf(L), buf(L)
+    # bar 1: the siren, a pitch-swept pulse wailing E up to B and back, twice
+    n = at(2.5); t = np.arange(n) / SR
+    f = midi_to_hz(64) * 2 ** ((7 * (0.5 - 0.5 * np.cos(2 * np.pi * t / 1.25))) / 12)
+    ph = np.cumsum(f / SR) % 1.0
+    sir = np.where(ph < 0.25, 1.0, -1.0) + 0.55 * np.where((ph * 2.0 + 0.1) % 1 < 0.125, 1.0, -1.0)
+    sir = lowpass(sir, 4200) * np.minimum(1, t / 0.12) * (1 - 0.35 * (t / 2.5))
+    add_at(b, sir * 0.34, 0, 1.0, -0.2); add_at(s, sir * 0.22, 0, 1.0, 0.2)
+    # the march under it: snare 8ths, kick on the beats, tightening into bar 2
     for k in range(8):
-        snare(b, 7 * spb * 0.98 + k * spb / 4 * 0.6, 0.4 + 0.07 * k, big=False)
-    # the hit on E: kick, crash, power chord, bass
-    th = 4.45
-    kick(b, th, 1.2); snare(b, th, 1.0); crash(b, th, 0.7)
-    chord(b, th, 40, (0, 7, 12, 19, 24), 1.9, g=0.9, duty=0.25, fc=3200)
-    bass(b, th, 28, 1.8, g=0.9, bright=0.9)
-    lead(b, th, E5, 1.6, g=0.6, sends=s)
-    return finish(b, s, rev_wet=0.45)
+        snare(b, k * spb / 2, 0.22 + 0.03 * k, big=False)
+    for k in range(4):
+        kick(b, k * spb, 0.55 + 0.05 * k)
+    # bar 2: night comes down. The hook's notes fall E-D-C-B over the engine waking in 16ths.
+    b2 = 4 * spb
+    for k in range(16):
+        g = 0.35 + 0.45 * k / 15
+        bass(b, b2 + k * spb / 4, 40 if k % 4 else 40, spb / 4 * 0.9, g=g, bright=0.25 + 0.55 * k / 15)
+    for i, m in enumerate([E5, D5, C5, B4]):
+        lead(b, b2 + i * spb, m, spb * 0.92, g=0.62 - 0.04 * i, dark=0.2 + 0.1 * i, sends=s)
+    for k in range(8):
+        snare(b, b2 + 2 * spb + k * spb / 4, 0.3 + 0.07 * k, big=False)
+    kick(b, b2, 0.8); kick(b, b2 + 2 * spb, 0.85)
+    # a riser into the hit
+    n2 = at(4 * spb); tt = np.arange(n2) / n2
+    ris = (highpass(lfsr_noise(n2, rate=30000), 3000) * tt ** 2.2) * 0.35
+    add_at(b, ris, at(b2), 1.0, 0.0)
+    # bar 3, beat 1: the hit on E, as the night is fully down
+    th = 8 * spb
+    kick(b, th, 1.2); snare(b, th, 1.0); crash(b, th, 0.75)
+    chord(b, th, 40, (0, 7, 12, 19, 24), 1.25, g=0.95, duty=0.25, fc=3200)
+    bass(b, th, 28, 1.2, g=0.95, bright=0.9)
+    lead(b, th, E5, 1.1, g=0.55, sends=s)
+    return finish(b, s, rev_wet=0.42, target_db=-13.0)
 
 
 def s_clear():
-    """The wave is over: the hook's first phrase, slowed, lifting from E minor to E major, and a
-    long ringing chord. 7.2 s (the finisher's slow motion runs for exactly this long)."""
-    b, s = buf(7.2), buf(7.2)
+    """The wave is over, and the dawn: the hook's first phrase slowed, lifting from E minor to
+    E major, a pad swelling up under it like the light, and a ringing E major chord with a
+    sunrise arpeggio. 7.5 s (the finisher's slow motion and the sky's turn run this long)."""
+    L = 7.5
+    b, s = buf(L), buf(L)
     spb = 60 / 76
-    phrase = [(0, 1.5, E4), (1.5, 1.5, G4), (3, 1, B4), (4, 1, A4), (5, 1, G4), (6, 2, 68)]   # ends on G#: major
+    phrase = [(0, 1.5, E4), (1.5, 1.5, G4), (3, 1, B4), (4, 1, A4), (5, 1, G4), (6, 2.6, 68)]   # ends on G#: major
     for bt, ln, m in phrase:
-        lead(b, bt * spb, m, ln * spb * 0.95, g=0.75, sends=s)
+        lead(b, bt * spb, m, ln * spb * 0.95, g=0.72, sends=s)
     for k, (bt, root, ivs) in enumerate([(0, 40, (0, 7, 12, 15)), (4, 36, (0, 7, 12, 16)), (6, 40, (0, 7, 12, 16, 19))]):
-        chord(b, bt * spb, root + 12, ivs, (8 - bt) * spb + 1.2, g=0.45 if k < 2 else 0.55)
-        bass(b, bt * spb, root, (2 if k < 2 else 3.2) * spb, g=0.6, bright=0.4)
-    for i in range(8):   # sparkle arp over the final chord
-        arp(b, 6 * spb + i * spb / 4, [64, 68, 71, 76, 80, 83, 88, 83][i] + 12, 0.18, g=0.35, pan=0.3 * np.sin(i))
-    crash(b, 6 * spb, 0.35)
-    return finish(b, s, rev_wet=0.55, dly=spb * 0.75)
+        chord(b, bt * spb, root + 12, ivs, (8.6 - bt) * spb + 0.6, g=0.42 if k < 2 else 0.55)
+        bass(b, bt * spb, root, (2 if k < 2 else 3.4) * spb, g=0.6, bright=0.4)
+    # the light: a soft pulse pad that swells from the C chord into the E major one
+    n = at(L - 2.2); t = np.arange(n) / n
+    pad = np.zeros(n)
+    for m in (52, 59, 64, 68, 71):
+        f = midi_to_hz(m)
+        pad += pulse(f, n, 0.5) + pulse(f * 2 ** (7 / 1200), n, 0.5)
+    pad = lowpass(pad, 1600) * (t ** 1.6) * (1 - np.clip((t - 0.92) / 0.08, 0, 1)) / 10
+    add_at(b, pad, at(2.2), 0.55, 0.15); add_at(s, pad, at(2.2), 0.35, -0.15)
+    # sunrise: the arpeggio climbing over the final chord, and a bell on top
+    for i in range(12):
+        arp(b, 6 * spb + i * spb / 4, [64, 68, 71, 76, 80, 83, 88, 83, 88, 92, 95, 100][i], 0.2, g=0.3 + 0.01 * i, pan=0.35 * np.sin(i))
+    lead(b, 6 * spb + 1.0, 88, 1.3, g=0.25, dark=0.3, sends=s)
+    crash(b, 6 * spb, 0.3)
+    return finish(b, s, rev_wet=0.55, dly=spb * 0.75, target_db=-13.0)
+
+
+def c_dawn():
+    """The dawn card's chime: an E major arpeggio, a soft bell. 2.6 s."""
+    b, s = buf(2.6), buf(2.6)
+    for i, m in enumerate([64, 68, 71, 76, 80]):
+        arp(b, i * 0.11, m + 12, 0.45, g=0.42, pan=0.3 * np.sin(i))
+        add_at(s, D.v_arp(m + 12, int(0.45 * SR)), at(i * 0.11), 0.3, 0)
+    chord(b, 0.5, 52, (0, 7, 12, 16), 1.8, g=0.32, duty=0.5, fc=1500)
+    lead(b, 0.55, 88, 1.2, g=0.28, dark=0.35, sends=s)
+    return finish(b, s, rev_wet=0.6, dly=0.33, target_db=-17.0)
 
 
 def s_dawn():
@@ -218,7 +266,7 @@ def c_poi():
     return finish(b, s, rev_wet=0.45, dly=0.2, target_db=-17.5)
 
 
-ALL = {'sting_alarm': s_alarm, 'sting_clear': s_clear, 'sting_dawn': s_dawn, 'sting_night_falls': s_night,
+ALL = {'sting_alarm': s_alarm, 'sting_clear': s_clear, 'sting_dawn': c_dawn, 'sting_night_falls': s_night,
        'sting_ember': s_ember, 'sting_guardian': s_guardian, 'cue_achievement': c_achievement,
        'cue_airdrop': c_airdrop, 'cue_objective': c_objective, 'cue_poi_cleared': c_poi}
 

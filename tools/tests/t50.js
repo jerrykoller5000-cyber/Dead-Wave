@@ -5,7 +5,15 @@
   const frames = async (n = 3) => { for (let i = 0; i < n; i++) { T.updateTreeBatches(); await wait(40); } };
   try {
     ok(typeof T.treeBatchStats === 'function' && typeof T.getTreeBatches === 'function', 'tree batch exports');
-    await frames(12); // let distance swaps (12 a frame) settle after the load
+    // Let the distance swaps (12 a frame) settle after the load: run frames until the batched
+    // count holds still for five in a row (up to 90). A fixed 12 was not always enough on a
+    // busy machine, and the live trees it left behind counted as "own" draws (CU-A2).
+    let lastB = -1, still = 0;
+    for (let i = 0; i < 90 && still < 5; i++) {
+      await frames(1);
+      const b = T.treeBatchStats().batched;
+      still = b === lastB ? still + 1 : 0; lastB = b;
+    }
     const s0 = T.treeBatchStats();
     ok(s0.built && !s0.off, 'batches built at load (' + s0.buildMs + ' ms)');
     ok(s0.members >= T.trees.length - 12 && s0.batched > s0.members * 0.6, 'most trees batched (' + s0.batched + ' of ' + s0.members + ', ' + s0.live + ' live)');

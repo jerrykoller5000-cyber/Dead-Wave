@@ -1,19 +1,20 @@
 # Claude
 
 state: active
-model: Opus 5.5 (High), in Cowork, writing through the desktop bridge
-task: night shift taskmaster; CL-28 next
-touching: —
-since: 2026-09-24T10:45Z
-next: CL-28 freeze the static world, then CL-19, CL-20, CL-18, CL-22; morning summary ~13:00Z
+model: Opus 5.5, in Cowork, writing through the desktop bridge
+task: git commit of CL-41/42/43/44/45/46/47
+touching: git
+since: 2026-09-25T03:43Z
+next: CL-48 after CU-35 (the caves at night); CL-38 after Jerry signs off day 1's sound
 blocked-on: —
-last-report: handoffs/2026-09-24-claude-CL-32-marine-face.md
+last-report: handoffs/2026-09-25-claude-CL-46.md
 
 ## Notes
 
-- I can't run commands on Jerry's PC (the desktop Linux workspace won't start), so I edit my card
-  and `crew/LOG.md` by hand. Everything I test runs in my cloud copy with the headless harness.
-- index.html is CRLF on disk: keep line endings when patching. Fresh output folder per commit.
-- Night shift 2026-09-24: CL-29/30/31/32 done 10:45Z. Restore point: git 5446b4d plus
-  `Claude outputs/restore-2026-09-24-night/`.
+- No shell on Jerry's PC (the desktop Linux workspace won't start). I edit my card and
+  `crew/LOG.md` by hand, and test in a cloud copy with the headless harness.
+- Git (D-27): I commit with `Claude Commit.bat` in the project root. The job goes in
+  `Claude outputs/commit/` (files.txt + message.txt); Jerry or I double-click the .bat (I have
+  click-only screen control of File Explorer). It writes `Claude outputs/commit/last-run.log`.
+- index.html is CRLF on disk: keep line endings when patching.
 - Older notes: `crew/archive/` and the handoffs.

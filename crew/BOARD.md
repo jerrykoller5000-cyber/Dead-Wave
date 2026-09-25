@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 01:15 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 02:30 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -20,15 +20,40 @@ Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
 3. Work the queue top to bottom, one check-in and one handoff per task, until it's empty or
    you're blocked. Don't stop to ask Jerry whether to continue.
 
-Where each of you is (2026-09-24, 09:10 UTC). **The night shift (Jerry is asleep; Claude runs the board).** Phase 1 is done; tonight is performance, the last world fixes, and phase 2 proposals for Jerry's morning. Work your queue top to bottom without stopping to ask.
+## Mission
 
-| Agent | Now / start with | Then |
-| --- | --- | --- |
-| Cursor | CU-21/CU-22: commit and push tonight's reviewed work | then CU-5 |
-| Grokbot | queue clear: GB-35 and GB-36 reviewed | wait for Jerry's review |
-| ChatGPT | GP-28 version the intro files (Jerry got a stale `opening.js`) | GP-29 GB-36's kiosk text and restock fixture |
-| Claude | CL-34 chiptune fight loops from the Suno tracks | No screen control tonight |
-| Antigravity | AG-13 shots after CL-33 and GB-35 | AG-9c still waits on CU-19 |
+**Fix day 1.** Jerry, 2026-09-25 02:25Z: fix every problem the audit found, and make day 1's music and stingers as good as they can be.
+Every task below comes from the day-1 audit (`handoffs/audit-day1/PLAN.md` has the merged list and where each one came from). Work your queue top to bottom; a task that says "after XX-n" waits for it. Jerry's decisions are D-28 to D-32.
+- **Grokbot** · GB-39 · handoffs/2026-09-25-grokbot-GB-39.md
+- **Grokbot** · GB-40 · handoffs/2026-09-25-grokbot-GB-40.md
+- **Grokbot** · GB-42 · handoffs/2026-09-25-grokbot-GB-42.md
+- **Grokbot** · GB-43 · handoffs/2026-09-25-grokbot-GB-43.md
+- **Grokbot** · GB-44 · handoffs/2026-09-25-grokbot-GB-44.md
+- **Grokbot** · GB-45 · handoffs/2026-09-25-grokbot-GB-45.md
+- **Cursor** · CU-28 · handoffs/2026-09-25-cursor-CU-28.md
+- **Cursor** · CU-29 · handoffs/2026-09-25-cursor-CU-29.md
+- **Cursor** · CU-30 · handoffs/2026-09-25-cursor-CU-30.md
+- **Cursor** · CU-31 · handoffs/2026-09-25-cursor-CU-31.md
+- **Cursor** · CU-32 · handoffs/2026-09-25-cursor-CU-32.md
+- **Cursor** · CU-33 · handoffs/2026-09-25-cursor-CU-33.md
+- **Cursor** · CU-35 · handoffs/2026-09-25-cursor-CU-35.md
+- **Cursor** · CU-34 · handoffs/2026-09-25-cursor-CU-34.md
+- **ChatGPT** · GP-31 · handoffs/2026-09-25-chatgpt-GP-31.md
+- **ChatGPT** · GP-32 · handoffs/2026-09-25-chatgpt-GP-32.md
+- **ChatGPT** · GP-33 · handoffs/2026-09-25-chatgpt-GP-33.md
+- **ChatGPT** · GP-34 · handoffs/2026-09-25-chatgpt-GP-34.md
+- **ChatGPT** · GP-35 · handoffs/2026-09-25-chatgpt-GP-35.md
+- **ChatGPT** · GP-36 · handoffs/2026-09-25-chatgpt-GP-36.md
+- **Claude** · CL-41 · handoffs/2026-09-25-claude-CL-41.md
+- **Claude** · CL-45 · handoffs/2026-09-25-claude-CL-45.md
+- **Claude** · CL-42 · handoffs/2026-09-25-claude-CL-42.md
+- **Claude** · CL-43 · handoffs/2026-09-25-claude-CL-43.md
+- **Claude** · CL-47 · handoffs/2026-09-25-claude-CL-47.md
+- **Claude** · CL-44 · handoffs/2026-09-25-claude-CL-44.md
+- **Claude** · CL-46 · handoffs/2026-09-25-claude-CL-46.md
+- **Claude** · CL-48 · handoffs/2026-09-25-claude-CL-48.md
+
+Then: Cursor plays day 1 again on Jerry's GPU (CU-35, Antigravity's job while it's out of usage), and Jerry plays it.
 
 ## Waiting on
 
@@ -37,11 +62,28 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
+- **Claude** · CL-41 the next prep starts after the finisher · waiting: ChatGPT
+- **Grokbot** · GB-43 day 1's first fight at the nearest POI · waiting: ChatGPT
+
 
 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-25, 03:30Z · Antigravity is out of usage for tonight.** Its work goes to another agent: the
+  day-1 replay on Jerry's GPU (was AG-17) is now Cursor's CU-35. AG-16's shots are in; Claude reviewed them.
+
+- **2026-09-25, 02:25Z · Fix day 1.** Jerry read the plan. Fix all the other problems the audit found too,
+  and make the day-1 stingers and music as good as possible. His answers:
+  1. The sky follows the loop: day in prep, the alarm brings night, the clear brings dawn. D-28.
+  2. Day 1 is **15** zombies: half pop up out of the ground, half come from the cave. D-29.
+  3. No saves: remove the morning save; every Play is a fresh run. D-30.
+  4. Ways to die carry over between runs (a lifetime collection). D-31.
+
+- **2026-09-25, 01:35Z · The day-1 audit.** Claude improves the crew panel. Then every agent, Claude
+  included, audits day 1 and turns the problems in to Claude. Claude reads them all, makes a plan,
+  and brings it to Jerry. See **Mission** at the top.
 
 - **2026-09-25, 01:15Z · Git is shared.** Jerry overrides AGENTS.md rule 6: Claude may now commit
   and push too, not only Cursor. D-27.
@@ -120,6 +162,22 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-32 · Claude's calls from the plan (Jerry did not overrule).** A short dawn card after the finisher. Two
+  or three shamblers at the POI nearest the HQ on day 1, so the first kill, skull and bank come before the
+  first alarm. The first cave poke of a run is a warning (a screech and the eyes); the second one comes for
+  you (revises D-26). Day-1 fps is fine on Jerry's 5080 (AG-15: 58.8 fps with the flamethrower), so CU-26,
+  GB-37 and AG-14 are parked.
+- **D-31 · Ways to die is a lifetime collection (Jerry).** New games no longer clear `tt_death_log`
+  (reverses the CU-24 clear). Only a real reset of the profile clears it.
+- **D-30 · No saves (Jerry).** The morning save (`tt_day_start`) comes out: nothing writes it, nothing
+  reads it. Play and Play again always start a fresh run at day 1. Quit to menu says it ends the run.
+- **D-29 · Day 1 is 15 zombies, half out of the ground (Jerry, revising "horde sizes stay").** 7 or 8 rise
+  out of the ground (the existing claw-up) in the treeline 35 to 60 m from the HQ, out of the camera's view,
+  and 7 or 8 walk out of the day's cave. Other days are unchanged. Claude's call on top: on day 1 the
+  shamblers get no cave role, so one pistol body shot kills one whichever cave rolls (GB-A4).
+- **D-28 · The sky follows the loop (Jerry).** The clock only runs in prep and holds before dusk. The alarm
+  brings the night on over its 5 s; the wave is fought at night; the last kill's finisher ends in dawn, and
+  the next prep starts in the morning. Claude builds it (CL-45).
 - **D-27 · Cursor and Claude both commit and push (Jerry, 01:15Z; replaces "only Cursor").** Same
   rules as before: only finished, checked-out work, never a file an active agent is in, the rule 7
   checks first, then push `feature/Phis-changes`. One at a time: check in with `git` in `--touch`,
@@ -345,7 +403,33 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-26** Profile a day-1 firefight on the pistol, the uzi and the flamethrower (`tools/cpu-profile.mjs`): the top
+- [x] **CU-28** **S1 for the suite (CU-A1).** The test page dismisses the splash once `window.TT` exists
+  (`DWOpening.dismissForTesting()`), so t60 and t61 run again. Then the whole suite on Jerry's PC.
+- [x] **CU-29** The 373 ms stall on the day-1 last kill (AG-A6). Profile it on Jerry's GPU (`tools/cpu-profile.mjs`
+  around `beginWaveFinisher` / `startPrep`), fix your part, hand Claude the rest.
+- [ ] **CU-30** Load and shell (CU-A3, CU-A7): warm and cold title times on Jerry's GPU against 5 s / 15 s, and the
+  title menu's 45 fps (the live pre-roll, AG-15). A favicon, so the two 404s go.
+- [ ] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
+  `tt_day_start`) and its tests (check out with `--review`). Stop clearing `tt_death_log` on a new game.
+- [ ] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
+  (rule 3). Claude says yes to anything of his.
+- [ ] **CU-33** The death screen after a real death, not the dev `rip` (CU-A9). Fix it if it doesn't show.
+- [ ] **CU-35** (was AG-17; Antigravity is out for tonight) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's
+  GPU from a fresh profile (survive; die and Play again), with Antigravity's own harness: `qa/run-ag15.mjs` and
+  `qa/run-ag15-deep.mjs` (hardware GPU over CDP, see `qa/README.md`). Time the alarm to first contact and the wave from
+  first shot to last kill. Fps at the menu, prep, the wave and the finisher. Shots of every step, and of the day-1
+  assault cave at night during the wave (the alarm brings real night now, D-28), NVGs off and on, for Claude's CL-48.
+  Report `qa/2026-09-25-CU-35.md` plus the handoff; shots in `qa/shots/2026-09-25-CU-35/`. You may write in `qa/` for
+  this. Say plainly what you couldn't check.
+- [ ] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
+  your handoff.
+- [x] **CU-27** Day-1 audit → `handoffs/audit-day1/cursor.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the full `npm test` (every
+  failure: test name and first error line; the panel says 35 fail), boot and load time cold and warm
+  against the budget, every console error and warning in a day-1 run, saves and resume (`tt_day_start`,
+  `tt_death_log`, Play again, quit and come back), a CPU profile of the day-1 wave (`tools/cpu-profile.mjs`),
+  and scratch files left in the repo (`crew/_gb16_*`, `tools/_f*.txt`, `gen-ag9.*`...). Check in with
+  `--touch "handoffs/audit-day1/cursor.md"`.
+- [~] **CU-26** (parked by D-32: day-1 fps is fine on the 5080) Profile a day-1 firefight on the pistol, the uzi and the flamethrower (`tools/cpu-profile.mjs`): the top
   costs per frame, and what the draw calls are. Hand the list to Claude and Grokbot.
 - [x] **CU-25** Play again after a death starts on day 1. The morning ledger (`tt_day_start`) currently
   resumes on Play, so a cave death came back as day 2. A death's Play again is a new run. Quitting
@@ -361,9 +445,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
   (terrain, trees, props, buildings, zombies and their parts, particles, decals, UI sprites) in
   megaswarm and in a day-5 fight. A table in your handoff. No fixes.
-- [>] **CU-21** Through the night: commit finished work every hour or so (only what's been handed
+- [~] **CU-21** (night shift over; parked 01:40Z) Through the night: commit finished work every hour or so (only what's been handed
   off; never half-done work), with the handoff names in the message.
-- [ ] **CU-22** Before morning (about 13:00 UTC): full `npm test`, commit, push, and the numbers in
+- [~] **CU-22** (night shift over; parked 01:40Z) Before morning (about 13:00 UTC): full `npm test`, commit, push, and the numbers in
   your handoff for Jerry. t60/t61 now unmute before they start; if they still fail, paste the first
   failing line.
 - [x] **CU-14** Commit what landed after CU-13: GB-21 (`index.html`, t56) and ChatGPT's GP-13 recheck
@@ -392,7 +476,29 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Grokbot — combat
 
-- [ ] **GB-37** FPS drops in firefights, worst with the flamethrower (Jerry). In `updateFlameStream`: draw the
+- [x] **GB-39** **S1 (GB-A1).** Fighting the wave at its own cave mouth must not poke the cave: no poke from the
+  wave's assault caves while it is spawning or its zombies are in the mouth, and a round that hits a zombie
+  doesn't count. t59 keeps passing.
+- [x] **GB-40** **D-29.** Day 1 is 15: 7 or 8 claw up out of the ground in the treeline 35 to 60 m from the HQ, out of
+  the camera's view and never within 25 m of the marine; the rest walk out of the day's cave. No cave role for
+  day-1 shamblers. Don't spawn a zombie on top of a marine standing at the mouth (GB-A7). Update the wave
+  preview (`total`) so the briefing says 15.
+- [x] **GB-42** Day-1 skulls you can see and keep (GP-A1, GB-A3), with ChatGPT (GP-33): no 8-value pooling on day 1, so
+  the first kill drops a skull; skulls don't expire while the wave is on; at the finisher the unpicked ones fly
+  to the marine.
+- [x] **GB-43** D-32: two or three shamblers at the POI nearest the HQ on day 1, standing guard until you come.
+  A normal kill with normal skulls. Tell ChatGPT the POI for the coach line (GP-35).
+- [x] **GB-44** D-32 revises D-26: the first cave poke of a run is only a warning (the screech, the eyes, a camera
+  nudge); the second one within 20 m comes for you. The chase goes round static props and crashes through builds
+  instead of passing through them (GB-A6, GB-A8). t59 updated, `--review`.
+- [x] **GB-45** Your seven probe checks (t0, t1, t2, t3, t4, t6a, t8) each get one or two real assertions on what they
+  already print (GB-A9).
+- [x] **GB-38** Day-1 audit → `handoffs/audit-day1/grokbot.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the wave director's day-1 plan
+  (how many, which kinds, when), zombie behaviour (stuck, bad paths, spawning in view, clumping), the
+  starting weapons and ammo (feel, damage, reloads, the knife), building and turrets, the cave guardian
+  rules (D-26), how you die and the finisher trigger, and the difficulty against `docs/specs/difficulty.md`.
+  Check in with `--touch "handoffs/audit-day1/grokbot.md"`.
+- [~] **GB-37** (parked by D-32: AG-15 measured 58.8 fps with the flamethrower on the 5080) FPS drops in firefights, worst with the flamethrower (Jerry). In `updateFlameStream`: draw the
   blobs as one InstancedMesh per stage material (up to 140 meshes are 140 draw calls today); gather the trees
   near the player once per frame instead of testing every blob against all 430 trees; pool the ground
   fires and their meshes. Bench before and after (`tools/bench.mjs`), then AG-14.
@@ -446,6 +552,26 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### ChatGPT — what the player reads and decides
 
+- [x] **GP-31** A tracked objective must not hide the kiosk or bank prompt, or the coach, on narrow screens
+  (GP-A2, `ui/hud-layout.css`).
+- [x] **GP-32** Polish (GP-A7, GP-A8, AG-A7, AG-A8, AG-A9): the kiosk's guns in price order after the owned ones; the death
+  list's locked ways as badges, not "????"; the day-clear banner clear of the minimap; the menu footer out of the
+  callsign at short heights; the menu block sitting on the cabin wall, not the roof wire.
+- [!] **GP-33** The day-1 economy (GP-A1, GP-A5), with Grokbot (GB-42): the coach's first card on the first skull; the
+  streak bonus pays what it says (carry the fraction, don't round it away); the kiosk and briefing say what day 1 pays.
+  Quit to menu says it ends the run (D-30).
+- [ ] **GP-34** After CL-41: the dawn card (D-32). After the finisher hands the camera back: kills, skulls picked up,
+  best streak this night, one tip, and Continue, which opens tomorrow's briefing. Short, skippable, `ui/strings.js`.
+- [ ] **GP-35** After GB-43: the coach's first line on day 1 points to the guarded POI ("Shamblers at the <POI>: go and
+  clear them"), then the pickup and bank cards follow as now.
+- [!] **GP-36** Strings (GP-A9): move the older screens' copy into `ui/strings.js` (the day banners, the alarm, "Wave
+  Day", "Zombies left", "Grace", the menu and pause text), and retire `menu.studio` and `legacy.menu.tagline`.
+- [x] **GP-30** Day-1 audit → `handoffs/audit-day1/chatgpt.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: every word and screen a
+  first-time player sees on day 1: the menu, loading, the tutorial and coach, the briefing, the HUD,
+  objectives, prompts and banners, the kiosk and the day-1 economy (can you afford what day 1 needs?),
+  the audio cues' timing, and the dawn summary. Also: copy that is not in `ui/strings.js`, keys nothing uses
+  (`menu.studio`, `legacy.menu.tagline`), text that overlaps or gets cut off. Check in with
+  `--touch "handoffs/audit-day1/chatgpt.md"`.
 - [x] **GP-28** Jerry's browser kept the old `assets/intro/opening.js` (with `skip.onclick`) against the new
   `index.html` (no Skip button): the script threw at line 57, the video ended into nothing, the menu never
   came, though the game (and its music) loaded. Claude reproduced it; Ctrl+Shift+R cures it. Stop it
@@ -489,7 +615,19 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (model: see its card)
 
-- [ ] **AG-14** Jerry's GPU: fps in a day-1 wave with the flamethrower held for 10 s, before and after GB-37.
+- [~] **AG-16** (parked 03:30Z: Antigravity is out for tonight. Its shots are in `qa/shots/2026-09-25-AG-16/`; Claude reviewed them: the NVG-on and fog shots match the plain ones, so the scene wasn't at real night. The night-cave shots move into CU-35.) Shots for Claude (CL-48): the day-1 assault cave from 30 m and 10 m at 22:00, NVGs off and on, and one
+  in the fog. Report to Claude.
+- [~] **AG-17** (moved to Cursor's CU-35, 03:30Z) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's GPU from a fresh profile (survive; die and
+  Play again). Time the alarm to first contact and the wave from first shot to last kill. Fps at the menu, prep, the
+  wave and the finisher. Shots of every step. Say plainly what you couldn't check.
+- [x] **AG-15** Day-1 audit → `handoffs/audit-day1/antigravity.md`, shots in `qa/shots/2026-09-25-AG-15/`.
+  Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: play day 1 start to finish on Jerry's GPU from a fresh profile, twice: once to survive
+  the wave, once dying on purpose and pressing Play again. A screenshot for every problem. Fps at the menu,
+  while scavenging, in the wave with the flamethrower held, and in the finisher. Anything that looks wrong,
+  confusing, ugly or unfair. Sound: note any cue that doesn't fire or fires at the wrong time (the console and
+  `?debug=1` can tell you even without hearing it). This once you write outside `qa/`: your report goes in `handoffs/audit-day1/antigravity.md`.
+  Check in with `--touch "handoffs/audit-day1/antigravity.md, qa/shots/2026-09-25-AG-15/"`.
+- [~] **AG-14** (parked by D-32) Jerry's GPU: fps in a day-1 wave with the flamethrower held for 10 s, before and after GB-37.
 - [x] **AG-13** After CL-33 and GB-35: shots of the finisher staying on the last zombie, and of the
   guardian drag into the thrown-out cutscene. No splash-skip in the player path.
 - [x] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
@@ -515,12 +653,30 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife
 
+- [x] **CL-39** Day-1 audit → `handoffs/audit-day1/claude.md`. The world (terrain, water, caves, flora,
+  wildlife, night lighting), the music and the audio director, a code read of the day-1 path in
+  `index.html`, and the whole day against the flow test in `docs/plan.md`.
+- [x] **CL-41** The next prep starts when the finisher hands the camera back, not underneath it: `day += 1`, the banner
+  and the prep label move with it (CL-A5, GP-A3). Tell ChatGPT the hook for the dawn card.
+- [x] **CL-45** D-28: the sky follows the loop. Prep holds before dusk, the alarm brings the night on, the finisher
+  ends in dawn, and the next prep starts in the morning. One "Day n" on the HUD.
+- [x] **CL-42** Day 1's song, as good as it can be (CL-A3, CL-A4): re-formed for D-29's closer, shorter fight (the drop at
+  contact, the climax by the last few), sections that follow the wave, a seamless loop, and the fight loops played
+  through Web Audio.
+- [x] **CL-43** Day 1's stingers, as good as they can be: the alarm (now the nightfall too), the relief, the dawn, and
+  the cues, re-made in First Blood's voices and levelled against the new song.
+- [x] **CL-47** Day 1's calm music in the same voices: the menu and the prep day track, so day 1 is one sound (CL-A9).
+- [x] **CL-44** t50: 218 tree meshes against its limit; check it against CL-28 (CU-A2).
+- [x] **CL-46** Review the 12 handoffs waiting on me, and close the stale requests (DONE, WONT, LATER) (CL-A10).
+- [ ] **CL-48** After CU-35: the caves at night (CL-A8), from its shots during a real night wave.
+- [x] **CL-40** After CU-27, GP-30, GB-38 and AG-15: read all five audits, merge them into one list, make the plan,
+  and take it to Jerry. The fixes go on the board once he agrees.
 - [x] **CL-35** (01:07Z, `handoffs/2026-09-25-claude-CL-35-36-day1-song-stingers.md`) Day 1's own fight song, "First
   Blood" (`fight_day01`, 4:30 loop, 96 bpm half-time, chiptune; `tools/day1.py`, MIDI in `assets/soundtrack/`).
 - [x] **CL-36** (same) Chiptune stingers and cues (`tools/stingers.py`).
 - [x] **CL-37** (same) Levels: fight music about 5 dB down near and 2 dB far, the day-1 song fades in over 1.5 s,
   flamethrower about 6 dB down. Also Jerry's splash/menu text removals (Caracal eyebrow x2, tagline, footer "Dead Wave").
-- [ ] **CL-38** 20 fight songs, one per day, 4-5 minutes, looping. Waits on Jerry signing off day 1's sound.
+- [ ] **CL-38** (after CL-42, and Jerry signs off day 1's sound) 20 fight songs, one per day, 4-5 minutes, looping. Waits on Jerry signing off day 1's sound.
 - [x] **CL-33** (done 23:03Z: the 360 now spans the whole sting; face push removed; t61 18/0) The finisher keeps the zoom on the last zombie for the whole relief sting. Remove the
   pan and zoom onto the marine's face (the last 30% of CL-31). Jerry: it did not look as good as
   he thought.

@@ -61,7 +61,9 @@
     await until(() => T.getPhase() === 'wave', 15000);
     ok(T.getPhase() === 'wave', 'the wave is on: ' + T.getPhase());
 
-    // Proximity: the floor with nobody near, louder as one closes in.
+    // Proximity: the floor with nobody near, louder as one closes in. The plan is drained first:
+    // day 1's ground risers (D-29, GB-40) would keep clawing up 35-60 m out.
+    T.drainWavePlanDbg();
     T.clearZombies && T.clearZombies();
     await until(() => Math.abs(ms().prox - 0.7) < 0.03, 8000);
     ok(Math.abs(ms().prox - 0.7) < 0.03, 'the fight at 70% with nobody within 150 m (CL-35): ' + ms().prox.toFixed(2));

@@ -18,12 +18,21 @@
     await wait(300);
     T.beginWave();
     await until(() => ms().stage === 'fight', 14000);
+    // The plan drained and the field cleared, so nobody is near for the floor check: a day-1 plan
+    // (built at the match start) sends ground risers 35-60 m out (D-29). One stays far off so the
+    // wave is still on.
+    T.drainWavePlanDbg();
+    T.clearZombies && T.clearZombies();
+    T.spawnZombie(T.player.position.x + 140, T.player.position.z + 140, 'shambler', true, true);   // ~200 m
     const gapOk = ms().stage === 'fight';
     ok(gapOk && ms().deckTrack === 'chip_fight_1', 'day 9: Tier 1, right after the alarm sting: ' + ms().stage + '/' + ms().deckTrack);
     await until(() => Math.abs(ms().prox - 0.7) < 0.03, 6000);
     ok(Math.abs(ms().prox - 0.7) < 0.03, '70% with nobody within 150 m: ' + ms().prox.toFixed(2));
 
-    // Drain the wave to one zombie next to the marine.
+    // Drain the wave to one zombie next to the marine. The plan is drained first, so no more
+    // of the wave walks out while the music climbs (a slow run used to spawn a second body in
+    // that wait, and then this kill wasn't the last one).
+    T.drainWavePlanDbg();
     T.clearZombies && T.clearZombies();
     const p = T.player.position;
     const z = T.spawnZombie(p.x + 5, p.z + 5, 'shambler', true, true);

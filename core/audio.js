@@ -831,6 +831,19 @@ export const AudioSys = (() => {
       if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
         WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
       }
+      // CL-42: a track cut into sections the director moves between as the wave goes.
+      if (m.sections && typeof m.sections === 'object') {
+        for (const k of Object.keys(m.sections)) {
+          const S = m.sections[k];
+          if (!S || typeof S.file !== 'string' || !isFinite(+S.barSeconds) || !Array.isArray(S.list) || !S.list.length) continue;
+          SECTIONED[k] = {
+            file: S.file, barS: +S.barSeconds,
+            list: Object.fromEntries(S.list.map((s) => [s.name, { t0: s.bar * +S.barSeconds, dur: s.bars * +S.barSeconds }])),
+            flow: Object.assign({ stalk: 'stalk', fight: ['dropA'], lull: 'break', last: 'climax', lastAt: 3, near: 45, far: 70, lullAfter: 4 }, S.flow || {})
+          };
+          loadSections(k);
+        }
+      }
       const df = m.dayFight;
       if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
         DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
@@ -886,6 +899,116 @@ export const AudioSys = (() => {
   let overlapFrames = 0;    // frames with a sting and audible music together (must stay 0)
 
   function trackUrl(name) { return SOUNDTRACK + name + '.mp3'; }
+
+  // --- CL-42: the section player ------------------------------------------------------
+  // Day 1's song is cut into sections (tools/day1.py), all one tempo and each its own circle.
+  // They sit end to end in one Opus file, decoded once into a Web Audio buffer and looped with
+  // loopStart/loopEnd, which is sample-accurate: no seam, unlike <audio loop> on an mp3. The
+  // director picks the section from the wave (stalk while the horde is out of sight, the drops
+  // in rotation while it's on you, the break when it goes quiet, the climax for the last few)
+  // and cuts on the next bar line, so every change lands on a downbeat. If Web Audio or the
+  // file isn't there, the same track plays whole on the <audio> deck as before.
+  const SECTIONED = {};      // track -> { file, barS, list: { name: { t0, dur } }, flow }
+  const secBuf = {};         // file -> AudioBuffer (or 'loading' / 'failed')
+  let secOut = null;         // the section player's gain, straight to the speakers like the deck
+  let sec = null;            // { track, name, src, g, startAt, dur, t0 }
+  let secPending = null;     // { name, at }
+  let secMode = 'stalk', secRot = -1, secQuietT = 0, secLoops = 0;
+  function loadSections(track) {
+    const S = SECTIONED[track];
+    if (!S || secBuf[S.file] || !ctx || typeof fetch !== 'function') return;
+    secBuf[S.file] = 'loading';
+    fetch(SOUNDTRACK + S.file).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status))))
+      .then((ab) => new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.catch) p.catch(rej); }))
+      .then((buf) => { secBuf[S.file] = buf; })
+      .catch(() => { secBuf[S.file] = 'failed'; });
+  }
+  function sectionsReady(track) {
+    const S = SECTIONED[track];
+    return !!(S && ctx && ctx.state !== 'closed' && secBuf[S.file] && typeof secBuf[S.file] === 'object');
+  }
+  function secPlay(name, when) {
+    const S = SECTIONED[sec ? sec.track : deckTrack]; const buf = S && secBuf[S.file];
+    const part = S && S.list[name];
+    if (!part || !buf || typeof buf !== 'object') return false;
+    if (!secOut) { secOut = ctx.createGain(); secOut.gain.value = 0; secOut.connect(ctx.destination); }
+    const src = ctx.createBufferSource();
+    src.buffer = buf; src.loop = true; src.loopStart = part.t0; src.loopEnd = part.t0 + part.dur;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + 0.012);
+    src.connect(g); g.connect(secOut);
+    src.start(when, part.t0);
+    if (sec && sec.src) {                     // the old one out over the same 30 ms
+      try { sec.g.gain.setValueAtTime(1, when); sec.g.gain.linearRampToValueAtTime(0, when + 0.03); sec.src.stop(when + 0.05); } catch (_) {}
+    }
+    sec = { track: sec ? sec.track : deckTrack, name, src, g, startAt: when, dur: part.dur, t0: part.t0 };
+    secLoops = 0;
+    return true;
+  }
+  function secStop(fade) {
+    if (sec && sec.src && ctx) {
+      const t = ctx.currentTime;
+      try { sec.g.gain.cancelScheduledValues(t); sec.g.gain.setValueAtTime(sec.g.gain.value, t); sec.g.gain.linearRampToValueAtTime(0, t + (fade || 0.03)); sec.src.stop(t + (fade || 0.03) + 0.02); } catch (_) {}
+    }
+    sec = null; secPending = null;
+  }
+  // Where in the flow the wave is, from what the page tells the director every frame.
+  function secWant(state, dt) {
+    const F = SECTIONED[sec.track].flow;
+    const live = state.threat || 0, near = state.nearest == null ? 999 : state.nearest;
+    if (state.spawnedAll && state.remaining > 0 && state.remaining <= F.lastAt) return 'last';
+    if (secMode === 'last') return 'last';
+    if (live > 0 && near <= F.near) { secQuietT = 0; return 'fight'; }
+    if (secMode === 'fight' || secMode === 'lull') {
+      if (live === 0 || near > F.far) secQuietT += dt; else secQuietT = 0;
+      return secQuietT >= F.lullAfter ? 'lull' : 'fight';
+    }
+    return 'stalk';
+  }
+  function secSectionFor(mode) {
+    const F = SECTIONED[sec.track].flow;
+    if (mode === 'fight') { secRot = (secRot + 1) % F.fight.length; return F.fight[secRot]; }
+    return mode === 'last' ? F.last : mode === 'lull' ? F.lull : F.stalk;
+  }
+  function secFits(mode, name) {
+    const F = SECTIONED[sec.track].flow;
+    return mode === 'fight' ? F.fight.includes(name) : name === secSectionFor.peek(mode);
+  }
+  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; return mode === 'last' ? F.last : mode === 'lull' ? F.lull : F.stalk; };
+  function secUpdate(state, dt) {
+    if (!sec || !ctx) return;
+    const now = ctx.currentTime, S = SECTIONED[sec.track];
+    const mode = secWant(state, dt);
+    const into = now - sec.startAt;
+    if (into > 0) secLoops = Math.floor(into / sec.dur);
+    if (secPending) {
+      if (now >= secPending.at - 0.005) { secPending = null; }
+      return;
+    }
+    const nextBar = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / S.barS)) * S.barS;
+    const endOfSec = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / sec.dur)) * sec.dur;
+    if (mode !== secMode || !secFits(mode, sec.name)) {
+      // A new part of the fight: cut on the next bar line.
+      const name = secSectionFor(mode);
+      secMode = mode;
+      if (name !== sec.name && secPlay(name, nextBar)) secPending = { name, at: nextBar };
+    } else if (mode === 'fight' && S.flow.fight.length > 1 && endOfSec - now < 0.35 && now - sec.startAt > sec.dur * 0.5) {
+      // Still fighting at the end of a section: on to the next one in the rotation.
+      const name = secSectionFor('fight');
+      if (name !== sec.name && secPlay(name, endOfSec)) secPending = { name, at: endOfSec };
+    }
+  }
+  function secStart(name, state) {
+    // The first section: straight into the fight if they're already on you.
+    secMode = 'stalk'; secRot = -1; secQuietT = 0;
+    sec = { track: name, name: null, src: null, g: null, startAt: 0, dur: 1, t0: 0 };
+    const mode = state ? secWant(state, 0) : 'stalk';
+    secMode = mode;
+    const first = secSectionFor(mode);
+    const ok = secPlay(first, ctx.currentTime + 0.04);
+    if (!ok) sec = null;
+    return ok;
+  }
   function gainOf(name) { return MUSIC_GAIN[name] || 1; }
   function pickTrack(pool) {
     const list = MUSIC_POOLS[pool] || MUSIC_POOLS.menu;
@@ -911,13 +1034,24 @@ export const AudioSys = (() => {
     return deck;
   }
   function stopDeck() {
+    secStop();
     if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
     deckTrack = null; deckLevel = 0; deckTarget = 0; deckLoopAt = -1;
   }
   // Start a track on the deck. from: seconds in; level/target/seconds: the fade.
   function startDeck(name, opts) {
-    const el = ensureDeck();
     const o = opts || {};
+    secStop();
+    if (sectionsReady(name) && secStart(name, o.state)) {
+      if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
+      deckTrack = name;
+      deckLevel = o.level != null ? o.level : 0;
+      deckTarget = 1;
+      deckRate = 1 / Math.max(0.05, o.fadeIn || FADE_IN_S);
+      deckLoopAt = 0;
+      return;
+    }
+    const el = ensureDeck();
     try { el.pause(); } catch (_) {}
     el.src = trackUrl(name);
     // CL-34: a track that loops from its very start (the chip loops) loops natively, which
@@ -1044,13 +1178,14 @@ export const AudioSys = (() => {
     mood = null; nextMood = null;
     playSting('alarm', () => { stage = 'gap'; gapT = GAP_AFTER_ALARM; });
   }
+  let lastState = null;
   function startFight() {
     stage = 'fight';
     mood = 'fight';
     const name = waveTrackForDay(lastDay) || pickTrack('fight');
     const hit = MUSIC_HITS[name] || 0;
     // CL-30 (Jerry): a 10 s fade in from silence to the floor; proximity does the rest.
-    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : FIGHT_FADE_IN_S });
+    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : FIGHT_FADE_IN_S, state: lastState });
   }
   // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
   // then the calm music fades back in slowly the moment the sting ends.
@@ -1088,6 +1223,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
+    lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
     if (state.day) lastDay = state.day;
@@ -1172,13 +1308,16 @@ export const AudioSys = (() => {
       const step = deckRate * dt;
       deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
     }
-    if (deck && deckTrack) {
+    if (deckTrack && (deck || sec)) {
       const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release') ? prox : 1;
       const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * briefDuck * duck * musicShotDuck;
       const out = Math.max(0, Math.min(1, v));
-      if (Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
+      if (sec && secOut && ctx) {
+        try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
+        if (stage === 'fight') secUpdate(state, dt);
+      } else if (deck && Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
     }
-    if (stingName && deck && deckTrack && deck.volume > 0.001 && !deck.paused) overlapFrames++;
+    if (stingName && deckTrack && ((deck && deck.volume > 0.001 && !deck.paused) || (sec && secOut && secOut.gain.value > 0.001))) overlapFrames++;
   }
   // The alarm and the briefing board, from the page's 'dw-game' events (D-8).
   if (typeof window !== 'undefined' && window.addEventListener) {
@@ -1211,6 +1350,7 @@ export const AudioSys = (() => {
     if (muted || musicPlaying) return;
     musicPlaying = true;
     loadMusicManifest();
+    for (const k of Object.keys(SECTIONED)) loadSections(k);   // CL-42: decode before the first wave
     clearMusicNodes(); // kill any leftover synth nodes
     stopDeck(); stopSting();
     // The next updateMusic picks up the story from the game state.
@@ -1224,10 +1364,13 @@ export const AudioSys = (() => {
   }
   function musicState() {
     return {
-      stage, mood, nextMood, front: deck && deckTrack ? deck.src : null, frontTime: deck ? deck.currentTime : 0,
-      deckTrack, deckLevel, volume: deck ? deck.volume : 0, prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
+      stage, mood, nextMood, front: sec ? SOUNDTRACK + SECTIONED[sec.track].file : (deck && deckTrack ? deck.src : null), frontTime: deck ? deck.currentTime : 0,
+      deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
-      deckLoop: !!(deck && deck.loop),
+      deckLoop: !!(sec || (deck && deck.loop)),
+      section: sec ? sec.name : null, sectionMode: sec ? secMode : null, sectionPending: secPending ? secPending.name : null,
+      sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
+      sectionLoop: sec && sec.src ? { start: sec.src.loopStart, end: sec.src.loopEnd, loop: sec.src.loop } : null,
       sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
       lastCue: lastCue ? Object.assign({}, lastCue) : null,
       pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),

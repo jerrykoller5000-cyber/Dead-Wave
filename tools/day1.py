@@ -21,7 +21,19 @@ The form (108 bars, 4:30), so a long wave never sits on one idea:
 The whole song is rendered as a circle (every tail that runs past the end is folded back onto
 the start), so the loop point is inaudible.
 
-  python3 day1.py out/  ->  out/fight_day01.wav
+CL-42 (Jerry: "make the music for day 1 as good as possible"): the song is also cut into
+sections the game moves between as the wave goes (core/audio.js, the section player):
+  stalk   8  the new opener: the engine low and filtered, a heartbeat kick, the hook's first
+             three notes far off in the echo. Plays while the horde is still out of sight.
+  dropA  16  the drop, the moment they're on you, then riffB, dropA2, bridge in rotation while
+             the fight is on; break (8) when it goes quiet between groups; climax (16) for the
+             last few. Every section is its own circle, so it loops without a seam, and they are
+             all at one tempo, so the game can cut between them on any bar line.
+The whole song (the old 108-bar form) is still rendered as the fallback for a browser where the
+section player can't run.
+
+  python3 day1.py out/  ->  out/fight_day01.wav, out/fight_day01.mid,
+                            out/fight_day01_sections.wav, out/fight_day01_sections.json
 """
 import sys, os
 import numpy as np
@@ -47,7 +59,7 @@ TONES = {'Em': (0, 7, 12, 15), 'F': (0, 7, 12, 16), 'G': (0, 7, 12, 16), 'Am': (
          'B': (0, 7, 12, 16), 'C': (0, 7, 12, 16), 'D': (0, 7, 12, 16)}
 
 SECTIONS = [
-    # name,     bars, progression (cycled per bar)
+    # name,     bars, progression (cycled per bar)   (the full song, the fallback)
     ('intro',     8, ['Em', 'Em', 'C', 'D']),
     ('dropA',    16, ['Em', 'Em', 'C', 'D']),
     ('riffB',    16, ['Em', 'F', 'Em', 'D']),
@@ -59,11 +71,25 @@ SECTIONS = [
     ('turn',      4, ['Em', 'Em', 'C', 'D']),
 ]
 assert sum(s[1] for s in SECTIONS) == BARS
+# The game's sections (CL-42), in the order they sit in fight_day01_sections.
+GAME_SECTIONS = [
+    ('stalk',     8, ['Em', 'Em', 'C', 'D']),
+    ('dropA',    16, ['Em', 'Em', 'C', 'D']),
+    ('riffB',    16, ['Em', 'F', 'Em', 'D']),
+    ('break',     8, ['Em', 'Em', 'C', 'D']),
+    ('dropA2',   16, ['Em', 'Em', 'C', 'D']),
+    ('bridge',   16, ['Am', 'C', 'Em', 'B']),
+    ('climax',   16, ['Em', 'Em', 'C', 'D']),
+]
+SEC_LEN = {nm: n for nm, n, _ in SECTIONS + GAME_SECTIONS}
 
-bar_info = []   # per bar: (section, index in section, chord)
-for name, n, prog in SECTIONS:
-    for i in range(n):
-        bar_info.append((name, i, prog[i % len(prog)]))
+def bars_of(sections):
+    out = []   # per bar: (section, index in section, chord)
+    for name, n, prog in sections:
+        for i in range(n):
+            out.append((name, i, prog[i % len(prog)]))
+    return out
+bar_info = bars_of(SECTIONS)
 
 # ------------------------------------------------------------------- the hook
 # (step, length, midi, velocity) over two bars; step in 16ths from the phrase start.
@@ -216,7 +242,11 @@ def note(track, pos, n, m, v):
 
 
 # --------------------------------------------------------------------- render
-def render():
+def render(sections=None, circle=True, master_mode='song'):
+    sections = sections or SECTIONS
+    bar_info = bars_of(sections)
+    BARS = len(bar_info)
+    N = int(round(BARS * BAR_S * SR))
     NOTES.clear()
     L = N + TAIL
     bus = {k: np.zeros((2, L)) for k in ('bass', 'sub', 'stab', 'lead', 'arp', 'pad', 'drums', 'fx')}
@@ -238,10 +268,12 @@ def render():
         root = ROOT[ch]
         nxt_sec = bar_info[b + 1][0] if b + 1 < BARS else bar_info[0][0]
         last_of_sec = (b + 1 == BARS) or bar_info[b + 1][0] != sec
-        sec_len = next(n for nm, n, _ in SECTIONS if nm == sec)
+        sec_len = SEC_LEN[sec]
 
         # ---- bass engine
-        if sec in ('intro', 'turn'):
+        if sec == 'stalk':
+            bright = 0.22 + 0.06 * (i % 4 == 3)
+        elif sec in ('intro', 'turn'):
             bright = (i + 1) / 8 * 0.55 if sec == 'intro' else 0.5 - (i / 4) * 0.4
         elif sec == 'build':
             bright = 0.35 + 0.65 * (i / 7)
@@ -258,12 +290,18 @@ def render():
         else:
             add_at(bus['bass'], v_bass(root, int(BAR_S * SR * 0.95), 0.25), smp(b), 0.9, 0); note('bass', smp(b), BAR_S * SR * 0.95, root, 0.9)
         # sub on the downbeats when the drums are in
-        if sec not in ('intro', 'break', 'turn'):
+        if sec not in ('intro', 'break', 'turn', 'stalk'):
             add_at(bus['sub'], v_sub(root, int(SPB * 2 * SR * 0.95)), smp(b, 0), 0.8, 0); note('sub', smp(b, 0), SPB * 2 * SR * 0.95, root - 12, 0.8)
             add_at(bus['sub'], v_sub(root, int(SPB * 2 * SR * 0.95)), smp(b, 8), 0.7, 0); note('sub', smp(b, 8), SPB * 2 * SR * 0.95, root - 12, 0.7)
 
         # ---- drums
-        if sec == 'intro':
+        if sec == 'stalk':
+            # a heartbeat, ba-dum, and a far tick on the 4; the last bar leans in
+            kick(smp(b, 0), 0.75, heavy=1.3); kick(smp(b, 3), 0.5, heavy=1.3)
+            hat(smp(b, 12), 0.35, pan=-0.4)
+            if i == 7:
+                for k, st in enumerate(range(12, 16)): snare(smp(b, st), 0.15 + 0.06 * k, big=False)
+        elif sec == 'intro':
             kick(smp(b, 0), 0.8 if i < 4 else 0.95)
             if i >= 4:
                 for st in range(0, 16, 2): hat(smp(b, st), 0.6 + 0.3 * (st % 4 == 0))
@@ -307,6 +345,14 @@ def render():
         # impacts and crashes on the downbeat of the loud sections
         if i == 0 and sec in ('dropA', 'dropA2', 'climax', 'bridge', 'riffB'):
             add_at(bus['fx'], fx_impact(), smp(b), 0.7 if sec != 'riffB' else 0.45, 0)
+        if sec == 'climax' and i % 4 == 0 and i > 0:
+            add_at(bus['fx'], d_crash(), smp(b), 0.5, 0.25)
+        if sec == 'climax':
+            # the engine an octave down under the climax: the floor drops out of the world
+            for st in (0, 8):
+                add_at(bus['sub'], v_sub(root - 12, int(SPB * 2 * SR * 0.9)), smp(b, st), 0.35, 0)
+        if sec == 'stalk' and i % 4 == 2:
+            add_at(bus['fx'], fx_riser(1) * 0.5, smp(b, 8), 0.25, 0)
         # risers into the drops
         if sec == 'intro' and i == 6: add_at(bus['fx'], fx_riser(2), smp(b), 0.35, 0)
         if sec == 'break' and i == 4: add_at(bus['fx'], fx_riser(4), smp(b), 0.4, 0)
@@ -323,10 +369,10 @@ def render():
                 for iv in (0, 7, 12): note('stabs', smp(b, st), S16 * SR * 3.2, root + 24 + iv, 0.9)
 
         # ---- pad (break and climax, and a thin one in riff B)
-        if sec in ('break', 'climax', 'riffB') and (i % 1 == 0):
+        if sec in ('break', 'climax', 'riffB', 'stalk') and (i % 1 == 0):
             p = v_pad(ch, int(BAR_S * SR * 1.05))
             for iv in (0, 7, 12, 15 if ch in ('Em', 'Am') else 16): note('pad', smp(b), BAR_S * SR * 1.05, ROOT[ch] + 24 + iv, 0.6)
-            g = 0.9 if sec == 'break' else (0.45 if sec == 'climax' else 0.3)
+            g = 0.9 if sec == 'break' else (0.45 if sec == 'climax' else (0.42 if sec == 'stalk' else 0.3))
             add_at(bus['pad'], p, smp(b), g, -0.2); add_at(bus['pad'], p, smp(b), g, 0.2)
             add_at(send_rev, p, smp(b), g * 0.5, 0)
 
@@ -353,28 +399,35 @@ def render():
                 h = v_lead(third_below(mm), n, dark)
                 add_at(bus['lead'], h, pos, v * g * 0.55, -0.3); note('harmony', pos, ln * S16 * SR * 0.96, third_below(mm), v * g * 0.55)
 
-    def sec_start(name):
-        b = 0
-        for nm, n, _ in SECTIONS:
-            if nm == name: return b
+    def sec_starts(name):
+        b, out = 0, []
+        for nm, n, _ in sections:
+            if nm == name: out.append(b)
             b += n
-    s = sec_start('dropA')
-    for k in range(3):                      # bars 12-23: A A2, three times
-        lay(HOOK_A, s + 4 + 4 * k); lay(HOOK_A2, s + 6 + 4 * k)
-    s = sec_start('riffB')
-    for k in range(4):
-        lay(RIFF_B, s + 4 * k, g=0.95 if k % 2 == 0 else 0.85)
-    s = sec_start('break')
-    lay(HOOK_A, s, g=0.55, dark=0.7, echo=1.0); lay(HOOK_A2, s + 2, g=0.5, dark=0.7, echo=1.0)
-    s = sec_start('dropA2')
-    for k in range(4):
-        lay(HOOK_A, s + 4 * k, octave=1, g=0.8); lay(HOOK_A2, s + 2 + 4 * k, octave=1, g=0.8)
-    s = sec_start('bridge')
-    for k in range(2):
-        lay(BRIDGE_LINE, s + 8 * k, g=0.9, echo=0.8)
-    s = sec_start('climax')
-    for k in range(4):
-        lay(HOOK_A, s + 4 * k, octave=1, g=0.85, harmony=True); lay(HOOK_A2, s + 2 + 4 * k, octave=1, g=0.85, harmony=True)
+        return out
+    for s in sec_starts('stalk'):
+        # the hook's first three notes, far off in the echo, twice
+        far = [(0, 3, E4, 0.9), (3, 3, G4, 0.8), (6, 6, B4, 0.85)]
+        lay(far, s + 1, octave=1, g=0.32, dark=0.75, echo=1.2); lay(far, s + 5, octave=1, g=0.28, dark=0.8, echo=1.2)
+    for s in sec_starts('dropA'):
+        # the hook comes in with the drop in the game's cut (the song's intro is gone), bars 0-15
+        start = 4 if master_mode == 'song' else 0
+        for k in range(3 if start else 4):
+            lay(HOOK_A, s + start + 4 * k); lay(HOOK_A2, s + start + 2 + 4 * k)
+    for s in sec_starts('riffB'):
+        for k in range(4):
+            lay(RIFF_B, s + 4 * k, g=0.95 if k % 2 == 0 else 0.85)
+    for s in sec_starts('break'):
+        lay(HOOK_A, s, g=0.55, dark=0.7, echo=1.0); lay(HOOK_A2, s + 2, g=0.5, dark=0.7, echo=1.0)
+    for s in sec_starts('dropA2'):
+        for k in range(4):
+            lay(HOOK_A, s + 4 * k, octave=1, g=0.8); lay(HOOK_A2, s + 2 + 4 * k, octave=1, g=0.8)
+    for s in sec_starts('bridge'):
+        for k in range(2):
+            lay(BRIDGE_LINE, s + 8 * k, g=0.9, echo=0.8)
+    for s in sec_starts('climax'):
+        for k in range(4):
+            lay(HOOK_A, s + 4 * k, octave=1, g=0.85, harmony=True); lay(HOOK_A2, s + 2 + 4 * k, octave=1, g=0.85, harmony=True)
 
     # ---- sidechain pump on the tonal buses
     pump = np.ones(L)
@@ -398,8 +451,9 @@ def render():
     mix += dly + rev
     # ---- fold the tail onto the start: the song is a circle
     loop = mix[:, :N].copy()
-    loop[:, :TAIL] += mix[:, N:N + TAIL]
-    return master(loop)
+    if circle:
+        loop[:, :TAIL] += mix[:, N:N + TAIL]
+    return master(loop) if master_mode == 'song' else loop
 
 
 def master(x):
@@ -461,12 +515,40 @@ def export_midi(path):
         f.write(b'MThd' + struct.pack('>IHHH', 6, 1, len(tracks), TPB) + b''.join(tracks))
 
 
+# Per-section loudness (dB RMS) for the game's cut: quiet while they're out of sight, the drops
+# at the song's level, the climax a touch over it. A fixed gain per section (no compressor
+# riding across the joins) keeps every loop seamless.
+SECTION_DB = {'stalk': -20.5, 'dropA': -14.5, 'riffB': -14.5, 'break': -18.5, 'dropA2': -14.3,
+              'bridge': -14.0, 'climax': -13.4}
+
+
+def render_sections():
+    """Each game section on its own circle, levelled, laid end to end on exact bar lines."""
+    b, a = sg.butter(2, 32 / (SR / 2), 'high')
+    parts, table, bar = [], [], 0
+    for sec in GAME_SECTIONS:
+        y = render([sec], circle=True, master_mode='section')
+        # the 32 Hz highpass as a circle too: filter three copies and keep the middle one
+        z = sg.filtfilt(b, a, np.concatenate([y, y, y], axis=1), axis=1)[:, y.shape[1]:2 * y.shape[1]]
+        z = level(z, target_db=SECTION_DB[sec[0]])
+        parts.append(z)
+        table.append({'name': sec[0], 'bar': bar, 'bars': sec[1]})
+        bar += sec[1]
+    return np.concatenate(parts, axis=1), table
+
+
 if __name__ == '__main__':
+    import json, time
     out = sys.argv[1] if len(sys.argv) > 1 else 'out'
     os.makedirs(out, exist_ok=True)
-    import time
     t0 = time.time()
     y = render()
     write_wav(os.path.join(out, 'fight_day01.wav'), y)
     export_midi(os.path.join(out, 'fight_day01.mid'))
-    print(f'fight_day01: {y.shape[1] / SR:.2f}s, {BPM} bpm, {BARS} bars, rendered in {time.time() - t0:.1f}s')
+    print(f'fight_day01: {y.shape[1] / SR:.2f}s, {BPM} bpm, {BARS} bars, rendered in {time.time() - t0:.1f}s', flush=True)
+    t0 = time.time()
+    z, table = render_sections()
+    write_wav(os.path.join(out, 'fight_day01_sections.wav'), z)
+    meta = {'bpm': BPM, 'beatsPerBar': 4, 'barSeconds': BAR_S, 'sections': table}
+    json.dump(meta, open(os.path.join(out, 'fight_day01_sections.json'), 'w'), indent=1)
+    print(f'fight_day01_sections: {z.shape[1] / SR:.2f}s, {sum(t["bars"] for t in table)} bars in {len(table)} sections, rendered in {time.time() - t0:.1f}s')

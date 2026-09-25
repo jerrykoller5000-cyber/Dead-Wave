@@ -1,5 +1,5 @@
 {
-  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. CL-35/36: day 1 has its own song, fight_day01 ('First Blood', tools/day1.py, 4:30 loop, gain 1.6, fades in over 1.5 s because its intro is the build); the stingers and cues are chiptune (tools/stingers.py) at gain 2.0. fadeIn: per-track fight fade-in seconds (default 10). Claude keeps this file.",
+  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. CL-35/36: day 1 has its own song, fight_day01 ('First Blood', tools/day1.py, 4:30 loop, gain 1.6, fades in over 1.5 s because its intro is the build); the stingers and cues are chiptune (tools/stingers.py) at gain 2.0. fadeIn: per-track fight fade-in seconds (default 10). Claude keeps this file. CL-42/43/47 (Jerry: day 1's music as good as possible): the day-1 song is also cut into sections (tools/day1.py -> fight_day01_sections.ogg, Opus) that the section player in core/audio.js moves between as the wave goes (sections.flow: stalk while the horde is out of sight, the fight rotation once one is within 'near' metres, the break after 'lullAfter' seconds with nobody within 'far', the climax for the last 'lastAt'); fight_day01.mp3 is the whole song, the fallback. The alarm is also the nightfall (2 bars, 5.0 s to the hit) and the relief sting is also the dawn (7.5 s, the finisher's length); 'dawn' is the dawn card's chime. The menu and the prep pools are chip tracks in the song's voices (tools/calm.py).",
   "pools": {
     "fight": [
       "chip_fight_1"
@@ -31,6 +31,16 @@
     ],
     "silent": [
       "silent_drone"
+    ],
+    "menu": [
+      "menu_theme"
+    ],
+    "dawnprep": [
+      "calm_morning"
+    ],
+    "day": [
+      "calm_day",
+      "calm_morning"
     ]
   },
   "hits": {
@@ -137,5 +147,63 @@
   ],
   "fadeIn": {
     "fight_day01": 1.5
+  },
+  "sections": {
+    "fight_day01": {
+      "file": "fight_day01_sections.ogg",
+      "barSeconds": 2.5,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    }
   }
 }
