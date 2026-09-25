@@ -31172,6 +31172,7 @@
       if (gameOver || won) return;
       gameOver = !victory;
       won = victory;
+      hq.seq = null;   // an alarm still counting down would start the wave behind the burial
       setPaused(false);
       stopFiring();
       AudioSys.chainsawStop();
