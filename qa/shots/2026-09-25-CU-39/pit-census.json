@@ -1,0 +1,51 @@
+{
+  "census": [
+    {
+      "what": "Mesh < Group | MeshStandardMaterial #6a5230 em#000000",
+      "n": 14,
+      "ymin": -10.43,
+      "ymax": -4.68,
+      "geo": "BufferGeometry",
+      "scale": 1
+    },
+    {
+      "what": "Mesh < Group | MeshStandardMaterial #9c8048 em#000000",
+      "n": 7,
+      "ymin": -10.43,
+      "ymax": -4.68,
+      "geo": "SphereGeometry",
+      "scale": 0.55
+    },
+    {
+      "what": "Mesh < Group | MeshStandardMaterial #5a4a2a em#000000",
+      "n": 7,
+      "ymin": -10.42,
+      "ymax": -4.67,
+      "geo": "SphereGeometry",
+      "scale": 0.57
+    },
+    {
+      "what": "Mesh < Group | MeshStandardMaterial #cdb27a em#000000",
+      "n": 7,
+      "ymin": -10.43,
+      "ymax": -4.68,
+      "geo": "SphereGeometry",
+      "scale": 0.53
+    },
+    {
+      "what": "Mesh < Group | MeshBasicMaterial #a8f2ff transparent",
+      "n": 2,
+      "ymin": 0,
+      "ymax": 0,
+      "geo": "BufferGeometry",
+      "scale": 1
+    }
+  ],
+  "bubbles": {
+    "on": false,
+    "n": 0,
+    "visible": 0,
+    "popping": 0,
+    "maxY": null
+  }
+}
