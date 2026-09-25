@@ -24,8 +24,8 @@
     await until(() => ms().stage === 'calm' && ms().deckTrack, 3000);
     const s1 = ms();
     const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
-    ok(wb === '1:chip_skirmish_b 3:chip_skirmish_a 8:chip_fight_1 12:chip_fight_2 16:chip_fight_3', 'waves by day, Jerry\'s table, as chip loops (CL-27, CL-34): ' + wb);
-    ok(s1.gains.chip_fight_1 >= 2.5 && s1.gains.sting_alarm >= 2.5, 'the fight loops and stings are boosted: ' + s1.gains.chip_fight_1);
+    ok(wb === '1:fight_day01 2:chip_skirmish_b 3:chip_skirmish_a 8:chip_fight_1 12:chip_fight_2 16:chip_fight_3', 'waves by day: day 1 has its own song, then the chip loops (CL-27, CL-34, CL-35): ' + wb);
+    ok(s1.gains.fight_day01 > 1 && s1.gains.fight_day01 < s1.gains.chip_fight_1 && s1.gains.sting_alarm >= 1.5, 'gains (CL-35: the fight music turned down): ' + s1.gains.fight_day01 + ' / ' + s1.gains.sting_alarm);
     ok(s1.stage === 'calm' && !!s1.deckTrack, 'calm music in prep: ' + s1.deckTrack);
 
     // The briefing board halves the music, and closing it brings it back.
@@ -52,23 +52,23 @@
     const tGap = Date.now();
     await until(() => ms().stage === 'fight', 4000);
     const gap = (Date.now() - tGap) / 1000;
-    ok(ms().stage === 'fight' && ms().deckTrack === 'chip_skirmish_b', 'then day 1\'s track, the skirmish B loop: ' + ms().deckTrack);
+    ok(ms().stage === 'fight' && ms().deckTrack === 'fight_day01', 'then day 1\'s own song, First Blood: ' + ms().deckTrack);
     ok(ms().deckLoop === true, 'and it loops natively, gapless (CL-34)');
-    ok(ms().deckLevel < 0.2, 'fading in from silence (CL-30): ' + ms().deckLevel.toFixed(2));
-    await until(() => ms().deckLevel > 0.2, 15000);
-    ok(ms().deckLevel > 0.2 && ms().deckLevel < 0.6, 'climbing slowly through the 10 s fade: ' + ms().deckLevel.toFixed(2));
+    ok(ms().deckLevel < 0.5, 'fading in (CL-35: over 1.5 s; the song\'s intro is the build): ' + ms().deckLevel.toFixed(2));
+    await until(() => ms().deckLevel >= 0.999, 8000);
+    ok(ms().deckLevel >= 0.999, 'and up within a few seconds: ' + ms().deckLevel.toFixed(2));
     ok(gap < 0.5, 'the moment the sting ends (CL-26): ' + gap.toFixed(1) + ' s');
     await until(() => T.getPhase() === 'wave', 15000);
     ok(T.getPhase() === 'wave', 'the wave is on: ' + T.getPhase());
 
     // Proximity: the floor with nobody near, louder as one closes in.
     T.clearZombies && T.clearZombies();
-    await until(() => Math.abs(ms().prox - 0.5) < 0.03, 8000);
-    ok(Math.abs(ms().prox - 0.5) < 0.03, 'the fight at 50% with nobody within 150 m: ' + ms().prox.toFixed(2));
+    await until(() => Math.abs(ms().prox - 0.7) < 0.03, 8000);
+    ok(Math.abs(ms().prox - 0.7) < 0.03, 'the fight at 70% with nobody within 150 m (CL-35): ' + ms().prox.toFixed(2));
     const p = T.player.position;
     const far = T.spawnZombie(p.x + 42, p.z + 42, 'shambler', true, true);   // ~60 m
-    await until(() => ms().prox > 0.8 && ms().prox < 0.95, 8000);   // (polled: slow under a loaded run)
-    ok(ms().prox > 0.8 && ms().prox < 0.95, 'at about 60 m it has climbed to ~85%: ' + ms().prox.toFixed(2));
+    await until(() => ms().prox > 0.86 && ms().prox < 0.97, 8000);   // (polled: slow under a loaded run)
+    ok(ms().prox > 0.86 && ms().prox < 0.97, 'at about 60 m it has climbed to ~91%: ' + ms().prox.toFixed(2));
     T.clearZombies && T.clearZombies();
     T.spawnZombie(p.x + 3, p.z + 3, 'shambler', true, true);
     await until(() => ms().prox > 0.97, 8000);

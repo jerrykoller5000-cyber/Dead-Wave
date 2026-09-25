@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-24, 09:20 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 01:15 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -42,6 +42,9 @@ a card blocked on another agent, and a next task that says "after the split" or 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-25, 01:15Z · Git is shared.** Jerry overrides AGENTS.md rule 6: Claude may now commit
+  and push too, not only Cursor. D-27.
 
 - **2026-09-24, 22:52Z · Jerry played it.** No screen control tonight: he is at the machine until 23:00 local. Work in files only.
   1. No skip on the splash (`openingSkip`, and Esc). GP-27.
@@ -117,6 +120,15 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-27 · Cursor and Claude both commit and push (Jerry, 01:15Z; replaces "only Cursor").** Same
+  rules as before: only finished, checked-out work, never a file an active agent is in, the rule 7
+  checks first, then push `feature/Phis-changes`. One at a time: check in with `git` in `--touch`,
+  so the check-in refuses the second one. `git pull --rebase` before pushing; no force-push.
+  How Claude does it: `Claude Commit.bat` in the project root. Claude writes the job into
+  `Claude outputs/commit/` (`files.txt`, one path per line, and `message.txt`); Jerry double-clicks the
+  .bat. It commits only the listed files (`--pathspec-from-file`, so anything else staged stays
+  staged), pulls with rebase only if GitHub is ahead, pushes, and writes `last-run.log`. With no job
+  waiting it only reports `git status`. Cursor: the .bat is untracked on purpose; leave it be.
 - **D-26 · The guardian chase (Jerry 22:52Z, revises D-25; built as GB-35).** One shot (or one explosive)
   into a mouth with the marine within 20 m and in its line of sight brings the guardian out. It runs
   him down at 27 m/s against a 11.8 m/s sprint: he can run but can't get away. On contact it takes a
@@ -288,7 +300,7 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
   - **Use the handoff template.** `out` warns when a report lacks `Changed:`, `Tests:` or
     `Not verified:`, and the panel shows those fields. Most of Grokbot's GB-1 notes didn't
     use it.
-  - **Cursor commits finished work at the end of each of his own tasks.** That means
+  - **Cursor (and, since D-27, Claude) commits finished work at the end of each of his own tasks.** That means
     everything checked out since the last commit, never a file an active agent is still in.
     The panel shows how many finished reports are waiting.
 - **D-5 · Pit view.** The pit's ring was hidden under the water, not badly framed. Claude
@@ -333,6 +345,8 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
+- [ ] **CU-26** Profile a day-1 firefight on the pistol, the uzi and the flamethrower (`tools/cpu-profile.mjs`): the top
+  costs per frame, and what the draw calls are. Hand the list to Claude and Grokbot.
 - [x] **CU-25** Play again after a death starts on day 1. The morning ledger (`tt_day_start`) currently
   resumes on Play, so a cave death came back as day 2. A death's Play again is a new run. Quitting
   to the menu already clears the ledger. Do not resume it from Play again.
@@ -341,7 +355,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **CU-23** Do this first: a restore point. Commit and push exactly what's on disk now, with the
   message "Restore point before the night shift (Jerry, 2026-09-24)". Put the commit hash in your
   handoff so anyone can get back to it.
-- [>] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
+- [x] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
   `commitBuildDrag`). Fix it, and make the numbers an average over the run's last 10 s, not the last
   second. Tell Antigravity (AG-9c).
 - [x] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
@@ -378,6 +392,10 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Grokbot — combat
 
+- [ ] **GB-37** FPS drops in firefights, worst with the flamethrower (Jerry). In `updateFlameStream`: draw the
+  blobs as one InstancedMesh per stage material (up to 140 meshes are 140 draw calls today); gather the trees
+  near the player once per frame instead of testing every blob against all 430 trees; pool the ground
+  fires and their meshes. Bench before and after (`tools/bench.mjs`), then AG-14.
 - [x] **GB-35** The guardian chase, revising D-25. He comes out only when a shot goes into the cave
   and the marine is within 20 m. He comes out after the marine at a crazy speed. The player can try to
   run, but the guardian is far too fast to outrun (Jerry, in chat to Claude: "he is way too fast";
@@ -471,6 +489,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (model: see its card)
 
+- [ ] **AG-14** Jerry's GPU: fps in a day-1 wave with the flamethrower held for 10 s, before and after GB-37.
 - [x] **AG-13** After CL-33 and GB-35: shots of the finisher staying on the last zombie, and of the
   guardian drag into the thrown-out cutscene. No splash-skip in the player path.
 - [x] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
@@ -481,7 +500,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   of the relief sting (orbit, orbit, the marine's face), and the marine's face with no helmet (CL-32):
   front and three-quarter. Compare with `qa/shots/2026-09-24-CL-32/face_before_after.png`. Also the pit's
   bubbles from the shore (CL-20), and the watchtower deck from the ladder top (CL-19).
-- [>] **AG-11** Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and after CL-28 land: the
+- [x] **AG-11** Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and after CL-28 land: the
   numbers next to AG-9's.
 
 - [x] **AG-9** Real-GPU numbers on Jerry's machine after CU-15: `tools/bench.mjs` (megaswarm), a
@@ -496,6 +515,12 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife
 
+- [x] **CL-35** (01:07Z, `handoffs/2026-09-25-claude-CL-35-36-day1-song-stingers.md`) Day 1's own fight song, "First
+  Blood" (`fight_day01`, 4:30 loop, 96 bpm half-time, chiptune; `tools/day1.py`, MIDI in `assets/soundtrack/`).
+- [x] **CL-36** (same) Chiptune stingers and cues (`tools/stingers.py`).
+- [x] **CL-37** (same) Levels: fight music about 5 dB down near and 2 dB far, the day-1 song fades in over 1.5 s,
+  flamethrower about 6 dB down. Also Jerry's splash/menu text removals (Caracal eyebrow x2, tagline, footer "Dead Wave").
+- [ ] **CL-38** 20 fight songs, one per day, 4-5 minutes, looping. Waits on Jerry signing off day 1's sound.
 - [x] **CL-33** (done 23:03Z: the 360 now spans the whole sting; face push removed; t61 18/0) The finisher keeps the zoom on the last zombie for the whole relief sting. Remove the
   pan and zoom onto the marine's face (the last 30% of CL-31). Jerry: it did not look as good as
   he thought.

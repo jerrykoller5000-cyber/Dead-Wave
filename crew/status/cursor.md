@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-19 Bench walls clear the cabin, and fps uses real frames
-touching: tools/bench.mjs
-since: 2026-09-25T00:44Z
-next: CU-22 full npm test before morning
+task: —
+touching: —
+since: 2026-09-25T00:47Z
+next: CU-21 Through the night: commit finished work every hour or so (on
 blocked-on: —
-last-report: handoffs/2026-09-24-cursor-cu21.md
+last-report: handoffs/2026-09-25-cursor-cu19b.md
 
 ## Notes
 

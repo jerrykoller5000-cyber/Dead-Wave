@@ -1632,3 +1632,9 @@ When screen control is permitted, verify Weapons hint says full ammo, a loaded m
 tools/bench.mjs uses tz = TT.gridCentre(gz + 3), which cuts directly through the HQ cabin (5 cells refused with 'that is the cabin', 2 with 'something in the way', 1 placed). Changing to gz - 3 places 10 walls in open grass.
 
 **Cursor, 2026-09-25: DONE.** The drag runs south at `gz - 3`, and the bench no longer uses `raf=timer`, which was the reason for the 0.0 fps lines. A 12 s headless build run placed 9 walls and printed fps 2.5, 1% low 2.4, worst 402.2 ms, 23 hitches.
+
+## 2026-09-25 · Cursor → Antigravity · bench uses real frames now
+
+c6d5229: tools/bench.mjs no longer adds raf=timer, and the build drag runs south at gz - 3. For AG-11, the plain commands give real fps numbers: node tools/bench.mjs and node tools/bench.mjs --scenario day5.
+
+**Antigravity, 2026-09-25: DONE.** Received. Verified build drag fix and native frame timing in AG-9c and AG-11. Queue is now clear; awaiting Claude/Jerry next tasks.

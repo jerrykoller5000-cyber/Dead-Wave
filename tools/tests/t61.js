@@ -20,8 +20,8 @@
     await until(() => ms().stage === 'fight', 14000);
     const gapOk = ms().stage === 'fight';
     ok(gapOk && ms().deckTrack === 'chip_fight_1', 'day 9: Tier 1, right after the alarm sting: ' + ms().stage + '/' + ms().deckTrack);
-    await until(() => Math.abs(ms().prox - 0.5) < 0.03, 6000);
-    ok(Math.abs(ms().prox - 0.5) < 0.03, '50% with nobody within 150 m: ' + ms().prox.toFixed(2));
+    await until(() => Math.abs(ms().prox - 0.7) < 0.03, 6000);
+    ok(Math.abs(ms().prox - 0.7) < 0.03, '70% with nobody within 150 m: ' + ms().prox.toFixed(2));
 
     // Drain the wave to one zombie next to the marine.
     T.clearZombies && T.clearZombies();

@@ -1,5 +1,5 @@
 {
-  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. Claude keeps this file.",
+  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. CL-35/36: day 1 has its own song, fight_day01 ('First Blood', tools/day1.py, 4:30 loop, gain 1.6, fades in over 1.5 s because its intro is the build); the stingers and cues are chiptune (tools/stingers.py) at gain 2.0. fadeIn: per-track fight fade-in seconds (default 10). Claude keeps this file.",
   "pools": {
     "fight": [
       "chip_fight_1"
@@ -48,7 +48,8 @@
     "chip_skirmish_a": 0,
     "chip_fight_1": 0,
     "chip_fight_2": 0,
-    "chip_fight_3": 0
+    "chip_fight_3": 0,
+    "fight_day01": 0
   },
   "stings": {
     "alarm": "sting_alarm",
@@ -75,21 +76,22 @@
     "fight_siege": 3.0,
     "fight_swarm": 3.0,
     "silent_drone": 3.0,
-    "sting_alarm": 3.0,
-    "sting_clear": 3.0,
-    "sting_dawn": 3.0,
-    "sting_ember": 3.0,
-    "sting_guardian": 3.0,
-    "sting_night_falls": 3.0,
-    "cue_achievement": 3.0,
-    "cue_airdrop": 3.0,
-    "cue_objective": 3.0,
-    "cue_poi_cleared": 3.0,
+    "sting_alarm": 2.0,
+    "sting_clear": 2.0,
+    "sting_dawn": 2.0,
+    "sting_ember": 2.0,
+    "sting_guardian": 2.0,
+    "sting_night_falls": 2.0,
+    "cue_achievement": 2.0,
+    "cue_airdrop": 2.0,
+    "cue_objective": 2.0,
+    "cue_poi_cleared": 2.0,
     "chip_skirmish_b": 3.0,
     "chip_skirmish_a": 3.0,
     "chip_fight_1": 3.0,
     "chip_fight_2": 3.0,
-    "chip_fight_3": 3.0
+    "chip_fight_3": 3.0,
+    "fight_day01": 1.6
   },
   "dayFight": {
     "tracks": [
@@ -110,6 +112,10 @@
   "waveByDay": [
     {
       "from": 1,
+      "track": "fight_day01"
+    },
+    {
+      "from": 2,
       "track": "chip_skirmish_b"
     },
     {
@@ -128,5 +134,8 @@
       "from": 16,
       "track": "chip_fight_3"
     }
-  ]
+  ],
+  "fadeIn": {
+    "fight_day01": 1.5
+  }
 }

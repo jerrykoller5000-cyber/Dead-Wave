@@ -809,7 +809,7 @@ export const AudioSys = (() => {
   // Waves: a track per day (Jerry, CL-27). from is the first day that gets the track. Until the
   // special nights have their own music, they play their day's track too.
   // CL-34: the chiptune loops made from Jerry's Suno fight tracks (tools/chip.py).
-  let WAVE_BY_DAY = [{ from: 1, track: 'chip_skirmish_b' }, { from: 3, track: 'chip_skirmish_a' }, { from: 8, track: 'chip_fight_1' }, { from: 12, track: 'chip_fight_2' }, { from: 16, track: 'chip_fight_3' }];
+  let WAVE_BY_DAY = [{ from: 1, track: 'fight_day01' }, { from: 2, track: 'chip_skirmish_b' }, { from: 3, track: 'chip_skirmish_a' }, { from: 8, track: 'chip_fight_1' }, { from: 12, track: 'chip_fight_2' }, { from: 16, track: 'chip_fight_3' }];
   function waveTrackForDay(d) {
     let t = null;
     for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
@@ -827,6 +827,7 @@ export const AudioSys = (() => {
       if (m.hits && typeof m.hits === 'object') for (const k of Object.keys(m.hits)) if (isFinite(+m.hits[k])) MUSIC_HITS[k] = +m.hits[k];
       if (m.stings && typeof m.stings === 'object') for (const k of Object.keys(m.stings)) if (typeof m.stings[k] === 'string') MUSIC_STINGS[k] = m.stings[k];
       if (m.gain && typeof m.gain === 'object') for (const k of Object.keys(m.gain)) if (isFinite(+m.gain[k]) && +m.gain[k] > 0) MUSIC_GAIN[k] = +m.gain[k];
+      if (m.fadeIn && typeof m.fadeIn === 'object') for (const k of Object.keys(m.fadeIn)) if (isFinite(+m.fadeIn[k]) && +m.fadeIn[k] >= 0) FIGHT_FADE[k] = +m.fadeIn[k];
       if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
         WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
       }
@@ -837,9 +838,14 @@ export const AudioSys = (() => {
     }).catch(() => {});
   }
   const MUSIC_VOL = 0.3;
-  const FIGHT_FLOOR = 0.5;           // the fight track with nobody within PROX_FAR (CL-30)
-  const FIGHT_IN_RANGE = 0.5;        // ... with one at PROX_FAR: a smooth climb from there
-  const FIGHT_FADE_IN_S = 10;        // after the alarm sting: 0 to the floor over 10 s (CL-30)
+  // CL-35 (Jerry: "use your best judgement"): the fight songs carry their own dynamics now (a
+  // built intro, drops, a breakdown), so the director swings less: 70% with nobody within
+  // PROX_FAR, full within PROX_NEAR. A song can set its own fade-in (music.json fadeIn); the
+  // day-1 song's intro is its fade, so it starts almost at once.
+  const FIGHT_FLOOR = 0.7;           // the fight track with nobody within PROX_FAR
+  const FIGHT_IN_RANGE = 0.7;        // ... with one at PROX_FAR: a smooth climb from there
+  const FIGHT_FADE_IN_S = 10;        // the default fade after the alarm sting (CL-30)
+  const FIGHT_FADE = {};             // per-track fade-in seconds, from music.json
   const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
   const GAP_AFTER_ALARM = 0;         // the fight starts the moment the alarm sting ends
   const FAST_FADE_S = 0.35;          // the fight making way for the relief sting
@@ -1044,7 +1050,7 @@ export const AudioSys = (() => {
     const name = waveTrackForDay(lastDay) || pickTrack('fight');
     const hit = MUSIC_HITS[name] || 0;
     // CL-30 (Jerry): a 10 s fade in from silence to the floor; proximity does the rest.
-    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE_IN_S });
+    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : FIGHT_FADE_IN_S });
   }
   // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
   // then the calm music fades back in slowly the moment the sting ends.
@@ -1321,21 +1327,21 @@ export const AudioSys = (() => {
     v.pan.pan.setTargetAtTime(Math.max(-1, Math.min(1, pan)), now, 0.04);
     v.low.frequency.setTargetAtTime(1900 + Math.random() * 650, now, 0.08);
     v.gain.gain.cancelScheduledValues(now);
-    v.gain.gain.setTargetAtTime(0.48 * Math.min(1, volume), now, 0.035);
+    v.gain.gain.setTargetAtTime(0.24 * Math.min(1, volume), now, 0.035);   // CL-35: was 0.48 (Jerry: too loud)
     v.gain.gain.setTargetAtTime(0, v.until, 0.075);
   }
   function fireHiss(volume = 1, pan = 0) {
     if (volume < 0.025) return;
     if (ctx && ctx.currentTime < (fireHiss.next || 0)) return;
     fireHiss.next = (ctx ? ctx.currentTime : 0) + 0.22;
-    playNoise({ dur: 0.35, vol: 0.11 * volume, filterFreq: 3600, filterType: 'highpass', attack: 0.025, pan });
+    playNoise({ dur: 0.35, vol: 0.06 * volume, filterFreq: 3600, filterType: 'highpass', attack: 0.025, pan });
   }
   function fireCrackle(volume = 1, pan = 0) {
     if (volume < 0.025) return;
     if (ctx && ctx.currentTime < (fireCrackle.next || 0)) return;
     fireCrackle.next = (ctx ? ctx.currentTime : 0) + 0.13;
-    playNoise({ dur: 0.045, vol: 0.12 * volume, filterFreq: 1600, filterType: 'bandpass', pan });
-    playNoise({ dur: 0.3, vol: 0.07 * volume, filterFreq: 550, filterType: 'lowpass', attack: 0.045, pan });
+    playNoise({ dur: 0.045, vol: 0.07 * volume, filterFreq: 1600, filterType: 'bandpass', pan });
+    playNoise({ dur: 0.3, vol: 0.04 * volume, filterFreq: 550, filterType: 'lowpass', attack: 0.045, pan });
   }
   function crateLand() {
     playNoise({ dur: 0.18, vol: 0.18, filterFreq: 220, filterType: 'lowpass', rev: 0.5 });

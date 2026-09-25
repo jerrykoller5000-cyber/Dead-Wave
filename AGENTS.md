@@ -62,9 +62,9 @@ appends to `handoffs/requests.md` in UTF-8. Don't use PowerShell's `Add-Content`
 Claude works that way.
 
 **If you can't run `npm test`,** write "not run" and why under Tests:, and Cursor runs it
-before committing. ChatGPT's runner does not get past Chrome: `CDP timeout: Page.enable`
+before committing (or Claude, when he commits). ChatGPT's runner does not get past Chrome: `CDP timeout: Page.enable`
 in `tools/cdp.mjs`, even with one worker. That is his environment, not a failing check.
-He writes "not run" and Cursor runs the suite for him at commit time.
+He writes "not run" and whoever commits runs the suite for him at commit time.
 
 Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
 `antigravity`. Task ids: `CL-`, `CU-`, `GP-`, `GB-`, `AG-`.
@@ -73,7 +73,7 @@ Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
 
 | Agent | Owns | Files |
 | --- | --- | --- |
-| Cursor | Integration, git, tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
+| Cursor | Integration, git (shared with Claude, rule 6), tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
 | Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting | `world/*`, `life/*`, `assets/world/*`, `crew/BOARD.md`, this file |
 | Grokbot | Combat: zombies, the wave director, enemy roles, builds and turrets, weapons, scripted deaths | `combat/*` |
 | ChatGPT | What the player reads and decides: HUD, menus, shop, onboarding, text, economy, objectives, audio cues | `ui/*`, `game/economy.js`, `game/objectives.js` |
@@ -98,10 +98,15 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
    three-way merge onto the new version.
 5. **The split freeze.** While Cursor has the freeze on (the panel shows **SPLIT FREEZE ON**),
    nobody else edits `index.html`. Use that time for specs and tests in new files.
-6. **Only Cursor commits and pushes.** Nobody else touches git or GitHub. At the end of each of
-   his own tasks, Cursor commits the finished work that is waiting: everything checked out
-   since the last commit, never a file an active agent is still in. After the checks in
-   rule 7 he pushes `feature/Phis-changes`. The panel shows what's waiting.
+6. **Only Cursor and Claude commit and push** (Jerry, 2026-09-25, D-27). Nobody else touches
+   git or GitHub. At the end of each of their own tasks, either one may commit the finished
+   work that is waiting: everything checked out since the last commit, never a file an active
+   agent is still in. After the checks in rule 7 they push `feature/Phis-changes`. The panel
+   shows what's waiting.
+   - **One committer at a time.** Before touching git, check in with `git` in `--touch`
+     (for example `--touch "git"`). The check-in refuses if the other is already in it; wait
+     until they check out.
+   - `git pull --rebase` before you push, and never force-push.
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
    - Anything visible has before-and-after shots from `tools/shoot.mjs`
@@ -142,7 +147,7 @@ Five agents, each good at something different. The board gives each one tasks th
 - **Owners, ask for help:**
   - `node crew/crew.mjs request <you> antigravity "shots: <what>" "<how to set it up>"`
     when you need eyes on something.
-  - If you can't run the tests, write "Tests: not run" and Cursor runs them at commit time.
+  - If you can't run the tests, write "Tests: not run" and whoever commits (Cursor or Claude) runs them.
 
 ## Handoff note template (`handoffs/YYYY-MM-DD-<agent>-<task>.md`)
 
