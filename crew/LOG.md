@@ -1126,3 +1126,6 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-25T22:05Z · claude · MODEL · Board updated to the current models (from Jerry): Claude Opus 5.5, Cursor Grok 4.7, ChatGPT GPT-ASTRA 6 (High), Antigravity Gemini 3.1 Pro; Grokbot to name its model on its card. New table "Who runs on what" at the top of BOARD.md
 - 2026-09-25T21:54Z · cursor · DONE · CU-37 Commit ChatGPT's checked-out bounty UI; the page waits on Grokbot · report handoffs/2026-09-25-cursor-CU-37.md
 - 2026-09-25T21:54Z · cursor · IN · CU-37 Commit and push the bounty UI · on Grok 4.7 · touching git
+- 2026-09-25T21:55Z · cursor · DONE · CU-37 Commit and push the bounty UI · report handoffs/2026-09-25-cursor-CU-37.md
+- 2026-09-25T21:56Z · cursor · IN · CU-37 Push the bounty UI and keep the first pass in the handoff · on Grok 4.7 · touching git
+- 2026-09-25T21:56Z · cursor · DONE · CU-37 Push the bounty UI and keep the first pass in the handoff · report handoffs/2026-09-25-cursor-CU-37.md

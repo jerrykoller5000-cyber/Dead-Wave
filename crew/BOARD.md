@@ -491,7 +491,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   (CU-29) and the goggles' post effect (CU-35) compiled in the staged pre-roll, so nothing hitches the first
   time. Then the warm title time (7-8 s against 5 s) and anything the day 1-10 run below shows. Measure in a
   visible window on the real GPU.
-- [>] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
+- [x] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
   then commit and push (rule 6; Claude commits too, so check in with `--touch "git"`). A flake gets rerun
   alone before anyone chases it.
 - [x] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
