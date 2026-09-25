@@ -160,8 +160,9 @@ export async function launch({ headless = true, args = [] } = {}) {
     '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
     '--disable-backgrounding-occluded-windows', '--mute-audio',
     // Headless Chrome has no real GPU: SwiftShader gives it WebGL2 so the game renders.
-    '--enable-unsafe-swiftshader', '--use-angle=swiftshader',
-    ...(headless ? ['--headless=new'] : []),
+    // A visible window keeps the real GPU; forcing SwiftShader there made every
+    // "real GPU" number a software-rendering number.
+    ...(headless ? ['--headless=new', '--enable-unsafe-swiftshader', '--use-angle=swiftshader'] : ['--enable-unsafe-webgpu']),
     ...args,
     'about:blank'
   ];
