@@ -11,7 +11,7 @@
   ok(aprons.every(w => w > 0.6), 'trodden dooryards: ' + aprons.map(w => w.toFixed(2)).join(','));
   // Runes lie on the pit floor.
   const pit = T.POI.lakeHole; let worst = 0, n = 0;
-  pit.children.forEach(o => { if (o.isMesh && (o.userData.pitRunes || o.renderOrder === 1)) { const p = o.geometry.attributes.position; for (let i = 0; i < p.count; i += 7) { const x = p.getX(i) + pit.position.x, z = p.getZ(i) + pit.position.z; worst = Math.max(worst, Math.abs(p.getY(i) + pit.position.y - T.sampleHeight(x, z))); n++; } } });
+  pit.children.forEach(o => { if (o.isMesh && (o.userData.pitRunes || o.renderOrder === 1)) { const p = o.geometry.attributes.position; for (let i = 0; i < p.count; i += 7) { const x = p.getX(i) + pit.position.x, z = p.getZ(i) + pit.position.z; worst = Math.max(worst, Math.abs(p.getY(i) + pit.position.y - (T.groundMeshY ? T.groundMeshY(x, z) : T.sampleHeight(x, z)))); n++; } } });
   ok(n > 50 && worst < 0.25, 'runes sit on the pit floor (max gap ' + worst.toFixed(2) + 'm over ' + n + ' samples)');
   // ...and draw after the lake surface, or the deep water paints over them (2026-09-23).
   const waterRO = Math.max(...T.waterSurfaceTargets.map(w => w.mesh.renderOrder));

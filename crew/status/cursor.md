@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-37 Commit the batch that doesn't touch index.html (GB-55, crew files)
-touching: git
-since: 2026-09-25T09:08Z
-next: CU-37 Integration, all night. Every time a batch of tasks lands: t
+task: —
+touching: —
+since: 2026-09-25T09:17Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-CU-38.md
+last-report: handoffs/2026-09-25-cursor-CU-39.md
 
 ## Notes
 

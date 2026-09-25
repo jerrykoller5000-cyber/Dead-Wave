@@ -1,5 +1,6 @@
 import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
+import { buildScoutingReport } from './scouting.js';
 
 export const FIELD_INTEL_PRICE = 120;
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
@@ -78,6 +79,14 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
   const line = (parent, tag, value, cls) => { const el=doc.createElement(tag); el.textContent=value; if(cls)el.className=cls; parent.append(el); return el; };
   function render(data) {
     const view = buildBriefing(data); heading.textContent = view.title; content.replaceChildren();
+    const scouting = view.available ? buildScoutingReport(data) : null;
+    if(scouting) {
+      const report=doc.createElement('section');report.className='briefing-scouting';content.append(report);
+      line(report,'h3',scouting.title);
+      if(scouting.rest)line(report,'p',scouting.rest,'briefing-rest');
+      line(report,'p',scouting.caves);line(report,'p',scouting.pushes,'briefing-pushes');
+      line(report,'p',scouting.trick,'briefing-trick');line(report,'p',scouting.legend,'briefing-muted');
+    }
     for (const warning of view.warnings) line(content,'p',warning,'briefing-warning');
     for (const source of view.sources) {
       const group=doc.createElement('section'); content.append(group); line(group,'h3',source.heading);

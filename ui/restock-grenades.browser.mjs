@@ -14,9 +14,9 @@ try{
  if(!before){
   assert.equal(await all.textContent(),'Restock $36');await all.click();assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:464,nades:5,ammo:168});
   assert.equal(await page.evaluate(()=>grenadeReceipts.filter(e=>e.itemId==='grenade').reduce((n,e)=>n+e.cashSpent,0)),36);assert(await all.isDisabled());await page.evaluate(()=>grenadeStock.buy());assert.equal(await page.evaluate(()=>TT.getBank()),464);
-  await page.evaluate(()=>grenadeStock.setup({cash:59,nades:2,ammo:132}));assert.equal(await all.textContent(),'Restock $48');
-  await page.evaluate(()=>grenadeStock.setup({cash:47,nades:2,ammo:132}));assert(await all.isDisabled());await page.evaluate(()=>grenadeStock.buy());assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:47,nades:2,ammo:132},'insufficient total cannot partially spend');
-  await page.evaluate(()=>grenadeStock.setup({nades:2,ammo:132}));await page.evaluate(()=>grenadeStock.gun());assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:488,nades:2,ammo:168},'gun-only refill leaves grenades alone');
+  await page.evaluate(()=>grenadeStock.setup({cash:59,nades:2,ammo:132}));assert.equal(await all.textContent(),'Restock $44');
+  await page.evaluate(()=>grenadeStock.setup({cash:43,nades:2,ammo:132}));assert(await all.isDisabled());await page.evaluate(()=>grenadeStock.buy());assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:43,nades:2,ammo:132},'insufficient total cannot partially spend');
+  await page.evaluate(()=>grenadeStock.setup({nades:2,ammo:132}));await page.evaluate(()=>grenadeStock.gun());assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:492,nades:2,ammo:168},'gun-only refill leaves grenades alone');
   await page.evaluate(()=>grenadeStock.setup({nades:0,rank:3}));assert.equal(await all.textContent(),'Restock $96');await all.click();assert.deepEqual(await page.evaluate(()=>grenadeStock.read()),{cash:404,nades:8,ammo:168},'Grenadier capacity respected');
   await page.evaluate(()=>grenadeStock.setup({nades:8,rank:0}));assert(await all.isDisabled());await page.evaluate(()=>grenadeStock.buy());assert.equal(await page.evaluate(()=>TT.getBank()),500,'over-cap inventory never charged or reduced');
  }

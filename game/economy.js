@@ -1,6 +1,21 @@
 // Economy helpers. Banking/kiosk integration remains in index.html until the split.
 // Quote whole existing ammo packs, counting a shared reserve only once. Inventory,
 // caps and pack prices come from combat; this function never mutates them.
+// Equipment inflation starts after the teaching nights. Essential supplies and
+// construction use their own unchanged prices; the kiosk selects the category.
+export function equipmentMarkup(night) {
+  if (!Number.isSafeInteger(night) || night < 1) throw new TypeError('Invalid equipment night');
+  return Math.min(17, Math.max(0, night - 3)) * 10;
+}
+export function equipmentPrice(base, night) {
+  if (!Number.isSafeInteger(base) || base < 0) throw new TypeError('Invalid equipment price');
+  const markup = equipmentMarkup(night);
+  if (!markup || !base) return base;
+  const scaled = Math.ceil(base * (100 + markup) / 500) * 5;
+  if (!Number.isSafeInteger(scaled)) throw new RangeError('Equipment price too large');
+  return scaled;
+}
+
 export function quoteRestock(reserves) {
   const seen=new Set(), rows=[];
   for(const r of reserves) {

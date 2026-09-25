@@ -196,6 +196,11 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-38 · Bounty rewards (Claude, for Jerry; GB-57 asked).** Per cleared bounty post, in skulls into the bag (so still
+  banked), on top of the guards' own drops: nights 2-3 **25**, 4-7 **60**, 8-13 **150**, 14 and up **300**. ChatGPT's
+  20/30/40/60 was under 3% of a late night's take (GP-41: about 1,500 on night 10, 3,800 on night 20), so the day's job
+  would stop mattering by night 8; these stay at about 8-20% of the night's base value, worth the walk without
+  outpaying the fight. One number per band, so the board can print it plainly.
 - **D-37 · Daytime: a scouting report and bounties (Claude, for Jerry).** In prep the HQ board shows tonight's plan
   (the caves, the pushes, the trick), and tonight's caves are marked on the minimap. From night 2 the board also posts one
   or two bounties: a camp held by guards sized to the night; clear it before the alarm for a reward. Both live only on
@@ -452,6 +457,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
+- [ ] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
+  (the specks should be gone: the rune bands now drape over the drawn bed, 14 cm up) and the finisher at 0.5 s, 1.5 s and
+  2.6 s (the grade is a canvas filter now, not the grey blend sheet: it should read as a punchy, desaturated shot, not
+  milky). Report to Claude with the shots.
+- [ ] **CU-42** **The 48-zombie frame (CU-38).** Profile nights 5-10 on the GPU with 48 alive: is the 40-47 ms worst frame
+  CPU (AI, separation, animation, skinning) or GPU? Fix the cheap wins (throttle far-zombie AI or animation, cache per-frame
+  lookups), aiming at a steady 60 and 1% lows over 40 fps. And night 1's single 82 ms frame in the first seconds of the
+  wave: find what first-uses there (a shader, a music section decode, the flares) and warm it in the pre-roll like CU-36.
 - [x] **CU-40** Grokbot's GB-55 finding: `startMatch` in tools/tests/lib.js waits a fixed 10 s, but the insertion is 9 s of
   game time and on a slow box it still owns the camera. Make it wait for the insertion to end (or add a TT.isDeploying()),
   so every test gets it (t4, t58, t75 to t79).
@@ -463,7 +476,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   (CU-29) and the goggles' post effect (CU-35) compiled in the staged pre-roll, so nothing hitches the first
   time. Then the warm title time (7-8 s against 5 s) and anything the day 1-10 run below shows. Measure in a
   visible window on the real GPU.
-- [>] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
+- [!] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
   then commit and push (rule 6; Claude commits too, so check in with `--touch "git"`). A flake gets rerun
   alone before anyone chases it.
 - [x] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
@@ -544,15 +557,15 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 - [x] **GB-55** t4 fails on the live game since GB-46 made it start a real match ("camera up 16.4 m and back 41.2 m from
   the marine": the insertion camera, like GB-49's t58). Re-base it the way you did t58; don't loosen it.
-- [>] **GB-56** **Play the 20 nights through, headless.** With GB-53's plans, GB-50's hits and GB-52's blades: run nights 1
+- [x] **GB-56** **Play the 20 nights through, headless.** With GB-53's plans, GB-50's hits and GB-52's blades: run nights 1
   to 20 with a scripted marine at the HQ (godmode off where you can, on where you must) and log each night's length, the
   pushes and breathers, the worst pile-ups, stuck or lost zombies, and what killed him. Fix what drags or breaks; put the
   table in the handoff for ChatGPT's GP-41 and for Claude.
-- [ ] **GB-57** **After GB-56. Bounties, the combat side (D-37).** From night 2, each prep picks one or two POIs
+- [x] **GB-57** **After GB-56. Bounties, the combat side (D-37).** From night 2, each prep picks one or two POIs
   (not the one nearest the HQ, not the same as yesterday's) and posts guards there like GB-43, sized to the night: 3-4
   early, up to 6-8 with a specialist later. Publish `bounty-posted` {kind, index, reward, guards} when they're placed and
   `bounty-done` {kind, index, reward} on that post's `poi-cleared`, and pay the reward then (skulls into the bag, so it
-  still has to be banked). Rewards from GP-41's table (ask ChatGPT). A bounty that isn't cleared by the alarm just ends:
+  still has to be banked). Rewards per D-38. A bounty that isn't cleared by the alarm just ends:
   its guards join nobody and go. Contract in docs/contracts.md for ChatGPT. New test, `--review`.
 - [x] **GB-50** **S1 for Saturday (Jerry, item 6).** Zombies clip through the marine when they attack. Hold every attacker
   on a contact ring round the marine (they crowd him, they never stand inside him), and make a hit **land**: the
@@ -802,6 +815,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   that sits under hours of play.
 - [x] **CL-38** **After GB-53's table.** The horde soundtrack for nights 1 to 20 (Jerry signed off day 1's sound): each
   night's fight music follows its wave the way day 1's does, climbing with the nights.
+- [x] **CL-55** CU-39's two findings: the pit's rune bands drape over the drawn bed (the specks were bed triangles poking
+  through bands laid on sampleHeight), and the finisher's grade is a canvas filter (the saturation blend didn't happen on
+  Jerry's GPU, so it was a 90% grey sheet: the milky finisher). t81.
 - [x] **CL-53** The pit: the little black specks under the water that hide the runes (Jerry). Find what draws them and
   fix it.
 - [x] **CL-54** Ideas to make the daytime more fun and more polished (Jerry, item 5), for Jerry to pick from.

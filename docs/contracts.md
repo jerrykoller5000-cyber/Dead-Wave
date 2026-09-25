@@ -339,3 +339,55 @@ Owner: ChatGPT, game/economy.js. Caller: Grokbot's kill reward settlement.
   ledger neither grants Cash nor changes player-versus-build kill attribution.
 - Banking remains the only conversion of these skull rewards into Cash. No save contract:
   D-30 starts a fresh run on Play. Wired by Grokbot in GB-42 amend; GP-33 live UI verification passed.
+
+## Night shape in the wave preview (GB-53, 2026-09-25; written down for GP-42 in GB-57)
+
+Owner: Grokbot. Callers: ChatGPT's scouting report on the HQ board (GP-42, D-37), Claude's music (CL-38).
+Read-only: reading never rerolls or changes the plan; it is frozen once in `startPrep()` like the rest of the preview.
+
+- `getWavePreview(day).night` = `{ act, rest, trick, label, caves, pushes, lull, ground }`, from `nightPlanFor(day)`:
+  - `act`: `'teach'` (nights 1-3), `'build'` (4-10) or `'test'` (11 on).
+  - `rest`: `true` on the rest nights (7, 11, 14, 17 in the first twenty), which have a lighter mix and longer breathers.
+  - `trick`: a stable id for what the night does: `claw-up`, `runners`, `lake`, `two-fronts`, `nest`, `guardian`,
+    `woods`, `bomber-pack`, `runners-two-caves`, `brute-night`, `surround`, `guardian-ember`, `artillery`, `lake-surge`,
+    `nest-colossus`, `demon-night`, `surround-fast`, `siege`, `gauntlet`, `last-stand`. Map it to your own short copy.
+  - `label`: an English sentence for developers, not player copy. Past night 20 it starts "Night N: ".
+  - `caves`: how many mouths the plan asked for: 1, 2 or 3, `'all'` (surround), or `'chalk'` on a guardian night.
+    The mouths actually used are the preview's `caveIndices` (and `byTypeAndCave`); ground and lake rows are not caves
+    (`caveIndex -1`, see Wave preview exports).
+  - `pushes`: the push sizes in order (an array; its length is the number of pushes; the last is the peak).
+  - `lull`: the breather between pushes in seconds, counted once the field has thinned (or after `LULL_MAX_WAIT`).
+  - `ground`: how many claw up out of the treeline instead of coming from a cave.
+- Past night 20 the test nights (13-20) come round again, grown to the old day curve; the same fields apply.
+- The full table of the twenty nights is in `docs/specs/difficulty.md`.
+
+## Bounties, combat side (GB-57, D-37 and D-38, 2026-09-25)
+
+Owner: Grokbot. Callers: ChatGPT's HQ board, minimap mark and notice (GP-43). Events go out on `'dw-game'`
+through `publishUI`, so each carries `runId`, `eventId`, `day` and `labelKey` (the same label rule as `poi-guards`).
+
+- **When:** each prep from night 2, once the prep is really under way (not under the alarm, not while a card has the
+  game paused). Nothing is posted on day 1 (that day has GB-43's guards). If the alarm is sounded before the prep has
+  placed anything (Next Night straight from the card), nothing is posted that day.
+- **Where:** one post on nights 2-7, two from night 8, at least 25 m apart. Never the POI nearest the HQ (day 1's),
+  never one of yesterday's, never the dock. Candidates are the campsites, cabins, sheds, wrecks, the tower, the
+  graveyard and the mast.
+- **Guards:** in a ring 2.5-5 m round the post, asleep and facing out, like GB-43's, and awake the same way (the marine
+  within 18 m, one of them hurt or killed), but each post wakes on its own. Nights 2-3: 3-4 shamblers; 4-7: 4-5;
+  8-13: 5-6, one a brute; 14 on: 6-8, one a brute or a demon. Normal kills, normal skulls.
+- **Reward (D-38):** per cleared post, skulls into the bag (it still has to be banked), on top of the guards' own
+  skulls: nights 2-3 **25**, 4-7 **60**, 8-13 **150**, 14 and up **300**. It goes into the bag as one skull of that value.
+- `bounty-posted` `{ kind, index, reward, guards, x, z, dist }`: once per post, when its guards are placed.
+- `bounty-done` `{ kind, index, reward }`: when the post's last guard dies, right after that post's `poi-cleared`
+  (GP-38's event fires for bounty posts too). The bag has already grown: a `skull-pickup` `{ count: 1, value: reward,
+  carriedCount, carriedValue, bounty: true }` goes out just before it.
+- `bounty-expired` `{ kind, index, reward, reason }`: an open bounty ends at the alarm (`reason: 'alarm'`, sent straight
+  after `alarm-started`), or at a wave begun without the alarm (`reason: 'wave'`, tests and skips). Its guards, asleep or
+  awake, go while the alarm's camera is up on the sky and join nobody: no reward, no `poi-cleared`, the wave keeps its
+  own total.
+- `getBounties()` (plain and on `window.TT`): today's posts as a fresh array, so a reopened board or a late listener
+  misses nothing: `[{ kind, index, x, z, dist, reward, guards, day, state: 'open' | 'done' | 'expired', labelKey,
+  alive, awake }]`. It is emptied by the next prep and by a new run (`run-reset`). `kind` + `index` are the POI's own
+  (the same identity as `poi-guards` and `poi-cleared`), stable for the run.
+- Test hooks on `TT`: `spawnBounties()`, `expireBounties(reason)`, `bountyRewardFor(day)`, `bountyGuardTypes(day)`,
+  `bountyDbg()`. `getPoiGuards()` lists day-1 guards only. Test: t83.

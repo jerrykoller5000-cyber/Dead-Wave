@@ -3,7 +3,7 @@
   try {
     ok(typeof T.caliberOf === 'function' && T.caliberOf('pistol') === '.45', 'pistol calibre is .45');
     ok(T.caliberOf('uzi') === '9mm', 'uzi calibre stays 9mm');
-    ok(!!T.AMMO_PACK['.45'] && T.AMMO_PACK['.45'].n === 36 && T.AMMO_PACK['.45'].cost === 12, '.45 pack 36/$12');
+    ok(!!T.AMMO_PACK['.45'] && T.AMMO_PACK['.45'].n === 36 && T.AMMO_PACK['.45'].cost === 8, '.45 pack 36/$8 (GP-41 cut it from $12)');
     ok(!!T.AMMO_PACK['9mm'], '9mm pack still present');
     const res = T.getReserve();
     ok((res['.45'] | 0) === 50, 'starting .45 reserve is 50 (GB-36: 36 x1.4)');

@@ -310,7 +310,11 @@
     #loopCine .bar.top { top: 0; } #loopCine .bar.bot { bottom: 0; }
     body.loopcine #loopCine .bar { height: 8vh; }
     #loopCine .grade { position: absolute; inset: 0; background: #7a7a7a; mix-blend-mode: saturation; opacity: 0; transition: opacity .45s ease; }
-    body.finishgrade #loopCine .grade { opacity: .9; transition: opacity .12s ease; }
+    /* CL-55 (CU-39): the grade was a grey layer with mix-blend-mode: saturation. On Jerry's
+       machine the blend did not happen, so it was just a 90% grey sheet over the shot: the
+       washed-out, milky finisher. It is a filter on the game canvas now (as the NVG is). */
+    #loopCine .grade { display: none; }
+    canvas.fin-grade:not(.nvg-phosphor) { filter: saturate(.4) contrast(1.16); }
     #loopCine .glare { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 70% 40%, rgba(255,236,190,.95) 0%, rgba(255,210,150,.7) 45%, rgba(255,190,120,.35) 100%); }
     #loopCine .blink { position: absolute; inset: 0; opacity: 0; background: #000; }
     body.loopcine #hud > *:not(#win):not(#bigBanner), body.loopcine #reticle, body.loopcine #hitPing { visibility: hidden !important; }
@@ -1033,7 +1037,7 @@
   <script type="module">
     import * as THREE from 'three';
     import { createPrepRepairReader } from './ui/prep-repairs.js';
-    import { createGuardianReward, quoteRestock, createSkullValueAccumulator } from './game/economy.js';
+    import { createGuardianReward, quoteRestock, createSkullValueAccumulator, equipmentPrice, equipmentMarkup } from './game/economy.js';
     import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
@@ -1044,6 +1048,7 @@
     import { text as dwText } from './ui/strings.js';
     import { createNightRecord, mountDawn } from './ui/dawn.js';
     import './ui/camp-cleared.js';
+    import { drawScoutingMarks } from './ui/scouting.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -6937,6 +6942,38 @@
 
     // A ring laid ON the ground: each vertex sits on the real (carved) bed, a hair
     // above it, so the band follows the funnel's slope instead of hanging flat over it.
+    // CL-55 (CU-39): the height of the ground mesh as it is drawn, at (x, z). sampleHeight is
+    // the smooth surface; the drawn ground is flat triangles about 2 m across laid over it.
+    // In the pit's steep bowl those differ by a good 0.3 m, and the rune bands, draped
+    // 7 cm over sampleHeight, went under the drawn bed wherever a triangle bulged up:
+    // the "black specks" cutting the runes were the lake bed poking through. Draped over
+    // this instead, the bands lie on the triangles you actually see.
+    function groundMeshY(x, z) {
+      const r = Math.hypot(x, z);
+      if (r >= TERRAIN_RADIUS * 0.999) return sampleHeight(x, z);
+      const arr = ground.geometry.attributes.position.array, rings = TERRAIN_RINGS, segs = TERRAIN_SEGS;
+      let a = Math.atan2(z, x); if (a < 0) a += Math.PI * 2;
+      const j = Math.floor((a / (Math.PI * 2)) * segs) % segs, j2 = (j + 1) % segs;
+      const i = Math.floor(rings * Math.pow(r / TERRAIN_RADIUS, 1 / TERRAIN_RING_POW));
+      let tris;
+      if (i <= 0) tris = [[0, 1 + j2, 1 + j]];
+      else {
+        const inner = 1 + (i - 1) * segs, outer = 1 + i * segs;
+        const A = inner + j, B = inner + j2, C = outer + j2, D = outer + j;
+        tris = [[A, B, C], [A, C, D]];
+      }
+      let best = -1e9, y = sampleHeight(x, z);
+      for (const t of tris) {
+        const x0 = arr[t[0] * 3], z0 = arr[t[0] * 3 + 2], x1 = arr[t[1] * 3], z1 = arr[t[1] * 3 + 2], x2 = arr[t[2] * 3], z2 = arr[t[2] * 3 + 2];
+        const d = (z1 - z2) * (x0 - x2) + (x2 - x1) * (z0 - z2);
+        if (Math.abs(d) < 1e-9) continue;
+        const w0 = ((z1 - z2) * (x - x2) + (x2 - x1) * (z - z2)) / d;
+        const w1 = ((z2 - z0) * (x - x2) + (x0 - x2) * (z - z2)) / d;
+        const w2 = 1 - w0 - w1, m = Math.min(w0, w1, w2);
+        if (m > best) { best = m; y = w0 * arr[t[0] * 3 + 1] + w1 * arr[t[1] * 3 + 1] + w2 * arr[t[2] * 3 + 1]; }
+      }
+      return y;
+    }
     function drapedRing(cx, cz, r0, r1, segs, rows, lift, uRepeat) {
       const pos = [], uv = [], idx = [];
       for (let j = 0; j <= rows; j++) {
@@ -6944,7 +6981,7 @@
         for (let i = 0; i <= segs; i++) {
           const a = (i / segs) * Math.PI * 2;
           const x = Math.cos(a) * r, z = Math.sin(a) * r;
-          pos.push(x, sampleHeight(cx + x, cz + z) + lift, z);
+          pos.push(x, groundMeshY(cx + x, cz + z) + lift, z);
           uv.push((i / segs) * uRepeat, j / rows);
         }
       }
@@ -7001,10 +7038,10 @@
         map: runeTex, color: 0xa8f2ff, transparent: true, opacity: 0.95,
         depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, polygonOffset: true, polygonOffsetFactor: -2
       });
-      const band = new THREE.Mesh(drapedRing(cx, cz, R * 0.56, R * 0.8, 120, 3, 0.07, 3), runeMat);
+      const band = new THREE.Mesh(drapedRing(cx, cz, R * 0.56, R * 0.8, 160, 8, 0.14, 3), runeMat);
       band.renderOrder = 1;
       g.add(band);
-      const inner = new THREE.Mesh(drapedRing(cx, cz, rt * 1.08, rt * 1.32, 80, 2, 0.06, 2), runeMat);
+      const inner = new THREE.Mesh(drapedRing(cx, cz, rt * 1.08, rt * 1.32, 112, 4, 0.12, 2), runeMat);
       inner.renderOrder = 1;
       g.add(inner);
       // Drawn after the lake's surface (renderOrder 2), not before it. The surface darkens
@@ -7645,6 +7682,8 @@
         ctx.fill();
       }
       drawMapBlips(ctx, toLocal, 1);
+      drawScoutingMarks(ctx, { preview: getWavePreview(day), day, phase, alarmActive: !!hq.seq }, POI.caves,
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 22 });
       // Names follow the rotating minimap rather than the terrain bake, so they
       // stay upright and readable even while the player turns.
       ctx.font = '700 15px sans-serif';
@@ -16584,7 +16623,7 @@
       }
       if (!dualOwned[currentWeapon]) {
         AudioSys.invalid();
-        showBanner('AKIMBO NOT BOUGHT', WEAPON_STATS[currentWeapon].name + ' pair costs $' + DUAL_PRICE[currentWeapon] + ' (kiosk, Upgrades)', 1.8, '#ffb347');
+        showBanner('AKIMBO NOT BOUGHT', WEAPON_STATS[currentWeapon].name + ' pair costs $' + equipmentPrice(DUAL_PRICE[currentWeapon], day) + ' (kiosk, Upgrades)', 1.8, '#ffb347');
         return;
       }
       dualActive = !dualActive;
@@ -16656,7 +16695,7 @@
     // kiosk and carried (H to use).
     let medkits = 0;
     const MAX_MEDKITS = 3;
-    const MEDKIT_PRICE = 65;
+    const MEDKIT_PRICE = 35; // GP-41: basic recovery must not consume an early night's income
     const REGEN_CAP_FRAC = 0.4;
     const REGEN_RATE = 2.2;         // hp per second, once the hurt timer has cleared
     const REGEN_DELAY = 5;          // seconds after the last hit before regen starts
@@ -16706,7 +16745,7 @@
     // rounds of 9mm against a day's income of hundreds), so upkeep never entered into
     // a buying decision. It should sting a little to hose a wave with the minigun.
     const AMMO_PACK = {
-      '.45': { n: 36, cost: 12 }, '9mm': { n: 60, cost: 14 }, '5.56mm': { n: 60, cost: 20 }, '7.62mm': { n: 60, cost: 24 },
+      '.45': { n: 36, cost: 8 }, '9mm': { n: 60, cost: 14 }, '5.56mm': { n: 60, cost: 20 }, '7.62mm': { n: 60, cost: 24 },
       '.44': { n: 12, cost: 15 }, '.338': { n: 10, cost: 28 }, '12ga': { n: 20, cost: 20 },
       '40mm': { n: 6, cost: 44 }, '7.62 belt': { n: 300, cost: 48 }, 'Fuel': { n: 60, cost: 24 },
       '60mm': { n: 4, cost: 34 }, chainsaw: { n: 45, cost: 18 }
@@ -18906,7 +18945,7 @@
     const PERK_MAX = 5;
     const perkLevels = { vitality: 0, power: 0, hands: 0, legs: 0, scavenger: 0, grenadier: 0 };
     function perkLvl(k) { return perkLevels[k] || 0; }
-    function perkCost(p) { return Math.round(p.base * (1 + perkLvl(p.key) * 0.85)); }
+    function perkCost(p) { return equipmentPrice(Math.round(p.base * (1 + perkLvl(p.key) * 0.85)), day); }
     function dmgMult() { return 1 + perkLvl('power') * 0.12; }
     function reloadMult() { return 1 / (1 + perkLvl('hands') * 0.12); }
     function speedMult() { return 1 + perkLvl('legs') * 0.05; }
@@ -18925,7 +18964,7 @@
     let fieldIntelOwned = false;
     function publishUI(type, details = {}) {
       // UI label enrichment of Grokbot's committed POI event; world layout is untouched.
-      if (type === 'poi-guards' || type === 'poi-cleared') {
+      if (type === 'poi-guards' || type === 'poi-cleared' || type === 'bounty-posted' || type === 'bounty-done' || type === 'bounty-expired') {   // GB-57: bounties too
         const style = details.kind === 'campsite' ? POI.campsites[details.index]?.style : null;
         const name = ['ranger','hikers','trapper'].includes(style) ? style : details.kind;
         details = { ...details, day, labelKey: 'world.' + name };
@@ -19052,11 +19091,11 @@
         for (const [key] of SHOP_TABS) addTab(shopTabsEl, key, dwText(key === 'build' ? 'shop.tabs.builds' : 'shop.tabs.' + key), group[0] === key);
         for (const key of group[1]) if (!sub.hidden) addTab(sub, key, dwText('shop.tabs.' + key), shopTab === key);
       }
-      if (shopHintEl) shopHintEl.textContent = (SHOP_HINT[shopTab] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '');
+      if (shopHintEl) shopHintEl.textContent = (SHOP_HINT[shopTab] || '') + (day === 1 ? ' ' + dwText('economy.dayOne') : '') + (day > 3 && ['weapons','gear','upgrades','perks'].includes(shopTab) ? ' ' + dwText('economy.equipmentPrices', { percent: equipmentMarkup(day) }) : '');
       if (shopTab === 'weapons') {
         renderRestockAll();
-        for (const w of [...WEAPON_ORDER].sort((a,b) => Number(!weaponOwned[a]) - Number(!weaponOwned[b]) || WEAPON_PRICE[a] - WEAPON_PRICE[b])) {
-          const price = WEAPON_PRICE[w];
+        for (const w of [...WEAPON_ORDER].sort((a,b) => Number(!weaponOwned[a]) - Number(!weaponOwned[b]) || weaponPrice(a) - weaponPrice(b))) {
+          const price = weaponPrice(w);
           const owned = !!weaponOwned[w];
           const row = shopRow(WEAPON_STATS[w].name, owned ? 'owned' : '', WEAPON_BLURB[w],
             owned ? 'OWNED' : '$' + price, !owned && bank >= price,
@@ -19101,10 +19140,10 @@
         shopRow('MedPen', medkits + ' / ' + MAX_MEDKITS + ' carried', 'Auto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.',
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
         for (const gr of GEAR) {
-          const owned = !!gearOwned[gr.key];
+          const owned = !!gearOwned[gr.key], price = equipmentPrice(gr.cost, day);
           const locked = !owned && gr.needs && !gearOwned[gr.needs];
           shopRow(gr.name, owned ? 'owned' : (locked ? gr.needsLabel : (gr.armor ? '+' + gr.armor + ' armor' : '')), gr.desc,
-            owned ? 'OWNED' : (locked ? 'LOCKED' : '$' + gr.cost), !owned && !locked && bank >= gr.cost,
+            owned ? 'OWNED' : (locked ? 'LOCKED' : '$' + price), !owned && !locked && bank >= price,
             owned ? null : () => buyGear(gr), owned ? 'owned' : '');
         }
         if (armorMax() > 0) {
@@ -19116,7 +19155,7 @@
       } else if (shopTab === 'upgrades') {
         let any = true;
         shopRow('Machete', macheteOwned ? 'owned' : 'replaces the knife', 'A proper blade for F: ' + BLADE_STATS.machete.reach.toFixed(1) + 'm reach, ' + BLADE_STATS.machete.dmg + ' damage and a wider arc (knife: ' + BLADE_STATS.knife.reach.toFixed(1) + 'm, ' + BLADE_STATS.knife.dmg + '). Swings a touch slower.',
-          macheteOwned ? 'OWNED' : '$' + MACHETE_PRICE, !macheteOwned && bank >= MACHETE_PRICE, macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
+          macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
         for (const w of WEAPON_ORDER) {
           if (!weaponOwned[w]) continue;
           if (w === 'chainsaw') {
@@ -19129,7 +19168,7 @@
           if (DUAL_CAPABLE[w]) {
             any = true;
             const got = !!dualOwned[w];
-            const price = DUAL_PRICE[w];
+            const price = equipmentPrice(DUAL_PRICE[w], day);
             shopRow(WEAPON_STATS[w].name + ' pair', got ? 'owned' : 'akimbo',
               'A second ' + WEAPON_STATS[w].name + ' for the off hand. Y switches between one and two: twice the rate of fire and twice the loaded rounds, for a wider group, a slower reload, and no hand free for a grenade or the blade.',
               got ? 'OWNED' : '$' + price, !got && bank >= price, got ? null : () => buyDualWield(w), got ? 'owned' : '');
@@ -19137,7 +19176,7 @@
           if (!EXT_MAG_PRICE[w]) continue;
           any = true;
           const owned = !!extMag[w];
-          const price = EXT_MAG_PRICE[w];
+          const price = equipmentPrice(EXT_MAG_PRICE[w], day);
           shopRow(WEAPON_STATS[w].name + (w === 'flamer' ? ' bigger tank' : ' extended mag'), owned ? 'owned' : '', (w === 'flamer' ? 'Tank ' : 'Magazine ') + WEAPON_STATS[w].maxAmmo + ' → ' + Math.round(WEAPON_STATS[w].maxAmmo * 1.5) + ', and a bigger reserve to match.',
             owned ? 'OWNED' : '$' + price, !owned && bank >= price, owned ? null : () => buyExtMag(w), owned ? 'owned' : '');
         }
@@ -19183,8 +19222,10 @@
       updateCoinHud();
       return true;
     }
+    // GP-41: supplies/builds retain base prices; the nerfed saw is also fixed.
+    function weaponPrice(w) { return w === 'chainsaw' ? WEAPON_PRICE[w] : equipmentPrice(WEAPON_PRICE[w], day); }
     function buyWeapon(w) {
-      if (weaponOwned[w] || !spend(WEAPON_PRICE[w])) return;
+      if (weaponOwned[w] || !spend(weaponPrice(w))) return;
       weaponOwned[w] = true;
       if (w === 'chainsaw') sawFuel = sawFuelMax();
       else {
@@ -19193,7 +19234,7 @@
         const c = caliberOf(w);
         if (RESERVE_CAP[c]) reserveAmmo[c] = Math.max(reserveAmmo[c] | 0, reserveCap(c));
       }
-      reportPurchase('weapon:' + w, WEAPON_PRICE[w]);
+      reportPurchase('weapon:' + w, weaponPrice(w));
       showBanner(WEAPON_STATS[w].name.toUpperCase() + ' ACQUIRED', 'Q to bring it up', 1.8, '#7cdea0');
       updateAmmoHud();
       renderShop();
@@ -19270,9 +19311,9 @@
     function buyAllAmmo() { return buyWeaponAmmo(); }
     function buyDualWield(w) {
       if (dualOwned[w] || !DUAL_CAPABLE[w] || !weaponOwned[w]) return;
-      if (!spend(DUAL_PRICE[w])) return;
+      if (!spend(equipmentPrice(DUAL_PRICE[w], day))) return;
       dualOwned[w] = true;
-      reportPurchase('dual:' + w, DUAL_PRICE[w]);
+      reportPurchase('dual:' + w, equipmentPrice(DUAL_PRICE[w], day));
       AudioSys.magThud();
       showBanner(WEAPON_STATS[w].name.toUpperCase() + ' PAIR', 'Y switches between one gun and two', 2.0, '#ffd24a');
       renderShop();
@@ -19280,13 +19321,14 @@
     function buyGear(gr) {
       if (gearOwned[gr.key]) return;
       if (gr.needs && !gearOwned[gr.needs]) { AudioSys.invalid(); return; }
-      if (!spend(gr.cost)) return;
+      const price = equipmentPrice(gr.cost, day);
+      if (!spend(price)) return;
       gearOwned[gr.key] = true;
       if (gr.armor) { playerArmor += gr.armor; AudioSys.armorDon(); }
       applyGearVisibility();
       updateTacticalHud();
       updateHpHud();
-      reportPurchase('gear:' + gr.key, gr.cost);
+      reportPurchase('gear:' + gr.key, price);
       renderShop();
     }
     function repairArmor() {
@@ -19301,18 +19343,18 @@
       renderShop();
     }
     function buyExtMag(w) {
-      if (extMag[w] || !EXT_MAG_PRICE[w] || !spend(EXT_MAG_PRICE[w])) return;
+      if (extMag[w] || !EXT_MAG_PRICE[w] || !spend(equipmentPrice(EXT_MAG_PRICE[w], day))) return;
       extMag[w] = true;
-      reportPurchase('magazine:' + w, EXT_MAG_PRICE[w]);
+      reportPurchase('magazine:' + w, equipmentPrice(EXT_MAG_PRICE[w], day));
       updateAmmoHud();
       renderShop();
     }
     function buyMachete() {
-      if (macheteOwned || !spend(MACHETE_PRICE)) return;
+      if (macheteOwned || !spend(equipmentPrice(MACHETE_PRICE, day))) return;
       macheteOwned = true;
       applyBladeModel();
       AudioSys.macheteSwing();
-      reportPurchase('machete', MACHETE_PRICE);
+      reportPurchase('machete', equipmentPrice(MACHETE_PRICE, day));
       renderShop();
     }
     function buySawTank() {
@@ -26498,13 +26540,17 @@
       waveFinisher = { t0: performance.now(), dur, mesh: (z.mesh && !z.mesh.userData.gibbed) ? z.mesh : null, x, y, z: zz, sx: 0, sz: 0, set: false };
       slowMoT = Math.max(slowMoT, dur + FIN_RETURN_S);
       loopCineOverlay(true);
-      document.body.classList.add('finishgrade');
+      finGrade(true);
       finisherFlash();
       publishUI('wave-last-kill', { x, z: zz, typeKey: z.typeKey, duration: dur });
       if (skullKeepDay()) skullRecallUntil = performance.now() + SKULL_RECALL_MS;   // GB-42: loose skulls fly to the marine
     }
+    function finGrade(on) {
+      document.body.classList.toggle('finishgrade', !!on);
+      renderer.domElement.classList.toggle('fin-grade', !!on);
+    }
     function finisherStyleOff() {
-      document.body.classList.remove('finishgrade');
+      finGrade(false);
       if (!loopCine) document.body.classList.remove('loopcine');
     }
     let _finFlashEl = null;
@@ -26558,7 +26604,7 @@
       if (gameOver || won || !gameStarted) { waveFinisher = null; finisherStyleOff(); return; }
       const t = (performance.now() - F.t0) / 1000;
       if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; finisherJustEnded = true; slowMoT = 0; finisherStyleOff(); return; }
-      if (t >= F.dur - 0.05) document.body.classList.remove('finishgrade');
+      if (t >= F.dur - 0.05) finGrade(false);
       if (t >= F.dur + 0.1) document.body.classList.remove('loopcine');
       const m = F.mesh;
       if (m && m.parent) { F.x = m.position.x; F.y = m.position.y; F.z = m.position.z; }
@@ -26928,6 +26974,7 @@
       if (z.poiGuard && !z.poiGuard.cleared && !zombies.some((o) => o !== z && o.alive && o.poiGuard === z.poiGuard)) {
         z.poiGuard.cleared = true;
         publishUI('poi-cleared', { kind: z.poiGuard.kind, index: z.poiGuard.index, x: z.poiGuard.x, z: z.poiGuard.z, count: z.poiGuard.n || 0 });
+        if (z.poiGuard.bounty) settleBounty(z.poiGuard);   // GB-57: the reward, after its poi-cleared
       }
       const info = deathInfo || { kind: 'generic', dir: { x: 0, z: 0 }, defense: true };
       const kind = info.kind || 'generic';
@@ -27635,6 +27682,9 @@
       // POI nearest the HQ.
       // Spawned from updateZombies once the load pre-roll is over: its cleanup clears every zombie.
       poiGuardsDue = day === 1 && !devNoZombies;
+      // GB-57 / D-37: from night 2, one or two bounty posts, placed like the day-1 guards.
+      bounties = [];
+      bountiesDue = day >= 2 && !devNoZombies;
 
       // Bonus grenade every few days (every day with the Grenadier perk)
       if (day > 1 && (day % 2 === 0 || perkLvl('grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
@@ -27696,6 +27746,10 @@
       spawnCd = 0.25;
       // GB-43: guards still at their post when the alarm sounds go back into the dark; the wave is the briefing's 15.
       retirePoiGuards();
+      // GB-57: a bounty not cleared by now just ends (a wave started without the alarm: tests, skips).
+      if (bountiesDue && bountyLastKeys.length) bountyLastKeys = [];
+      bountiesDue = false;
+      expireBounties('wave');
       burstLeft = Math.min(3, waveTotal);
       // Level 2 as the wave starts (CL-4): all active mouths pulse together. Idempotent.
       // Clearer than per-first-spawn; drowned never appear in caveIndices.
@@ -27849,33 +27903,43 @@
     // come for him like any shambler. Normal kills, normal skulls.
     const POI_GUARD_WAKE = 18;
     let poiGuardPost = null;
-    function nearestHqPoi() {
+    function poiPostList() {
       const list = [];
-      const add = (kind, arr) => { (arr || []).forEach((p, i) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z)) list.push({ kind, index: i, x: p.x, z: p.z }); }); };
+      const add = (kind, arr) => { (arr || []).forEach((p, i) => { if (p && Number.isFinite(p.x) && Number.isFinite(p.z)) list.push({ kind, index: i, x: p.x, z: p.z, dist: Math.hypot(p.x, p.z) }); }); };
       add('campsite', POI.campsites); add('cabin', POI.cabins); add('shed', POI.sheds); add('wreck', POI.wrecks);
       add('tower', [POI.tower]); add('graveyard', [POI.graveyard]); add('mast', [POI.mast]); add('dock', [POI.dock]);
+      return list;
+    }
+    function nearestHqPoi() {
       let best = null;
-      for (const p of list) { p.dist = Math.hypot(p.x, p.z); if (!best || p.dist < best.dist) best = p; }
+      for (const p of poiPostList()) if (!best || p.dist < best.dist) best = p;
       return best;
     }
-    function spawnPoiGuards() {
-      poiGuardPost = null;
-      const post = nearestHqPoi();
-      if (!post) return 0;
-      const n = 2 + (Math.random() < 0.5 ? 1 : 0);
+    // Guards in a ring round a post, facing out, asleep. GB-57: `types` lists a kind per guard.
+    function placePostGuards(post, types) {
+      const n = types.length;
       const a0 = Math.random() * Math.PI * 2;
+      const rMax = n > 4 ? 2.8 : 2;
       let made = 0;
       for (let k = 0; k < n; k++) {
-        const a = a0 + (k / n) * Math.PI * 2, r = 2.5 + Math.random() * 2;
+        const a = a0 + (k / n) * Math.PI * 2, r = 2.5 + Math.random() * rMax;
         let p = resolveStaticProps(post.x + Math.cos(a) * r, post.z + Math.sin(a) * r, 0.8);
         if (waterDepthAt(p.x, p.z) > 0.2) p = { x: post.x, z: post.z };
-        const g = spawnZombie(p.x, p.z, 'shambler', true, true);
+        const g = spawnZombie(p.x, p.z, types[k], true, true);
         if (!g) continue;
         g.poiGuard = post; g.poiAwake = false; g.caveIndex = -1;
         g.mesh.rotation.y = Math.atan2(p.x - post.x, p.z - post.z);   // facing out from the post
         made++;
       }
       post.n = made;
+      return made;
+    }
+    function spawnPoiGuards() {
+      poiGuardPost = null;
+      const post = nearestHqPoi();
+      if (!post) return 0;
+      const n = 2 + (Math.random() < 0.5 ? 1 : 0);
+      const made = placePostGuards(post, new Array(n).fill('shambler'));
       poiGuardPost = post;
       publishUI('poi-guards', { kind: post.kind, index: post.index, x: post.x, z: post.z, dist: post.dist, count: made });
       return made;
@@ -27889,9 +27953,106 @@
         if (k >= 0) zombies.splice(k, 1);
       }
     }
-    function wakePoiGuards(reason) {
-      for (const o of zombies) if (o.poiGuard && !o.poiAwake) { o.poiAwake = true; o.poiWake = reason; }
+    // GB-57: a post wakes on its own; the day-1 alarm (no post given) still wakes every guard.
+    function wakePoiGuards(reason, post) {
+      for (const o of zombies) if (o.poiGuard && !o.poiAwake && (!post || o.poiGuard === post)) { o.poiAwake = true; o.poiWake = reason; }
     }
+
+    // GB-57 / D-37 / D-38: the day's bounties. From night 2 each prep posts guards at one POI
+    // (two from night 8): never the POI nearest the HQ (day 1's), never one of yesterday's, not
+    // the dock (its post is on the water). Guards are sized to the night: 3-4 shamblers on
+    // nights 2-3, 4-5 on 4-7, 5-6 with a brute on 8-13, 6-8 with a brute or a demon from 14.
+    // They sleep and wake like GB-43's (per post). The last one down is the post's poi-cleared;
+    // then the reward (D-38) goes into the skull bag as one skull, so it still has to be banked,
+    // on top of the guards' own skulls. At the alarm an open bounty ends: its guards, asleep or
+    // not, go while the alarm's camera is up on the sky, and join nobody.
+    const BOUNTY_REWARD = [[2, 25], [4, 60], [8, 150], [14, 300]];   // D-38: from night -> skulls
+    function bountyRewardFor(d) { let r = 0; for (const [from, v] of BOUNTY_REWARD) if ((d | 0) >= from) r = v; return r; }
+    function bountyPostsFor(d) { return d < 2 ? 0 : d < 8 ? 1 : 2; }
+    function bountyGuardTypes(d, rnd = Math.random) {
+      if (d < 2) return [];
+      const n = d <= 3 ? 3 + (rnd() < 0.5 ? 1 : 0) : d <= 7 ? 4 + (rnd() < 0.5 ? 1 : 0)
+        : d <= 13 ? 5 + (rnd() < 0.5 ? 1 : 0) : 6 + Math.min(2, (rnd() * 3) | 0);
+      const types = new Array(n).fill('shambler');
+      if (d >= 14) types[0] = rnd() < 0.5 ? 'brute' : 'demon';
+      else if (d >= 8) types[0] = 'brute';
+      return types;
+    }
+    const BOUNTY_SPREAD = 25;   // two posts at least this far apart
+    let bounties = [];          // today's posts: { kind, index, x, z, dist, reward, guards, day, state, n, bounty }
+    let bountiesDue = false;
+    let bountyLastKeys = [];    // yesterday's posts, as 'kind:index'
+    const bountyKey = (p) => p.kind + ':' + p.index;
+    function spawnBounties() {
+      bounties = [];
+      const d = day, want = bountyPostsFor(d), reward = bountyRewardFor(d);
+      if (!want || !reward) { bountyLastKeys = []; return 0; }
+      const near = nearestHqPoi();
+      const nearKey = near ? bountyKey(near) : '';
+      const cands = poiPostList().filter((p) => p.kind !== 'dock' && bountyKey(p) !== nearKey
+        && !bountyLastKeys.includes(bountyKey(p)) && waterDepthAt(p.x, p.z) <= 0.2);
+      const picked = [];
+      while (picked.length < want && cands.length) {
+        const p = cands.splice((Math.random() * cands.length) | 0, 1)[0];
+        if (picked.some((q) => Math.hypot(q.x - p.x, q.z - p.z) < BOUNTY_SPREAD)) continue;
+        picked.push(p);
+      }
+      for (const post of picked) {
+        post.bounty = true; post.reward = reward; post.day = d; post.state = 'open';
+        const made = placePostGuards(post, bountyGuardTypes(d));
+        if (!made) continue;
+        post.guards = made;
+        bounties.push(post);
+        publishUI('bounty-posted', { kind: post.kind, index: post.index, reward, guards: made, x: post.x, z: post.z, dist: post.dist });
+      }
+      bountyLastKeys = bounties.map(bountyKey);
+      return bounties.length;
+    }
+    function settleBounty(post) {
+      if (!post || !post.bounty || post.state !== 'open') return false;
+      post.state = 'done';
+      skullBag.count += 1; skullBag.value += post.reward;
+      updateSkullHud();
+      publishUI('skull-pickup', { count: 1, value: post.reward, carriedCount: skullBag.count, carriedValue: skullBag.value, bounty: true });
+      try { AudioSys.skullPickup(); } catch (_) {}
+      publishUI('bounty-done', { kind: post.kind, index: post.index, reward: post.reward });
+      return true;
+    }
+    function expireBounties(reason) {
+      let n = 0;
+      for (const post of bounties) {
+        if (post.state !== 'open') continue;
+        post.state = 'expired';
+        for (const o of zombies.slice()) {
+          if (o.poiGuard !== post || !o.alive) continue;
+          o.alive = false;
+          recycleOrDisposeZombie(o);
+          const k = zombies.indexOf(o);
+          if (k >= 0) zombies.splice(k, 1);
+        }
+        publishUI('bounty-expired', { kind: post.kind, index: post.index, reward: post.reward, reason });
+        n++;
+      }
+      return n;
+    }
+    // Same label rule as publishUI's enrichment of the POI events (ChatGPT's).
+    function bountyLabelKey(post) {
+      const style = post.kind === 'campsite' ? POI.campsites[post.index]?.style : null;
+      return 'world.' + (['ranger', 'hikers', 'trapper'].includes(style) ? style : post.kind);
+    }
+    /** GB-57: today's bounties, a copy (the HQ board reads this; a late listener misses nothing). */
+    function getBounties() {
+      return bounties.map((b) => ({
+        kind: b.kind, index: b.index, x: b.x, z: b.z, dist: b.dist, reward: b.reward, guards: b.guards,
+        day: b.day, state: b.state, labelKey: bountyLabelKey(b),
+        alive: zombies.filter((o) => o.alive && o.poiGuard === b).length,
+        awake: zombies.some((o) => o.alive && o.poiGuard === b && o.poiAwake)
+      }));
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type === 'alarm-started') expireBounties('alarm');   // the alarm ends an open bounty
+      else if (detail?.type === 'run-reset') { bounties = []; bountiesDue = false; bountyLastKeys = []; }
+    });
     
     function spawnWaveBatch(dt) {
       if (phase !== 'wave') return;
@@ -31174,7 +31335,7 @@
           const st = WEAPON_STATS[key];
           const owned = !!weaponOwned[key];
           let meta;
-          if (!owned) meta = '$' + WEAPON_PRICE[key];
+          if (!owned) meta = '$' + weaponPrice(key);
           else if (st.melee) meta = Math.max(0, Math.ceil(sawFuel)) + 's gas';
           else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);
           out.push({ key, name: st.name, meta, locked: !owned, current: key === currentWeapon });
@@ -31327,7 +31488,7 @@
       if (kind === 'weapon') {
         if (it.locked) {
           AudioSys.invalid();
-          showBanner(it.name.toUpperCase() + ' — NOT BOUGHT', 'Buy it at the kiosk ($' + WEAPON_PRICE[it.key] + ')', 1.6, '#ffb347');
+          showBanner(it.name.toUpperCase() + ' — NOT BOUGHT', 'Buy it at the kiosk ($' + weaponPrice(it.key) + ')', 1.6, '#ffb347');
           return;
         }
         if (it.key !== currentWeapon) setWeapon(WEAPON_ORDER.indexOf(it.key));
@@ -36530,8 +36691,22 @@
       }
     }
 
+    // GB-56: does the flat segment a-b pass through the HQ's square (grown by r)? Slab test.
+    function segCrossesHouse(ax, az, bx, bz, r) {
+      if (!house.present) return false;
+      const cx = house.group.position.x, cz = house.group.position.z, h = house.half + (r || 0);
+      const dx = bx - ax, dz = bz - az;
+      let t0 = 0, t1 = 1;
+      if (Math.abs(dx) < 1e-9) { if (Math.abs(ax - cx) >= h) return false; }
+      else { let u0 = (cx - h - ax) / dx, u1 = (cx + h - ax) / dx; if (u0 > u1) { const q = u0; u0 = u1; u1 = q; } if (u0 > t0) t0 = u0; if (u1 < t1) t1 = u1; if (t0 >= t1) return false; }
+      if (Math.abs(dz) < 1e-9) { if (Math.abs(az - cz) >= h) return false; }
+      else { let u0 = (cz - h - az) / dz, u1 = (cz + h - az) / dz; if (u0 > u1) { const q = u0; u0 = u1; u1 = q; } if (u0 > t0) t0 = u0; if (u1 < t1) t1 = u1; if (t0 >= t1) return false; }
+      return true;
+    }
+
     function updateZombies(dt) {
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
+      if (bountiesDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll && !hq.seq && !paused) { bountiesDue = false; spawnBounties(); }   // GB-57
       if (zombies.length) updateFlowFields(dt);
       zombiesRemaining = Math.max(0, waveTotal - waveSpawned) + zombies.length;
       if (phase === 'wave' && waveSpawned >= waveTotal) {
@@ -36554,8 +36729,8 @@
           const gd = Math.hypot(player.position.x - z.mesh.position.x, player.position.z - z.mesh.position.z);
           const lost = zombies.filter((o) => o.poiGuard === z.poiGuard && o.alive).length < (z.poiGuard.n || 0);
           if (poiPhase === 'wave') wakePoiGuards('alarm');
-          else if (z.hp < z.maxHp || lost) wakePoiGuards('hit');
-          else if (gd < POI_GUARD_WAKE) wakePoiGuards('near');
+          else if (z.hp < z.maxHp || lost) wakePoiGuards('hit', z.poiGuard);
+          else if (gd < POI_GUARD_WAKE) wakePoiGuards('near', z.poiGuard);
           else { poseSleepingGuard(z, dt); continue; }   // GB-51: it idles at its post
         }
         const tactics = z.tactics || 'direct';
@@ -36612,15 +36787,25 @@
 
         // Feral flank: offset sideways then sprint when close
         if (tactics === 'flank' && !lured && !windowRoute) {
+          const zx0 = z.mesh.position.x, zz0 = z.mesh.position.z;
           z.flankPhase = (z.flankPhase || 0) + dt;
           const side = z.flankSide || 1;
           const flankDist = Math.max(2.5, Math.min(9, dist * 0.55));
           if (dist > 3.5) {
             const ox = -dz / dist * side * flankDist;
             const oz = dx / dist * side * flankDist;
-            tx = px0 + ox; tz = pz0 + oz;
-            dx = tx - z.mesh.position.x; dz = tz - z.mesh.position.z;
-            dist = Math.hypot(dx, dz) || 0.0001;
+            // GB-56: only a flank point it can walk to. A flank point is off the player, so it
+            // is steered to straight (no flow field); played through with the marine at the
+            // HQ, one on the far side of the house walked flankers into the middle of a wall,
+            // where they stood for good (up to 66 a night, and nights stalled). With the house
+            // on either leg (to the point, or from it to him) it goes for him instead, and the
+            // flow field takes it round.
+            const fx = px0 + ox, fz = pz0 + oz;
+            if (!segCrossesHouse(zx0, zz0, fx, fz, z.radius) && !segCrossesHouse(fx, fz, px0, pz0, z.radius)) {
+              tx = fx; tz = fz;
+              dx = tx - z.mesh.position.x; dz = tz - z.mesh.position.z;
+              dist = Math.hypot(dx, dz) || 0.0001;
+            }
           }
           if (dist < 7 && z.sprintT <= 0 && Math.random() < 0.02) z.sprintT = 0.55 + Math.random() * 0.35;
         }
@@ -36800,8 +36985,33 @@
           z.spitCd = (z.spitCd || 1.5) - dt;
           // Spiders sit closer and skitter sideways between shots instead of standing still.
           const near = z.spider ? 6.5 : 8.5, hold = z.spider ? 15 : 21, reach = z.spider ? 18 : 23;
-          if (dist < near) { sx = -sx; sz = -sz; spd = z.baseSpeed * 0.85; }
-          else if (dist < hold) {
+          // GB-56: it holds its firing line only where it has one. Played through, spiders
+          // parked behind the HQ (house, trees, a rock) lobbed acid over it for good: the marine
+          // could not shoot back, and the night could not end. Without a clear line it keeps
+          // coming (the flow field takes it round) until it has one. Checked twice a second,
+          // with the same test the reticle uses (shotBlocked). Once round, it keeps coming a
+          // moment longer (lineGo) so its sideways skitter does not carry it straight back behind
+          // the corner it just came round.
+          z.lineT = (z.lineT || 0) - dt;
+          z.lineGo = (z.lineGo || 0) - dt;
+          if (z.lineT <= 0 && dist < hold) {
+            z.lineT = 0.45 + Math.random() * 0.2;
+            const tyy = Math.hypot(tx - player.position.x, tz - player.position.z) < 3 ? player.position.y : sampleHeight(tx, tz);
+            // Two lines, from its body to his gun height, 0.45 m either side: the round leaves his
+            // gun off to one side of his chest, and one line that grazed the house corner let a
+            // spider hold where every round he fired hit the corner (224 rounds, no kill).
+            const lx = -(tz - zz), lz = tx - zx, ll = Math.hypot(lx, lz) || 1, ox = lx / ll * 0.45, oz = lz / ll * 0.45;
+            const fy = z.mesh.position.y + (z.hitH || 1) * 0.5, gy = tyy + 1.3;
+            z.lineClear = !shotBlocked({ x: zx + ox, y: fy, z: zz + oz }, { x: tx + ox, y: gy, z: tz + oz }) &&
+              !shotBlocked({ x: zx - ox, y: fy, z: zz - oz }, { x: tx - ox, y: gy, z: tz - oz });
+            if (!z.lineClear) z.lineGo = 1.2;
+          }
+          // Backing off too only with a line: backing off blind took it out past `near`, walking
+          // in blind brought it back, and it rocked there (spiders lost at 6 to 8 m, played through).
+          // Straight away from him, not back along the flow field: reversing the field's
+          // heading at a corner took it back round the corner it had just come round.
+          if (dist < near && z.lineClear !== false) { sx = -nx; sz = -nz; spd = z.baseSpeed * 0.85; }
+          else if (dist < hold && z.lineClear !== false && !(z.lineGo > 0)) {
             if (z.spider) { z.strafeT = (z.strafeT || 0) - dt; if (z.strafeT <= 0) { z.strafeT = 1.2 + Math.random(); z.strafeDir = Math.random() < 0.5 ? -1 : 1; } const d0 = z.strafeDir || 1; sx = -nz * d0; sz = nx * d0; spd = z.baseSpeed * 0.6; }
             else spd = 0;
           }
@@ -37813,7 +38023,7 @@
       phase = 'idle';
       clearZombies();
       combo = 0; comboT = 0; comboBest = 0; slowMoT = 0; waveFinisher = null; loopCine = null; loopHoldIdle = 0;
-      document.body.classList.remove('loopcine', 'finishgrade');
+      document.body.classList.remove('loopcine'); finGrade(false);
       matchStats.kills = 0; matchStats.headshots = 0;
       bloodMoon = false;
       guardianFirstBloodDone = false;
@@ -38985,11 +39195,11 @@ live++;
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
-          THREE, scene, renderer, camera, sun, hemi, moon, ground, player,
+          THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
@@ -39020,7 +39230,7 @@ live++;
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),

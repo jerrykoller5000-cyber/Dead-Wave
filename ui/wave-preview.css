@@ -14,3 +14,11 @@
 body.briefing #pause { visibility: hidden; }
 body.briefing #firstMinuteCoach { display: none; }
 @media(max-width:500px) { #hqBriefing { padding: 18px; } }
+
+#hqBriefing .briefing-scouting { border-top: 0; padding-top: 0; }
+#hqBriefing .briefing-rest { color: #a7d3ad; }
+#hqBriefing .briefing-trick { color: #e2d1a1; }
+
+#hqBriefing[open] { display: flex; flex-direction: column; }
+#hqBriefing .briefing-content { min-height: 0; overflow-y: auto; }
+#hqBriefing > h2, #hqBriefing > .briefing-prep, #hqBriefing > footer { flex-shrink: 0; }
