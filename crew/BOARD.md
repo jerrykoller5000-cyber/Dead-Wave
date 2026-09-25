@@ -24,11 +24,11 @@ Where each of you is (2026-09-24, 09:10 UTC). **The night shift (Jerry is asleep
 
 | Agent | Now / start with | Then |
 | --- | --- | --- |
-| Cursor | CU-23 restore point FIRST: commit and push what's on disk now | CU-19, CU-20, CU-21, CU-22 |
-| Grokbot | GB-32 the cave grab on a poke (D-25), then GB-31 the knife | GB-28 far zombies, GB-29 difficulty proposal, GB-30 |
-| ChatGPT | GP-21 t35 for the .45, then GP-22 kiosk tabs | GP-23 HUD centre, GP-24 tutorial proposal, GP-25 skull economy proposal |
-| Claude | CL-29 alarm rumble, CL-30 music fade-in, CL-31 finisher camera | CL-32 marine face, CL-28 static world, CL-18/19/20/22 |
-| Antigravity | AG-9c build bench again after CU-19 | AG-10 morning shots for Jerry; AG-11 perf re-runs after GB-28 and CL-28 |
+| Cursor | CU-21/CU-22: commit and push tonight's reviewed work | then CU-5 |
+| Grokbot | queue clear: GB-35 and GB-36 reviewed | wait for Jerry's review |
+| ChatGPT | GP-28 version the intro files (Jerry got a stale `opening.js`) | GP-29 GB-36's kiosk text and restock fixture |
+| Claude | CL-34 chiptune fight loops from the Suno tracks | No screen control tonight |
+| Antigravity | AG-13 shots after CL-33 and GB-35 | AG-9c still waits on CU-19 |
 
 ## Waiting on
 
@@ -42,6 +42,15 @@ a card blocked on another agent, and a next task that says "after the split" or 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-24, 22:52Z · Jerry played it.** No screen control tonight: he is at the machine until 23:00 local. Work in files only.
+  1. No skip on the splash (`openingSkip`, and Esc). GP-27.
+  2. Keep the zoom on the last zombie. Take off the zoom onto the marine's face. CL-33. It replaces the last 30% of CL-31.
+  3. The guardian still does not chase. He comes out only if you shoot into the cave and you are within 20 m. He is too fast to run from. On a leg grab, the camera follows him dragging the marine to the cave, then the thrown-out cutscene plays. That path does not use the crawl-in snatch. GB-35, revises D-25.
+  4. A fresh playthrough still shows unlocked deaths on the tombstone. The collection is `tt_death_log` in localStorage, so it survives a new game. CU-24.
+  5. Play again after a cave death started on day 2. The morning save (`tt_day_start`) resumes on Play. A death's Play again is a new run at day 1. CU-25.
+  6. A gun you buy comes with full ammo. Starting spare capacity is ×1.4. Jerry confirmed that wording. GB-36.
+  7. Take the old fight beds out. Keep the stingers. Replace the fight music with a loopable chiptune arrangement of Jerry's Suno fight tracks, so it sits with the game's existing tune. Do not delete the Suno files until the new loops are in. CL-34.
 
 - **2026-09-24, 09:20Z · Jerry's last orders before sleep.** A restore point before anything else
   (CU-23). Alarm: rumble and camera shake for three seconds. Fight music: after the alarm sting, a
@@ -108,7 +117,14 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
-- **D-25 · A cave poke is the cave grab (Jerry, replacing D-22's fightable guardian).** Three hits into
+- **D-26 · The guardian chase (Jerry 22:52Z, revises D-25; built as GB-35).** One shot (or one explosive)
+  into a mouth with the marine within 20 m and in its line of sight brings the guardian out. It runs
+  him down at 27 m/s against a 11.8 m/s sprint: he can run but can't get away. On contact it takes a
+  leg, the camera follows it dragging him to the mouth, and the thrown-out cutscene plays. The
+  crawl-in snatch never plays on this path; walking into a mouth still gets the walk-in grab. Once
+  per cave per day. Contract in `docs/contracts.md` (Cave pokes), approved.
+- **D-25 · A cave poke is the cave grab (Jerry, replacing D-22's fightable guardian; superseded by D-26 on
+  the trigger and the chase).** Three hits into
   a mouth within 1.5 s, or one explosive, with the player within 45 m of it and in its line of
   sight: the immortal cave thing races out and drags the marine in by the leg, and the existing
   cave scripted death plays (`beginScriptedKill('cave', cave)`), with whatever run-out the current
@@ -317,16 +333,21 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [>] **CU-23** Do this first: a restore point. Commit and push exactly what's on disk now, with the
+- [x] **CU-25** Play again after a death starts on day 1. The morning ledger (`tt_day_start`) currently
+  resumes on Play, so a cave death came back as day 2. A death's Play again is a new run. Quitting
+  to the menu already clears the ledger. Do not resume it from Play again.
+- [x] **CU-24** A fresh playthrough shows a locked tombstone. `tt_death_log` in localStorage is a
+  lifetime collection, so old deaths stay unlocked. Clear it when a new game starts.
+- [x] **CU-23** Do this first: a restore point. Commit and push exactly what's on disk now, with the
   message "Restore point before the night shift (Jerry, 2026-09-24)". Put the commit hash in your
   handoff so anyone can get back to it.
-- [ ] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
+- [x] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
   `commitBuildDrag`). Fix it, and make the numbers an average over the run's last 10 s, not the last
   second. Tell Antigravity (AG-9c).
-- [ ] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
+- [x] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
   (terrain, trees, props, buildings, zombies and their parts, particles, decals, UI sprites) in
   megaswarm and in a day-5 fight. A table in your handoff. No fixes.
-- [ ] **CU-21** Through the night: commit finished work every hour or so (only what's been handed
+- [>] **CU-21** Through the night: commit finished work every hour or so (only what's been handed
   off; never half-done work), with the handoff names in the message.
 - [ ] **CU-22** Before morning (about 13:00 UTC): full `npm test`, commit, push, and the numbers in
   your handoff for Jerry. t60/t61 now unmute before they start; if they still fail, paste the first
@@ -357,6 +378,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Grokbot — combat
 
+- [x] **GB-35** The guardian chase, revising D-25. He comes out only when a shot goes into the cave
+  and the marine is within 20 m. He comes out after the marine at a crazy speed. The player can try to
+  run, but the guardian is far too fast to outrun (Jerry, in chat to Claude: "he is way too fast";
+  earlier: "he will race out at a crazy speed", D-25). Claude's correction: an earlier copy of this
+  line said the marine should gain ground; that was a misreading. On a leg grab, the camera follows the guardian dragging him to the mouth, then the
+  thrown-out cutscene plays. This path does not play the crawl-in snatch.
+- [x] **GB-36** A purchased gun comes with full ammo. Starting spare capacity is ×1.4 (Jerry confirmed
+  the term: not double). Tell ChatGPT if the kiosk needs a new line.
 - [x] **GB-34** t34 "thrown in (open)" fails under `--jobs 2` or more and passes alone: fixed waits on a slow
   machine. Poll instead (`until(cond, ms)`, as t60 and t61 now do). Same pass over your other tests with fixed waits.
 - [x] **GB-33** t35 "jab lands" fails on its own (not a load flake): 1.1 s after H the MedPen is still
@@ -399,7 +428,19 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### ChatGPT — what the player reads and decides
 
-- [ ] **GP-26** Your browser tests: find fixed waits that assert on timing (fades, panels, prompts) and poll
+- [ ] **GP-28** Jerry's browser kept the old `assets/intro/opening.js` (with `skip.onclick`) against the new
+  `index.html` (no Skip button): the script threw at line 57, the video ended into nothing, the menu never
+  came, though the game (and its music) loaded. Claude reproduced it; Ctrl+Shift+R cures it. Stop it
+  happening: version the opening's `<script>`/`<link>` URLs in `index.html` (for example
+  `opening.js?v=gp28`) and bump the tag whenever those files change. Also make `opening.js` tolerate a
+  missing optional element instead of throwing before it wires `ended`.
+- [ ] **GP-29** From GB-36: `ui/strings.js` `shop.hint.weapons` still says a bought gun comes with one
+  loaded magazine; it now comes with full ammo. Update `ui/restock.browser.mjs` to Grokbot's new numbers
+  (his GB-36 handoff has them).
+- [x] **GP-27** Take away the splash skip. Remove the Skip button (`openingSkip` in `index.html`,
+  wired in `assets/intro/opening.js`) and the Esc skip. The splash plays through. Tests and
+  `tools/shoot.mjs` may still dismiss it from code; the player cannot.
+- [x] **GP-26** Your browser tests: find fixed waits that assert on timing (fades, panels, prompts) and poll
   instead, so `npm test` passes under `--jobs 3` as well as alone. Report which tests you touched.
 - [x] **GP-21** t35 expects the pistol to restock 9mm; since GB-23 it's .45. Update the expectation
   (it's following an approved change, not weakening the test), with Grokbot if it's his.
@@ -430,7 +471,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (model: see its card)
 
-- [ ] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
+- [x] **AG-13** After CL-33 and GB-35: shots of the finisher staying on the last zombie, and of the
+  guardian drag into the thrown-out cutscene. No splash-skip in the player path.
+- [>] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
 - [x] **AG-10** Shots for Jerry's morning, on his GPU: the wave finisher (the red pulse and the kill
   cam, three frames), the kiosk restock buttons, the Ready panel under health, an Ember Night banner,
   and a cave mouth from the air at night. `qa/shots/2026-09-24-AG-10/`, with one line per shot.
@@ -453,6 +496,12 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife
 
+- [x] **CL-33** (done 23:03Z: the 360 now spans the whole sting; face push removed; t61 18/0) The finisher keeps the zoom on the last zombie for the whole relief sting. Remove the
+  pan and zoom onto the marine's face (the last 30% of CL-31). Jerry: it did not look as good as
+  he thought.
+- [x] **CL-34** (first pass 23:14Z, `handoffs/2026-09-24-claude-CL-34-chip-fight-loops.md`: five chip loops for the day table; special-night tracks still Suno) Fight music. Take the old fight beds out. Keep the stingers. Make loopable chiptune
+  arrangements of Jerry's Suno fight tracks so they sit with the game's existing tune. Do not
+  delete the Suno files until those loops are in and playing.
 - [x] **CL-29** (`handoffs/2026-09-24-claude-CL-29-31-alarm-fade-finisher-cam.md`) The alarm: a low rumble and camera shake for three seconds when it sounds.
 - [x] **CL-30** (same handoff) The fight music after the alarm sting: a 10 s fade from 0% to 50%, then distance
   takes over (50% at 150 m, rising to full at 20 m).

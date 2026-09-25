@@ -39,7 +39,7 @@ try {
   });});
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   await page.waitForFunction(()=>window.DWLoad?.snapshot().state==='ready'&&window.TT,null,{timeout:120000});
-  await page.evaluate(()=>{document.getElementById('openingSkip').click();document.getElementById('openingSkip').click();});
+  await page.evaluate(()=>DWOpening.dismissForTesting());
   await page.waitForFunction(()=>document.getElementById('opening').hidden);
   await page.fill('#playerName','UI Tester'); await page.click('#modeHunt');
   await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:20000});

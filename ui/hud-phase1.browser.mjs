@@ -1,6 +1,7 @@
 // GP-16/17 HUD integration: actual page, renderer substitute, setup probe only.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';import {serve} from '../tools/serve.mjs';
+import {waitForPresentation} from './browser-poll.mjs';
 const {chromium}=createRequire(import.meta.url)('playwright');
 const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before'),ember=process.argv.includes('--ember'),edges=process.argv.includes('--edges');
 const shots=path.join(root,'Claude outputs/shots',edges?'gp23':ember?'gp17':'gp16');fs.mkdirSync(shots,{recursive:true});
@@ -14,15 +15,17 @@ try{
  await page.route('**/index.html?*',r=>r.fulfill({body:src,contentType:'text/html'}));
  await page.goto(server.origin+'/index.html?debug=1&raf=timer');
  await page.waitForFunction(()=>window.TT&&DWLoad.snapshot().state==='ready',null,{timeout:120000});
- await page.evaluate(()=>{document.getElementById('openingSkip').click();document.getElementById('openingSkip').click();});
+ await page.evaluate(()=>DWOpening.dismissForTesting());
  await page.waitForFunction(()=>document.getElementById('opening').hidden);
  await page.fill('#playerName','HUD Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:30000});
  await page.evaluate(()=>{TT.runDevCommand('godmode');hudProbe.streak();});
  await page.waitForFunction(()=>document.getElementById('combo').classList.contains('show'));
- if(edges){await page.evaluate(()=>hudProbe.notice());await page.waitForTimeout(500);}
+ if(edges){await page.evaluate(()=>hudProbe.notice());await waitForPresentation(page,['#bigBanner','#reloadPrompt','#combo']);}
  for(const [name,width,height] of [['desktop',1280,720],['small',390,844]]){
-   await page.setViewportSize({width,height});await page.waitForTimeout(200);
+   await page.setViewportSize({width,height});
+   await page.waitForFunction(size=>innerWidth===size.width&&innerHeight===size.height,{width,height});
+   await waitForPresentation(page,['#prepTimer','#combo']);
    await page.screenshot({path:path.join(shots,(before?'before-':'after-')+name+'.png')});
    if(!before){
      assert(await page.locator('#hudTopLeft #prepTimer').isVisible());
@@ -42,7 +45,8 @@ try{
  if(ember){
    await page.setViewportSize({width:1280,height:720});
    await page.evaluate(()=>hudProbe.day4());
-   await page.waitForTimeout(150);
+   await page.waitForFunction(()=>document.getElementById('timeLine').textContent.includes('Ember Night'));
+   await waitForPresentation(page,['#bigBanner']);
    await page.screenshot({path:path.join(shots,(before?'before':'after')+'-banner.png')});
    if(!before){assert.match(await page.locator('#bigBanner .t').innerText(),/EMBER NIGHT/);assert.match(await page.locator('#timeLine').innerText(),/Ember Night/);}
    await page.evaluate(()=>{const q=TT.HQ_PANEL_FRONT;TT.player.position.set(q.x,TT.sampleHeight(q.x,q.z),q.z);});

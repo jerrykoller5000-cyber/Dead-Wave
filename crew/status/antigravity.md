@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 3.8 Flash
-task: —
-touching: —
-since: 2026-09-24T09:26Z
+task: AG-9c Run build scenario bench after CU-19 fix
+touching: qa/2026-09-24-AG-9c.md
+since: 2026-09-25T00:01Z
 next: AG-9c The build bench again after CU-19, on Jerry's GPU.
 blocked-on: —
-last-report: handoffs/2026-09-24-antigravity-AG-10.md
+last-report: handoffs/2026-09-24-antigravity-AG-13.md
 
 ## Notes
 

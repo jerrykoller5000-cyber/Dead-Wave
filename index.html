@@ -769,7 +769,6 @@
     </div>
     <div class="opening-controls">
       <button id="openingSound" type="button" aria-pressed="true">Sound on</button>
-      <button id="openingSkip" type="button">Skip · Esc</button>
     </div>
   </div>
   <div id="nvgOverlay"></div>
@@ -16609,15 +16608,21 @@
       '60mm': { n: 4, cost: 34 }, chainsaw: { n: 45, cost: 18 }
     };
     // Reserve caps: a handful of magazines' worth, so you can't front-load a whole run.
-    const RESERVE_CAP = {
+    const RESERVE_CAP_BASE = {
       '.45': 120, '9mm': 220, '5.56mm': 180, '7.62mm': 180, '.44': 36, '.338': 30,
       '12ga': 110, '40mm': 18, '7.62 belt': 900, 'Fuel': 240, '60mm': 16
     };
+    // GB-36 (Jerry, 22:52Z): starting spare capacity is x1.4 (his word: not double). The
+    // extended-mag x1.5 still stacks on top (reserveCap). The starting pistol's spare .45
+    // is 40% up with it: 36 -> 50.
+    const SPARE_CAP_MULT = 1.4;
+    const RESERVE_CAP = Object.fromEntries(Object.entries(RESERVE_CAP_BASE).map(([c, n]) => [c, Math.round(n * SPARE_CAP_MULT)]));
+    const START_RESERVE_45 = Math.round(36 * SPARE_CAP_MULT);
     const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
     let weaponOwned = { pistol: true };
-    let reserveAmmo = { '.45': 36, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
+    let reserveAmmo = { '.45': START_RESERVE_45, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
     let extMag = {};                   // weapon key -> true once bought
     let sawFuel = SAW_FUEL_BASE;
     let sawTankUpgraded = false;
@@ -16672,7 +16677,7 @@
     }
     function resetEconomy() {
       weaponOwned = { pistol: true };
-      reserveAmmo = { '.45': 36, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
+      reserveAmmo = { '.45': START_RESERVE_45, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
       extMag = {};
       dualOwned = {};
       dualActive = false;
@@ -18995,7 +19000,12 @@
       if (weaponOwned[w] || !spend(WEAPON_PRICE[w])) return;
       weaponOwned[w] = true;
       if (w === 'chainsaw') sawFuel = sawFuelMax();
-      else ammoByWeapon[w] = magSize(w); // it arrives loaded
+      else {
+        ammoByWeapon[w] = magSize(w); // it arrives loaded
+        // GB-36: and with its reserve full. A shared calibre (the AA-12 on 12ga) tops up too.
+        const c = caliberOf(w);
+        if (RESERVE_CAP[c]) reserveAmmo[c] = Math.max(reserveAmmo[c] | 0, reserveCap(c));
+      }
       reportPurchase('weapon:' + w, WEAPON_PRICE[w]);
       showBanner(WEAPON_STATS[w].name.toUpperCase() + ' ACQUIRED', 'Q to bring it up', 1.8, '#7cdea0');
       updateAmmoHud();
@@ -27886,6 +27896,9 @@
     function loadDeathLog() {
       try { return JSON.parse(localStorage.getItem('tt_death_log') || '[]').filter((k) => DEATH_WAYS[k]); } catch (_) { return []; }
     }
+    function clearDeathLog() {
+      try { localStorage.removeItem('tt_death_log'); } catch (_) {}
+    }
     function recordDeath(cause) {
       const seen = loadDeathLog();
       const isNew = cause && DEATH_WAYS[cause] && seen.indexOf(cause) < 0;
@@ -29188,8 +29201,12 @@
       for (const m of root.userData.extraMats || []) m.dispose();
     }
     const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG'];
-    function beginScriptedKill(kind, cave) {
+    function beginScriptedKill(kind, cave, opts) {
       if (scriptedKill || cine || gameOver || won || !gameStarted) return;
+      // GB-35: the chase hands its guardian over on the catch; any other grab (walking
+      // into a mouth) ends a chase that is still running.
+      const chase = kind === 'cave' && opts && opts.chase ? opts.chase : null;
+      if (!chase) abortCaveChase();
       if (shopOpen) closeShop();
       if (wheelIsOpen()) closeWheel(false);
       cancelPlaceMode();
@@ -29219,15 +29236,20 @@
         sk.fx = Math.sin(cave.yaw); sk.fz = Math.cos(cave.yaw);
         sk.rx = Math.cos(cave.yaw); sk.rz = -Math.sin(cave.yaw);
         sk.at = (lx, lz, y = 0) => new THREE.Vector3(cave.x + sk.rx * lx + sk.fx * lz, cave.gy + y, cave.z + sk.rz * lx + sk.fz * lz);
-        sk.guardian = makeCaveGuardian(cave);
-        sk.guardian.position.copy(sk.at(0, -3.4));
-        sk.guardian.rotation.y = cave.yaw;
-        sk.guardian.visible = false;      // it comes out of the dark on its own cue
+        if (chase) {
+          sk.guardian = chase.g;          // GB-35: it is already out, with his leg
+        } else {
+          sk.guardian = makeCaveGuardian(cave);
+          sk.guardian.position.copy(sk.at(0, -3.4));
+          sk.guardian.rotation.y = cave.yaw;
+          sk.guardian.visible = false;      // it comes out of the dark on its own cue
+        }
         // Which side of the mouth he walked in on: the arm that takes him is the near one.
         sk.side = ((player.position.x - cave.x) * sk.rx + (player.position.z - cave.z) * sk.rz) < 0 ? -1 : 1;
         // Where the remains land when they come back out.
         const lx = (Math.random() - 0.5) * 2.5, lz = 6.4 + Math.random() * 1.6;
         sk.landAt = sk.at(lx, lz); sk.landAt.y = sampleHeight(sk.landAt.x, sk.landAt.z) + 0.1;
+        if (chase) setupCaveDrag(sk, chase);
       } else {
         sk.p0.y = Math.min(sk.p0.y, LAKE.level - 0.85);   // chest-deep in it
         // He is NOT teleported over the centre any more. The pit reaches out to wherever
@@ -29285,7 +29307,12 @@
     function updateScriptedKill(dt) {
       if (!scriptedKill) return;
       if (gameOver || won) { abortScriptedKill(); return; }
-      scriptedKill.t += dt;
+      const skNow = scriptedKill;
+      if (skNow.drag && !skNow.dragDone) {
+        // GB-35: the drag runs on its own clock; the kill's timeline picks up at the fade.
+        skNow.dragT += dt;
+        if (skNow.dragT >= skNow.dragDur) { skNow.dragDone = true; skNow.t = 2.2; }
+      } else skNow.t += dt;
       updateScriptedKillRig(dt);
       if (scriptedKill && scriptedKill.t >= 8.9) finishScriptedKill();
     }
@@ -29322,6 +29349,8 @@
       skCue(sk, 'kill2', 3.6, () => AudioSys.bossRoar());
       skCue(sk, 'heave', 5.45, () => AudioSys.bossRoar());
       skCue(sk, 'throw', 5.95, () => AudioSys.bagThrow());
+      // GB-35: run down and dragged back to the mouth; no crawl-in snatch on this path.
+      if (sk.drag && t < 4.4) { updateCaveDrag(sk, t); return; }
       if (t < 4.4) {
         const reach = skPh(t, 0, 0.5);      // the arm out of the dark
         const yank = skPh(t, 0.5, 0.9);     // off his feet
@@ -29637,6 +29666,7 @@
       if (cine) { cine.t = Math.max(cine.t, CINE.black - 0.01); if (cineFadeEl) cineFadeEl.style.opacity = '1'; }
     }
     function abortScriptedKill() {
+      abortCaveChase();   // GB-35
       // resetGame / mode change while the scene ran: put everything back, no death.
       if (cleanupScriptedKill() && !cine) {
         document.body.classList.remove('cine', 'cinebars');
@@ -29707,7 +29737,8 @@
     
 
     // === GB-32 / D-25: shoot into a cave -> immortal cave grab (scripted death) ===
-    const CAVE_POKE_HITS = 3, CAVE_POKE_WINDOW = 1.5, CAVE_POKE_RANGE = 45;
+    // GB-35 (revises D-25): one shot into the mouth, from within 20 m, brings it out.
+    const CAVE_POKE_HITS = 1, CAVE_POKE_WINDOW = 1.5, CAVE_POKE_RANGE = 20;
     let cavePokeNow = 0;
     let cavePokeHitLog = [];
     const cavePokeUsedCaves = new Set();
@@ -29736,7 +29767,7 @@
       }
       return false;
     }
-    // D-25: within 45 m, in front of the mouth, not occluded by a build.
+    // GB-35: within 20 m, in front of the mouth, not occluded by a build.
     function playerInCavePokeLos(c) {
       const px = player.position.x, pz = player.position.z, py = player.position.y;
       const d = Math.hypot(px - c.x, pz - c.z);
@@ -29787,18 +29818,16 @@
       if (!c || cavePokeUsedCaves.has(caveIndex)) return false;
       if (playerInCaveGrabBand(c)) return false;
       if (!playerInCavePokeLos(c)) return false;
-      // D-25: aggro cue for Claude's screech, then the existing immortal cave cutscene.
+      // GB-35: aggro cue for Claude's screech, then it comes out after him (the chase
+      // below). One guardian out at a time.
+      if (caveChase) return false;
       publishCaveGuardian(caveIndex, c.x, c.z, 'aggro');
       cavePokeUsedCaves.add(caveIndex);
-      beginScriptedKill('cave', c);
-      if (!scriptedKill) {
-        cavePokeUsedCaves.delete(caveIndex);
-        return false;
-      }
-      return true;
+      return startCaveChase(caveIndex, c);
     }
     function updateCavePoke(dt) {
       cavePokeNow += dt;
+      updateCaveChase(dt);
     }
     function getCavePokeState() {
       return {
@@ -29807,6 +29836,182 @@
         hits: cavePokeHitLog.map((h) => ({ caveIndex: h.caveIndex, age: cavePokeNow - h.t })),
         now: cavePokeNow
       };
+    }
+
+    // === GB-35 (revises D-25): the guardian comes out after him ===
+    // One shot into the mouth from within 20 m wakes it, and it races out and runs him
+    // down. Jerry wants it far too fast to outrun: it runs more than twice a flat-out
+    // marine's sprint (PHYS.run 11.8 m/s). It is a prop, not a zombie, so nothing can hurt
+    // it. When it reaches him it takes a leg and the scripted kill plays the drag variant:
+    // the camera follows it hauling him back to the mouth, then the thrown-out beats. This
+    // path never plays the crawl-in snatch (that stays the walk-in grab, t36).
+    const CAVE_CHASE_SPEED = 27, CAVE_CHASE_OUT_DELAY = 0.35, CAVE_CHASE_GRAB_R = 1.5, CAVE_CHASE_MAX_T = 6;
+    const CAVE_DRAG_SPEED = 6.5, CAVE_DRAG_GRAB_T = 0.45, CAVE_DRAG_LEAD = 1.35;
+    let caveChase = null;
+    function startCaveChase(caveIndex, c) {
+      abortCaveChase();
+      const g = makeCaveGuardian(c);
+      const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
+      g.position.set(c.x - fx * 2.8, c.gy, c.z - fz * 2.8);
+      g.rotation.y = c.yaw;
+      g.visible = true;
+      caveChase = { caveIndex, cave: c, g, t: 0, speed: CAVE_CHASE_SPEED, ran: 0 };
+      return true;
+    }
+    function abortCaveChase() {
+      if (!caveChase) return false;
+      disposeRigProp(caveChase.g);
+      caveChase = null;
+      return true;
+    }
+    function caveGroundAt(c, x, z) {
+      // Inside the lip the floor is the cave's own; out on the apron it is the terrain.
+      const h = sampleHeight(x, z);
+      return ((x - c.x) * Math.sin(c.yaw) + (z - c.z) * Math.cos(c.yaw)) < 0.6 ? Math.max(h, c.gy) : h;
+    }
+    function updateCaveChase(dt) {
+      const ch = caveChase;
+      if (!ch) return;
+      if (!gameStarted || gameOver || won || scriptedKill || cine) { abortCaveChase(); return; }
+      ch.t += dt;
+      const c = ch.cave, g = ch.g, gud = g.userData;
+      const dx = player.position.x - g.position.x, dz = player.position.z - g.position.z;
+      const d = Math.hypot(dx, dz);
+      const going = ch.t > CAVE_CHASE_OUT_DELAY;   // the screech first, then it comes
+      if (going && d > 1e-4) {
+        const step = Math.min(Math.max(0, d - CAVE_CHASE_GRAB_R * 0.6), ch.speed * dt);
+        g.position.x += dx / d * step; g.position.z += dz / d * step;
+        ch.ran += step;
+      }
+      g.position.y = caveGroundAt(c, g.position.x, g.position.z);
+      if (d > 1e-4) g.rotation.y = Math.atan2(dx, dz);
+      // Flat out: long strides, both arms out in front for him, leaning into it.
+      const ph = ch.ran * 1.6, run = going ? 1 : 0;
+      if (gud.legLG) gud.legLG.rotation.x = Math.sin(ph) * 0.95 * run;
+      if (gud.legRG) gud.legRG.rotation.x = -Math.sin(ph) * 0.95 * run;
+      if (gud.armLG) gud.armLG.rotation.set(-1.25 + Math.sin(ph) * 0.25 * run, 0, -0.12);
+      if (gud.armRG) gud.armRG.rotation.set(-1.25 - Math.sin(ph) * 0.25 * run, 0, 0.12);
+      for (const claw of gud.claws || []) claw.rotation.x = -0.35;
+      if (gud.torso) gud.torso.rotation.x = 0.38 * run;
+      if (gud.jaw) gud.jaw.rotation.x = 0.35 + Math.abs(Math.sin(ch.t * 9)) * 0.35;
+      if (going && Math.random() < 0.5) spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 2);
+      // Contact: a hand on the leg. Up a tower or on a roof only buys him the few seconds
+      // before CAVE_CHASE_MAX_T; it is immortal and it does not give up.
+      const dy = Math.abs(player.position.y - g.position.y);
+      if ((d <= CAVE_CHASE_GRAB_R && dy < 3.5) || ch.t >= CAVE_CHASE_MAX_T) catchCaveChase();
+    }
+    function catchCaveChase() {
+      const ch = caveChase;
+      if (!ch) return false;
+      caveChase = null;
+      beginScriptedKill('cave', ch.cave, { chase: ch });
+      if (!scriptedKill || scriptedKill.guardian !== ch.g) { disposeRigProp(ch.g); return false; }
+      publishCaveGuardian(ch.caveIndex, ch.cave.x, ch.cave.z, 'grab');
+      return true;
+    }
+    function getCaveChase() {
+      const ch = caveChase;
+      if (!ch) return null;
+      return {
+        caveIndex: ch.caveIndex, t: ch.t, speed: ch.speed, playerRun: PHYS.run,
+        x: ch.g.position.x, z: ch.g.position.z,
+        dist: Math.hypot(player.position.x - ch.g.position.x, player.position.z - ch.g.position.z)
+      };
+    }
+    // The drag variant of the cave kill (sk.drag). Runs on sk.dragT while it hauls him to
+    // the mouth; then the kill's own timeline resumes at 2.2 (the fade), pulling him on
+    // into the dark under the black, and the aftermath (walk out, throw) plays unchanged.
+    function setupCaveDrag(sk, ch) {
+      sk.drag = true; sk.dragT = 0; sk.dragDone = false;
+      sk.gFrom = ch.g.position.clone(); sk.gRot0 = ch.g.rotation.y;
+      sk.dragFrom = player.position.clone();
+      sk.dragTo = sk.at(sk.side * 0.35, 0.2);    // his boots at the lip
+      sk.dragIn = sk.at(sk.side * 0.35, -3.2);   // and on into the dark under the fade
+      const dist = Math.hypot(sk.dragTo.x - sk.dragFrom.x, sk.dragTo.z - sk.dragFrom.z);
+      sk.dragDur = CAVE_DRAG_GRAB_T + Math.min(4.5, Math.max(1.2, dist / CAVE_DRAG_SPEED));
+      // The snatch's grab beats belong to the crawl-in; this path has its own, now.
+      sk.cues.stir = sk.cues.grab = sk.cues.drop = true;
+      AudioSys.bossRoar();
+      AudioSys.playerHurt();
+      if (AudioSys.scream) AudioSys.scream();
+      const s = sndAt(sk.dragFrom.x, sk.dragFrom.z, 60);
+      AudioSys.gore(Math.max(0.35, s.v * 0.5), s.pan, false);
+      spawnDust(sk.dragFrom.x, sk.dragFrom.y, sk.dragFrom.z, 7);
+      sk.cam.copy(camera.position);
+    }
+    function caveArmAim(g, arm, target, amt, lateral) {
+      // Same frame maths as the snatch's armReach: a hanging arm swings forward on -x.
+      if (!arm) return;
+      arm.updateMatrixWorld(true);
+      arm.getWorldPosition(_ckShoulder);
+      const dx = target.x - _ckShoulder.x, dy = target.y - _ckShoulder.y, dz = target.z - _ckShoulder.z;
+      const cy = Math.cos(g.rotation.y), sy = Math.sin(g.rotation.y);
+      const lx = dx * cy - dz * sy + lateral;
+      const lz = dx * sy + dz * cy;
+      const down = Math.max(0.15, -dy);
+      arm.rotation.x = -Math.atan2(lz, down) * amt;
+      arm.rotation.z = Math.atan2(lx, down) * amt;
+      arm.rotation.y = 0;
+    }
+    const _cdBoots = new THREE.Vector3(), _cdLead = new THREE.Vector3(), _cdG = new THREE.Vector3();
+    const _cdAnkle = new THREE.Vector3(), _cdCam = new THREE.Vector3(), _cdLook = new THREE.Vector3();
+    function updateCaveDrag(sk, t) {
+      const c = sk.cave, g = sk.guardian, gud = g.userData;
+      const clock = sk.dragDone ? sk.dragDur + (t - 2.2) : sk.dragT;
+      const ddt = Math.min(0.1, Math.max(0, clock - (sk.dragClock === undefined ? clock : sk.dragClock)));
+      sk.dragClock = clock;
+      const grab = skPh(clock, 0, CAVE_DRAG_GRAB_T);   // the leg taken, he goes down
+      const hu = Math.min(1, Math.max(0, (clock - CAVE_DRAG_GRAB_T) / Math.max(0.1, sk.dragDur - CAVE_DRAG_GRAB_T)));
+      const haul = hu * hu * (3 - 2 * hu) * 0.35 + hu * 0.65;   // steady, eased at the ends
+      const inP = sk.dragDone ? skPh(t, 2.2, 3.3) : 0;
+      sk.dragHaul = haul;
+      const boots = _cdBoots.copy(sk.dragFrom).lerp(sk.dragTo, haul).lerp(sk.dragIn, inP);
+      boots.y = caveGroundAt(c, boots.x, boots.z) + 0.12 + (1 - grab) * 0.5;
+      // Heading: to the mouth, then on in.
+      let hx = sk.dragIn.x - boots.x, hz = sk.dragIn.z - boots.z;
+      let hl = Math.hypot(hx, hz);
+      if (hl < 0.3) { hx = -sk.fx; hz = -sk.fz; hl = 1; }
+      hx /= hl; hz /= hl;
+      // It leads by an arm's length, turned to go, the leg held out behind it.
+      const lead = _cdLead.set(boots.x + hx * CAVE_DRAG_LEAD, 0, boots.z + hz * CAVE_DRAG_LEAD);
+      const gp = _cdG.copy(sk.gFrom).lerp(lead, grab);
+      gp.y = caveGroundAt(c, gp.x, gp.z);
+      g.visible = true;
+      g.position.copy(gp);
+      let dr = Math.atan2(hx, hz) - sk.gRot0; dr = Math.atan2(Math.sin(dr), Math.cos(dr));
+      g.rotation.y = sk.gRot0 + dr * grab;
+      g.updateMatrixWorld(true);
+      // The marine: on his back, boots first, the way the snatch lays him out.
+      player.position.copy(boots);
+      player.position.y -= inP * 0.6;
+      player.rotation.y = Math.atan2(-hx, -hz);
+      marine.rotation.set(-grab * (Math.PI / 2 - 0.22), 0, Math.sin(clock * 9) * 0.16 * grab);
+      marine.position.y = -ROLL_PIVOT_Y + grab * 0.34;
+      poseMarine(1);
+      const ankle = _cdAnkle.set(boots.x - hx * 0.34 * grab, boots.y + (1 - grab) * 0.15 + 0.12, boots.z - hz * 0.34 * grab);
+      caveArmAim(g, sk.side < 0 ? gud.armLG : gud.armRG, ankle, 1, 0);
+      const other = sk.side < 0 ? gud.armRG : gud.armLG;
+      const stride = hu > 0 && hu < 1 ? Math.sin(clock * 9) : 0;
+      if (other) other.rotation.set(-0.5 + stride * 0.55, 0, sk.side * 0.18);
+      for (const claw of gud.claws || []) claw.rotation.x = -1.0;
+      if (gud.legLG) gud.legLG.rotation.x = stride * 0.6;
+      if (gud.legRG) gud.legRG.rotation.x = -stride * 0.6;
+      if (gud.torso) gud.torso.rotation.x = 0.35 * grab;
+      if (gud.head) gud.head.rotation.x = -0.1;
+      if (gud.jaw) gud.jaw.rotation.x = 0.2 + Math.abs(Math.sin(clock * 3.2)) * 0.5;
+      // Boots ploughing the dirt, the blood going with him.
+      if (hu > 0.02 && hu < 1) {
+        if (Math.random() < 0.6) spawnDust(boots.x, boots.y - 0.1, boots.z, 2);
+        if (Math.random() < 0.35) spawnBlood(boots.x, boots.y + 0.2, boots.z, -hx, -hz, 2, 0.5);
+      }
+      // Camera: follows the two of them in, low and off to his side, the mouth ahead.
+      const sx = hz * sk.side, sz = -hx * sk.side;
+      const mx = (boots.x + gp.x) * 0.5, mz = (boots.z + gp.z) * 0.5;
+      _cdCam.set(mx - hx * 4.6 + sx * 3.4, Math.max(boots.y, gp.y) + 3.1, mz - hz * 4.6 + sz * 3.4);
+      _cdLook.set(mx, (boots.y + gp.y) * 0.5 + 0.8, mz);
+      const k = ddt > 0 ? 1 - Math.exp(-ddt * 5) : 0;
+      sk.cam.lerp(_cdCam, k);
+      sk.look.lerp(_cdLook, ddt > 0 ? 1 - Math.exp(-ddt * 8) : 0);
     }
 
     // CL-22: the places that are alive. A cave you stand near breathes now and then; the pit
@@ -36483,6 +36688,7 @@
       resetPerks();
       resetEconomy();
       clearDayStart();
+      clearDeathLog();
       bank = 40; // seed money: one decision in the first prep, not a shopping spree
       medkits = 0; sinceHurt = 999; clearMedDrops();
       updateCoinHud();
@@ -37614,7 +37820,7 @@
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
@@ -37641,7 +37847,7 @@
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, buyExtMag, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, buyExtMag, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).

@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-23 Restore point: commit and push what's on disk
-touching: index.html, core/audio.js, tools/tests, ui, docs, qa, crew/BOARD.md
-since: 2026-09-24T15:44Z
-next: —
+task: CU-21 Commit the reviewed night-shift work now that AG-13 is in
+touching: index.html, core/audio.js, assets/soundtrack, assets/intro/opening.js, tools/tests, ui, qa, docs/contracts.md
+since: 2026-09-25T00:01Z
+next: CU-21 commit handed-off work
 blocked-on: —
-last-report: handoffs/2026-09-24-cursor-cu5-save.md
+last-report: handoffs/2026-09-24-cursor-cu20.md
 
 ## Notes
 

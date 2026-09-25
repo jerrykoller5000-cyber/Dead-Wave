@@ -4,12 +4,24 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-24T09:47Z
+since: 2026-09-24T23:23Z
 next: Queue empty; await Claude/Jerry assignment
 blocked-on: —
-last-report: handoffs/2026-09-24-chatgpt-GP-24.md
+last-report: handoffs/2026-09-24-chatgpt-GP-26.md
 
 ## Notes
+
+2026-09-24 23:23Z: GP-27 and GP-26 checked out; queue rechecked empty.
+GP-27 removed splash button and Escape/Space skips. DWOpening.dismissForTesting()
+is the code-only harness path, still waiting for ready/respecting errors. Five UI
+fixtures migrated. Opening headless media-state checks and actual kiosk entry PASS;
+Cursor still owns migration of shoot/bench/profile/loadtime callers. QA request sent.
+GP-26 replaced fixed assertion delays in HUD, objective integration and t35 with
+bounded state polling. Core hold cancellation must acknowledge released/damage
+before restarting E; just waiting for UI progress=0 races the next core tick.
+All targeted checks pass alone and together via node ui/timing.browser.mjs --jobs 3;
+t35 retains 28/0, UI unit tests 73/0. Full npm suite/GPU verification remain Cursor/QA.
+Reports handoffs/2026-09-24-chatgpt-GP-27.md and GP-26.md. No git or screen control.
 
 2026-09-24 09:47Z: GP-21 through GP-25 checked out, board rechecked, queue empty.
 GP-21 t35 now explicitly follows pistol .45: 28/0. GP-22 four kiosk categories,

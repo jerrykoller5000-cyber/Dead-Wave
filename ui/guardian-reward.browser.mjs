@@ -28,7 +28,7 @@ try {
   await page.addInitScript(()=>{window.gp12Purchases=[];window.addEventListener('dw-game',({detail:d})=>{if(d.type==='purchase-delivered')gp12Purchases.push(d);});});
   await page.goto(server.origin+'/index.html?debug=1&raf=timer');
   await page.waitForFunction(()=>window.TT&&window.DWLoad?.snapshot().state==='ready',null,{timeout:120000});
-  await page.evaluate(()=>{document.getElementById('openingSkip').click();document.getElementById('openingSkip').click();});
+  await page.evaluate(()=>DWOpening.dismissForTesting());
   await page.waitForFunction(()=>document.getElementById('opening').hidden);
   await page.fill('#playerName','Reward Tester');await page.click('#modeHunt');
   await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:30000});

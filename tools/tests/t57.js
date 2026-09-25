@@ -1,4 +1,4 @@
-﻿(async () => {
+(async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   try {
     ok(typeof T.caliberOf === 'function' && T.caliberOf('pistol') === '.45', 'pistol calibre is .45');
@@ -6,7 +6,7 @@
     ok(!!T.AMMO_PACK['.45'] && T.AMMO_PACK['.45'].n === 36 && T.AMMO_PACK['.45'].cost === 12, '.45 pack 36/$12');
     ok(!!T.AMMO_PACK['9mm'], '9mm pack still present');
     const res = T.getReserve();
-    ok((res['.45'] | 0) === 36, 'starting .45 reserve is 36');
+    ok((res['.45'] | 0) === 50, 'starting .45 reserve is 50 (GB-36: 36 x1.4)');
     ok((res['9mm'] | 0) === 0, 'starting 9mm reserve is 0 (no Uzi yet)');
     if (T.addCash) T.addCash(100);
     const before = res['.45'] | 0;

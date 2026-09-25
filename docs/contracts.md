@@ -238,7 +238,9 @@ only two deaths have a cutscene). Nobody may call them. `tt_death_log` and the d
 ## Pistol ammo (GB-23, 2026-09-24)
 
 Owner: Grokbot (weapons). The pistol has its own calibre, `.45` (the Uzi keeps 9mm): pack
-`{ n: 36, cost: 12 }`, reserve cap 120, and a new run starts with 36 rounds of it. `grantSupply`
+`{ n: 36, cost: 12 }`, reserve cap 168, and a new run starts with 50 rounds of it (GB-36: both x1.4;
+every calibre cap is `RESERVE_CAP_BASE` x `SPARE_CAP_MULT` 1.4, rounded, with the ext-mag x1.5 on top). GB-36:
+`buyWeapon(w)` delivers a loaded magazine and fills that calibre reserve to `reserveCap` (never lowers it). `grantSupply`
 takes `ammo:.45`. UI text: `calibre.45` in `ui/strings.js` (ChatGPT, GP-19).
 
 ## Guardian first-blood reward (GP-12, 2026-09-24)
@@ -267,18 +269,26 @@ Owner: Claude (the music director in `core/audio.js`); Cursor owns the engine ar
 - The page's audio-direction state also carries `ember` (Ember Night), `guardian` (any guardian
   up) and `special` (phase 3's special night: 'fog', 'swarm', 'siegenight', 'silent', or null).
 
-## Cave pokes: the immortal grab (GB-32, D-25, 2026-09-24; replaces GB-26/D-22)
+## Cave pokes: the immortal grab (GB-32, D-25; revised by GB-35, 2026-09-24; replaces GB-26/D-22)
 
 Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sounds; tests.
-- `noteCaveMouthHit(caveIndex, opts?)` → true when this hit starts a poke (three hits into one
-  mouth within 1.5 s, or `{ explosive: true }`). Not while the player is in the grab band.
-- `triggerCavePoke(caveIndex)` → true when the grab started. It needs: prep or a wave, no modal open,
-  no scripted kill running, the player within 45 m with a clear line to the mouth, and outside the
-  grab band. It publishes `dw-game` `{ type: 'cave-guardian', caveIndex, x, z, phase: 'aggro' }`,
-  then `beginScriptedKill('cave', cave)`. The guardian is immortal and the cave cutscene plays.
+- `noteCaveMouthHit(caveIndex, opts?)` → true when this hit brings the guardian out. GB-35: one
+  shot into the mouth is enough (was three in 1.5 s), or `{ explosive: true }`. Not while the player is
+  in the grab band.
+- `triggerCavePoke(caveIndex)` → true when the chase started. It needs: prep or a wave, no modal open,
+  no scripted kill or chase running, the player within 20 m (GB-35; was 45) with a clear line to the
+  mouth, and outside the grab band. It publishes `dw-game` `{ type: 'cave-guardian', caveIndex, x, z,
+  phase: 'aggro' }` and the guardian races out after him (27 m/s against a 11.8 m/s sprint: he cannot
+  be outrun). It is an immortal prop, not a zombie.
+- On the catch it publishes `phase: 'grab'` (GB-35, new) and calls
+  `beginScriptedKill('cave', cave, { chase })`: the drag variant (`sk.drag`), where the camera follows
+  it hauling him to the mouth, then the thrown-out cutscene. No crawl-in snatch on this path. The
+  walk-in grab (`beginScriptedKill('cave', cave)`, no third argument) is unchanged.
+- `getCaveChase()` → `{ caveIndex, t, speed, playerRun, x, z, dist }` or null; `abortCaveChase()` removes a
+  running chase (`abortScriptedKill()` also does).
 - `getCavePokeState()` → `{ dayCount, used }`: once per cave per day, cleared by `startPrep`.
 - Gone with D-22: the fightable poked guardian, its 75-cash drop, and the `emerge`, `retreat` and
-  `death` phases. Sounds bind to `aggro` only (CL-22).
+  `death` phases. Sounds bind to `aggro` (CL-22); `grab` is free for a sound if Claude wants one.
 
 ## Wave finisher (CL-26, 2026-09-24)
 

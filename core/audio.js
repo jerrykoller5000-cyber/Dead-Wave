@@ -805,10 +805,11 @@ export const AudioSys = (() => {
   const MUSIC_STINGS = {};   // cue -> track
   const MUSIC_GAIN = {};     // track -> loudness multiplier (Jerry's tracks are boosted)
   // Day fights: a track per horde size. sizes[i] is the smallest horde that gets tracks[i].
-  const DAY_FIGHT = { tracks: ['day_skirmish_b', 'day_skirmish_a', 'fight_1a', 'fight_2a', 'fight_3a'], sizes: [1, 4, 9, 16, 26] };
+  const DAY_FIGHT = { tracks: ['chip_skirmish_b', 'chip_skirmish_a', 'chip_fight_1', 'chip_fight_2', 'chip_fight_3'], sizes: [1, 4, 9, 16, 26] };
   // Waves: a track per day (Jerry, CL-27). from is the first day that gets the track. Until the
   // special nights have their own music, they play their day's track too.
-  let WAVE_BY_DAY = [{ from: 1, track: 'day_skirmish_b' }, { from: 3, track: 'day_skirmish_a' }, { from: 8, track: 'fight_1a' }, { from: 12, track: 'fight_2a' }, { from: 16, track: 'fight_3a' }];
+  // CL-34: the chiptune loops made from Jerry's Suno fight tracks (tools/chip.py).
+  let WAVE_BY_DAY = [{ from: 1, track: 'chip_skirmish_b' }, { from: 3, track: 'chip_skirmish_a' }, { from: 8, track: 'chip_fight_1' }, { from: 12, track: 'chip_fight_2' }, { from: 16, track: 'chip_fight_3' }];
   function waveTrackForDay(d) {
     let t = null;
     for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
@@ -913,7 +914,9 @@ export const AudioSys = (() => {
     const o = opts || {};
     try { el.pause(); } catch (_) {}
     el.src = trackUrl(name);
-    el.loop = false;
+    // CL-34: a track that loops from its very start (the chip loops) loops natively, which
+    // is gapless in the browser; one that loops from a later hit still seeks on 'ended'.
+    el.loop = o.loopAt === 0;
     deckTrack = name;
     deckLevel = o.level != null ? o.level : 0;
     deckTarget = 1;
@@ -1218,6 +1221,7 @@ export const AudioSys = (() => {
       stage, mood, nextMood, front: deck && deckTrack ? deck.src : null, frontTime: deck ? deck.currentTime : 0,
       deckTrack, deckLevel, volume: deck ? deck.volume : 0, prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
+      deckLoop: !!(deck && deck.loop),
       sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
       lastCue: lastCue ? Object.assign({}, lastCue) : null,
       pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),

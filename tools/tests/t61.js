@@ -1,7 +1,6 @@
 // t61 — CL-26: the wave finisher. The last kill of a wave: a red pulse, the fight music cut
 // dead and the relief sting alone with every other sound cleared, slow motion for exactly
-// the sting's length, and the camera circling the body (70%) then pushing onto the marine's
-// face (30%) (CL-31). Then the calm music fades in.
+// the sting's length, and the camera circling the body for the whole sting (CL-31, CL-33). Then the calm music fades in.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -20,7 +19,7 @@
     T.beginWave();
     await until(() => ms().stage === 'fight', 14000);
     const gapOk = ms().stage === 'fight';
-    ok(gapOk && ms().deckTrack === 'fight_1a', 'day 9: Tier 1, right after the alarm sting: ' + ms().stage + '/' + ms().deckTrack);
+    ok(gapOk && ms().deckTrack === 'chip_fight_1', 'day 9: Tier 1, right after the alarm sting: ' + ms().stage + '/' + ms().deckTrack);
     await until(() => Math.abs(ms().prox - 0.5) < 0.03, 6000);
     ok(Math.abs(ms().prox - 0.5) < 0.03, '50% with nobody within 150 m: ' + ms().prox.toFixed(2));
 
@@ -46,13 +45,13 @@
     ok(!!el, 'the red pulse is on screen');
     ok(ms().stage === 'relief' && ms().sting === 'clear' && !ms().deckTrack, 'the fight cut dead, the relief sting alone: ' + ms().stage + '/' + ms().sting + '/' + ms().deckTrack);
     ok(ms().solo === true, 'every other sound cleared during the sting');
-    // CL-31: a 360 around the body for the first 70% of the sting, zooming in, never in
-    // the ground; then a slow push onto the marine's face for the last 30%.
+    // CL-31/CL-33: a 360 around the body for the whole sting, zooming in, never in the
+    // ground; no push onto the marine's face any more (Jerry).
     const Fb = T.getWaveFinisher(); const bx = Fb ? Fb.x : kx, bz = Fb ? Fb.z : kz;
     const dur = Fb ? Fb.dur : 7.2; const t0 = Fb ? Fb.t0 : performance.now();
     const el2 = () => (performance.now() - t0) / 1000;
     let sweep = 0, lastA = null, dMin = 99, dMax = 0, under = 0, frames = 0;
-    while (el2() < dur * 0.68) {
+    while (el2() < dur * 0.97) {
       const cx = T.camera.position.x - bx, cz = T.camera.position.z - bz;
       const a = Math.atan2(cz, cx);
       if (lastA !== null) { let da = a - lastA; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI; sweep += da; }
@@ -63,16 +62,11 @@
       await wait(50);
     }
     const deg = Math.abs(sweep) * 180 / Math.PI;
-    ok(deg > 300, 'the camera circles the body: ' + deg.toFixed(0) + ' degrees');
+    ok(deg > 320, 'the camera circles the body over the sting: ' + deg.toFixed(0) + ' degrees');
     ok(dMax < 6 && dMin > 0.8, 'close around the body all the way round: ' + dMin.toFixed(1) + '-' + dMax.toFixed(1) + ' m');
     ok(under === 0, 'never in the ground (' + frames + ' samples)');
-    await until(() => el2() > dur * 0.97, 8000);
-    const pp = T.player.position;
-    const dx = T.camera.position.x - pp.x, dz = T.camera.position.z - pp.z;
-    const dh = Math.hypot(dx, dz), dy = T.camera.position.y - pp.y;
-    ok(dh < 1.8 && dy > 1.0 && dy < 2.0, 'then it ends on the marine\'s face: ' + dh.toFixed(2) + ' m out, ' + dy.toFixed(2) + ' m up');
-    const fy = T.player.rotation.y;
-    ok((dx * Math.sin(fy) + dz * Math.cos(fy)) > 0.3, 'in front of him, looking at his face');
+    const endD = Math.hypot(T.camera.position.x - bx, T.camera.position.z - bz);
+    ok(endD < 3.6, 'still on the zombie at the end of the sting, not the marine: ' + endD.toFixed(2) + ' m from the body');
     await until(() => ms().stage === 'calm', 10000);
     ok(ms().stage === 'calm' && !!ms().deckTrack, 'then the calm music: ' + ms().deckTrack);
     ok(ms().solo === false, 'and the other sounds are back');

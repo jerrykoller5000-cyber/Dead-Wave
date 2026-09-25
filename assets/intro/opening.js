@@ -2,7 +2,6 @@
 (() => {
   const root = document.getElementById('opening');
   const video = document.getElementById('openingVideo');
-  const skip = document.getElementById('openingSkip');
   const sound = document.getElementById('openingSound');
   const play = document.getElementById('openingPlay');
   const retry = document.getElementById('openingRetry');
@@ -45,7 +44,7 @@
   }
   function loading() {
     clearTimeout(introTimer); setPhase(failed ? 'error' : 'loading');
-    skip.hidden = true; play.hidden = true; video.pause();
+    play.hidden = true; video.pause();
     // A brief dissolve, not a fabricated multi-second loading delay on fast machines.
     if (ready) setTimeout(finish, 350);
   }
@@ -54,7 +53,6 @@
     video.pause(); play.hidden = true; setPhase('intro'); sting();
     introTimer = setTimeout(loading, matchMedia('(prefers-reduced-motion: reduce)').matches ? 1000 : 3200);
   }
-  skip.onclick = () => phase === 'video' ? intro() : loading();
   retry.onclick = () => location.reload();
   sound.onclick = () => {
     soundEnabled = !soundEnabled; video.muted = !soundEnabled;
@@ -69,7 +67,8 @@
   video.addEventListener('timeupdate', () => { if (video.currentTime !== lastMediaTime) { lastMediaTime = video.currentTime; lastMediaAdvance = performance.now(); } });
   document.addEventListener('keydown', e => {
     if (phase === 'menu') return;
-    if (e.code === 'Escape' || e.code === 'Space' && e.target.tagName !== 'BUTTON') { e.preventDefault(); e.stopImmediatePropagation(); skip.click(); }
+    // The opening plays through; don't let pause/jump leak into the game behind it.
+    if (e.code === 'Escape' || e.code === 'Space' && e.target.tagName !== 'BUTTON') { e.preventDefault(); e.stopImmediatePropagation(); }
   }, true);
   const watchdog = setInterval(() => {
     if (phase === 'video' && play.hidden && performance.now() - lastMediaAdvance > 15000) intro();
@@ -80,6 +79,8 @@
   window.DWOpening = {
     get active() { return phase !== 'menu'; },
     get soundEnabled() { return soundEnabled; },
+    // Harness-only entry point: no player control calls this. Still honors load/error state.
+    dismissForTesting() { if (phase !== 'menu') loading(); },
     progress(value, label) {
       if (failed || ready) return;
       progress.style.width = Math.max(0, Math.min(100,value)) + '%';

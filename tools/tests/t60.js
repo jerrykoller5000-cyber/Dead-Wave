@@ -24,8 +24,8 @@
     await until(() => ms().stage === 'calm' && ms().deckTrack, 3000);
     const s1 = ms();
     const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
-    ok(wb === '1:day_skirmish_b 3:day_skirmish_a 8:fight_1a 12:fight_2a 16:fight_3a', 'waves by day, Jerry\'s table (CL-27): ' + wb);
-    ok(s1.gains.fight_1a >= 2.5 && s1.gains.sting_alarm >= 2.5, 'Jerry\'s tracks are boosted: ' + s1.gains.fight_1a);
+    ok(wb === '1:chip_skirmish_b 3:chip_skirmish_a 8:chip_fight_1 12:chip_fight_2 16:chip_fight_3', 'waves by day, Jerry\'s table, as chip loops (CL-27, CL-34): ' + wb);
+    ok(s1.gains.chip_fight_1 >= 2.5 && s1.gains.sting_alarm >= 2.5, 'the fight loops and stings are boosted: ' + s1.gains.chip_fight_1);
     ok(s1.stage === 'calm' && !!s1.deckTrack, 'calm music in prep: ' + s1.deckTrack);
 
     // The briefing board halves the music, and closing it brings it back.
@@ -52,7 +52,8 @@
     const tGap = Date.now();
     await until(() => ms().stage === 'fight', 4000);
     const gap = (Date.now() - tGap) / 1000;
-    ok(ms().stage === 'fight' && ms().deckTrack === 'day_skirmish_b', 'then day 1\'s track, day skirmish B: ' + ms().deckTrack);
+    ok(ms().stage === 'fight' && ms().deckTrack === 'chip_skirmish_b', 'then day 1\'s track, the skirmish B loop: ' + ms().deckTrack);
+    ok(ms().deckLoop === true, 'and it loops natively, gapless (CL-34)');
     ok(ms().deckLevel < 0.2, 'fading in from silence (CL-30): ' + ms().deckLevel.toFixed(2));
     await until(() => ms().deckLevel > 0.2, 15000);
     ok(ms().deckLevel > 0.2 && ms().deckLevel < 0.6, 'climbing slowly through the 10 s fade: ' + ms().deckLevel.toFixed(2));
@@ -91,15 +92,15 @@
 
     // A day fight: no alarm, the track follows the horde's size, and ends like a wave.
     let dz = T.spawnZombie(p.x + 10, p.z + 10, 'shambler', true, true);
-    await until(() => ms().stage === 'dayfight' && ms().deckTrack === 'day_skirmish_b', 10000);
+    await until(() => ms().stage === 'dayfight' && ms().deckTrack === 'chip_skirmish_b', 10000);
     const info = 'zombie ' + (dz ? (dz.alive ? 'alive' : 'dead') : 'not spawned') + ', phase ' + T.getPhase() + ', stage ' + ms().stage;
-    ok(ms().deckTrack === 'day_skirmish_b', 'one zombie in daylight: day skirmish B: ' + ms().deckTrack + ' (' + info + ')');
+    ok(ms().deckTrack === 'chip_skirmish_b', 'one zombie in daylight: day skirmish B: ' + ms().deckTrack + ' (' + info + ')');
     for (let i = 0; i < 5; i++) T.spawnZombie(p.x + 12 + i, p.z + 10, 'shambler', true, true);
-    await until(() => ms().deckTrack === 'day_skirmish_a', 8000);
-    ok(ms().deckTrack === 'day_skirmish_a', 'six: steps up to day skirmish A: ' + ms().deckTrack);
+    await until(() => ms().deckTrack === 'chip_skirmish_a', 8000);
+    ok(ms().deckTrack === 'chip_skirmish_a', 'six: steps up to day skirmish A: ' + ms().deckTrack);
     for (let i = 0; i < 5; i++) T.spawnZombie(p.x + 12 + i, p.z + 14, 'shambler', true, true);
-    await until(() => ms().deckTrack === 'fight_1a', 8000);
-    ok(ms().deckTrack === 'fight_1a', 'eleven: Tier 1: ' + ms().deckTrack);
+    await until(() => ms().deckTrack === 'chip_fight_1', 8000);
+    ok(ms().deckTrack === 'chip_fight_1', 'eleven: Tier 1: ' + ms().deckTrack);
     T.clearZombies && T.clearZombies();
     await until(() => ms().stage === 'relief', 8000);
     ok(ms().stage === 'relief' && ms().sting === 'clear', 'the day fight ends with the relief sting too');
