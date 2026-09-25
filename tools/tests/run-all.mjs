@@ -58,6 +58,7 @@ function buildTestPage() {
   // Inline module imports are resolved from test.html's folder. Point them at the repo root.
   // The import map's "./fakethree.mjs" is not an import-from, so it stays next to test.html.
   out = out.replace(/from (['"])\.\//g, 'from $1/');
+  out = out.replace(/import (['"])\.\//g, 'import $1/');
   const file = path.join(HERE, 'test.html');
   fs.writeFileSync(file, out);
   return file;
