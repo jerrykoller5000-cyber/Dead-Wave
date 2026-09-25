@@ -3,7 +3,7 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {createRequire} from 'node:module';import {fileURLToPath} from 'node:url';import {serve} from '../tools/serve.mjs';
 const {chromium}=createRequire(import.meta.url)('playwright');
 const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.includes('--before'),phase2=process.argv.includes('--phase2');
-const shots=path.join(root,'Claude outputs/shots',phase2?'gp22':'gp18');fs.mkdirSync(shots,{recursive:true});
+const shots=path.join(root,'Claude outputs/shots',process.argv.includes('--gp29')?'gp29':phase2?'gp22':'gp18');fs.mkdirSync(shots,{recursive:true});
 const src=fs.readFileSync(path.join(root,'index.html'),'utf8')
  .replace(/<script type="importmap">[\s\S]*?<\/script>/,()=>'<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>')
  .replace('window.TT = {',()=>`window.stockProbe={
@@ -32,30 +32,31 @@ try{
  await page.evaluate(()=>{stockProbe.setup();TT.setShopTabDbg('weapons');window.stockReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')stockReceipts.push(e);});});
  await shot('weapons');
  if(!before){
+   assert.match(await page.locator('#shopHint').textContent(),/full ammo: a loaded magazine and a full reserve/);
    if(phase2)assert.equal(await page.locator('[data-weapon]').first().getAttribute('data-weapon'),'pistol');
    const pistol=page.locator('[data-weapon="pistol"] [data-restock]');
-   assert.equal(await pistol.textContent(),'Restock $36');
+   assert.equal(await pistol.textContent(),'Restock $48');
    assert(await page.locator('[data-weapon="m4"] [data-restock]').isDisabled());
    await pistol.click();
-   assert.deepEqual(await page.evaluate(()=>({cash:TT.getBank(),pistol:TT.getReserve()['.45'],uzi:TT.getReserve()['9mm'],loaded:TT.getAmmo().pistol})),{cash:464,pistol:120,uzi:200,loaded:3});
+   assert.deepEqual(await page.evaluate(()=>({cash:TT.getBank(),pistol:TT.getReserve()['.45'],uzi:TT.getReserve()['9mm'],loaded:TT.getAmmo().pistol})),{cash:452,pistol:168,uzi:200,loaded:3});
    assert(await pistol.isDisabled());
-   assert.equal(await page.evaluate(()=>stockReceipts.filter(e=>e.itemId==='ammo:.45'&&e.source==='kiosk').reduce((n,e)=>n+e.cashSpent,0)),36);
-   await page.evaluate(()=>stockProbe.restock('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),464);
+   assert.equal(await page.evaluate(()=>stockReceipts.filter(e=>e.itemId==='ammo:.45'&&e.source==='kiosk').reduce((n,e)=>n+e.cashSpent,0)),48);
+   await page.evaluate(()=>stockProbe.restock('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),452);
    await page.evaluate(()=>stockProbe.cash(13));
-   const uzi=page.locator('[data-weapon="uzi"] [data-restock]');assert.equal(await uzi.textContent(),'Restock $14');assert(await uzi.isDisabled());
+   const uzi=page.locator('[data-weapon="uzi"] [data-restock]');assert.equal(await uzi.textContent(),'Restock $28');assert(await uzi.isDisabled());
    await page.evaluate(()=>stockProbe.restock('uzi'));assert.equal(await page.evaluate(()=>TT.getReserve()['9mm']),200);assert.equal(await page.evaluate(()=>TT.getBank()),13);
    await page.evaluate(()=>stockProbe.cash(500));
-   const all=page.locator('[data-restock-all] button');assert.equal(await all.textContent(),'Restock $52');
+   const all=page.locator('[data-restock-all] button');assert.equal(await all.textContent(),'Restock $126');
    await all.click();
-   assert.deepEqual(await page.evaluate(()=>({cash:TT.getBank(),uzi:TT.getReserve()['9mm'],shells:TT.getReserve()['12ga'],fuel:stockProbe.fuel()})),{cash:448,uzi:220,shells:110,fuel:60});
-   assert(await all.isDisabled());await page.evaluate(()=>stockProbe.all());assert.equal(await page.evaluate(()=>TT.getBank()),448);
+   assert.deepEqual(await page.evaluate(()=>({cash:TT.getBank(),uzi:TT.getReserve()['9mm'],shells:TT.getReserve()['12ga'],fuel:stockProbe.fuel()})),{cash:374,uzi:308,shells:154,fuel:60});
+   assert(await all.isDisabled());await page.evaluate(()=>stockProbe.all());assert.equal(await page.evaluate(()=>TT.getBank()),374);
    await shot('full');
    await page.evaluate(()=>{stockProbe.setup();stockProbe.cash(60);});
-   assert.equal(await all.textContent(),'Restock $88');assert(await all.isDisabled());
+   assert.equal(await all.textContent(),'Restock $174');assert(await all.isDisabled());
    await page.evaluate(()=>stockProbe.all());assert.equal(await page.evaluate(()=>TT.getBank()),60);assert.equal(await page.evaluate(()=>TT.getReserve()['.45']),36);
  }
  await page.evaluate(()=>TT.setShopTabDbg('ammo'));await shot('ammo');
- if(!before){assert.match(await page.locator('#shopHint').textContent(),/pistol uses \.45/);assert.equal(await page.locator('[data-restock-all] button').textContent(),'Restock $88');}
+ if(!before){assert.match(await page.locator('#shopHint').textContent(),/pistol uses \.45/);assert.equal(await page.locator('[data-restock-all] button').textContent(),'Restock $174');}
  await page.evaluate(()=>TT.setShopTabDbg('weapons'));await page.setViewportSize({width:390,height:844});await shot('small');
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  if(phase2&&!before){

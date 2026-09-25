@@ -2,12 +2,12 @@
 
 state: active
 model: Gemini 3.8 Flash
-task: AG-9c Run build scenario bench after CU-19 fix
-touching: qa/2026-09-24-AG-9c.md
-since: 2026-09-25T00:01Z
-next: AG-9c The build bench again after CU-19, on Jerry's GPU.
+task: AG-11 Megaswarm and day-5 benchmarks on Jerry's GPU after GB-28 and CL-28
+touching: qa/2026-09-24-AG-11.md
+since: 2026-09-25T00:35Z
+next: AG-11 Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and
 blocked-on: —
-last-report: handoffs/2026-09-24-antigravity-AG-13.md
+last-report: handoffs/2026-09-24-antigravity-AG-12.md
 
 ## Notes
 

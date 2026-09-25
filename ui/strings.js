@@ -349,7 +349,7 @@ const messages = {
   "shop.tabs.build": "Blueprints",
   "shop.tabs.builds": "Builds",
   "shop.tabs.fortify": "Fortify",
-  "shop.hint.weapons": "One-time unlocks. Bought guns join the {weaponWheel} rotation and come with one loaded magazine.",
+  "shop.hint.weapons": "One-time unlocks. Bought guns join the {weaponWheel} rotation and come with full ammo: a loaded magazine and a full reserve.",
   "shop.hint.ammo": "The pistol uses .45; the Uzi uses 9mm. Guns of the same calibre share a reserve. {reload} reloads from it. Buy individual packs below or fill your reserves with Restock all.",
   "shop.hint.gear": "Tactical kit. Nothing here is issued; the nights are dark until you pay for eyes.",
   "shop.hint.upgrades": "Per-weapon improvements for guns you own. Extended mags are +50% (the revolver and launcher can't take one).",

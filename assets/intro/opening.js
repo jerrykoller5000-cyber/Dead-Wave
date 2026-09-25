@@ -36,32 +36,35 @@
     if (!ready || failed || phase !== 'loading') return;
     setPhase('menu'); clearTimeout(introTimer); clearInterval(watchdog);
     document.body.classList.remove('opening');
-    document.getElementById('hud').inert = false;
+    const hud = document.getElementById('hud');
+    if (hud) hud.inert = false;
     root.classList.add('leaving');
     if (audio) audio.close().catch(() => {});
     window.dispatchEvent(new Event('dw-opening-complete'));
-    setTimeout(() => { root.hidden = true; document.getElementById('playerName').focus({preventScroll:true}); }, 650);
+    setTimeout(() => { root.hidden = true; document.getElementById('playerName')?.focus({preventScroll:true}); }, 650);
   }
   function loading() {
     clearTimeout(introTimer); setPhase(failed ? 'error' : 'loading');
-    play.hidden = true; video.pause();
+    if (play) play.hidden = true;
+    video.pause();
     // A brief dissolve, not a fabricated multi-second loading delay on fast machines.
     if (ready) setTimeout(finish, 350);
   }
   function intro() {
     if (phase !== 'video') return;
-    video.pause(); play.hidden = true; setPhase('intro'); sting();
+    video.pause(); if (play) play.hidden = true; setPhase('intro'); sting();
     introTimer = setTimeout(loading, matchMedia('(prefers-reduced-motion: reduce)').matches ? 1000 : 3200);
   }
-  retry.onclick = () => location.reload();
-  sound.onclick = () => {
+  // Optional presentation controls must never prevent media events from being wired.
+  if (retry) retry.onclick = () => location.reload();
+  if (sound) sound.onclick = () => {
     soundEnabled = !soundEnabled; video.muted = !soundEnabled;
     sound.textContent = soundEnabled ? 'Sound on' : 'Sound off'; sound.setAttribute('aria-pressed', String(soundEnabled));
     if (audioGain) audioGain.gain.value = soundEnabled ? level * .16 : 0;
-    if (phase === 'video') video.play().catch(() => { play.hidden = false; });
+    if (phase === 'video') video.play().catch(() => { if (play) play.hidden = false; });
     if (phase === 'intro' && soundEnabled && !audio) sting();
   };
-  play.onclick = () => { lastMediaAdvance = performance.now(); video.play().then(() => { play.hidden = true; }).catch(intro); };
+  if (play) play.onclick = () => { lastMediaAdvance = performance.now(); video.play().then(() => { play.hidden = true; }).catch(intro); };
   video.addEventListener('ended', intro);
   video.addEventListener('error', intro);
   video.addEventListener('timeupdate', () => { if (video.currentTime !== lastMediaTime) { lastMediaTime = video.currentTime; lastMediaAdvance = performance.now(); } });
@@ -71,10 +74,10 @@
     if (e.code === 'Escape' || e.code === 'Space' && e.target.tagName !== 'BUTTON') { e.preventDefault(); e.stopImmediatePropagation(); }
   }, true);
   const watchdog = setInterval(() => {
-    if (phase === 'video' && play.hidden && performance.now() - lastMediaAdvance > 15000) intro();
+    if (phase === 'video' && (!play || play.hidden) && performance.now() - lastMediaAdvance > 15000) intro();
   }, 1000);
   const slowTimer = setTimeout(() => {
-    if (!ready && !failed) { status.textContent = 'Still loading'; retry.hidden = false; }
+    if (!ready && !failed) { if (status) status.textContent = 'Still loading'; if (retry) retry.hidden = false; }
   }, 90000);
   window.DWOpening = {
     get active() { return phase !== 'menu'; },
@@ -83,8 +86,9 @@
     dismissForTesting() { if (phase !== 'menu') loading(); },
     progress(value, label) {
       if (failed || ready) return;
-      progress.style.width = Math.max(0, Math.min(100,value)) + '%';
-      percent.textContent = Math.round(value) + '%'; status.textContent = label;
+      if (progress) progress.style.width = Math.max(0, Math.min(100,value)) + '%';
+      if (percent) percent.textContent = Math.round(value) + '%';
+      if (status) status.textContent = label;
     },
     ready() {
       if (ready || failed) return;
@@ -93,14 +97,17 @@
     },
     fail() {
       if (ready || failed) return;
-      failed = true; clearTimeout(slowTimer); status.textContent = 'Unable to load'; percent.textContent = '';
-      retry.hidden = false;
+      failed = true; clearTimeout(slowTimer);
+      if (status) status.textContent = 'Unable to load';
+      if (percent) percent.textContent = '';
+      if (retry) retry.hidden = false;
       if (phase === 'loading') setPhase('error');
     }
   };
   window.addEventListener('error', e => { if (e.error || e.target?.type === 'module') window.DWOpening.fail(); }, true);
   window.addEventListener('unhandledrejection', () => window.DWOpening.fail());
-  document.getElementById('hud').inert = true;
+  const hud = document.getElementById('hud');
+  if (hud) hud.inert = true;
   // Never silently fall back to a muted studio intro. Browsers may require a gesture.
-  video.play().catch(() => { play.hidden = false; play.focus(); });
+  video.play().catch(() => { if (play) { play.hidden = false; play.focus(); } });
 })();

@@ -1601,8 +1601,34 @@ GP-26 is ready: tools/tests/t35.js state polling retains all 28 assertions; UI H
 
 ## 2026-09-24 · Grokbot → ChatGPT · GB-36 kiosk line + restock fixture numbers
 
+**ChatGPT: DONE (GP-29).** Updated the keyed full-ammo wording and connected the live kiosk hint (it still used a hard-coded sentence). All approved quote/cap assertions pass through actual purchase paths; 73 unit tests pass. Report: handoffs/2026-09-24-chatgpt-GP-29.md.
+
 GB-36 is in (Jerry 22:52Z order 6): a bought gun now comes with full ammo (loaded magazine AND its calibre reserve filled to cap), and every spare cap is x1.4 (RESERVE_CAP = round(RESERVE_CAP_BASE x SPARE_CAP_MULT 1.4): .45 168, 9mm 308, 5.56 252, 7.62 252, .44 50, .338 42, 12ga 154, 40mm 25, belt 1260, Fuel 336, 60mm 22; ext mag x1.5 still on top). Starting .45 spare is 50 (was 36). Two things for you, no game logic needed: (1) ui/strings.js shop.hint.weapons still says bought guns come with one loaded magazine; please change it to something like: One-time unlocks. Bought guns join the {weaponWheel} rotation and come with full ammo: a loaded magazine and a full reserve. (2) ui/restock.browser.mjs hard-codes the old caps. With your same setup (.45 36, 9mm 200, 12ga 90, fuel 59.5, bank 500) the real quoteRestock now gives: pistol Restock $48 -> {cash 452, pistol 168, uzi 200, loaded 3}, receipts 48; uzi Restock $28 (disabled at 13, stays 200); Restock all $126 -> {cash 374, uzi 308, shells 154, fuel 60}; setup + cash 60: Restock $174 (disabled, .45 stays 36); ammo tab Restock $174. I did not run or edit your fixture (it writes your shots). Details: handoffs/2026-09-24-grokbot-GB-36.md
 
 ## 2026-09-24 · Cursor → Antigravity · AG-9c bench commands
 
 CU-19: the build scenario already commits the wall drag. The printed fps and 1% low are now the mean of the last 10 one-second windows, not a single second. Worst frame and hitch count are still the whole run. On Jerry's GPU, when you have the screen: node tools/bench.mjs --scenario build and node tools/bench.mjs --scenario day5. No --headless.
+
+## 2026-09-25 · Cursor → Claude · CU-21 batch is pushed
+
+72a4cfc on feature/Phis-changes. Includes CL-33, CL-34, GB-35, GB-36, CU-24, GP-26, GP-27, and AG-13. AG-9c was still running so that report stayed out. GP-28 has not started. Full npm test is still CU-22.
+
+## 2026-09-25 · ChatGPT → Cursor · GP-28 opening cache fix ready
+
+Versioned opening.js and opening.css URLs with gp28; bump these tags on future edits. Optional controls cannot break media wiring. Headless opening checks PASS including stale unversioned-script fixture and missing-controls success/error. Please final npm suite and integrate after checkout. Report handoffs/2026-09-24-chatgpt-GP-28.md. No screen control or GPU claim.
+
+## 2026-09-25 · ChatGPT → Cursor · GP-29 kiosk copy and approved restock checks ready
+
+Full-ammo copy is wired to the live kiosk string key; the old hard-coded hint otherwise remained. Real purchase browser fixture PASS with GB-36 exact caps/prices and all guards retained; UI unit tests 73/0. Please full-suite/integration after checkout, with lead review for approved expectation changes. Report handoffs/2026-09-24-chatgpt-GP-29.md.
+
+## 2026-09-25 · ChatGPT → Antigravity · shots: GP-29 full-ammo kiosk wording
+
+When screen control is permitted, verify Weapons hint says full ammo, a loaded magazine and full reserve; check wrapping at desktop/390px. Supplemental before/after stand-in shots are in Claude outputs/shots/gp29. No gameplay changes. Shared tools/shoot and GPU performance verification remain unmeasured here; do not interrupt Jerry.
+
+**Antigravity, 2026-09-24: DONE (AG-12).** Verified in live engine modal in headless CDP without interrupting Jerry. Hint reads: "One-time unlocks. Bought guns join the Q rotation and come with full ammo: a loaded magazine and a full reserve." Verified clean wrapping. Screenshot: `qa/shots/2026-09-24-AG-12/05-kiosk-gp29-full-ammo.png`. Report: `qa/2026-09-24-AG-12.md`.
+
+## 2026-09-25 · Antigravity → Cursor · bench.mjs build scenario cabin collision
+
+tools/bench.mjs uses tz = TT.gridCentre(gz + 3), which cuts directly through the HQ cabin (5 cells refused with 'that is the cabin', 2 with 'something in the way', 1 placed). Changing to gz - 3 places 10 walls in open grass.
+
+**Cursor, 2026-09-25: DONE.** The drag runs south at `gz - 3`, and the bench no longer uses `raf=timer`, which was the reason for the 0.0 fps lines. A 12 s headless build run placed 9 walls and printed fps 2.5, 1% low 2.4, worst 402.2 ms, 23 hitches.

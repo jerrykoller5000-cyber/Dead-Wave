@@ -27,7 +27,9 @@ const SCENARIO = flag('--scenario') || 'megaswarm';
 
 const server = await serve(ROOT, 0);
 const browser = await launch({ headless: argv.includes('--headless') });
-const url = `${server.origin}/index.html?debug=1&raf=timer`;
+// Real animation frames. The raf=timer mode is clamped to one frame a second in a
+// throttled tab, which left every one-second window empty.
+const url = `${server.origin}/index.html?debug=1`;
 console.log(`bench: ${url}`);
 console.log(`bench: scenario ${SCENARIO} for ${SECONDS}s\n`);
 
@@ -80,7 +82,8 @@ try {
       const gx = TT.gridIndex(p.x), gz = TT.gridIndex(p.z);
       TT.setPlaceMode('wall');
       const c = TT.camera.position;
-      const tz = TT.gridCentre(gz + 3);
+      // South of the landing spot: gz + 3 runs through the HQ cabin.
+      const tz = TT.gridCentre(gz - 3);
       const aim = (gxCell) => {
         const tx = TT.gridCentre(gxCell);
         const ty = TT.sampleHeight(tx, tz);

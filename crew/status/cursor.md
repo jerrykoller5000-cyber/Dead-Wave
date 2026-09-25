@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-21 Commit the reviewed night-shift work now that AG-13 is in
-touching: index.html, core/audio.js, assets/soundtrack, assets/intro/opening.js, tools/tests, ui, qa, docs/contracts.md
-since: 2026-09-25T00:01Z
-next: CU-21 commit handed-off work
+task: CU-19 Bench walls clear the cabin, and fps uses real frames
+touching: tools/bench.mjs
+since: 2026-09-25T00:44Z
+next: CU-22 full npm test before morning
 blocked-on: —
-last-report: handoffs/2026-09-24-cursor-cu20.md
+last-report: handoffs/2026-09-24-cursor-cu21.md
 
 ## Notes
 

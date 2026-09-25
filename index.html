@@ -713,7 +713,8 @@
       text-shadow: 0 0 4px rgba(0,0,0,0.9), 0 0 1px rgba(0,0,0,0.9);
     }
   </style>
-  <link rel="stylesheet" href="assets/intro/opening.css">
+  <!-- Bump the opening asset version whenever opening.css or opening.js changes. -->
+  <link rel="stylesheet" href="assets/intro/opening.css?v=gp28">
   <link rel="stylesheet" href="ui/loading.css">
   <link rel="stylesheet" href="ui/coach.css">
   <link rel="stylesheet" href="ui/wave-preview.css">
@@ -1001,7 +1002,7 @@
     import the bare "three/webgpu" and "three/tsl" specifiers, which is why all four
     entries below have to be present and agree.
   -->
-  <script src="assets/intro/opening.js"></script>
+  <script src="assets/intro/opening.js?v=gp28"></script>
   <script type="module" src="ui/loading.js"></script>
   <script type="module" src="ui/coach.js"></script>
   <script type="module" src="ui/wave-preview.js"></script>
@@ -18826,7 +18827,7 @@
       ['weapons', ['weapons', 'upgrades']], ['ammo', ['ammo']], ['build', ['build', 'fortify']], ['gear', ['gear', 'perks']]
     ];
     const SHOP_HINT = {
-      weapons: 'One-time unlocks. Bought guns join the Q rotation and come with one loaded magazine.',
+      weapons: dwText('shop.hint.weapons'),
       ammo: dwText('shop.hint.ammo'),
       gear: 'Tactical kit. Nothing here is issued; the nights are dark until you pay for eyes.',
       upgrades: 'Per-weapon improvements for guns you own. Extended mags are +50% (the revolver and launcher can\'t take one).',

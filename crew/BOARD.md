@@ -341,7 +341,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **CU-23** Do this first: a restore point. Commit and push exactly what's on disk now, with the
   message "Restore point before the night shift (Jerry, 2026-09-24)". Put the commit hash in your
   handoff so anyone can get back to it.
-- [x] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
+- [>] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
   `commitBuildDrag`). Fix it, and make the numbers an average over the run's last 10 s, not the last
   second. Tell Antigravity (AG-9c).
 - [x] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
@@ -428,13 +428,13 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### ChatGPT — what the player reads and decides
 
-- [ ] **GP-28** Jerry's browser kept the old `assets/intro/opening.js` (with `skip.onclick`) against the new
+- [x] **GP-28** Jerry's browser kept the old `assets/intro/opening.js` (with `skip.onclick`) against the new
   `index.html` (no Skip button): the script threw at line 57, the video ended into nothing, the menu never
   came, though the game (and its music) loaded. Claude reproduced it; Ctrl+Shift+R cures it. Stop it
   happening: version the opening's `<script>`/`<link>` URLs in `index.html` (for example
   `opening.js?v=gp28`) and bump the tag whenever those files change. Also make `opening.js` tolerate a
   missing optional element instead of throwing before it wires `ended`.
-- [ ] **GP-29** From GB-36: `ui/strings.js` `shop.hint.weapons` still says a bought gun comes with one
+- [x] **GP-29** From GB-36: `ui/strings.js` `shop.hint.weapons` still says a bought gun comes with one
   loaded magazine; it now comes with full ammo. Update `ui/restock.browser.mjs` to Grokbot's new numbers
   (his GB-36 handoff has them).
 - [x] **GP-27** Take away the splash skip. Remove the Skip button (`openingSkip` in `index.html`,
@@ -473,15 +473,15 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 - [x] **AG-13** After CL-33 and GB-35: shots of the finisher staying on the last zombie, and of the
   guardian drag into the thrown-out cutscene. No splash-skip in the player path.
-- [>] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
+- [x] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
 - [x] **AG-10** Shots for Jerry's morning, on his GPU: the wave finisher (the red pulse and the kill
   cam, three frames), the kiosk restock buttons, the Ready panel under health, an Ember Night banner,
   and a cave mouth from the air at night. `qa/shots/2026-09-24-AG-10/`, with one line per shot.
-- [ ] **AG-12** Shots on Jerry's GPU, for his morning: the new finisher camera (CL-31) at 30%, 60% and 90%
+- [x] **AG-12** Shots on Jerry's GPU, for his morning: the new finisher camera (CL-31) at 30%, 60% and 90%
   of the relief sting (orbit, orbit, the marine's face), and the marine's face with no helmet (CL-32):
   front and three-quarter. Compare with `qa/shots/2026-09-24-CL-32/face_before_after.png`. Also the pit's
   bubbles from the shore (CL-20), and the watchtower deck from the ladder top (CL-19).
-- [ ] **AG-11** Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and after CL-28 land: the
+- [>] **AG-11** Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and after CL-28 land: the
   numbers next to AG-9's.
 
 - [x] **AG-9** Real-GPU numbers on Jerry's machine after CU-15: `tools/bench.mjs` (megaswarm), a

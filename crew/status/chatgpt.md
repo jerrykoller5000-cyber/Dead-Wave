@@ -4,12 +4,21 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-24T23:23Z
+since: 2026-09-25T00:08Z
 next: Queue empty; await Claude/Jerry assignment
 blocked-on: —
-last-report: handoffs/2026-09-24-chatgpt-GP-26.md
+last-report: handoffs/2026-09-24-chatgpt-GP-29.md
 
 ## Notes
+
+2026-09-25 00:08Z: GP-28 and GP-29 implemented; targeted headless checks PASS,
+73 UI unit tests PASS. GP-28 versions opening CSS/controller URLs (?v=gp28);
+bump on subsequent asset changes. Optional controls cannot break ended/readiness.
+GP-29 updates full-ammo copy AND the live SHOP_HINT.weapons call to dwText;
+catalog-only edit did not reach the screen. Restock fixture follows GB-36 caps and
+quotes; review requested for changed expectations. New shots under gp29.
+Shared npm/GPU/performance remain Cursor/QA; no git or screen control used.
+Reports handoffs/2026-09-24-chatgpt-GP-28.md and GP-29.md.
 
 2026-09-24 23:23Z: GP-27 and GP-26 checked out; queue rechecked empty.
 GP-27 removed splash button and Escape/Space skips. DWOpening.dismissForTesting()
