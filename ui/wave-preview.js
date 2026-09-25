@@ -1,6 +1,7 @@
 import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
 import { buildScoutingReport } from './scouting.js';
+import { buildBountyBoard } from './bounties.js';
 
 export const FIELD_INTEL_PRICE = 120;
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
@@ -86,6 +87,19 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       if(scouting.rest)line(report,'p',scouting.rest,'briefing-rest');
       line(report,'p',scouting.caves);line(report,'p',scouting.pushes,'briefing-pushes');
       line(report,'p',scouting.trick,'briefing-trick');line(report,'p',scouting.legend,'briefing-muted');
+    }
+    const bounties = buildBountyBoard(data);
+    if(bounties) {
+      const board=doc.createElement('section');board.className='briefing-bounties';content.append(board);
+      line(board,'h3',bounties.title);
+      if(!bounties.rows.length)line(board,'p',bounties.empty,'briefing-muted');
+      for(const row of bounties.rows) {
+        const post=doc.createElement('article');post.className='bounty-post';post.dataset.state=row.state;post.dataset.bounty=row.id;board.append(post);
+        line(post,'h4',row.name);line(post,'p',row.guards);line(post,'p',row.reward,'bounty-reward');
+        if(row.deadline)line(post,'p',row.deadline,'briefing-muted');
+      }
+      if(bounties.rows.length)line(board,'p',bounties.note,'briefing-muted');
+      if(bounties.rows.some(row=>row.state==='open'))line(board,'p',bounties.legend,'briefing-muted');
     }
     for (const warning of view.warnings) line(content,'p',warning,'briefing-warning');
     for (const source of view.sources) {

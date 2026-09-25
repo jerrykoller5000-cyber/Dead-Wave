@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 08:55 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 22:05 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -19,6 +19,21 @@ Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
    first task, or read your queue below.
 3. Work the queue top to bottom, one check-in and one handoff per task, until it's empty or
    you're blocked. Don't stop to ask Jerry whether to continue.
+
+## Who runs on what (current)
+
+Jerry moves agents between models; this table is the current truth (2026-09-25, 22:05 UTC, from Jerry).
+Each agent's card (`crew/status/<you>.md`, `model:`) and its next check-in `--model` should match it.
+Older notes and decisions below that name other models are history.
+
+| Agent | Model now | Where it runs |
+| --- | --- | --- |
+| Claude (lead) | Claude Opus 5.5 | Cowork, writing through the desktop bridge |
+| Cursor | Grok 4.7 | Cursor IDE on Jerry's PC |
+| ChatGPT | GPT-ASTRA 6 (High) | ChatGPT / Codex app on Jerry's PC |
+| Grokbot | not named on its card yet (Grokbot: put yours on your card) | Grok Bot app on Jerry's PC |
+| Antigravity | Gemini 3.1 Pro (back 2026-09-25) | Antigravity editor with a browser, on Jerry's GPU |
+| OpenCode | left the crew 2026-09-23 | — |
 
 ## Mission
 
@@ -323,7 +338,7 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
   session runs on>"` and refuses without it. The model goes on the agent's card and the panel,
   the IN line in the log says `on <model>`, and a change of model gets its own MODEL line.
   Model names come out of `AGENTS.md`: the card is where each agent's model lives. Claude, who
-  checks in by hand, writes the same. Antigravity is on Claude Sonnet 4.6 from now on. D-9's
+  checks in by hand, writes the same. Antigravity was on Claude Sonnet 4.6 then; it is on Gemini 3.1 Pro as of 2026-09-25 (see Who runs on what). D-9's
   cautions were about Gemini Flash, so its role stays the crew's eyes for now, and Jerry can
   widen it.
 - **D-13 · The guardian night (GB-13 spec) is approved, with two changes.** Day 6 and every
@@ -457,11 +472,11 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
+- [x] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
   (the specks should be gone: the rune bands now drape over the drawn bed, 14 cm up) and the finisher at 0.5 s, 1.5 s and
   2.6 s (the grade is a canvas filter now, not the grey blend sheet: it should read as a punchy, desaturated shot, not
   milky). Report to Claude with the shots.
-- [ ] **CU-42** **The 48-zombie frame (CU-38).** Profile nights 5-10 on the GPU with 48 alive: is the 40-47 ms worst frame
+- [x] **CU-42** **The 48-zombie frame (CU-38).** Profile nights 5-10 on the GPU with 48 alive: is the 40-47 ms worst frame
   CPU (AI, separation, animation, skinning) or GPU? Fix the cheap wins (throttle far-zombie AI or animation, cache per-frame
   lookups), aiming at a steady 60 and 1% lows over 40 fps. And night 1's single 82 ms frame in the first seconds of the
   wave: find what first-uses there (a shader, a music section decode, the flares) and warm it in the pre-roll like CU-36.
@@ -476,7 +491,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   (CU-29) and the goggles' post effect (CU-35) compiled in the staged pre-roll, so nothing hitches the first
   time. Then the warm title time (7-8 s against 5 s) and anything the day 1-10 run below shows. Measure in a
   visible window on the real GPU.
-- [!] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
+- [>] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
   then commit and push (rule 6; Claude commits too, so check in with `--touch "git"`). A flake gets rerun
   alone before anyone chases it.
 - [x] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
@@ -561,6 +576,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   to 20 with a scripted marine at the HQ (godmode off where you can, on where you must) and log each night's length, the
   pushes and breathers, the worst pile-ups, stuck or lost zombies, and what killed him. Fix what drags or breaks; put the
   table in the handoff for ChatGPT's GP-41 and for Claude.
+- [ ] **GB-59** **After GB-58. The fog cull (CU-42).** At the 48 cap about 41 zombies are past the night fog (far 65 m)
+  and still drawn: three.js traversal and draw submission is the 48-zombie frame. Inside the zombie update, skip drawing
+  and animating a zombie past the fog's far distance plus a margin (bring it back as it comes in; never cull one that is
+  a threat, a spit holder with a line, or the guardian). Measure before and after with qa/run-cu42.mjs on the GPU (ask
+  Cursor), and keep every test green. If it isn't clean and small, leave it for after Saturday.
+- [>] **GB-58** **GB-56's leftovers.** The one spider lost on night 12 (you thought the ammo kiosk): find it and fix it,
+  with a check in t80. Then nights 13-15 run 11-12 min against 6-9 for their neighbours: if the length is the last
+  push's stragglers, not the fight, tighten it; if it's the fight, leave it and say so in the handoff.
 - [x] **GB-57** **After GB-56. Bounties, the combat side (D-37).** From night 2, each prep picks one or two POIs
   (not the one nearest the HQ, not the same as yesterday's) and posts guards there like GB-43, sized to the night: 3-4
   early, up to 6-8 with a specialist later. Publish `bounty-posted` {kind, index, reward, guards} when they're placed and
@@ -677,7 +700,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   guardian to run out after you. What comes out, how far it chases, whether it can die, how it
   goes back, and the screech (the sound is Claude's; say when it should play). Claude decides.
 
-### ChatGPT — what the player reads and decides
+### ChatGPT — what the player reads and decides (GPT-ASTRA 6, High)
 
 - [x] **GP-37** **The end of a night (Jerry, item 10).** The dawn card becomes the **Night N Complete** card: no "First light"
   eyebrow; the title is "Night {n} Complete"; the night's numbers stay; two buttons, **Next Night** and **Proceed to
@@ -694,7 +717,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   `TT.getWavePreview().night`, frozen at prep: the caves by name, how many pushes, the trick in a few words ("runners
   from two caves", "a bomber pack"), and the rest nights marked as rests. Tonight's caves get a small mark on the
   minimap during prep. Nothing pops up (GP-39): the report is where the player goes to read it.
-- [ ] **GP-43** **After GB-57. Bounties on the HQ board (D-37).** List the day's bounties on the board: the camp's
+- [x] **GP-43** **After GB-57. Bounties on the HQ board (D-37).** List the day's bounties on the board: the camp's
   name, the reward, "before the alarm". Once the board has been read, the camp gets a minimap mark. On `bounty-done`, a
   small notice in GP-38's stack ("Bounty: Trapper's Camp +40 skulls"). A bounty still open at the alarm quietly drops off.
 - [x] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
@@ -762,8 +785,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **GP-20** When an objective completes, call `AudioSys.musicCue('objective')` (D-21: you say
   what happened, the music owner picks the sound). One line and a check in your browser test.
 
-### Antigravity — the crew's eyes (model: see its card)
+### Antigravity — the crew's eyes (Gemini 3.1 Pro)
 
+- [ ] **AG-18** **The showcase dry run (back on Gemini 3.1 Pro, 2026-09-25).** On Jerry's GPU in a visible window, from a
+  fresh profile, play the demo the way a guest would see it: the title, day 1 prep (read the HQ board: tonight's scouting
+  report), the alarm's sky shot, the night 1 wave, the last kill and the Night 1 Complete card, Proceed to Morning, day 2
+  (take the bounty on the HQ board, clear it, bank the skulls), night 2, then Next Night into night 3. Shots of every step
+  and a short capture of one alarm and one finisher. Write down anything that looks wrong, reads badly, stalls, or plays
+  a sound at the wrong time, with the time and a shot. Report to Claude; change no game code.
 - [~] **AG-16** (parked 03:30Z: Antigravity is out for tonight. Its shots are in `qa/shots/2026-09-25-AG-16/`; Claude reviewed them: the NVG-on and fog shots match the plain ones, so the scene wasn't at real night. The night-cave shots move into CU-35.) Shots for Claude (CL-48): the day-1 assault cave from 30 m and 10 m at 22:00, NVGs off and on, and one
   in the fog. Report to Claude.
 - [~] **AG-17** (moved to Cursor's CU-35, 03:30Z) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's GPU from a fresh profile (survive; die and
@@ -800,7 +829,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **AG-8** The pit's rune ring on a real GPU (CL-14): the `pit` view, from the bank, and from
   overhead. Compare with `qa/shots/cl14/`. Report to Claude.
 
-### Claude — lead; the world and wildlife
+### Claude — lead; the world and wildlife (Opus 5.5)
 
 - [x] **CL-50** The last kill (Jerry, items 7 and 8): the camera shot is **3 seconds**, cooler and more stylised; the relief
   stinger is shorter to match; the marine stops following the cursor while the camera is away (no 360 spin).

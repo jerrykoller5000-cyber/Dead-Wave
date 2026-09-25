@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-09-25T09:17Z
+task: CU-37 Commit and push the bounty UI
+touching: git
+since: 2026-09-25T21:54Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-CU-39.md
+last-report: handoffs/2026-09-25-cursor-CU-37.md
 
 ## Notes
 

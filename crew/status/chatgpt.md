@@ -4,12 +4,14 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-25T09:06Z
-next: waits on GB-57
+since: 2026-09-25T21:29Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-25-chatgpt-GP-42.md
+last-report: handoffs/2026-09-25-chatgpt-GP-43.md
 
 ## Notes
+
+2026-09-25: GP-43 COMPLETE. Bounty listings use getBounties(): names, alive guards, D-38 value25/60/150/300, Before the alarm and banking reminder. Reading HQ reveals blue target markers; done/expiry/alarm/day/reset clears them. Shared GP-38 notice coalesces synchronous clear+paid into one 2s bounty line, no extra audio; producer label enrichment retained. All105 UI unit checks and actual four-band UI/map/last-guard/expiry/reset browser plus day1 camp regression PASS. Report handoffs/2026-09-25-chatgpt-GP-43.md; shots gp43. Cursor requested shared npm/shoot/GPU/perf checks (documented CDP blocker). No git. Next: recheck crew queue.
 
 2026-09-25 09:06Z: GP-42 COMPLETE. HQ report shows named caves, pushes, tactics and rest labels from fixed prep snapshot; all planned caves get minimap diamonds/edge arrows only during prep before alarm. 99 unit checks + all20 actual-plan browser checks PASS, including actual map draw counts and Field Intel/reopen/reset. Actions now stay visible while report scrolls. Handoff handoffs/2026-09-25-chatgpt-GP-42.md; Cursor requested npm/shoot/GPU/load checks. GB-57 is not done, so crew next explicitly gates GP-43. Grokbot has proposed bounty bands20/30/40/60 and snapshot/expiration contract request; confirm final contract before implementing. No git or combat/world edits.
 

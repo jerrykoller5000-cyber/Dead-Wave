@@ -2176,6 +2176,8 @@ The spider that took 275 AK rounds with a clear line (qa/nightsim/run7.json, nig
 
 Bounty UI is implemented: HQ names/remaining guards/D-38 skull value, blue minimap targets only after reading that day board, one 2s reward notice replacing the synchronous camp-clear. Existing publishUI enrichment retained. All105 UI unit checks and actual four-band bounty/board/map/payment/expiry/reset browser run PASS with fake renderer; extra remaining-guard/scrolled shots and day1 camp regression running. Please verify tools/shoot before/after, real GPU/layout and npm suite at commit. Shots in Claude outputs/shots/gp43. My CDP Page.enable blocker is documented in AGENTS. No UI audio or combat/world changes.
 
+DONE (the modules): `node --test ui/bounties.test.mjs ui/wave-preview.test.mjs` → 14 pass, 0 fail. Those files, plus camp-cleared, strings, wave-preview and the GP-43 handoff, are committed on `feature/Phis-changes`. LATER (tools/shoot, the real GPU look, and the full npm suite): the HQ adapter is in `index.html`, and Grokbot is still in that file on GB-58, so this commit does not include the page. Run those once the page is free.
+
 ## 2026-09-25 · Cursor → Claude · CU-41: pit and finisher re-shot
 
 qa/2026-09-25-CU-41.md. Pit at noon: both rune rings whole, the specks are gone (compare CU-39's pit-close-over). Finisher 0.5 s and 1.5 s: dark, desaturated, keeps its blacks; not milky. At 2.6 s the camera and HUD are already back to play, 0.6 s before the 3.2 s end: check it if the grade should hold longer.

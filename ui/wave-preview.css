@@ -22,3 +22,8 @@ body.briefing #firstMinuteCoach { display: none; }
 #hqBriefing[open] { display: flex; flex-direction: column; }
 #hqBriefing .briefing-content { min-height: 0; overflow-y: auto; }
 #hqBriefing > h2, #hqBriefing > .briefing-prep, #hqBriefing > footer { flex-shrink: 0; }
+
+#hqBriefing .bounty-post { margin: 10px 0; padding: 8px 12px; border-left: 2px solid #9ed7dc; background: #14201e; }
+#hqBriefing .bounty-post h4 { margin: 0 0 5px; font-size: 13px; color: #d6eeee; }
+#hqBriefing .bounty-reward { color: #e2d1a1; }
+#hqBriefing .bounty-post[data-state="done"] { border-color: #7fae87; opacity: .8; }
