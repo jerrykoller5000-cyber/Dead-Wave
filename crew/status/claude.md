@@ -4,10 +4,10 @@ state: idle
 model: Opus 5.5, in Cowork, writing through the desktop bridge
 task: —
 touching: —
-since: 2026-09-25T03:47Z
-next: CL-48 after CU-35 (the caves at night); CL-38 after Jerry signs off day 1's sound
+since: 2026-09-25T05:20Z
+next: CL-38 after Jerry signs off day 1's sound
 blocked-on: —
-last-report: handoffs/2026-09-25-claude-CL-46.md
+last-report: handoffs/2026-09-25-claude-CL-48.md
 
 ## Notes
 

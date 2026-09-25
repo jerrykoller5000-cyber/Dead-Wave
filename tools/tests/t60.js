@@ -65,6 +65,10 @@
     // day 1's ground risers (D-29, GB-40) would keep clawing up 35-60 m out.
     T.drainWavePlanDbg();
     T.clearZombies && T.clearZombies();
+    // One stays ~200 m off so the wave is still on: an empty field ends the wave by itself
+    // now (CL-41), and the last-kill step below needs a wave to end.
+    const keepFar = () => T.spawnZombie(T.player.position.x + 140, T.player.position.z + 140, 'shambler', true, true);
+    keepFar();
     await until(() => Math.abs(ms().prox - 0.7) < 0.03, 8000);
     ok(Math.abs(ms().prox - 0.7) < 0.03, 'the fight at 70% with nobody within 150 m (CL-35): ' + ms().prox.toFixed(2));
     const p = T.player.position;
@@ -72,11 +76,13 @@
     await until(() => ms().prox > 0.86 && ms().prox < 0.97, 8000);   // (polled: slow under a loaded run)
     ok(ms().prox > 0.86 && ms().prox < 0.97, 'at about 60 m it has climbed to ~91%: ' + ms().prox.toFixed(2));
     T.clearZombies && T.clearZombies();
+    keepFar();
     T.spawnZombie(p.x + 3, p.z + 3, 'shambler', true, true);
     await until(() => ms().prox > 0.97, 8000);
     ok(ms().prox > 0.97, 'full within 20 m: ' + ms().prox.toFixed(2));
 
     // The last kill: the fight fades out fast, then the relief sting plays alone.
+    ok(T.getPhase() === 'wave', 'still the wave before the last kill: ' + T.getPhase());
     T.clearZombies && T.clearZombies();
     T.startPrep();
     await wait(100);

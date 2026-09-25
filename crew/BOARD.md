@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 03:55 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 05:20 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -32,6 +32,8 @@ Every task below comes from the day-1 audit (`handoffs/audit-day1/PLAN.md` has t
 - **Grokbot** · GB-45 · handoffs/2026-09-25-grokbot-GB-45.md
 - **Grokbot** · GB-47 · handoffs/2026-09-25-grokbot-GB-47.md
 - **Grokbot** · GB-46 · handoffs/2026-09-25-grokbot-GB-46.md
+- **Grokbot** · GB-48 · handoffs/2026-09-25-grokbot-GB-48.md
+- **Grokbot** · GB-49 · handoffs/2026-09-25-grokbot-GB-49.md
 - **Cursor** · CU-28 · handoffs/2026-09-25-cursor-CU-28.md
 - **Cursor** · CU-29 · handoffs/2026-09-25-cursor-CU-29.md
 - **Cursor** · CU-30 · handoffs/2026-09-25-cursor-CU-30.md
@@ -57,6 +59,8 @@ Every task below comes from the day-1 audit (`handoffs/audit-day1/PLAN.md` has t
 
 Then: Cursor plays day 1 again on Jerry's GPU (CU-35, Antigravity's job while it's out of usage), and Jerry plays it.
 
+**05:20Z: every Fix-day-1 task is done and pushed. Jerry is playing day 1.** What's left for next session: GB-48 and GB-49, CU-32 (waits on Grokbot and Antigravity's OK), and CL-38 after Jerry signs off day 1's sound.
+
 ## Waiting on
 
 The panel's "Right now" box draws this. Claude keeps it current: one line for each thing that
@@ -64,8 +68,8 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Claude** · CL-41 the next prep starts after the finisher · waiting: ChatGPT
-- **Grokbot** · GB-43 day 1's first fight at the nearest POI · waiting: ChatGPT
+- **Claude** · CL-38 20 fight songs · waiting: Jerry signs off day 1's sound
+- **Cursor** · CU-32 scratch files · waiting: Grokbot, Antigravity
 
 
 
@@ -423,7 +427,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   assault cave at night during the wave (the alarm brings real night now, D-28), NVGs off and on, for Claude's CL-48.
   Report `qa/2026-09-25-CU-35.md` plus the handoff; shots in `qa/shots/2026-09-25-CU-35/`. You may write in `qa/` for
   this. Say plainly what you couldn't check.
-- [>] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
+- [x] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
   your handoff.
 - [x] **CU-27** Day-1 audit → `handoffs/audit-day1/cursor.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the full `npm test` (every
   failure: test name and first error line; the panel says 35 fail), boot and load time cold and warm
@@ -505,6 +509,11 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   on the platform cell says "that is the cabin", but `placeBuildAt('light')` puts it on the ground, not the deck.
   (4) t3: turrets land at lv0 on platform-topped cells, and a railing on wall+floor is refused although a floor is
   there. Don't touch the cabin or the world. `--review`.
+- [ ] **GB-48** (next session) Warm the one-time first-use stalls into the staged pre-roll: the finisher's two
+  emissive variants (CU-29) and the goggles' post effect (CU-35: a 200 ms frame the first time the NVGs go on).
+  Prove it on Jerry's GPU with Cursor's visible-window tools (CU-30 fixed them to use the real GPU).
+- [ ] **GB-49** (next session) t58 fails 3 on a clean run (CU-34): `arc does not point back into the camera/marine
+  view (dot=-0.69)`. Fix the game or the test, whichever is wrong; don't loosen it.
 - [x] **GB-38** Day-1 audit → `handoffs/audit-day1/grokbot.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the wave director's day-1 plan
   (how many, which kinds, when), zombie behaviour (stuck, bad paths, spawning in view, clumping), the
   starting weapons and ammo (feel, damage, reloads, the knife), building and turrets, the cave guardian
@@ -680,7 +689,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **CL-47** Day 1's calm music in the same voices: the menu and the prep day track, so day 1 is one sound (CL-A9).
 - [x] **CL-44** t50: 218 tree meshes against its limit; check it against CL-28 (CU-A2).
 - [x] **CL-46** Review the 12 handoffs waiting on me, and close the stale requests (DONE, WONT, LATER) (CL-A10).
-- [ ] **CL-48** After CU-35: the caves at night (CL-A8), from its shots during a real night wave.
+- [x] **CL-48** After CU-35: the caves at night (CL-A8), from its shots during a real night wave.
 - [x] **CL-40** After CU-27, GP-30, GB-38 and AG-15: read all five audits, merge them into one list, make the plan,
   and take it to Jerry. The fixes go on the board once he agrees.
 - [x] **CL-35** (01:07Z, `handoffs/2026-09-25-claude-CL-35-36-day1-song-stingers.md`) Day 1's own fight song, "First
