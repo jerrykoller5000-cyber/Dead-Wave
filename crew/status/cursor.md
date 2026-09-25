@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-31 Remove the morning save; keep ways to die across runs
-touching: index.html (saves, death log), tools/tests/t62.js
-since: 2026-09-25T04:32Z
-next: CU-31 D-30 and D-31. Take out the morning save (`writeDayStart`, `
+task: CU-34 Full npm test, then commit and push everything checked out
+touching: git
+since: 2026-09-25T04:54Z
+next: CU-34 After CU-35: full `npm test` on Jerry's PC, commit and push
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-CU-30.md
+last-report: handoffs/2026-09-25-cursor-CU-35.md
 
 ## Notes
 

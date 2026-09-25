@@ -411,19 +411,19 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   around `beginWaveFinisher` / `startPrep`), fix your part, hand Claude the rest.
 - [x] **CU-30** Load and shell (CU-A3, CU-A7): warm and cold title times on Jerry's GPU against 5 s / 15 s, and the
   title menu's 45 fps (the live pre-roll, AG-15). A favicon, so the two 404s go.
-- [>] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
+- [x] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
   `tt_day_start`) and its tests (check out with `--review`). Stop clearing `tt_death_log` on a new game.
-- [ ] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
+- [!] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
   (rule 3). Claude says yes to anything of his.
-- [ ] **CU-33** The death screen after a real death, not the dev `rip` (CU-A9). Fix it if it doesn't show.
-- [ ] **CU-35** (was AG-17; Antigravity is out for tonight) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's
+- [x] **CU-33** The death screen after a real death, not the dev `rip` (CU-A9). Fix it if it doesn't show.
+- [x] **CU-35** (was AG-17; Antigravity is out for tonight) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's
   GPU from a fresh profile (survive; die and Play again), with Antigravity's own harness: `qa/run-ag15.mjs` and
   `qa/run-ag15-deep.mjs` (hardware GPU over CDP, see `qa/README.md`). Time the alarm to first contact and the wave from
   first shot to last kill. Fps at the menu, prep, the wave and the finisher. Shots of every step, and of the day-1
   assault cave at night during the wave (the alarm brings real night now, D-28), NVGs off and on, for Claude's CL-48.
   Report `qa/2026-09-25-CU-35.md` plus the handoff; shots in `qa/shots/2026-09-25-CU-35/`. You may write in `qa/` for
   this. Say plainly what you couldn't check.
-- [ ] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
+- [>] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
   your handoff.
 - [x] **CU-27** Day-1 audit → `handoffs/audit-day1/cursor.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the full `npm test` (every
   failure: test name and first error line; the panel says 35 fail), boot and load time cold and warm

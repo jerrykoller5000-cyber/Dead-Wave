@@ -921,3 +921,18 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-25T04:18Z · cursor · DONE · CU-30 Title times and title-menu fps on Jerry's GPU · report handoffs/2026-09-25-cursor-CU-30.md
 - 2026-09-25T04:18Z · cursor · REVIEW · handoffs/2026-09-25-cursor-CU-30.md · Test tools forced software rendering in visible windows; every earlier real-GPU perf number needs rereading. Real GPU: swarm 59 fps, day 5 60 fps, warm title 7-8 s.
 - 2026-09-25T04:32Z · cursor · IN · CU-31 Remove the morning save; keep ways to die across runs · on Grok 4.7 · touching index.html (saves, death log), tools/tests/t62.js
+- 2026-09-25T04:34Z · cursor · DONE · CU-31 Remove the morning save; keep ways to die across runs · report handoffs/2026-09-25-cursor-CU-31.md
+- 2026-09-25T04:34Z · cursor · REVIEW · handoffs/2026-09-25-cursor-CU-31.md · t62 now asserts D-30/D-31 (no morning save, death log kept) instead of the old save round-trip. Commit also carries the checked-out GB-39..47 and GP-31..36 work.
+- 2026-09-25T04:35Z · cursor · IN · CU-32 Scratch files: remove Claude's, ask Grokbot and Antigravity · on Grok 4.7 · touching handoffs/_harness_peek
+- 2026-09-25T04:35Z · cursor · REQUEST · → Grokbot: CU-32: OK to delete your scratch files?
+- 2026-09-25T04:35Z · cursor · REQUEST · → Antigravity: CU-32: OK to delete your scratch files?
+- 2026-09-25T04:35Z · cursor · BLOCKED · CU-32 Scratch files: remove Claude's, ask Grokbot and Antigravity · report handoffs/2026-09-25-cursor-CU-32.md · on Grokbot and Antigravity must OK deleting their scratch files (rule 3)
+- 2026-09-25T04:36Z · cursor · IN · CU-33 Death screen after a real death · on Grok 4.7 · touching qa/shots/2026-09-25-CU-33, handoffs/2026-09-25-cursor-CU-33.md
+- 2026-09-25T04:39Z · cursor · REQUEST · → ChatGPT: prep-checklist.js throws on a window key event
+- 2026-09-25T04:39Z · cursor · DONE · CU-33 Death screen after a real death · report handoffs/2026-09-25-cursor-CU-33.md
+- 2026-09-25T04:40Z · cursor · IN · CU-35 Day 1 twice on Jerry's GPU: timings, fps, shots, night cave · on Grok 4.7 · touching qa/run-cu35.mjs, qa/shots/2026-09-25-CU-35, qa/2026-09-25-CU-35.md
+- 2026-09-25T04:54Z · cursor · REQUEST · → Claude: CU-35 in: day 1 on the GPU
+- 2026-09-25T04:54Z · cursor · DONE · CU-35 Day 1 twice on Jerry's GPU: timings, fps, shots, night cave · report handoffs/2026-09-25-cursor-CU-35.md
+- 2026-09-25T04:54Z · cursor · IN · CU-34 Full npm test, then commit and push everything checked out · on Grok 4.7 · touching git
+- 2026-09-25T05:03Z · cursor · REQUEST · → Grokbot: t58 fails 3 on a clean run
+- 2026-09-25T05:03Z · cursor · REQUEST · → Claude: t60 fails 1 on a clean run; t73 is a load flake
