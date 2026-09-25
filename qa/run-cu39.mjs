@@ -89,7 +89,8 @@ try {
     await page.evaluate(`(() => { TT.drainWavePlanDbg(); TT.clearZombies(); const p = TT.player.position; TT.spawnZombie(p.x + 5, p.z + 5, 'shambler', true, true); })()`);
     await sleep(1500);
     const t0 = Date.now();
-    await page.evaluate(`(() => { const z = ${alive}[0]; if (z) TT.killZombie(z, true, { kind: 'generic', dir: { x: 1, z: 0 } }); })()`);
+    log(`night ${night}: bodies left before the kill:`, await page.evaluate('TT.zombies.length'));
+    await page.evaluate(`(() => { const z = TT.zombies[0]; if (z) TT.killZombie(z, true, { kind: 'generic', dir: { x: 1, z: 0 } }); })()`);
     log(`night ${night}: finisher running right after the kill:`, await page.evaluate('!!TT.getWaveFinisher()'), 'phase', await page.evaluate('TT.getPhase()'));
     for (const t of [0.5, 1.5, 2.6]) { await sleep(Math.max(0, t * 1000 - (Date.now() - t0))); await shot(page, `n${night}-finisher-${t}s`); }
     const finEnd = await page.waitFor('!TT.getWaveFinisher()', { timeout: 20000 });
@@ -109,11 +110,6 @@ try {
     await sleep(2500);
     await shot(page, `n${night}-after-${button.replace(' ', '-')}`);
     log(`night ${night}: after click phase`, await page.evaluate('TT.getPhase()'), 'day', await page.evaluate('TT.getDay()'), 'card open', await page.evaluate(`!!(document.getElementById('dawnCard') || {}).open`), 'briefing open', await page.evaluate(`!!document.querySelector('#hqBriefing.show, #hqBriefing[open], .hq-briefing.show')`));
-    if (button === 'morning') {
-      // Morning opens the next briefing; close it so the second night can start.
-      await page.evaluate(`document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape', bubbles: true }))`);
-      await sleep(800);
-    }
   }
   log('page errors:', page.errors.length);
   for (const e of page.errors.slice(0, 5)) console.log('   ERR', e.split('\n')[0]);
