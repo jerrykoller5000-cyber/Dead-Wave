@@ -1,12 +1,12 @@
 # Cursor
 
-state: idle
+state: blocked
 model: Grok 4.7
-task: —
+task: CU-32 Scratch files: Grokbot's are already gone; Antigravity has not OK'd theirs
 touching: —
-since: 2026-09-25T21:56Z
+since: 2026-09-25T21:57Z
 next: —
-blocked-on: —
+blocked-on: Antigravity has not OK'd deleting gen-ag9, the qa probe scripts, and qa/shots/test-*.png
 last-report: handoffs/2026-09-25-cursor-CU-37.md
 
 ## Notes
