@@ -139,7 +139,8 @@ def calm_morning():
     return T.render(-17.5)
 
 
-def calm_day():
+def calm_day_v1():
+    """CL-47's 90 bpm prep track (kept for reference; CL-52 replaced it)."""
     T = Track(90, 24)
     prog = ['Em', 'Em', 'C', 'D', 'Em', 'Em', 'Am', 'B'] * 3
     roots = {'Em': 40, 'C': 36, 'D': 38, 'Am': 45, 'B': 35}
@@ -168,6 +169,60 @@ def calm_day():
             T.lead(bar0 + int(bt // 4), bt % 4, m, ln, g=0.36, dark=0.45, echo=0.8)
     return T.render(-18.0)
 
+
+
+def calm_day():
+    """CL-52 (Jerry, 2026-09-25): the day track is on for hours, so it is five minutes, very
+    minimal and atmospheric, and loops without a seam. 60 bpm (a bar is 4 s), 75 bars = 5:00.
+    No drums. A soft pulse-pad drone that changes chord every 16 s and breathes through its
+    filter, a triangle root held low, a wind of filtered noise, and now and then a single
+    glint of the E minor pentatonic high up in the echoes. Every 80 s or so a faint, dark
+    quote of the hook's first four notes. A circle like the others: the tails fold onto the start.
+    """
+    T = Track(60, 75)
+    rng = np.random.default_rng(1908)
+    prog = [('Em', 40, (0, 7, 12, 15, 19)), ('C', 36, (0, 7, 11, 16, 19)), ('G', 43, (0, 7, 12, 16)),
+            ('D', 38, (0, 7, 12, 14, 18)), ('Am', 45, (0, 7, 12, 15)), ('Em', 40, (0, 7, 10, 15, 19)),
+            ('C', 36, (0, 7, 12, 16, 23)), ('Bsus', 35, (0, 7, 12, 17))]
+    k = 0
+    for bar in range(0, 75, 4):
+        name, r, ivs = prog[k % len(prog)]; k += 1
+        span = min(4, 75 - bar)
+        n = int(span * 4 * T.spb * SR) + int(3.0 * SR)
+        x = np.zeros(n); tt = np.arange(n) / SR
+        for iv in ivs:
+            f = midi_to_hz(r + 24 + iv)
+            x += pulse(f, n, 0.5) + pulse(f * 2 ** (5 / 1200), n, 0.5) * 0.8
+        breath = 0.5 + 0.5 * np.sin(2 * np.pi * tt / 9.0 + bar)
+        x = lowpass(x, 700) * (0.55 + 0.45 * breath) + lowpass(x, 1500) * 0.18 * breath
+        x = x * adsr(n, 2.6, 0.5, 0.9, 3.0) / (2 * len(ivs))
+        add_at(T.dry, x, T.t(bar), 0.3, -0.3); add_at(T.dry, x, T.t(bar), 0.3, 0.3)
+        add_at(T.rev, x, T.t(bar), 0.28, 0)
+        # the root, low and held
+        nb = int(span * 4 * T.spb * SR * 0.98)
+        b = lowpass(tri_stepped(midi_to_hz(r), nb), 500) * adsr(nb, 1.5, 0.3, 0.9, 2.0)
+        add_at(T.dry, b, T.t(bar), 0.2, 0)
+    # the wind: filtered noise swelling slowly (its own cycle, circular)
+    n = T.N; tt = np.arange(n) / SR
+    wind = lfsr_noise(n, rate=9000).astype(float)
+    wind = lowpass(highpass(wind, 180), 900)
+    swell = (0.35 + 0.65 * (0.5 + 0.5 * np.sin(2 * np.pi * tt / 37.5))) * (0.7 + 0.3 * np.sin(2 * np.pi * tt / 100.0))
+    add_at(T.dry, wind * swell, 0, 0.035, -0.2); add_at(T.rev, wind * swell, 0, 0.03, 0.2)
+    # glints: single high notes, sparse, in the echoes
+    penta = [64, 67, 69, 71, 74, 76, 79, 81, 83, 86, 88]
+    t = 3.0
+    while t < 296:
+        m = int(rng.choice(penta)); g = 0.09 + 0.05 * rng.random()
+        bar, beat = int(t // 4), (t % 4)
+        T.arp(bar, beat, m, 0.6, g=g, pan=float(rng.uniform(-0.6, 0.6)), rev=0.8)
+        if rng.random() < 0.3:
+            T.arp(bar, beat + 0.5, m + (3 if m % 12 in (4, 11) else 2), 0.6, g=g * 0.7, pan=float(rng.uniform(-0.6, 0.6)), rev=0.8)
+        t += float(rng.uniform(3.2, 7.5))
+    # the hook, a faint and dark quote, now and then
+    for bar0 in (18, 38, 58):
+        for bt, ln, m in [(0, 1.5, E4), (1.5, 1.5, G4), (3, 1, B4), (4, 3, A4)]:
+            T.lead(bar0 + int(bt // 4), bt % 4, m, ln, g=0.16, dark=0.7, echo=0.9)
+    return T.render(-21.0)
 
 ALL = {'menu_theme': menu_theme, 'calm_morning': calm_morning, 'calm_day': calm_day}
 

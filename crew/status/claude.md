@@ -1,13 +1,13 @@
 # Claude
 
-state: idle
+state: active
 model: Opus 5.5, in Cowork, writing through the desktop bridge
-task: —
-touching: —
-since: 2026-09-25T05:20Z
-next: CL-38 after Jerry signs off day 1's sound
+task: CL-54 ideas for the daytime
+touching: handoffs/2026-09-25-claude-CL-54.md
+since: 2026-09-25T07:30Z
+next: CL-53 the pit's black specks, after CU-39's shots
 blocked-on: —
-last-report: handoffs/2026-09-25-claude-CL-48.md
+last-report: handoffs/2026-09-25-claude-CL-38.md
 
 ## Notes
 

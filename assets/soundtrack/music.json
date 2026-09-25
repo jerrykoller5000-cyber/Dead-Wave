@@ -1,5 +1,5 @@
 {
-  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. CL-35/36: day 1 has its own song, fight_day01 ('First Blood', tools/day1.py, 4:30 loop, gain 1.6, fades in over 1.5 s because its intro is the build); the stingers and cues are chiptune (tools/stingers.py) at gain 2.0. fadeIn: per-track fight fade-in seconds (default 10). Claude keeps this file. CL-42/43/47 (Jerry: day 1's music as good as possible): the day-1 song is also cut into sections (tools/day1.py -> fight_day01_sections.ogg, Opus) that the section player in core/audio.js moves between as the wave goes (sections.flow: stalk while the horde is out of sight, the fight rotation once one is within 'near' metres, the break after 'lullAfter' seconds with nobody within 'far', the climax for the last 'lastAt'); fight_day01.mp3 is the whole song, the fallback. The alarm is also the nightfall (2 bars, 5.0 s to the hit) and the relief sting is also the dawn (7.5 s, the finisher's length); 'dawn' is the dawn card's chime. The menu and the prep pools are chip tracks in the song's voices (tools/calm.py).",
+  "about": "Where Jerry's music goes (CL-21, CL-23, CL-24, CL-25, D-21; docs/audio/cue-sheet.md). Names are relative to assets/soundtrack/, without .mp3. A pool listed here replaces the default pool in core/audio.js. waveByDay: the track each wave loops, by day (Jerry: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights use their day's track until they get their own). fight: the fallback. dayFight: daylight fights pick a track by horde size; sizes[i] is the smallest horde that gets tracks[i]. hits: seconds into a track where it hits (fights start and loop there). stings: cues. gain: loudness multiplier per track (Jerry's are boosted). The aftermath track is out for now (Jerry). The WAV originals stay in incoming/ and are not committed. CL-34 (Jerry): the fight beds are now chiptune loops made by tools/chip.py from the tempo and key of Jerry's Suno fight tracks (chip_*); they loop from 0, natively. The Suno fight files stay on disk until Jerry has heard the loops; the old compose.py metal bed is out of the ember pool. CL-35/36: day 1 has its own song, fight_day01 ('First Blood', tools/day1.py, 4:30 loop, gain 1.6, fades in over 1.5 s because its intro is the build); the stingers and cues are chiptune (tools/stingers.py) at gain 2.0. fadeIn: per-track fight fade-in seconds (default 10). Claude keeps this file. CL-42/43/47 (Jerry: day 1's music as good as possible): the day-1 song is also cut into sections (tools/day1.py -> fight_day01_sections.ogg, Opus) that the section player in core/audio.js moves between as the wave goes (sections.flow: stalk while the horde is out of sight, the fight rotation once one is within 'near' metres, the break after 'lullAfter' seconds with nobody within 'far', the climax for the last 'lastAt'); fight_day01.mp3 is the whole song, the fallback. The alarm is also the nightfall (2 bars, 5.0 s to the hit) and the relief sting is also the dawn (7.5 s, the finisher's length); 'dawn' is the dawn card's chime. The menu and the prep pools are chip tracks in the song's voices (tools/calm.py). CL-52: the day track (calm_day) is a 5-minute ambient circle played through Web Audio (a one-section 'sections' entry) so it loops without a seam; it is the only daytime track. 'camp' is the 2 s camp-cleared stinger, played while the day fight fades. CL-38: nights 2-20 have their own section songs in First Blood's family (tools/hordes.py): faster, in new keys and driving harder as the run climbs, with their own songs for the Ember and Guardian nights; waveByDay follows GB-53's table. After night 20 the finale keeps playing.",
   "pools": {
     "fight": [
       "chip_fight_1"
@@ -36,17 +36,16 @@
       "menu_theme"
     ],
     "dawnprep": [
-      "calm_morning"
+      "calm_day"
     ],
     "day": [
-      "calm_day",
-      "calm_morning"
+      "calm_day"
     ]
   },
   "hits": {
     "fight_1a": 15.74,
     "fight_2a": 2.92,
-    "fight_ember": 16.66,
+    "fight_ember": 0,
     "boss_guardian": 6.1,
     "fight_siege": 15.58,
     "fight_swarm": 1.94,
@@ -59,7 +58,14 @@
     "chip_fight_1": 0,
     "chip_fight_2": 0,
     "chip_fight_3": 0,
-    "fight_day01": 0
+    "fight_day01": 0,
+    "fight_n02": 0,
+    "fight_guardian": 0,
+    "fight_n04": 0,
+    "fight_n07": 0,
+    "fight_n10": 0,
+    "fight_n14": 0,
+    "fight_n18": 0
   },
   "stings": {
     "alarm": "sting_alarm",
@@ -71,13 +77,14 @@
     "achievement": "cue_achievement",
     "airdrop": "cue_airdrop",
     "objective": "cue_objective",
-    "poi_cleared": "cue_poi_cleared"
+    "poi_cleared": "cue_poi_cleared",
+    "camp": "sting_camp"
   },
   "gain": {
     "fight_1a": 3.0,
     "fight_2a": 3.0,
     "fight_3a": 3.0,
-    "fight_ember": 3.0,
+    "fight_ember": 1.6,
     "boss_guardian": 3.0,
     "day_skirmish_a": 3.0,
     "day_skirmish_b": 3.0,
@@ -101,7 +108,15 @@
     "chip_fight_1": 3.0,
     "chip_fight_2": 3.0,
     "chip_fight_3": 3.0,
-    "fight_day01": 1.6
+    "fight_day01": 1.6,
+    "sting_camp": 2.0,
+    "fight_n02": 1.6,
+    "fight_guardian": 1.6,
+    "fight_n04": 1.6,
+    "fight_n07": 1.6,
+    "fight_n10": 1.6,
+    "fight_n14": 1.6,
+    "fight_n18": 1.6
   },
   "dayFight": {
     "tracks": [
@@ -126,32 +141,551 @@
     },
     {
       "from": 2,
-      "track": "chip_skirmish_b"
+      "track": "fight_n02"
     },
     {
-      "from": 3,
-      "track": "chip_skirmish_a"
+      "from": 4,
+      "track": "fight_ember"
+    },
+    {
+      "from": 5,
+      "track": "fight_n04"
+    },
+    {
+      "from": 6,
+      "track": "fight_guardian"
+    },
+    {
+      "from": 7,
+      "track": "fight_n04"
     },
     {
       "from": 8,
-      "track": "chip_fight_1"
+      "track": "fight_ember"
+    },
+    {
+      "from": 9,
+      "track": "fight_n07"
+    },
+    {
+      "from": 11,
+      "track": "fight_n10"
     },
     {
       "from": 12,
-      "track": "chip_fight_2"
+      "track": "fight_guardian"
+    },
+    {
+      "from": 13,
+      "track": "fight_n10"
+    },
+    {
+      "from": 14,
+      "track": "fight_n14"
     },
     {
       "from": 16,
-      "track": "chip_fight_3"
+      "track": "fight_ember"
+    },
+    {
+      "from": 17,
+      "track": "fight_n14"
+    },
+    {
+      "from": 18,
+      "track": "fight_guardian"
+    },
+    {
+      "from": 19,
+      "track": "fight_n18"
     }
   ],
   "fadeIn": {
-    "fight_day01": 1.5
+    "fight_day01": 1.5,
+    "fight_n02": 1.5,
+    "fight_ember": 1.5,
+    "fight_guardian": 1.5,
+    "fight_n04": 1.5,
+    "fight_n07": 1.5,
+    "fight_n10": 1.5,
+    "fight_n14": 1.5,
+    "fight_n18": 1.5
   },
   "sections": {
     "fight_day01": {
       "file": "fight_day01_sections.ogg",
       "barSeconds": 2.5,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "calm_day": {
+      "file": "calm_day.ogg",
+      "barSeconds": 4,
+      "list": [
+        {
+          "name": "all",
+          "bar": 0,
+          "bars": 75
+        }
+      ],
+      "flow": {
+        "stalk": "all",
+        "fight": [
+          "all"
+        ],
+        "lull": "all",
+        "last": "all",
+        "lastAt": 0,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n02": {
+      "file": "fight_n02_sections.ogg",
+      "barSeconds": 2.4,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_ember": {
+      "file": "fight_ember_sections.ogg",
+      "barSeconds": 2.181818,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_guardian": {
+      "file": "fight_guardian_sections.ogg",
+      "barSeconds": 2.666667,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n04": {
+      "file": "fight_n04_sections.ogg",
+      "barSeconds": 2.307692,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n07": {
+      "file": "fight_n07_sections.ogg",
+      "barSeconds": 2.222222,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n10": {
+      "file": "fight_n10_sections.ogg",
+      "barSeconds": 2.142857,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n14": {
+      "file": "fight_n14_sections.ogg",
+      "barSeconds": 2.068966,
+      "list": [
+        {
+          "name": "stalk",
+          "bar": 0,
+          "bars": 8
+        },
+        {
+          "name": "dropA",
+          "bar": 8,
+          "bars": 16
+        },
+        {
+          "name": "riffB",
+          "bar": 24,
+          "bars": 16
+        },
+        {
+          "name": "break",
+          "bar": 40,
+          "bars": 8
+        },
+        {
+          "name": "dropA2",
+          "bar": 48,
+          "bars": 16
+        },
+        {
+          "name": "bridge",
+          "bar": 64,
+          "bars": 16
+        },
+        {
+          "name": "climax",
+          "bar": 80,
+          "bars": 16
+        }
+      ],
+      "flow": {
+        "stalk": "stalk",
+        "fight": [
+          "dropA",
+          "riffB",
+          "dropA2",
+          "bridge"
+        ],
+        "lull": "break",
+        "last": "climax",
+        "lastAt": 3,
+        "near": 45,
+        "far": 70,
+        "lullAfter": 4
+      }
+    },
+    "fight_n18": {
+      "file": "fight_n18_sections.ogg",
+      "barSeconds": 2.0,
       "list": [
         {
           "name": "stalk",

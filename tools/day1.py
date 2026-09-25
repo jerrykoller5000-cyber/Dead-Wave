@@ -42,6 +42,7 @@ from synth import SR, adsr, lowpass, highpass, bandpass, reverb, stereo_delay, a
 from chip import pulse, tri_stepped, lfsr_noise
 
 BPM = 96.0
+DRIVE = 0                   # CL-38: 0 is First Blood as it was; the later nights' songs push it (tools/hordes.py)
 SPB = 60.0 / BPM            # seconds per beat
 S16 = SPB / 4               # seconds per 16th
 BARS = 108
@@ -332,12 +333,23 @@ def render(sections=None, circle=True, master_mode='song'):
             for st in range(0, 16, 2): hat(smp(b, st), 0.75 if st % 4 == 2 else 0.5, open_=(st == 14))
             if sec == 'climax':
                 for st in range(1, 16, 2): hat(smp(b, st), 0.28, pan=-0.3)
+        elif DRIVE >= 3 or (DRIVE >= 2 and sec in ('riffB', 'dropA2')):
+            # CL-38, the later nights: the drops drive like the climax, four on the floor
+            for st in (0, 4, 8, 12): kick(smp(b, st), 1.0 if st in (0, 8) else 0.88)
+            if i % 2 == 1: kick(smp(b, 14), 0.7)
+            snare(smp(b, 4), 0.92); snare(smp(b, 12), 1.0)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.72 if st % 4 == 2 else 0.48, open_=(st == 14))
+            for st in range(1, 16, 2): hat(smp(b, st), 0.22, pan=-0.3)
         else:
             # half-time: the heavy walk. Kick 1 and the "a" of 2 and "and" of 3, snare on 3.
             kick(smp(b, 0), 1.0); kick(smp(b, 6), 0.85); kick(smp(b, 10), 0.9)
             if i % 4 == 3: kick(smp(b, 14), 0.8); kick(smp(b, 15), 0.7)
             snare(smp(b, 8), 1.0)
             for st in range(0, 16, 2): hat(smp(b, st), 0.62 if st % 4 == 0 else 0.42, open_=(st == 14 and i % 2 == 1))
+            if DRIVE >= 1:
+                # CL-38: 16th ghost hats and a pickup kick keep the walk moving
+                for st in range(1, 16, 2): hat(smp(b, st), 0.2, pan=-0.35)
+                if i % 2 == 1: kick(smp(b, 13), 0.55)
         # fills into the next section
         if last_of_sec and sec in ('dropA', 'riffB', 'dropA2', 'bridge', 'climax'):
             for k, st in enumerate(range(12, 16)): snare(smp(b, st), 0.55 + 0.12 * k, big=False)

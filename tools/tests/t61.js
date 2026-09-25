@@ -25,7 +25,7 @@
     T.clearZombies && T.clearZombies();
     T.spawnZombie(T.player.position.x + 140, T.player.position.z + 140, 'shambler', true, true);   // ~200 m
     const gapOk = ms().stage === 'fight';
-    ok(gapOk && ms().deckTrack === 'chip_fight_1', 'day 9: Tier 1, right after the alarm sting: ' + ms().stage + '/' + ms().deckTrack);
+    ok(gapOk && ms().deckTrack === 'fight_n07', 'day 9: night 9\'s song (CL-38), right after the alarm: ' + ms().stage + '/' + ms().deckTrack);
     await until(() => Math.abs(ms().prox - 0.7) < 0.03, 6000);
     ok(Math.abs(ms().prox - 0.7) < 0.03, '70% with nobody within 150 m: ' + ms().prox.toFixed(2));
 
@@ -45,17 +45,18 @@
     window.addEventListener('dw-game', onEv);
     const kx = z.mesh.position.x, kz = z.mesh.position.z;
     T.killZombie(z, true, { kind: 'bullet', dir: { x: 1, z: 0 } });
-    await wait(250);
+    await wait(30);   // CL-50: the shot is 2.4 s now, so sample it from the start (a loaded run is slow)
     const F = T.getWaveFinisher();
     ok(events.length === 1, 'the last kill publishes wave-last-kill');
-    ok(!!F && F.dur > 5 && F.dur < 9, 'the finisher runs for the sting: ' + (F && F.dur.toFixed(1)) + ' s');
-    ok(T.getSlowMo() > 5, 'slow motion for the sting\'s length: ' + T.getSlowMo().toFixed(1));
+    // CL-50 (Jerry, 2026-09-25): three seconds in all, a 2.4 s shot and a 0.6 s return.
+    ok(!!F && F.dur > 2 && F.dur < 2.8, 'the finisher shot is short (CL-50): ' + (F && F.dur.toFixed(1)) + ' s');
+    ok(T.getSlowMo() > 2.5 && T.getSlowMo() < 3.1, 'slow motion for the whole 3 s: ' + T.getSlowMo().toFixed(1));
+    ok(document.body.classList.contains('finishgrade') && document.body.classList.contains('loopcine'), 'the colour drained out and the bars in (CL-50)');
+    const yaw0 = T.player.rotation.y;
     const el = document.getElementById('waveFinisherFlash');
     ok(!!el, 'the red pulse is on screen');
-    ok(ms().stage === 'relief' && ms().sting === 'clear' && !ms().deckTrack, 'the fight cut dead, the relief sting alone: ' + ms().stage + '/' + ms().sting + '/' + ms().deckTrack);
-    ok(ms().solo === true, 'every other sound cleared during the sting');
-    // CL-31/CL-33: a 360 around the body for the whole sting, zooming in, never in the
-    // ground; no push onto the marine's face any more (Jerry).
+    // CL-50: a part-orbit round the body that pulls back to show the field, never in the
+    // ground; the marine doesn't turn with the camera (no 360 spin, Jerry).
     const Fb = T.getWaveFinisher(); const bx = Fb ? Fb.x : kx, bz = Fb ? Fb.z : kz;
     const dur = Fb ? Fb.dur : 7.2; const t0 = Fb ? Fb.t0 : performance.now();
     const el2 = () => (performance.now() - t0) / 1000;
@@ -68,19 +69,24 @@
       if (el2() > 0.5) { const d = Math.hypot(cx, cz); dMin = Math.min(dMin, d); dMax = Math.max(dMax, d); }
       if (T.camera.position.y < T.sampleHeight(T.camera.position.x, T.camera.position.z) + 0.3) under++;
       frames++;
-      await wait(50);
+      await wait(20);
     }
+    ok(frames >= 8, 'the shot was sampled (' + frames + ' samples)');
+    ok(ms().stage === 'relief' && ms().sting === 'clear' && !ms().deckTrack, 'the fight cut dead, the relief sting alone: ' + ms().stage + '/' + ms().sting + '/' + ms().deckTrack);
+    ok(ms().solo === true, 'every other sound cleared during the sting');
     const deg = Math.abs(sweep) * 180 / Math.PI;
-    ok(deg > 320, 'the camera circles the body over the sting: ' + deg.toFixed(0) + ' degrees');
+    ok(deg > 100 && deg < 200, 'the camera swings round the body: ' + deg.toFixed(0) + ' degrees');
+    ok(Math.abs(T.player.rotation.y - yaw0) < 0.02, 'the marine keeps his facing: ' + (T.player.rotation.y - yaw0).toFixed(3));
     ok(dMax < 6 && dMin > 0.8, 'close around the body all the way round: ' + dMin.toFixed(1) + '-' + dMax.toFixed(1) + ' m');
     ok(under === 0, 'never in the ground (' + frames + ' samples)');
     const endD = Math.hypot(T.camera.position.x - bx, T.camera.position.z - bz);
-    ok(endD < 3.6, 'still on the zombie at the end of the sting, not the marine: ' + endD.toFixed(2) + ' m from the body');
+    ok(endD < 4.6, 'still on the zombie at the end of the shot, not the marine: ' + endD.toFixed(2) + ' m from the body');
     await until(() => ms().stage === 'calm', 10000);
     ok(ms().stage === 'calm' && !!ms().deckTrack, 'then the calm music: ' + ms().deckTrack);
     ok(ms().solo === false, 'and the other sounds are back');
     await wait(1500);
     ok(!T.getWaveFinisher(), 'the finisher is over');
+    ok(!document.body.classList.contains('finishgrade'), 'and the colour is back');
     ok(ms().overlapFrames === 0, 'never a sting and music at once');
     window.removeEventListener('dw-game', onEv);
   } catch (e) {

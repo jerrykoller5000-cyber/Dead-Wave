@@ -304,6 +304,16 @@
     #cine .bar { position: absolute; left: 0; right: 0; height: 0; background: #000; transition: height 1s ease; }
     #cine .bar.top { top: 0; } #cine .bar.bot { bottom: 0; }
     body.cinebars #cine .bar { height: 9vh; }
+    /* CL-49/50/51: the loop's own cinematics (the last kill, the alarm, the morning). */
+    #loopCine { position: fixed; inset: 0; pointer-events: none; z-index: 59; }
+    #loopCine .bar { position: absolute; left: 0; right: 0; height: 0; background: #000; transition: height .28s ease; }
+    #loopCine .bar.top { top: 0; } #loopCine .bar.bot { bottom: 0; }
+    body.loopcine #loopCine .bar { height: 8vh; }
+    #loopCine .grade { position: absolute; inset: 0; background: #7a7a7a; mix-blend-mode: saturation; opacity: 0; transition: opacity .45s ease; }
+    body.finishgrade #loopCine .grade { opacity: .9; transition: opacity .12s ease; }
+    #loopCine .glare { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 70% 40%, rgba(255,236,190,.95) 0%, rgba(255,210,150,.7) 45%, rgba(255,190,120,.35) 100%); }
+    #loopCine .blink { position: absolute; inset: 0; opacity: 0; background: #000; }
+    body.loopcine #hud > *:not(#win):not(#bigBanner), body.loopcine #reticle, body.loopcine #hitPing { visibility: hidden !important; }
     #cine .cap { position: absolute; left: 0; right: 0; bottom: 12vh; text-align: center; font-family: var(--font-display); font-size: 26px; letter-spacing: .12em; color: #e8e4d4; text-transform: uppercase; opacity: 0; transition: opacity 1.4s ease; text-shadow: 0 2px 10px rgba(0,0,0,.8); }
     #cine .cap .s { display: block; font-family: var(--font-hud); font-size: 13px; letter-spacing: .22em; opacity: .75; margin-top: 8px; }
     #cine .cap.on { opacity: 1; }
@@ -1033,6 +1043,7 @@
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
     import { createNightRecord, mountDawn } from './ui/dawn.js';
+    import './ui/camp-cleared.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -1740,7 +1751,9 @@
     const SKY_NIGHT_MAX = 0.995;   // the night drifts on during a wave, never into the dawn
     const SKY_DAWN_AT = 0.31;      // 07:26: where the finisher leaves it (just past first light)
     const ALARM_NIGHT_S = 5.0;     // the alarm's klaxon, flares and strobes
-    const skyLoop = { mode: 'free', tween: null };   // mode: free | prep | wave | dawn
+    const skyLoop = { mode: 'free', tween: null };   // mode: free | prep | wave | hold | dawn
+    // D-34: after the last kill the night holds ('hold') until the player picks Next Night or
+    // Proceed to Morning on the Night N Complete card.
     // The turn of the sky runs on the wall clock, not the game's dt, so it lands exactly when
     // the alarm or the finisher ends even through slow motion.
     function skyTo(target, seconds) {
@@ -1761,7 +1774,7 @@
         const n = (w + DAY_CYCLE_SPEED * dt) % 1;
         return (w < SKY_PREP_HOLD && n >= SKY_PREP_HOLD) ? SKY_PREP_HOLD : n;
       }
-      if (S.mode === 'wave') {
+      if (S.mode === 'wave' || S.mode === 'hold') {
         const n = w + DAY_CYCLE_SPEED * 0.25 * dt;
         return (w >= SKY_NIGHT_AT - 0.05 && n <= SKY_NIGHT_MAX) ? n : w;
       }
@@ -1771,11 +1784,12 @@
     // The dawn breaks while the finisher's camera circles the last body: it runs for the
     // relief sting's length, and so does the turn of the sky (the finisher tells everyone
     // with 'wave-last-kill', so this doesn't have to live inside it).
+    // D-34 (Jerry, 2026-09-25) revises that: the night holds through the last kill and the Night
+    // N Complete card, and the sunrise waits for Proceed to Morning (loopMorning, below).
     window.addEventListener('dw-game', (ev) => {
       const d = ev && ev.detail;
       if (!d || d.type !== 'wave-last-kill' || skyLoop.mode === 'free') return;
-      skyLoop.mode = 'dawn';
-      skyTo(SKY_DAWN_AT, (isFinite(+d.duration) && +d.duration > 0 ? +d.duration : 7.5) + 0.4);
+      skyLoop.mode = 'hold'; skyLoop.tween = null;
     });
 
     function resetDayClockForMatch() {
@@ -1870,7 +1884,9 @@
       // is actually coming from, and the dome tints with the ground.
       {
         const nightMix = 1 - Math.min(1, visualFactor / 0.42);
-        skyUniforms.uSunDir.value.copy(sunDir);
+        // CL-49: the painted sun goes down under the horizon (the light itself keeps its floor
+        // of 0.35 so shadows never go flat), so the alarm's shot can watch it set.
+        skyUniforms.uSunDir.value.set(Math.cos(ang), Math.max(-0.3, Math.sin(ang)), 0.3).normalize();
         // Moon rides opposite the sun.
         skyUniforms.uMoonDir.value.set(-Math.cos(ang), Math.max(0.2, -Math.sin(ang) * 0.6 + 0.45), -0.3).normalize();
         skyUniforms.uNight.value = nvgActive ? 0.25 : nightMix;
@@ -12124,10 +12140,19 @@
         return a[(Math.random() * a.length) | 0];
       };
       if (kind === 'chainsaw') {
-        // Sequential shred while damaging
+        // Sequential shred while damaging. GB-52: in step with the damage done, not a 55 %
+        // roll every tick. That roll took the head (and so the life) off anything in about a
+        // second, whatever its health: a brute, a demon, even the colossus. Now a part comes
+        // off for every 18 % of its health the saw takes, and the head only once it is down
+        // to 35 %, so a big body lasts as long as its health says.
+        z.shredAcc = (z.shredAcc || 0) + amount;
+        const shredStep = (z.maxHp || 24) * 0.18;
+        if (z.shredAcc < shredStep) return;
+        z.shredAcc -= shredStep;
         const order = ['armL', 'armR', 'legL', 'legR', 'head'];
         for (const k of order) {
-          if (!z.partsLost[k] && Math.random() < 0.55) {
+          if (k === 'head' && !z.partsLost.head && z.hp > (z.maxHp || 24) * 0.35) break;
+          if (!z.partsLost[k]) {
             detachZombiePart(z, k, dx, dz);
             spawnGibBurst(z.mesh.position.x, z.mesh.position.y + 1.0, z.mesh.position.z,
               z.mesh.userData.skinColor, z.mesh.userData.eyeColor, dx, dz, 'shred');
@@ -16217,6 +16242,17 @@
         kL += hit * 0.22;
         kR += hit * 0.16;
       }
+      // GB-50: a big hit drops him to one knee for a moment: down and straight back up.
+      const kneeK = hitStumble.kneeT > 0 ? Math.sin(Math.min(1, hitStumble.kneeT / HIT_KNEE_S) * Math.PI) : 0;
+      if (kneeK > 0.001) {
+        bodyY -= kneeK * 0.42;
+        kR += kneeK * 1.55;
+        kL += kneeK * 0.8;
+        POSE.thighL -= kneeK * 0.35;
+        POSE.thighR -= kneeK * 0.1;
+        torsoLean += kneeK * 0.2;
+        headPitch += kneeK * 0.06;
+      }
 
       // --- Weapon recoil absorbed by the torso (heavier guns punch harder) ---
       torsoLean += bodyRecoil.lean;
@@ -16412,8 +16448,12 @@
       // reach 3.5, arc minDot 0.05 (~±87°), one swing killed 6/12 frontal shamblers.
       // After: dmg 22 / cd 0.42 (52 DPS), reach 2.4, arc 0.40 (~±66°), max 2 hits/swing.
       // Shambler takes 2 swings; feral still one-shots. Panic tool, not a crowd clear.
-            knife:   { reach: 2.4, dmg: 22, cd: 0.42, arc: 0.40, maxHits: 2, name: 'Knife' },
-      machete: { reach: 3.8, dmg: 85, cd: 0.40, arc: -0.05, name: 'Machete' }
+      // GB-52 (Jerry: the knife and the saw are still a bit too strong): the recovery is longer
+      // (knife cd 0.42 -> 0.55, machete 0.40 -> 0.50), the machete bites at most 3 per swing
+      // (was every body in its half circle), and every blade hit is scaled by the kind's size
+      // (MELEE_SIZE_MUL: brute 0.6, demon 0.5, colossus and guardian 0.35, military and spider 0.8).
+      knife:   { reach: 2.4, dmg: 22, cd: 0.55, arc: 0.40, maxHits: 2, name: 'Knife' },
+      machete: { reach: 3.8, dmg: 85, cd: 0.50, arc: -0.05, maxHits: 3, name: 'Machete' }
     };
     function bladeStats() { return macheteOwned ? BLADE_STATS.machete : BLADE_STATS.knife; }
     function applyBladeModel() {
@@ -16600,7 +16640,7 @@
       // reach/arc widened from 2.05m and ±66°: at the old size a shambler could stand
       // just off your shoulder, outside the cone, and chew on you while the saw was
       // screaming. It now sweeps a full half-circle at arm's length plus a body.
-      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 17, spin: false, auto: true, melee: true, reach: 3.1, arc: -0.05 }
+      chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 3.1, arc: 0.20 }   // GB-52: was 17 and arc -0.05
     };
     let ammoByWeapon = { minigun: 300, m4: 30, ak: 30, aa12: 20, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, flamer: 60, chainsaw: Infinity };
     let grenades = 3;
@@ -16679,6 +16719,16 @@
     const EXT_MAG_PRICE = { pistol: 45, uzi: 70, shotgun: 80, m4: 95, ak: 100, aa12: 130, sniper: 90, minigun: 140, flamer: 90 }; // revolver + launcher deliberately excluded; flamer's is a bigger tank
     const SAW_FUEL_BASE = 60;          // seconds of cutting per full tank
     const SAW_TANK_PRICE = 85;         // "bigger tank": +50% capacity
+    // GB-52: the saw's gas and heat matter. Running it burns 1 s of gas a second, and
+    // SAW_BITE_FUEL more while the chain is in a body (a full 60 s tank is 24 s of cutting).
+    // Heat climbs SAW_HEAT_BITE a second in a body (8 s flat out) and SAW_HEAT_RUN running
+    // free; at 1 it stalls until it has cooled (SAW_COOL a second) to SAW_RESTART_HEAT.
+    // It bites at most SAW_MAX_BODIES bodies a tick, nearest first.
+    const SAW_BITE_FUEL = 1.5, SAW_HEAT_BITE = 1 / 8, SAW_HEAT_RUN = 1 / 40, SAW_COOL = 1 / 3, SAW_RESTART_HEAT = 0.45, SAW_MAX_BODIES = 3;
+    let sawHeat = 0, sawOverheat = false, sawBiteT = 0, sawCutting = false, sawHudT = 0;
+    // GB-52: blades and the saw do less to the bigger kinds, so the guns stay the answer.
+    const MELEE_SIZE_MUL = { military: 0.8, spider: 0.8, brute: 0.6, demon: 0.5, colossus: 0.35, guardian: 0.35 };
+    function meleeSizeMul(z) { const m = MELEE_SIZE_MUL[z && z.typeKey]; return m == null ? 1 : m; }
     let weaponOwned = { pistol: true };
     let reserveAmmo = { '.45': START_RESERVE_45, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
     let extMag = {};                   // weapon key -> true once bought
@@ -16742,6 +16792,7 @@
       dualActive = false;
       akimboHand = 0;
       sawFuel = SAW_FUEL_BASE;
+      sawHeat = 0; sawOverheat = false; sawBiteT = 0;   // GB-52
       sawTankUpgraded = false;
       gearOwned = GEAR_NONE();
       playerArmor = 0;
@@ -18750,7 +18801,7 @@
           // home within SKULL_FLY_MS, so every one is bagged, and counted on the dawn card, before
           // the finisher hands over to prep. The dawn card pauses the game: a skull still in the
           // air then used to hang there, uncounted.
-          const rdt = slowMoT > 0 ? dt / 0.32 : dt;
+          const rdt = slowMoT > 0 ? dt / slowMoK : dt;
           const flyLeft = Math.max(0.05, ((c.flyBy || 0) - performance.now()) / 1000);
           const step = Math.min(fd, Math.max((16 + fd * 0.6) * rdt, fd * rdt / flyLeft));
           if (fd > 0.001) { c.mesh.position.x += fdx / fd * step; c.mesh.position.z += fdz / fd * step; }
@@ -18868,7 +18919,7 @@
     let fieldIntelOwned = false;
     function publishUI(type, details = {}) {
       // UI label enrichment of Grokbot's committed POI event; world layout is untouched.
-      if (type === 'poi-guards') {
+      if (type === 'poi-guards' || type === 'poi-cleared') {
         const style = details.kind === 'campsite' ? POI.campsites[details.index]?.style : null;
         const name = ['ranger','hikers','trapper'].includes(style) ? style : details.kind;
         details = { ...details, day, labelKey: 'world.' + name };
@@ -18880,8 +18931,16 @@
     let dawnWasPaused = false;
     const dawnScreen = mountDawn({
       onShow: () => AudioSys.musicCue('dawn'),
-      onSkip: () => setPaused(dawnWasPaused),
-      onContinue: () => { setPaused(dawnWasPaused); openHQBriefing({ fromDawn: true }); }
+      onNextNight: () => {
+        setPaused(dawnWasPaused);
+        if (typeof loopNextNight === 'function') loopNextNight();
+        else console.info('[GP-37] Next Night selected; awaiting CL-51 loopNextNight.');
+      },
+      onMorning: () => {
+        setPaused(dawnWasPaused);
+        if (typeof loopMorning === 'function') loopMorning();
+        else console.info('[GP-37] Proceed to Morning selected; awaiting CL-51 loopMorning.');
+      }
     });
     window.addEventListener('dw-game', ({detail}) => {
       if (detail?.type === 'run-reset') { nightRecord.reset(); dawnScreen.close(); }
@@ -19166,17 +19225,27 @@
     // A quote covers the complete refill. Recompute at click time; never spend a
     // partial budget or charge a shared reserve twice. Existing pack purchases
     // retain inventory, Cash deductions and purchase receipts.
+    // Hand grenades have no calibre reserve; the restock quote buys them individually.
+    const HAND_GRENADE_PRICE = 12;
+    function buyRestockGrenade() {
+      if (grenades >= maxGrenades() || !spend(HAND_GRENADE_PRICE)) return false;
+      grenades++;
+      reportPurchase('grenade', HAND_GRENADE_PRICE);
+      return true;
+    }
     function ammoRestockPlan(w) {
       const keys = w == null ? [...stockedCalibers(), ...(weaponOwned.chainsaw ? ['chainsaw'] : [])]
         : weaponOwned[w] ? [w === 'chainsaw' ? w : caliberOf(w)] : [];
-      return quoteRestock(keys.map(key => ({ key, current: key === 'chainsaw' ? sawFuel : (reserveAmmo[key] | 0),
+      const reserves = keys.map(key => ({ key, current: key === 'chainsaw' ? sawFuel : (reserveAmmo[key] | 0),
         capacity: key === 'chainsaw' ? sawFuelMax() : reserveCap(key), quantity: AMMO_PACK[key].n,
-        price: AMMO_PACK[key].cost, tolerance: key === 'chainsaw' ? 0.01 : 0 })));
+        price: AMMO_PACK[key].cost, tolerance: key === 'chainsaw' ? 0.01 : 0 }));
+      if (w == null) reserves.push({ key: 'hand-grenade', current: grenades, capacity: maxGrenades(), quantity: 1, price: HAND_GRENADE_PRICE });
+      return quoteRestock(reserves);
     }
     function renderRestockAll() {
       const plan = ammoRestockPlan();
       const row = shopRow(dwText('shop.ammo.restock'), dwText(plan.cost ? 'shop.ammo.short' : 'shop.ammo.allFull', { count: plan.rows.length }),
-        dwText(plan.cost ? 'shop.ammo.restockHelp' : 'shop.ammo.fullHelp'),
+        dwText(plan.cost ? 'shop.ammo.restockHelp' : 'shop.ammo.fullHelp', { grenadePrice: HAND_GRENADE_PRICE }),
         dwText(plan.cost ? 'shop.ammo.restockPrice' : 'shop.fullButton', { price: plan.cost }),
         plan.cost > 0 && bank >= plan.cost, () => buyAllAmmo(), plan.cost ? '' : 'owned');
       row.dataset.restockAll = '';
@@ -19186,8 +19255,8 @@
       if (!plan.cost || bank < plan.cost) { renderShop(); return { bought: 0, spentTotal: 0 }; }
       let bought = 0, spentTotal = 0;
       for (const row of plan.rows) for (let i = 0; i < row.packs; i++) {
-        if (!buyAmmo(row.key, true)) break;
-        bought++; spentTotal += AMMO_PACK[row.key].cost;
+        if (!(row.key === 'hand-grenade' ? buyRestockGrenade() : buyAmmo(row.key, true))) break;
+        bought++; spentTotal += row.cost / row.packs;
       }
       if (bought) { AudioSys.pickup(); updateAmmoHud(); }
       renderShop(); return { bought, spentTotal };
@@ -20075,23 +20144,23 @@
       if (phase !== 'prep' || hq.seq) { AudioSys.invalid(); showBanner('WAVE UNDER WAY', 'The panel works between waves', 1.2, '#ffb347'); return; }
       if (devNoZombies) { AudioSys.invalid(); showBanner('NODEAD IS ON', 'Waves are switched off', 1.2, '#ffb347'); return; }
       endZombieGrace();
-      hq.seq = { t: 0, fired: 0 };
-      // CL-45: the night comes down over the alarm.
-      skyLoop.mode = 'wave'; skyTo(SKY_NIGHT_AT, ALARM_NIGHT_S);
-      publishUI('alarm-started', { day });
+      // CL-49 (Jerry): the camera goes up to the sun setting and the moon coming up, then down
+      // onto the HQ for the flares, the strobes and the rumble. The sequence's clock starts
+      // behind zero by the length of the sky shot, so the flares go up as the camera lands.
+      const cineKind = isNight ? 'night' : 'dusk';
+      hq.seq = { t: -ALARM_CINE_LEAD[cineKind], fired: 0 };
+      skyLoop.mode = 'wave';
+      startLoopCine(cineKind);
+      publishUI('alarm-started', { day, hold: ALARM_HOLD[cineKind] });   // D-33: no sting, the music waits
       AudioSys.klaxon();
-      // CL-29 (Jerry): the ground rumbles and the camera shakes for three seconds.
-      if (AudioSys.alarmRumble) AudioSys.alarmRumble(ALARM_RUMBLE_S);
-      alarmShakeT = ALARM_RUMBLE_S;
-      addShake(0.1);
-      showBanner(dwText('hq.alarm'), dwText('hq.heard', {day}), 2.2, '#ff5a44');
+      showBanner(dwText('hq.alarm'), dwText('hq.heard', {day}), 2.6, '#ff5a44');
     }
     const HQ_STROBE_S = 5;
     function updateHQSequence(dt) {
       const Q = hq.seq;
       const gy = house.group ? house.group.position.y : 0;
       // Strobes: dark unless the sequence is running.
-      const strobing = Q && Q.t < HQ_STROBE_S;
+      const strobing = Q && Q.t >= 0 && Q.t < HQ_STROBE_S;
       for (let i = 0; i < (house.strobes || []).length; i++) {
         const s = house.strobes[i];
         let on = false;
@@ -26028,54 +26097,143 @@
     // GB-40 / D-29: day 1 is 15 shamblers; 7 or 8 of them claw up out of the ground (GROUND_RISE
     // in the working caveByIndex; -1 plus groundByIndex in the preview).
     const DAY1_TOTAL = 15, DAY1_GROUND_MIN = 7, GROUND_RISE = -2;
+    // GB-53: nights 1 to 20, one plan each (docs/specs/difficulty.md has the table). The totals are
+    // the horde sizes the nights already had (D-29 changed day 1 only); what changed is what is in
+    // them and how they arrive. Before this every night from 2 on was about 90% shamblers with the
+    // same sprinkle of specialists, so night 12 felt like night 5, only longer. Now every night has
+    // a job: days 1-3 teach, 4-10 build, 11-20 test; a new kind or a new trick every two or three
+    // nights; set pieces (a bomber pack, runners from two caves, a brute night, a demon night); rest
+    // nights (7, 11, 14, 17) with a lighter mix and longer breathers; and a climb to 20.
+    //   kinds:  specialist counts; shamblers fill the rest of total.
+    //   packs:  kind -> number of packs; each pack comes out together, late in the night.
+    //   late:   kinds held back for the last push (a new kind's first showing).
+    //   caves:  1, 2 or 3 mouths, or 'all' (surround). Guardian nights stay chalk only (D-13).
+    //   ground: shamblers that claw up in the treeline instead (GB-40's rise).
+    //   pushes: the night comes in pushes with a breather between them (NIGHT_TIER pacing).
+    // The cadences are the old ones: Ember Night every fourth night, a colossus every fifth, the
+    // guardian every sixth (it replaces the colossus). The boss walks out at the head of the last push.
+    const NIGHT_TIER = {
+      teach: { burst: [3, 6], gap: [0.9, 1.6], lull: 9 },
+      build: { burst: [6, 10], gap: [0.55, 1.1], lull: 7 },
+      test: { burst: [8, 12], gap: [0.4, 0.9], lull: 5 },
+      rest: { burst: [7, 11], gap: [0.5, 1.0], lull: 12 }
+    };
+    const NIGHT_PLAN = [
+      null,
+      { total: 15, act: 'teach', caves: 1, pushes: 1, trick: 'claw-up', label: 'Fifteen shamblers; half claw up out of the ground (D-29)', kinds: {}, pace: { burst: [5, 9], gap: [0.5, 1.1] } },
+      { total: 50, act: 'teach', caves: 1, pushes: 2, trick: 'runners', label: 'Runners: the first ferals, in two packs', kinds: { feral: 8 }, packs: { feral: 2 } },
+      { total: 100, act: 'teach', caves: 1, pushes: 3, trick: 'lake', label: 'The lake wakes: drowned from the sinkhole, and the first leapers', kinds: { feral: 10, leaper: 6, drowned: 8 } },
+      { total: 130, act: 'build', caves: 2, pushes: 3, trick: 'two-fronts', label: 'Ember Night: two caves at once, the first soldiers and brutes', kinds: { feral: 12, leaper: 8, drowned: 4, military: 8, brute: 2 }, late: ['brute'] },
+      { total: 220, act: 'build', caves: 1, pushes: 3, trick: 'nest', label: 'The first spiders, and a colossus heads the last push', kinds: { feral: 16, leaper: 10, drowned: 6, military: 8, brute: 4, spider: 10 } },
+      { total: 213, act: 'build', caves: 1, pushes: 3, trick: 'guardian', label: 'Guardian night: it comes out of the chalk cave; the first spitters', kinds: { feral: 14, leaper: 10, drowned: 6, military: 10, brute: 4, spider: 6, spitter: 6 } },
+      { total: 300, act: 'build', rest: true, caves: 1, pushes: 4, ground: 40, trick: 'woods', label: 'Rest night: forty claw up in the treeline, and one pack of the first bombers', kinds: { feral: 30, leaper: 10, drowned: 10, bomber: 4 }, packs: { bomber: 1 } },
+      { total: 350, act: 'build', caves: 2, pushes: 4, trick: 'bomber-pack', label: 'Ember Night: a bomber pack of ten, and the first screamers', kinds: { feral: 24, leaper: 14, drowned: 8, military: 24, brute: 6, spider: 8, spitter: 6, screamer: 3, bomber: 10 }, packs: { bomber: 1 } },
+      { total: 390, act: 'build', caves: 2, pushes: 4, trick: 'runners-two-caves', label: 'Runners from two caves: eight packs of ten ferals', kinds: { feral: 80, leaper: 30, drowned: 8, military: 16, spider: 10, spitter: 4, screamer: 2, bomber: 6 }, packs: { feral: 8 } },
+      { total: 430, act: 'build', caves: 1, pushes: 4, trick: 'brute-night', label: 'Brute night down one cave, and a colossus', kinds: { feral: 30, leaper: 16, drowned: 10, military: 30, brute: 24, spider: 10, spitter: 6, screamer: 2, bomber: 6 }, packs: { brute: 4 } },
+      { total: 470, act: 'test', rest: true, caves: 'all', pushes: 5, trick: 'surround', label: 'Rest night, but from every cave; the first demons', kinds: { feral: 50, leaper: 16, drowned: 10, military: 16, spider: 8, spitter: 4, screamer: 2, bomber: 4, demon: 2 }, late: ['demon'] },
+      { total: 418, act: 'test', caves: 1, pushes: 4, trick: 'guardian-ember', label: 'The guardian on Ember Night, with demons', kinds: { feral: 40, leaper: 20, drowned: 10, military: 30, brute: 10, spider: 12, spitter: 10, screamer: 3, bomber: 8, demon: 6 } },
+      { total: 560, act: 'test', caves: 2, pushes: 5, trick: 'artillery', label: 'Artillery: twenty spitters behind a line of soldiers', kinds: { feral: 50, leaper: 24, drowned: 12, military: 50, brute: 12, spider: 14, spitter: 20, screamer: 3, bomber: 8, demon: 3 }, packs: { spitter: 4 } },
+      { total: 600, act: 'test', rest: true, caves: 1, pushes: 5, ground: 60, trick: 'lake-surge', label: 'Rest night: the lake surges (seventy drowned) and sixty claw up', kinds: { feral: 40, leaper: 16, drowned: 70, military: 16, brute: 4, spider: 10, spitter: 4, screamer: 2, bomber: 4, demon: 2 }, packs: { drowned: 5 } },
+      { total: 640, act: 'test', caves: 2, pushes: 5, trick: 'nest-colossus', label: 'The nest: fifty spiders, a screamer pack, and a colossus', kinds: { feral: 60, leaper: 30, drowned: 12, military: 40, brute: 14, spider: 50, spitter: 10, screamer: 6, bomber: 10, demon: 4 }, packs: { spider: 5, screamer: 1 } },
+      { total: 680, act: 'test', caves: 2, pushes: 5, trick: 'demon-night', label: 'Ember Night, demon night: fourteen demons in two packs', kinds: { feral: 70, leaper: 30, drowned: 14, military: 60, brute: 16, spider: 20, spitter: 12, screamer: 4, bomber: 12, demon: 14 }, packs: { demon: 2 } },
+      { total: 720, act: 'test', rest: true, caves: 'all', pushes: 6, trick: 'surround-fast', label: 'Rest night from every cave: the fast ones', kinds: { feral: 90, leaper: 30, drowned: 14, military: 20, brute: 8, spider: 16, spitter: 6, screamer: 4, bomber: 14, demon: 4 } },
+      { total: 631, act: 'test', caves: 1, pushes: 5, trick: 'siege', label: 'Guardian night, the siege: brutes behind a bomber screen', kinds: { feral: 60, leaper: 30, drowned: 14, military: 50, brute: 30, spider: 20, spitter: 14, screamer: 4, bomber: 20, demon: 8 }, packs: { brute: 3, bomber: 3 } },
+      { total: 810, act: 'test', caves: 3, pushes: 6, ground: 30, trick: 'gauntlet', label: 'The gauntlet: three caves and the treeline, short breathers', kinds: { feral: 90, leaper: 40, drowned: 18, military: 70, brute: 30, spider: 30, spitter: 18, screamer: 6, bomber: 18, demon: 12 }, pace: { lull: 3 } },
+      { total: 850, act: 'test', caves: 3, pushes: 6, ground: 40, trick: 'last-stand', label: 'Last stand: Ember Night, a colossus, three caves, the treeline and the lake', kinds: { feral: 100, leaper: 50, drowned: 24, military: 80, brute: 36, spider: 36, spitter: 20, screamer: 8, bomber: 24, demon: 18 }, packs: { demon: 2, bomber: 2 } }
+    ];
+    /** GB-53: the plan for a night. Past 20 the test nights (13-20) come round again, grown to the old day curve. */
+    function nightPlanFor(dayNum) {
+      const d = Math.max(1, dayNum | 0);
+      if (d < NIGHT_PLAN.length) return NIGHT_PLAN[d];
+      const base = NIGHT_PLAN[13 + ((d - 21) % 8)];
+      const total = zombiesForDay(d) * HORDE_MULT;
+      const f = total / base.total;
+      const kinds = {};
+      for (const k of Object.keys(base.kinds)) kinds[k] = Math.round(base.kinds[k] * f);
+      return { ...base, total, kinds, ground: base.ground ? Math.round(base.ground * f) : 0, label: 'Night ' + d + ': ' + base.label, endless: true };
+    }
+    function nightPaceFor(plan) {
+      const tier = plan.rest ? NIGHT_TIER.rest : (NIGHT_TIER[plan.act] || NIGHT_TIER.build);
+      const p = plan.pace || {};
+      return { burst: p.burst || tier.burst, gap: p.gap || tier.gap, lull: p.lull != null ? p.lull : tier.lull };
+    }
+    /** Push sizes: each push a little bigger than the one before, the last one the peak. */
+    function nightPushSizes(total, pushes) {
+      const P = Math.max(1, Math.min(pushes | 0, total));
+      if (P <= 1) return [total];
+      const w = [];
+      let ws = 0;
+      for (let p = 0; p < P; p++) { const x = (1 + 0.35 * p / (P - 1)) * (p === P - 1 ? 1.15 : 1); w.push(x); ws += x; }
+      const sizes = w.map((x) => Math.floor(total * x / ws));
+      let rem = total - sizes.reduce((a, b) => a + b, 0);
+      for (let p = P - 1; rem > 0; p = (p - 1 + P) % P) { sizes[p] += 1; rem -= 1; }
+      return sizes;
+    }
     function waveComposition(dayNum) {
-      // Scripted mixes by day — returns ordered type keys for the wave
-      if (dayNum <= 1) return new Array(DAY1_TOTAL).fill('shambler');   // GB-40 / D-29: day 1 is 15
-      if (dayNum === 2) return swellWithFodder(['shambler', 'shambler', 'feral', 'shambler', 'feral']);
-      if (dayNum === 3) {
-        return swellWithFodder(['shambler', 'leaper', 'shambler', 'feral', 'leaper', 'shambler', 'drowned', 'shambler', 'feral', 'leaper']);
-      }
-      if (dayNum === 4) {
-        return swellWithFodder(['military', 'shambler', 'feral', 'brute', 'military', 'drowned', 'leaper', 'feral', 'shambler', 'military', 'drowned', 'spider', 'leaper']);
-      }
-      // day 5+: escalate with pressure types + fodder, seasoned with specialists
-      const n = zombiesForDay(dayNum);
-      const mix = [];
-      for (let i = 0; i < n; i++) {
-        const t = i / Math.max(1, n - 1);
-        if (t < 0.18) mix.push('shambler');
-        else if (t < 0.32) mix.push('feral');
-        else if (t < 0.44) mix.push('leaper');
-        else if (t < 0.54) mix.push('drowned');
-        else if (t < 0.7) mix.push('military');
-        else if (t < 0.84) mix.push('brute');
-        else mix.push(Math.random() < 0.5 ? 'leaper' : 'military');
-      }
-      // Specialists: spitters creep the last stretch, screamers make everything worse,
-      // bombers punish a tight line of defences.
-      const spitters = Math.min(3, 1 + Math.floor((dayNum - 4) / 2));
-      for (let i = 0; i < spitters; i++) mix[2 + i * 4] = 'spitter';
-      const spiders = Math.min(4, 1 + Math.floor((dayNum - 4) / 2));
-      for (let i = 0; i < spiders; i++) { const at = 4 + i * 6; if (at < mix.length) mix[at] = 'spider'; }
-      const bombers = Math.min(4, 1 + Math.floor((dayNum - 5) / 2));
-      for (let i = 0; i < bombers; i++) { const at = 3 + i * 5; if (at < mix.length) mix[at] = 'bomber'; }
-      // Demons from day 6: one, a second from day 9, a third from day 12, and two more
-      // on a blood moon, when the sky is the colour they came from.
-      if (dayNum >= 6) {
-        let demons = Math.min(3, 1 + Math.floor((dayNum - 6) / 3));
-        if (dayNum % 4 === 0) demons += 2;
-        for (let i = 0; i < demons; i++) { const at = 7 + i * 7; if (at < mix.length) mix[at] = 'demon'; }
-      }
-      if (dayNum >= 6) mix[Math.min(mix.length - 1, 5)] = 'screamer';
-      if (dayNum >= 9 && mix.length > 9) mix[9] = 'screamer';
-      // Shuffle lightly so bursts aren't perfectly sorted
-      for (let i = mix.length - 1; i > 0; i--) {
-        if (Math.random() < 0.35) {
-          const j = (Math.random() * (i + 1)) | 0;
-          const tmp = mix[i]; mix[i] = mix[j]; mix[j] = tmp;
+      // GB-40 / D-29: day 1 is 15.
+      if (dayNum <= 1) { const d1 = new Array(DAY1_TOTAL).fill('shambler'); d1.pushSizes = [DAY1_TOTAL]; return d1; }
+      const plan = nightPlanFor(dayNum);
+      const sizes = nightPushSizes(plan.total, plan.pushes || 1);
+      const P = sizes.length;
+      const kinds = plan.kinds || {}, packs = plan.packs || {}, late = plan.late || [];
+      const spreadBy = sizes.map(() => []);   // specials dealt through each push
+      const packBy = sizes.map(() => []);     // packs that come out together in each push
+      const spread = [];
+      for (const k of Object.keys(kinds)) {
+        const c = kinds[k] | 0;
+        if (c <= 0) continue;
+        const np = Math.min(c, packs[k] | 0);
+        if (np > 0) {
+          for (let j = 0; j < np; j++) {
+            const n = Math.floor(c / np) + (j < c % np ? 1 : 0);
+            const p = P - 1 - Math.floor((np - 1 - j) * P / np);   // packs lean late
+            packBy[p].push(new Array(n).fill(k));
+          }
+        } else if (late.includes(k)) {
+          for (let i = 0; i < c; i++) spreadBy[P - 1].push(k);
+        } else {
+          for (let i = 0; i < c; i++) spread.push({ k, at: (i + 0.5) / c });
         }
       }
-      return swellWithFodder(mix);
+      // Interleave the kinds evenly, then deal them by push weight (the first push gets half its
+      // share: the night warms up).
+      spread.sort((a, b) => a.at - b.at);
+      const pw = sizes.map((s, p) => s * (p === 0 && P > 1 ? 0.5 : 1));
+      const pws = pw.reduce((a, b) => a + b, 0);
+      for (let i = 0; i < spread.length; i++) {
+        const f = (i + 0.5) / spread.length * pws;
+        let acc = 0, p = 0;
+        for (; p < P - 1; p++) { acc += pw[p]; if (f < acc) break; }
+        spreadBy[p].push(spread[i].k);
+      }
+      const packN = (p) => packBy[p].reduce((a, pk) => a + pk.length, 0);
+      for (let p = 0; p < P; p++) {
+        // Never more specials than a push has bodies: spill to the nearest push with room.
+        while (spreadBy[p].length + packN(p) > sizes[p] && spreadBy[p].length) {
+          let q = -1;
+          for (let s = 1; s < P && q < 0; s++) {
+            if (p + s < P && spreadBy[p + s].length + packN(p + s) < sizes[p + s]) q = p + s;
+            else if (p - s >= 0 && spreadBy[p - s].length + packN(p - s) < sizes[p - s]) q = p - s;
+          }
+          if (q < 0) break;
+          spreadBy[q].push(spreadBy[p].pop());
+        }
+      }
+      const out = [];
+      for (let p = 0; p < P; p++) {
+        const sp = spreadBy[p];
+        for (let i = sp.length - 1; i > 0; i--) {
+          if (Math.random() < 0.3) { const j = (Math.random() * (i + 1)) | 0; const tmp = sp[i]; sp[i] = sp[j]; sp[j] = tmp; }
+        }
+        const n = Math.max(0, sizes[p] - packN(p));
+        const seg = new Array(n).fill('shambler');
+        for (let i = 0; i < sp.length && i < n; i++) seg[Math.floor((i + 0.5) * n / sp.length)] = sp[i];
+        const Q = packBy[p].length;
+        for (let q = Q - 1; q >= 0; q--) seg.splice(Math.floor(n * (0.2 + 0.6 * q / Math.max(1, Q))), 0, ...packBy[p][q]);
+        for (const k of seg) out.push(k);
+      }
+      out.pushSizes = sizes.slice();
+      return out;
     }
 
     function pickZombieType(dayNum) {
@@ -26306,6 +26464,7 @@
     }
     // Brief time dilation for the big moments: the last kill of a day, a boss down.
     let slowMoT = 0;
+    let slowMoK = 1;   // this frame's time scale (CL-50: the finisher has its own curve)
     function triggerSlowMo(dur) { slowMoT = Math.max(slowMoT, dur); }
 
     // === Wave finisher (CL-26, Jerry) ===================================================
@@ -26317,14 +26476,30 @@
     let waveFinisher = null;
     let finisherJustEnded = false;   // CL-41: startPrep knows the finisher was the payoff
     const _finPos = new THREE.Vector3(), _finTgt = new THREE.Vector3();
+    // CL-50 (Jerry, 2026-09-25): 3 seconds in all. A near-freeze on the kill while the camera
+    // punches in low and close, the colour drained out under the red flash and the bars,
+    // then a slow part-orbit that pulls back to reveal the field, and back to the marine.
+    const FIN_SHOT_S = 2.4;
+    function finisherTimeScale() {
+      const F = waveFinisher; if (!F) return 0.32;
+      const t = (performance.now() - F.t0) / 1000;
+      if (t < 0.3) return 0.05;
+      if (t < 2.0) return 0.22;
+      return Math.min(1, 0.22 + (t - 2.0) * 0.78);
+    }
     function beginWaveFinisher(z, x, y, zz) {
-      const len = (AudioSys.cueLength && AudioSys.cueLength('clear')) || 7.2;
-      const dur = Math.max(3, Math.min(12, len));
+      const dur = FIN_SHOT_S;
       waveFinisher = { t0: performance.now(), dur, mesh: (z.mesh && !z.mesh.userData.gibbed) ? z.mesh : null, x, y, z: zz, sx: 0, sz: 0, set: false };
-      slowMoT = Math.max(slowMoT, dur);
+      slowMoT = Math.max(slowMoT, dur + FIN_RETURN_S);
+      loopCineOverlay(true);
+      document.body.classList.add('finishgrade');
       finisherFlash();
       publishUI('wave-last-kill', { x, z: zz, typeKey: z.typeKey, duration: dur });
       if (skullKeepDay()) skullRecallUntil = performance.now() + SKULL_RECALL_MS;   // GB-42: loose skulls fly to the marine
+    }
+    function finisherStyleOff() {
+      document.body.classList.remove('finishgrade');
+      if (!loopCine) document.body.classList.remove('loopcine');
     }
     let _finFlashEl = null;
     function finisherFlash() {
@@ -26345,7 +26520,7 @@
     // marine's face for the last 30% is gone: it did not look as good as hoped.) The camera
     // never goes inside the ground, a build or a solid: if the line from the body to where
     // it wants to be is blocked, it comes in short of the block.
-    const FIN_RETURN_S = 0.8;
+    const FIN_RETURN_S = 0.6;
     const _finA = new THREE.Vector3(), _finALook = new THREE.Vector3();
     function finisherClip(look, pos) {
       // Pull pos back towards look until nothing solid sits between them.
@@ -26374,31 +26549,216 @@
     function waveFinisherCamera() {
       const F = waveFinisher;
       if (!F) return;
-      if (gameOver || won || !gameStarted) { waveFinisher = null; return; }
+      if (gameOver || won || !gameStarted) { waveFinisher = null; finisherStyleOff(); return; }
       const t = (performance.now() - F.t0) / 1000;
-      if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; finisherJustEnded = true; return; }
+      if (t >= F.dur + FIN_RETURN_S) { waveFinisher = null; finisherJustEnded = true; slowMoT = 0; finisherStyleOff(); return; }
+      if (t >= F.dur - 0.05) document.body.classList.remove('finishgrade');
+      if (t >= F.dur + 0.1) document.body.classList.remove('loopcine');
       const m = F.mesh;
       if (m && m.parent) { F.x = m.position.x; F.y = m.position.y; F.z = m.position.z; }
       if (!F.set) {
-        // Start the orbit from the side the camera is already on.
-        F.a0 = Math.atan2(camera.position.z - F.z, camera.position.x - F.x);
+        // Start from the side the camera is already on, a little round towards its right.
+        F.a0 = Math.atan2(camera.position.z - F.z, camera.position.x - F.x) - 0.5;
         F.set = true;
       }
       const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
       const gy = Math.max(F.y, sampleHeight(F.x, F.z));
-      // The 360, over the whole sting.
-      const u = Math.min(1, t / F.dur);
-      const ang = F.a0 + Math.PI * 2 * ease(u);
-      const rad = 4.6 - 1.8 * ease(u);                 // zooming in as it circles
-      _finALook.set(F.x, gy + 0.55, F.z);
-      _finA.set(F.x + Math.cos(ang) * rad, gy + 1.5 - 0.4 * ease(u), F.z + Math.sin(ang) * rad);
+      // The punch: in close and low while time all but stops, then a slow part-orbit that
+      // pulls up and back to show the field around the body.
+      const u = t < 0.3 ? 0 : Math.min(1, (t - 0.3) / (F.dur - 0.3));
+      const eu = ease(u);
+      const ang = F.a0 + 2.4 * eu;
+      const rad = 2.2 + 1.8 * eu;
+      _finALook.set(F.x, gy + 0.5 + 0.25 * eu, F.z);
+      _finA.set(F.x + Math.cos(ang) * rad, gy + 0.75 + 1.25 * eu, F.z + Math.sin(ang) * rad);
       finisherClip(_finALook, _finA);
       const wantPos = _finA, wantLook = _finALook;
-      // In over 0.4 s at the start, out over FIN_RETURN_S after the sting.
-      const w = Math.min(ease(t / 0.4), 1 - ease((t - F.dur) / FIN_RETURN_S));
+      // Snapped in over 0.14 s, out over FIN_RETURN_S after the shot.
+      const w = Math.min(ease(t / 0.14), 1 - ease((t - F.dur) / FIN_RETURN_S));
       camera.position.lerp(wantPos, w);
       camLook.lerp(wantLook, w);
     }
+
+    // === The loop's cinematics (CL-49, CL-51; Jerry 2026-09-25, D-34) ==================
+    // The alarm ('dusk'): the camera tilts up to the sun going down, sweeps over the top to
+    // the moon coming up, then drops onto the HQ as its flares go up, and hands back.
+    // Next Night ('night'): the same from a sky that is already dark: the moon, then the HQ.
+    // Proceed to Morning ('morning'): up to the sunrise; the marine is brought back to his
+    // spawn under the glare while the sky fills, then the camera comes down onto him.
+    // The marine keeps his facing throughout (updateMouseAim), and the HUD steps aside.
+    const ALARM_CINE_LEAD = { dusk: 2.7, night: 1.1 };   // sky shot before the HQ's flares
+    const ALARM_HOLD = { dusk: 3.9, night: 2.4 };        // the music waits this long (D-33)
+    const SPAWN_X = 0, SPAWN_Z = -8.5;
+    let loopCine = null;
+    let loopHoldIdle = 0;
+    const _lcPos = new THREE.Vector3(), _lcLook = new THREE.Vector3(), _lcD = new THREE.Vector3();
+    const _lcA = new THREE.Vector3(), _lcB = new THREE.Vector3(), _lcUp = new THREE.Vector3(0, 1, 0);
+    let _lcEl = null;
+    function loopCineEl() {
+      if (!_lcEl) {
+        _lcEl = document.createElement('div');
+        _lcEl.id = 'loopCine';
+        _lcEl.innerHTML = '<div class="bar top"></div><div class="bar bot"></div><div class="grade"></div><div class="glare"></div><div class="blink"></div>';
+        document.body.appendChild(_lcEl);
+      }
+      return _lcEl;
+    }
+    function loopCineOverlay(on) {
+      try { loopCineEl(); document.body.classList.toggle('loopcine', !!on); } catch (_) {}
+    }
+    function loopCineFlash(kind, ms) {
+      try {
+        const el = loopCineEl().querySelector(kind === 'glare' ? '.glare' : '.blink');
+        if (el && el.animate) el.animate([{ opacity: 0 }, { opacity: 1, offset: 0.4 }, { opacity: 1, offset: 0.55 }, { opacity: 0 }], { duration: ms, easing: 'ease-in-out' });
+      } catch (_) {}
+    }
+    function sendMarineToSpawn() {
+      climbingTower = false; onTowerDeck = false;
+      player.position.set(SPAWN_X, sampleHeight(SPAWN_X, SPAWN_Z), SPAWN_Z);
+      velX = 0; velZ = 0; vy = 0; grounded = true;
+      if (typeof resetCameraRig === 'function') resetCameraRig();
+    }
+    // Directions the shots look along. The sun and moon come live from the sky dome, so the
+    // camera follows the sun down and the moon up while the sky turns.
+    function lcSun(minEl, maxEl) {
+      const d = skyUniforms.uSunDir.value;
+      const h = Math.hypot(d.x, d.z) || 1;
+      const el = Math.max(minEl, Math.min(maxEl, Math.asin(Math.max(-1, Math.min(1, d.y))) + 0.1));
+      return _lcD.set(d.x / h * Math.cos(el), Math.sin(el), d.z / h * Math.cos(el)).clone();
+    }
+    function lcMoon() {
+      const d = skyUniforms.uMoonDir.value;
+      const h = Math.hypot(d.x, d.z) || 1;
+      const el = Math.max(0.2, Math.min(0.95, Math.asin(Math.max(-1, Math.min(1, d.y))) - 0.12));
+      return _lcD.set(d.x / h * Math.cos(el), Math.sin(el), d.z / h * Math.cos(el)).clone();
+    }
+    function lcOver(C) {
+      // Over the top between the sun and the moon, leaning to the side the shot started on
+      // (straight up would spin the camera about its own axis).
+      const s = lcSun(0.05, 0.6), m = lcMoon();
+      const side = _lcA.set(s.z - m.z, 0, m.x - s.x);
+      if (side.lengthSq() < 1e-6) side.set(0, 0, 1);
+      side.normalize();
+      if (side.dot(C.look0) < 0) side.multiplyScalar(-1);
+      return side.multiplyScalar(0.55).add(_lcB.set(0, 0.83, 0)).normalize().clone();
+    }
+    function lcHq(C) {
+      const g = house.group ? house.group.position : null;
+      const hx = g ? g.x : SPAWN_X, hz = g ? g.z : SPAWN_Z - 10;
+      const hy = (g ? g.y : sampleHeight(hx, hz)) + 3.2;
+      return _lcD.set(hx - C.pos.x, hy - C.pos.y, hz - C.pos.z).normalize().clone();
+    }
+    function startLoopCine(kind) {
+      const look0 = _lcA.copy(camLook).sub(camera.position);
+      if (look0.lengthSq() < 1e-6) look0.set(0, -0.3, 1);
+      look0.normalize();
+      const C = { kind, t0: performance.now(), look0: look0.clone(), pos: new THREE.Vector3(), done: {}, keys: null, end: 0, out: 0.7 };
+      const cur = () => C.look0;
+      if (kind === 'dusk') {
+        C.keys = [[0, cur], [0.8, () => lcSun(0.05, 0.55)], [1.9, () => lcSun(0.05, 0.55)], [2.35, () => lcOver(C)],
+          [2.95, lcMoon], [3.25, lcMoon], [3.9, () => lcHq(C)], [5.1, () => lcHq(C)]];
+        C.end = 5.1;
+      } else if (kind === 'night') {
+        C.keys = [[0, cur], [0.8, lcMoon], [1.4, lcMoon], [2.1, () => lcHq(C)], [3.3, () => lcHq(C)]];
+        C.end = 3.3;
+      } else {   // morning
+        C.keys = [[0, cur], [1.0, () => lcSun(0.06, 0.42)], [3.2, () => lcSun(0.06, 0.42)]];
+        C.end = 3.2; C.out = 1.25;
+      }
+      loopCine = C;
+      loopCineOverlay(true);
+    }
+    // Events along each shot, on real time (the loop runs these from updateLoopCine).
+    function loopCineEvents(C, t) {
+      const at = (k, s) => { if (t >= s && !C.done[k]) { C.done[k] = true; return true; } return false; };
+      if (C.kind === 'dusk') {
+        if (at('sky', 0.55)) skyTo(SKY_NIGHT_AT, 2.9);
+        if (at('rumble', 3.5)) alarmRumbleNow();
+      } else if (C.kind === 'night') {
+        if (at('home', 0.9)) { loopCineFlash('blink', 380); setTimeout(sendMarineToSpawn, 150); }
+        if (at('rumble', 1.9)) alarmRumbleNow();
+      } else {
+        if (at('sky', 0.35)) skyTo(SKY_MORNING_AT, 3.3);
+        if (at('home', 1.7)) { loopCineFlash('glare', 700); setTimeout(sendMarineToSpawn, 280); }
+      }
+    }
+    function alarmRumbleNow() {
+      // CL-29 (Jerry): the ground rumbles and the camera shakes for three seconds.
+      if (AudioSys.alarmRumble) AudioSys.alarmRumble(ALARM_RUMBLE_S);
+      alarmShakeT = ALARM_RUMBLE_S;
+      addShake(0.1);
+    }
+    function updateLoopCine() {
+      const C = loopCine;
+      if (C) {
+        if (gameOver || won || !gameStarted) { endLoopCine(); return; }
+        const t = (performance.now() - C.t0) / 1000;
+        loopCineEvents(C, t);
+        if (t >= C.end + C.out) endLoopCine();
+        return;
+      }
+      // D-34 fallback: a held night with no card up (a card that was skipped or never came)
+      // goes on to the morning by itself.
+      if (skyLoop.mode === 'hold' && phase === 'prep' && gameStarted && !gameOver && !won && !paused &&
+          !waveFinisher && !document.body.classList.contains('dawn') && !(document.getElementById('dawnCard') || {}).open) {
+        loopHoldIdle += 1 / 60;
+        if (loopHoldIdle > 1.2) loopMorning();
+      } else loopHoldIdle = 0;
+    }
+    function endLoopCine() {
+      const C = loopCine;
+      loopCine = null;
+      document.body.classList.remove('loopcine');
+      if (C && C.kind === 'morning' && skyLoop.mode !== 'free') skyLoop.mode = 'prep';
+    }
+    function loopCineCamera() {
+      const C = loopCine;
+      if (!C) return;
+      const t = (performance.now() - C.t0) / 1000;
+      const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
+      // Stand a little behind and above the marine, looking along the shot.
+      const K = C.keys;
+      let i = 0;
+      while (i < K.length - 2 && t >= K[i + 1][0]) i++;
+      const a = K[i], b = K[i + 1];
+      const u = ease((t - a[0]) / Math.max(0.001, b[0] - a[0]));
+      const dA = a[1](), dB = b[1]();
+      const dir = dA.lerp(dB, t >= b[0] && i === K.length - 2 ? 1 : u).normalize();
+      const flat = Math.hypot(dir.x, dir.z) || 1;
+      C.pos.set(player.position.x - dir.x / flat * 3.2, player.position.y + 2.1, player.position.z - dir.z / flat * 3.2);
+      const g = sampleHeight(C.pos.x, C.pos.z);
+      if (C.pos.y < g + 1.2) C.pos.y = g + 1.2;
+      _lcLook.copy(C.pos).addScaledVector(dir, 60);
+      const w = Math.min(ease(t / 0.55), 1 - ease((t - C.end) / C.out));
+      camera.position.lerp(C.pos, w);
+      camLook.lerp(_lcLook, w);
+    }
+    // Night N Complete (GP-37 wires the buttons): Next Night pulls the alarm at once;
+    // Proceed to Morning runs the sunrise shot and puts the marine back at his spawn.
+    function closeNightCard() {
+      // GP-37's buttons close the card themselves; a direct call (a key, a test) closes it here.
+      const dc = document.getElementById('dawnCard');
+      if (dc && dc.open) { try { dc.close(); } catch (_) {} document.body.classList.remove('dawn'); }
+    }
+    function loopNextNight() {
+      if (!gameStarted || gameOver || won || phase !== 'prep' || hq.seq || loopCine) return false;
+      closeNightCard();
+      if (paused) setPaused(false);
+      loopHoldIdle = 0;
+      hqStartWave();
+      return true;
+    }
+    function loopMorning() {
+      if (!gameStarted || gameOver || won || loopCine) return false;
+      closeNightCard();
+      if (paused) setPaused(false);
+      loopHoldIdle = 0;
+      if (skyLoop.mode !== 'free') skyLoop.mode = 'prep';
+      startLoopCine('morning');
+      return true;
+    }
+    window.loopNextNight = loopNextNight;
+    window.loopMorning = loopMorning;
 
     // === Bomber blast ===
     // Reuses the grenade's effects and prop/zombie damage, then does what a grenade
@@ -26557,6 +26917,12 @@
     function killZombie(z, award = true, deathInfo = null) {
       if (!z.alive) return;
       z.alive = false;
+      // GP-38 (ChatGPT's request): the last guard of a POI down is a cleared site, once per post.
+      // retirePoiGuards (the alarm) and clearZombies (resets) never come through here, so neither is a clear.
+      if (z.poiGuard && !z.poiGuard.cleared && !zombies.some((o) => o !== z && o.alive && o.poiGuard === z.poiGuard)) {
+        z.poiGuard.cleared = true;
+        publishUI('poi-cleared', { kind: z.poiGuard.kind, index: z.poiGuard.index, x: z.poiGuard.x, z: z.poiGuard.z, count: z.poiGuard.n || 0 });
+      }
       const info = deathInfo || { kind: 'generic', dir: { x: 0, z: 0 }, defense: true };
       const kind = info.kind || 'generic';
       const dx = (info.dir && info.dir.x) || 0;
@@ -26711,6 +27077,10 @@
     let wavePreview = null; // frozen WavePreview for current prep/wave day
     let burstLeft = 0;
     let ambushCd = 0;
+    // GB-53: the night's pushes and the breathers between them (see NIGHT_PLAN / NIGHT_TIER).
+    let nightPace = null;
+    const LULL_FIELD = 5;       // a breather starts its clock once the field is down to this many
+    const LULL_MAX_WAIT = 30;   // s; a camper doesn't hold the night up for ever
 
     function zombiesForDay(n) {
       // Front-loaded harder than it used to be: the economy runs on kills now, so the
@@ -27073,13 +27443,18 @@
         // old fanfare and second slow-down only play when a wave ended without one.
         if (!finisherJustEnded) { triggerSlowMo(0.7); AudioSys.dayCleared(); }
       }
+      const afterFinisher = finisherJustEnded;
       finisherJustEnded = false;
-      // CL-45: prep is daylight. After a finisher the sky is already at dawn; otherwise
-      // (a wave ended some other way) bring the morning up quickly.
+      // CL-45: prep is daylight. D-34: after a finisher the night holds until the player picks
+      // on the Night N Complete card (loopMorning / loopNextNight). A wave that ended some
+      // other way brings the morning up quickly, as before.
       if (skyLoop.mode !== 'free') {
-        skyLoop.mode = 'prep';
-        const toDawn = skyLoop.tween && Math.abs(skyLoop.tween.to - SKY_DAWN_AT) < 1e-6;
-        if (isNight && !toDawn) skyTo(SKY_DAWN_AT, 3);
+        if (afterFinisher && isNight) { skyLoop.mode = 'hold'; skyLoop.tween = null; loopHoldIdle = 0; }
+        else {
+          skyLoop.mode = 'prep';
+          const toDawn = skyLoop.tween && Math.abs(skyLoop.tween.to - SKY_DAWN_AT) < 1e-6;
+          if (isNight && !toDawn) skyTo(SKY_DAWN_AT, 3);
+        }
       }
       day += 1;
       resetCavePokeDay(day === 1);   // GB-44: day 1 is a new run
@@ -27089,18 +27464,24 @@
       bloodMoon = day >= 4 && day % 4 === 0;
       if (bloodMoon) showBanner(dwText('wave.bloodMoon'), dwText('wave.bloodMoonHelp', { day }), 4, '#ff5a44');
       waveQueue = waveComposition(day);
+      // GB-53: the night's plan (the mix, the caves, the pushes, the trick); see NIGHT_PLAN.
+      const nightPlan = nightPlanFor(day);
+      const pushSizes = (waveQueue.pushSizes || [waveQueue.length]).slice();
       // GB-14 / D-13: guardian night replaces colossus + surround; Blood Moon still stacks.
       guardianNightActive = isGuardianNight(day);
       guardianCaveIndex = guardianNightActive ? findGuardianCaveIndex() : -1;
-      if (guardianNightActive) {
-        waveQueue = trimGuardianFodder(waveQueue);
-        waveQueue.push('guardian');
-        waveSurround = false;
-      } else {
-        // A colossus fronts every fifth day (deferred on guardian nights).
-        if (day % 5 === 0) waveQueue.push('colossus');
-        waveSurround = day >= 6 && day % 3 === 0 && day % 5 !== 0;
+      // A colossus fronts every fifth day (deferred on guardian nights). GB-53: the boss walks out
+      // at the head of the last push, a few bodies in, instead of trailing the whole night.
+      const bossKey = guardianNightActive ? 'guardian' : (day % 5 === 0 ? 'colossus' : null);
+      if (bossKey) {
+        const lastN = pushSizes[pushSizes.length - 1];
+        const at = Math.min(waveQueue.length, waveQueue.length - lastN + Math.min(6, Math.floor(lastN * 0.1)));
+        waveQueue.splice(at, 0, bossKey);
+        pushSizes[pushSizes.length - 1] += 1;
       }
+      waveSurround = !guardianNightActive && nightPlan.caves === 'all';
+      const nightCaves = guardianNightActive ? 1 : (nightPlan.caves === 'all' ? 99 : (nightPlan.caves | 0) || 1);
+      nightPace = { day, ...nightPaceFor(nightPlan), sizes: pushSizes, push: 0, left: pushSizes[0], inLull: false, lullT: 0, lullWait: 0 };
       waveTotal = waveQueue.length;
       waveSpawned = 0;
       zombiesRemaining = waveTotal;
@@ -27123,7 +27504,7 @@
           const first = POI.caves[firstIdx];
           assaultCaveIndices.push(firstIdx);
           waveBearings.push(first.ang);
-          if (day >= 4 && day % 2 === 0 && POI.caves.length > 1) {
+          if (nightCaves >= 2 && POI.caves.length > 1) {
             // A second mouth, from the far side of the compass when there is one.
             const across = [];
             for (let i = 0; i < POI.caves.length; i++) {
@@ -27136,6 +27517,20 @@
             const secondIdx = pool[(Math.random() * pool.length) | 0];
             assaultCaveIndices.push(secondIdx);
             waveBearings.push(POI.caves[secondIdx].ang);
+          }
+          if (nightCaves >= 3 && POI.caves.length > 2) {
+            // GB-53: a third mouth, the one furthest round the compass from the other two.
+            let best = -1, bestD = -1;
+            for (let i = 0; i < POI.caves.length; i++) {
+              if (assaultCaveIndices.includes(i)) continue;
+              let m = Infinity;
+              for (const j of assaultCaveIndices) {
+                const a = POI.caves[i].ang - POI.caves[j].ang;
+                m = Math.min(m, Math.abs(Math.atan2(Math.sin(a), Math.cos(a))));
+              }
+              if (m > bestD) { bestD = m; best = i; }
+            }
+            if (best >= 0) { assaultCaveIndices.push(best); waveBearings.push(POI.caves[best].ang); }
           }
         } else {
           waveBearings.push(Math.random() * Math.PI * 2);
@@ -27156,6 +27551,12 @@
         if (day === 1 && !guardianNightActive && waveQueue.length) {
           const gn = Math.min(waveQueue.length, DAY1_GROUND_MIN + ((Math.random() * 2) | 0));
           for (let g = 0; g < gn; g++) groundSet.add(Math.min(waveQueue.length - 1, Math.round(g * waveQueue.length / gn)));
+        } else if ((nightPlan.ground | 0) > 0 && !guardianNightActive) {
+          // GB-53: the treeline nights (7, 14, 19, 20): some of the fodder claws up instead.
+          const sh = [];
+          for (let i = 0; i < waveQueue.length; i++) if (waveQueue[i] === 'shambler') sh.push(i);
+          const gn = Math.min(sh.length, nightPlan.ground | 0);
+          for (let g = 0; g < gn; g++) groundSet.add(sh[Math.min(sh.length - 1, Math.floor((g + 0.5) * sh.length / gn))]);
         }
         let rr = 0;
         for (let i = 0; i < waveQueue.length; i++) {
@@ -27212,7 +27613,13 @@
           queue: waveQueue.slice(),
           caveByIndex: planCaves.map((c) => (c === GROUND_RISE ? -1 : c)),
           groundByIndex: planCaves.map((c) => c === GROUND_RISE),
-          groundRisers: groundSet.size
+          groundRisers: groundSet.size,
+          // GB-53: what kind of night it is (for the briefing, the music and the money).
+          night: {
+            act: nightPlan.act, rest: !!nightPlan.rest, trick: nightPlan.trick, label: nightPlan.label,
+            caves: guardianNightActive ? 'chalk' : nightPlan.caves, pushes: pushSizes.slice(), lull: nightPace.lull,
+            ground: groundSet.size
+          }
         };
       }
 
@@ -27253,7 +27660,8 @@
         waveBearings: waveBearings.slice(),
         spawnCd,
         burstLeft,
-        ambushCd
+        ambushCd,
+        pace: nightPace ? { push: nightPace.push, pushes: nightPace.sizes.length, left: nightPace.left, inLull: nightPace.inLull, lullT: nightPace.lullT, lullWait: nightPace.lullWait } : null
       };
     }
     function getActiveCaveIndices() {
@@ -27485,6 +27893,23 @@
       if (waveSpawned >= waveTotal) return;
       spawnCd -= dt;
       ambushCd -= dt;
+      // GB-53: a breather between pushes. Its clock starts once the field is down to LULL_FIELD
+      // (or LULL_MAX_WAIT has gone by), then the next push comes.
+      if (nightPace && nightPace.inLull) {
+        nightPace.lullWait += dt;
+        if (nightPace.lullWait < LULL_MAX_WAIT) {
+          let aliveN = 0;
+          for (const o of zombies) if (o.alive && !o.dying) aliveN += 1;
+          if (aliveN > LULL_FIELD) return;
+          nightPace.lullT -= dt;
+          if (nightPace.lullT > 0) return;
+        }
+        nightPace.inLull = false;
+        nightPace.push = Math.min(nightPace.sizes.length - 1, nightPace.push + 1);
+        nightPace.left = nightPace.sizes[nightPace.push];
+        burstLeft = 0;
+        spawnCd = 0;
+      }
       if (spawnCd > 0) return;
 
       // Occasional ambush out of the cave mouth nearest the player (day 2+)
@@ -27499,9 +27924,17 @@
         // times the bodies now, and at the old trickle the field never filled and a
         // night would have taken ten times as long to clear. The MAX_ZOMBIES cap and
         // the field-full backoff below are what actually hold the line.
-        spawnCd = 0.5 + Math.random() * 0.6;
-        burstLeft = 5 + ((Math.random() * 5) | 0);
-        if (day >= 4) burstLeft += 2;
+        if (nightPace) {
+          // GB-53: the night's own pacing (NIGHT_TIER); the last push is the peak, a little thicker.
+          const g = nightPace.gap, b = nightPace.burst;
+          spawnCd = g[0] + Math.random() * (g[1] - g[0]);
+          burstLeft = b[0] + ((Math.random() * (b[1] - b[0] + 1)) | 0);
+          if (nightPace.sizes.length > 1 && nightPace.push === nightPace.sizes.length - 1) burstLeft += 2;
+        } else {
+          spawnCd = 0.5 + Math.random() * 0.6;
+          burstLeft = 5 + ((Math.random() * 5) | 0);
+          if (day >= 4) burstLeft += 2;
+        }
         return;
       }
 
@@ -27609,6 +28042,10 @@
         if (waveQueue.length) {
           waveQueue.shift();
           if (caveByIndex.length) caveByIndex.shift();
+          // GB-53: the push is out; breathe before the next one.
+          if (nightPace && --nightPace.left <= 0 && nightPace.push < nightPace.sizes.length - 1) {
+            nightPace.inLull = true; nightPace.lullT = nightPace.lull; nightPace.lullWait = 0; burstLeft = 0;
+          }
         }
       } else {
         // Field full — come straight back rather than burning the burst on nothing.
@@ -28070,6 +28507,22 @@
     let playerHp = PLAYER_MAX_HP;
     let hurtFlash = 0;
     const hitReaction = { time: 0, duration: 0.44, front: 1, side: 0, strength: 0 };
+    // GB-50: a hit lands. The marine slides back along the blow (kvx/kvz, bleeding off at
+    // HIT_KNOCK_DECAY per second: about 0.35 m for a shambler, 0.9 m for a brute), stumbles for
+    // a beat (walk slowed, aim thrown off by aimOff radians, a camera jolt), and a big hit
+    // (a brute, a boss, or 22+) puts him on one knee. Nothing stops him: he can always move
+    // and shoot, only slower, and all of it is over inside HIT_AIM_S.
+    const HIT_STUMBLE_S = 0.32, HIT_AIM_S = 0.4, HIT_KNEE_S = 0.55, HIT_KNEE_CD = 3, HIT_KNEE_DMG = 22, HIT_KNOCK_DECAY = 7;
+    const hitStumble = { kvx: 0, kvz: 0, stumbleT: 0, aimOff: 0, aimT: 0, jx: 0, jz: 0, jolt: 0, kneeT: 0, kneeCd: 0, hits: 0, knees: 0 };
+    function hitStumbleSpeedK() {
+      const s = Math.max(0, hitStumble.stumbleT / HIT_STUMBLE_S), k = Math.max(0, hitStumble.kneeT / HIT_KNEE_S);
+      return Math.min(1 - 0.3 * s, 1 - 0.55 * Math.sin(Math.min(1, k) * Math.PI));
+    }
+    function resetHitStumble() {
+      hitStumble.kvx = hitStumble.kvz = 0;
+      hitStumble.stumbleT = hitStumble.aimT = hitStumble.kneeT = hitStumble.kneeCd = 0;
+      hitStumble.aimOff = hitStumble.jolt = 0;
+    }
 
     // === Ways to die ==============================================================
     // Every damage source names itself, so the death screen can say exactly what got
@@ -28152,9 +28605,20 @@
       hitReaction.side = dx * Math.cos(aimYaw) - dz * Math.sin(aimYaw);
       hitReaction.strength = Math.min(1.6, 0.55 + amount / 34) * (soaked > toHp ? 0.65 : 1);
       if (attackerPos && grounded) {
-        const shove = Math.min(2.2, 0.65 + amount * 0.04);
-        velX -= dx * shove;
-        velZ -= dz * shove;
+        // GB-50 (see hitStumble): knocked back along the blow, a stumble, maybe a knee.
+        const heavy = !!(attacker && (attacker.brute || attacker.tactics === 'tank' || attacker.tactics === 'boss'));
+        const soakK = soaked > toHp ? 0.7 : 1;
+        const kv = Math.min(7, (1.6 + amount * 0.14) * (heavy ? 1.6 : 1)) * soakK;
+        hitStumble.kvx = -dx * kv; hitStumble.kvz = -dz * kv;
+        hitStumble.stumbleT = HIT_STUMBLE_S;
+        hitStumble.aimOff = (hitReaction.side >= 0 ? -1 : 1) * Math.min(0.14, 0.04 + amount * 0.004) * soakK;
+        hitStumble.aimT = HIT_AIM_S;
+        hitStumble.jx = -dx; hitStumble.jz = -dz;
+        hitStumble.jolt = Math.min(0.55, 0.18 + amount * 0.014) * soakK;
+        if ((heavy || amount >= HIT_KNEE_DMG) && toHp > 0 && hitStumble.kneeCd <= 0) {
+          hitStumble.kneeT = HIT_KNEE_S; hitStumble.kneeCd = HIT_KNEE_CD; hitStumble.knees++;
+        }
+        hitStumble.hits++;
       }
       addShake(Math.min(0.5, 0.1 + amount * 0.012));
       if (toHp > 0.5) spawnBlood(player.position.x, player.position.y + getStanceEyeY() * 0.7, player.position.z, 0, 0, 5);
@@ -29406,7 +29870,7 @@
       for (const m of root.userData.mats || []) m.dispose();
       for (const m of root.userData.extraMats || []) m.dispose();
     }
-    const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG'];
+    const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG', 'torsoG', 'headG'];   // GB-54: torso and head react too
     function beginScriptedKill(kind, cave, opts) {
       if (scriptedKill || cine || gameOver || won || !gameStarted) return;
       // GB-35: the chase hands its guardian over on the catch; any other grab (walking
@@ -29423,6 +29887,8 @@
       rollT = 0;
       // He may arrive mid-swim, pitched flat by the swimming pose; put him back on his
       // feet once so the grab starts from a clean stance, then holster the weapon.
+      // GB-54: the joints as they were on screen, so the grab eases out of them (see rigDamp).
+      const rdPre = SK_PARTS.filter((k) => marine.userData[k]).map((k) => [marine.userData[k], marine.userData[k].quaternion.clone()]).concat([[marine, marine.quaternion.clone()]]);
       updateMarinePose(0.016, false, false, false);
       weaponMount.visible = false;
       lastDeathCause = kind === 'cave' ? 'caveguard' : 'tentacles';
@@ -29430,12 +29896,13 @@
       document.body.classList.add('cine', 'cinebars');
       syncReticleVisibility();
       const ud = marine.userData;
-      const saved = new Map(SK_PARTS.map((k) => [k, ud[k].quaternion.clone()]));
+      const saved = new Map(SK_PARTS.filter((k) => ud[k]).map((k) => [k, ud[k].quaternion.clone()]));
       const sk = {
         kind, t: 0, cave, saved,
         p0: player.position.clone(),
         cam: camera.position.clone(), look: player.position.clone(),
-        cues: {}
+        cues: {},
+        yaw0: player.rotation.y   // GB-54: he turns from where he was facing, not in one frame
       };
       if (kind === 'cave') {
         if (cave.eyeRig) cave.eyeRig.visible = false;
@@ -29486,11 +29953,89 @@
         sk.out = { x: ox, z: oz };
       }
       scriptedKill = sk;
+      // GB-54: the rig eases out of whatever he was doing into the grab.
+      for (const [o, q] of rdPre) { const keep = o.quaternion.clone(); o.quaternion.copy(q); rigDamp(o, 0, 0, true); o.quaternion.copy(keep); }
       updateScriptedKillRig(0);
     }
     // Eased phase progress: 0 before t0, 1 after t1, smooth between.
     function skPh(t, t0, t1) { const u = Math.min(1, Math.max(0, (t - t0) / (t1 - t0))); return u * u * (3 - 2 * u); }
     function skCue(sk, name, at, fn) { if (sk.t >= at && !sk.cues[name]) { sk.cues[name] = true; fn(); } }
+    // GB-54: weight for the scripted rigs. Every beat poses its joints straight off its own
+    // timeline, so wherever two beats met (the chase handing over to the drag, the kick going
+    // limp, a tentacle's sway handing over to its reach) the pose jumped in one frame: up to
+    // 1.35 rad at the snatch's limp. rigDamp runs after the pose is written: each joint eases from
+    // where it was last frame toward the new pose (time constant 1/rate s). The heavy parts (a
+    // guardian's torso, a tentacle's root) get low rates and lag, and the tips of the tentacles lag
+    // more than their roots, which is the follow-through. reset takes the pose as it is (a cut
+    // under the black, or the first frame of a rig).
+    const _rdQ = new THREE.Quaternion();
+    function rigDamp(obj, dt, rate, reset) {
+      if (!obj) return;
+      const ud = obj.userData, q = obj.quaternion;
+      if (!ud._rdq || reset) { (ud._rdq || (ud._rdq = new THREE.Quaternion())).copy(q); return; }
+      _rdQ.copy(q);
+      // Shortest way round (q and -q are the same turn).
+      if (ud._rdq.x * _rdQ.x + ud._rdq.y * _rdQ.y + ud._rdq.z * _rdQ.z + ud._rdq.w * _rdQ.w < 0) _rdQ.set(-_rdQ.x, -_rdQ.y, -_rdQ.z, -_rdQ.w);
+      let a = dt > 0 ? 1 - Math.exp(-dt * rate) : 0;
+      // and never faster than RIG_MAX_TURN, so a big change of pose (running into the grab)
+      // is a quick swing, not a snap in the first frame.
+      const ang = 2 * Math.acos(Math.min(1, Math.abs(ud._rdq.x * _rdQ.x + ud._rdq.y * _rdQ.y + ud._rdq.z * _rdQ.z + ud._rdq.w * _rdQ.w)));
+      if (ang * a > RIG_MAX_TURN * dt) a = RIG_MAX_TURN * dt / ang;
+      q.copy(ud._rdq).slerp(_rdQ, a);
+      ud._rdq.copy(q);
+    }
+    const RIG_RATE = { arm: 11, leg: 15, torso: 7, head: 9, jaw: 16, claw: 14 };
+    const RIG_MAX_TURN = 12;   // rad/s, 0.2 rad a frame at 60 fps
+    function dampGuardian(g, dt, reset, legRate) {
+      if (!g) return;
+      const u = g.userData;
+      rigDamp(u.armLG, dt, RIG_RATE.arm, reset); rigDamp(u.armRG, dt, RIG_RATE.arm, reset);
+      rigDamp(u.legLG, dt, legRate || RIG_RATE.leg, reset); rigDamp(u.legRG, dt, legRate || RIG_RATE.leg, reset);
+      rigDamp(u.torso, dt, RIG_RATE.torso, reset); rigDamp(u.head, dt, RIG_RATE.head, reset); rigDamp(u.jaw, dt, RIG_RATE.jaw, reset);
+      for (const c of u.claws || []) rigDamp(c, dt, RIG_RATE.claw, reset);
+    }
+    function dampTentacle(arm, dt, reset) {
+      rigDamp(arm, dt, 10, reset);
+      const segs = arm.userData.segs, N = segs.length;
+      for (let i = 1; i < N; i++) rigDamp(segs[i], dt, 24 - 13 * i / N, reset);   // the tip trails the root
+    }
+    function dampScriptedRigs(sk, dt, cut) {
+      const ud = marine.userData;
+      for (const k of SK_PARTS) if (ud[k]) rigDamp(ud[k], dt, (k === 'torsoG' || k === 'headG') ? 10 : 12, cut);
+      rigDamp(marine, dt, 12, cut);
+      if (sk.guardian) dampGuardian(sk.guardian, dt, cut);
+      if (sk.ring) for (const arm of sk.ring.userData.arms) dampTentacle(arm, dt, cut || !arm.userData._rdq);
+    }
+    // The jolt of being taken: up fast, gone in half a second.
+    function skYank(tau) { return tau <= 0 ? 0 : Math.min(1, tau * 12) * Math.exp(-tau * 5); }
+    function skAngleTo(from, to, u) { let d = to - from; d = Math.atan2(Math.sin(d), Math.cos(d)); return from + d * u; }
+    // GB-54: his body in a grab, instead of both arms and legs windmilling at 3 Hz. The leg it has
+    // is held straight out toward it. The other leg kicks at it, the arms claw back at the dirt (or
+    // thrash for the surface in the water), and his head comes up to look at what has him. yank
+    // whips him toward the pull. fight 1 is fighting, 0 is limp, and it blends between the two.
+    function poseMarineGrabbed(t, fight, side, yank, water) {
+      const ud = marine.userData, f = Math.max(0, Math.min(1, fight));
+      const H = side < 0 ? 'L' : 'R', Fr = side < 0 ? 'R' : 'L', hs = side < 0 ? -1 : 1;
+      const kick = Math.sin(t * 9.5), kick2 = Math.sin(t * 9.5 + 1.9), claw = Math.sin(t * 6.2);
+      const set = (j, x, y, z, lx, ly, lz) => { if (j) j.rotation.set(lx + (x - lx) * f, ly + (y - ly) * f, lz + (z - lz) * f); };
+      const setX = (j, x, lx) => { if (j) j.rotation.x = lx + (x - lx) * f; };
+      // The held leg: straight, pulled long. Limp, it just trails.
+      set(ud['leg' + H + 'G'], 0.08 - yank * 0.3, 0, hs * 0.1, 0.16, 0, hs * 0.12);
+      setX(ud['knee' + H + 'G'], 0.06, 0.1);
+      // The free leg drives at it.
+      set(ud['leg' + Fr + 'G'], -0.25 - 0.55 * kick, 0, -hs * 0.2, -0.12, 0, -hs * 0.15);
+      setX(ud['knee' + Fr + 'G'], 0.75 + 0.55 * kick2, 0.42);
+      // Arms: on his back they reach past his head and claw at the ground, one then the other;
+      // in the water they reach up out of it.
+      const up = water ? 0.5 : 0;
+      set(ud.armLG, -0.75 - up - 0.75 * (0.5 + 0.5 * claw), 0, -0.95 + 0.3 * claw - yank * 0.4, 0.35, 0, -0.55);
+      set(ud.armRG, -0.75 - up - 0.75 * (0.5 - 0.5 * claw), 0, 0.95 + 0.3 * claw + yank * 0.4, 0.25, 0, 0.6);
+      set(ud.elbowLG, -0.35 - 0.6 * (0.5 - 0.5 * claw), 0, 0, -0.35, 0, 0);
+      set(ud.elbowRG, -0.35 - 0.6 * (0.5 + 0.5 * claw), 0, 0, -0.3, 0, 0);
+      // He lifts his head to look at it; the yank snaps it back.
+      set(ud.torsoG, 0.14 + 0.08 * kick2 - yank * 0.3, 0, 0, 0, 0, 0);
+      set(ud.headG, 0.32 - yank * 0.45, 0.1 * Math.sin(t * 3.1), 0, 0.12, 0, 0.25);
+    }
     function poseMarine(flail) {
       // flail > 0: kicking against it; flail = 0: limp.
       const ud = marine.userData, t = performance.now() / 1000;
@@ -29538,6 +30083,11 @@
       if (cineFadeEl) cineFadeEl.style.opacity = fade.toFixed(3);
       if (sk.kind === 'cave') updateCaveKill(sk, t);
       else updateTentacleKill(sk, t);
+      // GB-54: ease every joint toward the pose just written (see rigDamp). The cut under the black
+      // (t 4.4) takes the new scene's pose as it is.
+      const cut = t >= 4.4 && !sk.rdCut;
+      if (cut) sk.rdCut = true;
+      if (scriptedKill === sk) dampScriptedRigs(sk, dt, cut);
       sk.cam.y = Math.max(sk.cam.y, sampleHeight(sk.cam.x, sk.cam.z) + 0.35);
     }
     // The cave. Beats: an arm comes out of the black on the side he walked in on and takes
@@ -29585,10 +30135,10 @@
         // He walked in facing the dark, so he faces the dark. Tipping him backwards from
         // there is what puts his boots toward the cave and his head trailing out of it —
         // dragged feet-first, which is the only way a grab on the ankle can read.
-        player.rotation.y = c.yaw;
+        player.rotation.y = skAngleTo(sk.yaw0, c.yaw, skPh(t, 0, 0.45));   // GB-54
         marine.rotation.set(-drop * (Math.PI / 2 - 0.22), 0, Math.sin(t * 9) * 0.16 * (1 - gone) * drop);
         marine.position.y = -ROLL_PIVOT_Y + drop * 0.34;
-        poseMarine(gone > 0.7 ? 0 : 1);
+        poseMarineGrabbed(t, 1 - skPh(t, 2.3, 3.1), sk.side, skYank(t - 0.5), false);   // GB-54: was poseMarine(1), then limp in one frame
         // Both hands take the leg: the near one first, the second once it has stepped out.
         const ankle = _ckV2.set(
           boots.x + sk.fx * 0.34 * drop, boots.y + (1 - drop) * 0.15 + 0.12, boots.z + sk.fz * 0.34 * drop);
@@ -29744,9 +30294,11 @@
         player.position.set(px, py, pz);
         // Hauled by a leg, so he tips head-back and rolls: the body is dragged, not
         // carried. He fights it until he is under.
-        player.rotation.y = Math.atan2(-sk.inDir.x, -sk.inDir.z);
+        // GB-54: he was turned to face the camera from the first frame (a 180 degree flip on the
+        // grab); now the yank is what turns him over.
+        player.rotation.y = skAngleTo(sk.yaw0, Math.atan2(-sk.inDir.x, -sk.inDir.z), yank);
         marine.rotation.set(-yank * 0.5 - sink * 0.75, 0, yank * 0.3 + Math.sin(t * 7) * 0.12 * (1 - sink));
-        poseMarine(sink < 0.85 ? 1 : 0);
+        poseMarineGrabbed(t, 1 - skPh(t, 2.3, 3.2), 1, skYank(t - 0.95), true);
         // The ankle it has hold of, in world space. Two deliberate offsets: it sits on
         // the PIT side of him (the arms come from the pit, so a target past him would
         // have them reaching across his body), and it is pinned to the waterline — his
@@ -29760,31 +30312,34 @@
           arm.visible = t >= 0.05;
           const holder = sk.grabArms.indexOf(arm) >= 0;
           const lead = holder ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(arm.userData.phase));
-          // Out of the abyss, and back down into it as it hauls him under.
-          arm.position.y = arm.userData.restY + breach * (8.6 * lead) - sink * 7.4;
-          if (holder && reach > 0.02) {
-            // Second arm takes the other leg a beat later, and higher up.
+          // Out of the abyss, and back down into it as it hauls him under. GB-54: they break the
+          // water one after another, and overshoot and settle back (easeOutBack) like something
+          // with weight; the ones holding him come first.
+          const bu = Math.min(1, Math.max(0, (t - (holder ? 0 : 0.07 * (i % 4))) / 0.55));
+          const bo = bu >= 1 ? 1 : 1 + 2.4 * Math.pow(bu - 1, 3) + 1.4 * Math.pow(bu - 1, 2);
+          arm.position.y = arm.userData.restY + bo * (8.6 * lead) - sink * 7.4;
+          const idleCurl = 0.1 + breach * 0.14 + sink * 0.1;
+          const w = !holder || reach <= 0.02 ? 0 : (arm === sk.grabArms[0] ? reach : skPh(t, 0.75, 1.3));
+          if (w > 0.02) {
             // Second arm takes the other leg: a little further round him and higher.
             const mine = arm === sk.grabArms[0] ? sk.ankle : _tentGrab2.set(
               sk.ankle.x + sk.inDir.z * 0.4, sk.ankle.y + 0.22, sk.ankle.z - sk.inDir.x * 0.4);
-            const w = arm === sk.grabArms[0] ? reach : skPh(t, 0.75, 1.3);
-            if (w > 0.02) {
-              // Blend out of its idle sway into the reach so the arm does not snap onto him.
-              swayTentacle(arm, t, 0.12);
-              if (w > 0.06) {
-                // Overshoot the target as it takes hold: aiming exactly at the leg leaves
-                // the tip touching it, while reaching past and curling hard wraps it.
-                const hold = Math.min(1, yank * 1.4 + haul);
-                _tentPast.copy(mine);
-                _tentPast.x += sk.inDir.x * 0.45 * hold;
-                _tentPast.z += sk.inDir.z * 0.45 * hold;
-                _tentPast.y += 0.12 * hold;
-                aimTentacle(arm, _tentPast, 0.55 + hold * 1.9, Math.sin(t * 2 + arm.userData.phase) * 0.05);
-              }
-              if (w < 1 && Math.random() < 0.5) spawnSplash(mine.x, lvl, mine.z, 3, 0.9);
-            }
+            // GB-54: a real blend out of the sway into the reach (it used to jump to the full reach
+            // at w 0.06, and the second arm froze until its own reach began).
+            swayTentacle(arm, t, idleCurl);
+            tentSnap(arm);
+            // Overshoot the target as it takes hold: aiming exactly at the leg leaves the tip
+            // touching it, while reaching past and curling hard wraps it.
+            const hold = Math.min(1, yank * 1.4 + haul);
+            _tentPast.copy(mine);
+            _tentPast.x += sk.inDir.x * 0.45 * hold;
+            _tentPast.z += sk.inDir.z * 0.45 * hold;
+            _tentPast.y += 0.12 * hold;
+            aimTentacle(arm, _tentPast, 0.55 + hold * 1.9, Math.sin(t * 2 + arm.userData.phase) * 0.05);
+            tentBlend(arm, w);
+            if (w < 1 && Math.random() < 0.5) spawnSplash(mine.x, lvl, mine.z, 3, 0.9);
           } else {
-            swayTentacle(arm, t, 0.1 + breach * 0.14 + sink * 0.1);
+            swayTentacle(arm, t, idleCurl);
           }
           if (breach > 0.05 && breach < 1 && Math.random() < 0.55) spawnSplash(arm.position.x, lvl, arm.position.z, 3, 0.8);
         }
@@ -29834,6 +30389,22 @@
       }
     }
     const _tentGrab2 = new THREE.Vector3(), _tentPast = new THREE.Vector3();
+    // GB-54: hold an arm's sway pose while its reach is solved, then blend the two.
+    const _tentSway = [], _tentTmp = new THREE.Quaternion();
+    function tentSnap(arm) {
+      const segs = arm.userData.segs;
+      for (let i = 0; i <= segs.length; i++) { const q = i === 0 ? arm.quaternion : segs[i - 1].quaternion; (_tentSway[i] || (_tentSway[i] = new THREE.Quaternion())).copy(q); }
+    }
+    function tentBlend(arm, w) {
+      if (w >= 1) return;
+      const segs = arm.userData.segs;
+      for (let i = 0; i <= segs.length; i++) {
+        const q = i === 0 ? arm.quaternion : segs[i - 1].quaternion, s = _tentSway[i];
+        _tentTmp.copy(q);
+        if (s.x * _tentTmp.x + s.y * _tentTmp.y + s.z * _tentTmp.z + s.w * _tentTmp.w < 0) _tentTmp.set(-_tentTmp.x, -_tentTmp.y, -_tentTmp.z, -_tentTmp.w);
+        q.copy(s).slerp(_tentTmp, w);
+      }
+    }
     function scriptedKillCamera() {
       if (!scriptedKill) return false;
       camera.position.copy(scriptedKill.cam);
@@ -29845,7 +30416,7 @@
       if (!sk) return null;
       scriptedKill = null;
       const ud = marine.userData;
-      for (const k of SK_PARTS) ud[k].quaternion.copy(sk.saved.get(k));
+      for (const k of SK_PARTS) if (ud[k] && sk.saved.has(k)) ud[k].quaternion.copy(sk.saved.get(k));
       marine.rotation.set(0, 0, 0);
       marine.position.y = -ROLL_PIVOT_Y;
       // The remains props stood in for him while the scene played; the burial cine hides
@@ -30246,7 +30817,20 @@
       for (const claw of gud.claws || []) claw.rotation.x = -0.35;
       if (gud.torso) gud.torso.rotation.x = 0.38 * run;
       if (gud.jaw) gud.jaw.rotation.x = 0.35 + Math.abs(Math.sin(ch.t * 9)) * 0.35;
-      if (going && Math.random() < 0.5) spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 2);
+      // GB-54: weight in the run. Each footfall throws up dirt and, close by, shakes the camera, and
+      // the body drops onto every stride instead of gliding. The arms and torso are damped (legs
+      // barely: at this speed a stride is a blur).
+      if (going) {
+        const s = Math.sin(ph);
+        if (ch.lastStride !== undefined && (s >= 0) !== (ch.lastStride >= 0)) {
+          spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 4);
+          addShake(0.16 * Math.max(0, 1 - d / 22));
+        }
+        ch.lastStride = s;
+        g.position.y += Math.abs(Math.cos(ph)) * 0.09;
+        if (Math.random() < 0.25) spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 1);
+      }
+      dampGuardian(g, dt, false, 60);
       // Contact: a hand on the leg. Up a tower or on a roof only buys him the few seconds
       // before CAVE_CHASE_MAX_T; it is immortal and it does not give up.
       const dy = Math.abs(player.position.y - g.position.y);
@@ -30265,7 +30849,7 @@
       const ch = caveChase;
       if (!ch) return null;
       return {
-        caveIndex: ch.caveIndex, t: ch.t, speed: ch.speed, playerRun: PHYS.run,
+        caveIndex: ch.caveIndex, t: ch.t, speed: ch.speed, playerRun: PHYS.run, g: ch.g,
         x: ch.g.position.x, z: ch.g.position.z, ran: ch.ran, smashed: ch.smashed, steered: ch.steered,
         dist: Math.hypot(player.position.x - ch.g.position.x, player.position.z - ch.g.position.z)
       };
@@ -30336,10 +30920,10 @@
       // The marine: on his back, boots first, the way the snatch lays him out.
       player.position.copy(boots);
       player.position.y -= inP * 0.6;
-      player.rotation.y = Math.atan2(-hx, -hz);
+      player.rotation.y = skAngleTo(sk.yaw0, Math.atan2(-hx, -hz), grab);   // GB-54
       marine.rotation.set(-grab * (Math.PI / 2 - 0.22), 0, Math.sin(clock * 9) * 0.16 * grab);
       marine.position.y = -ROLL_PIVOT_Y + grab * 0.34;
-      poseMarine(1);
+      poseMarineGrabbed(clock, 1 - inP, sk.side, skYank(clock), false);   // GB-54
       const ankle = _cdAnkle.set(boots.x - hx * 0.34 * grab, boots.y + (1 - grab) * 0.15 + 0.12, boots.z - hz * 0.34 * grab);
       caveArmAim(g, sk.side < 0 ? gud.armLG : gud.armRG, ankle, 1, 0);
       const other = sk.side < 0 ? gud.armRG : gud.armLG;
@@ -30348,8 +30932,9 @@
       for (const claw of gud.claws || []) claw.rotation.x = -1.0;
       if (gud.legLG) gud.legLG.rotation.x = stride * 0.6;
       if (gud.legRG) gud.legRG.rotation.x = -stride * 0.6;
-      if (gud.torso) gud.torso.rotation.x = 0.35 * grab;
-      if (gud.head) gud.head.rotation.x = -0.1;
+      // GB-54: it leans into each heave, head down, pulling.
+      if (gud.torso) gud.torso.rotation.x = 0.35 * grab + 0.1 * Math.abs(stride);
+      if (gud.head) gud.head.rotation.x = -0.1 + 0.12 * grab;
       if (gud.jaw) gud.jaw.rotation.x = 0.2 + Math.abs(Math.sin(clock * 3.2)) * 0.5;
       // Boots ploughing the dirt, the blood going with him.
       if (hu > 0.02 && hu < 1) {
@@ -31016,6 +31601,7 @@
         const fuel = Math.max(0, Math.ceil(sawFuel));
         if (ammoCountEl) ammoCountEl.textContent = fuel + 's';
         if (ammoDetailEl) ammoDetailEl.textContent = 'Gas ' + fuel + ' / ' + Math.round(sawFuelMax()) + (running ? ' · Running' : (fuel <= 0 ? ' · EMPTY' : ''));
+        if (ammoDetailEl && (sawOverheat || sawHeat > 0.05)) ammoDetailEl.textContent += sawOverheat ? ' \u00b7 OVERHEAT' : ' \u00b7 Heat ' + Math.round(sawHeat * 100) + '%';   // GB-52
         if (fuel <= 0) ammoEl.classList.add('empty'); else ammoEl.classList.remove('empty');
       } else {
         // Loaded / reserve. The reserve is what the kiosk sells; the magazine is what
@@ -31403,6 +31989,9 @@
 
     function updateMouseAim(dt) {
       if (!pointerOnCanvas) return;
+      // CL-50 (Jerry): while a cinematic has the camera, the cursor's ground point swings with
+      // it; the marine keeps the facing he had (no 360 on the last kill).
+      if (waveFinisher || loopCine) return;
       // Keep the last sight line while lowering. Raycasting through a camera still
       // inside its zoom transition otherwise swings the rifle and camera together.
       if (!sniperScopingNow && scopeAmt > 0.002) return;
@@ -31429,6 +32018,14 @@
       else if (groundT === Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, AIM_SKY_DIST);
       aimTarget.copy(aimHit);
       updateShotLos(zt !== Infinity);
+      // GB-50: a stumble throws the aim off a little, easing back over HIT_AIM_S.
+      if (hitStumble.aimT > 0 && hitStumble.aimOff) {
+        const off = hitStumble.aimOff * Math.pow(hitStumble.aimT / HIT_AIM_S, 2);
+        const ox = aimTarget.x - player.position.x, oz = aimTarget.z - player.position.z;
+        const c = Math.cos(off), s = Math.sin(off);
+        aimTarget.x = player.position.x + ox * c + oz * s;
+        aimTarget.z = player.position.z - ox * s + oz * c;
+      }
       const dx = aimTarget.x - player.position.x;
       const dz = aimTarget.z - player.position.z;
       if (dx * dx + dz * dz < 0.04) return;
@@ -32009,6 +32606,7 @@
       const arc = st.arc != null ? st.arc : 0.4;
       const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
       let hitSomething = false;
+      const sawMarks = [];
       for (const z of zombies) {
         if (!z.alive) continue;
         const dx = z.mesh.position.x - player.position.x;
@@ -32016,12 +32614,16 @@
         const d = Math.hypot(dx, dz);
         if (d < reach + z.radius) {
           const dot = (dx * fx + dz * fz) / (d || 1);
-          if (dot > arc) {
-            damageZombie(z, st.damage * dmgMult(), { kind: 'chainsaw', dir: { x: fx, z: fz } });
-            hitSomething = true;
-          }
+          if (dot > arc) sawMarks.push({ z, d });
         }
       }
+      // GB-52: at most SAW_MAX_BODIES a tick, nearest first, each scaled by its size.
+      sawMarks.sort((a, b) => a.d - b.d);
+      for (let i = 0; i < sawMarks.length && i < SAW_MAX_BODIES; i++) {
+        damageZombie(sawMarks[i].z, st.damage * dmgMult() * meleeSizeMul(sawMarks[i].z), { kind: 'chainsaw', dir: { x: fx, z: fz } });
+        hitSomething = true;
+      }
+      if (sawMarks.length) sawBiteT = 0.3;
       for (const t of trees) {
         if ((!t.alive && !t.stump) || t.falling) continue;
         const dx = t.x - player.position.x;
@@ -32773,6 +33375,13 @@
 
     function tryFire(dt) {
       sprayHeat = Math.max(0, sprayHeat - dt * (fireHeld ? 2.4 : 9));
+      // GB-52: the saw cools whenever it is not running, whatever is in your hands.
+      if (!sawCutting && sawHeat > 0) {
+        sawHeat = Math.max(0, sawHeat - dt * SAW_COOL);
+        if (sawOverheat && sawHeat <= SAW_RESTART_HEAT) { sawOverheat = false; updateAmmoHud(); }
+        else if (currentWeapon === 'chainsaw') { sawHudT -= dt; if (sawHudT <= 0) { sawHudT = 0.25; updateAmmoHud(); } }
+      }
+      sawCutting = false;
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
       fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !(rollT > 0) && !mortarMounted && !mortarCarried;
@@ -32785,6 +33394,11 @@
         // The saw runs on gas bought at the kiosk. Dry tank: it just won't start.
         if (fireHeld && sawFuel <= 0) {
           if (edge) { AudioSys.chainsawDryPull(); flashNoAmmo(); }
+          fireHeld = false;
+        }
+        // GB-52: overheated, it will not start until it has cooled.
+        if (fireHeld && sawOverheat) {
+          if (edge) AudioSys.chainsawDryPull();
           fireHeld = false;
         }
         if (!fireHeld || won || gameOver || !gameStarted) {
@@ -32800,7 +33414,7 @@
         AudioSys.chainsawStart();
         AudioSys.chainsawSetRev(1);
         if (gun.userData.heatMat) {
-          gun.userData.heatMat.emissiveIntensity = 0.22 + Math.sin(performance.now() * 0.02) * 0.06;
+          gun.userData.heatMat.emissiveIntensity = 0.22 + sawHeat * 0.9 + Math.sin(performance.now() * 0.02) * 0.06;   // GB-52: glows hotter
         }
         // Mount vibration / arm shake while cutting (hand-seated base)
         const cmb = getWeaponMountBase();
@@ -32811,7 +33425,22 @@
         weaponMount.rotation.y = cmb.ry + reloadMountOff.ry;
         weaponMount.rotation.z = cmb.rz + reloadMountOff.rz + (Math.random() - 0.5) * 0.05;
         fireCooldown -= dt;
-        sawFuel = Math.max(0, sawFuel - dt);
+        // GB-52: gas and heat (see SAW_BITE_FUEL). biting = the chain was in a body in the last 0.3 s.
+        sawCutting = true;
+        sawBiteT = Math.max(0, sawBiteT - dt);
+        const biting = sawBiteT > 0;
+        sawFuel = Math.max(0, sawFuel - dt * (1 + (biting ? SAW_BITE_FUEL : 0)));
+        sawHeat = Math.min(1, sawHeat + dt * (biting ? SAW_HEAT_BITE : SAW_HEAT_RUN));
+        if (sawHeat >= 1) {
+          sawOverheat = true;
+          AudioSys.chainsawStop();
+          AudioSys.chainsawDryPull();
+          if (gun.userData.heatMat) gun.userData.heatMat.emissiveIntensity = 1.2;
+          showBanner('SAW OVERHEATED', 'Let it cool a moment', 1.2, '#ffb347');
+          sawHudRunning = false;
+          updateAmmoHud();
+          return;
+        }
         if (fireCooldown <= 0) {
           fireCooldown = st.interval;
           chainsawTick();
@@ -33213,7 +33842,7 @@
       meleeMarks.sort((a, b) => a.d - b.d);
       for (const m of meleeMarks) {
         if (hits >= maxHits) break;
-        damageZombie(m.z, bs.dmg * dmgMult(), { kind: 'melee', dir: { x: fx, z: fz } });
+        damageZombie(m.z, bs.dmg * dmgMult() * meleeSizeMul(m.z), { kind: 'melee', dir: { x: fx, z: fz } });   // GB-52
         hits++;
       }
       // Hit confirmation. The plain knife used to land completely silently — the only
@@ -35818,6 +36447,83 @@
     }
 
     let groanThrottle = 0;
+    // GB-51: a zombie with nothing to chase (a POI guard at its post, one held in the grace,
+    // one waiting with nowhere to go) idles on its own clock: it breathes, sways, turns its
+    // head to look about and now and then shuffles a step. Every body rolls its own rates,
+    // phases and timers (z.idle), so a group never moves in step. The walk and the attack
+    // are untouched: this only shows while a body is standing, and eases in and out.
+    function zombieIdleState(z, dt) {
+      let s = z.idle;
+      if (!s) {
+        const r = Math.random;
+        s = z.idle = {
+          t: r() * 100, breath: 1.6 + r() * 1.0, sway: 0.6 + r() * 0.7, swayPh: r() * 6.283, sag: 0.8 + r() * 0.4,
+          look: 0, lookTo: 0, lookT: 0.3 + r() * 1.5, lookRate: 1.1 + r() * 1.4,
+          stepT: 2 + r() * 6, step: 0, stepDur: 0.6 + r() * 0.2, stepLeg: r() < 0.5 ? -1 : 1, stepYaw: 0, stepX: 0, stepZ: 0,
+          yaw: 0, amt: 0, steps: 0
+        };
+      }
+      s.t += dt;
+      s.lookT -= dt;
+      if (s.lookT <= 0) {
+        // Look one way, then the other; now and then back to the front for a while.
+        s.lookT = 1.2 + Math.random() * 3.3;
+        s.lookTo = (s.lookTo !== 0 && Math.random() < 0.3) ? 0 : -(Math.sign(s.lookTo) || (Math.random() < 0.5 ? 1 : -1)) * (0.3 + Math.random() * 0.45);
+      }
+      s.look += (s.lookTo - s.look) * (1 - Math.exp(-s.lookRate * dt));
+      if (s.step > 0) s.step = Math.max(0, s.step - dt);
+      else {
+        s.stepT -= dt;
+        if (s.stepT <= 0) {
+          s.stepT = 3 + Math.random() * 7;
+          s.step = s.stepDur; s.steps++;
+          s.stepLeg = -s.stepLeg;
+          s.stepYaw = (Math.random() * 2 - 1) * 0.45;
+          if (Math.abs(s.yaw + s.stepYaw) > 0.8) s.stepYaw = -s.stepYaw;   // stays roughly facing its post
+          const a = Math.random() * 6.283; s.stepX = Math.sin(a); s.stepZ = Math.cos(a);
+        }
+      }
+      return s;
+    }
+    // A POI guard asleep at its post skips the whole walk loop, so it gets the full pose here:
+    // the idle above, plus the step's slow turn and a shuffle of at most 0.12 m round the post.
+    function poseSleepingGuard(z, dt) {
+      const s = zombieIdleState(z, dt);
+      const m = z.mesh;
+      if (s.homeX == null) { s.homeX = m.position.x; s.homeZ = m.position.z; s.baseYaw = m.rotation.y; }
+      const b = Math.sin(s.t * s.breath), w = Math.sin(s.t * s.sway + s.swayPh);
+      const lift = s.step > 0 ? Math.sin((1 - s.step / s.stepDur) * Math.PI) : 0;
+      if (s.step > 0) {
+        s.yaw += s.stepYaw * dt / s.stepDur;
+        const k = 1 - Math.exp(-4 * dt);
+        m.position.x += (s.homeX + s.stepX * 0.12 - m.position.x) * k;
+        m.position.z += (s.homeZ + s.stepZ * 0.12 - m.position.z) * k;
+        m.position.y = entityGroundY(m.position.x, m.position.z, m.position.y + STEP_UP);
+      }
+      m.rotation.y = s.baseYaw + s.yaw;
+      if (z.farLod) return;
+      const ud = m.userData, rest = ud.rest || {}, parts = z.partsLost || emptyPartsLost();
+      if (ud.torso) {
+        ud.torso.rotation.x = (rest.torsoRX || 0) + 0.05 * s.sag + b * 0.025;
+        ud.torso.rotation.z = (rest.torsoRZ || 0) + w * 0.06;
+        ud.torso.rotation.y = (rest.torsoRY || 0) + w * 0.04 - lift * s.stepYaw * 0.3;
+      }
+      if (ud.head && !parts.head) {
+        ud.head.rotation.x = (rest.headRX || 0) + 0.1 * s.sag + Math.sin(s.t * 0.6 + s.swayPh) * 0.04;
+        ud.head.rotation.y = (rest.headRY || 0) + s.look;
+        ud.head.rotation.z = (rest.headRZ || 0) - w * 0.08;
+      }
+      const aL = rest.armLBase != null ? rest.armLBase : -0.4, aR = rest.armRBase != null ? rest.armRBase : -0.4;
+      if (ud.armLG && !parts.armL) { ud.armLG.rotation.x = aL + b * 0.04 + w * 0.05; ud.armLG.rotation.z = (rest.armLRZ || 0) + 0.03 + b * 0.02; }
+      if (ud.armRG && !parts.armR) { ud.armRG.rotation.x = aR + b * 0.04 - w * 0.05; ud.armRG.rotation.z = (rest.armRRZ || 0) - 0.03 - b * 0.02; }
+      if (ud.legLG && !parts.legL) { ud.legLG.rotation.x = s.stepLeg < 0 ? -lift * 0.35 : lift * 0.06; if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = s.stepLeg < 0 ? lift * 0.45 : 0; }
+      if (ud.legRG && !parts.legR) { ud.legRG.rotation.x = s.stepLeg > 0 ? -lift * 0.35 : lift * 0.06; if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = s.stepLeg > 0 ? lift * 0.45 : 0; }
+      if (ud.hips) {
+        ud.hips.position.y = (ud.baseHipsY || 0.55) + b * 0.006 - lift * 0.015;
+        ud.hips.rotation.z = (rest.hipsRZ || 0) + w * 0.03 + lift * 0.04 * s.stepLeg;
+      }
+    }
+
     function updateZombies(dt) {
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
       if (zombies.length) updateFlowFields(dt);
@@ -35844,7 +36550,7 @@
           if (poiPhase === 'wave') wakePoiGuards('alarm');
           else if (z.hp < z.maxHp || lost) wakePoiGuards('hit');
           else if (gd < POI_GUARD_WAKE) wakePoiGuards('near');
-          else { z.mesh.rotation.y += Math.sin(performance.now() * 0.0004 + (z.bob || 0)) * dt * 0.25; continue; }
+          else { poseSleepingGuard(z, dt); continue; }   // GB-51: it idles at its post
         }
         const tactics = z.tactics || 'direct';
         const px0 = player.position.x, pz0 = player.position.z;
@@ -36274,6 +36980,21 @@
           mz += zWater.current.z * dt * carry;
         }
 
+        // GB-50: the contact ring. A zombie crowds the marine but never stands inside him:
+        // whatever brought it closer than touching (its walk, a leap, the crowd, his own
+        // step into it) puts it back on the ring round him, and the walls below still apply.
+        if (!scriptedKill && Math.abs(z.mesh.position.y - player.position.y) < 1.6) {
+          const ring = z.radius + PLAYER_RADIUS + 0.04;
+          let rx = mx - player.position.x, rz = mz - player.position.z;
+          let rd = Math.hypot(rx, rz);
+          if (rd < ring) {
+            if (rd < 1e-4) { rx = zx - player.position.x; rz = zz - player.position.z; rd = Math.hypot(rx, rz); }
+            if (rd < 1e-4) { const a = (z.bob || 0) * 6.283; rx = Math.sin(a); rz = Math.cos(a); rd = 1; }
+            mx = player.position.x + rx / rd * ring;
+            mz = player.position.z + rz / rd * ring;
+            z.ringHeld = (z.ringHeld || 0) + 1;
+          }
+        }
         // Soft barricades — brutes shrug them off more
         const softStr = tactics === 'tank' ? 0.25 : 0.85;
         let slid = (z.climber && pieceHeight('barricade') <= (z.climbHeight || CLIMB_HEIGHT))
@@ -36424,7 +37145,10 @@
         if (z.crawling) cadence *= 0.55;
         if (z.chargeT > 0) cadence *= 2.4;
         cadence *= z.gaitMul || 1;
-        if (moving) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
+        // GB-51: a body that is going nowhere (spd 0: holding, waiting) stands and idles
+        // instead of walking on the spot.
+        const standing = !moving || spd < 0.05;
+        if (!standing) z.walkPhase = (z.walkPhase || 0) + dt * cadence;
         // Heavy things you hear coming: a footfall every half stride.
         if (moving && (z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian')) {
           const fi = Math.floor((z.walkPhase || 0) / Math.PI);
@@ -36544,6 +37268,34 @@
             const sa = sndAt(zx, zz, 30);
             const v = Math.max(0.12, 1 - gd / 30) * (z.typeKey === 'brute' || z.typeKey === 'colossus' ? 1.3 : 1);
             AudioSys.zombieVoice(z.typeKey, chasing ? 'chase' : 'idle', v, sa.pan);
+          }
+        }
+        // GB-51: standing with nothing in reach, they idle on their own clock (zombieIdleState).
+        {
+          const idl = zombieIdleState(z, dt);
+          const inReach = Math.hypot(player.position.x - zx, player.position.z - zz) < z.radius + PLAYER_RADIUS + 0.6;
+          const idleNow = standing && !rising && !inReach && !(z.attackWindup > 0) && !(z.swingT > 0) && !(z.hitReact > 0);
+          idl.amt += ((idleNow ? 1 : 0) - idl.amt) * (1 - Math.exp(-5 * dt));
+          if (idl.amt > 0.01) {
+            const ia = idl.amt, b = Math.sin(idl.t * idl.breath), w = Math.sin(idl.t * idl.sway + idl.swayPh);
+            const lift = idl.step > 0 ? Math.sin((1 - idl.step / idl.stepDur) * Math.PI) : 0;
+            gaitSway += w * 0.05 * ia; gaitLean += b * 0.02 * ia; gaitTwist += w * 0.03 * ia;
+            headBob += Math.sin(idl.t * 0.6 + idl.swayPh) * 0.04 * ia; headLoll -= w * 0.06 * ia;
+            if (!z.farLod) {
+              if (ud.head && !parts.head && !(z.screamT > 0)) ud.head.rotation.y = (rest.headRY || 0) + idl.look * ia;
+              if (lift > 0) {
+                const leg = idl.stepLeg < 0 ? ud.legLG : ud.legRG, lost = idl.stepLeg < 0 ? parts.legL : parts.legR;
+                if (leg && !lost) { leg.rotation.x -= lift * 0.3 * ia; if (leg.userData.shinG) leg.userData.shinG.rotation.x += lift * 0.4 * ia; }
+              }
+              if (ud.armLG && !parts.armL) ud.armLG.rotation.x += (b * 0.04 + w * 0.04) * ia;
+              if (ud.armRG && !parts.armR) ud.armRG.rotation.x += (b * 0.04 - w * 0.04) * ia;
+            }
+            if (ud.hips) ud.hips.position.y += (b * 0.006 - lift * 0.012) * ia;
+            if (!knocked) z.mesh.rotation.y += idl.stepYaw * lift * 0.3 * ia;
+            idl.shown = true;
+          } else if (idl.shown) {
+            idl.shown = false;
+            if (ud.head && !parts.head && !(z.screamT > 0)) ud.head.rotation.y = rest.headRY || 0;
           }
         }
         // Standing still they still breathe and sway — nothing here is ever a statue.
@@ -37054,7 +37806,8 @@
       day = 0;
       phase = 'idle';
       clearZombies();
-      combo = 0; comboT = 0; comboBest = 0; slowMoT = 0; waveFinisher = null;
+      combo = 0; comboT = 0; comboBest = 0; slowMoT = 0; waveFinisher = null; loopCine = null; loopHoldIdle = 0;
+      document.body.classList.remove('loopcine', 'finishgrade');
       matchStats.kills = 0; matchStats.headshots = 0;
       bloodMoon = false;
       guardianFirstBloodDone = false;
@@ -37218,6 +37971,7 @@
       hurtFlash = 0;
       hitReaction.time = 0;
       hitReaction.strength = 0;
+      resetHitStumble();   // GB-50
       for (const key of Object.keys(bodyRecoil)) bodyRecoil[key] = 0;
       for (const key of Object.keys(recoilKick)) recoilKick[key] = 0;
       slopeSlide.active = false;
@@ -37490,8 +38244,9 @@ live++;
       }
       if (slowMoT > 0) {
         slowMoT -= dt;
-        dt *= 0.32;
-      }
+        slowMoK = waveFinisher ? finisherTimeScale() : 0.32;
+        dt *= slowMoK;
+      } else slowMoK = 1;
       // A wheel is a decision, not a pause: the horde keeps coming, just slowly
       // enough to read eleven labels. Anything that should have shut the ring
       // (dying, the shop opening) closes it here rather than leaving it stuck up.
@@ -37658,8 +38413,9 @@ live++;
             }
           }
         }
-        const tX = moving ? wishX * targetSpeed : 0;
-        const tZ = moving ? wishZ * targetSpeed : 0;
+        const stumbleK = hitStumbleSpeedK();   // GB-50: slower for a beat, never stopped
+        const tX = moving ? wishX * targetSpeed * stumbleK : 0;
+        const tZ = moving ? wishZ * targetSpeed * stumbleK : 0;
         const rate = slide.active ? 2.0 : (grounded ? (moving ? PHYS.accelGround : PHYS.accelStop) : PHYS.accelAir);
         const k = 1 - Math.exp(-rate * dt);
         if (rollT > 0) {
@@ -37690,6 +38446,18 @@ live++;
 
         player.position.x += velX * dt;
         player.position.z += velZ * dt;
+        // GB-50: the knockback slide rides on top of the walk and bleeds off on its own.
+        if (hitStumble.kvx || hitStumble.kvz) {
+          player.position.x += hitStumble.kvx * dt;
+          player.position.z += hitStumble.kvz * dt;
+          const kd = Math.exp(-HIT_KNOCK_DECAY * dt);
+          hitStumble.kvx *= kd; hitStumble.kvz *= kd;
+          if (Math.hypot(hitStumble.kvx, hitStumble.kvz) < 0.05) { hitStumble.kvx = 0; hitStumble.kvz = 0; }
+        }
+        hitStumble.stumbleT = Math.max(0, hitStumble.stumbleT - dt);
+        hitStumble.aimT = Math.max(0, hitStumble.aimT - dt);
+        hitStumble.kneeT = Math.max(0, hitStumble.kneeT - dt);
+        hitStumble.kneeCd = Math.max(0, hitStumble.kneeCd - dt);
         const groundSpeed = Math.hypot(velX, velZ);
         moving = groundSpeed > 0.6;
         {
@@ -38174,9 +38942,21 @@ live++;
       } else {
         shakeAmp = 0;
       }
+      // GB-50: a hit jolts the camera along the blow and a little down, then settles.
+      if (hitStumble.jolt > 0.002) {
+        const j = hitStumble.jolt * (1 - scopeAmt * 0.75);
+        camera.position.x += hitStumble.jx * j * 0.6;
+        camera.position.z += hitStumble.jz * j * 0.6;
+        camera.position.y -= j * 0.3;
+        camLook.x += hitStumble.jx * j * 0.25;
+        camLook.z += hitStumble.jz * j * 0.25;
+        hitStumble.jolt *= Math.exp(-12 * dt);
+      } else hitStumble.jolt = 0;
       scriptedKillCamera();
       cineCamera();
       waveFinisherCamera();
+      updateLoopCine();
+      loopCineCamera();
       camera.lookAt(camLook);
       // (the shot view, if a tool has set one, is applied last — see applyShotView)
       // Leave warm-up staging intact behind the opaque opening, then hide the marine.
@@ -38192,6 +38972,9 @@ live++;
       renderFrame();
       if (showPerf && !window.TT) {
         window.TT = {
+      graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
+      getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
+      getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
@@ -38200,7 +38983,7 @@ live++;
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,
@@ -38231,7 +39014,7 @@ live++;
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
@@ -38686,8 +39469,12 @@ live++;
 
     buildTreeBatches(); // CL-10: after every tree is placed, before the warm-up compiles the scene
     await loadMark('contact shading + rest of setup');
+    const _wt0 = performance.now();
     await whileHiddenFramesRun(() => initPostProcessing());
+    const _wtPost = performance.now();
     warmEffectPools();
+    const _wtPools = performance.now();
+    let _wtCompile = _wtPools, _wtFrame = _wtPools;
     try {
       if (typeof renderer.compileAsync === 'function') {
         const hidden = [];
@@ -38695,6 +39482,20 @@ live++;
         // The ghost preview and every weapon count here — they are the things that pop
         // into view later with materials nothing has ever rendered.
         ghostGroup.visible = true;
+        // Skulls do not exist until the first kills, and their glowing materials first
+        // drew during the finisher's recall: a one-time stall on day 1 (CU-29). One of
+        // each kind rides through the warm-up instead.
+        const warmSkulls = [];
+        for (const kind of Object.keys(SKULL_LOOK)) {
+          const s = makeSkullMesh(kind);
+          s.position.set(player.position.x, player.position.y + 1, player.position.z);
+          scene.add(s);
+          warmSkulls.push(s);
+        }
+        // The goggles are a CSS filter on the canvas; its first composite cost a 200 ms
+        // frame the first time they went on (CU-35).
+        renderer.domElement.classList.add('nvg-phosphor');
+        if (nvgOverlayEl) nvgOverlayEl.classList.add('on');
         // compileAsync projects the scene through the camera like a real frame, so
         // anything outside the frustum — the pooled bodies parked underground, the
         // effect meshes at the player's feet before the camera has settled — was being
@@ -38706,6 +39507,7 @@ live++;
         // emissiveIntensity in its life: 1 (fresh), 0.65 (hit-flash), 0 (flash faded).
         // Each was a separate ~30ms build the first time it happened in a fight.
         await whileHiddenFramesRun(() => renderer.compileAsync(scene, camera));
+        _wtCompile = performance.now();
         // compileAsync builds the variant that draws straight to the canvas. With
         // post-processing on, the game never draws that variant: the scene goes into a
         // render target, and the node builder keys on that (tone mapping is applied at
@@ -38720,9 +39522,15 @@ live++;
         // hand between frames (renderer._nodes.nodeFrame is what the loop steps;
         // pinned three@0.175.0, guarded in case it moves).
         warmFrame('load');
+        _wtFrame = performance.now();
         for (const o of culled) o.frustumCulled = true;
         for (const o of hidden) o.visible = false;
         ghostGroup.visible = false;
+        for (const s of warmSkulls) scene.remove(s);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          renderer.domElement.classList.remove('nvg-phosphor');
+          if (nvgOverlayEl) nvgOverlayEl.classList.remove('on');
+        }));
       }
     } catch (err) {
       console.info('Dead-Wave: pipeline warm-up skipped.', err);
@@ -38732,7 +39540,7 @@ live++;
     try {
       const nb = renderer._nodes && renderer._nodes.nodeBuilderCache;
       let vis = 0, all = 0; scene.traverse((o) => { if (o.isLight) { all++; let p = o, v = true; while (p) { if (!p.visible) { v = false; break; } p = p.parent; } if (v) vis++; } });
-      console.info('Dead-Wave warm-up: ' + (nb ? nb.size : '?') + ' shader variants compiled, ' + _warmStats.zombies + ' bodies pooled, ' + _warmStats.frames + ' warm frames, lights visible ' + vis + '/' + all + ', shadows ' + renderer.shadowMap.enabled + ' | ' + _warmStats.trace.join(' '));
+      console.info('Dead-Wave warm-up: ' + (nb ? nb.size : '?') + ' shader variants compiled, ' + _warmStats.zombies + ' bodies pooled, ' + _warmStats.frames + ' warm frames, lights visible ' + vis + '/' + all + ', shadows ' + renderer.shadowMap.enabled + ' | post ' + Math.round(_wtPost - _wt0) + 'ms pools ' + Math.round(_wtPools - _wtPost) + 'ms compile ' + Math.round(_wtCompile - _wtPools) + 'ms warm frame ' + Math.round(_wtFrame - _wtCompile) + 'ms | ' + _warmStats.trace.join(' '));
     } catch (e) {}
 
     // WebGPU submits work asynchronously, so frame scheduling belongs to the renderer:

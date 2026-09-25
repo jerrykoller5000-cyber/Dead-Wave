@@ -124,32 +124,36 @@ def s_alarm():
 
 
 def s_clear():
-    """The wave is over, and the dawn: the hook's first phrase slowed, lifting from E minor to
-    E major, a pad swelling up under it like the light, and a ringing E major chord with a
-    sunrise arpeggio. 7.5 s (the finisher's slow motion and the sky's turn run this long)."""
-    L = 7.5
+    """CL-50 (Jerry, 2026-09-25): the last kill, short and hard to match the 3 s finisher. A hit on
+    the kill (the band's E power chord, kick and crash) while time all but stops, three quick
+    notes of the hook climbing out of it, and a ringing E major chord with a sparkle on top. 2.6 s
+    (the Night N Complete card's chime follows it)."""
+    L = 2.6
     b, s = buf(L), buf(L)
-    spb = 60 / 76
-    phrase = [(0, 1.5, E4), (1.5, 1.5, G4), (3, 1, B4), (4, 1, A4), (5, 1, G4), (6, 2.6, 68)]   # ends on G#: major
-    for bt, ln, m in phrase:
-        lead(b, bt * spb, m, ln * spb * 0.95, g=0.72, sends=s)
-    for k, (bt, root, ivs) in enumerate([(0, 40, (0, 7, 12, 15)), (4, 36, (0, 7, 12, 16)), (6, 40, (0, 7, 12, 16, 19))]):
-        chord(b, bt * spb, root + 12, ivs, (8.6 - bt) * spb + 0.6, g=0.42 if k < 2 else 0.55)
-        bass(b, bt * spb, root, (2 if k < 2 else 3.4) * spb, g=0.6, bright=0.4)
-    # the light: a soft pulse pad that swells from the C chord into the E major one
-    n = at(L - 2.2); t = np.arange(n) / n
-    pad = np.zeros(n)
-    for m in (52, 59, 64, 68, 71):
-        f = midi_to_hz(m)
-        pad += pulse(f, n, 0.5) + pulse(f * 2 ** (7 / 1200), n, 0.5)
-    pad = lowpass(pad, 1600) * (t ** 1.6) * (1 - np.clip((t - 0.92) / 0.08, 0, 1)) / 10
-    add_at(b, pad, at(2.2), 0.55, 0.15); add_at(s, pad, at(2.2), 0.35, -0.15)
-    # sunrise: the arpeggio climbing over the final chord, and a bell on top
-    for i in range(12):
-        arp(b, 6 * spb + i * spb / 4, [64, 68, 71, 76, 80, 83, 88, 83, 88, 92, 95, 100][i], 0.2, g=0.3 + 0.01 * i, pan=0.35 * np.sin(i))
-    lead(b, 6 * spb + 1.0, 88, 1.3, g=0.25, dark=0.3, sends=s)
-    crash(b, 6 * spb, 0.3)
-    return finish(b, s, rev_wet=0.55, dly=spb * 0.75, target_db=-13.0)
+    kick(b, 0.0, 1.25); crash(b, 0.0, 0.55); snare(b, 0.0, 0.7)
+    chord(b, 0.0, 40, (0, 7, 12, 19), 0.55, g=0.7, duty=0.25, fc=2200)
+    bass(b, 0.0, 28, 0.5, g=0.9, bright=0.8)
+    for t, m, ln in [(0.36, 64, 0.16), (0.53, 67, 0.16), (0.70, 71, 0.2)]:
+        lead(b, t, m, ln, g=0.62, sends=s)
+    lead(b, 0.92, 68, 1.45, g=0.66, sends=s)                 # G#: the major third, the relief
+    chord(b, 0.92, 52, (0, 7, 12, 16), 1.6, g=0.5)
+    bass(b, 0.92, 40, 0.9, g=0.6, bright=0.4); kick(b, 0.92, 0.8)
+    for i in range(6):
+        arp(b, 1.0 + i * 0.07, [76, 80, 83, 88, 92, 95][i], 0.14, g=0.26 + 0.02 * i, pan=0.35 * np.sin(i))
+    return finish(b, s, rev_wet=0.5, dly=0.21, target_db=-13.0)
+
+
+def s_camp():
+    """CL-52 (Jerry): a camp cleared in daylight. Two seconds, soft, played while the fight music
+    fades out under it: a rising B-E, a small E major chord and a glint on top."""
+    L = 2.0
+    b, s = buf(L), buf(L)
+    lead(b, 0.0, 71, 0.22, g=0.5, sends=s); lead(b, 0.22, 76, 0.9, g=0.52, sends=s)
+    chord(b, 0.22, 52, (0, 7, 12, 16), 1.3, g=0.34, duty=0.5, fc=1600)
+    bass(b, 0.22, 40, 0.6, g=0.42, bright=0.3)
+    for i, m in enumerate([83, 88, 92]):
+        arp(b, 0.42 + i * 0.08, m, 0.14, g=0.22, pan=0.3 * np.sin(i + 1))
+    return finish(b, s, rev_wet=0.45, dly=0.18, target_db=-16.5)
 
 
 def c_dawn():
@@ -239,23 +243,26 @@ def c_achievement():
 
 
 def c_airdrop():
-    b, s = buf(2.2), buf(2.2)
-    n = at(1.1); t = np.arange(n) / SR
-    f = 1800 * 2 ** (-t * 2.2)
+    """CL-52 (Jerry): the airdrop is a sound effect now, not a stinger: a falling whistle and the
+    crate's thump. 1.0 s."""
+    L = 1.0
+    b, s = buf(L), buf(L)
+    n = at(0.62); t = np.arange(n) / SR
+    f = 1900 * 2 ** (-t * 2.6)
     ph = np.cumsum(f / SR) % 1.0
-    wh = lowpass(np.where(ph < 0.5, 1.0, -1.0), 5000) * np.minimum(1, t / 0.05) * (1 - t / 1.1)
-    add_at(b, wh, 0, 0.3, 0.2); add_at(s, wh, 0, 0.3, 0.2)
-    kick(b, 1.1, 1.0); add_at(b, D.d_snare(True), at(1.1), 0.4, 0)
-    chord(b, 1.1, 52, (0, 7, 12), 0.9, g=0.4, duty=0.25)
-    return finish(b, s, rev_wet=0.4, target_db=-16.0)
+    wh = lowpass(np.where(ph < 0.5, 1.0, -1.0), 4200) * np.minimum(1, t / 0.04) * (1 - t / 0.62) ** 0.6
+    add_at(b, wh, 0, 0.22, 0.15); add_at(s, wh, 0, 0.15, 0.15)
+    kick(b, 0.62, 1.0); add_at(b, D.d_snare(False), at(0.62), 0.25, 0)
+    return finish(b, s, rev_wet=0.25, target_db=-17.0)
 
 
 def c_objective():
-    b, s = buf(3.4), buf(3.4)
-    lead(b, 0.0, 71, 0.28, g=0.6, sends=s); lead(b, 0.3, 76, 0.28, g=0.6, sends=s); lead(b, 0.6, 83, 1.1, g=0.6, sends=s)
-    chord(b, 0.6, 52, (0, 7, 12, 16), 2.2, g=0.4)
-    bass(b, 0.6, 40, 0.6, g=0.5, bright=0.5); kick(b, 0.6, 0.7)
-    return finish(b, s, rev_wet=0.5, dly=0.3, target_db=-16.0)
+    """CL-52 (Jerry): supplies collected, a sound effect: a bright double blip. 0.6 s."""
+    L = 0.6
+    b, s = buf(L), buf(L)
+    arp(b, 0.0, 83, 0.09, g=0.55, pan=-0.1); arp(b, 0.085, 88, 0.2, g=0.55, pan=0.1)
+    add_at(s, D.v_arp(88, int(0.2 * SR)), at(0.085), 0.2, 0)
+    return finish(b, s, rev_wet=0.3, dly=0.12, target_db=-17.5)
 
 
 def c_poi():
@@ -268,7 +275,7 @@ def c_poi():
 
 ALL = {'sting_alarm': s_alarm, 'sting_clear': s_clear, 'sting_dawn': c_dawn, 'sting_night_falls': s_night,
        'sting_ember': s_ember, 'sting_guardian': s_guardian, 'cue_achievement': c_achievement,
-       'cue_airdrop': c_airdrop, 'cue_objective': c_objective, 'cue_poi_cleared': c_poi}
+       'cue_airdrop': c_airdrop, 'cue_objective': c_objective, 'cue_poi_cleared': c_poi, 'sting_camp': s_camp}
 
 if __name__ == '__main__':
     out = sys.argv[1] if len(sys.argv) > 1 else 'out'

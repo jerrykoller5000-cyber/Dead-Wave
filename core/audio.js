@@ -841,8 +841,8 @@ export const AudioSys = (() => {
             list: Object.fromEntries(S.list.map((s) => [s.name, { t0: s.bar * +S.barSeconds, dur: s.bars * +S.barSeconds }])),
             flow: Object.assign({ stalk: 'stalk', fight: ['dropA'], lull: 'break', last: 'climax', lastAt: 3, near: 45, far: 70, lullAfter: 4 }, S.flow || {})
           };
-          loadSections(k);
         }
+        secWantDay(lastDay);
       }
       const df = m.dayFight;
       if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
@@ -873,7 +873,11 @@ export const AudioSys = (() => {
   let deckTarget = 0;       // where the fade is heading
   let deckRate = 1;         // fade speed, level units per second
   let deckLoopAt = -1;      // >= 0: loop from here when it ends (the fight)
-  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | release | relief | end
+  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | campclear | release | relief | end
+  const CAMP_FADE_S = 1.6;   // CL-52: a camp cleared: the fight fades out under the camp stinger
+  const CAMP_S = 2.0;        //        which is this long, then the calm music comes back
+  const CAMP_FADE_IN_S = 6.0;
+  let campUntil = 0;
   let dayBand = -1;         // the day fight's track index
   let pendingDay = -1;      // a day-fight band waiting for the deck to fade out
   let lastCalm = 'day';
@@ -892,6 +896,9 @@ export const AudioSys = (() => {
   let stingLeft = 0;        // seconds until it counts as finished, if 'ended' never comes
   let stingNext = null;     // what to do when it finishes
   let alarmPending = false;
+  const nowMs = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+  let alarmHoldS = 3.4;       // D-33: how long the alarm holds the music back (from 'alarm-started')
+  let alarmUntil = 0;
   let finalePending = false;  // the page's finisher asked for the cut and the sting
   let soloOn = false;
   let prevPhase = null, prevStarted = false;
@@ -922,6 +929,21 @@ export const AudioSys = (() => {
       .then((ab) => new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.catch) p.catch(rej); }))
       .then((buf) => { secBuf[S.file] = buf; })
       .catch(() => { secBuf[S.file] = 'failed'; });
+  }
+  // CL-38: hold only what the run can reach soon (tonight's and tomorrow's song, the day track,
+  // whatever is playing); drop the other decoded songs, they come back when their night does.
+  let secWantedFor = -1;
+  function secWantDay(d) {
+    d = d || 1;
+    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track));
+    const keep = new Set([waveTrackForDay(d), waveTrackForDay(d + 1)]);
+    if (sec && sec.track) keep.add(sec.track);
+    for (const k of Object.keys(SECTIONED)) {
+      const S = SECTIONED[k];
+      if (!waveTracks.has(k) || keep.has(k)) loadSections(k);
+      else if (secBuf[S.file] && typeof secBuf[S.file] === 'object') delete secBuf[S.file];
+    }
+    secWantedFor = d;
   }
   function sectionsReady(track) {
     const S = SECTIONED[track];
@@ -1176,7 +1198,9 @@ export const AudioSys = (() => {
     dayBand = -1; pendingDay = -1;
     stage = 'alarm';
     mood = null; nextMood = null;
-    playSting('alarm', () => { stage = 'gap'; gapT = GAP_AFTER_ALARM; });
+    // D-33 (Jerry): no alarm sting; the klaxon is the alarm. Silence under it, then the fight.
+    stopSting(); stopDeck();
+    alarmUntil = nowMs() + alarmHoldS * 1000;
   }
   let lastState = null;
   function startFight() {
@@ -1193,6 +1217,13 @@ export const AudioSys = (() => {
     stage = 'release';
     mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
     deckTarget = 0; deckRate = 1 / FAST_FADE_S;
+  }
+  function startCampClear() {
+    stage = 'campclear';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    deckTarget = 0; deckRate = 1 / CAMP_FADE_S;
+    musicCue('camp');
+    campUntil = (typeof performance !== 'undefined' ? performance.now() : Date.now()) + CAMP_S * 1000;
   }
   function startRelief() {
     stopDeck();
@@ -1227,6 +1258,7 @@ export const AudioSys = (() => {
     const started = !!state.started;
     const phaseNow = state.phase;
     if (state.day) lastDay = state.day;
+    if (lastDay !== secWantedFor && ctx) secWantDay(lastDay);
     // The last kill: the wave hands back to prep with the run still on.
     const cleared = prevStarted && started && !state.over && !state.won && prevPhase === 'wave' && phaseNow === 'prep';
     const waveBegan = started && prevPhase !== 'wave' && phaseNow === 'wave';
@@ -1260,7 +1292,7 @@ export const AudioSys = (() => {
         stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
         if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; }
       } else if (stage === 'dayfight') {
-        if (liveN === 0) startRelease();
+        if (liveN === 0) startCampClear();
         else {
           const b = bandFor(liveN);
           const cur = pendingDay >= 0 ? pendingDay : dayBand;
@@ -1274,6 +1306,11 @@ export const AudioSys = (() => {
     }
     // --- the fast fades finishing ---
     if (stage === 'release' && (!deckTrack || deckLevel <= 0.001)) startRelief();
+    if (stage === 'campclear' && (typeof performance !== 'undefined' ? performance.now() : Date.now()) >= campUntil) {
+      stopDeck();
+      stage = 'calm'; mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: CAMP_FADE_IN_S });
+    }
     if (stage === 'dayfight' && pendingDay >= 0 && (!deckTrack || deckLevel <= 0.001)) { stopDeck(); startDayTrack(pendingDay); }
 
     // --- the sting (alone) ---
@@ -1283,6 +1320,7 @@ export const AudioSys = (() => {
       else if (sting) sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(MUSIC_STINGS[stingName] || '') * briefDuck));
     }
     // --- the gap after the alarm sting ---
+    if (stage === 'alarm' && !stingName && nowMs() >= alarmUntil) { stage = 'gap'; gapT = GAP_AFTER_ALARM; }
     if (stage === 'gap') { gapT -= dt; if (gapT <= 0) startFight(); }
     // --- calm music: fade the old one right out, then the new one in ---
     if (stage === 'calm') {
@@ -1309,7 +1347,7 @@ export const AudioSys = (() => {
       deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
     }
     if (deckTrack && (deck || sec)) {
-      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release') ? prox : 1;
+      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
       const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * briefDuck * duck * musicShotDuck;
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
@@ -1324,7 +1362,7 @@ export const AudioSys = (() => {
     window.addEventListener('dw-game', (ev) => {
       const d = ev && ev.detail;
       if (!d) return;
-      if (d.type === 'alarm-started') alarmPending = true;
+      if (d.type === 'alarm-started') { alarmPending = true; alarmHoldS = isFinite(+d.hold) && +d.hold > 0 ? +d.hold : 3.4; }
       else if (d.type === 'wave-last-kill') finalePending = true;
       else if (d.type === 'briefing-open') briefingOpen = true;
       else if (d.type === 'briefing-closed') briefingOpen = false;
@@ -1350,7 +1388,7 @@ export const AudioSys = (() => {
     if (muted || musicPlaying) return;
     musicPlaying = true;
     loadMusicManifest();
-    for (const k of Object.keys(SECTIONED)) loadSections(k);   // CL-42: decode before the first wave
+    secWantDay(lastDay);   // CL-42/CL-38: decode tonight's and tomorrow's song before the wave
     clearMusicNodes(); // kill any leftover synth nodes
     stopDeck(); stopSting();
     // The next updateMusic picks up the story from the game state.
