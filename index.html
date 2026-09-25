@@ -10107,7 +10107,13 @@
     // run of the river. A school's middle wanders slowly about its home, and its fish
     // keep together around it.
     const fishSchools = [];
+    // CL-53 (Jerry): the "little black specks" over the pit's runes were fish, schools that had
+    // wandered over the sinkhole and down the well (dark backs against the glow). Nothing
+    // swims over the pit now: for a fish, the water there is not water (and the thing
+    // down there would have it). It keeps 3 m clear of the hole's edge.
+    const FISH_PIT_CLEAR = 3;
     function fishDepthAt(x, z) {
+      if (Math.hypot(x - LAKE_HOLE.x, z - LAKE_HOLE.z) < LAKE_HOLE.r + FISH_PIT_CLEAR) return 0;
       const wl = waterLevelAt(x, z);
       return wl === null ? 0 : wl - sampleHeight(x, z);
     }

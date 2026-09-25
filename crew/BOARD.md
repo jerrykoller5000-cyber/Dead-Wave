@@ -35,6 +35,7 @@ Loop feel comes first (D-35). Work your queue top to bottom, one check-in and on
 - **Grokbot** · GB-53 · handoffs/2026-09-25-grokbot-GB-53.md
 - **Grokbot** · GB-54 · handoffs/2026-09-25-grokbot-GB-54.md
 - **Cursor** · CU-39 · handoffs/2026-09-25-cursor-CU-39.md
+- **Cursor** · CU-40 · handoffs/2026-09-25-cursor-CU-40.md
 - **Cursor** · CU-36 · handoffs/2026-09-25-cursor-CU-36.md
 - **Cursor** · CU-37 · handoffs/2026-09-25-cursor-CU-37.md
 - **Cursor** · CU-38 · handoffs/2026-09-25-cursor-CU-38.md
@@ -59,7 +60,6 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Claude** · CL-53 the pit's black specks · waiting: Cursor (CU-39's shots)
 - **Cursor** · CU-32 scratch files · waiting: Grokbot, Antigravity
 
 
@@ -438,6 +438,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
+- [ ] **CU-40** Grokbot's GB-55 finding: `startMatch` in tools/tests/lib.js waits a fixed 10 s, but the insertion is 9 s of
+  game time and on a slow box it still owns the camera. Make it wait for the insertion to end (or add a TT.isDeploying()),
+  so every test gets it (t4, t58, t75 to t79).
 - [>] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
   `node tools/shoot.mjs pit lake-shore` plus two closer views over the pit funnel at noon (the little black specks Jerry
   sees over the runes: what are they?), and a play-through of one alarm (the sky shot), one last kill (the 3 s finisher)
@@ -525,9 +528,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Grokbot — combat
 
-- [>] **GB-55** t4 fails on the live game since GB-46 made it start a real match ("camera up 16.4 m and back 41.2 m from
+- [x] **GB-55** t4 fails on the live game since GB-46 made it start a real match ("camera up 16.4 m and back 41.2 m from
   the marine": the insertion camera, like GB-49's t58). Re-base it the way you did t58; don't loosen it.
-- [ ] **GB-56** **Play the 20 nights through, headless.** With GB-53's plans, GB-50's hits and GB-52's blades: run nights 1
+- [>] **GB-56** **Play the 20 nights through, headless.** With GB-53's plans, GB-50's hits and GB-52's blades: run nights 1
   to 20 with a scripted marine at the HQ (godmode off where you can, on where you must) and log each night's length, the
   pushes and breathers, the worst pile-ups, stuck or lost zombies, and what killed him. Fix what drags or breaks; put the
   table in the handoff for ChatGPT's GP-41 and for Claude.
@@ -772,9 +775,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   that sits under hours of play.
 - [x] **CL-38** **After GB-53's table.** The horde soundtrack for nights 1 to 20 (Jerry signed off day 1's sound): each
   night's fight music follows its wave the way day 1's does, climbing with the nights.
-- [ ] **CL-53** The pit: the little black specks under the water that hide the runes (Jerry). Find what draws them and
+- [x] **CL-53** The pit: the little black specks under the water that hide the runes (Jerry). Find what draws them and
   fix it.
-- [ ] **CL-54** Ideas to make the daytime more fun and more polished (Jerry, item 5), for Jerry to pick from.
+- [x] **CL-54** Ideas to make the daytime more fun and more polished (Jerry, item 5), for Jerry to pick from.
 - [x] **CL-39** Day-1 audit → `handoffs/audit-day1/claude.md`. The world (terrain, water, caves, flora,
   wildlife, night lighting), the music and the audio director, a code read of the day-1 path in
   `index.html`, and the whole day against the flow test in `docs/plan.md`.

@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: Opus 5.5, in Cowork, writing through the desktop bridge
-task: CL-54 ideas for the daytime
-touching: handoffs/2026-09-25-claude-CL-54.md
-since: 2026-09-25T07:30Z
-next: CL-53 the pit's black specks, after CU-39's shots
+task: —
+touching: —
+since: 2026-09-25T08:25Z
+next: review CU-39's GPU check of the alarm, finisher and Night Complete card
 blocked-on: —
-last-report: handoffs/2026-09-25-claude-CL-38.md
+last-report: handoffs/2026-09-25-claude-CL-53.md
 
 ## Notes
 
