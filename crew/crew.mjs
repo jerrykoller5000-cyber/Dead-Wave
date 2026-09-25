@@ -2,7 +2,9 @@
 // crew/crew.mjs — the Dead-Wave crew board from the command line. No dependencies (Node 22+).
 //
 //   node crew/crew.mjs                          who is doing what, clashes, questions, reviews
-//   node crew/crew.mjs next <agent>             your next open task on the board
+//   node crew/crew.mjs next <agent>             your next task you can start now (skips ones that
+//                                               say "after XX-n" while XX-n is still open)
+//   node crew/crew.mjs mission                  the current mission and where everyone is on it
 //
 //   node crew/crew.mjs in   <agent> <task-id> "<what>" --model "<the model you run on>" --touch "index.html (part), tools/x.mjs"
 //   node crew/crew.mjs note <agent> "<progress: what you found or finished, one line>"
@@ -121,7 +123,13 @@ function ago(iso) {
 const taskRe = (id) => new RegExp('^(\\s*- \\[)( |x|>|!|~)(\\] \\*\\*' + id.replace(/[-]/g, '\\-') + '\\*\\*)', 'm');
 function boardTasks() {
   const out = [];
-  for (const m of read(boardPath).matchAll(/^\s*- \[( |x|>|!|~)\] \*\*([A-Z]{2}-\d+[a-z]?)\*\*\s*(.*)$/gm)) out.push({ box: m[1], id: m[2], text: m[3] });
+  // A task is its "- [ ] **XX-n**" line plus the indented lines under it.
+  for (const line of read(boardPath).replace(/\r\n/g, '\n').split('\n')) {
+    const m = /^\s*- \[( |x|>|!|~)\] \*\*([A-Z]{2}-\d+[a-z]?)\*\*\s*(.*)$/.exec(line);
+    if (m) out.push({ box: m[1], id: m[2], text: m[3] });
+    else if (out.length && /^\s{2,}\S/.test(line) && !/^\s*- /.test(line) && out[out.length - 1].open !== false) out[out.length - 1].text += ' ' + line.trim();
+    else if (out.length && !line.trim()) out[out.length - 1].open = false;
+  }
   return out;
 }
 function markTask(agent, id, box) {
@@ -173,8 +181,59 @@ function freezeLine(all) {
   const f = all.find((s) => s.fields.state === 'active' && /freeze/i.test(s.fields.touching || ''));
   return f ? `SPLIT FREEZE ON (${AGENTS[f.agent]}, ${ago(f.fields.since)}) — nobody else edits index.html` : 'split freeze off';
 }
+// A task that says "after XX-n" (or "once", "until", "waits on") can't start while XX-n is open.
+function gateOf(t, all) {
+  for (const d of t.text.matchAll(/\b(?:after|once|until|waits? (?:for|on))\s+(?:the\s+)?(?:(split)\b|([A-Z]{2}-\d+))/gi)) {
+    const id = d[1] ? 'CU-4' : d[2].toUpperCase();
+    const g = all.find((x) => x.id === id);
+    if (id !== t.id && g && g.box !== 'x' && g.box !== '~') return g;
+  }
+  return null;
+}
 function nextTask(agent) {
-  return boardTasks().find((t) => t.id.startsWith(PREFIX[agent] + '-') && (t.box === ' ' || t.box === '>'));
+  const all = boardTasks();
+  const mine = all.filter((t) => t.id.startsWith(PREFIX[agent] + '-') && (t.box === ' ' || t.box === '>'));
+  return mine.find((t) => !gateOf(t, all)) || null;
+}
+function waitingTask(agent) {
+  const all = boardTasks();
+  const t = all.find((x) => x.id.startsWith(PREFIX[agent] + '-') && (x.box === ' ' || x.box === '>') && gateOf(x, all));
+  return t ? { task: t, on: gateOf(t, all) } : null;
+}
+const ownerOf = (id) => AGENTS[Object.keys(PREFIX).find((a) => id.startsWith(PREFIX[a] + '-'))] || '?';
+
+// --- the mission: the one thing the whole crew is doing now (BOARD.md "## Mission") -----
+function mission() {
+  const board = read(boardPath).replace(/\r\n/g, '\n');
+  const m = /^## Mission\s*$([\s\S]*?)(?=^## |(?![\s\S]))/m.exec(board);
+  if (!m) return null;
+  const body = m[1];
+  const title = ((/\*\*([^*]+)\*\*/.exec(body) || [])[1] || 'Mission').replace(/\.$/, '');
+  const tasks = boardTasks();
+  const rows = [];
+  for (const r of body.matchAll(/^- \*\*(\w+)\*\* · ([A-Z]{2}-\d+) · (\S+)\s*$/gm)) {
+    const agent = Object.keys(AGENTS).find((a) => AGENTS[a].toLowerCase() === r[1].toLowerCase());
+    const t = tasks.find((x) => x.id === r[2]);
+    const st = agent ? readStatus(agent).fields : {};
+    const turnedIn = fs.existsSync(path.join(ROOT, r[3]));
+    const state = t && t.box === 'x' ? 'turned in' : st.state === 'active' && (st.task || '').startsWith(r[2]) ? 'working' : turnedIn ? 'report written' : 'not started';
+    rows.push({ agent, name: r[1], id: r[2], file: r[3], state });
+  }
+  return { title, rows };
+}
+function printMission() {
+  const ms = mission();
+  if (!ms || !ms.rows.length) return;
+  const done = ms.rows.filter((r) => r.state === 'turned in').length;
+  const mark = { 'turned in': '✓', working: '▶', 'report written': '…', 'not started': '○' };
+  console.log(`MISSION · ${ms.title} · ${done} of ${ms.rows.length} done`);
+  const byAgent = new Map();
+  for (const r of ms.rows) { if (!byAgent.has(r.name)) byAgent.set(r.name, []); byAgent.get(r.name).push(r); }
+  const multi = [...byAgent.values()].some((rs) => rs.length > 1);
+  if (!multi) for (const r of ms.rows) console.log(`  ${mark[r.state]} ${(r.name + '            ').slice(0, 12)}${(r.id + '       ').slice(0, 7)}${(r.state + '               ').slice(0, 15)}${r.file}`);
+  // Several tasks each: one line per agent, "✓ done ▶ working … written ○ not started".
+  else for (const [name, rs] of byAgent) console.log(`  ${(name + '            ').slice(0, 12)}${String(rs.filter((r) => r.state === 'turned in').length).padStart(2)}/${rs.length}  ${rs.map((r) => mark[r.state] + ' ' + r.id).join('  ')}`);
+  console.log('  ✓ done  ▶ working  … report written  ○ not started.  How: "## Mission" in crew/BOARD.md.');
 }
 
 // --- who we're waiting on (the same rules as the panel's top box) ------------------------
@@ -235,6 +294,8 @@ function panel() {
   const pad = (s, n) => (s + ' '.repeat(n)).slice(0, n);
   console.log('\nDEAD-WAVE CREW   ·   ' + freezeLine(all));
   console.log('─'.repeat(78));
+  printMission();
+  console.log('─'.repeat(78));
   const notes = logLines();
   for (const s of all) {
     const f = s.fields;
@@ -246,8 +307,8 @@ function panel() {
       if (last) console.log(' '.repeat(21) + 'latest: ' + last.text);
     }
     if (f.state === 'blocked') console.log(' '.repeat(21) + 'blocked on: ' + (f['blocked-on'] || DASH));
-    const nt = nextTask(s.agent);
-    if (f.state !== 'active') console.log(' '.repeat(21) + 'next: ' + (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 58)}` : (f.next || DASH)));
+    const nt = nextTask(s.agent), wt = waitingTask(s.agent);
+    if (f.state !== 'active') console.log(' '.repeat(21) + 'next: ' + (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 58)}` : wt ? `nothing to start: ${wt.task.id} waits on ${wt.on.id} (${ownerOf(wt.on.id)})` : 'queue empty'));
   }
   const p = problems(all);
   console.log('─'.repeat(78));
@@ -280,14 +341,19 @@ const positional = rest.filter((x, i) => !x.startsWith('--') && !(i > 0 && VALUE
 
 if (!cmd || cmd === 'panel') {
   panel();
+} else if (cmd === 'mission') {
+  const ms = mission();
+  if (!ms) console.log('No mission on the board right now.'); else printMission();
 } else if (cmd === 'check') {
   const p = problems(Object.keys(AGENTS).map(readStatus));
   if (p.length) { console.log(p.join('\n')); process.exit(1); }
   console.log('ok');
 } else if (cmd === 'next') {
   need(agent);
-  const t = nextTask(agent);
-  console.log(t ? `${t.id} ${t.text.replace(/\*\*/g, '')}` : 'Your queue is empty. Check out, and say so in your card\'s next: field.');
+  const t = nextTask(agent), w = waitingTask(agent);
+  if (t) console.log(`${t.id} ${t.text.replace(/\*\*/g, '')}`);
+  else if (w) console.log(`Nothing you can start yet. ${w.task.id} waits on ${w.on.id} (${ownerOf(w.on.id)}). Stop here: the board will change when it's ready.`);
+  else console.log('Your queue is empty. Stop here; Claude adds work to the board.');
 } else if (cmd === 'in') {
   need(agent);
   const [taskId, what] = positional;
@@ -345,13 +411,15 @@ if (!cmd || cmd === 'panel') {
   if (process.argv.includes('--done')) markTask(agent, taskId, 'x');
   else if (blocked) markTask(agent, taskId, '!');
   const nt = nextTask(agent);
-  s.fields.next = arg('next') || (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 60)}` : DASH);
+  s.fields.next = arg('next') || (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 60)}` : waitingTask(agent) ? `waits on ${waitingTask(agent).on.id}` : DASH);
   writeStatus(s);
   log(agent, blocked ? 'BLOCKED' : (process.argv.includes('--done') ? 'DONE' : 'OUT'), `${finished || DASH}${report ? ' · report ' + report : ''}${blocked ? ' · on ' + blocked : ''}`);
   if (review) log(agent, 'REVIEW', `${report || DASH} · ${review}`);
   console.log(blocked ? `${AGENTS[agent]} marked blocked: ${blocked}` : `${AGENTS[agent]} checked out.`);
   for (const w of warn) console.log('! ' + w);
-  console.log(nt && !blocked ? `Next on your queue: ${nt.id}. Keep going unless Jerry said otherwise (AGENTS.md).` : '');
+  const wt = waitingTask(agent);
+  console.log(blocked ? '' : nt ? `Next on your queue: ${nt.id}. Keep going unless Jerry said otherwise (AGENTS.md).`
+    : wt ? `Stop here. Your next task, ${wt.task.id}, waits on ${wt.on.id} (${ownerOf(wt.on.id)}).` : 'Your queue is empty. Stop here.');
   panel();
 } else if (cmd === 'ask') {
   need(agent);
@@ -390,6 +458,6 @@ if (!cmd || cmd === 'panel') {
   log(agent, 'REQUEST', `→ ${toName}: ${title}`);
   console.log('request added to handoffs/requests.md');
 } else {
-  console.error('Commands: (none) | next | in | note | out | ask | request | check | answer | reviewed. See the top of crew/crew.mjs.');
+  console.error('Commands: (none) | mission | next | in | note | out | ask | request | check | answer | reviewed. See the top of crew/crew.mjs.');
   process.exit(2);
 }

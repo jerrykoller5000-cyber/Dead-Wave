@@ -132,10 +132,37 @@
   .req ul { margin: 0; padding-left: 18px; font-size: 13px; }
   .req li { margin: 2px 0; }
 
+  /* summary line, mission, your move, help */
+  .summary { flex-basis: 100%; margin: 2px 0 0; font-size: 15px; color: var(--ink); }
+  .summary b { font-weight: 700; }
+  .mission { border-left: 6px solid var(--accent); }
+  .mission .mt { font-size: 19px; font-weight: 700; margin: 0; }
+  .mission .goal { color: var(--muted); margin: 4px 0 10px; }
+  .mission .rows { display: grid; gap: 6px; }
+  .mission .mr { display: grid; grid-template-columns: 12px 110px 64px 1fr; gap: 8px; align-items: center; font-size: 13.5px; min-width: 0; }
+  .mission .mr .dot { background: var(--c); }
+  .mission .mr .nm { font-weight: 700; color: var(--c); }
+  .mission .mr .f { color: var(--faint); font-size: 12px; overflow-wrap: anywhere; }
+  .st { font-size: 11px; font-weight: 700; letter-spacing: .05em; padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); white-space: nowrap; }
+  .st.in { color: #fff; background: var(--ok); } .st.work { color: var(--ok); } .st.wrote { color: var(--warn); } .st.none { color: var(--muted); }
+  .mission .then { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .mission .bar i { background: var(--ok); }
+  .you .yi { display: grid; grid-template-columns: 12px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); min-width: 0; }
+  .you .yi:first-of-type { border-top: 0; }
+  .you .yi .dot { background: var(--c); }
+  .you .yi .d { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+  .you .yi .d b { color: var(--ink); }
+  .you .yi .nm { font-weight: 700; color: var(--c); }
+  .you .howto { font-size: 12.5px; color: var(--faint); margin-top: 8px; }
+  button.copy { font: 600 12.5px system-ui, sans-serif; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; white-space: nowrap; }
+  button.copy:hover { border-color: var(--accent); }
+  button.copy.done { color: var(--ok); border-color: var(--ok); }
+  .help ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); } .help li { margin: 3px 0; } .help b { color: var(--ink); }
+  details.fold > summary { font-size: 13px; letter-spacing: 0; text-transform: none; }
   details > summary { cursor: pointer; color: var(--muted); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
   .md p { margin: 6px 0; } .md ul { margin: 4px 0; padding-left: 18px; } .md li { margin: 2px 0; }
   .offline { padding: 16px 18px; }
-  @media (max-width: 560px) { header, main { padding-left: 16px; padding-right: 16px; } .grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { header, main { padding-left: 16px; padding-right: 16px; } .grid2 { grid-template-columns: 1fr; } .mission .mr { grid-template-columns: 12px 1fr auto; } .mission .mr .sf { grid-column: 2 / -1; } .you .yi { grid-template-columns: 12px 1fr; } .you .yi > :last-child { grid-column: 2; justify-self: start; } }
 </style>
 </head>
 <body>
@@ -145,8 +172,11 @@
   <span class="badge" id="push">…</span>
   <span class="badge" id="tests" hidden></span>
   <span class="stamp" id="stamp">loading…</span>
+  <p class="summary" id="summary"></p>
 </header>
 <main>
+  <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
+  <section class="box you"><h3>Your move <small>what only you can do right now</small></h3><div id="you"></div></section>
   <section class="box flow"><h3>Right now <small>who's working, who everyone is waiting on, who's up next</small></h3><div id="flow"></div></section>
   <div class="attn" id="attn"></div>
   <div class="agents" id="agents"></div>
@@ -159,6 +189,14 @@
     <section class="box req"><h3>Open requests <small>handoffs/requests.md</small></h3><div id="requests"></div></section>
     <section class="box md"><details><summary>Orders from Jerry and decisions</summary><div id="orders"></div><div id="decisions"></div></details></section>
   </div>
+  <section class="box help"><details><summary>How to read this panel</summary><ul>
+    <li><b>The top line</b> says it in one sentence: who is working, who needs you, whether anything is waiting to be committed.</li>
+    <li><b>Mission</b> is the one job the whole crew is on now, and where each agent is with it. <span class="st in">DONE</span> means finished and checked out; green chips are done, grey ones not started.</li>
+    <li><b>Your move</b> lists what only you can do: start an agent (press <b>Copy prompt</b>, paste it into that agent's chat), or answer a question.</li>
+    <li><b>Right now</b> shows who is working, who is waiting on whom, and who is ready.</li>
+    <li><b>The cards</b> are each agent's own status. <b>Today</b> is who worked when; green lines are commits.</li>
+    <li>Nothing here changes anything: it only reads the crew files. Claude runs the board.</li>
+  </ul></details></section>
 </main>
 <script>
 const AGENTS = [['claude', 'Claude', 'CL'], ['cursor', 'Cursor', 'CU'], ['chatgpt', 'ChatGPT', 'GP'], ['grokbot', 'Grokbot', 'GB'], ['antigravity', 'Antigravity', 'AG']];
@@ -168,6 +206,9 @@ const STALE_HOURS = 8;
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const inline = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 const cvar = (a) => `style="--c: var(--${esc(a)})"`;
+const cut = (s, n) => { let t = String(s || '').replace(/\*\*/g, ''); if (t.length > n) { t = t.slice(0, n - 1); if ((t.match(/`/g) || []).length % 2) t = t.slice(0, t.lastIndexOf('`')); t = t.trimEnd() + '…'; } return t; };
+const clean2 = (s, n = 90) => inline(cut(s, n));
+const firstSentence = (s) => String(s || '').replace(/\*\*/g, '').split(/(?<=\.)\s/)[0];
 const hoursSince = (iso) => { const t = Date.parse(iso); return Number.isFinite(t) ? (Date.now() - t) / 36e5 : null; };
 function ago(iso) {
   const h = hoursSince(iso); if (h === null) return '—';
@@ -221,6 +262,44 @@ function boardTasks(board) {
     else if (out.length && /^\s{2,}\S/.test(line) && !/^\s*- /.test(line)) out[out.length - 1].text += ' ' + line.trim();
   }
   return out;
+}
+// A task that says "after XX-n" (or once / until / waits on) can't start while XX-n is open.
+function gateOf(t, tasks) {
+  for (const d of t.text.matchAll(/\b(?:after|once|until|waits? (?:for|on))\s+(?:the\s+)?(?:(split)\b|([A-Z]{2}-\d+))/gi)) {
+    const id = d[1] ? 'CU-4' : d[2].toUpperCase(); const g = tasks.find((x) => x.id === id);
+    if (id !== t.id && g && g.box !== 'x' && g.box !== '~') return g;
+  }
+  return null;
+}
+const PROMPT = (a, id) => `Dead-Wave: check in as ${a}. Read AGENTS.md and follow its session steps: look at the crew board, answer requests addressed to you, then work down your queue — check in (with --model, the model you run on), post notes as you go, check out with a handoff note, and take the next task — until your queue is empty or you're blocked. Questions only Jerry can answer go through crew.mjs ask.` + (id ? ` Today, do ${id} first.` : '');
+async function copyText(btn, text) {
+  try { await navigator.clipboard.writeText(text); }
+  catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch {} ta.remove(); }
+  btn.textContent = 'Copied ✓'; btn.classList.add('done'); setTimeout(() => { btn.textContent = 'Copy prompt'; btn.classList.remove('done'); }, 2500);
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('button.copy'); if (b) copyText(b, b.dataset.prompt); });
+function mission(board, tasks, statuses, exists) {
+  const body = section(board, 'Mission').replace(/\r\n/g, '\n');
+  if (!body.trim()) return null;
+  const title = ((/\*\*([^*]+)\*\*/.exec(body) || [])[1] || 'Mission').replace(/\.$/, '');
+  const lines = body.split('\n');
+  const goal = (lines.find((l) => l.trim() && !/^\*\*|^- \*\*|^Then:/.test(l.trim())) || '').trim();
+  const then = (lines.find((l) => /^Then:/.test(l.trim())) || '').trim().replace(/^Then:\s*/, '');
+  const rows = [];
+  for (const m of body.matchAll(/^- \*\*(\w+)\*\* · ([A-Z]{2}-\d+) · (\S+)\s*$/gm)) {
+    const a = BY_NAME[m[1].toLowerCase()]; const t = tasks.find((x) => x.id === m[2]); const f = (a && statuses[a]) || {};
+    const state = t && t.box === 'x' ? 'in' : f.state === 'active' && (f.task || '').startsWith(m[2]) ? 'work' : exists[m[3]] ? 'wrote' : 'none';
+    rows.push({ a, name: m[1], id: m[2], file: m[3], state });
+  }
+  return { title, goal, then, rows };
+}
+// One row per task while each agent has one; one row per agent (with a chip per task) once they have several.
+function missionRows(ms, lab) {
+  const by = new Map(); for (const r of ms.rows) { if (!by.has(r.name)) by.set(r.name, []); by.get(r.name).push(r); }
+  const multi = [...by.values()].some((rs) => rs.length > 1);
+  if (!multi) return ms.rows.map((r) => `<div class="mr" ${cvar(r.a)}><span class="dot"></span><span class="nm">${esc(r.name)}</span><span class="faint">${esc(r.id)}</span><span class="sf"><span class="st ${lab[r.state][0]}">${lab[r.state][1]}</span> <a class="f" href="../${esc(r.file)}">${esc(r.file)}</a></span></div>`).join('');
+  return [...by.entries()].map(([name, rs]) => { const a = rs[0].a; const n = rs.filter((r) => r.state === 'in').length;
+    return `<div class="mr" ${cvar(a)}><span class="dot"></span><span class="nm">${esc(name)}</span><span class="faint">${n}/${rs.length}</span><span class="sf">${rs.map((r) => `<span class="st ${lab[r.state][0]}" title="${esc(lab[r.state][1])}">${esc(r.id)}</span>`).join(' ')}</span></div>`; }).join('');
 }
 function section(board, title) {
   const m = new RegExp('^## ' + title + '\\s*$', 'm').exec(board); if (!m) return '';
@@ -326,7 +405,7 @@ function flowModel(board, tasks, statuses) {
 function renderFlow(board, tasks, statuses, now) {
   const { per, bottlenecks } = flowModel(board, tasks, statuses);
   const who = (a) => a === 'jerry' ? '<span class="n">you</span>' : `<span class="n" ${cvar(a)}>${esc(NAME[a] || a)}</span>`;
-  const clean = (s, n = 90) => { const t = String(s || '').replace(/\*\*/g, ''); return inline(t.length > n ? t.slice(0, n - 1) + '…' : t); };
+  const clean = (s, n = 90) => inline(cut(s, n));
   const gatesHtml = bottlenecks.map(({ on, waiters, gate }) => {
     const f = on === 'jerry' ? {} : statuses[on]; const st = (f.state || '').toLowerCase();
     const task = gate ? gate.what : st === 'active' ? f.task : (per[on] && per[on].next ? per[on].next.id + ' ' + per[on].next.text : f.task);
@@ -349,13 +428,13 @@ function renderFlow(board, tasks, statuses, now) {
     if (p.st === 'active') working.push(row(a, `${clean(f.task)} · ${dur(now - Date.parse(f.since))}`));
     else if (p.waitOn.length) waitingOn.push(row(a, `on ${p.waitOn.map(who).join(', ')}${p.next ? ' · then ' + esc(p.next.id) : ''}<br><span class="faint">${clean(p.why, 80)}</span>`));
     else if (p.staleOn.length) ready.push(row(a, `${esc((f.task || '').split(' ')[0])} ${clean((f.task || '').split(' ').slice(1).join(' '), 60)}<br><span class="faint">card says blocked on ${p.staleOn.map((b) => esc(NAME[b] || b)).join(', ')}, who ${p.staleOn.length > 1 ? 'are' : 'is'} out of that file now</span>`));
-    else if (p.next) ready.push(row(a, `${esc(p.next.id)} ${clean(p.next.text, 80)}`));
+    else if (p.next) ready.push(row(a, `${esc(p.next.id)} ${clean(firstSentence(p.next.text), 70)}`));
     else empty.push(row(a, 'queue empty: Claude adds work'));
   }
   const col = (title, items, none) => `<div class="col"><h4>${title}</h4>${items.join('') || `<div class="none">${none}</div>`}</div>`;
   document.getElementById('flow').innerHTML =
     (gatesHtml || '<div class="gate clear"><div class="big">Nobody is waiting on anyone</div><div class="sub">Everyone with work can go.</div></div>') +
-    `<div class="cols">${col('Working now', working, 'Nobody is checked in.')}${col('Up next · ready, needs your prompt', ready, 'Nobody is ready and idle.')}${col('Waiting', waitingOn, 'Nobody is waiting.')}${empty.length ? col('Nothing queued', empty, '') : ''}</div>`;
+    `<div class="cols">${col('Working now', working, 'Nobody is checked in.')}${col('Ready · start them from Your move', ready, 'Nobody is ready and idle.')}${col('Waiting', waitingOn, 'Nobody is waiting.')}${empty.length ? col('Nothing queued', empty, '') : ''}</div>`;
 }
 
 async function refresh() {
@@ -377,6 +456,8 @@ async function refresh() {
   const pushes = parseGit(pushLog).filter((c) => /push/.test(c.msg));
   const lastCommit = commits.length ? commits[commits.length - 1].t : 0;
   const tasks = boardTasks(board);
+  const missionFiles = [...section(board, 'Mission').matchAll(/^- \*\*\w+\*\* · [A-Z]{2}-\d+ · (\S+)\s*$/gm)].map((m) => m[1]);
+  const exists = Object.fromEntries(await Promise.all(missionFiles.map(async (f) => [f, !!(await opt('../' + f))])));
   const qs = questions(qText);
   const reqs = requests(reqText);
   const now = Date.now();
@@ -408,9 +489,49 @@ async function refresh() {
       if (clash(x, y)) attn.push(`<div class="item bad"><b>Clash:</b> ${active[i][1]} (${esc(x)}) and ${active[j][1]} (${esc(y)}) are in the same file.</div>`);
   const reviewWant = new Map();
   for (const e of log) { if (!e.report) continue; if (e.kind === 'REVIEW') reviewWant.set(e.report, e); if (e.kind === 'REVIEWED') reviewWant.delete(e.report); }
-  if (reviewWant.size) attn.push(`<div class="item"><b>${reviewWant.size} handoff${reviewWant.size > 1 ? 's' : ''} waiting for Claude's review</b> <span class="faint">(changes to test expectations and the like)</span><div class="faint">${[...reviewWant.values()].map((e) => `<a href="../${esc(e.report)}">${esc(e.report.replace('handoffs/', ''))}</a> — ${inline(e.text.split(' · ').slice(1).join(' · '))}`).join('<br>')}</div></div>`);
+  if (reviewWant.size) attn.push(`<div class="item"><details class="fold"><summary><b>${reviewWant.size} handoff${reviewWant.size > 1 ? 's' : ''} waiting for Claude's review</b> <span class="faint">(Claude's job, not yours: changes to test expectations and the like)</span></summary><div class="faint">${[...reviewWant.values()].map((e) => `<a href="../${esc(e.report)}">${esc(e.report.replace('handoffs/', ''))}</a> — ${inline(e.text.split(' · ').slice(1).join(' · '))}`).join('<br>')}</div></details></div>`);
+  // reviews: one folded line instead of a long list
   document.getElementById('attn').innerHTML = attn.join('');
   renderFlow(board, tasks, statuses, now);
+
+  // ---- mission
+  const ms = mission(board, tasks, statuses, exists);
+  const mb = document.getElementById('missionBox'); mb.hidden = !ms || !ms.rows.length;
+  if (ms && ms.rows.length) {
+    const lab = { in: ['in', 'DONE'], work: ['work', 'WORKING'], wrote: ['wrote', 'REPORT WRITTEN'], none: ['none', 'NOT STARTED'] };
+    const nIn = ms.rows.filter((r) => r.state === 'in').length;
+    document.getElementById('mission').innerHTML = `<h3 style="margin:0 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Mission <small style="text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400">what the whole crew is on now</small></h3>
+      <p class="mt">${esc(ms.title)} <span class="faint" style="font-size:14px;font-weight:400">· ${nIn} of ${ms.rows.length} done</span></p>
+      <p class="goal">${inline(ms.goal)}</p>
+      <div class="rows">${missionRows(ms, lab)}</div>
+      <div class="bar"><i style="width:${Math.round(100 * nIn / ms.rows.length)}%"></i></div>
+      ${ms.then ? `<div class="then"><b>Then:</b> ${inline(ms.then)}</div>` : ''}`;
+  }
+
+  // ---- your move: agents that are ready and idle need Jerry's prompt; questions need his answer
+  const you = [];
+  const readyAgents = [], waitingAgents = [];
+  for (const [a, n] of AGENTS) {
+    const f = statuses[a]; if ((f.state || '') === 'active') continue;
+    const open = tasks.filter((t) => t.agent === a && (t.box === ' ' || t.box === '>'));
+    const next = open.find((t) => !gateOf(t, tasks));
+    if (next) { readyAgents.push(n); you.push(`<div class="yi" ${cvar(a)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(n)}</span> on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}</div><button class="copy" type="button" data-prompt="${esc(PROMPT(a, next.id))}">Copy prompt</button></div>`); }
+    else if (open.length) waitingAgents.push(n);
+  }
+  for (const q of qs.filter((q) => q.state === 'open')) you.push(`<div class="yi" ${cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Answer ${esc(q.id)}</span> from ${esc(NAME[q.agent] || q.agent)}: ${inline(q.body.split('\n').filter(Boolean).join(' ').slice(0, 200))}</div><span class="faint">tell Claude in chat</span></div>`);
+  document.getElementById('you').innerHTML = you.length
+    ? you.join('') + (readyAgents.length ? `<div class="howto">Press <b>Copy prompt</b>, open that agent's chat, paste, send. The agent reads the board and does the rest.</div>` : '')
+    : '<p class="muted" style="margin:0">Nothing needs you right now.' + (waitingAgents.length ? ` ${esc(waitingAgents.join(', '))} ${waitingAgents.length > 1 ? 'are' : 'is'} waiting on the board, not on you.` : '') + '</p>';
+
+  // ---- the one-line summary
+  const workingNames = AGENTS.filter(([a]) => statuses[a].state === 'active').map(([, n]) => n);
+  const list = (xs) => xs.length <= 1 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1];
+  const bits = [];
+  bits.push(workingNames.length ? `<b>${esc(list(workingNames))}</b> ${workingNames.length > 1 ? 'are' : 'is'} working` : '<b>Nobody</b> is working');
+  if (readyAgents.length) bits.push(`<b>${esc(list(readyAgents))}</b> ${readyAgents.length > 1 ? 'are' : 'is'} ready and need${readyAgents.length > 1 ? '' : 's'} your prompt`);
+  if (waitingAgents.length) bits.push(`${esc(list(waitingAgents))} ${waitingAgents.length > 1 ? 'are' : 'is'} waiting`);
+  const oq = qs.filter((q) => q.state === 'open').length; if (oq) bits.push(`<b>${oq} question${oq > 1 ? 's' : ''}</b> for you`);
+  document.getElementById('summary').innerHTML = (ms && ms.rows.length ? `${esc(ms.title)}: ${ms.rows.filter((r) => r.state === 'in').length} of ${ms.rows.length} done. ` : '') + bits.join(' · ') + '.';
 
   // ---- agent cards
   const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
@@ -422,7 +543,10 @@ async function refresh() {
     const latest = st === 'active' ? [...log].reverse().find((e) => e.agent === a && e.kind === 'NOTE' && e.t >= since) : null;
     const today = log.filter((e) => e.agent === a && e.t >= dayStart.getTime());
     const finishedToday = today.filter((e) => /^(OUT|DONE)$/.test(e.kind) && e.report).length;
-    const next = mine.find((t) => t.box === '>' || t.box === ' ');
+    const curId = st === 'active' ? (f.task || '').split(' ')[0] : '';
+    const openMine = mine.filter((t) => (t.box === '>' || t.box === ' ') && t.id !== curId);
+    const next = openMine.find((t) => !gateOf(t, tasks)) || null;
+    const gatedNext = !next && openMine.length ? { t: openMine[0], on: gateOf(openMine[0], tasks) } : null;
     const chips = splitList(f.touching).map((t) => `<span class="chip">${esc(t)}</span>`).join('');
     return `<div class="card ${esc(st)}" ${cvar(a)}>
       <h2><span class="dot"></span>${n}<span class="state">${esc(st.toUpperCase())}</span></h2>
@@ -433,7 +557,7 @@ async function refresh() {
         ${latest ? `<div class="latest"><span class="faint">${clock(latest.t)} ·</span> ${inline(latest.text)}</div>` : ''}`
       : st === 'blocked' ? `<div class="task">${inline(f.task || '—')}</div><div class="row">blocked on <b>${inline(f['blocked-on'] || '—')}</b></div>`
       : `<div class="task muted">Not working right now</div><div class="row">last seen <b>${esc(ago(f.since))}</b></div>`}
-      <div class="row">next <b>${next ? esc(next.id) + '</b> ' + inline(next.text.replace(/\*\*/g, '').slice(0, 80)) : '<b>' + inline(f.next || '—') + '</b>'}</div>
+      <div class="row">next <b>${next ? esc(next.id) + '</b> ' + clean2(firstSentence(next.text), 80) : gatedNext ? esc(gatedNext.t.id) + '</b> waits on <b>' + esc(gatedNext.on.id) + '</b> (' + esc(NAME[gatedNext.on.agent] || '') + ')' : '<b>queue empty</b>'}</div>
       <div class="bar"><i style="width:${mine.length ? Math.round(100 * done / mine.length) : 0}%"></i></div>
       <div class="stats"><span><b>${done}</b>/${mine.length} board tasks done</span><span><b>${finishedToday}</b> reports today</span></div>
     </div>`;
@@ -506,13 +630,16 @@ async function refresh() {
   }).join('');
 
   // ---- requests
-  const openReqs = reqs.filter((r) => r.status === 'OPEN');
+  const recentDay = new Date(now - 36 * 36e5).toISOString().slice(0, 10);
+  const allOpen = reqs.filter((r) => r.status === 'OPEN');
+  const openReqs = allOpen.filter((r) => r.date >= recentDay);
+  const olderOpen = allOpen.length - openReqs.length;
   const groups = {};
   for (const r of openReqs) for (const to of r.to) (groups[to] ||= []).push(r);
   document.getElementById('requests').innerHTML = Object.keys(groups).length
     ? Object.entries(groups).map(([to, rs]) => `<h4>For ${esc(NAME[to] || to)} <span class="faint">(${rs.length})</span></h4><ul>${rs.slice(-8).reverse().map((r) => `<li>${inline(r.title)} <span class="faint">— from ${esc(r.from)}, ${esc(r.date)}</span></li>`).join('')}</ul>`).join('')
-      + `<p class="faint">"Open" means nobody has marked it DONE, WONT or LATER, or replied under it. ${reqs.length - openReqs.length} of ${reqs.length} are answered.</p>`
-    : '<p class="muted">No open requests.</p>';
+      + `<p class="faint">Open requests from the last day and a half. "Open" means nobody has marked it DONE, WONT or LATER, or replied under it.${olderOpen ? ` ${olderOpen} older ones are hidden: most were settled in later work.` : ''}</p>`
+    : `<p class="muted">No open requests from the last day and a half.${olderOpen ? ` <span class="faint">(${olderOpen} older ones hidden.)</span>` : ''}</p>`;
 
   document.getElementById('orders').innerHTML = '<h4>Orders from Jerry</h4>' + md(section(board, 'Orders from Jerry'));
   document.getElementById('decisions').innerHTML = '<h4>Decisions</h4>' + md(section(board, 'Decisions'));

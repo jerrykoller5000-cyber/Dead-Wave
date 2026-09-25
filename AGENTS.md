@@ -16,8 +16,9 @@ says it (D-14).
 You won't remember earlier sessions. The crew board remembers for you. Jerry watches it all on
 the crew panel, so what you log is how he knows what you're doing.
 
-1. **Look.** Run `node crew/crew.mjs`. It shows who is active and in which files, open
-   questions, and reviews waiting. Then read `crew/BOARD.md` (Jerry's orders, the decisions,
+1. **Look.** Run `node crew/crew.mjs`. It shows the current **mission** (the one job the whole
+   crew is on, if there is one), who is active and in which files, open questions, and reviews
+   waiting. `node crew/crew.mjs mission` shows just the mission. Then read `crew/BOARD.md` (Jerry's orders, the decisions,
    your queue) and your own card, `crew/status/<you>.md`, for the notes you left yourself.
 2. **Answer first.** Look in `handoffs/requests.md` for anything addressed to you, and answer
    it in place (`DONE`, `WONT (why)` or `LATER (phase)`).
@@ -44,7 +45,8 @@ the crew panel, so what you log is how he knows what you're doing.
    - Put anything your next session should know in the Notes section of your card.
 6. **Keep going.** Take the next task and go round again. Don't stop to ask Jerry whether to
    continue. Stop only when:
-   - your queue is empty;
+   - your queue is empty, or `crew.mjs next` says your next task waits on someone else's
+     (a task that says "after XX-n" can't start until XX-n is ticked);
    - you're blocked; or
    - you need a decision only Jerry can make. Then run
      `node crew/crew.mjs ask <you> "<the question>"`, which puts it at the top of his panel,

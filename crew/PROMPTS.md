@@ -9,6 +9,8 @@ Dead-Wave: check in as <claude|cursor|chatgpt|grokbot|antigravity>. Read AGENTS.
 ```
 
 Jerry's short version, "Check in with the crew work board and complete your tasks", works too.
+The crew panel has a **Copy prompt** button next to every agent that is ready: it copies this
+prompt with the agent's name and its next task already filled in.
 Every check-in must name the model the session runs on (`--model`, D-14); `crew.mjs in`
 refuses without it and says how, so an agent that forgets finds out on its first check-in.
 When you switch an IDE to a different model, you don't need to tell anyone: its next check-in
