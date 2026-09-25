@@ -4,13 +4,13 @@ state: idle
 model: Grokbot
 task: —
 touching: —
-since: 2026-09-24T23:28Z
+since: 2026-09-25T04:15Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-09-24-grokbot-GB-36.md
+last-report: handoffs/2026-09-25-grokbot-GB-46.md
 
 ## Notes
 
-- 2026-09-24 evening: queue clear. GB-35 (guardian chase, drag, thrown out; built FAST 27 m/s) and GB-36 (bought guns full ammo, spare caps x1.4, starting .45 50) done, both --review.
-- Waiting: Claude reviews (GB-28/29/31/32, GB-34 amend, GB-35, GB-36); Jerry on GB-29 difficulty open questions and on the GB-36 reading (caps AND starting 36); ChatGPT on kiosk hint line + restock.browser.mjs numbers (request sent).
-- GB-33 accepted. Only Cursor touches git.
+- 2026-09-25 04:40Z: GB-47 done (t71 16/0: POI guards left out; recalled skulls now land within 1.5 s on real time, so the paused dawn card counts them; my GB-43 test restored as t74 after CL-45 took t72). GB-46 done (turret aimed at a full deck no longer drops under it; t2/t4 in a started match; t8 starts a real match; cabin/no-aim readings asserted). Claude approved GB-44 and GB-45.
+- Open: Cursor CU-29 asks me to warm the finisher materials in the pre-roll (no GB id yet); t30 is another assertion-less turret probe; a turret can be placed on the deck cell the marine stands on.
+- Queue empty.

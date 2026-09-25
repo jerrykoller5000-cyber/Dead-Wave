@@ -66,4 +66,14 @@ body.deploying { cursor: default !important; }
 .menu-footer .signal-dot { display: inline-block; width: 4px; height: 4px; margin: 0 8px 2px 0; background: #a84b3d; }
 @media (max-height: 650px) { #modeSelect .menu-content { padding-top: 5vh; padding-bottom: 5vh; } .menu-eyebrow { margin-bottom: 14px; } #modeSelect h2.dw-wordmark { font-size: clamp(58px, 12vh, 110px); margin-bottom: 10px; } .menu-tagline { margin-bottom: 20px; font-size: 10px; } #modeSelect #nameRow { margin-top: 18px; } .menu-footer { bottom: 12px; } }
 @media (max-width: 600px) { #modeSelect .menu-content { padding-left: 8vw; } .opening-controls { bottom: 14px; } .menu-footer { left: 8vw; } .menu-eyebrow { letter-spacing: .14em; } }
+/* Lower desktop actions below the cabin roof line in the opening camera frame. */
+@media (min-width: 601px) and (min-height: 651px) {
+  #modeSelect .menu-content { transform:translateY(60px); }
+  .menu-footer { left:auto; right:6vw; }
+}
+/* The callsign is required; decorative status must never cover it on short screens. */
+@media (max-height: 650px) {
+  #modeSelect { overflow-y:auto; }
+  .menu-footer { display:none; }
+}
 @media (prefers-reduced-motion: reduce) { #opening *, #modeSelect * { animation: none !important; transition: none !important; } }

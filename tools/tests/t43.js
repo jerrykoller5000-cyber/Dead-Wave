@@ -32,10 +32,13 @@
 
     const caves = T.POI.caves;
     let drownedOk = true, caveOk = true, used = new Set();
+    let groundOk = true, groundN = 0;   // GB-40 / D-29: day 1's ground risers (caveIndex -1)
     for (let i = 0; i < prev.queue.length; i++) {
       const tk = prev.queue[i];
       const ci = prev.caveByIndex[i];
-      if (tk === 'drowned') {
+      if (prev.groundByIndex && prev.groundByIndex[i]) {
+        if (ci !== -1 || tk !== 'shambler') groundOk = false; else groundN++;
+      } else if (tk === 'drowned') {
         if (ci !== -1) drownedOk = false;
       } else {
         if (!(ci >= 0 && ci < caves.length)) caveOk = false;
@@ -43,6 +46,8 @@
       }
     }
     ok(drownedOk, 'drowned rows use caveIndex -1');
+    ok(groundOk && groundN === (prev.groundRisers || 0), 'ground rows (D-29) use caveIndex -1 and match groundRisers (' + groundN + ')');
+    if (prev.day === 1) ok(prev.total === 15 && groundN >= 7 && groundN <= 8, 'day 1 is 15, 7-8 from the ground (' + prev.total + '/' + groundN + ')');
     ok(caveOk, 'non-drowned rows use valid POI.caves indices');
     ok(prev.caveIndices.every((i) => used.has(i)), 'caveIndices ⊆ used mouths');
     ok([...used].every((i) => prev.caveIndices.includes(i)), 'used mouths ⊆ caveIndices');
@@ -95,7 +100,7 @@
     // Screamers (tactics=scream) call up to 3 shambler/feral friends mid-wave;
     // those extras are not shifted off waveQueue and made the lockstep check flake.
     let made = 0;
-    for (let i = 0; i < 80 && made < 3; i++) {
+    for (let i = 0; i < 80 && made < 4; i++) {
       if (T.spawnWaveBatch) T.spawnWaveBatch(0.25);
       await wait(16);
       made = ((T.getWaveDirectorState().waveSpawned || 0) - spawned0);
@@ -112,7 +117,7 @@
     for (const z of T.zombies) {
       if (!z.alive) continue;
       const tk = z.typeKey || z.type;
-      if (tk === 'drowned') continue;
+      if (tk === 'drowned' || z.groundRise) continue;
       checked++;
       const zx = z.mesh.position.x, zz = z.mesh.position.z;
       let best = Infinity, bestIdx = -1;

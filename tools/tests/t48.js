@@ -59,6 +59,22 @@
       made = T.zombies.filter(z => z.alive).length;
     }
     ok(made >= 1, 'spawned zombies (' + made + ')');
+    // GB-40 / D-29: day-1 shamblers get no cave role.
+    ok(T.getDay() === 1 && T.zombies.filter(z => z.alive).every(z => !z.caveTrait), 'no caveTrait on day 1 (D-29)');
+    // Day 2: the role is stamped on cave-spawned bodies.
+    T.clearZombies && T.clearZombies();
+    T.setDay(1); T.startPrep();
+    await wait(40);
+    if (T.skipGrace) T.skipGrace();
+    if (T.skipPrep) T.skipPrep();
+    await wait(40);
+    made = 0;
+    for (let i = 0; i < 60 && made < 2; i++) {
+      if (T.spawnWaveBatch) T.spawnWaveBatch(0.25);
+      await wait(16);
+      made = T.zombies.filter(z => z.alive).length;
+    }
+    ok(T.getDay() === 2 && made >= 1, 'day 2 spawned zombies (' + made + ')');
     const tagged = T.zombies.filter(z => z.alive && z.caveTrait);
     const drowned = T.zombies.filter(z => z.alive && (z.typeKey === 'drowned' || z.aquatic));
     ok(tagged.length >= 1 || drowned.length === made, 'caveTrait stamped on cave-spawned (or only drowned)');

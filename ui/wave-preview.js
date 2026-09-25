@@ -15,7 +15,7 @@ export function bearingLabel(angle) {
 // Pure projection of Grokbot's frozen plan. It neither reads TT nor consumes RNG.
 export function buildBriefing({ preview, day, intelOwned = false } = {}) {
   const result = { title: validCount(day) && day > 0 ? text('wavePreview.title', { day }) : text('wavePreview.unavailable'),
-    available: false, warnings: [], sources: [], total: null, note: text('wavePreview.unavailable') };
+    available: false, warnings: [], sources: [], total: null, earnings: null, note: text('wavePreview.unavailable') };
   if (!preview || preview.day !== day || !validCount(preview.total) || !Array.isArray(preview.byTypeAndCave)) return result;
   if (preview.bloodMoon) result.warnings.push(text('hud.bloodMoon'));
   if (preview.surround) result.warnings.push(text('wave.surround'));
@@ -27,7 +27,7 @@ export function buildBriefing({ preview, day, intelOwned = false } = {}) {
     sum += row.count;
     if (!Number.isSafeInteger(sum)) return result;
     if (!row.count) continue;
-    const id = row.caveIndex >= 0 ? `cave:${row.caveIndex}` : row.typeKey === 'drowned' ? 'lake' : 'perimeter';
+    const id = row.caveIndex >= 0 ? `cave:${row.caveIndex}` : row.ground === true ? 'ground' : row.typeKey === 'drowned' ? 'lake' : 'perimeter';
     let group = groups.get(id);
     if (!group) {
       const nameKey = CAVE_KEYS.find(key => STRINGS[key] === row.caveName);
@@ -41,6 +41,7 @@ export function buildBriefing({ preview, day, intelOwned = false } = {}) {
   if (sum !== preview.total) return result;
   result.available = true;
   if (!sum) { result.note = text('wavePreview.empty'); return result; }
+  if (day === 1) result.earnings = text('economy.dayOne');
   const all = [...groups.values()].sort((a,b) => b.total - a.total || a.id.localeCompare(b.id));
   const largest = all.filter(group => group.total === all[0].total);
   const selected = intelOwned ? all : largest.slice(0, 2);
@@ -86,9 +87,11 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     }
     if(view.note)line(content,'p',view.note,'briefing-muted');
     if(view.total)line(content,'p',view.total,'briefing-total');
+    if(view.earnings)line(content,'p',view.earnings,'briefing-earnings');
     if(data.phase!=='prep')line(content,'p',text('wavePreview.inProgress'),'briefing-warning');
     if(data.disabled)line(content,'p',text('hq.disabled'),'briefing-warning');
-    alarm.disabled = data.phase !== 'prep' || data.alarmActive || data.disabled;
+    if(data.canSoundAlarm === false)line(content,'p',text('wavePreview.atHQ'),'briefing-muted');
+    alarm.disabled = data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
     // Missing optional intelligence must never prevent a valid wave start.
   }
   function shut() {

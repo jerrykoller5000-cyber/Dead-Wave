@@ -1032,6 +1032,7 @@
     import { AudioSys } from './core/audio.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
+    import { createNightRecord, mountDawn } from './ui/dawn.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -18639,7 +18640,7 @@
     // GB-42 (GP-A1, GB-A3): day-1 skulls you can see and keep. On day 1 every kill drops its own
     // skull (no pooling), skulls don't expire while the wave is on, and at the finisher the ones
     // still on the ground fly to the marine. SKULL_KEEP_DAYS widens it to later days if wanted.
-    const SKULL_KEEP_DAYS = 1, SKULL_RECALL_MS = 2500;
+    const SKULL_KEEP_DAYS = 1, SKULL_RECALL_MS = 2500, SKULL_FLY_MS = 1500;
     let skullRecallUntil = 0;
     function skullKeepDay() { return day >= 1 && day <= SKULL_KEEP_DAYS; }
     // What a kill is worth drops as a skull of the thing that died — same pooling, same
@@ -18741,11 +18742,17 @@
         const c = cashDrops[i];
         if (c.taken) { cashDrops.splice(i, 1); continue; }
         // GB-42: the finisher calls the day's loose skulls in; they fly to the marine and bag themselves.
-        if (c.skull && !c.fly && performance.now() < skullRecallUntil) { c.fly = true; dropSkullRing(c); }
+        if (c.skull && !c.fly && performance.now() < skullRecallUntil) { c.fly = true; c.flyBy = performance.now() + SKULL_FLY_MS; dropSkullRing(c); }
         if (c.fly) {
           const fdx = player.position.x - c.mesh.position.x, fdz = player.position.z - c.mesh.position.z;
           const fd = Math.hypot(fdx, fdz);
-          const step = Math.min(fd, (16 + fd * 0.6) * dt);
+          // GB-47: on real time (the finisher's slow motion would stretch the flight past it) and
+          // home within SKULL_FLY_MS, so every one is bagged, and counted on the dawn card, before
+          // the finisher hands over to prep. The dawn card pauses the game: a skull still in the
+          // air then used to hang there, uncounted.
+          const rdt = slowMoT > 0 ? dt / 0.32 : dt;
+          const flyLeft = Math.max(0.05, ((c.flyBy || 0) - performance.now()) / 1000);
+          const step = Math.min(fd, Math.max((16 + fd * 0.6) * rdt, fd * rdt / flyLeft));
           if (fd > 0.001) { c.mesh.position.x += fdx / fd * step; c.mesh.position.z += fdz / fd * step; }
           c.mesh.position.y = sampleHeight(c.mesh.position.x, c.mesh.position.z) + 0.9 + Math.min(2.5, (fd - step) * 0.08);
           c.mesh.rotation.y += dt * 6;
@@ -18860,7 +18867,31 @@
     const FIELD_INTEL_COST = 120;
     let fieldIntelOwned = false;
     function publishUI(type, details = {}) {
+      // UI label enrichment of Grokbot's committed POI event; world layout is untouched.
+      if (type === 'poi-guards') {
+        const style = details.kind === 'campsite' ? POI.campsites[details.index]?.style : null;
+        const name = ['ranger','hikers','trapper'].includes(style) ? style : details.kind;
+        details = { ...details, day, labelKey: 'world.' + name };
+      }
       window.dispatchEvent(new CustomEvent('dw-game', { detail: { type, runId: uiRunId, eventId: ++uiEventId, ...details } }));
+    }
+    // GP-34: UI owns this night record and presentation; no reward mutation.
+    const nightRecord = createNightRecord();
+    let dawnWasPaused = false;
+    const dawnScreen = mountDawn({
+      onShow: () => AudioSys.musicCue('dawn'),
+      onSkip: () => setPaused(dawnWasPaused),
+      onContinue: () => { setPaused(dawnWasPaused); openHQBriefing({ fromDawn: true }); }
+    });
+    window.addEventListener('dw-game', ({detail}) => {
+      if (detail?.type === 'run-reset') { nightRecord.reset(); dawnScreen.close(); }
+      else if (detail?.type === 'alarm-started') nightRecord.begin(detail.day, matchStats.kills);
+      else if (detail?.type === 'skull-pickup') { nightRecord.pickup(detail.count); dawnScreen.addPickups(detail.count); }
+    });
+    function showDawnSummary(summary) {
+      if (!summary || !gameStarted || gameOver || won) return;
+      dawnWasPaused = paused; setPaused(true);
+      if (!dawnScreen.show(summary)) setPaused(dawnWasPaused);
     }
     // GP-12 / D-16: consume a confirmed planned kill once; never charge or grant Cash.
     const guardianReward = createGuardianReward({ runId: uiRunId,
@@ -20015,9 +20046,9 @@
       setPaused(hqBriefingWasPaused);
       publishUI('briefing-closed');
     }
-    function openHQBriefing() {
+    function openHQBriefing({ fromDawn = false } = {}) {
       publishPrepState(0, true);
-      if (!gameStarted || gameOver || won || hqBriefingOpen || !nearHQPanel()) return;
+      if (!gameStarted || gameOver || won || hqBriefingOpen || (!fromDawn && !nearHQPanel())) return;
       const director = getWaveDirectorState();
       let preview = null;
       try { preview = getWavePreview(director.day); } catch (error) { console.warn('Dead-Wave briefing unavailable:', error); }
@@ -20025,7 +20056,7 @@
       setPaused(true);
       publishUI('briefing-open', { day: director.day, phase: director.phase,
         preview, intelOwned: fieldIntelOwned,
-        alarmActive: !!hq.seq, disabled: devNoZombies });
+        alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel() });
     }
     window.addEventListener('dw-game', ({ detail }) => {
       if (!hqBriefingOpen) return;
@@ -20150,11 +20181,6 @@
             active: gameStarted && !gameOver && !won && !paused && !shopOpen }),
           mapRoot: document.getElementById('objectiveMapSurface'), hudRoot: document.getElementById('objectiveHud'),
           project: p => ({ x: (MAP_R - p.x) / (2 * MAP_R), y: (MAP_R - p.z) / (2 * MAP_R) }) });
-        if (pendingObjectiveRestore) {
-          try { objectiveRuntime.restore(pendingObjectiveRestore); } catch (_) {}
-          pendingObjectiveRestore = null;
-          writeDayStart();
-        }
       }
       publishPrepState(dt);
       const t = performance.now() * 0.001;
@@ -21662,6 +21688,11 @@
           pushLv(0);
           for (let lv = 1; lv <= MAX_LEVEL; lv++) pushLv(lv);
         }
+      } else if (rule.slot === 'object' && opts && opts.lv > 0 && opts.lv <= MAX_LEVEL) {
+        // GB-46: a turret, lure or mortar aimed at a deck goes on that deck or nowhere. With
+        // the deck already carrying one it used to drop to the ground under the deck, and
+        // was paid for down there (the floors' GB-8 rule: never quietly somewhere else).
+        levels.push(opts.lv);
       } else {
         if (opts && opts.lv != null && opts.lv >= 0 && opts.lv <= MAX_LEVEL) levels.push(opts.lv);
         for (let lv = 0; lv <= MAX_LEVEL; lv++) if (levels.indexOf(lv) < 0) levels.push(lv);
@@ -27032,68 +27063,11 @@
     }
 
 
-    // The morning ledger. Tests can save and load it. Play, and Play again, always
-    // start a new run on day 1. They do not resume it.
-    const DAY_START_KEY = 'tt_day_start';
-    let quietPrep = false;
-    let pendingObjectiveRestore = null;
-    function readDayStart() {
-      try {
-        const raw = localStorage.getItem(DAY_START_KEY);
-        return raw ? JSON.parse(raw) : null;
-      } catch (_) { return null; }
-    }
-    function clearDayStart() {
-      pendingObjectiveRestore = null;
-      try { localStorage.removeItem(DAY_START_KEY); } catch (_) {}
-    }
-    function writeDayStart() {
-      if (!gameStarted || phase !== 'prep') return null;
-      const ammo = {};
-      for (const k of Object.keys(ammoByWeapon)) {
-        const n = ammoByWeapon[k];
-        if (Number.isFinite(n)) ammo[k] = n;
-      }
-      const blob = {
-        v: 1,
-        day,
-        bank,
-        fieldIntelOwned: !!fieldIntelOwned,
-        reserveAmmo: Object.assign({}, reserveAmmo),
-        ammoByWeapon: ammo,
-        weaponOwned: Object.assign({}, weaponOwned),
-        sawFuel,
-        receipts: Object.assign({}, supplyGrantReceipts),
-        guardianFirstBloodDone: !!guardianFirstBloodDone,
-        objectives: objectiveRuntime ? objectiveRuntime.save() : null
-      };
-      try { localStorage.setItem(DAY_START_KEY, JSON.stringify(blob)); } catch (_) {}
-      return blob;
-    }
-    function applyDayStart(saved) {
-      if (!saved || saved.v !== 1) return false;
-      if (Number.isFinite(saved.bank)) bank = saved.bank;
-      fieldIntelOwned = !!saved.fieldIntelOwned;
-      if (saved.reserveAmmo) reserveAmmo = Object.assign(reserveAmmo, saved.reserveAmmo);
-      if (saved.ammoByWeapon) {
-        for (const k of Object.keys(saved.ammoByWeapon)) {
-          if (Number.isFinite(saved.ammoByWeapon[k])) ammoByWeapon[k] = saved.ammoByWeapon[k];
-        }
-      }
-      if (saved.weaponOwned) weaponOwned = Object.assign(weaponOwned, saved.weaponOwned);
-      if (Number.isFinite(saved.sawFuel)) sawFuel = saved.sawFuel;
-      if (saved.receipts) {
-        for (const k of Object.keys(supplyGrantReceipts)) delete supplyGrantReceipts[k];
-        Object.assign(supplyGrantReceipts, saved.receipts);
-      }
-      guardianFirstBloodDone = !!saved.guardianFirstBloodDone;
-      pendingObjectiveRestore = saved.objectives || null;
-      try { updateCoinHud(); updateAmmoHud(); } catch (_) {}
-      return true;
-    }
-
     function startPrep() {
-      if (day >= 1 && gameStarted && !quietPrep) {
+      // Claude's CL-41 hook: camera has returned before this presentation snapshot.
+      nightRecord.observe(matchStats.kills, combo);
+      const dawnSummary = finisherJustEnded ? nightRecord.finish(day) : null;
+      if (day >= 1 && gameStarted) {
         showBanner(dwText('wave.cleared', { day }), comboBest >= 5 ? dwText('wave.prepBest', { streak: comboBest }) : dwText('wave.prep'), 3, '#7cdea0');
         // CL-41: the finisher (slow motion, the relief sting) has just been the payoff; the
         // old fanfare and second slow-down only play when a wave ended without one.
@@ -27251,9 +27225,9 @@
 
       // Bonus grenade every few days (every day with the Grenadier perk)
       if (day > 1 && (day % 2 === 0 || perkLvl('grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
-      writeDayStart();
       updateWaveHud();
       updateAmmoHud();
+      if (dawnSummary) showDawnSummary(dawnSummary);
     }
 
     /** @returns {WavePreview|null} current frozen plan; null if idle / no plan yet */
@@ -27359,6 +27333,7 @@
     }
 
     function updateWaveHud() {
+      if (phase === 'wave') nightRecord.observe(matchStats.kills, combo);
       updatePrepTimerHud();
       if (!gameStarted) {
         waveLineEl.textContent = dwText('hud.wave.menu');
@@ -28129,9 +28104,6 @@
     let scriptedKill = null;     // the cave-guardian / tentacle sequence, when one is playing
     function loadDeathLog() {
       try { return JSON.parse(localStorage.getItem('tt_death_log') || '[]').filter((k) => DEATH_WAYS[k]); } catch (_) { return []; }
-    }
-    function clearDeathLog() {
-      try { localStorage.removeItem('tt_death_log'); } catch (_) {}
     }
     function recordDeath(cause) {
       const seen = loadDeathLog();
@@ -36925,7 +36897,6 @@
     }
 
     function quitToMenu() {
-      clearDayStart();
       setPaused(false);
       pauseEl.classList.remove('show');
       AudioSys.chainsawStop();
@@ -37092,8 +37063,6 @@
       resetObjectiveCombat();
       resetPerks();
       resetEconomy();
-      clearDayStart();
-      clearDeathLog();
       bank = 40; // seed money: one decision in the first prep, not a shopping spree
       medkits = 0; sinceHurt = 999; clearMedDrops();
       updateCoinHud();
@@ -38273,7 +38242,7 @@ live++;
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
           CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
-          waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day, saveDayStart: () => writeDayStart(), loadDayStart: () => applyDayStart(readDayStart()), clearDayStart,
+          waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
           groundFires, damageBuild, removeBuild, placeBuildAt, resolveTarget, cellOccupant, topmostInCell, getMortarMounted: () => mortarMounted,
           // Debug-only: build-mode probes (placement, drag, doors, the delete highlight).
           setPlaceMode, tryPlace, getPlacePoint, updateGhostPreview, pushOutOfBuild, resolveHardBuildCollisions, unlockAllBuilds,

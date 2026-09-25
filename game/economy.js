@@ -19,6 +19,27 @@ export function quoteRestock(reserves) {
   return {rows,cost};
 }
 
+// Rewards settle in whole skull value; fractional bonuses survive between kills.
+// The combat owner calls reset only for a new run, never for a broken streak.
+export function createSkullValueAccumulator() {
+  let fraction = 0;
+  return {
+    credit(value) {
+      if (!Number.isFinite(value) || value < 0) throw new TypeError('Invalid skull value');
+      const total = fraction + value;
+      if (total > Number.MAX_SAFE_INTEGER) throw new RangeError('Skull value too large');
+      // Decimal perk multipliers accumulate tiny errors across many rewards.
+      const nearest = Math.round(total);
+      const settled = Math.abs(total - nearest) <= 1e-12 ? nearest : total;
+      const whole = Math.floor(settled);
+      fraction = settled - whole;
+      return whole;
+    },
+    reset() { fraction = 0; },
+    remainder() { return fraction; }
+  };
+}
+
 // Guardian reward delivery does not use the paid-purchase path.
 const RECEIPT = 'guardian-night-first';
 const validRun = id => (typeof id==='string'&&id.length>0)||(Number.isSafeInteger(id)&&id>=0);

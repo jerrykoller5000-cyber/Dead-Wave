@@ -1,10 +1,10 @@
 # Claude
 
-state: active
+state: idle
 model: Opus 5.5, in Cowork, writing through the desktop bridge
-task: git commit of CL-41/42/43/44/45/46/47
-touching: git
-since: 2026-09-25T03:43Z
+task: —
+touching: —
+since: 2026-09-25T03:47Z
 next: CL-48 after CU-35 (the caves at night); CL-38 after Jerry signs off day 1's sound
 blocked-on: —
 last-report: handoffs/2026-09-25-claude-CL-46.md

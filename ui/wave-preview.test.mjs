@@ -38,3 +38,5 @@ test('Field Intel offer has honest cost, shortfall and ownership',()=>{
   assert.equal(intelOffer(120,false).label,'Buy — 120 Cash');assert(intelOffer(120,false).enabled);
   assert.equal(intelOffer(1000,true).label,'Owned');assert(!intelOffer(1000,true).enabled);
 });
+
+test('ground risers keep their own source label and count without becoming a cave',()=>{const preview={day:1,total:15,byTypeAndCave:[{typeKey:'shambler',count:8,caveIndex:-1,ground:true},{typeKey:'shambler',count:7,caveIndex:0,caveName:'North Cave'}]};const v=buildBriefing({preview,day:1,intelOwned:true});assert.equal(v.sources[0].id,'ground');assert.equal(v.sources[0].heading,'Treeline · ground rise');assert.equal(v.sources[0].total,'Treeline · ground rise: 8');assert.equal(v.total,'Total: 15');});

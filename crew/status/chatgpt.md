@@ -4,12 +4,49 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-25T00:08Z
-next: Queue empty; await Claude/Jerry assignment
+since: 2026-09-25T04:08Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-24-chatgpt-GP-29.md
+last-report: handoffs/2026-09-25-chatgpt-GP-36.md
 
 ## Notes
+
+2026-09-25 04:08Z: GP-33/34/35/36 COMPLETE. GP-33 real kill/pickup proof: 8
+kills -> 8 skulls worth9, coach visible. GP-34 dawn card runs after camera return,
+per-night stats, one chime, Skip/Escape resumes, Continue -> next briefing with
+remote alarm disabled. GP-35 actual Ranger Camp guard -> pickup -> bank passes,
+one-time coach waits for controls. GP-36 text migration and Daylight label pass
+actual startPrep/alarm/wave checks. 85 unit tests pass. Grokbot GB-47 fixed skull
+recall; final dawn rerun bag15/loose0 PASS. Reports GP-33 through GP-36; shots
+gp33-gp36. No git. Cursor owns CU-35 real GPU/shoot/audio/performance validation
+and commit. Remember native dawn modal pauses old tests after finisher: use
+its Skip/Continue when a scenario intends to keep playing.
+
+
+2026-09-25 approval follow-up: Claude APPROVED GP-33 accumulator contract.
+Recorded in docs/contracts.md; notified Grokbot to wire credit/reset in combat.
+Relevant unit recheck: 4 pass, 0 fail. GP-33 is still incomplete pending that
+integration and end-to-end first-pickup coach proof. GP-36 day-clear banner remains
+Claude-owned and will land with CL-41; do not edit those lines.
+
+
+2026-09-25 02:57Z: GP-36 own UI migration prepared and browser-verified, but
+left incomplete: day-clear banner is inside active CL-41 startPrep reservation.
+Claude requested to use wave.cleared plus wave.prep/wave.prepBest. Report
+handoffs/2026-09-25-chatgpt-GP-36.md. Other labels keyed, retired keys removed.
+77 unit checks pass; ui/legacy-copy.browser.mjs passes including keyed text,
+menu/pause/tips and kiosk/death/banner regressions. No game behavior changed.
+Ground-riser preview request acknowledged LATER in GP-34 briefing pass. GP-33
+also still awaits approval/integration; no ready independent queue work remains.
+
+
+2026-09-25: GP-31 and GP-32 checked out DONE; GP-33 UI/helper prepared but NOT
+complete. See handoffs/2026-09-25-chatgpt-GP-33.md. Await Claude contract approval
+and GB-42 live fractional reward + first-kill skull/coach proof. All 77 UI unit
+checks and ui/economy.browser.mjs PASS. Do not wire combat yourself. GP-34 waits
+for CL-41, GP-35 for GB-43. No git/screen control used. Real GPU/shared npm checks
+remain Antigravity/committing owner. Released all GP-33 files at blocked checkout.
+
 
 2026-09-25 00:08Z: GP-28 and GP-29 implemented; targeted headless checks PASS,
 73 UI unit tests PASS. GP-28 versions opening CSS/controller URLs (?v=gp28);

@@ -1,7 +1,7 @@
 import { text } from './strings.js';
 
 export const COACH_STORAGE_KEY = 'dw.coach.v1';
-const FLAGS = ['pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased'];
+const FLAGS = ['poiShown', 'pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased'];
 
 // An observer of committed actions: this module never awards skulls/Cash or starts a wave.
 export function createCoach({ load = () => null, save = () => {} } = {}) {
@@ -9,17 +9,24 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   try { stored = JSON.parse(load()); } catch { /* denied or old storage: session only */ }
   const profile = Object.fromEntries(FLAGS.map(key => [key, stored?.version === 1 && stored[key] === true]));
   let runId = null, ready = false, carried = 0, processing = false;
+  let poiKey = null, fightRetired = false;
   let pickupSeen = false, purchasePending = false, card = null, remaining = 0, visible = false;
   const persist = () => { try { save(JSON.stringify({ version: 1, ...profile })); } catch { /* play still works */ } };
   function handle(event = {}) {
     if (event.type === 'controls-ready') { ready = true; return; }
     if (event.type === 'run-reset') {
-      runId = event.runId; carried = 0; processing = false; pickupSeen = false;
+      runId = event.runId; ready = false; poiKey = null; fightRetired = false; carried = 0; processing = false; pickupSeen = false;
       purchasePending = false; card = null; visible = false; return;
     }
     if (event.runId != null && runId != null && event.runId !== runId) return;
+    if (event.type === 'poi-guards' && event.day === 1 && event.count > 0 && !fightRetired && !poiKey &&
+        ['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','dock'].some(id => event.labelKey === 'world.' + id)) {
+      poiKey = event.labelKey;
+    } else if (event.type === 'alarm-started') {
+      fightRetired = true; poiKey = null; if (card === 'poi') card = null;
+    }
     if (event.type === 'skull-pickup' && event.count > 0) {
-      pickupSeen = true;
+      pickupSeen = true; fightRetired = true; if (card === 'poi') card = null;
       if (Number.isSafeInteger(event.carriedCount)) carried = event.carriedCount;
     } else if (event.type === 'deposit-accepted' && event.count > 0) {
       carried = 0; processing = true;
@@ -46,6 +53,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (!visible) return null;
     if (carried > 0 && !processing && frame.nearWindow && !profile.banked && !profile.bankShown) show('bank', Infinity);
     if (!card && carried > 0 && !processing && pickupSeen && !profile.banked && !profile.bankShown && !profile.pickupShown) show('pickup', 8);
+    if (!card && !carried && poiKey && !fightRetired && !profile.banked && !profile.poiShown) show('poi', 12);
     if (!card && purchasePending && !profile.purchaseShown) show('purchase', 6);
     const view = read();
     if (card && Number.isFinite(frame.dt) && frame.dt > 0) {
@@ -56,8 +64,8 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   }
   function read() {
     if (!visible || !card) return null;
-    return { id: card, title: text(`coach.${card}`),
-      body: card === 'pickup' ? text('coach.return') : card === 'purchase' ? text('coach.loop') : '' };
+    return { id: card, title: card === 'poi' ? text('coach.poi', {poi:text(poiKey)}) : text(`coach.${card}`),
+      body: card === 'poi' ? text('coach.poiHelp') : card === 'pickup' ? text('coach.return') : card === 'purchase' ? text('coach.loop') : '' };
   }
   return { handle, tick, profile: () => ({ ...profile }), read };
 }

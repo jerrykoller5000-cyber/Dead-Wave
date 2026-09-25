@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 02:30 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 03:55 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -30,6 +30,8 @@ Every task below comes from the day-1 audit (`handoffs/audit-day1/PLAN.md` has t
 - **Grokbot** · GB-43 · handoffs/2026-09-25-grokbot-GB-43.md
 - **Grokbot** · GB-44 · handoffs/2026-09-25-grokbot-GB-44.md
 - **Grokbot** · GB-45 · handoffs/2026-09-25-grokbot-GB-45.md
+- **Grokbot** · GB-47 · handoffs/2026-09-25-grokbot-GB-47.md
+- **Grokbot** · GB-46 · handoffs/2026-09-25-grokbot-GB-46.md
 - **Cursor** · CU-28 · handoffs/2026-09-25-cursor-CU-28.md
 - **Cursor** · CU-29 · handoffs/2026-09-25-cursor-CU-29.md
 - **Cursor** · CU-30 · handoffs/2026-09-25-cursor-CU-30.md
@@ -407,9 +409,9 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   (`DWOpening.dismissForTesting()`), so t60 and t61 run again. Then the whole suite on Jerry's PC.
 - [x] **CU-29** The 373 ms stall on the day-1 last kill (AG-A6). Profile it on Jerry's GPU (`tools/cpu-profile.mjs`
   around `beginWaveFinisher` / `startPrep`), fix your part, hand Claude the rest.
-- [ ] **CU-30** Load and shell (CU-A3, CU-A7): warm and cold title times on Jerry's GPU against 5 s / 15 s, and the
+- [x] **CU-30** Load and shell (CU-A3, CU-A7): warm and cold title times on Jerry's GPU against 5 s / 15 s, and the
   title menu's 45 fps (the live pre-roll, AG-15). A favicon, so the two 404s go.
-- [ ] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
+- [>] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
   `tt_day_start`) and its tests (check out with `--review`). Stop clearing `tt_death_log` on a new game.
 - [ ] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
   (rule 3). Claude says yes to anything of his.
@@ -493,6 +495,16 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   instead of passing through them (GB-A6, GB-A8). t59 updated, `--review`.
 - [x] **GB-45** Your seven probe checks (t0, t1, t2, t3, t4, t6a, t8) each get one or two real assertions on what they
   already print (GB-A9).
+- [x] **GB-47** t71 fails on the live game: it counts GB-43's day-1 POI guards with the wave ("14 kills, 14 skulls
+  on the ground (16/16)", "bag +15 skulls (17)"). Make t71 leave the guards out, or clear them first; don't loosen
+  what it checks about the wave. `--review`.
+- [x] **GB-46** Builds and turrets are yours: the four odd things GB-45's probes print. For each one, fix it if it's a
+  bug, or assert it if it's meant; say which in the handoff. (1) t8 never starts a match (the Play click has no
+  callsign), so its wave part tests nothing. (2) t2/t4: every aimed placement comes back valid=false placed=0, and
+  t4's aim lands one cell off (0,-3 for dz -4); check it in a started match, not idle. (3) t1: `placeRefusalFor('light')`
+  on the platform cell says "that is the cabin", but `placeBuildAt('light')` puts it on the ground, not the deck.
+  (4) t3: turrets land at lv0 on platform-topped cells, and a railing on wall+floor is refused although a floor is
+  there. Don't touch the cabin or the world. `--review`.
 - [x] **GB-38** Day-1 audit → `handoffs/audit-day1/grokbot.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the wave director's day-1 plan
   (how many, which kinds, when), zombie behaviour (stuck, bad paths, spawning in view, clumping), the
   starting weapons and ammo (feel, damage, reloads, the knife), building and turrets, the cave guardian
@@ -557,14 +569,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 - [x] **GP-32** Polish (GP-A7, GP-A8, AG-A7, AG-A8, AG-A9): the kiosk's guns in price order after the owned ones; the death
   list's locked ways as badges, not "????"; the day-clear banner clear of the minimap; the menu footer out of the
   callsign at short heights; the menu block sitting on the cabin wall, not the roof wire.
-- [!] **GP-33** The day-1 economy (GP-A1, GP-A5), with Grokbot (GB-42): the coach's first card on the first skull; the
+- [x] **GP-33** The day-1 economy (GP-A1, GP-A5), with Grokbot (GB-42): the coach's first card on the first skull; the
   streak bonus pays what it says (carry the fraction, don't round it away); the kiosk and briefing say what day 1 pays.
   Quit to menu says it ends the run (D-30).
-- [ ] **GP-34** After CL-41: the dawn card (D-32). After the finisher hands the camera back: kills, skulls picked up,
+- [x] **GP-34** After CL-41: the dawn card (D-32). After the finisher hands the camera back: kills, skulls picked up,
   best streak this night, one tip, and Continue, which opens tomorrow's briefing. Short, skippable, `ui/strings.js`.
-- [ ] **GP-35** After GB-43: the coach's first line on day 1 points to the guarded POI ("Shamblers at the <POI>: go and
+- [x] **GP-35** After GB-43: the coach's first line on day 1 points to the guarded POI ("Shamblers at the <POI>: go and
   clear them"), then the pickup and bank cards follow as now.
-- [!] **GP-36** Strings (GP-A9): move the older screens' copy into `ui/strings.js` (the day banners, the alarm, "Wave
+- [x] **GP-36** Strings (GP-A9): move the older screens' copy into `ui/strings.js` (the day banners, the alarm, "Wave
   Day", "Zombies left", "Grace", the menu and pause text), and retire `menu.studio` and `legacy.menu.tagline`.
 - [x] **GP-30** Day-1 audit → `handoffs/audit-day1/chatgpt.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: every word and screen a
   first-time player sees on day 1: the menu, loading, the tutorial and coach, the briefing, the HUD,

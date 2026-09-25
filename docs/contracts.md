@@ -70,6 +70,12 @@ Owner: Grokbot. Callers: ChatGPT's HQ briefing (GP-5). From `handoffs/2026-09-23
 - Ambush option **A**: retarget only to a mouth already in `wavePreview.caveIndices`
 - `byTypeAndCave` lists each type+cave combination: `{typeKey, count, caveIndex, caveTheme, caveName}`
 - Sequence: surround days list all used mouths in `caveIndices` (usually all six) rather than leaving the array empty — `surround` flag is the UI signal
+- GB-40 / D-29 (2026-09-25): day 1 is 15 shamblers, and 7 or 8 of them claw up out of the ground. The preview adds
+  `groundByIndex` (booleans parallel to `queue`) and `groundRisers` (the count). Ground rows carry `caveIndex -1` in
+  `caveByIndex`, and their `byTypeAndCave` bucket is `{ typeKey: 'shambler', caveIndex: -1, caveTheme: null, caveName: null,
+  ground: true }`. The working `getWaveDirectorState().caveByIndex` uses -2 for a ground row. Each spawn is recorded in
+  `getWaveSpawnLog()`: `{ tk, ci, ground, x, z, pd, hq, inView }`, cleared by `startPrep` (tests). Ground risers are
+  flagged `z.groundRise`, with `caveIndex -1`. Day-1 zombies get no cave role.
 
 ## UI events: `'dw-game'` (approved D-8)
 
@@ -284,11 +290,29 @@ Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sound
   `beginScriptedKill('cave', cave, { chase })`: the drag variant (`sk.drag`), where the camera follows
   it hauling him to the mouth, then the thrown-out cutscene. No crawl-in snatch on this path. The
   walk-in grab (`beginScriptedKill('cave', cave)`, no third argument) is unchanged.
-- `getCaveChase()` → `{ caveIndex, t, speed, playerRun, x, z, dist }` or null; `abortCaveChase()` removes a
+- `getCaveChase()` → `{ caveIndex, t, speed, playerRun, x, z, ran, smashed, steered, dist }` or null; `abortCaveChase()` removes a
   running chase (`abortScriptedKill()` also does).
-- `getCavePokeState()` → `{ dayCount, used }`: once per cave per day, cleared by `startPrep`.
+- `getCavePokeState()` → `{ warned, warning, grace, eyesFor, dayCount, used, hits, now }`: once per cave per
+  day, cleared by `startPrep`; `warned` is once a run (GB-44), `warning` is
+  `{ caveIndex, age, shake, eyes }` for the day's warning or null.
 - Gone with D-22: the fightable poked guardian, its 75-cash drop, and the `emerge`, `retreat` and
   `death` phases. Sounds bind to `aggro` (CL-22); `grab` is free for a sound if Claude wants one.
+- GB-39 (GB-A1, 2026-09-25): a player round that passes through a mouth is judged when it ends; if it
+  hit a zombie on the way it does not count. During a wave `caveBusyWithWave(caveIndex)` is true for an
+  assault cave (preview `caveIndices` or the plan) until the wave has fully spawned, and for any cave with
+  a live zombie standing in its mouth; `noteCaveMouthHit` and `triggerCavePoke` return false for a busy
+  cave. Test hook: `spawnPlayerRound(origin, dir, damage = 24)` fires one player round (t69).
+- GB-44 (D-32, revises D-26, 2026-09-25): the first poke of a run is only a warning.
+  `noteCaveMouthHit` / `triggerCavePoke` return true when a poke is taken, the warning or the chase
+  (check `getCaveChase()` to tell them apart). The warning publishes the same `phase: 'aggro'` event
+  with `warning: true` (every `cave-guardian` event now carries `warning`, false on the chase and the
+  grab), so the screech plays; opens the cave's eyes with `caveWarn(cave, 2)` for 3 s and then puts
+  back the director's level (so the minimap also sees a 3 s `dw-cave-warn` level 2); and nudges the
+  camera. It does not spend the cave. Pokes within 2.5 s of it do nothing (the rest of the burst);
+  after that the next poke of any cave brings the guardian out. `startPrep` on day 1 (a new run)
+  clears the warning; later days keep it. The chase (GB-A8) steers round static props (trunks,
+  stumps, rocks, landmark solids at its height) and smashes any build it runs into
+  (`damageBuild` for all its hp, so what stood on it comes down), with a 0.14 s stumble.
 
 ## Wave finisher (CL-26, 2026-09-24)
 
@@ -298,3 +322,20 @@ page: red pulse, slow motion for the relief sting's length, a kill cam on the bo
   fight, plays `sting_clear` alone and silences every other sound until it ends.
 - `AudioSys.cueLength(name)` → seconds (0 until it's known); the finisher uses it for its length.
 - Test hooks: `TT.getWaveFinisher()`, `TT.getSlowMo()`, `TT.drainWavePlanDbg()`.
+
+## Skull value accumulator (GP-33, approved by Claude 2026-09-25)
+
+Owner: ChatGPT, game/economy.js. Caller: Grokbot's kill reward settlement.
+- createSkullValueAccumulator() returns an independent ledger with credit(raw), reset(), remainder().
+- credit(raw) accepts a finite nonnegative number, returns whole skull value and carries the
+  fractional remainder to subsequent rewards. Four credits of 1.25 return 1, 1, 1, 2.
+- Invalid negative/nonfinite values throw TypeError before mutation; a total above the safe
+  integer limit throws RangeError. Values within 1e-12 of a whole value are snapped to it
+  to absorb decimal floating-point error. Zero is valid.
+- reset() clears the remainder on a new run only. Day changes and broken streaks retain it.
+- remainder() is a read-only diagnostic returning the unsettled fraction.
+- Combat passes base skull value multiplied by its eligible streak/perk/Ember bonuses to
+  credit(), then sends the returned integer through its existing skull-drop path. This
+  ledger neither grants Cash nor changes player-versus-build kill attribution.
+- Banking remains the only conversion of these skull rewards into Cash. No save contract:
+  D-30 starts a fresh run on Play. Wired by Grokbot in GB-42 amend; GP-33 live UI verification passed.

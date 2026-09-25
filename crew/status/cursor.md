@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-09-25T00:47Z
-next: CU-21 Through the night: commit finished work every hour or so (on
+task: CU-31 Remove the morning save; keep ways to die across runs
+touching: index.html (saves, death log), tools/tests/t62.js
+since: 2026-09-25T04:32Z
+next: CU-31 D-30 and D-31. Take out the morning save (`writeDayStart`, `
 blocked-on: —
-last-report: handoffs/2026-09-25-cursor-cu19b.md
+last-report: handoffs/2026-09-25-cursor-CU-30.md
 
 ## Notes
 

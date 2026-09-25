@@ -46,3 +46,23 @@ test('pending deposits and stale prior-run events cannot complete banking', () =
   c.handle({type:'run-reset',runId:'two'}); c.handle({type:'deposit-complete',runId:'one',count:1,value:12});
   assert.equal(c.profile().banked,false);
 });
+
+const guards = (c, extra={}) => c.handle({type:'poi-guards',runId:'one',day:1,count:3,labelKey:'world.ranger',...extra});
+test('first fight waits for insertion and yields immediately to pickup then bank',()=>{
+ const c=createCoach();c.handle({type:'run-reset',runId:'one'});guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ c.handle({type:'controls-ready'});assert.equal(c.tick(frame({skulls:0})).title,'Shamblers at Ranger Camp: go and clear them.');
+ pickup(c);assert.equal(c.tick(frame()).id,'pickup');assert.equal(c.tick(frame({nearWindow:true})).id,'bank');
+});
+test('first-fight card is remembered, expires once, and ignores stale or invalid locations',()=>{
+ let saved;const c=start({save:v=>saved=v});for(const e of [{runId:'old'},{day:2},{count:0},{labelKey:'<script>'}])guards(c,e);
+ assert.equal(c.tick(frame({skulls:0})),null);guards(c);assert.equal(c.tick(frame({skulls:0})).id,'poi');
+ for(let i=0;i<13;i++)c.tick(frame({skulls:0,dt:1}));guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ const next=start({load:()=>saved});guards(next);assert.equal(next.tick(frame({skulls:0})),null);
+});
+test('alarm retires the first-fight cue but does not suppress the pickup lesson',()=>{
+ const c=start();guards(c);c.tick(frame({skulls:0}));c.handle({type:'alarm-started',runId:'one',day:1});assert.equal(c.tick(frame({skulls:0})),null);guards(c);assert.equal(c.tick(frame({skulls:0})),null);pickup(c);assert.equal(c.tick(frame()).id,'pickup');
+});
+test('experienced profiles do not get a new first-fight lesson, and a reset waits for controls',()=>{
+ const c=start({load:()=>JSON.stringify({version:1,banked:true})});guards(c);assert.equal(c.tick(frame({skulls:0})),null);
+ const fresh=start();fresh.handle({type:'run-reset',runId:'two'});guards(fresh,{runId:'two'});assert.equal(fresh.tick(frame({skulls:0})),null);
+});

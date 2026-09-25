@@ -8,6 +8,11 @@
 #bigBanner { top:192px; left:auto; right:16px; width:260px; max-width:none; transform:none; text-align:right; }
 #bigBanner .t { white-space:normal; overflow-wrap:anywhere; font-size:21px; }
 #bigBanner .s { font-size:12px; line-height:1.4; }
+/* On desktop the notice sits beside the map, with an explicit gutter. */
+@media(min-width:1000px) {
+  #bigBanner { top:24px; right:200px; padding:10px 12px; box-sizing:border-box; text-align:left; background:#0b120fd9; border-left:2px solid #988453; }
+}
+#winMsg .deathlog .d.locked { display:inline-flex; align-items:center; justify-content:center; width:28px; height:26px; padding:0; border-radius:3px; color:#888e7a; background:#11180dcc; }
 #objectiveHud { top:350px; max-height:calc(100vh - 458px); overflow:auto; }
 #ammo { display:grid; grid-template-columns:auto 1fr auto; max-width:calc(100vw - 32px); }
 #reloadPrompt { position:static; transform:none; grid-column:1 / -1; font-size:11px; padding:5px 8px; }
@@ -38,9 +43,25 @@
   #ammoCount { font-size:24px; }
   #ammoWeapon { font-size:11px; }
   #hudNotices, #objectiveHud { left:12px; right:auto; top:auto; bottom:110px; width:calc(100vw - 24px); max-height:20vh; overflow:auto; }
-  /* A tracked objective already explains its E action; suppress duplicate hints
-     only in this narrow layout. Reload stays with ammunition and is never hidden. */
-  body:has(.objective-tracker:not([hidden])) #hudNotices #firstMinuteCoach,
-  body:has(.objective-tracker:not([hidden])) #hudNotices #kioskPrompt { display:none; }
+  /* Local actions stay visible even when a distant objective is tracked. Reserve
+     the notice stack's maximum height so the two scrollable panels never overlap. */
+  body:has(#kioskPrompt.on, #firstMinuteCoach:not([hidden])) #objectiveHud { bottom:calc(118px + 20vh); }
   body:has(#placeBanner.on) #objectiveHud { display:none; }
 }
+
+/* Dawn is a deliberate, brief modal after the finisher returns the camera. */
+#dawnCard { position:fixed; inset:0; margin:auto; box-sizing:border-box; width:min(480px,calc(100vw - 32px)); max-height:calc(100dvh - 32px); overflow:auto; padding:28px; color:#dedecb; background:#0c1511; border:1px solid #818662; border-top:3px solid #cab673; font-family:var(--font-hud); font-size:14px; line-height:1.5; box-shadow:0 16px 80px #0008; }
+#dawnCard::backdrop { background:#06100bb8; }
+#dawnCard .dawn-eyebrow { margin:0; font-size:10px; letter-spacing:.22em; color:#a7ad8d; }
+#dawnCard h2 { margin:4px 0 24px; color:#e2d3a2; font-size:25px; }
+#dawnCard dl { margin:0; }
+#dawnCard dl div { display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid #5d6b4f55; padding:10px 0; }
+#dawnCard dt { color:#b5beaa; }
+#dawnCard dd { margin:0; font-size:23px; line-height:1.2; color:#f1ecd9; font-variant-numeric:tabular-nums; }
+#dawnCard .dawn-tip { margin:22px 0; color:#b5beaa; }
+#dawnCard footer { display:flex; justify-content:space-between; gap:12px; }
+#dawnCard button { padding:10px 14px; border:1px solid #778368; color:#e2e5d1; background:#263326; font:inherit; cursor:pointer; }
+#dawnCard button.primary { color:#131b12; background:#c6bb82; border-color:#c6bb82; }
+#dawnCard button:focus-visible { outline:2px solid #f0dfa3; outline-offset:3px; }
+body.dawn #pause, body.dawn #firstMinuteCoach, body.dawn #bigBanner, body.dawn #objectiveHud { visibility:hidden; }
+@media(max-width:440px) { #dawnCard { padding:22px; } #dawnCard h2 { font-size:23px; } #dawnCard footer { flex-wrap:wrap; } }

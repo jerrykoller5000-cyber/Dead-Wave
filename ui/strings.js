@@ -1,7 +1,7 @@
 /**
  * Dead-Wave player copy — GP-1, 2026-09-23. ChatGPT owns this catalogue.
  * Native ES module; no imports, DOM/storage/audio access, timers or Three.js.
- * Deliberately NOT wired into index.html. Owners migrate their own callers.
+ * Wired into the player UI. Owners migrate remaining callers through these keys.
  *
  * Usage: text('hq.deposit', { count: 2, interact: 'E' }).
  * Returns PLAIN TEXT. Use textContent/canvas text; never insert it as HTML.
@@ -86,7 +86,6 @@ const messages = {
   "menu.title": "Dead Wave",
   "menu.titleFirst": "Dead",
   "menu.titleSecond": "Wave",
-  "menu.studio": "CARACAL INTERACTIVE PRESENTS",
   "menu.play": "Play",
   "menu.settings": "Settings",
   "menu.quit": "Quit",
@@ -146,7 +145,6 @@ const messages = {
   "legacy.loading.scene": "Preparing scene",
   "legacy.loading.finishing": "Finishing up",
   "legacy.loading.still": "Still loading",
-  "legacy.menu.tagline": "Survive the days. Bank skulls. Fortify the cabin.",
   "legacy.settings.skipPrep": "Skip prep time: {state}",
 
   // error
@@ -184,10 +182,10 @@ const messages = {
 
   // pause
   "pause.title": "Paused",
-  "pause.description": "Game frozen. Resume, change settings, check the tips, or quit back to the main menu.",
+  "pause.description": "Game paused. Quitting ends this run. Play starts a new run.",
   "pause.resume": "Resume",
   "pause.tips": "Tips",
-  "pause.quit": "Quit to menu",
+  "pause.quit": "End run & quit to menu",
 
   // hud
   "hud.cash": "Cash",
@@ -200,7 +198,7 @@ const messages = {
   "hud.land": "Land r{radius}",
   "hud.landOpen": "{radius} · Land open",
   "hud.time": "{period} · {time}",
-  "hud.day": "Day",
+  "hud.day": "Daylight",
   "hud.night": "Night",
   "hud.rain": "Rain",
   "hud.grace": "Grace",
@@ -929,7 +927,7 @@ const messages = {
   "gameOver.bestStreak": "Best streak",
   "gameOver.deathLog": "Ways to die · {seen} / {total} found",
   "gameOver.deathLogNew": "Ways to die · {seen} / {total} found · NEW",
-  "gameOver.unknownDeath": "???",
+  "gameOver.unknownDeath": "Undiscovered way to die",
   "gameOver.cave": "Dragged into {place}.",
   "gameOver.rest": "Rest easy, {name}",
   "gameOver.unknownMarine": "Unknown Marine",
@@ -941,8 +939,24 @@ const messages = {
   "cinematic.noPlot": "No plot left for {name}",
   "cinematic.lake": "The lake keeps them now",
 
+  // dawn
+  "dawn.eyebrow": "FIRST LIGHT",
+  "dawn.title": "Night {day} survived",
+  "dawn.kills": "Zombies killed",
+  "dawn.skulls": "Skulls picked up",
+  "dawn.best": "Best streak this night",
+  "dawn.continue": "Continue to briefing",
+  "dawn.skip": "Skip",
+  "dawn.tipBank": "Bank your skulls at the HQ window, then resupply.",
+  "dawn.tipResupply": "Restock your ammo before you sound the next alarm.",
+  "wavePreview.atHQ": "Visit the HQ panel to sound the alarm.",
+  "wavePreview.ground": "Treeline · ground rise",
+
   // coach
+  "coach.poi": "Shamblers at {poi}: go and clear them.",
+  "coach.poiHelp": "Find it on your map, then collect the skulls they drop.",
   "coach.pickup": "Skulls collected.",
+  "economy.dayOne": "Day 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.",
   "coach.return": "Bring them to the HQ window to bank Cash.",
   "coach.bank": "Press {interact} to bank your skulls.",
   "coach.purchase": "Purchase ready.",
