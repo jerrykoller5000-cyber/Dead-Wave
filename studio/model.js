@@ -139,7 +139,10 @@ function restQuat(j, parentQ, out) {
     }
     _vz.copy(z);
     _vx.crossVectors(_vy, _vz);
-    _m4.makeBasis(_vx, _vy, _vz);
+    // makeBasis(x, y, z), written into the elements (column-major) as studio/ik.js does: the game's
+    // tests run on a stand-in three whose makeBasis does nothing.
+    const me = _m4.identity().elements;
+    me[0] = _vx.x; me[1] = _vx.y; me[2] = _vx.z; me[4] = _vy.x; me[5] = _vy.y; me[6] = _vy.z; me[8] = _vz.x; me[9] = _vz.y; me[10] = _vz.z;
     out.setFromRotationMatrix(_m4);
     return out.premultiply(_qa.copy(parentQ).invert());
   }
