@@ -1,0 +1,313 @@
+// studio/clip.js — clips as data, and the player that puts them on a rig. Claude's (D-40).
+// The format is docs/studio.md §1; this file is the only code that reads it, so the game and the
+// renderer (tools/studio.mjs) always agree about what a clip looks like.
+//
+//   const clip = loadClip(json);                    // validates; throws a readable error
+//   const inst = rigs.get('guardian').create({ design });
+//   const player = createPlayer(inst);
+//   player.play(clip, { loop: true });
+//   const events = player.update(dt, { targets: { ankle: worldVec3 } });
+import * as THREE from 'three';
+import { ikLimb } from './ik.js';
+
+export const CLIP_FORMAT = 'dw-clip/1';
+const D2R = Math.PI / 180;
+
+export const EASES = {
+  linear: (u) => u,
+  smooth: (u) => u * u * (3 - 2 * u),
+  in: (u) => u * u * u,
+  out: (u) => 1 - (1 - u) ** 3,
+  inout: (u) => (u < 0.5 ? 4 * u * u * u : 1 - (-2 * u + 2) ** 3 / 2),
+  back: (u) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * (u - 1) ** 3 + c1 * (u - 1) ** 2; },
+  step: (u) => (u < 1 ? 0 : 1)
+};
+// What each channel holds: a vec3, a scalar, or a point (a vec3 or a live target).
+const CHANNELS = { rot: 'vec3', pos: 'vec3', ik: 'point', pole: 'vec3', plant: 'scalar', level: 'scalar', grip: 'scalar', look: 'point', open: 'scalar' };
+
+// --- Loading ----------------------------------------------------------------------------
+const isVec3 = (v) => Array.isArray(v) && v.length === 3 && v.every((n) => typeof n === 'number' && Number.isFinite(n));
+function liveOf(v) {
+  if (typeof v === 'string' && v.startsWith('@')) return { at: v.slice(1), offset: [0, 0, 0] };
+  if (v && typeof v === 'object' && !Array.isArray(v) && typeof v.at === 'string' && v.at.startsWith('@')) {
+    return { at: v.at.slice(1), offset: isVec3(v.offset) ? v.offset : [0, 0, 0] };
+  }
+  return null;
+}
+// Every problem in a clip, as sentences an agent can act on. Empty means it's good.
+export function validateClip(json) {
+  const errs = [];
+  if (!json || typeof json !== 'object') return ['the clip is not a JSON object'];
+  if (json.format !== CLIP_FORMAT) errs.push(`"format" must be "${CLIP_FORMAT}" (got ${JSON.stringify(json.format)})`);
+  if (typeof json.name !== 'string' || !json.name) errs.push('"name" is missing');
+  if (typeof json.rig !== 'string' || !json.rig) errs.push('"rig" is missing');
+  if (!(json.length > 0)) errs.push('"length" must be a positive number of seconds');
+  if (!json.tracks || typeof json.tracks !== 'object') errs.push('"tracks" is missing');
+  else for (const [track, chans] of Object.entries(json.tracks)) {
+    if (!chans || typeof chans !== 'object') { errs.push(`track "${track}" must be an object of channels`); continue; }
+    for (const [ch, keys] of Object.entries(chans)) {
+      const kind = CHANNELS[ch];
+      if (!kind) { errs.push(`${track}.${ch}: unknown channel (use ${Object.keys(CHANNELS).join(', ')})`); continue; }
+      if (!Array.isArray(keys) || !keys.length) { errs.push(`${track}.${ch}: needs at least one key [time, value]`); continue; }
+      let last = -Infinity;
+      keys.forEach((k, i) => {
+        const at = `${track}.${ch} key ${i}`;
+        if (!Array.isArray(k) || k.length < 2) { errs.push(`${at}: a key is [time, value, ease?]`); return; }
+        const [t, v, e] = k;
+        if (typeof t !== 'number' || !Number.isFinite(t) || t < 0) errs.push(`${at}: time must be a number >= 0`);
+        else if (t < last) errs.push(`${at}: keys must be in time order (${t} after ${last})`);
+        last = t;
+        if (e !== undefined && !EASES[e]) errs.push(`${at}: unknown ease "${e}" (use ${Object.keys(EASES).join(', ')})`);
+        if (kind === 'scalar' && !(typeof v === 'number' && Number.isFinite(v))) errs.push(`${at}: value must be a number`);
+        if (kind === 'vec3' && !isVec3(v)) errs.push(`${at}: value must be [x, y, z]`);
+        if (kind === 'point' && !isVec3(v) && !liveOf(v)) errs.push(`${at}: value must be [x, y, z] or a live target "@name"`);
+      });
+    }
+  }
+  if (json.events !== undefined) {
+    if (!Array.isArray(json.events)) errs.push('"events" must be a list of [time, name, data?]');
+    else json.events.forEach((e, i) => { if (!Array.isArray(e) || typeof e[0] !== 'number' || typeof e[1] !== 'string') errs.push(`event ${i}: [time, name, data?]`); });
+  }
+  return errs;
+}
+export function loadClip(json) {
+  const errs = validateClip(json);
+  if (errs.length) throw new Error(`clip ${json && json.name ? '"' + json.name + '" ' : ''}is not valid:\n  - ` + errs.join('\n  - '));
+  const tracks = {};
+  for (const [track, chans] of Object.entries(json.tracks)) {
+    tracks[track] = {};
+    for (const [ch, keys] of Object.entries(chans)) {
+      tracks[track][ch] = keys.map(([t, v, e]) => ({ t, v, ease: EASES[e || 'smooth'], live: CHANNELS[ch] === 'point' ? liveOf(v) : null }));
+    }
+  }
+  const events = (json.events || []).map(([t, name, data]) => ({ t, name, data: data || {} })).sort((a, b) => a.t - b.t);
+  return { format: json.format, name: json.name, rig: json.rig, length: json.length, loop: !!json.loop, reference: json.reference || null, notes: json.notes || '', tracks, events, source: json };
+}
+
+// --- Sampling ---------------------------------------------------------------------------
+// Where t falls among the keys: the pair either side and how far between them (eased).
+function segment(keys, t) {
+  if (t <= keys[0].t || keys.length === 1) return [keys[0], keys[0], 0];
+  const last = keys[keys.length - 1];
+  if (t >= last.t) return [last, last, 0];
+  let i = 1;
+  while (keys[i].t < t) i++;
+  const a = keys[i - 1], b = keys[i];
+  const u = (t - a.t) / Math.max(1e-6, b.t - a.t);
+  return [a, b, b.ease(u)];
+}
+const lerp3 = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+function sampleVec3(keys, t) { const [a, b, u] = segment(keys, t); return lerp3(a.v, b.v, u); }
+function sampleScalar(keys, t) { const [a, b, u] = segment(keys, t); return a.v + (b.v - a.v) * u; }
+// A point is kept as a weighted list of parts (fixed rig-frame points and live targets), and only
+// resolved to the world when it's applied: that's what lets a key blend from a spot on the ground
+// to the marine's moving ankle, and two clips blend through the same machinery.
+function samplePoint(keys, t) {
+  const [a, b, u] = segment(keys, t);
+  const part = (k, w) => (k.live ? { w, live: k.live } : { w, fixed: k.v });
+  if (a === b || u <= 0) return [part(a, 1)];
+  if (u >= 1) return [part(b, 1)];
+  return [part(a, 1 - u), part(b, u)];
+}
+// Clip time for a play time: wrapped for a loop, held at the ends otherwise.
+export function clipTime(clip, t) {
+  if (clip.loop) { const L = clip.length; return ((t % L) + L) % L; }
+  return Math.max(0, Math.min(clip.length, t));
+}
+// The pose at time t: { root, joints: { name: { rot: Quaternion?, pos: [x,y,z]? } }, chains, head }.
+const _e = new THREE.Euler();
+export function sampleClip(clip, t) {
+  const tt = clipTime(clip, t);
+  const pose = { root: null, joints: {}, chains: {}, head: {} };
+  for (const [track, chans] of Object.entries(clip.tracks)) {
+    if (track === 'root') { if (chans.pos) pose.root = sampleVec3(chans.pos, tt); continue; }
+    const j = {};
+    if (chans.rot) { const r = sampleVec3(chans.rot, tt); j.rot = new THREE.Quaternion().setFromEuler(_e.set(r[0] * D2R, r[1] * D2R, r[2] * D2R, 'XYZ')); }
+    if (chans.pos) j.pos = sampleVec3(chans.pos, tt);
+    if (j.rot || j.pos) pose.joints[track] = j;
+    const c = {};
+    if (chans.ik) c.ik = samplePoint(chans.ik, tt);
+    if (chans.pole) c.pole = sampleVec3(chans.pole, tt);
+    for (const s of ['plant', 'level', 'grip']) if (chans[s]) c[s] = sampleScalar(chans[s], tt);
+    if (Object.keys(c).length) pose.chains[track] = c;
+    if (chans.look) pose.head.look = samplePoint(chans.look, tt);
+    if (chans.open) pose.head.open = sampleScalar(chans.open, tt);
+  }
+  return pose;
+}
+// Blend two poses: w 0 is all a, 1 is all b. A channel only one side has comes through whole.
+export function blendPoses(a, b, w) {
+  if (w <= 0) return a;
+  if (w >= 1) return b;
+  const out = { root: null, joints: {}, chains: {}, head: {} };
+  out.root = a.root && b.root ? lerp3(a.root, b.root, w) : (b.root || a.root);
+  for (const n of new Set([...Object.keys(a.joints), ...Object.keys(b.joints)])) {
+    const ja = a.joints[n], jb = b.joints[n];
+    if (!ja || !jb) { out.joints[n] = ja || jb; continue; }
+    out.joints[n] = {
+      rot: ja.rot && jb.rot ? ja.rot.clone().slerp(jb.rot, w) : (jb.rot || ja.rot),
+      pos: ja.pos && jb.pos ? lerp3(ja.pos, jb.pos, w) : (jb.pos || ja.pos)
+    };
+  }
+  const mixPts = (pa, pb) => (pa && pb ? pa.map((p) => ({ ...p, w: p.w * (1 - w) })).concat(pb.map((p) => ({ ...p, w: p.w * w }))) : (pb || pa));
+  const mixS = (x, y) => (x !== undefined && y !== undefined ? x + (y - x) * w : (y !== undefined ? y : x));
+  for (const n of new Set([...Object.keys(a.chains), ...Object.keys(b.chains)])) {
+    const ca = a.chains[n] || {}, cb = b.chains[n] || {};
+    out.chains[n] = {
+      ik: mixPts(ca.ik, cb.ik),
+      pole: ca.pole && cb.pole ? lerp3(ca.pole, cb.pole, w) : (cb.pole || ca.pole),
+      plant: mixS(ca.plant, cb.plant), level: mixS(ca.level, cb.level), grip: mixS(ca.grip, cb.grip)
+    };
+  }
+  out.head = { look: mixPts(a.head.look, b.head.look), open: mixS(a.head.open, b.head.open) };
+  return out;
+}
+// Events with a time in (t0, t1], for a clip played from t0 to t1 (loops wrap).
+export function clipEvents(clip, t0, t1) {
+  if (!clip.events.length || t1 <= t0) return [];
+  if (!clip.loop) return clip.events.filter((e) => e.t > t0 && e.t <= t1);
+  const out = [], L = clip.length;
+  for (let base = Math.floor(t0 / L) * L; base <= t1; base += L) {
+    for (const e of clip.events) { const at = base + e.t; if (at > t0 && at <= t1) out.push(e); }
+  }
+  return out;
+}
+
+// --- Applying a pose to a rig instance ---------------------------------------------------
+const _w = new THREE.Vector3(), _p = new THREE.Vector3(), _pole = new THREE.Vector3(), _up = new THREE.Vector3(), _f = new THREE.Vector3();
+const _q = new THREE.Quaternion();
+// A point part's world position. Fixed parts are rig frame; live parts are the caller's targets
+// (world), plus a world offset.
+function resolvePoint(inst, parts, targets, out) {
+  out.set(0, 0, 0);
+  let wsum = 0;
+  for (const p of parts) {
+    if (p.fixed) _p.set(p.fixed[0], p.fixed[1], p.fixed[2]).applyMatrix4(inst.group.matrixWorld);
+    else {
+      const tv = targets && targets[p.live.at];
+      if (!tv) continue;   // a live target the caller didn't give: that part drops out
+      _p.set(tv.x + p.live.offset[0], tv.y + p.live.offset[1], tv.z + p.live.offset[2]);
+    }
+    out.addScaledVector(_p, p.w); wsum += p.w;
+  }
+  if (wsum <= 0) return null;
+  return out.divideScalar(wsum);
+}
+// Turn a joint about its local X so its +Z lies level with the rig's ground.
+function levelJoint(inst, joint, amt) {
+  if (!(amt > 0)) return;
+  const keep = joint.rotation.x;
+  joint.rotation.x = 0;
+  joint.updateWorldMatrix(true, false);
+  _f.set(0, 0, 1).transformDirection(joint.matrixWorld);
+  _up.set(0, 1, 0).transformDirection(inst.group.matrixWorld);
+  const tip = Math.asin(Math.max(-1, Math.min(1, _f.dot(_up))));
+  joint.rotation.x = keep + (tip - keep) * amt;
+}
+export function applyPose(inst, pose, { targets = null, rootMotion = false } = {}) {
+  const def = inst.def, R = inst.R;
+  // Everything back to rest first, so a joint the clip doesn't mention sits where the rig's rest
+  // pose puts it, not wherever the last clip left it.
+  for (const [j, rest] of inst.rest) { j.quaternion.copy(rest.q); j.position.copy(rest.p); }
+  // Root motion moves the rig's root from where its owner put it; without it the clip plays in place.
+  if (rootMotion && pose.root) {
+    if (!inst.rootBase) inst.rootBase = inst.group.position.clone();
+    inst.group.position.copy(inst.rootBase).add(_p.set(pose.root[0], pose.root[1], pose.root[2]).multiplyScalar(inst.group.scale.x));
+  } else if (inst.rootBase) { inst.group.position.copy(inst.rootBase); inst.rootBase = null; }
+  for (const [n, j] of Object.entries(pose.joints)) {
+    const o = R[n];
+    if (!o) continue;
+    if (j.rot) o.quaternion.copy(j.rot);
+    if (j.pos) o.position.set(j.pos[0], j.pos[1], j.pos[2]);
+  }
+  inst.group.updateWorldMatrix(true, true);
+  // Limbs, in the order the rig lists them (arms after the spine they hang from is automatic:
+  // the spine was posed above).
+  for (const [name, ch] of Object.entries(def.chains)) {
+    const c = pose.chains[name];
+    const state = inst.plants[name] || (inst.plants[name] = { at: null });
+    if (!c || !c.ik) { state.at = null; continue; }
+    let target = resolvePoint(inst, c.ik, targets, _w);
+    if (!target) continue;
+    const plant = c.plant || 0;
+    if (plant >= 0.5) {
+      // Pinned where it was when the plant came on: the body moves over it, it doesn't slide.
+      if (!state.at) state.at = target.clone();
+      target = _w.copy(target).lerp(state.at, Math.min(1, (plant - 0.5) * 2));
+    } else state.at = null;
+    const pole = c.pole || ch.pole;
+    _pole.set(pole[0], pole[1], pole[2]).transformDirection(inst.group.matrixWorld);
+    ikLimb(R[ch.root], R[ch.mid], ch.lengths[0], ch.lengths[1], target, _pole);
+    const level = c.level !== undefined ? c.level : (plant >= 0.5 ? 1 : 0);
+    if (level > 0 && R[ch.end]) levelJoint(inst, R[ch.end], level);
+    if (c.grip !== undefined && def.grip) def.grip(R, name, c.grip);
+    state.last = target.clone();
+  }
+  // Head: turn to look at a point (on top of the neck's and head's own rotation), and the jaw.
+  const hd = def.head;
+  if (hd && pose.head.look) {
+    const at = resolvePoint(inst, pose.head.look, targets, _w);
+    if (at) lookAt(inst, hd, at);
+  }
+  if (hd && pose.head.open !== undefined && R[hd.jaw]) R[hd.jaw].rotation.x += pose.head.open * (hd.jawOpenDeg || 55) * D2R;
+  inst.group.updateWorldMatrix(true, true);
+}
+// Split the turn between neck and head, clamped: a creature looks, it doesn't spin its skull.
+function lookAt(inst, hd, at) {
+  const neck = inst.R[hd.neck], head = inst.R[hd.head];
+  if (!neck || !head) return;
+  neck.updateWorldMatrix(true, false);
+  _p.setFromMatrixPosition(neck.matrixWorld);
+  _f.copy(at).sub(_p);
+  neck.getWorldQuaternion(_q).invert();
+  _f.applyQuaternion(_q).normalize();
+  const lim = (hd.limitDeg || 70) * D2R;
+  const yaw = Math.max(-lim, Math.min(lim, Math.atan2(_f.x, _f.z)));
+  const pitch = Math.max(-lim, Math.min(lim, -Math.atan2(_f.y, Math.hypot(_f.x, _f.z))));
+  neck.rotateY(yaw * 0.5); neck.rotateX(pitch * 0.4);
+  head.rotateY(yaw * 0.5); head.rotateX(pitch * 0.6);
+}
+
+// --- The player ----------------------------------------------------------------------------
+export function createPlayer(inst) {
+  let cur = null, t = 0, speed = 1, rootMotion = false;
+  let fade = null;   // { clip, t, dur, age }
+  return {
+    get clip() { return cur; },
+    get time() { return t; },
+    play(clip, opts = {}) {
+      cur = clip; t = opts.at || 0; speed = opts.speed ?? 1; rootMotion = !!opts.rootMotion; fade = null;
+      if (opts.loop !== undefined) cur = { ...clip, loop: !!opts.loop };
+      inst.plants = {};
+      return this;
+    },
+    crossfade(clip, dur = 0.2, opts = {}) {
+      if (cur) fade = { clip: cur, t, dur: Math.max(1e-3, dur), age: 0 };
+      cur = opts.loop !== undefined ? { ...clip, loop: !!opts.loop } : clip;
+      t = opts.at || 0; speed = opts.speed ?? speed;
+      return this;
+    },
+    // Moves time on by dt, poses the rig, and returns the events passed on the way.
+    update(dt, { targets = null } = {}) {
+      if (!cur) return [];
+      const t0 = t;
+      t += dt * speed;
+      const events = clipEvents(cur, t0, t);
+      let pose = sampleClip(cur, t);
+      if (fade) {
+        fade.age += dt; fade.t += dt * speed;
+        const w = Math.min(1, fade.age / fade.dur);
+        pose = blendPoses(sampleClip(fade.clip, fade.t), pose, EASES.smooth(w));
+        if (w >= 1) fade = null;
+      }
+      applyPose(inst, pose, { targets, rootMotion });
+      return events;
+    },
+    // Pose the rig at a given time without moving the clock (the renderer's frames).
+    poseAt(time, { targets = null } = {}) {
+      if (!cur) return;
+      applyPose(inst, sampleClip(cur, time), { targets, rootMotion });
+    },
+    get done() { return !!cur && !cur.loop && t >= cur.length; }
+  };
+}

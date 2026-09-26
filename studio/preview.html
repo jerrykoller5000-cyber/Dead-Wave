@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>studio preview</title>
+<style>html,body{margin:0;background:#1d2330;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js","three/addons/":"../vendor/three/addons/"}}</script>
+</head><body>
+<script type="module">
+// studio/preview.html — one clip through the studio player as a strip: n frames side by side, the
+// scale marine (1.75 m), the live targets as red dots; or, with row=ref, the clip's reference on the
+// mannequin at the same moments. Claude's quick look (CL-58/59) and a starting point for CU-44.
+//   studio/preview.html?clip=drag&n=6&row=rig|ref&view=side|three[&ref=Push_Loop][&rig=guardian]
+import * as THREE from 'three';
+import { rbox } from '../core/geometry.js';
+import { rigs, loadClip, createPlayer, loadReference, makeMannequin, poseReference } from './index.js';
+const q = new URLSearchParams(location.search);
+const name = q.get('clip') || 'gallop', N = +(q.get('n') || 6), view = q.get('view') || 'side';
+const rigName = q.get('rig') || 'guardian';
+const json = await (await fetch('./clips/' + rigName + '/' + name + '.json')).json();
+const clip = loadClip(json);
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init();
+renderer.setSize(innerWidth, innerHeight); renderer.setPixelRatio(1); renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x2a3140);
+scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x3a3020, 0.9));
+const sun = new THREE.DirectionalLight(0xfff0d0, 2.2); sun.position.set(6, 12, 5); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40 }); scene.add(sun);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.MeshStandardMaterial({ color: 0x4f7a3a, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+{ const gh = new THREE.GridHelper(300, 150, 0x335522, 0x335522); gh.position.y = 0.01; scene.add(gh); }
+const markMat = new THREE.MeshStandardMaterial({ color: 0xff4040, emissive: 0x802020 });
+function dummy(x, z) {
+  const m = new THREE.Group(); m.position.set(x, 0, z);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x556b2f });
+  const t = new THREE.Mesh(rbox(0.5, 0.6, 0.3), mat); t.position.y = 1.15; m.add(t);
+  const h = new THREE.Mesh(rbox(0.28, 0.3, 0.3), new THREE.MeshStandardMaterial({ color: 0xd8b090 })); h.position.y = 1.62; m.add(h);
+  for (const s of [-1, 1]) { const l = new THREE.Mesh(rbox(0.18, 0.8, 0.2), new THREE.MeshStandardMaterial({ color: 0x3a4a2a })); l.position.set(s * 0.13, 0.42, 0); m.add(l); }
+  m.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+  scene.add(m); return m;
+}
+const spacing = +(q.get('spacing') || 6.5);
+const stage = json.stage || rigs.def(rigName).stage.targets;
+const insts = [];
+const row = q.get('row') || 'rig';
+for (let i = 0; i < N && row === 'rig'; i++) {
+  const inst = rigs.get(rigName).create({ design: { rock: 0x3d4a44, dark: 0x0e1512, moss: 0x2e5a2a, eyeTint: 0xbdf3ff } });
+  inst.group.position.set((i - (N - 1) / 2) * spacing, 0, 0);
+  if (view === 'side') inst.group.rotation.y = Math.PI / 2;
+  scene.add(inst.group);
+  const player = createPlayer(inst).play(clip);
+  const tNow = (clip.loop ? i / N : i / (N - 1)) * clip.length;
+  inst.group.updateWorldMatrix(true, true);
+  const targets = Object.fromEntries(Object.entries(stage).map(([k, v]) => [k, new THREE.Vector3(...v).multiplyScalar(inst.group.scale.x).applyMatrix4(new THREE.Matrix4().makeRotationY(inst.group.rotation.y)).add(inst.group.position)]));
+  for (const v of Object.values(targets)) { const m = new THREE.Mesh(new THREE.SphereGeometry(0.08), markMat); m.position.copy(v); scene.add(m); }
+  player.poseAt(tNow, { targets });
+  insts.push(inst);
+}
+if (row === 'rig') dummy(-((N - 1) / 2) * spacing - 3.5, 0);
+// The reference, a row behind, at the same moments (scaled in time to the clip's length).
+const refName = q.get('ref') || clip.reference;
+if (refName && row === 'ref') {
+  const ref = loadReference(await (await fetch('../assets/anim/reference/ual.json')).json());
+  const rc = ref.clip(refName);
+  for (let i = 0; i < N; i++) {
+    const man = makeMannequin(ref);
+    man.group.position.set((i - (N - 1) / 2) * spacing, 0, 0);
+    man.group.scale.setScalar(1.6);
+    if (view === 'side') man.group.rotation.y = Math.PI / 2;
+    scene.add(man.group);
+    poseReference(man, rc, (clip.loop ? i / N : i / (N - 1)) * rc.length);
+  }
+}
+const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, 0.1, 500);
+const span = N * spacing;
+if (view === 'side') { camera.position.set(0, 4.2, span * 0.66 + 8); camera.lookAt(0, 1.2, -2); }
+else { camera.position.set(span * 0.2, 5, span * 0.6 + 6); camera.lookAt(0, 1.3, 0); for (const i of insts) i.group.rotation.y = Math.PI / 4; }
+renderer.render(scene, camera);
+window.__ready = true;
+</script></body></html>

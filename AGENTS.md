@@ -76,7 +76,7 @@ Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
 | Agent | Owns | Files |
 | --- | --- | --- |
 | Cursor | Integration, git (shared with Claude, rule 6), tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
-| Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting | `world/*`, `life/*`, `assets/world/*`, `crew/BOARD.md`, this file |
+| Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting; the studio's clips, rigs and player (D-40) | `world/*`, `life/*`, `assets/world/*`, `studio/*`, `assets/anim/*`, `crew/BOARD.md`, this file |
 | Grokbot | Combat: zombies, the wave director, enemy roles, builds and turrets, weapons, scripted deaths | `combat/*` |
 | ChatGPT | What the player reads and decides: HUD, menus, shop, onboarding, text, economy, objectives, audio cues | `ui/*`, `game/economy.js`, `game/objectives.js` |
 | Antigravity | The crew's eyes: plays the real game in a real browser, takes screenshots, checks every visible change, reports what it sees | `qa/*` (reports and screenshots). No game code. |

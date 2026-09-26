@@ -413,3 +413,17 @@ and the cave chase in `index.html` (Grokbot's beats drive them; the modules own 
   `tentacleUpdate(arm, t)` to rebuild the tube; `tentacleShow(arm, on)`, `tentacleTip(arm)`.
 - Both are added to the scene by their caller and disposed with `disposeRigProp` (they carry
   `userData.mats`).
+
+## The studio: clips, rigs and the player (CL-57 to CL-59, D-40, 2026-09-26)
+
+Owner: Claude (`studio/*`, `assets/anim/*`). Callers: the renderer (`tools/studio.mjs`, Cursor's
+CU-44) and, from CL-62, the game. The format is `docs/studio.md`; everyone imports `studio/index.js`:
+
+- `loadClip(json)` (throws, listing every problem), `validateClip(json) → [sentences]`,
+  `sampleClip`, `blendPoses`, `clipEvents`, `clipTime`, `applyPose(inst, pose, { targets, rootMotion })`,
+  `createPlayer(inst)` → `play`, `crossfade`, `update(dt, { targets }) → events`, `poseAt(t, { targets })`.
+- `rigs.get(name).create({ design, scale })` → `{ group, R, def }`; `rigs.def(name)` (chains, head,
+  stage, budget); `rigCost(group) → { draws, triangles }`; `registerRig(name, def)`.
+- `loadReference(json)`, `makeMannequin(ref)`, `poseReference(man, clip, t)` for the UAL reference.
+- `ikLimb` moved from `world/cave-guardian.js` to `studio/ik.js` (re-exported from the guardian, so
+  old callers still work).

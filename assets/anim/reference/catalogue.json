@@ -1,0 +1,163 @@
+[
+  {
+    "name": "ClimbUp_1m",
+    "pack": "UAL2",
+    "length": 0.6667,
+    "loop": false,
+    "goodFor": "hauling up onto a ledge"
+  },
+  {
+    "name": "Hit_Knockback",
+    "pack": "UAL2",
+    "length": 0.8333,
+    "loop": false,
+    "goodFor": "taking a big hit and staggering back"
+  },
+  {
+    "name": "LayToIdle",
+    "pack": "UAL2",
+    "length": 1.5333,
+    "loop": false,
+    "goodFor": "getting up off the ground"
+  },
+  {
+    "name": "NinjaJump_Land",
+    "pack": "UAL2",
+    "length": 1.2667,
+    "loop": false,
+    "goodFor": "landing heavy"
+  },
+  {
+    "name": "NinjaJump_Start",
+    "pack": "UAL2",
+    "length": 0.9667,
+    "loop": false,
+    "goodFor": "crouch and spring (the guardian's pounce)"
+  },
+  {
+    "name": "OverhandThrow",
+    "pack": "UAL2",
+    "length": 1.3333,
+    "loop": false,
+    "goodFor": "wind-up, throw and follow-through (the guardian's throw)"
+  },
+  {
+    "name": "Slide_Start",
+    "pack": "UAL2",
+    "length": 0.8333,
+    "loop": false,
+    "goodFor": "dropping into a slide"
+  },
+  {
+    "name": "Walk_Carry_Loop",
+    "pack": "UAL2",
+    "length": 2,
+    "loop": true,
+    "goodFor": "walking with a load held in front (the guardian's walk-out)"
+  },
+  {
+    "name": "Zombie_Idle_Loop",
+    "pack": "UAL2",
+    "length": 1.3333,
+    "loop": true,
+    "goodFor": "a zombie standing"
+  },
+  {
+    "name": "Zombie_Scratch",
+    "pack": "UAL2",
+    "length": 1.8,
+    "loop": false,
+    "goodFor": "a zombie clawing at something (the guardian's grab)"
+  },
+  {
+    "name": "Zombie_Walk_Fwd_Loop",
+    "pack": "UAL2",
+    "length": 1.3333,
+    "loop": true,
+    "goodFor": "a zombie walking"
+  },
+  {
+    "name": "Crouch_Fwd_Loop",
+    "pack": "UAL1",
+    "length": 2,
+    "loop": true,
+    "goodFor": "moving low"
+  },
+  {
+    "name": "Death01",
+    "pack": "UAL1",
+    "length": 2.4,
+    "loop": false,
+    "goodFor": "a death fall"
+  },
+  {
+    "name": "Hit_Chest",
+    "pack": "UAL1",
+    "length": 0.3333,
+    "loop": false,
+    "goodFor": "a hit to the body"
+  },
+  {
+    "name": "Hit_Head",
+    "pack": "UAL1",
+    "length": 0.4333,
+    "loop": false,
+    "goodFor": "a hit to the head"
+  },
+  {
+    "name": "Idle_Loop",
+    "pack": "UAL1",
+    "length": 2.5,
+    "loop": true,
+    "goodFor": "standing still: weight, breathing"
+  },
+  {
+    "name": "Jog_Fwd_Loop",
+    "pack": "UAL1",
+    "length": 0.9333,
+    "loop": true,
+    "goodFor": "a jog"
+  },
+  {
+    "name": "PickUp_Table",
+    "pack": "UAL1",
+    "length": 0.8333,
+    "loop": false,
+    "goodFor": "bending to take something"
+  },
+  {
+    "name": "Punch_Cross",
+    "pack": "UAL1",
+    "length": 1,
+    "loop": false,
+    "goodFor": "a committed strike: anticipation, hit, recovery"
+  },
+  {
+    "name": "Push_Loop",
+    "pack": "UAL1",
+    "length": 2.6667,
+    "loop": true,
+    "goodFor": "leaning into a heavy push, feet driving (the guardian's drag)"
+  },
+  {
+    "name": "Roll",
+    "pack": "UAL1",
+    "length": 1.4667,
+    "loop": false,
+    "goodFor": "a dodge roll"
+  },
+  {
+    "name": "Sprint_Loop",
+    "pack": "UAL1",
+    "length": 0.6667,
+    "loop": true,
+    "goodFor": "flat out: lean, arm drive, flight phase (the guardian's bound)"
+  },
+  {
+    "name": "Walk_Loop",
+    "pack": "UAL1",
+    "length": 1.3333,
+    "loop": true,
+    "goodFor": "a plain walk: contact, passing, stride timing"
+  }
+]

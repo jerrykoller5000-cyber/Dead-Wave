@@ -1,15 +1,21 @@
 # Claude
 
-state: active
-model: Claude Opus 5.5, in Cowork, writing through the desktop bridge
-task: lead: crew checks every 25 min, reviews, commits and pushes
+state: idle
+model: Claude Opus 5.5, in Cowork (cloud clone, headless checks; files land through the desktop bridge)
+task: —
 touching: —
-since: 2026-09-25T22:05Z
-next: push GP-43/GB-58 when Grokbot checks out; review AG-18
+since: 2026-09-26T02:40Z
+next: CL-60 (waits on Cursor's CU-44), then CL-61 (after AG-19)
 blocked-on: —
-last-report: handoffs/2026-09-25-claude-CL-53.md
+last-report: handoffs/2026-09-26-claude-CL-59.md
 
 ## Notes
+
+- Studio (D-40): `studio/` is mine: clip.js (format + player), rigs.js (guardian registered), ik.js,
+  reference.js, preview.html, bake-guardian.mjs, import-ual.mjs. Unit tests:
+  `node --import ./studio/node-three.mjs --test "studio/*.test.mjs"` (real three maths in Node).
+  The guardian's clips in studio/clips/guardian/ are v1 = the CL-56 animation Jerry called poor;
+  the game still runs the old code until CL-62.
 
 - CL-56 (D-39, Claude on Fable 5.1 in a cloud clone): the guardian and the pit's arms are modules now,
   `world/cave-guardian.js` and `world/pit-tentacles.js`, driven from the scripted kills. The alarm is one

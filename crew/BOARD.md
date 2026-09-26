@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-26, 01:50 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-26, 02:40 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -58,7 +58,8 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Cursor** · CU-32 scratch files · waiting: Grokbot, Antigravity
+- **Claude** · CL-60 Jerry's notes onto the board · waiting: Cursor (CU-44)
+- **Antigravity** · AG-19 the studio on Jerry's GPU · waiting: Cursor (CU-44)
 
 
 
@@ -867,14 +868,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife (Opus 5.5)
 
-- [>] **CL-57** **The studio (D-40): the spec.** Finish `docs/studio.md`: the clip JSON (tracks for joints and IK
+- [x] **CL-57** **The studio (D-40): the spec.** Finish `docs/studio.md`: the clip JSON (tracks for joints and IK
   targets, keys with easing, planted flags, events), how a rig registers (joints, rest pose, IK chains, budget), the
   review folder (`meta.json`, versions, `latest`, `notes.md` layout), `stats.json`, and the render command's flags. One
   worked example: the guardian's pounce as a clip.
-- [ ] **CL-58** **The clip player.** After CL-57. `studio/clip.js` (sample, blend two, events, IK with planted feet, a live
+- [x] **CL-58** **The clip player.** After CL-57. `studio/clip.js` (sample, blend two, events, IK with planted feet, a live
   target added on top) and `studio/rigs.js` (the guardian from `world/cave-guardian.js` registered first). The game and
   the renderer use the same player. Unit tests on fakethree.
-- [ ] **CL-59** **Reference motion.** After CL-58. The Quaternius UAL 1 and 2 clips (CC0, `Desktop\Animation Assets`) in
+- [x] **CL-59** **Reference motion.** After CL-58. The Quaternius UAL 1 and 2 clips (CC0, `Desktop\Animation Assets`) in
   `assets/anim/reference/` (only what we use, compacted), a catalogue (name, length, loop), and `studio/retarget.js` to
   play a reference on a humanoid mannequin next to our rig in the strip; timing notes for the guardian's beats (Push_Loop
   and Walk_Carry_Loop for the drag, OverhandThrow for the throw, Zombie_Scratch for the grab). Licence file in the folder.
