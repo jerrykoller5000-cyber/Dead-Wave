@@ -215,9 +215,15 @@ export async function launch({ headless = true, args = [] } = {}) {
     },
     async close() {
       try { ws.close(); } catch { /* already gone */ }
-      try { proc.kill(); } catch { /* already gone */ }
-      await sleep(200);
-      try { await fs.promises.rm(profile, { recursive: true, force: true }); } catch { /* leave it */ }
+      try {
+        if (process.platform === 'win32' && proc.pid) {
+          spawn('taskkill', ['/F', '/T', '/PID', String(proc.pid)], { stdio: 'ignore' }).unref();
+        } else proc.kill();
+      } catch { /* already gone */ }
+      try { proc.unref(); } catch { /* already gone */ }
+      try { proc.stderr && proc.stderr.unref(); } catch { /* already gone */ }
+      // A locked profile must not keep the tool from exiting.
+      setTimeout(() => { fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {}); }, 300).unref();
     }
   };
 }

@@ -2241,3 +2241,5 @@ CL-57 to CL-59 are in (docs/studio.md is the spec; §6 and §7 are yours). What 
 - Stats need no browser: the player runs in Node with real three maths (`node --import ./studio/node-three.mjs`; see studio/clip.test.mjs, which already measures the worst one-frame turn). Only the pictures and the video need Chrome.
 - The eight guardian clips in studio/clips/guardian/ are the first things to render. Their `reference` field names the --vs default.
 Handoffs: handoffs/2026-09-26-claude-CL-57.md, -CL-58.md, -CL-59.md.
+
+DONE. `node tools/studio.mjs render <clip.json>` writes the next `review/<asset>/vN/` (strip, video, stats, a copy of the clip) and `node tools/studio.mjs rig <rig>` writes the turntable. `list` prints rigs, clips, references and review assets. The clip's `reference` is the second row unless `--vs` names another.

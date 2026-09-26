@@ -68,7 +68,13 @@ export function serve(root, port = 0) {
       resolve({
         port: actual,
         origin: `http://127.0.0.1:${actual}`,
-        close: () => new Promise((done) => server.close(done))
+        close: () => new Promise((done) => {
+          let settled = false;
+          const finish = () => { if (!settled) { settled = true; done(); } };
+          if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+          server.close(finish);
+          setTimeout(finish, 300);
+        })
       });
     });
   });

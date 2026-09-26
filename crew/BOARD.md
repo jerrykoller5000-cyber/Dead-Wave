@@ -489,7 +489,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-44** **The studio (D-40): the renderer, `tools/studio.mjs`.** After CL-57. `node tools/studio.mjs render
+- [x] **CU-44** **The studio (D-40): the renderer, `tools/studio.mjs`.** After CL-57. `node tools/studio.mjs render
   <rig> <clip> [--vs <reference clip>]` renders headless into `review/<asset>/vN/`: `strip.png` (12 frames on a grid,
   ground, a 1.75 m marine for scale, a ghost of the previous frame, the reference as a second row), `video.webm` (real
   and quarter speed, side view and play-camera view; MediaRecorder in the page, no ffmpeg), `turntable.png` for a rig
