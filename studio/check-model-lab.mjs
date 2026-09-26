@@ -247,6 +247,32 @@ async function checkModel(ref, stub) {
       return `${limb} (${built.limbs[limb].length} mesh${built.limbs[limb].length > 1 ? 'es' : ''})`;
     });
   }
+  if (json.body) {
+    await step(page, 'a click on a creature with a body hits it, and it reacts', async () => {
+      await page.evaluate('lab.pick(null); lab.view("three-front")');
+      await page.evaluate('lab.nextFrame()');
+      st = await S();
+      must(st.body && st.body.state === 'animated', 'before the hit it is ' + JSON.stringify(st.body));
+      // The biggest part clear of the panels, clicked plainly (no shift): a hit, not a pick.
+      for (const r of [...rows].sort((a, b) => b.triangles - a.triangles)) {
+        const at = await page.evaluate(`lab.screenOfPart(${r.i})`);
+        const onCanvas = await page.evaluate(`(() => { const e = document.elementFromPoint(${at.x}, ${at.y}); return !!e && e.tagName === 'CANVAS' && !e.id; })()`);
+        if (!onCanvas || (await page.evaluate(`lab.partAtScreen(${at.x}, ${at.y})`)) === null) continue;
+        await page.send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: at.x, y: at.y });
+        await page.send('Input.dispatchMouseEvent', { type: 'mousePressed', x: at.x, y: at.y, button: 'left', buttons: 1, clickCount: 1 });
+        await page.send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: at.x, y: at.y, button: 'left', buttons: 0, clickCount: 1 });
+        const f0 = await page.evaluate('lab.frames');
+        must(await page.waitFor(`lab.frames >= ${f0 + 3}`, { timeout: 60000, every: 100 }), 'the lab stopped drawing');
+        st = await S();
+        must(st.part === null, 'a plain click on a body picked a part instead of hitting it');
+        must(st.body.state !== 'animated', `it didn't react: ${st.body.state}`);
+        must(/last hit Shotgun, close/.test(st.context), 'the note context has no hit: ' + st.context);
+        await page.evaluate('document.getElementById("standup").click()');
+        return `${st.body.preset}: ${st.body.state} after a close shell on ${r.name}`;
+      }
+      throw new Fail('no part of it was clear of the panels to click');
+    });
+  }
   let look = null;
   await step(page, 'the picture is a PNG with its caption, under 3 MB', async () => {
     await page.evaluate(`lab.setLight("nvg"); lab.pick(${picked ?? 0}); lab.view("side")`);
@@ -302,6 +328,28 @@ async function checkModel(ref, stub) {
   });
 }
 
+async function checkDraft(ref, stub) {
+  console.log(`\na draft: ${ref}'s file opened with ?file= (a model not listed yet opens the same way)`);
+  const file = `studio/models/${ref}.json`, json = models.json(ref);
+  const { page, ok } = await openLab(stub.origin, `file=${file}`);
+  await step(page, 'the draft loads as its own model, and its note names its file', async () => {
+    must(ok, 'the lab never became ready');
+    const st = await page.evaluate('lab.state()');
+    must(st.file === file && st.ref === ref, `file ${st.file}, ref ${st.ref}`);
+    must(st.look.startsWith(`studio/model-lab.html?file=${file}`) && !st.look.includes('model='), 'look ' + st.look);
+    const errs = errorsOf(page);
+    must(!errs.length, errs.join('; '));
+    const before = stub.got.length;
+    const r = await page.evaluate('lab.note("A draft note. (check-model-lab)", { picture: false })');
+    must(r.how === 'saved', 'not saved: ' + JSON.stringify(r.error));
+    const b = stub.got.slice(before).find((g) => g.route === 'note').body;
+    must(b.meta.file === file && b.meta.look === `studio/model-lab.html?file=${file}` && b.asset === modelAsset(json), 'meta ' + JSON.stringify(b.meta));
+    must(!('snapshot' in b), 'a picture was sent though the box was unticked');
+    return `${st.ref} from ${file}${st.body ? `, reacting as ${st.body.preset}` : ''}`;
+  });
+  await page.send('Page.close').catch(() => {});
+}
+
 async function checkFallback(ref) {
   console.log(`\nwith no write door (a plain static server)`);
   const plain = await testServer('static');
@@ -354,6 +402,8 @@ async function checkRealDoor(ref) {
 const stub = await testServer('stub');
 try {
   for (const r of refs) await checkModel(r, stub);
+  // A draft that is a rig with a body registers its own rig beside the listed one; a prop is simpler.
+  await checkDraft(refs.find((r) => models.json(r).body) || refs[0], stub);
   await checkFallback(refs[0]);
   await checkRealDoor(refs[0]);
 } finally {
