@@ -231,6 +231,18 @@ async function checkModel(ref, stub) {
     }
     throw new Fail('no part of it was clear of the panels to click');
   });
+  await step(page, 'parts in colour: every copy of every part in its own colour, the model\'s own meshes hidden', async () => {
+    await page.evaluate('lab.toggle("colors", true)');
+    await page.evaluate('lab.nextFrame()');
+    st = await S();
+    must(st.colors === true && st.look.includes('colors=1'), 'the address does not carry it: ' + st.look);
+    must(st.colored === built.parts.length, `${st.colored} coloured for ${built.parts.length} drawn parts`);
+    must(st.modelMeshesShown === 0, `${st.modelMeshesShown} of the model's own meshes still show`);
+    await page.evaluate('lab.toggle("colors", false)');
+    st = await S();
+    must(st.colored === 0 && st.modelMeshesShown === built.meshes.length, `after: ${st.colored} coloured, ${st.modelMeshesShown} of ${built.meshes.length} shown`);
+    return `${built.parts.length} parts`;
+  });
   await step(page, 'a material lights up every part made of it', async () => {
     const m = json.parts[picked ?? 0].material;
     const n = await page.evaluate(`lab.pickMaterial(${JSON.stringify(m)})`);

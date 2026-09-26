@@ -31,6 +31,8 @@ purpose. *Night vision* is the game's green, goggles down.
 model, every copy of it. Hold **Shift** and click the model to find which part something is. Click a
 colour under *Materials* to light up everything made of it. *Joints* shows the skeleton: yellow dots
 where parts hang, blue dots where the game hangs a light or a flame. *Joint names* names them.
+**Parts in colour, numbered** paints every part its own colour with its number, the same number as in
+the list: say "part 12 is too long" and whoever reads your note knows exactly which.
 
 **A creature with a body** (the spider, the zombie): pick a weapon and click where it hits.
 *Stand it up* puts it back. *Lose a limb* takes an arm, a leg or the head off.
@@ -50,7 +52,7 @@ so, and **Show v1 as a ghost** draws the old one over the new in blue lines.
 **The review folder.** `review\model-<name>\index.html` shows the latest sheet beside the one before,
 what changed between them, and the notes. Write in `notes.md` there as for any animation.
 
-Keys: `1`-`6` the views, `F` fit, `T` turntable, `W` wireframe, `J` joints, `N` names, `G` grid,
+Keys: `1`-`6` the views, `F` fit, `T` turntable, `W` wireframe, `J` joints, `N` names, `P` parts in colour, `G` grid,
 `L` the next light, `Esc` clear the pick.
 
 ---
@@ -84,6 +86,10 @@ seconds. It loads the studio and three.js, never the game.
 - **Light**: the ¾ front by day, at night, and in night vision, and **in the game**: the model 12 m
   from the game's camera (60°, 46° down) at 1:1 on a 1280 × 720 screen, so it's as big as the player
   sees it.
+- **The parts map**: the model from both three-quarter sides with every part of the file in its own
+  colour and numbered (its index in `parts`), and the key beside it: number, colour, name, copies. A note
+  that says "the thing at the back" is matched to its entry here. The colour of part N is the same on
+  every sheet and in the lab (`partColor`).
 - For a model that is a rig, six frames of its first clip, side on (`--clip rig/clip` for another).
 - In every view, the 1.75 m figure stands beside the model, never behind it.
 
@@ -130,7 +136,7 @@ Every setting is in the address, and the lab keeps it up to date as Jerry clicks
 | `clip` | `rig/clip` to play (a model that is a rig). |
 | `light` | `day` (the default), `night`, `nvg`. |
 | `figure` | `figure` (1.75 m, the default), `marine`, `none`. |
-| `wire`, `joints`, `names`, `spin` | `1` to switch on. `grid=0` switches the grid off. |
+| `wire`, `joints`, `names`, `spin`, `colors` | `1` to switch on (`colors`: parts in colour, numbered). `grid=0` switches the grid off. |
 | `view` | `front`, `side`, `back`, `top`, `three-front`, `three-back`. |
 | `cam`, `at` | The orbit camera: `yaw,pitch,distance` (radians, metres) and the point it looks at. |
 | `part` | The index of a part in the file's `parts`, lit up. |
@@ -193,6 +199,7 @@ No browser needed; `model-look.test.mjs` checks it in Node.
 | `modelBounds(object)`, `sizeText(bounds)`, `rulerTicks(lo, hi, mpp)` | Size to the millimetre; ruler ticks. |
 | `placeLabels(items, { w, h, measure })` | Names beside points that never overlap; deterministic. |
 | `partRows(json)` | One row per part: copies, triangles, joint, material, limb, the mesh that draws it. |
+| `partColor(i)`, `partHex(i)` | Part i's colour in the parts map, the same everywhere. |
 | `partOverlay(json, joints, root, { src } \| { material }, mat)`, `partAt(json, joints, root, raycaster, hidden)` | Light up a part on the shown model (following its joints); find the part a ray hits, even inside a merged mesh. |
 | `modelDiff(a, b)` | What changed between two versions of a file, as sentences. |
 | `modelNote({ json, ref, text, ... })`, `noteBlock(...)`, `ASSET_NAME` | The note's body (contract 5) and the block to paste. |
@@ -203,11 +210,12 @@ No browser needed; `model-look.test.mjs` checks it in Node.
 ```
 node --import ./studio/node-three.mjs --test "studio/*.test.mjs"      model-look.test.mjs (12) and
                                                                       render-sheet.test.mjs (6) among the rest
-CHROME=... CHROME_ARGS=--no-sandbox node studio/check-model-lab.mjs   the lab in a real browser (59 checks)
+CHROME=... CHROME_ARGS=--no-sandbox node studio/check-model-lab.mjs   the lab in a real browser (63 checks)
 ```
 
 `check-model-lab.mjs` opens the lab for every model and checks: no page error; the cost, joints and
-parts are Node's; the turntable, the toggles, the three lights and the six views; a part picked from the
+parts are Node's; the turntable, the toggles, the three lights and the six views; parts in colour (every
+drawn copy coloured, the model's own meshes hidden); a part picked from the
 list lights every copy; a shift-click picks the part under the pointer; a material; a limb; a click on
 a creature with a body hits it and it reacts; the picture; the note's body against contract 5; the
 note's `look` opens the same view again; a file changed under the lab shows (keeping the camera), a

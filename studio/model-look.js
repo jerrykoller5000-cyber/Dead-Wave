@@ -291,10 +291,11 @@ export function partRows(json) {
   return rows;
 }
 
-// Meshes that draw one part (every copy of it), or every part of one material, over the model as a
-// highlight. They hang on the same joints as the part, so they move with a clip or a reaction. `joints`
-// is the shown model's { name: Group }, `root` the group parts without a joint hang on. Returns the
-// meshes; take them off with mesh.removeFromParent().
+// Meshes that draw one part (every copy of it), every part of one material, or every part ({ all: true }),
+// over the model. They hang on the same joints as the part, so they move with a clip or a reaction.
+// `joints` is the shown model's { name: Group }, `root` the group parts without a joint hang on;
+// `material` is one material, or a function of the part ({ src, name, material, ... }) giving one.
+// Returns the meshes; take them off with mesh.removeFromParent().
 export function partOverlay(json, joints, root, which, material) {
   const { single } = builds(json);
   const out = [];
@@ -303,16 +304,25 @@ export function partOverlay(json, joints, root, which, material) {
     if (which.material !== undefined && s.material !== which.material) continue;
     const parent = s.joint ? joints[s.joint] : root;
     if (!parent) continue;
-    const m = new THREE.Mesh(s.mesh.geometry, material);
+    const m = new THREE.Mesh(s.mesh.geometry, typeof material === 'function' ? material(s) : material);
     m.position.copy(s.mesh.position); m.quaternion.copy(s.mesh.quaternion); m.scale.copy(s.mesh.scale);
     m.renderOrder = 30;
     m.userData.overlay = true;
+    m.userData.src = s.src;
+    m.userData.limb = s.limb;
     m.name = 'highlight:' + (s.name || s.src);
     parent.add(m);
     out.push(m);
   }
   return out;
 }
+
+// The parts map: each part of the file its own colour, the same every time, so neighbours differ (the
+// golden-angle walk round the hue circle) and "part 12" is the same colour on every sheet.
+export function partColor(i) {
+  return new THREE.Color().setHSL((i * 0.381966) % 1, 0.62, i % 2 ? 0.5 : 0.62);
+}
+export const partHex = (i) => '#' + partColor(i).getHexString();
 
 // Which part of the file a ray hits first: { src, name, point, distance }, or null. A merged mesh can't
 // say which of its parts was clicked, so the ray is tried on each part's own mesh, posed where the
@@ -414,7 +424,7 @@ export function readLabQuery(q) {
     model: get('model'), file: get('file'), asset: get('asset'), clip: get('clip'),
     light: LIGHT_MODES.includes(get('light')) ? get('light') : 'day',
     figure: FIGURES.includes(get('figure')) ? get('figure') : 'figure',
-    wire: flag('wire', false), joints: flag('joints', false), names: flag('names', false), spin: flag('spin', false),
+    wire: flag('wire', false), joints: flag('joints', false), names: flag('names', false), spin: flag('spin', false), colors: flag('colors', false),
     grid: flag('grid', true), view: VIEW[get('view')] ? get('view') : null,
     part: get('part') !== null && /^\d+$/.test(get('part')) ? +get('part') : null,
     cam: cam.length === 3 && cam.every(Number.isFinite) ? { yaw: cam[0], pitch: cam[1], dist: cam[2] } : null,
@@ -428,7 +438,7 @@ export function labQuery(s) {
   if (s.clip) q.set('clip', s.clip);
   if (s.light && s.light !== 'day') q.set('light', s.light);
   if (s.figure && s.figure !== 'figure') q.set('figure', s.figure);
-  for (const k of ['wire', 'joints', 'names', 'spin']) if (s[k]) q.set(k, '1');
+  for (const k of ['wire', 'joints', 'names', 'spin', 'colors']) if (s[k]) q.set(k, '1');
   if (s.grid === false) q.set('grid', '0');
   if (s.view) q.set('view', s.view);
   if (s.part !== null && s.part !== undefined) q.set('part', String(s.part));

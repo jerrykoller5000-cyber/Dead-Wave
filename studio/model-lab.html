@@ -40,6 +40,7 @@
   .part { padding: 3px 7px; border-bottom: 1px solid #1f2533; cursor: pointer; font-size: 12px; }
   .part:hover { background: #1c2331; } .part.on { background: #4a3419; }
   .part b { font-weight: 600; } .part .m { color: var(--dim); }
+  .part .pc { display: inline-block; min-width: 18px; text-align: center; font: bold 10px/14px ui-monospace, monospace; color: #0c0e12; border-radius: 3px; margin-right: 5px; }
   #partInfo { font: 11px/1.4 ui-monospace, monospace; white-space: pre-wrap; color: var(--dim); max-height: 140px; overflow: auto; margin-top: 5px; }
   #saved { font-size: 12px; margin-top: 6px; min-height: 1.4em; }
   #history { font-size: 12px; margin-top: 8px; }
@@ -70,6 +71,7 @@
   <div class="grid3">
     <button id="spin" title="T">Turntable</button><button id="wire" title="W">Wireframe</button><button id="grid" title="G">Grid</button>
     <button id="joints" title="J">Joints</button><button id="names" title="N">Joint names</button><select id="figure" title="Something to judge its size by"></select>
+    <button id="colors" title="P: every part its own colour and number, as in the list" style="grid-column: span 3">Parts in colour, numbered</button>
   </div>
   <h2>Look from</h2>
   <div class="grid3" id="views"></div>
@@ -130,7 +132,7 @@ import { parseNotes, reviewState } from '../crew/notes.mjs';
 import {
   SHEET_VIEWS, VIEW, PLAY_CAMERA, viewBasis, orthoScale, fitOrtho, fitPerspective, figureSpot, FIGURE_HALF_WIDTH,
   buildFigure, FIGURE_HEIGHT, LIGHTS, LIGHT_MODES, applyLight, drawNvgEdges, modelBounds, sizeText, rulerTicks,
-  placeLabels, partRows, partOverlay, partAt, modelDiff, modelNote, noteBlock, readLabQuery, labQuery
+  placeLabels, partRows, partOverlay, partAt, partColor, partHex, modelDiff, modelNote, noteBlock, readLabQuery, labQuery
 } from './model-look.js';
 
 const q = new URLSearchParams(location.search);
@@ -202,12 +204,14 @@ let cur = null;   // { ref, json, built, inst, group, box, bounds, rows, asset, 
 let player = null, body = null, lastHit = null, reactLog = [], speed = 1, getupClip = null;
 let highlight = null, hiMeshes = [];   // { src } or { material }
 const hidden = new Set();              // limbs taken off
-const view = { light: S.light, wire: S.wire, joints: S.joints, names: S.names, spin: S.spin, grid: S.grid, figure: S.figure };
+const view = { light: S.light, wire: S.wire, joints: S.joints, names: S.names, spin: S.spin, grid: S.grid, figure: S.figure, colors: S.colors };
 const orbit = { yaw: 0.7, pitch: 0.35, dist: 6, at: new THREE.Vector3(0, 0.8, 0), straight: null, mpp: 0.01, pan: [0, 0] };
 
 function load(r) {
   if (cur) {
     clearHighlight();
+    for (const m of colorMeshes) m.removeFromParent();
+    colorMeshes = [];
     scene.remove(cur.group);
     disposeModel(cur.built);
   }
@@ -232,6 +236,7 @@ function load(r) {
   const file = fileOf(r);
   cur = { ref: r, json, built: b, inst, group, box, bounds: modelBounds(group), rows: partRows(json), asset, file };
   sizeGrid(box);
+  if (view.colors) setColors(true);
   const wl = b.joints.waterline;
   water.visible = !!wl;
   if (wl) water.position.y = new THREE.Vector3().setFromMatrixPosition(wl.matrixWorld).y;
@@ -320,6 +325,59 @@ function setHighlight(which) {
   if (!which) return;
   highlight = which;
   hiMeshes = partOverlay(cur.json, cur.built.joints, cur.built.group, which, hiMat);
+}
+// The parts map: every part of the file in its own colour (partColor) with its number, in place of the
+// model's own meshes, which hide while it shows. The colours hang on the joints like the highlight, so a
+// clip or a reaction moves them. Made again when the model or its lost limbs change.
+let colorMeshes = [];
+const colorMats = new Map();
+// Two-sided where the part's own material is (a hull plate), so the colours show the same faces the model does.
+const colorMat = (i, double) => {
+  const k = i + (double ? 'd' : '');
+  return colorMats.get(k) || colorMats.set(k, new THREE.MeshStandardMaterial({ color: partColor(i), roughness: 0.75, side: double ? THREE.DoubleSide : THREE.FrontSide })).get(k);
+};
+function setColors(on) {
+  for (const m of colorMeshes) m.removeFromParent();
+  colorMeshes = [];
+  view.colors = !!on;
+  const lost = new Set(Object.entries(cur.built.limbs).filter(([l]) => hidden.has(l)).flatMap(([, ms]) => ms));
+  for (const m of cur.built.meshes) m.visible = !view.colors && !lost.has(m);
+  if (!view.colors) return;
+  colorMeshes = partOverlay(cur.json, cur.built.joints, cur.built.group, {}, (p) => colorMat(p.src, (cur.json.materials[p.material] || {}).side === 'double'));
+  for (const m of colorMeshes) {
+    m.renderOrder = 0; m.castShadow = true; m.receiveShadow = true;
+    if (m.userData.limb && hidden.has(m.userData.limb)) m.visible = false;
+  }
+}
+// Each part's number beside it, where the numbers fit (the parts list says which is which).
+function drawPartNumbers(ctx, cam, x, y, w, h, dpr = 1) {
+  const seen = new Set(), items = [], p = new THREE.Vector3(), box = new THREE.Box3(), ray = new THREE.Raycaster();
+  for (const m of colorMeshes) {
+    const src = m.userData.src;
+    if (seen.has(src) || !m.visible) continue;
+    seen.add(src);
+    m.updateWorldMatrix(true, false);
+    // The number goes where the line of sight to the part's middle meets the part itself, so a hoop's
+    // number is on the hoop, not on the drum inside it; the middle when the line misses (a ring's hole).
+    box.setFromObject(m).getCenter(p).project(cam);
+    ray.setFromCamera(new THREE.Vector2(p.x, p.y), cam);
+    const hit = ray.intersectObject(m, false)[0];
+    if (hit) p.copy(hit.point).project(cam);
+    if (p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) continue;
+    items.push({ text: String(src), x: ((p.x + 1) / 2) * w / dpr, y: ((1 - p.y) / 2) * h / dpr, src });
+  }
+  ctx.save(); ctx.translate(x, y); ctx.scale(dpr, dpr);
+  ctx.font = 'bold 11px ui-monospace, monospace';
+  const placed = placeLabels(items, { w: w / dpr, h: h / dpr, measure: (t) => ctx.measureText(t).width + 4, lineH: 13, gap: 3 });
+  for (const l of placed) {
+    if (!l.shown) continue;
+    const tw = ctx.measureText(l.text).width;
+    ctx.fillStyle = partHex(l.src); ctx.fillRect(l.lx - 2, l.ly - 1, tw + 6, 14);
+    ctx.strokeStyle = 'rgba(0,0,0,0.7)'; ctx.lineWidth = 1; ctx.strokeRect(l.lx - 2.5, l.ly - 1.5, tw + 7, 15);
+    ctx.fillStyle = '#0c0e12'; ctx.fillText(l.text, l.lx + 1, l.ly + 10);
+  }
+  ctx.restore();
+  return placed.filter((l) => !l.shown).map((l) => l.src);
 }
 function pickAt(clientX, clientY) {
   const r = renderer.domElement.getBoundingClientRect();
@@ -498,6 +556,7 @@ function drawOverlay() {
   octx.clearRect(0, 0, overlay.width, overlay.height);
   if (orbit.straight && orbit.fit) drawRuler(octx, orbit.fit, VIEW[orbit.straight], 0, 0, overlay.width, overlay.height, dpr);
   if (view.names) drawNames(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
+  if (view.colors) drawPartNumbers(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
   drawFigureLabel(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
 }
 function render() {
@@ -528,7 +587,7 @@ function paint(cam, then) {
 function state() {
   return {
     model: draft ? null : cur.ref, file: draft ? S.file : null, asset: S.asset, clip: player && $('clip') ? $('clip').value : null,
-    light: view.light, figure: view.figure, wire: view.wire, joints: view.joints, names: view.names, spin: view.spin, grid: view.grid,
+    light: view.light, figure: view.figure, wire: view.wire, joints: view.joints, names: view.names, spin: view.spin, grid: view.grid, colors: view.colors,
     view: view.name || null, part: highlight && highlight.src !== undefined ? highlight.src : null,
     cam: orbit.straight ? null : { yaw: orbit.yaw, pitch: orbit.pitch, dist: orbit.dist }, at: orbit.straight ? null : orbit.at.toArray()
   };
@@ -539,6 +598,7 @@ function describe() {
   if (highlight && highlight.src !== undefined) bits.push(`part ${cur.rows[highlight.src].name} picked`);
   if (highlight && highlight.material) bits.push(`material ${highlight.material} lit up`);
   if (view.wire) bits.push('wireframe');
+  if (view.colors) bits.push('parts in colour, numbered');
   if (hidden.size) bits.push('without ' + [...hidden].join(', '));
   if (ghost) bits.push(`${ghost.version} as a ghost`);
   if (player && $('clip').value) bits.push('playing ' + $('clip').value);
@@ -698,6 +758,7 @@ async function drawSheet() {
     window.__ready = true;
     return;
   }
+  view.colors = false;
   load(ref);
   view.figure = 'figure'; view.joints = false; view.names = false;
   setWire(false);
@@ -706,7 +767,7 @@ async function drawSheet() {
   const clip = clipRef && cur.inst ? loadClip(await (await fetch(`./clips/${clipRef}.json`)).json()) : null;
   const FRAMES = 6, fw = Math.floor(W / FRAMES), fh = 220;
   // Each picture has its caption in a band above it, so a caption never covers the model.
-  const rowY = [HEAD, HEAD + CAP + TH + G], lightY = HEAD + 2 * (CAP + TH + G), clipY = lightY + CAP + LH + G;
+  const rowY = [HEAD, HEAD + CAP + TH + G], lightY = HEAD + 2 * (CAP + TH + G), mapY = lightY + CAP + LH + G, clipY = mapY + CAP + TH + G;
   const H = clipY + (clip ? CAP + fh + G : 0) + FOOT;
   out.width = W; out.height = H;
   ctx.fillStyle = '#14181f'; ctx.fillRect(0, 0, W, H);
@@ -786,6 +847,39 @@ async function drawSheet() {
     label('in the game: 12 m away, as big as on a 1280 × 720 screen', x + 8, lightY + 17, '#9aa3b2', 12);
   }
   setLight('day');
+  // The parts map: each part of the file in its own colour with its number, from both three-quarter
+  // sides, and the key beside them, so "the thing sticking out at the back" can be found in "parts".
+  {
+    view.figure = 'none'; showFigure();
+    setColors(true);
+    renderer.setSize(TW, TH);
+    const hiddenNums = new Set();
+    for (const [k, key] of ['three-front', 'three-back'].entries()) {
+      const v = VIEW[key], x = k * (TW + G);
+      fitPerspective(persp, modelBox, v, TW / TH, 0.08);
+      aimKey(v.dir, modelBox);
+      await paint(persp, () => {
+        ctx.putImageData(pixels(renderer.domElement, TW, TH), x, mapY + CAP);
+        for (const n of drawPartNumbers(ctx, persp, x, mapY + CAP, TW, TH)) hiddenNums.add(n);
+      });
+      tileLabel(`parts map, ${v.label}`, x, mapY, 'each part its colour and number');
+    }
+    setColors(false);
+    view.figure = 'figure'; showFigure();
+    // The key: number, colour, name, and how many it draws.
+    const x0 = 2 * (TW + G) + 10, y0 = mapY + CAP + 16, n = cur.rows.length;
+    const cols = Math.min(4, Math.max(1, Math.ceil(n / 24))), rowsPer = Math.ceil(n / cols), colW = Math.floor((TW - 20) / cols);
+    const lineH = Math.min(15, Math.floor((TH - 20) / rowsPer));
+    ctx.font = `${Math.min(12, lineH - 2)}px system-ui, sans-serif`;
+    for (const r of cur.rows) {
+      const c = Math.floor(r.i / rowsPer), x = x0 + c * colW, y = y0 + (r.i % rowsPer) * lineH;
+      ctx.fillStyle = partHex(r.i); ctx.fillRect(x, y - lineH + 4, 10, lineH - 4);
+      let t = `${r.i} ${r.name}${r.copies > 1 ? ' ×' + r.copies : ''}`;
+      while (t.length > 3 && ctx.measureText(t).width > colW - 16) t = t.slice(0, -2) + '…';
+      ctx.fillStyle = '#c9d2e0'; ctx.fillText(t, x + 14, y);
+    }
+    label(`key: the parts in the file's order${hiddenNums.size ? ` (${hiddenNums.size} numbers left off where they'd cover others)` : ''}`, 2 * (TW + G) + 8, mapY + 17, '#9aa3b2', 12);
+  }
   // A strip of its first clip, side on, when it is a rig that plays one: framed once for every frame, so
   // the motion shows.
   if (clip) {
@@ -896,7 +990,8 @@ async function live() {
     wire: (on) => setWire(on),
     grid: (on) => { view.grid = on; grid.visible = on; },
     joints: (on) => { view.joints = on; },
-    names: (on) => { view.names = on; }
+    names: (on) => { view.names = on; },
+    colors: (on) => setColors(on)
   };
   for (const [id, set] of Object.entries(toggles)) $(id).onclick = () => { set(!view[id]); syncButtons(); saveUrl(); };
   for (const v of SHEET_VIEWS) {
@@ -976,6 +1071,7 @@ async function live() {
   function loseLimb(limb, on) {
     for (const m of cur.built.limbs[limb] || []) m.visible = !on;
     if (on) hidden.add(limb); else hidden.delete(limb);
+    if (view.colors) setColors(true);
     if (on && body && typeof body.lose === 'function') { try { body.lose(limb); } catch { /* not a part this body has */ } }
   }
   function restoreLimbs() { for (const l of [...hidden]) loseLimb(l, false); syncLimbs(); }
@@ -995,7 +1091,7 @@ async function live() {
     $('partCount').textContent = `${j.parts.length} in the file, ${cur.built.parts.length} drawn`;
     $('parts').replaceChildren(...cur.rows.map((r) => {
       const d = document.createElement('div'); d.className = 'part'; d.dataset.i = r.i;
-      d.innerHTML = `<b>${esc(r.name)}</b> <span class="m">${r.shape}${r.copies > 1 ? ' ×' + r.copies : ''} · ${r.triangles} tris · ${esc(r.joint || 'model')} · ${esc(r.material)}${r.limb ? ' · ' + r.limb : ''}</span>`;
+      d.innerHTML = `<i class="pc" style="background:${partHex(r.i)}" title="its number and colour in Parts in colour">${r.i}</i><b>${esc(r.name)}</b> <span class="m">${r.shape}${r.copies > 1 ? ' ×' + r.copies : ''} · ${r.triangles} tris · ${esc(r.joint || 'model')} · ${esc(r.material)}${r.limb ? ' · ' + r.limb : ''}</span>`;
       d.onclick = () => pick(highlight && highlight.src === r.i ? null : r.i);
       return d;
     }));
@@ -1102,6 +1198,7 @@ async function live() {
     else if (k === 'w') toggles.wire(!view.wire);
     else if (k === 'j') toggles.joints(!view.joints);
     else if (k === 'n') toggles.names(!view.names);
+    else if (k === 'p') toggles.colors(!view.colors);
     else if (k === 'g') toggles.grid(!view.grid);
     else if (k === 'l') setLight(LIGHT_MODES[(LIGHT_MODES.indexOf(view.light) + 1) % LIGHT_MODES.length]);
     else if (k === 'escape') pick(null);
@@ -1184,7 +1281,8 @@ async function live() {
       wireOn: (() => { let w = null; cur.group.traverse((o) => { if (o.isMesh && !o.userData.overlay && w === null) w = !!o.material.wireframe; }); return w; })(),
       filter: renderer.domElement.style.filter, straight: orbit.straight, yaw: orbit.yaw, canSave, review: { ...review, notes: review.notes.length },
       body: body ? { preset: body.presetName, state: body.state } : null, context: describe(), look: lookUrl(), figureAt: shownFigure() ? shownFigure().position.toArray() : null,
-      ghost: ghost ? ghost.version : null, problems: [...problems], fileVersion: cur.json.version || 1
+      ghost: ghost ? ghost.version : null, problems: [...problems], fileVersion: cur.json.version || 1,
+      colored: colorMeshes.filter((m) => m.visible).length, modelMeshesShown: cur.built.meshes.filter((m) => m.visible).length
     }),
     setModel: async (r) => { ref = r; sel.value = r; await show(); return cur.ref; },
     setLight: (m) => { setLight(m); syncButtons(); },
