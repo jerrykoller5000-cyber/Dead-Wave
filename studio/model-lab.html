@@ -5,14 +5,17 @@
 <style>
   :root { --bg: #1d2330; --panel: rgba(18, 22, 30, 0.93); --ink: #e8e4d4; --dim: #9aa3b2; --accent: #e0b85a; --good: #7cdea0; --bad: #ff7a6a; --hi: #ff9a3c; }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; overflow: hidden; }
+  /* Three columns, the model in the middle: nothing covers it, and a straight view's ruler shows. */
+  body { display: flex; }
   canvas { display: block; }
+  #stage { position: relative; flex: 1 1 auto; min-width: 240px; height: 100%; overflow: hidden; }
   #view { position: absolute; inset: 0; }
   #overlay, #nvgEdge { position: absolute; inset: 0; pointer-events: none; }
   #nvgEdge { display: none; background: radial-gradient(ellipse 69% 80% at 50% 50%, transparent 48%, rgba(10,17,22,.16) 68%, rgba(0,3,6,.94) 100%); }
   body.nvg #nvgEdge { display: block; }
-  .panel { position: absolute; background: var(--panel); border: 1px solid #333b4a; border-radius: 8px; padding: 12px 14px; box-sizing: border-box; }
-  #side { top: 12px; left: 12px; width: 330px; max-height: calc(100% - 24px); overflow: auto; }
-  #notes { bottom: 12px; right: 12px; width: 370px; max-height: calc(100% - 24px); overflow: auto; }
+  .panel { position: relative; background: var(--panel); padding: 12px 14px; box-sizing: border-box; height: 100%; overflow: auto; }
+  #side { flex: 0 0 330px; border-right: 1px solid #333b4a; }
+  #notes { flex: 0 0 360px; border-left: 1px solid #333b4a; }
   h1 { font-size: 15px; margin: 0 0 6px; letter-spacing: .04em; }
   h2 { font-size: 12px; margin: 12px 0 6px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
   button, select, input[type=text] { font: inherit; color: var(--ink); background: #2c3444; border: 1px solid #45506a; border-radius: 5px; padding: 4px 8px; }
@@ -45,14 +48,12 @@
   #history blockquote { margin: 3px 0 0; padding-left: 8px; border-left: 2px solid var(--good); color: var(--dim); }
   pre.block { white-space: pre-wrap; user-select: all; margin: 4px 0 0; background: #10141b; padding: 6px; border-radius: 4px; }
   kbd { font: 11px ui-monospace, monospace; background: #2c3444; border: 1px solid #45506a; border-radius: 3px; padding: 0 3px; }
-  body.sheet, body.shot { overflow: visible; background: #14181f; }
+  body.sheet, body.shot { display: block; overflow: visible; background: #14181f; }
+  body.sheet #stage, body.shot #stage { display: none; }
   body.sheet .panel, body.shot .panel { display: none; }
 </style>
 <script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js"}}</script>
 </head><body>
-<div id="view"></div>
-<canvas id="overlay"></canvas>
-<div id="nvgEdge"></div>
 <div id="side" class="panel">
   <h1>Model lab</h1>
   <div class="hint">Drag to turn round it, wheel to zoom, right-drag to slide. <kbd>Shift</kbd>-click a part to pick it.</div>
@@ -60,6 +61,7 @@
   <select id="model"></select>
   <div id="info" class="hint clamp" title="Click for all of it"></div>
   <div id="review" class="hint"></div>
+  <div id="problems" class="hint bad" style="display:none"></div>
   <h2>Cost against its budget</h2>
   <div id="cost"></div>
   <h2>Light</h2>
@@ -93,6 +95,7 @@
   </div>
   <div class="hint" style="margin-top:10px"><kbd>1</kbd>-<kbd>6</kbd> views, <kbd>F</kbd> fit, <kbd>T</kbd> turntable, <kbd>W</kbd> wireframe, <kbd>J</kbd> joints, <kbd>L</kbd> light, <kbd>Esc</kbd> clear the pick.</div>
 </div>
+<div id="stage"><div id="view"></div><div id="nvgEdge"></div><canvas id="overlay"></canvas></div>
 <div id="notes" class="panel">
   <h1>Your note</h1>
   <textarea id="note" placeholder="What should change? e.g. The boat looks too flat at the bow. The lamp should be bigger and brighter."></textarea>
@@ -140,7 +143,15 @@ const today = () => new Date().toISOString().slice(0, 10);
 // A draft file (?file=, repo-relative) stands in for its listed namesake, if it has one.
 const draft = S.file ? await (await fetch('../' + S.file)).json() : null;
 const draftRef = draft ? `${draft.kind}/${draft.name}` : null;
-const modelJson = (r) => (draft && r === draftRef ? draft : models.json(r));
+// The files as the lab last read them. A listed model starts as studio/models/index.js has it and a draft
+// as ?file= gave it; the live lab watches the file and swaps in a newer one that validates (watchFile).
+const current = new Map();
+const isDraft = (r) => !!draft && r === draftRef;
+const modelJson = (r) => current.get(r) || (isDraft(r) ? draft : models.json(r));
+const fileOf = (r) => (isDraft(r) ? S.file : `studio/models/${r}.json`);
+// The rig each model plays as, and the file it was made from: made again when the file changes, so a
+// new limb or a new body shows at once. The listed rigs studio/rigs.js made are from models.json(ref).
+const madeFrom = new Map();
 let ref = draft ? draftRef : models.json(S.model) ? S.model : models.names()[0];
 
 // --- The stage ---------------------------------------------------------------------------------------------
@@ -201,6 +212,7 @@ function load(r) {
     disposeModel(cur.built);
   }
   player = null; body = null; lastHit = null; reactLog = []; hidden.clear();
+  setGhost(null);
   const json = modelJson(r);
   const b = buildModel(json);
   let inst = null;
@@ -208,15 +220,16 @@ function load(r) {
     // A draft of a rig plays as its own rig, so the listed one is left as it is; a model with a body
     // but no rig of its own (the zombie stand-in) gets one here, so it can react.
     const own = json.rig || 'model-' + json.name;
-    const name = json === draft ? own + '-draft' : own;
-    if (!rigs.def(name)) registerRig(name, rigFromModel(json));
+    const name = isDraft(r) ? own + '-draft' : own;
+    const from = madeFrom.has(name) ? madeFrom.get(name) : rigs.def(name) ? models.json(r) : null;
+    if (from !== json) { registerRig(name, rigFromModel(json)); madeFrom.set(name, json); }
     inst = rigs.get(name).create({ group: b.group });
   }
   const group = inst ? inst.group : b.group;
   scene.add(group);
   const box = new THREE.Box3().setFromObject(group);
   const asset = S.asset || modelAsset(json);
-  const file = json === draft ? S.file : `studio/models/${r}.json`;
+  const file = fileOf(r);
   cur = { ref: r, json, built: b, inst, group, box, bounds: modelBounds(group), rows: partRows(json), asset, file };
   sizeGrid(box);
   const wl = b.joints.waterline;
@@ -318,7 +331,12 @@ function pickAt(clientX, clientY) {
 
 // --- The camera -----------------------------------------------------------------------------------------------
 const camera = () => (orbit.straight ? ortho : persp);
-function size() { return MODE === 'live' ? [innerWidth, innerHeight] : [+(q.get('w') || 1280), +(q.get('h') || 800)]; }
+// The picture's size: the middle column in the live lab, or what the address asks for in a shot.
+function size() {
+  if (MODE !== 'live') return [+(q.get('w') || 1280), +(q.get('h') || 800)];
+  const r = $('stage').getBoundingClientRect();
+  return [Math.max(1, Math.round(r.width)), Math.max(1, Math.round(r.height))];
+}
 // The key light comes from over the camera's left shoulder and turns with it, as on a turntable.
 function aimKey(fromDir, box) {
   const sph = box.getBoundingSphere(new THREE.Sphere());
@@ -522,6 +540,7 @@ function describe() {
   if (highlight && highlight.material) bits.push(`material ${highlight.material} lit up`);
   if (view.wire) bits.push('wireframe');
   if (hidden.size) bits.push('without ' + [...hidden].join(', '));
+  if (ghost) bits.push(`${ghost.version} as a ghost`);
   if (player && $('clip').value) bits.push('playing ' + $('clip').value);
   if (lastHit && body) bits.push(`last hit ${lastHit} with ${body.presetName}`);
   bits.push(`draws ${cur.built.cost.draws}/${j.budget.draws}, triangles ${cur.built.cost.triangles}/${j.budget.triangles}`);
@@ -563,15 +582,15 @@ function compose(maxW) {
 }
 
 // --- The review folder: its version, whether the file changed since, and Jerry's notes so far --------------------
-const review = { asset: null, latest: null, notes: [], state: 'no-notes', changed: null, diff: [], folder: false };
+const review = { asset: null, latest: null, notes: [], state: 'no-notes', changed: null, diff: [], folder: false, then: null };
 async function readReview() {
   const base = `../review/${cur.asset}/`, get = async (f) => { try { const r = await fetch(base + f, { cache: 'no-store' }); return r.ok ? await r.text() : null; } catch { return null; } };
   const [latest, notes] = await Promise.all([get('latest.txt'), get('notes.md')]);
-  Object.assign(review, { asset: cur.asset, latest: latest && /^v\d+\s*$/.test(latest) ? latest.trim() : null, folder: latest !== null, notes: [], changed: null, diff: [] });
+  Object.assign(review, { asset: cur.asset, latest: latest && /^v\d+\s*$/.test(latest) ? latest.trim() : null, folder: latest !== null, notes: [], changed: null, diff: [], then: null });
   if (notes) { review.notes = parseNotes(notes); review.state = reviewState(review.notes, review.latest).state; } else review.state = 'no-notes';
   if (review.latest) {
     const then = await get(`${review.latest}/model.json`);
-    if (then) { try { const a = JSON.parse(then); review.diff = modelDiff(a, cur.json); review.changed = review.diff.length > 0; } catch { review.changed = null; } }
+    if (then) { try { const a = JSON.parse(then); review.diff = modelDiff(a, cur.json); review.changed = review.diff.length > 0; review.then = a; } catch { review.changed = null; } }
   }
   return review;
 }
@@ -581,10 +600,40 @@ function showReview() {
   const r = review, j = cur.json;
   const word = { 'no-notes': 'no notes yet', waiting: 'a note is waiting for the owner', taken: 'the owner is on it', look: 'answered: a new version to look at', 'answered-seen': 'answered', approved: 'approved' }[r.state] || r.state;
   let html = r.folder ? `Review folder review/${esc(r.asset)}: latest <b>${esc(r.latest || '?')}</b>, ${word}.` : `No review folder yet: your first note makes review/${esc(cur.asset)}.`;
-  if (r.changed) html += ` <span class="bad" title="${esc(r.diff.join('\n'))}">The file changed since ${esc(r.latest)}</span> (${r.diff.length} change${r.diff.length > 1 ? 's' : ''}; its owner renders v${Math.max((j.version || 1), +String(r.latest).slice(1) + 1)} with render-sheet).`;
+  if (r.changed) html += ` <span class="bad" title="${esc(r.diff.join('\n'))}">The file changed since ${esc(r.latest)}</span> (${r.diff.length} change${r.diff.length > 1 ? 's' : ''}; its owner renders v${Math.max((j.version || 1), +String(r.latest).slice(1) + 1)} with render-sheet). <button id="ghostBtn" class="${ghost ? 'on' : ''}" title="Draw ${esc(r.latest)} over it in blue lines">Show ${esc(r.latest)} as a ghost</button>`;
   else if (r.changed === false) html += ` The sheet there is of this file.`;
   $('review').innerHTML = html;
-  $('history').innerHTML = r.notes.length ? '<h2>Notes so far</h2>' + r.notes.slice(0, 8).map((n) => `<div class="n"><b>${esc(n.version)}</b> ${esc(n.date)} <span class="st">${esc(n.state)}</span><br>${esc(n.text.slice(0, 300))}${n.answer ? `<blockquote>${esc(n.answer.agent)} · ${esc(n.answer.version)}: ${esc(n.answer.text.slice(0, 200))}</blockquote>` : ''}</div>`).join('') : '';
+  if ($('ghostBtn')) $('ghostBtn').onclick = () => { setGhost(ghost ? null : r.then); showReview(); };
+  // Each note with the picture the lab sent with it, and a link that opens the lab as it was then.
+  const base = `../review/${esc(r.asset)}/`;
+  $('history').innerHTML = r.notes.length ? '<h2>Notes so far</h2>' + r.notes.slice(0, 8).map((n) => {
+    const pic = /!\[[^\]]*\]\((v\d+\/[\w.-]+\.png)\)/.exec(n.text), look = /look: studio\/model-lab\.html\?([^\s)]+)/.exec(n.text);
+    const text = n.text.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\(In the (model )?lab: [^)]*\)/, '').trim();
+    return `<div class="n"><b>${esc(n.version)}</b> ${esc(n.date)} <span class="st">${esc(n.state)}</span>${look ? ` · <a href="?${esc(look[1])}">see what was looked at</a>` : ''}<br>${esc(text.slice(0, 300))}` +
+      `${pic ? `<br><a href="${base}${esc(pic[1])}" target="_blank"><img src="${base}${esc(pic[1])}" alt="the picture sent with the note" style="max-width:100%;margin-top:4px;border:1px solid #333b4a"></a>` : ''}` +
+      `${n.answer ? `<blockquote>${esc(n.answer.agent)} · ${esc(n.answer.version)}: ${esc(n.answer.text.slice(0, 200))}</blockquote>` : ''}</div>`;
+  }).join('') : '';
+}
+// The review folder's latest version drawn over the model as it is now, in thin blue lines: what changed,
+// in place. Its own build, so the model's meshes and materials are untouched.
+let ghost = null;
+const ghostMat = new THREE.MeshBasicMaterial({ color: 0x66ccff, wireframe: true, transparent: true, opacity: 0.45, depthTest: false });
+function setGhost(json) {
+  if (ghost) {
+    scene.remove(ghost.group);
+    ghost.group.traverse((o) => { if (o.isMesh && !o.geometry.userData.shared) o.geometry.dispose(); });
+    for (const m of ghost.materials) m.dispose();
+    ghost = null;
+  }
+  if (!json) return;
+  try {
+    const b = buildModel(json), materials = new Set();
+    b.group.traverse((o) => { if (o.isMesh) { materials.add(o.material); o.material = ghostMat; o.renderOrder = 25; o.castShadow = false; o.userData.overlay = true; } });
+    // It stands where the model stands: a model that is a rig may be shown at another scale.
+    b.group.scale.copy(cur.group.scale);
+    scene.add(b.group);
+    ghost = { group: b.group, materials, version: review.latest };
+  } catch { ghost = null; }
 }
 
 // --- Notes: POST /__studio/note (contract 5) or, with no endpoint, a block to paste ----------------------------
@@ -832,8 +881,8 @@ async function applyStart({ clip = true } = {}) {
 
 // --- The live lab ---------------------------------------------------------------------------------------------------
 async function live() {
-  const resize = () => { renderer.setSize(innerWidth, innerHeight); if (orbit.straight) setView(orbit.straight); else placeCam(); };
-  renderer.setSize(innerWidth, innerHeight);
+  const resize = () => { renderer.setSize(...size()); if (orbit.straight) setView(orbit.straight); else placeCam(); };
+  renderer.setSize(...size());
   // Lights and toggles.
   for (const m of LIGHT_MODES) {
     const b = document.createElement('button'); b.textContent = LIGHTS[m].label; b.dataset.light = m;
@@ -933,10 +982,13 @@ async function live() {
   function syncLimbs() { for (const b of $('limbs').children) b.classList.toggle('on', hidden.has(b.dataset.limb)); }
 
   // The model's panels.
-  async function show() {
+  // Shows the model `ref`. keep: the file changed under the lab, so the camera, the clip and the picked
+  // part stay as they were.
+  async function show({ keep = false } = {}) {
+    const was = keep ? { clip: player ? $('clip').value : null, part: highlight && highlight.src !== undefined ? highlight.src : null } : null;
     load(ref);
     const j = cur.json, c = cur.built.cost, b = j.budget;
-    $('info').innerHTML = `<b>${esc(cur.ref)}</b> v${j.version || 1} · ${j.kind} · owner ${esc(j.owner || 'claude')}${draft && j === draft ? ' · <span class="bad">draft</span> ' + esc(S.file) : ''}<br>${esc(j.notes || '')}`;
+    $('info').innerHTML = `<b>${esc(cur.ref)}</b> v${j.version || 1} · ${j.kind} · owner ${esc(j.owner || 'claude')}${isDraft(cur.ref) ? ' · <span class="bad">draft</span> ' + esc(S.file) : ''}<br>${esc(j.notes || '')}`;
     const bar = (name, v, max) => `<div class="bar${v > max ? ' over' : ''}"><i style="width:${Math.min(100, (100 * v) / max).toFixed(1)}%"></i><span>${name} ${v} of ${max}${v > max ? ' — over' : ''}</span></div>`;
     $('cost').innerHTML = bar('draws', c.draws, b.draws) + bar('triangles', c.triangles, b.triangles) +
       `<div class="hint">${sizeText(cur.bounds)} · ${Object.keys(cur.built.joints).length} joints · ${cur.built.meshes.length} meshes · merge ${esc(JSON.stringify(j.merge ?? false))}</div>`;
@@ -961,10 +1013,15 @@ async function live() {
     $('cliplist').replaceChildren(...listed.map((x) => new Option(x, x)));
     await armBody(j);
     // Its idle under a reaction when it has a body; otherwise the first clip it lists.
-    $('clip').value = S.clip || (body ? (listed.find((x) => x.endsWith('/idle')) || `${own}/idle`) : (listed[0] || ''));
-    if (cur.inst && $('clip').value && (S.clip || body || listed.length)) await playClip();
-    // The live lab has played its clip already, above.
-    await applyStart({ clip: false });
+    $('clip').value = S.clip || (was && was.clip) || (body ? (listed.find((x) => x.endsWith('/idle')) || `${own}/idle`) : (listed[0] || ''));
+    if (cur.inst && $('clip').value && (S.clip || (was && was.clip) || body || listed.length)) await playClip();
+    if (was) {
+      if (orbit.straight) setView(orbit.straight); else placeCam();
+      if (was.part !== null && cur.rows[was.part]) setHighlight({ src: was.part });
+    } else {
+      // The live lab has played its clip already, above.
+      await applyStart({ clip: false });
+    }
     S.clip = null; S.view = null; S.cam = null;
     syncButtons(); syncPick();
     await readReview(); showReview();
@@ -1054,9 +1111,41 @@ async function live() {
   $('save').onclick = () => { const t = $('note').value.trim(); if (t) sendNote(t, { picture: $('pic').checked }); };
   $('approve').onclick = () => sendNote('good', { picture: $('pic').checked });
 
+  // The model's file, read again every 1.5 s: a change shows as soon as it's saved (an agent edits, Jerry
+  // watches), keeping the camera. A file that isn't valid leaves the last good one showing, with its
+  // problems as sentences.
+  let watching = false;
+  async function watchFile() {
+    if (watching) return false;
+    watching = true;
+    try {
+      const r = cur.ref, res = await fetch('../' + cur.file, { cache: 'no-store' });
+      if (!res.ok || r !== cur.ref) return false;
+      const text = await res.text();
+      let json;
+      try { json = JSON.parse(text); } catch (e) { showProblems([`${cur.file} is not JSON: ${e.message}`]); return false; }
+      if (JSON.stringify(json) === JSON.stringify(cur.json)) { showProblems([]); return false; }
+      const errs = validateModel(json);
+      if (errs.length) { showProblems(errs); return false; }
+      showProblems([]);
+      current.set(r, json);
+      await show({ keep: true });
+      $('saved').innerHTML = `<span class="good">${esc(cur.file)} changed: this is it now.</span>`;
+      return true;
+    } catch { return false; /* the server is away for a moment */ } finally { watching = false; }
+  }
+  function showProblems(list) {
+    problems = list;
+    const el = $('problems');
+    el.style.display = list.length ? '' : 'none';
+    el.innerHTML = list.length ? `The file has ${list.length} problem${list.length > 1 ? 's' : ''}; the last good one is showing:<br>` + list.slice(0, 8).map((t) => '- ' + esc(t)).join('<br>') : '';
+  }
+  let problems = [];
+
   setLight(view.light);
   await show();
   ping();
+  setInterval(() => { if (!document.hidden) watchFile(); }, 1500);
 
   // Each frame: the turntable, the clip, the reaction, then the picture.
   const clock = new THREE.Clock();
@@ -1094,7 +1183,8 @@ async function live() {
       parts: cur.rows.length, highlight: highlight ? { ...highlight, meshes: hiMeshes.length } : null, hidden: [...hidden],
       wireOn: (() => { let w = null; cur.group.traverse((o) => { if (o.isMesh && !o.userData.overlay && w === null) w = !!o.material.wireframe; }); return w; })(),
       filter: renderer.domElement.style.filter, straight: orbit.straight, yaw: orbit.yaw, canSave, review: { ...review, notes: review.notes.length },
-      body: body ? { preset: body.presetName, state: body.state } : null, context: describe(), look: lookUrl(), figureAt: shownFigure() ? shownFigure().position.toArray() : null
+      body: body ? { preset: body.presetName, state: body.state } : null, context: describe(), look: lookUrl(), figureAt: shownFigure() ? shownFigure().position.toArray() : null,
+      ghost: ghost ? ghost.version : null, problems: [...problems], fileVersion: cur.json.version || 1
     }),
     setModel: async (r) => { ref = r; sel.value = r; await show(); return cur.ref; },
     setLight: (m) => { setLight(m); syncButtons(); },
@@ -1115,6 +1205,9 @@ async function live() {
     partAtScreen: (x, y) => { const h = pickAt(x, y); return h ? h.src : null; },
     lose: (l, on = true) => { loseLimb(l, on); syncLimbs(); return [...hidden]; },
     snapshot: (maxW) => snapshot(maxW),
+    // Reads the file now instead of waiting for the next look (true when it changed what's shown).
+    watch: () => watchFile(),
+    ghost: (on = true) => { setGhost(on ? review.then : null); showReview(); return ghost ? ghost.version : null; },
     note: (text, opts) => sendNote(text, opts),
     ping: () => ping(),
     readReview: async () => { await readReview(); showReview(); return { ...review, notes: review.notes.length }; },

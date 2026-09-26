@@ -74,7 +74,8 @@ function pngSize(dataUrl) {
 // The repo's files, and POST /__studio/* either answered by a stand-in for the write door ('stub'), which
 // keeps what it was sent, or refused as a plain static server refuses it ('static').
 function testServer(mode) {
-  const got = [];
+  // overrides: repo path -> text served in its place (a model file "changed on disk" without touching it).
+  const got = [], overrides = new Map();
   const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.txt': 'text/plain', '.md': 'text/markdown' };
   const server = http.createServer((req, res) => {
     let p;
@@ -97,6 +98,7 @@ function testServer(mode) {
       });
       return;
     }
+    if (overrides.has(p)) { res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }).end(overrides.get(p)); return; }
     const file = path.resolve(ROOT, '.' + (p.endsWith('/') ? p + 'index.html' : p));
     if (!file.startsWith(ROOT + path.sep)) { res.writeHead(403).end(); return; }
     fs.readFile(file, (err, data) => {
@@ -105,7 +107,7 @@ function testServer(mode) {
     });
   });
   return new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve({
-    origin: `http://127.0.0.1:${server.address().port}`, got,
+    origin: `http://127.0.0.1:${server.address().port}`, got, overrides,
     close: () => new Promise((d) => { server.closeAllConnections(); server.close(() => d()); })
   })));
 }
@@ -298,6 +300,37 @@ async function checkModel(ref, stub) {
     must(typeof b.snapshot === 'string' && b.snapshot.startsWith('data:image/png;base64,') && b.snapshot.length <= 3 * 1024 * 1024, 'no picture, or too big');
     must(/look: studio\/model-lab\.html\?model=/.test(b.context) && /night vision/.test(b.context), 'the context: ' + b.context);
     return b.context.slice(0, 110) + '...';
+  });
+  await step(page, 'a change saved to the file shows in the lab, keeping the camera; a bad one shows its problems', async () => {
+    const at = '/studio/models/' + ref + '.json';
+    const before = await S();
+    // A bigger budget and one more part: the kind of change an agent saves while Jerry watches.
+    const changed = JSON.parse(JSON.stringify(json));
+    changed.version = (json.version || 1) + 1;
+    changed.budget = { draws: json.budget.draws + 1, triangles: json.budget.triangles + 12 };
+    changed.materials.checkMark = { color: '#ff00ff' };
+    changed.parts.push({ name: 'checkBox', shape: 'box', size: [0.1, 0.1, 0.1], at: [0, 3, 0], material: 'checkMark', merge: false });
+    stub.overrides.set(at, JSON.stringify(changed, null, 2));
+    try {
+      must(await page.evaluate('lab.watch()') === true, 'the lab did not take the changed file');
+      st = await S();
+      must(st.parts === json.parts.length + 1 && st.cost.draws === built.cost.draws + 1 && st.fileVersion === changed.version, `after the change: ${st.parts} parts, ${st.cost.draws} draws, v${st.fileVersion}`);
+      must(st.view === before.view && Math.abs(st.yaw - before.yaw) < 1e-9 && st.part === before.part, 'the camera or the pick moved: ' + JSON.stringify([before.view, st.view, before.part, st.part]));
+      must(await page.waitFor('lab.state().review.changed === true', { timeout: 20000 }), 'the lab does not say the file changed since the review version');
+      const g = await page.evaluate('lab.ghost(true)');
+      must(g === (await S()).review.latest, 'no ghost of the review version: ' + g);
+      must((await S()).context.includes(`${g} as a ghost`), 'the note context does not say a ghost is showing');
+      await page.evaluate('lab.ghost(false)');
+      stub.overrides.set(at, JSON.stringify({ ...changed, parts: [...changed.parts, { name: 'oops', shape: 'blob' }] }));
+      must(await page.evaluate('lab.watch()') === false, 'a bad file was taken');
+      st = await S();
+      must(st.problems.length && /oops|blob|shape/.test(st.problems.join(' ')), 'no problems shown: ' + JSON.stringify(st.problems));
+      must(st.parts === json.parts.length + 1, 'the last good file is not the one showing');
+      return `v${changed.version}: ${st.parts} parts; the bad one: "${st.problems[0]}"`;
+    } finally {
+      stub.overrides.delete(at);
+      await page.evaluate('lab.watch()');
+    }
   });
   await page.send('Page.close').catch(() => {});
   await step(null, 'the address in the note shows the same view again', async () => {
