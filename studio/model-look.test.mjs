@@ -11,7 +11,7 @@ import { parseNotes } from '../crew/notes.mjs';
 import {
   SHEET_VIEWS, VIEW, viewBasis, viewExtent, orthoScale, fitOrtho, fitPerspective, figureSpot, SCALE_FIGURE, buildFigure,
   FIGURE_HEIGHT, LIGHTS, NVG_FILTER, modelBounds, rulerTicks, placeLabels, partRows, partOverlay, partAt, modelDiff,
-  modelNote, noteBlock, readLabQuery, labQuery, ASSET_NAME
+  modelNote, noteBlock, readLabQuery, labQuery, ASSET_NAME, partColor, partHex
 } from './model-look.js';
 
 const project = (p, cam) => new THREE.Vector3(...p).project(cam);
@@ -177,6 +177,24 @@ test('a picked part lights up every copy of it where the model draws it, and fol
   // Every part of one material.
   const flesh = partOverlay(json, m.joints, m.group, { material: 'flesh' }, mat);
   assert.equal(flesh.length, rows.filter((x) => x.material === 'flesh').reduce((s, x) => s + x.copies, 0));
+});
+
+test('the parts map gives every part its own colour, the same every time, neighbours unlike', () => {
+  const seen = new Set();
+  for (let i = 0; i < 64; i++) {
+    const a = partColor(i), b = partColor(i + 1);
+    assert.equal(partHex(i), '#' + partColor(i).getHexString(), 'the same colour every time');
+    const d = Math.hypot(a.r - b.r, a.g - b.g, a.b - b.b);
+    assert.ok(d > 0.12, `parts ${i} and ${i + 1} look alike (${partHex(i)}, ${partHex(i + 1)})`);
+    seen.add(partHex(i));
+  }
+  assert.equal(seen.size, 64);
+  // Every drawn copy, each with the part it draws, coloured by a function of the part.
+  const json = models.json('prop/evac-boat'), m = buildModel(json);
+  const all = partOverlay(json, m.joints, m.group, {}, (p) => new THREE.MeshBasicMaterial({ color: partColor(p.src) }));
+  assert.equal(all.length, m.parts.length);
+  for (const o of all) assert.equal('#' + o.material.color.getHexString(), partHex(o.userData.src));
+  assert.deepEqual([...new Set(all.map((o) => o.userData.src))].sort((a, b) => a - b), json.parts.map((p, i) => i));
 });
 
 test('a click on the model finds the part of the file under it, even inside a merged mesh', () => {

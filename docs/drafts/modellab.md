@@ -208,7 +208,7 @@ No browser needed; `model-look.test.mjs` checks it in Node.
 ### Checking it
 
 ```
-node --import ./studio/node-three.mjs --test "studio/*.test.mjs"      model-look.test.mjs (12) and
+node --import ./studio/node-three.mjs --test "studio/*.test.mjs"      model-look.test.mjs (13) and
                                                                       render-sheet.test.mjs (6) among the rest
 CHROME=... CHROME_ARGS=--no-sandbox node studio/check-model-lab.mjs   the lab in a real browser (63 checks)
 ```

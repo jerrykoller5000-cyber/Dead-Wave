@@ -240,7 +240,8 @@ function load(r) {
   const wl = b.joints.waterline;
   water.visible = !!wl;
   if (wl) water.position.y = new THREE.Vector3().setFromMatrixPosition(wl.matrixWorld).y;
-  // Joint dots sized to the model, so a drum's and a boat's both read.
+  // Joint dots sized to the model, so a drum's and a boat's both read. They share one sphere.
+  if (jointDots.children.length) jointDots.children[0].geometry.dispose();
   jointDots.clear();
   const rad = Math.max(0.012, cur.box.getSize(new THREE.Vector3()).length() * 0.008);
   const dotGeo = new THREE.SphereGeometry(rad, 10, 8);
@@ -586,7 +587,7 @@ function paint(cam, then) {
 // --- What the picture is of, in words: the note's context and the snapshot's caption -----------------------------
 function state() {
   return {
-    model: draft ? null : cur.ref, file: draft ? S.file : null, asset: S.asset, clip: player && $('clip') ? $('clip').value : null,
+    model: isDraft(cur.ref) ? null : cur.ref, file: isDraft(cur.ref) ? S.file : null, asset: S.asset, clip: player && $('clip') ? $('clip').value : null,
     light: view.light, figure: view.figure, wire: view.wire, joints: view.joints, names: view.names, spin: view.spin, grid: view.grid, colors: view.colors,
     view: view.name || null, part: highlight && highlight.src !== undefined ? highlight.src : null,
     cam: orbit.straight ? null : { yaw: orbit.yaw, pitch: orbit.pitch, dist: orbit.dist }, at: orbit.straight ? null : orbit.at.toArray()
