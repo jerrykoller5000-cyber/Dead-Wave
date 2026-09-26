@@ -398,6 +398,31 @@ test('in a scene a body gets up on its clip, turned the way it lies, and the sce
   assert.equal(sp2.actors.shotgunClose.body.state, 'animated');
 });
 
+test('the new review scenes play: each body gets up from the side it fell on, and what\'s left of a body reacts', () => {
+  const run = (name) => {
+    const sp = createScene(loadScene(JSON.parse(fs.readFileSync(new URL(`./scenes/${name}.json`, import.meta.url), 'utf8')), clipOf));
+    const ev = {}, getup = {};
+    while (!sp.done) for (const e of sp.update(1 / 60).events) {
+      if (!e.name.startsWith('motion:')) continue;
+      (ev[e.actor] ||= []).push(e.name.slice(7));
+      if (e.name === 'motion:getup') getup[e.actor] = e.data;
+    }
+    assert.deepEqual(Object.values(sp.worst).filter((w) => w.bad).map((w) => w.kind + ':' + w.key), [], name);
+    return { sp, ev, getup };
+  };
+  const g = run('getting-up');
+  for (const [actor, side] of [['zombieFront', 'front'], ['zombieBack', 'back'], ['marineFront', 'front'], ['marineBack', 'back']]) {
+    assert.equal(g.getup[actor] && g.getup[actor].side, side, actor + ': ' + (g.ev[actor] || []).join(' '));
+    assert.ok(g.ev[actor].includes('recovered') && g.sp.actors[actor].body.state === 'animated', actor + ' is up by the end');
+    // Shot from ±X, facing +X: it gets up facing +X, give or take the twist of the fall.
+    assert.ok(Math.abs(g.getup[actor].heading - Math.PI / 2) < 0.8, actor + ' heading ' + g.getup[actor].heading.toFixed(2));
+  }
+  const d = run('zombie-dismembered');
+  assert.ok(d.ev.legless.includes('fall') && d.ev.legless.includes('getup'), d.ev.legless.join(' '));
+  assert.ok(!d.ev.armless.includes('fall') && d.ev.armless.includes('recovered'), d.ev.armless.join(' '));
+  assert.ok(d.ev.headless.includes('dead') && d.ev.headless.includes('settled'), d.ev.headless.join(' '));
+});
+
 test('a scene can take a part off a body on cue', () => {
   const sc = loadScene({ format: 'dw-scene/1', name: 'x', length: 3, actors: { z: { rig: 'zombie', at: [0, 0, 0], clips: [[0, 'zombie/idle']], motion: 'zombie/shambler', lose: [[0.5, 'legR']] } } }, clipOf);
   const sp = createScene(sc);

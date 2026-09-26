@@ -1,0 +1,28 @@
+{
+  "format": "dw-scene/1",
+  "name": "getting-up",
+  "length": 5,
+  "notes": "D-42: the get-up clips in play. A shell at 0.3 s from behind or in front puts each on its face or its back; each gets up on its own clip for that side, turned the way it lies (studio/clips/<rig>/getup-front|back.json). Left to right from the camera (+X): a shambler face down, a shambler on its back, a marine face down, a marine on his back.",
+  "actors": {
+    "zombieFront": {
+      "rig": "zombie", "at": [0, 0, -4.5], "face": 90,
+      "clips": [[0, "zombie/idle"]], "motion": "zombie/shambler",
+      "hits": [[0.3, { "at": "chest", "dir": [1, 0.1, 0], "power": 8, "kind": "pellet" }]]
+    },
+    "zombieBack": {
+      "rig": "zombie", "at": [0, 0, -1.5], "face": 90,
+      "clips": [[0, "zombie/idle"]], "motion": "zombie/shambler",
+      "hits": [[0.3, { "at": "chest", "dir": [-1, 0.1, 0], "power": 8, "kind": "pellet" }]]
+    },
+    "marineFront": {
+      "rig": "marine", "at": [0, 0, 1.5], "face": 90,
+      "clips": [[0, "marine/stand"]], "motion": "marine/marine",
+      "hits": [[0.3, { "at": "chest", "dir": [1, 0.1, 0], "power": 8, "kind": "pellet" }]]
+    },
+    "marineBack": {
+      "rig": "marine", "at": [0, 0, 4.5], "face": 90,
+      "clips": [[0, "marine/stand"]], "motion": "marine/marine",
+      "hits": [[0.3, { "at": "chest", "dir": [-1, 0.1, 0], "power": 8, "kind": "pellet" }]]
+    }
+  }
+}

@@ -281,6 +281,7 @@ export function createBody(inst, preset, opts = {}) {
   });
   for (const s of segs) if (!s.j) throw new Error(`body segment: the rig has no joint "${s.joint}"`);
   const lower = spec.frame.lower, upper = spec.frame.upper;
+  const chestI = idx[upper.up[1]];   // the top of the torso: how far up it is says whether a fall is over
   // What's left of it: every point simulates until its part is lost (body.lose). A lost point rides
   // along with the point it hung from, as the animation has it, and nothing else sees it.
   const parts = spec.parts || {};
@@ -571,6 +572,19 @@ export function createBody(inst, preset, opts = {}) {
   // --- One physics step ---
   const com = new THREE.Vector3(), comV = new THREE.Vector3();
   const qLow = new THREE.Quaternion(), qUp = new THREE.Quaternion(), qTurn = new THREE.Quaternion(), qAnim = new THREE.Quaternion();
+  // How far a frame (the hips', the chest's) has turned from the animation's, less `up` of the way,
+  // as a 3×3 row-major matrix: the muscles of a fallen body turn their targets by it.
+  const mLo = new Float64Array(9), mUp = new Float64Array(9);
+  const hangsOnChest = Uint8Array.from(names, (k, i) => (grp[i] === 'arms' || grp[i] === 'head' ? 1 : 0));
+  function turnOf(fr, up, m) {
+    frameQuat(P, fr, idx, qTurn); frameQuat(A, fr, idx, qAnim);
+    qTurn.multiply(qAnim.invert());                 // the animation's frame onto the body's
+    if (up > 0) slerpTo(qTurn, qAnim.identity(), up);
+    const x = qTurn.x, y = qTurn.y, z = qTurn.z, w = qTurn.w;
+    m[0] = 1 - 2 * (y * y + z * z); m[1] = 2 * (x * y - w * z); m[2] = 2 * (x * z + w * y);
+    m[3] = 2 * (x * y + w * z); m[4] = 1 - 2 * (x * x + z * z); m[5] = 2 * (y * z - w * x);
+    m[6] = 2 * (x * z - w * y); m[7] = 2 * (y * z + w * x); m[8] = 1 - 2 * (x * x + y * y);
+  }
   const toneFor = (g) => {
     const s = body.state;
     if (s === 'dead') return preset.death.tone;
@@ -610,17 +624,11 @@ export function createBody(inst, preset, opts = {}) {
     const rx = P[root * 3], ry = P[root * 3 + 1], rz = P[root * 3 + 2];
     const ax = A[root * 3], ay = A[root * 3 + 1], az = A[root * 3 + 2];
     const up = st === 'fall' || st === 'down' ? preset.fall.upright : st === 'held' ? preset.held.upright : st === 'dead' ? 0 : 1;
-    let turned = false, m0 = 1, m1 = 0, m2 = 0, m3 = 0, m4 = 1, m5 = 0, m6 = 0, m7 = 0, m8 = 1;
-    if (up < 1) {
-      frameQuat(P, lower, idx, qTurn); frameQuat(A, lower, idx, qAnim);
-      qTurn.multiply(qAnim.invert());                 // the animation's hips onto the body's
-      if (up > 0) slerpTo(qTurn, qAnim.identity(), up);
-      const x = qTurn.x, y = qTurn.y, z = qTurn.z, w = qTurn.w;
-      m0 = 1 - 2 * (y * y + z * z); m1 = 2 * (x * y - w * z); m2 = 2 * (x * z + w * y);
-      m3 = 2 * (x * y + w * z); m4 = 1 - 2 * (x * x + z * z); m5 = 2 * (y * z - w * x);
-      m6 = 2 * (x * z - w * y); m7 = 2 * (y * z + w * x); m8 = 1 - 2 * (x * x + y * y);
-      turned = true;
-    }
+    // Turned, the legs and spine keep their shape off the hips, and the arms and head off the chest
+    // (kept off the hips, a twisted spine puts the arms' targets in the ground, and they shove the
+    // body over).
+    const turned = up < 1;
+    if (turned) { turnOf(lower, up, mLo); turnOf(upper, up, mUp); }
     const TT = {};
     const str = Math.sqrt(preset.strength);
     for (const gname of TONE_GROUPS) TT[gname] = toneFor(gname) * str;
@@ -634,10 +642,11 @@ export function createBody(inst, preset, opts = {}) {
       // Spring toward the pose, and damp the point's motion relative to the root.
       Q[o] += ((P[o] - Q[o]) - vrx) * c; Q[o + 1] += ((P[o + 1] - Q[o + 1]) - vry) * c; Q[o + 2] += ((P[o + 2] - Q[o + 2]) - vrz) * c;
       if (turned) {
-        const dx = A[o] - ax, dy = A[o + 1] - ay, dz = A[o + 2] - az;
-        P[o] += (rx + m0 * dx + m1 * dy + m2 * dz - P[o]) * k;
-        P[o + 1] += (ry + m3 * dx + m4 * dy + m5 * dz - P[o + 1]) * k;
-        P[o + 2] += (rz + m6 * dx + m7 * dy + m8 * dz - P[o + 2]) * k;
+        const onChest = hangsOnChest[i], m = onChest ? mUp : mLo, b = onChest ? chestI * 3 : root * 3;
+        const dx = A[o] - A[b], dy = A[o + 1] - A[b + 1], dz = A[o + 2] - A[b + 2];
+        P[o] += (P[b] + m[0] * dx + m[1] * dy + m[2] * dz - P[o]) * k;
+        P[o + 1] += (P[b + 1] + m[3] * dx + m[4] * dy + m[5] * dz - P[o + 1]) * k;
+        P[o + 2] += (P[b + 2] + m[6] * dx + m[7] * dy + m[8] * dz - P[o + 2]) * k;
       } else {
         P[o] += (rx + A[o] - ax - P[o]) * k;
         P[o + 1] += (ry + A[o + 1] - ay - P[o + 1]) * k;
@@ -676,9 +685,12 @@ export function createBody(inst, preset, opts = {}) {
       P[f * 3] = x; P[f * 3 + 1] = y; P[f * 3 + 2] = z;
       if (stepping.u >= 1) { pin[stepping.k] = [x, z]; stepping = null; steps++; emit('step', { foot: names[f] }); }
     }
-    // Falling: the hands go out toward the ground ahead.
-    if (st === 'fall' && preset.fall.catch > 0) {
-      const k = springK(preset.fall.catch, h);
+    // Falling: the hands go out toward the ground ahead, to break the fall. As the chest comes down
+    // they let go: kept on a body lying on its face, they push it up and over the top of them, again
+    // and again, and it never lies still.
+    const chestUp = P[chestI * 3 + 1] - ground(P[chestI * 3], P[chestI * 3 + 2]) - rad[chestI];
+    if (st === 'fall' && preset.fall.catch > 0 && chestUp > 0.15) {
+      const k = springK(preset.fall.catch, h) * smooth((chestUp - 0.15) / 0.3);
       for (const hI of hands) {
         if (!live[hI]) continue;
         const x = rx + fallDir.x * 0.45, z = rz + fallDir.z * 0.45;
