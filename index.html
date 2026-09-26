@@ -34871,7 +34871,7 @@
     }
     function setReactions(on) {
       reactionsOn = !!on && hordeReady();
-      if (!reactionsOn && Horde) Horde.releaseAll();
+      if (!reactionsOn && Horde) Horde.releaseLiving();   // corpses stay as they lie until finishCorpse lets them go
       return reactionsOn;
     }
     // A corpse the horde says is still stops dragging its pool of blood along.

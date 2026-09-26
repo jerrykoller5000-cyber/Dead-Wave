@@ -400,3 +400,21 @@ test('a hit at a point the body lacks, or at no point at all, is refused up fron
   assert.ok(h.hit(z, { at: 'shoulderR', dir: [0, 0, -1], power: 3, kind: 'bullet' }), 'a real point still takes it');
   assert.doesNotThrow(() => run(h, 0.5));
 });
+
+test('reactions switched off mid-game: the living let go, a corpse stays as it lies until the host releases it', () => {
+  const h = createHorde({ presets });
+  const dead = mockZombie('shambler', 0, 0), live = mockZombie('shambler', 4, 0);
+  assert.ok(h.kill(dead, { at: 'chest', dir: [0, 0, -1], power: 3 }));
+  assert.ok(h.hit(live, { power: 4.5, kind: 'pellet' }));
+  for (let f = 0; f < 120 && (f < 10 || h.body(dead).points().head[1] >= 0.35); f++) { h.beginFrame(); h.update(1 / 60); }
+  const headY = () => { dead.mesh.updateWorldMatrix(true, true); return dead.mesh.userData.head.getWorldPosition(new THREE.Vector3()).y; };
+  const lying = headY();
+  h.releaseLiving();
+  assert.equal(h.has(live), false, 'the living body is let go');
+  assert.ok(h.has(dead) && h.frozen(dead), 'the corpse is kept, frozen');
+  for (let f = 0; f < 10; f++) h.beginFrame();         // the game keeps calling it; update() doesn't run while off
+  assert.ok(Math.abs(headY() - lying) < 1e-6 && lying < 0.5, `its head stays at ${lying.toFixed(2)} m`);
+  h.release(dead);                                       // finishCorpse: the pose goes back before the pool has the mesh
+  assert.equal(h.has(dead), false);
+  assert.ok(headY() > 1, 'released, the mesh has its animated pose back for the pool');
+});

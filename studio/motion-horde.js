@@ -508,7 +508,11 @@ export function createHorde(opts = {}) {
     // Stop simulating it and leave it as it lies (a corpse sinking away).
     freeze(key) { const r = recs.get(key); if (r) freezeRec(r); },
     release(key) { const r = recs.get(key); if (r) releaseRec(r); },
-    releaseAll() { for (const r of [...recs.values()]) releaseRec(r); later.length = 0; }
+    releaseAll() { for (const r of [...recs.values()]) releaseRec(r); later.length = 0; },
+    // Reactions switched off mid-game: the living go back to their animation, and a corpse stays as it
+    // lies, frozen, until the host lets its body go with the corpse (release). releaseAll stood every
+    // ragdoll corpse back up.
+    releaseLiving() { for (const r of [...recs.values()]) { if (r.killed) freezeRec(r, 'frozen'); else releaseRec(r); } },
   });
   // (A getter, defined on its own: Object.assign would copy what it returned once, not the getter.)
   Object.defineProperty(self, 'stats', {

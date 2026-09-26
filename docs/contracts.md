@@ -476,7 +476,8 @@ own (§10). `sceneClipRefs(json)` lists every clip a scene needs, get-ups includ
 ground, lodFor, clips, solve, onEvent, move })`; `hit(z, h)` and `kill(z, h)` (false: refused, play the old
 reaction); `beginFrame()` each frame before the host animates, after the pause's early return; `update(dt)` after
 it has and every hit is in; `busy(z)` (the AI waits while true); `adopt(key, { rig, preset, group, move, ground })`
-for the marine; `freeze`, `release`, `releaseAll`, `stats`. `solve(key, x, z) → { x, z }` is where the host's walls
+for the marine; `freeze`, `release`, `releaseAll`, `releaseLiving` (reactions switched off: corpses stay as they lie until
+`release`), `stats`. `solve(key, x, z) → { x, z }` is where the host's walls
 let a group stand. Behind REACTIONS, off (D-57).
 
 **Expectations** (contract 6, `studio/motion-expect.js`): a preset's `expect` is a list of `{ hit, from?, want,

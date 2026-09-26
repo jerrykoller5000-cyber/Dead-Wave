@@ -650,6 +650,7 @@ horde.kill(z, {...});                            // true: it dies as a ragdoll
 horde.beginFrame();                              // each frame, before the host animates (after pause's return)
 horde.update(dt);                                // after it has and every hit is in → [{ key, name, data }]
 horde.busy(z); horde.adopt(key, { rig, preset, group, move, ground }); horde.freeze(z); horde.release(z);
+horde.releaseLiving();                           // reactions off: the living let go, corpses stay as they lie
 horde.stats;                                     // { attached, active, awake, ms, msAvg, lod, refused, max }
 ```
 
