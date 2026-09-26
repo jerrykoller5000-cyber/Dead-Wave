@@ -1,73 +1,167 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Dead-Wave · Motion lab</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
 <style>
-  :root { --bg: #1d2330; --panel: rgba(18, 22, 30, 0.92); --ink: #e8e4d4; --dim: #9aa3b2; --accent: #e0b85a; --good: #7cdea0; --bad: #ff7a6a; }
+  :root { --bg: #1d2330; --panel: rgba(18, 22, 30, 0.92); --ink: #e8e4d4; --dim: #9aa3b2; --accent: #e0b85a; --good: #7cdea0; --bad: #ff7a6a; --line: #333b4a; }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; overflow: hidden; }
   canvas { display: block; }
-  .panel { position: absolute; background: var(--panel); border: 1px solid #333b4a; border-radius: 8px; padding: 12px 14px; box-sizing: border-box; }
+  .panel { position: absolute; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; box-sizing: border-box; }
   #controls { top: 12px; left: 12px; width: 300px; max-height: calc(100% - 24px); overflow: auto; }
+  #readout { top: 12px; right: 12px; width: 300px; max-height: calc(100% - 470px); overflow: auto; font: 12px/1.45 ui-monospace, monospace; }
   #notes { bottom: 12px; right: 12px; width: 360px; }
-  #readout { top: 12px; right: 12px; width: 260px; font: 12px/1.45 ui-monospace, monospace; }
+  #timeline { bottom: 12px; left: 324px; right: 384px; min-width: 300px; padding: 8px 10px; }
   h1 { font-size: 15px; margin: 0 0 8px; letter-spacing: .04em; } h2 { font-size: 12px; margin: 12px 0 6px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
-  button, select { font: inherit; color: var(--ink); background: #2c3444; border: 1px solid #45506a; border-radius: 5px; padding: 5px 8px; cursor: pointer; }
+  button, select, input[type=text] { font: inherit; color: var(--ink); background: #2c3444; border: 1px solid #45506a; border-radius: 5px; padding: 5px 8px; }
+  button, select { cursor: pointer; }
   button:hover { background: #38435a; } button.on { background: var(--accent); color: #1a1a1a; border-color: var(--accent); }
+  button:disabled { opacity: .45; cursor: default; }
+  select { width: 100%; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
   label.sl { display: grid; grid-template-columns: 58px 1fr 36px; align-items: center; gap: 6px; margin: 3px 0; color: var(--dim); }
   input[type=range] { width: 100%; }
-  textarea { width: 100%; height: 90px; box-sizing: border-box; background: #10141b; color: var(--ink); border: 1px solid #45506a; border-radius: 5px; padding: 6px; font: inherit; resize: vertical; }
+  textarea { width: 100%; height: 72px; box-sizing: border-box; background: #10141b; color: var(--ink); border: 1px solid #45506a; border-radius: 5px; padding: 6px; font: inherit; resize: vertical; }
   .hint { color: var(--dim); font-size: 12px; margin: 6px 0 0; }
-  #saved { font-size: 12px; margin-top: 6px; min-height: 1.4em; }
-  .ev { color: var(--good); } .st { color: var(--accent); }
+  #saved { font-size: 12px; margin-top: 6px; min-height: 1.4em; word-break: break-word; }
+  #saved code, #readout code { background: #10141b; padding: 1px 4px; border-radius: 3px; }
+  .ev { color: var(--good); } .st { color: var(--accent); } .no { color: var(--bad); } .dim { color: var(--dim); }
+  .body { margin: 0 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); } .body:last-child { border-bottom: 0; }
+  #scrub { width: 100%; height: 64px; cursor: col-resize; touch-action: none; }
+  #transport { margin-top: 6px; display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+  #transport button { padding: 3px 8px; }
+  #transport .speed { display: flex; align-items: center; gap: 4px; color: var(--dim); font-size: 12px; margin-left: auto; }
+  #transport .speed input { width: 90px; }
+  #clock { font: 12px ui-monospace, monospace; color: var(--dim); min-width: 12em; }
+  .tag { position: absolute; transform: translate(-50%, -100%); pointer-events: none; font: 12px/1.3 system-ui, sans-serif; background: rgba(10, 12, 18, .72); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
+  .tag b { color: var(--accent); }
+  #copybox { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); display: flex; align-items: center; justify-content: center; }
+  #copybox[hidden] { display: none; }
+  #copybox .panel { position: static; width: min(640px, 90vw); }
+  #copybox textarea { height: 220px; font: 12px ui-monospace, monospace; }
+  .scene { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: 8px; }
+  .check { display: flex; gap: 6px; align-items: center; color: var(--dim); font-size: 12px; margin-top: 6px; }
+  #history { margin: 0 0 6px; font-size: 12px; }
+  #history summary { cursor: pointer; color: var(--dim); }
+  #history[data-state="look"] summary, #history[data-state="waiting"] summary { color: var(--accent); }
+  #histlist { max-height: 170px; overflow: auto; margin-top: 4px; }
+  .hn { margin: 6px 0; } .hn .ans { margin-top: 2px; padding-left: 8px; border-left: 2px solid var(--good); color: var(--good); }
+  table.exp { border-collapse: collapse; margin-top: 6px; font-size: 11px; width: 100%; }
+  table.exp th, table.exp td { padding: 2px 3px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.exp td + td, table.exp th + th { white-space: nowrap; }
+  #expout details { margin-top: 4px; } #expout summary { cursor: pointer; }
+  table.exp th { color: var(--dim); font-weight: normal; }
+  table.exp td.ok { color: var(--good); } table.exp td.no { color: var(--bad); }
 </style>
 <script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js"}}</script>
 </head><body>
 <div id="controls" class="panel">
   <h1>Motion lab</h1>
-  <div class="hint">Pick a weapon, then click the body where it hits. Drag to turn the camera, wheel to zoom.</div>
+  <div class="hint">Pick a weapon, then click the body where it hits. Drag to turn the camera, wheel to zoom. <span id="grabhint"></span></div>
   <h2>Body</h2>
   <select id="preset"></select>
+  <label class="check" title="White: the points the physics moves and the bones between them. Green: where its animation wants each point, which the muscles pull toward."><input type="checkbox" id="bones"> Show its points, and where its animation wants them</label>
   <h2>Weapon</h2>
   <div class="grid" id="weapons"></div>
-  <h2>Time</h2>
-  <div class="grid">
-    <button data-speed="1" class="on">Real speed</button><button data-speed="0.25">Quarter speed</button>
-    <button id="replay">Again</button><button id="reset">Stand up</button>
+  <label class="sl" style="margin-top:6px" title="How hard the weapon hits, from a quarter to three times its usual power"><span>power</span><input id="power" type="range" min="-2" max="1.585" step="0.01" value="0"><span id="powerv">1.00×</span></label>
+  <div class="hint">Or fire it at the usual spot (as the crew's checks do):</div>
+  <div class="row3" id="from" style="margin-top:6px"><button data-from="front">From the front</button><button data-from="side">From the side</button><button data-from="back">From behind</button></div>
+  <div class="grid" style="margin-top:6px"><button id="again">Again, the same way</button><button id="reset">Stand up</button></div>
+  <h2>Compare</h2>
+  <select id="compare"></select>
+  <div class="hint">A second body beside the first. Every hit lands on both, the same way, at the same moment.</div>
+  <div id="expectbox" hidden>
+    <h2>Reactions already approved</h2>
+    <button id="checkexp">Check them<span id="checkexpwith"></span></button>
+    <div id="expout" class="hint"></div>
   </div>
-  <h2>Muscles (try it, then say it in a note)</h2>
+  <h2>Muscles of body A (try it, then say it in a note)</h2>
   <div id="sliders"></div>
   <button id="fromfile" style="margin-top:6px">Back to the file's values</button>
+  <div id="partsbox" hidden>
+    <h2>Take a part off</h2>
+    <div class="row" id="parts"></div>
+  </div>
 </div>
 <div id="readout" class="panel"></div>
+<div id="timeline" class="panel">
+  <canvas id="scrub"></canvas>
+  <div id="transport">
+    <button id="pause" title="Stop here, or play on from here (Space)">Pause</button><button id="replay" title="Play again from just before the hit (R)">Replay</button><button id="live" class="on" title="Back to the body as it is now (L)">Live</button>
+    <button id="back1" title="One frame back (←)">◀ frame</button><button id="fwd1" title="One frame on (→)">frame ▶</button>
+    <span id="clock"></span>
+    <span class="speed">speed <button data-speed="1" class="on">1×</button><button data-speed="0.5">½×</button><button data-speed="0.25">¼×</button><button data-speed="0.1">⅒×</button>
+      <input id="speed" type="range" min="-4.32" max="1" step="0.01" value="0" title="Any speed from 0.05× to 2×"><span id="speedv">1.00×</span></span>
+  </div>
+</div>
 <div id="notes" class="panel">
   <h1>Your note</h1>
+  <details id="history" hidden><summary id="histsum"></summary><div id="histlist"></div></details>
   <textarea id="note" placeholder="What should change? e.g. The shotgun stagger is good but he gets up too fast. The brute should rock back more."></textarea>
+  <label class="check"><input type="checkbox" id="withpic" checked> Send a picture of what's on screen with it, and a strip of the reaction</label>
   <div class="grid" style="margin-top:6px"><button id="save">Save note for the crew</button><button id="approve">It's good</button></div>
+  <div class="scene"><input type="text" id="scenename" placeholder="scene name" maxlength="40"><button id="savescene">Save as scene</button></div>
   <div id="saved"></div>
-  <div class="hint">Notes go to review/motion-&lt;body&gt;/notes.md, with what you last did here. The owner answers there and on the crew panel.</div>
+  <div class="hint" id="notehint">Notes go to review/motion-&lt;body&gt;/notes.md, with what you last did here. The owner answers there and on the crew panel.</div>
 </div>
+<div id="tags"></div>
+<div id="copybox" hidden><div class="panel"><h1 id="copytitle">Copy this</h1><div class="hint" id="copyhint"></div><textarea id="copytext" readonly></textarea><div class="row" style="margin-top:8px"><button id="copyclose">Done</button><a id="copypic" download hidden><button>Save the picture</button></a></div></div></div>
 <script type="module">
 // studio/motion-lab.html — Jerry's bench for reactions (D-42). Claude's. Served by tools/serve.mjs
-// ("Open Motion Lab.bat"): studio/motion-lab.html?preset=zombie/shambler. Pure studio code: the same
-// createBody the game and the scenes run, on the studio rigs.
+// ("Open Motion Lab.bat"): studio/motion-lab.html?preset=zombie/shambler. The same createBody the game
+// and the scenes run, on the studio rigs, so what Jerry approves here is what the game plays.
+//
+// What it does: hit a body (or two side by side, compared), watch it at any speed, scrub back through
+// the last six seconds with every event marked, and send a note with a picture to the review folder,
+// or save what happened as a scene an agent can render (node tools/studio.mjs scene). Without the
+// lab's server (a plain static server) it copies the note instead.
+//
+// URL: ?preset=zombie/brute &compare=file|<rig/name> &weapon=<battery hit> &power=<0.25..3>
+// &bones=1 &asset=<review folder>.
+// A page script (studio/check-labs.mjs, or an agent in the console) drives it through window.lab.
 import * as THREE from 'three';
 import { rigs, loadMotion, createBody, loadClip, createPlayer } from './index.js';
+import * as engine from './motion.js';
 import { presets } from './motion/index.js';
 
+// The battery's hits (contract 6; studio/motion-battery.js when it's there): a name, a kind, a power
+// in m/s at the point hit, and the point the crew's checks aim at. A grenade pushes up half as much
+// as along.
 const WEAPONS = [
-  { key: 'rifle', label: 'Rifle round', kind: 'bullet', power: 2.5 },
-  { key: 'shotFar', label: 'Shotgun, 6 m', kind: 'pellet', power: 3.2 },
-  { key: 'shotClose', label: 'Shotgun, close', kind: 'pellet', power: 6.5 },
-  { key: 'blade', label: 'Machete', kind: 'blade', power: 3.5 },
-  { key: 'swing', label: "Brute's swing", kind: 'crush', power: 4.5 },
-  { key: 'grenade', label: 'Grenade', kind: 'blast', power: 8, up: 0.5 },
-  { key: 'kill', label: 'Killing shot', kind: 'bullet', power: 3, kill: true }
+  { key: 'rifle', label: 'Rifle round', kind: 'bullet', power: 2.5, at: 'chest' },
+  { key: 'shotgun-far', label: 'Shotgun, 6 m', kind: 'pellet', power: 3.2, at: 'chest' },
+  { key: 'shotgun-close', label: 'Shotgun, close', kind: 'pellet', power: 6.5, at: 'chest' },
+  { key: 'machete', label: 'Machete', kind: 'blade', power: 3.5, at: 'chest' },
+  { key: 'brute-swing', label: "Brute's swing", kind: 'crush', power: 4.5, at: 'shoulderR' },
+  { key: 'grenade', label: 'Grenade', kind: 'blast', power: 8, at: 'pelvis', up: 0.5 },
+  { key: 'kill', label: 'Killing shot', kind: 'bullet', power: 3, at: 'head', kill: true }
 ];
-const CLIPS = { zombie: 'zombie/idle', marine: 'marine/stand' };
-const q = new URLSearchParams(location.search);
-let ref = presets.json(q.get('preset')) ? q.get('preset') : 'zombie/shambler';
-let weapon = WEAPONS[2], speed = 1, overrides = {}, last = null, history = [];
+// Where a hit comes from, in the body's own frame (it faces +Z): the way it pushes.
+const FROM = { front: [0, 0, -1], back: [0, 0, 1], side: [-1, 0, 0] };
+// What each rig stands on while it waits to be hit, and the game's zombie sizes (index.html
+// ZOMBIE_TYPES scale), so a feral is a feral's size here as in the game and the crew's battery.
+const STANDS = { zombie: 'zombie/idle', marine: 'marine/stand' };
+const ZOMBIE_SCALES = { shambler: 1, feral: 0.88, leaper: 0.92, drowned: 0.98, military: 1.08, brute: 1.38, spitter: 1.05, screamer: 0.96, bomber: 1.1 };
+const PARTS = ['armL', 'armR', 'legL', 'legR', 'head'];
+const PART_NAMES = { armL: 'left arm', armR: 'right arm', legL: 'left leg', legR: 'right leg', head: 'head' };
+const PART_JOINTS = { armL: 'shoulderL', armR: 'shoulderR', legL: 'hipL', legR: 'hipR', head: 'head' };
+const KIND_COLOR = { bullet: 0xff5040, pellet: 0xff9a40, blade: 0xd8e4ff, crush: 0xc08cff, blast: 0xffd040 };
+const EV_COLOR = { hit: '#ff6a5a', stagger: '#e0b85a', step: '#e0b85a', fall: '#c08cff', land: '#c08cff', down: '#c08cff', getup: '#7cc8ff', recovered: '#7cdea0', dead: '#b0b8c4', settled: '#b0b8c4', held: '#ff9ad0', released: '#ff9ad0', lost: '#ff9a3a' };
+const REC_SPAN = 6, REC_STEP = 1 / 120, FRAME = 1 / 60, SPACING = 2, SNAP_LIMIT = 3 * 1024 * 1024;
 
+const q = new URLSearchParams(location.search);
+const firstPreset = presets.json(q.get('preset')) ? q.get('preset') : 'zombie/shambler';
+const assetOverride = /^[a-z0-9][a-z0-9-]{1,63}$/.test(q.get('asset') || '') ? q.get('asset') : null;
+let weapon = WEAPONS.find((w) => w.key === q.get('weapon')) || WEAPONS[2];
+// The weapon's power times this (the power slider): where a reaction turns from one thing to another.
+let powerK = Math.max(0.25, Math.min(3, +q.get('power') || 1));
+let compareWith = q.get('compare') === 'file' || presets.json(q.get('compare')) ? q.get('compare') : '';
+let overrides = {}, speed = 1, simT = 0, mode = 'live', viewT = 0, canSave = false, building = null;
+let labBodies = [], seq = null, liveSnap = null, grab = null, lastSave = null, lastScene = null, framedTwo = false;
+const rec = { frames: [], events: [], hits: [] };
+
+// --- The stage ----------------------------------------------------------------------------------
 const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
 await renderer.init();
 renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true;
@@ -86,144 +180,1179 @@ const placeCam = () => {
   camera.lookAt(orbit.at);
 };
 placeCam();
+const UP = new THREE.Vector3(0, 1, 0);
+const _v = new THREE.Vector3(), _w = new THREE.Vector3(), _q4 = [0, 0, 0, 1];
+const r3 = (v) => Math.round(v * 1000) / 1000;
 
-// The body: a studio rig playing its idle, and a reacting body over it.
-let inst, player, body, markers = [];
-const hitMark = new THREE.Mesh(new THREE.SphereGeometry(0.05), new THREE.MeshBasicMaterial({ color: 0xff5040 }));
-hitMark.visible = false; scene.add(hitMark);
-function presetNow() {
-  const src = structuredClone(presets.json(ref));
-  src.tone = { ...src.tone, ...(overrides.tone || {}) };
-  if (overrides.mass) src.mass = overrides.mass;
-  if (overrides.strength) src.strength = overrides.strength;
-  return loadMotion(src);
+// The hit's direction: an arrow that ends where the hit lands, as long as the hit is hard.
+function makeArrow() {
+  const mat = new THREE.MeshBasicMaterial({ color: 0xff5040, depthTest: false, transparent: true, opacity: 0.95 });
+  const g = new THREE.Group();
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, 1, 8), mat); shaft.position.y = 0.5;
+  const head = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.14, 14), mat);
+  const dot = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 8), mat);
+  g.add(shaft, head); g.renderOrder = 10; shaft.renderOrder = head.renderOrder = dot.renderOrder = 10;
+  g.visible = false; dot.visible = false;
+  scene.add(g, dot);
+  return { g, shaft, head, dot, mat, state: null };
 }
-async function build() {
-  if (inst) scene.remove(inst.group);
-  const p = presets.json(ref);
-  const brute = ref.endsWith('/brute');
-  inst = rigs.get(p.rig).create(p.rig === 'zombie' ? { type: ref.split('/')[1], scale: brute ? 1.38 : 1 } : {});
-  inst.group.traverse((o) => { if (o.isMesh) o.castShadow = true; });
-  scene.add(inst.group);
-  const clip = loadClip(await (await fetch('./clips/' + CLIPS[p.rig] + '.json')).json());
-  player = createPlayer(inst).play(clip, { loop: true });
-  body = createBody(inst, presetNow(), { ground: () => 0 });
-  history = []; last = null; hitMark.visible = false;
-  // Where the body stands. The game stands a zombie's feet 0.2 m into the ground (studio/zombie.js);
-  // the lab lifts it so its boots are on the floor (the body measures its own depth either way).
-  inst.group.position.set(0, p.rig === 'zombie' ? 0.26 * (brute ? 1.38 : 1) : 0, 0);
+// A state is { at, dir, len, color }: kept as it is in the recording, so a replay draws it again.
+function showArrow(a, st) {
+  a.state = st || null;
+  a.g.visible = a.dot.visible = !!st;
+  if (!st) return;
+  const d = _v.set(st.dir[0], st.dir[1], st.dir[2]).normalize();
+  a.shaft.scale.y = st.len - 0.14; a.shaft.position.y = (st.len - 0.14) / 2; a.head.position.y = st.len - 0.07;
+  a.g.quaternion.setFromUnitVectors(UP, d);
+  a.g.position.set(st.at[0], st.at[1], st.at[2]).addScaledVector(d, -st.len);
+  a.dot.position.set(st.at[0], st.at[1], st.at[2]);
+  a.mat.color.setHex(st.color);
 }
 
-// Clicking the body: hit where the ray lands, pushed along the ray.
-const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
-let drag = null;
-renderer.domElement.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, moved: false }; });
-addEventListener('pointermove', (e) => {
-  if (!drag) return;
-  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-  if (Math.hypot(dx, dy) > 3) drag.moved = true;
-  if (drag.moved) { orbit.yaw -= dx * 0.008; orbit.pitch = Math.max(-0.1, Math.min(1.3, orbit.pitch + dy * 0.006)); drag.x = e.clientX; drag.y = e.clientY; placeCam(); }
-});
-addEventListener('pointerup', (e) => {
-  if (drag && !drag.moved && e.target === renderer.domElement) {
-    ndc.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
-    ray.setFromCamera(ndc, camera);
-    const hit = ray.intersectObject(inst.group, true)[0];
-    if (hit) strike(hit.point.toArray(), ray.ray.direction.toArray());
+// --- The body's own points, over the rig (the "Show its points" box) ------------------------------------
+// White: the points the physics moves and the bones between them. Green: where the animation wants
+// each point, which is what the muscles pull toward (from the body's root). The gap between them is
+// the reaction. They're recorded with the rest, so a replay shows them too.
+let showBones = q.get('bones') === '1';
+function makeBones(lb) {
+  const spec = lb.inst.def.body, names = Object.keys(spec.points);
+  const pairs = spec.bones.map(([a, b]) => [names.indexOf(a), names.indexOf(b)]).filter(([a, b]) => a >= 0 && b >= 0);
+  const line = (color, opacity) => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pairs.length * 6), 3));
+    const l = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color, depthTest: false, transparent: true, opacity }));
+    l.renderOrder = 12; l.frustumCulled = false; l.visible = false;
+    scene.add(l);
+    return l;
+  };
+  return { names, pairs, sim: line(0xffffff, 0.9), anim: line(0x7cdea0, 0.75) };
+}
+// The body's points now, flat [x, y, z, ...] in its own order: simulated, and animated.
+function bonePoints(lb) {
+  if (typeof lb.body.animPoints !== 'function') return null;
+  const flat = (o) => Float32Array.from(lb.bones.names.flatMap((n) => o[n] || [0, 0, 0]));
+  return { sim: flat(pointsNow(lb)), anim: flat(lb.body.animPoints()) };
+}
+// The overlay as the screen should show it: live, or the recording at the playhead.
+function redrawBones() {
+  const fr = mode !== 'live' && rec.frames.length ? around(viewT)[0] : null;
+  labBodies.forEach((lb, i) => drawBones(lb, fr ? fr.pts[i] : bonePoints(lb)));
+}
+function drawBones(lb, pts) {
+  const B = lb.bones;
+  for (const [l, p] of [[B.sim, pts && pts.sim], [B.anim, pts && pts.anim]]) {
+    l.visible = showBones && !!p;
+    if (!l.visible) continue;
+    const arr = l.geometry.attributes.position.array;
+    B.pairs.forEach(([a, b], i) => { arr.set(p.subarray(a * 3, a * 3 + 3), i * 6); arr.set(p.subarray(b * 3, b * 3 + 3), i * 6 + 3); });
+    l.geometry.attributes.position.needsUpdate = true;
   }
-  drag = null;
-});
-renderer.domElement.addEventListener('wheel', (e) => { orbit.dist = Math.max(1.5, Math.min(14, orbit.dist * (1 + Math.sign(e.deltaY) * 0.1))); placeCam(); e.preventDefault(); }, { passive: false });
-
-function strike(at, dir) {
-  const w = weapon;
-  const d = [dir[0], dir[1] + (w.up || 0), dir[2]];
-  last = { w, at, dir: d };
-  hitMark.position.set(...at); hitMark.visible = true;
-  const ok = w.kill ? body.kill({ at, dir: d, power: w.power, kind: w.kind }) : body.hit({ at, dir: d, power: w.power, kind: w.kind });
-  history.push(`${(performance.now() / 1000).toFixed(1)} ${w.label}${ok ? '' : ' (refused)'}`);
 }
 
-// Panels
+// --- Bodies -------------------------------------------------------------------------------------
+// Clips by "rig/name", loaded once. The files as they are (rawClips) are what the crew's checks take.
+const clipCache = new Map(), rawClips = new Map();
+async function fetchClip(ref) {
+  if (!clipCache.has(ref)) {
+    clipCache.set(ref, fetch('./clips/' + ref + '.json').then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (j) rawClips.set(ref, j); return j ? loadClip(j) : null; }).catch(() => null));
+  }
+  return clipCache.get(ref);
+}
+function presetJson(lb) {
+  const src = structuredClone(presets.json(lb.ref));
+  if (lb.overrides) {
+    src.tone = { ...src.tone, ...(lb.overrides.tone || {}) };
+    if (lb.overrides.mass) src.mass = lb.overrides.mass;
+    if (lb.overrides.strength) src.strength = lb.overrides.strength;
+  }
+  return src;
+}
+const moved = (lb) => !!lb.overrides && (Object.keys(lb.overrides.tone || {}).length > 0 || !!lb.overrides.mass || !!lb.overrides.strength);
+const typeOf = (ref) => ref.split('/')[1];
+
+// One body on the floor: the rig, its clip player (standing, and getting up when its preset names
+// get-up clips), the reacting body over it, its arrow and its name tag. `overrides` is the sliders'.
+async function makeLabBody(key, ref, overrides, x) {
+  const json = presets.json(ref);
+  const type = typeOf(ref);
+  const zombie = json.rig === 'zombie';
+  const scale = zombie ? (ZOMBIE_SCALES[type] ?? 1) : 1;
+  const inst = rigs.get(json.rig).create(zombie ? { type: ZOMBIE_SCALES[type] !== undefined ? type : 'shambler', scale } : {});
+  inst.group.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+  // The game stands a zombie's feet 0.2 m into the ground (studio/zombie.js); the lab lifts it so its
+  // boots are on the floor (the body measures its own depth either way).
+  const home = new THREE.Vector3(x, zombie ? 0.26 * scale : 0, 0);
+  inst.group.position.copy(home);
+  const lb = { key, ref, overrides, inst, home, scale, json, clips: new Map(), warnings: [], seqEvents: [], lost: new Set(), hidden: [], lastHit: null, firstHit: null, seqEnd: null, getupPlaying: null, lastGetup: null };
+  lb.preset = loadMotion(presetJson(lb));
+  const refs = [STANDS[json.rig], lb.preset.getup && lb.preset.getup.front, lb.preset.getup && lb.preset.getup.back].filter((r) => typeof r === 'string');
+  for (const r of refs) {
+    const c = await fetchClip(r);
+    if (c) lb.clips.set(r, c);
+    else lb.warnings.push(`no clip ${r}: ${r === STANDS[json.rig] ? 'it stands in its rest pose' : 'it gets up the old way'}`);
+  }
+  lb.idle = lb.clips.get(STANDS[json.rig]) || null;
+  lb.player = createPlayer(inst);
+  if (lb.idle) lb.player.play(lb.idle, { loop: true });
+  lb.body = createBody(inst, lb.preset, { ground: () => 0 });
+  // Every joint the player poses, in a fixed order: what the timeline records.
+  lb.joints = [...inst.rest.keys()];
+  lb.arrow = makeArrow();
+  lb.bones = makeBones(lb);
+  lb.tag = document.createElement('div'); lb.tag.className = 'tag';
+  document.getElementById('tags').append(lb.tag);
+  scene.add(inst.group);
+  pose0(lb);
+  return lb;
+}
+// Posed on its animation now, not at the next frame: a hit straight after a body is made or stood
+// up aims at where its points really are.
+function pose0(lb) {
+  lb.player.update(0, {});
+  lb.inst.group.updateWorldMatrix(true, true);
+  lb.body.follow();
+}
+function disposeBody(lb) {
+  scene.remove(lb.inst.group, lb.arrow.g, lb.arrow.dot, lb.bones.sim, lb.bones.anim);
+  lb.tag.remove();
+}
+const partJoint = (lb, part) => {
+  const spec = lb.inst.def.body && lb.inst.def.body.parts && lb.inst.def.body.parts[part];
+  return lb.inst.R[(spec && spec.joint) || PART_JOINTS[part]] || null;
+};
+function standUp(lb) {
+  lb.body.reset();
+  lb.inst.group.position.copy(lb.home); lb.inst.group.rotation.set(0, 0, 0);
+  if (lb.idle) lb.player.play(lb.idle, { loop: true });
+  lb.getupPlaying = null;
+  for (const p of lb.lost) { const j = partJoint(lb, p); if (j) j.visible = true; }
+  lb.lost.clear(); lb.hidden = [];
+  lb.seqEvents = []; lb.firstHit = null; lb.lastHit = null; lb.seqEnd = null; lb.lastGetup = null;
+  showArrow(lb.arrow, null);
+  pose0(lb);
+}
+
+// Everything on the floor again, from the preset menu, the compare menu and the sliders.
+async function build() {
+  const token = {};
+  building = token;
+  const next = [];
+  const two = !!compareWith;
+  next.push(await makeLabBody('A', presetSel.value, overrides, two ? -SPACING / 2 : 0));
+  if (two) next.push(await makeLabBody('B', compareWith === 'file' ? presetSel.value : compareWith, null, SPACING / 2));
+  if (building !== token) { next.forEach(disposeBody); return; }
+  labBodies.forEach(disposeBody);
+  labBodies = next;
+  grab = null; grabDot.visible = false;
+  rec.frames = []; rec.events = []; rec.hits = []; seq = null; liveSnap = null;
+  mode = 'live'; viewT = simT; setTransport();
+  record(true);
+  // Two bodies stand side by side across the view: the camera comes round to the front to see both.
+  if (two !== framedTwo) { framedTwo = two; Object.assign(orbit, two ? { yaw: 0.35, dist: 6.8 } : { yaw: 0.6, dist: 5.2 }); placeCam(); }
+  drawParts();
+  drawExpectBox();
+  building = null;
+  loadHistory();
+}
+
+// --- Hitting --------------------------------------------------------------------------------------
+// Which way a body faces, from its group's rotation. Read off the quaternion, not rotation.y: once a
+// replay has set the quaternion, three re-reads the Euler angles, and a turn past a right angle
+// comes back as (180°, 180° - yaw, 180°).
+const _f = new THREE.Vector3();
+const yawOf = (lb) => { _f.set(0, 0, 1).applyQuaternion(lb.inst.group.quaternion); return Math.atan2(_f.x, _f.z); };
+const localDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], 0, d[2]).applyAxisAngle(UP, -y).toArray(); };
+const worldDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], d[1], d[2]).applyAxisAngle(UP, y).toArray(); };
+// Where each point is now: the simulated pose while it reacts, the animated one while it doesn't.
+const pointsNow = (lb) => (lb.body.awake ? lb.body.points() : lb.body.animPoints());
+// The body's points as the screen shows them: live, or the recording at the playhead (by name).
+function shownPoints(lb) {
+  const i = labBodies.indexOf(lb), fr = mode !== 'live' && rec.frames.length ? around(viewT)[0] : null;
+  const sim = fr && fr.pts[i] && fr.pts[i].sim;
+  if (!sim) return pointsNow(lb);
+  return Object.fromEntries(lb.bones.names.map((n, k) => [n, [sim[k * 3], sim[k * 3 + 1], sim[k * 3 + 2]]]));
+}
+function nearestPoint(lb, at, pts = pointsNow(lb)) {
+  let best = 'chest', bd = Infinity;
+  for (const [n, p] of Object.entries(pts)) {
+    const d = (p[0] - at[0]) ** 2 + (p[1] - at[1]) ** 2 + (p[2] - at[2]) ** 2;
+    if (d < bd) { bd = d; best = n; }
+  }
+  return best;
+}
+function fromOf(local) {
+  const L = Math.hypot(local[0], local[2]) || 1;
+  const z = local[2] / L;
+  return z < -0.5 ? 'front' : z > 0.5 ? 'back' : 'side';
+}
+
+// A hit starts a new run of hits once every body is standing on its animation again: that run is
+// what "Save as scene" replays, and what the readout judges.
+function beginRun() {
+  // A run goes on while a body is still reacting, or still missing a part it lost in this run (so a
+  // later hit joins the run that took the part off, and Save as scene keeps the loss at its time).
+  // Stand up puts the parts back and starts the next run afresh.
+  if (seq && (!labBodies.every((lb) => lb.body.state === 'animated') || labBodies.some((lb) => lb.lost.size))) return;
+  seq = { t0: simT, start: {}, hits: [], lost: [], refs: {} };
+  for (const lb of labBodies) {
+    seq.start[lb.key] = { at: lb.inst.group.position.toArray().map(r3), yaw: yawOf(lb), ref: lb.ref, preset: presetJson(lb), moved: moved(lb) };
+    lb.seqEvents = []; lb.seqEnd = null; lb.firstHit = null;
+  }
+}
+// A hit lands on the live body: a paused or replaying lab goes back to live first.
+const goLive = () => { if (mode !== 'live') setMode('live'); };
+// s.dir is the way it pushes before the weapon's own lift (a grenade's); s.at a body point's name.
+function strike(lb, s, w = weapon, power = r3(w.power * powerK)) {
+  const dir = [s.dir[0], s.dir[1] + (w.up || 0), s.dir[2]];
+  const hit = { at: s.at, dir, power, kind: w.kind };
+  const ok = w.kill ? lb.body.kill(hit) : lb.body.hit(hit);
+  showArrow(lb.arrow, { at: s.xyz, dir, len: 0.22 + power * 0.07, color: KIND_COLOR[w.kind] || 0xff5040 });
+  const label = w.label + (power !== w.power ? ` at ${(power / w.power).toFixed(2)}×` : '');
+  const h = { t: simT, key: lb.key, weapon: w.key, label, kind: w.kind, power, usual: power === w.power, kill: !!w.kill, at: s.at, dir: dir.map(r3), local: localDir(lb, s.dir), lift: s.dir[1], from: s.from, ok };
+  seq.hits.push(h);
+  rec.hits.push(h);
+  lb.lastHit = h;
+  if (!lb.firstHit) lb.firstHit = h;
+}
+// A click on one body: the same hit on every body, at the same body point, from the same side of it.
+function hitFromClick(lb, xyz, rayDir) {
+  // Clicked on a paused or replayed pose: the point is picked on the pose clicked (the chest in the
+  // replay), and the live body is hit on that point where it is now, with the arrow there too.
+  const wasLive = mode === 'live';
+  const name = nearestPoint(lb, xyz, shownPoints(lb));
+  goLive();
+  beginRun();
+  record(true);
+  const local = localDir(lb, rayDir);
+  const from = fromOf(local);
+  for (const other of labBodies) {
+    const d = other === lb ? rayDir : worldDir(other, [local[0], rayDir[1], local[2]]);
+    strike(other, { at: name, xyz: other === lb && wasLive ? xyz : pointsNow(other)[name], dir: d, from });
+  }
+}
+// A hit at the weapon's usual point, from the front, the side or behind: what the crew's checks do.
+function fire(from = 'front') {
+  goLive();
+  beginRun();
+  record(true);
+  for (const lb of labBodies) strike(lb, { at: weapon.at, xyz: pointsNow(lb)[weapon.at], dir: worldDir(lb, FROM[from]), from });
+}
+// The first hit of the run again, on bodies stood back up on their animation.
+function again() {
+  const h = seq && seq.hits.find((x) => x.key === 'A');
+  if (!h) return;
+  goLive();
+  for (const lb of labBodies) standUp(lb);
+  seq = null;
+  beginRun();
+  record(true);
+  const w = WEAPONS.find((x) => x.key === h.weapon) || weapon;
+  for (const lb of labBodies) strike(lb, { at: h.at, xyz: pointsNow(lb)[h.at], dir: worldDir(lb, [h.local[0], h.lift, h.local[2]]), from: h.from }, w, h.power);
+}
+function lose(part) {
+  goLive();
+  beginRun();
+  record(true);
+  for (const lb of labBodies) {
+    if (typeof lb.body.lose !== 'function' || lb.lost.has(part)) continue;
+    const ok = lb.body.lose(part);
+    if (ok === false) continue;
+    lb.lost.add(part);
+    const j = partJoint(lb, part);
+    if (j) j.visible = false;
+    lb.hidden = [...lb.lost];
+    seq.lost.push({ t: simT, key: lb.key, part });
+  }
+}
+
+// --- Getting up on clips (contract 1) ----------------------------------------------------------------
+// An engine that says which way a body lies ('getup' with { side, heading }) and a preset that names
+// a clip for that side: the rig turns to the heading and plays the clip from its start, timed to end
+// as the body lets go; then it goes back to standing. Otherwise the body blends back as it always has.
+function onEvent(lb, name, data) {
+  rec.events.push({ t: simT, key: lb.key, name, data: data || null });
+  lb.seqEvents.push([simT, name]);
+  if (name === 'getup' && data && typeof data.side === 'string') {
+    const ref = lb.preset.getup && lb.preset.getup[data.side];
+    const clip = ref && lb.clips.get(ref);
+    lb.lastGetup = { side: data.side, heading: data.heading, clip: ref || null, played: !!clip };
+    if (clip && Number.isFinite(data.heading)) {
+      lb.inst.group.rotation.set(0, data.heading, 0);
+      lb.inst.group.updateWorldMatrix(false, true);
+      lb.player.play(clip, { speed: clip.length / lb.preset.getup.time, loop: false });
+      lb.getupPlaying = ref;
+    }
+  }
+  if ((name === 'fall' || name === 'dead' || name === 'held') && lb.getupPlaying) {
+    lb.getupPlaying = null;
+    if (lb.idle) lb.player.crossfade(lb.idle, 0.15, { loop: true, speed: 1 });
+  }
+  if (name === 'recovered' || name === 'settled') lb.seqEnd = simT;
+}
+
+// One frame of one body, in the order the game runs it: the animation, the body reads it, simulates,
+// the host takes on where the reaction moved it, and the body writes its pose over the rig.
+function stepBody(lb, dt) {
+  lb.player.update(dt, {});
+  if (lb.getupPlaying && lb.player.done) {
+    lb.getupPlaying = null;
+    if (lb.idle) lb.player.crossfade(lb.idle, 0.3, { loop: true, speed: 1 });
+  }
+  lb.body.follow();
+  for (const e of lb.body.update(dt)) onEvent(lb, e[0], e[1]);
+  if (lb.body.awake) lb.inst.group.position.add(lb.body.drift);
+  lb.inst.group.updateWorldMatrix(false, true);
+  lb.body.apply();
+}
+
+// --- The timeline: the last six seconds, recorded -----------------------------------------------------
+function snapBody(lb) {
+  const J = lb.joints, a = new Float64Array(J.length * 7 + 7);
+  let o = 0;
+  for (const j of J) { j.quaternion.toArray(a, o); j.position.toArray(a, o + 4); o += 7; }
+  lb.inst.group.quaternion.toArray(a, o); lb.inst.group.position.toArray(a, o + 4);
+  return a;
+}
+// force: now, however soon after the last frame (the moment of a hit, or of the bodies being made);
+// a frame at the same time as the last one takes its place.
+function record(force) {
+  const last = rec.frames[rec.frames.length - 1];
+  if (!force && last && simT - last.t < REC_STEP - 1e-9) return;
+  if (last && last.t === simT) rec.frames.pop();
+  rec.frames.push({ t: simT, pose: labBodies.map(snapBody), arrows: labBodies.map((lb) => lb.arrow.state), hidden: labBodies.map((lb) => lb.hidden), state: labBodies.map((lb) => lb.body.state), pts: labBodies.map(bonePoints) });
+  const cut = simT - REC_SPAN;
+  let k = 0;
+  while (k < rec.frames.length - 1 && rec.frames[k].t < cut) k++;
+  if (k) rec.frames.splice(0, k);
+  rec.events = rec.events.filter((e) => e.t >= cut);
+  rec.hits = rec.hits.filter((h) => h.t >= cut);
+}
+const recStart = () => (rec.frames.length ? rec.frames[0].t : simT);
+const recEnd = () => (rec.frames.length ? rec.frames[rec.frames.length - 1].t : simT);
+// The recorded frames either side of a time.
+function around(t) {
+  const F = rec.frames;
+  let lo = 0, hi = F.length - 1;
+  if (t <= F[0].t) hi = 0;
+  else if (t >= F[hi].t) lo = hi;
+  else { while (hi - lo > 1) { const m = (lo + hi) >> 1; if (F[m].t <= t) lo = m; else hi = m; } }
+  return [F[lo], F[hi]];
+}
+function showFrame(t) {
+  if (!rec.frames.length) return;
+  const [a, b] = around(t), u = a === b || b.t <= a.t ? 0 : (t - a.t) / (b.t - a.t);
+  labBodies.forEach((lb, i) => {
+    const A = a.pose[i], B = b.pose[i];
+    if (!A || !B) return;
+    const objs = [...lb.joints, lb.inst.group];
+    objs.forEach((o, k) => {
+      const at = k * 7;
+      THREE.Quaternion.slerpFlat(_q4, 0, A, at, B, at, u);
+      o.quaternion.fromArray(_q4);
+      o.position.set(A[at + 4] + (B[at + 4] - A[at + 4]) * u, A[at + 5] + (B[at + 5] - A[at + 5]) * u, A[at + 6] + (B[at + 6] - A[at + 6]) * u);
+    });
+    for (const p of PARTS) { const j = partJoint(lb, p); if (j) j.visible = !(a.hidden[i] || []).includes(p); }
+    showArrow(lb.arrow, a.arrows[i]);
+    drawBones(lb, a.pts[i]);
+    lb.inst.group.updateWorldMatrix(false, true);
+  });
+}
+function setMode(m) {
+  if (m === mode) return;
+  if (mode === 'live') {
+    // Leaving live: keep what live had, to put it back exactly when it resumes.
+    liveSnap = labBodies.map((lb) => ({ p: lb.inst.group.position.clone(), q: lb.inst.group.quaternion.clone(), arrow: lb.arrow.state, hidden: lb.hidden }));
+    record(true);
+    viewT = recEnd();
+  }
+  if (m === 'live' && liveSnap) {
+    labBodies.forEach((lb, i) => {
+      const s = liveSnap[i];
+      if (!s) return;
+      lb.inst.group.position.copy(s.p); lb.inst.group.quaternion.copy(s.q);
+      showArrow(lb.arrow, s.arrow);
+      for (const p of PARTS) { const j = partJoint(lb, p); if (j) j.visible = !s.hidden.includes(p); }
+    });
+    liveSnap = null;
+  }
+  mode = m;
+  setTransport();
+}
+function pause() { if (mode === 'live' || mode === 'replay') setMode('paused'); }
+function play() {
+  if (mode === 'live') return;
+  if (viewT >= recEnd() - 1e-3) viewT = replayFrom();
+  setMode('replay');
+}
+// A replay starts just before the first hit it can see, or at the start of what's recorded.
+function replayFrom() {
+  const first = rec.hits.find((h) => h.t >= recStart());
+  return first ? Math.max(recStart(), first.t - 0.3) : recStart();
+}
+function replay(s) {
+  if (s) setSpeed(s);
+  if (mode === 'live') setMode('paused');
+  viewT = replayFrom();
+  setMode('replay');
+}
+function scrub(t) {
+  if (mode === 'live') setMode('paused');
+  else if (mode === 'replay') setMode('paused');
+  viewT = Math.max(recStart(), Math.min(recEnd(), t));
+  showFrame(viewT);
+}
+function stepFrames(n) { scrub((mode === 'live' ? recEnd() : viewT) + n * FRAME); }
+function live() { setMode('live'); }
+
+// --- Panels ------------------------------------------------------------------------------------
 const presetSel = document.getElementById('preset');
-for (const n of presets.names()) presetSel.add(new Option(n + (presets.json(n).notes ? '' : ''), n));
-presetSel.value = ref;
-presetSel.onchange = async () => { ref = presetSel.value; overrides = {}; history = []; drawSliders(); await build(); history.push('body: ' + ref); };
+for (const n of presets.names()) presetSel.add(new Option(n, n));
+presetSel.value = firstPreset;
+presetSel.onchange = async () => { overrides = {}; drawSliders(); await build(); };
+const compareSel = document.getElementById('compare');
+compareSel.add(new Option('Nothing: one body', ''));
+compareSel.add(new Option("B: the file's numbers, A: your sliders", 'file'));
+for (const n of presets.names()) compareSel.add(new Option('B: ' + n, n));
+compareSel.value = compareWith;
+compareSel.onchange = async () => { compareWith = compareSel.value; await build(); };
 const wbox = document.getElementById('weapons');
+function setWeapon(key) {
+  weapon = WEAPONS.find((w) => w.key === key) || weapon;
+  for (const c of wbox.children) c.classList.toggle('on', c.dataset.key === weapon.key);
+}
 for (const w of WEAPONS) {
-  const b = document.createElement('button'); b.textContent = w.label; if (w === weapon) b.classList.add('on');
-  b.onclick = () => { weapon = w; for (const c of wbox.children) c.classList.toggle('on', c === b); };
+  const b = document.createElement('button'); b.textContent = w.label; b.dataset.key = w.key;
+  b.onclick = () => setWeapon(w.key);
   wbox.append(b);
 }
-for (const b of document.querySelectorAll('[data-speed]')) b.onclick = () => { speed = +b.dataset.speed; for (const c of document.querySelectorAll('[data-speed]')) c.classList.toggle('on', c === b); };
-document.getElementById('reset').onclick = () => { body.reset(); hitMark.visible = false; };
-document.getElementById('replay').onclick = () => { if (!last) return; body.reset(); body.follow(); const w = weapon; weapon = last.w; strike(last.at, last.dir); weapon = w; };
+setWeapon(weapon.key);
+const bonesEl = document.getElementById('bones');
+bonesEl.checked = showBones;
+bonesEl.onchange = () => { showBones = bonesEl.checked; redrawBones(); };
+const powerEl = document.getElementById('power');
+function setPower(k) {
+  powerK = Math.max(0.25, Math.min(3, +k || 1));
+  powerEl.value = Math.log2(powerK).toFixed(2);
+  document.getElementById('powerv').textContent = powerK.toFixed(2) + '×';
+}
+powerEl.oninput = () => setPower(2 ** +powerEl.value);
+setPower(powerK);
+for (const b of document.querySelectorAll('[data-from]')) b.onclick = () => fire(b.dataset.from);
+document.getElementById('reset').onclick = () => { for (const lb of labBodies) standUp(lb); seq = null; if (mode !== 'live') setMode('live'); };
+document.getElementById('again').onclick = again;
+function rebuildA() {
+  const lb = labBodies[0];
+  if (!lb) return;
+  lb.overrides = overrides;
+  lb.preset = loadMotion(presetJson(lb));
+  lb.body = createBody(lb.inst, lb.preset, { ground: () => 0 });
+  standUp(lb);
+  seq = null;
+  drawExpectBox();
+}
 function drawSliders() {
   const box = document.getElementById('sliders'); box.replaceChildren();
-  const p = loadMotion(presets.json(ref));
+  const p = loadMotion(presets.json(presetSel.value));
   const add = (label, get, set, min, max, step) => {
     const l = document.createElement('label'); l.className = 'sl';
-    const s = document.createElement('input'); s.type = 'range'; s.min = min; s.max = max; s.step = step; s.value = get();
+    const s = document.createElement('input'); s.type = 'range'; s.min = min; s.max = max; s.step = step; s.value = get(); s.dataset.name = label;
     const o = document.createElement('span'); o.textContent = (+s.value).toFixed(2);
-    s.oninput = () => { set(+s.value); o.textContent = (+s.value).toFixed(2); body = createBody(inst, presetNow(), { ground: () => 0 }); };
+    s.oninput = () => { set(+s.value); o.textContent = (+s.value).toFixed(2); rebuildA(); };
     l.append(label, s, o); box.append(l);
   };
   for (const g of ['legs', 'spine', 'arms', 'head']) add(g, () => (overrides.tone || {})[g] ?? p.tone[g], (v) => { (overrides.tone ||= {})[g] = v; }, 0, 1, 0.01);
   add('weight', () => overrides.mass ?? p.mass, (v) => { overrides.mass = v; }, 0.3, 4, 0.05);
   add('strength', () => overrides.strength ?? p.strength, (v) => { overrides.strength = v; }, 0.2, 3, 0.05);
 }
-document.getElementById('fromfile').onclick = () => { overrides = {}; drawSliders(); body = createBody(inst, presetNow(), { ground: () => 0 }); };
+function setSlider(name, v) {
+  const s = document.querySelector(`#sliders input[data-name="${name}"]`);
+  if (!s) throw new Error('no slider ' + name);
+  s.value = v; s.oninput();
+}
+document.getElementById('fromfile').onclick = () => { overrides = {}; drawSliders(); rebuildA(); };
 drawSliders();
+// Parts come off only on an engine that can take them (contract 3).
+function drawParts() {
+  const can = labBodies.some((lb) => typeof lb.body.lose === 'function');
+  document.getElementById('partsbox').hidden = !can;
+  const box = document.getElementById('parts'); box.replaceChildren();
+  if (!can) return;
+  for (const p of PARTS) { const b = document.createElement('button'); b.textContent = PART_NAMES[p]; b.onclick = () => lose(p); box.append(b); }
+}
+const canHold = () => labBodies.some((lb) => typeof lb.body.hold === 'function');
 
-// Notes: straight into the review folder when served by tools/serve.mjs; copied otherwise.
+// The transport under the timeline.
+const scrubEl = document.getElementById('scrub');
+function setTransport() {
+  document.getElementById('pause').textContent = mode === 'replay' ? 'Pause' : mode === 'paused' ? 'Play' : 'Pause';
+  document.getElementById('live').classList.toggle('on', mode === 'live');
+  document.getElementById('replay').classList.toggle('on', mode === 'replay');
+}
+function setSpeed(s) {
+  speed = Math.max(0.05, Math.min(2, +s || 1));
+  document.getElementById('speed').value = Math.log2(speed).toFixed(2);
+  document.getElementById('speedv').textContent = speed.toFixed(2) + '×';
+  for (const c of document.querySelectorAll('[data-speed]')) c.classList.toggle('on', Math.abs(+c.dataset.speed - speed) < 1e-3);
+}
+for (const b of document.querySelectorAll('[data-speed]')) b.onclick = () => setSpeed(+b.dataset.speed);
+document.getElementById('speed').oninput = (e) => setSpeed(2 ** +e.target.value);
+document.getElementById('pause').onclick = () => (mode === 'paused' ? play() : pause());
+document.getElementById('replay').onclick = () => replay();
+document.getElementById('live').onclick = live;
+document.getElementById('back1').onclick = () => stepFrames(-1);
+document.getElementById('fwd1').onclick = () => stepFrames(1);
+// A button gives the keyboard back once it's clicked: kept, Space would both press it again and play
+// or pause, and the two would undo each other.
+addEventListener('click', (e) => { const b = e.target && e.target.closest && e.target.closest('button'); if (b) b.blur(); });
+addEventListener('keydown', (e) => {
+  if (e.target && e.target.closest && e.target.closest('textarea, input, select')) return;
+  if (e.key === ' ') { e.preventDefault(); if (mode === 'paused') play(); else pause(); }
+  else if (e.key === 'ArrowLeft') stepFrames(-1);
+  else if (e.key === 'ArrowRight') stepFrames(1);
+  else if (e.key === 'r' || e.key === 'R') replay();
+  else if (e.key === 'l' || e.key === 'L') live();
+});
+const scrubT = (clientX) => {
+  const r = scrubEl.getBoundingClientRect();
+  const end = mode === 'live' ? recEnd() : Math.max(recEnd(), viewT);
+  return end - REC_SPAN + ((clientX - r.left) / r.width) * REC_SPAN;
+};
+let scrubbing = false, hoverX = null;
+scrubEl.addEventListener('pointerdown', (e) => { scrubbing = true; scrubEl.setPointerCapture(e.pointerId); scrub(scrubT(e.clientX)); });
+scrubEl.addEventListener('pointermove', (e) => { hoverX = e.clientX - scrubEl.getBoundingClientRect().left; if (scrubbing) scrub(scrubT(e.clientX)); });
+scrubEl.addEventListener('pointerup', (e) => { scrubbing = false; try { scrubEl.releasePointerCapture(e.pointerId); } catch {} });
+scrubEl.addEventListener('pointerleave', () => { hoverX = null; });
+
+// The scrub bar: what's recorded, every event on the body that had it (A above, B below), the hits
+// as red marks, and where the picture is.
+function drawTimeline(ctx = null, W0 = 0, H0 = 0) {
+  const own = !ctx;
+  let W = W0, H = H0;
+  if (own) {
+    const dpr = Math.min(2, devicePixelRatio);
+    W = scrubEl.clientWidth; H = scrubEl.clientHeight;
+    if (scrubEl.width !== Math.round(W * dpr) || scrubEl.height !== Math.round(H * dpr)) { scrubEl.width = Math.round(W * dpr); scrubEl.height = Math.round(H * dpr); }
+    ctx = scrubEl.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  const g = ctx;
+  g.clearRect(0, 0, W, H);
+  g.fillStyle = '#10141b'; g.fillRect(0, 0, W, H);
+  const end = mode === 'live' ? recEnd() : Math.max(recEnd(), viewT), start = end - REC_SPAN;
+  const x = (t) => ((t - start) / REC_SPAN) * W;
+  if (rec.frames.length) { g.fillStyle = '#1f2735'; g.fillRect(x(recStart()), 0, x(recEnd()) - x(recStart()), H); }
+  g.strokeStyle = '#2c3444'; g.lineWidth = 1;
+  for (let s = Math.ceil(start); s <= end; s++) { g.beginPath(); g.moveTo(x(s) + 0.5, H - 10); g.lineTo(x(s) + 0.5, H); g.stroke(); }
+  const two = labBodies.length > 1, rowH = two ? (H - 14) / 2 : H - 14;
+  const rowY = (key) => (key === 'B' ? 2 + rowH : 2);
+  g.font = '11px system-ui, sans-serif'; g.textBaseline = 'top';
+  let lastLabel = { A: -1e9, B: -1e9 };
+  for (const e of rec.events) {
+    if (e.name === 'wake' || e.name === 'hit') continue;
+    const px = x(e.t), y = rowY(e.key), small = e.name === 'step' || e.name === 'land';
+    g.fillStyle = EV_COLOR[e.name] || '#9aa3b2';
+    g.fillRect(px - 1, y + (small ? rowH * 0.45 : 0), 2, small ? rowH * 0.55 : rowH);
+    if (!small && px - lastLabel[e.key] > 44 && px < W - 20) { g.fillText(e.name + (e.data && e.data.side ? ' ' + e.data.side : e.data && e.data.part ? ' ' + e.data.part : ''), px + 3, y + 1); lastLabel[e.key] = px; }
+  }
+  for (const h of rec.hits) {
+    const px = x(h.t), y = rowY(h.key);
+    g.fillStyle = '#ff6a5a';
+    g.beginPath(); g.moveTo(px - 5, y); g.lineTo(px + 5, y); g.lineTo(px, y + 8); g.closePath(); g.fill();
+    g.fillRect(px - 1, y, 2, rowH);
+  }
+  if (two) { g.fillStyle = '#9aa3b2'; g.fillText('A', 2, 2 + rowH - 13); g.fillText('B', 2, 2 + 2 * rowH - 13); }
+  // The playhead, and the time: seconds after the first hit it can see.
+  const head = mode === 'live' ? recEnd() : viewT;
+  g.fillStyle = mode === 'live' ? '#7cdea0' : '#e0b85a';
+  g.fillRect(x(head) - 1, 0, 2, H);
+  const hit = [...rec.hits].reverse().find((h) => h.t <= head + 1e-6) || rec.hits[0];
+  const rel = hit ? head - hit.t : null;
+  g.fillStyle = '#9aa3b2'; g.textBaseline = 'bottom';
+  g.fillText(rel === null ? (head >= end - 1e-6 ? 'now' : `${(head - end).toFixed(2)} s`) : `${rel >= 0 ? '+' : ''}${rel.toFixed(2)} s from the hit`, 4, H - 1);
+  if (own && hoverX !== null) {
+    let best = null, bd = 8;
+    for (const e of [...rec.events, ...rec.hits.map((h) => ({ t: h.t, key: h.key, name: h.label }))]) { const d = Math.abs(x(e.t) - hoverX); if (d < bd) { bd = d; best = e; } }
+    if (best) { const s = `${best.key} ${best.name} at ${hit ? (best.t - hit.t >= 0 ? '+' : '') + (best.t - hit.t).toFixed(2) : best.t.toFixed(2)} s`; g.textAlign = 'right'; g.fillText(s, W - 4, H - 1); g.textAlign = 'left'; }
+  }
+  if (own) {
+    const c = document.getElementById('clock');
+    c.textContent = mode === 'live' ? (speed === 1 ? 'live' : `live at ${speed.toFixed(2)}×`) : `${mode === 'replay' ? 'replay' : 'paused'} · ${rel === null ? '' : (rel >= 0 ? '+' : '') + rel.toFixed(2) + ' s'}`;
+  }
+}
+
+// --- What happened, and what the preset expects -----------------------------------------------------------
+// From least to most, as the crew's battery says it (studio/motion-battery.js classify).
+function outcome(names) {
+  const s = new Set(names);
+  if (s.has('dead')) return 'dead';
+  if (s.has('fall') || s.has('down')) return 'down';
+  if (s.has('stagger') || s.has('step')) return 'stagger';
+  if (s.has('wake') || s.has('hit') || s.has('recovered')) return 'flinch';
+  return 'none';
+}
+function judge(lb) {
+  if (!lb.firstHit) return null;
+  const names = lb.seqEvents.map((e) => e[1]);
+  const got = outcome(names);
+  const steps = names.filter((n) => n === 'step').length;
+  const back = lb.seqEnd !== null ? lb.seqEnd - lb.firstHit.t : null;
+  const hits = seq ? seq.hits.filter((h) => h.key === lb.key).length : 1;
+  const h = lb.firstHit, w = WEAPONS.find((x) => x.key === h.weapon);
+  const want = hits === 1 && h.usual ? (lb.json.expect || []).find((e) => e.hit === h.weapon && (e.from || 'front') === h.from) : null;
+  return { got, steps, back, hits, want: want ? want.want : null, ok: want ? want.want === got : null, off: want && w && h.at !== w.at ? w.at : null, moved: moved(lb) };
+}
+// --- The reactions already approved (contract 6) ----------------------------------------------------------
+// A preset's "expect" is what Jerry has approved of its reaction, hit by hit. The crew's check for it
+// (studio/motion-expect.js, on the battery in studio/motion-battery.js) comes with those lists, so the
+// lab only looks for it when the preset has one: a studio without it never asks for the file. It runs
+// the file's numbers, and the sliders' when they're moved, so a slider that breaks an approved
+// reaction says so before anyone writes it into the preset.
+let expectMod = null, lastExpect = null;
+const hasExpect = (lb) => !!(lb && Array.isArray(lb.json.expect) && lb.json.expect.length);
+function drawExpectBox() {
+  const A = labBodies[0];
+  document.getElementById('expectbox').hidden = !hasExpect(A);
+  document.getElementById('checkexpwith').textContent = A && moved(A) ? ', with your sliders' : '';
+  document.getElementById('expout').textContent = '';
+  lastExpect = null;
+}
+const tally = (r) => ({ total: r.results.length, ok: r.results.filter((x) => x.ok).length, errors: r.errors, failures: r.failures, results: r.results.map((x) => ({ hit: x.hit, from: x.from, want: x.want, got: x.got, ok: x.ok })) });
+async function checkExpectations() {
+  const A = labBodies[0], out = document.getElementById('expout');
+  if (!hasExpect(A)) return null;
+  if (expectMod === null) { try { expectMod = await import('./motion-expect.js'); } catch { expectMod = false; } }
+  if (!expectMod || typeof expectMod.checkExpect !== 'function') { out.textContent = "The checks aren't in this copy of the studio (studio/motion-expect.js)."; return null; }
+  out.textContent = 'Checking…';
+  await new Promise((r) => setTimeout(r, 20));
+  const clipOf = (ref) => rawClips.get(ref) || null;
+  const t0 = performance.now();
+  let file, mine = null;
+  try {
+    file = tally(expectMod.checkExpect(presets.json(A.ref), { clipOf }));
+    if (moved(A)) mine = tally(expectMod.checkExpect(presetJson(A), { clipOf }));
+  } catch (e) { out.textContent = 'The check failed: ' + (e.message || e); return null; }
+  lastExpect = { ref: A.ref, file, sliders: mine, ms: Math.round(performance.now() - t0) };
+  const shown = mine || file;
+  const label = (k) => (WEAPONS.find((w) => w.key === k) || { label: k }).label;
+  const cell = (hit, from) => {
+    const x = shown.results.find((r) => r.hit === hit && r.from === from);
+    return x ? `<td class="${x.ok ? 'ok' : 'no'}" title="approved: ${esc(x.want)}">${esc(x.got)} ${x.ok ? '✓' : '✗'}</td>` : '<td class="dim">·</td>';
+  };
+  out.innerHTML = `<div>${mine ? `The file: ${file.ok} of ${file.total} as approved. <b>Your sliders: ${mine.ok} of ${mine.total}.</b>` : `${file.ok} of ${file.total} as approved.`} <span class="dim">(${lastExpect.ms} ms)</span></div>
+    <table class="exp"><tr><th></th><th>front</th><th>side</th><th>behind</th></tr>${[...new Set(shown.results.map((x) => x.hit))].map((h) => `<tr><td>${esc(label(h))}</td>${['front', 'side', 'back'].map((f) => cell(h, f)).join('')}</tr>`).join('')}</table>
+    ${shown.errors.length + shown.failures.length ? `<details><summary>Why, in the preset's numbers (for the crew)</summary>${[...shown.errors, ...shown.failures].map((f) => `<div class="no" style="margin-top:4px">${esc(f)}</div>`).join('')}</details>` : ''}`;
+  out.scrollIntoView({ block: 'nearest' });
+  return lastExpect;
+}
+document.getElementById('checkexp').onclick = () => checkExpectations();
+
+const readout = document.getElementById('readout');
+function drawReadout() {
+  const parts = [];
+  const shown = mode !== 'live' && rec.frames.length ? around(viewT)[0] : null;
+  labBodies.forEach((lb, i) => {
+    const p = lb.json, b = lb.body, j = judge(lb);
+    let html = `<div class="body"><div><b>${labBodies.length > 1 ? lb.key + ' · ' : ''}${lb.ref}</b> v${p.version || 1}${moved(lb) ? ' <span class="st">sliders</span>' : ''} <span class="dim">· owner ${p.owner || 'grokbot'}</span></div>
+      <div>${shown ? `at the playhead <span class="st">${shown.state[i]}</span> · live ` : ''}state <span class="st">${b.state}</span> · sim ${(b.weight * 100).toFixed(0)}% · off balance ${((b.offBalance || 0) * 100).toFixed(0)} cm</div>`;
+    if (lb.lastHit) html += `<div>last: ${lb.lastHit.label} at ${lb.lastHit.at}, from the ${lb.lastHit.from}${lb.lastHit.ok ? '' : ' <span class="no">(refused)</span>'}</div>`;
+    if (j) {
+      html += `<div>→ <span class="ev">${j.got}</span>${j.steps ? ` · ${j.steps} step${j.steps > 1 ? 's' : ''}` : ''}${j.back !== null ? ` · itself again ${j.back.toFixed(2)} s after` : ''}${j.hits > 1 ? ` · ${j.hits} hits` : ''}</div>`;
+      if (j.want) html += `<div>expected ${j.want} ${j.ok ? '<span class="ev">✓</span>' : '<span class="no">✗</span>'}${j.off ? ` <span class="dim">(the check hits the ${j.off})</span>` : ''}${j.moved ? ' <span class="dim">(with your sliders)</span>' : ''}</div>`;
+    }
+    if (lb.lastGetup) html += `<div class="dim">got up from its ${lb.lastGetup.side}${lb.lastGetup.played ? ' on ' + lb.lastGetup.clip : ' (no clip: the old blend)'}</div>`;
+    for (const w of lb.warnings) html += `<div class="no">${w}</div>`;
+    html += '</div>';
+    parts.push(html);
+  });
+  const recent = rec.events.filter((e) => e.name !== 'wake').slice(-8);
+  parts.push(`<div>${recent.map((e) => `<span class="ev">${labBodies.length > 1 ? e.key + ':' : ''}${e.name}</span>`).join(' ') || '&nbsp;'}</div>`);
+  if (labBodies[0] && labBodies[0].json.notes) parts.push(`<div class="hint">${labBodies[0].json.notes}</div>`);
+  parts.push(`<div class="hint">a frame: bodies ${cost.bodies.toFixed(2)} ms · drawing ${cost.draw.toFixed(1)} ms · ${cost.fps.toFixed(0)} fps</div>`);
+  readout.innerHTML = parts.join('');
+}
+
+// Name tags over the bodies when there are two.
+function drawTags() {
+  for (const lb of labBodies) {
+    if (labBodies.length < 2) { lb.tag.hidden = true; continue; }
+    // Over the head as drawn (the replay's pose while paused).
+    lb.inst.R.head.getWorldPosition(_w);
+    _w.y += 0.45 * lb.scale;
+    _w.project(camera);
+    lb.tag.hidden = _w.z > 1;
+    lb.tag.style.left = ((_w.x + 1) / 2) * innerWidth + 'px';
+    lb.tag.style.top = ((1 - _w.y) / 2) * innerHeight + 'px';
+    lb.tag.innerHTML = `<b>${lb.key}</b> ${lb.ref}${lb.key === 'A' && moved(lb) ? ' · sliders' : lb.key === 'B' && compareWith === 'file' ? ' · the file' : ''}`;
+  }
+}
+
+// --- The mouse on the floor: clicks hit, drags turn the camera, shift-drags hold a body (contract 2) ---
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+const grabDot = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 8), new THREE.MeshBasicMaterial({ color: 0xff9ad0, depthTest: false }));
+grabDot.renderOrder = 11; grabDot.visible = false; scene.add(grabDot);
+function pick(clientX, clientY) {
+  ndc.set((clientX / innerWidth) * 2 - 1, -(clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  let best = null;
+  for (const lb of labBodies) {
+    const h = ray.intersectObject(lb.inst.group, true).find((x) => x.object.visible);
+    if (h && (!best || h.distance < best.hit.distance)) best = { lb, hit: h };
+  }
+  return best;
+}
+let drag = null;
+renderer.domElement.addEventListener('pointerdown', (e) => {
+  if (e.shiftKey && canHold()) {
+    const p = pick(e.clientX, e.clientY);
+    if (p && typeof p.lb.body.hold === 'function') {
+      const name = nearestPoint(p.lb, p.hit.point.toArray(), shownPoints(p.lb));   // on the pose clicked
+      if (mode !== 'live') setMode('live');
+      const target = new THREE.Vector3(...pointsNow(p.lb)[name]);
+      const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(camera.getWorldDirection(_v).clone(), target);
+      // A hold starts a run of its own on the readout; a scene can't hold a body by the mouse, so
+      // "Save as scene" keeps only the hits.
+      beginRun();
+      if (p.lb.body.hold(name, target) !== false) { grab = { lb: p.lb, name, target, plane }; grabDot.visible = true; grabDot.position.copy(target); }
+      return;
+    }
+  }
+  drag = { x: e.clientX, y: e.clientY, moved: false };
+});
+addEventListener('pointermove', (e) => {
+  if (grab) {
+    ndc.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    if (ray.ray.intersectPlane(grab.plane, _w)) { grab.target.set(_w.x, Math.max(0.03, _w.y), _w.z); grabDot.position.copy(grab.target); }
+    return;
+  }
+  if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (Math.hypot(dx, dy) > 3) drag.moved = true;
+  if (drag.moved) { orbit.yaw -= dx * 0.008; orbit.pitch = Math.max(-0.1, Math.min(1.3, orbit.pitch + dy * 0.006)); drag.x = e.clientX; drag.y = e.clientY; placeCam(); }
+});
+addEventListener('pointerup', (e) => {
+  if (grab) { if (typeof grab.lb.body.release === 'function') grab.lb.body.release(grab.name); grab = null; grabDot.visible = false; return; }
+  if (drag && !drag.moved && e.target === renderer.domElement) {
+    const p = pick(e.clientX, e.clientY);
+    if (p) hitFromClick(p.lb, p.hit.point.toArray(), ray.ray.direction.toArray());
+  }
+  drag = null;
+});
+renderer.domElement.addEventListener('wheel', (e) => { orbit.dist = Math.max(1.5, Math.min(14, orbit.dist * (1 + Math.sign(e.deltaY) * 0.1))); placeCam(); e.preventDefault(); }, { passive: false });
+
+// --- Notes, pictures and scenes ----------------------------------------------------------------------
+const assetName = () => assetOverride || 'motion-' + labBodies[0].ref.replace('/', '-');
+function metaFor(lb) {
+  const p = lb.json;
+  return { kind: 'motion', owner: p.owner || 'grokbot', rig: p.rig, motion: lb.ref, file: `studio/motion/${lb.ref}.json`, task: 'D-42', look: 'studio/motion-lab.html?preset=' + lb.ref, version: p.version || 1 };
+}
+// What the note says the lab was doing: the preset and its version, the last hit and what came of
+// it, any slider moved (against the file's number), the body beside it, and where the replay was.
 function context() {
-  const p = presets.json(ref), bits = [`${ref} v${p.version || 1}`];
-  if (last) bits.push(`last: ${last.w.label} (${last.w.kind}, ${last.w.power} m/s)`);
+  const A = labBodies[0], p = A.json, bits = [`${A.ref} v${p.version || 1}`];
+  const came = (lb) => {
+    const j = judge(lb);
+    if (!j) return '';
+    return `${j.got}${j.steps ? `, ${j.steps} step${j.steps > 1 ? 's' : ''}` : ''}${j.back !== null ? `, itself again after ${j.back.toFixed(2)} s` : ''}${j.want ? ` (expected ${j.want})` : ''}${j.hits > 1 ? `, after ${j.hits} hits` : ''}`;
+  };
+  if (A.firstHit) { const h = A.firstHit; bits.push(`last: ${h.label} (${h.kind}, ${h.power} m/s) at the ${h.at} from the ${h.from}: ${came(A)}`); }
   const ch = [];
-  for (const [g, v] of Object.entries(overrides.tone || {})) ch.push(`${g} tone ${v.toFixed(2)} (file ${p.tone[g] ?? '-'})`);
+  for (const [g, v] of Object.entries(overrides.tone || {})) ch.push(`${g} tone ${v.toFixed(2)} (file ${p.tone && p.tone[g] !== undefined ? p.tone[g] : '-'})`);
   if (overrides.mass) ch.push(`weight ${overrides.mass} (file ${p.mass ?? 1})`);
   if (overrides.strength) ch.push(`strength ${overrides.strength} (file ${p.strength ?? 1})`);
   if (ch.length) bits.push('sliders: ' + ch.join(', '));
+  const B = labBodies[1];
+  if (B) bits.push(`beside it ${compareWith === 'file' ? "the file's numbers" : B.ref + ' v' + (B.json.version || 1)}${B.firstHit ? ': ' + came(B) : ''}`);
+  if (A.lost.size) bits.push('parts off: ' + [...A.lost].map((x) => PART_NAMES[x]).join(', '));
+  if (lastExpect) bits.push(`approved reactions: the file ${lastExpect.file.ok} of ${lastExpect.file.total}${lastExpect.sliders ? `, with the sliders ${lastExpect.sliders.ok} of ${lastExpect.sliders.total}` : ''}`);
+  if (mode !== 'live') {
+    const h = rec.hits.find((x) => x.t <= viewT + 1e-6);
+    bits.push(`picture ${h ? (viewT - h.t).toFixed(2) + ' s after the hit' : 'before the hit'} (${mode === 'replay' ? 'replaying' : 'paused'})`);
+  }
   return bits.join('; ');
 }
-async function send(text) {
-  const out = document.getElementById('saved');
-  try {
-    const r = await fetch('/__studio/note', { method: 'POST', body: JSON.stringify({ preset: ref, text, context: context() }) });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error);
-    out.innerHTML = `<span class="ev">Saved to ${j.file}.</span> ${j.owner} sees it on the crew panel.`;
-    document.getElementById('note').value = '';
-  } catch (e) {
-    const asset = 'motion-' + ref.replace('/', '-');
-    const block = `## ${new Date().toISOString().slice(0, 10)} · Jerry · v${presets.json(ref).version || 1} · lab\n${text}\n(In the lab: ${context()})\n`;
-    try { await navigator.clipboard.writeText(block); } catch {}
-    out.innerHTML = `<span style="color:var(--bad)">Couldn't save here</span> (open the lab with "Open Motion Lab.bat"). The note is copied: paste it at the top of review/${asset}/notes.md.`;
-  }
-}
-document.getElementById('save').onclick = () => { const t = document.getElementById('note').value.trim(); if (t) send(t); };
-document.getElementById('approve').onclick = () => send('good');
-
-// Loop
-const clock = new THREE.Clock();
-const readout = document.getElementById('readout');
-let evLog = [];
-await build();
-renderer.setAnimationLoop(() => {
-  const dt = Math.min(0.05, clock.getDelta()) * speed;
-  player.update(dt, {});
-  body.follow();
-  for (const e of body.update(dt)) evLog.push(e[0]);
-  body.apply();
-  evLog = evLog.slice(-8);
-  const p = presets.json(ref);
-  readout.innerHTML = `<div><b>${ref}</b> v${p.version || 1} · owner ${p.owner || 'grokbot'}</div>
-    <div>state <span class="st">${body.state}</span> · sim ${(body.weight * 100).toFixed(0)}%</div>
-    <div>off balance ${((body.offBalance || 0) * 100).toFixed(0)} cm</div>
-    <div style="margin-top:6px">${evLog.map((e) => `<span class="ev">${e}</span>`).join(' ') || '&nbsp;'}</div>
-    <div class="hint">${p.notes || ''}</div>`;
-  renderer.render(scene, camera);
+// The canvas as a PNG, with the scrub bar and a caption under it so the picture says what it shows.
+// Under 3 MB (contract 5). The renderer keeps no copy of a frame once it's on screen, so the loop
+// takes the picture straight after it draws a frame.
+// With { strip: true } (a note's picture), six moments of the reaction go under it. A page in a
+// background tab gets no frames, so if none comes soon the picture is drawn here and now.
+let captures = [];
+const snapshot = ({ strip = false } = {}) => new Promise((resolve) => {
+  const c = { resolve, strip };
+  captures.push(c);
+  setTimeout(() => { if (captures.includes(c)) { renderer.render(scene, camera); takeCaptures(); } }, 1500);
 });
+function takeCaptures() {
+  if (!captures.length) return;
+  const waiting = captures; captures = [];
+  let url = null;
+  try { url = composeSnapshot(waiting.some((c) => c.strip)); } catch (e) { console.warn('motion lab: no picture:', e); }
+  for (const c of waiting) c.resolve(url);
+}
+// A body's recorded pose put back on it exactly (snapBody's layout).
+function putBody(lb, a) {
+  [...lb.joints, lb.inst.group].forEach((o, k) => { o.quaternion.fromArray(a, k * 7); o.position.fromArray(a, k * 7 + 4); });
+  lb.inst.group.updateWorldMatrix(false, true);
+}
+// Six moments of the reaction for the picture's strip: from just before the first hit the recording
+// holds to its end, drawn from the recording with the camera as it is, then everything put back as
+// it was on screen. null when there's no hit to show.
+const STRIP = 6;
+function stripTiles(tileW, tileH) {
+  const hit = rec.hits.find((h) => h.t >= recStart());
+  const t0 = hit ? Math.max(recStart(), hit.t - 0.05) : 0, t1 = recEnd();
+  if (!hit || t1 - t0 < 0.25) return null;
+  const keep = labBodies.map((lb) => ({ pose: snapBody(lb), arrow: lb.arrow.state, vis: PARTS.map((p) => { const j = partJoint(lb, p); return j ? j.visible : true; }) }));
+  const times = Array.from({ length: STRIP }, (_, i) => t0 + ((t1 - t0) * i) / (STRIP - 1));
+  // One crop for every tile: where the bodies are on screen over the whole strip, with room round
+  // them, at the screen's shape, so a tile shows the bodies large and the tiles compare.
+  const src = renderer.domElement, W = src.width, H = src.height;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const t of times) {
+    showFrame(t);
+    for (const lb of labBodies) for (const j of lb.joints) {
+      j.getWorldPosition(_w).project(camera);
+      const px = ((_w.x + 1) / 2) * W, py = ((1 - _w.y) / 2) * H;
+      x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
+    }
+  }
+  const pad = 0.18 * Math.max(x1 - x0, y1 - y0) + 0.04 * H;
+  let cw = Math.max(x1 - x0 + 2 * pad, ((y1 - y0 + 2 * pad) * W) / H, W / 4), ch = (cw * H) / W;
+  cw = Math.min(cw, W); ch = Math.min(ch, H);
+  const cx = Math.max(0, Math.min(W - cw, (x0 + x1) / 2 - cw / 2)), cy = Math.max(0, Math.min(H - ch, (y0 + y1) / 2 - ch / 2));
+  const tiles = [];
+  for (const t of times) {
+    showFrame(t);
+    renderer.render(scene, camera);
+    const c = document.createElement('canvas'); c.width = tileW; c.height = tileH;
+    c.getContext('2d').drawImage(src, cx, cy, cw, ch, 0, 0, tileW, tileH);
+    tiles.push({ canvas: c, at: t - hit.t, state: around(t)[0].state });
+  }
+  labBodies.forEach((lb, i) => {
+    putBody(lb, keep[i].pose);
+    showArrow(lb.arrow, keep[i].arrow);
+    PARTS.forEach((p, k) => { const j = partJoint(lb, p); if (j) j.visible = keep[i].vis[k]; });
+  });
+  redrawBones();
+  // Drawn again as it was, so the screen doesn't show the last moment of the strip for a frame.
+  renderer.render(scene, camera);
+  return tiles;
+}
+function composeSnapshot(withStrip) {
+  const src = renderer.domElement;
+  const frame = document.createElement('canvas'); frame.width = src.width; frame.height = src.height;
+  frame.getContext('2d').drawImage(src, 0, 0);
+  const w0 = Math.min(1280, src.width), stripTileW = Math.floor(w0 / STRIP), stripTileH = Math.round((stripTileW * src.height) / src.width);
+  const tiles = withStrip ? stripTiles(stripTileW, stripTileH) : null;
+  for (let scale = Math.min(1, 1280 / src.width), k = 0; k < 5; k++, scale *= 0.72) {
+    const w = Math.round(src.width * scale), h = Math.round(src.height * scale);
+    const tw = Math.floor(w / STRIP), th = tiles ? Math.round((tw * h) / w) : 0;
+    const bars = 96, H = h + th + bars;
+    // The words and the scrub bar go on a canvas of their own, copied over the frame at the end:
+    // Chrome adds noise to what's read back from any canvas text was drawn on (its guard against
+    // fingerprinting), and that noise bands the ground and the sky in the picture.
+    const ink = document.createElement('canvas'); ink.width = w; ink.height = H;
+    const g = ink.getContext('2d');
+    g.font = '13px system-ui, sans-serif';
+    for (const lb of labBodies) if (labBodies.length > 1 && !lb.tag.hidden) {
+      const x = (parseFloat(lb.tag.style.left) / innerWidth) * w, y = (parseFloat(lb.tag.style.top) / innerHeight) * h;
+      const s = lb.tag.textContent, sw = g.measureText(s).width;
+      g.fillStyle = 'rgba(10,12,18,.75)'; g.fillRect(x - sw / 2 - 5, y - 18, sw + 10, 18);
+      g.fillStyle = '#e8e4d4'; g.textAlign = 'center'; g.fillText(s, x, y - 5); g.textAlign = 'left';
+    }
+    if (tiles) {
+      g.font = '12px system-ui, sans-serif'; g.textBaseline = 'top';
+      tiles.forEach((tl, i) => {
+        const x = i * tw, s = `${tl.at >= 0 ? '+' : ''}${tl.at.toFixed(2)} s · ${tl.state.join(' / ')}`;
+        g.fillStyle = 'rgba(10,12,18,.72)'; g.fillRect(x + 3, h + 3, g.measureText(s).width + 8, 17);
+        g.fillStyle = '#e8e4d4'; g.fillText(s, x + 7, h + 5);
+        g.fillStyle = '#12161e'; g.fillRect(x + tw - 1, h, 1, th);
+      });
+    }
+    g.save(); g.translate(0, h + th); drawTimeline(g, w, 60); g.restore();
+    g.fillStyle = '#12161e'; g.fillRect(0, h + th + 60, w, bars - 60);
+    g.fillStyle = '#e8e4d4'; g.font = '13px system-ui, sans-serif'; g.textBaseline = 'top';
+    let row = '', y = h + th + 64;
+    for (const wd of context().split(' ')) {
+      if (row && g.measureText(row + wd).width > w - 16) { g.fillText(row, 8, y); row = ''; y += 15; if (y > H - 14) break; }
+      row += wd + ' ';
+    }
+    if (y <= H - 14) g.fillText(row, 8, y);
+    const c = document.createElement('canvas'); c.width = w; c.height = H;
+    const out = c.getContext('2d');
+    out.drawImage(frame, 0, 0, w, h);
+    if (tiles) tiles.forEach((tl, i) => out.drawImage(tl.canvas, i * tw, h, tw, th));
+    out.drawImage(ink, 0, 0);
+    const url = c.toDataURL('image/png');
+    if (url.length <= SNAP_LIMIT) return url;
+  }
+  return null;
+}
+async function studioPost(route, body) {
+  const r = await fetch('/__studio/' + route, { method: 'POST', body: JSON.stringify(body) });
+  const j = await r.json();
+  if (!j.ok) throw Object.assign(new Error(j.error || 'refused'), { reply: j });
+  return j;
+}
+const savedEl = document.getElementById('saved');
+function copyBox(title, hint, text, picture) {
+  document.getElementById('copytitle').textContent = title;
+  document.getElementById('copyhint').textContent = hint;
+  const t = document.getElementById('copytext'); t.value = text;
+  const a = document.getElementById('copypic');
+  a.hidden = !picture;
+  if (picture) { a.href = picture; a.download = `lab-${new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15)}.png`; }
+  document.getElementById('copybox').hidden = false;
+  t.focus(); t.select();
+}
+document.getElementById('copyclose').onclick = () => { document.getElementById('copybox').hidden = true; };
+// The clipboard, if it answers: it can wait on a permission that never comes (a window without the
+// focus), so after a moment the copy box is shown instead.
+async function copyText(s) {
+  try {
+    const wrote = navigator.clipboard.writeText(s).then(() => true, () => false);
+    return await Promise.race([wrote, new Promise((r) => setTimeout(() => r(false), 1500))]);
+  } catch { return false; }
+}
+// Straight into the review folder when the lab's server is there; copied for pasting when it isn't.
+// The notes this body already has, and the owner's answers, so Jerry sees what changed before he
+// writes again. Asked of the write door (POST /__studio/notes), which only reads; without the lab's
+// server there's nothing to ask, and the box stays hidden.
+let history = null;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function loadHistory() {
+  const box = document.getElementById('history');
+  if (!canSave || !labBodies.length) { box.hidden = true; history = null; return null; }
+  const asset = assetName();
+  try { history = await studioPost('notes', { asset }); } catch { history = null; box.hidden = true; return null; }
+  if (assetName() !== asset) return history;
+  const h = history, owner = h.owner || labBodies[0].json.owner || 'grokbot';
+  document.getElementById('notehint').textContent = `Notes go to review/${asset}/notes.md, with what you last did here and the picture. ${owner} answers there and on the crew panel.`;
+  const now = `v${labBodies[0].json.version || 1}`;
+  const say = {
+    'no-notes': 'none yet',
+    waiting: `your last note is waiting for ${owner}`,
+    taken: `${owner} is working on your note`,
+    look: `${owner} answered with ${h.lookAt}${h.lookAt === now ? ', which is what you see now' : ''}: look again`,
+    'answered-seen': 'answered',
+    approved: 'you approved it'
+  }[h.state] || h.state;
+  box.hidden = false;
+  box.dataset.state = h.state;
+  document.getElementById('histsum').textContent = `Notes so far (${h.notes.length}): ${say}`;
+  document.getElementById('histlist').innerHTML = h.notes.slice(0, 8).map((n) => `<div class="hn"><b>${esc(n.date)} · ${esc(n.version)}</b> <span class="dim">${esc(n.state)}</span><br>${esc(n.text)}${n.answer ? `<div class="ans">${esc(n.answer.agent)} · ${esc(n.answer.version)}: ${esc(n.answer.text)}</div>` : ''}</div>`).join('') +
+    (h.page ? `<a href="../${esc(h.page)}" target="_blank" style="color:var(--accent)">The folder's page, with the pictures</a>` : '') || '<div class="dim">Nothing written about this body yet.</div>';
+  return history;
+}
+async function sendNote(text, { picture = document.getElementById('withpic').checked } = {}) {
+  const A = labBodies[0];
+  const pic = picture ? await snapshot({ strip: true }) : null;
+  const body = { asset: assetName(), text, context: context(), meta: metaFor(A) };
+  if (pic) body.snapshot = pic;
+  if (canSave) {
+    try {
+      const j = await studioPost('note', body);
+      lastSave = { ...j, how: 'saved' };
+      await loadHistory();
+      savedEl.innerHTML = `<span class="ev">Saved to ${j.file}${j.picture ? ', with the picture' : ''}.</span> ${j.owner} sees it on the crew panel.`;
+      document.getElementById('note').value = '';
+      return lastSave;
+    } catch (e) {
+      if (e.reply) { savedEl.innerHTML = `<span class="no">Not saved: ${e.message}</span>`; lastSave = { ok: false, how: 'refused', error: e.message }; return lastSave; }
+    }
+  }
+  const block = `## ${new Date().toISOString().slice(0, 10)} · Jerry · v${A.json.version || 1} · lab\n${text}\n(In the lab: ${context()})\n`;
+  const copied = await copyText(block);
+  const where = `review/${body.asset}/notes.md`;
+  savedEl.innerHTML = `<span style="color:var(--bad)">Couldn't save here</span> (open the lab with "Open Motion Lab.bat"). ${copied ? 'The note is copied' : 'Copy the note'}: paste it at the top of ${where}.`;
+  if (!copied || pic) copyBox('Your note', `Paste this at the top of ${where}${pic ? ', and save the picture into that folder' : ''}.`, block, pic);
+  lastSave = { ok: false, how: copied ? 'copied' : 'shown', file: where, block, picture: !!pic };
+  return lastSave;
+}
+document.getElementById('save').onclick = () => { const t = document.getElementById('note').value.trim(); if (t) sendNote(t); };
+document.getElementById('approve').onclick = () => sendNote('good');
+
+// A scene that replays this run of hits: each body where it stood and faced when the run began, its
+// preset (with the sliders, if moved), its idle, and the hits at the times they landed (the first at
+// 0.5 s). Render it with node tools/studio.mjs scene studio/scenes/lab-<name>.json.
+const sceneNameEl = document.getElementById('scenename');
+const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'lab';
+// The same body and weapon give the same name, so a name this page already saved gets the next number:
+// a second save doesn't quietly replace the first.
+const scenesSaved = new Set();
+function defaultSceneName() {
+  const A = labBodies[0], h = seq && seq.hits[0];
+  const base = slug([typeOf(A.ref), labBodies[1] ? 'vs-' + (compareWith === 'file' ? 'file' : typeOf(labBodies[1].ref)) : '', h ? h.weapon : ''].filter(Boolean).join('-'));
+  let name = base;
+  for (let k = 2; scenesSaved.has(name); k++) name = slug(base.slice(0, 34) + '-' + k);   // room for the number under slug's 40
+  return name;
+}
+// The scene is the lab turned a quarter turn about the vertical (places, facings and pushes alike, so
+// the physics is the same): the renderer's side view looks along X, and the lab stands its bodies
+// along X, so turned they stand side by side in its strip, facing the camera, as zombie-reactions do.
+const quarter = ([x, y, z]) => [r3(z), r3(y), r3(-x)];
+function sceneJson(name) {
+  if (!seq || !(seq.hits.length || seq.lost.length)) return null;
+  const t0 = seq.t0 - 0.5;
+  const ends = labBodies.map((lb) => (lb.seqEnd !== null ? lb.seqEnd : simT));
+  const length = Math.max(2, Math.min(20, Math.ceil((Math.max(...ends) - t0 + 1) * 10) / 10));
+  const actors = {}, say = [];
+  for (const lb of labBodies) {
+    const st = seq.start[lb.key];
+    if (!st) continue;
+    const face = ((st.yaw * 180) / Math.PI + 90 + 540) % 360 - 180;
+    const a = { rig: lb.json.rig, at: quarter(st.at), face: r3(face) };
+    if (lb.json.rig === 'zombie' && lb.scale !== 1) a.scale = lb.scale;
+    a.clips = [[0, STANDS[lb.json.rig]]];
+    a.motion = st.moved ? st.preset : st.ref;
+    const mine = seq.hits.filter((h) => h.key === lb.key);
+    const kill = mine.find((h) => h.kill);
+    const hits = mine.filter((h) => h !== kill).map((h) => [r3(h.t - t0), { at: h.at, dir: quarter(h.dir), power: h.power, kind: h.kind }]);
+    if (hits.length) a.hits = hits;
+    if (kill) a.kill = [r3(kill.t - t0), { at: kill.at, dir: quarter(kill.dir), power: kill.power, kind: kill.kind }];
+    const lost = seq.lost.filter((l) => l.key === lb.key).map((l) => [r3(l.t - t0), l.part]);
+    if (lost.length) a.lose = lost;
+    const j = judge(lb);
+    say.push(`${lb.key === 'A' ? 'a' : 'b'} is ${st.ref} v${lb.json.version || 1}${st.moved ? ' with the lab sliders' : ''}${mine[0] ? `, hit by ${mine.map((h) => h.label.toLowerCase()).join(', then ')} at the ${mine[0].at} from the ${mine[0].from}` : ''}${j ? ` (in the lab: ${j.got})` : ''}`);
+    actors[lb.key === 'A' ? 'a' : 'b'] = a;
+  }
+  return {
+    format: 'dw-scene/1', name: 'lab-' + name, length,
+    notes: `Saved from the motion lab on ${new Date().toISOString().slice(0, 10)}: ${say.join('; ')}.`,
+    actors
+  };
+}
+async function saveScene(name = sceneNameEl.value.trim() || defaultSceneName()) {
+  name = slug(name);
+  sceneNameEl.value = name;
+  const json = sceneJson(name);
+  if (!json) { savedEl.innerHTML = '<span class="no">Hit the body first: the scene replays the hits since it last stood still.</span>'; lastScene = { ok: false, how: 'nothing' }; return lastScene; }
+  if (canSave) {
+    try {
+      const j = await studioPost('scene', { name, json });
+      lastScene = { ...j, how: 'saved', json };
+      scenesSaved.add(name);
+      savedEl.innerHTML = `<span class="ev">Saved ${j.file}${j.replaced ? ', over the one of the same name' : ''}.</span> An agent renders it with <code>${j.render}</code>`;
+      return lastScene;
+    } catch (e) {
+      if (e.reply) { savedEl.innerHTML = `<span class="no">Not saved: ${e.message}</span>`; lastScene = { ok: false, how: 'refused', error: e.message }; return lastScene; }
+    }
+  }
+  const text = JSON.stringify(json, null, 2) + '\n';
+  const copied = await copyText(text);
+  savedEl.innerHTML = `<span style="color:var(--bad)">Couldn't save here.</span> ${copied ? 'The scene is copied' : 'Copy the scene'}: save it as studio/scenes/lab-${name}.json.`;
+  if (!copied) copyBox('The scene', `Save this as studio/scenes/lab-${name}.json.`, text, null);
+  lastScene = { ok: false, how: copied ? 'copied' : 'shown', json };
+  return lastScene;
+}
+document.getElementById('savescene').onclick = () => saveScene();
+
+// Does the lab's server take notes here? A plain static server (python -m http.server) doesn't.
+try { canSave = !!(await studioPost('ping', {})).ok; } catch { canSave = false; }
+if (!canSave) document.getElementById('notehint').textContent = "This page isn't served by the lab's own server, so notes and scenes are copied for you to paste. Open it with \"Open Motion Lab.bat\" to save them straight in.";
+
+// --- The loop --------------------------------------------------------------------------------------
+const clock = new THREE.Clock();
+let readoutAt = 0;
+await build();
+if (canHold()) document.getElementById('grabhint').textContent = 'Shift-drag a body to hold it by that point.';
+// What a frame costs here: the bodies (animation, simulation, pose, recording) and the drawing, in
+// ms, smoothed. The bodies' share is what the game pays per reacting body (docs/studio.md §10).
+const cost = { bodies: 0, draw: 0, fps: 0 };
+const smooth = (a, b) => a + (b - a) * 0.1;
+function live1(dt) {
+  simT += dt;
+  for (const lb of labBodies) stepBody(lb, dt);
+  if (showBones) for (const lb of labBodies) drawBones(lb, bonePoints(lb));
+  record(false);
+}
+// A frame that throws still draws and still hands over the pictures it owes (a note waits on them);
+// the error is reported, once for each different message, rather than every frame.
+const frameErrors = new Set();
+renderer.setAnimationLoop(() => {
+  const gap = clock.getDelta(), real = Math.min(0.05, gap);
+  if (gap > 0) cost.fps = smooth(cost.fps, 1 / gap);
+  try {
+    if (labBodies.length && !building) {
+      const t0 = performance.now();
+      if (mode === 'live') live1(real * speed);
+      else if (mode === 'replay') {
+        viewT = Math.min(recEnd(), viewT + real * speed);
+        showFrame(viewT);
+        if (viewT >= recEnd() - 1e-9) setMode('paused');
+      }
+      cost.bodies = smooth(cost.bodies, performance.now() - t0);
+      drawTags();
+      drawTimeline();
+      if (performance.now() - readoutAt > 100) { readoutAt = performance.now(); drawReadout(); }
+    }
+  } catch (e) {
+    const m = String((e && e.stack) || e);
+    if (!frameErrors.has(m)) { frameErrors.add(m); console.error('motion lab: a frame failed:', e); }
+  } finally {
+    const t1 = performance.now();
+    renderer.render(scene, camera);
+    cost.draw = smooth(cost.draw, performance.now() - t1);
+    takeCaptures();
+  }
+});
+// Live time moved on in whole 1/60 s frames without waiting for the screen, for a script on a slow
+// machine (headless Chrome draws a frame a second): the same steps the loop takes, then one picture.
+function advance(seconds, step = FRAME) {
+  goLive();
+  const n = Math.max(0, Math.round(seconds / step));
+  for (let i = 0; i < n; i++) live1(step);
+  drawTags(); drawTimeline(); drawReadout();
+  return simT;
+}
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+
+// --- For scripts and agents: the lab from the console, or studio/check-labs.mjs --------------------
+const bodyByKey = (k) => labBodies.find((lb) => lb.key === k) || labBodies[0];
+window.lab = {
+  get ready() { return !building && labBodies.length > 0; },
+  state: () => ({
+    mode, simT, viewT, speed, canSave, weapon: weapon.key, power: powerK, preset: presetSel.value, compare: compareWith,
+    engine: { getup: labBodies.some((lb) => lb.preset.getup && (lb.preset.getup.front || lb.preset.getup.back)), lose: labBodies.some((lb) => typeof lb.body.lose === 'function'), hold: canHold(), parts: 'BODY_PARTS' in engine, expect: hasExpect(labBodies[0]) },
+    bodies: labBodies.map((lb) => ({
+      key: lb.key, ref: lb.ref, rig: lb.json.rig, version: lb.json.version || 1, state: lb.body.state, weight: lb.body.weight, moved: moved(lb),
+      preset: { tone: lb.preset.tone, mass: lb.preset.mass, strength: lb.preset.strength }, judge: judge(lb),
+      events: lb.seqEvents.map((e) => e[1]), lastGetup: lb.lastGetup, getupClips: [...lb.clips.keys()].filter((r) => r !== STANDS[lb.json.rig]),
+      lost: [...lb.lost], at: lb.inst.group.position.toArray().map(r3), yaw: r3(yawOf(lb)), warnings: lb.warnings,
+      arrow: lb.arrow.state ? { at: lb.arrow.state.at.map(r3), dir: lb.arrow.state.dir.map(r3), visible: lb.arrow.g.visible } : null
+    })),
+    rec: { frames: rec.frames.length, start: recStart(), end: recEnd(), events: rec.events.map((e) => [r3(e.t), e.key, e.name]), hits: rec.hits.map((h) => [r3(h.t), h.key, h.weapon, h.from]) },
+    run: seq ? { t0: seq.t0, hits: seq.hits.length } : null,
+    lastSave, lastScene, context: labBodies.length ? context() : '',
+    history: history ? { asset: history.asset, exists: history.exists, state: history.state, count: history.notes.length, latest: history.latest } : null
+  }),
+  setPreset: async (ref) => { presetSel.value = ref; overrides = {}; drawSliders(); await build(); },
+  compare: async (what) => { compareSel.value = what || ''; compareWith = compareSel.value; await build(); },
+  setWeapon, setPower, fire, again, lose, pause, play, live, replay, scrub, setSpeed, stepFrames, advance, checkExpect: checkExpectations,
+  showBones: (on = true) => { bonesEl.checked = !!on; bonesEl.onchange(); },
+  get cost() { return { ...cost }; },
+  slider: setSlider,
+  standUp: () => document.getElementById('reset').onclick(),
+  note: (text, opts) => sendNote(text, opts),
+  saveScene: (name) => saveScene(name),
+  snapshot,
+  sceneJson: (name = 'preview') => sceneJson(name),
+  // Where a body point is on screen (CSS pixels), for a script that clicks it like a person would.
+  screenOf: (key, point = 'chest') => {
+    const p = pointsNow(bodyByKey(key))[point];
+    if (!p) return null;
+    _w.set(p[0], p[1], p[2]).project(camera);
+    return { x: ((_w.x + 1) / 2) * innerWidth, y: ((1 - _w.y) / 2) * innerHeight };
+  },
+  // Where on the scrub bar a time is (CSS pixels), for a script that drags it.
+  scrubAt: (t) => {
+    const r = scrubEl.getBoundingClientRect();
+    const end = mode === 'live' ? recEnd() : Math.max(recEnd(), viewT);
+    return { x: r.left + ((t - (end - REC_SPAN)) / REC_SPAN) * r.width, y: r.top + r.height / 2 };
+  },
+  // The world height of a joint as drawn now (the replay's pose while paused).
+  jointY: (key, joint) => { const j = bodyByKey(key).inst.R[joint]; j.updateWorldMatrix(true, false); return r3(new THREE.Vector3().setFromMatrixPosition(j.matrixWorld).y); }
+};
 </script>
 </body></html>

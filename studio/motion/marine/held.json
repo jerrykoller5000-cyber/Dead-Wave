@@ -1,0 +1,24 @@
+{
+  "format": "dw-motion/1",
+  "name": "held",
+  "version": 1,
+  "owner": "claude",
+  "rig": "marine",
+  "notes": "P-74 (CL-67): the marine in the guardian's hand, hauled off by one ankle. He goes loose the moment it has him: arms trail over his head, his head bounces on the dirt, the free leg catches and drags, and he slides rather than sticks. Anything not held reacts as marine/marine does.",
+  "mass": 1.1,
+  "strength": 1.3,
+  "tone": { "legs": 0.9, "spine": 0.85, "arms": 0.8, "head": 0.75 },
+  "balance": { "step": 0.12, "fall": 0.55, "steps": 3, "stepTime": 0.22, "lift": 0.1, "lead": 0.2, "anchor": 0.1, "support": 0.9 },
+  "hits": {
+    "bullet": { "recover": 0.3, "knockdown": 9 },
+    "pellet": { "recover": 0.4, "knockdown": 7 },
+    "blast": { "recover": 0.9, "knockdown": 4, "lift": 0.35 },
+    "blade": { "slump": { "spine": 0.4, "arms": 0.2, "head": 0.45, "legs": 0.2 }, "recover": 0.35, "knockdown": 7 },
+    "crush": { "slump": { "spine": 0.6, "arms": 0.3, "head": 0.5, "legs": 0.45 }, "recover": 0.6, "knockdown": 5 }
+  },
+  "fall": { "tone": { "legs": 0.06, "spine": 0.15, "arms": 0.45, "head": 0.2 }, "catch": 0.8 },
+  "down": { "time": 0.55, "height": 0.4 },
+  "getup": { "time": 0.9, "front": "marine/getup-front", "back": "marine/getup-back" },
+  "held": { "tone": { "legs": 0.1, "spine": 0.18, "arms": 0.06, "head": 0.1 }, "friction": 0.3, "upright": 0.35, "absorb": 0.8 },
+  "death": { "tone": 0.03, "settle": 0.5 }
+}

@@ -5,8 +5,9 @@ import shambler from './zombie/shambler.json' with { type: 'json' };
 import feral from './zombie/feral.json' with { type: 'json' };
 import brute from './zombie/brute.json' with { type: 'json' };
 import marine from './marine/marine.json' with { type: 'json' };
+import marineHeld from './marine/held.json' with { type: 'json' };
 
-const ALL = { 'zombie/shambler': shambler, 'zombie/feral': feral, 'zombie/brute': brute, 'marine/marine': marine };
+const ALL = { 'zombie/shambler': shambler, 'zombie/feral': feral, 'zombie/brute': brute, 'marine/marine': marine, 'marine/held': marineHeld };
 export const presets = {
   names: () => Object.keys(ALL),
   json: (ref) => ALL[ref] || null

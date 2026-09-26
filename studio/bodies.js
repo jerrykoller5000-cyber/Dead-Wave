@@ -63,7 +63,15 @@ export function humanBody(at, { pelvisIsRoot }) {
         { joint: 'shoulder' + s, aim: ['shoulder' + s, 'elbow' + s] }, { joint: 'elbow' + s, aim: ['elbow' + s, 'hand' + s] }
       ])
     ],
-    feet: ['footL', 'footR'], hands: ['handL', 'handR'], root: 'pelvis'
+    feet: ['footL', 'footR'], hands: ['handL', 'handR'], root: 'pelvis',
+    // What a body can lose (studio/motion.js body.lose; the game's partsLost keys): the points that go
+    // with it, the point they hung from, and the joint whose group is the part (what a host hides).
+    // The shoulder, hip and chest points stay: they're part of the torso's and the hips' frames.
+    parts: {
+      ...Object.fromEntries(['L', 'R'].map((s) => ['arm' + s, { points: ['elbow' + s, 'hand' + s], anchor: 'shoulder' + s, joint: 'shoulder' + s }])),
+      ...Object.fromEntries(['L', 'R'].map((s) => ['leg' + s, { points: ['knee' + s, 'foot' + s], anchor: 'hip' + s, joint: 'hip' + s }])),
+      head: { points: ['head', 'crown'], anchor: 'chest', joint: 'head' }
+    }
   };
 }
 

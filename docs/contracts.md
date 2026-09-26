@@ -461,10 +461,40 @@ marine). The full description is `docs/studio.md` §10.
 | `body.follow()` | Every frame, after the host posed the animation. Cheap while the body only animates. |
 | `body.hit({ at, dir, power, kind })` | `at`: a point name or `[x, y, z]` world; `dir` world; `power` m/s at the point; `kind` one of `bullet`, `pellet`, `blast`, `blade`, `crush`. Returns `false` when the pool is full of reacting bodies: the host plays its old reaction. One call per shot (a shell's pellets summed), not per pellet. |
 | `body.kill({ ... })` | The same arguments; limp until `settled`, then asleep (the host can freeze the corpse). |
-| `body.update(dt) → events` | `[name, data?]`: `wake`, `hit`, `stagger`, `step {foot}`, `fall`, `land`, `down`, `getup`, `recovered`, `dead`, `settled`. |
+| `body.update(dt, { lod }) → events` | `[name, data?]`: `wake`, `hit`, `stagger`, `step {foot}`, `fall`, `land`, `down`, `getup { side, heading }`, `recovered`, `dead`, `settled`, `held`/`released { point }`, `lost { part }`. `lod` 0 full, 1 half rate, 2 the pose holds while its timers run (contract 4). |
+| `getup { side, heading }`, `body.lying` | Contract 1. `side` `front`/`back`; `heading` the world yaw to turn the group to. A preset's `getup.front`/`getup.back` name clips for its rig; a host that plays clips turns to `heading` and plays `getup[side]` at `clip.length / getup.time`. |
+| `body.hold(point, target, { strength, offset })`, `body.release(point?)`, `body.holding` | Contract 2. `target` a Vector3, `[x, y, z]` or a function. `strength` 1 pins, under 1 a spring. State `held`. `false` for a lost part. |
+| `body.lose(part)`, `body.lost`, `BODY_PARTS` | Contract 3. `armL`, `armR`, `legL`, `legR`, `head` (the game's `partsLost` keys). A lost leg drops a standing body. `reset()` puts it back. |
+| `body.shift(dx, dy, dz, { stop })` | The host moved the body's group itself: the whole body goes with it, planted feet included. `stop` is a wall: the speed into it goes. |
 | `body.apply()` | Writes the pose onto the rig by `body.weight`; joints the host doesn't re-pose each frame are restored by the next `follow()`. |
 | `body.state`, `body.awake`, `body.alive`, `body.weight`, `body.drift` | `drift` (world, m): where the reaction has moved the body; the host adds it to its own position while `awake` (feet while standing, hips once down). The AI does nothing of its own while `state` is `fall`, `down` or `getup`. |
 
-Scenes take `motion`, `hits` and `kill` on an actor (§10). The motion lab's notes come in through
-`POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`), which writes only under
-`review/motion-*` (Cursor reviews the hook: CU-47).
+Scenes take `motion`, `hits`, `kill` and `lose` on an actor, and a hold on an actor with `motion` is the body's
+own (§10). `sceneClipRefs(json)` lists every clip a scene needs, get-ups included.
+
+**The horde** (`studio/motion-horde.js`, §10.6), the game's only door to the bodies: `createHorde({ presets, max,
+ground, lodFor, clips, solve, onEvent, move })`; `hit(z, h)` and `kill(z, h)` (false: refused, play the old
+reaction); `beginFrame()` each frame before the host animates, after the pause's early return; `update(dt)` after
+it has and every hit is in; `busy(z)` (the AI waits while true); `adopt(key, { rig, preset, group, move, ground })`
+for the marine; `freeze`, `release`, `releaseAll`, `releaseLiving` (reactions switched off: corpses stay as they lie until
+`release`), `stats`. `solve(key, x, z) → { x, z }` is where the host's walls
+let a group stand. Behind REACTIONS, off (D-57).
+
+**Expectations** (contract 6, `studio/motion-expect.js`): a preset's `expect` is a list of `{ hit, from?, want,
+note? }` with `hit` a battery name (`rifle`, `shotgun-far`, `shotgun-close`, `machete`, `brute-swing`, `grenade`,
+`kill`) and `want` an outcome (`none`, `flinch`, `stagger`, `down`, `dead`). Changing one is changing what Jerry
+approved: `--review` (rule 13).
+
+**The write door** (contract 5): `tools/serve.mjs` hands every POST under `/__studio/` to
+`studio/notes-endpoint.mjs`: `note { asset, text, context?, snapshot?, meta? }` (or the first form, `{ preset, text }`),
+`scene { name, json }`, `notes { asset }` (read only) and `ping`. It writes only `review/<asset>/` and
+`studio/scenes/lab-<name>.json`, and only for the studio's own pages (Host on this machine, the page's own Origin,
+no cross-site request: 403 otherwise). Cursor reviews the hook (CU-47).
+
+## Models as data (dw-model/1, Claude, 2026-09-26)
+
+`studio/model.js` (docs/studio.md §11): `validateModel(json)` (problems as sentences), `buildModel(json)` →
+`{ group, joints, parts, meshes, limbs, cost, over }`, `instanceModel(built)` (shared geometry and materials),
+`rigFromModel(json)`, `disposeModel(built)`. The models are `studio/models/<kind>/<name>.json`, listed in
+`studio/models/index.js`; a model that names a `rig` registers as a studio rig. The game builds nothing from
+them yet: each one it adopts (the drums, P-43; the boat, P-52) is its owner's task.

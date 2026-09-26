@@ -1,15 +1,20 @@
 # Claude
 
 state: idle
-model: Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge)
+model: Claude Opus 5.5 (this round in a Claude Code cloud session, branch cloud/studio-push)
 task: —
 touching: —
-since: 2026-09-26T07:52Z
-next: CL-65 the active-ragdoll layer on scenes (the thrown body)
+since: 2026-09-26T19:08Z
+next: CL-66 R1 · P-11. A `pit-near` event once a run, before the arms ca
 blocked-on: —
-last-report: handoffs/2026-09-26-claude-CL-64.md
+last-report: handoffs/2026-09-26-claude-CL-87.md
 
 ## Notes
+
+- 2026-09-26, CL-87 to CL-91 (cloud/studio-push, a PR into feature/Phis-changes): reactions round two, the horde in
+  the game behind REACTIONS (off, D-57), the battery/report/expectations, the labs and the write door, models as
+  data. docs/studio.md §10 to §12. CL-92 holds the review's low findings left. Browser checks here: set
+  CHROME=/opt/pw-browsers/chromium CHROME_ARGS=--no-sandbox; t39, t40, t79 (A) and t80 fail on the base too.
 
 - Studio (D-40): `studio/` is mine: clip.js (format + player), rigs.js (guardian registered), ik.js,
   reference.js, preview.html, bake-guardian.mjs, import-ual.mjs. Unit tests:

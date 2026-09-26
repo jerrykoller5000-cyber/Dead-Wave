@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { loadClip, sampleClip, blendPoses, clipEvents, clipTime, applyPose, solveChain, EASES } from './clip.js';
 import { rigs } from './rigs.js';
 import { worldQuat, worldScale, slerpTo } from './ik.js';
-import { validateMotion, loadMotion, createBody, HIT_KINDS } from './motion.js';
+import { validateMotion, loadMotion, createBody, HIT_KINDS, BODY_PARTS } from './motion.js';
 import { presets } from './motion/index.js';
 
 export const SCENE_FORMAT = 'dw-scene/1';
@@ -132,6 +132,13 @@ export function validateScene(json) {
         if (o.at !== undefined && typeof o.at !== 'string' && !isVec3(o.at)) errs.push(`${w}: "at" is a body point ("chest", "head", "pelvis", ...) or [x, y, z] scene space`);
       });
     }
+    if (a.lose !== undefined) {
+      if (a.motion === undefined) errs.push(`${at}: "lose" needs "motion" (a preset) to lose a part from`);
+      if (!Array.isArray(a.lose) || !a.lose.length) errs.push(`${at}: "lose" is a list of [time, part]`);
+      else a.lose.forEach((l, i) => {
+        if (!Array.isArray(l) || !isNum(l[0]) || !BODY_PARTS.includes(l[1])) errs.push(`${at} lose ${i}: [time, part], the part one of ${BODY_PARTS.join(', ')}`);
+      });
+    }
     if (a.targets !== undefined) {
       if (typeof a.targets !== 'object') errs.push(`${at}: "targets" maps a clip's live target to "actor.joint"`);
       else for (const [k, v] of Object.entries(a.targets)) { const r = splitRef(v); if (!r || !actors[r.actor]) errs.push(`${at}.targets.${k}: "${v}" must be "actor.joint" naming an actor in the scene`); }
@@ -183,10 +190,24 @@ function orderActors(json) {
 }
 
 // --- Loading ----------------------------------------------------------------------------------
+const motionJson = (m) => (typeof m === 'string' ? presets.json(m) : m);
+// Every clip a scene plays: its actors' clips, and the clips its reacting bodies get up with (their
+// presets' getup.front and getup.back). A host fetches these before loadScene (studio/load.js).
+export function sceneClipRefs(json) {
+  const refs = new Set();
+  for (const a of Object.values((json && json.actors) || {})) {
+    for (const c of (a && a.clips) || []) if (Array.isArray(c) && typeof c[1] === 'string') refs.add(c[1]);
+    const g = a && a.motion !== undefined && motionJson(a.motion) && motionJson(a.motion).getup;
+    if (g) for (const side of ['front', 'back']) if (typeof g[side] === 'string') refs.add(g[side]);
+  }
+  return [...refs];
+}
+
 // clipOf("guardian/drag") returns that clip's JSON (studio/clips/guardian/drag.json): the caller
 // reads files (Node) or fetches them (browser), so this file does neither.
 export function loadScene(json, clipOf) {
   const errs = validateScene(json);
+  const warnings = [];
   const clips = new Map();
   if (!errs.length) for (const a of Object.values(json.actors)) for (const c of a.clips) {
     if (clips.has(c[1])) continue;
@@ -197,6 +218,24 @@ export function loadScene(json, clipOf) {
       if (clip.rig !== c[1].split('/')[0]) errs.push(`clip "${c[1]}" is for rig "${clip.rig}"`);
       clips.set(c[1], clip);
     } catch (e) { errs.push(`clip "${c[1]}": ${String(e.message || e).split('\n').join(' ')}`); }
+  }
+  // A reacting body's get-up clips. One the host didn't fetch (a page that only fetches the actors'
+  // clips) is a warning, not an error: that body gets up the old way. A broken one is an error.
+  if (!errs.length) for (const [n, a] of Object.entries(json.actors)) {
+    const g = a.motion !== undefined && motionJson(a.motion) && motionJson(a.motion).getup;
+    if (!g) continue;
+    for (const side of ['front', 'back']) {
+      const ref = g[side];
+      if (typeof ref !== 'string' || clips.has(ref)) continue;
+      let cj = null;
+      try { cj = clipOf(ref); } catch { cj = null; }
+      if (!cj) { warnings.push(`actor "${n}": its get-up clip "${ref}" wasn't given, so it gets up the old way (fetch sceneClipRefs(json))`); continue; }
+      try {
+        const clip = loadClip(cj);
+        if (clip.rig !== a.rig) errs.push(`actor "${n}": get-up clip "${ref}" is for rig "${clip.rig}", not "${a.rig}"`);
+        else clips.set(ref, clip);
+      } catch (e) { errs.push(`clip "${ref}": ${String(e.message || e).split('\n').join(' ')}`); }
+    }
   }
   if (errs.length) throw new Error(`scene ${json && json.name ? '"' + json.name + '" ' : ''}is not valid:\n  - ` + errs.join('\n  - '));
   const paths = {};
@@ -212,9 +251,12 @@ export function loadScene(json, clipOf) {
       tilt: a.tilt ? normKeys(a.tilt) : null, rise: a.rise ? normKeys(a.rise) : null,
       clips: a.clips.map(([t, ref, o]) => ({ t, ref, clip: clips.get(ref), fade: (o && o.fade) ?? 0.15, loop: o && o.loop !== undefined ? !!o.loop : null, stride: (o && o.stride) || 0, speed: (o && o.speed) || 0, minRate: (o && o.minRate) ?? 0.2 })),
       targets: a.targets || {},
-      motion: a.motion === undefined ? null : loadMotion(typeof a.motion === 'string' ? presets.json(a.motion) : a.motion),
-      hits: [...(a.hits || []).map(([t, o]) => ({ t, ...o })), ...(a.kill ? [{ t: a.kill[0], ...a.kill[1], kill: true }] : [])].sort((x, y) => x.t - y.t)
+      motion: a.motion === undefined ? null : loadMotion(motionJson(a.motion)),
+      hits: [...(a.hits || []).map(([t, o]) => ({ t, ...o })), ...(a.kill ? [{ t: a.kill[0], ...a.kill[1], kill: true }] : [])].sort((x, y) => x.t - y.t),
+      lose: (a.lose || []).map(([t, part]) => ({ t, part })).sort((x, y) => x.t - y.t)
     };
+    const m = actors[n].motion;
+    actors[n].getup = m ? { front: clips.get(m.getup.front) || null, back: clips.get(m.getup.back) || null } : null;
   }
   const holds = (json.holds || []).map((h) => {
     const f = splitRef(h.from), to = splitRef(h.to);
@@ -224,6 +266,7 @@ export function loadScene(json, clipOf) {
   return {
     format: SCENE_FORMAT, name: json.name, length: json.length, actors, paths, holds, order: orderActors(json),
     checks: { gap: c.gap ?? DEFAULT_CHECKS.gap, slide: c.slide ?? DEFAULT_CHECKS.slide, snap: c.snap ?? DEFAULT_CHECKS.snap, speed: c.speed || {} },
+    warnings,
     source: json
   };
 }
@@ -303,7 +346,8 @@ export function createScene(scene, opts = {}) {
     if (!given) root.add(inst.group);
     inst.group.updateWorldMatrix(true, false);
     const scale = worldScale(inst.group, new THREE.Vector3());
-    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map(), shift: new THREE.Vector3(), hitIdx: 0, body: null };
+    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map(), shift: new THREE.Vector3(), hitIdx: 0, body: null,
+      turn: 0, baseYaw: 0, upright: false, override: null, loseIdx: 0, hidden: [], heldBy: [] };
     // A reacting body: the world's ground under it (the host's, or the scene's floor).
     if (a.motion) A[n].body = createBody(inst, a.motion, { ground: (x, z) => (opts.ground ? opts.ground(x, z) : root.getWorldPosition(_gw).y), pool: opts.pool });
   }
@@ -317,18 +361,55 @@ export function createScene(scene, opts = {}) {
   };
   for (const h of scene.holds) { h.fromJ = jointOf({ actor: h.from.actor, name: h.from.name }); h.toJ = jointOf(h.to); }
   for (const a of Object.values(A)) a.targetJ = Object.fromEntries(Object.entries(a.spec.targets).map(([k, v]) => [k, jointOf(splitRef(v))]));
+  // A hold on a reacting body is the body's own (studio/motion.js hold): the hand pins the body's
+  // point nearest the grip and the rest of it hangs, trails and drags. `hand` is where the holder's
+  // hand is this frame (the target); `gripOff` how far the grip point sits from that body point.
+  for (const h of scene.holds) {
+    const b = A[h.to.actor];
+    if (!b.body) continue;
+    b.heldBy.push(h);
+    h.hand = new THREE.Vector3(); h.gripOff = new THREE.Vector3(); h.bodyW = 0; h.engaged = false; h.point = null;
+    h.target = h.hand;
+  }
 
   const gripPoint = (h, out) => {
     out.setFromMatrixPosition(h.toJ.matrixWorld);
     if (h.offset) out.add(_v2.set(...h.offset).applyQuaternion(worldQuat(h.toJ, _qt)));
     return out;
   };
+  // A body point where the rig shows it now (studio/bodies.js: a joint and an offset on it).
+  const shownPoint = (a, name, out) => {
+    const pt = a.inst.def.body.points[name];
+    return out.set(pt.at[0], pt.at[1], pt.at[2]).applyMatrix4(a.inst.R[pt.joint].matrixWorld);
+  };
+  // The body point a hold takes: the one it names (marine.footL is the point footL), else one on the
+  // held joint, else whichever is nearest the grip.
+  const pointFor = (a, h) => {
+    const pts = a.inst.def.body.points;
+    if (pts[h.to.name]) return h.to.name;
+    const on = Object.keys(pts).filter((k) => a.inst.R[pts[k].joint] === h.toJ);
+    gripPoint(h, _g);
+    let best = null, bd = Infinity;
+    for (const k of on.length ? on : Object.keys(pts)) { const d = shownPoint(a, k, _v).distanceToSquared(_g); if (d < bd) { bd = d; best = k; } }
+    return best;
+  };
+  // Where the grip point sits from the held body point: the hand holds the point there, so the grip
+  // itself (an ankle, not the sole under it) lands in the hand. Once the body is simulating, it's
+  // measured from the simulated point to the grip as drawn, so whatever the drawn limb differs from
+  // the simulated one by (its ankle turned as its clip says) is taken up too.
+  const measureGrip = (a, h) => {
+    if (!h.point) return;
+    h.toJ.updateWorldMatrix(true, false);
+    const from = a.body.awake ? a.body.pointAt(h.point, _v) : shownPoint(a, h.point, _v);
+    h.gripOff.subVectors(gripPoint(h, _g), from);
+  };
   // Put a body where the scene says, in its own parent's frame (the host's marine hangs off the player).
   const placeBody = (a) => {
     const g = a.inst.group;
     root.updateWorldMatrix(true, false);
     _qy.setFromAxisAngle(_v.set(0, 1, 0), a.yaw);
-    const tilt = a.spec.tilt ? sampleKeys(a.spec.tilt, T) : null;
+    // A body that got up on its own (D-42) stands: the scene's tilt and rise are for a body it lays down.
+    const tilt = a.spec.tilt && !a.upright ? sampleKeys(a.spec.tilt, T) : null;
     if (tilt) _qy.multiply(_qt.setFromEuler(_e.set(tilt[0] * D2R, tilt[1] * D2R, tilt[2] * D2R, 'XYZ')));
     _m.compose(a.pos, _qy, _s.set(1, 1, 1)).premultiply(root.matrixWorld);   // scene → world (unit scale)
     if (g.parent) { g.parent.updateWorldMatrix(true, false); _m.premultiply(_mi.copy(g.parent.matrixWorld).invert()); }
@@ -397,11 +478,13 @@ export function createScene(scene, opts = {}) {
       a.pos.lerpVectors(a.enterFrom.p, a.pos, u);
       yaw = lerpAngle(a.enterFrom.yaw, yaw, u);
     }
-    a.yaw = yaw;
+    // Turned by a get-up (it rose facing the way it lay): the scene's facing for it turns too.
+    a.baseYaw = yaw;
+    a.yaw = yaw + a.turn;
     // Where a reaction has moved it (a stagger back, a fall): the scene's place for it moves too.
     a.pos.x += a.shift.x; a.pos.z += a.shift.z;
     a.pos.y += groundAt(a.pos.x, a.pos.z);
-    if (s.rise) a.pos.y += sampleKeys(s.rise, T);
+    if (s.rise && !a.upright) a.pos.y += sampleKeys(s.rise, T);
     placeBody(a);
   };
   // The clip an actor plays now, its rate, and the pose.
@@ -420,7 +503,7 @@ export function createScene(scene, opts = {}) {
     a.rate = entry.speed || (entry.stride ? Math.max(entry.minRate, (a.speed * clip.length) / entry.stride) : 1);
     const ct0 = a.ct;
     a.ct += dt * a.rate;
-    const events = clipEvents(clip, ct0, a.ct).map((e) => ({ actor: s.name, t: T, name: e.name, data: e.data }));
+    let events = clipEvents(clip, ct0, a.ct).map((e) => ({ actor: s.name, t: T, name: e.name, data: e.data }));
     let pose = sampleClip(clip, a.ct);
     if (a.fade) {
       a.fade.age += dt; a.fade.ct += dt * a.rate;
@@ -428,6 +511,16 @@ export function createScene(scene, opts = {}) {
       const w = Math.min(1, a.fade.age / a.fade.dur);
       pose = blendPoses(sampleClip(fc, a.fade.ct), pose, EASES.smooth(w));
       if (w >= 1) a.fade = null;
+    }
+    // Getting up (D-42): the body's own get-up clip plays over the scene's clips (whose clock runs
+    // on) until it ends, when the scene's clip takes it back over 0.3 s.
+    const o = a.override;
+    if (o) {
+      const c0 = o.ct;
+      o.ct += dt * o.rate;
+      events = clipEvents(o.clip, c0, o.ct).map((e) => ({ actor: s.name, t: T, name: e.name, data: e.data }));
+      pose = sampleClip(o.clip, o.ct);
+      if (o.ct >= o.clip.length) { a.override = null; a.fade = { entry: { clip: o.clip, loop: null }, ct: o.clip.length, age: 0, dur: 0.3 }; }
     }
     const targets = {};
     for (const [k, j] of Object.entries(a.targetJ)) targets[k] = new THREE.Vector3().setFromMatrixPosition(j.matrixWorld);
@@ -491,6 +584,10 @@ export function createScene(scene, opts = {}) {
           const dx = _v.x - _v2.x, dz = _v.z - _v2.z;
           if (Math.hypot(dx, dz) > 1e-3) { b.yaw = lerpAngle(b.yaw, Math.atan2(dx, dz), Math.min(1, trail)); placeBody(b); }
         }
+        // A reacting body isn't towed or lifted: the hand holds it (in the reactions, below) by as
+        // much as the hold tows or lifts it, and it hangs, trails and drags by itself. Its animation
+        // still trails (above), so its muscles pull it into a body stretched out behind the grip.
+        if (b.body) { h.bodyW = Math.max(tow, lift); h.hand.copy(_h); continue; }
         if (lift > 0) solveChain(b.inst, h.to.name, _h, lift);
         for (let k = 0; tow > 0 && k < 4; k++) {
           gripPoint(h, _g);
@@ -553,6 +650,9 @@ export function createScene(scene, opts = {}) {
     for (const [n, a] of Object.entries(A)) {
       const b = a.body;
       if (!b) continue;
+      // A hold that starts this frame measures its grip from the pose as posed (the body takes up
+      // from there); one already on measures it from the body's own pose, after apply() below.
+      for (const h of a.heldBy) if (h.bodyW > 0 && !h.engaged) { h.point ||= pointFor(a, h); measureGrip(a, h); }
       b.follow();
       const hs = a.spec.hits;
       while (a.hitIdx < hs.length && hs[a.hitIdx].t <= T + 1e-9) {
@@ -564,15 +664,49 @@ export function createScene(scene, opts = {}) {
         const hit = { at, dir, power: h.power, kind: h.kind };
         if (h.kill) b.kill(hit); else b.hit(hit);
       }
-      for (const e of b.update(dt)) events.push({ actor: n, t: T, name: 'motion:' + e[0], data: e[1] || null });
+      // Parts lost on cue: the body stops simulating them, and a studio body stops drawing them.
+      while (a.loseIdx < a.spec.lose.length && a.spec.lose[a.loseIdx].t <= T + 1e-9) {
+        const part = a.spec.lose[a.loseIdx++].part;
+        b.lose(part);
+        const pj = a.inst.def.body.parts && a.inst.def.body.parts[part] && a.inst.R[a.inst.def.body.parts[part].joint];
+        if (pj && !a.given && pj.visible) { pj.visible = false; a.hidden.push(pj); }
+      }
+      // Held by a hand: the hold eases in and out with the hold's weight, and lets go at 0.
+      for (const h of a.heldBy) {
+        if (h.bodyW > 0) { if (b.hold(h.point, h.target, { strength: h.bodyW, offset: h.gripOff })) h.engaged = true; }
+        else if (h.engaged) { b.release(h.point); h.engaged = false; }
+      }
+      for (const e of b.update(dt)) {
+        events.push({ actor: n, t: T, name: 'motion:' + e[0], data: e[1] || null });
+        // Getting up: turn to where it lies and play its own get-up clip from the start (poseActor),
+        // when its preset has one for that side. Without one it blends back up the old way.
+        if (e[0] === 'getup' && e[1] && a.spec.getup && a.spec.getup[e[1].side]) {
+          const clip = a.spec.getup[e[1].side];
+          a.override = { clip, ct: 0, rate: clip.length / Math.max(0.05, a.spec.motion.getup.time) };
+          root.updateWorldMatrix(true, false);
+          const rootYaw = _e.setFromQuaternion(_qt.setFromRotationMatrix(root.matrixWorld), 'YXZ').y;
+          a.turn = lerpAngle(0, e[1].heading - rootYaw - a.baseYaw, 1);
+          a.upright = true;
+          a.inst.plants = {}; a.inst.stepping = 0;
+        }
+        // Down again, or dead, before it's up: the get-up stops and the scene's clips have it back.
+        if ((e[0] === 'fall' || e[0] === 'dead' || e[0] === 'held') && a.override) a.override = null;
+      }
       b.apply();
-      if (b.awake) {
+      for (const h of a.heldBy) if (h.engaged) measureGrip(a, h);
+      // Where the reaction took it becomes the scene's place for it, except while a hand has it:
+      // then its place stays where the scene keys it, as in the scene without a body, so the
+      // holder aims and reaches as it always did (aiming at the body a hand pins would be aiming
+      // at its own hand). Let go of, it takes up where it lies.
+      if (b.awake && !b.holding) {
         root.updateWorldMatrix(true, false);
         _qt.setFromRotationMatrix(root.matrixWorld).invert();
         _v.copy(b.drift).applyQuaternion(_qt);
         a.shift.x += _v.x; a.shift.z += _v.z;
       }
       a.reacting = b.awake || b.state === 'dead';
+      // Nothing to compare the frame after a reaction with: the snap check starts again from there.
+      if (a.reacting) a.prevQ.clear();
     }
     // Checks, after everyone is where they end up this frame.
     for (const h of scene.holds) {
@@ -640,8 +774,12 @@ export function createScene(scene, opts = {}) {
     for (const a of Object.values(A)) {
       a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; a.inst.stepping = 0; a.enterFrom = null; a.lastBase = null;
       a.shift.set(0, 0, 0); a.hitIdx = 0; a.reacting = false;
+      a.turn = 0; a.upright = false; a.override = null; a.loseIdx = 0;
+      for (const pj of a.hidden) pj.visible = true;
+      a.hidden = [];
       if (a.body) a.body.reset();
     }
+    for (const h of scene.holds) if (h.hand) { h.bodyW = 0; h.engaged = false; }
     // Time 0: everyone placed and posed, nothing moved yet.
     return step(0);
   };

@@ -19,10 +19,11 @@ canvas{display:block}
 //   studio/scene-preview.html?scene=demo-drag&n=8&cols=4
 import * as THREE from 'three';
 import { loadScene, createScene } from './index.js';
+import { sceneClipRefs } from './scene.js';
 const q = new URLSearchParams(location.search);
 const name = q.get('scene') || 'demo-drag', N = +(q.get('n') || 8), COLS = +(q.get('cols') || 4);
 const json = await (await fetch('./scenes/' + name + '.json')).json();
-const refs = [...new Set(Object.values(json.actors).flatMap((a) => a.clips.map((c) => c[1])))];
+const refs = sceneClipRefs(json);
 const clipJson = new Map(await Promise.all(refs.map(async (r) => [r, await (await fetch('./clips/' + r + '.json')).json()])));
 const sc = loadScene(json, (r) => clipJson.get(r));
 

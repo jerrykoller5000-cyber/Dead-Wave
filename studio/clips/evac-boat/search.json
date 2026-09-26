@@ -1,0 +1,13 @@
+{
+  "format": "dw-clip/1",
+  "name": "search",
+  "rig": "evac-boat",
+  "length": 6,
+  "loop": true,
+  "notes": "Waiting off the dock with the lamp lit: the searchlight sweeps the shore slowly from side to side, tipped a little down onto the bank, and the outboard steers against the drift. The rocking on the water is the host's (the whole boat), not this clip's.",
+  "tracks": {
+    "lamp": { "rot": [[0, [8, -35, 0]], [3, [8, 35, 0]], [6, [8, -35, 0]]] },
+    "motor": { "rot": [[0, [0, -6, 0]], [3, [0, 6, 0]], [6, [0, -6, 0]]] }
+  },
+  "events": [[0, "sweep", { "to": "left" }], [3, "sweep", { "to": "right" }]]
+}

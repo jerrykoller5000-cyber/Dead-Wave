@@ -190,6 +190,17 @@ function writeReviewIndex(list) {
   const body = JSON.stringify({ note: 'Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.', assets: list.map((r) => ({ asset: r.asset, owner: r.owner, rig: r.meta.rig || null, clip: r.meta.clip || null, reference: r.meta.reference || null })) }, null, 2) + '\n';
   if (read(reviewsJson) !== body) fs.writeFileSync(reviewsJson, body, 'utf8');
 }
+// How the owner makes an asset's next version: a model's sheet (studio/render-sheet.mjs, docs/studio.md
+// §12) or a clip's strip (tools/studio.mjs).
+function renderHint(r, name) {
+  const m = r.meta || {};
+  if (m.kind === 'model' && (m.ref || m.model)) {
+    const ref = m.ref || m.model;
+    return `node studio/render-sheet.mjs ${ref}${name !== 'model-' + ref.split('/').pop() ? ' --asset ' + name : ''}`;
+  }
+  const clip = m.clip ? `studio/clips/${m.rig || 'guardian'}/${m.clip}.json` : '<clip.json>';
+  return `node tools/studio.mjs render ${clip} --asset ${name}${m.reference ? ' --vs ' + m.reference : ''}`;
+}
 const REVIEW_WORD = { 'no-notes': 'no notes yet', waiting: "Jerry's note waiting", taken: 'owner is on it', look: 'answered: Jerry to look', 'answered-seen': 'answered', approved: 'approved' };
 function reviewLine(r) {
   const extra = r.state === 'waiting' ? ': ' + r.open.map((n) => `${n.version} "${n.text.slice(0, 70)}${n.text.length > 70 ? '…' : ''}"`).join('; ')
@@ -416,7 +427,7 @@ if (!cmd || cmd === 'panel') {
   if (mine.length) {
     const r = mine[0];
     console.log(`Jerry's note on review/${r.asset}/ (${[...r.open, ...r.taken].map((n) => n.version + ': ' + n.text).join(' | ')})\n` +
-      (r.state === 'waiting' ? `  First: node crew/crew.mjs review take ${r.asset}   (the request it writes says the rest)` : `  You've taken it: change the clip, render it (node tools/studio.mjs render ... --asset ${r.asset}), then node crew/crew.mjs review answer ${r.asset} ${agent} "<what changed>"`));
+      (r.state === 'waiting' ? `  First: node crew/crew.mjs review take ${r.asset}   (the request it writes says the rest)` : `  You've taken it: change the ${r.meta.kind === 'model' ? 'model' : 'clip'}, render it (${renderHint(r, r.asset)}), then node crew/crew.mjs review answer ${r.asset} ${agent} "<what changed>"`));
     process.exit(0);
   }
   const t = nextTask(agent), w = waitingTask(agent);
@@ -542,8 +553,10 @@ if (!cmd || cmd === 'panel') {
       ...r.open.map((n) => `> ${n.date} · ${n.version}: ${n.text}`),
       '',
       `Owner: ${AGENTS[owner]}${r.meta.task && !/^CU-44$/.test(r.meta.task) ? ` (task ${r.meta.task})` : ''}.${r.meta.reference ? ` Reference: ${r.meta.reference} (assets/anim/reference/).` : ''}`,
-      `1. Change ${clip ? '`' + clip + '`' : 'the asset'} to answer the note. Check it on the strip, not by guesswork: the stats say where a joint snaps or a foot slides.`,
-      `2. Render the next version: \`node tools/studio.mjs render ${clip || '<clip.json>'} --asset ${name}${r.meta.reference ? ' --vs ' + r.meta.reference : ''}\``,
+      r.meta.kind === 'model'
+        ? `1. Change \`${r.meta.file || 'the model file'}\` to answer the note, and bump its "version". Look at it, not by guesswork: the lab (${r.meta.look || 'studio/model-lab.html'}), or \`node studio/render-sheet.mjs --look "<the look: in Jerry's note>"\` for the picture he saw.`
+        : `1. Change ${clip ? '`' + clip + '`' : 'the asset'} to answer the note. Check it on the strip, not by guesswork: the stats say where a joint snaps or a foot slides.`,
+      `2. Render the next version: \`${renderHint(r, name)}\``,
       `3. Answer under Jerry's note: \`node crew/crew.mjs review answer ${name} ${owner} "<what changed, in one line>"\``,
     ].join('\n');
     const title = `Jerry's note on ${name} (${r.open.map((n) => n.version).join(', ')})`;
@@ -561,7 +574,7 @@ if (!cmd || cmd === 'panel') {
     const todo = r.notes.filter((n) => n.state === 'waiting' || n.state === 'taken');
     if (!todo.length) { console.error(`No open note on ${name} to answer (${REVIEW_WORD[r.state]}).`); process.exit(2); }
     if (todo.some((n) => +n.version.slice(1) >= +String(version).slice(1)) && !process.argv.includes('--force')) {
-      console.error(`Not answered: ${name} is still at ${version}, the version Jerry wrote about. Render the change first (node tools/studio.mjs render <clip.json> --asset ${name}) so he has a new version to look at. (--force to answer without one, e.g. "can't be done, here's why".)`);
+      console.error(`Not answered: ${name} is still at ${version}, the version Jerry wrote about. Render the change first (${renderHint(r, name)}) so he has a new version to look at. (--force to answer without one, e.g. "can't be done, here's why".)`);
       process.exit(2);
     }
     const day = now().slice(0, 10);

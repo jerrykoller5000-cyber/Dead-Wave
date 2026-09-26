@@ -1,10 +1,27 @@
 {
   "format": "dw-motion/1",
   "name": "shambler",
-  "version": 1,
+  "version": 2,
   "owner": "grokbot",
   "rig": "zombie",
   "notes": "The everyday dead. Rifle rounds jolt it and it keeps coming; a close shotgun shell staggers it back two or three steps and often puts it down; a grenade throws it. Gets up slowly, like something that has forgotten how.",
+  "expect": [
+    { "hit": "rifle", "want": "flinch", "note": "A rifle round jolts it and it keeps coming." },
+    { "hit": "rifle", "from": "back", "want": "flinch" },
+    { "hit": "rifle", "from": "side", "want": "flinch" },
+    { "hit": "shotgun-far", "want": "stagger", "note": "A shell from 6 m staggers it a step." },
+    { "hit": "shotgun-far", "from": "back", "want": "stagger" },
+    { "hit": "shotgun-far", "from": "side", "want": "stagger" },
+    { "hit": "shotgun-close", "want": "down", "note": "A close shell puts it down." },
+    { "hit": "shotgun-close", "from": "back", "want": "down" },
+    { "hit": "shotgun-close", "from": "side", "want": "down" },
+    { "hit": "brute-swing", "want": "down" },
+    { "hit": "grenade", "want": "down", "note": "A grenade throws it, wherever it lands." },
+    { "hit": "grenade", "from": "back", "want": "down" },
+    { "hit": "grenade", "from": "side", "want": "down" },
+    { "hit": "kill", "want": "dead" },
+    { "hit": "kill", "from": "back", "want": "dead" }
+  ],
   "mass": 1,
   "tone": { "legs": 0.8, "spine": 0.7, "arms": 0.45, "head": 0.55 },
   "balance": { "step": 0.13, "fall": 0.5, "steps": 3, "stepTime": 0.3, "lift": 0.08, "lead": 0.18, "anchor": 0.15, "support": 0.8 },
@@ -17,6 +34,6 @@
   },
   "fall": { "tone": { "legs": 0.04, "spine": 0.1, "arms": 0.28, "head": 0.12 }, "catch": 0.55 },
   "down": { "time": 1.6, "height": 0.4 },
-  "getup": { "time": 1.0 },
+  "getup": { "time": 1.2, "front": "zombie/getup-front", "back": "zombie/getup-back" },
   "death": { "tone": 0.03, "settle": 0.5 }
 }

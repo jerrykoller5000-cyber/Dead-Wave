@@ -1,0 +1,26 @@
+{
+  "format": "dw-scene/1",
+  "name": "zombie-dismembered",
+  "length": 5,
+  "notes": "D-42 with the game's partsLost: what's left of a body reacts. Left to right from the camera (+X): a shambler whose left leg is shot off at 0.5 s (it goes over, lies, and gets up on the leg it has); one whose right arm goes at 0.4 s and that takes a rifle round at 0.9 s (it only rocks); one whose head goes at 0.5 s with the killing shot (it drops limp).",
+  "actors": {
+    "legless": {
+      "rig": "zombie", "at": [0, 0, -3], "face": 90,
+      "clips": [[0, "zombie/idle"]], "motion": "zombie/shambler",
+      "lose": [[0.5, "legL"]],
+      "hits": [[0.5, { "at": "kneeL", "dir": [-1, 0, 0], "power": 2.5, "kind": "pellet" }]]
+    },
+    "armless": {
+      "rig": "zombie", "at": [0, 0, 0], "face": 90,
+      "clips": [[0, "zombie/idle"]], "motion": "zombie/shambler",
+      "lose": [[0.4, "armR"]],
+      "hits": [[0.9, { "at": "chest", "dir": [-1, 0, 0], "power": 2.5, "kind": "bullet" }]]
+    },
+    "headless": {
+      "rig": "zombie", "at": [0, 0, 3], "face": 90,
+      "clips": [[0, "zombie/idle"]], "motion": "zombie/shambler",
+      "lose": [[0.5, "head"]],
+      "kill": [0.5, { "at": "chest", "dir": [-1, 0.2, 0], "power": 3, "kind": "bullet" }]
+    }
+  }
+}

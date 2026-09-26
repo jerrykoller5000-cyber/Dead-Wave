@@ -41,7 +41,7 @@ export function serve(root, port = 0) {
       res.writeHead(400).end('bad url');
       return;
     }
-    if (req.method === 'POST' && pathname === '/__studio/note') { handleStudioNote(req, res, base); return; }
+    if (req.method === 'POST' && pathname.startsWith('/__studio/')) { handleStudioNote(req, res, base, pathname); return; }
     if (pathname.endsWith('/')) pathname += 'index.html';
     const file = path.resolve(base, '.' + pathname);
     // Never serve outside the root, however the path is spelled.

@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Dead-Wave · Model lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<style>
+  :root { --bg: #1d2330; --panel: rgba(18, 22, 30, 0.93); --ink: #e8e4d4; --dim: #9aa3b2; --accent: #e0b85a; --good: #7cdea0; --bad: #ff7a6a; --hi: #ff9a3c; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; overflow: hidden; }
+  /* Three columns, the model in the middle: nothing covers it, and a straight view's ruler shows. */
+  body { display: flex; }
+  canvas { display: block; }
+  #stage { position: relative; flex: 1 1 auto; min-width: 240px; height: 100%; overflow: hidden; }
+  #view { position: absolute; inset: 0; }
+  #overlay, #nvgEdge { position: absolute; inset: 0; pointer-events: none; }
+  #nvgEdge { display: none; background: radial-gradient(ellipse 69% 80% at 50% 50%, transparent 48%, rgba(10,17,22,.16) 68%, rgba(0,3,6,.94) 100%); }
+  body.nvg #nvgEdge { display: block; }
+  .panel { position: relative; background: var(--panel); padding: 12px 14px; box-sizing: border-box; height: 100%; overflow: auto; }
+  #side { flex: 0 0 330px; border-right: 1px solid #333b4a; }
+  #notes { flex: 0 0 360px; border-left: 1px solid #333b4a; }
+  h1 { font-size: 15px; margin: 0 0 6px; letter-spacing: .04em; }
+  h2 { font-size: 12px; margin: 12px 0 6px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  button, select, input[type=text] { font: inherit; color: var(--ink); background: #2c3444; border: 1px solid #45506a; border-radius: 5px; padding: 4px 8px; }
+  button { cursor: pointer; } button:hover { background: #38435a; } button.on { background: var(--accent); color: #1a1a1a; border-color: var(--accent); }
+  select, input[type=text] { width: 100%; box-sizing: border-box; }
+  .row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .row button { flex: 1 1 auto; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+  textarea { width: 100%; height: 84px; box-sizing: border-box; background: #10141b; color: var(--ink); border: 1px solid #45506a; border-radius: 5px; padding: 6px; font: inherit; resize: vertical; }
+  .hint { color: var(--dim); font-size: 12px; margin: 5px 0 0; }
+  .good { color: var(--good); } .bad { color: var(--bad); }
+  a { color: var(--accent); }
+  .clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
+  .bar { position: relative; height: 16px; background: #10141b; border: 1px solid #333b4a; border-radius: 4px; margin: 3px 0; font-size: 11px; line-height: 16px; }
+  .bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: #3f7a55; }
+  .bar.over i { background: #a04438; }
+  .bar span { position: relative; padding-left: 6px; }
+  .sw { display: inline-flex; align-items: center; gap: 4px; margin: 0 8px 4px 0; font-size: 12px; color: var(--dim); cursor: pointer; border-radius: 4px; padding: 1px 3px; }
+  .sw.on { outline: 1px solid var(--hi); color: var(--ink); }
+  .sw i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid #0006; }
+  #parts { max-height: 230px; overflow: auto; border: 1px solid #333b4a; border-radius: 5px; background: #10141b; }
+  .part { padding: 3px 7px; border-bottom: 1px solid #1f2533; cursor: pointer; font-size: 12px; }
+  .part:hover { background: #1c2331; } .part.on { background: #4a3419; }
+  .part b { font-weight: 600; } .part .m { color: var(--dim); }
+  .part .pc { display: inline-block; min-width: 18px; text-align: center; font: bold 10px/14px ui-monospace, monospace; color: #0c0e12; border-radius: 3px; margin-right: 5px; }
+  #partInfo { font: 11px/1.4 ui-monospace, monospace; white-space: pre-wrap; color: var(--dim); max-height: 140px; overflow: auto; margin-top: 5px; }
+  #saved { font-size: 12px; margin-top: 6px; min-height: 1.4em; }
+  #history { font-size: 12px; margin-top: 8px; }
+  #history .n { border-top: 1px solid #333b4a; padding: 5px 0; }
+  #history .n .st { color: var(--accent); }
+  #history blockquote { margin: 3px 0 0; padding-left: 8px; border-left: 2px solid var(--good); color: var(--dim); }
+  pre.block { white-space: pre-wrap; user-select: all; margin: 4px 0 0; background: #10141b; padding: 6px; border-radius: 4px; }
+  kbd { font: 11px ui-monospace, monospace; background: #2c3444; border: 1px solid #45506a; border-radius: 3px; padding: 0 3px; }
+  body.sheet, body.shot { display: block; overflow: visible; background: #14181f; }
+  body.sheet #stage, body.shot #stage { display: none; }
+  body.sheet .panel, body.shot .panel { display: none; }
+</style>
+<script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js"}}</script>
+</head><body>
+<div id="side" class="panel">
+  <h1>Model lab</h1>
+  <div class="hint">Drag to turn round it, wheel to zoom, right-drag to slide. <kbd>Shift</kbd>-click a part to pick it.</div>
+  <h2>Model</h2>
+  <select id="model"></select>
+  <div id="info" class="hint clamp" title="Click for all of it"></div>
+  <div id="review" class="hint"></div>
+  <div id="problems" class="hint bad" style="display:none"></div>
+  <h2>Cost against its budget</h2>
+  <div id="cost"></div>
+  <div id="checks" class="hint"></div>
+  <h2>Light</h2>
+  <div class="grid3" id="lights"></div>
+  <h2>Show</h2>
+  <div class="grid3">
+    <button id="spin" title="T">Turntable</button><button id="wire" title="W">Wireframe</button><button id="grid" title="G">Grid</button>
+    <button id="joints" title="J">Joints</button><button id="names" title="N">Joint names</button><select id="figure" title="Something to judge its size by"></select>
+    <button id="colors" title="P: every part its own colour and number, as in the list" style="grid-column: span 3">Parts in colour, numbered</button>
+  </div>
+  <h2>Look from</h2>
+  <div class="grid3" id="views"></div>
+  <h2>Parts <span id="partCount" style="text-transform:none;letter-spacing:0"></span></h2>
+  <div id="parts"></div>
+  <div id="partInfo"></div>
+  <h2>Materials (click to light up every part)</h2>
+  <div id="mats"></div>
+  <div id="limbbox" style="display:none">
+    <h2>Lose a limb</h2>
+    <div class="row" id="limbs"></div>
+  </div>
+  <div id="clipbox" style="display:none">
+    <h2>Play a clip</h2>
+    <input type="text" id="clip" list="cliplist" placeholder="spider/crawl"><datalist id="cliplist"></datalist>
+    <div class="grid2" style="margin-top:5px"><button id="play">Play</button><button id="stop">Rest pose</button></div>
+  </div>
+  <div id="hitbox" style="display:none">
+    <h2>Hit it</h2>
+    <div class="grid2" id="weapons"></div>
+    <div class="grid2" style="margin-top:5px"><button id="standup">Stand it up</button><button id="slow">Quarter speed</button></div>
+    <div id="react" class="hint"></div>
+  </div>
+  <div class="hint" style="margin-top:10px"><kbd>1</kbd>-<kbd>6</kbd> views, <kbd>F</kbd> fit, <kbd>T</kbd> turntable, <kbd>W</kbd> wireframe, <kbd>J</kbd> joints, <kbd>L</kbd> light, <kbd>Esc</kbd> clear the pick.</div>
+</div>
+<div id="stage"><div id="view"></div><div id="nvgEdge"></div><canvas id="overlay"></canvas></div>
+<div id="notes" class="panel">
+  <h1>Your note</h1>
+  <textarea id="note" placeholder="What should change? e.g. The boat looks too flat at the bow. The lamp should be bigger and brighter."></textarea>
+  <label class="hint"><input type="checkbox" id="pic" checked> Send a picture of what I'm looking at</label>
+  <div class="grid2" style="margin-top:5px"><button id="save">Save note for the crew</button><button id="approve">It's good</button></div>
+  <div id="saved"></div>
+  <div class="hint" id="canSave"></div>
+  <div class="hint">Notes go to review/model-&lt;name&gt;/notes.md with the picture. The model's owner answers there and on the crew panel.</div>
+  <div id="history"></div>
+</div>
+<script type="module">
+// studio/model-lab.html — Jerry's bench for models, and the agents' camera on them (docs/studio.md §12).
+// Claude's. Served by tools/serve.mjs ("Open Model Lab.bat"):
+//   studio/model-lab.html?model=prop/evac-boat                    turn round it, pick a part, see its cost,
+//                                                                 in day, night or night vision; write a note
+//   studio/model-lab.html?file=studio/models/prop/new-thing.json   a draft that isn't listed yet
+//   studio/model-lab.html?sheet=1&model=creature/spider            the contact sheet studio/render-sheet.mjs
+//                                                                 saves (?mode=sheet too): six views and more
+//   studio/model-lab.html?shot=1&model=...&light=nvg&cam=...       one picture of the lab set up that way
+//                                                                 (render-sheet --look), no panels
+// Every setting is in the address (studio/model-look.js labQuery), so a note's "look" repeats the view.
+// The same buildModel the game runs, so what's here is what the game draws. window.lab drives it in
+// studio/check-model-lab.mjs.
+import * as THREE from 'three';
+import { buildModel, validateModel, rigFromModel, modelAsset, disposeModel } from './model.js';
+import { models } from './models/index.js';
+import { rigs, registerRig } from './rigs.js';
+import { loadClip, createPlayer } from './clip.js';
+import { loadMotion, createBody } from './motion.js';
+import { presets } from './motion/index.js';
+import { parseNotes, reviewState } from '../crew/notes.mjs';
+import {
+  SHEET_VIEWS, VIEW, PLAY_CAMERA, viewBasis, orthoScale, fitOrtho, fitPerspective, figureSpot, FIGURE_HALF_WIDTH,
+  buildFigure, FIGURE_HEIGHT, LIGHTS, LIGHT_MODES, applyLight, drawNvgEdges, modelBounds, sizeText, rulerTicks,
+  placeLabels, partRows, partOverlay, partAt, partColor, partHex, modelDiff, modelNote, noteBlock, readLabQuery, labQuery,
+  modelChecks, checkSentences
+} from './model-look.js';
+
+const q = new URLSearchParams(location.search);
+const MODE = q.get('sheet') === '1' || q.get('mode') === 'sheet' ? 'sheet' : q.get('shot') === '1' ? 'shot' : 'live';
+const S = readLabQuery(q);           // what to show: light, toggles, part, camera (model-look.js)
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const today = () => new Date().toISOString().slice(0, 10);
+
+// A draft file (?file=, repo-relative) stands in for its listed namesake, if it has one.
+const draft = S.file ? await (await fetch('../' + S.file)).json() : null;
+const draftRef = draft ? `${draft.kind}/${draft.name}` : null;
+// The files as the lab last read them. A listed model starts as studio/models/index.js has it and a draft
+// as ?file= gave it; the live lab watches the file and swaps in a newer one that validates (watchFile).
+const current = new Map();
+const isDraft = (r) => !!draft && r === draftRef;
+const modelJson = (r) => current.get(r) || (isDraft(r) ? draft : models.json(r));
+const fileOf = (r) => (isDraft(r) ? S.file : `studio/models/${r}.json`);
+// The rig each model plays as, and the file it was made from: made again when the file changes, so a
+// new limb or a new body shows at once. The listed rigs studio/rigs.js made are from models.json(ref).
+const madeFrom = new Map();
+let ref = draft ? draftRef : models.json(S.model) ? S.model : models.names()[0];
+
+// --- The stage ---------------------------------------------------------------------------------------------
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init();
+renderer.setPixelRatio(MODE === 'live' ? Math.min(2, devicePixelRatio) : 1);
+renderer.shadowMap.enabled = true;
+// The game's colour pipeline (index.html): sRGB out, no tone mapping.
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NoToneMapping;
+$('view').append(renderer.domElement);
+const scene = new THREE.Scene();
+const hemi = new THREE.HemisphereLight(0xddeeff, 0x445566, 0.68);
+const key = new THREE.DirectionalLight(0xfffaf5, 1.73);
+const ambient = new THREE.AmbientLight(0x223344, 0.04);
+key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
+// Thin two-sided sheets (a hull plate) shadow themselves into stripes without a little bias.
+key.shadow.bias = -0.0005; key.shadow.normalBias = 0.02;
+scene.add(hemi, key, key.target, ambient);
+const lightRig = { hemi, key, ambient };
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color: 0x4f6a3a, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+// A metre grid under the model and a few metres round it, so sizes read off the ground (sizeGrid).
+let grid = null;
+// A model with a "waterline" joint floats: the water stands at that height.
+const water = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color: 0x2d5a6e, roughness: 0.6, transparent: true, opacity: 0.55 }));
+water.rotation.x = -Math.PI / 2; water.visible = false; scene.add(water);
+// Something to judge its size by: a plain 1.75 m person, or the studio's marine (the game's joint layout).
+const figure = buildFigure();
+const marine = rigs.get('marine').create({});
+const marineHeight = modelBounds(marine.group).size[1];
+scene.add(figure.group, marine.group);
+const persp = new THREE.PerspectiveCamera(34, 1, 0.05, 400);
+const ortho = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.01, 100);
+// The joints: a dot on each (yellow when parts hang on it, blue for a socket, where the game hangs a light
+// or a flame), a line to its parent, and its name on the overlay.
+const jointDots = new THREE.Group(); scene.add(jointDots);
+const dotMat = new THREE.MeshBasicMaterial({ color: 0xffd040, depthTest: false, transparent: true });
+const socketMat = new THREE.MeshBasicMaterial({ color: 0x54c8ff, depthTest: false, transparent: true });
+const boneMat = new THREE.LineBasicMaterial({ color: 0xffe28a, depthTest: false, transparent: true, opacity: 0.8 });
+let bones = null;
+// The picked part, drawn over the model in orange whatever is in front of it.
+const hiMat = new THREE.MeshBasicMaterial({ color: 0xff9a3c, transparent: true, opacity: 0.55, depthTest: false });
+const overlay = $('overlay'), octx = overlay.getContext('2d', { willReadFrequently: true });
+
+// --- The model -----------------------------------------------------------------------------------------------
+let cur = null;   // { ref, json, built, inst, group, box, bounds, rows, asset, file }
+let player = null, body = null, lastHit = null, reactLog = [], speed = 1, getupClip = null;
+let highlight = null, hiMeshes = [];   // { src } or { material }
+const hidden = new Set();              // limbs taken off
+const view = { light: S.light, wire: S.wire, joints: S.joints, names: S.names, spin: S.spin, grid: S.grid, figure: S.figure, colors: S.colors };
+const orbit = { yaw: 0.7, pitch: 0.35, dist: 6, at: new THREE.Vector3(0, 0.8, 0), straight: null, mpp: 0.01, pan: [0, 0] };
+
+function load(r) {
+  if (cur) {
+    clearHighlight();
+    for (const m of colorMeshes) m.removeFromParent();
+    colorMeshes = [];
+    scene.remove(cur.group);
+    disposeModel(cur.built);
+  }
+  player = null; body = null; lastHit = null; reactLog = []; hidden.clear();
+  setGhost(null);
+  const json = modelJson(r);
+  const b = buildModel(json);
+  let inst = null;
+  if (json.rig || json.body) {
+    // A draft of a rig plays as its own rig, so the listed one is left as it is; a model with a body
+    // but no rig of its own (the zombie stand-in) gets one here, so it can react.
+    const own = json.rig || 'model-' + json.name;
+    const name = isDraft(r) ? own + '-draft' : own;
+    const from = madeFrom.has(name) ? madeFrom.get(name) : rigs.def(name) ? models.json(r) : null;
+    if (from !== json) { registerRig(name, rigFromModel(json)); madeFrom.set(name, json); }
+    inst = rigs.get(name).create({ group: b.group });
+  }
+  const group = inst ? inst.group : b.group;
+  scene.add(group);
+  const box = new THREE.Box3().setFromObject(group);
+  const asset = S.asset || modelAsset(json);
+  const file = fileOf(r);
+  cur = { ref: r, json, built: b, inst, group, box, bounds: modelBounds(group), rows: partRows(json), asset, file };
+  sizeGrid(box);
+  if (view.colors) setColors(true);
+  const wl = b.joints.waterline;
+  water.visible = !!wl;
+  if (wl) water.position.y = new THREE.Vector3().setFromMatrixPosition(wl.matrixWorld).y;
+  // Joint dots sized to the model, so a drum's and a boat's both read. They share one sphere.
+  if (jointDots.children.length) jointDots.children[0].geometry.dispose();
+  jointDots.clear();
+  const rad = Math.max(0.012, cur.box.getSize(new THREE.Vector3()).length() * 0.008);
+  const dotGeo = new THREE.SphereGeometry(rad, 10, 8);
+  const hasParts = new Set(json.parts.map((p) => p.joint).filter(Boolean));
+  for (const [n, j] of Object.entries(b.joints)) {
+    const socket = !hasParts.has(n) && !Object.values(b.joints).some((o) => o.parent === j);
+    const d = new THREE.Mesh(dotGeo, socket ? socketMat : dotMat);
+    d.renderOrder = 40; d.userData.joint = j; d.userData.name = n; d.userData.socket = socket;
+    jointDots.add(d);
+  }
+  if (bones) { scene.remove(bones); bones.geometry.dispose(); }
+  const pairs = Object.values(b.joints).filter((j) => Object.values(b.joints).includes(j.parent));
+  bones = new THREE.LineSegments(new THREE.BufferGeometry(), boneMat);
+  bones.geometry.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(Math.max(1, pairs.length) * 6), 3));
+  bones.userData.pairs = pairs; bones.renderOrder = 39; bones.frustumCulled = false;
+  scene.add(bones);
+  setWire(view.wire);
+  placeFigure(null);
+  return cur;
+}
+
+// Further out than a few metres a grid only shimmers (its lines closer than a pixel), so it stops there.
+function sizeGrid(box) {
+  const sz = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+  const n = 2 * Math.ceil((Math.max(sz.x, sz.z) + 6) / 2);
+  const shown = grid ? grid.visible : view.grid;
+  if (grid) { scene.remove(grid); grid.geometry.dispose(); grid.material.dispose(); }
+  grid = new THREE.GridHelper(n, n, 0x35502a, 0x35502a);
+  grid.position.set(Math.round(c.x), 0.004, Math.round(c.z));
+  grid.visible = shown;
+  scene.add(grid);
+  tintGrid();
+}
+// The grid's lines are unlit, so at night they're dimmed by hand to about what the ground gets.
+function tintGrid() { if (grid) grid.material.color.setScalar({ day: 1, night: 0.12, nvg: 0.45 }[view.light] ?? 1); }
+// The figure stands on the model's left (-X), level with its middle, facing the same way; for a straight
+// view it moves so it's beside the model in the picture, never behind it.
+function placeFigure(v) {
+  const spot = v ? figureSpot(cur.box, v) : [cur.box.min.x - 0.35 - FIGURE_HALF_WIDTH, 0, (cur.box.min.z + cur.box.max.z) / 2];
+  figure.group.position.set(...spot); marine.group.position.set(...spot);
+  figure.group.updateMatrixWorld(true); marine.group.updateMatrixWorld(true);
+  showFigure();
+}
+function showFigure() { figure.group.visible = view.figure === 'figure'; marine.group.visible = view.figure === 'marine'; }
+const shownFigure = () => (view.figure === 'figure' ? figure.group : view.figure === 'marine' ? marine.group : null);
+// The model and its figure, as one box (for framing).
+function stageBox(withGround = true) {
+  const b = new THREE.Box3().setFromObject(cur.group);
+  const f = shownFigure();
+  if (f) b.union(new THREE.Box3().setFromObject(f));
+  if (withGround) { b.min.y = Math.min(b.min.y, 0); }
+  return b;
+}
+function setWire(on) {
+  view.wire = on;
+  cur.group.traverse((o) => { if (o.isMesh && !o.userData.overlay) o.material.wireframe = on; });
+}
+function setLight(mode) {
+  view.light = LIGHT_MODES.includes(mode) ? mode : 'day';
+  applyLight(view.light, scene, lightRig);
+  tintGrid();
+  document.body.classList.toggle('nvg', view.light === 'nvg' && MODE === 'live');
+  renderer.domElement.style.filter = MODE === 'live' ? LIGHTS[view.light].filter : '';
+}
+function placeJoints() {
+  jointDots.visible = view.joints; bones.visible = view.joints;
+  if (!view.joints && !view.names) return;
+  cur.group.updateWorldMatrix(true, true);
+  for (const d of jointDots.children) d.position.setFromMatrixPosition(d.userData.joint.matrixWorld);
+  const P = bones.geometry.attributes.position, a = new THREE.Vector3();
+  bones.userData.pairs.forEach((j, i) => {
+    a.setFromMatrixPosition(j.parent.matrixWorld); P.setXYZ(i * 2, a.x, a.y, a.z);
+    a.setFromMatrixPosition(j.matrixWorld); P.setXYZ(i * 2 + 1, a.x, a.y, a.z);
+  });
+  P.needsUpdate = true;
+}
+
+// --- Picking a part -----------------------------------------------------------------------------------------
+function clearHighlight() { for (const m of hiMeshes) m.removeFromParent(); hiMeshes = []; highlight = null; }
+function setHighlight(which) {
+  clearHighlight();
+  if (!which) return;
+  highlight = which;
+  hiMeshes = partOverlay(cur.json, cur.built.joints, cur.built.group, which, hiMat);
+}
+// The parts map: every part of the file in its own colour (partColor) with its number, in place of the
+// model's own meshes, which hide while it shows. The colours hang on the joints like the highlight, so a
+// clip or a reaction moves them. Made again when the model or its lost limbs change.
+let colorMeshes = [];
+const colorMats = new Map();
+// Two-sided where the part's own material is (a hull plate), so the colours show the same faces the model does.
+const colorMat = (i, double) => {
+  const k = i + (double ? 'd' : '');
+  return colorMats.get(k) || colorMats.set(k, new THREE.MeshStandardMaterial({ color: partColor(i), roughness: 0.75, side: double ? THREE.DoubleSide : THREE.FrontSide })).get(k);
+};
+function setColors(on) {
+  for (const m of colorMeshes) m.removeFromParent();
+  colorMeshes = [];
+  view.colors = !!on;
+  const lost = new Set(Object.entries(cur.built.limbs).filter(([l]) => hidden.has(l)).flatMap(([, ms]) => ms));
+  for (const m of cur.built.meshes) m.visible = !view.colors && !lost.has(m);
+  if (!view.colors) return;
+  colorMeshes = partOverlay(cur.json, cur.built.joints, cur.built.group, {}, (p) => colorMat(p.src, (cur.json.materials[p.material] || {}).side === 'double'));
+  for (const m of colorMeshes) {
+    m.renderOrder = 0; m.castShadow = true; m.receiveShadow = true;
+    if (m.userData.limb && hidden.has(m.userData.limb)) m.visible = false;
+  }
+}
+// Each part's number beside it, where the numbers fit (the parts list says which is which).
+function drawPartNumbers(ctx, cam, x, y, w, h, dpr = 1) {
+  const seen = new Set(), items = [], p = new THREE.Vector3(), box = new THREE.Box3(), ray = new THREE.Raycaster();
+  for (const m of colorMeshes) {
+    const src = m.userData.src;
+    if (seen.has(src) || !m.visible) continue;
+    seen.add(src);
+    m.updateWorldMatrix(true, false);
+    // The number goes where the line of sight to the part's middle meets the part itself, so a hoop's
+    // number is on the hoop, not on the drum inside it; the middle when the line misses (a ring's hole).
+    box.setFromObject(m).getCenter(p).project(cam);
+    ray.setFromCamera(new THREE.Vector2(p.x, p.y), cam);
+    const hit = ray.intersectObject(m, false)[0];
+    if (hit) p.copy(hit.point).project(cam);
+    if (p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) continue;
+    items.push({ text: String(src), x: ((p.x + 1) / 2) * w / dpr, y: ((1 - p.y) / 2) * h / dpr, src });
+  }
+  ctx.save(); ctx.translate(x, y); ctx.scale(dpr, dpr);
+  ctx.font = 'bold 11px ui-monospace, monospace';
+  const placed = placeLabels(items, { w: w / dpr, h: h / dpr, measure: (t) => ctx.measureText(t).width + 4, lineH: 13, gap: 3 });
+  for (const l of placed) {
+    if (!l.shown) continue;
+    const tw = ctx.measureText(l.text).width;
+    ctx.fillStyle = partHex(l.src); ctx.fillRect(l.lx - 2, l.ly - 1, tw + 6, 14);
+    ctx.strokeStyle = 'rgba(0,0,0,0.7)'; ctx.lineWidth = 1; ctx.strokeRect(l.lx - 2.5, l.ly - 1.5, tw + 7, 15);
+    ctx.fillStyle = '#0c0e12'; ctx.fillText(l.text, l.lx + 1, l.ly + 10);
+  }
+  ctx.restore();
+  return placed.filter((l) => !l.shown).map((l) => l.src);
+}
+function pickAt(clientX, clientY) {
+  const r = renderer.domElement.getBoundingClientRect();
+  const ndc = new THREE.Vector2(((clientX - r.left) / r.width) * 2 - 1, -((clientY - r.top) / r.height) * 2 + 1);
+  const ray = new THREE.Raycaster();
+  ray.setFromCamera(ndc, camera());
+  return partAt(cur.json, cur.built.joints, cur.built.group, ray, hidden);
+}
+
+// --- The camera -----------------------------------------------------------------------------------------------
+const camera = () => (orbit.straight ? ortho : persp);
+// The picture's size: the middle column in the live lab, or what the address asks for in a shot.
+function size() {
+  if (MODE !== 'live') return [+(q.get('w') || 1280), +(q.get('h') || 800)];
+  const r = $('stage').getBoundingClientRect();
+  return [Math.max(1, Math.round(r.width)), Math.max(1, Math.round(r.height))];
+}
+// The key light comes from over the camera's left shoulder and turns with it, as on a turntable.
+function aimKey(fromDir, box) {
+  const sph = box.getBoundingSphere(new THREE.Sphere());
+  const d = new THREE.Vector3(...fromDir).setY(0);
+  // Looking straight down, the light is nearly overhead too, so shadows stay short under what casts them.
+  const down = d.lengthSq() < 1e-6;
+  if (down) d.set(-0.3, 0, 0.6);
+  d.normalize().applyAxisAngle(new THREE.Vector3(0, 1, 0), -0.7);
+  d.y = down ? 8 : 1.1; d.normalize();
+  key.position.copy(sph.center).addScaledVector(d, Math.max(4, sph.radius * 4));
+  key.target.position.copy(sph.center);
+  // The shadow is aimed from the light's world matrix, which three updates only after the shadow is
+  // drawn: without this, each picture's shadows fall where the picture before had its light.
+  key.updateMatrixWorld(); key.target.updateMatrixWorld();
+  const r = Math.max(1.5, sph.radius * 1.4);
+  Object.assign(key.shadow.camera, { left: -r, right: r, top: r, bottom: -r, near: 0.1, far: Math.max(4, sph.radius * 4) + r * 2 });
+  key.shadow.camera.updateProjectionMatrix();
+}
+function placeCam() {
+  const [w, h] = size();
+  if (orbit.straight) {
+    const v = VIEW[orbit.straight];
+    const fit = fitOrtho(ortho, stageBox(v.dir[1] === 0), v, w, h, orbit.mpp);
+    // A slide (right-drag) moves the frame, and the ruler with it.
+    ortho.position.addScaledVector(fit.basis.x, orbit.pan[0]).addScaledVector(fit.basis.y, orbit.pan[1]);
+    ortho.updateMatrixWorld(true);
+    orbit.fit = { ...fit, x0: fit.x0 + orbit.pan[0], y0: fit.y0 + orbit.pan[1] };
+    aimKey(v.dir, stageBox());
+    return;
+  }
+  persp.aspect = w / h; persp.updateProjectionMatrix();
+  const c = Math.cos(orbit.pitch);
+  persp.position.set(orbit.at.x + Math.sin(orbit.yaw) * c * orbit.dist, orbit.at.y + Math.sin(orbit.pitch) * orbit.dist, orbit.at.z + Math.cos(orbit.yaw) * c * orbit.dist);
+  persp.up.set(0, 1, 0);
+  persp.lookAt(orbit.at);
+  persp.near = Math.max(0.02, orbit.dist / 200); persp.far = orbit.dist * 20 + 100; persp.updateProjectionMatrix();
+  aimKey([Math.sin(orbit.yaw), 0, Math.cos(orbit.yaw)], stageBox());
+}
+// A named view. Front, side, back and top are straight (orthographic, with a ruler); the three-quarter
+// views are the orbit camera, framed to fit.
+function setView(k) {
+  const v = VIEW[k];
+  if (!v) return;
+  orbit.pan = [0, 0];
+  if (v.ortho) {
+    orbit.straight = k;
+    placeFigure(v);
+    const [w, h] = size();
+    orbit.mpp = orthoScale({ all: stageBox(v.dir[1] === 0) }, [v], w, h, 0.1);
+  } else {
+    orbit.straight = null;
+    placeFigure(v);
+    const [w, h] = size();
+    const d = fitPerspective(persp, stageBox(), v, w / h, 0.12);
+    const dir = new THREE.Vector3(...v.dir).normalize();
+    orbit.dist = d;
+    orbit.at.copy(persp.position).addScaledVector(dir, -d);
+    orbit.yaw = Math.atan2(dir.x, dir.z); orbit.pitch = Math.asin(dir.y);
+  }
+  view.name = k;
+  placeCam();
+}
+// Leaves a straight view for the orbit camera, looking the same way.
+function toOrbit() {
+  if (!orbit.straight) return;
+  const v = VIEW[orbit.straight];
+  const dir = new THREE.Vector3(...v.dir).normalize();
+  orbit.yaw = v.key === 'top' ? 0 : Math.atan2(dir.x, dir.z);
+  orbit.pitch = Math.min(1.45, Math.asin(dir.y));
+  const box = stageBox();
+  orbit.at.copy(box.getCenter(new THREE.Vector3()));
+  orbit.dist = Math.max(1.5, box.getBoundingSphere(new THREE.Sphere()).radius * 2.6);
+  orbit.straight = null;
+  view.name = null;
+}
+function fitAll() { orbit.pan = [0, 0]; setView('three-front'); view.name = null; }
+
+// --- The overlay: a ruler on straight views, the joints' names, the figure's height ----------------------------
+function drawRuler(ctx, fit, v, x, y, w, h, dpr = 1) {
+  ctx.save();
+  ctx.translate(x, y); ctx.scale(dpr, dpr);
+  const W = w / dpr, H = h / dpr;
+  ctx.font = '11px ui-monospace, monospace';
+  if (v.dir[1] === 0) {
+    // Elevations: the ground line, a ruler up the left edge, and the waterline if it floats.
+    const gy = fit.y0 / fit.mpp;
+    ctx.fillStyle = 'rgba(79,106,58,0.22)'; ctx.fillRect(0, gy, W, H - gy);
+    ctx.strokeStyle = 'rgba(160,190,120,0.9)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, gy + 0.5); ctx.lineTo(W, gy + 0.5); ctx.stroke();
+    const lo = fit.y0 - (H * fit.mpp), hi = fit.y0;
+    const t = rulerTicks(Math.max(lo, -5), hi, fit.mpp);
+    ctx.fillStyle = 'rgba(10,12,16,0.55)'; ctx.fillRect(0, 0, 44, H);
+    ctx.strokeStyle = '#d8d4c4'; ctx.fillStyle = '#d8d4c4';
+    for (const k of t.ticks) {
+      const py = (fit.y0 - k.v) / fit.mpp;
+      if (py < 0 || py > H) continue;
+      ctx.beginPath(); ctx.moveTo(44, py + 0.5); ctx.lineTo(44 - (k.major ? 12 : 6), py + 0.5); ctx.stroke();
+      if (k.major) ctx.fillText(`${+k.v.toFixed(2)} m`, 3, py - 2);
+    }
+    if (cur.built.joints.waterline) {
+      const wy = (fit.y0 - new THREE.Vector3().setFromMatrixPosition(cur.built.joints.waterline.matrixWorld).y) / fit.mpp;
+      ctx.strokeStyle = 'rgba(90,170,220,0.9)'; ctx.setLineDash([6, 4]);
+      ctx.beginPath(); ctx.moveTo(44, wy + 0.5); ctx.lineTo(W, wy + 0.5); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(120,190,230,0.95)'; ctx.fillText('waterline', W - 70, wy - 3);
+    }
+  } else {
+    // The top view: a scale bar, as long as a round number of metres.
+    const len = [0.25, 0.5, 1, 2, 5, 10].reverse().find((m) => m / fit.mpp <= W * 0.3) || 0.25;
+    const px = len / fit.mpp;
+    ctx.fillStyle = 'rgba(10,12,16,0.6)'; ctx.fillRect(8, H - 30, px + 16, 22);
+    ctx.strokeStyle = '#d8d4c4'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(16, H - 14); ctx.lineTo(16 + px, H - 14); ctx.moveTo(16, H - 19); ctx.lineTo(16, H - 9); ctx.moveTo(16 + px, H - 19); ctx.lineTo(16 + px, H - 9); ctx.stroke();
+    ctx.fillStyle = '#d8d4c4'; ctx.fillText(`${len} m (grid 1 m)`, 20, H - 18);
+  }
+  ctx.restore();
+}
+// The joints' names beside their dots, where they don't cover each other. `cam` has just rendered.
+function drawNames(ctx, cam, x, y, w, h, dpr = 1) {
+  const items = [];
+  const p = new THREE.Vector3();
+  cur.group.updateWorldMatrix(true, true);
+  for (const [n, j] of Object.entries(cur.built.joints)) {
+    p.setFromMatrixPosition(j.matrixWorld).project(cam);
+    if (p.z > 1 || p.x < -1 || p.x > 1 || p.y < -1 || p.y > 1) continue;
+    items.push({ text: n, x: ((p.x + 1) / 2) * w / dpr, y: ((1 - p.y) / 2) * h / dpr });
+  }
+  ctx.save(); ctx.translate(x, y); ctx.scale(dpr, dpr);
+  ctx.font = '11px ui-monospace, monospace';
+  const placed = placeLabels(items, { w: w / dpr, h: h / dpr, measure: (t) => ctx.measureText(t).width, lineH: 12 });
+  for (const l of placed) {
+    if (!l.shown) continue;
+    ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(l.lx - 2, l.ly - 1, ctx.measureText(l.text).width + 4, 13);
+    ctx.fillStyle = '#ffd040'; ctx.fillText(l.text, l.lx, l.ly + 10);
+  }
+  ctx.restore();
+  return placed.filter((l) => !l.shown).map((l) => l.text);
+}
+function drawFigureLabel(ctx, cam, x, y, w, h, dpr = 1) {
+  const f = shownFigure();
+  if (!f) return;
+  const top = new THREE.Vector3().setFromMatrixPosition(f.matrixWorld);
+  top.y = view.figure === 'figure' ? FIGURE_HEIGHT : marineHeight;
+  top.project(cam);
+  if (top.z > 1) return;
+  const px = ((top.x + 1) / 2) * w / dpr, py = ((1 - top.y) / 2) * h / dpr;
+  ctx.save(); ctx.translate(x, y); ctx.scale(dpr, dpr);
+  ctx.font = '11px system-ui, sans-serif';
+  const t = view.figure === 'figure' ? '1.75 m' : `marine ${marineHeight.toFixed(2)} m`;
+  ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(px - ctx.measureText(t).width / 2 - 3, py - 17, ctx.measureText(t).width + 6, 14);
+  ctx.fillStyle = '#c9d2e0'; ctx.fillText(t, px - ctx.measureText(t).width / 2, py - 6);
+  ctx.restore();
+}
+function drawOverlay() {
+  const dpr = renderer.getPixelRatio(), [w, h] = size();
+  if (overlay.width !== Math.round(w * dpr) || overlay.height !== Math.round(h * dpr)) {
+    overlay.width = Math.round(w * dpr); overlay.height = Math.round(h * dpr);
+    overlay.style.width = w + 'px'; overlay.style.height = h + 'px';
+  }
+  octx.clearRect(0, 0, overlay.width, overlay.height);
+  if (orbit.straight && orbit.fit) drawRuler(octx, orbit.fit, VIEW[orbit.straight], 0, 0, overlay.width, overlay.height, dpr);
+  if (view.names) drawNames(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
+  if (view.colors) drawPartNumbers(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
+  drawFigureLabel(octx, camera(), 0, 0, overlay.width, overlay.height, dpr);
+}
+function render() {
+  placeJoints();
+  renderer.render(scene, camera());
+  drawOverlay();
+}
+// three's node materials take a light's new colour and strength once per turn of the renderer's own
+// animation loop, not at every render() call: a picture drawn outside the loop after the light changed
+// keeps the old light. So pictures are drawn inside it, one turn each, and the live loop (if any) is put
+// back after. If the loop doesn't turn (a page in the background), the turn is made by hand.
+let mainLoop = null;
+function paint(cam, then) {
+  return new Promise((resolve, reject) => {
+    let done = false;
+    const go = () => {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      renderer.setAnimationLoop(mainLoop);
+      try { placeJoints(); renderer.render(scene, cam); resolve(then ? then() : undefined); } catch (e) { reject(e); }
+    };
+    const timer = setTimeout(() => { const nf = renderer._nodes && renderer._nodes.nodeFrame; if (nf && typeof nf.update === 'function') nf.update(); go(); }, 1500);
+    renderer.setAnimationLoop(go);
+  });
+}
+
+// --- What the picture is of, in words: the note's context and the snapshot's caption -----------------------------
+function state() {
+  return {
+    model: isDraft(cur.ref) ? null : cur.ref, file: isDraft(cur.ref) ? S.file : null, asset: S.asset, clip: player && $('clip') ? $('clip').value : null,
+    light: view.light, figure: view.figure, wire: view.wire, joints: view.joints, names: view.names, spin: view.spin, grid: view.grid, colors: view.colors,
+    view: view.name || null, part: highlight && highlight.src !== undefined ? highlight.src : null,
+    cam: orbit.straight ? null : { yaw: orbit.yaw, pitch: orbit.pitch, dist: orbit.dist }, at: orbit.straight ? null : orbit.at.toArray()
+  };
+}
+function describe() {
+  const j = cur.json, bits = [`${cur.ref} v${j.version || 1}`, LIGHTS[view.light].label.toLowerCase()];
+  bits.push(view.name ? VIEW[view.name].label : `orbit yaw ${orbit.yaw.toFixed(2)} pitch ${orbit.pitch.toFixed(2)} at ${orbit.dist.toFixed(1)} m`);
+  if (highlight && highlight.src !== undefined) bits.push(`part ${cur.rows[highlight.src].name} picked`);
+  if (highlight && highlight.material) bits.push(`material ${highlight.material} lit up`);
+  if (view.wire) bits.push('wireframe');
+  if (view.colors) bits.push('parts in colour, numbered');
+  if (hidden.size) bits.push('without ' + [...hidden].join(', '));
+  if (ghost) bits.push(`${ghost.version} as a ghost`);
+  if (player && $('clip').value) bits.push('playing ' + $('clip').value);
+  if (lastHit && body) bits.push(`last hit ${lastHit} with ${body.presetName}`);
+  bits.push(`draws ${cur.built.cost.draws}/${j.budget.draws}, triangles ${cur.built.cost.triangles}/${j.budget.triangles}`);
+  return bits.join('; ');
+}
+const lookUrl = () => 'studio/model-lab.html?' + labQuery(state());
+// A picture of the view as it is now, with a caption saying what it is, at most `maxW` wide and under
+// the 3 MB a note may carry (smaller until it fits). The canvas is read straight after drawing it.
+async function snapshot(maxW = 1280) {
+  return paint(camera(), () => { drawOverlay(); return compose(maxW); }).then((url) => (url.length > 2.9e6 && maxW > 480 ? snapshot(Math.round(maxW * 0.75)) : url));
+}
+// A 2D canvas kept in memory rather than on the GPU, so the pictures are made the same way everywhere.
+function canvas2d(w, h) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  return { c, ctx: c.getContext('2d', { willReadFrequently: true }) };
+}
+// The renderer's picture (or part of it) at w × h as pixels, through the light's filter (the goggles'
+// green) when it has one. It goes through a scratch canvas and is handed over as pixels (putImageData):
+// a 2D canvas that has the WebGL canvas drawn into it moves onto the GPU, and there, in headless Chrome
+// at least, every line of text drawn after faintly tints and dithers the whole canvas.
+function pixels(src, w, h, mode = 'day', sx = 0, sy = 0, sw = src.width, sh = src.height) {
+  const { ctx } = canvas2d(w, h);
+  ctx.filter = LIGHTS[mode].filter || 'none';
+  ctx.drawImage(src, sx, sy, sw, sh, 0, 0, w, h);
+  ctx.filter = 'none';
+  if (mode === 'nvg') drawNvgEdges(ctx, 0, 0, w, h);
+  return ctx.getImageData(0, 0, w, h);
+}
+function compose(maxW) {
+  const src = renderer.domElement, k = Math.min(1, maxW / src.width);
+  const w = Math.round(src.width * k), h = Math.round(src.height * k), cap = 26;
+  const { c, ctx } = canvas2d(w, h + cap);
+  ctx.putImageData(pixels(src, w, h, view.light), 0, 0);
+  ctx.drawImage(overlay, 0, 0, w, h);
+  ctx.fillStyle = '#14181f'; ctx.fillRect(0, h, w, cap);
+  ctx.font = '13px system-ui, sans-serif'; ctx.fillStyle = '#e8e4d4';
+  ctx.fillText(`${describe()} · ${today()}`.slice(0, Math.floor(w / 6.4)), 8, h + 18);
+  return c.toDataURL('image/png');
+}
+
+// --- The review folder: its version, whether the file changed since, and Jerry's notes so far --------------------
+const review = { asset: null, latest: null, notes: [], state: 'no-notes', changed: null, diff: [], folder: false, then: null };
+async function readReview() {
+  const base = `../review/${cur.asset}/`, get = async (f) => { try { const r = await fetch(base + f, { cache: 'no-store' }); return r.ok ? await r.text() : null; } catch { return null; } };
+  const [latest, notes] = await Promise.all([get('latest.txt'), get('notes.md')]);
+  Object.assign(review, { asset: cur.asset, latest: latest && /^v\d+\s*$/.test(latest) ? latest.trim() : null, folder: latest !== null, notes: [], changed: null, diff: [], then: null });
+  if (notes) { review.notes = parseNotes(notes); review.state = reviewState(review.notes, review.latest).state; } else review.state = 'no-notes';
+  if (review.latest) {
+    const then = await get(`${review.latest}/model.json`);
+    if (then) { try { const a = JSON.parse(then); review.diff = modelDiff(a, cur.json); review.changed = review.diff.length > 0; review.then = a; } catch { review.changed = null; } }
+  }
+  return review;
+}
+
+// What the lab says about the review folder, and Jerry's notes so far under the note box.
+function showReview() {
+  const r = review, j = cur.json;
+  const word = { 'no-notes': 'no notes yet', waiting: 'a note is waiting for the owner', taken: 'the owner is on it', look: 'answered: a new version to look at', 'answered-seen': 'answered', approved: 'approved' }[r.state] || r.state;
+  let html = r.folder ? `Review folder review/${esc(r.asset)}: latest <b>${esc(r.latest || '?')}</b>, ${word}.` : `No review folder yet: your first note makes review/${esc(cur.asset)}.`;
+  if (r.changed) html += ` <span class="bad" title="${esc(r.diff.join('\n'))}">The file changed since ${esc(r.latest)}</span> (${r.diff.length} change${r.diff.length > 1 ? 's' : ''}; its owner renders v${Math.max((j.version || 1), +String(r.latest).slice(1) + 1)} with render-sheet). <button id="ghostBtn" class="${ghost ? 'on' : ''}" title="Draw ${esc(r.latest)} over it in blue lines">Show ${esc(r.latest)} as a ghost</button>`;
+  else if (r.changed === false) html += ` The sheet there is of this file.`;
+  $('review').innerHTML = html;
+  if ($('ghostBtn')) $('ghostBtn').onclick = () => { setGhost(ghost ? null : r.then); showReview(); };
+  // Each note with the picture the lab sent with it, and a link that opens the lab as it was then.
+  const base = `../review/${esc(r.asset)}/`;
+  $('history').innerHTML = r.notes.length ? '<h2>Notes so far</h2>' + r.notes.slice(0, 8).map((n) => {
+    const pic = /!\[[^\]]*\]\((v\d+\/[\w.-]+\.png)\)/.exec(n.text), look = /look: studio\/model-lab\.html\?([^\s)]+)/.exec(n.text);
+    const text = n.text.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\(In the (model )?lab: [^)]*\)/, '').trim();
+    return `<div class="n"><b>${esc(n.version)}</b> ${esc(n.date)} <span class="st">${esc(n.state)}</span>${look ? ` · <a href="?${esc(look[1])}">see what was looked at</a>` : ''}<br>${esc(text.slice(0, 300))}` +
+      `${pic ? `<br><a href="${base}${esc(pic[1])}" target="_blank"><img src="${base}${esc(pic[1])}" alt="the picture sent with the note" style="max-width:100%;margin-top:4px;border:1px solid #333b4a"></a>` : ''}` +
+      `${n.answer ? `<blockquote>${esc(n.answer.agent)} · ${esc(n.answer.version)}: ${esc(n.answer.text.slice(0, 200))}</blockquote>` : ''}</div>`;
+  }).join('') : '';
+}
+// The review folder's latest version drawn over the model as it is now, in thin blue lines: what changed,
+// in place. Its own build, so the model's meshes and materials are untouched.
+let ghost = null;
+const ghostMat = new THREE.MeshBasicMaterial({ color: 0x66ccff, wireframe: true, transparent: true, opacity: 0.45, depthTest: false });
+function setGhost(json) {
+  if (ghost) {
+    scene.remove(ghost.group);
+    ghost.group.traverse((o) => { if (o.isMesh && !o.geometry.userData.shared) o.geometry.dispose(); });
+    for (const m of ghost.materials) m.dispose();
+    ghost = null;
+  }
+  if (!json) return;
+  try {
+    const b = buildModel(json), materials = new Set();
+    b.group.traverse((o) => { if (o.isMesh) { materials.add(o.material); o.material = ghostMat; o.renderOrder = 25; o.castShadow = false; o.userData.overlay = true; } });
+    // It stands where the model stands: a model that is a rig may be shown at another scale.
+    b.group.scale.copy(cur.group.scale);
+    scene.add(b.group);
+    ghost = { group: b.group, materials, version: review.latest };
+  } catch { ghost = null; }
+}
+
+// --- Notes: POST /__studio/note (contract 5) or, with no endpoint, a block to paste ----------------------------
+let canSave = null;
+// Whether this server saves notes (tools/serve.mjs with the studio's write door) or they'll be copied. A
+// write door from before /__studio/ping says no here and may still take the note: the save tries anyway.
+async function ping() {
+  try { const r = await fetch('/__studio/ping', { method: 'POST', body: '{}' }); const j = await r.json(); canSave = !!(j && j.ok); } catch { canSave = false; }
+  const el = $('canSave');
+  if (el) el.textContent = canSave ? 'This lab saves notes straight into the review folder.' : 'If this lab can\'t save your note, it copies it for you to paste into notes.md.';
+  return canSave;
+}
+async function sendNote(text, { picture = true } = {}) {
+  const json = cur.json, out = $('saved');
+  let body;
+  try {
+    body = modelNote({ json, ref: cur.ref, text, context: `${describe()}; look: ${lookUrl()}`, snapshot: picture ? await snapshot() : null, asset: S.asset, file: cur.file, look: 'studio/model-lab.html?' + (draft ? `file=${S.file}` : `model=${cur.ref}`) + (S.asset ? `&asset=${S.asset}` : '') });
+  } catch (e) {
+    out.innerHTML = `<span class="bad">${esc(e.message)}</span>`;
+    return { how: 'refused', error: e.message };
+  }
+  try {
+    const r = await fetch('/__studio/note', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || 'refused');
+    out.innerHTML = `<span class="good">Saved to ${esc(j.file)}${j.picture ? ', with the picture' : ''}.</span> ${esc(j.owner || '')} sees it on the crew panel.`;
+    $('note').value = '';
+    await readReview(); showReview();
+    return { how: 'saved', reply: j, sent: body };
+  } catch (e) {
+    // Say so first: a clipboard that needs permission may never answer.
+    const block = noteBlock({ version: json.version || 1, text, context: body.context, day: today() });
+    out.innerHTML = `<span class="bad">Couldn't save here</span> (${esc(String(e.message || e).slice(0, 120)) || 'no endpoint'}; open the lab with Open Model Lab.bat). Paste this at the top of review/${esc(body.asset)}/notes.md, under the box:<pre class="block">${esc(block)}</pre>`;
+    const copied = await Promise.race([navigator.clipboard ? navigator.clipboard.writeText(block).then(() => true, () => false) : Promise.resolve(false), new Promise((r) => setTimeout(() => r(false), 1500))]);
+    if (copied) out.insertAdjacentHTML('beforeend', '<div class="hint">It is copied already.</div>');
+    return { how: 'copied', block, error: String(e.message || e), sent: body };
+  }
+}
+
+// ================================================================================================================
+if (MODE === 'sheet') await drawSheet();
+else if (MODE === 'shot') await drawShot();
+else await live();
+
+// --- The contact sheet: six views, the light row, a clip strip, the cost and the size -----------------------------
+async function drawSheet() {
+  document.body.classList.add('sheet');
+  renderer.domElement.style.display = 'none'; overlay.style.display = 'none';
+  const { c: out, ctx } = canvas2d(1600, 200); document.body.append(out);
+  const json = modelJson(ref);
+  const problems = json ? validateModel(json) : [`no model "${S.model}"`];
+  const label = (text, x, y, color = '#e8e4d4', size = 15, font = 'system-ui, sans-serif') => { ctx.font = `${size}px ${font}`; ctx.fillStyle = color; ctx.fillText(text, x, y); };
+  window.__png = () => out.toDataURL('image/png');
+  if (problems.length) {
+    // Not buildable: the sheet is the problems, as sentences, so the picture still says what to fix.
+    out.width = 1600; out.height = 120 + problems.length * 22;
+    ctx.fillStyle = '#14181f'; ctx.fillRect(0, 0, out.width, out.height);
+    label(`${ref} is not valid: ${problems.length} problem${problems.length > 1 ? 's' : ''}`, 16, 40, '#ff7a6a', 22);
+    problems.forEach((t, i) => label('- ' + t, 16, 80 + i * 22, '#e8e4d4', 15, 'ui-monospace, monospace'));
+    window.__size = { w: out.width, h: out.height };
+    window.__stats = { model: ref, errors: problems };
+    window.__ready = true;
+    return;
+  }
+  view.colors = false;
+  load(ref);
+  view.figure = 'figure'; view.joints = false; view.names = false;
+  setWire(false);
+  const W = 1600, HEAD = 158, TW = 532, TH = 400, G = 2, LW = 398, LH = 300, CAP = 24, FOOT = 30;
+  const clipRef = S.clip || (cur.inst && (cur.json.clips || [])[0]) || null;
+  const clipFile = clipRef && cur.inst ? await fetch(`./clips/${clipRef}.json`) : null;
+  if (clipFile && !clipFile.ok) throw new Error(`no clip ${clipRef}: there is no studio/clips/${clipRef}.json`);
+  const clip = clipFile ? loadClip(await clipFile.json()) : null;
+  const FRAMES = 6, fw = Math.floor(W / FRAMES), fh = 220;
+  // Each picture has its caption in a band above it, so a caption never covers the model.
+  const rowY = [HEAD, HEAD + CAP + TH + G], lightY = HEAD + 2 * (CAP + TH + G), mapY = lightY + CAP + LH + G, clipY = mapY + CAP + TH + G;
+  const H = clipY + (clip ? CAP + fh + G : 0) + FOOT;
+  out.width = W; out.height = H;
+  ctx.fillStyle = '#14181f'; ctx.fillRect(0, 0, W, H);
+  const modelBox = new THREE.Box3().setFromObject(cur.group);
+  // Each view's box: the model, the figure where it stands for that view, and the ground under both.
+  const boxes = {};
+  for (const v of SHEET_VIEWS) {
+    placeFigure(v);
+    boxes[v.key] = stageBox(true);
+  }
+  // Front, side and back share a scale and a ground line, so heights compare straight across; the plan
+  // has its own scale, so a long model's footprint doesn't shrink its elevations.
+  const elevations = SHEET_VIEWS.filter((v) => v.ortho && v.dir[1] === 0);
+  const mppElev = orthoScale(boxes, elevations, TW, TH, 0.09), mppTop = orthoScale(boxes, [VIEW.top], TW, TH, 0.09);
+  const mppOf = (v) => (v.key === 'top' ? mppTop : mppElev);
+  const tileLabel = (text, x, y, sub) => {
+    label(text, x + 8, y + 17, '#e8e4d4', 14);
+    ctx.font = '14px system-ui, sans-serif';
+    if (sub) label(sub, x + 16 + ctx.measureText(text).width, y + 17, '#9aa3b2', 12);
+  };
+  let missing = [];
+  for (const [i, v] of SHEET_VIEWS.entries()) {
+    const x = (i % 3) * (TW + G), cy = rowY[Math.floor(i / 3)], y = cy + CAP;
+    placeFigure(v);
+    setLight('day');
+    // Straight side-on, the ground is a line: it's drawn, not rendered. From above and at three-quarters
+    // it's the grass and the metre grid.
+    const flat = v.ortho && v.dir[1] === 0;
+    ground.visible = grid.visible = !flat;
+    water.visible = !!cur.built.joints.waterline && !flat;
+    renderer.setSize(TW, TH);
+    let cam, fit = null;
+    if (v.ortho) { fit = fitOrtho(ortho, boxes[v.key], v, TW, TH, mppOf(v)); cam = ortho; }
+    else { fitPerspective(persp, boxes[v.key], v, TW / TH, 0.1); cam = persp; }
+    aimKey(v.dir, boxes[v.key]);
+    // The joints on the three-quarter front, named where the names fit.
+    const named = v.key === 'three-front';
+    view.joints = named;
+    await paint(cam, () => {
+      ctx.putImageData(pixels(renderer.domElement, TW, TH), x, y);
+      if (fit) drawRuler(ctx, fit, v, x, y, TW, TH);
+      if (named) missing = drawNames(ctx, cam, x, y, TW, TH);
+      drawFigureLabel(ctx, cam, x, y, TW, TH);
+    });
+    view.joints = false; placeJoints();
+    tileLabel(v.label, x, cy, v.ortho ? `orthographic, ${(1 / mppOf(v)).toFixed(0)} px a metre` : 'perspective');
+  }
+  ground.visible = grid.visible = true;
+  water.visible = !!cur.built.joints.waterline;
+  // The light row: the three-quarter front in the game's day, night and night vision, and the model as
+  // big as the player sees it, 12 m away on a 1280 × 720 screen.
+  const v3 = VIEW['three-front'];
+  placeFigure(v3);
+  renderer.setSize(LW, LH);
+  const lights = [['day', 'day'], ['night', 'night, goggles up'], ['nvg', 'night vision']];
+  for (const [i, [mode, name]] of lights.entries()) {
+    const x = i * (LW + G);
+    setLight(mode);
+    fitPerspective(persp, boxes['three-front'], v3, LW / LH, 0.1);
+    aimKey(v3.dir, boxes['three-front']);
+    await paint(persp, () => ctx.putImageData(pixels(renderer.domElement, LW, LH, mode), x, lightY + CAP));
+    label(name, x + 8, lightY + 17, '#9aa3b2', 13);
+  }
+  {
+    // The game's camera: 12 m out, 46° down, 60° field of view, at 1:1 pixels on a 1280 × 720 screen.
+    const [sw, sh] = PLAY_CAMERA.screen, x = 3 * (LW + G);
+    setLight('day');
+    renderer.setSize(sw, sh);
+    const game = new THREE.PerspectiveCamera(PLAY_CAMERA.fov, sw / sh, 0.1, 400);
+    const c = modelBox.getCenter(new THREE.Vector3());
+    const e = PLAY_CAMERA.elevation, d = PLAY_CAMERA.distance, dir = new THREE.Vector3(...v3.dir).setY(0).normalize();
+    game.position.copy(c).addScaledVector(dir, d * Math.cos(e)).setY(c.y + d * Math.sin(e));
+    game.lookAt(c); game.updateMatrixWorld(true);
+    aimKey(v3.dir, boxes['three-front']);
+    const p = c.clone().project(game), px = Math.round(((p.x + 1) / 2) * sw - LW / 2), py = Math.round(((1 - p.y) / 2) * sh - LH / 2);
+    await paint(game, () => ctx.putImageData(pixels(renderer.domElement, LW, LH, 'day', Math.max(0, Math.min(sw - LW, px)), Math.max(0, Math.min(sh - LH, py)), LW, LH), x, lightY + CAP));
+    label('in the game: 12 m away, as big as on a 1280 × 720 screen', x + 8, lightY + 17, '#9aa3b2', 12);
+  }
+  setLight('day');
+  // The parts map: each part of the file in its own colour with its number, from both three-quarter
+  // sides, and the key beside them, so "the thing sticking out at the back" can be found in "parts".
+  {
+    view.figure = 'none'; showFigure();
+    setColors(true);
+    renderer.setSize(TW, TH);
+    const hiddenNums = new Set();
+    for (const [k, key] of ['three-front', 'three-back'].entries()) {
+      const v = VIEW[key], x = k * (TW + G);
+      fitPerspective(persp, modelBox, v, TW / TH, 0.08);
+      aimKey(v.dir, modelBox);
+      await paint(persp, () => {
+        ctx.putImageData(pixels(renderer.domElement, TW, TH), x, mapY + CAP);
+        for (const n of drawPartNumbers(ctx, persp, x, mapY + CAP, TW, TH)) hiddenNums.add(n);
+      });
+      tileLabel(`parts map, ${v.label}`, x, mapY, 'each part its colour and number');
+    }
+    setColors(false);
+    view.figure = 'figure'; showFigure();
+    // The key: number, colour, name, and how many it draws.
+    const x0 = 2 * (TW + G) + 10, y0 = mapY + CAP + 16, n = cur.rows.length;
+    const cols = Math.min(4, Math.max(1, Math.ceil(n / 24))), rowsPer = Math.ceil(n / cols), colW = Math.floor((TW - 20) / cols);
+    const lineH = Math.min(15, Math.floor((TH - 20) / rowsPer));
+    ctx.font = `${Math.min(12, lineH - 2)}px system-ui, sans-serif`;
+    for (const r of cur.rows) {
+      const c = Math.floor(r.i / rowsPer), x = x0 + c * colW, y = y0 + (r.i % rowsPer) * lineH;
+      ctx.fillStyle = partHex(r.i); ctx.fillRect(x, y - lineH + 4, 10, lineH - 4);
+      let t = `${r.i} ${r.name}${r.copies > 1 ? ' ×' + r.copies : ''}`;
+      while (t.length > 3 && ctx.measureText(t).width > colW - 16) t = t.slice(0, -2) + '…';
+      ctx.fillStyle = '#c9d2e0'; ctx.fillText(t, x + 14, y);
+    }
+    label(`key: the parts in the file's order${hiddenNums.size ? ` (${hiddenNums.size} numbers left off where they'd cover others)` : ''}`, 2 * (TW + G) + 8, mapY + 17, '#9aa3b2', 12);
+  }
+  // A strip of its first clip, side on, when it is a rig that plays one: framed once for every frame, so
+  // the motion shows.
+  if (clip) {
+    renderer.setSize(fw, fh);
+    player = createPlayer(cur.inst).play(clip);
+    figure.group.visible = false;
+    const times = [...Array(FRAMES)].map((_, f) => (clip.loop ? f / FRAMES : f / Math.max(1, FRAMES - 1)) * clip.length);
+    const cbox = new THREE.Box3();
+    for (const t of times) { player.poseAt(t); cbox.union(new THREE.Box3().setFromObject(cur.group)); }
+    cbox.min.y = Math.min(cbox.min.y, 0);
+    const side = { dir: [-1, 0.25, 0.35], ortho: false };
+    for (const [f, t] of times.entries()) {
+      player.poseAt(t);
+      fitPerspective(persp, cbox, side, fw / fh, 0.06);
+      aimKey(side.dir, cbox);
+      await paint(persp, () => ctx.putImageData(pixels(renderer.domElement, fw, fh), f * fw, clipY + CAP));
+      label(`${t.toFixed(2)} s`, f * fw + 8, clipY + CAP + 18, '#e8e4d4', 12);
+    }
+    label(`${clipRef}: ${clip.length} s${clip.loop ? ', a loop' : ''}, side on (${FRAMES} frames)`, 8, clipY + 17, '#9aa3b2', 13);
+    for (const [j, r] of cur.inst.rest) { j.quaternion.copy(r.q); j.position.copy(r.p); }
+    player = null;
+  }
+  // The header: which model and version, what it costs against its budget, how big it is, what it's made of.
+  const j = cur.json, c = cur.built.cost, b = j.budget, over = cur.built.over;
+  const rv = q.get('rv') || `v${j.version || 1}`;
+  label(`${cur.asset}  ${rv}`, 16, 34, '#e0b85a', 26);
+  label(`${cur.ref} · ${j.kind} · owner ${j.owner || 'claude'}${rv !== `v${j.version || 1}` ? ` · the file says version ${j.version || 1}` : ''} · ${Object.keys(cur.built.joints).length} joints · ${j.parts.length} parts (${cur.built.parts.length} drawn in ${cur.built.meshes.length} meshes) · merge ${JSON.stringify(j.merge ?? false)}`, 16, 58, '#9aa3b2', 14);
+  const bar = (x, y, name, v, max) => {
+    const w = 210, f = Math.min(1, v / max);
+    ctx.fillStyle = '#10141b'; ctx.fillRect(x, y, w, 18);
+    ctx.fillStyle = v > max ? '#a04438' : '#3f7a55'; ctx.fillRect(x, y, w * f, 18);
+    label(`${name} ${v} of ${max}`, x + 6, y + 14, '#f0ece0', 13);
+  };
+  bar(16, 70, 'draws', c.draws, b.draws);
+  bar(236, 70, 'triangles', c.triangles, b.triangles);
+  label(over ? 'OVER BUDGET' : 'within budget', 458, 84, over ? '#ff7a6a' : '#7cdea0', 14);
+  label(`${sizeText(cur.bounds)}, from ${cur.bounds.min[1].toFixed(2)} to ${cur.bounds.max[1].toFixed(2)} m up · beside it a 1.75 m figure`, 16, 108, '#c9d2e0', 13);
+  // What the numbers say looks wrong (model-look.js modelChecks): pieces that don't touch, parts under the ground.
+  const checks = modelChecks(j), said = checkSentences(checks);
+  let cline = said.length ? 'checks: ' + said.join(' · ') : `checks: one piece (parts within ${checks.touch} m touch), nothing under the ground`;
+  ctx.font = '13px system-ui, sans-serif';
+  while (cline.length > 20 && ctx.measureText(cline).width > W - 32) cline = cline.slice(0, -2) + '…';
+  label(cline, 16, 150, said.length ? '#ffb070' : '#7cdea0', 13);
+  let sx = 16;
+  ctx.font = '12px system-ui, sans-serif';
+  for (const [n, m] of Object.entries(j.materials)) {
+    ctx.fillStyle = m.color; ctx.fillRect(sx, 116, 12, 12);
+    if (m.emissive) { ctx.strokeStyle = m.emissive; ctx.strokeRect(sx - 1.5, 114.5, 15, 15); }
+    ctx.fillStyle = '#9aa3b2'; ctx.fillText(n, sx + 16, 126); sx += 26 + ctx.measureText(n).width;
+    if (sx > 900) break;
+  }
+  // The file's notes, wrapped on the right.
+  ctx.font = '13px system-ui, sans-serif'; ctx.fillStyle = '#9aa3b2';
+  let line = '', ly = 28, lines = 0;
+  for (const w of (j.notes || '').split(' ')) {
+    if (ctx.measureText(line + w).width > 610) { if (++lines > 6) break; ctx.fillText(line, 975, ly); line = ''; ly += 17; }
+    line += w + ' ';
+  }
+  if (lines <= 6) ctx.fillText(line, 975, ly); else ctx.fillText('...', 975, ly);
+  label(`studio/model-lab.html?model=${cur.ref} to turn round it and write a note · node studio/render-sheet.mjs ${cur.ref} for the next version${missing.length ? ` · names not shown where they overlap: ${missing.slice(0, 6).join(', ')}${missing.length > 6 ? '...' : ''}` : ''}`, 10, H - 11, '#6d7686', 12);
+  window.__size = { w: W, h: H };
+  window.__stats = {
+    model: cur.ref, version: j.version || 1, draws: c.draws, triangles: c.triangles, budget: b, over,
+    bounds: cur.bounds, joints: Object.keys(cur.built.joints), parts: j.parts.length, drawn: cur.built.parts.length,
+    meshes: cur.built.meshes.length, merge: j.merge ?? false, views: SHEET_VIEWS.map((v) => v.key), scale: { elevationsPxPerMetre: +(1 / mppElev).toFixed(1), topPxPerMetre: +(1 / mppTop).toFixed(1) },
+    ...(clipRef ? { clip: clipRef } : {}), namesHidden: missing, checks: { ...checks, said }
+  };
+  window.__ready = true;
+}
+
+// --- One picture of the lab as the address sets it up (render-sheet --look) ---------------------------------------
+async function drawShot() {
+  document.body.classList.add('shot');
+  const [w, h] = size();
+  renderer.setSize(w, h);
+  load(ref);
+  setLight(view.light);
+  grid.visible = view.grid;
+  await applyStart();
+  window.__png = () => snapshot(w);
+  window.__size = { w, h: h + 26 };
+  window.__stats = { model: cur.ref, look: lookUrl(), context: describe() };
+  window.__ready = true;
+}
+
+// Things the address can set that need the model loaded: the view or camera, the picked part, the clip.
+async function applyStart({ clip = true } = {}) {
+  if (S.view) setView(S.view);
+  else if (S.cam) {
+    Object.assign(orbit, { yaw: S.cam.yaw, pitch: S.cam.pitch, dist: S.cam.dist, straight: null });
+    if (S.at) orbit.at.set(...S.at); else orbit.at.copy(stageBox().getCenter(new THREE.Vector3()));
+    placeFigure(null); placeCam();
+  } else fitAll();
+  if (S.part !== null && cur.rows[S.part]) setHighlight({ src: S.part });
+  if (clip && S.clip && cur.inst) {
+    try { player = createPlayer(cur.inst).play(loadClip(await (await fetch(`./clips/${S.clip}.json`)).json()), { loop: true }); player.update(0); } catch { player = null; }
+  }
+}
+
+// --- The live lab ---------------------------------------------------------------------------------------------------
+async function live() {
+  const resize = () => { renderer.setSize(...size()); if (orbit.straight) setView(orbit.straight); else placeCam(); };
+  renderer.setSize(...size());
+  // Lights and toggles.
+  for (const m of LIGHT_MODES) {
+    const b = document.createElement('button'); b.textContent = LIGHTS[m].label; b.dataset.light = m;
+    b.onclick = () => { setLight(m); syncButtons(); saveUrl(); };
+    $('lights').append(b);
+  }
+  for (const [k, label] of [['figure', '1.75 m figure'], ['marine', `marine (${marineHeight.toFixed(2)} m)`], ['none', 'no figure']]) $('figure').add(new Option(label, k));
+  $('figure').onchange = () => { view.figure = $('figure').value; if (orbit.straight) setView(orbit.straight); else showFigure(); saveUrl(); };
+  const toggles = {
+    spin: (on) => { view.spin = on; if (on) toOrbit(); },
+    wire: (on) => setWire(on),
+    grid: (on) => { view.grid = on; grid.visible = on; },
+    joints: (on) => { view.joints = on; },
+    names: (on) => { view.names = on; },
+    colors: (on) => setColors(on)
+  };
+  for (const [id, set] of Object.entries(toggles)) $(id).onclick = () => { set(!view[id]); syncButtons(); saveUrl(); };
+  for (const v of SHEET_VIEWS) {
+    const b = document.createElement('button'); b.textContent = v.label.replace(/ \(.*\)/, '').replace('three-quarter, ', '¾ '); b.title = v.label; b.dataset.view = v.key;
+    b.onclick = () => { view.spin = false; setView(v.key); syncButtons(); saveUrl(); };
+    $('views').append(b);
+  }
+  // Clips and weapons.
+  const WEAPONS = [
+    { key: 'rifle', label: 'Rifle round', kind: 'bullet', power: 2.5 }, { key: 'shotgun-far', label: 'Shotgun, 6 m', kind: 'pellet', power: 3.2 },
+    { key: 'shotgun-close', label: 'Shotgun, close', kind: 'pellet', power: 6.5 }, { key: 'machete', label: 'Machete', kind: 'blade', power: 3.5 },
+    { key: 'brute-swing', label: "Brute's swing", kind: 'crush', power: 4.5 }, { key: 'grenade', label: 'Grenade', kind: 'blast', power: 8, up: 0.5 },
+    { key: 'kill', label: 'Killing shot', kind: 'bullet', power: 3, kill: true }
+  ];
+  let weapon = WEAPONS[2];
+  for (const w of WEAPONS) {
+    const b = document.createElement('button'); b.textContent = w.label; b.classList.toggle('on', w === weapon);
+    b.onclick = () => { weapon = w; for (const c of $('weapons').children) c.classList.toggle('on', c === b); };
+    $('weapons').append(b);
+  }
+  $('standup').onclick = () => { if (body) body.reset(); restoreLimbs(); if (cur.inst) cur.group.rotation.y = 0; };
+  $('slow').onclick = (e) => { speed = speed === 1 ? 0.25 : 1; e.currentTarget.classList.toggle('on', speed < 1); };
+  $('play').onclick = playClip;
+  $('stop').onclick = () => { player = null; if (cur.inst) for (const [j, r] of cur.inst.rest) { j.quaternion.copy(r.q); j.position.copy(r.p); } };
+  $('info').onclick = (e) => e.currentTarget.classList.toggle('clamp');
+  // Models.
+  const sel = $('model');
+  for (const n of models.names()) sel.add(new Option(n, n));
+  if (draft && !models.json(draftRef)) sel.add(new Option(draftRef + ' (draft)', draftRef));
+  sel.value = ref;
+  sel.onchange = async () => { ref = sel.value; S.part = null; await show(); saveUrl(); };
+
+  async function armBody(json) {
+    body = null; lastHit = null; reactLog = []; getupClip = null;
+    $('hitbox').style.display = 'none';
+    if (!cur.inst || !cur.inst.def.body) return;
+    const own = json.rig || json.name;
+    let pj = presets.names().map((n) => presets.json(n)).find((p) => p.rig === own) || null;
+    if (!pj) { try { const r = await fetch(`./motion/${own}/${own}.json`); if (r.ok) pj = await r.json(); } catch { /* no preset: it can't react */ } }
+    if (!pj) return;
+    // The preset's get-up clips name the rig they were made on (zombie/getup-front), which the
+    // model's own rig (model-zombie) fails; onGetup below plays them from presetJson, so the preset
+    // loaded for the model leaves them out.
+    const { front, back, ...getup } = pj.getup || {};
+    body = createBody(cur.inst, loadMotion({ ...pj, rig: cur.inst.def.name, ...(pj.getup ? { getup } : {}) }), { ground: () => 0 });
+    body.presetName = `${own}/${pj.name} v${pj.version || 1}`;
+    body.presetJson = pj;
+    $('hitbox').style.display = '';
+  }
+  function strike(ev) {
+    const r = renderer.domElement.getBoundingClientRect();
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1), camera());
+    const hit = ray.intersectObject(cur.group, true).find((h) => h.object.visible && !h.object.userData.overlay);
+    if (!hit) return false;
+    const d = ray.ray.direction, dir = [d.x, d.y + (weapon.up || 0), d.z], at = hit.point.toArray();
+    const ok = weapon.kill ? body.kill({ at, dir, power: weapon.power, kind: weapon.kind }) : body.hit({ at, dir, power: weapon.power, kind: weapon.kind });
+    lastHit = `${weapon.label} (${weapon.kind}, ${weapon.power} m/s)${ok ? '' : ', refused'}`;
+    return true;
+  }
+  async function playClip() {
+    const r = $('clip').value.trim();
+    try {
+      player = createPlayer(cur.inst).play(loadClip(await (await fetch(`./clips/${r}.json`)).json()), { loop: true });
+    } catch (e) { $('saved').innerHTML = `<span class="bad">No clip ${esc(r)}: ${esc(String(e.message || e).split('\n')[0])}</span>`; }
+  }
+  // A body that gets up (contract 1): turn it to the heading the engine gives and play the preset's
+  // get-up clip for the side it lies on; without one the engine blends back as before.
+  async function onGetup(data) {
+    const g = body && body.presetJson && body.presetJson.getup;
+    const name = data && g && g[data.side];
+    if (!name) return;
+    try {
+      const clip = loadClip(await (await fetch(`./clips/${name}.json`)).json());
+      if (typeof data.heading === 'number') cur.group.rotation.y = data.heading;
+      player = createPlayer(cur.inst).play(clip);
+      getupClip = { clip, back: $('clip').value.trim() };
+    } catch { /* the clip isn't there: the blend carries on */ }
+  }
+  // Limbs (the game's partsLost keys): hidden here, and taken off the body too when its engine can.
+  function loseLimb(limb, on) {
+    for (const m of cur.built.limbs[limb] || []) m.visible = !on;
+    if (on) hidden.add(limb); else hidden.delete(limb);
+    if (view.colors) setColors(true);
+    if (on && body && typeof body.lose === 'function') { try { body.lose(limb); } catch { /* not a part this body has */ } }
+    // Put back, the body has it again: stood up whole, then the limbs still off taken off again (a
+    // leg still off drops it, as it should). Left as it was, a leg put back still made it fall.
+    if (!on && body && typeof body.lose === 'function') {
+      body.reset();
+      for (const l of hidden) { try { body.lose(l); } catch { /* not a part this body has */ } }
+    }
+  }
+  function restoreLimbs() { for (const l of [...hidden]) loseLimb(l, false); syncLimbs(); }
+  function syncLimbs() { for (const b of $('limbs').children) b.classList.toggle('on', hidden.has(b.dataset.limb)); }
+
+  // The model's panels.
+  // Shows the model `ref`. keep: the file changed under the lab, so the camera, the clip and the picked
+  // part stay as they were.
+  async function show({ keep = false } = {}) {
+    const was = keep ? { clip: player ? $('clip').value : null, part: highlight && highlight.src !== undefined ? highlight.src : null } : null;
+    load(ref);
+    const j = cur.json, c = cur.built.cost, b = j.budget;
+    $('info').innerHTML = `<b>${esc(cur.ref)}</b> v${j.version || 1} · ${j.kind} · owner ${esc(j.owner || 'claude')}${isDraft(cur.ref) ? ' · <span class="bad">draft</span> ' + esc(S.file) : ''}<br>${esc(j.notes || '')}`;
+    const bar = (name, v, max) => `<div class="bar${v > max ? ' over' : ''}"><i style="width:${Math.min(100, (100 * v) / max).toFixed(1)}%"></i><span>${name} ${v} of ${max}${v > max ? ' — over' : ''}</span></div>`;
+    $('cost').innerHTML = bar('draws', c.draws, b.draws) + bar('triangles', c.triangles, b.triangles) +
+      `<div class="hint">${sizeText(cur.bounds)} · ${Object.keys(cur.built.joints).length} joints · ${cur.built.meshes.length} meshes · merge ${esc(JSON.stringify(j.merge ?? false))}</div>`;
+    const checks = modelChecks(j), said = checkSentences(checks);
+    cur.checks = { ...checks, said };
+    $('checks').innerHTML = said.length ? said.map((t) => `<div style="color:#ffb070">${esc(t)}</div>`).join('') : `<span class="good">One piece, nothing under the ground.</span>`;
+    $('partCount').textContent = `${j.parts.length} in the file, ${cur.built.parts.length} drawn`;
+    $('parts').replaceChildren(...cur.rows.map((r) => {
+      const d = document.createElement('div'); d.className = 'part'; d.dataset.i = r.i;
+      d.innerHTML = `<i class="pc" style="background:${partHex(r.i)}" title="its number and colour in Parts in colour">${r.i}</i><b>${esc(r.name)}</b> <span class="m">${r.shape}${r.copies > 1 ? ' ×' + r.copies : ''} · ${r.triangles} tris · ${esc(r.joint || 'model')} · ${esc(r.material)}${r.limb ? ' · ' + r.limb : ''}</span>`;
+      d.onclick = () => pick(highlight && highlight.src === r.i ? null : r.i);
+      return d;
+    }));
+    $('mats').innerHTML = Object.entries(j.materials).map(([n, m]) => `<span class="sw" data-mat="${esc(n)}" title="${esc(m.note || '')}"><i style="background:${m.color}${m.emissive ? `;box-shadow:0 0 6px ${m.emissive}` : ''}"></i>${esc(n)}</span>`).join('');
+    for (const s of $('mats').children) s.onclick = () => { const m = s.dataset.mat; setHighlight(highlight && highlight.material === m ? null : { material: m }); syncPick(); saveUrl(); };
+    const limbs = Object.keys(cur.built.limbs);
+    $('limbbox').style.display = limbs.length ? '' : 'none';
+    $('limbs').replaceChildren(...limbs.map((l) => {
+      const bt = document.createElement('button'); bt.textContent = l; bt.dataset.limb = l;
+      bt.onclick = () => { loseLimb(l, !hidden.has(l)); syncLimbs(); };
+      return bt;
+    }));
+    const own = j.rig || j.name, listed = j.clips || [];
+    $('clipbox').style.display = cur.inst ? '' : 'none';
+    $('cliplist').replaceChildren(...listed.map((x) => new Option(x, x)));
+    await armBody(j);
+    // Its idle under a reaction when it has a body; otherwise the first clip it lists.
+    $('clip').value = S.clip || (was && was.clip) || (body ? (listed.find((x) => x.endsWith('/idle')) || `${own}/idle`) : (listed[0] || ''));
+    if (cur.inst && $('clip').value && (S.clip || (was && was.clip) || body || listed.length)) await playClip();
+    if (was) {
+      if (orbit.straight) setView(orbit.straight); else placeCam();
+      if (was.part !== null && cur.rows[was.part]) setHighlight({ src: was.part });
+    } else {
+      // The live lab has played its clip already, above.
+      await applyStart({ clip: false });
+    }
+    S.clip = null; S.view = null; S.cam = null;
+    syncButtons(); syncPick();
+    await readReview(); showReview();
+  }
+  function pick(i) {
+    setHighlight(i === null || i === undefined ? null : { src: i });
+    syncPick(); saveUrl();
+  }
+  function syncPick() {
+    for (const d of $('parts').children) d.classList.toggle('on', !!highlight && highlight.src === +d.dataset.i);
+    for (const s of $('mats').children) s.classList.toggle('on', !!highlight && highlight.material === s.dataset.mat);
+    const r = highlight && highlight.src !== undefined ? cur.rows[highlight.src] : null;
+    if (r) {
+      const el = $('parts').children[r.i];
+      // After the list has been laid out, or "nearest" is worked out against rows not yet placed.
+      if (el && el.scrollIntoView) requestAnimationFrame(() => el.scrollIntoView({ block: 'nearest' }));
+      const json = JSON.stringify(cur.json.parts[r.i]).replace(/,"/g, ', "');
+      $('partInfo').textContent = `${r.name}: ${r.copies} drawn (${r.drawn.join(', ') || r.name}), ${r.triangles} triangles, in mesh ${r.meshes.join(', ')}${r.sharedWith ? ` with ${r.sharedWith} other part${r.sharedWith > 1 ? 's' : ''}` : ' on its own'}.${r.note ? '\n' + r.note : ''}\n${json}`;
+    } else $('partInfo').textContent = highlight && highlight.material ? `Every part of ${highlight.material}: ${cur.rows.filter((x) => x.material === highlight.material).map((x) => x.name).join(', ')}` : '';
+  }
+  function syncButtons() {
+    for (const b of $('lights').children) b.classList.toggle('on', b.dataset.light === view.light);
+    for (const k of Object.keys(toggles)) $(k).classList.toggle('on', !!view[k]);
+    for (const b of $('views').children) b.classList.toggle('on', b.dataset.view === view.name);
+    $('figure').value = view.figure;
+  }
+  let urlTimer = 0;
+  function saveUrl() {
+    clearTimeout(urlTimer);
+    urlTimer = setTimeout(() => { try { history.replaceState(null, '', '?' + labQuery(state())); } catch { /* a sandboxed page can't */ } }, 250);
+  }
+
+  // Mouse: drag turns, right-drag slides, wheel zooms. A click that didn't move picks a part (shift, or a
+  // model with no body) or hits a creature that has one.
+  let drag = null;
+  renderer.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+  renderer.domElement.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, moved: 0, button: e.button, shift: e.shiftKey }; });
+  addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    drag.moved += Math.abs(dx) + Math.abs(dy);
+    drag.x = e.clientX; drag.y = e.clientY;
+    if (drag.moved < 4) return;
+    if (drag.button === 2 || e.ctrlKey) {
+      // Slide the camera and what it looks at, in the picture's plane.
+      if (orbit.straight) { orbit.pan[0] -= dx * orbit.mpp; orbit.pan[1] += dy * orbit.mpp; }
+      else {
+        const b = viewBasis({ dir: persp.position.clone().sub(orbit.at).normalize().toArray() });
+        const k = orbit.dist * 0.0016;
+        orbit.at.addScaledVector(b.x, -dx * k).addScaledVector(b.y, dy * k);
+      }
+    } else {
+      toOrbit(); view.spin = false; view.name = null;
+      orbit.yaw -= dx * 0.008; orbit.pitch = Math.max(-0.25, Math.min(1.5, orbit.pitch + dy * 0.006));
+    }
+    placeCam(); syncButtons(); saveUrl();
+  });
+  addEventListener('pointerup', (e) => {
+    if (drag && drag.moved < 4 && drag.button === 0 && e.target === renderer.domElement) {
+      if (body && !e.shiftKey) strike(e);
+      else { const hit = pickAt(e.clientX, e.clientY); pick(hit ? hit.src : null); }
+    }
+    drag = null;
+  });
+  renderer.domElement.addEventListener('wheel', (e) => {
+    const k = 1 + Math.sign(e.deltaY) * 0.1;
+    if (orbit.straight) orbit.mpp = Math.max(0.0005, Math.min(0.2, orbit.mpp * k));
+    else orbit.dist = Math.max(0.4, Math.min(80, orbit.dist * k));
+    placeCam(); saveUrl(); e.preventDefault();
+  }, { passive: false });
+  addEventListener('resize', resize);
+  addEventListener('keydown', (e) => {
+    if (e.target && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+    const k = e.key.toLowerCase();
+    if (k >= '1' && k <= '6') { view.spin = false; setView(SHEET_VIEWS[+k - 1].key); }
+    else if (k === 'f') { view.spin = false; fitAll(); }
+    else if (k === 't') toggles.spin(!view.spin);
+    else if (k === 'w') toggles.wire(!view.wire);
+    else if (k === 'j') toggles.joints(!view.joints);
+    else if (k === 'n') toggles.names(!view.names);
+    else if (k === 'p') toggles.colors(!view.colors);
+    else if (k === 'g') toggles.grid(!view.grid);
+    else if (k === 'l') setLight(LIGHT_MODES[(LIGHT_MODES.indexOf(view.light) + 1) % LIGHT_MODES.length]);
+    else if (k === 'escape') pick(null);
+    else return;
+    syncButtons(); saveUrl();
+  });
+  $('save').onclick = () => { const t = $('note').value.trim(); if (t) sendNote(t, { picture: $('pic').checked }); };
+  $('approve').onclick = () => sendNote('good', { picture: $('pic').checked });
+
+  // The model's file, read again every 1.5 s: a change shows as soon as it's saved (an agent edits, Jerry
+  // watches), keeping the camera. A file that isn't valid leaves the last good one showing, with its
+  // problems as sentences.
+  let watching = false;
+  async function watchFile() {
+    if (watching) return false;
+    watching = true;
+    try {
+      const r = cur.ref, res = await fetch('../' + cur.file, { cache: 'no-store' });
+      if (!res.ok || r !== cur.ref) return false;
+      const text = await res.text();
+      let json;
+      try { json = JSON.parse(text); } catch (e) { showProblems([`${cur.file} is not JSON: ${e.message}`]); return false; }
+      if (JSON.stringify(json) === JSON.stringify(cur.json)) { showProblems([]); return false; }
+      const errs = validateModel(json);
+      if (errs.length) { showProblems(errs); return false; }
+      showProblems([]);
+      current.set(r, json);
+      await show({ keep: true });
+      $('saved').innerHTML = `<span class="good">${esc(cur.file)} changed: this is it now.</span>`;
+      return true;
+    } catch { return false; /* the server is away for a moment */ } finally { watching = false; }
+  }
+  function showProblems(list) {
+    problems = list;
+    const el = $('problems');
+    el.style.display = list.length ? '' : 'none';
+    el.innerHTML = list.length ? `The file has ${list.length} problem${list.length > 1 ? 's' : ''}; the last good one is showing:<br>` + list.slice(0, 8).map((t) => '- ' + esc(t)).join('<br>') : '';
+  }
+  let problems = [];
+
+  setLight(view.light);
+  await show();
+  ping();
+  setInterval(() => { if (!document.hidden) watchFile(); }, 1500);
+
+  // Each frame: the turntable, the clip, the reaction, then the picture.
+  const clock = new THREE.Clock();
+  let frames = 0;
+  mainLoop = () => {
+    const dt = Math.min(0.05, clock.getDelta()) * speed;
+    if (view.spin && !orbit.straight) { orbit.yaw += dt * 0.6; placeCam(); }
+    if (player) {
+      player.update(dt);
+      if (getupClip && player.clip === getupClip.clip && player.time >= getupClip.clip.length) { getupClip = null; playClip(); }
+    }
+    if (body) {
+      body.follow();
+      for (const e of body.update(dt)) {
+        if (e[0] === 'getup') onGetup(e[1]);
+        if (e[0] !== 'step') reactLog.push(e[0]);
+      }
+      body.apply();
+      reactLog = reactLog.slice(-6);
+      $('react').innerHTML = `${esc(body.presetName)}: <span class="good">${body.state}</span>${lastHit ? ` · ${esc(lastHit)}` : ''}<br>${esc(reactLog.join(' · ')) || 'Pick a weapon and click where it hits.'}`;
+    }
+    render();
+    frames++;
+  };
+  renderer.setAnimationLoop(mainLoop);
+
+  // window.lab: the lab driven from outside, for studio/check-model-lab.mjs (and later check-labs).
+  window.lab = {
+    get ready() { return !!cur; },
+    get frames() { return frames; },
+    models: () => models.names(),
+    state: () => ({
+      ...state(), ref: cur.ref, version: cur.json.version || 1, asset: cur.asset, cost: cur.built.cost, budget: cur.json.budget, over: cur.built.over,
+      bounds: cur.bounds, joints: Object.keys(cur.built.joints), dots: jointDots.children.filter((d) => d.visible && jointDots.visible).length,
+      parts: cur.rows.length, highlight: highlight ? { ...highlight, meshes: hiMeshes.length } : null, hidden: [...hidden],
+      wireOn: (() => { let w = null; cur.group.traverse((o) => { if (o.isMesh && !o.userData.overlay && w === null) w = !!o.material.wireframe; }); return w; })(),
+      filter: renderer.domElement.style.filter, straight: orbit.straight, yaw: orbit.yaw, canSave, review: { ...review, notes: review.notes.length, then: !!review.then },
+      body: body ? { preset: body.presetName, state: body.state } : null, context: describe(), look: lookUrl(), figureAt: shownFigure() ? shownFigure().position.toArray() : null,
+      ghost: ghost ? ghost.version : null, problems: [...problems], fileVersion: cur.json.version || 1,
+      colored: colorMeshes.filter((m) => m.visible).length, modelMeshesShown: cur.built.meshes.filter((m) => m.visible).length,
+      checks: cur.checks ? cur.checks.said : null
+    }),
+    setModel: async (r) => { ref = r; sel.value = r; await show(); return cur.ref; },
+    setLight: (m) => { setLight(m); syncButtons(); },
+    toggle: (k, on) => { toggles[k](on === undefined ? !view[k] : !!on); syncButtons(); return view[k]; },
+    setFigure: (f) => { view.figure = f; if (orbit.straight) setView(orbit.straight); else showFigure(); syncButtons(); },
+    view: (k) => { view.spin = false; setView(k); syncButtons(); return orbit.straight; },
+    pick: (i) => { pick(i); return highlight; },
+    pickMaterial: (m) => { setHighlight({ material: m }); syncPick(); return hiMeshes.length; },
+    // Where a part is on the screen now (the middle of its first copy), for a click in a test.
+    screenOfPart: (i) => {
+      const ms = partOverlay(cur.json, cur.built.joints, cur.built.group, { src: i }, hiMat);
+      const box = new THREE.Box3();
+      for (const m of ms) { m.updateWorldMatrix(true, false); box.union(new THREE.Box3().setFromObject(m)); }
+      for (const m of ms) m.removeFromParent();
+      const p = box.getCenter(new THREE.Vector3()).project(camera()), r = renderer.domElement.getBoundingClientRect();
+      return { x: r.left + ((p.x + 1) / 2) * r.width, y: r.top + ((1 - p.y) / 2) * r.height };
+    },
+    partAtScreen: (x, y) => { const h = pickAt(x, y); return h ? h.src : null; },
+    lose: (l, on = true) => { loseLimb(l, on); syncLimbs(); return [...hidden]; },
+    snapshot: (maxW) => snapshot(maxW),
+    // Reads the file now instead of waiting for the next look (true when it changed what's shown).
+    watch: () => watchFile(),
+    ghost: (on = true) => { setGhost(on ? review.then : null); showReview(); return ghost ? ghost.version : null; },
+    note: (text, opts) => sendNote(text, opts),
+    ping: () => ping(),
+    readReview: async () => { await readReview(); showReview(); return { ...review, notes: review.notes.length, then: !!review.then }; },
+    nextFrame: () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+  };
+}
+</script>
+</body></html>

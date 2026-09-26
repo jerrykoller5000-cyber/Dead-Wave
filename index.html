@@ -1053,10 +1053,22 @@
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
+    import { createHorde, fetchHordeClips } from './studio/motion-horde.js';   // GB-65: reactions (D-42)
+    import { presets as MotionPresets } from './studio/motion/index.js';
     import * as PitArms from './world/pit-tentacles.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
+
+    // GB-65 (D-42, P-70 to P-72): the dead and the marine react to hits as bodies (studio/motion-horde.js;
+    // the rest is in "=== Reactions" by the knockdown). Off unless the page has ?reactions=1, localStorage
+    // has tt_reactions = '1', or the dev console says "reactions on". Declared up here because the load's
+    // warm-up fight already goes through the combat code that reads them.
+    let reactionsOn = false;
+    try { reactionsOn = new URLSearchParams(location.search).get('reactions') === '1' || localStorage.getItem('tt_reactions') === '1'; } catch (_) {}
+    let Horde = null;                 // made the first time reactions are on
+    const hordeClips = new Map();     // get-up clips the presets name, once fetched
+    let shotSeq = 0;                  // one shell's pellets share a number: one push on each body they hit
 
     // DWLoad, yieldToBrowser and whileHiddenFramesRun live in core/loader.js.
     window.DWOpening?.progress(8, 'Loading world');
@@ -15754,6 +15766,10 @@
     function tryRoll() {
       if (!gameStarted || gameOver || won || paused || playerSwimming || climbingTower || !grounded) return;
       if (rollT > 0 || rollCd > 0 || placeMode || buildMode || mortarMounted) return;
+      // GB-67 (P-72): not from the ground; from a stagger the roll takes him out of it (his planted feet
+      // would hold him back).
+      if (marineFloored()) return;
+      if (Horde) Horde.release(marine);
       const forward = (keys.ArrowUp || keys.KeyW ? 1 : 0) + (keys.ArrowDown || keys.KeyS ? -1 : 0);
       const strafe = (keys.ArrowLeft || keys.KeyA ? 1 : 0) + (keys.ArrowRight || keys.KeyD ? -1 : 0);
       // Screen-relative like walking; with no direction held, roll the way you face.
@@ -19513,6 +19529,10 @@
         const n = cmd === 'megaswarm' ? 500 : (parseInt(cmd.slice(10), 10) || 500);
         const made = spawnMegaswarm(n);
         showBanner('MEGASWARM', made + ' shamblers', 2.2, '#ffb347');
+      } else if (cmd === 'reactions on' || cmd === 'reactions off') {
+        // GB-65: reactions (D-42) for this session; localStorage tt_reactions = '1' keeps them on.
+        const on = setReactions(cmd === 'reactions on');
+        showBanner(on ? 'REACTIONS ON' : 'REACTIONS OFF', on ? 'Hits push bodies (studio/motion-horde.js)' : 'The old hit reactions', 2.2, '#7cdea0');
       } else if (cmd === 'bench') {
         devBench();
       } else if (cmd === 'nodead') {
@@ -26412,6 +26432,7 @@
 
     function recycleOrDisposeZombie(z, forceDispose) {
       if (!z.mesh) return;
+      if (Horde) Horde.release(z);   // GB-65: its body (if the horde has one) goes back with the mesh
       // Nothing is disposed any more (see resetZombieMesh); every body goes back to
       // its pool. The parameter is kept so the call sites read as they did.
       z.mesh.visible = false;
@@ -26871,9 +26892,13 @@
     const bloodPoolGeo = new THREE.CircleGeometry(1, 16);
     const _cq1 = new THREE.Quaternion(), _cq2 = new THREE.Quaternion(), _cq3 = new THREE.Quaternion();
     const _cAxis = new THREE.Vector3();
-    function beginCorpse(z, dx, dz) {
+    // rag (GB-66): the horde has the body and lets it fall (studio/motion-horde.js); this keeps the
+    // blood, the shadows and the sink, and the topple in updateCorpses leaves it alone.
+    function beginCorpse(z, dx, dz, rag = false) {
       const mesh = z.mesh;
       if (!mesh) return false;
+      // Toppled the old way: any body the horde had goes back to the animation first.
+      if (!rag && Horde) Horde.release(z);
       // Died on fire: the body stays charred. Materials are per-zombie (the hit flash
       // tints them individually), so darkening these does not blacken the whole horde,
       // and the mesh is re-skinned by resetZombieMesh when the pool hands it back out.
@@ -26925,7 +26950,8 @@
         junk: !!(ud.gibbed || ud.dismembered),
         baseY: mesh.position.y,
         poolR: 0.45 + (ud.hitH || 1.5) * 0.28,
-        parts: z.partsLost || emptyPartsLost()
+        parts: z.partsLost || emptyPartsLost(),
+        rag: rag ? z : null, settled: false
       };
       if (corpses.length >= MAX_CORPSES) finishCorpse(corpses.shift());
       corpses.push(c);
@@ -26937,6 +26963,7 @@
       if (c.castersOff) for (const o of c.casters) o.castShadow = true; // the pooled mesh goes back whole
       mesh.visible = false;
       scene.remove(mesh);
+      if (c.rag && Horde) Horde.release(c.rag);   // GB-66: the horde lets go of the body before the pool has it
       mesh.rotation.set(0, c.yaw, 0);
       resetZombieMesh(mesh);
       poolFor(c.typeKey).push(mesh);
@@ -26954,21 +26981,27 @@
         const after = c.t - c.fallT;
         const bounce = (after > 0 && after < 0.32) ? Math.sin(after / 0.32 * Math.PI) * 0.07 : 0;
         const ang = (Math.PI / 2 - 0.1) * fall + bounce;
-        // Topple about the horizontal axis perpendicular to the fall direction (in
-        // the body's frame), with a little roll about its own length: yaw * fall * twist.
-        _cq1.setFromAxisAngle(_cAxis.set(0, 1, 0), c.yaw);
-        _cq2.setFromAxisAngle(_cAxis.set(c.lz, 0, -c.lx).normalize(), ang);
-        _cq3.setFromAxisAngle(_cAxis.set(0, 1, 0), c.twist * fall);
-        m.quaternion.copy(_cq1).multiply(_cq2).multiply(_cq3);
-        // Limbs flail on the way down, then go slack.
-        const flail = Math.sin(Math.min(1, u) * Math.PI);
-        const p = c.parts;
-        if (ud.armLG && !p.armL) { ud.armLG.rotation.x = -1.3 * flail - 0.25 * fall; ud.armLG.rotation.z = 0.35 * fall + 0.4 * flail; }
-        if (ud.armRG && !p.armR) { ud.armRG.rotation.x = -1.1 * flail - 0.2 * fall; ud.armRG.rotation.z = -0.3 * fall - 0.4 * flail; }
-        if (ud.legLG && !p.legL) { ud.legLG.rotation.x = 0.25 * flail - 0.15 * fall; if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = 0.5 * fall; }
-        if (ud.legRG && !p.legR) { ud.legRG.rotation.x = -0.2 * flail + 0.1 * fall; if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = 0.3 * fall; }
-        if (ud.head && !p.head) { ud.head.rotation.x = -0.4 * flail + 0.15 * fall; ud.head.rotation.z = 0.35 * fall; }
-        if (ud.torso) { ud.torso.rotation.x = 0.1 * flail; ud.torso.rotation.z = 0.12 * fall; ud.torso.rotation.y = 0; }
+        if (c.rag) {
+          // GB-66: a ragdoll falls as the horde lets it (it moves the mesh with the body); its pool of
+          // blood goes with it until it lies still.
+          if (!c.settled) c.pool.position.set(m.position.x, sampleHeight(m.position.x, m.position.z) + 0.05, m.position.z);
+        } else {
+          // Topple about the horizontal axis perpendicular to the fall direction (in
+          // the body's frame), with a little roll about its own length: yaw * fall * twist.
+          _cq1.setFromAxisAngle(_cAxis.set(0, 1, 0), c.yaw);
+          _cq2.setFromAxisAngle(_cAxis.set(c.lz, 0, -c.lx).normalize(), ang);
+          _cq3.setFromAxisAngle(_cAxis.set(0, 1, 0), c.twist * fall);
+          m.quaternion.copy(_cq1).multiply(_cq2).multiply(_cq3);
+          // Limbs flail on the way down, then go slack.
+          const flail = Math.sin(Math.min(1, u) * Math.PI);
+          const p = c.parts;
+          if (ud.armLG && !p.armL) { ud.armLG.rotation.x = -1.3 * flail - 0.25 * fall; ud.armLG.rotation.z = 0.35 * fall + 0.4 * flail; }
+          if (ud.armRG && !p.armR) { ud.armRG.rotation.x = -1.1 * flail - 0.2 * fall; ud.armRG.rotation.z = -0.3 * fall - 0.4 * flail; }
+          if (ud.legLG && !p.legL) { ud.legLG.rotation.x = 0.25 * flail - 0.15 * fall; if (ud.legLG.userData.shinG) ud.legLG.userData.shinG.rotation.x = 0.5 * fall; }
+          if (ud.legRG && !p.legR) { ud.legRG.rotation.x = -0.2 * flail + 0.1 * fall; if (ud.legRG.userData.shinG) ud.legRG.userData.shinG.rotation.x = 0.3 * fall; }
+          if (ud.head && !p.head) { ud.head.rotation.x = -0.4 * flail + 0.15 * fall; ud.head.rotation.z = 0.35 * fall; }
+          if (ud.torso) { ud.torso.rotation.x = 0.1 * flail; ud.torso.rotation.z = 0.12 * fall; ud.torso.rotation.y = 0; }
+        }
         // Eyes go dark as the body settles.
         if (ud.eyeMats && after > 0) for (const em of ud.eyeMats) em.emissiveIntensity = Math.max(0, 1.7 - after * 1.8);
         if (after > 0.35 && !c.castersOff) { c.castersOff = true; for (const o of c.casters) o.castShadow = false; }
@@ -26977,8 +27010,9 @@
           c.pool.visible = true;
           c.pool.scale.setScalar(Math.max(0.01, c.poolR * Math.min(1, (c.t - c.fallT * 0.75) / 2.4)));
         }
-        // Sink away at the end.
+        // Sink away at the end (a ragdoll stops simulating first, or its points would hold it up).
         if (after > CORPSE_LIE) {
+          if (c.rag && Horde) Horde.freeze(c.rag);
           const s = (after - CORPSE_LIE) / 1.6;
           m.position.y = c.baseY - s * 1.3;
           c.pool.scale.setScalar(Math.max(0.01, c.poolR * (1 - s)));
@@ -27007,6 +27041,8 @@
       const hitY = py + (z.hitH || 1.4) * 0.55;
       if (!z.partsLost) z.partsLost = emptyPartsLost();
 
+      // GB-66 (P-71): with reactions on, every death that leaves a corpse falls as a body when the horde
+      // takes it (ragdollDeath); blasts and the saw still gib.
       if (kind === 'explosive') {
         spawnBlood(px, hitY, pz, dx, dz, 26, 2.0);
         spawnGibBurst(px, hitY, pz, skin, eye, dx, dz, 'explosive');
@@ -27034,10 +27070,10 @@
           const avail = PART_KEYS.filter((k) => !z.partsLost[k]);
           if (avail.length) detachZombiePart(z, avail[(Math.random() * avail.length) | 0], dx, dz);
         }
-        if (!beginCorpse(z, dx, dz)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+        if (!beginCorpse(z, dx, dz, ragdollDeath(z, info))) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
       } else if (kind === 'melee') {
         spawnBlood(px, hitY, pz, dx, dz, 8, 0.9);
-        if (!beginCorpse(z, dx, dz)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+        if (!beginCorpse(z, dx, dz, ragdollDeath(z, info))) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
       } else {
         // bullet / generic — tumble with 1–2 parts
         spawnBlood(px, hitY, pz, dx, dz, 14, 1.25);
@@ -27049,7 +27085,7 @@
           detachZombiePart(z, k, dx, dz);
         }
         if (Math.random() < 0.25) spawnFleshChunks(px, hitY, pz, dx, dz, skin, 2);
-        if (!beginCorpse(z, dx, dz)) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
+        if (!beginCorpse(z, dx, dz, ragdollDeath(z, info))) recycleOrDisposeZombie(z, z.mesh && z.mesh.userData.dismembered);
       }
 
       const i = zombies.indexOf(z);
@@ -27120,6 +27156,7 @@
     }
 
     function clearZombies() {
+      if (Horde) Horde.releaseAll();   // GB-65: every reacting body, the corpses' and the marine's, lets go
       for (const z of zombies.slice()) {
         z.alive = false;
         if (z.mesh) {
@@ -28807,6 +28844,10 @@
         }
         hitStumble.hits++;
       }
+      // GB-67 (P-72): with reactions on, a zombie's blow is a push on his body: his stagger steps are the
+      // knockback and the knee (the slide above would only fight his planted feet, and a scripted knee
+      // under a staggering body pulls it over).
+      if (attacker && attacker.typeKey && attacker.mesh && marineMelee(amount, attacker)) { hitStumble.kvx = 0; hitStumble.kvz = 0; hitStumble.kneeT = 0; }
       addShake(Math.min(0.5, 0.1 + amount * 0.012));
       if (toHp > 0.5) spawnBlood(player.position.x, player.position.y + getStanceEyeY() * 0.7, player.position.z, 0, 0, 5);
       else spawnEmbers(player.position.x, player.position.y + getStanceEyeY() * 0.6, player.position.z, 3, 0.5); // plates ring: a few sparks, no blood
@@ -29834,6 +29875,7 @@
     const SK_PARTS = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG', 'torsoG', 'headG'];   // GB-54: torso and head react too
     function beginScriptedKill(kind, cave, opts) {
       if (scriptedKill || cine || gameOver || won || !gameStarted) return;
+      if (Horde) Horde.release(marine);   // GB-67: the scene takes him as he stands, not mid-stagger
       // GB-35: the chase hands its guardian over on the catch; any other grab (walking
       // into a mouth) ends a chase that is still running.
       const chase = kind === 'cave' && opts && opts.chase ? opts.chase : null;
@@ -31014,6 +31056,7 @@
     function endGame(victory, msg) {
       if (fullMapOpen) setFullMap(false);
       if (gameOver || won) return;
+      if (Horde) Horde.release(marine);   // GB-67: his death (or the win) plays on his own pose
       gameOver = !victory;
       won = victory;
       hq.seq = null;   // an alarm still counting down would start the wave behind the burial
@@ -33414,7 +33457,7 @@
       sawCutting = false;
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
-      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !(rollT > 0) && !mortarMounted && !mortarCarried;
+      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !(rollT > 0) && !mortarMounted && !mortarCarried && !marineFloored();   // (GB-67: not while he's down)
       const edge = fireHeld && !prevMouseFireHeld;
       prevMouseFireHeld = fireHeld;
 
@@ -33550,6 +33593,9 @@
             for (let i = 0; i < n; i++) {
               spawnProjectile(false, null, aimDirWithSpread(st.spread || 0.14), st.damage, projectileLifeFor(st), null, st.speed, 'pellet');
             }
+            // GB-65: one shell, one number: its pellets on a body are one push (studio/motion-horde.js).
+            shotSeq++;
+            for (let k = projectiles.length - n; k < projectiles.length; k++) projectiles[k].shot = shotSeq;
             // Pump shotgun: red hull ejects on pump-back — no gold brass here.
             // The AA-12 has no pump to work, so it throws its hull on the shot.
             if (currentWeapon === 'aa12') spawnCasing('aa12');
@@ -33586,7 +33632,7 @@
     }
 
     function throwGrenade() {
-      if (!gameStarted || gameOver || won || placeMode || paused || grenadeCd > 0 || playerSwimming || mortarMounted || mortarCarried) return;
+      if (!gameStarted || gameOver || won || placeMode || paused || grenadeCd > 0 || playerSwimming || mortarMounted || mortarCarried || marineFloored()) return;
       if (akimboOn()) { AudioSys.invalid(); showBanner('BOTH HANDS FULL', 'Y goes back to one gun', 1.2, '#ffb347'); return; }
       if (grenades <= 0) { AudioSys.emptyClick(); return; }
       grenades -= 1;
@@ -33651,6 +33697,8 @@
       const baseDmg = (g.damage != null) ? g.damage : 55 * dmgMult();
       // Your own blast hurts you too. Stand back, or roll.
       if (shakeDist < AOE && Math.abs(player.position.y - y) < 3) damagePlayer(Math.round(Math.max(6, baseDmg * 0.55 * (1 - shakeDist / AOE))), g.cause || 'blast');
+      // GB-67 (P-72): with reactions on, a bomber's blast throws him (as it hurts him: not in godmode).
+      if (g.cause === 'bomber' && shakeDist < AOE && Math.abs(player.position.y - y) < 3 && !devGodMode) marineBlast(x, z, shakeDist / AOE);
       for (const lm of landmarks) {
         if (!lm.alive) continue;
         // Fence runs use their nearest point so long runs take damage where the blast lands.
@@ -33678,7 +33726,7 @@
           const dmg = Math.round(baseDmg * (1 - d / AOE));
           {
             const blast = dirToward(x, z, zom.mesh.position.x, zom.mesh.position.z);
-            damageZombie(zom, Math.max(12, dmg), { kind: 'explosive', dir: blast, defense: !!g.defense });
+            damageZombie(zom, Math.max(12, dmg), { kind: 'explosive', dir: blast, defense: !!g.defense, blast: d / AOE, blastDmg: baseDmg });   // GB-65: where in the blast
           }
         }
       }
@@ -33846,7 +33894,7 @@
 
     const KNIFE_LANDMARK_MULT = 0.5;   // a blade is not an axe
     function knifeAttack() {
-      if (!gameStarted || gameOver || won || placeMode || paused || knifeCd > 0 || playerSwimming || mortarMounted || mortarCarried) return;
+      if (!gameStarted || gameOver || won || placeMode || paused || knifeCd > 0 || playerSwimming || mortarMounted || mortarCarried || marineFloored()) return;
       // Both hands are full.
       if (akimboOn()) { AudioSys.invalid(); showBanner('BOTH HANDS FULL', 'Y goes back to one gun', 1.2, '#ffb347'); return; }
       const bs = bladeStats();
@@ -34785,6 +34833,188 @@
       tree._tbRestored = true; // CL-10: pristine again, so it may rejoin its batch once far away
     }
 
+    // === Reactions (D-42; GB-65 to GB-67, P-70 to P-72) =========================
+    // With reactions on, a hit is a push on a body (studio/motion-horde.js: the same code the motion lab
+    // and the studio's scenes run). A rifle round jolts a zombie, a close shell staggers it or puts it
+    // down, a grenade throws it, and it gets up again; a death falls the way it was hit; the marine is
+    // rocked by a swipe, staggered by a brute and put down by a bomber. At most eight bodies simulate at
+    // once. A hit the horde refuses (a full pool, a spider, a crawler, a body mid-leap) plays the old
+    // flinch, knockdown and kick below. docs/studio.md §10.6 has the whole wiring.
+    function hordeReady() {
+      if (Horde) return true;
+      try {
+        Horde = createHorde({
+          presets: MotionPresets, max: 8,
+          // The ground under a body: the deck it stands on, if any, else the terrain.
+          ground: (x, z, y) => entityGroundY(x, z, y + STEP_UP),
+          // Full rate near the camera, half rate out to where far bodies stop animating, then held.
+          lodFor: (x, z) => { const d = Math.hypot(x - camera.position.x, z - camera.position.z); return d < 25 ? 0 : (d < ZOMBIE_FAR_M ? 1 : 2); },
+          clips: (ref) => hordeClips.get(ref) || null,
+          onEvent: onHordeEvent,
+          // Walls, builds and the HQ hold a reacting body as they hold one walking: a blast beside a
+          // wall leaves the zombie on its own side.
+          solve: (key, x, z) => {
+            const me = key === marine, r = me ? PLAYER_RADIUS : (key.radius || 0.4);
+            const y = me ? player.position.y : (key.mesh ? key.mesh.position.y : 0);
+            let s = resolveHardBuildCollisions(x, z, r, me, y, null);
+            if (house.present) s = pushOutOfHouse(s.x, s.z, r);
+            return s;
+          }
+        });
+      } catch (e) {
+        console.warn('Dead-Wave: reactions unavailable.', e);
+        reactionsOn = false;
+        return false;
+      }
+      fetchHordeClips(MotionPresets).then((m) => { for (const [k, v] of m) hordeClips.set(k, v); }, () => {});
+      return true;
+    }
+    function setReactions(on) {
+      reactionsOn = !!on && hordeReady();
+      if (!reactionsOn && Horde) Horde.releaseLiving();   // corpses stay as they lie until finishCorpse lets them go
+      return reactionsOn;
+    }
+    // A corpse the horde says is still stops dragging its pool of blood along.
+    function onHordeEvent(key, name) {
+      if (name !== 'settled' && name !== 'frozen') return;
+      for (const c of corpses) if (c.rag === key) { c.settled = true; break; }
+    }
+
+    // What a hit does to a body: a push at the point hit, in m/s. The studio's presets are tuned to
+    // these (docs/studio.md §10): a rifle round 2.5 is a flinch, a shell at 6 m 3.2 a stagger, a close
+    // shell 6.5 drops a shambler, a grenade 8 throws it.
+    //   bullet  0.57 × √damage, 1% less every 2 m (to 30% less), at most 7: M4 2.5, AK 3.0, pistol 2.8,
+    //           revolver 4.1, sniper 5.5
+    //   pellet  0.103 × damage each (at most 1.5), full to 2 m, then 1/17 less a metre (to 35%): the
+    //           shotgun's seven are 0.93 each, 6.5 up close; at 6 m 0.71 each, about 3.2 for the four or
+    //           five that land
+    //   blast   8 × √(damage ÷ 55) at the centre, 35% of that at the edge, at most 11: grenade 8, launcher
+    //           9.6, bomber 7.3
+    //   blade   1.6 + 0.022 × the blade's damage before GB-52's size scaling, at most 5: knife 2.1,
+    //           machete 3.5; the saw 1.2 a tick
+    //   crush   6 (a falling trunk)
+    // The caps keep a scripted or debug hit of thousands from throwing a body across the map.
+    // Melee isn't one yet: a knife or machete hit barely moves a body, so GB-52's shove (the point of
+    // drawing one) keeps playing until the blade presets shove (P-75). A melee kill still falls as a body.
+    const REACT_KIND = { bullet: 'bullet', pellet: 'pellet', explosive: 'blast', chainsaw: 'blade', crush: 'crush' };
+    function reactionPower(kind, amount, info, z) {
+      const dist = (info && info.dist) || 0;
+      if (kind === 'bullet') return Math.min(7, 0.57 * Math.sqrt(Math.max(0, amount))) * (1 - Math.min(0.3, dist / 200));
+      if (kind === 'pellet') return Math.min(1.5, 0.103 * amount) * Math.max(0.35, Math.min(1, 1 - (dist - 2) / 17));
+      if (kind === 'explosive') {
+        const u = info && info.blast != null ? Math.max(0, Math.min(1, info.blast)) : 0.5;
+        return Math.min(11, 8 * Math.sqrt(((info && info.blastDmg) || 55) / 55) * (1 - 0.65 * u));
+      }
+      if (kind === 'melee') return Math.min(5, 1.6 + 0.022 * amount / (z ? meleeSizeMul(z) : 1));
+      if (kind === 'chainsaw') return 1.2;
+      if (kind === 'crush') return 6;
+      return 0;
+    }
+    // The hit a zombie's body takes, or null for none (the old reaction plays). None while something
+    // else owns the body: the old knockdown, clawing up out of the ground, a window, a leap or a charge,
+    // deep water, or a crawl (no legs to stagger on).
+    function reactionHit(z, kind, amount, info, dx, dz, hitY) {
+      if (!reactionsOn || !z || !z.mesh || !hordeReady()) return null;
+      const rk = REACT_KIND[kind];
+      if (!rk) return null;
+      if (z.knockT > 0 || z.riseT > 0 || z.windowClimb || z.leapT > 0 || z.chargeT > 0 || z.crawling) return null;
+      const p = z.mesh.position;
+      if (waterDepthAt(p.x, p.z) > 0.6) return null;
+      // A push from nowhere (spikes) isn't one; a blast pushes out from where it went off.
+      if (rk !== 'blast' && !(dx || dz)) return null;
+      const power = reactionPower(kind, amount, info, z);
+      if (!(power > 0)) return null;
+      if (rk === 'blast') return { at: 'pelvis', dir: [dx, 0.3, dz], power, kind: rk };
+      if (rk === 'crush') return { at: 'chest', dir: [dx, -0.3, dz], power, kind: rk };
+      return { at: [p.x, hitY, p.z], dir: [dx, 0, dz], power, kind: rk, shot: info && info.shot != null ? info.shot : undefined };
+    }
+    // GB-66 (P-71): a death the horde takes falls the way it was hit, as a body. beginCorpse keeps the
+    // blood, the shadows and the sink, not its topple. A death with no push (a burn, spikes) goes limp
+    // where it stands. A refused one (or one in the water) topples as it always has.
+    function ragdollDeath(z, info) {
+      if (!reactionsOn || !z.mesh || z.riseT > 0 || z.windowClimb || !hordeReady()) return false;
+      if (waterDepthAt(z.mesh.position.x, z.mesh.position.z) > 0.6) return false;
+      const d = (info && info.dir) || {};
+      return Horde.kill(z, (info && info.react) || { at: 'chest', dir: [d.x || 0, 0, d.z || 0], power: 0.8, kind: 'bullet' });
+    }
+    // GB-65 (P-70): a zombie the horde has off its feet (falling, down, getting up) is the horde's for the
+    // moment: updateZombies doesn't walk it, turn it or let it attack (the horde moves it by where the
+    // reaction carries it). It still burns, its hit flash still fades, and walls and the HQ still hold it.
+    function holdReactingZombie(z, dt, dotKills) {
+      z.attackWindup = 0; z._pendingAttack = null; z.swingT = 0;
+      z.staggerVX = 0; z.staggerVZ = 0; z.sprintT = 0;
+      if (z.burnT > 0) {
+        z.burnT -= dt;
+        z.hp -= 8 * dt * (1 - (z.fireResist || 0));
+        if (z.hp <= 0) { z._defenseKill = !!z.burnDefense; dotKills.push(z); }
+      }
+      if (z.flashT > 0) {
+        z.flashT = Math.max(0, z.flashT - dt);
+        const mats = z.mesh.userData.bodyMats, inten = (z.flashT / 0.14) * 0.65;
+        if (mats) for (const m of mats) {
+          if (!m.emissive) continue;
+          m.emissiveIntensity = inten;
+          if (inten <= 0.01) { m.emissive.setHex(0x000000); m.emissiveIntensity = 0; }
+        }
+      }
+      const p = z.mesh.position;
+      let s = resolveHardBuildCollisions(p.x, p.z, z.radius, false, p.y, null);
+      if (house.present) s = pushOutOfHouse(s.x, s.z, z.radius);
+      p.x = s.x; p.z = s.z;
+    }
+
+    // GB-67 (P-72): the marine as a body too (preset marine/marine, Jerry's GB-50 order): a swipe rocks
+    // him, a brute's blow staggers him a step, a bomber's blast puts him down and he's up fast. He keeps
+    // control while he staggers (slowed), loses it while he falls and lies (about a second), and never
+    // reacts in a scripted kill, the insertion, a roll, the water, on the ladder or at the mortar.
+    function marineHit(h) {
+      if (!reactionsOn || !gameStarted || gameOver || won || scriptedKill || menuCamera.deploying) return false;
+      if (rollT > 0 || playerSwimming || climbingTower || mortarMounted || !hordeReady()) return false;
+      if (!Horde.adopt(marine, {
+        rig: 'marine', preset: 'marine/marine', group: marine,
+        move: (dx, dz) => { player.position.x += dx; player.position.z += dz; },
+        ground: (x, z, y) => playerGroundY(x, z, y + STEP_UP)
+      })) return false;
+      return Horde.hit(marine, h);
+    }
+    // A zombie's blow: claws cut (blade), everything else clubs (crush). 1.5 + 0.15 × damage, a tenth
+    // more from the heavy kinds, at the shoulder facing the blow: a shambler 2.4, a brute 4.3 (a stagger),
+    // a demon's charge 6.4 and the colossus's slam 5.9 (both put him down).
+    const CLAW_KINDS = { feral: true, leaper: true, spider: true };
+    function marineMelee(amount, attacker) {
+      const ap = attacker.mesh.position;
+      let dx = player.position.x - ap.x, dz = player.position.z - ap.z;
+      const d = Math.hypot(dx, dz) || 1;
+      dx /= d; dz /= d;
+      // Where the blow comes from, across his own frame (he faces +Z; L is his -X side).
+      const yaw = player.rotation.y, side = -dx * Math.cos(yaw) + dz * Math.sin(yaw);
+      const heavy = !!(attacker.brute || attacker.tactics === 'tank' || attacker.tactics === 'boss' || attacker.tactics === 'charge');
+      const power = Math.min(7, 1.5 + amount * 0.15) * (heavy ? 1.1 : 1);
+      return marineHit({ at: side < 0 ? 'shoulderL' : 'shoulderR', dir: [dx, 0.1, dz], power, kind: CLAW_KINDS[attacker.typeKey] ? 'blade' : 'crush' });
+    }
+    // A bomber's blast, from where it went off (u: 0 at its centre, 1 at its edge): 6.9 at 1 m.
+    function marineBlast(x, z, u) {
+      let dx = player.position.x - x, dz = player.position.z - z;
+      const d = Math.hypot(dx, dz);
+      if (d > 1e-3) { dx /= d; dz /= d; } else { dx = -Math.sin(player.rotation.y); dz = -Math.cos(player.rotation.y); }
+      return marineHit({ at: 'pelvis', dir: [dx, 0.4, dz], power: 8 * (1 - 0.6 * Math.max(0, Math.min(1, u))), kind: 'blast' });
+    }
+    function marineReactState() { return Horde && Horde.has(marine) ? Horde.state(marine) : 'animated'; }
+    function marineFloored() { const s = marineReactState(); return s === 'fall' || s === 'down'; }
+    // His pace while he reacts: slowed on his feet and getting up, nothing while he's down.
+    function marineReactK() { const s = marineReactState(); return s === 'react' || s === 'getup' ? 0.6 : (s === 'fall' || s === 'down' ? 0 : 1); }
+
+    // Once a frame, after every body is animated and every hit is in, before the frame is drawn.
+    function updateReactions(dt) {
+      if (!Horde) return;
+      if (Horde.has(marine) && (scriptedKill || gameOver || won || !gameStarted || menuCamera.deploying)) Horde.release(marine);
+      if (!reactionsOn) return;
+      try { Horde.update(dt); } catch (e) {
+        console.warn('Dead-Wave: reactions switched off after an error in the horde.', e);
+        setReactions(false);
+      }
+    }
+
     // === Knockdown ==============================================================
     // A hard enough hit puts a zombie on the ground: it topples (about its own feet,
     // in the direction the blast pushed it), lies there helpless for a moment, then
@@ -34903,16 +35133,22 @@
         }
       }
 
-      // Hit react — flinch lean + stagger kickback
-      z.hitReact = Math.min(0.45, 0.12 + dmg * 0.008);
-      z.hitDirX = dx; z.hitDirZ = dz;
-      maybeKnockDown(z, kind, dmg, dx, dz);
-      // A blade swing shoves bodies off you — that is the whole point of drawing it
-      // with a zombie already in your face, and the reason the knife used to feel
-      // pointless was that a kill left the next one standing exactly where it was.
-      const kick = (kind === 'explosive' ? 4.5 : (kind === 'melee' ? 5.2 : (kind === 'pellet' ? 2.2 : (kind === 'chainsaw' ? 1.4 : 1.8))));
-      z.staggerVX = dx * kick * (0.6 + Math.min(1.2, dmg / 30));
-      z.staggerVZ = dz * kick * (0.6 + Math.min(1.2, dmg / 30));
+      // GB-65 (P-70): with reactions on, a hit the horde takes is a push on the body (see "=== Reactions");
+      // the flinch, the knockdown and the kick below are for everything it doesn't take. A killing hit's
+      // push goes to killZombie with the death.
+      const react = reactionHit(z, kind, amount, info, dx, dz, hitY);
+      if (!(react && z.hp > 0 && Horde.hit(z, react))) {
+        // Hit react — flinch lean + stagger kickback
+        z.hitReact = Math.min(0.45, 0.12 + dmg * 0.008);
+        z.hitDirX = dx; z.hitDirZ = dz;
+        maybeKnockDown(z, kind, dmg, dx, dz);
+        // A blade swing shoves bodies off you — that is the whole point of drawing it
+        // with a zombie already in your face, and the reason the knife used to feel
+        // pointless was that a kill left the next one standing exactly where it was.
+        const kick = (kind === 'explosive' ? 4.5 : (kind === 'melee' ? 5.2 : (kind === 'pellet' ? 2.2 : (kind === 'chainsaw' ? 1.4 : 1.8))));
+        z.staggerVX = dx * kick * (0.6 + Math.min(1.2, dmg / 30));
+        z.staggerVZ = dz * kick * (0.6 + Math.min(1.2, dmg / 30));
+      }
       z.flashT = 0.14;
 
       const mats = z.mesh.userData.bodyMats;
@@ -34927,7 +35163,7 @@
       if (z.hp <= 0) {
         // Arm's length: some of it lands on you.
         if (Math.hypot(z.mesh.position.x - player.position.x, z.mesh.position.z - player.position.z) < 2.6) splatScreen(kind === 'explosive' || kind === 'pellet' || kind === 'chainsaw' ? 1 : 0.7);
-        killZombie(z, true, { kind, dir: { x: dx, z: dz }, defense: !!(info && info.defense) });
+        killZombie(z, true, { kind, dir: { x: dx, z: dz }, defense: !!(info && info.defense), react });
       }
     }
 
@@ -35075,7 +35311,7 @@
             if (!p.pierced) p.pierced = new Set();
             for (const h of _pierceHits) {
               const hy = p.prev.y + (p.pos.y - p.prev.y) * h.t;
-              p.hitZombie = true; damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
+              p.hitZombie = true; damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret, dist: p.age * p.speed, shot: p.shot });
               p.pierced.add(h.z);
               if (p.pierce <= 0) { pierceSpent = true; break; } // that was the last body it can take
               p.pierce -= 1;
@@ -35106,7 +35342,8 @@
         }
         if (hitZ) {
           const hy = p.prev.y + (p.pos.y - p.prev.y) * hitZT;
-          p.hitZombie = true; damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret });
+          // dist and shot (GB-65): how far the round flew and which shell it came from, for the push it gives.
+          p.hitZombie = true; damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, defense: !!p.fromTurret, dist: p.age * p.speed, shot: p.shot });
           p.hit = true;
           endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
@@ -36596,6 +36833,8 @@
           else if (gd < POI_GUARD_WAKE) wakePoiGuards('near', z.poiGuard);
           else { poseSleepingGuard(z, dt); continue; }   // GB-51: it idles at its post
         }
+        // GB-65 (P-70): falling, lying or getting up, it is the horde's (see holdReactingZombie).
+        if (reactionsOn && Horde && Horde.busy(z)) { holdReactingZombie(z, dt, dotKills); continue; }
         const tactics = z.tactics || 'direct';
         const px0 = player.position.x, pz0 = player.position.z;
         const hx0 = house.active ? house.group.position.x : 0;
@@ -38357,6 +38596,11 @@ live++;
         renderFrame();
         return;
       }
+      // GB-65: the reacting bodies hand their joints back to the animation before anything animates
+      // this frame (studio/motion-horde.js, beginFrame), then take them again in updateReactions.
+      // After the pause and the insertion's early returns: a frame that doesn't reach updateReactions
+      // keeps the bodies as they were drawn (a zombie that's down stays down behind the pause menu).
+      if (Horde) Horde.beginFrame();
 
       updateDayNight(dt);
       updateCaveEyes();
@@ -38429,6 +38673,8 @@ live++;
           const len = Math.hypot(wishX, wishZ);
           if (len > 1e-6) { wishX /= len; wishZ /= len; moving = true; }
         }
+        // GB-67 (P-72): knocked off his feet, he has no say in where he goes for the moment it lasts.
+        if (marineFloored()) { wishX = 0; wishZ = 0; moving = false; }
 
         // Riding the ladder owns position.x/y/z outright (see updateTowerClimb) — the
         // usual ground/water movement below would otherwise fight it every frame.
@@ -38492,7 +38738,7 @@ live++;
             }
           }
         }
-        const stumbleK = hitStumbleSpeedK();   // GB-50: slower for a beat, never stopped
+        const stumbleK = hitStumbleSpeedK() * marineReactK();   // GB-50: slower for a beat, never stopped (GB-67: slowed while he reacts)
         const tX = moving ? wishX * targetSpeed * stumbleK : 0;
         const tZ = moving ? wishZ * targetSpeed * stumbleK : 0;
         const rate = slide.active ? 2.0 : (grounded ? (moving ? PHYS.accelGround : PHYS.accelStop) : PHYS.accelAir);
@@ -38626,7 +38872,7 @@ live++;
         updateTowerSiege(dt);
         // Jump with coyote time and input buffering, so a press just before landing or
         // just after stepping off a lip still works.
-        if (keys.Space) jumpBufferT = PHYS.jumpBuffer;
+        if (keys.Space && !marineFloored()) jumpBufferT = PHYS.jumpBuffer;   // (GB-67: not from the ground)
         if (jumpBufferT > 0 && coyoteT > 0 && waterWade < 0.75) {
           vy = PHYS.jumpVel * (1 - waterWade * 0.35);
           grounded = false;
@@ -38659,6 +38905,7 @@ live++;
 
       updateProjectiles(dt);
       updateGrenades(dt);
+      updateReactions(dt);   // GB-65: every body animated and every hit in; before anything is drawn
       updateDebris(dt);
       updateBlood(dt);
       updateGibs(dt);
@@ -39054,6 +39301,7 @@ live++;
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
+      getHorde: () => Horde, setReactions, getReactions: () => reactionsOn, reactionPower, marineReactState, marineFloored, marineReactK,   // GB-65 to GB-67 (t85)
           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,

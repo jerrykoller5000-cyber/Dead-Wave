@@ -1,0 +1,90 @@
+{
+  "version": "v2",
+  "model": "creature/spider",
+  "file": "studio/models/creature/spider.json",
+  "modelVersion": 2,
+  "draws": 30,
+  "triangles": 2636,
+  "budget": {
+    "draws": 32,
+    "triangles": 3200
+  },
+  "over": false,
+  "bounds": {
+    "min": [
+      -0.907,
+      0.015,
+      -0.911
+    ],
+    "max": [
+      0.907,
+      0.867,
+      0.84
+    ],
+    "size": [
+      1.815,
+      0.852,
+      1.751
+    ]
+  },
+  "joints": [
+    "pelvis",
+    "chest",
+    "neck",
+    "head",
+    "jaw",
+    "hip1L",
+    "knee1L",
+    "foot1L",
+    "hip2L",
+    "knee2L",
+    "foot2L",
+    "hip3L",
+    "knee3L",
+    "foot3L",
+    "hip4L",
+    "knee4L",
+    "foot4L",
+    "hip1R",
+    "knee1R",
+    "foot1R",
+    "hip2R",
+    "knee2R",
+    "foot2R",
+    "hip3R",
+    "knee3R",
+    "foot3R",
+    "hip4R",
+    "knee4R",
+    "foot4R"
+  ],
+  "parts": 33,
+  "drawn": 77,
+  "meshes": 30,
+  "merge": "color",
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 156.7,
+    "topPxPerMetre": 156.7
+  },
+  "clip": "spider/crawl",
+  "checks": {
+    "pieces": 1,
+    "gaps": [],
+    "touch": 0.021,
+    "underGround": null,
+    "said": []
+  },
+  "namesHidden": [
+    "chest",
+    "foot4L"
+  ],
+  "renderSeconds": 4.5
+}
