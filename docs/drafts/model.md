@@ -164,8 +164,8 @@ Its preset is `studio/motion/spider/spider.json` (not yet in `studio/motion/inde
 lab maps each rig to an idle clip, and `spider/idle` is there for it). Against the lab's weapons: a
 rifle round, a far shell and a machete are flinches, a close shell skids it a step, a brute's swing
 rocks it, a grenade throws it and it rights itself, a kill goes limp and settles. A reacting spider
-costs about 0.08 ms a frame warmed in Node (a shambler 0.04 to 0.05 here): more points, so more, and
-still inside eight at once.
+costs about 0.08 ms a frame warmed in Node (a shambler 0.04 to 0.05 here): 30 points against 17, so
+a little over the 0.07 ms a body is budgeted; the pool's eight at once, all spiders, is about 0.65 ms.
 
 ## 7. In code
 
@@ -199,7 +199,8 @@ For the roadmap's first two:
 
 ```
 node studio/model-sheet.mjs --check prop/evac-boat my/draft.json    no browser: problems as sentences,
-                                                                    cost against budget, joints, limbs
+                                                                    cost against budget, joints, limbs,
+                                                                    and its clips there and for its rig
 node studio/model-sheet.mjs prop/evac-boat                          the next version: review/model-evac-boat/vN/
 node studio/model-sheet.mjs <model or draft.json> --out look.png    just the picture (a draft that isn't
                                                                     listed yet goes to Claude outputs/models/)
@@ -231,7 +232,8 @@ draft that isn't listed yet, and `?mode=sheet` is the picture the sheet command 
 
 The spider's crawl: two sets of four limbs take turns, 0.3 m a step; in a scene give it
 `"stride": 0.6` and its planted hands don't slide (`studio/scenes/spider-crawl.json`). The game's
-spider today has six limbs; drop pair 2 or 3 in the file if Jerry wants six.
+spider today has six limbs; if Jerry wants six, drop pair 2 or 3 from the file (its joints, parts,
+chain and body points).
 
 **Checking it:** `node --import ./studio/node-three.mjs --test "studio/*.test.mjs"`.
 `model.test.mjs` checks that every model on disk is listed, valid and within budget, that bad
