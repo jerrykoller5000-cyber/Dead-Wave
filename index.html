@@ -1049,6 +1049,10 @@
     import { createNightRecord, mountDawn } from './ui/dawn.js';
     import './ui/camp-cleared.js';
     import { drawScoutingMarks } from './ui/scouting.js';
+    import { bountyIntel, drawBountyMarks } from './ui/bounties.js';
+    import { createGroundFoliage } from './world/ground-foliage.js';
+    import * as CaveGuardian from './world/cave-guardian.js';
+    import * as PitArms from './world/pit-tentacles.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -1789,12 +1793,16 @@
     // The dawn breaks while the finisher's camera circles the last body: it runs for the
     // relief sting's length, and so does the turn of the sky (the finisher tells everyone
     // with 'wave-last-kill', so this doesn't have to live inside it).
-    // D-34 (Jerry, 2026-09-25) revises that: the night holds through the last kill and the Night
-    // N Complete card, and the sunrise waits for Proceed to Morning (loopMorning, below).
+    // D-39 (Jerry, 2026-09-25, revising D-34): the last kill brings the day. The sky runs on to
+    // the morning by itself, over the finisher and the first seconds of the next prep, with no
+    // camera move and no card: the night's numbers go up on a small banner (ui/dawn.js) and the
+    // next night is started at the briefing panel only.
+    const DAWN_SWEEP_S = 7;
     window.addEventListener('dw-game', (ev) => {
       const d = ev && ev.detail;
       if (!d || d.type !== 'wave-last-kill' || skyLoop.mode === 'free') return;
-      skyLoop.mode = 'hold'; skyLoop.tween = null;
+      skyLoop.mode = 'dawn';
+      skyTo(SKY_MORNING_AT, DAWN_SWEEP_S);
     });
 
     function resetDayClockForMatch() {
@@ -7684,6 +7692,8 @@
       drawMapBlips(ctx, toLocal, 1);
       drawScoutingMarks(ctx, { preview: getWavePreview(day), day, phase, alarmActive: !!hq.seq }, POI.caves,
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 22 });
+      drawBountyMarks(ctx, bountyIntel.markers({ day, phase, alarmActive: !!hq.seq }),
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 42 });
       // Names follow the rotating minimap rather than the terrain bake, so they
       // stay upright and readable even while the player turns.
       ctx.font = '700 15px sans-serif';
@@ -8407,20 +8417,21 @@
 
     // --- Foliage (capped) ---
     const foliage = [];
+    const groundFoliageArt = createGroundFoliage(THREE);
     const MAX_GRASS = 3200;
     const MAX_BUSH = 260;
     const MAX_FERN = 260;
     const MAX_FLOWER = 340;
     const MAX_MUSHROOM = 110;
     const MAX_CLUTTER = 220;
-    const grassMat = new THREE.MeshStandardMaterial({ color: 0x4caf50, roughness: 0.95, side: THREE.DoubleSide });
-    const grassMat2 = new THREE.MeshStandardMaterial({ color: 0x6bbf4e, roughness: 0.95, side: THREE.DoubleSide });
-    const grassMat3 = new THREE.MeshStandardMaterial({ color: 0x8fae4a, roughness: 0.95, side: THREE.DoubleSide });
+    const grassMat = new THREE.MeshStandardMaterial({ color: 0x668947, roughness: 0.95, side: THREE.DoubleSide });
+    const grassMat2 = new THREE.MeshStandardMaterial({ color: 0x809951, roughness: 0.95, side: THREE.DoubleSide });
+    const grassMat3 = new THREE.MeshStandardMaterial({ color: 0xa09961, roughness: 0.95, side: THREE.DoubleSide });
     const grassMats = [grassMat, grassMat, grassMat2, grassMat3];
-    const bushMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32, roughness: 1 });
-    const bushMat2 = new THREE.MeshStandardMaterial({ color: 0x357a38, roughness: 1 });
+    const bushMat = new THREE.MeshStandardMaterial({ color: 0x4a703d, roughness: 1 });
+    const bushMat2 = new THREE.MeshStandardMaterial({ color: 0x617e45, roughness: 1 });
     const blossomMat = new THREE.MeshStandardMaterial({ color: 0xf3d9e8, roughness: 0.85 });
-    const fernMat = new THREE.MeshStandardMaterial({ color: 0x66bb6a, roughness: 0.9, side: THREE.DoubleSide });
+    const fernMat = new THREE.MeshStandardMaterial({ color: 0x668c4e, roughness: 0.9, side: THREE.DoubleSide });
     const stemMat = new THREE.MeshStandardMaterial({ color: 0x4d8a3f, roughness: 0.9, side: THREE.DoubleSide });
     const mushCapMats = [
       new THREE.MeshStandardMaterial({ color: 0xc0392b, roughness: 0.7 }),
@@ -8651,13 +8662,14 @@
       const mats = moisture < 0.45 ? [grassMat3, grassMat3, grassMat2] : grassMats;
       for (let i = 0; i < n; i++) {
         const bh = 0.22 + rnd() * 0.32;
-        const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.07 + rnd() * 0.03, bh), mats[(rnd() * mats.length) | 0]);
+        const blade = new THREE.Mesh(groundFoliageArt.blade(0.07 + rnd() * 0.03, bh), mats[(rnd() * mats.length) | 0]);
         blade.position.set((rnd() - 0.5) * 0.58, bh * 0.5 - 0.03, (rnd() - 0.5) * 0.58);
         blade.rotation.y = rnd() * Math.PI;
         blade.rotation.z = (rnd() - 0.5) * 0.4;
         parts.push(blade);
       }
       const g = mergeParts(parts, foliageMat);
+      groundFoliageArt.shade(g, 'grass');
       g.position.set(x, groundMinAround(x, z, 0.3), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'grass', x, z });
@@ -8669,21 +8681,22 @@
       const bmat = rnd() < 0.5 ? bushMat : bushMat2;
       const n = 4 + Math.floor(rnd() * 2);
       for (let i = 0; i < n; i++) {
-        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.24 + rnd() * 0.17, 8, 6), bmat);
+        const puff = new THREE.Mesh(groundFoliageArt.shrub(0.24 + rnd() * 0.17), bmat);
         puff.position.set((rnd() - 0.5) * 0.42, 0.2 + rnd() * 0.16, (rnd() - 0.5) * 0.42);
         parts.push(puff);
       }
-      // A little under a third bloom with tiny blossom dots dotted through the leaves.
+      // A little under a third carry pale petalled blossoms among the leaves.
       if (rnd() < 0.28) {
         const dots = 4 + Math.floor(rnd() * 5);
         for (let i = 0; i < dots; i++) {
-          const dot = new THREE.Mesh(new THREE.SphereGeometry(0.045 + rnd() * 0.025, 5, 4), blossomMat);
+          const dot = new THREE.Mesh(groundFoliageArt.flower(0.045 + rnd() * 0.025), blossomMat);
           const a = rnd() * Math.PI * 2, r = 0.18 + rnd() * 0.28;
           dot.position.set(Math.cos(a) * r, 0.28 + rnd() * 0.2, Math.sin(a) * r);
           parts.push(dot);
         }
       }
       const g = mergeParts(parts, foliageMat, { castShadow: true });
+      groundFoliageArt.shade(g, 'bush');
       g.position.set(x, groundMinAround(x, z, 0.3), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'bush', x, z });
@@ -8694,14 +8707,15 @@
       const parts = [];
       const n = 6 + Math.floor(rnd() * 3);
       for (let i = 0; i < n; i++) {
-        const leaf = new THREE.Mesh(new THREE.PlaneGeometry(0.2 + rnd() * 0.08, 0.38 + rnd() * 0.14), fernMat);
+        const leaf = new THREE.Mesh(groundFoliageArt.fern(0.2 + rnd() * 0.08, 0.38 + rnd() * 0.14), fernMat);
         const ang = (i / n) * Math.PI * 2 + rnd();
-        leaf.position.set(Math.cos(ang) * 0.13, 0.2, Math.sin(ang) * 0.13);
+        leaf.position.set(Math.sin(ang) * 0.1, 0.025, Math.cos(ang) * 0.1);
         leaf.rotation.y = ang;
-        leaf.rotation.x = -0.6;
+        leaf.rotation.x = -0.1;
         parts.push(leaf);
       }
       const g = mergeParts(parts, foliageMat);
+      groundFoliageArt.shade(g, 'fern');
       g.position.set(x, groundMinAround(x, z, 0.2), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'fern', x, z });
@@ -8717,19 +8731,20 @@
       for (let i = 0; i < n; i++) {
         const fx = (rnd() - 0.5) * 0.4, fz = (rnd() - 0.5) * 0.4;
         const stemH = 0.16 + rnd() * 0.14;
-        const stem = new THREE.Mesh(new THREE.PlaneGeometry(0.03, stemH), stemMat);
+        const stem = new THREE.Mesh(groundFoliageArt.flowerStem(stemH), stemMat);
         stem.position.set(fx, stemH * 0.5, fz);
         stem.rotation.y = rnd() * Math.PI;
         parts.push(stem);
-        const bloom = new THREE.Mesh(new THREE.SphereGeometry(0.07 + rnd() * 0.03, 6, 5), pal.petal);
+        const bloom = new THREE.Mesh(groundFoliageArt.flower(0.07 + rnd() * 0.03), pal.petal);
         bloom.position.set(fx, stemH + 0.02, fz);
-        bloom.scale.y = 0.55;
+        bloom.scale.y = 1;
         parts.push(bloom);
-        const center = new THREE.Mesh(new THREE.SphereGeometry(0.03, 5, 4), pal.center);
+        const center = new THREE.Mesh(new THREE.IcosahedronGeometry(0.026, 0), pal.center);
         center.position.set(fx, stemH + 0.05, fz);
         parts.push(center);
       }
       const g = mergeParts(parts, foliageMat);
+      groundFoliageArt.shade(g, 'flower');
       g.position.set(x, groundMinAround(x, z, 0.25), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'flower', x, z });
@@ -8748,7 +8763,7 @@
         const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.02 * s, 0.028 * s, stemH, 5), mushStemMat);
         stem.position.set(mx, stemH * 0.5, mz);
         parts.push(stem);
-        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.09 * s, 8, 5, 0, Math.PI * 2, 0, Math.PI * 0.55), capMat);
+        const cap = new THREE.Mesh(groundFoliageArt.mushroomCap(0.09 * s), capMat);
         cap.position.set(mx, stemH, mz);
         parts.push(cap);
         if (capMat === mushCapMats[0] && rnd() < 0.7) {
@@ -8761,6 +8776,7 @@
         }
       }
       const g = mergeParts(parts, foliageMat);
+      groundFoliageArt.shade(g, 'mushroom');
       g.position.set(x, groundMinAround(x, z, 0.15), z);
       scene.add(g);
       foliage.push({ mesh: g, kind: 'mushroom', x, z });
@@ -18974,28 +18990,16 @@
     // GP-34: UI owns this night record and presentation; no reward mutation.
     const nightRecord = createNightRecord();
     let dawnWasPaused = false;
-    const dawnScreen = mountDawn({
-      onShow: () => AudioSys.musicCue('dawn'),
-      onNextNight: () => {
-        setPaused(dawnWasPaused);
-        if (typeof loopNextNight === 'function') loopNextNight();
-        else console.info('[GP-37] Next Night selected; awaiting CL-51 loopNextNight.');
-      },
-      onMorning: () => {
-        setPaused(dawnWasPaused);
-        if (typeof loopMorning === 'function') loopMorning();
-        else console.info('[GP-37] Proceed to Morning selected; awaiting CL-51 loopMorning.');
-      }
-    });
+    const dawnScreen = mountDawn({ onShow: () => AudioSys.musicCue('dawn') });
     window.addEventListener('dw-game', ({detail}) => {
       if (detail?.type === 'run-reset') { nightRecord.reset(); dawnScreen.close(); }
       else if (detail?.type === 'alarm-started') nightRecord.begin(detail.day, matchStats.kills);
       else if (detail?.type === 'skull-pickup') { nightRecord.pickup(detail.count); dawnScreen.addPickups(detail.count); }
     });
     function showDawnSummary(summary) {
+      // D-39: a banner, not a menu. The game goes on underneath it.
       if (!summary || !gameStarted || gameOver || won) return;
-      dawnWasPaused = paused; setPaused(true);
-      if (!dawnScreen.show(summary)) setPaused(dawnWasPaused);
+      dawnScreen.show(summary);
     }
     // GP-12 / D-16: consume a confirmed planned kill once; never charge or grant Cash.
     const guardianReward = createGuardianReward({ runId: uiRunId,
@@ -20172,7 +20176,7 @@
       hqBriefingWasPaused = paused; hqBriefingOpen = true;
       setPaused(true);
       publishUI('briefing-open', { day: director.day, phase: director.phase,
-        preview, intelOwned: fieldIntelOwned,
+        preview, bounties: getBounties(), intelOwned: fieldIntelOwned,
         alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel() });
     }
     window.addEventListener('dw-game', ({ detail }) => {
@@ -20195,7 +20199,7 @@
       // CL-49 (Jerry): the camera goes up to the sun setting and the moon coming up, then down
       // onto the HQ for the flares, the strobes and the rumble. The sequence's clock starts
       // behind zero by the length of the sky shot, so the flares go up as the camera lands.
-      const cineKind = isNight ? 'night' : 'dusk';
+      const cineKind = 'alarm';   // D-39: one shot, the HQ, whatever the sky is doing
       hq.seq = { t: -ALARM_CINE_LEAD[cineKind], fired: 0 };
       skyLoop.mode = 'wave';
       startLoopCine(cineKind);
@@ -26631,15 +26635,15 @@
       camLook.lerp(wantLook, w);
     }
 
-    // === The loop's cinematics (CL-49, CL-51; Jerry 2026-09-25, D-34) ==================
-    // The alarm ('dusk'): the camera tilts up to the sun going down, sweeps over the top to
-    // the moon coming up, then drops onto the HQ as its flares go up, and hands back.
-    // Next Night ('night'): the same from a sky that is already dark: the moon, then the HQ.
-    // Proceed to Morning ('morning'): up to the sunrise; the marine is brought back to his
-    // spawn under the glare while the sky fills, then the camera comes down onto him.
-    // The marine keeps his facing throughout (updateMouseAim), and the HUD steps aside.
-    const ALARM_CINE_LEAD = { dusk: 2.7, night: 1.1 };   // sky shot before the HQ's flares
-    const ALARM_HOLD = { dusk: 3.9, night: 2.4 };        // the music waits this long (D-33)
+    // === The loop's cinematics (CL-49, CL-51; Jerry 2026-09-25, D-34; revised D-39) ======
+    // The alarm ('alarm'): no pan to the sky. The camera pulls back to a shot with the whole HQ
+    // in frame and holds there while the night comes down over it, the strobes go and the
+    // flares go up and burst, then hands back as the wave starts. The marine keeps his facing
+    // throughout (updateMouseAim), and the HUD steps aside.
+    // Proceed to Morning ('morning') is kept for the debug hook only (D-39: the dawn now comes
+    // by itself at the last kill).
+    const ALARM_CINE_LEAD = { alarm: 0.55, dusk: 0.55, night: 0.55 };   // a beat for the camera to arrive
+    const ALARM_HOLD = { alarm: 4.6, dusk: 4.6, night: 4.6 };           // the music waits this long (D-33)
     const SPAWN_X = 0, SPAWN_Z = -8.5;
     let loopCine = null;
     let loopHoldIdle = 0;
@@ -26706,13 +26710,13 @@
       look0.normalize();
       const C = { kind, t0: performance.now(), look0: look0.clone(), pos: new THREE.Vector3(), done: {}, keys: null, end: 0, out: 0.7 };
       const cur = () => C.look0;
-      if (kind === 'dusk') {
-        C.keys = [[0, cur], [0.8, () => lcSun(0.05, 0.55)], [1.9, () => lcSun(0.05, 0.55)], [2.35, () => lcOver(C)],
-          [2.95, lcMoon], [3.25, lcMoon], [3.9, () => lcHq(C)], [5.1, () => lcHq(C)]];
-        C.end = 5.1;
-      } else if (kind === 'night') {
-        C.keys = [[0, cur], [0.8, lcMoon], [1.4, lcMoon], [2.1, () => lcHq(C)], [3.3, () => lcHq(C)]];
-        C.end = 3.3;
+      if (kind === 'alarm' || kind === 'dusk' || kind === 'night') {
+        // D-39: one shot, the HQ. Pulled back from the side the camera is already on, high
+        // enough to hold the tower and the flares bursting over it.
+        C.kind = 'alarm';
+        C.keys = [[0, cur], [5.0, cur]];
+        C.end = 4.5; C.out = 0.75;
+        C.shot = alarmShotSetup();
       } else {   // morning
         C.keys = [[0, cur], [1.0, () => lcSun(0.06, 0.42)], [3.2, () => lcSun(0.06, 0.42)]];
         C.end = 3.2; C.out = 1.25;
@@ -26723,12 +26727,11 @@
     // Events along each shot, on real time (the loop runs these from updateLoopCine).
     function loopCineEvents(C, t) {
       const at = (k, s) => { if (t >= s && !C.done[k]) { C.done[k] = true; return true; } return false; };
-      if (C.kind === 'dusk') {
-        if (at('sky', 0.55)) skyTo(SKY_NIGHT_AT, 2.9);
-        if (at('rumble', 3.5)) alarmRumbleNow();
-      } else if (C.kind === 'night') {
-        if (at('home', 0.9)) { loopCineFlash('blink', 380); setTimeout(sendMarineToSpawn, 150); }
-        if (at('rumble', 1.9)) alarmRumbleNow();
+      if (C.kind === 'alarm') {
+        // The night comes down over the HQ while the camera holds on it; the ground
+        // rumbles as the flares go up.
+        if (at('sky', 0.25) && !isNight) skyTo(SKY_NIGHT_AT, 3.4);
+        if (at('rumble', 1.6)) alarmRumbleNow();
       } else {
         if (at('sky', 0.35)) skyTo(SKY_MORNING_AT, 3.3);
         if (at('home', 1.7)) { loopCineFlash('glare', 700); setTimeout(sendMarineToSpawn, 280); }
@@ -26749,13 +26752,6 @@
         if (t >= C.end + C.out) endLoopCine();
         return;
       }
-      // D-34 fallback: a held night with no card up (a card that was skipped or never came)
-      // goes on to the morning by itself.
-      if (skyLoop.mode === 'hold' && phase === 'prep' && gameStarted && !gameOver && !won && !paused &&
-          !waveFinisher && !document.body.classList.contains('dawn') && !(document.getElementById('dawnCard') || {}).open) {
-        loopHoldIdle += 1 / 60;
-        if (loopHoldIdle > 1.2) loopMorning();
-      } else loopHoldIdle = 0;
     }
     function endLoopCine() {
       const C = loopCine;
@@ -26763,11 +26759,36 @@
       document.body.classList.remove('loopcine');
       if (C && C.kind === 'morning' && skyLoop.mode !== 'free') skyLoop.mode = 'prep';
     }
+    // The alarm shot (D-39): a fixed camera that holds the HQ. Set up once, from where the
+    // play camera is when the alarm sounds, so the pull-back is along the line it already looks.
+    const ALARM_SHOT = { dist: 27, up: 10.5, lookUp: 5.4, push: 2.2 };
+    function alarmShotSetup() {
+      const hg = house.group ? house.group.position : null;
+      const hx = hg ? hg.x : 0, hz = hg ? hg.z : 0, hy = hg ? hg.y : sampleHeight(0, 0);
+      let sx = camera.position.x - hx, sz = camera.position.z - hz;
+      const sl = Math.hypot(sx, sz);
+      if (sl < 2) { sx = Math.sin(camYawCurrent + Math.PI); sz = Math.cos(camYawCurrent + Math.PI); } else { sx /= sl; sz /= sl; }
+      return { hx, hy, hz, sx, sz };
+    }
+    function alarmShotCamera(C, t, ease) {
+      const S = C.shot;
+      // A slow push in over the hold, so the frame is never dead still.
+      const u = Math.max(0, Math.min(1, t / C.end));
+      const dist = ALARM_SHOT.dist - ALARM_SHOT.push * u;
+      C.pos.set(S.hx + S.sx * dist, S.hy + ALARM_SHOT.up - u * 0.8, S.hz + S.sz * dist);
+      const g = sampleHeight(C.pos.x, C.pos.z);
+      if (C.pos.y < g + 2.5) C.pos.y = g + 2.5;
+      _lcLook.set(S.hx, S.hy + ALARM_SHOT.lookUp, S.hz);
+      const w = Math.min(ease(t / 0.7), 1 - ease((t - C.end) / C.out));
+      camera.position.lerp(C.pos, w);
+      camLook.lerp(_lcLook, w);
+    }
     function loopCineCamera() {
       const C = loopCine;
       if (!C) return;
       const t = (performance.now() - C.t0) / 1000;
       const ease = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
+      if (C.kind === 'alarm') { alarmShotCamera(C, t, ease); return; }
       // Stand a little behind and above the marine, looking along the shot.
       const K = C.keys;
       let i = 0;
@@ -26785,12 +26806,11 @@
       camera.position.lerp(C.pos, w);
       camLook.lerp(_lcLook, w);
     }
-    // Night N Complete (GP-37 wires the buttons): Next Night pulls the alarm at once;
-    // Proceed to Morning runs the sunrise shot and puts the marine back at his spawn.
+    // D-39: the Night N Complete card is a banner now (ui/dawn.js), with no buttons. These two
+    // remain as debug hooks (TT.loopNextNight, TT.loopMorning): the alarm from the panel, and
+    // the sunrise shot.
     function closeNightCard() {
-      // GP-37's buttons close the card themselves; a direct call (a key, a test) closes it here.
-      const dc = document.getElementById('dawnCard');
-      if (dc && dc.open) { try { dc.close(); } catch (_) {} document.body.classList.remove('dawn'); }
+      if (dawnScreen && dawnScreen.close) dawnScreen.close();
     }
     function loopNextNight() {
       if (!gameStarted || gameOver || won || phase !== 'prep' || hq.seq || loopCine) return false;
@@ -27491,23 +27511,22 @@
       nightRecord.observe(matchStats.kills, combo);
       const dawnSummary = finisherJustEnded ? nightRecord.finish(day) : null;
       if (day >= 1 && gameStarted) {
-        showBanner(dwText('wave.cleared', { day }), comboBest >= 5 ? dwText('wave.prepBest', { streak: comboBest }) : dwText('wave.prep'), 3, '#7cdea0');
+        // D-39: after a finisher the Night N Complete banner carries the night's numbers, so the
+        // big "DAY N CLEARED" card is only for a wave that ended some other way.
+        if (!dawnSummary) showBanner(dwText('wave.cleared', { day }), comboBest >= 5 ? dwText('wave.prepBest', { streak: comboBest }) : dwText('wave.prep'), 3, '#7cdea0');
         // CL-41: the finisher (slow motion, the relief sting) has just been the payoff; the
         // old fanfare and second slow-down only play when a wave ended without one.
         if (!finisherJustEnded) { triggerSlowMo(0.7); AudioSys.dayCleared(); }
       }
       const afterFinisher = finisherJustEnded;
       finisherJustEnded = false;
-      // CL-45: prep is daylight. D-34: after a finisher the night holds until the player picks
-      // on the Night N Complete card (loopMorning / loopNextNight). A wave that ended some
-      // other way brings the morning up quickly, as before.
+      // CL-45: prep is daylight. D-39: the last kill has already started the sweep to the
+      // morning (the 'wave-last-kill' listener above); it finishes under the new prep. A wave
+      // that ended some other way brings the morning up quickly, as before.
       if (skyLoop.mode !== 'free') {
-        if (afterFinisher && isNight) { skyLoop.mode = 'hold'; skyLoop.tween = null; loopHoldIdle = 0; }
-        else {
-          skyLoop.mode = 'prep';
-          const toDawn = skyLoop.tween && Math.abs(skyLoop.tween.to - SKY_DAWN_AT) < 1e-6;
-          if (isNight && !toDawn) skyTo(SKY_DAWN_AT, 3);
-        }
+        skyLoop.mode = 'prep';
+        const sweeping = skyLoop.tween && (Math.abs(skyLoop.tween.to - SKY_MORNING_AT) < 1e-6 || Math.abs(skyLoop.tween.to - SKY_DAWN_AT) < 1e-6);
+        if (isNight && !sweeping) skyTo(SKY_MORNING_AT, 3);
       }
       day += 1;
       resetCavePokeDay(day === 1);   // GB-44: day 1 is a new run
@@ -29755,278 +29774,44 @@
       }
     }
 
-    // The guardian. Same zombie body as everything else, dressed for the cave it lives
-    // in: the horde's builder bakes each part's colour into vertex colours and compacts
-    // the body into one mesh a joint, so re-colouring means rewriting those vertex
-    // colours — setting material.color only multiplies what is already there, which is
-    // why this used to come out as a grey cardigan rather than cave stone.
-    const _cgCol = new THREE.Color(), _cgMix = new THREE.Color();
+    // The guardian (world/cave-guardian.js): a built rig, not a re-dressed zombie. A pale
+    // long-armed crawler coloured from the cave it lives in. The group the scenes move is the
+    // outer one; its root sits at the creature's chest so "its position" is where it is, and
+    // the rig hangs off an inner pivot, scaled up and set back so the hind feet land behind.
+    const GUARDIAN_SCALE = 1.3, GUARDIAN_SETBACK = 1.15;
     function makeCaveGuardian(cave) {
-      const m = makeZombieMesh('caveguard');
-      const ud = m.userData;
       const d = (cave && cave.design) || CAVE_DESIGNS.wet;
-      const rock = new THREE.Color(d.rock), dark = new THREE.Color(d.dark), moss = new THREE.Color(d.moss);
-      // Pale stone version of the cave's own rock: it has been down there long enough to
-      // have taken the colour of the walls. Brightened by SCALING the rock colour rather
-      // than mixing it with white — three works in linear space, where a mid-brown is a
-      // small number, so lerping it 55% toward white lands on neutral grey and throws the
-      // theme away. Multiplying keeps the hue and only changes the level.
-      const pale = rock.clone().multiplyScalar(3.6).addScalar(0.06);
-      pale.r = Math.min(1, pale.r); pale.g = Math.min(1, pale.g); pale.b = Math.min(1, pale.b);
-      const mossLit = moss.clone().multiplyScalar(2.2);
-      mossLit.r = Math.min(1, mossLit.r); mossLit.g = Math.min(1, mossLit.g); mossLit.b = Math.min(1, mossLit.b);
-      m.traverse((o) => {
-        if (!o.isMesh) return;
-        const mat = o.material;
-        if (!mat) return;
-        if (mat.emissive && mat.emissive.getHex() !== 0) {
-          // The eyes take the cave's own eye tint, so a chalk cave glows differently
-          // from a wet one.
-          mat.emissive.setHex(d.eyeTint || 0xbdf3ff);
-          if (mat.color) mat.color.setHex(d.eyeTint || 0xbdf3ff);
-          return;
-        }
-        const col = o.geometry && o.geometry.attributes && o.geometry.attributes.color;
-        if (!col) { if (mat.color) mat.color.copy(pale); return; }
-        const pos = o.geometry.attributes.position;
-        let minY = Infinity, maxY = -Infinity;
-        for (let i = 0; i < pos.count; i++) { const y = pos.getY(i); if (y < minY) minY = y; if (y > maxY) maxY = y; }
-        const span = (maxY - minY) || 1;
-        for (let i = 0; i < col.count; i++) {
-          _cgCol.setRGB(col.getX(i), col.getY(i), col.getZ(i));
-          // Original luminance decides what a vertex becomes: what was skin goes to
-          // pale stone, what was clothing goes to the cave's shadow colour. Keeping that
-          // split is what stops the whole body flattening into one painted lump.
-          const lum = _cgCol.r * 0.3 + _cgCol.g * 0.59 + _cgCol.b * 0.11;
-          _cgMix.copy(dark).lerp(pale, Math.min(1, Math.max(0, (lum - 0.18) / 0.55)));
-          // Damp green gathering low down and in the creases, like the walls it sleeps on.
-          const t = (pos.getY(i) - minY) / span;
-          _cgMix.lerp(mossLit, Math.max(0, 0.55 - t * 0.5) * (0.5 + 0.5 * Math.sin(pos.getX(i) * 9.1 + pos.getZ(i) * 7.3)));
-          const grain = 0.9 + 0.2 * (((Math.sin(pos.getX(i) * 31.1 + pos.getY(i) * 17.7) * 43758.5453) % 1 + 1) % 1);
-          col.setXYZ(i, Math.min(1, _cgMix.r * grain), Math.min(1, _cgMix.g * grain), Math.min(1, _cgMix.b * grain));
-        }
-        col.needsUpdate = true;
-        if (mat.color) mat.color.setHex(0xffffff);
-        mat.roughness = 0.95;
-      });
-      if (ud.head) ud.head.rotation.z = 0.42;               // the head sits wrong on the neck
-      // Gaunt and wrong: the frame pulled thin and tall, the arms down past its knees.
-      m.scale.set(0.88, 1.14, 0.88);
-      for (const k of ['armLG', 'armRG']) if (ud[k]) ud[k].scale.set(0.8, 1.5, 0.8);
-      for (const k of ['legLG', 'legRG']) if (ud[k]) ud[k].scale.set(0.84, 1.22, 0.84);
-
-      // --- Dressing ---------------------------------------------------------------
-      // Added after the body is compacted, so these stay their own meshes and can be
-      // aimed independently. It is one creature in a six-second scene; the draw calls
-      // are affordable and the silhouette is what the whole scene rests on.
-      const boneMat = new THREE.MeshStandardMaterial({ color: pale.getHex(), roughness: 0.88 });
-      const clawMat = new THREE.MeshStandardMaterial({ color: dark.clone().lerp(pale, 0.25).getHex(), roughness: 0.55, metalness: 0.15 });
-      const crustMat = new THREE.MeshStandardMaterial({ color: d.rock, roughness: 0.96 });
-      const mossMat = new THREE.MeshStandardMaterial({ color: d.moss, roughness: 1, side: THREE.DoubleSide });
-      m.userData.extraMats = [boneMat, clawMat, crustMat, mossMat];
-      const claws = [];
-      const hands = [];
-      for (const side of [-1, 1]) {
-        const arm = side < 0 ? ud.armLG : ud.armRG;
-        if (!arm) continue;
-        // Hands: four long claws and a thumb, out of the end of each arm. The arms are
-        // scaled 0.8/1.5/0.8, so anything parented here has to be scaled back out or it
-        // arrives stretched.
-        const hand = new THREE.Group();
-        hand.position.set(0, -0.92, 0.05);
-        hand.scale.set(1 / 0.8, 1 / 1.5, 1 / 0.8);
-        arm.add(hand);
-        hands.push(hand);
-        for (let f = 0; f < 5; f++) {
-          const isThumb = f === 4;
-          const len = isThumb ? 0.16 : 0.26 + (f === 1 || f === 2 ? 0.06 : 0);
-          const claw = new THREE.Group();
-          claw.position.set((f - 1.5) * 0.045 * (isThumb ? 0 : 1) + (isThumb ? side * 0.075 : 0), 0, isThumb ? 0.02 : 0);
-          const bone1 = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.022, len * 0.55, 5), boneMat);
-          bone1.position.y = -len * 0.28;
-          claw.add(bone1);
-          const tip = new THREE.Mesh(new THREE.ConeGeometry(0.019, len * 0.5, 5), clawMat);
-          tip.position.y = -len * 0.78;
-          tip.rotation.x = 0.45;                     // hooked forward
-          tip.rotation.z = Math.PI;
-          claw.add(tip);
-          claw.rotation.x = isThumb ? 0.5 : -0.12 - f * 0.1;
-          claw.rotation.z = isThumb ? side * 0.9 : (f - 1.5) * 0.07;
-          hand.add(claw);
-          claws.push(claw);
-        }
-        // Shoulder crust: plates of the cave's own stone grown over the joint.
-        for (let i = 0; i < 3; i++) {
-          const plate = new THREE.Mesh(new THREE.DodecahedronGeometry(0.1 + Math.random() * 0.07, 0), crustMat);
-          plate.position.set(0, -0.05 - i * 0.12, -0.02 + Math.random() * 0.06);
-          plate.scale.set(1.3 / 0.8, 0.5 / 1.5, 1.2 / 0.8);
-          plate.rotation.set(Math.random(), Math.random() * 3, Math.random());
-          arm.add(plate);
-        }
-        // Weed hanging off the forearm, dripping.
-        for (let i = 0; i < 3; i++) {
-          const strand = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.26 + Math.random() * 0.2, 0.008), mossMat);
-          strand.position.set((Math.random() - 0.5) * 0.14, -0.72 - Math.random() * 0.1, 0.02 + Math.random() * 0.06);
-          strand.scale.set(1 / 0.8, 1 / 1.5, 1);
-          strand.rotation.z = (Math.random() - 0.5) * 0.3;
-          arm.add(strand);
-        }
-      }
-      if (ud.torso) {
-        // Ribs standing out of the chest, and a slab of cave crust across the back.
-        for (let i = 0; i < 4; i++) {
-          const rib = new THREE.Mesh(new THREE.TorusGeometry(0.2 - i * 0.02, 0.022, 4, 8, Math.PI * 0.8), boneMat);
-          rib.rotation.set(Math.PI / 2, 0, Math.PI * 0.4);
-          rib.position.set(0, 0.42 - i * 0.12, 0.12);
-          rib.scale.set(1, 1, 0.6);
-          ud.torso.add(rib);
-        }
-        for (let i = 0; i < 4; i++) {
-          const plate = new THREE.Mesh(new THREE.DodecahedronGeometry(0.15 + Math.random() * 0.1, 0), crustMat);
-          plate.position.set((Math.random() - 0.5) * 0.3, 0.5 - i * 0.18, -0.2 - Math.random() * 0.05);
-          plate.scale.set(1.2, 0.8, 0.5);
-          plate.rotation.set(Math.random(), Math.random() * 3, Math.random());
-          ud.torso.add(plate);
-        }
-        for (let i = 0; i < 4; i++) {
-          const strand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.4 + Math.random() * 0.3, 0.008), mossMat);
-          strand.position.set((Math.random() - 0.5) * 0.4, 0.1 - Math.random() * 0.2, -0.24);
-          strand.rotation.z = (Math.random() - 0.5) * 0.4;
-          ud.torso.add(strand);
-        }
-      }
-      if (ud.head) {
-        // The jaw is unhinged and hangs, and the skull is crusted over on one side.
-        const jaw = new THREE.Group();
-        jaw.position.set(0, -0.08, 0.06);
-        const jawBone = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.09, 0.26), boneMat);
-        jawBone.position.set(0, -0.11, 0.12);
-        jaw.add(jawBone);
-        for (let i = 0; i < 6; i++) {
-          const tooth = new THREE.Mesh(new THREE.ConeGeometry(0.022, 0.08, 4), boneMat);
-          tooth.position.set((i - 2.5) * 0.045, -0.04, 0.2);
-          tooth.rotation.x = Math.PI;
-          jaw.add(tooth);
-        }
-        ud.head.add(jaw);
-        m.userData.jaw = jaw;
-        for (let i = 0; i < 6; i++) {
-          const tooth = new THREE.Mesh(new THREE.ConeGeometry(0.02, 0.07, 4), boneMat);
-          tooth.position.set((i - 2.5) * 0.045, -0.055, 0.2);
-          ud.head.add(tooth);
-        }
-        const crust = new THREE.Mesh(new THREE.DodecahedronGeometry(0.16, 0), crustMat);
-        crust.position.set(0.14, 0.12, -0.05);
-        crust.scale.set(0.9, 1.1, 0.8);
-        ud.head.add(crust);
-      }
-      m.userData.claws = claws;
-      m.userData.hands = hands;
-      m.castShadow = true;
-      scene.add(m);
-      return m;
+      const outer = new THREE.Group();
+      const rigRoot = CaveGuardian.makeCaveGuardianRig(d);
+      rigRoot.scale.setScalar(GUARDIAN_SCALE);
+      rigRoot.position.z = -GUARDIAN_SETBACK;
+      outer.add(rigRoot);
+      outer.userData.rigRoot = rigRoot;
+      outer.userData.rig = rigRoot.userData.rig;
+      outer.userData.mats = rigRoot.userData.mats;
+      outer.userData.hands = rigRoot.userData.rig.hands;
+      outer.userData.stride = 0;
+      scene.add(outer);
+      return outer;
     }
-    // Tentacles reach for a point rather than waving on the spot. Rather than run real
-    // IK, the arm is solved as a circular arc: N equal segments each bent by the same
-    // angle trace an arc whose chord is L*sin(Nθ/2)/sin(θ/2), so binary-searching θ for
-    // the distance to the target and pointing that chord at it puts the tip on the
-    // target. It is two dozen lines, never oscillates, and an arc is the shape a
-    // tentacle actually makes.
-    const _tentX = new THREE.Vector3(1, 0, 0);
-    const _tentD = new THREE.Vector3();
-    const _tentQA = new THREE.Quaternion(), _tentQB = new THREE.Quaternion();
-    function aimTentacle(arm, target, extraCurl = 0, twist = 0) {
-      const segs = arm.userData.segs, N = segs.length, L = arm.userData.segLen;
-      _tentD.copy(target).sub(arm.position);
-      const dist = Math.min(N * L * 0.985, Math.max(N * L * 0.22, _tentD.length()));
-      let lo = 1e-4, hi = Math.PI / N * 1.9;
-      for (let i = 0; i < 18; i++) {
-        const mid = (lo + hi) / 2;
-        const chord = L * Math.sin(N * mid / 2) / Math.sin(mid / 2);
-        if (chord > dist) lo = mid; else hi = mid;
-      }
-      const theta = (lo + hi) / 2;
-      const horiz = Math.hypot(_tentD.x, _tentD.z);
-      const elev = Math.atan2(horiz, _tentD.y);            // angle off +y
-      const yaw = Math.atan2(_tentD.x, _tentD.z);
-      _tentQA.setFromAxisAngle(AXIS_Y, yaw);
-      _tentQB.setFromAxisAngle(_tentX, elev - (N - 1) * theta / 2);
-      arm.quaternion.copy(_tentQA).multiply(_tentQB);
-      for (let i = 0; i < N; i++) {
-        const seg = segs[i];
-        if (i === 0) { seg.rotation.set(0, 0, 0); continue; }
-        // The last few segments curl harder: that is the wrap, and it is what makes the
-        // tip look like it has taken hold rather than simply touched.
-        const grip = i > N - 4 ? extraCurl * (i - (N - 4)) / 3 : 0;
-        seg.rotation.x = theta + grip;
-        seg.rotation.y = twist * (i / N);
-      }
-      return theta;
+    // Every joint of the rig, with the damping rate its part gets (see rigDamp).
+    function guardianJointRate(j) {
+      const n = j.name || '';
+      if (n.startsWith('shoulder') || n.startsWith('elbow') || n.startsWith('wrist')) return RIG_RATE.arm;
+      if (n.startsWith('hip') || n.startsWith('knee') || n.startsWith('ankle')) return RIG_RATE.leg;
+      if (n === 'jaw') return RIG_RATE.jaw;
+      if (n === 'neck' || n === 'head') return RIG_RATE.head;
+      if (n.startsWith('thumb')) return RIG_RATE.claw;
+      return RIG_RATE.torso;
     }
-    // Free sway for an arm that is not holding anything.
-    function swayTentacle(arm, t, curl) {
-      const segs = arm.userData.segs, ph = arm.userData.phase;
-      arm.rotation.set(Math.sin(t * 0.7 + ph) * 0.18, arm.userData.baseYaw + Math.sin(t * 0.5 + ph) * 0.3, 0);
-      arm.quaternion.setFromEuler(arm.rotation);
-      segs.forEach((seg, i) => {
-        if (i === 0) { seg.rotation.set(0, 0, 0); return; }
-        seg.rotation.x = curl * (0.35 + i / segs.length) + Math.sin(t * 2.6 + ph + i * 0.55) * 0.06;
-        seg.rotation.y = Math.sin(t * 1.9 + ph * 1.7 + i * 0.4) * 0.05;
-      });
-    }
+    // The pit's arms (world/pit-tentacles.js): smooth tubes swept along curves that the
+    // scene moves each frame, so an arm can be run round a leg as a real coil. Always out
+    // of the abyss itself, never the player's feet.
     function makeTentacleRing() {
-      // Always out of the abyss itself — not the player's feet, which used to put half
-      // the ring on the lake bed when the hole was small.
-      const cx = LAKE_HOLE.x, cz = LAKE_HOLE.z;
-      const armR = LAKE_HOLE.r * 0.42;
-      const g = new THREE.Group();
-      const skinMat = new THREE.MeshStandardMaterial({ color: 0x16302a, roughness: 0.24, metalness: 0.16 });
-      const bellyMat = new THREE.MeshStandardMaterial({ color: 0x35564a, roughness: 0.3, metalness: 0.12 });
-      const padMat = new THREE.MeshStandardMaterial({ color: 0xa8e6cd, roughness: 0.5 });
-      g.userData.mats = [skinMat, bellyMat, padMat];
-      g.userData.arms = [];
-      const SEGS = 13, SEG_LEN = 0.82;
-      for (let k = 0; k < 7; k++) {
-        const a = k * (Math.PI * 2 / 7) + 0.35;
-        const arm = new THREE.Group();
-        arm.position.set(cx + Math.cos(a) * armR, LAKE.level - 11.5, cz + Math.sin(a) * armR);
-        const baseYaw = Math.atan2(cx - arm.position.x, cz - arm.position.z);
-        arm.rotation.y = baseYaw;
-        let parent = arm;
-        const segs = [];
-        for (let i = 0; i < SEGS; i++) {
-          const r0 = 0.4 * (1 - i / (SEGS + 2.5)), r1 = 0.4 * (1 - (i + 1) / (SEGS + 2.5));
-          const seg = new THREE.Group();
-          seg.position.y = i === 0 ? 0 : SEG_LEN;
-          const mesh = new THREE.Mesh(new THREE.CylinderGeometry(r1, r0, SEG_LEN * 1.04, 8), skinMat);
-          mesh.position.y = SEG_LEN * 0.5;
-          mesh.castShadow = true;
-          seg.add(mesh);
-          // Pale underside down the inner face, and two rows of suckers along it — a
-          // bare tube reads as a hose, and the suckers are what make it an animal.
-          if (i < SEGS - 1) {
-            const belly = new THREE.Mesh(new THREE.CylinderGeometry(r1 * 0.72, r0 * 0.72, SEG_LEN, 6, 1, false, -0.7, 1.4), bellyMat);
-            belly.position.set(0, SEG_LEN * 0.5, r0 * 0.34);
-            seg.add(belly);
-          }
-          if (i >= 1 && i < SEGS - 1) {
-            for (const sx of [-1, 1]) {
-              const pad = new THREE.Mesh(new THREE.SphereGeometry(0.052 * (1 - i / (SEGS + 4)), 6, 5), padMat);
-              pad.position.set(sx * r0 * 0.4, SEG_LEN * (i % 2 ? 0.32 : 0.62), r0 * 0.78);
-              pad.scale.set(1, 1, 0.55);
-              seg.add(pad);
-            }
-          }
-          parent.add(seg); parent = seg; segs.push(seg);
-        }
-        arm.userData.segs = segs;
-        arm.userData.segLen = SEG_LEN;
-        arm.userData.phase = k * 1.71;
-        arm.userData.baseYaw = baseYaw;
-        arm.userData.restY = LAKE.level - 11.5;
-        arm.visible = false;   // CL-20: shown from the burst on (updateTentacleKill)
-        g.add(arm); g.userData.arms.push(arm);
-      }
+      const g = PitArms.makePitTentacles({
+        cx: LAKE_HOLE.x, cz: LAKE_HOLE.z, floorY: LAKE.level - 11.5, ringR: LAKE_HOLE.r * 0.42,
+        count: 7, glow: 0x9eeeff, waterY: LAKE.level
+      });
       scene.add(g);
       return g;
     }
@@ -30108,7 +29893,7 @@
         // instead of across the hole and over his head.
         const bearing = Math.atan2(sk.p0.x - LAKE_HOLE.x, sk.p0.z - LAKE_HOLE.z);
         const off = (a) => {
-          const d = Math.abs(Math.atan2(a.position.x - LAKE_HOLE.x, a.position.z - LAKE_HOLE.z) - bearing) % (Math.PI * 2);
+          const d = Math.abs(Math.atan2(a.base.x - LAKE_HOLE.x, a.base.z - LAKE_HOLE.z) - bearing) % (Math.PI * 2);
           return Math.min(d, Math.PI * 2 - d);
         };
         const arms = sk.ring.userData.arms.slice().sort((A, B) => off(A) - off(B));
@@ -30153,25 +29938,15 @@
     }
     const RIG_RATE = { arm: 11, leg: 15, torso: 7, head: 9, jaw: 16, claw: 14 };
     const RIG_MAX_TURN = 12;   // rad/s, 0.2 rad a frame at 60 fps
-    function dampGuardian(g, dt, reset, legRate) {
-      if (!g) return;
-      const u = g.userData;
-      rigDamp(u.armLG, dt, RIG_RATE.arm, reset); rigDamp(u.armRG, dt, RIG_RATE.arm, reset);
-      rigDamp(u.legLG, dt, legRate || RIG_RATE.leg, reset); rigDamp(u.legRG, dt, legRate || RIG_RATE.leg, reset);
-      rigDamp(u.torso, dt, RIG_RATE.torso, reset); rigDamp(u.head, dt, RIG_RATE.head, reset); rigDamp(u.jaw, dt, RIG_RATE.jaw, reset);
-      for (const c of u.claws || []) rigDamp(c, dt, RIG_RATE.claw, reset);
-    }
-    function dampTentacle(arm, dt, reset) {
-      rigDamp(arm, dt, 10, reset);
-      const segs = arm.userData.segs, N = segs.length;
-      for (let i = 1; i < N; i++) rigDamp(segs[i], dt, 24 - 13 * i / N, reset);   // the tip trails the root
+    function dampGuardian(g, dt, reset, rateAll) {
+      if (!g || !g.userData.rig) return;
+      for (const j of g.userData.rig.joints) rigDamp(j, dt, rateAll || guardianJointRate(j), reset);
     }
     function dampScriptedRigs(sk, dt, cut) {
       const ud = marine.userData;
       for (const k of SK_PARTS) if (ud[k]) rigDamp(ud[k], dt, (k === 'torsoG' || k === 'headG') ? 10 : 12, cut);
       rigDamp(marine, dt, 12, cut);
       if (sk.guardian) dampGuardian(sk.guardian, dt, cut);
-      if (sk.ring) for (const arm of sk.ring.userData.arms) dampTentacle(arm, dt, cut || !arm.userData._rdq);
     }
     // The jolt of being taken: up fast, gone in half a second.
     function skYank(tau) { return tau <= 0 ? 0 : Math.min(1, tau * 12) * Math.exp(-tau * 5); }
@@ -30285,7 +30060,7 @@
         // three metres back inside the mouth with arms a metre long, so the grab was a
         // creature gesturing at a man well beyond its reach. It lunges to just inside the
         // lip, takes the ankle there, and only then hauls itself and him backwards.
-        const gp = sk.at(sk.side * 0.5 * (1 - drag), -3.4 + reach * 2.3 - drag * 3.1 - gone * 1.6);
+        const gp = sk.at(sk.side * 0.5 * (1 - drag), -3.4 + reach * 2.3 - drag * 4.0 - gone * 1.6);
         gp.y = Math.max(sampleHeight(gp.x, gp.z), c.gy);
         g.position.copy(gp);
         // Turns as it hauls, so it is dragging him rather than walking backwards.
@@ -30306,36 +30081,19 @@
         marine.rotation.set(-drop * (Math.PI / 2 - 0.22), 0, Math.sin(t * 9) * 0.16 * (1 - gone) * drop);
         marine.position.y = -ROLL_PIVOT_Y + drop * 0.34;
         poseMarineGrabbed(t, 1 - skPh(t, 2.3, 3.1), sk.side, skYank(t - 0.5), false);   // GB-54: was poseMarine(1), then limp in one frame
-        // Both hands take the leg: the near one first, the second once it has stepped out.
+        // The leg it has, and the rig going for it: a pounce out of the dark onto the ankle,
+        // then it turns and hauls him in on three limbs (world/cave-guardian.js).
         const ankle = _ckV2.set(
-          boots.x + sk.fx * 0.34 * drop, boots.y + (1 - drop) * 0.15 + 0.12, boots.z + sk.fz * 0.34 * drop);
-        const armReach = (arm, amt, lateral) => {
-          if (!arm) return;
-          // The arms hang down the body, so aiming them means working in the guardian's
-          // own frame: a hanging arm swings FORWARD on negative x (rotating about +x
-          // takes -y to -z, i.e. behind it) and sideways on z. Getting that sign wrong is
-          // what left it standing there with its arms by its sides.
-          arm.updateMatrixWorld(true);
-          arm.getWorldPosition(_ckShoulder);
-          const dx = ankle.x - _ckShoulder.x, dy = ankle.y - _ckShoulder.y, dz = ankle.z - _ckShoulder.z;
-          const cy = Math.cos(g.rotation.y), sy = Math.sin(g.rotation.y);
-          const lx = dx * cy - dz * sy + lateral;
-          const lz = dx * sy + dz * cy;
-          const down = Math.max(0.15, -dy);
-          arm.rotation.x = -Math.atan2(lz, down) * amt;
-          arm.rotation.z = Math.atan2(lx, down) * amt;
-          arm.rotation.y = 0;
-        };
-        armReach(sk.side < 0 ? gud.armLG : gud.armRG, reach, 0);
-        armReach(sk.side < 0 ? gud.armRG : gud.armLG, skPh(t, 0.8, 1.3), -sk.side * 0.2);
-        // Claws close as it takes hold.
-        for (const claw of gud.claws || []) claw.rotation.x = -0.12 - Math.min(1, reach + yank) * 0.9;
-        if (gud.jaw) gud.jaw.rotation.x = 0.18 + Math.abs(Math.sin(pt * 3.2)) * 0.5;
-        if (gud.head) gud.head.rotation.x = -0.12 + drag * 0.22;
-        // Braced legs, digging in as it pulls.
-        if (gud.legLG) gud.legLG.rotation.x = -0.35 * step + Math.sin(pt * 7) * 0.22 * drag;
-        if (gud.legRG) gud.legRG.rotation.x = 0.3 * step - Math.sin(pt * 7) * 0.22 * drag;
-        if (gud.torso) gud.torso.rotation.x = 0.3 * reach - drag * 0.3;
+          boots.x + sk.fx * 0.34 * drop, boots.y + (1 - drop) * 0.15 + 0.22, boots.z + sk.fz * 0.34 * drop);
+        const S = sk.side < 0 ? 'L' : 'R';
+        const rigG = g.userData.rigRoot, R = g.userData.rig;
+        if (t < 1.0) {
+          _cgLook.copy(player.position); _cgLook.y += 1.2;
+          CaveGuardian.guardianRearGrab(rigG, R, t, S, ankle, reach, Math.min(1, yank * 1.5 + reach * 0.3), _cgLook);
+        } else {
+          _cgLook.copy(sk.at(0, -6, 1.2));
+          CaveGuardian.guardianDragWalk(rigG, R, t, S, ankle, (t - 1) * 7, Math.max(0.4, drag), _cgLook);
+        }
         // Boots ploughing the dirt, and the blood going in with him.
         if (drag > 0.02 && drag < 1) {
           if (Math.random() < 0.6) spawnDust(boots.x, boots.y - 0.1, boots.z, 2);
@@ -30361,17 +30119,23 @@
         gp.y = Math.max(sampleHeight(gp.x, gp.z), c.gy);
         g.position.copy(gp);
         g.rotation.y = c.yaw + Math.PI * leave;
-        if (gud.torso) gud.torso.rotation.x = -0.15 + wind * 0.4 - toss * 0.55;
-        if (gud.head) gud.head.rotation.x = -0.1 - wind * 0.25;
-        if (gud.jaw) gud.jaw.rotation.x = 0.2 + wind * 0.55;
-        // Arms: carrying low, hauled back over the shoulder, then whipped through.
-        const armX = -0.5 - walkOut * 0.5 - wind * 1.9 + toss * 3.0;
-        if (gud.armLG) { gud.armLG.rotation.set(armX, 0, -0.22); }
-        if (gud.armRG) { gud.armRG.rotation.set(armX, 0, 0.22); }
-        for (const claw of gud.claws || []) claw.rotation.x = -0.12 - (toss > 0.35 ? 0 : 0.85);
-        const stride = (leave > 0 || walkOut < 1) ? Math.sin(pt * 8) * 0.42 : 0;
-        if (gud.legLG) gud.legLG.rotation.x = stride;
-        if (gud.legRG) gud.legRG.rotation.x = -stride;
+        // The rig: out on its hind legs with the body held low in both hands, hauled back over
+        // its head, thrown, then it turns and goes back in.
+        const rigG = g.userData.rigRoot, R = g.userData.rig;
+        _cgFwd.set(Math.sin(g.rotation.y), 0, Math.cos(g.rotation.y));
+        _cgCarry.copy(gp).addScaledVector(_cgFwd, 1.1); _cgCarry.y += 1.55;
+        const walking = (walkOut > 0 && walkOut < 1) || (leave > 0 && leave < 1);
+        const ph = walking ? pt * 7 : 0;
+        if (leave > 0) {
+          _cgLook.copy(sk.at(0, -8, 1.5));
+          CaveGuardian.guardianWalkUpright(rigG, R, pt, ph, null, _cgLook);
+        } else if (wind > 0 || toss > 0) {
+          _cgLook.copy(sk.landAt); _cgLook.y += 1;
+          CaveGuardian.guardianCarryThrow(rigG, R, pt, _cgCarry, wind, toss, _cgLook);
+        } else {
+          _cgLook.copy(sk.at(0, 8, 1.2));
+          CaveGuardian.guardianWalkUpright(rigG, R, pt, ph, _cgCarry, _cgLook);
+        }
         const rm = sk.remains;
         if (toss <= 0) {
           // Hung off the midpoint of its actual hands rather than parked at a guessed
@@ -30457,7 +30221,9 @@
         // Where he is: dragged from where he was swimming toward the centre, then under.
         const px = p0.x + (LAKE_HOLE.x - p0.x) * haul;
         const pz = p0.z + (LAKE_HOLE.z - p0.z) * haul;
-        const py = p0.y - sink * 5.4;
+        // The yank hauls him up onto the surface (a coil a metre under the water is a coil
+        // nobody sees), he is dragged along it, and then he goes under.
+        const py = p0.y + 0.6 * yank * (1 - sink) - sink * 5.4;
         player.position.set(px, py, pz);
         // Hauled by a leg, so he tips head-back and rolls: the body is dragged, not
         // carried. He fights it until he is under.
@@ -30472,43 +30238,38 @@
         // ankle is really a metre down, and a coil that happens a metre under the water
         // is a coil nobody sees.
         sk.ankle.set(px - sk.inDir.x * 0.26, lvl - 0.12, pz - sk.inDir.z * 0.26);
+        // The arms (world/pit-tentacles.js). The two on his side of the pit take him: the
+        // first runs a coil round his shins, the second round his chest; the rest stand up out
+        // of the water and lean in over the hole. All of it goes down with him.
+        let tpx = LAKE_HOLE.x - px, tpz = LAKE_HOLE.z - pz;
+        const tpl = Math.hypot(tpx, tpz) || 1; tpx /= tpl; tpz /= tpl;
+        _tentAxis.set(tpx, 0, tpz);
+        // Legs: they come to the surface as he is tipped over. Chest: half out of the water.
+        _tentGrab1.set(px + tpx * (0.55 + 0.25 * yank), lvl - 0.25 + 0.3 * yank - sink * 4.2, pz + tpz * (0.55 + 0.25 * yank));
+        _tentGrab2.set(px - tpx * 0.15, lvl - 0.2 - sink * 4.6, pz - tpz * 0.15);
         const arms = sk.ring.userData.arms;
         for (let i = 0; i < arms.length; i++) {
           const arm = arms[i];
-          // CL-20: nothing of it shows before the water bursts.
-          arm.visible = t >= 0.05;
-          const holder = sk.grabArms.indexOf(arm) >= 0;
-          const lead = holder ? 1 : 0.55 + 0.45 * Math.abs(Math.sin(arm.userData.phase));
-          // Out of the abyss, and back down into it as it hauls him under. GB-54: they break the
-          // water one after another, and overshoot and settle back (easeOutBack) like something
-          // with weight; the ones holding him come first.
-          const bu = Math.min(1, Math.max(0, (t - (holder ? 0 : 0.07 * (i % 4))) / 0.55));
+          const holder = sk.grabArms.indexOf(arm);
+          // GB-54: they break the water one after another, and overshoot and settle back
+          // (easeOutBack) like something with weight; the ones holding him come first.
+          const bu = Math.min(1, Math.max(0, (t - (holder >= 0 ? 0 : 0.07 * (i % 4))) / 0.6));
           const bo = bu >= 1 ? 1 : 1 + 2.4 * Math.pow(bu - 1, 3) + 1.4 * Math.pow(bu - 1, 2);
-          arm.position.y = arm.userData.restY + bo * (8.6 * lead) - sink * 7.4;
-          const idleCurl = 0.1 + breach * 0.14 + sink * 0.1;
-          const w = !holder || reach <= 0.02 ? 0 : (arm === sk.grabArms[0] ? reach : skPh(t, 0.75, 1.3));
-          if (w > 0.02) {
-            // Second arm takes the other leg: a little further round him and higher.
-            const mine = arm === sk.grabArms[0] ? sk.ankle : _tentGrab2.set(
-              sk.ankle.x + sk.inDir.z * 0.4, sk.ankle.y + 0.22, sk.ankle.z - sk.inDir.x * 0.4);
-            // GB-54: a real blend out of the sway into the reach (it used to jump to the full reach
-            // at w 0.06, and the second arm froze until its own reach began).
-            swayTentacle(arm, t, idleCurl);
-            tentSnap(arm);
-            // Overshoot the target as it takes hold: aiming exactly at the leg leaves the tip
-            // touching it, while reaching past and curling hard wraps it.
-            const hold = Math.min(1, yank * 1.4 + haul);
-            _tentPast.copy(mine);
-            _tentPast.x += sk.inDir.x * 0.45 * hold;
-            _tentPast.z += sk.inDir.z * 0.45 * hold;
-            _tentPast.y += 0.12 * hold;
-            aimTentacle(arm, _tentPast, 0.55 + hold * 1.9, Math.sin(t * 2 + arm.userData.phase) * 0.05);
-            tentBlend(arm, w);
-            if (w < 1 && Math.random() < 0.5) spawnSplash(mine.x, lvl, mine.z, 3, 0.9);
-          } else {
-            swayTentacle(arm, t, idleCurl);
-          }
-          if (breach > 0.05 && breach < 1 && Math.random() < 0.55) spawnSplash(arm.position.x, lvl, arm.position.z, 3, 0.8);
+          // They wait just under the surface (the water hides them) and burst the last stretch.
+          const full = holder >= 0 ? 1 : 0.8 + 0.2 * Math.abs(Math.sin(arm.phase));
+          const rise = (0.7 + (full - 0.7) * bo) * (1 - sink * 0.9);
+          PitArms.tentacleIdle(arm, t, rise);
+          PitArms.tentacleShow(arm, t >= 0.05);   // CL-20: nothing of it shows before the water bursts
+          if (holder === 0) {
+            PitArms.tentacleReach(arm, t, _tentGrab1, { centre: _tentGrab1, axis: _tentAxis, r: 0.21 + 0.06 * (1 - yank), turns: 2.2, len: 0.6, start: 0 }, reach);
+            if (reach > 0.02 && reach < 1 && Math.random() < 0.5) spawnSplash(_tentGrab1.x, lvl, _tentGrab1.z, 3, 0.9);
+          } else if (holder === 1) {
+            const w2 = skPh(t, 0.8, 1.35);
+            PitArms.tentacleReach(arm, t, _tentGrab2, { centre: _tentGrab2, axis: _tentAxis, r: 0.4, turns: 1.6, len: 0.7, start: 1.5 }, w2);
+            if (w2 > 0.02 && w2 < 1 && Math.random() < 0.5) spawnSplash(_tentGrab2.x, lvl, _tentGrab2.z, 3, 0.9);
+          } else PitArms.tentacleSettle(arm);
+          PitArms.tentacleUpdate(arm, t);
+          if (breach > 0.05 && breach < 1 && Math.random() < 0.55) spawnSplash(arm.base.x, lvl, arm.base.z, 3, 0.8);
         }
         // The water where he is being dragged: a wake, then the swallow.
         if (haul > 0 && haul < 1 && Math.random() < 0.7) spawnSplash(px, lvl, pz, 4, 1.15);
@@ -30555,23 +30316,7 @@
         sk.look.set(LAKE_HOLE.x, lvl + 0.04, LAKE_HOLE.z);
       }
     }
-    const _tentGrab2 = new THREE.Vector3(), _tentPast = new THREE.Vector3();
-    // GB-54: hold an arm's sway pose while its reach is solved, then blend the two.
-    const _tentSway = [], _tentTmp = new THREE.Quaternion();
-    function tentSnap(arm) {
-      const segs = arm.userData.segs;
-      for (let i = 0; i <= segs.length; i++) { const q = i === 0 ? arm.quaternion : segs[i - 1].quaternion; (_tentSway[i] || (_tentSway[i] = new THREE.Quaternion())).copy(q); }
-    }
-    function tentBlend(arm, w) {
-      if (w >= 1) return;
-      const segs = arm.userData.segs;
-      for (let i = 0; i <= segs.length; i++) {
-        const q = i === 0 ? arm.quaternion : segs[i - 1].quaternion, s = _tentSway[i];
-        _tentTmp.copy(q);
-        if (s.x * _tentTmp.x + s.y * _tentTmp.y + s.z * _tentTmp.z + s.w * _tentTmp.w < 0) _tentTmp.set(-_tentTmp.x, -_tentTmp.y, -_tentTmp.z, -_tentTmp.w);
-        q.copy(s).slerp(_tentTmp, w);
-      }
-    }
+    const _tentGrab1 = new THREE.Vector3(), _tentGrab2 = new THREE.Vector3(), _tentAxis = new THREE.Vector3();
     function scriptedKillCamera() {
       if (!scriptedKill) return false;
       camera.position.copy(scriptedKill.cam);
@@ -30865,7 +30610,7 @@
     // the camera follows it hauling him back to the mouth, then the thrown-out beats. This
     // path never plays the crawl-in snatch (that stays the walk-in grab, t36).
     const CAVE_CHASE_SPEED = 27, CAVE_CHASE_OUT_DELAY = 0.35, CAVE_CHASE_GRAB_R = 1.5, CAVE_CHASE_MAX_T = 6;
-    const CAVE_DRAG_SPEED = 6.5, CAVE_DRAG_GRAB_T = 0.45, CAVE_DRAG_LEAD = 1.35;
+    const CAVE_DRAG_SPEED = 6.5, CAVE_DRAG_GRAB_T = 0.45, CAVE_DRAG_LEAD = 2.2;   // the lead is an arm's length: the rig's hind feet sit 1.15 m behind its origin
     let caveChase = null;
     function startCaveChase(caveIndex, c) {
       abortCaveChase();
@@ -30975,29 +30720,25 @@
       }
       g.position.y = caveGroundAt(c, g.position.x, g.position.z);
       if (d > 1e-4) g.rotation.y = Math.atan2(dx, dz);
-      // Flat out: long strides, both arms out in front for him, leaning into it.
-      const ph = ch.ran * 1.6, run = going ? 1 : 0;
-      if (gud.legLG) gud.legLG.rotation.x = Math.sin(ph) * 0.95 * run;
-      if (gud.legRG) gud.legRG.rotation.x = -Math.sin(ph) * 0.95 * run;
-      if (gud.armLG) gud.armLG.rotation.set(-1.25 + Math.sin(ph) * 0.25 * run, 0, -0.12);
-      if (gud.armRG) gud.armRG.rotation.set(-1.25 - Math.sin(ph) * 0.25 * run, 0, 0.12);
-      for (const claw of gud.claws || []) claw.rotation.x = -0.35;
-      if (gud.torso) gud.torso.rotation.x = 0.38 * run;
-      if (gud.jaw) gud.jaw.rotation.x = 0.35 + Math.abs(Math.sin(ch.t * 9)) * 0.35;
-      // GB-54: weight in the run. Each footfall throws up dirt and, close by, shakes the camera, and
-      // the body drops onto every stride instead of gliding. The arms and torso are damped (legs
-      // barely: at this speed a stride is a blur).
+      // Flat out: a bound on all fours (world/cave-guardian.js), the stride read off the
+      // distance run so its hands land where the ground goes by. It winds up out of the
+      // mouth over the first strides rather than starting at full stretch.
+      const ph = ch.ran * 0.75;   // a bound every 8.4 m: three a second flat out
+      ch.runAmt = (ch.runAmt || 0) + ((going ? 1 : 0) - (ch.runAmt || 0)) * Math.min(1, dt * 5);
+      _cgLook.copy(player.position); _cgLook.y += 1.0;
+      CaveGuardian.guardianGallop(g.userData.rigRoot, g.userData.rig, ph, ch.runAmt, ch.t, _cgLook);
+      // GB-54: weight in the run. Each bound throws up dirt as the hands land and, close by,
+      // shakes the camera.
       if (going) {
         const s = Math.sin(ph);
         if (ch.lastStride !== undefined && (s >= 0) !== (ch.lastStride >= 0)) {
-          spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 4);
-          addShake(0.16 * Math.max(0, 1 - d / 22));
+          spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 5);
+          addShake(0.18 * Math.max(0, 1 - d / 22));
         }
         ch.lastStride = s;
-        g.position.y += Math.abs(Math.cos(ph)) * 0.09;
-        if (Math.random() < 0.25) spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 1);
+        if (Math.random() < 0.3) spawnDust(g.position.x, g.position.y + 0.05, g.position.z, 1);
       }
-      dampGuardian(g, dt, false, 60);
+      dampGuardian(g, dt, false, 40);   // a light hand on the run: the clamp in rigDamp keeps a bound from snapping
       // Contact: a hand on the leg. Up a tower or on a roof only buys him the few seconds
       // before CAVE_CHASE_MAX_T; it is immortal and it does not give up.
       const dy = Math.abs(player.position.y - g.position.y);
@@ -31042,20 +30783,7 @@
       spawnDust(sk.dragFrom.x, sk.dragFrom.y, sk.dragFrom.z, 7);
       sk.cam.copy(camera.position);
     }
-    function caveArmAim(g, arm, target, amt, lateral) {
-      // Same frame maths as the snatch's armReach: a hanging arm swings forward on -x.
-      if (!arm) return;
-      arm.updateMatrixWorld(true);
-      arm.getWorldPosition(_ckShoulder);
-      const dx = target.x - _ckShoulder.x, dy = target.y - _ckShoulder.y, dz = target.z - _ckShoulder.z;
-      const cy = Math.cos(g.rotation.y), sy = Math.sin(g.rotation.y);
-      const lx = dx * cy - dz * sy + lateral;
-      const lz = dx * sy + dz * cy;
-      const down = Math.max(0.15, -dy);
-      arm.rotation.x = -Math.atan2(lz, down) * amt;
-      arm.rotation.z = Math.atan2(lx, down) * amt;
-      arm.rotation.y = 0;
-    }
+    const _cgLook = new THREE.Vector3(), _cgCarry = new THREE.Vector3(), _cgFwd = new THREE.Vector3();
     const _cdBoots = new THREE.Vector3(), _cdLead = new THREE.Vector3(), _cdG = new THREE.Vector3();
     const _cdAnkle = new THREE.Vector3(), _cdCam = new THREE.Vector3(), _cdLook = new THREE.Vector3();
     function updateCaveDrag(sk, t) {
@@ -31091,18 +30819,18 @@
       marine.rotation.set(-grab * (Math.PI / 2 - 0.22), 0, Math.sin(clock * 9) * 0.16 * grab);
       marine.position.y = -ROLL_PIVOT_Y + grab * 0.34;
       poseMarineGrabbed(clock, 1 - inP, sk.side, skYank(clock), false);   // GB-54
-      const ankle = _cdAnkle.set(boots.x - hx * 0.34 * grab, boots.y + (1 - grab) * 0.15 + 0.12, boots.z - hz * 0.34 * grab);
-      caveArmAim(g, sk.side < 0 ? gud.armLG : gud.armRG, ankle, 1, 0);
-      const other = sk.side < 0 ? gud.armRG : gud.armLG;
-      const stride = hu > 0 && hu < 1 ? Math.sin(clock * 9) : 0;
-      if (other) other.rotation.set(-0.5 + stride * 0.55, 0, sk.side * 0.18);
-      for (const claw of gud.claws || []) claw.rotation.x = -1.0;
-      if (gud.legLG) gud.legLG.rotation.x = stride * 0.6;
-      if (gud.legRG) gud.legRG.rotation.x = -stride * 0.6;
-      // GB-54: it leans into each heave, head down, pulling.
-      if (gud.torso) gud.torso.rotation.x = 0.35 * grab + 0.1 * Math.abs(stride);
-      if (gud.head) gud.head.rotation.x = -0.1 + 0.12 * grab;
-      if (gud.jaw) gud.jaw.rotation.x = 0.2 + Math.abs(Math.sin(clock * 3.2)) * 0.5;
+      const ankle = _cdAnkle.set(boots.x - hx * 0.34 * grab, boots.y + (1 - grab) * 0.15 + 0.22, boots.z - hz * 0.34 * grab);
+      // The rig (world/cave-guardian.js): the catch is a pounce onto the leg, then it turns
+      // for the mouth and goes on three limbs with the leg held out behind it.
+      const S = sk.side < 0 ? 'L' : 'R';
+      const rigG = g.userData.rigRoot, R = g.userData.rig;
+      if (clock < CAVE_DRAG_GRAB_T * 0.7) {
+        _cgLook.copy(player.position); _cgLook.y += 1.2;
+        CaveGuardian.guardianRearGrab(rigG, R, clock, S, ankle, clock / (CAVE_DRAG_GRAB_T * 0.7), Math.min(1, clock / (CAVE_DRAG_GRAB_T * 0.5)), _cgLook);
+      } else {
+        _cgLook.copy(sk.dragIn); _cgLook.y += 1.0;
+        CaveGuardian.guardianDragWalk(rigG, R, clock, S, ankle, clock * 7, Math.max(0.4, haul), _cgLook);
+      }
       // Boots ploughing the dirt, the blood going with him.
       if (hu > 0.02 && hu < 1) {
         if (Math.random() < 0.6) spawnDust(boots.x, boots.y - 0.1, boots.z, 2);
@@ -32099,6 +31827,24 @@
             t.x, t.z, t.canopyRadius * 0.9, baseY + t.canopyBottom * 0.65, baseY + t.canopyTop) !== null) return true;
         if (segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z,
             t.x, t.z, t.trunkRadius + 0.12, baseY, baseY + t.canopyBottom + 0.4) !== null) return true;
+      }
+      // GB-58: the line also sees what else stops his rounds - his own pieces (bar the railings
+      // and wire his rounds pass through) and the landmark solids. A spider behind his wall read a
+      // clear line, held its distance and spat, and every round went into the wall. A hit in the
+      // last 0.3 m is the thing aimed at, not something in the way.
+      const lineLen = Math.hypot(dx, dy, dz), nearEnd = 1 - 0.3 / Math.max(0.3, lineLen);
+      for (const b of builds) {
+        if (b.hp <= 0 || !b.mesh || b.type === 'railing' || b.type === 'wire') continue;
+        const r = (isEdgeKind(b.type) ? BUILD_GRID * 0.75 : (b.radius || 0.6)) + 0.1;
+        if (b.x + r < segMinX || b.x - r > segMaxX || b.z + r < segMinZ || b.z - r > segMaxZ) continue;
+        const h = segmentHitsBuild(b, from.x, from.y, from.z, to.x, to.y, to.z);
+        if (h !== null && h < nearEnd) return true;
+      }
+      for (const ws of worldSolids) {
+        if (ws.x + ws.radius < segMinX || ws.x - ws.radius > segMaxX ||
+            ws.z + ws.radius < segMinZ || ws.z - ws.radius > segMaxZ) continue;
+        const h = segmentHitsCylinder(from.x, from.y, from.z, to.x, to.y, to.z, ws.x, ws.z, ws.radius, ws.y0, ws.y1);
+        if (h !== null && h < nearEnd) return true;
       }
       return false;
     }
@@ -39199,7 +38945,7 @@ live++;
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), projectiles, getMuzzleWorld, /* GB-58: nightsim's stall probe */ getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,

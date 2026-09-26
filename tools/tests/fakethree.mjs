@@ -619,3 +619,21 @@ export const DoubleSide = 2, BackSide = 1, FrontSide = 0, SRGBColorSpace = 'srgb
 export const Node = makeStub('Node');
 export default {};
 export const LatheGeometry = geoClass((points = [], segs = 12, phiStart = 0, phiLen = Math.PI * 2) => { const pts = points.length ? points : [{ x: 0, y: 0 }, { x: 1, y: 1 }]; return gridGeo(Math.max(3, segs | 0), Math.max(1, pts.length - 1), (u, v) => { const k = Math.min(pts.length - 1, Math.round(v * (pts.length - 1))); const p = pts[k]; const ph = phiStart + u * phiLen; return [p.x * Math.sin(ph), p.y, p.x * Math.cos(ph)]; }); });
+
+// CL-56: the pit's arms sweep tubes along Catmull-Rom curves (world/pit-tentacles.js). A
+// uniform spline is close enough for the checks, which only ask where a tip is.
+export class CatmullRomCurve3 {
+  constructor(points = [], closed = false, curveType = 'centripetal', tension = 0.5) { this.points = points; this.closed = closed; this.curveType = curveType; this.tension = tension; this.isCatmullRomCurve3 = true; }
+  getPoint(t, out = new Vector3()) {
+    const p = this.points, n = p.length;
+    if (!n) return out.set(0, 0, 0);
+    if (n === 1) return out.copy(p[0]);
+    const s = Math.max(0, Math.min(1, t)) * (n - 1);
+    let i = Math.floor(s); if (i >= n - 1) i = n - 2;
+    const u = s - i;
+    const p0 = p[Math.max(0, i - 1)], p1 = p[i], p2 = p[i + 1], p3 = p[Math.min(n - 1, i + 2)];
+    const c = (a, b, d, e) => 0.5 * ((2 * b) + (-a + d) * u + (2 * a - 5 * b + 4 * d - e) * u * u + (-a + 3 * b - 3 * d + e) * u * u * u);
+    return out.set(c(p0.x, p1.x, p2.x, p3.x), c(p0.y, p1.y, p2.y, p3.y), c(p0.z, p1.z, p2.z, p3.z));
+  }
+  getPoints(n = 5) { const r = []; for (let i = 0; i <= n; i++) r.push(this.getPoint(i / n)); return r; }
+}

@@ -47,7 +47,15 @@
   const M = () => T.marine.userData;
   const MK = ['armLG', 'armRG', 'elbowLG', 'elbowRG', 'legLG', 'legRG', 'kneeLG', 'kneeRG', 'torsoG', 'headG'];
   const marineJ = () => MK.filter((k) => M()[k]).map((k) => ['m.' + k, M()[k]]).concat([['m.root', T.marine], ['player', T.player]]);
-  const guardJ = (g, legs) => { const u = g.userData; return ['armLG', 'armRG', 'torso', 'head'].concat(legs ? ['legLG', 'legRG'] : []).filter((k) => u[k]).map((k) => ['g.' + k, u[k]]); };
+  // CL-56: the guardian is a rig (world/cave-guardian.js) whose joints are named groups.
+  const guardJ = (g, legs) => {
+    const u = g.userData;
+    if (u.rig) return u.rig.joints.filter((j) => legs || !/^(hip|knee|ankle)/.test(j.name)).map((j) => ['g.' + j.name, j]);
+    return ['armLG', 'armRG', 'torso', 'head'].concat(legs ? ['legLG', 'legRG'] : []).filter((k) => u[k]).map((k) => ['g.' + k, u[k]]);
+  };
+  // CL-56: the pit's arms are tubes on curves (world/pit-tentacles.js): no joints to watch, so
+  // the snapping check is on the tip: how far it moves in one 60 fps frame of game time.
+  const tipOf = (a, out) => a.curve ? a.curve.getPoint(1, out || new T.THREE.Vector3()) : a.position;
   const fmt = (w) => w.a.toFixed(3) + ' rad (' + w.name + ' at ' + w.t + ', ' + w.frames + ' frames)';
   try {
     await startMatch(T, 'Grabs');
@@ -109,24 +117,37 @@
       const sk = T.getScriptedKill();
       if (!sk || !sk.ring) return null;
       const js = [];
-      sk.grabArms.forEach((arm, k) => { if (!arm.visible) return; js.push(['arm' + k, arm]); arm.userData.segs.forEach((s, i) => js.push(['arm' + k + '.s' + i, s])); });
+      sk.grabArms.forEach((arm, k) => { if (!arm.visible || !arm.userData || !arm.userData.segs) return; js.push(['arm' + k, arm]); arm.userData.segs.forEach((s, i) => js.push(['arm' + k + '.s' + i, s])); });
       return marineJ().concat(js);
     };
     const peak = new Map(), at12 = new Map(), y0 = new Map(), rose = new Map();
+    const tipPrev = new Map(); let tipWorst = { d: 0, t: 0 }, tipFrames = 0, tipClk = null;
     const wC = await watch(armsJ, 8000, () => { const sk = T.getScriptedKill(); return !sk || sk.t > 4.2; }, () => {
       const sk = T.getScriptedKill();
       if (!sk || !sk.ring) return;
       const others = sk.ring.userData.arms.filter((a) => sk.grabArms.indexOf(a) < 0);
       for (const a of others) {
-        if (!y0.has(a)) y0.set(a, a.position.y);
-        else if (!rose.has(a) && a.position.y - y0.get(a) > 1.5) rose.set(a, sk.t);
+        const y = tipOf(a).y;
+        if (!y0.has(a)) y0.set(a, y);
+        else if (!rose.has(a) && y - y0.get(a) > 1.5) rose.set(a, sk.t);
       }
       for (const a of others) {
-        if (sk.t < 1.0) peak.set(a, Math.max(peak.get(a) || -1e9, a.position.y));
-        if (sk.t >= 1.2 && sk.t < 1.6 && !at12.has(a)) at12.set(a, a.position.y);
+        const y = tipOf(a).y;
+        if (sk.t < 1.0) peak.set(a, Math.max(peak.get(a) || -1e9, y));
+        if (sk.t >= 1.2 && sk.t < 1.6 && !at12.has(a)) at12.set(a, y);
+      }
+      // The tips of the arms holding him: no jump between frames.
+      const dtc = tipClk == null ? 0 : sk.t - tipClk; tipClk = sk.t;
+      for (const a of sk.grabArms) {
+        if (!a.visible) continue;
+        const p = tipOf(a);
+        const q = tipPrev.get(a);
+        if (q && dtc > 0 && dtc <= 0.1) { const d = Math.hypot(p.x - q.x, p.y - q.y, p.z - q.z) * Math.min(1, (1 / 60) / dtc); if (d > tipWorst.d) tipWorst = { d, t: +sk.t.toFixed(2) }; tipFrames++; }
+        tipPrev.set(a, p.clone ? p.clone() : { x: p.x, y: p.y, z: p.z });
       }
     });
     ok(wC.a < 0.3, '(C) the pit: biggest one-frame turn ' + fmt(wC));
+    ok(tipFrames > 10 && tipWorst.d < 0.8, '(C) the grabbing arms never jump: the tip moves at most ' + tipWorst.d.toFixed(2) + ' m in a 60 fps frame (at ' + tipWorst.t + ', ' + tipFrames + ' frames)');
     const over = [...at12.keys()].filter((a) => peak.get(a) - at12.get(a) > 0.2).length;
     const rt = [...rose.values()], spread = rt.length ? Math.max(...rt) - Math.min(...rt) : 0;
     ok(rt.length >= 3 && spread >= 0.12, 'the arms break the water one after another (first 1.5 m reached over ' + spread.toFixed(2) + ' s by ' + rt.length + ' arms)');

@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
-model: Gemini 3.8 Flash (High)
-task: AG-16 Shots for Claude: day-1 cave at 22:00, 30m/10m, NVGs off/on, fog
-touching: qa/shots/2026-09-25-AG-16/
-since: 2026-09-25T02:33Z
-next: waits on CL-40
+state: idle
+model: Gemini 3.1 Pro (High)
+task: —
+touching: —
+since: 2026-09-25T22:03Z
+next: —
 blocked-on: —
-last-report: handoffs/audit-day1/antigravity.md
+last-report: qa/2026-09-25-AG-18.md
 
 ## Notes
 
@@ -34,3 +34,4 @@ a real GPU the way you can.
 - AG-12: PASS. Captured 11 morning shots on Jerry's GPU: CL-32 detailed face with no helmet (front, 3/4, low-angle), CL-31/33 finisher camera, CL-20 pit bubbles and hidden tentacles, CL-19 watchtower deck ladder top and railing collision, and GP-29 kiosk full-ammo text. Report in qa/2026-09-24-AG-12.md, handoff in handoffs/2026-09-24-antigravity-AG-12.md.
 - AG-11: PASS. Megaswarm and Day 5 benchmarks on Jerry's GPU after GB-28 and CL-28. Measured 65.5% drop in megaswarm hitches (58 down to 20) and 57.1% drop in Day 5 hitches (28 down to 12). Report in qa/2026-09-24-AG-11.md, handoff in handoffs/2026-09-24-antigravity-AG-11.md.
 - AG-15: PASS. Complete Day 1 audit on Jerry's RTX 5080 GPU across two full runs (survive and death/restart). Documented 9 problems (2 S1, 4 S2, 3 S3) with 18 screenshot proofs. Report in handoffs/audit-day1/antigravity.md, shots in qa/shots/2026-09-25-AG-15/.
+- 2026-09-25 22:05Z (Claude, from Jerry): back on Gemini 3.1 Pro. AG-16 and AG-17 are parked or moved; next is AG-18.

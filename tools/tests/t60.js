@@ -46,7 +46,7 @@
     const s2 = ms();
     ok(s2.stage === 'alarm' && !s2.sting, 'D-33: the alarm is the klaxon, no sting: ' + s2.stage + '/' + s2.sting);
     ok(!s2.deckTrack, 'nothing else plays under it: ' + s2.deckTrack);
-    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'dusk', 'the camera goes up to the sunset (CL-49)');
+    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'alarm', 'the camera holds the HQ for the alarm (D-39, was the sunset pan of CL-49)');
     await until(() => T.getAlarmShake() > 2.2, 8000);
     ok(T.getAlarmShake() > 2.2, 'the rumble and shake run for three seconds: ' + T.getAlarmShake().toFixed(1));
     await until(() => ms().stage !== 'alarm', 12000);

@@ -391,3 +391,25 @@ through `publishUI`, so each carries `runId`, `eventId`, `day` and `labelKey` (t
   (the same identity as `poi-guards` and `poi-cleared`), stable for the run.
 - Test hooks on `TT`: `spawnBounties()`, `expireBounties(reason)`, `bountyRewardFor(day)`, `bountyGuardTypes(day)`,
   `bountyDbg()`. `getPoiGuards()` lists day-1 guards only. Test: t83.
+
+## The guardian rig and the pit's arms (CL-56, D-39, 2026-09-25)
+
+Owner: Claude (`world/cave-guardian.js`, `world/pit-tentacles.js`). Callers: the scripted kills
+and the cave chase in `index.html` (Grokbot's beats drive them; the modules own the bodies).
+
+- `makeCaveGuardianRig(design)` → a Group at the creature's hind feet, +Z forward, with
+  `userData.rig` naming every joint (`pelvis`, `spine1`, `spine2`, `chest`, `neck`, `head`, `jaw`,
+  `shoulderL/R`, `elbowL/R`, `wristL/R`, `handL/R`, `hipL/R`, `kneeL/R`, `ankleL/R`, `thumbL/R`),
+  `rig.joints` (for damping), `rig.hands` (world positions to hang a carried thing off) and
+  `rig.eyes`. `design` is a cave design (`rock`, `dark`, `moss`, `eyeTint`).
+- Poses, each writing every joint for one frame: `guardianGallop(g, R, phase, run, t, look)`,
+  `guardianStand`, `guardianRearGrab(g, R, t, side, ankle, reach, hold, look)`,
+  `guardianDragWalk(g, R, t, side, ankle, phase, heave, look)`, `guardianCarryThrow(g, R, t, carry,
+  wind, toss, look)`, `guardianWalkUpright(g, R, t, phase, hold, look)`. `g` is the rig root (it
+  may be scaled and parented); targets are world points. `ikLimb` is the two-bone solver they use.
+- `makePitTentacles({ cx, cz, floorY, ringR, count, glow, waterY })` → a Group with
+  `userData.arms`; per arm `tentacleIdle(arm, t, rise)`, `tentacleReach(arm, t, target, coil, w)`
+  (coil: `{ centre, axis, r, turns, len, start }`), `tentacleSettle(arm)`, then
+  `tentacleUpdate(arm, t)` to rebuild the tube; `tentacleShow(arm, on)`, `tentacleTip(arm)`.
+- Both are added to the scene by their caller and disposed with `disposeRigProp` (they carry
+  `userData.mats`).

@@ -946,8 +946,8 @@ const messages = {
   "dawn.best": "Best streak this night",
   "dawn.morning": "Proceed to Morning",
   "dawn.nextNight": "Next Night",
-  "dawn.tipBank": "Bank your skulls at the HQ window, then resupply.",
-  "dawn.tipResupply": "Proceed to morning to restock, or face the next night now.",
+  "dawn.tipBank": "Bank your skulls at the HQ window, resupply, then sound the next alarm at the briefing panel.",
+  "dawn.tipResupply": "Restock at the kiosk, then sound the next alarm at the briefing panel.",
   "wavePreview.atHQ": "Visit the HQ panel to sound the alarm.",
   "wavePreview.ground": "Treeline · ground rise",
 

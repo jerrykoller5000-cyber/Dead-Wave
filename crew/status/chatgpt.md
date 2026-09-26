@@ -4,12 +4,14 @@ state: idle
 model: GPT-ASTRA 6 (High)
 task: —
 touching: —
-since: 2026-09-25T21:29Z
+since: 2026-09-26T00:08Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-09-25-chatgpt-GP-43.md
+last-report: handoffs/2026-09-26-chatgpt-GP-44.md
 
 ## Notes
+
+2026-09-26: Jerry directly assigned ChatGPT ownership of grass, shrubs and all ground foliage. GP-44 COMPLETE: world/ground-foliage.js compact geometry factory + existing generator/material adapters; tapered grass, branching leafy shrubs/blossoms, divided ferns, petalled wildflowers/stalk leaves, irregular mushroom caps. All4347 plant identities/coordinates and289 batches unchanged; vertices698190 ->850905. Real WebGPU now works through Playwright Edge (CDP harness still separate): before/after shots gp44, native HQ mean17.00 ->16.67ms/p95both16.8ms; ready7.93 ->8.18s, single sample limits in report.108 tests pass, live GPU wind and construction clearing verified. Handoff handoffs/2026-09-26-chatgpt-GP-44.md. Antigravity requested independent eyes/tools-shoot, Claude asked to update ownership/queue. No git. Trees/terrain/water/caves remain Claude. Read fresh board before next work.
 
 2026-09-25: GP-43 COMPLETE. Bounty listings use getBounties(): names, alive guards, D-38 value25/60/150/300, Before the alarm and banking reminder. Reading HQ reveals blue target markers; done/expiry/alarm/day/reset clears them. Shared GP-38 notice coalesces synchronous clear+paid into one 2s bounty line, no extra audio; producer label enrichment retained. All105 UI unit checks and actual four-band UI/map/last-guard/expiry/reset browser plus day1 camp regression PASS. Report handoffs/2026-09-25-chatgpt-GP-43.md; shots gp43. Cursor requested shared npm/shoot/GPU/perf checks (documented CDP blocker). No git. Next: recheck crew queue.
 

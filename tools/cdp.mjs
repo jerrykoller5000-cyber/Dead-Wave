@@ -163,6 +163,9 @@ export async function launch({ headless = true, args = [] } = {}) {
     // A visible window keeps the real GPU; forcing SwiftShader there made every
     // "real GPU" number a software-rendering number.
     ...(headless ? ['--headless=new', '--enable-unsafe-swiftshader', '--use-angle=swiftshader'] : ['--enable-unsafe-webgpu']),
+    // CHROME_ARGS: extra flags for a box that needs them (a cloud container running as
+    // root needs --no-sandbox, say). Space-separated.
+    ...(process.env.CHROME_ARGS ? process.env.CHROME_ARGS.split(/\s+/).filter(Boolean) : []),
     ...args,
     'about:blank'
   ];

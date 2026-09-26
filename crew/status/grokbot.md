@@ -1,10 +1,10 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grokbot
-task: —
-touching: —
-since: 2026-09-25T17:15Z
+task: GB-58 GB-56 leftovers: night-12 spider (ammo kiosk vs line check), t80 check; nights 13-15 length (stragglers vs fight)
+touching: index.html (combat: shot/line checks, kiosk collision, wave director), tools/tests/t80.js, tools/nightsim.mjs, qa/nightsim/
+since: 2026-09-25T21:20Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-09-25-grokbot-GB-57.md

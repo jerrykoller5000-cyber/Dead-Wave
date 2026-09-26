@@ -4,6 +4,7 @@
 //   npm test -- t39 t45          just those
 //   npm test -- --jobs 1         one at a time (easier to read when something breaks)
 //   npm test -- --keep           leave tools/tests/test.html on disk to open by hand
+//   npm test -- --all-fails      print every FAIL line in full, not just the first
 //
 // How it works. Each tNN.js is an async expression evaluated inside a loaded copy of the
 // game, and asserts against window.TT. The copy (test.html, generated here) points the
@@ -185,6 +186,8 @@ if (failing.length || broken.length) {
     for (const r of rs) {
       const first = r.lines.find((l) => l.startsWith('FAIL')) || r.note || '';
       console.log(`    ${r.name.padEnd(6)} ${r.fail} fail  ${first.slice(0, 96)}`);
+      // --all-fails: every FAIL line, in full (the first, cut to 96 columns, is the default).
+      if (argv.includes('--all-fails')) for (const l of r.lines.filter((l) => l.startsWith('FAIL'))) console.log(`           ${l}`);
     }
   }
 }

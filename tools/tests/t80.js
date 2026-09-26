@@ -4,6 +4,8 @@
 // behind the house keeps coming round until the house is out of the line, and one in the open still
 // holds its band and does not walk into melee. And a flanker whose flank point is across the house
 // no longer walks into the wall and stands there.
+// GB-58: the night-12 spider was not the ammo kiosk (it stops nothing); the line check now also sees
+// what else stops his rounds (his own pieces, the landmark solids), checked with a wall he built.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -99,6 +101,64 @@
     }
     const cEnd = clearance(gz.mesh.position.x, gz.mesh.position.z);
     ok(c0 < 0.45 && tight / Math.max(1, n6) < 0.25 && cEnd >= 0.45 && gMin > 3, 'a spider on a line that grazes the corner takes one with room (start ' + c0.toFixed(2) + ' m clear, end ' + cEnd.toFixed(2) + ' m; tight ' + Math.round(100 * tight / Math.max(1, n6)) + '% of the time after 3 s; closest ' + gMin.toFixed(1) + ' m)');
+    T.clearZombies(); await wait(200);
+    // GB-58: his AK, aimed the way the nightsim marine aims, at a zombie (held in place if `hold`).
+    T.addCash(9000); T.buyWeapon('ak');
+    for (let i = 0; i < 14 && T.getCurrentWeapon() !== 'ak'; i++) T.setWeapon(i);
+    const shootAt = async (zz, ms, stand, hold) => {
+      const hp0 = zz.hp; const t0 = Date.now();
+      while (Date.now() - t0 < ms && zz.alive && zz.mesh) {
+        p.set(stand.x, T.sampleHeight(stand.x, stand.z), stand.z);
+        if (hold) zz.mesh.position.set(hold.x, T.sampleHeight(hold.x, hold.z), hold.z);
+        T.setAimTargetDbg(zz.mesh.position.x, zz.mesh.position.z); T.aimTarget.y = zz.mesh.position.y + (zz.hitH || 1.45) * 0.7;
+        T.setAimYawDbg(Math.atan2(zz.mesh.position.x - p.x, zz.mesh.position.z - p.z));
+        T.setMouseFireDbg(true);
+        if ((T.getAmmo().ak | 0) === 0 && !T.isReloading()) { T.addCash(200); T.buyAmmo('7.62mm', true); T.startReload(); }
+        await wait(16);
+      }
+      T.setMouseFireDbg(false);
+      return { died: !zz.alive, dmg: Math.round(zz.alive ? hp0 - zz.hp : hp0) };
+    };
+    const lineAfter = async (zz, ms, stand, hold) => {
+      const t0 = Date.now();
+      while (Date.now() - t0 < ms) { p.set(stand.x, T.sampleHeight(stand.x, stand.z), stand.z); if (hold) zz.mesh.position.set(hold.x, T.sampleHeight(hold.x, hold.z), hold.z); await wait(50); }
+      return zz.lineClear;
+    };
+    // (7) GB-58: the night-12 spider (GB-56's one lost zombie): 6.8 m north of him at the HQ's west
+    // wall, its line check clear, no hit from 275 AK rounds. The suspect was the ammo kiosk on that
+    // wall, the line passing about 1 m from it. The kiosk has no solid, for rounds or for the line
+    // check, and nothing else there stops a round: from that spot a spider reads a line and his AK
+    // kills it.
+    const k12 = { x: hx - hh - 0.5, z: hz + 0.8 }, s12 = { x: hx - hh - 2.7, z: hz + 7.2 };
+    const K = T.KIOSK;
+    const kioskGap = (() => { let m = 1e9; for (let i = 0; i <= 40; i++) { const u = i / 40; m = Math.min(m, Math.hypot(k12.x + (s12.x - k12.x) * u - K.x, k12.z + (s12.z - k12.z) * u - K.z)); } return m; })();
+    const kz = T.spawnZombie(s12.x, s12.z, 'spider', true, true);
+    const line7 = await lineAfter(kz, 1500, k12, s12);
+    const r7 = await shootAt(kz, 4000, k12, s12);
+    ok(kioskGap < 1.5 && line7 === true && r7.died, 'the night-12 spot, the line ' + kioskGap.toFixed(2) + ' m from the ammo kiosk: the spider reads a line and his AK kills it (line ' + line7 + ', ' + (r7.died ? 'dead' : 'alive after ' + r7.dmg + ' damage') + ')');
+    T.clearZombies(); await wait(200);
+    // (8) GB-58: the same mismatch where it is real. The line check (shotBlocked) walked the house,
+    // rocks, trees and the ground, but a round of his also stops at his own pieces and at the
+    // landmark solids (tents, cabins, fences, posts). A spider behind a wall he built read a line,
+    // held its band there, and could not be hit. Now it reads no line and comes on.
+    const st8 = { x: post.x - 3, z: post.z }, sp8 = { x: post.x - 14, z: post.z };
+    const gxw = T.gridIndex(post.x - 8), gzw = T.gridIndex(post.z);
+    const walls = [];
+    for (const dz of [-1, 0, 1]) { const b = T.placeBuildAt('wall', gxw, gzw + dz, Math.PI / 2); if (b) walls.push(b); }
+    const wz = T.spawnZombie(sp8.x, sp8.z, 'spider', true, true);
+    const rW = await shootAt(wz, 1500, st8, sp8);
+    ok(walls.length === 3 && !rW.died && rW.dmg === 0, 'three wall pieces between them stop his rounds (' + walls.length + ' walls; ' + rW.dmg + ' damage)');
+    const line8 = await lineAfter(wz, 1200, st8, sp8);
+    let comeOn = false, w8 = 1e9; const t8 = Date.now();
+    while (Date.now() - t8 < 12000 && wz.alive) {
+      p.set(st8.x, T.sampleHeight(st8.x, st8.z), st8.z);
+      await wait(100);
+      const d = Math.hypot(wz.mesh.position.x - p.x, wz.mesh.position.z - p.z); w8 = Math.min(w8, d);
+      if (Math.abs(wz.mesh.position.z - st8.z) > 3.2 || d < 6.5) comeOn = true;
+    }
+    ok(line8 === false, 'a spider behind his wall reads no line (line ' + line8 + ')');
+    ok(comeOn, 'and comes on round the wall instead of holding behind it (closest ' + w8.toFixed(1) + ' m, ended at ' + wz.mesh.position.x.toFixed(1) + ',' + wz.mesh.position.z.toFixed(1) + ')');
+    for (const b of walls) T.removeBuild(b, true);
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e.message)); }
   return out.join('\n');
 })()

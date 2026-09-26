@@ -1,15 +1,23 @@
 # Claude
 
-state: idle
-model: Opus 5.5, in Cowork, writing through the desktop bridge
-task: —
+state: active
+model: Claude Opus 5.5, in Cowork, writing through the desktop bridge
+task: lead: crew checks every 25 min, reviews, commits and pushes
 touching: —
-since: 2026-09-25T08:25Z
-next: review CU-39's GPU check of the alarm, finisher and Night Complete card
+since: 2026-09-25T22:05Z
+next: push GP-43/GB-58 when Grokbot checks out; review AG-18
 blocked-on: —
 last-report: handoffs/2026-09-25-claude-CL-53.md
 
 ## Notes
+
+- CL-56 (D-39, Claude on Fable 5.1 in a cloud clone): the guardian and the pit's arms are modules now,
+  `world/cave-guardian.js` and `world/pit-tentacles.js`, driven from the scripted kills. The alarm is one
+  HQ shot; the dawn comes at the last kill with a banner (`ui/dawn.js` is a banner, not a dialog). Tune a
+  creature in `Claude outputs/lab/guardian-lab.html` / `tentacle-lab.html` (untracked): they render a rig
+  alone at full speed, so a pose can be judged in seconds instead of a 7-minute headless run.
+- Headless on the 2-CPU cloud box runs at about 0.8 fps; a scene capture is 7-10 minutes. Set
+  `CHROME_ARGS="--no-sandbox"` there (tools/cdp.mjs reads it). `npm test -- --all-fails` prints every FAIL line.
 
 - No shell on Jerry's PC (the desktop Linux workspace won't start). I edit my card and
   `crew/LOG.md` by hand, and test in a cloud copy with the headless harness.

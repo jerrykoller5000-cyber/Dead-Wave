@@ -42,7 +42,8 @@ const DT = Number(opt('--dt', 1 / 30)) || 1 / 30;
 const CAP = Number(opt('--cap', 900)) || 900;
 const OUT = opt('--out', null);
 const GOD = argv.includes('--god');
-const skip = new Set(['--jobs', '--dt', '--cap', '--out'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
+const WALLCAP = Number(opt('--wallcap', 40)) || 40;   // GB-58: real minutes per night before it is cut off
+const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
 let nights = argv.filter((a, i) => !a.startsWith('--') && !skip.has(i)).map(Number).filter((n) => n >= 1);
 if (!nights.length) nights = Array.from({ length: 20 }, (_, i) => i + 1);
 
@@ -136,6 +137,8 @@ async function playNight(o) {
   let sampleT = 0, knifeSwings = 0, meleeKills = 0, reloadKnife = 0, sw = 0, spawnedPrev = 0;
   let logT = 0, clickT = false; const samples = []; let inside = { n: 0, t: 0, depth: 0 };
   let fired = 0, firedAtKill = 0, lastW = null, lastMag = 0;
+  // GB-58: the tail after the last spawn (when the field is down to 10, 5 and 1), and a stall probe.
+  let tail10 = null, tail5 = null, tail1 = null, probe = null;
   const kills0 = () => T.getWaveDirectorState();
   botFn = (dt) => {
     const ws = T.getWaveDirectorState();
@@ -151,6 +154,20 @@ async function playNight(o) {
       if (!ws.pace.inLull && lullStart !== null) { lulls.push(+(t - lullStart).toFixed(1)); lullStart = null; }
     }
     maxAlive = Math.max(maxAlive, alive.length);
+    if (ws.waveSpawned >= ws.waveTotal) {
+      if (tail10 === null && alive.length <= 10) tail10 = t;
+      if (tail5 === null && alive.length <= 5) tail5 = t;
+      if (tail1 === null && alive.length <= 1) tail1 = t;
+    }
+    if (probe && T.projectiles) {
+      // Every round fired while the probe runs: where it left the muzzle and where it ended.
+      for (const q of T.projectiles) if (!q.__ns && !q.fromTurret) { q.__ns = { o: [q.pos.x, q.pos.y, q.pos.z], last: [q.pos.x, q.pos.y, q.pos.z], age: 0 }; probe.live.add(q); }
+      for (const q of probe.live) {
+        if (T.projectiles.includes(q)) { q.__ns.last = [q.pos.x, q.pos.y, q.pos.z]; q.__ns.age = q.age; continue; }
+        probe.live.delete(q);
+        if (probe.shots.length < 40) probe.shots.push({ o: q.__ns.o.map((v) => +v.toFixed(2)), end: q.__ns.last.map((v) => +v.toFixed(2)), age: +q.__ns.age.toFixed(2), hitZ: !!q.hitZombie, hit: !!q.hit });
+      }
+    }
     const p = T.player.position;
     // Back to the post if knocked off it.
     const bx = post.x - p.x, bz = post.z - p.z, bd = Math.hypot(bx, bz);
@@ -253,6 +270,21 @@ async function playNight(o) {
     // Stalled: all out, nothing killed for 60 s.
     if (ws.waveSpawned >= ws.waveTotal && killGap > 60) {
       const p = T.player.position;
+      // GB-58: watch 5 s of his fire at the target first (rounds, muzzle, the target's hit volume).
+      const tgt = T.__nsTarget;
+      if (tgt && tgt.alive && tgt.mesh) {
+        const hp0 = tgt.hp; probe = { live: new Set(), shots: [] };
+        const ps = simT, pw = Date.now();
+        while (simT - ps < 5 && Date.now() - pw < 60000 && tgt.alive) await wait(50);
+        const mz = T.getMuzzleWorld ? T.getMuzzleWorld() : null, m = tgt.mesh;
+        R.stallProbe = { hp0: Math.round(hp0), hp1: tgt.alive ? Math.round(tgt.hp) : 0, maxHp: tgt.maxHp, died: !tgt.alive, type: tgt.typeKey,
+          target: m ? { x: +m.position.x.toFixed(2), y: +m.position.y.toFixed(2), z: +m.position.z.toFixed(2), ground: +T.sampleHeight(m.position.x, m.position.z).toFixed(2), r: tgt.radius, hitH: tgt.hitH, line: tgt.lineClear, climb: !!tgt.climbing, onWall: tgt.wallT || 0 } : null,
+          marine: { x: +p.x.toFixed(2), y: +p.y.toFixed(2), z: +p.z.toFixed(2), yaw: +T.player.rotation.y.toFixed(2), w: T.getCurrentWeapon() },
+          muzzle: mz ? [+mz.x.toFixed(2), +mz.y.toFixed(2), +mz.z.toFixed(2)] : null, aim: [+T.aimTarget.x.toFixed(2), +T.aimTarget.y.toFixed(2), +T.aimTarget.z.toFixed(2)],
+          shots: probe.shots };
+        probe = null;
+        if (!tgt.alive) { continue; }
+      }
       lost = T.zombies.filter((z) => z.alive).map((z) => ({ type: z.typeKey, d: +Math.hypot(z.mesh.position.x - p.x, z.mesh.position.z - p.z).toFixed(0), stuck: stuckSeen.has(z), x: +z.mesh.position.x.toFixed(1), z: +z.mesh.position.z.toFixed(1), px: +p.x.toFixed(1), pz: +p.z.toFixed(1), hp: Math.round(z.hp), line: z.lineClear, target: T.__nsTarget === z, tactics: z.tactics || 'direct', dying: !!z.dying, knock: +(z.knockT || 0).toFixed(1), riseT: z.riseT, marine: { y: +p.y.toFixed(2), gy: +T.sampleHeight(p.x, p.z).toFixed(2), w: T.getCurrentWeapon(), mag: T.getAmmo()[T.getCurrentWeapon()] | 0, rel: T.isReloading(), hp: Math.round(T.getHp()), firedSinceKill: fired - firedAtKill } }));
       for (const z of T.zombies.slice()) if (z.alive) T.killZombie(z);
       break;
@@ -269,6 +301,7 @@ async function playNight(o) {
     firstSpawn: firstSpawn && +firstSpawn.toFixed(1), lastSpawn: lastSpawn && +lastSpawn.toFixed(1), lastKill: lastKill && +lastKill.toFixed(1),
     length: lastKill !== null && firstSpawn !== null ? +(lastKill - firstSpawn).toFixed(1) : null,
     pushes, lulls, maxAlive, pile, crowd, inside, stuck, lost, capped,
+    tail10: tail10 && +tail10.toFixed(1), tail5: tail5 && +tail5.toFixed(1), tail1: tail1 && +tail1.toFixed(1),
     deaths, damage: Math.round(dmg), damageHp: Math.round(dmgHp), hits, damageBy: Object.fromEntries(Object.entries(dmgBy).map(([k, v]) => [k, Math.round(v)])),
     knifeSwings, meleeKills, samples, knees: T.getHitStumble ? T.getHitStumble().knees : null,
     wallSecs: Math.round((Date.now() - wall0) / 1000), errors: []
@@ -291,7 +324,7 @@ async function runNight(night) {
     await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); })()`);
     await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 30000 });
     await page.evaluate(lib);
-    const o = { night, dt: DT, cap: CAP, god: GOD, wallCap: 40 * 60000 };
+    const o = { night, dt: DT, cap: CAP, god: GOD, wallCap: WALLCAP * 60000 };
     const raw = await page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 45 * 60000);
     const r = JSON.parse(raw);
     r.errors = page.errors.slice(0, 3).map((e) => e.split('\n')[0]);

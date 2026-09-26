@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 22:05 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-25, 23:40 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -70,6 +70,7 @@ Loop feel comes first (D-35). Work your queue top to bottom, one check-in and on
 - **Claude** · CL-53 · handoffs/2026-09-25-claude-CL-53.md
 - **Claude** · CL-54 · handoffs/2026-09-25-claude-CL-54.md
 - **Grokbot** · GB-49 · handoffs/2026-09-25-grokbot-GB-49.md
+- **Claude** · CL-56 · handoffs/2026-09-25-claude-CL-56.md
 
 ## Waiting on
 
@@ -85,6 +86,17 @@ a card blocked on another agent, and a next task that says "after the split" or 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-25, 22:45Z · Four things that still look bad.** Jerry, with Claude on the big model. CL-56, D-39.
+  1. The guardian that pulls you into the cave looks like absolute garbage, and so does its animation. Several agents
+     have tried. Rebuild it.
+  2. The pit monster's tentacles and its grabbing animation look terrible. The pit itself looks great.
+  3. The camera's move into night is a bad pan. Wait for the alarm sequence to start, with the HQ in frame, so the
+     strobing lights and the fireworks are what we see.
+  4. Night to day looks bad. When the last zombie of the night dies, it turns to day by itself: no more panning to
+     the sunrise. A small banner, out of the way, says what the Night Survived menu said, but it is not a menu and
+     has no buttons. The only way to start the next night is the briefing panel. Also: skulls still on the ground
+     after the night could not be picked up.
 
 - **2026-09-25, 08:50Z · "Go with what you think."** Jerry went to sleep and left the two open questions to Claude.
   Q-1: the load budget is met by the splash (D-36). Daytime ideas 1 and 2 go in for Saturday: tonight's scouting
@@ -210,6 +222,15 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 ## Decisions
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
+
+- **D-39 · The loop's two transitions (Jerry, 22:45Z; revises D-34, CL-49 and CL-51).** The alarm: no pan to the
+  sky. The camera pulls back to one shot that holds the whole HQ while the night comes down over it, the strobes go
+  and the flares burst, then hands back as the wave starts (`startLoopCine('alarm')`). The last kill: the sky sweeps on
+  to the morning by itself over the finisher and the first seconds of prep (`skyLoop.mode` 'dawn', `DAWN_SWEEP_S`);
+  no camera move, no held night, no Night N Complete card. The night's numbers go up on a small banner at the bottom
+  right (`ui/dawn.js`, no buttons, never pauses, gone by itself); the next night comes from the briefing panel only.
+  `loopMorning` / `loopNextNight` stay as debug hooks. The guardian and the pit's arms are built rigs now
+  (`world/cave-guardian.js`, `world/pit-tentacles.js`, Claude's), and every scripted-kill beat drives them.
 
 - **D-38 · Bounty rewards (Claude, for Jerry; GB-57 asked).** Per cleared bounty post, in skulls into the bag (so still
   banked), on top of the guards' own drops: nights 2-3 **25**, 4-7 **60**, 8-13 **150**, 14 and up **300**. ChatGPT's
@@ -472,6 +493,14 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
+- [ ] **CU-43** **First. The showcase dry run, done the real way (AG-18 redo).** AG-18's script used `skipPrep`, killed the
+  zombies 4.5 s after it while the wave was still spawning ("Zombies left: 7"), and never opened the HQ briefing, so its
+  three findings are the harness, not the game. Build it on your qa/run-cu41.mjs: from a fresh profile on Jerry's GPU,
+  day 1 prep, walk to the HQ and press E (the briefing with tonight's scouting report and, from day 2, the bounties),
+  `TT.hqStartWave()`, wait for phase `wave` and for the night's spawns to finish, kill until the wave ends, then the
+  finisher and the Night 1 Complete card, Proceed to Morning, day 2: read the board, clear the bounty, bank at the HQ
+  window, night 2, then Next Night into night 3. Shots of every step and a short capture of one alarm and one finisher.
+  Anything wrong goes to its owner with the shot. Report to Claude.
 - [x] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
   (the specks should be gone: the rune bands now drape over the drawn bed, 14 cm up) and the finisher at 0.5 s, 1.5 s and
   2.6 s (the grade is a canvas filter now, not the grey blend sheet: it should read as a punchy, desaturated shot, not
@@ -787,7 +816,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (Gemini 3.1 Pro)
 
-- [ ] **AG-18** **The showcase dry run (back on Gemini 3.1 Pro, 2026-09-25).** On Jerry's GPU in a visible window, from a
+- [x] **AG-18** **The showcase dry run (back on Gemini 3.1 Pro, 2026-09-25).** On Jerry's GPU in a visible window, from a
   fresh profile, play the demo the way a guest would see it: the title, day 1 prep (read the HQ board: tonight's scouting
   report), the alarm's sky shot, the night 1 wave, the last kill and the Night 1 Complete card, Proceed to Morning, day 2
   (take the bounty on the HQ board, clear it, bank the skulls), night 2, then Next Night into night 3. Shots of every step
@@ -831,6 +860,10 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife (Opus 5.5)
 
+- [x] **CL-56** (Jerry's four, 22:45Z; D-39; `handoffs/2026-09-25-claude-CL-56.md`) The guardian rebuilt as its own rig
+  (a pale long-armed crawler: the bound, the pounce, the three-limbed drag, the walk-out and the throw), the pit's
+  arms as swept tubes that coil round his legs and chest, the alarm as one shot that holds the HQ, and the dawn at the
+  last kill with a banner instead of the card. Skulls on the ground after the night checked.
 - [x] **CL-50** The last kill (Jerry, items 7 and 8): the camera shot is **3 seconds**, cooler and more stylised; the relief
   stinger is shorter to match; the marine stops following the cursor while the camera is away (no 360 spin).
 - [x] **CL-49** The alarm (Jerry, item 9): when the alarm is pulled the camera pans up to the sun setting and the moon

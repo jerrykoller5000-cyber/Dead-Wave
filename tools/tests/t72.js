@@ -1,7 +1,7 @@
-// t72 — CL-45 / D-28, CL-41 and D-34 (CL-51): the sky follows the loop. Prep is daylight and
-// holds before dusk; the alarm brings the night; the next prep waits for the finisher; the
-// night holds until the player picks Proceed to Morning (the sunrise, back at spawn) or Next
-// Night (straight into the alarm).
+// t72 — CL-45 / D-28, CL-41 and D-39 (CL-56): the sky follows the loop. Prep is daylight and
+// holds before dusk; the alarm brings the night under a shot that holds the HQ; the next prep
+// waits for the finisher; the last kill brings the morning by itself, with a banner and no
+// card; the next night is started at the panel.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -42,35 +42,26 @@
     ok(T.getPhase() === 'prep' && T.getWaveDirectorState().day === dayBefore + 1, 'then day ' + (dayBefore + 1) + "'s prep: " + T.getPhase());
     ok(!T.getWaveFinisher(), 'once the finisher has handed the camera back');
     ok(T.getSlowMo() < 0.05, 'no second slow-down after the finisher: ' + T.getSlowMo().toFixed(2));
-    // D-34: the night holds under the Night N Complete card until the player picks.
-    ok(T.getSkyMode() === 'hold' && (hour() > 21 || hour() < 4), 'the night holds after the last kill: ' + T.getSkyMode() + ', ' + hour().toFixed(2) + 'h');
-    // Proceed to Morning: the sunrise shot, then the marine at his spawn, in the morning.
-    T.player.position.x += 20;
-    ok(T.loopMorning() === true, 'Proceed to Morning starts the sunrise shot');
-    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'morning', 'the camera goes up to the sunrise');
-    await until(() => !T.getLoopCine(), 9000);
-    ok(!T.getLoopCine(), 'and comes back down');
-    ok(hour() > 6.9 && hour() < 9, 'and it is morning: ' + hour().toFixed(2) + 'h');
+    // D-39 (revises D-34): the last kill brings the day by itself. No card, no camera move:
+    // the sky sweeps on to the morning over the finisher and the first seconds of prep, and
+    // the night's numbers go up on a small banner with no buttons.
+    ok(T.getSkyMode() === 'prep', 'prep after the finisher, no held night: ' + T.getSkyMode());
+    await until(() => { const h = hour(); return h > 7.6 && h < 9; }, 14000);
+    ok(hour() > 7.6 && hour() < 9, 'and it is morning by itself: ' + hour().toFixed(2) + 'h');
     ok(!/Night/.test(tl()), 'day on the HUD: "' + tl() + '"');
-    ok(Math.hypot(T.player.position.x - 0, T.player.position.z + 8.5) < 1.5, 'the marine is back at his spawn: ' + T.player.position.x.toFixed(1) + ', ' + T.player.position.z.toFixed(1));
-    ok(T.getSkyMode() === 'prep', 'and prep runs as usual: ' + T.getSkyMode());
-    // Next Night: from a held night, straight into the alarm (the moon, then the HQ).
+    const card = document.getElementById('dawnCard');
+    ok(!!card && card.open === true, 'the Night Complete banner is up');
+    ok(!!card && card.querySelectorAll('button').length === 0, 'and it has no buttons');
+    ok(!!card && card.tagName !== 'DIALOG', 'and it is not a modal');
+    ok(/Night 1 Complete/i.test(card ? card.textContent : ''), 'it names the night: "' + (card ? card.textContent.replace(/\s+/g, ' ').trim().slice(0, 60) : '') + '"');
+    ok(T.getPhase() === 'prep', 'the game goes on under it: ' + T.getPhase());
+    ok(Math.abs(T.player.position.x - p.x) < 0.01, 'and the marine was not moved');
+    // The next night comes from the briefing panel only; the alarm's shot holds the HQ.
     T.hqStartWave();
+    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'alarm', 'the alarm shot frames the HQ (no sky pan): ' + (T.getLoopCine() && T.getLoopCine().kind));
     await until(() => T.getPhase() === 'wave' && !T.getLoopCine(), 15000);
-    T.clearZombies && T.clearZombies();
-    const z2 = T.spawnZombie(p.x + 4, p.z + 4, 'shambler', true, true);
-    T.drainWavePlanDbg();
-    T.killZombie(z2, true, { kind: 'bullet', dir: { x: 1, z: 0 } });
-    await until(() => T.getPhase() === 'prep', 8000);
-    ok(T.getSkyMode() === 'hold', 'the second night holds too: ' + T.getSkyMode());
-    const dayN = T.getWaveDirectorState().day;
-    T.player.position.x += 20;
-    ok(T.loopNextNight() === true, 'Next Night pulls the alarm at once');
-    ok(!!T.getLoopCine() && T.getLoopCine().kind === 'night', 'from a dark sky: the moon, then the HQ');
-    await until(() => T.getPhase() === 'wave', 9000);
-    ok(T.getPhase() === 'wave' && T.getWaveDirectorState().day === dayN, 'night ' + dayN + ' is on: ' + T.getPhase());
-    ok(Math.hypot(T.player.position.x - 0, T.player.position.z + 8.5) < 1.5, 'with the marine at the HQ');
-    ok(hour() > 21 || hour() < 4, 'and the sky never went round through a day: ' + hour().toFixed(2) + 'h');
+    ok(T.getPhase() === 'wave', 'night 2 is on: ' + T.getPhase());
+    ok(hour() > 21 || hour() < 4, 'and it is night: ' + hour().toFixed(2) + 'h');
   } catch (e) {
     out.push('FAIL threw: ' + (e && (e.stack || e.message)));
   }
