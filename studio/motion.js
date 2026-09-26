@@ -234,11 +234,15 @@ function frameQuat(P, fr, idx, out) {
 }
 
 // A hold's target, read into out: a Vector3, a function returning [x, y, z] (or a Vector3), or [x, y, z].
+// A target that isn't a finite point this frame (a hand not placed yet: NaN) leaves `out` where it
+// was: one NaN let in spread to every point and into the rig, for good.
 function readTarget(tg, out) {
   let v = typeof tg === 'function' ? tg() : tg;
-  if (v && v.isVector3) { out[0] = v.x; out[1] = v.y; out[2] = v.z; return; }
-  if (Array.isArray(v) && v.length >= 3) { out[0] = v[0]; out[1] = v[1]; out[2] = v[2]; return; }
-  throw new Error('a hold\'s target is a THREE.Vector3, [x, y, z], or a function returning either');
+  let x, y, z;
+  if (v && v.isVector3) { x = v.x; y = v.y; z = v.z; }
+  else if (Array.isArray(v) && v.length >= 3) { x = v[0]; y = v[1]; z = v[2]; }
+  else throw new Error('a hold\'s target is a THREE.Vector3, [x, y, z], or a function returning either');
+  if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) { out[0] = x; out[1] = y; out[2] = z; }
 }
 
 export function createBody(inst, preset, opts = {}) {
@@ -471,7 +475,7 @@ export function createBody(inst, preset, opts = {}) {
       hd.dir0[0] = _v.x; hd.dir0[1] = _v.y; hd.dir0[2] = _v.z;
     }
     // A new hold's target starts where the hand has it now: the point, or the grip off it.
-    if (fresh) { for (let c = 0; c < 3; c++) hd.cur[c] = P[i * 3 + c] + (hd.off ? hd.off0[c] : 0); hd.last.set(hd.cur); }
+    if (fresh) { for (let c = 0; c < 3; c++) hd.cur[c] = P[i * 3 + c] + (hd.off ? hd.off0[c] : 0); hd.last.set(hd.cur); hd.t1.set(hd.cur); }
     weights();
     return true;
   };
@@ -570,7 +574,7 @@ export function createBody(inst, preset, opts = {}) {
     placeLost();
     // Standing on a leg it no longer has: it goes over.
     const leg = pd.points.some((k) => feet.includes(idx[k]));
-    if (leg && body.alive && (body.state === 'animated' || body.state === 'react')) {
+    if (leg && body.alive && (body.state === 'animated' || body.state === 'react' || body.state === 'getup')) {
       if (!wake()) return false;
       aimFall(pd.points.map((k) => idx[k]));
       fall();

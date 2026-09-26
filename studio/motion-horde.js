@@ -228,6 +228,16 @@ export function createHorde(opts = {}) {
   }
   // A slot for this body: it already has one, there is a free one, or the longest-dead corpse on the
   // ground gives its up (frozen where it lies). Held for the hit until update() flushes it.
+  // A hit the body can't take is refused here, where the host still plays its old reaction: a point
+  // it doesn't have ("shoulder" for "shoulderR") threw later, inside update(), and the game then
+  // switched reactions off for the session.
+  function takes(rec, h) {
+    if (!HIT_KINDS.includes(h.kind || 'bullet')) return false;
+    const at = h.at;
+    if (typeof at === 'string') return !!(rec.inst.def.body.points[at]);
+    if (at === undefined) return true;
+    return Array.isArray(at) && at.length >= 3 && at.every(Number.isFinite);
+  }
   function canTake(rec) {
     if (!rec.pooled) return true;
     const b = rec.body;
@@ -445,7 +455,7 @@ export function createHorde(opts = {}) {
       const rec = recs.get(key) || attachZombie(key);
       if (!rec || rec.frozen || rec.killed) return false;
       if (rec.zombie && rec.zombie.crawling) return false;
-      if (!HIT_KINDS.includes(h.kind || 'bullet')) return false;
+      if (!takes(rec, h)) return false;
       if (!canTake(rec)) return false;
       enqueue(rec, h, false);
       return true;
@@ -455,7 +465,7 @@ export function createHorde(opts = {}) {
       if (!rec || rec.frozen) return false;
       if (rec.killed) return true;
       if (rec.zombie && rec.zombie.crawling) return false;
-      if (!HIT_KINDS.includes(h.kind || 'bullet')) return false;
+      if (!takes(rec, h)) return false;
       if (!canTake(rec)) return false;
       enqueue(rec, h, true);
       rec.killed = true; rec.deadAt = frame;

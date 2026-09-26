@@ -389,3 +389,14 @@ test('a wall holds a reacting body: a blast beside it leaves the zombie on its o
     else assert.ok(far > WALL + 0.5, `with no wall the blast carries it ${far.toFixed(2)} m (so the test means something)`);
   }
 });
+
+test('a hit at a point the body lacks, or at no point at all, is refused up front, not thrown inside update()', () => {
+  const h = createHorde({ presets });
+  const z = mockZombie();
+  assert.equal(h.hit(z, { at: 'shoulder', dir: [0, 0, -1], power: 3, kind: 'bullet' }), false, 'no point "shoulder"');
+  assert.equal(h.hit(z, { at: [0, NaN, 0], dir: [0, 0, -1], power: 3, kind: 'bullet' }), false, 'not a point');
+  assert.equal(h.kill(z, { at: 'tail', power: 3 }), false);
+  assert.doesNotThrow(() => run(h, 0.5));
+  assert.ok(h.hit(z, { at: 'shoulderR', dir: [0, 0, -1], power: 3, kind: 'bullet' }), 'a real point still takes it');
+  assert.doesNotThrow(() => run(h, 0.5));
+});

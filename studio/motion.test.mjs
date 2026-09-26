@@ -536,3 +536,38 @@ test('a hand keeps its grip at any display rate: the flop scene at 60, 144, 165 
     assert.ok(under > -0.002, `${hz} Hz: nothing through the ground (${under.toFixed(4)})`);
   }
 });
+
+test('a hold target that is not a point this frame (NaN) is ignored; the body stays finite and held', () => {
+  const inst = rigs.get('zombie').create({});
+  const body = createBody(inst, preset('zombie/shambler'));
+  body.follow();
+  let t = 0;
+  body.hold('handR', () => (t > 0.2 && t < 0.4) || t < 0.02 ? [NaN, 1, 0] : [0.3 + t, 1.2, 0.4], { strength: 1 });
+  let bad = false;
+  for (let f = 0; f < 60; f++) {
+    t = f / 60; body.follow(); body.update(1 / 60); body.apply();
+    for (const p of Object.values(body.points())) if (!p.every(Number.isFinite)) bad = true;
+    inst.group.traverse((o) => { if (!Number.isFinite(o.quaternion.x)) bad = true; });
+  }
+  assert.ok(!bad, 'a NaN target made the body non-finite');
+  assert.equal(body.state, 'held');
+  const h = body.points().handR;
+  assert.ok(Math.hypot(h[0] - (0.3 + t), h[1] - 1.2, h[2] - 0.4) < 0.02, 'back on the hand once the target is a point again');
+});
+
+test('a body that loses a leg while it gets up falls again', () => {
+  const inst = rigs.get('zombie').create({});
+  const body = createBody(inst, preset('zombie/shambler'));
+  const ev = [];
+  body.follow();
+  let lostAt = -1;
+  for (let f = 0; f < 600; f++) {
+    body.follow();
+    if (f === 30) body.hit({ at: 'chest', dir: [0, 0.1, 1], power: 8, kind: 'pellet' });
+    if (lostAt < 0 && body.state === 'getup') { body.lose('legL'); lostAt = ev.length; }
+    for (const e of body.update(1 / 60)) ev.push(e[0]);
+    body.apply();
+  }
+  assert.ok(lostAt >= 0, 'it got up: ' + ev.join(' '));
+  assert.ok(ev.slice(lostAt).includes('fall'), 'after the leg went: ' + ev.slice(lostAt).join(' '));
+});
