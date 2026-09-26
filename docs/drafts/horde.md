@@ -22,7 +22,7 @@ is exactly as it was: the horde is never even made.
 | Piece | Where |
 | --- | --- |
 | The horde: adoption, the pool, hits, deaths, drift, get-up clips | `studio/motion-horde.js` (Claude) |
-| Its tests, on the studio's zombie stand-ins | `studio/motion-horde.test.mjs` (13) |
+| Its tests, on the studio's zombie stand-ins | `studio/motion-horde.test.mjs` (14) |
 | The switch and the wiring | `index.html`, "=== Reactions" by the knockdown (Grokbot's part) |
 | The game check, on and off | `tools/tests/t85.js` (26 checks) |
 | What it looks like in the game | `docs/drafts/horde-shots.jpg` (see "Seen in the game") |
@@ -45,7 +45,8 @@ const horde = createHorde({
 });
 horde.hit(z, { at: [x, y, z] | 'chest', dir: [x, y, z], power, kind, shot });  // false: refused
 horde.kill(z, { ... });           // true: it dies as a ragdoll
-horde.update(dt);                 // once a frame → [{ key, name, data }]
+horde.beginFrame();               // first thing each frame, before the host animates anything
+horde.update(dt);                 // once a frame, after it has → [{ key, name, data }]
 horde.busy(z);                    // true while it falls, lies or gets up
 horde.adopt(key, { rig, preset, group, move, ground });   // a body of the host's own (the marine)
 horde.freeze(z); horde.release(z); horde.releaseAll();
@@ -76,7 +77,16 @@ it lies. A corpse still in the air never does (it would hang there), and neither
 down but alive (the engine's `sleep()` would stand it straight back up). Otherwise the hit is refused
 and the game plays its old reaction.
 
-**Each frame, for each body that is awake or has a hit waiting** (the rest cost nothing):
+**Two calls a frame.** `beginFrame()` comes first, before the host animates anything: every joint a
+body wrote last frame gets back what the animation had left on it. The game sets only some of a
+joint's Euler angles each frame (a leg's swing but never its twist; the marine's hips' yaw and roll
+but never their pitch), and three.js keeps a joint's Euler in step with its quaternion, so without
+this the reaction's own tilt stayed in what the body read as the animation next frame and fed on
+itself: a brute's blow threw the marine metres into the air, in the real game (the browser checks'
+stand-in for three never syncs a quaternion back to its Euler, so they could not show it). A corpse
+lying still keeps its pose. Then `update(dt)`, after the host has animated and every hit is in:
+
+**In update(), for each body that is awake or has a hit waiting** (the rest cost nothing):
 
 1. The ground under it: a plane through three samples at its group (not a lookup for every point on
    every physics step). Slopes past 1.5 are clamped.
@@ -117,7 +127,7 @@ All in Grokbot's parts, each change commented `GB-65`, `GB-66` or `GB-67`.
 | `beginCorpse(z, dx, dz, rag)`, `updateCorpses`, `finishCorpse` | a ragdoll corpse keeps the blood (its pool follows the body until it is still), the shadows and the sink, not the topple; it is frozen before it sinks and let go before its mesh is pooled |
 | `updateZombies` | a busy zombie is the horde's: no walk, no turn, no attack; it still burns, its hit flash fades, and walls and the HQ still hold it |
 | `recycleOrDisposeZombie`, `clearZombies` | the body is let go with the mesh; a reset lets them all go |
-| the main loop | `updateReactions(dt)` after projectiles and grenades, before anything is drawn |
+| the main loop | `Horde.beginFrame()` first in `tick()`; `updateReactions(dt)` after projectiles and grenades, before anything is drawn |
 | the projectiles, the explosions | `dist` (how far the round flew), `shot`, `blast` (where in the blast) and `blastDmg` on the hit |
 | `damagePlayer`, `explodeGrenade` | a zombie's blow and a bomber's blast go to the marine's body |
 | movement, `tryFire`, jumping, `tryRoll`, the knife, grenades | the marine while he reacts |
@@ -172,22 +182,25 @@ his stagger steps are the knockback, and the scripted knee under a staggering bo
 
 ## Checking it
 
-- `node --import ./studio/node-three.mjs --test studio/motion-horde.test.mjs`: 13 tests. The preset
+- `node --import ./studio/node-three.mjs --test studio/motion-horde.test.mjs`: 14 tests. The preset
   by type and what is refused; adoption once per mesh; a shell's pellets as one hit (a close one drops
   a shambler, which gets up; a far one staggers it; a brute shrugs one off); a kill that lies, settles
   and is frozen, and takes its shell's pellets with it; the pool and the lying corpse that gives up its
   slot; lod and lost parts handed to the engine; a get-up clip turned to the heading and played; the
   hips back where the host keeps them; three adoptions a frame; determinism; the marine (a brute's
-  blow is a step, a bomber at 1 m puts him down and he is up in under 1.5 s); 48 attached with 8
-  reacting in about 0.4 ms a frame.
+  blow is a step, a bomber at 1 m puts him down and he is up in under 1.5 s); a host that poses some
+  Euler angles each frame, as updateMarinePose does, with beginFrame (a brute's blow stays a step; it
+  threw him 6 m up without); 48 attached with 8 reacting in about 0.4 ms a frame.
 - `tools/tests/t85.js`, in the game: all of the above that the game adds, on and off (26 checks).
 
 The browser checks run on a stand-in for three.js with no `Matrix4.makeBasis`, so a body's hip and
 chest frames are only right facing +Z there; t85 stands its zombies and the marine that way. The same
 stand-in runs its maths through proxies, about 25 times slower than three.js: t85 bounds the horde at
 4 ms a reacting body a frame there (it measures about 1.5), and the Node test holds the real figure.
-**Request for Cursor:** a real `makeBasis` in `tools/tests/fakethree.mjs`, so a reacting body is
-right whichever way it faces in the browser checks.
+**Requests for Cursor**, both in `tools/tests/fakethree.mjs`: a real `Matrix4.makeBasis`, so a reacting
+body is right whichever way it faces in the browser checks; and a quaternion that keeps its object's
+Euler in step (three.js does, the stand-in only goes the other way), so a check can see what the game
+does when it sets one angle of a joint a body has turned.
 
 That slowness also means a browser check that times something by the wall clock can come up short
 when many bodies react at once there (t77's "off, it cools" did once, under three jobs; it passes with
