@@ -4,7 +4,7 @@
   "kind": "creature",
   "version": 1,
   "owner": "claude",
-  "notes": "The shambler stand-in of studio/zombie.js as data: the same joint names and offsets as the game's makeZombieMesh (index.html), the same boxes. model.test.mjs checks it against the code joint by joint, so a change to either shows up. The droop on the shoulders is the shambler's (-0.85 rad); ferals, brutes and the rest are still the code's opts.type.",
+  "notes": "The shambler stand-in of studio/zombie.js as data: the same joint names and offsets as the game's makeZombieMesh (index.html), the same boxes. model.test.mjs checks it against the code joint by joint, so a change to either shows up. The droop on the shoulders is the shambler's (-0.85 rad); ferals, brutes and the rest are still the code's opts.type. Its feet end 0.2 m below its origin, as the game's zombies do (hips 0.55, leg 0.76): that is roadmap P-73, and this file follows the game, not the other way round.",
   "materials": {
     "skin": { "color": "#d4c4a8", "roughness": 0.92 },
     "cloth": { "color": "#5a5046", "roughness": 0.95 },
