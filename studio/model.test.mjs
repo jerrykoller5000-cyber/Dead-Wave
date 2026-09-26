@@ -287,7 +287,9 @@ test('the zombie model reacts to a shell exactly as the stand-in does', () => {
   registerRig('zombie-model', rigFromModel(models.json('creature/zombie')));
   const run = (rig) => {
     const inst = rigs.get(rig).create({});
-    const body = createBody(inst, loadMotion({ ...presets.json('zombie/shambler'), rig }), {});
+    // The get-up clips are the stand-in rig's; this test is about the reaction, so it leaves them out.
+    const sh = presets.json('zombie/shambler');
+    const body = createBody(inst, loadMotion({ ...sh, rig, getup: { time: sh.getup.time } }), {});
     const track = [];
     for (let f = 0; f < 90; f++) {
       body.follow();

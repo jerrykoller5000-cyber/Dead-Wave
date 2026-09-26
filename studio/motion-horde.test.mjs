@@ -200,12 +200,13 @@ test('getting up: with a clip for its side, the rig turns to the heading and pla
   assert.ok(names(ev, z).includes('getup') && names(ev, z).includes('recovered'), names(ev, z).join(' '));
   assert.ok(played, 'the clip played while it got up');
   assert.ok(Math.abs(yawAt - 1.2) < 1e-6, `faced the heading (${yawAt})`);
-  // Without the event's side and heading (today's engine), nothing is played: the old blend.
+  // The engine's own getup event (contract 1 is in: it says which side and which way) plays the clip too.
   const h2 = createHorde({ presets: withClip, clips: clipOf, presetFor: () => 'zombie/test-getup' });
   const z2 = mockZombie();
   shell(h2, z2, 6);
-  run(h2, 6);
-  assert.equal(z2.mesh.userData.hordeBody.player, null);
+  let played2 = false;
+  run(h2, 6, () => { const c = z2.mesh.userData.hordeBody; if (h2.state(z2) === 'getup' && c.player && c.player.clip) played2 = true; });
+  assert.ok(played2, 'the clip played on the engine\'s own getup event');
 });
 
 test('the hips go back where the host keeps them: after a reaction, and on release', () => {
