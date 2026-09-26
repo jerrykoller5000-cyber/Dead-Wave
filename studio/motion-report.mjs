@@ -155,15 +155,14 @@ function sweepText(sa, sb) {
   const out = [];
   const froms = [...new Set(sa.sweeps.map((s) => s.from))];
   for (const from of froms) {
-    out.push(`Sweep from the ${from}: the power (m/s at the point hit) where the outcome changes${sb ? `; A is ${sa.preset}, B ${sb.label}` : ''}.`);
+    out.push(`Sweep from the ${from}: the power (m/s at the point hit) where the outcome changes, searched up to its knockdown or --max${sb ? `; A is ${sa.preset}, B ${sb.label}` : ''}.`);
     const rows = [];
     for (const s of sa.sweeps.filter((x) => x.from === from)) {
       const t = sb && sb.sweeps.find((x) => x.kind === s.kind && x.from === from);
-      const top = `searched to ${f2(s.max)}`;
-      if (!t) { rows.push([s.kind, `at ${s.at}`, bandsText(s), `(${top})`]); continue; }
+      if (!t) { rows.push([s.kind, `at ${s.at}`, `to ${f2(s.max)}:`, bandsText(s)]); continue; }
       const same = bandsText(s) === bandsText(t);
-      rows.push([s.kind, `at ${s.at}`, 'A', bandsText(s)]);
-      rows.push(['', '', 'B', bandsText(t) + (same ? '' : '  *')]);
+      rows.push([s.kind, `at ${s.at}`, `A to ${f2(s.max)}:`, bandsText(s)]);
+      rows.push(['', '', `B to ${f2(t.max)}:`, bandsText(t) + (same ? '' : '  *')]);
     }
     out.push(grid(rows));
     // The battery's own hits against the sweep: how far each is from changing.

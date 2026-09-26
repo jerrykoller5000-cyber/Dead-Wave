@@ -82,8 +82,8 @@ test('--try: the preset against a copy with a number changed; --check fails when
 
 test('--sweep: where the outcome changes for a kind, and how far each battery hit is from a change', () => {
   assert.equal(swept.code, 0, swept.err);
-  assert.match(swept.out, /^Sweep from the front: the power \(m\/s at the point hit\) where the outcome changes\.$/m);
-  assert.match(swept.out, /^pellet +at chest +flinch, stagger from \d\.\d\d, down from 5\.50 \(its knockdown\) +\(searched to 5\.50\)$/m);
+  assert.match(swept.out, /^Sweep from the front: the power \(m\/s at the point hit\) where the outcome changes, searched up to its knockdown or --max\.$/m);
+  assert.match(swept.out, /^pellet +at chest +to 5\.50: +flinch, stagger from \d\.\d\d, down from 5\.50 \(its knockdown\)$/m);
   assert.doesNotMatch(swept.out, /^bullet /m, '--kinds pellet sweeps only pellets');
   assert.match(swept.out, /^shotgun-far +3\.20 +stagger +\d\.\d\d over flinch->stagger at \d\.\d\d; 2\.30 under stagger->down at 5\.50$/m);
   assert.match(swept.out, /^shotgun-close +6\.50 +down +1\.00 over stagger->down at 5\.50$/m);
