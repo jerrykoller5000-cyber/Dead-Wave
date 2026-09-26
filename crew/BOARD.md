@@ -65,6 +65,12 @@ a card blocked on another agent, and a next task that says "after the split" or 
 Newest first. Claude writes these down when Jerry gives them in chat. The older ones (the showcase and
 before) are in `crew/archive/board-queues-2026-09-26.md`.
 
+- **2026-09-26, ~04:40Z · Face the prey, then turn and drag.** On the first scene preview: the guardian grabs the
+  marine while facing away from him. A creature grabs facing its target, whatever way the target lies, aiming for the
+  leg; then it turns round and heads for its cave, dragging him. Into CL-64. Also: other agents have suggested a
+  ragdoll hybrid like the Euphoria engine; maybe some time in the future (Claude's view: as a layer on scenes, for the
+  body being thrown about, after CL-64; `docs/studio.md` Later).
+
 - **2026-09-26, ~04:30Z · Scenes: the grab is the problem, and build it to reuse.** After seeing the studio's guardian
   strips: "the problem may not have been as much with animation but the position of the two models' limbs (placement
   on grab) and the speed and movement. It's very hard to tell from the strips and video, but the tool is cool and
@@ -403,7 +409,10 @@ Nothing queued.
 - [ ] **CL-64** **The guardian's grab and drag as the first scene; the game plays it.** After CU-46. The catch in
   beats you can see (pounce, catch, pull down) instead of all in 0.45 s; the hand held on the marine's real ankle;
   a heavy haul at a believable speed with the steps matched to it; the marine towed on his back, his leg lifted by
-  the hand. `review/guardian-grab-drag/`, then the game's cave drag switched from its hand code to the scene.
+  the hand. Jerry (04:40Z): it lunges and grabs **facing him**, aiming for the leg whichever way he lies, then turns
+  round (stepping, not spinning on planted feet) and heads for the cave dragging him. That needs facing that changes
+  over time in the scene format (keyed `face`, or face an actor), which this task adds.
+  `review/guardian-grab-drag/`, then the game's cave drag switched from its hand code to the scene.
   Then Jerry's notes.
 - [ ] **CL-62** **The rest of the guardian through the studio.** After CL-64. The chase, the walk-out and the throw
   as scenes and clips the same way (the throw is a scene: the marine is in it), timed against the UAL references,

@@ -1208,3 +1208,5 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T04:17Z · claude · DONE · CL-63 Scenes: the format, the marine rig, the scene player · report handoffs/2026-09-26-claude-CL-63.md
 - 2026-09-26T04:29Z · cursor · IN · CU-46 Render scenes: side tiles, top-down row, video, check marks · on Grok 4.7 · touching tools/studio.mjs, tools/studio-scene.html, review/
 - 2026-09-26T04:34Z · cursor · DONE · CU-46 Render scenes: side tiles, top-down row, video, check marks · report handoffs/2026-09-26-cursor-CU-46.md
+- 2026-09-26T04:34Z · claude · NOTE · Jerry on the demo scene: the guardian must grab facing the marine, then turn and drag him to the cave. Into CL-64 (keyed facing in the scene format). Active ragdoll noted for later (docs/studio.md, Later)
+- 2026-09-26T04:35Z · claude · REVIEWED · handoffs/2026-09-26-cursor-CU-46.md · good: both bodies, the top-down row shows the path, checks marked and matching the player; accepted

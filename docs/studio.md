@@ -410,6 +410,12 @@ marine (its joint groups from `makeMarine()`'s `userData`) instead of building o
 - **Sound:** the same loop for stingers and effects (a waveform, a spectrogram and the file, with
   notes).
 - **Models:** a turntable and a contact sheet for any prop or creature, with its budget.
+- **An active-ragdoll layer (Jerry, 2026-09-26; the Euphoria idea).** For a body being thrown about
+  (the marine dragged, thrown, knocked down), not for the creature doing it. The scene still decides
+  the intent (where the grip is, where the body goes); a light physics pass on the victim's limbs
+  (position-based, joint limits, the ground, pulled toward the clip's pose by a keyed stiffness) adds
+  the flop and drag. One body at a time in a cutscene is cheap in the browser; ragdoll deaths for the
+  horde are a separate, harder question (many bodies at once). After CL-64.
 
 ## Looked at and set aside (2026-09-26)
 
