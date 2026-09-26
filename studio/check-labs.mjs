@@ -75,7 +75,9 @@ async function step(page, what, fn) {
     return true;
   } catch (e) {
     failed++;
-    console.log(`  FAIL  ${what}: ${e instanceof Fail ? e.message : (e && e.stack) || e}`);
+    // What the page itself said last, so a timeout says why.
+    const said = page ? pageErrors(page).slice(-3) : [];
+    console.log(`  FAIL  ${what}: ${e instanceof Fail ? e.message : (e && e.stack) || e}${said.length ? '\n        the page said: ' + said.join(' | ') : ''}`);
     return false;
   } finally {
     if (opt.shots && page) {
@@ -428,12 +430,17 @@ async function checkMotionLab(browser, server, page0) {
     await step(p2, 'from a plain static server it still works, and copies the note and the scene', async () => {
       await p2.goto(`${plain.origin}/${PAGES.motion.path}?preset=marine/marine`, { waitUntil: 'none' });
       must(await p2.waitFor('window.lab && window.lab.ready', { timeout: 90000 }), 'window.lab never became ready: ' + pageErrors(p2).join('; '));
-      let s = await p2.evaluate('lab.state()');
+      // Each call says which part it was, for when one never comes back.
+      const ev = (what, expr, t) => p2.evaluate(expr, t).catch((e) => { throw new Fail(`${what}: ${e.message}`); });
+      let s = await ev('its state', 'lab.state()');
       must(!s.canSave, 'it thinks it can save on a server with no write door');
-      await p2.evaluate('lab.setWeapon("grenade"); lab.fire("front"); lab.advance(3)');
-      const n = await p2.evaluate(`lab.note('check-labs: copied, not saved', { picture: true })`, SLOW);
+      // How many frames the page gets in a second, and whether it thinks it's seen: a window headless
+      // Chrome has put in the background gets none, and the lab has to cope.
+      const seen = await ev('its frames', 'new Promise((r) => { let n = 0; const f = () => { n++; requestAnimationFrame(f); }; requestAnimationFrame(f); setTimeout(() => r({ frames: n, visibility: document.visibilityState, focus: document.hasFocus() }), 1000); })', 30000);
+      await ev('a grenade', 'lab.setWeapon("grenade"); lab.fire("front"); lab.advance(3)');
+      const n = await ev('the note', `lab.note('check-labs: copied, not saved', { picture: true })`, SLOW);
       must(n && !n.ok && (n.how === 'copied' || n.how === 'shown') && /· Jerry · v\d+ · lab\ncheck-labs: copied/.test(n.block), 'the note fallback: ' + JSON.stringify(n));
-      const sc = await p2.evaluate(`lab.saveScene('check-copied')`, SLOW);
+      const sc = await ev('the scene', `lab.saveScene('check-copied')`, SLOW);
       must(sc && !sc.ok && (sc.how === 'copied' || sc.how === 'shown') && sc.json && sc.json.format === 'dw-scene/1', 'the scene fallback: ' + JSON.stringify(sc && sc.how));
       const after = [fs.readdirSync(path.join(ROOT, 'review')).join(','), fs.readdirSync(path.join(ROOT, 'studio', 'scenes')).join(',')];
       must(after[0] === before[0] && after[1] === before[1], 'something was written without the write door');
@@ -441,8 +448,8 @@ async function checkMotionLab(browser, server, page0) {
       // Chrome logs that; it's the point of this check, not a fault.
       const errs = pageErrors(p2).filter((e) => !/status of 501/.test(e));
       must(!errs.length, errs.join(' | '));
-      s = await p2.evaluate('lab.state()');
-      return `note ${n.how}, scene ${sc.how}; the marine: ${s.bodies[0].events.join(' ')}`;
+      s = await ev('its state again', 'lab.state()');
+      return `note ${n.how}, scene ${sc.how}; the marine: ${s.bodies[0].events.join(' ')}; the page had ${seen.frames} frames a second, ${seen.visibility}${seen.focus ? ', focused' : ''}`;
     });
   } finally {
     await p2.send('Page.close').catch(() => {});

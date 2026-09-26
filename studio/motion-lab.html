@@ -962,9 +962,14 @@ function context() {
 // The canvas as a PNG, with the scrub bar and a caption under it so the picture says what it shows.
 // Under 3 MB (contract 5). The renderer keeps no copy of a frame once it's on screen, so the loop
 // takes the picture straight after it draws a frame.
-// With { strip: true } (a note's picture), six moments of the reaction go under it.
+// With { strip: true } (a note's picture), six moments of the reaction go under it. A page in a
+// background tab gets no frames, so if none comes soon the picture is drawn here and now.
 let captures = [];
-const snapshot = ({ strip = false } = {}) => new Promise((resolve) => captures.push({ resolve, strip }));
+const snapshot = ({ strip = false } = {}) => new Promise((resolve) => {
+  const c = { resolve, strip };
+  captures.push(c);
+  setTimeout(() => { if (captures.includes(c)) { renderer.render(scene, camera); takeCaptures(); } }, 1500);
+});
 function takeCaptures() {
   if (!captures.length) return;
   const waiting = captures; captures = [];
@@ -1089,7 +1094,14 @@ function copyBox(title, hint, text, picture) {
   t.focus(); t.select();
 }
 document.getElementById('copyclose').onclick = () => { document.getElementById('copybox').hidden = true; };
-async function copyText(s) { try { await navigator.clipboard.writeText(s); return true; } catch { return false; } }
+// The clipboard, if it answers: it can wait on a permission that never comes (a window without the
+// focus), so after a moment the copy box is shown instead.
+async function copyText(s) {
+  try {
+    const wrote = navigator.clipboard.writeText(s).then(() => true, () => false);
+    return await Promise.race([wrote, new Promise((r) => setTimeout(() => r(false), 1500))]);
+  } catch { return false; }
+}
 // Straight into the review folder when the lab's server is there; copied for pasting when it isn't.
 // The notes this body already has, and the owner's answers, so Jerry sees what changed before he
 // writes again. Asked of the write door (POST /__studio/notes), which only reads; without the lab's
@@ -1235,26 +1247,35 @@ function live1(dt) {
   if (showBones) for (const lb of labBodies) drawBones(lb, bonePoints(lb));
   record(false);
 }
+// A frame that throws still draws and still hands over the pictures it owes (a note waits on them);
+// the error is reported, once for each different message, rather than every frame.
+const frameErrors = new Set();
 renderer.setAnimationLoop(() => {
   const gap = clock.getDelta(), real = Math.min(0.05, gap);
   if (gap > 0) cost.fps = smooth(cost.fps, 1 / gap);
-  if (labBodies.length && !building) {
-    const t0 = performance.now();
-    if (mode === 'live') live1(real * speed);
-    else if (mode === 'replay') {
-      viewT = Math.min(recEnd(), viewT + real * speed);
-      showFrame(viewT);
-      if (viewT >= recEnd() - 1e-9) setMode('paused');
+  try {
+    if (labBodies.length && !building) {
+      const t0 = performance.now();
+      if (mode === 'live') live1(real * speed);
+      else if (mode === 'replay') {
+        viewT = Math.min(recEnd(), viewT + real * speed);
+        showFrame(viewT);
+        if (viewT >= recEnd() - 1e-9) setMode('paused');
+      }
+      cost.bodies = smooth(cost.bodies, performance.now() - t0);
+      drawTags();
+      drawTimeline();
+      if (performance.now() - readoutAt > 100) { readoutAt = performance.now(); drawReadout(); }
     }
-    cost.bodies = smooth(cost.bodies, performance.now() - t0);
-    drawTags();
-    drawTimeline();
-    if (performance.now() - readoutAt > 100) { readoutAt = performance.now(); drawReadout(); }
+  } catch (e) {
+    const m = String((e && e.stack) || e);
+    if (!frameErrors.has(m)) { frameErrors.add(m); console.error('motion lab: a frame failed:', e); }
+  } finally {
+    const t1 = performance.now();
+    renderer.render(scene, camera);
+    cost.draw = smooth(cost.draw, performance.now() - t1);
+    takeCaptures();
   }
-  const t1 = performance.now();
-  renderer.render(scene, camera);
-  cost.draw = smooth(cost.draw, performance.now() - t1);
-  takeCaptures();
 });
 // Live time moved on in whole 1/60 s frames without waiting for the screen, for a script on a slow
 // machine (headless Chrome draws a frame a second): the same steps the loop takes, then one picture.
