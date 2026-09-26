@@ -49,7 +49,7 @@ const SEGMENTS = {
   torus: { def: [16, 6], lo: [3, 3], hi: [64, 32], second: 'around the tube' }
 };
 const TOP_KEYS = ['format', 'name', 'kind', 'version', 'owner', 'notes', 'materials', 'joints', 'parts', 'chains', 'budget', 'merge',
-  'rig', 'displayScale', 'head', 'stage', 'body'];
+  'rig', 'displayScale', 'head', 'stage', 'body', 'clips'];
 const MATERIAL_KEYS = ['color', 'roughness', 'metalness', 'emissive', 'emissiveIntensity', 'flatShading', 'transparent', 'opacity', 'side', 'note'];
 const JOINT_KEYS = ['parent', 'at', 'rot', 'aim', 'pole', 'mirror', 'note'];
 const CHAIN_KEYS = ['root', 'mid', 'end', 'lengths', 'pole', 'exact', 'mirror', 'note'];
@@ -326,6 +326,8 @@ export function validateModel(json) {
   }
   if (json.rig !== undefined && !(typeof json.rig === 'string' && /^[a-z][a-z0-9-]*$/.test(json.rig))) errs.push('"rig" is the name it registers as a studio rig (lower case), e.g. "spider"');
   if (json.rig !== undefined && !jointNames.size) errs.push('"rig" needs "joints": a rig is a skeleton');
+  if (json.clips !== undefined && !(Array.isArray(json.clips) && json.clips.every((c) => typeof c === 'string' && /^[\w-]+\/[\w-]+$/.test(c)))) errs.push('"clips" lists the clips its rig plays, "rig/clip" (studio/clips/<rig>/<clip>.json), the one to show first first');
+  if (json.clips !== undefined && json.rig === undefined) errs.push('"clips" needs "rig": only a model that is a rig plays clips');
   if (json.displayScale !== undefined && !(isNum(json.displayScale) && json.displayScale > 0)) errs.push('"displayScale" is the size it is shown at, above 0 (1 is as built)');
   if (json.head !== undefined) {
     const h = json.head;

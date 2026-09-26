@@ -42,7 +42,7 @@
   </div>
   <div id="clipbox" style="display:none">
     <h2>Clip (a creature that is a rig)</h2>
-    <input type="text" id="clip" placeholder="spider/crawl">
+    <input type="text" id="clip" list="cliplist" placeholder="spider/crawl"><datalist id="cliplist"></datalist>
     <div class="grid" style="margin-top:6px"><button id="play">Play</button><button id="stop">Rest pose</button></div>
   </div>
   <div id="hitbox" style="display:none">
@@ -290,9 +290,11 @@ if (SHEET) {
     frame(camera, [1, 0.5, 1], box.union(new THREE.Box3().setFromObject(marine.group)), innerWidth / innerHeight);
     placeCam();
     const clipIn = document.getElementById('clip');
-    const own = json.rig || json.name;
-    clipIn.value = q.get('clip') || (inst && inst.def.body ? `${own}/idle` : `${own}/crawl`);
-    armBody(json).then(() => { if (inst && (q.get('clip') || body)) playClip(); });
+    const own = json.rig || json.name, listed = json.clips || [];
+    document.getElementById('cliplist').replaceChildren(...listed.map((c) => new Option(c, c)));
+    // Its idle under a reaction when it has a body; otherwise the first clip it lists.
+    clipIn.value = q.get('clip') || (inst && inst.def.body ? (listed.find((c) => c.endsWith('/idle')) || `${own}/idle`) : (listed[0] || ''));
+    armBody(json).then(() => { if (inst && clipIn.value && (q.get('clip') || body || listed.length)) playClip(); });
   };
   // --- Hitting a creature that has a body (studio/motion.js, D-42), with the motion lab's weapons. Its
   // preset is the one for its rig in studio/motion/index.js, or studio/motion/<rig>/<rig>.json.

@@ -29,8 +29,6 @@ register(new URL('./node-three-hook.mjs', import.meta.url));
 const { buildModel, validateModel, rigFromModel, modelAsset } = await import('./model.js');
 const { models } = await import('./models/index.js');
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
-// A creature that is a rig shows this clip under its sheet unless --clip names another.
-const CLIPS = { 'creature/spider': 'spider/crawl' };
 
 function args() {
   const pos = [], opt = {};
@@ -74,7 +72,7 @@ function check(arg) {
   if (json.joints) {
     const def = rigFromModel(json);
     for (const [n, c] of Object.entries(def.chains)) console.log(`  limb ${n}: ${c.root} > ${c.mid} > ${c.end}, lengths ${c.lengths.map((v) => v.toFixed(3)).join(' + ')}, pole [${c.pole.join(', ')}]${c.exact ? ', exact' : ''}`);
-    if (json.rig) console.log(`  registers as rig "${json.rig}"${def.body ? ', with a body that reacts' : ''}`);
+    if (json.rig) console.log(`  registers as rig "${json.rig}"${def.body ? ', with a body that reacts' : ''}${json.clips ? '; plays ' + json.clips.join(', ') : ''}`);
   }
   if (Object.keys(m.limbs).length) console.log(`  limbs that can be lost: ${Object.entries(m.limbs).map(([k, v]) => `${k} (${v.length} mesh${v.length > 1 ? 'es' : ''})`).join(', ')}`);
   return !m.over;
@@ -117,7 +115,8 @@ async function sheet(arg, opt) {
   const { ref, json, file, listed } = resolve(arg);
   const errs = validateModel(json);
   if (errs.length) throw new Error(`${file} is not valid:\n  - ${errs.join('\n  - ')}`);
-  const clip = opt.clip && opt.clip !== true ? opt.clip : (CLIPS[ref] || '');
+  // A model that is a rig shows the first of its "clips" under its sheet, unless --clip names another.
+  const clip = opt.clip && opt.clip !== true ? opt.clip : ((json.clips || [])[0] || '');
   const q = new URLSearchParams({ mode: 'sheet', ...(listed ? { model: ref } : { file }), ...(clip ? { clip } : {}) });
   if ((opt.out && opt.out !== true) || !listed) {
     const out = opt.out && opt.out !== true ? path.resolve(opt.out) : path.join(ROOT, 'Claude outputs', 'models', json.name + '.png');

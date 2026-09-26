@@ -6,6 +6,7 @@
   "owner": "claude",
   "notes": "The spider zombie for its future body: a man's torso slung low and level, his own head out front with the jaw hanging, and eight human limbs splayed out with elbows and knees riding high, hands planted, like something crawling that shouldn't be able to. Six arms and the legs at the back. Each limb lies in its own upright plane, so the IK solver's pose at rest is the modelled pose. The game's spider today (index.html makeZombieMesh) has six limbs; drop pair 2 or 3 here if Jerry wants six. One finish for all the flesh, rags and bone, so each joint draws once (merge: color).",
   "rig": "spider",
+  "clips": ["spider/crawl", "spider/idle"],
   "materials": {
     "flesh": { "color": "#a39a84", "roughness": 0.9 },
     "darkFlesh": { "color": "#756f5f", "roughness": 0.9 },

@@ -54,6 +54,12 @@ test('every model on disk is listed, is valid, is named for its file and builds 
     const m = buildModel(json);
     assert.ok(!m.over, `${ref} is over its budget: ${JSON.stringify(m.cost)} against ${JSON.stringify(json.budget)}`);
     assert.deepEqual(m.cost, rigCost(m.group), 'counted the way a rig is');
+    // The clips a model lists are on disk, valid, and for its rig.
+    for (const c of json.clips || []) {
+      const clip = loadClip(read(`./clips/${c}.json`));
+      assert.equal(clip.rig, json.rig, `${c} is for rig "${json.rig}"`);
+    }
+    if (json.rig) assert.equal(rigs.def(json.rig).model, ref, `studio/rigs.js registers ${ref} as "${json.rig}"`);
     console.log(`  ${ref.padEnd(18)} draws ${String(m.cost.draws).padStart(2)}/${json.budget.draws}  triangles ${String(m.cost.triangles).padStart(4)}/${json.budget.triangles}  ${Object.keys(m.joints).length} joints, ${m.parts.length} parts drawn`);
   }
   // What the roadmap asks of the first ones: the drum in one or two draws (P-43), the boat under 40 (P-52).
@@ -81,6 +87,7 @@ test('a bad model is refused with every problem named as a sentence', () => {
       { shape: 'box', size: [1, 1, 1], material: 'paint', scale: -1 },
       { shape: 'rod', size: [0.1], from: [0, 0, 0], to: [0, 0, 0], material: 'paint' }
     ],
+    clips: ['spider/crawl'],
     chains: { legL: { root: 'pelvis', mid: 'kneeL', end: 'footL' } },
     merge: 'yes'
   };
@@ -95,7 +102,7 @@ test('a bad model is refused with every problem named as a sentence', () => {
     /part 4: a lathe's "points" go from bottom to top/, /part 5: an array of 3 needs a "step" or a "rot"/,
     /part 6: its mirror goes on "kneeR", and there is no such joint/, /part 7: "scale" is a number or \[x, y, z\], above 0/,
     /part 8: a rod's "from" and "to" are the same point/,
-    /chain "legL": "footL" must sit down "kneeL"'s -Y/
+    /chain "legL": "footL" must sit down "kneeL"'s -Y/, /"clips" needs "rig"/
   ]) assert.match(text, want);
   assert.throws(() => buildModel(bad), /is not valid/);
   assert.throws(() => rigFromModel(bad), /is not valid/);
@@ -355,18 +362,23 @@ test('a model is a rig with no new code: rest pose, adopting a built one, and wh
   assert.equal(inst.R, built.joints);
   assert.throws(() => rigs.get('spider').create({ group: buildModel(models.json('prop/fuel-drum')).group }), /not a "spider" model/);
   // A prop with joints (the boat's motor and lamp) can be a rig too, with no limbs.
-  const boat = rigFromModel(models.json('prop/evac-boat'));
-  assert.deepEqual(boat.chains, {});
-  registerRig('boat-test', boat);
-  assert.ok(rigs.get('boat-test').create({}).R.lamp);
+  assert.deepEqual(rigs.def('evac-boat').chains, {});
   assert.throws(() => rigFromModel(model([{ shape: 'box', size: [1, 1, 1], material: 'a' }])), /has no "joints": a rig needs a skeleton/);
-  // A clip can turn the boat's lamp: the joints are the model's own.
-  const sweep = loadClip({ format: 'dw-clip/1', name: 'sweep', rig: 'boat-test', length: 1, tracks: { lamp: { rot: [[0, [0, -30, 0]], [1, [0, 30, 0]]] } } });
-  const b = rigs.get('boat-test').create({});
-  createPlayer(b).play(sweep).update(0.5);
-  b.group.updateWorldMatrix(true, true);
-  const beam = wpos(b.R.beam), lamp = wpos(b.R.lamp);
-  assert.ok(Math.abs(beam.x - lamp.x) < 1e-6, 'halfway through the sweep the lamp faces ahead');
+  // Its searchlight sweeps the shore: the clip turns the model's own lamp joint.
+  const b = rigs.get('evac-boat').create({});
+  const beamX = (t) => { createPlayer(b).play(loadClip(read('./clips/evac-boat/search.json'))).poseAt(t); b.group.updateWorldMatrix(true, true); return wpos(b.R.beam).x - wpos(b.R.lamp).x; };
+  assert.ok(beamX(0) < -0.05 && beamX(3) > 0.05, 'the lamp swings from one side to the other');
+  assert.ok(Math.abs(beamX(1.5)) < 1e-6, 'and faces ahead halfway');
+  // P-52's approach: 24 m in, slowing to the dock, with the horn, the flares and "docked" on the way.
+  const arrive = loadClip(read('./clips/evac-boat/arrive.json'));
+  const a = rigs.get('evac-boat').create({});
+  const player = createPlayer(a).play(arrive, { rootMotion: true });
+  const names = [], zs = [];
+  for (let i = 0; i <= 20 * 30; i++) { for (const e of player.update(i === 0 ? 0 : 1 / 30)) names.push(e.name); zs.push(a.group.position.z); }
+  assert.deepEqual(names, ['horn', 'flares', 'horn', 'docked']);
+  assert.ok(Math.abs(zs[0] + 24) < 1e-6 && Math.abs(zs[zs.length - 1]) < 1e-6, `from ${zs[0]} to ${zs[zs.length - 1]}`);
+  const speed = (i) => (zs[i + 1] - zs[i]) * 30;
+  assert.ok(speed(30) > speed(300) && speed(300) > speed(570), 'it slows all the way in');
 });
 
 // The spider's body is data in its model file (points, bones, braces, hinges, frames, segments), and
