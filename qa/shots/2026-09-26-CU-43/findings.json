@@ -1,0 +1,12 @@
+{
+  "findings": [
+    "5 page error(s). First: TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."
+  ],
+  "errors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25005/ui/prep-checklist.js:116:15\n    at <anonymous>:2:12\n    at <anonymous>:5:5",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25005/ui/prep-checklist.js:116:15\n    at <anonymous>:2:12\n    at <anonymous>:5:5",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25005/ui/prep-checklist.js:116:15\n    at <anonymous>:2:12\n    at <anonymous>:5:5",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25005/ui/prep-checklist.js:116:15\n    at <anonymous>:2:12\n    at <anonymous>:5:5",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25005/ui/prep-checklist.js:116:15\n    at <anonymous>:2:12\n    at <anonymous>:5:5"
+  ]
+}
