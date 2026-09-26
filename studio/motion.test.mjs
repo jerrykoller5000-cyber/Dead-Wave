@@ -20,7 +20,7 @@ function play(rig, ref, action, secs = 4, opts = {}) {
   for (let f = 0; f < secs * 60; f++) {
     body.follow();
     if (f === 30) action(body);
-    for (const e of body.update(1 / 60)) events.push(e[0]);
+    for (const e of body.update(1 / 60, { lod: opts.lod || 0 })) events.push(e[0]);
     body.apply();
     for (const p of Object.values(body.points())) { minY = Math.min(minY, p[1]); if (!p.every(Number.isFinite)) bad = true; }
     inst.group.traverse((o) => { if (o.isObject3D && !(Number.isFinite(o.quaternion.x) && Number.isFinite(o.position.x))) bad = true; });
@@ -157,4 +157,296 @@ test('a scene refuses hits without a preset, and a bad hit, in sentences', () =>
   const bad = { format: 'dw-scene/1', name: 'x', length: 1, actors: { z: { rig: 'zombie', at: [0, 0, 0], clips: [[0, 'zombie/idle']], hits: [[0.2, { kind: 'laser', dir: [1, 0] }]] } } };
   assert.throws(() => loadScene(bad, clipOf), (e) => /needs "motion"/.test(e.message) && /"kind" is one of/.test(e.message) && /"dir" is \[x, y, z\]/.test(e.message));
   assert.equal(HIT_KINDS.length, 5);
+});
+
+// --- Held, lost, getting up, level of detail (the engine package: contracts 1 to 4) ------------
+// What studio/index.js doesn't export yet comes straight from its file.
+import { BODY_PARTS } from './motion.js';
+import { sceneClipRefs } from './scene.js';
+import { loadClip, createPlayer } from './clip.js';
+
+const clipAt = (r) => loadClip(clipOf(r));
+// Every simulated point's height over the ground less its own radius (studio/bodies.js): never
+// under 0. Only while the body simulates (its points mean nothing before it first wakes), and only
+// the parts it still has. Feet stand as deep as the rig's own sole does at rest (the marine's sole
+// point is 4 cm under its radius; the engine keeps that depth), so a foot is only held to the ground.
+const RADIUS = { pelvis: 0.12, waist: 0.11, chest: 0.13, head: 0.08, crown: 0.12, hipL: 0.09, hipR: 0.09, kneeL: 0.07, kneeR: 0.07, footL: 0, footR: 0, shoulderL: 0.08, shoulderR: 0.08, elbowL: 0.06, elbowR: 0.06, handL: 0.05, handR: 0.05 };
+const GONE = { armL: ['elbowL', 'handL'], armR: ['elbowR', 'handR'], legL: ['kneeL', 'footL'], legR: ['kneeR', 'footR'], head: ['head', 'crown'] };
+const underGround = (body) => {
+  if (!body.awake) return Infinity;
+  const skip = new Set(body.lost.flatMap((p) => GONE[p]));
+  let m = Infinity;
+  for (const [k, v] of Object.entries(body.points())) if (!skip.has(k)) m = Math.min(m, v[1] - RADIUS[k]);
+  return m;
+};
+
+test('a held body: its point stays on a moving hand, the rest hangs off it, and nothing goes through the ground', () => {
+  const inst = rigs.get('marine').create({});
+  const body = createBody(inst, preset('marine/held'));
+  const player = createPlayer(inst).play(clipAt('marine/stand'), { loop: true });
+  const hand = new THREE.Vector3();
+  const events = [];
+  let worst = 0, under = Infinity, gone = 0;
+  for (let f = 0; f < 60 * 5; f++) {
+    const t = f / 60;
+    player.update(1 / 60);
+    body.follow();
+    // A hand takes his ankle at 0.5 s, lifts it to 0.7 m and walks off with it at 2 m/s, swinging
+    // it side to side, and lets go at 3.2 s.
+    hand.set(0.13 + 0.25 * Math.sin(t * 5), 0.1 + Math.min(0.6, Math.max(0, t - 0.5) * 1.5), 0.02 + Math.max(0, t - 0.8) * 2);
+    if (f === 30) assert.ok(body.hold('footL', hand), 'the hold takes');
+    if (f === 192) assert.ok(body.release('footL'));
+    for (const e of body.update(1 / 60)) events.push(e[0]);
+    body.apply();
+    const p = body.points();
+    if (f > 30 && f < 192) worst = Math.max(worst, Math.hypot(p.footL[0] - hand.x, p.footL[1] - hand.y, p.footL[2] - hand.z));
+    under = Math.min(under, underGround(body));
+    gone = Math.max(gone, Math.hypot(p.pelvis[0], p.pelvis[2]));
+    for (const v of Object.values(p)) assert.ok(v.every(Number.isFinite));
+  }
+  assert.ok(worst < 0.03, `the held point stays within 3 cm of the hand (worst ${worst.toFixed(4)} m)`);
+  assert.ok(under > -0.002, `nothing goes through the ground (lowest point ${under.toFixed(4)} m under its radius)`);
+  assert.ok(gone > 3, `the body goes with the hand (pelvis ${gone.toFixed(2)} m from where it stood)`);
+  for (const e of ['held', 'released', 'fall', 'down', 'getup']) assert.ok(events.includes(e), e + ' in ' + events.join(' '));
+  assert.ok(events.indexOf('released') < events.indexOf('fall'), 'let go of, it drops');
+});
+
+test('a hold can be a function, is a spring under strength 1, and a lost part can\'t be held', () => {
+  const make = () => { const inst = rigs.get('zombie').create({}); const b = createBody(inst, preset('zombie/shambler')); b.follow(); return b; };
+  // A hand that takes it by the wrist and walks off at 1.5 m/s.
+  const lag = (strength) => {
+    const b = make();
+    let t = 0, worst = 0;
+    b.hold('handR', () => [0.3 + t * 1.5, 1.2, 0.5], { strength });
+    for (let f = 0; f < 90; f++) { t = f / 60; b.follow(); b.update(1 / 60); b.apply(); const p = b.points().handR; if (f > 20) worst = Math.max(worst, Math.hypot(p[0] - (0.3 + t * 1.5), p[1] - 1.2, p[2] - 0.5)); }
+    assert.equal(b.state, 'held');
+    return { worst, went: b.points().pelvis[0] };
+  };
+  const hard = lag(1), soft = lag(0.4);
+  assert.ok(hard.worst < 0.01, 'hard: on the target, ' + hard.worst.toFixed(4));
+  // Soft, it trails the hand like a spring, and still pulls the body after it.
+  assert.ok(soft.worst > hard.worst * 3, 'soft: trails it, ' + soft.worst.toFixed(3));
+  assert.ok(soft.went > 0.4 && hard.went > soft.went, `both pull the body along (hard ${hard.went.toFixed(2)} m, soft ${soft.went.toFixed(2)} m)`);
+  const b = make();
+  b.lose('armR');
+  assert.equal(b.hold('handR', [0, 1, 0]), false);
+  assert.throws(() => b.hold('tail', [0, 1, 0]), /no such point/);
+});
+
+test('the flop scene: the hand keeps his ankle within 3 cm while it has him, he never goes through the ground, and it seeks the same every time', () => {
+  const json = JSON.parse(fs.readFileSync(new URL('./scenes/guardian-grab-drag-flop.json', import.meta.url), 'utf8'));
+  const plain = JSON.parse(fs.readFileSync(new URL('./scenes/guardian-grab-drag.json', import.meta.url), 'utf8'));
+  assert.equal(plain.actors.marine.motion, undefined, 'the scene the game plays is untouched');
+  assert.equal(json.actors.marine.motion, 'marine/held');
+  const sc = loadScene(json, clipOf);
+  assert.deepEqual(sc.warnings, []);
+  const sp = createScene(sc);
+  const body = sp.actors.marine.body;
+  let worst = 0, at = 0, under = Infinity, heldFrom = null;
+  const states = new Set();
+  while (!sp.done) {
+    const r = sp.update(1 / 60);
+    states.add(body.state);
+    if (body.holding && heldFrom === null) heldFrom = sp.t;
+    under = Math.min(under, underGround(body));
+    // From 0.6 s the hold is at its full weight (its tow keys): the hand has him.
+    const g = r.checks.gap['guardian.handR>marine.footL'];
+    if (sp.t >= 0.6 && body.holding && g && g.value > worst) { worst = g.value; at = sp.t; }
+  }
+  console.log(`  flop: held from ${heldFrom.toFixed(2)} s, worst grip gap ${(worst * 100).toFixed(1)} cm at ${at.toFixed(2)} s`);
+  assert.ok(worst < 0.03, `grip gap ${worst.toFixed(3)} m at ${at.toFixed(2)} s`);
+  assert.ok(under > -0.002, 'nothing through the ground: ' + under.toFixed(4));
+  assert.ok(Math.abs(heldFrom - 0.42) < 0.03, 'the hand takes him as the tow starts: ' + heldFrom);
+  assert.ok(states.has('held') && body.state === 'held', [...states].join(' '));
+  assert.ok(body.points().pelvis[2] > 7, 'hauled off with it: ' + body.points().pelvis[2].toFixed(2));
+  // The marine adds no failing check of his own (the guardian's are its clips', as in the plain scene).
+  assert.deepEqual(Object.values(sp.worst).filter((w) => w.bad && w.key.startsWith('marine')).map((w) => w.kind + ':' + w.key), []);
+  // seek replays from 0 in fixed steps: the same body and the same joints every time.
+  const snap = () => [JSON.stringify(body.points()), Object.values(sp.actors.marine.inst.R).map((j) => j.quaternion.toArray().map((x) => x.toFixed(9)).join()).join('|')];
+  sp.seek(3.1); const a = snap();
+  sp.seek(1.2); sp.seek(3.1); const b = snap();
+  assert.deepEqual(a, b);
+});
+
+test('a lost leg drops a standing body; a lost arm doesn\'t, and a rifle round still only rocks it', () => {
+  const leg = play('zombie', 'zombie/shambler', (b) => b.lose('legL'), 4);
+  assert.ok(leg.events.includes('lost') && leg.events.includes('fall') && leg.events.includes('down'), leg.events.join(' '));
+  assert.ok(underGround(leg.body) > -0.002 && !leg.bad, 'what it has left lies on the ground: ' + underGround(leg.body).toFixed(4));
+  const arm = play('zombie', 'zombie/shambler', (b) => { b.lose('armL'); b.hit({ at: 'chest', dir: [0, 0, -1], power: 2.5, kind: 'bullet' }); }, 3);
+  assert.ok(!arm.events.includes('fall') && arm.events.includes('recovered'), arm.events.join(' '));
+  assert.deepEqual(arm.body.lost, ['armL']);
+  // The lost arm doesn't simulate: it rides with its shoulder, as far off it as the animation has it.
+  const p = arm.body.points(), a = arm.body.animPoints();
+  const far = (q) => Math.hypot(...[0, 1, 2].map((i) => q.handL[i] - q.shoulderL[i]));
+  assert.ok(Math.abs(far(p) - far(a)) < 1e-9, 'the hand kept its place off the shoulder');
+  // A marine who loses a leg goes down too; a zombie that loses its head and is shot there dies.
+  const m = play('marine', 'marine/marine', (b) => b.lose('legR'), 3);
+  assert.ok(m.events.includes('fall'), m.events.join(' '));
+  const h = play('zombie', 'zombie/shambler', (b) => { b.lose('head'); b.kill({ at: 'head', dir: [0, 0, -1], power: 3 }); }, 4);
+  assert.ok(h.events.includes('dead') && h.events.includes('settled') && !h.bad, h.events.join(' '));
+  assert.deepEqual(BODY_PARTS, ['armL', 'armR', 'legL', 'legR', 'head']);
+  assert.throws(() => leg.body.lose('tail'), /parts are armL, armR, legL, legR, head/);
+  // reset() puts it back together.
+  leg.body.reset();
+  assert.deepEqual(leg.body.lost, []);
+});
+
+// A host that plays clips, as the contract has it: on 'getup' it turns the rig's group to the
+// heading and plays the preset's clip for that side from its start (at length / getup.time), then
+// goes back to its own clip. It takes on the body's drift while the body reacts.
+function hostGetsUp(rig, ref, base, hit, secs = 6) {
+  const inst = rigs.get(rig).create({});
+  const p = preset(ref);
+  const body = createBody(inst, p);
+  const player = createPlayer(inst).play(clipAt(base), { loop: true });
+  let getup = null, back = false;
+  const events = [];
+  for (let f = 0; f < secs * 60; f++) {
+    player.update(1 / 60);
+    body.follow();
+    if (f === 30) body.hit(hit);
+    for (const e of body.update(1 / 60)) {
+      events.push(e[0]);
+      if (e[0] === 'getup') {
+        getup = e[1];
+        assert.deepEqual(body.lying, e[1], 'body.lying is what the event says');
+        inst.group.rotation.y = e[1].heading;
+        const c = clipAt(p.getup[e[1].side]);
+        player.play(c, { speed: c.length / p.getup.time });
+      }
+    }
+    body.apply();
+    if (body.awake) inst.group.position.add(body.drift);
+    if (body.state === 'down') assert.ok(body.lying && ['front', 'back'].includes(body.lying.side));
+    if (getup && player.done && !back) { back = true; player.crossfade(clipAt(base), 0.3, { loop: true, speed: 1 }); }
+  }
+  inst.group.updateWorldMatrix(true, true);
+  const y = (j) => new THREE.Vector3().setFromMatrixPosition(inst.R[j].matrixWorld).y;
+  return { body, events, getup, back, pelvisY: y('pelvis'), headY: y('head') };
+}
+
+test('knocked down face down it gets up from the front, on its back from the back, and ends standing on its animation', () => {
+  const cases = [
+    ['zombie', 'zombie/shambler', 'zombie/idle', { at: 'chest', dir: [0, 0.1, 1], power: 8, kind: 'pellet' }, 'front', 0.55, 1.41],
+    ['zombie', 'zombie/shambler', 'zombie/idle', { at: 'chest', dir: [0, 0.1, -1], power: 8, kind: 'pellet' }, 'back', 0.55, 1.41],
+    ['marine', 'marine/marine', 'marine/stand', { at: 'chest', dir: [0, 0.1, 1], power: 8, kind: 'pellet' }, 'front', 0, 1.22],
+    ['marine', 'marine/marine', 'marine/stand', { at: 'chest', dir: [0, 0.1, -1], power: 8, kind: 'pellet' }, 'back', 0, 1.22]
+  ];
+  for (const [rig, ref, base, hit, side, pelvisY, headY] of cases) {
+    const r = hostGetsUp(rig, ref, base, hit);
+    const what = `${rig} pushed ${hit.dir[2] > 0 ? 'forward' : 'back'}`;
+    const order = ['fall', 'down', 'getup', 'recovered'].map((e) => r.events.indexOf(e));
+    assert.ok(order.every((i, k) => i >= 0 && (k === 0 || i > order[k - 1])), what + ': ' + r.events.join(' '));
+    assert.equal(r.getup.side, side, what);
+    // It faces the way it went over, give or take the twist of the fall: a heading of about 0 (+Z).
+    assert.ok(Math.abs(Math.atan2(Math.sin(r.getup.heading), Math.cos(r.getup.heading))) < 0.8, what + ' heading ' + r.getup.heading.toFixed(2));
+    assert.ok(r.back, what + ': the clip played through');
+    assert.equal(r.body.state, 'animated'); assert.equal(r.body.weight, 0); assert.equal(r.body.lying, null);
+    assert.ok(Math.abs(r.pelvisY - pelvisY) < 0.02 && Math.abs(r.headY - headY) < 0.03, `${what}: standing (pelvis ${r.pelvisY.toFixed(3)}, head ${r.headY.toFixed(3)})`);
+  }
+});
+
+test('every preset\'s get-up clips are on disk, start lying and end standing, and none snaps at the rate it plays', () => {
+  for (const ref of presets.names()) {
+    const p = preset(ref);
+    for (const side of ['front', 'back']) {
+      const cref = p.getup[side];
+      if (!cref) continue;
+      const clip = clipAt(cref);
+      assert.equal(clip.rig, p.rig, `${ref} getup.${side}`);
+      const inst = rigs.get(p.rig).create({});
+      const player = createPlayer(inst).play(clip);
+      const rate = clip.length / p.getup.time, prev = new Map();
+      let worst = 0;
+      const steps = Math.ceil(p.getup.time * 60);
+      for (let i = 0; i <= steps; i++) {
+        player.update(i === 0 ? 0 : clip.length / steps);
+        for (const o of Object.values(inst.R)) { if (!o || !o.isObject3D) continue; const q = prev.get(o); if (q) worst = Math.max(worst, 2 * Math.acos(Math.min(1, Math.abs(q.dot(o.quaternion))))); prev.set(o, o.quaternion.clone()); }
+        inst.group.updateWorldMatrix(true, true);
+        const head = new THREE.Vector3().setFromMatrixPosition(inst.R.head.matrixWorld).y;
+        if (i === 0) assert.ok(head < 0.45, `${cref} starts lying (head ${head.toFixed(2)})`);
+        if (i === steps) assert.ok(head > 1.1, `${cref} ends standing (head ${head.toFixed(2)})`);
+      }
+      assert.ok(worst < 0.3, `${cref} at ${rate.toFixed(2)}x (${ref}): worst one-frame turn ${worst.toFixed(3)} rad`);
+    }
+  }
+  // A preset names them, and is told in sentences when it's wrong; fields it doesn't know are left alone.
+  const base = { format: 'dw-motion/1', name: 'x', rig: 'zombie' };
+  assert.deepEqual(validateMotion({ ...base, expect: [{ hit: 'rifle', want: 'flinch' }], getup: { time: 1, front: 'zombie/getup-front' }, held: { tone: 0.1, friction: 0.2, upright: 0.5, absorb: 0.8 } }), []);
+  const errs = validateMotion({ ...base, getup: { front: 'marine/getup-front', back: 'nope' }, held: { tone: { tail: 1 }, absorb: 2 } }).join('; ');
+  for (const want of ['getup.front: "marine/getup-front" is a clip for rig "marine"', 'getup.back is a clip "rig/name"', 'held.tone.tail', 'held.absorb must be a number from 0 to 1']) assert.ok(errs.includes(want), 'missing: ' + want + '\n' + errs);
+});
+
+test('in a scene a body gets up on its clip, turned the way it lies, and the scene takes it back standing', () => {
+  const json = JSON.parse(fs.readFileSync(new URL('./scenes/zombie-reactions.json', import.meta.url), 'utf8'));
+  assert.ok(sceneClipRefs(json).includes('zombie/getup-front') && sceneClipRefs(json).includes('zombie/getup-back'));
+  const sp = createScene(loadScene(json, clipOf));
+  let getup = null;
+  while (!sp.done) for (const e of sp.update(1 / 60).events) if (e.actor === 'shotgunClose' && e.name === 'motion:getup') getup = e.data;
+  assert.ok(getup && getup.side === 'back', 'shot in the chest from in front, it lay on its back: ' + JSON.stringify(getup));
+  const a = sp.actors.shotgunClose;
+  assert.equal(a.body.state, 'animated');
+  a.inst.group.updateWorldMatrix(true, true);
+  const yaw = new THREE.Euler().setFromQuaternion(a.inst.group.getWorldQuaternion(new THREE.Quaternion()), 'YXZ').y;
+  assert.ok(Math.abs(Math.atan2(Math.sin(yaw - getup.heading), Math.cos(yaw - getup.heading))) < 1e-6, 'it stands facing the heading it got up on');
+  assert.ok(Math.abs(new THREE.Vector3().setFromMatrixPosition(a.inst.R.pelvis.matrixWorld).y - 0.55) < 0.02, 'standing');
+  // A page that fetches only the actors' clips still plays the scene; the body gets up the old way.
+  const bare = loadScene(json, (r) => (r.includes('getup') ? undefined : clipOf(r)));
+  assert.ok(bare.warnings.length > 0 && /get-up clip/.test(bare.warnings[0]));
+  const sp2 = createScene(bare);
+  while (!sp2.done) sp2.update(1 / 60);
+  assert.equal(sp2.actors.shotgunClose.body.state, 'animated');
+});
+
+test('a scene can take a part off a body on cue', () => {
+  const sc = loadScene({ format: 'dw-scene/1', name: 'x', length: 3, actors: { z: { rig: 'zombie', at: [0, 0, 0], clips: [[0, 'zombie/idle']], motion: 'zombie/shambler', lose: [[0.5, 'legR']] } } }, clipOf);
+  const sp = createScene(sc);
+  const ev = [];
+  while (!sp.done) for (const e of sp.update(1 / 60).events) ev.push(e.name);
+  assert.ok(ev.includes('motion:lost') && ev.includes('motion:fall'), ev.join(' '));
+  assert.equal(sp.actors.z.inst.R.hipR.visible, false, 'the studio body stops drawing it');
+  sp.seek(0.2);
+  assert.equal(sp.actors.z.inst.R.hipR.visible, true, 'and has it back on a seek');
+  assert.throws(() => loadScene({ format: 'dw-scene/1', name: 'x', length: 1, actors: { z: { rig: 'zombie', at: [0, 0, 0], clips: [[0, 'zombie/idle']], lose: [[0.5, 'tail']] } } }, clipOf), (e) => /"lose" needs "motion"/.test(e.message) && /the part one of armL/.test(e.message));
+});
+
+test('level of detail: lod 1 costs clearly less and still falls and gets up; lod 2 holds the pose while its timers run', () => {
+  const crowd = () => Array.from({ length: 48 }, (_, i) => {
+    const inst = rigs.get('zombie').create({}); inst.group.position.set(i * 2, 0, 0);
+    const b = createBody(inst, preset('zombie/shambler')); b.follow(); b.hit({ power: 4.5, kind: 'pellet' }); return b;
+  });
+  const cost = (lod) => {
+    let best = Infinity;
+    for (let rep = 0; rep < 3; rep++) {
+      const bodies = crowd();
+      let ms = 0;
+      for (let f = 0; f < 40; f++) for (const b of bodies) { b.follow(); const t0 = performance.now(); b.update(1 / 60, { lod }); ms += performance.now() - t0; b.apply(); }
+      best = Math.min(best, ms / 40);
+    }
+    return best;
+  };
+  const c0 = cost(0), c1 = cost(1), c2 = cost(2);
+  console.log(`  48 bodies, update only: lod 0 ${c0.toFixed(2)} ms, lod 1 ${c1.toFixed(2)} ms, lod 2 ${c2.toFixed(2)} ms a frame`);
+  assert.ok(c1 < c0 * 0.75, `lod 1 ${c1.toFixed(2)} ms against lod 0 ${c0.toFixed(2)} ms`);
+  assert.ok(c2 < c0 * 0.25);
+  // Stable at half rate: a knockdown still falls, lies, gets up and stands, all finite, above ground.
+  const r = play('zombie', 'zombie/shambler', (b) => b.hit({ at: 'chest', dir: [0, 0.1, 1], power: 8, kind: 'pellet' }), 6, { lod: 1 });
+  const order = ['fall', 'down', 'getup', 'recovered'].map((e) => r.events.indexOf(e));
+  assert.ok(order.every((i, k) => i >= 0 && (k === 0 || i > order[k - 1])), r.events.join(' '));
+  assert.ok(!r.bad && r.minY > -0.45);
+  // lod 2: the pose doesn't move, but a body that's down still gets up and recovers on time.
+  const inst = rigs.get('zombie').create({});
+  const b = createBody(inst, preset('zombie/shambler'));
+  b.follow(); b.hit({ at: 'chest', dir: [0, 0.1, 1], power: 8, kind: 'pellet' });
+  const ev = [];
+  for (let f = 0; f < 600 && b.state !== 'down'; f++) { b.follow(); ev.push(...b.update(1 / 60).map((e) => e[0])); b.apply(); }
+  const still = JSON.stringify(b.points());
+  let moved = false;
+  for (let k = 0; k < 60; k++) { b.follow(); ev.push(...b.update(1 / 60, { lod: 2 }).map((e) => e[0])); b.apply(); if (b.state === 'down' && JSON.stringify(b.points()) !== still) moved = true; }
+  assert.ok(!moved, 'held still');
+  for (let k = 0; k < 240 && b.state !== 'animated'; k++) { b.follow(); ev.push(...b.update(1 / 60, { lod: 2 }).map((e) => e[0])); b.apply(); }
+  assert.ok(ev.includes('getup') && ev.includes('recovered'), ev.join(' '));
+  // A corpse far away settles and sleeps on its timer.
+  const d = play('zombie', 'zombie/shambler', (x) => x.kill({ power: 3 }), 2, { lod: 2 });
+  assert.ok(d.events.includes('settled') && d.body.sleeping, d.events.join(' '));
 });

@@ -39,6 +39,9 @@ export const BODY_PARTS = ['armL', 'armR', 'legL', 'legR', 'head'];
 const TONE_GROUPS = ['legs', 'spine', 'arms', 'head'];
 const SUB = 1 / 120;           // fixed physics step
 const ITER = 4;                // constraint passes per step
+// A body a hand hauls stretches along the pull: twice the passes keep its limbs their length (the
+// grip stays in the hand while it swings). Held bodies are few; this costs nothing elsewhere.
+const ITER_HELD = 8;
 // A muscle is a damped spring toward the animated pose. Its stiffness (ω², 1/s²) is MUSCLE × tone²:
 // at tone 1 a limb sags 3 mm under its own weight, at 0.3 about 4 cm, at 0.1 a third of a metre,
 // and at 0.03 it's limp. Damped at ZETA of critical, so a muscle pulls back without wobbling.
@@ -68,7 +71,7 @@ const DEFAULTS = {
   getup: { time: 0.8, front: null, back: null },
   // Hanging off something that holds it (a hand round its ankle): arms that trail, a head that
   // bounces, legs that catch on the ground, and a ground it slides over instead of sticking to.
-  held: { tone: { legs: 0.12, spine: 0.3, arms: 0.07, head: 0.1 }, friction: 0.3, upright: 0 },
+  held: { tone: { legs: 0.1, spine: 0.18, arms: 0.06, head: 0.1 }, friction: 0.3, upright: 0, absorb: 0.8 },
   death: { tone: 0.03, settle: 0.5 }
 };
 
@@ -142,7 +145,7 @@ export function validateMotion(json) {
   }
   if (json.held !== undefined) {
     if (!isObj(json.held)) errs.push('"held" must be an object: { tone, friction, upright }, how the body hangs while something holds it');
-    else { tones(json.held.tone, 'held.tone'); num(json.held.friction, 'held.friction', 0, 1); num(json.held.upright, 'held.upright', 0, 1); }
+    else { tones(json.held.tone, 'held.tone'); num(json.held.friction, 'held.friction', 0, 1); num(json.held.upright, 'held.upright', 0, 1); num(json.held.absorb, 'held.absorb', 0, 1); }
   }
   if (json.death !== undefined) {
     if (!isObj(json.death)) errs.push('"death" must be an object: { tone, settle }');
@@ -178,7 +181,7 @@ export function loadMotion(json) {
     fall: { tone: toneObj(json.fall && json.fall.tone, D.fall.tone), catch: (json.fall && json.fall.catch) ?? D.fall.catch, upright: (json.fall && json.fall.upright) ?? D.fall.upright },
     down: { ...D.down, ...(json.down || {}) },
     getup: { ...D.getup, ...(json.getup || {}) },
-    held: { tone: toneObj(json.held && json.held.tone, D.held.tone), friction: (json.held && json.held.friction) ?? D.held.friction, upright: (json.held && json.held.upright) ?? D.held.upright },
+    held: { tone: toneObj(json.held && json.held.tone, D.held.tone), friction: (json.held && json.held.friction) ?? D.held.friction, upright: (json.held && json.held.upright) ?? D.held.upright, absorb: (json.held && json.held.absorb) ?? D.held.absorb },
     death: { ...D.death, ...(json.death || {}) },
     source: json
   };
@@ -261,6 +264,7 @@ export function createBody(inst, preset, opts = {}) {
   // where the hand goes; the rest of the body is what gives).
   const iw = Float64Array.from(inv);
   const P = new Float64Array(n * 3), Q = new Float64Array(n * 3);      // now, and a step ago (Verlet)
+  const PB = new Float64Array(n * 3);                                   // before a step's constraints (held bodies)
   const A = new Float64Array(n * 3), A0 = new Float64Array(n * 3);     // the animated pose, and the one before
   const pairs = (list, kind) => (list || []).map((e) => {
     for (const k of e.slice(0, 2)) if (idx[k] === undefined) throw new Error(`body ${kind} [${e.join(', ')}]: no point "${k}"`);
@@ -419,7 +423,7 @@ export function createBody(inst, preset, opts = {}) {
   // --- Held (contract: body.hold / body.release) ---
   // A hold pins one point to a moving target. At strength 1 it's hard: the point is put on the target
   // in every constraint pass, and the rest of the body hangs off it. Under 1 it's a spring of that
-  // tone. The target is read once a frame and eased across the frame's steps, so a hand moving 5 cm
+  // tone, firming into the pin as it nears 1. The target is read once a frame and eased across the frame's steps, so a hand moving 5 cm
   // a frame drags the point smoothly instead of in jumps. While anything holds it, a living body is
   // `held`: its muscles go to the preset's held tone, its feet let go, and it neither balances nor
   // steps. Let go of, it drops (or, still on its feet, finds them).
@@ -427,19 +431,23 @@ export function createBody(inst, preset, opts = {}) {
     iw.set(inv);
     for (const hd of holds) if (hd.strength >= 1) iw[hd.i] = 0;
   };
-  body.hold = (point, target, { strength = 1 } = {}) => {
+  // `offset` (optional, a Vector3 or [x, y, z], world, now): where the hand really has it, from the
+  // point (an ankle, where the point is the sole under it). It turns with the point's own bone from
+  // here on, every constraint pass, so the grip stays in the hand while the limb swings.
+  body.hold = (point, target, { strength = 1, offset = null } = {}) => {
     const i = idx[point];
     if (i === undefined) throw new Error(`hold "${point}": no such point (${names.join(', ')})`);
     if (!live[i]) return false;                     // that part is gone
     let hd = holds.find((x) => x.i === i);
-    if (!hd) {
+    const fresh = !hd;
+    if (fresh) {
       if (body.sleeping && body.state === 'dead') {
         // A settled corpse picked up again simulates again.
         if (opts.pool && !opts.pool.take(body)) return false;
         body.sleeping = false; still = 0;
       } else if (!wake()) return false;
-      hd = { i, point, target, strength: 1, cur: Float64Array.of(P[i * 3], P[i * 3 + 1], P[i * 3 + 2]), last: new Float64Array(3), t0: new Float64Array(3), t1: new Float64Array(3) };
-      hd.last.set(hd.cur);
+      hd = { i, point, target, strength: 1, ref: refOf(i), off: false, off0: new Float64Array(3), dir0: new Float64Array(3),
+        cur: new Float64Array(3), last: new Float64Array(3), t0: new Float64Array(3), t1: new Float64Array(3), goal: new Float64Array(3) };
       holds.push(hd);
       emit('held', { point });
       if (body.alive && body.state !== 'dead' && body.state !== 'held') {
@@ -449,9 +457,37 @@ export function createBody(inst, preset, opts = {}) {
     }
     hd.target = target;
     hd.strength = clamp01(strength);
+    // Near 1 a spring alone lags a fast hand, and going hard would then jump the point onto it: so
+    // the hold also pins by strength⁴ of the way each constraint pass (0.5 barely, 0.95 nearly all),
+    // firming up into the hard pin without a step.
+    hd.pin = hd.strength >= 1 ? 1 : hd.strength ** 4;
+    hd.off = !!offset && hd.ref >= 0;
+    if (hd.off) {
+      readTarget(offset, hd.off0);
+      const o = i * 3, r = hd.ref * 3;
+      _v.set(P[o] - P[r], P[o + 1] - P[r + 1], P[o + 2] - P[r + 2]).normalize();
+      hd.dir0[0] = _v.x; hd.dir0[1] = _v.y; hd.dir0[2] = _v.z;
+    }
+    // A new hold's target starts where the hand has it now: the point, or the grip off it.
+    if (fresh) { for (let c = 0; c < 3; c++) hd.cur[c] = P[i * 3 + c] + (hd.off ? hd.off0[c] : 0); hd.last.set(hd.cur); }
     weights();
     return true;
   };
+  // The point a held point's bone runs from (the knee for a foot, the elbow for a hand).
+  function refOf(i) { for (const c of bones) { if (c.b === i) return c.a; if (c.a === i) return c.b; } return -1; }
+  // Where the held point should be: on the target, or the grip's offset back from it, turned as the
+  // point's bone has turned since the offset was given.
+  const _d0 = new THREE.Vector3(), _d1 = new THREE.Vector3(), _qo = new THREE.Quaternion();
+  function goalOf(hd) {
+    const g = hd.goal;
+    if (!hd.off) { g[0] = hd.cur[0]; g[1] = hd.cur[1]; g[2] = hd.cur[2]; return g; }
+    const o = hd.i * 3, r = hd.ref * 3;
+    _d1.set(P[o] - P[r], P[o + 1] - P[r + 1], P[o + 2] - P[r + 2]).normalize();
+    _qo.setFromUnitVectors(_d0.set(hd.dir0[0], hd.dir0[1], hd.dir0[2]), _d1);
+    _v.set(hd.off0[0], hd.off0[1], hd.off0[2]).applyQuaternion(_qo);
+    g[0] = hd.cur[0] - _v.x; g[1] = hd.cur[1] - _v.y; g[2] = hd.cur[2] - _v.z;
+    return g;
+  }
   body.release = (point) => {
     let any = false;
     for (let k = holds.length - 1; k >= 0; k--) {
@@ -500,11 +536,20 @@ export function createBody(inst, preset, opts = {}) {
     }
     return true;
   };
-  // A lost point keeps its animated place against the point it hung from.
+  // A lost point keeps its animated place against the point it hung from, turned with the torso
+  // (an arm, the head) or the hips (a leg) as the body lies: as the rig draws a lost part, riding
+  // along with its parent.
+  const qLostLo = new THREE.Quaternion(), qLostUp = new THREE.Quaternion(), qLostA = new THREE.Quaternion(), _lv = new THREE.Vector3();
+  const onUpper = new Set([...upper.x, ...upper.up].map((k) => idx[k]));
   function placeLost() {
+    if (!lostPts.length) return;
+    frameQuat(P, lower, idx, qLostLo).multiply(frameQuat(A, lower, idx, qLostA).invert());
+    frameQuat(P, upper, idx, qLostUp).multiply(frameQuat(A, upper, idx, qLostA).invert());
     for (const i of lostPts) {
       const o = i * 3, oa = anchorOf[i] * 3;
-      for (let c = 0; c < 3; c++) { const d = A[o + c] - A[oa + c]; P[o + c] = P[oa + c] + d; Q[o + c] = Q[oa + c] + d; }
+      _lv.set(A[o] - A[oa], A[o + 1] - A[oa + 1], A[o + 2] - A[oa + 2]).applyQuaternion(onUpper.has(anchorOf[i]) ? qLostUp : qLostLo);
+      P[o] = P[oa] + _lv.x; P[o + 1] = P[oa + 1] + _lv.y; P[o + 2] = P[oa + 2] + _lv.z;
+      Q[o] = Q[oa] + _lv.x; Q[o + 1] = Q[oa + 1] + _lv.y; Q[o + 2] = Q[oa + 2] + _lv.z;
     }
   }
 
@@ -564,7 +609,7 @@ export function createBody(inst, preset, opts = {}) {
     // being held up in a sit. Planted feet stay put.
     const rx = P[root * 3], ry = P[root * 3 + 1], rz = P[root * 3 + 2];
     const ax = A[root * 3], ay = A[root * 3 + 1], az = A[root * 3 + 2];
-    const up = st === 'react' || st === 'getup' ? 1 : st === 'held' ? preset.held.upright : st === 'dead' ? 0 : preset.fall.upright;
+    const up = st === 'fall' || st === 'down' ? preset.fall.upright : st === 'held' ? preset.held.upright : st === 'dead' ? 0 : 1;
     let turned = false, m0 = 1, m1 = 0, m2 = 0, m3 = 0, m4 = 1, m5 = 0, m6 = 0, m7 = 0, m8 = 1;
     if (up < 1) {
       frameQuat(P, lower, idx, qTurn); frameQuat(A, lower, idx, qAnim);
@@ -588,11 +633,16 @@ export function createBody(inst, preset, opts = {}) {
       const o = i * 3;
       // Spring toward the pose, and damp the point's motion relative to the root.
       Q[o] += ((P[o] - Q[o]) - vrx) * c; Q[o + 1] += ((P[o + 1] - Q[o + 1]) - vry) * c; Q[o + 2] += ((P[o + 2] - Q[o + 2]) - vrz) * c;
-      let dx = A[o] - ax, dy = A[o + 1] - ay, dz = A[o + 2] - az;
-      if (turned) { const tx = m0 * dx + m1 * dy + m2 * dz, ty = m3 * dx + m4 * dy + m5 * dz; dz = m6 * dx + m7 * dy + m8 * dz; dx = tx; dy = ty; }
-      P[o] += (rx + dx - P[o]) * k;
-      P[o + 1] += (ry + dy - P[o + 1]) * k;
-      P[o + 2] += (rz + dz - P[o + 2]) * k;
+      if (turned) {
+        const dx = A[o] - ax, dy = A[o + 1] - ay, dz = A[o + 2] - az;
+        P[o] += (rx + m0 * dx + m1 * dy + m2 * dz - P[o]) * k;
+        P[o + 1] += (ry + m3 * dx + m4 * dy + m5 * dz - P[o + 1]) * k;
+        P[o + 2] += (rz + m6 * dx + m7 * dy + m8 * dz - P[o + 2]) * k;
+      } else {
+        P[o] += (rx + A[o] - ax - P[o]) * k;
+        P[o + 1] += (ry + A[o + 1] - ay - P[o + 1]) * k;
+        P[o + 2] += (rz + A[o + 2] - az - P[o + 2]) * k;
+      }
     }
     // The root: held up by the legs while it stands; drawn back toward the animation's place.
     if ((st === 'react' || st === 'getup') && footOn.some(Boolean)) {
@@ -611,10 +661,10 @@ export function createBody(inst, preset, opts = {}) {
     // Held softly: a spring toward the target, damped against the target's own motion.
     for (const hd of holds) {
       if (hd.strength >= 1) continue;
-      const k = springK(hd.strength, h), c = springC(hd.strength, h), o = hd.i * 3;
+      const k = springK(hd.strength, h), c = springC(hd.strength, h), o = hd.i * 3, gl = goalOf(hd);
       for (let a = 0; a < 3; a++) {
         Q[o + a] += ((P[o + a] - Q[o + a]) - (hd.cur[a] - hd.last[a])) * c;
-        P[o + a] += (hd.cur[a] - P[o + a]) * k;
+        P[o + a] += (gl[a] - P[o + a]) * k;
       }
     }
     // Stepping: the foot swings from where it was to under the weight, lifted in an arc.
@@ -640,7 +690,9 @@ export function createBody(inst, preset, opts = {}) {
     // ground (last, so nothing is ever left under it; the ground wins over a target below it).
     // A body something holds slides over the ground; one standing or lying grips it.
     const fr = holds.length ? preset.held.friction : preset.friction;
-    for (let it = 0; it < ITER; it++) {
+    const absorb = holds.length ? preset.held.absorb : 0;
+    if (absorb > 0) PB.set(P);
+    for (let it = 0, passes = holds.length ? ITER_HELD : ITER; it < passes; it++) {
       for (const c of bonesOn) solveDist(c, c.len, c.len, 1);
       for (const c of bracesOn) solveDist(c, c.len * c.lo, c.len * c.hi, 0.5);
       if (hingesOn.length) {
@@ -648,7 +700,11 @@ export function createBody(inst, preset, opts = {}) {
         for (const hg of hingesOn) solveHinge(hg, hg.upper ? qUp : qLow);
       }
       feet.forEach((f, k) => { if (pin[k] && !(stepping && stepping.k === k)) { P[f * 3] = pin[k][0]; P[f * 3 + 2] = pin[k][1]; } });
-      for (const hd of holds) if (hd.strength >= 1) { const o = hd.i * 3; P[o] = hd.cur[0]; P[o + 1] = hd.cur[1]; P[o + 2] = hd.cur[2]; }
+      for (const hd of holds) {
+        const o = hd.i * 3, f = hd.pin, gl = goalOf(hd);
+        if (f >= 1) { P[o] = gl[0]; P[o + 1] = gl[1]; P[o + 2] = gl[2]; }
+        else if (f > 0) { P[o] += (gl[0] - P[o]) * f; P[o + 1] += (gl[1] - P[o + 1]) * f; P[o + 2] += (gl[2] - P[o + 2]) * f; }
+      }
       for (let i = 0; i < n; i++) {
         if (!live[i]) continue;
         const fl = floorAt(i);
@@ -660,9 +716,31 @@ export function createBody(inst, preset, opts = {}) {
         }
       }
     }
-    // Nothing flies apart: a runaway point (a bad preset) is put back where the animation has it.
+    // Hauled by a hand, each step's pull comes through the bones as a jump in position, and all of
+    // it would be kept as speed: the legs and hips fly up the line to the hand and the body streams
+    // out behind it like a flag. A held body soaks up `absorb` of it, as a heavy body on the ground
+    // does, and keeps the rest (the swing, the flop).
+    if (absorb > 0) {
+      for (let i = 0; i < n; i++) {
+        if (!live[i] || iw[i] === 0) continue;
+        const o = i * 3;
+        Q[o] += (P[o] - PB[o]) * absorb; Q[o + 1] += (P[o + 1] - PB[o + 1]) * absorb; Q[o + 2] += (P[o + 2] - PB[o + 2]) * absorb;
+      }
+    }
+    // Nothing flies apart: a runaway point (a bad preset) is put back where the animation has it,
+    // still, and a body a hand holds hard is put there with the held point on the hand (put back
+    // anywhere else, the pin would yank it just as far again the next step).
     for (let i = 0; i < n * 3; i++) {
-      if (!Number.isFinite(P[i]) || Math.abs(P[i] - Q[i]) > 60 * h) { P.set(A); Q.set(A); break; }
+      if (!Number.isFinite(P[i]) || Math.abs(P[i] - Q[i]) > 60 * h) {
+        P.set(A);
+        const hd = holds.find((x) => x.strength >= 1);
+        if (hd) {
+          const o = hd.i * 3, gl = goalOf(hd), dx = gl[0] - A[o], dy = gl[1] - A[o + 1], dz = gl[2] - A[o + 2];
+          for (let k = 0; k < n; k++) { P[k * 3] += dx; P[k * 3 + 1] += dy; P[k * 3 + 2] += dz; }
+        }
+        Q.set(P);
+        break;
+      }
     }
     if (lostPts.length) placeLost();
   }
@@ -759,7 +837,7 @@ export function createBody(inst, preset, opts = {}) {
     let hd = null;
     for (const x of holds) if (!hd || x.strength > hd.strength) hd = x;
     if (hd) {
-      const o = hd.i * 3, dx = hd.cur[0] - P[o], dy = hd.cur[1] - P[o + 1], dz = hd.cur[2] - P[o + 2];
+      const o = hd.i * 3, gl = goalOf(hd), dx = gl[0] - P[o], dy = gl[1] - P[o + 1], dz = gl[2] - P[o + 2];
       for (let i = 0; i < n; i++) { P[i * 3] += dx; P[i * 3 + 1] += dy; P[i * 3 + 2] += dz; }
     }
     Q.set(P);

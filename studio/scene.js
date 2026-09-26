@@ -363,13 +363,13 @@ export function createScene(scene, opts = {}) {
   for (const a of Object.values(A)) a.targetJ = Object.fromEntries(Object.entries(a.spec.targets).map(([k, v]) => [k, jointOf(splitRef(v))]));
   // A hold on a reacting body is the body's own (studio/motion.js hold): the hand pins the body's
   // point nearest the grip and the rest of it hangs, trails and drags. `hand` is where the holder's
-  // hand is this frame; `gripOff` how far the grip point sits from that body point, as shown.
+  // hand is this frame (the target); `gripOff` how far the grip point sits from that body point.
   for (const h of scene.holds) {
     const b = A[h.to.actor];
     if (!b.body) continue;
     b.heldBy.push(h);
     h.hand = new THREE.Vector3(); h.gripOff = new THREE.Vector3(); h.bodyW = 0; h.engaged = false; h.point = null;
-    h.target = () => [h.hand.x - h.gripOff.x, h.hand.y - h.gripOff.y, h.hand.z - h.gripOff.z];
+    h.target = h.hand;
   }
 
   const gripPoint = (h, out) => {
@@ -393,12 +393,15 @@ export function createScene(scene, opts = {}) {
     for (const k of on.length ? on : Object.keys(pts)) { const d = shownPoint(a, k, _v).distanceToSquared(_g); if (d < bd) { bd = d; best = k; } }
     return best;
   };
-  // Where the grip point sits from the held body point, as shown: the hand holds the point there, so
-  // the grip itself (an ankle, not the sole under it) lands in the hand.
+  // Where the grip point sits from the held body point: the hand holds the point there, so the grip
+  // itself (an ankle, not the sole under it) lands in the hand. Once the body is simulating, it's
+  // measured from the simulated point to the grip as drawn, so whatever the drawn limb differs from
+  // the simulated one by (its ankle turned as its clip says) is taken up too.
   const measureGrip = (a, h) => {
     if (!h.point) return;
     h.toJ.updateWorldMatrix(true, false);
-    h.gripOff.subVectors(gripPoint(h, _g), shownPoint(a, h.point, _v));
+    const from = a.body.awake ? a.body.pointAt(h.point, _v) : shownPoint(a, h.point, _v);
+    h.gripOff.subVectors(gripPoint(h, _g), from);
   };
   // Put a body where the scene says, in its own parent's frame (the host's marine hangs off the player).
   const placeBody = (a) => {
@@ -565,12 +568,6 @@ export function createScene(scene, opts = {}) {
       }
       a.reaching = reach;
       events.push(...poseActor(a, dt, reach));
-      // A reacting body shows its own pose from here on (where it ended last frame), so whoever
-      // reaches for it, aims at it or holds it this frame sees where it really is, not its animation.
-      if (a.body && a.body.awake && a.body.weight > 0) {
-        a.body.apply();
-        for (const h of a.heldBy) if (h.engaged) measureGrip(a, h);
-      }
       // This actor's holds on bodies already posed: tow them along the ground, lift the held limb.
       for (const h of scene.holds) if (h.from.actor === n) {
         const b = A[h.to.actor];
@@ -653,8 +650,8 @@ export function createScene(scene, opts = {}) {
     for (const [n, a] of Object.entries(A)) {
       const b = a.body;
       if (!b) continue;
-      // A hold that starts this frame measures its grip from the pose as shown (the animation, or
-      // the body's own if it's already reacting), before follow() puts the animation back.
+      // A hold that starts this frame measures its grip from the pose as posed (the body takes up
+      // from there); one already on measures it from the body's own pose, after apply() below.
       for (const h of a.heldBy) if (h.bodyW > 0 && !h.engaged) { h.point ||= pointFor(a, h); measureGrip(a, h); }
       b.follow();
       const hs = a.spec.hits;
@@ -676,7 +673,7 @@ export function createScene(scene, opts = {}) {
       }
       // Held by a hand: the hold eases in and out with the hold's weight, and lets go at 0.
       for (const h of a.heldBy) {
-        if (h.bodyW > 0) { if (b.hold(h.point, h.target, { strength: h.bodyW })) h.engaged = true; }
+        if (h.bodyW > 0) { if (b.hold(h.point, h.target, { strength: h.bodyW, offset: h.gripOff })) h.engaged = true; }
         else if (h.engaged) { b.release(h.point); h.engaged = false; }
       }
       for (const e of b.update(dt)) {
@@ -696,7 +693,12 @@ export function createScene(scene, opts = {}) {
         if ((e[0] === 'fall' || e[0] === 'dead' || e[0] === 'held') && a.override) a.override = null;
       }
       b.apply();
-      if (b.awake) {
+      for (const h of a.heldBy) if (h.engaged) measureGrip(a, h);
+      // Where the reaction took it becomes the scene's place for it, except while a hand has it:
+      // then its place stays where the scene keys it, as in the scene without a body, so the
+      // holder aims and reaches as it always did (aiming at the body a hand pins would be aiming
+      // at its own hand). Let go of, it takes up where it lies.
+      if (b.awake && !b.holding) {
         root.updateWorldMatrix(true, false);
         _qt.setFromRotationMatrix(root.matrixWorld).invert();
         _v.copy(b.drift).applyQuaternion(_qt);
