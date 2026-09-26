@@ -324,6 +324,37 @@ test('a GET under /__studio/ is not a write; the files are still served', async 
   await s.text();
 });
 
+test('a file in a folder that is a link out (notes.md, or a picture\'s name, even a dangling one) is refused, and nothing goes through', async (t) => {
+  const dir = path.join(root, 'review', 'motion-linked');
+  fs.mkdirSync(path.join(dir, 'v1'), { recursive: true });
+  fs.writeFileSync(path.join(dir, 'meta.json'), JSON.stringify({ asset: 'motion-linked', kind: 'motion', owner: 'grokbot' }));
+  fs.writeFileSync(path.join(dir, 'latest.txt'), 'v1\n');
+  const target = path.join(outside, 'notes-target.md');
+  try { fs.symlinkSync(target, path.join(dir, 'notes.md')); } catch { t.skip('no right to make links here'); return; }
+  const r = await post('note', { asset: 'motion-linked', text: 'through the link' });
+  assert.equal(r.code, 403, JSON.stringify(r.json));
+  assert.match(r.json.error, /notes\.md is a link/);
+  assert.ok(!fs.existsSync(target), 'written through the link');
+  fs.rmSync(path.join(dir, 'notes.md'));
+  // A picture's name planted as a dangling link: the picture takes the next name, never the link.
+  const at = new Date().toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15);
+  const pic = path.join(outside, 'pic-target.png');
+  for (const n of [`lab-${at}.png`, `lab-${at}-2.png`]) fs.symlinkSync(pic, path.join(dir, 'v1', n));
+  const r2 = await post('note', { asset: 'motion-linked', text: 'with a picture', snapshot: PNG1 });
+  assert.equal(r2.code, 200, JSON.stringify(r2.json));
+  assert.ok(!fs.existsSync(pic), 'the picture went through a planted link');
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('nested comment marks can\'t rebuild one: a note never hides the notes under it', async () => {
+  const r = await post('note', { asset: 'motion-marks', text: 'second <!-<!---->- and -<!---->-> end', meta: { kind: 'motion', owner: 'grokbot', version: 1 } });
+  assert.equal(r.code, 200, JSON.stringify(r.json));
+  const md = read('review/motion-marks/notes.md');
+  const mine = md.slice(md.lastIndexOf('-->') + 3);          // under the stub's own comment
+  assert.ok(!mine.includes('<!--') && !mine.includes('-->'), mine);
+  assert.match(mine, /second .* and .* end/);
+});
+
 test('only the studio\'s own pages write: another site, a rebound Host or a cross-site fetch gets a 403 and writes nothing', async () => {
   const note = JSON.stringify({ asset: 'motion-zombie-shambler', text: 'forged: good' });
   const before = tree(root);

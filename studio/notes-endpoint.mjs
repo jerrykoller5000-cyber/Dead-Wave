@@ -87,6 +87,15 @@ function inside(dir, target) {
   return rel !== '' && !rel.startsWith('..') && !path.isAbsolute(rel);
 }
 
+// Every file the door writes goes through here: a file that is a link (even one to nowhere, which
+// existsSync doesn't see) is refused, so a planted notes.md or PNG name can't write outside review/.
+function writeOwn(file, data, what) {
+  let st = null;
+  try { st = fs.lstatSync(file); } catch { /* not there yet: written fresh */ }
+  if (st && st.isSymbolicLink()) refuse(403, `${what} is a link: the studio writes only its own files`);
+  fs.writeFileSync(file, data);
+}
+
 const today = (d = new Date()) => d.toISOString().slice(0, 10);
 const stamp = (d = new Date()) => d.toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15);   // 20260926-142233
 const str = (v) => (typeof v === 'string' ? v : v === undefined || v === null ? '' : String(v));
@@ -107,7 +116,10 @@ function checkMeta(meta, asset) {
 // Jerry's words, kept as he wrote them, but unable to start a heading or an answer, or to open a comment
 // that would hide every note under it.
 function cleanText(text) {
-  return text.replace(/\r\n?/g, '\n').replace(/<!--|-->/g, '').replace(/^[ \t#>]+/gm, '').replace(/\n{3,}/g, '\n\n').trim();
+  // Comment marks go until none are left: one pass let nested marks ("<!-<!---->-") rebuild one.
+  let t = text.replace(/\r\n?/g, '\n'), was;
+  do { was = t; t = t.replace(/<!--|-->/g, ''); } while (t !== was);
+  return t.replace(/^[ \t#>]+/gm, '').replace(/\n{3,}/g, '\n\n').trim();
 }
 
 function decodeSnapshot(snap) {
@@ -185,8 +197,8 @@ function note(j, base) {
 
   fs.mkdirSync(dir, { recursive: true });
   if (!inside(review, dir)) refuse(403, `review/${asset} leads outside review/`);
-  if (created) fs.writeFileSync(metaFile, JSON.stringify(meta, null, 2) + '\n');
-  if (version !== latest) fs.writeFileSync(latestFile, version + '\n');
+  if (created) writeOwn(metaFile, JSON.stringify(meta, null, 2) + '\n', `review/${asset}/meta.json`);
+  if (version !== latest) writeOwn(latestFile, version + '\n', `review/${asset}/latest.txt`);
   let picture = null;
   if (png) {
     const vdir = path.join(dir, version);
@@ -194,12 +206,16 @@ function note(j, base) {
     if (!inside(review, vdir)) refuse(403, `review/${asset}/${version} leads outside review/`);
     const at = stamp();
     let name = `lab-${at}.png`;
-    for (let k = 2; fs.existsSync(path.join(vdir, name)); k++) name = `lab-${at}-${k}.png`;
-    fs.writeFileSync(path.join(vdir, name), png);
+    const taken = (n) => { try { fs.lstatSync(path.join(vdir, n)); return true; } catch { return false; } };
+    for (let k = 2; taken(name); k++) name = `lab-${at}-${k}.png`;
+    writeOwn(path.join(vdir, name), png, `review/${asset}/${version}/${name}`);
     picture = `${version}/${name}`;
   }
   const notesFile = path.join(dir, 'notes.md');
-  if (!fs.existsSync(notesFile)) fs.writeFileSync(notesFile, notesStub(asset, version, today()));
+  let noteLink = null;
+  try { noteLink = fs.lstatSync(notesFile).isSymbolicLink(); } catch { /* not there yet */ }
+  if (noteLink) refuse(403, `review/${asset}/notes.md is a link: the studio writes only its own files`);
+  if (!fs.existsSync(notesFile)) writeOwn(notesFile, notesStub(asset, version, today()), `review/${asset}/notes.md`);
   const entry = `## ${today()} · Jerry · ${version} · lab\n${text}\n` +
     (context ? `(In the lab: ${context})\n` : '') +
     (picture ? `![What the lab showed](${picture})\n` : '');
@@ -214,7 +230,7 @@ function note(j, base) {
   else if (close >= 0) at = close + 3;
   else at = cur.indexOf('\n') >= 0 ? cur.indexOf('\n') + 1 : cur.length;
   const before = cur.slice(0, at).replace(/\s*$/, ''), after = cur.slice(at).replace(/^\s*/, '');
-  fs.writeFileSync(notesFile, before + '\n\n' + entry + (after ? '\n' + after : ''));
+  writeOwn(notesFile, before + '\n\n' + entry + (after ? '\n' + after : ''), `review/${asset}/notes.md`);
   const out = { ok: true, asset, file: `review/${asset}/notes.md`, owner: meta.owner || 'claude', version, created };
   if (picture) out.picture = `review/${asset}/${picture}`;
   // The first lab's folders say only `motion` in meta.json, not their kind.
@@ -267,7 +283,7 @@ a{color:#e0b85a} section{border-top:1px solid #333b4a}</style>
 <p>To look at it again, ${what}${look ? ` (with the lab running: <a href="../../${esc(look)}">open it here</a>)` : ''}. Write your note in the lab, or in <code>notes.md</code> in this folder.</p>
 ${notes || '<p class="sub">No notes yet.</p>'}
 `;
-  fs.writeFileSync(file, html);
+  writeOwn(file, html, 'the folder\'s index.html');
   return true;
 }
 
@@ -286,7 +302,7 @@ function scene(j, base) {
   const file = path.join(dir, name + '.json');
   if (fs.existsSync(file) && !inside(dir, file)) refuse(403, `studio/scenes/${name}.json leads outside studio/scenes`);
   const replaced = fs.existsSync(file);
-  fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+  writeOwn(file, JSON.stringify(out, null, 2) + '\n', `studio/scenes/${name}.json`);
   const rel = `studio/scenes/${name}.json`;
   return { ok: true, name, file: rel, replaced, render: `node tools/studio.mjs scene ${rel}` };
 }
