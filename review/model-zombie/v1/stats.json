@@ -1,0 +1,100 @@
+{
+  "version": "v1",
+  "model": "creature/zombie",
+  "file": "studio/models/creature/zombie.json",
+  "modelVersion": 1,
+  "draws": 15,
+  "triangles": 720,
+  "budget": {
+    "draws": 24,
+    "triangles": 1200
+  },
+  "over": false,
+  "bounds": {
+    "min": [
+      -0.38,
+      -0.26,
+      -0.17
+    ],
+    "max": [
+      0.38,
+      1.58,
+      0.588
+    ],
+    "size": [
+      0.76,
+      1.84,
+      0.758
+    ]
+  },
+  "joints": [
+    "pelvis",
+    "spine",
+    "head",
+    "hipL",
+    "kneeL",
+    "ankleL",
+    "shoulderL",
+    "elbowL",
+    "handL",
+    "hipR",
+    "kneeR",
+    "ankleR",
+    "shoulderR",
+    "elbowR",
+    "handR"
+  ],
+  "parts": 9,
+  "drawn": 15,
+  "meshes": 15,
+  "merge": false,
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 163.2,
+    "topPxPerMetre": 252.2
+  },
+  "checks": {
+    "pieces": 2,
+    "gaps": [
+      {
+        "parts": [
+          "pelvis",
+          "thighL",
+          "thighR",
+          "shinL",
+          "shinR",
+          "bootL",
+          "bootR"
+        ],
+        "items": 7,
+        "metres": 0.05,
+        "between": [
+          "pelvis",
+          "torso"
+        ]
+      }
+    ],
+    "touch": 0.022,
+    "underGround": {
+      "metres": 0.26,
+      "parts": [
+        "shinL",
+        "shinR",
+        "bootL",
+        "bootR"
+      ]
+    },
+    "said": [
+      "pelvis; thighL; thighR and 4 more float 0.05 m off the rest (pelvis to torso)",
+      "0.26 m under the ground: shinL, shinR, bootL, bootR"
+    ]
+  },
+  "renderSeconds": 3.8
+}

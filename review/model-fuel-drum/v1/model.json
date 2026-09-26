@@ -1,0 +1,27 @@
+{
+  "format": "dw-model/1",
+  "name": "fuel-drum",
+  "kind": "prop",
+  "version": 1,
+  "owner": "claude",
+  "notes": "The red fuel drum by the wrecks, sheds and mast that chains when it goes up (roadmap P-43). The game's buildBarrel (index.html) as data: a 0.95 m drum, two rolling hoops, a yellow hazard band with a dark skull stencil, the filler cap and a bung on the lid. The paint and the band share a finish, and so do the hoops, cap and stencil, so it draws twice (P-43 wants one or two). The top joint is where the flames come out.",
+  "materials": {
+    "paint": { "color": "#a8261c", "roughness": 0.55, "metalness": 0.45 },
+    "band": { "color": "#e0b83a", "roughness": 0.55, "metalness": 0.45, "note": "the paint's finish, so the two draw as one" },
+    "iron": { "color": "#3a2a26", "roughness": 0.6, "metalness": 0.5 },
+    "stencil": { "color": "#2a1d1a", "roughness": 0.6, "metalness": 0.5 }
+  },
+  "joints": {
+    "top": { "at": [0, 0.95, 0], "note": "the lid: flames and the blast start here" }
+  },
+  "parts": [
+    { "name": "drum", "shape": "cylinder", "size": [0.36, 0.95], "segments": 14, "at": [0, 0.475, 0], "material": "paint" },
+    { "name": "hoop", "shape": "cylinder", "size": [0.375, 0.05], "segments": 14, "at": [0, 0.12, 0], "array": { "count": 2, "step": [0, 0.7, 0] }, "material": "iron", "note": "the rolling hoops, low and high" },
+    { "name": "band", "shape": "cylinder", "size": [0.365, 0.16], "segments": 14, "at": [0, 0.5, 0], "material": "band" },
+    { "name": "skull", "shape": "rbox", "size": [0.16, 0.16, 0.02], "radius": 0.01, "at": [0, 0.5, 0.36], "material": "stencil", "note": "the hazard stencil on the band, facing +Z" },
+    { "name": "cap", "shape": "cylinder", "size": [0.06, 0.04], "segments": 8, "at": [0.18, 0.97, 0.1], "material": "iron" },
+    { "name": "bung", "shape": "cylinder", "size": [0.035, 0.03], "segments": 6, "at": [-0.2, 0.965, -0.08], "material": "iron" }
+  ],
+  "budget": { "draws": 2, "triangles": 400 },
+  "merge": "color"
+}

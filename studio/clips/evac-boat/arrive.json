@@ -1,0 +1,14 @@
+{
+  "format": "dw-clip/1",
+  "name": "arrive",
+  "rig": "evac-boat",
+  "length": 20,
+  "loop": false,
+  "notes": "The boat coming for him at the last push (roadmap P-52): it slides in from 24 m out, slowing all the way, the lamp searching the shore and settling on the dock for the last few metres, the motor straightening as it comes alongside. Root motion is the approach along its own +Z, so a host that takes it (rootMotion) gets the whole run in; one that moves the boat itself plays the lamp and motor in place. The events are where the game hangs the horn, the flares and the boarding prompt.",
+  "tracks": {
+    "root": { "pos": [[0, [0, 0, -24]], [20, [0, 0, 0], "out"]] },
+    "lamp": { "rot": [[0, [6, 0, 0]], [3, [8, -30, 0]], [7, [8, 30, 0]], [11, [8, -25, 0]], [15, [10, 12, 0]], [18, [12, 0, 0]], [20, [12, 0, 0]]] },
+    "motor": { "rot": [[0, [0, 0, 0]], [6, [0, 8, 0]], [12, [0, -6, 0]], [17, [0, 3, 0]], [20, [0, 0, 0]]] }
+  },
+  "events": [[0.5, "horn"], [1.2, "flares"], [16, "horn"], [19.5, "docked"]]
+}

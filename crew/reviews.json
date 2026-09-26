@@ -49,6 +49,34 @@
       "rig": "guardian",
       "clip": "throw",
       "reference": "OverhandThrow"
+    },
+    {
+      "asset": "model-evac-boat",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "model-fuel-drum",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "model-spider",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "model-zombie",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
     }
   ]
 }
