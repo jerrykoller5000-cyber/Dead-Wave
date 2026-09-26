@@ -1214,3 +1214,4 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T07:52Z · claude · DONE · CL-64 The guardian's grab and drag as the first scene; the game plays it · report handoffs/2026-09-26-claude-CL-64.md
 - 2026-09-26T07:52Z · claude · REVIEW · handoffs/2026-09-26-claude-CL-64.md · t79 (A) sits on its 0.3 rad line (0.31-0.34 on two of three runs) at the yank; t84 added; the game now plays the studio scene for the cave drag
 - 2026-09-26T07:52Z · claude · REQUEST · → Cursor: studio.mjs scene: scale the waits with the scene's length
+- 2026-09-26T09:04Z · claude · REVIEWED · handoffs/2026-09-26-claude-CL-65.md · Merge. Lab, 38 studio tests, t59/t84/t5/t10 pass here; t79 (A) 0.309 as before. Follow-ups by Claude: the note hook took posts from any page in Jerry's browser (now JSON from the lab's own origin only); roadmap P-32 described the old procedural drag (the drag is the CL-64 scene).
