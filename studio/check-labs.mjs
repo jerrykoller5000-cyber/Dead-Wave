@@ -372,6 +372,15 @@ async function checkMotionLab(browser, server, page0) {
       return st.bodies.map((b) => `${b.key}${b.moved ? ' (sliders)' : ' (file)'}: ${b.judge && b.judge.got}`).join(', ');
     });
 
+    await step(page, 'the approved reactions checked in the lab (contract 6), when the preset has them', async () => {
+      if (!st.engine.expect) return 'skipped: this preset has no "expect"';
+      const r = await page.evaluate('lab.checkExpect().then((x) => x && { file: { ok: x.file.ok, total: x.file.total }, sliders: x.sliders && { ok: x.sliders.ok, total: x.sliders.total }, ms: x.ms })');
+      must(r && r.file && r.file.total > 0, 'no result from the check: ' + JSON.stringify(r) + ' ' + pageErrors(page).join('; '));
+      must(r.sliders && r.sliders.total === r.file.total, 'with the sliders moved it should check them too: ' + JSON.stringify(r));
+      must((await S()).context.includes('approved reactions: the file'), 'the note context does not say how the check came out');
+      return `the file ${r.file.ok} of ${r.file.total} as approved, with the sliders ${r.sliders.ok} of ${r.sliders.total} (${r.ms} ms)`;
+    });
+
     await step(page, 'a note with a picture lands in its review folder', async () => {
       await page.evaluate(`document.getElementById('note').value = 'check-labs: the lab note check. It gets up too slowly.'; document.getElementById('save').click()`);
       must(await page.waitFor('lab.state().lastSave && lab.state().lastSave.how', { timeout: 30000 }), 'the note was never sent');

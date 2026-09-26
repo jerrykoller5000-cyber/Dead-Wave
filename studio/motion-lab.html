@@ -47,6 +47,12 @@
   #history[data-state="look"] summary, #history[data-state="waiting"] summary { color: var(--accent); }
   #histlist { max-height: 170px; overflow: auto; margin-top: 4px; }
   .hn { margin: 6px 0; } .hn .ans { margin-top: 2px; padding-left: 8px; border-left: 2px solid var(--good); color: var(--good); }
+  table.exp { border-collapse: collapse; margin-top: 6px; font-size: 11px; width: 100%; }
+  table.exp th, table.exp td { padding: 2px 3px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.exp td + td, table.exp th + th { white-space: nowrap; }
+  #expout details { margin-top: 4px; } #expout summary { cursor: pointer; }
+  table.exp th { color: var(--dim); font-weight: normal; }
+  table.exp td.ok { color: var(--good); } table.exp td.no { color: var(--bad); }
 </style>
 <script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js"}}</script>
 </head><body>
@@ -63,6 +69,11 @@
   <h2>Compare</h2>
   <select id="compare"></select>
   <div class="hint">A second body beside the first. Every hit lands on both, the same way, at the same moment.</div>
+  <div id="expectbox" hidden>
+    <h2>Reactions already approved</h2>
+    <button id="checkexp">Check them<span id="checkexpwith"></span></button>
+    <div id="expout" class="hint"></div>
+  </div>
   <h2>Muscles of body A (try it, then say it in a note)</h2>
   <div id="sliders"></div>
   <button id="fromfile" style="margin-top:6px">Back to the file's values</button>
@@ -194,9 +205,13 @@ function showArrow(a, st) {
 }
 
 // --- Bodies -------------------------------------------------------------------------------------
-const clipCache = new Map();
+// Clips by "rig/name", loaded once. The files as they are (rawClips) are what the crew's checks take.
+const clipCache = new Map(), rawClips = new Map();
 async function fetchClip(ref) {
-  if (!clipCache.has(ref)) clipCache.set(ref, fetch('./clips/' + ref + '.json').then((r) => (r.ok ? r.json() : null)).then((j) => (j ? loadClip(j) : null)).catch(() => null));
+  if (!clipCache.has(ref)) {
+    clipCache.set(ref, fetch('./clips/' + ref + '.json').then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (j) rawClips.set(ref, j); return j ? loadClip(j) : null; }).catch(() => null));
+  }
   return clipCache.get(ref);
 }
 function presetJson(lb) {
@@ -289,6 +304,7 @@ async function build() {
   // Two bodies stand side by side across the view: the camera comes round to the front to see both.
   if (two !== framedTwo) { framedTwo = two; Object.assign(orbit, two ? { yaw: 0.35, dist: 6.8 } : { yaw: 0.6, dist: 5.2 }); placeCam(); }
   drawParts();
+  drawExpectBox();
   building = null;
   loadHistory();
 }
@@ -553,6 +569,7 @@ function rebuildA() {
   lb.body = createBody(lb.inst, lb.preset, { ground: () => 0 });
   standUp(lb);
   seq = null;
+  drawExpectBox();
 }
 function drawSliders() {
   const box = document.getElementById('sliders'); box.replaceChildren();
@@ -702,6 +719,51 @@ function judge(lb) {
   const want = hits === 1 ? (lb.json.expect || []).find((e) => e.hit === h.weapon && (e.from || 'front') === h.from) : null;
   return { got, steps, back, hits, want: want ? want.want : null, ok: want ? want.want === got : null, off: want && w && h.at !== w.at ? w.at : null, moved: moved(lb) };
 }
+// --- The reactions already approved (contract 6) ----------------------------------------------------------
+// A preset's "expect" is what Jerry has approved of its reaction, hit by hit. The crew's check for it
+// (studio/motion-expect.js, on the battery in studio/motion-battery.js) comes with those lists, so the
+// lab only looks for it when the preset has one: a studio without it never asks for the file. It runs
+// the file's numbers, and the sliders' when they're moved, so a slider that breaks an approved
+// reaction says so before anyone writes it into the preset.
+let expectMod = null, lastExpect = null;
+const hasExpect = (lb) => !!(lb && Array.isArray(lb.json.expect) && lb.json.expect.length);
+function drawExpectBox() {
+  const A = labBodies[0];
+  document.getElementById('expectbox').hidden = !hasExpect(A);
+  document.getElementById('checkexpwith').textContent = A && moved(A) ? ', with your sliders' : '';
+  document.getElementById('expout').textContent = '';
+  lastExpect = null;
+}
+const tally = (r) => ({ total: r.results.length, ok: r.results.filter((x) => x.ok).length, errors: r.errors, failures: r.failures, results: r.results.map((x) => ({ hit: x.hit, from: x.from, want: x.want, got: x.got, ok: x.ok })) });
+async function checkExpectations() {
+  const A = labBodies[0], out = document.getElementById('expout');
+  if (!hasExpect(A)) return null;
+  if (expectMod === null) { try { expectMod = await import('./motion-expect.js'); } catch { expectMod = false; } }
+  if (!expectMod || typeof expectMod.checkExpect !== 'function') { out.textContent = "The checks aren't in this copy of the studio (studio/motion-expect.js)."; return null; }
+  out.textContent = 'Checking…';
+  await new Promise((r) => setTimeout(r, 20));
+  const clipOf = (ref) => rawClips.get(ref) || null;
+  const t0 = performance.now();
+  let file, mine = null;
+  try {
+    file = tally(expectMod.checkExpect(presets.json(A.ref), { clipOf }));
+    if (moved(A)) mine = tally(expectMod.checkExpect(presetJson(A), { clipOf }));
+  } catch (e) { out.textContent = 'The check failed: ' + (e.message || e); return null; }
+  lastExpect = { ref: A.ref, file, sliders: mine, ms: Math.round(performance.now() - t0) };
+  const shown = mine || file;
+  const label = (k) => (WEAPONS.find((w) => w.key === k) || { label: k }).label;
+  const cell = (hit, from) => {
+    const x = shown.results.find((r) => r.hit === hit && r.from === from);
+    return x ? `<td class="${x.ok ? 'ok' : 'no'}" title="approved: ${esc(x.want)}">${esc(x.got)} ${x.ok ? '✓' : '✗'}</td>` : '<td class="dim">·</td>';
+  };
+  out.innerHTML = `<div>${mine ? `The file: ${file.ok} of ${file.total} as approved. <b>Your sliders: ${mine.ok} of ${mine.total}.</b>` : `${file.ok} of ${file.total} as approved.`} <span class="dim">(${lastExpect.ms} ms)</span></div>
+    <table class="exp"><tr><th></th><th>front</th><th>side</th><th>behind</th></tr>${[...new Set(shown.results.map((x) => x.hit))].map((h) => `<tr><td>${esc(label(h))}</td>${['front', 'side', 'back'].map((f) => cell(h, f)).join('')}</tr>`).join('')}</table>
+    ${shown.errors.length + shown.failures.length ? `<details><summary>Why, in the preset's numbers (for the crew)</summary>${[...shown.errors, ...shown.failures].map((f) => `<div class="no" style="margin-top:4px">${esc(f)}</div>`).join('')}</details>` : ''}`;
+  out.scrollIntoView({ block: 'nearest' });
+  return lastExpect;
+}
+document.getElementById('checkexp').onclick = () => checkExpectations();
+
 const readout = document.getElementById('readout');
 function drawReadout() {
   const parts = [];
@@ -820,6 +882,7 @@ function context() {
   const B = labBodies[1];
   if (B) bits.push(`beside it ${compareWith === 'file' ? "the file's numbers" : B.ref + ' v' + (B.json.version || 1)}${B.firstHit ? ': ' + came(B) : ''}`);
   if (A.lost.size) bits.push('parts off: ' + [...A.lost].map((x) => PART_NAMES[x]).join(', '));
+  if (lastExpect) bits.push(`approved reactions: the file ${lastExpect.file.ok} of ${lastExpect.file.total}${lastExpect.sliders ? `, with the sliders ${lastExpect.sliders.ok} of ${lastExpect.sliders.total}` : ''}`);
   if (mode !== 'live') {
     const h = rec.hits.find((x) => x.t <= viewT + 1e-6);
     bits.push(`picture ${h ? (viewT - h.t).toFixed(2) + ' s after the hit' : 'before the hit'} (${mode === 'replay' ? 'replaying' : 'paused'})`);
@@ -1075,7 +1138,7 @@ window.lab = {
   get ready() { return !building && labBodies.length > 0; },
   state: () => ({
     mode, simT, viewT, speed, canSave, weapon: weapon.key, preset: presetSel.value, compare: compareWith,
-    engine: { getup: labBodies.some((lb) => lb.preset.getup && (lb.preset.getup.front || lb.preset.getup.back)), lose: labBodies.some((lb) => typeof lb.body.lose === 'function'), hold: canHold(), parts: 'BODY_PARTS' in engine },
+    engine: { getup: labBodies.some((lb) => lb.preset.getup && (lb.preset.getup.front || lb.preset.getup.back)), lose: labBodies.some((lb) => typeof lb.body.lose === 'function'), hold: canHold(), parts: 'BODY_PARTS' in engine, expect: hasExpect(labBodies[0]) },
     bodies: labBodies.map((lb) => ({
       key: lb.key, ref: lb.ref, rig: lb.json.rig, version: lb.json.version || 1, state: lb.body.state, weight: lb.body.weight, moved: moved(lb),
       preset: { tone: lb.preset.tone, mass: lb.preset.mass, strength: lb.preset.strength }, judge: judge(lb),
@@ -1090,7 +1153,7 @@ window.lab = {
   }),
   setPreset: async (ref) => { presetSel.value = ref; overrides = {}; drawSliders(); await build(); },
   compare: async (what) => { compareSel.value = what || ''; compareWith = compareSel.value; await build(); },
-  setWeapon, fire, again, lose, pause, play, live, replay, scrub, setSpeed, stepFrames, advance,
+  setWeapon, fire, again, lose, pause, play, live, replay, scrub, setSpeed, stepFrames, advance, checkExpect: checkExpectations,
   get cost() { return { ...cost }; },
   slider: setSlider,
   standUp: () => document.getElementById('reset').onclick(),

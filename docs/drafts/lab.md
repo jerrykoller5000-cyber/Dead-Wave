@@ -42,6 +42,10 @@ Chrome and fails on any page error or missing event.
    sliders** to see your slider changes next to the preset as it is.
 7. The **muscle** sliders change body A. You don't need to get numbers right: move one until it looks
    better, then say so in a note. The note records the slider for the agent.
+   - **Reactions already approved** (once the crew has written down what you approved): **Check them**
+     plays every approved hit on the body in a moment and shows a grid: a tick where it still does
+     what you approved, a cross where it doesn't. With the sliders moved it checks the sliders too, so
+     you can see if a change you like breaks something you already said was right.
 8. **Again, the same way** stands the bodies up and hits them the same way again. **Stand up** resets
    them.
 9. Write your note bottom right and press **Save note for the crew**. A picture of the screen goes
@@ -180,6 +184,15 @@ instead of sliding back. Zombies are built at the game's size for their type (fe
 **The readout's last line** is the cost of a frame here: the bodies (animation, simulation, pose,
 recording), the drawing, and fps.
 
+**Reactions already approved (contract 6).** When body A's preset has an `expect` list, the lab shows
+**Check them**. It imports `studio/motion-expect.js` (the report package's; it comes with those lists,
+so a studio without it never requests the file and there's no 404) and runs `checkExpect` on the
+file's numbers, and again on the sliders' preset object when they're moved, with the lab's own clips
+for the get-ups (`clipOf` from the raw clip files it fetched). About 0.2 s for fifteen entries in
+headless Chrome. It draws a grid (hit by side: what it got, ✓ or ✗; the approved outcome on hover)
+and folds the `explain` sentences under "Why". The note's context then says "approved reactions: the
+file 15 of 15, with the sliders 10 of 15". `lab.checkExpect()` returns the same numbers.
+
 **Notes so far.** With the write door there, the lab asks `POST /__studio/notes` for body A's folder
 when it builds and after each note, and shows one line (waiting for the owner; the owner is on it;
 answered with vN, "which is what you see now" when the preset is at vN; approved) that opens to the
@@ -227,11 +240,14 @@ and CHROME_ARGS as for the tests) at 1280×720, and:
 12. save as scene: the file, the render command, and the scene replayed in Node gives the lab's
     outcome for each body;
 13. the file's numbers against the sliders: A carries them, B doesn't, and the context names them;
-14. a note with a picture, typed and saved through the page's own button: notes.md holds one waiting
+14. the approved reactions checked in the lab, when the preset has `expect`: the file's and the
+    sliders' counts, and the context says them (it reports the counts; judging them is the report
+    package's `motion-expect` test);
+15. a note with a picture, typed and saved through the page's own button: notes.md holds one waiting
     note with the context and the picture's line, the PNG is there, meta.json says motion, the folder
     page shows the note, and the lab's notes so far now say one, waiting;
-15. no page errors and no console errors;
-16. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
+16. no page errors and no console errors;
+17. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
     copies the note and the scene, and writes nothing.
 
 The note's folder (`review/check-labs-<time>`) and the scene (`studio/scenes/lab-check-<time>.json`)
