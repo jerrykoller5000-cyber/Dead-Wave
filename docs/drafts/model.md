@@ -240,3 +240,15 @@ chain and body points).
 models give their problems as sentences, every shape, mirror, array and merge, that builds repeat
 exactly, the zombie model against `studio/zombie.js` (joints, boxes, and a shell's reaction), the
 spider's IK, crawl and scene, the boat's clips, and the spider's reactions.
+
+## For Jerry's guide (docs/studio-guide.md)
+
+Models have review folders too: `review\model-fuel-drum`, `model-evac-boat`, `model-spider` and
+`model-zombie`. Open `index.html` in one for its contact sheet: the model from six sides beside the
+marine, what it costs (green is within its budget, red is over), and, for the spider and the boat,
+a strip of it moving. Write your note in `notes.md` the same way as for an animation.
+
+Or double-click `Open Model Lab.bat`: pick a model, drag to turn round it, press Night to see its
+lights, and click the spider or the zombie with a weapon to watch it react. Write your note in the
+box and press Save; it goes to the model's `notes.md` with a picture of what you were looking at,
+and the owner answers there.
