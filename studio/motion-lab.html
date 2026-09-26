@@ -366,9 +366,16 @@ const localDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], 0, d[2]).
 const worldDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], d[1], d[2]).applyAxisAngle(UP, y).toArray(); };
 // Where each point is now: the simulated pose while it reacts, the animated one while it doesn't.
 const pointsNow = (lb) => (lb.body.awake ? lb.body.points() : lb.body.animPoints());
-function nearestPoint(lb, at) {
+// The body's points as the screen shows them: live, or the recording at the playhead (by name).
+function shownPoints(lb) {
+  const i = labBodies.indexOf(lb), fr = mode !== 'live' && rec.frames.length ? around(viewT)[0] : null;
+  const sim = fr && fr.pts[i] && fr.pts[i].sim;
+  if (!sim) return pointsNow(lb);
+  return Object.fromEntries(lb.bones.names.map((n, k) => [n, [sim[k * 3], sim[k * 3 + 1], sim[k * 3 + 2]]]));
+}
+function nearestPoint(lb, at, pts = pointsNow(lb)) {
   let best = 'chest', bd = Infinity;
-  for (const [n, p] of Object.entries(pointsNow(lb))) {
+  for (const [n, p] of Object.entries(pts)) {
     const d = (p[0] - at[0]) ** 2 + (p[1] - at[1]) ** 2 + (p[2] - at[2]) ** 2;
     if (d < bd) { bd = d; best = n; }
   }
@@ -410,15 +417,18 @@ function strike(lb, s, w = weapon, power = r3(w.power * powerK)) {
 }
 // A click on one body: the same hit on every body, at the same body point, from the same side of it.
 function hitFromClick(lb, xyz, rayDir) {
+  // Clicked on a paused or replayed pose: the point is picked on the pose clicked (the chest in the
+  // replay), and the live body is hit on that point where it is now, with the arrow there too.
+  const wasLive = mode === 'live';
+  const name = nearestPoint(lb, xyz, shownPoints(lb));
   goLive();
   beginRun();
   record(true);
-  const name = nearestPoint(lb, xyz);
   const local = localDir(lb, rayDir);
   const from = fromOf(local);
   for (const other of labBodies) {
     const d = other === lb ? rayDir : worldDir(other, [local[0], rayDir[1], local[2]]);
-    strike(other, { at: name, xyz: other === lb ? xyz : pointsNow(other)[name], dir: d, from });
+    strike(other, { at: name, xyz: other === lb && wasLive ? xyz : pointsNow(other)[name], dir: d, from });
   }
 }
 // A hit at the weapon's usual point, from the front, the side or behind: what the crew's checks do.
@@ -896,8 +906,8 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
   if (e.shiftKey && canHold()) {
     const p = pick(e.clientX, e.clientY);
     if (p && typeof p.lb.body.hold === 'function') {
+      const name = nearestPoint(p.lb, p.hit.point.toArray(), shownPoints(p.lb));   // on the pose clicked
       if (mode !== 'live') setMode('live');
-      const name = nearestPoint(p.lb, p.hit.point.toArray());
       const target = new THREE.Vector3(...pointsNow(p.lb)[name]);
       const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(camera.getWorldDirection(_v).clone(), target);
       // A hold starts a run of its own on the readout; a scene can't hold a body by the mouse, so
