@@ -117,7 +117,8 @@
 // or save what happened as a scene an agent can render (node tools/studio.mjs scene). Without the
 // lab's server (a plain static server) it copies the note instead.
 //
-// URL: ?preset=zombie/brute &compare=file|<rig/name> &weapon=<battery hit> &asset=<review folder>.
+// URL: ?preset=zombie/brute &compare=file|<rig/name> &weapon=<battery hit> &power=<0.25..3>
+// &bones=1 &asset=<review folder>.
 // A page script (studio/check-labs.mjs, or an agent in the console) drives it through window.lab.
 import * as THREE from 'three';
 import { rigs, loadMotion, createBody, loadClip, createPlayer } from './index.js';
@@ -688,6 +689,9 @@ document.getElementById('replay').onclick = () => replay();
 document.getElementById('live').onclick = live;
 document.getElementById('back1').onclick = () => stepFrames(-1);
 document.getElementById('fwd1').onclick = () => stepFrames(1);
+// A button gives the keyboard back once it's clicked: kept, Space would both press it again and play
+// or pause, and the two would undo each other.
+addEventListener('click', (e) => { const b = e.target && e.target.closest && e.target.closest('button'); if (b) b.blur(); });
 addEventListener('keydown', (e) => {
   if (e.target && e.target.closest && e.target.closest('textarea, input, select')) return;
   if (e.key === ' ') { e.preventDefault(); if (mode === 'paused') play(); else pause(); }
