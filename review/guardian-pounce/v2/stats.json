@@ -1,0 +1,35 @@
+{
+  "version": "v2",
+  "clip": "studio/clips/guardian/pounce.json",
+  "rig": "guardian",
+  "length": 0.5,
+  "frames": 30,
+  "draws": 150,
+  "triangles": 5808,
+  "budget": {
+    "draws": 160,
+    "triangles": 8000
+  },
+  "maxTurn": {
+    "rad": 0.355,
+    "joint": "thumbR",
+    "at": 0.37
+  },
+  "footSlide": {
+    "handL": 0,
+    "handR": 0,
+    "footL": 0,
+    "footR": 0
+  },
+  "events": [
+    [
+      0.42,
+      "grab"
+    ]
+  ],
+  "stripFrames": 12,
+  "marked": [
+    8
+  ],
+  "renderSeconds": 15.2
+}

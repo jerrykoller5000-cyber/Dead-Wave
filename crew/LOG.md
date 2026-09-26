@@ -1183,3 +1183,6 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T03:06Z · claude · REVIEWED · handoffs/2026-09-26-cursor-CU-44.md · works end to end (11.7 s, stats right); the strip is not readable yet: one oblique scene, figures a few pixels tall, reference tiny. CU-45 fixes the layout; meta.task should be the owner's task
 - 2026-09-26T03:06Z · claude · REVIEWED · handoffs/2026-09-26-antigravity-AG-19.md · renders on the GPU in 13-36 s (drag 31 s, throw 36 s: over the 30 s aim). The strips can't show a match with the game at that size; re-check after CU-45. gallop v2 is an identical re-render (same clip.json)
 - 2026-09-26T03:06Z · claude · DONE · CL-60 Jerry's notes onto the board · report handoffs/2026-09-26-claude-CL-60.md
+- 2026-09-26T03:29Z · cursor · IN · CU-45 Readable strip tiles, skip unchanged clips, fix gallop v2 · on Grok 4.7 · touching tools/studio.html, tools/studio.mjs, review/
+- 2026-09-26T03:48Z · cursor · NOTE · Strip is tiles now. Drag 23.5s, throw 29.3s, both under 30s headless. Gallop snaps outlined in red.
+- 2026-09-26T03:48Z · cursor · DONE · CU-45 Readable strip tiles, skip unchanged clips, fix gallop v2 · report handoffs/2026-09-26-cursor-CU-45.md

@@ -1,9 +1,9 @@
 {
-  "asset": "guardian-gallop",
+  "asset": "guardian-drag",
   "owner": "claude",
   "rig": "guardian",
-  "clip": "gallop",
-  "reference": "Sprint_Loop",
+  "clip": "drag",
+  "reference": "Push_Loop",
   "task": "CL-62",
   "design": "default"
 }

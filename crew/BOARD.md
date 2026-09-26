@@ -489,7 +489,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-45** **First. The studio's strip, readable (D-40; Claude's review of CU-44).** The strip is the thing Jerry
+- [x] **CU-45** **First. The studio's strip, readable (D-40; Claude's review of CU-44).** The strip is the thing Jerry
   and every agent looks at, and today it's one oblique scene with the creature a few pixels tall
   (`review/guardian-drag/v1/strip.png`). Make it a grid of tiles instead: one viewport per frame (`setViewport` /
   `setScissor` on one renderer), each tile its own side-on camera framed on the rig's bounds for the whole clip (same

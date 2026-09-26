@@ -195,7 +195,6 @@ async function shoot(query, file, { video = false } = {}) {
     } else {
       const size = await page.evaluate('window.__size || { w: 1280, h: 720 }');
       await page.setViewport(size.w, size.h);
-      await page.evaluate('window.__draw && window.__draw()');
       await page.screenshot(file);
     }
     const errors = page.errors.filter((e) => !/favicon/i.test(e));
@@ -207,41 +206,90 @@ async function shoot(query, file, { video = false } = {}) {
   }
 }
 
+function ownerTask(rig) {
+  return rig === 'guardian' ? 'CL-62' : '';
+}
+function unchanged(dir, bytes) {
+  const latest = path.join(dir, 'latest.txt');
+  if (!fs.existsSync(latest)) return null;
+  const version = fs.readFileSync(latest, 'utf8').trim();
+  const prev = path.join(dir, version, 'clip.json');
+  if (!fs.existsSync(prev)) return null;
+  return fs.readFileSync(prev).equals(bytes) ? version : null;
+}
+function writeMeta(dir, meta) {
+  const file = path.join(dir, 'meta.json');
+  const cur = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+  const next = { ...cur, ...meta, task: ownerTask(meta.rig) || cur.task || '' };
+  fs.writeFileSync(file, JSON.stringify(next, null, 2) + '\n');
+}
+
+async function shootBoth(query, stripFile, videoFile) {
+  const server = await serve(ROOT, 0);
+  const browser = await launch({ headless: true });
+  try {
+    const page = await browser.newPage({ width: 1280, height: 720 });
+    await page.goto(`${server.origin}/tools/studio.html?${query}`, { waitUntil: 'none' });
+    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: 90000 });
+    if (!stripOk) throw new Error('the strip did not finish');
+    const err = await page.evaluate('window.__error || ""');
+    if (err) throw new Error(err);
+    const size = await page.evaluate('window.__size || { w: 1280, h: 720 }');
+    await page.setViewport(size.w, size.h);
+    await page.screenshot(stripFile);
+    await page.evaluate('window.__goVideo = true');
+    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: 120000 });
+    if (!vidOk) throw new Error('the video did not finish');
+    const err2 = await page.evaluate('window.__error || ""');
+    if (err2) throw new Error(err2);
+    const len = await page.evaluate('window.__b64 ? window.__b64.length : 0');
+    if (!len) throw new Error('no video was recorded');
+    let b64 = '';
+    const STEP = 400000;
+    for (let i = 0; i < len; i += STEP) b64 += await page.evaluate(`window.__b64.slice(${i}, ${i + STEP})`);
+    await fs.promises.mkdir(path.dirname(videoFile), { recursive: true });
+    await fs.promises.writeFile(videoFile, Buffer.from(b64, 'base64'));
+  } finally {
+    await Promise.race([browser.close(), new Promise((r) => setTimeout(r, 2500))]);
+    await Promise.race([server.close(), new Promise((r) => setTimeout(r, 800))]);
+  }
+}
+
 async function renderClip(rel, opt) {
   const t0 = Date.now();
   const abs = path.resolve(ROOT, rel);
-  const json = JSON.parse(fs.readFileSync(abs, 'utf8'));
+  const raw = fs.readFileSync(abs);
+  const json = JSON.parse(raw.toString('utf8'));
   const clip = loadClip(json);
   const frames = Math.max(2, parseInt(opt.frames || '12', 10) || 12);
   const vs = opt.vs === 'none' ? '' : (opt.vs && opt.vs !== true ? opt.vs : (json.reference || ''));
+  const asset = opt.asset && opt.asset !== true ? opt.asset : `${json.rig}-${json.name}`;
+  const dir = path.join(ROOT, 'review', asset);
+  const same = unchanged(dir, raw);
+  if (same && !opt.force) {
+    console.log(`${asset} unchanged (${same}); no new version. Pass --force to re-render.`);
+    return;
+  }
   if (vs) {
     const ref = loadReference(JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'anim', 'reference', 'ual.json'), 'utf8')));
     ref.clip(vs);
   }
   const designName = opt.design && opt.design !== true ? opt.design : 'default';
   const measured = measure(clip, json, { rootMotion: !!opt['root-motion'], stripFrames: frames });
-  const asset = opt.asset && opt.asset !== true ? opt.asset : `${json.rig}-${json.name}`;
-  const dir = path.join(ROOT, 'review', asset);
   fs.mkdirSync(dir, { recursive: true });
   const version = nextVersion(dir);
   const ver = path.join(dir, version);
   fs.mkdirSync(ver, { recursive: true });
-  if (!fs.existsSync(path.join(dir, 'meta.json'))) {
-    fs.writeFileSync(path.join(dir, 'meta.json'), JSON.stringify({
-      asset, owner: 'claude', rig: json.rig, clip: json.name, reference: vs || null,
-      task: 'CU-44', design: designName
-    }, null, 2) + '\n');
-  }
-  fs.copyFileSync(abs, path.join(ver, 'clip.json'));
+  writeMeta(dir, {
+    asset, owner: 'claude', rig: json.rig, clip: json.name, reference: vs || null, design: designName
+  });
+  fs.writeFileSync(path.join(ver, 'clip.json'), raw);
   const q = new URLSearchParams({
-    mode: 'strip', clip: rel.split(path.sep).join('/'), frames: String(frames),
-    vs, cam: opt.cam && opt.cam !== true ? opt.cam : 'side',
-    root: opt['root-motion'] ? '1' : '0', design: designName,
+    mode: 'both', clip: rel.split(path.sep).join('/'), frames: String(frames),
+    vs, root: opt['root-motion'] ? '1' : '0', design: designName,
     bad: measured.bad.join(','), over: measured.over ? '1' : '0'
   });
-  await shoot(q.toString(), path.join(ver, 'strip.png'));
-  const qv = new URLSearchParams(q); qv.set('mode', 'video');
-  await shoot(qv.toString(), path.join(ver, 'video.webm'), { video: true });
+  await shootBoth(q.toString(), path.join(ver, 'strip.png'), path.join(ver, 'video.webm'));
   const stats = {
     version, clip: rel.split(path.sep).join('/'), rig: json.rig,
     length: clip.length, frames: measured.frames,
@@ -272,11 +320,7 @@ async function renderRig(name, opt) {
   fs.mkdirSync(ver, { recursive: true });
   const frames = Math.max(4, parseInt(opt.frames || '8', 10) || 8);
   const designName = opt.design && opt.design !== true ? opt.design : 'default';
-  if (!fs.existsSync(path.join(dir, 'meta.json'))) {
-    fs.writeFileSync(path.join(dir, 'meta.json'), JSON.stringify({
-      asset, owner: 'claude', rig: name, clip: null, reference: null, task: 'CU-44', design: designName
-    }, null, 2) + '\n');
-  }
+  writeMeta(dir, { asset, owner: 'claude', rig: name, clip: null, reference: null, design: designName });
   const over = budget && (cost.draws > budget.draws || cost.triangles > budget.triangles);
   const q = new URLSearchParams({ mode: 'turntable', rig: name, frames: String(frames), design: designName, over: over ? '1' : '0' });
   await shoot(q.toString(), path.join(ver, 'turntable.png'));
@@ -297,7 +341,7 @@ try {
   else if (cmd === 'rig' && pos[0]) await renderRig(pos[0], opt);
   else {
     console.log('node tools/studio.mjs list');
-    console.log('node tools/studio.mjs render <clip.json> [--vs ref] [--frames 12] [--cam side] [--root-motion] [--design default]');
+    console.log('node tools/studio.mjs render <clip.json> [--vs ref] [--frames 12] [--root-motion] [--design default] [--force]');
     console.log('node tools/studio.mjs rig <rig> [--frames 8]');
     process.exitCode = 2;
   }

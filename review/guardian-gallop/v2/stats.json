@@ -1,0 +1,57 @@
+{
+  "version": "v2",
+  "clip": "studio/clips/guardian/gallop.json",
+  "rig": "guardian",
+  "length": 0.32,
+  "frames": 20,
+  "draws": 150,
+  "triangles": 5808,
+  "budget": {
+    "draws": 160,
+    "triangles": 8000
+  },
+  "maxTurn": {
+    "rad": 1.199,
+    "joint": "hipR",
+    "at": 0.11
+  },
+  "footSlide": {
+    "handL": 0,
+    "handR": 0,
+    "footL": 0,
+    "footR": 0
+  },
+  "events": [
+    [
+      0,
+      "footfall"
+    ],
+    [
+      0.015,
+      "footfall"
+    ],
+    [
+      0.142,
+      "footfall"
+    ],
+    [
+      0.152,
+      "footfall"
+    ]
+  ],
+  "stripFrames": 12,
+  "marked": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "renderSeconds": 12.1
+}

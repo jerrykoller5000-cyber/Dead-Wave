@@ -1,12 +1,12 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><title>studio render</title>
-<style>html,body{margin:0;background:#1d2330;overflow:hidden}canvas{display:block}</style>
+<style>html,body{margin:0;background:#243044;overflow:hidden}canvas{display:block}#labels{position:absolute;left:0;top:0;pointer-events:none}</style>
 <script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js","three/addons/":"../vendor/three/addons/"}}</script>
 </head><body>
 <script type="module">
-// tools/studio.html — CU-44. One page, driven by tools/studio.mjs. Never loads the game.
-//   ?mode=strip|video|turntable&clip=<path>&frames=12&vs=<ref>&cam=side|play|front|three
-//   &root=0|1&design=default|wet|chalk&bad=0,3&over=0|1
+// tools/studio.html — CU-45. Each strip frame is its own tile (one viewport, one side camera),
+// so the figure fills the tile. Never loads the game.
+//   ?mode=strip|video|both|turntable&clip=<path>&frames=12&vs=<ref>&bad=0,3
 import * as THREE from 'three';
 import { rbox } from '../core/geometry.js';
 import { rigs, loadClip, createPlayer, loadReference, makeMannequin, poseReference } from '../studio/index.js';
@@ -14,7 +14,8 @@ import { rigs, loadClip, createPlayer, loadReference, makeMannequin, poseReferen
 const q = new URLSearchParams(location.search);
 const mode = q.get('mode') || 'strip';
 const COLS = 4;
-const SP = +(q.get('spacing') || 7);
+const TILE_W = 320;
+const TILE_H = 360;
 const DESIGNS = {
   default: { rock: 0x3d4a44, dark: 0x0e1512, moss: 0x2e5a2a, eyeTint: 0xbdf3ff },
   wet: { rock: 0x1c4036, dark: 0x071410, moss: 0x1c6b38, eyeTint: 0x7dffc4 },
@@ -22,6 +23,7 @@ const DESIGNS = {
 };
 const bad = new Set((q.get('bad') || '').split(',').filter(Boolean).map(Number));
 const design = DESIGNS[q.get('design')] || DESIGNS.default;
+const rootMotion = q.get('root') === '1';
 
 function fail(e) { window.__error = String(e && e.stack || e); console.error(e); }
 function marine() {
@@ -36,21 +38,9 @@ function marine() {
   m.traverse((o) => { if (o.isMesh) o.castShadow = true; });
   return m;
 }
-function label(text, color) {
-  const c = document.createElement('canvas'); c.width = 256; c.height = 64;
-  const g = c.getContext('2d');
-  g.fillStyle = color; g.font = 'bold 36px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillText(text, 128, 32);
-  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthTest: false }));
-  sp.scale.set(1.5, 0.38, 1);
-  return sp;
-}
-function ghostify(group) {
-  group.traverse((o) => {
-    if (!o.isMesh) return;
-    o.material = new THREE.MeshBasicMaterial({ color: 0xa8b4c4, transparent: true, opacity: 0.22, depthWrite: false });
-    o.castShadow = false;
-  });
+function groundLine() {
+  const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0.02, -8), new THREE.Vector3(0, 0.02, 8)]);
+  return new THREE.Line(g, new THREE.LineBasicMaterial({ color: 0x1a2a16 }));
 }
 function targetsFor(inst, stage) {
   inst.group.updateWorldMatrix(true, true);
@@ -58,179 +48,231 @@ function targetsFor(inst, stage) {
   return Object.fromEntries(Object.entries(stage).map(([k, v]) => [k, new THREE.Vector3(v[0], v[1], v[2]).applyMatrix4(m)]));
 }
 function stepTo(inst, player, clip, stage, time) {
-  player.play(clip, { rootMotion: q.get('root') === '1' });
-  const steps = Math.max(1, Math.ceil(time * 60));
+  player.play(clip, { rootMotion });
+  const steps = Math.max(1, Math.ceil(Math.max(time, 1 / 60) * 60));
   for (let i = 0; i <= steps; i++) player.update(i === 0 ? 0 : time / steps, { targets: targetsFor(inst, stage) });
 }
-function cell(i, row0) {
-  const col = i % COLS, row = row0 + Math.floor(i / COLS);
-  return new THREE.Vector3((col - (COLS - 1) / 2) * SP, 0, -row * SP);
+function timesOf(clip, n) {
+  const out = [];
+  for (let i = 0; i < n; i++) out.push((clip.loop ? i / n : i / Math.max(1, n - 1)) * clip.length);
+  return out;
+}
+// Side-on ortho camera (+X), the same for every tile in a row. The subject fills most of the height.
+function fitSide(box) {
+  const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.05, 80);
+  const cx = (box.min.x + box.max.x) / 2;
+  const cy = (box.min.y + box.max.y) / 2;
+  const cz = (box.min.z + box.max.z) / 2;
+  const halfH = Math.max(0.5, (box.max.y - box.min.y) / 2);
+  const halfD = Math.max(0.5, (box.max.z - box.min.z) / 2);
+  const aspect = TILE_W / TILE_H;
+  let fH = halfH / 0.78;
+  let fW = fH * aspect;
+  if (halfD > fW * 0.9) { fW = halfD / 0.9; fH = fW / aspect; }
+  cam.top = fH; cam.bottom = -fH; cam.left = -fW; cam.right = fW;
+  cam.position.set(cx + 14, cy, cz);
+  cam.lookAt(cx, cy, cz);
+  cam.updateProjectionMatrix();
+  return cam;
+}
+function paintTile(col, row, rows, cam, isBad, clear) {
+  const x = col * TILE_W;
+  const y = (rows - 1 - row) * TILE_H;
+  const border = isBad ? 8 : 0;
+  renderer.setScissorTest(true);
+  renderer.setViewport(x, y, TILE_W, TILE_H);
+  renderer.setScissor(x, y, TILE_W, TILE_H);
+  renderer.setClearColor(isBad ? 0xe23b2e : (clear || 0x243044), 1);
+  renderer.clear(true, true, true);
+  if (border) {
+    renderer.setViewport(x + border, y + border, TILE_W - border * 2, TILE_H - border * 2);
+    renderer.setScissor(x + border, y + border, TILE_W - border * 2, TILE_H - border * 2);
+    renderer.setClearColor(0x243044, 1);
+    renderer.clear(true, true, true);
+  }
+  renderer.render(scene, cam);
+}
+function label(ctx, col, row, text, red) {
+  const x = col * TILE_W + 14;
+  const y = row * TILE_H + 48;
+  ctx.font = 'bold 40px sans-serif';
+  ctx.fillStyle = red ? '#ffb0a8' : '#f4f1e8';
+  ctx.fillText(text, x, y);
 }
 
 const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
 await renderer.init();
 renderer.setPixelRatio(1);
+renderer.autoClear = false;
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(q.get('over') === '1' ? 0x4a1818 : 0x243044);
-scene.add(new THREE.HemisphereLight(0xc5d6ef, 0x3a3428, 1.05));
-const sun = new THREE.DirectionalLight(0xfff1d2, 1.8); sun.position.set(8, 14, 6); scene.add(sun);
-const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x4c743c, roughness: 1 }));
-ground.rotation.x = -Math.PI / 2; scene.add(ground);
-const grid = new THREE.GridHelper(400, 200, 0x2f4a28, 0x2f4a28); grid.position.y = 0.01; scene.add(grid);
-const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 800);
-const yaw = { side: Math.PI / 2, front: 0, play: 0.35, three: Math.PI / 4 }[q.get('cam') || 'side'] ?? Math.PI / 2;
+scene.add(new THREE.HemisphereLight(0xc5d6ef, 0x3a3428, 1.15));
+const sun = new THREE.DirectionalLight(0xfff1d2, 1.7); sun.position.set(6, 12, 4); scene.add(sun);
+const floor = groundLine();
+scene.add(floor);
+const videoCam = new THREE.PerspectiveCamera(32, 1280 / 720, 0.1, 80);
 
 try {
-  if (mode === 'turntable') {
-    const rigName = q.get('rig') || 'guardian';
-    const N = +(q.get('frames') || 8);
-    for (let i = 0; i < N; i++) {
-      const inst = rigs.get(rigName).create({ design });
-      const p = cell(i, 0);
-      inst.group.position.copy(p);
-      inst.group.rotation.y = (i / N) * Math.PI * 2;
-      scene.add(inst.group);
-      const man = marine(); man.position.copy(p); man.position.x -= 2.2; scene.add(man);
-      const tag = label((i * 360 / N).toFixed(0) + '°', '#e8eef8'); tag.position.copy(p); tag.position.y = 3.1; scene.add(tag);
-    }
-    const rows = Math.ceil(N / COLS);
-    window.__size = sizeFor(rows);
-    frameCamera(rows);
-  } else {
-    const clipPath = q.get('clip');
-    const json = await (await fetch('../' + clipPath)).json();
-    const clip = loadClip(json);
-    const rigName = json.rig;
-    const stage = json.stage || (rigs.def(rigName).stage && rigs.def(rigName).stage.targets) || {};
-    const N = +(q.get('frames') || 12);
-    const refName = q.get('vs') || '';
-    if (mode === 'strip') {
-      placeRow(clip, rigName, stage, N, 0, true);
-      let rows = Math.ceil(N / COLS);
-      if (refName) {
-        await placeRef(refName, clip, N, rows);
-        rows += Math.ceil(N / COLS);
-      }
-      window.__size = sizeFor(rows);
-      frameCamera(rows);
-    } else {
-      const inst = rigs.get(rigName).create({ design });
-      scene.add(inst.group);
-      const man = marine(); man.position.set(2.4, 0, 0); scene.add(man);
-      const player = createPlayer(inst);
-      const targets = () => targetsFor(inst, stage);
-      await record(player, clip, targets);
-    }
-  }
-  if (mode !== 'video') {
-    document.body.appendChild(renderer.domElement);
-    window.__draw = () => {
-      renderer.setSize(window.__size.w, window.__size.h, false);
-      renderer.domElement.style.width = window.__size.w + 'px';
-      renderer.domElement.style.height = window.__size.h + 'px';
-      camera.aspect = window.__size.w / window.__size.h;
-      camera.updateProjectionMatrix();
-      renderer.render(scene, camera);
-    };
-    window.__draw();
-    window.__ready = true;
-  }
+  if (mode === 'turntable') await renderTurntable();
+  else await renderClip();
 } catch (e) { fail(e); }
 
-function placeRow(clip, rigName, stage, N, row0, withGhost) {
-  const yawNow = yaw;
+async function renderTurntable() {
+  const rigName = q.get('rig') || 'guardian';
+  const N = +(q.get('frames') || 8);
+  const rows = Math.ceil(N / COLS);
+  const size = open(COLS * TILE_W, rows * TILE_H);
+  const inst = rigs.get(rigName).create({ design });
+  scene.add(inst.group);
+  const man = marine();
+  scene.add(man);
+  const box = new THREE.Box3().setFromObject(inst.group);
+  man.position.set(0, 0, box.min.z - 1.15);
+  const frame = box.clone(); frame.expandByObject(man); frame.expandByPoint(new THREE.Vector3(0, 0, box.min.z - 1.15));
+  const cam = fitSide(frame);
+  const span = Math.max(box.max.z - box.min.z, box.max.x - box.min.x) + 2;
+  floor.geometry.setFromPoints([new THREE.Vector3(0, 0.02, -span), new THREE.Vector3(0, 0.02, span)]);
+  const ctx = labels(size);
   for (let i = 0; i < N; i++) {
-    const tNow = (clip.loop ? i / N : i / Math.max(1, N - 1)) * clip.length;
-    const tPrev = (clip.loop ? ((i - 1 + N) % N) / N : Math.max(0, i - 1) / Math.max(1, N - 1)) * clip.length;
-    const p = cell(i, row0);
-    if (withGhost && (clip.loop || i > 0)) {
-      const g = rigs.get(rigName).create({ design });
-      g.group.position.copy(p); g.group.rotation.y = yawNow;
-      stepTo(g, createPlayer(g), clip, stage, tPrev);
-      ghostify(g.group); scene.add(g.group);
+    inst.group.rotation.y = (i / N) * Math.PI * 2;
+    inst.group.updateWorldMatrix(true, true);
+    paintTile(i % COLS, Math.floor(i / COLS), rows, cam, false);
+    label(ctx, i % COLS, Math.floor(i / COLS), Math.round(i * 360 / N) + '°', false);
+  }
+  window.__stripReady = true;
+  window.__ready = true;
+}
+
+async function renderClip() {
+  const json = await (await fetch('../' + q.get('clip'))).json();
+  const clip = loadClip(json);
+  const rigName = json.rig;
+  const stage = json.stage || (rigs.def(rigName).stage && rigs.def(rigName).stage.targets) || {};
+  const N = +(q.get('frames') || 12);
+  const refName = q.get('vs') || '';
+  const rigRows = Math.ceil(N / COLS);
+  const rows = rigRows + (refName ? rigRows : 0);
+  const size = open(COLS * TILE_W, rows * TILE_H);
+  const inst = rigs.get(rigName).create({ design });
+  scene.add(inst.group);
+  const man = marine();
+  scene.add(man);
+  let figure = null, rc = null;
+  if (refName) {
+    const ref = loadReference(await (await fetch('../assets/anim/reference/ual.json')).json());
+    rc = ref.clip(refName);
+    figure = makeMannequin(ref);
+    figure.group.visible = false;
+    scene.add(figure.group);
+  }
+  const player = createPlayer(inst);
+  const ts = timesOf(clip, N);
+  const box = new THREE.Box3();
+  for (const t of ts) {
+    stepTo(inst, player, clip, stage, t);
+    box.expandByObject(inst.group);
+  }
+  man.position.set(0, 0, box.min.z - 1.2);
+  const frame = box.clone();
+  frame.expandByObject(man);
+  const cam = fitSide(frame);
+  const span = (frame.max.z - frame.min.z) + 2;
+  floor.geometry.setFromPoints([new THREE.Vector3(0, 0.02, frame.min.z - 1), new THREE.Vector3(0, 0.02, frame.min.z + span)]);
+  const ctx = labels(size);
+  for (let i = 0; i < N; i++) {
+    stepTo(inst, player, clip, stage, ts[i]);
+    paintTile(i % COLS, Math.floor(i / COLS), rows, cam, bad.has(i));
+    label(ctx, i % COLS, Math.floor(i / COLS), ts[i].toFixed(2) + 's', bad.has(i));
+  }
+  if (figure) {
+    inst.group.visible = false;
+    figure.group.visible = true;
+    const rbox3 = new THREE.Box3();
+    for (let i = 0; i < N; i++) {
+      poseReference(figure, rc, (ts[i] / clip.length) * rc.length);
+      figure.group.updateWorldMatrix(true, true);
+      rbox3.expandByObject(figure.group);
     }
-    const inst = rigs.get(rigName).create({ design });
-    inst.group.position.copy(p); inst.group.rotation.y = yawNow; scene.add(inst.group);
-    stepTo(inst, createPlayer(inst), clip, stage, tNow);
-    const man = marine(); man.position.copy(p); man.position.x -= 2.3; scene.add(man);
-    const tag = label(tNow.toFixed(2) + 's', bad.has(i) ? '#ff5a4a' : '#e8eef8');
-    tag.position.copy(p); tag.position.y = 3.2; scene.add(tag);
-    if (bad.has(i)) {
-      const ring = new THREE.Mesh(new THREE.RingGeometry(2.6, 2.85, 28), new THREE.MeshBasicMaterial({ color: 0xff3b30, side: THREE.DoubleSide }));
-      ring.rotation.x = -Math.PI / 2; ring.position.copy(p); ring.position.y = 0.03; scene.add(ring);
+    // Frame the human, not whatever the bounds picked up: 1.8 m tall, marine tucked beside, filling the tile.
+    man.position.set(0, 0, -1.15);
+    const rcam = fitSide(new THREE.Box3(new THREE.Vector3(-0.45, 0, -1.7), new THREE.Vector3(0.45, 1.85, 0.55)));
+    floor.geometry.setFromPoints([new THREE.Vector3(0, 0.02, -2.2), new THREE.Vector3(0, 0.02, 1.2)]);
+    for (let i = 0; i < N; i++) {
+      poseReference(figure, rc, (ts[i] / clip.length) * rc.length);
+      const row = rigRows + Math.floor(i / COLS);
+      paintTile(i % COLS, row, rows, rcam, false);
+      label(ctx, i % COLS, row, ts[i].toFixed(2) + 's', false);
     }
   }
+  window.__stripReady = true;
+  if (mode === 'both') {
+    await new Promise((resolve) => {
+      const timer = setInterval(() => { if (window.__goVideo) { clearInterval(timer); resolve(); } }, 40);
+    });
+    for (const o of [...scene.children]) if (o !== inst.group && o !== man && !o.isLight) scene.remove(o);
+    const yard = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({ color: 0x4c743c, roughness: 1 }));
+    yard.rotation.x = -Math.PI / 2; scene.add(yard);
+    inst.group.visible = true; inst.group.rotation.set(0, 0, 0); inst.group.position.set(0, 0, 0);
+    man.visible = true; man.position.set(2.4, 0, 0);
+    renderer.setScissorTest(false);
+    renderer.setSize(1280, 720, false);
+    renderer.domElement.style.width = '1280px';
+    renderer.domElement.style.height = '720px';
+    document.getElementById('labels').style.display = 'none';
+    await record(player, clip, () => targetsFor(inst, stage));
+  } else window.__ready = true;
 }
-async function placeRef(refName, clip, N, row0) {
-  const ref = loadReference(await (await fetch('../assets/anim/reference/ual.json')).json());
-  const rc = ref.clip(refName);
-  for (let i = 0; i < N; i++) {
-    const mannequin = makeMannequin(ref);
-    const p = cell(i, row0);
-    mannequin.group.position.copy(p);
-    mannequin.group.rotation.y = yaw;
-    scene.add(mannequin.group);
-    const tOurs = (clip.loop ? i / N : i / Math.max(1, N - 1)) * clip.length;
-    const u = clip.length > 0 ? tOurs / clip.length : 0;
-    poseReference(mannequin, rc, u * rc.length);
-    const tag = label(refName, '#c9d4c0'); tag.position.copy(p); tag.position.y = 2.6; scene.add(tag);
-  }
+
+function open(w, h) {
+  window.__size = { w, h };
+  renderer.setSize(w, h, false);
+  renderer.domElement.style.width = w + 'px';
+  renderer.domElement.style.height = h + 'px';
+  document.body.appendChild(renderer.domElement);
+  renderer.setViewport(0, 0, w, h);
+  renderer.setScissor(0, 0, w, h);
+  renderer.setClearColor(0x243044, 1);
+  renderer.clear(true, true, true);
+  return { w, h };
 }
-function frameCamera(rows) {
-  const lookZ = -((Math.max(1, rows) - 1) * SP) / 2;
-  const width = (COLS - 1) * SP + 8;
-  const depth = (Math.max(1, rows) - 1) * SP + 8;
-  // A long lens, so the back row stays close to the size of the front row.
-  camera.fov = 16;
-  const aspect = (window.__size && window.__size.w / window.__size.h) || 1;
-  const fov = camera.fov * Math.PI / 180;
-  const dist = Math.max(width / aspect, depth) / (2 * Math.tan(fov / 2)) * 1.85;
-  camera.position.set(dist * 0.2, dist * 0.55, lookZ + dist * 0.78);
-  camera.lookAt(0, 0.9, lookZ);
-  camera.updateProjectionMatrix();
+function labels(size) {
+  const c = document.createElement('canvas');
+  c.id = 'labels'; c.width = size.w; c.height = size.h;
+  document.body.appendChild(c);
+  return c.getContext('2d');
 }
-function sizeFor(rows) {
-  const w = 1280;
-  const h = Math.max(480, Math.round(320 * Math.max(1, rows)));
-  return { w, h: Math.min(h, 1600) };
-}
-function setCam(which, look) {
-  if (which === 'side') { camera.position.set(7.2, 2.4, 0.2); camera.lookAt(0, 1.1, look || 0); }
-  else { camera.position.set(-1.4, 3.4, -6.2); camera.lookAt(0, 1.2, 1.2); }
-  camera.aspect = 1280 / 720; camera.updateProjectionMatrix();
+function setCam(which) {
+  if (which === 'side') { videoCam.position.set(7.2, 2.4, 0.2); videoCam.lookAt(0, 1.1, 0); }
+  else { videoCam.position.set(-1.4, 3.4, -6.2); videoCam.lookAt(0, 1.2, 1.2); }
+  videoCam.aspect = 1280 / 720;
+  videoCam.updateProjectionMatrix();
 }
 async function record(player, clip, targets) {
-  renderer.setSize(1280, 720);
   const canvas = renderer.domElement;
-  document.body.appendChild(canvas);
   const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp8') ? 'video/webm;codecs=vp8' : 'video/webm';
   const rec = new MediaRecorder(canvas.captureStream(30), { mimeType: mime, videoBitsPerSecond: 2500000 });
   const chunks = [];
   rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
-  const speeds = [1, 0.25];
-  const cams = ['side', 'play'];
   const cycle = Math.max(0.35, clip.length);
-  setCam('side');
-  player.play(clip, { rootMotion: q.get('root') === '1', speed: 1 });
-  renderer.render(scene, camera);
-  rec.start(100);
-  let seg = 0;
   const plan = [];
-  for (const cam of cams) for (const speed of speeds) plan.push({ cam, speed, dur: cycle / speed });
-  let segT = 0;
-  player.play(clip, { rootMotion: q.get('root') === '1', speed: plan[0].speed });
+  for (const cam of ['side', 'play']) for (const speed of [1, 0.25]) plan.push({ cam, speed, dur: cycle / speed });
+  renderer.autoClear = true;
   setCam(plan[0].cam);
+  player.play(clip, { rootMotion, speed: plan[0].speed });
+  renderer.setViewport(0, 0, 1280, 720);
+  renderer.render(scene, videoCam);
+  rec.start(100);
+  let seg = 0, segT = 0;
   await new Promise((resolve) => {
     let last = performance.now();
     function tick(now) {
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
       segT += dt;
       player.update(dt, { targets: targets() });
-      renderer.render(scene, camera);
+      renderer.render(scene, videoCam);
       if (segT >= plan[seg].dur) {
         seg++; segT = 0;
         if (seg >= plan.length) { rec.stop(); return; }
-        player.play(clip, { rootMotion: q.get('root') === '1', speed: plan[seg].speed });
+        player.play(clip, { rootMotion, speed: plan[seg].speed });
         setCam(plan[seg].cam);
       }
       requestAnimationFrame(tick);
@@ -239,12 +281,10 @@ async function record(player, clip, targets) {
     requestAnimationFrame(tick);
   });
   const blob = new Blob(chunks, { type: mime });
-  const data = await blob.arrayBuffer();
-  const bytes = new Uint8Array(data);
+  const bytes = new Uint8Array(await blob.arrayBuffer());
   let bin = '';
-  const STEP = 8192;
-  for (let i = 0; i < bytes.length; i += STEP) {
-    const slice = bytes.subarray(i, i + STEP);
+  for (let i = 0; i < bytes.length; i += 8192) {
+    const slice = bytes.subarray(i, i + 8192);
     for (let j = 0; j < slice.length; j++) bin += String.fromCharCode(slice[j]);
   }
   window.__b64 = btoa(bin);

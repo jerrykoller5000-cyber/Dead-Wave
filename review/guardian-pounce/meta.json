@@ -1,9 +1,9 @@
 {
-  "asset": "guardian-gallop",
+  "asset": "guardian-pounce",
   "owner": "claude",
   "rig": "guardian",
-  "clip": "gallop",
-  "reference": "Sprint_Loop",
+  "clip": "pounce",
+  "reference": "Zombie_Scratch",
   "task": "CL-62",
   "design": "default"
 }

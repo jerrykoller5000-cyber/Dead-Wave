@@ -1,0 +1,11 @@
+{
+  "version": "v2",
+  "rig": "guardian",
+  "draws": 150,
+  "triangles": 5808,
+  "budget": {
+    "draws": 160,
+    "triangles": 8000
+  },
+  "renderSeconds": 1.4
+}

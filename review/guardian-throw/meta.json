@@ -1,9 +1,9 @@
 {
-  "asset": "guardian-gallop",
+  "asset": "guardian-throw",
   "owner": "claude",
   "rig": "guardian",
-  "clip": "gallop",
-  "reference": "Sprint_Loop",
+  "clip": "throw",
+  "reference": "OverhandThrow",
   "task": "CL-62",
   "design": "default"
 }
