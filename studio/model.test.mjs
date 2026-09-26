@@ -415,7 +415,7 @@ test('the spider reacts on its eight legs: a body made of data, the same engine'
   assert.ok(grenade.finite && grenade.low > 0.03);
   const kill = hit({ kind: 'bullet', power: 3, at: 'head', kill: true });
   assert.ok(kill.events.includes('dead') && kill.events.includes('settled'), 'dead, it goes limp and settles: ' + kill.events.join(' '));
-  // What it costs: more points than a zombie (26 to 17), so more, but not out of scale. Timed against a
+  // What it costs: more points than a zombie (30 to 17), so more, but not out of scale. Timed against a
   // shambler in the same run (best of five), so a slow machine doesn't fail it.
   const per = (rig, p) => {
     const inst = rigs.get(rig).create({});

@@ -368,7 +368,7 @@ function resolveBody(b) {
 // Built once per distinct shape and shared, like core/geometry.js's rbox: a horde of the same model
 // holds one copy of each piece.
 const GEO = new Map();
-const segs = (p, n) => {
+const segs = (p) => {
   const d = SEGMENTS[p.shape].def;
   if (!Array.isArray(d)) return p.segments ?? d;
   if (p.segments === undefined) return d;
@@ -476,7 +476,7 @@ function mirrorMatrix(m) {
 }
 // Every part as it's drawn: array copies and mirror twins spelled out, each with its joint (null for
 // the model itself) and its matrix on that joint.
-function expandParts(json) {
+function expandParts(json, jointNames) {
   const out = [];
   json.parts.forEach((p, i) => {
     const base = partMatrix(p.at, p.rot, p.scale);
@@ -492,7 +492,7 @@ function expandParts(json) {
       const joint = p.joint ?? null;
       out.push({ src: i, copy: c, mirrored: false, spec: p, name: p.name || null, joint, limb: p.limb || null, matrix: m });
       if (p.mirror === 'x') {
-        const tj = joint !== null && mirrorName(joint) && json._joints.has(mirrorName(joint)) ? mirrorName(joint) : joint;
+        const tj = joint !== null && mirrorName(joint) && jointNames.has(mirrorName(joint)) ? mirrorName(joint) : joint;
         out.push({
           src: i, copy: c, mirrored: true, spec: p, name: p.name ? (mirrorName(p.name) || p.name) : null, joint: tj,
           limb: p.limb ? (mirrorName(p.limb) || p.limb) : null, matrix: mirrorMatrix(m)
@@ -604,7 +604,7 @@ export function buildModel(json) {
   const mode = json.merge ?? false;
   const mats = new Map(), finishMats = new Map();
   const matOf = (n) => mats.get(n) || mats.set(n, makeMaterial(n, json.materials[n])).get(n);
-  const expanded = expandParts({ ...json, _joints: new Set(Object.keys(joints)) });
+  const expanded = expandParts(json, new Set(Object.keys(joints)));
   const bins = new Map();
   expanded.forEach((e, k) => {
     const m = json.materials[e.spec.material], alone = mode === false || e.spec.merge === false;
