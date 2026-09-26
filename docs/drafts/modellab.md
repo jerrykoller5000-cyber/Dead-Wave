@@ -77,7 +77,9 @@ seconds. It loads the studio and three.js, never the game.
 
 **The sheet** (`sheet.png`, 1600 wide) reads top to bottom:
 - The asset and its version, the cost against the budget as bars (red over), the size (width ×
-  height × depth, and from how far below the ground to how high), the materials, the file's notes.
+  height × depth, and from how far below the ground to how high), the materials, the file's notes,
+  and **the checks** (below): green when it's one piece with nothing under the ground, orange with
+  what's wrong.
 - **Front, side, back**: orthographic, one scale and one ground line for all three, with a ruler in
   metres. The side view looks at the R side (+X), so the front is on the left. The ground is a line;
   anything under it shows through a green tint (the zombie's feet do: P-73).
@@ -123,6 +125,20 @@ command writes review folders.
 **When Jerry writes a note**, `node crew/crew.mjs review take model-<name>` says what to do: change the
 file and bump its version, look at it, render, answer. His note's context ends with
 `look: studio/model-lab.html?...`: give that to `render-sheet --look` to see exactly what he saw.
+
+### The checks
+
+`modelChecks(json)` (studio/model-look.js) says in numbers what a model looks like it gets wrong, the
+things that are easy to miss without eyes:
+
+- **Pieces.** Parts that touch (their boxes within 1.2% of the model's biggest size: 2 cm on a man, 7 cm
+  on the boat, never under 1 cm) are one piece. More than one piece means something floats, and it says
+  what, how far, and the two nearest parts: `1 of the 7 spine floats 0.025 m off the rest (spine to gut)`.
+- **Under the ground**: how far and which parts, for a model that stands (one with a `waterline` joint
+  floats, so it's let off).
+
+The sheet's header, `stats.json` (`checks`), the lab's panel, `render-sheet` and `model-sheet --check`
+all say them. They are hints, not failures: the zombie model keeps the game's gaps on purpose.
 
 ### The lab's address
 
@@ -202,13 +218,14 @@ No browser needed; `model-look.test.mjs` checks it in Node.
 | `partColor(i)`, `partHex(i)` | Part i's colour in the parts map, the same everywhere. |
 | `partOverlay(json, joints, root, { src } \| { material }, mat)`, `partAt(json, joints, root, raycaster, hidden)` | Light up a part on the shown model (following its joints); find the part a ray hits, even inside a merged mesh. |
 | `modelDiff(a, b)` | What changed between two versions of a file, as sentences. |
+| `modelChecks(json, { touch })`, `checkSentences(checks)` | Pieces that don't touch and what's under the ground (above), and the same as sentences. |
 | `modelNote({ json, ref, text, ... })`, `noteBlock(...)`, `ASSET_NAME` | The note's body (contract 5) and the block to paste. |
 | `readLabQuery(params)`, `labQuery(state)`, `FIGURES` | The lab's address, both ways. |
 
 ### Checking it
 
 ```
-node --import ./studio/node-three.mjs --test "studio/*.test.mjs"      model-look.test.mjs (13) and
+node --import ./studio/node-three.mjs --test "studio/*.test.mjs"      model-look.test.mjs (14) and
                                                                       render-sheet.test.mjs (6) among the rest
 CHROME=... CHROME_ARGS=--no-sandbox node studio/check-model-lab.mjs   the lab in a real browser (63 checks)
 ```
@@ -239,14 +256,19 @@ first lab's endpoint), so it never writes into the repo.
 - The studio's marine is 1.56 m to the top of his cap (the game's about 1.62 m), not the 1.75 m
   docs/studio.md §6 says; the sheet and the lab have their own 1.75 m figure.
 - The zombie model's feet are 0.26 m under the ground, as the game's are (P-73): its elevations
-  show the boots under the ground line against the ruler, which is the screenshot P-73 asks for.
+  show the boots under the ground line against the ruler, which is the screenshot P-73 asks for. The
+  checks also find a 5 cm gap at its waist, between the hips and the torso, which the game's
+  makeZombieMesh has too (hips box 0.55 to 0.75 m, torso from 0.80 m): it shows in the front view.
+  Both are left as the game has them; they're for Grokbot and Jerry to decide (P-73).
+- One of the spider's seven spine bones floated 2.5 cm above its gut. Its gut is 5 cm taller now and
+  sags a little under the spine (`creature/spider` version 2: review/model-spider/v2 beside v1).
 
 ### For the lead
 
 - Add to `studio/index.js`: from `./model-look.js`, `SHEET_VIEWS`, `VIEW`, `fitOrtho`,
   `fitPerspective`, `orthoScale`, `figureSpot`, `SCALE_FIGURE`, `buildFigure`, `LIGHTS`, `applyLight`,
-  `NVG_FILTER`, `partRows`, `partOverlay`, `partAt`, `modelDiff`, `modelNote`, `readLabQuery`,
-  `labQuery`; from `./render-sheet.mjs` (Node only, so not in index.js): `renderSheet`, `planVersion`,
+  `NVG_FILTER`, `partRows`, `partOverlay`, `partAt`, `partColor`, `modelChecks`, `checkSentences`,
+  `modelDiff`, `modelNote`, `readLabQuery`, `labQuery`; from `./render-sheet.mjs` (Node only, so not in index.js): `renderSheet`, `planVersion`,
   `writeReviewPage`.
 - docs/studio.md §6: "the scale marine (1.75 m)" is 1.56 m.
 - docs/drafts/model.md §8 says `model-sheet.mjs <model>` makes "the next version": it's now
