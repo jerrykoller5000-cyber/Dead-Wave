@@ -161,7 +161,6 @@ function note(j, base) {
   if (str(j.context).length > LIMITS.context) refuse(413, `"context" is over ${LIMITS.context} characters`);
   const context = cleanText(str(j.context)).replace(/\s*\n\s*/g, ' ');
   const png = j.snapshot === undefined || j.snapshot === null || j.snapshot === '' ? null : decodeSnapshot(j.snapshot);
-  if (j.meta !== undefined && j.meta !== null) checkMeta(j.meta, asset);
 
   const review = path.join(base, 'review');
   const dir = path.join(review, asset);

@@ -346,6 +346,12 @@ test('a file in a folder that is a link out (notes.md, or a picture\'s name, eve
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
+test('a folder that has its meta takes the note whatever meta the page sends (it only makes a new folder)', async () => {
+  const r = await post('note', { asset: 'motion-zombie-test', text: 'meta from a preset owned by someone new', meta: { kind: 'motion', owner: 'philip', version: 3 } });
+  assert.equal(r.code, 200, JSON.stringify(r.json));
+  assert.equal(r.json.owner, JSON.parse(read('review/motion-zombie-test/meta.json')).owner);
+});
+
 test('nested comment marks can\'t rebuild one: a note never hides the notes under it', async () => {
   const r = await post('note', { asset: 'motion-marks', text: 'second <!-<!---->- and -<!---->-> end', meta: { kind: 'motion', owner: 'grokbot', version: 1 } });
   assert.equal(r.code, 200, JSON.stringify(r.json));
