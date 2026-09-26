@@ -103,9 +103,16 @@ export async function shoot(query, file, { root = ROOT, timeout = 180000 } = {})
   try {
     const page = await browser.newPage({ width: 1600, height: 1000 });
     await page.goto(`${server.origin}/studio/model-lab.html?${query}`, { waitUntil: 'none' });
-    const ok = await page.waitFor('window.__ready === true', { timeout, every: 200 });
+    // Ready, or an error on the page: a sheet that throws says why at once instead of at the timeout.
+    const t0 = Date.now();
+    let ok = false;
+    while (!ok && Date.now() - t0 < timeout) {
+      try { ok = await page.evaluate('window.__ready === true'); } catch { /* the page is still loading */ }
+      if (!ok && page.errors.some((e) => !/favicon/i.test(e))) break;
+      if (!ok) await new Promise((r) => setTimeout(r, 200));
+    }
     const errors = page.errors.filter((e) => !/favicon/i.test(e));
-    if (!ok) throw new Error('the model lab did not finish: ' + (errors[0] || 'no error given').split('\n')[0]);
+    if (!ok) throw new Error('the model lab did not finish: ' + (errors[0] || `nothing after ${timeout / 1000} s`).split('\n')[0]);
     const url = await page.evaluate('window.__png()', timeout);
     if (typeof url !== 'string' || !url.startsWith('data:image/png;base64,')) throw new Error('the model lab gave no picture');
     await fs.promises.mkdir(path.dirname(file), { recursive: true });
@@ -198,10 +205,18 @@ export async function renderSheet(arg, opt = {}) {
   const dir = path.join(opt.root || ROOT, 'review', asset);
   const plan = planVersion(dir, m.bytes, m.json, opt);
   if (plan.action === 'skip' || plan.action === 'refuse') return { ...plan, asset, dir };
-  const ver = path.join(dir, plan.version);
+  const ver = path.join(dir, plan.version), made = !fs.existsSync(ver);
   fs.mkdirSync(ver, { recursive: true });
-  const { stats, errors } = await shoot(new URLSearchParams({ ...base, rv: plan.version, ...(opt.asset ? { asset } : {}) }).toString(), path.join(ver, 'sheet.png'), opt);
-  if (!stats || stats.errors) throw new Error(`the sheet for ${m.ref} failed: ${JSON.stringify(stats && stats.errors)}`);
+  let shot;
+  try {
+    shot = await shoot(new URLSearchParams({ ...base, rv: plan.version, ...(opt.asset ? { asset } : {}) }).toString(), path.join(ver, 'sheet.png'), opt);
+    if (!shot.stats || shot.stats.errors) throw new Error(`the sheet for ${m.ref} failed: ${JSON.stringify(shot.stats && shot.stats.errors)}`);
+  } catch (e) {
+    // A version folder this run made and couldn't fill goes again, so it isn't mistaken for one a note made.
+    if (made) fs.rmSync(ver, { recursive: true, force: true });
+    throw e;
+  }
+  const { stats, errors } = shot;
   const out = {
     version: plan.version, model: m.ref, file: m.file, modelVersion: m.json.version || 1,
     draws: stats.draws, triangles: stats.triangles, budget: stats.budget, over: stats.over, bounds: stats.bounds,

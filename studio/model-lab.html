@@ -768,7 +768,9 @@ async function drawSheet() {
   setWire(false);
   const W = 1600, HEAD = 158, TW = 532, TH = 400, G = 2, LW = 398, LH = 300, CAP = 24, FOOT = 30;
   const clipRef = S.clip || (cur.inst && (cur.json.clips || [])[0]) || null;
-  const clip = clipRef && cur.inst ? loadClip(await (await fetch(`./clips/${clipRef}.json`)).json()) : null;
+  const clipFile = clipRef && cur.inst ? await fetch(`./clips/${clipRef}.json`) : null;
+  if (clipFile && !clipFile.ok) throw new Error(`no clip ${clipRef}: there is no studio/clips/${clipRef}.json`);
+  const clip = clipFile ? loadClip(await clipFile.json()) : null;
   const FRAMES = 6, fw = Math.floor(W / FRAMES), fh = 220;
   // Each picture has its caption in a band above it, so a caption never covers the model.
   const rowY = [HEAD, HEAD + CAP + TH + G], lightY = HEAD + 2 * (CAP + TH + G), mapY = lightY + CAP + LH + G, clipY = mapY + CAP + TH + G;
