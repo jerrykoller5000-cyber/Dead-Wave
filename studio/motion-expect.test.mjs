@@ -87,5 +87,6 @@ test('explain says why for each outcome, in the preset\'s own numbers', () => {
   const p = loadMotion(presets.json('zombie/shambler'));
   assert.match(explain(runHit('zombie/shambler', 'rifle'), p), /^no step; most off balance [\d.]+ m \(it steps at balance\.step 0\.13\); this hit is 2\.5 × hits\.bullet\.scale 1 \/ mass 1 = 2\.5 against hits\.bullet\.knockdown 7; itself again [\d.]+ s after the hit$/);
   assert.match(explain(runHit('zombie/shambler', 'kill'), p), /^killed; it settled [\d.]+ s after the hit$/);
+  assert.equal(explain(runHit('zombie/shambler', 'kill', { until: (n) => n === 'dead' }), p), 'killed');
   assert.match(explain({ outcome: 'none', kind: 'bullet', power: 1 }, p), /never woke/);
 });

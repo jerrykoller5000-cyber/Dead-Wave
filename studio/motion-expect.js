@@ -58,7 +58,7 @@ export function explain(run, preset) {
   const pw = run.power * h.scale / p.mass;
   const hitIs = `this hit is ${run.power} × hits.${run.kind}.scale ${h.scale} / mass ${p.mass} = ${+pw.toFixed(2)} against hits.${run.kind}.knockdown ${h.knockdown}`;
   switch (run.outcome) {
-    case 'dead': return `killed; it settled ${run.settled ? run.time + ' s after the hit' : 'not within the run'}`;
+    case 'dead': return `killed${run.settled ? `; it settled ${run.time} s after the hit` : ''}`;
     case 'none': return 'it never woke (a full pool refuses a hit)';
     case 'down':
       if (!run.kill && pw >= h.knockdown) return `it fell at once: ${hitIs}`;
@@ -79,7 +79,10 @@ export function checkExpect(ref, opts = {}) {
   const errors = validateExpect(json.expect).map((e) => `${name}: ${e}`);
   if (errors.length || !list.length) return { preset: presetRef(json), version: json.version || 1, errors, results: [], failures: [...errors] };
   const preset = loadMotion(json);
-  const bat = runBattery(json, { ...opts, entries: list.map((e) => ({ hit: e.hit, from: e.from || 'front' })) });
+  // Only the outcome is checked, so a run stops once it can't change: at the fall or the kill. The
+  // report still plays each hit through to the get-up or the settle for its numbers.
+  const until = opts.until || ((name) => name === 'fall' || name === 'dead');
+  const bat = runBattery(json, { ...opts, until, entries: list.map((e) => ({ hit: e.hit, from: e.from || 'front' })) });
   const results = list.map((e, i) => {
     const run = bat.runs[i];
     const ok = run.outcome === e.want;

@@ -7,6 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { report } from './motion-report.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'dw-motion-report-'));
@@ -23,21 +24,29 @@ const draft = path.join(TMP, 'draft.json');
 const sham = JSON.parse(fs.readFileSync(path.join(ROOT, 'studio/motion/zombie/shambler.json'), 'utf8'));
 fs.writeFileSync(draft, JSON.stringify({ ...sham, name: 'draft', expect: [{ hit: 'rifle', want: 'flinch' }, { hit: 'shotgun-far', want: 'down' }] }, null, 2));
 
-// Every run at once: each is its own process, so the file takes about as long as the slowest.
-const [one, vs, tried, swept, json1, json2, bad1, bad2, bad3, check, all, bare] = await Promise.all([
-  cli(['zombie/shambler', '--hits', 'rifle,shotgun-close', '--from', 'front,back']),
-  cli(['zombie/shambler', '--vs', 'zombie/brute', '--hits', 'shotgun-close,rifle', '--from', 'front']),
-  cli(['zombie/shambler', '--try', 'hits.pellet.knockdown=20', '--hits', 'shotgun-close', '--from', 'front', '--check']),
-  cli(['zombie/shambler', '--sweep', '--kinds', 'pellet', '--hits', 'rifle', '--from', 'front']),
-  cli(['zombie/feral', '--hits', 'shotgun-far,kill', '--from', 'side', '--json', path.join(TMP, 'a.json')]),
-  cli(['zombie/feral', '--hits', 'shotgun-far,kill', '--from', 'side', '--json', path.join(TMP, 'b.json')]),
-  cli(['zombie/nobody']),
-  cli(['zombie/shambler', '--frobnicate']),
-  cli(['zombie/shambler', '--hits', 'bazooka']),
-  cli([draft, '--hits', 'rifle', '--from', 'front', '--check']),
-  cli(['all', '--hits', 'rifle', '--from', 'front']),
-  cli(['zombie/feral', '--hits', 'rifle', '--from', 'front'], { hook: false })
-]);
+// What only a child process shows: exit codes, the usage on stderr, running without --import, and a
+// file written by another process. One at a time: the suite runs its files side by side and
+// motion.test.mjs times 48 bodies a frame, which a dozen processes at once would starve on 4 cores.
+const one = await cli(['zombie/shambler', '--hits', 'rifle,shotgun-close', '--from', 'front,back']);
+const check = await cli([draft, '--hits', 'rifle', '--from', 'front', '--check']);
+const bad2 = await cli(['zombie/shambler', '--frobnicate']);
+const json1 = await cli(['zombie/feral', '--hits', 'shotgun-far,kill', '--from', 'side', '--json', path.join(TMP, 'a.json')]);
+const bare = await cli(['zombie/feral', '--hits', 'rifle', '--from', 'front'], { hook: false });
+
+// The rest runs the same report() in this process (no start-up each time): what it prints, its exit
+// code, or the sentence it stops with.
+const inproc = (args) => {
+  const lines = [];
+  try { const r = report(args, (s) => lines.push(s)); return { code: r.code, out: lines.join('\n') + '\n', err: '' }; }
+  catch (e) { return { code: 2, out: lines.join('\n'), err: String(e.message) }; }
+};
+const vs = inproc(['zombie/shambler', '--vs', 'zombie/brute', '--hits', 'shotgun-close,rifle', '--from', 'front']);
+const tried = inproc(['zombie/shambler', '--try', 'hits.pellet.knockdown=20', '--hits', 'shotgun-close', '--from', 'front', '--check']);
+const swept = inproc(['zombie/shambler', '--sweep', '--kinds', 'pellet', '--hits', 'rifle', '--from', 'front']);
+const json2 = inproc(['zombie/feral', '--hits', 'shotgun-far,kill', '--from', 'side', '--json', path.join(TMP, 'b.json')]);
+const bad1 = inproc(['zombie/nobody']);
+const bad3 = inproc(['zombie/shambler', '--hits', 'bazooka']);
+const all = inproc(['all', '--hits', 'rifle', '--from', 'front']);
 
 test('one preset: a titled table, a row per hit and side, what the columns mean, and its expectations', () => {
   assert.equal(one.code, 0, one.err);
@@ -80,11 +89,12 @@ test('--sweep: where the outcome changes for a kind, and how far each battery hi
   assert.match(swept.out, /^shotgun-close +6\.50 +down +1\.00 over stagger->down at 5\.50$/m);
 });
 
-test('--json: everything as data, and the same data every run', () => {
+test('--json: everything as data, and the same data from another process', () => {
   assert.equal(json1.code, 0, json1.err);
+  assert.equal(json2.code, 0, json2.err);
   assert.match(json1.out, /Wrote .*a\.json\./);
   const a = fs.readFileSync(path.join(TMP, 'a.json'), 'utf8'), b = fs.readFileSync(path.join(TMP, 'b.json'), 'utf8');
-  assert.equal(a, b, 'deterministic: two runs write the same file');
+  assert.equal(a, b, 'deterministic: a child process and this one write the same file');
   const d = JSON.parse(a);
   assert.equal(d.presets.length, 1);
   const bat = d.presets[0].battery;
@@ -94,12 +104,12 @@ test('--json: everything as data, and the same data every run', () => {
   assert.ok(d.presets[0].expect.results.every((r) => r.ok && !('run' in r)));
 });
 
-test('mistakes are sentences, with the usage, and exit 2', () => {
-  for (const [r, re] of [[bad1, /no preset at studio\/motion\/zombie\/nobody\.json \("zombie\/nobody"\)/], [bad2, /unknown option --frobnicate/], [bad3, /hit "bazooka" is not one of rifle, shotgun-far, /]]) {
-    assert.equal(r.code, 2, r.out);
-    assert.match(r.err, re);
-    assert.match(r.err, /^usage: node --import \.\/studio\/node-three\.mjs studio\/motion-report\.mjs/m);
-  }
+test('mistakes are sentences; from the command line, with the usage and exit 2', () => {
+  assert.equal(bad2.code, 2, bad2.out);
+  assert.match(bad2.err, /unknown option --frobnicate/);
+  assert.match(bad2.err, /^usage: node --import \.\/studio\/node-three\.mjs studio\/motion-report\.mjs/m);
+  assert.match(bad1.err, /^no preset at studio\/motion\/zombie\/nobody\.json \("zombie\/nobody"\)$/);
+  assert.match(bad3.err, /^hit "bazooka" is not one of rifle, shotgun-far, /);
 });
 
 test('a draft preset file: its expectations checked, the miss explained, --check exits 1', () => {
