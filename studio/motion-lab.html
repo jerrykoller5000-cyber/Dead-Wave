@@ -61,8 +61,10 @@
   <div class="hint">Pick a weapon, then click the body where it hits. Drag to turn the camera, wheel to zoom. <span id="grabhint"></span></div>
   <h2>Body</h2>
   <select id="preset"></select>
+  <label class="check" title="White: the points the physics moves and the bones between them. Green: where its animation wants each point, which the muscles pull toward."><input type="checkbox" id="bones"> Show its points, and where its animation wants them</label>
   <h2>Weapon</h2>
   <div class="grid" id="weapons"></div>
+  <label class="sl" style="margin-top:6px" title="How hard the weapon hits, from a quarter to three times its usual power"><span>power</span><input id="power" type="range" min="-2" max="1.585" step="0.01" value="0"><span id="powerv">1.00×</span></label>
   <div class="hint">Or fire it at the usual spot (as the crew's checks do):</div>
   <div class="row3" id="from" style="margin-top:6px"><button data-from="front">From the front</button><button data-from="side">From the side</button><button data-from="back">From behind</button></div>
   <div class="grid" style="margin-top:6px"><button id="again">Again, the same way</button><button id="reset">Stand up</button></div>
@@ -151,6 +153,8 @@ const q = new URLSearchParams(location.search);
 const firstPreset = presets.json(q.get('preset')) ? q.get('preset') : 'zombie/shambler';
 const assetOverride = /^[a-z0-9][a-z0-9-]{1,63}$/.test(q.get('asset') || '') ? q.get('asset') : null;
 let weapon = WEAPONS.find((w) => w.key === q.get('weapon')) || WEAPONS[2];
+// The weapon's power times this (the power slider): where a reaction turns from one thing to another.
+let powerK = Math.max(0.25, Math.min(3, +q.get('power') || 1));
 let compareWith = q.get('compare') === 'file' || presets.json(q.get('compare')) ? q.get('compare') : '';
 let overrides = {}, speed = 1, simT = 0, mode = 'live', viewT = 0, canSave = false, building = null;
 let labBodies = [], seq = null, liveSnap = null, grab = null, lastSave = null, lastScene = null, framedTwo = false;
@@ -204,6 +208,46 @@ function showArrow(a, st) {
   a.mat.color.setHex(st.color);
 }
 
+// --- The body's own points, over the rig (the "Show its points" box) ------------------------------------
+// White: the points the physics moves and the bones between them. Green: where the animation wants
+// each point, which is what the muscles pull toward (from the body's root). The gap between them is
+// the reaction. They're recorded with the rest, so a replay shows them too.
+let showBones = q.get('bones') === '1';
+function makeBones(lb) {
+  const spec = lb.inst.def.body, names = Object.keys(spec.points);
+  const pairs = spec.bones.map(([a, b]) => [names.indexOf(a), names.indexOf(b)]).filter(([a, b]) => a >= 0 && b >= 0);
+  const line = (color, opacity) => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pairs.length * 6), 3));
+    const l = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color, depthTest: false, transparent: true, opacity }));
+    l.renderOrder = 12; l.frustumCulled = false; l.visible = false;
+    scene.add(l);
+    return l;
+  };
+  return { names, pairs, sim: line(0xffffff, 0.9), anim: line(0x7cdea0, 0.75) };
+}
+// The body's points now, flat [x, y, z, ...] in its own order: simulated, and animated.
+function bonePoints(lb) {
+  if (typeof lb.body.animPoints !== 'function') return null;
+  const flat = (o) => Float32Array.from(lb.bones.names.flatMap((n) => o[n] || [0, 0, 0]));
+  return { sim: flat(pointsNow(lb)), anim: flat(lb.body.animPoints()) };
+}
+// The overlay as the screen should show it: live, or the recording at the playhead.
+function redrawBones() {
+  const fr = mode !== 'live' && rec.frames.length ? around(viewT)[0] : null;
+  labBodies.forEach((lb, i) => drawBones(lb, fr ? fr.pts[i] : bonePoints(lb)));
+}
+function drawBones(lb, pts) {
+  const B = lb.bones;
+  for (const [l, p] of [[B.sim, pts && pts.sim], [B.anim, pts && pts.anim]]) {
+    l.visible = showBones && !!p;
+    if (!l.visible) continue;
+    const arr = l.geometry.attributes.position.array;
+    B.pairs.forEach(([a, b], i) => { arr.set(p.subarray(a * 3, a * 3 + 3), i * 6); arr.set(p.subarray(b * 3, b * 3 + 3), i * 6 + 3); });
+    l.geometry.attributes.position.needsUpdate = true;
+  }
+}
+
 // --- Bodies -------------------------------------------------------------------------------------
 // Clips by "rig/name", loaded once. The files as they are (rawClips) are what the crew's checks take.
 const clipCache = new Map(), rawClips = new Map();
@@ -254,6 +298,7 @@ async function makeLabBody(key, ref, overrides, x) {
   // Every joint the player poses, in a fixed order: what the timeline records.
   lb.joints = [...inst.rest.keys()];
   lb.arrow = makeArrow();
+  lb.bones = makeBones(lb);
   lb.tag = document.createElement('div'); lb.tag.className = 'tag';
   document.getElementById('tags').append(lb.tag);
   scene.add(inst.group);
@@ -268,7 +313,7 @@ function pose0(lb) {
   lb.body.follow();
 }
 function disposeBody(lb) {
-  scene.remove(lb.inst.group, lb.arrow.g, lb.arrow.dot);
+  scene.remove(lb.inst.group, lb.arrow.g, lb.arrow.dot, lb.bones.sim, lb.bones.anim);
   lb.tag.remove();
 }
 const partJoint = (lb, part) => {
@@ -347,12 +392,13 @@ function beginRun() {
 // A hit lands on the live body: a paused or replaying lab goes back to live first.
 const goLive = () => { if (mode !== 'live') setMode('live'); };
 // s.dir is the way it pushes before the weapon's own lift (a grenade's); s.at a body point's name.
-function strike(lb, s, w = weapon) {
+function strike(lb, s, w = weapon, power = r3(w.power * powerK)) {
   const dir = [s.dir[0], s.dir[1] + (w.up || 0), s.dir[2]];
-  const hit = { at: s.at, dir, power: w.power, kind: w.kind };
+  const hit = { at: s.at, dir, power, kind: w.kind };
   const ok = w.kill ? lb.body.kill(hit) : lb.body.hit(hit);
-  showArrow(lb.arrow, { at: s.xyz, dir, len: 0.22 + w.power * 0.07, color: KIND_COLOR[w.kind] || 0xff5040 });
-  const h = { t: simT, key: lb.key, weapon: w.key, label: w.label, kind: w.kind, power: w.power, kill: !!w.kill, at: s.at, dir: dir.map(r3), local: localDir(lb, s.dir), lift: s.dir[1], from: s.from, ok };
+  showArrow(lb.arrow, { at: s.xyz, dir, len: 0.22 + power * 0.07, color: KIND_COLOR[w.kind] || 0xff5040 });
+  const label = w.label + (power !== w.power ? ` at ${(power / w.power).toFixed(2)}×` : '');
+  const h = { t: simT, key: lb.key, weapon: w.key, label, kind: w.kind, power, usual: power === w.power, kill: !!w.kill, at: s.at, dir: dir.map(r3), local: localDir(lb, s.dir), lift: s.dir[1], from: s.from, ok };
   seq.hits.push(h);
   rec.hits.push(h);
   lb.lastHit = h;
@@ -388,7 +434,7 @@ function again() {
   beginRun();
   record(true);
   const w = WEAPONS.find((x) => x.key === h.weapon) || weapon;
-  for (const lb of labBodies) strike(lb, { at: h.at, xyz: pointsNow(lb)[h.at], dir: worldDir(lb, [h.local[0], h.lift, h.local[2]]), from: h.from }, w);
+  for (const lb of labBodies) strike(lb, { at: h.at, xyz: pointsNow(lb)[h.at], dir: worldDir(lb, [h.local[0], h.lift, h.local[2]]), from: h.from }, w, h.power);
 }
 function lose(part) {
   goLive();
@@ -460,7 +506,7 @@ function record(force) {
   const last = rec.frames[rec.frames.length - 1];
   if (!force && last && simT - last.t < REC_STEP - 1e-9) return;
   if (last && last.t === simT) rec.frames.pop();
-  rec.frames.push({ t: simT, pose: labBodies.map(snapBody), arrows: labBodies.map((lb) => lb.arrow.state), hidden: labBodies.map((lb) => lb.hidden), state: labBodies.map((lb) => lb.body.state) });
+  rec.frames.push({ t: simT, pose: labBodies.map(snapBody), arrows: labBodies.map((lb) => lb.arrow.state), hidden: labBodies.map((lb) => lb.hidden), state: labBodies.map((lb) => lb.body.state), pts: labBodies.map(bonePoints) });
   const cut = simT - REC_SPAN;
   let k = 0;
   while (k < rec.frames.length - 1 && rec.frames[k].t < cut) k++;
@@ -494,6 +540,7 @@ function showFrame(t) {
     });
     for (const p of PARTS) { const j = partJoint(lb, p); if (j) j.visible = !(a.hidden[i] || []).includes(p); }
     showArrow(lb.arrow, a.arrows[i]);
+    drawBones(lb, a.pts[i]);
     lb.inst.group.updateWorldMatrix(false, true);
   });
 }
@@ -566,6 +613,17 @@ for (const w of WEAPONS) {
   wbox.append(b);
 }
 setWeapon(weapon.key);
+const bonesEl = document.getElementById('bones');
+bonesEl.checked = showBones;
+bonesEl.onchange = () => { showBones = bonesEl.checked; redrawBones(); };
+const powerEl = document.getElementById('power');
+function setPower(k) {
+  powerK = Math.max(0.25, Math.min(3, +k || 1));
+  powerEl.value = Math.log2(powerK).toFixed(2);
+  document.getElementById('powerv').textContent = powerK.toFixed(2) + '×';
+}
+powerEl.oninput = () => setPower(2 ** +powerEl.value);
+setPower(powerK);
 for (const b of document.querySelectorAll('[data-from]')) b.onclick = () => fire(b.dataset.from);
 document.getElementById('reset').onclick = () => { for (const lb of labBodies) standUp(lb); seq = null; if (mode !== 'live') setMode('live'); };
 document.getElementById('again').onclick = again;
@@ -724,7 +782,7 @@ function judge(lb) {
   const back = lb.seqEnd !== null ? lb.seqEnd - lb.firstHit.t : null;
   const hits = seq ? seq.hits.filter((h) => h.key === lb.key).length : 1;
   const h = lb.firstHit, w = WEAPONS.find((x) => x.key === h.weapon);
-  const want = hits === 1 ? (lb.json.expect || []).find((e) => e.hit === h.weapon && (e.from || 'front') === h.from) : null;
+  const want = hits === 1 && h.usual ? (lb.json.expect || []).find((e) => e.hit === h.weapon && (e.from || 'front') === h.from) : null;
   return { got, steps, back, hits, want: want ? want.want : null, ok: want ? want.want === got : null, off: want && w && h.at !== w.at ? w.at : null, moved: moved(lb) };
 }
 // --- The reactions already approved (contract 6) ----------------------------------------------------------
@@ -954,6 +1012,7 @@ function stripTiles(tileW, tileH) {
     showArrow(lb.arrow, keep[i].arrow);
     PARTS.forEach((p, k) => { const j = partJoint(lb, p); if (j) j.visible = keep[i].vis[k]; });
   });
+  redrawBones();
   // Drawn again as it was, so the screen doesn't show the last moment of the strip for a frame.
   renderer.render(scene, camera);
   return tiles;
@@ -1169,6 +1228,7 @@ const smooth = (a, b) => a + (b - a) * 0.1;
 function live1(dt) {
   simT += dt;
   for (const lb of labBodies) stepBody(lb, dt);
+  if (showBones) for (const lb of labBodies) drawBones(lb, bonePoints(lb));
   record(false);
 }
 renderer.setAnimationLoop(() => {
@@ -1208,7 +1268,7 @@ const bodyByKey = (k) => labBodies.find((lb) => lb.key === k) || labBodies[0];
 window.lab = {
   get ready() { return !building && labBodies.length > 0; },
   state: () => ({
-    mode, simT, viewT, speed, canSave, weapon: weapon.key, preset: presetSel.value, compare: compareWith,
+    mode, simT, viewT, speed, canSave, weapon: weapon.key, power: powerK, preset: presetSel.value, compare: compareWith,
     engine: { getup: labBodies.some((lb) => lb.preset.getup && (lb.preset.getup.front || lb.preset.getup.back)), lose: labBodies.some((lb) => typeof lb.body.lose === 'function'), hold: canHold(), parts: 'BODY_PARTS' in engine, expect: hasExpect(labBodies[0]) },
     bodies: labBodies.map((lb) => ({
       key: lb.key, ref: lb.ref, rig: lb.json.rig, version: lb.json.version || 1, state: lb.body.state, weight: lb.body.weight, moved: moved(lb),
@@ -1224,7 +1284,8 @@ window.lab = {
   }),
   setPreset: async (ref) => { presetSel.value = ref; overrides = {}; drawSliders(); await build(); },
   compare: async (what) => { compareSel.value = what || ''; compareWith = compareSel.value; await build(); },
-  setWeapon, fire, again, lose, pause, play, live, replay, scrub, setSpeed, stepFrames, advance, checkExpect: checkExpectations,
+  setWeapon, setPower, fire, again, lose, pause, play, live, replay, scrub, setSpeed, stepFrames, advance, checkExpect: checkExpectations,
+  showBones: (on = true) => { bonesEl.checked = !!on; bonesEl.onchange(); },
   get cost() { return { ...cost }; },
   slider: setSlider,
   standUp: () => document.getElementById('reset').onclick(),

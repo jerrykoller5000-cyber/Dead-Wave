@@ -60,6 +60,9 @@ for (const sig of ['SIGINT', 'SIGTERM']) {
 
 // --- Reporting ---------------------------------------------------------------------------------------
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// What a call that draws pictures may take: a note's picture is seven renders, about a second each in
+// headless Chrome's software GL, and much more on a box that's busy with other work.
+const SLOW = 300000;
 let passed = 0, failed = 0, shotN = 0;
 class Fail extends Error {}
 const must = (ok, why) => { if (!ok) throw new Fail(why); };
@@ -272,7 +275,7 @@ async function checkMotionLab(browser, server, page0) {
     });
 
     await step(page, 'the picture is the canvas, with the scrub bar and a caption, under 3 MB', async () => {
-      const url = await page.evaluate('lab.snapshot()');
+      const url = await page.evaluate('lab.snapshot()', SLOW);
       must(typeof url === 'string' && url.startsWith('data:image/png;base64,'), 'no PNG came back');
       const s = pngSize(url);
       must(s && s.w <= 1280 && s.w >= 640 && s.h > 400, 'odd picture size ' + JSON.stringify(s));
@@ -339,7 +342,7 @@ async function checkMotionLab(browser, server, page0) {
     });
 
     await step(page, 'save as scene: studio/scenes/lab-<name>.json, and it replays the same in Node', async () => {
-      const r = await page.evaluate(`lab.saveScene(${JSON.stringify(sceneName)})`);
+      const r = await page.evaluate(`lab.saveScene(${JSON.stringify(sceneName)})`, SLOW);
       must(r && r.how === 'saved' && r.ok, 'not saved: ' + JSON.stringify(r && (r.error || r.how)));
       must(r.file === `studio/scenes/lab-${sceneName}.json` && fs.existsSync(sceneFile), 'no file ' + r.file);
       must(r.render === `node tools/studio.mjs scene studio/scenes/lab-${sceneName}.json`, 'the render line is ' + r.render);
@@ -374,7 +377,7 @@ async function checkMotionLab(browser, server, page0) {
 
     await step(page, 'the approved reactions checked in the lab (contract 6), when the preset has them', async () => {
       if (!st.engine.expect) return 'skipped: this preset has no "expect"';
-      const r = await page.evaluate('lab.checkExpect().then((x) => x && { file: { ok: x.file.ok, total: x.file.total }, sliders: x.sliders && { ok: x.sliders.ok, total: x.sliders.total }, ms: x.ms })');
+      const r = await page.evaluate('lab.checkExpect().then((x) => x && { file: { ok: x.file.ok, total: x.file.total }, sliders: x.sliders && { ok: x.sliders.ok, total: x.sliders.total }, ms: x.ms })', SLOW);
       must(r && r.file && r.file.total > 0, 'no result from the check: ' + JSON.stringify(r) + ' ' + pageErrors(page).join('; '));
       must(r.sliders && r.sliders.total === r.file.total, 'with the sliders moved it should check them too: ' + JSON.stringify(r));
       must((await S()).context.includes('approved reactions: the file'), 'the note context does not say how the check came out');
@@ -383,7 +386,7 @@ async function checkMotionLab(browser, server, page0) {
 
     await step(page, 'a note with a picture lands in its review folder', async () => {
       await page.evaluate(`document.getElementById('note').value = 'check-labs: the lab note check. It gets up too slowly.'; document.getElementById('save').click()`);
-      must(await page.waitFor('lab.state().lastSave && lab.state().lastSave.how', { timeout: 30000 }), 'the note was never sent');
+      must(await page.waitFor('lab.state().lastSave && lab.state().lastSave.how', { timeout: SLOW }), 'the note was never sent');
       const r = (await S()).lastSave;
       must(r.ok && r.how === 'saved', 'not saved: ' + JSON.stringify(r));
       must(r.file === `review/${asset}/notes.md`, 'saved to ' + r.file);
@@ -428,9 +431,9 @@ async function checkMotionLab(browser, server, page0) {
       let s = await p2.evaluate('lab.state()');
       must(!s.canSave, 'it thinks it can save on a server with no write door');
       await p2.evaluate('lab.setWeapon("grenade"); lab.fire("front"); lab.advance(3)');
-      const n = await p2.evaluate(`lab.note('check-labs: copied, not saved', { picture: true })`);
+      const n = await p2.evaluate(`lab.note('check-labs: copied, not saved', { picture: true })`, SLOW);
       must(n && !n.ok && (n.how === 'copied' || n.how === 'shown') && /· Jerry · v\d+ · lab\ncheck-labs: copied/.test(n.block), 'the note fallback: ' + JSON.stringify(n));
-      const sc = await p2.evaluate(`lab.saveScene('check-copied')`);
+      const sc = await p2.evaluate(`lab.saveScene('check-copied')`, SLOW);
       must(sc && !sc.ok && (sc.how === 'copied' || sc.how === 'shown') && sc.json && sc.json.format === 'dw-scene/1', 'the scene fallback: ' + JSON.stringify(sc && sc.how));
       const after = [fs.readdirSync(path.join(ROOT, 'review')).join(','), fs.readdirSync(path.join(ROOT, 'studio', 'scenes')).join(',')];
       must(after[0] === before[0] && after[1] === before[1], 'something was written without the write door');
