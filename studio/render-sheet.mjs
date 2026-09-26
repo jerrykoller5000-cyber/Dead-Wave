@@ -34,6 +34,14 @@ const { validateModel } = await import('./model.js');
 const { models } = await import('./models/index.js');
 const { modelDiff, ASSET_NAME, sizeText } = await import('./model-look.js');
 export const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+// Every file written goes through here: a review file that is a link (a planted index.html, a dangling
+// sheet.png) is refused, as the write door refuses it, so nothing is written outside the folder.
+function writeOwn(file, data) {
+  let st = null;
+  try { st = fs.lstatSync(file); } catch { /* not there yet */ }
+  if (st && st.isSymbolicLink()) throw new Error(`${path.relative(ROOT, file)} is a link: the studio writes only its own files`);
+  fs.writeFileSync(file, data);
+}
 
 // "kind/name" or a .json file: { ref, json, file (repo-relative, forward slashes), listed, bytes }.
 export function resolveModel(arg, root = ROOT) {
@@ -81,7 +89,11 @@ export function planVersion(dir, bytes, json, { force = false, redraw = false } 
   if (!latest) return { action: 'new', version: 'v' + fileV };
   const had = path.join(dir, latest, 'model.json'), sheet = path.join(dir, latest, 'sheet.png');
   if (!fs.existsSync(had) || !fs.existsSync(sheet)) {
-    return fileV > n ? { action: 'new', version: 'v' + fileV } : { action: 'fill', version: latest };
+    // A version a lab note made first (its picture, no sheet yet) is filled in with the file that says
+    // that version; an older file would be drawn under the newer label.
+    if (fileV > n) return { action: 'new', version: 'v' + fileV };
+    if (fileV === n) return { action: 'fill', version: latest };
+    return { action: 'refuse', version: latest, why: `${latest} is waiting for its sheet, but the file says "version": ${fileV}: set it to ${n} to draw ${latest}, or higher for a new one` };
   }
   const same = fs.readFileSync(had).equals(bytes);
   if (same && redraw) {
@@ -116,7 +128,7 @@ export async function shoot(query, file, { root = ROOT, timeout = 180000 } = {})
     const url = await page.evaluate('window.__png()', timeout);
     if (typeof url !== 'string' || !url.startsWith('data:image/png;base64,')) throw new Error('the model lab gave no picture');
     await fs.promises.mkdir(path.dirname(file), { recursive: true });
-    await fs.promises.writeFile(file, Buffer.from(url.slice(22), 'base64'));
+    writeOwn(file, Buffer.from(url.slice(22), 'base64'));
     const stats = await page.evaluate('window.__stats');
     return { stats, errors };
   } finally {
@@ -183,7 +195,7 @@ ${changes}
 <h2>Notes <span class="sub">(as they were when ${esc(latest)} was drawn; notes.md has the newest)</span></h2>
 ${notes || '<p class="sub">No notes yet.</p>'}
 `;
-  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  writeOwn(path.join(dir, 'index.html'), html);
   return path.join(dir, 'index.html');
 }
 
@@ -225,18 +237,18 @@ export async function renderSheet(arg, opt = {}) {
     ...(stats.namesHidden && stats.namesHidden.length ? { namesHidden: stats.namesHidden } : {}),
     renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
   };
-  fs.writeFileSync(path.join(ver, 'stats.json'), JSON.stringify(out, null, 2) + '\n');
-  fs.writeFileSync(path.join(ver, 'model.json'), m.bytes);
+  writeOwn(path.join(ver, 'stats.json'), JSON.stringify(out, null, 2) + '\n');
+  writeOwn(path.join(ver, 'model.json'), m.bytes);
   const metaFile = path.join(dir, 'meta.json');
   const had = readJson(metaFile) || {};
   const look = `studio/model-lab.html?model=${m.ref}${opt.asset ? '&asset=' + asset : ''}`;
-  fs.writeFileSync(metaFile, JSON.stringify({
+  writeOwn(metaFile, JSON.stringify({
     ...had, asset, kind: 'model', ref: m.ref, model: m.ref, owner: m.json.owner || 'claude', version: m.json.version || 1,
     file: m.file, look, task: had.task || ''
   }, null, 2) + '\n');
-  if (vnum(plan.version) >= vnum(readLatest(dir))) fs.writeFileSync(path.join(dir, 'latest.txt'), plan.version + '\n');
+  if (vnum(plan.version) >= vnum(readLatest(dir))) writeOwn(path.join(dir, 'latest.txt'), plan.version + '\n');
   const notes = path.join(dir, 'notes.md');
-  if (!fs.existsSync(notes)) fs.writeFileSync(notes, notesStub(asset, plan.version, new Date().toISOString().slice(0, 10)));
+  if (!fs.existsSync(notes)) writeOwn(notes, notesStub(asset, plan.version, new Date().toISOString().slice(0, 10)));
   writeReviewPage(dir, asset);
   return { ...plan, asset, dir, stats: out, errors, seconds: (Date.now() - t0) / 1000 };
 }

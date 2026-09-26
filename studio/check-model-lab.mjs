@@ -430,7 +430,7 @@ async function checkRealDoor(ref) {
   const server = await serve(dir, 0);
   const { page, ok } = await openLab(server.origin, `model=${ref}`);
   try {
-    await step(page, 'the note is saved with its picture, or copied if this endpoint takes only motion notes', async () => {
+    await step(page, 'the note is saved with its picture through the real write door', async () => {
       must(ok, 'the lab never became ready');
       const r = await page.evaluate('lab.note("The hull should sit lower. (check-model-lab)")');
       const asset = modelAsset(models.json(ref)), folder = path.join(dir, 'review', asset);
@@ -443,11 +443,9 @@ async function checkRealDoor(ref) {
         must(r.reply.picture && fs.existsSync(path.join(dir, r.reply.picture)), 'no picture at ' + r.reply.picture);
         return `saved: ${r.reply.file}, ${r.reply.picture}`;
       }
-      // The first lab's endpoint wants { preset } and reads at most 20 KB, so it refuses the note or cuts
-      // the connection on its picture; either way the lab copies it.
-      must(r.how === 'copied' && /preset|fetch/i.test(r.error), 'neither saved nor copied for the known reason: ' + JSON.stringify(r));
-      must(!fs.existsSync(folder), 'a folder was made although the note was refused');
-      return `copied: this endpoint said "${r.error}" (it takes model notes once contract 5's endpoint is merged)`;
+      // The write door takes model notes (contract 5): copied here is a regression (a cap too small
+      // for the picture, a refused meta), not the first lab's endpoint any more.
+      throw new Fail('not saved: ' + JSON.stringify({ how: r.how, error: r.error }));
     });
   } finally {
     await page.send('Page.close').catch(() => {});

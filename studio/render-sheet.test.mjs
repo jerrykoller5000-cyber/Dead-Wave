@@ -115,3 +115,23 @@ test('the command line: flags, values, and a value missing', () => {
   assert.deepEqual(parseArgs(['--all', '--redraw']), { pos: [], opt: { all: true, redraw: true } });
   assert.throws(() => parseArgs(['x', '--out']), /--out needs a value/);
 });
+
+test('a version a lab note made first is filled only by a file that says that version', () => {
+  const a = Buffer.from('{"a":1}'), b = Buffer.from('{"a":2}'), dir = path.join(tmp(), 'model-t');
+  folder(dir, 'v2', { v1: a, v2: null });                  // latest.txt v2: the note's picture, no sheet yet
+  assert.deepEqual(planVersion(dir, b, { version: 2 }), { action: 'fill', version: 'v2' });
+  assert.deepEqual(planVersion(dir, b, { version: 3 }), { action: 'new', version: 'v3' });
+  const old = planVersion(dir, b, { version: 1 });
+  assert.equal(old.action, 'refuse', 'an older file drawn under the newer label');
+  assert.match(old.why, /v2 is waiting for its sheet, but the file says "version": 1/);
+});
+
+test('a review file that is a link is refused, not written through', (t) => {
+  const dir = path.join(tmp(), 'model-t'), outside = path.join(tmp(), 'outside.txt');
+  folder(dir, 'v1', { v1: Buffer.from('{"a":1}') });
+  fs.writeFileSync(outside, 'mine\n');
+  fs.rmSync(path.join(dir, 'index.html'), { force: true });
+  try { fs.symlinkSync(outside, path.join(dir, 'index.html')); } catch { t.skip('no right to make links here'); return; }
+  assert.throws(() => writeReviewPage(dir, 'model-t'), /is a link/);
+  assert.equal(fs.readFileSync(outside, 'utf8'), 'mine\n');
+});
