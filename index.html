@@ -317,7 +317,7 @@
     canvas.fin-grade:not(.nvg-phosphor) { filter: saturate(.4) contrast(1.16); }
     #loopCine .glare { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 70% 40%, rgba(255,236,190,.95) 0%, rgba(255,210,150,.7) 45%, rgba(255,190,120,.35) 100%); }
     #loopCine .blink { position: absolute; inset: 0; opacity: 0; background: #000; }
-    body.loopcine #hud > *:not(#win):not(#bigBanner), body.loopcine #reticle, body.loopcine #hitPing { visibility: hidden !important; }
+    body.loopcine #hud > *:not(#win):not(#bigBanner):not(#pause):not(#shop), body.loopcine #reticle, body.loopcine #hitPing { visibility: hidden !important; }
     #cine .cap { position: absolute; left: 0; right: 0; bottom: 12vh; text-align: center; font-family: var(--font-display); font-size: 26px; letter-spacing: .12em; color: #e8e4d4; text-transform: uppercase; opacity: 0; transition: opacity 1.4s ease; text-shadow: 0 2px 10px rgba(0,0,0,.8); }
     #cine .cap .s { display: block; font-family: var(--font-hud); font-size: 13px; letter-spacing: .22em; opacity: .75; margin-top: 8px; }
     #cine .cap.on { opacity: 1; }
@@ -31016,6 +31016,7 @@
       if (gameOver || won) return;
       gameOver = !victory;
       won = victory;
+      hq.seq = null;   // an alarm still counting down would start the wave behind the burial
       setPaused(false);
       stopFiring();
       AudioSys.chainsawStop();
