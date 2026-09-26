@@ -111,14 +111,24 @@ function testServer(mode) {
     close: () => new Promise((d) => { server.closeAllConnections(); server.close(() => d()); })
   })));
 }
-// A copy of the repo for the real write door: its folders linked, its review folder empty and its own.
+// A copy of the repo for the real write door: its folders linked (junctions, which Windows makes without
+// admin rights), its review folder empty and its own.
+const LINKED = ['studio', 'vendor', 'core', 'world', 'crew', 'assets', 'tools'];
 function scratchRoot() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'dw-model-lab-'));
-  for (const d of ['studio', 'vendor', 'core', 'world', 'crew', 'assets', 'tools']) {
-    if (fs.existsSync(path.join(ROOT, d))) fs.symlinkSync(path.join(ROOT, d), path.join(dir, d), 'dir');
+  for (const d of LINKED) {
+    if (fs.existsSync(path.join(ROOT, d))) fs.symlinkSync(path.join(ROOT, d), path.join(dir, d), 'junction');
   }
   fs.mkdirSync(path.join(dir, 'review'));
   return dir;
+}
+// The links go first, one by one, so removing the copy can never reach into the repo through them.
+function removeScratch(dir) {
+  for (const d of LINKED) {
+    const at = path.join(dir, d);
+    try { if (fs.lstatSync(at).isSymbolicLink()) { try { fs.unlinkSync(at); } catch { fs.rmdirSync(at); } } } catch { /* not there */ }
+  }
+  fs.rmSync(dir, { recursive: true, force: true });
 }
 
 // --- The checks ------------------------------------------------------------------------------------------
@@ -440,7 +450,7 @@ async function checkRealDoor(ref) {
   } finally {
     await page.send('Page.close').catch(() => {});
     await Promise.race([server.close(), sleep(800)]);
-    fs.rmSync(dir, { recursive: true, force: true });
+    removeScratch(dir);
   }
 }
 
