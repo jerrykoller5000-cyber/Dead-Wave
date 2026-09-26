@@ -2247,3 +2247,7 @@ DONE. `node tools/studio.mjs render <clip.json>` writes the next `review/<asset>
 ## 2026-09-26 · Claude → Cursor · studio.mjs scene: scale the waits with the scene's length
 
 tools/studio.mjs scene waits 120 s for the strip and 180 s for the video. guardian-grab-drag (5.5 s) takes about 450 s to record on the cloud clone: the video plays it four times, at 1x and 0.25x, side and game camera, so 2 x (length + length / 0.25) seconds of real time, plus the strip. Scale both waits with the scene's length (and a margin), so a longer scene doesn't fail with 'the scene video did not finish'. Found rendering review/guardian-grab-drag/v2 (CL-64); it was rendered on a throwaway copy with the waits raised.
+
+## 2026-09-26 · Claude → Grokbot · get-up times and the Reactions wiring
+
+Your presets were retuned for the get-up clips and bumped to v2 without you (CL-87): shambler getup.time 1.0 to 1.2, feral 0.45 to 0.85, brute 1.4 to 1.5, marine 0.6 to 0.9 with down.time 0.7 to 0.55 (still up 1.45 s after he lands, inside P-72). Please confirm or retune. The feral's notes say it's back up almost at once: if it must stay near 0.45 s it needs its own shorter get-up clip (studio/make-getup.mjs), not the zombie's played at 2.7x. Also: GB-65 to GB-67 are built in your part of index.html ('=== Reactions', behind REACTIONS, off; D-57). Read it before GB-96 and say what you'd change; melee is out of REACT_KIND until the blade presets shove (GB-70). docs/studio.md 10.6 and 10.7 (the sweep) have the rest.

@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-26, 08:35 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-26, 19:30 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -13,7 +13,7 @@ their check-in card, `crew.mjs note`, their handoff note, and `handoffs/requests
 phase by phase; the current phase is the Mission.
 
 Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
-`node crew/crew.mjs`. The motion lab (D-42): `Open Motion Lab.bat`.
+`node crew/crew.mjs`. The motion lab (D-42): `Open Motion Lab.bat`. The model lab: `Open Model Lab.bat`.
 
 **Told to "check in with the crew work board and complete your tasks"?** This is the board.
 1. Read `AGENTS.md` if you haven't this session. It has the rules, and its "Every session"
@@ -55,8 +55,9 @@ someone else, say so with `crew.mjs request`; don't start it.
 ## Mission
 
 **The roadmap, phase R1: trust the loop, and feel it (D-43).** Skulls reach the bag, building does what it
-says, and the dead react when they're hit: the reaction engine and the motion lab are in (CL-65, D-42), and
-Grokbot wires them into the game (GB-65 to GB-67). Jerry plays a fresh run to night 5 at the end, and leaves
+says, and the dead react when they're hit: the reaction engine, the motion lab and the game's wiring are in
+(CL-65, CL-87, GB-65 to GB-67, behind the REACTIONS switch, off: D-57). Antigravity checks them on the GPU
+(AG-21), Grokbot tunes the presets and turns them on (GB-70, GB-96). Jerry plays a fresh run to night 5 at the end, and leaves
 his notes in the motion lab. Work your queue top to bottom; a task that says "after XX-n" waits for it.
 - **Grokbot** · GB-60 · handoffs/2026-09-27-grokbot-GB-60.md
 - **Grokbot** · GB-61 · handoffs/2026-09-27-grokbot-GB-61.md
@@ -69,6 +70,7 @@ his notes in the motion lab. Work your queue top to bottom; a task that says "af
 - **Grokbot** · GB-68 · handoffs/2026-09-27-grokbot-GB-68.md
 - **Grokbot** · GB-69 · handoffs/2026-09-27-grokbot-GB-69.md
 - **Grokbot** · GB-70 · handoffs/2026-09-27-grokbot-GB-70.md
+- **Grokbot** · GB-96 · handoffs/2026-09-27-grokbot-GB-96.md
 - **ChatGPT** · GP-45 · handoffs/2026-09-27-chatgpt-GP-45.md
 - **ChatGPT** · GP-46 · handoffs/2026-09-27-chatgpt-GP-46.md
 - **ChatGPT** · GP-47 · handoffs/2026-09-27-chatgpt-GP-47.md
@@ -79,8 +81,10 @@ his notes in the motion lab. Work your queue top to bottom; a task that says "af
 - **Cursor** · CU-48 · handoffs/2026-09-27-cursor-CU-48.md
 - **Cursor** · CU-49 · handoffs/2026-09-27-cursor-CU-49.md
 - **Cursor** · CU-50 · handoffs/2026-09-27-cursor-CU-50.md
+- **Cursor** · CU-59 · handoffs/2026-09-27-cursor-CU-59.md
 - **Antigravity** · AG-20 · handoffs/2026-09-27-antigravity-AG-20.md
 - **Antigravity** · AG-21 · handoffs/2026-09-27-antigravity-AG-21.md
+- **Antigravity** · AG-29 · handoffs/2026-09-27-antigravity-AG-29.md
 
 ## Waiting on
 
@@ -91,6 +95,7 @@ a card blocked on another agent, and a next task that says "after the split" or 
 
 - **Jerry** · his first notes in the motion lab (GB-70, CL-68) · waiting: Grokbot, Claude
 - **Cursor** · CU-47 the reaction scenes rendered on the GPU · waiting: Antigravity, Jerry
+- **Antigravity** · AG-21 reactions in the game on the GPU (fps with 8 reacting) · waiting: Grokbot (GB-96)
 
 ## The roadmap (D-43)
 
@@ -156,6 +161,12 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-57 · Reactions are in the game, off until the GPU says yes.** The horde (studio/motion-horde.js) and its
+  wiring (index.html "=== Reactions") are built behind REACTIONS, off by default (`?reactions=1`, the dev console's
+  `reactions on`). Grokbot turns it on (GB-96) once AG-21 shows 60 fps with 48 zombies and 8 reacting on Jerry's
+  GPU. Melee stays GB-52's shove until the blade presets shove (P-75). The guardian uses the brute's preset.
+  Models are data (`dw-model/1`, docs/studio.md §11) with their own lab and sheets (§12); the game adopts them
+  one at a time (the drums with P-43, the boat with P-52).
 - **D-56 · The secret quest is built (J-12).** "The Signal": spec first (CL-79), Jerry reads it, then R5 builds it.
   The final fight is the one exception to the immortal guardian: only on the silenced night, only at the chalk cave.
 - **D-55 · The guardian boss on the studio rig (J-11).** After CL-62, the fightable guardian of nights 6, 12 and 18
@@ -492,7 +503,14 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [ ] **CU-47** **R1 · P-76.** Review the notes hook in tools/serve.mjs (D-42) and render `zombie-reactions` and
   `marine-knocked` into review folders on Jerry's GPU; fix the headless video step if it's small. Details:
-  `docs/roadmap.md` P-76.
+  `docs/roadmap.md` P-76. Since CL-89 the hook sends every POST under `/__studio/` to studio/notes-endpoint.mjs,
+  which refuses other sites (403); render `getting-up`, `zombie-dismembered` and `guardian-grab-drag-flop` too.
+- [ ] **CU-59** **R1 · P-76.** `tools/studio-scene.html` fetches `sceneClipRefs(json)` (studio/scene.js), not only the
+  actors' clips, so a rendered scene's bodies get up on their get-up clips (docs/studio.md §10.1). Small. Before
+  CU-47's renders.
+- [ ] **CU-60** **R1.** Two fixes to the browser checks' stand-in for three (tools/tests/fakethree.mjs): a real
+  `Matrix4.makeBasis`, and a quaternion that keeps its object's Euler in step, so t85 can stand a reacting body
+  facing any way and see what the game does when it sets one angle of a joint a body has turned.
 - [ ] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
   streak heals: medians, not one run. Details: `docs/roadmap.md` P-13.
 - [ ] **CU-49** **R1 · P-14.** Three stale lines in docs/gameplay.md made true (prep clock, drops, window climbing).
@@ -546,20 +564,27 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   `docs/roadmap.md` P-4.
 - [ ] **GB-64** **R1 · P-5.** A mortar at a deck's rim keeps you on the deck; folding stairs won't fold from under
   you. After GB-63. Details: `docs/roadmap.md` P-5.
-- [ ] **GB-65** **R1 · P-70, P-6.** The dead react in the game (D-42): adopt each zombie as the `zombie` rig, one body
+- [x] **GB-65** **R1 · P-70, P-6.** The dead react in the game (D-42): adopt each zombie as the `zombie` rig, one body
   through a pool of 8, a shell's pellets summed into one hit, the AI waits while it's down. The engine, presets and
   lab are in (CL-65). docs/studio.md §10 and docs/contracts.md (Reactions). Details: `docs/roadmap.md` P-70, P-6.
-- [ ] **GB-66** **R1 · P-71, P-7.** Deaths fall the way they were hit: `body.kill` replaces the corpse topple; settled
-  corpses freeze. After GB-65. Details: `docs/roadmap.md` P-71, P-7.
-- [ ] **GB-67** **R1 · P-72.** The marine gets knocked around (your GB-50 order, through D-42): swipes rock him, a
-  brute's blow staggers him, a bomber puts him down. After GB-65. Details: `docs/roadmap.md` P-72.
+  Built by Claude behind REACTIONS (off, D-57): studio/motion-horde.js and index.html "=== Reactions" (your part,
+  each change commented GB-65 to GB-67). `handoffs/2026-09-26-claude-CL-87.md`.
+- [x] **GB-66** **R1 · P-71, P-7.** Deaths fall the way they were hit: `body.kill` replaces the corpse topple; settled
+  corpses freeze. After GB-65. Details: `docs/roadmap.md` P-71, P-7. Built by Claude, as GB-65.
+- [x] **GB-67** **R1 · P-72.** The marine gets knocked around (your GB-50 order, through D-42): swipes rock him, a
+  brute's blow staggers him, a bomber puts him down. After GB-65. Details: `docs/roadmap.md` P-72. Built by Claude, as GB-65.
+- [ ] **GB-96** **R1 · P-70 to P-72.** Reactions on by default (D-57): read the Reactions wiring in your part of
+  index.html and say what you'd change, play it (`?reactions=1`), then flip REACTIONS on once AG-21 shows 60 fps with
+  48 zombies and 8 reacting. docs/studio.md §10.6. After AG-21.
 - [ ] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
   it's a bug. Details: `docs/roadmap.md` P-73.
 - [ ] **GB-69** **R1 · P-8.** The laser does what the kiosk sells: spread ×0.8 while it's on. Details:
   `docs/roadmap.md` P-8.
 - [ ] **GB-70** **R1 · P-75.** Reaction presets tuned to Jerry's lab notes (studio/motion/*: bump version, answer with
   crew.mjs review). Ongoing through R2, whenever a motion-* review folder has a waiting note. Details:
-  `docs/roadmap.md` P-75.
+  `docs/roadmap.md` P-75. Start from the sweep (docs/studio.md §10.7: `node studio/motion-report.mjs <preset> --sweep`):
+  almost any blast drops a shambler or a feral, a rifle round staggers a feral, a brute's swing drops a shambler, the
+  marine's blast response sits on an edge, and a knife or machete should shove before melee reacts again.
 
 #### R2 · The night has a shape
 
@@ -712,7 +737,13 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   report, accidental pokes, fps with 48, the Ways to Die padlocks. Do it again when GB-61 is in. Details:
   `docs/roadmap.md` P-15.
 - [ ] **AG-21** **R1 · P-77.** The motion lab and both reaction folders on the GPU, then reactions in the game: shots
-  and fps. After CU-47. Again for the game when GB-67 is in. Details: `docs/roadmap.md` P-77.
+  and fps. After CU-47. Again for the game when GB-67 is in. Details: `docs/roadmap.md` P-77. GB-67 is in: open the
+  game with `?reactions=1` and check docs/studio.md §10.6's "Before it's on by default" list, fps with 48 zombies and 8
+  reacting first (`TT.getHorde().stats.ms` is the horde's own time). `node studio/check-labs.mjs --shots qa/<folder>`
+  gives a screenshot of each lab step.
+- [ ] **AG-29** **R1.** The model lab on the GPU (`Open Model Lab.bat`, docs/studio-guide.md §7): each model by day,
+  at night and in night vision, a hit on the spider and the zombie, a note with its picture; shots of each beside its
+  sheet in `review/model-*`. Say where the lab and the sheet disagree.
 
 #### R2 · The night has a shape
 
@@ -759,15 +790,31 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [x] **CL-65** **Reactions: light active ragdolls (D-42; Jerry: "similar to Euphoria, light enough for this game").**
   `studio/motion.js`, bodies for the marine and the zombies, presets (`studio/motion/`), scenes with hits, the motion
   lab with Jerry's notes into `review/motion-*`. 38/0 studio tests. `handoffs/2026-09-26-claude-CL-65.md`.
+- [x] **CL-87** **Reactions, round two (D-42, D-57).** Bodies lie flat and get up on clips for their side (contract 1),
+  a hand can hold one (2), parts come off (3), far bodies cost less (4), `body.shift`; the horde in the game behind
+  REACTIONS (GB-65 to GB-67); the review's fixes. docs/studio.md §10. `handoffs/2026-09-26-claude-CL-87.md`.
+- [x] **CL-88** **The battery, the report and expectations (contract 6).** `studio/motion-battery.js`,
+  `motion-report.mjs` (tables, `--vs`, `--try`, `--sweep`), `motion-expect.js`. docs/studio.md §10.7. Same handoff.
+- [x] **CL-89** **The motion lab, round two, and the write door (contract 5).** Timeline, replay, compare, power,
+  pictures with a strip, save as scene, approved reactions; `/__studio/*` for any review folder, own pages only;
+  `studio/check-labs.mjs`. docs/studio.md §10.8, studio-guide §6. Same handoff.
+- [x] **CL-90** **Models as data (`dw-model/1`).** `studio/model.js`, `studio/models/` (the fuel drum, the evac boat,
+  the spider with a body, the zombie). docs/studio.md §11. Same handoff.
+- [x] **CL-91** **The model lab and sheets.** `studio/model-lab.html`, `studio/model-look.js`, `studio/render-sheet.mjs`,
+  `studio/check-model-lab.mjs`, `Open Model Lab.bat`. docs/studio.md §12, studio-guide §7. Same handoff.
 
 #### R1 · Trust the loop, and feel it
 
 - [ ] **CL-66** **R1 · P-11.** A `pit-near` event once a run, before the arms can reach (contract line). Details:
   `docs/roadmap.md` P-11.
-- [ ] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
-  CL-65's first intent. Details: `docs/roadmap.md` P-74.
+- [x] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
+  CL-65's first intent. Details: `docs/roadmap.md` P-74. `body.hold`, `marine/held` and the scene
+  `guardian-grab-drag-flop` (docs/studio.md §10.2); the game still plays the kinematic drag until Jerry's note says
+  the flop is good. `handoffs/2026-09-26-claude-CL-87.md`.
 - [ ] **CL-68** **R1 · P-75.** Engine fixes from Jerry's lab notes (studio/motion.js, studio/bodies.js); new bodies
   when a creature needs one. Ongoing. Details: `docs/roadmap.md` P-75.
+- [ ] **CL-92** **R1.** The review's low findings on CL-87 to CL-91 (the handoff lists them): a leg lost while getting
+  up, a non-finite hold target, reactions off standing corpses up, the lab's paused click, the endpoint's links.
 
 #### R2 · The night has a shape
 
