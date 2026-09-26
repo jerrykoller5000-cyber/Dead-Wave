@@ -49,7 +49,9 @@ Chrome and fails on any page error or missing event.
 8. **Again, the same way** stands the bodies up and hits them the same way again. **Stand up** resets
    them.
 9. Write your note bottom right and press **Save note for the crew**. A picture of the screen goes
-   with it, with the bar and a line saying what you did; untick the box to leave it out. Press
+   with it: what you see, six small pictures of the reaction from the hit on, the bar, and a line
+   saying what you did. Stop the bar on the moment you mean before you save, and the big picture is
+   that moment. Untick the box to leave the picture out. Press
    **It's good** when a body reacts the way you want. The note goes on the crew panel with the body's
    owner (Grokbot for the zombies and the marine).
    - **Notes so far**, above the box, says where your notes on this body stand: waiting, being worked
@@ -143,7 +145,11 @@ moved. The lab only reports it; `studio/motion-expect.js` is what checks it.
 **The note's context** is one line: the preset and version; the first hit of the run (weapon, kind,
 power, point, side) and what came of it; every slider moved, against the file's number; what stood
 beside it and what came of that; parts taken off; and where the replay was when the picture was
-taken. The picture is the canvas as drawn (at most 1280 wide), the scrub bar, and that line.
+taken. The picture is the canvas as drawn (at most 1280 wide); under it, for a note, a strip of six
+moments from just before the first hit the recording holds to its end, each drawn from the
+recording with one crop round the bodies (so the six compare) and labelled with its time from the hit
+and each body's state; then the scrub bar and that line. 1280×936 from a 1280×720 window, about
+120 to 350 KB. The words are drawn on a canvas of their own (see "Things found on the way").
 
 **Timeline.** Every frame (at most every 1/120 s of lab time) records each body's joints and its
 group, its arrow and hidden parts. Six seconds are kept. Replay interpolates between frames, so slow
@@ -244,7 +250,8 @@ and CHROME_ARGS as for the tests) at 1280×720, and:
     sliders' counts, and the context says them (it reports the counts; judging them is the report
     package's `motion-expect` test);
 15. a note with a picture, typed and saved through the page's own button: notes.md holds one waiting
-    note with the context and the picture's line, the PNG is there, meta.json says motion, the folder
+    note with the context and the picture's line, the PNG is there with the strip under the view,
+    meta.json says motion, the folder
     page shows the note, and the lab's notes so far now say one, waiting;
 16. no page errors and no console errors;
 17. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
