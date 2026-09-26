@@ -128,7 +128,7 @@ export function createHorde(opts = {}) {
       let inst;
       try { inst = rigs.get(rig).create({ group }); } catch (_) { ud.hordeBody = false; return null; }
       if (!inst.def.body) { ud.hordeBody = false; return null; }
-      c = { rig, inst, plane: { x: 0, z: 0, y: 0, sx: 0, sz: 0 }, s: 1, posJ: [], joints: [], owner: null, player: null, rec: null };
+      c = { rig, inst, plane: { x: 0, z: 0, y: 0, sx: 0, sz: 0 }, s: 1, posJ: [], joints: [], anim: [], owner: null, player: null, rec: null };
       adoptFix(c, group);
       ud.hordeBody = c;
     }
@@ -167,9 +167,10 @@ export function createHorde(opts = {}) {
       if (r) r.p.y = group.userData.baseHipsY;
     }
     for (const sg of inst.def.body.segments) {
-      if (sg.pos === undefined || !R[sg.joint]) continue;
       const j = R[sg.joint];
-      c.posJ.push({ j, x: j.position.x, z: j.position.z, w: null });
+      if (!j) continue;
+      c.anim.push([j, new THREE.Quaternion(), new THREE.Vector3()]);
+      if (sg.pos !== undefined) c.posJ.push({ j, x: j.position.x, z: j.position.z, w: null });
     }
   }
 
@@ -375,13 +376,29 @@ export function createHorde(opts = {}) {
     if (rec.clip && b.state !== 'getup') stopGetup(rec);
     // Where the reaction moved it, taken on before it is drawn, so the body is drawn where it is.
     if (b.state !== 'animated' && !b.sleeping && (b.drift.x || b.drift.z)) takeDrift(rec, b.drift.x, b.drift.z);
+    // What the animation left on the joints the body writes, for beginFrame() to hand back.
+    for (const e of c.anim) { e[1].copy(e[0].quaternion); e[2].copy(e[0].position); }
     b.apply();
     rec.applied = true;
+    rec.wrote = b.weight > 0;
     notePosJoints(rec);
+  }
+
+  // The animated pose back on every joint a body wrote last frame, before the host animates again. A
+  // host that sets only some of a joint's Euler angles (the game sets a leg's swing, never its twist,
+  // and the marine's hips' roll and yaw, never their pitch) otherwise sets them on top of the reaction:
+  // the reaction becomes part of what the body reads as the animation, and feeds on itself (the marine
+  // knocked flat by a brute flew up metres, frame on frame). A corpse lying still keeps its pose.
+  function unapply(rec) {
+    if (!rec.wrote) return;
+    rec.wrote = false;
+    if (rec.frozen) return;
+    for (const [j, q, p] of rec.c.anim) { j.quaternion.copy(q); j.position.copy(p); }
   }
 
   function releaseRec(rec) {
     if (rec.clip) stopGetup(rec);
+    unapply(rec);
     const b = rec.body;
     // follow() puts back the animated pose on any joint the host hasn't posed since the last apply().
     if (rec.applied) b.follow();
@@ -439,6 +456,8 @@ export function createHorde(opts = {}) {
       avgMs += (lastMs - avgMs) * 0.1;
       return out;
     },
+    // Call at the start of each frame, before the host animates its bodies (see unapply).
+    beginFrame() { for (const r of recs.values()) unapply(r); },
     busy(key) { const r = recs.get(key); return !!r && !r.frozen && BUSY.has(r.body.state); },
     state(key) { const r = recs.get(key); return r ? r.body.state : null; },
     has(key) { return recs.has(key); },

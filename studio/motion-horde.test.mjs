@@ -280,6 +280,31 @@ test('the marine: a brute\'s blow staggers him and he keeps his feet; a bomber a
   assert.equal(h.stats.active, 0, 'the marine has no pool slot; both recovered');
   void f;
 });
+test('a host that poses only some Euler angles each frame (as the game does) calls beginFrame, and the reaction stays a reaction', () => {
+  // updateMarinePose sets the hips' yaw, roll and height, the torso's lean, roll, twist and height, and
+  // each leg's and knee's swing, and never the hips' pitch. Without beginFrame the reaction's pitch stayed
+  // in what the body read as the animation, fed on itself, and a brute's blow threw him metres up.
+  const h = createHorde({ presets });
+  const g = makeMarineRig();
+  g.userData = { ...g.userData, ...rigNames(g) };
+  const u = g.userData;
+  h.adopt('m', { rig: 'marine', preset: 'marine/marine', group: g });
+  h.hit('m', { at: 'shoulderR', dir: [-1, 0.1, 0], power: 4.29, kind: 'crush' });
+  const ev = [];
+  let top = 0;
+  for (let f = 0; f < 300; f++) {
+    h.beginFrame();
+    u.lowerBody.rotation.y = 0; u.lowerBody.rotation.z = 0; u.lowerBody.position.y = 0;
+    u.torsoG.rotation.x = 0; u.torsoG.rotation.z = 0; u.torsoG.rotation.y = 0; u.torsoG.position.y = 0.7;
+    u.legLG.rotation.x = 0; u.legRG.rotation.x = 0; u.kneeLG.rotation.x = 0; u.kneeRG.rotation.x = 0;
+    for (const e of h.update(1 / 60)) ev.push(e.name);
+    top = Math.max(top, h.body('m').points().pelvis[1]);
+  }
+  assert.ok(ev.includes('recovered') && !ev.includes('fall'), ev.join(' '));
+  assert.ok(top < 1, `the pelvis never went above ${top.toFixed(2)} m`);
+  assert.ok(Math.abs(u.lowerBody.rotation.x) < 1e-6, `and the hips are the animation's again (pitch ${u.lowerBody.rotation.x})`);
+});
+
 // The game marine's userData names (makeMarine), from the stand-in's rig, so adoptMarine() finds them.
 function rigNames(g) {
   const r = g.userData.rig;

@@ -38514,6 +38514,9 @@ live++;
       updateTreeBatches();
     }
     function tick() {
+      // GB-65: the reacting bodies hand their joints back to the animation before anything animates
+      // this frame (studio/motion-horde.js, beginFrame), then take them again in updateReactions.
+      if (Horde) Horde.beginFrame();
       maybePreRollFromLoop();
       stepLivePreRoll();
       if (showPerf) {
