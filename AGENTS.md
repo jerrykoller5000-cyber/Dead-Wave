@@ -141,11 +141,15 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 ## Playing to strengths
 
 Five agents, each good at something different. The board gives each one tasks that fit.
+The roadmap to 1.0 (`crew/BOARD.md` and `docs/roadmap.md`, D-43) is laid out that way: the board's "Who
+does what" says what to give each agent and what to keep away from it.
 - **Claude, Cursor, ChatGPT and Grokbot** take the big, cross-cutting work inside
   `index.html` and their modules.
 - **Antigravity** can see: it runs the game in a real browser on a real GPU. Every visible
   change goes through it: the pit, the cave warnings, the loading screen, the build aiming.
   It reports with screenshots and never edits game code.
+- **Reactions and animation** (D-42): `studio/` has the engine, the bodies, the presets and the motion lab;
+  `docs/studio.md` §9-10. Jerry's notes on a reaction land in `review/motion-*` like any review.
 - **Owners, ask for help:**
   - `node crew/crew.mjs request <you> antigravity "shots: <what>" "<how to set it up>"`
     when you need eyes on something.
