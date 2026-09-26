@@ -440,17 +440,16 @@ test('level of detail: lod 1 costs clearly less and still falls and gets up; lod
     const inst = rigs.get('zombie').create({}); inst.group.position.set(i * 2, 0, 0);
     const b = createBody(inst, preset('zombie/shambler')); b.follow(); b.hit({ power: 4.5, kind: 'pellet' }); return b;
   });
-  const cost = (lod) => {
-    let best = Infinity;
-    for (let rep = 0; rep < 3; rep++) {
-      const bodies = crowd();
-      let ms = 0;
-      for (let f = 0; f < 40; f++) for (const b of bodies) { b.follow(); const t0 = performance.now(); b.update(1 / 60, { lod }); ms += performance.now() - t0; b.apply(); }
-      best = Math.min(best, ms / 40);
-    }
-    return best;
+  // The best of five runs each, taken in turn, so a busy machine slows both alike.
+  const once = (lod) => {
+    const bodies = crowd();
+    let ms = 0;
+    for (let f = 0; f < 40; f++) for (const b of bodies) { b.follow(); const t0 = performance.now(); b.update(1 / 60, { lod }); ms += performance.now() - t0; b.apply(); }
+    return ms / 40;
   };
-  const c0 = cost(0), c1 = cost(1), c2 = cost(2);
+  const best = [Infinity, Infinity, Infinity];
+  for (let rep = 0; rep < 5; rep++) for (const lod of [0, 1, 2]) best[lod] = Math.min(best[lod], once(lod));
+  const [c0, c1, c2] = best;
   console.log(`  48 bodies, update only: lod 0 ${c0.toFixed(2)} ms, lod 1 ${c1.toFixed(2)} ms, lod 2 ${c2.toFixed(2)} ms a frame`);
   assert.ok(c1 < c0 * 0.75, `lod 1 ${c1.toFixed(2)} ms against lod 0 ${c0.toFixed(2)} ms`);
   assert.ok(c2 < c0 * 0.25);
