@@ -70,8 +70,8 @@
 <div id="timeline" class="panel">
   <canvas id="scrub"></canvas>
   <div id="transport">
-    <button id="pause">Pause</button><button id="replay">Replay</button><button id="live" class="on">Live</button>
-    <button id="back1" title="One frame back">◀ frame</button><button id="fwd1" title="One frame on">frame ▶</button>
+    <button id="pause" title="Stop here, or play on from here (Space)">Pause</button><button id="replay" title="Play again from just before the hit (R)">Replay</button><button id="live" class="on" title="Back to the body as it is now (L)">Live</button>
+    <button id="back1" title="One frame back (←)">◀ frame</button><button id="fwd1" title="One frame on (→)">frame ▶</button>
     <span id="clock"></span>
     <span class="speed">speed <button data-speed="1" class="on">1×</button><button data-speed="0.5">½×</button><button data-speed="0.25">¼×</button><button data-speed="0.1">⅒×</button>
       <input id="speed" type="range" min="-4.32" max="1" step="0.01" value="0" title="Any speed from 0.05× to 2×"><span id="speedv">1.00×</span></span>
@@ -277,7 +277,7 @@ async function build() {
   if (building !== token) { next.forEach(disposeBody); return; }
   labBodies.forEach(disposeBody);
   labBodies = next;
-  if (grab) grab = null;
+  grab = null; grabDot.visible = false;
   rec.frames = []; rec.events = []; rec.hits = []; seq = null; liveSnap = null;
   mode = 'live'; viewT = simT; setTransport();
   // Two bodies stand side by side across the view: the camera comes round to the front to see both.
@@ -287,9 +287,13 @@ async function build() {
 }
 
 // --- Hitting --------------------------------------------------------------------------------------
-const yawOf = (lb) => lb.inst.group.rotation.y;
-const localDir = (lb, d) => _v.set(d[0], 0, d[2]).applyAxisAngle(UP, -yawOf(lb)).toArray();
-const worldDir = (lb, d) => _v.set(d[0], d[1], d[2]).applyAxisAngle(UP, yawOf(lb)).toArray();
+// Which way a body faces, from its group's rotation. Read off the quaternion, not rotation.y: once a
+// replay has set the quaternion, three re-reads the Euler angles, and a turn past a right angle
+// comes back as (180°, 180° - yaw, 180°).
+const _f = new THREE.Vector3();
+const yawOf = (lb) => { _f.set(0, 0, 1).applyQuaternion(lb.inst.group.quaternion); return Math.atan2(_f.x, _f.z); };
+const localDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], 0, d[2]).applyAxisAngle(UP, -y).toArray(); };
+const worldDir = (lb, d) => { const y = yawOf(lb); return _v.set(d[0], d[1], d[2]).applyAxisAngle(UP, y).toArray(); };
 // Where each point is now: the simulated pose while it reacts, the animated one while it doesn't.
 const pointsNow = (lb) => (lb.body.awake ? lb.body.points() : lb.body.animPoints());
 function nearestPoint(lb, at) {
@@ -386,7 +390,7 @@ function onEvent(lb, name, data) {
     const clip = ref && lb.clips.get(ref);
     lb.lastGetup = { side: data.side, heading: data.heading, clip: ref || null, played: !!clip };
     if (clip && Number.isFinite(data.heading)) {
-      lb.inst.group.rotation.y = data.heading;
+      lb.inst.group.rotation.set(0, data.heading, 0);
       lb.inst.group.updateWorldMatrix(false, true);
       lb.player.play(clip, { speed: clip.length / lb.preset.getup.time, loop: false });
       lb.getupPlaying = ref;
