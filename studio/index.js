@@ -2,6 +2,7 @@
 // (tools/studio.mjs) import from here and nowhere deeper, so the pieces behind it can move.
 export { CLIP_FORMAT, EASES, validateClip, loadClip, sampleClip, blendPoses, clipEvents, clipTime, applyPose, solveChain, createPlayer } from './clip.js';
 export { SCENE_FORMAT, validateScene, loadScene, createScene } from './scene.js';
+export { fetchScene } from './load.js';
 export { MARINE, makeMarineRig, adoptMarine } from './marine.js';
 export { rigs, registerRig, rigCost } from './rigs.js';
 export { ikLimb } from './ik.js';

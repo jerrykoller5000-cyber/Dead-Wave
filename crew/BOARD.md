@@ -48,6 +48,7 @@ Work your queue top to bottom; a task that says "after XX-n" waits for it.
 - **Claude** · CL-63 · handoffs/2026-09-26-claude-CL-63.md
 - **Cursor** · CU-46 · handoffs/2026-09-26-cursor-CU-46.md
 - **Claude** · CL-64 · handoffs/2026-09-26-claude-CL-64.md
+- **Claude** · CL-65 · handoffs/2026-09-26-claude-CL-65.md
 
 ## Waiting on
 
@@ -56,7 +57,7 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Cursor** · CU-46 the studio renders scenes · waiting: Claude (CL-64)
+- **Claude** · CL-64 the guardian's grab and drag, the first scene · waiting: Jerry (his notes)
 
 
 
@@ -406,7 +407,7 @@ Nothing queued.
   joint offsets, plus `adopt` for the game's own marine), and `studio/scene.js`: actors on paths with keyed speed,
   holds (reach, tow, lift), stride-matched clip rates, per-frame checks (hold gap, planted-foot slide, speed), seek
   for the renderer. Unit tests. A demo scene the renderer can use until CL-64's.
-- [ ] **CL-64** **The guardian's grab and drag as the first scene; the game plays it.** After CU-46. The catch in
+- [x] **CL-64** **The guardian's grab and drag as the first scene; the game plays it.** After CU-46. The catch in
   beats you can see (pounce, catch, pull down) instead of all in 0.45 s; the hand held on the marine's real ankle;
   a heavy haul at a believable speed with the steps matched to it; the marine towed on his back, his leg lifted by
   the hand. Jerry (04:40Z): it lunges and grabs **facing him**, aiming for the leg whichever way he lies, then turns
@@ -414,6 +415,12 @@ Nothing queued.
   over time in the scene format (keyed `face`, or face an actor), which this task adds.
   `review/guardian-grab-drag/`, then the game's cave drag switched from its hand code to the scene.
   Then Jerry's notes.
+- [ ] **CL-65** **An active-ragdoll layer on scenes (Jerry, 2026-09-26: "start it after you finish your next job").**
+  After CL-64. For the body being thrown about, not the creature doing it: the scene still decides the intent (grip,
+  where the body goes, when); a light position-based physics pass on the held body's limbs (joint limits, the ground,
+  pulled toward the clip's pose by a keyed `stiffness` per actor or limb) adds arms trailing, the head bouncing, legs
+  catching on the ground. One body at a time in a cutscene; checks for it (joint limits, through the ground). The
+  horde's ragdoll deaths are a separate question for later (many bodies, the frame rate).
 - [ ] **CL-62** **The rest of the guardian through the studio.** After CL-64. The chase, the walk-out and the throw
   as scenes and clips the same way (the throw is a scene: the marine is in it), timed against the UAL references,
   one review folder each, until Jerry's notes say good.

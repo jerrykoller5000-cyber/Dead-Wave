@@ -77,6 +77,25 @@ test('a planted foot stays put while the body moves over it', () => {
   assert.ok(at0.distanceTo(at1) < 0.01, 'slid ' + at0.distanceTo(at1).toFixed(3));
 });
 
+test('a held foot lets go of its plant by as much as it is held, and blends turn the short way', () => {
+  const inst = rigs.get('guardian').create({ scale: 1 });
+  const c = loadClip(base({ footL: { ik: [[0, [-0.34, 0.1, 0.4]], [1, [-0.34, 0.1, -0.6], 'linear']], plant: [[0, 1]] } }));
+  const ankle = () => new THREE.Vector3().setFromMatrixPosition(inst.R.ankleL.matrixWorld);
+  applyPose(inst, sampleClip(c, 0), {});
+  const pin = ankle();
+  // A quarter held (plant 0.75) is still half on its pin; fully held, it goes where the clip wants it.
+  applyPose(inst, sampleClip(c, 0.5), { free: { footL: 0.25 } });
+  const quarter = ankle();
+  applyPose(inst, sampleClip(c, 0.5), { free: { footL: 1 } });
+  const loose = ankle();
+  assert.ok(quarter.distanceTo(pin) < loose.distanceTo(pin) - 0.05, 'a quarter hold still mostly pinned: ' + quarter.distanceTo(pin).toFixed(2) + ' vs ' + loose.distanceTo(pin).toFixed(2));
+  // q and -q are the same turn: a half blend toward either is 45° from where it started.
+  const q90 = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
+  const neg = new THREE.Quaternion(-q90.x, -q90.y, -q90.z, -q90.w);
+  const a = blendPoses({ joints: { j: { rot: new THREE.Quaternion() } }, chains: {}, head: {} }, { joints: { j: { rot: neg } }, chains: {}, head: {} }, 0.5).joints.j.rot;
+  assert.ok(Math.abs(2 * Math.acos(Math.min(1, Math.abs(a.w))) - Math.PI / 4) < 0.01, 'half blend turned ' + (2 * Math.acos(Math.abs(a.w)) * 180 / Math.PI).toFixed(1) + '°');
+});
+
 // The snap measure (the biggest one-frame joint turn at 60 fps; over 0.3 rad reads as a pop) is what
 // the renderer reports for Jerry. It's printed here, not asserted: the baked v1 gallop snaps at the
 // hips (1.2 rad), exactly as the CL-56 code did, and that is one of the things CL-62 fixes.

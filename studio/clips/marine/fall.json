@@ -1,0 +1,59 @@
+{
+ "format": "dw-clip/1",
+ "name": "fall",
+ "rig": "marine",
+ "length": 0.35,
+ "reference": "Hit_Knockback",
+ "notes": "CL-64. His leg is taken from behind: arms thrown out to catch himself, the free leg kicking back.",
+ "tracks": {
+  "spine": {
+   "rot": [[0,
+     [12, 0, 0]],
+    [0.35,
+     [-10, 0, 0]]]
+  },
+  "head": {
+   "rot": [[0,
+     [-8, 0, 0]],
+    [0.35,
+     [-30, 0, 0]]]
+  },
+  "shoulderL": {
+   "rot": [[0,
+     [-50, 0, 8]],
+    [0.35,
+     [-150, 0, 20]]]
+  },
+  "shoulderR": {
+   "rot": [[0,
+     [35, 0, -8]],
+    [0.35,
+     [-145, 0, -20]]]
+  },
+  "elbowL": {
+   "rot": [[0,
+     [-80, 0, 0]],
+    [0.35,
+     [-20, 0, 0]]]
+  },
+  "elbowR": {
+   "rot": [[0,
+     [-80, 0, 0]],
+    [0.35,
+     [-25, 0, 0]]]
+  },
+  "hipR": {
+   "rot": [[0,
+     [0, 0, 0]],
+    [0.35,
+     [25, 0, 0]]]
+  },
+  "kneeR": {
+   "rot": [[0,
+     [20, 0, 0]],
+    [0.35,
+     [70, 0, 0]]]
+  }
+ },
+ "events": [[0.3, "hit-ground"]]
+}

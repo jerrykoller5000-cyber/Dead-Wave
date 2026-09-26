@@ -1052,6 +1052,7 @@
     import { bountyIntel, drawBountyMarks } from './ui/bounties.js';
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
+    import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
     import * as PitArms from './world/pit-tentacles.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
@@ -29779,6 +29780,14 @@
     // outer one; its root sits at the creature's chest so "its position" is where it is, and
     // the rig hangs off an inner pivot, scaled up and set back so the hind feet land behind.
     const GUARDIAN_SCALE = 1.3, GUARDIAN_SETBACK = 1.15;
+    // CL-64 (D-41): the cave drag is a studio scene, studio/scenes/guardian-grab-drag.json, played on
+    // the game's own guardian and marine (what review/guardian-grab-drag/ shows is what plays here).
+    // Loaded off the critical path; if it isn't in yet, or can't load, the drag keeps its old hand
+    // code (updateCaveDrag below).
+    let caveGrab = null;
+    Studio.fetchScene('guardian-grab-drag')
+      .then((scene) => { caveGrab = { Studio, scene }; })
+      .catch((e) => console.warn('[cave grab] the scene did not load; the drag uses its old code:', e));
     function makeCaveGuardian(cave) {
       const d = (cave && cave.design) || CAVE_DESIGNS.wet;
       const outer = new THREE.Group();
@@ -29943,6 +29952,8 @@
       for (const j of g.userData.rig.joints) rigDamp(j, dt, rateAll || guardianJointRate(j), reset);
     }
     function dampScriptedRigs(sk, dt, cut) {
+      // CL-64: a scene's poses are already smooth, and easing them would drag planted feet: record only.
+      if (sk.scene) cut = true;
       const ud = marine.userData;
       for (const k of SK_PARTS) if (ud[k]) rigDamp(ud[k], dt, (k === 'torsoG' || k === 'headG') ? 10 : 12, cut);
       rigDamp(marine, dt, 12, cut);
@@ -30049,6 +30060,7 @@
       skCue(sk, 'throw', 5.95, () => AudioSys.bagThrow());
       // GB-35: run down and dragged back to the mouth; no crawl-in snatch on this path.
       if (sk.drag && t < 4.4) { updateCaveDrag(sk, t); return; }
+      if (sk.scene) endGrabScene(sk);   // CL-64: the cut under the black hands the bodies back
       if (t < 4.4) {
         const reach = skPh(t, 0, 0.5);      // the arm out of the dark
         const yank = skPh(t, 0.5, 0.9);     // off his feet
@@ -30327,6 +30339,7 @@
       const sk = scriptedKill;
       if (!sk) return null;
       scriptedKill = null;
+      endGrabScene(sk);   // CL-64
       const ud = marine.userData;
       for (const k of SK_PARTS) if (ud[k] && sk.saved.has(k)) ud[k].quaternion.copy(sk.saved.get(k));
       marine.rotation.set(0, 0, 0);
@@ -30776,17 +30789,120 @@
       // The snatch's grab beats belong to the crawl-in; this path has its own, now.
       sk.cues.stir = sk.cues.grab = sk.cues.drop = true;
       AudioSys.bossRoar();
+      sk.cam.copy(camera.position);
+      if (caveGrab && startGrabScene(sk)) return;   // the scene plays the grab's own beats (grab, yank)
       AudioSys.playerHurt();
       if (AudioSys.scream) AudioSys.scream();
       const s = sndAt(sk.dragFrom.x, sk.dragFrom.z, 60);
       AudioSys.gore(Math.max(0.35, s.v * 0.5), s.pan, false);
       spawnDust(sk.dragFrom.x, sk.dragFrom.y, sk.dragFrom.z, 7);
-      sk.cam.copy(camera.position);
+    }
+    // CL-64: the scene. Its +Z points from where he's caught to the cave mouth; its haul path is laid
+    // from where the scene's turn leaves the guardian, to the mouth and on into the dark. The bodies
+    // are the game's own, eased in from wherever the chase left them. The drag ends when the
+    // guardian has hauled him to the lip (sk.dragDur is set on arrival; 20 s is only a backstop).
+    function startGrabScene(sk) {
+      const c = sk.cave, g = sk.guardian, S = caveGrab.Studio;
+      try {
+        const boots = sk.dragFrom;
+        const root = new THREE.Group();
+        root.position.set(boots.x, caveGroundAt(c, boots.x, boots.z), boots.z);
+        root.rotation.y = Math.atan2(sk.dragTo.x - boots.x, sk.dragTo.z - boots.z);
+        scene.add(root);
+        root.updateMatrixWorld(true);
+        const toScene = (v) => { const p = root.worldToLocal(v.clone()); return [p.x, 0, p.z]; };
+        const start = caveGrab.scene.source.paths.haul.points[0];
+        const mouth = toScene(sk.at(sk.side * 0.2, 0.6)), inside = toScene(sk.at(0, -3.2)), deep = toScene(sk.at(0, -9));
+        const rigRoot = g.userData.rigRoot;
+        const gw = rigRoot.getWorldPosition(new THREE.Vector3());
+        g.visible = true;
+        const bodies = {
+          guardian: S.rigs.get('guardian').create({ group: rigRoot }),
+          marine: S.rigs.get('marine').create({ group: marine })
+        };
+        sk.scene = S.createScene(caveGrab.scene, {
+          parent: root, bodies,
+          paths: { haul: [start, mouth, inside, deep] },
+          ground: (x, z) => caveGroundAt(c, x, z),
+          enter: {
+            guardian: { position: gw, yaw: g.rotation.y, time: 0.3 },
+            marine: { position: player.position.clone(), yaw: player.rotation.y, time: 0.35 }
+          }
+        });
+        sk.sceneRoot = root;
+        sk.sceneHeading = root.rotation.y;
+        sk.mouthDist = Math.hypot(mouth[0] - start[0], mouth[2] - start[2]);
+        sk.dragDur = 20;   // ends on arrival; this is only the backstop
+        return true;
+      } catch (e) {
+        console.warn('[cave grab] could not start the scene; old drag:', e);
+        if (sk.scene) { sk.scene.dispose(); sk.scene = null; }
+        if (sk.sceneRoot) { sk.sceneRoot.removeFromParent(); sk.sceneRoot = null; }
+        return false;
+      }
+    }
+    const _gsG = new THREE.Vector3(), _gsM = new THREE.Vector3();
+    function updateGrabScene(sk, t) {
+      const sp = sk.scene;
+      const clock = sk.dragDone ? sk.dragDur + (t - 2.2) : sk.dragT;
+      const ddt = Math.min(0.1, Math.max(0, clock - (sk.dragClock === undefined ? clock : sk.dragClock)));
+      sk.dragClock = clock;
+      // The player (the camera's anchor, the listener) goes with his body, and the guardian's outer group
+      // with its rig (the scene places both bodies in their own parents' frames, so this is safe).
+      marine.getWorldPosition(_gsM);
+      player.position.copy(_gsM);
+      sk.guardian.userData.rigRoot.getWorldPosition(_gsG);
+      sk.guardian.position.set(_gsG.x, _gsG.y, _gsG.z);
+      sk.guardian.updateMatrixWorld(true);
+      const r = ddt > 0 ? sp.update(ddt) : sp.first;
+      marine.getWorldPosition(_gsM);
+      sk.guardian.userData.rigRoot.getWorldPosition(_gsG);
+      for (const e of r.events) {
+        const s = sndAt(_gsM.x, _gsM.z, 60);
+        if (e.name === 'grab') {
+          AudioSys.playerHurt();
+          if (AudioSys.scream) AudioSys.scream();
+          AudioSys.gore(Math.max(0.35, s.v * 0.5), s.pan, false);
+        } else if (e.name === 'hit-ground') {
+          if (AudioSys.bagThrow) AudioSys.bagThrow();
+          spawnDust(_gsM.x, _gsM.y, _gsM.z, 7);
+        } else if (e.name === 'step' && e.actor === 'guardian') {
+          const sg = sndAt(_gsG.x, _gsG.z, 55);
+          if (sg.v > 0.05) AudioSys.heavyStep(sg.v, sg.pan, true);
+        }
+      }
+      // Arrived: he's at the lip. The kill's own timeline takes it from here (the fade at 2.2).
+      if (!sk.dragDone) {
+        const pr = sp.path('haul');
+        if (pr && pr.distance >= sk.mouthDist + 0.5) sk.dragDur = sk.dragT;
+      }
+      // Boots ploughing the dirt, the blood going with him.
+      const hx = Math.sin(sk.sceneHeading), hz = Math.cos(sk.sceneHeading);
+      if (r.checks.speed.marine && r.checks.speed.marine.value > 0.4) {
+        if (Math.random() < 0.6) spawnDust(_gsM.x, _gsM.y, _gsM.z, 2);
+        if (Math.random() < 0.35) spawnBlood(_gsM.x, _gsM.y + 0.2, _gsM.z, -hx, -hz, 2, 0.5);
+      }
+      // Camera: follows the two of them in, low and off to his side, the mouth ahead.
+      const sx = hz * sk.side, sz = -hx * sk.side;
+      const mx = (_gsM.x + _gsG.x) * 0.5, mz = (_gsM.z + _gsG.z) * 0.5;
+      _cdCam.set(mx - hx * 4.6 + sx * 3.4, Math.max(_gsM.y, _gsG.y) + 3.1, mz - hz * 4.6 + sz * 3.4);
+      _cdLook.set(mx, (_gsM.y + _gsG.y) * 0.5 + 0.8, mz);
+      const k = ddt > 0 ? 1 - Math.exp(-ddt * 5) : 0;
+      sk.cam.lerp(_cdCam, k);
+      sk.look.lerp(_cdLook, ddt > 0 ? 1 - Math.exp(-ddt * 8) : 0);
+    }
+    // Done with the scene (the aftermath under the black, or an abort): the bodies go back as they were.
+    function endGrabScene(sk) {
+      if (!sk || !sk.scene) return;
+      sk.scene.dispose();
+      sk.scene = null;
+      if (sk.sceneRoot) { sk.sceneRoot.removeFromParent(); sk.sceneRoot = null; }
     }
     const _cgLook = new THREE.Vector3(), _cgCarry = new THREE.Vector3(), _cgFwd = new THREE.Vector3();
     const _cdBoots = new THREE.Vector3(), _cdLead = new THREE.Vector3(), _cdG = new THREE.Vector3();
     const _cdAnkle = new THREE.Vector3(), _cdCam = new THREE.Vector3(), _cdLook = new THREE.Vector3();
     function updateCaveDrag(sk, t) {
+      if (sk.scene) { updateGrabScene(sk, t); return; }
       const c = sk.cave, g = sk.guardian, gud = g.userData;
       const clock = sk.dragDone ? sk.dragDur + (t - 2.2) : sk.dragT;
       const ddt = Math.min(0.1, Math.max(0, clock - (sk.dragClock === undefined ? clock : sk.dragClock)));
@@ -38945,7 +39061,7 @@ live++;
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
           POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
-          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), projectiles, getMuzzleWorld, /* GB-58: nightsim's stall probe */ getScriptedKill: () => scriptedKill, getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
+          LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), projectiles, getMuzzleWorld, /* GB-58: nightsim's stall probe */ getScriptedKill: () => scriptedKill, caveGrabReady: () => !!caveGrab, /* CL-64 */ getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
           // night shot does not mean waiting out a day.
           setShotView, getShotView: () => shotView,

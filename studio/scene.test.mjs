@@ -163,3 +163,51 @@ test('the game marine is adopted where it hangs, and the stand-in matches its jo
   assert.ok(at.distanceTo(new THREE.Vector3(2, 0, 3)) < 1e-6, 'placed in the scene, whatever its parent: ' + at.toArray());
   assert.equal(g.parent, pivot, 'left where the game hung it');
 });
+
+test('a body can face another, then turn to its path; lunge from "at" onto the path', () => {
+  const sc = loadScene(base({
+    actors: {
+      marine: { rig: 'marine', at: [0, 0, 0], face: 180, clips: [[0, 'marine/still']] },
+      guardian: {
+        rig: 'guardian', path: 'haul', at: [[0, [0, 0, 3]], [0.5, [0, 0, 2]]], onPath: [[0.5, 0], [1, 1]],
+        aim: { at: 'marine', w: [[0, 1], [0.6, 1], [1.2, 0]] }, clips: [[0, 'guardian/stand']]
+      }
+    },
+    paths: { haul: { points: [[0, 0, 2], [0, 0, 20]], speed: [[0, 0], [1, 0], [1.5, 2]] } }
+  }), clips());
+  const sp = createScene(sc);
+  const g = sp.actors.guardian.inst.group;
+  const fwd = () => new THREE.Vector3(0, 0, 1).applyQuaternion(g.getWorldQuaternion(new THREE.Quaternion()));
+  sp.seek(0.3);
+  assert.ok(fwd().z < -0.99, 'faces the marine (−Z) while it lunges: ' + fwd().z.toFixed(2));
+  assert.ok(w(g).z < 3 && w(g).z > 2, 'coming in from "at": ' + w(g).z.toFixed(2));
+  sp.seek(1.4);
+  assert.ok(fwd().z > 0.99, 'turned to go (+Z): ' + fwd().z.toFixed(2));
+  sp.seek(2);
+  assert.ok(Math.abs(w(g).z - 3.5) < 0.05, 'hauling along the path (0.5 m in the ramp, 1 m at 2 m/s): ' + w(g).z.toFixed(2));
+});
+
+test('the host lays the path, gives the ground, and hands its body over smoothly', () => {
+  const sc = loadScene(base({
+    actors: { m: { rig: 'marine', path: 'p', clips: [[0, 'marine/still']] } },
+    paths: { p: { points: [[0, 0, 0], [0, 0, 5]], speed: [[0, 1]] } }
+  }), clips());
+  const parent = new THREE.Group(); parent.position.set(100, 3, 50); parent.rotation.y = Math.PI / 2;
+  const sp = createScene(sc, {
+    parent,
+    paths: { p: [[0, 0, 0], [4, 0, 0]] },                       // along scene +X instead
+    ground: (x, z) => 3 + 0.1 * (x - 100),                       // a slope, in world metres
+    enter: { m: { position: new THREE.Vector3(100, 3, 49), yaw: 0, time: 0.5 } }
+  });
+  const m = sp.actors.m.inst.group;
+  sp.seek(0);
+  assert.ok(w(m).distanceTo(new THREE.Vector3(100, 3, 49)) < 1e-6, 'starts where the host had it');
+  const r = sp.seek(1);
+  // Scene +X is world −Z under a parent turned 90°: one metre along the path.
+  const want = new THREE.Vector3(100, 0, 49);
+  want.y = 3 + 0.1 * (want.x - 100);
+  assert.ok(w(m).distanceTo(want) < 1e-3, 'on the laid path and the ground: ' + w(m).toArray().map((x) => x.toFixed(3)));
+  assert.equal(sp.path('p').total, 4);
+  assert.ok(Math.abs(sp.path('p').distance - 1) < 1e-3);
+  assert.ok(r.checks.speed.m.value > 0.9);
+});

@@ -8,7 +8,7 @@
 //   player.play(clip, { loop: true });
 //   const events = player.update(dt, { targets: { ankle: worldVec3 } });
 import * as THREE from 'three';
-import { ikLimb } from './ik.js';
+import { ikLimb, worldQuat, slerpTo } from './ik.js';
 
 export const CLIP_FORMAT = 'dw-clip/1';
 const D2R = Math.PI / 180;
@@ -23,7 +23,7 @@ export const EASES = {
   step: (u) => (u < 1 ? 0 : 1)
 };
 // What each channel holds: a vec3, a scalar, or a point (a vec3 or a live target).
-const CHANNELS = { rot: 'vec3', pos: 'vec3', ik: 'point', pole: 'vec3', plant: 'scalar', level: 'scalar', grip: 'scalar', look: 'point', open: 'scalar' };
+const CHANNELS = { rot: 'vec3', pos: 'vec3', ik: 'point', pole: 'vec3', plant: 'scalar', level: 'scalar', grip: 'scalar', look: 'point', open: 'scalar', step: 'scalar' };
 
 // --- Loading ----------------------------------------------------------------------------
 const isVec3 = (v) => Array.isArray(v) && v.length === 3 && v.every((n) => typeof n === 'number' && Number.isFinite(n));
@@ -128,7 +128,7 @@ export function sampleClip(clip, t) {
     const c = {};
     if (chans.ik) c.ik = samplePoint(chans.ik, tt);
     if (chans.pole) c.pole = sampleVec3(chans.pole, tt);
-    for (const s of ['plant', 'level', 'grip']) if (chans[s]) c[s] = sampleScalar(chans[s], tt);
+    for (const s of ['plant', 'level', 'grip', 'step']) if (chans[s]) c[s] = sampleScalar(chans[s], tt);
     if (Object.keys(c).length) pose.chains[track] = c;
     if (chans.look) pose.head.look = samplePoint(chans.look, tt);
     if (chans.open) pose.head.open = sampleScalar(chans.open, tt);
@@ -145,7 +145,7 @@ export function blendPoses(a, b, w) {
     const ja = a.joints[n], jb = b.joints[n];
     if (!ja || !jb) { out.joints[n] = ja || jb; continue; }
     out.joints[n] = {
-      rot: ja.rot && jb.rot ? ja.rot.clone().slerp(jb.rot, w) : (jb.rot || ja.rot),
+      rot: ja.rot && jb.rot ? slerpTo(ja.rot.clone(), jb.rot, w) : (jb.rot || ja.rot),
       pos: ja.pos && jb.pos ? lerp3(ja.pos, jb.pos, w) : (jb.pos || ja.pos)
     };
   }
@@ -153,13 +153,19 @@ export function blendPoses(a, b, w) {
   const mixS = (x, y) => (x !== undefined && y !== undefined ? x + (y - x) * w : (y !== undefined ? y : x));
   for (const n of new Set([...Object.keys(a.chains), ...Object.keys(b.chains)])) {
     const ca = a.chains[n] || {}, cb = b.chains[n] || {};
+    // A limb only one side places fades its IK in or out over the blend (instead of dropping it at
+    // the end of the fade, which pops the limb back to its rest).
+    const ikW = ca.ik && !cb.ik ? (1 - w) * (ca.ikW ?? 1) : !ca.ik && cb.ik ? w * (cb.ikW ?? 1) : (ca.ikW ?? 1) * (1 - w) + (cb.ikW ?? 1) * w;
     out.chains[n] = {
-      ik: mixPts(ca.ik, cb.ik),
+      ik: mixPts(ca.ik, cb.ik), ikW,
       pole: ca.pole && cb.pole ? lerp3(ca.pole, cb.pole, w) : (cb.pole || ca.pole),
-      plant: mixS(ca.plant, cb.plant), level: mixS(ca.level, cb.level), grip: mixS(ca.grip, cb.grip)
+      plant: mixS(ca.plant, cb.plant), level: mixS(ca.level, cb.level), grip: mixS(ca.grip, cb.grip), step: mixS(ca.step, cb.step)
     };
   }
-  out.head = { look: mixPts(a.head.look, b.head.look), open: mixS(a.head.open, b.head.open) };
+  // Looking at something fades in or out over the blend too, when only one side looks.
+  const la = a.head.look, lb = b.head.look;
+  const lookW = la && !lb ? (1 - w) * (a.head.lookW ?? 1) : !la && lb ? w * (b.head.lookW ?? 1) : (a.head.lookW ?? 1) * (1 - w) + (b.head.lookW ?? 1) * w;
+  out.head = { look: mixPts(la, lb), lookW, open: mixS(a.head.open, b.head.open) };
   return out;
 }
 // Events with a time in (t0, t1], for a clip played from t0 to t1 (loops wrap).
@@ -194,15 +200,20 @@ function resolvePoint(inst, parts, targets, out) {
   return out.divideScalar(wsum);
 }
 // Turn a joint about its local X so its +Z lies level with the rig's ground.
+// Quaternion in, quaternion out (never reading .rotation after a quaternion was written: the game's
+// test stand-in for three.js doesn't keep the two in step, real three does, and this is the same
+// maths either way).
+const _le = new THREE.Euler(), _lq = new THREE.Quaternion(), _X = new THREE.Vector3(1, 0, 0), _Y = new THREE.Vector3(0, 1, 0);
 function levelJoint(inst, joint, amt) {
   if (!(amt > 0)) return;
-  const keep = joint.rotation.x;
-  joint.rotation.x = 0;
+  _le.setFromQuaternion(joint.quaternion, 'XYZ');
+  const keep = _le.x, ey = _le.y, ez = _le.z;
+  joint.quaternion.setFromEuler(_le.set(0, ey, ez, 'XYZ'));
   joint.updateWorldMatrix(true, false);
   _f.set(0, 0, 1).transformDirection(joint.matrixWorld);
   _up.set(0, 1, 0).transformDirection(inst.group.matrixWorld);
   const tip = Math.asin(Math.max(-1, Math.min(1, _f.dot(_up))));
-  joint.rotation.x = keep + (tip - keep) * amt;
+  joint.quaternion.setFromEuler(_le.set(keep + (tip - keep) * amt, ey, ez, 'XYZ'));
 }
 // Solve one limb onto a world point (the scene player's lift, and applyPose below). `weight` < 1
 // eases from where the limb is now.
@@ -218,7 +229,11 @@ export function solveChain(inst, name, target, weight = 1, pole = null) {
 }
 // `reach` (the scene player's holds): { chain: { at: Vector3 (world), w } } pulls a limb's target
 // toward a point, over whatever the clip says, even if the clip doesn't place that limb.
-export function applyPose(inst, pose, { targets = null, rootMotion = false, reach = null } = {}) {
+// `dt` (seconds since the last pose) drives limbs that step for themselves (the `step` channel).
+// `free` (the scene player's holds): { chain: w } for a limb something else has hold of, 0 to 1
+// (true is 1): its clip's plant lets go by that much (a foot that's been grabbed isn't standing on
+// anything), so a hold easing in eases the foot off the ground instead of jerking it off.
+export function applyPose(inst, pose, { targets = null, rootMotion = false, reach = null, dt = 0, free = null } = {}) {
   const def = inst.def, R = inst.R;
   // Everything back to rest first, so a joint the clip doesn't mention sits where the rig's rest
   // pose puts it, not wherever the last clip left it.
@@ -244,21 +259,57 @@ export function applyPose(inst, pose, { targets = null, rootMotion = false, reac
     if ((!c || !c.ik) && !rc) { state.at = null; state.planted = false; continue; }
     let target = c && c.ik ? resolvePoint(inst, c.ik, targets, _w) : null;
     if (!target && !rc) continue;
-    const plant = (c && c.plant) || 0;
+    // A limb that steps for itself (`step` > 0: how far, in rig units, its planted foot may fall from
+    // where the clip wants it before it picks it up). It stays pinned, and when the body has moved
+    // or turned far enough off it, it lifts, swings to the clip's spot in `STEP_TIME` and plants
+    // there. One limb of a body in the air at a time, unless one is falling far behind. This is what
+    // lets a clip say "stand here" while the scene turns and moves the body under it.
+    if (target && c && c.step > 0 && !rc) {
+      // Coming from a planted clip, it starts pinned where it was planted, not where this clip wants it.
+      if (!state.pin && !state.swing && state.at) state.pin = state.at.clone();
+      target = autoStep(inst, name, state, target, c.step, dt, ch);
+      state.planted = !state.swing;
+      solveChain(inst, name, target, 1, (c && c.pole) || ch.pole);
+      if (R[ch.end]) (state.endLast || (state.endLast = new THREE.Vector3())).setFromMatrixPosition(R[ch.end].matrixWorld);
+      if (R[ch.end]) levelJoint(inst, R[ch.end], c.level !== undefined ? c.level : 1);
+      if (c.grip !== undefined && def.grip) def.grip(R, name, c.grip);
+      state.at = null;
+      continue;
+    }
+    // Leaving a stepping clip: a planted limb stays where it stands (the next clip's plant keeps it).
+    if (state.swing || state.pin) {
+      if (state.swing) inst.stepping = Math.max(0, (inst.stepping || 1) - 1);
+      else if (state.pin) state.carry = state.pin.clone();
+      state.swing = null; state.pin = null;
+    }
+    // Held by another body, it lets go of its own plant as the hold takes it (a weight: `true` is 1).
+    const held = free && free[name] ? Math.min(1, +free[name]) : 0;
+    const plant = ((c && c.plant) || 0) * (1 - held);
     if (target && plant >= 0.5) {
       // Pinned where it was when the plant came on: the body moves over it, it doesn't slide.
-      if (!state.at) state.at = target.clone();
+      if (!state.at) state.at = state.carry ? state.carry : target.clone();
+      state.carry = null;
       target = _w.copy(target).lerp(state.at, Math.min(1, (plant - 0.5) * 2));
     } else state.at = null;
-    state.planted = !!target && plant >= 0.5 && !rc;
-    let ikW = 1;
+    state.planted = !!target && plant >= 0.99 && !rc;   // fully pinned; a limb easing out of its pin is lifting
+    // A limb something has hold of is pulled straight by it: it keeps the clip's direction from its
+    // root, but not the clip's bend (a grabbed leg doesn't go on running), by as much as it's held.
+    if (held > 0 && target && R[ch.root]) {
+      const rp = _hr.setFromMatrixPosition(R[ch.root].matrixWorld);
+      const len = (ch.lengths[0] + ch.lengths[1]) * (_hs.setFromMatrixColumn(R[ch.root].matrixWorld, 1).length() || 1) * 0.985;
+      const d = _hd.copy(target).sub(rp), dl = d.length();
+      if (dl > 1e-4) target = _w.copy(target).lerp(d.multiplyScalar(len / dl).add(rp), held);
+    }
+    let ikW = c && c.ikW !== undefined ? c.ikW : 1;
     if (rc) {
       if (target) target = _w.copy(target).lerp(rc.at, Math.min(1, rc.w));
       else { target = _w.copy(rc.at); ikW = Math.min(1, rc.w); }
+      if (c && c.ik) ikW = Math.max(ikW, Math.min(1, rc.w));
     }
     solveChain(inst, name, target, ikW, (c && c.pole) || ch.pole);
     if (!c) { state.last = target.clone(); continue; }
-    const level = c.level !== undefined ? c.level : (plant >= 0.5 ? 1 : 0);
+    // Levelled as much as the limb is placed (a limb fading out of a clip lets go of its level too).
+    const level = (c.level !== undefined ? c.level : (plant >= 0.5 ? 1 : 0)) * Math.min(1, ikW);
     if (level > 0 && R[ch.end]) levelJoint(inst, R[ch.end], level);
     if (c.grip !== undefined && def.grip) def.grip(R, name, c.grip);
     state.last = target.clone();
@@ -267,25 +318,64 @@ export function applyPose(inst, pose, { targets = null, rootMotion = false, reac
   const hd = def.head;
   if (hd && pose.head.look) {
     const at = resolvePoint(inst, pose.head.look, targets, _w);
-    if (at) lookAt(inst, hd, at);
+    if (at) lookAt(inst, hd, at, pose.head.lookW ?? 1);
   }
-  if (hd && pose.head.open !== undefined && R[hd.jaw]) R[hd.jaw].rotation.x += pose.head.open * (hd.jawOpenDeg || 55) * D2R;
+  // Open: a turn about X added in front (what rotation.x += a does to an XYZ rotation).
+  if (hd && pose.head.open !== undefined && R[hd.jaw]) R[hd.jaw].quaternion.premultiply(_lq.setFromAxisAngle(_X, pose.head.open * (hd.jawOpenDeg || 55) * D2R));
   inst.group.updateWorldMatrix(true, true);
 }
+const _hr = new THREE.Vector3(), _hs = new THREE.Vector3(), _hd = new THREE.Vector3();
+export const STEP_TIME = 0.25;
+const _st = new THREE.Vector3(), _sf = new THREE.Vector3();
+function autoStep(inst, name, state, want, thr, dt, ch) {
+  const sc = inst.group.scale.x || 1;
+  if (!state.pin && !state.swing) { state.pin = want.clone(); return state.pin; }
+  if (state.swing) {
+    const sw = state.swing;
+    sw.age += dt;
+    const u = Math.min(1, sw.age / sw.dur);
+    // Over first, then down: it gets where it's going by three quarters of the step and puts the foot
+    // down from above, so a landing never skims the ground.
+    const uh = Math.min(1, u / 0.75), e = uh * uh * (3 - 2 * uh);
+    _st.copy(sw.from).lerp(want, e);
+    _st.y += Math.sin(Math.PI * u) * Math.max(0.12, thr * 0.7) * sc;
+    if (u >= 1) { state.pin = want.clone(); state.swing = null; inst.stepping = Math.max(0, (inst.stepping || 1) - 1); return state.pin; }
+    return _st;
+  }
+  const drift = _sf.copy(state.pin).sub(want).setY(0).length() / sc;
+  const busy = (inst.stepping || 0) > 0;
+  // A pin the limb can no longer reach has to be picked up whatever the threshold says.
+  const root = inst.R[ch.root];
+  const far = root && _sf.setFromMatrixPosition(root.matrixWorld).distanceTo(state.pin) / sc > (ch.lengths[0] + ch.lengths[1]) * 0.96;
+  if ((far && (inst.stepping || 0) < 2) || drift > thr * (busy ? 1.6 : 1) && (inst.stepping || 0) < 2) {
+    // A long step takes longer (up to 1.8 times), so a big stride isn't a flick.
+    // It lifts from where the limb really is (a pin it could no longer reach, it had already let go of).
+    const from = state.endLast ? state.endLast.clone() : state.pin.clone();   // where it was drawn last frame
+    state.swing = { from, age: 0, dur: STEP_TIME * Math.min(1.8, Math.max(1, drift / 0.5)) };
+    inst.stepping = (inst.stepping || 0) + 1;
+  }
+  return state.pin;
+}
+
 // Split the turn between neck and head, clamped: a creature looks, it doesn't spin its skull.
-function lookAt(inst, hd, at) {
+function lookAt(inst, hd, at, w = 1) {
   const neck = inst.R[hd.neck], head = inst.R[hd.head];
   if (!neck || !head) return;
   neck.updateWorldMatrix(true, false);
   _p.setFromMatrixPosition(neck.matrixWorld);
   _f.copy(at).sub(_p);
-  neck.getWorldQuaternion(_q).invert();
+  worldQuat(neck, _q).invert();
   _f.applyQuaternion(_q).normalize();
   const lim = (hd.limitDeg || 70) * D2R;
-  const yaw = Math.max(-lim, Math.min(lim, Math.atan2(_f.x, _f.z)));
-  const pitch = Math.max(-lim, Math.min(lim, -Math.atan2(_f.y, Math.hypot(_f.x, _f.z))));
-  neck.rotateY(yaw * 0.5); neck.rotateX(pitch * 0.4);
-  head.rotateY(yaw * 0.5); head.rotateX(pitch * 0.6);
+  // A target behind the neck is looked at over the shoulder on its own side (|z|), not flipped from one
+  // side to the other as it crosses straight behind.
+  // And a target straight above or below the neck has no sideways to turn to: the turn fades out
+  // as it lines up, instead of spinning the head round.
+  const yaw = Math.max(-lim, Math.min(lim, Math.atan2(_f.x, Math.abs(_f.z)))) * w * Math.min(1, Math.hypot(_f.x, _f.z) * 3);
+  const pitch = Math.max(-lim, Math.min(lim, -Math.atan2(_f.y, Math.hypot(_f.x, _f.z)))) * w;
+  // rotateY / rotateX, spelled as the quaternion products they are.
+  neck.quaternion.multiply(_lq.setFromAxisAngle(_Y, yaw * 0.5)).multiply(_lq.setFromAxisAngle(_X, pitch * 0.4));
+  head.quaternion.multiply(_lq.setFromAxisAngle(_Y, yaw * 0.5)).multiply(_lq.setFromAxisAngle(_X, pitch * 0.6));
 }
 
 // --- The player ----------------------------------------------------------------------------
@@ -320,7 +410,7 @@ export function createPlayer(inst) {
         pose = blendPoses(sampleClip(fade.clip, fade.t), pose, EASES.smooth(w));
         if (w >= 1) fade = null;
       }
-      applyPose(inst, pose, { targets, rootMotion });
+      applyPose(inst, pose, { targets, rootMotion, dt });
       return events;
     },
     // Pose the rig at a given time without moving the clock (the renderer's frames).

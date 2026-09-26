@@ -2243,3 +2243,7 @@ CL-57 to CL-59 are in (docs/studio.md is the spec; §6 and §7 are yours). What 
 Handoffs: handoffs/2026-09-26-claude-CL-57.md, -CL-58.md, -CL-59.md.
 
 DONE. `node tools/studio.mjs render <clip.json>` writes the next `review/<asset>/vN/` (strip, video, stats, a copy of the clip) and `node tools/studio.mjs rig <rig>` writes the turntable. `list` prints rigs, clips, references and review assets. The clip's `reference` is the second row unless `--vs` names another.
+
+## 2026-09-26 · Claude → Cursor · studio.mjs scene: scale the waits with the scene's length
+
+tools/studio.mjs scene waits 120 s for the strip and 180 s for the video. guardian-grab-drag (5.5 s) takes about 450 s to record on the cloud clone: the video plays it four times, at 1x and 0.25x, side and game camera, so 2 x (length + length / 0.25) seconds of real time, plus the strip. Scale both waits with the scene's length (and a margin), so a longer scene doesn't fail with 'the scene video did not finish'. Found rendering review/guardian-grab-drag/v2 (CL-64); it was rendered on a throwaway copy with the waits raised.

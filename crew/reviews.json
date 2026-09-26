@@ -2,6 +2,13 @@
   "note": "Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.",
   "assets": [
     {
+      "asset": "demo-drag",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "guardian",
       "owner": "claude",
       "rig": "guardian",
@@ -21,6 +28,13 @@
       "rig": "guardian",
       "clip": "gallop",
       "reference": "Sprint_Loop"
+    },
+    {
+      "asset": "guardian-grab-drag",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": null,
+      "reference": null
     },
     {
       "asset": "guardian-pounce",

@@ -35,12 +35,31 @@ function createInstance(def, opts) {
   const R = adopting ? def.adopt(group) : (group.userData.rig || {});
   // Name every joint group so the damping and the renderer's snap check can report it.
   for (const [k, v] of Object.entries(R)) if (v && v.isObject3D && !v.name) v.name = k;
-  const inst = { def, group, R, rest: new Map(), plants: {}, rootBase: null };
+  const inst = { def, group, R, rest: new Map(), plants: {}, rootBase: null, adopted: adopting };
   const capture = () => {
     inst.rest.clear();
     group.traverse((o) => { if (o !== group && !o.isMesh) inst.rest.set(o, { q: o.quaternion.clone(), p: o.position.clone() }); });
   };
   capture();
+  if (adopting) {
+    // What it was before a scene took it, so the host can have it back (inst.restore()).
+    const before = new Map([...inst.rest].map(([o, r]) => [o, { q: r.q.clone(), p: r.p.clone() }]));
+    const own = { p: group.position.clone(), q: group.quaternion.clone(), s: group.scale.clone() };
+    inst.before = before;
+    inst.restore = () => {
+      for (const [o, r] of before) { o.quaternion.copy(r.q); o.position.copy(r.p); }
+      group.position.copy(own.p); group.quaternion.copy(own.q); group.scale.copy(own.s);
+      group.updateWorldMatrix(false, true);
+    };
+    // Its rest is the studio's, joint by joint, so the game plays exactly what the review folder shows.
+    const ref = createInstance(def, {});
+    for (const [n, j] of Object.entries(R)) {
+      const rj = ref.R[n];
+      if (!j || !j.isObject3D || !rj) continue;
+      const r = ref.rest.get(rj);
+      if (r) inst.rest.set(j, { q: r.q.clone(), p: r.p.clone() });
+    }
+  }
   // The rest pose is a clip at time 0: joints a clip doesn't mention sit where it puts them.
   if (def.rest && !adopting) {
     group.updateWorldMatrix(true, true);
@@ -66,6 +85,8 @@ export function rigCost(group) {
 // --- The cave guardian (world/cave-guardian.js) ---------------------------------------------
 registerRig('guardian', {
   build: (opts) => makeCaveGuardianRig(opts.design),
+  // The game's guardian: the same rig, hung off its outer group (index.html makeCaveGuardian).
+  adopt: (group) => { if (!group.userData.rig || !group.userData.rig.wristR) throw new Error('not a guardian rig'); return group.userData.rig; },
   displayScale: 1.3,
   chains: {
     handL: { root: 'shoulderL', mid: 'elbowL', end: 'wristL', lengths: [1.08, 1.16], pole: [-0.7, 0.35, -1] },

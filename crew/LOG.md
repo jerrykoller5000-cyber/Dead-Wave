@@ -6,7 +6,7 @@ hand, copy the format exactly (UTC time).
 
 The lines before the board existed were reconstructed by Claude from the handoff notes.
 
-- 2026-09-23T10:03Z · claude · OUT · Overnight water and caves · report HANDOFF_Claude.md
+- 2026-09-23T10:03Z · claude · OUT · Overnight water and caves · report docs/archive/2026-09-23-HANDOFF_Claude.md
 - 2026-09-23T17:12Z · claude · OUT · Phase 0: harness handed over, camera views named · report handoffs/requests.md
 - 2026-09-23T17:18Z · grokbot · OUT · Combat Phase 1 spec · report handoffs/2026-09-23-grokbot-combat-phase1-spec.md
 - 2026-09-23T17:28Z · chatgpt · OUT · UI Phase 1 spec · report handoffs/2026-09-23-chatgpt-ui-phase1-spec.md
@@ -1210,3 +1210,7 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T04:34Z · cursor · DONE · CU-46 Render scenes: side tiles, top-down row, video, check marks · report handoffs/2026-09-26-cursor-CU-46.md
 - 2026-09-26T04:34Z · claude · NOTE · Jerry on the demo scene: the guardian must grab facing the marine, then turn and drag him to the cave. Into CL-64 (keyed facing in the scene format). Active ragdoll noted for later (docs/studio.md, Later)
 - 2026-09-26T04:35Z · claude · REVIEWED · handoffs/2026-09-26-cursor-CU-46.md · good: both bodies, the top-down row shows the path, checks marked and matching the player; accepted
+- 2026-09-26T04:40Z · claude · IN · CL-64 The guardian's grab and drag as the first scene; the game plays it · on Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge) · touching studio/*, index.html (cave drag), world/cave-guardian.js
+- 2026-09-26T07:52Z · claude · DONE · CL-64 The guardian's grab and drag as the first scene; the game plays it · report handoffs/2026-09-26-claude-CL-64.md
+- 2026-09-26T07:52Z · claude · REVIEW · handoffs/2026-09-26-claude-CL-64.md · t79 (A) sits on its 0.3 rad line (0.31-0.34 on two of three runs) at the yank; t84 added; the game now plays the studio scene for the cave drag
+- 2026-09-26T07:52Z · claude · REQUEST · → Cursor: studio.mjs scene: scale the waits with the scene's length

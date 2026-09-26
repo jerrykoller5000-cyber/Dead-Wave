@@ -104,6 +104,10 @@ Before the first key a channel holds the first value; after the last, the last.
 | `grip` | `-1..1`. Negative curls the hand under to knuckle-walk; positive closes it on something | `handL`, `handR` |
 | `look` | `[x, y, z]` rig frame, or a live target: the head and neck turn to it (on top of their `rot`) | `head` |
 | `open` | `0..1` jaw open (added to the jaw's `rot`) | `head` |
+| `step` | rig units (0 = off). The limb steps for itself: it stays pinned where it stands, and when the body has moved or turned more than this far off where `ik` wants it (or it can no longer reach its pin), it lifts from where it is, swings over, and plants there. One limb in the air at a time (two if one is falling far behind). For clips that say where to stand while the scene moves the body (a turn, a lunge) | a chain |
+
+When one clip fades into another and only one of them places a limb (or looks at something), the
+limb's IK, its `level` and the look fade in or out over the blend instead of dropping at its end.
 
 Joints a clip doesn't mention keep the rig's rest pose. A chain with an `ik` channel overrides the
 `rot` of its two joints. `root` is the whole creature moving over the ground (root motion); the game
@@ -340,6 +344,14 @@ default), `"back"`, or degrees added to the travel heading. `scale` overrides th
 scale. Two keyed body channels move the whole actor on top of its place: `tilt` (degrees, XYZ, about
 the feet: the marine laid on his back) and `rise` (metres up). Keys are the clip format's: `[time, value, ease]`.
 
+**Moving and turning (CL-64).** `at` can be keys (`[[t, [x, y, z], ease], ...]`): a lunge. With a
+path too, `onPath` (keyed 0..1) blends from `at` onto the path, so a body can lunge, pull back, walk
+round and then set off along the path. `aim: { "at": "marine.footL", "w": keys, "turn": 1 }` turns
+it to face another body (or one of its joints) by the keyed weight, on top of its own heading: a
+creature grabs facing what it grabs, then turns away to go. `turn` says which way round it goes for
+a turn near 180° (1 its left, -1 its right). A body's ground speed (from its path, its keyed `at`,
+or both) is what a clip's `stride` is matched to.
+
 **Clips.** `[start time, "rig/clip", options]`, in time order; each takes over from the one before.
 A clip reference is `studio/clips/<rig>/<clip>.json`. Options: `fade` (seconds to blend from the
 last one, default 0.15), `loop`, `speed` (a fixed rate), and **`stride`**: metres the actor covers
@@ -362,6 +374,19 @@ joint or a limb of another (`actor.chain` means the chain's end joint). Three ke
 
 A hold's `offset` ([x, y, z] metres, in the `to` joint's frame) moves the grip point along the limb
 (a hand round the shin instead of the ankle bone).
+
+More on a hold (CL-64): `trail` (keyed 0..1, with `tow`) swings the towed body round so it stretches
+out behind the grip, away from whoever has it. `"taut": true` pulls the held limb straight: the body
+is slid back along the ground until the limb can only just reach the hand. If a limb pulled straight
+still can't reach up to the hand, the body comes off the ground by the difference (up to 0.8 m, once
+the limb is fully lifted): he's being held up by the leg. A limb that's lifted (or, without `lift`,
+towed) lets go of its own clip's plant by as much as it's held, so a foot eases off the ground as the
+hold comes in instead of springing off its pin, and it's pulled straight along the clip's direction
+rather than going on with the clip's bend. When a hold hands over from `reach` to `tow`, let the reach
+fade as the tow comes in: with both at full, the hand chases the ankle and the ankle chases the hand.
+Timing that reads well in the game (CL-64): `tow` over about 0.2 s, `lift` over about 0.5 s with the
+`smooth` ease, and a clip change on the held body faded over 0.3 s; a faster lift yanks the leg
+straight in a frame or two.
 
 **Order each frame.** Every actor is put on its path and posed from its clips. Then, for each hold,
 the held actor is posed before the holder; the holder reaches; the held actor is towed and its limb
@@ -391,6 +416,21 @@ sp.seek(t);      // replays from 0 in fixed steps: the same pose at t every time
 sp.worst;        // the worst of each check since the last seek: { "slide:guardian.footL": { value, t, bad }, ... }
 sp.actors.marine.inst, sp.actors.guardian.rate, sp.root, sp.done
 ```
+
+The host's options (the game, CL-64): `paths: { haul: [[x, y, z], ...] }` lays a path where this
+moment needs it (to this cave's mouth), keeping the scene's speed keys; `ground: (x, z) => y`
+(world) puts every body on the real terrain; `enter: { actor: { position, yaw, time } }` starts a
+body where the host's really was (world position and yaw) and eases it, placement and every joint,
+into the scene over `time` seconds; while it eases in, its feet don't pin (a pin taken where the game
+had the foot would hold it there while the body slides into the scene over it), and they pin where
+they stand once it has arrived. Every blend turns the short way (`slerpTo` in studio/ik.js): the
+tests' stand-in three blends quaternions component by component and would otherwise swing a joint
+the long way round at a partial weight. `sp.path(name)` says how far along a path the scene is, so the
+host can end a haul on arrival; past the scene's length a path carries on at its last speed.
+`sp.dispose()` hands the host's bodies back exactly as they were given and removes the rest.
+Adopted bodies take the studio's rest pose joint by joint, so the game plays exactly what the review
+folder shows. `fetchScene(name)` (browser) loads a scene and its clips relative to the studio's own
+folder.
 
 `validateScene(json)` returns the problems as sentences, like `validateClip`. A quick look without
 the renderer: `studio/scene-preview.html?scene=demo-drag&n=8` (side-on tiles following the bodies,

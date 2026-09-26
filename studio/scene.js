@@ -7,6 +7,7 @@
 import * as THREE from 'three';
 import { loadClip, sampleClip, blendPoses, clipEvents, clipTime, applyPose, solveChain, EASES } from './clip.js';
 import { rigs } from './rigs.js';
+import { worldQuat, worldScale, slerpTo } from './ik.js';
 
 export const SCENE_FORMAT = 'dw-scene/1';
 const D2R = Math.PI / 180;
@@ -67,7 +68,7 @@ export function validateScene(json) {
   if (json.paths !== undefined && (typeof json.paths !== 'object' || Array.isArray(json.paths))) errs.push('"paths" must be an object of named paths');
   for (const [n, p] of Object.entries(paths)) {
     if (!p || !Array.isArray(p.points) || p.points.length < 2 || !p.points.every(isVec3)) errs.push(`path "${n}": "points" needs at least two [x, y, z]`);
-    if (p && p.speed !== undefined) errs.push(...keyErrors(p.speed, 'scalar', `path "${n}".speed`, { min: 0 }));
+    if (p && p.speed !== undefined) errs.push(...keyErrors(p.speed, 'scalar', `path "${n}".speed`));
     else errs.push(`path "${n}": "speed" is missing (keys of metres per second)`);
   }
   const actors = json.actors && typeof json.actors === 'object' && !Array.isArray(json.actors) ? json.actors : null;
@@ -78,7 +79,16 @@ export function validateScene(json) {
     const def = typeof a.rig === 'string' ? rigs.def(a.rig) : null;
     if (!def) errs.push(`${at}: "rig" must be a registered rig (${rigs.names().join(', ')}); got ${JSON.stringify(a.rig)}`);
     if (a.path !== undefined && !paths[a.path]) errs.push(`${at}: no path "${a.path}" in "paths"`);
-    if (a.path === undefined && a.at !== undefined && !isVec3(a.at)) errs.push(`${at}: "at" must be [x, y, z]`);
+    const keyedAt = Array.isArray(a.at) && Array.isArray(a.at[0]);
+    if (a.at !== undefined) { if (keyedAt) errs.push(...keyErrors(a.at, 'vec3', `${at}.at`)); else if (!isVec3(a.at)) errs.push(`${at}: "at" must be [x, y, z] or keys of it`); }
+    if (a.onPath !== undefined) { if (!a.path) errs.push(`${at}: "onPath" blends from "at" onto a path, so it needs "path"`); else errs.push(...keyErrors(a.onPath, 'scalar', `${at}.onPath`, { min: 0, max: 1 })); }
+    if (a.aim !== undefined) {
+      const r = a.aim && typeof a.aim.at === 'string' ? (a.aim.at.includes('.') ? splitRef(a.aim.at) : { actor: a.aim.at }) : null;
+      if (!r || !actors[r.actor] || r.actor === n) errs.push(`${at}: "aim.at" names another actor (or "actor.joint") to face`);
+      if (!a.aim || a.aim.w === undefined) errs.push(`${at}: "aim.w" is keyed weights, 0 (its own heading) to 1 (facing the target)`);
+      else errs.push(...keyErrors(a.aim.w, 'scalar', `${at}.aim.w`, { min: 0, max: 1 }));
+      if (a.aim && a.aim.turn !== undefined && a.aim.turn !== 1 && a.aim.turn !== -1) errs.push(`${at}: "aim.turn" is 1 (turn to its left) or -1 (to its right)`);
+    }
     for (const k of ['along', 'side', 'scale']) if (a[k] !== undefined && !isNum(a[k])) errs.push(`${at}: "${k}" must be a number`);
     if (a.face !== undefined && !isNum(a.face) && a.face !== 'forward' && a.face !== 'back') errs.push(`${at}: "face" is "forward", "back" or degrees`);
     if (a.tilt !== undefined) errs.push(...keyErrors(a.tilt, 'vec3', `${at}.tilt`));
@@ -115,13 +125,14 @@ export function validateScene(json) {
     if (fd && !fd.chains[f.name]) errs.push(`${at}: "${f.name}" is not a limb of ${actors[f.actor].rig} (${Object.keys(fd.chains).join(', ')})`);
     if (!WEIGHTS.some((k) => h[k] !== undefined)) errs.push(`${at}: give at least one of ${WEIGHTS.join(', ')} (keyed weights 0 to 1)`);
     for (const k of WEIGHTS) if (h[k] !== undefined) errs.push(...keyErrors(h[k], 'scalar', `${at}.${k}`, { min: 0, max: 1 }));
+    if (h.trail !== undefined) { if (h.tow === undefined) errs.push(`${at}: "trail" swings a towed body round, so it needs "tow"`); errs.push(...keyErrors(h.trail, 'scalar', `${at}.trail`, { min: 0, max: 1 })); }
     if (h.lift !== undefined && td && !td.chains[to.name]) errs.push(`${at}: "lift" needs "to" to be a limb (${Object.keys(td.chains).join(', ')}), not "${to.name}"`);
     if (h.offset !== undefined && !isVec3(h.offset)) errs.push(`${at}: "offset" must be [x, y, z] metres in the held joint's frame`);
   });
   if (json.checks !== undefined) {
     const c = json.checks;
     for (const k of ['gap', 'slide', 'snap']) if (c[k] !== undefined && !(c[k] > 0)) errs.push(`checks.${k} must be a number above 0`);
-    if (c.speed !== undefined) for (const [n, r] of Object.entries(c.speed)) if (!actors[n] || !Array.isArray(r) || r.length !== 2 || !r.every(isNum)) errs.push(`checks.speed.${n}: [lowest, highest] m/s for an actor in the scene`);
+    if (c.speed !== undefined) for (const [n, r] of Object.entries(c.speed)) if (!actors[n] || !Array.isArray(r) || r.length < 2 || r.length > 4 || !r.every(isNum)) errs.push(`checks.speed.${n}: [lowest, highest, from?, to?] m/s (from and to in seconds) for an actor in the scene`);
   }
   if (!errs.length) { const cyc = orderActors(json); if (!Array.isArray(cyc)) errs.push(cyc); }
   return errs;
@@ -134,6 +145,7 @@ function orderActors(json) {
   const before = new Map(names.map((n) => [n, new Set()]));
   for (const h of json.holds || []) before.get(splitRef(h.from).actor).add(splitRef(h.to).actor);
   for (const [n, a] of Object.entries(json.actors)) for (const v of Object.values(a.targets || {})) { const r = splitRef(v); if (r.actor !== n) before.get(n).add(r.actor); }
+  for (const [n, a] of Object.entries(json.actors)) if (a.aim && typeof a.aim.at === 'string') { const t = a.aim.at.split('.')[0]; if (t !== n && before.has(t) && !(json.holds || []).some((h) => splitRef(h.to).actor === n && splitRef(h.from).actor === t)) before.get(n).add(t); }
   const out = [], state = new Map();
   const visit = (n, trail) => {
     if (state.get(n) === 2) return true;
@@ -168,7 +180,10 @@ export function loadScene(json, clipOf) {
   const actors = {};
   for (const [n, a] of Object.entries(json.actors)) {
     actors[n] = {
-      name: n, rig: a.rig, path: a.path || null, at: a.at || [0, 0, 0], along: a.along || 0, side: a.side || 0,
+      name: n, rig: a.rig, path: a.path || null, along: a.along || 0, side: a.side || 0,
+      at: Array.isArray(a.at) && Array.isArray(a.at[0]) ? normKeys(a.at) : normKeys([[0, a.at || [0, 0, 0]]]), hasAt: a.at !== undefined,
+      onPath: a.onPath ? normKeys(a.onPath) : null,
+      aim: a.aim ? { ref: a.aim.at.includes('.') ? splitRef(a.aim.at) : { actor: a.aim.at, name: null }, w: normKeys(a.aim.w), turn: a.aim.turn || 0 } : null,
       face: a.face === undefined ? 'forward' : a.face, scale: a.scale,
       tilt: a.tilt ? normKeys(a.tilt) : null, rise: a.rise ? normKeys(a.rise) : null,
       clips: a.clips.map(([t, ref, o]) => ({ t, ref, clip: clips.get(ref), fade: (o && o.fade) ?? 0.15, loop: o && o.loop !== undefined ? !!o.loop : null, stride: (o && o.stride) || 0, speed: (o && o.speed) || 0, minRate: (o && o.minRate) ?? 0.2 })),
@@ -177,7 +192,7 @@ export function loadScene(json, clipOf) {
   }
   const holds = (json.holds || []).map((h) => {
     const f = splitRef(h.from), to = splitRef(h.to);
-    return { key: `${h.from}>${h.to}`, from: f, to, offset: h.offset || null, reach: h.reach ? normKeys(h.reach) : null, tow: h.tow ? normKeys(h.tow) : null, lift: h.lift ? normKeys(h.lift) : null };
+    return { key: `${h.from}>${h.to}`, from: f, to, offset: h.offset || null, taut: !!h.taut, reach: h.reach ? normKeys(h.reach) : null, tow: h.tow ? normKeys(h.tow) : null, lift: h.lift ? normKeys(h.lift) : null, trail: h.trail ? normKeys(h.trail) : null };
   });
   const c = json.checks || {};
   return {
@@ -199,7 +214,13 @@ function makePath(p, length) {
   const total = cum[cum.length - 1];
   return {
     total, speed,
-    distAt(t) { const f = Math.max(0, t) / dt, i = Math.min(n - 2, Math.floor(f)), u = Math.min(1, f - i); return dist[i] + (dist[i + 1] - dist[i]) * u; },
+    // Past the end of the table (a host playing a haul on until it arrives) it carries on at the last speed.
+    distAt(t) {
+      const f = Math.max(0, t) / dt;
+      if (f >= n - 1) return dist[n - 1] + sampleKeys(speed, (n - 1) * dt) * (Math.max(0, t) - (n - 1) * dt);
+      const i = Math.floor(f), u = f - i;
+      return dist[i] + (dist[i + 1] - dist[i]) * u;
+    },
     speedAt(t) { return sampleKeys(speed, t); },
     // A point s metres along (straight on past either end), into out (x, z).
     pointAt(s, out) {
@@ -216,7 +237,8 @@ function makePath(p, length) {
 const _v = new THREE.Vector3(), _v2 = new THREE.Vector3(), _h = new THREE.Vector3(), _g = new THREE.Vector3();
 const _p2 = new THREE.Vector2(), _q2 = new THREE.Vector2();
 const _m = new THREE.Matrix4(), _mi = new THREE.Matrix4(), _qy = new THREE.Quaternion(), _qt = new THREE.Quaternion(), _e = new THREE.Euler();
-const _s = new THREE.Vector3();
+const _s = new THREE.Vector3(), _gv = new THREE.Vector3();
+const lerpAngle = (a, b, w) => a + Math.atan2(Math.sin(b - a), Math.cos(b - a)) * w;
 
 // How low each limb's end sits when the rig stands at rest, plus a margin: at or under that it's on
 // the ground. Limbs that don't stand on anything at rest (the marine's hands) get null. Per rig, once.
@@ -227,8 +249,8 @@ function contactHeights(rig) {
   inst.group.updateWorldMatrix(true, true);
   const out = {};
   for (const [cn, ch] of Object.entries(inst.def.chains)) {
-    const y = inst.R[ch.end] ? new THREE.Vector3().setFromMatrixPosition(inst.R[ch.end].matrixWorld).y / inst.group.scale.y : Infinity;
-    out[cn] = y < 0.2 ? y + 0.06 : null;
+    const y = inst.R[ch.end] ? new THREE.Vector3().setFromMatrixPosition(inst.R[ch.end].matrixWorld).y : Infinity;   // metres, at display scale
+    out[cn] = y < 0.26 ? y + 0.06 : null;
   }
   CONTACT.set(rig, out);
   return out;
@@ -240,6 +262,13 @@ function contactHeights(rig) {
 export function createScene(scene, opts = {}) {
   const root = new THREE.Group();
   root.name = 'scene:' + scene.name;
+  // opts.paths: { name: [[x, y, z], ...] } lays a path where the host needs it (to this cave's mouth),
+  // keeping the scene's speed keys.
+  const paths = { ...scene.paths };
+  for (const [n, pts] of Object.entries(opts.paths || {})) {
+    if (!scene.paths[n]) throw new Error(`scene "${scene.name}" has no path "${n}" to lay out`);
+    paths[n] = makePath({ points: pts, speed: scene.source.paths[n].speed }, scene.length);
+  }
   if (opts.parent) opts.parent.add(root);
   const A = {};
   for (const [n, a] of Object.entries(scene.actors)) {
@@ -247,7 +276,7 @@ export function createScene(scene, opts = {}) {
     const inst = given || rigs.get(a.rig).create(a.scale !== undefined ? { scale: a.scale } : {});
     if (!given) root.add(inst.group);
     inst.group.updateWorldMatrix(true, false);
-    const scale = inst.group.getWorldScale(new THREE.Vector3());
+    const scale = worldScale(inst.group, new THREE.Vector3());
     A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map() };
   }
   // A joint by name: a limb's name means its end (a hand, an ankle).
@@ -263,7 +292,7 @@ export function createScene(scene, opts = {}) {
 
   const gripPoint = (h, out) => {
     out.setFromMatrixPosition(h.toJ.matrixWorld);
-    if (h.offset) out.add(_v2.set(...h.offset).applyQuaternion(h.toJ.getWorldQuaternion(_qt)));
+    if (h.offset) out.add(_v2.set(...h.offset).applyQuaternion(worldQuat(h.toJ, _qt)));
     return out;
   };
   // Put a body where the scene says, in its own parent's frame (the host's marine hangs off the player).
@@ -277,25 +306,71 @@ export function createScene(scene, opts = {}) {
     if (g.parent) { g.parent.updateWorldMatrix(true, false); _m.premultiply(_mi.copy(g.parent.matrixWorld).invert()); }
     _m.decompose(g.position, g.quaternion, _v2);
     // Keep the body's own size: its world scale when the scene took it, in its parent's frame.
-    const ps = g.parent ? g.parent.getWorldScale(_v2) : _v2.set(1, 1, 1);
+    const ps = g.parent ? worldScale(g.parent, _v2) : _v2.set(1, 1, 1);
     g.scale.set(a.scale.x / ps.x, a.scale.y / ps.y, a.scale.z / ps.z);
     g.updateWorldMatrix(false, true);
   };
+  // The ground under a point in scene space, as a scene-space height (0 without a ground).
+  const groundAt = (x, z) => {
+    if (!opts.ground) return 0;
+    root.updateWorldMatrix(true, false);
+    root.localToWorld(_gv.set(x, 0, z));
+    const gy = opts.ground(_gv.x, _gv.z);
+    return root.worldToLocal(_gv.set(_gv.x, gy, _gv.z)).y;
+  };
   const place = (a) => {
     const s = a.spec;
+    const at = sampleKeys(s.at, T);
+    let yaw = (typeof s.face === 'number' ? s.face : 0) * D2R;
+    a.pos.set(at[0], at[1], at[2]);
     if (s.path) {
-      const P = scene.paths[s.path];
+      const P = paths[s.path];
       const d = P.distAt(T) + s.along;
       P.pointAt(d, _p2);
       const ahead = P.pointAt(d + 0.25, _q2), bx = ahead.x, bz = ahead.y;
       const behind = P.pointAt(d - 0.25, _q2);
       const heading = Math.atan2(bx - behind.x, bz - behind.y);
-      a.yaw = heading + (s.face === 'back' ? Math.PI : s.face === 'forward' ? 0 : s.face * D2R);
-      a.pos.set(_p2.x - Math.cos(heading) * s.side, 0, _p2.y + Math.sin(heading) * s.side);
-    } else {
-      a.yaw = (typeof s.face === 'number' ? s.face : 0) * D2R;
-      a.pos.set(s.at[0], s.at[1], s.at[2]);
+      const py = heading + (s.face === 'back' ? Math.PI : s.face === 'forward' ? 0 : s.face * D2R);
+      const px = _p2.x - Math.cos(heading) * s.side, pz = _p2.y + Math.sin(heading) * s.side;
+      // On the path, or blending onto it from "at" (a lunge that ends where the haul starts).
+      const w = s.onPath ? sampleKeys(s.onPath, T) : 1;
+      a.pos.set(at[0] + (px - at[0]) * w, at[1] * (1 - w), at[2] + (pz - at[2]) * w);
+      yaw = s.onPath ? lerpAngle(yaw, py, w) : py;
     }
+    // Facing another body: a creature grabs facing what it grabs, then turns away to go.
+    if (s.aim) {
+      const w = sampleKeys(s.aim.w, T);
+      if (w > 0) {
+        const t = A[s.aim.ref.actor];
+        if (s.aim.ref.name) { const j = jointOf(s.aim.ref); j.updateWorldMatrix(true, false); _gv.setFromMatrixPosition(j.matrixWorld); }
+        else t.inst.group.getWorldPosition(_gv);
+        root.worldToLocal(_gv);
+        const dx = _gv.x - a.pos.x, dz = _gv.z - a.pos.z;
+        if (Math.hypot(dx, dz) > 1e-3) {
+          // Which way round it turns between facing the target and its own heading: the short way, or
+          // the way "turn" says (1 turns to its left, -1 to its right), for a turn near 180°.
+          let d = Math.atan2(Math.sin(Math.atan2(dx, dz) - yaw), Math.cos(Math.atan2(dx, dz) - yaw));
+          if (s.aim.turn && Math.sign(d) !== Math.sign(s.aim.turn) && Math.abs(d) > Math.PI * 0.5) d -= Math.sign(d) * Math.PI * 2;
+          yaw += d * Math.min(1, w);
+        }
+      }
+    }
+    // Handed over from gameplay: start where the host's body really was, and ease into the scene.
+    const en = opts.enter && opts.enter[s.name];
+    if (en && en.time > 0 && T < en.time) {
+      const u = EASES.smooth(T / en.time);
+      if (!a.enterFrom) {
+        root.updateWorldMatrix(true, false);
+        const p0 = root.worldToLocal(en.position.clone());
+        _qt.setFromRotationMatrix(root.matrixWorld);
+        const rootYaw = new THREE.Euler().setFromQuaternion(_qt, 'YXZ').y;
+        a.enterFrom = { p: p0, yaw: (en.yaw ?? yaw + rootYaw) - rootYaw };
+      }
+      a.pos.lerpVectors(a.enterFrom.p, a.pos, u);
+      yaw = lerpAngle(a.enterFrom.yaw, yaw, u);
+    }
+    a.yaw = yaw;
+    a.pos.y += groundAt(a.pos.x, a.pos.z);
     if (s.rise) a.pos.y += sampleKeys(s.rise, T);
     placeBody(a);
   };
@@ -308,7 +383,7 @@ export function createScene(scene, opts = {}) {
     const entry = s.clips[idx];
     if (idx !== a.clipIdx) {
       if (a.clipIdx >= 0 && entry.fade > 0) { const pe = s.clips[a.clipIdx]; a.fade = { entry: pe, ct: a.ct, age: 0, dur: entry.fade }; }
-      a.clipIdx = idx; a.ct = 0; a.inst.plants = {};
+      a.clipIdx = idx; a.ct = 0;   // pins carry over: a foot planted at the change stays planted
     }
     const clip = entry.loop === null ? entry.clip : { ...entry.clip, loop: entry.loop };
     // Stepping at the ground's speed: a stride is metres per play of the clip.
@@ -326,7 +401,22 @@ export function createScene(scene, opts = {}) {
     }
     const targets = {};
     for (const [k, j] of Object.entries(a.targetJ)) targets[k] = new THREE.Vector3().setFromMatrixPosition(j.matrixWorld);
-    applyPose(a.inst, pose, { targets, reach });
+    // A limb another body holds (towing or lifting it) isn't planted by its own clip any more.
+    const free = {};
+    // By as much as the hold has it: the lift when there is one (the limb is going to the hand), else the tow.
+    for (const h of scene.holds) if (h.to.actor === s.name && a.inst.def.chains[h.to.name]) {
+      const w = h.lift ? sampleKeys(h.lift, T) || 0 : sampleKeys(h.tow, T) || 0;
+      if (w > 0) free[h.to.name] = Math.max(free[h.to.name] || 0, w);
+    }
+    // A body still easing in from gameplay doesn't pin its feet yet: a pin taken where the game had
+    // the foot would hold it there while the body slides into the scene under it (a knee folds up,
+    // then springs when the pin lets go). It pins where it stands once it has arrived.
+    const en = opts.enter && opts.enter[s.name];
+    if (a.given && en && en.time > 0 && T < en.time) {
+      for (const st of Object.values(a.inst.plants)) { st.at = null; st.carry = null; st.pin = null; st.swing = null; }
+      a.inst.stepping = 0;
+    }
+    applyPose(a.inst, pose, { targets, reach, dt, free });
     return events;
   };
 
@@ -343,8 +433,11 @@ export function createScene(scene, opts = {}) {
     for (const n of scene.order) {
       const a = A[n];
       // Ground speed from the path: what a stride is matched against.
-      a.speed = a.spec.path ? scene.paths[a.spec.path].speedAt(T) : 0;
       place(a);
+      // Ground speed of where the scene puts it (a path, a keyed "at", or both): what a stride matches.
+      a.speed = a.lastBase && dt > 0 ? Math.hypot(a.pos.x - a.lastBase.x, a.pos.z - a.lastBase.z) / dt
+        : (a.spec.path ? Math.abs(paths[a.spec.path].speedAt(T)) : 0);
+      a.lastBase = a.pos.clone();
       const reach = {};
       for (const h of scene.holds) if (h.from.actor === n) {
         const w = sampleKeys(h.reach, T) || 0;
@@ -355,23 +448,75 @@ export function createScene(scene, opts = {}) {
       // This actor's holds on bodies already posed: tow them along the ground, lift the held limb.
       for (const h of scene.holds) if (h.from.actor === n) {
         const b = A[h.to.actor];
-        const tow = sampleKeys(h.tow, T) || 0, lift = sampleKeys(h.lift, T) || 0;
+        const tow = sampleKeys(h.tow, T) || 0, lift = sampleKeys(h.lift, T) || 0, trail = sampleKeys(h.trail, T) || 0;
         _h.setFromMatrixPosition(h.fromJ.matrixWorld);
         b.towed = tow > 0;
         // Lift, then tow, then lift again: lifting a leg moves the ankle over the ground too, so the
         // body is towed to where the lifted ankle ends up, and the leg settles onto the hand from there.
+        // Trail: a body hauled by one limb swings round to stretch out behind the grip, away from
+        // whoever has it (its own +Z, feet to head, points from the holder to it).
+        if (trail > 0 && tow > 0) {
+          root.worldToLocal(_v.copy(_h));
+          A[h.from.actor].inst.group.getWorldPosition(_v2); root.worldToLocal(_v2);
+          const dx = _v.x - _v2.x, dz = _v.z - _v2.z;
+          if (Math.hypot(dx, dz) > 1e-3) { b.yaw = lerpAngle(b.yaw, Math.atan2(dx, dz), Math.min(1, trail)); placeBody(b); }
+        }
         if (lift > 0) solveChain(b.inst, h.to.name, _h, lift);
         for (let k = 0; tow > 0 && k < 4; k++) {
           gripPoint(h, _g);
           root.worldToLocal(_v.copy(_h)); root.worldToLocal(_v2.copy(_g));
           const dx = (_v.x - _v2.x) * tow, dz = (_v.z - _v2.z) * tow;
           if (Math.hypot(dx, dz) < 1e-4) break;
+          const g0 = groundAt(b.pos.x, b.pos.z);
           b.pos.x += dx; b.pos.z += dz;
+          b.pos.y += groundAt(b.pos.x, b.pos.z) - g0;
           placeBody(b);
           b.inst.group.updateWorldMatrix(false, true);
           if (lift > 0) solveChain(b.inst, h.to.name, _h, lift);
         }
+          // Taut: a body hauled by a limb stretches it. Slide the body back from the hand (along the
+        // ground, the way it trails) until that limb could just reach, so it's pulled straight.
+        for (let k = 0; h.taut && tow > 0 && lift > 0 && k < 2; k++) {
+          const ch = b.inst.def.chains[h.to.name];
+          const L = (ch.lengths[0] + ch.lengths[1]) * (b.inst.group.scale.x || 1) * 0.985;
+          const hip = _v.setFromMatrixPosition(b.inst.R[ch.root].matrixWorld);
+          const dy = _h.y - hip.y, dh = Math.hypot(_h.x - hip.x, _h.z - hip.z);
+          const want = Math.sqrt(Math.max(0, L * L - dy * dy));
+          if (dh > 1e-3 && want > dh + 1e-3) {
+            root.worldToLocal(hip); root.worldToLocal(_v2.copy(_h));
+            const ux = (hip.x - _v2.x), uz = (hip.z - _v2.z), ul = Math.hypot(ux, uz) || 1;
+            const tw = tow * Math.min(1, lift) ** 2;   // it tightens as the leg is lifted, not in one jerk
+            b.pos.x += (ux / ul) * (want - dh) * tw; b.pos.z += (uz / ul) * (want - dh) * tw;
+            placeBody(b); b.inst.group.updateWorldMatrix(false, true);
+            solveChain(b.inst, h.to.name, _h, lift);
+          }
+        }
+        // Hung by it: if the held limb, pulled straight, still doesn't reach up to the hand, the body
+        // comes off the ground by the difference (up to 0.8 m): it's being lifted by the leg.
+        if (tow > 0 && lift > 0) {
+          gripPoint(h, _g);
+          const up = (_h.y - _g.y) * tow;
+          if (up > 0.01) {
+            root.worldToLocal(_v.set(0, 0, 0).add(_h)); root.worldToLocal(_v2.copy(_g));
+            b.pos.y += Math.min(0.8, _v.y - _v2.y) * Math.min(1, lift) ** 2;   // only once the leg is really held up
+            placeBody(b); b.inst.group.updateWorldMatrix(false, true);
+            solveChain(b.inst, h.to.name, _h, lift);
+          }
+        }
       }
+    }
+    // A body handed over mid-pose (the marine was running with his rifle up) eases from that pose
+    // into the scene's over its "enter" time, joint by joint, instead of jumping to it in one frame.
+    for (const a of Object.values(A)) {
+      const en = opts.enter && opts.enter[a.spec.name];
+      if (!a.given || !en || !(en.time > 0) || T >= en.time || !a.inst.before) continue;
+      const u = EASES.smooth(Math.min(1, T / en.time));
+      for (const [o, r] of a.inst.before) {
+        _qt.copy(o.quaternion); _v.copy(o.position);   // the scene's pose, before it's overwritten
+        slerpTo(o.quaternion.copy(r.q), _qt, u);
+        o.position.lerpVectors(r.p, _v, u);
+      }
+      a.inst.group.updateWorldMatrix(false, true);
     }
     // Checks, after everyone is where they end up this frame.
     for (const h of scene.holds) {
@@ -410,8 +555,10 @@ export function createScene(scene, opts = {}) {
       a.inst.group.getWorldPosition(_v); root.worldToLocal(_v);
       const sp = a.lastXZ && dt > 0 ? Math.hypot(_v.x - a.lastXZ.x, _v.z - a.lastXZ.y) / dt : 0;
       a.lastXZ = new THREE.Vector2(_v.x, _v.z);
+      // [lowest, highest] m/s, optionally only from a time (and to one): a lunge is allowed to be fast.
       const range = scene.checks.speed[n];
-      const vb = !!range && a.lastXZ && (sp < range[0] - 1e-6 || sp > range[1] + 1e-6);
+      const inWindow = range && T >= (range[2] ?? 0) - 1e-9 && T <= (range[3] ?? Infinity) + 1e-9;
+      const vb = !!inWindow && dt > 0 && (sp < range[0] - 1e-6 || sp > range[1] + 1e-6);
       checks.speed[n] = { value: sp, bad: vb };
       checks.bad ||= vb;
       noteWorst('speed', n, sp, { bad: vb });
@@ -433,7 +580,7 @@ export function createScene(scene, opts = {}) {
   const reset = () => {
     T = 0;
     for (const k of Object.keys(worst)) delete worst[k];
-    for (const a of Object.values(A)) { a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; }
+    for (const a of Object.values(A)) { a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; a.inst.stepping = 0; a.enterFrom = null; a.lastBase = null; }
     // Time 0: everyone placed and posed, nothing moved yet.
     return step(0);
   };
@@ -442,6 +589,8 @@ export function createScene(scene, opts = {}) {
     root, actors: Object.fromEntries(Object.entries(A).map(([n, a]) => [n, { inst: a.inst, get speed() { return a.speed; }, get rate() { return a.rate; } }])),
     get t() { return T; },
     get done() { return T >= scene.length - 1e-9; },
+    // How far along a path the scene is (metres), and how long the path is: the host ends a haul on arrival.
+    path(name) { const P = paths[name]; return P ? { distance: P.distAt(T), total: P.total } : null; },
     // The worst of each check since the last reset/seek, keyed "kind:what": gap:guardian.handR>marine.footL,
     // slide:guardian.footL, speed:guardian, snap:guardian. Each { kind, key, value, t, bad, ... }.
     get worst() { return { ...worst }; },
@@ -454,6 +603,12 @@ export function createScene(scene, opts = {}) {
       while (T < target - 1e-9) r = step(Math.min(STEP, target - T));
       return r;
     },
-    reset
+    reset,
+    // Done with it: the host's own bodies go back exactly as they were handed over, the scene's
+    // own bodies and its root leave the world.
+    dispose() {
+      for (const a of Object.values(A)) if (a.given && a.inst.restore) a.inst.restore();
+      root.removeFromParent();
+    }
   };
 }

@@ -80,8 +80,15 @@
     }, 9000, () => { const sk = T.getScriptedKill(); return !!sk && sk.dragDone; }, () => {
       const sk = T.getScriptedKill();
       if (sk && sk.drag && !sk.dragDone && sk.dragT > 0.7) {
-        const held = sk.side < 0 ? 'kneeLG' : 'kneeRG', free = sk.side < 0 ? 'kneeRG' : 'kneeLG';
-        heldKnee.push(M()[held].rotation.x); freeKnee.push(M()[free].rotation.x);
+        // CL-64: when the studio scene plays the drag, the scene decides the leg it takes (the
+        // guardian's right hand on his left ankle, studio/scenes/guardian-grab-drag.json), not the
+        // side he came in on.
+        const left = sk.scene ? true : sk.side < 0;
+        const held = left ? 'kneeLG' : 'kneeRG', free = left ? 'kneeRG' : 'kneeLG';
+        // The knee's bend read off its quaternion: the scene poses by quaternion, and the test page's
+        // stand-in three doesn't carry that back into .rotation (real three does).
+        const bendOf = (j) => { const q = j.quaternion; return Math.sign(q.x * q.w || 1) * 2 * Math.acos(Math.min(1, Math.abs(q.w))); };   // a knee turns about X only
+        heldKnee.push(bendOf(M()[held])); freeKnee.push(bendOf(M()[free]));
       }
     });
     const skA = T.getScriptedKill();

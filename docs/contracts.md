@@ -438,3 +438,12 @@ CU-44) and, from CL-62, the game. The format is `docs/studio.md`; everyone impor
 - `applyPose` takes `reach: { chain: { at, w } }`; `solveChain(inst, chain, target, w)` places one limb;
   `ikLimb(..., endLocal)` aims a limb whose end sits off the bone line. The guardian's clips are
   unchanged (the bake check still passes).
+- CL-64: the game plays scenes. `index.html` imports `studio/index.js` (static) and loads
+  `guardian-grab-drag` with `fetchScene`; the cave drag (`startGrabScene` / `updateGrabScene` /
+  `endGrabScene`, next to `updateCaveDrag`) adopts the game's own guardian rig (`rigs.get('guardian')
+  .create({ group: rigRoot })`) and marine, lays the haul path to the mouth, and hands both back with
+  `sp.dispose()` at the cut. If the scene can't load, the old hand-coded drag still runs. New in the
+  player: the clip channel `step`; `applyPose(..., { dt, free })`; `createScene` options `paths`,
+  `ground`, `enter`; `sp.path()`, `sp.dispose()`; `fetchScene(name)`. The studio does its rotations
+  through quaternions and world matrices only, so it gives the same answers on the test page's
+  stand-in three (tools/tests/fakethree.mjs) as on real three.

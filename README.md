@@ -70,20 +70,30 @@ The full list, including the scope, build menu and gear keys, is in [docs/contro
 | [Gameplay systems](docs/gameplay.md) | Kiosk, enemies, armor, weapons, builds, cash, Blood Moon |
 | [Graphics and rendering](docs/graphics-and-rendering.md) | Quality presets, GPU notes, renderer internals, URL switches |
 | [Soundtrack](docs/soundtrack.md) | The 15 tracks and how they are generated |
-| [Performance report](docs/performance-report.txt) | Notes from an earlier stability and performance pass |
+| [Studio guide](docs/studio-guide.md) | The animation studio in plain words: review folders, notes, scenes |
+| [Contracts](docs/contracts.md) | What each part of the game promises the others |
 
 ## Repository layout
 
 ```
-index.html               the whole game
+index.html               the game
 Play Dead-Wave.bat       Windows launcher (local server + Edge on the fast GPU)
-assets/
-  soundtrack/            the 15 tracks the game plays
-tools/
-  compose.py, synth.py   offline generator for the soundtrack (numpy, scipy)
-docs/                    reference documentation, plus images/ (key art)
+package.json             npm test / npm run serve
+core/ game/ ui/ world/   modules split out of index.html (audio, economy, HUD, cave guardian...)
+studio/                  the animation studio: rigs, clips, scenes and their player
+review/                  what the studio renders for Jerry to look at (one folder per asset)
+assets/                  soundtrack, intro, animation and world data
+vendor/                  three.js and fonts, byte-exact
+tools/                   test runner and tests (tools/tests), dev server, renderers, generators
+qa/                      Antigravity's GPU checks: reports, run scripts, screenshots
+crew/                    the crew's board, log, status cards and panel (Open Crew Panel.bat)
+handoffs/                every agent's report, one file per task
+docs/                    reference documentation; docs/archive holds old one-off notes
 .claude/launch.json      dev-server config for Claude Code's preview pane
 ```
+
+Local only (not in git): `Claude outputs/` (Claude's commit box and old previews) and
+`Claude Commit.bat` (commits and pushes a job Claude leaves in that box).
 
 ## Credits
 
