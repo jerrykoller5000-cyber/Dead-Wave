@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "model": "studio/models/prop/fuel-drum.json",
+  "modelVersion": 1,
+  "draws": 2,
+  "triangles": 328,
+  "budget": {
+    "draws": 2,
+    "triangles": 400
+  },
+  "over": false,
+  "joints": [
+    "top"
+  ],
+  "parts": 6,
+  "drawn": 7,
+  "merge": "color",
+  "page": {
+    "draws": 2,
+    "triangles": 328
+  },
+  "renderSeconds": 2.1
+}

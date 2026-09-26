@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "model": "studio/models/prop/evac-boat.json",
+  "modelVersion": 1,
+  "draws": 20,
+  "triangles": 2958,
+  "budget": {
+    "draws": 36,
+    "triangles": 4000
+  },
+  "over": false,
+  "joints": [
+    "waterline",
+    "board",
+    "motor",
+    "lamp",
+    "beam"
+  ],
+  "parts": 61,
+  "drawn": 100,
+  "merge": true,
+  "clip": "evac-boat/search",
+  "page": {
+    "draws": 20,
+    "triangles": 2958
+  },
+  "renderSeconds": 3.3
+}

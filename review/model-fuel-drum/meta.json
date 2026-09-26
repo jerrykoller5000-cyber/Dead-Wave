@@ -1,0 +1,9 @@
+{
+  "asset": "model-fuel-drum",
+  "kind": "model",
+  "owner": "claude",
+  "model": "prop/fuel-drum",
+  "file": "studio/models/prop/fuel-drum.json",
+  "look": "studio/model-lab.html?model=prop/fuel-drum",
+  "task": ""
+}

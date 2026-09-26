@@ -1,0 +1,9 @@
+{
+  "asset": "model-zombie",
+  "kind": "model",
+  "owner": "claude",
+  "model": "creature/zombie",
+  "file": "studio/models/creature/zombie.json",
+  "look": "studio/model-lab.html?model=creature/zombie",
+  "task": ""
+}

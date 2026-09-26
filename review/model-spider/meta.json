@@ -1,0 +1,9 @@
+{
+  "asset": "model-spider",
+  "kind": "model",
+  "owner": "claude",
+  "model": "creature/spider",
+  "file": "studio/models/creature/spider.json",
+  "look": "studio/model-lab.html?model=creature/spider&clip=spider/crawl",
+  "task": ""
+}

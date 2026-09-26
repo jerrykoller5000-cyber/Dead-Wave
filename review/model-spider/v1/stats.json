@@ -1,0 +1,52 @@
+{
+  "version": "v1",
+  "model": "studio/models/creature/spider.json",
+  "modelVersion": 1,
+  "draws": 30,
+  "triangles": 2636,
+  "budget": {
+    "draws": 32,
+    "triangles": 3200
+  },
+  "over": false,
+  "joints": [
+    "pelvis",
+    "chest",
+    "neck",
+    "head",
+    "jaw",
+    "hip1L",
+    "knee1L",
+    "foot1L",
+    "hip2L",
+    "knee2L",
+    "foot2L",
+    "hip3L",
+    "knee3L",
+    "foot3L",
+    "hip4L",
+    "knee4L",
+    "foot4L",
+    "hip1R",
+    "knee1R",
+    "foot1R",
+    "hip2R",
+    "knee2R",
+    "foot2R",
+    "hip3R",
+    "knee3R",
+    "foot3R",
+    "hip4R",
+    "knee4R",
+    "foot4R"
+  ],
+  "parts": 33,
+  "drawn": 77,
+  "merge": "color",
+  "clip": "spider/crawl",
+  "page": {
+    "draws": 30,
+    "triangles": 2636
+  },
+  "renderSeconds": 3.7
+}
