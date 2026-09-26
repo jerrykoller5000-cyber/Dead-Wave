@@ -1,7 +1,7 @@
 {
   "format": "dw-motion/1",
   "name": "shambler",
-  "version": 1,
+  "version": 2,
   "owner": "grokbot",
   "rig": "zombie",
   "notes": "The everyday dead. Rifle rounds jolt it and it keeps coming; a close shotgun shell staggers it back two or three steps and often puts it down; a grenade throws it. Gets up slowly, like something that has forgotten how.",
@@ -17,6 +17,6 @@
   },
   "fall": { "tone": { "legs": 0.04, "spine": 0.1, "arms": 0.28, "head": 0.12 }, "catch": 0.55 },
   "down": { "time": 1.6, "height": 0.4 },
-  "getup": { "time": 1.0 },
+  "getup": { "time": 1.2, "front": "zombie/getup-front", "back": "zombie/getup-back" },
   "death": { "tone": 0.03, "settle": 0.5 }
 }
