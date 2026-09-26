@@ -63,6 +63,8 @@ const isVec3 = (v) => isVec(v, 3);
 const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const isColor = (v) => typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v);
 const list = (a) => a.join(', ');
+// "a box", "an rbox", "an extrude": the article for a shape's name, as it's read aloud.
+const an = (w) => (/^([aeiou]|rbox)/.test(w) ? 'an ' : 'a ') + w;
 
 // "hipL" <-> "hipR", "hip1L" <-> "hip1R", "legL2" <-> "legR2": a capital L or R at the end, or before
 // trailing digits. Anything else has no twin (null).
@@ -73,6 +75,10 @@ export function mirrorName(name) {
 // A mirror across the model's YZ plane: a point's x flips, and a rotation's y and z turn the other way.
 const flipX = (v) => (v ? [-v[0], v[1], v[2]] : v);
 const flipRot = (v) => (v ? [v[0], -v[1], -v[2]] : v);
+
+// The review folder for a model's sheets and Jerry's notes on it: review/model-<name> (docs/studio.md §5).
+// Names are unique across kinds, so the folder name needs no kind in it.
+export const modelAsset = (json) => 'model-' + json.name;
 
 // --- The skeleton -----------------------------------------------------------------------------------
 // Every joint, twins included, parents first: [{ name, parent, at, rot, aim, pole, twinOf }]. Problems
@@ -201,7 +207,7 @@ export function validateModel(json) {
   const errs = [];
   if (!isObj(json)) return ['the model is not a JSON object'];
   if (json.format !== MODEL_FORMAT) errs.push(`"format" must be "${MODEL_FORMAT}" (got ${JSON.stringify(json.format)})`);
-  if (typeof json.name !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(json.name)) errs.push('"name" is missing: lower case, digits and dashes, the same as the file name (studio/models/<kind>/<name>.json)');
+  if (typeof json.name !== 'string' || !/^[a-z0-9][a-z0-9-]{0,57}$/.test(json.name)) errs.push('"name" is missing: lower case, digits and dashes, up to 58 of them, the same as the file name (studio/models/<kind>/<name>.json)');
   if (!MODEL_KINDS.includes(json.kind)) errs.push(`"kind" is ${MODEL_KINDS.map((k) => `"${k}"`).join(' or ')} (got ${JSON.stringify(json.kind)})`);
   for (const k of Object.keys(json)) if (!TOP_KEYS.includes(k)) errs.push(`unknown field "${k}" (a model has ${list(TOP_KEYS)})`);
   if (json.version !== undefined && !(Number.isInteger(json.version) && json.version >= 1)) errs.push('"version" is a whole number from 1: bump it with each change Jerry should look at');
@@ -256,12 +262,12 @@ export function validateModel(json) {
     for (const k of Object.keys(p)) {
       if (PART_KEYS.includes(k) || S.opts.includes(k)) continue;
       const owners = MODEL_SHAPES.filter((s) => SHAPES[s].opts.includes(k));
-      errs.push(owners.length ? `${at}: "${k}" is for ${list(owners)}, not a ${p.shape}` : `${at}: unknown field "${k}" (a part has ${list(PART_KEYS)}; a ${p.shape} also ${S.opts.length ? list(S.opts) : 'nothing else'})`);
+      errs.push(owners.length ? `${at}: "${k}" is for ${list(owners)}, not ${an(p.shape)}` : `${at}: unknown field "${k}" (a part has ${list(PART_KEYS)}; ${an(p.shape)} also ${S.opts.length ? list(S.opts) : 'nothing else'})`);
     }
     if (S.what) {
-      if (!Array.isArray(p.size) || !S.size.includes(p.size.length) || !p.size.every(isNum)) errs.push(`${at}: a ${p.shape}'s "size" is ${S.what}`);
+      if (!Array.isArray(p.size) || !S.size.includes(p.size.length) || !p.size.every(isNum)) errs.push(`${at}: ${an(p.shape)}'s "size" is ${S.what}`);
       else if (p.shape === 'cylinder' && p.size.length === 3 ? !(p.size[0] >= 0 && p.size[1] >= 0 && p.size[0] + p.size[1] > 0 && p.size[2] > 0) : !p.size.every((v) => v > 0)) errs.push(`${at}: "size" must be above 0`);
-    } else if (p.size !== undefined) errs.push(`${at}: a ${p.shape} has no "size" (${{ lathe: '"points" give its outline', extrude: '"outline" and "depth" give it', panel: '"corners" give it' }[p.shape]})`);
+    } else if (p.size !== undefined) errs.push(`${at}: ${an(p.shape)} has no "size" (${{ lathe: '"points" give its outline', extrude: '"outline" and "depth" give it', panel: '"corners" give it' }[p.shape]})`);
     if (p.shape === 'lathe') {
       if (!Array.isArray(p.points) || p.points.length < 2 || !p.points.every((q) => isVec(q, 2) && q[0] >= 0)) errs.push(`${at}: a lathe's "points" are at least two [radius, y], radius 0 or more, turned about the part's Y`);
       else if (p.points[p.points.length - 1][1] < p.points[0][1]) errs.push(`${at}: a lathe's "points" go from bottom to top (the faces point outward that way)`);
@@ -288,7 +294,7 @@ export function validateModel(json) {
       const pair = Array.isArray(sg.def);
       const v = pair && isNum(p.segments) ? [p.segments, sg.def[1]] : p.segments;
       const ok = pair ? isVec(v, 2) && v.every((n, k) => Number.isInteger(n) && n >= sg.lo[k] && n <= sg.hi[k]) : Number.isInteger(v) && v >= sg.lo && v <= sg.hi;
-      if (!ok) errs.push(pair ? `${at}: a ${p.shape}'s "segments" is [around (${sg.lo[0]}-${sg.hi[0]}), ${sg.second} (${sg.lo[1]}-${sg.hi[1]})], or one number for around` : `${at}: a ${p.shape}'s "segments" is a whole number from ${sg.lo} to ${sg.hi}`);
+      if (!ok) errs.push(pair ? `${at}: ${an(p.shape)}'s "segments" is [around (${sg.lo[0]}-${sg.hi[0]}), ${sg.second} (${sg.lo[1]}-${sg.hi[1]})], or one number for around` : `${at}: ${an(p.shape)}'s "segments" is a whole number from ${sg.lo} to ${sg.hi}`);
     }
     if (p.at !== undefined && !isVec3(p.at)) errs.push(`${at}: "at" is [x, y, z] metres on its joint`);
     if (p.rot !== undefined && !isVec3(p.rot)) errs.push(`${at}: "rot" is [x, y, z] degrees`);

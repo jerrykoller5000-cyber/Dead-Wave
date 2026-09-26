@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
-import { validateModel, buildModel, rigFromModel, restClip, instanceModel, mirrorName, MODEL_SHAPES } from './model.js';
+import { validateModel, buildModel, rigFromModel, restClip, instanceModel, mirrorName, modelAsset, MODEL_SHAPES } from './model.js';
 import { models } from './models/index.js';
 import { rigs, registerRig, rigCost } from './rigs.js';
 import { makeZombieRig } from './zombie.js';
@@ -49,6 +49,7 @@ test('every model on disk is listed, is valid, is named for its file and builds 
     assert.deepEqual(validateModel(json), [], ref);
     assert.equal(`${json.kind}/${json.name}`, ref, `${ref}: "kind" and "name" match where the file is`);
     assert.ok(!names.has(json.name), `${json.name}: a model's name is its review folder (model-<name>), so names are unique`);
+    assert.match(modelAsset(json), /^[a-z0-9][a-z0-9-]{1,63}$/, 'a review asset name the notes endpoint takes');
     names.add(json.name);
     const m = buildModel(json);
     assert.ok(!m.over, `${ref} is over its budget: ${JSON.stringify(m.cost)} against ${JSON.stringify(json.budget)}`);
