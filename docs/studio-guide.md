@@ -88,6 +88,31 @@ so you can always say "go back to v2's arms" or "v4 was better than v5".
 - **You'd rather just say it in chat.** That's fine. The agent writes your words into `notes.md`
   for you, so they're on record.
 
+## 6. The motion lab (how things react when they're hit)
+
+1. Double-click `Open Motion Lab.bat` in the game folder. A page opens with a zombie standing on a green floor.
+2. Pick a body at the top left:
+   - `zombie/shambler`, the everyday dead;
+   - `zombie/feral`, fast and light;
+   - `zombie/brute`, plated and heavy;
+   - `marine/marine`, him.
+3. Pick a weapon, then click the body where it hits:
+   - rifle;
+   - shotgun from 6 m, or close;
+   - machete;
+   - a brute's swing;
+   - grenade;
+   - a killing shot.
+4. **Quarter speed** slows it down. **Again** replays your last hit. **Stand up** resets it.
+5. The **muscle** sliders let you try stiffer or looser. You don't need to get numbers right: move one
+   until it looks better, then say so in a note. The note records the slider for the agent.
+6. Write your note bottom right and press **Save note for the crew**. Press **It's good** when a body
+   reacts the way you want. The note goes on the crew panel like any other, with the body's owner
+   (Grokbot for the zombies and the marine).
+
+The lab only saves notes when it's opened with the .bat file. Opened any other way, it copies the
+note for you to paste into the file it names.
+
 ## For the crew
 
 Jerry's notes come before your queue. The commands are in `docs/studio.md` §5:

@@ -441,6 +441,87 @@ tile), not the finished grab, which is CL-64's. The marine rig
 the grip point in the game; `rigs.get('marine').create({ group: marine })` adopts the game's own
 marine (its joint groups from `makeMarine()`'s `userData`) instead of building one.
 
+
+## 10. Reactions: bodies that get hit (D-42)
+
+Euphoria's idea, cut down for a browser horde (`studio/motion.js`). A body plays its clip until something
+hits it. Then it's a handful of points joined by bones, held in its pose by **muscles**. A hit drops
+their **tone** for a moment and it comes back. Planted feet stay put. When the body's weight leaves its
+feet it takes **stagger steps**. Past a limit it **falls**, puts its hands out, lies there, and **gets up**.
+Dead, it goes limp and **settles**, then sleeps. Nothing is hand-keyed: a reaction is the same
+physics every time, tuned by a preset file. The game, the scenes and the motion lab all run the
+same code, so what Jerry approves in the lab is what the game plays.
+
+**What reacts is the rig's `body`** (`studio/bodies.js`, hung on the rig in `studio/rigs.js`):
+- `points`: about 17 per humanoid, each on a joint with a mass, a radius and a tone group (`legs`,
+  `spine`, `arms`, `head`).
+- `bones`: held at their length.
+- `braces`: kept within a range, so the spine bends, the head nods and legs can't fold flat.
+- `hinges`: knees fold forward, elbows back. A hinge never forces the animation's own bend.
+- `segments`: how the points pose the joints again. `frame` for hips and chest, `aim` for limb bones,
+  `pos` for a pivot that moves.
+
+The marine and the zombies (`studio/zombie.js`, the game's `makeZombieMesh` layout) have one. The
+guardian, spiders and the colossus get theirs when they need to react.
+
+**How it reacts is a preset**, `studio/motion/<rig>/<name>.json` (listed in `studio/motion/index.js`):
+
+| Field | Meaning |
+| --- | --- |
+| `format`, `name`, `rig` | `dw-motion/1`, its name, the rig it's for. |
+| `version`, `owner` | Bump `version` with each change Jerry should look at; `owner` answers his notes (default grokbot). |
+| `tone` | 0..1 per group. A muscle's stiffness is tone²: at 1 a limb sags 3 mm, at 0.3 about 4 cm, at 0.1 a third of a metre, at 0.03 it's limp. |
+| `mass`, `strength` | Heavier bodies move less per hit; stronger ones pull back harder. |
+| `balance` | `step` (m off balance before a step), `fall` (m before it falls), `steps` (how many before it gives up), `stepTime`, `lift`, `lead` (how far ahead it reads its own motion), `anchor` (hips over feet), `support` (legs holding it up). |
+| `hits.<kind>` | For `bullet`, `pellet`, `blast`, `blade`, `crush`: `scale` (× power), `spread` (to nearby points), `slump` (how much each tone drops), `recover` (seconds to get it back), `knockdown` (power that drops it at once), `lift` (upward share, blasts). |
+| `fall`, `down`, `getup`, `death` | Tone while falling and `catch` (hands out); seconds lying and the height that counts as down; seconds to get up; tone when dead and seconds of stillness before it sleeps. |
+
+A hit's **power** is metres per second at the point hit. For reference, today's presets react like
+this: a rifle round (2.5) is a flinch; a shotgun shell at 6 m (3.2) is a stagger step; a close shell
+(6.5) knocks a shambler down; a grenade (8) throws it; a brute shrugs off the close shell.
+
+**In code** (each frame, after the animation posed the rig):
+
+```js
+import { rigs, loadMotion, createBody, createMotionPool } from './studio/index.js';
+import { presets } from './studio/motion/index.js';
+const pool = createMotionPool({ max: 8 });                    // at most 8 simulate at once (rule 12)
+const inst = rigs.get('zombie').create({ group: z.mesh });    // adopt the game's own zombie
+const body = createBody(inst, loadMotion(presets.json('zombie/shambler')), { ground: entityGroundY, pool });
+body.follow();                                                // read the animated pose
+body.hit({ at: [x, y, z], dir: [dx, dy, dz], power: 6.5, kind: 'pellet' });   // false if the pool is full
+const events = body.update(dt);                               // [['stagger'], ['step', {foot}], ['fall'], ['down'], ['getup'], ['recovered'], ['dead'], ['settled'], ...]
+body.apply();                                                 // the rig shows the reaction, by body.weight
+if (body.awake) z.position.add(body.drift);                   // the host takes on where it staggered to
+```
+
+`body.state` is `animated`, `react`, `fall`, `down`, `getup` or `dead`. `body.kill({...})` goes limp.
+`body.reset()` stands it back up on its animation. Bodies are deterministic, so a scene replays
+exactly. The pool refuses a hit only when every slot is mid-reaction; the host then plays its old
+reaction. Cost: about 0.07 ms a body a frame (48 at once, 2.6 ms, in Node).
+
+**In a scene**, an actor takes `"motion": "zombie/shambler"` (or a preset object) and
+`"hits": [[t, { "at": "chest" | [x, y, z], "dir": [x, y, z], "power": 6.5, "kind": "pellet" }]]`, and
+optionally `"kill": [t, {...}]`. `dir` and `at` are in scene space. The scene takes on the body's drift
+itself. The snap and slide checks skip a body while it reacts, because a fall turns fast by design.
+`node tools/studio.mjs scene studio/scenes/zombie-reactions.json` renders one into a review folder like
+any scene (`zombie-reactions`, `marine-knocked` are the first two).
+
+**The motion lab**, `studio/motion-lab.html` (Jerry: `Open Motion Lab.bat`):
+- Pick a body and a weapon, click where it hits, and watch at full or quarter speed.
+- Try the muscle sliders.
+- Write a note. The note goes into `review/motion-<rig>-<name>/notes.md` under
+  `## <date> · Jerry · v<version> · lab`, with what he last did and any slider he moved. `meta.json`
+  names the preset's owner, and `crew.mjs review` and the panel show it as waiting.
+- The owner changes the preset, bumps its `version` and `latest.txt`, and answers with
+  `crew.mjs review answer` as for any asset.
+- The notes come in through `POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`). It
+  writes only under `review/motion-*`.
+
+**Checking it:** `node --import ./studio/node-three.mjs --test "studio/*.test.mjs"`. `motion.test.mjs`
+covers standing, the flinch, the stagger, the knockdown and get-up, the limp death, the pose landing
+on its points, determinism, the brute, the pool, the 48-body cost and both review scenes.
+
 ---
 
 ## Later
@@ -450,12 +531,9 @@ marine (its joint groups from `makeMarine()`'s `userData`) instead of building o
 - **Sound:** the same loop for stingers and effects (a waveform, a spectrogram and the file, with
   notes).
 - **Models:** a turntable and a contact sheet for any prop or creature, with its budget.
-- **An active-ragdoll layer (Jerry, 2026-09-26; the Euphoria idea).** For a body being thrown about
-  (the marine dragged, thrown, knocked down), not for the creature doing it. The scene still decides
-  the intent (where the grip is, where the body goes); a light physics pass on the victim's limbs
-  (position-based, joint limits, the ground, pulled toward the clip's pose by a keyed stiffness) adds
-  the flop and drag. One body at a time in a cutscene is cheap in the browser; ragdoll deaths for the
-  horde are a separate, harder question (many bodies at once). After CL-64.
+- **Reactions beyond humanoids (after D-42, §10).** The guardian's thrown marine and the pit's pull as
+  bodies (a scene hands the victim to `createBody` mid-scene); spiders and the colossus as their own
+  `body` entries; hit arcs and dismemberment on top of the same points.
 
 ## Looked at and set aside (2026-09-26)
 

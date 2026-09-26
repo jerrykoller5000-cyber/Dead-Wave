@@ -1,0 +1,193 @@
+{
+  "format": "dw-scene/1",
+  "name": "zombie-reactions",
+  "length": 5,
+  "notes": "One hit each at 0.5 s, from the camera's side (+X), the bodies in a row across the frame: a rifle round, a shotgun shell from 6 m and from 1.5 m, a grenade at their feet, a kill, and a brute taking the close shell. The first review of D-42's reactions.",
+  "actors": {
+    "rifle": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        -6
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/shambler",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "chest",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "power": 2.5,
+            "kind": "bullet"
+          }
+        ]
+      ]
+    },
+    "shotgunFar": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        -3.6
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/shambler",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "chest",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "power": 3.2,
+            "kind": "pellet"
+          }
+        ]
+      ]
+    },
+    "shotgunClose": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        -1.2
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/shambler",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "chest",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "power": 6.5,
+            "kind": "pellet"
+          }
+        ]
+      ]
+    },
+    "grenade": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        1.2
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/shambler",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "pelvis",
+            "dir": [
+              -1,
+              0.5,
+              0
+            ],
+            "power": 8,
+            "kind": "blast"
+          }
+        ]
+      ]
+    },
+    "killed": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        3.6
+      ],
+      "face": 90,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/shambler",
+      "kill": [
+        0.5,
+        {
+          "at": "head",
+          "dir": [
+            -1,
+            0,
+            0
+          ],
+          "power": 3,
+          "kind": "bullet"
+        }
+      ]
+    },
+    "brute": {
+      "rig": "zombie",
+      "at": [
+        0,
+        0,
+        6.4
+      ],
+      "face": 90,
+      "scale": 1.38,
+      "clips": [
+        [
+          0,
+          "zombie/idle"
+        ]
+      ],
+      "motion": "zombie/brute",
+      "hits": [
+        [
+          0.5,
+          {
+            "at": "chest",
+            "dir": [
+              -1,
+              0,
+              0
+            ],
+            "power": 6.5,
+            "kind": "pellet"
+          }
+        ]
+      ]
+    }
+  }
+}

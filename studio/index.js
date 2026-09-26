@@ -7,3 +7,5 @@ export { MARINE, makeMarineRig, adoptMarine } from './marine.js';
 export { rigs, registerRig, rigCost } from './rigs.js';
 export { ikLimb } from './ik.js';
 export { loadReference, makeMannequin, poseReference } from './reference.js';
+export { MOTION_FORMAT, HIT_KINDS, validateMotion, loadMotion, createBody, createMotionPool } from './motion.js';
+export { ZOMBIE, makeZombieRig, adoptZombie } from './zombie.js';

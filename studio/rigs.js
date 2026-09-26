@@ -6,6 +6,8 @@ import * as THREE from 'three';
 import { loadClip, sampleClip, applyPose } from './clip.js';
 import { makeCaveGuardianRig, guardianGrip } from '../world/cave-guardian.js';
 import { makeMarineRig, adoptMarine, MARINE_CHAINS } from './marine.js';
+import { makeZombieRig, adoptZombie, ZOMBIE_CHAINS } from './zombie.js';
+import { MARINE_BODY, ZOMBIE_BODY } from './bodies.js';
 import guardianRest from './clips/guardian/rest.json' with { type: 'json' };
 
 const REG = new Map();
@@ -111,5 +113,22 @@ registerRig('marine', {
   chains: MARINE_CHAINS,
   head: null,
   stage: {},
+  // What reacts when he's hit (studio/motion.js, D-42): studio/bodies.js.
+  body: MARINE_BODY,
   budget: { draws: 40, triangles: 2000 }
+});
+
+// --- The zombies (studio/zombie.js; the game's makeZombieMesh() joint layout, D-42) ---------
+// One rig for every humanoid kind: opts.type ('shambler', 'feral', 'brute', ...) sets the droop and
+// the build, opts.scale the size (the game's ZOMBIE_TYPES scale). Spiders and the colossus aren't
+// humanoid and get their own entries when they react.
+registerRig('zombie', {
+  build: (opts) => makeZombieRig(opts),
+  adopt: (group) => adoptZombie(group),
+  displayScale: 1,
+  chains: ZOMBIE_CHAINS,
+  head: null,
+  stage: {},
+  body: ZOMBIE_BODY,
+  budget: { draws: 24, triangles: 1200 }
 });
