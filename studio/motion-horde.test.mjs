@@ -332,3 +332,60 @@ test('48 zombies with 8 reacting cost well under a millisecond or two a frame', 
   assert.ok(avg < 2, `${avg.toFixed(3)} ms a frame`);
   assert.equal(rigs.names().includes('zombie'), true);
 });
+
+// --- Review fixes (GB-65 to GB-67 review, 2026-09-26) ----------------------------------------------
+
+test('a corpse frozen between beginFrame() and update() stays lying (a full pool\'s new hit, or the host\'s freeze)', () => {
+  for (const how of ['pool', 'host']) {
+    const h = createHorde({ presets, max: 1 });
+    const dead = mockZombie('shambler', 0, 0), next = mockZombie('shambler', 4, 0);
+    assert.ok(h.kill(dead, { at: 'chest', dir: [0, 0, -1], power: 3 }));
+    const head = new THREE.Vector3();
+    const headY = () => { dead.mesh.updateWorldMatrix(true, true); return dead.mesh.userData.head.getWorldPosition(head).y; };
+    // Down on the ground and not yet settled, the way the game runs a frame: beginFrame, hits, update.
+    for (let f = 0; f < 120 && (f < 10 || h.body(dead).points().head[1] >= 0.35); f++) { h.beginFrame(); h.update(1 / 60); }
+    assert.ok(!h.frozen(dead), how + ': still settling');
+    h.beginFrame();
+    if (how === 'pool') assert.ok(h.hit(next, { power: 4.5, kind: 'pellet' }), 'the corpse gives up its slot');
+    else h.freeze(dead);
+    assert.ok(h.frozen(dead));
+    let worst = 0;
+    for (let f = 0; f < 40; f++) { if (f) h.beginFrame(); h.update(1 / 60); worst = Math.max(worst, headY()); }
+    assert.ok(worst < 0.5, `${how}: its head drawn ${worst.toFixed(2)} m up (lying is under 0.5 m)`);
+  }
+});
+
+test('the marine keeps walking while a blow staggers him: the body goes where the host moves him', () => {
+  const h = createHorde({ presets });
+  const g = makeMarineRig();
+  g.userData = { ...g.userData, ...rigNames(g) };
+  // The host: walking him on at 5 m/s x 0.6 (the game's pace while he reacts), and taking his drift.
+  assert.ok(h.adopt('m', { rig: 'marine', preset: 'marine/marine', group: g, move: (dx, dz) => { g.position.x += dx; g.position.z += dz; } }));
+  assert.ok(h.hit('m', { at: 'shoulderR', dir: [-0.2, 0.1, -1], power: 4, kind: 'crush' }));
+  let asked = 0, reacting = 0;
+  const x0 = g.position.x;
+  for (let f = 0; f < 120; f++) {
+    h.beginFrame();
+    if (f > 0 && h.state('m') === 'react') { g.position.x += 5 * 0.6 / 60; asked += 5 * 0.6 / 60; reacting++; }
+    h.update(1 / 60);
+  }
+  assert.ok(reacting > 20, `he reacted for ${reacting} frames`);
+  const went = g.position.x - x0;
+  assert.ok(went > asked * 0.7, `asked to walk ${asked.toFixed(2)} m, went ${went.toFixed(2)} m (the stagger rooted him before)`);
+  const p = h.body('m').points().pelvis;
+  assert.ok(Math.abs(p[0] - g.position.x) < 0.4, `his body went with him (pelvis at x ${p[0].toFixed(2)}, group at ${g.position.x.toFixed(2)})`);
+});
+
+test('a wall holds a reacting body: a blast beside it leaves the zombie on its own side (the host\'s solve hook)', () => {
+  const WALL = 0.5;                                   // a wall along x = 0.5; the zombie stands at 0, blown toward it
+  const solve = (key, x, z) => ({ x: Math.min(x, WALL - 0.3), z });
+  for (const withWall of [false, true]) {
+    const h = createHorde({ presets, solve: withWall ? solve : undefined });
+    const z = mockZombie();
+    assert.ok(h.hit(z, { at: 'pelvis', dir: [1, 0.3, 0], power: 8, kind: 'blast' }));
+    let far = -Infinity;
+    for (let f = 0; f < 240; f++) { h.beginFrame(); h.update(1 / 60); far = Math.max(far, h.body(z).points().pelvis[0], z.mesh.position.x); }
+    if (withWall) assert.ok(far < WALL, `with the wall it got to x ${far.toFixed(2)} (the wall is at ${WALL})`);
+    else assert.ok(far > WALL + 0.5, `with no wall the blast carries it ${far.toFixed(2)} m (so the test means something)`);
+  }
+});

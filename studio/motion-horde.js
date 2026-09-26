@@ -84,6 +84,9 @@ export function createHorde(opts = {}) {
   const lodFor = opts.lodFor || null;
   const onEvent = opts.onEvent || null;
   const moveFn = opts.move || null;
+  // solve(key, x, z) → { x, z }: where the host's walls and buildings let a body's group stand. A
+  // reaction that carries it into one is put back out, the body with it (body.shift).
+  const solveFn = opts.solve || null;
   const clipsFn = opts.clips || null;
   const presetOf = opts.presetFor || hordePresetFor;
   const now = opts.now || (() => performance.now());
@@ -181,7 +184,8 @@ export function createHorde(opts = {}) {
       key, c, body: b, inst: c.inst, group: c.inst.group, preset: c.preset, pooled: !!o.pooled,
       zombie: o.zombie || null, move: o.move || null, ground: o.ground || groundFn, keepYaw: !o.zombie,
       queue: [], reserved: false, frozen: false, killed: false, deadAt: -1, lost: new Set(),
-      clip: null, snap: null, yaw0: null, heading: 0, applied: false
+      clip: null, snap: null, yaw0: null, heading: 0, applied: false,
+      at: null, atFrame: -1           // where its group was when the last frame's reaction let go of it
     };
     // One body per mesh: a record the host forgot to release (its zombie is gone, the mesh is back
     // out of the pool on another) lets go before the new one takes over.
@@ -336,12 +340,34 @@ export function createHorde(opts = {}) {
     rec.clip = null; rec.snap = null;
   }
 
-  function takeDrift(rec, dx, dz) {
+  function moveGroup(rec, dx, dz) {
     const g = rec.group;
     if (rec.move) rec.move(dx, dz);
     else if (moveFn) moveFn(rec.key, dx, dz, g);
     else { g.position.x += dx; g.position.z += dz; }
     g.updateWorldMatrix(true, false);
+  }
+  function takeDrift(rec, dx, dz) {
+    moveGroup(rec, dx, dz);
+    if (!solveFn || typeof rec.body.shift !== 'function') return;
+    // Into a wall: the group goes back out, and the body with it, stopped against it.
+    _v.setFromMatrixPosition(rec.group.matrixWorld);
+    const s = solveFn(rec.key, _v.x, _v.z);
+    if (!s || !Number.isFinite(s.x) || !Number.isFinite(s.z)) return;
+    const ox = s.x - _v.x, oz = s.z - _v.z;
+    if (Math.abs(ox) + Math.abs(oz) < 1e-6) return;
+    moveGroup(rec, ox, oz);
+    rec.body.shift(ox, 0, oz, { stop: true });
+  }
+  // Where the host moved the group since the reaction last let go of it (the player walking the
+  // marine on, a zombie's AI, a wall's push): the body goes along, so a stagger slows him but doesn't
+  // root him where he stood. Only from the frame before: a body asleep since then starts afresh.
+  function carry(rec) {
+    const g = rec.group, b = rec.body;
+    if (!rec.at || rec.atFrame !== frame - 1 || typeof b.shift !== 'function' || b.state === 'animated') return;
+    _v.setFromMatrixPosition(g.matrixWorld);
+    const dx = _v.x - rec.at.x, dz = _v.z - rec.at.z;
+    if (Math.abs(dx) + Math.abs(dz) > 1e-6 && Math.hypot(dx, dz) < 5) b.shift(dx, 0, dz);
   }
 
   function stepRec(rec, dt, out) {
@@ -354,6 +380,7 @@ export function createHorde(opts = {}) {
     // Asleep until now: it starts from where the animation has it this frame, not moving (its last
     // reading could be seconds old). reset() hands back the slot canTake() held; hit() takes it again.
     if (b.state === 'animated') b.reset();
+    else carry(rec);
     if (rec.clip) {
       if (rec.keepYaw) faceHeading(g, rec.heading);
       rec.clip.player.update(dt);
@@ -376,6 +403,8 @@ export function createHorde(opts = {}) {
     if (rec.clip && b.state !== 'getup') stopGetup(rec);
     // Where the reaction moved it, taken on before it is drawn, so the body is drawn where it is.
     if (b.state !== 'animated' && !b.sleeping && (b.drift.x || b.drift.z)) takeDrift(rec, b.drift.x, b.drift.z);
+    _v.setFromMatrixPosition(g.matrixWorld);
+    (rec.at || (rec.at = new THREE.Vector3())).copy(_v); rec.atFrame = frame;
     // What the animation left on the joints the body writes, for beginFrame() to hand back.
     for (const e of c.anim) { e[1].copy(e[0].quaternion); e[2].copy(e[0].position); }
     b.apply();
@@ -392,7 +421,10 @@ export function createHorde(opts = {}) {
   function unapply(rec) {
     if (!rec.wrote) return;
     rec.wrote = false;
-    if (rec.frozen) return;
+    // A corpse keeps its pose: the host never animates one, and follow() puts back any joint the host
+    // didn't pose. Handing the animation back to one frozen before update() (a pool slot given up
+    // mid-frame, the host's own freeze) left it drawn standing where it lay.
+    if (rec.frozen || rec.killed) return;
     for (const [j, q, p] of rec.c.anim) { j.quaternion.copy(q); j.position.copy(p); }
   }
 

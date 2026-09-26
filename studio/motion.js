@@ -521,6 +521,31 @@ export function createBody(inst, preset, opts = {}) {
     fallDir.set(dx, 0, dz).normalize();
   }
 
+  // --- Moved by the host (body.shift) ---
+  // The host moved the body's group itself (the player walking the marine on while he staggers, a wall
+  // pushing a zombie back out): the whole body goes with it, planted feet and a step under way
+  // included, keeping its speed. { stop: true } is a wall: the speed into the way it was pushed goes
+  // (a body thrown at a wall stops there instead of sliding back in every frame).
+  body.shift = (dx, dy = 0, dz = 0, o = {}) => {
+    if (![dx, dy, dz].every(Number.isFinite)) return false;
+    for (let i = 0; i < n; i++) {
+      const k = i * 3;
+      P[k] += dx; P[k + 1] += dy; P[k + 2] += dz; Q[k] += dx; Q[k + 1] += dy; Q[k + 2] += dz;
+      A[k] += dx; A[k + 1] += dy; A[k + 2] += dz; A0[k] += dx; A0[k + 1] += dy; A0[k + 2] += dz;
+    }
+    for (const p of pin) if (p) { p[0] += dx; p[1] += dz; }
+    if (stepping) { stepping.from[0] += dx; stepping.from[1] += dz; stepping.to[0] += dx; stepping.to[1] += dz; }
+    const l = Math.hypot(dx, dz);
+    if (o.stop && l > 1e-9) {
+      const nx = dx / l, nz = dz / l;
+      for (let i = 0; i < n; i++) {
+        const k = i * 3, vn = (P[k] - Q[k]) * nx + (P[k + 2] - Q[k + 2]) * nz;
+        if (vn < 0) { Q[k] += nx * vn; Q[k + 2] += nz * vn; }
+      }
+    }
+    return true;
+  };
+
   // --- Lost parts (contract: body.lose) ---
   function relink() {
     const ok = (c) => live[c.a] && live[c.b];
