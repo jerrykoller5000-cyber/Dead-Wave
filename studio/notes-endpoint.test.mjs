@@ -67,6 +67,12 @@ before(async () => {
   fs.writeFileSync(path.join(gd, 'latest.txt'), 'v2\n');
   notesLib = await import(pathToFileURL(path.join(root, 'crew', 'notes.mjs')).href);
   fs.writeFileSync(path.join(gd, 'notes.md'), notesLib.notesStub('guardian-drag', 'v1', '2026-09-27') + '\n## 2026-09-27 · Jerry · v1\nFloaty.\n\n> claude · v2 · 2026-09-27: digs in\n');
+  // A motion folder the renderer drew a page for: its page is the renderer's, not the note door's.
+  const mr = path.join(root, 'review', 'motion-rendered');
+  fs.mkdirSync(mr, { recursive: true });
+  fs.writeFileSync(path.join(mr, 'meta.json'), JSON.stringify({ asset: 'motion-rendered', kind: 'motion', owner: 'grokbot', motion: 'zombie/x' }));
+  fs.writeFileSync(path.join(mr, 'latest.txt'), 'v1\n');
+  fs.writeFileSync(path.join(mr, 'index.html'), '<h1>the renderer drew this</h1>');
   const { serve } = await import(pathToFileURL(path.join(root, 'tools', 'serve.mjs')).href);
   server = await serve(root, 0);
   start = tree(root);
@@ -80,7 +86,7 @@ after(async () => {
 test('ping says the routes, so a page knows it can save before it tries', async () => {
   const r = await post('ping', {});
   assert.equal(r.code, 200);
-  assert.deepEqual(r.json.routes, ['note', 'scene', 'ping']);
+  assert.deepEqual(r.json.routes, ['note', 'notes', 'scene', 'ping']);
   assert.equal(r.json.limits.snapshot, 3 * 1024 * 1024);
 });
 
@@ -111,6 +117,14 @@ test('a note on a new asset makes its folder: meta.json, latest.txt, the stub, t
   assert.equal(notes.length, 1);
   assert.equal(notes[0].version, 'v3');
   assert.equal(notesLib.reviewState(notes, 'v3').state, 'waiting');
+  // Its page, the one the crew panel links: the version big at the top, the note, its picture.
+  assert.equal(r.json.page, 'review/motion-zombie-test/index.html');
+  const page = read('review/motion-zombie-test/index.html');
+  assert.match(page, /<h1>v3<\/h1>/);
+  assert.match(page, /He gets up too fast\./);
+  assert.match(page, /<img src="v3\/lab-\d{8}-\d{6}\.png"/);
+  assert.match(page, /waiting for the owner/);
+  assert.match(page, /pick <b>zombie\/test<\/b>/);
 });
 
 test('the next note goes on top, into the folder as it is (no meta needed now)', async () => {
@@ -124,6 +138,39 @@ test('the next note goes on top, into the folder as it is (no meta needed now)',
   assert.equal(notes[0].approved, true);
   // Two pictures in the same second each keep their own file.
   assert.equal(fs.readdirSync(path.join(root, 'review', 'motion-zombie-test', 'v3')).filter((f) => f.endsWith('.png')).length, 2);
+  // The page again, newest first, and nothing in a note is taken for HTML.
+  await post('note', { asset: 'motion-zombie-test', text: 'The <script>alert(1)</script> brute & "friends".' });
+  const page = read('review/motion-zombie-test/index.html');
+  assert.ok(page.indexOf('brute &amp;') < page.indexOf('>good<') && page.indexOf('>good<') < page.indexOf('He gets up'), 'newest first');
+  assert.match(page, /&lt;script&gt;alert\(1\)&lt;\/script&gt; brute &amp; &quot;friends&quot;/);
+  assert.ok(!page.includes('<script>'));
+  assert.match(page, /approved/);
+});
+
+test('notes reads a folder back as crew/notes.mjs does, newest first, and writes nothing', async () => {
+  const was = tree(root);
+  let r = await post('notes', { asset: 'motion-zombie-test' });
+  assert.equal(r.code, 200, JSON.stringify(r.json));
+  assert.equal(r.json.exists, true);
+  assert.equal(r.json.latest, 'v3');
+  assert.equal(r.json.owner, 'grokbot');
+  assert.equal(r.json.page, 'review/motion-zombie-test/index.html');
+  assert.equal(r.json.notes.length, 3);
+  assert.match(r.json.notes[0].text, /brute & "friends"/);
+  assert.equal(r.json.notes[1].state, 'approved');
+  assert.equal(r.json.notes[2].version, 'v3');
+  r = await post('notes', { asset: 'nobody-here' });
+  assert.deepEqual([r.code, r.json.exists, r.json.notes.length, r.json.state], [200, false, 0, 'no-notes']);
+  r = await post('notes', { asset: '../escape' });
+  assert.equal(r.code, 400);
+  assert.deepEqual(changed(was, tree(root)), []);
+});
+
+test("a page the renderer wrote is left as it is; a lab's page is not written for a render folder", async () => {
+  let r = await post('note', { asset: 'motion-rendered', text: 'On the rendered one.' });
+  assert.equal(r.code, 200, JSON.stringify(r.json));
+  assert.equal(r.json.page, undefined);
+  assert.equal(read('review/motion-rendered/index.html'), '<h1>the renderer drew this</h1>');
 });
 
 test("a folder the renderer made takes a note with no meta, at latest.txt's version, under the stub", async () => {
@@ -132,6 +179,9 @@ test("a folder the renderer made takes a note with no meta, at latest.txt's vers
   assert.equal(r.json.owner, 'claude');
   assert.equal(r.json.version, 'v2');
   assert.equal(r.json.picture, undefined);
+  // A render folder's page is the renderer's to write.
+  assert.equal(r.json.page, undefined);
+  assert.ok(!exists('review/guardian-drag/index.html'));
   const md = read('review/guardian-drag/notes.md');
   assert.ok(md.indexOf('Still floaty') < md.indexOf('Floaty.'), 'newest at the top');
   assert.ok(md.indexOf('Still floaty') > md.indexOf('-->'), 'under the stub');
@@ -275,9 +325,9 @@ test('a GET under /__studio/ is not a write; the files are still served', async 
 });
 
 test('everything written went into review/ or studio/scenes/lab-*.json', () => {
-  const allowed = /^(review\/[a-z0-9][a-z0-9-]{1,63}\/(meta\.json|latest\.txt|notes\.md|v\d+\/lab-\d{8}-\d{6}(-\d+)?\.png)|studio\/scenes\/lab-[a-z0-9-]{1,40}\.json)$/;
+  const allowed = /^(review\/[a-z0-9][a-z0-9-]{1,63}\/(meta\.json|latest\.txt|notes\.md|index\.html|v\d+\/lab-\d{8}-\d{6}(-\d+)?\.png)|studio\/scenes\/lab-[a-z0-9-]{1,40}\.json)$/;
   // The files the tests themselves put there to be refused are theirs, not the server's.
-  const planted = /^review\/(bad-latest|a-file|broken-meta)\b/;
+  const planted = /^review\/(bad-latest|a-file|broken-meta|motion-rendered\/(meta\.json|latest\.txt|index\.html))\b/;
   const written = changed(start, tree(root)).filter((f) => !planted.test(f));
   assert.ok(written.length >= 8, written.join(', '));
   for (const f of written) assert.match(f, allowed);

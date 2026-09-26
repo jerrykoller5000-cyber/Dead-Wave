@@ -7,11 +7,15 @@
 //        A folder that has no meta.json yet needs meta ({ kind: 'motion' | 'model', owner?, version?, ... }):
 //        it is made with meta.json from meta, latest.txt "v<meta.version or 1>" and the notes.md stub.
 //        snapshot: 'data:image/png;base64,...' (up to 3 MB), saved as review/<asset>/<latest>/lab-<utc time>.png
-//        and named in the note. → { ok, asset, file, owner, version, picture? }
+//        and named in the note. A lab's folder (meta.kind motion or model) also gets its page, index.html:
+//        the notes with their pictures (never over a page the renderer wrote).
+//        → { ok, asset, file, owner, version, created, picture?, page? }
 //   POST /__studio/note   { preset: "zombie/shambler", text, context? }
 //        The lab's first form: the asset is motion-<rig>-<name>, its meta read from the preset file.
 //   POST /__studio/scene  { name, json }
 //        → studio/scenes/lab-<name>.json, a scene an agent renders with node tools/studio.mjs scene.
+//   POST /__studio/notes  { asset }   (reads only) → { ok, exists, latest, owner, state, lookAt, page, notes }:
+//        the folder's notes as crew/notes.mjs reads them, newest first, so the lab can show them.
 //   POST /__studio/ping   → { ok, routes, limits }: a page asks whether it can save before it tries.
 //
 // Everything a page sends is checked here, because the server is on Jerry's PC: names are a short
@@ -20,7 +24,7 @@
 // with a sentence saying what is wrong.
 import fs from 'node:fs';
 import path from 'node:path';
-import { notesStub } from '../crew/notes.mjs';
+import { notesStub, parseNotes, reviewState } from '../crew/notes.mjs';
 
 export const ASSET = /^[a-z0-9][a-z0-9-]{1,63}$/;
 export const SCENE_NAME = /^[a-z0-9-]{1,40}$/;
@@ -213,7 +217,58 @@ function note(j, base) {
   fs.writeFileSync(notesFile, before + '\n\n' + entry + (after ? '\n' + after : ''));
   const out = { ok: true, asset, file: `review/${asset}/notes.md`, owner: meta.owner || 'claude', version, created };
   if (picture) out.picture = `review/${asset}/${picture}`;
+  // The first lab's folders say only `motion` in meta.json, not their kind.
+  if (KINDS.includes(meta.kind || (meta.motion ? 'motion' : null)) && labPage(dir, asset, meta, version)) out.page = `review/${asset}/index.html`;
   return out;
+}
+
+// A lab-made folder's page, review/<asset>/index.html. The crew panel links every folder's page and
+// the notes stub tells Jerry to open it, but only the renderer (tools/studio.mjs) writes one, and it
+// never renders a lab's folder. This one is plain HTML with no script, so it opens from the disk as
+// well: the latest version big at the top, how to look at it again, and every note with its picture
+// and the answers under it, newest first. It's written again with each note. A page the renderer
+// wrote is left as it is.
+const PAGE_MARK = '<!-- written by studio/notes-endpoint.mjs, again with each note -->';
+const STATE_WORDS = { waiting: 'waiting for the owner', taken: 'the owner is on it', answered: 'answered', approved: 'approved' };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function labPage(dir, asset, meta, version) {
+  const file = path.join(dir, 'index.html');
+  if (fs.existsSync(file) && !fs.readFileSync(file, 'utf8').includes(PAGE_MARK)) return false;
+  const md = fs.readFileSync(path.join(dir, 'notes.md'), 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '');
+  // The same headings crew/notes.mjs reads, in the same order, so each gets its state from it.
+  const states = parseNotes(md);
+  const sections = [];
+  let cur = null;
+  for (const line of md.split('\n')) {
+    const t = line.trim();
+    if (/^## /.test(t)) { cur = /\bv\d+\b/i.test(t) ? { head: t.slice(3), lines: [] } : null; if (cur) sections.push(cur); continue; }
+    if (cur && t) cur.lines.push(t);
+  }
+  const notes = sections.map((s, i) => {
+    const st = states[i] ? states[i].state : '';
+    const lines = s.lines.map((l) => {
+      const img = /^!\[([^\]]*)\]\((v\d+\/[\w.-]+\.png)\)$/.exec(l);
+      if (img) return `<img src="${esc(img[2])}" alt="${esc(img[1])}">`;
+      if (l.startsWith('>')) return `<blockquote>${esc(l.replace(/^>\s*/, ''))}</blockquote>`;
+      return `<p${/^\(In the lab: /.test(l) ? ' class="ctx"' : ''}>${esc(l)}</p>`;
+    }).join('');
+    return `<section><h2>${esc(s.head)} <span class="st">${esc(STATE_WORDS[st] || st)}</span></h2>${lines}</section>`;
+  }).join('\n');
+  const look = typeof meta.look === 'string' && /^[\w./?=&%-]+$/.test(meta.look) ? meta.look : null;
+  const what = meta.motion ? `double-click <b>Open Motion Lab.bat</b> in the game folder and pick <b>${esc(meta.motion)}</b>` : 'open the lab it came from';
+  const html = `<!doctype html><meta charset="utf-8"><title>${esc(asset)} ${esc(version)}</title>
+${PAGE_MARK}
+<style>body{margin:24px;max-width:980px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-size:64px;margin:0}
+.sub,.ctx,.st{color:#9aa3b2} .st{font-size:14px;font-weight:normal;margin-left:8px} h2{font-weight:normal;font-size:20px;margin:28px 0 6px}
+img{max-width:100%;display:block;margin:8px 0;border:1px solid #333b4a} blockquote{margin:6px 0;padding:4px 12px;border-left:3px solid #7cdea0}
+a{color:#e0b85a} section{border-top:1px solid #333b4a}</style>
+<h1>${esc(version)}</h1>
+<p class="sub">${esc(asset)} · owner ${esc(meta.owner || 'claude')}${meta.file ? ' · ' + esc(meta.file) : ''}</p>
+<p>To look at it again, ${what}${look ? ` (with the lab running: <a href="../../${esc(look)}">open it here</a>)` : ''}. Write your note in the lab, or in <code>notes.md</code> in this folder.</p>
+${notes || '<p class="sub">No notes yet.</p>'}
+`;
+  fs.writeFileSync(file, html);
+  return true;
 }
 
 function scene(j, base) {
@@ -236,8 +291,31 @@ function scene(j, base) {
   return { ok: true, name, file: rel, replaced, render: `node tools/studio.mjs scene ${rel}` };
 }
 
+// The notes a folder already has, as crew/notes.mjs reads them, newest first, so the lab can show Jerry
+// what he said before and what the owner answered. Read only. A folder that isn't there is no notes,
+// not an error, so a page can ask about any asset without a 404 in its console.
+function readNotes(j, base) {
+  checkAsset(j.asset);
+  const review = path.join(base, 'review');
+  const dir = path.join(review, j.asset);
+  if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return { ok: true, asset: j.asset, exists: false, latest: null, state: 'no-notes', notes: [] };
+  if (!inside(review, dir)) refuse(403, `review/${j.asset} leads outside review/`);
+  const read = (f) => { try { return fs.readFileSync(path.join(dir, f), 'utf8'); } catch { return ''; } };
+  const latest = read('latest.txt').trim();
+  const notes = parseNotes(read('notes.md'));
+  const st = reviewState(notes, VERSION.test(latest) ? latest : null);
+  let owner = null;
+  try { owner = JSON.parse(read('meta.json')).owner || null; } catch { /* no owner to say */ }
+  return {
+    ok: true, asset: j.asset, exists: true, latest: VERSION.test(latest) ? latest : null, owner, state: st.state, lookAt: st.lookAt,
+    page: fs.existsSync(path.join(dir, 'index.html')) ? `review/${j.asset}/index.html` : null,
+    notes: notes.slice(0, 20).map((n) => ({ date: n.date, who: n.who, version: n.version, text: n.text.slice(0, 600), state: n.state, answer: n.answer ? { agent: n.answer.agent, version: n.answer.version, text: n.answer.text.slice(0, 300) } : null }))
+  };
+}
+
 const ROUTES = new Map([
   ['note', { cap: LIMITS.note, run: note }],
+  ['notes', { cap: LIMITS.ping, run: readNotes }],
   ['scene', { cap: LIMITS.scene, run: scene }],
   ['ping', { cap: LIMITS.ping, run: () => ({ ok: true, routes: [...ROUTES.keys()], limits: LIMITS }) }]
 ]);

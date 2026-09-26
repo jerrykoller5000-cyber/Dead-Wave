@@ -8,7 +8,7 @@
   canvas { display: block; }
   .panel { position: absolute; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; box-sizing: border-box; }
   #controls { top: 12px; left: 12px; width: 300px; max-height: calc(100% - 24px); overflow: auto; }
-  #readout { top: 12px; right: 12px; width: 300px; max-height: calc(100% - 440px); overflow: auto; font: 12px/1.45 ui-monospace, monospace; }
+  #readout { top: 12px; right: 12px; width: 300px; max-height: calc(100% - 470px); overflow: auto; font: 12px/1.45 ui-monospace, monospace; }
   #notes { bottom: 12px; right: 12px; width: 360px; }
   #timeline { bottom: 12px; left: 324px; right: 384px; min-width: 300px; padding: 8px 10px; }
   h1 { font-size: 15px; margin: 0 0 8px; letter-spacing: .04em; } h2 { font-size: 12px; margin: 12px 0 6px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
@@ -42,6 +42,11 @@
   #copybox textarea { height: 220px; font: 12px ui-monospace, monospace; }
   .scene { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: 8px; }
   .check { display: flex; gap: 6px; align-items: center; color: var(--dim); font-size: 12px; margin-top: 6px; }
+  #history { margin: 0 0 6px; font-size: 12px; }
+  #history summary { cursor: pointer; color: var(--dim); }
+  #history[data-state="look"] summary, #history[data-state="waiting"] summary { color: var(--accent); }
+  #histlist { max-height: 170px; overflow: auto; margin-top: 4px; }
+  .hn { margin: 6px 0; } .hn .ans { margin-top: 2px; padding-left: 8px; border-left: 2px solid var(--good); color: var(--good); }
 </style>
 <script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js"}}</script>
 </head><body>
@@ -79,6 +84,7 @@
 </div>
 <div id="notes" class="panel">
   <h1>Your note</h1>
+  <details id="history" hidden><summary id="histsum"></summary><div id="histlist"></div></details>
   <textarea id="note" placeholder="What should change? e.g. The shotgun stagger is good but he gets up too fast. The brute should rock back more."></textarea>
   <label class="check"><input type="checkbox" id="withpic" checked> Send a picture of what's on screen with it</label>
   <div class="grid" style="margin-top:6px"><button id="save">Save note for the crew</button><button id="approve">It's good</button></div>
@@ -284,6 +290,7 @@ async function build() {
   if (two !== framedTwo) { framedTwo = two; Object.assign(orbit, two ? { yaw: 0.35, dist: 6.8 } : { yaw: 0.6, dist: 5.2 }); placeCam(); }
   drawParts();
   building = null;
+  loadHistory();
 }
 
 // --- Hitting --------------------------------------------------------------------------------------
@@ -887,6 +894,35 @@ function copyBox(title, hint, text, picture) {
 document.getElementById('copyclose').onclick = () => { document.getElementById('copybox').hidden = true; };
 async function copyText(s) { try { await navigator.clipboard.writeText(s); return true; } catch { return false; } }
 // Straight into the review folder when the lab's server is there; copied for pasting when it isn't.
+// The notes this body already has, and the owner's answers, so Jerry sees what changed before he
+// writes again. Asked of the write door (POST /__studio/notes), which only reads; without the lab's
+// server there's nothing to ask, and the box stays hidden.
+let history = null;
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function loadHistory() {
+  const box = document.getElementById('history');
+  if (!canSave || !labBodies.length) { box.hidden = true; history = null; return null; }
+  const asset = assetName();
+  try { history = await studioPost('notes', { asset }); } catch { history = null; box.hidden = true; return null; }
+  if (assetName() !== asset) return history;
+  const h = history, owner = h.owner || labBodies[0].json.owner || 'grokbot';
+  document.getElementById('notehint').textContent = `Notes go to review/${asset}/notes.md, with what you last did here and the picture. ${owner} answers there and on the crew panel.`;
+  const now = `v${labBodies[0].json.version || 1}`;
+  const say = {
+    'no-notes': 'none yet',
+    waiting: `your last note is waiting for ${owner}`,
+    taken: `${owner} is working on your note`,
+    look: `${owner} answered with ${h.lookAt}${h.lookAt === now ? ', which is what you see now' : ''}: look again`,
+    'answered-seen': 'answered',
+    approved: 'you approved it'
+  }[h.state] || h.state;
+  box.hidden = false;
+  box.dataset.state = h.state;
+  document.getElementById('histsum').textContent = `Notes so far (${h.notes.length}): ${say}`;
+  document.getElementById('histlist').innerHTML = h.notes.slice(0, 8).map((n) => `<div class="hn"><b>${esc(n.date)} · ${esc(n.version)}</b> <span class="dim">${esc(n.state)}</span><br>${esc(n.text)}${n.answer ? `<div class="ans">${esc(n.answer.agent)} · ${esc(n.answer.version)}: ${esc(n.answer.text)}</div>` : ''}</div>`).join('') +
+    (h.page ? `<a href="../${esc(h.page)}" target="_blank" style="color:var(--accent)">The folder's page, with the pictures</a>` : '') || '<div class="dim">Nothing written about this body yet.</div>';
+  return history;
+}
 async function sendNote(text, { picture = document.getElementById('withpic').checked } = {}) {
   const A = labBodies[0];
   const pic = picture ? await snapshot() : null;
@@ -896,6 +932,7 @@ async function sendNote(text, { picture = document.getElementById('withpic').che
     try {
       const j = await studioPost('note', body);
       lastSave = { ...j, how: 'saved' };
+      await loadHistory();
       savedEl.innerHTML = `<span class="ev">Saved to ${j.file}${j.picture ? ', with the picture' : ''}.</span> ${j.owner} sees it on the crew panel.`;
       document.getElementById('note').value = '';
       return lastSave;
@@ -1048,7 +1085,8 @@ window.lab = {
     })),
     rec: { frames: rec.frames.length, start: recStart(), end: recEnd(), events: rec.events.map((e) => [r3(e.t), e.key, e.name]), hits: rec.hits.map((h) => [r3(h.t), h.key, h.weapon, h.from]) },
     run: seq ? { t0: seq.t0, hits: seq.hits.length } : null,
-    lastSave, lastScene, context: labBodies.length ? context() : ''
+    lastSave, lastScene, context: labBodies.length ? context() : '',
+    history: history ? { asset: history.asset, exists: history.exists, state: history.state, count: history.notes.length, latest: history.latest } : null
   }),
   setPreset: async (ref) => { presetSel.value = ref; overrides = {}; drawSliders(); await build(); },
   compare: async (what) => { compareSel.value = what || ''; compareWith = compareSel.value; await build(); },

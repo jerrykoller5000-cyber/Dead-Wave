@@ -161,6 +161,9 @@ async function checkMotionLab(browser, server, page0) {
       must(st.canSave, 'the page could not reach POST /__studio/ping');
       must(st.bodies.length === 1 && st.bodies[0].ref === 'zombie/shambler', 'expected one zombie/shambler, got ' + st.bodies.map((b) => b.ref).join(', '));
       must(st.weapon === 'shotgun-close', 'the weapon from the URL was not picked');
+      must(await page.waitFor('lab.state().history', { timeout: 20000 }), 'the notes so far never came (POST /__studio/notes)');
+      const h = (await S()).history;
+      must(h.asset === asset && !h.exists && h.count === 0, 'a new review folder should have no notes: ' + JSON.stringify(h));
       const e = st.engine;
       return `engine: get-up clips ${e.getup ? 'named' : 'none'}, lose ${e.lose ? 'yes' : 'no'}, hold ${e.hold ? 'yes' : 'no'}`;
     });
@@ -371,7 +374,11 @@ async function checkMotionLab(browser, server, page0) {
       must(md.includes(`](${r.picture.split('/').slice(2).join('/')})`), 'the note does not name the picture');
       const meta = JSON.parse(fs.readFileSync(path.join(reviewDir, 'meta.json'), 'utf8'));
       must(meta.kind === 'motion' && meta.motion === 'zombie/shambler' && meta.owner, 'meta.json: ' + JSON.stringify(meta));
-      return `${r.file} and ${r.picture} (${s.w}×${s.h})`;
+      // The folder's page, and the lab's notes so far, both show it.
+      must(r.page === `review/${asset}/index.html` && /It gets up too slowly\./.test(fs.readFileSync(path.join(ROOT, r.page), 'utf8')), 'the folder page: ' + r.page);
+      const h = (await S()).history;
+      must(h && h.exists && h.count === 1 && h.state === 'waiting', 'the lab\'s notes so far: ' + JSON.stringify(h));
+      return `${r.file}, ${r.picture} (${s.w}×${s.h}) and ${r.page}`;
     });
 
     await step(page, 'no page errors', async () => {

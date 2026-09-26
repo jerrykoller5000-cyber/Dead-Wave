@@ -48,6 +48,10 @@ Chrome and fails on any page error or missing event.
    with it, with the bar and a line saying what you did; untick the box to leave it out. Press
    **It's good** when a body reacts the way you want. The note goes on the crew panel with the body's
    owner (Grokbot for the zombies and the marine).
+   - **Notes so far**, above the box, says where your notes on this body stand: waiting, being worked
+     on, or answered with a new version to look at. Click it to read them and the answers.
+   - The body's review folder has a page now (`review/motion-<body>/index.html`, the crew panel's
+     "Open"): your notes with their pictures and the answers, newest first.
 10. **Save as scene** keeps what just happened (the hits since the body last stood still) as a scene
     the crew can render frame by frame. Give it a name or leave the one it suggests.
 
@@ -72,7 +76,19 @@ changed in Cursor's file: the hook). It writes in two places only: `review/<asse
 | `/__studio/note` | `{ asset, text, context?, snapshot?, meta? }` | Adds `## <date> · Jerry · <version> · lab` and the note at the top of `review/<asset>/notes.md` (under the stub's comment, above the notes already there). | `{ ok, asset, file, owner, version, created, picture? }` |
 | `/__studio/note` | `{ preset: "zombie/shambler", text, context? }` | The lab's first form: asset `motion-<rig>-<name>`, meta read from `studio/motion/<rig>/<name>.json`. | as above |
 | `/__studio/scene` | `{ name, json }` | Writes `studio/scenes/lab-<name>.json`, with `json.name` set to `lab-<name>`. | `{ ok, name, file, replaced, render }`: `render` is the command |
+| `/__studio/notes` | `{ asset }` | Reads only: the folder's notes as `crew/notes.mjs` reads them, newest first (at most 20). A folder that isn't there is `exists: false`, not a 404, so a page can ask without an error in its console. | `{ ok, asset, exists, latest, owner, state, lookAt, page, notes: [{ date, who, version, text, state, answer }] }` |
 | `/__studio/ping` | `{}` | Nothing. A page asks whether it can save. | `{ ok, routes, limits }` |
+
+**Beyond the contract** (the lead keeps or drops them; each is one line to take out): the `notes`
+route above, and the **folder page**. The crew panel links every review folder's `index.html` and
+the notes stub tells Jerry to open it, but only the renderer writes one, and it never renders a lab's
+folder, so a motion folder's "Open" led nowhere. A note on a folder whose `meta.kind` is `motion` or
+`model` (or whose meta names a `motion`, as the first lab's folders do) now writes `index.html` too:
+plain HTML, no script (it opens from the disk), the latest version big at the top, how to look at it
+again (and a link to `meta.look` for when the lab is running), and every note with its picture, its
+context and the answers, newest first, each with its state from `crew/notes.mjs`. It's written again
+with each note. A page the renderer wrote (no `<!-- written by studio/notes-endpoint.mjs ... -->`
+mark) is left as it is. The reply names it as `page`.
 
 - **A new folder** (no `meta.json`) needs `meta`, with `meta.kind` `motion` or `model`. It gets
   `meta.json` (meta, with `asset` set and `owner` defaulted: grokbot for motion, claude for model),
@@ -97,10 +113,11 @@ changed in Cursor's file: the hook). It writes in two places only: `review/<asse
 | 500 | `meta.json` isn't JSON (fix it by hand); anything the disk refuses. |
 
 A GET under `/__studio/` is served as a file like any other (so it's a 404). Tests:
-`studio/notes-endpoint.test.mjs` runs the real `tools/serve.mjs` from a copy in a temporary folder
-(review/, studio/motion/, crew/notes.mjs) and exercises every route and every refusal, the old form,
-a link out of `review/`, capped bodies with and without a length, and checks that nothing was
-written anywhere else.
+`studio/notes-endpoint.test.mjs` (14) runs the real `tools/serve.mjs` from a copy in a temporary
+folder (review/, studio/motion/, crew/notes.mjs) and exercises every route and every refusal, the old
+form, a link out of `review/`, capped bodies with and without a length, the folder page (escaped,
+newest first, never over the renderer's), the read route, and checks that nothing was written
+anywhere else.
 
 ## The lab page (studio/motion-lab.html)
 
@@ -163,6 +180,11 @@ instead of sliding back. Zombies are built at the game's size for their type (fe
 **The readout's last line** is the cost of a frame here: the bodies (animation, simulation, pose,
 recording), the drawing, and fps.
 
+**Notes so far.** With the write door there, the lab asks `POST /__studio/notes` for body A's folder
+when it builds and after each note, and shows one line (waiting for the owner; the owner is on it;
+answered with vN, "which is what you see now" when the preset is at vN; approved) that opens to the
+last eight notes with their answers and a link to the folder's page.
+
 **window.lab**, for a script or the console:
 
 ```js
@@ -189,7 +211,8 @@ node studio/check-labs.mjs --root <dir>   serve another checkout (a merge of the
 It serves the repo with `tools/serve.mjs`, opens the lab in headless Chrome (`tools/cdp.mjs`; CHROME
 and CHROME_ARGS as for the tests) at 1280×720, and:
 
-1. loads it, and the page reaches the write door (`/__studio/ping`);
+1. loads it, and the page reaches the write door (`/__studio/ping`) and reads its notes so far
+   (none, for the check's own folder);
 2. clicks the chest with a real mouse event: one hit, an arrow at it;
 3. plays the reaction through: wake, hit, fall, down, getup, recovered, in order, judged "down";
 4. get-up clips, when the preset names them: a side, a clip, a heading;
@@ -205,7 +228,8 @@ and CHROME_ARGS as for the tests) at 1280×720, and:
     outcome for each body;
 13. the file's numbers against the sliders: A carries them, B doesn't, and the context names them;
 14. a note with a picture, typed and saved through the page's own button: notes.md holds one waiting
-    note with the context and the picture's line, the PNG is there, meta.json says motion;
+    note with the context and the picture's line, the PNG is there, meta.json says motion, the folder
+    page shows the note, and the lab's notes so far now say one, waiting;
 15. no page errors and no console errors;
 16. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
     copies the note and the scene, and writes nothing.
@@ -250,7 +274,7 @@ check-labs' `outcome()` can import `classify` from `studio/motion-battery.js` in
 ## Checking it
 
 ```
-node --import ./studio/node-three.mjs --test "studio/*.test.mjs"     (50: the 38 before and the endpoint's 12)
+node --import ./studio/node-three.mjs --test "studio/*.test.mjs"     (52: the 38 before and the endpoint's 14)
 node --test crew/notes.test.mjs
 CHROME=... CHROME_ARGS=... node studio/check-labs.mjs
 ```
