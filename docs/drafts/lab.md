@@ -271,7 +271,12 @@ and CHROME_ARGS as for the tests) at 1280×720, and:
     page shows the note, and the lab's notes so far now say one, waiting;
 16. no page errors and no console errors;
 17. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
-    copies the note and the scene, and writes nothing.
+    copies (or shows) the note and the scene, and writes nothing. It says how many frames the page
+    had in a second.
+
+A failed step prints what the page said last (its errors and console errors), and the last phase
+names the call that didn't come back. Interrupted (Ctrl-C), it still deletes its folder and scene and
+closes its Chrome.
 
 The note's folder (`review/check-labs-<time>`) and the scene (`studio/scenes/lab-check-<time>.json`)
 are deleted at the end. Exit 1 on any failure. It takes about 20 to 90 s; most of it is the replay
@@ -289,7 +294,12 @@ server)` that drives it through its own `window.lab`-style object, and the same 
   on the ground. The lab draws the words on a canvas of their own and copies it over the frame; the
   picture is then the frame exactly (compared pixel by pixel).
 - **Headless Chrome draws the lab at about 1 to 10 fps** (software GL). `lab.advance()` moves lab
-  time in whole frames without waiting, so the check doesn't depend on it.
+  time in whole frames without waiting, so the check doesn't depend on it. On a busy box it can go a
+  whole second with no frame at all, so a picture that no frame has taken after 1.5 s is drawn there
+  and then, and a frame that throws still draws and hands over its pictures.
+- **The clipboard can wait forever** on a permission nobody grants (headless Chrome, a window
+  without the focus, a busy box). The copy fallback gives it 1.5 s, then shows the copy box. Before
+  that, one check in four hung there.
 - **`tools/studio.mjs scene` draws a lab scene's strip, but its video step times out headless** ("the
   scene video did not finish"), as the engine package also found. That's P-76, Cursor's.
 
