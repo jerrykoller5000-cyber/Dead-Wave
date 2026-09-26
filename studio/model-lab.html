@@ -18,6 +18,7 @@
   .sw { display: inline-flex; align-items: center; gap: 4px; margin: 0 8px 4px 0; font-size: 12px; color: var(--dim); }
   .sw i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid #0006; }
   .good { color: var(--good); } .bad { color: var(--bad); }
+  .clamp { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
   #saved { font-size: 12px; margin-top: 6px; min-height: 1.4em; }
   body.sheet { overflow: visible; background: #14181f; }
   body.sheet .panel { display: none; }
@@ -29,7 +30,7 @@
   <div class="hint">Drag to turn round it, wheel to zoom. The marine beside it is 1.75 m.</div>
   <h2>Model</h2>
   <select id="model"></select>
-  <div id="info" class="hint"></div>
+  <div id="info" class="hint clamp" title="Click for all of it"></div>
   <h2>Cost</h2>
   <div id="cost"></div>
   <h2>Materials</h2>
@@ -43,6 +44,12 @@
     <h2>Clip (a creature that is a rig)</h2>
     <input type="text" id="clip" placeholder="spider/crawl">
     <div class="grid" style="margin-top:6px"><button id="play">Play</button><button id="stop">Rest pose</button></div>
+  </div>
+  <div id="hitbox" style="display:none">
+    <h2>Hit it (a creature with a body)</h2>
+    <div class="grid" id="weapons"></div>
+    <div class="grid" style="margin-top:6px"><button id="standup">Stand it up</button><button id="slow">Quarter speed</button></div>
+    <div id="react" class="hint"></div>
   </div>
 </div>
 <div id="notes" class="panel">
@@ -65,6 +72,8 @@ import { buildModel, validateModel, rigFromModel, modelAsset } from './model.js'
 import { models } from './models/index.js';
 import { rigs, registerRig } from './rigs.js';
 import { loadClip, createPlayer } from './clip.js';
+import { loadMotion, createBody } from './motion.js';
+import { presets } from './motion/index.js';
 
 const q = new URLSearchParams(location.search);
 const SHEET = q.get('mode') === 'sheet';
@@ -112,9 +121,11 @@ function load() {
   const b = buildModel(json);
   built = b;
   let group = b.group;
-  if (json.rig) {
-    // A draft of a rig plays as its own rig, so the listed one is left as it is.
-    const name = json === draft ? json.rig + '-draft' : json.rig;
+  if (json.rig || json.body) {
+    // A draft of a rig plays as its own rig, so the listed one is left as it is; a model with a body
+    // but no rig of its own (the zombie stand-in) gets one here, so it can react.
+    const own = json.rig || 'model-' + json.name;
+    const name = json === draft ? own + '-draft' : own;
     if (!rigs.def(name)) registerRig(name, rigFromModel(json));
     inst = rigs.get(name).create({ group: b.group });
     group = inst.group;
@@ -279,9 +290,49 @@ if (SHEET) {
     frame(camera, [1, 0.5, 1], box.union(new THREE.Box3().setFromObject(marine.group)), innerWidth / innerHeight);
     placeCam();
     const clipIn = document.getElementById('clip');
-    if (inst && !clipIn.value) clipIn.value = q.get('clip') || `${json.rig}/crawl`;
-    if (inst && q.get('clip')) playClip();
+    const own = json.rig || json.name;
+    clipIn.value = q.get('clip') || (inst && inst.def.body ? `${own}/idle` : `${own}/crawl`);
+    armBody(json).then(() => { if (inst && (q.get('clip') || body)) playClip(); });
   };
+  // --- Hitting a creature that has a body (studio/motion.js, D-42), with the motion lab's weapons. Its
+  // preset is the one for its rig in studio/motion/index.js, or studio/motion/<rig>/<rig>.json.
+  const WEAPONS = [
+    { label: 'Rifle round', kind: 'bullet', power: 2.5 }, { label: 'Shotgun, 6 m', kind: 'pellet', power: 3.2 },
+    { label: 'Shotgun, close', kind: 'pellet', power: 6.5 }, { label: 'Machete', kind: 'blade', power: 3.5 },
+    { label: "Brute's swing", kind: 'crush', power: 4.5 }, { label: 'Grenade', kind: 'blast', power: 8, up: 0.5 },
+    { label: 'Killing shot', kind: 'bullet', power: 3, kill: true }
+  ];
+  let body = null, weapon = WEAPONS[2], speed = 1, lastHit = null, reactLog = [];
+  const wbox = document.getElementById('weapons');
+  for (const w of WEAPONS) {
+    const b = document.createElement('button'); b.textContent = w.label; b.classList.toggle('on', w === weapon);
+    b.onclick = () => { weapon = w; for (const c of wbox.children) c.classList.toggle('on', c === b); };
+    wbox.append(b);
+  }
+  async function armBody(json) {
+    body = null; lastHit = null; reactLog = [];
+    document.getElementById('hitbox').style.display = 'none';
+    if (!inst || !inst.def.body) return;
+    const own = json.rig || json.name;
+    let pj = presets.names().map((n) => presets.json(n)).find((p) => p.rig === own) || null;
+    if (!pj) { try { const r = await fetch(`./motion/${own}/${own}.json`); if (r.ok) pj = await r.json(); } catch {} }
+    if (!pj) return;
+    body = createBody(inst, loadMotion({ ...pj, rig: inst.def.name }), { ground: () => 0 });
+    body.presetName = `${own}/${pj.name} v${pj.version || 1}`;
+    document.getElementById('hitbox').style.display = '';
+  }
+  document.getElementById('standup').onclick = () => { if (body) body.reset(); };
+  document.getElementById('slow').onclick = (e) => { speed = speed === 1 ? 0.25 : 1; e.target.classList.toggle('on', speed < 1); };
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  function strike(ev) {
+    ndc.set((ev.clientX / innerWidth) * 2 - 1, -(ev.clientY / innerHeight) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObject(inst.group, true)[0];
+    if (!hit) return;
+    const d = ray.ray.direction, dir = [d.x, d.y + (weapon.up || 0), d.z], at = hit.point.toArray();
+    const ok = weapon.kill ? body.kill({ at, dir, power: weapon.power, kind: weapon.kind }) : body.hit({ at, dir, power: weapon.power, kind: weapon.kind });
+    lastHit = `${weapon.label} (${weapon.kind}, ${weapon.power} m/s)${ok ? '' : ', refused'}`;
+  }
   async function playClip() {
     const r = document.getElementById('clip').value.trim();
     const out = document.getElementById('saved');
@@ -290,6 +341,7 @@ if (SHEET) {
       player = createPlayer(inst).play(clip, { loop: true });
     } catch (e) { out.innerHTML = `<span class="bad">No clip ${r}: ${String(e.message || e).split('\n')[0]}</span>`; }
   }
+  document.getElementById('info').onclick = (e) => e.currentTarget.classList.toggle('clamp');
   const sel = document.getElementById('model');
   for (const n of models.names()) sel.add(new Option(n, n));
   if (draft && !models.json(ref)) sel.add(new Option(ref + ' (draft)', ref));
@@ -303,13 +355,15 @@ if (SHEET) {
   document.getElementById('play').onclick = playClip;
   document.getElementById('stop').onclick = () => { player = null; if (inst) for (const [j, r] of inst.rest) { j.quaternion.copy(r.q); j.position.copy(r.p); } };
   let drag = null;
-  renderer.domElement.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY }; });
+  renderer.domElement.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, moved: 0 }; });
   addEventListener('pointermove', (e) => {
     if (!drag) return;
+    drag.moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
     orbit.yaw -= (e.clientX - drag.x) * 0.008; orbit.pitch = Math.max(-0.2, Math.min(1.5, orbit.pitch + (e.clientY - drag.y) * 0.006));
     drag.x = e.clientX; drag.y = e.clientY; placeCam();
   });
-  addEventListener('pointerup', () => { drag = null; });
+  // A click that didn't turn the camera is a hit, on a creature with a body.
+  addEventListener('pointerup', (e) => { if (drag && drag.moved < 4 && body && e.target === renderer.domElement) strike(e); drag = null; });
   renderer.domElement.addEventListener('wheel', (e) => { orbit.dist = Math.max(0.8, Math.min(60, orbit.dist * (1 + Math.sign(e.deltaY) * 0.1))); placeCam(); e.preventDefault(); }, { passive: false });
   addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); placeCam(); });
 
@@ -319,7 +373,7 @@ if (SHEET) {
   const snapshot = () => new Promise((resolve) => { snapNext = resolve; });
   async function send(text) {
     const json = modelJson(ref), asset = modelAsset(json), v = 'v' + (json.version || 1);
-    const context = `${ref} ${v}; draws ${built.cost.draws}/${json.budget.draws}, triangles ${built.cost.triangles}/${json.budget.triangles}${night ? '; at night' : ''}${player ? '; playing ' + document.getElementById('clip').value : ''}; camera yaw ${orbit.yaw.toFixed(2)} pitch ${orbit.pitch.toFixed(2)} at ${orbit.dist.toFixed(1)} m`;
+    const context = `${ref} ${v}; draws ${built.cost.draws}/${json.budget.draws}, triangles ${built.cost.triangles}/${json.budget.triangles}${night ? '; at night' : ''}${player ? '; playing ' + document.getElementById('clip').value : ''}${lastHit ? `; last hit ${lastHit} with ${body.presetName}` : ''}; camera yaw ${orbit.yaw.toFixed(2)} pitch ${orbit.pitch.toFixed(2)} at ${orbit.dist.toFixed(1)} m`;
     const out = document.getElementById('saved');
     const body = {
       asset, text, context,
@@ -346,8 +400,15 @@ if (SHEET) {
   show();
   const clock = new THREE.Clock();
   renderer.setAnimationLoop(() => {
-    const dt = Math.min(0.05, clock.getDelta());
+    const dt = Math.min(0.05, clock.getDelta()) * speed;
     if (player) player.update(dt);
+    if (body) {
+      body.follow();
+      for (const e of body.update(dt)) if (e[0] !== 'step') reactLog.push(e[0]);
+      body.apply();
+      reactLog = reactLog.slice(-6);
+      document.getElementById('react').innerHTML = `${body.presetName}: <span class="good">${body.state}</span>${lastHit ? ` · ${lastHit}` : ''}<br>${reactLog.join(' · ') || 'Pick a weapon and click where it hits.'}`;
+    }
     placeDots();
     renderer.render(scene, camera);
     // A picture is taken straight after a frame is drawn, before the browser clears it.
