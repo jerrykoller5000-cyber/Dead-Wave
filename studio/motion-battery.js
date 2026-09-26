@@ -4,8 +4,9 @@
 // weapons, each from the front, the back and the side, played on a fresh body standing on its idle
 // clip the way the lab stands it. Each run says what came of the hit (none, flinch, stagger, down or
 // dead), how many steps it took, how long until it was itself again, how far the chest went, where the
-// body ended up and how low it got. The same numbers every time: nothing here is random, so a change
-// to a preset shows up as a change in the report and nothing else does.
+// body ended up, which way it lies once down, how low it got, and how smoothly it came back to its
+// animation. The same numbers every time: nothing here is random, so a change to a preset shows up
+// as a change in the report and nothing else does.
 //
 //   runBattery('zombie/shambler')                                   every hit, from every side
 //   runBattery(json, { hits: ['shotgun-close'], from: ['front'] })  a preset object, some of it
@@ -23,7 +24,7 @@ import zombieIdle from './clips/zombie/idle.json' with { type: 'json' };
 import marineStand from './clips/marine/stand.json' with { type: 'json' };
 
 // The lab's weapons (studio/motion-lab.html), by name. Power is metres per second at the point hit
-// (docs/studio.md §10). The grenade lifts as the lab's does: half a metre up for each one along.
+// (docs/studio.md §10). The grenade's push points up half as much as it points along, as the lab's does.
 export const BATTERY = [
   { name: 'rifle', label: 'Rifle round', kind: 'bullet', power: 2.5, at: 'chest' },
   { name: 'shotgun-far', label: 'Shotgun, 6 m', kind: 'pellet', power: 3.2, at: 'chest' },
@@ -132,8 +133,10 @@ function play(json, preset, stance, spec, opts, clipOf) {
   const pts = names.map((k) => ({ k, j: inst.R[def.points[k].joint], at: new THREE.Vector3(...(def.points[k].at || [0, 0, 0])), foot: feet.has(k) }));
   const shown = (p) => _v.copy(p.at).applyMatrix4(p.j.matrixWorld);
   const player = createPlayer(inst);
-  const stand = clipOf(stance.clip);
-  if (stand) player.play(stand, { loop: true });
+  // Its stand clip, or (stand: null) its rest pose as a clip with nothing in it, so a get-up clip
+  // always has something to hand back to.
+  const stand = clipOf(stance.clip) || loadClip({ format: 'dw-clip/1', name: 'rest', rig: stance.rig, length: 1, loop: true, tracks: {} });
+  player.play(stand, { loop: true });
   player.update(0);
   // Boots on the floor: the game stands a zombie 0.2 m into the ground; the lab lifts it out, and so
   // does the battery, so heights read from the floor.
@@ -264,8 +267,9 @@ function prepare(ref, opts) {
 
 // One hit: a battery name ('grenade'), { hit: 'grenade', from: 'back' }, or a custom
 // { kind, power, at, from, up, kill }. opts: dt (1/60), lead (0.5 s standing first), window (8 s
-// after the hit at most), lod (0, 1, 2), lose (['armL', ...]), create ({ type, scale }), stand (a clip,
-// or null for the rest pose), clipOf (ref => clip JSON, for get-up clips), until (event name => stop).
+// after the hit at most), tail (0.25 s watched after it recovers), lod (0, 1, 2), lose (['armL', ...]),
+// create ({ type, scale }), stand (a clip "rig/name", or null for the rest pose), clipOf (ref => clip
+// JSON, for get-up clips and other stands), until (event name => true to stop there).
 export function runHit(ref, entry, opts = {}) {
   const { json, preset, stance, clipOf } = prepare(ref, opts);
   return play(json, preset, stance, hitSpec(entry), opts, clipOf);

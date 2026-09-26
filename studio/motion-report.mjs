@@ -92,11 +92,11 @@ function tryOn(json, sets) {
 }
 
 // --- Formatting --------------------------------------------------------------------------------
+// Two decimals, and no "-0.00" for a hair under zero.
+const f2 = (v) => (v === null || v === undefined ? '-' : (Math.abs(v) < 0.005 ? 0 : Number(v)).toFixed(2));
 // A snap: its size and joint, and "roll" when the limb turned about its length rather than swinging;
 // SNAP past the t79 rule's 0.3 rad.
 const snapText = (s) => (!s ? '-' : `${f2(s.rad)} ${s.joint}${s.swing !== null && s.rad > 0.1 && s.swing < s.rad / 3 ? ' roll' : ''}${s.rad > 0.3 ? ' SNAP' : ''}`);
-// Two decimals, and no "-0.00" for a hair under zero.
-const f2 = (v) => (v === null || v === undefined ? '-' : (Math.abs(v) < 0.005 ? 0 : Number(v)).toFixed(2));
 function grid(rows) {
   const w = [];
   for (const r of rows) r.forEach((c, i) => { w[i] = Math.max(w[i] || 0, String(c).length); });
@@ -107,7 +107,7 @@ const LEGEND = (p) => `outcome: none, flinch (no step), stagger (stepped, kept i
 time: s from the hit until it was itself again (settled, if dead). chest: most the chest moved (m). drop: most it sank (m).
 moved: how far its hips ended from where it stood (m); along: that, along the push (less than 0: back against it).
 fell: once down, its chest from its hips along the push (m): more than 0, it went down the way it was hit.
-lowest: its lowest point but the feet (m above the floor).
+lowest (one preset at a time): its lowest point but the feet (m above the floor).
 off-bal: most it was off balance (m); it steps at balance.step ${p.balance.step} and falls at balance.fall ${p.balance.fall}.
 snap: the biggest one-frame joint turn (rad) as it came back to its animation; over 0.3 is a snap. "roll": the
 limb barely moved and turned about its own length (the animation's twist jumped under it).`;
@@ -240,6 +240,8 @@ export function report(argv, print = console.log) {
 const strip = (e) => ({ ...e, results: e.results.map(({ run, ...r }) => r) });
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  // Piped into head, the reader goes away early: that's the reader done, not an error.
+  process.stdout.on('error', (e) => { if (e.code === 'EPIPE') process.exit(process.exitCode || 0); else throw e; });
   try {
     process.exitCode = report(process.argv.slice(2)).code;
   } catch (e) {
