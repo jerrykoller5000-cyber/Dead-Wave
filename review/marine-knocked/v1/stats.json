@@ -1,0 +1,71 @@
+{
+  "version": "v1",
+  "scene": "studio/scenes/marine-knocked.json",
+  "name": "marine-knocked",
+  "length": 5,
+  "worst": {
+    "slide:swiped.footL": {
+      "kind": "slide",
+      "key": "swiped.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:swiped.footR": {
+      "kind": "slide",
+      "key": "swiped.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:swiped": {
+      "kind": "speed",
+      "key": "swiped",
+      "value": 1.0448917695169404,
+      "t": 0.733333333333334,
+      "bad": false
+    },
+    "slide:blasted.footL": {
+      "kind": "slide",
+      "key": "blasted.footL",
+      "value": 0,
+      "t": 0,
+      "limb": "footL",
+      "bad": false
+    },
+    "slide:blasted.footR": {
+      "kind": "slide",
+      "key": "blasted.footR",
+      "value": 0,
+      "t": 0,
+      "limb": "footR",
+      "bad": false
+    },
+    "speed:blasted": {
+      "kind": "speed",
+      "key": "blasted",
+      "value": 5.767446640645568,
+      "t": 0.5166666666666666,
+      "bad": false
+    },
+    "snap:swiped": {
+      "kind": "snap",
+      "key": "swiped",
+      "value": 0.017175284036566544,
+      "t": 1.3833333333333333,
+      "joint": "head",
+      "bad": false
+    },
+    "snap:blasted": {
+      "kind": "snap",
+      "key": "blasted",
+      "value": 0.034987784148396164,
+      "t": 2.166666666666664,
+      "joint": "head",
+      "bad": false
+    }
+  },
+  "renderSeconds": 52.2
+}

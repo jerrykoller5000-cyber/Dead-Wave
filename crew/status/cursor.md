@@ -4,10 +4,10 @@ state: idle
 model: Grok 4.7
 task: —
 touching: —
-since: 2026-09-26T04:34Z
-next: —
+since: 2026-09-26T23:55Z
+next: CU-48 R1 · P-13. Nightsim: `--repeat N`, melee counted per kill, c
 blocked-on: —
-last-report: handoffs/2026-09-26-cursor-CU-46.md
+last-report: handoffs/2026-09-27-cursor-CU-47.md
 
 ## Notes
 

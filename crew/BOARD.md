@@ -490,7 +490,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [ ] **CU-47** **R1 · P-76.** Review the notes hook in tools/serve.mjs (D-42) and render `zombie-reactions` and
+- [x] **CU-47** **R1 · P-76.** Review the notes hook in tools/serve.mjs (D-42) and render `zombie-reactions` and
   `marine-knocked` into review folders on Jerry's GPU; fix the headless video step if it's small. Details:
   `docs/roadmap.md` P-76.
 - [ ] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
@@ -639,7 +639,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R2 · The night has a shape
 
-- [ ] **GP-48** **R2 · P-24.** The minimap shows hurt builds (amber, red, flashing) and rim pips for the ones out of
+- [!] **GP-48** **R2 · P-24.** The minimap shows hurt builds (amber, red, flashing) and rim pips for the ones out of
   range. Details: `docs/roadmap.md` P-24.
 - [ ] **GP-49** **R2 · P-25.** One panned cue when a far build fails; an optional "West wall failing" line. After
   CU-50; after GP-48. Details: `docs/roadmap.md` P-25.

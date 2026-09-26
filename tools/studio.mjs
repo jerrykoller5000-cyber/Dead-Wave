@@ -351,17 +351,31 @@ async function renderScene(rel, opt) {
   const version = nextVersion(dir);
   const ver = path.join(dir, version);
   fs.mkdirSync(ver, { recursive: true });
-  writeMeta(dir, { asset, owner: 'claude', rig: 'guardian', scene: json.name, clip: null, reference: null, design: 'default', task: 'CL-64' });
+  const actors = Object.values(json.actors || {});
+  const reacting = actors.some((a) => a.motion);
+  const rigsUsed = [...new Set(actors.map((a) => a.rig))];
+  writeMeta(dir, {
+    asset, owner: reacting ? 'grokbot' : 'claude', rig: reacting ? rigsUsed.join('+') : 'guardian',
+    scene: json.name, clip: null, reference: null, design: 'default',
+    task: reacting ? 'GB-70' : 'CL-64'
+  });
   fs.writeFileSync(path.join(ver, 'scene.json'), raw);
   const frames = String(Math.max(2, parseInt(opt.frames || '8', 10) || 8));
   const q = new URLSearchParams({ scene: rel.split(path.sep).join('/'), frames, phase: 'video' });
+  // Four video passes are 2 * (length + length/4) seconds of playback. Software frames run
+  // slower than that clock, so the wait scales with the length and keeps a margin (a 5.5 s
+  // scene took about 450 s on the cloud clone).
+  const playback = 2 * (json.length + json.length / 0.25);
+  const stripWait = Math.round((45 + json.length * 8) * 1000);
+  const videoWait = Math.round((playback * 12 + 90) * 1000);
+  console.log(`  waits: strip ${(stripWait / 1000).toFixed(0)}s, video ${(videoWait / 1000).toFixed(0)}s`);
   const server = await serve(ROOT, 0);
-  const browser = await launch({ headless: true });
+  const browser = await launch({ headless: !opt.gpu });
   let worst = {};
   try {
     const page = await browser.newPage({ width: 1280, height: 720 });
     await page.goto(`${server.origin}/tools/studio-scene.html?${q}`, { waitUntil: 'none' });
-    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: 120000 });
+    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: stripWait });
     if (!stripOk) throw new Error('the scene strip did not finish');
     const err = await page.evaluate('window.__error || ""');
     if (err) throw new Error(err);
@@ -370,7 +384,7 @@ async function renderScene(rel, opt) {
     await page.screenshot(path.join(ver, 'strip.png'));
     worst = await page.evaluate('window.__worst || {}');
     await page.evaluate('window.__goVideo = true');
-    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: 180000 });
+    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: videoWait });
     if (!vidOk) throw new Error('the scene video did not finish');
     const err2 = await page.evaluate('window.__error || ""');
     if (err2) throw new Error(err2);
