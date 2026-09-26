@@ -14,7 +14,19 @@
 // board. `> <agent> · vN` is an answer: look at vN. A note that starts "good" or "approved" closes
 // the asset at that version. Anything inside <!-- --> is ignored (the stub's example lives there).
 
-const HEAD = /^## +(\S+) *· *([^·]+?) *· *(v\d+)\s*$/;
+// A note's heading: "## 2026-09-27 · Jerry · v1". Typed by hand in Notepad, so be kind: dashes, bars or
+// commas work as well as the dot, the order doesn't matter, "V2" is v2, and no date or name is fine.
+const HEAD_VERSION = /\bv(\d+)\b/i;
+const HEAD_DATE = /\b(\d{4}-\d{2}-\d{2})\b/;
+function readHead(line) {
+  const t = line.trim();
+  if (!/^## /.test(t)) return null;
+  const v = HEAD_VERSION.exec(t);
+  if (!v) return null;
+  const d = HEAD_DATE.exec(t);
+  const rest = t.slice(3).replace(HEAD_DATE, ' ').replace(HEAD_VERSION, ' ').replace(/[·|,\-–—:]+/g, ' ').trim();
+  return { head: t, date: d ? d[1] : '', who: rest || 'Jerry', version: 'v' + (+v[1]) };
+}
 const REPLY = /^> *(\w+) *· *(taken|v\d+) *· *([^:]*?)\s*(?::\s*(.*))?$/;
 const vnum = (v) => (v ? +String(v).slice(1) : 0);
 
@@ -23,8 +35,8 @@ export function parseNotes(text) {
   const notes = [];
   let cur = null;
   for (const line of clean.split('\n')) {
-    const h = HEAD.exec(line.trim());
-    if (h) { cur = { date: h[1], who: h[2].trim(), version: h[3], text: [], replies: [] }; notes.push(cur); continue; }
+    const h = readHead(line);
+    if (h) { cur = { ...h, text: [], replies: [] }; notes.push(cur); continue; }
     if (/^## /.test(line)) { cur = null; continue; }
     if (!cur) continue;
     const r = REPLY.exec(line.trim());
@@ -61,18 +73,21 @@ export function reviewState(notes, latest) {
 }
 
 // The stub a new notes.md starts as. Everything in the comment is ignored by the parser.
-export function notesStub(asset, latest) {
+export function notesStub(asset, latest, today) {
+  const v = latest || 'v1', d = today || '2026-09-27';
   return `# Notes on ${asset}
 
 <!--
-How to write a note (Jerry): open index.html in this folder, watch, then write under a heading
-with today's date, your name and the version you watched (it's in latest.txt). Plain sentences.
-Write "good" when it's right. Put the newest note at the top. For example:
+Jerry: open index.html in this folder and watch. Then, below this box, write a line starting with
+## and the date, your name and the version you watched (the big "${v}" at the top of index.html),
+and your note under it in plain sentences. Dashes are fine. Write "good" when it's right.
+For example:
 
-## 2026-09-27 · Jerry · ${latest || 'v1'}
-The drag feels floaty. It should dig in harder on each heave.
+## ${d} - Jerry - ${v}
+The start is too quick, and the head bobs. It should feel heavy.
 
-The owner answers under your note with the version to look at next.
+Save the file. The owner answers under your note with the version to look at next.
+The guide: docs/studio-guide.md
 -->
 `;
 }

@@ -59,7 +59,7 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Cursor** · CU-45 a strip you can read · waiting: Claude (CL-61 Jerry's guide)
+- **Jerry** · CL-62 your first note, on review/guardian-drag (v2) · waiting: Claude
 
 
 
@@ -895,7 +895,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   notes newer than their latest render (on the panel as "Jerry's notes waiting"); `crew.mjs review take <asset>` turns
   them into a task or a request for the asset's owner (from `meta.json`), and the answer goes under Jerry's note with the
   version number.
-- [ ] **CL-61** **Jerry's guide.** After CU-45 (CL-60 and AG-19 are in). `docs/studio-guide.md` in plain words: where to look, how to
+- [x] **CL-61** **Jerry's guide.** After CU-45 (CL-60 and AG-19 are in). `docs/studio-guide.md` in plain words: where to look, how to
   write a note, what happens next, how to compare versions. One real example: the guardian's current drag rendered into
   `review/guardian-drag/v1/`, ready for Jerry's first note. Then tell Jerry it's ready (`crew.mjs ask`).
 - [ ] **CL-62** **The guardian's animation through the studio (first real job).** After CL-61, and only on Jerry's go

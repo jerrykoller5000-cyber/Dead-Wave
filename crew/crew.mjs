@@ -205,7 +205,7 @@ function addUnderNote(file, note, lines) {
   const at = all.findIndex((l) => {
     if (inComment) { if (l.includes('-->')) inComment = false; return false; }
     if (l.trim().startsWith('<!--')) { inComment = !l.includes('-->'); return false; }
-    return l.trim().startsWith('## ') && l.includes(note.date) && l.includes(note.version) && l.includes(note.who);
+    return l.trim() === note.head;
   });
   if (at < 0) return false;
   let end = at + 1;
@@ -411,6 +411,14 @@ if (!cmd || cmd === 'panel') {
   console.log('ok');
 } else if (cmd === 'next') {
   need(agent);
+  // Jerry's notes on your review folders come before the queue: he is waiting on them.
+  const mine = reviewAssets().filter((r) => r.owner === agent && (r.state === 'waiting' || r.state === 'taken'));
+  if (mine.length) {
+    const r = mine[0];
+    console.log(`Jerry's note on review/${r.asset}/ (${[...r.open, ...r.taken].map((n) => n.version + ': ' + n.text).join(' | ')})\n` +
+      (r.state === 'waiting' ? `  First: node crew/crew.mjs review take ${r.asset}   (the request it writes says the rest)` : `  You've taken it: change the clip, render it (node tools/studio.mjs render ... --asset ${r.asset}), then node crew/crew.mjs review answer ${r.asset} ${agent} "<what changed>"`));
+    process.exit(0);
+  }
   const t = nextTask(agent), w = waitingTask(agent);
   if (t) console.log(`${t.id} ${t.text.replace(/\*\*/g, '')}`);
   else if (w) console.log(`Nothing you can start yet. ${w.task.id} waits on ${w.on.id} (${ownerOf(w.on.id)}). Stop here: the board will change when it's ready.`);
@@ -516,7 +524,7 @@ if (!cmd || cmd === 'panel') {
   writeReviewIndex(list);
   if (!sub) {
     if (!list.length) { console.log('No review folders yet. The studio makes them: node tools/studio.mjs render <clip.json>'); process.exit(0); }
-    for (const r of list) if (!fs.existsSync(r.notesFile)) fs.writeFileSync(r.notesFile, notesStub(r.asset, r.latest), 'utf8');
+    for (const r of list) if (!fs.existsSync(r.notesFile)) fs.writeFileSync(r.notesFile, notesStub(r.asset, r.latest, now().slice(0, 10)), 'utf8');
     console.log('asset                  now  owner       notes');
     for (const r of list) console.log(reviewLine(r));
     const w = list.filter((r) => r.state === 'waiting');

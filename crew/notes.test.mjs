@@ -41,3 +41,13 @@ test('headings that are not notes are ignored', () => {
   assert.equal(n.length, 1);
   assert.equal(n[0].version, 'v3');
 });
+
+test('a heading typed by hand in Notepad still counts', () => {
+  for (const h of ['## 2026-09-27 - Jerry - v2', '## 2026-09-27 · Jerry · V2', '## Jerry v2', '## v2 2026-09-27 Jerry', '## 2026-09-27 | Jerry | v2']) {
+    const n = parseNotes(h + '\nToo floaty.\n');
+    assert.equal(n.length, 1, h);
+    assert.equal(n[0].version, 'v2', h);
+    assert.equal(n[0].who, 'Jerry', h);
+    assert.equal(n[0].text, 'Too floaty.', h);
+  }
+});

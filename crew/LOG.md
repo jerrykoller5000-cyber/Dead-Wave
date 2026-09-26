@@ -1186,3 +1186,7 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T03:29Z · cursor · IN · CU-45 Readable strip tiles, skip unchanged clips, fix gallop v2 · on Grok 4.7 · touching tools/studio.html, tools/studio.mjs, review/
 - 2026-09-26T03:48Z · cursor · NOTE · Strip is tiles now. Drag 23.5s, throw 29.3s, both under 30s headless. Gallop snaps outlined in red.
 - 2026-09-26T03:48Z · cursor · DONE · CU-45 Readable strip tiles, skip unchanged clips, fix gallop v2 · report handoffs/2026-09-26-cursor-CU-45.md
+- 2026-09-26T03:52Z · claude · IN · CL-61 Jerry's guide to the studio · on Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge) · touching docs/studio-guide.md, crew/crew.mjs, crew/panel.html
+- 2026-09-26T03:52Z · claude · REVIEWED · handoffs/2026-09-26-cursor-CU-45.md · good: the strip reads now (drag v2: figure fills the tile, times large, reference row at human size). Small: the rig rows paint below the reference rows (GL viewports count from the bottom); fine as is. Accepted
+- 2026-09-26T03:53Z · claude · ASK · Q-2 The studio is ready for your first note (CL-61). Open Tiny Trek\review\guardian-drag\index.html, watch v2, then write un
+- 2026-09-26T03:54Z · claude · DONE · CL-61 Jerry's guide to the studio · report handoffs/2026-09-26-claude-CL-61.md

@@ -541,6 +541,11 @@ async function refresh() {
     if (next) { readyAgents.push(n); you.push(`<div class="yi" ${cvar(a)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(n)}</span> on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}</div><button class="copy" type="button" data-prompt="${esc(PROMPT(a, next.id))}">Copy prompt</button></div>`); }
     else if (open.length) waitingAgents.push(n);
   }
+  // A note Jerry wrote that nobody has picked up: the owner needs starting (agents only run when prompted).
+  for (const r of revs.filter((r) => r.state === 'waiting' && (statuses[r.owner] || {}).state !== 'active')) {
+    const n = r.open[0];
+    you.push(`<div class="yi" ${cvar(r.owner)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(NAME[r.owner] || r.owner)}</span> on your note on <b>${esc(r.asset)}</b> ${esc(n.version)}: “${esc(n.text.slice(0, 120))}”</div><button class="copy" type="button" data-prompt="${esc(PROMPT(r.owner, `Jerry's note on review/${r.asset}/ (crew.mjs next ${r.owner} says how)`))}">Copy prompt</button></div>`);
+  }
   for (const r of revs.filter((r) => r.state === 'look')) you.push(`<div class="yi" ${cvar(r.owner)}><span class="dot"></span><div class="d"><span class="nm">Look at ${esc(r.asset)} ${esc(r.lookAt)}</span>: ${esc(NAME[r.owner] || r.owner)} answered your note. ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 160))}</div><a class="copy" href="${r.at}index.html" target="_blank">Open</a></div>`);
   for (const q of qs.filter((q) => q.state === 'open')) you.push(`<div class="yi" ${cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Answer ${esc(q.id)}</span> from ${esc(NAME[q.agent] || q.agent)}: ${inline(q.body.split('\n').filter(Boolean).join(' ').slice(0, 200))}</div><span class="faint">tell Claude in chat</span></div>`);
   document.getElementById('you').innerHTML = you.length
@@ -661,7 +666,7 @@ async function refresh() {
       : r.state === 'look' ? `${esc(NAME[r.owner] || r.owner)} made ${esc(r.lookAt)}: ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 140))}`
       : r.state === 'approved' ? `approved at ${esc(r.approvedAt)}` : `${esc(r.clip ? 'clip ' + r.clip : 'rig turntable')}${r.reference ? ' · reference ' + esc(r.reference) : ''}`;
     return `<div class="ri"><div><a href="${r.at}index.html" target="_blank">${esc(r.asset)}</a> <span class="faint">${esc(r.latest || '')} · ${esc(NAME[r.owner] || r.owner)}</span></div><div><span class="st ${esc(r.state)}">${esc(WORD[r.state] || r.state)}</span><span class="nt">${detail}</span></div></div>`;
-  }).join('') + `<p class="faint" style="margin:8px 0 0">Open a folder, watch, then write in its <code>notes.md</code> under a line like <code>## ${new Date().toISOString().slice(0, 10)} · Jerry · v1</code> (the version is in <code>latest.txt</code>). Plain sentences; "good" when it's right. The owner picks it up from the board.</p>`;
+  }).join('') + `<p class="faint" style="margin:8px 0 0">Open a folder, watch, then write in its <code>notes.md</code> under a line like <code>## ${new Date().toISOString().slice(0, 10)} - Jerry - v2</code> (the version is the big one at the top of the folder's page; the guide is <code>docs/studio-guide.md</code>). Plain sentences; "good" when it's right. The owner picks it up from the board.</p>`;
 
   // ---- requests
   const recentDay = new Date(now - 36 * 36e5).toISOString().slice(0, 10);

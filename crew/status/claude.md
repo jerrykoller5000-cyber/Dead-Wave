@@ -4,10 +4,10 @@ state: idle
 model: Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-09-26T03:06Z
-next: CL-61 Jerry's guide (after CU-45)
+since: 2026-09-26T03:54Z
+next: CL-62 the guardian through the studio, from Jerry's first note
 blocked-on: —
-last-report: handoffs/2026-09-26-claude-CL-60.md
+last-report: handoffs/2026-09-26-claude-CL-61.md
 
 ## Notes
 
