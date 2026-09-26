@@ -97,7 +97,7 @@
   <h1>Your note</h1>
   <details id="history" hidden><summary id="histsum"></summary><div id="histlist"></div></details>
   <textarea id="note" placeholder="What should change? e.g. The shotgun stagger is good but he gets up too fast. The brute should rock back more."></textarea>
-  <label class="check"><input type="checkbox" id="withpic" checked> Send a picture of what's on screen with it</label>
+  <label class="check"><input type="checkbox" id="withpic" checked> Send a picture of what's on screen with it, and a strip of the reaction</label>
   <div class="grid" style="margin-top:6px"><button id="save">Save note for the crew</button><button id="approve">It's good</button></div>
   <div class="scene"><input type="text" id="scenename" placeholder="scene name" maxlength="40"><button id="savescene">Save as scene</button></div>
   <div id="saved"></div>
@@ -301,6 +301,7 @@ async function build() {
   grab = null; grabDot.visible = false;
   rec.frames = []; rec.events = []; rec.hits = []; seq = null; liveSnap = null;
   mode = 'live'; viewT = simT; setTransport();
+  record(true);
   // Two bodies stand side by side across the view: the camera comes round to the front to see both.
   if (two !== framedTwo) { framedTwo = two; Object.assign(orbit, two ? { yaw: 0.35, dist: 6.8 } : { yaw: 0.6, dist: 5.2 }); placeCam(); }
   drawParts();
@@ -361,6 +362,7 @@ function strike(lb, s, w = weapon) {
 function hitFromClick(lb, xyz, rayDir) {
   goLive();
   beginRun();
+  record(true);
   const name = nearestPoint(lb, xyz);
   const local = localDir(lb, rayDir);
   const from = fromOf(local);
@@ -373,6 +375,7 @@ function hitFromClick(lb, xyz, rayDir) {
 function fire(from = 'front') {
   goLive();
   beginRun();
+  record(true);
   for (const lb of labBodies) strike(lb, { at: weapon.at, xyz: pointsNow(lb)[weapon.at], dir: worldDir(lb, FROM[from]), from });
 }
 // The first hit of the run again, on bodies stood back up on their animation.
@@ -383,12 +386,14 @@ function again() {
   for (const lb of labBodies) standUp(lb);
   seq = null;
   beginRun();
+  record(true);
   const w = WEAPONS.find((x) => x.key === h.weapon) || weapon;
   for (const lb of labBodies) strike(lb, { at: h.at, xyz: pointsNow(lb)[h.at], dir: worldDir(lb, [h.local[0], h.lift, h.local[2]]), from: h.from }, w);
 }
 function lose(part) {
   goLive();
   beginRun();
+  record(true);
   for (const lb of labBodies) {
     if (typeof lb.body.lose !== 'function' || lb.lost.has(part)) continue;
     const ok = lb.body.lose(part);
@@ -449,9 +454,12 @@ function snapBody(lb) {
   lb.inst.group.quaternion.toArray(a, o); lb.inst.group.position.toArray(a, o + 4);
   return a;
 }
+// force: now, however soon after the last frame (the moment of a hit, or of the bodies being made);
+// a frame at the same time as the last one takes its place.
 function record(force) {
   const last = rec.frames[rec.frames.length - 1];
   if (!force && last && simT - last.t < REC_STEP - 1e-9) return;
+  if (last && last.t === simT) rec.frames.pop();
   rec.frames.push({ t: simT, pose: labBodies.map(snapBody), arrows: labBodies.map((lb) => lb.arrow.state), hidden: labBodies.map((lb) => lb.hidden), state: labBodies.map((lb) => lb.body.state) });
   const cut = simT - REC_SPAN;
   let k = 0;
@@ -892,45 +900,108 @@ function context() {
 // The canvas as a PNG, with the scrub bar and a caption under it so the picture says what it shows.
 // Under 3 MB (contract 5). The renderer keeps no copy of a frame once it's on screen, so the loop
 // takes the picture straight after it draws a frame.
+// With { strip: true } (a note's picture), six moments of the reaction go under it.
 let captures = [];
-const snapshot = () => new Promise((resolve) => captures.push(resolve));
+const snapshot = ({ strip = false } = {}) => new Promise((resolve) => captures.push({ resolve, strip }));
 function takeCaptures() {
   if (!captures.length) return;
   const waiting = captures; captures = [];
   let url = null;
-  try { url = composeSnapshot(); } catch (e) { console.warn('motion lab: no picture:', e); }
-  for (const r of waiting) r(url);
+  try { url = composeSnapshot(waiting.some((c) => c.strip)); } catch (e) { console.warn('motion lab: no picture:', e); }
+  for (const c of waiting) c.resolve(url);
 }
-function composeSnapshot() {
-  const bars = 96, src = renderer.domElement;
+// A body's recorded pose put back on it exactly (snapBody's layout).
+function putBody(lb, a) {
+  [...lb.joints, lb.inst.group].forEach((o, k) => { o.quaternion.fromArray(a, k * 7); o.position.fromArray(a, k * 7 + 4); });
+  lb.inst.group.updateWorldMatrix(false, true);
+}
+// Six moments of the reaction for the picture's strip: from just before the first hit the recording
+// holds to its end, drawn from the recording with the camera as it is, then everything put back as
+// it was on screen. null when there's no hit to show.
+const STRIP = 6;
+function stripTiles(tileW, tileH) {
+  const hit = rec.hits.find((h) => h.t >= recStart());
+  const t0 = hit ? Math.max(recStart(), hit.t - 0.05) : 0, t1 = recEnd();
+  if (!hit || t1 - t0 < 0.25) return null;
+  const keep = labBodies.map((lb) => ({ pose: snapBody(lb), arrow: lb.arrow.state, vis: PARTS.map((p) => { const j = partJoint(lb, p); return j ? j.visible : true; }) }));
+  const times = Array.from({ length: STRIP }, (_, i) => t0 + ((t1 - t0) * i) / (STRIP - 1));
+  // One crop for every tile: where the bodies are on screen over the whole strip, with room round
+  // them, at the screen's shape, so a tile shows the bodies large and the tiles compare.
+  const src = renderer.domElement, W = src.width, H = src.height;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const t of times) {
+    showFrame(t);
+    for (const lb of labBodies) for (const j of lb.joints) {
+      j.getWorldPosition(_w).project(camera);
+      const px = ((_w.x + 1) / 2) * W, py = ((1 - _w.y) / 2) * H;
+      x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py);
+    }
+  }
+  const pad = 0.18 * Math.max(x1 - x0, y1 - y0) + 0.04 * H;
+  let cw = Math.max(x1 - x0 + 2 * pad, ((y1 - y0 + 2 * pad) * W) / H, W / 4), ch = (cw * H) / W;
+  cw = Math.min(cw, W); ch = Math.min(ch, H);
+  const cx = Math.max(0, Math.min(W - cw, (x0 + x1) / 2 - cw / 2)), cy = Math.max(0, Math.min(H - ch, (y0 + y1) / 2 - ch / 2));
+  const tiles = [];
+  for (const t of times) {
+    showFrame(t);
+    renderer.render(scene, camera);
+    const c = document.createElement('canvas'); c.width = tileW; c.height = tileH;
+    c.getContext('2d').drawImage(src, cx, cy, cw, ch, 0, 0, tileW, tileH);
+    tiles.push({ canvas: c, at: t - hit.t, state: around(t)[0].state });
+  }
+  labBodies.forEach((lb, i) => {
+    putBody(lb, keep[i].pose);
+    showArrow(lb.arrow, keep[i].arrow);
+    PARTS.forEach((p, k) => { const j = partJoint(lb, p); if (j) j.visible = keep[i].vis[k]; });
+  });
+  // Drawn again as it was, so the screen doesn't show the last moment of the strip for a frame.
+  renderer.render(scene, camera);
+  return tiles;
+}
+function composeSnapshot(withStrip) {
+  const src = renderer.domElement;
   const frame = document.createElement('canvas'); frame.width = src.width; frame.height = src.height;
   frame.getContext('2d').drawImage(src, 0, 0);
+  const w0 = Math.min(1280, src.width), stripTileW = Math.floor(w0 / STRIP), stripTileH = Math.round((stripTileW * src.height) / src.width);
+  const tiles = withStrip ? stripTiles(stripTileW, stripTileH) : null;
   for (let scale = Math.min(1, 1280 / src.width), k = 0; k < 5; k++, scale *= 0.72) {
     const w = Math.round(src.width * scale), h = Math.round(src.height * scale);
+    const tw = Math.floor(w / STRIP), th = tiles ? Math.round((tw * h) / w) : 0;
+    const bars = 96, H = h + th + bars;
     // The words and the scrub bar go on a canvas of their own, copied over the frame at the end:
     // Chrome adds noise to what's read back from any canvas text was drawn on (its guard against
     // fingerprinting), and that noise bands the ground and the sky in the picture.
-    const ink = document.createElement('canvas'); ink.width = w; ink.height = h + bars;
+    const ink = document.createElement('canvas'); ink.width = w; ink.height = H;
     const g = ink.getContext('2d');
     g.font = '13px system-ui, sans-serif';
     for (const lb of labBodies) if (labBodies.length > 1 && !lb.tag.hidden) {
       const x = (parseFloat(lb.tag.style.left) / innerWidth) * w, y = (parseFloat(lb.tag.style.top) / innerHeight) * h;
-      const s = lb.tag.textContent, tw = g.measureText(s).width;
-      g.fillStyle = 'rgba(10,12,18,.75)'; g.fillRect(x - tw / 2 - 5, y - 18, tw + 10, 18);
+      const s = lb.tag.textContent, sw = g.measureText(s).width;
+      g.fillStyle = 'rgba(10,12,18,.75)'; g.fillRect(x - sw / 2 - 5, y - 18, sw + 10, 18);
       g.fillStyle = '#e8e4d4'; g.textAlign = 'center'; g.fillText(s, x, y - 5); g.textAlign = 'left';
     }
-    g.save(); g.translate(0, h); drawTimeline(g, w, 60); g.restore();
-    g.fillStyle = '#12161e'; g.fillRect(0, h + 60, w, bars - 60);
+    if (tiles) {
+      g.font = '12px system-ui, sans-serif'; g.textBaseline = 'top';
+      tiles.forEach((tl, i) => {
+        const x = i * tw, s = `${tl.at >= 0 ? '+' : ''}${tl.at.toFixed(2)} s · ${tl.state.join(' / ')}`;
+        g.fillStyle = 'rgba(10,12,18,.72)'; g.fillRect(x + 3, h + 3, g.measureText(s).width + 8, 17);
+        g.fillStyle = '#e8e4d4'; g.fillText(s, x + 7, h + 5);
+        g.fillStyle = '#12161e'; g.fillRect(x + tw - 1, h, 1, th);
+      });
+    }
+    g.save(); g.translate(0, h + th); drawTimeline(g, w, 60); g.restore();
+    g.fillStyle = '#12161e'; g.fillRect(0, h + th + 60, w, bars - 60);
     g.fillStyle = '#e8e4d4'; g.font = '13px system-ui, sans-serif'; g.textBaseline = 'top';
-    let row = '', y = h + 64;
+    let row = '', y = h + th + 64;
     for (const wd of context().split(' ')) {
-      if (row && g.measureText(row + wd).width > w - 16) { g.fillText(row, 8, y); row = ''; y += 15; if (y > h + bars - 14) break; }
+      if (row && g.measureText(row + wd).width > w - 16) { g.fillText(row, 8, y); row = ''; y += 15; if (y > H - 14) break; }
       row += wd + ' ';
     }
-    if (y <= h + bars - 14) g.fillText(row, 8, y);
-    const c = document.createElement('canvas'); c.width = w; c.height = h + bars;
+    if (y <= H - 14) g.fillText(row, 8, y);
+    const c = document.createElement('canvas'); c.width = w; c.height = H;
     const out = c.getContext('2d');
     out.drawImage(frame, 0, 0, w, h);
+    if (tiles) tiles.forEach((tl, i) => out.drawImage(tl.canvas, i * tw, h, tw, th));
     out.drawImage(ink, 0, 0);
     const url = c.toDataURL('image/png');
     if (url.length <= SNAP_LIMIT) return url;
@@ -988,7 +1059,7 @@ async function loadHistory() {
 }
 async function sendNote(text, { picture = document.getElementById('withpic').checked } = {}) {
   const A = labBodies[0];
-  const pic = picture ? await snapshot() : null;
+  const pic = picture ? await snapshot({ strip: true }) : null;
   const body = { asset: assetName(), text, context: context(), meta: metaFor(A) };
   if (pic) body.snapshot = pic;
   if (canSave) {

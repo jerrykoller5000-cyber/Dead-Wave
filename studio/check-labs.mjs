@@ -394,6 +394,8 @@ async function checkMotionLab(browser, server, page0) {
       must(r.picture && fs.existsSync(path.join(ROOT, r.picture)), 'no picture at ' + r.picture);
       const s = pngSize(fs.readFileSync(path.join(ROOT, r.picture)));
       must(s && s.w >= 640, 'the picture is not a PNG');
+      // The note's picture has the strip of the reaction under the view (six tiles, a sixth as wide).
+      must(s.h >= s.w * 0.72, `the picture is ${s.w}×${s.h}: no strip of the reaction under it?`);
       must(md.includes(`](${r.picture.split('/').slice(2).join('/')})`), 'the note does not name the picture');
       const meta = JSON.parse(fs.readFileSync(path.join(reviewDir, 'meta.json'), 'utf8'));
       must(meta.kind === 'motion' && meta.motion === 'zombie/shambler' && meta.owner, 'meta.json: ' + JSON.stringify(meta));
