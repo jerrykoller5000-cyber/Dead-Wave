@@ -206,7 +206,7 @@ export async function renderSheet(arg, opt = {}) {
     version: plan.version, model: m.ref, file: m.file, modelVersion: m.json.version || 1,
     draws: stats.draws, triangles: stats.triangles, budget: stats.budget, over: stats.over, bounds: stats.bounds,
     joints: stats.joints, parts: stats.parts, drawn: stats.drawn, meshes: stats.meshes, merge: stats.merge,
-    views: stats.views, scale: stats.scale, ...(stats.clip ? { clip: stats.clip } : {}),
+    views: stats.views, scale: stats.scale, ...(stats.clip ? { clip: stats.clip } : {}), ...(stats.checks ? { checks: stats.checks } : {}),
     ...(stats.namesHidden && stats.namesHidden.length ? { namesHidden: stats.namesHidden } : {}),
     renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
   };
@@ -276,6 +276,7 @@ export async function main(argv = process.argv.slice(2)) {
       const s = r.stats;
       say(`${r.asset} ${r.version}${r.action === 'new' ? '' : ' (' + r.action + ')'}  draws ${s.draws}/${s.budget.draws}  tris ${s.triangles}/${s.budget.triangles}${s.over ? '  OVER BUDGET' : ''}  ${sizeText(s.bounds)}  ${r.seconds.toFixed(1)} s`);
       say(`  review/${r.asset}/${r.version}/sheet.png`);
+      for (const c of (s.checks && s.checks.said) || []) say('  check: ' + c);
     }
     for (const e of r.errors || []) say('  page: ' + e.split('\n')[0]);
   }

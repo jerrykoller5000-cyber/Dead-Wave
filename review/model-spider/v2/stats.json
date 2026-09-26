@@ -1,8 +1,8 @@
 {
-  "version": "v1",
+  "version": "v2",
   "model": "creature/spider",
   "file": "studio/models/creature/spider.json",
-  "modelVersion": 1,
+  "modelVersion": 2,
   "draws": 30,
   "triangles": 2636,
   "budget": {
@@ -76,29 +76,15 @@
   },
   "clip": "spider/crawl",
   "checks": {
-    "pieces": 2,
-    "gaps": [
-      {
-        "parts": [
-          "1 of the 7 spine"
-        ],
-        "items": 1,
-        "metres": 0.025,
-        "between": [
-          "spine",
-          "gut"
-        ]
-      }
-    ],
+    "pieces": 1,
+    "gaps": [],
     "touch": 0.021,
     "underGround": null,
-    "said": [
-      "1 of the 7 spine floats 0.025 m off the rest (spine to gut)"
-    ]
+    "said": []
   },
   "namesHidden": [
     "chest",
     "foot4L"
   ],
-  "renderSeconds": 4.7
+  "renderSeconds": 4.5
 }

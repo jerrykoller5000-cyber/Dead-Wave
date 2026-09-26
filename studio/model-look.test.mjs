@@ -11,7 +11,7 @@ import { parseNotes } from '../crew/notes.mjs';
 import {
   SHEET_VIEWS, VIEW, viewBasis, viewExtent, orthoScale, fitOrtho, fitPerspective, figureSpot, SCALE_FIGURE, buildFigure,
   FIGURE_HEIGHT, LIGHTS, NVG_FILTER, modelBounds, rulerTicks, placeLabels, partRows, partOverlay, partAt, modelDiff,
-  modelNote, noteBlock, readLabQuery, labQuery, ASSET_NAME, partColor, partHex
+  modelNote, noteBlock, readLabQuery, labQuery, ASSET_NAME, partColor, partHex, modelChecks, checkSentences
 } from './model-look.js';
 
 const project = (p, cam) => new THREE.Vector3(...p).project(cam);
@@ -217,6 +217,32 @@ test('a click on the model finds the part of the file under it, even inside a me
   assert.ok(!without || zr[without.src].name !== 'head');
 });
 
+test('the checks: pieces that don\'t touch, and what is under the ground', () => {
+  const box = (name, at, size = [0.2, 0.2, 0.2]) => ({ name, shape: 'box', size, at, material: 'a' });
+  const t = (parts, extra = {}) => ({ format: 'dw-model/1', name: 't', kind: 'prop', materials: { a: { color: '#aa3322' } }, parts, budget: { draws: 64, triangles: 20000 }, ...extra });
+  // Two boxes a metre high: one piece when they touch, two with a 0.1 m gap between them.
+  assert.deepEqual(checkSentences(modelChecks(t([box('base', [0, 0.1, 0]), box('lid', [0, 0.3, 0])]))), []);
+  const apart = modelChecks(t([box('base', [0, 0.1, 0]), box('lid', [0, 0.4, 0])]));
+  assert.equal(apart.pieces, 2);
+  assert.deepEqual([apart.gaps[0].parts, apart.gaps[0].metres, apart.gaps[0].between], [['lid'], 0.1, ['lid', 'base']]);
+  assert.match(checkSentences(apart)[0], /^lid floats 0\.1 m off the rest \(lid to base\)$/);
+  // Some copies of an array float: it says how many.
+  const arr = modelChecks(t([box('slab', [0, 0.1, 0], [1, 0.2, 0.2]), { ...box('peg', [-0.4, 0.25, 0], [0.05, 0.1, 0.05]), array: { count: 3, step: [0.4, 0.1, 0] } }]));
+  // (the first peg stands on the slab; the other two float apart, each a piece of its own)
+  assert.deepEqual(checkSentences(arr).map((x) => x.slice(0, 25)), ['1 of the 3 peg floats 0.1', '1 of the 3 peg floats 0.2']);
+  // Under the ground, unless it floats on water.
+  const sunk = modelChecks(t([box('base', [0, 0.05, 0])]));
+  assert.deepEqual(sunk.underGround, { metres: 0.05, parts: ['base'] });
+  assert.equal(modelChecks(t([box('hull', [0, 0.05, 0])], { joints: { waterline: { at: [0, 0.1, 0] } } })).underGround, null);
+  // The models on disk: the drum, the boat and the spider hang together; the zombie shows the game's own
+  // 5 cm gap at the waist and its feet under the ground (P-73).
+  for (const ref of ['prop/fuel-drum', 'prop/evac-boat', 'creature/spider']) assert.deepEqual(checkSentences(modelChecks(models.json(ref))), [], ref);
+  const z = modelChecks(models.json('creature/zombie'));
+  assert.equal(z.pieces, 2);
+  assert.deepEqual([z.gaps[0].metres, z.gaps[0].between], [0.05, ['pelvis', 'torso']]);
+  assert.equal(z.underGround.metres, 0.26);
+});
+
 test('what changed between two versions of a model file, in sentences', () => {
   const a = models.json('prop/fuel-drum'), b = JSON.parse(JSON.stringify(a));
   assert.deepEqual(modelDiff(a, b), []);
@@ -238,7 +264,7 @@ test('the note the lab sends is contract 5\'s, and its copy reads as Jerry\'s no
   const n = modelNote({ json, ref: 'creature/spider', text: 'Longer legs.', context: 'day; front', snapshot: 'data:image/png;base64,iVBORw0KGgo=' });
   assert.equal(n.asset, modelAsset(json));
   assert.match(n.asset, ASSET_NAME);
-  assert.deepEqual(n.meta, { kind: 'model', ref: 'creature/spider', owner: 'claude', version: 1, file: 'studio/models/creature/spider.json', look: 'studio/model-lab.html?model=creature/spider' });
+  assert.deepEqual(n.meta, { kind: 'model', ref: 'creature/spider', owner: 'claude', version: json.version, file: 'studio/models/creature/spider.json', look: 'studio/model-lab.html?model=creature/spider' });
   assert.equal(n.snapshot.slice(0, 22), 'data:image/png;base64,');
   assert.ok(!('snapshot' in modelNote({ json, ref: 'creature/spider', text: 'x' })), 'no picture, no snapshot field');
   const named = modelNote({ json, ref: 'creature/spider', text: 'x', asset: 'spider-six' });

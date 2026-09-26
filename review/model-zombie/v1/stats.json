@@ -60,5 +60,41 @@
     "elevationsPxPerMetre": 163.2,
     "topPxPerMetre": 252.2
   },
-  "renderSeconds": 3.5
+  "checks": {
+    "pieces": 2,
+    "gaps": [
+      {
+        "parts": [
+          "pelvis",
+          "thighL",
+          "thighR",
+          "shinL",
+          "shinR",
+          "bootL",
+          "bootR"
+        ],
+        "items": 7,
+        "metres": 0.05,
+        "between": [
+          "pelvis",
+          "torso"
+        ]
+      }
+    ],
+    "touch": 0.022,
+    "underGround": {
+      "metres": 0.26,
+      "parts": [
+        "shinL",
+        "shinR",
+        "bootL",
+        "bootR"
+      ]
+    },
+    "said": [
+      "pelvis; thighL; thighR and 4 more float 0.05 m off the rest (pelvis to torso)",
+      "0.26 m under the ground: shinL, shinR, bootL, bootR"
+    ]
+  },
+  "renderSeconds": 3.8
 }

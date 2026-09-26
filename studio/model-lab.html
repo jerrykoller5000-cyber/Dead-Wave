@@ -66,6 +66,7 @@
   <div id="problems" class="hint bad" style="display:none"></div>
   <h2>Cost against its budget</h2>
   <div id="cost"></div>
+  <div id="checks" class="hint"></div>
   <h2>Light</h2>
   <div class="grid3" id="lights"></div>
   <h2>Show</h2>
@@ -133,7 +134,8 @@ import { parseNotes, reviewState } from '../crew/notes.mjs';
 import {
   SHEET_VIEWS, VIEW, PLAY_CAMERA, viewBasis, orthoScale, fitOrtho, fitPerspective, figureSpot, FIGURE_HALF_WIDTH,
   buildFigure, FIGURE_HEIGHT, LIGHTS, LIGHT_MODES, applyLight, drawNvgEdges, modelBounds, sizeText, rulerTicks,
-  placeLabels, partRows, partOverlay, partAt, partColor, partHex, modelDiff, modelNote, noteBlock, readLabQuery, labQuery
+  placeLabels, partRows, partOverlay, partAt, partColor, partHex, modelDiff, modelNote, noteBlock, readLabQuery, labQuery,
+  modelChecks, checkSentences
 } from './model-look.js';
 
 const q = new URLSearchParams(location.search);
@@ -764,7 +766,7 @@ async function drawSheet() {
   load(ref);
   view.figure = 'figure'; view.joints = false; view.names = false;
   setWire(false);
-  const W = 1600, HEAD = 136, TW = 532, TH = 400, G = 2, LW = 398, LH = 300, CAP = 24, FOOT = 30;
+  const W = 1600, HEAD = 158, TW = 532, TH = 400, G = 2, LW = 398, LH = 300, CAP = 24, FOOT = 30;
   const clipRef = S.clip || (cur.inst && (cur.json.clips || [])[0]) || null;
   const clip = clipRef && cur.inst ? loadClip(await (await fetch(`./clips/${clipRef}.json`)).json()) : null;
   const FRAMES = 6, fw = Math.floor(W / FRAMES), fh = 220;
@@ -919,6 +921,12 @@ async function drawSheet() {
   bar(236, 70, 'triangles', c.triangles, b.triangles);
   label(over ? 'OVER BUDGET' : 'within budget', 458, 84, over ? '#ff7a6a' : '#7cdea0', 14);
   label(`${sizeText(cur.bounds)}, from ${cur.bounds.min[1].toFixed(2)} to ${cur.bounds.max[1].toFixed(2)} m up · beside it a 1.75 m figure`, 16, 108, '#c9d2e0', 13);
+  // What the numbers say looks wrong (model-look.js modelChecks): pieces that don't touch, parts under the ground.
+  const checks = modelChecks(j), said = checkSentences(checks);
+  let cline = said.length ? 'checks: ' + said.join(' · ') : `checks: one piece (parts within ${checks.touch} m touch), nothing under the ground`;
+  ctx.font = '13px system-ui, sans-serif';
+  while (cline.length > 20 && ctx.measureText(cline).width > W - 32) cline = cline.slice(0, -2) + '…';
+  label(cline, 16, 150, said.length ? '#ffb070' : '#7cdea0', 13);
   let sx = 16;
   ctx.font = '12px system-ui, sans-serif';
   for (const [n, m] of Object.entries(j.materials)) {
@@ -941,7 +949,7 @@ async function drawSheet() {
     model: cur.ref, version: j.version || 1, draws: c.draws, triangles: c.triangles, budget: b, over,
     bounds: cur.bounds, joints: Object.keys(cur.built.joints), parts: j.parts.length, drawn: cur.built.parts.length,
     meshes: cur.built.meshes.length, merge: j.merge ?? false, views: SHEET_VIEWS.map((v) => v.key), scale: { elevationsPxPerMetre: +(1 / mppElev).toFixed(1), topPxPerMetre: +(1 / mppTop).toFixed(1) },
-    ...(clipRef ? { clip: clipRef } : {}), namesHidden: missing
+    ...(clipRef ? { clip: clipRef } : {}), namesHidden: missing, checks: { ...checks, said }
   };
   window.__ready = true;
 }
@@ -1090,6 +1098,9 @@ async function live() {
     const bar = (name, v, max) => `<div class="bar${v > max ? ' over' : ''}"><i style="width:${Math.min(100, (100 * v) / max).toFixed(1)}%"></i><span>${name} ${v} of ${max}${v > max ? ' — over' : ''}</span></div>`;
     $('cost').innerHTML = bar('draws', c.draws, b.draws) + bar('triangles', c.triangles, b.triangles) +
       `<div class="hint">${sizeText(cur.bounds)} · ${Object.keys(cur.built.joints).length} joints · ${cur.built.meshes.length} meshes · merge ${esc(JSON.stringify(j.merge ?? false))}</div>`;
+    const checks = modelChecks(j), said = checkSentences(checks);
+    cur.checks = { ...checks, said };
+    $('checks').innerHTML = said.length ? said.map((t) => `<div style="color:#ffb070">${esc(t)}</div>`).join('') : `<span class="good">One piece, nothing under the ground.</span>`;
     $('partCount').textContent = `${j.parts.length} in the file, ${cur.built.parts.length} drawn`;
     $('parts').replaceChildren(...cur.rows.map((r) => {
       const d = document.createElement('div'); d.className = 'part'; d.dataset.i = r.i;
@@ -1284,7 +1295,8 @@ async function live() {
       filter: renderer.domElement.style.filter, straight: orbit.straight, yaw: orbit.yaw, canSave, review: { ...review, notes: review.notes.length, then: !!review.then },
       body: body ? { preset: body.presetName, state: body.state } : null, context: describe(), look: lookUrl(), figureAt: shownFigure() ? shownFigure().position.toArray() : null,
       ghost: ghost ? ghost.version : null, problems: [...problems], fileVersion: cur.json.version || 1,
-      colored: colorMeshes.filter((m) => m.visible).length, modelMeshesShown: cur.built.meshes.filter((m) => m.visible).length
+      colored: colorMeshes.filter((m) => m.visible).length, modelMeshesShown: cur.built.meshes.filter((m) => m.visible).length,
+      checks: cur.checks ? cur.checks.said : null
     }),
     setModel: async (r) => { ref = r; sel.value = r; await show(); return cur.ref; },
     setLight: (m) => { setLight(m); syncButtons(); },

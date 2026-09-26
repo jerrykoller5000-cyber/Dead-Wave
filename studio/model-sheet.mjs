@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 register(new URL('./node-three-hook.mjs', import.meta.url));
 const { buildModel, validateModel, rigFromModel } = await import('./model.js');
+const { modelChecks, checkSentences } = await import('./model-look.js');
 const { models } = await import('./models/index.js');
 const { validateClip } = await import('./clip.js');
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -65,6 +66,8 @@ function check(arg) {
     for (const [n, c] of Object.entries(def.chains)) console.log(`  limb ${n}: ${c.root} > ${c.mid} > ${c.end}, lengths ${c.lengths.map((v) => v.toFixed(3)).join(' + ')}, pole [${c.pole.join(', ')}]${c.exact ? ', exact' : ''}`);
     if (json.rig) console.log(`  registers as rig "${json.rig}"${def.body ? ', with a body that reacts' : ''}${json.clips ? '; plays ' + json.clips.join(', ') : ''}`);
   }
+  const said = checkSentences(modelChecks(json));
+  console.log(said.length ? said.map((t) => '  check: ' + t).join('\n') : '  check: one piece, nothing under the ground');
   if (Object.keys(m.limbs).length) console.log(`  limbs that can be lost: ${Object.entries(m.limbs).map(([k, v]) => `${k} (${v.length} mesh${v.length > 1 ? 'es' : ''})`).join(', ')}`);
   // The clips it says it plays: there, valid, and for its rig.
   let clipsOk = true;

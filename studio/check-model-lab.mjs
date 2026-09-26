@@ -32,7 +32,7 @@ import { launch } from '../tools/cdp.mjs';
 register(new URL('./node-three-hook.mjs', import.meta.url));
 const { buildModel, modelAsset } = await import('./model.js');
 const { models } = await import('./models/index.js');
-const { partRows, ASSET_NAME } = await import('./model-look.js');
+const { partRows, ASSET_NAME, modelChecks, checkSentences } = await import('./model-look.js');
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
 const argv = process.argv.slice(2);
@@ -162,11 +162,13 @@ async function checkModel(ref, stub) {
     return `${st.parts} parts, ${st.joints.length} joints, ${st.cost.draws} draws, ${st.cost.triangles} triangles`;
   });
   if (!up) { await page.send('Page.close').catch(() => {}); return; }
-  await step(page, 'its cost, joints and parts are what Node builds', async () => {
+  await step(page, 'its cost, joints, parts and checks are what Node makes of it', async () => {
     must(st.cost.draws === built.cost.draws && st.cost.triangles === built.cost.triangles, `the lab counts ${JSON.stringify(st.cost)}, Node ${JSON.stringify(built.cost)}`);
     must(st.joints.length === Object.keys(built.joints).length, `${st.joints.length} joints, Node ${Object.keys(built.joints).length}`);
     must(st.parts === json.parts.length, `${st.parts} rows, the file has ${json.parts.length} parts`);
     must(st.over === built.over, 'over budget disagrees');
+    const said = checkSentences(modelChecks(json));
+    must(JSON.stringify(st.checks) === JSON.stringify(said), `the lab's checks ${JSON.stringify(st.checks)}, Node's ${JSON.stringify(said)}`);
     return `${st.bounds.size.join(' × ')} m`;
   });
   await step(page, 'the turntable turns, and wireframe, joints, names and grid switch', async () => {

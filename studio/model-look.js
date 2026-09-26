@@ -342,6 +342,68 @@ export function partAt(json, joints, root, raycaster, hidden = new Set()) {
   return best;
 }
 
+// --- Checks an agent can't do by eye --------------------------------------------------------------------
+// What a model looks like it gets wrong, in numbers, at rest: whether its parts hang together as one
+// piece (a part that touches nothing floats; a gap between two halves shows in a close view), and what
+// is under the ground (a model that floats, one with a "waterline" joint, is let off). Parts are
+// compared by their boxes in the model's frame, so a turned part counts as a little bigger than it is:
+// the check errs toward "touching". `touch` is how close counts as touching, in metres: by default 1.2%
+// of the model's biggest size (2 cm on a man, 7 cm on the boat), and never under 1 cm, so the small
+// gaps a blocky figure is built with (an arm held off the body) pass and a gap that shows doesn't.
+const gapBetween = (a, b) => Math.hypot(
+  Math.max(0, a.min.x - b.max.x, b.min.x - a.max.x),
+  Math.max(0, a.min.y - b.max.y, b.min.y - a.max.y),
+  Math.max(0, a.min.z - b.max.z, b.min.z - a.max.z));
+export function modelChecks(json, opts = {}) {
+  const { single } = builds(json);
+  single.group.updateMatrixWorld(true);
+  const parts = single.parts.map((p) => ({ name: p.name || `part ${p.src}`, src: p.src, box: new THREE.Box3().setFromObject(p.mesh, true) }));
+  const all = new THREE.Box3();
+  for (const p of parts) all.union(p.box);
+  const s = all.getSize(new THREE.Vector3());
+  const touch = opts.touch ?? +Math.max(0.01, 0.012 * Math.max(s.x, s.y, s.z)).toFixed(3);
+  // Pieces: parts joined by touching, as a union-find over every pair.
+  const up = parts.map((_, i) => i);
+  const find = (i) => (up[i] === i ? i : (up[i] = find(up[i])));
+  for (let i = 0; i < parts.length; i++) for (let k = i + 1; k < parts.length; k++) if (gapBetween(parts[i].box, parts[k].box) <= touch) up[find(i)] = find(k);
+  const groups = new Map();
+  parts.forEach((p, i) => { const r = find(i); (groups.get(r) || groups.set(r, []).get(r)).push(p); });
+  const size = (g) => g.reduce((s, p) => { const v = p.box.getSize(_v); return s + v.x * v.y * v.z; }, 0);
+  const pieces = [...groups.values()].sort((a, b) => size(b) - size(a));
+  // Each piece but the biggest: how far it is from the rest, and between which two parts.
+  const gaps = pieces.slice(1).map((g) => {
+    let best = null;
+    for (const p of g) for (const q of parts) {
+      if (g.includes(q)) continue;
+      const d = gapBetween(p.box, q.box);
+      if (!best || d < best.metres) best = { metres: +d.toFixed(3), between: [p.name, q.name] };
+    }
+    // Names once each; a part only some of whose copies float says how many ("1 of the 7 spine").
+    const names = [...new Set(g.map((p) => p.name))].map((n) => {
+      const here = g.filter((p) => p.name === n).length, of = parts.filter((p) => p.name === n).length;
+      return here < of ? `${here} of the ${of} ${n}` : n;
+    });
+    return { parts: names, items: g.length, ...best };
+  });
+  const floats = json.joints && json.joints.waterline;
+  const under = floats ? [] : parts.filter((p) => p.box.min.y < -touch);
+  const depth = under.length ? +(-Math.min(...under.map((p) => p.box.min.y))).toFixed(3) : 0;
+  return {
+    pieces: pieces.length, gaps, touch,
+    underGround: under.length ? { metres: depth, parts: [...new Set(under.map((p) => p.name))] } : null
+  };
+}
+// The checks as short sentences, for the sheet's header and the lab's panel.
+export function checkSentences(c) {
+  const out = [];
+  for (const g of c.gaps) {
+    const who = g.parts.length > 3 ? g.parts.slice(0, 3).join('; ') + ` and ${g.parts.length - 3} more` : g.parts.join('; ');
+    out.push(`${who} ${g.items > 1 ? 'float' : 'floats'} ${g.metres} m off the rest (${g.between[0]} to ${g.between[1]})`);
+  }
+  if (c.underGround) out.push(`${c.underGround.metres} m under the ground: ${c.underGround.parts.slice(0, 4).join(', ')}${c.underGround.parts.length > 4 ? ' and more' : ''}`);
+  return out;
+}
+
 // --- What changed between two versions of a file -----------------------------------------------------------
 const short = (v) => {
   const s = JSON.stringify(v);

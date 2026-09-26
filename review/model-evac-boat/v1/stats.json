@@ -51,5 +51,12 @@
     "topPxPerMetre": 53.1
   },
   "clip": "evac-boat/search",
-  "renderSeconds": 5.4
+  "checks": {
+    "pieces": 1,
+    "gaps": [],
+    "touch": 0.074,
+    "underGround": null,
+    "said": []
+  },
+  "renderSeconds": 5.1
 }

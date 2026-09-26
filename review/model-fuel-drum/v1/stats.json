@@ -46,5 +46,12 @@
     "elevationsPxPerMetre": 187.4,
     "topPxPerMetre": 256.5
   },
-  "renderSeconds": 3.3
+  "checks": {
+    "pieces": 1,
+    "gaps": [],
+    "touch": 0.012,
+    "underGround": null,
+    "said": []
+  },
+  "renderSeconds": 3.7
 }
