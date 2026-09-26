@@ -919,6 +919,10 @@ function defaultSceneName() {
   const A = labBodies[0], h = seq && seq.hits[0];
   return slug([typeOf(A.ref), labBodies[1] ? 'vs-' + (compareWith === 'file' ? 'file' : typeOf(labBodies[1].ref)) : '', h ? h.weapon : ''].filter(Boolean).join('-'));
 }
+// The scene is the lab turned a quarter turn about the vertical (places, facings and pushes alike, so
+// the physics is the same): the renderer's side view looks along X, and the lab stands its bodies
+// along X, so turned they stand side by side in its strip, facing the camera, as zombie-reactions do.
+const quarter = ([x, y, z]) => [r3(z), r3(y), r3(-x)];
 function sceneJson(name) {
   if (!seq || !(seq.hits.length || seq.lost.length)) return null;
   const t0 = seq.t0 - 0.5;
@@ -928,15 +932,16 @@ function sceneJson(name) {
   for (const lb of labBodies) {
     const st = seq.start[lb.key];
     if (!st) continue;
-    const a = { rig: lb.json.rig, at: st.at, face: r3((st.yaw * 180) / Math.PI) };
+    const face = ((st.yaw * 180) / Math.PI + 90 + 540) % 360 - 180;
+    const a = { rig: lb.json.rig, at: quarter(st.at), face: r3(face) };
     if (lb.json.rig === 'zombie' && lb.scale !== 1) a.scale = lb.scale;
     a.clips = [[0, STANDS[lb.json.rig]]];
     a.motion = st.moved ? st.preset : st.ref;
     const mine = seq.hits.filter((h) => h.key === lb.key);
     const kill = mine.find((h) => h.kill);
-    const hits = mine.filter((h) => h !== kill).map((h) => [r3(h.t - t0), { at: h.at, dir: h.dir, power: h.power, kind: h.kind }]);
+    const hits = mine.filter((h) => h !== kill).map((h) => [r3(h.t - t0), { at: h.at, dir: quarter(h.dir), power: h.power, kind: h.kind }]);
     if (hits.length) a.hits = hits;
-    if (kill) a.kill = [r3(kill.t - t0), { at: kill.at, dir: kill.dir, power: kill.power, kind: kill.kind }];
+    if (kill) a.kill = [r3(kill.t - t0), { at: kill.at, dir: quarter(kill.dir), power: kill.power, kind: kill.kind }];
     const lost = seq.lost.filter((l) => l.key === lb.key).map((l) => [r3(l.t - t0), l.part]);
     if (lost.length) a.lose = lost;
     const j = judge(lb);
