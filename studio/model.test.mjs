@@ -438,3 +438,43 @@ test('the spider reacts on its eight legs: a body made of data, the same engine'
   assert.ok(sp < zb * 4, `a spider costs ${(sp / zb).toFixed(1)} shamblers`);
 });
 
+
+// --- Review fixes (the model packages' review, 2026-09-26) -------------------------------------
+
+test('a bad body, a mirrored chain with no twin joints, an inherited material name and an unknown owner are sentences', () => {
+  const legs = { hipL: { at: [0.1, 0.5, 0] }, kneeL: { parent: 'hipL', at: [0, -0.25, 0] }, footL: { parent: 'kneeL', at: [0, -0.25, 0] } };
+  const base = (extra) => model([{ shape: 'box', size: [0.1, 0.1, 0.1], material: 'a' }], { joints: legs, ...extra });
+  let errs;
+  assert.doesNotThrow(() => { errs = validateModel(base({ body: { points: { a: null }, segments: [null] } })); });
+  assert.ok(errs.some((e) => /"body" points a are each/.test(e)) && errs.some((e) => /every "body" segment/.test(e)), errs.join('; '));
+  errs = validateModel(base({ body: { points: { a: { joint: 'hipL', at: [0, 0, 0], mass: 1, r: 0.05, group: 'legs' } }, segments: [{ joint: 'hipL', pos: 'a' }] } }));
+  assert.ok(errs.some((e) => /needs "frame"/.test(e)), errs.join('; '));
+  errs = validateModel(base({ chains: { legL: { root: 'hipL', mid: 'kneeL', end: 'footL', mirror: 'x' } } }));
+  assert.ok(errs.some((e) => /mirrored onto "legR", but .* no twin/.test(e)), errs.join('; '));
+  errs = validateModel(model([{ shape: 'box', size: [0.1, 0.1, 0.1], material: 'toString' }]));
+  assert.ok(errs.some((e) => /"material" names one of/.test(e)), 'an inherited name passed: ' + errs.join('; '));
+  errs = validateModel(model([{ shape: 'box', size: [0.1, 0.1, 0.1], material: 'a' }], { owner: 'philip' }));
+  assert.ok(errs.some((e) => /"owner" is the agent .*claude, cursor, chatgpt, grokbot, antigravity/.test(e)), errs.join('; '));
+});
+
+test('an instance has its own limbs and meshes, and a model rig builds from one template', () => {
+  const built = buildModel(models.json('creature/spider'));
+  const inst = instanceModel(built);
+  assert.deepEqual(Object.keys(inst.limbs).sort(), Object.keys(built.limbs).sort());
+  for (const [l, ms] of Object.entries(inst.limbs)) {
+    assert.equal(ms.length, built.limbs[l].length, l);
+    for (const m of ms) { assert.ok(m.isMesh); let o = m; while (o.parent) o = o.parent; assert.equal(o, inst.group, l + ': a mesh of the instance'); }
+  }
+  assert.equal(inst.meshes.length, built.meshes.length);
+  // rigs.create builds a reference body on every adopt: a copy of one template, not a new build.
+  const t0 = performance.now();
+  for (let k = 0; k < 20; k++) rigs.get('spider').create({});
+  const ms = (performance.now() - t0) / 20;
+  assert.ok(ms < 3, `a spider rig ${ms.toFixed(2)} ms each (a full build every time was about 3.4)`);
+});
+
+test('the game\'s front door never fails on a model file: the model rigs load behind a guard', () => {
+  const src = fs.readFileSync(new URL('./rigs.js', import.meta.url), 'utf8');
+  assert.ok(!/^import .*models\/index\.js/m.test(src) && !/^import .*\.\/model\.js/m.test(src), 'rigs.js imports the models statically again');
+  assert.match(src, /try \{\s*const \[\{ rigFromModel \}, \{ models \}\] = await Promise\.all/);
+});

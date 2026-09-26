@@ -20,6 +20,8 @@ export const MODEL_FORMAT = 'dw-model/1';
 export const MODEL_KINDS = ['prop', 'creature'];
 // The game's partsLost keys (index.html makeZombieMesh): a part tagged with one hides with that limb.
 export const LIMBS = ['armL', 'armR', 'legL', 'legR', 'head'];
+// Who can answer Jerry's notes: the same list the write door checks (studio/notes-endpoint.mjs AGENTS).
+const OWNERS = ['claude', 'cursor', 'chatgpt', 'grokbot', 'antigravity'];
 const D2R = Math.PI / 180;
 
 // What each shape takes. `size` lists how many numbers its size may have; the options are the extra
@@ -198,7 +200,11 @@ function expandChains(json, joints, errs = []) {
     else if (src[t]) errs.push(`chain "${n}" is mirrored onto "${t}", which is declared as well: declare one side and mirror it`);
     else {
       const sw = (j) => { const m = mirrorName(j); return m && byName.has(m) ? m : j; };
-      add(t, { ...c, root: sw(c.root), mid: sw(c.mid), end: sw(c.end), pole: isVec3(c.pole) ? flipX(c.pole) : c.pole }, n);
+      const twin = { root: sw(c.root), mid: sw(c.mid), end: sw(c.end) };
+      // A mirror on joints with no twins would be a second chain driving the same limb.
+      const same = ['root', 'mid', 'end'].filter((k) => typeof c[k] === 'string' && twin[k] === c[k]);
+      if (same.length) errs.push(`chain "${n}" is mirrored onto "${t}", but ${list(same.map((k) => `"${c[k]}"`))} ${same.length > 1 ? 'have' : 'has'} no twin: mirror the joints too (their "mirror": "x")`);
+      else add(t, { ...c, ...twin, pole: isVec3(c.pole) ? flipX(c.pole) : c.pole }, n);
     }
   }
   return out;
@@ -214,7 +220,7 @@ export function validateModel(json) {
   if (!MODEL_KINDS.includes(json.kind)) errs.push(`"kind" is ${MODEL_KINDS.map((k) => `"${k}"`).join(' or ')} (got ${JSON.stringify(json.kind)})`);
   for (const k of Object.keys(json)) if (!TOP_KEYS.includes(k)) errs.push(`unknown field "${k}" (a model has ${list(TOP_KEYS)})`);
   if (json.version !== undefined && !(Number.isInteger(json.version) && json.version >= 1)) errs.push('"version" is a whole number from 1: bump it with each change Jerry should look at');
-  if (json.owner !== undefined && !/^[a-z]+$/.test(json.owner)) errs.push('"owner" is the agent who answers Jerry\'s notes on it (claude, cursor, grokbot, chatgpt)');
+  if (json.owner !== undefined && !OWNERS.includes(json.owner)) errs.push(`"owner" is the agent who answers Jerry's notes on it: ${list(OWNERS)} (got ${JSON.stringify(json.owner)})`);
   if (json.notes !== undefined && typeof json.notes !== 'string') errs.push('"notes" is free text: what the model is and what it should feel like');
   if (json.merge !== undefined && json.merge !== true && json.merge !== false && json.merge !== 'color') errs.push('"merge" is true (parts on one joint with one material draw as one), "color" (parts on one joint whose materials differ only in colour draw as one) or false');
   const b = json.budget;
@@ -302,7 +308,7 @@ export function validateModel(json) {
     if (p.at !== undefined && !isVec3(p.at)) errs.push(`${at}: "at" is [x, y, z] metres on its joint`);
     if (p.rot !== undefined && !isVec3(p.rot)) errs.push(`${at}: "rot" is [x, y, z] degrees`);
     if (p.scale !== undefined && !((isNum(p.scale) && p.scale > 0) || (isVec3(p.scale) && p.scale.every((v) => v > 0)))) errs.push(`${at}: "scale" is a number or [x, y, z], above 0 (a left/right copy is "mirror": "x", not a negative scale)`);
-    if (typeof p.material !== 'string' || !mats || !mats[p.material]) errs.push(`${at}: "material" names one of "materials" (${mats ? list(Object.keys(mats)) : 'none'}); got ${JSON.stringify(p.material)}`);
+    if (typeof p.material !== 'string' || !mats || !Object.hasOwn(mats, p.material)) errs.push(`${at}: "material" names one of "materials" (${mats ? list(Object.keys(mats)) : 'none'}); got ${JSON.stringify(p.material)}`);
     if (p.joint !== undefined && !hasJoint(p.joint)) errs.push(`${at}: joint "${p.joint}" is not a joint (${list([...jointNames]) || 'none: leave "joint" out to put it on the model itself'})`);
     if (p.limb !== undefined && !LIMBS.includes(p.limb)) errs.push(`${at}: "limb" is one of ${list(LIMBS)} (the part hides when that limb is lost)`);
     if (p.merge !== undefined && typeof p.merge !== 'boolean') errs.push(`${at}: "merge" is false to keep this part its own mesh (something the game moves or hides alone)`);
@@ -348,9 +354,17 @@ export function validateModel(json) {
     const body = resolveBody(json.body);
     if (!body) errs.push(`"body" is ${list(Object.keys(BODIES).map((k) => `"${k}"`))} (a layout in studio/bodies.js), { "human": { pelvis, chest, crown, foot }, "pelvisIsRoot": bool }, or a whole body { points, bones, segments, ... }`);
     else {
-      const need = new Set([...Object.values(body.points || {}).map((p) => p.joint), ...(body.segments || []).map((s) => s.joint)]);
-      const missing = [...need].filter((n) => !hasJoint(n));
-      if (missing.length) errs.push(`"body" moves joints this model doesn't have: ${list(missing)}`);
+      // Each piece checked for its shape first, so a null or a typo is a sentence, not a TypeError.
+      const pts = Object.entries(body.points || {}), segsB = body.segments || [];
+      const badPt = pts.filter(([, p]) => !isObj(p) || typeof p.joint !== 'string').map(([k]) => k);
+      if (badPt.length) errs.push(`"body" points ${list(badPt)} are each { "joint", "at", "mass", "r", "group" }`);
+      if (segsB.some((sg) => !isObj(sg) || typeof sg.joint !== 'string')) errs.push('every "body" segment is { "joint", and "frame", "aim" or "pos" }');
+      if (typeof json.body === 'object' && !isObj(json.body.human) && !isObj(body.frame)) errs.push('a whole "body" needs "frame": { "lower": { "x", "up" }, "upper": { "x", "up" } }, the points its hips and chest turn by');
+      if (!badPt.length && segsB.every((sg) => isObj(sg) && typeof sg.joint === 'string')) {
+        const need = new Set([...pts.map(([, p]) => p.joint), ...segsB.map((sg) => sg.joint)]);
+        const missing = [...need].filter((n) => !hasJoint(n));
+        if (missing.length) errs.push(`"body" moves joints this model doesn't have: ${list(missing)}`);
+      }
     }
   }
   return errs;
@@ -664,7 +678,14 @@ export function instanceModel(built) {
   const names = new Set(Object.keys(built.joints)), joints = {};
   group.traverse((o) => { if (!o.isMesh && names.has(o.name) && !joints[o.name]) joints[o.name] = o; });
   group.userData.rig = joints;
-  return { group, joints };
+  // A copy keeps the tree's order: pair each object with its copy, so the build's limbs and meshes name
+  // this instance's own (a spider copy can hide the leg it lost).
+  const a = [], b = [];
+  src.traverse((o) => a.push(o)); group.traverse((o) => b.push(o));
+  const copyOf = new Map(a.map((o, k) => [o, b[k]]));
+  const mine = (list) => (list || []).map((m) => copyOf.get(m)).filter(Boolean);
+  const limbs = Object.fromEntries(Object.entries(built.limbs || {}).map(([l, ms]) => [l, mine(ms)]));
+  return { group, joints, limbs, meshes: mine(built.meshes) };
 }
 
 // Frees what a build made for itself (merged geometry, materials). Shapes are shared and stay.
@@ -705,8 +726,11 @@ export function rigFromModel(json, opts = {}) {
   if (!isObj(json.joints) || !Object.keys(json.joints).length) throw new Error(`model "${json.name}" has no "joints": a rig needs a skeleton`);
   const chains = expandChains(json, expandJoints(json));
   const body = json.body !== undefined ? resolveBody(json.body) : undefined;
+  // Built once, then copied: rigs.create builds a reference body on every adopt, and a full build (the
+  // checks and the merge) cost 3.4 ms a spider against 0.8 ms for a copy.
+  let tmpl = null;
   return {
-    build: () => buildModel(json).group,
+    build: () => instanceModel(tmpl ||= buildModel(json)).group,
     adopt: (group) => {
       const u = group && group.userData;
       if (!u || !u.rig || !u.model || u.model.name !== json.name) throw new Error(`this group is not a "${json.name}" model (build one with buildModel)`);
