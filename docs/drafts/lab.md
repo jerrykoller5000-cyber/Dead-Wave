@@ -27,6 +27,10 @@ Chrome and fails on any page error or missing event.
    **From behind**: the weapon hits the body where the crew's checks aim it (the chest; the shoulder
    for a brute's swing; the hips for a grenade; the head for a killing shot).
 4. An arrow shows where the hit landed and which way it pushed. A longer arrow is a harder hit.
+   The **power** slider under the weapons makes the weapon hit softer or harder (a quarter to three
+   times): slide it until a stagger turns into a fall, and you know how close the body is to falling.
+   Tick **Show its points** to see the body the way the physics sees it: white is where its points
+   are, green is where its animation wants them.
 5. **The bar at the bottom** holds the last six seconds. The marks on it are what happened: red is a
    hit, yellow a stagger step, purple a fall, blue getting up, green back to normal, grey dead.
    - Click or drag on the bar to stop at that moment and look at it. Turn the camera while it's
@@ -128,7 +132,17 @@ anywhere else.
 ## The lab page (studio/motion-lab.html)
 
 **URL**: `?preset=zombie/brute`, `&compare=file` or `&compare=<rig/name>`, `&weapon=<battery hit>`,
-`&asset=<review folder>` (where notes go; default `motion-<rig>-<name>`).
+`&power=1.5` (0.25 to 3 times the weapon's), `&bones=1` (the overlay on), `&asset=<review folder>`
+(where notes go; default `motion-<rig>-<name>`).
+
+**Power.** The slider multiplies the weapon's power (log scale, 0.25× to 3×). A hit at another power
+says so in its label ("Shotgun, 6 m at 1.40×"), in the note's context and in a saved scene (the
+actual m/s), and the approved-reaction line on the readout only judges hits at the battery's power.
+
+**The overlay** ("Show its points"): `LineSegments` over the rig, drawn on top, one for the body's
+simulated points (`points()` while it reacts, else `animPoints()`) joined by its `bones`, one for
+`animPoints()` (the muscles' targets). Recorded per frame with the pose (17 points, twice, as
+Float32Array), so it's there in a replay, the strip and the picture.
 
 **Weapons** are the battery's (contract 6): `rifle`, `shotgun-far`, `shotgun-close`, `machete`,
 `brute-swing`, `grenade`, `kill`, with its powers and points. "From the front/side/behind" is the
@@ -207,12 +221,14 @@ last eight notes with their answers and a link to the folder's page.
 **window.lab**, for a script or the console:
 
 ```js
-lab.ready; lab.state()      // mode, times, every body (state, outcome, events, get-up, arrow, preset), the recording, last save
+lab.ready; lab.state()      // mode, times, power, every body (state, outcome, events, get-up, arrow, preset),
+                            // the recording, the run, last save and scene, notes so far, the note's context
 await lab.setPreset('zombie/brute'); await lab.compare('file' | '<rig/name>' | '')
-lab.setWeapon('grenade'); lab.fire('front' | 'side' | 'back'); lab.again(); lab.lose('legL'); lab.slider('legs', 0.4)
+lab.setWeapon('grenade'); lab.setPower(1.5); lab.fire('front' | 'side' | 'back'); lab.again()
+lab.lose('legL'); lab.slider('legs', 0.4); lab.showBones(true); await lab.checkExpect()
 lab.advance(2)              // live time on in whole 1/60 s frames, without waiting for the screen
 lab.pause(); lab.play(); lab.replay(0.25); lab.scrub(t); lab.stepFrames(-1); lab.live(); lab.setSpeed(0.5)
-await lab.snapshot()        // the next frame as a PNG data URL, with the bar and the caption
+await lab.snapshot({ strip }) // the next frame as a PNG data URL, with the bar and the caption (and the strip)
 await lab.note(text, { picture }); await lab.saveScene(name); lab.sceneJson(name)
 lab.screenOf('A', 'chest'); lab.scrubAt(t); lab.jointY('A', 'head'); lab.cost
 ```
