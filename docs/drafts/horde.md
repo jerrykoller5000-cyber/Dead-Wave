@@ -25,6 +25,7 @@ is exactly as it was: the horde is never even made.
 | Its tests, on the studio's zombie stand-ins | `studio/motion-horde.test.mjs` (13) |
 | The switch and the wiring | `index.html`, "=== Reactions" by the knockdown (Grokbot's part) |
 | The game check, on and off | `tools/tests/t85.js` (26 checks) |
+| What it looks like in the game | `docs/drafts/horde-shots.jpg` (see "Seen in the game") |
 
 The bodies are studio/motion.js's, unchanged: the same code the lab and the scenes run.
 
@@ -187,6 +188,33 @@ stand-in runs its maths through proxies, about 25 times slower than three.js: t8
 4 ms a reacting body a frame there (it measures about 1.5), and the Node test holds the real figure.
 **Request for Cursor:** a real `makeBasis` in `tools/tests/fakethree.mjs`, so a reacting body is
 right whichever way it faces in the browser checks.
+
+That slowness also means a browser check that times something by the wall clock can come up short
+when many bodies react at once there (t77's "off, it cools" did once, under three jobs; it passes with
+two). t85 times everything by the game's own dt for that reason.
+
+Run with the switch on, the checks near what changed (t0, t14, t21, t24, t28, t31, t33, t34, t36, t37,
+t40, t53, t54, t60, t61, t63, t69, t71 to t77, t80, t83, t84, t85) pass, apart from t76's "sampled N
+frames" (it fails on the untouched base too) and t85's first check, which says the switch is off by
+default and so fails, as it should, on a page opened with `?reactions=1`. A script that runs the suite
+that way is a copy of `run-all.mjs` with `&reactions=1` on the page's address.
+
+## Seen in the game
+
+`docs/drafts/horde-shots.jpg`: the real game with real three.js, rendered in software (SwiftShader,
+about one frame a second, so no fps from it). Four zombies west of the HQ in the grace hour, side-on:
+a close shell on a shambler, a grenade by a shambler, an M4 round that kills a shambler, and a close
+shell on a brute. Each "reactions on" frame is taken when the first shambler reaches that state, not
+at a clock time. The last frame is the same hits with reactions off.
+
+Logged at each frame (the body's simulated pelvis against the drawn hips joint, over the ground):
+falling 0.27 and 0.27, down 0.12 and 0.12, getting up 0.53 and 0.57, up 0.62 and 0.59. The drawn body
+follows the simulated one; the shamblers are down 1.6 s and up about 1 s later, as their preset says;
+the brute rocks and keeps its feet; the corpse lies flat where it fell.
+
+One thing to tune (P-75): **down, a shambler sits rather than lies**. Its pelvis is on the ground but
+its chest stays up, because the fall tone keeps the spine and head against the standing pose. A lower
+`fall.tone.spine`, or the get-up clips (contract 1) posing it flat, would lay it down.
 
 ## Before it is on by default (on Jerry's GPU)
 
