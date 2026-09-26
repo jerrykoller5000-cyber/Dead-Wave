@@ -1216,3 +1216,6 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T07:52Z · claude · REQUEST · → Cursor: studio.mjs scene: scale the waits with the scene's length
 - 2026-09-26T18:33Z · claude · REQUEST · → Grokbot: get-up times and the Reactions wiring
 - 2026-09-26T18:43Z · claude · REQUEST · → Cursor: Play Dead-Wave.bat can close Jerry's browser
+- 2026-09-26T19:08Z · claude · IN · CL-87 the studio's second round: reactions, the horde behind REACTIONS, the report, the labs, models; review fixes · on Claude Opus 5.5 · touching studio/*, docs/studio.md, docs/studio-guide.md
+- 2026-09-26T19:08Z · claude · DONE · CL-87 the studio's second round: reactions, the horde behind REACTIONS, the report, the labs, models; review fixes · report handoffs/2026-09-26-claude-CL-87.md
+- 2026-09-26T19:08Z · claude · REVIEW · handoffs/2026-09-26-claude-CL-87.md · Test expectations changed with the lead's sign-off: t85 holds the game's dice still and adds three checks; model.test and motion-horde.test drop assumptions the parallel packages broke; check-model-lab now needs the real write door to save.
