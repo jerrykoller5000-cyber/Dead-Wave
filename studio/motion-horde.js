@@ -87,6 +87,11 @@ export function createHorde(opts = {}) {
   const clipsFn = opts.clips || null;
   const presetOf = opts.presetFor || hordePresetFor;
   const now = opts.now || (() => performance.now());
+  // Adopting a mesh costs about 0.4 ms (rigs.create builds the studio's own rig to read its rest pose
+  // from), once in the mesh's life. A grenade into a fresh crowd would pay it a dozen times in one frame,
+  // so at most this many adopt a frame; the rest keep the old reaction until a later hit.
+  const adoptMax = opts.adoptsPerFrame ?? 3;
+  let adoptedNow = 0;
   const self = {};
   const recs = new Map();          // key (a zombie, or one of the host's own bodies) → its record
   const loaded = new Map();        // preset ref → loadMotion(json), shared by every body that uses it
@@ -189,7 +194,10 @@ export function createHorde(opts = {}) {
     if (!z || !z.mesh) return null;
     const ref = presetOf(z);
     if (!ref) return null;
+    const fresh = !z.mesh.userData || z.mesh.userData.hordeBody === undefined;
+    if (fresh && adoptedNow >= adoptMax) { refused++; return null; }
     const c = bodyFor(z.mesh, 'zombie', ref, true);
+    if (fresh) adoptedNow++;
     return c ? makeRec(z, c, { pooled: true, zombie: z }) : null;
   }
 
@@ -415,6 +423,7 @@ export function createHorde(opts = {}) {
     update(dt) {
       const t0 = now();
       frame++;
+      adoptedNow = 0;
       const out = later.splice(0);
       lodN.fill(0);
       let awake = 0;

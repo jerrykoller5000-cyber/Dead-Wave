@@ -234,6 +234,22 @@ test('the hips go back where the host keeps them: after a reaction, and on relea
   assert.equal(h.stats.active, 0);
 });
 
+test('at most three meshes adopt a frame (it costs about 0.4 ms each); the rest keep the old reaction till later', () => {
+  const h = createHorde({ presets });
+  const zs = [0, 1, 2, 3, 4].map((i) => mockZombie('shambler', i * 2, 0));
+  const first = zs.map((z) => h.hit(z, { power: 2.5 }));
+  assert.deepEqual(first, [true, true, true, false, false]);
+  assert.equal(h.stats.attached, 3);
+  h.update(1 / 60);
+  assert.ok(h.hit(zs[3], { power: 2.5 }) && h.hit(zs[4], { power: 2.5 }), 'next frame they adopt');
+  // An adopted mesh (back from the pool on a new zombie) doesn't count: it is already paid for.
+  h.update(1 / 60);
+  h.release(zs[0]);
+  const again = { ...mockZombie(), mesh: zs[0].mesh };
+  const more = [5, 6, 7].map((i) => mockZombie('shambler', i * 2, 0));
+  assert.deepEqual([...more.map((z) => h.hit(z, { power: 2.5 })), h.hit(again, { power: 2.5 })], [true, true, true, true]);
+});
+
 test('the same hits play the same way every time (no randomness in the horde)', () => {
   const once = () => {
     const h = createHorde({ presets });
@@ -274,10 +290,10 @@ test('48 zombies with 8 reacting cost well under a millisecond or two a frame', 
   const h = createHorde({ presets, max: 8 });
   const zs = [];
   for (let i = 0; i < 48; i++) zs.push(mockZombie(i % 6 === 0 ? 'feral' : 'shambler', (i % 8) * 2.5, Math.floor(i / 8) * 2.5));
-  // Everyone adopted (a hit each: the first eight react, the rest are refused but attached), then
-  // eight at a time hit again and simulating together.
-  for (const z of zs) h.hit(z, { power: 0.5 });
-  run(h, 1.5);
+  // Everyone adopted (three a frame, a hit each: the first eight react, the rest are refused but kept),
+  // then eight at a time hit again and simulating together.
+  run(h, 1.5, (f) => { if (f < 20) for (const z of zs) if (!h.has(z)) h.hit(z, { power: 0.5 }); });
+  assert.equal(h.stats.attached, 48);
   let ms = 0, frames = 0, awake = 0;
   run(h, 2, (f) => {
     if (f % 20 === 0) for (let i = 0; i < 8; i++) shell(h, zs[(i * 5 + f) % 48], 100 + f * 10 + i, 4 / 7);
