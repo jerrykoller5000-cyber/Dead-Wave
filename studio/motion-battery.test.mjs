@@ -190,3 +190,10 @@ test('a hit on a point the body lacks lands on a stand-in on that side, and the 
   assert.ok(OUTCOMES.includes(r.outcome), r.outcome);
   assert.equal(runHit('zombie/shambler', 'brute-swing').standIn, null, 'a body that has the point: no stand-in');
 });
+
+test('options in the wrong shape come back as sentences, and one side or hit may be a plain name', () => {
+  const r = runBattery('zombie/shambler', { hits: 'rifle', from: 'back' });
+  assert.deepEqual(r.runs.map((x) => `${x.hit}/${x.from}`), ['rifle/back']);
+  assert.throws(() => runHit('zombie/shambler', undefined), /a hit is a battery name/);
+  assert.throws(() => runBattery('zombie/shambler', { entries: 'rifle' }), /"entries" is a list/);
+});

@@ -88,6 +88,7 @@ export function stanceFor(json, opts = {}) {
 
 // Where a battery entry (or a custom hit) lands and which way it pushes.
 function hitSpec(entry) {
+  if (typeof entry !== 'string' && (!entry || typeof entry !== 'object')) throw new Error(`a hit is a battery name (${BATTERY_NAMES.join(', ')}) or { kind, power, at, from } (got ${JSON.stringify(entry)})`);
   const base = typeof entry === 'string' ? BATTERY.find((b) => b.name === entry) : entry.hit ? BATTERY.find((b) => b.name === entry.hit) : null;
   if ((typeof entry === 'string' || entry.hit) && !base) throw new Error(`"${typeof entry === 'string' ? entry : entry.hit}" is not a battery hit (${BATTERY_NAMES.join(', ')})`);
   const e = { ...(base || {}), ...(typeof entry === 'string' ? {} : entry) };
@@ -298,9 +299,11 @@ export function runBattery(ref, opts = {}) {
   const { json, preset, stance, clipOf } = prepare(ref, opts);
   let entries = opts.entries;
   if (!entries) {
-    const hits = opts.hits || BATTERY_NAMES, from = opts.from || SIDES;
+    // One name or a list, for both: { from: 'back' } is the back only.
+    const hits = [].concat(opts.hits || BATTERY_NAMES), from = [].concat(opts.from || SIDES);
     entries = hits.flatMap((h) => from.map((s) => ({ hit: h, from: s })));
   }
+  if (!Array.isArray(entries)) throw new Error('"entries" is a list of { hit, from }, e.g. [{ "hit": "rifle", "from": "back" }]');
   const runs = entries.map((e) => play(json, preset, stance, hitSpec(e), opts, clipOf));
   return { preset: presetRef(json), version: json.version || 1, rig: json.rig, build: stance.create, stand: stance.clip, lod: opts.lod ?? 0, runs };
 }
