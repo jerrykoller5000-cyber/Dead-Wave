@@ -138,8 +138,9 @@ function paired(a, b) {
     }
     rows.push(row);
   }
-  const sum = changed.length ? `${changed.length} outcome${changed.length === 1 ? '' : 's'} differ (!): ${changed.join('; ')}.` : 'Every outcome is the same.';
-  return `${grid(rows)}\n${sum} ${marks} number${marks === 1 ? '' : 's'} differ by more than 1/20 s or 2 cm (*).`;
+  const count = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+  const sum = changed.length ? `${count(changed.length, 'outcome differs', 'outcomes differ')} (!): ${changed.join('; ')}.` : 'Every outcome is the same.';
+  return `${grid(rows)}\n${sum} ${count(marks, 'number differs', 'numbers differ')} by more than 1/20 s or 2 cm (*).`;
 }
 
 const bandsText = (sw) => sw.bands.map((x, i) => (i === 0 ? x.outcome : `${x.outcome} from ${f2(x.from)}${Math.abs(x.from - sw.knockdown) < 1e-6 ? ' (its knockdown)' : ''}`)).join(', ')
