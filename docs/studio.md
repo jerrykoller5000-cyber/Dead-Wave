@@ -955,9 +955,10 @@ the chains, head, stage, body and budget, and `rest`: the model's rest pose as a
 Its preset is `studio/motion/spider/spider.json` (not yet in `studio/motion/index.js`: the motion
 lab maps each rig to an idle clip, and `spider/idle` is there for it). Against the lab's weapons: a
 rifle round, a far shell and a machete are flinches, a close shell skids it a step, a brute's swing
-rocks it, a grenade throws it and it rights itself, a kill goes limp and settles. A reacting spider
-costs about 0.08 ms a frame warmed in Node (a shambler 0.04 to 0.05 here): 30 points against 17, so
-a little over the 0.07 ms a body is budgeted; the pool's eight at once, all spiders, is about 0.65 ms.
+rocks it, a grenade throws it and it rights itself, a kill goes limp and settles. A reacting spider has 30 points against a
+shambler's 17. On the shared cloud box the two measured about the same, 0.1 to 0.2 ms a frame each and
+too noisy to rank; the budget is 0.07 ms a body, so P-77 measures it on Jerry's GPU before spiders join
+the horde.
 
 ### 11.7 In code
 
