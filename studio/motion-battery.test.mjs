@@ -130,6 +130,24 @@ test('margins read either side of a band that goes back down the scale; a kind t
   assert.ok(b.monotone);
 });
 
+test('snap: how hard a body is handed back to its animation, and whether a limb swung or rolled', () => {
+  const r = runBattery('zombie/shambler', { hits: ['rifle', 'shotgun-close', 'kill'], from: ['front'] });
+  const [rifle, close, kill] = r.runs;
+  assert.equal(kill.snap, null, 'the dead never come back');
+  for (const x of [rifle, close]) {
+    assert.ok(x.snap && x.snap.rad >= 0 && typeof x.snap.joint === 'string' && x.snap.at > 0, JSON.stringify(x.snap));
+    assert.ok(x.snap.at <= x.time + 0.26, 'measured up to a quarter second after it recovered');
+  }
+  // Getting up in 0.05 s instead of the preset's own time throws the pose from lying to standing
+  // in three frames: a snap many times the size, and the limbs swing rather than roll.
+  const json = structuredClone(presets.json('zombie/shambler'));
+  json.getup = { ...json.getup, time: 0.05 };
+  const fast = runHit(json, 'shotgun-close');
+  assert.equal(fast.outcome, 'down');
+  assert.ok(fast.snap.rad > 0.3 && fast.snap.rad > 3 * close.snap.rad, `${fast.snap.rad} against ${close.snap.rad}`);
+  assert.ok(fast.snap.swing > fast.snap.rad / 3, `a swing, not a roll: ${JSON.stringify(fast.snap)}`);
+});
+
 test('options reach the body: a far body (lod) and lost limbs, when the engine has them', () => {
   // lod is passed to body.update; an engine without it ignores it and plays the same.
   const near = runHit('zombie/shambler', 'shotgun-far');

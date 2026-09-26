@@ -52,7 +52,7 @@ test('one preset: a titled table, a row per hit and side, what the columns mean,
   assert.equal(one.code, 0, one.err);
   const out = one.out;
   assert.match(out, /^zombie\/shambler v\d+ {2}\(rig zombie: shambler, scale 1; standing on zombie\/idle; hit 0\.5 s in; 60 fps\)$/m);
-  assert.match(out, /^hit +from +outcome +steps +time +chest +drop +moved +along +fell +lowest +off-bal$/m);
+  assert.match(out, /^hit +from +outcome +steps +time +chest +drop +moved +along +fell +lowest +off-bal +snap$/m);
   assert.match(out, /^rifle +front +flinch +0 +\d\.\d\d/m);
   assert.match(out, /^rifle +back +flinch +0 /m);
   assert.match(out, /^shotgun-close +front +down +0 +\d\.\d\d/m);
@@ -100,7 +100,7 @@ test('--json: everything as data, and the same data from another process', () =>
   const bat = d.presets[0].battery;
   assert.equal(bat.preset, 'zombie/feral');
   assert.deepEqual(bat.runs.map((r) => [r.hit, r.from, r.outcome]), [['shotgun-far', 'side', 'stagger'], ['kill', 'side', 'dead']]);
-  for (const k of ['steps', 'time', 'chest', 'drop', 'moved', 'along', 'fell', 'lowest', 'offBalance', 'events', 'times']) assert.ok(k in bat.runs[0], k);
+  for (const k of ['steps', 'time', 'chest', 'drop', 'moved', 'along', 'fell', 'lowest', 'offBalance', 'snap', 'events', 'times']) assert.ok(k in bat.runs[0], k);
   assert.ok(d.presets[0].expect.results.every((r) => r.ok && !('run' in r)));
 });
 

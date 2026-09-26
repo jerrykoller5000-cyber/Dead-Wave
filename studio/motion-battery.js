@@ -117,7 +117,7 @@ function clipGetter(opts) {
   };
 }
 
-const _v = new THREE.Vector3();
+const _v = new THREE.Vector3(), _p = new THREE.Vector3(), _s = new THREE.Vector3(), _q = new THREE.Quaternion();
 const alongPush = (dir, dx, dz) => { const L = Math.hypot(dir[0], dir[2]) || 1; return (dx * dir[0] + dz * dir[2]) / L; };
 
 // One hit on a fresh body. The host loop is the scenes' (studio/scene.js): pose the clip, follow,
@@ -150,6 +150,18 @@ function play(json, preset, stance, spec, opts, clipOf) {
   const events = [], times = {};
   let chest0 = null, pelvis0 = null, chest = 0, drop = 0, low = { point: null, y: Infinity }, off = 0, bad = false, overClip = null, stop = null;
   let fell = null, lying = false;
+  // Coming back: how smoothly the body is handed back to its animation, from the get-up (or, standing,
+  // the blend back) until `tail` seconds after it recovered. World turns, so the host turning the rig
+  // to the get-up's heading doesn't count; a body that pops shows as one big turn.
+  const joints = Object.entries(inst.R).filter(([, j]) => j && j.isObject3D);
+  const prevQ = new Map(), snap = { rad: 0, joint: null, at: null, swing: null };
+  // A limb's own direction (its aim points), to tell a limb swinging fast from one rolling about its
+  // length: a roll is the animation's twist jumping under a simulated limb, and shows as a flip.
+  const aimOf = new Map(def.segments.filter((sg) => sg.aim).map((sg) => [sg.joint, sg.aim.map((k) => pts.find((p) => p.k === k))]));
+  const prevDir = new Map();
+  const dirOf = (jn) => { const ab = aimOf.get(jn); if (!ab) return null; const a = shown(ab[0]).clone(); return shown(ab[1]).clone().sub(a).normalize(); };
+  const tailF = opts.until ? 0 : Math.round((opts.tail ?? 0.25) / dt);
+  let back = false, endF = Infinity;
   // Which way it lies: its chest from its hips, over the ground, along the push. More than 0, it went
   // down the way it was hit (on its back from a shot in the chest, on its face from one in the back).
   const lie = () => { const c = shown(chestP).clone(), h = shown(pelvisP); return alongPush(spec.dir, c.x - h.x, c.z - h.z); };
@@ -182,8 +194,10 @@ function play(json, preset, stance, spec, opts, clipOf) {
       }
       if ((name === 'fall' || name === 'dead') && overClip) { player.crossfade(stand, 0.3, { loop: true }); overClip = null; }
       if (name === 'down') lying = true;
-      if (name === 'recovered' || name === 'settled' || (opts.until && opts.until(name))) stop = name;
+      if (name === 'recovered') endF = f + tailF;
+      if (name === 'settled' || (opts.until && opts.until(name))) stop = name;
     }
+    if (!back && f >= hitF && (body.state === 'getup' || body.recovering > 0 || times.recovered !== undefined)) back = true;
     body.apply();
     if (f >= hitF) {
       inst.group.updateWorldMatrix(true, true);
@@ -197,9 +211,22 @@ function play(json, preset, stance, spec, opts, clipOf) {
       }
       if (body.offBalance > off) off = body.offBalance;
       if (lying && fell === null) fell = lie();
+      for (const [jn, j] of joints) {
+        j.matrixWorld.decompose(_p, _q, _s);
+        const q0 = prevQ.get(j), d = dirOf(jn), d0 = prevDir.get(jn);
+        if (q0 && back) {
+          const a = 2 * Math.acos(Math.min(1, Math.abs(q0.dot(_q)))) * (1 / 60) / dt;
+          if (a > snap.rad) {
+            snap.rad = a; snap.joint = jn; snap.at = t;
+            snap.swing = d && d0 ? Math.acos(Math.max(-1, Math.min(1, d.dot(d0)))) * (1 / 60) / dt : null;
+          }
+        }
+        (q0 ? q0.copy(_q) : prevQ.set(j, _q.clone()));
+        if (d) prevDir.set(jn, d);
+      }
     }
     if (body.awake && !body.sleeping) { inst.group.position.x += body.drift.x; inst.group.position.z += body.drift.z; }
-    if (stop) break;
+    if (stop || f >= endF) break;
   }
   inst.group.updateWorldMatrix(true, true);
   const outcome = classify(events);
@@ -219,6 +246,10 @@ function play(json, preset, stance, spec, opts, clipOf) {
     fell: fell === null ? null : r3(fell),
     lowest: { point: low.point, y: r3(low.y) },
     offBalance: r3(off),
+    // The biggest one-frame turn of a joint (rad at 60 fps) while it came back; over 0.3 is a snap
+    // (the t79 rule). swing is how far that limb's own direction turned in the same frame: much less
+    // than rad means it rolled about its length. null if it never came back (dead, or still down).
+    snap: back ? { rad: r3(snap.rad), joint: snap.joint, at: snap.at, swing: snap.swing === null ? null : r3(snap.swing) } : null,
     bad, events, times
   };
 }

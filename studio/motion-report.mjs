@@ -92,6 +92,9 @@ function tryOn(json, sets) {
 }
 
 // --- Formatting --------------------------------------------------------------------------------
+// A snap: its size and joint, and "roll" when the limb turned about its length rather than swinging;
+// SNAP past the t79 rule's 0.3 rad.
+const snapText = (s) => (!s ? '-' : `${f2(s.rad)} ${s.joint}${s.swing !== null && s.rad > 0.1 && s.swing < s.rad / 3 ? ' roll' : ''}${s.rad > 0.3 ? ' SNAP' : ''}`);
 // Two decimals, and no "-0.00" for a hair under zero.
 const f2 = (v) => (v === null || v === undefined ? '-' : (Math.abs(v) < 0.005 ? 0 : Number(v)).toFixed(2));
 function grid(rows) {
@@ -105,22 +108,24 @@ time: s from the hit until it was itself again (settled, if dead). chest: most t
 moved: how far its hips ended from where it stood (m); along: that, along the push (less than 0: back against it).
 fell: once down, its chest from its hips along the push (m): more than 0, it went down the way it was hit.
 lowest: its lowest point but the feet (m above the floor).
-off-bal: most it was off balance (m); it steps at balance.step ${p.balance.step} and falls at balance.fall ${p.balance.fall}.`;
+off-bal: most it was off balance (m); it steps at balance.step ${p.balance.step} and falls at balance.fall ${p.balance.fall}.
+snap: the biggest one-frame joint turn (rad) as it came back to its animation; over 0.3 is a snap. "roll": the
+limb barely moved and turned about its own length (the animation's twist jumped under it).`;
 
 function single(b) {
-  const rows = [['hit', 'from', 'outcome', 'steps', 'time', 'chest', 'drop', 'moved', 'along', 'fell', 'lowest', 'off-bal']];
-  for (const r of b.runs) rows.push([r.hit, r.from, r.outcome + (r.bad ? ' (NaN!)' : ''), r.steps, f2(r.time), f2(r.chest), f2(r.drop), f2(r.moved), f2(r.along), f2(r.fell), `${r.lowest.point} ${f2(r.lowest.y)}`, f2(r.offBalance)]);
+  const rows = [['hit', 'from', 'outcome', 'steps', 'time', 'chest', 'drop', 'moved', 'along', 'fell', 'lowest', 'off-bal', 'snap']];
+  for (const r of b.runs) rows.push([r.hit, r.from, r.outcome + (r.bad ? ' (NaN!)' : ''), r.steps, f2(r.time), f2(r.chest), f2(r.drop), f2(r.moved), f2(r.along), f2(r.fell), `${r.lowest.point} ${f2(r.lowest.y)}`, f2(r.offBalance), snapText(r.snap)]);
   return grid(rows);
 }
 
 // How far apart two numbers must be before the table marks them: 1/20 s, 2 cm.
-const TOL = { time: 0.05, chest: 0.02, drop: 0.02, moved: 0.02, along: 0.02, fell: 0.02, offBalance: 0.02 };
+const TOL = { time: 0.05, chest: 0.02, drop: 0.02, moved: 0.02, along: 0.02, fell: 0.02, offBalance: 0.02, snap: 0.05 };
 function differs(k, x, y) {
   if (x === null || y === null) return x !== y;
   return Math.abs(x - y) > TOL[k] + 1e-9;
 }
 function paired(a, b) {
-  const rows = [['hit', 'from', 'outcome', '', '', 'steps', '', '', 'time', '', '', 'chest', '', '', 'drop', '', '', 'moved', '', '', 'along', '', '', 'fell', '', '', 'off-bal', '', '']];
+  const rows = [['hit', 'from', 'outcome', '', '', 'steps', '', '', 'time', '', '', 'chest', '', '', 'drop', '', '', 'moved', '', '', 'along', '', '', 'fell', '', '', 'off-bal', '', '', 'snap', '', '']];
   const changed = [];
   let marks = 0;
   const bi = new Map(b.runs.map((r) => [`${r.hit}/${r.from}`, r]));
@@ -131,9 +136,10 @@ function paired(a, b) {
     if (x.outcome !== y.outcome) changed.push(`${x.hit} from the ${x.from} (${x.outcome} to ${y.outcome})`);
     row.push(x.steps, y.steps, x.steps !== y.steps ? '*' : '');
     marks += x.steps !== y.steps ? 1 : 0;
-    for (const k of ['time', 'chest', 'drop', 'moved', 'along', 'fell', 'offBalance']) {
-      const d = differs(k, x[k], y[k]);
-      row.push(f2(x[k]), f2(y[k]), d ? '*' : '');
+    for (const k of ['time', 'chest', 'drop', 'moved', 'along', 'fell', 'offBalance', 'snap']) {
+      const xv = k === 'snap' ? (x.snap ? x.snap.rad : null) : x[k], yv = k === 'snap' ? (y.snap ? y.snap.rad : null) : y[k];
+      const d = differs(k, xv, yv);
+      row.push(f2(xv), f2(yv), d ? '*' : '');
       marks += d ? 1 : 0;
     }
     rows.push(row);
