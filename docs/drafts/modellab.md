@@ -52,8 +52,8 @@ so, and **Show v1 as a ghost** draws the old one over the new in blue lines.
 **The review folder.** `review\model-<name>\index.html` shows the latest sheet beside the one before,
 what changed between them, and the notes. Write in `notes.md` there as for any animation.
 
-Keys: `1`-`6` the views, `F` fit, `T` turntable, `W` wireframe, `J` joints, `N` names, `P` parts in colour, `G` grid,
-`L` the next light, `Esc` clear the pick.
+Keys: `1`-`6` the views, `F` fit, `T` turntable, `W` wireframe, `J` joints, `N` names, `P` parts in
+colour, `G` grid, `L` the next light, `Esc` clear the pick.
 
 ---
 
@@ -72,8 +72,8 @@ node studio/render-sheet.mjs --look "model=creature/spider&light=nvg&view=side&p
                                                              the lab set up by an address, as one picture
 ```
 
-On the cloud box set `CHROME` and `CHROME_ARGS=--no-sandbox`, as for the tests. A sheet takes 4 to 6
-seconds. It loads the studio and three.js, never the game.
+On the cloud box set `CHROME` and `CHROME_ARGS=--no-sandbox`, as for the tests. A sheet takes about 4
+to 7 seconds there. It loads the studio and three.js, never the game.
 
 **The sheet** (`sheet.png`, 1600 wide) reads top to bottom:
 - The asset and its version, the cost against the budget as bars (red over), the size (width ×
@@ -111,7 +111,8 @@ A version folder holds `sheet.png`, `model.json` (the file as it was) and `stats
   "joints": ["pelvis", "..."], "parts": 33, "drawn": 77, "meshes": 30, "merge": "color",
   "views": ["front", "side", "back", "top", "three-front", "three-back"],
   "scale": { "elevationsPxPerMetre": 156.7, "topPxPerMetre": 156.7 }, "clip": "spider/crawl",
-  "namesHidden": ["chest", "foot4L"], "renderSeconds": 4.4 }
+  "namesHidden": ["chest", "foot4L"],
+  "checks": { "pieces": 1, "gaps": [], "touch": 0.021, "underGround": null, "said": [] }, "renderSeconds": 4.4 }
 ```
 
 The folder has `meta.json` (`kind: "model"`, `ref`, `owner`, `version`, `file`, `look`), `latest.txt`,
@@ -265,11 +266,12 @@ first lab's endpoint), so it never writes into the repo.
 
 ### For the lead
 
-- Add to `studio/index.js`: from `./model-look.js`, `SHEET_VIEWS`, `VIEW`, `fitOrtho`,
+- Add to `studio/index.js`, from `./model-look.js`: `SHEET_VIEWS`, `VIEW`, `fitOrtho`,
   `fitPerspective`, `orthoScale`, `figureSpot`, `SCALE_FIGURE`, `buildFigure`, `LIGHTS`, `applyLight`,
   `NVG_FILTER`, `partRows`, `partOverlay`, `partAt`, `partColor`, `modelChecks`, `checkSentences`,
-  `modelDiff`, `modelNote`, `readLabQuery`, `labQuery`; from `./render-sheet.mjs` (Node only, so not in index.js): `renderSheet`, `planVersion`,
-  `writeReviewPage`.
+  `modelDiff`, `modelNote`, `readLabQuery`, `labQuery`. `studio/render-sheet.mjs` runs only in Node (it
+  starts a server and Chrome), so it stays out of index.js; a tool imports `renderSheet`,
+  `planVersion` and `writeReviewPage` from it directly.
 - docs/studio.md §6: "the scale marine (1.75 m)" is 1.56 m.
 - docs/drafts/model.md §8 says `model-sheet.mjs <model>` makes "the next version": it's now
   render-sheet's rule (the file's `"version"`), and `?mode=sheet` still works beside `?sheet=1`.
