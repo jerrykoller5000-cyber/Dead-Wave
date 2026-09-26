@@ -321,7 +321,24 @@ const ROUTES = new Map([
 ]);
 
 // Every POST under /__studio/ (tools/serve.mjs). `pathname` is the decoded path; without it, the request's.
+// Only the studio's own pages may write: the server is on this machine at a fixed port, and any web
+// page open in the same browser could otherwise post a note signed "Jerry" (a plain form or a no-cors
+// fetch needs no preflight). The Host must be this machine (not a rebound name), a browser's Origin
+// must be the page's own, and a cross-site request is refused. Node's fetch (the tests, the agents'
+// scripts) sends no Origin and passes.
+export function fromOwnPage(req) {
+  const host = String(req.headers.host || ''), origin = req.headers.origin, site = req.headers['sec-fetch-site'];
+  if (!/^(127\.0\.0\.1|localhost|\[::1\])(:\d+)?$/i.test(host)) return false;
+  if (origin !== undefined && origin !== 'http://' + host) return false;
+  return site !== 'cross-site' && site !== 'same-site';
+}
+
 export function handleStudio(req, res, base, pathname) {
+  if (!fromOwnPage(req)) {
+    req.resume();
+    send(res, 403, { ok: false, error: 'the studio takes notes only from its own pages (open the lab with Open Motion Lab.bat)' });
+    return;
+  }
   let p = pathname;
   if (typeof p !== 'string') { try { p = decodeURIComponent(new URL(req.url, 'http://localhost').pathname); } catch { p = ''; } }
   const name = p.startsWith('/__studio/') ? p.slice('/__studio/'.length) : '';

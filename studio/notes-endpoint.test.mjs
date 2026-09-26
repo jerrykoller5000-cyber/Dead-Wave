@@ -324,6 +324,26 @@ test('a GET under /__studio/ is not a write; the files are still served', async 
   await s.text();
 });
 
+test('only the studio\'s own pages write: another site, a rebound Host or a cross-site fetch gets a 403 and writes nothing', async () => {
+  const note = JSON.stringify({ asset: 'motion-zombie-shambler', text: 'forged: good' });
+  const before = tree(root);
+  const host = new URL(server.origin).host;
+  for (const [why, headers] of [
+    ['another site\'s form', { Origin: 'http://evil.example', 'Content-Type': 'text/plain' }],
+    ['a rebound Host', { Host: 'attacker.example:' + new URL(server.origin).port }],
+    ['a cross-site fetch', { 'Sec-Fetch-Site': 'cross-site' }],
+    ['a same-site one', { 'Sec-Fetch-Site': 'same-site', Origin: 'http://' + host }]
+  ]) {
+    const r = await postRaw('note', [note], headers);
+    assert.equal(r.code, 403, why);
+    assert.match(r.json.error, /only from its own pages/, why);
+  }
+  assert.deepEqual(changed(before, tree(root)), [], 'nothing written');
+  // The lab's own page: Origin is its own, fetched same-origin.
+  const own = await postRaw('ping', ['{}'], { Origin: 'http://' + host, 'Sec-Fetch-Site': 'same-origin' });
+  assert.equal(own.code, 200);
+});
+
 test('everything written went into review/ or studio/scenes/lab-*.json', () => {
   const allowed = /^(review\/[a-z0-9][a-z0-9-]{1,63}\/(meta\.json|latest\.txt|notes\.md|index\.html|v\d+\/lab-\d{8}-\d{6}(-\d+)?\.png)|studio\/scenes\/lab-[a-z0-9-]{1,40}\.json)$/;
   // The files the tests themselves put there to be refused are theirs, not the server's.
