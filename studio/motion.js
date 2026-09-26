@@ -354,6 +354,7 @@ export function createBody(inst, preset, opts = {}) {
     P.set(A); Q.set(A0);
     body.state = 'react'; stateT = 0; woke = 0; steps = 0; stepping = null; still = 0; landed = false;
     body.sleeping = false; body.drift.set(0, 0, 0); body.lying = null;
+    for (const s of segs) s.lastQ = null;           // each reaction's twist starts from the animation's
     feet.forEach((f, k) => { pin[k] = footOn[k] ? [P[f * 3], P[f * 3 + 2]] : null; });
     emit('wake');
     return true;
@@ -502,10 +503,23 @@ export function createBody(inst, preset, opts = {}) {
     if (!holds.length && body.state === 'held') {
       const rh = P[root * 3 + 1] - ground(P[root * 3], P[root * 3 + 2]);
       if (rh > standH * 0.8 && footOn.some(Boolean)) { body.state = 'react'; stateT = 0; resetPins(); }
-      else fall();
+      else { aimFall(); fall(); }
     }
     return true;
   };
+
+  // Which way a fall with no hit behind it goes (a lost leg, a hold let go): the way the hips are
+  // moving; else toward the side it lost; else forward. From the body's own state, so a replay is exact.
+  function aimFall(lostIdx) {
+    const o = root * 3;
+    let dx = P[o] - Q[o], dz = P[o + 2] - Q[o + 2];
+    if (Math.hypot(dx, dz) < 1e-5 && lostIdx && lostIdx.length) {
+      const l = lostIdx[lostIdx.length - 1] * 3;
+      dx = A[l] - A[o]; dz = A[l + 2] - A[o + 2];
+    }
+    if (Math.hypot(dx, dz) < 1e-5) { dx = 0; dz = 1; }
+    fallDir.set(dx, 0, dz).normalize();
+  }
 
   // --- Lost parts (contract: body.lose) ---
   function relink() {
@@ -533,6 +547,7 @@ export function createBody(inst, preset, opts = {}) {
     const leg = pd.points.some((k) => feet.includes(idx[k]));
     if (leg && body.alive && (body.state === 'animated' || body.state === 'react')) {
       if (!wake()) return false;
+      aimFall(pd.points.map((k) => idx[k]));
       fall();
     }
     return true;
@@ -563,6 +578,8 @@ export function createBody(inst, preset, opts = {}) {
   body.reset = () => {
     body.state = 'animated'; body.weight = 0; body.alive = true; body.sleeping = false; slump = null;
     body.drift.set(0, 0, 0); stepping = null; hasPrev = false; followed = false; body.lying = null; body.recovering = 0;
+    fallDir.set(0, 0, 1); body.offBalance = 0;       // a replay starts from nothing the last run left
+    for (const s of segs) s.lastQ = null;
     t = 0; acc = 0; hNow = SUB; body.lod = 0;
     holds.length = 0; weights();
     if (lost.size) { lost.clear(); live.fill(1); anchorOf.fill(-1); relink(); }
@@ -859,8 +876,16 @@ export function createBody(inst, preset, opts = {}) {
     if (body.state === 'animated' || body.sleeping) return drain();
     dt = Math.max(0, Math.min(dt, 0.1));
     body.lod = lod;
-    const frozen = lod >= 2;
-    const h = lod === 1 ? SUB * 2 : SUB;
+    // A corpse still on its way down isn't frozen far away: it falls at half rate until it's down, so
+    // it never settles and sleeps standing up (it's only for the second or so the fall takes).
+    const dropping = lod >= 2 && body.state === 'dead' && !body.sleeping
+      && P[root * 3 + 1] - ground(P[root * 3], P[root * 3 + 2]) > preset.down.height;
+    const frozen = lod >= 2 && !dropping;
+    // Held by a hand on a display faster than the 120 Hz step: one step a frame, of the frame's own
+    // length, so the held point is on the hand every frame it's drawn (a fixed step left frames with
+    // no step at all, and the grip opened up to 6 cm at 144 Hz).
+    const fine = holds.length && lod === 0 && dt > 0 && dt < SUB - 1e-9;
+    const h = fine ? Math.max(SUB / 4, dt) : lod === 1 || dropping ? SUB * 2 : SUB;
     // A change of step keeps every point's speed: Verlet keeps speed as the last step's move.
     if (h !== hNow) { const r = h / hNow; for (let i = 0; i < n * 3; i++) Q[i] = P[i] - (P[i] - Q[i]) * r; hNow = h; }
     acc += dt;
@@ -978,9 +1003,19 @@ export function createBody(inst, preset, opts = {}) {
         _q.copy(_qc).multiply(_qb.invert()).multiply(_qa);
       } else if (s.aim) {
         const a = s.aimI[0] * 3, b = s.aimI[1] * 3;
-        _x.set(A[b] - A[a], A[b + 1] - A[a + 1], A[b + 2] - A[a + 2]).normalize();
         _y.set(S[b] - S[a], S[b + 1] - S[a + 1], S[b + 2] - S[a + 2]).normalize();
-        _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        if (s.lastQ) {
+          // Keep the bone's twist going on from what it drew last frame: swing that turn onto the
+          // bone's new direction. Taking the twist from the animation instead spun a limb half a turn
+          // in one frame when a host switched clips mid-reaction (a get-up clip starting); the
+          // animation's twist comes back through the weight as the body hands back.
+          _q.setFromUnitVectors(s.lastDir, _y).multiply(s.lastQ);
+        } else {
+          _x.set(A[b] - A[a], A[b + 1] - A[a + 1], A[b + 2] - A[a + 2]).normalize();
+          _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        }
+        (s.lastQ ||= new THREE.Quaternion()).copy(_q);
+        (s.lastDir ||= new THREE.Vector3()).copy(_y);
       } else continue;
       slerpTo(_qa, _q, w);                           // the world rotation it ends with, the short way
       const parent = j.parent;

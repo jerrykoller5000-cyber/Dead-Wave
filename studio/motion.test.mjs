@@ -474,3 +474,65 @@ test('level of detail: lod 1 costs clearly less and still falls and gets up; lod
   const d = play('zombie', 'zombie/shambler', (x) => x.kill({ power: 3 }), 2, { lod: 2 });
   assert.ok(d.events.includes('settled') && d.body.sleeping, d.events.join(' '));
 });
+
+// --- Review fixes (CL-66/67 review, 2026-09-26) ------------------------------------------------
+
+test('a limb doesn\'t spin when the animation under a reaction turns it about its own bone (a clip starting mid-fall)', () => {
+  const inst = rigs.get('zombie').create({});
+  const body = createBody(inst, preset('zombie/shambler'));
+  const arm = inst.R.shoulderL, rest = arm.quaternion.clone();
+  const twist = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI);  // about the arm's own bone (it hangs along -Y)
+  const world = new THREE.Quaternion();
+  let worst = 0, last = null;
+  body.follow();
+  for (let f = 0; f < 150; f++) {
+    if (f >= 90) arm.quaternion.copy(rest).multiply(twist);   // the host's new clip, a half turn off
+    body.follow();
+    if (f === 30) body.kill({ at: 'chest', dir: [0, 0, 1], power: 3 });
+    body.update(1 / 60); body.apply();
+    arm.getWorldQuaternion(world);
+    if (f > 80 && last) worst = Math.max(worst, last.angleTo(world));
+    last = world.clone();
+  }
+  assert.ok(worst < 0.35, `the arm turned ${worst.toFixed(2)} rad in one frame`);
+});
+
+test('a fall with no hit behind it goes the same way every time, and a reset forgets the last one', () => {
+  const run = (first) => {
+    const inst = rigs.get('zombie').create({});
+    const body = createBody(inst, preset('zombie/shambler'));
+    body.follow();
+    if (first) { for (let f = 0; f < 90; f++) { body.follow(); if (f === 10) first(body); body.update(1 / 60); body.apply(); } body.reset(); }
+    for (let f = 0; f < 150; f++) { body.follow(); if (f === 10) body.lose('legL'); body.update(1 / 60); body.apply(); }
+    return body.points().pelvis;
+  };
+  const fresh = run(null);
+  const after = run((b) => b.hit({ at: 'chest', dir: [1, 0, -1], power: 9, kind: 'pellet' }));
+  const d = Math.hypot(fresh[0] - after[0], fresh[1] - after[1], fresh[2] - after[2]);
+  assert.ok(d < 1e-6, `the pelvis ended ${d.toFixed(3)} m from a fresh body's`);
+});
+
+test('a corpse killed far away (lod 2) falls before it sleeps: it never sleeps standing', () => {
+  const d = play('zombie', 'zombie/shambler', (x) => x.kill({ power: 3 }), 4, { lod: 2 });
+  assert.ok(d.events.includes('settled') && d.body.sleeping, d.events.join(' '));
+  assert.ok(d.body.points().pelvis[1] < preset('zombie/shambler').down.height, `pelvis at ${d.body.points().pelvis[1].toFixed(2)} m`);
+});
+
+test('a hand keeps its grip at any display rate: the flop scene at 60, 144, 165 and 240 Hz', () => {
+  // A fixed 120 Hz step left some frames of a faster display with no step at all, and the grip
+  // opened up to 6 cm at 144 Hz. Held, a body steps once a frame instead.
+  const json = JSON.parse(fs.readFileSync(new URL('./scenes/guardian-grab-drag-flop.json', import.meta.url), 'utf8'));
+  for (const hz of [60, 144, 165, 240]) {
+    const sp = createScene(loadScene(json, clipOf));
+    const body = sp.actors.marine.body;
+    let worst = 0, under = Infinity;
+    while (!sp.done) {
+      const r = sp.update(1 / hz);
+      const g = r.checks.gap['guardian.handR>marine.footL'];
+      if (sp.t >= 0.6 && body.holding && g) worst = Math.max(worst, g.value);
+      under = Math.min(under, underGround(body));
+    }
+    assert.ok(worst < 0.03, `${hz} Hz: grip gap ${(worst * 100).toFixed(1)} cm`);
+    assert.ok(under > -0.002, `${hz} Hz: nothing through the ground (${under.toFixed(4)})`);
+  }
+});
