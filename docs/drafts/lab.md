@@ -89,7 +89,7 @@ changed in Cursor's file: the hook). It writes in two places only: `review/<asse
 
 | Code | When |
 | --- | --- |
-| 400 | Not JSON, not an object; a bad `asset` (2 to 64 of a-z, 0-9 and `-`, starting with a letter or digit) or a Windows device name (`con`, `nul`, `com1`, `lpt1-...`); an empty note; `context` not text; a new folder without `meta`, or `meta.kind` not motion or model, `meta.owner` not an agent, `meta.version` not a whole number from 1; a snapshot that isn't a base64 PNG; a scene `name` outside `^[a-z0-9-]{1,40}$`, no `json`, `json.format` not `dw-scene/1`, no actors. |
+| 400 | Not JSON, not an object; a bad `asset` (2 to 64 of a-z, 0-9 and `-`, starting with a letter or digit) or a Windows device name (`con`, `prn`, `aux`, `nul`, `com1`, `lpt1`...); an empty note; `context` not text; a new folder without `meta`, or `meta.kind` not motion or model, `meta.owner` not an agent, `meta.version` not a whole number from 1; a snapshot that isn't a base64 PNG; a scene `name` outside `^[a-z0-9-]{1,40}$`, no `json`, `json.format` not `dw-scene/1`, no actors. |
 | 403 | `review/<asset>` (or its version folder) leads outside `review/` through a link. |
 | 404 | No such route; the old form's preset doesn't exist. |
 | 409 | `review/<asset>` is a file; its `latest.txt` isn't a version like `v2` (fix it by hand). |

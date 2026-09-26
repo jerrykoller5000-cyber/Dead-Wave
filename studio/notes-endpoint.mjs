@@ -29,8 +29,9 @@ export const KINDS = ['motion', 'model'];
 export const AGENTS = ['claude', 'cursor', 'chatgpt', 'grokbot', 'antigravity'];
 const PRESET = /^[a-z0-9]+\/[a-z0-9-]+$/;
 const VERSION = /^v([1-9]\d{0,3})$/;
-// Windows won't make a file or folder with these names, whatever follows them.
-const WINDOWS_NAMES = /^(con|prn|aux|nul|com\d|lpt\d)(-|$)/;
+// Windows won't make a folder with these names (or these names with an extension, but a name here
+// has no dot).
+const WINDOWS_NAMES = /^(con|prn|aux|nul|com\d|lpt\d)$/;
 const PNG = 'data:image/png;base64,';
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 const MB = 1024 * 1024;

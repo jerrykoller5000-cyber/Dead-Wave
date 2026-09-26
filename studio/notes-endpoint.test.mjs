@@ -205,7 +205,7 @@ test('every refusal is a 4xx with a sentence, and writes nothing', async () => {
     ['asset starting with a dash', 'note', { asset: '-ab', text: 'x', meta }, 400, /"asset"/],
     ['asset not a string', 'note', { asset: 12, text: 'x', meta }, 400, /"asset"/],
     ['a Windows device name', 'note', { asset: 'con', text: 'x', meta }, 400, /Windows/],
-    ['another one', 'note', { asset: 'lpt1-notes', text: 'x', meta }, 400, /Windows/],
+    ['another one', 'note', { asset: 'lpt1', text: 'x', meta }, 400, /Windows/],
     ['no text', 'note', { asset: 'fresh', meta }, 400, /"text" is the note/],
     ['blank text', 'note', { asset: 'fresh', text: '  \n ', meta }, 400, /empty/],
     ['text that is only marks', 'note', { asset: 'fresh', text: '## >', meta }, 400, /nothing left/],
