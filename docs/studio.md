@@ -225,9 +225,25 @@ The drag feels floaty. It should dig in harder on each heave.
 > claude · v2 · 2026-09-27: each heave now plants both hind feet and throws the shoulders back.
 ```
 
-A Jerry section with no `>` answer under it is **waiting**. `crew.mjs review` lists waiting notes;
-`crew.mjs review take <asset>` turns one into a task for the owner (CL-60). The owner answers with
-the version that addresses it. "good" (or "approved") from Jerry closes the asset.
+A Jerry section with no `>` answer under it is **waiting**. "good" (or "approved") from Jerry closes
+the asset at that version. Anything inside `<!-- -->` is ignored (the stub's example lives there).
+The round trip (CL-60; the parser is `crew/notes.mjs`, shared by `crew.mjs` and the panel):
+
+```
+node crew/crew.mjs review                     every folder and where its notes stand; makes a notes.md
+                                              stub where there isn't one; the panel shows the same
+node crew/crew.mjs review take <asset>        a request for the owner (meta.json) in handoffs/requests.md,
+                                              and "> owner · taken · date" under Jerry's note
+node tools/studio.mjs render <clip> --asset <asset>          the owner's next version
+node crew/crew.mjs review answer <asset> <agent> "<what changed>"
+                                              "> agent · vN · date: ..." under the note; refused while
+                                              latest is still the version Jerry wrote about (--force to
+                                              answer without a new one, e.g. to explain why not)
+```
+
+Every `node crew/crew.mjs` panel prints `✎ Jerry's notes waiting` and `◉ For Jerry to look at`, and
+`crew/panel.html` has a Review folders box (and a "Look at ..." line under Your move). The panel
+can't list folders over http, so `crew.mjs` keeps the folder list in `crew/reviews.json`.
 
 ## 6. The strip and stats
 

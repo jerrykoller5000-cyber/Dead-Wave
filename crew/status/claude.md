@@ -1,13 +1,13 @@
 # Claude
 
 state: idle
-model: Claude Opus 5.5, in Cowork (cloud clone, headless checks; files land through the desktop bridge)
+model: Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-09-26T02:40Z
-next: CL-60 (waits on Cursor's CU-44), then CL-61 (after AG-19)
+since: 2026-09-26T03:06Z
+next: CL-61 Jerry's guide (after CU-45)
 blocked-on: —
-last-report: handoffs/2026-09-26-claude-CL-59.md
+last-report: handoffs/2026-09-26-claude-CL-60.md
 
 ## Notes
 

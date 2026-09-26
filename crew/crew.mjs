@@ -15,6 +15,14 @@
 //   node crew/crew.mjs request <from> <to> "<title>" "<body>"     (or --body-file <path>)
 //   node crew/crew.mjs check                                       exit 1 on a clash or stale check-in
 //
+//   Jerry's notes on the studio's review folders (D-40; review/<asset>/notes.md):
+//   node crew/crew.mjs review                          every review folder and where its notes stand
+//   node crew/crew.mjs review take   <asset>           turn Jerry's waiting note into a request for the
+//                                                      folder's owner (from meta.json)
+//   node crew/crew.mjs review answer <asset> <agent> "<what changed>" [--version vN]
+//                                                      after rendering the new version: the answer goes
+//                                                      under Jerry's note with the version to look at
+//
 //   Lead / Jerry only:
 //   node crew/crew.mjs answer   Q-<n> "<answer>"
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
@@ -29,6 +37,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseNotes, reviewState, notesStub } from './notes.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
@@ -158,6 +167,53 @@ function pendingReviews() {
     if (e.kind === 'REVIEWED') want.delete(rep);
   }
   return [...want.values()];
+}
+
+// --- Jerry's notes on the review folders (D-40, CL-60) ----------------------------------
+const reviewDir = path.join(ROOT, 'review');
+const reviewsJson = path.join(CREW, 'reviews.json');
+function reviewAssets() {
+  if (!fs.existsSync(reviewDir)) return [];
+  return fs.readdirSync(reviewDir, { withFileTypes: true }).filter((d) => d.isDirectory() && fs.existsSync(path.join(reviewDir, d.name, 'latest.txt'))).map((d) => {
+    const dir = path.join(reviewDir, d.name);
+    let meta = {};
+    try { meta = JSON.parse(read(path.join(dir, 'meta.json')) || '{}'); } catch { meta = {}; }
+    const latest = read(path.join(dir, 'latest.txt')).trim() || null;
+    const notesFile = path.join(dir, 'notes.md');
+    const notes = parseNotes(read(notesFile));
+    return { asset: d.name, dir, notesFile, meta, owner: AGENTS[meta.owner] ? meta.owner : 'claude', latest, notes, ...reviewState(notes, latest) };
+  }).sort((a, b) => a.asset.localeCompare(b.asset));
+}
+// The panel can't list folders over http, so it reads this index; it only changes when a folder
+// comes or goes (no times in it), so it doesn't churn in git.
+function writeReviewIndex(list) {
+  const body = JSON.stringify({ note: 'Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.', assets: list.map((r) => ({ asset: r.asset, owner: r.owner, rig: r.meta.rig || null, clip: r.meta.clip || null, reference: r.meta.reference || null })) }, null, 2) + '\n';
+  if (read(reviewsJson) !== body) fs.writeFileSync(reviewsJson, body, 'utf8');
+}
+const REVIEW_WORD = { 'no-notes': 'no notes yet', waiting: "Jerry's note waiting", taken: 'owner is on it', look: 'answered: Jerry to look', 'answered-seen': 'answered', approved: 'approved' };
+function reviewLine(r) {
+  const extra = r.state === 'waiting' ? ': ' + r.open.map((n) => `${n.version} "${n.text.slice(0, 70)}${n.text.length > 70 ? '…' : ''}"`).join('; ')
+    : r.state === 'look' ? ` (look at ${r.lookAt})` : r.state === 'approved' ? ` at ${r.approvedAt}` : '';
+  return `${r.asset.padEnd(22)} ${String(r.latest || '?').padEnd(4)} ${AGENTS[r.owner].padEnd(11)} ${REVIEW_WORD[r.state]}${extra}`;
+}
+// Insert lines at the end of one note's section (before the next "## " heading).
+function addUnderNote(file, note, lines) {
+  const text = read(file), eol = eolOf(text);
+  const all = text.split(/\r?\n/);
+  // Headings inside <!-- --> (the stub's example) don't count.
+  let inComment = false;
+  const at = all.findIndex((l) => {
+    if (inComment) { if (l.includes('-->')) inComment = false; return false; }
+    if (l.trim().startsWith('<!--')) { inComment = !l.includes('-->'); return false; }
+    return l.trim().startsWith('## ') && l.includes(note.date) && l.includes(note.version) && l.includes(note.who);
+  });
+  if (at < 0) return false;
+  let end = at + 1;
+  while (end < all.length && !/^## /.test(all[end]) && !/^<!--/.test(all[end])) end++;
+  while (end > at + 1 && !all[end - 1].trim()) end--;
+  all.splice(end, 0, '', ...lines);
+  fs.writeFileSync(file, all.join(eol).replace(/(\r?\n)*$/, eol), 'utf8');
+  return true;
 }
 
 function problems(all) {
@@ -318,6 +374,11 @@ function panel() {
   if (q.length) console.log(`? ${q.length} open question(s) for Jerry: crew/QUESTIONS.md (${q.map((x) => x.id).join(', ')})`);
   const r = pendingReviews();
   if (r.length) console.log(`» ${r.length} handoff(s) waiting for the lead's review: ${r.map((x) => (/(handoffs\/\S+\.md)/.exec(x.text) || [])[1]).join(', ')}`);
+  const rv = reviewAssets();
+  writeReviewIndex(rv);
+  const jw = rv.filter((x) => x.state === 'waiting'), jl = rv.filter((x) => x.state === 'look');
+  if (jw.length) console.log(`✎ Jerry's notes waiting: ${jw.map((x) => `${x.asset} ${x.open.map((n) => n.version).join(',')} (${AGENTS[x.owner]})`).join(', ')}. Take one: node crew/crew.mjs review take <asset>`);
+  if (jl.length) console.log(`◉ For Jerry to look at: ${jl.map((x) => `${x.asset} ${x.lookAt}`).join(', ')} (review/<asset>/index.html)`);
   console.log('\nLast log lines:\n' + notes.slice(-6).map((e) => `- ${e.at} · ${e.agent} · ${e.kind} · ${e.text}`).join('\n'));
   console.log('\nOrders, decisions and queues: crew/BOARD.md\n');
   return p;
@@ -336,7 +397,7 @@ function checkReport(rep) {
 }
 
 const [cmd, agent, ...rest] = process.argv.slice(2);
-const VALUE_FLAGS = ['--touch', '--report', '--next', '--blocked', '--model', '--review', '--body-file'];
+const VALUE_FLAGS = ['--touch', '--report', '--next', '--blocked', '--model', '--review', '--body-file', '--version'];
 const positional = rest.filter((x, i) => !x.startsWith('--') && !(i > 0 && VALUE_FLAGS.includes(rest[i - 1])));
 
 if (!cmd || cmd === 'panel') {
@@ -448,6 +509,58 @@ if (!cmd || cmd === 'panel') {
   const rep = agent, verdict = positional.join(' ').trim() || 'ok';
   log('claude', 'REVIEWED', `${rep} · ${verdict}`);
   console.log('review recorded');
+} else if (cmd === 'review') {
+  // agent is the sub-command here: (none) | take | answer
+  const sub = agent;
+  const list = reviewAssets();
+  writeReviewIndex(list);
+  if (!sub) {
+    if (!list.length) { console.log('No review folders yet. The studio makes them: node tools/studio.mjs render <clip.json>'); process.exit(0); }
+    for (const r of list) if (!fs.existsSync(r.notesFile)) fs.writeFileSync(r.notesFile, notesStub(r.asset, r.latest), 'utf8');
+    console.log('asset                  now  owner       notes');
+    for (const r of list) console.log(reviewLine(r));
+    const w = list.filter((r) => r.state === 'waiting');
+    if (w.length) console.log(`\n${w.length} waiting. The owner (or Claude) takes one: node crew/crew.mjs review take ${w[0].asset}`);
+  } else if (sub === 'take') {
+    const [name] = positional;
+    const r = list.find((x) => x.asset === name);
+    if (!r) { console.error(`No review folder "${name}". Folders: ${list.map((x) => x.asset).join(', ') || 'none'}`); process.exit(2); }
+    if (!r.open.length) { console.log(`Nothing waiting on ${name} (${REVIEW_WORD[r.state]}).`); process.exit(0); }
+    const owner = r.owner, day = now().slice(0, 10);
+    const clip = r.meta.clip ? `studio/clips/${r.meta.rig || 'guardian'}/${r.meta.clip}.json` : null;
+    const body = [
+      `Jerry's note${r.open.length > 1 ? 's' : ''} on review/${name}/ (now at ${r.latest}), from review/${name}/notes.md:`,
+      '',
+      ...r.open.map((n) => `> ${n.date} · ${n.version}: ${n.text}`),
+      '',
+      `Owner: ${AGENTS[owner]}${r.meta.task && !/^CU-44$/.test(r.meta.task) ? ` (task ${r.meta.task})` : ''}.${r.meta.reference ? ` Reference: ${r.meta.reference} (assets/anim/reference/).` : ''}`,
+      `1. Change ${clip ? '`' + clip + '`' : 'the asset'} to answer the note. Check it on the strip, not by guesswork: the stats say where a joint snaps or a foot slides.`,
+      `2. Render the next version: \`node tools/studio.mjs render ${clip || '<clip.json>'} --asset ${name}${r.meta.reference ? ' --vs ' + r.meta.reference : ''}\``,
+      `3. Answer under Jerry's note: \`node crew/crew.mjs review answer ${name} ${owner} "<what changed, in one line>"\``,
+    ].join('\n');
+    const title = `Jerry's note on ${name} (${r.open.map((n) => n.version).join(', ')})`;
+    append(requestsPath, ['', `## ${day} · Claude → ${AGENTS[owner]} · ${title}`, '', ...body.split('\n')]);
+    for (const n of r.open) addUnderNote(r.notesFile, n, [`> ${owner} · taken · ${day}`]);
+    log('claude', 'REQUEST', `→ ${AGENTS[owner]}: ${title}`);
+    console.log(`Taken: a request for ${AGENTS[owner]} is in handoffs/requests.md, and notes.md says so under Jerry's note.`);
+  } else if (sub === 'answer') {
+    const [name, who, ...words] = positional;
+    const text = words.join(' ').trim();
+    need(who);
+    const r = list.find((x) => x.asset === name);
+    if (!r || !text) { console.error('Usage: crew review answer <asset> <agent> "<what changed>" [--version vN]'); process.exit(2); }
+    const version = arg('version') || r.latest;
+    const todo = r.notes.filter((n) => n.state === 'waiting' || n.state === 'taken');
+    if (!todo.length) { console.error(`No open note on ${name} to answer (${REVIEW_WORD[r.state]}).`); process.exit(2); }
+    if (todo.some((n) => +n.version.slice(1) >= +String(version).slice(1)) && !process.argv.includes('--force')) {
+      console.error(`Not answered: ${name} is still at ${version}, the version Jerry wrote about. Render the change first (node tools/studio.mjs render <clip.json> --asset ${name}) so he has a new version to look at. (--force to answer without one, e.g. "can't be done, here's why".)`);
+      process.exit(2);
+    }
+    const day = now().slice(0, 10);
+    for (const n of todo) addUnderNote(r.notesFile, n, [`> ${who} · ${version} · ${day}: ${text}`]);
+    log(who, 'NOTE', `answered Jerry's note on ${name}: look at ${version} · ${text.slice(0, 100)}`);
+    console.log(`Answered under Jerry's note in review/${name}/notes.md: look at ${version}.`);
+  } else { console.error('Usage: crew review | review take <asset> | review answer <asset> <agent> "<what changed>"'); process.exit(2); }
 } else if (cmd === 'request') {
   need(agent);
   const [to, title, body] = positional;
@@ -458,6 +571,6 @@ if (!cmd || cmd === 'panel') {
   log(agent, 'REQUEST', `→ ${toName}: ${title}`);
   console.log('request added to handoffs/requests.md');
 } else {
-  console.error('Commands: (none) | mission | next | in | note | out | ask | request | check | answer | reviewed. See the top of crew/crew.mjs.');
+  console.error('Commands: (none) | mission | next | in | note | out | ask | request | check | answer | reviewed | review. See the top of crew/crew.mjs.');
   process.exit(2);
 }

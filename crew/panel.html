@@ -127,6 +127,15 @@
   .q .done { color: var(--faint); } .q .done span:last-child { text-decoration: line-through; }
   .q .more { color: var(--faint); font-size: 12px; }
 
+  /* review folders (the studio, D-40) */
+  .rev .ri { display: grid; grid-template-columns: minmax(130px, 200px) 1fr; gap: 4px 12px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .rev .ri:first-of-type { border-top: 0; }
+  .rev .ri a { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+  .rev .st { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--line); color: var(--muted); margin-right: 6px; }
+  .rev .st.waiting, .rev .st.look { background: var(--accent); color: #fff; }
+  .rev .st.approved { background: var(--ok); color: #fff; }
+  .rev .nt { color: var(--muted); overflow-wrap: anywhere; }
+
   /* requests */
   .req h4 { margin: 10px 0 4px; font-size: 13px; }
   .req ul { margin: 0; padding-left: 18px; font-size: 13px; }
@@ -154,7 +163,7 @@
   .you .yi .d b { color: var(--ink); }
   .you .yi .nm { font-weight: 700; color: var(--c); }
   .you .howto { font-size: 12.5px; color: var(--faint); margin-top: 8px; }
-  button.copy { font: 600 12.5px system-ui, sans-serif; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; white-space: nowrap; }
+  button.copy, a.copy { text-decoration: none; font: 600 12.5px system-ui, sans-serif; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; white-space: nowrap; }
   button.copy:hover { border-color: var(--accent); }
   button.copy.done { color: var(--ok); border-color: var(--ok); }
   .help ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); } .help li { margin: 3px 0; } .help b { color: var(--ink); }
@@ -177,6 +186,7 @@
 <main>
   <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
   <section class="box you"><h3>Your move <small>what only you can do right now</small></h3><div id="you"></div></section>
+  <section class="box rev" id="revBox" hidden><h3>Review folders <small>the studio: watch it, then write in its notes.md</small></h3><div id="reviews"></div></section>
   <section class="box flow"><h3>Right now <small>who's working, who everyone is waiting on, who's up next</small></h3><div id="flow"></div></section>
   <div class="attn" id="attn"></div>
   <div class="agents" id="agents"></div>
@@ -447,9 +457,22 @@ async function refresh() {
     document.getElementById('stamp').textContent = 'offline · retrying every 10 s';
     return;
   }
-  const [logText, qText, reqText, headLog, pushLog, testsJson] = await Promise.all([
+  const [logText, qText, reqText, headLog, pushLog, testsJson, revJson] = await Promise.all([
     opt('LOG.md'), opt('QUESTIONS.md'), opt('../handoffs/requests.md'), opt('../.git/logs/HEAD'),
-    opt('../.git/logs/refs/remotes/origin/feature/Phis-changes'), opt('tests.json')]);
+    opt('../.git/logs/refs/remotes/origin/feature/Phis-changes'), opt('tests.json'), opt('reviews.json')]);
+  // Review folders: crew.mjs keeps the list (reviews.json); the notes are read live, with the same
+  // parser crew.mjs uses (crew/notes.mjs), so a note Jerry just saved shows on the next refresh.
+  let revs = [];
+  try {
+    const NM = await (window.__notesMod ||= import('./notes.mjs'));
+    const idx = JSON.parse(revJson || '{}').assets || [];
+    revs = await Promise.all(idx.map(async (r) => {
+      const at = '../review/' + encodeURIComponent(r.asset) + '/';
+      const [nt, lt] = await Promise.all([opt(at + 'notes.md'), opt(at + 'latest.txt')]);
+      const notes = NM.parseNotes(nt);
+      return { ...r, at, notes, ...NM.reviewState(notes, lt.trim() || null) };
+    }));
+  } catch (e) { console.warn('review folders:', e); }
   const statuses = Object.fromEntries(await Promise.all(AGENTS.map(async ([a]) => [a, parseStatus(await opt('status/' + a + '.md'))])));
   const log = parseLog(logText);
   const commits = parseGit(headLog).filter((c) => /^commit/.test(c.msg)).map((c) => ({ ...c, msg: c.msg.replace(/^commit( \(\w+\))?: /, '') }));
@@ -518,6 +541,7 @@ async function refresh() {
     if (next) { readyAgents.push(n); you.push(`<div class="yi" ${cvar(a)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(n)}</span> on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}</div><button class="copy" type="button" data-prompt="${esc(PROMPT(a, next.id))}">Copy prompt</button></div>`); }
     else if (open.length) waitingAgents.push(n);
   }
+  for (const r of revs.filter((r) => r.state === 'look')) you.push(`<div class="yi" ${cvar(r.owner)}><span class="dot"></span><div class="d"><span class="nm">Look at ${esc(r.asset)} ${esc(r.lookAt)}</span>: ${esc(NAME[r.owner] || r.owner)} answered your note. ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 160))}</div><a class="copy" href="${r.at}index.html" target="_blank">Open</a></div>`);
   for (const q of qs.filter((q) => q.state === 'open')) you.push(`<div class="yi" ${cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Answer ${esc(q.id)}</span> from ${esc(NAME[q.agent] || q.agent)}: ${inline(q.body.split('\n').filter(Boolean).join(' ').slice(0, 200))}</div><span class="faint">tell Claude in chat</span></div>`);
   document.getElementById('you').innerHTML = you.length
     ? you.join('') + (readyAgents.length ? `<div class="howto">Press <b>Copy prompt</b>, open that agent's chat, paste, send. The agent reads the board and does the rest.</div>` : '')
@@ -628,6 +652,16 @@ async function refresh() {
     return `<h4 ${cvar(a)}><span class="dot" style="background:var(--${a})"></span>${n}<span class="n">${done} of ${mine.length} done</span></h4>
       <ul>${open.map(row).join('')}</ul>${closed.length ? `<details><summary class="more">${closed.length} done or parked</summary><ul>${closed.map(row).join('')}</ul></details>` : ''}`;
   }).join('');
+
+  // ---- review folders
+  const WORD = { 'no-notes': 'no notes yet', waiting: 'your note is waiting', taken: 'being worked on', look: 'look at the new version', 'answered-seen': 'answered', approved: 'approved' };
+  document.getElementById('revBox').hidden = !revs.length;
+  document.getElementById('reviews').innerHTML = revs.map((r) => {
+    const detail = r.state === 'waiting' || r.state === 'taken' ? [...r.open, ...r.taken].map((n) => `${esc(n.version)}: “${esc(n.text.slice(0, 140))}”`).join(' · ')
+      : r.state === 'look' ? `${esc(NAME[r.owner] || r.owner)} made ${esc(r.lookAt)}: ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 140))}`
+      : r.state === 'approved' ? `approved at ${esc(r.approvedAt)}` : `${esc(r.clip ? 'clip ' + r.clip : 'rig turntable')}${r.reference ? ' · reference ' + esc(r.reference) : ''}`;
+    return `<div class="ri"><div><a href="${r.at}index.html" target="_blank">${esc(r.asset)}</a> <span class="faint">${esc(r.latest || '')} · ${esc(NAME[r.owner] || r.owner)}</span></div><div><span class="st ${esc(r.state)}">${esc(WORD[r.state] || r.state)}</span><span class="nt">${detail}</span></div></div>`;
+  }).join('') + `<p class="faint" style="margin:8px 0 0">Open a folder, watch, then write in its <code>notes.md</code> under a line like <code>## ${new Date().toISOString().slice(0, 10)} · Jerry · v1</code> (the version is in <code>latest.txt</code>). Plain sentences; "good" when it's right. The owner picks it up from the board.</p>`;
 
   // ---- requests
   const recentDay = new Date(now - 36 * 36e5).toISOString().slice(0, 10);

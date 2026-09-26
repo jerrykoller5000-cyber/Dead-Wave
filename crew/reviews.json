@@ -1,0 +1,40 @@
+{
+  "note": "Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.",
+  "assets": [
+    {
+      "asset": "guardian",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-drag",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "drag",
+      "reference": "Push_Loop"
+    },
+    {
+      "asset": "guardian-gallop",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "gallop",
+      "reference": "Sprint_Loop"
+    },
+    {
+      "asset": "guardian-pounce",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "pounce",
+      "reference": "Zombie_Scratch"
+    },
+    {
+      "asset": "guardian-throw",
+      "owner": "claude",
+      "rig": "guardian",
+      "clip": "throw",
+      "reference": "OverhandThrow"
+    }
+  ]
+}

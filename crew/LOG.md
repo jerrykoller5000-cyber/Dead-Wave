@@ -1177,3 +1177,9 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T02:26Z · cursor · IN · CU-44 Studio renderer: strip, video, turntable, stats · on Grok 4.7 · touching tools/studio.mjs, tools/studio.html, review/
 - 2026-09-26T02:29Z · cursor · NOTE · Renderer runs: list works. Rendering the drag clip (strip, reference row, video) on headless Chrome.
 - 2026-09-26T02:43Z · cursor · DONE · CU-44 Studio renderer: strip, video, turntable, stats · report handoffs/2026-09-26-cursor-CU-44.md
+- 2026-09-26T02:59Z · antigravity · IN · AG-19 The studio on Jerry's GPU · on Gemini 3.1 Pro (High) · touching qa/2026-09-25-AG-19.md, qa/run-ag19.mjs
+- 2026-09-26T03:04Z · antigravity · DONE · AG-19 The studio on Jerry's GPU · report handoffs/2026-09-26-antigravity-AG-19.md
+- 2026-09-26T03:06Z · claude · IN · CL-60 Jerry's notes onto the board · on Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge) · touching crew/crew.mjs, crew/notes.mjs, crew/panel.html, crew/reviews.json, review/*/notes.md
+- 2026-09-26T03:06Z · claude · REVIEWED · handoffs/2026-09-26-cursor-CU-44.md · works end to end (11.7 s, stats right); the strip is not readable yet: one oblique scene, figures a few pixels tall, reference tiny. CU-45 fixes the layout; meta.task should be the owner's task
+- 2026-09-26T03:06Z · claude · REVIEWED · handoffs/2026-09-26-antigravity-AG-19.md · renders on the GPU in 13-36 s (drag 31 s, throw 36 s: over the 30 s aim). The strips can't show a match with the game at that size; re-check after CU-45. gallop v2 is an identical re-render (same clip.json)
+- 2026-09-26T03:06Z · claude · DONE · CL-60 Jerry's notes onto the board · report handoffs/2026-09-26-claude-CL-60.md

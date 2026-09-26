@@ -49,6 +49,7 @@ Work your queue top to bottom; a task that says "after XX-n" waits for it.
 - **Claude** · CL-59 · handoffs/2026-09-26-claude-CL-59.md
 - **Claude** · CL-60 · handoffs/2026-09-26-claude-CL-60.md
 - **Antigravity** · AG-19 · handoffs/2026-09-26-antigravity-AG-19.md
+- **Cursor** · CU-45 · handoffs/2026-09-26-cursor-CU-45.md
 - **Claude** · CL-61 · handoffs/2026-09-26-claude-CL-61.md
 
 ## Waiting on
@@ -58,8 +59,7 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Claude** · CL-60 Jerry's notes onto the board · waiting: Cursor (CU-44)
-- **Antigravity** · AG-19 the studio on Jerry's GPU · waiting: Cursor (CU-44)
+- **Cursor** · CU-45 a strip you can read · waiting: Claude (CL-61 Jerry's guide)
 
 
 
@@ -489,6 +489,18 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
+- [ ] **CU-45** **First. The studio's strip, readable (D-40; Claude's review of CU-44).** The strip is the thing Jerry
+  and every agent looks at, and today it's one oblique scene with the creature a few pixels tall
+  (`review/guardian-drag/v1/strip.png`). Make it a grid of tiles instead: one viewport per frame (`setViewport` /
+  `setScissor` on one renderer), each tile its own side-on camera framed on the rig's bounds for the whole clip (same
+  framing in every tile, so motion reads as motion), the marine beside it at the same scale, the ground line, the time
+  in big type in the corner, and red tile borders where a joint snaps or a foot slides. The reference in its own row of
+  tiles under the rig's, at the same times, scaled to human height next to the same marine. Aim: a figure fills most of
+  its tile's height at 1280 px wide. Also: `meta.json`'s `task` is the owner's task (e.g. CL-62), not CU-44; `render`
+  makes no new version when the clip is byte-identical to `latest` (say so and exit 0; `--force` to re-render anyway),
+  because an unchanged "v2" tells Jerry something changed (`review/guardian-gallop/v2` is one: remove it, `latest` back
+  to v1); and say what makes drag (31 s) and throw (36 s) miss the 30 s aim. Re-render the five guardian folders and
+  put the drag strip in the handoff.
 - [x] **CU-44** **The studio (D-40): the renderer, `tools/studio.mjs`.** After CL-57. `node tools/studio.mjs render
   <rig> <clip> [--vs <reference clip>]` renders headless into `review/<asset>/vN/`: `strip.png` (12 frames on a grid,
   ground, a 1.75 m marine for scale, a ghost of the previous frame, the reference as a second row), `video.webm` (real
@@ -820,7 +832,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (Gemini 3.1 Pro)
 
-- [ ] **AG-19** **The studio on Jerry's GPU (D-40).** After CU-44 and CL-59. Render the guardian's current clips and one
+- [x] **AG-19** **The studio on Jerry's GPU (D-40).** After CU-44 and CL-59. Render the guardian's current clips and one
   reference (`--vs Zombie_Scratch`) with `tools/studio.mjs` on Jerry's PC. Check: the strip matches the game (same rig,
   colours, proportions and timing as the guardian in a real chase, from your own in-game shots), the video plays, the
   stats look sane, and how long each render takes. Report with the strips side by side with your in-game shots.
@@ -879,11 +891,11 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   `assets/anim/reference/` (only what we use, compacted), a catalogue (name, length, loop), and `studio/retarget.js` to
   play a reference on a humanoid mannequin next to our rig in the strip; timing notes for the guardian's beats (Push_Loop
   and Walk_Carry_Loop for the drag, OverhandThrow for the throw, Zombie_Scratch for the grab). Licence file in the folder.
-- [ ] **CL-60** **Jerry's notes onto the board.** After CU-44. `node crew/crew.mjs review`: lists `review/*/notes.md` with
+- [x] **CL-60** **Jerry's notes onto the board.** After CU-44. `node crew/crew.mjs review`: lists `review/*/notes.md` with
   notes newer than their latest render (on the panel as "Jerry's notes waiting"); `crew.mjs review take <asset>` turns
   them into a task or a request for the asset's owner (from `meta.json`), and the answer goes under Jerry's note with the
   version number.
-- [ ] **CL-61** **Jerry's guide.** After CL-60 and AG-19. `docs/studio-guide.md` in plain words: where to look, how to
+- [ ] **CL-61** **Jerry's guide.** After CU-45 (CL-60 and AG-19 are in). `docs/studio-guide.md` in plain words: where to look, how to
   write a note, what happens next, how to compare versions. One real example: the guardian's current drag rendered into
   `review/guardian-drag/v1/`, ready for Jerry's first note. Then tell Jerry it's ready (`crew.mjs ask`).
 - [ ] **CL-62** **The guardian's animation through the studio (first real job).** After CL-61, and only on Jerry's go
