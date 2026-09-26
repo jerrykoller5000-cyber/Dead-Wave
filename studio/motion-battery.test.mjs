@@ -139,12 +139,13 @@ test('snap: how hard a body is handed back to its animation, and whether a limb 
     assert.ok(x.snap.at <= x.time + 0.26, 'measured up to a quarter second after it recovered');
   }
   // Getting up in 0.05 s instead of the preset's own time throws the pose from lying to standing
-  // in three frames: a snap many times the size, and the limbs swing rather than roll.
+  // in three frames: a snap well over 0.3 rad and more than twice the size, and the limbs swing
+  // rather than roll. (Twice, not more: an engine whose own get-up is rougher still passes.)
   const json = structuredClone(presets.json('zombie/shambler'));
   json.getup = { ...json.getup, time: 0.05 };
   const fast = runHit(json, 'shotgun-close');
   assert.equal(fast.outcome, 'down');
-  assert.ok(fast.snap.rad > 0.3 && fast.snap.rad > 3 * close.snap.rad, `${fast.snap.rad} against ${close.snap.rad}`);
+  assert.ok(fast.snap.rad > 0.5 && fast.snap.rad > 2 * close.snap.rad, `${fast.snap.rad} against ${close.snap.rad}`);
   assert.ok(fast.snap.swing > fast.snap.rad / 3, `a swing, not a roll: ${JSON.stringify(fast.snap)}`);
 });
 
