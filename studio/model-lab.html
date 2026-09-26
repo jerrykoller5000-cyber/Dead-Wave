@@ -1044,7 +1044,11 @@ async function live() {
     let pj = presets.names().map((n) => presets.json(n)).find((p) => p.rig === own) || null;
     if (!pj) { try { const r = await fetch(`./motion/${own}/${own}.json`); if (r.ok) pj = await r.json(); } catch { /* no preset: it can't react */ } }
     if (!pj) return;
-    body = createBody(cur.inst, loadMotion({ ...pj, rig: cur.inst.def.name }), { ground: () => 0 });
+    // The preset's get-up clips name the rig they were made on (zombie/getup-front), which the
+    // model's own rig (model-zombie) fails; onGetup below plays them from presetJson, so the preset
+    // loaded for the model leaves them out.
+    const { front, back, ...getup } = pj.getup || {};
+    body = createBody(cur.inst, loadMotion({ ...pj, rig: cur.inst.def.name, ...(pj.getup ? { getup } : {}) }), { ground: () => 0 });
     body.presetName = `${own}/${pj.name} v${pj.version || 1}`;
     body.presetJson = pj;
     $('hitbox').style.display = '';
@@ -1085,6 +1089,12 @@ async function live() {
     if (on) hidden.add(limb); else hidden.delete(limb);
     if (view.colors) setColors(true);
     if (on && body && typeof body.lose === 'function') { try { body.lose(limb); } catch { /* not a part this body has */ } }
+    // Put back, the body has it again: stood up whole, then the limbs still off taken off again (a
+    // leg still off drops it, as it should). Left as it was, a leg put back still made it fall.
+    if (!on && body && typeof body.lose === 'function') {
+      body.reset();
+      for (const l of hidden) { try { body.lose(l); } catch { /* not a part this body has */ } }
+    }
   }
   function restoreLimbs() { for (const l of [...hidden]) loseLimb(l, false); syncLimbs(); }
   function syncLimbs() { for (const b of $('limbs').children) b.classList.toggle('on', hidden.has(b.dataset.limb)); }

@@ -318,6 +318,12 @@ async function checkMotionLab(browser, server, page0) {
       must(!missing, `a body that loses a leg falls; no "${missing}": ${b.events.join(' ')}`);
       const sc = await page.evaluate('lab.sceneJson("lost")');
       must(sc && JSON.stringify(sc.actors.a.lose) === '[[0.5,"legL"]]', 'the scene does not take the leg off: ' + JSON.stringify(sc && sc.actors.a.lose));
+      // Off in one run, then a hit once it has recovered: the hit joins the run that took the part
+      // off, so the saved scene loses it too (it replayed a whole body before).
+      await page.evaluate('lab.standUp(); lab.advance(0.5); lab.lose("armR"); lab.advance(1); lab.fire("front"); lab.advance(1.5)');
+      const sc2 = await page.evaluate('lab.sceneJson("lost-then-hit")');
+      must(sc2 && JSON.stringify(sc2.actors.a.lose) === '[[0.5,"armR"]]', 'a part taken off before the hit is not in the scene: ' + JSON.stringify(sc2 && sc2.actors.a.lose));
+      must(sc2.actors.a.hits && sc2.actors.a.hits[0][0] > 0.5, 'the hit is not after the loss: ' + JSON.stringify(sc2.actors.a.hits));
       await page.evaluate('lab.standUp()');
       must((await S()).bodies[0].lost.length === 0, 'standing up did not put it back together');
       return b.events.join(' ');

@@ -383,7 +383,10 @@ function fromOf(local) {
 // A hit starts a new run of hits once every body is standing on its animation again: that run is
 // what "Save as scene" replays, and what the readout judges.
 function beginRun() {
-  if (seq && !labBodies.every((lb) => lb.body.state === 'animated')) return;
+  // A run goes on while a body is still reacting, or still missing a part it lost in this run (so a
+  // later hit joins the run that took the part off, and Save as scene keeps the loss at its time).
+  // Stand up puts the parts back and starts the next run afresh.
+  if (seq && (!labBodies.every((lb) => lb.body.state === 'animated') || labBodies.some((lb) => lb.lost.size))) return;
   seq = { t0: simT, start: {}, hits: [], lost: [], refs: {} };
   for (const lb of labBodies) {
     seq.start[lb.key] = { at: lb.inst.group.position.toArray().map(r3), yaw: yawOf(lb), ref: lb.ref, preset: presetJson(lb), moved: moved(lb) };
