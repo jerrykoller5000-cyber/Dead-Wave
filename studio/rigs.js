@@ -8,6 +8,8 @@ import { makeCaveGuardianRig, guardianGrip } from '../world/cave-guardian.js';
 import { makeMarineRig, adoptMarine, MARINE_CHAINS } from './marine.js';
 import { makeZombieRig, adoptZombie, ZOMBIE_CHAINS } from './zombie.js';
 import { MARINE_BODY, ZOMBIE_BODY } from './bodies.js';
+import { rigFromModel } from './model.js';
+import { models } from './models/index.js';
 import guardianRest from './clips/guardian/rest.json' with { type: 'json' };
 
 const REG = new Map();
@@ -132,3 +134,14 @@ registerRig('zombie', {
   body: ZOMBIE_BODY,
   budget: { draws: 24, triangles: 1200 }
 });
+
+// --- Creatures made as models (studio/models/*, docs/drafts/model.md) -------------------------
+// A model that names a "rig" is a rig with no code of its own: its skeleton, limbs, head and budget are
+// all in its file (the spider's eight legs are chains there). A rig written in code keeps its name. A
+// model that doesn't validate is left out with its problems in the console, rather than taking the
+// studio (and the game with it) down.
+for (const ref of models.rigs()) {
+  const json = models.json(ref);
+  if (REG.has(json.rig)) continue;
+  try { registerRig(json.rig, rigFromModel(json)); } catch (e) { console.warn(`studio/models/${ref}.json: ${e.message}`); }
+}

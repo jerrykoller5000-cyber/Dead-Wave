@@ -1,0 +1,42 @@
+{
+  "format": "dw-model/1",
+  "name": "zombie",
+  "kind": "creature",
+  "version": 1,
+  "owner": "claude",
+  "notes": "The shambler stand-in of studio/zombie.js as data: the same joint names and offsets as the game's makeZombieMesh (index.html), the same boxes. model.test.mjs checks it against the code joint by joint, so a change to either shows up. The droop on the shoulders is the shambler's (-0.85 rad); ferals, brutes and the rest are still the code's opts.type.",
+  "materials": {
+    "skin": { "color": "#d4c4a8", "roughness": 0.92 },
+    "cloth": { "color": "#5a5046", "roughness": 0.95 },
+    "boot": { "color": "#2a2220", "roughness": 0.85 }
+  },
+  "joints": {
+    "pelvis": { "at": [0, 0.55, 0], "note": "hips.position.y = 0.55" },
+    "spine": { "parent": "pelvis", "at": [0, 0.28, 0], "note": "torso, a child of the hips" },
+    "head": { "parent": "spine", "at": [0, 0.58, 0] },
+    "hipL": { "parent": "pelvis", "at": [-0.13, -0.02, 0], "mirror": "x", "note": "legLG; L is the -X side" },
+    "kneeL": { "parent": "hipL", "at": [0, -0.38, 0], "mirror": "x", "note": "shinG" },
+    "ankleL": { "parent": "kneeL", "at": [0, -0.36, 0.04], "mirror": "x", "note": "the boot's own offset, where the foot ends" },
+    "shoulderL": { "parent": "spine", "at": [-0.32, 0.42, 0], "rot": [-48.70141258611997, 0, 0], "mirror": "x", "note": "armLG, drooped forward (baseRotX)" },
+    "elbowL": { "parent": "shoulderL", "at": [0, -0.34, 0], "mirror": "x" },
+    "handL": { "parent": "elbowL", "at": [0, -0.34, 0.01], "mirror": "x" }
+  },
+  "parts": [
+    { "name": "pelvis", "joint": "pelvis", "shape": "rbox", "size": [0.36, 0.2, 0.22], "at": [0, 0.1, 0], "material": "cloth" },
+    { "name": "torso", "joint": "spine", "shape": "rbox", "size": [0.48, 0.5, 0.26], "at": [0, 0.22, 0], "material": "cloth" },
+    { "name": "thighL", "joint": "hipL", "shape": "rbox", "size": [0.16, 0.38, 0.18], "at": [0, -0.18, 0], "material": "skin", "mirror": "x", "limb": "legL" },
+    { "name": "shinL", "joint": "kneeL", "shape": "rbox", "size": [0.14, 0.36, 0.16], "at": [0, -0.16, 0], "material": "skin", "mirror": "x", "limb": "legL" },
+    { "name": "bootL", "joint": "kneeL", "shape": "rbox", "size": [0.16, 0.1, 0.24], "at": [0, -0.36, 0.04], "material": "boot", "mirror": "x", "limb": "legL", "note": "on the shin, as in the game" },
+    { "name": "upperArmL", "joint": "shoulderL", "shape": "rbox", "size": [0.12, 0.34, 0.13], "at": [0, -0.16, 0], "material": "skin", "mirror": "x", "limb": "armL" },
+    { "name": "forearmL", "joint": "elbowL", "shape": "rbox", "size": [0.1, 0.3, 0.11], "at": [0, -0.14, 0], "material": "skin", "mirror": "x", "limb": "armL" },
+    { "name": "handL", "joint": "handL", "shape": "rbox", "size": [0.09, 0.1, 0.1], "material": "skin", "mirror": "x", "limb": "armL" },
+    { "name": "head", "joint": "head", "shape": "rbox", "size": [0.34, 0.34, 0.34], "material": "skin", "limb": "head" }
+  ],
+  "chains": {
+    "footL": { "root": "hipL", "mid": "kneeL", "end": "ankleL", "lengths": [0.38, 0.36], "pole": [0, 0, 1], "exact": true, "mirror": "x" },
+    "handL": { "root": "shoulderL", "mid": "elbowL", "end": "handL", "lengths": [0.34, 0.34], "pole": [0, 0, -1], "exact": true, "mirror": "x" }
+  },
+  "body": "zombie",
+  "budget": { "draws": 24, "triangles": 1200 },
+  "merge": false
+}

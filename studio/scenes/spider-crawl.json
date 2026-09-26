@@ -1,0 +1,15 @@
+{
+  "format": "dw-scene/1",
+  "name": "spider-crawl",
+  "length": 3.2,
+  "actors": {
+    "spider": {
+      "rig": "spider", "path": "line",
+      "clips": [[0, "spider/crawl", { "loop": true, "stride": 0.6 }]]
+    }
+  },
+  "paths": {
+    "line": { "points": [[0, 0, 0], [0, 0, 12]], "speed": [[0, 0.75]] }
+  },
+  "checks": { "gap": 0.05, "slide": 0.05, "speed": { "spider": [0.5, 1.0] } }
+}
