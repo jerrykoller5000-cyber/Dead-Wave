@@ -1168,9 +1168,15 @@ document.getElementById('approve').onclick = () => sendNote('good');
 // 0.5 s). Render it with node tools/studio.mjs scene studio/scenes/lab-<name>.json.
 const sceneNameEl = document.getElementById('scenename');
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'lab';
+// The same body and weapon give the same name, so a name this page already saved gets the next number:
+// a second save doesn't quietly replace the first.
+const scenesSaved = new Set();
 function defaultSceneName() {
   const A = labBodies[0], h = seq && seq.hits[0];
-  return slug([typeOf(A.ref), labBodies[1] ? 'vs-' + (compareWith === 'file' ? 'file' : typeOf(labBodies[1].ref)) : '', h ? h.weapon : ''].filter(Boolean).join('-'));
+  const base = slug([typeOf(A.ref), labBodies[1] ? 'vs-' + (compareWith === 'file' ? 'file' : typeOf(labBodies[1].ref)) : '', h ? h.weapon : ''].filter(Boolean).join('-'));
+  let name = base;
+  for (let k = 2; scenesSaved.has(name); k++) name = slug(base.slice(0, 34) + '-' + k);   // room for the number under slug's 40
+  return name;
 }
 // The scene is the lab turned a quarter turn about the vertical (places, facings and pushes alike, so
 // the physics is the same): the renderer's side view looks along X, and the lab stands its bodies
@@ -1216,7 +1222,8 @@ async function saveScene(name = sceneNameEl.value.trim() || defaultSceneName()) 
     try {
       const j = await studioPost('scene', { name, json });
       lastScene = { ...j, how: 'saved', json };
-      savedEl.innerHTML = `<span class="ev">Saved ${j.file}.</span> An agent renders it with <code>${j.render}</code>`;
+      scenesSaved.add(name);
+      savedEl.innerHTML = `<span class="ev">Saved ${j.file}${j.replaced ? ', over the one of the same name' : ''}.</span> An agent renders it with <code>${j.render}</code>`;
       return lastScene;
     } catch (e) {
       if (e.reply) { savedEl.innerHTML = `<span class="no">Not saved: ${e.message}</span>`; lastScene = { ok: false, how: 'refused', error: e.message }; return lastScene; }
