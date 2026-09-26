@@ -9,7 +9,7 @@ import { models } from './models/index.js';
 import { rigs, registerRig, rigCost } from './rigs.js';
 import { makeZombieRig } from './zombie.js';
 import { loadClip, validateClip, createPlayer, solveChain } from './clip.js';
-import { loadMotion, createBody } from './motion.js';
+import { loadMotion, validateMotion, createBody } from './motion.js';
 import { presets } from './motion/index.js';
 import { loadScene, createScene } from './scene.js';
 
@@ -368,3 +368,59 @@ test('a model is a rig with no new code: rest pose, adopting a built one, and wh
   const beam = wpos(b.R.beam), lamp = wpos(b.R.lamp);
   assert.ok(Math.abs(beam.x - lamp.x) < 1e-6, 'halfway through the sweep the lamp faces ahead');
 });
+
+// The spider's body is data in its model file (points, bones, braces, hinges, frames, segments), and
+// motion.js runs it with no code of its own: eight feet instead of two. The weapons are the motion lab's.
+test('the spider reacts on its eight legs: a body made of data, the same engine', () => {
+  const pj = read('./motion/spider/spider.json');
+  assert.deepEqual(validateMotion(pj), []);
+  const preset = loadMotion(pj);
+  const idle = loadClip(read('./clips/spider/idle.json'));
+  const hit = (weapon) => {
+    const inst = rigs.get('spider').create({});
+    const player = createPlayer(inst).play(idle, { loop: true });
+    const body = createBody(inst, preset, {});
+    const events = [];
+    let low = Infinity, finite = true;
+    for (let f = 0; f < 6 * 60; f++) {
+      player.update(1 / 60);
+      body.follow();
+      if (f === 30) (weapon.kill ? body.kill : body.hit)({ at: weapon.at, dir: weapon.dir || [0, 0, -1], power: weapon.power, kind: weapon.kind });
+      for (const e of body.update(1 / 60)) events.push(e[0]);
+      body.apply();
+      if (f >= 30) for (const p of Object.values(body.points())) { low = Math.min(low, p[1]); if (!p.every(Number.isFinite)) finite = false; }
+      inst.group.traverse((o) => { if (!Number.isFinite(o.quaternion.w)) finite = false; });
+    }
+    return { events, low, finite, state: body.state };
+  };
+  const rifle = hit({ kind: 'bullet', power: 2.5, at: 'chest' });
+  assert.ok(rifle.finite && rifle.low > 0.03, 'nothing goes through the ground or off to infinity');
+  assert.ok(!rifle.events.includes('fall') && rifle.events.includes('recovered'), 'a rifle round is a flinch: ' + rifle.events.join(' '));
+  const shell = hit({ kind: 'pellet', power: 6.5, at: 'chest' });
+  assert.ok(!shell.events.includes('fall') && shell.events.includes('recovered'), 'eight legs take a close shell: ' + shell.events.join(' '));
+  const grenade = hit({ kind: 'blast', power: 8, at: 'pelvis', dir: [0, 0.5, -1] });
+  for (const e of ['fall', 'down', 'getup', 'recovered']) assert.ok(grenade.events.includes(e), `a grenade: ${e} (${grenade.events.join(' ')})`);
+  assert.ok(grenade.finite && grenade.low > 0.03);
+  const kill = hit({ kind: 'bullet', power: 3, at: 'head', kill: true });
+  assert.ok(kill.events.includes('dead') && kill.events.includes('settled'), 'dead, it goes limp and settles: ' + kill.events.join(' '));
+  // What it costs: more points than a zombie (26 to 17), so more, but not out of scale. Timed against a
+  // shambler in the same run (best of five), so a slow machine doesn't fail it.
+  const per = (rig, p) => {
+    const inst = rigs.get(rig).create({});
+    const body = createBody(inst, p, {});
+    let best = Infinity;
+    for (let r = 0; r < 6; r++) {
+      body.reset(); body.follow();
+      body.hit({ at: 'chest', dir: [0, 0, -1], power: 3.2, kind: 'pellet' });
+      const t0 = performance.now();
+      for (let f = 0; f < 20; f++) { body.follow(); body.update(1 / 60); body.apply(); }
+      if (r > 0) best = Math.min(best, (performance.now() - t0) / 20);   // the first run warms up
+      assert.notEqual(body.state, 'animated', 'timed while it reacts');
+    }
+    return best;
+  };
+  const sp = per('spider', preset), zb = per('zombie', loadMotion(presets.json('zombie/shambler')));
+  console.log(`  a reacting spider ${sp.toFixed(3)} ms a frame, a shambler ${zb.toFixed(3)} ms (${(sp / zb).toFixed(1)}x)`);
+  assert.ok(sp < zb * 4, `a spider costs ${(sp / zb).toFixed(1)} shamblers`);
+});
+

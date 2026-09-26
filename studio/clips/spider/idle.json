@@ -1,0 +1,21 @@
+{
+  "format": "dw-clip/1",
+  "name": "idle",
+  "rig": "spider",
+  "length": 2.4,
+  "loop": true,
+  "notes": "Waiting, hands planted: the body breathes low and slow, the chest turns a little from side to side as if it's listening, and the jaw works. The limbs stay where the model puts them. What a host plays under a reaction when the spider isn't moving.",
+  "tracks": {
+    "pelvis": {
+      "pos": [[0, [0, 0.5, 0]], [1.2, [0, 0.485, 0]], [2.4, [0, 0.5, 0]]],
+      "rot": [[0, [0, 0, 0]], [1.2, [2, 0, 0]], [2.4, [0, 0, 0]]]
+    },
+    "chest": {
+      "rot": [[0, [0, -5, 0]], [0.9, [-3, 4, 0]], [1.8, [0, 6, 1]], [2.4, [0, -5, 0]]]
+    },
+    "head": {
+      "open": [[0, 0.1], [0.6, 0.5], [1.0, 0.15], [1.7, 0.6], [2.4, 0.1]]
+    }
+  },
+  "events": []
+}
