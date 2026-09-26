@@ -148,6 +148,22 @@ function play(json, preset, stance, spec, opts, clipOf) {
   const body = createBody(inst, preset, { ground: () => 0 });
   const getup = (json.getup && typeof json.getup === 'object') ? json.getup : {};
   const chestP = pts.find((p) => p.k === 'chest') || pts[0], pelvisP = pts.find((p) => p.k === (def.root || 'pelvis')) || pts[0];
+  // A body without the point the hit names (the spider has no shoulders): it lands on the point
+  // nearest the chest on that side (R is +X, L is -X; either for a point with no side), and the run
+  // says so (standIn), instead of the whole battery stopping on it.
+  let at = spec.at, standIn = null;
+  if (typeof at === 'string' && !def.points[at]) {
+    const c = shown(chestP).clone(), side = /R$/.test(at) ? 1 : /L$/.test(at) ? -1 : 0;
+    let best = null, bd = Infinity;
+    for (const p of pts) {
+      const w = shown(p);
+      if (side && Math.sign(w.x - c.x) !== side) continue;
+      const d = w.distanceTo(c);
+      if (d < bd) { bd = d; best = p.k; }
+    }
+    standIn = { asked: at, used: best || chestP.k };
+    at = standIn.used;
+  }
 
   const hitF = Math.round(lead / dt), lastF = hitF + Math.round(window / dt);
   const events = [], times = {};
@@ -179,7 +195,7 @@ function play(json, preset, stance, spec, opts, clipOf) {
     body.follow();
     if (f === hitF) {
       chest0 = shown(chestP).clone(); pelvis0 = shown(pelvisP).clone();
-      const h = { at: spec.at, dir: spec.dir, power: spec.power, kind: spec.kind };
+      const h = { at, dir: spec.dir, power: spec.power, kind: spec.kind };
       if (spec.kill) body.kill(h); else body.hit(h);
     }
     const t = r3((f - hitF + 1) * dt);
@@ -237,7 +253,7 @@ function play(json, preset, stance, spec, opts, clipOf) {
   const end = shown(pelvisP);
   const recovered = times.recovered !== undefined;
   return {
-    hit: spec.hit, from: spec.from, kind: spec.kind, power: spec.power, at: spec.at, kill: spec.kill,
+    hit: spec.hit, from: spec.from, kind: spec.kind, power: spec.power, at, kill: spec.kill, standIn,
     outcome, recovered, settled: times.settled !== undefined,
     steps: events.filter((e) => e[1] === 'step').length,
     time: outcome === 'dead' ? (times.settled ?? null) : (times.recovered ?? null),
@@ -319,18 +335,22 @@ export function sweep(ref, opts = {}) {
     bands.push({ outcome: prev, from: 0 });
     for (const p of points) {
       const o = at(p);
-      if (o !== prev) {
+      // Two changes can fall inside one step (flinch, then stagger, then down): find each edge in
+      // turn and name each band by what is really at its edge, until the band reaches p's outcome.
+      // Each edge is exact (not rounded), so a hit at a band's `from` gives that band's outcome.
+      while (o !== prev) {
         // Halve the gap until it is within tol: the change lies between a and c.
         let a = lo, c = p;
         while (c - a > tol) { const m = (a + c) / 2; if (at(m) === prev) a = m; else c = m; }
-        bands.push({ outcome: o, from: r3(c) });
-        prev = o;
+        const oc = c === p ? o : at(c);
+        bands.push({ outcome: oc, from: c });
+        prev = oc; lo = c;
       }
       lo = p;
     }
     const order = bands.map((x) => OUTCOMES.indexOf(x.outcome));
     out.push({
-      kind, at: b.at, from, max: r3(top), knockdown: r3(drops), bands,
+      kind, at: b.at, from, max: r3(top), knockdown: drops, bands,
       // Each change should be to something worse. One that goes back (down, then stagger at more
       // power) means the preset is balanced on an edge there: worth a look.
       monotone: order.every((o, i) => i === 0 || o > order[i - 1])

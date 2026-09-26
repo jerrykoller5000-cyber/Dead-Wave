@@ -126,3 +126,12 @@ test('all: every preset on disk; and it runs without --import too', () => {
   assert.equal(bare.code, 0, bare.err);
   assert.match(bare.out, /^rifle +front +stagger /m);
 });
+
+// --- Review fixes (report package review, 2026-09-26) ------------------------------------------
+
+test('all: a body without the point a hit names (the spider has no shoulders) is hit on a stand-in, and every preset is reported', () => {
+  const r = inproc(['all', '--hits', 'brute-swing', '--from', 'front']);
+  assert.equal(r.code, 0, r.err);
+  assert.match(r.out, /^brute-swing \(on \w+: no shoulderR\) +front +\w+/m);
+  for (const p of ['marine/marine', 'spider/spider', 'zombie/brute', 'zombie/feral', 'zombie/shambler']) assert.match(r.out, new RegExp('^' + p.replace('/', '\\/') + ' v\\d+ ', 'm'), p);
+});

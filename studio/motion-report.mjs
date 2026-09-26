@@ -114,7 +114,7 @@ limb barely moved and turned about its own length (the animation's twist jumped 
 
 function single(b) {
   const rows = [['hit', 'from', 'outcome', 'steps', 'time', 'chest', 'drop', 'moved', 'along', 'fell', 'lowest', 'off-bal', 'snap']];
-  for (const r of b.runs) rows.push([r.hit, r.from, r.outcome + (r.bad ? ' (NaN!)' : ''), r.steps, f2(r.time), f2(r.chest), f2(r.drop), f2(r.moved), f2(r.along), f2(r.fell), `${r.lowest.point} ${f2(r.lowest.y)}`, f2(r.offBalance), snapText(r.snap)]);
+  for (const r of b.runs) rows.push([r.hit + (r.standIn ? ` (on ${r.standIn.used}: no ${r.standIn.asked})` : ''), r.from, r.outcome + (r.bad ? ' (NaN!)' : ''), r.steps, f2(r.time), f2(r.chest), f2(r.drop), f2(r.moved), f2(r.along), f2(r.fell), `${r.lowest.point} ${f2(r.lowest.y)}`, f2(r.offBalance), snapText(r.snap)]);
   return grid(rows);
 }
 
@@ -149,7 +149,7 @@ function paired(a, b) {
   return `${grid(rows)}\n${sum} ${count(marks, 'number differs', 'numbers differ')} by more than 1/20 s or 2 cm (*).`;
 }
 
-const bandsText = (sw) => sw.bands.map((x, i) => (i === 0 ? x.outcome : `${x.outcome} from ${f2(x.from)}${Math.abs(x.from - sw.knockdown) < 1e-6 ? ' (its knockdown)' : ''}`)).join(', ')
+const bandsText = (sw) => sw.bands.map((x, i) => (i === 0 ? x.outcome : `${x.outcome} from ${f2(x.from)}${Math.abs(x.from - sw.knockdown) < 1e-9 ? ' (its knockdown)' : ''}`)).join(', ')
   + (sw.monotone ? '' : '  <- goes back down the scale: the preset sits on an edge there');
 function sweepText(sa, sb) {
   const out = [];
@@ -200,7 +200,7 @@ export function report(argv, print = console.log) {
   const sweepOpts = (from) => ({ clipOf, lod: a.lod ?? 0, kinds: a.kinds, from, max: a.max });
   const refs = a.refs[0] === 'all' ? presetsOnDisk() : a.refs;
   const data = { presets: [] };
-  let failed = 0;
+  let failed = 0, broke = 0;
   const one = (json, label) => {
     loadMotion(json);                     // a bad preset stops here, with its problems as sentences
     const battery = runBattery(json, opts);
@@ -209,6 +209,7 @@ export function report(argv, print = console.log) {
     return { label: label || presetRef(json), json, battery, expect, sweep: sweeps && { preset: presetRef(json), version: json.version || 1, sweeps: sweeps } };
   };
   for (const ref of refs) {
+   try {
     const A = one(readPreset(ref), ref.endsWith('.json') ? ref : null);
     let B = null;
     if (a.vs) B = one(readPreset(a.vs), a.vs.endsWith('.json') ? a.vs : null);
@@ -232,9 +233,15 @@ export function report(argv, print = console.log) {
     print('');
     failed += A.expect.failures.length + (B ? B.expect.failures.length : 0);
     data.presets.push({ label: A.label, battery: A.battery, expect: strip(A.expect), sweep: A.sweep, vs: B && { label: B.label, battery: B.battery, expect: strip(B.expect), sweep: B.sweep } });
+   } catch (e) {
+    // One preset that can't be run (under "all") is reported, and the rest still are.
+    if (refs.length < 2 || e instanceof UsageError) throw e;
+    print(`${ref}: can't be run: ${e.message || e}\n`);
+    broke++;
+   }
   }
   if (a.json) { fs.writeFileSync(a.json, JSON.stringify(data, null, 1) + '\n'); print(`Wrote ${a.json}.`); }
-  return { code: a.check && failed ? 1 : 0, data };
+  return { code: broke ? 2 : a.check && failed ? 1 : 0, data };
 }
 // The expectation results without their runs (the battery section has the numbers).
 const strip = (e) => ({ ...e, results: e.results.map(({ run, ...r }) => r) });

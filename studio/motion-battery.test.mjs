@@ -2,6 +2,7 @@
 // maths in Node:  node --import ./studio/node-three.mjs --test studio/motion-battery.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { BATTERY, BATTERY_NAMES, FROM, SIDES, OUTCOMES, SWEPT, classify, runBattery, runHit, sweep, marginAt, stanceFor } from './motion-battery.js';
 import { presets } from './motion/index.js';
 import { rigs, createBody, loadMotion, HIT_KINDS } from './index.js';
@@ -161,4 +162,31 @@ test('options reach the body: a far body (lod) and lost limbs, when the engine h
   } else {
     assert.throws(() => runHit('zombie/shambler', 'rifle', { lose: ['legL'] }), /no body\.lose \(lost limbs, contract 3\)/);
   }
+});
+
+// --- Review fixes (report package review, 2026-09-26) ------------------------------------------
+
+test('two changes inside one step are both found, and a hit at every band\'s edge gives that band', () => {
+  // One 10 m/s step spans the shambler's whole flinch-stagger-down range.
+  const s = sweep('zombie/shambler', { kinds: ['pellet'], step: 10 }).sweeps[0];
+  assert.deepEqual(s.bands.map((b) => b.outcome), ['flinch', 'stagger', 'down']);
+  // The feral's bullet knockdown is 6 × 0.8 = 4.800000000000001: an edge rounded to 4.8 was a stagger.
+  const sw = sweep('zombie/feral', { kinds: ['crush', 'bullet'] });
+  for (const k of sw.sweeps) {
+    for (const b of k.bands.slice(1)) {
+      const r = runHit('zombie/feral', { kind: k.kind, power: b.from, at: SWEPT[k.kind].at, up: SWEPT[k.kind].up, from: k.from });
+      assert.equal(r.outcome, b.outcome, `feral ${k.kind} at ${b.from}: the band says ${b.outcome}, a hit there is a ${r.outcome}`);
+    }
+  }
+});
+
+test('a hit on a point the body lacks lands on a stand-in on that side, and the run says so', () => {
+  // The spider's preset is on disk, not in the registry: pass its JSON (the model package's body).
+  const spider = JSON.parse(fs.readFileSync(new URL('./motion/spider/spider.json', import.meta.url), 'utf8'));
+  const r = runHit(spider, 'brute-swing');
+  assert.equal(r.standIn.asked, 'shoulderR');
+  assert.ok(/R$/.test(r.standIn.used) || r.standIn.used === 'chest', r.standIn.used);
+  assert.equal(r.at, r.standIn.used);
+  assert.ok(OUTCOMES.includes(r.outcome), r.outcome);
+  assert.equal(runHit('zombie/shambler', 'brute-swing').standIn, null, 'a body that has the point: no stand-in');
 });
