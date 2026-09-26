@@ -1,6 +1,7 @@
 {
   "version": "v1",
-  "model": "studio/models/creature/zombie.json",
+  "model": "creature/zombie",
+  "file": "studio/models/creature/zombie.json",
   "modelVersion": 1,
   "draws": 15,
   "triangles": 720,
@@ -9,6 +10,23 @@
     "triangles": 1200
   },
   "over": false,
+  "bounds": {
+    "min": [
+      -0.38,
+      -0.26,
+      -0.17
+    ],
+    "max": [
+      0.38,
+      1.58,
+      0.588
+    ],
+    "size": [
+      0.76,
+      1.84,
+      0.758
+    ]
+  },
   "joints": [
     "pelvis",
     "spine",
@@ -28,10 +46,19 @@
   ],
   "parts": 9,
   "drawn": 15,
+  "meshes": 15,
   "merge": false,
-  "page": {
-    "draws": 15,
-    "triangles": 720
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 163.2,
+    "topPxPerMetre": 252.2
   },
-  "renderSeconds": 2.1
+  "renderSeconds": 3.7
 }

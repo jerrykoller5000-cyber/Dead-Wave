@@ -89,7 +89,8 @@ test('the folder\'s page shows the latest sheet beside the one before, what chan
   assert.match(page, /It needs a lid\./);
   assert.match(page, /<img class="lab" src="v1\/lab-20260927-101500\.png"/);
   assert.match(page, /<blockquote>claude · v2 · 2026-09-27: a lid, 0\.1 m thick\.<\/blockquote>/);
-  assert.match(page, /href="\.\.\/\.\.\/studio\/model-lab\.html\?model=prop\/t"/);
+  // The lab as Open Model Lab.bat serves it: the page itself opens from the disk, where a module page can't.
+  assert.match(page, /href="http:\/\/127\.0\.0\.1:8973\/studio\/model-lab\.html\?model=prop\/t"/);
   assert.ok(!/<script/i.test(page), 'plain HTML: it opens from the disk');
 });
 

@@ -170,7 +170,7 @@ blockquote{margin:6px 0;padding:4px 12px;border-left:3px solid #7cdea0} code{fon
 <h1>${esc(latest)}</h1>
 <p class="sub">${esc(asset)} · ${esc(meta.ref || '')} · owner ${esc(meta.owner || 'claude')}${meta.file ? ' · ' + esc(meta.file) : ''}</p>
 <p>The model from six sides, in day, night and night vision, and as big as it is in the game, beside a 1.75 m figure. Green is within its budget, red is over. Click a sheet for it full size.
-To turn round it yourself, double-click <b>Open Model Lab.bat</b> in the game folder (with it open: <a href="../../${esc(lab)}">${esc(lab)}</a>); write your note there and it comes here with a picture. Or write it in <code>notes.md</code> in this folder.</p>
+To turn round it yourself, double-click <b>Open Model Lab.bat</b> in the game folder, then <a href="http://127.0.0.1:8973/${esc(lab)}">open it in the lab</a>; write your note there and it comes here with a picture. Or write it in <code>notes.md</code> in this folder.</p>
 <div class="pair">${shown.map(col).join('\n')}</div>
 ${changes}
 <h2>Notes <span class="sub">(as they were when ${esc(latest)} was drawn; notes.md has the newest)</span></h2>

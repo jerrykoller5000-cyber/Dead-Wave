@@ -1,6 +1,7 @@
 {
   "version": "v1",
-  "model": "studio/models/prop/evac-boat.json",
+  "model": "prop/evac-boat",
+  "file": "studio/models/prop/evac-boat.json",
   "modelVersion": 1,
   "draws": 20,
   "triangles": 2958,
@@ -9,6 +10,23 @@
     "triangles": 4000
   },
   "over": false,
+  "bounds": {
+    "min": [
+      -1.14,
+      -0.1,
+      -3.26
+    ],
+    "max": [
+      1.14,
+      2.852,
+      2.92
+    ],
+    "size": [
+      2.28,
+      2.952,
+      6.18
+    ]
+  },
   "joints": [
     "waterline",
     "board",
@@ -18,11 +36,20 @@
   ],
   "parts": 61,
   "drawn": 100,
+  "meshes": 20,
   "merge": true,
-  "clip": "evac-boat/search",
-  "page": {
-    "draws": 20,
-    "triangles": 2958
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 62.2,
+    "topPxPerMetre": 53.1
   },
-  "renderSeconds": 3.3
+  "clip": "evac-boat/search",
+  "renderSeconds": 5.2
 }

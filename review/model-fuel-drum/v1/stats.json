@@ -1,6 +1,7 @@
 {
   "version": "v1",
-  "model": "studio/models/prop/fuel-drum.json",
+  "model": "prop/fuel-drum",
+  "file": "studio/models/prop/fuel-drum.json",
   "modelVersion": 1,
   "draws": 2,
   "triangles": 328,
@@ -9,15 +10,41 @@
     "triangles": 400
   },
   "over": false,
+  "bounds": {
+    "min": [
+      -0.366,
+      0,
+      -0.375
+    ],
+    "max": [
+      0.366,
+      0.99,
+      0.375
+    ],
+    "size": [
+      0.731,
+      0.99,
+      0.75
+    ]
+  },
   "joints": [
     "top"
   ],
   "parts": 6,
   "drawn": 7,
+  "meshes": 2,
   "merge": "color",
-  "page": {
-    "draws": 2,
-    "triangles": 328
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 187.4,
+    "topPxPerMetre": 256.5
   },
-  "renderSeconds": 2.1
+  "renderSeconds": 3.7
 }

@@ -1,6 +1,7 @@
 {
   "version": "v1",
-  "model": "studio/models/creature/spider.json",
+  "model": "creature/spider",
+  "file": "studio/models/creature/spider.json",
   "modelVersion": 1,
   "draws": 30,
   "triangles": 2636,
@@ -9,6 +10,23 @@
     "triangles": 3200
   },
   "over": false,
+  "bounds": {
+    "min": [
+      -0.907,
+      0.015,
+      -0.911
+    ],
+    "max": [
+      0.907,
+      0.867,
+      0.84
+    ],
+    "size": [
+      1.815,
+      0.852,
+      1.751
+    ]
+  },
   "joints": [
     "pelvis",
     "chest",
@@ -42,11 +60,24 @@
   ],
   "parts": 33,
   "drawn": 77,
+  "meshes": 30,
   "merge": "color",
-  "clip": "spider/crawl",
-  "page": {
-    "draws": 30,
-    "triangles": 2636
+  "views": [
+    "front",
+    "side",
+    "back",
+    "top",
+    "three-front",
+    "three-back"
+  ],
+  "scale": {
+    "elevationsPxPerMetre": 156.7,
+    "topPxPerMetre": 156.7
   },
-  "renderSeconds": 3.7
+  "clip": "spider/crawl",
+  "namesHidden": [
+    "chest",
+    "foot4L"
+  ],
+  "renderSeconds": 4.4
 }

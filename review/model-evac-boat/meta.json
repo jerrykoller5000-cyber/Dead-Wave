@@ -4,6 +4,8 @@
   "owner": "claude",
   "model": "prop/evac-boat",
   "file": "studio/models/prop/evac-boat.json",
-  "look": "studio/model-lab.html?model=prop/evac-boat&clip=evac-boat/search",
-  "task": ""
+  "look": "studio/model-lab.html?model=prop/evac-boat",
+  "task": "",
+  "ref": "prop/evac-boat",
+  "version": 1
 }

@@ -5,5 +5,7 @@
   "model": "prop/fuel-drum",
   "file": "studio/models/prop/fuel-drum.json",
   "look": "studio/model-lab.html?model=prop/fuel-drum",
-  "task": ""
+  "task": "",
+  "ref": "prop/fuel-drum",
+  "version": 1
 }

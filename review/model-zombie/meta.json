@@ -5,5 +5,7 @@
   "model": "creature/zombie",
   "file": "studio/models/creature/zombie.json",
   "look": "studio/model-lab.html?model=creature/zombie",
-  "task": ""
+  "task": "",
+  "ref": "creature/zombie",
+  "version": 1
 }
