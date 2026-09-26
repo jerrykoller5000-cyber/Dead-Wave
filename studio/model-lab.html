@@ -148,7 +148,6 @@ function placeDots() {
   jointDots.visible = showJoints;
   for (const d of jointDots.children) d.position.setFromMatrixPosition(d.userData.joint.matrixWorld);
 }
-const hex = (c) => '#' + new THREE.Color(c).getHexString();
 function describe(json) {
   const c = built.cost, b = json.budget;
   const ok = (v, max) => `<span class="${v > max ? 'bad' : 'good'}">${v}</span> of ${max}`;
@@ -204,7 +203,6 @@ if (SHEET) {
   const ctx = out.getContext('2d');
   ctx.fillStyle = '#14181f'; ctx.fillRect(0, 0, W, H);
   renderer.setSize(TW, TH);
-  const d = describe(json);
   const emissive = Object.values(json.materials).some((m) => m.emissive);
   const views = [
     ['three-quarter', [1, 0.55, 1.25]], ['front (+Z)', [0, 0.18, 1]], ['right side (+X)', [1, 0.18, 0]],

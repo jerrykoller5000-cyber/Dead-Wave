@@ -28,6 +28,7 @@ import { notesStub } from '../crew/notes.mjs';
 register(new URL('./node-three-hook.mjs', import.meta.url));
 const { buildModel, validateModel, rigFromModel, modelAsset } = await import('./model.js');
 const { models } = await import('./models/index.js');
+const { validateClip } = await import('./clip.js');
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
 function args() {
@@ -75,7 +76,15 @@ function check(arg) {
     if (json.rig) console.log(`  registers as rig "${json.rig}"${def.body ? ', with a body that reacts' : ''}${json.clips ? '; plays ' + json.clips.join(', ') : ''}`);
   }
   if (Object.keys(m.limbs).length) console.log(`  limbs that can be lost: ${Object.entries(m.limbs).map(([k, v]) => `${k} (${v.length} mesh${v.length > 1 ? 'es' : ''})`).join(', ')}`);
-  return !m.over;
+  // The clips it says it plays: there, valid, and for its rig.
+  let clipsOk = true;
+  for (const c of json.clips || []) {
+    const f = path.join(ROOT, 'studio', 'clips', c + '.json');
+    const cj = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null;
+    const problems = !cj ? [`there is no studio/clips/${c}.json`] : [...validateClip(cj), ...(cj.rig !== json.rig ? [`it is for rig "${cj.rig}", not "${json.rig}"`] : [])];
+    if (problems.length) { clipsOk = false; console.log(`  clip ${c}: ${problems.join('; ')}`); }
+  }
+  return !m.over && clipsOk;
 }
 
 async function shoot(query, file) {
