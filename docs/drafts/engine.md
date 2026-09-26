@@ -23,6 +23,15 @@ lies. It topples, and lies flat.
 `fall.upright` (0 to 1, default 0) says how much a falling or lying body still keeps the animation's
 way up. `held.upright` is the same while held. React and getup are always 1.
 
+Turned like this, the legs and spine keep their shape off the hips, and the arms and head off the
+chest. (Off the hips alone, a twisted spine put the arms' targets in the ground and they shoved the
+body over.) The fall's `catch` (hands out to the ground ahead) fades out as the chest comes down:
+kept on a body lying on its face, it was a push-up over the top, and a marine somersaulted again and
+again and never lay still.
+
+Knocked down, 48 zombies cost about 7 to 15% more a frame than before (about 2 ms against 1.9,
+update and apply, Node): two frame turns a step. That's about 0.04 ms a body; the pool keeps it to 8.
+
 ## Getting up (contract 1)
 
 When a body starts to get up it emits `['getup', { side, heading }]`:
@@ -153,6 +162,23 @@ dragged with his arms trailing and his head down. While the hand has him the gri
 guardian's own flagged checks (slides, a snap) are its clips', identical in both scenes (CL-64). The
 game still plays `guardian-grab-drag.json`, untouched.
 
+**Review scenes.** Besides the flop, two new ones for Jerry's eye (studio/scenes/):
+
+- `getting-up`: a shambler and a marine, each shot onto its face and onto its back at 0.3 s; each
+  gets up on its own clip for that side, turned the way it lies.
+- `zombie-dismembered`: a shambler loses its left leg (it goes over, lies, and gets up on the leg it
+  has); one loses its right arm and takes a rifle round (it only rocks); one loses its head with the
+  killing shot (it drops limp).
+
+`zombie-reactions` and `marine-knocked` now show the get-up clips too (the close shell, the
+grenade, the blast).
+
+Not done: the review folders. `node tools/studio.mjs scene studio/scenes/guardian-grab-drag-flop.json`
+drew the strip here, but its video step timed out headless ("the scene video did not finish"; P-76,
+Cursor's), so there's no folder to commit. Render them on Jerry's GPU. For `getting-up` and the
+reactions, `tools/studio-scene.html` first needs to fetch `sceneClipRefs(json)`, or its bodies get
+up the old way.
+
 ## Lost parts (contract 3)
 
 ```js
@@ -225,12 +251,13 @@ export { SCENE_FORMAT, validateScene, loadScene, createScene, sceneClipRefs } fr
 
 ## Checking it
 
-`node --import ./studio/node-three.mjs --test "studio/*.test.mjs"` (47 tests). New in
+`node --import ./studio/node-three.mjs --test "studio/*.test.mjs"` (48 tests). New in
 `motion.test.mjs`: a held body's point stays within 3 cm of a moving hand and nothing goes through
 the ground; a hold can be a function and is a spring under 1; the flop scene's grip gap stays under
 3 cm while the hand has him, and it seeks the same every time; a lost leg drops a body, a lost arm
 doesn't; knocked down face down it reports front, on its back back, and both rigs end standing on
 their animation after the clip; every preset's get-up clips start lying, end standing and don't snap
-at their rate; a scene turns and gets a body up on its clip, and still plays without the clips; a
+at their rate; a scene turns and gets a body up on its clip, and still plays without the clips; the
+new review scenes play (each body gets up from the side it fell on; what's left of a body reacts); a
 scene takes a part off on cue; lod 1 costs clearly less and still gets up, lod 2 holds the pose and
 its timers run.
