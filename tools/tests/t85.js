@@ -26,20 +26,23 @@
     const home = { x: P.x, z: P.z };
     const stand = (x, z) => { T.player.position.set(x, T.sampleHeight(x, z), z); };
     // A zombie `d` m behind the marine's line (so it faces +Z, toward him), too tough to die of it.
-    const spawnBehind = (type, d, x = P.x) => { const z = T.spawnZombie(x, P.z - d, type, true, true); z.hp = 9999; return z; };
-    // Every event its body has from now on, and every state it passes through.
-    // (and, given where it stood, how far back along -Z it was carried at most: the shove).
+    // The grace hour is started again each time, so on a slow run it never ends mid-check.
+    const spawnBehind = (type, d, x = P.x) => { T.restartGraceDbg(); const z = T.spawnZombie(x, P.z - d, type, true, true); z.hp = 9999; return z; };
+    // Every event its body has from now on, and every state it passes through (and, given where it
+    // stood, how far back along -Z it was carried at most: the shove). Times are the body's own game
+    // time (the dt it is handed), so a slow or busy machine can't fail a check that is about seconds.
     const watch = (z, from = null) => {
-      const b = H.body(z), rec = { ev: [], states: [], busy: false, back: 0 };
+      const b = H.body(z), rec = { ev: [], at: {}, t: 0, states: [], busy: false, back: 0 };
       const up = b.update;
-      b.update = (dt, o) => { const e = up(dt, o); for (const x of e) rec.ev.push(x[0]); return e; };
+      b.update = (dt, o) => { rec.t += dt; const e = up(dt, o); for (const x of e) { rec.ev.push(x[0]); if (!(x[0] in rec.at)) rec.at[x[0]] = rec.t; } return e; };
       rec.poll = () => {
         const s = H.state(z); if (rec.states[rec.states.length - 1] !== s) rec.states.push(s); if (H.busy(z)) rec.busy = true;
         if (from !== null && z.mesh) rec.back = Math.max(rec.back, from - z.mesh.position.z);
       };
       return rec;
     };
-    const runFor = async (secs, ...recs) => { const t0 = performance.now(); while (performance.now() - t0 < secs * 1000) { await frames(1); for (const r of recs) r.poll(); } };
+    // Frames until `done()` (or `secs` of wall clock, generous: the game slows under load), polling.
+    const runUntil = async (done, secs, ...recs) => { const t0 = performance.now(); while (!done() && performance.now() - t0 < secs * 1000) { await frames(1); for (const r of recs) r.poll(); } };
     // The shotgun's shell on a body: seven pellets of 9, one shot number, as the projectile code sends
     // them. Pellets of 7 (the AA-12's) are the crowd's: under 8 they never take a limb off, and a body
     // with its legs shot off crawls, and a crawler keeps the old reaction.
@@ -74,7 +77,7 @@
     const z0 = sh.mesh.position.z;
     shell(sh);
     const w1 = watch(sh, z0);
-    await runFor(4.5, w1);
+    await runUntil(() => w1.ev.includes('recovered'), 20, w1);
     const hits1 = w1.ev.filter((e) => e === 'hit').length;
     ok(hits1 === 1, `seven pellets are one push (${hits1} hit events)`);
     ok(w1.ev.includes('fall') || w1.ev.includes('stagger'), 'a close shell staggers or drops a shambler: ' + w1.ev.join(' '));
@@ -87,7 +90,7 @@
     await frames(4);
     T.damageZombie(rf, 19, { kind: 'bullet', dir: { x: 0, z: -1 }, hitY: rf.mesh.position.y + 1.2, dist: 5 });
     const w2 = watch(rf);
-    await runFor(2.5, w2);
+    await runUntil(() => w2.ev.includes('recovered'), 12, w2);
     ok(w2.ev.includes('hit') && w2.ev.includes('recovered') && !w2.ev.includes('fall') && !w2.busy, 'a rifle round is a flinch: ' + w2.ev.join(' '));
 
     // 3. A brute shrugs off the close shell.
@@ -95,7 +98,7 @@
     await frames(4);
     shell(br);
     const w3 = watch(br);
-    await runFor(2.5, w3);
+    await runUntil(() => w3.ev.includes('recovered'), 12, w3);
     ok(w3.ev.includes('hit') && !w3.ev.includes('fall') && !w3.ev.includes('stagger'), 'a brute shrugs off a close shell: ' + w3.ev.join(' '));
 
     // 4. A kill (an M4 round into a shambler with 19 left) leaves a corpse lying on the ground, and
@@ -106,12 +109,12 @@
     T.damageZombie(kz, 19, { kind: 'bullet', dir: { x: 0, z: -1 }, hitY: kz.mesh.position.y + 1.0, dist: 11 });
     const corpse = T.corpses.find((c) => c.rag === kz);
     ok(!kz.alive && !!corpse, 'the kill is a ragdoll corpse (not the old topple)');
-    const t4 = performance.now();
-    while (corpse && !corpse.settled && performance.now() - t4 < 6000) await frames(1);
-    const settledIn = (performance.now() - t4) / 1000;
+    const w4 = corpse ? watch(kz) : null;
+    await runUntil(() => !corpse || corpse.settled, 20);
+    const settledIn = w4 && 'settled' in w4.at ? w4.at.settled : Infinity;
     if (corpse) {
       const pel = H.body(kz).points().pelvis, gy = T.sampleHeight(pel[0], pel[2]);
-      ok(corpse.settled && H.frozen(kz) && settledIn < 4, `it settles and is frozen (${settledIn.toFixed(1)} s)`);
+      ok(corpse.settled && H.frozen(kz) && settledIn < 4, `it settles and is frozen (${settledIn.toFixed(1)} s of game time)`);
       ok(pel[1] - gy < 0.35, `lying: the pelvis ${(pel[1] - gy).toFixed(2)} m off the ground`);
       const hips = corpse.mesh.userData.hips, q0 = hips.quaternion.clone(), p0 = hips.position.clone();
       await frames(10);
@@ -133,7 +136,7 @@
     let slowed = false, floored5 = false;
     if (w5) {
       const t5 = performance.now();
-      while (performance.now() - t5 < 2500) { await frames(1); w5.poll(); if (T.marineReactK() < 1 && T.marineReactK() > 0) slowed = true; if (T.marineFloored()) floored5 = true; }
+      while (!w5.ev.includes('recovered') && performance.now() - t5 < 12000) { await frames(1); w5.poll(); if (T.marineReactK() < 1 && T.marineReactK() > 0) slowed = true; if (T.marineFloored()) floored5 = true; }
     }
     ok(!!w5 && w5.ev.includes('hit') && (w5.ev.includes('stagger') || w5.ev.includes('step')) && !w5.ev.includes('fall'), 'a brute\'s blow staggers the marine and he keeps his feet: ' + (w5 ? w5.ev.join(' ') : 'no body'));
     ok(slowed && !floored5 && T.marineReactState() === 'animated', 'he keeps control while he staggers (slowed), and it passes');
@@ -147,19 +150,14 @@
     await frames(3);
     T.killZombie(bomber, false, { kind: 'bullet', dir: { x: 0, z: 0 } });
     const w6 = H.body(M) ? watch(M) : null;
-    let downAt = 0, upAt = 0, floored6 = false;
+    let floored6 = false;
     if (w6) {
       const t6 = performance.now();
-      while (performance.now() - t6 < 4000) {
-        await frames(1); w6.poll();
-        const s = T.marineReactState();
-        if (T.marineFloored()) floored6 = true;
-        if (!downAt && s === 'down') downAt = performance.now();
-        if (downAt && !upAt && s === 'animated') upAt = performance.now();
-      }
+      while (!w6.ev.includes('recovered') && performance.now() - t6 < 15000) { await frames(1); w6.poll(); if (T.marineFloored()) floored6 = true; }
     }
+    const downAt = w6 && w6.at.down, upAt = w6 && w6.at.recovered;
     ok(!!w6 && w6.ev.includes('down') && w6.ev.includes('recovered'), 'a bomber at 1 m puts him down and he gets up: ' + (w6 ? w6.ev.join(' ') : 'no body'));
-    ok(floored6 && downAt && upAt && (upAt - downAt) / 1000 < 1.5, `up again ${downAt && upAt ? ((upAt - downAt) / 1000).toFixed(2) : '?'} s after he landed; no control while he was down`);
+    ok(floored6 && downAt && upAt && upAt - downAt < 1.5, `up again ${downAt && upAt ? (upAt - downAt).toFixed(2) : '?'} s (game time) after he landed; no control while he was down`);
     ok(T.marineReactK() === 1 && T.getHp() > 0, 'control is his again');
 
     // 7. 48 zombies, 8 of them reacting: the horde stays inside its bound.
