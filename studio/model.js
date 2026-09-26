@@ -1,6 +1,6 @@
 // studio/model.js — models as data (D-40's second half: modeling). Claude's (studio/*).
 //
-// A model is one JSON file, studio/models/<kind>/<name>.json (docs/drafts/model.md): its materials by
+// A model is one JSON file, studio/models/<kind>/<name>.json (docs/studio.md §11): its materials by
 // name, an optional skeleton of joints, and parts made of a few plain shapes placed on the joints. The
 // game, the studio's pages and the tests all build a model through this file, so what Jerry approves
 // on a contact sheet is what the game draws. A model with limbs (chains) is also a studio rig

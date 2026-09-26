@@ -23,7 +23,7 @@ function mockZombie(typeKey = 'shambler', x = 0, z = 0) {
   mesh.position.set(x, 0, z);
   return { mesh, typeKey, alive: true, crawling: false, spider: typeKey === 'spider', partsLost: Object.fromEntries(HORDE_PARTS.map((k) => [k, false])) };
 }
-// A close shotgun shell: seven pellets of one shot, 0.93 each (docs/drafts/horde.md), from in front.
+// A close shotgun shell: seven pellets of one shot, 0.93 each (docs/studio.md §10.6), from in front.
 const shell = (h, z, shot, per = 6.5 / 7) => {
   let ok = true;
   for (let i = 0; i < 7; i++) ok = h.hit(z, { at: [z.mesh.position.x + (i - 3) * 0.02, 1.0, z.mesh.position.z], dir: [0, 0, -1], power: per, kind: 'pellet', shot }) && ok;

@@ -135,7 +135,7 @@ registerRig('zombie', {
   budget: { draws: 24, triangles: 1200 }
 });
 
-// --- Creatures made as models (studio/models/*, docs/drafts/model.md) -------------------------
+// --- Creatures made as models (studio/models/*, docs/studio.md §11) -------------------------
 // A model that names a "rig" is a rig with no code of its own: its skeleton, limbs, head and budget are
 // all in its file (the spider's eight legs are chains there). A rig written in code keeps its name. A
 // model that doesn't validate is left out with its problems in the console, rather than taking the

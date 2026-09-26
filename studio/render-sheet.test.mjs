@@ -1,4 +1,4 @@
-// studio/render-sheet.test.mjs — the review folders studio/render-sheet.mjs writes (docs/drafts/modellab.md).
+// studio/render-sheet.test.mjs — the review folders studio/render-sheet.mjs writes (docs/studio.md §12).
 // No browser: the version rules and the folder's page, on folders made in a temporary directory.
 //   node --import ./studio/node-three.mjs --test studio/render-sheet.test.mjs
 import test from 'node:test';

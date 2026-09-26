@@ -60,7 +60,7 @@
     T.restartGraceDbg();
     await frames(3);
 
-    // The mapping (docs/drafts/horde.md): a rifle round ~2.5, a close shell ~6.5, a grenade ~8.
+    // The mapping (docs/studio.md §10.6): a rifle round ~2.5, a close shell ~6.5, a grenade ~8.
     const rifle = T.reactionPower('bullet', 19, { dist: 5 }), close = 7 * T.reactionPower('pellet', 9, { dist: 2 }), nade = T.reactionPower('explosive', 55, { blast: 0 });
     ok(Math.abs(rifle - 2.5) < 0.15 && Math.abs(close - 6.5) < 0.1 && Math.abs(nade - 8) < 1e-6, `powers: an M4 round ${rifle.toFixed(2)}, a close shell ${close.toFixed(2)}, a grenade ${nade.toFixed(2)}`);
 

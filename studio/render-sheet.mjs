@@ -1,5 +1,5 @@
 // studio/render-sheet.mjs — a model's contact sheet, into its review folder for Jerry to note and for
-// agents to look at (docs/drafts/modellab.md). Claude's (studio/*).
+// agents to look at (docs/studio.md §12). Claude's (studio/*).
 //
 //   node studio/render-sheet.mjs creature/spider                  the next version: review/model-spider/vN/
 //   node studio/render-sheet.mjs creature/spider --asset spider-6  into review/spider-6/ instead

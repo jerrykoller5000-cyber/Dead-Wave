@@ -1,5 +1,5 @@
 // studio/motion-horde.js — reactions for a crowd: the game's horde and its marine (D-42, P-70 to
-// P-72). Claude's (studio/*). docs/drafts/horde.md says how the game wires it in.
+// P-72). Claude's (studio/*). docs/studio.md §10.6 says how the game wires it in.
 //
 // The game has up to 48 zombies and a marine, and at most `max` of them simulate at once (a pool,
 // AGENTS.md rule 12). A zombie is adopted as the studio's 'zombie' rig the first time something hits

@@ -1,4 +1,4 @@
-// studio/model-look.test.mjs — how the studio looks at a model (docs/drafts/modellab.md). Real three.js
+// studio/model-look.test.mjs — how the studio looks at a model (docs/studio.md §12). Real three.js
 // maths in Node, no browser:
 //   node --import ./studio/node-three.mjs --test studio/model-look.test.mjs
 import test from 'node:test';

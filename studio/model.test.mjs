@@ -1,4 +1,4 @@
-// studio/model.test.mjs — models as data (docs/drafts/model.md). Real three.js maths in Node:
+// studio/model.test.mjs — models as data (docs/studio.md §11). Real three.js maths in Node:
 //   node --import ./studio/node-three.mjs --test studio/model.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';

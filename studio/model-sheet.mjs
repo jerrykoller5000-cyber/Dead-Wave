@@ -1,4 +1,4 @@
-// studio/model-sheet.mjs — look at a model: check it, or draw its contact sheet (docs/drafts/model.md). Claude's.
+// studio/model-sheet.mjs — look at a model: check it, or draw its contact sheet (docs/studio.md §11). Claude's.
 //
 //   node studio/model-sheet.mjs --check prop/evac-boat my/new-model.json   no browser: its problems as sentences,
 //                                                                          its cost against its budget, its
@@ -8,7 +8,7 @@
 //
 // A model is "kind/name" (listed in studio/models/index.js) or a path to a .json file (a draft that
 // isn't listed yet). Drawing the sheet and writing the review folder is studio/render-sheet.mjs's (the
-// model lab's sheet mode in headless Chrome, docs/drafts/modellab.md), so there is one way a review
+// model lab's sheet mode in headless Chrome, docs/studio.md §12), so there is one way a review
 // folder is made; this command hands every argument but --check to it.
 import { register } from 'node:module';
 import fs from 'node:fs';

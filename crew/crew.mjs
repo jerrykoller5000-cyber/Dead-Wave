@@ -190,8 +190,8 @@ function writeReviewIndex(list) {
   const body = JSON.stringify({ note: 'Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.', assets: list.map((r) => ({ asset: r.asset, owner: r.owner, rig: r.meta.rig || null, clip: r.meta.clip || null, reference: r.meta.reference || null })) }, null, 2) + '\n';
   if (read(reviewsJson) !== body) fs.writeFileSync(reviewsJson, body, 'utf8');
 }
-// How the owner makes an asset's next version: a model's sheet (studio/render-sheet.mjs, docs/drafts/
-// modellab.md) or a clip's strip (tools/studio.mjs).
+// How the owner makes an asset's next version: a model's sheet (studio/render-sheet.mjs, docs/studio.md
+// §12) or a clip's strip (tools/studio.mjs).
 function renderHint(r, name) {
   const m = r.meta || {};
   if (m.kind === 'model' && (m.ref || m.model)) {

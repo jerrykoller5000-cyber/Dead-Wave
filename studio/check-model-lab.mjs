@@ -1,5 +1,5 @@
 // studio/check-model-lab.mjs — the model lab checked in a real browser, the way Jerry and the renderer use
-// it (docs/drafts/modellab.md). Claude's (studio/*). Headless Chrome through tools/cdp.mjs (CHROME and
+// it (docs/studio.md §12). Claude's (studio/*). Headless Chrome through tools/cdp.mjs (CHROME and
 // CHROME_ARGS as for the tests).
 //
 //   node studio/check-model-lab.mjs                    every model in studio/models/index.js

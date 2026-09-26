@@ -1,4 +1,4 @@
-// studio/model-look.js — how the studio looks at a model (docs/drafts/modellab.md). Claude's (studio/*).
+// studio/model-look.js — how the studio looks at a model (docs/studio.md §12). Claude's (studio/*).
 //
 // The views of a contact sheet and how each is framed, the 1.75 m scale figure, the game's three
 // lights (day, night, and night vision), the parts list and the highlight on one part, joint labels
@@ -15,7 +15,7 @@ import { buildModel, modelAsset } from './model.js';
 // back and top are orthographic and share one scale, so a size reads straight off them against the
 // ruler, and front, side and back stand on one ground line. The three-quarter views are in perspective,
 // the way an eye sees it. `dir` points from the model to the camera, in the model's frame (+Z forward,
-// +Y up; "L" is the -X side, docs/drafts/model.md), so the side view looks at its R side.
+// +Y up; "L" is the -X side, docs/studio.md §11), so the side view looks at its R side.
 export const SHEET_VIEWS = [
   { key: 'front', label: 'front', dir: [0, 0, 1], ortho: true },
   { key: 'side', label: 'side (its R, +X)', dir: [1, 0, 0], ortho: true },

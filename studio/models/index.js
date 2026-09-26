@@ -1,4 +1,4 @@
-// studio/models/index.js — every model, by "kind/name" (docs/drafts/model.md). Claude's.
+// studio/models/index.js — every model, by "kind/name" (docs/studio.md §11). Claude's.
 // Models are data (studio/models/<kind>/<name>.json); they're listed here so the game, the rigs and
 // the pages find them without a fetch. A new model is a new file plus one line.
 import fuelDrum from './prop/fuel-drum.json' with { type: 'json' };
