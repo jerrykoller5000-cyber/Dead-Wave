@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-25, 23:40 UTC, by Claude.
+Lead: Claude. Last updated 2026-09-26, 01:50 UTC, by Claude.
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -37,40 +37,19 @@ Older notes and decisions below that name other models are history.
 
 ## Mission
 
-**The showcase build.** Jerry, 2026-09-25 05:55Z: he shows Dead-Wave to people on **Saturday**. Tonight is the
-core loop and performance: nights 1 to 20 fun and polished, their music, the guardian, the economy, getting hit, and
-the night-to-morning flow. Jerry's full list is under **Orders from Jerry** (06:00Z); the decisions are D-33 to D-35.
-Loop feel comes first (D-35). Work your queue top to bottom, one check-in and one handoff per task; a task that says
-"after XX-n" waits for it. Don't stop to ask Jerry whether to go on.
-- **Grokbot** · GB-55 · handoffs/2026-09-25-grokbot-GB-55.md
-- **Grokbot** · GB-56 · handoffs/2026-09-25-grokbot-GB-56.md
-- **Grokbot** · GB-57 · handoffs/2026-09-25-grokbot-GB-57.md
-- **Grokbot** · GB-50 · handoffs/2026-09-25-grokbot-GB-50.md
-- **Grokbot** · GB-51 · handoffs/2026-09-25-grokbot-GB-51.md
-- **Grokbot** · GB-52 · handoffs/2026-09-25-grokbot-GB-52.md
-- **Grokbot** · GB-53 · handoffs/2026-09-25-grokbot-GB-53.md
-- **Grokbot** · GB-54 · handoffs/2026-09-25-grokbot-GB-54.md
-- **Cursor** · CU-39 · handoffs/2026-09-25-cursor-CU-39.md
-- **Cursor** · CU-40 · handoffs/2026-09-25-cursor-CU-40.md
-- **Cursor** · CU-36 · handoffs/2026-09-25-cursor-CU-36.md
-- **Cursor** · CU-37 · handoffs/2026-09-25-cursor-CU-37.md
-- **Cursor** · CU-38 · handoffs/2026-09-25-cursor-CU-38.md
-- **ChatGPT** · GP-37 · handoffs/2026-09-25-chatgpt-GP-37.md
-- **ChatGPT** · GP-38 · handoffs/2026-09-25-chatgpt-GP-38.md
-- **ChatGPT** · GP-39 · handoffs/2026-09-25-chatgpt-GP-39.md
-- **ChatGPT** · GP-40 · handoffs/2026-09-25-chatgpt-GP-40.md
-- **ChatGPT** · GP-41 · handoffs/2026-09-25-chatgpt-GP-41.md
-- **ChatGPT** · GP-42 · handoffs/2026-09-25-chatgpt-GP-42.md
-- **ChatGPT** · GP-43 · handoffs/2026-09-25-chatgpt-GP-43.md
-- **Claude** · CL-50 · handoffs/2026-09-25-claude-CL-50.md
-- **Claude** · CL-49 · handoffs/2026-09-25-claude-CL-49.md
-- **Claude** · CL-51 · handoffs/2026-09-25-claude-CL-51.md
-- **Claude** · CL-52 · handoffs/2026-09-25-claude-CL-52.md
-- **Claude** · CL-38 · handoffs/2026-09-25-claude-CL-38.md
-- **Claude** · CL-53 · handoffs/2026-09-25-claude-CL-53.md
-- **Claude** · CL-54 · handoffs/2026-09-25-claude-CL-54.md
-- **Grokbot** · GB-49 · handoffs/2026-09-25-grokbot-GB-49.md
-- **Claude** · CL-56 · handoffs/2026-09-25-claude-CL-56.md
+**The studio: modeling and animation for agents.** Jerry, 2026-09-26 01:40Z (D-40, `docs/studio.md`): build a way for
+the crew to see what it makes. Clips become data; one command renders any rig or clip to a filmstrip, a video and
+numbers in under 30 s; the renders land in `review/<asset>/`, where Jerry leaves notes that come back onto this board.
+When it works and Jerry's guide is written (CL-61), the first real job is the guardian's animation (CL-62, on Jerry's
+go). The marine's animation stays as it is. The showcase build closed with all 29 tasks in (Jerry has his copy).
+Work your queue top to bottom; a task that says "after XX-n" waits for it.
+- **Claude** · CL-57 · handoffs/2026-09-26-claude-CL-57.md
+- **Claude** · CL-58 · handoffs/2026-09-26-claude-CL-58.md
+- **Cursor** · CU-44 · handoffs/2026-09-26-cursor-CU-44.md
+- **Claude** · CL-59 · handoffs/2026-09-26-claude-CL-59.md
+- **Claude** · CL-60 · handoffs/2026-09-26-claude-CL-60.md
+- **Antigravity** · AG-19 · handoffs/2026-09-26-antigravity-AG-19.md
+- **Claude** · CL-61 · handoffs/2026-09-26-claude-CL-61.md
 
 ## Waiting on
 
@@ -86,6 +65,14 @@ a card blocked on another agent, and a next task that says "after the split" or 
 ## Orders from Jerry
 
 Newest first. Claude writes these down when Jerry gives them in chat.
+
+- **2026-09-26, 01:40Z · The studio (future development).** Jerry has his showcase copy and is happy with it. His
+  long-held idea: bridge the gap between a human developer and a creation suite agents can understand. Jerry is the
+  critic ("we need this or that"); the agents can see what they have to do instead of a million blind attempts. Start
+  with modeling and animation for this game, then textures and sound. The guardian's model is great; its animation is
+  poor; it is the first job once the tool exists and Jerry's part is explained. The marine's animation is fine for now.
+  He linked the Quaternius Universal Animation Library 1 and 2 (`Desktop\Animation Assets`, CC0) as a guide for
+  character animation, and his earlier Caracal Studio texturer. D-40, `docs/studio.md`.
 
 - **2026-09-25, 22:45Z · Four things that still look bad.** Jerry, with Claude on the big model. CL-56, D-39.
   1. The guardian that pulls you into the cave looks like absolute garbage, and so does its animation. Several agents
@@ -222,6 +209,14 @@ Newest first. Claude writes these down when Jerry gives them in chat.
 ## Decisions
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
+
+- **D-40 · The studio (Jerry, 01:40Z; `docs/studio.md`).** Two rules: everything visual is data an agent can read and
+  edit, and every change can be looked at in seconds as pictures. Clips are JSON keyframes on a registered rig
+  (`studio/`), rendered by `tools/studio.mjs` into `review/<asset>/vN/` (strip, video, stats); Jerry writes plain notes
+  in `review/<asset>/notes.md` and `crew.mjs review` turns them into tasks for the asset's owner. The Quaternius UAL
+  clips (CC0) are the reference for human timing and weight and can be retargeted onto our humanoids. Caracal Studio
+  and a Blender pipeline are set aside for now (reasons in the doc). Order: modeling and animation, then textures,
+  then sound.
 
 - **D-39 · The loop's two transitions (Jerry, 22:45Z; revises D-34, CL-49 and CL-51).** The alarm: no pan to the
   sky. The camera pulls back to one shot that holds the whole HQ while the night comes down over it, the strobes go
@@ -493,13 +488,21 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-43** **First. The showcase dry run, done the real way (AG-18 redo).** AG-18's script used `skipPrep`, killed the
+- [ ] **CU-44** **The studio (D-40): the renderer, `tools/studio.mjs`.** After CL-57. `node tools/studio.mjs render
+  <rig> <clip> [--vs <reference clip>]` renders headless into `review/<asset>/vN/`: `strip.png` (12 frames on a grid,
+  ground, a 1.75 m marine for scale, a ghost of the previous frame, the reference as a second row), `video.webm` (real
+  and quarter speed, side view and play-camera view; MediaRecorder in the page, no ffmpeg), `turntable.png` for a rig
+  with no clip, and `stats.json` (length, draw calls, triangles, the worst one-frame joint turn scaled to 60 fps, planted
+  foot slide), with snaps and slides marked red on the strip. It loads only the rig and the player, never the whole
+  game: under 30 s on Jerry's PC and in the cloud (`CHROME_ARGS`). Moves `latest` to the new version.
+- [x] **CU-43** **First. The showcase dry run, done the real way (AG-18 redo).** AG-18's script used `skipPrep`, killed the
   zombies 4.5 s after it while the wave was still spawning ("Zombies left: 7"), and never opened the HQ briefing, so its
   three findings are the harness, not the game. Build it on your qa/run-cu41.mjs: from a fresh profile on Jerry's GPU,
   day 1 prep, walk to the HQ and press E (the briefing with tonight's scouting report and, from day 2, the bounties),
   `TT.hqStartWave()`, wait for phase `wave` and for the night's spawns to finish, kill until the wave ends, then the
   finisher and the Night 1 Complete card, Proceed to Morning, day 2: read the board, clear the bounty, bank at the HQ
-  window, night 2, then Next Night into night 3. Shots of every step and a short capture of one alarm and one finisher.
+  window, night 2, then Next Night into night 3. (D-39 since: no card and no buttons; after the last kill the day comes by
+  itself with a banner, and each night starts from the HQ panel. Script it that way.) Shots of every step and a short capture of one alarm and one finisher.
   Anything wrong goes to its owner with the shot. Report to Claude.
 - [x] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
   (the specks should be gone: the rune bands now drape over the drawn bed, 14 cm up) and the finisher at 0.5 s, 1.5 s and
@@ -534,7 +537,7 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
   title menu's 45 fps (the live pre-roll, AG-15). A favicon, so the two 404s go.
 - [x] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
   `tt_day_start`) and its tests (check out with `--review`). Stop clearing `tt_death_log` on a new game.
-- [!] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
+- [x] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
   (rule 3). Claude says yes to anything of his.
 - [x] **CU-33** The death screen after a real death, not the dev `rip` (CU-A9). Fix it if it doesn't show.
 - [x] **CU-35** (was AG-17; Antigravity is out for tonight) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's
@@ -816,6 +819,10 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Antigravity — the crew's eyes (Gemini 3.1 Pro)
 
+- [ ] **AG-19** **The studio on Jerry's GPU (D-40).** After CU-44 and CL-59. Render the guardian's current clips and one
+  reference (`--vs Zombie_Scratch`) with `tools/studio.mjs` on Jerry's PC. Check: the strip matches the game (same rig,
+  colours, proportions and timing as the guardian in a real chase, from your own in-game shots), the video plays, the
+  stats look sane, and how long each render takes. Report with the strips side by side with your in-game shots.
 - [x] **AG-18** **The showcase dry run (back on Gemini 3.1 Pro, 2026-09-25).** On Jerry's GPU in a visible window, from a
   fresh profile, play the demo the way a guest would see it: the title, day 1 prep (read the HQ board: tonight's scouting
   report), the alarm's sky shot, the night 1 wave, the last kill and the Night 1 Complete card, Proceed to Morning, day 2
@@ -860,6 +867,27 @@ Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
 
 ### Claude — lead; the world and wildlife (Opus 5.5)
 
+- [>] **CL-57** **The studio (D-40): the spec.** Finish `docs/studio.md`: the clip JSON (tracks for joints and IK
+  targets, keys with easing, planted flags, events), how a rig registers (joints, rest pose, IK chains, budget), the
+  review folder (`meta.json`, versions, `latest`, `notes.md` layout), `stats.json`, and the render command's flags. One
+  worked example: the guardian's pounce as a clip.
+- [ ] **CL-58** **The clip player.** After CL-57. `studio/clip.js` (sample, blend two, events, IK with planted feet, a live
+  target added on top) and `studio/rigs.js` (the guardian from `world/cave-guardian.js` registered first). The game and
+  the renderer use the same player. Unit tests on fakethree.
+- [ ] **CL-59** **Reference motion.** After CL-58. The Quaternius UAL 1 and 2 clips (CC0, `Desktop\Animation Assets`) in
+  `assets/anim/reference/` (only what we use, compacted), a catalogue (name, length, loop), and `studio/retarget.js` to
+  play a reference on a humanoid mannequin next to our rig in the strip; timing notes for the guardian's beats (Push_Loop
+  and Walk_Carry_Loop for the drag, OverhandThrow for the throw, Zombie_Scratch for the grab). Licence file in the folder.
+- [ ] **CL-60** **Jerry's notes onto the board.** After CU-44. `node crew/crew.mjs review`: lists `review/*/notes.md` with
+  notes newer than their latest render (on the panel as "Jerry's notes waiting"); `crew.mjs review take <asset>` turns
+  them into a task or a request for the asset's owner (from `meta.json`), and the answer goes under Jerry's note with the
+  version number.
+- [ ] **CL-61** **Jerry's guide.** After CL-60 and AG-19. `docs/studio-guide.md` in plain words: where to look, how to
+  write a note, what happens next, how to compare versions. One real example: the guardian's current drag rendered into
+  `review/guardian-drag/v1/`, ready for Jerry's first note. Then tell Jerry it's ready (`crew.mjs ask`).
+- [ ] **CL-62** **The guardian's animation through the studio (first real job).** After CL-61, and only on Jerry's go
+  (he said: once the tool is done and his part is explained). Rebuild the chase, pounce, drag, walk-out and throw as clips,
+  timed against the UAL references, one review folder each, until Jerry's notes say good.
 - [x] **CL-56** (Jerry's four, 22:45Z; D-39; `handoffs/2026-09-25-claude-CL-56.md`) The guardian rebuilt as its own rig
   (a pale long-armed crawler: the bound, the pounce, the three-limbed drag, the walk-out and the throw), the pit's
   arms as swept tubes that coil round his legs and chest, the alarm as one shot that holds the HQ, and the dawn at the
