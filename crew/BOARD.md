@@ -813,8 +813,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   the flop is good. `handoffs/2026-09-26-claude-CL-87.md`.
 - [ ] **CL-68** **R1 · P-75.** Engine fixes from Jerry's lab notes (studio/motion.js, studio/bodies.js); new bodies
   when a creature needs one. Ongoing. Details: `docs/roadmap.md` P-75.
-- [ ] **CL-92** **R1.** The review's low findings on CL-87 to CL-91 (the handoff lists them): a leg lost while getting
-  up, a non-finite hold target, reactions off standing corpses up, the lab's paused click, the endpoint's links.
+- [ ] **CL-92** **R1.** The review's other low findings on CL-87 to CL-91 (listed in
+  `handoffs/2026-09-26-claude-CL-87.md`): a body pushed sideways that sits, the scene's get-up turn that stays,
+  reactions off standing corpses up, the battery's idle speed and `classify`, the lab's paused click and scene names.
 
 #### R2 · The night has a shape
 

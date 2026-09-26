@@ -191,7 +191,7 @@ function play(json, preset, stance, spec, opts, clipOf) {
   }
   for (let f = 0; f <= lastF; f++) {
     player.update(dt);
-    if (overClip && player.done) { player.crossfade(stand, 0.3, { loop: true }); overClip = null; }
+    if (overClip && player.done) { player.crossfade(stand, 0.3, { loop: true, speed: 1 }); overClip = null; }
     body.follow();
     if (f === hitF) {
       chest0 = shown(chestP).clone(); pelvis0 = shown(pelvisP).clone();
@@ -211,7 +211,7 @@ function play(json, preset, stance, spec, opts, clipOf) {
           overClip = clip;
         }
       }
-      if ((name === 'fall' || name === 'dead') && overClip) { player.crossfade(stand, 0.3, { loop: true }); overClip = null; }
+      if ((name === 'fall' || name === 'dead') && overClip) { player.crossfade(stand, 0.3, { loop: true, speed: 1 }); overClip = null; }
       if (name === 'down') lying = true;
       if (name === 'recovered') endF = f + tailF;
       if (name === 'settled' || (opts.until && opts.until(name))) stop = name;
