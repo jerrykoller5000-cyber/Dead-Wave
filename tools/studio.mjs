@@ -209,18 +209,18 @@ async function shoot(query, file, { video = false } = {}) {
 function ownerTask(rig) {
   return rig === 'guardian' ? 'CL-62' : '';
 }
-function unchanged(dir, bytes) {
+function unchanged(dir, bytes, file = 'clip.json') {
   const latest = path.join(dir, 'latest.txt');
   if (!fs.existsSync(latest)) return null;
   const version = fs.readFileSync(latest, 'utf8').trim();
-  const prev = path.join(dir, version, 'clip.json');
+  const prev = path.join(dir, version, file);
   if (!fs.existsSync(prev)) return null;
   return fs.readFileSync(prev).equals(bytes) ? version : null;
 }
 function writeMeta(dir, meta) {
   const file = path.join(dir, 'meta.json');
   const cur = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
-  const next = { ...cur, ...meta, task: ownerTask(meta.rig) || cur.task || '' };
+  const next = { ...cur, ...meta, task: meta.task || ownerTask(meta.rig) || cur.task || '' };
   fs.writeFileSync(file, JSON.stringify(next, null, 2) + '\n');
 }
 
@@ -334,15 +334,78 @@ async function renderRig(name, opt) {
   console.log('  ' + path.join('review', asset, version));
 }
 
+async function renderScene(rel, opt) {
+  const t0 = Date.now();
+  const abs = path.resolve(ROOT, rel);
+  const raw = fs.readFileSync(abs);
+  const json = JSON.parse(raw.toString('utf8'));
+  if (!json.name) throw new Error('scene has no name');
+  const asset = opt.asset && opt.asset !== true ? opt.asset : json.name;
+  const dir = path.join(ROOT, 'review', asset);
+  const same = unchanged(dir, raw, 'scene.json');
+  if (same && !opt.force) {
+    console.log(`${asset} unchanged (${same}); no new version. Pass --force to re-render.`);
+    return;
+  }
+  fs.mkdirSync(dir, { recursive: true });
+  const version = nextVersion(dir);
+  const ver = path.join(dir, version);
+  fs.mkdirSync(ver, { recursive: true });
+  writeMeta(dir, { asset, owner: 'claude', rig: 'guardian', scene: json.name, clip: null, reference: null, design: 'default', task: 'CL-64' });
+  fs.writeFileSync(path.join(ver, 'scene.json'), raw);
+  const frames = String(Math.max(2, parseInt(opt.frames || '8', 10) || 8));
+  const q = new URLSearchParams({ scene: rel.split(path.sep).join('/'), frames, phase: 'video' });
+  const server = await serve(ROOT, 0);
+  const browser = await launch({ headless: true });
+  let worst = {};
+  try {
+    const page = await browser.newPage({ width: 1280, height: 720 });
+    await page.goto(`${server.origin}/tools/studio-scene.html?${q}`, { waitUntil: 'none' });
+    const stripOk = await page.waitFor('window.__stripReady === true || !!window.__error', { timeout: 120000 });
+    if (!stripOk) throw new Error('the scene strip did not finish');
+    const err = await page.evaluate('window.__error || ""');
+    if (err) throw new Error(err);
+    const size = await page.evaluate('window.__size');
+    await page.setViewport(size.w, size.h);
+    await page.screenshot(path.join(ver, 'strip.png'));
+    worst = await page.evaluate('window.__worst || {}');
+    await page.evaluate('window.__goVideo = true');
+    const vidOk = await page.waitFor('window.__ready === true || !!window.__error', { timeout: 180000 });
+    if (!vidOk) throw new Error('the scene video did not finish');
+    const err2 = await page.evaluate('window.__error || ""');
+    if (err2) throw new Error(err2);
+    const len = await page.evaluate('window.__b64 ? window.__b64.length : 0');
+    if (!len) throw new Error('no video was recorded');
+    let b64 = '';
+    for (let i = 0; i < len; i += 400000) b64 += await page.evaluate(`window.__b64.slice(${i}, ${i + 400000})`);
+    await fs.promises.writeFile(path.join(ver, 'video.webm'), Buffer.from(b64, 'base64'));
+  } finally {
+    await Promise.race([browser.close(), new Promise((r) => setTimeout(r, 2500))]);
+    await Promise.race([server.close(), new Promise((r) => setTimeout(r, 800))]);
+  }
+  const stats = {
+    version, scene: rel.split(path.sep).join('/'), name: json.name, length: json.length,
+    worst, renderSeconds: +((Date.now() - t0) / 1000).toFixed(1)
+  };
+  fs.writeFileSync(path.join(ver, 'stats.json'), JSON.stringify(stats, null, 2) + '\n');
+  writeIndex(dir, asset, version);
+  const flagged = Object.entries(worst).filter(([, v]) => v && v.bad).map(([k, v]) => `${k} ${Number(v.value).toFixed(2)} at ${Number(v.t).toFixed(2)}s`);
+  console.log(`${asset} ${version}  ${json.length}s  ${stats.renderSeconds}s`);
+  if (flagged.length) console.log('  worst:', flagged.join('; '));
+  console.log('  ' + path.join('review', asset, version));
+}
+
 const { cmd, pos, opt } = args();
 try {
   if (cmd === 'list') list();
   else if (cmd === 'render' && pos[0]) await renderClip(pos[0], opt);
   else if (cmd === 'rig' && pos[0]) await renderRig(pos[0], opt);
+  else if (cmd === 'scene' && pos[0]) await renderScene(pos[0], opt);
   else {
     console.log('node tools/studio.mjs list');
     console.log('node tools/studio.mjs render <clip.json> [--vs ref] [--frames 12] [--root-motion] [--design default] [--force]');
     console.log('node tools/studio.mjs rig <rig> [--frames 8]');
+    console.log('node tools/studio.mjs scene <scene.json> [--frames 8] [--force]');
     process.exitCode = 2;
   }
 } catch (e) {

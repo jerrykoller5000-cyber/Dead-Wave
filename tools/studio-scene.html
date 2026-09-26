@@ -1,0 +1,201 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>studio scene</title>
+<style>html,body{margin:0;background:#1d2330;overflow:hidden}</style>
+<script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js","three/addons/":"../vendor/three/addons/"}}</script>
+</head><body>
+<script type="module">
+// tools/studio-scene.html — CU-46. Draws a scene. The player (studio/scene.js) does the maths;
+// this page only poses with seek/update and copies each tile onto a sheet.
+//   ?scene=studio/scenes/demo-drag.json&frames=8&phase=strip|video
+import * as THREE from 'three';
+import { loadScene, createScene } from '../studio/index.js';
+
+const q = new URLSearchParams(location.search);
+const phase = q.get('phase') || 'strip';
+const N = Math.max(2, +(q.get('frames') || 8));
+const COLS = 4;
+const TILE_W = 320;
+const SIDE_H = 300;
+const TOP_H = 240;
+
+function fail(e) { window.__error = String(e && e.stack || e); console.error(e); }
+function badLines(checks) {
+  const out = [];
+  if (!checks) return out;
+  for (const kind of ['gap', 'slide', 'speed', 'snap']) {
+    const m = checks[kind];
+    if (!m) continue;
+    for (const [k, v] of Object.entries(m)) if (v && v.bad) out.push(kind + ' ' + k + (v.limb ? '.' + v.limb : '') + ' ' + (v.value || 0).toFixed(2));
+  }
+  return out;
+}
+function bodiesBox(sp) {
+  const box = new THREE.Box3();
+  for (const a of Object.values(sp.actors)) box.expandByObject(a.inst.group);
+  return box;
+}
+
+try {
+  const scenePath = q.get('scene');
+  const json = await (await fetch('../' + scenePath)).json();
+  const refs = [...new Set(Object.values(json.actors).flatMap((a) => a.clips.map((c) => c[1])))];
+  const raw = new Map(await Promise.all(refs.map(async (r) => [r, await (await fetch('../studio/clips/' + r + '.json')).json()])));
+  const scene = loadScene(json, (r) => raw.get(r));
+
+  const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+  await renderer.init();
+  renderer.setPixelRatio(1);
+  const world = new THREE.Scene();
+  world.background = new THREE.Color(0x2a3140);
+  world.add(new THREE.HemisphereLight(0xc5d6ef, 0x3a3428, 1.05));
+  const sun = new THREE.DirectionalLight(0xfff0d0, 2.0);
+  sun.position.set(8, 14, 4);
+  world.add(sun);
+  world.add(sun.target);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x4c743c, roughness: 1 }));
+  ground.rotation.x = -Math.PI / 2;
+  world.add(ground);
+  const grid = new THREE.GridHelper(400, 400, 0x2d4a22, 0x3a5a2c);
+  grid.position.y = 0.02;
+  world.add(grid);
+  // The path, so the top-down row shows the line they travel.
+  const pathPts = [];
+  for (const p of Object.values(json.paths || {})) for (const pt of p.points) pathPts.push(new THREE.Vector3(pt[0], 0.04, pt[2]));
+  if (pathPts.length > 1) world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pathPts), new THREE.LineBasicMaterial({ color: 0xf0d080 })));
+
+  const sp = createScene(scene, { parent: world });
+  const sideRows = Math.ceil(N / COLS);
+  const topCount = Math.min(N, COLS);
+  const sheetW = COLS * TILE_W;
+  const sheetH = sideRows * SIDE_H + TOP_H;
+  const sheet = document.createElement('canvas');
+  sheet.width = sheetW;
+  sheet.height = sheetH;
+  document.body.appendChild(sheet);
+  const ctx = sheet.getContext('2d');
+  const sideCam = new THREE.PerspectiveCamera(30, TILE_W / SIDE_H, 0.1, 300);
+  const topCam = new THREE.PerspectiveCamera(32, TILE_W / TOP_H, 0.1, 300);
+  const gameCam = new THREE.PerspectiveCamera(38, 1280 / 720, 0.1, 200);
+  const center = new THREE.Vector3(), size = new THREE.Vector3();
+
+  // One framing for the whole path, so each top tile shows where the bodies are on it.
+  const pathBox = new THREE.Box3();
+  for (const p of Object.values(json.paths || {})) for (const pt of p.points) pathBox.expandByPoint(new THREE.Vector3(pt[0], 0, pt[2]));
+  pathBox.expandByVector(new THREE.Vector3(2, 0, 2));
+  const pathCenter = pathBox.getCenter(new THREE.Vector3());
+  const pathSize = pathBox.getSize(new THREE.Vector3());
+
+  function frameSide() {
+    const box = bodiesBox(sp);
+    box.getCenter(center);
+    box.getSize(size);
+    const fit = Math.max(size.z / sideCam.aspect, size.y, 1.2) * 1.35 / (2 * Math.tan((sideCam.fov * Math.PI) / 360));
+    sun.position.set(center.x + 8, 14, center.z + 4);
+    sun.target.position.copy(center);
+    sideCam.position.set(center.x + Math.max(6, fit + size.x / 2), center.y + 0.5, center.z);
+    sideCam.lookAt(center.x, Math.max(0.6, center.y * 0.7), center.z);
+  }
+  function frameTop() {
+    const dist = Math.max(pathSize.x / topCam.aspect, pathSize.z, 4) * 0.62 / Math.tan((topCam.fov * Math.PI) / 360);
+    topCam.position.set(pathCenter.x, pathCenter.y + Math.max(8, dist), pathCenter.z);
+    topCam.lookAt(pathCenter.x, 0, pathCenter.z);
+  }
+  function frameGame() {
+    const box = bodiesBox(sp);
+    box.getCenter(center);
+    gameCam.position.set(center.x - 1.4, center.y + 3.4, center.z - 6.2);
+    gameCam.lookAt(center.x, center.y + 0.6, center.z + 1.5);
+  }
+  function paintLabel(x, y, w, h, t, lines) {
+    if (lines.length) {
+      ctx.strokeStyle = '#e04040';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(x + 3, y + 3, w - 6, h - 6);
+    }
+    ctx.fillStyle = lines.length ? '#ffb0a8' : '#f4f1e8';
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText(t.toFixed(2) + 's', x + 12, y + 34);
+    ctx.font = '15px sans-serif';
+    lines.slice(0, 3).forEach((line, i) => ctx.fillText(line, x + 12, y + 56 + i * 18));
+  }
+
+  renderer.setSize(TILE_W, SIDE_H, false);
+  frameTop();
+  for (let i = 0; i < N; i++) {
+    const t = (i / Math.max(1, N - 1)) * scene.length;
+    const r = sp.seek(t);
+    frameSide();
+    const col = i % COLS, row = Math.floor(i / COLS);
+    await renderer.renderAsync(world, sideCam);
+    ctx.drawImage(renderer.domElement, col * TILE_W, row * SIDE_H, TILE_W, SIDE_H);
+    paintLabel(col * TILE_W, row * SIDE_H, TILE_W, SIDE_H, t, badLines(r.checks));
+  }
+  renderer.setSize(TILE_W, TOP_H, false);
+  topCam.aspect = TILE_W / TOP_H;
+  topCam.updateProjectionMatrix();
+  for (let i = 0; i < topCount; i++) {
+    const t = (i / Math.max(1, topCount - 1)) * scene.length;
+    const r = sp.seek(t);
+    frameTop();
+    await renderer.renderAsync(world, topCam);
+    const x = i * TILE_W, y = sideRows * SIDE_H;
+    ctx.drawImage(renderer.domElement, x, y, TILE_W, TOP_H);
+    paintLabel(x, y, TILE_W, TOP_H, t, badLines(r.checks));
+  }
+  window.__sheet = sheet;
+  window.__size = { w: sheetW, h: sheetH };
+  window.__worst = sp.seek(scene.length).checks && sp.worst;
+  window.__stripReady = true;
+
+  if (phase === 'video') {
+    await new Promise((resolve) => {
+      const timer = setInterval(() => { if (window.__goVideo) { clearInterval(timer); resolve(); } }, 40);
+    });
+    sheet.style.display = 'none';
+    renderer.setSize(1280, 720, false);
+    renderer.domElement.style.width = '1280px';
+    renderer.domElement.style.height = '720px';
+    document.body.appendChild(renderer.domElement);
+    const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp8') ? 'video/webm;codecs=vp8' : 'video/webm';
+    const rec = new MediaRecorder(renderer.domElement.captureStream(30), { mimeType: mime, videoBitsPerSecond: 2500000 });
+    const chunks = [];
+    rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+    const cycle = Math.max(0.4, scene.length);
+    const plan = [];
+    for (const cam of ['side', 'game']) for (const speed of [1, 0.25]) plan.push({ cam, speed, dur: cycle / speed });
+    let seg = 0, segT = 0, started = false;
+    const paint = (dt) => {
+      if (!started) { sp.seek(0); started = true; }
+      else if (dt > 0) sp.update(dt * plan[seg].speed);
+      if (plan[seg].cam === 'side') { sideCam.aspect = 1280 / 720; sideCam.updateProjectionMatrix(); frameSide(); renderer.render(world, sideCam); }
+      else { gameCam.aspect = 1280 / 720; frameGame(); renderer.render(world, gameCam); }
+    };
+    paint(0);
+    rec.start(100);
+    await new Promise((resolve) => {
+      let last = performance.now();
+      function tick(now) {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        segT += dt;
+        paint(dt);
+        if (segT >= plan[seg].dur) {
+          seg++; segT = 0; started = false;
+          if (seg >= plan.length) { rec.stop(); return; }
+        }
+        requestAnimationFrame(tick);
+      }
+      rec.onstop = resolve;
+      requestAnimationFrame(tick);
+    });
+    const bytes = new Uint8Array(await new Blob(chunks, { type: mime }).arrayBuffer());
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 8192) {
+      const slice = bytes.subarray(i, i + 8192);
+      for (let j = 0; j < slice.length; j++) bin += String.fromCharCode(slice[j]);
+    }
+    window.__b64 = btoa(bin);
+    window.__ready = true;
+  } else window.__ready = true;
+} catch (e) { fail(e); }
+</script></body></html>

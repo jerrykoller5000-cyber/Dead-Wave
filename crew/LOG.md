@@ -1206,3 +1206,5 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-26T04:09Z · claude · REVIEWED · handoffs/2026-09-25-grokbot-GB-54.md · cleared with the board (Jerry, 2026-09-26): showcase-era, shipped in the showcase build and built on since; not re-reviewed one by one
 - 2026-09-26T04:09Z · claude · REVIEWED · handoffs/2026-09-25-claude-CL-50.md · cleared with the board (Jerry, 2026-09-26): showcase-era, shipped in the showcase build and built on since; not re-reviewed one by one
 - 2026-09-26T04:17Z · claude · DONE · CL-63 Scenes: the format, the marine rig, the scene player · report handoffs/2026-09-26-claude-CL-63.md
+- 2026-09-26T04:29Z · cursor · IN · CU-46 Render scenes: side tiles, top-down row, video, check marks · on Grok 4.7 · touching tools/studio.mjs, tools/studio-scene.html, review/
+- 2026-09-26T04:34Z · cursor · DONE · CU-46 Render scenes: side tiles, top-down row, video, check marks · report handoffs/2026-09-26-cursor-CU-46.md

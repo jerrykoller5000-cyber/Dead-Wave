@@ -373,7 +373,7 @@ the finished work on 2026-09-26 (the studio and everything before it): it is wor
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [ ] **CU-46** **First. The studio renders scenes (D-41).** After CL-63. `node tools/studio.mjs scene
+- [x] **CU-46** **First. The studio renders scenes (D-41).** After CL-63. `node tools/studio.mjs scene
   <scene.json>` into `review/<scene name>/vN/`: every actor drawn (the marine as the `marine` rig, not the scale
   post), the camera following the scene's middle so the travel shows, a strip of side-on tiles plus a top-down row
   (the path and where each actor is), and the video (real speed, quarter speed; side, then the game's camera). Mark

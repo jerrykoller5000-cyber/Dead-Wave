@@ -1,0 +1,94 @@
+{
+  "version": "v1",
+  "scene": "studio/scenes/demo-drag.json",
+  "name": "demo-drag",
+  "length": 3,
+  "worst": {
+    "slide:marine.footL": {
+      "kind": "slide",
+      "key": "marine.footL",
+      "value": 0.10506371770128475,
+      "t": 0.3,
+      "limb": "footL",
+      "bad": true
+    },
+    "slide:marine.footR": {
+      "kind": "slide",
+      "key": "marine.footR",
+      "value": 0.12535781667771073,
+      "t": 0.18333333333333332,
+      "limb": "footR",
+      "bad": true
+    },
+    "speed:marine": {
+      "kind": "speed",
+      "key": "marine",
+      "value": 5.749725158539883,
+      "t": 0.4833333333333333,
+      "bad": false
+    },
+    "slide:guardian.handL": {
+      "kind": "slide",
+      "key": "guardian.handL",
+      "value": 2.641395637742986,
+      "t": 2.1333333333333306,
+      "limb": "handL",
+      "bad": true
+    },
+    "slide:guardian.handR": {
+      "kind": "slide",
+      "key": "guardian.handR",
+      "value": 1.4978944929263827,
+      "t": 0.08333333333333333,
+      "limb": "handR",
+      "bad": true
+    },
+    "slide:guardian.footL": {
+      "kind": "slide",
+      "key": "guardian.footL",
+      "value": 2.255271546546537,
+      "t": 1.7999999999999985,
+      "limb": "footL",
+      "bad": true
+    },
+    "slide:guardian.footR": {
+      "kind": "slide",
+      "key": "guardian.footR",
+      "value": 2.260971030104177,
+      "t": 1.3000000000000003,
+      "limb": "footR",
+      "bad": true
+    },
+    "speed:guardian": {
+      "kind": "speed",
+      "key": "guardian",
+      "value": 2.4000000000000288,
+      "t": 1.5333333333333328,
+      "bad": false
+    },
+    "snap:marine": {
+      "kind": "snap",
+      "key": "marine",
+      "value": 0.1738471652634134,
+      "t": 0.4666666666666666,
+      "joint": "hipL",
+      "bad": false
+    },
+    "snap:guardian": {
+      "kind": "snap",
+      "key": "guardian",
+      "value": 0.3554333333333339,
+      "t": 0.36666666666666664,
+      "joint": "thumbR",
+      "bad": true
+    },
+    "gap:guardian.handR>marine.footL": {
+      "kind": "gap",
+      "key": "guardian.handR>marine.footL",
+      "value": 0.9178635647451547,
+      "t": 0.39999999999999997,
+      "bad": true
+    }
+  },
+  "renderSeconds": 67.2
+}
