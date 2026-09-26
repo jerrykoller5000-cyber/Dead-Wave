@@ -51,6 +51,12 @@
       const hy = z.mesh.position.y + 1.0; shot++;
       for (let i = 0; i < 7 && z.alive; i++) T.damageZombie(z, dmg, { kind: 'pellet', dir: { x: 0, z: -1 }, hitY: hy, dist, shot });
     };
+    // The game's dice held still for a check: no pellet takes a limb (a zombie with its legs off
+    // crawls, and a crawler keeps the old reaction) and a kill always takes the same part. Without
+    // this, t85 failed now and then on the dice, not on the reactions.
+    const calm = (fn) => { const r = Math.random; Math.random = () => 0.999; try { return fn(); } finally { Math.random = r; } };
+    const key = (code, down) => document.body.dispatchEvent(new KeyboardEvent(down ? 'keydown' : 'keyup', { code, bubbles: true }));
+    const headUp = (z) => { const h = z.mesh.userData.head, v = h.getWorldPosition(h.position.clone()); return v.y - T.sampleHeight(v.x, v.z); };
     T.restartGraceDbg();
     await frames(3);
 
@@ -75,7 +81,7 @@
     const sh = spawnBehind('shambler', 2.2);
     await frames(4);
     const z0 = sh.mesh.position.z;
-    shell(sh);
+    calm(() => shell(sh));
     const w1 = watch(sh, z0);
     await runUntil(() => w1.ev.includes('recovered'), 20, w1);
     const hits1 = w1.ev.filter((e) => e === 'hit').length;
@@ -96,7 +102,7 @@
     // 3. A brute shrugs off the close shell.
     const br = spawnBehind('brute', 8);
     await frames(4);
-    shell(br);
+    calm(() => shell(br));
     const w3 = watch(br);
     await runUntil(() => w3.ev.includes('recovered'), 12, w3);
     ok(w3.ev.includes('hit') && !w3.ev.includes('fall') && !w3.ev.includes('stagger'), 'a brute shrugs off a close shell: ' + w3.ev.join(' '));
@@ -106,7 +112,7 @@
     const kz = spawnBehind('shambler', 11);
     await frames(4);
     kz.hp = 19;
-    T.damageZombie(kz, 19, { kind: 'bullet', dir: { x: 0, z: -1 }, hitY: kz.mesh.position.y + 1.0, dist: 11 });
+    calm(() => T.damageZombie(kz, 19, { kind: 'bullet', dir: { x: 0, z: -1 }, hitY: kz.mesh.position.y + 1.0, dist: 11 }));
     const corpse = T.corpses.find((c) => c.rag === kz);
     ok(!kz.alive && !!corpse, 'the kill is a ragdoll corpse (not the old topple)');
     const w4 = corpse ? watch(kz) : null;
@@ -121,6 +127,49 @@
       ok(hips.quaternion.equals(q0) && hips.position.equals(p0), 'frozen: its pose stays put');
     }
 
+    // 4b. Paused with a zombie down: it stays down behind the menu (the pose isn't handed back to the
+    // animation on a frame that doesn't simulate).
+    {
+      const gz = spawnBehind('shambler', 14);
+      await frames(4);
+      T.damageZombie(gz, 55, { kind: 'explosive', dir: { x: 0, z: -1 }, blast: 0, blastDmg: 55 });
+      const wg = watch(gz);
+      await runUntil(() => H.state(gz) === 'down', 12, wg);
+      const before = headUp(gz);
+      key('Escape', true); key('Escape', false);
+      await frames(12);
+      const during = headUp(gz), wasPaused = document.getElementById('pause').classList.contains('show');
+      key('Escape', true); key('Escape', false);
+      await frames(3);
+      ok(wasPaused && Math.abs(during - before) < 0.15,
+        `paused with a zombie down, its head stays low: ${before.toFixed(2)} m before, ${during.toFixed(2)} m during the pause${wasPaused ? '' : ' (the pause did not open)'}`);
+    }
+
+    // 4c. A blast beside a wall: the wall holds the zombie on its own side (the horde's solve hook).
+    {
+      const gx = T.gridIndex(P.x) + 6, gz = T.gridIndex(P.z) - 9;
+      const gy = T.sampleHeight(T.gridCentre(gx), T.gridCentre(gz));
+      T.levelGroundRect(T.gridCentre(gx - 3), T.gridCentre(gz - 3), T.gridCentre(gx + 3), T.gridCentre(gz + 3), gy, 3);
+      const walls = [-1, 0, 1].map((i) => T.placeBuildAt('wall', gx + i, gz, 0));
+      if (walls.every(Boolean)) {
+        const bx = T.thinBoxFor(walls[1]), near = bx.cz - bx.hz, far = bx.cz + bx.hz;
+        T.restartGraceDbg();
+        const wz = T.spawnZombie(bx.cx, near - 0.9, 'shambler', true, true); wz.hp = 9999;
+        await frames(4);
+        T.damageZombie(wz, 55, { kind: 'explosive', dir: { x: 0, z: 1 }, blast: 0, blastDmg: 55 });
+        const ww = watch(wz);
+        let most = -Infinity;
+        const t0 = performance.now();
+        while (!ww.ev.includes('recovered') && performance.now() - t0 < 15000) {
+          await frames(1); ww.poll();
+          const b = H.body(wz);
+          most = Math.max(most, wz.mesh.position.z, b ? b.points().pelvis[2] : -Infinity);
+        }
+        ok(ww.ev.includes('fall') && most < far, `a blast into a wall: it fell (${ww.ev.includes('fall')}) and got to z ${(most - near).toFixed(2)} m past the wall's near face; its far face is ${(far - near).toFixed(2)} m on`);
+        T.clearZombies();
+      } else ok(false, 'the wall for the blast check was refused: ' + T.placeRefusalFor('wall', gx, gz));
+    }
+
     // 5. The marine: a brute's blow staggers him and he keeps his feet (and control, slowed).
     T.clearZombies();
     stand(home.x, home.z);
@@ -133,13 +182,23 @@
     T.damagePlayer(16, 'brute', hb);
     const M = T.marine;
     const w5 = H.body(M) ? watch(M) : null;
-    let slowed = false, floored5 = false;
+    let slowed = false, floored5 = false, walked = 0, reactFrames = 0;
     if (w5) {
+      // He walks on (W held) through the stagger: how far he actually goes while it lasts.
+      key('KeyW', true);
       const t5 = performance.now();
-      while (!w5.ev.includes('recovered') && performance.now() - t5 < 12000) { await frames(1); w5.poll(); if (T.marineReactK() < 1 && T.marineReactK() > 0) slowed = true; if (T.marineFloored()) floored5 = true; }
+      let last = { x: P.x, z: P.z };
+      while (!w5.ev.includes('recovered') && performance.now() - t5 < 12000) {
+        await frames(1); w5.poll();
+        if (T.marineReactState() === 'react') { walked += Math.hypot(P.x - last.x, P.z - last.z); reactFrames++; }
+        last = { x: P.x, z: P.z };
+        if (T.marineReactK() < 1 && T.marineReactK() > 0) slowed = true; if (T.marineFloored()) floored5 = true;
+      }
+      key('KeyW', false);
     }
     ok(!!w5 && w5.ev.includes('hit') && (w5.ev.includes('stagger') || w5.ev.includes('step')) && !w5.ev.includes('fall'), 'a brute\'s blow staggers the marine and he keeps his feet: ' + (w5 ? w5.ev.join(' ') : 'no body'));
     ok(slowed && !floored5 && T.marineReactState() === 'animated', 'he keeps control while he staggers (slowed), and it passes');
+    ok(reactFrames > 5 && walked > 1, `he walks on while he staggers: ${walked.toFixed(2)} m over ${reactFrames} frames (the stagger rooted him before)`);
 
     // 6. A bomber at 1 m puts him down, and he is up again within 1.5 s of landing.
     T.clearZombies();

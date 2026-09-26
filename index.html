@@ -34850,7 +34850,16 @@
           // Full rate near the camera, half rate out to where far bodies stop animating, then held.
           lodFor: (x, z) => { const d = Math.hypot(x - camera.position.x, z - camera.position.z); return d < 25 ? 0 : (d < ZOMBIE_FAR_M ? 1 : 2); },
           clips: (ref) => hordeClips.get(ref) || null,
-          onEvent: onHordeEvent
+          onEvent: onHordeEvent,
+          // Walls, builds and the HQ hold a reacting body as they hold one walking: a blast beside a
+          // wall leaves the zombie on its own side.
+          solve: (key, x, z) => {
+            const me = key === marine, r = me ? PLAYER_RADIUS : (key.radius || 0.4);
+            const y = me ? player.position.y : (key.mesh ? key.mesh.position.y : 0);
+            let s = resolveHardBuildCollisions(x, z, r, me, y, null);
+            if (house.present) s = pushOutOfHouse(s.x, s.z, r);
+            return s;
+          }
         });
       } catch (e) {
         console.warn('Dead-Wave: reactions unavailable.', e);
@@ -34885,7 +34894,9 @@
     //           machete 3.5; the saw 1.2 a tick
     //   crush   6 (a falling trunk)
     // The caps keep a scripted or debug hit of thousands from throwing a body across the map.
-    const REACT_KIND = { bullet: 'bullet', pellet: 'pellet', explosive: 'blast', melee: 'blade', chainsaw: 'blade', crush: 'crush' };
+    // Melee isn't one yet: a knife or machete hit barely moves a body, so GB-52's shove (the point of
+    // drawing one) keeps playing until the blade presets shove (P-75). A melee kill still falls as a body.
+    const REACT_KIND = { bullet: 'bullet', pellet: 'pellet', explosive: 'blast', chainsaw: 'blade', crush: 'crush' };
     function reactionPower(kind, amount, info, z) {
       const dist = (info && info.dist) || 0;
       if (kind === 'bullet') return Math.min(7, 0.57 * Math.sqrt(Math.max(0, amount))) * (1 - Math.min(0.3, dist / 200));
@@ -38514,9 +38525,6 @@ live++;
       updateTreeBatches();
     }
     function tick() {
-      // GB-65: the reacting bodies hand their joints back to the animation before anything animates
-      // this frame (studio/motion-horde.js, beginFrame), then take them again in updateReactions.
-      if (Horde) Horde.beginFrame();
       maybePreRollFromLoop();
       stepLivePreRoll();
       if (showPerf) {
@@ -38588,6 +38596,11 @@ live++;
         renderFrame();
         return;
       }
+      // GB-65: the reacting bodies hand their joints back to the animation before anything animates
+      // this frame (studio/motion-horde.js, beginFrame), then take them again in updateReactions.
+      // After the pause and the insertion's early returns: a frame that doesn't reach updateReactions
+      // keeps the bodies as they were drawn (a zombie that's down stays down behind the pause menu).
+      if (Horde) Horde.beginFrame();
 
       updateDayNight(dt);
       updateCaveEyes();
