@@ -206,6 +206,19 @@ That slowness also means a browser check that times something by the wall clock 
 when many bodies react at once there (t77's "off, it cools" did once, under three jobs; it passes with
 two). t85 times everything by the game's own dt for that reason.
 
+With the switch off (the default), the whole browser suite at two jobs gave 1242 passes and 8 fails
+against the base's 1220 and 4. Of the extra fails, t41's "cave grab running", t59's two "drag
+finished" and t85's two passed when run again at lighter load, and t79's (A) was already known to
+fail. The one I can't explain is t80's "three wall pieces between them stop his rounds": it failed 4
+times in about 19 runs here and never in 15 on the base. In the one failure caught with a probe,
+the rounds that hit the spider were fired from about 4.3 m south of the marine and 3.35 m above him,
+as if the muzzle hadn't caught up with the check moving him there. Since then 13 probed runs here and
+9 on the base, side by side, all passed; on both, the rounds fired in that check follow the frames
+drawn (about one round every three frames), so a faster run fires more and has more chances. With
+the switch off the horde is never made and every hook returns at once, so I have found no way for
+this work to cause it. It is left here for Grokbot and Cursor: where a round starts on the frame
+after the check moves the marine.
+
 Run with the switch on, the checks near what changed (t0, t14, t21, t24, t28, t31, t33, t34, t36, t37,
 t40, t53, t54, t60, t61, t63, t69, t71 to t77, t80, t83, t84, t85) pass, apart from t76's "sampled N
 frames" (it fails on the untouched base too) and t85's first check, which says the switch is off by
