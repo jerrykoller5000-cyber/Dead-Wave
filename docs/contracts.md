@@ -427,3 +427,14 @@ CU-44) and, from CL-62, the game. The format is `docs/studio.md`; everyone impor
 - `loadReference(json)`, `makeMannequin(ref)`, `poseReference(man, clip, t)` for the UAL reference.
 - `ikLimb` moved from `world/cave-guardian.js` to `studio/ik.js` (re-exported from the guardian, so
   old callers still work).
+- Scenes (CL-63, D-41; `docs/studio.md` §9): `validateScene(json) → [sentences]`, `loadScene(json,
+  clipOf)` (throws, listing every problem), `createScene(scene, { parent, bodies })` → `update(dt) →
+  { t, events, checks }`, `seek(t)`, `worst`, `actors`, `root`, `done`. The renderer (CU-46) and the game
+  (CL-64) both play scenes through this; neither does hold, path or check maths itself.
+- The marine rig: `rigs.get('marine').create()` (a stand-in on the game marine's joint offsets) or
+  `create({ group })` to adopt the game's own marine (`adoptMarine`, from `makeMarine()`'s userData).
+  `MARINE` in `studio/marine.js` copies makeMarine()'s offsets; `studio/scene.test.mjs` fails if
+  index.html's change, so whoever changes the marine's joints updates both.
+- `applyPose` takes `reach: { chain: { at, w } }`; `solveChain(inst, chain, target, w)` places one limb;
+  `ikLimb(..., endLocal)` aims a limb whose end sits off the bone line. The guardian's clips are
+  unchanged (the bake check still passes).

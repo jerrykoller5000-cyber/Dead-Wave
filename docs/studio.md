@@ -293,6 +293,114 @@ A rig declares its draw calls and triangles; every render prints them against it
 red if they're over. The guardian today: 150 meshes and 5,808 triangles, one creature on screen at
 a time. A clip is only done when it doesn't snap, doesn't slide, and the game still holds 60 fps.
 
+## 9. Scenes (D-41)
+
+A clip is one body moving in place. Most of what looks wrong in a game is between bodies: where a
+hand lands on a leg, how fast a thing is hauled, whether the feet push or glide. A **scene** is one
+moment with everyone in it, as data: who is there, what each plays, what holds what, how they
+travel, and what to check. The studio renders it (CU-46) and the game plays the same file where the
+moment happens (the host says where, and hands over its own bodies). A new moment is a new scene
+file, not new code: the guardian's drag is the first; the pit's arm, the throw, a zombie grab and the
+tower climb are the same shape.
+
+Scenes live in `studio/scenes/<name>.json`:
+
+```json
+{
+  "format": "dw-scene/1",
+  "name": "demo-drag",
+  "length": 3,
+  "actors": {
+    "marine": {
+      "rig": "marine", "path": "haul", "along": -2.0, "face": "back",
+      "clips": [[0, "marine/lie"]],
+      "tilt": [[0, [0, 0, 0]], [0.4, [-78, 0, 0], "out"]],
+      "rise": [[0, 0], [0.4, 0.15]]
+    },
+    "guardian": {
+      "rig": "guardian", "path": "haul",
+      "clips": [[0, "guardian/pounce"], [0.45, "guardian/drag", { "fade": 0.2, "loop": true, "stride": 1.6 }]]
+    }
+  },
+  "paths": {
+    "haul": { "points": [[0, 0, 0], [0, 0, 12]], "speed": [[0, 0], [0.45, 0], [1.2, 2.4, "inout"]] }
+  },
+  "holds": [
+    { "from": "guardian.handR", "to": "marine.footL",
+      "reach": [[0.1, 0], [0.4, 1, "out"]], "tow": [[0.4, 0], [0.7, 1]], "lift": [[0.4, 0], [0.7, 1]] }
+  ],
+  "checks": { "gap": 0.05, "slide": 0.05, "speed": { "guardian": [0, 3.5] } }
+}
+```
+
+**Actors.** Each names a registered rig (§2) and stands either on a path or at a fixed spot
+(`"at": [x, y, z]`, `"face": degrees`). On a path, `along` puts it metres ahead of (+) or behind (−)
+the path's point and `side` metres to its right; `face` is `"forward"` (along the travel, the
+default), `"back"`, or degrees added to the travel heading. `scale` overrides the rig's display
+scale. Two keyed body channels move the whole actor on top of its place: `tilt` (degrees, XYZ, about
+the feet: the marine laid on his back) and `rise` (metres up). Keys are the clip format's: `[time, value, ease]`.
+
+**Clips.** `[start time, "rig/clip", options]`, in time order; each takes over from the one before.
+A clip reference is `studio/clips/<rig>/<clip>.json`. Options: `fade` (seconds to blend from the
+last one, default 0.15), `loop`, `speed` (a fixed rate), and **`stride`**: metres the actor covers
+in one play of the clip. With a stride, the clip plays at the actor's ground speed (rate = speed ×
+length ÷ stride, and never below `minRate`, default 0.2), so feet planted in the clip stay planted
+in the world: the body goes over them and they push. A walk that glides is a stride that's wrong.
+
+**Paths.** `points` is a line in scene space (metres, y ignored: actors stand on the ground the
+host gives). `speed` is keyed metres per second; the distance travelled is its integral. Actors on
+the same path travel together; `along` keeps their spacing.
+
+**Holds** are what makes it two bodies. `from` is a limb (an IK chain) of one actor, `to` is a
+joint or a limb of another (`actor.chain` means the chain's end joint). Three keyed weights, 0 to 1:
+
+| Weight | What it does |
+| --- | --- |
+| `reach` | The `from` limb goes to the `to` joint: the hand lands on the ankle, wherever the ankle is. |
+| `tow` | The `to` actor is pulled along the ground (x and z) so its joint stays at the hand: the marine follows the grip, his body trailing on its own path heading. |
+| `lift` | The `to` limb (it must be a chain) goes up to the hand: the held leg rises to where the hand holds it. |
+
+A hold's `offset` ([x, y, z] metres, in the `to` joint's frame) moves the grip point along the limb
+(a hand round the shin instead of the ankle bone).
+
+**Order each frame.** Every actor is put on its path and posed from its clips. Then, for each hold,
+the held actor is posed before the holder; the holder reaches; the held actor is towed and its limb
+lifted. An actor can hold one and be held by another; a loop (A holds B holds A) is refused when
+the scene loads.
+
+**Checks** run on every frame and come back from the player, so the renderer marks them and the
+game can log them:
+
+| Check | What it measures | Flagged over |
+| --- | --- | --- |
+| `gap` | for each hold at full `reach` or `tow`, metres from the hand to the grip point | `checks.gap`, default 0.05 |
+| `slide` | for each limb on the ground, how far it moved over the ground since it touched down. On the ground: the clip plants it (plant ≥ 0.5), or its end is down at the height it stands at in the rig's rest pose (+6 cm), so a clip that plants nothing is still caught gliding. Skipped for a body being towed and a limb that's holding | `checks.slide`, default 0.05 |
+| `speed` | each actor's ground speed, m/s | outside `checks.speed.<actor>` |
+| `snap` | the biggest one-frame joint turn, scaled to 60 fps (§6) | 0.3 rad |
+
+**The player** (`studio/scene.js`, exported from `studio/index.js`):
+
+```js
+const scene = loadScene(json, (ref) => clipJson);          // validates; throws with every problem
+const sp = createScene(scene, {
+  parent,                           // where the actors go (the host's group, placed at the moment)
+  bodies: { marine: myMarineInst }, // optional: actors the host already has (rigs.get(n).create({ group }))
+});
+sp.update(dt);   // → { t, events: [{ actor, t, name }], checks: { gap: {...}, slide: {...}, speed: {...} } }
+sp.seek(t);      // replays from 0 in fixed steps: the same pose at t every time (the renderer's frames)
+sp.worst;        // the worst of each check since the last seek: { "slide:guardian.footL": { value, t, bad }, ... }
+sp.actors.marine.inst, sp.actors.guardian.rate, sp.root, sp.done
+```
+
+`validateScene(json)` returns the problems as sentences, like `validateClip`. A quick look without
+the renderer: `studio/scene-preview.html?scene=demo-drag&n=8` (side-on tiles following the bodies,
+red where a check fails). The demo, `studio/scenes/demo-drag.json`, is the v1 guardian clips hauling
+the marine by the ankle: it shows the machinery (and the v1 drag's gliding feet, flagged on every
+tile), not the finished grab, which is CL-64's. The marine rig
+(`studio/marine.js`) is built from the game marine's joint offsets, so a grip point in the studio is
+the grip point in the game; `rigs.get('marine').create({ group: marine })` adopts the game's own
+marine (its joint groups from `makeMarine()`'s `userData`) instead of building one.
+
 ---
 
 ## Later

@@ -37,20 +37,17 @@ Older notes and decisions below that name other models are history.
 
 ## Mission
 
-**The studio: modeling and animation for agents.** Jerry, 2026-09-26 01:40Z (D-40, `docs/studio.md`): build a way for
-the crew to see what it makes. Clips become data; one command renders any rig or clip to a filmstrip, a video and
-numbers in under 30 s; the renders land in `review/<asset>/`, where Jerry leaves notes that come back onto this board.
-When it works and Jerry's guide is written (CL-61), the first real job is the guardian's animation (CL-62, on Jerry's
-go). The marine's animation stays as it is. The showcase build closed with all 29 tasks in (Jerry has his copy).
+**Scenes: two bodies, one moment (D-41).** Jerry, 2026-09-26 ~04:30Z: looking at the studio's guardian, he thinks the
+trouble was less the animation than where the limbs meet on the grab, and the speed and movement, and the strips can't
+show that because they draw the guardian alone, in place. So the studio learns scenes: one data file that says who is
+in a moment, what each plays, what holds what, how they travel and what to check; the studio renders it and the game
+plays the same file. Built to be reused scene to scene (the pit's arm, the throw, a zombie grab, the tower climb), not
+as a one-off. The guardian's grab and drag are the first scene (CL-64), then Jerry's notes. The studio mission before
+this one closed with all 8 tasks in.
 Work your queue top to bottom; a task that says "after XX-n" waits for it.
-- **Claude** · CL-57 · handoffs/2026-09-26-claude-CL-57.md
-- **Claude** · CL-58 · handoffs/2026-09-26-claude-CL-58.md
-- **Cursor** · CU-44 · handoffs/2026-09-26-cursor-CU-44.md
-- **Claude** · CL-59 · handoffs/2026-09-26-claude-CL-59.md
-- **Claude** · CL-60 · handoffs/2026-09-26-claude-CL-60.md
-- **Antigravity** · AG-19 · handoffs/2026-09-26-antigravity-AG-19.md
-- **Cursor** · CU-45 · handoffs/2026-09-26-cursor-CU-45.md
-- **Claude** · CL-61 · handoffs/2026-09-26-claude-CL-61.md
+- **Claude** · CL-63 · handoffs/2026-09-26-claude-CL-63.md
+- **Cursor** · CU-46 · handoffs/2026-09-26-cursor-CU-46.md
+- **Claude** · CL-64 · handoffs/2026-09-26-claude-CL-64.md
 
 ## Waiting on
 
@@ -59,13 +56,21 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all ticked [x] drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Jerry** · CL-62 your first note, on review/guardian-drag (v2) · waiting: Claude
+- **Cursor** · CU-46 the studio renders scenes · waiting: Claude (CL-64)
 
 
 
 ## Orders from Jerry
 
-Newest first. Claude writes these down when Jerry gives them in chat.
+Newest first. Claude writes these down when Jerry gives them in chat. The older ones (the showcase and
+before) are in `crew/archive/board-queues-2026-09-26.md`.
+
+- **2026-09-26, ~04:30Z · Scenes: the grab is the problem, and build it to reuse.** After seeing the studio's guardian
+  strips: "the problem may not have been as much with animation but the position of the two models' limbs (placement
+  on grab) and the speed and movement. It's very hard to tell from the strips and video, but the tool is cool and
+  works." He agreed to both steps (the studio shows the real moment with both bodies; then fix it in the game), and:
+  "make sure we can reuse whatever we develop here for future development. Not a one-off thing but a robust tool we
+  can transfer from scene to scene." D-41.
 
 - **2026-09-26, 01:40Z · The studio (future development).** Jerry has his showcase copy and is happy with it. His
   long-held idea: bridge the gap between a human developer and a creation suite agents can understand. Jerry is the
@@ -75,141 +80,20 @@ Newest first. Claude writes these down when Jerry gives them in chat.
   He linked the Quaternius Universal Animation Library 1 and 2 (`Desktop\Animation Assets`, CC0) as a guide for
   character animation, and his earlier Caracal Studio texturer. D-40, `docs/studio.md`.
 
-- **2026-09-25, 22:45Z · Four things that still look bad.** Jerry, with Claude on the big model. CL-56, D-39.
-  1. The guardian that pulls you into the cave looks like absolute garbage, and so does its animation. Several agents
-     have tried. Rebuild it.
-  2. The pit monster's tentacles and its grabbing animation look terrible. The pit itself looks great.
-  3. The camera's move into night is a bad pan. Wait for the alarm sequence to start, with the HQ in frame, so the
-     strobing lights and the fireworks are what we see.
-  4. Night to day looks bad. When the last zombie of the night dies, it turns to day by itself: no more panning to
-     the sunrise. A small banner, out of the way, says what the Night Survived menu said, but it is not a menu and
-     has no buttons. The only way to start the next night is the briefing panel. Also: skulls still on the ground
-     after the night could not be picked up.
-
-- **2026-09-25, 08:50Z · "Go with what you think."** Jerry went to sleep and left the two open questions to Claude.
-  Q-1: the load budget is met by the splash (D-36). Daytime ideas 1 and 2 go in for Saturday: tonight's scouting
-  report on the HQ board, and bounties on the HQ board (D-37; handoffs/2026-09-25-claude-CL-54.md). GB-57, GP-42, GP-43.
-
-- **2026-09-25, 06:00Z · The showcase (Saturday).** Jerry played day 1: the music is sounding really nice (CL-38 is
-  a go). He shows the game on Saturday, so tonight is the fundamentals of the core loop and performance. Claude runs
-  the crew and has screen control to start the agents.
-  1. Waves 1 to 20 as fun, engaging and polished as possible. GB-53.
-  2. The soundtrack for hordes 1 to 20. CL-38.
-  3. The guardian's grab and chase, and the tentacle creatures, as polished as possible. Little black specks in the
-     underwater pit hide the runes. GB-54, CL-53.
-  4. Balance the economy and the gameplay. GP-41, GB-52.
-  5. Ideas to make the daytime more fun and polished. CL-54.
-  6. Zombies clip through the marine when they attack. He should get knocked around and stumble when hit. GB-50.
-  7. The marine spins round on the last-kill camera: he follows the cursor, a 360 as the last zombie dies. CL-50.
-  8. A cooler, more stylised last kill. Its stinger shorter, and the camera about 3 seconds. The night-survived
-     stinger sounds good. CL-50.
-  9. The alarm: the camera pans up to the sun setting and the moon rising, quickly, then down to the alarm and the
-     rest of the sequence. CL-49.
-  10. The card after the last kill: no "First light"; it reads "Night N Complete", with two buttons, Next Night and
-      Proceed to Morning. Next Night starts the alarm sequence at once. Proceed to Morning pans the camera up to the
-      sunrise and back down to the marine at his spawn. GP-37, CL-51.
-  From his playthrough:
-  - Zombies need an idle animation. GB-51.
-  - The camp-cleared sound after clearing a camp is jarring: a smooth transition, a small banner saying it's
-    cleared, and a stinger of about 2 s as the fight music fades. GP-38, CL-52.
-  - No alarm stinger, just the regular alarm sound. CL-49.
-  - The supplies and airdrop stingers can be short sound effects. CL-52.
-  - The day track: about 5 minutes, loops better, very minimal and atmospheric, because it plays all the time. CL-52.
-  - Day missions (the ranger camp, the medical supplies) shouldn't appear on their own: the player explores, and
-    finds a site when he's close enough to see its E prompt. No notification otherwise. GP-39.
-  - Restock all ammo should refill the grenades. GP-40.
-  - The knife and the chainsaw are a little too strong. GB-52.
-
-- **2026-09-25, 03:30Z · Antigravity is out of usage for tonight.** Its work goes to another agent: the
-  day-1 replay on Jerry's GPU (was AG-17) is now Cursor's CU-35. AG-16's shots are in; Claude reviewed them.
-
-- **2026-09-25, 02:25Z · Fix day 1.** Jerry read the plan. Fix all the other problems the audit found too,
-  and make the day-1 stingers and music as good as possible. His answers:
-  1. The sky follows the loop: day in prep, the alarm brings night, the clear brings dawn. D-28.
-  2. Day 1 is **15** zombies: half pop up out of the ground, half come from the cave. D-29.
-  3. No saves: remove the morning save; every Play is a fresh run. D-30.
-  4. Ways to die carry over between runs (a lifetime collection). D-31.
-
-- **2026-09-25, 01:35Z · The day-1 audit.** Claude improves the crew panel. Then every agent, Claude
-  included, audits day 1 and turns the problems in to Claude. Claude reads them all, makes a plan,
-  and brings it to Jerry. See **Mission** at the top.
-
 - **2026-09-25, 01:15Z · Git is shared.** Jerry overrides AGENTS.md rule 6: Claude may now commit
   and push too, not only Cursor. D-27.
-
-- **2026-09-24, 22:52Z · Jerry played it.** No screen control tonight: he is at the machine until 23:00 local. Work in files only.
-  1. No skip on the splash (`openingSkip`, and Esc). GP-27.
-  2. Keep the zoom on the last zombie. Take off the zoom onto the marine's face. CL-33. It replaces the last 30% of CL-31.
-  3. The guardian still does not chase. He comes out only if you shoot into the cave and you are within 20 m. He is too fast to run from. On a leg grab, the camera follows him dragging the marine to the cave, then the thrown-out cutscene plays. That path does not use the crawl-in snatch. GB-35, revises D-25.
-  4. A fresh playthrough still shows unlocked deaths on the tombstone. The collection is `tt_death_log` in localStorage, so it survives a new game. CU-24.
-  5. Play again after a cave death started on day 2. The morning save (`tt_day_start`) resumes on Play. A death's Play again is a new run at day 1. CU-25.
-  6. A gun you buy comes with full ammo. Starting spare capacity is ×1.4. Jerry confirmed that wording. GB-36.
-  7. Take the old fight beds out. Keep the stingers. Replace the fight music with a loopable chiptune arrangement of Jerry's Suno fight tracks, so it sits with the game's existing tune. Do not delete the Suno files until the new loops are in. CL-34.
-
-- **2026-09-24, 09:20Z · Jerry's last orders before sleep.** A restore point before anything else
-  (CU-23). Alarm: rumble and camera shake for three seconds. Fight music: after the alarm sting, a
-  10 s fade from 0% to 50%, then distance takes over. The wave finisher: a 360 around the last
-  zombie for 70% of the relief sting, then a slow pan and zoom onto the marine's face for the last
-  30%. The knife is far too strong. Shooting into a cave brings out the **immortal** cave thing,
-  racing out and dragging you in by the leg: the cave cutscene plays (D-25, replacing D-22's
-  fightable guardian). Give the marine a detailed face, and more detail on his face covering.
-  Claude has screen control to keep the IDEs moving: routine approvals inside the project only.
-
-- **2026-09-24, 09:10Z · The night shift.** Jerry is asleep; Claude is taskmaster until morning. Horde
-  sizes stay as they are: balance through skulls and other levers instead (GB-29, GP-25 are
-  proposals for Jerry to decide on). Wave music by day (CL-27): days 1-2 day skirmish B, 3-7 day
-  skirmish A, 8-11 Tier 1, 12-15 Tier 2, 16+ Tier 3; special nights keep their day's track until
-  they're built.
-
-- **2026-09-24, 05:00Z · The new plan.** Jerry played the game and wrote his notes; he and Claude
-  agreed the plan in `docs/plan.md` (D-19). The test for everything is **flow**: no new systems
-  until the ones we have work well. Phase 1 is on the board. Jerry is making the music in Suno
-  from `docs/audio/cue-sheet.md`. Day fights stay (guarded POIs and small daytime waves); night is
-  the horde. The tutorial is skippable and remembered. Blood Moon becomes **Ember Night**.
-
-- **2026-09-24, 04:35Z · The board is cleared.** Antigravity is out of usage for a few hours and
-  the rest of the crew has reached its stopping point. Every task is off the board (kept in
-  `crew/archive/board-queues-2026-09-24.md`). Jerry plays the game and takes notes; then he and
-  Claude make a new plan with new tasks. Start nothing until then.
-
-- **2026-09-24, 03:55Z · A good stopping point.** Jerry is re-assessing the game after work, and
-  then he and Claude set the future vision: goals we can actually reach, and where the game goes.
-  So: finish only what the "Where each of you is" table lists for you, then check out and start
-  nothing new. Cursor goes last (CU-13): commit everything, run the full `npm test`, push, and
-  put the commit and the numbers in his handoff. Anything else on the board waits for the new plan.
-
-- **2026-09-24 — Antigravity now runs on Claude Sonnet 4.6, and every check-in names its
-  model** so everyone can track who is running what (D-14).
-
-- **2026-09-23 — OpenCode leaves the crew.** Jerry doesn't think it will help much with this
-  project. Its finished work stays (OC-1 to OC-3); its standing job goes back to Cursor (D-10).
-
-- **2026-09-23 — Two new crew members.** OpenCode (Nemotron 3.5 Lightning, in a terminal) and
-  Antigravity (Gemini 3.8 Flash, in an editor with a browser). They lighten everyone's
-  load. Give each the work that fits it, and keep them away from what their models do
-  badly (D-9).
-- **2026-09-23 — Work together better, and let Jerry see what is actually happening.** After the
-  first round on the board: the crew keeps going down its queues without stopping to ask Jerry,
-  posts progress as it goes, and the panel shows it (D-6, D-7).
-- **2026-09-23 — The crew board.** Every agent checks in here before working and checks out
-  with a report when done. Jerry talks to Claude; Claude updates this board; each agent picks
-  up its next task from its queue below.
-- **2026-09-23 — Cursor now runs on Grok 4.7.** Same name, same role, same files. Cursor, read
-  your card in `crew/status/cursor.md` and the decisions below before starting; nothing from
-  your earlier sessions is in your memory.
-- **2026-09-23 — The order of work** (from the Crew Plan; step 2 is updated by D-2 below):
-  1. Foundation: vendor three.js, the shot rig and `npm test` are done; the split is next.
-  2. Load time: the title screen within 15 s cold and 5 s warm.
-  3. Read the threat: wave previews, cave warnings, enemy roles.
-  4. Teach the loop: the first-minute coach, one vocabulary, dead settings removed, honest loading.
-  5. Reasons to leave the cabin: objectives and caches at the landmarks.
-  6. A world that reacts: felled trees block lanes, the river slows zombies.
-  7. Things work as they look: floors, stairs, bridges, cover, a save each day.
-  8. Showcase: the guardian night, replays of the scripted deaths.
 
 ## Decisions
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
+
+- **D-41 · Scenes (Jerry, ~04:30Z; extends D-40).** A scene is one data file (`dw-scene/1`, `docs/studio.md` §9)
+  naming the actors (registered rigs), the clips each plays, the holds between them (a hand that reaches a joint, a
+  body towed by a hand, a limb lifted by it), the paths they travel with speed over time, a stride per clip so
+  feet step at the ground's speed, and the checks (hold gap, foot slide, speed). `studio/scene.js` plays it; the
+  renderer draws it; the game plays the same file where the moment happens (the host gives the place and its own
+  bodies). The marine is a registered rig that can adopt the game's own marine. A new moment is a new scene file,
+  not new player code.
 
 - **D-40 · The studio (Jerry, 01:40Z; `docs/studio.md`).** Two rules: everything visual is data an agent can read and
   edit, and every change can be looked at in seconds as pictures. Clips are JSON keyframes on a registered rig
@@ -483,515 +367,47 @@ checked in on the whole file, wait or pick another task. Re-read before you save
 
 ## Queues
 
-Phase 1 of `docs/plan.md`: make it feel right. The earlier queues are in
-`crew/archive/board-queues-2026-09-24.md`. `[ ]` to do, `[>]` in progress, `[x]` done, `[!]` blocked,
-`[~]` parked.
+Each agent's open work. `[ ]` to do, `[>]` in progress, `[x]` done, `[!]` blocked, `[~]` parked. Jerry cleared
+the finished work on 2026-09-26 (the studio and everything before it): it is word for word in
+`crew/archive/board-queues-2026-09-26.md`, and the older queues in `crew/archive/board-queues-2026-09-24.md`.
 
 ### Cursor — integration, git, tools, engine core (Grok 4.7)
 
-- [x] **CU-45** **First. The studio's strip, readable (D-40; Claude's review of CU-44).** The strip is the thing Jerry
-  and every agent looks at, and today it's one oblique scene with the creature a few pixels tall
-  (`review/guardian-drag/v1/strip.png`). Make it a grid of tiles instead: one viewport per frame (`setViewport` /
-  `setScissor` on one renderer), each tile its own side-on camera framed on the rig's bounds for the whole clip (same
-  framing in every tile, so motion reads as motion), the marine beside it at the same scale, the ground line, the time
-  in big type in the corner, and red tile borders where a joint snaps or a foot slides. The reference in its own row of
-  tiles under the rig's, at the same times, scaled to human height next to the same marine. Aim: a figure fills most of
-  its tile's height at 1280 px wide. Also: `meta.json`'s `task` is the owner's task (e.g. CL-62), not CU-44; `render`
-  makes no new version when the clip is byte-identical to `latest` (say so and exit 0; `--force` to re-render anyway),
-  because an unchanged "v2" tells Jerry something changed (`review/guardian-gallop/v2` is one: remove it, `latest` back
-  to v1); and say what makes drag (31 s) and throw (36 s) miss the 30 s aim. Re-render the five guardian folders and
-  put the drag strip in the handoff.
-- [x] **CU-44** **The studio (D-40): the renderer, `tools/studio.mjs`.** After CL-57. `node tools/studio.mjs render
-  <rig> <clip> [--vs <reference clip>]` renders headless into `review/<asset>/vN/`: `strip.png` (12 frames on a grid,
-  ground, a 1.75 m marine for scale, a ghost of the previous frame, the reference as a second row), `video.webm` (real
-  and quarter speed, side view and play-camera view; MediaRecorder in the page, no ffmpeg), `turntable.png` for a rig
-  with no clip, and `stats.json` (length, draw calls, triangles, the worst one-frame joint turn scaled to 60 fps, planted
-  foot slide), with snaps and slides marked red on the strip. It loads only the rig and the player, never the whole
-  game: under 30 s on Jerry's PC and in the cloud (`CHROME_ARGS`). Moves `latest` to the new version.
-- [x] **CU-43** **First. The showcase dry run, done the real way (AG-18 redo).** AG-18's script used `skipPrep`, killed the
-  zombies 4.5 s after it while the wave was still spawning ("Zombies left: 7"), and never opened the HQ briefing, so its
-  three findings are the harness, not the game. Build it on your qa/run-cu41.mjs: from a fresh profile on Jerry's GPU,
-  day 1 prep, walk to the HQ and press E (the briefing with tonight's scouting report and, from day 2, the bounties),
-  `TT.hqStartWave()`, wait for phase `wave` and for the night's spawns to finish, kill until the wave ends, then the
-  finisher and the Night 1 Complete card, Proceed to Morning, day 2: read the board, clear the bounty, bank at the HQ
-  window, night 2, then Next Night into night 3. (D-39 since: no card and no buttons; after the last kill the day comes by
-  itself with a banner, and each night starts from the HQ panel. Script it that way.) Shots of every step and a short capture of one alarm and one finisher.
-  Anything wrong goes to its owner with the shot. Report to Claude.
-- [x] **CU-41** **First, for Claude (CL-55).** On Jerry's GPU, re-shoot what CU-39 showed: the pit at noon with depth test ON
-  (the specks should be gone: the rune bands now drape over the drawn bed, 14 cm up) and the finisher at 0.5 s, 1.5 s and
-  2.6 s (the grade is a canvas filter now, not the grey blend sheet: it should read as a punchy, desaturated shot, not
-  milky). Report to Claude with the shots.
-- [x] **CU-42** **The 48-zombie frame (CU-38).** Profile nights 5-10 on the GPU with 48 alive: is the 40-47 ms worst frame
-  CPU (AI, separation, animation, skinning) or GPU? Fix the cheap wins (throttle far-zombie AI or animation, cache per-frame
-  lookups), aiming at a steady 60 and 1% lows over 40 fps. And night 1's single 82 ms frame in the first seconds of the
-  wave: find what first-uses there (a shader, a music section decode, the flares) and warm it in the pre-roll like CU-36.
-- [x] **CU-40** Grokbot's GB-55 finding: `startMatch` in tools/tests/lib.js waits a fixed 10 s, but the insertion is 9 s of
-  game time and on a slow box it still owns the camera. Make it wait for the insertion to end (or add a TT.isDeploying()),
-  so every test gets it (t4, t58, t75 to t79).
-- [x] **CU-39** **First, for Claude (CL-53 and a check of CL-49/50/51).** On Jerry's GPU with your visible-window tools:
-  `node tools/shoot.mjs pit lake-shore` plus two closer views over the pit funnel at noon (the little black specks Jerry
-  sees over the runes: what are they?), and a play-through of one alarm (the sky shot), one last kill (the 3 s finisher)
-  and both buttons on the Night Complete card, with shots or a short capture. Report to Claude.
-- [x] **CU-36** **Performance for Saturday.** The one-time stalls first (was GB-48): the finisher's two emissive variants
-  (CU-29) and the goggles' post effect (CU-35) compiled in the staged pre-roll, so nothing hitches the first
-  time. Then the warm title time (7-8 s against 5 s) and anything the day 1-10 run below shows. Measure in a
-  visible window on the real GPU.
-- [x] **CU-37** **Integration, all night.** Every time a batch of tasks lands: the tests of the files that changed,
-  then commit and push (rule 6; Claude commits too, so check in with `--touch "git"`). A flake gets rerun
-  alone before anyone chases it.
-- [x] **CU-38** **After GB-53, GB-50 and CL-49.** Play nights 1 to 10 on Jerry's GPU (you are the crew's eyes while
-  Antigravity is out): fps per night, the worst frames, what felt wrong, shots of each alarm and each finisher.
-  Report to Claude.
-- [x] **CU-28** **S1 for the suite (CU-A1).** The test page dismisses the splash once `window.TT` exists
-  (`DWOpening.dismissForTesting()`), so t60 and t61 run again. Then the whole suite on Jerry's PC.
-- [x] **CU-29** The 373 ms stall on the day-1 last kill (AG-A6). Profile it on Jerry's GPU (`tools/cpu-profile.mjs`
-  around `beginWaveFinisher` / `startPrep`), fix your part, hand Claude the rest.
-- [x] **CU-30** Load and shell (CU-A3, CU-A7): warm and cold title times on Jerry's GPU against 5 s / 15 s, and the
-  title menu's 45 fps (the live pre-roll, AG-15). A favicon, so the two 404s go.
-- [x] **CU-31** **D-30 and D-31.** Take out the morning save (`writeDayStart`, `loadDayStart`, `clearDayStart`,
-  `tt_day_start`) and its tests (check out with `--review`). Stop clearing `tt_death_log` on a new game.
-- [x] **CU-32** Scratch files (CU-A8): ask each author with `crew.mjs request`, then remove what they OK
-  (rule 3). Claude says yes to anything of his.
-- [x] **CU-33** The death screen after a real death, not the dev `rip` (CU-A9). Fix it if it doesn't show.
-- [x] **CU-35** (was AG-17; Antigravity is out for tonight) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's
-  GPU from a fresh profile (survive; die and Play again), with Antigravity's own harness: `qa/run-ag15.mjs` and
-  `qa/run-ag15-deep.mjs` (hardware GPU over CDP, see `qa/README.md`). Time the alarm to first contact and the wave from
-  first shot to last kill. Fps at the menu, prep, the wave and the finisher. Shots of every step, and of the day-1
-  assault cave at night during the wave (the alarm brings real night now, D-28), NVGs off and on, for Claude's CL-48.
-  Report `qa/2026-09-25-CU-35.md` plus the handoff; shots in `qa/shots/2026-09-25-CU-35/`. You may write in `qa/` for
-  this. Say plainly what you couldn't check.
-- [x] **CU-34** After CU-35: full `npm test` on Jerry's PC, commit and push everything checked out, numbers in
-  your handoff.
-- [x] **CU-27** Day-1 audit → `handoffs/audit-day1/cursor.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the full `npm test` (every
-  failure: test name and first error line; the panel says 35 fail), boot and load time cold and warm
-  against the budget, every console error and warning in a day-1 run, saves and resume (`tt_day_start`,
-  `tt_death_log`, Play again, quit and come back), a CPU profile of the day-1 wave (`tools/cpu-profile.mjs`),
-  and scratch files left in the repo (`crew/_gb16_*`, `tools/_f*.txt`, `gen-ag9.*`...). Check in with
-  `--touch "handoffs/audit-day1/cursor.md"`.
-- [~] **CU-26** (parked by D-32: day-1 fps is fine on the 5080) Profile a day-1 firefight on the pistol, the uzi and the flamethrower (`tools/cpu-profile.mjs`): the top
-  costs per frame, and what the draw calls are. Hand the list to Claude and Grokbot.
-- [x] **CU-25** Play again after a death starts on day 1. The morning ledger (`tt_day_start`) currently
-  resumes on Play, so a cave death came back as day 2. A death's Play again is a new run. Quitting
-  to the menu already clears the ledger. Do not resume it from Play again.
-- [x] **CU-24** A fresh playthrough shows a locked tombstone. `tt_death_log` in localStorage is a
-  lifetime collection, so old deaths stay unlocked. Clear it when a new game starts.
-- [x] **CU-23** Do this first: a restore point. Commit and push exactly what's on disk now, with the
-  message "Restore point before the night shift (Jerry, 2026-09-24)". Put the commit hash in your
-  handoff so anyone can get back to it.
-- [x] **CU-19** The bench's build scenario placed 0 walls (AG-9b: `beginPlaceClick` without
-  `commitBuildDrag`). Fix it, and make the numbers an average over the run's last 10 s, not the last
-  second. Tell Antigravity (AG-9c).
-- [x] **CU-20** Measure (D-23): count the scene's objects, visible meshes and draw calls by kind
-  (terrain, trees, props, buildings, zombies and their parts, particles, decals, UI sprites) in
-  megaswarm and in a day-5 fight. A table in your handoff. No fixes.
-- [~] **CU-21** (night shift over; parked 01:40Z) Through the night: commit finished work every hour or so (only what's been handed
-  off; never half-done work), with the handoff names in the message.
-- [~] **CU-22** (night shift over; parked 01:40Z) Before morning (about 13:00 UTC): full `npm test`, commit, push, and the numbers in
-  your handoff for Jerry. t60/t61 now unmute before they start; if they still fail, paste the first
-  failing line.
-- [x] **CU-14** Commit what landed after CU-13: GB-21 (`index.html`, t56) and ChatGPT's GP-13 recheck
-  (`ui/replays.browser.mjs` and his reports). Small: do it first.
-- [x] **CU-15** An honest FPS counter and a `megaswarm` benchmark. Jerry spawned 500 zombies and the
-  counter said 20 FPS when it felt like 4. (a) The counter reports from real frame times: the
-  average over the last second, the 1% low and the worst frame, and it counts hitches over 50 ms.
-  (b) A `megaswarm` command in the debug console that spawns 500 zombies around a fixed spot
-  with a fixed seed: the all-out-chaos benchmark. It goes past `MAX_ZOMBIES` on purpose; ask
-  Grokbot for a spawn path that allows it. (c) `tools/bench.mjs` runs megaswarm for 30 s and
-  prints the four numbers, so anyone can compare before and after a change.
-- [x] **CU-16** Measure, don't fix: after CU-15, profile a day-5 fight and placing base-build pieces
-  (Jerry: 45 FPS, down to 30 with big hitches). Report the top costs per frame with numbers, and
-  what causes each hitch (a guess to check: the zombies' pathfinding being rebuilt on every
-  placement). Claude decides the fixes from your report.
-- [x] **CU-17** Antigravity's AG-9 could only run megaswarm: there's no way in to a day-5 fight or
-  to placing pieces. Add both to `tools/bench.mjs` as scenarios (`--scenario day5`, `--scenario
-  build`): set the day, start the wave, and place ten pieces through the real placement path, then
-  print the four numbers. Tell Antigravity the commands (AG-9b).
-- [x] **CU-18** Measure, don't fix: megaswarm ran at 1.6 fps on Jerry's GPU (worst frame 634 ms, 58
-  hitches). Take a CPU profile of it (the DevTools Profiler over CDP works headless) and report
-  the top functions by self time, and how the frame splits between the zombie update, physics,
-  and drawing. Claude decides the fixes from it.
-- [x] **CU-5** Phase 1 core: the collider grid, the on-screen error card, a save at the start of
-  each day. After CU-16.
+- [ ] **CU-46** **First. The studio renders scenes (D-41).** After CL-63. `node tools/studio.mjs scene
+  <scene.json>` into `review/<scene name>/vN/`: every actor drawn (the marine as the `marine` rig, not the scale
+  post), the camera following the scene's middle so the travel shows, a strip of side-on tiles plus a top-down row
+  (the path and where each actor is), and the video (real speed, quarter speed; side, then the game's camera). Mark
+  a tile red where `studio/scene.js` flags a check (hold gap, foot slide, speed out of range) and put the worst of
+  each in `stats.json`. The player does the maths (`createScene`, `seek`, the `checks` it returns); the renderer
+  only draws. Unchanged scene, no new version.
 
 ### Grokbot — combat
 
-- [x] **GB-55** t4 fails on the live game since GB-46 made it start a real match ("camera up 16.4 m and back 41.2 m from
-  the marine": the insertion camera, like GB-49's t58). Re-base it the way you did t58; don't loosen it.
-- [x] **GB-56** **Play the 20 nights through, headless.** With GB-53's plans, GB-50's hits and GB-52's blades: run nights 1
-  to 20 with a scripted marine at the HQ (godmode off where you can, on where you must) and log each night's length, the
-  pushes and breathers, the worst pile-ups, stuck or lost zombies, and what killed him. Fix what drags or breaks; put the
-  table in the handoff for ChatGPT's GP-41 and for Claude.
-- [ ] **GB-59** **After GB-58. The fog cull (CU-42).** At the 48 cap about 41 zombies are past the night fog (far 65 m)
-  and still drawn: three.js traversal and draw submission is the 48-zombie frame. Inside the zombie update, skip drawing
-  and animating a zombie past the fog's far distance plus a margin (bring it back as it comes in; never cull one that is
-  a threat, a spit holder with a line, or the guardian). Measure before and after with qa/run-cu42.mjs on the GPU (ask
-  Cursor), and keep every test green. If it isn't clean and small, leave it for after Saturday.
-- [>] **GB-58** **GB-56's leftovers.** The one spider lost on night 12 (you thought the ammo kiosk): find it and fix it,
-  with a check in t80. Then nights 13-15 run 11-12 min against 6-9 for their neighbours: if the length is the last
-  push's stragglers, not the fight, tighten it; if it's the fight, leave it and say so in the handoff.
-- [x] **GB-57** **After GB-56. Bounties, the combat side (D-37).** From night 2, each prep picks one or two POIs
-  (not the one nearest the HQ, not the same as yesterday's) and posts guards there like GB-43, sized to the night: 3-4
-  early, up to 6-8 with a specialist later. Publish `bounty-posted` {kind, index, reward, guards} when they're placed and
-  `bounty-done` {kind, index, reward} on that post's `poi-cleared`, and pay the reward then (skulls into the bag, so it
-  still has to be banked). Rewards per D-38. A bounty that isn't cleared by the alarm just ends:
-  its guards join nobody and go. Contract in docs/contracts.md for ChatGPT. New test, `--review`.
-- [x] **GB-50** **S1 for Saturday (Jerry, item 6).** Zombies clip through the marine when they attack. Hold every attacker
-  on a contact ring round the marine (they crowd him, they never stand inside him), and make a hit **land**: the
-  marine is knocked back along the blow (a short slide, more for a brute), stumbles for a beat (a lurch in the
-  body, aim thrown off a little, a quick camera jolt), and a big hit can put him on one knee. Nothing takes control
-  away for more than a moment. New test, `--review`.
-- [x] **GB-51** Zombies need an idle (Jerry). A zombie with nothing to chase (the POI guards, a zombie waiting or lost)
-  sways, breathes, turns its head, shuffles a step now and then, each with its own timing so a group never moves
-  in step. The walk and attack stay as they are.
-- [x] **GB-52** The knife and the chainsaw are a bit too strong (Jerry). Bring both down so the guns stay the main
-  answer: less damage per hit on the bigger kinds, a longer knife recovery, the chainsaw's fuel and heat mattering.
-  Numbers in the handoff, before and after, per kind. Agree the chainsaw's price with ChatGPT (GP-41).
-- [x] **GB-53** **Waves 1 to 20, as fun as they can be (Jerry, item 1).** Play each night's plan through
-  (`waveComposition`, the director, `docs/specs/difficulty.md`) and make every night feel different: a new kind
-  or a new trick every two or three nights, a set piece now and then (a brute night, runners from two caves, a
-  bomber pack), rests between the peaks, and a real climb to 20. Days 1-3 teach, 4-10 build, 11-20 test. Keep
-  D-29's day 1. Write the 20 nights as a table in `docs/specs/difficulty.md` (kinds, counts, caves, the trick) and
-  send it to Claude, who writes the music to it (CL-38), and to ChatGPT for the money (GP-41). `--review`.
-- [x] **GB-54** **After GB-50.** The guardian (Jerry, item 3): the grab, the drag to the cave and the chase, and the
-  tentacle creatures in the pit, as polished as they can be. Smooth, heavy moves (no snapping or popping between
-  poses), the marine's body reacting to the grab, the tentacles reaching with weight and follow-through. Claude
-  fixes the black specks over the pit's runes (CL-53); tell Claude if any of those meshes are yours.
-- [x] **GB-39** **S1 (GB-A1).** Fighting the wave at its own cave mouth must not poke the cave: no poke from the
-  wave's assault caves while it is spawning or its zombies are in the mouth, and a round that hits a zombie
-  doesn't count. t59 keeps passing.
-- [x] **GB-40** **D-29.** Day 1 is 15: 7 or 8 claw up out of the ground in the treeline 35 to 60 m from the HQ, out of
-  the camera's view and never within 25 m of the marine; the rest walk out of the day's cave. No cave role for
-  day-1 shamblers. Don't spawn a zombie on top of a marine standing at the mouth (GB-A7). Update the wave
-  preview (`total`) so the briefing says 15.
-- [x] **GB-42** Day-1 skulls you can see and keep (GP-A1, GB-A3), with ChatGPT (GP-33): no 8-value pooling on day 1, so
-  the first kill drops a skull; skulls don't expire while the wave is on; at the finisher the unpicked ones fly
-  to the marine.
-- [x] **GB-43** D-32: two or three shamblers at the POI nearest the HQ on day 1, standing guard until you come.
-  A normal kill with normal skulls. Tell ChatGPT the POI for the coach line (GP-35).
-- [x] **GB-44** D-32 revises D-26: the first cave poke of a run is only a warning (the screech, the eyes, a camera
-  nudge); the second one within 20 m comes for you. The chase goes round static props and crashes through builds
-  instead of passing through them (GB-A6, GB-A8). t59 updated, `--review`.
-- [x] **GB-45** Your seven probe checks (t0, t1, t2, t3, t4, t6a, t8) each get one or two real assertions on what they
-  already print (GB-A9).
-- [x] **GB-47** t71 fails on the live game: it counts GB-43's day-1 POI guards with the wave ("14 kills, 14 skulls
-  on the ground (16/16)", "bag +15 skulls (17)"). Make t71 leave the guards out, or clear them first; don't loosen
-  what it checks about the wave. `--review`.
-- [x] **GB-46** Builds and turrets are yours: the four odd things GB-45's probes print. For each one, fix it if it's a
-  bug, or assert it if it's meant; say which in the handoff. (1) t8 never starts a match (the Play click has no
-  callsign), so its wave part tests nothing. (2) t2/t4: every aimed placement comes back valid=false placed=0, and
-  t4's aim lands one cell off (0,-3 for dz -4); check it in a started match, not idle. (3) t1: `placeRefusalFor('light')`
-  on the platform cell says "that is the cabin", but `placeBuildAt('light')` puts it on the ground, not the deck.
-  (4) t3: turrets land at lv0 on platform-topped cells, and a railing on wall+floor is refused although a floor is
-  there. Don't touch the cabin or the world. `--review`.
-- [~] **GB-48** (moved to Cursor as CU-36) Warm the one-time first-use stalls into the staged pre-roll: the finisher's two
-  emissive variants (CU-29) and the goggles' post effect (CU-35: a 200 ms frame the first time the NVGs go on).
-  Prove it on Jerry's GPU with Cursor's visible-window tools (CU-30 fixed them to use the real GPU).
-- [x] **GB-49** (next session) t58 fails 3 on a clean run (CU-34): `arc does not point back into the camera/marine
-  view (dot=-0.69)`. Fix the game or the test, whichever is wrong; don't loosen it.
-- [x] **GB-38** Day-1 audit → `handoffs/audit-day1/grokbot.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: the wave director's day-1 plan
-  (how many, which kinds, when), zombie behaviour (stuck, bad paths, spawning in view, clumping), the
-  starting weapons and ammo (feel, damage, reloads, the knife), building and turrets, the cave guardian
-  rules (D-26), how you die and the finisher trigger, and the difficulty against `docs/specs/difficulty.md`.
-  Check in with `--touch "handoffs/audit-day1/grokbot.md"`.
-- [~] **GB-37** (parked by D-32: AG-15 measured 58.8 fps with the flamethrower on the 5080) FPS drops in firefights, worst with the flamethrower (Jerry). In `updateFlameStream`: draw the
-  blobs as one InstancedMesh per stage material (up to 140 meshes are 140 draw calls today); gather the trees
-  near the player once per frame instead of testing every blob against all 430 trees; pool the ground
-  fires and their meshes. Bench before and after (`tools/bench.mjs`), then AG-14.
-- [x] **GB-35** The guardian chase, revising D-25. He comes out only when a shot goes into the cave
-  and the marine is within 20 m. He comes out after the marine at a crazy speed. The player can try to
-  run, but the guardian is far too fast to outrun (Jerry, in chat to Claude: "he is way too fast";
-  earlier: "he will race out at a crazy speed", D-25). Claude's correction: an earlier copy of this
-  line said the marine should gain ground; that was a misreading. On a leg grab, the camera follows the guardian dragging him to the mouth, then the
-  thrown-out cutscene plays. This path does not play the crawl-in snatch.
-- [x] **GB-36** A purchased gun comes with full ammo. Starting spare capacity is ×1.4 (Jerry confirmed
-  the term: not double). Tell ChatGPT if the kiosk needs a new line.
-- [x] **GB-34** t34 "thrown in (open)" fails under `--jobs 2` or more and passes alone: fixed waits on a slow
-  machine. Poll instead (`until(cond, ms)`, as t60 and t61 now do). Same pass over your other tests with fixed waits.
-- [x] **GB-33** t35 "jab lands" fails on its own (not a load flake): 1.1 s after H the MedPen is still
-  in hand (health 91, so the heal landed). Fix the test's wait or the pen's timing; say which.
-- [x] **GB-32** D-25: a cave poke is the cave grab. Replace the GB-26/27 poked-guardian fight with: the
-  hit trigger (as now) plus the player within 45 m and in sight of the mouth → the immortal cave
-  thing races out and the cave scripted death plays. Keep once-per-cave-per-day; remove the spawn,
-  leash, half cash and retreat. Update t59, and check t36/t37 still pass.
-- [x] **GB-31** The knife is far too strong (Jerry). First measure: damage per swing, reach, arc, swing
-  speed, how many bodies one swing hits, and kills per second against a day-3 crowd, next to the
-  guns. Then propose the fix in your handoff with before/after numbers (Claude approves it), and
-  build it with a test.
-- [x] **GB-28** Cheaper far zombies (D-23), measured with `node tools/bench.mjs --headless` before
-  and after: zombies past ~40 m from the camera don't cast shadows, and their body parts don't
-  update matrices they don't need (a far zombie can skip `updateMatrixWorld` on limbs that aren't
-  animating). Nothing visible up close; no gameplay change. t5-t10 and t53 still pass.
-- [x] **GB-29** A proposal only, for Jerry's morning: difficulty without changing horde sizes
-  (Jerry). Per-day speed, health and damage for each zombie type, how many are up at once, and
-  the gaps between bursts, days 1-20, so days 1-3 feel like a slow start (Call of Duty Zombies)
-  even with 20-100 bodies. Coordinate the reward side with ChatGPT (GP-25). A table in
-  `docs/specs/difficulty.md`.
-- [x] **GB-30** t35's "9mm restocked" line fails since the pistol moved to .45 (GB-23). If the test is
-  yours, update it to the .45; if it's ChatGPT's, leave it (GP-21).
-- [x] **GB-22** Take out the death replay (D-20): the four replay helpers, the `scripted-death-replay`
-  event and the replay path in the scripted kill. The live cave and pit deaths stay exactly as
-  they were. Retire t56 with a one-line reason in its header, and check t36/t37 still pass.
-- [x] **GB-23** The pistol gets its own ammo, .45 (it shares the Uzi's today). Its own ammo pack
-  and price; tell ChatGPT the id for the kiosk and the strings.
-- [x] **GB-24** The mortar camera: zoomed in while the arc points back at the marine, the camera
-  freaks out. Find it and fix it, with a test.
-- [x] **GB-26** Build D-22: the guardian comes out when you shoot into a cave, with its test (the
-- [x] **GB-27** D-22, corrected: pokes also work in prep (daytime exploring), except while a modal
-  is open; a poked guardian goes back into the dark when the alarm sounds, not at prep. Add a
-  prep poke and an alarm return to t59.
-  three-hit trigger, the leash, the return, the two-a-day cap, half cash, no first-blood, and
-  the `cave-guardian` event phases). The animation stays as it is for now: that's phase 4.
-- [x] **GB-25** A proposal only, in `handoffs/requests.md`: shooting into a cave. Jerry wants the
-  guardian to run out after you. What comes out, how far it chases, whether it can die, how it
-  goes back, and the screech (the sound is Claude's; say when it should play). Claude decides.
+Nothing queued.
 
 ### ChatGPT — what the player reads and decides (GPT-ASTRA 6, High)
 
-- [x] **GP-37** **The end of a night (Jerry, item 10).** The dawn card becomes the **Night N Complete** card: no "First light"
-  eyebrow; the title is "Night {n} Complete"; the night's numbers stay; two buttons, **Next Night** and **Proceed to
-  Morning** (Proceed is the default). Next Night calls `loopNextNight()` and Proceed calls `loopMorning()` (Claude
-  adds both in `index.html` with CL-51; until then they log). Keep the pause and the input guard. Esc is Proceed.
-- [x] **GP-38** A small **camp cleared** banner when the last zombie at a POI dies (Jerry): the camp's name and
-  "Cleared", two seconds, out of the way. Claude's new two-second stinger plays with it (CL-52); publish a
-  `poi-cleared` game event with the POI's name if there isn't one.
-- [x] **GP-39** No day missions popping up by themselves (Jerry). "Check the ranger camp", "medical supplies" and the like
-  stop appearing on their own: nothing about a site shows until the marine is close enough to see its **E** prompt.
-  The E prompt stays. Coach lines that point at a site go too, except GP-35's first line on day 1.
-- [x] **GP-40** **Restock all ammo** refills the grenades too, at the grenades' price (Jerry).
-- [x] **GP-42** **Tonight's scouting report (D-37).** In prep, the HQ board (the briefing) shows tonight's plan from
-  `TT.getWavePreview().night`, frozen at prep: the caves by name, how many pushes, the trick in a few words ("runners
-  from two caves", "a bomber pack"), and the rest nights marked as rests. Tonight's caves get a small mark on the
-  minimap during prep. Nothing pops up (GP-39): the report is where the player goes to read it.
-- [x] **GP-43** **After GB-57. Bounties on the HQ board (D-37).** List the day's bounties on the board: the camp's
-  name, the reward, "before the alarm". Once the board has been read, the camp gets a minimap mark. On `bounty-done`, a
-  small notice in GP-38's stack ("Bounty: Trapper's Camp +40 skulls"). A bounty still open at the alarm quietly drops off.
-- [x] **GP-41** **After GB-53.** The economy and balance for nights 1 to 20 (Jerry, item 4): what a night pays against
-  what the next one needs you to buy. Every night should leave the player able to buy one thing that matters, and
-  the kiosk's prices should climb with the waves. Work from GB-53's table; agree weapon numbers with Grokbot
-  (GB-52). Numbers in the handoff.
-- [x] **GP-31** A tracked objective must not hide the kiosk or bank prompt, or the coach, on narrow screens
-  (GP-A2, `ui/hud-layout.css`).
-- [x] **GP-32** Polish (GP-A7, GP-A8, AG-A7, AG-A8, AG-A9): the kiosk's guns in price order after the owned ones; the death
-  list's locked ways as badges, not "????"; the day-clear banner clear of the minimap; the menu footer out of the
-  callsign at short heights; the menu block sitting on the cabin wall, not the roof wire.
-- [x] **GP-33** The day-1 economy (GP-A1, GP-A5), with Grokbot (GB-42): the coach's first card on the first skull; the
-  streak bonus pays what it says (carry the fraction, don't round it away); the kiosk and briefing say what day 1 pays.
-  Quit to menu says it ends the run (D-30).
-- [x] **GP-34** After CL-41: the dawn card (D-32). After the finisher hands the camera back: kills, skulls picked up,
-  best streak this night, one tip, and Continue, which opens tomorrow's briefing. Short, skippable, `ui/strings.js`.
-- [x] **GP-35** After GB-43: the coach's first line on day 1 points to the guarded POI ("Shamblers at the <POI>: go and
-  clear them"), then the pickup and bank cards follow as now.
-- [x] **GP-36** Strings (GP-A9): move the older screens' copy into `ui/strings.js` (the day banners, the alarm, "Wave
-  Day", "Zombies left", "Grace", the menu and pause text), and retire `menu.studio` and `legacy.menu.tagline`.
-- [x] **GP-30** Day-1 audit → `handoffs/audit-day1/chatgpt.md`. Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: every word and screen a
-  first-time player sees on day 1: the menu, loading, the tutorial and coach, the briefing, the HUD,
-  objectives, prompts and banners, the kiosk and the day-1 economy (can you afford what day 1 needs?),
-  the audio cues' timing, and the dawn summary. Also: copy that is not in `ui/strings.js`, keys nothing uses
-  (`menu.studio`, `legacy.menu.tagline`), text that overlaps or gets cut off. Check in with
-  `--touch "handoffs/audit-day1/chatgpt.md"`.
-- [x] **GP-28** Jerry's browser kept the old `assets/intro/opening.js` (with `skip.onclick`) against the new
-  `index.html` (no Skip button): the script threw at line 57, the video ended into nothing, the menu never
-  came, though the game (and its music) loaded. Claude reproduced it; Ctrl+Shift+R cures it. Stop it
-  happening: version the opening's `<script>`/`<link>` URLs in `index.html` (for example
-  `opening.js?v=gp28`) and bump the tag whenever those files change. Also make `opening.js` tolerate a
-  missing optional element instead of throwing before it wires `ended`.
-- [x] **GP-29** From GB-36: `ui/strings.js` `shop.hint.weapons` still says a bought gun comes with one
-  loaded magazine; it now comes with full ammo. Update `ui/restock.browser.mjs` to Grokbot's new numbers
-  (his GB-36 handoff has them).
-- [x] **GP-27** Take away the splash skip. Remove the Skip button (`openingSkip` in `index.html`,
-  wired in `assets/intro/opening.js`) and the Esc skip. The splash plays through. Tests and
-  `tools/shoot.mjs` may still dismiss it from code; the player cannot.
-- [x] **GP-26** Your browser tests: find fixed waits that assert on timing (fades, panels, prompts) and poll
-  instead, so `npm test` passes under `--jobs 3` as well as alone. Report which tests you touched.
-- [x] **GP-21** t35 expects the pistol to restock 9mm; since GB-23 it's .45. Update the expectation
-  (it's following an approved change, not weakening the test), with Grokbot if it's his.
-- [x] **GP-22** The kiosk, phase 2: tabs (Weapons, Ammo, Builds, Gear), and "ammo for the guns you
-  own" first, so the player doesn't scroll. Before/after shots.
-- [x] **GP-23** The HUD: keep the centre of the screen clear (Jerry). Anything that sits in the middle
-  during play and doesn't need to, move it to the edges. Before/after shots at desktop and 390 px.
-- [x] **GP-24** A proposal only, for Jerry's morning: the tutorial day. Offered on the first run only,
-  Skip always there, the choice remembered, replayable from the menu. What it teaches, in what
-  order, with the coach hints you already have. `docs/specs/tutorial.md`.
-- [x] **GP-25** A proposal only, for Jerry's morning: balance through skulls, not horde size. What a
-  kill pays by type and day, what the kiosk costs, and what a player can afford by the end of days
-  1, 3, 5 and 10. With Grokbot's GB-29. `docs/specs/economy-balance.md`.
-- [x] **GP-14** Take out Watch again and the catalogue tile buttons (D-20), with their strings and
-  tests. After GB-22, or together: the page must not call a helper that's gone.
-- [x] **GP-15** Bug: after clicking Search on the ranger cache, the marine is stuck until you click
-  Stop tracking. Find it (the hold and the tracking may be fighting; bring Cursor in if it's the
-  CU-11 interaction), fix it, test it.
-- [x] **GP-16** The Ready panel sometimes overlaps the killstreak. Move it into the left panel with
-  Dead-Wave and health, so the center of the screen stays clear.
-- [x] **GP-17** Blood Moon is now **Ember Night** in every string the player sees: HUD, briefing,
-  banners, the wave preview. The code's own names (`bloodMoon`) can stay.
-- [x] **GP-18** In the kiosk, a Restock button next to each weapon's Buy that fills just that gun's
-  ammo, plus Restock all. (The full kiosk cleanup is phase 2.)
-
-- [x] **GP-20** When an objective completes, call `AudioSys.musicCue('objective')` (D-21: you say
-  what happened, the music owner picks the sound). One line and a check in your browser test.
+Nothing queued.
 
 ### Antigravity — the crew's eyes (Gemini 3.1 Pro)
 
-- [x] **AG-19** **The studio on Jerry's GPU (D-40).** After CU-44 and CL-59. Render the guardian's current clips and one
-  reference (`--vs Zombie_Scratch`) with `tools/studio.mjs` on Jerry's PC. Check: the strip matches the game (same rig,
-  colours, proportions and timing as the guardian in a real chase, from your own in-game shots), the video plays, the
-  stats look sane, and how long each render takes. Report with the strips side by side with your in-game shots.
-- [x] **AG-18** **The showcase dry run (back on Gemini 3.1 Pro, 2026-09-25).** On Jerry's GPU in a visible window, from a
-  fresh profile, play the demo the way a guest would see it: the title, day 1 prep (read the HQ board: tonight's scouting
-  report), the alarm's sky shot, the night 1 wave, the last kill and the Night 1 Complete card, Proceed to Morning, day 2
-  (take the bounty on the HQ board, clear it, bank the skulls), night 2, then Next Night into night 3. Shots of every step
-  and a short capture of one alarm and one finisher. Write down anything that looks wrong, reads badly, stalls, or plays
-  a sound at the wrong time, with the time and a shot. Report to Claude; change no game code.
-- [~] **AG-16** (parked 03:30Z: Antigravity is out for tonight. Its shots are in `qa/shots/2026-09-25-AG-16/`; Claude reviewed them: the NVG-on and fog shots match the plain ones, so the scene wasn't at real night. The night-cave shots move into CU-35.) Shots for Claude (CL-48): the day-1 assault cave from 30 m and 10 m at 22:00, NVGs off and on, and one
-  in the fog. Report to Claude.
-- [~] **AG-17** (moved to Cursor's CU-35, 03:30Z) After CL-43, GB-44 and GP-34: play day 1 twice on Jerry's GPU from a fresh profile (survive; die and
-  Play again). Time the alarm to first contact and the wave from first shot to last kill. Fps at the menu, prep, the
-  wave and the finisher. Shots of every step. Say plainly what you couldn't check.
-- [x] **AG-15** Day-1 audit → `handoffs/audit-day1/antigravity.md`, shots in `qa/shots/2026-09-25-AG-15/`.
-  Audit only: change no game code. The how and the report format are in `handoffs/audit-day1/README.md`. Look at all of day 1, but go deepest here: play day 1 start to finish on Jerry's GPU from a fresh profile, twice: once to survive
-  the wave, once dying on purpose and pressing Play again. A screenshot for every problem. Fps at the menu,
-  while scavenging, in the wave with the flamethrower held, and in the finisher. Anything that looks wrong,
-  confusing, ugly or unfair. Sound: note any cue that doesn't fire or fires at the wrong time (the console and
-  `?debug=1` can tell you even without hearing it). This once you write outside `qa/`: your report goes in `handoffs/audit-day1/antigravity.md`.
-  Check in with `--touch "handoffs/audit-day1/antigravity.md, qa/shots/2026-09-25-AG-15/"`.
-- [~] **AG-14** (parked by D-32) Jerry's GPU: fps in a day-1 wave with the flamethrower held for 10 s, before and after GB-37.
-- [x] **AG-13** After CL-33 and GB-35: shots of the finisher staying on the last zombie, and of the
-  guardian drag into the thrown-out cutscene. No splash-skip in the player path.
-- [x] **AG-9c** The build bench again after CU-19, on Jerry's GPU.
-- [x] **AG-10** Shots for Jerry's morning, on his GPU: the wave finisher (the red pulse and the kill
-  cam, three frames), the kiosk restock buttons, the Ready panel under health, an Ember Night banner,
-  and a cave mouth from the air at night. `qa/shots/2026-09-24-AG-10/`, with one line per shot.
-- [x] **AG-12** Shots on Jerry's GPU, for his morning: the new finisher camera (CL-31) at 30%, 60% and 90%
-  of the relief sting (orbit, orbit, the marine's face), and the marine's face with no helmet (CL-32):
-  front and three-quarter. Compare with `qa/shots/2026-09-24-CL-32/face_before_after.png`. Also the pit's
-  bubbles from the shore (CL-20), and the watchtower deck from the ladder top (CL-19).
-- [x] **AG-11** Megaswarm and the day-5 fight on Jerry's GPU after GB-28 and after CL-28 land: the
-  numbers next to AG-9's.
-
-- [x] **AG-9** Real-GPU numbers on Jerry's machine after CU-15: `tools/bench.mjs` (megaswarm), a
-- [x] **AG-9b** The day-5 fight and build-piece numbers, after CU-17 gives you the commands.
-  day-5 fight, and placing ten build pieces. The counter's four numbers for each. Report to Cursor
-  and Claude.
-- [x] **AG-7b** The GP-7 prep checklist again: Play, wait until `body` no longer has `deploying`
-  (the landing), then check the goals and tick them (bank, ammo, repair, alarm). Report to
-  ChatGPT.
-- [x] **AG-8** The pit's rune ring on a real GPU (CL-14): the `pit` view, from the bank, and from
-  overhead. Compare with `qa/shots/cl14/`. Report to Claude.
+Nothing queued.
 
 ### Claude — lead; the world and wildlife (Opus 5.5)
 
-- [x] **CL-57** **The studio (D-40): the spec.** Finish `docs/studio.md`: the clip JSON (tracks for joints and IK
-  targets, keys with easing, planted flags, events), how a rig registers (joints, rest pose, IK chains, budget), the
-  review folder (`meta.json`, versions, `latest`, `notes.md` layout), `stats.json`, and the render command's flags. One
-  worked example: the guardian's pounce as a clip.
-- [x] **CL-58** **The clip player.** After CL-57. `studio/clip.js` (sample, blend two, events, IK with planted feet, a live
-  target added on top) and `studio/rigs.js` (the guardian from `world/cave-guardian.js` registered first). The game and
-  the renderer use the same player. Unit tests on fakethree.
-- [x] **CL-59** **Reference motion.** After CL-58. The Quaternius UAL 1 and 2 clips (CC0, `Desktop\Animation Assets`) in
-  `assets/anim/reference/` (only what we use, compacted), a catalogue (name, length, loop), and `studio/retarget.js` to
-  play a reference on a humanoid mannequin next to our rig in the strip; timing notes for the guardian's beats (Push_Loop
-  and Walk_Carry_Loop for the drag, OverhandThrow for the throw, Zombie_Scratch for the grab). Licence file in the folder.
-- [x] **CL-60** **Jerry's notes onto the board.** After CU-44. `node crew/crew.mjs review`: lists `review/*/notes.md` with
-  notes newer than their latest render (on the panel as "Jerry's notes waiting"); `crew.mjs review take <asset>` turns
-  them into a task or a request for the asset's owner (from `meta.json`), and the answer goes under Jerry's note with the
-  version number.
-- [x] **CL-61** **Jerry's guide.** After CU-45 (CL-60 and AG-19 are in). `docs/studio-guide.md` in plain words: where to look, how to
-  write a note, what happens next, how to compare versions. One real example: the guardian's current drag rendered into
-  `review/guardian-drag/v1/`, ready for Jerry's first note. Then tell Jerry it's ready (`crew.mjs ask`).
-- [ ] **CL-62** **The guardian's animation through the studio (first real job).** After CL-61, and only on Jerry's go
-  (he said: once the tool is done and his part is explained). Rebuild the chase, pounce, drag, walk-out and throw as clips,
-  timed against the UAL references, one review folder each, until Jerry's notes say good.
-- [x] **CL-56** (Jerry's four, 22:45Z; D-39; `handoffs/2026-09-25-claude-CL-56.md`) The guardian rebuilt as its own rig
-  (a pale long-armed crawler: the bound, the pounce, the three-limbed drag, the walk-out and the throw), the pit's
-  arms as swept tubes that coil round his legs and chest, the alarm as one shot that holds the HQ, and the dawn at the
-  last kill with a banner instead of the card. Skulls on the ground after the night checked.
-- [x] **CL-50** The last kill (Jerry, items 7 and 8): the camera shot is **3 seconds**, cooler and more stylised; the relief
-  stinger is shorter to match; the marine stops following the cursor while the camera is away (no 360 spin).
-- [x] **CL-49** The alarm (Jerry, item 9): when the alarm is pulled the camera pans up to the sun setting and the moon
-  coming up, quickly, then back down to the alarm and the rest of the sequence. Take the alarm stinger out and keep
-  the siren (Jerry).
-- [x] **CL-51** **With GP-37.** `loopNextNight()`: straight into the alarm sequence (the sky is already dark, so the pan
-  shows the moon). `loopMorning()`: the camera pans up to the sunrise, then back down to the marine at his spawn
-  point, and the next prep starts. The sky holds the night until the player chooses.
-- [x] **CL-52** Audio (Jerry): the camp-cleared stinger two seconds, crossfading as the fight music fades out; the supplies
-  and airdrop stingers become short sound effects; the day track becomes a minimal, atmospheric five-minute loop
-  that sits under hours of play.
-- [x] **CL-38** **After GB-53's table.** The horde soundtrack for nights 1 to 20 (Jerry signed off day 1's sound): each
-  night's fight music follows its wave the way day 1's does, climbing with the nights.
-- [x] **CL-55** CU-39's two findings: the pit's rune bands drape over the drawn bed (the specks were bed triangles poking
-  through bands laid on sampleHeight), and the finisher's grade is a canvas filter (the saturation blend didn't happen on
-  Jerry's GPU, so it was a 90% grey sheet: the milky finisher). t81.
-- [x] **CL-53** The pit: the little black specks under the water that hide the runes (Jerry). Find what draws them and
-  fix it.
-- [x] **CL-54** Ideas to make the daytime more fun and more polished (Jerry, item 5), for Jerry to pick from.
-- [x] **CL-39** Day-1 audit → `handoffs/audit-day1/claude.md`. The world (terrain, water, caves, flora,
-  wildlife, night lighting), the music and the audio director, a code read of the day-1 path in
-  `index.html`, and the whole day against the flow test in `docs/plan.md`.
-- [x] **CL-41** The next prep starts when the finisher hands the camera back, not underneath it: `day += 1`, the banner
-  and the prep label move with it (CL-A5, GP-A3). Tell ChatGPT the hook for the dawn card.
-- [x] **CL-45** D-28: the sky follows the loop. Prep holds before dusk, the alarm brings the night on, the finisher
-  ends in dawn, and the next prep starts in the morning. One "Day n" on the HUD.
-- [x] **CL-42** Day 1's song, as good as it can be (CL-A3, CL-A4): re-formed for D-29's closer, shorter fight (the drop at
-  contact, the climax by the last few), sections that follow the wave, a seamless loop, and the fight loops played
-  through Web Audio.
-- [x] **CL-43** Day 1's stingers, as good as they can be: the alarm (now the nightfall too), the relief, the dawn, and
-  the cues, re-made in First Blood's voices and levelled against the new song.
-- [x] **CL-47** Day 1's calm music in the same voices: the menu and the prep day track, so day 1 is one sound (CL-A9).
-- [x] **CL-44** t50: 218 tree meshes against its limit; check it against CL-28 (CU-A2).
-- [x] **CL-46** Review the 12 handoffs waiting on me, and close the stale requests (DONE, WONT, LATER) (CL-A10).
-- [x] **CL-48** After CU-35: the caves at night (CL-A8), from its shots during a real night wave.
-- [x] **CL-40** After CU-27, GP-30, GB-38 and AG-15: read all five audits, merge them into one list, make the plan,
-  and take it to Jerry. The fixes go on the board once he agrees.
-- [x] **CL-35** (01:07Z, `handoffs/2026-09-25-claude-CL-35-36-day1-song-stingers.md`) Day 1's own fight song, "First
-  Blood" (`fight_day01`, 4:30 loop, 96 bpm half-time, chiptune; `tools/day1.py`, MIDI in `assets/soundtrack/`).
-- [x] **CL-36** (same) Chiptune stingers and cues (`tools/stingers.py`).
-- [x] **CL-37** (same) Levels: fight music about 5 dB down near and 2 dB far, the day-1 song fades in over 1.5 s,
-  flamethrower about 6 dB down. Also Jerry's splash/menu text removals (Caracal eyebrow x2, tagline, footer "Dead Wave").
-- [x] **CL-38** (after CL-42, and Jerry signs off day 1's sound) 20 fight songs, one per day, 4-5 minutes, looping. Waits on Jerry signing off day 1's sound.
-- [x] **CL-33** (done 23:03Z: the 360 now spans the whole sting; face push removed; t61 18/0) The finisher keeps the zoom on the last zombie for the whole relief sting. Remove the
-  pan and zoom onto the marine's face (the last 30% of CL-31). Jerry: it did not look as good as
-  he thought.
-- [x] **CL-34** (first pass 23:14Z, `handoffs/2026-09-24-claude-CL-34-chip-fight-loops.md`: five chip loops for the day table; special-night tracks still Suno) Fight music. Take the old fight beds out. Keep the stingers. Make loopable chiptune
-  arrangements of Jerry's Suno fight tracks so they sit with the game's existing tune. Do not
-  delete the Suno files until those loops are in and playing.
-- [x] **CL-29** (`handoffs/2026-09-24-claude-CL-29-31-alarm-fade-finisher-cam.md`) The alarm: a low rumble and camera shake for three seconds when it sounds.
-- [x] **CL-30** (same handoff) The fight music after the alarm sting: a 10 s fade from 0% to 50%, then distance
-  takes over (50% at 150 m, rising to full at 20 m).
-- [x] **CL-31** (same handoff) The finisher camera: a fast 360 around the last zombie for 70% of the relief sting,
-  then a slow pan and zoom onto the marine's face for the last 30%. The camera never goes inside
-  terrain or walls.
-- [x] **CL-32** (`handoffs/2026-09-24-claude-CL-32-marine-face.md`) The marine's face: real detail (eyes, brows, nose, mouth, stubble) for when the helmet
-  and mask are off, and more detail on the face covering.
-- [x] **CL-27** Wave music by day (Jerry): 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2, 16+
-  Tier 3 (`music.json` `waveByDay`).
-- [x] **CL-28** (part 1, `handoffs/2026-09-24-claude-CL-28-freeze-static-world.md`) Freeze the static world (D-23): trees, rocks, props, buildings and terrain stop
-  recomputing their matrices every frame. Megaswarm before and after.
-- [x] **CL-21** Music, part 1 (D-21, `docs/audio/cue-sheet.md`): the fight music starts on the
-  alarm with `sting_alarm`, jumps to the track's hit point, escalates by tiers, holds until the
-  last zombie dies, then `sting_clear` and the aftermath. The corny `fight_*` tracks leave the
-  pools. Built so Jerry's Suno files drop in as they arrive.
-- [x] **CL-17** (`handoffs/2026-09-24-claude-CL-17-caves-in-fog.md`) Cave mouths show as sharp black spots from the air, at night and in Ember Night: the
-  cave interiors most likely ignore the fog. Fade them with it.
-- [x] **CL-18** (`handoffs/2026-09-24-claude-CL-18-22-puddles-voices.md`) Puddles come out as half circles: probably laid flat on sloping ground, so the
-  downhill half is under the terrain. Fit them to the ground.
-- [x] **CL-19** (`handoffs/2026-09-24-claude-CL-19-20-tower-rails-pit.md`) The watchtower's railings don't stop the marine: give them colliders.
-- [x] **CL-20** (`handoffs/2026-09-24-claude-CL-19-20-tower-rails-pit.md`) The pit: the tentacles show from outside the water before the cutscene. Keep them
-  hidden in the hole until it starts, and send bubbles up over the hole. (The rumble comes with
-  the music and sound work.)
-- [x] **CL-23** Jerry's music in (`handoffs/2026-09-24-claude-CL-23-music-in.md`): all 22 pieces
-  converted and wired: tiers, Ember Night, the guardian, day skirmishes, the stings, and cues
-  ready for later.
-- [x] **CL-24** The music rhythm, Jerry's spec (`handoffs/2026-09-24-claude-CL-24-music-rhythm.md`):
-  one track at a time, the alarm sting alone then Tier 1 by proximity, the relief sting alone,
-  the briefing halves the music, Jerry's tracks 3x louder.
-- [x] **CL-25** The music, tuned by Jerry (`handoffs/2026-09-24-claude-CL-25-music-tuned.md`): 1 s gap,
-  60/70/100% by distance, fast fade into the relief sting, no aftermath, day fights by horde size.
-- [x] **CL-26** The wave finisher and the fight volume (`handoffs/2026-09-24-claude-CL-26-wave-finisher.md`):
-  the last kill of a wave gets a red pulse, the relief sting alone, slow motion and a kill cam.
-- [x] **CL-22** (`handoffs/2026-09-24-claude-CL-18-22-puddles-voices.md`) The cave guardian's voice: bind `dw-game` `cave-guardian` (D-22) to a warning
-  screech on `aggro`, a roar on `emerge` and a growl on `retreat`, from the mouth's direction.
-- [~] **CL-11** Night lighting that stays dark but readable: phase 3.
-- [~] **CL-7** The world bake: parked by D-2.
+- [x] **CL-63** **First. Scenes (D-41): the format, the marine rig, the scene player.** `docs/studio.md` §9 (the
+  `dw-scene/1` format), the marine registered as a rig (`studio/marine.js`: a stand-in built with the game marine's
+  joint offsets, plus `adopt` for the game's own marine), and `studio/scene.js`: actors on paths with keyed speed,
+  holds (reach, tow, lift), stride-matched clip rates, per-frame checks (hold gap, planted-foot slide, speed), seek
+  for the renderer. Unit tests. A demo scene the renderer can use until CL-64's.
+- [ ] **CL-64** **The guardian's grab and drag as the first scene; the game plays it.** After CU-46. The catch in
+  beats you can see (pounce, catch, pull down) instead of all in 0.45 s; the hand held on the marine's real ankle;
+  a heavy haul at a believable speed with the steps matched to it; the marine towed on his back, his leg lifted by
+  the hand. `review/guardian-grab-drag/`, then the game's cave drag switched from its hand code to the scene.
+  Then Jerry's notes.
+- [ ] **CL-62** **The rest of the guardian through the studio.** After CL-64. The chase, the walk-out and the throw
+  as scenes and clips the same way (the throw is a scene: the marine is in it), timed against the UAL references,
+  one review folder each, until Jerry's notes say good.
 
 ## Where things live
 

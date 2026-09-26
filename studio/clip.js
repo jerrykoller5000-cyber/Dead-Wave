@@ -204,7 +204,21 @@ function levelJoint(inst, joint, amt) {
   const tip = Math.asin(Math.max(-1, Math.min(1, _f.dot(_up))));
   joint.rotation.x = keep + (tip - keep) * amt;
 }
-export function applyPose(inst, pose, { targets = null, rootMotion = false } = {}) {
+// Solve one limb onto a world point (the scene player's lift, and applyPose below). `weight` < 1
+// eases from where the limb is now.
+export function solveChain(inst, name, target, weight = 1, pole = null) {
+  const ch = inst.def.chains[name], R = inst.R;
+  if (!ch || !R[ch.root] || !R[ch.mid]) return false;
+  const pv = pole || ch.pole;
+  _pole.set(pv[0], pv[1], pv[2]).transformDirection(inst.group.matrixWorld);
+  if (ch.exact && R[ch.end]) ikLimb(R[ch.root], R[ch.mid], R[ch.mid].position.length(), ch.lengths[1], target, _pole, weight, R[ch.end].position);
+  else ikLimb(R[ch.root], R[ch.mid], ch.lengths[0], ch.lengths[1], target, _pole, weight);
+  inst.group.updateWorldMatrix(true, true);
+  return true;
+}
+// `reach` (the scene player's holds): { chain: { at: Vector3 (world), w } } pulls a limb's target
+// toward a point, over whatever the clip says, even if the clip doesn't place that limb.
+export function applyPose(inst, pose, { targets = null, rootMotion = false, reach = null } = {}) {
   const def = inst.def, R = inst.R;
   // Everything back to rest first, so a joint the clip doesn't mention sits where the rig's rest
   // pose puts it, not wherever the last clip left it.
@@ -224,20 +238,26 @@ export function applyPose(inst, pose, { targets = null, rootMotion = false } = {
   // Limbs, in the order the rig lists them (arms after the spine they hang from is automatic:
   // the spine was posed above).
   for (const [name, ch] of Object.entries(def.chains)) {
-    const c = pose.chains[name];
+    const c = pose.chains[name] || null;
     const state = inst.plants[name] || (inst.plants[name] = { at: null });
-    if (!c || !c.ik) { state.at = null; continue; }
-    let target = resolvePoint(inst, c.ik, targets, _w);
-    if (!target) continue;
-    const plant = c.plant || 0;
-    if (plant >= 0.5) {
+    const rc = reach && reach[name] && reach[name].w > 0 ? reach[name] : null;
+    if ((!c || !c.ik) && !rc) { state.at = null; state.planted = false; continue; }
+    let target = c && c.ik ? resolvePoint(inst, c.ik, targets, _w) : null;
+    if (!target && !rc) continue;
+    const plant = (c && c.plant) || 0;
+    if (target && plant >= 0.5) {
       // Pinned where it was when the plant came on: the body moves over it, it doesn't slide.
       if (!state.at) state.at = target.clone();
       target = _w.copy(target).lerp(state.at, Math.min(1, (plant - 0.5) * 2));
     } else state.at = null;
-    const pole = c.pole || ch.pole;
-    _pole.set(pole[0], pole[1], pole[2]).transformDirection(inst.group.matrixWorld);
-    ikLimb(R[ch.root], R[ch.mid], ch.lengths[0], ch.lengths[1], target, _pole);
+    state.planted = !!target && plant >= 0.5 && !rc;
+    let ikW = 1;
+    if (rc) {
+      if (target) target = _w.copy(target).lerp(rc.at, Math.min(1, rc.w));
+      else { target = _w.copy(rc.at); ikW = Math.min(1, rc.w); }
+    }
+    solveChain(inst, name, target, ikW, (c && c.pole) || ch.pole);
+    if (!c) { state.last = target.clone(); continue; }
     const level = c.level !== undefined ? c.level : (plant >= 0.5 ? 1 : 0);
     if (level > 0 && R[ch.end]) levelJoint(inst, R[ch.end], level);
     if (c.grip !== undefined && def.grip) def.grip(R, name, c.grip);

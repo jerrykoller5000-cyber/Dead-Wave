@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>scene preview</title>
+<style>
+html,body{margin:0;background:#1d2330;overflow:hidden;font:600 15px system-ui,sans-serif;color:#e8ecf2}
+canvas{display:block}
+.lab{position:absolute;padding:6px 9px;pointer-events:none;text-shadow:0 1px 2px #000}
+.lab b{font-size:20px}
+.lab .bad{color:#ff7070;font-weight:700}
+.tile{position:absolute;box-sizing:border-box;border:3px solid transparent;pointer-events:none}
+.tile.bad{border-color:#e04040}
+</style>
+<script type="importmap">{"imports":{"three":"../vendor/three/three.webgpu.js","three/webgpu":"../vendor/three/three.webgpu.js","three/tsl":"../vendor/three/three.tsl.js","three/addons/":"../vendor/three/addons/"}}</script>
+</head><body>
+<script type="module">
+// studio/scene-preview.html — Claude's quick look at a scene (CL-63), and a starting point for CU-46's
+// renderer: n side-on tiles through the scene, the camera following the bodies so the travel shows
+// against the grid, the time on each tile, and a red border with the check's name where scene.js
+// flags one (hold gap, foot slide, speed, snap).
+//   studio/scene-preview.html?scene=demo-drag&n=8&cols=4
+import * as THREE from 'three';
+import { loadScene, createScene } from './index.js';
+const q = new URLSearchParams(location.search);
+const name = q.get('scene') || 'demo-drag', N = +(q.get('n') || 8), COLS = +(q.get('cols') || 4);
+const json = await (await fetch('./scenes/' + name + '.json')).json();
+const refs = [...new Set(Object.values(json.actors).flatMap((a) => a.clips.map((c) => c[1])))];
+const clipJson = new Map(await Promise.all(refs.map(async (r) => [r, await (await fetch('./clips/' + r + '.json')).json()])));
+const sc = loadScene(json, (r) => clipJson.get(r));
+
+const W = innerWidth, H = innerHeight, rows = Math.ceil(N / COLS), tw = Math.floor(W / COLS), th = Math.floor(H / rows);
+const renderer = new THREE.WebGPURenderer({ antialias: true, forceWebGL: true });
+await renderer.init();
+// One tile at a time into the renderer's own canvas, each copied onto the sheet as soon as it's drawn
+// (viewports on one canvas came out of order with the WebGPU renderer).
+renderer.setSize(tw, th); renderer.setPixelRatio(1); renderer.shadowMap.enabled = true;
+const sheet = document.createElement('canvas'); sheet.width = W; sheet.height = H; document.body.appendChild(sheet);
+const ctx = sheet.getContext('2d');
+const world = new THREE.Scene(); world.background = new THREE.Color(0x2a3140);
+world.add(new THREE.HemisphereLight(0xbfd4ff, 0x3a3020, 1.0));
+const sun = new THREE.DirectionalLight(0xfff0d0, 2.2); sun.position.set(8, 14, 4); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -30, right: 30, top: 30, bottom: -30 }); world.add(sun); world.add(sun.target);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x4f7a3a, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; world.add(ground);
+{ const gh = new THREE.GridHelper(400, 400, 0x2d4a22, 0x3a5a2c); gh.position.y = 0.01; world.add(gh); }   // 1 m squares: travel reads
+const sp = createScene(sc, { parent: world });
+const cam = new THREE.PerspectiveCamera(30, tw / th, 0.1, 300);
+const c = new THREE.Vector3(), p = new THREE.Vector3();
+for (let i = 0; i < N; i++) {
+  const t = (i / Math.max(1, N - 1)) * sc.length;
+  const r = sp.seek(t);
+  // Frame everyone: the box round all the bodies, seen from the side (+X), far enough to fit it.
+  const box = new THREE.Box3();
+  for (const a of Object.values(sp.actors)) box.expandByObject(a.inst.group);
+  box.getCenter(c);
+  const size = box.getSize(p);
+  const fit = Math.max(size.z / cam.aspect, size.y) * 1.25 / (2 * Math.tan((cam.fov * Math.PI) / 360));
+  sun.position.set(c.x + 8, 14, c.z + 4); sun.target.position.copy(c);
+  cam.position.set(c.x + Math.max(6, fit + size.x / 2), c.y + 0.6, c.z); cam.lookAt(c.x, c.y * 0.8, c.z);
+  const col = i % COLS, row = Math.floor(i / COLS);
+  await renderer.renderAsync(world, cam);
+  ctx.drawImage(renderer.domElement, col * tw, row * th);
+  const bad = [];
+  for (const [kind, m] of Object.entries(r.checks)) if (kind !== 'bad') for (const [k, v] of Object.entries(m)) if (v.bad) bad.push(`${kind} ${k}${v.limb ? '.' + v.limb : ''} ${v.value.toFixed(2)}`);
+  const tile = document.createElement('div'); tile.className = 'tile' + (bad.length ? ' bad' : '');
+  Object.assign(tile.style, { left: col * tw + 'px', top: row * th + 'px', width: tw + 'px', height: th + 'px' });
+  const lab = document.createElement('div'); lab.className = 'lab';
+  lab.style.left = col * tw + 'px'; lab.style.top = row * th + 'px';
+  lab.innerHTML = `<b>${t.toFixed(2)}s</b>` + bad.slice(0, 3).map((b) => `<div class="bad">${b}</div>`).join('');
+  document.body.append(tile, lab);
+}
+window.__ready = true;
+</script></body></html>

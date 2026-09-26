@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import { loadClip, sampleClip, applyPose } from './clip.js';
 import { makeCaveGuardianRig, guardianGrip } from '../world/cave-guardian.js';
+import { makeMarineRig, adoptMarine, MARINE_CHAINS } from './marine.js';
 import guardianRest from './clips/guardian/rest.json' with { type: 'json' };
 
 const REG = new Map();
@@ -24,10 +25,14 @@ export const rigs = {
 };
 
 // A built body the player can pose: its root group, its joints by name, and its rest pose.
+// opts.group: a body the host already has (the game's own marine) is adopted instead of built:
+// its scale and pose are left as they are, and its rest is what it is now.
 function createInstance(def, opts) {
-  const group = def.build(opts);
-  group.scale.setScalar(opts.scale ?? def.displayScale);
-  const R = group.userData.rig || {};
+  const adopting = !!opts.group;
+  if (adopting && typeof def.adopt !== 'function') throw new Error(`rig "${def.name}" can't adopt a body (no adopt())`);
+  const group = adopting ? opts.group : def.build(opts);
+  if (!adopting) group.scale.setScalar(opts.scale ?? def.displayScale);
+  const R = adopting ? def.adopt(group) : (group.userData.rig || {});
   // Name every joint group so the damping and the renderer's snap check can report it.
   for (const [k, v] of Object.entries(R)) if (v && v.isObject3D && !v.name) v.name = k;
   const inst = { def, group, R, rest: new Map(), plants: {}, rootBase: null };
@@ -37,7 +42,7 @@ function createInstance(def, opts) {
   };
   capture();
   // The rest pose is a clip at time 0: joints a clip doesn't mention sit where it puts them.
-  if (def.rest) {
+  if (def.rest && !adopting) {
     group.updateWorldMatrix(true, true);
     applyPose(inst, sampleClip(loadClip(def.rest), 0));
     capture();
@@ -75,4 +80,15 @@ registerRig('guardian', {
   // Where the renderer stands its live targets (rig frame): the marine's ankle, in reach of a pounce.
   stage: { targets: { ankle: [0.4, 0.3, 2.6], carry: [0, 1.2, 0.85] }, marine: [1.6, 0, 2.2] },
   budget: { draws: 160, triangles: 8000 }
+});
+
+// --- The marine (studio/marine.js; the game's makeMarine() joint layout) ------------------
+registerRig('marine', {
+  build: () => makeMarineRig(),
+  adopt: (group) => adoptMarine(group),
+  displayScale: 1,
+  chains: MARINE_CHAINS,
+  head: null,
+  stage: {},
+  budget: { draws: 40, triangles: 2000 }
 });

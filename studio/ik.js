@@ -12,7 +12,12 @@ const _S = new THREE.Vector3(), _T = new THREE.Vector3(), _E = new THREE.Vector3
 const _v1 = new THREE.Vector3(), _v2 = new THREE.Vector3(), _v3 = new THREE.Vector3(), _v4 = new THREE.Vector3();
 const _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _qp = new THREE.Quaternion();
 
-export function ikLimb(a, b, L1, L2, target, pole, weight = 1) {
+// `endLocal` (optional): where the limb's end really sits in `b`'s frame, when it isn't on b's -Y
+// (the marine's grip is ahead of his forearm). Then L2 is that point's distance and b's bend is
+// corrected by its angle, so the end point itself lands on the target. Its X is ignored.
+export function ikLimb(a, b, L1, L2, target, pole, weight = 1, endLocal = null) {
+  let psi = 0;
+  if (endLocal) { L2 = Math.hypot(endLocal.y, endLocal.z) || L2; psi = Math.atan2(-endLocal.z, -endLocal.y); }
   a.updateWorldMatrix(true, false);
   _S.setFromMatrixPosition(a.matrixWorld);
   _T.copy(target).sub(_S);
@@ -51,7 +56,8 @@ export function ikLimb(a, b, L1, L2, target, pole, weight = 1) {
   a.parent.getWorldQuaternion(_qp).invert();
   _q.premultiply(_qp);
   if (weight >= 1) a.quaternion.copy(_q); else a.quaternion.slerp(_q, weight);
-  if (weight >= 1) b.rotation.set(bend, 0, 0);
-  else { b.rotation.x += (bend - b.rotation.x) * weight; b.rotation.y *= (1 - weight); b.rotation.z *= (1 - weight); }
+  const bx = bend - psi;
+  if (weight >= 1) b.rotation.set(bx, 0, 0);
+  else { b.rotation.x += (bx - b.rotation.x) * weight; b.rotation.y *= (1 - weight); b.rotation.z *= (1 - weight); }
   return bend;
 }
