@@ -1,0 +1,23 @@
+{
+  "format": "dw-motion/1",
+  "name": "brute",
+  "version": 1,
+  "owner": "grokbot",
+  "rig": "zombie",
+  "notes": "Plated and heavy (P-26): rifle rounds barely rock it; a shotgun shell moves it a little; only blasts and fire put it down. When it does go down it lands like a wardrobe and takes its time.",
+  "mass": 2.4,
+  "strength": 1.4,
+  "tone": { "legs": 0.95, "spine": 0.85, "arms": 0.6, "head": 0.7 },
+  "balance": { "step": 0.16, "fall": 0.6, "steps": 4, "stepTime": 0.34, "lift": 0.06, "lead": 0.15, "anchor": 0.3, "support": 0.95 },
+  "hits": {
+    "bullet": { "scale": 0.5, "slump": { "spine": 0.25, "arms": 0.25, "head": 0.3, "legs": 0.05 }, "recover": 0.35, "knockdown": 20 },
+    "pellet": { "scale": 0.6, "slump": { "spine": 0.4, "arms": 0.35, "head": 0.4, "legs": 0.15 }, "recover": 0.5, "knockdown": 12 },
+    "blast": { "scale": 1.1, "recover": 1.5, "knockdown": 2.8, "lift": 0.3 },
+    "blade": { "scale": 0.4, "recover": 0.3, "knockdown": 20 },
+    "crush": { "scale": 0.8, "recover": 1.1, "knockdown": 4 }
+  },
+  "fall": { "tone": { "legs": 0.05, "spine": 0.14, "arms": 0.25, "head": 0.15 }, "catch": 0.4 },
+  "down": { "time": 2.2, "height": 0.45 },
+  "getup": { "time": 1.4 },
+  "death": { "tone": 0.03, "settle": 0.6 }
+}

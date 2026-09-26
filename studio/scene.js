@@ -8,6 +8,8 @@ import * as THREE from 'three';
 import { loadClip, sampleClip, blendPoses, clipEvents, clipTime, applyPose, solveChain, EASES } from './clip.js';
 import { rigs } from './rigs.js';
 import { worldQuat, worldScale, slerpTo } from './ik.js';
+import { validateMotion, loadMotion, createBody, HIT_KINDS } from './motion.js';
+import { presets } from './motion/index.js';
 
 export const SCENE_FORMAT = 'dw-scene/1';
 const D2R = Math.PI / 180;
@@ -108,6 +110,28 @@ export function validateScene(json) {
         if (o.speed !== undefined && !(o.speed > 0)) errs.push(`${w}: "speed" must be above 0`);
       });
     }
+    // Reacting bodies (D-42, docs/studio.md §10): a preset, and hits at given times.
+    if (a.motion !== undefined) {
+      if (def && !def.body) errs.push(`${at}: rig "${a.rig}" has no "body" in studio/rigs.js, so it can't react`);
+      const mj = typeof a.motion === 'string' ? presets.json(a.motion) : a.motion;
+      if (!mj) errs.push(`${at}: "motion" "${a.motion}" is not a preset (${presets.names().join(', ')}), nor a preset object`);
+      else { for (const e of validateMotion(mj)) errs.push(`${at}.motion: ${e}`); if (mj.rig && a.rig && mj.rig !== a.rig) errs.push(`${at}: motion preset is for rig "${mj.rig}", not "${a.rig}"`); }
+    }
+    for (const k of ['hits', 'kill']) {
+      if (a[k] === undefined) continue;
+      if (a.motion === undefined) errs.push(`${at}: "${k}" needs "motion" (a preset) to react with`);
+      const list = k === 'kill' ? [a.kill] : a.hits;
+      if (!Array.isArray(list) || (k === 'hits' && !list.length)) { errs.push(`${at}: "hits" is a list of [time, { at, dir, power, kind }]`); continue; }
+      list.forEach((h, i) => {
+        const w = k === 'kill' ? `${at}.kill` : `${at} hit ${i}`;
+        if (!Array.isArray(h) || !isNum(h[0]) || !h[1] || typeof h[1] !== 'object') { errs.push(`${w}: [time, { at, dir, power, kind }]`); return; }
+        const o = h[1];
+        if (o.dir !== undefined && !isVec3(o.dir)) errs.push(`${w}: "dir" is [x, y, z], the way the hit pushes, scene space`);
+        if (o.power !== undefined && !(isNum(o.power) && o.power >= 0)) errs.push(`${w}: "power" is metres per second at the hit point, 0 or more`);
+        if (o.kind !== undefined && !HIT_KINDS.includes(o.kind)) errs.push(`${w}: "kind" is one of ${HIT_KINDS.join(', ')}`);
+        if (o.at !== undefined && typeof o.at !== 'string' && !isVec3(o.at)) errs.push(`${w}: "at" is a body point ("chest", "head", "pelvis", ...) or [x, y, z] scene space`);
+      });
+    }
     if (a.targets !== undefined) {
       if (typeof a.targets !== 'object') errs.push(`${at}: "targets" maps a clip's live target to "actor.joint"`);
       else for (const [k, v] of Object.entries(a.targets)) { const r = splitRef(v); if (!r || !actors[r.actor]) errs.push(`${at}.targets.${k}: "${v}" must be "actor.joint" naming an actor in the scene`); }
@@ -187,7 +211,9 @@ export function loadScene(json, clipOf) {
       face: a.face === undefined ? 'forward' : a.face, scale: a.scale,
       tilt: a.tilt ? normKeys(a.tilt) : null, rise: a.rise ? normKeys(a.rise) : null,
       clips: a.clips.map(([t, ref, o]) => ({ t, ref, clip: clips.get(ref), fade: (o && o.fade) ?? 0.15, loop: o && o.loop !== undefined ? !!o.loop : null, stride: (o && o.stride) || 0, speed: (o && o.speed) || 0, minRate: (o && o.minRate) ?? 0.2 })),
-      targets: a.targets || {}
+      targets: a.targets || {},
+      motion: a.motion === undefined ? null : loadMotion(typeof a.motion === 'string' ? presets.json(a.motion) : a.motion),
+      hits: [...(a.hits || []).map(([t, o]) => ({ t, ...o })), ...(a.kill ? [{ t: a.kill[0], ...a.kill[1], kill: true }] : [])].sort((x, y) => x.t - y.t)
     };
   }
   const holds = (json.holds || []).map((h) => {
@@ -237,7 +263,7 @@ function makePath(p, length) {
 const _v = new THREE.Vector3(), _v2 = new THREE.Vector3(), _h = new THREE.Vector3(), _g = new THREE.Vector3();
 const _p2 = new THREE.Vector2(), _q2 = new THREE.Vector2();
 const _m = new THREE.Matrix4(), _mi = new THREE.Matrix4(), _qy = new THREE.Quaternion(), _qt = new THREE.Quaternion(), _e = new THREE.Euler();
-const _s = new THREE.Vector3(), _gv = new THREE.Vector3();
+const _s = new THREE.Vector3(), _gv = new THREE.Vector3(), _gw = new THREE.Vector3();
 const lerpAngle = (a, b, w) => a + Math.atan2(Math.sin(b - a), Math.cos(b - a)) * w;
 
 // How low each limb's end sits when the rig stands at rest, plus a margin: at or under that it's on
@@ -277,7 +303,9 @@ export function createScene(scene, opts = {}) {
     if (!given) root.add(inst.group);
     inst.group.updateWorldMatrix(true, false);
     const scale = worldScale(inst.group, new THREE.Vector3());
-    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map() };
+    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map(), shift: new THREE.Vector3(), hitIdx: 0, body: null };
+    // A reacting body: the world's ground under it (the host's, or the scene's floor).
+    if (a.motion) A[n].body = createBody(inst, a.motion, { ground: (x, z) => (opts.ground ? opts.ground(x, z) : root.getWorldPosition(_gw).y), pool: opts.pool });
   }
   // A joint by name: a limb's name means its end (a hand, an ankle).
   const jointOf = (ref) => {
@@ -370,6 +398,8 @@ export function createScene(scene, opts = {}) {
       yaw = lerpAngle(a.enterFrom.yaw, yaw, u);
     }
     a.yaw = yaw;
+    // Where a reaction has moved it (a stagger back, a fall): the scene's place for it moves too.
+    a.pos.x += a.shift.x; a.pos.z += a.shift.z;
     a.pos.y += groundAt(a.pos.x, a.pos.z);
     if (s.rise) a.pos.y += sampleKeys(s.rise, T);
     placeBody(a);
@@ -518,6 +548,32 @@ export function createScene(scene, opts = {}) {
       }
       a.inst.group.updateWorldMatrix(false, true);
     }
+    // Reactions (D-42): each reacting body reads its animated pose, takes the hits due, simulates, and
+    // writes its pose back. The scene's place for it follows where the reaction took it.
+    for (const [n, a] of Object.entries(A)) {
+      const b = a.body;
+      if (!b) continue;
+      b.follow();
+      const hs = a.spec.hits;
+      while (a.hitIdx < hs.length && hs[a.hitIdx].t <= T + 1e-9) {
+        const h = hs[a.hitIdx++];
+        root.updateWorldMatrix(true, false);
+        _qt.setFromRotationMatrix(root.matrixWorld);
+        const dir = h.dir ? _v.set(...h.dir).applyQuaternion(_qt).toArray() : undefined;
+        const at = Array.isArray(h.at) ? root.localToWorld(_v2.set(...h.at)).toArray() : h.at;
+        const hit = { at, dir, power: h.power, kind: h.kind };
+        if (h.kill) b.kill(hit); else b.hit(hit);
+      }
+      for (const e of b.update(dt)) events.push({ actor: n, t: T, name: 'motion:' + e[0], data: e[1] || null });
+      b.apply();
+      if (b.awake) {
+        root.updateWorldMatrix(true, false);
+        _qt.setFromRotationMatrix(root.matrixWorld).invert();
+        _v.copy(b.drift).applyQuaternion(_qt);
+        a.shift.x += _v.x; a.shift.z += _v.z;
+      }
+      a.reacting = b.awake || b.state === 'dead';
+    }
     // Checks, after everyone is where they end up this frame.
     for (const h of scene.holds) {
       const w = Math.max(sampleKeys(h.reach, T) || 0, sampleKeys(h.tow, T) || 0);
@@ -538,7 +594,7 @@ export function createScene(scene, opts = {}) {
         const st = a.inst.plants[cn];
         const end = a.inst.R[ch.end];
         // A limb holding something goes where the hold puts it; its gap is the check, not slide.
-        if (!end || a.towed || (a.reaching && a.reaching[cn])) { delete a.slides[cn]; continue; }
+        if (!end || a.towed || a.reacting || (a.reaching && a.reaching[cn])) { delete a.slides[cn]; continue; }
         root.worldToLocal(_v.setFromMatrixPosition(end.matrixWorld));
         const ch0 = a.contact[cn];
         const down = (st && st.planted) || (ch0 !== null && _v.y <= ch0);
@@ -564,7 +620,8 @@ export function createScene(scene, opts = {}) {
       noteWorst('speed', n, sp, { bad: vb });
       // The biggest one-frame joint turn, at 60 fps.
       let wt = 0, wj = null;
-      for (const [jn, j] of Object.entries(a.inst.R)) {
+      // A body mid-reaction turns fast because it's falling, not because a clip snaps: not checked.
+      for (const [jn, j] of Object.entries(a.reacting ? {} : a.inst.R)) {
         if (!j || !j.isObject3D) continue;
         const q = a.prevQ.get(j);
         if (q) { const ang = 2 * Math.acos(Math.min(1, Math.abs(q.dot(j.quaternion)))) * (STEP / Math.max(1e-4, dt)); if (ang > wt) { wt = ang; wj = jn; } }
@@ -580,13 +637,17 @@ export function createScene(scene, opts = {}) {
   const reset = () => {
     T = 0;
     for (const k of Object.keys(worst)) delete worst[k];
-    for (const a of Object.values(A)) { a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; a.inst.stepping = 0; a.enterFrom = null; a.lastBase = null; }
+    for (const a of Object.values(A)) {
+      a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; a.inst.stepping = 0; a.enterFrom = null; a.lastBase = null;
+      a.shift.set(0, 0, 0); a.hitIdx = 0; a.reacting = false;
+      if (a.body) a.body.reset();
+    }
     // Time 0: everyone placed and posed, nothing moved yet.
     return step(0);
   };
   const first = reset();
   return {
-    root, actors: Object.fromEntries(Object.entries(A).map(([n, a]) => [n, { inst: a.inst, get speed() { return a.speed; }, get rate() { return a.rate; } }])),
+    root, actors: Object.fromEntries(Object.entries(A).map(([n, a]) => [n, { inst: a.inst, body: a.body, get speed() { return a.speed; }, get rate() { return a.rate; } }])),
     get t() { return T; },
     get done() { return T >= scene.length - 1e-9; },
     // How far along a path the scene is (metres), and how long the path is: the host ends a haul on arrival.

@@ -1,0 +1,22 @@
+{
+  "format": "dw-motion/1",
+  "name": "shambler",
+  "version": 1,
+  "owner": "grokbot",
+  "rig": "zombie",
+  "notes": "The everyday dead. Rifle rounds jolt it and it keeps coming; a close shotgun shell staggers it back two or three steps and often puts it down; a grenade throws it. Gets up slowly, like something that has forgotten how.",
+  "mass": 1,
+  "tone": { "legs": 0.8, "spine": 0.7, "arms": 0.45, "head": 0.55 },
+  "balance": { "step": 0.13, "fall": 0.5, "steps": 3, "stepTime": 0.3, "lift": 0.08, "lead": 0.18, "anchor": 0.15, "support": 0.8 },
+  "hits": {
+    "bullet": { "scale": 1, "spread": 0.4, "slump": { "spine": 0.55, "arms": 0.5, "head": 0.6, "legs": 0.15 }, "recover": 0.5, "knockdown": 7 },
+    "pellet": { "scale": 1, "spread": 0.7, "slump": { "spine": 0.65, "arms": 0.55, "head": 0.65, "legs": 0.3 }, "recover": 0.75, "knockdown": 5.5 },
+    "blast": { "scale": 1, "spread": 1, "slump": { "spine": 0.9, "arms": 0.85, "head": 0.85, "legs": 0.85 }, "recover": 1.3, "knockdown": 3, "lift": 0.45 },
+    "blade": { "scale": 1, "spread": 0.5, "slump": { "spine": 0.45, "arms": 0.35, "head": 0.5, "legs": 0.2 }, "recover": 0.55, "knockdown": 8 },
+    "crush": { "scale": 1, "spread": 0.8, "slump": { "spine": 0.75, "arms": 0.6, "head": 0.6, "legs": 0.65 }, "recover": 1, "knockdown": 3.5 }
+  },
+  "fall": { "tone": { "legs": 0.04, "spine": 0.1, "arms": 0.28, "head": 0.12 }, "catch": 0.55 },
+  "down": { "time": 1.6, "height": 0.4 },
+  "getup": { "time": 1.0 },
+  "death": { "tone": 0.03, "settle": 0.5 }
+}

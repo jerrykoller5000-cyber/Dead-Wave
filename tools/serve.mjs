@@ -7,6 +7,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { handleStudioNote } from '../studio/notes-endpoint.mjs';   // D-42: the motion lab's notes (Claude's)
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -40,6 +41,7 @@ export function serve(root, port = 0) {
       res.writeHead(400).end('bad url');
       return;
     }
+    if (req.method === 'POST' && pathname === '/__studio/note') { handleStudioNote(req, res, base); return; }
     if (pathname.endsWith('/')) pathname += 'index.html';
     const file = path.resolve(base, '.' + pathname);
     // Never serve outside the root, however the path is spelled.

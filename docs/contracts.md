@@ -447,3 +447,24 @@ CU-44) and, from CL-62, the game. The format is `docs/studio.md`; everyone impor
   `ground`, `enter`; `sp.path()`, `sp.dispose()`; `fetchScene(name)`. The studio does its rotations
   through quaternions and world matrices only, so it gives the same answers on the test page's
   stand-in three (tools/tests/fakethree.mjs) as on real three.
+
+## Reactions: bodies that get hit (D-42, Claude; approved 2026-09-26)
+
+`studio/motion.js`, through `studio/index.js`. Claude owns the engine, the rigs' `body` specs and the lab;
+the presets (`studio/motion/<rig>/<name>.json`) name their own `owner` (Grokbot for the zombies and the
+marine). The full description is `docs/studio.md` §10.
+
+| Export | Contract |
+| --- | --- |
+| `createMotionPool({ max })` | One per game. At most `max` bodies simulate; `pool.active`. |
+| `createBody(inst, preset, { ground, pool })` | `inst` from `rigs.get('zombie' \| 'marine').create({ group })` (adopting the game's own body). `ground(x, z)` is the world height (`entityGroundY`). Throws in sentences on a wrong rig or a rig without `body`. |
+| `body.follow()` | Every frame, after the host posed the animation. Cheap while the body only animates. |
+| `body.hit({ at, dir, power, kind })` | `at`: a point name or `[x, y, z]` world; `dir` world; `power` m/s at the point; `kind` one of `bullet`, `pellet`, `blast`, `blade`, `crush`. Returns `false` when the pool is full of reacting bodies: the host plays its old reaction. One call per shot (a shell's pellets summed), not per pellet. |
+| `body.kill({ ... })` | The same arguments; limp until `settled`, then asleep (the host can freeze the corpse). |
+| `body.update(dt) → events` | `[name, data?]`: `wake`, `hit`, `stagger`, `step {foot}`, `fall`, `land`, `down`, `getup`, `recovered`, `dead`, `settled`. |
+| `body.apply()` | Writes the pose onto the rig by `body.weight`; joints the host doesn't re-pose each frame are restored by the next `follow()`. |
+| `body.state`, `body.awake`, `body.alive`, `body.weight`, `body.drift` | `drift` (world, m): where the reaction has moved the body; the host adds it to its own position while `awake` (feet while standing, hips once down). The AI does nothing of its own while `state` is `fall`, `down` or `getup`. |
+
+Scenes take `motion`, `hits` and `kill` on an actor (§10). The motion lab's notes come in through
+`POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`), which writes only under
+`review/motion-*` (Cursor reviews the hook: CU-47).
