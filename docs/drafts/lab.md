@@ -9,10 +9,13 @@ The lead folds this into the docs. Nothing here changes the game.
 The motion lab keeps the last six seconds of what the bodies did. Jerry can stop it, drag back
 through it, step a frame at a time and play it again at any speed, with every event marked on the
 bar. A second body can stand beside the first and take every hit at the same moment. Each hit is
-drawn as an arrow. A note carries a picture of the screen. What happened can be saved as a scene
-that an agent renders like any other. The server's note door takes a note for any review folder, not
-only a motion preset's, and a scene. `studio/check-labs.mjs` clicks through the lab in headless
-Chrome and fails on any page error or missing event.
+drawn as an arrow, at any power from a quarter to three times the weapon's, and the body's own
+points can be drawn over it. A note carries a picture of the screen with a strip of the reaction
+under it, and the lab shows the notes already written and their answers. A preset's approved
+reactions can be checked in the lab, sliders and all. What happened can be saved as a scene that an
+agent renders like any other. The server's note door takes a note for any review folder, not only a
+motion preset's, gives a lab's folder a page, and takes a scene. `studio/check-labs.mjs` clicks
+through the lab in headless Chrome and fails on any page error or missing event.
 
 ---
 
@@ -83,7 +86,7 @@ changed in Cursor's file: the hook). It writes in two places only: `review/<asse
 
 | Route | Body | Does | Reply |
 | --- | --- | --- | --- |
-| `/__studio/note` | `{ asset, text, context?, snapshot?, meta? }` | Adds `## <date> · Jerry · <version> · lab` and the note at the top of `review/<asset>/notes.md` (under the stub's comment, above the notes already there). | `{ ok, asset, file, owner, version, created, picture? }` |
+| `/__studio/note` | `{ asset, text, context?, snapshot?, meta? }` | Adds `## <date> · Jerry · <version> · lab` and the note at the top of `review/<asset>/notes.md` (under the stub's comment, above the notes already there). | `{ ok, asset, file, owner, version, created, picture?, page? }` |
 | `/__studio/note` | `{ preset: "zombie/shambler", text, context? }` | The lab's first form: asset `motion-<rig>-<name>`, meta read from `studio/motion/<rig>/<name>.json`. | as above |
 | `/__studio/scene` | `{ name, json }` | Writes `studio/scenes/lab-<name>.json`, with `json.name` set to `lab-<name>`. | `{ ok, name, file, replaced, render }`: `render` is the command |
 | `/__studio/notes` | `{ asset }` | Reads only: the folder's notes as `crew/notes.mjs` reads them, newest first (at most 20). A folder that isn't there is `exists: false`, not a 404, so a page can ask without an error in its console. | `{ ok, asset, exists, latest, owner, state, lookAt, page, notes: [{ date, who, version, text, state, answer }] }` |
@@ -165,8 +168,9 @@ recording with one crop round the bodies (so the six compare) and labelled with 
 and each body's state; then the scrub bar and that line. 1280×936 from a 1280×720 window, about
 120 to 350 KB. The words are drawn on a canvas of their own (see "Things found on the way").
 
-**Timeline.** Every frame (at most every 1/120 s of lab time) records each body's joints and its
-group, its arrow and hidden parts. Six seconds are kept. Replay interpolates between frames, so slow
+**Timeline.** Every frame (at most every 1/120 s of lab time), the moment the bodies are made and
+the instant of each hit record each body's joints and its group, its arrow, hidden parts, state and
+points. Six seconds are kept. Replay interpolates between frames, so slow
 motion is smooth. Lab time is the simulation's time: at ¼× live, six seconds of it is 24 real ones.
 
 **Compare.** Body A at x −1, B at x +1, both facing +Z. A click on either hits both at the same body
@@ -267,8 +271,8 @@ and CHROME_ARGS as for the tests) at 1280×720, and:
     package's `motion-expect` test);
 15. a note with a picture, typed and saved through the page's own button: notes.md holds one waiting
     note with the context and the picture's line, the PNG is there with the strip under the view,
-    meta.json says motion, the folder
-    page shows the note, and the lab's notes so far now say one, waiting;
+    meta.json says motion, the folder page shows the note, and the lab's notes so far now say one,
+    waiting;
 16. no page errors and no console errors;
 17. from a plain static server (POST answered 501, as python's is): it loads, knows it can't save,
     copies (or shows) the note and the scene, and writes nothing. It says how many frames the page
@@ -299,7 +303,8 @@ server)` that drives it through its own `window.lab`-style object, and the same 
   and then, and a frame that throws still draws and hands over its pictures.
 - **The clipboard can wait forever** on a permission nobody grants (headless Chrome, a window
   without the focus, a busy box). The copy fallback gives it 1.5 s, then shows the copy box. Before
-  that, one check in four hung there.
+  that, the check's last phase sometimes hung on the note (three times in about ten runs on a box
+  loaded by other runs); after it, six runs in a row passed, one of them showing the box.
 - **`tools/studio.mjs scene` draws a lab scene's strip, but its video step times out headless** ("the
   scene video did not finish"), as the engine package also found. That's P-76, Cursor's.
 
@@ -315,8 +320,9 @@ check-labs' `outcome()` can import `classify` from `studio/motion-battery.js` in
   the module (`pathname.startsWith('/__studio/')`, with the pathname passed on). Please review it with
   the rest of the hook. The scene video step times out headless for lab scenes too.
 - **The lead, docs/contracts.md (Reactions, last paragraph)**: the write door now writes
-  `review/<asset>/` (a note, a picture, a new folder's meta.json, latest.txt and notes.md) and
-  `studio/scenes/lab-<name>.json`, not only `review/motion-*`.
+  `review/<asset>/` (a note, a picture, a new folder's meta.json, latest.txt and notes.md, and a
+  lab folder's index.html) and `studio/scenes/lab-<name>.json`, not only `review/motion-*`, and reads
+  a folder's notes back (`/__studio/notes`).
 - **Antigravity** (P-77): `node studio/check-labs.mjs --shots qa/<folder>` leaves a screenshot of
   each step; the readout's last line is the frame's cost and fps on Jerry's GPU.
 
