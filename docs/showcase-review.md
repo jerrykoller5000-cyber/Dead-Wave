@@ -7,6 +7,25 @@ cleanly onto it. Scope: anything that could break or
 embarrass the game in a 20-minute demo. No features were added.
 
 Branch `cloud/showcase-review`. It has two one-line fixes, each in its own commit, plus this file.
+Pull request: https://github.com/jerrykoller5000-cyber/Dead-Wave/pull/1 (into `feature/Phis-changes`, not merged).
+
+## Since the review: base at `c65ae3e` (2026-09-26)
+
+The base moved on after this review. Commit `37ef95b` landed the bounty board adapter (GP-43), a spider
+fix (GB-58) and CL-56. CL-56 makes the alarm one shot on the HQ with no sky pan. It also replaces the
+Night N Complete card with a small banner, and the morning now comes on its own. These notes come from
+reading the new base's code only. Nothing was re-run on it.
+
+- **Row 1: resolved on the base.** `briefing-open` now carries `bounties: getBounties()`.
+- **Row 2: still present on the base.** The `body.loopcine` rule at line 320 is unchanged. Fix `33fcf33` still applies.
+- **Row 3: still present on the base.** `endGame` still doesn't clear `hq.seq`, and `updateHQSequence` still calls `beginWave()`. Fix `7d15468` still applies.
+- **Row 4: still present,** and probably more visible. `expireBounties('alarm')` still runs on `alarm-started`, and the alarm shot now holds on the HQ instead of turning to the sky.
+- **Row 5: GB-58 targets it.** The `37ef95b` commit message reports t80 13/0 on Jerry's machine. Not re-run here.
+- **Rows 6 to 9:** not re-checked.
+- **"Checked and fine" → The loop:** the Night Complete card results no longer apply, because CL-56 replaced the card.
+
+The two fixes merge cleanly onto `c65ae3e`. The next step is to merge them, then re-run t60, t72 and t79
+(re-based by CL-56), plus t61 and t83.
 
 ## Found
 
