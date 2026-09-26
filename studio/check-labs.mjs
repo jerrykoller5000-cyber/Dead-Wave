@@ -46,6 +46,18 @@ const PAGES = {
 const names = opt.pages.length ? opt.pages : Object.keys(PAGES);
 for (const n of names) if (!PAGES[n]) { console.error(`no lab page "${n}" (there are ${Object.keys(PAGES).join(', ')})`); process.exit(2); }
 
+// What a check leaves in the repo while it runs (a review folder, a scene) goes, even on Ctrl-C, and
+// so does its Chrome (cdp.mjs's close kills it before its first await).
+const cleanups = new Set();
+let browser = null;
+for (const sig of ['SIGINT', 'SIGTERM']) {
+  process.on(sig, () => {
+    for (const c of cleanups) { try { c(); } catch { /* going anyway */ } }
+    if (browser) browser.close().catch(() => {});
+    process.exit(130);
+  });
+}
+
 // --- Reporting ---------------------------------------------------------------------------------------
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let passed = 0, failed = 0, shotN = 0;
@@ -146,10 +158,12 @@ async function checkMotionLab(browser, server, page0) {
   const asset = `check-labs-${stamp}`, sceneName = `check-${stamp}`;
   const reviewDir = path.join(ROOT, 'review', asset), sceneFile = path.join(ROOT, 'studio', 'scenes', `lab-${sceneName}.json`);
   const page = await browser.newPage({ width: 1280, height: 720 });
+  const remove = () => { fs.rmSync(reviewDir, { recursive: true, force: true }); fs.rmSync(sceneFile, { force: true }); };
+  if (!opt.keep) cleanups.add(remove);
   const cleanUp = () => {
+    cleanups.delete(remove);
     if (opt.keep) { console.log(`  kept  review/${asset}/ and studio/scenes/lab-${sceneName}.json`); return; }
-    fs.rmSync(reviewDir, { recursive: true, force: true });
-    fs.rmSync(sceneFile, { force: true });
+    remove();
   };
   const S = () => page.evaluate('lab.state()');
   let st, hitT = 0, downT = 0;
@@ -424,7 +438,6 @@ async function checkMotionLab(browser, server, page0) {
 
 // --- Run -------------------------------------------------------------------------------------------------
 const server = await serve(ROOT, 0);
-let browser;
 const t0 = Date.now();
 try {
   browser = await launch({ headless: true });
