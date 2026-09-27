@@ -58,6 +58,8 @@ someone else, say so with `crew.mjs request`; don't start it.
 says, and the dead react when they're hit: the reaction engine and the motion lab are in (CL-65, D-42), and
 Grokbot wires them into the game (GB-65 to GB-67). Jerry plays a fresh run to night 5 at the end, and leaves
 his notes in the motion lab. Work your queue top to bottom; a task that says "after XX-n" waits for it.
+**R1 closed 2026-09-27 ~18:15Z, and the crew is HALTED** (Jerry: a few days, until usage resets). Do not check in
+to anything new. Finish only what you are already in, hand off, and stop. Claude reopens the board when Jerry says.
 - **Grokbot** · GB-60 · handoffs/2026-09-27-grokbot-GB-60.md
 - **Grokbot** · GB-61 · handoffs/2026-09-27-grokbot-GB-61.md
 - **Grokbot** · GB-62 · handoffs/2026-09-27-grokbot-GB-62.md
@@ -100,7 +102,7 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CU-51, AG-22 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CU-51, CU-59, AG-22 |
 | **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
 | **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26 |
@@ -115,6 +117,11 @@ For players who look, the relay's static and the pit stones hide a way to silenc
 guardian for the true ending. `docs/roadmap.md` has it in full.
 
 ## Orders from Jerry
+
+- **2026-09-27, ~18:00Z · Finish R1, then halt.** "After we finish Phase R1 we are going to halt work for a few days
+  until some of the usage can reset." So: R1 closes (GB-70 and CL-68 once Jerry's lab notes are in; AG-20 and AG-21 on
+  his GPU), everything waiting is committed, and then nobody starts anything until Jerry says so. R2 and R3 work
+  already done stays; don't take new R2/R3 tasks once R1 is closed. The mission line says when the halt is on.
 
 - **2026-09-26 · A reaction tool, the roadmap to finish the game, and the open calls.** "Create a hybrid
   animation/ragdoll tool similar to Euphoria, specifically tailored to be light enough to use in this game; work
@@ -507,6 +514,10 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **CU-59** **R2 · P-55.** `debugTouched`: one shell flag set by any `TT.*` hook that changes the run (the `*Dbg`
+  setters, `loopNextNight`, `loopMorning`, `skipPrep`, the scripted-kill and cave hooks), reset at a fresh start;
+  `recordFinishedRun` passes `eligible: !debugTouched`. So a debug run earns no badge (GP-65). Small.
+  `docs/contracts.md`, lifetime badges.
 - [ ] **CU-58** **R3 · P-34.** `spawnSupplyDrop({x, z, contents, source})` and a `supply-drop` event; the airdrop cue
   plays. Moved from Grokbot (integration plumbing). Details: `docs/roadmap.md` P-34.
 - [ ] **CU-52** **R3 · P-44.** Vault your own barricades: Space beside a sandbag, wire, barricade or open window hops
@@ -555,15 +566,16 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   brute's blow staggers him, a bomber puts him down. After GB-65. Details: `docs/roadmap.md` P-72.
 - [x] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
   it's a bug. Details: `docs/roadmap.md` P-73.
-- [ ] **GB-69** **R1 · P-8.** The laser does what the kiosk sells: spread ×0.8 while it's on. Details:
+- [x] **GB-69** **R1 · P-8.** The laser does what the kiosk sells: spread ×0.8 while it's on. Details:
   `docs/roadmap.md` P-8.
-- [ ] **GB-70** **R1 · P-75.** Reaction presets tuned to Jerry's lab notes (studio/motion/*: bump version, answer with
+- [x] **GB-70** **R1 · P-75.** Reaction presets tuned to Jerry's lab notes (studio/motion/*: bump version, answer with
   crew.mjs review). Ongoing through R2, whenever a motion-* review folder has a waiting note. Details:
   `docs/roadmap.md` P-75.
 
 #### R2 · The night has a shape
+  Closed by Jerry's call, 2026-09-27: "the motion looks good for now"; the v2 presets stand, tweaks later.
 
-- [ ] **GB-59** **R2.** Brought back: the fog cull (CU-42). Skip drawing and animating zombies past the fog's far
+- [x] **GB-59** **R2.** Brought back: the fog cull (CU-42). Skip drawing and animating zombies past the fog's far
   distance (never a threat, a spit holder with a line, or the guardian); measure on the GPU with qa/run-cu42.mjs. The
   frame-budget lever for R2 and D-50.
 - [ ] **GB-71** **R2 · P-16.** Test nights: early pushes run straight on, then one real breather with the cave eyes
@@ -572,7 +584,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   and sooner. After GB-71; after GB-59. Details: `docs/roadmap.md` P-17.
 - [ ] **GB-73** **R2 · P-18.** Headline packs as set pieces: six brutes side by side, the demon and bomber packs;
   night 19's short breathers made true. After GB-72. Details: `docs/roadmap.md` P-18.
-- [ ] **GB-74** **R2 · P-22.** Streaks heal: from 5 kills, 1 HP a kill (2 from 20), up to 70% (D-52). Details:
+- [x] **GB-74** **R2 · P-22.** Streaks heal: from 5 kills, 1 HP a kill (2 from 20), up to 70% (D-52). Details:
   `docs/roadmap.md` P-22.
 - [ ] **GB-75** **R2 · P-26.** Brutes wear plates: bullets and blades cut to 0.55, fire and blasts full (the unused
   `armored` flag). Matches the brute's reaction preset. Details: `docs/roadmap.md` P-26.
@@ -584,6 +596,17 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   unbanked skulls (D-46). After GB-67. Details: `docs/roadmap.md` P-32.
 - [ ] **GB-96** **R2 · P-100.** The shotgun against spiders on a wall: a small spider-only edge, measured before and
   after (Grokbot's call under Jerry's "use your best judgement"). After GB-59. Details: `docs/roadmap.md` P-100.
+- [ ] **GB-98** **R2 · P-20.** The zombies keep their own animation pose like the marine now does (GB-67 follow-up):
+  `updateZombies` writes partial Euler angles, so a reacting zombie reads some of its written pose back as its
+  animation; a per-body snapshot before `apply()`, put back at the top of the update. Probably feeds t91's
+  back-shot pitch. Small.
+- [ ] **GB-99** **R2 · P-20.** The brute's head line: a head-centre shot sits at 0.78-0.81 of its `hitH` (2.05·s), on
+  the headshot line, so it only sometimes counts. Keep `hitH` (the body target stays the size it is); give each
+  zombie type its own head fraction, set from where its head really is (brute about 0.74, so a head-centre shot
+  is a headshot with a margin). Jerry can veto if he wants the brute's head harder. Small.
+- [ ] **GB-97** **R2 · P-55.** The director says when a night is over: `dw-game` `'night-cleared'` `{ day, kind, runId }`
+  at dawn, once a night (`kind`: plain, blood-moon, guardian, fog, siege, colossus). The badges' fact (GP-65);
+  small. `docs/contracts.md`, lifetime badges.
 
 #### R3 · The day feeds the night
 
@@ -643,7 +666,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [x] **GP-48** **R2 · P-24.** The minimap shows hurt builds (amber, red, flashing) and rim pips for the ones out of
   range. Details: `docs/roadmap.md` P-24.
-- [ ] **GP-49** **R2 · P-25.** One panned cue when a far build fails; an optional "West wall failing" line. After
+- [x] **GP-49** **R2 · P-25.** One panned cue when a far build fails; an optional "West wall failing" line. After
   CU-50; after GP-48. Details: `docs/roadmap.md` P-25.
 - [ ] **GP-50** **R2 · P-29.** The scouting report names the counter: plates stop bullets, kill the screamer first.
   After GB-75; after GB-76; after GB-77. Details: `docs/roadmap.md` P-29.
@@ -658,15 +681,15 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [x] **GP-54** **R3 · P-36.** The relay, once repaired, can be called once each prep (a per-day `callable` state).
   Details: `docs/roadmap.md` P-36.
-- [!] **GP-55** **R3 · P-37.** Tonight's call: three cards on the HQ board, one pick, gone at the alarm (D-53). After
+- [x] **GP-55** **R3 · P-37.** Tonight's call: three cards on the HQ board, one pick, gone at the alarm (D-53). After
   GP-54. Details: `docs/roadmap.md` P-37.
 - [ ] **GP-56** **R3 · P-35.** Drop news as a small notice from strings, not a hard-coded banner. After CU-58.
   Details: `docs/roadmap.md` P-35.
 - [ ] **GP-57** **R3 · P-40.** The dawn banner says what the dare earned. After GB-82. Details: `docs/roadmap.md`
   P-40.
-- [ ] **GP-58** **R3 · P-41.** From day 2, two of the five caches restock with something new. Details:
+- [x] **GP-58** **R3 · P-41.** From day 2, two of the five caches restock with something new. Details:
   `docs/roadmap.md` P-41.
-- [ ] **GP-59** **R3 · P-42.** The board lists what restocked; the minimap marks it after you've read the board. After
+- [x] **GP-59** **R3 · P-42.** The board lists what restocked; the minimap marks it after you've read the board. After
   GP-58. Details: `docs/roadmap.md` P-42.
 - [ ] **GP-60** **R3 · P-46.** Fixed equipment prices; guns stocked by act (D-48); the economy model re-run. After
   GB-61; after GB-81. Details: `docs/roadmap.md` P-46.
@@ -681,7 +704,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   After GB-85. Details: `docs/roadmap.md` P-51.
 - [ ] **GP-64** **R4 · P-54.** The victory screen: the closing line, nights, kills, headshots, best streak, skulls
   banked, survivors aboard. After GB-86; after GP-52. Details: `docs/roadmap.md` P-54.
-- [ ] **GP-65** **R4 · P-55.** About 12 lifetime badges on the death card and the title (store, then the UI). After
+- [x] **GP-65** **R4 · P-55.** About 12 lifetime badges on the death card and the title (store, then the UI). After
   GP-52. Details: `docs/roadmap.md` P-55.
 - [ ] **GP-66** **R4 · P-86.** The relay's twenty morning lines, the survivors' lines and the props' notes in strings,
   on the board. After CL-74. Details: `docs/roadmap.md` P-86.
@@ -699,9 +722,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R6 · Finish (1.0)
 
-- [ ] **GP-71** **R6 · P-81.** The first hour teaches itself: every key's first-use card; the controls page matches
+- [x] **GP-71** **R6 · P-81.** The first hour teaches itself: every key's first-use card; the controls page matches
   the game. After GP-51. Details: `docs/roadmap.md` P-81.
-- [ ] **GP-72** **R6 · P-82.** One voice: every line read once, the same words for the same things. Details:
+- [!] **GP-72** **R6 · P-82.** One voice: every line read once, the same words for the same things. Details:
   `docs/roadmap.md` P-82.
 - [ ] **GP-73** **R6 · P-83.** Credits: Jerry, the crew, Quaternius (CC0), the music. Details: `docs/roadmap.md` P-83.
 
@@ -710,10 +733,10 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [>] **AG-20** **R1 · P-15.** A fresh run to night 5 on Jerry's GPU: night lengths, lost skulls, the skull-at-dawn
+- [x] **AG-20** **R1 · P-15.** A fresh run to night 5 on Jerry's GPU: night lengths, lost skulls, the skull-at-dawn
   report, accidental pokes, fps with 48, the Ways to Die padlocks. Do it again when GB-61 is in. Details:
   `docs/roadmap.md` P-15.
-- [ ] **AG-21** **R1 · P-77.** The motion lab and both reaction folders on the GPU, then reactions in the game: shots
+- [x] **AG-21** **R1 · P-77.** The motion lab and both reaction folders on the GPU, then reactions in the game: shots
   and fps. After CU-47. Again for the game when GB-67 is in. Details: `docs/roadmap.md` P-77.
 
 #### R2 · The night has a shape
@@ -768,7 +791,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   `docs/roadmap.md` P-11.
 - [x] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
   CL-65's first intent. Details: `docs/roadmap.md` P-74.
-- [ ] **CL-68** **R1 · P-75.** Engine fixes from Jerry's lab notes (studio/motion.js, studio/bodies.js); new bodies
+- [x] **CL-68** **R1 · P-75.** Engine fixes from Jerry's lab notes (studio/motion.js, studio/bodies.js); new bodies
   when a creature needs one. Ongoing. Details: `docs/roadmap.md` P-75.
 
 #### R2 · The night has a shape

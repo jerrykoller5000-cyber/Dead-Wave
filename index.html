@@ -851,6 +851,7 @@
       <div class="menu-content">
         <h2 class="dw-wordmark" data-dw-wordmark></h2>
         <p id="menuBestRecord" class="best-record" hidden></p>
+        <div id="menuBadges"></div>
         <div class="modes">
           <button id="modeHunt" type="button" data-dw-text="menu.play"></button>
           <button id="menuSettingsBtn" class="secondary" type="button" data-dw-text="settings.title"></button>
@@ -1050,11 +1051,15 @@
     import { text as dwText } from './ui/strings.js';
     import { renderBuildBanner } from './ui/build-controls.js';
     import { createRecords, RECORDS_KEY, renderBestRecord } from './ui/records.js';
-    import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses } from './ui/build-alerts.js';
+    import { createBadges, BADGES_KEY } from './ui/badges.js';
+    import { createBadgeAdapter, renderBadgeCollection } from './ui/badges-runtime.js';
+    import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses, createFarBuildWarnings } from './ui/build-alerts.js';
+    import { createDailyCall, cheapestTurretBlueprint } from './ui/radio-call.js';
     import { createNightRecord, mountDawn } from './ui/dawn.js';
     import './ui/camp-cleared.js';
     import { drawScoutingMarks } from './ui/scouting.js';
     import { bountyIntel, drawBountyMarks } from './ui/bounties.js';
+    import { cacheIntel, restockRows, drawCacheMarks } from './ui/cache-intel.js';
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
@@ -7594,9 +7599,21 @@
       else uiCaveWarnings.delete(detail.index);
     });
     const buildAttackPulses = createBuildAttackPulses();
+    const farBuildWarnings = createFarBuildWarnings();
     window.addEventListener('dw-game', ({detail}) => {
-      if (detail?.type === 'build-hit' || detail?.type === 'run-reset')
-        buildAttackPulses.handle(detail, detail.type === 'run-reset' ? [] : builds, performance.now());
+      if (detail?.type !== 'build-hit' && detail?.type !== 'run-reset') return;
+      const now = performance.now();
+      buildAttackPulses.handle(detail, detail.type === 'run-reset' ? [] : builds, now);
+      const cue = farBuildWarnings.handle(detail, detail.type === 'run-reset' ? {} : {
+        active: gameStarted && !gameOver && !won && !paused && !shopOpen,
+        x: player.position.x, z: player.position.z, yaw: camYawCurrent
+      }, now);
+      if (cue) {
+        // A distant defense warning uses the existing sound bus/mute controls.
+        const material = ['light','heavy','flame','mortar'].includes(detail.kind) ? 'turret' : 'wood';
+        if (cue.broke) AudioSys.buildBreak(material, cue.volume, cue.pan);
+        else AudioSys.buildHit(material, cue.volume, cue.pan);
+      }
     });
     function drawMapBlips(ctx, toMap, sz, projection) {
       if (objectiveRuntime && ctx !== fullMapCtx) for (const marker of objectiveRuntime.markers()) {
@@ -7708,6 +7725,8 @@
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 22 });
       drawBountyMarks(ctx, bountyIntel.markers({ day, phase, alarmActive: !!hq.seq }),
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 42 });
+      drawCacheMarks(ctx, cacheIntel.markers({ runId: uiRunId, day, sites: objectiveRuntime?.snapshot()?.sites || [] }),
+        { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 56 });
       // Names follow the rotating minimap rather than the terrain bake, so they
       // stay upright and readable even while the player turns.
       ctx.font = '700 15px sans-serif';
@@ -15987,6 +16006,7 @@
 
     let playerDeathT = 0;
     function updateMarinePose(dt, moving, running, swimming) {
+      restoreMarineAnim();   // GB-67 follow-up: last frame's animation, not his body's pose
       const ud = marine.userData;
       const legL = ud.legLG, legR = ud.legRG;
       const kneeL = ud.kneeLG, kneeR = ud.kneeRG;
@@ -20211,6 +20231,32 @@
 
     // UI-owned modal adapter; the existing alarm keeps every gameplay guard.
     let hqBriefingOpen = false, hqBriefingWasPaused = false;
+    const dailyRadioCall = createDailyCall({
+      claim: request => objectiveRuntime?.beginRadioCall(request),
+      publish: receipt => {
+        if (receipt.card === 'intel') fieldIntelOwned = true;
+        publishUI('radio-call', receipt);
+      }
+    });
+    dailyRadioCall.reset(uiRunId);
+    function refreshRadioCall() {
+      const director = getWaveDirectorState(), relay = objectiveRuntime?.read()?.radioCall;
+      dailyRadioCall.update({ runId: uiRunId, day: director.day, phase: director.phase,
+        alarm: !!hq.seq, repaired: relay?.repaired === true,
+        callable: relay?.day === director.day && relay.callable === true, receipt: relay?.receipt,
+        owned: { fieldIntel: fieldIntelOwned, blueprints: buildUnlocked },
+        hardwareBlueprint: cheapestTurretBlueprint(BUILD_UNLOCK_PRICE, buildUnlocked) });
+      return dailyRadioCall.read();
+    }
+    function publishHQBriefing() {
+      const director = getWaveDirectorState();
+      let preview = null;
+      try { preview = getWavePreview(director.day); } catch (error) { console.warn('Dead-Wave briefing unavailable:', error); }
+      publishUI('briefing-open', { day: director.day, phase: director.phase,
+        preview, bounties: getBounties(), intelOwned: fieldIntelOwned, radioCall: refreshRadioCall(),
+        restocks: restockRows(objectiveRuntime?.snapshot(), director.day),
+        alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel() });
+    }
     function closeHQBriefing() {
       if (!hqBriefingOpen) return;
       hqBriefingOpen = false;
@@ -20220,19 +20266,27 @@
     function openHQBriefing({ fromDawn = false } = {}) {
       publishPrepState(0, true);
       if (!gameStarted || gameOver || won || hqBriefingOpen || (!fromDawn && !nearHQPanel())) return;
-      const director = getWaveDirectorState();
-      let preview = null;
-      try { preview = getWavePreview(director.day); } catch (error) { console.warn('Dead-Wave briefing unavailable:', error); }
       hqBriefingWasPaused = paused; hqBriefingOpen = true;
       setPaused(true);
-      publishUI('briefing-open', { day: director.day, phase: director.phase,
-        preview, bounties: getBounties(), intelOwned: fieldIntelOwned,
-        alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel() });
+      publishHQBriefing();
     }
     window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type === 'run-reset') { dailyRadioCall.reset(detail.runId); return; }
+      if (detail?.type === 'alarm-started') {
+        refreshRadioCall();
+        if (hqBriefingOpen) closeHQBriefing();
+        return;
+      }
       if (!hqBriefingOpen) return;
       if (detail?.type === 'briefing-close-request') closeHQBriefing();
-      else if (detail?.type === 'alarm-request') {
+      else if (detail?.type === 'radio-call-request') {
+        if (!gameStarted || gameOver || won || phase !== 'prep' || hq.seq || devNoZombies || !nearHQPanel() ||
+            detail.runId !== uiRunId || detail.day !== day) return;
+        publishPrepState(0, true);
+        refreshRadioCall();
+        dailyRadioCall.pick(detail.card);
+        publishHQBriefing();
+      } else if (detail?.type === 'alarm-request') {
         if (!gameStarted || gameOver || won || phase !== 'prep' || hq.seq || devNoZombies || !nearHQPanel()) return;
         closeHQBriefing();
         hqStartWave();
@@ -20348,6 +20402,7 @@
         objectiveRuntime = mountObjectiveRuntime({ runId: uiRunId, getProps: getObjectiveProps,
           onComplete: () => AudioSys.musicCue('objective'),
           getInteraction: getObjectiveInteraction, listChoices: listOwnedAmmoPackChoices, grantSupply,
+          grantBlueprint: grantBuildBlueprint, getRestockBlueprint: () => cheapestTurretBlueprint(BUILD_UNLOCK_PRICE, buildUnlocked),
           getPlayer: () => ({ x: player.position.x, z: player.position.z, caliber: caliberOf(currentWeapon),
             active: gameStarted && !gameOver && !won && !paused && !shopOpen }),
           mapRoot: document.getElementById('objectiveMapSurface'), hudRoot: document.getElementById('objectiveHud'),
@@ -26303,6 +26358,47 @@
       z.farLod = far;
       setZombieRenderLod(z.mesh, far);
     }
+    // GB-59 / CU-42: the fog cull. Past the fog's far edge a zombie is drawn in solid fog
+    // colour, so it is not drawn at all (the far LOD above has already frozen its joints).
+    // Measured along the camera's view axis, as three measures fog (depth, not range): a
+    // zombie off to the side at 80 m can sit well inside the fog on screen. It still walks,
+    // paths and attacks unseen; only the draw goes. Kept drawn whatever the distance: the
+    // guardian, a body that has the blow (the motion body), anything mid-attack or charging
+    // (and for 2 s after, so a zombie clawing a far wall does not blink), and a spitter
+    // holding a firing line. Hides 8 m past the far edge, shows again at 4 m (no flicker
+    // on the line). fogCullOn is the switch for measuring (TT.setFogCullDbg).
+    const FOG_CULL_MARGIN = 8, FOG_CULL_BACK = 4;
+    let fogCullOn = true;
+    let _fcFar = Infinity;
+    const _fcFwd = new THREE.Vector3(0, 0, -1);
+    function fogCullPrep() {
+      const f = scene.fog;
+      _fcFar = (fogCullOn && f && f.density == null && f.far > 0) ? f.far + FOG_CULL_MARGIN : Infinity;
+      if (_fcFar !== Infinity) camera.getWorldDirection(_fcFwd);
+    }
+    function fogCullKeeps(z) {
+      if (z.typeKey === 'guardian' || z.guardianPlanned) return true;
+      if (z.body && z.body.awake) return true;
+      if (z.attackWindup > 0 || z.swingT > 0 || z._pendingAttack || z.chargeWind > 0 || z.chargeT > 0) { z.fogKeepT = 2; return true; }
+      if (z.lineClear && (z.lineT == null ? -9 : z.lineT) > -0.5) return true;   // checked its line this last half second: it is holding
+      return (z.fogKeepT || 0) > 0;
+    }
+    function fogCullDepth(z) {
+      const p = z.mesh.position, c = camera.position;
+      return (p.x - c.x) * _fcFwd.x + (p.y - c.y) * _fcFwd.y + (p.z - c.z) * _fcFwd.z;
+    }
+    function syncZombieFogCull(z, dt) {
+      if (!z || !z.mesh) return;
+      if (z.fogKeepT > 0) z.fogKeepT -= dt;
+      let hide = false;
+      if (_fcFar !== Infinity && !fogCullKeeps(z)) {
+        const d = fogCullDepth(z);
+        hide = z.fogHidden ? d > _fcFar - (FOG_CULL_MARGIN - FOG_CULL_BACK) : d > _fcFar;
+      }
+      if (hide === !!z.fogHidden) return;
+      z.fogHidden = hide;
+      z.mesh.visible = !hide;
+    }
     function compactZombieMesh(g) {
       const ud = g.userData;
       const keep = new Set([...(ud.eyeMats || []), ...(ud.pulseMats || [])]);
@@ -26738,9 +26834,26 @@
     function streakReloadMult() { return combo >= 10 ? 0.75 : 1; }
     function streakSavesRound() { return combo >= 20 && Math.random() < 0.34; }
     function streakResist() { return combo >= 30 ? 0.25 : 0; }
+    // GB-74 / P-22 (D-52): streaks heal. From the 5th kill of a streak each of his own kills
+    // gives back 1 HP (2 from the 20th), but only up to 70% of max: a hurt player has a reason
+    // to push, and a medpen is still the way to full. Natural regen stays at 40%. Turret, trap
+    // and wire kills never come through registerKill, so they never heal.
+    const STREAK_HEAL_CAP_FRAC = 0.7;
+    function streakHealHp() { return combo >= 20 ? 2 : combo >= 5 ? 1 : 0; }
+    function streakHeal() {
+      const hp = streakHealHp();
+      if (!hp || !gameStarted || gameOver || won || playerHp <= 0) return 0;
+      const cap = PLAYER_MAX_HP * STREAK_HEAL_CAP_FRAC;
+      if (playerHp >= cap) return 0;
+      const was = playerHp;
+      playerHp = Math.min(cap, playerHp + hp);
+      updateHpHud();
+      return playerHp - was;
+    }
     function registerKill() {
       combo += 1;
       comboT = COMBO_WINDOW;
+      streakHeal();   // GB-74
       comboPopT = 0.12;
       if (combo > comboBest) comboBest = combo;
       if (combo === 5) { showBanner('RAMPAGE', '5 streak · x1.25 skull value · faster feet', 1.6, '#ffd24a'); AudioSys.streak(0); }
@@ -26768,7 +26881,7 @@
         if (comboNumEl) comboNumEl.textContent = combo + '×';
         const m = comboMult();
         const power = combo >= 30 ? 'thick skin' : combo >= 20 ? 'free rounds' : combo >= 10 ? 'quick hands' : combo >= 5 ? 'fast feet' : '';
-        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' skull value · ' + power) : '';
+        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' skull value · ' + power + (streakHealHp() ? ' · kills heal' : '')) : '';   // GB-74
         if (comboBarEl) comboBarEl.style.transform = 'scaleX(' + Math.max(0, comboT / COMBO_WINDOW).toFixed(3) + ')';
       }
     }
@@ -26777,11 +26890,33 @@
     const runRecords = createRecords({ load: () => localStorage.getItem(RECORDS_KEY), save: value => localStorage.setItem(RECORDS_KEY, value) });
     const menuBestRecord = document.getElementById('menuBestRecord');
     renderBestRecord(menuBestRecord, runRecords.read());
+    const lifetimeBadges = createBadges({ load: () => localStorage.getItem(BADGES_KEY), save: value => localStorage.setItem(BADGES_KEY, value) });
+    const menuBadges = document.getElementById('menuBadges');
+    // CU-59 owns debugTouched. Missing until that shell task lands means eligible.
+    function badgeRunEligible() { return typeof debugTouched === 'undefined' || !debugTouched; }
+    const badgeAdapter = createBadgeAdapter({ store: lifetimeBadges, getEligible: badgeRunEligible,
+      onAward: (ids, {moment}) => {
+        renderBadgeCollection(menuBadges, lifetimeBadges.read());
+        if (moment) AudioSys.musicCue('achievement');
+      }
+    });
+    badgeAdapter.reset(uiRunId);
+    renderBadgeCollection(menuBadges, lifetimeBadges.read());
+    window.addEventListener('dw-game', ({detail}) => {
+      if (detail?.type === 'run-reset') { badgeAdapter.receive(detail); return; }
+      if (!gameStarted || gameOver || won) return;
+      badgeAdapter.receive(detail);
+      if (detail?.type === 'prep-state') badgeAdapter.relay(objectiveRuntime?.read());
+    });
     function recordFinishedRun(evacuated = false) {
       if (!gameStarted) return null;
-      const result = runRecords.finish(uiRunId, { day: Math.max(1, day), kills: matchStats.kills,
-        streak: comboBest, headshots: matchStats.headshots, skulls: matchStats.skullsTurnedIn || 0, evacuated: !!evacuated });
+      const record = { day: Math.max(1, day), kills: matchStats.kills,
+        streak: comboBest, headshots: matchStats.headshots, skulls: matchStats.skullsTurnedIn || 0,
+        evacuated: !!evacuated, eligible: badgeRunEligible() };
+      const result = runRecords.finish(uiRunId, record);
+      if (result) badgeAdapter.finish(uiRunId, record);
       renderBestRecord(menuBestRecord, runRecords.read());
+      renderBadgeCollection(menuBadges, lifetimeBadges.read());
       return result;
     }
     let hitPingT = 0;
@@ -27399,6 +27534,7 @@
     function killZombie(z, award = true, deathInfo = null) {
       if (!z.alive) return;
       z.alive = false;
+      if (z.fogHidden && z.mesh) { z.fogHidden = false; z.mesh.visible = true; }   // GB-59: the corpse is his to walk up to
       motionZs.delete(z);   // GB-66: a corpse takes the body over (beginCorpse); a gib gives its slot back below
       // GP-38 (ChatGPT's request): the last guard of a POI down is a cleared site, once per post.
       // retirePoiGuards (the alarm) and clearZombies (resets) never come through here, so neither is a clear.
@@ -29140,10 +29276,21 @@
         const pr = Studio.loadMotion(MotionPresets.json('marine/marine'));
         const inst = Studio.rigs.get('marine').create({ group: marine });
         marineBodyV = Studio.createBody(inst, pr, { ground: (x, z) => entityGroundY(x, z, player.position.y + STEP_UP) });
+        marineBodyJoints = Object.values(inst.R).filter((j) => j && j.isObject3D);
       } catch (e) { console.warn('GB-67: no reacting body for the marine: ' + (e && e.message)); }
       return marineBodyV;
     }
     function marineDown() { const b = marineBodyV; return !!(b && MOTION_DOWN[b.state]); }
+    // GB-67 follow-up. updateMarinePose writes only some of a joint's Euler angles (the hips get their yaw and roll,
+    // never their pitch) and eases others from last frame's value. With his body's pose left in the joints, that
+    // read the body's own lean back as the animation's: the body chased itself, a 0.05 m/s tap had him stepping
+    // and falling within a second (t92, under the real basis; three on the GPU always behaved like this). So his
+    // animation's own pose is kept each frame, before the body writes over it, and put back before the next
+    // updateMarinePose: the animation carries on from where it was, as if no body had touched it.
+    let marineBodyJoints = [];
+    const marineAnimSnap = new Map();
+    function snapMarineAnim() { for (const j of marineBodyJoints) { let s = marineAnimSnap.get(j); if (!s) marineAnimSnap.set(j, (s = { q: j.quaternion.clone(), p: j.position.clone() })); else { s.q.copy(j.quaternion); s.p.copy(j.position); } } }
+    function restoreMarineAnim() { if (!marineAnimSnap.size) return; for (const [j, s] of marineAnimSnap) { j.quaternion.copy(s.q); j.position.copy(s.p); } marineAnimSnap.clear(); }
     function marineBodyAllowed() {
       return motionEnabled && gameStarted && !gameOver && !won && !scriptedKill && !marineInsertion && !playerSwimming &&
         !climbingTower && !mortarMounted && !mortarCarried && !(rollT > 0);
@@ -29160,18 +29307,27 @@
       if (!blow || !grounded || !marineBodyAllowed()) { marineHits.skipped++; return false; }
       const b = marineBody();
       if (!b) { marineHits.skipped++; return false; }
-      if (!b.awake) { b.follow(); b.follow(); }
+      if (!b.awake) { b.follow(); b.follow(); marineBodyHost.set(player.position.x, player.position.y, player.position.z); }
       const L = Math.hypot(dx, dz) || 1;
       const took = b.hit({ at: [player.position.x, player.position.y + blow.y, player.position.z], dir: [dx / L, 0, dz / L], power: blow.power, kind: blow.kind });
       if (took) marineHits.taken++; else marineHits.refused++;
       return took;
     }
+    // Where the host had him when his body last ran (GB-67 follow-up).
+    const marineBodyHost = new THREE.Vector3();
     // Each frame, after his animation and his gun are posed.
     function updateMarineBody(dt) {
       const b = marineBodyV;
       if (!b || !b.awake) return;
       if (!marineBodyAllowed()) { releaseBody(b); return; }
+      // Standing, the host moves him (GB-50's slide, his own walk, the ground under him): his body comes along
+      // (CL-67's body.shift), feet and all, with no push. Left behind, his planted feet stretched him until he
+      // fell: under the real basis a shambler's swipe put him down (t92). Down, his body's drift moves the host
+      // instead, so nothing is shifted then.
+      const hx = player.position.x - marineBodyHost.x, hy = player.position.y - marineBodyHost.y, hz = player.position.z - marineBodyHost.z;
+      if (!MOTION_DOWN[b.state] && b.shift && (hx || hy || hz) && Math.abs(hx) + Math.abs(hz) < 3) b.shift(hx, hy, hz);
       b.follow();
+      snapMarineAnim();
       const ev = b.update(dt);
       b.apply();
       for (const e of ev) { marineHits.events.push(e[0]); if (marineHits.events.length > 40) marineHits.events.shift(); }
@@ -29188,6 +29344,7 @@
         }
         if (clear) { player.position.x = p.x; player.position.z = p.z; }
       }
+      marineBodyHost.set(player.position.x, player.position.y, player.position.z);
     }
 
     // === Ways to die ==============================================================
@@ -31522,7 +31679,7 @@
       const recordResult = recordFinishedRun(victory);
       winTitleEl.textContent = dwText(victory ? 'gameOver.win' : 'gameOver.title');
       // How it ended — by name, when the marine died a named death — then the run in
-      // four numbers, then the catalogue of ways to die with this one marked found.
+      // five numbers, then the catalogue of ways to die with this one marked found.
       const cause = !victory && gameStarted && lastDeathCause && DEATH_WAYS[lastDeathCause] ? lastDeathCause : null;
       winMsgEl.textContent = '';
       const why = document.createElement('span'); why.className = 'reason';
@@ -31544,6 +31701,8 @@
       winMsgEl.appendChild(why); winMsgEl.appendChild(row);
       const bestLine = document.createElement('span'); bestLine.className = 'best-record';
       renderBestRecord(bestLine, runRecords.read(), recordResult?.newFields || []); winMsgEl.appendChild(bestLine);
+      const badges = document.createElement('span'); badges.id = 'runBadges';
+      renderBadgeCollection(badges, lifetimeBadges.read(), badgeAdapter.earned()); winMsgEl.appendChild(badges);
       if (!victory && gameStarted) {
         const { seen, isNew } = recordDeath(cause);
         const keys = Object.keys(DEATH_WAYS);
@@ -33066,6 +33225,17 @@
       sprayHeat = Math.min(9, sprayHeat + 1);
       sprayShot++;
     }
+    // GB-69 (P-8): the laser does what the kiosk sells ("Tighter groups"). While it's switched on and the gun in
+    // hand carries one, the random cone is x0.8: every bullet, every pellet of a shell, the launcher's round.
+    // Recoil (climb and wander) is the gun's and is left alone.
+    const LASER_SPREAD_MUL = 0.8;
+    function laserSteadies() {
+      if (!lasersEnabled || !gearOwned.laser) return false;
+      const st = WEAPON_STATS[currentWeapon];
+      if (!st || st.melee) return false;
+      const gun = weaponMeshes[currentWeapon];
+      return !!(gun && gun.userData.laser);
+    }
     function aimDirWithSpread(spread = 0) {
       const d = getAimDir().clone();
       const profile = WEAPON_RECOIL[currentWeapon] || [0, 0, 0];
@@ -33073,7 +33243,7 @@
       const brace = crouching ? 0.62 : 1;
       const moving = Math.min(1, Math.hypot(velX, velZ) / 5);
       const pair = akimboOn() ? 1.45 : 1;
-      const cone = Math.max(spread, profile[0]) * brace * pair * (1 + moving * 0.45 + heat * 0.045);
+      const cone = Math.max(spread, profile[0]) * brace * pair * (1 + moving * 0.45 + heat * 0.045) * (laserSteadies() ? LASER_SPREAD_MUL : 1);
       const r = Math.sqrt(Math.random()) * cone, a = Math.random() * Math.PI * 2;
       const climb = Math.min(0.07, heat * profile[1]) * brace * pair;
       const side = Math.sin(sprayShot * 0.73) * profile[2] * Math.min(1, heat / 5) * brace * pair;
@@ -37241,9 +37411,11 @@
       const bombQueue = [];
       groanThrottle -= dt;
       const poiPhase = phase;   // GB-43: the loop body declares its own `phase` further down
+      fogCullPrep();   // GB-59
       for (const z of zombies) {
         if (!z.alive) continue;
         syncZombieFarLod(z);
+        syncZombieFogCull(z, dt);   // GB-59
         // GB-43: a POI guard holds its post until woken.
         if (z.poiGuard && !z.poiAwake) {
           const gd = Math.hypot(player.position.x - z.mesh.position.x, player.position.z - z.mesh.position.z);
@@ -39717,7 +39889,7 @@ live++;
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, zombieBody, motionDown, flushShotHits, getMotionStats: () => ({ ...motionStats, active: motionPool.active, reacting: motionZs.size }), setMotionEnabledDbg: (v) => { motionEnabled = !!v; }, getCorpses: () => corpses, marineBody: () => marineBody(), marineDown, marineHitDbg: (kind, power, dx, dz, y = 1.2) => marineHit({ kind, power, y }, dx, dz), bomberBlast, getMarineHits: () => ({ ...marineHits, events: marineHits.events.slice(), state: marineBodyV ? marineBodyV.state : null }), updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
-          knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
+          knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,

@@ -22,18 +22,17 @@ same way.
 | `LMB` | Fire. Hold for the chainsaw and flamethrower |
 | `RMB` | Zoom. A real first-person scope on the sniper rifle |
 | Hold `Q` | Weapon wheel: time slows, point at a gun, release to draw it. A quick tap steps to the next one |
-| `R` | Reload from the reserve. While a build ghost is up it cycles the axis lock instead |
+| `R` | Reload from the reserve. While a build ghost is up it rotates the piece; on Upgrade it selects the part instead |
 | `G` | Grenade. Your own grenades hurt you |
-| `F` | Knife, left hand: 3.5 m reach, 54 damage, 0.28 s, +/-87 degree arc |
-| `H` | Use a medkit |
+| `F` | Use the equipped blade (knife or bought machete) |
+| `H` | Use a carried MedPen |
 
 The reticle locks onto a zombie's body when it is over one, and aims into the sky above the
 skyline. The camera does not turn with your aim, so nothing moves under the reticle when you
 move the mouse and shots land on it.
 
-The knife one-shots Shamblers, ferals, Leapers, Screamers, Spitters and Bombers, and sweeps a
-crowd, and every blade hit shoves bodies back hard enough to buy the space it was meant to.
-The Machete (kiosk, Upgrades tab) replaces it: 3.8 m reach, 85 damage, 0.40 s, +/-93 degree arc.
+Blade reach, damage and targets depend on the equipped blade.
+The Machete (kiosk, Upgrades tab) replaces the knife with more reach and damage, but a limited number of targets per swing. Larger enemies resist blade damage.
 
 ### Sniper scope
 
@@ -57,7 +56,7 @@ it. Changing power keeps the picture centred where it was. Look sensitivity scal
 | Hold `B` | Build wheel, the same way. A quick tap enters or leaves build mode |
 | `Y` | Switch between one gun and two, once you own the pair (pistol, Uzi, revolver) |
 | `T` / `X` | Repair / sell. While a build ghost is up these act on the cell you are pointing at, not the nearest piece |
-| `Enter` | During prep: skip the countdown and start the wave now |
+| `Enter` | During prep: reminds you to use the HQ alarm panel; it does not start a wave |
 | `Tab` | Full map (north-up, whole world). `Tab` or `Esc` closes it; the game keeps running |
 
 **`E` at the kiosk** opens it (`E` or `Esc` closes it; time stops while it is open). It trades mid-wave too.
@@ -66,16 +65,12 @@ it. Changing power keeps the picture centred where it was. Look sensitivity scal
 leaves it, `T` shoulders it to carry it (no weapons while carrying, and you are slower), and
 `LMB` or `E` sets it down. You are rooted while manning it.
 
-**The build wheel** (hold `B`) holds nineteen: the shovel, then barricade, wall, window, door,
-sandbag, platform, floor, stairs, barbed wire, railing, spikes, fuel drum, mine, decoy beacon,
-light, flame, heavy, mortar. The **shovel** ($4) is not a structure
-— it levels the cell you point at and blends it into the ground around it. Rough or sloping
-ground refuses a build; this is how you fix it, and it is the one entry that works on a cell that
-already has something standing in it, reseating the pieces on top onto the new ground rather
-than knocking them down. Every slot is always in the same place whether or
-not you own it, so buying a blueprint never moves the others; locked ones sit greyed with their
-price and say so if you pick them. The barricade is free, the rest need their plans from the
-kiosk, and placing still costs per piece.
+**The build wheel** (hold `B`) has three pages: Structure, Defenses and Turrets. Point at a
+slot and release to select it; a quick tap enters or leaves build mode. Barricade, shovel and
+Upgrade start unlocked; other plans come from the kiosk. An unlocked blueprint does not make
+placement free: for example, a barricade costs 8 Cash and levelling with the shovel costs 4 Cash.
+The shovel levels the target cell and blends its edges, reseating existing pieces on top.
+Locked slots keep their places and show the blueprint price.
 
 **Placement is a lattice of 2 m cells over the whole map**, one piece per cell, like bricks in a
 course. 2 m because that is exactly how wide a wall section is, so a run of them meets edge to
@@ -135,11 +130,10 @@ which keeps it from dragging the ground out from under a reticle you have just p
 
 Settings are reachable from the title screen and from `Esc` mid-match, in the same panel:
 music and SFX volume (defaults 30% / 80%), look sensitivity, graphics quality, camera, fullscreen
-and "Skip prep time". Everything is remembered between runs.
+and Tips. Preferences are remembered between runs. Prep has no countdown: use E at the HQ board, then Sound the alarm.
 
 - **Look sensitivity** (0.25x to 3x): middle-drag speed, and how far the sniper reticle throws while scoped.
 - **Fullscreen**: `F11` or the toggle. It is taken on the document root so the HUD goes fullscreen
   with the canvas. It is re-entered when you pick a mode, because a browser only grants
   fullscreen from inside a click or keypress and so it cannot be restored at load. `Esc` leaves
   fullscreen (the browser's own handling) and that counts as turning it off.
-- **Skip prep time**: every prep becomes a 5-second countdown instead of two minutes.

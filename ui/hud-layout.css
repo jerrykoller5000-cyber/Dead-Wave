@@ -84,3 +84,17 @@ body:is(.opening,.frontend,.deploying,.cine,.dawn) #campCleared { display:none; 
 .record-new { color:#ead399; font-size:9px; letter-spacing:.08em; }
 #winMsg .stats { flex-wrap:wrap; gap:8px 0; }
 #winMsg .st { min-width:64px; padding:2px 10px; }
+
+/* GP-65: a compact collection, expanded only on request. */
+.lifetime-badges { display:block; margin:10px 0; text-align:left; font:12px/1.45 var(--font-hud); letter-spacing:normal; }
+#menuBadges .badge-toggle, #runBadges .badge-toggle { display:inline-block; min-width:0; padding:6px 8px; font:inherit; clip-path:none; text-transform:none; letter-spacing:normal; color:#d9c89e; background:#101913cc; border:1px solid #87917b66; cursor:pointer; }
+.lifetime-badges .badge-toggle:focus-visible { outline:2px solid #e2d1a1; outline-offset:3px; }
+.lifetime-badges .badge-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; max-height:210px; overflow:auto; margin-top:8px; padding:2px; }
+.lifetime-badges .badge-grid[hidden] { display:none; }
+.lifetime-badge { display:grid; grid-template-columns:1fr auto; gap:3px 8px; padding:8px; border:1px solid #71866b55; background:#102019cc; color:#dbdfcd; }
+.lifetime-badge.locked { color:#a7ada0; background:#141915cc; border-style:dashed; }
+.lifetime-badge strong { font-size:12px; overflow-wrap:anywhere; }
+.lifetime-badge .badge-state { color:#c9b57e; font-size:10px; }
+.lifetime-badge .badge-description { grid-column:1/-1; font-size:11px; font-weight:400; }
+.badges-new { display:block; margin-top:5px; color:#ead399; font-size:11px; }
+@media(max-width:440px) { .lifetime-badges .badge-grid { grid-template-columns:1fr; max-height:170px; } }

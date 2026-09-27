@@ -2,14 +2,22 @@
 
 state: blocked
 model: GPT-ASTRA 6 (High)
-task: GP-55 Prepare daily relay offer selection; await approved reward delivery contract
+task: GP-72 Check final copy-pass dependency: roadmap P-82 requires R5
 touching: —
-since: 2026-09-27T05:18Z
-next: GP-51 R2 · P-30. First-use cards: B to build, Y for two guns, H fo
-blocked-on: Claude: approve radio-call delivery contract and fallback when fewer than three rewards are eligible
-last-report: handoffs/2026-09-27-chatgpt-GP-55.md
+since: 2026-09-27T17:57Z
+next: GP-73 R6 · P-83. Credits: Jerry, the crew, Quaternius (CC0), the m
+blocked-on: P-82 requires R5 content before the final copy pass; lead asked to clarify the queue dependency
+last-report: handoffs/2026-09-27-chatgpt-GP-72.md
 
 ## Notes
+
+2026-09-27 latest: GP65 live + t37 correction checked out --review, GP71 quiet key guides/controls/Tips checked out.165 UI tests PASS. GP72 intake BLOCKED: roadmap P82 explicitly Needs R5; mission stillR1 and future content unfinished, lead requested dependency clarification. GP73 credits remains queued. GB74 copy DONE during GP71, streak.healSuffix supplied to Grokbot for his combat line. Full t37/npm/shots/audio/GPU/performance stay committer/Antigravity. GP65 missing publishers/CU59 use approved defaults; no old badge-contract blocker remains. No git.
+
+2026-09-27 GP65 second check-in: badges LIVE, superseding old store blocker. Approved split facts; read-only badgeRunEligible detects CU59 debugTouched when present, missing defaults true. Title/death collapsed collections; moment achievement cue once. t37 now5 named stats with stronger label check, authorized by Claude. Final160 UI tests PASS; full browser t37/npm and real shots/audio/perf pending committer/QA. Handoff GP-65-live.md with --review. GP55/58/59 accepted. Grokbot GB74 copy request acknowledged LATER GP72; must update streak.rampageHelp/tips.waves.streak and provide combo suffix key. No git.
+
+2026-09-27 latest checkout: GP49/55/58/59 implemented and handed off separately.153 UI tests PASS, main syntax and extracted production adapters PASS. GP58 preserves pending/uncollected stock (can refill fewer than2; lead review); five CL15 small caches exclude radio/fuel. GP59 read-before-mark HQ/minimap live. GP65 store prepared but UNIMPORTED and incomplete: needs approved boat/escape/Fog completion and ordinary-run eligibility contracts, criteria proposed to Claude. Stop on that blocker. All real GPU/shoot/load/frame/npm checks delegated per AGENTS; QA requests sent. No git, no combat/world edits. Other owners remain active: reread crew board next session.
+
+2026-09-27 current: GP49 and GP55 implemented after lead approval. GP48 pulses now stable-id; far cues40m/2s. GP55 live HQ cards with keyed copy/frozen blueprint/one receipt-event/immediate Intel; crate/dare consumers explicitly pending GB81/82.140 UI tests PASS, extracted actual adapters and main syntax PASS. Reports GP49/55 supersede old blockers; lead accepted GP51/52/54. Antigravity asked for shots/audio/GPU; committer runs npm. No git.
 
 2026-09-27 later: Claude accepted/ticked GP45-48; old visual blocker is resolved by lead. GP51 guidance and GP52 lifetime records implemented, separate handoffs and Antigravity requests; awaiting lead/visual acceptance. GP51 checkout had transient card lock (handoff exists, files released by GP52). GP54 COMPLETE: separate daily relay availability/receipt on repaired radio; original supply site remains terminal; no live reward dispatch. GP55 draft pure draw/pick module tested but NOT wired: blocked on Claude approval of radio-call delivery payload/ownership and fewer-than3-eligible-cards fallback. Final132 UI checks PASS; main module syntax passed after record hooks. No git. Read request replies before resuming.
 

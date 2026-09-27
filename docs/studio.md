@@ -521,6 +521,14 @@ The scene's tow, lift and trail still place the actor; the simulation decides wh
 gap check still measures the hand to the held joint (about 1 cm once hung). `guardian-grab-drag` does
 this to the marine from the yank on.
 
+Two more on a hold (CL-62): `"fromAlso": "guardian.handL"` names a second limb of the same holder, and
+the grip is then the point between the two hands (both reach, the gap is measured to the middle). And
+with `limp`, `to` may be any point of the held body rather than a limb (`"to": "marine.chest"`): that
+point is taken to the hand itself and the body hangs off it. `guardian-throw-out` carries the marine
+that way, dead from the start (`"kill": [0, { "power": 0 }]`), and drops `limp` to 0 at the throw
+clip's `release` event: the point is let go with the hand's speed, so he flies where the hand was going,
+lands and settles. A `limp` hold needs no `reach`/`tow`/`lift` of its own.
+
 **The motion lab**, `studio/motion-lab.html` (Jerry: `Open Motion Lab.bat`):
 - Pick a body and a weapon, click where it hits, and watch at full or quarter speed.
 - Try the muscle sliders.

@@ -524,7 +524,9 @@ export function guardianWalkUpright(g, R, t, ph, hold, look) {
     const ls = L === 'L' ? -1 : 1;
     const p = ph + (L === 'L' ? 0 : Math.PI);
     const lift = Math.max(0, Math.sin(p));
-    _tgt.set(ls * 0.36, lift * 0.3, 0.45 * Math.cos(p)).applyMatrix4(g.matrixWorld);
+    // The foot swings forward while it is up and goes back under it while it is down (CL-62: it
+    // was the other way round, a moonwalk; the studio's slide check on the carry clip found it).
+    _tgt.set(ls * 0.36, lift * 0.3, -0.45 * Math.cos(p)).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + L], R['knee' + L], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, L);

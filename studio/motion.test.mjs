@@ -216,6 +216,44 @@ test('the guardian drags a limp marine (CL-67): hung by the ankle at the hand, n
   assert.ok(p.pelvis[2] > 5 && p.pelvis[1] < 0.5 && p.pelvis[2] < p.footL[2], 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(','));
 });
 
+test('the guardian carries and throws the marine (CL-62): held at the chest between both hands, let go at the release, lands and settles', () => {
+  const sp = createScene(loadScene(JSON.parse(fs.readFileSync(new URL('./scenes/guardian-throw-out.json', import.meta.url), 'utf8')), clipOf));
+  const b = sp.actors.marine.body;
+  const ev = []; let worstGap = 0, lowest = Infinity, carried = 0, released = null, top = 0, chestAtRelease = null;
+  while (!sp.done) {
+    const r = sp.update(1 / 60);
+    for (const e of r.events) {
+      if (e.actor === 'marine' && e.name.startsWith('motion:')) ev.push(e.name.slice(7));
+      if (e.actor === 'guardian' && e.name === 'release') { released = sp.t; chestAtRelease = b.points().chest; }
+    }
+    const g = r.checks.gap['guardian.handR>marine.chest'];
+    if (g && sp.t > 0.3) { carried++; worstGap = Math.max(worstGap, g.value); }
+    for (const v of Object.values(b.points())) lowest = Math.min(lowest, v[1]);
+    top = Math.max(top, b.points().pelvis[1]);
+  }
+  assert.ok(carried > 120 && worstGap < 0.03, 'the chest got ' + worstGap.toFixed(3) + ' m off the hands while carried (' + carried + ' frames)');
+  assert.ok(released && ev.includes('released'), ev.join(' '));
+  // Thrown: he leaves the hands going out and up, comes down well beyond where it stood, and settles dead.
+  const p = b.points();
+  assert.ok(p.pelvis[2] > chestAtRelease[2] + 2 && p.pelvis[1] < 0.3, 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(','));
+  assert.ok(top > 3, 'never got up high: ' + top.toFixed(2));
+  assert.ok(lowest > -0.06, 'a point went ' + lowest.toFixed(3) + ' m under the ground');
+  assert.equal(b.state, 'dead');
+  assert.ok(ev.includes('settled'), ev.join(' '));
+});
+
+test('a hold between both hands, and on a body point that is not a limb, are checked in sentences', () => {
+  const base = () => JSON.parse(fs.readFileSync(new URL('./scenes/guardian-throw-out.json', import.meta.url), 'utf8'));
+  let j = base(); j.holds[0].fromAlso = 'marine.handL';
+  assert.throws(() => loadScene(j, clipOf), /"fromAlso" must be another limb of "guardian"/);
+  j = base(); j.holds[0].fromAlso = 'guardian.handR';
+  assert.throws(() => loadScene(j, clipOf), /the same limb as "from"/);
+  j = base(); j.holds[0].to = 'marine.belly';
+  assert.throws(() => loadScene(j, clipOf), /has no point "belly"/);
+  j = base(); delete j.actors.marine.motion; delete j.actors.marine.kill;
+  assert.throws(() => loadScene(j, clipOf), /"limp" needs "marine" to have "motion"/);
+});
+
 test('a scene refuses hits without a preset, and a bad hit, in sentences', () => {
   const bad = { format: 'dw-scene/1', name: 'x', length: 1, actors: { z: { rig: 'zombie', at: [0, 0, 0], clips: [[0, 'zombie/idle']], hits: [[0.2, { kind: 'laser', dir: [1, 0] }]] } } };
   assert.throws(() => loadScene(bad, clipOf), (e) => /needs "motion"/.test(e.message) && /"kind" is one of/.test(e.message) && /"dir" is \[x, y, z\]/.test(e.message));

@@ -1,4 +1,5 @@
 import { text } from './strings.js';
+import { createKeyGuide, KEY_GUIDE_STORAGE_KEY } from './key-guide.js';
 
 export const COACH_STORAGE_KEY = 'dw.coach.v1';
 const FLAGS = ['poiShown', 'pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased', 'buildShown', 'pairShown', 'medpenShown', 'built'];
@@ -98,6 +99,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   const hud = document.getElementById('hudNotices') || document.getElementById('hud');
   if (hud) {
     const coach = createCoach({ load: () => localStorage.getItem(COACH_STORAGE_KEY), save: value => localStorage.setItem(COACH_STORAGE_KEY, value) });
+    const guide = createKeyGuide({load:()=>localStorage.getItem(KEY_GUIDE_STORAGE_KEY),save:value=>localStorage.setItem(KEY_GUIDE_STORAGE_KEY,value)});
     const panel = document.createElement('aside'); panel.id = 'firstMinuteCoach'; panel.hidden = true;
     panel.setAttribute('role', 'status'); panel.setAttribute('aria-live', 'polite'); panel.setAttribute('aria-atomic', 'true');
     const title = document.createElement('strong'), body = document.createElement('span'); panel.append(title, body); hud.append(panel);
@@ -109,15 +111,19 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       if (view && lastId !== view.id) { title.textContent = view.title; body.textContent = view.body; body.hidden = !view.body; }
       lastId = view?.id || null;
     }
+    function tickGuidance(dt = frame.dt) {
+      const active=frame.active && !suppressed(),primary=coach.tick({...frame,dt,active});
+      const profile=coach.profile();
+      const extra=guide.tick({...frame,dt,active,priority:!!primary,learnedLoop:profile.banked&&profile.purchased});
+      render(primary||extra);
+    }
     window.addEventListener('dw-game', ({ detail }) => {
       if (!detail) return;
-      if (detail.type === 'hud-state') {
-        frame = detail;
-        render(coach.tick({ ...frame, active: frame.active && !suppressed() }));
-      } else { coach.handle(detail); render(suppressed() ? null : coach.read()); }
+      if (detail.type === 'hud-state') { frame=detail;tickGuidance(); }
+      else { coach.handle(detail);guide.handle(detail);render(suppressed()?null:coach.read()||guide.read()); }
     });
     // Pause/menu changes can stop gameplay ticks: hide the card immediately as well.
-    const refresh = () => render(coach.tick({ ...frame, dt: 0, active: frame.active && !suppressed() }));
+    const refresh = () => tickGuidance(0);
     const observer = new MutationObserver(refresh);
     for (const target of [document.body, ...document.querySelectorAll('#pause, #shop, #win, #bigBanner, #devConsole')]) observer.observe(target, { attributes: true, attributeFilter: ['class'] });
     document.addEventListener('visibilitychange', refresh);

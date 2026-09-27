@@ -3,6 +3,12 @@
 const RADIO = 'objective:radio-repair';
 export const OBJECTIVE_IDS = Object.freeze(['radio-repair','medical-convoy','ranger-cache',
   'hikers-cache','trapper-cache','fuel-depot','wreck-salvage'].map(id=>'objective:'+id));
+// The five small caches in CL-15; radio and fuel stand stay one-time sites.
+export const RESTOCK_CACHE_IDS = Object.freeze(OBJECTIVE_IDS.filter(id=>id!==RADIO && id!=='objective:fuel-depot'));
+const BLUEPRINTS = new Set(['light','flame','heavy','mortar']);
+const validPack = p => p && typeof p.id==='string' && quantity(p.quantity) &&
+  (['ammo','fuel','medpen','grenade'].includes(p.kind) || p.kind==='blueprint' && BLUEPRINTS.has(p.id) && p.quantity===1);
+const claimId = site => site.id + (site.restockDay ? ':day:'+site.restockDay : '') + ':claim:'+site.attempt;
 const FIXED = {
   'objective:medical-convoy': {id:'medpen',kind:'medpen',quantity:2},
   'objective:hikers-cache': {id:'medpen',kind:'medpen',quantity:1},
@@ -16,11 +22,11 @@ const row = id => ({id,state:'undiscovered',progress:0,feedback:null,pack:null,r
 
 export function createObjectives(initialRunId) {
   let runId, sequence, revealed, sites, active=false, reachable=new Set(), damageRevision=null;
-  let relayDay=0, relayClosed=true, relayReceipt=null, relayPhase='inactive';
+  let relayDay=0, relayClosed=true, relayReceipt=null, relayPhase='inactive', restockDay=0;
   function reset(id) {
     if(!validRun(id))throw new TypeError('Objective run id required');
     runId=id;sequence=0;revealed=false;sites=new Map(OBJECTIVE_IDS.map(id=>[id,row(id)]));
-    active=false;reachable.clear();damageRevision=null; relayDay=0;relayClosed=true;relayReceipt=null;relayPhase='inactive';
+    active=false;reachable.clear();damageRevision=null; relayDay=0;relayClosed=true;relayReceipt=null;relayPhase='inactive';restockDay=0;
   }
   reset(initialRunId);
   function interrupt(site) {
@@ -79,7 +85,7 @@ export function createObjectives(initialRunId) {
     const pack=site.pack||options.find(p=>p.id===choiceId)||(FIXED[id]?options[0]:null);
     if(!pack)return null;
     site.state='ready-to-claim';site.feedback=null;site.attempt++;
-    site.pending={runId,siteId:id,receiptId:`${id}:claim:${site.attempt}`,pack:clone(pack),quantity:site.remaining??pack.quantity};
+    site.pending={runId,siteId:id,receiptId:claimId(site),pack:clone(pack),quantity:site.remaining??pack.quantity};
     sequence++;return clone(site.pending);
   }
   function settleClaim({runId:claimRun,siteId,receiptId,accepted,remaining}={}) {
@@ -87,13 +93,29 @@ export function createObjectives(initialRunId) {
     if(claimRun!==runId||!pending||pending.receiptId!==receiptId)return false;
     const total=pending.quantity;
     if(!Number.isFinite(accepted)||!Number.isFinite(remaining)||accepted<0||remaining<0||accepted>total||Math.abs(accepted+remaining-total)>1e-7)return false;
-    if(['medpen','grenade'].includes(pending.pack.kind)&&(!Number.isInteger(accepted)||!Number.isInteger(remaining)))return false;
+    if(['medpen','grenade','blueprint'].includes(pending.pack.kind)&&(!Number.isInteger(accepted)||!Number.isInteger(remaining)))return false;
     if(accepted>0){site.pack=clone(pending.pack);site.remaining=remaining;}
     // A site removed during inventory delivery still records the grant, but cannot
     // reappear as an available target. Inventory must also persist this transaction.
     if(site.state!=='unavailable')site.state=remaining===0?'claimed':'ready-to-claim';
     site.feedback=remaining===0?null:accepted===0?'full':'partial';site.pending=null;
     sequence++;return true;
+  }
+  // Atomic, once per day. Never overwrite a delivery in flight or its leftovers.
+  function restock(day,picks=[]) {
+    if(!Number.isSafeInteger(day)||day<2||day<=restockDay||!Array.isArray(picks)||picks.length>2)return false;
+    const ids=new Set();
+    for(const pick of picks) {
+      const site=sites.get(pick?.id);
+      if(!site||(['medpen','grenade'].includes(pick.pack?.kind)&&!Number.isInteger(pick.pack.quantity))||!RESTOCK_CACHE_IDS.includes(site.id)||ids.has(site.id)||site.state==='unavailable'||site.pending||
+        (site.pack&&site.remaining>0)||!validPack(pick.pack)||pick.pack.kind==='fuel')return false;
+      ids.add(site.id);
+    }
+    for(const pick of picks) {
+      const site=sites.get(pick.id);
+      Object.assign(site,{state:'available',progress:0,feedback:null,pack:clone(pick.pack),remaining:pick.pack.quantity,pending:null,restockDay:day});
+    }
+    restockDay=day;sequence++;return true;
   }
   function setRadioDay({runId:requestRun,day,phase,alarm=false}={}) {
     if(requestRun!==runId||!Number.isSafeInteger(day)||day<1||day<relayDay||!['prep','wave','inactive'].includes(phase))return false;
@@ -114,10 +136,10 @@ export function createObjectives(initialRunId) {
     return clone(relayReceipt);
   }
   function snapshot() {
-    return {runId,sequence,revealed,active,radioCall:radioCall(),sites:[...sites.values()].map(site=>({...clone(site),reachable:active&&reachable.has(site.id)}))};
+    return {runId,sequence,revealed,active,restockDay,radioCall:radioCall(),sites:[...sites.values()].map(site=>({...clone(site),reachable:active&&reachable.has(site.id)}))};
   }
   function save() {
-    return {version:1,runId,revealed,relay:{day:relayDay,closed:relayClosed,receipt:clone(relayReceipt)},sites:[...sites.values()].map(clone)};
+    return {version:1,runId,revealed,restockDay,relay:{day:relayDay,closed:relayClosed,receipt:clone(relayReceipt)},sites:[...sites.values()].map(clone)};
   }
   // Cursor must restore this in the same transaction as inventory and its receipts.
   // Validate the entire blob before replacing anything; partial restore is forbidden.
@@ -128,20 +150,23 @@ export function createObjectives(initialRunId) {
     if(relay.receipt!==null&&(!relay.receipt||relay.receipt.runId!==blob.runId||relay.receipt.day!==relay.day||
       !['ammo','medical','hardware','intel','blackout'].includes(relay.receipt.card)||
       relay.receipt.receiptId!==RADIO+':day:'+relay.day+':call'))return false;
+    const savedRestockDay=blob.restockDay??0;
+    if(!Number.isSafeInteger(savedRestockDay)||savedRestockDay<0||savedRestockDay===1)return false;
     const next=new Map();
     for(const saved of blob.sites) {
       if(!saved||!OBJECTIVE_IDS.includes(saved.id)||next.has(saved.id)||!STATES.has(saved.state)||!Number.isFinite(saved.progress)||saved.progress<0||saved.progress>6||!Number.isSafeInteger(saved.attempt)||saved.attempt<0)return false;
-      if(saved.pack!==null&&(!saved.pack||typeof saved.pack.id!=='string'||!quantity(saved.pack.quantity)||!['ammo','fuel','medpen','grenade'].includes(saved.pack.kind)))return false;
+      if(saved.pack!==null&&!validPack(saved.pack))return false;
+      if(saved.restockDay!=null&&(!RESTOCK_CACHE_IDS.includes(saved.id)||!Number.isSafeInteger(saved.restockDay)||saved.restockDay<2||saved.restockDay>savedRestockDay||!saved.pack))return false;
       if(saved.remaining!==null&&(!saved.pack||!Number.isFinite(saved.remaining)||saved.remaining<0||saved.remaining>saved.pack.quantity))return false;
       if(saved.pending!==null) {
         const p=saved.pending;
-        if(!p||p.runId!==blob.runId||p.siteId!==saved.id||p.receiptId!==`${saved.id}:claim:${saved.attempt}`||!quantity(p.quantity)||!p.pack||!quantity(p.pack.quantity)||p.quantity>p.pack.quantity||typeof p.pack.id!=='string'||!['ammo','fuel','medpen','grenade'].includes(p.pack.kind))return false;
+        if(!p||p.runId!==blob.runId||p.siteId!==saved.id||p.receiptId!==claimId(saved)||!quantity(p.quantity)||!validPack(p.pack)||p.quantity>p.pack.quantity)return false;
       }
       const site=clone(saved);interrupt(site);next.set(site.id,site);
     }
-    relayDay=relay.day;relayClosed=relay.closed;relayReceipt=clone(relay.receipt);relayPhase='inactive';
+    relayDay=relay.day;relayClosed=relay.closed;relayReceipt=clone(relay.receipt);relayPhase='inactive';restockDay=savedRestockDay;
     runId=blob.runId;revealed=blob.revealed;sites=next;sequence++;active=false;reachable.clear();damageRevision=null;
     return true;
   }
-  return {reset,update,beginClaim,settleClaim,setRadioDay,beginRadioCall,snapshot,save,restore};
+  return {reset,update,beginClaim,settleClaim,restock,setRadioDay,beginRadioCall,snapshot,save,restore};
 }

@@ -3,7 +3,7 @@ import { projectScoutCave } from './scouting.js';
 const COLORS = Object.freeze({ healthy: '#5ad8ff', damaged: '#e2b45a', critical: '#ff755e' });
 
 // Claude approved the CU-50 build-hit event, not flashT or inferred HP changes.
-// Object identity keeps a removed build's pulse off a replacement in its cell.
+// Stable event IDs select a build; object identity keeps a removed build's pulse off a replacement in its cell.
 export function createBuildAttackPulses() {
   const until = new Map(); let runId = null;
   return {
@@ -11,8 +11,8 @@ export function createBuildAttackPulses() {
       if (event?.type === 'run-reset') { until.clear(); runId = event.runId; return; }
       if (event?.type !== 'build-hit' || !Number.isFinite(nowMs) ||
           (runId != null && event.runId != null && event.runId !== runId) ||
-          !Number.isFinite(event.x) || !Number.isFinite(event.z)) return;
-      for (const b of builds) if (b.x === event.x && b.z === event.z) {
+          !Number.isFinite(event.id) || !Number.isFinite(event.x) || !Number.isFinite(event.z)) return;
+      for (const b of builds) if (b.id === event.id) {
         if (event.broke || b.hp <= 0) until.delete(b);
         else until.set(b, nowMs + 800);
       }
@@ -22,6 +22,25 @@ export function createBuildAttackPulses() {
       for (const [b, end] of until) if (!alive.has(b) || b.hp <= 0 || end <= nowMs) until.delete(b);
       return builds.map(b => ({ id: b.id, x: b.x, z: b.z, hp: b.hp, maxHp: b.maxHp,
         underAttack: until.has(b) }));
+    }
+  };
+}
+
+// Event-driven only: no HP polling and no extra cue inside the existing 40m sound.
+export function createFarBuildWarnings() {
+  let runId = null, nextAt = -Infinity;
+  return {
+    handle(event, listener = {}, nowMs = 0) {
+      if (event?.type === 'run-reset') { runId = event.runId; nextAt = -Infinity; return null; }
+      if (event?.type !== 'build-hit' || !listener.active ||
+          (runId != null && event.runId !== runId) ||
+          ![event.id, event.x, event.z, event.frac, listener.x, listener.z, listener.yaw, nowMs].every(Number.isFinite) ||
+          event.frac < 0 || event.frac > 1 || (!event.broke && event.frac >= .5) || nowMs < nextAt) return null;
+      const dx = event.x - listener.x, dz = event.z - listener.z, distance = Math.hypot(dx, dz);
+      if (distance <= 40) return null;
+      nextAt = nowMs + 2000;
+      const pan = Math.max(-.85, Math.min(.85, (-dx * Math.cos(listener.yaw) + dz * Math.sin(listener.yaw)) / distance));
+      return { broke: event.broke === true, pan, volume: .45 };
     }
   };
 }

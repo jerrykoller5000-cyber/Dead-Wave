@@ -51,6 +51,13 @@
       "reference": "OverhandThrow"
     },
     {
+      "asset": "guardian-throw-out",
+      "owner": "claude",
+      "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "marine-knocked",
       "owner": "grokbot",
       "rig": "marine",
@@ -61,6 +68,13 @@
       "asset": "motion-marine-marine",
       "owner": "grokbot",
       "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "motion-zombie-shambler",
+      "owner": "grokbot",
+      "rig": "zombie",
       "clip": null,
       "reference": null
     },

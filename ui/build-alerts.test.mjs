@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildHealth, buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses } from './build-alerts.js';
+import { buildHealth, buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses, createFarBuildWarnings } from './build-alerts.js';
 
 const wall = (overrides = {}) => ({ id: 'wall', hp: 100, maxHp: 100, x: 0, z: 10, ...overrides });
 const projection = { x: 0, z: 0, yaw: 0, center: 100, scale: 2, rim: 90 };
@@ -89,19 +89,49 @@ test('attack outline flashes without hiding health color or leaking canvas state
 });
 
 test('only damage events pulse for 800ms; reset, expiry and replacements clear them', () => {
- const pulses=createBuildAttackPulses(), b=wall({hp:40});
+ const pulses=createBuildAttackPulses(), b=wall({id:7,hp:40});
  pulses.handle({type:'run-reset',runId:1});
- pulses.handle({type:'build-hit',runId:0,x:b.x,z:b.z},[b],0);
+ pulses.handle({type:'build-hit',id:7,runId:0,x:b.x,z:b.z},[b],0);
  assert.equal(pulses.snapshot([b],0)[0].underAttack,false);
- pulses.handle({type:'build-hit',runId:1,x:b.x,z:b.z},[b],0);
+ pulses.handle({type:'build-hit',id:7,runId:1,x:b.x,z:b.z},[b],0);
  assert.equal(pulses.snapshot([b],799)[0].underAttack,true);
  assert.equal(pulses.snapshot([b],800)[0].underAttack,false);
- pulses.handle({type:'build-hit',runId:1,x:b.x,z:b.z},[b],1000);
+ pulses.handle({type:'build-hit',id:7,runId:1,x:b.x,z:b.z},[b],1000);
  assert.equal(pulses.snapshot([{...b}],1001)[0].underAttack,false);
- pulses.handle({type:'build-hit',runId:1,x:b.x,z:b.z},[b],1100);
- pulses.handle({type:'build-hit',runId:1,x:b.x,z:b.z,broke:true},[b],1101);
+ pulses.handle({type:'build-hit',id:7,runId:1,x:b.x,z:b.z},[b],1100);
+ pulses.handle({type:'build-hit',id:7,runId:1,x:b.x,z:b.z,broke:true},[b],1101);
  assert.equal(pulses.snapshot([b],1102)[0].underAttack,false);
- pulses.handle({type:'build-hit',runId:1,x:b.x,z:b.z},[b],1200);
+ pulses.handle({type:'build-hit',id:7,runId:1,x:b.x,z:b.z},[b],1200);
  pulses.handle({type:'run-reset',runId:2});
  assert.equal(pulses.snapshot([b],1201)[0].underAttack,false);
+});
+
+
+test('stable build identity separates defenses stacked at the same coordinates', () => {
+ const pulses=createBuildAttackPulses(), a=wall({id:1}), b=wall({id:2});
+ pulses.handle({type:'build-hit',id:1,x:0,z:10},[a,b],0);
+ assert.deepEqual(pulses.snapshot([a,b],1).map(b=>b.underAttack),[true,false]);
+ pulses.handle({type:'run-reset',runId:2});
+ pulses.handle({type:'build-hit',x:0,z:10},[a,b],0);
+ assert.deepEqual(pulses.snapshot([a,b],1).map(b=>b.underAttack),[false,false]);
+});
+
+const farHit = (extra={}) => ({type:'build-hit',runId:1,id:7,x:60,z:0,frac:.4,broke:false,...extra});
+const ears = (extra={}) => ({active:true,x:0,z:0,yaw:0,...extra});
+test('far build cue is panned with the camera and limited to one per two seconds', () => {
+ const cues=createFarBuildWarnings(); cues.handle({type:'run-reset',runId:1});
+ assert.equal(cues.handle(farHit(),ears(),0).pan,-.85);
+ assert.equal(cues.handle(farHit({id:8,broke:true}),ears(),1999),null);
+ assert.equal(cues.handle(farHit({broke:true}),ears({yaw:Math.PI}),2000).pan,.85);
+ assert.equal(cues.handle(farHit({x:0,z:60}),ears(),4000).pan,0);
+});
+test('warning excludes near, healthy, stale, inactive and invalid events without using cooldown', () => {
+ const cues=createFarBuildWarnings(); cues.handle({type:'run-reset',runId:1});
+ for(const change of [{x:40},{frac:.5},{frac:1},{runId:0},{frac:NaN},{id:undefined},{type:'purchase-delivered'}])
+   assert.equal(cues.handle(farHit(change),ears(),0),null);
+ assert.equal(cues.handle(farHit(),ears({active:false}),0),null);
+ assert.equal(cues.handle(farHit(),ears({yaw:NaN}),0),null);
+ assert.equal(cues.handle(farHit({broke:true,frac:0}),ears(),0).broke,true);
+ cues.handle({type:'run-reset',runId:2});
+ assert(cues.handle(farHit({runId:2}),ears(),1));
 });

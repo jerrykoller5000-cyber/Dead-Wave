@@ -27,3 +27,9 @@ body.briefing #firstMinuteCoach { display: none; }
 #hqBriefing .bounty-post h4 { margin: 0 0 5px; font-size: 13px; color: #d6eeee; }
 #hqBriefing .bounty-reward { color: #e2d1a1; }
 #hqBriefing .bounty-post[data-state="done"] { border-color: #7fae87; opacity: .8; }
+
+#hqBriefing .radio-call-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 8px; }
+#hqBriefing .radio-call-card { display: flex; flex-direction: column; gap: 7px; text-align: left; line-height: 1.5; }
+#hqBriefing .radio-call-card strong { color: #e2d1a1; }
+#hqBriefing .radio-call-card span { font-weight: 400; }
+#hqBriefing .radio-call-status { color: #c5d8ba; }

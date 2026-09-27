@@ -108,3 +108,33 @@ test('relay receipt survives module roundtrip and invalid relay data is rejected
  assert.equal(n.snapshot().radioCall.callable,false);assert.equal(n.snapshot().radioCall.receipt.card,'medical');
  const bad=n.save();bad.relay.receipt.day=99;const before=n.save();assert.equal(n.restore(bad),false);assert.deepEqual(n.save(),before);
 });
+
+
+test('day-two restock reopens caches with day-scoped receipts and never re-arms twice',()=>{
+ const m=createObjectives('run');open(m,med);const old=m.beginClaim({id:med});deliver(m,old,2);
+ assert.equal(m.restock(1,[{id:med,pack:{id:'grenade',kind:'grenade',quantity:2}}]),false);
+ assert(m.restock(2,[{id:med,pack:{id:'grenade',kind:'grenade',quantity:2}}]));
+ open(m,med);const r=m.beginClaim({id:med});assert.equal(r.pack.kind,'grenade');assert(r.receiptId.includes(':day:2:'));
+ assert.notEqual(r.receiptId,old.receiptId);deliver(m,r,2);
+ assert.equal(m.restock(2,[]),false);assert(m.restock(3,[{id:med,pack:{id:'medpen',kind:'medpen',quantity:2}}]));
+ open(m,med);assert.notEqual(m.beginClaim({id:med}).receiptId,r.receiptId);
+});
+
+test('restocks preserve pending/partial deliveries, refuse invalid lists atomically and exclude relay/fuel',()=>{
+ const m=createObjectives('run');open(m);const r=m.beginClaim({id:ranger,choiceId:pack.id,choices:[pack]});
+ const pick={id:ranger,pack:{id:'grenade',kind:'grenade',quantity:2}};
+ assert.equal(m.restock(2,[pick]),false);deliver(m,r,1);assert.equal(m.restock(2,[pick]),false);
+ const before=m.save();
+ for(const picks of [[{...pick,id:radio}],[{...pick,id:'objective:fuel-depot'}],[{...pick,id:med},{...pick,id:med}],
+   [{id:med,pack:{id:'bogus',kind:'blueprint',quantity:1}}]])assert.equal(m.restock(2,picks),false);
+ assert.deepEqual(m.save(),before);
+});
+
+test('restocked blueprint receipts survive module roundtrip and a reset clears daily stock',()=>{
+ const m=createObjectives('run');assert(m.restock(2,[{id:ranger,pack:{id:'light',kind:'blueprint',quantity:1}}]));open(m);
+ const r=m.beginClaim({id:ranger});assert.equal(r.quantity,1);
+ const n=createObjectives('new');assert(n.restore(m.save()));assert.equal(n.snapshot().restockDay,2);open(n);
+ assert.deepEqual(n.beginClaim({id:ranger}),r);assert(deliver(n,r,1));assert.equal(deliver(n,r,1),false);
+ const bad=n.save();bad.sites.find(s=>s.id===ranger).restockDay=3;assert.equal(n.restore(bad),false);
+ n.reset('fresh');assert.equal(n.snapshot().restockDay,0);assert.equal(site(n,ranger).state,'undiscovered');
+});

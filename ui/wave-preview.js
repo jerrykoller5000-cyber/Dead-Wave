@@ -2,6 +2,7 @@ import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
 import { buildScoutingReport } from './scouting.js';
 import { buildBountyBoard } from './bounties.js';
+import { buildRadioCallView } from './radio-call.js';
 
 export const FIELD_INTEL_PRICE = 120;
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
@@ -88,6 +89,26 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       line(report,'p',scouting.caves);line(report,'p',scouting.pushes,'briefing-pushes');
       line(report,'p',scouting.trick,'briefing-trick');line(report,'p',scouting.legend,'briefing-muted');
     }
+    const radio = buildRadioCallView(data.radioCall);
+    if (radio) {
+      const section=doc.createElement('section');section.className='briefing-radio';content.append(section);
+      line(section,'h3',radio.title);
+      const status=line(section,'p',radio.note,'radio-call-status');status.setAttribute('role','status');
+      const cards=doc.createElement('div');cards.className='radio-call-cards';section.append(cards);
+      for(const card of radio.cards) {
+        const button=doc.createElement('button');button.type='button';button.className='radio-call-card';button.dataset.card=card.id;
+        button.disabled=!card.enabled || data.disabled === true || data.canSoundAlarm === false;line(button,'strong',card.name);line(button,'span',card.description);
+        button.addEventListener('click',()=>send('radio-call-request',{card:card.id,day:data.day,runId:data.runId}));
+        cards.append(button);
+      }
+    }
+    if(data.restocks?.length) {
+      const caches=doc.createElement('section');caches.className='briefing-restocks';content.append(caches);
+      line(caches,'h3',text('cache.title'));
+      for(const row of data.restocks)line(caches,'p',text('cache.row',{
+        site:row.name,reward:row.collected?text('cache.collected'):row.reward}));
+      if(data.restocks.some(row=>!row.collected))line(caches,'p',text('cache.mapLegend'),'briefing-muted');
+    }
     const bounties = buildBountyBoard(data);
     if(bounties) {
       const board=doc.createElement('section');board.className='briefing-bounties';content.append(board);
@@ -139,7 +160,9 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
   const receive = ({detail:data}) => {
     if(!data)return;
     if(data.type==='briefing-open') {
+      const cardHadFocus = dialog.open && doc.activeElement?.classList.contains('radio-call-card');
       render(data);
+      if(cardHadFocus)close.focus();
       if(!dialog.open){returnFocus=doc.activeElement;doc.body.classList.add('briefing');dialog.showModal();close.focus();}
     } else if(data.type==='prep-checklist-view') {
       prep.hidden = !data.view.visible; prepHeading.textContent = data.view.summary; renderPrepRows(prepRows,data.view,doc);

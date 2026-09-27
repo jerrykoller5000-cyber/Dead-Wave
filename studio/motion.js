@@ -343,7 +343,8 @@ export function createBody(inst, preset, opts = {}) {
       if (!held) return false;
       held = null;
       inv[heldI] = 1 / mass[heldI]; heldI = -1;
-      if (body.state === 'held') { body.state = body.alive ? 'fall' : 'dead'; stateT = 0; landed = false; still = 0; emit('released'); }
+      if (body.state === 'held') { body.state = body.alive ? 'fall' : 'dead'; stateT = 0; landed = false; still = 0; }
+      emit('released');   // a corpse let go says so too (it flies with the hand's speed, then settles)
       return true;
     }
     const i = nearest(point);
@@ -500,7 +501,9 @@ export function createBody(inst, preset, opts = {}) {
       }
     }
     // Nothing flies apart: a runaway point (a bad preset) is put back where the animation has it.
+    // (The held point goes wherever the hand goes, however far: it's the hand's, not a runaway.)
     for (let i = 0; i < n * 3; i++) {
+      if (held && (i / 3 | 0) === held.i) continue;
       if (!Number.isFinite(P[i]) || Math.abs(P[i] - Q[i]) > 60 * h) { P.set(A); Q.set(A); break; }
     }
   }

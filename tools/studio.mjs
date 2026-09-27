@@ -354,10 +354,12 @@ async function renderScene(rel, opt) {
   const actors = Object.values(json.actors || {});
   const reacting = actors.some((a) => a.motion);
   const rigsUsed = [...new Set(actors.map((a) => a.rig))];
+  // A scene is the studio's (Claude's, D-40) unless it says otherwise ("owner", "task" in the JSON);
+  // a reaction on its own is reviewed under review/motion-* with the preset's owner.
   writeMeta(dir, {
-    asset, owner: reacting ? 'grokbot' : 'claude', rig: reacting ? rigsUsed.join('+') : 'guardian',
+    asset, owner: json.owner || 'claude', rig: reacting ? rigsUsed.join('+') : 'guardian',
     scene: json.name, clip: null, reference: null, design: 'default',
-    task: reacting ? 'GB-70' : 'CL-64'
+    task: json.task || ''
   });
   fs.writeFileSync(path.join(ver, 'scene.json'), raw);
   const frames = String(Math.max(2, parseInt(opt.frames || '8', 10) || 8));

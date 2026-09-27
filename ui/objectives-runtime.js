@@ -2,6 +2,7 @@
 import {createObjectives,OBJECTIVE_IDS} from '../game/objectives.js';
 import {mountObjectives} from './objectives.js';
 import {text} from './strings.js';
+import {drawCacheRestock} from './cache-restock.js';
 const RADIO='objective:radio-repair';
 const fixed={
   'objective:medical-convoy':{id:'medpen',kind:'medpen',quantity:2},
@@ -9,6 +10,7 @@ const fixed={
   'objective:trapper-cache':{id:'grenade',kind:'grenade',quantity:1}
 };
 function description(pack,amount=pack?.quantity) {
+  if(pack?.kind==='blueprint')return {key:'shop.blueprint',params:{name:text('build.'+pack.id+'.name')}};
   if(!pack)return {key:'objectives.choosePack'};
   if(pack.kind==='medpen')return {key:'supply.medpens',params:{count:amount}};
   if(pack.kind==='grenade')return {key:'ammo.quantity.grenades',params:{count:amount}};
@@ -21,7 +23,7 @@ function choiceDescription(pack) {
   const calibre=pack.caliber==='chainsaw'?text('weapon.chainsaw.name'):text('calibre.'+(keys[pack.caliber]||pack.caliber));
   const d=description(pack);return {key:'objectives.packChoice',params:{calibre,pack:text(d.key,d.params)}};
 }
-export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,getPlayer,mapRoot,hudRoot,project,onComplete=()=>{}}) {
+export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,grantBlueprint=()=>null,getRestockBlueprint=()=>null,getPlayer,mapRoot,hudRoot,project,onComplete=()=>{}}) {
   const model=createObjectives(runId),choices=new Map();
   let damageRevision=0,lastNear=null,disposed=false,frame=0,lastPoll=0,lastPaint='',lastSnapshot=null;
   const view=mountObjectives({mapRoot,hudRoot,project,onChoose:(id,choice)=>{choices.set(id,choice);lastPaint='';update();}});
@@ -55,7 +57,11 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
       const request=model.beginClaim({id:site.id,choiceId:pack?.id,choices:options(site.id)});
       if(request) {
         const receiptId=String(request.runId)+':'+request.receiptId;
-        const result=grantSupply({receiptId,source:'objective',items:[{id:request.pack.id==='medpen'?'medkit':request.pack.id,qty:request.quantity}]});
+        let result;
+        if(request.pack.kind==='blueprint') {
+          const granted=grantBlueprint(request.pack.id);
+          if(granted?.granted||granted?.alreadyOwned)result={ok:true,accepted:[{qty:1}],remaining:[]};
+        } else result=grantSupply({receiptId,source:'objective',items:[{id:request.pack.id==='medpen'?'medkit':request.pack.id,qty:request.quantity}]});
         if(result?.ok) {
           const accepted=result.accepted.reduce((n,item)=>n+item.qty,0),remaining=result.remaining.reduce((n,item)=>n+item.qty,0);
           if(model.settleClaim({...request,accepted,remaining})&&model.snapshot().sites.find(s=>s.id===site.id).state==='claimed')onComplete(site.id);
@@ -68,7 +74,7 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
       if(prop){const next=world.stateFor(site.state,site.id,site.feedback==='partial');if(next&&prop.state!==next)prop.setState(next);}
       return {...site,position:prop?{x:prop.centre.x,z:prop.centre.z}:{x:0,z:0},progress:site.progress/6,
         reward:description(pack),remaining:site.remaining===null?null:description(pack,site.remaining),
-        choices:fixed[site.id]?[]:opts.map(p=>({id:p.id,reward:choiceDescription(p)})),choiceId:pack?.id,choiceLocked:!!site.pack};
+        choices:fixed[site.id]||site.restockDay?[]:opts.map(p=>({id:p.id,reward:choiceDescription(p)})),choiceId:pack?.id,choiceLocked:!!site.pack};
     })};
     // Refresh labels at 10 Hz, while keeping input handling synchronous. Avoid DOM
     // rebuilding when only the sequence changed.
@@ -81,7 +87,15 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
   const onKey=e=>{if(e.code==='KeyE'&&!e.repeat)queueMicrotask(()=>update(true));};
   const onGame=({detail:d})=>{
     if(d?.type==='run-reset'){model.reset(d.runId);choices.clear();view.reset(d.runId);lastNear=null;lastPaint='';damageRevision=0;update();}
-    else if(d?.type==='prep-state'){model.setRadioDay({...d,alarm:d.alarm===true});}
+    else if(d?.type==='prep-state'){
+      model.setRadioDay({...d,alarm:d.alarm===true});
+      const snapshot=model.snapshot();
+      if(d.runId===snapshot.runId&&d.phase==='prep'&&!d.alarm&&d.day>=2&&d.day>snapshot.restockDay) {
+        const ammo=options('objective:ranger-cache');
+        const picks=drawCacheRestock(snapshot,ammo,getRestockBlueprint());
+        if(model.restock(d.day,picks)){lastPaint='';update();}
+      }
+    }
     else if(d?.type==='alarm-started'){model.setRadioDay({...d,phase:'wave',alarm:true});}
     else if(d?.type==='player-damaged'){damageRevision++;update();}
   };

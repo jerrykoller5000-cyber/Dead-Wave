@@ -72,6 +72,16 @@
     key('KeyW', false);
     ok(whileDown && movedDown < 0.35 && movedUp > 1.0, 'W held: ' + f2(movedDown) + ' m while down (only his fall), ' + f2(movedUp) + ' m in 0.5 s once up');
 
+    // (4) GB-67 follow-up: a tap (0.05 m/s) doesn't fell him. updateMarinePose writes only some of a joint's
+    // angles; with his body's pose left in them, his animation read his body's lean back as its own and he fell
+    // from nothing under the real basis. His animation's pose is now kept apart from his body's.
+    await stand(); await wait(2500);
+    T.marineHitDbg('blade', 0.05, 1, 0, 1.25);
+    const tapped = !!T.marineBody() && T.marineBody().state !== 'animated';
+    const tapStates = new Set(); const tt0 = performance.now();
+    while (performance.now() - tt0 < 1500) { tapStates.add(T.marineBody().state); await wait(20); }
+    ok(tapped && !tapStates.has('fall') && !tapStates.has('down') && T.marineBody().state === 'animated', 'a 0.05 m/s tap wakes his body and he stays up; it is over within 1.5 s (' + [...tapStates].join(' ') + ')');
+
     ok(!errs.length, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 2).join(' | ') : ''));
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e.message)); }
   return out.join('\n');
