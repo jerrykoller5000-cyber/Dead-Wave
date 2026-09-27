@@ -19533,6 +19533,34 @@
         try { devConsoleInput.blur(); } catch (_) {}
       }
     }
+    // The living horde, sorted by what could make it disappear: hidden by the fog cull, frozen by the far
+    // LOD, under the ground (more than a metre below sampleHeight on dry land), in the water, above the fog's
+    // far edge, and how far off it is. `horde` in the dev console; TT.hordeReport() in a test.
+    function hordeReport() {
+      const c = { alive: 0, visible: 0, fogHidden: 0, farLod: 0, under: 0, over: 0, water: 0, beyondFog: 0, nan: 0, near: Infinity, mean: 0 };
+      const fog = scene.fog, far = fog ? fog.far : Infinity;
+      const samples = [];
+      for (const z of zombies) {
+        if (!z.alive || !z.mesh) continue;
+        c.alive++;
+        const m = z.mesh, x = m.position.x, y = m.position.y, zz = m.position.z;
+        if (!Number.isFinite(x + y + zz)) { c.nan++; continue; }
+        if (m.visible) c.visible++;
+        if (z.fogHidden) c.fogHidden++;
+        if (z.farLod) c.farLod++;
+        const g = sampleHeight(x, zz), depth = waterDepthAt(x, zz);
+        if (depth > 0.3) c.water++;
+        else if (y < g - 1) { c.under++; if (samples.length < 3) samples.push('under at ' + x.toFixed(0) + ',' + zz.toFixed(0) + ' y ' + y.toFixed(1) + ' ground ' + g.toFixed(1)); }
+        else if (y > g + 2) c.over++;
+        const d = Math.hypot(x - player.position.x, zz - player.position.z);
+        c.mean += d; if (d < c.near) c.near = d;
+        if (d > far) c.beyondFog++;
+      }
+      if (c.alive) c.mean /= c.alive;
+      c.fogFar = far;
+      c.line = c.alive + ' alive · ' + c.visible + ' drawn · ' + c.fogHidden + ' fog-hidden · ' + c.farLod + ' far-LOD · ' + c.under + ' under · ' + c.over + ' over · ' + c.water + ' in water · ' + c.beyondFog + ' past fog ' + (far === Infinity ? '∞' : far.toFixed(0)) + ' m · nearest ' + (c.near === Infinity ? '-' : c.near.toFixed(0)) + ' m · mean ' + c.mean.toFixed(0) + ' m' + (samples.length ? ' · ' + samples.join('; ') : '');
+      return c;
+    }
     function spawnMegaswarm(n) {
       const count = Math.max(1, n | 0);
       const rnd = mulberry32(15);
@@ -19585,6 +19613,11 @@
         const n = cmd === 'megaswarm' ? 500 : (parseInt(cmd.slice(10), 10) || 500);
         const made = spawnMegaswarm(n);
         showBanner('MEGASWARM', made + ' shamblers', 2.2, '#ffb347');
+      } else if (cmd === 'horde') {
+        // Claude 2026-09-27: where the horde is when it "vanishes": counts by what could hide it.
+        const r = hordeReport();
+        showBanner('HORDE', r.line, 6, '#9ad0ff');
+        console.log('[horde]', r);
       } else if (cmd === 'bench') {
         devBench();
       } else if (cmd === 'nodead') {
@@ -38066,7 +38099,11 @@
           // is the block that used to yank it down to the water surface regardless.
           // Claude 2026-09-27: 0.95 (was 1.15) so head and shoulders ride above the surface: a horde
           // crossing a river at night was all but under water, and read as gone.
-          const floatY = sampleHeight(mx, mz) + zDepth - 0.95 * z.scale;
+          // From the surface itself, at where it has moved to: the bed under it plus the depth read a
+          // step back was a 10 m spike either way at the pit's rim (18 m of bed under a shallow rim).
+          const wNow = waterAt(mx, mz);
+          const surface = wNow.level !== null ? wNow.level : sampleHeight(mx, mz) + zDepth;
+          const floatY = surface - 0.95 * z.scale;
           z.mesh.position.y += (floatY - z.mesh.position.y) * Math.min(1, dt * 5);
         } else {
           z.mesh.position.y = entityGroundY(mx, mz, z.mesh.position.y + STEP_UP);
@@ -39980,7 +40017,7 @@ live++;
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
-          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), getSceneFog: () => { if (!scene.fog) return null; const d = camera.getWorldDirection(new THREE.Vector3()); return { near: scene.fog.near, far: scene.fog.far, fwd: { x: d.x, y: d.y, z: d.z } }; }, resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
+          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, hordeReport, perfSnapshot: () => perfWindow(), getSceneFog: () => { if (!scene.fog) return null; const d = camera.getWorldDirection(new THREE.Vector3()); return { near: scene.fog.near, far: scene.fog.far, fwd: { x: d.x, y: d.y, z: d.z } }; }, resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
           LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), projectiles, getMuzzleWorld, /* GB-58: nightsim's stall probe */ getScriptedKill: () => scriptedKill, caveGrabReady: () => !!caveGrab, /* CL-64 */ getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
