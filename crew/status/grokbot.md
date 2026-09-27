@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grokbot
-task: GB-70 Jerry's motion-lab sign-off (13:06): close R1's preset round; t91 back-shot pitch re-checked
-touching: handoffs/2026-09-27-grokbot-GB-70.md (no code; presets as Jerry approved them)
-since: 2026-09-27T18:09Z
-next: GB-70 R1 · P-75. Reaction presets tuned to Jerry's lab notes (stud
+task: —
+touching: —
+since: 2026-09-27T18:24Z
+next: GB-71 R2 · P-16. Test nights: early pushes run straight on, then o
 blocked-on: —
-last-report: handoffs/2026-09-27-grokbot-GB-74.md
+last-report: handoffs/2026-09-27-grokbot-GB-70.md
 
 ## Notes
 
