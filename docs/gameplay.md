@@ -39,10 +39,9 @@ buys applies to everything eating that calibre.
 
 ## Waves, days and prep
 
-- **Prep** is 2 minutes between waves, with a countdown under the clock at the top of the screen:
-  green, amber under 30 s, red and pulsing under 10 s. It reads "grace period - clock held" while
-  the opening no-zombie grace is running. `Enter` starts the wave immediately (ending the grace
-  too). Settings > "Skip prep time" makes every prep 5 seconds.
+- **Prep** lasts until he starts the next wave at the HQ panel. The clock under the top of the
+  screen stays on READY and does not count down. While the alarm is sounding it reads INBOUND
+  and pulses red.
 - **Blood Moon** every 4th day: red sky, faster horde, x1.5 cash.
 - **Horde pace.** Every zombie type runs 15% faster than it used to, and the Shambler another 25%
   on top (2.55 to 3.19 m/s), so the fodder keeps up with you.
@@ -66,7 +65,8 @@ buys applies to everything eating that calibre.
 - **Cash drops** last 30 seconds, and small payouts pool until they are worth the walk ($8+)
   rather than every body leaving its own stack. They pulse slowly, then faster as the clock runs
   down, then shrink away.
-- **Airdrops** are rare (every 4-7 minutes) and money only, a bounty for walking out to them.
+- **Airdrops** are rare (every 4-7 minutes). The crate holds ammunition for the guns he carries,
+  two packs of each, and one or two MedPens. It does not pay cash.
 
 ## The cabin
 
@@ -207,8 +207,9 @@ Wire, railings, sandbags, platforms and floors all strengthen the wall under the
 there, and give that back when they are sold or destroyed.
 
 **Windows and doors** are not pieces of their own: they cut an opening into a wall that is already
-standing. A window leaves a sill — rounds fired above it pass, and the horde still cannot climb
-through. A door lets you walk through and nothing else. Both weaken the wall, a door more.
+standing. A window leaves a sill — rounds fired above it pass. A smaller zombie can climb
+through a ground-floor window (not a brute, a crawler, or one missing a leg), unless steel mesh
+is fitted. A door lets you walk through and nothing else. Both weaken the wall, a door more.
 
 **If something breaks, what it was holding comes down.** Destroy a wall and the platform, turret
 or wall stacked on it falls with it. A floor spanning open space falls when the wall it rests on
