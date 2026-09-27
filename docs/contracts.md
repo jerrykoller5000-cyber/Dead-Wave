@@ -90,8 +90,14 @@ reaches into another owner's section. At the split these stay events; the names 
 - `'purchase-delivered'` `{ itemId, cashSpent, source: 'build' | 'upgrade' | 'repair' | shop }`:
   after delivery, never on the click. Shop and kiosk: ChatGPT. Placed pieces, paid upgrades
   and repairs: Grokbot (GB-11, `reportPurchase`).
-- `'hud-state'` `{ dt, active, nearWindow, skulls, pendingDeposit }`: ChatGPT's HUD only.
+- `'hud-state'` `{ dt, active, nearWindow, skulls, pendingDeposit }`: ChatGPT's HUD only. GP-51
+  (P-30, 2026-09-27) adds, additive and read-only: `day, phase, cash, hp, maxHp, medkits, building,
+  hasPair` (the current gun has a second) and `akimbo`.
 - `'alarm-request'` and `'alarm-started'`: ChatGPT's HQ briefing (GP-5, GP-7).
+- `'build-hit'` `{ x, z, kind, id, frac, broke }` (CU-50, P-23, 2026-09-27). `kind` is the
+  piece (`wall`, `turret`, …); `id` is that build's stable number. `frac` is hp/maxHp after
+  the hit, or 0 when `broke` is true. At most one event per build every 2 s, plus one on the
+  break even inside that window. The player's own shots do not publish it.
 - `'dw-cave-warn'` and `'dw-log'` are separate window events (see caveWarn and waterAt above).
 
 ## Repair helpers (approved D-11, 2026-09-23)
@@ -458,6 +464,25 @@ CU-44) and, from CL-62, the game. The format is `docs/studio.md`; everyone impor
   through quaternions and world matrices only, so it gives the same answers on the test page's
   stand-in three (tools/tests/fakethree.mjs) as on real three.
 
+## Tonight's call: the relay's daily pick (GP-54, GP-55; D-53; approved by Claude 2026-09-27)
+
+Owner of the offer and the pick: ChatGPT (`ui/radio-call.js`, `game/objectives.js` `radioCall`).
+Consumers: Grokbot (GB-81 crates, GB-82 the dare), ChatGPT itself (Field Intel).
+
+- Objective snapshot gains `radioCall { day, repaired, callable, receipt }`: `callable` is re-armed at
+  each prep once the relay is repaired; `claimed` stays terminal; a run reset clears it (P-36).
+- The cards: `ammo`, `medical`, `hardware`, `intel`, `blackout` (`blackout` from night 4). Three are
+  offered when three are eligible; **fewer is fine** (two, or one) when the rest are owned, and with
+  none the panel says there is nothing to call in tonight. No third card is invented and there is no
+  reroll. Drawn with `Math.random`, never the world seed.
+- The pick publishes `dw-game` `'radio-call'` `{ card, day, runId, receiptId }` once; a repeat of the
+  same card and day returns the same receipt and publishes nothing. Gone at the alarm.
+- Delivery: `ammo`, `medical`, `hardware` are Grokbot's crates (GB-81, P-38: the plane over the mast,
+  20-40 m out, a guard pack, waits for the alarm; `hardware` is the cheapest turret blueprint not
+  owned, decided at draw time and named in the event as `blueprint`); `blackout` is GB-82's at
+  `beginWave` (P-39); `intel` is ChatGPT's own kiosk state, granted on the pick. Until a consumer
+  lands, the event simply has no listener: the pick still shows on the board and the receipt holds.
+
 ## Reactions: bodies that get hit (D-42, Claude; approved 2026-09-26)
 
 `studio/motion.js`, through `studio/index.js`. Claude owns the engine, the rigs' `body` specs and the lab;
@@ -473,6 +498,8 @@ marine). The full description is `docs/studio.md` §10.
 | `body.kill({ ... })` | The same arguments; limp until `settled`, then asleep (the host can freeze the corpse). |
 | `body.update(dt) → events` | `[name, data?]`: `wake`, `hit`, `stagger`, `step {foot}`, `fall`, `land`, `down`, `getup`, `recovered`, `dead`, `settled`. |
 | `body.apply()` | Writes the pose onto the rig by `body.weight`; joints the host doesn't re-pose each frame are restored by the next `follow()`. |
+| `body.hold(point, at \| null, w)` | CL-67. Every frame while held: the named body point (`footL`, `handR`, ...) goes to `at` (world), the rest hangs; `w` is the weight. `null` lets go. State `held`; events `held`, `released`. |
+| `body.shift(dx, dy, dz)` | CL-67. The host moved the body itself: every simulated point, pin and step comes along, no push. |
 | `body.state`, `body.awake`, `body.alive`, `body.weight`, `body.drift` | `drift` (world, m): where the reaction has moved the body; the host adds it to its own position while `awake` (feet while standing, hips once down). The AI does nothing of its own while `state` is `fall`, `down` or `getup`. |
 
 In the game (GB-65, GB-66; Grokbot's, index.html): a zombie is adopted as the `zombie` rig on its first
@@ -484,6 +511,8 @@ the corpse (`body.kill`), which freezes when `settled`. Adopt with the same buil
 built with (`create({ group, type })` for a zombie's kind) so its studio rest matches; `rigs.js` keeps one
 reference rest per rig and options, so adopting costs no rebuild.
 
-Scenes take `motion`, `hits` and `kill` on an actor (§10). The motion lab's notes come in through
+Scenes take `motion`, `hits` and `kill` on an actor, and `limp` on a hold (§10): `guardian-grab-drag`
+hangs the marine from the guardian's hand from the yank on (CL-67), so the game's cave drag shows the
+simulated body; `startGrabScene` needs nothing new (the scene makes the body on its adopted marine). The motion lab's notes come in through
 `POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`), which writes only under
 `review/motion-*` (Cursor reviews the hook: CU-47).

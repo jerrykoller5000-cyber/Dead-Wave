@@ -850,6 +850,7 @@
     <div id="modeSelect" class="show">
       <div class="menu-content">
         <h2 class="dw-wordmark" data-dw-wordmark></h2>
+        <p id="menuBestRecord" class="best-record" hidden></p>
         <div class="modes">
           <button id="modeHunt" type="button" data-dw-text="menu.play"></button>
           <button id="menuSettingsBtn" class="secondary" type="button" data-dw-text="settings.title"></button>
@@ -957,6 +958,7 @@
               <li data-dw-text="tips.building.blueprints"></li>
               <li data-dw-text="tips.building.repair"></li>
               <li data-dw-text="tips.building.drums"></li>
+              <li data-dw-text="tips.building.trees"></li>
             </ul>
             <h3 data-dw-text="tips.waves.title"></h3>
             <ul>
@@ -1047,6 +1049,7 @@
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
     import { renderBuildBanner } from './ui/build-controls.js';
+    import { createRecords, RECORDS_KEY, renderBestRecord } from './ui/records.js';
     import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses } from './ui/build-alerts.js';
     import { createNightRecord, mountDawn } from './ui/dawn.js';
     import './ui/camp-cleared.js';
@@ -20364,6 +20367,8 @@
         const a = shopOpen ? null : actionTarget();
         publishUI('hud-state', { dt, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
           nearWindow: a === 'hqWindow', skulls: skullBag.count,
+          day, phase, cash: bank, hp: playerHp, maxHp: PLAYER_MAX_HP, medkits,
+          building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
           pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' });
         let text = '';
         if (a === 'kiosk') text = okNow ? 'E — Supply kiosk' : 'Kiosk locked — opens during prep';
@@ -20509,6 +20514,7 @@
     }
     // --- Builds: barricades & turrets ---
     const builds = [];
+    let buildSerial = 1;
     // === Spatial index of builds =====================================================
     // Every zombie used to walk the whole build list several times a frame (what to
     // hit, what it is bumping into, whether a lure is calling) — a hundred bodies
@@ -23938,6 +23944,7 @@
       scene.add(barGroup);
 
       const b = {
+        id: buildSerial++,
         mesh, x, z, type: kind, hp: st.hp, maxHp: st.hp, radius: st.radius,
         yaw: mesh.rotation.y,
         baseY,
@@ -24110,10 +24117,25 @@
       if (b.type === 'floor') return t >= 2 ? 'metal' : (t >= 1 ? 'stone' : 'wood');
       return BUILD_MATERIAL[b.type] || null;
     }
+    // P-23: the HUD and the far-wall cue listen. `kind` is the piece (wall, turret, …);
+    // `type` on the event is the dw-game name. At most one report per build each 2 s,
+    // and always one more when it breaks.
+    function reportBuildHit(b, broke) {
+      const now = performance.now();
+      if (!broke && b.hitReportAt != null && now - b.hitReportAt < 2000) return;
+      b.hitReportAt = now;
+      const max = b.maxHp > 0 ? b.maxHp : 1;
+      publishUI('build-hit', {
+        x: b.x, z: b.z, kind: b.type, id: b.id,
+        frac: broke ? 0 : Math.max(0, Math.round(b.hp / max * 1000) / 1000),
+        broke: !!broke
+      });
+    }
     function damageBuild(b, dmg, source, quiet) {
       if (source === 'player') return;
       if (!b || b.hp <= 0 || builds.indexOf(b) < 0) return; // it may have died mid-windup
       b.hp -= dmg;
+      reportBuildHit(b, b.hp <= 0);
       b.flashT = 0.12;
       const mat = buildMaterial(b);
       const sa = sndAt(b.x, b.z, 40);
@@ -26751,7 +26773,17 @@
       }
     }
     // Match stats, shown on the end screen.
-    const matchStats = { kills: 0, headshots: 0 };
+    const matchStats = { kills: 0, headshots: 0, skullsTurnedIn: 0 };
+    const runRecords = createRecords({ load: () => localStorage.getItem(RECORDS_KEY), save: value => localStorage.setItem(RECORDS_KEY, value) });
+    const menuBestRecord = document.getElementById('menuBestRecord');
+    renderBestRecord(menuBestRecord, runRecords.read());
+    function recordFinishedRun(evacuated = false) {
+      if (!gameStarted) return null;
+      const result = runRecords.finish(uiRunId, { day: Math.max(1, day), kills: matchStats.kills,
+        streak: comboBest, headshots: matchStats.headshots, skulls: matchStats.skullsTurnedIn || 0, evacuated: !!evacuated });
+      renderBestRecord(menuBestRecord, runRecords.read());
+      return result;
+    }
     let hitPingT = 0;
     const hitPingEl = document.getElementById('hitPing');
     function showHitPing(text, color) {
@@ -31487,7 +31519,8 @@
       stopFiring();
       AudioSys.chainsawStop();
       cancelPlaceMode();
-      winTitleEl.textContent = victory ? 'You did it!' : 'Game over';
+      const recordResult = recordFinishedRun(victory);
+      winTitleEl.textContent = dwText(victory ? 'gameOver.win' : 'gameOver.title');
       // How it ended — by name, when the marine died a named death — then the run in
       // four numbers, then the catalogue of ways to die with this one marked found.
       const cause = !victory && gameStarted && lastDeathCause && DEATH_WAYS[lastDeathCause] ? lastDeathCause : null;
@@ -31498,13 +31531,19 @@
         : (cause ? DEATH_WAYS[cause].line : null);
       why.textContent = deathLine ? deathLine + '.' : (msg || (victory ? 'Nice work.' : 'Try again?'));
       const row = document.createElement('span'); row.className = 'stats';
-      for (const [v, label] of [[Math.max(1, day), 'Day'], [matchStats.kills, 'Kills'], [matchStats.headshots, 'Headshots'], [comboBest, 'Best streak']]) {
+      for (const [v, label, recordKey] of [[Math.max(1, day), dwText('gameOver.day')], [matchStats.kills, dwText('gameOver.kills')], [matchStats.headshots, dwText('gameOver.headshots'), 'headshots'], [comboBest, dwText('gameOver.bestStreak')], [matchStats.skullsTurnedIn || 0, dwText('gameOver.skulls'), 'skulls']]) {
         const st = document.createElement('span'); st.className = 'st';
         const b = document.createElement('b'); b.textContent = String(v);
         const i = document.createElement('i'); i.textContent = label;
-        st.appendChild(b); st.appendChild(i); row.appendChild(st);
+        st.appendChild(b); st.appendChild(i);
+        if (recordResult?.newFields.includes(recordKey)) {
+          const badge = document.createElement('strong'); badge.className = 'record-new'; badge.textContent = dwText('records.new'); st.append(badge);
+        }
+        row.appendChild(st);
       }
       winMsgEl.appendChild(why); winMsgEl.appendChild(row);
+      const bestLine = document.createElement('span'); bestLine.className = 'best-record';
+      renderBestRecord(bestLine, runRecords.read(), recordResult?.newFields || []); winMsgEl.appendChild(bestLine);
       if (!victory && gameStarted) {
         const { seen, isNew } = recordDeath(cause);
         const keys = Object.keys(DEATH_WAYS);
@@ -38347,6 +38386,7 @@
     }
 
     function quitToMenu() {
+      recordFinishedRun(won);
       setPaused(false);
       pauseEl.classList.remove('show');
       AudioSys.chainsawStop();
@@ -38506,7 +38546,7 @@
       clearZombies();
       combo = 0; comboT = 0; comboBest = 0; slowMoT = 0; waveFinisher = null; loopCine = null; loopHoldIdle = 0;
       document.body.classList.remove('loopcine'); finGrade(false);
-      matchStats.kills = 0; matchStats.headshots = 0;
+      matchStats.kills = 0; matchStats.headshots = 0; matchStats.skullsTurnedIn = 0;
       bloodMoon = false;
       guardianFirstBloodDone = false;
       guardianNightActive = false;

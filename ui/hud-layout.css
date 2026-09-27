@@ -76,3 +76,11 @@ body:is(.opening,.frontend,.deploying,.cine,.dawn) #campCleared { display:none; 
 #hudNotices #placeBanner .place-why { color:#ffb347; }
 #hudNotices #placeBanner .place-upgrade { color:#9fe8b8; }
 #hudNotices #placeBanner .place-scrap { color:#ff8a6a; }
+
+/* GP-52: small lifetime record, with no saved-game controls. */
+.best-record { display:block; color:#c8c4ae; font-size:12px; line-height:1.6; letter-spacing:.02em; }
+.best-record[hidden] { display:none; }
+#menuBestRecord { margin:0 0 16px; }
+.record-new { color:#ead399; font-size:9px; letter-spacing:.08em; }
+#winMsg .stats { flex-wrap:wrap; gap:8px 0; }
+#winMsg .st { min-width:64px; padding:2px 10px; }
