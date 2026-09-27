@@ -58,6 +58,13 @@
       "reference": null
     },
     {
+      "asset": "motion-marine-marine",
+      "owner": "grokbot",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "zombie-reactions",
       "owner": "grokbot",
       "rig": "zombie",

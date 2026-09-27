@@ -102,7 +102,8 @@ test('a brute shrugs off what drops a shambler', () => {
   const sh = play('zombie', 'zombie/shambler', (b) => b.hit({ at: 'chest', dir: [0, 0, -1], power: 6.5, kind: 'pellet' }), 3);
   const br = play('zombie', 'zombie/brute', (b) => b.hit({ at: 'chest', dir: [0, 0, -1], power: 6.5, kind: 'pellet' }), 3, { create: { type: 'brute', scale: 1.38 } });
   assert.ok(sh.events.includes('fall'), sh.events.join(' '));
-  assert.ok(!br.events.includes('fall') && !br.events.includes('stagger'), br.events.join(' '));
+  // Jerry's v2 brute (2026-09-27) is looser: a close shell may rock it a step, but never off its feet.
+  assert.ok(!br.events.includes('fall'), br.events.join(' '));
 });
 
 test('the pool caps how many bodies simulate; a full pool sleeps the oldest one lying down first', () => {

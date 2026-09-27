@@ -26201,6 +26201,23 @@
           }
         }
         if (Number.isFinite(low) && low < 0) { footLift = -low; hips.position.y += footLift; }
+        // The lifted head must stay inside the hit column (and so in its top, headshot slice): a few types' crowns
+        // now reach past hitH, so hitH grows to just over the head where it has to. Most types don't change.
+        if (footLift > 0) {
+          g.updateMatrixWorld(true);
+          let top = -Infinity;
+          head.traverse((m) => {
+            const pa = m.isMesh && m.visible !== false && m.geometry && m.geometry.attributes && m.geometry.attributes.position;
+            if (!pa) return;
+            const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3;
+            for (let i = 0; i < pa.count; i++) {
+              const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13];
+              if (y > top) top = y;
+            }
+          });
+          // spawnZombie stretches the body by this one's variant height (0.93-1.07), so the head does too.
+          if (Number.isFinite(top)) g.userData.hitH = Math.max(g.userData.hitH, top * (vr.height || 1) + 0.08 * s);   // + room for bob and head loll
+        }
       }
       g.userData.footLift = footLift;
       g.userData.baseHipsY = hips.position.y;
@@ -35273,7 +35290,9 @@
       try {
         const pr = _motionPresets[ref] || (_motionPresets[ref] = Studio.loadMotion(MotionPresets.json(ref)));
         const mesh = z.mesh;   // a corpse keeps the mesh after z.mesh is let go (GB-66)
-        const inst = Studio.rigs.get('zombie').create({ group: mesh });
+        // Claude (GB-65 follow-up): adopt with the kind it was built as, so its studio rest (arm droop, a brute's
+        // wide shoulders) is its own kind's and not the shambler's. The game bakes its size into the offsets, so no scale.
+        const inst = Studio.rigs.get('zombie').create({ group: mesh, type: z.typeKey });
         z.body = Studio.createBody(inst, pr, { ground: (x, zz) => entityGroundY(x, zz, mesh.position.y + STEP_UP), pool: motionPool });
       } catch (e) {
         z.body = null;

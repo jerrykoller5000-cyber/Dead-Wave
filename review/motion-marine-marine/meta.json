@@ -1,0 +1,9 @@
+{
+  "asset": "motion-marine-marine",
+  "owner": "grokbot",
+  "rig": "marine",
+  "motion": "marine/marine",
+  "file": "studio/motion/marine/marine.json",
+  "task": "D-42",
+  "look": "studio/motion-lab.html?preset=marine/marine"
+}

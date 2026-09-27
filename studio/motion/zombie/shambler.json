@@ -1,12 +1,12 @@
 {
   "format": "dw-motion/1",
   "name": "shambler",
-  "version": 1,
+  "version": 2,
   "owner": "grokbot",
   "rig": "zombie",
-  "notes": "The everyday dead. Rifle rounds jolt it and it keeps coming; a close shotgun shell staggers it back two or three steps and often puts it down; a grenade throws it. Gets up slowly, like something that has forgotten how.",
+  "notes": "v2: Jerry's lab values (2026-09-27): looser all over, arms nearly limp. The everyday dead. Rifle rounds jolt it and it keeps coming; a close shotgun shell staggers it back two or three steps and often puts it down; a grenade throws it. Gets up slowly, like something that has forgotten how.",
   "mass": 1,
-  "tone": { "legs": 0.8, "spine": 0.7, "arms": 0.45, "head": 0.55 },
+  "tone": { "legs": 0.5, "spine": 0.31, "arms": 0.1, "head": 0.16 },
   "balance": { "step": 0.13, "fall": 0.5, "steps": 3, "stepTime": 0.3, "lift": 0.08, "lead": 0.18, "anchor": 0.15, "support": 0.8 },
   "hits": {
     "bullet": { "scale": 1, "spread": 0.4, "slump": { "spine": 0.55, "arms": 0.5, "head": 0.6, "legs": 0.15 }, "recover": 0.5, "knockdown": 7 },
