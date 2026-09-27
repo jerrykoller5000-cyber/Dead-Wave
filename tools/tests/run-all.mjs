@@ -135,6 +135,8 @@ async function runOne(name) {
   }
   const errs = page.errors.slice(0, 2).map((e) => e.split('\n')[0]);
   results.push({ name, pass, fail, note, lines, errs, raw, info, secs: (Date.now() - t0) / 1000 });
+  // A check's INFO lines (a benchmark's numbers, say) are shown with --all-fails whether it passed or not.
+  if (argv.includes('--all-fails')) for (const l of lines.filter((l) => l.startsWith('INFO'))) console.log(`           ${l}`);
   const tag = note ? 'ERROR' : (fail ? 'FAIL ' : (info ? 'info ' : 'ok   '));
   const detail = note ? '  — ' + note
     : (info ? '  — ' + (raw.trim() ? raw.trim().split('\n')[0].slice(0, 90) : 'returned nothing') : '');

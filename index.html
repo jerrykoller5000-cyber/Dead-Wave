@@ -26341,7 +26341,8 @@
     function setZombieRenderLod(mesh, far) {
       if (!mesh) return;
       mesh.traverse((o) => {
-        if (o.isMesh) o.castShadow = !far;
+        // Claude 2026-09-27: back to the mesh's own flag, not `true` for every part (eyes and the like never cast).
+        if (o.isMesh) { if (o.userData._castLod === undefined) o.userData._castLod = o.castShadow; o.castShadow = far ? false : o.userData._castLod; }
       });
       const ud = mesh.userData || {};
       const joints = [ud.hips, ud.torso, ud.head, ud.armLG, ud.armRG, ud.legLG, ud.legRG];
@@ -26462,6 +26463,13 @@
     function resetZombieMesh(mesh) {
       if (!mesh || !mesh.userData) return;
       const ud = mesh.userData;
+      // Claude 2026-09-27 (the megaswarm): a zombie killed past ZOMBIE_FAR_M went to the pool with its joints'
+      // matrixAutoUpdate off (the far LOD), and freezeCorpse/finishCorpse only restore joints they froze
+      // themselves. The next zombie on that mesh walked with the corpse's pose stuck on it ("crumpled",
+      // "inactive"). Every joint wakes up here, and the hips go back over the feet (a reacting body moves
+      // them in x and z; the rest of the pose is restored below).
+      setZombieRenderLod(mesh, false);
+      if (ud.hips) { ud.hips.position.x = 0; ud.hips.position.z = 0; }
       // Every body is restorable, dismembered or not: the limb groups were only hidden,
       // and the stumps that were added at the joints are stripped here. Bodies used to
       // be disposed once damaged, which — besides rebuilding thirty meshes a kill —
@@ -27315,6 +27323,7 @@
     const _cq1 = new THREE.Quaternion(), _cq2 = new THREE.Quaternion(), _cq3 = new THREE.Quaternion();
     const _cAxis = new THREE.Vector3();
     function beginCorpse(z, dx, dz, info = null) {
+      if (z.farLod) { setZombieRenderLod(z.mesh, false); z.farLod = false; }   // Claude 2026-09-27: the fall animates whatever the distance
       const mesh = z.mesh;
       if (!mesh) { if (z.body) releaseBody(z.body); return false; }
       const kb = corpseBodyFor(z);   // GB-66: adopted while z.mesh is still its own
@@ -27387,7 +27396,7 @@
     const CORPSE_THROW_MIN = 5, CORPSE_SETTLE_MAX = 4, CORPSE_CRUSH_RAW = 120;
     const CORPSE_NO_SHOVE = { brute: 1, military: 1, demon: 1, colossus: 1, guardian: 1 };
     function corpseBodyFor(z) {
-      const ok = motionEnabled && !z.crawling && !z.windowClimb && !(z.riseT > 0);
+      const ok = motionEnabled && !z.crawling && !z.windowClimb && !(z.riseT > 0) && !z.inWater;
       if (!ok) { if (z.body) releaseBody(z.body); return null; }
       return zombieBody(z);
     }
@@ -35549,7 +35558,7 @@
       const mk = MOTION_KIND[kind];
       // A lost limb is only hidden (detachZombiePart), so a body still works without it. A
       // crawler lies low on purpose, and would read as already down.
-      if (!mk || !motionEnabled || !z.alive || z.riseT > 0 || z.windowClimb || z.leapT > 0 || z.crawling) { motionStats.skipped++; return false; }
+      if (!mk || !motionEnabled || !z.alive || z.riseT > 0 || z.windowClimb || z.leapT > 0 || z.crawling || z.inWater) { motionStats.skipped++; return false; }
       const b = zombieBody(z);
       if (!b) { motionStats.skipped++; return false; }
       // A sleeping body read its pose long ago: read it twice now, so it wakes where it stands, at rest.
@@ -35619,7 +35628,8 @@
         const b = z.body;
         z._bodyT = (z._bodyT || 0) + dt;
         const tooLong = b && b.alive && z._bodyT > MOTION_BODY_MAX_S;
-        if (!b || !z.alive || z.crawling || tooLong || zombies.indexOf(z) < 0) { if (b) releaseBody(b); motionZs.delete(z); z._bodyT = 0; continue; }
+        // Into the water the body lets go (its floor is the riverbed, the mesh floats at the surface).
+        if (!b || !z.alive || z.crawling || tooLong || z.inWater || zombies.indexOf(z) < 0) { if (b) releaseBody(b); motionZs.delete(z); z._bodyT = 0; continue; }
         // Standing, the AI walks the mesh: the body comes along, feet and all (CL-67's shift), instead of
         // being stretched between its planted feet and a host that moved on, which toppled it.
         const m = z.mesh, h = z._bodyHost;
@@ -37643,6 +37653,7 @@
         const zWaterLevel = zWater.level;
         const zOnDeck = zWaterLevel !== null && z.mesh.position.y > zWaterLevel + 0.6;
         const zSwimming = zWater.wading >= 1 && !zOnDeck;
+        z.inWater = zSwimming || (zDepth > 0.35 && !zOnDeck);   // for the reacting bodies: none in the water
 
         if (zSwimming) {
           // The drowned are in their element in the water; everyone else paddles.
@@ -38053,7 +38064,9 @@
           // speed check above is: a zombie standing on a bridge deck well above the
           // water is not swimming even though the water below it is deep, and this
           // is the block that used to yank it down to the water surface regardless.
-          const floatY = sampleHeight(mx, mz) + zDepth - 1.15 * z.scale;
+          // Claude 2026-09-27: 0.95 (was 1.15) so head and shoulders ride above the surface: a horde
+          // crossing a river at night was all but under water, and read as gone.
+          const floatY = sampleHeight(mx, mz) + zDepth - 0.95 * z.scale;
           z.mesh.position.y += (floatY - z.mesh.position.y) * Math.min(1, dt * 5);
         } else {
           z.mesh.position.y = entityGroundY(mx, mz, z.mesh.position.y + STEP_UP);
@@ -39967,7 +39980,7 @@ live++;
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
           THREE, scene, renderer, camera, sun, hemi, moon, ground, player, groundMeshY,
           trees, rocks, foliage, zombies, builds, sampleHeight, waterDepthAt,
-          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
+          POI, supplyDrops, spawnSupplyDrop, spawnZombie, spawnMegaswarm, perfSnapshot: () => perfWindow(), getSceneFog: () => { if (!scene.fog) return null; const d = camera.getWorldDirection(new THREE.Vector3()); return { near: scene.fog.near, far: scene.fog.far, fwd: { x: d.x, y: d.y, z: d.z } }; }, resetPerf, spawnBuild, platforms, platformHeightAt, entityGroundY, worldSolids, resolveStaticProps,
           // Debug-only: caves, the sinkhole and the scripted kills.
           LAKE_HOLE, DEATH_WAYS, beginScriptedKill, finishScriptedKill, abortScriptedKill, noteCaveMouthHit, triggerCavePoke, getCavePokeState, getCaveChase, abortCaveChase, caveBusyWithWave, getWaveSpawnLog: () => waveSpawnLog, getPoiGuards: () => ({ post: poiGuardPost, zombies: zombies.filter((z) => z.poiGuard && !z.poiGuard.bounty) }), nearestHqPoi, spawnPoiGuards, pickGroundRiseSpot, pointInCameraView, spawnPlayerRound: (o, d, dmg = 24) => spawnProjectile(false, o, d, dmg), projectiles, getMuzzleWorld, /* GB-58: nightsim's stall probe */ getScriptedKill: () => scriptedKill, caveGrabReady: () => !!caveGrab, /* CL-64 */ getWaveFinisher: () => waveFinisher, getLoopCine: () => loopCine, loopMorning, loopNextNight, getSkyMode: () => skyLoop.mode, getPitBubbles: () => ({ on: pitBubblesOn, n: pitBubbles ? pitBubbles.length : 0, visible: pitBubbles ? pitBubbles.filter((b) => b.m.visible).length : 0, popping: pitBubbles ? pitBubbles.filter((b) => b.pop > 0).length : 0, maxY: pitBubbles ? Math.max(...pitBubbles.map((b) => b.m.position.y)) : null }), getPuddles: () => puddles, drapePuddle, weather, getTowerState: () => ({ climbing: climbingTower, onDeck: onTowerDeck, tower }), towerDeckDbg: () => { if (!tower || !tower.alive) return false; climbingTower = false; player.position.set(tower.x, tower.deckY, tower.z); onTowerDeck = true; grounded = true; velX = 0; velZ = 0; vy = 0; return true; }, getSlowMo: () => slowMoT, hqStartWave, getAlarmShake: () => alarmShakeT, drainWavePlanDbg: () => { waveSpawned = waveTotal; }, getDeathCause: () => lastDeathCause, loadDeathLog, nearCave,
           // Screenshot rig (tools/shoot.mjs): park the camera, and move the clock so a
