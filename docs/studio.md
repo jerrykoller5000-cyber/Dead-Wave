@@ -506,6 +506,10 @@ deck), pins and the step in flight included, without a push.
 exactly. The pool refuses a hit only when every slot is mid-reaction; the host then plays its old
 reaction. Cost: about 0.07 ms a body a frame (48 at once, 2.6 ms, in Node).
 
+**In the game** the reactions are the Settings toggle "Ragdoll", off by default (2026-09-27); `docs/contracts.md`,
+Reactions, says what on and off mean there. `sceneWithoutMotion(json)` is the same scene with no reacting body
+(the game loads `guardian-grab-drag` both ways).
+
 **In a scene**, an actor takes `"motion": "zombie/shambler"` (or a preset object) and
 `"hits": [[t, { "at": "chest" | [x, y, z], "dir": [x, y, z], "power": 6.5, "kind": "pellet" }]]`, and
 optionally `"kill": [t, {...}]`. `dir` and `at` are in scene space. The scene takes on the body's drift

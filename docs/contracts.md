@@ -520,6 +520,14 @@ The facts come from two places, and nothing else: the run record and four `dw-ga
 
 ## Reactions: bodies that get hit (D-42, Claude; approved 2026-09-26)
 
+**In the game the reactions are a Settings toggle, "Ragdoll", off by default** (Jerry, 2026-09-27; `tt_reactions`
+in localStorage, `TT.setMotionEnabledDbg(true)` in a test). Off, hits, deaths, the marine's blows and the cave
+drag play the code that was there before D-42 landed: no body is created or updated. On, the marine's body
+plays only a blow that puts him down (a stagger is GB-50's stumble and knee, as before), a live body is let go
+after 8 s (the marine's after 6 s) whatever state it is in, a standing zombie's body comes along with its mesh
+(`body.shift`), and the animation pose of every reacting zombie is kept and put back before `updateZombies`
+writes again (GB-98). Tests that need a body turn it on themselves.
+
 `studio/motion.js`, through `studio/index.js`. Claude owns the engine, the rigs' `body` specs and the lab;
 the presets (`studio/motion/<rig>/<name>.json`) name their own `owner` (Grokbot for the zombies and the
 marine). The full description is `docs/studio.md` §10.

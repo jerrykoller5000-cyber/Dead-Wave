@@ -6,6 +6,7 @@
 // per frame than 18 of today's toppling ones.
 (async () => {
   const T = window.TT; const out = [];
+  T.setMotionEnabledDbg(true);   // Claude 2026-09-27: reactions are a Settings toggle, off by default
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const f2 = (v) => (+v).toFixed(2);
@@ -160,4 +161,4 @@
     ok(!errs.length, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 2).join(' | ') : ''));
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e.message)); }
   return out.join('\n');
-})()
+})()

@@ -10,8 +10,11 @@ const getJson = async (rel) => {
   return r.json();
 };
 
-export async function fetchScene(name) {
-  const json = await getJson(`scenes/${name}.json`);
+// `transform(json)` (optional) returns the scene JSON to load instead of the file's: the game loads
+// guardian-grab-drag twice, once as written and once through sceneWithoutMotion (the Ragdoll setting).
+export async function fetchScene(name, { transform } = {}) {
+  let json = await getJson(`scenes/${name}.json`);
+  if (transform) json = transform(json);
   const refs = [...new Set(Object.values(json.actors || {}).flatMap((a) => (a.clips || []).map((c) => c[1])))];
   const clips = new Map(await Promise.all(refs.map(async (r) => [r, await getJson(`clips/${r}.json`)])));
   return loadScene(json, (r) => clips.get(r));

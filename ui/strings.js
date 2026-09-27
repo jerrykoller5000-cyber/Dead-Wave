@@ -246,6 +246,8 @@ const messages = {
   "settings.fullscreenUnavailable": "Fullscreen unavailable",
   "settings.overlay": "Overlay",
   "settings.performance": "FPS & hardware: {state}",
+  "settings.ragdoll": "Ragdoll",
+  "settings.ragdollState": "Physics reactions: {state}",
   "settings.prep": "Prep",
   "settings.prepHelp": "Start the next wave at the HQ panel.",
   "settings.sensitivity": "{value}x",

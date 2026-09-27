@@ -198,6 +198,20 @@ function orderActors(json) {
   return out;
 }
 
+// The same scene with no reacting body in it: every actor's `motion`, `hits` and `kill` dropped, and
+// every hold's `limp` (a hold that was only a limp hold keeps a zero-weight reach, so it still validates).
+// The clips alone animate everyone; the checks and paths are unchanged. Returns a new object.
+export function sceneWithoutMotion(json) {
+  const out = JSON.parse(JSON.stringify(json));
+  for (const a of Object.values(out.actors || {})) { delete a.motion; delete a.hits; delete a.kill; }
+  for (const h of out.holds || []) {
+    if (h.limp === undefined) continue;
+    delete h.limp;
+    if (!WEIGHTS.some((k) => h[k] !== undefined)) h.reach = [[0, 0]];
+  }
+  return out;
+}
+
 // --- Loading ----------------------------------------------------------------------------------
 // clipOf("guardian/drag") returns that clip's JSON (studio/clips/guardian/drag.json): the caller
 // reads files (Node) or fetches them (browser), so this file does neither.

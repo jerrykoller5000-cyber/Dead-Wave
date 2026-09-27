@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
-import { rigs, loadMotion, validateMotion, createBody, createMotionPool, loadScene, createScene, HIT_KINDS } from './index.js';
+import { rigs, loadMotion, validateMotion, createBody, createMotionPool, loadScene, createScene, sceneWithoutMotion, HIT_KINDS } from './index.js';
 import { presets } from './motion/index.js';
 
 const clipOf = (r) => JSON.parse(fs.readFileSync(new URL(`./clips/${r}.json`, import.meta.url), 'utf8'));
@@ -252,6 +252,20 @@ test('a hold between both hands, and on a body point that is not a limb, are che
   assert.throws(() => loadScene(j, clipOf), /has no point "belly"/);
   j = base(); delete j.actors.marine.motion; delete j.actors.marine.kill;
   assert.throws(() => loadScene(j, clipOf), /"limp" needs "marine" to have "motion"/);
+});
+
+test('sceneWithoutMotion: the same scene with no reacting body, and it still plays (the Ragdoll setting off)', () => {
+  const json = JSON.parse(fs.readFileSync(new URL('./scenes/guardian-grab-drag.json', import.meta.url), 'utf8'));
+  const plain = sceneWithoutMotion(json);
+  assert.ok(json.actors.marine.motion && json.holds[0].limp, 'the source scene still has its body');
+  assert.equal(plain.actors.marine.motion, undefined);
+  assert.equal(plain.holds[0].limp, undefined);
+  const sp = createScene(loadScene(plain, clipOf));
+  assert.equal(sp.actors.marine.body, null);
+  while (!sp.done) sp.update(1 / 60);
+  const t2 = sceneWithoutMotion(JSON.parse(fs.readFileSync(new URL('./scenes/guardian-throw-out.json', import.meta.url), 'utf8')));
+  assert.deepEqual(t2.holds[0].reach, [[0, 0]]);
+  assert.doesNotThrow(() => loadScene(t2, clipOf));
 });
 
 test('a scene refuses hits without a preset, and a bad hit, in sentences', () => {

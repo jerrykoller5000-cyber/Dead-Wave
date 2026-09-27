@@ -919,6 +919,9 @@
           <div class="settingRow">
             <span data-dw-text="settings.overlay"></span><button id="perfHudToggle" class="settingBtn" type="button"></button>
           </div>
+          <div class="settingRow">
+            <span data-dw-text="settings.ragdoll"></span><button id="ragdollToggle" class="settingBtn" type="button"></button>
+          </div>
           <div class="modes">
             <button id="settingsBackBtn" type="button" data-dw-text="common.back"></button>
           </div>
@@ -29310,16 +29313,23 @@
       if (!b.awake) { b.follow(); b.follow(); marineBodyHost.set(player.position.x, player.position.y, player.position.z); }
       const L = Math.hypot(dx, dz) || 1;
       const took = b.hit({ at: [player.position.x, player.position.y + blow.y, player.position.z], dir: [dx / L, 0, dz / L], power: blow.power, kind: blow.kind });
-      if (took) marineHits.taken++; else marineHits.refused++;
+      // Claude, 2026-09-27: only a blow that puts him down is his body's to play. A stagger left his mesh
+      // stepping away from the capsule the camera and the collisions follow (he "tweaked out"), so a
+      // standing reaction is let go at once and GB-50's stumble and knee answer it as before.
+      if (took && b.state !== 'fall') { releaseBody(b); marineHits.skipped++; return false; }
+      if (took) { marineHits.taken++; marineBodySince = 0; } else marineHits.refused++;
       return took;
     }
     // Where the host had him when his body last ran (GB-67 follow-up).
     const marineBodyHost = new THREE.Vector3();
+    let marineBodySince = 0;   // seconds his body has been awake: a failsafe, never stuck on the ground
+    const MARINE_BODY_MAX_S = 6;
     // Each frame, after his animation and his gun are posed.
     function updateMarineBody(dt) {
       const b = marineBodyV;
       if (!b || !b.awake) return;
-      if (!marineBodyAllowed()) { releaseBody(b); return; }
+      marineBodySince += dt;
+      if (!marineBodyAllowed() || marineBodySince > MARINE_BODY_MAX_S) { releaseBody(b); return; }
       // Standing, the host moves him (GB-50's slide, his own walk, the ground under him): his body comes along
       // (CL-67's body.shift), feet and all, with no push. Left behind, his planted feet stretched him until he
       // fell: under the real basis a shambler's swipe put him down (t92). Down, his body's drift moves the host
@@ -30429,8 +30439,10 @@
     // Loaded off the critical path; if it isn't in yet, or can't load, the drag keeps its old hand
     // code (updateCaveDrag below).
     let caveGrab = null;
-    Studio.fetchScene('guardian-grab-drag')
-      .then((scene) => { caveGrab = { Studio, scene }; })
+    // Two loads of the scene: as written (the marine's body hangs from the hand, CL-67), and with no reacting
+    // body (the Ragdoll setting off: the marine is animated by the scene's clips alone).
+    Promise.all([Studio.fetchScene('guardian-grab-drag'), Studio.fetchScene('guardian-grab-drag', { transform: Studio.sceneWithoutMotion })])
+      .then(([scene, plain]) => { caveGrab = { Studio, scene, plain }; })
       .catch((e) => console.warn('[cave grab] the scene did not load; the drag uses its old code:', e));
     function makeCaveGuardian(cave) {
       const d = (cave && cave.design) || CAVE_DESIGNS.wet;
@@ -31466,7 +31478,7 @@
           guardian: S.rigs.get('guardian').create({ group: rigRoot }),
           marine: S.rigs.get('marine').create({ group: marine })
         };
-        sk.scene = S.createScene(caveGrab.scene, {
+        sk.scene = S.createScene(motionEnabled && caveGrab.scene ? caveGrab.scene : (caveGrab.plain || caveGrab.scene), {
           parent: root, bodies,
           paths: { haul: [start, mouth, inside, deep] },
           ground: (x, z) => caveGroundAt(c, x, z),
@@ -35477,7 +35489,18 @@
     // a body is falling, down or getting up the AI does nothing of its own (motionDown), and
     // the body's drift moves the zombie. A shell's pellets are one hit (flushShotHits).
     const motionPool = Studio.createMotionPool({ max: 8 });
-    let motionEnabled = true;
+    // Claude, 2026-09-27 (Jerry): reactions are a Settings toggle ("Ragdoll"), off by default. Off, every
+    // hit, death and the marine's blows play the code that was there before D-42 landed in the game.
+    let motionEnabled = false;
+    try { motionEnabled = localStorage.getItem('tt_reactions') === '1'; } catch (_) {}
+    // Turning it off mid-game lets every awake body go, so nothing is left half-posed.
+    function setMotionEnabled(on) {
+      motionEnabled = !!on;
+      if (motionEnabled) return;
+      for (const z of motionZs) if (z.body) releaseBody(z.body);
+      motionZs.clear();
+      releaseMarineBody();
+    }
     const MOTION_PRESET_OF = { brute: 'zombie/brute', military: 'zombie/brute', feral: 'zombie/feral', leaper: 'zombie/feral' };
     const MOTION_NONE = { spider: 1, colossus: 1, guardian: 1 };
     const MOTION_KIND = { bullet: 'bullet', pellet: 'pellet', explosive: 'blast', melee: 'blade', chainsaw: 'blade', crush: 'crush' };
@@ -35534,7 +35557,7 @@
       const L = Math.hypot(dx, dz);
       const dir = L > 0.01 ? [dx / L, 0, dz / L] : [-Math.sin(z.mesh.rotation.y), 0, -Math.cos(z.mesh.rotation.y)];
       const took = b.hit({ at: [z.mesh.position.x, hitY, z.mesh.position.z], dir, power: motionPower(kind, push != null ? push : dmg), kind: mk });
-      if (took) { motionZs.add(z); motionStats.taken++; } else motionStats.refused++;
+      if (took) { if (!motionZs.has(z)) { z._bodyT = 0; (z._bodyHost || (z._bodyHost = new THREE.Vector3())).copy(z.mesh.position); } motionZs.add(z); motionStats.taken++; } else motionStats.refused++;
       return took;
     }
     // The reaction to one hit (a whole shell counts as one): the body's, or today's.
@@ -35569,20 +35592,53 @@
       pendingShots.clear();
     }
     // Each frame, after the zombies posed their animation: awake bodies simulate and show.
+    // Claude, 2026-09-27 (GB-98 done here): updateZombies writes some of a joint's Euler angles and adds to
+    // others, so a body's written pose was read back as the animation and fed itself (they crumpled). The
+    // animation's own pose is kept before the body writes, and put back before the next updateZombies.
+    const MOTION_BODY_MAX_S = 8;   // a live body awake this long is let go: nobody stays stuck reacting
+    function zombieBodyJoints(z) {
+      if (z._bodyJoints) return z._bodyJoints;
+      const inst = z.body && z.body.inst;
+      return (z._bodyJoints = inst && inst.R ? Object.values(inst.R).filter((j) => j && j.isObject3D) : []);
+    }
+    function snapZombieAnim(z) {
+      const snap = z._animSnap || (z._animSnap = new Map());
+      for (const j of zombieBodyJoints(z)) { let s = snap.get(j); if (!s) snap.set(j, { q: j.quaternion.clone(), p: j.position.clone() }); else { s.q.copy(j.quaternion); s.p.copy(j.position); } }
+    }
+    function restoreZombieAnim(z) {
+      const snap = z._animSnap;
+      if (!snap || !snap.size) return;
+      for (const [j, s] of snap) { j.quaternion.copy(s.q); j.position.copy(s.p); }
+      snap.clear();
+    }
+    function restoreMotionAnims() { for (const z of motionZs) restoreZombieAnim(z); }
     function updateMotionBodies(dt) {
       if (!motionZs.size) return;
       const t0 = performance.now();
       for (const z of motionZs) {
         const b = z.body;
-        if (!b || !z.alive || z.crawling || zombies.indexOf(z) < 0) { if (b) releaseBody(b); motionZs.delete(z); continue; }
+        z._bodyT = (z._bodyT || 0) + dt;
+        const tooLong = b && b.alive && z._bodyT > MOTION_BODY_MAX_S;
+        if (!b || !z.alive || z.crawling || tooLong || zombies.indexOf(z) < 0) { if (b) releaseBody(b); motionZs.delete(z); z._bodyT = 0; continue; }
+        // Standing, the AI walks the mesh: the body comes along, feet and all (CL-67's shift), instead of
+        // being stretched between its planted feet and a host that moved on, which toppled it.
+        const m = z.mesh, h = z._bodyHost;
+        if (h && !MOTION_DOWN[b.state] && b.shift) {
+          const hx = m.position.x - h.x, hy = m.position.y - h.y, hz = m.position.z - h.z;
+          if ((hx || hy || hz) && Math.abs(hx) + Math.abs(hz) < 3) b.shift(hx, hy, hz);
+        }
         b.follow();
+        snapZombieAnim(z);
         const ev = b.update(dt);
         b.apply();
         for (const e of ev) if (e[0] === 'fall') { z.attackWindup = 0; z._pendingAttack = null; z.swingT = 0; }
         if (b.awake) {
-          const slid = resolveHardBuildCollisions(z.mesh.position.x + b.drift.x, z.mesh.position.z + b.drift.z, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
-          z.mesh.position.x = slid.x; z.mesh.position.z = slid.z;
-        } else motionZs.delete(z);
+          if (MOTION_DOWN[b.state] && (b.drift.x || b.drift.z)) {
+            const slid = resolveHardBuildCollisions(z.mesh.position.x + b.drift.x, z.mesh.position.z + b.drift.z, z.radius, false, z.mesh.position.y, z.climber ? (z.climbHeight || CLIMB_HEIGHT) : null);
+            z.mesh.position.x = slid.x; z.mesh.position.z = slid.z;
+          }
+          (z._bodyHost || (z._bodyHost = new THREE.Vector3())).copy(z.mesh.position);
+        } else { motionZs.delete(z); z._bodyT = 0; z._bodyHost = null; }
       }
       const ms = performance.now() - t0;
       motionStats.ms += (ms - motionStats.ms) * 0.1;
@@ -37395,6 +37451,7 @@
     }
 
     function updateZombies(dt) {
+      restoreMotionAnims();   // last frame's animation pose, not the bodies' (see updateMotionBodies)
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
       if (bountiesDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll && !hq.seq && !paused) { bountiesDue = false; spawnBounties(); }   // GB-57
       if (zombies.length) updateFlowFields(dt);
@@ -38643,6 +38700,22 @@
           syncPerf();
         }
       }
+      {
+        // Ragdoll (the reactions, D-42): off by default; on, the dead react to hits and the marine takes blows.
+        const rgBtn = document.getElementById('ragdollToggle');
+        if (rgBtn) {
+          const syncRg = () => {
+            rgBtn.textContent = dwText('settings.ragdollState', {state:dwText(motionEnabled ? 'common.on' : 'common.off')});
+            rgBtn.classList.toggle('on', motionEnabled);
+          };
+          rgBtn.addEventListener('click', () => {
+            setMotionEnabled(!motionEnabled);
+            try { localStorage.setItem('tt_reactions', motionEnabled ? '1' : '0'); } catch (_) {}
+            syncRg();
+          });
+          syncRg();
+        }
+      }
       const followBtn = document.getElementById('followCursorToggle');
       const tiltBtns = document.querySelectorAll('#autoTiltSeg button');
       const syncFollow = () => {
@@ -39888,7 +39961,7 @@ live++;
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, zombieBody, motionDown, flushShotHits, getMotionStats: () => ({ ...motionStats, active: motionPool.active, reacting: motionZs.size }), setMotionEnabledDbg: (v) => { motionEnabled = !!v; }, getCorpses: () => corpses, marineBody: () => marineBody(), marineDown, marineHitDbg: (kind, power, dx, dz, y = 1.2) => marineHit({ kind, power, y }, dx, dz), bomberBlast, getMarineHits: () => ({ ...marineHits, events: marineHits.events.slice(), state: marineBodyV ? marineBodyV.state : null }), updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, setAmmoDbg: (k, n) => { ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, zombieBody, motionDown, flushShotHits, getMotionStats: () => ({ ...motionStats, active: motionPool.active, reacting: motionZs.size }), setMotionEnabledDbg: (v) => setMotionEnabled(v), getCorpses: () => corpses, marineBody: () => marineBody(), marineDown, marineHitDbg: (kind, power, dx, dz, y = 1.2) => marineHit({ kind, power, y }, dx, dz), bomberBlast, getMarineHits: () => ({ ...marineHits, events: marineHits.events.slice(), state: marineBodyV ? marineBodyV.state : null }), updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
