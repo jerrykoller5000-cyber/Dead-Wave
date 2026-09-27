@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-48 Nightsim repeat runs and the median table for nights 8-20
-touching: tools/nightsim.mjs, qa/nightsim/cu48.json
-since: 2026-09-27T04:04Z
-next: CU-48 R1 · P-13. Nightsim: `--repeat N`, melee counted per kill, c
+task: —
+touching: —
+since: 2026-09-27T07:24Z
+next: CU-58 R3 · P-34. `spawnSupplyDrop({x, z, contents, source})` and a
 blocked-on: —
-last-report: handoffs/2026-09-27-cursor-CU-47.md
+last-report: handoffs/2026-09-27-cursor-CU-50.md
 
 ## Notes
 

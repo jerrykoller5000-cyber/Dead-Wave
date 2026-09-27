@@ -475,6 +475,7 @@ guardian, spiders and the colossus get theirs when they need to react.
 | `balance` | `step` (m off balance before a step), `fall` (m before it falls), `steps` (how many before it gives up), `stepTime`, `lift`, `lead` (how far ahead it reads its own motion), `anchor` (hips over feet), `support` (legs holding it up). |
 | `hits.<kind>` | For `bullet`, `pellet`, `blast`, `blade`, `crush`: `scale` (× power), `spread` (to nearby points), `slump` (how much each tone drops), `recover` (seconds to get it back), `knockdown` (power that drops it at once), `lift` (upward share, blasts). |
 | `fall`, `down`, `getup`, `death` | Tone while falling and `catch` (hands out); seconds lying and the height that counts as down; seconds to get up; tone when dead and seconds of stillness before it sleeps. |
+| `held` | Tone while something has hold of it (CL-67; default limp: legs 0.03, spine 0.03, arms 0.05, head 0.03) and `friction` for the parts dragging on the ground (0.6). |
 
 A hit's **power** is metres per second at the point hit. For reference, today's presets react like
 this: a rifle round (2.5) is a flinch; a shotgun shell at 6 m (3.2) is a stagger step; a close shell
@@ -495,7 +496,12 @@ body.apply();                                                 // the rig shows t
 if (body.awake) z.position.add(body.drift);                   // the host takes on where it staggered to
 ```
 
-`body.state` is `animated`, `react`, `fall`, `down`, `getup` or `dead`. `body.kill({...})` goes limp.
+`body.state` is `animated`, `react`, `fall`, `down`, `getup`, `held` or `dead`. `body.kill({...})` goes limp.
+`body.hold('footL', [x, y, z], w)` (CL-67) takes one point wherever the host says, every frame (a hand
+round an ankle), and the rest hangs and drags: state `held`, weight `w`, events `held` and, on
+`body.hold('footL', null)`, `released` (alive it falls, lands and gets up; dead it settles once let go).
+`body.shift(dx, dy, dz)` moves everything simulated along with the host (a knockback slide, a moving
+deck), pins and the step in flight included, without a push.
 `body.reset()` stands it back up on its animation. Bodies are deterministic, so a scene replays
 exactly. The pool refuses a hit only when every slot is mid-reaction; the host then plays its old
 reaction. Cost: about 0.07 ms a body a frame (48 at once, 2.6 ms, in Node).
@@ -506,6 +512,14 @@ optionally `"kill": [t, {...}]`. `dir` and `at` are in scene space. The scene ta
 itself. The snap and slide checks skip a body while it reacts, because a fall turns fast by design.
 `node tools/studio.mjs scene studio/scenes/zombie-reactions.json` renders one into a review folder like
 any scene (`zombie-reactions`, `marine-knocked` are the first two).
+
+A hold can hang a reacting body (CL-67): `"limp": [[t, 0], [t, 1]]` on the hold, with `motion` on the
+held actor. At that weight the held limb's body point is taken to the holder's hand (placed so the
+held joint, the ankle, lands on the hand) and the body simulates from there: the free leg swings, the
+arms trail, the head bounces, the parts that reach the ground drag with the preset's `held.friction`.
+The scene's tow, lift and trail still place the actor; the simulation decides what it looks like. The
+gap check still measures the hand to the held joint (about 1 cm once hung). `guardian-grab-drag` does
+this to the marine from the yank on.
 
 **The motion lab**, `studio/motion-lab.html` (Jerry: `Open Motion Lab.bat`):
 - Pick a body and a weapon, click where it hits, and watch at full or quarter speed.

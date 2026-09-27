@@ -47,7 +47,8 @@
       const mesh = z.mesh, x0 = mesh.position.x, z0 = mesh.position.z;
       const face = Math.cos(mesh.rotation.y);
       const stillBefore = (() => { let n = 0; mesh.traverse((o) => { if (o !== mesh && !o.matrixAutoUpdate) n++; }); return n; })();
-      steady(() => { T.fireRoundDbg(x0, mesh.position.y + 1.0, z0 - 3, 0, 0, 1, 27, 100, 0); for (let i = 0; i < 6; i++) T.stepProjectilesDbg(1 / 60); });
+      // GB-68 re-base: the hips went up by footLift (its feet were in the ground), so the back is that much higher; + 1.0 alone now hits the pelvis.
+      steady(() => { T.fireRoundDbg(x0, mesh.position.y + 1.0 + (mesh.userData.footLift || 0), z0 - 3, 0, 0, 1, 27, 100, 0); for (let i = 0; i < 6; i++) T.stepProjectilesDbg(1 / 60); });
       const c = corpseOf(mesh);
       ok(!z.alive && !!c && !!c.body && c.body.state === 'dead', 'an AK round in the back: it dies on its body (' + (c ? (c.body ? c.body.state : 'topple') : 'no corpse') + ', facing z ' + f2(face) + ')');
       const t0 = performance.now();

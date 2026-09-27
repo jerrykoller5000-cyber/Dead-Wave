@@ -8,14 +8,16 @@
 //                            userData. Adding the two empty end groups (hand, foot) is the only change.
 //
 // Joint names follow the marine's: "L" is the zombie's -X side. It faces +Z. Limbs hang along -Y.
-// Note (for Grokbot): the game stands a zombie's feet about 0.2 m under its root (hips 0.55, leg 0.74);
-// studio/motion.js measures that sink when a body wakes, so reactions don't pop it up or down.
+// GB-68 (P-73): the game's hips used to sit at 0.55 * s with the legs hanging 0.81 * s, so every walker
+// stood about a quarter of its scale in the ground; makeZombieMesh now lifts the hips by the lowest
+// point of the rest pose (userData.footLift, 0.26 * s for the plain build), and this stand-in matches.
+// studio/motion.js still measures the remaining sink when a body wakes (about 0 now).
 import * as THREE from 'three';
 import { rbox } from '../core/geometry.js';
 
 // The game zombie's joint offsets at scale 1 (index.html, makeZombieMesh). crew: keep these in step.
 export const ZOMBIE = {
-  hipsY: 0.55,                 // hips.position.y = 0.55 * s
+  hipsY: 0.81,                 // hips.position.y = 0.81 * s (soles on the ground; GB-68)
   torsoY: 0.28,                // torso.position.y = 0.28 * s (child of hips)
   legX: 0.13, legY: -0.02,     // legLG.position.set(-0.13 * s, -0.02 * s, 0)
   shin: -0.38,                 // shinG.position.y = -0.38 * s

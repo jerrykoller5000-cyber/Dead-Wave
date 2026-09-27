@@ -91,3 +91,32 @@ test('an urgent warning takes priority over banking guidance without changing th
   c.handle({type:'pit-near'}); assert.equal(c.tick(frame({nearWindow:true})).id,'pitWarning');
   assert.equal(c.profile().banked,false);
 });
+
+const lessonFrame = (extra={}) => frame({skulls:0,day:2,phase:'prep',cash:8,hp:40,maxHp:100,medkits:0,building:false,hasPair:false,akimbo:false,...extra});
+test('build coaching needs day-two prep and Cash, and B retires it immediately',()=>{
+ const c=start();
+ for(const f of [{day:1},{day:3},{phase:'wave'},{cash:7},{active:false}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame()).id,'build');
+ assert.equal(c.tick(lessonFrame({building:true})),null);
+ assert.equal(c.tick(lessonFrame()),null);
+ const built=start();built.handle({type:'purchase-delivered',source:'build',cashSpent:8,itemId:'barricade'});
+ assert.equal(built.profile().built,true);for(let i=0;i<9;i++)built.tick(lessonFrame({dt:1}));
+ assert.equal(built.tick(lessonFrame()),null);
+});
+test('pair coaching waits for a delivered pair and compatible held gun; no day-one card',()=>{
+ const c=start({load:()=>JSON.stringify({version:1,purchaseShown:true,buildShown:true})});
+ c.handle({type:'purchase-delivered',source:'debug',cashSpent:80,itemId:'dual:pistol'});
+ assert.equal(c.tick(lessonFrame({hasPair:true})),null);
+ c.handle({type:'purchase-delivered',source:'kiosk',cashSpent:80,itemId:'dual:pistol'});
+ for(const f of [{day:1,hasPair:true},{hasPair:false},{hasPair:true,active:false}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame({hasPair:true})).id,'pair');
+ assert.equal(c.tick(lessonFrame({hasPair:true,akimbo:true})),null);
+ assert.equal(c.tick(lessonFrame({hasPair:true})),null);
+});
+test('MedPen coaching uses health percentage, needs a pen, and survives profile reload',()=>{
+ let saved;const c=start({save:v=>saved=v,load:()=>JSON.stringify({version:1,buildShown:true})});
+ for(const f of [{day:1,medkits:1},{hp:41,medkits:1},{hp:0,medkits:1},{medkits:0},{active:false,medkits:1}])assert.equal(c.tick(lessonFrame(f)),null);
+ assert.equal(c.tick(lessonFrame({hp:80,maxHp:200,medkits:1})).id,'medpen');
+ assert.equal(c.tick(lessonFrame({hp:100,maxHp:200,medkits:0})),null);
+ const restored=start({load:()=>saved});assert.equal(restored.tick(lessonFrame({medkits:1})),null);
+});

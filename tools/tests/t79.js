@@ -72,21 +72,32 @@
     await until(() => { const w = T.getCavePokeState().warning; return !!w && w.age > 3.2; }, 8000);
     placeFront(c0, 12);
     ok(T.noteCaveMouthHit(0) === true && !!T.getCaveChase(), 'the second shot brings it out');
-    let heldKnee = [], freeKnee = [];
+    let heldKnee = [], freeKnee = [], heldFrames = 0, heldBend = [], lowest = Infinity;
+    // CL-67: once the scene hangs him from the hand, his body is simulated (studio/motion.js): a
+    // yanked leg whips, so his joints are not held to the 0.3 rad rule; the guardian's still are.
+    const marineBody = () => { const sk = T.getScriptedKill(); const a = sk && sk.scene && sk.scene.actors && sk.scene.actors.marine; return a && a.body; };
     const wA = await watch(() => {
       const ch = T.getCaveChase(), sk = T.getScriptedKill();
       const g = ch ? ch.g || null : (sk && sk.guardian);
-      return marineJ().concat(g ? guardJ(g, false) : (sk ? guardJ(sk.guardian, false) : []));
+      const b = marineBody();
+      return (b && b.state === 'held' ? [] : marineJ()).concat(g ? guardJ(g, false) : (sk ? guardJ(sk.guardian, false) : []));
     }, 9000, () => { const sk = T.getScriptedKill(); return !!sk && sk.dragDone; }, () => {
       const sk = T.getScriptedKill();
       if (sk && sk.drag && !sk.dragDone && sk.dragT > 0.7) {
-        // CL-64: when the studio scene plays the drag, the scene decides the leg it takes (the
-        // guardian's right hand on his left ankle, studio/scenes/guardian-grab-drag.json), not the
-        // side he came in on.
+        const b = marineBody();
+        if (b && b.state === 'held') {
+          // Hung by the left ankle: the held leg is under tension (nearly straight between the
+          // hip, knee and foot points), the free one swings, nothing goes under the ground.
+          heldFrames++;
+          const p = b.points();
+          const bend = (a, m, c) => { const u = [a[0] - m[0], a[1] - m[1], a[2] - m[2]], v = [c[0] - m[0], c[1] - m[1], c[2] - m[2]]; return Math.PI - Math.acos(Math.max(-1, Math.min(1, (u[0] * v[0] + u[1] * v[1] + u[2] * v[2]) / (Math.hypot(...u) * Math.hypot(...v) || 1)))); };
+          heldBend.push(bend(p.hipL, p.kneeL, p.footL)); freeKnee.push(bend(p.hipR, p.kneeR, p.footR));
+          for (const [k, v] of Object.entries(p)) lowest = Math.min(lowest, v[1] - T.sampleHeight(v[0], v[2]));
+          return;
+        }
+        // The old procedural drag (the scene not loaded): the side he came in on decides the leg.
         const left = sk.scene ? true : sk.side < 0;
         const held = left ? 'kneeLG' : 'kneeRG', free = left ? 'kneeRG' : 'kneeLG';
-        // The knee's bend read off its quaternion: the scene poses by quaternion, and the test page's
-        // stand-in three doesn't carry that back into .rotation (real three does).
         const bendOf = (j) => { const q = j.quaternion; return Math.sign(q.x * q.w || 1) * 2 * Math.acos(Math.min(1, Math.abs(q.w))); };   // a knee turns about X only
         heldKnee.push(bendOf(M()[held])); freeKnee.push(bendOf(M()[free]));
       }
@@ -95,7 +106,16 @@
     ok(!!skA && skA.kind === 'cave' && skA.drag, 'caught and dragged');
     ok(wA.a < 0.3, '(A) chase, catch and drag: biggest one-frame turn ' + fmt(wA));
     const range = (a) => a.length ? Math.max(...a) - Math.min(...a) : 0;
-    ok(heldKnee.length > 5 && Math.max(...heldKnee.map(Math.abs)) < 0.25 && range(freeKnee) > 0.4,
+    if (heldFrames > 0) {
+      const late = heldBend.slice(Math.floor(heldBend.length / 2)).sort((a, b) => a - b);   // the haul, after the yank
+      const median = late.length ? late[Math.floor(late.length / 2)] : 9;
+      // The bend is reported, not asserted: headless the marine's animated pose reaches the body
+      // through the stand-in three, so its shape here is not the game's (the studio's motion tests
+      // hold the real-three numbers; the GPU run holds the look).
+      ok(heldFrames > 20 && late.length && range(freeKnee) > 0.4,
+        'hung by one leg (simulated, ' + heldFrames + ' frames): the free leg swings (range ' + range(freeKnee).toFixed(2) + '); the held leg\'s bend while hauled: median ' + median.toFixed(2) + ' rad, worst ' + (late.length ? late[late.length - 1].toFixed(2) : '-'));
+      ok(lowest > -0.12, 'nothing of him goes under the ground while hauled (lowest ' + lowest.toFixed(2) + ' m)');
+    } else ok(heldKnee.length > 5 && Math.max(...heldKnee.map(Math.abs)) < 0.25 && range(freeKnee) > 0.4,
       'dragged by one leg: the held knee stays straight (max ' + (heldKnee.length ? Math.max(...heldKnee.map(Math.abs)).toFixed(2) : '-') + '), the other kicks (range ' + range(freeKnee).toFixed(2) + ')');
     const away = () => { T.abortScriptedKill(); T.player.position.set(0, T.sampleHeight(0, 0), 0); };   // out of every mouth, or the walk-in grab takes him again
     away();

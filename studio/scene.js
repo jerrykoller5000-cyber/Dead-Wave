@@ -152,6 +152,14 @@ export function validateScene(json) {
     if (h.trail !== undefined) { if (h.tow === undefined) errs.push(`${at}: "trail" swings a towed body round, so it needs "tow"`); errs.push(...keyErrors(h.trail, 'scalar', `${at}.trail`, { min: 0, max: 1 })); }
     if (h.lift !== undefined && td && !td.chains[to.name]) errs.push(`${at}: "lift" needs "to" to be a limb (${Object.keys(td.chains).join(', ')}), not "${to.name}"`);
     if (h.offset !== undefined && !isVec3(h.offset)) errs.push(`${at}: "offset" must be [x, y, z] metres in the held joint's frame`);
+    // limp (CL-67): the held body hangs from the grip and drags, simulated (docs/studio.md §10).
+    if (h.limp !== undefined) {
+      errs.push(...keyErrors(h.limp, 'scalar', `${at}.limp`, { min: 0, max: 1 }));
+      const ta = actors[to.actor];
+      if (ta && ta.motion === undefined) errs.push(`${at}: "limp" needs "${to.actor}" to have "motion" (a preset) to hang with`);
+      if (td && !td.chains[to.name]) errs.push(`${at}: "limp" needs "to" to be a limb (${Object.keys(td.chains).join(', ')}), not "${to.name}"`);
+      else if (td && td.body && !td.body.points[to.name]) errs.push(`${at}: "limp": ${actors[to.actor].rig}'s body has no point "${to.name}" (${Object.keys(td.body.points).join(', ')})`);
+    }
   });
   if (json.checks !== undefined) {
     const c = json.checks;
@@ -218,7 +226,7 @@ export function loadScene(json, clipOf) {
   }
   const holds = (json.holds || []).map((h) => {
     const f = splitRef(h.from), to = splitRef(h.to);
-    return { key: `${h.from}>${h.to}`, from: f, to, offset: h.offset || null, taut: !!h.taut, reach: h.reach ? normKeys(h.reach) : null, tow: h.tow ? normKeys(h.tow) : null, lift: h.lift ? normKeys(h.lift) : null, trail: h.trail ? normKeys(h.trail) : null };
+    return { key: `${h.from}>${h.to}`, from: f, to, offset: h.offset || null, taut: !!h.taut, reach: h.reach ? normKeys(h.reach) : null, tow: h.tow ? normKeys(h.tow) : null, lift: h.lift ? normKeys(h.lift) : null, trail: h.trail ? normKeys(h.trail) : null, limp: h.limp ? normKeys(h.limp) : null };
   });
   const c = json.checks || {};
   return {
@@ -564,8 +572,45 @@ export function createScene(scene, opts = {}) {
         const hit = { at, dir, power: h.power, kind: h.kind };
         if (h.kill) b.kill(hit); else b.hit(hit);
       }
+      // Held limp by a hold (CL-67): the grip's body point goes where the holder's hand is, offset
+      // so the held joint (the ankle) sits on the hand, and the rest hangs and drags.
+      for (const h of scene.holds) {
+        if (h.to.actor !== n || !h.limp) continue;
+        const w = sampleKeys(h.limp, T) || 0;
+        if (w > 0) {
+          _h.setFromMatrixPosition(h.fromJ.matrixWorld);
+          // The body's end point (the foot) sits past the held joint (the ankle) along the lower bone,
+          // and the written pose aims that bone through the body's points: so the point is put where
+          // the joint, drawn at its own length along the line from the middle point, lands on the hand.
+          const ch = a.inst.def.chains[h.to.name], bp = a.inst.def.body.points;
+          const midName = Object.keys(bp).find((k) => bp[k].joint === ch.mid);
+          const pts = b.points(), ap = b.animPoints();
+          const fix = h.limpFix || (h.limpFix = new THREE.Vector3());
+          let tx, ty, tz;
+          if (midName && a.inst.R[ch.mid]) {
+            _v.setFromMatrixPosition(a.inst.R[ch.mid].matrixWorld); _v2.setFromMatrixPosition(h.toJ.matrixWorld);
+            const jointLen = _v.distanceTo(_v2) || 1;
+            const am = ap[midName], ae = ap[h.to.name];
+            const bodyLen = Math.hypot(ae[0] - am[0], ae[1] - am[1], ae[2] - am[2]);
+            const pm = b.state === 'held' ? pts[midName] : am, r = bodyLen / jointLen;
+            tx = pm[0] + (_h.x - pm[0]) * r - fix.x; ty = pm[1] + (_h.y - pm[1]) * r - fix.y; tz = pm[2] + (_h.z - pm[2]) * r - fix.z;
+          } else {
+            _v.setFromMatrixPosition(h.toJ.matrixWorld);
+            const ae = ap[h.to.name];
+            tx = _h.x + ae[0] - _v.x - fix.x; ty = _h.y + ae[1] - _v.y - fix.y; tz = _h.z + ae[2] - _v.z - fix.z;
+          }
+          b.hold(h.to.name, [tx, ty, tz], w);
+          h.limpOn = true;
+        } else if (b.state === 'held') { b.hold(h.to.name, null); h.limpOn = false; if (h.limpFix) h.limpFix.set(0, 0, 0); }
+      }
       for (const e of b.update(dt)) events.push({ actor: n, t: T, name: 'motion:' + e[0], data: e[1] || null });
       b.apply();
+      for (const h of scene.holds) {
+        if (h.to.actor !== n || !h.limpOn || !h.limpFix || !(b.weight > 0)) continue;
+        _h.setFromMatrixPosition(h.fromJ.matrixWorld);
+        _v.setFromMatrixPosition(h.toJ.matrixWorld);
+        h.limpFix.add(_v.sub(_h).multiplyScalar(0.8));
+      }
       if (b.awake) {
         root.updateWorldMatrix(true, false);
         _qt.setFromRotationMatrix(root.matrixWorld).invert();

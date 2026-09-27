@@ -493,11 +493,11 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [x] **CU-47** **R1 · P-76.** Review the notes hook in tools/serve.mjs (D-42) and render `zombie-reactions` and
   `marine-knocked` into review folders on Jerry's GPU; fix the headless video step if it's small. Details:
   `docs/roadmap.md` P-76.
-- [>] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
+- [x] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
   streak heals: medians, not one run. Details: `docs/roadmap.md` P-13.
-- [ ] **CU-49** **R1 · P-14.** Three stale lines in docs/gameplay.md made true (prep clock, drops, window climbing).
+- [x] **CU-49** **R1 · P-14.** Three stale lines in docs/gameplay.md made true (prep clock, drops, window climbing).
   Details: `docs/roadmap.md` P-14.
-- [ ] **CU-50** **R1 · P-23.** Builds report their damage: a `build-hit` event (throttled) for the HUD and the cue.
+- [x] **CU-50** **R1 · P-23.** Builds report their damage: a `build-hit` event (throttled) for the HUD and the cue.
   Moved from Grokbot to spread the load (integration plumbing). Details: `docs/roadmap.md` P-23.
 
 #### R2 · The night has a shape
@@ -553,7 +553,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   corpses freeze. After GB-65. Details: `docs/roadmap.md` P-71, P-7.
 - [x] **GB-67** **R1 · P-72.** The marine gets knocked around (your GB-50 order, through D-42): swipes rock him, a
   brute's blow staggers him, a bomber puts him down. After GB-65. Details: `docs/roadmap.md` P-72.
-- [>] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
+- [x] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
   it's a bug. Details: `docs/roadmap.md` P-73.
 - [ ] **GB-69** **R1 · P-8.** The laser does what the kiosk sells: spread ×0.8 while it's on. Details:
   `docs/roadmap.md` P-8.
@@ -632,33 +632,33 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [>] **GP-45** **R1 · P-9.** Build mode's HUD: each key beside its word, no Reload row while R rotates. After GB-62.
+- [x] **GP-45** **R1 · P-9.** Build mode's HUD: each key beside its word, no Reload row while R rotates. After GB-62.
   Details: `docs/roadmap.md` P-9.
-- [>] **GP-46** **R1 · P-10.** "Cabin" becomes "HQ" everywhere the player reads it (the landmark cabins stay cabins).
+- [x] **GP-46** **R1 · P-10.** "Cabin" becomes "HQ" everywhere the player reads it (the landmark cabins stay cabins).
   After GB-62. Details: `docs/roadmap.md` P-10.
-- [>] **GP-47** **R1 · P-12.** One-time lines for the first cave poke and the first swim toward the pit. After CL-66.
+- [x] **GP-47** **R1 · P-12.** One-time lines for the first cave poke and the first swim toward the pit. After CL-66.
   Details: `docs/roadmap.md` P-12.
 
 #### R2 · The night has a shape
 
-- [!] **GP-48** **R2 · P-24.** The minimap shows hurt builds (amber, red, flashing) and rim pips for the ones out of
+- [x] **GP-48** **R2 · P-24.** The minimap shows hurt builds (amber, red, flashing) and rim pips for the ones out of
   range. Details: `docs/roadmap.md` P-24.
 - [ ] **GP-49** **R2 · P-25.** One panned cue when a far build fails; an optional "West wall failing" line. After
   CU-50; after GP-48. Details: `docs/roadmap.md` P-25.
 - [ ] **GP-50** **R2 · P-29.** The scouting report names the counter: plates stop bullets, kill the screamer first.
   After GB-75; after GB-76; after GB-77. Details: `docs/roadmap.md` P-29.
-- [ ] **GP-51** **R2 · P-30.** First-use cards: B to build, Y for two guns, H for a MedPen; the tree-felling tip.
+- [x] **GP-51** **R2 · P-30.** First-use cards: B to build, Y for two guns, H for a MedPen; the tree-felling tip.
   After GP-45. Details: `docs/roadmap.md` P-30.
-- [ ] **GP-52** **R2 · P-31.** The best run on the death card and the title (`tt_best_run`, a lifetime record like
+- [x] **GP-52** **R2 · P-31.** The best run on the death card and the title (`tt_best_run`, a lifetime record like
   D-31). Details: `docs/roadmap.md` P-31.
 - [ ] **GP-53** **R2 · P-33.** "Kick free! (E)" during the haul, then "It took your skulls.". After GB-78. Details:
   `docs/roadmap.md` P-33.
 
 #### R3 · The day feeds the night
 
-- [ ] **GP-54** **R3 · P-36.** The relay, once repaired, can be called once each prep (a per-day `callable` state).
+- [x] **GP-54** **R3 · P-36.** The relay, once repaired, can be called once each prep (a per-day `callable` state).
   Details: `docs/roadmap.md` P-36.
-- [ ] **GP-55** **R3 · P-37.** Tonight's call: three cards on the HQ board, one pick, gone at the alarm (D-53). After
+- [!] **GP-55** **R3 · P-37.** Tonight's call: three cards on the HQ board, one pick, gone at the alarm (D-53). After
   GP-54. Details: `docs/roadmap.md` P-37.
 - [ ] **GP-56** **R3 · P-35.** Drop news as a small notice from strings, not a hard-coded banner. After CU-58.
   Details: `docs/roadmap.md` P-35.
@@ -766,7 +766,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [x] **CL-66** **R1 · P-11.** A `pit-near` event once a run, before the arms can reach (contract line). Details:
   `docs/roadmap.md` P-11.
-- [ ] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
+- [x] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
   CL-65's first intent. Details: `docs/roadmap.md` P-74.
 - [ ] **CL-68** **R1 · P-75.** Engine fixes from Jerry's lab notes (studio/motion.js, studio/bodies.js); new bodies
   when a creature needs one. Ongoing. Details: `docs/roadmap.md` P-75.

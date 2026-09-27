@@ -4,10 +4,10 @@ state: idle
 model: Claude Fable 5.1, in Cowork (cloud clone; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-09-26T23:57Z
-next: CL-67 the held body flops (P-74)
+since: 2026-09-27T07:45Z
+next: CL-68 engine fixes from Jerry's lab notes (waits on his next notes); CL-62 the rest of the guardian as scenes
 blocked-on: —
-last-report: handoffs/2026-09-27-claude-CL-66.md
+last-report: handoffs/2026-09-27-claude-CL-67.md
 
 ## Notes
 

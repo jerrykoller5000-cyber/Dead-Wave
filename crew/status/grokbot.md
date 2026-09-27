@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grokbot
-task: GB-68 Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if it's a bug (P-73)
-touching: index.html (makeZombieMesh hips height, if a bug), studio/zombie.js note (request if needed), tools/tests/t93.js
-since: 2026-09-27T04:20Z
-next: GB-68 R1 · P-73. Zombies' feet on the ground: check the 0.2 m sink
+task: —
+touching: —
+since: 2026-09-27T05:38Z
+next: GB-69 R1 · P-8. The laser does what the kiosk sells: spread ×0.8 w
 blocked-on: —
-last-report: handoffs/2026-09-27-grokbot-GB-67.md
+last-report: handoffs/2026-09-27-grokbot-GB-68.md
 
 ## Notes
 

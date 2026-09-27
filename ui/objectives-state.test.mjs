@@ -84,3 +84,27 @@ test('removed props are unavailable and cannot resurrect on later owner snapshot
   frame(m,{sites:[{id:ranger,exists:false}]});assert.equal(site(m,ranger).state,'unavailable');
   assert(deliver(m,r,30));open(m);assert.equal(site(m,ranger).state,'unavailable');assert.equal(m.beginClaim({id:ranger}),null);
 });
+
+test('repaired relay is callable once each prep without reopening its claimed site',()=>{
+ const m=createObjectives('run');const prep=day=>m.setRadioDay({runId:'run',day,phase:'prep'});
+ prep(2);assert.equal(m.snapshot().radioCall.callable,false);
+ frame(m,{held:true,holdSeconds:6});assert.equal(m.snapshot().radioCall.callable,true);
+ const supply=m.beginClaim({id:radio,choiceId:pack.id,choices:[pack]});deliver(m,supply,60);
+ const first=m.beginRadioCall({runId:'run',day:2,card:'ammo'});assert(first.receiptId.includes(':day:2:'));
+ assert.equal(m.snapshot().radioCall.callable,false);
+ assert.equal(m.beginRadioCall({runId:'run',day:2,card:'medical'}),null);
+ assert.deepEqual(m.beginRadioCall({runId:'run',day:2,card:'ammo'}),first);
+ prep(2);assert.equal(m.snapshot().radioCall.callable,false);assert.equal(site(m,radio).state,'claimed');
+ prep(3);assert.equal(m.snapshot().radioCall.callable,true);assert.equal(site(m,radio).state,'claimed');
+ assert.equal(m.beginRadioCall({runId:'old',day:3,card:'ammo'}),null);
+ assert.equal(m.beginRadioCall({runId:'run',day:2,card:'ammo'}),null);
+ m.setRadioDay({runId:'run',day:3,phase:'prep',alarm:true});prep(3);
+ assert.equal(m.snapshot().radioCall.callable,false);
+ m.reset('new');assert.equal(m.snapshot().radioCall.callable,false);assert.equal(m.snapshot().radioCall.receipt,null);
+});
+test('relay receipt survives module roundtrip and invalid relay data is rejected atomically',()=>{
+ const m=createObjectives('run');m.setRadioDay({runId:'run',day:4,phase:'prep'});frame(m,{held:true,holdSeconds:6});
+ m.beginRadioCall({runId:'run',day:4,card:'medical'});const n=createObjectives('new');assert(n.restore(m.save()));
+ assert.equal(n.snapshot().radioCall.callable,false);assert.equal(n.snapshot().radioCall.receipt.card,'medical');
+ const bad=n.save();bad.relay.receipt.day=99;const before=n.save();assert.equal(n.restore(bad),false);assert.deepEqual(n.save(),before);
+});

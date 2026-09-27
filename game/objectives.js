@@ -16,10 +16,11 @@ const row = id => ({id,state:'undiscovered',progress:0,feedback:null,pack:null,r
 
 export function createObjectives(initialRunId) {
   let runId, sequence, revealed, sites, active=false, reachable=new Set(), damageRevision=null;
+  let relayDay=0, relayClosed=true, relayReceipt=null, relayPhase='inactive';
   function reset(id) {
     if(!validRun(id))throw new TypeError('Objective run id required');
     runId=id;sequence=0;revealed=false;sites=new Map(OBJECTIVE_IDS.map(id=>[id,row(id)]));
-    active=false;reachable.clear();damageRevision=null;
+    active=false;reachable.clear();damageRevision=null; relayDay=0;relayClosed=true;relayReceipt=null;relayPhase='inactive';
   }
   reset(initialRunId);
   function interrupt(site) {
@@ -94,16 +95,39 @@ export function createObjectives(initialRunId) {
     site.feedback=remaining===0?null:accepted===0?'full':'partial';site.pending=null;
     sequence++;return true;
   }
+  function setRadioDay({runId:requestRun,day,phase,alarm=false}={}) {
+    if(requestRun!==runId||!Number.isSafeInteger(day)||day<1||day<relayDay||!['prep','wave','inactive'].includes(phase))return false;
+    if(day>relayDay){relayDay=day;relayClosed=false;relayReceipt=null;}
+    relayPhase=phase;
+    if(alarm||phase==='wave')relayClosed=true;
+    sequence++;return true;
+  }
+  function radioCall() {
+    const repaired=revealed&&sites.get(RADIO).state!=='unavailable';
+    return {day:relayDay,repaired,callable:repaired&&relayPhase==='prep'&&relayDay>0&&!relayClosed&&!relayReceipt,receipt:clone(relayReceipt)};
+  }
+  function beginRadioCall({runId:requestRun,day,card}={}) {
+    if(requestRun!==runId||day!==relayDay||!['ammo','medical','hardware','intel','blackout'].includes(card))return null;
+    if(relayReceipt)return !relayClosed&&relayPhase==='prep'&&radioCall().repaired&&relayReceipt.card===card?clone(relayReceipt):null;
+    if(!radioCall().callable)return null;
+    relayReceipt={runId,day,card,receiptId:RADIO+':day:'+day+':call'};sequence++;
+    return clone(relayReceipt);
+  }
   function snapshot() {
-    return {runId,sequence,revealed,active,sites:[...sites.values()].map(site=>({...clone(site),reachable:active&&reachable.has(site.id)}))};
+    return {runId,sequence,revealed,active,radioCall:radioCall(),sites:[...sites.values()].map(site=>({...clone(site),reachable:active&&reachable.has(site.id)}))};
   }
   function save() {
-    return {version:1,runId,revealed,sites:[...sites.values()].map(clone)};
+    return {version:1,runId,revealed,relay:{day:relayDay,closed:relayClosed,receipt:clone(relayReceipt)},sites:[...sites.values()].map(clone)};
   }
   // Cursor must restore this in the same transaction as inventory and its receipts.
   // Validate the entire blob before replacing anything; partial restore is forbidden.
   function restore(blob) {
     if(!blob||blob.version!==1||!validRun(blob.runId)||typeof blob.revealed!=='boolean'||!Array.isArray(blob.sites)||blob.sites.length!==OBJECTIVE_IDS.length)return false;
+    const relay=blob.relay||{day:0,closed:true,receipt:null};
+    if(!Number.isSafeInteger(relay.day)||relay.day<0||typeof relay.closed!=='boolean')return false;
+    if(relay.receipt!==null&&(!relay.receipt||relay.receipt.runId!==blob.runId||relay.receipt.day!==relay.day||
+      !['ammo','medical','hardware','intel','blackout'].includes(relay.receipt.card)||
+      relay.receipt.receiptId!==RADIO+':day:'+relay.day+':call'))return false;
     const next=new Map();
     for(const saved of blob.sites) {
       if(!saved||!OBJECTIVE_IDS.includes(saved.id)||next.has(saved.id)||!STATES.has(saved.state)||!Number.isFinite(saved.progress)||saved.progress<0||saved.progress>6||!Number.isSafeInteger(saved.attempt)||saved.attempt<0)return false;
@@ -115,8 +139,9 @@ export function createObjectives(initialRunId) {
       }
       const site=clone(saved);interrupt(site);next.set(site.id,site);
     }
+    relayDay=relay.day;relayClosed=relay.closed;relayReceipt=clone(relay.receipt);relayPhase='inactive';
     runId=blob.runId;revealed=blob.revealed;sites=next;sequence++;active=false;reachable.clear();damageRevision=null;
     return true;
   }
-  return {reset,update,beginClaim,settleClaim,snapshot,save,restore};
+  return {reset,update,beginClaim,settleClaim,setRadioDay,beginRadioCall,snapshot,save,restore};
 }

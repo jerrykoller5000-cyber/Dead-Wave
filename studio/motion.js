@@ -46,6 +46,8 @@ const DEFAULTS = {
     crush: { scale: 1, spread: 0.8, slump: { spine: 0.7, arms: 0.6, head: 0.6, legs: 0.6 }, recover: 0.9, knockdown: 4 }
   },
   fall: { tone: { legs: 0.04, spine: 0.12, arms: 0.3, head: 0.15 }, catch: 0.7 },
+  // Held by something (a hand round an ankle) and hauled: the muscles that stay on while it hangs.
+  held: { tone: { legs: 0.03, spine: 0.03, arms: 0.05, head: 0.03 }, friction: 0.6 },
   down: { time: 1.4, height: 0.4 },
   getup: { time: 0.8 },
   death: { tone: 0.03, settle: 0.5 }
@@ -98,6 +100,7 @@ export function validateMotion(json) {
     }
   }
   if (json.fall !== undefined) { tones(json.fall.tone, 'fall.tone'); num(json.fall.catch, 'fall.catch', 0, 1); }
+  if (json.held !== undefined) { tones(json.held.tone, 'held.tone'); num(json.held.friction, 'held.friction', 0, 1); }
   if (json.down !== undefined) { num(json.down.time, 'down.time', 0, 30); num(json.down.height, 'down.height', 0.05, 2); }
   if (json.getup !== undefined) num(json.getup.time, 'getup.time', 0.05, 5);
   if (json.death !== undefined) { num(json.death.tone, 'death.tone', 0, 1); num(json.death.settle, 'death.settle', 0.05, 10); }
@@ -129,6 +132,7 @@ export function loadMotion(json) {
     balance: { ...D.balance, ...(json.balance || {}) },
     hits,
     fall: { tone: toneObj(json.fall && json.fall.tone, D.fall.tone), catch: (json.fall && json.fall.catch) ?? D.fall.catch },
+    held: { tone: toneObj(json.held && json.held.tone, D.held.tone), friction: (json.held && json.held.friction) ?? D.held.friction },
     down: { ...D.down, ...(json.down || {}) },
     getup: { ...D.getup, ...(json.getup || {}) },
     death: { ...D.death, ...(json.death || {}) },
@@ -222,6 +226,8 @@ export function createBody(inst, preset, opts = {}) {
   let t = 0, acc = 0, stateT = 0, followed = false, hasPrev = false;
   let tone = { ...preset.tone }, slump = null, fallDir = new THREE.Vector3(0, 0, 1);
   let sink = 0, sinkNow = 0, still = 0, steps = 0, stepping = null, landed = false, woke = 0;
+  // Held: one point goes where something takes it (a hand), and the rest hangs and drags.
+  let held = null;   // { i, at: [x, y, z], prev: [x, y, z], w }
   const pin = feet.map(() => null);
   let queue = [];
   const emit = (name, data) => queue.push(data ? [name, data] : [name]);
@@ -270,6 +276,7 @@ export function createBody(inst, preset, opts = {}) {
     measure();
     P.set(A); Q.set(A0);
     body.state = 'react'; stateT = 0; woke = 0; steps = 0; stepping = null; still = 0; landed = false;
+    for (const sg of segs) sg.lastW = null;
     body.sleeping = false; body.drift.set(0, 0, 0);
     feet.forEach((f, k) => { pin[k] = [P[f * 3], P[f * 3 + 2]]; });
     emit('wake');
@@ -324,8 +331,40 @@ export function createBody(inst, preset, opts = {}) {
     body.state = 'dead'; stateT = 0; still = 0;
     for (let k = 0; k < pin.length; k++) pin[k] = null;
     stepping = null;
-    emit('dead');
+    emit('dead');   // a held corpse stays held: it hangs limp from the hand until let go
     return true;
+  };
+
+  // Held by a point: `at` is where that point is taken (world), `w` how much of the body the
+  // hold has (0..1, the blend the host wants; 1 is fully hung). Call every frame with the new
+  // place; `hold(point, null)` lets go: alive it falls and gets up, dead it settles.
+  body.hold = (point, at, w = 1) => {
+    if (at === null || at === undefined) {
+      if (!held) return false;
+      held = null;
+      inv[heldI] = 1 / mass[heldI]; heldI = -1;
+      if (body.state === 'held') { body.state = body.alive ? 'fall' : 'dead'; stateT = 0; landed = false; still = 0; emit('released'); }
+      return true;
+    }
+    const i = nearest(point);
+    if (body.state === 'animated' && !wake()) return false;
+    if (!held || held.i !== i) {
+      if (held) inv[held.i] = 1 / mass[held.i];
+      held = { i, at: [at[0], at[1], at[2]], prev: [P[i * 3], P[i * 3 + 1], P[i * 3 + 2]], w };
+      heldI = i; inv[i] = 0;
+      if (body.alive && body.state !== 'held') { body.state = 'held'; stateT = 0; stepping = null; for (let k = 0; k < pin.length; k++) pin[k] = null; emit('held', { point: names[i] }); }
+    } else { held.at[0] = at[0]; held.at[1] = at[1]; held.at[2] = at[2]; held.w = w; }
+    return true;
+  };
+  let heldI = -1;
+  // The host moved the body itself (a knockback slide, a moving deck): every simulated point, the
+  // planted feet and the step in flight come along, without a push. World metres.
+  body.shift = (dx, dy = 0, dz = 0) => {
+    if (body.state === 'animated') return;
+    for (let i = 0; i < n; i++) { const o = i * 3; P[o] += dx; P[o + 1] += dy; P[o + 2] += dz; Q[o] += dx; Q[o + 1] += dy; Q[o + 2] += dz; }
+    for (let k = 0; k < pin.length; k++) if (pin[k]) { pin[k][0] += dx; pin[k][1] += dz; }
+    if (stepping) { stepping.from[0] += dx; stepping.from[1] += dz; stepping.to[0] += dx; stepping.to[1] += dz; }
+    if (held) { held.prev[0] += dx; held.prev[1] += dy; held.prev[2] += dz; }
   };
 
   function fall() {
@@ -341,6 +380,7 @@ export function createBody(inst, preset, opts = {}) {
     if (body.alive && body.state !== 'animated') { body.state = 'animated'; body.weight = 0; }
   };
   body.reset = () => {
+    if (held) { inv[held.i] = 1 / mass[held.i]; held = null; heldI = -1; }
     body.state = 'animated'; body.weight = 0; body.alive = true; body.sleeping = false; slump = null;
     body.drift.set(0, 0, 0); stepping = null; hasPrev = false; followed = false;
     if (opts.pool) opts.pool.give(body);
@@ -353,6 +393,7 @@ export function createBody(inst, preset, opts = {}) {
     const s = body.state;
     if (s === 'dead') return preset.death.tone;
     if (s === 'fall' || s === 'down') return preset.fall.tone[g];
+    if (s === 'held') return preset.held.tone[g];
     let v = preset.tone[g];
     if (slump) v *= 1 - (slump.tone[g] || 0) * (1 - smooth(slump.t / slump.dur));
     if (s === 'getup') v = v * smooth(stateT / preset.getup.time) + preset.fall.tone[g] * (1 - smooth(stateT / preset.getup.time));
@@ -428,6 +469,13 @@ export function createBody(inst, preset, opts = {}) {
         P[hI * 3] += (x - P[hI * 3]) * k; P[hI * 3 + 1] += (ground(x, z) + rad[hI] - P[hI * 3 + 1]) * k; P[hI * 3 + 2] += (z - P[hI * 3 + 2]) * k;
       }
     }
+    // The held point: where the hand is, moving as the hand moves, and immovable to the solvers.
+    if (held) {
+      const o = held.i * 3;
+      Q[o] = held.prev[0]; Q[o + 1] = held.prev[1]; Q[o + 2] = held.prev[2];
+      P[o] = held.at[0]; P[o + 1] = held.at[1]; P[o + 2] = held.at[2];
+      held.prev = held.at.slice();
+    }
     // Constraints: bones hold their length, braces stay within their range, knees and elbows bend
     // one way, points stay above the ground, planted feet stay pinned.
     for (let it = 0; it < ITER; it++) {
@@ -438,11 +486,13 @@ export function createBody(inst, preset, opts = {}) {
         for (const hg of hinges) solveHinge(hg, hg.upper ? qUp : qLow);
       }
       feet.forEach((f, k) => { if (pin[k] && !(stepping && stepping.k === k)) { P[f * 3] = pin[k][0]; P[f * 3 + 2] = pin[k][1]; } });
+      if (held) { const o = held.i * 3; P[o] = held.at[0]; P[o + 1] = held.at[1]; P[o + 2] = held.at[2]; }
       for (let i = 0; i < n; i++) {
+        if (held && i === held.i) continue;
         const fl = floorAt(i);
         if (P[i * 3 + 1] < fl) {
           P[i * 3 + 1] = fl;
-          const fr = preset.friction;
+          const fr = body.state === 'held' ? preset.held.friction : preset.friction;
           Q[i * 3] = P[i * 3] - (P[i * 3] - Q[i * 3]) * (1 - fr);
           Q[i * 3 + 2] = P[i * 3 + 2] - (P[i * 3 + 2] - Q[i * 3 + 2]) * (1 - fr);
           if (Q[i * 3 + 1] < P[i * 3 + 1]) Q[i * 3 + 1] = P[i * 3 + 1];
@@ -545,6 +595,7 @@ export function createBody(inst, preset, opts = {}) {
       // The feet's own depth (the game stands zombies 0.2 m into the ground): kept while standing,
       // let go while down, and taken back up while getting up.
       if (st === 'react') sinkNow = sink;
+      else if (st === 'held') sinkNow += (0 - sinkNow) * Math.min(1, SUB / 0.3);
       else sinkNow += ((st === 'getup' ? sink : 0) - sinkNow) * Math.min(1, SUB / (st === 'getup' ? preset.getup.time * 0.5 : 0.5));
       stepOnce(SUB);
       if (st === 'react') balance(SUB);
@@ -554,10 +605,12 @@ export function createBody(inst, preset, opts = {}) {
     const s = body.state;
     if (s === 'react') body.weight = body.recovering ? Math.max(0, 1 - body.recovering / preset.blendOut) : Math.min(1, woke / Math.max(1e-3, preset.blendIn));
     else if (s === 'getup') body.weight = 1 - smooth(stateT / preset.getup.time);
+    else if (s === 'held') body.weight = Math.min(1, Math.max(held ? held.w : 1, 0));
     else if (s !== 'animated') body.weight = Math.min(1, Math.max(body.weight, woke / Math.max(1e-3, preset.blendIn)));
     // How far the reaction has moved the body over the ground, for the host to take on as its own
     // place: where its feet went while it stands (a stagger step), where its hips went once it's down.
-    if (s === 'react' && feet.length) {
+    if (s === 'held') body.drift.set(0, 0, 0);   // the hand says where it is, not the host
+    else if (s === 'react' && feet.length) {
       let dx = 0, dz = 0;
       for (const f of feet) { dx += P[f * 3] - A[f * 3]; dz += P[f * 3 + 2] - A[f * 3 + 2]; }
       body.drift.set(dx / feet.length, 0, dz / feet.length);
@@ -583,7 +636,10 @@ export function createBody(inst, preset, opts = {}) {
       } else if (!slump && !stepping && woke > 0.2 && (body.offBalance || 0) < preset.balance.step * 0.6 && speedOf(root) < 0.35) {
         body.recovering = 1e-6;
       }
+    } else if (s === 'held') {
+      // Nothing of its own: the hand decides when it's let go.
     } else if (s === 'dead') {
+      if (held) { still = 0; return; }
       let e = 0;
       for (let i = 0; i < n; i++) e = Math.max(e, speedOf(i));
       still = e < 0.08 ? still + SUB : 0;
@@ -592,6 +648,7 @@ export function createBody(inst, preset, opts = {}) {
   }
   function recover() {
     body.state = 'animated'; body.weight = 0; body.recovering = 0; slump = null; stepping = null;
+    for (const sg of segs) sg.lastW = null;
     if (opts.pool) opts.pool.give(body);
     emit('recovered');
   }
@@ -601,7 +658,10 @@ export function createBody(inst, preset, opts = {}) {
   body.apply = () => {
     const w = body.weight;
     if (!(w > 0) || !followed) return;
-    S.set(P);
+    // The blend is between the points, not the joints' turns: a limb held the opposite way from its
+    // animation (a leg hauled up by the ankle) then swings through, instead of a slerp between two
+    // opposite turns picking a different way round each frame.
+    if (w >= 1) S.set(P); else for (let i = 0; i < n * 3; i++) S[i] = A[i] + (P[i] - A[i]) * w;
     const pm = new THREE.Matrix4(), pq = new THREE.Quaternion(), ps = new THREE.Vector3(), pp = new THREE.Vector3();
     for (const s of segs) {
       const j = s.j;
@@ -614,9 +674,16 @@ export function createBody(inst, preset, opts = {}) {
         const a = s.aimI[0] * 3, b = s.aimI[1] * 3;
         _x.set(A[b] - A[a], A[b + 1] - A[a + 1], A[b + 2] - A[a + 2]).normalize();
         _y.set(S[b] - S[a], S[b + 1] - S[a + 1], S[b + 2] - S[a + 2]).normalize();
-        _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        // The first frame turns the bone from where the animation has it; after that each frame
+        // turns on from where it was written last frame. A bone pointing nearly the opposite way
+        // from its animation (a leg held up by the ankle while the clip has it down) has no one
+        // shortest turn from the animation, and picking one afresh each frame spins the joint.
+        if (s.lastW) _q.setFromUnitVectors(s.lastDir, _y).multiply(s.lastW);
+        else _q.setFromUnitVectors(_x, _y).multiply(_qa);
+        (s.lastDir ||= new THREE.Vector3()).copy(_y);
+        (s.lastW ||= new THREE.Quaternion()).copy(_q);
       } else continue;
-      _qa.slerp(_q, w);                              // the world rotation it ends with
+      _qa.copy(_q);                                  // the world rotation it ends with
       const parent = j.parent;
       parent.updateWorldMatrix(false, false);
       parent.matrixWorld.decompose(pp, pq, ps);
@@ -629,7 +696,7 @@ export function createBody(inst, preset, opts = {}) {
         const o = s.posI * 3;
         _w.set(S[o], S[o + 1], S[o + 2]);
         _v.copy(offs[s.posI]).multiply(_s).applyQuaternion(_qa);
-        _w.sub(_v).lerp(_p, 1 - w);                  // the pivot, from the simulated point
+        _w.sub(_v);                                  // the pivot, from the (blended) point
         pm.copy(parent.matrixWorld).invert();
         j.position.copy(_w.applyMatrix4(pm));
         (s.wroteP = s.wroteP0 ||= new THREE.Vector3()).copy(j.position);

@@ -81,12 +81,14 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
   const onKey=e=>{if(e.code==='KeyE'&&!e.repeat)queueMicrotask(()=>update(true));};
   const onGame=({detail:d})=>{
     if(d?.type==='run-reset'){model.reset(d.runId);choices.clear();view.reset(d.runId);lastNear=null;lastPaint='';damageRevision=0;update();}
+    else if(d?.type==='prep-state'){model.setRadioDay({...d,alarm:d.alarm===true});}
+    else if(d?.type==='alarm-started'){model.setRadioDay({...d,phase:'wave',alarm:true});}
     else if(d?.type==='player-damaged'){damageRevision++;update();}
   };
   window.addEventListener('keydown',onKey);window.addEventListener('dw-game',onGame);
   function poll(t){if(disposed)return;if(t-lastPoll>=100){lastPoll=t;update();}frame=requestAnimationFrame(poll);}
   frame=requestAnimationFrame(poll);update();
-  return {update,read:()=>model.snapshot(),markers:()=>view.read().markers,
+  return {update,beginRadioCall:request=>model.beginRadioCall(request),read:()=>model.snapshot(),markers:()=>view.read().markers,
     save:()=>({state:model.save(),choices:[...choices],trackedId:view.read().tracker?.id??null}),
     restore:blob=>{if(!blob||!model.restore(blob.state))return false;choices.clear();for(const pair of blob.choices||[])if(Array.isArray(pair)&&pair.length===2)choices.set(...pair);view.reset(blob.state.runId);lastPaint='';update();if(blob.trackedId)view.track(blob.trackedId);return true;},
     snapshot:()=>lastSnapshot,

@@ -1,7 +1,7 @@
 import { text } from './strings.js';
 
 export const COACH_STORAGE_KEY = 'dw.coach.v1';
-const FLAGS = ['poiShown', 'pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased'];
+const FLAGS = ['poiShown', 'pickupShown', 'bankShown', 'purchaseShown', 'banked', 'purchased', 'buildShown', 'pairShown', 'medpenShown', 'built'];
 
 // An observer of committed actions: this module never awards skulls/Cash or starts a wave.
 export function createCoach({ load = () => null, save = () => {} } = {}) {
@@ -10,6 +10,7 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   const profile = Object.fromEntries(FLAGS.map(key => [key, stored?.version === 1 && stored[key] === true]));
   let runId = null, ready = false, carried = 0, processing = false;
   let poiKey = null, fightRetired = false;
+  let prep = {}, pairBought = false;
   const warningsSeen = new Set(); let pendingWarnings = [];
   const isWarning = id => id === 'caveWarning' || id === 'pitWarning';
   let pickupSeen = false, purchasePending = false, card = null, remaining = 0, visible = false;
@@ -18,9 +19,14 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (event.type === 'controls-ready') { ready = true; return; }
     if (event.type === 'run-reset') {
       runId = event.runId; ready = false; poiKey = null; fightRetired = false; carried = 0; processing = false; pickupSeen = false;
-      purchasePending = false; card = null; visible = false; warningsSeen.clear(); pendingWarnings = []; return;
+      purchasePending = false; card = null; visible = false; warningsSeen.clear(); pendingWarnings = []; prep = {}; pairBought = false; return;
     }
     if (event.runId != null && runId != null && event.runId !== runId) return;
+    if (event.type === 'prep-state') prep = {day:event.day,phase:event.phase,cash:event.cash};
+    if (event.type === 'purchase-delivered' && event.cashSpent > 0) {
+      if (event.source === 'build') { profile.built = true; if(card === 'build') card = null; persist(); }
+      if (event.source === 'kiosk' && /^dual:/.test(event.itemId || '')) pairBought = true;
+    }
     const warning = event.type === 'cave-guardian' && event.warning === true ? 'caveWarning' :
       event.type === 'pit-near' ? 'pitWarning' : null;
     if (warning && !warningsSeen.has(warning)) { warningsSeen.add(warning); pendingWarnings.push(warning); }
@@ -56,6 +62,13 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (typeof frame.pendingDeposit === 'boolean') processing = frame.pendingDeposit;
     if ((card === 'pickup' || card === 'bank') && (!carried || processing || profile.banked)) card = null;
     if (card === 'bank' && !frame.nearWindow) card = null;
+    const day = frame.day ?? prep.day, phase = frame.phase ?? prep.phase, cash = frame.cash ?? prep.cash;
+    if (frame.building === true && !profile.buildShown) { profile.buildShown = true; persist(); }
+    const canBuild = day === 2 && phase === 'prep' && cash >= 8 && !profile.built && !frame.building;
+    const canPair = day >= 2 && pairBought && frame.hasPair === true && !frame.akimbo;
+    const canHeal = day >= 2 && Number.isFinite(frame.hp) && frame.hp > 0 &&
+      Number.isFinite(frame.maxHp) && frame.maxHp > 0 && frame.hp / frame.maxHp <= .4 && frame.medkits > 0;
+    if ((card === 'build' && !canBuild) || (card === 'pair' && !canPair) || (card === 'medpen' && !canHeal)) card = null;
     visible = ready && frame.active === true;
     if (!visible) return null;
     if (pendingWarnings.length) show(pendingWarnings.shift(), 8);
@@ -63,6 +76,9 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (!card && carried > 0 && !processing && pickupSeen && !profile.banked && !profile.bankShown && !profile.pickupShown) show('pickup', 8);
     if (!card && !carried && poiKey && !fightRetired && !profile.banked && !profile.poiShown) show('poi', 12);
     if (!card && purchasePending && !profile.purchaseShown) show('purchase', 6);
+    if (!card && canHeal && !profile.medpenShown) show('medpen', 8);
+    if (!card && canPair && !profile.pairShown) show('pair', 8);
+    if (!card && canBuild && !profile.buildShown) show('build', 8);
     const view = read();
     if (card && Number.isFinite(frame.dt) && frame.dt > 0) {
       remaining -= Math.min(frame.dt, 1);

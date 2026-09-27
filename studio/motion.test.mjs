@@ -131,6 +131,48 @@ test('48 reacting zombies cost a few milliseconds a frame', () => {
   assert.ok(ms < 12, `${ms.toFixed(2)} ms a frame`);
 });
 
+test('held by the ankle and hauled: the grip stays at the hand, nothing goes through the ground, and let go it lands', () => {
+  const inst = rigs.get('marine').create({});
+  const body = createBody(inst, preset('marine/marine'), { ground: () => 0 });
+  body.follow(); body.follow();
+  const foot0 = body.animPoints().footL;
+  const hand = [foot0[0], foot0[1] + 0.5, foot0[2] + 0.3];
+  const ev = [];
+  let worstGap = 0, lowest = Infinity;
+  for (let f = 0; f < 240; f++) {
+    body.follow();
+    hand[2] += 0.02;                                   // hauled at 1.2 m/s
+    hand[1] = foot0[1] + 0.5 + 0.05 * Math.sin(f / 9);  // the hand bobs with the walk
+    body.hold('footL', hand, 1);
+    for (const e of body.update(1 / 60)) ev.push(e[0]);
+    body.apply();
+    const p = body.points();
+    worstGap = Math.max(worstGap, Math.hypot(p.footL[0] - hand[0], p.footL[1] - hand[1], p.footL[2] - hand[2]));
+    for (const [k, v] of Object.entries(p)) lowest = Math.min(lowest, v[1] - (k === 'footL' ? 0 : 0.03));
+    inst.group.traverse((o) => assert.ok(Number.isFinite(o.quaternion.x) && Number.isFinite(o.position.x)));
+  }
+  assert.equal(body.state, 'held');
+  assert.ok(ev.includes('held'), ev.join(' '));
+  assert.ok(worstGap < 0.03, 'grip ' + worstGap.toFixed(3) + ' m off the hand');
+  assert.ok(lowest > -0.06, 'a point went ' + lowest.toFixed(3) + ' m under the ground');
+  // The body came along: its hips are well down the haul, behind the hand, on the ground.
+  const p = body.points();
+  assert.ok(p.pelvis[2] > foot0[2] + 2 && p.pelvis[2] < hand[2], 'hips at z ' + p.pelvis[2].toFixed(2) + ' (hand ' + hand[2].toFixed(2) + ')');
+  assert.ok(p.pelvis[1] < 0.5, 'hips dragging at ' + p.pelvis[1].toFixed(2) + ' m');
+  // Let go: he falls, lands and gets up.
+  body.hold('footL', null);
+  for (let f = 0; f < 300; f++) { body.follow(); for (const e of body.update(1 / 60)) ev.push(e[0]); body.apply(); }
+  assert.ok(ev.includes('released') && ev.includes('down') && ev.includes('getup'), ev.join(' '));
+  // shift moves everything without a push: the points, and nothing flies.
+  const b2 = createBody(rigs.get('zombie').create({}), preset('zombie/shambler'), { ground: () => 0 });
+  b2.follow(); b2.follow(); b2.hit({ at: 'chest', dir: [0, 0, -1], power: 2, kind: 'bullet' });
+  b2.update(1 / 60);
+  const before = b2.points().pelvis;
+  b2.shift(1, 0, 0.5);
+  const after = b2.points().pelvis;
+  assert.ok(Math.abs(after[0] - before[0] - 1) < 1e-9 && Math.abs(after[2] - before[2] - 0.5) < 1e-9);
+});
+
 test('the review scenes play: every reaction happens where the scene says', () => {
   const run = (name) => {
     const sp = createScene(loadScene(JSON.parse(fs.readFileSync(new URL(`./scenes/${name}.json`, import.meta.url), 'utf8')), clipOf));
@@ -152,6 +194,26 @@ test('the review scenes play: every reaction happens where the scene says', () =
   const m = run('marine-knocked').ev;
   assert.ok(m.swiped.includes('step') && !m.swiped.includes('fall'), m.swiped.join(' '));
   assert.ok(m.blasted.includes('down') && m.blasted.includes('recovered'));
+});
+
+test('the guardian drags a limp marine (CL-67): hung by the ankle at the hand, nothing through the ground', () => {
+  const sp = createScene(loadScene(JSON.parse(fs.readFileSync(new URL('./scenes/guardian-grab-drag.json', import.meta.url), 'utf8')), clipOf));
+  const ev = []; let worstGap = 0, lowest = Infinity, frames = 0;
+  while (!sp.done) {
+    const r = sp.update(1 / 60);
+    for (const e of r.events) if (e.actor === 'marine' && e.name.startsWith('motion:')) ev.push(e.name.slice(7));
+    if (sp.t < 1.1) continue;
+    frames++;
+    worstGap = Math.max(worstGap, r.checks.gap['guardian.handR>marine.footL'].value);
+    for (const [k, v] of Object.entries(sp.actors.marine.body.points())) lowest = Math.min(lowest, v[1]);
+  }
+  assert.ok(ev.includes('held') && !ev.includes('fall'), ev.join(' '));
+  assert.equal(sp.actors.marine.body.state, 'held');
+  assert.ok(frames > 200 && worstGap < 0.03, 'the ankle got ' + worstGap.toFixed(3) + ' m off the hand while hauled');
+  assert.ok(lowest > -0.06, 'a point went ' + lowest.toFixed(3) + ' m under the ground');
+  // He's hauled along: the hips end up far down the scene's +Z, on the ground, behind the hand.
+  const p = sp.actors.marine.body.points();
+  assert.ok(p.pelvis[2] > 5 && p.pelvis[1] < 0.5 && p.pelvis[2] < p.footL[2], 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(','));
 });
 
 test('a scene refuses hits without a preset, and a bad hit, in sentences', () => {
