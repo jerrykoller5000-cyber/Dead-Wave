@@ -66,3 +66,13 @@ body.dawn #firstMinuteCoach { visibility:hidden; }
 #campCleared { padding:8px 10px; color:#cbd3ae; background:#0c1915e8; border-left:2px solid #94aa77; font:12px/1.4 var(--font-hud); }
 #campCleared[hidden] { display:none; }
 body:is(.opening,.frontend,.deploying,.cine,.dawn) #campCleared { display:none; }
+
+/* GP-45: wrap between actions, never between a key and its word. */
+#hudNotices #placeBanner .place-heading { display:block; margin:0 0 4px; }
+#hudNotices #placeBanner .place-controls { display:flex; flex-wrap:wrap; gap:3px 10px; }
+#hudNotices #placeBanner .place-control { display:inline-flex; align-items:baseline; white-space:nowrap; font-size:10px; letter-spacing:normal; }
+#hudNotices #placeBanner kbd { font:inherit; font-weight:800; color:#fff0c4; margin-right:4px; }
+#hudNotices #placeBanner .place-note { display:block; }
+#hudNotices #placeBanner .place-why { color:#ffb347; }
+#hudNotices #placeBanner .place-upgrade { color:#9fe8b8; }
+#hudNotices #placeBanner .place-scrap { color:#ff8a6a; }

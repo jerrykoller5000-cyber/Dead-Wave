@@ -13,6 +13,15 @@ import { notesStub } from '../crew/notes.mjs';
 const REF = /^[a-z]+\/[a-z0-9-]+$/;
 
 export function handleStudioNote(req, res, base) {
+  // Only the lab, on this server: a page from anywhere else in Jerry's browser could otherwise post a
+  // note, and notes are what agents act on. A cross-site page can't send JSON without asking first
+  // (and this server never says yes), and its Origin isn't this host.
+  const origin = req.headers.origin, type = String(req.headers['content-type'] || '');
+  if ((origin && origin !== `http://${req.headers.host}`) || !type.startsWith('application/json')) {
+    res.writeHead(403, { 'Content-Type': 'application/json' }).end(JSON.stringify({ ok: false, error: 'notes come from the motion lab on this server' }));
+    req.resume();
+    return;
+  }
   let body = '';
   req.setEncoding('utf8');
   req.on('data', (d) => { body += d; if (body.length > 20000) req.destroy(); });

@@ -101,6 +101,11 @@ injection, never `window.TT`). From `handoffs/2026-09-23-grokbot-REQ-gp7-repair-
 
 - `getRepairTarget()` → the damaged build T would repair (damaged builds only, the same reach
   as T), or `null`.
+- Since GB-63 (P-4, 2026-09-27) "the same reach as T" is storey-bound: T, X and `getRepairTarget()`
+  only consider a build whose height overlaps his storey band (`storeyBand`) and that nothing he
+  built blocks from his chest (`segmentHitsBuild`; railings and wire excepted). From the ground the
+  damaged deck overhead is `null`; from a deck the wall under his feet is `null`. The return shape is
+  unchanged and `reachable` stays `true`. Test: t88.
 - `getRepairSnapshot(id)` → that build now: `{ ..., cost, affordable }`. At full HP it is still
   returned, with `cost: 0` and `affordable: true`. `null` only when the build is gone.
 - Ids: `type@gx,gz:slot:L{level}[:opening]`. Known gap, accepted: ids reuse the cell, so a
@@ -314,6 +319,11 @@ Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sound
   stumps, rocks, landmark solids at its height) and smashes any build it runs into
   (`damageBuild` for all its hp, so what stood on it comes down), with a 0.14 s stumble.
 
+- CL-66 (P-11, 2026-09-26): the pit warns before it takes him. Swimming within `LAKE_HOLE.grabR + 8` m of
+  the hole publishes `dw-game` `{ type: 'pit-near', x, z, dist, grabR }` once a run (reset with the cave
+  warning, on day 1's prep), with a hard pit rumble; the grab itself is unchanged at `grabR`. The coach
+  turns the event into its one-time card (P-12); nothing else reads it yet.
+
 ## Wave finisher (CL-26, 2026-09-24)
 
 Owner: Claude. The last kill of a wave (the plan spent, nobody left alive) runs the finisher in the
@@ -464,6 +474,15 @@ marine). The full description is `docs/studio.md` §10.
 | `body.update(dt) → events` | `[name, data?]`: `wake`, `hit`, `stagger`, `step {foot}`, `fall`, `land`, `down`, `getup`, `recovered`, `dead`, `settled`. |
 | `body.apply()` | Writes the pose onto the rig by `body.weight`; joints the host doesn't re-pose each frame are restored by the next `follow()`. |
 | `body.state`, `body.awake`, `body.alive`, `body.weight`, `body.drift` | `drift` (world, m): where the reaction has moved the body; the host adds it to its own position while `awake` (feet while standing, hips once down). The AI does nothing of its own while `state` is `fall`, `down` or `getup`. |
+
+In the game (GB-65, GB-66; Grokbot's, index.html): a zombie is adopted as the `zombie` rig on its first
+hit and the marine as `marine` (GB-67); a body's `power` is the round's damage before armour (armour
+soaks the wound, not the shove; the preset's `mass` decides who stays up); a crawler, a zombie climbing a
+window, rising or leaping, and the spiders, colossus and guardian get no body and play the old reaction
+(`getMotionStats().skipped`); a full pool or a refused body counts as `refused`. Deaths hand the body to
+the corpse (`body.kill`), which freezes when `settled`. Adopt with the same build options the rig would be
+built with (`create({ group, type })` for a zombie's kind) so its studio rest matches; `rigs.js` keeps one
+reference rest per rig and options, so adopting costs no rebuild.
 
 Scenes take `motion`, `hits` and `kill` on an actor (§10). The motion lab's notes come in through
 `POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`), which writes only under

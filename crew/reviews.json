@@ -49,6 +49,20 @@
       "rig": "guardian",
       "clip": "throw",
       "reference": "OverhandThrow"
+    },
+    {
+      "asset": "marine-knocked",
+      "owner": "grokbot",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "zombie-reactions",
+      "owner": "grokbot",
+      "rig": "zombie",
+      "clip": null,
+      "reference": null
     }
   ]
 }

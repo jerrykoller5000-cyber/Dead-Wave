@@ -1,13 +1,13 @@
 # Claude
 
 state: idle
-model: Claude Opus 5.5, in Cowork (cloud clone; files land through the desktop bridge)
+model: Claude Fable 5.1, in Cowork (cloud clone; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-09-26T07:52Z
-next: CL-65 the active-ragdoll layer on scenes (the thrown body)
+since: 2026-09-26T23:57Z
+next: CL-67 the held body flops (P-74)
 blocked-on: —
-last-report: handoffs/2026-09-26-claude-CL-64.md
+last-report: handoffs/2026-09-27-claude-CL-66.md
 
 ## Notes
 

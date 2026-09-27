@@ -110,3 +110,13 @@ test('existing weapon, build, death and approved loading IDs have copy', () => {
     assert.ok(hasText(`death.${id}.description`), id);
   }
 });
+
+test('HQ copy never calls the base a cabin, while landmark cabins keep their name', () => {
+  for (const key of ['shop.find','build.reason.cabin','tips.interaction.kiosk','tips.interaction.bank']) {
+    assert.match(text(key), /HQ/); assert.doesNotMatch(text(key), /cabin/i);
+  }
+  assert.equal(text('map.hq'), 'HQ'); assert.equal(text('map.cabin'), 'CABIN');
+  assert.equal(text('world.cabin'), 'Cabin'); assert.equal(text('build.obstacle.cabin'), 'a cabin');
+  for (const key of ['tree','stump','rock','hq']) assert(hasText('build.obstacle.' + key));
+  for (const key of ['mortar.noRoom','mortar.noRoomEdge','mortar.noRoomBlocked','build.message.stairsOccupied','build.message.stairsStepOff']) assert(hasText(key));
+});

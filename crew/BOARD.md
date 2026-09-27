@@ -100,7 +100,7 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CU-51, AG-22 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CU-51, AG-22 |
 | **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
 | **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26 |
@@ -493,7 +493,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [x] **CU-47** **R1 · P-76.** Review the notes hook in tools/serve.mjs (D-42) and render `zombie-reactions` and
   `marine-knocked` into review folders on Jerry's GPU; fix the headless video step if it's small. Details:
   `docs/roadmap.md` P-76.
-- [ ] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
+- [>] **CU-48** **R1 · P-13.** Nightsim: `--repeat N`, melee counted per kill, crowd seconds, signature-kind peaks,
   streak heals: medians, not one run. Details: `docs/roadmap.md` P-13.
 - [ ] **CU-49** **R1 · P-14.** Three stale lines in docs/gameplay.md made true (prep clock, drops, window climbing).
   Details: `docs/roadmap.md` P-14.
@@ -536,24 +536,24 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [ ] **GB-60** **R1 · P-1.** Skulls you earn reach the bag, every night: the last kill pulls them in; none land in a
+- [x] **GB-60** **R1 · P-1.** Skulls you earn reach the bag, every night: the last kill pulls them in; none land in a
   grab zone. Claude's rule-10 OK is given (roadmap, lead calls). Details: `docs/roadmap.md` P-1.
-- [ ] **GB-61** **R1 · P-2.** A skull within 4 m zips to you; skulls last 45 s; big drops still need the walk. After
+- [x] **GB-61** **R1 · P-2.** A skull within 4 m zips to you; skulls last 45 s; big drops still need the walk. After
   GB-60. Details: `docs/roadmap.md` P-2.
-- [ ] **GB-62** **R1 · P-3.** Build refusals say why while you aim; no turret under your feet on a deck. Details:
+- [x] **GB-62** **R1 · P-3.** Build refusals say why while you aim; no turret under your feet on a deck. Details:
   `docs/roadmap.md` P-3.
-- [ ] **GB-63** **R1 · P-4.** T and X act on your own storey only, never through a floor. After GB-62. Details:
+- [x] **GB-63** **R1 · P-4.** T and X act on your own storey only, never through a floor. After GB-62. Details:
   `docs/roadmap.md` P-4.
-- [ ] **GB-64** **R1 · P-5.** A mortar at a deck's rim keeps you on the deck; folding stairs won't fold from under
+- [x] **GB-64** **R1 · P-5.** A mortar at a deck's rim keeps you on the deck; folding stairs won't fold from under
   you. After GB-63. Details: `docs/roadmap.md` P-5.
-- [ ] **GB-65** **R1 · P-70, P-6.** The dead react in the game (D-42): adopt each zombie as the `zombie` rig, one body
+- [x] **GB-65** **R1 · P-70, P-6.** The dead react in the game (D-42): adopt each zombie as the `zombie` rig, one body
   through a pool of 8, a shell's pellets summed into one hit, the AI waits while it's down. The engine, presets and
   lab are in (CL-65). docs/studio.md §10 and docs/contracts.md (Reactions). Details: `docs/roadmap.md` P-70, P-6.
-- [ ] **GB-66** **R1 · P-71, P-7.** Deaths fall the way they were hit: `body.kill` replaces the corpse topple; settled
+- [x] **GB-66** **R1 · P-71, P-7.** Deaths fall the way they were hit: `body.kill` replaces the corpse topple; settled
   corpses freeze. After GB-65. Details: `docs/roadmap.md` P-71, P-7.
-- [ ] **GB-67** **R1 · P-72.** The marine gets knocked around (your GB-50 order, through D-42): swipes rock him, a
+- [x] **GB-67** **R1 · P-72.** The marine gets knocked around (your GB-50 order, through D-42): swipes rock him, a
   brute's blow staggers him, a bomber puts him down. After GB-65. Details: `docs/roadmap.md` P-72.
-- [ ] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
+- [>] **GB-68** **R1 · P-73.** Zombies' feet on the ground: check the 0.2 m sink (studio/zombie.js note) and fix it if
   it's a bug. Details: `docs/roadmap.md` P-73.
 - [ ] **GB-69** **R1 · P-8.** The laser does what the kiosk sells: spread ×0.8 while it's on. Details:
   `docs/roadmap.md` P-8.
@@ -582,6 +582,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   `docs/roadmap.md` P-28.
 - [ ] **GB-78** **R2 · P-32.** The first guardian catch of a run can be escaped: five E presses, 50 HP and the
   unbanked skulls (D-46). After GB-67. Details: `docs/roadmap.md` P-32.
+- [ ] **GB-96** **R2 · P-100.** The shotgun against spiders on a wall: a small spider-only edge, measured before and
+  after (Grokbot's call under Jerry's "use your best judgement"). After GB-59. Details: `docs/roadmap.md` P-100.
 
 #### R3 · The day feeds the night
 
@@ -630,11 +632,11 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [ ] **GP-45** **R1 · P-9.** Build mode's HUD: each key beside its word, no Reload row while R rotates. After GB-62.
+- [>] **GP-45** **R1 · P-9.** Build mode's HUD: each key beside its word, no Reload row while R rotates. After GB-62.
   Details: `docs/roadmap.md` P-9.
-- [ ] **GP-46** **R1 · P-10.** "Cabin" becomes "HQ" everywhere the player reads it (the landmark cabins stay cabins).
+- [>] **GP-46** **R1 · P-10.** "Cabin" becomes "HQ" everywhere the player reads it (the landmark cabins stay cabins).
   After GB-62. Details: `docs/roadmap.md` P-10.
-- [ ] **GP-47** **R1 · P-12.** One-time lines for the first cave poke and the first swim toward the pit. After CL-66.
+- [>] **GP-47** **R1 · P-12.** One-time lines for the first cave poke and the first swim toward the pit. After CL-66.
   Details: `docs/roadmap.md` P-12.
 
 #### R2 · The night has a shape
@@ -708,7 +710,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [ ] **AG-20** **R1 · P-15.** A fresh run to night 5 on Jerry's GPU: night lengths, lost skulls, the skull-at-dawn
+- [>] **AG-20** **R1 · P-15.** A fresh run to night 5 on Jerry's GPU: night lengths, lost skulls, the skull-at-dawn
   report, accidental pokes, fps with 48, the Ways to Die padlocks. Do it again when GB-61 is in. Details:
   `docs/roadmap.md` P-15.
 - [ ] **AG-21** **R1 · P-77.** The motion lab and both reaction folders on the GPU, then reactions in the game: shots
@@ -762,7 +764,7 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R1 · Trust the loop, and feel it
 
-- [ ] **CL-66** **R1 · P-11.** A `pit-near` event once a run, before the arms can reach (contract line). Details:
+- [x] **CL-66** **R1 · P-11.** A `pit-near` event once a run, before the arms can reach (contract line). Details:
   `docs/roadmap.md` P-11.
 - [ ] **CL-67** **R1 · P-74.** The held body flops: `hold` on a reacting body, and the guardian's drag victim uses it.
   CL-65's first intent. Details: `docs/roadmap.md` P-74.

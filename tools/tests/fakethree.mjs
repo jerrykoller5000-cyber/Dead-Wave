@@ -221,7 +221,9 @@ export class Matrix4 {
   makeRotationZ(t) { const c = Math.cos(t), s = Math.sin(t); this.identity(); const e = this.elements; e[0] = c; e[4] = -s; e[1] = s; e[5] = c; return this; }
   makeRotationFromQuaternion(q) { return this.compose(new Vector3(), q, new Vector3(1, 1, 1)); }
   makeScale(x, y, z) { this.identity(); const e = this.elements; e[0] = x; e[5] = y; e[10] = z; return this; }
-  makeBasis() { return this; }
+  // The three columns, translation zeroed, like three.js (GB-61: the no-op left the gun's mount matrix
+  // from the last frame in place, so headless the marine's gun drifted metres off him).
+  makeBasis(x, y, z) { const e = this.elements; e[0] = x.x; e[1] = x.y; e[2] = x.z; e[3] = 0; e[4] = y.x; e[5] = y.y; e[6] = y.z; e[7] = 0; e[8] = z.x; e[9] = z.y; e[10] = z.z; e[11] = 0; e[12] = 0; e[13] = 0; e[14] = 0; e[15] = 1; return this; }
   scale(v) { const e = this.elements; for (let i = 0; i < 4; i++) { e[i] *= v.x; e[4 + i] *= v.y; e[8 + i] *= v.z; } return this; }
   setPosition(x, y, z) { if (x && x.isVector3) { y = x.y; z = x.z; x = x.x; } this.elements[12] = x; this.elements[13] = y; this.elements[14] = z; return this; }
   invert() {
@@ -283,7 +285,7 @@ export class Object3D {
     this.isObject3D = true;
     return permissive(this);
   }
-  getWorldScale(v) { return v.copy(this.scale); }
+  getWorldScale(v) { this.updateWorldMatrix(true, false); const p = new Vector3(), q = new Quaternion(); this.matrixWorld.decompose(p, q, v); return v; }
   add(...objs) { for (const o of objs) { if (!o || o === this) continue; if (o.parent) o.parent.remove(o); o.parent = this; this.children.push(o); } return this; }
   remove(...objs) { for (const o of objs) { const i = this.children.indexOf(o); if (i >= 0) { this.children.splice(i, 1); o.parent = null; } } return this; }
   removeFromParent() { if (this.parent) this.parent.remove(this); return this; }
@@ -318,7 +320,7 @@ export class Object3D {
     if (c) for (const ch of this.children) ch.updateWorldMatrix(false, true);
   }
   getWorldPosition(v) { this.updateWorldMatrix(true, false); return v.setFromMatrixPosition(this.matrixWorld); }
-  getWorldQuaternion(q) { return q.copy(this.quaternion); }
+  getWorldQuaternion(q) { return this.getWorldQuaternionReal(q); }
   getWorldDirection(v) { return v.set(0, 0, 1).applyQuaternion(this.quaternion); }
   localToWorld(v) { this.updateWorldMatrix(true, false); return v.applyMatrix4(this.matrixWorld); }
   worldToLocal(v) { this.updateMatrixWorld(true); const m = this.matrixWorld.clone().invert(); return v.applyMatrix4(m); }

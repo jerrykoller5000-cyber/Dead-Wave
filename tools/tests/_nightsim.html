@@ -8,7 +8,7 @@
   <!-- Both typefaces are self-hosted in vendor/fonts. Same two faces the game always
        used; they came off fonts.googleapis.com, which meant the first paint waited on a
        third party and the game could not start offline at all. -->
-  <link rel="stylesheet" href="vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="/vendor/fonts/fonts.css">
   <style>
     :root {
       /* Tactical field-HUD palette: dark olive glass, amber for primary actions,
@@ -729,13 +729,13 @@
     }
   </style>
   <!-- Bump the opening asset version whenever opening.css or opening.js changes. -->
-  <link rel="stylesheet" href="assets/intro/opening.css?v=gp32">
-  <link rel="stylesheet" href="ui/loading.css">
-  <link rel="stylesheet" href="ui/coach.css">
-  <link rel="stylesheet" href="ui/wave-preview.css">
-  <link rel="stylesheet" href="ui/prep-checklist.css">
-  <link rel="stylesheet" href="ui/objectives.css">
-  <link rel="stylesheet" href="ui/hud-layout.css">
+  <link rel="stylesheet" href="/assets/intro/opening.css?v=gp32">
+  <link rel="stylesheet" href="/ui/loading.css">
+  <link rel="stylesheet" href="/ui/coach.css">
+  <link rel="stylesheet" href="/ui/wave-preview.css">
+  <link rel="stylesheet" href="/ui/prep-checklist.css">
+  <link rel="stylesheet" href="/ui/objectives.css">
+  <link rel="stylesheet" href="/ui/hud-layout.css">
   <style>
     #errorCard {
       position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 80;
@@ -771,7 +771,7 @@
     })();
   </script>
   <div id="opening" data-phase="video" aria-label="Dead Wave opening">
-    <video id="openingVideo" src="assets/intro/caracal.mp4" autoplay playsinline preload="auto" aria-label="Caracal studio intro"></video>
+    <video id="openingVideo" src="/assets/intro/caracal.mp4" autoplay playsinline preload="auto" aria-label="Caracal studio intro"></video>
     <button id="openingPlay" type="button" hidden>Play intro with sound</button>
     <div class="opening-title" aria-hidden="true">
       <div class="dw-wordmark">Dead <span>Wave</span></div>
@@ -1014,49 +1014,40 @@
     import the bare "three/webgpu" and "three/tsl" specifiers, which is why all four
     entries below have to be present and agree.
   -->
-  <script src="assets/intro/opening.js?v=gp28"></script>
-  <script type="module" src="ui/loading.js"></script>
-  <script type="module" src="ui/coach.js"></script>
-  <script type="module" src="ui/wave-preview.js"></script>
-  <script type="module" src="ui/prep-checklist.js"></script>
-  <script src="assets/intro/menu-camera.js"></script>
-  <script src="assets/intro/airborne.js"></script>
-  <script src="assets/world/campsites.js"></script>
-  <script src="assets/world/landmark-details.js"></script>
-  <script src="assets/world/objective-props.js"></script>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "./vendor/three/three.webgpu.js",
-      "three/webgpu": "./vendor/three/three.webgpu.js",
-      "three/tsl": "./vendor/three/three.tsl.js",
-      "three/addons/": "./vendor/three/addons/"
-    }
-  }
-  </script>
+  <script src="/assets/intro/opening.js?v=gp28"></script>
+  <script type="module" src="/ui/loading.js"></script>
+  <script type="module" src="/ui/coach.js"></script>
+  <script type="module" src="/ui/wave-preview.js"></script>
+  <script type="module" src="/ui/prep-checklist.js"></script>
+  <script src="/assets/intro/menu-camera.js"></script>
+  <script src="/assets/intro/airborne.js"></script>
+  <script src="/assets/world/campsites.js"></script>
+  <script src="/assets/world/landmark-details.js"></script>
+  <script src="/assets/world/objective-props.js"></script>
+  <script type="importmap">{ "imports": { "three": "./fakethree.mjs", "three/webgpu": "./fakethree.mjs", "three/tsl": "./faketsl.mjs", "three/addons/": "./addons/" } }</script>
   <script type="module">
     import * as THREE from 'three';
-    import { createPrepRepairReader } from './ui/prep-repairs.js';
-    import { createGuardianReward, quoteRestock, createSkullValueAccumulator, equipmentPrice, equipmentMarkup } from './game/economy.js';
-    import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
+    import { createPrepRepairReader } from '/ui/prep-repairs.js';
+    import { createGuardianReward, quoteRestock, createSkullValueAccumulator, equipmentPrice, equipmentMarkup } from '/game/economy.js';
+    import { mountObjectiveRuntime } from '/ui/objectives-runtime.js';
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
-    } from './core/math.js';
-    import { addCast, rbox, rmesh, mergeParts, boxProjectUV } from './core/geometry.js';
-    import { AudioSys } from './core/audio.js';
-    import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
-    import { text as dwText } from './ui/strings.js';
-    import { renderBuildBanner } from './ui/build-controls.js';
-    import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses } from './ui/build-alerts.js';
-    import { createNightRecord, mountDawn } from './ui/dawn.js';
-    import './ui/camp-cleared.js';
-    import { drawScoutingMarks } from './ui/scouting.js';
-    import { bountyIntel, drawBountyMarks } from './ui/bounties.js';
-    import { createGroundFoliage } from './world/ground-foliage.js';
-    import * as CaveGuardian from './world/cave-guardian.js';
-    import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
-    import { presets as MotionPresets } from './studio/motion/index.js';   // GB-65 (D-42): the reaction presets
-    import * as PitArms from './world/pit-tentacles.js';
+    } from '/core/math.js';
+    import { addCast, rbox, rmesh, mergeParts, boxProjectUV } from '/core/geometry.js';
+    import { AudioSys } from '/core/audio.js';
+    import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from '/core/loader.js';
+    import { text as dwText } from '/ui/strings.js';
+    import { renderBuildBanner } from '/ui/build-controls.js';
+    import { buildAlertMarkers, drawBuildAlerts, createBuildAttackPulses } from '/ui/build-alerts.js';
+    import { createNightRecord, mountDawn } from '/ui/dawn.js';
+    import '/ui/camp-cleared.js';
+    import { drawScoutingMarks } from '/ui/scouting.js';
+    import { bountyIntel, drawBountyMarks } from '/ui/bounties.js';
+    import { createGroundFoliage } from '/world/ground-foliage.js';
+    import * as CaveGuardian from '/world/cave-guardian.js';
+    import * as Studio from '/studio/index.js';   // CL-64: scenes (the cave drag)
+    import { presets as MotionPresets } from '/studio/motion/index.js';   // GB-65 (D-42): the reaction presets
+    import * as PitArms from '/world/pit-tentacles.js';
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -26177,32 +26168,6 @@
       g.userData.gibbed = false;
       g.userData.dismembered = false;
       g.userData.partsLost = typeKey === 'spider' ? { armL: true, armR: true, legL: true, legR: true, head: false } : { armL: false, armR: false, legL: false, legR: false, head: false };
-      // GB-68 (P-73): stand the soles on the ground. The legs hang about 0.81*s under the hips (thigh pivot
-      // 0.02 + knee 0.38, shin 0.36, half a boot 0.05) but the hips sat at 0.55*s, so every walker stood about
-      // 0.25*s in the dirt (0.25 m for a shambler, 0.6 m for a colossus). Measure the lowest point of the shins
-      // and boots in the finished rest pose (some types rescale, bend or pitch their legs) and lift the hips by
-      // exactly that much. Only the legs move up with it; hitH already matched the lifted body. The spider
-      // plants its own limbs and is left alone.
-      let footLift = 0;
-      if (typeKey !== 'spider') {
-        g.updateMatrixWorld(true);
-        let low = Infinity;
-        for (const L of [legLG, legRG]) {
-          const sg = L.userData.shinG;
-          if (!sg) continue;
-          for (const m of sg.children) {
-            const pa = m.isMesh && m.geometry && m.geometry.attributes && m.geometry.attributes.position;
-            if (!pa) continue;
-            const e = m.matrixWorld.elements, arr = pa.array, st = pa.itemSize || 3;
-            for (let i = 0; i < pa.count; i++) {
-              const y = e[1] * arr[i * st] + e[5] * arr[i * st + 1] + e[9] * arr[i * st + 2] + e[13];
-              if (y < low) low = y;
-            }
-          }
-        }
-        if (Number.isFinite(low) && low < 0) { footLift = -low; hips.position.y += footLift; }
-      }
-      g.userData.footLift = footLift;
       g.userData.baseHipsY = hips.position.y;
       g.userData.skinColor = skinCol;
       g.userData.eyeColor = t.eye;
@@ -37890,7 +37855,7 @@
         if (ud.hips) {
           const bobAmp = z.typeKey === 'brute' ? 0.05 : (z.typeKey === 'feral' ? 0.02 : 0.03);
           let hipsY = (ud.baseHipsY || 0.55) + Math.abs(Math.sin(phase)) * bobAmp * (z.typeKey === 'brute' ? 1.4 : 1);
-          if (z.crawling) hipsY = (hipsY - (ud.footLift || 0)) * 0.45;   // GB-68: a crawler keeps its old height
+          if (z.crawling) hipsY *= 0.45;
           if (limpK) hipsY -= Math.max(0, Math.sin(phase)) * limpK * 0.05;
           ud.hips.position.y = hipsY;
         }

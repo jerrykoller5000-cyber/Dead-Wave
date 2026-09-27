@@ -1,0 +1,5 @@
+Jerry's Suno tracks go here, named after their slot in docs/audio/cue-sheet.md.
+Write hit points and notes below, one per line, e.g.:
+fight_1a hits at 0:12
+fight_2b = metal_the_horde (keep)
+

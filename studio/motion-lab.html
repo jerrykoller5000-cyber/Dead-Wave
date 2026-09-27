@@ -189,7 +189,7 @@ function context() {
 async function send(text) {
   const out = document.getElementById('saved');
   try {
-    const r = await fetch('/__studio/note', { method: 'POST', body: JSON.stringify({ preset: ref, text, context: context() }) });
+    const r = await fetch('/__studio/note', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ preset: ref, text, context: context() }) });
     const j = await r.json();
     if (!j.ok) throw new Error(j.error);
     out.innerHTML = `<span class="ev">Saved to ${j.file}.</span> ${j.owner} sees it on the crew panel.`;

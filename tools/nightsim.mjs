@@ -3,6 +3,7 @@
 //   node tools/nightsim.mjs                    nights 1..20, 3 pages at a time
 //   node tools/nightsim.mjs 5 10 18 --jobs 2   just those nights
 //   node tools/nightsim.mjs --out qa/nightsim.json --dt 0.0333 --god
+//   node tools/nightsim.mjs 8 9 10 --repeat 3     a fresh page each time; medians after
 //
 // Each night gets a fresh page of the test build (fake three.js, like npm test), a real match start
 // (it waits out the insertion), then T.setDay(n-1) + startPrep + hqStartWave with the marine at the
@@ -43,7 +44,8 @@ const CAP = Number(opt('--cap', 900)) || 900;
 const OUT = opt('--out', null);
 const GOD = argv.includes('--god');
 const WALLCAP = Number(opt('--wallcap', 40)) || 40;   // GB-58: real minutes per night before it is cut off
-const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
+const REPEAT = Math.max(1, Number(opt('--repeat', 1)) || 1);
+const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap', '--repeat'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
 let nights = argv.filter((a, i) => !a.startsWith('--') && !skip.has(i)).map(Number).filter((n) => n >= 1);
 if (!nights.length) nights = Array.from({ length: 20 }, (_, i) => i + 1);
 
@@ -113,6 +115,13 @@ async function playNight(o) {
   const pv = T.getWavePreview();
   R.planned = pv ? pv.total : null;
   R.trick = pv && pv.night ? pv.night.label || pv.night.trick || '' : '';
+  let signature = '', sigBest = -1;
+  if (pv && pv.byTypeAndCave) {
+    const by = {};
+    for (const row of pv.byTypeAndCave) by[row.typeKey] = (by[row.typeKey] || 0) + (row.count || 0);
+    for (const [k, v] of Object.entries(by)) if (v > sigBest) { sigBest = v; signature = k; }
+  }
+  R.signature = signature;
   const maxHp = T.getMaxHp();
   const deaths = [], dmgBy = {};
   let t0 = simT;
@@ -135,6 +144,8 @@ async function playNight(o) {
   let pile = { n: 0, t: 0, type: '' }, crowd = { n: 0, t: 0 }, maxAlive = 0;
   const trail = new WeakMap(), stuckSeen = new Set(), stuck = [];
   let sampleT = 0, knifeSwings = 0, meleeKills = 0, reloadKnife = 0, sw = 0, spawnedPrev = 0;
+  let crowd5s = 0, sigPeak = 0, screamerCalls = 0, healHp = 0, prevHp = T.getHp();
+  const screaming = new Set();
   let logT = 0, clickT = false; const samples = []; let inside = { n: 0, t: 0, depth: 0 };
   let fired = 0, firedAtKill = 0, lastW = null, lastMag = 0;
   // GB-58: the tail after the last spawn (when the field is down to 10, 5 and 1), and a stall probe.
@@ -210,9 +221,28 @@ async function playNight(o) {
       { const w = T.getCurrentWeapon(), m = T.getAmmo()[w] | 0; if (w === lastW && m < lastMag) fired += lastMag - m; lastW = w; lastMag = m; }
       if (bdst < 2.2 && T.getKnifeCd() <= 0 && (T.isReloading() || (T.getAmmo()[T.getCurrentWeapon()] | 0) === 0)) {
         const before = T.zombies.filter((z) => z.alive).length; T.knifeAttack(); knifeSwings++;
-        if (T.zombies.filter((z) => z.alive).length < before) meleeKills++;
+        meleeKills += Math.max(0, before - T.zombies.filter((z) => z.alive).length);
       }
     } else T.setMouseFireDbg(false);
+    let near5 = 0, sigN = 0;
+    for (const z of alive) {
+      if (Math.hypot(z.mesh.position.x - p.x, z.mesh.position.z - p.z) < 5) near5++;
+      if (signature && z.typeKey === signature) sigN++;
+    }
+    if (near5 >= 5) crowd5s += dt;
+    if (sigN > sigPeak) sigPeak = sigN;
+    for (const z of T.zombies) {
+      if (!z.alive || z.typeKey !== 'screamer') continue;
+      if (z.screamT > 0) { if (!screaming.has(z)) { screaming.add(z); screamerCalls++; } }
+      else screaming.delete(z);
+    }
+    const hpNow = T.getHp();
+    const rise = hpNow - prevHp;
+    // A streak heal is a jump of 1, or 2 from a 20-kill streak, and it stops at 70%
+    // (P-22, not in the game yet). Regen drips under 0.1 a frame. A MedPen on the
+    // ground is +50% at once, and getting up after a death sets him to full.
+    if (rise > 0.25 && rise <= 2.5 && hpNow <= maxHp * 0.7 + 0.01) healHp += rise;
+    prevHp = hpNow;
     // Ammo is not what this measures.
     sampleT += dt; logT += dt;
     if (logT >= 30) {
@@ -303,7 +333,9 @@ async function playNight(o) {
     pushes, lulls, maxAlive, pile, crowd, inside, stuck, lost, capped,
     tail10: tail10 && +tail10.toFixed(1), tail5: tail5 && +tail5.toFixed(1), tail1: tail1 && +tail1.toFixed(1),
     deaths, damage: Math.round(dmg), damageHp: Math.round(dmgHp), hits, damageBy: Object.fromEntries(Object.entries(dmgBy).map(([k, v]) => [k, Math.round(v)])),
-    knifeSwings, meleeKills, samples, knees: T.getHitStumble ? T.getHitStumble().knees : null,
+    knifeSwings, meleeKills, meleeShare: lastKillCount > 0 ? +(meleeKills / lastKillCount).toFixed(3) : 0,
+    crowd5s: +crowd5s.toFixed(1), signature, sigPeak, screamerCalls, healHp: +healHp.toFixed(1),
+    samples, knees: T.getHitStumble ? T.getHitStumble().knees : null,
     wallSecs: Math.round((Date.now() - wall0) / 1000), errors: []
   });
   return JSON.stringify(R);
@@ -315,7 +347,8 @@ const server = await serve(ROOT, 0);
 const browser = await launch({ headless: true });
 const lib = fs.readFileSync(path.join(TESTS, 'lib.js'), 'utf8');
 const results = [];
-async function runNight(night) {
+async function runNight(job) {
+  const night = job.night, run = job.run;
   const page = await browser.newPage({ width: 1280, height: 720 });
   const t0 = Date.now();
   try {
@@ -328,15 +361,17 @@ async function runNight(night) {
     const raw = await page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 45 * 60000);
     const r = JSON.parse(raw);
     r.errors = page.errors.slice(0, 3).map((e) => e.split('\n')[0]);
+    r.run = run;
     results.push(r);
-    if (r.error) { console.log(`night ${night}  ERROR ${r.error}`); } else console.log(`night ${String(night).padStart(2)}  ${r.length}s  spawned ${r.spawned}/${r.planned}  deaths ${r.deaths.length}  stuck ${r.stuck.length}  lost ${r.lost.length}  pile ${r.pile.n}  (${((Date.now() - t0) / 1000).toFixed(0)}s real)`);
+    if (r.error) { console.log(`night ${night} run ${run}  ERROR ${r.error}`); } else console.log(`night ${String(night).padStart(2)} run ${run}  ${r.length}s  spawned ${r.spawned}/${r.planned}  deaths ${r.deaths.length}  melee ${r.meleeKills} (${r.meleeShare})  crowd5 ${r.crowd5s}s  sig ${r.signature} ${r.sigPeak}  scream ${r.screamerCalls}  heal ${r.healHp}  (${((Date.now() - t0) / 1000).toFixed(0)}s real)`);
   } catch (e) {
-    results.push({ night, error: e.message.split('\n')[0] });
-    console.log(`night ${night}  ERROR ${e.message.split('\n')[0]}`);
+    results.push({ night, run, error: e.message.split('\n')[0] });
+    console.log(`night ${night} run ${run}  ERROR ${e.message.split('\n')[0]}`);
   }
   try { await page.send('Page.close', {}); } catch { /* gone */ }
 }
-const queue = nights.slice();
+const queue = [];
+for (const n of nights) for (let i = 1; i <= REPEAT; i++) queue.push({ night: n, run: i });
 try {
   await Promise.all(Array.from({ length: Math.min(JOBS, queue.length) }, async () => { while (queue.length) await runNight(queue.shift()); }));
 } finally {
@@ -344,8 +379,8 @@ try {
   await server.close();
   try { fs.unlinkSync(path.join(TESTS, PAGE)); } catch { /* fine */ }
 }
-results.sort((a, b) => a.night - b.night);
-if (OUT) { fs.mkdirSync(path.dirname(path.resolve(ROOT, OUT)), { recursive: true }); fs.writeFileSync(path.resolve(ROOT, OUT), JSON.stringify({ dt: DT, god: GOD, results }, null, 1)); }
+results.sort((a, b) => a.night - b.night || (a.run || 0) - (b.run || 0));
+if (OUT) { fs.mkdirSync(path.dirname(path.resolve(ROOT, OUT)), { recursive: true }); fs.writeFileSync(path.resolve(ROOT, OUT), JSON.stringify({ dt: DT, god: GOD, repeat: REPEAT, results }, null, 1)); }
 // Markdown table.
 const cause = (r) => { const m = {}; for (const d of r.deaths || []) m[d.cause] = (m[d.cause] || 0) + 1; return Object.entries(m).map(([k, v]) => k + ' ' + v).join(', ') || '-'; };
 console.log('\n| Night | Planned | Spawned | Killed | Length s | Last spawn s | Pushes (start s) | Breathers s | Max alive | Pile-up | Crowd on him | Inside him | Stuck | Lost | Deaths | Damage | Knees |');
@@ -353,5 +388,18 @@ console.log('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|--
 for (const r of results) {
   if (r.error) { console.log(`| ${r.night} | ERROR ${r.error} |`); continue; }
   console.log(`| ${r.night} | ${r.planned} | ${r.spawned} | ${r.killed} | ${r.length}${r.capped ? ' (capped)' : ''} | ${r.lastSpawn} | ${r.pushes.length} (${r.pushes.join(', ')}) | ${r.lulls.join(', ') || '-'} | ${r.maxAlive} | ${r.pile.n} ${r.pile.type} @${r.pile.t}s ${r.pile.d}m | ${r.crowd.n} | ${r.inside.n} (${r.inside.depth} m) | ${r.stuck.length} | ${r.lost.length} | ${r.deaths.length} (${cause(r)}) | ${r.damage} | ${r.knees} |`);
+}
+if (REPEAT > 1) {
+  const num = (xs) => xs.filter((v) => v != null && !Number.isNaN(v)).sort((a, b) => a - b);
+  const med = (xs) => { const a = num(xs); if (!a.length) return null; const m = a.length >> 1; return a.length % 2 ? a[m] : +((a[m - 1] + a[m]) / 2).toFixed(2); };
+  const rng = (xs) => { const a = num(xs); return a.length ? a[0] + '–' + a[a.length - 1] : '–'; };
+  const fmt = (v) => v == null ? '–' : v;
+  console.log('\n| Night | Runs | Damage median (range) | Deaths median (range) | Length median (range) | Melee share median (range) | Crowd ≥5 within 5 m, median s | Signature peak | Screamer calls | Streak HP |');
+  console.log('|---|---|---|---|---|---|---|---|---|---|');
+  for (const n of [...new Set(results.map((r) => r.night))]) {
+    const rows = results.filter((r) => r.night === n && !r.error);
+    if (!rows.length) { console.log(`| ${n} | 0 | ERROR |`); continue; }
+    console.log(`| ${n} | ${rows.length} | ${fmt(med(rows.map((r) => r.damage)))} (${rng(rows.map((r) => r.damage))}) | ${fmt(med(rows.map((r) => r.deaths.length)))} (${rng(rows.map((r) => r.deaths.length))}) | ${fmt(med(rows.map((r) => r.length)))} (${rng(rows.map((r) => r.length))}) | ${fmt(med(rows.map((r) => r.meleeShare)))} (${rng(rows.map((r) => r.meleeShare))}) | ${fmt(med(rows.map((r) => r.crowd5s)))} | ${rows[0].signature} ${fmt(med(rows.map((r) => r.sigPeak)))} | ${fmt(med(rows.map((r) => r.screamerCalls)))} | ${fmt(med(rows.map((r) => r.healHp)))} |`);
+  }
 }
 process.exit(0);

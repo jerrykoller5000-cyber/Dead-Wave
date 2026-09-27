@@ -13,3 +13,7 @@ Load budget: since the splash can't be skipped (GP-27), it runs about 14 s on yo
 ## Q-2 · open · 2026-09-26T03:53Z · claude
 
 The studio is ready for your first note (CL-61). Open Tiny Trek\review\guardian-drag\index.html, watch v2, then write under a '## date - Jerry - v2' line in notes.md in the same folder. The guide is docs/studio-guide.md. Your notes start the guardian's rebuild (CL-62); gallop, pounce and throw are there too whenever you want.
+
+## Q-3 · open · 2026-09-27T04:08Z · claude
+
+Grokbot's GB-60 (skulls always reach the bag) rests on one question about the skull you couldn't pick up at dawn: did it have a glowing ring on the ground under it? A real skull drop always has one, in the colour of that zombie's eyes. If yours had no ring, what you saw wasn't a skull drop (maybe a corpse's head), and we'd chase a different bug.

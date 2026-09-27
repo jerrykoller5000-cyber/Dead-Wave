@@ -10,15 +10,20 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
   const profile = Object.fromEntries(FLAGS.map(key => [key, stored?.version === 1 && stored[key] === true]));
   let runId = null, ready = false, carried = 0, processing = false;
   let poiKey = null, fightRetired = false;
+  const warningsSeen = new Set(); let pendingWarnings = [];
+  const isWarning = id => id === 'caveWarning' || id === 'pitWarning';
   let pickupSeen = false, purchasePending = false, card = null, remaining = 0, visible = false;
   const persist = () => { try { save(JSON.stringify({ version: 1, ...profile })); } catch { /* play still works */ } };
   function handle(event = {}) {
     if (event.type === 'controls-ready') { ready = true; return; }
     if (event.type === 'run-reset') {
       runId = event.runId; ready = false; poiKey = null; fightRetired = false; carried = 0; processing = false; pickupSeen = false;
-      purchasePending = false; card = null; visible = false; return;
+      purchasePending = false; card = null; visible = false; warningsSeen.clear(); pendingWarnings = []; return;
     }
     if (event.runId != null && runId != null && event.runId !== runId) return;
+    const warning = event.type === 'cave-guardian' && event.warning === true ? 'caveWarning' :
+      event.type === 'pit-near' ? 'pitWarning' : null;
+    if (warning && !warningsSeen.has(warning)) { warningsSeen.add(warning); pendingWarnings.push(warning); }
     if (event.type === 'poi-guards' && event.day === 1 && event.count > 0 && !fightRetired && !poiKey &&
         ['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','dock'].some(id => event.labelKey === 'world.' + id)) {
       poiKey = event.labelKey;
@@ -40,7 +45,9 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     }
   }
   function show(id, seconds) {
-    card = id; remaining = seconds; profile[`${id}Shown`] = true;
+    card = id; remaining = seconds;
+    if (isWarning(id)) return; // Per-run warnings never change the saved teaching profile.
+    profile[`${id}Shown`] = true;
     if (id === 'purchase') purchasePending = false;
     persist();
   }
@@ -51,7 +58,8 @@ export function createCoach({ load = () => null, save = () => {} } = {}) {
     if (card === 'bank' && !frame.nearWindow) card = null;
     visible = ready && frame.active === true;
     if (!visible) return null;
-    if (carried > 0 && !processing && frame.nearWindow && !profile.banked && !profile.bankShown) show('bank', Infinity);
+    if (pendingWarnings.length) show(pendingWarnings.shift(), 8);
+    if (!isWarning(card) && carried > 0 && !processing && frame.nearWindow && !profile.banked && !profile.bankShown) show('bank', Infinity);
     if (!card && carried > 0 && !processing && pickupSeen && !profile.banked && !profile.bankShown && !profile.pickupShown) show('pickup', 8);
     if (!card && !carried && poiKey && !fightRetired && !profile.banked && !profile.poiShown) show('poi', 12);
     if (!card && purchasePending && !profile.purchaseShown) show('purchase', 6);

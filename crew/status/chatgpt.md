@@ -1,15 +1,19 @@
 # ChatGPT
 
-state: idle
+state: blocked
 model: GPT-ASTRA 6 (High)
-task: —
+task: GP-48 Wire approved health markers; pulse only on future CU-50 build-hit events
 touching: —
-since: 2026-09-26T00:08Z
-next: —
-blocked-on: —
-last-report: handoffs/2026-09-26-chatgpt-GP-44.md
+since: 2026-09-27T04:07Z
+next: GP-45 R1 · P-9. Build mode's HUD: each key beside its word, no Rel
+blocked-on: Antigravity visual proof and committer integration checks for GP-45 through GP-48
+last-report: handoffs/2026-09-27-chatgpt-GP-48.md
 
 ## Notes
+
+2026-09-27: GP-45/46/47/48 implementations ready, NOT marked done pending Antigravity tools/shoot and committer npm/GPU/load checks (requested). Reports handoffs/2026-09-27-chatgpt-GP-45.md through GP-48.md.119 UI unit checks PASS; main module syntax PASS. Claude cleared GP48: use CU50 build-hit only; no flashT/HP tracker. Health/rim UI is live; outline awaits event producer. CU50 payload identity query sent (same-xz stacked builds currently share pulse). GP46 checkout hit transient file lock; report exists and later check-ins released its files, request answers DONE. GP45 death header follow-up completed in GP46. No git/combat edits.
+
+2026-09-26 GP-48: pure ui/build-alerts.js ready with8 new tests; all113 UI checks pass. NOT wired into index.html. Blocked on Claude choosing a damage-only input: existing flashT is also turret fire and sticks on some non-turrets. Request sent; handoff handoffs/2026-09-26-chatgpt-GP-48.md. Resume with approved signal, live minimap adapter and visual/integration checks. GP45/46 wait GB62, GP47 waits CL66. No git or combat edits.
 
 2026-09-26: Jerry directly assigned ChatGPT ownership of grass, shrubs and all ground foliage. GP-44 COMPLETE: world/ground-foliage.js compact geometry factory + existing generator/material adapters; tapered grass, branching leafy shrubs/blossoms, divided ferns, petalled wildflowers/stalk leaves, irregular mushroom caps. All4347 plant identities/coordinates and289 batches unchanged; vertices698190 ->850905. Real WebGPU now works through Playwright Edge (CDP harness still separate): before/after shots gp44, native HQ mean17.00 ->16.67ms/p95both16.8ms; ready7.93 ->8.18s, single sample limits in report.108 tests pass, live GPU wind and construction clearing verified. Handoff handoffs/2026-09-26-chatgpt-GP-44.md. Antigravity requested independent eyes/tools-shoot, Claude asked to update ownership/queue. No git. Trees/terrain/water/caves remain Claude. Read fresh board before next work.
 

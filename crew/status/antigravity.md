@@ -1,10 +1,10 @@
 # Antigravity
 
-state: idle
-model: Gemini 3.1 Pro (High)
-task: —
-touching: —
-since: 2026-09-26T03:04Z
+state: active
+model: Gemini 3.1 Pro
+task: AG-20 A fresh run to night 5 on Jerry's GPU: night lengths, lost skulls, the skull-at-dawn report, accidental pokes, fps with 48, the Ways to Die padlocks
+touching: qa/2026-09-27-AG-20.md
+since: 2026-09-27T03:58Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-09-26-antigravity-AG-19.md

@@ -31,6 +31,10 @@
     ok(slide1 > 0.15 && slide1 < 0.75 && Math.abs(p.z - a.z) < 0.1, 'a short slide: ' + slide1.toFixed(2) + ' m (dz ' + (p.z - a.z).toFixed(2) + ')');
     s = T.getHitStumble();
     ok(s.stumbleT === 0 && s.aimT === 0 && s.kneeT === 0 && s.speedK === 1 && s.kvx === 0, 'over within a moment (speedK ' + s.speedK + ')');
+    // GB-67 (P-72): when his reacting body takes a brute's blow, its stagger replaces the knee (t92 checks that).
+    // The knee is what plays when his body can't take a blow (bodies off, in the air, mid-roll...), so (2) and (3)
+    // check it with bodies off. Every check below is as GB-50 wrote it.
+    T.setMotionEnabledDbg && T.setMotionEnabledDbg(false);
     // (2) A brute from +z: a longer slide to -z and down on one knee, still able to move.
     a = await stand();
     const k0 = T.getHitStumble().knees;
@@ -48,6 +52,7 @@
     T.damagePlayer(16, 'brute', fake(0, 1, { brute: true }));
     ok(T.getHitStumble().knees === k0 + 1 && T.getHitStumble().kneeT === 0 && T.getHitStumble().kvz < -1, 'no knee lock: the next heavy hit within 3 s only knocks him back');
     await wait(800);
+    T.setMotionEnabledDbg && T.setMotionEnabledDbg(true);
     // (4) The contact ring, live: five bodies spawned inside him crowd him and swing, none stays inside.
     await stand();
     const hp0 = T.getHp(), h0 = T.getHitStumble().hits;

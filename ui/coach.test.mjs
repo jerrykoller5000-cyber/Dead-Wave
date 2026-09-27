@@ -66,3 +66,28 @@ test('experienced profiles do not get a new first-fight lesson, and a reset wait
  const c=start({load:()=>JSON.stringify({version:1,banked:true})});guards(c);assert.equal(c.tick(frame({skulls:0})),null);
  const fresh=start();fresh.handle({type:'run-reset',runId:'two'});guards(fresh,{runId:'two'});assert.equal(fresh.tick(frame({skulls:0})),null);
 });
+
+test('cave and pit warnings show once per run, survive suppression, and ignore a stale run', () => {
+  const c = createCoach(); c.handle({type:'run-reset', runId:1});
+  c.handle({type:'cave-guardian',runId:1,warning:false});
+  c.handle({type:'pit-near',runId:0}); c.handle({type:'controls-ready'});
+  assert.equal(c.tick({active:true}), null);
+  c.handle({type:'cave-guardian',runId:1,warning:true});
+  assert.equal(c.tick({active:false,dt:30}),null);
+  assert.equal(c.tick({active:true}).id,'caveWarning');
+  assert.match(c.read().title,/Don't shoot/);
+  for(let i=0;i<9;i++)c.tick({active:true,dt:1});
+  c.handle({type:'cave-guardian',runId:1,warning:true}); assert.equal(c.tick({active:true}),null);
+  c.handle({type:'pit-near',runId:1}); assert.equal(c.tick({active:true}).id,'pitWarning');
+  for(let i=0;i<9;i++)c.tick({active:true,dt:1});
+  c.handle({type:'pit-near',runId:1}); assert.equal(c.tick({active:true}),null);
+  c.handle({type:'run-reset',runId:2}); c.handle({type:'pit-near',runId:2});
+  assert.equal(c.tick({active:true}),null); c.handle({type:'controls-ready'});
+  assert.equal(c.tick({active:true}).id,'pitWarning');
+  assert.equal(Object.hasOwn(c.profile(),'pitWarningShown'),false);
+});
+test('an urgent warning takes priority over banking guidance without changing the economy', () => {
+  const c=start(); pickup(c); assert.equal(c.tick(frame({nearWindow:true})).id,'bank');
+  c.handle({type:'pit-near'}); assert.equal(c.tick(frame({nearWindow:true})).id,'pitWarning');
+  assert.equal(c.profile().banked,false);
+});

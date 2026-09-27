@@ -1,6 +1,7 @@
 // t2 - deck placement probe. GB-45 (GB-A9): three wall+platform cells give a deck well above the
 // ground. GB-46: in a started match (tryPlace does nothing on the menu), on ground clear of the
 // cabin, a turret aimed at a deck from the ground and from the next deck goes on the deck.
+// GB-62 (P-3): and one aimed at the deck cell he stands on does not go at all.
 (async () => {
   const T = window.TT; const out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -49,6 +50,9 @@
     trial('deck-player aim at own cell', p.x - 6, p.y + 12, p.z - 4, p.x, deckY, p.z, 'flame');
     T.setPlaceMode(null);
     ok(made[0] === 'light@0,0 lv1' && made[1] === 'heavy@0,1 lv1', 'aimed turrets go on the decks [' + made.slice(0, 2).join(' | ') + ']');
+    // GB-62 (P-3): the third trial, asserted at last: aimed at the deck cell he stands on, no
+    // turret goes under his feet.
+    ok(made[2] === 'none', 'no turret under his feet on the deck he stands on [' + made[2] + ']');
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e.message)); }
   return out.join('\n');
 })()

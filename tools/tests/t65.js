@@ -20,6 +20,28 @@
     let popped = await until(() => T.getPitBubbles().popping > 0, 10000);
     ok(popped, 'and pop on the surface');
     ok(!T.getScriptedKill(), 'no grab from 40 m');
+    // CL-66 (P-11): swimming in toward the hole, the pit warns him once a run before the arms can
+    // reach: a `pit-near` event inside grabR + 8 m, none again on a second approach, and no grab yet.
+    const near = [];
+    window.addEventListener('dw-game', (e) => { if (e.detail && e.detail.type === 'pit-near') near.push(e.detail); });
+    const swimTo = async (r) => {
+      const d = T.waterDepthAt(H.x + r, H.z), lvl = T.sampleHeight(H.x + r, H.z) + d;
+      p.set(H.x + r, lvl - 0.2, H.z);
+      await wait(400);
+      return d;
+    };
+    const d19 = await swimTo(H.grabR + 6.5);
+    ok(d19 > 1.3, 'deep enough to swim ' + (H.grabR + 6.5).toFixed(1) + ' m out (depth ' + d19.toFixed(1) + ')');
+    await until(() => near.length > 0, 3000);
+    ok(near.length === 1 && Math.abs(near[0].dist - (H.grabR + 6.5)) < 1.5 && near[0].grabR === H.grabR, 'swimming in, the pit warns him: pit-near at ' + (near[0] ? near[0].dist.toFixed(1) : '-') + ' m');
+    ok(!T.getScriptedKill(), 'the arms have not reached him yet');
+    ok(T.getPitBubbles().on, '(the bubbles are up while he is this close)');
+    p.set(H.x + 40, T.sampleHeight(H.x + 40, H.z), H.z);
+    await wait(400);
+    await swimTo(H.grabR + 6.5);
+    ok(near.length === 1, 'once a run: back in, no second warning (' + near.length + ')');
+    p.set(H.x + 40, T.sampleHeight(H.x + 40, H.z), H.z);
+    await wait(300);
     // The grab: at the start, the arms are hidden until the burst.
     T.beginScriptedKill('tentacle');
     const sk = T.getScriptedKill();

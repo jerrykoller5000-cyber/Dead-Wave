@@ -54,11 +54,10 @@ function createInstance(def, opts) {
       group.updateWorldMatrix(false, true);
     };
     // Its rest is the studio's, joint by joint, so the game plays exactly what the review folder shows.
-    const ref = createInstance(def, {});
+    const ref = referenceRest(def, opts);
     for (const [n, j] of Object.entries(R)) {
-      const rj = ref.R[n];
-      if (!j || !j.isObject3D || !rj) continue;
-      const r = ref.rest.get(rj);
+      if (!j || !j.isObject3D) continue;
+      const r = ref.get(n);
       if (r) inst.rest.set(j, { q: r.q.clone(), p: r.p.clone() });
     }
   }
@@ -70,6 +69,29 @@ function createInstance(def, opts) {
     inst.plants = {};
   }
   return inst;
+}
+
+// The studio rest of a rig, by joint name, for adopting the host's bodies: built once per rig and
+// build options (a zombie's type, say) and kept, not rebuilt for every zombie the game hands over
+// (GB-65 saw a whole studio zombie built and thrown away on each first hit).
+const REF_REST = new WeakMap();
+function referenceRest(def, opts) {
+  const { group, ...build } = opts || {};
+  const key = JSON.stringify(build, Object.keys(build).sort());
+  let byKey = REF_REST.get(def);
+  if (!byKey) REF_REST.set(def, (byKey = new Map()));
+  let rest = byKey.get(key);
+  if (!rest) {
+    const ref = createInstance(def, build);
+    rest = new Map();
+    for (const [n, rj] of Object.entries(ref.R)) {
+      if (!rj || !rj.isObject3D) continue;
+      const r = ref.rest.get(rj);
+      if (r) rest.set(n, { q: r.q.clone(), p: r.p.clone() });
+    }
+    byKey.set(key, rest);
+  }
+  return rest;
 }
 
 // Every mesh and triangle a rig draws: the renderer checks it against the budget.
