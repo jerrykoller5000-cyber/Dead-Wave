@@ -163,6 +163,13 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-57 · 1.0 ships as a desktop app, not a zip (Jerry, 2026-09-27).** The game stays what it is (one HTML
+  module, three.js on WebGPU, no build step); the package wraps it in a desktop shell, Tauri (WebView2, a small
+  download) or Electron (bundled Chromium, the safest WebGPU), so the player gets an `.exe` with an icon, a window
+  with no browser chrome, native fullscreen, an installer and saves in a real folder instead of localStorage. No
+  rewrite in a native engine: that is the game again, months, for nothing the wrapper doesn't give. CU-57 (P-89)
+  is that wrapper; it lands in R6 as planned. The browser build stays the crew's working build (the tests, the
+  studio, Antigravity's runs), so nothing changes before R6.
 - **D-56 · The secret quest is built (J-12).** "The Signal": spec first (CL-79), Jerry reads it, then R5 builds it.
   The final fight is the one exception to the immortal guardian: only on the silenced night, only at the chalk cave.
 - **D-55 · The guardian boss on the studio rig (J-11).** After CL-62, the fightable guardian of nights 6, 12 and 18
@@ -539,8 +546,15 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   Details: `docs/roadmap.md` P-87.
 - [ ] **CU-56** **R6 · P-88.** The budgets hold on Jerry's GPU: title 15 s cold, 5 s warm; 60 fps with 48. Details:
   `docs/roadmap.md` P-88.
-- [ ] **CU-57** **R6 · P-89.** The 1.0 package: a zip Jerry can hand over, a version on the title. After CU-55; after
-  CU-56. Details: `docs/roadmap.md` P-89.
+- [ ] **CU-57** **R6 · P-89.** The 1.0 package as a desktop app (D-57): a Tauri or Electron shell round the folder
+  (a custom protocol for the module imports, saves in a real folder, an icon, fullscreen, an installer), a version
+  on the title, and the browser build kept for the crew. After CU-55; after CU-56. Details: `docs/roadmap.md` P-89.
+
+### Grokbot — combat
+
+
+#### R1 · Trust the loop, and feel it
+
 
 ### Grokbot — combat
 
