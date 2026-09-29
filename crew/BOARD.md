@@ -1020,8 +1020,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   counter named; P-26's plates as its first row. Before GB-104 and GP-80. Details: `docs/roadmap.md` P-118.
 - [ ] **CL-62** **R2.** The rest of the guardian through the studio: the chase, the walk-out and the throw as scenes
   and clips, until Jerry's notes say good. Carried over. After CL-64 (done).
-  Jerry (2026-09-29, Q-2): "looking better but still needs a lot of work"; Claude asks him questions and works from
-  his answers.
+  Jerry (2026-09-29, Q-2): "looking better but still needs a lot of work". His notes (review/guardian-grab-drag v3,
+  guardian-throw-out v1): the run-out and grab are close; drag him in faster; no blood trail; the marine shakes his
+  head and pounds his fists as he is dragged; the walk-in grab jumps into the air for a few frames (fix it, no blood
+  yet); the toss out looks poor; the cave needs real depth: he emerges from the dark, partly hidden, never pops in or
+  out; more fluid motion throughout; a low growl. The toss: a lazy underhand softball pitch, as if the marine isn't
+  worth his time.
 - [ ] **CL-69** **R2 · P-19.** The score follows the night's shape: a break in the breather, bridge and climax at the
   last push. After GB-71. Details: `docs/roadmap.md` P-19.
 - [ ] **CL-70** **R2 · P-20.** Night 19 sounds bigger than night 2: a gain that climbs night by night. Details:
