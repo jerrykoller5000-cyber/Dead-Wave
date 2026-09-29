@@ -5,9 +5,9 @@ set "URL=http://127.0.0.1:%PORT%/index.html?solid=1"
 for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":%PORT% .*LISTENING"') do taskkill /PID %%a /F >nul 2>&1
 where py >nul 2>&1
 if %errorlevel%==0 (
-    start "Dead-Wave Server" /D "%~dp0" /min py -m http.server %PORT%
+    start "Dead-Wave Server" /D "%~dp0" /min py "%~dp0tools\serve.py" %PORT%
 ) else (
-    start "Dead-Wave Server" /D "%~dp0" /min python -m http.server %PORT%
+    start "Dead-Wave Server" /D "%~dp0" /min python "%~dp0tools\serve.py" %PORT%
 )
 ping 127.0.0.1 -n 3 >nul
 

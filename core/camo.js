@@ -8,6 +8,11 @@
 // Layers are painted in order over the base wherever the layer's noise is above its threshold.
 // cx, cy: noise cells across the tile (cy > cx stretches shapes sideways). px: digital block size
 // in tile pixels (at 256). spots: round dabs, radius in tile pixels at 256.
+// A colour a little darker (f < 1) or lighter (f > 1), for the plain colours' grain.
+function shade(h, f) {
+  const c = [1, 3, 5].map((i) => Math.max(0, Math.min(255, Math.round(parseInt(h.slice(i, i + 2), 16) * f + (f > 1 ? 4 : 0)))));
+  return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join('');
+}
 const PATTERNS = [
   { key: 'm81' },
   { key: 'flecktarn', base: '#8a8a60', layers: [
@@ -72,11 +77,75 @@ const PATTERNS = [
   { key: 'cadpat', px: 3, base: '#6c7550', layers: [
     { c: '#4e5a38', cx: 8, cy: 8, t: 0.45, seed: 151 },
     { c: '#3b4230', cx: 10, cy: 10, t: 0.56, seed: 152 },
-    { c: '#1c1f18', cx: 12, cy: 12, t: 0.66, seed: 153 }] }
+    { c: '#1c1f18', cx: 12, cy: 12, t: 0.66, seed: 153 }] },
+
+  // Jerry's second sheet (2026-09-29, Claude): rare and historic patterns.
+  // South African Giraffe: two-tone, irregular brown patches over off-white (dry grassland).
+  { key: 'giraffe', base: '#d8cfb4', layers: [
+    { c: '#7a5634', cx: 8, cy: 8, t: 0.47, seed: 161 }] },
+  // Swiss TAZ: small, busy four-colour shapes on a pale green.
+  { key: 'swissTaz', base: '#8d9a60', layers: [
+    { c: '#46592f', cx: 8, cy: 8, t: 0.5, seed: 171 },
+    { c: '#6b4b30', cx: 10, cy: 10, t: 0.6, seed: 172 },
+    { c: '#1d1e18', cx: 12, cy: 12, t: 0.67, seed: 173 }] },
+  // Zaire Green Leopard: bold black rosettes over deep greens.
+  { key: 'zaireLeopard', base: '#4a6a34', layers: [
+    { c: '#2f4a23', cx: 4, cy: 4, t: 0.5, seed: 181 }],
+  spots: [
+    { c: '#111310', n: 45, r: [9, 14], seed: 182, hole: 0.55 },
+    { c: '#111310', n: 90, r: [2, 4], seed: 183 }] },
+  // Sri Lankan Cactus: tall, upright plant shapes, stretched top to bottom.
+  { key: 'cactus', base: '#7f7c50', layers: [
+    { c: '#3f5a2e', cx: 9, cy: 3, t: 0.5, seed: 191 },
+    { c: '#5a4630', cx: 11, cy: 4, t: 0.6, seed: 192 },
+    { c: '#1f2119', cx: 13, cy: 4, t: 0.68, seed: 193 }] },
+  // Serbian Karst: greys and a little ochre for bare limestone.
+  { key: 'serbianKarst', base: '#a9a596', layers: [
+    { c: '#7e7b70', cx: 5, cy: 5, t: 0.48, seed: 201 },
+    { c: '#9a8a62', cx: 6, cy: 6, t: 0.62, seed: 202 },
+    { c: '#55524a', cx: 8, cy: 8, t: 0.66, seed: 203 }],
+  spots: [
+    { c: '#d2cdbb', n: 160, r: [1.2, 2.8], seed: 204 },
+    { c: '#3a3833', n: 120, r: [1, 2.2], seed: 205 }] },
+  // PAP digital trial: a fine digital woodland.
+  { key: 'papDigital', px: 3, base: '#6f7a57', layers: [
+    { c: '#8c8a62', cx: 7, cy: 7, t: 0.52, seed: 211 },
+    { c: '#3d4a33', cx: 9, cy: 9, t: 0.56, seed: 212 },
+    { c: '#25281f', cx: 11, cy: 11, t: 0.67, seed: 213 }] },
+  // M1929 Telo Mimetico: large soft-edged green and brown blotches on ochre.
+  { key: 'teloMimetico', base: '#b7a878', layers: [
+    { c: '#6b7342', cx: 3, cy: 3, t: 0.5, seed: 221, soft: 0.05 },
+    { c: '#7a5634', cx: 4, cy: 4, t: 0.58, seed: 222, soft: 0.05 },
+    { c: '#3f3a28', cx: 5, cy: 5, t: 0.68, seed: 223, soft: 0.03 }] },
+  // Sumpftarnmuster: blurred, split-edge marsh pattern.
+  { key: 'sumpftarn', base: '#a39c78', layers: [
+    { c: '#6f7a4c', cx: 4, cy: 5, t: 0.5, seed: 231, soft: 0.1 },
+    { c: '#7b6246', cx: 5, cy: 6, t: 0.6, seed: 232, soft: 0.1 },
+    { c: '#4b4f34', cx: 7, cy: 8, t: 0.68, seed: 233, soft: 0.08 }] },
+  // Tiger Stripe: long dark brush-stroke stripes running side to side.
+  { key: 'tigerStripe', base: '#8e8a5e', layers: [
+    { c: '#4a5a2e', cx: 2, cy: 10, t: 0.5, seed: 241 },
+    { c: '#5a4430', cx: 2, cy: 12, t: 0.62, seed: 242 },
+    { c: '#181914', cx: 3, cy: 14, t: 0.66, seed: 243 }] },
+
+  // Jerry's colour chart: plain colours, with a faint fabric grain so they read as cloth.
+  ...[
+    ['oliveDrab', '#6b8e23'], ['armyGreen', '#4b5320'], ['fieldDrab', '#6c541e'], ['drab', '#967117'],
+    ['camouflageGreen', '#78866b'], ['foliageGreen', '#4f7942'], ['rifleGreen', '#444c38'],
+    ['darkOliveGreen', '#556b2f'], ['olive', '#808000'], ['khaki', '#f0e68c'], ['darkKhaki', '#bdb76b'],
+    ['desertSand', '#edc9af'], ['ecru', '#c2b280'], ['tan', '#d2b48c'], ['coyoteBrown', '#81613c'],
+    ['sandyBrown', '#f4a460'], ['feldgrau', '#4d5d53'], ['battleshipGrey', '#848482'], ['gunmetal', '#2a3439'],
+    ['charcoal', '#36454f'], ['navyBlue', '#000080'], ['airForceBlueRaf', '#5d8aa8'], ['airForceBlueUsaf', '#00308f'],
+    ['prussianBlue', '#003153'], ['forestGreen', '#228b22']
+  ].map(([key, c], i) => ({ key, solid: true, base: c, layers: [
+    { c: shade(c, 0.96), cx: 32, cy: 32, t: 0.62, seed: 300 + i * 2 },
+    { c: shade(c, 1.04), cx: 32, cy: 32, t: 0.64, seed: 301 + i * 2 }] }))
 ];
 
-// In the order Jerry's sheet lists them.
+// In the order Jerry's sheets list them: the patterns, then the plain colours.
 export const CAMO_KEYS = Object.freeze(PATTERNS.map((p) => p.key));
+// The plain colours, so the CIF can give them their own heading.
+export const CAMO_SOLID_KEYS = Object.freeze(PATTERNS.filter((p) => p.solid).map((p) => p.key));
 export const CAMO_DEFAULT = 'm81';
 export const isCamoKey = (k) => CAMO_KEYS.includes(k);
 
@@ -111,12 +180,19 @@ export function paintCamo(key, out, size) {
   const p = PATTERNS.find((q) => q.key === key);
   if (!p || !p.base || !out || out.length < size * size * 4) return false;
   const base = hex(p.base);
-  const layers = (p.layers || []).map((l) => ({ col: hex(l.c), t: l.t, n: makeNoise(l.cx, l.cy, l.seed) }));
+  const layers = (p.layers || []).map((l) => ({ col: hex(l.c), t: l.t, soft: l.soft || 0, n: makeNoise(l.cx, l.cy, l.seed) }));
   const block = p.px ? Math.max(1, Math.round(p.px * size / 256)) : 1;
   for (let by = 0; by < size; by += block) for (let bx = 0; bx < size; bx += block) {
     const u = (bx + block / 2) / size, v = (by + block / 2) / size;
     let col = base;
-    for (const l of layers) if (l.n(u, v) > l.t) col = l.col;
+    for (const l of layers) {
+      const nv = l.n(u, v);
+      if (l.soft) {
+        // Soft edge: blend over a band round the threshold (Telo Mimetico, Sumpftarn).
+        const a = Math.max(0, Math.min(1, (nv - l.t + l.soft) / (2 * l.soft)));
+        if (a > 0) col = a >= 1 ? l.col : [0, 1, 2].map((i) => Math.round(col[i] + (l.col[i] - col[i]) * a));
+      } else if (nv > l.t) col = l.col;
+    }
     for (let y = by; y < Math.min(size, by + block); y++) for (let x = bx; x < Math.min(size, bx + block); x++) {
       const i = (y * size + x) * 4;
       out[i] = col[0]; out[i + 1] = col[1]; out[i + 2] = col[2]; out[i + 3] = 255;
@@ -133,11 +209,14 @@ export function paintCamo(key, out, size) {
   };
   for (const s of p.spots || []) {
     const rnd = lcg(s.seed), col = hex(s.c), chip = s.chip ? hex(s.chip) : null;
+    const holeCol = s.hole ? hex((p.layers && p.layers[0] && p.layers[0].c) || p.base) : null;
     for (let i = 0; i < s.n; i++) {
       const x = rnd() * size, y = rnd() * size, r = (s.r[0] + rnd() * (s.r[1] - s.r[0])) * k;
       // DBDU's rocks: a dark chip with a pale one sat against it.
       if (chip) dab(x + r * 0.9, y - r * 0.5, r * 0.75, chip);
       dab(x, y, Math.max(0.6, r), col);
+      // A leopard's rosette: the ring's middle painted back in the colour under it.
+      if (s.hole) dab(x, y, r * s.hole, holeCol);
     }
   }
   return true;

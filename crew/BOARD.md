@@ -103,9 +103,9 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
 | **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91 |
-| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104 |
-| **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
-| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81 |
+| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69 |
+| **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82 |
+| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105 |
 | **R6 · Finish (1.0)** | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
 
 **The story it tells (D-44, "The Signal").** The relay on the mast went silent three weeks ago; the convoy never
@@ -163,6 +163,22 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-66 · The dressing room (Jerry, 2026-09-29).** The CIF becomes a dressing room with a 3D view of the marine he can
+  turn a full 360 while he dresses him. Each item takes its own camo: helmet, facemask, trousers, holster, hat,
+  gloves, shorts, backpack, and the armour with its straps; weapons take camo too. Boots come in black, brown or tan.
+  Hats: 8-point cover, boonie, ballcap (worn forwards or backwards). Gloves on or off, sleeves rolled or down, shorts
+  or trousers. Hair, eye and skin colour. The facemask starts coyote brown and never comes off: his face stays a
+  mystery. Four base camos are free; the rest are earned in play (days survived, kill streaks and the like, the rules
+  in CL-96); the console's "dapper dan" unlocks everything. CL-96 (the spec, first), CU-70, CL-97, GP-82.
+- **D-65 · Suppressors and fire selectors (Jerry, 2026-09-29).** A suppressor upgrade for the M4, AK-47, pistol,
+  sniper, Uzi and shotgun (not the AA-12), each one styled to belong on its gun. Zombies will notice suppressed fire
+  less, and suppressed rounds hit a little softer: that balance comes later, with a hearing rule for the horde (the
+  "Suppressor" row comes back out of Not now). Fire selectors: semi-auto for the M4, AK-47 and AA-12 from the start; a
+  full-auto unlock for the pistol that is hard to hold on target, much less controllable than the Uzi. CL-95, CU-68,
+  CU-69, GB-105.
+- **D-64 · A fidelity pass on the marine, his gear and the guns (Jerry, 2026-09-29).** A little less bulky and a touch
+  more stylized, without going overboard. The ear defenders are no longer on him at the start: they come with the
+  helmet. The facemask is coyote brown (D-66). CL-94 (the marine and his kit), CL-95 (the guns and the suppressors).
 - **D-63 · Storms, the rabbit and the 240 (Jerry, 2026-09-29).** Storms bring 5 lightning strikes each: 1 in 50 a
   strike sets a tree burning (the rain still damps it, D-60), 1 in 100 kills the zombies where it lands, and 1 in 200
   hits the marine for 70 damage (he can live through it; at 70 HP or less it kills him). A pair of insulated boots
@@ -172,8 +188,8 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
   the tombstone (`lightning`, `rabbit`, D-31). The rabbit and the grenade are a nod, built, named and worded our own
   way: no names or lines from the film. The build menu
   gets the M240B beside the mortar, Jerry's brother's gun: tripod-mounted only, belt-fed, 1,000 rounds, carried and
-  placed like the mortar, fired only with the marine on it. Buying a mortar or a 240 comes with half its maximum ammo,
-  so the mortar gains an ammo count. CL-92, CL-93, CU-67, GP-81.
+  placed like the mortar, fired only with the marine on it. Buying a mortar or a 240 comes with half its maximum ammo
+  (the mortar already fires 60 mm shells from a capped reserve; the 240 gets a 7.62 belt). CL-92, CL-93, CU-67, GP-81.
 - **D-62 · The horde fights the defences, and every kind has a weakness (Jerry, 2026-09-29).** Turrets make nights too
   easy. Zombies go for what is shooting them: a turret that fires on a zombie draws it and its pack, and some kinds
   (brutes, demons and a share of each push) ignore the marine and go straight for the defences, hitting builds harder.
@@ -579,6 +595,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **CU-68** **R3 · P-127.** Suppressors in the kiosk (D-65): an upgrade per gun (the akimbo pair gets two), the can
+  fitted in view and the muzzle flash moved to its end; no change to the fight yet (GB-105). After CL-95. Details:
+  `docs/roadmap.md` P-127.
+- [ ] **CU-69** **R3 · P-128.** Fire selectors (D-65): a key toggles semi and auto on the M4, AK-47 and AA-12 (semi: one
+  shot a click, a tighter group); the pistol's full-auto unlock, hard to hold (climbs and blooms far more than the
+  Uzi); the mode on the HUD. Details: `docs/roadmap.md` P-128.
 - [ ] **CU-64** **R3 · P-111.** The hip holster and going unarmed (D-61): the pistol draws from and goes back to the
   holster on his leg; holster everything to go unarmed, +10% on foot (Fleet foot included, +30% at most). After CL-89.
   Details: `docs/roadmap.md` P-111.
@@ -590,8 +612,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   the shotgun and launcher round by round; akimbo; Quick hands (D-59) still counts. After CL-89. Details:
   `docs/roadmap.md` P-114.
 - [ ] **CU-67** **R3 · P-121.** The M240B and mortar ammo (D-63): the 240 in the build menu beside the mortar, on its
-  tripod only, belt-fed, 1,000 rounds, carried and placed like the mortar and fired with the marine on it; the mortar
-  gets an ammo count; each comes with half its maximum. Details: `docs/roadmap.md` P-121.
+  tripod only, belt-fed, 1,000 rounds, carried and placed like the mortar and fired with the marine on it; each comes
+  with half its maximum (the mortar's 60 mm reserve cap already exists). Details: `docs/roadmap.md` P-121.
 - [ ] **CU-62** **R3 · P-105.** Skills by doing (D-59): the plumbing. Perks out of the code (`PERKS`, `perkLevels`,
   `perkCost`, the shop rows; 18 call sites); a per-player `skills` store with `addSkillXp(player, key, n)` and
   `skillLvl`, reset in `resetGame`; `dmgMult`, `reloadMult`, `speedMult`, `cashMult`, `maxGrenades` and the blast
@@ -608,6 +630,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R4 · The way out
 
+- [ ] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
+  turn 360; each item's camo and options; saved to the profile. After CL-96, CL-94. Details: `docs/roadmap.md` P-131.
 - [ ] **CU-53** **R4 · P-78.** A full run timed headless: `tools/nightsim.mjs --full`, the boat called on 20. After
   GB-86. Details: `docs/roadmap.md` P-78.
 
@@ -734,6 +758,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R5 · Named nights and bigger systems
 
+- [ ] **GB-105** **R5 · P-129.** Suppressor balance (D-65): first the hearing rule (a shot draws zombies within a
+  radius); then suppressed fire is heard much closer and hits a little softer. nightsim before and after. After
+  CU-68. Details: `docs/roadmap.md` P-129.
 - [ ] **GB-87** **R5 · P-56.** Night mods: Fog Night on 14, named the prep before (D-54). Details: `docs/roadmap.md`
   P-56.
 - [ ] **GB-88** **R5 · P-59.** The siege on 18 made real: brutes and soldiers go for your walls. Details:
@@ -818,6 +845,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R4 · The way out
 
+- [ ] **GP-82** **R4 · P-133.** Camo unlocks (D-66): four base camos, the rest earned per CL-96's plan, a toast on
+  each unlock, locked items shown in the dressing room, the "dapper dan" console command unlocks everything. After
+  CL-96. Details: `docs/roadmap.md` P-133.
 - [ ] **GP-63** **R4 · P-51.** "Call the boat" beside "Sound the alarm"; the dock blinks on the minimap once it's due.
   After GB-85. Details: `docs/roadmap.md` P-51.
 - [ ] **GP-64** **R4 · P-54.** The victory screen: the closing line, nights, kills, headshots, best streak, skulls
@@ -933,6 +963,11 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **CL-94** **R3 · P-125.** The fidelity pass on the marine and his kit (D-64): less bulky, a touch more
+  stylized; ear defenders only with the helmet; the facemask coyote brown for good; built so every item can be worn,
+  swapped and coloured on its own (CU-70). Through the studio review folders. Details: `docs/roadmap.md` P-125.
+- [ ] **CL-95** **R3 · P-126.** The fidelity pass on the guns, and six suppressors (D-64, D-65): the M4, AK-47, pistol,
+  sniper, Uzi and shotgun each get a can that belongs on it. Details: `docs/roadmap.md` P-126.
 - [ ] **CL-89** **R3 · P-110.** The loadout spec (D-61): `docs/loadout.md`, the slots and which gun goes where, akimbo,
   the Armory's storage, the magazine model, the holster key and the unarmed speed. First of the D-61 tasks. Details:
   `docs/roadmap.md` P-110.
@@ -947,6 +982,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R4 · The way out
 
+- [ ] **CL-96** **R4 · P-130.** The dressing room spec (D-66): every slot and its options, what takes camo, the four
+  base camos and how the rest are earned (days, streaks, badges), one wardrobe per player (D-58). First of the D-66
+  tasks. Details: `docs/roadmap.md` P-130.
+- [ ] **CL-97** **R4 · P-132.** The wardrobe on the rig (D-66): hats (8-point, boonie, ballcap forwards or backwards),
+  gloves on or off, sleeves rolled or down, shorts, boot colours, hair, eyes and skin, camo on the guns. After CL-94.
+  Details: `docs/roadmap.md` P-132.
 - [ ] **CL-73** **R4 · P-52.** The boat comes in: flares at the dock, a horn, a boat with a lamp sliding in during the
   last push. After GB-85. Details: `docs/roadmap.md` P-52.
 - [ ] **CL-74** **R4 · P-86.** Docs/story.md: The Signal's bible (D-44), the relay's twenty lines, the survivors'
