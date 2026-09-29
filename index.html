@@ -27143,8 +27143,9 @@
     renderBestRecord(menuBestRecord, runRecords.read());
     const lifetimeBadges = createBadges({ load: () => localStorage.getItem(BADGES_KEY), save: value => localStorage.setItem(BADGES_KEY, value) });
     const menuBadges = document.getElementById('menuBadges');
-    // CU-59 owns debugTouched. Missing until that shell task lands means eligible.
-    function badgeRunEligible() { return typeof debugTouched === 'undefined' || !debugTouched; }
+    // CU-59: a debug hook used this run. A fresh start clears it, so a real run still earns badges.
+    let debugTouched = false;
+    function badgeRunEligible() { return !debugTouched; }
     const badgeAdapter = createBadgeAdapter({ store: lifetimeBadges, getEligible: badgeRunEligible,
       onAward: (ids, {moment}) => {
         renderBadgeCollection(menuBadges, lifetimeBadges.read());
@@ -39139,6 +39140,7 @@
     });
 
     function resetGame() {
+      debugTouched = false;
       marineIdle.reset(); marineIdleInput = false;
       if (marineInsertion) marineInsertion.finish();
       abortScriptedKill();
@@ -40250,8 +40252,21 @@ live++;
       objEPressed = false;
       skyDome.position.copy(camera.position);
       renderFrame();
+      // CU-59: only calls through TT count. A real poke calls beginScriptedKill directly and stays eligible.
+      function stampDebugHooks(api) {
+        const read = new Set(['graceActiveDbg', 'fogCullDbg', 'fogCullDepthDbg', 'bountyDbg']);
+        const named = new Set(['loopNextNight', 'loopMorning', 'skipPrep', 'beginScriptedKill', 'finishScriptedKill', 'abortScriptedKill', 'noteCaveMouthHit', 'triggerCavePoke', 'abortCaveChase']);
+        for (const k of Object.keys(api)) {
+          const fn = api[k];
+          if (typeof fn !== 'function') continue;
+          const dbg = /Dbg$/.test(k) && !k.startsWith('get') && !read.has(k);
+          if (!dbg && !named.has(k)) continue;
+          api[k] = function (...a) { debugTouched = true; return fn.apply(this, a); };
+        }
+        return api;
+      }
       if (showPerf && !window.TT) {
-        window.TT = {
+        window.TT = stampDebugHooks({
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
@@ -40321,8 +40336,9 @@ live++;
           // Debug-only: jump the clock (0 midnight, 0.25 sunrise, 0.5 noon, 0.75 dusk).
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
           // Debug-only: end the opening no-attack grace period immediately.
-          skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); }
-        };
+          skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
+          getDebugTouched: () => debugTouched, resetGame,
+        });
       }
       if (showPerf) {
         perfAccum += dt;

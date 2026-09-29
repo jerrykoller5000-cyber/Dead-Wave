@@ -498,9 +498,10 @@ The facts come from two places, and nothing else: the run record and four `dw-ga
 - **`eligible`.** `true` unless a debug hook was used during the run. The shell keeps one flag,
   `debugTouched`, set by any `TT.*` hook that changes the run's state (the `*Dbg` setters,
   `loopNextNight`, `loopMorning`, `skipPrep`, `setAmmoDbg`, `setGearDbg`, the scripted-kill and cave
-  hooks), reset at a fresh start; `recordFinishedRun` passes `eligible: !debugTouched`. Owner: Cursor
-  (the shell; a small CU task). Until it lands the hook passes `eligible: true` and ChatGPT's adapter
-  treats a missing `eligible` as `true`, so nothing waits on it except the live awards.
+  hooks), reset at a fresh start; `recordFinishedRun` passes `eligible: !debugTouched`. Landed in CU-59:
+  the flag wraps the `TT` hooks (the `*Dbg` setters, not the read-only ones, plus `loopNextNight`,
+  `loopMorning`, `skipPrep` and the scripted-kill and cave hooks). A real play calls those functions
+  directly, so it stays eligible.
 - **Moment awards**, each from an existing or named event, awarded at once with the `achievement` cue:
   - `first-bank`: `dw-game` `'deposit-complete'` (existing).
   - `relay-online`: ChatGPT's own objective snapshot, `radioCall.repaired` turning true (existing).
