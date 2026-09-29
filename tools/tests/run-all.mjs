@@ -81,6 +81,18 @@ if (!tests.length) {
   process.exit(2);
 }
 
+// CU-63: game logic reads the players list. Fail the suite before the browser if a new
+// read of player.position landed outside the local view and the marine's own actions.
+try {
+  const checkOut = execFileSync(process.execPath, [path.join(ROOT, 'tools', 'check-players.mjs')], { encoding: 'utf8' });
+  process.stdout.write(checkOut.endsWith('\n') ? checkOut : checkOut + '\n');
+} catch (e) {
+  process.stdout.write(e.stdout || '');
+  process.stderr.write(e.stderr || '');
+  console.error('check-players failed');
+  process.exit(1);
+}
+
 buildTestPage();
 const server = await serve(ROOT, 0);
 const browser = await launch({ headless: true });

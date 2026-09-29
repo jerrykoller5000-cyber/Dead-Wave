@@ -7475,9 +7475,9 @@
       if (playerWasUp) {
         grounded = false;
         vy = 2.2;
-        const away = Math.hypot(player.position.x - tower.x, player.position.z - tower.z) || 1;
-        velX += ((player.position.x - tower.x) / away) * 4.5;
-        velZ += ((player.position.z - tower.z) / away) * 4.5;
+        const away = Math.hypot(nearestPlayer(0, 0).position.x - tower.x, nearestPlayer(0, 0).position.z - tower.z) || 1;
+        velX += ((nearestPlayer(0, 0).position.x - tower.x) / away) * 4.5;
+        velZ += ((nearestPlayer(0, 0).position.z - tower.z) / away) * 4.5;
         damagePlayer(PLAYER_MAX_HP * 0.7, 'towerfall');
         showBanner('THE TOWER COLLAPSED!', 'You should have climbed down sooner…', 3, '#ff6a4a');
       } else {
@@ -10441,7 +10441,7 @@
     }
 
     function updateWildlife(dt) {
-      const px = player.position.x, pz = player.position.z;
+      const px = nearestPlayer(0, 0).position.x, pz = nearestPlayer(0, 0).position.z;
       const hideGround = groundCrittersShouldHide();
       const night = !!(typeof isNight !== 'undefined' && isNight);
 
@@ -10553,7 +10553,7 @@
               if (b.recoverT <= 0 || dHoriz > 7) b.swoopPhase = 'dive';
             } else {
               // Dive phase: steer at roughly torso height and swipe on a close pass.
-              const targetY = player.position.y + 1.1;
+              const targetY = nearestPlayer(0, 0).position.y + 1.1;
               const dx = px - b.mesh.position.x;
               const dy = targetY - b.mesh.position.y;
               const dz = pz - b.mesh.position.z;
@@ -15301,6 +15301,23 @@
 
     const player = new THREE.Group();
 
+    // CU-63 (D-58): the players list. R2 has the local marine, plus test dummies.
+    // The world asks nearestPlayer, playersNear or nearestReal.
+    let playerSerial = 0;
+    const localPlayer = {
+    const players = [localPlayer];
+    function playerAlive(p) { return !!p && p.hp > 0 && !gameOver && !(p.local && scriptedKill); }
+    function nearestPlayer(x, z, opts) {
+    function playersNear(x, z, r, opts) {
+    function playerById(id) { for (const p of players) if (p.id === id) return p; return null; }
+    function nearestReal(x, z) {
+        if (p.dummy) continue;
+    function addDummyPlayer(x, z) {
+      const id = ++playerSerial;
+      const p = { id, local: false, dummy: true, obj, hits: 0, damage: 0, tripped: null, hp: 100, get position() { return obj.position; } };
+    function removeDummyPlayer(id) {
+      const i = players.findIndex((p) => p.id === id && p.dummy);
+    function clearDummyPlayers() {
     // addCast, rbox and rmesh live in core/geometry.js.
 
     // Uniform camouflage: a woodland/multi-terrain pattern painted once into a canvas —
@@ -19056,15 +19073,16 @@
       for (let i = cashDrops.length - 1; i >= 0; i--) {
         const c = cashDrops[i];
         if (c.taken) { cashDrops.splice(i, 1); continue; }
+        const who = nearestReal(c.mesh.position.x, c.mesh.position.z);
         // GB-42: the finisher calls the day's loose skulls in; they fly to the marine and bag themselves.
         if (c.skull && !c.fly && performance.now() < skullRecallUntil) { c.fly = true; c.flyBy = performance.now() + SKULL_FLY_MS; dropSkullRing(c); }
         // GB-61 (P-2): from night 2 a small skull within SKULL_ZIP_R zips to him.
         if (c.skull && !c.fly && day >= 2 && c.value < SKULL_ZIP_MAX && !c.rewardReceipt && gameStarted && !gameOver && !won && !scriptedKill) {
-          const zx = c.mesh.position.x - player.position.x, zz = c.mesh.position.z - player.position.z;
+          const zx = c.mesh.position.x - who.position.x, zz = c.mesh.position.z - who.position.z;
           if (zx * zx + zz * zz < SKULL_ZIP_R * SKULL_ZIP_R) { c.fly = true; c.zip = true; c.flyBy = performance.now() + SKULL_ZIP_MS; dropSkullRing(c); }
         }
         if (c.fly) {
-          const fdx = player.position.x - c.mesh.position.x, fdz = player.position.z - c.mesh.position.z;
+          const fdx = who.position.x - c.mesh.position.x, fdz = who.position.z - c.mesh.position.z;
           const fd = Math.hypot(fdx, fdz);
           // GB-47: on real time (the finisher's slow motion would stretch the flight past it) and
           // home within SKULL_FLY_MS, so every one is bagged, and counted on the dawn card, before
@@ -19119,8 +19137,8 @@
           ch.material.emissiveIntensity = b + pulse * CASH_EMISSIVE_AMP;
         });
         if (!gameStarted || gameOver || won) continue;
-        const dx = c.mesh.position.x - player.position.x;
-        const dz = c.mesh.position.z - player.position.z;
+        const dx = c.mesh.position.x - who.position.x;
+        const dz = c.mesh.position.z - who.position.z;
         if (dx * dx + dz * dz < 1.35) {
           c.taken = true;
           if (c.skull) {
@@ -22489,7 +22507,7 @@
       // house
       if (house.present && houseBoxDist(x, z) < radius) return true;
       // player
-      if (!skipPlayer && Math.hypot(x - player.position.x, z - player.position.z) < radius + PLAYER_RADIUS + 0.3) return true;
+      if (!skipPlayer && Math.hypot(x - nearestPlayer(0, 0).position.x, z - nearestPlayer(0, 0).position.z) < radius + PLAYER_RADIUS + 0.3) return true;
       return false;
     }
 
@@ -22520,7 +22538,7 @@
           return (LANDMARK_NAMES[ws.landmark.kind] || 'something') + ' in the way — shoot it, knife it or dig it out';
         }
       }
-      if (!skipPlayer && Math.hypot(x - player.position.x, z - player.position.z) < r + PLAYER_RADIUS + 0.3) return 'you are standing there';
+      if (!skipPlayer && Math.hypot(x - nearestPlayer(0, 0).position.x, z - nearestPlayer(0, 0).position.z) < r + PLAYER_RADIUS + 0.3) return 'you are standing there';
       for (const t of trees) {
         if (t.stump && t.stumpMesh) { if (Math.hypot(x - t.x, z - t.z) < r + t.trunkRadius + 0.25) return 'a tree stump in the way'; continue; }
         if (!t.alive && !t.falling) continue;
@@ -22601,14 +22619,14 @@
         // his own cell used to land under his feet: the ground check below never ran there.
         if ((t.level > 0 || t.slot === 'ptop') && t.slot !== 'modifier' && !t.slot.startsWith('cap')) {
           const baseY = ghostYAt(placeMode, gx, gz, yaw, opts);
-          if (Math.abs(player.position.y - baseY) < 1.2) {
+          if (Math.abs(nearestPlayer(0, 0).position.y - baseY) < 1.2) {
             let on;
             if (t.slot.startsWith('edge')) {
               const q = edgeIdxOfSlot(t.slot), [ex, ez] = edgeDir(q), spec = EDGE_SPEC[placeMode] || { edge: 0.85, depth: 0.12 };
               const mx = x + ex * spec.edge, mz = z + ez * spec.edge;
-              on = Math.abs(player.position.x - mx) < (q % 2 ? spec.depth : 1.0) + PLAYER_RADIUS && Math.abs(player.position.z - mz) < (q % 2 ? 1.0 : spec.depth) + PLAYER_RADIUS;
+              on = Math.abs(nearestPlayer(0, 0).position.x - mx) < (q % 2 ? spec.depth : 1.0) + PLAYER_RADIUS && Math.abs(nearestPlayer(0, 0).position.z - mz) < (q % 2 ? 1.0 : spec.depth) + PLAYER_RADIUS;
             } else {
-              on = Math.hypot(player.position.x - x, player.position.z - z) < (BUILD_FOOTPRINT[placeMode] || 0.7) + PLAYER_RADIUS;
+              on = Math.hypot(nearestPlayer(0, 0).position.x - x, nearestPlayer(0, 0).position.z - z) < (BUILD_FOOTPRINT[placeMode] || 0.7) + PLAYER_RADIUS;
             }
             if (on) return 'you are standing there';
           }
@@ -22628,7 +22646,7 @@
           }
           if (hi - lo > 0.9) return 'ground too rough';
           const hx = (q % 2 ? spec.depth : 1.0) + PLAYER_RADIUS, hz = (q % 2 ? 1.0 : spec.depth) + PLAYER_RADIUS;
-          if (Math.abs(player.position.x - mx) < hx && Math.abs(player.position.z - mz) < hz) return 'you are standing there';
+          if (Math.abs(nearestPlayer(0, 0).position.x - mx) < hx && Math.abs(nearestPlayer(0, 0).position.z - mz) < hz) return 'you are standing there';
           return null;
         }
       }
@@ -23753,11 +23771,11 @@
     function onStairsRamp(b) {
       const d = b && b.deck;
       if (!d) return false;
-      const dx = player.position.x - d.x, dz = player.position.z - d.z;
+      const dx = nearestPlayer(0, 0).position.x - d.x, dz = nearestPlayer(0, 0).position.z - d.z;
       const c = Math.cos(d.yaw), s = Math.sin(d.yaw);
       const lx = dx * c - dz * s, lz = dx * s + dz * c;
       if (Math.abs(lx) > d.hw + 0.05 || Math.abs(lz) > d.hl + 0.05) return false;
-      const y0 = b.mesh.position.y, py = player.position.y;
+      const y0 = b.mesh.position.y, py = nearestPlayer(0, 0).position.y;
       return py >= y0 - 0.3 && py <= y0 + LEVEL_H + 0.6;
     }
     function toggleStairs(b) {
@@ -27539,8 +27557,13 @@
           grav: -1.5, drag: 1.6, life: 0.7 + Math.random() * 0.6, scale: 0.5 + Math.random() * 0.6, grow: true
         });
       }
-      const pd = Math.hypot(player.position.x - x, player.position.z - zz);
+      const pd = Math.hypot(localPlayer.position.x - x, localPlayer.position.z - zz);
       if (pd < 4.4) damagePlayer(Math.round(7 + 23 * (1 - pd / 4.4)), 'bomber', null, { from: { x, z: zz }, kind: 'blast', power: 2 + 6 * (1 - pd / 4.4) });   // GB-67: 6.6 m/s at 1 m
+      for (const pl of players) {
+        if (!pl.dummy) continue;
+        const dd = Math.hypot(pl.position.x - x, pl.position.z - zz);
+        if (dd < 4.4) damagePlayer(Math.round(7 + 23 * (1 - dd / 4.4)), 'bomber', null, { from: { x, z: zz }, kind: 'blast', power: 2 + 6 * (1 - dd / 4.4) }, pl);
+      }
       for (const b of builds.slice()) {
         const d = Math.hypot(b.x - x, b.z - zz);
         if (d < 3.8) damageBuild(b, 15 + 70 * (1 - d / 3.8), 'enemy');
@@ -28079,7 +28102,7 @@
     }
 
     function isOutsideImmediateView(x, z) {
-      const dx = x - player.position.x, dz = z - player.position.z;
+      const dx = x - nearestPlayer(0, 0).position.x, dz = z - nearestPlayer(0, 0).position.z;
       const d = Math.hypot(dx, dz) || 1;
       const fx = Math.sin(aimYaw), fz = Math.cos(aimYaw);
       const dot = (dx / d) * fx + (dz / d) * fz;
@@ -28087,7 +28110,7 @@
     }
 
     function pickRadioDefenderSeat(cx, cz, taken) {
-      const px = player.position.x, pz = player.position.z;
+      const px = nearestPlayer(0, 0).position.x, pz = nearestPlayer(0, 0).position.z;
       for (let attempt = 0; attempt < 48; attempt++) {
         const a = Math.random() * Math.PI * 2;
         const r = RADIO_DEFENDER.rMin + Math.random() * (RADIO_DEFENDER.rMax - RADIO_DEFENDER.rMin);
@@ -28164,7 +28187,7 @@
       if (!gameStarted || gameOver || won) return;
       if (radioDefendersFired && !radioDefendersPending) return;
       const c = radioCentre();
-      const d = Math.hypot(player.position.x - c.x, player.position.z - c.z);
+      const d = Math.hypot(nearestPlayer(0, 0).position.x - c.x, nearestPlayer(0, 0).position.z - c.z);
       if (!radioDefendersFired && !radioDefendersPending && d > RADIO_DEFENDER.triggerR) return;
       trySpawnRadioDefenders();
     }
@@ -28688,10 +28711,11 @@
       _gbView.set(x, y, z).project(camera);
       return _gbView.z > -1 && _gbView.z < 1 && Math.abs(_gbView.x) < 1.08 && Math.abs(_gbView.y) < 1.08;
     }
+      const px = nearestPlayer(0, 0).position.x, pz = nearestPlayer(0, 0).position.z;
     function groundRiseSpotOk(x, z) {
       const hd = Math.hypot(x, z);
       if (hd < GROUND_RISE_MIN || hd > GROUND_RISE_MAX) return false;
-      if (Math.hypot(x - player.position.x, z - player.position.z) < GROUND_RISE_CLEAR) return false;
+      if (Math.hypot(x - nearestPlayer(0, 0).position.x, z - nearestPlayer(0, 0).position.z) < GROUND_RISE_CLEAR) return false;
       if (waterDepthAt(x, z) > 0.05) return false;
       const gy = sampleHeight(x, z);
       if (pointInCameraView(x, gy + 0.3, z) || pointInCameraView(x, gy + 1.8, z)) return false;
@@ -28973,7 +28997,7 @@
           for (const i of allowed) {
             const c = POI.caves[i];
             if (!c) continue;
-            const d = Math.hypot(c.x - player.position.x, c.z - player.position.z);
+            const d = Math.hypot(c.x - nearestPlayer(0, 0).position.x, c.z - nearestPlayer(0, 0).position.z);
             if (d < bd) { bd = d; cave = c; }
           }
           if (!cave && plannedCaveIdx >= 0) cave = POI.caves[plannedCaveIdx] || null;
@@ -28983,11 +29007,11 @@
         if (cave) {
           // Just inside the drip line, in the dark, already on its feet.
           const fx = Math.sin(cave.yaw), fz = Math.cos(cave.yaw), crx = Math.cos(cave.yaw), crz = -Math.sin(cave.yaw);
-          const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = Math.hypot(player.position.x - cave.x, player.position.z - cave.z) < 8 ? -3.6 + Math.random() * 0.5 : -1.4 + Math.random() * 1.2;   // GB-40 (GB-A7): deeper when the marine is at the mouth
+          const lx = (Math.random() - 0.5) * Math.min(2.4, (cave.mouthHalf || 2) * 0.9) + (cave.design ? cave.design.skew * 1.2 : 0), lz = Math.hypot(nearestPlayer(0, 0).position.x - cave.x, nearestPlayer(0, 0).position.z - cave.z) < 8 ? -3.6 + Math.random() * 0.5 : -1.4 + Math.random() * 1.2;   // GB-40 (GB-A7): deeper when the marine is at the mouth
           sx = cave.x + crx * lx + fx * lz;
           sz = cave.z + crz * lx + fz * lz;
           // GB-40 (GB-A7): never on top of him; hold the burst a moment instead.
-          if (Math.hypot(player.position.x - sx, player.position.z - sz) < 2.5) { spawnCd = 0.35; burstLeft += 1; return; }
+          if (Math.hypot(nearestPlayer(0, 0).position.x - sx, nearestPlayer(0, 0).position.z - sz) < 2.5) { spawnCd = 0.35; burstLeft += 1; return; }
         } else {
           // Planned open-ground / missing cave: old rim spawn.
           let ang;
@@ -29025,7 +29049,7 @@
         }
         // drowned: caveIndex -1 — aquatic only; no cave role / no caveWarn
         waveSpawned += 1;
-        waveSpawnLog.push({ tk, ci: spawned.caveIndex, ground: !!groundSpot, x: spot.x, z: spot.z, pd: Math.hypot(spot.x - player.position.x, spot.z - player.position.z), hq: Math.hypot(spot.x, spot.z), inView: !!groundSpot && pointInCameraView(spot.x, sampleHeight(spot.x, spot.z) + 1, spot.z) });
+        waveSpawnLog.push({ tk, ci: spawned.caveIndex, ground: !!groundSpot, x: spot.x, z: spot.z, pd: Math.hypot(spot.x - nearestPlayer(0, 0).position.x, spot.z - nearestPlayer(0, 0).position.z), hq: Math.hypot(spot.x, spot.z), inView: !!groundSpot && pointInCameraView(spot.x, sampleHeight(spot.x, spot.z) + 1, spot.z) });
         if (waveSpawnLog.length > 400) waveSpawnLog.shift();
         if (waveQueue.length) {
           waveQueue.shift();
@@ -29288,8 +29312,8 @@
       for (let tries = 0; tries < 40 && !ok; tries++) {
         const a = Math.random() * Math.PI * 2;
         const r = 22 + Math.random() * 34;
-        x = player.position.x + Math.cos(a) * r;
-        z = player.position.z + Math.sin(a) * r;
+        x = nearestPlayer(0, 0).position.x + Math.cos(a) * r;
+        z = nearestPlayer(0, 0).position.z + Math.sin(a) * r;
         ok = Math.hypot(x, z) < landRadius - 8 && waterDepthAt(x, z) < 0.05 && terrainSlope(x, z) < 0.4 && !nearPOI(x, z, 6) && houseBoxDist(x, z) > 3;
       }
       if (!ok) return;
@@ -29302,7 +29326,7 @@
       scene.add(plane);
       supplyPlanes.push({ plane, dir, speed, x, z, dropped: false, t: 0, life: 340 / speed });
       AudioSys.planeFlyover(340 / speed);
-      showBanner('SUPPLY DROP INBOUND', 'Plane overhead \u2014 crate coming down ' + compassName(x - player.position.x, z - player.position.z) + ' of you', 3, '#ffe066');
+      showBanner('SUPPLY DROP INBOUND', 'Plane overhead \u2014 crate coming down ' + compassName(x - nearestPlayer(0, 0).position.x, z - nearestPlayer(0, 0).position.z) + ' of you', 3, '#ffe066');
     }
     function releaseSupplyCrate(p) {
       const g = makeSupplyCrate();
@@ -29366,7 +29390,7 @@
             s.landedAge = 0;
             AudioSys.crateLand();
             spawnDust(s.x, s.gy, s.z, 10);
-            addShake(Math.max(0, 0.25 - Math.hypot(s.x - player.position.x, s.z - player.position.z) * 0.01));
+            addShake(Math.max(0, 0.25 - Math.hypot(s.x - nearestReal(s.x, s.z).position.x, s.z - nearestReal(s.x, s.z).position.z) * 0.01));
           } else if (g.position.y < floor - 5) { g.position.y = floor; }
         } else if (s.state === 'landed') {
           s.age += dt;
@@ -29376,7 +29400,7 @@
             const at = s.strobe.getWorldPosition(supplyLightPosition);
             requestEffectLight(at.x, at.y, at.z, 0xe8f6ff, 3, 7);
           }
-          const pd = Math.hypot(s.x - player.position.x, s.z - player.position.z);
+          const pd = Math.hypot(s.x - nearestReal(s.x, s.z).position.x, s.z - nearestReal(s.x, s.z).position.z);
           if (gameStarted && !gameOver && !won && pd < 2.4) { claimSupplyDrop(s); continue; }
           if (s.age > s.life) { airborne.dispose(g); supplyDrops.splice(i, 1); }
         } else if (s.state === 'open') {
@@ -29652,6 +29676,8 @@
     }
 
     function damagePlayer(amount, cause = null, attacker = null, info = null) {
+      // CU-63: a dummy counts the hit and never dies, and never ends the run.
+      if (p && p.dummy) { p.hits++; p.damage += amount; return; }
       if (devGodMode) return; // "godmode" dev cheat — every damage source funnels through here
       if (gameOver || won || !gameStarted) return;
       if (scriptedKill) return; // a scripted kill owns the ending; nothing else gets a bite
@@ -29785,7 +29811,7 @@
         m.mesh.position.y = sampleHeight(m.mesh.position.x, m.mesh.position.z) + 0.15 + Math.sin(m.age * 3) * 0.06;
         if (m.age > m.life) { scene.remove(m.mesh); medDrops.splice(i, 1); continue; }
         if (!gameStarted || gameOver || won) continue;
-        const dx = m.mesh.position.x - player.position.x, dz = m.mesh.position.z - player.position.z;
+        const dx = m.mesh.position.x - nearestReal(m.mesh.position.x, m.mesh.position.z).position.x, dz = m.mesh.position.z - nearestReal(m.mesh.position.x, m.mesh.position.z).position.z;
         if (dx * dx + dz * dz < 1.5) {
           scene.remove(m.mesh); medDrops.splice(i, 1);
           AudioSys.pickup();
@@ -31363,7 +31389,7 @@
     let cavePokeWarn = null;   // { caveIndex, t, prior, shake }
     function caveWarningBeat(caveIndex, c) {
       cavePokeWarned = true;
-      const d = Math.hypot(player.position.x - c.x, player.position.z - c.z);
+      const d = Math.hypot(nearestPlayer(0, 0).position.x - c.x, nearestPlayer(0, 0).position.z - c.z);
       const shake = CAVE_WARN_SHAKE * Math.max(0.4, 1 - d / 30);
       cavePokeWarn = { caveIndex, t: cavePokeNow, shake };
       publishCaveGuardian(caveIndex, c.x, c.z, 'aggro', true);
@@ -31411,8 +31437,12 @@
       return f.lz < 1.2 && f.lz > -4.5 && Math.abs(f.lx - f.skew) < f.half + 0.45 && Math.abs(y - c.gy) < 3.2;
     }
     function playerInCaveGrabBand(c) {
-      const f = caveMouthFrame(c, player.position.x, player.position.z);
-      return f.lz < 0.55 && f.lz > -3.5 && Math.abs(f.lx - f.skew) < f.half && Math.abs(player.position.y - c.gy) < 2.6;
+      for (const who of players) {
+        if (who.dummy) continue;
+        const f = caveMouthFrame(c, who.position.x, who.position.z);
+        if (f.lz < 0.55 && f.lz > -3.5 && Math.abs(f.lx - f.skew) < f.half && Math.abs(who.position.y - c.gy) < 2.6) return true;
+      }
+      return false;
     }
     function segmentHitsCaveMouthShot(c, ax, ay, az, bx, by, bz) {
       for (let i = 0; i <= 5; i++) {
@@ -31423,20 +31453,24 @@
     }
     // GB-35: within 20 m, in front of the mouth, not occluded by a build.
     function playerInCavePokeLos(c) {
-      const px = player.position.x, pz = player.position.z, py = player.position.y;
-      const d = Math.hypot(px - c.x, pz - c.z);
-      if (!(d > 0.8 && d <= CAVE_POKE_RANGE)) return false;
-      if (Math.abs(py - c.gy) > 10) return false;
-      const f = caveMouthFrame(c, px, pz);
-      if (f.lz < -0.5) return false; // inside / behind the lip
-      // Frontal cone (~70 deg half-angle) when standing out front.
-      if (f.lz > 0.2 && Math.abs(f.lx - f.skew) > f.lz * 2.75 + f.half) return false;
-      const ay = c.gy + 1.15, by = py + 1.0;
-      for (const b of builds) {
-        if (b.alive === false) continue;
-        if (segmentHitsBuild(b, c.x, ay, c.z, px, by, pz) !== null) return false;
+      for (const who of players) {
+        if (who.dummy) continue;
+        const px = who.position.x, pz = who.position.z, py = who.position.y;
+        const d = Math.hypot(px - c.x, pz - c.z);
+        if (!(d > 0.8 && d <= CAVE_POKE_RANGE)) continue;
+        if (Math.abs(py - c.gy) > 10) continue;
+        const f = caveMouthFrame(c, px, pz);
+        if (f.lz < -0.5) continue;
+        if (f.lz > 0.2 && Math.abs(f.lx - f.skew) > f.lz * 2.75 + f.half) continue;
+        const ay = c.gy + 1.15, by = py + 1.0;
+        let blocked = false;
+        for (const b of builds) {
+          if (b.alive === false) continue;
+          if (segmentHitsBuild(b, c.x, ay, c.z, px, by, pz) !== null) { blocked = true; break; }
+        }
+        if (!blocked) return true;
       }
-      return true;
+      return false;
     }
     function resetCavePokeDay(newRun) {
       cavePokeUsedCaves.clear();
@@ -31602,7 +31636,7 @@
         if (b.hp <= 0 || builds.indexOf(b) < 0) continue;   // came down with an earlier one
         spawnChunks(b.x, b.mesh.position.y + 0.9, b.z, 0x6b5a3e, 10, 6);
         damageBuild(b, b.hp + 1, 'guardian');
-        const dp = Math.hypot(player.position.x - b.x, player.position.z - b.z);
+        const dp = Math.hypot(nearestPlayer(0, 0).position.x - b.x, nearestPlayer(0, 0).position.z - b.z);
         addShake(0.5 * Math.max(0, 1 - dp / 25));
         ch.slowT = CAVE_SMASH_SLOW;
         ch.smashed++;
@@ -31615,7 +31649,7 @@
       if (!gameStarted || gameOver || won || scriptedKill || cine) { abortCaveChase(); return; }
       ch.t += dt;
       const c = ch.cave, g = ch.g, gud = g.userData;
-      const dx = player.position.x - g.position.x, dz = player.position.z - g.position.z;
+      const dx = nearestPlayer(0, 0).position.x - g.position.x, dz = nearestPlayer(0, 0).position.z - g.position.z;
       const d = Math.hypot(dx, dz);
       const going = ch.t > CAVE_CHASE_OUT_DELAY;   // the screech first, then it comes
       if (going && d > 1e-4) {
@@ -31625,7 +31659,7 @@
         for (let guard = 0; left > 1e-4 && guard < 40; guard++) {
           const step = Math.min(0.4, left); left -= step;
           const px = g.position.x, pz = g.position.z;
-          let ux = player.position.x - px, uz = player.position.z - pz;
+          let ux = nearestPlayer(0, 0).position.x - px, uz = nearestPlayer(0, 0).position.z - pz;
           const ud = Math.hypot(ux, uz);
           if (ud < 1e-4) break;
           ux /= ud; uz /= ud;
@@ -31647,7 +31681,7 @@
       // mouth over the first strides rather than starting at full stretch.
       const ph = ch.ran * 0.75;   // a bound every 8.4 m: three a second flat out
       ch.runAmt = (ch.runAmt || 0) + ((going ? 1 : 0) - (ch.runAmt || 0)) * Math.min(1, dt * 5);
-      _cgLook.copy(player.position); _cgLook.y += 1.0;
+      _cgLook.copy(nearestPlayer(0, 0).position); _cgLook.y += 1.0;
       CaveGuardian.guardianGallop(g.userData.rigRoot, g.userData.rig, ph, ch.runAmt, ch.t, _cgLook);
       // GB-54: weight in the run. Each bound throws up dirt as the hands land and, close by,
       // shakes the camera.
@@ -31663,7 +31697,7 @@
       dampGuardian(g, dt, false, 40);   // a light hand on the run: the clamp in rigDamp keeps a bound from snapping
       // Contact: a hand on the leg. Up a tower or on a roof only buys him the few seconds
       // before CAVE_CHASE_MAX_T; it is immortal and it does not give up.
-      const dy = Math.abs(player.position.y - g.position.y);
+      const dy = Math.abs(nearestPlayer(0, 0).position.y - g.position.y);
       if ((d <= CAVE_CHASE_GRAB_R && dy < 3.5) || ch.t >= CAVE_CHASE_MAX_T) catchCaveChase();
     }
     function catchCaveChase() {
@@ -31906,7 +31940,7 @@
         spawnRipple(LAKE_HOLE.x + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), LAKE.level + 0.02, LAKE_HOLE.z + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), 1.4, 1.6);
       }
       if (scriptedKill || gameOver || won || !gameStarted || devGodMode) return;
-      const px = player.position.x, pz = player.position.z;
+      const px = localPlayer.position.x, pz = localPlayer.position.z;
       const pitD = Math.hypot(px - LAKE_HOLE.x, pz - LAKE_HOLE.z);
       // CL-66 (P-11): swimming toward the pit, he's warned once a run before the arms can reach:
       // the pit rumbles hard under him and the world says so (the coach turns it into a card, P-12).
@@ -31917,14 +31951,16 @@
         publishUI('pit-near', { x: LAKE_HOLE.x, z: LAKE_HOLE.z, dist: pitD, grabR: LAKE_HOLE.grabR });
       }
       if (playerSwimming && pitD < LAKE_HOLE.grabR) { beginScriptedKill('tentacle'); return; }
-      for (const c of POI.caves) {
-        const dx = px - c.x, dz = pz - c.z;
+      for (const who of players) for (const c of POI.caves) {
+        const dx = who.position.x - c.x, dz = who.position.z - c.z;
         if (dx * dx + dz * dz > 36) continue;
-        // Into the mouth's own frame: +lz is out toward the map, negative is inside.
         const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
         const lz = dx * fx + dz * fz;
         const lx = dx * Math.cos(c.yaw) - dz * Math.sin(c.yaw);
-        if (lz < 0.55 && lz > -3.5 && Math.abs(lx - (c.design ? c.design.skew * 1.2 : 0)) < (c.mouthHalf || 2.15) && Math.abs(player.position.y - c.gy) < 2.6) { beginScriptedKill('cave', c); return; }
+        if (lz < 0.55 && lz > -3.5 && Math.abs(lx - (c.design ? c.design.skew * 1.2 : 0)) < (c.mouthHalf || 2.15) && Math.abs(who.position.y - c.gy) < 2.6) {
+          if (who.dummy) { who.tripped = { kind: 'cave', caveIndex: POI.caves.indexOf(c) }; break; }
+          beginScriptedKill('cave', c); return;
+        }
       }
     }
 
@@ -34348,7 +34384,7 @@
           if (Math.hypot(z.mesh.position.x - f.x, z.mesh.position.z - f.z) < 1.25 + z.radius * 0.5 && Math.abs(z.mesh.position.y - f.y) < 2) igniteZombie(z, 1.8, !!f.defense);
         }
         f.hurtT -= dt;
-        if (f.hurtT <= 0 && Math.hypot(player.position.x - f.x, player.position.z - f.z) < 1.15 && Math.abs(player.position.y - f.y) < 1.6) {
+        if (f.hurtT <= 0 && Math.hypot(nearestPlayer(0, 0).position.x - f.x, nearestPlayer(0, 0).position.z - f.z) < 1.15 && Math.abs(nearestPlayer(0, 0).position.y - f.y) < 1.6) {
           f.hurtT = 0.45;
           damagePlayer(4, 'fire');
         }
@@ -34595,7 +34631,7 @@
         spawnRipple(x, sampleHeight(x, z) + explosionWet, z, 2.4, 1.8); // Huge explosion ripple ring!
       }
       else spawnDust(x, y, z, 12);
-      const shakeDist = Math.hypot(x - player.position.x, z - player.position.z);
+      const shakeDist = Math.hypot(x - localPlayer.position.x, z - localPlayer.position.z);
       addShake(Math.max(0, 0.95 - shakeDist * 0.07));
       // AoE damage — shell uses launcher st.damage; Key-G throwable keeps legacy 55
       // Grenadier widens your own thrown grenades (not shells or bomber blasts):
@@ -34604,7 +34640,7 @@
       const AOE = 4.5 * ((g.damage == null) ? 1 + perkLvl('grenadier') * 0.08 : 1) * (g.blastMul || 1);
       const baseDmg = (g.damage != null) ? g.damage : 55 * dmgMult();
       // Your own blast hurts you too. Stand back, or roll.
-      if (shakeDist < AOE && Math.abs(player.position.y - y) < 3) damagePlayer(Math.round(Math.max(6, baseDmg * 0.55 * (1 - shakeDist / AOE))), g.cause || 'blast');
+      if (shakeDist < AOE && Math.abs(localPlayer.position.y - y) < 3) damagePlayer(Math.round(Math.max(6, baseDmg * 0.55 * (1 - shakeDist / AOE))), g.cause || 'blast');
       for (const lm of landmarks) {
         if (!lm.alive) continue;
         // Fence runs use their nearest point so long runs take damage where the blast lands.
@@ -35499,7 +35535,7 @@
         const px = bx + dx * d, pz = bz + dz * d;
         spawnDust(px, sampleHeight(px, pz) + 0.05, pz, d > t.canopyBottom ? 3 : 2);
       }
-      const pd = Math.hypot(player.position.x - bx, player.position.z - bz);
+      const pd = Math.hypot(nearestPlayer(0, 0).position.x - bx, nearestPlayer(0, 0).position.z - bz);
       addShake(Math.max(0, 0.35 - pd * 0.012) * Math.min(1.3, 0.6 + t.scale * 0.4));
       { const sa = sndAt(bx + dx * reach * 0.5, bz + dz * reach * 0.5, 60); AudioSys.treeThud(sa.v, sa.pan, t.scale || 1); }
       // Branches snap: bark splinters and a burst of leaves where the crown hits.
@@ -35521,10 +35557,10 @@
       }
       // The player is not exempt.
       {
-        const rx = player.position.x - bx, rz = player.position.z - bz;
+        const rx = nearestPlayer(0, 0).position.x - bx, rz = nearestPlayer(0, 0).position.z - bz;
         const along = rx * dx + rz * dz;
         const side = Math.abs(rx * dz - rz * dx);
-        if (along > 0.5 && along < reach + 0.5 && side < halfW && Math.abs(player.position.y - sampleHeight(bx, bz)) < 3) {
+        if (along > 0.5 && along < reach + 0.5 && side < halfW && Math.abs(nearestPlayer(0, 0).position.y - sampleHeight(bx, bz)) < 3) {
           damagePlayer(35, 'tree');
           showBanner('TIMBER', 'Watch where they fall', 1.4, '#e8c86a');
         }
@@ -36930,7 +36966,7 @@
       ffPlayer.timer -= dt;
       if (ffPlayer.timer <= 0 || force) {
         ffPlayer.timer = FF_PERIOD;
-        updateFlowFieldOn(ffPlayer, player.position.x, player.position.z, 0);
+        updateFlowFieldOn(ffPlayer, nearestPlayer(0, 0).position.x, nearestPlayer(0, 0).position.z, 0);
       }
     }
 
@@ -37585,8 +37621,8 @@
             });
           }
           // Direct hit hurts immediately, then the ground stays bad news for a while.
-          const pd = Math.hypot(g.x - player.position.x, g.z - player.position.z);
-          if (pd < 1.6 && Math.abs(player.position.y - gh) < 2.2) {
+          const pd = Math.hypot(g.x - nearestPlayer(0, 0).position.x, g.z - nearestPlayer(0, 0).position.z);
+          if (pd < 1.6 && Math.abs(nearestPlayer(0, 0).position.y - gh) < 2.2) {
             if (g.web) { playerWebT = 2.2; damagePlayer(3, 'spider'); showBanner('WEBBED', 'Slowed — shake it off', 1.2, '#e8e6dc'); }
             else damagePlayer(9, 'spider');
           }
@@ -37604,8 +37640,8 @@
         p.tick -= dt;
         if (p.tick <= 0) {
           p.tick = 0.33;
-          const pd = Math.hypot(p.x - player.position.x, p.z - player.position.z);
-          if (pd < 1.6 && Math.abs(player.position.y - p.y) < 1.6) damagePlayer(3, 'acid');
+          const pd = Math.hypot(p.x - nearestPlayer(0, 0).position.x, p.z - nearestPlayer(0, 0).position.z);
+          if (pd < 1.6 && Math.abs(nearestPlayer(0, 0).position.y - p.y) < 1.6) damagePlayer(3, 'acid');
           for (const b of builds.slice()) {
             if (Math.hypot(p.x - b.x, p.z - b.z) < 1.7) damageBuild(b, 2.2, 'enemy', true);
           }
@@ -37716,6 +37752,8 @@
     }
 
     let badPosResets = 0;   // Claude 2026-09-28: how often the backstop in updateZombies caught a bad position (hordeReport)
+    // (D-58, CU-63) lands this reads it instead. The cave guardian of the scripted grab never counts (it is not in
+      const dx = z.mesh.position.x - nearestPlayer(0, 0).position.x, dz = z.mesh.position.z - nearestPlayer(0, 0).position.z;
     function updateZombies(dt) {
       restoreMotionAnims();   // last frame's animation pose, not the bodies' (see updateMotionBodies)
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
@@ -37741,7 +37779,7 @@
         syncZombieFogCull(z, dt);   // GB-59
         // GB-43: a POI guard holds its post until woken.
         if (z.poiGuard && !z.poiAwake) {
-          const gd = Math.hypot(player.position.x - z.mesh.position.x, player.position.z - z.mesh.position.z);
+          const gd = Math.hypot(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x - z.mesh.position.x, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z - z.mesh.position.z);
           const lost = zombies.filter((o) => o.poiGuard === z.poiGuard && o.alive).length < (z.poiGuard.n || 0);
           if (poiPhase === 'wave') wakePoiGuards('alarm');
           else if (z.hp < z.maxHp || lost) wakePoiGuards('hit', z.poiGuard);
@@ -37749,7 +37787,7 @@
           else { poseSleepingGuard(z, dt); continue; }   // GB-51: it idles at its post
         }
         const tactics = z.tactics || 'direct';
-        const px0 = player.position.x, pz0 = player.position.z;
+        const px0 = nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, pz0 = nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z;
         const hx0 = house.active ? house.group.position.x : 0;
         const hz0 = house.active ? house.group.position.z : 0;
 
@@ -37970,7 +38008,7 @@
             if (Math.random() < dt * 14) spawnDust(zx, hHere, zz, 2);
             if (!z.chargeHit) {
               const pd = Math.hypot(px0 - zx, pz0 - zz);
-              if (pd < z.radius + 1.0 && Math.abs(player.position.y - z.mesh.position.y) < 1.8) {
+              if (pd < z.radius + 1.0 && Math.abs(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y - z.mesh.position.y) < 1.8) {
                 z.chargeHit = true;
                 damagePlayer(Math.round(z.damage * 1.6), 'demon', z);
                 // Thrown back and off your feet a little (the same shove a blast uses).
@@ -38012,7 +38050,7 @@
           z.lineGo = (z.lineGo || 0) - dt;
           if (z.lineT <= 0 && dist < hold) {
             z.lineT = 0.45 + Math.random() * 0.2;
-            const tyy = Math.hypot(tx - player.position.x, tz - player.position.z) < 3 ? player.position.y : sampleHeight(tx, tz);
+            const tyy = Math.hypot(tx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, tz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z) < 3 ? nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y : sampleHeight(tx, tz);
             // Two lines, from its body to his gun height, 0.45 m either side: the round leaves his
             // gun off to one side of his chest, and one line that grazed the house corner let a
             // spider hold where every round he fired hit the corner (224 rounds, no kill).
@@ -38103,14 +38141,14 @@
             if (z.mesh.userData.armRG) z.mesh.userData.armRG.rotation.x = -2.4;
             if (z.slamWind <= 0) {
               AudioSys.bossSlam();
-              const sd = Math.hypot(zx - player.position.x, zz - player.position.z);
+              const sd = Math.hypot(zx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, zz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z);
               addShake(Math.max(0.25, 1.0 - sd * 0.03));
               spawnDust(zx, hHere, zz, 14);
               spawnChunks(zx, hHere + 0.2, zz, 0x6b6250, 8, 5);
               if (sd < 5.2) {
                 damagePlayer(26, 'colossus', z);
                 // Shove the marine off his feet.
-                const kx = (player.position.x - zx) / (sd || 1), kz = (player.position.z - zz) / (sd || 1);
+                const kx = (nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x - zx) / (sd || 1), kz = (nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z - zz) / (sd || 1);
                 velX += kx * 14; velZ += kz * 14;
                 if (grounded) { vy = 5; grounded = false; }
               }
@@ -38219,15 +38257,15 @@
         // GB-50: the contact ring. A zombie crowds the marine but never stands inside him:
         // whatever brought it closer than touching (its walk, a leap, the crowd, his own
         // step into it) puts it back on the ring round him, and the walls below still apply.
-        if (!scriptedKill && Math.abs(z.mesh.position.y - player.position.y) < 1.6) {
+        if (!scriptedKill && Math.abs(z.mesh.position.y - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y) < 1.6) {
           const ring = z.radius + PLAYER_RADIUS + 0.04;
-          let rx = mx - player.position.x, rz = mz - player.position.z;
+          let rx = mx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, rz = mz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z;
           let rd = Math.hypot(rx, rz);
           if (rd < ring) {
-            if (rd < 1e-4) { rx = zx - player.position.x; rz = zz - player.position.z; rd = Math.hypot(rx, rz); }
+            if (rd < 1e-4) { rx = zx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x; rz = zz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z; rd = Math.hypot(rx, rz); }
             if (rd < 1e-4) { const a = (z.bob || 0) * 6.283; rx = Math.sin(a); rz = Math.cos(a); rd = 1; }
-            mx = player.position.x + rx / rd * ring;
-            mz = player.position.z + rz / rd * ring;
+            mx = nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x + rx / rd * ring;
+            mz = nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z + rz / rd * ring;
             z.ringHeld = (z.ringHeld || 0) + 1;
           }
         }
@@ -38293,7 +38331,7 @@
           }
           // A burning zombie is a fire hazard to you as well: brush against one and
           // the flames catch (ticks every half second while you're in contact).
-          if (Math.hypot(zx - player.position.x, zz - player.position.z) < z.radius + 0.9 && Math.abs(z.mesh.position.y - player.position.y) < 2) {
+          if (Math.hypot(zx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, zz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z) < z.radius + 0.9 && Math.abs(z.mesh.position.y - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y) < 2) {
             z.burnTouchT = (z.burnTouchT || 0) - dt;
             if (z.burnTouchT <= 0) { z.burnTouchT = 0.5; damagePlayer(4, 'fire'); }
           }
@@ -38490,7 +38528,7 @@
         // Far-off bodies stop casting shadows: every caster is drawn twice, and a
         // shadow forty metres out is a few pixels. Toggled only when it changes.
         {
-          const want = Math.hypot(player.position.x - zx, player.position.z - zz) < 34;
+          const want = Math.hypot(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x - zx, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z - zz) < 34;
           if (z._castShadow !== want) {
             z._castShadow = want;
             z.mesh.traverse((o) => { if (o.isMesh) o.castShadow = want; });
@@ -38502,7 +38540,7 @@
         // shuffling about.
         z.groanCd = (z.groanCd == null ? 1 + Math.random() * 6 : z.groanCd) - dt;
         if (z.groanCd <= 0) {
-          const gd = Math.hypot(player.position.x - zx, player.position.z - zz);
+          const gd = Math.hypot(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x - zx, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z - zz);
           const chasing = moving && gd < 22;
           z.groanCd = chasing ? 2.2 + Math.random() * 4 : 4 + Math.random() * 9;
           if (gd < 30 && groanThrottle <= 0 && !graceFreeze) {
@@ -38515,7 +38553,7 @@
         // GB-51: standing with nothing in reach, they idle on their own clock (zombieIdleState).
         {
           const idl = zombieIdleState(z, dt);
-          const inReach = Math.hypot(player.position.x - zx, player.position.z - zz) < z.radius + PLAYER_RADIUS + 0.6;
+          const inReach = Math.hypot(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x - zx, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z - zz) < z.radius + PLAYER_RADIUS + 0.6;
           const idleNow = standing && !rising && !inReach && !(z.attackWindup > 0) && !(z.swingT > 0) && !(z.hitReact > 0);
           idl.amt += ((idleNow ? 1 : 0) - idl.amt) * (1 - Math.exp(-5 * dt));
           if (idl.amt > 0.01) {
@@ -38571,7 +38609,7 @@
           if (z.attackWindup <= 0 && z._pendingAttack) {
             const atk = z._pendingAttack;
             z._pendingAttack = null;
-            const stillNearPlayer = Math.hypot(z.mesh.position.x - player.position.x, z.mesh.position.z - player.position.z) < z.radius + PLAYER_RADIUS + 0.45 && Math.abs(z.mesh.position.y - player.position.y) < ZOMBIE_REACH_Y;
+            const stillNearPlayer = Math.hypot(z.mesh.position.x - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, z.mesh.position.z - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z) < z.radius + PLAYER_RADIUS + 0.45 && Math.abs(z.mesh.position.y - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y) < ZOMBIE_REACH_Y;
             const stillNearBuild = atk.build && atk.build.hp > 0 && !doorIsOpen(atk.build) && nearestAttackableBuild(z.mesh.position.x, z.mesh.position.z, z.radius + 0.15, z.mesh.position.y) === atk.build;
             if (atk.type === 'house' && houseBoxDist(z.mesh.position.x, z.mesh.position.z) < z.radius + 0.6) damageHouse(atk.dmg);
             else if (atk.type === 'build' && stillNearBuild) {
@@ -38597,7 +38635,7 @@
                 z.staggerVZ = (z.staggerVZ || 0) + kz / kd * 4.5;
               }
             }
-            else if (atk.type === 'player' && stillNearPlayer && !buildBetween(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, player.position.x, player.position.y + 0.9, player.position.z)) damagePlayer(atk.dmg, z.typeKey, z);
+            else if (atk.type === 'player' && stillNearPlayer && !buildBetween(z.mesh.position.x, z.mesh.position.y + 0.9, z.mesh.position.z, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y + 0.9, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z)) damagePlayer(atk.dmg, z.typeKey, z);
             z.swingT = 0.28;
           }
         } else if (z.swingT > 0) {
@@ -38666,9 +38704,9 @@
           // Vertical reach on top of the horizontal check — without it a zombie stuck at
           // the foot of the watchtower (or any other height difference) could still
           // "melee" a player standing well out of its actual reach above it.
-          const pdy = Math.abs(player.position.y - z.mesh.position.y);
+          const pdy = Math.abs(nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y - z.mesh.position.y);
           {
-            const pd = Math.hypot(mx - player.position.x, mz - player.position.z);
+            const pd = Math.hypot(mx - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, mz - nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z);
             // Vertical reach: a zombie claws at what it can get its hands on. 2.3m let
             // one on the ground reach a player standing on a platform (deck 2.25m up),
             // so the platform protected nothing and there was no reason for the horde
@@ -38680,7 +38718,7 @@
               // and the wall itself took nothing. Whatever of yours is in the way
               // gets hit instead — which is what a wall is for.
               const inTheWay = buildBetween(mx, z.mesh.position.y + 0.9, mz,
-                                            player.position.x, player.position.y + 0.9, player.position.z);
+                                            nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.y + 0.9, nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z);
               if (inTheWay) tryWindup('build', z.damage, 0.95, inTheWay);
               else tryWindup('player', z.damage, 0.85);
             } else {
@@ -38735,7 +38773,7 @@
         // where it last stood (z.x/z.z, last frame's good place) instead of vanishing, and
         // drops the steering state that may have carried the bad number.
         if (!Number.isFinite(z.mesh.position.x) || !Number.isFinite(z.mesh.position.z) || !Number.isFinite(z.mesh.position.y)) {
-          const okX = Number.isFinite(z.x) ? z.x : player.position.x, okZ = Number.isFinite(z.z) ? z.z : player.position.z;
+          const okX = Number.isFinite(z.x) ? z.x : nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.x, okZ = Number.isFinite(z.z) ? z.z : nearestPlayer(z.mesh.position.x, z.mesh.position.z).position.z;
           z.mesh.position.x = okX; z.mesh.position.z = okZ; z.mesh.position.y = entityGroundY(okX, okZ);
           z.flowX = null; z.flowZ = null; z.unstickT = 0; z.staggerVX = 0; z.staggerVZ = 0;
           z.stuckX = okX; z.stuckZ = okZ;
@@ -39141,6 +39179,7 @@
 
     function resetGame() {
       debugTouched = false;
+      clearDummyPlayers();
       marineIdle.reset(); marineIdleInput = false;
       if (marineInsertion) marineInsertion.finish();
       abortScriptedKill();
@@ -40338,6 +40377,7 @@ live++;
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getDebugTouched: () => debugTouched, resetGame,
+          addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players,
         });
       }
       if (showPerf) {
