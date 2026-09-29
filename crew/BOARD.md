@@ -102,10 +102,10 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22 |
-| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91 |
+| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
-| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26 |
+| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81 |
 | **R6 · Finish (1.0)** | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
 
 **The story it tells (D-44, "The Signal").** The relay on the mast went silent three weeks ago; the convoy never
@@ -163,6 +163,36 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-63 · Storms, the rabbit and the 240 (Jerry, 2026-09-29).** Storms bring 5 lightning strikes each: 1 in 50 a
+  strike sets a tree burning (the rain still damps it, D-60), 1 in 100 kills the zombies where it lands, and 1 in 200
+  hits the marine for 70 damage (he can live through it; at 70 HP or less it kills him). A pair of insulated boots
+  hidden on the map makes him immune. One out-of-the-way rabbit mound has bones and a skull round it; shoot it and a
+  white rabbit bursts out and takes his head off, unless he has our knockoff of the famous holy grenade, hidden on the
+  map, whose pin pull sets off an angelic choir: that one kills the rabbit (a badge). Both are new deaths to collect on
+  the tombstone (`lightning`, `rabbit`, D-31). The rabbit and the grenade are a nod, built, named and worded our own
+  way: no names or lines from the film. The build menu
+  gets the M240B beside the mortar, Jerry's brother's gun: tripod-mounted only, belt-fed, 1,000 rounds, carried and
+  placed like the mortar, fired only with the marine on it. Buying a mortar or a 240 comes with half its maximum ammo,
+  so the mortar gains an ammo count. CL-92, CL-93, CU-67, GP-81.
+- **D-62 · The horde fights the defences, and every kind has a weakness (Jerry, 2026-09-29).** Turrets make nights too
+  easy. Zombies go for what is shooting them: a turret that fires on a zombie draws it and its pack, and some kinds
+  (brutes, demons and a share of each push) ignore the marine and go straight for the defences, hitting builds harder.
+  Every kind gets a weakness and a resistance by damage type (bullet, pellet, fire, blast, blade, crush) in one
+  table, so each needs its own answer; P-26's brute plates become the table's first row, and the scouting report and
+  first-use cards name the counters. CL-91 (the table), GB-103, GB-104, GP-80.
+- **D-61 · The loadout: an Armory, holsters and magazines (Jerry, 2026-09-29).** A new HQ window, the Armory. Before
+  each day he fills four slots: two primaries slung on his back, one over each shoulder, and two secondaries in
+  cross-draw holsters under his arms. The base pistol is always on his hip holster, outside the four. Anything
+  handed in is stored, with its magazines, until he takes it out (for the run: D-30). The weapon wheel shows only
+  what he carries. He can holster everything and go unarmed, faster on foot (+10%; with Fleet foot, D-59, never
+  more than +30% in all). What he carries shows on him: mags in pouches, grenades, a bandolier for shotgun shells,
+  a belt for 40 mm, the bulky rest in his backpack, each in 3-4 stages from full to empty. Magazines become real:
+  R puts the magazine in the dump pouch on his belt with its rounds; a double tap drops it, much faster, and it is
+  lost unless picked up before the next dawn or dusk. The HUD shows each magazine and how full it is, and "spare"
+  becomes "mags", "shells" or "rounds" by gun. The shotgun and the launcher load round by round; the revolver uses
+  speed loaders. Akimbo is two of the same secondary, one in each holster (a second pistol can take a secondary
+  holster). Melee blades stay outside the slots; the chainsaw, the minigun and the flamer are primaries. CL-89 (the
+  spec, first), CU-64, CU-65, CU-66, GP-78, GP-79, CL-90.
 - **D-60 · Rain puts fires out (Jerry, 2026-09-29).** Today rain only shortens ground and tree fires and stops them
   spreading. From GB-102 it also reaches the rest: a burning zombie burns out faster in the wet and stops setting
   others alight; campfires sputter down to embers while it pours and come back after; the marine won't light up
@@ -549,6 +579,19 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **CU-64** **R3 · P-111.** The hip holster and going unarmed (D-61): the pistol draws from and goes back to the
+  holster on his leg; holster everything to go unarmed, +10% on foot (Fleet foot included, +30% at most). After CL-89.
+  Details: `docs/roadmap.md` P-111.
+- [ ] **CU-65** **R3 · P-113.** The Armory in the game (D-61): four slots (two primaries, two secondaries) plus the hip
+  pistol, storage that keeps guns and magazines for the run, the loadout applied before the day, the weapon wheel
+  showing only what he carries; per player (CU-63). After GP-78. Details: `docs/roadmap.md` P-113.
+- [ ] **CU-66** **R3 · P-114.** Magazines (D-61): each magazine tracked with its rounds; R stows it in the dump pouch,
+  a double tap drops it (faster; lost unless picked up before the next dawn or dusk); speed loaders for the revolver;
+  the shotgun and launcher round by round; akimbo; Quick hands (D-59) still counts. After CL-89. Details:
+  `docs/roadmap.md` P-114.
+- [ ] **CU-67** **R3 · P-121.** The M240B and mortar ammo (D-63): the 240 in the build menu beside the mortar, on its
+  tripod only, belt-fed, 1,000 rounds, carried and placed like the mortar and fired with the marine on it; the mortar
+  gets an ammo count; each comes with half its maximum. Details: `docs/roadmap.md` P-121.
 - [ ] **CU-62** **R3 · P-105.** Skills by doing (D-59): the plumbing. Perks out of the code (`PERKS`, `perkLevels`,
   `perkCost`, the shop rows; 18 call sites); a per-player `skills` store with `addSkillXp(player, key, n)` and
   `skillLvl`, reset in `resetGame`; `dmgMult`, `reloadMult`, `speedMult`, `cashMult`, `maxGrenades` and the blast
@@ -657,9 +700,14 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [ ] **GB-100** **R2 · P-103.** Co-op groundwork (D-58): the zombies and the director go for the nearest living
   player in `players`: the flow field from every player, attacks on whoever they reach, the guardian's progress to
   the nearest. One player plays the same. After CU-63. Details: `docs/roadmap.md` P-103.
+- [ ] **GB-103** **R2 · P-117.** The horde fights the defences (D-62): a turret firing on a zombie draws it and its
+  pack; brutes, demons and a share of each push go straight for the defences; builds take harder hits. nightsim with
+  turrets before and after. Details: `docs/roadmap.md` P-117.
 
 #### R3 · The day feeds the night
 
+- [ ] **GB-104** **R3 · P-119.** Every kind has a weakness, in combat (D-62): CL-91's table in `damageZombie`, with
+  GB-75's plates as its first row. nightsim medians before and after. After CL-91. Details: `docs/roadmap.md` P-119.
 - [ ] **GB-102** **R3 · P-109.** Rain puts fires out (D-60): burning zombies burn out faster and stop spreading in the
   wet; campfires sputter to embers and come back; no cigarette in the rain, a lit one goes out, no ember from a dropped
   butt (GP-74's idle, `studio/marine-idle.js`). nightsim on a rainy night before and after. Details:
@@ -737,6 +785,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **GP-78** **R3 · P-112.** The Armory window at the HQ (D-61): four slots to fill before the day, the stored guns
+  and magazines, a pure `game/armory.js` with unit tests. After CL-89. Details: `docs/roadmap.md` P-112.
+- [ ] **GP-79** **R3 · P-115.** Magazines on the HUD (D-61): an icon per magazine showing how full it is; "spare"
+  becomes "mags", "shells" or "rounds" by gun. After CU-66. Details: `docs/roadmap.md` P-115.
+- [ ] **GP-80** **R3 · P-120.** The counters in words (D-62): the scouting report and first-use cards name each kind's
+  weakness from CL-91's table. After CL-91. Details: `docs/roadmap.md` P-120.
 - [ ] **GP-76** **R3 · P-107.** Skills by doing (D-59): the kiosk loses the Perks tab; a skills panel (six rows, rank
   and progress) in the pause menu and on the death card; a "Fleet foot · rank 2" toast on `skill-up`; the strings,
   the streak boosts' new names, `ui/strings.test.mjs`. After CU-62. Details: `docs/roadmap.md` P-107.
@@ -775,6 +829,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R5 · Named nights and bigger systems
 
+- [ ] **GP-81** **R5 · P-124.** Two new deaths on the tombstone (D-63): `lightning` and `rabbit` in the death catalogue,
+  their lines and their unlock; the names and pickup lines for the boots and the grenade; a badge for killing the
+  rabbit. After CL-92, CL-93. Details: `docs/roadmap.md` P-124.
 - [ ] **GP-67** **R5 · P-60.** The board warns: "Fog Night", "The siege · they'll go for your walls". After GB-88.
   Details: `docs/roadmap.md` P-60.
 - [ ] **GP-68** **R5 · P-62.** "A colossus is walking the east trail" on the board; COLOSSUS DOWN from strings. After
@@ -860,6 +917,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R2 · The night has a shape
 
+- [ ] **CL-91** **R2 · P-118.** Every kind has a weakness (D-62): the table, each zombie kind by damage type, with its
+  counter named; P-26's plates as its first row. Before GB-104 and GP-80. Details: `docs/roadmap.md` P-118.
 - [ ] **CL-62** **R2.** The rest of the guardian through the studio: the chase, the walk-out and the throw as scenes
   and clips, until Jerry's notes say good. Carried over. After CL-64 (done).
 - [ ] **CL-69** **R2 · P-19.** The score follows the night's shape: a break in the breather, bridge and climax at the
@@ -874,6 +933,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **CL-89** **R3 · P-110.** The loadout spec (D-61): `docs/loadout.md`, the slots and which gun goes where, akimbo,
+  the Armory's storage, the magazine model, the holster key and the unarmed speed. First of the D-61 tasks. Details:
+  `docs/roadmap.md` P-110.
+- [ ] **CL-90** **R3 · P-116.** What he carries shows on him (D-61): primaries slung on his back, cross-draw holsters,
+  the hip pistol, mag pouches, grenades, a shell bandolier, a 40 mm belt, the backpack; 3-4 stages each; the draw and
+  holster moves through the studio. After CU-65. Details: `docs/roadmap.md` P-116.
 - [ ] **CL-88** **R3 · P-104.** Skills by doing (D-59): `docs/skills.md`, the spec: what counts for each of the six,
   the rank thresholds, the effects and caps, the reset on a fresh start, one set per player (D-58), and the new names
   for the streak's boosts. First of the D-59 tasks. Details: `docs/roadmap.md` P-104.
@@ -889,6 +954,13 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R5 · Named nights and bigger systems
 
+- [ ] **CL-92** **R5 · P-122.** Lightning in storms (D-63): 5 strikes a storm; 1 in 50 burns a tree, 1 in 100 kills the
+  zombies where it lands, 1 in 200 hits the marine for 70 (never under godmode); insulated boots hidden on the map
+  make him immune. Details: `docs/roadmap.md` P-122.
+- [ ] **CL-93** **R5 · P-123.** The rabbit mound (D-63): an out-of-the-way burrow with bones and a skull; shoot it and a
+  white rabbit takes the marine's head off. The one answer: our knockoff holy grenade, hidden on the map, an angelic
+  choir on the pin pull, and it kills the rabbit. Our own models, names, sounds and words. Details: `docs/roadmap.md`
+  P-123.
 - [ ] **CL-75** **R5 · P-63.** Survivor figures: unarmed, by the camp fire, then by the HQ. Details: `docs/roadmap.md`
   P-63.
 - [ ] **CL-76** **R5 · P-57.** Fog Night's fog: about 30 m, goggles or not; the night keeps its music arc. After
