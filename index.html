@@ -16969,7 +16969,7 @@
       { key: 'laser', name: 'Laser sight', desc: 'Aiming laser on every gun (Z). Tighter groups, easier tracking.', cost: 60 },
       { key: 'flashlight', name: 'Gun flashlight', desc: 'Weapon-mounted light (L). A cone of visibility at night.', cost: 45 }
     ];
-    const GEAR_NONE = () => ({ helmet: false, vest: false, pads: false, nvg: false, laser: false, flashlight: false });
+    const GEAR_NONE = () => ({ helmet: false, vest: false, pads: false, nvg: false, laser: false, flashlight: true });
     let gearOwned = GEAR_NONE();
     // --- Armor pool ---
     // Bought pieces add capacity; damage taken drains it. Armour soaks ARMOR_ABSORB of
@@ -19082,7 +19082,7 @@
             skullBag.count += 1; skullBag.value += c.value;
             updateSkullHud();
             publishUI('skull-pickup', { count: 1, value: c.value, carriedCount: skullBag.count, carriedValue: skullBag.value, ...(c.zip ? { zipped: true } : { recalled: true }) });
-            AudioSys.skullPickup();
+            if (c.zip) AudioSys.skullPickup();   // GP-85: a last-kill recall plays one chime for the batch, from the UI
             scene.remove(c.mesh);
             cashDrops.splice(i, 1);
           }
@@ -19353,6 +19353,8 @@
         shopRow('MedPen', medkits + ' / ' + MAX_MEDKITS + ' carried', 'Auto-injector. H to jab one: heals 60% of max health. Natural regen only ever climbs back to 40%.',
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
         for (const gr of GEAR) {
+          // D-68: the gun light comes with every weapon. It is not for sale.
+          if (gr.key === 'flashlight') continue;
           const owned = !!gearOwned[gr.key], price = equipmentPrice(gr.cost, day);
           // Jerry: an add-on stays off the list until what it fits on is bought.
           if (!owned && gr.needs && !gearOwned[gr.needs]) continue;
@@ -27130,7 +27132,7 @@
         if (comboNumEl) comboNumEl.textContent = combo + '×';
         const m = comboMult();
         const power = combo >= 30 ? 'thick skin' : combo >= 20 ? 'free rounds' : combo >= 10 ? 'quick hands' : combo >= 5 ? 'fast feet' : '';
-        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' skull value · ' + power + (streakHealHp() ? ' · kills heal' : '')) : '';   // GB-74
+        if (comboMultEl) comboMultEl.textContent = m > 1 ? ('x' + m + ' skull value · ' + power + (streakHealHp() ? dwText('streak.healSuffix') : '')) : '';   // GB-74; the words are ChatGPT's (streak.healSuffix)
         if (comboBarEl) comboBarEl.style.transform = 'scaleX(' + Math.max(0, comboT / COMBO_WINDOW).toFixed(3) + ')';
       }
     }
@@ -32550,7 +32552,7 @@
         const ammoLabel = Number.isFinite(ammo) ? Math.ceil(ammo) : '∞';
         const res = reserveOf(currentWeapon);
         if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
-        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' spare';
+        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' Bullets';
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
