@@ -102,7 +102,7 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CU-51, CU-59, AG-22 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-61, AG-22 |
 | **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
 | **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26 |
@@ -163,6 +163,15 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-58 · Co-op for up to 4 players, one player hosts (Jerry, 2026-09-29).** The host's game runs everything it runs
+  today: the zombies, the waves, the director, Cash and the builds. The other players send their movement and shots
+  to the host, and the host sends back where everything is. Not lockstep: the game rolls about 950 dice a run, so
+  two copies can't be kept identical. The networking comes after 1.0, as its own phase (R7), through the D-57
+  desktop app (it can host a game; a browser page can't). The groundwork starts now, in R2: the game learns to
+  hold a list of players instead of one marine (CL-87, CU-61, GB-100), and plays exactly the same with one. From
+  CU-61 on, the rule for everyone: new game logic asks the players list (`nearestPlayer`, `players`), never
+  `player.position`; only the local view (camera, HUD, sound, culling) and the marine's own movement read him
+  directly. `tools/check-players.mjs` holds the line. No React or other rewrite: the game stays one HTML module.
 - **D-57 · 1.0 ships as a desktop app, not a zip (Jerry, 2026-09-27).** The game stays what it is (one HTML
   module, three.js on WebGPU, no build step); the package wraps it in a desktop shell, Tauri (WebView2, a small
   download) or Electron (bundled Chromium, the safest WebGPU), so the player gets an `.exe` with an icon, a window
@@ -518,6 +527,10 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [ ] **CU-51** **R2 · P-13.** R2 measured: nightsim medians for the new shape, bench fps with 48 and 8 reacting.
   After GB-73; after GB-66. Details: `docs/roadmap.md` P-13.
+- [ ] **CU-61** **R2 · P-102.** Co-op groundwork (D-58): the players list. `players = [localPlayer]`, `nearestPlayer`,
+  and every game-logic read of `player.position` moved onto them; the local view and his own movement stay. The
+  game plays exactly the same; `tools/check-players.mjs` fails if the direct reads grow; `TT.addDummyPlayer()` for
+  tests. After CL-87. Details: `docs/roadmap.md` P-102.
 
 #### R3 · The day feeds the night
 
@@ -621,6 +634,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [ ] **GB-97** **R2 · P-55.** The director says when a night is over: `dw-game` `'night-cleared'` `{ day, kind, runId }`
   at dawn, once a night (`kind`: plain, blood-moon, guardian, fog, siege, colossus). The badges' fact (GP-65);
   small. `docs/contracts.md`, lifetime badges.
+- [ ] **GB-100** **R2 · P-103.** Co-op groundwork (D-58): the zombies and the director go for the nearest living
+  player in `players`: the flow field from every player, attacks on whoever they reach, the guardian's progress to
+  the nearest. One player plays the same. After CU-61. Details: `docs/roadmap.md` P-103.
 
 #### R3 · The day feeds the night
 
@@ -818,6 +834,9 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   `docs/roadmap.md` P-20.
 - [ ] **CL-71** **R2 · P-21.** Late Ember and Guardian tiers, so nights 16 and 18 stop reusing nights 4 and 6. After
   CL-70. Details: `docs/roadmap.md` P-21.
+- [ ] **CL-87** **R2 · P-101.** Co-op groundwork (D-58): `docs/coop.md`, the contract for "a player" (what each one
+  owns, what is shared), the players-list API CU-61 builds, the three kinds of `player.position` read, and a first
+  sketch of the host's messages for R7. Before CU-61. Details: `docs/roadmap.md` P-101.
 
 #### R3 · The day feeds the night
 

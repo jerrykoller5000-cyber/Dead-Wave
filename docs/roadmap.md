@@ -15,11 +15,12 @@ root.
 | Phase | Items | What it gets the player | Jerry's play at the end |
 | --- | --- | --- | --- |
 | R1 · Trust the loop, and feel it | P-1 to P-15, P-70 to P-77 | Skulls reach the bag, building says what it does, the dead react when they're hit, and the marine gets knocked around. | A fresh run to night 5, and his notes in the motion lab. |
-| R2 · The night has a shape | P-16 to P-33 | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. |
+| R2 · The night has a shape | P-16 to P-33, P-101 to P-103 | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. |
 | R3 · The day feeds the night | P-34 to P-49 | The relay, then one call a day. Caches restock, drums burn, you vault your walls. Guns arrive by act at fixed prices, one mod each. | Days 1-10 fresh. |
 | R4 · The way out | P-50 to P-55, P-78, P-86 | The boat at night 20, a victory screen and badges. The relay tells the story. | A run to the boat, and a win. |
 | R5 · Named nights and bigger systems | P-56 to P-68, P-94 to P-98 | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, and the secret. | Nights 12-20 from the debug start, and the secret. |
 | R6 · Finish (1.0) | P-79 to P-93, P-99 | Balance from medians, the first hour teaching itself, sound, readability, green tests, the budgets, the package. | Three full runs, then the release. |
+| R7 · Co-op (after 1.0) | Written when R6 closes | Up to 4 players, one hosting (D-58). | A night with friends. |
 
 Every item is a task on the board; the table at the end maps them. Most are one agent session.
 
@@ -200,6 +201,9 @@ something behind.
 | P-31 | The death card shows "Best: Night 9 · 1,204 kills · streak 31" with NEW on beaten numbers, plus "Skulls banked". The title shows his best run. | New `ui/records.js` in coach.js's style, key `tt_best_run {version,day,kills,streak,headshots,skulls,runs,evacuated}`. Written from `endGame` (`30898-30960`) and `quitToMenu` (`37613`). Labels (`30918`) move to `ui/strings.js:924-927`. `matchStats.skullsTurnedIn` reset in `resetGame` (`37773`). | ChatGPT | S | Claude's D-30 reading | `node --test ui/records.test.mjs` (maxima, NEW, corrupt or throwing storage). Browser: die on night 2, see Best with NEW; after a reload the title shows night 2. Antigravity shots at 1280 and 390 px. |
 | P-32 | The first guardian catch of a run can be escaped: five E presses during the haul, at a cost of 50 HP and the unbanked skull bag. A second catch, a walk-in or the pit still kill. | Since CL-64 the drag is the studio scene `guardian-grab-drag` (`startGrabScene` / `updateGrabScene` / `endGrabScene` in index.html; the old procedural haul is only the fallback): count E while `sk.scene` hauls (and in the fallback haul), never Space (Space, Enter and Esc skip the scene). Break free with `endGrabScene` first (the scene's `dispose()` hands the guardian and marine back exactly as they were), then clean up as `abortScriptedKill` does. Zero `skullBag` with a receipt. `escape` phase. Line numbers moved with CL-64: find them by name. | Grokbot | S | D-46 | tNN: the escape leaves `scriptedKill` null, not game over, HP at least 1, the bag at 0 and `escape` published; a second catch ends as `caveguard`. t36, t37, t59 and t79 pass (`--review`). |
 | P-33 | "Kick free! (E)" during the haul, then "It took your skulls." | Coach and prompt on the `escape` phase; copy in strings. | ChatGPT | S | P-32 | Unit test. Antigravity shot. |
+| P-101 | Nothing yet (co-op groundwork, D-58). | `docs/coop.md`: what "a player" is and owns (position, health, armour, guns and ammo, skull bag, input, his rig and camera) and what is shared (Cash, the bank, builds, the night). The players-list API: `players`, `localPlayer`, `nearestPlayer(x, z, {alive})`, `playerById`. The three kinds of `player.position` read: the local view (camera, HUD, sound listener, fog cull, LOD) stays local; game logic (damage, pickups, triggers, AI targets, caves, objectives, scripted kills) goes through the list; his own movement stays. A first sketch of R7: the host runs the game, clients send input and shots, the host sends snapshots (positions quantised, 10-20 a second; animation and ragdolls stay cosmetic on each machine). | Claude | S | D-58 | Jerry reads it; Cursor can build CU-61 from it without questions. |
+| P-102 | Nothing visible: the game plays exactly the same with one player. | `players = [localPlayer]` beside the existing `player`; about 528 `player.position` reads sorted by P-101's three kinds, the game-logic ones moved onto `players` / `nearestPlayer`. `tools/check-players.mjs` counts the direct reads outside the allowed places and fails if the count grows (run by `npm test`). `TT.addDummyPlayer(x, z)` adds a standing second marine to the list for tests (drawn as a plain marine, no input). | Cursor | M | P-101 | Every test green, unchanged. `check-players` passes and fails on a planted read. A tNN: a dummy player standing on a skull does not pick it up for the marine; one standing in a cave mouth trips its trigger. Antigravity: a night 5 run plays as before. |
+| P-103 | Nothing visible with one player. With a dummy second one, the horde splits between them. | `updateFlowFields` seeds from every living player (a multi-source field); targeting (`tx, tz`), melee reach and `damagePlayer` take the player reached; the guardian's D-13 progress measures to the nearest; the director's distances to the nearest. | Grokbot | S | P-102 | A tNN with `TT.addDummyPlayer` 40 m away: zombies spawned beside each go for that one; one player alone plays as before (t98, t99, t100 unchanged). |
 
 ### R3 · The day feeds the night
 
@@ -294,6 +298,15 @@ errors, and every test is green. The showcase build, then the release.
 | P-93 | The marine's own animation through the studio (the walk, the run, the reload), now that the guardian's is done. | UAL references retargeted onto the marine rig; clips as data; review folders. | Claude | M | CL-62 | Jerry's "good" on each folder. |
 | P-100 | The shotgun earns its place against spiders on a wall: a small, spider-only edge (a slightly tighter spread or more pellet damage on spiders), measured before and after. | Jerry's "use your best judgement" (2026-09-26, 23:01 CT) on Grokbot's open call. Pellet damage or spread is scaled for `spider` targets only, in the shotgun's hit path; nothing else changes. Numbers from nightsim: spiders killed per shell on nights 8-12 before and after. | Grokbot | S | GB-59 (the 48 cap, so the night-12 wall fight is real) | tNN: a shell at a wall spider does at least 20% more than today; a shell at a shambler does the same as today. t80 and t46 pass. |
 | P-99 | The guardian's final fight has its own music. | A sectioned boss track through the director. | Claude | S | P-97 | t61; Jerry listens. |
+
+### R7 · Co-op, up to 4 players (after 1.0)
+
+Goal (D-58): friends join the host's game from the desktop app and fight the night together. The host's game
+runs the zombies, the waves, Cash and the builds; the others send their movement and shots and draw what the host
+sends back. Tasks are written when R6 closes, in this order: a second marine on the same machine as a test; two
+machines in sync (the marines and the horde); shooting, damage, builds, Cash and the waves; hosting and joining
+in the desktop app (by address or through a small relay); then the scripted moments (a catch, the boat) decided
+one by one. The groundwork is P-101 to P-103 in R2.
 
 **Load and slip order.**
 - **Grokbot has 29 items and is the bottleneck.** In each milestone his fixes come first. If his lane falls behind, these slip first, in order: P-5, P-8 (hand it to ChatGPT as copy), P-48, P-23 (event plumbing Claude may move to Cursor), P-61.
@@ -649,3 +662,6 @@ Every item is a task in `crew/BOARD.md` (Queues). Tasks with no P-id: GB-59 (Bro
 | P-98 | GB-93 | R5 |
 | P-99 | CL-85 | R6 |
 | P-100 | GB-96 | R2 |
+| P-101 | CL-87 | R2 |
+| P-102 | CU-61 | R2 |
+| P-103 | GB-100 | R2 |
