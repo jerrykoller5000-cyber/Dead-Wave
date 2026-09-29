@@ -1,15 +1,19 @@
 # ChatGPT
 
-state: blocked
-model: GPT-ASTRA 6 (High)
-task: GP-72 Check final copy-pass dependency: roadmap P-82 requires R5
-touching: —
-since: 2026-09-27T17:57Z
+state: active
+model: GPT-6 (Codex; exact variant unavailable)
+task: GP-85 Skull recall arrival chime and count notice
+touching: ui/skull-recall.js, ui/skull-recall.css, ui/skull-recall.test.mjs, ui/skull-recall.browser.mjs, ui/strings.js
+since: 2026-09-29T08:28Z
 next: GP-73 R6 · P-83. Credits: Jerry, the crew, Quaternius (CC0), the m
-blocked-on: P-82 requires R5 content before the final copy pass; lead asked to clarify the queue dependency
-last-report: handoffs/2026-09-27-chatgpt-GP-72.md
+blocked-on: —
+last-report: handoffs/2026-09-29-chatgpt-GP-75.md
 
 ## Notes
+
+2026-09-29: GP-75 Jerry direct Marine omni roll implemented, report handoffs/2026-09-29-chatgpt-GP-75.md. The existing camera-relative burst remains; a direction-aligned tumble now gives forward/back opposite somersaults, left/right cartwheels and four diagonal blends. Aim turns do not redirect the fixed world travel. 4 new +16 prior studio/idle tests PASS. Actual WebGPU eight-direction pose+physical travel, complete side recovery/cooldown PASS, zero page errors, native before/after shots and short perf saved under Claude outputs/shots/gp75. Legacy motion browser checker timed out before TT setup; npm/standard shoot/48-zombie independent checks remain with crew. Cursor/Claude/Antigravity requested; no git. Roadmap halt still applies to queued work.
+
+2026-09-29: GP-74 Jerry direct Marine idle implemented and handed off for review. New studio/marine-idle.js + tests/browser runner; scoped index pose/reset/fire hooks. 5s bored, 25s pack, 4s extraction/light then 60s lit cigarette with repeats; actions cancel, movement drops tiny cosmetic fire/char. 6 new tests + 10 scene + 165 UI pass, real WebGPU integration and shots pass with zero page errors. Standard shoot reproduced CDP Page.enable timeout; npm not run per AGENTS. Full suite/standard comparison/48-zombie certification and independent eyes requested from crew; no done tick until cleared. Report handoffs/2026-09-29-chatgpt-GP-74.md. No git; concurrent CU-60 kiosk/revolver edits preserved. Roadmap halt still applies to all other tasks.
 
 2026-09-27 latest: GP65 live + t37 correction checked out --review, GP71 quiet key guides/controls/Tips checked out.165 UI tests PASS. GP72 intake BLOCKED: roadmap P82 explicitly Needs R5; mission stillR1 and future content unfinished, lead requested dependency clarification. GP73 credits remains queued. GB74 copy DONE during GP71, streak.healSuffix supplied to Grokbot for his combat line. Full t37/npm/shots/audio/GPU/performance stay committer/Antigravity. GP65 missing publishers/CU59 use approved defaults; no old badge-contract blocker remains. No git.
 

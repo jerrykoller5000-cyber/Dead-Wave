@@ -1,6 +1,7 @@
 // t102 - CU-61 (Jerry direct): the CIF at the HQ swaps the marine's camo, free. E at the window
 // opens it; every pattern is a button; a click repaints the shared uniform tile, costs nothing,
 // and is remembered; E closes it. M81 Woodland (what he was built in) is the default.
+// Claude 2026-09-29: Jerry's second sheet, 9 more patterns and 25 plain colours (49 in all).
 (async () => {
   const T = window.TT; const out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -17,7 +18,8 @@
     const el = document.getElementById('cif'), list = document.getElementById('cifList');
     ok(T.isCIFOpen() && el.classList.contains('show') && T.getPhase && true, 'the CIF opens');
     const buttons = [...list.querySelectorAll('button[data-camo]')];
-    ok(buttons.length === 15, 'fifteen patterns (' + buttons.length + ')');
+    ok(buttons.length === T.CAMO_KEYS.length && buttons.length === 49, 'every pattern and colour, 49 (' + buttons.length + ')');
+    ok([...list.children].some((e) => e.classList.contains('cif-group')), 'the plain colours have their heading');
     ok(buttons.find((b) => b.dataset.camo === 'm81').classList.contains('on'), 'M81 is marked as worn');
     ok(document.getElementById('cifTitle').textContent.includes('CIF'), 'titled CIF');
     const bank0 = T.getBank(), before = sample();
@@ -28,7 +30,7 @@
     let saved = null; try { saved = localStorage.getItem('tt_camo'); } catch (_) {}
     ok(saved === 'dcu', 'remembered between runs (' + saved + ')');
     for (const k of T.CAMO_KEYS) { buttons.find((b) => b.dataset.camo === k).click(); }
-    ok(T.getCamo() === 'cadpat' && T.getBank() === bank0, 'every pattern can be worn, all free');
+    ok(T.getCamo() === T.CAMO_KEYS[T.CAMO_KEYS.length - 1] && T.getBank() === bank0, 'every pattern can be worn, all free');
     buttons.find((b) => b.dataset.camo === 'm81').click(); await wait(20);
     ok(T.getCamo() === 'm81' && sample() === before, 'back to M81: the original tile, pixel for pixel');
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyE', key: 'e' }));

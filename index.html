@@ -582,6 +582,7 @@
     #cifList button b { font-size: 10px; font-weight: 600; opacity: .7; }
     #cifList button.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
     #cifList button.on b { color: var(--accent); opacity: 1; }
+    #cifList .cif-group { grid-column: 1 / -1; margin-top: 8px; font-family: var(--font-hud); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
     #cif .modes { display: flex; margin-top: 14px; }
     #cif .modes button {
       pointer-events: auto; cursor: pointer; border: 0; flex: 1;
@@ -1094,7 +1095,7 @@
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
     } from './core/math.js';
     import { addCast, rbox, rmesh, mergeParts, boxProjectUV } from './core/geometry.js';
-    import { CAMO_KEYS, CAMO_DEFAULT, isCamoKey, paintCamo } from './core/camo.js';
+    import { CAMO_KEYS, CAMO_SOLID_KEYS, CAMO_DEFAULT, isCamoKey, paintCamo } from './core/camo.js';
     import { AudioSys } from './core/audio.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
@@ -1111,6 +1112,8 @@
     import { cacheIntel, restockRows, drawCacheMarks } from './ui/cache-intel.js';
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
+    import { createMarineIdle } from './studio/marine-idle.js';
+    import { rollTravel, rollAxisLocal } from './studio/marine-roll.js';
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
     import { presets as MotionPresets } from './studio/motion/index.js';   // GB-65 (D-42): the reaction presets
     import * as PitArms from './world/pit-tentacles.js';
@@ -15334,8 +15337,6 @@
       return t;
     }
     const camoTex = makeCamoTexture();
-    const uniformMat = new THREE.MeshStandardMaterial({ color: 0xe2ded0, map: camoTex, roughness: 0.95, metalness: 0.02 });
-    const trouserMat = new THREE.MeshStandardMaterial({ color: 0xd2cebd, map: camoTex, roughness: 0.95, metalness: 0.02 });
     // CU-61: the CIF swaps camo by repainting this one canvas (the shirt, trousers and helmet
     // cover all read it), so a swap adds no material and no draw. M81 Woodland is the tile
     // painted above, copied so he can go back to it. The pick is remembered between runs.
@@ -15368,6 +15369,8 @@
       return true;
     }
     try { const saved = localStorage.getItem(CAMO_STORE); if (saved && saved !== CAMO_DEFAULT) setCamo(saved, false); } catch (_) { /* no storage */ }
+    const uniformMat = new THREE.MeshStandardMaterial({ color: 0xe2ded0, map: camoTex, roughness: 0.95, metalness: 0.02 });
+    const trouserMat = new THREE.MeshStandardMaterial({ color: 0xd2cebd, map: camoTex, roughness: 0.95, metalness: 0.02 });
     const coverMat = new THREE.MeshStandardMaterial({ color: 0xd8d6c4, map: camoTex, roughness: 0.9, metalness: 0.05 });
     const carrierMat = new THREE.MeshStandardMaterial({ color: 0x4c5138, roughness: 0.88, metalness: 0.06 });   // ranger green
     const webMat = new THREE.MeshStandardMaterial({ color: 0x2f3326, roughness: 0.9, metalness: 0.04 });
@@ -15855,8 +15858,9 @@
     // --- Dodge roll ---
     // V: a short tumble in the direction you're moving (or facing). You can't shoot
     // during it, but nothing can hurt you either.
-    let rollT = 0, rollCd = 0, rollDirX = 0, rollDirZ = 0, rollYawRel = 0;
+    let rollT = 0, rollCd = 0, rollDirX = 0, rollDirZ = 0;
     const ROLL_DUR = 0.52;
+    const rollTumbleAxis = new THREE.Vector3(1, 0, 0);
 
     // --- Crouch ---
     // Hold C: slower, lower profile, tighter grouping — trade speed for a smaller
@@ -15869,14 +15873,10 @@
       if (rollT > 0 || rollCd > 0 || placeMode || buildMode || mortarMounted) return;
       const forward = (keys.ArrowUp || keys.KeyW ? 1 : 0) + (keys.ArrowDown || keys.KeyS ? -1 : 0);
       const strafe = (keys.ArrowLeft || keys.KeyA ? 1 : 0) + (keys.ArrowRight || keys.KeyD ? -1 : 0);
-      // Screen-relative like walking; with no direction held, roll the way you face.
-      const fx = Math.sin(camYawCurrent), fz = Math.cos(camYawCurrent);
-      const rx = Math.cos(camYawCurrent), rz = -Math.sin(camYawCurrent);
-      let dx = fx * forward + rx * strafe, dz = fz * forward + rz * strafe;
-      let len = Math.hypot(dx, dz);
-      if (len < 1e-6) { dx = Math.sin(aimYaw); dz = Math.cos(aimYaw); len = 1; }
-      rollDirX = dx / len; rollDirZ = dz / len;
-      rollYawRel = _wrapAngle(Math.atan2(rollDirX, rollDirZ) - aimYaw);
+      // Capture the same screen-relative direction used by ordinary walking.
+      // With no movement key, roll along the current aim line.
+      const travel = rollTravel(forward, strafe, camYawCurrent, aimYaw);
+      rollDirX = travel.x; rollDirZ = travel.z;
       rollT = ROLL_DUR;
       rollCd = ROLL_DUR + (gearOwned.pads ? 0.5 : 0.8);
       spawnDust(player.position.x, sampleHeight(player.position.x, player.position.z), player.position.z, 3);
@@ -16085,6 +16085,28 @@
       return cur + (target - cur) * (1 - Math.exp(-rate * dt));
     }
 
+    // GP-74: a cosmetic idle layer; all action poses retain priority.
+    const marineIdle = createMarineIdle({ THREE, marine, scene,
+      solveArm: (side, target) => solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],
+        side === 'R' ? _HAND_R : _HAND_L, target, side === 'R' ? _POLE_R : _POLE_L, 1),
+      smoke: (...args) => spawnSmokePuff(...args), ground: (x, z) => sampleHeight(x, z),
+      ignite: (x, z) => spawnGroundFire(x, z, false, 0, true)
+    });
+    let marineIdleInput = false;
+    for (const event of ['keydown', 'pointerdown', 'pointermove', 'wheel']) {
+      window.addEventListener(event, () => { marineIdleInput = true; }, { passive: true });
+    }
+    function updateMarineIdle(dt) {
+      marineIdle.step(dt, {
+        eligible: gameStarted && !gameOver && !won && !scriptedKill && !marineInsertion && !menuCamera.deploying &&
+          !shopOpen && !playerSwimming && !climbingTower && !mortarMounted && !mortarCarried && !marineDown(),
+        active: marineIdleInput || Object.values(keys).some(Boolean) || Math.hypot(velX, velZ) > .08 || !grounded ||
+          mouseFireHeld || zoomHeld || reloading || knifeAnimT > 0 || gestureT > 0 || hitReaction.time > 0 ||
+          rollT > 0 || crouching || buildMode || placeMode || wheelIsOpen(),
+        paused
+      });
+      marineIdleInput = false;
+    }
     let playerDeathT = 0;
     function updateMarinePose(dt, moving, running, swimming) {
       restoreMarineAnim();   // GB-67 follow-up: last frame's animation, not his body's pose
@@ -16137,7 +16159,9 @@
       // Holster whatever gun is equipped while swimming — tryFire is already gated on
       // playerSwimming so it can't actually be fired, but it was still visibly dangling
       // from your hand the whole time you were paddling.
-      weaponMount.visible = !swimming && !mortarMounted && !mortarCarried;
+      const smokingIdle = marineIdle.state.phase === 'pack' || marineIdle.state.phase === 'smoking';
+      weaponMount.visible = !swimming && !mortarMounted && !mortarCarried && !smokingIdle;
+      offhandMount.visible = akimboOn() && weaponMount.visible;
 
       // NVG flip animation
       const nvgTarget = nvgDown ? 1 : 0;
@@ -16501,7 +16525,13 @@
         const u = 1 - rollT / ROLL_DUR;
         const spin = (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2) * Math.PI * 2;
         const tuck = Math.sin(Math.min(1, u * 1.25) * Math.PI);
-        rollPivot.rotation.set(spin, rollYawRel, 0, 'YXZ');
+        // Tumble about an axis across travel while keeping the torso facing aim.
+        // Forward/backward somersault; left/right cartwheel; diagonals mix both.
+        // Recompute against current aim so a mouse turn cannot bend the visible roll
+        // away from the world-space direction captured at takeoff.
+        const axis = rollAxisLocal(rollDirX, rollDirZ, aimYaw);
+        rollTumbleAxis.set(axis.x, 0, axis.z);
+        rollPivot.quaternion.setFromAxisAngle(rollTumbleAxis, spin);
         marine.rotation.x = 0;
         if (lower) lower.rotation.y = 0;
         if (torso) { torso.rotation.set(0.55 * tuck, 0, 0); }
@@ -16519,7 +16549,7 @@
         if (elbowR) elbowR.rotation.x = ELBOW_R_BASE.x - 0.8 * tuck;
         // Pull the ball down toward the ground while airborne mid-spin.
         marine.position.y = -ROLL_PIVOT_Y + 0.02 - 0.16 * tuck;
-      } else if (rollPivot.rotation.x !== 0 || rollPivot.rotation.y !== 0) {
+      } else if (rollPivot.rotation.x !== 0 || rollPivot.rotation.y !== 0 || rollPivot.rotation.z !== 0) {
         rollPivot.rotation.set(0, 0, 0, 'XYZ');
       }
     }
@@ -16806,7 +16836,7 @@
       pistol:   { name: 'Pistol',   maxAmmo: 12,  reload: 1.35, interval: 0.28,   damage: 24, speed: 75,  range: 40,  spin: false, auto: true },
       uzi:      { name: 'Uzi',      maxAmmo: 32,  reload: 1.4,  interval: 1 / 14, damage: 11, speed: 80,  range: 35,  spin: false, auto: true },
       shotgun:  { name: 'Shotgun',  maxAmmo: 8,   reload: 1.6,  interval: 0.7,    damage: 9,  speed: 60,  range: 22,  spin: false, auto: false, pellets: 7, spread: 0.14 },
-      revolver: { name: 'Revolver', maxAmmo: 6,   reload: 1.8,  interval: 0.45,   damage: 52, speed: 80,  range: 50,  spin: false, auto: false, spread: 0.02 },
+      revolver: { name: 'Revolver', maxAmmo: 6,   reload: 1.8,  interval: 0.45,   damage: 52, speed: 80,  range: 50,  spin: false, auto: false, spread: 0.02, pierce: 2 },
       // pierce: how many extra bodies the round carries on through after the first.
       // 3 means it can kill four zombies lined up, each one costing PIERCE_FALLOFF.
       sniper:   { name: 'Sniper',   maxAmmo: 5,   reload: 2.35, interval: 0.9,    damage: 92, speed: 130, range: 125, spin: false, auto: false, spread: 0.004, pierce: 3 },
@@ -18754,6 +18784,34 @@
       const button = cyl(0.12, 0.13, 0.1, buttonMat, 0, 1.28, 0.27, 16, panel); button.rotation.x = Math.PI / 2;
       box(0.34, 0.34, 0.04, hazard, 0, 1.28, 0.23, panel);
       for (const sx of [-0.3, 0.3]) box(0.05, 0.22, 0.05, steelDark, sx, 1.0, 0.27, panel);
+      // --- CU-61: the CIF on the south face, west of the mural, mirroring the start panel: a
+      // hatch with uniforms on a rail inside and a stencilled plate over it.
+      {
+        const cif = new THREE.Group(); cif.position.set(HQ_CIF_X, 0, PZ); cif.rotation.y = Math.PI; g.add(cif);
+        box(1.22, 1.14, 0.02, new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 1 }), 0, 1.65, 0.03, cif);   // the dark back
+        box(1.5, 0.16, 0.3, steelDark, 0, 2.3, 0.05, cif);                                   // lintel
+        box(1.5, 0.14, 0.42, hazard, 0, 1.02, 0.12, cif);                                    // counter
+        for (const sx of [-0.68, 0.68]) box(0.14, 1.42, 0.3, steelDark, sx, 1.63, 0.05, cif);
+        box(1.1, 0.03, 0.03, steel, 0, 2.12, 0.07, cif);                                     // hanging rail
+        for (const [i, col] of [0x5f6c3b, 0xc2a67a, 0x8e8f88, 0x6c7550, 0xb09a74].entries()) {
+          const x = -0.44 + i * 0.22;
+          box(0.17, 0.44, 0.04, new THREE.MeshStandardMaterial({ color: col, roughness: 0.95 }), x, 1.84, 0.07, cif);
+          box(0.02, 0.1, 0.02, steel, x, 2.07, 0.07, cif);
+        }
+        const cv = document.createElement('canvas'); cv.width = 256; cv.height = 96;
+        const c2 = cv.getContext ? cv.getContext('2d') : null;
+        if (c2) {
+          c2.fillStyle = '#1d2126'; c2.fillRect(0, 0, 256, 96);
+          c2.fillStyle = '#e3b62b'; c2.textAlign = 'center'; c2.textBaseline = 'middle';
+          c2.font = 'bold 56px Impact, "Arial Black", sans-serif'; c2.fillText(dwText('cif.title'), 128, 40);
+          c2.font = 'bold 15px Arial, sans-serif'; c2.fillText(dwText('cif.subtitle').toUpperCase(), 128, 80);
+        }
+        const signTex = new THREE.CanvasTexture(cv);
+        if (THREE.SRGBColorSpace) signTex.colorSpace = THREE.SRGBColorSpace;
+        const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.44, 0.54),
+          new THREE.MeshStandardMaterial({ map: signTex, emissiveMap: signTex, emissive: 0xffffff, emissiveIntensity: 0.45, roughness: 0.6 }));
+        sign.position.set(0, 2.68, 0.06); cif.add(sign);
+      }
       // Lamps, for night.
       const hqLight = new THREE.PointLight(0xffe2b0, 0, 12, 2); hqLight.position.set(0, 3.2, -(W + 1.2)); g.add(hqLight);
       g.visible = false;
@@ -18783,34 +18841,6 @@
     // house sits on the build lattice: it collides as its real square footprint (not
     // the 3 m circle it used to be), and a wall you build beside it lands flush against
     // it. It stands in every mode; see house.present.
-      // --- CU-61: the CIF on the south face, west of the mural, mirroring the start panel: a
-      // hatch with uniforms on a rail inside and a stencilled plate over it.
-      {
-        const cif = new THREE.Group(); cif.position.set(HQ_CIF_X, 0, PZ); cif.rotation.y = Math.PI; g.add(cif);
-        box(1.22, 1.14, 0.02, new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 1 }), 0, 1.65, 0.03, cif);   // the dark back
-        box(1.5, 0.16, 0.3, steelDark, 0, 2.3, 0.05, cif);                                   // lintel
-        box(1.5, 0.14, 0.42, hazard, 0, 1.02, 0.12, cif);                                    // counter
-        for (const sx of [-0.68, 0.68]) box(0.14, 1.42, 0.3, steelDark, sx, 1.63, 0.05, cif);
-        box(1.1, 0.03, 0.03, steel, 0, 2.12, 0.07, cif);                                     // hanging rail
-        for (const [i, col] of [0x5f6c3b, 0xc2a67a, 0x8e8f88, 0x6c7550, 0xb09a74].entries()) {
-          const x = -0.44 + i * 0.22;
-          box(0.17, 0.44, 0.04, new THREE.MeshStandardMaterial({ color: col, roughness: 0.95 }), x, 1.84, 0.07, cif);
-          box(0.02, 0.1, 0.02, steel, x, 2.07, 0.07, cif);
-        }
-        const cv = document.createElement('canvas'); cv.width = 256; cv.height = 96;
-        const c2 = cv.getContext ? cv.getContext('2d') : null;
-        if (c2) {
-          c2.fillStyle = '#1d2126'; c2.fillRect(0, 0, 256, 96);
-          c2.fillStyle = '#e3b62b'; c2.textAlign = 'center'; c2.textBaseline = 'middle';
-          c2.font = 'bold 56px Impact, "Arial Black", sans-serif'; c2.fillText(dwText('cif.title'), 128, 40);
-          c2.font = 'bold 15px Arial, sans-serif'; c2.fillText(dwText('cif.subtitle').toUpperCase(), 128, 80);
-        }
-        const signTex = new THREE.CanvasTexture(cv);
-        if (THREE.SRGBColorSpace) signTex.colorSpace = THREE.SRGBColorSpace;
-        const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.44, 0.54),
-          new THREE.MeshStandardMaterial({ map: signTex, emissiveMap: signTex, emissive: 0xffffff, emissiveIntensity: 0.45, roughness: 0.6 }));
-        sign.position.set(0, 2.68, 0.06); cif.add(sign);
-      }
     const HOUSE_SCALE = 1;
     house.radius = HQ_HALF + 0.5;               // "near the HQ" checks
     house.half = HQ_HALF;                       // the footprint: a 10 m square
@@ -19377,10 +19407,15 @@
           row.insertBefore(pipEl, row.querySelector('button'));
         }
       } else if (shopTab === 'fortify') {
+        // Jerry: only the tiers he owns and the one straight after them. Tier 0 is the piece's
+        // own build blueprint (window mesh hangs on the window), so a track shows nothing until
+        // that is bought.
         for (const track of Object.keys(UPGRADE_TRACKS)) {
+          if (!buildUnlocked[track === 'bars' ? 'window' : track]) continue;
           const tr = UPGRADE_TRACKS[track], have = upgradeOwned[track] | 0;
           for (let t = 1; t < tr.names.length; t++) {
             const owned = have >= t, next = have + 1 === t, price = tr.bp[t];
+            if (!owned && !next) continue;
             let stat = '';
             if (tr.hp) stat = ' ' + (track === 'door' ? '+' + tr.hp[t] + ' toughness on the wall it hangs in' : (tr.hp[t] + ' toughness (from ' + tr.hp[0] + ')')) + '.';
             else if (track !== 'bars') stat = ' Damage \u00d7' + TURRET_TIER.dmg[t] + ', reach \u00d7' + TURRET_TIER.range[t] + ', fire rate \u00d7' + (1 / TURRET_TIER.interval[t]).toFixed(2) + ', toughness \u00d7' + TURRET_TIER.hp[t] + '.';
@@ -19406,15 +19441,10 @@
       updateCoinHud();
       return true;
     }
-        // Jerry: only the tiers he owns and the one straight after them. Tier 0 is the piece's
-        // own build blueprint (window mesh hangs on the window), so a track shows nothing until
-        // that is bought.
     // GP-41: supplies/builds retain base prices; the nerfed saw is also fixed.
-          if (!buildUnlocked[track === 'bars' ? 'window' : track]) continue;
     function weaponPrice(w) { return w === 'chainsaw' ? WEAPON_PRICE[w] : equipmentPrice(WEAPON_PRICE[w], day); }
     function buyWeapon(w) {
       if (weaponOwned[w] || !spend(weaponPrice(w))) return;
-            if (!owned && !next) continue;
       weaponOwned[w] = true;
       if (w === 'chainsaw') sawFuel = sawFuelMax();
       else {
@@ -19604,41 +19634,14 @@
     }
     document.getElementById('shopClose').addEventListener('click', closeShop);
 
-    // === Dev console (~) ===
-    // Testing hatch: tilde opens a one-line prompt. "bigtex shooter" turns on
-    // unlimited cash — the bank is topped straight back up after anything spends
-    // from it, and the HUD reads infinity instead of a number — and grants
-    // everything in one shot: every weapon, full ammo, all gear and armor, the
-    // machete, and every build blueprint unlocked (reuses grantAllWeapons(), the
-    // same hook the old weapon probes used). Turning the cheat back off only
-    // stops the cash refill; it doesn't strip anything already granted.
-    // "godmode" blocks damagePlayer() outright — every damage source in the game
-    // funnels through that one function, so this one flag covers all of them.
-    // "nodead" clears the field and freezes the day/wave clock (updateWaveSystem
-    // no-ops while it's set), so prep never counts down into another horde.
-    // "godead" (or "nodead off") turns them back on.
-    let devInfiniteCash = false;
-    let devGodMode = false;
-    let devNoZombies = false;
-    let devConsoleOpen = false;
-    const DEV_BANK = 999999;
-    const devConsoleEl = document.getElementById('devConsole');
-    const devConsoleInput = document.getElementById('devConsoleInput');
-    function openDevConsole() {
-      if (devConsoleOpen || !devConsoleEl) return;
-      devConsoleOpen = true;
-      devConsoleEl.classList.add('on');
-      if (devConsoleInput) {
-        devConsoleInput.value = '';
-        try { devConsoleInput.focus(); } catch (_) {}
-      }
-      // Drop anything held so the marine doesn't keep walking while you type.
     // === CIF (CU-61, Jerry): the camo window. Every pattern, free, as often as he likes. ===
     let cifOpen = false;
     const cifEl = document.getElementById('cif'), cifListEl = document.getElementById('cifList');
     function buildCIF() {
       const tile = document.createElement('canvas'); tile.width = tile.height = 64;
       for (const key of CAMO_KEYS) {
+        // Claude 2026-09-29 (Jerry's colour chart): the plain colours under their own heading.
+        if (key === CAMO_SOLID_KEYS[0]) { const h = document.createElement('div'); h.className = 'cif-group'; h.textContent = dwText('cif.solids'); cifListEl.append(h); }
         const b = document.createElement('button');
         b.type = 'button'; b.dataset.camo = key;
         const sw = document.createElement('canvas'); sw.width = 128; sw.height = 64;
@@ -19650,7 +19653,7 @@
       }
     }
     function syncCIF() {
-      for (const b of cifListEl.children) {
+      for (const b of cifListEl.querySelectorAll('button[data-camo]')) {
         const on = b.dataset.camo === camoKey;
         b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
         b.querySelector('b').textContent = dwText(on ? 'cif.wearing' : 'cif.free');
@@ -19688,6 +19691,35 @@
     }
     document.getElementById('cifClose').addEventListener('click', closeCIF);
 
+    // === Dev console (~) ===
+    // Testing hatch: tilde opens a one-line prompt. "bigtex shooter" turns on
+    // unlimited cash — the bank is topped straight back up after anything spends
+    // from it, and the HUD reads infinity instead of a number — and grants
+    // everything in one shot: every weapon, full ammo, all gear and armor, the
+    // machete, and every build blueprint unlocked (reuses grantAllWeapons(), the
+    // same hook the old weapon probes used). Turning the cheat back off only
+    // stops the cash refill; it doesn't strip anything already granted.
+    // "godmode" blocks damagePlayer() outright — every damage source in the game
+    // funnels through that one function, so this one flag covers all of them.
+    // "nodead" clears the field and freezes the day/wave clock (updateWaveSystem
+    // no-ops while it's set), so prep never counts down into another horde.
+    // "godead" (or "nodead off") turns them back on.
+    let devInfiniteCash = false;
+    let devGodMode = false;
+    let devNoZombies = false;
+    let devConsoleOpen = false;
+    const DEV_BANK = 999999;
+    const devConsoleEl = document.getElementById('devConsole');
+    const devConsoleInput = document.getElementById('devConsoleInput');
+    function openDevConsole() {
+      if (devConsoleOpen || !devConsoleEl) return;
+      devConsoleOpen = true;
+      devConsoleEl.classList.add('on');
+      if (devConsoleInput) {
+        devConsoleInput.value = '';
+        try { devConsoleInput.focus(); } catch (_) {}
+      }
+      // Drop anything held so the marine doesn't keep walking while you type.
       for (const k of Object.keys(keys)) keys[k] = false;
       mouseFireHeld = false;
     }
@@ -19725,7 +19757,8 @@
       }
       if (c.alive) c.mean /= c.alive;
       c.fogFar = far;
-      c.line = c.alive + ' alive · ' + c.visible + ' drawn · ' + c.fogHidden + ' fog-hidden · ' + c.farLod + ' far-LOD · ' + c.under + ' under · ' + c.over + ' over · ' + c.water + ' in water · ' + c.beyondFog + ' past fog ' + (far === Infinity ? '∞' : far.toFixed(0)) + ' m · nearest ' + (c.near === Infinity ? '-' : c.near.toFixed(0)) + ' m · mean ' + c.mean.toFixed(0) + ' m' + (samples.length ? ' · ' + samples.join('; ') : '');
+      c.resets = badPosResets;
+      c.line = (c.nan ? c.nan + ' NaN · ' : '') + (badPosResets ? badPosResets + ' reset · ' : '') + c.alive + ' alive · ' + c.visible + ' drawn · ' + c.fogHidden + ' fog-hidden · ' + c.farLod + ' far-LOD · ' + c.under + ' under · ' + c.over + ' over · ' + c.water + ' in water · ' + c.beyondFog + ' past fog ' + (far === Infinity ? '∞' : far.toFixed(0)) + ' m · nearest ' + (c.near === Infinity ? '-' : c.near.toFixed(0)) + ' m · mean ' + c.mean.toFixed(0) + ' m' + (samples.length ? ' · ' + samples.join('; ') : '');
       return c;
     }
     function spawnMegaswarm(n) {
@@ -20332,6 +20365,8 @@
     const hq = { dep: 'idle', depT: 0, pendingValue: 0, pendingCount: 0, shutterAmt: 0, bag: null, greenT: 0, seq: null, flares: [] };
     function nearHQWindow() { return Math.hypot(player.position.x - HQ_WINDOW_FRONT.x, player.position.z - HQ_WINDOW_FRONT.z) < 2.3 && player.position.y < house.group.position.y + 2.5; }
     function nearHQPanel() { return Math.hypot(player.position.x - HQ_PANEL_FRONT.x, player.position.z - HQ_PANEL_FRONT.z) < 2.2 && player.position.y < house.group.position.y + 2.5; }
+    const HQ_CIF_FRONT = { x: HQ_CIF_X, z: -(HQ_HALF + 0.9) };
+    function nearCIF() { return !!house.group && Math.hypot(player.position.x - HQ_CIF_FRONT.x, player.position.z - HQ_CIF_FRONT.z) < 2.0 && player.position.y < house.group.position.y + 2.5; }
     function hqDeposit() {
       if (hq.dep !== 'idle' && hq.dep !== 'green') { AudioSys.invalid(); showBanner('HQ BUSY', 'Wait for the ding', 1.0, '#ffb347'); return; }
       if (skullBag.count <= 0) { AudioSys.invalid(); showBanner('NO SKULLS', 'Kill something and bring back what it leaves', 1.4, '#ffb347'); return; }
@@ -20362,8 +20397,6 @@
       const t = performance.now() * 0.001;
       for (const f of house.fans || []) f.rotation.y += dt * 5;
       if (house.hqLight) house.hqLight.intensity = (isNight || skyUniforms.uNight.value > 0.35) ? 2.2 : 0;
-    const HQ_CIF_FRONT = { x: HQ_CIF_X, z: -(HQ_HALF + 0.9) };
-    function nearCIF() { return !!house.group && Math.hypot(player.position.x - HQ_CIF_FRONT.x, player.position.z - HQ_CIF_FRONT.z) < 2.0 && player.position.y < house.group.position.y + 2.5; }
       if (house.slitMat) house.slitMat.emissiveIntensity = 1.1 + 0.6 * Math.sin(t * 1.3) * Math.sin(t * 0.47 + 1);
       // --- the skull window
       const S = hq;
@@ -20636,6 +20669,7 @@
           if (hq.dep === 'open' || hq.dep === 'throw' || hq.dep === 'close' || hq.dep === 'process') text = 'Processing skulls\u2026';
           else text = skullBag.count ? 'E — Turn in ' + skullBag.count + ' skull' + (skullBag.count === 1 ? '' : 's') + ' ($' + skullBag.value + ')' : 'Skull window — bring skulls to turn in';
         } else if (a === 'hqPanel') text = dwText(hq.seq ? 'hq.alarmSounding' : phase === 'prep' ? 'hq.start' : 'hq.inProgress');
+        else if (a === 'cif') text = dwText('cif.prompt');
         else if (a === 'mountMortar') text = 'E — Man the mortar';
         else if (a === 'door') { const d = nearestDoor(); text = d && d.doorOpen ? 'E — Close the door' : 'E — Open the door'; }
         else if (a === 'stairs') { const st = nearestFoldStairs(); text = st && st.folded ? 'E — Lower the stairs' : 'E — Raise the stairs'; }
@@ -20666,7 +20700,7 @@
       const sd = st ? Math.hypot(st.x - px, st.z - pz) : Infinity;
       if (!placeMode && !buildMode && nearHQWindow() && kd > 1.2) return 'hqWindow';
       if (!placeMode && !buildMode && nearHQPanel()) return 'hqPanel';
-        else if (a === 'cif') text = dwText('cif.prompt');
+      if (!placeMode && !buildMode && nearCIF()) return 'cif';
       if (kd < KIOSK.useDist && kd <= md && kd <= dd && kd <= sd) return 'kiosk';
       if (m && md <= dd && md <= sd) return 'mountMortar';
       if (dr && dd <= sd) return 'door';
@@ -20677,6 +20711,7 @@
       const a = actionTarget();
       if (a === 'hqWindow') hqDeposit();
       else if (a === 'hqPanel') openHQBriefing();
+      else if (a === 'cif') openCIF();
       else if (a === 'kiosk') openShop();
       else if (a === 'door') toggleDoor(nearestDoor());
       else if (a === 'stairs') toggleStairs(nearestFoldStairs());
@@ -20697,7 +20732,6 @@
       const px = player.position.x, py = player.position.y, pz = player.position.z;
       const distance = Math.hypot(px - approach.x, pz - approach.z);
       const dead = gameOver || won || playerHp <= 0;
-      if (!placeMode && !buildMode && nearCIF()) return 'cif';
       let blockedBy = null;
       if (dead) blockedBy = 'dead';
       else if (objectiveModalOpen()) blockedBy = 'modal';
@@ -20708,7 +20742,6 @@
         const ay = py + 0.9, by = approach.y + 0.9;
         for (const b of builds) {
           if (b.alive === false) continue;
-      else if (a === 'cif') openCIF();
           if (segmentHitsBuild(b, px, ay, pz, approach.x, by, approach.z) !== null) { blockedBy = 'wall'; break; }
         }
         if (!blockedBy) {
@@ -30709,6 +30742,7 @@
       const chase = kind === 'cave' && opts && opts.chase ? opts.chase : null;
       if (!chase) abortCaveChase();
       if (shopOpen) closeShop();
+      closeCIF();
       if (wheelIsOpen()) closeWheel(false);
       cancelPlaceMode();
       stopFiring();
@@ -30739,7 +30773,6 @@
         if (cave.eyeRig) cave.eyeRig.visible = false;
         sk.fx = Math.sin(cave.yaw); sk.fz = Math.cos(cave.yaw);
         sk.rx = Math.cos(cave.yaw); sk.rz = -Math.sin(cave.yaw);
-      closeCIF();
         sk.at = (lx, lz, y = 0) => new THREE.Vector3(cave.x + sk.rx * lx + sk.fx * lz, cave.gy + y, cave.z + sk.rz * lx + sk.fz * lz);
         if (chase) {
           sk.guardian = chase.g;          // GB-35: it is already out, with his leg
@@ -32274,6 +32307,11 @@
         if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
         return;
       }
+      if (cifOpen) {
+        if ((e.code === 'KeyE' && !e.repeat) || e.code === 'Escape') { closeCIF(); e.preventDefault(); }
+        if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
+        return;
+      }
       // settingsFrom covers the panel opened from the title screen, where nothing is
       // "paused" because no match has started yet.
       if ((paused || settingsFrom) && e.code !== 'Escape') {
@@ -32304,11 +32342,6 @@
       if (e.code === 'KeyB') { if (!e.repeat && !openWheel('build')) toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
-      if (cifOpen) {
-        if ((e.code === 'KeyE' && !e.repeat) || e.code === 'Escape') { closeCIF(); e.preventDefault(); }
-        if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
-        return;
-      }
       if (e.code === 'KeyV') { tryRoll(); e.preventDefault(); }
       if (e.code === 'KeyY') { toggleDualWield(); e.preventDefault(); }
       if (e.code === 'KeyT') { if (mortarMounted) shoulderMortar(); else repairNearestBuild(); e.preventDefault(); }
@@ -34196,14 +34229,16 @@
 
     const burnedFireCells = new Set();
     const fireCell = (x, z) => Math.round(x / 1.5) + ':' + Math.round(z / 1.5);
-    function spawnGroundFire(x, z, defense = false, generation = 0) {
-      if (!fireCanSpreadTo(x, z)) return null;
-      for (const f of groundFires) if (Math.hypot(f.x - x, f.z - z) < 1.2) {
+    function spawnGroundFire(x, z, defense = false, generation = 0, cigarette = false) {
+      // A dropped cigarette is a tiny cosmetic ember: no damage or spreading forest fire.
+      if (cigarette ? waterDepthAt(x, z) > 0.02 : !fireCanSpreadTo(x, z)) return null;
+      if (cigarette) spawnScorch(x, z, .16);
+      for (const f of groundFires) if (!!f.cigarette === cigarette && Math.hypot(f.x - x, f.z - z) < (cigarette ? .15 : 1.2)) {
         if (generation === 0) { f.age = Math.min(f.age, GROUND_FIRE_LIFE * 0.35); f.defense = defense; }
         return f;
       }
       if (groundFires.length >= MAX_GROUND_FIRES || (generation > 0 && burnedFireCells.has(fireCell(x, z)))) return null;
-      burnedFireCells.add(fireCell(x, z));
+      if (!cigarette) burnedFireCells.add(fireCell(x, z));
       const y = sampleHeight(x, z);
       let g = groundFirePool.pop();
       if (!g) {
@@ -34216,6 +34251,7 @@
         scene.add(g);
       }
       g.visible = true;
+      g.scale.setScalar(cigarette ? .16 : 1); // pooled meshes must recover full flame size
       const disc = g.userData.disc;
       disc.visible = true;
       g.position.set(x, y, z);
@@ -34225,7 +34261,7 @@
       // Every patch gets its own turn and size, or a spreading fire reads as a row of
       // identical stamped circles rather than one uneven burn.
       disc.rotation.z = Math.random() * Math.PI * 2;
-      const f = { x, z, y, defense, generation, mesh: g, disc, age: 0, hurtT: 0, spreadT: 0.8 + Math.random() * 0.7, scorched: false,
+      const f = { x, z, y, defense, generation, cigarette, mesh: g, disc, age: 0, hurtT: 0, spreadT: 0.8 + Math.random() * 0.7, scorched: cigarette,
                   sizeVar: 0.75 + Math.random() * 0.5, flick: Math.random() * 6.28 };
       groundFires.push(f);
       return f;
@@ -34253,16 +34289,17 @@
       for (let i = groundFires.length - 1; i >= 0; i--) {
         const f = groundFires[i];
         f.age += dt * (1 + (weather.intensity || 0) * 1.8);
+        const duration = f.cigarette ? 4 : GROUND_FIRE_LIFE;
         // Lay the scorch down a little before the flame dies, so the ground is already
         // blackening under it rather than a mark appearing out of nowhere.
         if (!f.scorched && f.age > GROUND_FIRE_LIFE * 0.55) { f.scorched = true; spawnScorch(f.x, f.z, 0.9 + Math.random() * 0.5); }
-        if (f.age >= GROUND_FIRE_LIFE) { releaseGroundFire(f); groundFires.splice(i, 1); continue; }
+        if (f.age >= duration) { releaseGroundFire(f); groundFires.splice(i, 1); continue; }
         // --- Spread ---
         // Young fire creeps outward; rain puts a stop to it. Each beat tries one
         // patch at a arm's length out, which is slow enough to watch a line of fire
         // walk across grass and cheap enough to not care about.
         f.spreadT -= dt;
-        if (f.spreadT <= 0) {
+        if (!f.cigarette && f.spreadT <= 0) {
           f.spreadT = 0.7 + Math.random() * 0.8;
           const young = f.age < GROUND_FIRE_LIFE * 0.6;
           const wet = weather.intensity || 0;   // a shower damps the spread right down
@@ -34282,17 +34319,21 @@
             if (Math.hypot(t.x - f.x, t.z - f.z) < (t.trunkRadius || 0.3) + 1.5) igniteTree(t, f.defense);
           }
         }
-        const life = 1 - f.age / GROUND_FIRE_LIFE;
+        const life = 1 - f.age / duration;
         // Two offset sines rather than one: a single beat had every patch pulsing in
         // step, which read as a flicker of the whole screen instead of of the fire.
         const flick = 0.72 + Math.sin(f.age * 23 + f.flick) * 0.18 + Math.sin(f.age * 7.3 + f.flick * 2) * 0.10;
-        requestEffectLight(f.x, f.y + 0.8, f.z, 0xff7a2a, (0.6 + 1.4 * life) * flick, 8);
+        requestEffectLight(f.x, f.y + (f.cigarette ? .12 : .8), f.z, 0xff7a2a, (0.6 + 1.4 * life) * flick * (f.cigarette ? .08 : 1), f.cigarette ? 1 : 8);
         // Fire flares as it takes hold and shrinks back as it dies, rather than only
         // ever fading out at a fixed size.
         const grow = Math.min(1, f.age / 0.7);
         f.disc.scale.setScalar((0.55 + life * 0.5) * f.sizeVar * (0.6 + 0.4 * grow) * (0.92 + flick * 0.1));
         // Shared material stays immutable; scale and flame height belong to the patch.
         animateFireTongues(f.mesh.userData.flames, f.age, life * (0.5 + grow * 0.5));
+        if (f.cigarette) {
+          if (Math.random() < dt * 2) spawnSmokePuff(f.x, f.y + .15, f.z, { tone: 'pale', size: .07, grow: .18, vy: .25, life: 1.2, peak: .25 });
+          continue;
+        }
         if (Math.random() < dt * 2) { const sa = sndAt(f.x, f.z, 18); AudioSys.fireCrackle(sa.v, sa.pan); }
         if (Math.random() < dt * 9 * (0.3 + life)) spawnFireEmbers(f.x, f.y + 0.2, f.z, 1, 1.3, 0.7);
         // Grass smoke: pale and thin while it flares, greyer as it smoulders out.
@@ -37671,6 +37712,7 @@
       return true;
     }
 
+    let badPosResets = 0;   // Claude 2026-09-28: how often the backstop in updateZombies caught a bad position (hordeReport)
     function updateZombies(dt) {
       restoreMotionAnims();   // last frame's animation pose, not the bodies' (see updateMotionBodies)
       if (poiGuardsDue && phase === 'prep' && gameStarted && !devNoZombies && _preRollDone && !_liveRoll) { poiGuardsDue = false; spawnPoiGuards(); }   // GB-43
@@ -38110,6 +38152,10 @@
             if (z.guardianStuckRepath <= 1) {
               z.unstickT = 1.5;
               z.flankSide = -(z.flankSide || 1);
+              // Claude 2026-09-28: the sidestep needs its side. Without it the unstick below
+              // steered by undefined, the guardian's position went NaN, and the separation pass
+              // spread it to the whole horde in a frame (Jerry: "the horde clips under the map").
+              z.unstickSide = z.flankSide;
               z.guardianBestDist = dProg;
             } else {
               z.guardianRetreat = true;
@@ -38153,7 +38199,7 @@
         }
         if (z.unstickT > 0) {
           z.unstickT -= dt;
-          const u = z.unstickSide;
+          const u = z.unstickSide || 1;
           const ux = sx * 0.35 - sz * u, uz = sz * 0.35 + sx * u, ul = Math.hypot(ux, uz) || 1;
           sx = ux / ul; sz = uz / ul;
         }
@@ -38668,7 +38714,10 @@
           const dx = b.mesh.position.x - a.mesh.position.x;
           const dz = b.mesh.position.z - a.mesh.position.z;
           const minD = a.radius + b.radius;
-          if (dx > minD || dx < -minD || dz > minD || dz < -minD) continue;
+          // Claude 2026-09-28: `!(|d| <= minD)` rather than `> minD`, so a NaN is skipped too. A NaN
+          // here used to get through the box test, turn `hypot || 0.0001` into 0.0001 and push
+          // every neighbour by NaN or ten thousand times the gap: one bad body took the horde.
+          if (!(Math.abs(dx) <= minD && Math.abs(dz) <= minD)) continue;
           const dist = Math.hypot(dx, dz) || 0.0001;
           if (dist >= minD) continue;
           const push = (minD - dist) * 0.58;
@@ -38679,6 +38728,16 @@
       }
       for (const z of zombies) {
         if (!z.alive) continue;
+        // Claude 2026-09-28: backstop. A body whose position went bad this frame goes back to
+        // where it last stood (z.x/z.z, last frame's good place) instead of vanishing, and
+        // drops the steering state that may have carried the bad number.
+        if (!Number.isFinite(z.mesh.position.x) || !Number.isFinite(z.mesh.position.z) || !Number.isFinite(z.mesh.position.y)) {
+          const okX = Number.isFinite(z.x) ? z.x : player.position.x, okZ = Number.isFinite(z.z) ? z.z : player.position.z;
+          z.mesh.position.x = okX; z.mesh.position.z = okZ; z.mesh.position.y = entityGroundY(okX, okZ);
+          z.flowX = null; z.flowZ = null; z.unstickT = 0; z.staggerVX = 0; z.staggerVZ = 0;
+          z.stuckX = okX; z.stuckZ = okZ;
+          badPosResets++;
+        }
         z.x = z.mesh.position.x;
         z.z = z.mesh.position.z;
         // Re-seat after the separation pass — except swimmers (their float height was
@@ -39032,6 +39091,7 @@
       updateCoinHud();
       setWeapon(WEAPON_ORDER.indexOf('pistol'));
       closeShop();
+      closeCIF();
       resetDayClockForMatch();
       nvgDown = false;
       nvgFlip = 0;
@@ -39077,6 +39137,7 @@
     });
 
     function resetGame() {
+      marineIdle.reset(); marineIdleInput = false;
       if (marineInsertion) marineInsertion.finish();
       abortScriptedKill();
       lastDeathCause = null;
@@ -39088,7 +39149,6 @@
       AudioSys.chainsawStop();
       AudioSys.resetBlip();
       // Quietly: clearing the field for a new match is not a demolition, and every
-      closeCIF();
       // collapsing stack used to throw a shower of debris over the fresh start.
       for (const b of builds.slice()) removeBuild(b, true);
       buildCells.clear();
@@ -39438,6 +39498,7 @@ live++;
       try { stepObjectiveInteraction(dt); } catch (e) {}
       try { updateAudioDirection(dt); } catch (_) {}
       if (menuCamera.deploying) {
+        marineIdle.reset();
         menuCamera.advance(dt);
         updateDayNight(dt);
         updateCaveEyes();
@@ -39491,6 +39552,7 @@ live++;
         return;
       }
 
+      updateMarineIdle(dt);
       updateDayNight(dt);
       updateCaveEyes();
       // Shadow frustum rides along with the player.
@@ -39745,6 +39807,7 @@ live++;
         if (!marineDown()) tryFire(dt);   // GB-67: not from the ground
         // Recoil kicks this frame's shot into recoilKick; place the gun again with it.
         holdWeapon(0);
+        marineIdle.pose(dt);
         updateMarineBody(dt);   // GB-67: his reacting body, over the pose and the gun
         updateLasers();
         syncReticleVisibility();
