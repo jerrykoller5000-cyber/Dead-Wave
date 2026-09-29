@@ -4,10 +4,10 @@ state: idle
 model: Grok 4.7
 task: —
 touching: —
-since: 2026-09-27T07:24Z
-next: CU-58 R3 · P-34. `spawnSupplyDrop({x, z, contents, source})` and a
+since: 2026-09-29T05:30Z
+next: CU-59 R2 · P-55. `debugTouched`: one shell flag set by any `TT.*` 
 blocked-on: —
-last-report: handoffs/2026-09-27-cursor-CU-50.md
+last-report: handoffs/2026-09-29-cursor-CU-61.md
 
 ## Notes
 

@@ -553,6 +553,43 @@
       padding: 12px 16px; font-family: var(--font-hud); font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
       text-transform: uppercase; background: var(--accent-2); color: var(--accent-2-ink);
     }
+    /* CIF (CU-61): the camo window at the HQ. Off to the right and see-through, so the marine
+       can be seen changing behind it. */
+    #cif {
+      display: none; position: absolute; inset: 0; align-items: center; justify-content: flex-end;
+      padding: 0 4vw; background: rgba(5,7,4,.28); pointer-events: auto; z-index: 6;
+    }
+    #cif.show { display: flex; }
+    #cif .card {
+      position: relative; background: var(--panel-bg-solid); border: 1px solid var(--panel-border);
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+      padding: 22px 24px 20px; width: min(580px, 94vw); max-height: 92vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    #cif .card::before { content: ''; position: absolute; left: 0; top: 0; width: 56px; height: 4px; background: var(--accent); }
+    #cif h2 {
+      font-family: var(--font-display); font-size: 22px; font-weight: 400; letter-spacing: 0.03em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 4px; display: flex; gap: 10px; align-items: baseline;
+    }
+    #cif h2 small { font-family: var(--font-hud); font-size: 12px; color: var(--ink); opacity: .75; letter-spacing: 0.04em; }
+    #cif p.hint { font-size: 12px; opacity: .75; margin-bottom: 12px; }
+    #cifList { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+    #cifList button {
+      pointer-events: auto; cursor: pointer; display: flex; flex-direction: column; gap: 5px; text-align: left;
+      border: 1px solid rgba(206,222,150,.18); background: rgba(255,255,255,.04); color: var(--ink); padding: 6px;
+      font-family: var(--font-hud); font-weight: 700; font-size: 11.5px; letter-spacing: .03em; text-transform: uppercase;
+    }
+    #cifList button canvas { display: block; width: 100%; aspect-ratio: 2 / 1; image-rendering: pixelated; }
+    #cifList button b { font-size: 10px; font-weight: 600; opacity: .7; }
+    #cifList button.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+    #cifList button.on b { color: var(--accent); opacity: 1; }
+    #cif .modes { display: flex; margin-top: 14px; }
+    #cif .modes button {
+      pointer-events: auto; cursor: pointer; border: 0; flex: 1;
+      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+      padding: 12px 16px; font-family: var(--font-hud); font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+      text-transform: uppercase; background: var(--accent-2); color: var(--accent-2-ink);
+    }
+    @media (max-width: 640px) { #cif { justify-content: center; padding: 0; } }
     /* Build-mode bar. It used to be a 220px box wedged between the minimap and the
        edge of the screen, where nobody found it and nothing told you how to get out
        of build mode. Bottom centre, above the ammo panel, with the keys spelled out. */
@@ -879,6 +916,14 @@
         <div class="modes"><button id="shopClose" type="button">Back to the fight (E / Esc)</button></div>
       </div>
     </div>
+    <div id="cif" role="dialog" aria-labelledby="cifTitle">
+      <div class="card">
+        <h2 id="cifTitle"><span data-dw-text="cif.title"></span><small data-dw-text="cif.subtitle"></small></h2>
+        <p class="hint" data-dw-text="cif.hint"></p>
+        <div id="cifList"></div>
+        <div class="modes"><button id="cifClose" type="button" data-dw-text="cif.close"></button></div>
+      </div>
+    </div>
     <div id="pause">
       <div class="card" id="pauseCard">
         <div id="pauseMainView">
@@ -1049,6 +1094,7 @@
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
     } from './core/math.js';
     import { addCast, rbox, rmesh, mergeParts, boxProjectUV } from './core/geometry.js';
+    import { CAMO_KEYS, CAMO_DEFAULT, isCamoKey, paintCamo } from './core/camo.js';
     import { AudioSys } from './core/audio.js';
     import { DWLoad, yieldToBrowser, whileHiddenFramesRun } from './core/loader.js';
     import { text as dwText } from './ui/strings.js';
@@ -15290,6 +15336,38 @@
     const camoTex = makeCamoTexture();
     const uniformMat = new THREE.MeshStandardMaterial({ color: 0xe2ded0, map: camoTex, roughness: 0.95, metalness: 0.02 });
     const trouserMat = new THREE.MeshStandardMaterial({ color: 0xd2cebd, map: camoTex, roughness: 0.95, metalness: 0.02 });
+    // CU-61: the CIF swaps camo by repainting this one canvas (the shirt, trousers and helmet
+    // cover all read it), so a swap adds no material and no draw. M81 Woodland is the tile
+    // painted above, copied so he can go back to it. The pick is remembered between runs.
+    const CAMO_STORE = 'tt_camo';
+    const woodlandTile = (() => {
+      const src = camoTex.image, cv = document.createElement('canvas');
+      cv.width = src.width; cv.height = src.height;
+      const c = cv.getContext ? cv.getContext('2d') : null;
+      if (c) c.drawImage(src, 0, 0);
+      return cv;
+    })();
+    let camoKey = CAMO_DEFAULT;
+    function paintCamoTile(key, cv) {
+      const c = cv && cv.getContext ? cv.getContext('2d') : null;
+      if (!c) return false;
+      if (key === 'm81') { c.clearRect(0, 0, cv.width, cv.height); c.drawImage(woodlandTile, 0, 0, cv.width, cv.height); return true; }
+      const img = c.createImageData(cv.width, cv.height);
+      if (!paintCamo(key, img.data, cv.width)) return false;
+      c.putImageData(img, 0, 0);
+      return true;
+    }
+    function setCamo(key, save = true) {
+      if (!isCamoKey(key)) return false;
+      if (key !== camoKey) {
+        if (!paintCamoTile(key, camoTex.image)) return false;
+        camoKey = key;
+        camoTex.needsUpdate = true;
+      }
+      if (save) { try { localStorage.setItem(CAMO_STORE, key); } catch (_) { /* private mode: this run only */ } }
+      return true;
+    }
+    try { const saved = localStorage.getItem(CAMO_STORE); if (saved && saved !== CAMO_DEFAULT) setCamo(saved, false); } catch (_) { /* no storage */ }
     const coverMat = new THREE.MeshStandardMaterial({ color: 0xd8d6c4, map: camoTex, roughness: 0.9, metalness: 0.05 });
     const carrierMat = new THREE.MeshStandardMaterial({ color: 0x4c5138, roughness: 0.88, metalness: 0.06 });   // ranger green
     const webMat = new THREE.MeshStandardMaterial({ color: 0x2f3326, roughness: 0.9, metalness: 0.04 });
@@ -18190,7 +18268,7 @@
 
     // HQ dimensions: a 10 m square (on the build lattice: its faces land on cell
     // edges), five and a bit metres to the roof.
-    const HQ_H = 5.4, HQ_HALF = 5, HQ_WINDOW_Z = -2.2, HQ_PANEL_X = 3.2;
+    const HQ_H = 5.4, HQ_HALF = 5, HQ_WINDOW_Z = -2.2, HQ_PANEL_X = 3.2, HQ_CIF_X = -3.3;
     // === Skulls ======================================================================
     // What the dead leave now instead of cash: a skull that looks like the thing it
     // came off — bone tinted toward the body's own colour, its eyes still glowing the
@@ -18705,6 +18783,34 @@
     // house sits on the build lattice: it collides as its real square footprint (not
     // the 3 m circle it used to be), and a wall you build beside it lands flush against
     // it. It stands in every mode; see house.present.
+      // --- CU-61: the CIF on the south face, west of the mural, mirroring the start panel: a
+      // hatch with uniforms on a rail inside and a stencilled plate over it.
+      {
+        const cif = new THREE.Group(); cif.position.set(HQ_CIF_X, 0, PZ); cif.rotation.y = Math.PI; g.add(cif);
+        box(1.22, 1.14, 0.02, new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 1 }), 0, 1.65, 0.03, cif);   // the dark back
+        box(1.5, 0.16, 0.3, steelDark, 0, 2.3, 0.05, cif);                                   // lintel
+        box(1.5, 0.14, 0.42, hazard, 0, 1.02, 0.12, cif);                                    // counter
+        for (const sx of [-0.68, 0.68]) box(0.14, 1.42, 0.3, steelDark, sx, 1.63, 0.05, cif);
+        box(1.1, 0.03, 0.03, steel, 0, 2.12, 0.07, cif);                                     // hanging rail
+        for (const [i, col] of [0x5f6c3b, 0xc2a67a, 0x8e8f88, 0x6c7550, 0xb09a74].entries()) {
+          const x = -0.44 + i * 0.22;
+          box(0.17, 0.44, 0.04, new THREE.MeshStandardMaterial({ color: col, roughness: 0.95 }), x, 1.84, 0.07, cif);
+          box(0.02, 0.1, 0.02, steel, x, 2.07, 0.07, cif);
+        }
+        const cv = document.createElement('canvas'); cv.width = 256; cv.height = 96;
+        const c2 = cv.getContext ? cv.getContext('2d') : null;
+        if (c2) {
+          c2.fillStyle = '#1d2126'; c2.fillRect(0, 0, 256, 96);
+          c2.fillStyle = '#e3b62b'; c2.textAlign = 'center'; c2.textBaseline = 'middle';
+          c2.font = 'bold 56px Impact, "Arial Black", sans-serif'; c2.fillText(dwText('cif.title'), 128, 40);
+          c2.font = 'bold 15px Arial, sans-serif'; c2.fillText(dwText('cif.subtitle').toUpperCase(), 128, 80);
+        }
+        const signTex = new THREE.CanvasTexture(cv);
+        if (THREE.SRGBColorSpace) signTex.colorSpace = THREE.SRGBColorSpace;
+        const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.44, 0.54),
+          new THREE.MeshStandardMaterial({ map: signTex, emissiveMap: signTex, emissive: 0xffffff, emissiveIntensity: 0.45, roughness: 0.6 }));
+        sign.position.set(0, 2.68, 0.06); cif.add(sign);
+      }
     const HOUSE_SCALE = 1;
     house.radius = HQ_HALF + 0.5;               // "near the HQ" checks
     house.half = HQ_HALF;                       // the footprint: a 10 m square
@@ -19218,9 +19324,10 @@
           medkits >= MAX_MEDKITS ? 'FULL' : '$' + MEDKIT_PRICE, medkits < MAX_MEDKITS && bank >= MEDKIT_PRICE, () => buyMedkit());
         for (const gr of GEAR) {
           const owned = !!gearOwned[gr.key], price = equipmentPrice(gr.cost, day);
-          const locked = !owned && gr.needs && !gearOwned[gr.needs];
-          shopRow(gr.name, owned ? 'owned' : (locked ? gr.needsLabel : (gr.armor ? '+' + gr.armor + ' armor' : '')), gr.desc,
-            owned ? 'OWNED' : (locked ? 'LOCKED' : '$' + price), !owned && !locked && bank >= price,
+          // Jerry: an add-on stays off the list until what it fits on is bought.
+          if (!owned && gr.needs && !gearOwned[gr.needs]) continue;
+          shopRow(gr.name, owned ? 'owned' : (gr.armor ? '+' + gr.armor + ' armor' : ''), gr.desc,
+            owned ? 'OWNED' : '$' + price, !owned && bank >= price,
             owned ? null : () => buyGear(gr), owned ? 'owned' : '');
         }
         if (armorMax() > 0) {
@@ -19277,9 +19384,9 @@
             let stat = '';
             if (tr.hp) stat = ' ' + (track === 'door' ? '+' + tr.hp[t] + ' toughness on the wall it hangs in' : (tr.hp[t] + ' toughness (from ' + tr.hp[0] + ')')) + '.';
             else if (track !== 'bars') stat = ' Damage \u00d7' + TURRET_TIER.dmg[t] + ', reach \u00d7' + TURRET_TIER.range[t] + ', fire rate \u00d7' + (1 / TURRET_TIER.interval[t]).toFixed(2) + ', toughness \u00d7' + TURRET_TIER.hp[t] + '.';
-            const desc = UPGRADE_BLURB[track][t] + stat + ' Upgrading each piece: $' + tr.cost[t] + '.' + (!owned && !next ? ' Needs the ' + tr.names[t - 1] + ' blueprint first.' : '');
+            const desc = UPGRADE_BLURB[track][t] + stat + ' Upgrading each piece: $' + tr.cost[t] + '.';
             shopRow(tr.names[t] + ' blueprint', owned ? 'owned' : '', desc,
-              owned ? 'OWNED' : '$' + price, next && bank >= price, owned || !next ? null : () => buyUpgradeBlueprint(track, t), owned ? 'owned' : '');
+              owned ? 'OWNED' : '$' + price, next && bank >= price, owned ? null : () => buyUpgradeBlueprint(track, t), owned ? 'owned' : '');
           }
         }
       } else if (shopTab === 'build') {
@@ -19299,10 +19406,15 @@
       updateCoinHud();
       return true;
     }
+        // Jerry: only the tiers he owns and the one straight after them. Tier 0 is the piece's
+        // own build blueprint (window mesh hangs on the window), so a track shows nothing until
+        // that is bought.
     // GP-41: supplies/builds retain base prices; the nerfed saw is also fixed.
+          if (!buildUnlocked[track === 'bars' ? 'window' : track]) continue;
     function weaponPrice(w) { return w === 'chainsaw' ? WEAPON_PRICE[w] : equipmentPrice(WEAPON_PRICE[w], day); }
     function buyWeapon(w) {
       if (weaponOwned[w] || !spend(weaponPrice(w))) return;
+            if (!owned && !next) continue;
       weaponOwned[w] = true;
       if (w === 'chainsaw') sawFuel = sawFuelMax();
       else {
@@ -19521,6 +19633,61 @@
         try { devConsoleInput.focus(); } catch (_) {}
       }
       // Drop anything held so the marine doesn't keep walking while you type.
+    // === CIF (CU-61, Jerry): the camo window. Every pattern, free, as often as he likes. ===
+    let cifOpen = false;
+    const cifEl = document.getElementById('cif'), cifListEl = document.getElementById('cifList');
+    function buildCIF() {
+      const tile = document.createElement('canvas'); tile.width = tile.height = 64;
+      for (const key of CAMO_KEYS) {
+        const b = document.createElement('button');
+        b.type = 'button'; b.dataset.camo = key;
+        const sw = document.createElement('canvas'); sw.width = 128; sw.height = 64;
+        if (paintCamoTile(key, tile)) { const c = sw.getContext('2d'); c.drawImage(tile, 0, 0); c.drawImage(tile, 64, 0); }
+        const name = document.createElement('span'); name.textContent = dwText('cif.pattern.' + key);
+        b.append(sw, name, document.createElement('b'));
+        b.addEventListener('click', () => pickCamo(key));
+        cifListEl.append(b);
+      }
+    }
+    function syncCIF() {
+      for (const b of cifListEl.children) {
+        const on = b.dataset.camo === camoKey;
+        b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
+        b.querySelector('b').textContent = dwText(on ? 'cif.wearing' : 'cif.free');
+      }
+    }
+    function pickCamo(key) {
+      if (key === camoKey || !setCamo(key)) return;
+      AudioSys.kioskTab();
+      syncCIF();
+    }
+    function openCIF() {
+      if (fullMapOpen) setFullMap(false);
+      if (!gameStarted || gameOver || won || cifOpen || shopOpen) return;
+      cifOpen = true;
+      paused = true;
+      AudioSys.shutter(true);
+      pauseEl.classList.remove('show');
+      cifEl.classList.add('show');
+      syncReticleVisibility();
+      mouseFireHeld = false; zoomHeld = false;
+      stopFiring();
+      AudioSys.chainsawStop();
+      cancelPlaceMode();
+      for (const k of Object.keys(keys)) keys[k] = false;
+      if (!cifListEl.childElementCount) buildCIF();
+      syncCIF();
+    }
+    function closeCIF() {
+      if (!cifOpen) return;
+      cifOpen = false;
+      AudioSys.shutter(false);
+      cifEl.classList.remove('show');
+      paused = false;
+      syncReticleVisibility();
+    }
+    document.getElementById('cifClose').addEventListener('click', closeCIF);
+
       for (const k of Object.keys(keys)) keys[k] = false;
       mouseFireHeld = false;
     }
@@ -20195,6 +20362,8 @@
       const t = performance.now() * 0.001;
       for (const f of house.fans || []) f.rotation.y += dt * 5;
       if (house.hqLight) house.hqLight.intensity = (isNight || skyUniforms.uNight.value > 0.35) ? 2.2 : 0;
+    const HQ_CIF_FRONT = { x: HQ_CIF_X, z: -(HQ_HALF + 0.9) };
+    function nearCIF() { return !!house.group && Math.hypot(player.position.x - HQ_CIF_FRONT.x, player.position.z - HQ_CIF_FRONT.z) < 2.0 && player.position.y < house.group.position.y + 2.5; }
       if (house.slitMat) house.slitMat.emissiveIntensity = 1.1 + 0.6 * Math.sin(t * 1.3) * Math.sin(t * 0.47 + 1);
       // --- the skull window
       const S = hq;
@@ -20497,6 +20666,7 @@
       const sd = st ? Math.hypot(st.x - px, st.z - pz) : Infinity;
       if (!placeMode && !buildMode && nearHQWindow() && kd > 1.2) return 'hqWindow';
       if (!placeMode && !buildMode && nearHQPanel()) return 'hqPanel';
+        else if (a === 'cif') text = dwText('cif.prompt');
       if (kd < KIOSK.useDist && kd <= md && kd <= dd && kd <= sd) return 'kiosk';
       if (m && md <= dd && md <= sd) return 'mountMortar';
       if (dr && dd <= sd) return 'door';
@@ -20527,6 +20697,7 @@
       const px = player.position.x, py = player.position.y, pz = player.position.z;
       const distance = Math.hypot(px - approach.x, pz - approach.z);
       const dead = gameOver || won || playerHp <= 0;
+      if (!placeMode && !buildMode && nearCIF()) return 'cif';
       let blockedBy = null;
       if (dead) blockedBy = 'dead';
       else if (objectiveModalOpen()) blockedBy = 'modal';
@@ -20537,6 +20708,7 @@
         const ay = py + 0.9, by = approach.y + 0.9;
         for (const b of builds) {
           if (b.alive === false) continue;
+      else if (a === 'cif') openCIF();
           if (segmentHitsBuild(b, px, ay, pz, approach.x, by, approach.z) !== null) { blockedBy = 'wall'; break; }
         }
         if (!blockedBy) {
@@ -30567,6 +30739,7 @@
         if (cave.eyeRig) cave.eyeRig.visible = false;
         sk.fx = Math.sin(cave.yaw); sk.fz = Math.cos(cave.yaw);
         sk.rx = Math.cos(cave.yaw); sk.rz = -Math.sin(cave.yaw);
+      closeCIF();
         sk.at = (lx, lz, y = 0) => new THREE.Vector3(cave.x + sk.rx * lx + sk.fx * lz, cave.gy + y, cave.z + sk.rz * lx + sk.fz * lz);
         if (chase) {
           sk.guardian = chase.g;          // GB-35: it is already out, with his leg
@@ -32131,6 +32304,11 @@
       if (e.code === 'KeyB') { if (!e.repeat && !openWheel('build')) toggleBuildMode(); e.preventDefault(); }
       if (e.code === 'KeyG') { throwGrenade(); e.preventDefault(); }
       if (e.code === 'KeyF') { knifeAttack(); e.preventDefault(); }
+      if (cifOpen) {
+        if ((e.code === 'KeyE' && !e.repeat) || e.code === 'Escape') { closeCIF(); e.preventDefault(); }
+        if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
+        return;
+      }
       if (e.code === 'KeyV') { tryRoll(); e.preventDefault(); }
       if (e.code === 'KeyY') { toggleDualWield(); e.preventDefault(); }
       if (e.code === 'KeyT') { if (mortarMounted) shoulderMortar(); else repairNearestBuild(); e.preventDefault(); }
@@ -38910,6 +39088,7 @@
       AudioSys.chainsawStop();
       AudioSys.resetBlip();
       // Quietly: clearing the field for a new match is not a demolition, and every
+      closeCIF();
       // collapsing stack used to throw a shower of debris over the fresh start.
       for (const b of builds.slice()) removeBuild(b, true);
       buildCells.clear();
@@ -40042,7 +40221,7 @@ live++;
           knife, marine, grenadesInFlight, getKnifeAnimT: () => knifeAnimT, getKnifeCd: () => knifeCd,
           AudioSys, getAudioState: () => _audioState, getAmbState: () => _ambState,
           bladeStats, isMacheteOwned: () => macheteOwned, setMacheteOwned: (v) => { macheteOwned = !!v; applyBladeModel(); },
-          getGearOwned: () => gearOwned, buyGear, GEAR, getArmor: () => playerArmor, setArmor: (v) => { playerArmor = v; updateHpHud(); }, armorMax, applyGearVisibility, repairArmor, buyMachete,
+          getGearOwned: () => gearOwned, buyGear, GEAR, setCamo, getCamo: () => camoKey, CAMO_KEYS, openCIF, closeCIF, isCIFOpen: () => cifOpen, nearCIF, HQ_CIF_FRONT, camoTex, getArmor: () => playerArmor, setArmor: (v) => { playerArmor = v; updateHpHud(); }, armorMax, applyGearVisibility, repairArmor, buyMachete,
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
