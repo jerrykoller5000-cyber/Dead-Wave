@@ -18,8 +18,8 @@ the crew panel, so what you log is how he knows what you're doing.
 
 1. **Look.** Run `node crew/crew.mjs`. It shows the current **mission** (the one job the whole
    crew is on, if there is one), who is active and in which files, open questions, and reviews
-   waiting. `node crew/crew.mjs mission` shows just the mission. Then read `crew/BOARD.md` (Jerry's orders, the decisions,
-   your queue) and your own card, `crew/status/<you>.md`, for the notes you left yourself.
+   waiting. `node crew/crew.mjs mission` shows just the mission. Then read `crew/BOARD.md` (Jerry's orders, the decisions
+   one line each, your queue; the full text of a decision is in `docs/decisions.md`) and your own card, `crew/status/<you>.md`, for the notes you left yourself.
 2. **Answer first.** Look in `handoffs/requests.md` for anything addressed to you, and answer
    it in place (`DONE`, `WONT (why)` or `LATER (phase)`).
 3. **Check in.** `node crew/crew.mjs next <you>` names your next task. Then:
@@ -52,6 +52,10 @@ the crew panel, so what you log is how he knows what you're doing.
      `node crew/crew.mjs ask <you> "<the question>"`, which puts it at the top of his panel,
      and work on something else meanwhile.
 
+**A new task** (Jerry asks you directly for something that isn't on the board): get its id with
+`node crew/crew.mjs newid <you> "<what>"` and use that one. Never make an id up: two jobs with one id
+confuse the board and the panel.
+
 **Asking another agent for something:**
 `node crew/crew.mjs request <you> <them> "<title>" "<body>"` (or `--body-file <path>`). It
 appends to `handoffs/requests.md` in UTF-8. Don't use PowerShell's `Add-Content`: it mangles
@@ -76,7 +80,7 @@ Agent names for the commands: `claude`, `cursor`, `chatgpt`, `grokbot`,
 | Agent | Owns | Files |
 | --- | --- | --- |
 | Cursor | Integration, git (shared with Claude, rule 6), tooling, engine core: boot and the loader shell, colliders, saves, the error card | the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json` |
-| Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting; the studio's clips, rigs and player (D-40) | `world/*`, `life/*`, `assets/world/*`, `studio/*`, `assets/anim/*`, `crew/BOARD.md`, this file |
+| Claude (lead) | The world: terrain, water, caves, flora, wildlife, night lighting; the studio's clips, rigs and player (D-40) | `world/*`, `life/*`, `assets/world/*`, `studio/*`, `assets/anim/*`, `crew/BOARD.md`, `docs/roadmap.md`, `docs/decisions.md`, this file |
 | Grokbot | Combat: zombies, the wave director, enemy roles, builds and turrets, weapons, scripted deaths | `combat/*` |
 | ChatGPT | What the player reads and decides: HUD, menus, shop, onboarding, text, economy, objectives, audio cues | `ui/*`, `game/economy.js`, `game/objectives.js` |
 | Antigravity | The crew's eyes: plays the real game in a real browser, takes screenshots, checks every visible change, reports what it sees | `qa/*` (reports and screenshots). No game code. |
@@ -90,7 +94,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 ## Rules
 
 1. **Jerry decides; Claude leads.** Priorities, ownership and disputes go to Claude, and
-   Claude's call stands unless Jerry overrides it. Orders and decisions are in `crew/BOARD.md`.
+   Claude's call stands unless Jerry overrides it. Orders and decisions are in `crew/BOARD.md` (each decision in full: `docs/decisions.md`).
 2. **Touch only your own files.** If you need something from another area, add a request to
    `handoffs/requests.md` addressed to its owner, then carry on with something else.
 3. **Never revert, delete or reformat another agent's work,** Philip's included. If you think

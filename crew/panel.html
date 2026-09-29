@@ -156,6 +156,28 @@
   .st.in { color: #fff; background: var(--ok); } .st.work { color: var(--ok); } .st.wrote { color: var(--warn); } .st.none { color: var(--muted); }
   .mission .then { margin-top: 10px; font-size: 13px; color: var(--muted); }
   .mission .bar i { background: var(--ok); }
+
+  /* roadmap: one row per stage, progress from the board */
+  .roadmap .stages { display: grid; gap: 12px; }
+  .roadmap .stage { display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line); }
+  .roadmap .stage:first-child { border-top: 0; padding-top: 0; }
+  .roadmap .rn { grid-row: span 4; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; background: var(--chip); color: var(--muted); border: 2px solid var(--line); }
+  .roadmap .stage.done .rn { background: var(--ok); color: #fff; border-color: var(--ok); }
+  .roadmap .stage.now .rn { border-color: var(--accent); color: var(--accent); }
+  .roadmap .sh { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+  .roadmap .sn { font-weight: 700; font-size: 15px; }
+  .roadmap .tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+  .roadmap .stage.done .tag { background: var(--ok); color: #fff; }
+  .roadmap .stage.now .tag { background: var(--accent); color: #fff; }
+  .roadmap .cnt { margin-left: auto; font-size: 13px; color: var(--muted); } .roadmap .cnt b { color: var(--ink); }
+  .roadmap .sbar { display: flex; height: 10px; background: var(--chip); border-radius: 5px; overflow: hidden; margin: 2px 0; }
+  .roadmap .sbar i { display: block; height: 100%; }
+  .roadmap .sbar .d { background: var(--ok); } .roadmap .sbar .w { background: color-mix(in srgb, var(--ok) 45%, var(--chip)); } .roadmap .sbar .b { background: var(--warn); }
+  .roadmap .sg { font-size: 13px; color: var(--muted); }
+  .roadmap .sa { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--faint); }
+  .roadmap .sa span b { color: var(--c); font-weight: 700; }
+  .roadmap .key { font-size: 12px; color: var(--faint); margin-top: 8px; }
+  .roadmap .key i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin: 0 4px 0 10px; }
   .you .yi { display: grid; grid-template-columns: 12px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); min-width: 0; }
   .you .yi:first-of-type { border-top: 0; }
   .you .yi .dot { background: var(--c); }
@@ -185,6 +207,7 @@
 </header>
 <main>
   <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
+  <section class="box roadmap" id="roadBox" hidden><h3>Roadmap <small>every stage to 1.0 and after, live from crew/BOARD.md · details in docs/roadmap.md</small></h3><div id="roadmap"></div></section>
   <section class="box you"><h3>Your move <small>what only you can do right now</small></h3><div id="you"></div></section>
   <section class="box rev" id="revBox" hidden><h3>Review folders <small>the studio: watch it, then write in its notes.md</small></h3><div id="reviews"></div></section>
   <section class="box flow"><h3>Right now <small>who's working, who everyone is waiting on, who's up next</small></h3><div id="flow"></div></section>
@@ -202,6 +225,7 @@
   <section class="box help"><details><summary>How to read this panel</summary><ul>
     <li><b>The top line</b> says it in one sentence: who is working, who needs you, whether anything is waiting to be committed.</li>
     <li><b>Mission</b> is the one job the whole crew is on now, and where each agent is with it. <span class="st in">DONE</span> means finished and checked out; green chips are done, grey ones not started.</li>
+    <li><b>Roadmap</b> is every stage of the game to 1.0 (and co-op after it): how many of its tasks are done, and each agent's share.</li>
     <li><b>Your move</b> lists what only you can do: start an agent (press <b>Copy prompt</b>, paste it into that agent's chat), or answer a question.</li>
     <li><b>Right now</b> shows who is working, who is waiting on whom, and who is ready.</li>
     <li><b>The cards</b> are each agent's own status. <b>Today</b> is who worked when; green lines are commits.</li>
@@ -298,7 +322,7 @@ function mission(board, tasks, statuses, exists) {
   const rows = [];
   for (const m of body.matchAll(/^- \*\*(\w+)\*\* · ([A-Z]{2}-\d+) · (\S+)\s*$/gm)) {
     const a = BY_NAME[m[1].toLowerCase()]; const t = tasks.find((x) => x.id === m[2]); const f = (a && statuses[a]) || {};
-    const state = t && t.box === 'x' ? 'in' : f.state === 'active' && (f.task || '').startsWith(m[2]) ? 'work' : exists[m[3]] ? 'wrote' : 'none';
+    const state = !t || t.box === 'x' ? 'in' : f.state === 'active' && (f.task || '').startsWith(m[2]) ? 'work' : exists[m[3]] ? 'wrote' : 'none';
     rows.push({ a, name: m[1], id: m[2], file: m[3], state });
   }
   return { title, goal, then, rows };
@@ -310,6 +334,21 @@ function missionRows(ms, lab) {
   if (!multi) return ms.rows.map((r) => `<div class="mr" ${cvar(r.a)}><span class="dot"></span><span class="nm">${esc(r.name)}</span><span class="faint">${esc(r.id)}</span><span class="sf"><span class="st ${lab[r.state][0]}">${lab[r.state][1]}</span> <a class="f" href="../${esc(r.file)}">${esc(r.file)}</a></span></div>`).join('');
   return [...by.entries()].map(([name, rs]) => { const a = rs[0].a; const n = rs.filter((r) => r.state === 'in').length;
     return `<div class="mr" ${cvar(a)}><span class="dot"></span><span class="nm">${esc(name)}</span><span class="faint">${n}/${rs.length}</span><span class="sf">${rs.map((r) => `<span class="st ${lab[r.state][0]}" title="${esc(lab[r.state][1])}">${esc(r.id)}</span>`).join(' ')}</span></div>`; }).join('');
+}
+// The roadmap table on the board: | **R1 · Name** | Status | Goal | Jerry plays | Tasks |. A listed task that has
+// left the board was finished and archived (crew.mjs tidy), so it counts as done.
+function roadmap(board, tasks) {
+  const body = section(board, 'The roadmap \\(D-43\\)').replace(/\r\n/g, '\n');
+  const out = [];
+  for (const m of body.matchAll(/^\| \*\*(R\d+) · ([^*]+)\*\* \| ([^|]*) \| ([^|]*) \| ([^|]*) \| ([^|]*) \|\s*$/gm)) {
+    const ids = [...m[6].matchAll(/\b([A-Z]{2}-\d+[a-z]?)\b/g)].map((x) => x[1]);
+    const st = ids.map((id) => { const t = tasks.find((x) => x.id === id); return { id, box: t ? t.box : 'x' }; });
+    const by = {};
+    for (const x of st) { const a = (AGENTS.find((g) => g[2] === x.id.slice(0, 2)) || [])[0]; if (!a) continue; by[a] ||= [0, 0]; by[a][1]++; if (x.box === 'x' || x.box === '~') by[a][0]++; }
+    out.push({ n: m[1], name: m[2].trim(), status: m[3].trim(), goal: m[4].trim(), plays: m[5].trim(), total: ids.length,
+      done: st.filter((x) => x.box === 'x' || x.box === '~').length, work: st.filter((x) => x.box === '>').length, blocked: st.filter((x) => x.box === '!').length, by });
+  }
+  return out;
 }
 function section(board, title) {
   const m = new RegExp('^## ' + title + '\\s*$', 'm').exec(board); if (!m) return '';
@@ -529,6 +568,25 @@ async function refresh() {
       <div class="rows">${missionRows(ms, lab)}</div>
       <div class="bar"><i style="width:${Math.round(100 * nIn / ms.rows.length)}%"></i></div>
       ${ms.then ? `<div class="then"><b>Then:</b> ${inline(ms.then)}</div>` : ''}`;
+  }
+
+  // ---- roadmap
+  const rm = roadmap(board, tasks);
+  document.getElementById('roadBox').hidden = !rm.length;
+  if (rm.length) {
+    const pct = (n, t) => (t ? (100 * n / t).toFixed(1) : 0) + '%';
+    document.getElementById('roadmap').innerHTML = '<div class="stages">' + rm.map((r) => {
+      const all = r.total > 0 && r.done === r.total;
+      const cls = all || /done/i.test(r.status) ? 'done' : /now|next|▶/i.test(r.status) ? 'now' : '';
+      const tag = cls === 'done' ? 'Done' : (r.status.replace(/[✓▶]/g, '').trim() || 'Later');
+      const agents = AGENTS.filter(([a]) => r.by[a]).map(([a, n]) => `<span ${cvar(a)}><b>${esc(n)}</b> ${r.by[a][0]}/${r.by[a][1]}</span>`).join('');
+      return `<div class="stage ${cls}"><div class="rn">${cls === 'done' ? '✓' : esc(r.n)}</div>
+        <div class="sh"><span class="sn">${esc(r.n)} · ${esc(r.name)}</span><span class="tag">${esc(tag)}</span>
+          <span class="cnt">${r.total ? `<b>${r.done}</b> of ${r.total} done${r.work ? ` · ${r.work} working` : ''}${r.blocked ? ` · ${r.blocked} blocked` : ''}` : 'tasks written later'}</span></div>
+        <div class="sbar"><i class="d" style="width:${pct(r.done, r.total)}"></i><i class="w" style="width:${pct(r.work, r.total)}"></i><i class="b" style="width:${pct(r.blocked, r.total)}"></i></div>
+        <div class="sg">${inline(r.goal)} <span class="faint">· Jerry plays: ${inline(r.plays)}</span></div>
+        ${agents ? `<div class="sa">${agents}</div>` : ''}</div>`;
+    }).join('') + '</div><div class="key">Bar:<i style="background:var(--ok)"></i>done<i style="background:color-mix(in srgb, var(--ok) 45%, var(--chip))"></i>working<i style="background:var(--warn)"></i>blocked</div>';
   }
 
   // ---- your move: agents that are ready and idle need Jerry's prompt; questions need his answer

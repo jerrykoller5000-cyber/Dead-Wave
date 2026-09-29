@@ -5,6 +5,9 @@
 //   node crew/crew.mjs next <agent>             your next task you can start now (skips ones that
 //                                               say "after XX-n" while XX-n is still open)
 //   node crew/crew.mjs mission                  the current mission and where everyone is on it
+//   node crew/crew.mjs newid <agent> "<what>"   the next unused task id for that agent (e.g. CU-77),
+//                                               logged so nobody else gets the same one. Always use
+//                                               this for a new task; never guess an id.
 //
 //   node crew/crew.mjs in   <agent> <task-id> "<what>" --model "<the model you run on>" --touch "index.html (part), tools/x.mjs"
 //   node crew/crew.mjs note <agent> "<progress: what you found or finished, one line>"
@@ -25,6 +28,8 @@
 //
 //   Lead / Jerry only:
 //   node crew/crew.mjs answer   Q-<n> "<answer>"
+//   node crew/crew.mjs tidy                     move every finished [x] task off the board into
+//                                               crew/archive/board-queues-<today>.md
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
 //
 // Agents: claude, cursor, chatgpt, grokbot, antigravity. Task ids: CL-, CU-, GP-, GB-, AG-.
@@ -56,6 +61,7 @@ const logPath = path.join(CREW, 'LOG.md');
 const boardPath = path.join(CREW, 'BOARD.md');
 const questionsPath = path.join(CREW, 'QUESTIONS.md');
 const requestsPath = path.join(ROOT, 'handoffs', 'requests.md');
+const archiveDir = path.join(CREW, 'archive');
 
 const read = (f) => (fs.existsSync(f) ? fs.readFileSync(f, 'utf8').replace(/^﻿/, '') : '');
 // Keep a file's own line endings when we append to or rewrite it.
@@ -258,6 +264,70 @@ function waitingTask(agent) {
 }
 const ownerOf = (id) => AGENTS[Object.keys(PREFIX).find((a) => id.startsWith(PREFIX[a] + '-'))] || '?';
 
+// --- tidy: finished tasks leave the board for crew/archive/ ----------------------------
+// A task is its "- [x] **XX-n**" line plus the indented lines under it. Phase headings
+// ("#### ") left with no tasks under them go too. Returns the ids moved.
+function tidyBoard() {
+  const text = read(boardPath), eol = eolOf(text);
+  const lines = text.replace(/\r\n/g, '\n').split('\n');
+  const keep = [], moved = [];
+  let agentHead = null, phaseHead = null;
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (/^## /.test(l)) { agentHead = null; phaseHead = null; }
+    if (/^### /.test(l)) { agentHead = l; phaseHead = null; }
+    if (/^#### /.test(l)) phaseHead = l;
+    const m = /^\s*- \[x\] \*\*([A-Z]{2}-\d+[a-z]?)\*\*/.exec(l);
+    if (!m) { keep.push(l); continue; }
+    const block = [l];
+    while (i + 1 < lines.length && /^\s{2,}\S/.test(lines[i + 1]) && !/^\s*- /.test(lines[i + 1])) block.push(lines[++i]);
+    if (i + 1 < lines.length && !lines[i + 1].trim() && keep.length && !keep[keep.length - 1].trim()) i++;
+    moved.push({ id: m[1], agentHead, phaseHead, block });
+  }
+  if (!moved.length) return [];
+  // Drop phase headings that are now empty (only blank lines before the next heading).
+  const out = [];
+  for (let i = 0; i < keep.length; i++) {
+    if (/^#### /.test(keep[i])) {
+      let j = i + 1; while (j < keep.length && !keep[j].trim()) j++;
+      if (j >= keep.length || /^#{2,4} /.test(keep[j])) { i = j - 1; continue; }
+    }
+    out.push(keep[i]);
+  }
+  const board = out.join('\n').replace(/\n{3,}/g, '\n\n');
+  fs.writeFileSync(boardPath, board.split('\n').join(eol), 'utf8');
+  // Append to today's archive, grouped by agent and phase.
+  if (!fs.existsSync(archiveDir)) fs.mkdirSync(archiveDir, { recursive: true });
+  const file = path.join(archiveDir, `board-queues-${now().slice(0, 10)}.md`);
+  const add = [];
+  let lastA = null, lastP = null;
+  for (const t of moved) {
+    const a = (t.agentHead || '### (no agent)').replace(/^### /, '## ');
+    const p = (t.phaseHead || '#### (no phase)').replace(/^#### /, '### ');
+    if (a !== lastA) { add.push('', a); lastA = a; lastP = null; }
+    if (p !== lastP) { add.push('', p, ''); lastP = p; }
+    add.push(...t.block);
+  }
+  append(file, [`<!-- crew.mjs tidy, ${now()}: ${moved.length} finished -->`, ...add, ''],
+    `# Board queues archived ${now().slice(0, 10)}\n\nFinished tasks moved off crew/BOARD.md (\`node crew/crew.mjs tidy\`). Each one's report is in handoffs/.\n\n`);
+  return moved.map((t) => t.id);
+}
+
+// --- newid: the next unused task id for an agent -----------------------------------------
+// Looks everywhere an id can already live: the board, the archive, the log (including ids
+// handed out by newid and not on the board yet), the roadmap and the handoff file names.
+function nextId(agent) {
+  const pre = PREFIX[agent];
+  const re = new RegExp('\\b' + pre + '-(\\d+)', 'g');
+  let max = 0;
+  const scan = (t) => { for (const m of String(t).matchAll(re)) max = Math.max(max, +m[1]); };
+  scan(read(boardPath)); scan(read(logPath)); scan(read(path.join(ROOT, 'docs', 'roadmap.md')));
+  if (fs.existsSync(archiveDir)) for (const f of fs.readdirSync(archiveDir)) scan(read(path.join(archiveDir, f)));
+  const hd = path.join(ROOT, 'handoffs');
+  if (fs.existsSync(hd)) scan(fs.readdirSync(hd).join(' '));
+  return `${pre}-${max + 1}`;
+}
+
 // --- the mission: the one thing the whole crew is doing now (BOARD.md "## Mission") -----
 function mission() {
   const board = read(boardPath).replace(/\r\n/g, '\n');
@@ -272,7 +342,8 @@ function mission() {
     const t = tasks.find((x) => x.id === r[2]);
     const st = agent ? readStatus(agent).fields : {};
     const turnedIn = fs.existsSync(path.join(ROOT, r[3]));
-    const state = t && t.box === 'x' ? 'turned in' : st.state === 'active' && (st.task || '').startsWith(r[2]) ? 'working' : turnedIn ? 'report written' : 'not started';
+    // A task that has left the board was finished and archived (crew.mjs tidy).
+    const state = !t || t.box === 'x' ? 'turned in' : st.state === 'active' && (st.task || '').startsWith(r[2]) ? 'working' : turnedIn ? 'report written' : 'not started';
     rows.push({ agent, name: r[1], id: r[2], file: r[3], state });
   }
   return { title, rows };
@@ -569,6 +640,18 @@ if (!cmd || cmd === 'panel') {
     log(who, 'NOTE', `answered Jerry's note on ${name}: look at ${version} · ${text.slice(0, 100)}`);
     console.log(`Answered under Jerry's note in review/${name}/notes.md: look at ${version}.`);
   } else { console.error('Usage: crew review | review take <asset> | review answer <asset> <agent> "<what changed>"'); process.exit(2); }
+} else if (cmd === 'newid') {
+  need(agent);
+  const what = positional.join(' ').trim();
+  if (!what) { console.error('Usage: crew newid <agent> "<what the task is, a few words>"'); process.exit(2); }
+  const id = nextId(agent);
+  log(agent, 'ID', `${id} ${what.slice(0, 120)}`);
+  console.log(id);
+} else if (cmd === 'tidy') {
+  const ids = tidyBoard();
+  if (!ids.length) { console.log('Nothing finished on the board.'); process.exit(0); }
+  log('claude', 'NOTE', `tidy: ${ids.length} finished task${ids.length > 1 ? 's' : ''} moved to crew/archive/board-queues-${now().slice(0, 10)}.md (${ids.join(', ')})`);
+  console.log(`Moved ${ids.length} finished task${ids.length > 1 ? 's' : ''} to crew/archive/board-queues-${now().slice(0, 10)}.md: ${ids.join(', ')}`);
 } else if (cmd === 'request') {
   need(agent);
   const [to, title, body] = positional;
@@ -579,6 +662,6 @@ if (!cmd || cmd === 'panel') {
   log(agent, 'REQUEST', `→ ${toName}: ${title}`);
   console.log('request added to handoffs/requests.md');
 } else {
-  console.error('Commands: (none) | mission | next | in | note | out | ask | request | check | answer | reviewed | review. See the top of crew/crew.mjs.');
+  console.error('Commands: (none) | mission | next | newid | in | note | out | ask | request | check | answer | reviewed | review | tidy. See the top of crew/crew.mjs.');
   process.exit(2);
 }
