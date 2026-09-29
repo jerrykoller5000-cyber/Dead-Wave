@@ -17,3 +17,7 @@ The studio is ready for your first note (CL-61). Open Tiny Trek\review\guardian-
 ## Q-3 · open · 2026-09-27T04:08Z · claude
 
 Grokbot's GB-60 (skulls always reach the bag) rests on one question about the skull you couldn't pick up at dawn: did it have a glowing ring on the ground under it? A real skull drop always has one, in the colour of that zombie's eyes. If yours had no ring, what you saw wasn't a skull drop (maybe a corpse's head), and we'd chase a different bug.
+
+## Q-4 · open · 2026-09-29T07:12Z · cursor
+
+Hollows (D-67), three calls: (1) Does being caught below end the run (the plan), or only cost the haul? (2) A fresh warren layout every run (the plan), or the same every run so they can be learned? (3) Should the secret's final fight (D-56) be underground in the chalk heart, behind the rune doors, rather than at the chalk mouth?

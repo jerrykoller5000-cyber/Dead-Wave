@@ -18,7 +18,7 @@ root.
 | R2 · The night has a shape | P-16 to P-33, P-101 to P-103, P-117, P-118 | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. |
 | R3 · The day feeds the night | P-34 to P-49, P-104 to P-109, P-110 to P-116, P-119 to P-121, P-125 to P-128 | The relay, then one call a day. Caches restock, drums burn, you vault your walls. Guns arrive by act at fixed prices, one mod each. | Days 1-10 fresh. |
 | R4 · The way out | P-50 to P-55, P-78, P-86, P-130 to P-133 | The boat at night 20, a victory screen and badges. The relay tells the story. | A run to the boat, and a win. |
-| R5 · Named nights and bigger systems | P-56 to P-68, P-94 to P-98, P-122 to P-124, P-129 | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, and the secret. | Nights 12-20 from the debug start, and the secret. |
+| R5 · Named nights and bigger systems | P-56 to P-68, P-94 to P-98, P-122 to P-124, P-129, P-134 to P-146 | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, and the Hollows under the caves by day. | Nights 12-20 from the debug start, and the secret. |
 | R6 · Finish (1.0) | P-79 to P-93, P-99 | Balance from medians, the first hour teaching itself, sound, readability, green tests, the budgets, the package. | Three full runs, then the release. |
 | R7 · Co-op (after 1.0) | Written when R6 closes | Up to 4 players, one hosting (D-58). | A night with friends. |
 
@@ -278,7 +278,8 @@ Goal: a run can be won, and the story is told.
 
 ### R5 · Named nights and bigger systems
 
-Goal: Fog Night, the siege, the wanderer, survivors, the guardian boss on its rig, and the secret.
+Goal: Fog Night, the siege, the wanderer, survivors, the guardian boss on its rig, the secret, and the Hollows
+under the caves by day (D-67).
 
 | ID | What the player gets | How it's built (reuse) | Owner | Size | Needs | Done when |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -305,6 +306,88 @@ Goal: Fog Night, the siege, the wanderer, survivors, the guardian boss on its ri
 | P-123 | A rabbit mound out of the way, with bones and a skull round it. Shoot it and a white rabbit takes the marine's head off, unless he has found the knockoff holy grenade: pull the pin, an angelic choir, and the rabbit is done. | One burrow (`burrows`) picked far from the paths, dressed with bones and a skull; a shot into it spawns the rabbit, a lunge and the head off (`lastDeathCause = 'rabbit'`). The grenade: a hidden pickup (the spot in the handoff), its own model, a choir cue on the pin pull (`core/audio.js`), the only thing that kills the rabbit. Our own models, names, sounds and words. | Claude | S | none | tNNs: a shot into that mound ends the run as `rabbit`; other mounds are harmless; with the grenade thrown at it the rabbit dies and the run goes on; the choir plays on the pin. Antigravity video. |
 | P-124 | Two new deaths to collect on the tombstone (struck by lightning, and the rabbit), a badge for killing the rabbit, and names for the boots and the grenade. | `DEATH_WAYS` gains `lightning` and `rabbit`; lines in strings; the tombstone's unlock (D-31); the badge in `ui/badges.js` (P-55); pickup names and lines for the two hidden items. | ChatGPT | S | P-122, P-123 | Unit tests; Antigravity shot of each on the tombstone. |
 | P-129 | Suppressed fire draws the horde less, but hits a little softer. | First the hearing rule the Not now row asked for: a shot draws zombies within a radius by gun (they turn and come); then suppressed shots are heard at a fraction of it and deal slightly less damage. | Grokbot | M | P-127 | tNNs: unsuppressed M4 fire draws a zombie at 40 m, suppressed not; suppressed damage lower by the handoff's figure. nightsim before and after. |
+
+#### The Hollows: underground by day (D-67, Jerry 2026-09-29)
+
+Jerry asked for a way past the cave guardian into an underground cave system: fought through by day only, for
+extra Cash and finds (blueprints, weapons), no building, and part of the story. Planned by Cursor at his order;
+nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, because this is an XL system.
+
+**How it works.**
+- **Where.** Under five of the six caves: root, shale, iron, wet and hill. Each has its own *warren*. The chalk cave
+  stays deadly: it's the guardian's home, over the source.
+- **Getting past the guardian: the Hush.** It's a box built from the relay's spare board. It plays the signal back
+  out of step, so the guardian can't hear the man carrying it.
+  - He gets it the morning after the relay is repaired, so Act 1 still teaches "don't go in" and Act 2 opens the
+    caves.
+  - The HQ charges it once each dawn: one delve a day, like one call a day (D-53).
+  - Lit at a mouth, it stops the walk-in grab, and E takes him down.
+  - Without it, everything topside stays as it is: the poke chase (D-26), the walk-in grab and the first-catch escape
+    (D-46).
+- **Daytime only.** He goes down only in prep. The alarm panel is topside, so the night can't start while he's
+  below. Nothing topside moves while he's under (prep has no clock), so a delve costs risk and supplies, not the
+  day.
+- **Down there.**
+  - Three depths: the Mouth, the Galleries and the Deep, each darker than the last. The gun light and the NVG
+    matter, which gives them a use by day.
+  - Sleepers in alcoves wake to noise and light. Nests feed a chamber until blown up.
+  - Each cave's role (`CAVE_ROLES`) applies to everything below it.
+  - Each Deep has one set piece: a knot of climbers in the roots, flankers in the shale clefts, an armoured mine crew
+    in the iron workings, the drowned in a flooded gallery, and the barrow king on his bier.
+  - No building of any kind: no build mode, no shovel, no tripods.
+- **The stir.**
+  - Gunfire fills a meter below, suppressed fire much less (D-65) and blasts most. The Hush keeps it down.
+  - When the meter fills, or the Hush runs flat (about 8 minutes), the walls answer: dust, a screech, ten seconds,
+    then the guardian comes through the rock.
+  - A bolt-hole or the way out saves him. The run's one kick-free still applies (D-46: it costs 50 HP and the bag).
+  - Otherwise it's the cave death. Death below ends the run like anywhere else.
+- **What he brings up.**
+  - Skulls from the kills. The loop stays skulls, then bank at the HQ window, then Cash.
+  - Supply crates: ammo and MedPens.
+  - Each warren's Deep has one strongbox a run. It holds one of:
+    - a blueprint he doesn't own;
+    - a gun before its arrival night (D-48);
+    - a weapon mod (P-48);
+    - an earned camo (D-66);
+    - a rune shard.
+  - The convoy's dog tags.
+  - A full delve's median pays about half the same day's night in skull value, so the nights stay the main road.
+- **Passages.** Clearing a warren's Deep opens a tunnel to the next cave round the compass for the rest of the run.
+  By day he can go in at one mouth and come out at the other.
+- **The story.**
+  - The convoy never arrived because the dead dragged it under. Its wreckage is in the Galleries, and twelve dog
+    tags across the five warrens each carry a line.
+  - The Hollows are old mine workings and barrows that the signal woke: the runes run through the rock from the pit,
+    and the deeper he goes, the louder it sings.
+  - Every Deep has a sealed rune door facing the lake, toward the chalk heart. It hums, and it stays shut.
+  - Rune shards give pieces of the pit's order, a second way into the secret (D-56).
+- **The rules it keeps.**
+  - Topside nothing moves: seeds, the world's layout and the cave positions stay as they are (rule 10).
+  - The warrens are laid out from their own dice, fresh each run, from a fixed kit per theme.
+  - Cleared warrens stay cleared for the run, and there are no saves (D-30).
+  - Co-op (D-58): the party goes down together; the details wait for R7. The runtime reads the players list from
+    the start.
+- **Jerry's calls (Q-4).**
+  - Does being caught below end the run (the plan), or only cost the haul?
+  - Is the layout fresh each run (the plan), or the same every run so the warrens can be learned?
+  - Should the secret's final fight (D-56) happen underground, in the chalk heart behind the rune doors, rather than
+    at the chalk mouth?
+
+| ID | What the player gets | How it's built (reuse) | Owner | Size | Needs | Done when |
+| --- | --- | --- | --- | --- | --- | --- |
+| P-134 | Nothing yet: the Hollows' spec. | `docs/specs/hollows.md` covers: the Hush and the mouth rule; the five warrens (theme, kit, set piece, strongbox); the three depths, their sizes and a delve's length (a full clear is about 8-10 minutes); the stir; the loot, with ChatGPT's numbers; the story beats; what topside does while he's below; the runtime contract agreed with Cursor (enter and leave, the ground and collider providers, the nav grid); co-op; and the answers to Jerry's three calls (Q-4). Rule 10 sign-off on the warrens' own dice. | Claude | M | D-67, P-86 | Jerry says yes. Cursor, Grokbot and ChatGPT can each start from it without questions. |
+| P-135 | The Hush: from the dawn after the relay is repaired, one charge a day. Lit at a mouth, the walk-in grab doesn't fire, and E takes him down. The chalk mouth refuses: "Too close to the source." | A charged/lit state at the HQ, re-armed at `startPrep` once `radioCall.repaired`. The walk-in grab (`checkScriptedKillTriggers`) checks it; the poke chase (D-26) doesn't. Contract: `hush-state { charged, lit, cave, battery }`. | Grokbot | S | P-134, P-32 | tNN: without a charge the walk-in grab fires as today; with one, E at a non-chalk mouth takes him below and spends the charge; the chalk mouth refuses; a poke still starts the chase; one charge a day; a run reset clears it. |
+| P-136 | Going down and coming up: a fade, and he stands in the warren's mouth tunnel. Nothing topside moves while he's below, only the warren is drawn, and building is refused with a line. | `core/hollow.js`: enter and leave; the topside frozen and hidden; the ground and collider providers switch (`sampleHeight`, `entityGroundY`, `worldSolids`, build solids) to the warren's; a nav grid from the kit's tiles for the zombies' flow field; build mode, placing, the shovel and tripods refused; the map shows the explored warren. Reads the players list (D-58). | Cursor | L | P-134, P-102 | tNN: enter, walk a scripted route with no fall-through, leave at the mouth he went in by; topside zombies and timers didn't tick; building is refused. fps in an empty warren within 5% of the topside HQ view. |
+| P-137 | Five warrens that look like where they are: root (roots, glowing fungus), shale (narrow clefts), iron (mine rails, carts, timbering), wet (flooded, knee-deep), hill (barrow tombs). The convoy's wreckage in the Galleries, and a sealed rune door in each Deep. | `world/hollows.js`: a tile kit per theme (tunnels, chambers, shafts, drops). Three depths laid out from their own dice per run and cave. Dark, with a few lamps and glow; the gun light and the NVG matter. Nothing topside moves (rule 10). | Claude | L | P-134 | TT builds all five from a seed. A test finds every loot point and the exit reachable. Draws and triangles under the spec's budget. Antigravity shots of each. |
+| P-138 | Fighting below: sleepers in alcoves wake to noise and light, nests feed a chamber until blown, and each Deep has its set piece (climbers, flankers, the mine crew, the drowned, the barrow king). | Spawns from the warren's points; `applyCaveRole` on everything below; nests as spawners with HP; set pieces from the existing kinds. At most 24 awake. Skulls drop as topside. The damage table (D-62) applies. | Grokbot | M | P-136, P-137, P-118 | tNN per theme: a shot within a sleeper's radius wakes it; a blown nest stops; the set piece spawns once; the cap holds. |
+| P-139 | The stir: noise fills a meter, the Hush holds it down, and when it fills or the Hush runs flat, the guardian comes through the rock after a 10 s warning. A bolt-hole or the way out saves him; the run's one kick-free still applies. | A stir meter from GB-105's hearing rule (suppressed shots much less, D-65; blasts most). The warning (dust, a screech); the guardian's grab into the existing scripted death, `startGrabScene`; D-46's escape (P-32) reused. The Hush battery runs about 8 minutes. | Grokbot | M | P-138, P-135, P-129 | tNN: 30 unsuppressed shots in 20 s fill it and suppressed ones don't; the warning, then the grab; the kick-free leaves him below with 50 HP less and no bag; a second catch ends the run as `caveguard`; a flat Hush brings it too. |
+| P-140 | The haul: skulls, supply crates, and one strongbox a warren a run. It holds a blueprint he doesn't own, a gun before its arrival night, a mod, an earned camo or a rune shard. And the convoy's twelve dog tags. | `game/hollows-loot.js` (pure): prize tables by depth and theme against the run's state (owned, the night, D-48's arrivals, D-66's camos). Skull value tuned so a full delve's median pays about half the same day's night. | ChatGPT | S | P-134, P-46 | Unit tests: every prize is valid for the run state, with no repeats, and the same for the same seed. A budget test: a delve a day doesn't break the twenty-night budget. |
+| P-141 | The words and the HUD below: the Hush's battery and the stir; the depth; "No building down here"; the prize and tag pickups. On the board: the Hush charged, the warrens cleared and the passages open. The chalk mouth's refusal. | `ui/hollows.js` (pure, like `ui/bounties.js`), strings, the board row. | ChatGPT | M | P-139, P-140 | Unit tests; Antigravity shots at 1280 and 390 px. |
+| P-142 | What the Hollows say: the convoy went under; twelve dog tags, a line each; the relay's lines learn where the signal is loudest; the rune doors hum; rune shards give pieces of the pit's order, a second way into the secret. | `docs/story.md`: the tags, the doors and the shards, beside the relay's twenty lines (P-86) and the secret (P-94). | Claude | S | P-134, P-94 | Jerry reads it; the lines go into strings with P-141. |
+| P-143 | Passages: a cleared warren opens a tunnel to the next cave round the compass for the rest of the run; in at one mouth, out at the other, by day. | The runtime's exit at the Deep, linked to the neighbour's mouth. Cleared warrens are held for the run and reset with it. | Cursor | S | P-136, P-137 | tNN: a cleared warren's passage takes him out at the neighbouring mouth; an uncleared one doesn't; a run reset closes them. |
+| P-144 | The Hollows sound alive: drips, the Hush's hum, the stir's rumble, the guardian in the walls, and an underground state for the music. | Short cues through the director and `core/audio.js`. | Claude | S | P-139 | t61 green; Jerry listens. |
+| P-145 | Measured: fps below on Jerry's GPU with 24 awake and the lights, and a scripted delve per warren headless: time, deaths, and pay against the same day's night. | `tools/nightsim.mjs --hollow`, `tools/bench.mjs` below. | Cursor | S | P-139 | Numbers in the handoff; 60 fps holds. |
+| P-146 | Eyes on it: each warren walked on the GPU, day entry to exit, shots of every depth, a video of the stir running out, fps. | Antigravity's runner. | Antigravity | S | P-141 | A report in `qa/` with shots, the video and fps. |
 
 ### R6 · Finish (1.0)
 
@@ -726,3 +809,16 @@ Every item is a task in `crew/BOARD.md` (Queues). Tasks with no P-id: GB-59 (Bro
 | P-131 | CU-70 | R4 |
 | P-132 | CL-97 | R4 |
 | P-133 | GP-82 | R4 |
+| P-134 | CL-98 | R5 |
+| P-135 | GB-106 | R5 |
+| P-136 | CU-71 | R5 |
+| P-137 | CL-99 | R5 |
+| P-138 | GB-107 | R5 |
+| P-139 | GB-108 | R5 |
+| P-140 | GP-83 | R5 |
+| P-141 | GP-84 | R5 |
+| P-142 | CL-100 | R5 |
+| P-143 | CU-72 | R5 |
+| P-144 | CL-101 | R5 |
+| P-145 | CU-73 | R5 |
+| P-146 | AG-29 | R5 |

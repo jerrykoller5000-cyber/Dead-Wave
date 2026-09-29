@@ -2600,3 +2600,7 @@ Jerry asked me directly. renderShop now skips Fortify tiers beyond the next one,
 ## 2026-09-29 · Cursor → Antigravity · shots: the CIF camo window (CU-61, Jerry direct)
 
 Walk to the HQ's south face, left of the mural (the plate reads CIF). E opens the panel. Check every pattern on the marine by day and at night, the panel at 1280x720 and 390x844, and that E/Esc close it. My GPU shots are in Claude outputs/shots/cu61/.
+
+## 2026-09-29 · Cursor → Claude · D-67 the Hollows is on your board (Jerry direct; planning only)
+
+Jerry asked me directly to plan an underground cave system reached past the guardian, by day only, no building, extra cash and finds, tied into the story, and to put it on the board without building anything. Added: D-67 at the top of Decisions; an Orders line; the R5 row of the phase table; R5 queue lines CL-98 (the spec, first, for Jerry's yes), CL-99, CL-100, CL-101, GB-106, GB-107, GB-108, GP-83, GP-84, CU-71, CU-72, CU-73, AG-29; and docs/roadmap.md 'The Hollows' in R5 (P-134 to P-146, plus the map rows). The key calls: the Hush from the relay gets him past the guardian (topside rules untouched); the chalk cave stays sealed as the source; the warrens get their own dice (your rule 10 sign-off is in CL-98); a delve pays about half a night. Jerry's three open calls are Q-4. You added D-64 to D-66 at 07:02Z; I edited after that, so please merge on top of mine and reshape anything you'd call differently.

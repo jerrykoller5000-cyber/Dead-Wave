@@ -105,7 +105,7 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91 |
 | **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82 |
-| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105 |
+| **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29 |
 | **R6 · Finish (1.0)** | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
 
 **The story it tells (D-44, "The Signal").** The relay on the mast went silent three weeks ago; the convoy never
@@ -117,6 +117,12 @@ For players who look, the relay's static and the pit stones hide a way to silenc
 guardian for the true ending. `docs/roadmap.md` has it in full.
 
 ## Orders from Jerry
+
+- **2026-09-29, ~07:06Z · An underground cave system, on the board only.** "Someway to get past the cave Guardian.
+  Underground cave system accessible through the cave entrances. Players can fight through underground caves during
+  the daytime only... play underground for some extra cash... maybe they can unlock blueprints or weapons... They
+  cannot build under there. We need to work it into the story... Don't actually do any work, just come up with a
+  cohesive plan and put it on the board." Planned by Cursor as D-67 (the Hollows), R5, P-134 to P-146.
 
 - **2026-09-27, ~18:00Z · Finish R1, then halt.** "After we finish Phase R1 we are going to halt work for a few days
   until some of the usage can reset." So: R1 closes (GB-70 and CL-68 once Jerry's lab notes are in; AG-20 and AG-21 on
@@ -162,6 +168,33 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 ## Decisions
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
+
+- **D-67 · The Hollows: underground by day (Jerry, 2026-09-29; planned by Cursor at his order).** Five of the six
+  caves (root, shale, iron, wet, hill) have a warren under them. The chalk cave stays deadly: it's the guardian's home,
+  over the source.
+  - **Getting past the guardian: the Hush.** A box built from the relay's spare board plays the signal back out of
+    step, so the guardian can't hear the man carrying it. He gets it the morning after the relay is repaired (Act 2).
+    The HQ charges it once each dawn: one delve a day. Lit at a mouth, it stops the walk-in grab, and E takes him
+    down. Topside rules stay as they are (the poke chase D-26, the walk-in grab, D-46).
+  - **Daytime only.** He goes down only in prep, the night can't start while he's below, and nothing topside moves
+    while he's under.
+  - **Down there.** Three depths, dark (the gun light and the NVG earn their keep): sleepers that wake to noise and
+    light, nests to blow up, and each cave's role applies. Each Deep has a set piece (the climbers' knot, the shale
+    flankers, the iron mine crew, the drowned, the barrow king). No building of any kind.
+  - **The stir.** Noise fills a meter, suppressed fire much less (D-65). When it fills, or the Hush runs flat
+    (about 8 minutes), the guardian comes through the rock after a 10 s warning. A bolt-hole or the way out saves
+    him; the run's one kick-free applies (D-46). Otherwise the cave death, which ends the run.
+  - **The haul.** Skulls (banked at the HQ as always), supply crates, and one strongbox per warren per run: a
+    blueprint he doesn't own, a gun before its arrival night (D-48), a mod, an earned camo (D-66) or a rune shard.
+    A full delve pays about half a night, so the nights stay the main road. Clearing a Deep opens a passage to the
+    next cave for the run.
+  - **The story.** The convoy never arrived because the dead dragged it under: its wreckage and twelve dog tags
+    are down there. The signal's runes run through the rock from the pit; every Deep has a sealed rune door that
+    hums toward the lake. Rune shards are a second way into the secret (D-56).
+  - **The rules it keeps.** The world topside, its seeds and the caves stay as they are (rule 10). The warrens get
+    their own dice, fresh each run. Co-op goes down as a party (details in R7).
+  - **Tasks.** R5, spec first: CL-98, then GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101,
+    CU-73, AG-29. Jerry's three calls are Q-4. Details: `docs/roadmap.md` "The Hollows", P-134 to P-146.
 
 - **D-66 · The dressing room (Jerry, 2026-09-29).** The CIF becomes a dressing room with a 3D view of the marine he can
   turn a full 360 while he dresses him. Each item takes its own camo: helmet, facemask, trousers, holster, hat,
@@ -639,6 +672,13 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [ ] **CU-54** **R5.** R5 measured: fps on Fog Night and the siege, with the wanderer out, on the GPU. After CL-76;
   after GB-88.
+- [ ] **CU-71** **R5 · P-136.** The Hollows' runtime (D-67): going down and coming up, topside frozen and hidden, the
+  ground, colliders and a nav grid switched to the warren, building refused, players list aware. After CL-98; after
+  CU-63. Details: `docs/roadmap.md` P-136.
+- [ ] **CU-72** **R5 · P-143.** Passages: a cleared warren's Deep opens a tunnel to the next cave round the compass,
+  for the run. After CU-71; after CL-99. Details: `docs/roadmap.md` P-143.
+- [ ] **CU-73** **R5 · P-145.** The Hollows measured: fps below with 24 awake on the GPU; a scripted delve per warren
+  (`nightsim --hollow`): time, deaths, pay against the same day's night. After GB-108. Details: `docs/roadmap.md` P-145.
 
 #### R6 · Finish (1.0)
 
@@ -775,6 +815,14 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   rig and can die there. After GP-70; after CL-78. Details: `docs/roadmap.md` P-97.
 - [ ] **GB-93** **R5 · P-98.** Swarm Night on 17: runners from every cave, faster pushes. After AG-25. Details:
   `docs/roadmap.md` P-98.
+- [ ] **GB-106** **R5 · P-135.** The Hush (D-67): one charge a dawn once the relay is up; lit at a mouth it stops the
+  walk-in grab and E goes down; the chalk mouth refuses; the poke chase unchanged. After CL-98; after GB-78. Details:
+  `docs/roadmap.md` P-135.
+- [ ] **GB-107** **R5 · P-138.** Fighting below: sleepers that wake to noise and light, nests to blow up, each Deep's
+  set piece, cave roles, 24 awake at most. After CU-71; after CL-99; after CL-91. Details: `docs/roadmap.md` P-138.
+- [ ] **GB-108** **R5 · P-139.** The stir: noise fills a meter (suppressed much less), the Hush holds it; full or flat,
+  the guardian comes through the rock; bolt-holes, the kick-free, else the cave death. After GB-107; after GB-106;
+  after GB-105. Details: `docs/roadmap.md` P-139.
 
 #### R6 · Finish (1.0)
 
@@ -870,6 +918,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   screen. After GB-90. Details: `docs/roadmap.md` P-66.
 - [ ] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
   ending, the rune gun at the dock. After CL-79. Details: `docs/roadmap.md` P-96.
+- [ ] **GP-83** **R5 · P-140.** The Hollows' haul (D-67): `game/hollows-loot.js`: skulls, crates, one strongbox a
+  warren a run (a blueprint, an early gun, a mod, a camo, a rune shard), the twelve dog tags; a delve pays about half
+  a night. After CL-98; after GP-60. Details: `docs/roadmap.md` P-140.
+- [ ] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
+  here", pickups; the board's warrens and passages; the chalk mouth's refusal. After GB-108; after GP-83. Details:
+  `docs/roadmap.md` P-141.
 
 #### R6 · Finish (1.0)
 
@@ -909,6 +963,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [ ] **AG-25** **R5.** Fog Night and the siege on the GPU: shots NVG on and off, fps. After CL-76; after GB-88.
 - [ ] **AG-26** **R5.** Survivors, the wanderer and the secret quest walked through on the GPU. After GB-92.
+- [ ] **AG-29** **R5 · P-146.** The Hollows on the GPU: each warren walked from the mouth to the Deep and out, shots of
+  every depth, a video of the stir running out, fps. After GP-84. Details: `docs/roadmap.md` P-146.
 
 #### R6 · Finish (1.0)
 
@@ -1015,6 +1071,16 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   lake goes quiet. After CL-79. Details: `docs/roadmap.md` P-95.
 - [ ] **CL-81** **R5 · P-68.** The kick-free gets a real let-go beat in the studio. After GB-78; after CL-62. Details:
   `docs/roadmap.md` P-68.
+- [ ] **CL-98** **R5 · P-134.** The Hollows' spec (D-67), `docs/specs/hollows.md`: the Hush, the five warrens, the
+  depths, the stir, the loot, the story, the runtime contract with Cursor, co-op, and Jerry's three calls (Q-4), for
+  Jerry's yes. After CL-74. Details: `docs/roadmap.md` P-134.
+- [ ] **CL-99** **R5 · P-137.** The five warrens: a tile kit per theme (root, shale, iron, wet, hill), three depths from
+  their own dice per run, the convoy's wreckage, a sealed rune door in each Deep; nothing topside moves. After CL-98.
+  Details: `docs/roadmap.md` P-137.
+- [ ] **CL-100** **R5 · P-142.** What the Hollows say: the convoy went under, twelve dog tags, the rune doors, rune
+  shards into the secret, in docs/story.md. After CL-98; after CL-79. Details: `docs/roadmap.md` P-142.
+- [ ] **CL-101** **R5 · P-144.** The Hollows sound alive: drips, the Hush's hum, the stir, the guardian in the walls,
+  the music's underground state. After GB-108. Details: `docs/roadmap.md` P-144.
 
 #### R6 · Finish (1.0)
 

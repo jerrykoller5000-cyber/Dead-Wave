@@ -4,10 +4,10 @@ state: idle
 model: Grok 4.7
 task: —
 touching: —
-since: 2026-09-29T05:30Z
-next: CU-59 R2 · P-55. `debugTouched`: one shell flag set by any `TT.*` 
+since: 2026-09-29T07:12Z
+next: CU-69 R3 · P-128. Fire selectors (D-65): a key toggles semi and au
 blocked-on: —
-last-report: handoffs/2026-09-29-cursor-CU-61.md
+last-report: handoffs/2026-09-29-cursor-CU-74.md
 
 ## Notes
 
