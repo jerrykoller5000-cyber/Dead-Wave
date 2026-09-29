@@ -102,8 +102,8 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-61, AG-22 |
-| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22 |
+| **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24 |
 | **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret. | Nights 12-20 from the debug start; the secret. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26 |
 | **R6 · Finish (1.0)** | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
@@ -163,13 +163,28 @@ before) are in `crew/archive/board-queues-2026-09-26.md`.
 
 Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
 
+- **D-60 · Rain puts fires out (Jerry, 2026-09-29).** Today rain only shortens ground and tree fires and stops them
+  spreading. From GB-102 it also reaches the rest: a burning zombie burns out faster in the wet and stops setting
+  others alight; campfires sputter down to embers while it pours and come back after; the marine won't light up
+  in the rain (GP-74's cigarette), a lit one hisses out when a shower starts, and a dropped butt leaves no ember.
+  Fire weapons are weaker on rainy nights on purpose. GB-102, R3. Details: `docs/roadmap.md` P-109.
+- **D-59 · Perks go; the marine learns by doing (Jerry, 2026-09-29).** The six perks leave the kiosk. The same six
+  skills rank up (0 to 5) from what the player does: Vitality from nights survived and comebacks from under 25% HP;
+  Stopping power from headshot and one-shot kills; Quick hands from reloads under pressure (magazine at or under a
+  quarter, a zombie within 8 m); Fleet foot from running while chased and close dodge rolls; Scavenger from skulls
+  banked at the HQ; Grenadier from explosive multi-kills (3+). Nothing is earned by getting hurt, reloading for
+  nothing or jogging circles by day. Ranks last the run and reset on a fresh start (D-30 stands: no power between
+  runs). Each player learns his own (D-58). Caps: Fleet foot +25% at rank 5, Scavenger +30% (+6% a rank); no timed
+  active reload for now. The streak's temporary "fast feet" and "quick hands" are renamed so the names don't clash.
+  Perks were a large Cash sink: the economy is re-based before P-46 and P-47. Lands in R3: CL-88, CU-62, GB-101,
+  GP-76, GP-77. Details: `docs/roadmap.md` P-104 to P-108.
 - **D-58 · Co-op for up to 4 players, one player hosts (Jerry, 2026-09-29).** The host's game runs everything it runs
   today: the zombies, the waves, the director, Cash and the builds. The other players send their movement and shots
   to the host, and the host sends back where everything is. Not lockstep: the game rolls about 950 dice a run, so
   two copies can't be kept identical. The networking comes after 1.0, as its own phase (R7), through the D-57
   desktop app (it can host a game; a browser page can't). The groundwork starts now, in R2: the game learns to
-  hold a list of players instead of one marine (CL-87, CU-61, GB-100), and plays exactly the same with one. From
-  CU-61 on, the rule for everyone: new game logic asks the players list (`nearestPlayer`, `players`), never
+  hold a list of players instead of one marine (CL-87, CU-63, GB-100), and plays exactly the same with one. From
+  CU-63 on, the rule for everyone: new game logic asks the players list (`nearestPlayer`, `players`), never
   `player.position`; only the local view (camera, HUD, sound, culling) and the marine's own movement read him
   directly. `tools/check-players.mjs` holds the line. No React or other rewrite: the game stays one HTML module.
 - **D-57 · 1.0 ships as a desktop app, not a zip (Jerry, 2026-09-27).** The game stays what it is (one HTML
@@ -527,13 +542,18 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 - [ ] **CU-51** **R2 · P-13.** R2 measured: nightsim medians for the new shape, bench fps with 48 and 8 reacting.
   After GB-73; after GB-66. Details: `docs/roadmap.md` P-13.
-- [ ] **CU-61** **R2 · P-102.** Co-op groundwork (D-58): the players list. `players = [localPlayer]`, `nearestPlayer`,
+- [ ] **CU-63** **R2 · P-102.** Co-op groundwork (D-58): the players list. `players = [localPlayer]`, `nearestPlayer`,
   and every game-logic read of `player.position` moved onto them; the local view and his own movement stay. The
   game plays exactly the same; `tools/check-players.mjs` fails if the direct reads grow; `TT.addDummyPlayer()` for
   tests. After CL-87. Details: `docs/roadmap.md` P-102.
 
 #### R3 · The day feeds the night
 
+- [ ] **CU-62** **R3 · P-105.** Skills by doing (D-59): the plumbing. Perks out of the code (`PERKS`, `perkLevels`,
+  `perkCost`, the shop rows; 18 call sites); a per-player `skills` store with `addSkillXp(player, key, n)` and
+  `skillLvl`, reset in `resetGame`; `dmgMult`, `reloadMult`, `speedMult`, `cashMult`, `maxGrenades` and the blast
+  radius read skills; a `skill-up` event; t25 and the perk tests re-based. After CL-88 and CU-63. Details:
+  `docs/roadmap.md` P-105.
 - [ ] **CU-59** **R2 · P-55.** `debugTouched`: one shell flag set by any `TT.*` hook that changes the run (the `*Dbg`
   setters, `loopNextNight`, `loopMorning`, `skipPrep`, the scripted-kill and cave hooks), reset at a fresh start;
   `recordFinishedRun` passes `eligible: !debugTouched`. So a debug run earns no badge (GP-65). Small.
@@ -636,10 +656,18 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   small. `docs/contracts.md`, lifetime badges.
 - [ ] **GB-100** **R2 · P-103.** Co-op groundwork (D-58): the zombies and the director go for the nearest living
   player in `players`: the flow field from every player, attacks on whoever they reach, the guardian's progress to
-  the nearest. One player plays the same. After CU-61. Details: `docs/roadmap.md` P-103.
+  the nearest. One player plays the same. After CU-63. Details: `docs/roadmap.md` P-103.
 
 #### R3 · The day feeds the night
 
+- [ ] **GB-102** **R3 · P-109.** Rain puts fires out (D-60): burning zombies burn out faster and stop spreading in the
+  wet; campfires sputter to embers and come back; no cigarette in the rain, a lit one goes out, no ember from a dropped
+  butt (GP-74's idle, `studio/marine-idle.js`). nightsim on a rainy night before and after. Details:
+  `docs/roadmap.md` P-109.
+- [ ] **GB-101** **R3 · P-106.** Skills by doing (D-59): the combat counters. Headshot and one-shot kills; reloads
+  under pressure; running while chased and dodge rolls within 1.5 m of an attack (with GP-75's roll); explosive
+  multi-kills (grenades, the launcher, drums); dawns survived and comebacks from under 25% HP. Each feeds CU-62's
+  `addSkillXp`. After CU-62. Details: `docs/roadmap.md` P-106.
 - [ ] **GB-81** **R3 · P-38.** A crate pick brings the plane over the mast; it lands with a small guard pack; the
   random timer stops once the relay is up (D-49). After GP-55; after CU-58. Details: `docs/roadmap.md` P-38.
 - [ ] **GB-82** **R3 · P-39.** The Lights out dare: the HQ lamp stays dark tonight, kills pay 25% more. After GP-55.
@@ -709,6 +737,12 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 
 #### R3 · The day feeds the night
 
+- [ ] **GP-76** **R3 · P-107.** Skills by doing (D-59): the kiosk loses the Perks tab; a skills panel (six rows, rank
+  and progress) in the pause menu and on the death card; a "Fleet foot · rank 2" toast on `skill-up`; the strings,
+  the streak boosts' new names, `ui/strings.test.mjs`. After CU-62. Details: `docs/roadmap.md` P-107.
+- [ ] **GP-77** **R3 · P-108.** The economy re-based without perks (D-59): the GP-41 table redone with no perk
+  spending, skull values or new sinks adjusted so Cash still matters on nights 10-20; `ui/economy*.test.mjs`. Before
+  P-46 and P-47. After CL-88. Details: `docs/roadmap.md` P-108.
 - [x] **GP-54** **R3 · P-36.** The relay, once repaired, can be called once each prep (a per-day `callable` state).
   Details: `docs/roadmap.md` P-36.
 - [x] **GP-55** **R3 · P-37.** Tonight's call: three cards on the HQ board, one pick, gone at the alarm (D-53). After
@@ -835,11 +869,14 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
 - [ ] **CL-71** **R2 · P-21.** Late Ember and Guardian tiers, so nights 16 and 18 stop reusing nights 4 and 6. After
   CL-70. Details: `docs/roadmap.md` P-21.
 - [ ] **CL-87** **R2 · P-101.** Co-op groundwork (D-58): `docs/coop.md`, the contract for "a player" (what each one
-  owns, what is shared), the players-list API CU-61 builds, the three kinds of `player.position` read, and a first
-  sketch of the host's messages for R7. Before CU-61. Details: `docs/roadmap.md` P-101.
+  owns, what is shared), the players-list API CU-63 builds, the three kinds of `player.position` read, and a first
+  sketch of the host's messages for R7. Before CU-63. Details: `docs/roadmap.md` P-101.
 
 #### R3 · The day feeds the night
 
+- [ ] **CL-88** **R3 · P-104.** Skills by doing (D-59): `docs/skills.md`, the spec: what counts for each of the six,
+  the rank thresholds, the effects and caps, the reset on a fresh start, one set per player (D-58), and the new names
+  for the streak's boosts. First of the D-59 tasks. Details: `docs/roadmap.md` P-104.
 - [ ] **CL-72** **R3 · P-43.** Fuel drums back at the guarded wrecks, sheds and the mast: they chain, and they're back
   each morning. Rule 10 signed off. Details: `docs/roadmap.md` P-43.
 
