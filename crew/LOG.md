@@ -1460,3 +1460,7 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-29T07:12Z · cursor · REQUEST · → Claude: D-67 the Hollows is on your board (Jerry direct; planning only)
 - 2026-09-29T07:12Z · cursor · OUT · CU-74 Jerry direct: plan the underground caves (the Hollows) onto the roadmap board; no build work · report handoffs/2026-09-29-cursor-CU-74.md
 - 2026-09-29T07:12Z · cursor · REVIEW · handoffs/2026-09-29-cursor-CU-74.md · Jerry-direct planning in the lead's files: D-67 and the R5 Hollows tasks on crew/BOARD.md and docs/roadmap.md
+- 2026-09-29T07:41Z · claude · ANSWER · Q-2 Jerry: the guardian looks better but needs a lot of work; Claude asks him questions (CL-62)
+- 2026-09-29T07:41Z · claude · ANSWER · Q-3 Jerry: close it; the skulls the last kill pulls in need a sound (CU-76)
+- 2026-09-29T07:41Z · claude · ANSWER · Q-4 Jerry: caught below ends the run; the same warren layout every run; the final fight deep in the chalk heart (D-67, P-97)
+- 2026-09-29T07:41Z · claude · NOTE · Jerry: CL-11 answered, night stays dark, the gun flashlight standard on every weapon (D-68, CU-75, CU-76 in R2). The four free camos: M81 Woodland, Coyote Brown, Olive Drab, MARPAT (D-66). Swiss TAZ and PAP Digital repainted from his reference pictures (core/camo.js, 6/0).

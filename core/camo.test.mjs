@@ -57,4 +57,6 @@ test('the new patterns look their part', () => {
   assert.ok(count('sumpftarn').size > 20, 'Sumpftarn has blurred edges');
   assert.ok(count('teloMimetico').size > 20, 'Telo Mimetico has soft edges');
   assert.ok(count('zaireLeopard').has(0x111310), 'the leopard has black rosettes');
+  assert.equal(count('swissTaz').size, 4, 'Swiss TAZ: grey, sage, mauve and maroon');
+  assert.ok(count('papDigital').has(0x2b2f4e) && count('papDigital').has(0xb2cdbd), 'PAP: navy and mint clusters');
 });

@@ -102,7 +102,7 @@ tasks can start as soon as their own "after" is met, so the lanes keep moving.
 | Phase | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91 |
+| **R2 · The night has a shape** | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, GB-97, GB-98, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, CU-76 |
 | **R3 · The day feeds the night** | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69 |
 | **R4 · The way out** | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82 |
 | **R5 · Named nights and bigger systems** | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29 |
@@ -192,17 +192,26 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first.
     are down there. The signal's runes run through the rock from the pit; every Deep has a sealed rune door that
     hums toward the lake. Rune shards are a second way into the secret (D-56).
   - **The rules it keeps.** The world topside, its seeds and the caves stay as they are (rule 10). The warrens get
-    their own dice, fresh each run. Co-op goes down as a party (details in R7).
+    their own dice with a fixed seed: the same layout every run, so they can be learned (Jerry, Q-4). Co-op goes
+    down as a party (details in R7).
   - **Tasks.** R5, spec first: CL-98, then GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101,
-    CU-73, AG-29. Jerry's three calls are Q-4. Details: `docs/roadmap.md` "The Hollows", P-134 to P-146.
+    CU-73, AG-29. Details: `docs/roadmap.md` "The Hollows", P-134 to P-146.
+  - **Jerry's answers (Q-4, 2026-09-29).** Caught below ends the run. The same layout every run. The secret's final
+    fight (D-56, P-97) happens deep in the chalk heart, behind the rune doors, not at the chalk mouth.
 
+- **D-68 · Night stays dark; the flashlight is standard (Jerry, 2026-09-29, CL-11 answered).** Nights stay as dark as
+  they are, for the atmosphere and to push the flashlight and the NVGs. The gun flashlight is no longer bought: every
+  weapon has it from the start (L). The NVGs stay earned. P-85's readability stays subtle and never brightens the
+  night. Skulls pulled into the bag after the last kill of a night now make a sound, so he knows he has them. CU-75,
+  CU-76.
 - **D-66 · The dressing room (Jerry, 2026-09-29).** The CIF becomes a dressing room with a 3D view of the marine he can
   turn a full 360 while he dresses him. Each item takes its own camo: helmet, facemask, trousers, holster, hat,
   gloves, shorts, backpack, and the armour with its straps; weapons take camo too. Boots come in black, brown or tan.
   Hats: 8-point cover, boonie, ballcap (worn forwards or backwards). Gloves on or off, sleeves rolled or down, shorts
   or trousers. Hair, eye and skin colour. The facemask starts coyote brown and never comes off: his face stays a
-  mystery. Four base camos are free; the rest are earned in play (days survived, kill streaks and the like, the rules
-  in CL-96); the console's "dapper dan" unlocks everything. CL-96 (the spec, first), CU-70, CL-97, GP-82.
+  mystery. Four base camos are free: M81 Woodland, Coyote Brown, Olive Drab and MARPAT (Jerry); the rest are earned in
+  play (days survived, kill streaks and the like, the rules in CL-96); the console's "dapper dan" unlocks everything.
+  "Pants" and "trousers" are the same item. CL-96 (the spec, first), CU-70, CL-97, GP-82.
 - **D-65 · Suppressors and fire selectors (Jerry, 2026-09-29).** A suppressor upgrade for the M4, AK-47, pistol,
   sniper, Uzi and shotgun (not the AA-12), each one styled to belong on its gun. Zombies will notice suppressed fire
   less, and suppressed rounds hit a little softer: that balance comes later, with a hearing rule for the horde (the
@@ -625,6 +634,10 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   and every game-logic read of `player.position` moved onto them; the local view and his own movement stay. The
   game plays exactly the same; `tools/check-players.mjs` fails if the direct reads grow; `TT.addDummyPlayer()` for
   tests. After CL-87. Details: `docs/roadmap.md` P-102.
+- [ ] **CU-75** **R2 · P-147.** The gun flashlight standard from the start (D-68): owned on every weapon at a fresh run,
+  its kiosk row gone, L still toggles it. Details: `docs/roadmap.md` P-147.
+- [ ] **CU-76** **R2 · P-148.** A sound for the skulls the last kill pulls into the bag (D-68, Jerry on Q-3): one
+  collect chime as they land (not one per skull), with the count on screen. Details: `docs/roadmap.md` P-148.
 
 #### R3 · The day feeds the night
 
@@ -1007,6 +1020,8 @@ finished work before the roadmap is in `crew/archive/board-queues-2026-09-26.md`
   counter named; P-26's plates as its first row. Before GB-104 and GP-80. Details: `docs/roadmap.md` P-118.
 - [ ] **CL-62** **R2.** The rest of the guardian through the studio: the chase, the walk-out and the throw as scenes
   and clips, until Jerry's notes say good. Carried over. After CL-64 (done).
+  Jerry (2026-09-29, Q-2): "looking better but still needs a lot of work"; Claude asks him questions and works from
+  his answers.
 - [ ] **CL-69** **R2 · P-19.** The score follows the night's shape: a break in the breather, bridge and climax at the
   last push. After GB-71. Details: `docs/roadmap.md` P-19.
 - [ ] **CL-70** **R2 · P-20.** Night 19 sounds bigger than night 2: a gain that climbs night by night. Details:

@@ -15,7 +15,7 @@ root.
 | Phase | Items | What it gets the player | Jerry's play at the end |
 | --- | --- | --- | --- |
 | R1 · Trust the loop, and feel it | P-1 to P-15, P-70 to P-77 | Skulls reach the bag, building says what it does, the dead react when they're hit, and the marine gets knocked around. | A fresh run to night 5, and his notes in the motion lab. |
-| R2 · The night has a shape | P-16 to P-33, P-101 to P-103, P-117, P-118 | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. |
+| R2 · The night has a shape | P-16 to P-33, P-101 to P-103, P-117, P-118, P-147, P-148 | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. |
 | R3 · The day feeds the night | P-34 to P-49, P-104 to P-109, P-110 to P-116, P-119 to P-121, P-125 to P-128 | The relay, then one call a day. Caches restock, drums burn, you vault your walls. Guns arrive by act at fixed prices, one mod each. | Days 1-10 fresh. |
 | R4 · The way out | P-50 to P-55, P-78, P-86, P-130 to P-133 | The boat at night 20, a victory screen and badges. The relay tells the story. | A run to the boat, and a win. |
 | R5 · Named nights and bigger systems | P-56 to P-68, P-94 to P-98, P-122 to P-124, P-129, P-134 to P-146 | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, and the Hollows under the caves by day. | Nights 12-20 from the debug start, and the secret. |
@@ -204,6 +204,8 @@ something behind.
 | P-101 | Nothing yet (co-op groundwork, D-58). | `docs/coop.md`: what "a player" is and owns (position, health, armour, guns and ammo, skull bag, input, his rig and camera) and what is shared (Cash, the bank, builds, the night). The players-list API: `players`, `localPlayer`, `nearestPlayer(x, z, {alive})`, `playerById`. The three kinds of `player.position` read: the local view (camera, HUD, sound listener, fog cull, LOD) stays local; game logic (damage, pickups, triggers, AI targets, caves, objectives, scripted kills) goes through the list; his own movement stays. A first sketch of R7: the host runs the game, clients send input and shots, the host sends snapshots (positions quantised, 10-20 a second; animation and ragdolls stay cosmetic on each machine). | Claude | S | D-58 | Jerry reads it; Cursor can build CU-63 from it without questions. |
 | P-102 | Nothing visible: the game plays exactly the same with one player. | `players = [localPlayer]` beside the existing `player`; about 528 `player.position` reads sorted by P-101's three kinds, the game-logic ones moved onto `players` / `nearestPlayer`. `tools/check-players.mjs` counts the direct reads outside the allowed places and fails if the count grows (run by `npm test`). `TT.addDummyPlayer(x, z)` adds a standing second marine to the list for tests (drawn as a plain marine, no input). | Cursor | M | P-101 | Every test green, unchanged. `check-players` passes and fails on a planted read. A tNN: a dummy player standing on a skull does not pick it up for the marine; one standing in a cave mouth trips its trigger. Antigravity: a night 5 run plays as before. |
 | P-103 | Nothing visible with one player. With a dummy second one, the horde splits between them. | `updateFlowFields` seeds from every living player (a multi-source field); targeting (`tx, tz`), melee reach and `damagePlayer` take the player reached; the guardian's D-13 progress measures to the nearest; the director's distances to the nearest. | Grokbot | S | P-102 | A tNN with `TT.addDummyPlayer` 40 m away: zombies spawned beside each go for that one; one player alone plays as before (t98, t99, t100 unchanged). |
+| P-147 | The gun flashlight comes with every weapon from the start: night stays dark, and he always has a light. | `GEAR`'s `flashlight` owned at a fresh start (`GEAR_NONE`), its kiosk row removed, L unchanged; strings. | Cursor | S | D-68 | A tNN: a fresh run has the light on L with no purchase; the kiosk has no flashlight row. |
+| P-148 | Skulls the last kill pulls in make a sound as they reach the bag, so he knows he has them. | Where GB-60 pulls the skulls in: one collect chime as they land (not one per skull) and a short "+N skulls" line. | Cursor | S | none | A tNN: the pull plays the chime once and shows the count. |
 | P-117 | Turrets stop winning the night on their own: what shoots at the horde gets the horde. | Threat memory in `updateZombies`: a zombie hit by a turret or trap targets that build for a while and pulls its pack (the `smash` tactic's target search, `builds`); brutes, demons and about a quarter of each push pick the nearest defence first (D-62); build damage from zombies up (the numbers in the handoff). The marine stays the target for the rest. | Grokbot | M | P-23 | A tNN: a turret that fires draws its target and neighbours within 2 s; a push with turrets up sends at least a quarter at the defences. nightsim with a turret base before and after (Jerry: "breeze through levels"). |
 | P-118 | Nothing yet: the table of weaknesses (D-62). | `docs/weaknesses.md`: each kind (shambler, feral, leaper, spider, drowned, military, brute, spitter, screamer, bomber, demon, colossus, guardian) × bullet, pellet, fire, blast, blade, crush: a multiplier, one clear weakness and one resistance each, the counter in a line. P-26's plates as the first row; `fireResist` folded in. | Claude | S | D-62 | Jerry reads it; GB-104 and GP-80 build from it. |
 
@@ -300,7 +302,7 @@ under the caves by day (D-67).
 | P-94 | Nothing yet: the secret quest's spec. | `docs/specs/secret-quest.md`: the relay's pattern, the stones seen from the tower, the glyphs at the radio, the silenced night, the chalk-cave fight, the true ending and the rune gun. No world moves, no step in a grab zone (`7066-7068`, `30885`). | Claude | S | P-86 | Jerry says yes (or changes it). |
 | P-95 | The world side: the stones pulse in order at night, seen from the tower; the lake goes quiet when the signal is silenced. | Pit runes (`world/`), the relay's pattern as data. | Claude | S | P-94 | TT shows the pulse order; Antigravity shots from the tower. |
 | P-96 | The glyphs at the radio, the silenced night on the board, the true ending screen and the rune gun at the dock. | `ui/quest.js` (a pure model, on `ui/bounties.js`'s pattern), strings, the victory screen's second ending. | ChatGPT | M | P-94 | Unit tests: the right order silences, a wrong one doesn't; the ending shows. |
-| P-97 | The fight: on a silenced night the guardian comes out of the chalk cave on its studio rig, and can be killed there and only then. | The guardian night's fightable kind (D-13) on the P-67 rig; the true ending on its death. | Grokbot | M | P-96, P-67 | tNN: the kill only counts on a silenced night; the ending fires once. |
+| P-97 | The fight: on a silenced night the guardian comes out of the chalk cave on its studio rig, and can be killed there and only then. (Jerry, Q-4: the fight moves underground, deep in the chalk heart behind the rune doors, D-67.) | The guardian night's fightable kind (D-13) on the P-67 rig; the true ending on its death. | Grokbot | M | P-96, P-67 | tNN: the kill only counts on a silenced night; the ending fires once. |
 | P-98 | Swarm Night: night 17's runners from every cave, faster pushes, named the day before. | `mod: 'swarm'` like P-56; a board line. | Grokbot, ChatGPT | S each | P-56 plays well | tNN and a board line; Antigravity fps. |
 | P-122 | Lightning in storms: 5 strikes a storm, a tree set burning now and then, zombies killed where it lands, and now and then a strike on the marine for 70 damage (a death if he's at 70 or less). Insulated boots hidden on the map make him immune. | A strike during a shower (`weather`): a flash, thunder, a bolt mesh; rolls 1/50 tree (`igniteTree`), 1/100 kill in a radius, 1/200 the marine (70 damage through `damagePlayer`, cause `lightning`), never under godmode. The boots: a hidden pickup (the spot in the handoff), worn for the run, visible on him, zero lightning damage. | Claude | S | D-60 | A tNN with the odds forced to 1: each outcome happens; 70 damage at 100 HP leaves 30; at 60 HP it ends the run as `lightning`; with the boots, no damage. Natural odds over 10,000 simulated strikes within 20% of the stated ones. |
 | P-123 | A rabbit mound out of the way, with bones and a skull round it. Shoot it and a white rabbit takes the marine's head off, unless he has found the knockoff holy grenade: pull the pin, an angelic choir, and the rabbit is done. | One burrow (`burrows`) picked far from the paths, dressed with bones and a skull; a shot into it spawns the rabbit, a lunge and the head off (`lastDeathCause = 'rabbit'`). The grenade: a hidden pickup (the spot in the handoff), its own model, a choir cue on the pin pull (`core/audio.js`), the only thing that kills the rabbit. Our own models, names, sounds and words. | Claude | S | none | tNNs: a shot into that mound ends the run as `rabbit`; other mounds are harmless; with the grenade thrown at it the rabbit dies and the run goes on; the choir plays on the pin. Antigravity video. |
@@ -363,15 +365,14 @@ nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, becaus
   - Rune shards give pieces of the pit's order, a second way into the secret (D-56).
 - **The rules it keeps.**
   - Topside nothing moves: seeds, the world's layout and the cave positions stay as they are (rule 10).
-  - The warrens are laid out from their own dice, fresh each run, from a fixed kit per theme.
+  - The warrens are laid out from their own dice with a fixed seed, from a fixed kit per theme: the same layout every run (Jerry, Q-4).
   - Cleared warrens stay cleared for the run, and there are no saves (D-30).
   - Co-op (D-58): the party goes down together; the details wait for R7. The runtime reads the players list from
     the start.
-- **Jerry's calls (Q-4).**
-  - Does being caught below end the run (the plan), or only cost the haul?
-  - Is the layout fresh each run (the plan), or the same every run so the warrens can be learned?
-  - Should the secret's final fight (D-56) happen underground, in the chalk heart behind the rune doors, rather than
-    at the chalk mouth?
+- **Jerry's answers (Q-4, 2026-09-29).**
+  - Caught below ends the run.
+  - The same layout every run, so the warrens can be learned.
+  - The secret's final fight (D-56, P-97) happens deep in the chalk heart, behind the rune doors, not at the chalk mouth.
 
 | ID | What the player gets | How it's built (reuse) | Owner | Size | Needs | Done when |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -402,7 +403,7 @@ errors, and every test is green. The showcase build, then the release.
 | P-82 | One voice: every line read once, the same words for the same things. | A strings pass (the loop is always skulls, bank at the HQ window, Cash; AGENTS.md rule 11). | ChatGPT | S | R5 | `ui/strings.test.mjs` green; a list of changed keys. |
 | P-83 | Credits: Jerry, the crew, Quaternius (CC0), the music. | A credits page from the title. | ChatGPT | S | none | Antigravity shot. |
 | P-84 | The caves and the pit sound alive: the screech, cave groans, the pit's rumble (plan phase 4). | Short cues through the music director and `core/audio.js` (Claude's director, Cursor's engine). | Claude | S | none | t61 green; Jerry listens. |
-| P-85 | Night stays dark but readable: the dangerous kinds, the attack sides and hurt builds can be picked out. | CL-11's question answered by Jerry first; then rim light on threats and the build pips (P-24). | Claude | S | Jerry on CL-11 | Antigravity night shots NVG on and off. |
+| P-85 | Night stays dark but readable: the dangerous kinds, the attack sides and hurt builds can be picked out. | CL-11 answered (D-68): night stays dark. Rim light on threats and the build pips (P-24), never a brighter night. | Claude | S | Jerry on CL-11 | Antigravity night shots NVG on and off. |
 | P-87 | Every test green, and the flaky ones made robust. | t41 and others onto `startMatch` (`tools/tests/lib.js`); `npm test` twice in a row, the same. | Cursor | S | none | Two identical full runs in the handoff. |
 | P-88 | The budgets hold: title within 15 s cold and 5 s warm, 60 fps with 48 on Jerry's GPU. | `tools/loadtime.mjs`, `tools/bench.mjs`, GB-59's cull if not yet in. | Cursor | S | R5 | Numbers in the handoff, on the GPU. |
 | P-89 | The 1.0 package as a desktop app (D-57, Jerry 2026-09-27): an `.exe` with an icon, no browser chrome, native fullscreen, an installer, saves in a real folder; a version on the title. | A Tauri (WebView2) or Electron (bundled Chromium) shell round the folder: a custom protocol serves the module imports and the import map (`file://` won't), localStorage moves to a save file, `tools/package.mjs` builds it without `qa/`, `review/`, `handoffs/`. The browser build stays for the crew. Pick Tauri for the download size, Electron if WebGPU under WebView2 gives trouble. | Cursor | M | P-87, P-88 | The installer runs on a second, clean machine (Jerry); the game plays the same as in the browser. |
@@ -485,7 +486,7 @@ recommendation the review panel made, bent toward the story. Each stands unless 
   - Lights out stays an opt-in dare.
   - Swarm Night (17, runners from every cave) follows once Fog plays well (P-98).
   - Silent Night waits: it would remove the alarm shot (D-33, D-39).
-  - How dark night should be (CL-11) is still Jerry's.
+  - How dark night should be (CL-11): answered, it stays dark (D-68).
 - **D-55 · The guardian boss on the new rig (D-55).**
   - After CL-62, the fightable guardian of nights 6, 12 and 18 (D-13) wears the studio rig and clips, so it
     looks like the thing in the cave. Its rules don't change.
@@ -822,3 +823,5 @@ Every item is a task in `crew/BOARD.md` (Queues). Tasks with no P-id: GB-59 (Bro
 | P-144 | CL-101 | R5 |
 | P-145 | CU-73 | R5 |
 | P-146 | AG-29 | R5 |
+| P-147 | CU-75 | R2 |
+| P-148 | CU-76 | R2 |

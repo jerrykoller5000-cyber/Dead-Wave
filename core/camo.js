@@ -83,11 +83,12 @@ const PATTERNS = [
   // South African Giraffe: two-tone, irregular brown patches over off-white (dry grassland).
   { key: 'giraffe', base: '#d8cfb4', layers: [
     { c: '#7a5634', cx: 8, cy: 8, t: 0.47, seed: 161 }] },
-  // Swiss TAZ: small, busy four-colour shapes on a pale green.
-  { key: 'swissTaz', base: '#8d9a60', layers: [
-    { c: '#46592f', cx: 8, cy: 8, t: 0.5, seed: 171 },
-    { c: '#6b4b30', cx: 10, cy: 10, t: 0.6, seed: 172 },
-    { c: '#1d1e18', cx: 12, cy: 12, t: 0.67, seed: 173 }] },
+  // Swiss TAZ (Jerry's reference picture): sage, dusty mauve and deep maroon blotches on grey, their edges
+  // torn into little vertical spikes.
+  { key: 'swissTaz', base: '#a09e9d', layers: [
+    { c: '#7f978c', cx: 4, cy: 4, t: 0.54, seed: 171, jag: 0.12 },
+    { c: '#8e7a7b', cx: 4, cy: 5, t: 0.56, seed: 172, jag: 0.12 },
+    { c: '#6e4a47', cx: 5, cy: 5, t: 0.6, seed: 173, jag: 0.14 }] },
   // Zaire Green Leopard: bold black rosettes over deep greens.
   { key: 'zaireLeopard', base: '#4a6a34', layers: [
     { c: '#2f4a23', cx: 4, cy: 4, t: 0.5, seed: 181 }],
@@ -107,11 +108,12 @@ const PATTERNS = [
   spots: [
     { c: '#d2cdbb', n: 160, r: [1.2, 2.8], seed: 204 },
     { c: '#3a3833', n: 120, r: [1, 2.2], seed: 205 }] },
-  // PAP digital trial: a fine digital woodland.
-  { key: 'papDigital', px: 3, base: '#6f7a57', layers: [
-    { c: '#8c8a62', cx: 7, cy: 7, t: 0.52, seed: 211 },
-    { c: '#3d4a33', cx: 9, cy: 9, t: 0.56, seed: 212 },
-    { c: '#25281f', cx: 11, cy: 11, t: 0.67, seed: 213 }] },
+  // PAP digital (Jerry's reference blouse): deep teal green with large olive-brown areas, pale mint pixel
+  // clusters and small navy-indigo ones.
+  { key: 'papDigital', px: 3, base: '#22584a', layers: [
+    { c: '#5a5641', cx: 4, cy: 4, t: 0.54, seed: 211 },
+    { c: '#b2cdbd', cx: 8, cy: 7, t: 0.6, seed: 212, jag: 0.12 },
+    { c: '#2b2f4e', cx: 9, cy: 9, t: 0.66, seed: 213, jag: 0.08 }] },
   // M1929 Telo Mimetico: large soft-edged green and brown blotches on ochre.
   { key: 'teloMimetico', base: '#b7a878', layers: [
     { c: '#6b7342', cx: 3, cy: 3, t: 0.5, seed: 221, soft: 0.05 },
@@ -180,13 +182,15 @@ export function paintCamo(key, out, size) {
   const p = PATTERNS.find((q) => q.key === key);
   if (!p || !p.base || !out || out.length < size * size * 4) return false;
   const base = hex(p.base);
-  const layers = (p.layers || []).map((l) => ({ col: hex(l.c), t: l.t, soft: l.soft || 0, n: makeNoise(l.cx, l.cy, l.seed) }));
+  const layers = (p.layers || []).map((l) => ({ col: hex(l.c), t: l.t, soft: l.soft || 0, jag: l.jag || 0, n: makeNoise(l.cx, l.cy, l.seed),
+    // Torn edges: a fine noise stretched top to bottom, added to the shape's own (Swiss TAZ, PAP).
+    j: l.jag ? makeNoise(l.cx * 10, l.cy * 2, l.seed + 997) : null }));
   const block = p.px ? Math.max(1, Math.round(p.px * size / 256)) : 1;
   for (let by = 0; by < size; by += block) for (let bx = 0; bx < size; bx += block) {
     const u = (bx + block / 2) / size, v = (by + block / 2) / size;
     let col = base;
     for (const l of layers) {
-      const nv = l.n(u, v);
+      const nv = l.n(u, v) + (l.j ? (l.j(u, v) - 0.5) * l.jag * 2 : 0);
       if (l.soft) {
         // Soft edge: blend over a band round the threshold (Telo Mimetico, Sumpftarn).
         const a = Math.max(0, Math.min(1, (nv - l.t + l.soft) / (2 * l.soft)));
