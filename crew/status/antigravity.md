@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 3.1 Pro (High)
-task: AG-44 shots: GP-68
-touching: qa/
-since: 2026-09-30T17:48Z
-next: waits on GP-64
+task: —
+touching: —
+since: 2026-09-30T19:24Z
+next: waits on CL-76
 blocked-on: —
-last-report: handoffs/2026-09-30-antigravity-AG-44.md
+last-report: handoffs/2026-09-30-antigravity-AG-24.md
 
 ## Notes
 

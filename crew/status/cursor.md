@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-70 the CIF grows into the dressing room
-touching: index.html (dressing room), game/wardrobe.js, game/wardrobe.test.mjs, tools/tests/t144.js
-since: 2026-09-30T07:28Z
-next: CU-70 R4 · P-131. The dressing room (D-66): the CIF grows into it,
+task: —
+touching: —
+since: 2026-09-30T18:18Z
+next: CU-53 R4 · P-78. A full run timed headless: `tools/nightsim.mjs --
 blocked-on: —
-last-report: handoffs/2026-09-30-cursor-CU-52.md
+last-report: handoffs/2026-09-30-cursor-CU-70.md
 
 ## Notes
 

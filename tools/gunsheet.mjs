@@ -51,6 +51,9 @@ const RACK = `(() => {
 })()`;
 const VIEWS = [
   ['guns-all', `(() => { const R = ${RACK}; Object.keys(R.groups).forEach((k, i) => { const g = R.groups[k]; g.visible = true; g.position.set(R.base.x, R.base.y + 1.1 - Math.floor(i / 2) * 1.1, R.base.z - 1.0 + (i % 2) * 2.1); }); const b = R.base; return { x: b.x + 4.6, y: b.y + 0.1, z: b.z + 0.2, tx: b.x, ty: b.y, tz: b.z + 0.2, fov: 50 }; })()`],
+  // CL-97 part 2: the same rack with camo on the furniture (one pick per gun), then put back bare.
+  ['guns-camo', `(() => { const R = ${RACK}; TT.dressGuns({ guns: { m4: 'multicam', ak: 'tigerStripe', sniper: 'dpmDesert', shotgun: 'm81', uzi: 'marpat', pistol: 'flecktarn' } }); Object.keys(R.groups).forEach((k, i) => { const g = R.groups[k]; g.visible = true; g.position.set(R.base.x, R.base.y + 1.1 - Math.floor(i / 2) * 1.1, R.base.z - 1.0 + (i % 2) * 2.1); }); const b = R.base; return { x: b.x + 4.6, y: b.y + 0.1, z: b.z + 0.2, tx: b.x, ty: b.y, tz: b.z + 0.2, fov: 50 }; })()`],
+  ['gun-m4-camo', `(() => { const R = ${RACK}; TT.dressGuns({ guns: { m4: 'multicam' } }); for (const [key, g] of Object.entries(R.groups)) { g.visible = key === 'm4'; g.position.copy(R.base); } const b = R.base; return { x: b.x + 2.1, y: b.y + 0.03, z: b.z + 0.3, tx: b.x, ty: b.y, tz: b.z + 0.3, fov: 40 }; })()`],
   ...GUNS.map((k) => ['gun-' + k, `(() => { const R = ${RACK}; for (const [key, g] of Object.entries(R.groups)) { g.visible = key === '${k}'; g.position.copy(R.base); } const b = R.base; const small = '${k}' === 'uzi' || '${k}' === 'pistol'; const zc = small ? 0.12 : 0.3; const d = small ? 1.45 : 2.1; return { x: b.x + d, y: b.y + 0.03, z: b.z + zc, tx: b.x, ty: b.y, tz: b.z + zc, fov: 40 }; })()`]),
 ];
 

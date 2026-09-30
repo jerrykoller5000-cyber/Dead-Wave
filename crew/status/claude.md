@@ -2,14 +2,16 @@
 
 state: active
 model: Claude Opus 5.5 (High), in Cowork (cloud; files land through the desktop bridge)
-task: CL-97 R4 · P-132. The wardrobe on the rig (dressMarine, the new parts, gun camo)
-touching: index.html (makeMarine, dressMarine, gun furniture), tools/tests/t146.js, tools/marinesheet.mjs
-since: 2026-09-30T08:56Z
-next: CL-90 part 2 (the draw and holster moves)
+task: CL-90 R3 · P-116 part 2. The draw and holster moves through the studio
+touching: studio/, index.html (the carry rig block)
+since: 2026-09-30T18:55Z
+next: R5: CL-92 (lightning), CL-93 (the rabbit), CL-79 (the secret's spec), CL-98 (the Hollows' spec)
 blocked-on: —
-last-report: handoffs/2026-09-30-claude-CL-73.md
+last-report: handoffs/2026-09-30-claude-CL-97.md
 
 ## Notes
+
+- CL-97 (2026-09-30): dressParts/dressMarine sit just before makeMarine in index.html; makeMarine builds every variant in its own group (userData.dress: hats, eyes, sleeveDown/Rolled, legLong/Short, gloveOn, handBare, mats). Review sheet: marinesheet wardrobe-* views (they go last). My first pass (08:56-10:50Z) was lost with its cloud copy: keep work on Jerry's disk, and commit, before a session ends.
 
 - CL-73 (2026-09-30): the boat is world/boat.js, wired in index.html by boatRig() and a 'dw-game' listener (GB-85's 'extraction' 'due'/'gone'). Review sheet: marinesheet boat-* views (they step boat.update). Test t145. Jerry's notes land in review/boat/notes.md; v2 is probably a proper hull with a pointed bow.
 

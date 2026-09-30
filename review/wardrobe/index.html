@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>wardrobe</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>wardrobe · CL-97 · v1</h1>
+<p>The new parts on the marine for the dressing room (D-66): four hats, four kinds of eyewear, sleeves rolled,
+shorts, bare hands, and hair, eye and skin colour, and camo on each gun. Every hat takes the cap's camo. Eyewear sits over the eyes above
+the mask, stays on with the helmet, and hides when the NVG comes down. Your notes go in notes.md in this folder.</p>
+<script>
+const sets = [
+  ['Hats: the 8-point cover, a boonie, a ballcap forwards, a ballcap backwards', ['wardrobe-hats', 'wardrobe-hats-back']],
+  ['Eyewear: aviators, a pit-viper style, a Wayfarer style, the GWOT ballistic goggles', ['wardrobe-eyewear', 'wardrobe-eyewear-side']],
+  ['Him: (1) sleeves rolled, shorts, bare hands, light skin, blond, blue eyes; (2) sleeves rolled, auburn, green eyes; (3) shorts, bare hands, dark skin, black hair, a backwards ballcap and Wayfarers; (4) rolled, shorts, darkest skin, grey hair, a boonie and goggles', ['wardrobe-body', 'wardrobe-body-back']],
+];
+sets.push(['Camo on the guns, one pick each (stock, grip, handguard; metal stays metal): M4 MultiCam, AK Tiger Stripe, sniper DPM Desert, shotgun M81, Uzi MARPAT, pistol Flecktarn', ['guns-camo', 'gun-m4-camo']]);
+for (const [t, keys] of sets) {
+  document.write(`<h2>${t}</h2><div class="row">` + keys.map((k) => `<figure><figcaption>${k}</figcaption><img src="v1/${k}.png" alt="${k}"></figure>`).join('') + '</div>');
+}
+document.write('<h2>Before: the same guns, bare</h2><div class="row"><figure><figcaption>guns-all</figcaption><img src="before/guns-all.png" alt="guns-all before"></figure></div>');
+</script>

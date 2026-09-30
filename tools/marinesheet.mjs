@@ -120,6 +120,48 @@ const BOAT_VIEWS = [
 ];
 VIEWS.push(...BOAT_VIEWS);
 
+// CL-97: the wardrobe on the rig. Four marines a row, each dressed through TT.dressMarine: the hats, the eyewear
+// (close on the heads), and the body picks (sleeves rolled, shorts, bare hands) across skins, hair and eyes.
+const DRESS_ROWS = {
+  hats: [{ cap: 'cover' }, { cap: 'boonie' }, { cap: 'ballcap' }, { cap: 'ballcapBack' }],
+  eyewear: [{ eyewear: 'aviators' }, { eyewear: 'pitViper' }, { eyewear: 'wayfarer' }, { eyewear: 'goggles' }],
+  body: [
+    { rolled: true, shorts: true, bare: true, skin: 0, hair: 'blond', eyes: 'blue' },
+    { rolled: true, shorts: false, bare: false, skin: 2, hair: 'auburn', eyes: 'green' },
+    { rolled: false, shorts: true, bare: true, skin: 4, hair: 'black', eyes: 'brown', cap: 'ballcapBack', eyewear: 'wayfarer' },
+    { rolled: true, shorts: true, bare: false, skin: 5, hair: 'grey', eyes: 'hazel', cap: 'boonie', eyewear: 'goggles' },
+  ],
+};
+const dressView = (row, facing, close) => `(() => { const S = ${STAGE}; ${hideAll} S.solo(true); const T = TT, THREE = T.THREE, b = S.base;
+  window.__mdress = window.__mdress || {};
+  if (!window.__mdress.${row}) window.__mdress.${row} = ${JSON.stringify(DRESS_ROWS[row])}.map((o) => {
+    const m = T.makeMarine(); S.dress(m, false);
+    const w = T.normalizeWardrobe(null);
+    if (o.cap) w.items.cap.style = o.cap;
+    if (o.eyewear) w.items.eyewear = { style: o.eyewear };
+    if (o.rolled) w.items.shirt.sleeves = 'rolled';
+    if (o.shorts) w.items.trousers.cut = 'shorts';
+    if (o.bare) w.items.gloves.worn = false;
+    if (o.skin != null) Object.assign(w.body, { skin: o.skin, hair: o.hair, eyes: o.eyes });
+    T.dressMarine(m, w);
+    const g = new THREE.Group(); g.add(m); T.scene.add(g); return g;
+  });
+  for (const r of Object.values(window.__mdress)) for (const g of r) g.visible = false;
+  const gap = ${close ? 0.5 : 1.1};
+  window.__mdress.${row}.forEach((g, i) => { g.visible = true; g.position.set(b.x + (i - 1.5) * gap, b.y, b.z); g.rotation.y = ${facing}; });
+  return ${close} ? { x: b.x, y: b.y + 1.45, z: b.z + 1.9, tx: b.x, ty: b.y + 1.42, tz: b.z, fov: 38 }
+    : { x: b.x, y: b.y + 0.95, z: b.z + 4.3, tx: b.x, ty: b.y + 0.88, tz: b.z, fov: 40 }; })()`;
+// The stage's other rows stay hidden: hideAll only knows its own, so these views go last.
+const DRESS_VIEWS = [
+  ['wardrobe-hats', dressView('hats', -0.45, false)],
+  ['wardrobe-hats-back', dressView('hats', Math.PI - 0.45, false)],
+  ['wardrobe-eyewear', dressView('eyewear', -0.35, true)],
+  ['wardrobe-eyewear-side', dressView('eyewear', -1.2, true)],
+  ['wardrobe-body', dressView('body', -0.35, false)],
+  ['wardrobe-body-back', dressView('body', Math.PI - 0.35, false)],
+];
+VIEWS.push(...DRESS_VIEWS);
+
 // A cave's own frame: +z (fx, fz) points out of the mouth, +x (rx, rz) is to its right.
 function caveShot(theme, kind) {
   const spec = {

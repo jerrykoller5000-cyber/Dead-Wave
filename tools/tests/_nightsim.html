@@ -615,6 +615,7 @@
     #cifList button canvas { display: block; width: 100%; aspect-ratio: 2 / 1; image-rendering: pixelated; }
     #cifList button b { font-size: 10px; font-weight: 600; opacity: .7; }
     #cifList button.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+    #cifList button.locked { opacity: .4; cursor: default; }
     #cifList button.on b { color: var(--accent); opacity: 1; }
     #cifList .cif-group { grid-column: 1 / -1; margin-top: 8px; font-family: var(--font-hud); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
     #cif .modes { display: flex; margin-top: 14px; }
@@ -1142,16 +1143,7 @@
   <script src="/assets/world/campsites.js"></script>
   <script src="/assets/world/landmark-details.js"></script>
   <script src="/assets/world/objective-props.js"></script>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "./fakethree.mjs",
-      "three/webgpu": "./fakethree.mjs",
-      "three/tsl": "./faketsl.mjs",
-      "three/addons/": "./addons/"
-    }
-  }
-  </script>
+  <script type="importmap">{ "imports": { "three": "./fakethree.mjs", "three/webgpu": "./fakethree.mjs", "three/tsl": "./faketsl.mjs", "three/addons/": "./addons/" } }</script>
   <script type="module">
     import * as THREE from 'three';
     import { createPrepRepairReader } from '/ui/prep-repairs.js';
@@ -1183,7 +1175,8 @@
     import { mountEnemyCounterCards } from '/ui/enemy-counter.js';
     import { mountArmory } from '/ui/armory.js';
     import { createArmory, slotType } from '/game/armory.js';
-    import { WARDROBE_STORE, CAMO_ITEMS, DRESS_TABS, GUNS, BODY_CHOICES, BOOT_COLOURS, BOOT_HEX, defaultWardrobe, normalizeWardrobe, withItem, withBody, withGun, resetTab } from '/game/wardrobe.js';
+    import { WARDROBE_STORE, CAMO_ITEMS, DRESS_TABS, GUNS, BODY_CHOICES, BOOT_COLOURS, BOOT_HEX, CAP_STYLES, EYEWEAR_STYLES, SLEEVES, TROUSER_CUTS, defaultWardrobe, normalizeWardrobe, withItem, withBody, withGun, resetTab } from '/game/wardrobe.js';
+    import * as WARDROBE_LISTS from '/game/wardrobe.js';   // CL-97: the style lists (CAP_STYLES, EYEWEAR_STYLES, SLEEVES, TROUSER_CUTS)
     import { mountSkillsPanels } from '/ui/skills-panel.js';
     import '/ui/supply-notice.js';
     import '/ui/camp-cleared.js';
@@ -15711,7 +15704,7 @@
         camoTex.needsUpdate = true;
       }
       if (wardrobeState) {
-        for (const id of CAMO_ITEMS) wardrobeState.items[id] = { camo: key };
+        for (const id of CAMO_ITEMS) wardrobeState.items[id] = { ...wardrobeState.items[id], camo: key };
         dressWorld();
         if (save) writeWardrobe();
       }
@@ -15751,13 +15744,16 @@
       for (const id of CAMO_ITEMS) {
         const entry = w[id];
         const pick = state.items[id] && state.items[id].camo;
-        if (!entry || !isCamoKey(pick)) continue;
-        const tex = camoTile(pick);
+        if (!entry) continue;
         for (const mat of entry.mats) {
           if (mat.userData.dress !== 'camo') continue;
-          if (mat.userData.dressTint == null) mat.userData.dressTint = mat.color.getHex();
+          if (mat.userData.issueMap === undefined) {
+            mat.userData.issueMap = mat.map || null;
+            mat.userData.dressTint = mat.color.getHex();
+          }
+          const tex = isCamoKey(pick) ? camoTile(pick) : mat.userData.issueMap;
           mat.map = tex;
-          mat.color.setHex(tex === camoTex ? mat.userData.dressTint : 0xffffff);
+          mat.color.setHex(!tex || tex === camoTex ? mat.userData.dressTint : 0xffffff);
           mat.needsUpdate = true;
         }
       }
@@ -15773,6 +15769,12 @@
     function dressWorld() {
       if (worldMarine) applyWardrobe(worldMarine, wardrobeState);
       if (dressPreview) applyWardrobe(dressPreview, wardrobeState);
+      // CL-97's dressMarine owns the new parts (hat style, sleeves, eyewear). Until it
+      // is in this file, the camo and boot colour above are what he wears.
+      if (typeof dressMarine === 'function') {
+        if (worldMarine) dressMarine(worldMarine, wardrobeState);
+        if (dressPreview) dressMarine(dressPreview, wardrobeState);
+      }
     }
     const uniformMat = new THREE.MeshStandardMaterial({ color: 0xe2ded0, map: camoTex, roughness: 0.95, metalness: 0.02 });
     const trouserMat = new THREE.MeshStandardMaterial({ color: 0xd2cebd, map: camoTex, roughness: 0.95, metalness: 0.02 });
@@ -15845,6 +15847,100 @@
       }
     }
 
+    // === CL-97 (P-132, D-66): the wardrobe on the rig. makeMarine builds every variant once (hats, eyewear,
+    // sleeves, shorts, bare hands) in its own group; dressParts shows the picked one and colours hair, eyes
+    // and skin. dressMarine = CU-70's applyWardrobe (camo, boots) + dressParts; dressWorld calls it. ===
+    const DRESS_HAIR = { black: 0x16130f, darkBrown: 0x3a2c1e, brown: 0x6b4a2b, auburn: 0x7c3b1d, blond: 0xc9a466, grey: 0x8c8a84 };
+    const DRESS_EYES = { brown: 0x4a3020, hazel: 0x7a6634, green: 0x3f6b3a, blue: 0x3d6f9e, grey: 0x7c858c };
+    const DRESS_SKIN = [0xf2d3b8, 0xe2bc98, 0xd3b08a, 0xc4a882, 0x8f6a4a, 0x5c4030];   // light to dark; 3 is the original
+    const DRESS = {
+      cap: WARDROBE_LISTS.CAP_STYLES, eyewear: WARDROBE_LISTS.EYEWEAR_STYLES, sleeves: WARDROBE_LISTS.SLEEVES,
+      cut: WARDROBE_LISTS.TROUSER_CUTS, boots: BOOT_HEX, hair: DRESS_HAIR, eyes: DRESS_EYES, skin: DRESS_SKIN,
+    };
+    const eyewearMats = {
+      gold: new THREE.MeshStandardMaterial({ color: 0xc9a85c, roughness: 0.3, metalness: 0.85 }),
+      aviLens: new THREE.MeshStandardMaterial({ color: 0x3a4a3a, roughness: 0.08, metalness: 0.8, emissive: 0x0c140e, emissiveIntensity: 0.4 }),
+      viperFrame: new THREE.MeshStandardMaterial({ color: 0xeeeeea, roughness: 0.35, metalness: 0.1 }),
+      viperLens: new THREE.MeshStandardMaterial({ color: 0x7a2fa0, roughness: 0.08, metalness: 0.9, emissive: 0x2a1060, emissiveIntensity: 0.35 }),
+      wayFrame: new THREE.MeshStandardMaterial({ color: 0x0e0e0e, roughness: 0.28, metalness: 0.1 }),
+      wayLens: new THREE.MeshStandardMaterial({ color: 0x151a1c, roughness: 0.1, metalness: 0.6 }),
+      gogFrame: new THREE.MeshStandardMaterial({ color: 0x7d6d4f, roughness: 0.7, metalness: 0.05 }),
+      gogLens: new THREE.MeshStandardMaterial({ color: 0x2a2e30, roughness: 0.1, metalness: 0.65 }),
+      gogStrap: new THREE.MeshStandardMaterial({ color: 0x6f6247, roughness: 0.9, metalness: 0.02 }),
+      sock: new THREE.MeshStandardMaterial({ color: 0x4a4a3c, roughness: 0.95 }),
+    };
+    function dressParts(m, state) {
+      const d = m && m.userData && m.userData.dress;
+      if (!d) return;
+      const it = (state && state.items) || {}, body = (state && state.body) || {};
+      const pick = (list, v) => (list.includes(v) ? v : list[0]);
+      const hat = pick(DRESS.cap, it.cap && it.cap.style);
+      for (const k of Object.keys(d.hats)) d.hats[k].visible = k === hat;
+      const eye = pick(DRESS.eyewear, it.eyewear && it.eyewear.style);
+      for (const k of Object.keys(d.eyes)) d.eyes[k].visible = k === eye;
+      const rolled = (it.shirt && it.shirt.sleeves) === 'rolled';
+      for (const o of d.sleeveDown) o.visible = !rolled;
+      for (const o of d.sleeveRolled) o.visible = rolled;
+      const shorts = (it.trousers && it.trousers.cut) === 'shorts';
+      for (const o of d.legLong) o.visible = !shorts;
+      for (const o of d.legShort) o.visible = shorts;
+      const gloves = !(it.gloves && it.gloves.worn === false);
+      for (const o of d.gloveOn) o.visible = gloves;
+      for (const o of d.handBare) o.visible = !gloves;
+      const skin = DRESS_SKIN[DRESS_SKIN[body.skin] != null ? body.skin : 3];
+      d.mats.skin.color.setHex(skin);
+      d.mats.skinShade.color.setHex(skin).multiplyScalar(0.8);
+      d.mats.scar.color.setHex(skin).lerp(new THREE.Color(0xffffff), 0.18);
+      d.mats.hair.color.setHex(DRESS_HAIR[body.hair] != null ? DRESS_HAIR[body.hair] : DRESS_HAIR.darkBrown);
+      d.mats.iris.color.setHex(DRESS_EYES[body.eyes] != null ? DRESS_EYES[body.eyes] : DRESS_EYES.brown);
+      d.picked = { hat, eyewear: eye, rolled, shorts, gloves, skin: body.skin, hair: body.hair, eyes: body.eyes };
+    }
+    // TT.dressMarine(marine, wardrobe): the whole wardrobe on any marine (the profile's when none is given).
+    function dressMarine(m, state) {
+      const s = state || wardrobeState;
+      applyWardrobe(m, s);
+      dressParts(m, s);
+      if (m && m === worldMarine) dressGuns(s);   // his guns are the world's (the rack, the offhand and the carry copies share their materials)
+      return m && m.userData.dress ? m.userData.dress.picked : null;
+    }
+    // CL-97 part 2: camo on each gun's furniture (the stock, grip and handguard: its wood and polymer), one pick per
+    // gun (wardrobe.guns). Metal stays metal. Each gun gets its own copies of the furniture materials once, with
+    // camo UVs at the marine's scale; the offhand, carry and rack copies are clones, so they share them.
+    let gunFurniture = null;
+    function registerGunFurniture(guns) {
+      const FURNITURE = new Set([woodMat, woodDark, gunPoly, gunOlive, gunTan]);
+      const out = {};
+      for (const [id, gun] of Object.entries(guns)) {
+        const copies = new Map();
+        gun.traverse((o) => {
+          if (!o.isMesh || Array.isArray(o.material) || !FURNITURE.has(o.material)) return;
+          let c = copies.get(o.material);
+          if (!c) { c = o.material.clone(); c.name = 'furniture:' + id; c.userData.issueColor = c.color.getHex(); copies.set(o.material, c); }
+          o.material = c;
+          const src = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+          const P = src.attributes.position, uv = new Float32Array(P.count * 2);
+          boxProjectUV(P.array, uv);
+          src.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+          o.geometry = src;
+        });
+        out[id] = [...copies.values()];
+      }
+      return out;
+    }
+    function dressGuns(state) {
+      if (!gunFurniture) return;
+      const picks = (state && state.guns) || {};
+      for (const [id, mats] of Object.entries(gunFurniture)) {
+        const key = picks[id];
+        const tex = key && isCamoKey(key) ? camoTile(key) : null;
+        for (const mat of mats) {
+          mat.map = tex;
+          mat.color.setHex(tex ? 0xe6e2d6 : mat.userData.issueColor);
+          mat.needsUpdate = true;
+        }
+      }
+    }
+
     function makeMarine() {
       const g = new THREE.Group();
       const strapMat = new THREE.MeshStandardMaterial({ color: 0x2b2e24, roughness: 0.9, metalness: 0.05 });
@@ -15871,6 +15967,10 @@
       const packW = wear('pack')(camoGreen), packTrimW = wear('pack')(camoOD), padW = wear('pads')(padMat), plateW = wear('pads')(plateMat);
       for (const mat of [uniformW, trouserW, gloveW, beltW, holsterW, maskW, capW, shellW, carrierW, carrierPouchW, packW, packTrimW, padW]) mat.userData.dress = 'camo';
       bootW.userData.dress = 'colour';
+      // CL-97: his own skin, hair and iris, so each marine can differ (the dressing room's Him tab).
+      const skinW = skinMat.clone(), hairW = hairMat.clone(), irisW = hairMat.clone();
+      const dress = { hats: {}, eyes: {}, sleeveDown: [], sleeveRolled: [], legLong: [], legShort: [], gloveOn: [], handBare: [], mats: { skin: skinW, hair: hairW, iris: irisW } };
+      const part = (parent, list) => { const grp = new THREE.Group(); parent.add(grp); if (list) list.push(grp); return grp; };
 
       // ---------------------------------------------------------------------
       // Lower body. Its own group so the legs can face the direction of travel
@@ -15910,9 +16010,14 @@
         const knee = new THREE.Group();
         knee.position.set(0, -0.27, 0);
         legG.add(knee);
-        // Shin, bloused into the boot.
-        put(knee, rmesh(0.15, 0.13, 0.17, trouserW, 0.05), 0, -0.06, 0.012);
-        put(knee, rmesh(0.145, 0.16, 0.165, trouserW, 0.055), 0, -0.165, 0.012);
+        // Shin, bloused into the boot; in shorts (CL-97) a bare shin, a sock, and a turned-up hem on the thigh.
+        const shinLong = part(knee, dress.legLong), shinBare = part(knee, dress.legShort), hem = part(legG, dress.legShort);
+        put(shinLong, rmesh(0.15, 0.13, 0.17, trouserW, 0.05), 0, -0.06, 0.012);
+        put(shinLong, rmesh(0.145, 0.16, 0.165, trouserW, 0.055), 0, -0.165, 0.012);
+        put(shinBare, rmesh(0.118, 0.12, 0.13, skinW, 0.05), 0, -0.065, 0.012);
+        put(shinBare, rmesh(0.108, 0.1, 0.122, skinW, 0.045), 0, -0.15, 0.008);
+        put(shinBare, rmesh(0.125, 0.05, 0.14, eyewearMats.sock, 0.02), 0, -0.19, 0.0);
+        put(hem, rmesh(0.172, 0.035, 0.205, trouserW, 0.014), 0, -0.25, 0.012);
         // Knee pad: a moulded cap on a strap.
         const kneePad = put(knee, rmesh(0.15, 0.13, 0.06, plateW, 0.028), 0, -0.02, 0.095);
         const kneeStrap = put(knee, rmesh(0.16, 0.03, 0.185, strapMat, 0.01), 0, -0.07, 0.015);
@@ -16045,15 +16150,25 @@
         elbowG.position.set(0, -0.28, 0);
         elbowG.rotation.set(side < 0 ? -0.35 : -0.2, 0, 0);
         const ox = side < 0 ? 0.02 : -0.01, oz = side < 0 ? 0.04 : 0.03;
-        put(elbowG, rmesh(0.115, 0.12, 0.115, uniformW, 0.05), ox, -0.05, oz * 0.6);          // forearm, fuller at the elbow
-        put(elbowG, rmesh(0.105, 0.12, 0.105, uniformW, 0.045), ox, -0.15, oz);
-        put(elbowG, rmesh(0.11, 0.035, 0.11, uniformW, 0.015), ox, -0.205, oz + 0.005);      // cuff
-        // Glove: palm, curled fingers, thumb, knuckle guard.
+        // CL-97: sleeves down, or rolled above the elbow over a bare forearm.
+        const sleeve = part(elbowG, dress.sleeveDown), forearm = part(elbowG, dress.sleeveRolled), roll = part(armG, dress.sleeveRolled);
+        put(sleeve, rmesh(0.115, 0.12, 0.115, uniformW, 0.05), ox, -0.05, oz * 0.6);          // forearm, fuller at the elbow
+        put(sleeve, rmesh(0.105, 0.12, 0.105, uniformW, 0.045), ox, -0.15, oz);
+        put(sleeve, rmesh(0.11, 0.035, 0.11, uniformW, 0.015), ox, -0.205, oz + 0.005);      // cuff
+        put(forearm, rmesh(0.098, 0.12, 0.098, skinW, 0.045), ox, -0.05, oz * 0.6);
+        put(forearm, rmesh(0.086, 0.13, 0.086, skinW, 0.04), ox, -0.15, oz);
+        put(roll, rmesh(0.15, 0.06, 0.15, uniformW, 0.025), 0, -0.235, 0);                     // the roll, above the elbow
+        put(roll, rmesh(0.142, 0.022, 0.142, uniformW, 0.01), 0, -0.2, 0);
+        // Glove: palm, curled fingers, thumb, knuckle guard. Bare (CL-97): the same hand in skin.
         const gz = side < 0 ? 0.08 : 0.07;
-        put(elbowG, rmesh(0.1, 0.09, 0.1, gloveW, 0.028), ox, -0.255, gz);
-        put(elbowG, rmesh(0.095, 0.055, 0.05, gloveW, 0.02), ox, -0.29, gz + 0.045, 0.5);
-        put(elbowG, rmesh(0.03, 0.06, 0.035, gloveW, 0.012), ox - side * 0.055, -0.25, gz + 0.03, 0.2, 0, side * 0.4);
-        put(elbowG, rmesh(0.09, 0.025, 0.03, padMat, 0.01), ox, -0.275, gz + 0.06);
+        const glove = part(elbowG, dress.gloveOn), hand = part(elbowG, dress.handBare);
+        put(glove, rmesh(0.1, 0.09, 0.1, gloveW, 0.028), ox, -0.255, gz);
+        put(glove, rmesh(0.095, 0.055, 0.05, gloveW, 0.02), ox, -0.29, gz + 0.045, 0.5);
+        put(glove, rmesh(0.03, 0.06, 0.035, gloveW, 0.012), ox - side * 0.055, -0.25, gz + 0.03, 0.2, 0, side * 0.4);
+        put(glove, rmesh(0.09, 0.025, 0.03, padMat, 0.01), ox, -0.275, gz + 0.06);
+        put(hand, rmesh(0.09, 0.085, 0.092, skinW, 0.03), ox, -0.255, gz);
+        put(hand, rmesh(0.086, 0.05, 0.045, skinW, 0.02), ox, -0.288, gz + 0.042, 0.5);
+        put(hand, rmesh(0.027, 0.055, 0.032, skinW, 0.012), ox - side * 0.05, -0.25, gz + 0.03, 0.2, 0, side * 0.4);
         if (side < 0) put(elbowG, rmesh(0.05, 0.03, 0.05, nvgMat, 0.008), 0.02, -0.19, 0.09);   // watch
         armG.add(elbowG);
         torsoG.add(armG);
@@ -16090,24 +16205,46 @@
       torsoG.add(headG);
       const hAdd = (mesh, x, y, z) => { mesh.position.set(x, y - HEAD_PIVOT_Y, z); headG.add(mesh); return mesh; };
 
-      hAdd(cyl(0.065, 0.085, 0.13, skinMat, 10), 0, 1.24, 0);                                // neck
-      hAdd(rmesh(0.25, 0.25, 0.27, skinMat, 0.09), 0, 1.415, 0.015);                          // cranium
-      hAdd(rmesh(0.21, 0.12, 0.21, skinMat, 0.06), 0, 1.32, 0.04);                            // jaw
-      for (const sx of [-1, 1]) hAdd(rmesh(0.03, 0.07, 0.05, skinMat, 0.014), sx * 0.13, 1.4, 0.0);   // ears
-      hAdd(rmesh(0.2, 0.03, 0.035, skinMat, 0.012), 0, 1.455, 0.14);                          // brow
-      hAdd(rmesh(0.04, 0.06, 0.05, skinMat, 0.015), 0, 1.4, 0.155);                           // nose
+      hAdd(cyl(0.065, 0.085, 0.13, skinW, 10), 0, 1.24, 0);                                // neck
+      hAdd(rmesh(0.25, 0.25, 0.27, skinW, 0.09), 0, 1.415, 0.015);                          // cranium
+      hAdd(rmesh(0.21, 0.12, 0.21, skinW, 0.06), 0, 1.32, 0.04);                            // jaw
+      for (const sx of [-1, 1]) hAdd(rmesh(0.03, 0.07, 0.05, skinW, 0.014), sx * 0.13, 1.4, 0.0);   // ears
+      hAdd(rmesh(0.2, 0.03, 0.035, skinW, 0.012), 0, 1.455, 0.14);                          // brow
+      hAdd(rmesh(0.04, 0.06, 0.05, skinW, 0.015), 0, 1.4, 0.155);                           // nose
       // Cropped hair, so the bare head reads as a head before the helmet is bought
       // (it sits inside the crown once it is).
-      hAdd(rmesh(0.265, 0.07, 0.285, hairMat, 0.035), 0, 1.525, 0.01);
-      hAdd(rmesh(0.27, 0.1, 0.06, hairMat, 0.025), 0, 1.47, -0.125);                          // back of the crop
-      for (const sx of [-1, 1]) hAdd(rmesh(0.02, 0.06, 0.12, hairMat, 0.008), sx * 0.126, 1.46, -0.03);
-      // Field cap (crown, band, brim) — the bare-head look. Hidden under the helmet.
-      const bhAdd = (mesh, x, y, z) => { hAdd(mesh, x, y, z); gearParts.bareHead.push(mesh); return mesh; };
-      bhAdd(rmesh(0.29, 0.1, 0.31, capW, 0.05), 0, 1.565, 0.0);                              // crown
-      bhAdd(rmesh(0.3, 0.04, 0.32, capBandW, 0.012), 0, 1.515, 0.0);                         // band
-      const brim = bhAdd(rmesh(0.26, 0.018, 0.14, capW, 0.006), 0, 1.51, 0.2);               // brim
-      brim.rotation.x = 0.12;
-      bhAdd(rmesh(0.07, 0.03, 0.02, patchInk, 0.004), 0, 1.57, 0.158);                      // cap badge
+      hAdd(rmesh(0.265, 0.07, 0.285, hairW, 0.035), 0, 1.525, 0.01);
+      hAdd(rmesh(0.27, 0.1, 0.06, hairW, 0.025), 0, 1.47, -0.125);                          // back of the crop
+      for (const sx of [-1, 1]) hAdd(rmesh(0.02, 0.06, 0.12, hairW, 0.008), sx * 0.126, 1.46, -0.03);
+      // The hat — the bare-head look, hidden under the helmet. CL-97: the 8-point cover (field cap: crown, band,
+      // brim), a boonie, or a ballcap worn forwards or backwards. All take the cap's camo.
+      const hatG = new THREE.Group();
+      hatG.position.y = -HEAD_PIVOT_Y;
+      headG.add(hatG);
+      gearParts.bareHead.push(hatG);
+      const hatAt = (grp, mesh, x, y, z, rx = 0, ry = 0, rz = 0) => put(grp, mesh, x, y, z, rx, ry, rz);
+      const cover = dress.hats.cover = part(hatG);
+      hatAt(cover, rmesh(0.29, 0.1, 0.31, capW, 0.05), 0, 1.565, 0.0);                             // crown
+      hatAt(cover, rmesh(0.3, 0.04, 0.32, capBandW, 0.012), 0, 1.515, 0.0);                        // band
+      hatAt(cover, rmesh(0.26, 0.018, 0.14, capW, 0.006), 0, 1.51, 0.2, 0.12);                     // brim
+      hatAt(cover, rmesh(0.07, 0.03, 0.02, patchInk, 0.004), 0, 1.57, 0.158);                      // cap badge
+      const boonie = dress.hats.boonie = part(hatG);
+      hatAt(boonie, cyl(0.148, 0.156, 0.1, capW, 16), 0, 1.575, 0.005);                            // crown
+      hatAt(boonie, rmesh(0.22, 0.02, 0.24, capW, 0.01), 0, 1.626, 0.005);                         // flat top
+      hatAt(boonie, cyl(0.16, 0.16, 0.032, capBandW, 16), 0, 1.54, 0.005);                         // foliage band
+      hatAt(boonie, cyl(0.255, 0.27, 0.014, capW, 22), 0, 1.522, 0.012, 0.05);                      // the wide brim, drooping a touch
+      for (const sx of [-1, 1]) hatAt(boonie, rmesh(0.006, 0.12, 0.006, strapMat, 0.002), sx * 0.142, 1.46, 0.03, 0, 0, sx * -0.12);   // chin cord
+      const ballcap = (grp) => {
+        hatAt(grp, rmesh(0.272, 0.11, 0.292, capW, 0.07), 0, 1.56, 0.0);                            // crown, rounder than the cover
+        hatAt(grp, rmesh(0.2, 0.08, 0.02, capW, 0.02), 0, 1.565, 0.14);                             // front panel
+        hatAt(grp, rmesh(0.03, 0.016, 0.03, capBandW, 0.008), 0, 1.62, 0.0);                        // button
+        hatAt(grp, rmesh(0.21, 0.014, 0.14, capW, 0.007), 0, 1.522, 0.205, 0.2);                    // the curved bill
+        hatAt(grp, rmesh(0.07, 0.03, 0.012, strapMat, 0.004), 0, 1.53, -0.148);                     // strap at the back
+      };
+      ballcap(dress.hats.ballcap = part(hatG));
+      const back = dress.hats.ballcapBack = part(hatG);
+      back.rotation.y = Math.PI;
+      ballcap(back);
       // Helmet: a rounded high-cut shell in a camo cover, with a trim edge, side rails,
       // a shroud for the NVG mount, a velcro crown patch and a counterweight pouch.
       const hlAdd = (mesh, x, y, z) => { hAdd(mesh, x, y, z); gearParts.helmet.push(mesh); return mesh; };
@@ -16172,6 +16309,7 @@
       // and an old scar through the left brow.
       const skinShade = new THREE.MeshStandardMaterial({ color: 0x9c7f5e, roughness: 0.9 });
       const scarMat = new THREE.MeshStandardMaterial({ color: 0xcfb28e, roughness: 0.6 });
+      dress.mats.skinShade = skinShade; dress.mats.scar = scarMat;
       const glintMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
       const eyeMat = new THREE.MeshBasicMaterial({ color: 0x0a0a0a });
       const hRot = (mesh, rx, ry, rz) => { mesh.rotation.set(rx, ry, rz); return mesh; };
@@ -16179,17 +16317,17 @@
         const ex = sx * 0.06;
         hAdd(rmesh(0.074, 0.046, 0.012, skinShade, 0.01), ex, 1.419, 0.144);                  // socket shadow
         hAdd(rmesh(0.05, 0.024, 0.012, jawPrint, 0.009), ex, 1.419, 0.148);                    // white of the eye
-        hAdd(rmesh(0.022, 0.022, 0.008, hairMat, 0.008), ex - sx * 0.003, 1.419, 0.153);       // iris (looking a touch inward)
+        hAdd(rmesh(0.022, 0.022, 0.008, irisW, 0.008), ex - sx * 0.003, 1.419, 0.153);         // iris (looking a touch inward)
         hAdd(new THREE.Mesh(rbox(0.011, 0.011, 0.006, 0.004), eyeMat), ex - sx * 0.003, 1.419, 0.156);   // pupil
         hAdd(new THREE.Mesh(rbox(0.005, 0.005, 0.003, 0.001), glintMat), ex - sx * 0.003 + 0.004, 1.423, 0.1585);  // catchlight
-        hRot(hAdd(rmesh(0.06, 0.013, 0.016, skinMat, 0.006), ex, 1.4325, 0.152), 0.25, 0, 0);  // heavy upper lid
+        hRot(hAdd(rmesh(0.06, 0.013, 0.016, skinW, 0.006), ex, 1.4325, 0.152), 0.25, 0, 0);  // heavy upper lid
         hAdd(rmesh(0.052, 0.008, 0.01, skinShade, 0.004), ex, 1.4045, 0.151);                  // under the eye
-        hRot(hAdd(rmesh(0.072, 0.017, 0.02, hairMat, 0.007), ex + sx * 0.004, 1.4545, 0.162), 0, 0, sx * 0.16);   // brow
-        hAdd(rmesh(0.05, 0.022, 0.03, skinMat, 0.01), sx * 0.082, 1.398, 0.138);               // cheekbone
-        hAdd(rmesh(0.018, 0.06, 0.035, hairMat, 0.006), sx * 0.127, 1.405, 0.045);             // sideburn
+        hRot(hAdd(rmesh(0.072, 0.017, 0.02, hairW, 0.007), ex + sx * 0.004, 1.4545, 0.162), 0, 0, sx * 0.16);   // brow
+        hAdd(rmesh(0.05, 0.022, 0.03, skinW, 0.01), sx * 0.082, 1.398, 0.138);               // cheekbone
+        hAdd(rmesh(0.018, 0.06, 0.035, hairW, 0.006), sx * 0.127, 1.405, 0.045);             // sideburn
         hAdd(rmesh(0.012, 0.035, 0.02, skinShade, 0.005), sx * 0.142, 1.4, 0.0);               // inner ear
       }
-      hAdd(rmesh(0.03, 0.05, 0.03, skinMat, 0.01), 0, 1.428, 0.158);                           // nose bridge
+      hAdd(rmesh(0.03, 0.05, 0.03, skinW, 0.01), 0, 1.428, 0.158);                           // nose bridge
       hAdd(rmesh(0.02, 0.012, 0.012, skinShade, 0.004), 0, 1.44, 0.158);                       // frown line between the brows
       hRot(hAdd(rmesh(0.006, 0.036, 0.004, scarMat, 0.002), -0.076, 1.449, 0.171), 0, 0, 0.3);   // scar through the left brow
       // Skull-jaw mask (CL-32: more detail). A dark shell that wraps round the cheeks, a chin
@@ -16219,6 +16357,43 @@
       hAdd(rmesh(0.12, 0.018, 0.01, jawPrint, 0.004), 0, 1.264, 0.214);                          // chin
       hAdd(rmesh(0.27, 0.03, 0.2, strapMat, 0.008), 0, 1.35, -0.03);                             // mask strap
 
+      // CL-97: eyewear, over the eyes above the mask (Jerry: aviators, a pit-viper style, a Wayfarer style, the GWOT
+      // ballistic goggles). Hidden while the NVG is down (updateMarineBody).
+      const eyeG = new THREE.Group();
+      eyeG.position.y = -HEAD_PIVOT_Y;
+      headG.add(eyeG);
+      const E = eyewearMats;
+      dress.eyes.none = part(eyeG);
+      const avi = dress.eyes.aviators = part(eyeG);
+      for (const sx of [-1, 1]) {
+        put(avi, rmesh(0.08, 0.068, 0.006, E.gold, 0.028), sx * 0.06, 1.413, 0.176, 0, 0, sx * -0.14);      // rim
+        put(avi, rmesh(0.074, 0.062, 0.009, E.aviLens, 0.026), sx * 0.06, 1.411, 0.179, 0, 0, sx * -0.14);  // teardrop lens
+        put(avi, rmesh(0.006, 0.006, 0.15, E.gold, 0.002), sx * 0.13, 1.432, 0.1);                          // temple
+      }
+      put(avi, rmesh(0.05, 0.005, 0.005, E.gold, 0.002), 0, 1.437, 0.18);                                  // double bridge
+      put(avi, rmesh(0.03, 0.005, 0.005, E.gold, 0.002), 0, 1.424, 0.18);
+      const viper = dress.eyes.pitViper = part(eyeG);
+      put(viper, rmesh(0.2, 0.062, 0.01, E.viperLens, 0.02), 0, 1.42, 0.182);                              // the shield
+      put(viper, rmesh(0.214, 0.02, 0.018, E.viperFrame, 0.008), 0, 1.456, 0.18);                          // top bar
+      for (const sx of [-1, 1]) {
+        put(viper, rmesh(0.045, 0.058, 0.009, E.viperLens, 0.016), sx * 0.112, 1.42, 0.16, 0, sx * 0.75, 0);   // wrap
+        put(viper, rmesh(0.012, 0.022, 0.15, E.viperFrame, 0.006), sx * 0.132, 1.44, 0.07);                  // thick temple
+      }
+      const way = dress.eyes.wayfarer = part(eyeG);
+      for (const sx of [-1, 1]) {
+        put(way, rmesh(0.074, 0.05, 0.012, E.wayFrame, 0.01), sx * 0.058, 1.422, 0.177, 0, 0, sx * 0.06);     // frame
+        put(way, rmesh(0.058, 0.036, 0.006, E.wayLens, 0.008), sx * 0.058, 1.418, 0.184, 0, 0, sx * 0.06);    // lens
+        put(way, rmesh(0.012, 0.016, 0.15, E.wayFrame, 0.005), sx * 0.13, 1.44, 0.1);                         // temple
+      }
+      put(way, rmesh(0.16, 0.016, 0.014, E.wayFrame, 0.006), 0, 1.448, 0.178);                              // the heavy brow line
+      put(way, rmesh(0.026, 0.012, 0.012, E.wayFrame, 0.004), 0, 1.428, 0.179);                             // bridge
+      const gog = dress.eyes.goggles = part(eyeG);
+      put(gog, rmesh(0.235, 0.072, 0.04, E.gogFrame, 0.02), 0, 1.425, 0.17);                                // foam frame
+      put(gog, rmesh(0.214, 0.056, 0.01, E.gogLens, 0.016), 0, 1.426, 0.192);                               // one wide lens
+      put(gog, rmesh(0.04, 0.02, 0.012, E.gogFrame, 0.006), 0, 1.395, 0.19);                               // nose cut
+      put(gog, rmesh(0.278, 0.03, 0.33, E.gogStrap, 0.01), 0, 1.44, 0.0);                                   // strap round the head
+      g.userData.eyewearG = eyeG;
+
       // Bake rigid parts together (see mergeRigidMeshes); the hip is animated on its own.
       mergeRigidMeshes(g, gearParts, new Set([hip]));
       { const src = hip.geometry.clone(), P = src.attributes.position, uvA = new Float32Array(P.count * 2); boxProjectUV(P.array, uvA); src.setAttribute('uv', new THREE.BufferAttribute(uvA, 2)); hip.geometry = src; }
@@ -16228,6 +16403,8 @@
       for (const [item, m] of itemMats) wardrobe[item] = { mats: [...m.values()], meshes: [] };
       g.traverse((o) => { if (o.isMesh && matItem.has(o.material)) wardrobe[matItem.get(o.material)].meshes.push(o); });
       g.userData.wardrobe = wardrobe;
+      g.userData.dress = dress;   // CL-97
+      dressParts(g, null);
 
       g.userData.gripR = gripR;
       g.userData.weaponMount = weaponMount;
@@ -16601,6 +16778,7 @@
       if (nvg) {
         // -1.35 stowed up on the brow, 0 deployed and looking straight ahead.
         nvg.rotation.x = -1.35 * (1 - nvgFlip);
+        if (ud.eyewearG) ud.eyewearG.visible = nvgFlip < 0.35;   // CL-97: the tubes come down over the eyewear
         nvg.position.y = 1.58 - (ud.headPivotY || 0);
         nvg.position.z = 0.1;
       }
@@ -17100,6 +17278,8 @@
     }
 
     const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
+    gunFurniture = registerGunFurniture(weaponMeshes);   // CL-97 part 2, before the offhand copies are cloned
+    dressGuns(wardrobeState);
 
     // === Dual wield =============================================================
     // A second gun in the off hand for the three one-handers. Bought per weapon at
@@ -20824,6 +21004,34 @@
         }
         return;
       }
+      if (dressItem === 'eyewear') {
+        for (const style of EYEWEAR_STYLES) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = dressLabel('style', style, style === 'none' ? 'None' : style === 'pitViper' ? 'Pit viper' : style === 'goggles' ? 'GWOT goggles' : style === 'ballcapBack' ? 'Cap, back' : style);
+          b.classList.toggle('on', wardrobeState.items.eyewear.style === style);
+          b.addEventListener('click', () => { if (commitWardrobe(withItem(wardrobeState, 'eyewear', { style }))) renderDressChoices(); });
+          cifListEl.append(b);
+        }
+        return;
+      }
+      const optionRow = (choices, field, current) => {
+        for (const value of choices) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = dressLabel('style', String(value), value === true ? 'On' : value === false ? 'Off' : String(value));
+          b.classList.toggle('on', current === value);
+          b.addEventListener('click', () => {
+            const patch = {}; patch[field] = value;
+            if (commitWardrobe(withItem(wardrobeState, dressItem, patch))) renderDressChoices();
+          });
+          cifListEl.append(b);
+        }
+      };
+      if (dressItem === 'cap') optionRow(CAP_STYLES, 'style', wardrobeState.items.cap.style);
+      if (dressItem === 'shirt') optionRow(SLEEVES, 'sleeves', wardrobeState.items.shirt.sleeves);
+      if (dressItem === 'trousers') optionRow(TROUSER_CUTS, 'cut', wardrobeState.items.trousers.cut);
+      if (dressItem === 'gloves') optionRow([true, false], 'worn', wardrobeState.items.gloves.worn);
       if (dressItem === 'boots') {
         for (const colour of BOOT_COLOURS) {
           const b = document.createElement('button');
@@ -20835,7 +21043,7 @@
         }
         return;
       }
-      const current = dressTab === 'guns' ? (wardrobeState.guns[dressItem] || '') : wardrobeState.items[dressItem].camo;
+      const current = dressTab === 'guns' ? (wardrobeState.guns[dressItem] || '') : (wardrobeState.items[dressItem] && wardrobeState.items[dressItem].camo);
       const tile = document.createElement('canvas'); tile.width = tile.height = 64;
       for (const key of CAMO_KEYS) {
         if (key === CAMO_SOLID_KEYS[0]) { const h = document.createElement('div'); h.className = 'cif-group'; h.textContent = dwText('cif.solids'); cifListEl.append(h); }
@@ -20845,11 +21053,15 @@
         if (paintCamoTile(key, tile)) { const c = sw.getContext('2d'); c.drawImage(tile, 0, 0); c.drawImage(tile, 64, 0); }
         const name = document.createElement('span'); name.textContent = dwText('cif.pattern.' + key);
         const mark = document.createElement('b');
-        const on = key === current;
+        const locked = !camoUnlocks.isUnlocked(key);
+        const on = key === current && !locked;
         b.classList.toggle('on', on);
-        mark.textContent = dwText(on ? 'cif.wearing' : 'cif.free');
+        b.classList.toggle('locked', locked);
+        if (locked) b.disabled = true;
+        mark.textContent = locked ? (camoUnlockHint(key) || '') : dwText(on ? 'cif.wearing' : 'cif.free');
         b.append(sw, name, mark);
         b.addEventListener('click', () => {
+          if (!camoUnlocks.isUnlocked(key)) return;
           const next = dressTab === 'guns' ? withGun(wardrobeState, dressItem, key, isCamoKey) : withItem(wardrobeState, dressItem, { camo: key }, isCamoKey);
           if (commitWardrobe(next)) renderDressChoices();
         });
@@ -20879,7 +21091,8 @@
         }
         dressPreview.rotation.y = dressYaw;
         dressScene.add(dressPreview);
-        applyWardrobe(dressPreview, wardrobeState);
+        if (typeof dressMarine === 'function') dressMarine(dressPreview, wardrobeState);
+        else applyWardrobe(dressPreview, wardrobeState);
       } catch (_) { dressRenderer = null; }
     }
     function dressFrame() {
@@ -21632,7 +21845,7 @@
     function nearHQPanel() { return Math.hypot(player.position.x - HQ_PANEL_FRONT.x, player.position.z - HQ_PANEL_FRONT.z) < 2.2 && player.position.y < house.group.position.y + 2.5; }
     const HQ_CIF_FRONT = { x: HQ_HALF + 0.9, z: HQ_CIF_Z };   // CL-103: the east face
     const HQ_ARMORY_FRONT = { x: HQ_HALF + 0.9, z: HQ_ARMORY_Z };
-    function nearArmory() { return !!house.group && phase === 'prep' && Math.hypot(player.position.x - HQ_ARMORY_FRONT.x, player.position.z - HQ_ARMORY_FRONT.z) < 1.6 && player.position.y < house.group.position.y + 2.5; }
+    function nearArmory() { const P = localPlayer.position; return !!house.group && phase === 'prep' && Math.hypot(P.x - HQ_ARMORY_FRONT.x, P.z - HQ_ARMORY_FRONT.z) < 1.6 && P.y < house.group.position.y + 2.5; }   // his own E prompt (coop.md kind 1)
     function armoryPrompt() { try { return dwText('armory.prompt'); } catch (_) { return 'E — ' + dwText('armory.title'); } }   // ChatGPT adds armory.prompt
     function nearCIF() { return !!house.group && Math.hypot(player.position.x - HQ_CIF_FRONT.x, player.position.z - HQ_CIF_FRONT.z) < 2.0 && player.position.y < house.group.position.y + 2.5; }
     function hqDeposit() {
@@ -33792,7 +34005,8 @@
       if (!ank) return;
       marine.updateMatrixWorld(true);
       ank.getWorldPosition(_ghA);
-      player.position.addScaledVector(_ghP.sub(_ghA), Math.min(1, w));
+      // The held marine is the local one: scripted kills are local (coop.md kind 3).
+      localPlayer.position.addScaledVector(_ghP.sub(_ghA), Math.min(1, w));
     }
     // CL-62 (Jerry 2026-09-29): dragged in, the marine shakes his head and pounds his fists. Offsets on his head,
     // arms and elbows over whatever pose his body holds; the pose under them is kept and put back first thing
@@ -42827,7 +43041,7 @@ live++;
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
-          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS,   /* CL-90 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
       }

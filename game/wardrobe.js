@@ -5,7 +5,7 @@ export const CAMO_ITEMS = Object.freeze(['cap', 'helmet', 'mask', 'shirt', 'trou
 export const BOOT_COLOURS = Object.freeze(['black', 'brown', 'tan']);
 export const BOOT_HEX = Object.freeze({ black: 0x1c1c16, brown: 0x5a3a24, tan: 0xa07a48 });
 export const DRESS_TABS = Object.freeze([
-  { id: 'head', items: ['cap', 'helmet', 'mask'] },
+  { id: 'head', items: ['cap', 'helmet', 'mask', 'eyewear'] },
   { id: 'body', items: ['shirt', 'trousers', 'gloves', 'boots'] },
   { id: 'kit', items: ['carrier', 'pads', 'holster', 'belt', 'pack'] },
   { id: 'him', items: [] },
@@ -17,6 +17,12 @@ export const BODY_CHOICES = Object.freeze({
   eyes: ['brown', 'hazel', 'green', 'blue', 'grey'],
   skin: [0, 1, 2, 3, 4, 5],
 });
+// CL-97 reads these. The new meshes are his; the profile keeps the picks now.
+export const KIT_PLAIN = Object.freeze(['carrier', 'pads', 'holster', 'belt', 'pack']);
+export const CAP_STYLES = Object.freeze(['cover', 'boonie', 'ballcap', 'ballcapBack']);
+export const EYEWEAR_STYLES = Object.freeze(['none', 'aviators', 'pitViper', 'wayfarer', 'goggles']);
+export const SLEEVES = Object.freeze(['down', 'rolled']);
+export const TROUSER_CUTS = Object.freeze(['trousers', 'shorts']);
 
 function camoOf(item, seed) {
   return item === 'mask' ? 'coyoteBrown' : seed;
@@ -24,7 +30,12 @@ function camoOf(item, seed) {
 
 export function defaultWardrobe(seedCamo = 'm81') {
   const items = {};
-  for (const id of CAMO_ITEMS) items[id] = { camo: camoOf(id, seedCamo) };
+  for (const id of CAMO_ITEMS) items[id] = KIT_PLAIN.includes(id) ? {} : { camo: camoOf(id, seedCamo) };
+  items.cap.style = 'cover';
+  items.shirt.sleeves = 'down';
+  items.trousers.cut = 'trousers';
+  items.gloves.worn = true;
+  items.eyewear = { style: 'none' };
   items.boots = { colour: 'black' };
   return {
     version: 1,
@@ -40,9 +51,18 @@ export function normalizeWardrobe(raw, seedCamo = 'm81', isCamo = () => true) {
   const ok = (key) => typeof key === 'string' && key && isCamo(key);
   const items = {};
   for (const id of CAMO_ITEMS) {
-    const pick = raw.items[id] && raw.items[id].camo;
-    items[id] = { camo: ok(pick) ? pick : base.items[id].camo };
+    const src = raw.items[id] || {};
+    const item = {};
+    if (ok(src.camo)) item.camo = src.camo;
+    else if (!KIT_PLAIN.includes(id) && base.items[id].camo) item.camo = base.items[id].camo;
+    items[id] = item;
   }
+  items.cap.style = CAP_STYLES.includes(raw.items.cap && raw.items.cap.style) ? raw.items.cap.style : 'cover';
+  items.shirt.sleeves = SLEEVES.includes(raw.items.shirt && raw.items.shirt.sleeves) ? raw.items.shirt.sleeves : 'down';
+  items.trousers.cut = TROUSER_CUTS.includes(raw.items.trousers && raw.items.trousers.cut) ? raw.items.trousers.cut : 'trousers';
+  items.gloves.worn = !(raw.items.gloves && raw.items.gloves.worn === false);
+  const eye = raw.items.eyewear && raw.items.eyewear.style;
+  items.eyewear = { style: EYEWEAR_STYLES.includes(eye) ? eye : 'none' };
   const colour = raw.items.boots && raw.items.boots.colour;
   items.boots = { colour: BOOT_COLOURS.includes(colour) ? colour : 'black' };
   const guns = {};
@@ -64,14 +84,47 @@ function copy(state) {
 
 export function withItem(state, id, patch, isCamo = () => true) {
   const next = copy(state);
+  if (!patch || typeof patch !== 'object') return null;
+  if (id === 'eyewear') {
+    if (!EYEWEAR_STYLES.includes(patch.style)) return null;
+    next.items.eyewear = { style: patch.style };
+    return next;
+  }
   if (id === 'boots') {
-    if (!BOOT_COLOURS.includes(patch && patch.colour)) return null;
+    if (!BOOT_COLOURS.includes(patch.colour)) return null;
     next.items.boots = { colour: patch.colour };
     return next;
   }
   if (!CAMO_ITEMS.includes(id)) return null;
-  if (!patch || typeof patch.camo !== 'string' || !patch.camo || !isCamo(patch.camo)) return null;
-  next.items[id] = { camo: patch.camo };
+  const item = { ...next.items[id] };
+  let touched = false;
+  if (patch.camo != null) {
+    if (typeof patch.camo !== 'string' || !patch.camo || !isCamo(patch.camo)) return null;
+    item.camo = patch.camo;
+    touched = true;
+  }
+  if (patch.style != null) {
+    if (id !== 'cap' || !CAP_STYLES.includes(patch.style)) return null;
+    item.style = patch.style;
+    touched = true;
+  }
+  if (patch.sleeves != null) {
+    if (id !== 'shirt' || !SLEEVES.includes(patch.sleeves)) return null;
+    item.sleeves = patch.sleeves;
+    touched = true;
+  }
+  if (patch.cut != null) {
+    if (id !== 'trousers' || !TROUSER_CUTS.includes(patch.cut)) return null;
+    item.cut = patch.cut;
+    touched = true;
+  }
+  if (patch.worn != null) {
+    if (id !== 'gloves' || typeof patch.worn !== 'boolean') return null;
+    item.worn = patch.worn;
+    touched = true;
+  }
+  if (!touched) return null;
+  next.items[id] = item;
   return next;
 }
 

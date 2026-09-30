@@ -16,34 +16,55 @@ async function run() {
       const browser = await launch({ headless: true });
       try {
         const page = await browser.newPage({ width: vp.w, height: vp.h });
-        const url = `${server.origin}/index.html?debug=1&raf=timer&renderer=webgl`;
+        const url = `${server.origin}/index.html?raf=timer&renderer=webgl`;
+        console.log(`Navigating to ${server.origin} to set localStorage...`);
+        await page.goto(server.origin);
+        await page.evaluate(`localStorage.setItem('tt_perf_hud', '1')`);
+
         console.log(`Navigating to ${url} on ${vp.name}...`);
         await page.goto(url);
         
-        await page.waitFor('!!window.TT', { timeout: 60000 });
+        console.log("Waiting for window.TT...");
+        const ttReady = await page.waitFor('!!window.TT', { timeout: 120000 });
+        if (!ttReady) throw new Error("window.TT never appeared");
+        
+        console.log("Dismissing opening...");
         await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') { DWOpening.dismissForTesting(); return true; } const b = document.getElementById('openingSkip'); if (b) b.click(); return true; })()`);
         await page.evaluate('new Promise(r => setTimeout(r, 300))');
+        console.log("Calling startMatch...");
         await page.evaluate(`import('./tools/tests/lib.js').then(() => window.startMatch(window.TT, 'AG-44'))`);
         await page.evaluate('new Promise(r => setTimeout(r, 1000))');
 
+        console.log("Advancing to Day 9...");
         // Advance to Day 9 morning properly
-        await page.evaluate(`(() => {
+        await page.evaluate(`(async () => {
           TT.skipGrace();
           TT.runDevCommand('godmode');
-          for (let d = 1; d < 9; d++) {
-            TT.setDay(d); TT.setWorldTime(0.75);
-            TT.hqStartWave && TT.hqStartWave();
-            if (TT.drainWavePlanDbg) TT.drainWavePlanDbg();
-          }
-          TT.setDay(9);
+          if (TT.clearZombies) TT.clearZombies();
+          TT.setDay(8);
           TT.setWorldTime(0.2);
           if (TT.startPrep) TT.startPrep();
         })()`);
 
+        console.log("Waiting for wanderer...");
+
         // Wait for wanderer to appear
-        await page.waitFor(`(() => {
+        const wandererAppeared = await page.waitFor(`(() => {
           return !!TT.zombies.find(z => z.alive && z.poiGuard && z.poiGuard.wanderer);
-        })()`);
+        })()`, { timeout: 10000 });
+        if (!wandererAppeared) {
+          const info = await page.evaluate(`(() => {
+            return {
+              day: TT.day,
+              wandererAllowed: TT.wandererAllowed ? TT.wandererAllowed(TT.day) : 'unknown',
+              bountiesDue: TT.bountyDbg().due,
+              pathsLength: TT.PATHS ? TT.PATHS.length : 'unknown PATHS',
+              trailsLength: TT.wandererTrails ? TT.wandererTrails().length : 'unknown'
+            };
+          })()`);
+          console.log("WANDERER FAILED TO SPAWN! INFO:", info);
+          throw new Error("Wanderer did not spawn");
+        }
         
         await page.evaluate('new Promise(r => setTimeout(r, 500))');
 

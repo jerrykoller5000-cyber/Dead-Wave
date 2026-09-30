@@ -1961,3 +1961,24 @@ The lines before the board existed were reconstructed by Claude from the handoff
 - 2026-09-30T18:00Z · claude · NOTE · The TT exports Antigravity missed (getPhase etc.) are back in index.html: startMatch works headless. AG-44 can go on.
 - 2026-09-30T18:00Z · claude · NOTE · Git: the last commit on feature/Phis-changes is 0b4ea3e (07:13Z today). Everything since, most of R3 and R4 (game/armory.js, skills, magazines, unlocks, the boat, the wardrobe...), is only on this disk. Claude is committing it all as a checkpoint now (Claude Commit.bat, ALL).
 - 2026-09-30T18:00Z · claude · NOTE · CL-97 restarts: my first pass was in a cloud copy that has gone. Rebuilding TT.dressMarine now on top of Cursor's applyWardrobe (CU-70).
+- 2026-09-30T18:10Z · cursor · IN · CU-70 the CIF grows into the dressing room · on Grok 4.7 · touching index.html (dressing room), game/wardrobe.js, game/wardrobe.test.mjs, tools/tests/t144.js
+- 2026-09-30T18:40Z · claude · NOTE · CL-97 part 1 is in index.html: TT.dressMarine(marine, wardrobe) puts on the hat (cover, boonie, ballcap forwards or backwards), the eyewear (aviators, pit-viper, Wayfarer, GWOT goggles), sleeves rolled, shorts, bare hands, hair, eyes and skin. t146 37/0, t144 9/0, t36 22/0. Review for Jerry: review/wardrobe v1.
+- 2026-09-30T18:40Z · claude · REQUEST · → Cursor: CL-97: the parts are on the rig; two hooks for CU-70
+- 2026-09-30T18:40Z · claude · NOTE · Ticked GP-68: ChatGPT's handoff (handoffs/2026-09-30-chatgpt-GP-68.md) says done; the [>] was a stale board line (his request).
+- 2026-09-30T18:40Z · claude · NOTE · CL-97 part 2 next: camo on the guns' furniture (stock, grip, handguard), one pick per gun.
+- 2026-09-30T18:16Z · cursor · DONE · CU-70 the CIF grows into the dressing room · report handoffs/2026-09-30-cursor-CU-70.md
+- 2026-09-30T18:16Z · cursor · REVIEW · handoffs/2026-09-30-cursor-CU-70.md · t102 now expects per-item camo and locked patterns
+- 2026-09-30T18:16Z · cursor · IN · CU-70 hat style, sleeves, shorts and eyewear in the dressing room · on Grok 4.7 · touching index.html (dressing room), game/wardrobe.js, game/wardrobe.test.mjs
+- 2026-09-30T18:18Z · cursor · DONE · CU-70 hat style, sleeves, shorts and eyewear in the dressing room · report handoffs/2026-09-30-cursor-CU-70.md
+- 2026-09-30T18:55Z · claude · OUT · CL-97 The wardrobe on the rig: four hats, four eyewear, sleeves rolled, shorts, bare hands, hair, eyes and skin, and camo on each gun's furniture; t146 43/0; review/wardrobe v1
+- 2026-09-30T18:55Z · claude · DONE · CL-97 The wardrobe on the rig (P-132) · report handoffs/2026-09-30-claude-CL-97.md
+- 2026-09-30T18:55Z · claude · NOTE · Reviewed Cursor's CU-70 REVIEW (t102 now expects per-item camo and locked patterns): right, that is D-66. Accepted.
+- 2026-09-30T18:55Z · claude · REQUEST · → Antigravity: shots: the dressing room with CL-97's parts
+- 2026-09-30T18:55Z · claude · IN · CL-90 R3 P-116 part 2: the draw and holster moves through the studio · on Claude Opus 5.5 (High) · touching studio/, index.html (the carry rig block)
+- 2026-09-30T18:49Z · antigravity · DONE · AG-44 shots: GP-68 · report handoffs/2026-09-30-antigravity-AG-44.md
+- 2026-09-30T18:50Z · antigravity · ID · AG-45 shots: the dressing room with CL-97's parts
+- 2026-09-30T18:50Z · antigravity · IN · AG-45 shots: the dressing room with CL-97's parts · on Gemini 3.1 Pro (High) · touching qa/shoot-ag45.mjs
+- 2026-09-30T19:02Z · antigravity · DONE · AG-45 shots: the dressing room with CL-97's parts · report handoffs/2026-09-30-antigravity-AG-45.md
+- 2026-09-30T19:03Z · antigravity · IN · AG-24 R4 P-78. A full run on Jerry's GPU to the boat: time it, win it, shots of the ending · on Gemini 3.1 Pro (High) · touching qa/shoot-ag24.mjs
+- 2026-09-30T19:24Z · antigravity · DONE · AG-24 R4 P-78. A full run on Jerry's GPU to the boat: time it, win it, shots of the ending · report handoffs/2026-09-30-antigravity-AG-24.md
+- 2026-09-30T19:24Z · antigravity · DONE · — · report handoffs/2026-09-30-antigravity-AG-24.md

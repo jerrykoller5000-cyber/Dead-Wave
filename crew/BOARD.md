@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-30 18:00Z by Claude (R4: four tasks left).
+Lead: Claude. Last updated 2026-09-30 18:55Z by Claude (R4: two runs left, CU-53 and AG-24).
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -60,10 +60,10 @@ night 20, the victory screen and badges, the relay tells the story, and the dres
 boat and a win to close it. Claude's three specs and the boat come first: most of R4 waits on them. A task that says
 "after XX-n" waits for it; meanwhile take your next task whose "after" is met, R5 and R6 included. **Never save this
 board or `crew/LOG.md` from a copy you read earlier;** tick your box with `crew.mjs out` (it reads the file fresh).
-- **Left in R4 (2026-09-30 18:00Z):** CU-70 and CL-97 (the dressing room and the wardrobe on the rig), CU-53 (a full run
-  timed headless) and AG-24 (a full run to the boat on Jerry's GPU). Everything else in R4 is done.
-- Claude: CL-97 (the new parts on the marine: `TT.dressMarine`), then CL-90's draw and holster moves; meanwhile R5.
-- Cursor: CU-70 (reads CL-97's `TT.dressMarine` when it lands); CU-53 can start now (GB-86 is done); meanwhile R5 and R6.
+- **Left in R4 (2026-09-30 18:55Z):** CU-53 (a full run timed headless) and AG-24 (a full run to the boat on Jerry's GPU).
+  Everything else in R4 is done (CU-70 and CL-97: the dressing room and the wardrobe on the rig). Then Jerry plays a run to the boat.
+- Claude: CL-90's draw and holster moves; then R5 (CL-92 lightning, CL-93 the rabbit, CL-79 the secret's spec, CL-98 the Hollows' spec).
+- Cursor: CU-53 (a full run timed headless); meanwhile R5 and R6.
 - Grokbot: R5 and R6.
 - ChatGPT: the dressing room's words (Cursor's request); R5.
 - Antigravity: AG-24 can start now (GB-86 and GP-64 are done); shots as they land.
@@ -88,7 +88,6 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all finished drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Claude** · CL-97 the wardrobe on the rig (TT.dressMarine) · waiting: Cursor
 
 ## The roadmap (D-43)
 
@@ -334,7 +333,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 #### R4 · The way out
 
-- [>] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
+- [x] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
   turn 360; each item's camo and options; saved to the profile. After CL-96, CL-94. Details: `docs/roadmap.md` P-131.
 - [ ] **CU-53** **R4 · P-78.** A full run timed headless: `tools/nightsim.mjs --full`, the boat called on 20. After
   GB-86. Details: `docs/roadmap.md` P-78.
@@ -539,7 +538,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   rabbit. After CL-92, CL-93. Details: `docs/roadmap.md` P-124.
 - [x] **GP-67** **R5 · P-60.** The board warns: "Fog Night", "The siege · they'll go for your walls". After GB-88.
   Details: `docs/roadmap.md` P-60.
-- [>] **GP-68** **R5 · P-62.** "A colossus is walking the east trail" on the board; COLOSSUS DOWN from strings. After
+- [x] **GP-68** **R5 · P-62.** "A colossus is walking the east trail" on the board; COLOSSUS DOWN from strings. After
   GB-89. Details: `docs/roadmap.md` P-62.
 - [x] **GP-91** **R5 · P-86.** The props' notes as cards (docs/story.md §4): E at each of the ten sites reads its note
   from strings, once, as a short card. Where E already does something there (an objective's claim, the dock, the
@@ -580,7 +579,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 #### R4 · The way out
 
-- [ ] **AG-24** **R4 · P-78.** A full run on Jerry's GPU to the boat: time it, win it, shots of the ending. After
+- [x] **AG-24** **R4 · P-78.** A full run on Jerry's GPU to the boat: time it, win it, shots of the ending. After
   GB-86; after GP-64. Details: `docs/roadmap.md` P-78.
 
 #### R5 · Named nights and bigger systems
@@ -658,7 +657,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 - [x] **CL-96** **R4 · P-130.** The dressing room spec (D-66): every slot and its options, what takes camo, the four
   base camos and how the rest are earned (days, streaks, badges), one wardrobe per player (D-58). First of the D-66
   tasks. Details: `docs/roadmap.md` P-130.
-- [>] **CL-97** **R4 · P-132.** The wardrobe on the rig (D-66): hats (8-point, boonie, ballcap forwards or backwards),
+- [x] **CL-97** **R4 · P-132.** The wardrobe on the rig (D-66): hats (8-point, boonie, ballcap forwards or backwards),
   gloves on or off, sleeves rolled or down, shorts, boot colours, hair, eyes and skin, camo on the guns. Eyewear, picked
   in the CIF (Jerry): aviators, a pit-viper style, a Wayfarer style, and the GWOT ballistic goggles. After CL-94.
   Details: `docs/roadmap.md` P-132.

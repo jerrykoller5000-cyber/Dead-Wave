@@ -107,6 +107,13 @@
       "reference": null
     },
     {
+      "asset": "wardrobe",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "zombie-reactions",
       "owner": "grokbot",
       "rig": "zombie",
