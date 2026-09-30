@@ -1,6 +1,7 @@
 // t148 - GB-90 (P-64): survivor bounties. From night 3 a campsite bounty can hold a survivor (at most once per camp per
 // run) who waits by the fire. E does nothing near them while the post's guards live; once the guards are dead, E takes
-// them in (survivor-rescued, getSurvivors(), the figure goes). Nothing targets them. A run reset clears it all.
+// them in (survivor-rescued, getSurvivors(), the figure goes). Nothing targets them. GB-115: one left at the fire leaves
+// at the alarm (survivor-lost 'alarm') and the camp stays used. A run reset clears it all.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -64,6 +65,25 @@
     ok(S().waiting().length === 0 && T.getBounties().find((b) => b.index === sb.index && b.kind === 'campsite').survivor.state === 'rescued', 'the figure is gone; the board says rescued');
     await pressE();
     ok(T.getSurvivors().length === 1, 'a second E does nothing');
+    // GB-115: a survivor left at the fire leaves at the alarm, and that camp stays used.
+    let sb2 = null, tries2 = 0;
+    while (!sb2 && tries2 < 40) {   // night 8 posts two bounties, so the one camp left comes up twice as often
+      tries2++;
+      T.clearZombies(); T.setDay(7); T.startPrep(); home();
+      await until(() => T.getBounties().length > 0, 8000);
+      sb2 = T.getBounties().find((b) => b.survivor && b.survivor.state === 'waiting');
+    }
+    ok(!!sb2 && sb2.index !== sb.index && S().waiting().length === 1, 'another camp holds a survivor (' + (sb2 && sb2.survivor.style) + ', after ' + tries2 + ' prep(s))');
+    const l0 = of('survivor-lost').length;
+    home(); T.hqStartWave();
+    await until(() => of('survivor-lost').length > l0, 5000);
+    const lost = of('survivor-lost').slice(l0);
+    ok(!!sb2 && lost.length === 1 && lost[0].reason === 'alarm' && lost[0].camp === sb2.index && lost[0].style === sb2.survivor.style, 'the alarm: survivor-lost {reason ' + (lost[0] && lost[0].reason) + '}');
+    const row2 = sb2 && T.getBounties().find((b) => b.kind === 'campsite' && b.index === sb2.index);
+    ok(S().waiting().length === 0 && !!row2 && row2.survivor.state === 'lost', 'the figure is gone; the board says lost');
+    ok(!!sb2 && S().campsUsed().includes(sb2.index) && !S().allowed({ kind: 'campsite', index: sb2.index }, 9), 'that camp stays used');
+    ok(T.getSurvivors().length === 1, 'the one taken in earlier is still with him');
+    await until(() => T.getPhase() === 'wave', 25000);
     // A run reset clears it all.
     T.resetGame(); await wait(300);
     ok(T.getSurvivors().length === 0 && S().campsUsed().length === 0 && S().waiting().length === 0, 'reset clears survivors and used camps');

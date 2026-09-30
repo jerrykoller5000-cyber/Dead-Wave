@@ -585,7 +585,7 @@ the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in 
 - `hikers` (the medic): regen reaches `MEDIC_REGEN_CAP_FRAC` (0.5) of max hp instead of `REGEN_CAP_FRAC` (0.4): `regenCapFrac()`.
 - `trapper`: `repairCostOf(b)` is multiplied by `TRAPPER_REPAIR_MUL` (0.75), before rounding up; never under 1: `repairCostMul()`.
 - `ranger`: one free light turret, once a run, through `placeBuildAt` on the free cell nearest (-(HQ_HALF + 4), 0), clear of
-  the HQ by 2 m, dry and off the cabin. It's an ordinary build with `gift: 'ranger'`. If no cell takes it, he tries again at the next prep.
+  the HQ by 2 m, dry and off the cabin. It's an ordinary build with `gift: 'ranger'`. Scrapping or selling it pays nothing back (GB-115); upgrades bought on it refund as usual. If no cell takes it, he tries again at the next prep.
 - `dw-game` `'survivor-help'`: `{ style: 'hikers', help: 'regen', cap }`, `{ style: 'trapper', help: 'repairs', mul }`,
   `{ style: 'ranger', help: 'turret', id, x, z }`, fired when the survivor is taken in.
 - TT: `survivorHelpDbg` (`grant(style)`, `regenCapFrac`, `repairCostOf`, `setHp`, `regen(dt)`, `giftTurret()`, `owed()`). Test: t149.

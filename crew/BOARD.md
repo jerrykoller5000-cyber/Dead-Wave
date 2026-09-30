@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-30 18:55Z by Claude (R4: two runs left, CU-53 and AG-24).
+Lead: Claude. Last updated 2026-09-30 22:25Z by Claude (the mission is R5, Jerry's order; CU-53 closes R4).
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -54,32 +54,37 @@ someone else, say so with `crew.mjs request`; don't start it.
 
 ## Mission
 
-**The roadmap, phase R4: the way out (D-43).**
-R3's tasks are done (Jerry plays days 1-10 to close it; CL-90's draw and holster moves carry over). R4: the boat at
-night 20, the victory screen and badges, the relay tells the story, and the dressing room. Jerry plays a run to the
-boat and a win to close it. Claude's three specs and the boat come first: most of R4 waits on them. A task that says
-"after XX-n" waits for it; meanwhile take your next task whose "after" is met, R5 and R6 included. **Never save this
-board or `crew/LOG.md` from a copy you read earlier;** tick your box with `crew.mjs out` (it reads the file fresh).
-- **Left in R4 (2026-09-30 18:55Z):** CU-53 (a full run timed headless) and AG-24 (a full run to the boat on Jerry's GPU).
-  Everything else in R4 is done (CU-70 and CL-97: the dressing room and the wardrobe on the rig). Then Jerry plays a run to the boat.
-- Claude: CL-90's draw and holster moves; then R5 (CL-92 lightning, CL-93 the rabbit, CL-79 the secret's spec, CL-98 the Hollows' spec).
-- Cursor: CU-53 (a full run timed headless); meanwhile R5 and R6.
-- Grokbot: R5 and R6.
-- ChatGPT: the dressing room's words (Cursor's request); R5.
-- Antigravity: AG-24 can start now (GB-86 and GP-64 are done); shots as they land.
-- **Claude** · CL-96 · handoffs/claude-CL-96.md
-- **Claude** · CL-74 · handoffs/claude-CL-74.md
-- **Claude** · CL-73 · handoffs/claude-CL-73.md
-- **Claude** · CL-97 · handoffs/claude-CL-97.md
-- **Claude** · CL-90 · handoffs/claude-CL-90.md
-- **Cursor** · CU-70 · handoffs/cursor-CU-70.md
+**The roadmap, phase R5: named nights and bigger systems (D-43).**
+R4's tasks are done but one: Cursor's CU-53 (a full run timed headless, running now). Jerry plays a run to the boat
+and a win to close R4. R5: Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret
+(The Signal) and the Hollows under the caves by day. Jerry plays nights 12-20 from the debug start, the secret, and a
+delve in each warren to close it. **Claude's specs come first: nearly all of R5 waits on them** (CL-98 the Hollows,
+CL-79 the secret, CL-76 Fog Night's fog). Until your R5 task's "after" is met, take R6 (GB-94, GP-71 to GP-73,
+CU-55 to CU-57, AG-27). **Never save this board or `crew/LOG.md` from a copy you read earlier;** tick your box with
+`crew.mjs out` (it reads the file fresh).
+- **The Hollows' spec is in** (`docs/specs/hollows.md`, CL-98): GB-106, CU-71, GP-83 and CL-99 can start. Jerry reads it
+  meanwhile; a change he asks for lands in the spec and the tasks follow it.
+- **The secret's spec is in** (`docs/specs/secret-quest.md`, CL-79): GP-70 can start; CL-80 is Claude's. Both specs
+  wait on Jerry's yes (Q-5); build meanwhile, and follow any change he asks for.
+- Claude: CL-99 (the five warrens, a test warren first for CU-71), CL-80 (the stones from the tower), CL-76 (Fog Night's fog: CU-54 and AG-25 wait), then CL-92 and CL-93 (GP-81 waits), CL-75, CL-78, CL-81.
+- Cursor: CU-53 (R4), then CU-71 (the Hollows' runtime, spec §2); R6 meanwhile; CU-54 after CL-76.
+- Grokbot: GB-106 (the Hush, spec §1); then R6 (GB-94); GB-107 after CU-71 and CL-99.
+- ChatGPT: GP-93 (the dressing room's words), GP-83 (the haul, hollows.md §6), GP-70 (the radio's Tune and the true ending, secret-quest.md §3, §6); R6 meanwhile.
+- Antigravity: shots as they land; AG-25 after CL-76.
+- **Claude** · CL-98 · handoffs/claude-CL-98.md
+- **Claude** · CL-99 · handoffs/claude-CL-99.md
+- **Claude** · CL-79 · handoffs/claude-CL-79.md
+- **Claude** · CL-80 · handoffs/claude-CL-80.md
+- **Claude** · CL-76 · handoffs/claude-CL-76.md
+- **Claude** · CL-92 · handoffs/claude-CL-92.md
+- **Claude** · CL-93 · handoffs/claude-CL-93.md
 - **Cursor** · CU-53 · handoffs/cursor-CU-53.md
-- **Grokbot** · GB-86 · handoffs/grokbot-GB-86.md
-- **ChatGPT** · GP-82 · handoffs/chatgpt-GP-82.md
-- **ChatGPT** · GP-66 · handoffs/chatgpt-GP-66.md
-- **ChatGPT** · GP-64 · handoffs/chatgpt-GP-64.md
-- **Antigravity** · AG-24 · handoffs/antigravity-AG-24.md
-Then: R5.
+- **Cursor** · CU-71 · handoffs/cursor-CU-71.md
+- **Grokbot** · GB-106 · handoffs/grokbot-GB-106.md
+- **ChatGPT** · GP-83 · handoffs/chatgpt-GP-83.md
+- **ChatGPT** · GP-70 · handoffs/chatgpt-GP-70.md
+- **Antigravity** · AG-25 · handoffs/antigravity-AG-25.md
+Then: R6.
 
 ## Waiting on
 
@@ -101,8 +106,8 @@ counts a listed id that has left the board as done).
 | **R1 · Trust the loop, and feel it** | ✓ Done | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
 | **R2 · The night has a shape** | ✓ Done | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, CU-77, CL-102, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, GP-85, CU-78, AG-30, GP-86, CL-104, CL-105, GB-112 |
 | **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | GP-88, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, GP-87, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, GP-89, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69, GB-111, CL-103 |
-| **R4 · The way out** | ▶ Next | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
-| **R5 · Named nights and bigger systems** | Later | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91 |
+| **R4 · The way out** | Jerry plays | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
+| **R5 · Named nights and bigger systems** | ▶ Now | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91 |
 | **R6 · Finish (1.0)** | Later | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
 | **R7 · Co-op, up to 4 players** | After 1.0 | Up to 4 players, one hosting, through the desktop app (D-58). | A night with friends. | Written when R6 closes. |
 
@@ -115,6 +120,9 @@ For players who look, the relay's static and the pit stones hide a way to silenc
 guardian for the true ending. `docs/roadmap.md` has it in full.
 
 ## Orders from Jerry
+
+- **2026-09-30, ~22:20Z · On to R5.** "Great work please continue. If you guys get done with R4 move to R5." R4's
+  tasks are done but CU-53 (running), so the mission is R5 now; R4 closes when Jerry has played a run to the boat.
 
 - **2026-09-30, ~07:20Z · The fidelity pass is good; the crew works the night.** "Fidelity pass looks good to me nice
   work. I am going to go to sleep so you got the work for the rest of the night." CL-94 closed. R3's tasks are done, so
@@ -335,7 +343,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 - [x] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
   turn 360; each item's camo and options; saved to the profile. After CL-96, CL-94. Details: `docs/roadmap.md` P-131.
-- [ ] **CU-53** **R4 · P-78.** A full run timed headless: `tools/nightsim.mjs --full`, the boat called on 20. After
+- [>] **CU-53** **R4 · P-78.** A full run timed headless: `tools/nightsim.mjs --full`, the boat called on 20. After
   GB-86. Details: `docs/roadmap.md` P-78.
 
 #### R5 · Named nights and bigger systems
@@ -643,7 +651,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 - [x] **CL-103** **R3 · P-111.** The Armory's window at the HQ (D-61, `docs/loadout.md` section 2). Jerry: the CIF moves
   to the wall opposite the kiosk and skull window, and the Armory window goes beside it there. The prop, a prep-only E
   prompt, and the hook that opens GP-78's panel. After GP-78.
-- [>] **CL-90** **R3 · P-116.** What he carries shows on him (D-61): primaries slung on his back, cross-draw holsters,
+- [x] **CL-90** **R3 · P-116.** What he carries shows on him (D-61): primaries slung on his back, cross-draw holsters,
   the hip pistol, mag pouches, grenades, a shell bandolier, a 40 mm belt, the backpack; 3-4 stages each; the draw and
   holster moves through the studio. After CU-65. Details: `docs/roadmap.md` P-116.
 - [x] **CL-88** **R3 · P-104.** Skills by doing (D-59): `docs/skills.md`, the spec: what counts for each of the six,
@@ -682,13 +690,13 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 - [ ] **CL-77** **R5 · P-58.** Fog Night's own sectioned score. After CL-76. Details: `docs/roadmap.md` P-58.
 - [ ] **CL-78** **R5 · P-67.** The guardian boss on the studio rig and clips (D-55). After CL-62. Details:
   `docs/roadmap.md` P-67.
-- [ ] **CL-79** **R5 · P-94, P-69.** The secret quest's spec, docs/specs/secret-quest.md, for Jerry's yes (D-56).
+- [x] **CL-79** **R5 · P-94, P-69.** The secret quest's spec, docs/specs/secret-quest.md, for Jerry's yes (D-56).
   After CL-74. Details: `docs/roadmap.md` P-94, P-69.
 - [ ] **CL-80** **R5 · P-95.** The secret's world: the pit stones pulse in order at night, seen from the tower; the
   lake goes quiet. After CL-79. Details: `docs/roadmap.md` P-95.
 - [ ] **CL-81** **R5 · P-68.** The kick-free gets a real let-go beat in the studio. After GB-78; after CL-62. Details:
   `docs/roadmap.md` P-68.
-- [ ] **CL-98** **R5 · P-134.** The Hollows' spec (D-67), `docs/specs/hollows.md`: the Hush, the five warrens, the
+- [x] **CL-98** **R5 · P-134.** The Hollows' spec (D-67), `docs/specs/hollows.md`: the Hush, the five warrens, the
   depths, the stir, the loot, the story, the runtime contract with Cursor, co-op, and Jerry's three calls (Q-4), for
   Jerry's yes. After CL-74. Details: `docs/roadmap.md` P-134.
 - [ ] **CL-99** **R5 · P-137.** The five warrens: a tile kit per theme (root, shale, iron, wet, hill), three depths from

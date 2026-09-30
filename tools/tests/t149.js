@@ -1,6 +1,7 @@
 // t149 - GB-91 (P-65, D-52): what the survivors (GB-90) do for the rest of the run. The hikers' medic lets regen reach
 // 50% (not 40%); the trapper cuts repairs to 75%; the ranger sets up one free light turret by the HQ, once a run.
-// A run reset ends it all. The survivors are granted through survivorHelpDbg.grant (t148 covers taking one in).
+// A run reset ends it all. GB-115: the free turret refunds nothing when scrapped. The survivors are granted through
+// survivorHelpDbg.grant (t148 covers taking one in).
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -40,6 +41,13 @@
     ok(ev.some((e) => e.style === 'ranger' && e.help === 'turret'), 'survivor-help {ranger, turret}');
     H().grant('ranger');
     ok(gifts().length === 1 && !H().owed(), 'a second ranger does not add another');
+    // GB-115: scrapping the free turret pays nothing back; upgrades bought on it still do.
+    const gb = gifts()[0];
+    ok(T.scrapRefund(gb) === 0, 'the free turret refunds nothing (' + T.scrapRefund(gb) + ')');
+    gb.gift = null; const bought = T.scrapRefund(gb); gb.gift = 'ranger';
+    ok(bought > 0, 'the same turret, bought, would refund ' + bought);
+    gb.upgradeSpent = 45; const up = T.scrapRefund(gb); gb.upgradeSpent = 0;
+    ok(up > 0 && up < bought + 45, 'an upgrade bought on it refunds ' + up);
     // A run reset ends it all.
     T.resetGame(); await wait(300);
     ok(T.getSurvivors().length === 0 && H().regenCapFrac() === 0.4 && H().repairCostOf(dmg) === 12 && gifts().length === 0 && !H().owed(), 'reset: 40% regen, full repair price, no gift turret');

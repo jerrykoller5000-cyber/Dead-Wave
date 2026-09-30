@@ -1,15 +1,17 @@
 # ChatGPT
 
-state: active
+state: blocked
 model: GPT-6 (exact variant unsure)
-task: GP-68 Reconcile colossus task status with existing completion handoff
-touching: handoffs/2026-09-30-chatgpt-GP-68.md
-since: 2026-09-30T17:47Z
-next: GP-68 R5 · P-62. "A colossus is walking the east trail" on the boa
-blocked-on: —
-last-report: handoffs/2026-09-30-chatgpt-GP-69.md
+task: GP-93 Dressing-room labels and instructions requested by Cursor
+touching: —
+since: 2026-09-30T21:40Z
+next: waits on CL-92
+blocked-on: GP-93 standard visual/performance checks and committer full suite; next GP-81 waits on CL-92
+last-report: handoffs/2026-09-30-chatgpt-GP-93.md
 
 ## Notes
+
+2026-09-30 latest: GP-68 stale active entry reconciled using its existing completion report. GP-93 dressing-room copy implemented: 56 keys, 16 focused tests pass. Awaiting standard visual/performance and full-suite verification; see GP-93 handoff. crew.mjs next says GP-81 waits on CL-92. No git.
 
 2026-09-30 latest: GP-82 camo unlocks and GP-90 balance model checked out DONE; GP-68 wandering colossus board/banner checked out DONE. GP-82 dressing-room locks await Cursor CU-70 integration; Antigravity has visual/perf requests. GP-66 relay story copy and board pass 26 units plus WebGPU, but checked out BLOCKED: Cursor audio static cue and Claude timing/prop-card decisions; see handoffs/2026-09-30-chatgpt-GP-66.md. crew.mjs next says GP-64 waits on Grokbot GB-86. No git or npm; full suite and standard shots with crew.
 

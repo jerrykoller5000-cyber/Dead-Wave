@@ -43,6 +43,7 @@ const DT = Number(opt('--dt', 1 / 30)) || 1 / 30;
 const CAP = Number(opt('--cap', 900)) || 900;
 const OUT = opt('--out', null);
 const GOD = argv.includes('--god');
+const FULL = argv.includes('--full');
 const WALLCAP = Number(opt('--wallcap', 40)) || 40;   // GB-58: real minutes per night before it is cut off
 const REPEAT = Math.max(1, Number(opt('--repeat', 1)) || 1);
 const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap', '--repeat'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
@@ -65,7 +66,8 @@ function buildPage() {
 
 // ---- runs inside the page ------------------------------------------------------------
 async function playNight(o) {
-  const T = window.TT, R = { night: o.night };
+  const T = window.TT;
+  let R = { night: o.night };
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await startMatch(T, 'NightSim');
   let w0 = Date.now();
@@ -88,6 +90,14 @@ async function playNight(o) {
     return o.dt;
   };
   while (!mainClock) await wait(20);
+
+  const roster = o.full ? Array.from({ length: 20 }, (_, i) => i + 1) : [o.night];
+  const reports = [];
+  const wallAll = Date.now();
+  for (const nightNum of roster) {
+    o.night = nightNum;
+    o.boat = !!(o.full && nightNum === 20);
+    R = { night: nightNum };
 
   // Loadout by night.
   const has = (w) => T.getWeaponOwned && T.getWeaponOwned()[w];
@@ -282,11 +292,18 @@ async function playNight(o) {
       }
     }
   };
-  T.hqStartWave();
+  if (o.boat) {
+    // Night 20, one continuous run: the relay is up, he is at the HQ panel, and he calls the boat.
+    T.setRelayUpDbg && T.setRelayUpDbg(true);
+    const px = 3.2, pz = -5.9;
+    T.player.position.set(px, T.sampleHeight(px, pz), pz);
+    R.called = !!T.requestExtraction();
+    R.extraction = T.extractionFor ? T.extractionFor(T.getDay ? T.getDay() : n) : null;
+  } else T.hqStartWave();
   // The alarm sequence (flares, the sky shot) runs before beginWave.
   w0 = Date.now();
   while (T.getWaveDirectorState().phase !== 'wave' && Date.now() - w0 < 180000) await wait(50);
-  if (T.getWaveDirectorState().phase !== 'wave') { R.error = 'the wave never began'; return JSON.stringify(R); }
+  if (T.getWaveDirectorState().phase !== 'wave') { R.error = 'the wave never began'; reports.push(R); break; }
   t0 = simT;
   // Run it out.
   const wall0 = Date.now();
@@ -324,6 +341,26 @@ async function playNight(o) {
   }
   botFn = null;
   T.setMouseFireDbg(false);
+  if (o.boat) {
+    const bw = Date.now();
+    while (Date.now() - bw < 90000) {
+      const b = T.boardingDbg ? T.boardingDbg() : null;
+      if (b && (b.state === 'due' || b.reach)) break;
+      await wait(50);
+    }
+    const boat = T.getExtractionBoat && T.getExtractionBoat();
+    const deck = boat && boat.deck && boat.deck();
+    if (deck) T.player.position.set(deck.x, deck.y != null ? deck.y : T.sampleHeight(deck.x, deck.z), deck.z);
+    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyE', key: 'e', bubbles: true }));
+    const hold0 = simT;
+    while (simT - hold0 < 3 && Date.now() - bw < 120000) await wait(40);
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyE', key: 'e', bubbles: true }));
+    const boarded = T.boardingDbg ? T.boardingDbg() : {};
+    R.won = !!boarded.won;
+    R.boarded = boarded.state || null;
+    R.hot = !!boarded.hot;
+    R.reach = !!boarded.reach;
+  }
   const ws = T.getWaveDirectorState();
   if (lullStart !== null) lulls.push(+((simT - t0) - lullStart).toFixed(1));
   Object.assign(R, {
@@ -335,10 +372,21 @@ async function playNight(o) {
     deaths, damage: Math.round(dmg), damageHp: Math.round(dmgHp), hits, damageBy: Object.fromEntries(Object.entries(dmgBy).map(([k, v]) => [k, Math.round(v)])),
     knifeSwings, meleeKills, meleeShare: lastKillCount > 0 ? +(meleeKills / lastKillCount).toFixed(3) : 0,
     crowd5s: +crowd5s.toFixed(1), signature, sigPeak, screamerCalls, healHp: +healHp.toFixed(1),
-    samples, knees: T.getHitStumble ? T.getHitStumble().knees : null,
+    samples,     knees: T.getHitStumble ? T.getHitStumble().knees : null,
     wallSecs: Math.round((Date.now() - wall0) / 1000), errors: []
   });
-  return JSON.stringify(R);
+    reports.push(R);
+    if (R.error || R.won) break;
+  }
+  if (!o.full) return JSON.stringify(reports[0]);
+  const last = reports[reports.length - 1] || {};
+  return JSON.stringify({
+    full: true,
+    wallSecs: Math.round((Date.now() - wallAll) / 1000),
+    gameSecs: +reports.reduce((s, r) => s + (r.length || 0), 0).toFixed(1),
+    won: !!last.won, called: last.called, boarded: last.boarded, hot: !!last.hot,
+    nights: reports
+  });
 }
 
 // ---- node side -----------------------------------------------------------------------
@@ -370,10 +418,33 @@ async function runNight(job) {
   }
   try { await page.send('Page.close', {}); } catch { /* gone */ }
 }
+async function runFull() {
+  const page = await browser.newPage({ width: 1280, height: 720 });
+  const t0 = Date.now();
+  try {
+    await page.goto(`${server.origin}/tools/tests/${PAGE}?debug=1&raf=timer`, { timeout: 120000 });
+    if (!await page.waitFor('!!window.TT', { timeout: 120000 })) throw new Error('window.TT never appeared: ' + (page.errors[0] || '').split('\n')[0]);
+    await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); })()`);
+    await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 30000 });
+    await page.evaluate(lib);
+    const o = { full: true, night: 1, dt: DT, cap: CAP, god: GOD, wallCap: WALLCAP * 60000 };
+    const raw = await page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 3 * 60 * 60000);
+    const r = JSON.parse(raw);
+    r.wallSecs = Math.round((Date.now() - t0) / 1000);
+    r.errors = page.errors.slice(0, 3).map((e) => e.split('\n')[0]);
+    results.push(r);
+    console.log(`full run  ${r.wallSecs}s real  game ${r.gameSecs}s  won ${r.won}  called ${r.called}  boarded ${r.boarded}  nights ${(r.nights || []).length}`);
+  } catch (e) {
+    results.push({ full: true, error: e.message.split('\n')[0] });
+    console.log(`full run  ERROR ${e.message.split('\n')[0]}`);
+  }
+  try { await page.send('Page.close', {}); } catch { /* gone */ }
+}
 const queue = [];
-for (const n of nights) for (let i = 1; i <= REPEAT; i++) queue.push({ night: n, run: i });
+if (!FULL) for (const n of nights) for (let i = 1; i <= REPEAT; i++) queue.push({ night: n, run: i });
 try {
-  await Promise.all(Array.from({ length: Math.min(JOBS, queue.length) }, async () => { while (queue.length) await runNight(queue.shift()); }));
+  if (FULL) await runFull();
+  else await Promise.all(Array.from({ length: Math.min(JOBS, queue.length) }, async () => { while (queue.length) await runNight(queue.shift()); }));
 } finally {
   await browser.close();
   await server.close();

@@ -1,10 +1,10 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-09-30T18:18Z
+task: CU-53 a full headless run, the boat called on night 20
+touching: tools/nightsim.mjs, index.html (dressing room)
+since: 2026-09-30T21:42Z
 next: CU-53 R4 · P-78. A full run timed headless: `tools/nightsim.mjs --
 blocked-on: —
 last-report: handoffs/2026-09-30-cursor-CU-70.md

@@ -162,6 +162,33 @@ const DRESS_VIEWS = [
 ];
 VIEWS.push(...DRESS_VIEWS);
 
+// CL-90 part 2: the draw and holster moves, as a strip: four marines, each posed a moment further into the move.
+const DRAW_LOAD = { primary: ['m4', 'shotgun'], secondary: ['uzi', 'revolver'] };
+const DRAW_MOVES = {
+  'm4-to-pistol': ['m4', 'pistol', [0.09, 0.2, 0.3, 0.44]],       // the M4 onto his back, the pistol off the hip
+  'pistol-to-revolver': ['pistol', 'revolver', [0.09, 0.2, 0.29, 0.42]],   // the hip, then the cross-draw under the left arm
+  'uzi-to-shotgun': ['uzi', 'shotgun', [0.09, 0.2, 0.33, 0.47]],   // the chest, then over the shoulder
+};
+const drawView = (move, facing) => `(() => { const S = ${STAGE}; ${hideAll} S.solo(true); const T = TT, THREE = T.THREE, b = S.base;
+  if (window.__mdress) for (const r of Object.values(window.__mdress)) for (const g of r) g.visible = false;
+  window.__mdraw = window.__mdraw || {};
+  for (const r of Object.values(window.__mdraw)) for (const g of r) g.visible = false;
+  const [from, to, times] = ${JSON.stringify(DRAW_MOVES[move])};
+  if (!window.__mdraw['${move}']) window.__mdraw['${move}'] = times.map((t) => {
+    const m = T.makeMarine(); S.dress(m, true);
+    T.drawPreview(m, from, to, t, ${JSON.stringify(DRAW_LOAD)});
+    const g = new THREE.Group(); g.add(m); T.scene.add(g); return g;
+  });
+  window.__mdraw['${move}'].forEach((g, i) => { g.visible = true; g.position.set(b.x + (i - 1.5) * 1.15, b.y, b.z); g.rotation.y = ${facing}; });
+  return { x: b.x, y: b.y + 1.0, z: b.z + 4.4, tx: b.x, ty: b.y + 0.9, tz: b.z, fov: 40 }; })()`;
+const DRAW_VIEWS = [
+  ['draw-m4-to-pistol', drawView('m4-to-pistol', -0.6)],
+  ['draw-m4-to-pistol-back', drawView('m4-to-pistol', Math.PI - 0.6)],
+  ['draw-pistol-to-revolver', drawView('pistol-to-revolver', -0.3)],
+  ['draw-uzi-to-shotgun', drawView('uzi-to-shotgun', Math.PI - 0.8)],
+];
+VIEWS.push(...DRAW_VIEWS);
+
 // A cave's own frame: +z (fx, fz) points out of the mouth, +x (rx, rz) is to its right.
 function caveShot(theme, kind) {
   const spec = {

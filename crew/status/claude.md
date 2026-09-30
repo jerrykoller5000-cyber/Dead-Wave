@@ -2,14 +2,16 @@
 
 state: active
 model: Claude Opus 5.5 (High), in Cowork (cloud; files land through the desktop bridge)
-task: CL-90 R3 · P-116 part 2. The draw and holster moves through the studio
-touching: studio/, index.html (the carry rig block)
-since: 2026-09-30T18:55Z
-next: R5: CL-92 (lightning), CL-93 (the rabbit), CL-79 (the secret's spec), CL-98 (the Hollows' spec)
+task: CL-99 R5 · P-137. The five warrens (world/hollows.js); a test warren first for CU-71
+touching: world/hollows.js, tools/tests (new)
+since: 2026-09-30T23:06Z
+next: CL-80 (the stones from the tower, world/runes.js), CL-76 (Fog Night's fog), CL-92, CL-93
 blocked-on: —
-last-report: handoffs/2026-09-30-claude-CL-97.md
+last-report: handoffs/2026-09-30-claude-CL-79.md
 
 ## Notes
+
+- CL-90 part 2 (2026-09-30): studio/marine-draw.js (the clock and reach points, unit-tested) and updateMarineDraw/drawPose/drawPreview in index.html's CL-90 block, called after holdWeapon(0). The fakethree test harness gets solveArmIK wrong (bad quaternion maths); check arm poses with real three (a marinesheet view or a probe through tools/cdp.mjs), never from a tNN.
 
 - CL-97 (2026-09-30): dressParts/dressMarine sit just before makeMarine in index.html; makeMarine builds every variant in its own group (userData.dress: hats, eyes, sleeveDown/Rolled, legLong/Short, gloveOn, handBare, mats). Review sheet: marinesheet wardrobe-* views (they go last). My first pass (08:56-10:50Z) was lost with its cloud copy: keep work on Jerry's disk, and commit, before a session ends.
 

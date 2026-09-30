@@ -1195,6 +1195,7 @@
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
     import { createMarineIdle } from './studio/marine-idle.js';
+    import { createDraw, LEFT_REST as DRAW_LEFT_REST } from './studio/marine-draw.js';   // CL-90 part 2
     import { rollTravel, rollAxisLocal } from './studio/marine-roll.js';
     import * as Studio from './studio/index.js';   // CL-64: scenes (the cave drag)
     import { presets as MotionPresets } from './studio/motion/index.js';   // GB-65 (D-42): the reaction presets
@@ -15696,6 +15697,7 @@
     let wardrobeState = null;
     let worldMarine = null;
     let dressPreview = null;
+    let previewFocus = null;
     function paintCamoTile(key, cv) {
       const c = cv && cv.getContext ? cv.getContext('2d') : null;
       if (!c) return false;
@@ -15778,12 +15780,23 @@
     function dressWorld() {
       if (worldMarine) applyWardrobe(worldMarine, wardrobeState);
       if (dressPreview) applyWardrobe(dressPreview, wardrobeState);
-      // CL-97's dressMarine owns the new parts (hat style, sleeves, eyewear). Until it
-      // is in this file, the camo and boot colour above are what he wears.
       if (typeof dressMarine === 'function') {
         if (worldMarine) dressMarine(worldMarine, wardrobeState);
         if (dressPreview) dressMarine(dressPreview, wardrobeState);
       }
+      syncPreviewKit();
+    }
+    // AG-45: the helmet hides the hat, and the NVG hides the eyewear. While those
+    // items are selected, the preview shows the part he is picking.
+    function syncPreviewKit() {
+      const gp = dressPreview && dressPreview.userData && dressPreview.userData.gearParts;
+      if (!gp) return;
+      if (!previewFocus) return;
+      const hat = previewFocus === 'cap';
+      for (const o of gp.helmet || []) o.visible = !hat;
+      for (const o of gp.bareHead || []) o.visible = hat;
+      const eyes = previewFocus === 'eyewear';
+      for (const o of gp.nvg || []) o.visible = !eyes;
     }
     const uniformMat = new THREE.MeshStandardMaterial({ color: 0xe2ded0, map: camoTex, roughness: 0.95, metalness: 0.02 });
     const trouserMat = new THREE.MeshStandardMaterial({ color: 0xd2cebd, map: camoTex, roughness: 0.95, metalness: 0.02 });
@@ -17715,6 +17728,7 @@
     // whole rig costs a handful of draws. It is refreshed a few times a second, and only rebuilt on a change.
     const CARRY_REFRESH_S = 0.2;
     const CARRY_SLOTS = { mags: 5, grenades: 4, shells: 10, rounds40: 6, boxes: 2, tanks: 2 };
+    const marineDraw = createDraw();   // CL-90 part 2: the draw and holster moves (studio/marine-draw.js)
     // The big guns ride a little smaller on his back, so a minigun doesn't tower over his helmet.
     const CARRY_SLING_SCALE = { minigun: 0.62, flamer: 0.8, chainsaw: 0.8, sniper: 0.85, launcher: 0.9 };
     const carryMats = {
@@ -17880,7 +17894,8 @@
     // Works out what shows. `o` overrides the loadout or the gun in hand (the tests).
     function carryPlan(o = {}) {
       const load = o.loadout || carriedLoadout();
-      const inHand = o.inHand !== undefined ? o.inHand : (unarmed || !weaponMount.visible ? null : currentWeapon);
+      // Mid-move (CL-90 part 2) the gun in his hand is the move's: the old one until it is put away, then the new one.
+      const inHand = o.inHand !== undefined ? o.inHand : (marineDraw.state.active ? marineDraw.frame().inHand : (unarmed || !weaponMount.visible ? null : currentWeapon));
       const akimbo = o.akimbo !== undefined ? o.akimbo : akimboOn();
       let hide = inHand ? (akimbo ? 2 : 1) : 0;
       const take = (kind) => { if (hide > 0 && kind && kind === inHand) { hide--; return null; } return kind; };
@@ -17935,6 +17950,75 @@
       applyCarryPlan(rig, carryPlan(o || {}));
       return rig;
     }
+    // CL-90 part 2 (docs/loadout.md §3): the draw and holster moves. When the gun in his hand changes (a switch,
+    // U to go unarmed, U again), his right hand takes the old gun back where it lives (the hip, the chest holsters,
+    // his back), then goes to the next one and brings it up; the left lets go of the foregrip meanwhile. Cosmetic:
+    // a shot, a reload or a blade cuts it short and the gun is simply up, so nothing plays slower than before.
+    // No move for akimbo, a gun he doesn't carry (a debug grant), or when the hand is busy (swimming, the mortar,
+    // a scripted kill, down): those still just switch, with the quick dip.
+    let drawHeld;   // the gun last seen in his hand (null: none), undefined before the first frame
+    const _drawR = new THREE.Vector3(), _drawL = new THREE.Vector3();
+    const _DRAW_POLE_L = new THREE.Vector3(-0.25, -0.7, -0.65);   // his free left elbow down and back, not winged out
+    function drawPlain() {
+      return gameStarted && !gameOver && !won && !scriptedKill && !marineInsertion && !playerSwimming && !mortarMounted &&
+        !mortarCarried && !marineDown() && !akimboOn() && !reloading && !(knifeAnimT > 0);
+    }
+    function drawShowGun(kind) {
+      for (const name of WEAPON_ORDER) if (weaponMeshes[name]) weaponMeshes[name].visible = name === (kind || currentWeapon);
+    }
+    function drawEnd() {
+      marineDraw.cancel();
+      drawShowGun(currentWeapon);
+      updateCarriedGear(0, true);
+    }
+    function updateMarineDraw(dt) {
+      const held = weaponMount.visible ? currentWeapon : null;   // what updateMarinePose would show this frame
+      if (drawHeld === undefined) drawHeld = held;
+      if (held !== drawHeld) {
+        const from = drawHeld;
+        drawHeld = held;
+        if (marineDraw.state.active) drawEnd();
+        if (drawPlain() && marineDraw.start(from, held, carriedLoadout())) {
+          swapT = 0;   // the move replaces the quick dip
+          updateCarriedGear(0, true);
+        }
+      }
+      if (!marineDraw.state.active) return;
+      if (!drawPlain() || flashTimer > 0.03) { drawEnd(); return; }   // a shot, a reload, a blade: the gun is up
+      const events = marineDraw.step(dt);
+      if (!marineDraw.state.active) { drawEnd(); return; }
+      const f = marineDraw.frame();
+      if (events.length) updateCarriedGear(0, true);
+      weaponMount.visible = !!f.inHand;
+      if (f.inHand) drawShowGun(f.inHand);
+      if (!f.target || f.w <= 0.001) return;
+      drawPose(marine, f);
+    }
+    function drawPose(m, f) {
+      const ud = m.userData;
+      ud.torsoG.rotation.y += f.twistY;
+      ud.torsoG.rotation.x += f.bend;
+      m.updateWorldMatrix(true, true);
+      _drawR.set(f.target.x, f.target.y, f.target.z); m.localToWorld(_drawR);
+      solveArmIK(ud.armRG, ud.elbowRG, _HAND_R, _drawR, _POLE_R, f.w);
+      _drawL.set(DRAW_LEFT_REST.x, DRAW_LEFT_REST.y, DRAW_LEFT_REST.z); m.localToWorld(_drawL);
+      solveArmIK(ud.armLG, ud.elbowLG, _HAND_L, _drawL, _DRAW_POLE_L, f.w * 0.8);
+    }
+    // The review sheet: a fresh marine posed `t` seconds into the move from `from` to `to`, with what he carries
+    // on him and the gun in his hand at that instant.
+    function drawPreview(m, from, to, t, loadout) {
+      const d = createDraw();
+      d.start(from, to, loadout);
+      d.step(t);
+      const f = d.frame();
+      const ud = m.userData;
+      if (ud.drawGun) { ud.weaponMount.remove(ud.drawGun); ud.drawGun = null; }
+      if (f.inHand) { ud.drawGun = carryGunCopy(f.inHand); if (ud.drawGun) ud.weaponMount.add(ud.drawGun); }
+      carryPreview(m, { loadout, inHand: f.inHand, akimbo: false, grenades: 3, vest: true });
+      if (f.target && f.w > 0.001) drawPose(m, f);
+      return { w: f.w, inHand: f.inHand, active: d.state.active };
+    }
+    function drawDbg() { return { ...marineDraw.state, segs: marineDraw.state.segs.map((g) => g.kind), fired: [...marineDraw.state.fired], frame: marineDraw.frame(), held: drawHeld }; }
     // Debug and tests: the plan for a given loadout / gun in hand, and what the rig shows now.
     function carryDbg(o) {
       const rig = updateCarriedGear(0, true);
@@ -20978,8 +21062,10 @@
         b.addEventListener('click', () => {
           dressTab = tab.id;
           dressItem = tab.items[0] || (tab.id === 'guns' ? GUNS[0] : tab.id);
+          previewFocus = dressItem;
           renderDressItems();
           renderDressChoices();
+          syncPreviewKit();
         });
         cifTabsEl.append(b);
       }
@@ -20991,7 +21077,7 @@
         b.type = 'button';
         b.textContent = dressTab === 'guns' ? dwText('weapon.' + id + '.name') : dressLabel('item', id, DRESS_WORD[id]);
         b.classList.toggle('on', id === dressItem);
-        b.addEventListener('click', () => { dressItem = id; renderDressItems(); renderDressChoices(); });
+        b.addEventListener('click', () => { dressItem = id; previewFocus = id; renderDressItems(); renderDressChoices(); syncPreviewKit(); });
         cifItemsEl.append(b);
       }
       cifResetEl.textContent = dressLabel('dress', 'reset', 'Reset this tab');
@@ -21102,6 +21188,7 @@
         dressScene.add(dressPreview);
         if (typeof dressMarine === 'function') dressMarine(dressPreview, wardrobeState);
         else applyWardrobe(dressPreview, wardrobeState);
+        syncPreviewKit();
       } catch (_) { dressRenderer = null; }
     }
     function dressFrame() {
@@ -21126,6 +21213,7 @@
       cancelPlaceMode();
       for (const k of Object.keys(keys)) keys[k] = false;
       if (cifHintEl) cifHintEl.textContent = dressLabel('dress', 'hint', 'Each piece takes its own camo. Drag him to turn him.');
+      previewFocus = dressItem;
       renderDressItems();
       renderDressChoices();
       ensureDressView();
@@ -26556,7 +26644,7 @@
         for (const o of all) { y0 = Math.min(y0, o.mesh.position.y); y1 = Math.max(y1, o.mesh.position.y + (o.rise || pieceHeight(o.type))); }
         placeOutline(scrapMarkStack, { x0: box.x0, x1: box.x1, y0, y1, z0: box.z0, z1: box.z1 }, 0.05);
         let refund = 0;
-        for (const o of all) { const spent = (COST[o.type] || 5) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0); refund += Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp))); }
+        for (const o of all) { const spent = (o.gift ? 0 : (COST[o.type] || 5)) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0); refund += (spent > 0 ? Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp))) : 0); }
         const hint = 'Release the mouse to scrap ' + all.length + ' piece' + (all.length === 1 ? '' : 's') + ' \u2192 +$' + refund;
         if (hint !== scrapHint) { scrapHint = hint; refreshPlaceBanner(); }
         return;
@@ -26979,8 +27067,8 @@
       if (!all.length) { AudioSys.invalid(); showBanner('NOTHING THERE', 'Drag over the pieces you want to scrap', 1.1, '#ffb347'); return; }
       let refund = 0;
       for (const o of all) {
-        const spent = (COST[o.type] || 5) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0);
-        refund += Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp)));
+        const spent = (o.gift ? 0 : (COST[o.type] || 5)) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0);
+        refund += (spent > 0 ? Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp))) : 0);
       }
       for (const b of pieces) if (builds.indexOf(b) >= 0) { spawnDust(b.x, b.mesh.position.y + 0.5, b.z, 3); removeBuild(b); }
       bank += refund;
@@ -26989,11 +27077,13 @@
       showBanner('SCRAPPED ' + all.length, '+$' + refund, 1.2, '#7cdea0');
       updateGhostPreview();
     }
+    // GB-115 (Jerry, 2026-09-30): a gift (the ranger's turret, GB-91) cost nothing, so scrapping it pays nothing back;
+    // only upgrades bought on it refund. The same rule is in the box-scrap preview and commit.
     function scrapRefund(b) {
       let sum = 0;
       for (const o of scrapSet(b)) {
-        const spent = (COST[o.type] || 5) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0);
-        sum += Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp)));
+        const spent = (o.gift ? 0 : (COST[o.type] || 5)) + (o.opening ? (COST[o.opening] || 0) : 0) + (o.upgradeSpent || 0);
+        sum += (spent > 0 ? Math.max(1, Math.ceil(spent * 0.6 * (o.hp / o.maxHp))) : 0);
       }
       return sum;
     }
@@ -42524,6 +42614,7 @@ live++;
         if (!marineDown()) tryFire(dt);   // GB-67: not from the ground
         // Recoil kicks this frame's shot into recoilKick; place the gun again with it.
         holdWeapon(0);
+        updateMarineDraw(dt);   // CL-90 part 2: the draw and holster moves, over the hold
         marineIdle.pose(dt);
         updateMarineBody(dt);   // GB-67: his reacting body, over the pose and the gun
         updateLasers();
@@ -43050,7 +43141,7 @@ live++;
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
-          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
       }

@@ -27,3 +27,7 @@ Grokbot's GB-60 (skulls always reach the bag) rests on one question about the sk
 Hollows (D-67), three calls: (1) Does being caught below end the run (the plan), or only cost the haul? (2) A fresh warren layout every run (the plan), or the same every run so they can be learned? (3) Should the secret's final fight (D-56) be underground in the chalk heart, behind the rune doors, rather than at the chalk mouth?
 
 **Answer (2026-09-29):** Jerry: (1) caught below ends the run; (2) the same layout every run; (3) deep in the heart. On the board in D-67 and P-97.
+
+## Q-5 · open · 2026-09-30T23:05Z · claude
+
+Two specs for your yes: the Hollows (docs/specs/hollows.md: the Hush, five warrens, the stir, the haul, twelve dog tags kept for good) and the secret (docs/specs/secret-quest.md: a five-glyph word a run, learned from the tower, the static and rune shards, entered at the radio once a day; right, and a cleared warren's rune door opens to the chalk heart, where the guardian can be killed for the true ending). The crew builds on them now; say what to change and it changes.
