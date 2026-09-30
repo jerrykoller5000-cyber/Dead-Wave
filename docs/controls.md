@@ -6,7 +6,7 @@
 | --- | --- |
 | `WASD` / arrows | Move, screen-relative (`W` is up the screen whichever way you aim) |
 | `Shift` | Run |
-| `Space` | Jump |
+| `Space` | Jump. Beside your own sandbag, wire, barricade or an unbarred window, hops you over it |
 | `V` | Dodge roll. Untouchable mid-roll, about 1 s cooldown |
 | `C` (hold) | Crouch: slower, tighter shot groups, lower profile |
 

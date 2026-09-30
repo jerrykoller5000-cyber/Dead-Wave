@@ -34,10 +34,9 @@
   let blacks = 0, fogged = 0;
   T.scene.traverse(o => { const m = o.material; if (o.isMesh && m && m.color && m.color.r === 0 && m.color.g === 0 && m.color.b === 0 && m.side === T.THREE.DoubleSide && !m.map) { blacks++; if (m.fog !== false) fogged++; } });
   ok(blacks > 0 && fogged === blacks, 'cave interiors take the fog (' + fogged + ' of ' + blacks + ')');
-  // The grab still plays.
-  document.getElementById('playerName').value = 'Jerry';
-  document.getElementById('modeHunt').click(); await wait(2500);
-  { const f0 = T.spawnGroundFire(T.player.position.x + 30, T.player.position.z + 30); for (let i = 0; i < 60 && f0 && f0.age < 0.05; i++) await wait(500); }
+  // The grab still plays. startMatch waits until the insertion hands control back,
+  // which is what the old click-and-hope (and the fire-age spin) was waiting for.
+  await startMatch(T, 'Jerry');
   const c = caves[0];
   T.player.position.set(c.x + Math.sin(c.yaw) * 1.5, c.gy, c.z + Math.cos(c.yaw) * 1.5);
   try { T.beginScriptedKill('cave', c); } catch (e) { out.push('ERR ' + e.message); }

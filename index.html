@@ -17006,7 +17006,10 @@
         for (const m of gp[k]) m.visible = on;
       }
     }
+    let vault = null;          // CU-52: the 0.5 s hop over his own cover
+    let vaultSpaceWas = false;
     function resetEconomy() {
+      vault = null;
       skullLedger.reset();   // GP-33: a new run starts with no carried fraction
       weaponOwned = { pistol: true };
       reserveAmmo = { '.45': START_RESERVE_45, '9mm': 0, '5.56mm': 0, '7.62mm': 0, '.44': 0, '.338': 0, '12ga': 0, '40mm': 0, '7.62 belt': 0, 'Fuel': 0, '60mm': 0 };
@@ -19191,7 +19194,63 @@
     function perkCost(p) { return equipmentPrice(Math.round(p.base * (1 + perkLvl(p.key) * 0.85)), day); }
     function dmgMult() { return 1 + perkLvl('power') * 0.12; }
     function reloadMult() { return 1 / (1 + perkLvl('hands') * 0.12); }
-    function speedMult() { return 1 + perkLvl('legs') * 0.05; }
+    function speedMult() {
+      const m = 1 + perkLvl('legs') * 0.05;
+      return vault ? m * 0.7 : m;
+    }
+
+    // CU-52 (P-44): Space beside his own sandbag, wire, barricade or an unbarred
+    // window hops him over in half a second. Walls, gates and doors stay a jump.
+    function pieceVaultable(b) {
+      if (!b || b.hp <= 0 || !b.mesh) return false;
+      if (b.type === 'sandbag' || b.type === 'wire' || b.type === 'barricade') return true;
+      return b.type === 'wall' && b.opening === 'window' && !b.barred;
+    }
+    function tryVault() {
+      if (vault || marineDown()) return false;
+      if (!grounded && coyoteT <= 0) return false;
+      const px = player.position.x, pz = player.position.z, py = player.position.y;
+      let best = null, bestD = 1.65;
+      for (const b of builds) {
+        if (!pieceVaultable(b)) continue;
+        if (Math.abs(b.mesh.position.y - py) > 1.5) continue;
+        const box = thinBoxFor(b);
+        const cx = box ? box.cx : b.x, cz = box ? box.cz : b.z;
+        const d = Math.hypot(px - cx, pz - cz);
+        if (d < bestD && d > 0.05) { best = { b, box, cx, cz }; bestD = d; }
+      }
+      if (!best) return false;
+      const dx = best.cx - px, dz = best.cz - pz;
+      const len = Math.hypot(dx, dz) || 1;
+      const nx = dx / len, nz = dz / len;
+      const half = best.box ? Math.abs(nx) * best.box.hx + Math.abs(nz) * best.box.hz : 0.45;
+      const reach = half + 0.75;
+      vault = { t: 0, dur: 0.5, x0: px, z0: pz, x1: best.cx + nx * reach, z1: best.cz + nz * reach };
+      fireHeld = false;
+      mouseFireHeld = false;
+      jumpBufferT = 0;
+      return true;
+    }
+    function updateVault(dt) {
+      if (!vault) return;
+      vault.t += dt;
+      const u = Math.min(1, vault.t / vault.dur);
+      const e = u * u * (3 - 2 * u);
+      const x = vault.x0 + (vault.x1 - vault.x0) * e;
+      const z = vault.z0 + (vault.z1 - vault.z0) * e;
+      player.position.x = x;
+      player.position.z = z;
+      player.position.y = sampleHeight(x, z) + Math.sin(Math.PI * u) * 0.72;
+      vy = 0;
+      if (u >= 1) {
+        player.position.x = vault.x1;
+        player.position.z = vault.z1;
+        player.position.y = sampleHeight(vault.x1, vault.z1);
+        grounded = true;
+        coyoteT = 0.12;
+        vault = null;
+      } else grounded = false;
+    }
     function cashMult() { return 1 + perkLvl('scavenger') * 0.12; }
     function maxGrenades() { return MAX_GRENADES + perkLvl('grenadier'); }
     function resetPerks() { for (const k of Object.keys(perkLevels)) perkLevels[k] = 0; PLAYER_MAX_HP = 100; }
@@ -34402,7 +34461,7 @@
       sawCutting = false;
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
-      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !(rollT > 0) && !mortarMounted && !mortarCarried;
+      fireHeld = mouseFireHeld && gameStarted && !gameOver && !won && !placeMode && !buildMode && !uiBlocksFire() && !playerSwimming && !(rollT > 0) && !mortarMounted && !mortarCarried && !vault;
       const edge = fireHeld && !prevMouseFireHeld;
       prevMouseFireHeld = fireHeld;
 
@@ -37207,9 +37266,13 @@
           player.position.z += (dz / dist) * push;
         }
       }
-      let p = resolveSoftBarricades(player.position.x, player.position.z, PLAYER_RADIUS, 1);
-      p = resolveHardBuildCollisions(p.x, p.z, PLAYER_RADIUS, true, player.position.y);
-      player.position.x = p.x; player.position.z = p.z;
+      // CU-52: mid-vault he is hopping the piece, so the barricade shove and the hard
+      // push would plant him back on the near side.
+      if (!vault) {
+        let p = resolveSoftBarricades(player.position.x, player.position.z, PLAYER_RADIUS, 1);
+        p = resolveHardBuildCollisions(p.x, p.z, PLAYER_RADIUS, true, player.position.y);
+        player.position.x = p.x; player.position.z = p.z;
+      }
       if (house.present) {
         const hp = pushOutOfHouse(player.position.x, player.position.z, PLAYER_RADIUS);
         player.position.x = hp.x; player.position.z = hp.z;
@@ -39865,14 +39928,21 @@ live++;
         updateHitPing(dt);
         updateTowerSiege(dt);
         // Jump with coyote time and input buffering, so a press just before landing or
-        // just after stepping off a lip still works.
-        if (keys.Space && !marineDown()) jumpBufferT = PHYS.jumpBuffer;
-        if (jumpBufferT > 0 && coyoteT > 0 && waterWade < 0.75) {
-          vy = PHYS.jumpVel * (1 - waterWade * 0.35);
-          grounded = false;
-          coyoteT = 0;
-          jumpBufferT = 0;
-          AudioSys.jump();
+        // just after stepping off a lip still works. Beside vaultable cover, the same
+        // press hops him over it instead (CU-52).
+        let hopped = false;
+        if (keys.Space && !vaultSpaceWas && !marineDown()) hopped = tryVault();
+        vaultSpaceWas = !!keys.Space;
+        if (vault) updateVault(dt);
+        else {
+          if (keys.Space && !marineDown() && !hopped) jumpBufferT = PHYS.jumpBuffer;
+          if (jumpBufferT > 0 && coyoteT > 0 && waterWade < 0.75) {
+            vy = PHYS.jumpVel * (1 - waterWade * 0.35);
+            grounded = false;
+            coyoteT = 0;
+            jumpBufferT = 0;
+            AudioSys.jump();
+          }
         }
         // Releasing early cuts the arc short — a short hop instead of a full jump.
         if (!keys.Space && vy > 3.2) vy = 3.2;
@@ -40370,7 +40440,7 @@ live++;
             const r = aimRaycaster.ray; r.origin.set(ox, oy, oz); r.direction.set(dx, dy, dz).normalize();
             aimGroundDist = raycastTerrain(r, aimHit) ? aimHit.distanceTo(r.origin) : Infinity;
             aimTarget.copy(aimHit);
-          }, getMortarCarried: () => mortarCarried, mountMortar, nearestMortar,
+          }, getMortarCarried: () => mortarCarried, mountMortar, nearestMortar, tryVault, isVaulting: () => !!vault, speedMult,
           useMedkit, buyMedkit, getMedkits: () => medkits, getMedPenT: () => medPenT, medPenHand, supplyPlanes, claimSupplyDrop, updateSupplyDrops, spawnMedDrop, medDrops, spawnCashDrop, cashDrops, explodeGrenade, getHp: () => playerHp, setHp: (v) => { playerHp = v; updateHpHud(); },
           // Debug-only: jump the clock (0 midnight, 0.25 sunrise, 0.5 noon, 0.75 dusk).
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
