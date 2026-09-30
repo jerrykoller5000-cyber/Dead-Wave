@@ -1,6 +1,15 @@
 import { text, hasText, STRINGS } from './strings.js';
+import { COUNTER } from '../game/weaknesses.js';
 
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
+
+// Read only the director's named night. The warning and advice travel together
+// so the HQ board cannot announce a special night with stale generic tactics.
+export function scoutingSpecialNight(night) {
+  if (night?.mod === 'fog') return { warning: text('scouting.warning.fog'), line: text('scouting.trick.fogNight') };
+  if (night?.trick === 'siege') return { warning: text('scouting.warning.siege'), line: text('scouting.trick.siege') };
+  return null;
+}
 
 // Read only the director's current prep snapshot; never generate or reroll a plan.
 export function scoutingCaveIndices({ preview, day, phase, alarmActive = false } = {}) {
@@ -23,11 +32,24 @@ export function buildScoutingReport(data = {}) {
   });
   const trickId = typeof night.trick === 'string' ? night.trick.replace(/-([a-z])/g, (_, c) => c.toUpperCase()) : '';
   const trickKey = `scouting.trick.${trickId}`;
+  const special = scoutingSpecialNight(night);
+  // The plan is already frozen by the director. Show which kinds to prepare
+  // for, but leave their exact counts and source groups to Field Intel.
+  const planned = new Map();
+  for (const row of preview.byTypeAndCave) {
+    if (Object.hasOwn(COUNTER, row?.typeKey) && Number.isSafeInteger(row.count) && row.count > 0) {
+      planned.set(row.typeKey, (planned.get(row.typeKey) || 0) + row.count);
+    }
+  }
+  const counters = [...planned].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([kind]) => ({
+    kind, name: text(`enemy.${kind}.name`), line: text(`counter.${kind}`)
+  }));
   return {
     title: text('scouting.title', { day }),
     caves: text('scouting.caves', { names: names.length ? names.join(' · ') : text('scouting.noCaves') }),
     pushes: text('scouting.pushes', { count: night.pushes.length }),
-    trick: text(hasText(trickKey) ? trickKey : 'scouting.unconfirmed'),
+    trick: special?.line || text(hasText(trickKey) ? trickKey : 'scouting.unconfirmed'),
+    counters,
     rest: night.rest === true ? text('scouting.rest') : null,
     legend: text('scouting.mapLegend')
   };

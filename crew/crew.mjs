@@ -67,10 +67,13 @@ const read = (f) => (fs.existsSync(f) ? fs.readFileSync(f, 'utf8').replace(/^﻿
 // Keep a file's own line endings when we append to or rewrite it.
 const eolOf = (text) => (/\r\n/.test(text) ? '\r\n' : '\n');
 function append(file, lines, header = '') {
-  let cur = read(file) || header;
+  // Claude, 2026-09-29: append, never rewrite. Two agents checking out at once each read the whole log, added
+  // their line and wrote it all back: the second write dropped the first one's lines (GB-75's and GB-78's
+  // check-outs went missing). fs.appendFileSync adds to the end without touching what's there.
+  const cur = read(file);
+  if (!cur) { const eol0 = header && /\r\n/.test(header) ? '\r\n' : '\n'; fs.writeFileSync(file, (header || '') + lines.join(eol0) + eol0, 'utf8'); return; }
   const eol = eolOf(cur);
-  if (cur && !cur.endsWith('\n')) cur += eol;
-  fs.writeFileSync(file, cur + lines.join(eol) + eol, 'utf8');
+  fs.appendFileSync(file, (cur.endsWith('\n') ? '' : eol) + lines.join(eol) + eol, 'utf8');
 }
 
 function readStatus(agent) {

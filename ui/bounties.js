@@ -1,12 +1,16 @@
 import { text } from './strings.js';
 import { projectScoutCave } from './scouting.js';
 
-const LABELS = new Set(['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast'].map(k=>'world.'+k));
-const KINDS = new Set(['campsite','cabin','shed','wreck','tower','graveyard','mast']);
+const LABELS = new Set(['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','wanderer'].map(k=>'world.'+k));
+const KINDS = new Set(['campsite','cabin','shed','wreck','tower','graveyard','mast','wanderer']);
+const SURVIVOR_STYLES = new Set(['ranger','hikers','trapper']);
 const identity = b => `${b.day}:${b.kind}:${b.index}`;
 const validPost = (b,day) => b && Number.isSafeInteger(day) && day>=2 && b.day===day &&
   KINDS.has(b.kind) && Number.isSafeInteger(b.index) && b.index>=0 && LABELS.has(b.labelKey) &&
-  Number.isSafeInteger(b.reward) && b.reward>0 && Number.isSafeInteger(b.guards) && b.guards>0;
+  Number.isSafeInteger(b.reward) && b.reward>0 && Number.isSafeInteger(b.guards) && b.guards>0 &&
+  (b.kind!=='wanderer'||(Number.isFinite(b.x)&&Number.isFinite(b.z)));
+// The HQ is at (0,0). Game east is negative x, north is positive z.
+const trailSide = b => Math.abs(b.x)>=Math.abs(b.z)?(b.x<0?'east':'west'):(b.z>=0?'north':'south');
 
 export function buildBountyBoard({day,phase,alarmActive=false,bounties=[]}={}) {
   if(phase!=='prep'||alarmActive||!Number.isSafeInteger(day)||day<2)return null;
@@ -15,9 +19,13 @@ export function buildBountyBoard({day,phase,alarmActive=false,bounties=[]}={}) {
     if(!validPost(b,day)||!['open','done'].includes(b.state)||seen.has(identity(b)))continue;
     seen.add(identity(b));
     const remaining=Number.isSafeInteger(b.alive)&&b.alive>=0&&b.alive<=b.guards?b.alive:b.guards;
-    rows.push({id:identity(b),state:b.state,name:text(b.labelKey),
-      guards:b.state==='open'?text('bounty.guards',{count:remaining}):text('bounty.collected'),
+    const wanderer=b.kind==='wanderer';
+    rows.push({id:identity(b),state:b.state,name:wanderer?
+      text('bounty.wanderer',{direction:text('bounty.trail.'+trailSide(b))}):text(b.labelKey),
+      guards:b.state==='open'?(wanderer?text('bounty.wandererActive'):text('bounty.guards',{count:remaining})):text('bounty.collected'),
       reward:text('bounty.reward',{value:b.reward}),
+      survivor:b.state==='open' && b.kind==='campsite' && b.survivor?.state==='waiting' && SURVIVOR_STYLES.has(b.survivor.style)
+        ? text('survivor.board.'+b.survivor.style) : null,
       deadline:b.state==='open'?text('bounty.deadline'):null});
   }
   return {title:text('bounty.title'),rows,empty:text('bounty.empty'),note:text('bounty.bank'),legend:text('bounty.mapLegend')};

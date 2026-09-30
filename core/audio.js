@@ -839,7 +839,7 @@ export const AudioSys = (() => {
           SECTIONED[k] = {
             file: S.file, barS: +S.barSeconds,
             list: Object.fromEntries(S.list.map((s) => [s.name, { t0: s.bar * +S.barSeconds, dur: s.bars * +S.barSeconds }])),
-            flow: Object.assign({ stalk: 'stalk', fight: ['dropA'], lull: 'break', last: 'climax', lastAt: 3, near: 45, far: 70, lullAfter: 4 }, S.flow || {})
+            flow: Object.assign({ stalk: 'stalk', fight: ['dropA'], lull: 'break', last: 'climax', surge: 'bridge', lastAt: 3, near: 45, far: 70, lullAfter: 4 }, S.flow || {})
           };
         }
         secWantDay(lastDay);
@@ -855,8 +855,20 @@ export const AudioSys = (() => {
   // built intro, drops, a breakdown), so the director swings less: 70% with nobody within
   // PROX_FAR, full within PROX_NEAR. A song can set its own fade-in (music.json fadeIn); the
   // day-1 song's intro is its fade, so it starts almost at once.
-  const FIGHT_FLOOR = 0.7;           // the fight track with nobody within PROX_FAR
+  const FIGHT_FLOOR = 0.7;           // the fight track with nobody within PROX_FAR (nights 1-8)
   const FIGHT_IN_RANGE = 0.7;        // ... with one at PROX_FAR: a smooth climb from there
+  // CL-70 (P-20): night 19 sounds bigger than night 2. The fight music gains up to +2.5 dB over the
+  // run (none on nights 1-2, climbing to night 19), and its floor rises from 70% to 85% from night 8,
+  // so the late waves never drop back to a quiet bed. Never less than the night before.
+  const NIGHT_GAIN_DB_MAX = 2.5, NIGHT_GAIN_FROM = 2, NIGHT_GAIN_TO = 19;
+  const FLOOR_LATE = 0.85, FLOOR_FROM = 8, FLOOR_TO = 19;
+  function nightMusic(day) {
+    const d = Math.max(1, Math.floor(+day || 1));
+    const g = Math.max(0, Math.min(1, (d - NIGHT_GAIN_FROM) / (NIGHT_GAIN_TO - NIGHT_GAIN_FROM)));
+    const f = Math.max(0, Math.min(1, (d - FLOOR_FROM) / (FLOOR_TO - FLOOR_FROM)));
+    const db = NIGHT_GAIN_DB_MAX * g;
+    return { day: d, db, gain: Math.pow(10, db / 20), floor: FIGHT_FLOOR + (FLOOR_LATE - FIGHT_FLOOR) * f };
+  }
   const FIGHT_FADE_IN_S = 10;        // the default fade after the alarm sting (CL-30)
   const FIGHT_FADE = {};             // per-track fade-in seconds, from music.json
   const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
@@ -980,6 +992,16 @@ export const AudioSys = (() => {
     const live = state.threat || 0, near = state.nearest == null ? 999 : state.nearest;
     if (state.spawnedAll && state.remaining > 0 && state.remaining <= F.lastAt) return 'last';
     if (secMode === 'last') return 'last';
+    // CL-69 (P-19): the score follows the night's shape (the wave director's pace, GB-71). The last
+    // push of a night with several is the surge: the bridge, once through, then the climax to the end.
+    const pace = state.pace;
+    if (secMode === 'surge') {
+      const into = ctx ? ctx.currentTime - sec.startAt : 0;
+      return sec.name === F.surge && into >= sec.dur - 0.4 ? 'last' : 'surge';
+    }
+    if (pace && pace.pushes > 1 && pace.push === pace.pushes - 1 && !pace.inLull && live > 0 && SECTIONED[sec.track].list[F.surge]) { secQuietT = 0; return 'surge'; }
+    // The director's breather: the break at once (on the next bar), not after lullAfter seconds of quiet.
+    if (pace && pace.inLull && !(live > 0 && near <= F.near)) { secQuietT = F.lullAfter; return 'lull'; }
     if (live > 0 && near <= F.near) { secQuietT = 0; return 'fight'; }
     if (secMode === 'fight' || secMode === 'lull') {
       if (live === 0 || near > F.far) secQuietT += dt; else secQuietT = 0;
@@ -990,13 +1012,13 @@ export const AudioSys = (() => {
   function secSectionFor(mode) {
     const F = SECTIONED[sec.track].flow;
     if (mode === 'fight') { secRot = (secRot + 1) % F.fight.length; return F.fight[secRot]; }
-    return mode === 'last' ? F.last : mode === 'lull' ? F.lull : F.stalk;
+    return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk;
   }
   function secFits(mode, name) {
     const F = SECTIONED[sec.track].flow;
     return mode === 'fight' ? F.fight.includes(name) : name === secSectionFor.peek(mode);
   }
-  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; return mode === 'last' ? F.last : mode === 'lull' ? F.lull : F.stalk; };
+  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk; };
   function secUpdate(state, dt) {
     if (!sec || !ctx) return;
     const now = ctx.currentTime, S = SECTIONED[sec.track];
@@ -1333,7 +1355,9 @@ export const AudioSys = (() => {
     const live = state.threat || 0;
     const near = state.nearest == null ? 999 : state.nearest;
     const k = Math.max(0, Math.min(1, (PROX_FAR - near) / (PROX_FAR - PROX_NEAR)));
-    const proxTarget = live > 0 && near <= PROX_FAR ? FIGHT_IN_RANGE + (1 - FIGHT_IN_RANGE) * k : FIGHT_FLOOR;
+    const nm = nightMusic(lastDay);
+    const floorTonight = nm.floor, inRangeTonight = Math.max(FIGHT_IN_RANGE, nm.floor);
+    const proxTarget = live > 0 && near <= PROX_FAR ? inRangeTonight + (1 - inRangeTonight) * k : floorTonight;
     prox += (proxTarget - prox) * Math.min(1, dt * 1.5);
 
     // --- levels ---
@@ -1348,7 +1372,8 @@ export const AudioSys = (() => {
     }
     if (deckTrack && (deck || sec)) {
       const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
-      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * briefDuck * duck * musicShotDuck;
+      const nightMul = (stage === 'fight' || stage === 'release') ? nm.gain : 1;   // CL-70: the wave only, not day fights
+      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck;
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
         try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
@@ -1405,6 +1430,7 @@ export const AudioSys = (() => {
       stage, mood, nextMood, front: sec ? SOUNDTRACK + SECTIONED[sec.track].file : (deck && deckTrack ? deck.src : null), frontTime: deck ? deck.currentTime : 0,
       deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
+      night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
       deckLoop: !!(sec || (deck && deck.loop)),
       section: sec ? sec.name : null, sectionMode: sec ? secMode : null, sectionPending: secPending ? secPending.name : null,
       sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
@@ -1456,6 +1482,18 @@ export const AudioSys = (() => {
     playTone({ freq: 90, type: 'sawtooth', dur: 0.9, vol: 0.2, slideTo: 45, rev: 0.6 });
     playTone({ freq: 140, type: 'square', dur: 0.7, vol: 0.1, slideTo: 60, when: 0.1, rev: 0.5 });
     playNoise({ dur: 0.7, vol: 0.12, filterFreq: 320, filterType: 'lowpass', when: 0.05, rev: 0.6 });
+  }
+  // CL-62 (Jerry: "a low growl"): the cave guardian in the dark. A throat flutter of short, low saw pulses
+  // (55-75 Hz, drifting down) over a rumble of filtered noise: about 1.6 s, quiet, felt more than heard.
+  function guardianGrowl(volume = 1, pan = 0) {
+    const v = Math.max(0, Math.min(1, volume));
+    if (v < 0.03) return;
+    for (let i = 0; i < 9; i++) {
+      const f = 72 - i * 1.8 + (Math.random() - 0.5) * 6;
+      playTone({ freq: f, type: 'sawtooth', dur: 0.2, vol: 0.09 * v * (i < 2 ? 0.6 : 1), slideTo: f * 0.86, when: i * 0.16, attack: 0.04, rev: 0.45, pan });
+    }
+    playTone({ freq: 48, type: 'triangle', dur: 1.6, vol: 0.12 * v, slideTo: 40, attack: 0.25, rev: 0.5, pan });
+    playNoise({ dur: 1.5, vol: 0.07 * v, filterFreq: 190, filterType: 'lowpass', attack: 0.2, rev: 0.5, pan });
   }
   function spikeSnap() {
     playTone({ freq: 900, type: 'square', dur: 0.03, vol: 0.09 });
@@ -2454,7 +2492,7 @@ export const AudioSys = (() => {
     chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
     turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
     zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
-    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
+    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
     crateLand, pickup, repairClank, sellChime,
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
     grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,

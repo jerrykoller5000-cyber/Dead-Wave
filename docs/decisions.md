@@ -4,6 +4,12 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-69 · The dressing room: only camos are earned, from the best run (Claude, for Jerry; CL-96).** The four free
+  camos are Jerry's (M81, Coyote Brown, Olive Drab, MARPAT). The other 45 are earned from what the game already keeps
+  between runs: the best-run records (day, kills, streak, headshots, skulls in one run; runs finished; wins) and the
+  badges, each camo on one rule (`docs/wardrobe.md` section 4). Every other option (hats, eyewear, boots, gloves,
+  sleeves, shorts, hair, eyes, skin) is free. Kit bought in a run is styled in the dressing room but still bought each
+  run. Gun camo is on the furniture; metal stays metal. GP-82, CL-97, CU-70.
 - **D-67 · The Hollows: underground by day (Jerry, 2026-09-29; planned by Cursor at his order).** Five of the six
   caves (root, shale, iron, wet, hill) have a warren under them. The chalk cave stays deadly: it's the guardian's home,
   over the source.

@@ -18,11 +18,13 @@
     T.setAimYawDbg(0);
 
     const s = T.spawnZombie(px(), pz() + 2.0, 'shambler', true, true);
-    if (s) { s.mesh.position.set(px(), T.sampleHeight(px(), pz() + 2.0), pz() + 2.0); s.hp = 24; s.maxHp = 24; }
+    // GB-104 (D-62, docs/weaknesses.md): a shambler takes blades at 1.5, so a knife swing takes 33 off it. Its body
+    // here is 36 (24 x 1.5), so the knife is still the GB-52 two swings, and the first must take exactly the table's 33.
+    if (s) { s.mesh.position.set(px(), T.sampleHeight(px(), pz() + 2.0), pz() + 2.0); s.hp = 36; s.maxHp = 36; }
     hold(); await wait(30);
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20); hold();
-    ok(!!s && s.alive && s.hp < 24 && s.hp > 0, 'first swing wounds shambler (hp=' + (s && s.hp) + ')');
+    ok(!!s && s.alive && Math.abs(s.hp - 3) < 0.01, 'first swing wounds shambler by 22 x blade 1.5 = 33 (hp=' + (s && s.hp) + ' of 36)');
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20);
     ok(!!s && !s.alive, 'second swing kills shambler');

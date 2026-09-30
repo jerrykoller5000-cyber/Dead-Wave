@@ -355,6 +355,9 @@ export function createScene(scene, opts = {}) {
   }
   // Where the holder has it: the hand, or between both hands.
   const handPoint = (h, out) => {
+    // CL-104: a hand that says where it closes (userData.grip, hand-local: the guardian's, inside its curled
+    // fingers) holds there, not at its own origin, the heel of the palm.
+    if (h.fromJ.userData.grip && !h.fromAlsoJ) return out.copy(h.fromJ.userData.grip).applyMatrix4(h.fromJ.matrixWorld);
     out.setFromMatrixPosition(h.fromJ.matrixWorld);
     if (h.fromAlsoJ) out.add(_v2.setFromMatrixPosition(h.fromAlsoJ.matrixWorld)).multiplyScalar(0.5);
     return out;

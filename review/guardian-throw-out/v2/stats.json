@@ -1,0 +1,54 @@
+{
+  "version": "v2",
+  "scene": "studio/scenes/guardian-throw-out.json",
+  "name": "guardian-throw-out",
+  "length": 5.4,
+  "worst": {
+    "gap:guardian.handR>marine.chest": {
+      "kind": "gap",
+      "key": "guardian.handR>marine.chest",
+      "value": 0.004999999999999449,
+      "t": 0,
+      "bad": false
+    },
+    "speed:marine": {
+      "kind": "speed",
+      "key": "marine",
+      "value": 7.104330753914882,
+      "t": 2.749999999999995,
+      "bad": false
+    },
+    "slide:guardian.footL": {
+      "kind": "slide",
+      "key": "guardian.footL",
+      "value": 0.17627762393240975,
+      "t": 0.733333333333334,
+      "limb": "footL",
+      "bad": true
+    },
+    "slide:guardian.footR": {
+      "kind": "slide",
+      "key": "guardian.footR",
+      "value": 0.18777833516996578,
+      "t": 1.2166666666666672,
+      "limb": "footR",
+      "bad": true
+    },
+    "speed:guardian": {
+      "kind": "speed",
+      "key": "guardian",
+      "value": 2.4000000000000288,
+      "t": 0.6000000000000002,
+      "bad": false
+    },
+    "snap:guardian": {
+      "kind": "snap",
+      "key": "guardian",
+      "value": 0.21705426356589444,
+      "t": 2.8166666666666615,
+      "joint": "thumbL",
+      "bad": false
+    }
+  },
+  "renderSeconds": 397.3
+}

@@ -8,7 +8,7 @@ test('five-kill streak bonuses settle as whole skull value without disappearing'
  assert.deepEqual([1.25,1.25,1.25,1.25].map(n=>ledger.credit(n)),[1,1,1,2]);
  assert.equal(ledger.remainder(),0);
 });
-test('fraction survives plain rewards and decimal perk combinations',()=>{
+test('fraction survives plain rewards and decimal earned-skill combinations',()=>{
  const ledger=createSkullValueAccumulator();
  assert.equal(ledger.credit(1.5),1);assert.equal(ledger.credit(1),1);assert.equal(ledger.credit(1.5),2);
  let paid=0;for(let i=0;i<100;i++)paid+=ledger.credit(1.12);

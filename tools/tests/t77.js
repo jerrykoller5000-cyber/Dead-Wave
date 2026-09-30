@@ -19,7 +19,7 @@
     const px = 10, pz = 10;
     const hold = () => T.player.position.set(px, T.sampleHeight(px, pz), pz);
     hold(); await wait(200); hold();
-    // (1) The knife on a shambler: unchanged (22). On a brute: 22 x (1 - 0.28 armour) x 0.6 = 9.5.
+    // (1) The knife on a shambler: 22 x its Blade weakness 1.5 (GB-104, D-62) = 33. On a brute: 22 x (1 - 0.55 plates, GB-75) x 0.6 = 5.9 (9.5 before the plates).
     const hitOnce = async (kind) => {
       T.clearZombies(); await wait(50);
       const z = T.spawnZombie(px, pz + 1.6, kind, true, true);
@@ -29,10 +29,10 @@
       return 1000 - z.hp;
     };
     const ds = await hitOnce('shambler'), db = await hitOnce('brute');
-    ok(Math.abs(ds - 22) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (unchanged)');
-    ok(Math.abs(db - 22 * 0.72 * 0.6) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (was ' + (22 * 0.72).toFixed(1) + ')');
+    ok(Math.abs(ds - 22 * T.WEAKNESS.shambler.blade) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (22 x its Blade weakness ' + T.WEAKNESS.shambler.blade + ', GB-104)');
+    ok(Math.abs(db - 22 * 0.45 * 0.6) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (was ' + (22 * 0.72).toFixed(1) + ' before GB-52, ' + (22 * 0.72 * 0.6).toFixed(1) + ' before the plates)');
     // (1b) The saw no longer takes the head off anything in a second: ten saw ticks on a brute
-    // (8.4 after its size, 6.0 after its armour) leave it standing with its head on; fifteen kill it.
+    // (8.4 after its size, 3.8 after its plates since GB-75) leave it standing with its head on; twenty-five at most kill it.
     {
       T.clearZombies(); await wait(50);
       const br = T.spawnZombie(px + 30, pz, 'brute', true, true);
@@ -40,8 +40,9 @@
       const tick = W.chainsaw.damage * T.meleeSizeMul(br);
       for (let i = 0; i < 10; i++) T.damageZombie(br, tick, { kind: 'chainsaw', dir: { x: 0, z: 1 } });
       ok(br.alive && !(br.partsLost && br.partsLost.head), 'ten saw ticks: the brute stands, head on (hp ' + br.hp.toFixed(1) + '/' + br.maxHp + ', parts ' + JSON.stringify(br.partsLost || {}).replace(/"/g, '') + ')');
-      for (let i = 0; i < 5 && br.alive; i++) T.damageZombie(br, tick, { kind: 'chainsaw', dir: { x: 0, z: 1 } });
-      ok(!br.alive, 'fifteen kill it');
+      let n = 10;
+      for (; n < 25 && br.alive; n++) T.damageZombie(br, tick, { kind: 'chainsaw', dir: { x: 0, z: 1 } });
+      ok(!br.alive, 'twenty-five at most kill it (' + n + ')');
     }
     T.clearZombies(); await wait(50);
     // (2) The saw: bought, in hand, held down in a ring of big bodies.

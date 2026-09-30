@@ -149,21 +149,21 @@ const DRAG_L = 0.9, DRAG_ANKLE = V(-0.5, 0.35, -2.4);
     tracks, events: [[0, 'heave', {}], [r3(DRAG_L / 2), 'heave', {}]]
   });
 }
-// The walk-out with what is left, held low in both hands.
-const WALK_L = 0.9, CARRY = V(0, 1.2, 0.85);
+// The walk-out with what is left, held low in its right hand (CL-104, Jerry: one hand).
+const WALK_L = 0.9, CARRY = V(0.45, 1.25, 0.8);
 baked.carry = write('carry', {
   length: WALK_L, loop: true, reference: 'Walk_Carry_Loop',
-  notes: 'Baked from the CL-56 walk-out: upright, carrying the remains low in both hands.',
+  notes: 'Baked from the CL-56 walk-out: upright, carrying the remains low in its right hand (CL-104), the left arm swinging.',
   tracks: bake((u) => G.guardianWalkUpright(g, R, u * WALK_L, u * TAU, CARRY, LOOK), 24, WALK_L),
   events: [[0, 'footfall', { limb: 'footL' }], [r3(WALK_L / 2), 'footfall', { limb: 'footR' }]]
 });
-// The throw: hauled back over its head, then whipped through.
-const THROW_L = 1.2, WIND = 0.55;
+// The throw (CL-62, Jerry: a lazy underhand softball pitch): swung back low, then tossed forward and up.
+const THROW_L = 1.3, WIND = 0.55, TOSS = 0.7;
 baked.throw = write('throw', {
-  length: THROW_L, loop: false, reference: 'OverhandThrow',
-  notes: 'Baked from the CL-56 throw: the remains hauled back over its head, then thrown out onto the apron. Release at the event.',
-  tracks: bake((u) => { const t = u * THROW_L; G.guardianCarryThrow(g, R, t, CARRY, Math.min(1, t / WIND), Math.max(0, (t - WIND) / 0.65), LOOK); }, 30, THROW_L),
-  events: [[WIND, 'throw', {}], [r3(WIND + 0.45 * 0.65), 'release', {}]]
+  length: THROW_L, loop: false, reference: 'OneHandUnderhandToss',
+  notes: 'Baked from world/cave-guardian.js guardianCarryThrow (CL-62, Jerry 2026-09-29: "a lazy underhand softball pitch"; CL-104: with one hand): the remains swung back low beside its legs, then tossed forward and up onto the apron; it looks away as it lets go. Release at the event.',
+  tracks: bake((u) => { const t = u * THROW_L; G.guardianCarryThrow(g, R, t, CARRY, Math.min(1, t / WIND), Math.min(1, Math.max(0, (t - WIND) / TOSS)), LOOK); }, 40, THROW_L),
+  events: [[WIND, 'throw', {}], [r3(WIND + 0.55 * TOSS), 'release', {}]]
 });
 // Going back in: upright, arms swinging.
 baked.walk = write('walk', {
@@ -185,7 +185,7 @@ if (process.argv.includes('--check')) {
     gallop: [(u) => G.guardianGallop(g, R, u * TAU, 1, u * Math.PI / 9, LOOK), GALLOP_L],
     carry: [(u) => G.guardianWalkUpright(g, R, u * WALK_L, u * TAU, CARRY, LOOK), WALK_L],
     walk: [(u) => G.guardianWalkUpright(g, R, u * WALK_L, u * TAU, null, LOOK), WALK_L],
-    throw: [(u) => { const t = u * THROW_L; G.guardianCarryThrow(g, R, t, CARRY, Math.min(1, t / WIND), Math.max(0, (t - WIND) / 0.65), LOOK); }, THROW_L]
+    throw: [(u) => { const t = u * THROW_L; G.guardianCarryThrow(g, R, t, CARRY, Math.min(1, t / WIND), Math.min(1, Math.max(0, (t - WIND) / TOSS)), LOOK); }, THROW_L]
   };
   let worst = 0;
   for (const [name, [fn, L]] of Object.entries(fns)) {

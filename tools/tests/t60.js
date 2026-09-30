@@ -26,7 +26,16 @@
     const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
     // CL-38: every night has a song in First Blood's family, on GB-53's 20-night table (the
     // Ember nights 4, 8, 16 and the Guardian nights 6, 12, 18 have their own).
-    ok(wb === '1:fight_day01 2:fight_n02 4:fight_ember 5:fight_n04 6:fight_guardian 7:fight_n04 8:fight_ember 9:fight_n07 11:fight_n10 12:fight_guardian 13:fight_n10 14:fight_n14 16:fight_ember 17:fight_n14 18:fight_guardian 19:fight_n18', 'waves by day: a song for every night (CL-38): ' + wb);
+    ok(wb === '1:fight_day01 2:fight_n02 4:fight_ember 5:fight_n04 6:fight_guardian 7:fight_n04 8:fight_ember 9:fight_n07 11:fight_n10 12:fight_guardian 13:fight_n10 14:fight_n14 16:fight_ember_late 17:fight_n14 18:fight_guardian_late 19:fight_n18', 'waves by day: a song for every night (CL-38; CL-71: 16 and 18 their own late tiers): ' + wb);
+    ok(['fight_ember_late', 'fight_guardian_late'].every((k) => s1.sectioned.includes(k)), 'CL-71: the late Ember and Guardian tiers are section songs: ' + s1.sectioned.filter((k) => /late/.test(k)).join(', '));
+    // CL-70 (P-20): night 19 sounds bigger than night 2: the wave's music gains up to +2.5 dB over the run
+    // and its floor rises from 70% to 85% from night 8, and neither ever drops from one night to the next.
+    const nc = s1.nightCurve || [];
+    const never = nc.length === 20 && nc.every((n, i) => i === 0 || (n.gain >= nc[i - 1].gain && n.floor >= nc[i - 1].floor));
+    ok(never, 'CL-70: the night gain and floor never drop from one night to the next');
+    ok(nc.length === 20 && nc[0].db === 0 && nc[1].db === 0 && Math.abs(nc[18].db - 2.5) < 1e-9 && Math.abs(nc[19].db - 2.5) < 1e-9,
+      'CL-70: +0 dB on nights 1-2, +2.5 dB by night 19: ' + nc.map((n) => n.db.toFixed(1)).join(' '));
+    ok(nc.length === 20 && nc[7].floor === 0.7 && Math.abs(nc[18].floor - 0.85) < 1e-9, 'CL-70: the floor is 70% to night 8, 85% by night 19');
     ok(s1.gains.fight_day01 > 1 && s1.gains.fight_day01 < s1.gains.chip_fight_1 && s1.gains.sting_alarm >= 1.5, 'gains (CL-35: the fight music turned down): ' + s1.gains.fight_day01 + ' / ' + s1.gains.sting_alarm);
     ok(s1.stage === 'calm' && !!s1.deckTrack, 'calm music in prep: ' + s1.deckTrack);
 

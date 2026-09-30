@@ -7,7 +7,7 @@ const root=fileURLToPath(new URL('..',import.meta.url)),before=process.argv.incl
 const shots=path.join(root,'Claude outputs/shots',edges?'gp23':ember?'gp17':'gp16');fs.mkdirSync(shots,{recursive:true});
 let src=fs.readFileSync(path.join(root,'index.html'),'utf8')
  .replace(/<script type="importmap">[\s\S]*?<\/script>/,()=>'<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>')
- .replace('window.TT = {',()=>`window.hudProbe={streak:()=>{combo=12;comboT=100;},notice:()=>{showBanner('FIELD SUPPLIES','Return to the HQ window to bank your skulls',100);ammoByWeapon.pistol=0;updateAmmoHud();spawnSkullDrop(player.position.x,player.position.z,12,'shambler');},alarm:v=>{hq.seq=v?{t:0,fired:0}:null;},day4:()=>{day=3;startPrep();},wave:()=>{phase='wave';}};window.TT = {`);
+ .replace('window.TT = stampDebugHooks({',()=>`window.hudProbe={streak:()=>{combo=12;comboT=100;},notice:()=>{showBanner('FIELD SUPPLIES','Return to the HQ window to bank your skulls',100);setLoadedMagazineRounds(magazineStore,'pistol',0);syncMagazine('pistol');updateAmmoHud();spawnSkullDrop(player.position.x,player.position.z,12,'shambler');},alarm:v=>{hq.seq=v?{t:0,fired:0}:null;},day4:()=>{day=3;startPrep();},wave:()=>{phase='wave';}};window.TT = stampDebugHooks({`);
 const server=await serve(root,0);let browser;
 try{
  browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});

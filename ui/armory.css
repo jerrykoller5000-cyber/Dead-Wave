@@ -1,0 +1,19 @@
+#cif.armory-show { gap:16px; }
+#cif #armoryPanel { position:relative; flex:0 0 min(360px, 35vw); box-sizing:border-box; max-height:92vh; overflow:auto; padding:20px; background:var(--panel-bg-solid); border:1px solid var(--panel-border); box-shadow:0 20px 60px #0008; color:var(--ink); font-family:var(--font-hud); }
+#cif #armoryPanel[hidden] { display:none; }
+#cif #armoryPanel h2 { font-size:22px; }
+#cif #armoryPanel h3 { margin:15px 0 8px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+#cif .armory-hip { margin:8px 0 12px; font-size:12px; color:var(--accent); }
+#cif .armory-slots { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:7px; }
+#cif .armory-slots button, #cif .armory-shelf button { display:grid; gap:3px; min-width:0; padding:9px; background:#ffffff0a; border:1px solid #cbdcb73b; color:var(--ink); text-align:left; font:12px/1.35 var(--font-hud); cursor:pointer; }
+#cif .armory-slots button.selected { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+#cif .armory-slots strong { color:var(--accent); font-size:11px; }
+#cif .armory-slots small, #cif .armory-shelf small { opacity:.74; }
+#cif .armory-shelf { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:7px; }
+#cif .armory-shelf button:disabled { opacity:.4; cursor:default; }
+#cif .armory-shelf p { font-size:12px; opacity:.75; }
+#cif .armory-actions { display:flex; gap:8px; margin-top:17px; }
+#cif .armory-actions button { flex:1; min-width:0; padding:10px; border:0; background:var(--accent-2); color:var(--accent-2-ink); font:700 12px var(--font-hud); cursor:pointer; }
+#cif .armory-actions button:disabled, #cif #armoryOpen:disabled { opacity:.45; cursor:default; }
+@media(max-width:900px) { #cif.armory-show { justify-content:center; } #cif.armory-show > .card { display:none; } #cif #armoryPanel { flex-basis:min(560px, 94vw); } }
+@media(max-width:640px) { #cif #armoryPanel { max-height:94vh; padding:16px; } }

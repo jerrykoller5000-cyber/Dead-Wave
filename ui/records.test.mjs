@@ -7,8 +7,9 @@ test('records keep independent maxima and NEW only on improvements, counting eac
  const r=createRecords();const first=r.finish(1,run());assert.deepEqual(first.newFields,['day','kills','streak','headshots','skulls']);
  assert.equal(r.finish(1,run()),null);
  const second=r.finish(2,run({day:1,kills:25,streak:4,skulls:3,evacuated:true}));
- assert.deepEqual(second.newFields,['kills']);assert.equal(second.best.day,2);assert.equal(second.best.skulls,12);
+ assert.deepEqual(second.newFields,['kills','escapeNight']);assert.equal(second.best.day,2);assert.equal(second.best.skulls,12);
  assert.equal(second.best.runs,2);assert.equal(second.best.evacuated,1);
+ assert.equal(second.best.escapeNight,1);
  assert.equal(r.finish(1,run()),null);
  assert.equal(bestRecordParts(second.best,second.newFields).filter(p=>p.isNew)[0].key,'kills');
  second.best.kills=0;assert.equal(r.read().kills,25);
@@ -17,8 +18,18 @@ test('records survive reload but never represent a saved game',()=>{
  let saved;const a=createRecords({save:v=>saved=v});a.finish('old',run({day:9,kills:1204,streak:31}));
  const b=createRecords({load:()=>saved});assert.equal(b.read().day,9);
  assert.equal(bestRecordParts(b.read())[1].text,'1,204 kills');
- assert.deepEqual(Object.keys(JSON.parse(saved)).sort(),['day','evacuated','headshots','kills','runs','skulls','streak','version'].sort());
+ assert.deepEqual(Object.keys(JSON.parse(saved)).sort(),['day','evacuated','escapeNight','headshots','hotEscapeNight','kills','runs','skulls','streak','version'].sort());
  b.finish('new',run());assert.equal(b.read().runs,2);assert.equal(b.read().day,9);
+});
+test('best-run line remembers the night of a successful evacuation, independently of longest survival',()=>{
+ const r=createRecords();r.finish('long',run({day:25}));
+ r.finish('boat',run({day:20,evacuated:true}));
+ assert.equal(r.read().day,25);assert.equal(r.read().escapeNight,20);
+ assert.equal(bestRecordParts(r.read()).at(-1).text,'Got out on night 20.');
+ r.finish('later',run({day:22,evacuated:true,hot:true}));
+ assert.equal(r.read().escapeNight,22);
+ assert.equal(r.read().hotEscapeNight,22);
+ assert.match(bestRecordParts(r.read()).at(-1).text,/Hot extraction/);
 });
 test('corrupt and throwing storage cannot block a session or fabricate NEW values',()=>{
  for(const load of [()=>'{oops',()=>null,()=>JSON.stringify({version:9}),()=>{throw Error('denied')}]) {

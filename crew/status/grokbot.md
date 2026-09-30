@@ -4,10 +4,10 @@ state: idle
 model: Grokbot
 task: —
 touching: —
-since: 2026-09-27T18:24Z
-next: GB-71 R2 · P-16. Test nights: early pushes run straight on, then o
+since: 2026-09-30T13:20Z
+next: GB-94 R6 · P-79. Balance from medians over 20 nights: skull value 
 blocked-on: —
-last-report: handoffs/2026-09-27-grokbot-GB-70.md
+last-report: handoffs/2026-09-30-grokbot-GB-91.md
 
 ## Notes
 

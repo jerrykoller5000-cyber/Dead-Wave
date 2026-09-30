@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildBriefing, bearingLabel, intelOffer, FIELD_INTEL_PRICE } from './wave-preview.js';
+import { buildBriefing, bearingLabel, intelOffer, boatCallView, FIELD_INTEL_PRICE } from './wave-preview.js';
 const make = () => ({day:4,total:10,caveIndices:[0,1],bearings:[Math.PI/2,Math.PI],byTypeAndCave:[
   {typeKey:'shambler',count:4,caveIndex:0,caveName:'North Cave'},
   {typeKey:'brute',count:2,caveIndex:0,caveName:'North Cave'},
@@ -18,6 +18,15 @@ test('Field Intel lists every group/count; reading never mutates frozen plan',()
 test('ties show at most two largest approaches; warnings never need the upgrade',()=>{
   const p=make();p.byTypeAndCave[0].count=2;p.total=8;p.bloodMoon=true;p.surround=true;p.hasColossus=true;
   const view=buildBriefing({preview:p,day:4});assert.equal(view.sources.length,2);assert.equal(view.warnings.length,3);
+});
+test('special-night warnings show without Field Intel and follow the plan, not a hard-coded day',()=>{
+  const fog=make();fog.day=14;fog.night={mod:'fog',trick:'lake-surge'};
+  assert.deepEqual(buildBriefing({preview:fog,day:14}).warnings,['Fog Night']);
+  assert.deepEqual(buildBriefing({preview:fog,day:14,intelOwned:true}).warnings,['Fog Night']);
+  const siege=make();siege.day=18;siege.night={mod:null,trick:'siege'};
+  assert.deepEqual(buildBriefing({preview:siege,day:18}).warnings,["The siege · they'll go for your walls"]);
+  assert.deepEqual(buildBriefing({preview:{...siege,night:{trick:'woods'}},day:18}).warnings,[]);
+  assert.equal(buildBriefing({preview:fog,day:13}).available,false);
 });
 test('lake sources stay separate from caves, and bearings match game handedness',()=>{
   const p={day:3,total:2,caveIndices:[],bearings:[],byTypeAndCave:[{typeKey:'drowned',count:2,caveIndex:-1}]};
@@ -40,3 +49,13 @@ test('Field Intel offer has honest cost, shortfall and ownership',()=>{
 });
 
 test('ground risers keep their own source label and count without becoming a cave',()=>{const preview={day:1,total:15,byTypeAndCave:[{typeKey:'shambler',count:8,caveIndex:-1,ground:true},{typeKey:'shambler',count:7,caveIndex:0,caveName:'North Cave'}]};const v=buildBriefing({preview,day:1,intelOwned:true});assert.equal(v.sources[0].id,'ground');assert.equal(v.sources[0].heading,'Treeline · ground rise');assert.equal(v.sources[0].total,'Treeline · ground rise: 8');assert.equal(v.total,'Total: 15');});
+
+test('boat call is offered from the goal night, relay failure is explained, and location guards still apply',()=>{
+ const base={day:20,goalNight:20,phase:'prep',extraction:'offered',relayReady:true,canSoundAlarm:true};
+ assert.deepEqual(boatCallView(base),{offered:true,enabled:true,relayDown:false});
+ assert.deepEqual(boatCallView({...base,day:19}),{offered:false,enabled:false,relayDown:false});
+ assert.deepEqual(boatCallView({...base,extraction:null,relayReady:false}),{offered:false,enabled:false,relayDown:true});
+ assert.deepEqual(boatCallView({...base,extraction:'due'}),{offered:false,enabled:false,relayDown:false});
+ assert.deepEqual(boatCallView({...base,phase:'wave'}),{offered:false,enabled:false,relayDown:false});
+ assert.deepEqual(boatCallView({...base,canSoundAlarm:false}),{offered:true,enabled:false,relayDown:false});
+});

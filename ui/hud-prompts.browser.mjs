@@ -12,7 +12,7 @@ const styles=[...src.matchAll(/<style[^>]*>[\s\S]*?<\/style>|<link[^>]+rel="styl
 const html=`<!doctype html><meta charset="utf-8">${styles}<body class="playing"><div id="hud">
 <div id="hudNotices"><div id="kioskPrompt" class="on">E — Supply Kiosk</div><aside id="firstMinuteCoach"><strong>Press E to bank your skulls.</strong></aside><div id="placeBanner"></div></div>
 <div id="objectiveHud"><aside class="objective-tracker"><h2>Ranger cache</h2><span class="objective-distance">110 m</span><p>Supplies at the Ranger campsite.</p><p class="objective-prompt">Reach the cache to search.</p><button>Stop tracking</button></aside></div>
-<div id="ammo" class="glass"><div id="ammoCount">12</div><div id="ammoMeta">Pistol<br>12 / 12 · 50 spare</div></div></div>`;
+<div id="ammo" class="glass"><div id="ammoCount">12</div><div id="ammoMeta"><div id="ammoWeapon">Pistol</div><div id="ammoDetail">12 / 12 · 5 mags</div><div id="ammoMags"><span class="mag-glyph" style="--fill:100%"></span><span class="mag-glyph" style="--fill:50%"></span></div></div></div></div>`;
 const shots=path.join(root,'Claude outputs/shots/gp31');fs.mkdirSync(shots,{recursive:true});
 const server=await serve(root,0);let browser;
 try {

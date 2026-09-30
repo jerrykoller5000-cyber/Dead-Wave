@@ -1,0 +1,232 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 12,
+   "loadout": "ak, aa12, machete, armor 90",
+   "suppressed": [
+    "pistol",
+    "m4",
+    "ak",
+    "shotgun"
+   ],
+   "planned": 419,
+   "trick": "The guardian on Ember Night, with demons",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "waveTotal": 419,
+   "spawned": 419,
+   "killed": 419,
+   "skullValue": 2233,
+   "firstSpawn": 0.2,
+   "lastSpawn": 389.3,
+   "lastKill": 460.2,
+   "length": 460,
+   "pushes": [
+    6.2,
+    55.2,
+    145.3,
+    287.9
+   ],
+   "lulls": [
+    46.1
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 6,
+    "t": 6.9,
+    "type": "shambler",
+    "d": 173
+   },
+   "crowd": {
+    "n": 1,
+    "t": 94.9
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 431,
+   "tail5": 433.9,
+   "tail1": 456.6,
+   "deaths": [],
+   "damage": 284,
+   "damageHp": 194,
+   "hits": 38,
+   "damageBy": {
+    "bomber": 208,
+    "spider": 60,
+    "brute": 16
+   },
+   "knifeSwings": 80,
+   "meleeKills": 144,
+   "meleeShare": 0.344,
+   "crowd5s": 2.8,
+   "sigPeak": 41,
+   "screamerCalls": 3,
+   "healHp": 102.8,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 2,
+     "w": "aa12",
+     "mag": 18,
+     "rel": false,
+     "hp": 100,
+     "near": 10.6
+    },
+    {
+     "t": 60,
+     "alive": 48,
+     "killed": 46,
+     "w": "ak",
+     "mag": 8,
+     "rel": false,
+     "hp": 88,
+     "near": 123.9
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 57,
+     "w": "ak",
+     "mag": 28,
+     "rel": false,
+     "hp": 88,
+     "near": 143.3
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 98,
+     "w": "ak",
+     "mag": 17,
+     "rel": false,
+     "hp": 87,
+     "near": 83.4
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 143,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 74,
+     "near": 126.8
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 165,
+     "w": "ak",
+     "mag": 29,
+     "rel": false,
+     "hp": 70,
+     "near": 137.7
+    },
+    {
+     "t": 210,
+     "alive": 47,
+     "killed": 199,
+     "w": "aa12",
+     "mag": 1,
+     "rel": false,
+     "hp": 60,
+     "near": 142.8
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 236,
+     "w": "aa12",
+     "mag": 1,
+     "rel": false,
+     "hp": 70,
+     "near": 60.3
+    },
+    {
+     "t": 271,
+     "alive": 17,
+     "killed": 268,
+     "w": "ak",
+     "mag": 7,
+     "rel": false,
+     "hp": 65,
+     "near": 81
+    },
+    {
+     "t": 301,
+     "alive": 48,
+     "killed": 285,
+     "w": "ak",
+     "mag": 12,
+     "rel": false,
+     "hp": 67,
+     "near": 125.9
+    },
+    {
+     "t": 331,
+     "alive": 48,
+     "killed": 292,
+     "w": "aa12",
+     "mag": 0,
+     "rel": false,
+     "hp": 40,
+     "near": 136.9
+    },
+    {
+     "t": 361,
+     "alive": 48,
+     "killed": 333,
+     "w": "aa12",
+     "mag": 0,
+     "rel": false,
+     "hp": 70,
+     "near": 5.1
+    },
+    {
+     "t": 392,
+     "alive": 45,
+     "killed": 374,
+     "w": "aa12",
+     "mag": 0,
+     "rel": false,
+     "hp": 70,
+     "near": 3.9
+    },
+    {
+     "t": 422,
+     "alive": 23,
+     "killed": 396,
+     "w": "aa12",
+     "mag": 0,
+     "rel": false,
+     "hp": 58,
+     "near": 34.4
+    },
+    {
+     "t": 452,
+     "alive": 2,
+     "killed": 417,
+     "w": "aa12",
+     "mag": 0,
+     "rel": false,
+     "hp": 65,
+     "near": 4.5
+    }
+   ],
+   "knees": 1,
+   "wallSecs": 201,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

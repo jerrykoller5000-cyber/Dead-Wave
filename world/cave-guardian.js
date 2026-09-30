@@ -29,6 +29,7 @@ const ease = (u) => { u = clamp01(u); return u * u * (3 - 2 * u); };
 // Colour helpers. three works in linear space, where a mid-brown is a small number, so
 // brightening is a multiply (keeps the hue) rather than a lerp toward white (which lands on
 // neutral grey and throws the cave's theme away).
+const _v0 = new THREE.Vector3();
 function lit(c, k, add = 0) {
   const o = c.clone().multiplyScalar(k).addScalar(add);
   o.r = Math.min(1, o.r); o.g = Math.min(1, o.g); o.b = Math.min(1, o.b);
@@ -179,6 +180,9 @@ export function makeCaveGuardianRig(design) {
     // It knuckle-walks on the backs of these and takes an ankle with them.
     part(wr, rbox(0.34, 0.12, 0.3, 0.04), M.skin, 0, -0.04, 0.06);
     const hand = joint(wr, 'hand' + S, 0, -0.08, 0.18);
+    // CL-104 (Jerry 2026-09-29: "the marine is never grabbed in the creature's hand realistically"): where the hand
+    // actually closes on something, inside the curl of the fingers, not the heel of the palm. Anything held goes here.
+    hand.userData.grip = new THREE.Vector3(0, -0.08, 0.22);
     rig.hands.push(hand);
     const fingers = [];
     for (let f = 0; f < 4; f++) {
@@ -284,6 +288,11 @@ export function guardianGrip(R, S, amt, mode = 'walk') {
   const th = R['thumb' + S];
   if (mode === 'walk') { th.rotation.x = -0.6 * amt; th.userData.tip.rotation.x = -0.9 * amt; }
   else { th.rotation.x = 0.7 * amt; th.userData.tip.rotation.x = 1.0 * amt; }
+}
+// CL-104: the world point a hand holds things at (inside its closed fingers). Call after the rig is posed.
+export function guardianGripPoint(hand, out) {
+  hand.updateWorldMatrix(true, false);
+  return out.copy(hand.userData.grip || _v0).applyMatrix4(hand.matrixWorld);
 }
 // Put a hand's palm on `target` (world), knuckles down. `pole` is where the elbow goes.
 export function guardianHandTo(g, R, S, target, pole, weight = 1) {
@@ -469,34 +478,45 @@ export function guardianDragWalk(g, R, t, S, ankle, ph, heave, look) {
   guardianHead(g, R, look, 0.35 + 0.3 * Math.abs(Math.sin(t * 4)), 0.5);
 }
 
-// --- Up on its hind legs holding what is left in both hands. `wind` 0..1 hauls the arms
-// back over its head; `toss` 0..1 whips them through. `carry` is where the hands meet
-// (world) while holding.
+// --- Up on its hind legs holding what is left in one hand (CL-104, Jerry: "the toss needs to be with one hand").
+// `wind` 0..1 swings the right arm back low; `toss` 0..1 brings it through, underhand. `carry` is where the right
+// hand holds (world) while holding. The left arm hangs loose and swings against the throw.
 export function guardianCarryThrow(g, R, t, carry, wind, toss, look) {
+  // CL-62 (Jerry 2026-09-29): "just a toss, like he does not consider the marine worth his time. A lazy
+  // underhand softball pitch." The body swings back low beside its legs, then forward and up, let go at
+  // chest height; no rearing up, no whip. As it lets go it is already looking away, back to its cave.
   const w = ease(wind), k = ease(toss);
-  bodyShape(g, R, { rear: 1, crouch: 0.1, arch: -0.25 * w + 0.35 * k, lean: -0.25 * w + 0.5 * k });
+  bodyShape(g, R, { rear: 1, crouch: 0.1 + 0.18 * w - 0.12 * k, arch: 0.04 * w - 0.02 * k, lean: 0.14 * w + 0.06 * k, twist: 0.2 * w - 0.14 * k });
   g.updateWorldMatrix(true, false);
-  for (const S of ['L', 'R']) {
-    const side = S === 'L' ? -1 : 1;
-    // Holding: hands together low in front. Wind: up and back over the shoulders. Toss: out
-    // in front, arms straight.
-    _v3.copy(carry);
-    _v1.set(side * 0.35, 3.3, -0.9).applyMatrix4(g.matrixWorld);          // over the head
-    _v2.set(side * 0.55, 2.2, 2.3).applyMatrix4(g.matrixWorld);           // thrown through
-    _tgt.copy(_v3).lerp(_v1, w).lerp(_v2, k);
-    _pole.set(side * 1, 0.2, -0.6).transformDirection(g.matrixWorld);
-    guardianHandTo(g, R, S, _tgt, _pole);
-    R['wrist' + S].rotation.set(0.3 - 0.9 * k, 0, 0);
-    guardianGrip(R, S, k > 0.45 ? 0.15 : 1, 'grab');
-  }
+  // The throwing hand: holding low in front and to its right, swung back beside the hip, then through and up.
+  _v3.copy(carry);
+  _v1.set(0.5, 1.05, -0.5).applyMatrix4(g.matrixWorld);           // swung back, hip high (one hand: his boots clear the dirt)
+  _v2.set(0.4, 1.85, 2.0).applyMatrix4(g.matrixWorld);            // let go, underhand
+  _tgt.copy(_v3).lerp(_v1, w).lerp(_v2, k);
+  _pole.set(1, -0.3, -0.4).transformDirection(g.matrixWorld);
+  guardianHandTo(g, R, 'R', _tgt, _pole);
+  R.wristR.rotation.set(0.35 - 0.5 * k, 0, 0);
+  guardianGrip(R, 'R', k > 0.55 ? 0.2 : 1, 'grab');
+  // The other arm: loose at its side, a little forward on the wind-up and back as the right comes through.
+  _tgt.set(-0.72, 0.6 + 0.1 * k, 0.15 + 0.25 * w - 0.3 * k).applyMatrix4(g.matrixWorld);
+  _pole.set(-0.8, 0.2, -0.8).transformDirection(g.matrixWorld);
+  guardianHandTo(g, R, 'L', _tgt, _pole);
+  guardianGrip(R, 'L', 0.5, 'walk');
   for (const L of ['L', 'R']) {
     const ls = L === 'L' ? -1 : 1;
-    _tgt.set(ls * 0.4, 0, (L === 'L' ? 0.25 : -0.25) * (1 - k * 0.5) + 0.2 * k).applyMatrix4(g.matrixWorld);
+    _tgt.set(ls * 0.4, 0, (L === 'L' ? 0.25 : -0.25) * (1 - k * 0.3) + 0.08 * k).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + L], R['knee' + L], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, L);
   }
-  guardianHead(g, R, look, 0.3 + 0.6 * w + 0.3 * k, 0.3 * w);
+  // It watches what it swings, barely; once it lets go it has already lost interest.
+  const away = Math.max(0, (toss - 0.55) / 0.45);
+  if (look && away > 0) {
+    g.updateWorldMatrix(true, false);
+    _v1.set(0, 1.6, -6).applyMatrix4(g.matrixWorld);          // back over its shoulder, to the cave
+    _tgt.copy(look).lerp(_v1, Math.min(1, away));
+    guardianHead(g, R, _tgt, 0.15, 0);
+  } else guardianHead(g, R, look, 0.15 + 0.1 * w, 0);
 }
 
 // --- Walking upright (the walk-out with the body, the turn to go back in). --------------
@@ -507,9 +527,11 @@ export function guardianWalkUpright(g, R, t, ph, hold, look) {
   g.updateWorldMatrix(true, false);
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
-    if (hold) {
-      _tgt.copy(hold).add(_v1.set(side * 0.28, 0, 0).transformDirection(g.matrixWorld));
-      _pole.set(side * 1, 0.1, -0.5).transformDirection(g.matrixWorld);
+    if (hold && S === 'R') {
+      // CL-104: carried in one hand, the right, with a little sway in the step.
+      // (Not transformDirection for an offset: it normalises, which once put each hand a metre off the hold.)
+      _tgt.copy(hold); _tgt.y += 0.04 * Math.sin(ph * 2);
+      _pole.set(1, 0.1, -0.5).transformDirection(g.matrixWorld);
       guardianHandTo(g, R, S, _tgt, _pole);
       guardianGrip(R, S, 1, 'grab');
     } else {

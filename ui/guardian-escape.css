@@ -1,0 +1,6 @@
+#guardianEscapeNotice { position:fixed; left:50%; top:65%; transform:translate(-50%, -50%); z-index:61; display:grid; gap:7px; min-width:190px; max-width:calc(100vw - 24px); box-sizing:border-box; padding:13px 20px; border:1px solid #d8a97a; border-radius:3px; background:#150d0ce8; color:#fff1d8; text-align:center; text-shadow:0 2px 5px #000; pointer-events:none; font-family:var(--font-hud); box-shadow:0 5px 26px #000b; }
+#guardianEscapeNotice[hidden] { display:none; }
+#guardianEscapeNotice strong { font-size:clamp(17px, 2.8vw, 27px); letter-spacing:.055em; line-height:1.1; }
+#guardianEscapeNotice span { font-size:12px; letter-spacing:.03em; }
+#guardianEscapeNotice[data-mode="result"] { top:28%; border-color:#bd8971; }
+@media(max-width:600px) { #guardianEscapeNotice { top:59%; padding:10px 14px; } #guardianEscapeNotice[data-mode="result"] { top:23%; } }

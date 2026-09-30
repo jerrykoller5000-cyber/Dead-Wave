@@ -1,5 +1,16 @@
 import { text } from './strings.js';
+import { GUN_STOCK_NIGHT } from '../game/economy.js';
 const count = n => Number.isSafeInteger(n) && n >= 0;
+export function dawnStockLine(completedNight) {
+ if(!count(completedNight)||completedNight<1)return null;
+ const arriving=Object.entries(GUN_STOCK_NIGHT).filter(([,night])=>night===completedNight+1).map(([gun])=>text('weapon.'+gun+'.name'));
+ return arriving.length?text('dawn.newStock',{weapons:arriving.join(', ')}):null;
+}
+export function dawnDareLine(summary) {
+ const dare=summary?.dare;
+ if(!count(summary?.day)||!dare||dare.day!==summary.day||!count(dare.earned))return null;
+ return text('dawn.dareEarned',{skulls:dare.earned});
+}
 
 // Presentation-only per-night record. Cumulative kills provide a baseline; best
 // streak is sampled for this night, never copied from the run's lifetime best.
@@ -23,8 +34,10 @@ export function mountDawn({doc=document,bus=window,onShow=()=>{}}={}) {
  const el=doc.createElement('aside');el.id='dawnCard';el.className='dawn-banner';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
  const heading=doc.createElement('h2');heading.id='dawnTitle';const stats=doc.createElement('dl');
  for(const key of ['kills','skulls','best']){const row=doc.createElement('div'),label=doc.createElement('dt'),value=doc.createElement('dd');label.textContent=text('dawn.'+key);value.dataset.stat=key;row.append(label,value);stats.append(row);}
+ const dare=doc.createElement('p');dare.className='dawn-tip dawn-dare';dare.hidden=true;
+ const stock=doc.createElement('p');stock.className='dawn-tip dawn-stock';stock.hidden=true;
  const tip=doc.createElement('p');tip.className='dawn-tip';
- el.append(heading,stats,tip);doc.body.append(el);
+ el.append(heading,stats,dare,stock,tip);doc.body.append(el);
  // `open` as the dialog had it, so anything that asks whether the card is up still can.
  Object.defineProperty(el,'open',{get:()=>el.classList.contains('on')});
  let shown=null,timer=0;
@@ -38,6 +51,8 @@ export function mountDawn({doc=document,bus=window,onShow=()=>{}}={}) {
   shown={...summary};
   heading.textContent=text('dawn.title',{day:summary.day});
   for(const key of ['kills','skulls','best'])stats.querySelector('[data-stat="'+key+'"]').textContent=String(summary[key]);
+  const bonus=dawnDareLine(summary);dare.hidden=!bonus;dare.textContent=bonus||'';
+  const arrivals=dawnStockLine(summary.day);stock.hidden=!arrivals;stock.textContent=arrivals||'';
   tip.textContent=text(summary.skulls?'dawn.tipBank':'dawn.tipResupply');
   // Restart the slide-in if it is already up.
   el.classList.remove('on');void el.offsetWidth;el.classList.add('on');doc.body.classList.add('dawn');

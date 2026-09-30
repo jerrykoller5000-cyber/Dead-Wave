@@ -1,0 +1,358 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 2,
+ "results": [
+  {
+   "night": 20,
+   "loadout": "minigun, aa12, machete, armor 90",
+   "planned": 851,
+   "trick": "Last stand: Ember Night, a colossus, three caves, the treeline and the lake",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "wallCapped": true,
+   "waveTotal": 851,
+   "spawned": 460,
+   "killed": 412,
+   "firstSpawn": 0.3,
+   "lastSpawn": 358.7,
+   "lastKill": 358.6,
+   "length": 358.3,
+   "pushes": [
+    6.3,
+    83.3,
+    180,
+    288.9
+   ],
+   "lulls": [],
+   "maxAlive": 48,
+   "pile": {
+    "n": 4,
+    "t": 8,
+    "type": "feral",
+    "d": 170
+   },
+   "crowd": {
+    "n": 1,
+    "t": 291.7
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": true,
+   "tail10": null,
+   "tail5": null,
+   "tail1": null,
+   "deaths": [],
+   "damage": 37,
+   "damageHp": 13,
+   "hits": 14,
+   "damageBy": {
+    "spider": 37
+   },
+   "knifeSwings": 4,
+   "meleeKills": 1,
+   "meleeShare": 0.002,
+   "crowd5s": 0,
+   "sigPeak": 40,
+   "screamerCalls": 4,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 6,
+     "w": "minigun",
+     "mag": 226,
+     "rel": false,
+     "hp": 100,
+     "near": 59.4
+    },
+    {
+     "t": 60,
+     "alive": 48,
+     "killed": 51,
+     "w": "minigun",
+     "mag": 176,
+     "rel": false,
+     "hp": 100,
+     "near": 45.8
+    },
+    {
+     "t": 90,
+     "alive": 47,
+     "killed": 79,
+     "w": "minigun",
+     "mag": 92,
+     "rel": false,
+     "hp": 100,
+     "near": 25.8
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 114,
+     "w": "minigun",
+     "mag": 83,
+     "rel": false,
+     "hp": 100,
+     "near": 7.3
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 156,
+     "w": "minigun",
+     "mag": 48,
+     "rel": false,
+     "hp": 97,
+     "near": 33.8
+    },
+    {
+     "t": 180,
+     "alive": 47,
+     "killed": 195,
+     "w": "minigun",
+     "mag": 22,
+     "rel": false,
+     "hp": 97,
+     "near": 40.5
+    },
+    {
+     "t": 210,
+     "alive": 48,
+     "killed": 229,
+     "w": "minigun",
+     "mag": 3,
+     "rel": false,
+     "hp": 97,
+     "near": 32.6
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 271,
+     "w": "minigun",
+     "mag": 0,
+     "rel": true,
+     "hp": 94,
+     "near": 30.9
+    },
+    {
+     "t": 270,
+     "alive": 47,
+     "killed": 307,
+     "w": "minigun",
+     "mag": 230,
+     "rel": false,
+     "hp": 94,
+     "near": 34.7
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 340,
+     "w": "minigun",
+     "mag": 9,
+     "rel": false,
+     "hp": 94,
+     "near": 18.9
+    },
+    {
+     "t": 330,
+     "alive": 48,
+     "killed": 375,
+     "w": "minigun",
+     "mag": 19,
+     "rel": false,
+     "hp": 91,
+     "near": 7.9
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 1500,
+   "errors": [],
+   "run": 1
+  },
+  {
+   "night": 20,
+   "loadout": "minigun, aa12, machete, armor 90",
+   "planned": 851,
+   "trick": "Last stand: Ember Night, a colossus, three caves, the treeline and the lake",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "wallCapped": true,
+   "waveTotal": 851,
+   "spawned": 452,
+   "killed": 404,
+   "firstSpawn": 0.2,
+   "lastSpawn": 356.6,
+   "lastKill": 356.4,
+   "length": 356.2,
+   "pushes": [
+    6.3,
+    83.5,
+    181.9,
+    292.8
+   ],
+   "lulls": [],
+   "maxAlive": 48,
+   "pile": {
+    "n": 4,
+    "t": 12.7,
+    "type": "shambler",
+    "d": 157
+   },
+   "crowd": {
+    "n": 1,
+    "t": 50.6
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": true,
+   "tail10": null,
+   "tail5": null,
+   "tail1": null,
+   "deaths": [],
+   "damage": 126,
+   "damageHp": 44,
+   "hits": 23,
+   "damageBy": {
+    "spider": 43,
+    "bomber": 83
+   },
+   "knifeSwings": 14,
+   "meleeKills": 22,
+   "meleeShare": 0.054,
+   "crowd5s": 0,
+   "sigPeak": 40,
+   "screamerCalls": 4,
+   "healHp": 11.9,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 6,
+     "w": "minigun",
+     "mag": 119,
+     "rel": false,
+     "hp": 100,
+     "near": 40.6
+    },
+    {
+     "t": 60,
+     "alive": 48,
+     "killed": 52,
+     "w": "minigun",
+     "mag": 169,
+     "rel": false,
+     "hp": 99,
+     "near": 29.1
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 80,
+     "w": "minigun",
+     "mag": 153,
+     "rel": false,
+     "hp": 98,
+     "near": 27.2
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 114,
+     "w": "aa12",
+     "mag": 4,
+     "rel": false,
+     "hp": 95,
+     "near": 16.3
+    },
+    {
+     "t": 150,
+     "alive": 48,
+     "killed": 155,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 95,
+     "near": 20.6
+    },
+    {
+     "t": 180,
+     "alive": 47,
+     "killed": 193,
+     "w": "aa12",
+     "mag": 10,
+     "rel": false,
+     "hp": 92,
+     "near": 48.9
+    },
+    {
+     "t": 210,
+     "alive": 48,
+     "killed": 228,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 90,
+     "near": 37.3
+    },
+    {
+     "t": 240,
+     "alive": 47,
+     "killed": 268,
+     "w": "minigun",
+     "mag": 148,
+     "rel": false,
+     "hp": 82,
+     "near": 3.4
+    },
+    {
+     "t": 270,
+     "alive": 48,
+     "killed": 299,
+     "w": "minigun",
+     "mag": 186,
+     "rel": false,
+     "hp": 70,
+     "near": 29.4
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 338,
+     "w": "minigun",
+     "mag": 221,
+     "rel": false,
+     "hp": 70,
+     "near": 32.1
+    },
+    {
+     "t": 330,
+     "alive": 47,
+     "killed": 376,
+     "w": "minigun",
+     "mag": 260,
+     "rel": false,
+     "hp": 70,
+     "near": 2.6
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 1500,
+   "errors": [],
+   "run": 2
+  }
+ ]
+}

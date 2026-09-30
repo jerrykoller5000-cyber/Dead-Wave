@@ -11,6 +11,14 @@ test('HQ bounty board uses authoritative guard counts and reward, with a banking
  assert.equal(buildBountyBoard(open([{...post,alive:1}])).rows[0].guards,'1 guard remaining');
  assert.equal(buildBountyBoard(open([{...post,state:'done',alive:0}])).rows[0].guards,'Collected');
 });
+test('a waiting survivor gets a named camp clue, and a rescued or malformed one does not',()=>{
+ for(const [style,place] of [['ranger','ranger camp'],['hikers',"hikers' camp"],['trapper',"trapper's camp"]]) {
+  const row=buildBountyBoard(open([{...post,survivor:{style,state:'waiting'}}])).rows[0];
+  assert.equal(row.survivor,`Someone lit a fire at the ${place}.`);
+ }
+ for(const survivor of [{style:'trapper',state:'rescued'},{style:'other',state:'waiting'},null])
+  assert.equal(buildBountyBoard(open([{...post,survivor}])).rows[0].survivor,null);
+});
 test('day one, alarms and waves have no bounty board; expired/stale/malformed posts do not leak',()=>{
  for(const change of [{day:1},{phase:'wave'},{alarmActive:true}])assert.equal(buildBountyBoard({...open(),...change}),null);
  for(const change of [{day:7},{state:'expired'},{labelKey:'bad'},{kind:'cave'},{index:-1},{guards:NaN},{reward:-20}])assert.equal(buildBountyBoard(open([{...post,...change}])).rows.length,0);
@@ -41,4 +49,22 @@ test('camp and bounty completion fold into one reward notice; duplicates cannot 
  assert.equal(m.receive({...e,type:'poi-cleared'},500),false);assert.equal(m.receive({...e,type:'bounty-done'},500),false);assert.equal(m.read(2000),'');
  for(const event of [{...e,type:'bounty-done',runId:0},{...e,type:'bounty-done',index:7,reward:NaN},{...e,type:'bounty-expired',index:7}])assert.equal(m.receive(event,2100),false);
  m.receive({type:'run-reset',runId:2},2200);assert(m.receive({...e,type:'bounty-done',runId:2},2300));assert.equal(m.receive({...e,type:'poi-cleared',runId:2},2301),false);
+});
+test('wandering colossus uses its current trail side on the board and one keyed completion notice',()=>{
+ const wanderer={kind:'wanderer',index:3,labelKey:'world.wanderer',day:9,x:-90,z:22,guards:1,alive:1,reward:150,state:'open',wanderer:true};
+ const board=buildBountyBoard({day:9,phase:'prep',bounties:[wanderer]});
+ assert.equal(board.rows[0].name,'A colossus is walking the east trail');
+ assert.equal(board.rows[0].guards,'One colossus roaming');
+ assert.equal(board.rows[0].reward,'150 skull value');
+ for(const [x,z,side] of [[70,5,'west'],[2,80,'north'],[2,-80,'south']])
+  assert.equal(buildBountyBoard({day:9,phase:'prep',bounties:[{...wanderer,x,z}]}).rows[0].name,`A colossus is walking the ${side} trail`);
+ assert.equal(buildBountyBoard({day:9,phase:'prep',bounties:[{...wanderer,x:NaN}]}).rows.length,0);
+ const map=setup();map.receive({type:'briefing-open',runId:1,day:9,phase:'prep',bounties:[wanderer]});
+ assert.deepEqual(map.markers({day:9,phase:'prep'}).map(m=>[m.x,m.z]),[[-90,22]]);
+ map.receive({type:'bounty-done',runId:1,day:9,kind:'wanderer',index:3});
+ assert.equal(map.markers({day:9,phase:'prep'}).length,0);
+ const notice=createCampNotice();notice.receive({type:'run-reset',runId:1},0);
+ assert(notice.receive({type:'bounty-done',runId:1,...wanderer},0));
+ assert.equal(notice.read(0),'Bounty: Wandering colossus +150 skull value');
+ assert.equal(notice.receive({type:'bounty-done',runId:1,...wanderer},1),false);
 });

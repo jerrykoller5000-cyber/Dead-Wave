@@ -1,15 +1,25 @@
 # ChatGPT
 
 state: active
-model: GPT-6 (Codex; exact variant unavailable)
-task: GP-85 Skull recall arrival chime and count notice
-touching: ui/skull-recall.js, ui/skull-recall.css, ui/skull-recall.test.mjs, ui/skull-recall.browser.mjs, ui/strings.js
-since: 2026-09-29T08:28Z
-next: GP-73 R6 · P-83. Credits: Jerry, the crew, Quaternius (CC0), the m
+model: GPT-6 (exact variant unsure)
+task: GP-68 Reconcile colossus task status with existing completion handoff
+touching: handoffs/2026-09-30-chatgpt-GP-68.md
+since: 2026-09-30T17:47Z
+next: GP-68 R5 · P-62. "A colossus is walking the east trail" on the boa
 blocked-on: —
-last-report: handoffs/2026-09-29-chatgpt-GP-75.md
+last-report: handoffs/2026-09-30-chatgpt-GP-69.md
 
 ## Notes
+
+2026-09-30 latest: GP-82 camo unlocks and GP-90 balance model checked out DONE; GP-68 wandering colossus board/banner checked out DONE. GP-82 dressing-room locks await Cursor CU-70 integration; Antigravity has visual/perf requests. GP-66 relay story copy and board pass 26 units plus WebGPU, but checked out BLOCKED: Cursor audio static cue and Claude timing/prop-card decisions; see handoffs/2026-09-30-chatgpt-GP-66.md. crew.mjs next says GP-64 waits on Grokbot GB-86. No git or npm; full suite and standard shots with crew.
+
+2026-09-29 latest: GP-60, GP-61 and GP-63 are checked out --done with handoffs and focused production browser checks. GP-60 stock/prices approved; the model currently ends night 20 with 10,631 Cash including an AK suppressor and extended mag, and Grokbot owns the nights-11+ payout trim. Re-run ui/economy-balance.mjs when his rule lands. GP-61 arrival labels/dawn stock and GP-63 boat call/dock minimap passed 21/28 focused units plus browser checks. Antigravity has visual/performance requests; Cursor handles npm/commit. Concurrent board save reset GP-60/61 boxes and R3 mission; Claude asked to restore. GP-62 waits GB-84. No git.
+
+2026-09-29 18:49Z: Jerry's GP-87 → GP-76 → GP-88 → GP-56 order completed and each task checked out with a handoff. GP-87 skills store/perk removal, GP-76 panels/toast, GP-88 targeted/eventful crates, GP-56 compact supply notices pass focused real WebGPU checks. UI/game units: 185 pass, 1 pre-existing CU-59 stale `ui/badges-runtime.test.mjs:90` failure; `npm test -- t35 --jobs 1` never reached t35 due local CDP `Page.enable` timeout. Cursor requested to run t35/full suite at commit; Antigravity requested GP-87/76/56 visual and load/fps; Claude requested to publish GP-87/GP-88 board transfer and approve `docs/contracts.md` event. No git. `crew.mjs next chatgpt`: GP-79 waits on CU-66; stop until dependency/board changes.
+
+2026-09-29 latest: GP-53 guardian escape UI checked out --done --review. Real WebGPU first catch → five E presses → lost 7-skull receipt and visible loss notice PASS; 170 UI tests PASS; before/after shots in Claude outputs/shots/gp53. GP-85 and GP-86 also checked out this session. npm test/load/48-zombie and independent visual checks requested from Cursor/Antigravity. GP-80 was checked out --blocked with no game changes: it awaits GB-104's shared COUNTER module and a first-encounter event decision; see GP-80-dependency handoff and requests. GP-50 awaits GB-77 and board repair (GB-75/78 handoffs exist but ticks reopened in a concurrent save); Claude asked to reconcile. No git.
+
+2026-09-29: R2 is GO. GP-85 skull recall and GP-86 flashlight copy checked out with reports handoffs/2026-09-29-chatgpt-GP-85.md and GP-86.md. GP-85 production night-1 event-stream and real-renderer runs PASS (15 recalled, one chime, +15 notice), 168 UI tests PASS; full suite/load/48-zombie and independent eyes requested from Cursor/Antigravity. GP-86 two strings updated, 12 strings tests PASS. No git. GP-53 waits on GB-78; GP-50 waits on GB-75/76/77. Crew next currently returns GP-80 (R3) despite active R2 mission saying R3 follows; asked Claude to settle the order before starting it. Earlier Notes mentioning a roadmap halt are superseded.
 
 2026-09-29: GP-75 Jerry direct Marine omni roll implemented, report handoffs/2026-09-29-chatgpt-GP-75.md. The existing camera-relative burst remains; a direction-aligned tumble now gives forward/back opposite somersaults, left/right cartwheels and four diagonal blends. Aim turns do not redirect the fixed world travel. 4 new +16 prior studio/idle tests PASS. Actual WebGPU eight-direction pose+physical travel, complete side recovery/cooldown PASS, zero page errors, native before/after shots and short perf saved under Claude outputs/shots/gp75. Legacy motion browser checker timed out before TT setup; npm/standard shoot/48-zombie independent checks remain with crew. Cursor/Claude/Antigravity requested; no git. Roadmap halt still applies to queued work.
 

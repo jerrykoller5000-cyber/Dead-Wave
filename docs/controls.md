@@ -19,7 +19,9 @@ same way.
 | Input | Action |
 | --- | --- |
 | Mouse | Aim anywhere, 360 degrees. The marine turns to face the reticle |
-| `LMB` | Fire. Hold for the chainsaw and flamethrower |
+| `LMB` | Fire. Hold for full auto, the chainsaw and the flamethrower. The M4, AK-47 and AA-12 start on semi: one shot a click |
+| `K` | Fire selector on the M4, AK-47 and AA-12 (SEMI / AUTO). The pistol stays semi until the auto sear is bought, then K switches that too |
+| `U` | Holster the gun in his hands. U again draws it. Unarmed, he cannot shoot and moves 10% faster (never past ×1.30 with Fleet foot) |
 | `RMB` | Zoom. A real first-person scope on the sniper rifle |
 | Hold `Q` | Weapon wheel: time slows, point at a gun, release to draw it. A quick tap steps to the next one |
 | `R` | Reload from the reserve. While a build ghost is up it rotates the piece; on Upgrade it selects the part instead |

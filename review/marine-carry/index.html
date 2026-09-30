@@ -1,0 +1,21 @@
+<!doctype html><meta charset="utf-8"><title>marine-carry</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>marine-carry · CL-90 · v1</h1>
+<p>What he carries shows on him (D-61): the two primaries of his loadout slung crossed on his back, the two
+secondaries in cross-draw holsters under his arms, the pistol in the hip holster, and what is left in stages:
+magazine tops in the pouches, grenades on the right hip, the shotgun's shell bandolier, the launcher's 40 mm belt,
+the minigun's belt boxes and the flamer's tanks on the pack. He is unarmed here so all of it shows; in play the gun
+in his hands is never also on him. Your notes go in notes.md in this folder.</p>
+<script>
+const sets = [
+  ['M4 and shotgun slung, Uzi and revolver holstered, full', ['carry-full-back', 'carry-full-front', 'carry-full-side', 'carry-full-quarter']],
+  ['Minigun and launcher slung, revolver holstered, full', ['carry-heavy-back', 'carry-heavy-front']],
+  ['Flamer and sniper slung, two Uzis holstered, full', ['carry-flamer-back']],
+  ['The first loadout, empty: no spare magazines, shells, rounds or grenades left', ['carry-empty-front', 'carry-empty-back']],
+];
+for (const [t, keys] of sets) {
+  document.write(`<h2>${t}</h2><div class="row">` + keys.map((k) => `<figure><figcaption>${k}</figcaption><img src="v1/${k}.png" alt="${k}"></figure>`).join('') + '</div>');
+}
+document.write('<h2>Before: the same marine and loadout, with nothing showing</h2><div class="row">' + ['carry-full-back', 'carry-full-front', 'carry-heavy-back'].map((k) => `<figure><figcaption>${k}</figcaption><img src="before/${k}.png" alt="${k} before"></figure>`).join('') + '</div>');
+</script>

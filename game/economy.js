@@ -1,19 +1,24 @@
 // Economy helpers. Banking/kiosk integration remains in index.html until the split.
 // Quote whole existing ammo packs, counting a shared reserve only once. Inventory,
 // caps and pack prices come from combat; this function never mutates them.
-// Equipment inflation starts after the teaching nights. Essential supplies and
-// construction use their own unchanged prices; the kiosk selects the category.
+// D-48: a gun arrives in a specific act, then keeps one price for the whole run.
+export const GUN_STOCK_NIGHT = Object.freeze({
+  pistol:1, uzi:2, shotgun:2, revolver:3, m4:4, chainsaw:4,
+  ak:5, sniper:6, flamer:8, launcher:9, aa12:10, minigun:14
+});
+export function equipmentStocked(key, night) {
+  if (!Number.isSafeInteger(night) || night < 1) throw new TypeError('Invalid equipment night');
+  return Object.hasOwn(GUN_STOCK_NIGHT, key) && night >= GUN_STOCK_NIGHT[key];
+}
+// Preserve the two pricing calls for existing callers, with no night markup.
 export function equipmentMarkup(night) {
   if (!Number.isSafeInteger(night) || night < 1) throw new TypeError('Invalid equipment night');
-  return Math.min(17, Math.max(0, night - 3)) * 10;
+  return 0;
 }
 export function equipmentPrice(base, night) {
   if (!Number.isSafeInteger(base) || base < 0) throw new TypeError('Invalid equipment price');
-  const markup = equipmentMarkup(night);
-  if (!markup || !base) return base;
-  const scaled = Math.ceil(base * (100 + markup) / 500) * 5;
-  if (!Number.isSafeInteger(scaled)) throw new RangeError('Equipment price too large');
-  return scaled;
+  equipmentMarkup(night);
+  return base;
 }
 
 export function quoteRestock(reserves) {

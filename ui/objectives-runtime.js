@@ -23,7 +23,7 @@ function choiceDescription(pack) {
   const calibre=pack.caliber==='chainsaw'?text('weapon.chainsaw.name'):text('calibre.'+(keys[pack.caliber]||pack.caliber));
   const d=description(pack);return {key:'objectives.packChoice',params:{calibre,pack:text(d.key,d.params)}};
 }
-export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,grantBlueprint=()=>null,getRestockBlueprint=()=>null,getPlayer,mapRoot,hudRoot,project,onComplete=()=>{}}) {
+export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices,grantSupply,grantBlueprint=()=>null,getRestockBlueprint=()=>null,getPlayer,mapRoot,hudRoot,project,onComplete=()=>{},onRead=()=>{}}) {
   const model=createObjectives(runId),choices=new Map();
   let damageRevision=0,lastNear=null,disposed=false,frame=0,lastPoll=0,lastPaint='',lastSnapshot=null;
   const view=mountObjectives({mapRoot,hudRoot,project,onChoose:(id,choice)=>{choices.set(id,choice);lastPaint='';update();}});
@@ -53,6 +53,7 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
     };
     // E edge is still checked against the owner's snapshot after the core listener.
     if(active&&pressed&&near?.interaction.ePressed) {
+      onRead(near.id);
       const site=state.sites.find(s=>s.id===near.id),pack=choosePack(site);
       const request=model.beginClaim({id:site.id,choiceId:pack?.id,choices:options(site.id)});
       if(request) {

@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-09-29T07:12Z
-next: CU-69 R3 · P-128. Fire selectors (D-65): a key toggles semi and au
+task: CU-70 the CIF grows into the dressing room
+touching: index.html (dressing room), game/wardrobe.js, game/wardrobe.test.mjs, tools/tests/t144.js
+since: 2026-09-30T07:28Z
+next: CU-70 R4 · P-131. The dressing room (D-66): the CIF grows into it,
 blocked-on: —
-last-report: handoffs/2026-09-29-cursor-CU-74.md
+last-report: handoffs/2026-09-30-cursor-CU-52.md
 
 ## Notes
 

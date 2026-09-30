@@ -25,6 +25,7 @@
     const nCaves = T.POI.caves.length;
     const chalk = T.POI.caves.findIndex((c) => c.theme === 'chalk');
     const share = [], fails = [];
+    const gFails = [], gCount = [], packFails = [];   // GB-72, GB-73
     const bad = (d, m) => fails.push('n' + d + ' ' + m);
     for (let d = 1; d <= 20; d++) {
       T.setDay(d - 1); T.startPrep();
@@ -50,11 +51,30 @@
         const bi = pv.queue.indexOf(boss), lastStart = pv.total - pushes[pushes.length - 1];
         if (!(bi >= lastStart && bi < pv.total - 1)) bad(d, 'boss at ' + bi + ' (last push from ' + lastStart + ')');
       }
+      // GB-72 (P-17): the treeline risers all come with the last push.
+      gCount[d] = gr;
+      if (gr > 0 && pushes && pv.groundByIndex) {
+        const ls = pv.total - pushes[pushes.length - 1];
+        const early = pv.groundByIndex.findIndex((g, gi) => g && gi < ls);
+        if (early >= 0) gFails.push('n' + d + ' row ' + early + ' < ' + ls);
+      }
+      // GB-73 (P-18): night 10's brute packs lead each push, six abreast from one cave.
+      if (d === 10 && pushes) {
+        let s = 0;
+        for (const n of pushes) {
+          const head = pv.queue.slice(s, s + 6), cv = pv.caveByIndex.slice(s, s + 6);
+          if (!head.every((k) => k === 'brute') || new Set(cv).size !== 1) packFails.push('push@' + s + ' ' + head.join(',') + ' caves ' + cv.join(','));
+          s += n;
+        }
+      }
       share[d] = (pv.total - (c.shambler || 0) - (boss ? 1 : 0)) / p.total;
       if (d === 8) { let run = 0, best = 0; for (const k of pv.queue) { if (k === 'bomber') { run++; best = Math.max(best, run); } else run = 0; } if (best < 10) bad(d, 'bomber pack ' + best); }
       if (d === 9) { let run = 0, packs = 0; for (const k of pv.queue.concat('x')) { if (k === 'feral') run++; else { if (run >= 10) packs++; run = 0; } } if (packs < 8) bad(d, 'feral packs ' + packs); }
     }
     ok(fails.length === 0, 'each night plays its plan: kinds, boss, Ember Night, caves, ground, pushes, trick ' + fails.slice(0, 6).join('; '));
+    ok(gFails.length === 0 && [13, 15, 16, 17].every((d) => gCount[d] >= 30 && gCount[d] <= 60),
+      'GB-72: the treeline rises with the last push; nights 13/15/16/17 bring ' + [13, 15, 16, 17].map((d) => gCount[d]).join('/') + ' ' + gFails.slice(0, 4).join('; '));
+    ok(packFails.length === 0, 'GB-73: night 10 opens every push with six brutes from one cave ' + packFails.slice(0, 3).join('; '));
     const pct = (d) => Math.round(share[d] * 100);
     const restOk = [7, 11, 14, 17].every((d) => share[d] < share[d - 1] && share[d] < share[d + 1]);
     ok(restOk, 'rest nights are lighter than either side: ' + [6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((d) => d + ':' + pct(d) + '%').join(' '));
@@ -89,6 +109,15 @@
     steps = 0;
     while (st().pace.inLull && steps < 400) { T.spawnWaveBatch(0.25); steps++; }
     ok(steps * 0.25 >= 29.5 && steps * 0.25 <= 30.5, 'a full field waits at most 30 s: ' + (steps * 0.25) + ' s');
+    T.clearZombies();
+    // GB-73: night 19 (the gauntlet) keeps its breather short: 5 s at most, even with a full field.
+    T.setDay(18); T.startPrep(); T.skipGrace && T.skipGrace(); T.beginWave(); T.clearZombies();
+    const up = () => T.zombies.filter((z) => z.alive && !z.dying).length;
+    for (i = 0; i < 20000 && !(st().pace && st().pace.inLull); i++) { T.spawnWaveBatch(0.25); if (up() > 30) T.clearZombies(); }
+    while (up() <= 8) T.spawnZombie(20 + up(), 20, 'shambler');
+    steps = 0;
+    while (st().pace.inLull && steps < 400) { T.spawnWaveBatch(0.25); steps++; }
+    ok(steps * 0.25 >= 2.5 && steps * 0.25 <= 5.5, 'night 19: a full field holds the breather ' + (steps * 0.25) + ' s (5 s at most)');
     T.clearZombies();
     // Day 1 is D-29's: one push of 15, the old burst pacing, no breather.
     T.setDay(0); T.startPrep();

@@ -1,0 +1,275 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 13,
+   "loadout": "ak, aa12, machete, armor 90",
+   "planned": 560,
+   "trick": "Artillery: twenty spitters behind a line of soldiers",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "waveTotal": 560,
+   "spawned": 560,
+   "killed": 560,
+   "firstSpawn": 0.2,
+   "lastSpawn": 541.7,
+   "lastKill": 605.2,
+   "length": 605,
+   "pushes": [
+    6.2,
+    65.1,
+    169.9,
+    280.8,
+    444.6
+   ],
+   "lulls": [
+    45.7
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 7,
+    "t": 480.4,
+    "type": "shambler",
+    "d": 77
+   },
+   "crowd": {
+    "n": 0,
+    "t": 0
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 575.9,
+   "tail5": 584.1,
+   "tail1": 593.1,
+   "deaths": [],
+   "damage": 126,
+   "damageHp": 44,
+   "hits": 39,
+   "damageBy": {
+    "spider": 109,
+    "bomber": 17
+   },
+   "knifeSwings": 1,
+   "meleeKills": 1,
+   "meleeShare": 0.002,
+   "crowd5s": 0,
+   "sigPeak": 42,
+   "screamerCalls": 3,
+   "healHp": 13.9,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 0,
+     "w": "ak",
+     "mag": 22,
+     "rel": false,
+     "hp": 100,
+     "near": 19.2
+    },
+    {
+     "t": 60,
+     "alive": 46,
+     "killed": 35,
+     "w": "ak",
+     "mag": 17,
+     "rel": false,
+     "hp": 99,
+     "near": 13.9
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 60,
+     "w": "ak",
+     "mag": 23,
+     "rel": false,
+     "hp": 95,
+     "near": 22
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 94,
+     "w": "ak",
+     "mag": 23,
+     "rel": false,
+     "hp": 95,
+     "near": 19.9
+    },
+    {
+     "t": 150,
+     "alive": 47,
+     "killed": 119,
+     "w": "ak",
+     "mag": 14,
+     "rel": false,
+     "hp": 95,
+     "near": 35.3
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 154,
+     "w": "ak",
+     "mag": 20,
+     "rel": false,
+     "hp": 93,
+     "near": 25.9
+    },
+    {
+     "t": 210,
+     "alive": 47,
+     "killed": 177,
+     "w": "ak",
+     "mag": 13,
+     "rel": false,
+     "hp": 93,
+     "near": 19.4
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 210,
+     "w": "ak",
+     "mag": 3,
+     "rel": false,
+     "hp": 76,
+     "near": 18.4
+    },
+    {
+     "t": 270,
+     "alive": 48,
+     "killed": 241,
+     "w": "ak",
+     "mag": 6,
+     "rel": false,
+     "hp": 76,
+     "near": 29.2
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 266,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 75,
+     "near": 33.4
+    },
+    {
+     "t": 330,
+     "alive": 48,
+     "killed": 297,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 12.3
+    },
+    {
+     "t": 360,
+     "alive": 47,
+     "killed": 324,
+     "w": "ak",
+     "mag": 25,
+     "rel": false,
+     "hp": 70,
+     "near": 16.7
+    },
+    {
+     "t": 390,
+     "alive": 48,
+     "killed": 359,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 15.4
+    },
+    {
+     "t": 420,
+     "alive": 29,
+     "killed": 387,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 19.5
+    },
+    {
+     "t": 450,
+     "alive": 24,
+     "killed": 415,
+     "w": "ak",
+     "mag": 27,
+     "rel": false,
+     "hp": 70,
+     "near": 33
+    },
+    {
+     "t": 480,
+     "alive": 46,
+     "killed": 434,
+     "w": "ak",
+     "mag": 25,
+     "rel": false,
+     "hp": 70,
+     "near": 24.7
+    },
+    {
+     "t": 510,
+     "alive": 44,
+     "killed": 476,
+     "w": "ak",
+     "mag": 6,
+     "rel": false,
+     "hp": 70,
+     "near": 18.4
+    },
+    {
+     "t": 540,
+     "alive": 48,
+     "killed": 510,
+     "w": "ak",
+     "mag": 0,
+     "rel": true,
+     "hp": 70,
+     "near": 17.3
+    },
+    {
+     "t": 570,
+     "alive": 17,
+     "killed": 543,
+     "w": "ak",
+     "mag": 25,
+     "rel": false,
+     "hp": 70,
+     "near": 28
+    },
+    {
+     "t": 600,
+     "alive": 1,
+     "killed": 559,
+     "w": "ak",
+     "mag": 20,
+     "rel": false,
+     "hp": 70,
+     "near": 38.2
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 290,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

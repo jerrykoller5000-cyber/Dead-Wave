@@ -1,12 +1,54 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildScoutingReport,scoutingCaveIndices,projectScoutCave,drawScoutingMarks} from './scouting.js';
+import { COUNTER } from '../game/weaknesses.js';
+import { text } from './strings.js';
 const fixture=()=>({day:9,phase:'prep',preview:{day:9,total:10,caveIndices:[0,2],night:{pushes:[5,5],trick:'runners-two-caves',rest:false},byTypeAndCave:[{caveIndex:0,caveName:'North Cave'},{caveIndex:2,caveName:'East Cave'}]}});
 test('scouting shows all named planned caves and pushes without exact enemy counts',()=>{
  const data=fixture(),snapshot=JSON.stringify(data);Object.freeze(data.preview.night.pushes);Object.freeze(data.preview);
- const v=buildScoutingReport(data);assert.equal(v.caves,'Caves: North Cave · East Cave');assert.equal(v.pushes,'2 pushes');assert.equal(v.trick,'Runners from two caves');assert.equal(v.rest,null);assert.equal(JSON.stringify(data),snapshot);
+ const v=buildScoutingReport(data);assert.equal(v.caves,'Caves: North Cave · East Cave');assert.equal(v.pushes,'2 pushes');assert.equal(v.trick,'Runners from two caves · keep moving between packs');assert.equal(v.rest,null);assert.equal(JSON.stringify(data),snapshot);
  data.preview={...data.preview,night:{pushes:[10],trick:'woods',rest:true}};
  assert.equal(buildScoutingReport(data).pushes,'1 push');assert.equal(buildScoutingReport(data).rest,'Rest night · lighter mix, still a fight');
+});
+test('every planned night has one useful scouting line, including plates, screamers and bomber chains',()=>{
+ const tricks=['claw-up','runners','lake','two-fronts','nest','guardian','woods','bomber-pack','runners-two-caves','brute-night','surround','guardian-ember','artillery','lake-surge','nest-colossus','demon-night','surround-fast','siege','gauntlet','last-stand'];
+ const lines=tricks.map(trick=>{const d=fixture();d.preview.night.trick=trick;return buildScoutingReport(d).trick;});
+ assert.equal(lines.length,20);
+ assert(lines.every(line=>line.includes(' · ')&&line!=='Tactics unconfirmed'));
+ assert.match(lines[3],/plates stop bullets; fire and blasts don't/);
+ assert.match(lines[9],/Brute packs.*plates stop bullets/);
+ assert.match(lines[7],/kill the screamers first; chain the bombers/);
+ assert.match(lines[14],/kill screamers first/);
+ assert.match(lines[6],/bomber inside its pack for a chain/);
+ assert.match(lines[18],/short breather before the surge/);
+});
+test('the frozen plan names each planned kind once with its shared counter, never counts or unplanned kinds',()=>{
+ const data=fixture();
+ data.preview.byTypeAndCave=[
+  {typeKey:'brute',count:3,caveIndex:0,caveName:'North Cave'},
+  {typeKey:'screamer',count:2,caveIndex:0,caveName:'North Cave'},
+  {typeKey:'brute',count:4,caveIndex:2,caveName:'East Cave'},
+  {typeKey:'feral',count:0,caveIndex:2,caveName:'East Cave'},
+  {typeKey:'<unsafe>',count:1,caveIndex:2,caveName:'East Cave'}
+ ];
+ const before=JSON.stringify(data), view=buildScoutingReport(data);
+ assert.deepEqual(view.counters,[
+  {kind:'brute',name:text('enemy.brute.name'),line:text('counter.brute')},
+  {kind:'screamer',name:text('enemy.screamer.name'),line:text('counter.screamer')}
+ ]);
+ assert.deepEqual(COUNTER.brute,['blast','bullet']);
+ assert.deepEqual(COUNTER.screamer,['bullet','pellet']);
+ assert(!JSON.stringify(view.counters).includes('<unsafe>'));
+ assert(!JSON.stringify(view.counters).includes('count'));
+ assert.equal(JSON.stringify(data),before);
+ for(const kind of Object.keys(COUNTER))assert(text(`counter.${kind}`).length>12,`missing counter copy for ${kind}`);
+});
+test('Fog Night and siege get their own scouting advice from the frozen night plan',()=>{
+ const fog=fixture();fog.day=fog.preview.day=14;fog.preview.night.trick='lake-surge';fog.preview.night.mod='fog';
+ assert.equal(buildScoutingReport(fog).trick,'Lake surge in dense fog · keep a short route back to cover');
+ const siege=fixture();siege.day=siege.preview.day=18;siege.preview.night.trick='siege';
+ assert.equal(buildScoutingReport(siege).trick,'Brutes and soldiers will smash your walls · reinforce the weakest side');
+ assert.equal(buildScoutingReport({...fog,phase:'wave'}),null);
 });
 test('stale, missing, invalid and non-prep reports stay absent; untrusted copy is never shown',()=>{
  for(const change of [{day:8},{phase:'wave'},{alarmActive:true},{preview:null}]) {const d={...fixture(),...change};assert.equal(buildScoutingReport(d),null);assert.deepEqual(scoutingCaveIndices(d),[]);}

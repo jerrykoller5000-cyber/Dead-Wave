@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-09-29 by Claude (R2 is go; tonight's models; Grokbot's load spread).
+Lead: Claude. Last updated 2026-09-30 18:00Z by Claude (R4: four tasks left).
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
 steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
@@ -54,42 +54,32 @@ someone else, say so with `crew.mjs request`; don't start it.
 
 ## Mission
 
-**The roadmap, phase R2: the night has a shape (D-43).**
-One breather and a surge you can hear; plates, screamers and bomber chains; the first catch can be escaped; the co-op
-groundwork (D-58); the gun light standard. Work your queue top to bottom; a task that says "after XX-n" waits for it.
-**GO (Jerry, 2026-09-29): the halt is over.** Start with your first task. The critical path is Grokbot's surge
-(GB-71, GB-72, GB-73): Antigravity's R2 run, Cursor's measuring and Claude's score wait on it. Claude's CL-87 comes
-first because Cursor's CU-63 and Grokbot's GB-100 wait on it.
-- **Cursor** · CU-78 · handoffs/cursor-CU-78.md
-- **Cursor** · CU-75 · handoffs/cursor-CU-75.md
-- **Cursor** · CU-59 · handoffs/cursor-CU-59.md
-- **Cursor** · CU-77 · handoffs/cursor-CU-77.md
-- **Cursor** · CU-63 · handoffs/cursor-CU-63.md
-- **Cursor** · CU-51 · handoffs/cursor-CU-51.md
-- **Grokbot** · GB-71 · handoffs/grokbot-GB-71.md
-- **Grokbot** · GB-72 · handoffs/grokbot-GB-72.md
-- **Grokbot** · GB-73 · handoffs/grokbot-GB-73.md
-- **Grokbot** · GB-78 · handoffs/grokbot-GB-78.md
-- **Grokbot** · GB-75 · handoffs/grokbot-GB-75.md
-- **Grokbot** · GB-76 · handoffs/grokbot-GB-76.md
-- **Grokbot** · GB-77 · handoffs/grokbot-GB-77.md
-- **Grokbot** · GB-96 · handoffs/grokbot-GB-96.md
-- **Grokbot** · GB-99 · handoffs/grokbot-GB-99.md
-- **Grokbot** · GB-103 · handoffs/grokbot-GB-103.md
-- **Grokbot** · GB-100 · handoffs/grokbot-GB-100.md
-- **ChatGPT** · GP-85 · handoffs/chatgpt-GP-85.md
-- **ChatGPT** · GP-53 · handoffs/chatgpt-GP-53.md
-- **ChatGPT** · GP-50 · handoffs/chatgpt-GP-50.md
-- **Antigravity** · AG-30 · handoffs/antigravity-AG-30.md
-- **Antigravity** · AG-22 · handoffs/antigravity-AG-22.md
-- **Claude** · CL-87 · handoffs/claude-CL-87.md
-- **Claude** · CL-91 · handoffs/claude-CL-91.md
-- **Claude** · CL-70 · handoffs/claude-CL-70.md
-- **Claude** · CL-71 · handoffs/claude-CL-71.md
-- **Claude** · CL-102 · handoffs/claude-CL-102.md
-- **Claude** · CL-62 · handoffs/claude-CL-62.md
-- **Claude** · CL-69 · handoffs/claude-CL-69.md
-Then: R3, task by task as each one's "after" clears.
+**The roadmap, phase R4: the way out (D-43).**
+R3's tasks are done (Jerry plays days 1-10 to close it; CL-90's draw and holster moves carry over). R4: the boat at
+night 20, the victory screen and badges, the relay tells the story, and the dressing room. Jerry plays a run to the
+boat and a win to close it. Claude's three specs and the boat come first: most of R4 waits on them. A task that says
+"after XX-n" waits for it; meanwhile take your next task whose "after" is met, R5 and R6 included. **Never save this
+board or `crew/LOG.md` from a copy you read earlier;** tick your box with `crew.mjs out` (it reads the file fresh).
+- **Left in R4 (2026-09-30 18:00Z):** CU-70 and CL-97 (the dressing room and the wardrobe on the rig), CU-53 (a full run
+  timed headless) and AG-24 (a full run to the boat on Jerry's GPU). Everything else in R4 is done.
+- Claude: CL-97 (the new parts on the marine: `TT.dressMarine`), then CL-90's draw and holster moves; meanwhile R5.
+- Cursor: CU-70 (reads CL-97's `TT.dressMarine` when it lands); CU-53 can start now (GB-86 is done); meanwhile R5 and R6.
+- Grokbot: R5 and R6.
+- ChatGPT: the dressing room's words (Cursor's request); R5.
+- Antigravity: AG-24 can start now (GB-86 and GP-64 are done); shots as they land.
+- **Claude** · CL-96 · handoffs/claude-CL-96.md
+- **Claude** · CL-74 · handoffs/claude-CL-74.md
+- **Claude** · CL-73 · handoffs/claude-CL-73.md
+- **Claude** · CL-97 · handoffs/claude-CL-97.md
+- **Claude** · CL-90 · handoffs/claude-CL-90.md
+- **Cursor** · CU-70 · handoffs/cursor-CU-70.md
+- **Cursor** · CU-53 · handoffs/cursor-CU-53.md
+- **Grokbot** · GB-86 · handoffs/grokbot-GB-86.md
+- **ChatGPT** · GP-82 · handoffs/chatgpt-GP-82.md
+- **ChatGPT** · GP-66 · handoffs/chatgpt-GP-66.md
+- **ChatGPT** · GP-64 · handoffs/chatgpt-GP-64.md
+- **Antigravity** · AG-24 · handoffs/antigravity-AG-24.md
+Then: R5.
 
 ## Waiting on
 
@@ -98,8 +88,7 @@ others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A l
 ids are all finished drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
 
-- **Grokbot** · GB-71, GB-72, GB-73 the surge · waiting: Cursor, Antigravity, Claude, ChatGPT
-- **Claude** · CL-87 docs/coop.md · waiting: Cursor, Grokbot
+- **Claude** · CL-97 the wardrobe on the rig (TT.dressMarine) · waiting: Cursor
 
 ## The roadmap (D-43)
 
@@ -111,10 +100,10 @@ counts a listed id that has left the board as done).
 | Stage | Status | Goal | Jerry plays | Tasks |
 | --- | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | ✓ Done | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | ▶ Next | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, CU-77, CL-102, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, GP-85, CU-78, AG-30 |
-| **R3 · The day feeds the night** | Later | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | CU-58, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, CU-62, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, CU-66, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69 |
-| **R4 · The way out** | Later | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82 |
-| **R5 · Named nights and bigger systems** | Later | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29 |
+| **R2 · The night has a shape** | ✓ Done | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, CU-77, CL-102, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, GP-85, CU-78, AG-30, GP-86, CL-104, CL-105, GB-112 |
+| **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | GP-88, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, GP-87, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, GP-89, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69, GB-111, CL-103 |
+| **R4 · The way out** | ▶ Next | The boat at night 20; the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
+| **R5 · Named nights and bigger systems** | Later | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91 |
 | **R6 · Finish (1.0)** | Later | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
 | **R7 · Co-op, up to 4 players** | After 1.0 | Up to 4 players, one hosting, through the desktop app (D-58). | A night with friends. | Written when R6 closes. |
 
@@ -127,6 +116,26 @@ For players who look, the relay's static and the pit stones hide a way to silenc
 guardian for the true ending. `docs/roadmap.md` has it in full.
 
 ## Orders from Jerry
+
+- **2026-09-30, ~07:20Z · The fidelity pass is good; the crew works the night.** "Fidelity pass looks good to me nice
+  work. I am going to go to sleep so you got the work for the rest of the night." CL-94 closed. R3's tasks are done, so
+  the mission is R4 (his standing order).
+
+- **2026-09-30, ~04:45Z · One stage after another.** "If you guys finish R3 continue to R4. Same as before once one
+  mission is done, clear it and move to the next." Standing order: when a stage's tasks are all done, Claude clears
+  the mission and writes the next stage's (R4, then R5, R6); nobody waits for the stage to close before taking the
+  next stage's tasks whose "after" is met.
+
+- **2026-09-30, ~03:00Z · The mission is R3.** "Clear out the mission and change it to R3." Earlier (~02:30Z), after a
+  short break: "Start them on their tasks please." R2's mission is cleared; the R3 mission above lists what is left.
+
+- **2026-09-29, ~17:50Z · Jerry's review.** Suppressors good except the shotgun's: a big round can, "think No Country
+  for Old Men" (Claude, CL-95). The CIF moves to the wall opposite the kiosk and skull window, with the Armory window
+  beside it (CL-103). The guardian: comes out of the cave too slowly and not fluidly; the toss one-handed; the marine
+  must sit in the guardian's hand, never off beside it; the kick-free needs the marine struggling and pulling against
+  the drag (CL-104). After an escape the grab can happen again, and each escape takes more presses (GB-112). The
+  burial detail always wears woodland MARPAT, whatever his camo (CL-105). Later, in the CIF: shades (aviators, a
+  pit-viper style, a Wayfarer style) and the GWOT ballistic goggles (CL-97).
 
 - **2026-09-29, ~08:15Z · R2 is go.** "Lift the hold and delegate tasks." Tonight: Cursor on Grok 4.7 High, Claude on
   Opus 5.5 High, Antigravity on Gemini 3.1 Pro High, Grokbot on Grokbot, ChatGPT on GPT-6 Sol High. Claude spread the
@@ -192,6 +201,7 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first. **
 of every decision is in `docs/decisions.md`.** Read the full text of any decision your task names before you start.
 Claude adds each new decision in both places.
 
+- **D-69** · The dressing room: only camos are earned, from the best run (Claude, for Jerry; CL-96)
 - **D-68** · Night stays dark; the flashlight is standard (Jerry, 2026-09-29, CL-11 answered)
 - **D-67** · The Hollows: underground by day (Jerry, 2026-09-29; planned by Cursor at his order)
 - **D-66** · The dressing room (Jerry, 2026-09-29)
@@ -281,61 +291,50 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 #### R2 · The night has a shape
 
-- [ ] **CU-78** **R2 · first tonight.** Commit what is waiting before R2 starts: Claude's horde fix and the CIF heading
+- [x] **CU-78** **R2 · first tonight.** Commit what is waiting before R2 starts: Claude's horde fix and the CIF heading
   in `index.html`, `tools/tests/t100.js`, `t102.js`, GP-74 (marine idle) and GP-75 (roll) with their `studio/` files and
   handoffs. Run the suite first (`npm test`; t102's "back to M81" check already failed before these changes). The
   suite deletes `tools/tests/test.html`: restore it (`git checkout -- tools/tests/test.html`), never commit the deletion.
-- [ ] **CU-75** **R2 · P-147.** The gun flashlight standard from the start (D-68): owned on every weapon at a fresh run,
+- [x] **CU-75** **R2 · P-147.** The gun flashlight standard from the start (D-68): owned on every weapon at a fresh run,
   its kiosk row gone, L still toggles it. Details: `docs/roadmap.md` P-147.
-- [ ] **CU-59** **R2 · P-55.** `debugTouched`: one shell flag set by any `TT.*` hook that changes the run (the `*Dbg`
+- [x] **CU-59** **R2 · P-55.** `debugTouched`: one shell flag set by any `TT.*` hook that changes the run (the `*Dbg`
   setters, `loopNextNight`, `loopMorning`, `skipPrep`, the scripted-kill and cave hooks), reset at a fresh start;
   `recordFinishedRun` passes `eligible: !debugTouched`. So a debug run earns no badge (GP-65). Small.
   `docs/contracts.md`, lifetime badges.
-- [ ] **CU-77** **R2 · P-55.** The director says when a night is over: `dw-game` `'night-cleared'` `{ day, kind, runId }`
+- [x] **CU-77** **R2 · P-55.** The director says when a night is over: `dw-game` `'night-cleared'` `{ day, kind, runId }`
   at dawn, once a night (`kind`: plain, blood-moon, guardian, fog, siege, colossus). The badges' fact (GP-65);
   small. `docs/contracts.md`, lifetime badges.
   Moved from Grokbot (was GB-97) on 2026-09-29 to spread his load: event plumbing is Cursor's.
-- [ ] **CU-63** **R2 · P-102.** Co-op groundwork (D-58): the players list. `players = [localPlayer]`, `nearestPlayer`,
+- [x] **CU-63** **R2 · P-102.** Co-op groundwork (D-58): the players list. `players = [localPlayer]`, `nearestPlayer`,
   and every game-logic read of `player.position` moved onto them; the local view and his own movement stay. The
   game plays exactly the same; `tools/check-players.mjs` fails if the direct reads grow; `TT.addDummyPlayer()` for
   tests. After CL-87. Details: `docs/roadmap.md` P-102.
-- [ ] **CU-51** **R2 · P-13.** R2 measured: nightsim medians for the new shape, bench fps with 48 and 8 reacting.
+- [x] **CU-51** **R2 · P-13.** R2 measured: nightsim medians for the new shape, bench fps with 48 and 8 reacting.
   After GB-73; after GB-66. Details: `docs/roadmap.md` P-13.
 
 #### R3 · The day feeds the night
 
-- [ ] **CU-68** **R3 · P-127.** Suppressors in the kiosk (D-65): an upgrade per gun (the akimbo pair gets two), the can
+- [x] **CU-68** **R3 · P-127.** Suppressors in the kiosk (D-65): an upgrade per gun (the akimbo pair gets two), the can
   fitted in view and the muzzle flash moved to its end; no change to the fight yet (GB-105). After CL-95. Details:
   `docs/roadmap.md` P-127.
-- [ ] **CU-69** **R3 · P-128.** Fire selectors (D-65): a key toggles semi and auto on the M4, AK-47 and AA-12 (semi: one
+- [x] **CU-69** **R3 · P-128.** Fire selectors (D-65): a key toggles semi and auto on the M4, AK-47 and AA-12 (semi: one
   shot a click, a tighter group); the pistol's full-auto unlock, hard to hold (climbs and blooms far more than the
   Uzi); the mode on the HUD. Details: `docs/roadmap.md` P-128.
-- [ ] **CU-64** **R3 · P-111.** The hip holster and going unarmed (D-61): the pistol draws from and goes back to the
+- [x] **CU-64** **R3 · P-111.** The hip holster and going unarmed (D-61): the pistol draws from and goes back to the
   holster on his leg; holster everything to go unarmed, +10% on foot (Fleet foot included, +30% at most). After CL-89.
   Details: `docs/roadmap.md` P-111.
-- [ ] **CU-65** **R3 · P-113.** The Armory in the game (D-61): four slots (two primaries, two secondaries) plus the hip
+- [x] **CU-65** **R3 · P-113.** The Armory in the game (D-61): four slots (two primaries, two secondaries) plus the hip
   pistol, storage that keeps guns and magazines for the run, the loadout applied before the day, the weapon wheel
   showing only what he carries; per player (CU-63). After GP-78. Details: `docs/roadmap.md` P-113.
-- [ ] **CU-66** **R3 · P-114.** Magazines (D-61): each magazine tracked with its rounds; R stows it in the dump pouch,
-  a double tap drops it (faster; lost unless picked up before the next dawn or dusk); speed loaders for the revolver;
-  the shotgun and launcher round by round; akimbo; Quick hands (D-59) still counts. After CL-89. Details:
-  `docs/roadmap.md` P-114.
-- [ ] **CU-67** **R3 · P-121.** The M240B and mortar ammo (D-63): the 240 in the build menu beside the mortar, on its
+- [x] **CU-67** **R3 · P-121.** The M240B and mortar ammo (D-63): the 240 in the build menu beside the mortar, on its
   tripod only, belt-fed, 1,000 rounds, carried and placed like the mortar and fired with the marine on it; each comes
   with half its maximum (the mortar's 60 mm reserve cap already exists). Details: `docs/roadmap.md` P-121.
-- [ ] **CU-62** **R3 · P-105.** Skills by doing (D-59): the plumbing. Perks out of the code (`PERKS`, `perkLevels`,
-  `perkCost`, the shop rows; 18 call sites); a per-player `skills` store with `addSkillXp(player, key, n)` and
-  `skillLvl`, reset in `resetGame`; `dmgMult`, `reloadMult`, `speedMult`, `cashMult`, `maxGrenades` and the blast
-  radius read skills; a `skill-up` event; t25 and the perk tests re-based. After CL-88 and CU-63. Details:
-  `docs/roadmap.md` P-105.
-- [ ] **CU-58** **R3 · P-34.** `spawnSupplyDrop({x, z, contents, source})` and a `supply-drop` event; the airdrop cue
-  plays. Moved from Grokbot (integration plumbing). Details: `docs/roadmap.md` P-34.
-- [ ] **CU-52** **R3 · P-44.** Vault your own barricades: Space beside a sandbag, wire, barricade or open window hops
+- [x] **CU-52** **R3 · P-44.** Vault your own barricades: Space beside a sandbag, wire, barricade or open window hops
   you over in 0.5 s. Player physics is Cursor's (lead call). Details: `docs/roadmap.md` P-44.
 
 #### R4 · The way out
 
-- [ ] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
+- [>] **CU-70** **R4 · P-131.** The dressing room (D-66): the CIF grows into it, with a 3D view of the marine he can
   turn 360; each item's camo and options; saved to the profile. After CL-96, CL-94. Details: `docs/roadmap.md` P-131.
 - [ ] **CU-53** **R4 · P-78.** A full run timed headless: `tools/nightsim.mjs --full`, the boat called on 20. After
   GB-86. Details: `docs/roadmap.md` P-78.
@@ -366,75 +365,83 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 #### R2 · The night has a shape
 
-- [ ] **GB-71** **R2 · P-16.** Test nights: early pushes run straight on, then one real breather with the cave eyes
+- [x] **GB-71** **R2 · P-16.** Test nights: early pushes run straight on, then one real breather with the cave eyes
   dimmed; a `wave-push` event. After CU-48. Details: `docs/roadmap.md` P-16.
-- [ ] **GB-72** **R2 · P-17.** The last push surges from the caves and the treeline together, so the night ends harder
+- [x] **GB-72** **R2 · P-17.** The last push surges from the caves and the treeline together, so the night ends harder
   and sooner. After GB-71; after GB-59. Details: `docs/roadmap.md` P-17.
-- [ ] **GB-73** **R2 · P-18.** Headline packs as set pieces: six brutes side by side, the demon and bomber packs;
+- [x] **GB-73** **R2 · P-18.** Headline packs as set pieces: six brutes side by side, the demon and bomber packs;
   night 19's short breathers made true. After GB-72. Details: `docs/roadmap.md` P-18.
-- [ ] **GB-78** **R2 · P-32.** The first guardian catch of a run can be escaped: five E presses, 50 HP and the
+- [x] **GB-78** **R2 · P-32.** The first guardian catch of a run can be escaped: five E presses, 50 HP and the
   unbanked skulls (D-46). After GB-67. Details: `docs/roadmap.md` P-32.
-- [ ] **GB-75** **R2 · P-26.** Brutes wear plates: bullets and blades cut to 0.55, fire and blasts full (the unused
+- [x] **GB-75** **R2 · P-26.** Brutes wear plates: bullets and blades cut to 0.55, fire and blasts full (the unused
   `armored` flag). Matches the brute's reaction preset. Details: `docs/roadmap.md` P-26.
-- [ ] **GB-76** **R2 · P-27.** The screamer's howl pulls up to 3 far zombies up out of the ground near it, even at the
+- [x] **GB-76** **R2 · P-27.** The screamer's howl pulls up to 3 far zombies up out of the ground near it, even at the
   cap. After GB-59. Details: `docs/roadmap.md` P-27.
-- [ ] **GB-77** **R2 · P-28.** A bomber shot inside the crowd: the chain feeds your streak and pays in full. Details:
+- [x] **GB-77** **R2 · P-28.** A bomber shot inside the crowd: the chain feeds your streak and pays in full. Details:
   `docs/roadmap.md` P-28.
-- [ ] **GB-96** **R2 · P-100.** The shotgun against spiders on a wall: a small spider-only edge, measured before and
+- [x] **GB-96** **R2 · P-100.** The shotgun against spiders on a wall: a small spider-only edge, measured before and
   after (Grokbot's call under Jerry's "use your best judgement"). After GB-59. Details: `docs/roadmap.md` P-100.
-- [ ] **GB-99** **R2 · P-20.** The brute's head line: a head-centre shot sits at 0.78-0.81 of its `hitH` (2.05·s), on
+- [x] **GB-99** **R2 · P-20.** The brute's head line: a head-centre shot sits at 0.78-0.81 of its `hitH` (2.05·s), on
   the headshot line, so it only sometimes counts. Keep `hitH` (the body target stays the size it is); give each
   zombie type its own head fraction, set from where its head really is (brute about 0.74, so a head-centre shot
   is a headshot with a margin). Jerry can veto if he wants the brute's head harder. Small.
-- [ ] **GB-103** **R2 · P-117.** The horde fights the defences (D-62): a turret firing on a zombie draws it and its
+- [x] **GB-103** **R2 · P-117.** The horde fights the defences (D-62): a turret firing on a zombie draws it and its
   pack; brutes, demons and a share of each push go straight for the defences; builds take harder hits. nightsim with
   turrets before and after. Details: `docs/roadmap.md` P-117.
-- [ ] **GB-100** **R2 · P-103.** Co-op groundwork (D-58): the zombies and the director go for the nearest living
+- [x] **GB-100** **R2 · P-103.** Co-op groundwork (D-58): the zombies and the director go for the nearest living
   player in `players`: the flow field from every player, attacks on whoever they reach, the guardian's progress to
   the nearest. One player plays the same. After CU-63. Details: `docs/roadmap.md` P-103.
+- [x] **GB-112** **R2 · P-32.** The guardian's catch can happen again after an escape (today `kickFreeUsed` stops it
+  after the first). Each escape in a run takes more E presses: 5, then 8, then 12, then 16. The kick-free cost
+  (skulls, HP) as now each time. A test: a second grab after an escape, and the presses rising. Jerry, 2026-09-29.
 
 #### R3 · The day feeds the night
 
-- [ ] **GB-104** **R3 · P-119.** Every kind has a weakness, in combat (D-62): CL-91's table in `damageZombie`, with
+- [x] **GB-104** **R3 · P-119.** Every kind has a weakness, in combat (D-62): CL-91's table in `damageZombie`, with
   GB-75's plates as its first row. nightsim medians before and after. After CL-91. Details: `docs/roadmap.md` P-119.
-- [ ] **GB-102** **R3 · P-109.** Rain puts fires out (D-60): burning zombies burn out faster and stop spreading in the
+  Import the table from ChatGPT's `game/weaknesses.js` (GP-80); don't copy the numbers.
+- [x] **GB-111** **R3 · P-120.** `dw-game` `enemy-first-seen { kind }`, once a run per kind, the first time one comes
+  within 60 m of a player (`nearestPlayer`, D-58). For GP-80's first-use cards. A test: one event per kind, none twice.
+  Small.
+- [x] **GB-102** **R3 · P-109.** Rain puts fires out (D-60): burning zombies burn out faster and stop spreading in the
   wet; campfires sputter to embers and come back; no cigarette in the rain, a lit one goes out, no ember from a dropped
   butt (GP-74's idle, `studio/marine-idle.js`). nightsim on a rainy night before and after. Details:
   `docs/roadmap.md` P-109.
-- [ ] **GB-101** **R3 · P-106.** Skills by doing (D-59): the combat counters. Headshot and one-shot kills; reloads
+- [x] **GB-101** **R3 · P-106.** Skills by doing (D-59): the combat counters. Headshot and one-shot kills; reloads
   under pressure; running while chased and dodge rolls within 1.5 m of an attack (with GP-75's roll); explosive
-  multi-kills (grenades, the launcher, drums); dawns survived and comebacks from under 25% HP. Each feeds CU-62's
-  `addSkillXp`. After CU-62. Details: `docs/roadmap.md` P-106.
-- [ ] **GB-81** **R3 · P-38.** A crate pick brings the plane over the mast; it lands with a small guard pack; the
-  random timer stops once the relay is up (D-49). After GP-55; after CU-58. Details: `docs/roadmap.md` P-38.
-- [ ] **GB-82** **R3 · P-39.** The Lights out dare: the HQ lamp stays dark tonight, kills pay 25% more. After GP-55.
+  multi-kills (grenades, the launcher, drums); dawns survived and comebacks from under 25% HP. Each feeds GP-87's
+  `addSkillXp`. After GP-87. Details: `docs/roadmap.md` P-106.
+- [x] **GB-81** **R3 · P-38.** A crate pick brings the plane over the mast; it lands with a small guard pack; the
+  random timer stops once the relay is up (D-49). After GP-55; after GP-88. Details: `docs/roadmap.md` P-38.
+- [x] **GB-82** **R3 · P-39.** The Lights out dare: the HQ lamp stays dark tonight, kills pay 25% more. After GP-55.
   Details: `docs/roadmap.md` P-39.
-- [ ] **GB-83** **R3 · P-45.** With the relay up, one crate falls in the breather toward tonight's caves: run for it
+- [x] **GB-83** **R3 · P-45.** With the relay up, one crate falls in the breather toward tonight's caves: run for it
   or hold. After GB-81; after GB-71. Details: `docs/roadmap.md` P-45.
-- [ ] **GB-84** **R3 · P-48.** One mod per gun: the extended mag (slower reload) or a heavy barrel (steadier, slower
+- [x] **GB-84** **R3 · P-48.** One mod per gun: the extended mag (slower reload) or a heavy barrel (steadier, slower
   swap). After GP-60. Details: `docs/roadmap.md` P-48.
 
 #### R4 · The way out
 
-- [ ] **GB-85** **R4 · P-50.** From night 20, with the relay up, the boat can be called; not calling it is "stay"
+- [x] **GB-85** **R4 · P-50.** From night 20, with the relay up, the boat can be called; not calling it is "stay"
   (D-45). After GP-54; after GB-72. Details: `docs/roadmap.md` P-50.
-- [ ] **GB-86** **R4 · P-53.** Board the boat: hold E on the deck; a win, with no death-log entry; a "hot extraction"
+- [x] **GB-86** **R4 · P-53.** Board the boat: hold E on the deck; a win, with no death-log entry; a "hot extraction"
   before the last kill. After CL-73. Details: `docs/roadmap.md` P-53.
 
 #### R5 · Named nights and bigger systems
 
-- [ ] **GB-105** **R5 · P-129.** Suppressor balance (D-65): first the hearing rule (a shot draws zombies within a
+- [x] **GB-105** **R5 · P-129.** Suppressor balance (D-65): first the hearing rule (a shot draws zombies within a
   radius); then suppressed fire is heard much closer and hits a little softer. nightsim before and after. After
   CU-68. Details: `docs/roadmap.md` P-129.
-- [ ] **GB-87** **R5 · P-56.** Night mods: Fog Night on 14, named the prep before (D-54). Details: `docs/roadmap.md`
+- [x] **GB-87** **R5 · P-56.** Night mods: Fog Night on 14, named the prep before (D-54). Details: `docs/roadmap.md`
   P-56.
-- [ ] **GB-88** **R5 · P-59.** The siege on 18 made real: brutes and soldiers go for your walls. Details:
+- [x] **GB-88** **R5 · P-59.** The siege on 18 made real: brutes and soldiers go for your walls. Details:
   `docs/roadmap.md` P-59.
-- [ ] **GB-89** **R5 · P-61.** A colossus walks a trail by day from night 7: loot around it or bring it down for a big
+- [x] **GB-89** **R5 · P-61.** A colossus walks a trail by day from night 7: loot around it or bring it down for a big
   payout. Details: `docs/roadmap.md` P-61.
-- [ ] **GB-90** **R5 · P-64.** Survivor bounties: a camp from night 3 can hold one; clear the guards and press E
-  (D-47). After CL-75. Details: `docs/roadmap.md` P-64.
-- [ ] **GB-91** **R5 · P-65.** Survivors' help: the medic's regen to 50%, the trapper's cheaper repairs, the ranger's
+- [x] **GB-90** **R5 · P-64.** Survivor bounties: a camp from night 3 can hold one; clear the guards and press E
+  (D-47). The figure is CL-75's; until it lands, a bare `TT.makeMarine()` with no gun stands in (Claude, 2026-09-30).
+  Details: `docs/roadmap.md` P-64.
+- [x] **GB-91** **R5 · P-65.** Survivors' help: the medic's regen to 50%, the trapper's cheaper repairs, the ranger's
   turret. After GB-90. Details: `docs/roadmap.md` P-65.
 - [ ] **GB-92** **R5 · P-97.** The secret's fight: on a silenced night the guardian comes out of the chalk cave on its
   rig and can die there. After GP-70; after CL-78. Details: `docs/roadmap.md` P-97.
@@ -453,56 +460,76 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 - [ ] **GB-94** **R6 · P-79.** Balance from medians over 20 nights: skull value and packs, never horde size. After
   CU-51. Details: `docs/roadmap.md` P-79.
-- [ ] **GB-95** **R6 · P-80.** The blades as D-51 says: measured, then the machete if melee is still over 40%. After
+- [x] **GB-95** **R6 · P-80.** The blades as D-51 says: measured, then the machete if melee is still over 40%. After
   CU-48. Details: `docs/roadmap.md` P-80.
 
 ### ChatGPT — what the player reads and decides (GPT-6 Sol High)
 
 #### R2 · The night has a shape
 
-- [ ] **GP-85** **R2 · P-148.** A sound for the skulls the last kill pulls into the bag (D-68, Jerry on Q-3): one
+- [x] **GP-85** **R2 · P-148.** A sound for the skulls the last kill pulls into the bag (D-68, Jerry on Q-3): one
   collect chime as they land (not one per skull), with the count on screen. Details: `docs/roadmap.md` P-148.
   Moved from Cursor (was CU-76) on 2026-09-29: audio cues and the HUD line are ChatGPT's. No `index.html` combat edits: hook the pull through the existing `skull` events, or ask Grokbot for one with `crew.mjs request`.
-- [ ] **GP-53** **R2 · P-33.** "Kick free! (E)" during the haul, then "It took your skulls.". After GB-78. Details:
+- [x] **GP-86** **R2 · P-147.** The flashlight's words (ChatGPT asked; Cursor's CU-75 request): the two lines that
+  still sell the gun light say it comes with every gun, in `ui/strings.js`. After CU-75. Small.
+- [x] **GP-53** **R2 · P-33.** "Kick free! (E)" during the haul, then "It took your skulls.". After GB-78. Details:
   `docs/roadmap.md` P-33.
-- [ ] **GP-50** **R2 · P-29.** The scouting report names the counter: plates stop bullets, kill the screamer first.
+- [x] **GP-50** **R2 · P-29.** The scouting report names the counter: plates stop bullets, kill the screamer first.
   After GB-75; after GB-76; after GB-77. Details: `docs/roadmap.md` P-29.
 
 #### R3 · The day feeds the night
 
-- [ ] **GP-78** **R3 · P-112.** The Armory window at the HQ (D-61): four slots to fill before the day, the stored guns
+- [x] **GP-89** **R3 · P-114.** Magazines (D-61): each magazine tracked with its rounds; R stows it in the dump pouch,
+  a double tap drops it (faster; lost unless picked up before the next dawn or dusk); speed loaders for the revolver;
+  the shotgun and launcher round by round; akimbo; Quick hands (D-59) still counts. After CL-89. Details:
+  `docs/roadmap.md` P-114.
+  Moved from Cursor (was CU-66) on 2026-09-29 to keep ChatGPT busy in R3: GP-79 (the magazine HUD) follows it.
+- [x] **GP-87** **R3 · P-105.** Skills by doing (D-59): the plumbing. Perks out of the code (`PERKS`, `perkLevels`,
+  `perkCost`, the shop rows; 18 call sites); a per-player `skills` store with `addSkillXp(player, key, n)` and
+  `skillLvl`, reset in `resetGame`; `dmgMult`, `reloadMult`, `speedMult`, `cashMult`, `maxGrenades` and the blast
+  radius read skills; a `skill-up` event; t25 and the perk tests re-based. After CL-88 and CU-63. Details:
+  `docs/roadmap.md` P-105.
+  Moved from Cursor (was CU-62) on 2026-09-29 to spread the load: ChatGPT knows the perks, the kiosk and the economy.
+- [x] **GP-88** **R3 · P-34.** `spawnSupplyDrop({x, z, contents, source})` and a `supply-drop` event; the airdrop cue
+  plays. Moved from Grokbot (integration plumbing). Details: `docs/roadmap.md` P-34.
+  Moved from Cursor (was CU-58) on 2026-09-29; GP-56 follows it.
+- [x] **GP-78** **R3 · P-112.** The Armory window at the HQ (D-61): four slots to fill before the day, the stored guns
   and magazines, a pure `game/armory.js` with unit tests. After CL-89. Details: `docs/roadmap.md` P-112.
-- [ ] **GP-79** **R3 · P-115.** Magazines on the HUD (D-61): an icon per magazine showing how full it is; "spare"
-  becomes "mags", "shells" or "rounds" by gun. After CU-66. Details: `docs/roadmap.md` P-115.
-- [ ] **GP-80** **R3 · P-120.** The counters in words (D-62): the scouting report and first-use cards name each kind's
-  weakness from CL-91's table. After CL-91. Details: `docs/roadmap.md` P-120.
-- [ ] **GP-76** **R3 · P-107.** Skills by doing (D-59): the kiosk loses the Perks tab; a skills panel (six rows, rank
+- [x] **GP-79** **R3 · P-115.** Magazines on the HUD (D-61): an icon per magazine showing how full it is; "spare"
+  becomes "mags", "shells" or "rounds" by gun. After GP-89. Details: `docs/roadmap.md` P-115.
+- [x] **GP-80** **R3 · P-120.** The counters in words (D-62). First `game/weaknesses.js`: `WEAKNESS` and `COUNTER` from
+  `docs/weaknesses.md` as a pure, unit-tested module (GB-104 imports it). Then the scouting report names each planned
+  kind's counter, and a first-use card per kind listens for GB-111's `enemy-first-seen`. After CL-91. Details:
+  `docs/roadmap.md` P-120.
+- [x] **GP-76** **R3 · P-107.** Skills by doing (D-59): the kiosk loses the Perks tab; a skills panel (six rows, rank
   and progress) in the pause menu and on the death card; a "Fleet foot · rank 2" toast on `skill-up`; the strings,
-  the streak boosts' new names, `ui/strings.test.mjs`. After CU-62. Details: `docs/roadmap.md` P-107.
-- [ ] **GP-77** **R3 · P-108.** The economy re-based without perks (D-59): the GP-41 table redone with no perk
+  the streak boosts' new names, `ui/strings.test.mjs`. After GP-87. Details: `docs/roadmap.md` P-107.
+- [x] **GP-77** **R3 · P-108.** The economy re-based without perks (D-59): the GP-41 table redone with no perk
   spending, skull values or new sinks adjusted so Cash still matters on nights 10-20; `ui/economy*.test.mjs`. Before
   P-46 and P-47. After CL-88. Details: `docs/roadmap.md` P-108.
-- [ ] **GP-56** **R3 · P-35.** Drop news as a small notice from strings, not a hard-coded banner. After CU-58.
+- [x] **GP-56** **R3 · P-35.** Drop news as a small notice from strings, not a hard-coded banner. After GP-88.
   Details: `docs/roadmap.md` P-35.
-- [ ] **GP-57** **R3 · P-40.** The dawn banner says what the dare earned. After GB-82. Details: `docs/roadmap.md`
+- [x] **GP-57** **R3 · P-40.** The dawn banner says what the dare earned. After GB-82. Details: `docs/roadmap.md`
   P-40.
-- [ ] **GP-60** **R3 · P-46.** Fixed equipment prices; guns stocked by act (D-48); the economy model re-run. After
+- [x] **GP-60** **R3 · P-46.** Fixed equipment prices; guns stocked by act (D-48); the economy model re-run. After
   GB-61; after GB-81. Details: `docs/roadmap.md` P-46.
-- [ ] **GP-61** **R3 · P-47.** "Arrives night N" on unstocked guns; "New at the kiosk: AA-12" at dawn. After GP-60.
+- [x] **GP-61** **R3 · P-47.** "Arrives night N" on unstocked guns; "New at the kiosk: AA-12" at dawn. After GP-60.
   Details: `docs/roadmap.md` P-47.
-- [ ] **GP-62** **R3 · P-49.** Both mods on the Upgrades tab, the fitted one marked, a free switch. After GB-84.
+- [x] **GP-62** **R3 · P-49.** Both mods on the Upgrades tab, the fitted one marked, a free switch. After GB-84.
   Details: `docs/roadmap.md` P-49.
 
 #### R4 · The way out
 
-- [ ] **GP-82** **R4 · P-133.** Camo unlocks (D-66): four base camos, the rest earned per CL-96's plan, a toast on
+- [x] **GP-82** **R4 · P-133.** Camo unlocks (D-66): four base camos, the rest earned per CL-96's plan, a toast on
   each unlock, locked items shown in the dressing room, the "dapper dan" console command unlocks everything. After
   CL-96. Details: `docs/roadmap.md` P-133.
-- [ ] **GP-63** **R4 · P-51.** "Call the boat" beside "Sound the alarm"; the dock blinks on the minimap once it's due.
+- [x] **GP-63** **R4 · P-51.** "Call the boat" beside "Sound the alarm"; the dock blinks on the minimap once it's due.
   After GB-85. Details: `docs/roadmap.md` P-51.
-- [ ] **GP-64** **R4 · P-54.** The victory screen: the closing line, nights, kills, headshots, best streak, skulls
+- [x] **GP-64** **R4 · P-54.** The victory screen: the closing line, nights, kills, headshots, best streak, skulls
   banked, survivors aboard. After GB-86; after GP-52. Details: `docs/roadmap.md` P-54.
-- [ ] **GP-66** **R4 · P-86.** The relay's twenty morning lines, the survivors' lines and the props' notes in strings,
+- [x] **GP-90** **R4 · P-46.** The economy model re-run with GB-113's skull cut (x0.67 from night 11) with the heavy
+  barrel and suppressor sinks (Grokbot's GB-113 is done): `ui/economy-balance.mjs` and its report. Details: `docs/roadmap.md` P-46.
+- [x] **GP-66** **R4 · P-86.** The relay's twenty morning lines, the survivors' lines and the props' notes in strings,
   on the board. After CL-74. Details: `docs/roadmap.md` P-86.
 
 #### R5 · Named nights and bigger systems
@@ -510,11 +537,14 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 - [ ] **GP-81** **R5 · P-124.** Two new deaths on the tombstone (D-63): `lightning` and `rabbit` in the death catalogue,
   their lines and their unlock; the names and pickup lines for the boots and the grenade; a badge for killing the
   rabbit. After CL-92, CL-93. Details: `docs/roadmap.md` P-124.
-- [ ] **GP-67** **R5 · P-60.** The board warns: "Fog Night", "The siege · they'll go for your walls". After GB-88.
+- [x] **GP-67** **R5 · P-60.** The board warns: "Fog Night", "The siege · they'll go for your walls". After GB-88.
   Details: `docs/roadmap.md` P-60.
-- [ ] **GP-68** **R5 · P-62.** "A colossus is walking the east trail" on the board; COLOSSUS DOWN from strings. After
+- [>] **GP-68** **R5 · P-62.** "A colossus is walking the east trail" on the board; COLOSSUS DOWN from strings. After
   GB-89. Details: `docs/roadmap.md` P-62.
-- [ ] **GP-69** **R5 · P-66.** Survivors on the board ("Someone lit a fire at the trapper's camp") and on the victory
+- [x] **GP-91** **R5 · P-86.** The props' notes as cards (docs/story.md §4): E at each of the ten sites reads its note
+  from strings, once, as a short card. Where E already does something there (an objective's claim, the dock, the
+  tower, the HQ), the note shows with that action instead of a second prompt. After GP-66. Details: `docs/roadmap.md` P-86.
+- [x] **GP-69** **R5 · P-66.** Survivors on the board ("Someone lit a fire at the trapper's camp") and on the victory
   screen. After GB-90. Details: `docs/roadmap.md` P-66.
 - [ ] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
   ending, the rune gun at the dock. After CL-79. Details: `docs/roadmap.md` P-96.
@@ -529,23 +559,23 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 - [!] **GP-72** **R6 · P-82.** One voice: every line read once, the same words for the same things. Details:
   `docs/roadmap.md` P-82.
-- [ ] **GP-73** **R6 · P-83.** Credits: Jerry, the crew, Quaternius (CC0), the music. Details: `docs/roadmap.md` P-83.
+- [x] **GP-73** **R6 · P-83.** Credits: Jerry, the crew, Quaternius (CC0), the music. Details: `docs/roadmap.md` P-83.
 
 ### Antigravity — the crew's eyes (Gemini 3.1 Pro High)
 
 #### R2 · The night has a shape
 
-- [ ] **AG-30** **R2 · first tonight.** Eyes on what landed while the crew was halted, on Jerry's GPU: the marine's bored
+- [x] **AG-30** **R2 · first tonight.** Eyes on what landed while the crew was halted, on Jerry's GPU: the marine's bored
   idle and cigarette (GP-74), the roll in all eight directions (GP-75), the kiosk hiding upgrades (CU-60), the CIF window
   with all 49 camos and the "Plain colours" heading (CU-61, Claude), and the horde under the map (type `swarm`, run over
   the hills shooting for 5 minutes: no zombie sinks). Shots in `qa/`, one report. Then answer the shot requests waiting
   for you in `handoffs/requests.md`, and take shots for each R2 change as it lands.
-- [ ] **AG-22** **R2.** R2 on the GPU: a fresh run to night 5, nights 10 and 13 from the debug start; the surge, the
+- [x] **AG-22** **R2.** R2 on the GPU: a fresh run to night 5, nights 10 and 13 from the debug start; the surge, the
   music, fps. After GB-73.
 
 #### R3 · The day feeds the night
 
-- [ ] **AG-23** **R3.** R3 on the GPU: days 1-10 fresh; the relay, the calls, caches, drums, the vault, the kiosk by
+- [x] **AG-23** **R3.** R3 on the GPU: days 1-10 fresh; the relay, the calls, caches, drums, the vault, the kiosk by
   act. After GP-61.
 
 #### R4 · The way out
@@ -571,21 +601,21 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
 
 #### R2 · The night has a shape
 
-- [ ] **CL-87** **R2 · P-101.** Co-op groundwork (D-58): `docs/coop.md`, the contract for "a player" (what each one
+- [x] **CL-87** **R2 · P-101.** Co-op groundwork (D-58): `docs/coop.md`, the contract for "a player" (what each one
   owns, what is shared), the players-list API CU-63 builds, the three kinds of `player.position` read, and a first
   sketch of the host's messages for R7. Before CU-63. Details: `docs/roadmap.md` P-101.
-- [ ] **CL-91** **R2 · P-118.** Every kind has a weakness (D-62): the table, each zombie kind by damage type, with its
+- [x] **CL-91** **R2 · P-118.** Every kind has a weakness (D-62): the table, each zombie kind by damage type, with its
   counter named; P-26's plates as its first row. Before GB-104 and GP-80. Details: `docs/roadmap.md` P-118.
-- [ ] **CL-70** **R2 · P-20.** Night 19 sounds bigger than night 2: a gain that climbs night by night. Details:
+- [x] **CL-70** **R2 · P-20.** Night 19 sounds bigger than night 2: a gain that climbs night by night. Details:
   `docs/roadmap.md` P-20.
-- [ ] **CL-71** **R2 · P-21.** Late Ember and Guardian tiers, so nights 16 and 18 stop reusing nights 4 and 6. After
+- [x] **CL-71** **R2 · P-21.** Late Ember and Guardian tiers, so nights 16 and 18 stop reusing nights 4 and 6. After
   CL-70. Details: `docs/roadmap.md` P-21.
-- [ ] **CL-102** **R2 · P-20.** The zombies keep their own animation pose like the marine now does (GB-67 follow-up):
+- [x] **CL-102** **R2 · P-20.** The zombies keep their own animation pose like the marine now does (GB-67 follow-up):
   `updateZombies` writes partial Euler angles, so a reacting zombie reads some of its written pose back as its
   animation; a per-body snapshot before `apply()`, put back at the top of the update. Probably feeds t91's
   back-shot pitch. Small.
   Moved from Grokbot (was GB-98) on 2026-09-29 to spread his load: the reaction engine is Claude's (D-42).
-- [ ] **CL-62** **R2.** The rest of the guardian through the studio: the chase, the walk-out and the throw as scenes
+- [x] **CL-62** **R2.** The rest of the guardian through the studio: the chase, the walk-out and the throw as scenes
   and clips, until Jerry's notes say good. Carried over. After CL-64 (done).
   Jerry (2026-09-29, Q-2): "looking better but still needs a lot of work". His notes (review/guardian-grab-drag v3,
   guardian-throw-out v1): the run-out and grab are close; drag him in faster; no blood trail; the marine shakes his
@@ -593,39 +623,48 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   yet); the toss out looks poor; the cave needs real depth: he emerges from the dark, partly hidden, never pops in or
   out; more fluid motion throughout; a low growl. The toss: a lazy underhand softball pitch, as if the marine isn't
   worth his time.
-- [ ] **CL-69** **R2 · P-19.** The score follows the night's shape: a break in the breather, bridge and climax at the
+- [x] **CL-104** **R2.** The guardian, Jerry's second pass: it comes out of the dark faster and smoothly; the toss
+  with one hand; the marine held in its hand (hand-attached, his hips in its grip), never floating beside it; in the
+  kick-free the marine struggles, braces his feet and pulls against the drag while the guardian tugs back. Through
+  the studio review folders (guardian-grab-drag, guardian-throw-out) and in the game.
+- [x] **CL-105** **R2.** The burial detail always wears woodland MARPAT, never the player's camo. Small.
+- [x] **CL-69** **R2 · P-19.** The score follows the night's shape: a break in the breather, bridge and climax at the
   last push. After GB-71. Details: `docs/roadmap.md` P-19.
 
 #### R3 · The day feeds the night
 
-- [ ] **CL-94** **R3 · P-125.** The fidelity pass on the marine and his kit (D-64): less bulky, a touch more
+- [x] **CL-94** **R3 · P-125.** The fidelity pass on the marine and his kit (D-64): less bulky, a touch more
   stylized; ear defenders only with the helmet; the facemask coyote brown for good; built so every item can be worn,
   swapped and coloured on its own (CU-70). Through the studio review folders. Details: `docs/roadmap.md` P-125.
-- [ ] **CL-95** **R3 · P-126.** The fidelity pass on the guns, and six suppressors (D-64, D-65): the M4, AK-47, pistol,
+- [x] **CL-95** **R3 · P-126.** The fidelity pass on the guns, and six suppressors (D-64, D-65): the M4, AK-47, pistol,
   sniper, Uzi and shotgun each get a can that belongs on it. Details: `docs/roadmap.md` P-126.
-- [ ] **CL-89** **R3 · P-110.** The loadout spec (D-61): `docs/loadout.md`, the slots and which gun goes where, akimbo,
+- [x] **CL-89** **R3 · P-110.** The loadout spec (D-61): `docs/loadout.md`, the slots and which gun goes where, akimbo,
   the Armory's storage, the magazine model, the holster key and the unarmed speed. First of the D-61 tasks. Details:
   `docs/roadmap.md` P-110.
-- [ ] **CL-90** **R3 · P-116.** What he carries shows on him (D-61): primaries slung on his back, cross-draw holsters,
+- [x] **CL-103** **R3 · P-111.** The Armory's window at the HQ (D-61, `docs/loadout.md` section 2). Jerry: the CIF moves
+  to the wall opposite the kiosk and skull window, and the Armory window goes beside it there. The prop, a prep-only E
+  prompt, and the hook that opens GP-78's panel. After GP-78.
+- [>] **CL-90** **R3 · P-116.** What he carries shows on him (D-61): primaries slung on his back, cross-draw holsters,
   the hip pistol, mag pouches, grenades, a shell bandolier, a 40 mm belt, the backpack; 3-4 stages each; the draw and
   holster moves through the studio. After CU-65. Details: `docs/roadmap.md` P-116.
-- [ ] **CL-88** **R3 · P-104.** Skills by doing (D-59): `docs/skills.md`, the spec: what counts for each of the six,
+- [x] **CL-88** **R3 · P-104.** Skills by doing (D-59): `docs/skills.md`, the spec: what counts for each of the six,
   the rank thresholds, the effects and caps, the reset on a fresh start, one set per player (D-58), and the new names
   for the streak's boosts. First of the D-59 tasks. Details: `docs/roadmap.md` P-104.
-- [ ] **CL-72** **R3 · P-43.** Fuel drums back at the guarded wrecks, sheds and the mast: they chain, and they're back
+- [x] **CL-72** **R3 · P-43.** Fuel drums back at the guarded wrecks, sheds and the mast: they chain, and they're back
   each morning. Rule 10 signed off. Details: `docs/roadmap.md` P-43.
 
 #### R4 · The way out
 
-- [ ] **CL-96** **R4 · P-130.** The dressing room spec (D-66): every slot and its options, what takes camo, the four
+- [x] **CL-96** **R4 · P-130.** The dressing room spec (D-66): every slot and its options, what takes camo, the four
   base camos and how the rest are earned (days, streaks, badges), one wardrobe per player (D-58). First of the D-66
   tasks. Details: `docs/roadmap.md` P-130.
-- [ ] **CL-97** **R4 · P-132.** The wardrobe on the rig (D-66): hats (8-point, boonie, ballcap forwards or backwards),
-  gloves on or off, sleeves rolled or down, shorts, boot colours, hair, eyes and skin, camo on the guns. After CL-94.
+- [>] **CL-97** **R4 · P-132.** The wardrobe on the rig (D-66): hats (8-point, boonie, ballcap forwards or backwards),
+  gloves on or off, sleeves rolled or down, shorts, boot colours, hair, eyes and skin, camo on the guns. Eyewear, picked
+  in the CIF (Jerry): aviators, a pit-viper style, a Wayfarer style, and the GWOT ballistic goggles. After CL-94.
   Details: `docs/roadmap.md` P-132.
-- [ ] **CL-73** **R4 · P-52.** The boat comes in: flares at the dock, a horn, a boat with a lamp sliding in during the
+- [x] **CL-73** **R4 · P-52.** The boat comes in: flares at the dock, a horn, a boat with a lamp sliding in during the
   last push. After GB-85. Details: `docs/roadmap.md` P-52.
-- [ ] **CL-74** **R4 · P-86.** Docs/story.md: The Signal's bible (D-44), the relay's twenty lines, the survivors'
+- [x] **CL-74** **R4 · P-86.** Docs/story.md: The Signal's bible (D-44), the relay's twenty lines, the survivors'
   lines, what each place says. Details: `docs/roadmap.md` P-86.
 
 #### R5 · Named nights and bigger systems

@@ -2,6 +2,13 @@
   "note": "Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.",
   "assets": [
     {
+      "asset": "boat",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "demo-drag",
       "owner": "claude",
       "rig": "guardian",
@@ -32,7 +39,7 @@
     {
       "asset": "guardian-grab-drag",
       "owner": "claude",
-      "rig": "guardian",
+      "rig": "marine+guardian",
       "clip": null,
       "reference": null
     },
@@ -58,6 +65,20 @@
       "reference": null
     },
     {
+      "asset": "marine-carry",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-fidelity",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "marine-knocked",
       "owner": "grokbot",
       "rig": "marine",
@@ -75,6 +96,13 @@
       "asset": "motion-zombie-shambler",
       "owner": "grokbot",
       "rig": "zombie",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "suppressors",
+      "owner": "claude",
+      "rig": null,
       "clip": null,
       "reference": null
     },

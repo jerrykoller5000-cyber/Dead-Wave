@@ -1,0 +1,18 @@
+#pauseSkillsView { display:none; text-align:left; }
+#pauseSkillsView.on { display:block; max-height:82vh; overflow:auto; }
+#pause .card.skills-open, #win .card { max-width:540px; width:min(540px, 94vw); }
+.skills-list { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:9px; margin:12px 0 16px; text-align:left; }
+.skill-row { min-width:0; padding:9px 10px; background:#ffffff0a; border:1px solid #cbdcb733; font:12px/1.35 var(--font-hud); color:var(--ink); }
+.skill-row-top { display:flex; justify-content:space-between; gap:8px; }
+.skill-row-top strong { color:var(--accent); }
+.skill-row-top span, .skill-row small { color:var(--ink-dim); }
+.skill-row small { display:block; margin-top:4px; }
+.skill-track { height:4px; margin-top:7px; background:#ffffff25; }
+.skill-track span { display:block; height:100%; background:var(--accent); }
+#win .skills-section { display:block; margin:14px 0 12px; }
+#win .skills-section h3 { color:var(--accent); font:700 12px var(--font-hud); text-transform:uppercase; letter-spacing:.1em; }
+#win .skills-list { max-height:26vh; overflow:auto; }
+#win .card { max-height:88vh; overflow:auto; }
+#skillToast { position:fixed; z-index:110; top:8%; left:50%; transform:translate(-50%, -8px); padding:11px 18px; background:var(--panel-bg-solid); border:1px solid var(--accent); color:var(--accent); font:700 14px var(--font-hud); letter-spacing:.04em; opacity:0; pointer-events:none; transition:opacity .18s, transform .18s; }
+#skillToast.show { opacity:1; transform:translate(-50%, 0); }
+@media(max-width:520px) { .skills-list { grid-template-columns:1fr; gap:5px; } #pauseSkillsView .skills-list { max-height:55vh; overflow:auto; } #win .skills-list { max-height:22vh; } }

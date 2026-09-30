@@ -1,6 +1,6 @@
 import {text} from './strings.js';
 
-const LABELS = new Set(['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','dock'].map(k=>'world.'+k));
+const LABELS = new Set(['ranger','hikers','trapper','campsite','cabin','shed','wreck','tower','graveyard','mast','dock','wanderer'].map(k=>'world.'+k));
 export function createCampNotice() {
  let runId=null, current=null, seen=new Set();
  return {
@@ -13,7 +13,9 @@ export function createCampNotice() {
    if(!bounty&&seen.has('bounty:'+id))return false;
    const receipt=(bounty?'bounty:':'clear:')+id;
    if(seen.has(receipt))return false;
-   seen.add(receipt);current={label:text(bounty?'bounty.done':'poi.cleared',{name:text(event.labelKey),value:event.reward||0}),until:now+2000};return true;
+   seen.add(receipt);
+   const label=text(bounty?'bounty.done':'poi.cleared',{name:text(event.labelKey),value:event.reward||0});
+   current={label,until:now+2000};return true;
   },
   read(now) {if(current&&now>=current.until)current=null;return current?.label||'';}
  };

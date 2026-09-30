@@ -216,7 +216,7 @@ test('the guardian drags a limp marine (CL-67): hung by the ankle at the hand, n
   assert.ok(p.pelvis[2] > 5 && p.pelvis[1] < 0.5 && p.pelvis[2] < p.footL[2], 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(','));
 });
 
-test('the guardian carries and throws the marine (CL-62): held at the chest between both hands, let go at the release, lands and settles', () => {
+test('the guardian carries and throws the marine (CL-62, CL-104): held at the chest in its right hand, let go at the release, lands and settles', () => {
   const sp = createScene(loadScene(JSON.parse(fs.readFileSync(new URL('./scenes/guardian-throw-out.json', import.meta.url), 'utf8')), clipOf));
   const b = sp.actors.marine.body;
   const ev = []; let worstGap = 0, lowest = Infinity, carried = 0, released = null, top = 0, chestAtRelease = null;
@@ -231,12 +231,13 @@ test('the guardian carries and throws the marine (CL-62): held at the chest betw
     for (const v of Object.values(b.points())) lowest = Math.min(lowest, v[1]);
     top = Math.max(top, b.points().pelvis[1]);
   }
-  assert.ok(carried > 120 && worstGap < 0.03, 'the chest got ' + worstGap.toFixed(3) + ' m off the hands while carried (' + carried + ' frames)');
+  assert.ok(carried > 100 && worstGap < 0.03, 'the chest got ' + worstGap.toFixed(3) + ' m off the hand while carried (' + carried + ' frames)');   // CL-104: out faster, so fewer frames carried
   assert.ok(released && ev.includes('released'), ev.join(' '));
-  // Thrown: he leaves the hands going out and up, comes down well beyond where it stood, and settles dead.
+  // Tossed (CL-62, Jerry: a lazy underhand softball pitch, not a hurl): he leaves the hands going out and up,
+  // comes down beyond where it let go of him, and settles dead.
   const p = b.points();
-  assert.ok(p.pelvis[2] > chestAtRelease[2] + 2 && p.pelvis[1] < 0.3, 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(','));
-  assert.ok(top > 3, 'never got up high: ' + top.toFixed(2));
+  assert.ok(p.pelvis[2] > chestAtRelease[2] + 1 && p.pelvis[1] < 0.3, 'hips at ' + p.pelvis.map((v) => v.toFixed(2)).join(',') + ', let go at z ' + chestAtRelease[2].toFixed(2));
+  assert.ok(top > 1.6 && top < 3.2, 'a lob, not a hurl: the hips topped out at ' + top.toFixed(2) + ' m');
   assert.ok(lowest > -0.06, 'a point went ' + lowest.toFixed(3) + ' m under the ground');
   assert.equal(b.state, 'dead');
   assert.ok(ev.includes('settled'), ev.join(' '));

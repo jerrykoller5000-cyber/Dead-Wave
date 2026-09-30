@@ -104,8 +104,11 @@
     ok(c0 < 0.45 && tight / Math.max(1, n6) < 0.25 && cEnd >= 0.45 && gMin > 3, 'a spider on a line that grazes the corner takes one with room (start ' + c0.toFixed(2) + ' m clear, end ' + cEnd.toFixed(2) + ' m; tight ' + Math.round(100 * tight / Math.max(1, n6)) + '% of the time after 3 s; closest ' + gMin.toFixed(1) + ' m)');
     T.clearZombies(); await wait(200);
     // GB-58: his AK, aimed the way the nightsim marine aims, at a zombie (held in place if `hold`).
-    T.addCash(9000); T.buyWeapon('ak');
+    // GP-60 stocks the AK from night 5 and CU-69 issues it on semi: buy it on a stocked day (the day put back
+    // after) and switch it to auto, the way it fired when this was written.
+    T.addCash(9000); { const d0 = T.getDay(); T.setDay(Math.max(d0, 5)); T.buyWeapon('ak'); T.setDay(d0); }
     for (let i = 0; i < 14 && T.getCurrentWeapon() !== 'ak'; i++) T.setWeapon(i);
+    for (let i = 0; i < 2 && T.getCurrentWeapon() === 'ak' && T.toggleFireMode && T.toggleFireMode() !== 'auto'; i++);
     // Rounds leave from his gun. Put here from across the map, the headless rig does not
     // always follow at once: caught in (8), when the (7) spider had been the wave's last kill
     // and the finisher's slow motion was running, his gun was still at the (7) spot with its

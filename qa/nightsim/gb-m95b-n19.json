@@ -1,0 +1,346 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 19,
+   "loadout": "minigun, aa12, machete, armor 90",
+   "planned": 810,
+   "trick": "The gauntlet: three caves and the treeline, short breathers",
+   "signature": "shambler",
+   "botError": "Cannot read properties of null (reading 'position')",
+   "waveTotal": 810,
+   "spawned": 810,
+   "killed": 810,
+   "skullValue": 3008,
+   "firstSpawn": 0.2,
+   "lastSpawn": 752.3,
+   "lastKill": 813.6,
+   "length": 813.4,
+   "pushes": [
+    6.2,
+    98,
+    203.5,
+    333.2,
+    460.7,
+    603.9
+   ],
+   "lulls": [
+    5
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 4,
+    "t": 14.8,
+    "type": "shambler",
+    "d": 154
+   },
+   "crowd": {
+    "n": 1,
+    "t": 757.9
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 785.4,
+   "tail5": 795.8,
+   "tail1": 799.4,
+   "deaths": [],
+   "damage": 76,
+   "damageHp": 27,
+   "hits": 27,
+   "damageBy": {
+    "spider": 76
+   },
+   "knifeSwings": 13,
+   "meleeKills": 15,
+   "meleeShare": 0.019,
+   "crowd5s": 0,
+   "sigPeak": 41,
+   "screamerCalls": 4,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 47,
+     "killed": 1,
+     "w": "minigun",
+     "mag": 256,
+     "rel": false,
+     "hp": 100,
+     "near": 59.1
+    },
+    {
+     "t": 60,
+     "alive": 45,
+     "killed": 42,
+     "w": "minigun",
+     "mag": 182,
+     "rel": false,
+     "hp": 100,
+     "near": 65.8
+    },
+    {
+     "t": 90,
+     "alive": 48,
+     "killed": 58,
+     "w": "minigun",
+     "mag": 147,
+     "rel": false,
+     "hp": 100,
+     "near": 53.8
+    },
+    {
+     "t": 120,
+     "alive": 48,
+     "killed": 95,
+     "w": "minigun",
+     "mag": 112,
+     "rel": false,
+     "hp": 99,
+     "near": 42.9
+    },
+    {
+     "t": 150,
+     "alive": 45,
+     "killed": 123,
+     "w": "minigun",
+     "mag": 76,
+     "rel": false,
+     "hp": 99,
+     "near": 7.9
+    },
+    {
+     "t": 180,
+     "alive": 47,
+     "killed": 153,
+     "w": "minigun",
+     "mag": 64,
+     "rel": false,
+     "hp": 99,
+     "near": 31.7
+    },
+    {
+     "t": 210,
+     "alive": 48,
+     "killed": 190,
+     "w": "minigun",
+     "mag": 6,
+     "rel": false,
+     "hp": 99,
+     "near": 57.2
+    },
+    {
+     "t": 240,
+     "alive": 48,
+     "killed": 215,
+     "w": "minigun",
+     "mag": 195,
+     "rel": false,
+     "hp": 99,
+     "near": 30.8
+    },
+    {
+     "t": 270,
+     "alive": 46,
+     "killed": 248,
+     "w": "minigun",
+     "mag": 180,
+     "rel": false,
+     "hp": 97,
+     "near": 34.6
+    },
+    {
+     "t": 300,
+     "alive": 48,
+     "killed": 274,
+     "w": "minigun",
+     "mag": 104,
+     "rel": false,
+     "hp": 97,
+     "near": 31.9
+    },
+    {
+     "t": 330,
+     "alive": 48,
+     "killed": 308,
+     "w": "minigun",
+     "mag": 25,
+     "rel": false,
+     "hp": 94,
+     "near": 39.9
+    },
+    {
+     "t": 360,
+     "alive": 48,
+     "killed": 340,
+     "w": "minigun",
+     "mag": 214,
+     "rel": false,
+     "hp": 94,
+     "near": 38.8
+    },
+    {
+     "t": 390,
+     "alive": 48,
+     "killed": 372,
+     "w": "minigun",
+     "mag": 86,
+     "rel": false,
+     "hp": 92,
+     "near": 33.8
+    },
+    {
+     "t": 420,
+     "alive": 48,
+     "killed": 406,
+     "w": "minigun",
+     "mag": 97,
+     "rel": false,
+     "hp": 90,
+     "near": 48.8
+    },
+    {
+     "t": 450,
+     "alive": 47,
+     "killed": 436,
+     "w": "minigun",
+     "mag": 54,
+     "rel": false,
+     "hp": 90,
+     "near": 37.1
+    },
+    {
+     "t": 480,
+     "alive": 48,
+     "killed": 464,
+     "w": "minigun",
+     "mag": 9,
+     "rel": false,
+     "hp": 88,
+     "near": 35
+    },
+    {
+     "t": 510,
+     "alive": 48,
+     "killed": 497,
+     "w": "minigun",
+     "mag": 257,
+     "rel": false,
+     "hp": 88,
+     "near": 45.9
+    },
+    {
+     "t": 540,
+     "alive": 48,
+     "killed": 525,
+     "w": "minigun",
+     "mag": 245,
+     "rel": false,
+     "hp": 86,
+     "near": 7.9
+    },
+    {
+     "t": 570,
+     "alive": 48,
+     "killed": 559,
+     "w": "minigun",
+     "mag": 155,
+     "rel": false,
+     "hp": 85,
+     "near": 42.5
+    },
+    {
+     "t": 600,
+     "alive": 48,
+     "killed": 588,
+     "w": "minigun",
+     "mag": 50,
+     "rel": false,
+     "hp": 83,
+     "near": 43.5
+    },
+    {
+     "t": 630,
+     "alive": 47,
+     "killed": 622,
+     "w": "minigun",
+     "mag": 4,
+     "rel": false,
+     "hp": 83,
+     "near": 37.4
+    },
+    {
+     "t": 660,
+     "alive": 48,
+     "killed": 658,
+     "w": "minigun",
+     "mag": 275,
+     "rel": false,
+     "hp": 81,
+     "near": 7.7
+    },
+    {
+     "t": 690,
+     "alive": 48,
+     "killed": 691,
+     "w": "aa12",
+     "mag": 0,
+     "rel": true,
+     "hp": 79,
+     "near": 29.5
+    },
+    {
+     "t": 720,
+     "alive": 48,
+     "killed": 723,
+     "w": "aa12",
+     "mag": 13,
+     "rel": false,
+     "hp": 77,
+     "near": 28.7
+    },
+    {
+     "t": 750,
+     "alive": 48,
+     "killed": 760,
+     "w": "aa12",
+     "mag": 1,
+     "rel": false,
+     "hp": 75,
+     "near": 25.9
+    },
+    {
+     "t": 780,
+     "alive": 16,
+     "killed": 794,
+     "w": "minigun",
+     "mag": 175,
+     "rel": false,
+     "hp": 73,
+     "near": 7.8
+    },
+    {
+     "t": 810,
+     "alive": 1,
+     "killed": 809,
+     "w": "minigun",
+     "mag": 86,
+     "rel": false,
+     "hp": 73,
+     "near": 10.8
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 450,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

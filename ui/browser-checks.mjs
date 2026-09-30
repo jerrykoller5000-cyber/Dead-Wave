@@ -19,7 +19,7 @@ const shots = path.join(root, 'Claude outputs/shots', repairMode ? (process.argv
 fs.mkdirSync(shots, { recursive: true });
 let src = fs.readFileSync(path.join(root,'index.html'),'utf8')
   .replace(/<script type="importmap">[\s\S]*?<\/script>/, `<script type="importmap">{"imports":{"three":"/tools/tests/fakethree.mjs","three/webgpu":"/tools/tests/fakethree.mjs","three/tsl":"/tools/tests/faketsl.mjs","three/addons/":"/tools/tests/addons/"}}</script>`)
-  .replace('window.TT = {', `window.uiProbe={spawnSkullDrop,startPrep,publishPrepState,mapWarnings:uiCaveWarnings,getIntel:()=>fieldIntelOwned,setCash:v=>bank=v,dropPreview:()=>wavePreview=null,getPaused:()=>paused}; window.TT = {`);
+  .replace('window.TT = stampDebugHooks({', `window.uiProbe={spawnSkullDrop,startPrep,publishPrepState,mapWarnings:uiCaveWarnings,getIntel:()=>fieldIntelOwned,setCash:v=>bank=v,dropPreview:()=>wavePreview=null,getPaused:()=>paused,emptyPistol:()=>{setLoadedMagazineRounds(magazineStore,'pistol',0);magazineStore.pistol.spare=[];syncMagazine('pistol');}}; window.TT = stampDebugHooks({`);
 if (repairMode && process.argv.includes('--preview-repair-hook')) {
   assert(src.includes('repairs: [] }'),'preview expects the unwired production adapter');
   src=src.replace("import * as THREE from 'three';", "import * as THREE from 'three';\nimport { createPrepRepairReader } from './ui/prep-repairs.js';")
@@ -88,7 +88,7 @@ try {
     assert.equal(await page.locator('#prepChecklist summary').textContent(),'Prep 0/1');await shot('collapsed');
     await page.evaluate(()=>{uiProbe.spawnSkullDrop(TT.player.position.x,TT.player.position.z,12,'shambler');});
     await page.waitForFunction(()=>TT.getSkullBag().count===1);
-    await page.evaluate(()=>{TT.getAmmo().pistol=0;TT.getReserve()['.45']=0;uiProbe.startPrep();uiProbe.publishPrepState(0,true);});
+    await page.evaluate(()=>{uiProbe.emptyPistol();uiProbe.startPrep();uiProbe.publishPrepState(0,true);});
     await page.waitForFunction(()=>document.querySelector('#prepChecklist summary').textContent==='Prep 0/3');
     await page.locator('#prepChecklist summary').click();await shot('three-pending');
     const bounds=await page.locator('#prepChecklist').boundingBox();assert(bounds.x>=0&&bounds.y>=0);

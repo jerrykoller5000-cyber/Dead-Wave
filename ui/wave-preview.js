@@ -1,6 +1,6 @@
 import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
-import { buildScoutingReport } from './scouting.js';
+import { buildScoutingReport, scoutingSpecialNight } from './scouting.js';
 import { buildBountyBoard } from './bounties.js';
 import { buildRadioCallView } from './radio-call.js';
 
@@ -43,6 +43,8 @@ export function buildBriefing({ preview, day, intelOwned = false } = {}) {
   }
   if (sum !== preview.total) return result;
   result.available = true;
+  const special = scoutingSpecialNight(preview.night);
+  if (special) result.warnings.push(special.warning);
   if (!sum) { result.note = text('wavePreview.empty'); return result; }
   if (day === 1) result.earnings = text('economy.dayOne');
   const all = [...groups.values()].sort((a,b) => b.total - a.total || a.id.localeCompare(b.id));
@@ -67,20 +69,34 @@ export function intelOffer(cash, owned) {
     owned ? {} : affordable ? {price:FIELD_INTEL_PRICE} : {amount:FIELD_INTEL_PRICE - (Number.isFinite(cash) ? Math.max(0,cash) : 0)}) };
 }
 
+export function boatCallView({day,goalNight,phase,extraction,relayReady,alarmActive,disabled,canSoundAlarm}={}) {
+ const goal=validCount(day)&&validCount(goalNight)&&goalNight>0&&day>=goalNight&&phase==='prep';
+ const offered=goal&&extraction==='offered';
+ return { offered, enabled:offered&&!alarmActive&&!disabled&&canSoundAlarm!==false,
+  relayDown:goal&&extraction==null&&relayReady===false };
+}
+
 export function mountBriefing({ doc = document, bus = window } = {}) {
   const send = (type, details = {}) => bus.dispatchEvent(new CustomEvent('dw-game', {detail:{type,...details}}));
   const dialog = doc.createElement('dialog'); dialog.id = 'hqBriefing'; dialog.setAttribute('aria-labelledby','briefingTitle');
   const heading = doc.createElement('h2'); heading.id = 'briefingTitle';
   const content = doc.createElement('div'); content.className = 'briefing-content';
-  const footer = doc.createElement('footer'), alarm = doc.createElement('button'), close = doc.createElement('button');
-  alarm.type = close.type = 'button'; alarm.textContent = text('wavePreview.alarm'); close.textContent = text('common.close');
+  const footer = doc.createElement('footer'), alarm = doc.createElement('button'), boat = doc.createElement('button'), close = doc.createElement('button');
+  alarm.type = boat.type = close.type = 'button'; alarm.textContent = text('wavePreview.alarm'); boat.textContent = text('wavePreview.callBoat'); boat.hidden = true; close.textContent = text('common.close');
   const prep = doc.createElement('section'), prepHeading = doc.createElement('h3'), prepRows = doc.createElement('ul');
   prep.className = 'briefing-prep'; prepRows.className = 'prep-goals'; prep.hidden = true; prep.append(prepHeading,prepRows);
-  footer.append(alarm,close); dialog.append(heading,content,prep,footer); doc.body.append(dialog);
-  let returnFocus = null;
+  footer.append(alarm,boat,close); dialog.append(heading,content,prep,footer); doc.body.append(dialog);
+  let returnFocus = null, currentData = null;
   const line = (parent, tag, value, cls) => { const el=doc.createElement(tag); el.textContent=value; if(cls)el.className=cls; parent.append(el); return el; };
   function render(data) {
+    currentData = data;
     const view = buildBriefing(data); heading.textContent = view.title; content.replaceChildren();
+    if(data.relayStory?.line) {
+      const relay=doc.createElement('section');relay.className='briefing-relay';content.append(relay);
+      line(relay,'h3',text('story.relay.title'));
+      const dispatches = data.relayStory.lines?.length ? data.relayStory.lines : [{ line: data.relayStory.line }];
+      for (const dispatch of dispatches) line(relay,'p',dispatch.line,'relay-story-line');
+    }
     const scouting = view.available ? buildScoutingReport(data) : null;
     if(scouting) {
       const report=doc.createElement('section');report.className='briefing-scouting';content.append(report);
@@ -88,6 +104,10 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       if(scouting.rest)line(report,'p',scouting.rest,'briefing-rest');
       line(report,'p',scouting.caves);line(report,'p',scouting.pushes,'briefing-pushes');
       line(report,'p',scouting.trick,'briefing-trick');line(report,'p',scouting.legend,'briefing-muted');
+      if(scouting.counters.length) {
+        line(report,'h4',text('scouting.counters'));
+        for(const counter of scouting.counters)line(report,'p',`${counter.name} · ${counter.line}`,'briefing-counter');
+      }
     }
     const radio = buildRadioCallView(data.radioCall);
     if (radio) {
@@ -117,6 +137,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       for(const row of bounties.rows) {
         const post=doc.createElement('article');post.className='bounty-post';post.dataset.state=row.state;post.dataset.bounty=row.id;board.append(post);
         line(post,'h4',row.name);line(post,'p',row.guards);line(post,'p',row.reward,'bounty-reward');
+        if(row.survivor)line(post,'p',row.survivor,'briefing-warning');
         if(row.deadline)line(post,'p',row.deadline,'briefing-muted');
       }
       if(bounties.rows.length)line(board,'p',bounties.note,'briefing-muted');
@@ -136,14 +157,18 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(data.disabled)line(content,'p',text('hq.disabled'),'briefing-warning');
     if(data.canSoundAlarm === false)line(content,'p',text('wavePreview.atHQ'),'briefing-muted');
     alarm.disabled = data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
+    const boatView=boatCallView(data);
+    boat.hidden=!boatView.offered;boat.disabled=!boatView.enabled;
+    if(boatView.relayDown)line(content,'p',text('wavePreview.relayDown'),'briefing-warning');
     // Missing optional intelligence must never prevent a valid wave start.
   }
   function shut() {
     if(!dialog.open)return;
-    dialog.close(); doc.body.classList.remove('briefing');
+    dialog.close(); currentData=null; doc.body.classList.remove('briefing');
     if(returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
   }
   alarm.addEventListener('click',()=>send('alarm-request'));
+  boat.addEventListener('click',()=>{if(currentData)send('extraction-request',{runId:currentData.runId,day:currentData.day});});
   close.addEventListener('click',()=>send('briefing-close-request'));
   dialog.addEventListener('cancel',e=>{e.preventDefault();send('briefing-close-request');});
   // Capture input before the game's global bindings. Native Tab/Enter and button clicks

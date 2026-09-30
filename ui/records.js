@@ -3,7 +3,7 @@ import { text } from './strings.js';
 export const RECORDS_KEY = 'tt_best_run';
 const FIELDS = ['day', 'kills', 'streak', 'headshots', 'skulls'];
 const valid = value => Number.isSafeInteger(value) && value >= 0;
-const empty = () => ({ version: 1, day: 0, kills: 0, streak: 0, headshots: 0, skulls: 0, runs: 0, evacuated: 0 });
+const empty = () => ({ version: 1, day: 0, kills: 0, streak: 0, headshots: 0, skulls: 0, runs: 0, evacuated: 0, escapeNight: 0, hotEscapeNight: 0 });
 
 // Records only: no game state can be restored from this store.
 export function createRecords({ load = () => null, save = () => {} } = {}) {
@@ -11,7 +11,11 @@ export function createRecords({ load = () => null, save = () => {} } = {}) {
   try {
     const value = JSON.parse(load());
     if (value?.version === 1 && [...FIELDS, 'runs', 'evacuated'].every(k => valid(value[k])) &&
-        value.evacuated <= value.runs) best = { ...empty(), ...Object.fromEntries([...FIELDS, 'runs', 'evacuated'].map(k => [k, value[k]])) };
+        value.evacuated <= value.runs && (value.escapeNight === undefined || valid(value.escapeNight)) &&
+        (value.hotEscapeNight === undefined || valid(value.hotEscapeNight)) &&
+        (value.hotEscapeNight || 0) <= (value.escapeNight || 0))
+      best = { ...empty(), ...Object.fromEntries([...FIELDS, 'runs', 'evacuated'].map(k => [k, value[k]])),
+        escapeNight: value.escapeNight || 0, hotEscapeNight: value.hotEscapeNight || 0 };
   } catch { /* corrupt or denied storage cannot prevent play */ }
   return {
     read: () => ({ ...best }),
@@ -20,9 +24,12 @@ export function createRecords({ load = () => null, save = () => {} } = {}) {
           !result || !FIELDS.every(k => valid(result[k])) || result.day < 1 || typeof result.evacuated !== 'boolean') return null;
       finished.add(runId);
       const newFields = FIELDS.filter(k => result[k] > best[k]);
+      if (result.evacuated && result.day > best.escapeNight) newFields.push('escapeNight');
       for (const k of FIELDS) best[k] = Math.max(best[k], result[k]);
       best.runs = Math.min(Number.MAX_SAFE_INTEGER, best.runs + 1);
       if (result.evacuated) best.evacuated = Math.min(best.runs, best.evacuated + 1);
+      if (result.evacuated) best.escapeNight = Math.max(best.escapeNight, result.day);
+      if (result.evacuated && result.hot) best.hotEscapeNight = Math.max(best.hotEscapeNight, result.day);
       try { save(JSON.stringify(best)); } catch { /* retain session record */ }
       return { best: { ...best }, newFields };
     }
@@ -31,9 +38,12 @@ export function createRecords({ load = () => null, save = () => {} } = {}) {
 
 export function bestRecordParts(best, newFields = []) {
   if (!best || !valid(best.runs) || !best.runs) return [];
-  return ['day', 'kills', 'streak'].map(key => ({ key,
+  const parts = ['day', 'kills', 'streak'].map(key => ({ key,
     text: text('records.' + key, { count: best[key].toLocaleString('en-US') }),
     isNew: newFields.includes(key) }));
+  if (best.escapeNight) parts.push({ key: 'escapeNight', text: text('story.ending.boat', { night: best.escapeNight }) +
+    (best.hotEscapeNight === best.escapeNight ? ' ' + text('records.hotExtraction') : ''), isNew: newFields.includes('escapeNight') });
+  return parts;
 }
 
 export function renderBestRecord(el, best, newFields = []) {

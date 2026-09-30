@@ -1,0 +1,27 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 2,
+ "results": [
+  {
+   "night": 5,
+   "loadout": "m4, shotgun, knife, armor 75",
+   "planned": 221,
+   "trick": "The first spiders, and a colossus heads the last push",
+   "signature": "shambler",
+   "error": "the wave never began",
+   "errors": [],
+   "run": 1
+  },
+  {
+   "night": 5,
+   "loadout": "m4, shotgun, knife, armor 75",
+   "planned": 221,
+   "trick": "The first spiders, and a colossus heads the last push",
+   "signature": "shambler",
+   "error": "the wave never began",
+   "errors": [],
+   "run": 2
+  }
+ ]
+}

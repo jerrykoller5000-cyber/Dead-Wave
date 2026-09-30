@@ -98,6 +98,10 @@ reaches into another owner's section. At the split these stay events; the names 
   piece (`wall`, `turret`, …); `id` is that build's stable number. `frac` is hp/maxHp after
   the hit, or 0 when `broke` is true. At most one event per build every 2 s, plus one on the
   break even inside that window. The player's own shots do not publish it.
+- `'enemy-first-seen'` `{ kind, day }` (GB-111, P-120, 2026-09-29): once a run per zombie kind (`kind` is the
+  `ZOMBIE_TYPES` key: `shambler`, `brute`, `demon`, …), the first time one of that kind is within 60 m of the
+  marine (co-op: of any player, once `nearestPlayer` lands with CU-63). The cave guardian of the scripted grab
+  never counts. A new run starts the list again. For GP-80's first-use cards.
 - `'dw-cave-warn'` and `'dw-log'` are separate window events (see caveWarn and waterAt above).
 
 ## Repair helpers (approved D-11, 2026-09-23)
@@ -330,6 +334,15 @@ Owner: Grokbot (combat). Callers: the gunfire and explosion code; Claude's sound
   warning, on day 1's prep), with a hard pit rumble; the grab itself is unchanged at `grabR`. The coach
   turns the event into its one-time card (P-12); nothing else reads it yet.
 
+- GB-78 (P-32, D-46, 2026-09-29): **kick free.** The run's first guardian catch can be escaped while it hauls him to
+  the mouth (the `guardian-grab-drag` scene or the old drag; never the walk-in snatch, the pit or a second catch):
+  five presses of E (Space, Enter and Esc still skip to the death). Freed, he stands at least 2 m outside the lip,
+  loses 50 HP (never below 1) and his unbanked skull bag. `cave-guardian` gains `phase: 'escape'` with
+  `{ state, presses, need }`: `state` is `'open'` as the haul starts (it can be kicked free), `'press'` on each press
+  (`presses` of `need`, 5), `'free'` when he breaks loose, `'closed'` if the haul reaches the lip first. Once free:
+  `dw-game` `{ type: 'guardian-kick-free', day, receiptId, lostCount, lostValue }` (`receiptId` is
+  `'kick-free:<runId>:<day>'`, once a run). Callers: ChatGPT's "Kick free! (E)" prompt and "It took your skulls" (GP-53).
+
 ## Wave finisher (CL-26, 2026-09-24)
 
 Owner: Claude. The last kill of a wave (the plan spent, nobody left alive) runs the finisher in the
@@ -374,8 +387,19 @@ Read-only: reading never rerolls or changes the plan; it is frozen once in `star
   - `pushes`: the push sizes in order (an array; its length is the number of pushes; the last is the peak).
   - `lull`: the breather between pushes in seconds, counted once the field has thinned (or after `LULL_MAX_WAIT`).
   - `ground`: how many claw up out of the treeline instead of coming from a cave.
+  - `order` (GB-82, P-39): `null`, or `'blackout'` once the Lights out dare is picked in this prep (see "Tonight's call").
+    The one field that can change after the freeze; nothing else in the plan moves.
 - Past night 20 the test nights (13-20) come round again, grown to the old day curve; the same fields apply.
 - The full table of the twenty nights is in `docs/specs/difficulty.md`.
+- GB-71 (P-16, 2026-09-29): **one breather and a surge on test nights** (`act: 'test'`, 11 on). The early pushes run
+  straight on into each other; the only breather is the one before the last push, and it waits for the field to thin
+  (as `lull` above) or `LULL_MAX_SURGE` (45 s) at most. The cave eyes dim to level 1 for that breather and go back to
+  2 as the surge starts. Teach and build nights keep a breather between every push (at most `LULL_MAX_WAIT`, 30 s).
+  `getWaveDirectorState().pace.straight` is `true` on a test night.
+- `dw-game` `{ type: 'wave-push', day, push, pushes, last, lull }` once per push, as it starts (the first as the wave
+  begins). `push` is 0-based (as `pace.push`); `last` is `true` on the final push (the surge); `lull` is the seconds of
+  breather just before it, one decimal, 0 when the push ran straight on (and for the first). Callers: the music's surge
+  (Claude), the HUD's "they're coming" line (ChatGPT).
 
 ## Bounties, combat side (GB-57, D-37 and D-38, 2026-09-25)
 
@@ -482,6 +506,149 @@ Consumers: Grokbot (GB-81 crates, GB-82 the dare), ChatGPT itself (Field Intel).
   owned, decided at draw time and named in the event as `blueprint`); `blackout` is GB-82's at
   `beginWave` (P-39); `intel` is ChatGPT's own kiosk state, granted on the pick. Until a consumer
   lands, the event simply has no listener: the pick still shows on the board and the receipt holds.
+- GB-82 (P-39, 2026-09-29): **the Lights out dare is live.** A `blackout` pick for this run and day, in prep, sets
+  `getWavePreview(day).night.order = 'blackout'`; `beginWave` commits it: the HQ yard lamp (`house.hqLight`) stays at 0
+  the whole wave and every kill pays x1.25 skull value (`DARE_PAY_MUL`), and with the blood moon's x1.5 the two
+  together are capped at x1.75 (`DARE_PAY_CAP`). The next `startPrep` and a new run clear it. For the dawn line (P-40):
+  `getWaveDirectorState().dare = { order, active, earned, last }`: `earned` is the extra skull value the dare has paid
+  tonight (whole, rounded), and `last` is `{ day, earned }` for the night just ended (null when it had no dare), set
+  at `startPrep` before the dawn card shows.
+
+## The boat call: extraction (GB-85, P-50; D-45; proposed by Grokbot 2026-09-29, for Claude's review)
+
+Owner of the state: Grokbot (index.html, the wave director). Consumers: ChatGPT (GP-63, P-51: the "Call the boat" button,
+the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in on `due`), Grokbot (GB-86, P-53: boarding).
+
+- **State**, live on `getWavePreview(day).night.extraction` and `getWaveDirectorState().extraction.state`: `'offered'`
+  in prep from night 20 (`EXTRACTION_NIGHT`) with the relay up (`radioCall.repaired`); `'called'` once he calls it;
+  `'due'` from the moment tonight's last push starts; `null` otherwise. Nothing is offered before night 20 or with the
+  relay down. A run reset clears it.
+- **The call.** `dw-game` `'extraction-request'` `{ runId, day }`, sent like `'alarm-request'`: from the open briefing, at
+  the panel, in prep, with no alarm under way. When the boat is `'offered'` it publishes `'extraction'`
+  `{ phase: 'called', day }` and sounds the alarm (`hqStartWave`): the normal night, the same `NIGHT_PLAN`. Any other
+  request (another day or run, briefing shut, not offered) does nothing.
+- **Due.** As the last push starts (`wave-push` with `last: true`), a called night publishes `'extraction'`
+  `{ phase: 'due', day }` once. CL-73 brings the boat in on it.
+- **Stay.** Sounding the alarm without calling is "stay": an ordinary night, no event, and the next prep offers the
+  boat again.
+- **The wait.** A due boat waits through the dawn (P-53). The preview says `'due'` in the next prep, and it's not offered
+  again. The next alarm sends it away: `'extraction'` `{ phase: 'gone', day, calledDay }`. Boarding (GB-86) ends it
+  before that.
+- **Boarding (GB-86, P-53; proposed by Grokbot 2026-09-30).** While the state is `'due'` and CL-73's boat is `'waiting'`,
+  holding E for `BOARD_HOLD_S` (2 s) within `deck().r + 2.5` m of the boat's deck (the last metre or so of the dock)
+  boards it. Letting go, walking off, a landed hit (`player-damaged`), death or a modal starts the hold again.
+  Aboard: the state becomes `'boarded'`, `'extraction'` `{ phase: 'boarded', day, calledDay, hot }` is published, and
+  `endGame(true)` follows once any finisher camera or scripted kill is over. There's no death-log entry; the music goes to
+  'dawn'. `hot` (and `matchStats.hotExtraction`) is true when tonight still had zombies to spawn or kill (a "hot
+  extraction"). The last kill's dawn doesn't close the window: the boat waits into the next prep. The HUD prompt reads
+  "Hold E — Board the boat", then "Boarding… N%" (GB-114: keyed in ui/strings.js as `extraction.boardPrompt`, `extraction.boarding` {pct}, `extraction.win`, `extraction.winHot`). TT: `BOARD_HOLD_S`, `boardingDbg()`.
+  Test: t147. The end of the dock is 112.6 m from the HQ on this map, and the berth 116.5 m.
+- TT: `EXTRACTION_NIGHT`, `extractionFor(day)`, `requestExtraction(detail)`, `openHQBriefingDbg()`.
+
+## The wandering colossus (GB-89, P-61; proposed by Grokbot 2026-09-30)
+
+- `wandererAllowed(d)`: the odd nights from 7, never `d % 5 == 0` and never a guardian night (7, 9, 11, 13, 17, 19,
+  21, ...). On those days `spawnBounties` adds one `'wanderer'` post after the ordinary bounties (they're unchanged: 1 or 2).
+- The post is a GB-57 bounty with `kind: 'wanderer'`, `index` (the `PATHS` leg), `guards: 1` and
+  `reward: wandererReward(d)` (`max(150, bountyRewardFor(d))`: 150 on nights 7-13, 300 from 14). Its x, z follow the colossus.
+  `getBounties()` rows gain `wanderer: true|false`. `bounty-posted` carries `wanderer: true`.
+- One colossus walks a stretch of worn trail (`wandererTrails()`: non-deck legs, points at least 45 m from the HQ and
+  dry, a stretch of at least 20 m). It goes end to end and back at 0.6 of its speed (`WANDERER_PACE`). If it hasn't made 1 m of
+  progress in 3 s, it turns back. It walks through the no-zombie grace while unaware and attacks nobody until it wakes.
+- It wakes on the guard rules: a hit, the marine within 18 m, a heard shot (GB-105) or the alarm. Then it's an ordinary colossus.
+  Its kill gives `poi-cleared`, then `bounty-done` with the reward into the skull bag, on top of its own skulls and the
+  COLOSSUS DOWN banner. At the alarm an open one goes (`bounty-expired`, reason `'alarm'`).
+- UI: `ui/bounties.js` shows only its known kinds today, so the board skips the wanderer until GP-68 (P-62) adds the row and the strings
+  (`world.wanderer` is the enriched labelKey).
+- TT: `spawnWanderer(d)`, `wandererAllowed`, `wandererTrails`, `wandererReward`, `WANDERER_PACE`. Test: t143.
+
+## Survivor bounties (GB-90, P-64; proposed by Grokbot 2026-09-30)
+
+- From night 3 (`SURVIVOR_FROM`), each campsite bounty that `spawnBounties` posts can hold a survivor: chance
+  `survivorChance` (0.5), at most once per camp per run (a camp that has held one, rescued or not, never does again).
+- `post.survivor` = `{ style, camp, day, state, x, z }`; `style` is the camp's (`ranger`, `hikers`, `trapper`), `state` is
+  `'waiting'`, `'rescued'` or `'lost'`. `getBounties()` rows gain `survivor: { style, state } | null`; `bounty-posted` carries
+  `survivor: true|false`.
+- They wait 1.5 m from the fire, facing it: a stand-in figure (a bare `makeMarine()`, no gun) until CL-75's look. They're in no
+  zombie, hit or target list, so nothing targets or damages them.
+- E: `actionTarget()` returns `'survivor'` only within 2.2 m (`SURVIVOR_REACH`) and once none of the post's guards is alive, so E
+  does nothing before that. Then E takes them in: the figure goes, `dw-game` `'survivor-rescued'` `{ style, camp, day, count }`,
+  and `getSurvivors()` (plain and on `window.TT`) returns this run's `[{ style, camp, day }]`. Prompt key `survivor.rescue`
+  (placeholder copy; ChatGPT's).
+- The alarm, or the next day's posts, end a wait still at the fire: `'survivor-lost'` `{ style, camp, day, reason }` (reason
+  `'alarm'` or `'new-day'`). A run reset clears the survivors and the used camps.
+- TT: `getSurvivors`, `survivorDbg` (`setChance`, `allowed`, `inReach`, `waiting`, `campsUsed`). Test: t148.
+
+## Survivors' help (GB-91, P-65, D-52; proposed by Grokbot 2026-09-30)
+
+- The help follows the survivor's `style` from `getSurvivors()` and lasts for the run: a run reset ends it.
+- `hikers` (the medic): regen reaches `MEDIC_REGEN_CAP_FRAC` (0.5) of max hp instead of `REGEN_CAP_FRAC` (0.4): `regenCapFrac()`.
+- `trapper`: `repairCostOf(b)` is multiplied by `TRAPPER_REPAIR_MUL` (0.75), before rounding up; never under 1: `repairCostMul()`.
+- `ranger`: one free light turret, once a run, through `placeBuildAt` on the free cell nearest (-(HQ_HALF + 4), 0), clear of
+  the HQ by 2 m, dry and off the cabin. It's an ordinary build with `gift: 'ranger'`. If no cell takes it, he tries again at the next prep.
+- `dw-game` `'survivor-help'`: `{ style: 'hikers', help: 'regen', cap }`, `{ style: 'trapper', help: 'repairs', mul }`,
+  `{ style: 'ranger', help: 'turret', id, x, z }`, fired when the survivor is taken in.
+- TT: `survivorHelpDbg` (`grant(style)`, `regenCapFrac`, `repairCostOf`, `setHp`, `regen(dt)`, `giftTurret()`, `owed()`). Test: t149.
+
+## The siege on night 18 (GB-88, P-59; proposed by Grokbot 2026-09-30)
+
+- On a night whose plan has `trick: 'siege'` (night 18 today), `siegeNightNow` is set at
+  the alarm (`beginWave`), next to CU-77's `nightKindNow`. A new run clears it. TT: `siegeNightDbg()`.
+- Every brute and soldier (`SIEGE_SMASHERS`) the wave spawner makes that night gets `tactics: 'smash'`, and its own tactic is kept in
+  `z.siegeFrom` ('tank' or 'weave'). This happens after the cave role, so a cave's role can't undo it.
+- `'smash'` is the existing, formerly dormant targeting. Twice a second it picks the nearest placed wall or barricade. It walks to it
+  when it's within 28 m, else comes for the marine. It hits any of his builds it bumps into. GB-103's defence seekers still override it.
+- A sieging brute keeps its weight: `z.brute` for the heavy hit and the 2.2 heft on builds, and `siegeFrom === 'tank'` for the
+  0.25 barricade shove. A sieging soldier drops its weave and rushes while it sieges.
+- Unchanged: the total, the mix and the pushes (the plan's own), and the guardian ('boss', planned, D-13). Only one music plan is used
+  (P-21). ChatGPT's board line is GP-67.
+- Test: t140.
+
+## The hearing rule and the suppressor's cost (GB-105, P-129, D-65; proposed by Grokbot 2026-09-30)
+
+- Every gunshot is heard within `SHOT_HEARING[w]` metres of the marine: pistol and Uzi 35, M4 and shotgun 45,
+  launcher 45, AK, revolver and AA-12 50, minigun 55, sniper 70. With a can fitted (`suppressor[w]`, CU-68), it's
+  `SUPPRESSED_HEARING_MUL` (0.3) of that: the M4 goes to 13.5 m and the sniper to 21 m.
+  `shotHearingRadius(w)` gives the live radius.
+- A sleeping post guard (GB-43 and the GB-57 bounties) inside the radius wakes its whole post with `poiWake: 'shot'`,
+  the same wake as the alarm, a hit or walking up (18 m). In a wave the horde is already coming, so the rule shows by
+  day.
+- A suppressed round (bullet or pellet) carries `SUPPRESSED_DAMAGE_MUL` (0.9) of the gun's damage
+  (`suppressedDamageMul(w)`). The launcher, minigun, flamer and saw take no can.
+- For P-139's stir meter: `heardShotDbg()` returns `{ shotsHeard, lastShotNoise: { x, z, r, w, suppressed, t } }`
+  (TT). A stir meter can take the same radius per shot.
+- Test: t139.
+
+## The late payout trim (GB-113; ChatGPT's GP-60 request, approved by Claude 2026-09-29)
+
+- From night `LATE_CASH_NIGHT` (11), a kill's skull value is the table's `cashDrop` x `LATE_CASH_FACTOR` (0.67),
+  applied at the kill (`lateCashMul(day)`, on `window.TT`), before the streak, Scavenger, blood moon and dare
+  multipliers. The table itself is unchanged. Nights 1-10, bounties, objectives, supply drops and the guardian's
+  first-blood 80 are unchanged. Endless nights past 20 are trimmed too.
+- For a budget model, nights 11+ bank x0.67. With that, GP-77's careful buyer ends night 20 on about 2,497 Cash (it was
+  10,631).
+
+## Weapon mods: one per gun (GB-84, P-48; proposed by Grokbot 2026-09-29, for Claude's review)
+
+- Each gun has one mod slot. The two mods:
+  - **Extended mag**: every gun in `EXT_MAG_PRICE`. As before, x1.5 magazine and the calibre's reserve cap. New:
+    the reload takes `EXT_MAG_RELOAD_MUL` = x1.25 longer while it's fitted (the shotgun already pays shell by shell,
+    so it's exempt). This is the roadmap's nerf that needs Claude's sign-off.
+  - **Heavy barrel**: M4, AK, Uzi and minigun (`HEAVY_BARREL_PRICE`, same as their ext-mag prices, through
+    `equipmentPrice`). Halves the recoil climb (`HEAVY_CLIMB_MUL`), doubles the movement term of the cone
+    (`HEAVY_MOVE_SPREAD_MUL`), and the draw takes `HEAVY_SWAP_DUR` = 0.45 s, holding fire until the gun is up.
+- A mod is bought once and fitted on purchase. Fitting one un-fits the other. Switching between owned mods is free
+  and reports nothing. A refit never loses a round (Claude, 2026-09-29). The loaded magazine keeps what fits, and the rest
+  is repacked into spare magazines of the new size. What the smaller spare cap can't hold goes back to the reserve over
+  its cap: buys and pickups add nothing until it's spent back under.
+- Reads: `weaponMods(w)` returns `{ fitted: 'ext' | 'heavy' | null, ext, heavy, canExt, canHeavy }` (`ext` and `heavy`
+  mean owned). `weaponMods()` returns that for every gun that takes a mod. Actions: `buyExtMag(w)`, `buyHeavyBarrel(w)`,
+  `fitWeaponMod(w, 'ext' | 'heavy' | null)`, which returns false for a mod that isn't owned. All are on `window.TT`.
+- Purchases: `purchase-delivered` `{ itemId: 'magazine:<w>' }` for the ext mag (unchanged) and
+  `{ itemId: 'mod:heavy:<w>' }` for the barrel, each once, at the time of purchase.
+- The kiosk's ext-mag row now reads OWNED from "bought", not "fitted". The Upgrades rows (both mods, the fitted one
+  marked, a free switch) are GP-62's. A delve strongbox mod (D-67) can use the same calls.
+- A new run clears both. Test: t136.
 
 ## Lifetime badges: the milestone facts (GP-65; P-55; approved by Claude 2026-09-27)
 
@@ -508,11 +675,14 @@ The facts come from two places, and nothing else: the run record and four `dw-ga
   - `kicked-free`: `dw-game` `'guardian-kick-free'` `{ day, runId, receiptId }`, published once per escape
     by GB-78 (P-32/P-33; GP-53's "Kick free!" copy reads the same event). Named here so both sides build
     to it; until GB-78 lands the event has no publisher.
-  - `fog-survivor`: `dw-game` `'night-cleared'` `{ day, kind, runId }` at dawn, published by Grokbot's
-    director (`kind`: `plain`, `blood-moon`, `guardian`, `fog`, `siege`, `colossus`; one per night,
-    day 1 included). The badge is `kind === 'fog'` on the night 14 clear. `night-cleared` is also the
-    fact behind `nightCleared`/`nightKind` in the adapter; the night-N badges stay on the run record.
-    Until Grokbot publishes it (a small GB task; Fog Night itself is GB-87) the fog badge has no source.
+  - `fog-survivor`: `dw-game` `'night-cleared'` `{ day, kind, runId }` at dawn (`startPrep`, before
+    the day number moves on), one per night, day 1 included. **Live (CU-77, 2026-09-29).** `kind` is
+    one word, first match wins: `fog` (the night plan's `mod === 'fog'`, P-56), `siege` (night 18's
+    trick), `guardian`, `colossus` (every fifth night that isn't a guardian night), `blood-moon` (Ember
+    Night), `plain`. `TT.nightKindForDay(d)` gives it for any night. The badge is `kind === 'fog'` on the
+    night 14 clear. `night-cleared` is also the fact behind `nightCleared`/`nightKind` in the adapter;
+    the night-N badges stay on the run record. Night 14 says `plain` until Fog Night's `mod` lands
+    (P-56, GB-87); then the fog badge has its source with no change here. **Live (GB-87, 2026-09-29):** night 14's plan has `mod: 'fog'`, also on `wavePreview.night.mod` and `getWaveDirectorState().mod` from night 14's prep; `null` on every other night, the endless ones included.
 - The twelve ids and their criteria are fixed as proposed: `first-bank`, `relay-online`, `night-five`,
   `night-ten`, `night-twenty`, `fog-survivor`, `kicked-free`, `out-on-the-boat`, `thousand-skulls`,
   `thousand-kills`, `hundred-headshots`, `streak-twenty`. Debug-started runs (`eligible: false`) award
@@ -560,3 +730,25 @@ hangs the marine from the guardian's hand from the yank on (CL-67), so the game'
 simulated body; `startGrabScene` needs nothing new (the scene makes the body on its adopted marine). The motion lab's notes come in through
 `POST /__studio/note` on `tools/serve.mjs` (`studio/notes-endpoint.mjs`), which writes only under
 `review/motion-*` (Cursor reviews the hook: CU-47).
+
+## Supply drops: the call and the event (GP-88, P-34; approved by Claude 2026-09-29)
+
+Owner: ChatGPT (moved from Cursor's CU-58). Consumers: Grokbot's crates (GB-81, GB-83), ChatGPT's notice (GP-56).
+
+- **The call.** `spawnSupplyDrop({ x, z, contents, source })`, every field optional. With none it behaves as before
+  (a landable spot 22-56 m from a living player, the old random crate). `x, z` place it; `contents` is `'ammo'`,
+  `'medical'`, `'hardware'`, or `{ items: [{ id, qty }], ammo, medpens, grenades, blueprint }`; `source` says who
+  called it (`'random'`, `'radio'`, `'breather'`, ...) and rides on every event.
+- **The event.** `dw-game` `'supply-drop'` `{ phase, x, z, source, breather, runId, eventId }`, `phase` one of
+  `inbound`, `landed`, `claimed`, `expired`, each once per crate. `claimed` adds what he got: `rounds`, `pens`,
+  `grenades`, `blueprint`. Optional, for the notice's words (GP-56): `bearing` on `inbound` (where it is coming
+  down, from him), `ammoOffered` and `medpensOffered` on `claimed` (what the crate held, so a medical-only crate
+  never reads as "ammo full"). `phase`, `x`, `z`, `source` and `breather` are the required fields.
+- The airdrop cue plays on `inbound`, as before. Nothing else publishes `supply-drop`.
+- GB-81 (P-38, D-49, 2026-09-29): **drops are earned.** With the relay down, the random crate comes once a night, 40-180 s
+  into the wave, never by day; once the relay is up (`radioCall.repaired`) the random timer stops. An `ammo`, `medical` or
+  `hardware` `radio-call` for this run and day, in prep, calls `spawnSupplyDrop({ source: 'radio' })` 20-40 m from the
+  mast (`hardware` carries the event's `blueprint`). One radio crate a day, and a repeated `receiptId` delivers nothing.
+  On `landed` a guard pack claws up 6-10 m round it: 2 on nights 1-3, 3 on 4-6, 4 on 7-9, 5 from 10, one feral from
+  night 4 and two from night 8 (`z.objectiveRole === 'crate-guard'`). A radio crate doesn't time out; it `expired`s at
+  the alarm if it's still unclaimed. TT: `callRadioCrate`, `crateGuardPlan`, `relayUp`, `setRelayUpDbg`, `getSupplyTimer`.

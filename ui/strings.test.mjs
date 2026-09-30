@@ -8,7 +8,7 @@ import { STRINGS, DEFAULT_INPUT_LABELS, hasText, text } from './strings.js';
 test('banking distinguishes carried skull value from spendable Cash', () => {
   assert.equal(text('hud.skullValue', { value: 12 }), 'Skull value: 12');
   assert.equal(text('hq.banked', { amount: 12 }), 'Banked 12 Cash');
-  assert.match(text('perks.scavenger.description'), /skull value/);
+  assert.equal(text('skills.scavenger.name'), 'Scavenger');
   assert.match(text('wave.bloodMoonHelp', { day: 4 }), /skull value/);
   assert.match(text('wave.colossusReward', { value: 120 }), /turn the skulls in at HQ/);
 });
@@ -119,4 +119,15 @@ test('HQ copy never calls the base a cabin, while landmark cabins keep their nam
   assert.equal(text('world.cabin'), 'Cabin'); assert.equal(text('build.obstacle.cabin'), 'a cabin');
   for (const key of ['tree','stump','rock','hq']) assert(hasText('build.obstacle.' + key));
   for (const key of ['mortar.noRoom','mortar.noRoomEdge','mortar.noRoomBlocked','build.message.stairsOccupied','build.message.stairsStepOff']) assert(hasText(key));
+});
+
+test('Harbor Nine has twenty ordered dispatches and the site and survivor notes', () => {
+  for (let n = 1; n <= 20; n++) {
+    const line = text(`story.relay.${n}`);
+    assert(line.length > 35, `relay dispatch ${n}`);
+  }
+  for (const id of ['relayBroken','convoy','utilityTruck','ranger','hikers','trapper','fuel','dock','watchtower','hq'])
+    assert(hasText(`story.prop.${id}`), `prop ${id}`);
+  for (const id of ['reyes','voss','kettle']) for (const moment of ['found','morning','aboard'])
+    assert(hasText(`story.survivor.${id}.${moment}`), `${id} ${moment}`);
 });

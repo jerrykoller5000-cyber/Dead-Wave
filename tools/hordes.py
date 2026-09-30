@@ -11,8 +11,10 @@ is faster, in a higher or darker key, and pushes harder:
   fight_n10  nights 11, 13   112 bpm  B minor   riff B and the second drop drive (DRIVE 2)
   fight_n14  nights 14,15,17  116 bpm  D minor   DRIVE 2, a key lower and heavier
   fight_n18  nights 19-20  120 bpm  E minor   home key for the finale, every drop drives (DRIVE 3)
-  fight_ember     Ember Nights (4, 8, 16)       110 bpm  F minor, every drop drives
-  fight_guardian  Guardian Nights (6, 12, 18)   90 bpm   C minor, slow and heavy
+  fight_ember     Ember Nights (4, 8)           110 bpm  F minor, every drop drives
+  fight_guardian  Guardian Nights (6, 12)       90 bpm   C minor, slow and heavy
+  fight_ember_late     Ember Night 16          118 bpm  F minor, DRIVE 3 (CL-71)
+  fight_guardian_late  Guardian Night 18       100 bpm  C minor, DRIVE 3 (CL-71)
 Which night plays which is waveByDay in assets/soundtrack/music.json (GB-53's table:
 docs/specs/difficulty.md).
 
@@ -37,6 +39,9 @@ TIERS = [
     ('fight_n10', 112, 7, 2),
     ('fight_n14', 116, -2, 2),
     ('fight_n18', 120, 0, 3),
+    # CL-71 (P-21): nights 16 and 18 stop reusing nights 4 and 6's songs.
+    ('fight_ember_late', 118, 1, 3),     # Ember Night 16: F minor, faster, every drop drives
+    ('fight_guardian_late', 100, -4, 3), # Guardian Night 18: C minor, heavier, every drop drives
 ]
 BASE = {k: getattr(D, k) for k in ('HOOK_A', 'HOOK_A2', 'RIFF_B', 'BRIDGE_LINE', 'SCALE', 'E4', 'G4', 'B4')}
 BASE_ROOT = dict(D.ROOT)
