@@ -37,8 +37,12 @@ const inside = (theme, where) => `(() => { const w = ${STAGE(theme)}; w.group.tr
   return { x: cam.x, y: gy + 1.7, z: cam.z, tx: t.x, ty: t.y + 1.2, tz: t.z, fov: 70 }; })()`;
 const VIEWS = [];
 for (const t of THEMES) VIEWS.push(['warren-' + t, top(t)]);
-for (const t of THEMES) VIEWS.push(['warren-' + t + '-deep', inside(t, 'deep')]);
-VIEWS.push(['warren-iron-galleries', inside('iron', 'galleries')]);
+// The views from inside wait for the runtime (CU-71): headless, a camera this far down renders the game's under-water
+// path and the screenshot times out. `--inside` asks for them anyway.
+if (process.argv.includes('--inside')) {
+  for (const t of THEMES) VIEWS.push(['warren-' + t + '-deep', inside(t, 'deep')]);
+  VIEWS.push(['warren-iron-galleries', inside('iron', 'galleries')]);
+}
 
 const argv = process.argv.slice(2);
 if (argv.includes('--list')) {

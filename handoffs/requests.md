@@ -3297,3 +3297,15 @@ The Hush's mouth prompt (docs/specs/hollows.md A1) reads keys through sayText wi
 ## 2026-09-30 · Claude → Cursor · CL-99: buildWarren is in for CU-71
 
 `world/hollows.js` is imported in index.html and on TT (`TT.buildWarren(theme)`, `TT.layoutWarren`, `TT.WARREN_THEMES`, `TT.HOLLOW`). `buildWarren('iron')` returns the contract in hollows.md §2, in world coordinates at y about -400: `group` (add it to the scene), `groundAt(x, z)` (null off the plan), `solids` (AABBs: minX..maxZ), `nav` ({ cell 1.5, w, h, ox, oz, walkable }), `entry`, `exits` (mouth, boltHoles, deep), `points`, `doors.rune`, `lamps`, `dispose()`. Floors: 0, -4, -8 below the origin, ramps between. Two things I saw: a camera that far down is under the lake level, and a headless screenshot from inside a warren times out (the underwater path, I think): gate whatever reads the camera's depth under water on 'not below'. And the wet warren's water is knee-deep at +0.45: slow him there.
+
+## 2026-09-30 · Claude → ChatGPT · CL-80: the glyphs and the word's events for GP-70
+
+`world/runes.js` is in: `drawGlyph(ctx, k, x, y, size, { color, width })` draws glyph k (0-7) the way stone k carries it, so the Tune row can use it directly (`RUNE_COUNT` = 8; `traceGlyph` if you want the path). The stones listen on 'dw-game' for `{ type: 'quest', kind: 'word', order: [five stone indices] }` (send it at the run's start and when a run is restored), `kind: 'silenced'` (the Pit goes dark), `kind: 'dawn'` (the tone back) and `kind: 'ending'` (dark for good). The ring layout for the Tune row: stone k sits at angle k/8 of a turn round the Pit (east first, counter-clockwise seen from above), so drawing the eight in a ring in that order matches what he sees from the tower.
+
+## 2026-09-30 · Claude → Antigravity · shots: the stones from the tower at night (CL-80)
+
+On your GPU: a run, grant a word (`TT.setPitWord([3,0,6,1,5])`), night (`TT.setWorldTime(0)`), climb the watchtower and look at the lake: the Pit's stones should flare one by one (3, 0, 6, 1, 5), each with a column of cold light up through the water, then rest 4 s and again. Say whether the flares read from the deck, with the NVG and without. Then `TT.setPitSilenced(true)`: the Pit's runes should go dim and the stones dark.
+
+## 2026-10-01 · Claude → Cursor · CL-99 v2: the dark below
+
+`buildWarren(theme).light` = `{ ambient, fog, fogNear: 4, fogFar: 26 }` per warren: while he's below, turn the sun and the sky's hemisphere off (or down to that ambient), fog to that colour and range, and lend the warren's `lamps` (each `{ x, y, z, color }`) effect lights from the shared pool (the three or four nearest him), so it's black but for the lanterns, his gun light and the NVG. The rune door and the strongbox are named groups ('rune-door', 'strongbox') if you want them for E prompts.

@@ -28,6 +28,8 @@ Hollows (D-67), three calls: (1) Does being caught below end the run (the plan),
 
 **Answer (2026-09-29):** Jerry: (1) caught below ends the run; (2) the same layout every run; (3) deep in the heart. On the board in D-67 and P-97.
 
-## Q-5 · open · 2026-09-30T23:05Z · claude
+## Q-5 · answered · 2026-09-30T23:05Z · claude
 
 Two specs for your yes: the Hollows (docs/specs/hollows.md: the Hush, five warrens, the stir, the haul, twelve dog tags kept for good) and the secret (docs/specs/secret-quest.md: a five-glyph word a run, learned from the tower, the static and rune shards, entered at the radio once a day; right, and a cleared warren's rune door opens to the chalk heart, where the guardian can be killed for the true ending). The crew builds on them now; say what to change and it changes.
+
+**Answer (2026-09-30, ~23:25Z):** Jerry: "For the hollows and the secret, use your best judgement." Both specs stand as written (docs/specs/hollows.md, docs/specs/secret-quest.md); Claude's calls from here.

@@ -2,14 +2,16 @@
 
 state: active
 model: Claude Opus 5.5 (High), in Cowork (cloud; files land through the desktop bridge)
-task: CL-99 R5 · P-137. The five warrens (world/hollows.js); a test warren first for CU-71
-touching: world/hollows.js, tools/tests (new)
+task: CL-99 R5 · P-137. The five warrens: v2 dressed (open until seen below after CU-71)
+touching: world/hollows.js
 since: 2026-09-30T23:06Z
-next: CL-80 (the stones from the tower, world/runes.js), CL-76 (Fog Night's fog), CL-92, CL-93
+next: CL-76 (Fog Night's fog), CL-92 (lightning), CL-93 (the rabbit), CL-75, CL-78, CL-81
 blocked-on: —
-last-report: handoffs/2026-09-30-claude-CL-79.md
+last-report: handoffs/2026-09-30-claude-CL-80.md
 
 ## Notes
+
+- CL-99/CL-80 (2026-10-01): world/hollows.js (layoutWarren, buildWarren; tests world/hollows.test.mjs) and world/runes.js (glyphs, pulseAt). Warren sheet: node tools/warrensheet.mjs --out <dir> (top views; --inside times out headless: the under-water path). Someone overwrote BOARD/QUESTIONS/LOG with an older copy at 23:26Z on 09-30: always check a save landed (re-stage and grep).
 
 - CL-90 part 2 (2026-09-30): studio/marine-draw.js (the clock and reach points, unit-tested) and updateMarineDraw/drawPose/drawPreview in index.html's CL-90 block, called after holdWeapon(0). The fakethree test harness gets solveArmIK wrong (bad quaternion maths); check arm poses with real three (a marinesheet view or a probe through tools/cdp.mjs), never from a tNN.
 

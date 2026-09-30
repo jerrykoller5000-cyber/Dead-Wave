@@ -15,6 +15,7 @@
 // Coordinates: the plan's cell (i, j) spans x in [i*6, i*6+6), z in [j*6, j*6+6) relative to the origin; he comes in
 // at the mouth cell on the south edge (j = 0), facing +z. Floors: depth 1 at 0, depth 2 at -4, depth 3 at -8.
 import * as THREE from 'three';
+import { drawGlyph, RUNE_COUNT } from './runes.js';
 
 export const WARREN_THEMES = Object.freeze(['root', 'shale', 'iron', 'wet', 'hill']);
 export const HOLLOW = Object.freeze({
@@ -28,11 +29,11 @@ export const HOLLOW = Object.freeze({
 
 // Each theme's look (colours, the props it scatters) and its set piece (hollows.md §3).
 export const WARREN_LOOKS = Object.freeze({
-  root:  { rock: 0x4a3f33, floor: 0x3a2f24, accent: 0x6b5a3a, glow: 0x7cffb0, set: 'climbers-knot',  props: 'roots' },
-  shale: { rock: 0x3d4247, floor: 0x33373b, accent: 0x5a6068, glow: 0x9ec8ff, set: 'shale-flankers', props: 'blades' },
-  iron:  { rock: 0x4b3a30, floor: 0x3b3029, accent: 0x6b4a2a, glow: 0xffb45a, set: 'mine-crew',      props: 'timber' },
-  wet:   { rock: 0x33403f, floor: 0x283432, accent: 0x3f5a58, glow: 0x7fe0e0, set: 'drowned',        props: 'pools' },
-  hill:  { rock: 0x4a4740, floor: 0x3c3a34, accent: 0x6e6a5e, glow: 0xffd89a, set: 'barrow-king',    props: 'slabs' },
+  root:  { rock: 0x4a3f33, floor: 0x3a2f24, accent: 0x6b5a3a, glow: 0x7cffb0, set: 'climbers-knot',  props: 'roots',  ambient: 0x0e120c, fog: 0x070a06 },
+  shale: { rock: 0x3d4247, floor: 0x33373b, accent: 0x5a6068, glow: 0x9ec8ff, set: 'shale-flankers', props: 'blades', ambient: 0x0c0e12, fog: 0x06070a },
+  iron:  { rock: 0x4b3a30, floor: 0x3b3029, accent: 0x6b4a2a, glow: 0xffb45a, set: 'mine-crew',      props: 'timber', ambient: 0x120e0a, fog: 0x0a0705 },
+  wet:   { rock: 0x33403f, floor: 0x283432, accent: 0x3f5a58, glow: 0x7fe0e0, set: 'drowned',        props: 'pools',  ambient: 0x0a1011, fog: 0x050909 },
+  hill:  { rock: 0x4a4740, floor: 0x3c3a34, accent: 0x6e6a5e, glow: 0xffd89a, set: 'barrow-king',    props: 'slabs',  ambient: 0x100f0c, fog: 0x080806 },
 });
 
 // --- dice ---------------------------------------------------------------------------------
@@ -305,6 +306,57 @@ function mergedBoxes(list) {
   return g;
 }
 
+// The rune door's carving: the Pit's eight glyphs in two columns round a ring, glowing (browser only).
+let doorTexCache = null;
+function makeDoorTexture() {
+  if (doorTexCache) return doorTexCache;
+  if (typeof document === 'undefined') return null;
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 360;
+  const ctx = cv.getContext('2d');
+  ctx.strokeStyle = 'rgba(160, 245, 255, 0.8)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(128, 180, 70, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(128, 180, 20, 0, Math.PI * 2); ctx.stroke();
+  for (let k = 0; k < RUNE_COUNT; k++) {
+    const a = (k / RUNE_COUNT) * Math.PI * 2 - Math.PI / 2;
+    drawGlyph(ctx, k, 128 + Math.cos(a) * 100, 180 + Math.sin(a) * 100, 44, { width: 2.6 });
+  }
+  doorTexCache = new THREE.CanvasTexture(cv);
+  if (THREE.SRGBColorSpace) doorTexCache.colorSpace = THREE.SRGBColorSpace;
+  return doorTexCache;
+}
+
+// Each Deep's set piece, and the little that makes each warren itself.
+function dressSetPiece(group, plan, theme, mats, floorY, C) {
+  const set = plan.points.set, y3 = floorY(3);
+  const add = (geo, mat, x, y, z, rx = 0, ry = 0, rz = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.rotation.set(rx, ry, rz); group.add(m); return m; };
+  const rnd = mulberry32(hashStr('hollows-set:' + theme));
+  if (theme === 'root') {
+    // The climbers' knot: a mass of roots and bodies bunched under the Deep's roof.
+    for (let k = 0; k < 14; k++) add(new THREE.SphereGeometry(0.5 + rnd() * 0.6, 8, 6), k % 3 ? mats.accent : mats.bone, set.x + (rnd() - 0.5) * 3, y3 + HOLLOW.CHAMBER_ROOF - 0.8 - rnd() * 0.8, set.z + (rnd() - 0.5) * 3);
+    for (let k = 0; k < 10; k++) { const a = rnd() * Math.PI * 2, r = 1.5 + rnd() * 3; add(new THREE.CylinderGeometry(0.06, 0.14, 3 + rnd() * 2, 6), mats.accent, set.x + Math.cos(a) * r, y3 + HOLLOW.CHAMBER_ROOF - 1.8, set.z + Math.sin(a) * r, (rnd() - 0.5) * 0.5, 0, (rnd() - 0.5) * 0.5); }
+  } else if (theme === 'shale') {
+    // The clefts the flankers come out of: tall fins of slate either side.
+    for (const s of [-1, 1]) for (let k = 0; k < 3; k++) add(new THREE.BoxGeometry(0.3, 4 + rnd() * 1.5, 2.2), mats.accent, set.x + s * (3.6 + k * 0.5), y3 + 2.2, set.z + (k - 1) * 2.6, 0, (rnd() - 0.5) * 0.4, s * 0.08);
+  } else if (theme === 'iron') {
+    // The mine crew's cart on its rails, the winch, and timbering.
+    for (const s of [-0.45, 0.45]) add(new THREE.BoxGeometry(0.08, 0.08, C * 1.8), mats.iron, set.x + s, y3 + 0.04, set.z);
+    for (let k = -4; k <= 4; k++) add(new THREE.BoxGeometry(1.3, 0.08, 0.2), mats.accent, set.x, y3 + 0.02, set.z + k * 1.2);
+    add(new THREE.BoxGeometry(1.1, 0.7, 1.6), mats.iron, set.x, y3 + 0.65, set.z + 1.5, 0.05, 0, 0.12);
+    add(new THREE.CylinderGeometry(0.5, 0.5, 1.4, 12), mats.accent, set.x + 3.5, y3 + 0.9, set.z - 3, 0, 0, Math.PI / 2);
+  } else if (theme === 'wet') {
+    // The drowned's pool: black water filling the middle of the Deep, with bones at its edge.
+    add(new THREE.CylinderGeometry(3.6, 3.6, 0.06, 28), mats.water, set.x, y3 + 0.5, set.z);
+    for (let k = 0; k < 8; k++) { const a = rnd() * Math.PI * 2; add(new THREE.BoxGeometry(0.07, 0.07, 0.5), mats.bone, set.x + Math.cos(a) * 3.9, y3 + 0.05, set.z + Math.sin(a) * 3.9, 0, rnd() * 3, 0); }
+  } else if (theme === 'hill') {
+    // The barrow king's bier, and his court's tombs in the walls.
+    add(new THREE.BoxGeometry(2.6, 0.9, 1.4), mats.accent, set.x, y3 + 0.45, set.z);
+    add(new THREE.BoxGeometry(2.9, 0.15, 1.7), mats.rock, set.x, y3 + 0.95, set.z);
+    for (let k = 0; k < 6; k++) { const a = (k / 6) * Math.PI * 2; add(new THREE.BoxGeometry(1.8, 0.5, 0.8), mats.accent, set.x + Math.cos(a) * 4.4, y3 + 0.25, set.z + Math.sin(a) * 4.4, 0, -a, 0); }
+  }
+  // Every warren: a ring of small stones and bones by each sleeper's alcove.
+  for (const p of plan.points.sleepers) if (rnd() < 0.5) add(new THREE.BoxGeometry(0.06, 0.06, 0.45), mats.bone, p.x + (rnd() - 0.5), p.y + 0.04, p.z + (rnd() - 0.5), 0, rnd() * 3, 0);
+}
+
 export function buildWarren(theme, opts = {}) {
   const plan = layoutWarren(theme);
   const look = WARREN_LOOKS[theme];
@@ -324,6 +376,10 @@ export function buildWarren(theme, opts = {}) {
     lamp: new THREE.MeshBasicMaterial({ color: 0xffc97a, toneMapped: false }),
     wreck: new THREE.MeshStandardMaterial({ color: 0xc9c4b4, roughness: 0.7, metalness: 0.3 }),
     water: new THREE.MeshStandardMaterial({ color: 0x1d3a3c, roughness: 0.15, metalness: 0.4, transparent: true, opacity: 0.8 }),
+    iron: new THREE.MeshStandardMaterial({ color: 0x3b3a38, roughness: 0.6, metalness: 0.6 }),
+    bone: new THREE.MeshStandardMaterial({ color: 0xcfc6ae, roughness: 0.9 }),
+    day: new THREE.MeshBasicMaterial({ color: 0xfff4d8, toneMapped: false }),
+    shaft: new THREE.MeshBasicMaterial({ color: 0xfff1cf, transparent: true, opacity: 0.12, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, side: THREE.DoubleSide }),
   };
   const solids = planSolids(plan);
   const groundAt = planGround(plan);
@@ -378,14 +434,45 @@ export function buildWarren(theme, opts = {}) {
   { const x = wc.i * C + C / 2, z = wc.j * C + C / 2, y = floorY(wc.depth);
     const van = new THREE.Mesh(new THREE.BoxGeometry(1.9, 1.6, 3.4), mats.wreck); van.position.set(x + 0.6, y + 0.8, z); van.rotation.set(0.1, 0.5, 0.22); group.add(van);
     for (let k = 0; k < 2; k++) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.12, 1.9), mats.accent); st.position.set(x - 1.6, y + 0.1, z - 1 + k * 1.3); st.rotation.y = 0.3 + k * 0.6; group.add(st); } }
-  // The rune door, the strongbox, the lamps, the bolt-holes' daylight.
+  // The rune door: a slab carved with the Pit's glyphs, glowing (world/runes.js draws them; see makeDoorTexture).
   const d = plan.doors.rune;
-  const door = new THREE.Mesh(new THREE.BoxGeometry(2.6, 3.6, 0.5), mats.rune);
-  door.position.set(d.x, d.y + 1.8, d.z); door.rotation.y = d.yaw; door.name = 'rune-door'; group.add(door);
+  const door = new THREE.Group(); door.name = 'rune-door';
+  door.position.set(d.x, d.y, d.z); door.rotation.y = d.yaw;
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(2.6, 3.6, 0.5), mats.rune); slab.position.y = 1.8; door.add(slab);
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.5, 0.8), mats.rock); frame.position.y = 3.85; door.add(frame);
+  for (const sx of [-1, 1]) { const post = new THREE.Mesh(new THREE.BoxGeometry(0.4, 3.9, 0.8), mats.rock); post.position.set(sx * 1.5, 1.95, 0); door.add(post); }
+  const doorTex = opts.doorTexture || makeDoorTexture();
+  if (doorTex) {
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 3.1), new THREE.MeshBasicMaterial({ map: doorTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, color: 0x9eeeff }));
+    face.position.set(0, 1.8, 0.26); door.add(face);
+  }
+  group.add(door);
+  // The strongbox: an iron-bound chest on a rock.
   const sb = plan.points.strongbox;
-  const box = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.6, 0.6), mats.accent); box.position.set(sb.x, sb.y + 0.3, sb.z); box.name = 'strongbox'; group.add(box);
-  const lamps = plan.lamps.map((l) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 6), mats.lamp); m.position.set(l.x, l.y, l.z); group.add(m); return { x: l.x + origin.x, y: l.y + origin.y, z: l.z + origin.z }; });
-  for (const b of plan.exits.boltHoles) { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 1.6), new THREE.MeshBasicMaterial({ color: 0xfff4d8, toneMapped: false })); m.position.set(b.x, b.y + 1.2, b.z); group.add(m); }
+  const box = new THREE.Group(); box.name = 'strongbox'; box.position.set(sb.x, sb.y, sb.z);
+  const chest = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.5, 0.6), mats.accent); chest.position.y = 0.45; box.add(chest);
+  const lid = new THREE.Mesh(new THREE.BoxGeometry(0.94, 0.14, 0.64), mats.iron); lid.position.y = 0.77; box.add(lid);
+  for (const sx of [-0.3, 0.3]) { const band = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.52, 0.64), mats.iron); band.position.set(sx, 0.45, 0); box.add(band); }
+  const rock = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.2, 0.9), mats.rock); rock.position.y = 0.1; box.add(rock);
+  group.add(box);
+  // Lamps: an old oil lantern on a hook, its flame the only warm light (the runtime lends them effect lights).
+  const lamps = plan.lamps.map((l) => {
+    const g = new THREE.Group(); g.position.set(l.x, l.y, l.z);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.22, 0.16), mats.iron); g.add(body);
+    const flame = new THREE.Mesh(new THREE.SphereGeometry(0.07, 8, 6), mats.lamp); flame.scale.y = 1.4; g.add(flame);
+    const hook = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.5, 0.02), mats.iron); hook.position.y = 0.36; g.add(hook);
+    group.add(g);
+    return { x: l.x + origin.x, y: l.y + origin.y, z: l.z + origin.z, color: 0xffb46a };
+  });
+  // The bolt-holes: a crack of daylight in the rock.
+  for (const b of plan.exits.boltHoles) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.45, 1.7), mats.day);
+    m.position.set(b.x, b.y + 1.1, b.z); m.lookAt(b.x + 0.001, b.y + 1.1, b.z + 1); group.add(m);
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.9, 3, 10, 1, true), mats.shaft);
+    shaft.position.set(b.x, b.y + 1.5, b.z); group.add(shaft);
+  }
+  dressSetPiece(group, plan, theme, mats, floorY, C);
+
   // Everything to world space (the contract speaks the world's coordinates).
   const W = (p) => (p ? { ...p, x: p.x + origin.x, y: (p.y || 0) + origin.y, z: p.z + origin.z } : p);
   const worldSolids = solids.map((s) => ({ ...s, minX: s.minX + origin.x, maxX: s.maxX + origin.x, minY: s.minY + origin.y, maxY: s.maxY + origin.y, minZ: s.minZ + origin.z, maxZ: s.maxZ + origin.z }));
@@ -401,6 +488,7 @@ export function buildWarren(theme, opts = {}) {
     points: { sleepers: pts.sleepers.map(W), nests: pts.nests.map(W), crates: pts.crates.map(W), strongbox: W(pts.strongbox), tags: pts.tags.map(W), set: W(pts.set) },
     doors: { rune: W(plan.doors.rune) },
     lamps,
+    light: { ambient: look.ambient, fog: look.fog, fogNear: 4, fogFar: 26 },   // for the runtime: the dark below (CU-71)
     dispose() { group.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); for (const m of Object.values(mats)) m.dispose(); if (group.parent) group.parent.remove(group); },
   };
 }

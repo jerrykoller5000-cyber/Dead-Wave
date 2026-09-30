@@ -121,6 +121,13 @@
       "reference": null
     },
     {
+      "asset": "warrens",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "zombie-reactions",
       "owner": "grokbot",
       "rig": "zombie",

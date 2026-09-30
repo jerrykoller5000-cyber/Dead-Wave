@@ -562,6 +562,25 @@ the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in 
   (`world.wanderer` is the enriched labelKey).
 - TT: `spawnWanderer(d)`, `wandererAllowed`, `wandererTrails`, `wandererReward`, `WANDERER_PACE`. Test: t143.
 
+## The Hush (GB-106, P-135, D-67; proposed by Grokbot 2026-09-30, from docs/specs/hollows.md A1)
+
+- `hush-state` on `'dw-game'`, and `getHushState()` (plain and on `window.TT`): `{ owned, charged, lit, cave, battery, below }`.
+  Published when any of them changes (the battery only when it hits 0); read `getHushState()` for the live battery.
+- `owned`: from the first `startPrep` with the relay repaired (`relayUp()`), so the dawn after the repair, for the run.
+  `charged`: set at each `startPrep` once owned, spent on going down. `battery`: `HUSH_SECONDS` (480), counting only while `below`.
+- At a mouth, in prep, within 5 m (`HUSH_MOUTH_R`), `hushPrompt()` gives what it says and whether E acts:
+  `hush.flat` (no charge, including before the relay) and `hush.chalk` (the chalk mouth, with a charge) do nothing;
+  `hush.noTime` while the alarm is sounding (`hq.seq`; prep has no countdown any more, so this is the spec's
+  last-20-s refusal); `hush.light` lights it (`lit`, `cave`); then `hush.goDown` goes down. The words are ChatGPT's keys,
+  read with fallbacks until they exist.
+- Lit, the walk-in grab (`checkScriptedKillTriggers`, the cave branch) skips everyone at that mouth. Walking more than
+  8 m from it (`HUSH_LIT_R`), the alarm or the end of prep puts it out, and the charge is kept. The poke chase is unchanged.
+- Going down: `'dw-game'` `'hollow'` `{ phase: 'enter', cave, how: 'mouth' }`. Until CU-71's runtime lands, `hushAction()`
+  publishes it; the runtime should replace that line with its own enter, which publishes the same event. On `enter` the
+  Hush is `below` and spent; on `leave` it's up and out. While `below`, `hqStartWave` refuses (the alarm can't sound).
+  `updateHush(dt)` runs next to `checkScriptedKillTriggers(dt)`; the runtime must keep calling it while topside is frozen.
+- TT: `getHushState`, `hushDbg` (`prompt()`, `mouths()`, `surface(how)`, `grabbing()`, `alarm()`). Test: t152.
+
 ## Survivor bounties (GB-90, P-64; proposed by Grokbot 2026-09-30)
 
 - From night 3 (`SURVIVOR_FROM`), each campsite bounty that `spawnBounties` posts can hold a survivor: chance

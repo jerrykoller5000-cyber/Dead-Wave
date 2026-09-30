@@ -62,11 +62,11 @@ delve in each warren to close it. **Claude's specs come first: nearly all of R5 
 CL-79 the secret, CL-76 Fog Night's fog). Until your R5 task's "after" is met, take R6 (GB-94, GP-71 to GP-73,
 CU-55 to CU-57, AG-27). **Never save this board or `crew/LOG.md` from a copy you read earlier;** tick your box with
 `crew.mjs out` (it reads the file fresh).
-- **The Hollows' spec is in** (`docs/specs/hollows.md`, CL-98): GB-106, CU-71, GP-83 and CL-99 can start. Jerry reads it
-  meanwhile; a change he asks for lands in the spec and the tasks follow it.
-- **The secret's spec is in** (`docs/specs/secret-quest.md`, CL-79): GP-70 can start; CL-80 is Claude's. Both specs
-  wait on Jerry's yes (Q-5); build meanwhile, and follow any change he asks for.
-- Claude: CL-99 (the five warrens, a test warren first for CU-71), CL-80 (the stones from the tower), CL-76 (Fog Night's fog: CU-54 and AG-25 wait), then CL-92 and CL-93 (GP-81 waits), CL-75, CL-78, CL-81.
+- **The Hollows' spec is in** (`docs/specs/hollows.md`, CL-98): GB-106, CU-71, GP-83 and CL-99 can start. Jerry left it to
+  Claude's judgement (Q-5): it stands as written.
+- **The secret's spec is in** (`docs/specs/secret-quest.md`, CL-79): GP-70 can start; CL-80 is Claude's. Jerry left both
+  specs to Claude's judgement (Q-5): they stand as written.
+- Claude: CL-99 v2 (the warrens' dressing, light and dark; v1 layouts are in), CL-76 (Fog Night's fog: CU-54 and AG-25 wait), then CL-92 and CL-93 (GP-81 waits), CL-75, CL-78, CL-81.
 - Cursor: CU-53 (R4), then CU-71 (the Hollows' runtime, spec §2); R6 meanwhile; CU-54 after CL-76.
 - Grokbot: GB-106 (the Hush, spec §1); then R6 (GB-94); GB-107 after CU-71 and CL-99.
 - ChatGPT: GP-93 (the dressing room's words), GP-83 (the haul, hollows.md §6), GP-70 (the radio's Tune and the true ending, secret-quest.md §3, §6); R6 meanwhile.
@@ -120,6 +120,9 @@ For players who look, the relay's static and the pit stones hide a way to silenc
 guardian for the true ending. `docs/roadmap.md` has it in full.
 
 ## Orders from Jerry
+
+- **2026-09-30, ~23:25Z · The Hollows and the secret: Claude's judgement.** "For the hollows and the secret, use your best
+  judgement." Q-5 closed: both specs stand (docs/specs/hollows.md, docs/specs/secret-quest.md); build them as written.
 
 - **2026-09-30, ~22:20Z · On to R5.** "Great work please continue. If you guys get done with R4 move to R5." R4's
   tasks are done but CU-53 (running), so the mission is R5 now; R4 closes when Jerry has played a run to the boat.
@@ -454,7 +457,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   rig and can die there. After GP-70; after CL-78. Details: `docs/roadmap.md` P-97.
 - [ ] **GB-93** **R5 · P-98.** Swarm Night on 17: runners from every cave, faster pushes. After AG-25. Details:
   `docs/roadmap.md` P-98.
-- [>] **GB-106** **R5 · P-135.** The Hush (D-67): one charge a dawn once the relay is up; lit at a mouth it stops the
+- [x] **GB-106** **R5 · P-135.** The Hush (D-67): one charge a dawn once the relay is up; lit at a mouth it stops the
   walk-in grab and E goes down; the chalk mouth refuses; the poke chase unchanged. After CL-98; after GB-78. Details:
   `docs/roadmap.md` P-135.
 - [ ] **GB-107** **R5 · P-138.** Fighting below: sleepers that wake to noise and light, nests to blow up, each Deep's
@@ -553,7 +556,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   tower, the HQ), the note shows with that action instead of a second prompt. After GP-66. Details: `docs/roadmap.md` P-86.
 - [x] **GP-69** **R5 · P-66.** Survivors on the board ("Someone lit a fire at the trapper's camp") and on the victory
   screen. After GB-90. Details: `docs/roadmap.md` P-66.
-- [>] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
+- [ ] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
   ending, the rune gun at the dock. After CL-79. Details: `docs/roadmap.md` P-96.
 - [ ] **GP-83** **R5 · P-140.** The Hollows' haul (D-67): `game/hollows-loot.js`: skulls, crates, one strongbox a
   warren a run (a blueprint, an early gun, a mod, a camo, a rune shard), the twelve dog tags; a delve pays about half
@@ -692,7 +695,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   `docs/roadmap.md` P-67.
 - [x] **CL-79** **R5 · P-94, P-69.** The secret quest's spec, docs/specs/secret-quest.md, for Jerry's yes (D-56).
   After CL-74. Details: `docs/roadmap.md` P-94, P-69.
-- [ ] **CL-80** **R5 · P-95.** The secret's world: the pit stones pulse in order at night, seen from the tower; the
+- [x] **CL-80** **R5 · P-95.** The secret's world: the pit stones pulse in order at night, seen from the tower; the
   lake goes quiet. After CL-79. Details: `docs/roadmap.md` P-95.
 - [ ] **CL-81** **R5 · P-68.** The kick-free gets a real let-go beat in the studio. After GB-78; after CL-62. Details:
   `docs/roadmap.md` P-68.

@@ -1201,6 +1201,7 @@
     import { presets as MotionPresets } from './studio/motion/index.js';   // GB-65 (D-42): the reaction presets
     import * as PitArms from './world/pit-tentacles.js';
     import { createExtractionBoat } from './world/boat.js';   // CL-73
+    import { RUNE_COUNT, makeGlyphAtlas, pulseAt } from './world/runes.js';   // CL-80: the Pit's eight glyphs and the word
     import { buildWarren, layoutWarren, WARREN_THEMES, HOLLOW } from './world/hollows.js';   // CL-99: the warrens (CU-71 takes him down)
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
@@ -7127,6 +7128,44 @@
     }
     // Cryptic glyphs, drawn as one long strip: the band is wrapped round the pit's
     // floor, so the writing runs round the slope the way a carved inscription would.
+    let pitGlyphTex = null;
+    function pitGlyphAtlas() {
+      if (!pitGlyphTex) { pitGlyphTex = new THREE.CanvasTexture(makeGlyphAtlas(document)); pitGlyphTex.colorSpace = THREE.SRGBColorSpace; }
+      return pitGlyphTex;
+    }
+    function setPitWord(order) { pitSignal.word = Array.isArray(order) && order.length ? order.map((n) => n | 0) : null; pitSignal.t = 0; }
+    function setPitSilenced(on) { pitSignal.silenced = !!on; }
+    function updatePitSignal(dt, o) {   // o.night overrides the sky (tests)
+      const s = pitSignal;
+      if (!s.marks.length) return;
+      s.t += dt;
+      const on = !!s.word && !s.silenced && (o && o.night != null ? o.night : isNight) && onTowerDeck;
+      const p = s.freeze || (on ? pulseAt(s.word, s.t) : { stone: -1, glow: 0 });   // freeze: the review sheet's still
+      for (let k = 0; k < s.marks.length; k++) {
+        const lit = k === p.stone ? p.glow : 0;
+        const key = s.silenced ? -1 : lit;
+        const m = s.marks[k], st = s.stones[k], b = s.beams[k];
+        if (m.userData.lit === key) continue;
+        m.userData.lit = key;
+        m.material.color.setHex(0x9eeeff).multiplyScalar(s.silenced ? 0.15 : 1 + 2.5 * lit);
+        m.scale.setScalar(1 + 0.6 * lit);
+        st.material.emissiveIntensity = s.silenced ? 0 : 0.4 + 2.4 * lit;
+        b.visible = lit > 0.02;
+        b.material.opacity = 0.5 * lit;
+      }
+      if (s.shown !== s.silenced) {
+        s.shown = s.silenced;
+        if (s.runeMat) s.runeMat.opacity = s.silenced ? 0.12 : 0.95;
+        if (s.deepGlowMat) s.deepGlowMat.opacity = s.silenced ? 0 : 0.5;
+      }
+    }
+    // GP-70's quest model tells the world: the word at a run's start, a silenced day, the dawn after it, the ending.
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (!detail || detail.type !== 'quest') return;
+      if (detail.kind === 'word') setPitWord(detail.order);
+      else if (detail.kind === 'silenced' || detail.kind === 'ending') setPitSilenced(true);
+      else if (detail.kind === 'dawn') setPitSilenced(false);
+    });
     function makePitRuneStrip() {
       const W = 1024, H = 96, cv = document.createElement('canvas');
       cv.width = W; cv.height = H;
@@ -7246,6 +7285,11 @@
     // A funnel dug into the lake bed, dropping into a black well. The writing that
     // rings it is inscribed on the funnel's floor — down on the slope under the water,
     // glowing up through it — not a ring floating at the lip or under the surface.
+    // CL-80 (P-95, docs/specs/secret-quest.md §2, §4): the eight stones round the Pit carry the eight glyphs of
+    // world/runes.js (stone k, glyph k). On a night with a word set (GP-70's quest model), from the watchtower's deck
+    // only, the stones of the word flare in turn, each with a column of cold light up through the water; on a silenced
+    // day the Pit goes dark: its runes dim, the deep glow and the stones go out, no bubbles, no ripples.
+    const pitSignal = { word: null, silenced: false, t: 0, marks: [], stones: [], beams: [], runeMat: null, deepGlowMat: null, shown: -2 };
     function buildLakeHole() {
       const cx = LAKE_HOLE.x, cz = LAKE_HOLE.z, R = LAKE_HOLE.r;
       // Carve first so the rendered bed and the gameplay heightfield agree on the funnel.
@@ -7281,6 +7325,7 @@
         map: runeTex, color: 0xa8f2ff, transparent: true, opacity: 0.95,
         depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, polygonOffset: true, polygonOffsetFactor: -2
       });
+      pitSignal.runeMat = runeMat; pitSignal.deepGlowMat = deepGlowMat;   // CL-80
       const band = new THREE.Mesh(drapedRing(cx, cz, R * 0.56, R * 0.8, 160, 8, 0.14, 3), runeMat);
       band.renderOrder = 1;
       g.add(band);
@@ -7306,6 +7351,7 @@
         const y = sampleHeight(cx + x, cz + z);
         const h = 1.1 + rnd() * 0.7;
         const stone = new THREE.Mesh(new THREE.BoxGeometry(0.75 + rnd() * 0.25, h, 0.32), tabletMat);
+        stone.material = tabletMat.clone();   // CL-80: each stone flares on its own
         const face = new THREE.Group(), lean = new THREE.Group();
         face.position.set(x, y - 0.25, z);
         face.rotation.y = -a + Math.PI / 2;          // local -z looks into the pit
@@ -7316,14 +7362,24 @@
         const mark = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.42), glyphMat);
         mark.position.set(0, h * 0.62, -0.17);
         mark.rotation.y = Math.PI;
-        // Show a single glyph from the strip.
-        const gi = k % 16;
+        // CL-80: stone k carries glyph k of world/runes.js, the same eight the radio's Tune row draws (GP-70).
+        mark.material = glyphMat.clone();
+        mark.material.map = pitGlyphAtlas();
         const uvA = mark.geometry.attributes.uv;
-        for (let v = 0; v < uvA.count; v++) uvA.setXY(v, (gi + 0.1 + uvA.getX(v) * 0.8) / 16, 0.15 + uvA.getY(v) * 0.7);
+        for (let v = 0; v < uvA.count; v++) uvA.setXY(v, (k + 0.05 + uvA.getX(v) * 0.9) / RUNE_COUNT, 0.05 + uvA.getY(v) * 0.9);
         uvA.needsUpdate = true;
         mark.renderOrder = 3;            // after the lake surface, like the ring above
         lean.add(mark);
         g.add(face);
+        // The column of light a flaring stone sends up through the water.
+        const beamH = Math.max(1, LAKE.level - (y - 0.25));
+        const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 1.2, beamH, 14, 1, true),
+          new THREE.MeshBasicMaterial({ color: 0x9eeeff, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, side: THREE.DoubleSide }));
+        beam.position.set(x, y - 0.25 + beamH / 2, z);
+        beam.renderOrder = 3;
+        beam.visible = false;
+        g.add(beam);
+        pitSignal.marks.push(mark); pitSignal.stones.push(stone); pitSignal.beams.push(beam);
       }
       // Scoured stones and bones on the outer shelf, each on the bed where it lies.
       for (let k = 0; k < 16; k++) {
@@ -22124,6 +22180,7 @@
     // launcher on the tower, the corner strobes going for five seconds, then the wave.
     function hqStartWave() {
       if (!gameStarted || gameOver || won) return;
+      if (hush.below) { AudioSys.invalid(); return; }   // GB-106: no alarm while he's below
       if (phase !== 'prep' || hq.seq) { AudioSys.invalid(); showBanner('WAVE UNDER WAY', 'The panel works between waves', 1.2, '#ffb347'); return; }
       if (devNoZombies) { AudioSys.invalid(); showBanner('NODEAD IS ON', 'Waves are switched off', 1.2, '#ffb347'); return; }
       endZombieGrace();
@@ -22265,6 +22322,7 @@
         else if (a === 'door') { const d = nearestDoor(); text = d && d.doorOpen ? 'E — Close the door' : 'E — Open the door'; }
         else if (a === 'stairs') { const st = nearestFoldStairs(); text = st && st.folded ? 'E — Lower the stairs' : 'E — Raise the stairs'; }
         else if (a === 'dismount') text = 'E — Leave the mortar · T — Shoulder it';
+        if (!text) { const hp = hushPrompt(); if (hp) text = sayText(hp.key, {}, hp.fallback); }   // GB-106 (ChatGPT keys the words)
         if (!text && a === 'survivor') text = dwText('survivor.rescue');   // GB-90
         if (!text && boardingReach()) text = boardHoldT > 0 ? dwText('extraction.boarding', {pct: Math.round(100 * boardHoldT / BOARD_HOLD_S)}) : dwText('extraction.boardPrompt');   // GB-86/GB-114
         if (!text && gameStarted && !gameOver && !won) {
@@ -22295,6 +22353,7 @@
       if (!placeMode && !buildMode && nearHQPanel()) return 'hqPanel';
       if (!placeMode && !buildMode && nearArmory()) return 'armory';   // CL-103: checked first, the two hatches are side by side
       if (!placeMode && !buildMode && nearCIF()) return 'cif';
+      if (!placeMode && !buildMode && hushPrompt()?.act) return 'hush';   // GB-106
       if (!placeMode && !buildMode && survivorInReach()) return 'survivor';   // GB-90
       if (kd < KIOSK.useDist && kd <= md && kd <= dd && kd <= sd) return 'kiosk';
       if (m && md <= dd && md <= sd) return 'mountMortar';
@@ -22311,6 +22370,7 @@
       else if (a === 'kiosk') openShop();
       else if (a === 'door') toggleDoor(nearestDoor());
       else if (a === 'stairs') toggleStairs(nearestFoldStairs());
+      else if (a === 'hush') hushAction();   // GB-106
       else if (a === 'survivor') rescueSurvivor(survivorInReach());   // GB-90
       else if (a) interactMortar();
       else if (tower?.alive && onTowerDeck && Math.hypot(localPlayer.position.x - tower.x, localPlayer.position.z - tower.z) < TOWER_DECK_HALF + 0.8)
@@ -30032,6 +30092,92 @@
       nightOrder = 'blackout';
       if (wavePreview && wavePreview.day === day && wavePreview.night) wavePreview.night.order = nightOrder;
     });
+    // GB-106 (P-135, D-67; docs/specs/hollows.md A1): the Hush. From the dawn after the relay is repaired he owns it,
+    // and every prep (startPrep) charges it. In prep, within HUSH_MOUTH_R m of a cave mouth: with a charge, E lights it
+    // (the walk-in grab at that mouth then skips everyone) and a second E takes him down. The chalk mouth refuses ("too
+    // close to the source"); no charge (spent today, or no relay yet) reads "flat"; with the alarm already sounding it
+    // reads "no time" (prep has no countdown any more, so the spec's last-20-s refusal is the alarm's inbound). Going
+    // down spends the charge; until CU-71's runtime lands, the way down is the 'dw-game' 'hollow' { phase: 'enter', cave,
+    // how: 'mouth' } event itself. Below, the battery (HUSH_SECONDS) counts down and the alarm can't be called; a
+    // 'hollow' 'leave' brings him up. Walking more than HUSH_LIT_R m from a lit mouth, or the alarm, puts it out (the
+    // charge is kept). Contract: 'hush-state' { owned, charged, lit, cave, battery, below }, getHushState().
+    const HUSH_SECONDS = 480, HUSH_MOUTH_R = 5, HUSH_LIT_R = 8;
+    const hush = { owned: false, charged: false, lit: false, cave: -1, battery: HUSH_SECONDS, below: false };
+    function getHushState() {
+      return { owned: hush.owned, charged: hush.charged, lit: hush.lit, cave: hush.cave, battery: Math.max(0, hush.battery), below: hush.below };
+    }
+    function publishHush() { publishUI('hush-state', getHushState()); }
+    function hushDawn() {   // startPrep, after the day has turned
+      if (!hush.owned && relayUp()) hush.owned = true;
+      hush.charged = hush.owned; hush.lit = false; hush.cave = -1; hush.below = false; hush.battery = HUSH_SECONDS;
+      publishHush();
+    }
+    function nearestHushMouth() {
+      if (!POI.caves || !POI.caves.length) return null;
+      const p = localPlayer.position;
+      let best = null, bd = HUSH_MOUTH_R;
+      POI.caves.forEach((c, i) => {
+        if (!c) return;
+        const d = Math.hypot(p.x - c.x, p.z - c.z);
+        if (d <= bd && Math.abs(p.y - (c.gy ?? p.y)) < 3) { bd = d; best = { c, i, d }; }
+      });
+      return best;
+    }
+    // What the mouth says, and whether E acts there: { act, key, fallback, cave } or null.
+    function hushPrompt() {
+      if (!gameStarted || gameOver || won || phase !== 'prep' || hush.below) return null;
+      const m = nearestHushMouth();
+      if (!m) return null;
+      if (!hush.charged) return { act: false, key: 'hush.flat', fallback: 'The Hush is flat. Tomorrow.', cave: m.i };
+      if (m.c.theme === 'chalk') return { act: false, key: 'hush.chalk', fallback: 'Too close to the source.', cave: m.i };
+      if (hq.seq) return { act: false, key: 'hush.noTime', fallback: 'No time. Tomorrow.', cave: m.i };
+      if (hush.lit && hush.cave === m.i) return { act: true, key: 'hush.goDown', fallback: 'E \u2014 Go down', cave: m.i };
+      return { act: true, key: 'hush.light', fallback: 'E \u2014 Light the Hush', cave: m.i };
+    }
+    function hushAction() {
+      const hp = hushPrompt();
+      if (!hp || !hp.act) return false;
+      if (hush.lit && hush.cave === hp.cave) {
+        publishUI('hollow', { phase: 'enter', cave: hp.cave, how: 'mouth' });   // CU-71: the runtime's enter goes here
+        return true;
+      }
+      hush.lit = true; hush.cave = hp.cave;
+      publishHush();
+      return true;
+    }
+    function updateHush(dt) {
+      if (hush.below) {
+        if (hush.battery > 0) { hush.battery -= dt; if (hush.battery <= 0) { hush.battery = 0; publishHush(); } }
+        return;
+      }
+      if (!hush.lit) return;
+      const c = POI.caves && POI.caves[hush.cave];
+      const p = localPlayer.position;
+      if (!c || phase !== 'prep' || hq.seq || gameOver || won || Math.hypot(p.x - c.x, p.z - c.z) > HUSH_LIT_R) {
+        hush.lit = false; hush.cave = -1; publishHush();
+      }
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (!detail) return;
+      if (detail.type === 'hollow' && detail.phase === 'enter') {
+        hush.below = true; hush.charged = false; hush.lit = true; hush.battery = HUSH_SECONDS;
+        if (Number.isInteger(detail.cave)) hush.cave = detail.cave;
+        publishHush();
+      } else if (detail.type === 'hollow' && detail.phase === 'leave') {
+        hush.below = false; hush.lit = false; hush.cave = -1;
+        publishHush();
+      } else if (detail.type === 'run-reset') {
+        hush.owned = false; hush.charged = false; hush.lit = false; hush.cave = -1; hush.battery = HUSH_SECONDS; hush.below = false;
+        publishHush();
+      }
+    });
+    const hushDbg = {
+      prompt: () => hushPrompt(),
+      mouths: () => (POI.caves || []).map((c, i) => (c ? { i, x: c.x, z: c.z, gy: c.gy, yaw: c.yaw, theme: c.theme } : null)),
+      surface: (how = 'mouth') => publishUI('hollow', { phase: 'leave', cave: hush.cave, how }),
+      grabbing: () => !!scriptedKill, over: () => !!(gameOver || won), alarm: () => !!hq.seq,
+      MOUTH_R: HUSH_MOUTH_R, LIT_R: HUSH_LIT_R, SECONDS: HUSH_SECONDS
+    };
     function startPrep() {
       restoreMapDrums();   // CL-72 (P-43): the drums are back each morning
       // Claude's CL-41 hook: camera has returned before this presentation snapshot.
@@ -30069,6 +30215,7 @@
       resetCavePokeDay(day === 1);   // GB-44: day 1 is a new run
       phase = 'prep';
       prepTimer = PREP_TIME;
+      hushDawn();   // GB-106: the Hush charges at dawn
       if (armorMax() > 0 && playerArmor < armorMax()) { playerArmor = armorMax(); updateHpHud(); }
       bloodMoon = day >= 4 && day % 4 === 0;
       lastDare = hqBlackout ? { day: day - 1, earned: Math.round(dareEarned) } : null;   // GB-82: the dare ends with its night
@@ -33619,7 +33766,7 @@
       b.m.scale.setScalar(b.r);
     }
     function updatePitBubbles(dt) {
-      const near = Math.hypot(player.position.x - LAKE_HOLE.x, player.position.z - LAKE_HOLE.z) < PIT_BUBBLE_NEAR;
+      const near = !pitSignal.silenced && Math.hypot(player.position.x - LAKE_HOLE.x, player.position.z - LAKE_HOLE.z) < PIT_BUBBLE_NEAR;   // CL-80
       if (!near) {
         if (pitBubblesOn) { for (const b of pitBubbles) b.m.visible = false; pitBubblesOn = false; }
         return;
@@ -34312,9 +34459,10 @@
     });
     function checkScriptedKillTriggers(dt) {
       updatePitBubbles(dt);
+      updatePitSignal(dt);   // CL-80
       updateWorldVoices(dt);
       sinkholeRippleT -= dt;
-      if (sinkholeRippleT <= 0) {
+      if (sinkholeRippleT <= 0 && !pitSignal.silenced) {   // CL-80: a silenced lake lies flat
         // The tell: the water over the hole never sits quite still.
         sinkholeRippleT = 2.2 + Math.random() * 1.6;
         spawnRipple(LAKE_HOLE.x + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), LAKE.level + 0.02, LAKE_HOLE.z + (Math.random() - 0.5) * (LAKE_HOLE.r * 0.7), 1.4, 1.6);
@@ -34334,6 +34482,7 @@
       for (const who of players) for (const c of POI.caves) {
         const dx = who.position.x - c.x, dz = who.position.z - c.z;
         if (dx * dx + dz * dz > 36) continue;
+        if (hush.lit && !hush.below && POI.caves[hush.cave] === c) continue;   // GB-106: a lit Hush lets them walk in
         const fx = Math.sin(c.yaw), fz = Math.cos(c.yaw);
         const lz = dx * fx + dz * fz;
         const lx = dx * Math.cos(c.yaw) - dz * Math.sin(c.yaw);
@@ -42599,6 +42748,7 @@ live++;
         }
         // The caves and the sinkhole: step into a mouth, or swim over the hole,
         // and the scripted kill takes it from here.
+        updateHush(dt);   // GB-106
         checkScriptedKillTriggers(dt);
         // Always face aim so weaponMount +Z tracks mouse
         // Crewing the mortar turns you to the tube, not to where the shell is going.
@@ -43109,7 +43259,7 @@ live++;
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel,
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
-          acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
+          acidGlobs, pickWaterSpawn, waveComposition, nightPlanFor, NIGHT_PLAN, NIGHT_TIER, nightPushSizes, getWavePace: () => nightPace, pickZombieType, getWavePreview, getBounties, spawnBounties, expireBounties, bountyRewardFor, getSurvivors, survivorDbg, survivorHelpDbg, getHushState, hushDbg, spawnWanderer, wandererAllowed, wandererTrails, wandererReward, WANDERER_PACE, bountyGuardTypes, bountyDbg: () => ({ due: bountiesDue, seq: !!hq.seq, last: bountyLastKeys.slice() }), getWaveDirectorState, getActiveCaveIndices, spawnWaveBatch, beginWave, startPrep, clearZombies, isGuardianNight, getGuardianState, getGuardianAlive, GUARDIAN_KEYS, ZOMBIE_TYPES, MAX_ZOMBIES, spawnObjectiveDefenders, getRadioDefenderState, grantSupply, listOwnedAmmoPackChoices, grantBuildBlueprint, pulseGuardianFailsafeForTest, RADIO_DEFENDER, CAVE_ROLES, roleForCave, applyCaveRole, CLIMB_HEIGHT, climberCanVaultBuild, warnActiveCaves, getRendererBackend: () => rendererBackend, TSL,
           flowField: () => ({ ready: ffPlayer.ready, ms: ffPlayer.lastMs, ox: ffPlayer.ox, oz: ffPlayer.oz, house: { ready: ffHouse.ready, ms: ffHouse.lastMs } }),
           updateFlowField: (dt, force) => updateFlowFields(dt || 0, force !== false), flowDir: (x, z) => (flowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
           houseFlowDir: (x, z) => (houseFlowDir(x, z) ? { x: _ffOut.x, z: _ffOut.z } : null),
@@ -43142,7 +43292,7 @@ live++;
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
-          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW,   /* CL-99 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; },   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
       }

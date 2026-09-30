@@ -37,11 +37,7 @@ async function run() {
       return p === 'prep';
     })()`, { timeout: 60000 });
     
-    await page.waitFor(`(() => {
-      if (!window.TT || !window.TT.marine) return false;
-      const m = window.TT.marine;
-      return m.userData.deploying === false || m.position.y < window.TT.sampleHeight(m.position.x, m.position.z) + 1;
-    })()`, { timeout: 60000 });
+    await page.waitFor(`(() => !document.body.classList.contains('deploying'))()`, { timeout: 60000 });
     
     await page.evaluate('new Promise(r => setTimeout(r, 1000))');
 
@@ -51,9 +47,11 @@ async function run() {
       p.set(30, TT.sampleHeight(30, 30), 30);
       TT.setVelDbg(0, 0);
       
+      // Make marine visible in first person
+      TT.marine.visible = true;
+      
       // Setup camera nicely
-      const m = TT.marine;
-      TT.setShotView({ x: m.position.x + 2, y: m.position.y + 1, z: m.position.z + 2, tx: m.position.x, ty: m.position.y + 0.8, tz: m.position.z, fov: 40 });
+      TT.setShotView({ x: p.x + 2, y: p.y + 1, z: p.z + 2, tx: p.x, ty: p.y + 0.8, tz: p.z, fov: 40 });
       
       TT.grantAllWeapons();
       // The request says: "grant all, then two primaries, two secondaries and the pistol"
@@ -74,6 +72,14 @@ async function run() {
     await page.evaluate('new Promise(r => setTimeout(r, 500))');
 
     const takeShot = async (name) => {
+      const posLog = await page.evaluate(`(() => {
+        const p = TT.player.position;
+        const m = TT.marine;
+        const mp = new TT.THREE.Vector3();
+        m.getWorldPosition(mp);
+        return 'Shot ' + ${JSON.stringify(name)} + ' | Player: ' + p.x.toFixed(2) + ' ' + p.y.toFixed(2) + ' ' + p.z.toFixed(2) + ' | Marine: ' + mp.x.toFixed(2) + ' ' + mp.y.toFixed(2) + ' ' + mp.z.toFixed(2) + ' | Camera: ' + TT.camera.position.x.toFixed(2) + ' ' + TT.camera.position.y.toFixed(2) + ' ' + TT.camera.position.z.toFixed(2);
+      })()`);
+      console.log(posLog);
       await page.screenshot(path.join(OUT_DIR, name));
       console.log('Shot taken:', name);
     };
