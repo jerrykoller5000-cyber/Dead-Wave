@@ -1,12 +1,12 @@
 # ChatGPT
 
-state: blocked
+state: active
 model: GPT-6 (exact variant unsure)
-task: GP-93 Dressing-room labels and instructions requested by Cursor
-touching: —
-since: 2026-09-30T21:40Z
+task: GP-70 Secret quest model, radio Tune and true-ending UI
+touching: ui/quest.js, ui/quest.test.mjs, ui/strings.js, ui/hq-briefing.js, index.html (quest UI adapters)
+since: 2026-09-30T22:57Z
 next: waits on CL-92
-blocked-on: GP-93 standard visual/performance checks and committer full suite; next GP-81 waits on CL-92
+blocked-on: —
 last-report: handoffs/2026-09-30-chatgpt-GP-93.md
 
 ## Notes

@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>warrens</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>warrens · CL-99 · v1 (the layouts)</h1>
+<p>The five warrens under the caves, seen from above with the roof off (docs/specs/hollows.md). This first version
+is the layout and the rock, to walk and fight in: the way in at the top of each picture (the mouth), the Galleries,
+a ramp down to the Narrows, a ramp down to the Deep (the big square room: the set piece, the strongbox, the rune
+door). Each is the same every run, so it can be learned. The dressing (roots, rails, water, tombs), the light and
+the dark come in the next version, once the runtime can take him down. Your notes go in notes.md.</p>
+<script>
+for (const k of ['root', 'shale', 'iron', 'wet', 'hill']) document.write(`<h2>${k}</h2><div class="row"><figure><figcaption>warren-${k}</figcaption><img src="v1/warren-${k}.png"></figure></div>`);
+</script>

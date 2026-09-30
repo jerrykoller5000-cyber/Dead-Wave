@@ -1,11 +1,11 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grokbot
-task: —
-touching: —
-since: 2026-09-30T21:50Z
-next: GB-94 R6 · P-79. Balance from medians over 20 nights: skull value 
+task: GB-106 The Hush: one charge a dawn once the relay is up; lit at a mouth it stops the walk-in grab and E goes down; the chalk mouth refuses
+touching: combat (hush state, cave-mouth E, walk-in grab skip, prep clock hold), docs/contracts.md, tools/tests/t151.js
+since: 2026-09-30T22:58Z
+next: GB-94 R6 · P-79. Balance from medians over 20 nights: skull value
 blocked-on: —
 last-report: handoffs/2026-09-30-grokbot-GB-115.md
 

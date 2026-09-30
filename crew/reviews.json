@@ -72,6 +72,13 @@
       "reference": null
     },
     {
+      "asset": "marine-draw",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "marine-fidelity",
       "owner": "claude",
       "rig": "marine",

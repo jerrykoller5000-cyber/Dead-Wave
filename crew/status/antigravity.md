@@ -1,10 +1,10 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 3.1 Pro (High)
-task: —
-touching: —
-since: 2026-09-30T19:24Z
+task: AG-46 shots: the draw and holster moves (CL-90 part 2)
+touching: qa/shoot-ag46.mjs
+since: 2026-09-30T22:55Z
 next: waits on CL-76
 blocked-on: —
 last-report: handoffs/2026-09-30-antigravity-AG-24.md

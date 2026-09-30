@@ -1201,6 +1201,7 @@
     import { presets as MotionPresets } from './studio/motion/index.js';   // GB-65 (D-42): the reaction presets
     import * as PitArms from './world/pit-tentacles.js';
     import { createExtractionBoat } from './world/boat.js';   // CL-73
+    import { buildWarren, layoutWarren, WARREN_THEMES, HOLLOW } from './world/hollows.js';   // CL-99: the warrens (CU-71 takes him down)
     // Three Shader Language — the node-graph shader API the WebGPU renderer speaks.
     // Only the sky uses it today; any future GPU work belongs here rather than in GLSL.
     import * as TSL from 'three/tsl';
@@ -43141,7 +43142,7 @@ live++;
           setWorldTime: (t) => { worldTime = ((t % 1) + 1) % 1; },
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
-          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW,   /* CL-99 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
       }

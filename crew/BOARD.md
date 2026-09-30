@@ -454,7 +454,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   rig and can die there. After GP-70; after CL-78. Details: `docs/roadmap.md` P-97.
 - [ ] **GB-93** **R5 · P-98.** Swarm Night on 17: runners from every cave, faster pushes. After AG-25. Details:
   `docs/roadmap.md` P-98.
-- [ ] **GB-106** **R5 · P-135.** The Hush (D-67): one charge a dawn once the relay is up; lit at a mouth it stops the
+- [>] **GB-106** **R5 · P-135.** The Hush (D-67): one charge a dawn once the relay is up; lit at a mouth it stops the
   walk-in grab and E goes down; the chalk mouth refuses; the poke chase unchanged. After CL-98; after GB-78. Details:
   `docs/roadmap.md` P-135.
 - [ ] **GB-107** **R5 · P-138.** Fighting below: sleepers that wake to noise and light, nests to blow up, each Deep's
@@ -553,7 +553,7 @@ from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`cre
   tower, the HQ), the note shows with that action instead of a second prompt. After GP-66. Details: `docs/roadmap.md` P-86.
 - [x] **GP-69** **R5 · P-66.** Survivors on the board ("Someone lit a fire at the trapper's camp") and on the victory
   screen. After GB-90. Details: `docs/roadmap.md` P-66.
-- [ ] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
+- [>] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
   ending, the rune gun at the dock. After CL-79. Details: `docs/roadmap.md` P-96.
 - [ ] **GP-83** **R5 · P-140.** The Hollows' haul (D-67): `game/hollows-loot.js`: skulls, crates, one strongbox a
   warren a run (a blueprint, an early gun, a mod, a camo, a rune shard), the twelve dog tags; a delve pays about half
