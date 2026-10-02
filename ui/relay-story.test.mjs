@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { text } from './strings.js';
 import { createRelayStory } from './relay-story.js';
 
-test('all twenty Harbor Nine dispatches and every planned prop and survivor line exist', () => {
+test('all twenty Ridgeline dispatches and every planned prop and survivor line exist', () => {
   for (let n = 1; n <= 20; n++) assert(text(`story.relay.${n}`).length > 35, `missing relay ${n}`);
   for (const id of ['relayBroken','convoy','utilityTruck','ranger','hikers','trapper','fuel','dock','watchtower','hq'])
     assert(text(`story.prop.${id}`).length > 20, `missing prop ${id}`);
@@ -50,4 +50,18 @@ test('boat dispatches belong to mornings 18–20 even after a late repair', () =
   assert.equal(story.morning({runId:'late',day:20,repaired:true}).number,20);
   assert.equal(story.morning({runId:'run',day:20,repaired:true}),null,'old run cannot advance new story');
   story.reset('fresh');assert.equal(story.read(true).status,'awaiting');
+});
+
+test('first delve replaces unheard line eight or adds a dispatch next morning once', () => {
+  const story=createRelayStory(); story.reset('a');
+  assert.equal(story.firstDelve('old'),false);
+  assert.equal(story.firstDelve('a'),true); assert.equal(story.firstDelve('a'),false);
+  const lines=[];
+  for(let day=1;day<=10;day++)lines.push(...story.morning({runId:'a',day,repaired:true}).lines);
+  assert.equal(lines.find(x=>x.number===8).line,text('story.relay.delve'));
+  story.reset('b');
+  for(let day=1;day<=10;day++)story.morning({runId:'b',day,repaired:true});
+  story.firstDelve('b');
+  assert.equal(story.morning({runId:'b',day:11,repaired:true}).lines[0].line,text('story.relay.delve'));
+  assert.equal(story.morning({runId:'b',day:12,repaired:true}).lines.length,1);
 });

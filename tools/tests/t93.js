@@ -30,7 +30,10 @@
     const px = 10, pz = 10;
     T.levelGroundRect(px - 30, pz - 30, px + 30, pz + 30, T.sampleHeight(px, pz), 6);
     T.player.position.set(px, T.sampleHeight(px, pz), pz);
-    const kinds = ['shambler', 'feral', 'drowned', 'military', 'brute', 'spitter', 'screamer', 'colossus', 'demon', 'guardian', 'bomber'];
+    // CL-78 (D-55): the guardian boss wears the cave guardian's rig and its zombie body is hidden, so its feet, its head
+    // in the hit column and a headshot at its head are checked on the rig, in t164.
+    const kinds = ['shambler', 'feral', 'drowned', 'military', 'brute', 'spitter', 'screamer', 'colossus', 'demon', 'guardian', 'bomber']
+      .filter((k) => !(k === 'guardian' && T.guardianBossDbg));
     const rest = [], walk = [], head = [], shot = [];
     let i = 0;
     for (const k of kinds) {

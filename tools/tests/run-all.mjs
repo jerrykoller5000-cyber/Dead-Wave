@@ -60,7 +60,7 @@ function buildTestPage() {
   // The import map's "./fakethree.mjs" is not an import-from, so it stays next to test.html.
   out = out.replace(/from (['"])\.\//g, 'from $1/');
   out = out.replace(/import (['"])\.\//g, 'import $1/');
-  const file = path.join(HERE, 'test.html');
+  const file = path.join(HERE, PAGE_NAME);
   fs.writeFileSync(file, out);
   return file;
 }
@@ -70,6 +70,9 @@ const argv = process.argv.slice(2);
 const jobsIdx = argv.indexOf('--jobs');
 const JOBS = jobsIdx >= 0 ? Math.max(1, Number(argv[jobsIdx + 1]) || 1) : 4;
 const keep = argv.includes('--keep');
+// Each run gets its own page, so two agents' runs in this folder don't delete each other's (CU-82). --keep writes
+// test.html, the name the rend/ scripts and a browser opened by hand expect.
+const PAGE_NAME = keep ? 'test.html' : `test-${process.pid}.html`;
 const wanted = argv.filter((a, i) => !a.startsWith('--') && !(jobsIdx >= 0 && i === jobsIdx + 1))
   .map((a) => a.replace(/\.js$/, ''));
 
@@ -106,7 +109,7 @@ async function runOne(name) {
   try {
     // raf=timer: a background page gets no animation frames, and every check needs the
     // game's loop to actually run.
-    await page.goto(`${server.origin}/tools/tests/test.html?debug=1&raf=timer`, { timeout: 120000 });
+    await page.goto(`${server.origin}/tools/tests/${PAGE_NAME}?debug=1&raf=timer`, { timeout: 120000 });
     const ready = await page.waitFor('!!window.TT', { timeout: 120000 });
     if (!ready) {
       note = 'window.TT never appeared: ' + (page.errors[0] || 'no page error reported').split('\n')[0];
@@ -165,7 +168,7 @@ try {
 } finally {
   await browser.close();
   await server.close();
-  if (!keep) { try { fs.unlinkSync(path.join(HERE, 'test.html')); } catch { /* fine */ } }
+  if (!keep) { try { fs.unlinkSync(path.join(HERE, PAGE_NAME)); } catch { /* fine */ } }
 }
 
 // --- report -----------------------------------------------------------------------

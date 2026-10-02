@@ -147,3 +147,173 @@ export function boxProjectUV(pos, uv) {
     }
   }
 }
+
+// === Profile parts (CU-81) ===
+// A gun reads by its outline, and a stack of boxes has none. slab() takes a part's side outline,
+// [z, y] pairs, and gives it a thickness along x with rounded edges; lathe() turns a [radius, z]
+// profile round the z axis. Both are built here rather than with three's ExtrudeGeometry or
+// Shape, which the test build's three does not have. Non-indexed, with normals and UVs, so
+// mergeRigidMeshes and the camo UVs take them like any box.
+const SMOOTH_COS = Math.cos(0.7);
+function buildGeo(pos, nrm) {
+  const geo = new THREE.BufferGeometry();
+  const P = new Float32Array(pos), N = new Float32Array(nrm), U = new Float32Array(pos.length / 3 * 2);
+  for (let i = 0, j = 0; i < P.length; i += 3, j += 2) { U[j] = P[i + 2] * 4; U[j + 1] = P[i + 1] * 4; }
+  geo.setAttribute('position', new THREE.BufferAttribute(P, 3));
+  geo.setAttribute('normal', new THREE.BufferAttribute(N, 3));
+  geo.setAttribute('uv', new THREE.BufferAttribute(U, 2));
+  geo.computeBoundingSphere();
+  return geo;
+}
+// One triangle, wound so its face looks the way its normals do.
+function pushTri(pos, nrm, a, b, c, na, nb, nc) {
+  const ux = b[0] - a[0], uy = b[1] - a[1], uz = b[2] - a[2], vx = c[0] - a[0], vy = c[1] - a[1], vz = c[2] - a[2];
+  const fx = uy * vz - uz * vy, fy = uz * vx - ux * vz, fz = ux * vy - uy * vx;
+  if (fx * fx + fy * fy + fz * fz < 1e-18) return;
+  const flip = fx * (na[0] + nb[0] + nc[0]) + fy * (na[1] + nb[1] + nc[1]) + fz * (na[2] + nb[2] + nc[2]) < 0;
+  const vs = flip ? [a, c, b] : [a, b, c], ns = flip ? [na, nc, nb] : [na, nb, nc];
+  for (let k = 0; k < 3; k++) { pos.push(vs[k][0], vs[k][1], vs[k][2]); nrm.push(ns[k][0], ns[k][1], ns[k][2]); }
+}
+// Ear clipping for a simple polygon, counter-clockwise in (u, v). Returns index triples.
+export function triangulate(pts) {
+  const cross = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+  const idx = pts.map((_, i) => i), tris = [];
+  let guard = pts.length * pts.length + 16;
+  while (idx.length > 3 && guard-- > 0) {
+    let cut = false;
+    for (let i = 0; i < idx.length; i++) {
+      const ia = idx[(i + idx.length - 1) % idx.length], ib = idx[i], ic = idx[(i + 1) % idx.length];
+      const a = pts[ia], b = pts[ib], c = pts[ic], cr = cross(a, b, c);
+      if (Math.abs(cr) < 1e-12) { idx.splice(i, 1); cut = true; break; }
+      if (cr < 0) continue;
+      let ear = true;
+      for (const j of idx) {
+        if (j === ia || j === ib || j === ic) continue;
+        const p = pts[j];
+        if (cross(a, b, p) >= 0 && cross(b, c, p) >= 0 && cross(c, a, p) >= 0) { ear = false; break; }
+      }
+      if (!ear) continue;
+      tris.push([ia, ib, ic]); idx.splice(i, 1); cut = true; break;
+    }
+    if (!cut) break;
+  }
+  if (idx.length === 3) tris.push([idx[0], idx[1], idx[2]]);
+  return tris;
+}
+function cleanOutline(points) {
+  const out = [];
+  for (const p of points) {
+    const q = out[out.length - 1];
+    if (!q || Math.hypot(p[0] - q[0], p[1] - q[1]) > 1e-6) out.push([p[0], p[1]]);
+  }
+  while (out.length > 2 && Math.hypot(out[0][0] - out[out.length - 1][0], out[0][1] - out[out.length - 1][1]) <= 1e-6) out.pop();
+  let area = 0;
+  for (let i = 0; i < out.length; i++) { const a = out[i], b = out[(i + 1) % out.length]; area += a[0] * b[1] - b[0] * a[1]; }
+  return area < 0 ? out.reverse() : out;
+}
+// slab(points, width, bevel, segs): the outline at x = 0 is the part's middle. bevel is how far the
+// rounding eats into the outline (metres); segs 1 is a chamfer, 2 or 3 a rounded edge.
+export function slab(points, width, bevel = 0.004, segs = 2) {
+  const pts = cleanOutline(points), n = pts.length;
+  if (n < 3) return buildGeo([], []);
+  const hw = width / 2, b = Math.max(0, Math.min(bevel, hw * 0.9));
+  // Outward normals of each edge (i -> i+1), in (z, y).
+  const en = [];
+  for (let i = 0; i < n; i++) {
+    const a = pts[i], c = pts[(i + 1) % n], dz = c[0] - a[0], dy = c[1] - a[1], l = Math.hypot(dz, dy) || 1;
+    en.push([dy / l, -dz / l]);
+  }
+  // At each corner: the miter (to inset the outline by d, move by miter * d) and whether it is smooth.
+  const miter = [], smooth = [];
+  for (let i = 0; i < n; i++) {
+    const p = en[(i + n - 1) % n], q = en[i], dot = p[0] * q[0] + p[1] * q[1];
+    let mz = p[0] + q[0], my = p[1] + q[1];
+    const k = 1 / Math.max(0.35, 1 + dot);
+    mz *= k; my *= k;
+    const ml = Math.hypot(mz, my);
+    if (ml > 2.5) { mz *= 2.5 / ml; my *= 2.5 / ml; }
+    miter.push([mz, my]);
+    smooth.push(dot > SMOOTH_COS);
+  }
+  const vn = (i, e) => {
+    if (!smooth[i]) return en[e];
+    const p = en[(i + n - 1) % n], q = en[i], z = p[0] + q[0], y = p[1] + q[1], l = Math.hypot(z, y) || 1;
+    return [z / l, y / l];
+  };
+  // Rings from the -x face round the side to the +x face: [x, inset, cosθ, sinθ (signed toward x)].
+  const rings = [];
+  const S = Math.max(1, segs | 0);
+  for (let k = S; k >= 0; k--) { const t = k / S * Math.PI / 2; rings.push([-(hw - b) - b * Math.sin(t), b * (1 - Math.cos(t)), Math.cos(t), -Math.sin(t)]); }
+  for (let k = 0; k <= S; k++) { const t = k / S * Math.PI / 2; rings.push([(hw - b) + b * Math.sin(t), b * (1 - Math.cos(t)), Math.cos(t), Math.sin(t)]); }
+  const pos = [], nrm = [];
+  const at = (i, r) => [r[0], pts[i][1] - miter[i][1] * r[1], pts[i][0] - miter[i][0] * r[1]];
+  const nAt = (i, e, r) => { const s = vn(i, e); const x = r[3], c = r[2]; const l = Math.hypot(x, s[0] * c, s[1] * c) || 1; return [x / l, s[1] * c / l, s[0] * c / l]; };
+  for (let r = 0; r + 1 < rings.length; r++) {
+    const R0 = rings[r], R1 = rings[r + 1];
+    if (Math.abs(R0[0] - R1[0]) < 1e-9 && Math.abs(R0[1] - R1[1]) < 1e-9) continue;
+    for (let i = 0; i < n; i++) {
+      const j = (i + 1) % n;
+      const a = at(i, R0), bb = at(j, R0), c = at(j, R1), d = at(i, R1);
+      const na = nAt(i, i, R0), nb = nAt(j, i, R0), nc = nAt(j, i, R1), nd = nAt(i, i, R1);
+      pushTri(pos, nrm, a, bb, c, na, nb, nc);
+      pushTri(pos, nrm, a, c, d, na, nc, nd);
+    }
+  }
+  const capIn = b;
+  const flat = pts.map((p, i) => [p[0] - miter[i][0] * capIn, p[1] - miter[i][1] * capIn]);
+  let tris = triangulate(flat);
+  if (tris.length < n - 2) tris = triangulate(pts);
+  for (const sx of [-1, 1]) {
+    const N = [sx, 0, 0];
+    for (const [i, j, k] of tris) pushTri(pos, nrm, [sx * hw, flat[i][1], flat[i][0]], [sx * hw, flat[j][1], flat[j][0]], [sx * hw, flat[k][1], flat[k][0]], N, N, N);
+  }
+  return buildGeo(pos, nrm);
+}
+// lathe(profile, segs, phase): profile is [r, z], back to front (a closed loop, for a ring or a bell,
+// goes forward on the outside). A point given twice in a row is a hard edge; elsewhere the turn is
+// shaded smooth when it bends less than ~40 degrees.
+export function lathe(profile, segs = 14, phase = 0) {
+  const pr = [];
+  for (const p of profile) pr.push([Math.max(0, p[0]), p[1]]);
+  // Walked back to front, the solid lies on the axis side; a profile given front to back is turned round.
+  if (pr.length > 1 && pr[0][1] > pr[pr.length - 1][1]) pr.reverse();
+  const m = pr.length;
+  if (m < 2) return buildGeo([], []);
+  const sn = [];
+  for (let j = 0; j + 1 < m; j++) {
+    const a = pr[j], c = pr[j + 1], dr = c[0] - a[0], dz = c[1] - a[1], l = Math.hypot(dr, dz);
+    sn.push(l < 1e-9 ? null : [dz / l, -dr / l]);
+  }
+  const near = (j, step) => { for (let k = j + step; k >= 0 && k < sn.length; k += step) if (sn[k]) return sn[k]; return null; };
+  const ends = (j, end) => {
+    const s = sn[j];
+    const o = end ? (sn[j + 1] === null ? null : near(j, 1)) : (sn[j - 1] === null ? null : near(j, -1));
+    if (!o || s[0] * o[0] + s[1] * o[1] < SMOOTH_COS) return s;
+    const r = s[0] + o[0], z = s[1] + o[1], l = Math.hypot(r, z) || 1;
+    return [r / l, z / l];
+  };
+  const pos = [], nrm = [];
+  const S = Math.max(3, segs | 0);
+  for (let j = 0; j + 1 < m; j++) {
+    if (!sn[j]) continue;
+    const n0 = ends(j, false), n1 = ends(j, true), a = pr[j], c = pr[j + 1];
+    for (let s = 0; s < S; s++) {
+      const f0 = phase + s / S * Math.PI * 2, f1 = phase + (s + 1) / S * Math.PI * 2;
+      const c0 = Math.cos(f0), s0 = Math.sin(f0), c1 = Math.cos(f1), s1 = Math.sin(f1);
+      const P = (p, cs, sn2) => [p[0] * cs, p[0] * sn2, p[1]];
+      const Nn = (q, cs, sn2) => [q[0] * cs, q[0] * sn2, q[1]];
+      pushTri(pos, nrm, P(a, c0, s0), P(c, c0, s0), P(c, c1, s1), Nn(n0, c0, s0), Nn(n1, c0, s0), Nn(n1, c1, s1));
+      pushTri(pos, nrm, P(a, c0, s0), P(c, c1, s1), P(a, c1, s1), Nn(n0, c0, s0), Nn(n1, c1, s1), Nn(n0, c1, s1));
+    }
+  }
+  return buildGeo(pos, nrm);
+}
+// An outline helper: points along a quadratic curve from a through control c to b (both ends kept).
+export function curve(a, c, b, steps = 6) {
+  const out = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps, u = 1 - t;
+    out.push([u * u * a[0] + 2 * u * t * c[0] + t * t * b[0], u * u * a[1] + 2 * u * t * c[1] + t * t * b[1]]);
+  }
+  return out;
+}

@@ -1,7 +1,7 @@
 {
   "format": "dw-scene/1",
   "name": "guardian-grab-drag",
-  "notes": "CL-64, the first real scene (D-41). The marine runs from it; the guardian, facing him, lunges low and takes his ankle from behind (Jerry: a creature grabs facing its target, aiming for the leg), rears back and yanks him off his feet onto his face, walks its body round the leg it holds (so he isn't swung through the air) to face its cave, and hauls him away at a walking drag with its steps matched to the ground. Scene +Z is the way to the cave; the game lays the haul path to the real mouth. CL-67: once he's off his feet the marine's body is simulated (studio/motion.js), hung from the hand by the ankle: the arms trail, the head bounces, the free leg catches on the ground. CL-62 (Jerry 2026-09-29, v3 note): he drags the marine in faster: the haul reaches 4.4 m/s by 2.7 s (was 3 by 2.9).",
+  "notes": "CL-64, the first real scene (D-41). The marine runs from it; the guardian, facing him, lunges low and takes his ankle from behind (Jerry: a creature grabs facing its target, aiming for the leg), rears back and yanks him off his feet onto his face, walks its body round the leg it holds (so he isn't swung through the air) to face its cave, and hauls him away at a walking drag with its steps matched to the ground. Scene +Z is the way to the cave; the game lays the haul path to the real mouth. CL-67: once he's off his feet the marine's body is simulated (studio/motion.js), hung from the hand by the ankle: the arms trail, the head bounces, the free leg catches on the ground. CL-62 (Jerry 2026-09-29, v3 note): he drags the marine in faster: the haul reaches 4.4 m/s by 2.7 s (was 3 by 2.9). CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours and bolts back into its cave on the gallop. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours and bolts back into its cave on the gallop. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours and bolts back into its cave on the gallop. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours and bolts back into its cave on the gallop. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours and bolts back into its cave on the gallop. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.08 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave. CL-81 (P-68): the kick-free's let-go, a branch the game takes on the last press, whenever it comes: the hand flies open (every hold lets go in 0.04 s) and the marine, kicked loose, rolls away from the mouth (his body, a shove back off the cave), lies a moment and gets up (the marine preset's down and get-up); the guardian drops onto all fours, then rears up and walks back into its cave.",
   "length": 5.5,
   "actors": {
     "marine": {
@@ -418,6 +418,127 @@
         3.5,
         0.9
       ]
+    }
+  },
+  "branches": {
+    "letGo": {
+      "length": 1.9,
+      "release": 0.04,
+      "actors": {
+        "guardian": {
+          "clips": [
+            [
+              0.12,
+              "guardian/stand",
+              {
+                "fade": 0.14
+              }
+            ],
+            [
+              0.45,
+              "guardian/haul",
+              {
+                "fade": 0.3,
+                "loop": true,
+                "stride": 1.6
+              }
+            ]
+          ],
+          "ahead": [
+            [
+              0,
+              0
+            ],
+            [
+              0.3,
+              0.55,
+              "out"
+            ],
+            [
+              0.6,
+              0.6
+            ],
+            [
+              1.0,
+              1.2,
+              "in"
+            ],
+            [
+              1.9,
+              3.6,
+              "linear"
+            ]
+          ]
+        },
+        "marine": {
+          "clips": [
+            [
+              0,
+              "marine/stand",
+              {
+                "fade": 0.3
+              }
+            ]
+          ],
+          "tilt": [
+            [
+              0,
+              [
+                82,
+                0,
+                0
+              ]
+            ],
+            [
+              0.4,
+              [
+                82,
+                0,
+                0
+              ]
+            ],
+            [
+              1.15,
+              [
+                0,
+                0,
+                0
+              ],
+              "inout"
+            ]
+          ],
+          "rise": [
+            [
+              0,
+              0.13
+            ],
+            [
+              0.4,
+              0.13
+            ],
+            [
+              1.15,
+              0,
+              "inout"
+            ]
+          ],
+          "hits": [
+            [
+              0.1,
+              {
+                "at": "pelvis",
+                "dir": [
+                  0,
+                  0.3,
+                  -1
+                ],
+                "power": 5,
+                "kind": "crush"
+              }
+            ]
+          ]
+        }
+      }
     }
   }
 }

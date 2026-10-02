@@ -1,0 +1,14 @@
+<!doctype html><meta charset="utf-8"><title>rabbit mound</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The rabbit mound and the holy grenade · CL-93 · v1</h1>
+<p>Far out from every trail there's one mound with bones and a skull round its mouth. Shoot into it and a small white
+rabbit comes out, stares at you, then goes for your throat: one bite and your head is off. Bullets don't hurt it. The
+holy grenade sits in a little stone box behind the graveyard's dead tree. Walk over it to take it. When the rabbit is
+awake and near, G throws the holy grenade: a choir sings, the rabbit freezes, and the blast kills it. Try it from the
+dev console: <code>holy</code> gives you the grenade, <code>rabbit</code> takes you to the mound and wakes it. Your notes
+go in notes.md.</p>
+<script>
+const rows = [['The mound', ['mound', 'rabbit-out']], ['The holy grenade', ['holy-reliquary', 'holy-graveyard']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

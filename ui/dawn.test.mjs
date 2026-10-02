@@ -8,8 +8,8 @@ test('dawn names only the completed night’s Lights out bonus, including zero',
  for(const dare of [null,{day:3,earned:37},{day:4,earned:-1},{day:4,earned:1.5}])assert.equal(dawnDareLine({day:4,dare}),null);
 });
 test('dawn names next morning’s new stock and stays quiet otherwise',()=>{
- assert.equal(dawnStockLine(1),'New at the kiosk: Uzi, Shotgun.');
- assert.equal(dawnStockLine(3),'New at the kiosk: M4, Chainsaw.');
- assert.equal(dawnStockLine(9),'New at the kiosk: AA-12.');
+ assert.equal(dawnStockLine(1),'New at the supply terminal: Wasp SMG, Shotgun.');
+ assert.equal(dawnStockLine(3),'New at the supply terminal: GW-4 Carbine, Chainsaw.');
+ assert.equal(dawnStockLine(9),'New at the supply terminal: Breacher-12.');
  for(const night of [0,6,10,19,20,NaN])assert.equal(dawnStockLine(night),null);
 });

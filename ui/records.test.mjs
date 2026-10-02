@@ -18,14 +18,14 @@ test('records survive reload but never represent a saved game',()=>{
  let saved;const a=createRecords({save:v=>saved=v});a.finish('old',run({day:9,kills:1204,streak:31}));
  const b=createRecords({load:()=>saved});assert.equal(b.read().day,9);
  assert.equal(bestRecordParts(b.read())[1].text,'1,204 kills');
- assert.deepEqual(Object.keys(JSON.parse(saved)).sort(),['day','evacuated','escapeNight','headshots','hotEscapeNight','kills','runs','skulls','streak','version'].sort());
+ assert.deepEqual(Object.keys(JSON.parse(saved)).sort(),['day','evacuated','escapeNight','headshots','hotEscapeNight','kills','runs','skulls','streak','version','trueEndings','trueEndingDay'].sort());
  b.finish('new',run());assert.equal(b.read().runs,2);assert.equal(b.read().day,9);
 });
 test('best-run line remembers the night of a successful evacuation, independently of longest survival',()=>{
  const r=createRecords();r.finish('long',run({day:25}));
  r.finish('boat',run({day:20,evacuated:true}));
  assert.equal(r.read().day,25);assert.equal(r.read().escapeNight,20);
- assert.equal(bestRecordParts(r.read()).at(-1).text,'Got out on night 20.');
+ assert.equal(bestRecordParts(r.read()).at(-1).text,'Heron took you out on night 20.');
  r.finish('later',run({day:22,evacuated:true,hot:true}));
  assert.equal(r.read().escapeNight,22);
  assert.equal(r.read().hotEscapeNight,22);
@@ -42,4 +42,13 @@ test('invalid results do not consume a run receipt or alter a record',()=>{
  assert.equal(r.finish(1,run(change)),null);
  assert.equal(r.read().runs,0);assert(r.finish(1,run()));
  const invalid={...r.read(),evacuated:4};assert.equal(createRecords({load:()=>JSON.stringify(invalid)}).read().runs,0);
+});
+
+test('true ending persists as a win without awarding an evacuation',()=>{
+ let saved;const r=createRecords({save:v=>saved=v});
+ const result=r.finish('secret',run({day:16,trueEnding:true}));
+ assert.equal(result.best.trueEndings,1);assert.equal(result.best.evacuated,0);assert.equal(result.best.escapeNight,0);
+ assert.equal(result.best.trueEndingDay,16);assert.match(bestRecordParts(result.best).at(-1).text,/16/);
+ assert.equal(createRecords({load:()=>saved}).read().trueEndings,1);
+ assert.equal(r.finish('bad',run({trueEnding:true,evacuated:true})),null);
 });

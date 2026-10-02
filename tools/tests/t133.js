@@ -39,6 +39,7 @@
     T.setMouseFireDbg(false);
     ok(p0 - T.getAmmo().pistol === 1, 'the pistol is semi until the sear is bought');
     T.buyPistolAuto();
+    T.armoryDbg.fit('pistol', 'auto', true);   // CL-113: fitted at the Armory
     T.toggleFireMode();
     ok(T.recoilSpan('pistol', 10) > T.recoilSpan('uzi', 10), 'pistol auto spreads wider than the Uzi after 10 rounds (' + T.recoilSpan('pistol', 10).toFixed(3) + ' > ' + T.recoilSpan('uzi', 10).toFixed(3) + ')');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }

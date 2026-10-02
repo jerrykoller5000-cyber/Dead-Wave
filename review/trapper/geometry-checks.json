@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "seed": 1,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357
+    },
+    {
+      "seed": 1,
+      "variant": 1,
+      "vertices": 4992,
+      "originalVertices": 4992
+    },
+    {
+      "seed": 1,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 4196
+    },
+    {
+      "seed": 61,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357
+    },
+    {
+      "seed": 61,
+      "variant": 1,
+      "vertices": 4992,
+      "originalVertices": 4992
+    },
+    {
+      "seed": 61,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 4196
+    },
+    {
+      "seed": 511,
+      "variant": 0,
+      "vertices": 6357,
+      "originalVertices": 6357
+    },
+    {
+      "seed": 511,
+      "variant": 1,
+      "vertices": 4992,
+      "originalVertices": 4992
+    },
+    {
+      "seed": 511,
+      "variant": 2,
+      "vertices": 11770,
+      "originalVertices": 4196
+    }
+  ],
+  "hatchMeshes": 2,
+  "hatchVertices": 5142,
+  "terrainSeating": true,
+  "fakeThree": true
+}

@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {BADGE_IDS,createBadges,qualifyingBadges} from './badges.js';
 
-test('all twelve badges require their specific committed milestone facts',()=>{
- const cases=[['first-bank',{firstBank:true}],['relay-online',{relayOnline:true}],['night-five',{nightReached:5}],
+test('all badges require their specific committed milestone facts',()=>{
+ const cases=[['choir-practice',{rabbitKilled:true}],['nobody-left-behind',{evacuated:true,survivorsAboard:['okafor','brandt','pike']}],['brought-them-home',{tagsRecovered:9}],['silence',{trueEnding:true}],['first-bank',{firstBank:true}],['relay-online',{relayOnline:true}],['night-five',{nightReached:5}],
  ['night-ten',{nightReached:10}],['night-twenty',{nightReached:20}],['fog-survivor',{nightCleared:14,nightKind:'fog'}],
  ['kicked-free',{kickedFree:true}],['out-on-the-boat',{evacuated:true}],['thousand-skulls',{skullsBanked:1000}],
  ['thousand-kills',{kills:1000}],['hundred-headshots',{headshots:100}],['streak-twenty',{streak:20}]];

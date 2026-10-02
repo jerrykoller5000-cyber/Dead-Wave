@@ -5,15 +5,8 @@
   const until = async (cond, maxMs) => { const t0 = Date.now(); while (Date.now() - t0 < maxMs) { if (cond()) return true; await wait(100); } return cond(); };
   // Play refuses with no callsign. During menuCamera.deploying the game loop skips
   // updateCashDrops, so wait until a far teleport sticks (not the porch spawn).
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started && T.getPhase() === 'prep', 'the match opens in prep');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'the match opens in prep');
   const p = T.player.position;
   {
     const tx = 18, tz = 18;

@@ -42,7 +42,7 @@ test('earned badge camos require their matching badge rather than another milest
     assert(unlockedCamos(records(),badges(badge)).includes(key));
   }
   assert.equal(camoUnlockHint('sumpftarn'),'Earn the Through the fog badge');
-  assert.equal(camoUnlockHint('mccuu'),'Get out on the boat once');
+  assert.equal(camoUnlockHint('mccuu'),'Get out on Heron once');
 });
 
 test('run-end awards persist once; debug finishes and corrupt storage grant nothing',()=>{

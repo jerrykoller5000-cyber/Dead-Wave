@@ -2,15 +2,8 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play refuses with no callsign; Digit page-jumps are swallowed while menuCamera is deploying (~9s).
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
   // Insertion still owns the keyboard until deploying ends; wait until Digit keys work.
   for (let i = 0; i < 60; i++) {
     await wait(200);

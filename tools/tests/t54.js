@@ -11,16 +11,8 @@
     ok(!!T.RADIO_DEFENDER && T.RADIO_DEFENDER.count === 2, 'RADIO_DEFENDER.count === 2');
     ok(!!T.RADIO_DEFENDER && T.RADIO_DEFENDER.triggerR === 24, 'RADIO_DEFENDER.triggerR === 24');
 
-    const nameEl = document.getElementById('playerName');
-    if (nameEl) nameEl.value = 'GB16';
-    document.getElementById('modeHunt').click();
-    let started = false;
-    for (let i = 0; i < 80; i++) {
-      await wait(200);
-      if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-    }
-    ok(started, 'match reached prep');
-    if (!started) return out.join('\n');
+    await startMatch(T, 'GB16');
+    ok(T.getPhase() === 'prep', 'match reached prep');
 
     // (c) player-damaged
     let dmgEvents = 0; let lastDmg = null;

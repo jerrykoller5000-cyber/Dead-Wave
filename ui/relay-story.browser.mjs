@@ -35,6 +35,7 @@ try {
   await page.fill('#playerName','Relay Tester');await page.click('#modeHunt');
   await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
   await page.evaluate(()=>{gp66Probe.advance(3,false);gp66Probe.open();});
+  await page.getByRole('button',{name:'Relay',exact:true}).click();
   assert.equal(await page.locator('.briefing-relay .relay-story-line').textContent(),'RELAY · SILENT');
   for(const width of [1280,390]) {
     await page.setViewportSize({width,height:width===390?844:720});
@@ -47,6 +48,7 @@ try {
     await page.evaluate(({night})=>gp66Probe.advance(night,true),{night});
     assert.deepEqual(await page.evaluate(()=>gp66Probe.read().lines.map(item=>item.number)),expected);
     await page.evaluate(()=>gp66Probe.open());
+    await page.getByRole('button',{name:'Relay',exact:true}).click();
     assert.equal(await page.locator('.briefing-relay .relay-story-line').count(),expected.length);
     assert.match(await page.locator('.briefing-relay .relay-story-line').first().textContent(),night===20?/Tonight's the night/:/./);
     for(const width of [1280,390]) if([4,10,16,18,20].includes(night)) {

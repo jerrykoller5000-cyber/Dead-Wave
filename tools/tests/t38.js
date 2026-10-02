@@ -8,9 +8,7 @@
   }
   let draws = 0; for (const [k, g] of Object.entries(T.weaponMeshes)) { let n = 0; g.traverse(o => { if (o.isMesh) n++; }); draws += n; }
   ok(draws < 260, 'all twelve guns: ' + draws + ' meshes after merging');
-  const pn = document.getElementById('playerName'); if (pn) pn.value = 'Tester';
-  document.getElementById('modeHunt').click(); await wait(2500);
-  for (let i = 0; i < 80; i++) { const p = T.player.position; if (i > 4 && Math.abs(p.y - T.sampleHeight(p.x, p.z)) < 0.3) break; await wait(500); }
+  await startMatch(T, 'Tester');
   if (T.grantAllWeapons) T.grantAllWeapons();
   for (const k of ['ak', 'm4', 'pistol', 'shotgun', 'sniper', 'revolver', 'launcher', 'minigun']) {
     for (let i = 0; i < 20; i++) { T.setWeapon(i); if (T.getCurrentWeapon() === k) break; }

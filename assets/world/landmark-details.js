@@ -202,33 +202,33 @@ window.buildLandmarkDetails = (THREE, o) => {
     }
     // Broken boundary, a bent iron gate, and an empty wreath hook at the entry.
     for(const x of [-1.2,1.2]){
-      const y=ground(x,-4.5);
-      box(.55,1.6,.55,C.stone,x,y+.8,-4.5);
-      box(.68,.14,.68,C.pale,x,y+1.63,-4.5);
-      solid(x,-4.5,.35,y,1.7);
+      const y=ground(x,-6.2);
+      box(.55,1.6,.55,C.stone,x,y+.8,-6.2);
+      box(.68,.14,.68,C.pale,x,y+1.63,-6.2);
+      solid(x,-6.2,.35,y,1.7);
     }
     for(const side of [-1,1]){
-      const x=side*1.2,y=ground(x,-4.5);
-      for(let i=0;i<4;i++){
-        const px=x+side*(.65+i*.7),py=ground(px,-4.5);
-        box(.055,.86,.055,C.dark,px,py+.43,-4.5);
-        mesh(new THREE.ConeGeometry(.06,.15,4),C.dark,px,py+.92,-4.5);
+      const x=side*1.2,y=ground(x,-6.2);
+      for(let i=0;i<6;i++){
+        const px=x+side*(.65+i*.7),py=ground(px,-6.2);
+        box(.055,.86,.055,C.dark,px,py+.43,-6.2);
+        mesh(new THREE.ConeGeometry(.06,.15,4),C.dark,px,py+.92,-6.2);
       }
-      bar([x+side*.35,y+.7,-4.5],[x+side*2.9,ground(x+side*2.9,-4.5)+.7,-4.5],.025,C.dark);
+      bar([x+side*.35,y+.7,-6.2],[x+side*4.3,ground(x+side*4.3,-6.2)+.7,-6.2],.025,C.dark);
     }
     // Fallen gate leaf rests beside the path rather than sealing the entrance.
-    for(let i=0;i<5;i++)box(.04,.035,1.3,C.rust,2+i*.19,ground(2+i*.19,-3.6)+.07,-3.6,.27);
-    const by=ground(-4,-1);
-    box(.65,.12,1.7,C.old,-4,by+.42,-1);
-    for(const z of [-1.6,-.4])box(.42,.4,.14,C.stone,-4,by+.2,z);
-    solid(-4,-1,.63,by,.5);
-    lantern(-4,by+.5,-1.6);
+    for(let i=0;i<5;i++)box(.04,.035,1.3,C.rust,2+i*.19,ground(2+i*.19,-5.9)+.07,-5.9,.27);
+    const bx=-6.8,by=ground(bx,-1);
+    box(.65,.12,1.7,C.old,bx,by+.42,-1);
+    for(const z of [-1.6,-.4])box(.42,.4,.14,C.stone,bx,by+.2,z);
+    solid(bx,-1,.63,by,.5);
+    lantern(bx,by+.5,-1.6);
     // Gardener left a spade, and a single fresh bouquet on the bench.
-    bar([-4.2,by,-1.8],[-3.85,by+1.2,-1.8],.028,C.cut);
-    box(.18,.27,.045,C.steel,-4.2,by+.11,-1.8,0,-.25);
+    bar([bx-.2,by,-1.8],[bx+.15,by+1.2,-1.8],.028,C.cut);
+    box(.18,.27,.045,C.steel,bx-.2,by+.11,-1.8,0,-.25);
     for(let i=0;i<5;i++){
-      bar([-4.2+i*.07,by+.5,-.6],[-4.15+i*.07,by+.51,-1.05],.009,C.olive,4);
-      mesh(new THREE.IcosahedronGeometry(.045,0),i%2?C.pale:C.red,-4.15+i*.07,by+.53,-1.05);
+      bar([bx-.2+i*.07,by+.5,-.6],[bx-.15+i*.07,by+.51,-1.05],.009,C.olive,4);
+      mesh(new THREE.IcosahedronGeometry(.045,0),i%2?C.pale:C.red,bx-.15+i*.07,by+.53,-1.05);
     }
   }
   if(o.kind==='tower') {
@@ -237,11 +237,28 @@ window.buildLandmarkDetails = (THREE, o) => {
       const y=ground(x,z);
       box(.5,.32,.5,C.stone,x,y+.08,z);
       for(const yy of [.38,3.2,5.23]){
-        box(.31,.15,.32,C.steel,x,yy,z);
-        bolt(x,yy,z+.17);bolt(x+.17,yy,z,'x');
+        // Follow the existing inward-leaning post instead of leaving cuffs in mid-air.
+        const rx=-z*.045,rz=x*.045,px=x-Math.tan(rz)/Math.cos(rx)*(yy-2.8),pz=z+Math.tan(rx)*(yy-2.8);
+        const cuff=box(.31,.15,.32,C.steel,px,yy,pz);cuff.rotation.set(rx,0,rz);
+        bolt(px,yy,pz+.17);bolt(px+.17,yy,pz,'x');
       }
     }
-    plankFloor(0,5.615,0,2.85,2.85);
+    // GP-117: rain-grey boards and two conspicuous repairs, at the original floor height.
+    const aged=[0x72715b,0x686b56,0x807960,0x626550];
+    for(let i=0;i<12;i++){
+      const x=-1.425+(i+.5)*2.85/12;
+      box(2.85/12-.016,.05,2.85,i===3||i===9?0x9c865b:aged[i%4],x,5.615,0);
+      for(const z of[-1.25,1.25])bolt(x,5.648,z,'y');
+      for(let k=0;k<3;k++)box(.006,.005,.26+(i%3)*.055,0x4b5140,x-.05+k*.04,5.643,-.91+k*.76+(i%2)*.11);
+    }
+    // Worn observation rail and strapped corner joints; the ladder mouth stays open.
+    box(.24,.1,2.86,0x82795e,-1.43,6.42,0);
+    for(const x of[-1.43,1.43])for(const z of[-1.43,1.43]){
+      box(.15,.3,.035,C.steel,x,6.24,z+Math.sign(z)*.075);
+      for(const h of[6.14,6.33])bolt(x,h,z+Math.sign(z)*.101);
+      box(.038,.15,.31,0x765641,x+Math.sign(x)*.077,5.93,z);
+    }
+    for(const x of[-1.43,1.43])for(let i=0;i<5;i++)box(.008,.012,.21,0x80795d,x+Math.sign(x)*.052,6.433,-1.04+i*.5);
     for(const side of [-1,1]){
       bar([side*1.12,3.7,-1.1],[side*1.12,5.4,.5],.075,C.cut,4);
       bar([-1.1,3.7,side*1.12],[.5,5.4,side*1.12],.075,C.cut,4);
@@ -253,11 +270,25 @@ window.buildLandmarkDetails = (THREE, o) => {
     box(.4,.01,.55,C.pale,1.02,6.24,.66,.04);
     for(let i=0;i<3;i++)box(.015,.009,.37,C.olive,.9+i*.08,6.25,.66,.08);
     for(const x of [.91,1.06]){const m=cyl(.043,.19,C.dark,x,6.3,.44,8);m.rotation.x=Math.PI/2;}
+    bar([.91,6.3,.43],[1.06,6.3,.43],.025,C.dark);
+    for(const x of[.91,1.06]){const rim=cyl(.05,.035,0x454b40,x,6.3,.337,10);rim.rotation.x=Math.PI/2;const lens=cyl(.037,.006,0x536a60,x,6.3,.316,10);lens.rotation.x=Math.PI/2;}
+    // A scratched plotting sheet, pencil and compass: small working objects, not another plaque.
+    bar([.88,6.257,.71],[1.16,6.257,.78],.006,0x85513b,4);
+    bar([.94,6.258,.72],[1.08,6.258,.57],.006,0x85513b,4);
+    cyl(.032,.017,0x8b805a,1.15,6.265,.83,10);
+    bar([.81,6.257,.51],[.82,6.257,.78],.009,0x9a8553,5);
+    // Leather binocular case hangs beneath the same table, inside its old solid footprint.
+    box(.28,.21,.19,0x514b37,1.08,5.96,.94);box(.3,.04,.21,0x6c6348,1.08,6.075,.94);
+    box(.032,.18,.014,C.dark,1.08,5.99,1.042);box(.054,.045,.015,C.steel,1.08,6.025,1.052);
+    pipeCable([[.97,6.1,.92],[.94,6.2,.81],[1.2,6.2,.81],[1.2,6.1,.92]],.012,C.old);
     solid(1.02,.66,.34,5.62,.65);
     lantern(-1.08,5.66,1.08);
-    crate(-1.03,5.66,.3,.42,C.olive);
-    for(let i=0;i<7;i++){
-      const m=cyl(.016,.08,0x9a8850,.55+i*.07,5.67,-.5+(i%3)*.09,5);m.rotation.z=Math.PI/2;
+    // A steel ammunition tin replaces the crate within its existing corner footprint.
+    box(.42,.29,.35,0x555f40,-1.03,5.805,.3);box(.45,.055,.38,0x727a54,-1.03,5.977,.3);
+    for(const x of[-1.18,-.88])box(.032,.24,.018,C.old,x,5.83,.48);
+    bar([-1.15,6.025,.3],[-.91,6.025,.3],.017,C.dark);box(.07,.105,.025,C.steel,-1.03,5.92,.493);
+    for(let i=0;i<13;i++){
+      const m=cyl(.012,.073,0x9a8850,.52+(i*7%11)*.049,5.66,-.85+(i*3%7)*.09,6);m.rotation.set(Math.PI/2,0,i*2.4);
     }
     // Hoist rope and pulley outside the deck, with the load resting at ground.
     bar([-1.1,5.45,.9],[-1.85,5.45,.9],.065,C.old,4);
@@ -275,6 +306,14 @@ window.buildLandmarkDetails = (THREE, o) => {
     for(const x of [-.55,.55])for(const z of [-.55,.55]){
       box(.5,.3,.5,C.stone,x,.12,z);
       for(const a of [-.14,.14])bolt(x+a,.285,z,'y');
+      box(.29,.035,.29,C.dark,x,.295,z);
+      for(const a of[-.105,.105])bolt(x+a,.323,z+.105,'y');
+      // Bolted replacement plates and thin rust blooms, not a new tower silhouette.
+      for(const yy of[.55,4.75,9.15]){
+        box(.14,.43,.018,0x747c70,x,yy,z+Math.sign(z)*.065);
+        for(const dy of[-.14,.14])bolt(x,yy+dy,z+Math.sign(z)*.082);
+        box(.053,.18,.012,0x745842,x+.036,yy-.07,z+Math.sign(z)*.08);
+      }
     }
     for(let y=.7;y<h-2;y+=2.2)for(const side of [-1,1]){
       bar([side*.55,y,-.55],[side*.55,y+2.1,.55],.028,C.steel);
@@ -310,11 +349,40 @@ window.buildLandmarkDetails = (THREE, o) => {
       cyl(.023,.02,j===2?C.red:C.pale,-1.81,y+.51+j*.27,.77,6).rotation.x=Math.PI/2;
     }
     box(.82,1.42,.05,C.olive,-2.82,y+.97,.79,-.9);
+    // Door edge chips, hinges, and the unpowered rack's tied service loom.
+    for(const yy of[.42,1.47])box(.09,.15,.1,C.steel,-2.61,y+yy,.66);
+    for(let j=0;j<5;j++)box(.11,.016,.012,0x939783,-2.43+j*.12,y+1.69,.663);
+    for(let j=0;j<3;j++)pipeCable([[-2.42+j*.08,y+.36,.77],[-2.39+j*.08,y+.24,.79],[-1.81,y+.22,.78],[-1.81,y+.39+j*.27,.78]],.008,j===1?0x806f46:C.dark);
     solid(-2.1,.3,.68,y,1.8);
     pipeCable([[-1.7,y+.28,.8],[-1.3,ground(-1.3,.9)+.035,.9],[-.5,.08,.7],[.44,.4,-.76]],.022);
     const by=ground(-2.5,1.55);box(.43,.29,.3,C.dark,-2.5,by+.15,1.55);
     for(const x of [-2.65,-2.35])cyl(.035,.05,C.steel,x,by+.32,1.55,6);
     for(let i=0;i<3;i++){const r=ring(.32+i*.025,.012,C.dark,-1.7,ground(-1.7,1.9)+.03,1.9);r.rotation.x=Math.PI/2;}
+    // A used cable reel at the rear of the rack, well away from the repair approach.
+    const rx=-3.3,rz=-.7,ry=ground(rx,rz);
+    for(const x of[rx-.26,rx+.26])cyl(.39,.045,0x81735a,x,ry+.39,rz,14).rotation.z=Math.PI/2;
+    cyl(.26,.48,0x333b35,rx,ry+.39,rz,14).rotation.z=Math.PI/2;
+    for(let i=0;i<9;i++){const r=ring(.266,.017,C.dark,rx-.22+i*.055,ry+.39,rz);r.rotation.y=Math.PI/2;}
+    for(const z of[rz-.26,rz+.26])box(.62,.07,.12,C.old,rx,ry+.035,z);
+    // Broad copper grounding strap follows the real soil and disappears into bedrock.
+    const route=[[-.55,-.66],[-1.2,-1.12],[-2.1,-1.36],[-3.1,-1.9],[-4.2,-2.45]];
+    for(let i=1;i<route.length;i++){
+      const[a,b]=[route[i-1],route[i]],dx=b[0]-a[0],dz=b[1]-a[1],n=Math.hypot(dx,dz),ox=-dz/n*.035,oz=dx/n*.035;
+      panel([[a[0]-ox,ground(...a)+.045,a[1]-oz],[a[0]+ox,ground(...a)+.045,a[1]+oz],[b[0]+ox,ground(...b)+.045,b[1]+oz],[b[0]-ox,ground(...b)+.045,b[1]-oz]],0x8c7050);
+    }
+    const gx=-4.2,gz=-2.45,gy=ground(gx,gz);
+    const rock=mesh(new THREE.DodecahedronGeometry(.55,0),0x626d5c,gx,gy-.1,gz);rock.scale.set(1.5,.62,1.05);
+    box(.22,.028,.17,C.steel,gx,gy+.24,gz);bolt(gx,gy+.266,gz,'y');
+    bar([gx,gy-.05,gz],[gx,gy+.25,gz],.027,0x8c7050);
+    // Sato's abandoned headset and an open tool roll beside the repair cabinet.
+    const hx=2.55,hz=3.05,hy=ground(hx,hz);
+    const arch=mesh(new THREE.TorusGeometry(.17,.02,5,16,Math.PI),C.dark,hx,hy+.045,hz);arch.rotation.x=Math.PI/2;
+    for(const x of[hx-.17,hx+.17]){box(.095,.07,.14,C.dark,x,hy+.04,hz);box(.075,.022,.11,0x6c735c,x,hy+.09,hz);}
+    pipeCable([[hx+.18,hy+.07,hz],[hx+.3,hy+.04,hz+.1],[hx+.33,hy+.03,hz+.3],[hx+.13,hy+.025,hz+.4]],.009,C.dark);
+    const tx=2.45,tz=2.37,ty=ground(tx,tz);
+    box(.55,.025,.37,0x76745b,tx,ty+.02,tz,.18);
+    for(let i=0;i<3;i++){bar([tx-.17+i*.14,ty+.044,tz-.13],[tx-.17+i*.14,ty+.044,tz+.11],.009,C.steel,5);box(.045,.032,.09,i===1?0x7a4936:C.dark,tx-.17+i*.14,ty+.047,tz+.12);}
+    for(const x of[tx-.24,tx+.24])box(.026,.014,.32,C.old,x,ty+.041,tz);
   }
 
   if(o.kind==='bridge') {
@@ -354,6 +422,23 @@ window.buildLandmarkDetails = (THREE, o) => {
       const z=-L/2+.8+i*.78;
       box(W*2-.03,.008,.018,C.old,0,.065,z);
       box(.3,.009,.017,C.old,(i%3-1)*.51,.066,z-.22,i*.13);
+      for(const x of [-W+.19,W-.19]){bolt(x,.067,z-.32,'y');bolt(x,.067,z+.19,'y');}
+      for(let k=0;k<4;k++)box(.28+(k%2)*.17,.005,.008,i%2?0x655e48:0x4c4a3b,-.77+k*.48,.068,z-.46+(k%3)*.16);
+      // Short end-grain cracks and scars stay flush with the walking surface.
+      for(const s of [-1,1])bar([s*(W-.02),.071,z-.36],[s*(W-.24),.071,z-.33+(i%3)*.013],.004,0x393c32,4);
+    }
+    // Aged bearers and diagonal repairs, all below the established deck height.
+    for(const x of [-W+.16,W-.16]){
+      box(.18,.24,L,0x4f4b39,x,-.16,0);
+      for(const z of [1.1,3.2]){bar([x,-1.02,z-.73],[x,-.19,z+.7],.055,0x8b7651,4);box(.05,.25,.22,C.steel,x*1.04,-.21,z+.7);}
+      box(.16,.026,2.3,C.steel,x,.069,L/2-1.18);
+      for(let j=0;j<6;j++)bolt(x,.087,L/2-2.1+j*.37,'y');
+    }
+    for(const z of [L/2-.12,L/2-1.6])box(W*2,.22,.17,0x69604a,0,-.21,z);
+    // Coiled mooring lines remain outside the middle of the narrow walkway.
+    for(const [x,z]of [[W-.28,-1.9],[-W+.3,3.1]]){
+      for(let i=0;i<4;i++){const m=ring(.18-i*.034,.014,C.rope,x,.088+i*.008,z);m.rotation.x=Math.PI/2;}
+      pipeCable([[x,.105,z],[x-.12,.1,z+.3],[x+.05,.1,z+.43]],.012,C.rope);
     }
     for(const z of [-L/2+.5,0,L/2-.5])for(const side of [-1,1]){
       cyl(.16,.08,C.cut,side*(W-.1),.11,z,8);
@@ -364,25 +449,41 @@ window.buildLandmarkDetails = (THREE, o) => {
       bar([side*(W-.36),.18,z],[side*(W-.12),.18,z],.027,C.dark);
       bar([side*(W-.24),.1,z],[side*(W-.24),.19,z],.022,C.dark);
     }
-    // An open clinker hull with curved sides, visible ribs and two thwarts.
+    // A swamped clinker hull: an open split, absent floorboards and broken seating.
     const bx=side*(W+1.2),bz=1.8;
     const sections=[[-1.6,.03],[-1.1,.43],[0,.57],[1.05,.48],[1.3,.35]];
-    for(let i=1;i<sections.length;i++)for(const side of [-1,1])for(let row=0;row<3;row++){
+    for(let i=1;i<sections.length;i++)for(const hullSide of [-1,1])for(let row=0;row<3;row++){
       const [za,wa]=sections[i-1],[zb,wb]=sections[i],lo=row/3,hi=(row+1)/3;
-      panel([[bx+side*wa*(.55+lo*.45),-.64+lo*.58,bz+za],[bx+side*wb*(.55+lo*.45),-.64+lo*.58,bz+zb],[bx+side*wb*(.55+hi*.45),-.64+hi*.58,bz+zb],[bx+side*wa*(.55+hi*.45),-.64+hi*.58,bz+za]],row%2?C.wood:C.cut);
+      const p=(t,h)=>[bx+hullSide*(wa+(wb-wa)*t)*(.55+h*.45),-.74+h*.58,bz+za+(zb-za)*t];
+      if(i===2&&hullSide===side){
+        panel([p(0,lo),p(.14+(row%2)*.08,lo),p(.3-(row%2)*.12,hi),p(0,hi)],C.old);
+        panel([p(.82,lo),p(1,lo),p(1,hi),p(.67+(row%2)*.11,hi)],0x7a7156);
+      }else panel([p(0,lo),p(1,lo),p(1,hi),p(0,hi)],row%2?0x615e49:0x7d7357);
     }
-    panel([[bx-.3,-.63,bz-1],[bx+.3,-.63,bz-1],[bx+.34,-.63,bz+1.3],[bx-.34,-.63,bz+1.3]],C.old);
-    // Raised walking boards sit above the bilge while the keel remains submerged.
-    for(const x of [-.2,0,.2])box(.18,.035,2.1,C.cut,bx+x,-.46,bz+.1);
-    box(.7,.55,.075,C.wood,bx,-.34,bz+1.3);
-    for(const z of [-.7,.55])box(.94,.07,.22,C.cut,bx,-.1,bz+z);
-    for(const [z,w] of sections)if(w>.1)bar([bx-w,-.1,bz+z],[bx+w,-.1,bz+z],.025,C.old,5);
-    bar([bx-.35,.015,bz-.9],[bx+.2,.015,bz+1.4],.028,C.cut);
-    box(.17,.035,.47,C.cut,bx+.25,.015,bz+1.63,-.23);
-    pipeCable([[side*(W-.24),.18,2.6],[side*(W+.12),.02,2.4],[bx-.02,-.04,bz+1.25]],.018,C.rope);
+    // The actual lake surface shows through the missing bilge and the open side.
+    for(const [x,z,a]of [[-.18,.43,.15],[.2,.8,-.13]])box(.15,.035,.64,0x6c634a,bx+x,-.56,bz+z,a);
+    box(.7,.5,.075,C.old,bx,-.41,bz+1.3);
+    box(.39,.06,.22,0x91815c,bx-.29,-.23,bz-.7,0,.13);box(.26,.055,.19,0x817557,bx+.33,-.33,bz-.72,0,-.5);
+    box(.91,.055,.2,0x8a7d5d,bx,-.2,bz+.55,0,.08);
+    for(const [z,w]of sections)if(w>.1){bar([bx-w,-.18,bz+z],[bx-w*.6,-.68,bz+z],.025,C.old,5);bar([bx+w,-.18,bz+z],[bx+w*.6,-.68,bz+z],.025,C.old,5);}
+    // The oar is snapped; neither a sound hull nor a usable paddle is promised.
+    bar([bx-.26,-.35,bz+.15],[bx+.15,-.29,bz+.88],.023,C.cut);
+    bar([bx+.12,-.5,bz-.2],[bx+.3,-.49,bz-.67],.024,C.cut);box(.15,.026,.34,C.cut,bx+.34,-.48,bz-.78,-.3);
+    pipeCable([[side*(W-.24),.18,2.6],[side*(W+.12),-.12,2.4],[bx-.02,-.18,bz+1.25]],.018,C.rope);
     for(const z of [-1.2,1.2])ring(.27,.075,C.dark,-W-.08,-.22,z);
     const crateZ=-L/2+.85;
-    crate(-W+.3,.08,crateZ,.48,C.old,.04,true);solid(-W+.3,crateZ,.3,.08,.45);
+    // Stowed emergency flare case replaces the old small crate in its exact solid footprint.
+    const fx=-W+.3;
+    box(.48,.33,.43,0x515d46,fx,.25,crateZ);box(.51,.075,.46,0x687159,fx,.45,crateZ);
+    for(const x of [fx-.17,fx+.17]){box(.055,.038,.47,C.dark,x,.5,crateZ);box(.06,.09,.025,C.steel,x,.37,crateZ-.227);}
+    box(.17,.012,.31,0xa2583d,fx,.495,crateZ);
+    bar([fx-.1,.29,crateZ-.252],[fx+.1,.29,crateZ-.252],.016,C.dark);
+    solid(-W+.3,crateZ,.3,.08,.45);
+    // Laminated timetable frame, facing across the landward approach (lettering is keyed in buildDock).
+    const signX=W+.17,signZ=-3.7;
+    bar([signX,ground(signX,signZ)-.08,signZ],[signX,1.67,signZ],.045,C.old,6);
+    box(.07,.74,1.08,C.dark,signX,1.25,signZ);box(.075,.66,1,C.pale,signX-.007,1.25,signZ);
+    for(const z of [signZ-.48,signZ+.48])box(.09,.045,.045,C.steel,signX-.025,1.55,z);
     // Life ring on its own post and a hanging drying net outside the walking edge.
     bar([-W+.08,.05,L/2-.6],[-W+.08,1.15,L/2-.6],.045,C.old);
     ring(.29,.062,0xaa6f48,-W+.08,.78,L/2-.56);
@@ -393,6 +494,7 @@ window.buildLandmarkDetails = (THREE, o) => {
 
   if(o.kind==='wreck') {
     theme=variant%2?'stripped utility truck':'failed medical supply convoy';
+    const medical=variant%2===0;
     const paint=variant%2?0x716f53:0x556752;
     // Chassis and hollow cab: pillars frame real window gaps instead of a solid box.
     for(const x of [-.73,.73])box(.13,.23,5.4,C.dark,x,.59,0);
@@ -415,11 +517,18 @@ window.buildLandmarkDetails = (THREE, o) => {
     const wheel=ring(.19,.023,C.dark,-.54,1.68,-1.69);wheel.rotation.x=-.65;
     bar([-.54,1.39,-1.87],[-.54,1.68,-1.69],.028,C.steel);
     // Raised bonnet, exposed engine, radiator and one smashed lamp.
-    box(1.98,.08,1.03,paint,0,1.71,-2.34,0,0,.58);
+    if(medical){
+      panel([[-1,2.42,-2.31],[.16,2.34,-2.4],[.33,2.06,-1.97],[-.98,1.98,-1.93]],paint);
+      panel([[.89,1.51,-2.8],[1.3,1.23,-2.83],[1.02,1.96,-2.05],[.6,2.01,-1.97]],C.old);
+      bar([.17,2.35,-2.4],[.34,2.07,-1.98],.023,C.rust,4);
+    }else box(1.98,.08,1.03,paint,0,1.71,-2.34,0,0,.58);
     box(1.22,.37,.76,C.dark,0,1.19,-2.3);
-    for(let i=0;i<4;i++)cyl(.1,.16,C.steel,-.42+i*.28,1.42,-2.3,8);
+    for(let i=0;i<4;i++){
+      const head=cyl(.1,.16,C.steel,-.42+i*.28,1.42,-2.3,8);
+      if(medical&&i>1){head.rotation.z=.48;head.position.y-=.09;}
+    }
     box(1.8,.45,.12,C.dark,0,1.04,-2.87);
-    for(let i=0;i<10;i++)box(.08,.38,.06,C.steel,-.69+i*.15,1.05,-2.95);
+    for(let i=0;i<10;i++)if(!medical||i<3||i>6)box(.08,.38,.06,C.steel,-.69+i*.15,1.05,-2.95,0,medical?(i-4)*.045:0);
     for(const x of [-.92,.92]){
       cyl(.145,.08,C.steel,x,1.25,-2.88,12).rotation.x=Math.PI/2;
       cyl(.11,.02,x<0?C.dark:0xb5ad86,x,1.25,-2.93,10).rotation.x=Math.PI/2;
@@ -431,12 +540,20 @@ window.buildLandmarkDetails = (THREE, o) => {
       for(let row=0;row<3;row++)box(.1,.17,3.05,row===1?paint:C.old,side*1.07,1.19+row*.2,1.2);
       for(const z of [-.24,1.1,2.65])box(.13,.83,.09,C.steel,side*1.12,1.34,z);
     }
-    box(2.13,.57,.085,paint,0,1.11,2.93,0,0,-.73);
+    if(medical)box(2.13,.57,.075,paint,0,.39,2.83,0,0,-.12);
+    else box(2.13,.57,.085,paint,0,1.11,2.93,0,0,-.73);
     for(const x of [-.86,.86])box(.18,.075,.03,C.red,x,.79,2.85);
     for(const z of [-2.02,.55,2.05]){
       bar([-1.16,.5,z],[1.16,.5,z],.075,C.steel);
       for(const side of [-1,1]){
         const x=side*1.14,flat=side>0&&z<0,wy=flat?.38:.5;
+        if(medical&&side<0&&z<0){
+          const disc=cyl(.205,.12,C.rust,x,.49,z,12);disc.rotation.z=Math.PI/2;
+          const stub=cyl(.095,.28,C.steel,x-.06,.49,z,8);stub.rotation.z=Math.PI/2;
+          for(let k=0;k<5;k++)bolt(x-.15,.49+Math.cos(k*Math.PI*2/5)*.145,z+Math.sin(k*Math.PI*2/5)*.145,'x');
+          bar([-.72,.54,-2.02],[-1.19,.33,-2.32],.045,C.rust);
+          continue;
+        }
         const m=cyl(.46,.28,C.dark,x,wy,z,14);m.rotation.z=Math.PI/2;
         if(flat)m.scale.x=.7;
         const hub=cyl(.23,.3,C.rust,x,wy,z,10);hub.rotation.z=Math.PI/2;
@@ -455,11 +572,46 @@ window.buildLandmarkDetails = (THREE, o) => {
     }
     panel([[-1.02,1.7,.1],[-.83,2.27,.1],[-.83,2.24,1.75],[-1.02,1.85,1.9]],C.olive);
     panel([[-.83,2.27,.1],[.83,2.27,.1],[.83,2.24,1.2],[.12,2.17,1.73],[-.83,2.24,1.75]],0x73785c);
+    if(medical){
+      // Broken radiator core and severed hoses beneath the folded bonnet.
+      box(.68,.29,.16,C.rust,.22,1.01,-2.99,0,.2);
+      pipeCable([[-.44,1.35,-2.45],[-.72,1.28,-2.67],[-.87,.93,-2.85]],.047);
+      pipeCable([[.42,1.26,-2.5],[.69,1.15,-2.75],[.72,.87,-2.87]],.04);
+      bar([-.9,.93,-3.06],[-.43,.68,-3.23],.053,C.steel);
+      // Cargo identity panels and shallow paint losses, all below the canvas.
+      for(const side of[-1,1]){
+        box(.012,.46,1.16,0x455340,side*1.128,1.43,1.88);
+        for(let i=0;i<11;i++)box(.015,.016+(i%3)*.009,.08+(i%4)*.043,C.rust,side*1.139,1.17+(i%3)*.2,.1+i*.22);
+        box(.015,.022,.43,C.pale,side*1.141,1.63,1.88);
+      }
+      // Collapse the front progressively without lifting the rear tyres off their seats.
+      for(const p of parts){
+        p.updateMatrix();p.geometry.applyMatrix4(p.matrix);
+        const a=p.geometry.attributes.position;
+        for(let i=0;i<a.count;i++){
+          const x=a.getX(i),z=a.getZ(i),k=Math.max(0,Math.min(1,(.45-z)/2.47));
+          a.setY(i,a.getY(i)-k*(.27+(x<0?.065:0)));
+        }
+        a.needsUpdate=true;p.geometry.computeVertexNormals();p.position.set(0,0,0);p.rotation.set(0,0,0);p.scale.set(1,1,1);
+      }
+    }
     // Apply the vehicle's settled suspension before placing loose cargo on ground.
     transform(0,0,0,0,0,o.roll||0,o.tilt||0);
     solid(0,-1.5,1.2,0,2.55);solid(0,1.2,1.3,0,2.3);
     for(const [x,z] of [[1.75,2.55],[-1.95,1.5]]){
-      const y=ground(x,z);crate(x,y,z,.68,C.wood,.35,variant%2===0);solid(x,z,.45,y,.55);
+      const y=ground(x,z);
+      if(medical&&x>0){
+        // Burst shipping crate retains its original footprint and collider.
+        box(.68,.065,.68,C.old,x,y+.035,z,.35);
+        for(const side of[-1,1])box(.055,.46,.65,C.wood,x+side*.31,y+.26,z);
+        box(.66,.4,.055,C.wood,x,y+.23,z-.32);
+        for(const dx of[-.22,.02,.24])box(.19,.05,.65,C.cut,x+dx,y+.1,z+.38,.25+dx,0,-.12);
+        box(.36,.25,.3,C.pale,x-.04,y+.2,z-.06,0,.06);
+        box(.075,.15,.015,C.red,x-.04,y+.23,z+.101);
+        box(.19,.055,.015,C.red,x-.04,y+.23,z+.102);
+        box(.28,.13,.23,0x81876a,x+.08,y+.37,z-.13,.15);
+      }else crate(x,y,z,.68,C.wood,.35,variant%2===0);
+      solid(x,z,.45,y,.55);
     }
     const y=ground(-1.75,-1.8);
     // Detached door, empty fuel can and glass shards show why it never left.
@@ -467,6 +619,31 @@ window.buildLandmarkDetails = (THREE, o) => {
     box(.62,.03,.32,C.dark,-1.85,y+.15,-1.93,.3);
     can(1.68,ground(1.68,-.3),-.3,C.rust);
     for(let i=0;i<5;i++)panel([[-1.5+i*.16,y+.025,-2.3],[-1.42+i*.16,y+.025,-2.2],[-1.57+i*.16,y+.025,-2.16]],0x687977);
+    if(medical){
+      // Abandoned litter, halfway down from the open bed. Its lower handles meet the soil.
+      const seat=new THREE.Vector3(-.4,1.06,2.79).applyMatrix4(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(o.tilt||0,0,o.roll||0)));
+      const near=[seat.x,seat.y,seat.z],far=[-.4,ground(-.4,4.7)+.14,4.7];
+      for(const s of[-1,1])bar([near[0]+s*.36,near[1],near[2]-.15],[far[0]+s*.36,far[1],far[2]+.2],.028,C.steel);
+      panel([[near[0]-.3,near[1]-.045,near[2]],[near[0]+.3,near[1]-.045,near[2]],[far[0]+.3,far[1]-.045,far[2]],[far[0]-.3,far[1]-.045,far[2]]],0x7b8060);
+      for(const t of[.25,.72]){
+        const yy=near[1]+(far[1]-near[1])*t,zz=near[2]+(far[2]-near[2])*t;
+        const xx=near[0]+(far[0]-near[0])*t;
+        bar([xx-.34,yy+.012,zz],[xx+.34,yy+.012,zz],.021,C.old,4);
+      }
+      box(.47,.07,.28,0xa8a68e,-.4,near[1]-.05,near[2]+.17,0,0,.4);
+      // Supply packets and cloth rolls make the spill distinct from general salvage.
+      for(let i=0;i<4;i++){
+        const x=1.5+i*.18,z=3.02+(i%2)*.36,gy=ground(x,z);
+        if(i%2){const m=cyl(.074,.18,C.pale,x,gy+.082,z,10);m.rotation.z=Math.PI/2;box(.035,.014,.14,C.old,x,gy+.15,z);}
+        else{box(.21,.065,.28,0xa8a991,x,gy+.045,z,i*.31);box(.07,.008,.14,C.pale,x,gy+.081,z,i*.31);}
+      }
+      // Uneven, ground-seated scrapes and a small old leak; no glossy puddle effect.
+      for(const[x,z,rx,rz,col]of[[-.9,-2.5,.58,.43,0x363a2c],[-1.14,-3.1,.19,.73,0x695b40],[-1.13,-4,.14,.42,0x79694c],[1.78,3.45,.23,.63,0x75654a]]){
+        const vs=[];for(let i=0;i<9;i++){const a=i*Math.PI*2/9,k=1-(i%3)*.1,px=x+Math.cos(a)*rx*k,pz=z+Math.sin(a)*rz*k;vs.push([px,ground(px,pz)+.014,pz]);}panel(vs,col);
+      }
+      // A torn tyre sidewall lies behind the detached door, separate from the bare hub.
+      const tyre=ring(.31,.085,C.dark,-2.03,ground(-2.03,-.65)+.105,-.65);tyre.rotation.x=Math.PI/2;tyre.scale.y=.77;
+    }
   }
   if(o.kind==='camp') {
     theme=['ranger search party','interrupted hiking holiday','trapper winter preparations'][variant%3];

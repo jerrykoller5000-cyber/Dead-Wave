@@ -1,0 +1,14 @@
+<!doctype html><meta charset="utf-8"><title>lightning</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>Lightning and the insulated boots · CL-92 · v1</h1>
+<p>Every shower is a storm now, and each storm throws five bolts. Most come down off in the trees: a white flash, the
+bolt, the crack and the thunder. Now and then one sets a tree near you on fire, kills the dead where it lands, or hits
+you for 70. A pair of yellow rubber boots waits at the foot of the radio mast; walk over them and you wear them for the
+run, and lightning can't hurt you. Try it from the dev console: <code>shower</code>, <code>strike</code>,
+<code>strike me</code>, <code>strike tree</code>, <code>strike dead</code>, <code>boots</code>. (The night shot is at the
+title screen's lighter light.) Your notes go in notes.md.</p>
+<script>
+const rows = [['A bolt past the HQ, by night', ['bolt-night']], ['The boots at the mast, and on him', ['boots-mast', 'marine-boots']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

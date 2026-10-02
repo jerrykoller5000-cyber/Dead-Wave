@@ -2,15 +2,8 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   try {
-    const nameEl = document.getElementById('playerName');
-    if (nameEl) nameEl.value = 'WavePrev';
-    document.getElementById('modeHunt').click();
-    let started = false;
-    for (let i = 0; i < 80; i++) {
-      await wait(200);
-      if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-    }
-    ok(started, 'match reached prep after Play');
+    await startMatch(T, 'WavePrev');
+    ok(T.getPhase() === 'prep', 'match reached prep after Play');
     ok(typeof T.getWavePreview === 'function', 'getWavePreview exported on TT');
     ok(typeof T.getWaveDirectorState === 'function', 'getWaveDirectorState exported');
     ok(typeof T.getActiveCaveIndices === 'function', 'getActiveCaveIndices exported');

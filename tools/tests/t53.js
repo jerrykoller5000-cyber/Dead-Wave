@@ -27,16 +27,8 @@
     ok(T.isGuardianNight(4) === false, 'isGuardianNight(4) false');
     ok(T.isGuardianNight(30) === true, 'isGuardianNight(30)');
 
-    const nameEl = document.getElementById('playerName');
-    if (nameEl) nameEl.value = 'Guardian';
-    document.getElementById('modeHunt').click();
-    let started = false;
-    for (let i = 0; i < 80; i++) {
-      await wait(200);
-      if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-    }
-    ok(started, 'match reached prep after Play');
-    if (!started) return out.join('\n');
+    await startMatch(T, 'Guardian');
+    ok(T.getPhase() === 'prep', 'match reached prep after Play');
 
     // --- Check 4 prelude: day 4 blood moon, no guardian; day 5 colossus, no guardian ---
     // Jump to day 4 prep via setDay(3)+startPrep

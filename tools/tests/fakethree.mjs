@@ -639,3 +639,46 @@ export class CatmullRomCurve3 {
   }
   getPoints(n = 5) { const r = []; for (let i = 0; i <= n; i++) r.push(this.getPoint(i / n)); return r; }
 }
+// CU-82: the marine's fitted plates (studio/marine-body.js, GP-106) draw a Shape and extrude it. The outline is kept;
+// the extrusion is its bounding box, depth deep, which is all the checks can see of it.
+export class Shape {
+  constructor(points) { this.pts = []; if (points) for (const p of points) this.pts.push({ x: p.x, y: p.y }); this.holes = []; }
+  moveTo(x, y) { this.pts.push({ x, y }); return this; }
+  lineTo(x, y) { this.pts.push({ x, y }); return this; }
+  quadraticCurveTo(cx, cy, x, y) { this.pts.push({ x, y }); return this; }
+  bezierCurveTo(c1x, c1y, c2x, c2y, x, y) { this.pts.push({ x, y }); return this; }
+  arc(x, y, r) { this.pts.push({ x: x + r, y }, { x, y: y + r }, { x: x - r, y }, { x, y: y - r }); return this; }
+  absarc(x, y, r) { return this.arc(x, y, r); }
+  ellipse(x, y, rx, ry) { this.pts.push({ x: x + rx, y }, { x, y: y + ry }, { x: x - rx, y }, { x, y: y - ry }); return this; }
+  absellipse(x, y, rx, ry) { return this.ellipse(x, y, rx, ry); }
+  closePath() { return this; }
+  getPoints() { return this.pts.map((p) => new Vector2(p.x, p.y)); }
+}
+export const Path = Shape;
+const shapeBox = (shapes) => {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const s of [].concat(shapes || [])) for (const p of (s && s.pts) || []) { x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y); x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y); }
+  return x0 <= x1 ? { x0, y0, x1, y1 } : { x0: -0.5, y0: -0.5, x1: 0.5, y1: 0.5 };
+};
+export const ExtrudeGeometry = geoClass((shapes, opts = {}) => {
+  const b = shapeBox(shapes), d = opts.depth != null ? opts.depth : (opts.amount != null ? opts.amount : 1);
+  const g = new BoxGeometry(b.x1 - b.x0, b.y1 - b.y0, d);
+  g.translate((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, d / 2);
+  return g;
+});
+export const ShapeGeometry = geoClass((shapes) => {
+  const b = shapeBox(shapes);
+  const g = new PlaneGeometry(b.x1 - b.x0, b.y1 - b.y0);
+  g.translate((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, 0);
+  return g;
+});
+// CU-82: the HQ's damaged terminal and the balaclava's hem (ui/hq-damaged-terminal.js, ui/marine-face.js) sweep
+// tubes along a curve. A ring round each point of the path, not turned to follow it: the checks never read its shape.
+export const TubeGeometry = geoClass((path, tubularSegments = 64, radius = 1, radialSegments = 8) => {
+  const q = new Vector3();
+  return gridGeo(Math.max(3, radialSegments | 0), Math.max(1, tubularSegments | 0), (u, v) => {
+    const p = path && path.getPoint ? path.getPoint(v, q) : q.set(0, 0, 0);
+    const a = u * Math.PI * 2;
+    return [p.x + Math.cos(a) * radius, p.y + Math.sin(a) * radius, p.z];
+  });
+});

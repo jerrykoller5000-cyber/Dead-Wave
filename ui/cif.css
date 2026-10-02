@@ -1,0 +1,81 @@
+/* GP-97: bounded wardrobe panel; armory keeps its own layout. */
+#cif:not(.armory-only) { justify-content:center; padding:24px; background:rgba(5,7,4,.76); z-index:45; }
+#cif:not(.armory-only) > .card { width:min(1060px,100%); height:min(760px,calc(100dvh - 48px)); max-height:none; padding:0; overflow:hidden; display:flex; flex-direction:column; clip-path:none; border:1px solid #667052; border-top:3px solid var(--accent); box-shadow:0 24px 100px #000b; }
+body:has(#cif.show:not(.armory-only)) #enemyCounterCard { visibility:hidden; }
+#cif .cif-header { padding:22px 26px 16px; border-bottom:1px solid var(--panel-border); flex:none; }
+#cif .cif-eyebrow { color:var(--accent); font:10px var(--font-hud); letter-spacing:.18em; margin:0 0 9px; }
+#cif .card h2 { margin:0; font-size:27px; gap:16px; }
+#cif .card h2 small { font:12px var(--font-hud); letter-spacing:.08em; }
+#cif #cifHint { font-size:12px; margin:10px 0 0; color:#b9c0aa; }
+#cifStage { flex:1; min-height:0; display:grid; grid-template-columns:258px minmax(0,1fr); gap:0; align-items:stretch; }
+#cif .cif-preview { min-width:0; padding:20px 12px; background:#141810; border-right:1px solid var(--panel-border); display:flex; align-items:center; flex-direction:column; }
+#cif .cif-preview h3 { align-self:flex-start; margin:0 10px 8px; font:11px var(--font-hud); text-transform:uppercase; letter-spacing:.12em; color:#abb59a; }
+#cifMarine { width:220px; height:330px; max-height:calc(100dvh - 340px); max-width:100%; object-fit:contain; flex:0 1 auto; }
+#cifPreviewNote { margin:12px 10px; max-width:220px; color:#adb69d; font-size:11px; line-height:1.6; }
+#cif .cif-preview-actions { display:flex; gap:6px; margin-top:auto; }
+#cifSide { min-height:0; display:flex; flex-direction:column; overflow:hidden; padding:0; }
+#cifTabs { flex:none; display:flex; flex-wrap:nowrap; margin:0; gap:0; padding:0 16px; border-bottom:1px solid var(--panel-border); overflow-x:auto; }
+#cif #cifTabs button { border:0; border-bottom:3px solid transparent; background:none; color:#b8c1aa; padding:16px 12px 13px; font-size:11px; white-space:nowrap; flex:1; }
+#cif #cifTabs button.on { border-bottom-color:var(--accent); color:var(--accent); background:#c9d18b0b; }
+#cifItems { flex:none; flex-wrap:nowrap; overflow:auto; gap:6px; padding:12px 20px; margin:0; }
+#cifItems:empty { display:none; }
+#cif #cifItems button { flex:none; min-height:34px; padding:6px 12px; }
+#cif .cif-selection { padding:4px 22px 12px; border-bottom:1px solid var(--panel-border); }
+#cifSelection { font:20px var(--font-display); margin:0 0 5px; }
+#cifCurrent { margin:0; color:#aeb89c; font-size:11px; }
+#cif .cif-scroll { overflow:auto; overscroll-behavior:contain; padding:16px 22px 24px; min-height:0; flex:1; scrollbar-color:#697351 #1b2116; }
+#cifOptions { display:flex; flex-wrap:wrap; gap:6px; padding-bottom:16px; }
+#cifOptions .cif-group { width:100%; margin:8px 0 2px; }
+#cifOptions button, #cif .cif-preview-actions button, #cifFilters button { padding:8px 11px; background:#232b1d; color:#c9d1bd; border:1px solid #596348; font:11px var(--font-hud); cursor:pointer; min-height:34px; }
+#cif button.on, #cifFilters button[aria-pressed=true] { background:#3a4328; border-color:var(--accent); color:var(--accent); }
+#cifFilters { display:flex; gap:6px; padding:0 0 16px; }
+#cifFilters button { border-radius:3px; }
+#cifList { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:0; }
+#cifList .cif-group, #cifOptions .cif-group { color:#a8b396; font:10px var(--font-hud); letter-spacing:.12em; text-transform:uppercase; padding:0; margin:0; border:0; }
+#cif #cifList button { position:relative; min-width:0; padding:7px; gap:7px; border:1px solid #48513b; background:#20271b; text-align:left; align-items:stretch; font-size:11px; line-height:1.3; }
+#cif #cifList button canvas { width:100%; height:52px; object-fit:cover; border:0; }
+#cif #cifList button > span { padding:0 2px; }
+#cif #cifList button b { font:10px var(--font-hud); text-transform:none; color:#a7b591; padding:0 2px 3px; }
+#cif #cifList button.on { border-color:var(--accent); background:#39422a; box-shadow:inset 0 0 0 1px var(--accent); }
+#cif #cifList button.on b { color:var(--accent); }
+#cif #cifList button.locked { opacity:1; color:#bac2ad; cursor:default; background:#1b2118; }
+#cif #cifList button.locked canvas { opacity:.65; }
+#cif #cifList .cif-lock { font-size:9px; color:#d7c190; text-transform:uppercase; letter-spacing:.1em; }
+#cifEmpty { padding:18px 0; font-size:12px; color:#b8c1aa; }
+#cif .cif-footer { flex:none; display:flex; align-items:center; gap:12px; margin:0; padding:14px 22px; background:#1c2317; border-top:1px solid var(--panel-border); }
+#cif .cif-footer button { width:auto; flex:none; }
+#cif .cif-footer #cifReset { background:transparent; border:1px solid #667052; color:#b9c4a7; clip-path:none; font:10px var(--font-hud); }
+#cif .cif-footer #cifClose { font:12px var(--font-hud); min-width:140px; }
+#cifReset { margin:0; min-height:38px; font-size:10px; background:transparent; }
+#cifSaved { margin-left:auto; color:#aebd98; font-size:10px; }
+#cifClose { width:auto; min-height:40px; padding:10px 18px; font-size:11px; }
+#cif button:focus-visible { outline:2px solid #f5ecc0; outline-offset:3px; }
+#cif [hidden] { display:none!important; }
+@media(max-width:720px) {
+ #cif:not(.armory-only) { padding:8px; }
+ #cif:not(.armory-only) > .card { height:calc(100dvh - 16px); }
+ #cif .cif-header { padding:14px 16px 12px; }
+ #cif .card h2 { font-size:22px; } #cif .card h2 small { font-size:10px; }
+ #cif .cif-eyebrow { font-size:9px; margin-bottom:6px; }
+ #cif #cifHint { font-size:10px; margin-top:6px; }
+ #cifStage { display:flex; flex-direction:column; }
+ #cif .cif-preview { position:relative; height:142px; flex:none; padding:0 14px; display:grid; grid-template-columns:105px 1fr; grid-template-rows:30px 1fr 38px; border-right:0; border-bottom:1px solid var(--panel-border); column-gap:14px; }
+ #cifMarine { grid-column:1; grid-row:1/4; width:94px; height:141px; max-height:none; }
+ #cif .cif-preview h3 { grid-column:2; margin:12px 0 0; font-size:10px; }
+ #cifPreviewNote { grid-column:2; margin:4px 0; font-size:10px; line-height:1.4; }
+ #cif .cif-preview-actions { grid-column:2; margin:0; align-self:start; }
+ #cif .cif-preview-actions button { padding:5px 8px; min-height:28px; font-size:10px; }
+ #cifSide { flex:1; }
+ #cifTabs { padding:0 5px; }
+ #cif #cifTabs button { padding:12px 8px 10px; font-size:10px; }
+ #cifItems { padding:10px 12px; }
+ #cif .cif-selection { padding:0 14px 10px; }
+ #cifSelection { font-size:17px; }
+ #cif .cif-scroll { padding:12px 14px 18px; }
+ #cifList { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ #cif .cif-footer { padding:10px 12px; gap:8px; }
+ #cifSaved { display:none; }
+ #cifClose { margin-left:auto; padding:10px; font-size:10px; }
+ #cifReset { max-width:45%; padding:6px; }
+}
+@media(max-height:620px) and (max-width:720px) { #cif .cif-preview { display:none; } }

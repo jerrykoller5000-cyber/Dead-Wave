@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>night lockdown</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The night lockdown · CU-82 · v1</h1>
+<p>From the alarm to the morning the HQ is locked down: no kiosk, Armory, CIF, HQ panel or build menu. Every light on
+the HQ turns red while it is: the bay lamps, the flood, the corner strobes (red flashes in the alarm), the alarm
+cabinet's beacon and screen, the CIF and Armory signs, and the kiosk's screen. Left: by day in a match. Right: the same view
+at night. Your notes go in notes.md.</p>
+<script>
+for (const [h, k] of [['The west bays: the skull window and the kiosk', 'west'], ['The east hatches: the Armory and the CIF', 'east'], ['The south face: the alarm cabinet', 'south'], ['From above: the corner strobes', 'above']])
+  document.write(`<h2>${h}</h2><div class="row"><figure><figcaption>by day</figcaption><img src="v1/day-${k}.png"></figure><figure><figcaption>night, locked down</figcaption><img src="v1/night-${k}.png"></figure></div>`);
+</script>

@@ -5,6 +5,7 @@
     ok(T.SPARE_CAP_MULT === 1.4, 'spare capacity multiplier is 1.4 (not double)');
     ok(typeof T.reserveCap === 'function' && !!T.RESERVE_CAP_BASE, 'reserveCap / RESERVE_CAP_BASE exported');
     await startMatch(T, 'FullAmmo');
+    T.setDay(10);
     const R = T.getReserve();
     ok(T.START_RESERVE_45 === 50 && R['.45'] === 50, 'starting .45 spare 36 -> 50 (got ' + R['.45'] + ')');
     let capsOk = true; const bad = [];
@@ -22,7 +23,7 @@
     ok(T.getWeaponOwned().m4 === true, 'm4 bought');
     ok(T.getBank() === bank0 - T.WEAPON_PRICE.m4, 'charged the m4 price');
     ok(T.getAmmo().m4 === 30, 'm4 arrives with a loaded magazine (' + T.getAmmo().m4 + ')');
-    ok(R['5.56mm'] === T.reserveCap('5.56mm') && R['5.56mm'] === 252, 'm4 arrives with a full 5.56 reserve (' + R['5.56mm'] + ')');
+    ok(R['5.56mm'] === 240, 'm4 arrives with a full 5.56 reserve in whole magazines (' + R['5.56mm'] + ')');
 
     // Buying it again does nothing: no free refill.
     R['5.56mm'] = 10;
@@ -45,6 +46,7 @@
     // The extended mag still stacks x1.5 on the new cap.
     if (T.buyExtMag) {
       T.buyExtMag('m4');
+      if (T.armoryDbg) T.armoryDbg.fit('m4', 'ext', true);   // CL-113: fitted at the Armory
       ok(T.reserveCap('5.56mm') === 252 * 1.5, 'ext mag: 5.56 cap 252 x1.5 = ' + T.reserveCap('5.56mm'));
     }
     // Chainsaw: a full tank, as before.

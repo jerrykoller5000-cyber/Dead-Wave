@@ -36,6 +36,8 @@
     ok(bare.busy && bare.w === 'ak' && Math.abs(bare.t - 2.0) < 1e-6, 'bare AK reload ' + f2(bare.t) + ' s (2.0)');
     const cash0 = T.getBank();
     T.buyExtMag('ak');
+    ok(T.weaponMods('ak').fitted === null && T.weaponMods('ak').ext, 'CL-113: bought at the kiosk, not fitted');
+    T.armoryDbg.fit('ak', 'ext', true);   // CL-113: the Armory fits it
     const m1 = T.weaponMods('ak');
     ok(m1.fitted === 'ext' && m1.ext && T.getBank() < cash0, 'ext mag bought and fitted');
     toGun('pistol'); toGun('ak');
@@ -51,6 +53,7 @@
     ok(T.getAmmo().ak === 45 && rounds0 > 30 + T.RESERVE_CAP['7.62mm'], 'full up with the ext mag: ' + T.getAmmo().ak + ' loaded, ' + rounds0 + ' rounds in all (more than 30 + the base cap ' + T.RESERVE_CAP['7.62mm'] + ')');
     const cash1 = T.getBank(); const nb = buys.length;
     T.buyHeavyBarrel('ak');
+    T.armoryDbg.fit('ak', 'heavy', true);   // CL-113
     const m2 = T.weaponMods('ak');
     ok(m2.fitted === 'heavy' && m2.heavy && m2.ext, 'heavy barrel bought and fitted; the ext mag stays owned (' + JSON.stringify(m2) + ')');
     const heavyBuy = buys.slice(nb).find((b) => b.itemId === 'mod:heavy:ak');
@@ -71,6 +74,7 @@
     // Climb: at most 55% of bare.
     const cBare = T.recoilClimb('m4', 9);
     T.buyHeavyBarrel('m4');
+    T.armoryDbg.fit('m4', 'heavy', true);   // CL-113
     const cHeavy = T.recoilClimb('m4', 9);
     ok(cBare > 0 && cHeavy <= cBare * 0.55, 'M4 climb after 9 rounds: ' + f2(cHeavy) + ' vs bare ' + f2(cBare) + ' (<= 55%)');
     const akHeavy = T.recoilClimb('ak', 9); T.fitWeaponMod('ak', null); const akBare = T.recoilClimb('ak', 9); T.fitWeaponMod('ak', 'heavy');
@@ -120,6 +124,8 @@
     // The switch is free, both ways, and only for owned mods.
     const cash2 = T.getBank(); const nb2 = buys.length;
     T.buyExtMag('ak');
+    ok(T.weaponMods('ak').fitted === 'heavy' && T.getBank() === cash2 && buys.length === nb2, 'the kiosk will not sell the owned ext mag twice (CL-113: and does not fit it)');
+    T.fitWeaponMod('ak', 'ext');   // CL-113: the swap happens at the Armory's workbench
     ok(T.weaponMods('ak').fitted === 'ext' && T.getBank() === cash2 && buys.length === nb2, 'refitting the owned ext mag is free and reports no purchase');
     toGun('pistol'); toGun('ak');
     ok(Math.abs(T.getSwapDbg().swapDur - 0.28) < 1e-6 && T.getSwapDbg().fireCooldown === 0, 'with the mag back on, the AK draws at the normal speed');

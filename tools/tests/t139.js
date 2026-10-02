@@ -44,6 +44,7 @@
     T.setMouseFireDbg(true); await wait(120); const bareDmg = lastDmg(); T.setMouseFireDbg(false); await wait(150);
     // The can.
     T.buySuppressor('m4');
+    T.armoryDbg.fit('m4', 'suppressor', true);   // CL-113: fitted at the Armory
     g = guardAt(40); await wait(300);
     shot = await shootWest(); hold(g); await wait(200);
     ok(!!shot && shot.suppressed && Math.abs(shot.r - T.shotHearingRadius('m4')) < 1e-9, 'suppressed M4 shot heard to ' + (shot && shot.r.toFixed(1)) + ' m');

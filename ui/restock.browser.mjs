@@ -37,7 +37,7 @@ try{
    if(phase2)assert.equal(await page.locator('[data-weapon]').first().getAttribute('data-weapon'),'pistol');
    const pistol=page.locator('[data-weapon="pistol"] [data-restock]');
    assert.equal(await pistol.textContent(),'Restock $33');
-   assert(await page.locator('[data-weapon="m4"] [data-restock]').isDisabled());
+   /* CL-114: a gun not in stock yet has no kiosk row */assert(await page.locator('[data-weapon="m4"]').count()===0||await page.locator('[data-weapon="m4"] [data-restock]').isDisabled());
    await pistol.click();
    assert.deepEqual(await page.evaluate(()=>({cash:TT.getBank(),pistol:stockProbe.inventory().pistol.spare.length,uzi:stockProbe.inventory().uzi.spare.reduce((n,m)=>n+m,0),loaded:stockProbe.inventory().pistol.loaded[0]})),{cash:467,pistol:14,uzi:200,loaded:3});
    assert(await pistol.isDisabled());

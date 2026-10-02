@@ -1,3 +1,4 @@
+import { renderQuestPanel } from './quest-panel.js';
 import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
 import { buildScoutingReport, scoutingSpecialNight } from './scouting.js';
@@ -79,27 +80,50 @@ export function boatCallView({day,goalNight,phase,extraction,relayReady,alarmAct
 export function mountBriefing({ doc = document, bus = window } = {}) {
   const send = (type, details = {}) => bus.dispatchEvent(new CustomEvent('dw-game', {detail:{type,...details}}));
   const dialog = doc.createElement('dialog'); dialog.id = 'hqBriefing'; dialog.setAttribute('aria-labelledby','briefingTitle');
-  const heading = doc.createElement('h2'); heading.id = 'briefingTitle';
+  const header = doc.createElement('header'); header.className = 'briefing-header';
+  const identity = doc.createElement('div'), station = doc.createElement('p'); station.className = 'briefing-station'; station.textContent = text('alarm.station');
+  const heading = doc.createElement('h2'); heading.id = 'briefingTitle'; heading.textContent = text('alarm.title');
+  const subtitle = doc.createElement('p'); subtitle.className = 'briefing-day';
+  identity.append(station,heading,subtitle);
+  const close = doc.createElement('button'); close.type = 'button'; close.className = 'briefing-close'; close.textContent = text('common.close');
+  header.append(identity,close);
+  const status = doc.createElement('p'); status.className = 'briefing-status'; status.setAttribute('role','status');
+  const nav = doc.createElement('nav'); nav.className = 'briefing-nav'; nav.setAttribute('aria-label',text('alarm.title'));
   const content = doc.createElement('div'); content.className = 'briefing-content';
-  const footer = doc.createElement('footer'), alarm = doc.createElement('button'), boat = doc.createElement('button'), close = doc.createElement('button');
-  alarm.type = boat.type = close.type = 'button'; alarm.textContent = text('wavePreview.alarm'); boat.textContent = text('wavePreview.callBoat'); boat.hidden = true; close.textContent = text('common.close');
-  const prep = doc.createElement('section'), prepHeading = doc.createElement('h3'), prepRows = doc.createElement('ul');
+  const pages = {}, tabs = {};
+  const select = key => { for(const id of Object.keys(pages)){pages[id].hidden=id!==key;tabs[id].setAttribute('aria-pressed',String(id===key));} content.scrollTop=0; };
+  for(const key of ['report','fieldwork','relay']) {
+    const tab = doc.createElement('button'); tab.type='button'; tab.textContent=text('alarm.'+key); tabs[key]=tab;
+    const page = doc.createElement('div'); page.className='briefing-page'; page.id='briefing-'+key; pages[key]=page;
+    tab.setAttribute('aria-controls',page.id); tab.addEventListener('click',()=>select(key)); nav.append(tab); content.append(page);
+  }
+  const footer = doc.createElement('footer'), actions = doc.createElement('div'), alarm = doc.createElement('button'), boat = doc.createElement('button');
+  actions.className='briefing-actions'; alarm.className='briefing-alarm'; boat.className='briefing-extraction';
+  alarm.type = boat.type = 'button'; alarm.textContent = text('wavePreview.alarm'); boat.textContent = text('wavePreview.callBoat'); boat.hidden = true;
+  const consequence=doc.createElement('p'); consequence.className='briefing-consequence'; consequence.textContent=text('alarm.consequence');
+  const prep = doc.createElement('details'), prepHeading = doc.createElement('summary'), prepRows = doc.createElement('ul');
   prep.className = 'briefing-prep'; prepRows.className = 'prep-goals'; prep.hidden = true; prep.append(prepHeading,prepRows);
-  footer.append(alarm,boat,close); dialog.append(heading,content,prep,footer); doc.body.append(dialog);
+  actions.append(alarm,boat); footer.append(consequence,actions); dialog.append(header,status,nav,content,prep,footer); doc.body.append(dialog);
+  select('report');
   let returnFocus = null, currentData = null;
   const line = (parent, tag, value, cls) => { const el=doc.createElement(tag); el.textContent=value; if(cls)el.className=cls; parent.append(el); return el; };
   function render(data) {
     currentData = data;
-    const view = buildBriefing(data); heading.textContent = view.title; content.replaceChildren();
+    const view = buildBriefing(data); subtitle.textContent = view.title;
+    for(const page of Object.values(pages))page.replaceChildren();
+    const reportPage=pages.report, fieldPage=pages.fieldwork, relayPage=pages.relay;
+    const state=data.disabled?'locked':data.alarmActive?'active':data.phase!=='prep'?'inProgress':data.canSoundAlarm===false?'remote':'ready';
+    status.textContent=text('alarm.'+state); status.dataset.state=state;
     if(data.relayStory?.line) {
-      const relay=doc.createElement('section');relay.className='briefing-relay';content.append(relay);
+      const relay=doc.createElement('section');relay.className='briefing-relay';relayPage.append(relay);
       line(relay,'h3',text('story.relay.title'));
       const dispatches = data.relayStory.lines?.length ? data.relayStory.lines : [{ line: data.relayStory.line }];
       for (const dispatch of dispatches) line(relay,'p',dispatch.line,'relay-story-line');
+      renderQuestPanel(relay,data,{doc,send});
     }
     const scouting = view.available ? buildScoutingReport(data) : null;
     if(scouting) {
-      const report=doc.createElement('section');report.className='briefing-scouting';content.append(report);
+      const report=doc.createElement('section');report.className='briefing-scouting';reportPage.append(report);
       line(report,'h3',scouting.title);
       if(scouting.rest)line(report,'p',scouting.rest,'briefing-rest');
       line(report,'p',scouting.caves);line(report,'p',scouting.pushes,'briefing-pushes');
@@ -111,7 +135,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     }
     const radio = buildRadioCallView(data.radioCall);
     if (radio) {
-      const section=doc.createElement('section');section.className='briefing-radio';content.append(section);
+      const section=doc.createElement('section');section.className='briefing-radio';relayPage.append(section);
       line(section,'h3',radio.title);
       const status=line(section,'p',radio.note,'radio-call-status');status.setAttribute('role','status');
       const cards=doc.createElement('div');cards.className='radio-call-cards';section.append(cards);
@@ -123,7 +147,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       }
     }
     if(data.restocks?.length) {
-      const caches=doc.createElement('section');caches.className='briefing-restocks';content.append(caches);
+      const caches=doc.createElement('section');caches.className='briefing-restocks';fieldPage.append(caches);
       line(caches,'h3',text('cache.title'));
       for(const row of data.restocks)line(caches,'p',text('cache.row',{
         site:row.name,reward:row.collected?text('cache.collected'):row.reward}));
@@ -131,7 +155,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     }
     const bounties = buildBountyBoard(data);
     if(bounties) {
-      const board=doc.createElement('section');board.className='briefing-bounties';content.append(board);
+      const board=doc.createElement('section');board.className='briefing-bounties';fieldPage.append(board);
       line(board,'h3',bounties.title);
       if(!bounties.rows.length)line(board,'p',bounties.empty,'briefing-muted');
       for(const row of bounties.rows) {
@@ -143,23 +167,25 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
       if(bounties.rows.length)line(board,'p',bounties.note,'briefing-muted');
       if(bounties.rows.some(row=>row.state==='open'))line(board,'p',bounties.legend,'briefing-muted');
     }
-    for (const warning of view.warnings) line(content,'p',warning,'briefing-warning');
+    for (const warning of view.warnings) line(reportPage,'p',warning,'briefing-warning');
     for (const source of view.sources) {
-      const group=doc.createElement('section'); content.append(group); line(group,'h3',source.heading);
+      const group=doc.createElement('section'); reportPage.append(group); group.className='briefing-source'; line(group,'h3',source.heading);
       if(data.intelOwned)line(group,'p',source.bearing,'briefing-muted');
       for(const label of source.lines)line(group,'p',label);
       if(source.total)line(group,'p',source.total,'briefing-muted');
     }
-    if(view.note)line(content,'p',view.note,'briefing-muted');
-    if(view.total)line(content,'p',view.total,'briefing-total');
-    if(view.earnings)line(content,'p',view.earnings,'briefing-earnings');
-    if(data.phase!=='prep')line(content,'p',text('wavePreview.inProgress'),'briefing-warning');
-    if(data.disabled)line(content,'p',text('hq.disabled'),'briefing-warning');
-    if(data.canSoundAlarm === false)line(content,'p',text('wavePreview.atHQ'),'briefing-muted');
+    if(view.note)line(reportPage,'p',view.note,'briefing-muted');
+    if(view.total)line(reportPage,'p',view.total,'briefing-total');
+    if(view.earnings)line(reportPage,'p',view.earnings,'briefing-earnings');
+    if(data.phase!=='prep')line(reportPage,'p',text('wavePreview.inProgress'),'briefing-warning');
+    if(data.disabled)line(reportPage,'p',text('hq.disabled'),'briefing-warning');
+    if(data.canSoundAlarm === false)line(reportPage,'p',text('wavePreview.atHQ'),'briefing-muted');
     alarm.disabled = data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
     const boatView=boatCallView(data);
     boat.hidden=!boatView.offered;boat.disabled=!boatView.enabled;
-    if(boatView.relayDown)line(content,'p',text('wavePreview.relayDown'),'briefing-warning');
+    if(boatView.relayDown)line(reportPage,'p',text('wavePreview.relayDown'),'briefing-warning');
+    if(!fieldPage.childElementCount)line(fieldPage,'p',text('alarm.fieldworkEmpty'),'briefing-empty');
+    if(!relayPage.childElementCount)line(relayPage,'p',text(data.relayReady?'alarm.relayQuiet':'alarm.relaySilent'),'briefing-empty');
     // Missing optional intelligence must never prevent a valid wave start.
   }
   function shut() {
@@ -186,6 +212,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(!data)return;
     if(data.type==='briefing-open') {
       const cardHadFocus = dialog.open && doc.activeElement?.classList.contains('radio-call-card');
+      if(!dialog.open)select('report');
       render(data);
       if(cardHadFocus)close.focus();
       if(!dialog.open){returnFocus=doc.activeElement;doc.body.classList.add('briefing');dialog.showModal();close.focus();}

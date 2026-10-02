@@ -1,13 +1,18 @@
 <!doctype html><meta charset="utf-8"><title>warrens</title>
 <style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
-<h1>warrens · CL-99 · v2 (dressed)</h1>
-<p>The five warrens under the caves, seen from above with the roof off (docs/specs/hollows.md). This first version
-is the layout and the rock, to walk and fight in: the way in at the top of each picture (the mouth), the Galleries,
-a ramp down to the Narrows, a ramp down to the Deep (the big square room: the set piece, the strongbox, the rune
-door). Each is the same every run, so it can be learned. v2 adds each Deep's set piece (the root knot, the slate fins, the mine cart and rails, the drowned's pool, the barrow king's
-bier and tombs), the carved rune door, the strongbox, oil lanterns and the bolt-holes' daylight. The dark comes with the runtime
-(these shots are lit by the day above; below it will be black but for the lamps, his gun light and the NVG). Your notes go in notes.md.</p>
+<h1>warrens · CL-99 · v3 (what the dead dragged down)</h1>
+<p>v3, from the story: the husks, pale veined sacks hanging from the roots over every chamber, a hiker's boot or a
+ranger's orange jacket showing through, and deeper down two or three bodies grown together; FOB Threshold's crates
+and kit (stencilled PGB crates, one burst open, a helmet, a field radio) in place of the old ambulance; and in the iron
+warren, where it started, the settlers' iron wall across the first ramp cut open with the bars bent aside, the hikers'
+climbing rope down the ramp and their lights dropped at its foot. These are shot with the warren built high in the sky
+(a camera far below times out headless), so the blue in the roof is sky, and the lamps here are lit for the sheet; in
+the game it is dark but for the lamps and his light. Each warren now holds the story's nine tags (2, 2, 2, 2, 1).
+v2 (from above, the rock and set pieces) is below. Your notes go in notes.md.</p>
 <script>
-for (const k of ['root', 'shale', 'iron', 'wet', 'hill']) document.write(`<h2>${k}</h2><div class="row"><figure><figcaption>warren-${k} (v2)</figcaption><img src="v2/warren-${k}.png"></figure></div>`);
+const v3 = [['The husks over a chamber (root, iron, wet)', ['v3-root-chamber', 'v3-iron-chamber', 'v3-wet-chamber']], ['FOB Threshold’s crates; the iron warren’s cut wall and the hikers’ rope', ['v3-root-crates', 'v3-iron-breach']]];
+for (const [h, ks] of v3) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v3)</figcaption><img src="v3/${k}.png"></figure>`).join('') + '</div>');
+document.write('<h2>v2, from above</h2>');
+for (const k of ['root', 'shale', 'iron', 'wet', 'hill']) document.write(`<div class="row"><figure><figcaption>warren-${k} (v2)</figcaption><img src="v2/warren-${k}.png"></figure></div>`);
 </script>

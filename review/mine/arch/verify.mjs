@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import * as T from 'three';import * as Fake from '../../../tools/tests/fakethree.mjs';import {buildMineTimbers} from '../../../world/history-props.js';
+const profile=Array.from({length:35},(_,i)=>{const t=i/34*Math.PI,y=6.1*Math.sin(t)**(2/3.4);return[4.3*Math.sign(Math.cos(t))*Math.abs(Math.cos(t))**(2/3.4)+.18*y,y];});
+const g=buildMineTimbers(T,4.4,3.6,{archProfile:profile}),arch=g.getObjectByName('mine-outer-arch'),a=arch.children[0].geometry.attributes.position.array;assert(arch);assert([...a].every(Number.isFinite));
+for(let i=0;i<a.length;i+=3)assert(!(Math.abs(a[i])<1.95&&a[i+1]>.3&&a[i+1]<3.25),'Arch must keep the existing central portal clear');
+const before=Array.from(a);g.position.set(4,1,8);g.rotation.y=.7;g.userData.seatHistoryTerrain((x,z)=>x*.1+z*.08);assert.deepEqual(Array.from(a),before,'Cave outline must not be warped by ground seating');assert.equal(arch.position.y,0);assert(buildMineTimbers(Fake,4.4,3.6,{archProfile:profile}).getObjectByName('mine-outer-arch'));
+fs.writeFileSync(new URL('./arch-checks.json',import.meta.url),JSON.stringify({clearPortal:true,finite:true,profileUnwarped:true,fakeThree:true,archVertices:a.length/3},null,2));console.log('PASS: timber arch finite, central portal clear, cave profile unwarped by terrain seating, fake THREE compatible.');

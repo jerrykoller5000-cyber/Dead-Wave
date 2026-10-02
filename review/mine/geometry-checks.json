@@ -1,0 +1,30 @@
+{
+  "cases": 10,
+  "stats": [
+    {
+      "name": "buildMineTimbers",
+      "meshes": 1,
+      "vertices": 2556
+    },
+    {
+      "name": "buildCutBars",
+      "meshes": 1,
+      "vertices": 9336
+    },
+    {
+      "name": "buildIronBelowBoards",
+      "meshes": 2,
+      "vertices": 816
+    },
+    {
+      "name": "buildHikersCache",
+      "meshes": 2,
+      "vertices": 10296
+    }
+  ],
+  "clearBreach": true,
+  "finite": true,
+  "terrainSeating": true,
+  "fakeThree": true,
+  "ropeRoute": true
+}

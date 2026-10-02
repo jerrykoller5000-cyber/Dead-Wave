@@ -38,12 +38,14 @@ try{
  await page.fill('#playerName','Wanderer Tester');await page.click('#modeHunt');
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
  await page.evaluate(()=>{gp68Probe.setup(8);gp68Probe.open();});
+ await page.getByRole('button',{name:'Fieldwork',exact:true}).click();
  assert.equal(await page.locator('.bounty-post').count(),0);
  await page.screenshot({path:path.join(shots,'board-before-1280.png')});
  await page.getByRole('button',{name:'Close',exact:true}).click();
  assert(await page.evaluate(()=>gp68Probe.setup(9)),'wanderer spawned');
  const post=await page.evaluate(()=>gp68Probe.post());assert(post&&post.wanderer&&post.reward===150);
  await page.evaluate(()=>gp68Probe.open());
+ await page.getByRole('button',{name:'Fieldwork',exact:true}).click();
  const row=page.locator('.bounty-post[data-bounty*="wanderer"]');
  assert.equal(await row.count(),1);
  assert.match(await row.locator('h4').textContent(),/^A colossus is walking the (north|south|east|west) trail$/);

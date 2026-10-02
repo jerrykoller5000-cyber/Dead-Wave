@@ -8,7 +8,7 @@
 // this page only poses with seek/update and copies each tile onto a sheet.
 //   ?scene=studio/scenes/demo-drag.json&frames=8&phase=strip|video
 import * as THREE from 'three';
-import { loadScene, createScene } from '../studio/index.js';
+import { loadScene, createScene, sceneClipRefs } from '../studio/index.js';
 
 const q = new URLSearchParams(location.search);
 const phase = q.get('phase') || 'strip';
@@ -38,7 +38,7 @@ function bodiesBox(sp) {
 try {
   const scenePath = q.get('scene');
   const json = await (await fetch('../' + scenePath)).json();
-  const refs = [...new Set(Object.values(json.actors).flatMap((a) => a.clips.map((c) => c[1])))];
+  const refs = sceneClipRefs(json);   // CL-81: a branch's clips too
   const raw = new Map(await Promise.all(refs.map(async (r) => [r, await (await fetch('../studio/clips/' + r + '.json')).json()])));
   const scene = loadScene(json, (r) => raw.get(r));
 

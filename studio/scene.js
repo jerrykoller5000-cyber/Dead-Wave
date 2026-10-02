@@ -169,6 +169,34 @@ export function validateScene(json) {
       else if (td && !td.body) errs.push(`${at}: "limp": ${actors[to.actor].rig} has no body to hang`);
     }
   });
+  // Branches (CL-81): another way the moment can go, from whenever the host says (the kick-free's let-go). Each holds
+  // its own length, how fast every hold lets go ("release", seconds), and per actor: clips from the branch's start,
+  // tilt and rise keys, "ahead" (keys of metres along its own heading from where it was), and hits.
+  if (json.branches !== undefined) {
+    if (!json.branches || typeof json.branches !== 'object' || Array.isArray(json.branches)) errs.push('"branches" is an object of named branches');
+    else for (const [bn, b] of Object.entries(json.branches)) {
+      const at = `branch "${bn}"`;
+      if (!b || typeof b !== 'object' || !(b.length > 0)) { errs.push(`${at}: "length" must be a positive number of seconds`); continue; }
+      if (b.release !== undefined && !(isNum(b.release) && b.release >= 0)) errs.push(`${at}: "release" is the seconds every hold takes to let go, 0 or more`);
+      for (const [n, ba] of Object.entries(b.actors || {})) {
+        const w = `${at} actor "${n}"`, a = actors[n];
+        if (!a) { errs.push(`${w}: no actor "${n}" in the scene`); continue; }
+        if (ba.clips !== undefined) {
+          if (!Array.isArray(ba.clips) || !ba.clips.length) errs.push(`${w}: "clips" needs at least one [time, "rig/clip", options?]`);
+          else ba.clips.forEach((c, i) => { if (!Array.isArray(c) || !isNum(c[0]) || typeof c[1] !== 'string' || !/^[\w-]+\/[\w-]+$/.test(c[1])) errs.push(`${w} clip ${i}: [time, "rig/clip", options?]`); });
+        }
+        if (ba.tilt !== undefined) errs.push(...keyErrors(ba.tilt, 'vec3', `${w}.tilt`));
+        if (ba.rise !== undefined) errs.push(...keyErrors(ba.rise, 'scalar', `${w}.rise`));
+        if (ba.ahead !== undefined) errs.push(...keyErrors(ba.ahead, 'scalar', `${w}.ahead`));
+        if (ba.hits !== undefined) {
+          if (a.motion === undefined) errs.push(`${w}: "hits" needs the actor to have "motion"`);
+          if (!Array.isArray(ba.hits)) errs.push(`${w}: "hits" is a list of [time, { at, dir, power, kind }]`);
+          else ba.hits.forEach((h, i) => { if (!Array.isArray(h) || !isNum(h[0]) || !h[1] || typeof h[1] !== 'object' || (h[1].kind !== undefined && !HIT_KINDS.includes(h[1].kind))) errs.push(`${w} hit ${i}: [time, { at, dir, power, kind }]`); });
+        }
+      }
+    }
+    if (json.autoBranch !== undefined && (!json.autoBranch || !json.branches || !json.branches[json.autoBranch.name] || !isNum(json.autoBranch.at))) errs.push('"autoBranch" is { name, at }: a branch of this scene and the time it starts (for review renders)');
+  }
   if (json.checks !== undefined) {
     const c = json.checks;
     for (const k of ['gap', 'slide', 'snap']) if (c[k] !== undefined && !(c[k] > 0)) errs.push(`checks.${k} must be a number above 0`);
@@ -204,6 +232,7 @@ function orderActors(json) {
 export function sceneWithoutMotion(json) {
   const out = JSON.parse(JSON.stringify(json));
   for (const a of Object.values(out.actors || {})) { delete a.motion; delete a.hits; delete a.kill; }
+  for (const b of Object.values(out.branches || {})) for (const ba of Object.values(b.actors || {})) delete ba.hits;   // CL-81
   for (const h of out.holds || []) {
     if (h.limp === undefined) continue;
     delete h.limp;
@@ -212,13 +241,22 @@ export function sceneWithoutMotion(json) {
   return out;
 }
 
+// Every clip a scene file plays ("rig/clip"), its branches' included (CL-81): what a loader fetches.
+export function sceneClipRefs(json) {
+  const refs = [...Object.values((json && json.actors) || {}).flatMap((a) => (a.clips || []).map((c) => c[1])),
+    ...Object.values((json && json.branches) || {}).flatMap((b) => Object.values(b.actors || {}).flatMap((ba) => (ba.clips || []).map((c) => c[1])))];
+  return [...new Set(refs)];
+}
+
 // --- Loading ----------------------------------------------------------------------------------
 // clipOf("guardian/drag") returns that clip's JSON (studio/clips/guardian/drag.json): the caller
 // reads files (Node) or fetches them (browser), so this file does neither.
 export function loadScene(json, clipOf) {
   const errs = validateScene(json);
   const clips = new Map();
-  if (!errs.length) for (const a of Object.values(json.actors)) for (const c of a.clips) {
+  const allClips = errs.length ? [] : [...Object.values(json.actors).flatMap((a) => a.clips),
+    ...Object.values(json.branches || {}).flatMap((b) => Object.values(b.actors || {}).flatMap((ba) => ba.clips || []))];
+  if (!errs.length) for (const c of allClips) {
     if (clips.has(c[1])) continue;
     try {
       const cj = clipOf(c[1]);
@@ -231,6 +269,7 @@ export function loadScene(json, clipOf) {
   if (errs.length) throw new Error(`scene ${json && json.name ? '"' + json.name + '" ' : ''}is not valid:\n  - ` + errs.join('\n  - '));
   const paths = {};
   for (const [n, p] of Object.entries(json.paths || {})) paths[n] = makePath(p, json.length);
+  const normClip = ([t, ref, o]) => ({ t, ref, clip: clips.get(ref), fade: (o && o.fade) ?? 0.15, loop: o && o.loop !== undefined ? !!o.loop : null, stride: (o && o.stride) || 0, speed: (o && o.speed) || 0, minRate: (o && o.minRate) ?? 0.2 });
   const actors = {};
   for (const [n, a] of Object.entries(json.actors)) {
     actors[n] = {
@@ -240,7 +279,7 @@ export function loadScene(json, clipOf) {
       aim: a.aim ? { ref: a.aim.at.includes('.') ? splitRef(a.aim.at) : { actor: a.aim.at, name: null }, w: normKeys(a.aim.w), turn: a.aim.turn || 0 } : null,
       face: a.face === undefined ? 'forward' : a.face, scale: a.scale,
       tilt: a.tilt ? normKeys(a.tilt) : null, rise: a.rise ? normKeys(a.rise) : null,
-      clips: a.clips.map(([t, ref, o]) => ({ t, ref, clip: clips.get(ref), fade: (o && o.fade) ?? 0.15, loop: o && o.loop !== undefined ? !!o.loop : null, stride: (o && o.stride) || 0, speed: (o && o.speed) || 0, minRate: (o && o.minRate) ?? 0.2 })),
+      clips: a.clips.map(normClip),
       targets: a.targets || {},
       motion: a.motion === undefined ? null : loadMotion(typeof a.motion === 'string' ? presets.json(a.motion) : a.motion),
       hits: [...(a.hits || []).map(([t, o]) => ({ t, ...o })), ...(a.kill ? [{ t: a.kill[0], ...a.kill[1], kill: true }] : [])].sort((x, y) => x.t - y.t)
@@ -250,9 +289,18 @@ export function loadScene(json, clipOf) {
     const f = splitRef(h.from), to = splitRef(h.to);
     return { key: `${h.from}>${h.to}`, from: f, fromAlso: h.fromAlso ? splitRef(h.fromAlso) : null, to, offset: h.offset || null, taut: !!h.taut, reach: h.reach ? normKeys(h.reach) : null, tow: h.tow ? normKeys(h.tow) : null, lift: h.lift ? normKeys(h.lift) : null, trail: h.trail ? normKeys(h.trail) : null, limp: h.limp ? normKeys(h.limp) : null };
   });
+  const branches = {};
+  for (const [bn, b] of Object.entries(json.branches || {})) {
+    branches[bn] = { name: bn, length: b.length, release: b.release ?? 0.1, actors: {} };
+    for (const [n, ba] of Object.entries(b.actors || {})) branches[bn].actors[n] = {
+      clips: ba.clips ? ba.clips.map(normClip) : null, tilt: ba.tilt ? normKeys(ba.tilt) : null, rise: ba.rise ? normKeys(ba.rise) : null,
+      ahead: ba.ahead ? normKeys(ba.ahead) : null, hits: (ba.hits || []).map(([t, o]) => ({ t, ...o })).sort((x, y) => x.t - y.t)
+    };
+  }
   const c = json.checks || {};
   return {
-    format: SCENE_FORMAT, name: json.name, length: json.length, actors, paths, holds, order: orderActors(json),
+    format: SCENE_FORMAT, name: json.name, length: json.length, actors, paths, holds, order: orderActors(json), branches,
+    autoBranch: json.autoBranch || null,
     checks: { gap: c.gap ?? DEFAULT_CHECKS.gap, slide: c.slide ?? DEFAULT_CHECKS.slide, snap: c.snap ?? DEFAULT_CHECKS.snap, speed: c.speed || {} },
     source: json
   };
@@ -333,7 +381,7 @@ export function createScene(scene, opts = {}) {
     if (!given) root.add(inst.group);
     inst.group.updateWorldMatrix(true, false);
     const scale = worldScale(inst.group, new THREE.Vector3());
-    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map(), shift: new THREE.Vector3(), hitIdx: 0, body: null };
+    A[n] = { spec: a, inst, given: !!given, scale, contact: contactHeights(a.rig), towed: false, pos: new THREE.Vector3(), yaw: 0, clipIdx: -1, clipKey: null, curEntry: null, bhIdx: 0, brFrom: null, ct: 0, fade: null, rate: 1, speed: 0, lastXZ: null, slides: {}, prevQ: new Map(), shift: new THREE.Vector3(), hitIdx: 0, body: null };
     // A reacting body: the world's ground under it (the host's, or the scene's floor).
     if (a.motion) A[n].body = createBody(inst, a.motion, { ground: (x, z) => (opts.ground ? opts.ground(x, z) : root.getWorldPosition(_gw).y), pool: opts.pool });
   }
@@ -375,7 +423,8 @@ export function createScene(scene, opts = {}) {
     const g = a.inst.group;
     root.updateWorldMatrix(true, false);
     _qy.setFromAxisAngle(_v.set(0, 1, 0), a.yaw);
-    const tilt = a.spec.tilt ? sampleKeys(a.spec.tilt, T) : null;
+    const bt = bra(a.spec.name);
+    const tilt = bt && bt.tilt ? sampleKeys(bt.tilt, T - BR.t0) : a.spec.tilt ? sampleKeys(a.spec.tilt, T) : null;
     if (tilt) _qy.multiply(_qt.setFromEuler(_e.set(tilt[0] * D2R, tilt[1] * D2R, tilt[2] * D2R, 'XYZ')));
     _m.compose(a.pos, _qy, _s.set(1, 1, 1)).premultiply(root.matrixWorld);   // scene → world (unit scale)
     if (g.parent) { g.parent.updateWorldMatrix(true, false); _m.premultiply(_mi.copy(g.parent.matrixWorld).invert()); }
@@ -395,6 +444,14 @@ export function createScene(scene, opts = {}) {
   };
   const place = (a) => {
     const s = a.spec;
+    if (BR) {   // CL-81: from where it was when the branch was taken
+      const ba = bra(s.name), f = a.brFrom, d = ba && ba.ahead ? sampleKeys(ba.ahead, T - BR.t0) : 0;
+      a.yaw = f.yaw;
+      a.pos.set(f.x + Math.sin(f.yaw) * d + a.shift.x, 0, f.z + Math.cos(f.yaw) * d + a.shift.z);
+      a.pos.y = groundAt(a.pos.x, a.pos.z) + (ba && ba.rise ? sampleKeys(ba.rise, T - BR.t0) : s.rise ? sampleKeys(s.rise, T) : 0);
+      placeBody(a);
+      return;
+    }
     const at = sampleKeys(s.at, T);
     let yaw = (typeof s.face === 'number' ? s.face : 0) * D2R;
     a.pos.set(at[0], at[1], at[2]);
@@ -454,13 +511,16 @@ export function createScene(scene, opts = {}) {
   // The clip an actor plays now, its rate, and the pose.
   const poseActor = (a, dt, reach) => {
     const s = a.spec;
+    // CL-81: a branch's own clips, timed from its start (until its first one is due, what was playing plays on).
+    const bc0 = bra(s.name) && bra(s.name).clips, bc = bc0 && bc0[0].t <= T - BR.t0 + 1e-9 ? bc0 : null;
+    const list = bc || s.clips, lt = bc ? T - BR.t0 : T;
     let idx = -1;
-    for (let i = 0; i < s.clips.length; i++) if (s.clips[i].t <= T + 1e-9) idx = i;
+    for (let i = 0; i < list.length; i++) if (list[i].t <= lt + 1e-9) idx = i;
     if (idx < 0) idx = 0;
-    const entry = s.clips[idx];
-    if (idx !== a.clipIdx) {
-      if (a.clipIdx >= 0 && entry.fade > 0) { const pe = s.clips[a.clipIdx]; a.fade = { entry: pe, ct: a.ct, age: 0, dur: entry.fade }; }
-      a.clipIdx = idx; a.ct = 0;   // pins carry over: a foot planted at the change stays planted
+    const entry = list[idx], key = (bc ? 'b' : '') + idx;
+    if (key !== a.clipKey) {
+      if (a.curEntry && entry.fade > 0) a.fade = { entry: a.curEntry, ct: a.ct, age: 0, dur: entry.fade };
+      a.clipKey = key; a.clipIdx = idx; a.curEntry = entry; a.ct = 0;   // pins carry over: a foot planted at the change stays planted
     }
     const clip = entry.loop === null ? entry.clip : { ...entry.clip, loop: entry.loop };
     // Stepping at the ground's speed: a stride is metres per play of the clip.
@@ -482,7 +542,7 @@ export function createScene(scene, opts = {}) {
     const free = {};
     // By as much as the hold has it: the lift when there is one (the limb is going to the hand), else the tow.
     for (const h of scene.holds) if (h.to.actor === s.name && a.inst.def.chains[h.to.name]) {
-      const w = h.lift ? sampleKeys(h.lift, T) || 0 : sampleKeys(h.tow, T) || 0;
+      const w = h.lift ? hw(h.lift) || 0 : hw(h.tow) || 0;
       if (w > 0) free[h.to.name] = Math.max(free[h.to.name] || 0, w);
     }
     // A body still easing in from gameplay doesn't pin its feet yet: a pin taken where the game had
@@ -499,11 +559,41 @@ export function createScene(scene, opts = {}) {
 
   let T = 0;
   const worst = {};
+  // CL-81: a branch taken (another way the moment goes from now): { spec, t0, name }.
+  let BR = null;
+  const bra = (n) => (BR && BR.spec.actors[n]) || null;
+  // A hold's weight now: its keys, let go over the branch's "release" once a branch is taken.
+  function hw(keys) {
+    const v = sampleKeys(keys, T) || 0;
+    if (!BR) return v;
+    return BR.spec.release > 0 ? v * Math.max(0, 1 - (T - BR.t0) / BR.spec.release) : 0;
+  }
   const noteWorst = (kind, key, value, extra) => {
     const k = kind + ':' + key;
     if (!worst[k] || value > worst[k].value) worst[k] = { kind, key, value, t: T, ...extra };
   };
+  // CL-81: take a branch now: every actor carries on from where it is (see "branches" in the scene file).
+  const branch = (name) => {
+    const spec = scene.branches && scene.branches[name];
+    if (!spec) throw new Error(`scene "${scene.name}" has no branch "${name}"`);
+    if (BR) return false;
+    for (const a of Object.values(A)) a.brFrom = { x: a.pos.x - a.shift.x, z: a.pos.z - a.shift.z, yaw: a.yaw };
+    BR = { spec, t0: T, name };
+    for (const a of Object.values(A)) a.bhIdx = 0;
+    return true;
+  };
+  const auto = opts.autoBranch !== undefined ? opts.autoBranch : scene.autoBranch;
   const step = (dt) => {
+    if (auto && !BR && T + dt >= auto.at - 1e-9 && T < auto.at) {   // a review render: branch on the frame it's due
+      const d0 = auto.at - T, r0 = d0 > 1e-9 ? step0(d0) : null;
+      branch(auto.name);
+      const r = step0(Math.max(0, dt - d0));
+      if (r0) r.events.unshift(...r0.events);
+      return r;
+    }
+    return step0(dt);
+  };
+  const step0 = (dt) => {
     T += dt;
     const events = [];
     const checks = { gap: {}, slide: {}, speed: {}, snap: {}, bad: false };
@@ -517,7 +607,7 @@ export function createScene(scene, opts = {}) {
       a.lastBase = a.pos.clone();
       const reach = {};
       for (const h of scene.holds) if (h.from.actor === n) {
-        const w = sampleKeys(h.reach, T) || 0;
+        const w = hw(h.reach) || 0;
         if (w > 0) { h.toJ.parent.updateWorldMatrix(true, true); reach[h.from.name] = { at: gripPoint(h, new THREE.Vector3()), w }; if (h.fromAlso) reach[h.fromAlso.name] = reach[h.from.name]; }
       }
       a.reaching = reach;
@@ -525,7 +615,7 @@ export function createScene(scene, opts = {}) {
       // This actor's holds on bodies already posed: tow them along the ground, lift the held limb.
       for (const h of scene.holds) if (h.from.actor === n) {
         const b = A[h.to.actor];
-        const tow = sampleKeys(h.tow, T) || 0, lift = sampleKeys(h.lift, T) || 0, trail = sampleKeys(h.trail, T) || 0;
+        const tow = hw(h.tow) || 0, lift = hw(h.lift) || 0, trail = hw(h.trail) || 0;
         handPoint(h, _h);
         b.towed = tow > 0;
         // Lift, then tow, then lift again: lifting a leg moves the ankle over the ground too, so the
@@ -601,9 +691,10 @@ export function createScene(scene, opts = {}) {
       const b = a.body;
       if (!b) continue;
       b.follow();
-      const hs = a.spec.hits;
-      while (a.hitIdx < hs.length && hs[a.hitIdx].t <= T + 1e-9) {
-        const h = hs[a.hitIdx++];
+      const hs = a.spec.hits, bh = bra(n) ? bra(n).hits : null;
+      const due = () => (!BR && a.hitIdx < hs.length && hs[a.hitIdx].t <= T + 1e-9) || (bh && a.bhIdx < bh.length && bh[a.bhIdx].t <= T - BR.t0 + 1e-9);
+      while (due()) {
+        const h = !BR ? hs[a.hitIdx++] : bh[a.bhIdx++];
         root.updateWorldMatrix(true, false);
         _qt.setFromRotationMatrix(root.matrixWorld);
         const dir = h.dir ? _v.set(...h.dir).applyQuaternion(_qt).toArray() : undefined;
@@ -615,7 +706,7 @@ export function createScene(scene, opts = {}) {
       // so the held joint (the ankle) sits on the hand, and the rest hangs and drags.
       for (const h of scene.holds) {
         if (h.to.actor !== n || !h.limp) continue;
-        const w = sampleKeys(h.limp, T) || 0;
+        const w = hw(h.limp) || 0;
         if (w > 0) {
           handPoint(h, _h);
           // The body's end point (the foot) sits past the held joint (the ankle) along the lower bone,
@@ -663,7 +754,7 @@ export function createScene(scene, opts = {}) {
     }
     // Checks, after everyone is where they end up this frame.
     for (const h of scene.holds) {
-      const w = Math.max(sampleKeys(h.reach, T) || 0, sampleKeys(h.tow, T) || 0, sampleKeys(h.limp, T) || 0);
+      const w = Math.max(hw(h.reach) || 0, hw(h.tow) || 0, hw(h.limp) || 0);
       if (w < 0.99) continue;
       handPoint(h, _h);
       const gap = _h.distanceTo(gripPoint(h, _g));
@@ -700,13 +791,14 @@ export function createScene(scene, opts = {}) {
       a.lastXZ = new THREE.Vector2(_v.x, _v.z);
       // [lowest, highest] m/s, optionally only from a time (and to one): a lunge is allowed to be fast.
       const range = scene.checks.speed[n];
-      const inWindow = range && T >= (range[2] ?? 0) - 1e-9 && T <= (range[3] ?? Infinity) + 1e-9;
+      const inWindow = !BR && range && T >= (range[2] ?? 0) - 1e-9 && T <= (range[3] ?? Infinity) + 1e-9;
       const vb = !!inWindow && dt > 0 && (sp < range[0] - 1e-6 || sp > range[1] + 1e-6);
       checks.speed[n] = { value: sp, bad: vb };
       checks.bad ||= vb;
       noteWorst('speed', n, sp, { bad: vb });
       // The biggest one-frame joint turn, at 60 fps.
       let wt = 0, wj = null;
+      if (a.reacting) a.prevQ.clear();   // CL-81
       // A body mid-reaction turns fast because it's falling, not because a clip snaps: not checked.
       for (const [jn, j] of Object.entries(a.reacting ? {} : a.inst.R)) {
         if (!j || !j.isObject3D) continue;
@@ -722,11 +814,11 @@ export function createScene(scene, opts = {}) {
     return { t: T, events, checks };
   };
   const reset = () => {
-    T = 0;
+    T = 0; BR = null;
     for (const k of Object.keys(worst)) delete worst[k];
     for (const a of Object.values(A)) {
       a.clipIdx = -1; a.ct = 0; a.fade = null; a.lastXZ = null; a.slides = {}; a.prevQ.clear(); a.inst.plants = {}; a.inst.stepping = 0; a.enterFrom = null; a.lastBase = null;
-      a.shift.set(0, 0, 0); a.hitIdx = 0; a.reacting = false;
+      a.shift.set(0, 0, 0); a.hitIdx = 0; a.reacting = false; a.bhIdx = 0; a.clipKey = null; a.curEntry = null; a.brFrom = null;
       if (a.body) a.body.reset();
     }
     // Time 0: everyone placed and posed, nothing moved yet.
@@ -736,7 +828,11 @@ export function createScene(scene, opts = {}) {
   return {
     root, actors: Object.fromEntries(Object.entries(A).map(([n, a]) => [n, { inst: a.inst, body: a.body, get speed() { return a.speed; }, get rate() { return a.rate; } }])),
     get t() { return T; },
-    get done() { return T >= scene.length - 1e-9; },
+    get done() { return BR ? T >= BR.t0 + BR.spec.length - 1e-9 : T >= scene.length - 1e-9; },
+    // CL-81: take a branch now (false if one is taken already); which, and how far into it.
+    branch,
+    get branched() { return BR ? BR.name : null; },
+    get branchT() { return BR ? T - BR.t0 : 0; },
     // How far along a path the scene is (metres), and how long the path is: the host ends a haul on arrival.
     path(name) { const P = paths[name]; return P ? { distance: P.distAt(T), total: P.total } : null; },
     // The worst of each check since the last reset/seek, keyed "kind:what": gap:guardian.handR>marine.footL,

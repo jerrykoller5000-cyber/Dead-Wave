@@ -47,3 +47,25 @@ for (const theme of WARREN_THEMES) {
     w.dispose();
   });
 }
+
+// CL-99 v3 (docs/story.md §8): nine tags (2, 2, 2, 2, 1), as GP-83 counts them; the husks; FOB Threshold's crates in
+// place of the old ambulance; the iron warren's cut wall and the hikers' rope and lights.
+test('v3: nine tags, the husks, the crates, the iron warren\'s breach', () => {
+  assert.deepEqual({ ...HOLLOW.TAGS }, { root: 2, shale: 2, iron: 2, wet: 2, hill: 1 });
+  for (const theme of WARREN_THEMES) {
+    const w = buildWarren(theme);
+    const husks = w.group.userData.husks || [];
+    assert.ok(husks.length >= 6, theme + ': husks ' + husks.length);
+    const kinds = new Set(husks.map((h) => h.userData.what));
+    assert.ok(kinds.has('boot') || kinds.has('jacket'), theme + ': a hiker\'s boot or a ranger\'s jacket shows');
+    assert.ok(w.group.getObjectByName('fob-crates'), theme + ': FOB Threshold\'s crates');
+    const O = w.group.position;
+    for (const h of husks) {
+      const floor = w.groundAt(h.position.x + O.x, h.position.z + O.z) - O.y;   // the floor under it, in the group's frame
+      assert.ok(h.position.y - 2.3 > floor + 2.5, theme + ': hung overhead, its foot ' + (h.position.y - 2.3 - floor).toFixed(1) + ' m up');
+    }
+    if (theme === 'iron') { assert.ok(w.group.getObjectByName('iron-wall-cut') && w.group.getObjectByName('hikers-rope') && w.group.getObjectByName('hikers-headlamp')); }
+    else assert.ok(!w.group.getObjectByName('iron-wall-cut'));
+    w.dispose();
+  }
+});

@@ -4,10 +4,19 @@
   const T = window.TT; const out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click();
-  await wait(1500);
+  await startMatch(T, 'TestMarine');
   T.unlockAllBuilds(); T.addCash(100000);
+  for (const t of T.trees) { t.alive = false; t.stump = false; }
+  for (const r of T.rocks) r.alive = false;
   const p = T.player.position;
+  {
+    const tx = 22, tz = -18;
+    for (let i = 0; i < 40; i++) {
+      p.set(tx, T.sampleHeight(tx, tz), tz);
+      await wait(40);
+      if (Math.hypot(p.x - tx, p.z - tz) < 0.4) break;
+    }
+  }
   const pgx = T.gridIndex(p.x), pgz = T.gridIndex(p.z);
   const c = T.camera.position;
   const aimAtCell = (gx, gz, y) => { const tx = T.gridCentre(gx), tz = T.gridCentre(gz); const ty = y == null ? T.sampleHeight(tx, tz) : y; T.setAimRay(c.x, c.y, c.z, tx - c.x, ty - c.y, tz - c.z); };

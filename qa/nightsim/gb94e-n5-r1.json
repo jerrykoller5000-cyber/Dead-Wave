@@ -1,0 +1,175 @@
+{
+ "dt": 0.03333333333333333,
+ "god": false,
+ "repeat": 1,
+ "results": [
+  {
+   "night": 5,
+   "loadout": "m4, shotgun, knife, armor 75",
+   "planned": 221,
+   "trick": "The first spiders, and a colossus heads the last push",
+   "signature": "shambler",
+   "waveTotal": 221,
+   "spawned": 221,
+   "killed": 221,
+   "skullValue": 812,
+   "bankEarned": 0,
+   "bankEnd": 583743,
+   "firstSpawn": 0.3,
+   "lastSpawn": 236.1,
+   "lastKill": 305.7,
+   "length": 305.5,
+   "pushes": [
+    6.3,
+    85,
+    165.2
+   ],
+   "lulls": [
+    31.4,
+    30.3
+   ],
+   "maxAlive": 48,
+   "pile": {
+    "n": 7,
+    "t": 16,
+    "type": "shambler",
+    "d": 139
+   },
+   "crowd": {
+    "n": 0,
+    "t": 0
+   },
+   "inside": {
+    "n": 0,
+    "t": 0,
+    "depth": 0
+   },
+   "stuck": [],
+   "lost": [],
+   "capped": false,
+   "tail10": 285,
+   "tail5": 289.6,
+   "tail1": 300.9,
+   "deaths": [],
+   "damage": 36,
+   "damageHp": 13,
+   "hits": 13,
+   "damageBy": {
+    "spider": 36
+   },
+   "knifeSwings": 0,
+   "meleeKills": 0,
+   "meleeShare": 0,
+   "crowd5s": 0,
+   "sigPeak": 44,
+   "screamerCalls": 0,
+   "healHp": 0,
+   "samples": [
+    {
+     "t": 30,
+     "alive": 48,
+     "killed": 1,
+     "w": "m4",
+     "mag": 25,
+     "rel": false,
+     "hp": 100,
+     "near": 86.3
+    },
+    {
+     "t": 60,
+     "alive": 36,
+     "killed": 23,
+     "w": "m4",
+     "mag": 14,
+     "rel": false,
+     "hp": 100,
+     "near": 22.1
+    },
+    {
+     "t": 90,
+     "alive": 23,
+     "killed": 53,
+     "w": "m4",
+     "mag": 21,
+     "rel": false,
+     "hp": 98,
+     "near": 58
+    },
+    {
+     "t": 120,
+     "alive": 47,
+     "killed": 63,
+     "w": "m4",
+     "mag": 10,
+     "rel": false,
+     "hp": 98,
+     "near": 58.8
+    },
+    {
+     "t": 150,
+     "alive": 34,
+     "killed": 94,
+     "w": "m4",
+     "mag": 28,
+     "rel": false,
+     "hp": 98,
+     "near": 21.3
+    },
+    {
+     "t": 180,
+     "alive": 48,
+     "killed": 118,
+     "w": "m4",
+     "mag": 6,
+     "rel": false,
+     "hp": 95,
+     "near": 28.9
+    },
+    {
+     "t": 210,
+     "alive": 48,
+     "killed": 136,
+     "w": "m4",
+     "mag": 25,
+     "rel": false,
+     "hp": 93,
+     "near": 45.8
+    },
+    {
+     "t": 240,
+     "alive": 47,
+     "killed": 174,
+     "w": "m4",
+     "mag": 4,
+     "rel": false,
+     "hp": 93,
+     "near": 19.2
+    },
+    {
+     "t": 270,
+     "alive": 35,
+     "killed": 186,
+     "w": "m4",
+     "mag": 29,
+     "rel": false,
+     "hp": 92,
+     "near": 11.7
+    },
+    {
+     "t": 300,
+     "alive": 3,
+     "killed": 218,
+     "w": "m4",
+     "mag": 28,
+     "rel": false,
+     "hp": 88,
+     "near": 15
+    }
+   ],
+   "knees": 0,
+   "wallSecs": 312,
+   "errors": [],
+   "run": 1
+  }
+ ]
+}

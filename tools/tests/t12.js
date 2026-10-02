@@ -2,17 +2,9 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play refuses with no callsign; tryPlace also no-ops until the match has started.
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
-  // Insertion still drives the marine for ~9s after prep begins; p.set and tryPlace
-  // aim are overwritten until it finishes.
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
+  // startMatch waits out the insertion, so a teleport sticks.
   {
     const pl = T.player.position;
     const tx = 2, tz = -4;

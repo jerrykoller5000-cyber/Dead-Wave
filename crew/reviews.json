@@ -2,6 +2,20 @@
   "note": "Written by node crew/crew.mjs; the panel reads review/<asset>/notes.md itself.",
   "assets": [
     {
+      "asset": "armory",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "below-sound",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "boat",
       "owner": "claude",
       "rig": null,
@@ -16,9 +30,37 @@
       "reference": null
     },
     {
+      "asset": "first-people",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "fog-night",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "fog-score",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "guardian",
       "owner": "claude",
       "rig": "guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guardian-boss",
+      "owner": "claude",
+      "rig": "cave-guardian",
       "clip": null,
       "reference": null
     },
@@ -44,6 +86,13 @@
       "reference": null
     },
     {
+      "asset": "guardian-let-go",
+      "owner": "claude",
+      "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "guardian-pounce",
       "owner": "claude",
       "rig": "guardian",
@@ -61,6 +110,48 @@
       "asset": "guardian-throw-out",
       "owner": "claude",
       "rig": "marine+guardian",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "guns",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heart",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heart-score",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "heron",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "history",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "lightning",
+      "owner": "claude",
+      "rig": null,
       "clip": null,
       "reference": null
     },
@@ -93,6 +184,20 @@
       "reference": null
     },
     {
+      "asset": "marine-run",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "run",
+      "reference": "Jog_Fwd_Loop"
+    },
+    {
+      "asset": "marine-walk",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "walk",
+      "reference": "Walk_Loop"
+    },
+    {
       "asset": "motion-marine-marine",
       "owner": "grokbot",
       "rig": "marine",
@@ -107,7 +212,49 @@
       "reference": null
     },
     {
+      "asset": "night-lockdown",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "places-sound",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "rabbit",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "rune-finish",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "suppressors",
+      "owner": "claude",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "survivors",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "training",
       "owner": "claude",
       "rig": null,
       "clip": null,

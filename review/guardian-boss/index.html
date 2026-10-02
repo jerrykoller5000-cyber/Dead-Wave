@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>guardian boss</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The guardian boss on the cave guardian's rig · CL-78 · v1</h1>
+<p>The guardian you fight on nights 6, 12 and 18 is now the thing from the caves, in the Marrow's chalk colours, not a
+stretched zombie. It bounds at you on all fours, rears up with a clawed arm out to strike, flinches when hit, and rolls
+over when it dies. Its health, damage, speed and rules are the same. Stills can't show the motion: on a guardian night
+(or the dev console's guardian spawn) watch it move. Your notes go in notes.md.</p>
+<script>
+const rows = [['Before and after', ['before-boss-run', 'boss-run']], ['Coming on, side on, and rearing', ['boss-run-side', 'boss-rear']], ['Dead', ['boss-dead']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

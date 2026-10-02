@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-53 a full headless run, the boat called on night 20
-touching: tools/nightsim.mjs, index.html (dressing room)
-since: 2026-09-30T21:42Z
-next: CU-53 R4 · P-78. A full run timed headless: `tools/nightsim.mjs --
+task: CU-83 Commit and push the crew's and Jerry's work since 321aef8 (Jerry)
+touching: git
+since: 2026-10-02T04:06Z
+next: CU-72 R5 · P-143. Passages: a cleared warren's Deep opens a tunnel
 blocked-on: —
-last-report: handoffs/2026-09-30-cursor-CU-70.md
+last-report: handoffs/2026-10-01-cursor-CU-82-lights.md
 
 ## Notes
 

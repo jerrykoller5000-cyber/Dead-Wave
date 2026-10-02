@@ -11,7 +11,15 @@ export const PROP_NOTE_SITES = Object.freeze({
   'objective:fuel-depot': 'fuel',
   dock: 'dock',
   watchtower: 'watchtower',
-  hq: 'hq'
+  cordon: 'cordon',
+  trailhead: 'trailhead',
+  graveyard: 'graveyard',
+  mine: 'mine',
+  'warren:root': 'warrenRoot',
+  'warren:shale': 'warrenShale',
+  'warren:iron': 'warrenIron',
+  'warren:wet': 'warrenWet',
+  'warren:hill': 'warrenHill'
 });
 
 export function createPropNotes() {

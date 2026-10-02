@@ -25,7 +25,7 @@ try{
  await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
  if(!before)assert.match(await page.locator('#timeLine').innerText(),/^Daylight/);
  await checkCopy();await page.keyboard.press('Escape');await page.waitForFunction(()=>document.getElementById('pause').classList.contains('show'));await shot('pause');await page.click('#tipsBtn');await shot('tips');await page.keyboard.press('Escape');await page.evaluate(()=>{TT.openShop(true);TT.setShopTabDbg('weapons');});await shot('kiosk');
- if(!before)assert.deepEqual(await page.locator('[data-weapon]').evaluateAll(es=>es.map(e=>e.dataset.weapon)),['pistol','uzi','shotgun','revolver','m4','chainsaw','ak','flamer','sniper','launcher','aa12','minigun']);
+ if(!before)assert.deepEqual(await page.locator('[data-weapon]').evaluateAll(es=>es.map(e=>e.dataset.weapon)),['pistol']);/* CL-114 (Jerry): night 1 lists only the guns in stock; the rest arrive on their nights */
  await page.keyboard.press('Escape');await page.evaluate(()=>TT.startPrep());
  await page.waitForFunction(()=>getComputedStyle(document.getElementById('bigBanner')).opacity==='1');
  for(const [width,height] of [[1280,720],[390,844]]){await page.setViewportSize({width,height});await shot(`banner-${width}`);if(!before)assert(!await intersects('#bigBanner','#minimapFrame'),'banner clear of minimap');}

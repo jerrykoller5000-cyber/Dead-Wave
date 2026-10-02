@@ -1,5 +1,10 @@
 # The Hollows: underground by day (D-67)
 
+**Story v2 (D-70, 2026-10-01):** read `docs/story.md` §8 with this spec. The chalk cave is the Marrow cave, sealed at
+its mouth by the first people's cracked door (code id `chalk` stays); nine dog tags (the Gravewalkers who died), not
+twelve; no Medic-4: the dragged-down gear is FOB Threshold's, the hikers' and the rangers'; the husks hang below;
+Ridgeline, not Harbor Nine; the valley, not an island.
+
 Owner: Claude (CL-98, P-134). For Jerry to read and say yes to, and for the builders: Grokbot (GB-106 the Hush, GB-107
 fighting below, GB-108 the stir), Cursor (CU-71 the runtime, CU-72 passages, CU-73 measured), ChatGPT (GP-83 the haul,
 GP-84 the words), Claude (CL-99 the warrens, CL-100 what they say, CL-101 the sound), Antigravity (AG-29).
@@ -9,7 +14,7 @@ stands after R4.
 ## The short version
 
 - Five of the six caves (root, shale, iron, wet, hill) have a **warren** under them: three depths of dark tunnels
-  and chambers, a set piece at the bottom, and loot. The chalk cave has none: it is the guardian's, over the source.
+  and chambers, a set piece at the bottom, and loot. The chalk cave (the Marrow cave) has none: it is the heart's own, sealed.
 - The way in is **the Hush**: a box built from the relay's spare board that plays the signal back out of step, so the
   guardian can't hear the man carrying it. He has it from the morning after the relay is repaired; the HQ charges it
   once each dawn. **One delve a day, by day only.**
@@ -19,11 +24,11 @@ stands after R4.
   flat, the guardian comes through the rock after a ten-second warning. A **bolt-hole** or the way out saves him; the
   run's one kick-free still applies (D-46); otherwise it is the cave death, and **the run ends** (Jerry, Q-4).
 - **The haul:** skulls (banked at the HQ as always), supply crates, one **strongbox** per warren per run (a blueprint,
-  an early gun, a mod, a camo or a rune shard), and the twelve **dog tags** of convoy Medic-4. A full delve pays about
+  an early gun, a mod, a camo or a rune shard), and the nine **dog tags** of the Gravewalkers who died. A full delve pays about
   half a night, so the nights stay the main road.
 - **The same layout every run** (Jerry, Q-4): a warren can be learned. Clearing a Deep opens a **passage** to the next
   cave round the compass for the rest of the run.
-- The secret's final fight happens **deep in the chalk heart, behind the rune doors** (Jerry, Q-4): the rune door at
+- The secret's final fight happens **deep in the Marrow, at the heart, behind the rune doors** (Jerry, Q-4): the rune door at
   the bottom of every warren hums toward it. It opens only on the silenced night (the secret, CL-79).
 
 ## 1. The Hush (GB-106)
@@ -47,7 +52,8 @@ walk-in grab (`checkScriptedKillTriggers`, the cave branch) skips him at that mo
 one-second fade, CU-71). Unlit, the mouth kills as it does today. The poke chase (D-26) is untouched: the Hush is for
 going in, not for standing in front of a cave making noise.
 
-**The chalk mouth refuses.** With a charge, near the chalk mouth: "Too close to the source." No prompt to go down.
+**The Marrow cave refuses.** Its mouth is sealed by the first people's door (CL-107): with a charge, near it, "Too close
+to the source." No prompt to go down.
 
 **No charge** (already used today, or before the relay): the mouth prompt reads "The Hush is flat. Tomorrow." and
 nothing else changes.
@@ -70,7 +76,7 @@ warren's floor; `worldSolids` and the build solids are the warren's walls; the z
 nav grid. Build mode, placing, the shovel, the tripods and the mortar are refused with "No building down here." The
 map (Tab) shows only the explored part of this warren, cell by cell.
 
-**Where it lives.** Each warren is its own group far below the island (y around -400) with its own lights and fog;
+**Where it lives.** Each warren is its own group far below the valley (y around -400) with its own lights and fog;
 only one is ever built at a time, when he goes down, and thrown away when he comes up. It takes under a second to
 build (CL-99's budget).
 
@@ -168,22 +174,23 @@ into the rock; otherwise the cave death, and the run ends (Jerry, Q-4).
 - **Skulls** from the dead, carried up and banked at the HQ as always. Tuned so a full delve's median pays about
   **half the same day's night** (ChatGPT's budget test).
 - **Supply crates:** 3 to 5 a warren, like topside's (ammunition for what he carries, a med pack, a grenade).
-- **The strongbox:** one per warren per run, at the back of the Deep. One prize, rolled for the run from what he
+- **The strongbox:** one per warren per run, at the back of the Deep. **Story v2 (Claude, 2026-10-01): it always holds
+  its warren's rune shard, and one gear prize besides.** The prize is rolled for the run from what he
   doesn't have yet, by depth and theme (`game/hollows-loot.js`, pure and seeded): a build blueprint he doesn't own; a
   gun before its arrival night (D-48); a mod for a gun he carries; an earned camo he hasn't got (D-66, the unlock kept
-  for good); or a **rune shard** (section 7). Never a repeat in a run.
-- **The dog tags:** twelve, Medic-4's crew and escort, spread over the five warrens (root 2, shale 2, iron 3, wet 3,
-  hill 2), each in a fixed place. **Kept for good** once picked up (the profile, like the badges); the board shows
-  "Tags 5 / 12"; all twelve is a lifetime badge ("Brought them home", GP-65's list). Each tag has its line (CL-100).
+  for good). Never a repeat in a run.
+- **The dog tags:** nine, the Gravewalkers who died at FOB Threshold (story v2), spread over the five warrens (root 2, shale 2, iron 2, wet 2, hill 1),
+  each in a fixed place. **Kept for good** once picked up (the profile, like the badges); the board shows
+  "Tags 5 / 9"; all nine is a lifetime badge ("Brought them home", GP-65's list). Each tag has its line (CL-100).
 
 ## 7. What the Hollows say (CL-100, in `docs/story.md`)
 
-- **The convoy went under.** Medic-4 never reached the camps because the dead dragged it down: its wreckage (a
+- **(Story v2: Medic-4 is gone; story.md §8 replaces this.)** ~~The convoy went under.~~ Medic-4 never reached the camps because the dead dragged it down: its wreckage (a
   crumpled ambulance, stretchers, medical crates, a radio) lies in the Galleries of every warren, as if pulled apart.
-- **Twelve tags,** a line each: who they were and a last thing about them. The last one is the doctor's, and it isn't
-  there: the doctor got out (the survivors, R5).
-- **The relay learns.** From the first delve, one of Harbor Nine's morning lines changes: the tone is loudest "under
-  the chalk".
+- **Nine tags,** a line each: who they were and a last thing about them (CL-100). The three who lived (Okafor, Brandt,
+  Pike) wear theirs.
+- **The relay learns.** From the first delve, one of Ridgeline's morning lines changes: the tone is loudest "under
+  the white rock. We're calling it the Marrow."
 - **The rune doors.** A sealed slab at the back of each Deep, carved like the Pit's stones, humming toward the lake.
   E on one: "It's warm. It's singing." They open on the silenced night only (the secret).
 - **Rune shards.** Five exist, one per warren's strongbox table. Each shows one glyph of the Pit's order; collect them

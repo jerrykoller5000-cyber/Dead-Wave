@@ -14,16 +14,8 @@
     ok(T.roleForCave('hill').trait === 'barrow', 'hill → barrow');
     ok(T.roleForCave('nope') == null, 'unknown theme → null');
 
-    const nameEl = document.getElementById('playerName');
-    if (nameEl) nameEl.value = 'CaveWarn';
-    document.getElementById('modeHunt').click();
-    let started = false;
-    for (let i = 0; i < 80; i++) {
-      await wait(200);
-      if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-    }
-    ok(started, 'match reached prep after Play');
-    if (!started) return out.join('\n');
+    await startMatch(T, 'CaveWarn');
+    ok(T.getPhase() === 'prep', 'match reached prep after Play');
 
     const active = T.getActiveCaveIndices();
     ok(active.length >= 1, 'prep has active caves (' + active.length + ')');

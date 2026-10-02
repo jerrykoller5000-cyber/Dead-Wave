@@ -11,7 +11,7 @@ try{
  browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
  const page=await browser.newPage({viewport:{width:1280,height:720}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  const shot=n=>page.screenshot({path:path.join(shots,`${before?'before':'after'}-${n}.png`)});
- if(before)await page.route('**/ui/wave-preview.js',r=>r.fulfill({body:fs.readFileSync(path.join(root,'ui/wave-preview.js'),'utf8').replace("    if(view.earnings)line(content,'p',view.earnings,'briefing-earnings');",''),contentType:'text/javascript'}));
+ if(before)await page.route('**/ui/wave-preview.js',r=>r.fulfill({body:fs.readFileSync(path.join(root,'ui/wave-preview.js'),'utf8').replace("    if(view.earnings)line(reportPage,'p',view.earnings,'briefing-earnings');",''),contentType:'text/javascript'}));
  await page.route('**/index.html?*',r=>r.fulfill({body:src,contentType:'text/html'}));await page.goto(server.origin+'/index.html?debug=1&raf=timer');
  await page.waitForFunction(()=>window.TT&&DWLoad.snapshot().state==='ready',null,{timeout:120000});
  await page.evaluate(()=>DWOpening.dismissForTesting());await page.waitForFunction(()=>document.getElementById('opening').hidden);

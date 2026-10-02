@@ -376,6 +376,7 @@ async function playNight(o) {
     wallSecs: Math.round((Date.now() - wall0) / 1000), errors: []
   });
     reports.push(R);
+    console.log('ns night ' + R.night + '  ' + (R.length == null ? 'n/a' : R.length + 's') + '  deaths ' + (R.deaths ? R.deaths.length : 0) + '  wall ' + R.wallSecs + 's' + (R.error ? '  ERROR ' + R.error : '') + (R.won ? '  boarded' : ''));
     if (R.error || R.won) break;
   }
   if (!o.full) return JSON.stringify(reports[0]);
@@ -427,8 +428,17 @@ async function runFull() {
     await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); })()`);
     await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 30000 });
     await page.evaluate(lib);
-    const o = { full: true, night: 1, dt: DT, cap: CAP, god: GOD, wallCap: WALLCAP * 60000 };
-    const raw = await page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 3 * 60 * 60000);
+    const o = { full: true, night: 1, dt: DT, cap: CAP, god: GOD, wallCap: 15 * 60000 };
+    let seen = 0;
+    const pending = page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 6 * 60 * 60000);
+    const pulse = setInterval(() => {
+      while (page.console.length > seen) {
+        const line = page.console[seen++].text || '';
+        if (line.startsWith('ns ')) console.log(line);
+      }
+    }, 2000);
+    let raw;
+    try { raw = await pending; } finally { clearInterval(pulse); }
     const r = JSON.parse(raw);
     r.wallSecs = Math.round((Date.now() - t0) / 1000);
     r.errors = page.errors.slice(0, 3).map((e) => e.split('\n')[0]);

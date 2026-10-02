@@ -4,15 +4,8 @@
   ok(!document.getElementById('modeDefend'), 'Defend the House is gone from the menu');
   ok(/Play/.test(document.getElementById('modeHunt').textContent), 'the one button says Play');
   // Play refuses with no callsign; insertion overwrites position for ~9s.
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'started');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'started');
   const p = T.player.position;
   {
     const tx = 30, tz = 30;

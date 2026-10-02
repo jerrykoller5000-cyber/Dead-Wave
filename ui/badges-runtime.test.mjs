@@ -40,9 +40,9 @@ test('reset clears per-run NEW and stale moment events, while earned badges rema
  assert.deepEqual(a.finish(2,record({kills:NaN})),[]);assert.equal(a.finish(2,record()).length,8);
  assert.deepEqual(a.receive({type:'guardian-kick-free',runId:2,day:4,receiptId:'late'}),[]);
 });
-test('collection has twelve keyed criteria, marks only earned entries NEW and ignores unknown IDs',()=>{
+test('collection has sixteen keyed criteria, marks only earned entries NEW and ignores unknown IDs',()=>{
  const view=badgeCollection({unlocked:['relay-online','bogus']},['relay-online','first-bank']);
- assert.equal(view.rows.length,12);assert.equal(view.summary,'Badges · 1/12');
+ assert.equal(view.rows.length,16);assert.equal(view.summary,'Badges · 1/16');
  assert.deepEqual(view.rows.filter(r=>r.isNew).map(r=>r.id),['relay-online']);
  for(const row of view.rows){assert(row.name);assert(row.description);assert(!row.description.includes('{'));}
  assert(view.rows.find(r=>r.id==='night-five').description.includes('Reach night 5'));
@@ -68,7 +68,7 @@ test('badge renderer is collapsed by default, keyboard-button accessible, and pr
  renderBadgeCollection(host,{unlocked:['first-bank']},['first-bank']);
  const toggle=host.querySelector('button'),grid=host.querySelector('.badge-grid');
  assert.equal(toggle.type,'button');assert.equal(toggle.getAttribute('aria-expanded'),'false');assert.equal(toggle.getAttribute('aria-controls'),grid.id);
- assert.equal(grid.hidden,true);assert.equal(grid.children.length,12);assert(host.querySelector('.badges-new'));
+ assert.equal(grid.hidden,true);assert.equal(grid.children.length,16);assert(host.querySelector('.badges-new'));
  toggle.click();assert.equal(grid.hidden,false);assert.equal(toggle.getAttribute('aria-expanded'),'true');
  renderBadgeCollection(host,{unlocked:['first-bank','relay-online']});assert.equal(host.querySelector('.badge-grid').hidden,false);
  assert.equal(host.querySelector('.badges-new'),null);assert.equal(host.querySelector('.st'),null);
@@ -83,17 +83,44 @@ test('actual record hook awards once, suppresses debug moments and gives the dea
  const ctx={createRecords,RECORDS_KEY,renderBestRecord,createBadges,BADGES_KEY,createBadgeAdapter,renderBadgeCollection,document:doc,
    localStorage:{getItem:()=>null,setItem:()=>{}},window:{addEventListener:(_,f)=>{receive=f;}},AudioSys:{musicCue:name=>cues.push(name)},
    gameStarted:true,gameOver:false,won:false,day:5,uiRunId:1,matchStats:{kills:1000,headshots:100,skullsTurnedIn:1000},comboBest:20,
+   quest:{read:()=>({done:false})},victory:false,trueEnding:false,newCamos:[],
    objectiveRuntime:{read:()=>({runId:1,radioCall:{repaired:true}})},dwText:text};
  const code=source.slice(source.indexOf('    const runRecords = createRecords('),source.indexOf('    let hitPingT = 0;'));
  runInNewContext(code,ctx);
  receive({detail:{type:'deposit-complete',runId:1,receiptId:'bank:1',count:1}});assert.deepEqual(cues,['achievement']);
- ctx.debugTouched=true;receive({detail:{type:'prep-state',runId:1}});assert.equal(cues.length,1);
- ctx.recordResult=ctx.recordFinishedRun();assert(ctx.recordResult);assert.equal(ctx.recordFinishedRun(),null);
+ ctx.stampDebugHooks({fixtureDbg(){}}).fixtureDbg();receive({detail:{type:'prep-state',runId:1}});assert.equal(cues.length,1);
+ ctx.recordResult=ctx.recordFinishedRun();assert.equal(ctx.recordResult,null,'debug run must not write a record');assert.equal(ctx.recordFinishedRun(),null);
  const winMsgEl=doc.createElement('p');ctx.winMsgEl=winMsgEl;
  const stats=source.slice(source.indexOf("      const row = document.createElement('span'); row.className = 'stats';",source.indexOf('    function endGame(')),source.indexOf('      if (!victory && gameStarted) {',source.indexOf('    function endGame(')));
  ctx.why=doc.createElement('span');runInNewContext(stats,ctx);
  const row=winMsgEl.querySelector('.stats');assert.equal(row.children.length,5);
  assert.deepEqual(row.children.map(n=>n.querySelector('i').textContent),['Day','Kills','Headshots','Best streak','Skulls banked']);
  assert.equal(row.children.at(-1).querySelector('b').textContent,'1000');assert(winMsgEl.querySelector('.lifetime-badges'));
- assert.equal(winMsgEl.querySelector('.badge-toggle').textContent,'Badges · 1/12');
+ assert.equal(winMsgEl.querySelector('.badge-toggle').textContent,'Badges · 1/16');
+ // Mirror a genuine run reset, then prove clean records commit exactly once.
+ runInNewContext('debugTouched=false; uiRunId=2;',ctx);
+ receive({detail:{type:'run-reset',runId:2}});
+ assert(ctx.recordFinishedRun());assert.equal(ctx.recordFinishedRun(),null);
+});
+
+test('Silence is awarded once from a completed eligible true ending, never an evacuation or debug run',()=>{
+ const {adapter,store}=fixture();const r=record({evacuated:false,trueEnding:true});
+ assert(adapter.finish(1,r).includes('silence'));assert(!store.read().unlocked.includes('out-on-the-boat'));
+ assert.deepEqual(adapter.finish(1,r),[]);
+ const debug=fixture(()=>false);assert.deepEqual(debug.adapter.finish(1,r),[]);
+});
+
+test('rabbit badge requires a confirmed current-run kill, persists once and rejects debug or late events',()=>{
+ let saved=null,cues=0;
+ const store=createBadges({load:()=>saved,save:v=>{saved=v;}});
+ const a=createBadgeAdapter({store,onAward:()=>cues++});a.reset(1);
+ const killed={type:'rabbit',phase:'killed',runId:1,x:10,z:20};
+ for(const event of [{...killed,runId:0},{...killed,phase:'bite'},{...killed,phase:'woken'},
+  {...killed,x:NaN},{...killed,z:undefined},{...killed,type:'holy-grenade',phase:'blast'}]) assert.deepEqual(a.receive(event),[]);
+ assert.deepEqual(a.receive(killed),['choir-practice']);assert.deepEqual(a.receive(killed),[]);assert.equal(cues,1);
+ assert(createBadges({load:()=>saved}).read().unlocked.includes('choir-practice'));
+ a.reset(2);assert.deepEqual(a.receive({...killed,runId:2}),[]);
+ const debug=fixture(()=>false);assert.deepEqual(debug.adapter.receive(killed),[]);
+ const explicit=fixture();assert.deepEqual(explicit.adapter.receive({...killed,eligible:false}),[]);
+ const finished=fixture();finished.adapter.finish(1,record());assert.deepEqual(finished.adapter.receive(killed),[]);
 });

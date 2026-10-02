@@ -810,6 +810,15 @@ export const AudioSys = (() => {
   // special nights have their own music, they play their day's track too.
   // CL-34: the chiptune loops made from Jerry's Suno fight tracks (tools/chip.py).
   let WAVE_BY_DAY = [{ from: 1, track: 'fight_day01' }, { from: 2, track: 'chip_skirmish_b' }, { from: 3, track: 'chip_skirmish_a' }, { from: 8, track: 'chip_fight_1' }, { from: 12, track: 'chip_fight_2' }, { from: 16, track: 'chip_fight_3' }];
+  // CL-77 (P-58): a special night can have its own song (music.json specials: { fog: 'fight_fognight' }). The page says
+  // which (state.special); it plays only once its sections are decoded, else the night's own song plays as before.
+  const SPECIAL_TRACKS = { fog: 'fight_fognight' };
+  // CL-85 (P-99): the guardian's last fight, in the heart, has its own song (tools/heart.py), played by the fight's phase.
+  const HEART_TRACK = 'fight_heart';
+  function specialTrack(state) {
+    const t = state && state.special ? SPECIAL_TRACKS[state.special] : null;
+    return t && SECTIONED[t] ? t : null;
+  }
   function waveTrackForDay(d) {
     let t = null;
     for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
@@ -828,6 +837,7 @@ export const AudioSys = (() => {
       if (m.stings && typeof m.stings === 'object') for (const k of Object.keys(m.stings)) if (typeof m.stings[k] === 'string') MUSIC_STINGS[k] = m.stings[k];
       if (m.gain && typeof m.gain === 'object') for (const k of Object.keys(m.gain)) if (isFinite(+m.gain[k]) && +m.gain[k] > 0) MUSIC_GAIN[k] = +m.gain[k];
       if (m.fadeIn && typeof m.fadeIn === 'object') for (const k of Object.keys(m.fadeIn)) if (isFinite(+m.fadeIn[k]) && +m.fadeIn[k] >= 0) FIGHT_FADE[k] = +m.fadeIn[k];
+      if (m.specials && typeof m.specials === 'object') for (const k of Object.keys(m.specials)) if (typeof m.specials[k] === 'string') SPECIAL_TRACKS[k] = m.specials[k];
       if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
         WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
       }
@@ -930,6 +940,15 @@ export const AudioSys = (() => {
   const SECTIONED = {};      // track -> { file, barS, list: { name: { t0, dur } }, flow }
   const secBuf = {};         // file -> AudioBuffer (or 'loading' / 'failed')
   let secOut = null;         // the section player's gain, straight to the speakers like the deck
+  let secLp = null;          // CL-101: its low-pass (the music heard through the rock while he's below)
+  // CL-101 (P-144): the music below. In the calm, the day's song is far off through the rock (BELOW_MUSIC of its level,
+  // low-passed to BELOW_LP Hz on the section player); a fight below plays as a day fight does; while the rock screams
+  // (the stir's warning) and while the guardian holds him, no music at all.
+  const BELOW_MUSIC = 0.4, BELOW_LP = 650;
+  let belowMusic = 1;
+  // CL-82: near a cave mouth or the pit (state.dread 0..1) the calm music draws back (to PLACE_DREAD at the mouth).
+  const PLACE_DREAD = 0.55;
+  let placeDread = 1;
   let sec = null;            // { track, name, src, g, startAt, dur, t0 }
   let secPending = null;     // { name, at }
   let secMode = 'stalk', secRot = -1, secQuietT = 0, secLoops = 0;
@@ -947,8 +966,10 @@ export const AudioSys = (() => {
   let secWantedFor = -1;
   function secWantDay(d) {
     d = d || 1;
-    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track));
+    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track).concat(Object.values(SPECIAL_TRACKS), [HEART_TRACK]));   // CL-85: loaded when it's near
     const keep = new Set([waveTrackForDay(d), waveTrackForDay(d + 1)]);
+    const sp = specialTrack(lastState); if (sp) keep.add(sp);   // CL-77: tonight's special song
+    if (stage === 'heart' || (lastState && (lastState.heartSoon || lastState.heart))) keep.add(HEART_TRACK);   // CL-85
     if (sec && sec.track) keep.add(sec.track);
     for (const k of Object.keys(SECTIONED)) {
       const S = SECTIONED[k];
@@ -965,7 +986,11 @@ export const AudioSys = (() => {
     const S = SECTIONED[sec ? sec.track : deckTrack]; const buf = S && secBuf[S.file];
     const part = S && S.list[name];
     if (!part || !buf || typeof buf !== 'object') return false;
-    if (!secOut) { secOut = ctx.createGain(); secOut.gain.value = 0; secOut.connect(ctx.destination); }
+    if (!secOut) {
+      secOut = ctx.createGain(); secOut.gain.value = 0;
+      secLp = ctx.createBiquadFilter(); secLp.type = 'lowpass'; secLp.frequency.value = 20000; secLp.Q.value = 0.5;   // CL-101: shut below
+      secOut.connect(secLp); secLp.connect(ctx.destination);
+    }
     const src = ctx.createBufferSource();
     src.buffer = buf; src.loop = true; src.loopStart = part.t0; src.loopEnd = part.t0 + part.dur;
     const g = ctx.createGain();
@@ -989,6 +1014,10 @@ export const AudioSys = (() => {
   // Where in the flow the wave is, from what the page tells the director every frame.
   function secWant(state, dt) {
     const F = SECTIONED[sec.track].flow;
+    if (stage === 'heart' && state.heart) {   // CL-85: the heart fight's phase, not the wave's
+      if (state.heart.flat) return 'lull';
+      return 'h' + Math.max(1, Math.min(3, (state.heart.phase | 0) || 1));
+    }
     const live = state.threat || 0, near = state.nearest == null ? 999 : state.nearest;
     if (state.spawnedAll && state.remaining > 0 && state.remaining <= F.lastAt) return 'last';
     if (secMode === 'last') return 'last';
@@ -1009,16 +1038,20 @@ export const AudioSys = (() => {
     }
     return 'stalk';
   }
+  const secPhaseList = (F, mode) => (F.phases && F.phases[+mode.slice(1) - 1]) || F.fight;   // CL-85: 'h1'..'h3'
+  const secRotates = (mode) => mode === 'fight' || /^h\d$/.test(mode);
   function secSectionFor(mode) {
     const F = SECTIONED[sec.track].flow;
+    if (/^h\d$/.test(mode)) { const L = secPhaseList(F, mode); secRot = (secRot + 1) % L.length; return L[secRot]; }
     if (mode === 'fight') { secRot = (secRot + 1) % F.fight.length; return F.fight[secRot]; }
     return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk;
   }
   function secFits(mode, name) {
     const F = SECTIONED[sec.track].flow;
+    if (/^h\d$/.test(mode)) return secPhaseList(F, mode).includes(name);   // CL-85
     return mode === 'fight' ? F.fight.includes(name) : name === secSectionFor.peek(mode);
   }
-  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk; };
+  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; if (/^h\d$/.test(mode)) return secPhaseList(F, mode)[0]; return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk; };
   function secUpdate(state, dt) {
     if (!sec || !ctx) return;
     const now = ctx.currentTime, S = SECTIONED[sec.track];
@@ -1036,9 +1069,9 @@ export const AudioSys = (() => {
       const name = secSectionFor(mode);
       secMode = mode;
       if (name !== sec.name && secPlay(name, nextBar)) secPending = { name, at: nextBar };
-    } else if (mode === 'fight' && S.flow.fight.length > 1 && endOfSec - now < 0.35 && now - sec.startAt > sec.dur * 0.5) {
-      // Still fighting at the end of a section: on to the next one in the rotation.
-      const name = secSectionFor('fight');
+    } else if (secRotates(mode) && (mode === 'fight' ? S.flow.fight : secPhaseList(S.flow, mode)).length > 1 && endOfSec - now < 0.35 && now - sec.startAt > sec.dur * 0.5) {
+      // Still fighting at the end of a section: on to the next one in the rotation (CL-85: the heart's phase too).
+      const name = secSectionFor(mode);
       if (name !== sec.name && secPlay(name, endOfSec)) secPending = { name, at: endOfSec };
     }
   }
@@ -1228,13 +1261,38 @@ export const AudioSys = (() => {
   function startFight() {
     stage = 'fight';
     mood = 'fight';
-    const name = waveTrackForDay(lastDay) || pickTrack('fight');
+    const sp = specialTrack(lastState);
+    const name = (sp && sectionsReady(sp) ? sp : null) || waveTrackForDay(lastDay) || pickTrack('fight');   // CL-77
     const hit = MUSIC_HITS[name] || 0;
     // CL-30 (Jerry): a 10 s fade in from silence to the floor; proximity does the rest.
     startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : FIGHT_FADE_IN_S, state: lastState });
   }
   // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
   // then the calm music fades back in slowly the moment the sting ends.
+  // CL-85: into the heart: its song from the top (sectioned when it's loaded, else the guardian's pool), no alarm.
+  let heartEndUntil = 0;
+  function startHeart() {
+    stopSting(); stopDeck();
+    stage = 'heart'; mood = 'fight'; nextMood = null;
+    const name = SECTIONED[HEART_TRACK] && sectionsReady(HEART_TRACK) ? HEART_TRACK : pickTrack('guardian');
+    startDeck(name, { level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : 1.2, state: lastState });
+  }
+  // It dies: the song falls away fast and the long falling note plays alone (secret-quest.md 6), then the ending.
+  function startHeartEnd() {
+    stopSting();
+    stage = 'heartend'; mood = null; nextMood = null;
+    deckTarget = 0; deckRate = 1 / FAST_FADE_S;
+    heartEndUntil = nowMs() + 6000;
+    heartFall();
+  }
+  function heartFall() {
+    const c = ensure(); if (!c || muted) return;
+    for (const [f, v, d] of [[440, 0.06, 5.5], [329.63, 0.045, 5.2], [220, 0.07, 6], [110, 0.06, 6.5], [55, 0.07, 7]]) playTone({ freq: f, type: 'sine', dur: d, vol: v, slideTo: f / 4, attack: 0.15, rev: 0.9 });
+    playTone({ freq: 880, type: 'triangle', dur: 3.5, vol: 0.02, slideTo: 220, attack: 0.3, rev: 0.95 });
+    playNoise({ dur: 4.5, vol: 0.045, filterFreq: 260, filterType: 'lowpass', attack: 1.2, rev: 0.9 });
+    heartFalls++;
+  }
+  let heartFalls = 0;
   function startRelease() {
     stage = 'release';
     mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
@@ -1281,6 +1339,8 @@ export const AudioSys = (() => {
     const phaseNow = state.phase;
     if (state.day) lastDay = state.day;
     if (lastDay !== secWantedFor && ctx) secWantDay(lastDay);
+    { const sp = specialTrack(state); if (sp && ctx) loadSections(sp); }   // CL-77: once (loadSections returns if it's loading or held)
+    if ((state.heartSoon || state.heart) && ctx) loadSections(HEART_TRACK);   // CL-85: a silenced day below, the heart is near
     // The last kill: the wave hands back to prep with the run still on.
     const cleared = prevStarted && started && !state.over && !state.won && prevPhase === 'wave' && phaseNow === 'prep';
     const waveBegan = started && prevPhase !== 'wave' && phaseNow === 'wave';
@@ -1301,6 +1361,11 @@ export const AudioSys = (() => {
       startAlarm();
     } else if (cleared && (stage === 'alarm' || stage === 'gap' || stage === 'fight')) {
       if (stage === 'fight') startRelease(); else { stopSting(); startRelief(); }
+    } else if (state.heart && state.heart.on) {   // CL-85: the last fight
+      if (state.heart.dead) { if (stage !== 'heartend') startHeartEnd(); }
+      else if (stage !== 'heart') startHeart();
+    } else if (stage === 'heart' || (stage === 'heartend' && nowMs() >= heartEndUntil)) {
+      stopDeck(); stage = 'calm'; mood = null; nextMood = null;   // back up the tunnel, or it's over: the calm again
     } else if (stage === 'end' || stage === 'idle') {
       stage = 'calm'; mood = null;
     }
@@ -1366,6 +1431,15 @@ export const AudioSys = (() => {
     const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.8 : 1) * (state.shop ? 0.8 : 1);
     duck += (targetDuck - duck) * Math.min(1, dt * 2.5);
     musicShotDuck += (1 - musicShotDuck) * Math.min(1, dt * 1.8);
+    { // CL-101: below
+      const B = state.below && state.below.on ? state.below : null;
+      const calmBelow = !!B && stage === 'calm';
+      const want = !B ? 1 : (B.phase === 'warning' || B.phase === 'grab') ? 0 : calmBelow ? BELOW_MUSIC : 1;
+      belowMusic += (want - belowMusic) * Math.min(1, dt * (want < belowMusic ? 1.6 : 0.6));
+      const dr = stage === 'calm' ? Math.max(0, Math.min(1, +state.dread || 0)) : 0;   // CL-82
+      placeDread += ((1 - (1 - PLACE_DREAD) * dr) - placeDread) * Math.min(1, dt * 0.8);
+      if (secLp && ctx) { try { secLp.frequency.setTargetAtTime(calmBelow ? BELOW_LP : 20000, ctx.currentTime, 0.5); } catch (_) {} }
+    }
     if (deckLevel !== deckTarget) {
       const step = deckRate * dt;
       deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
@@ -1373,11 +1447,11 @@ export const AudioSys = (() => {
     if (deckTrack && (deck || sec)) {
       const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
       const nightMul = (stage === 'fight' || stage === 'release') ? nm.gain : 1;   // CL-70: the wave only, not day fights
-      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck;
+      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck * belowMusic * placeDread;
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
         try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
-        if (stage === 'fight') secUpdate(state, dt);
+        if (stage === 'fight' || stage === 'heart') secUpdate(state, dt);   // CL-85
       } else if (deck && Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
     }
     if (stingName && deckTrack && ((deck && deck.volume > 0.001 && !deck.paused) || (sec && secOut && secOut.gain.value > 0.001))) overlapFrames++;
@@ -1433,6 +1507,10 @@ export const AudioSys = (() => {
       night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
       deckLoop: !!(sec || (deck && deck.loop)),
       section: sec ? sec.name : null, sectionMode: sec ? secMode : null, sectionPending: secPending ? secPending.name : null,
+      specials: Object.assign({}, SPECIAL_TRACKS), special: lastState ? lastState.special || null : null,
+      below: { music: belowMusic, lp: secLp ? secLp.frequency.value : null },   // CL-101
+      dread: placeDread,   // CL-82
+      heartFalls,   // CL-85
       sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
       sectionLoop: sec && sec.src ? { start: sec.src.loopStart, end: sec.src.loopEnd, loop: sec.src.loop } : null,
       sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
@@ -1608,7 +1686,7 @@ export const AudioSys = (() => {
     const t = ctx.currentTime;
     // Was 0.018 + 0.08: a heavy shower was a wall of 3 kHz noise right where a
     // gunshot's crack lives. It sits under the fight now (and on the ducked bus).
-    const vol = muted ? 0.0001 : 0.012 + amount * 0.048;
+    const vol = muted ? 0.0001 : Math.max(0.0001, (0.012 + amount * 0.048) * (1 - belowK));   // CL-101: none below
     try {
       rainLoop.gain.gain.setTargetAtTime(vol, t, 0.45);
       rainLoop.filt.frequency.setTargetAtTime(2400 + amount * 1600, t, 0.6);
@@ -1667,29 +1745,248 @@ export const AudioSys = (() => {
   function setG(node, vol, tc) {
     try { node.g.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {}
   }
-  // state: { dt, wind (0..1), water (0..1), night (bool), rain (0..1), started, forest (0..1) }
+  // state: { dt, wind (0..1), water (0..1), night (bool), rain (0..1), started, forest (0..1),
+  //         below: null | { on, theme, stir (0..1), phase, hush (bool) } (CL-101) }
   function updateAmbience(st) {
     if (!amb || !ctx) return;
     const dt = st.dt;
+    const top = updateBelowAmbience(st, dt);   // CL-101: 1 topside, 0 below
+    updatePlaces(st, dt, top);   // CL-82
     amb.wander += dt * (0.25 + Math.random() * 0.1);
     const gust = 0.72 + 0.28 * Math.sin(amb.wander) * Math.sin(amb.wander * 0.37 + 1.3);
     const w = Math.max(0, Math.min(1, st.wind)) * gust;
-    setG(amb.windLow, amb.windLow.vol * (0.25 + w), 0.8);
-    setG(amb.windLeaves, amb.windLeaves.vol * w * (0.4 + 0.6 * st.forest) * (st.night ? 0.6 : 1), 0.6);
+    setG(amb.windLow, amb.windLow.vol * (0.25 + w) * top, 0.8);
+    setG(amb.windLeaves, amb.windLeaves.vol * w * (0.4 + 0.6 * st.forest) * (st.night ? 0.6 : 1) * top, 0.6);
     try { amb.windLow.filt.frequency.setTargetAtTime(200 + 260 * w, ctx.currentTime, 1.2); } catch (_) {}
     const wl = Math.max(0, Math.min(1, st.water));
-    setG(amb.water, amb.water.vol * wl, 0.5);
-    setG(amb.waterLow, amb.waterLow.vol * wl, 0.5);
+    setG(amb.water, amb.water.vol * wl * top, 0.5);
+    setG(amb.waterLow, amb.waterLow.vol * wl * top, 0.5);
     // crickets: only after dark, each voice chirping in irregular bursts
     for (const cr of amb.crickets) {
       cr.timer -= dt;
       if (cr.timer <= 0) { cr.on = !cr.on; cr.timer = cr.on ? 1.5 + Math.random() * 4 : 0.6 + Math.random() * 2.5; }
-      setG(cr, (st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) : 0.0001, 0.25);
+      setG(cr, (st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) * top : 0.0001, 0.25);
     }
     if (muted) return;
     // one-shots, all on the ambience bus
     const prevBus = routeBus; routeBus = ambBus;
-    try { ambienceOneShots(st, dt); } finally { routeBus = prevBus; }
+    try { if (top > 0.5) ambienceOneShots(st, dt); else belowOneShots(st.below, dt); } finally { routeBus = prevBus; }
+  }
+
+  // --- CL-101 (P-144): the Hollows' sound ---
+  // Below, the topside beds (wind, river, crickets, rain, birds, owls, thunder) go quiet over a second and the
+  // warren's own come up: the room's low air; drips (each theme its own: the wet warren drips most, the iron rings);
+  // the Hush's hum while its battery lasts (it winds down when it dies); the stir as a rumble in the rock that grows
+  // with the meter, a grinding scream over it in the warning; and from a third of the meter, the guardian moving in
+  // the walls: a scrape and a few knocks somewhere off to one side, closer and more often as it climbs.
+  const BELOW_AMB = {
+    ROOM: 0.024, HUM: 0.012, RUMBLE: 0.075, RUMBLE_WARN: 0.13, GRIND: 0.05, SUB: 0.05,
+    DRIP: { wet: [0.3, 1.2], iron: [0.9, 2.8], root: [1.3, 3.6], shale: [1.0, 3.0], hill: [1.5, 4.2], chalk: [0.8, 2.6] },
+    WALLS_FROM: 0.3, WALLS_S: [22, 6], TRICKLE_S: [9, 22]
+  };
+  let below = null, belowK = 0;
+  const belowCount = { drips: 0, trickles: 0, walls: 0, groans: 0, hushDie: 0, creaks: 0 };
+  function belowStart() {
+    const c = ensure();
+    if (!c || below) return;
+    const t0 = c.currentTime;
+    const noiseLoop = (type, freq, q) => {
+      const buf = noiseBuffer(3.3);
+      const src = c.createBufferSource(); if (buf) { src.buffer = buf; src.loop = true; }
+      const filt = c.createBiquadFilter(); filt.type = type; filt.frequency.value = freq; filt.Q.value = q;
+      const g = c.createGain(); g.gain.value = 0.0001;
+      src.connect(filt); filt.connect(g); g.connect(ambBus || sfxGain);
+      if (buf) src.start(t0);
+      return { src, filt, g };
+    };
+    const room = noiseLoop('lowpass', 170, 0.6);
+    const rumble = noiseLoop('lowpass', 60, 0.9);
+    const grind = noiseLoop('bandpass', 380, 1.4);
+    // the Hush: a low hum, two tones a breath apart so it beats, an octave over them, a slow swell
+    const humG = c.createGain(); humG.gain.value = 0.0001;
+    const humLp = c.createBiquadFilter(); humLp.type = 'lowpass'; humLp.frequency.value = 700;
+    const swell = c.createGain(); swell.gain.value = 0.8;
+    const lfo = c.createOscillator(); lfo.frequency.value = 0.23; const lfoG = c.createGain(); lfoG.gain.value = 0.2;
+    lfo.connect(lfoG); lfoG.connect(swell.gain); lfo.start(t0);
+    const hums = [[110, 'sine', 1], [110.55, 'sine', 0.9], [220.4, 'triangle', 0.35], [55, 'sine', 0.5]].map(([f, type, v]) => {
+      const o = c.createOscillator(); o.type = type; o.frequency.value = f;
+      const g = c.createGain(); g.gain.value = v;
+      o.connect(g); g.connect(humLp); o.start(t0);
+      return { o, f };
+    });
+    humLp.connect(swell); swell.connect(humG); humG.connect(ambBus || sfxGain);
+    const sub = c.createOscillator(); sub.type = 'sine'; sub.frequency.value = 36;
+    const subG = c.createGain(); subG.gain.value = 0.0001; sub.connect(subG); subG.connect(ambBus || sfxGain); sub.start(t0);
+    below = { room, rumble, grind, hum: { g: humG, hums }, sub: { g: subG }, hushWas: null, dripT: 0.5, trickleT: 6, wallsT: 8, creakT: 4, stirWas: 0, grindT: 0 };
+  }
+  function bg(node, vol, tc) { try { node.g.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {} }
+  // Sets the Hollows' beds from the page's state; returns how much of the topside is left (1 up top, 0 below).
+  function updateBelowAmbience(st, dt) {
+    const B = st.below && st.below.on ? st.below : null;
+    belowK += ((B ? 1 : 0) - belowK) * Math.min(1, dt * 1.6);
+    if (belowK < 0.002 && !B) { belowK = 0; if (below) { for (const n of [below.room, below.rumble, below.grind, below.hum, below.sub]) bg(n, 0, 0.3); } return 1; }
+    if (!below) belowStart();
+    if (!below) return 1 - belowK;
+    const k = belowK, s = B ? Math.max(0, Math.min(1, +B.stir || 0)) : 0, ph = B ? B.phase : 'calm';
+    const warn = ph === 'warning', grab = ph === 'grab';
+    bg(below.room, BELOW_AMB.ROOM * k, 0.6);
+    // the Hush
+    const hushOn = !!(B && B.hush);
+    if (B && below.hushWas === true && !hushOn) hushDie();
+    below.hushWas = B ? hushOn : null;
+    bg(below.hum, hushOn ? BELOW_AMB.HUM * k : 0, hushOn ? 0.8 : 0.5);
+    // the stir: the rock's rumble, and its scream in the warning
+    const rum = warn || grab ? BELOW_AMB.RUMBLE_WARN : BELOW_AMB.RUMBLE * (0.04 + 0.96 * s * s);
+    bg(below.rumble, rum * k, warn ? 0.25 : 1.2);
+    bg(below.sub, (warn || grab ? BELOW_AMB.SUB : BELOW_AMB.SUB * s * s) * k, 0.8);
+    try { below.rumble.filt.frequency.setTargetAtTime(50 + 90 * s + (warn ? 60 : 0), ctx.currentTime, 0.8); } catch (_) {}
+    below.grindT -= dt;
+    if (warn) {
+      if (below.grindT <= 0) { below.grindT = 0.12 + Math.random() * 0.25; bg(below.grind, BELOW_AMB.GRIND * k * (0.3 + 0.7 * Math.random()), 0.05);
+        try { below.grind.filt.frequency.setTargetAtTime(260 + Math.random() * 380, ctx.currentTime, 0.08); } catch (_) {} }
+    } else bg(below.grind, 0, 0.4);
+    // the meter crossing half and four-fifths: the rock settles round him (a groan you can read)
+    if (B && !muted) {
+      for (const at of [0.5, 0.8]) if (below.stirWas < at && s >= at) { const prev = routeBus; routeBus = ambBus; try { rockGroan(0.6 + 0.4 * s); } finally { routeBus = prev; } }
+      below.stirWas = s;
+    }
+    if (!B) below.stirWas = 0;
+    return 1 - k;
+  }
+  function belowOneShots(B, dt) {
+    if (!below || !B) return;
+    const theme = B.theme || 'shale', s = Math.max(0, Math.min(1, +B.stir || 0));
+    below.dripT -= dt;
+    if (below.dripT <= 0) { const r = BELOW_AMB.DRIP[theme] || BELOW_AMB.DRIP.shale; below.dripT = r[0] + Math.random() * (r[1] - r[0]); drip(theme); }
+    below.trickleT -= dt;
+    if (below.trickleT <= 0) { const r = BELOW_AMB.TRICKLE_S; below.trickleT = (r[0] + Math.random() * (r[1] - r[0])) * (1 - 0.6 * s); trickle(); }
+    if (theme === 'root' || theme === 'iron') {
+      below.creakT -= dt;
+      if (below.creakT <= 0) { below.creakT = 7 + Math.random() * 12; creak(theme); }
+    }
+    if (s >= BELOW_AMB.WALLS_FROM && B.phase !== 'grab') {
+      below.wallsT -= dt;
+      if (below.wallsT <= 0) {
+        const f = (s - BELOW_AMB.WALLS_FROM) / (1 - BELOW_AMB.WALLS_FROM);
+        below.wallsT = BELOW_AMB.WALLS_S[0] + (BELOW_AMB.WALLS_S[1] - BELOW_AMB.WALLS_S[0]) * f + Math.random() * 4;
+        guardianInWalls(f);
+      }
+    } else below.wallsT = Math.max(below.wallsT, 4);
+  }
+  function drip(theme) {
+    belowCount.drips++;
+    const pan = Math.random() * 1.6 - 0.8, near = Math.random();
+    const vol = 0.008 + near * 0.016;
+    if (theme === 'iron') {   // onto old iron: a small ring
+      playTone({ freq: 2300 + Math.random() * 1400, type: 'triangle', dur: 0.12, vol: vol * 0.8, attack: 0.002, pan, rev: 0.8 });
+      return;
+    }
+    const f = 900 + Math.random() * 1300;
+    playTone({ freq: f, type: 'sine', dur: 0.045, vol, slideTo: f * 1.7, attack: 0.002, pan, rev: 0.85 });   // the plink
+    if (Math.random() < 0.35) playTone({ freq: f * 1.3, type: 'sine', dur: 0.03, vol: vol * 0.5, slideTo: f * 2, attack: 0.002, when: 0.09 + Math.random() * 0.1, pan, rev: 0.85 });
+  }
+  function trickle() {   // grit and small stones off the roof
+    belowCount.trickles++;
+    const pan = Math.random() * 1.6 - 0.8, n = 3 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < n; i++) playNoise({ dur: 0.02 + Math.random() * 0.03, vol: 0.012 + Math.random() * 0.012, filterFreq: 2400 + Math.random() * 2000, filterType: 'bandpass', q: 1.2, when: i * (0.05 + Math.random() * 0.09), pan, rev: 0.7 });
+    playNoise({ dur: 0.4, vol: 0.008, filterFreq: 1800, filterType: 'highpass', when: 0.02, attack: 0.05, pan, rev: 0.7 });
+  }
+  function creak(theme) {   // the roots working in the roof, or the iron warren's old timbers and props
+    belowCount.creaks++;
+    const pan = Math.random() * 1.6 - 0.8;
+    const f = theme === 'iron' ? 240 + Math.random() * 120 : 130 + Math.random() * 80;
+    for (let i = 0; i < 5; i++) playTone({ freq: f * (1 + i * 0.015), type: 'sawtooth', dur: 0.05, vol: 0.006, slideTo: f * 0.94, attack: 0.01, when: i * 0.07, pan, rev: 0.75 });
+  }
+  function rockGroan(v = 1) {   // the rock settling under the weight of the noise
+    belowCount.groans++;
+    playNoise({ dur: 2.2, vol: 0.06 * v, filterFreq: 140, filterType: 'lowpass', attack: 0.6, rev: 0.9 });
+    playTone({ freq: 48, type: 'sine', dur: 2, vol: 0.05 * v, slideTo: 34, attack: 0.5 });
+    playTone({ freq: 96, type: 'triangle', dur: 1.6, vol: 0.012 * v, slideTo: 70, attack: 0.5, when: 0.3, rev: 0.8 });
+  }
+  function guardianInWalls(f) {   // it is moving in the rock: a long scrape, then a few heavy knocks, off to one side
+    belowCount.walls++;
+    const pan = (Math.random() < 0.5 ? -1 : 1) * (0.4 + Math.random() * 0.5);
+    const v = 0.4 + 0.6 * f;
+    playNoise({ dur: 1.1 + Math.random() * 0.8, vol: 0.05 * v, filterFreq: 260 + Math.random() * 160, filterType: 'bandpass', q: 0.9, attack: 0.35, pan, rev: 0.9 });
+    const knocks = 2 + Math.floor(Math.random() * 3), at = 1 + Math.random() * 0.6;
+    for (let i = 0; i < knocks; i++) {
+      playTone({ freq: 58, type: 'sine', dur: 0.16, vol: 0.06 * v, slideTo: 40, attack: 0.004, when: at + i * (0.32 + Math.random() * 0.12), pan, rev: 0.7 });
+      playNoise({ dur: 0.06, vol: 0.025 * v, filterFreq: 420, filterType: 'lowpass', when: at + i * 0.36, pan, rev: 0.7 });
+    }
+    if (f > 0.6 && Math.random() < 0.5) guardianGrowl(0.15 + 0.25 * f, pan);
+  }
+  function hushDie() {   // the battery's gone: the hum winds down and a little crackle goes out of it
+    belowCount.hushDie++;
+    if (muted) return;
+    const prev = routeBus; routeBus = ambBus;
+    try {
+      playTone({ freq: 220, type: 'triangle', dur: 1.4, vol: 0.02, slideTo: 60, attack: 0.01, rev: 0.6 });
+      playTone({ freq: 110, type: 'sine', dur: 1.6, vol: 0.025, slideTo: 30, attack: 0.01 });
+      for (let i = 0; i < 4; i++) playNoise({ dur: 0.02, vol: 0.02, filterFreq: 3000, filterType: 'bandpass', when: 0.2 + i * 0.18 + Math.random() * 0.1 });
+    } finally { routeBus = prev; }
+  }
+  // --- CL-82 (P-84): the places that are alive, as beds under CL-22's one-shots ---
+  // Near a cave mouth the cave breathes: a dark rush of air in and out of it every seven seconds or so, a low hum under
+  // it, from the mouth's side; more at night. Near the pit the lake has a floor that hums: a sub drone, slowly swelling,
+  // with the rumbles CL-22 already throws on it. Silenced (the signal, CL-80), the pit is quiet. Both 0 below.
+  const PLACE_BED = { CAVE: 0.07, CAVE_LOW: 0.025, CAVE_DAY: 0.6, BREATH_S: 7.2, PIT: 0.07, PIT_NOISE: 0.03 };
+  let places = null;
+  const placeCount = { breaths: 0 };
+  function placesStart() {
+    const c = ensure();
+    if (!c || places) return;
+    const t0 = c.currentTime;
+    const bus = ambBus || sfxGain;
+    const panner = (p) => { if (c.createStereoPanner) { const n = c.createStereoPanner(); n.pan.value = p; return n; } return null; };
+    const loop = (type, f, q) => { const buf = noiseBuffer(3.7), src = c.createBufferSource(); if (buf) { src.buffer = buf; src.loop = true; }
+      const filt = c.createBiquadFilter(); filt.type = type; filt.frequency.value = f; filt.Q.value = q; src.connect(filt); if (buf) src.start(t0); return { src, filt }; };
+    const air = loop('bandpass', 240, 0.9);
+    const caveG = c.createGain(); caveG.gain.value = 0.0001;
+    const cavePan = panner(0);
+    air.filt.connect(caveG);
+    const low = c.createOscillator(); low.type = 'sine'; low.frequency.value = 41;
+    const lowG = c.createGain(); lowG.gain.value = 0.0001; low.connect(lowG); low.start(t0);
+    if (cavePan) { caveG.connect(cavePan); lowG.connect(cavePan); cavePan.connect(bus); } else { caveG.connect(bus); lowG.connect(bus); }
+    const sub = c.createOscillator(); sub.type = 'sine'; sub.frequency.value = 28;
+    const sub2 = c.createOscillator(); sub2.type = 'sine'; sub2.frequency.value = 28.35;
+    const pitG = c.createGain(); pitG.gain.value = 0.0001;
+    const water = loop('lowpass', 75, 0.7);
+    const waterG = c.createGain(); waterG.gain.value = 0.0001;
+    const pitPan = panner(0);
+    sub.connect(pitG); sub2.connect(pitG); water.filt.connect(waterG); sub.start(t0); sub2.start(t0);
+    if (pitPan) { pitG.connect(pitPan); waterG.connect(pitPan); pitPan.connect(bus); } else { pitG.connect(bus); waterG.connect(bus); }
+    places = { air, caveG, lowG, cavePan, pitG, waterG, pitPan, breathT: 0, breathIn: true };
+  }
+  function pg(node, vol, tc) { try { node.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {} }
+  function updatePlaces(st, dt, top) {
+    const cave = Math.max(0, Math.min(1, +st.cave || 0)) * top, pit = Math.max(0, Math.min(1, +st.pit || 0)) * top;
+    if (!places && cave < 0.01 && pit < 0.01) return;
+    if (!places) placesStart();
+    if (!places) return;
+    const P = places, t = ctx.currentTime;
+    // the cave's breath: in (the air rises and brightens), out (it falls), each half BREATH_S / 2
+    P.breathT -= dt;
+    if (P.breathT <= 0) {
+      P.breathIn = !P.breathIn; P.breathT = PLACE_BED.BREATH_S * (0.4 + Math.random() * 0.2);
+      if (P.breathIn) placeCount.breaths++;
+      try { P.air.filt.frequency.setTargetAtTime(P.breathIn ? 330 : 170, t, 1.4); } catch (_) {}
+    }
+    const nightK = st.night ? 1 : PLACE_BED.CAVE_DAY;
+    pg(P.caveG, PLACE_BED.CAVE * cave * nightK * (P.breathIn ? 1 : 0.45), 1.2);
+    pg(P.lowG, PLACE_BED.CAVE_LOW * cave * nightK, 1.5);
+    if (P.cavePan) try { P.cavePan.pan.setTargetAtTime(+st.cavePan || 0, t, 0.3); } catch (_) {}
+    pg(P.pitG, PLACE_BED.PIT * pit, 2);
+    pg(P.waterG, PLACE_BED.PIT_NOISE * pit, 2);
+    if (P.pitPan) try { P.pitPan.pan.setTargetAtTime(+st.pitPan || 0, t, 0.3); } catch (_) {}
+  }
+  function placesState() {
+    return { built: !!places, cave: places ? places.caveG.gain.value : 0, caveLow: places ? places.lowG.gain.value : 0,
+      pit: places ? places.pitG.gain.value : 0, breaths: placeCount.breaths, dread: placeDread };
+  }
+  function belowState() {
+    return { k: belowK, built: !!below, hum: below ? below.hum.g.gain.value : 0, rumble: below ? below.rumble.g.gain.value : 0,
+      room: below ? below.room.g.gain.value : 0, grind: below ? below.grind.g.gain.value : 0,
+      wind: amb ? amb.windLow.g.gain.value : 0, counts: Object.assign({}, belowCount) };
   }
   function ambienceOneShots(st, dt) {
     if (!st.night && st.rain < 0.5) {
@@ -1730,6 +2027,39 @@ export const AudioSys = (() => {
     playNoise({ dur: 1.4 + Math.random(), vol, filterFreq: far ? 160 : 260, filterType: 'lowpass', when, attack: far ? 0.5 : 0.05, rev: 0.9 });
     playTone({ freq: 40, type: 'sine', dur: 1.2, vol: vol * 0.6, slideTo: 24, when: when + 0.05, attack: far ? 0.4 : 0.03 });
     if (!far) playNoise({ dur: 0.25, vol: 0.08, filterFreq: 900, filterType: 'bandpass', when: 0.02, rev: 0.8 });
+  }
+  // CL-92 (P-122): a strike of lightning `dist` m away. Close: the sky tears (a white crack) and the boom is on top of
+  // you; far: the flash first, then the roll a beat later (sound's ~343 m/s), lower and softer. `pan` -1..1.
+  function lightningStrike(dist = 60, pan = 0) {
+    const d = Math.max(0, dist), near = Math.max(0, Math.min(1, 1 - d / 140));
+    const when = Math.min(0.45, d / 343);
+    if (near > 0.55) playNoise({ dur: 0.18, vol: 0.2 * near, filterFreq: 2600, filterType: 'highpass', when, attack: 0.002, rev: 0.6, pan });
+    playNoise({ dur: 0.5, vol: 0.12 + 0.12 * near, filterFreq: 500 + 900 * near, filterType: 'lowpass', when: when + 0.02, attack: 0.004, rev: 0.8, pan });
+    playNoise({ dur: 2.4 + Math.random(), vol: 0.07 + 0.09 * near, filterFreq: 170 + 120 * near, filterType: 'lowpass', when: when + 0.12, attack: 0.08, rev: 0.95, pan: pan * 0.5 });
+    playTone({ freq: 46, type: 'sine', dur: 1.6, vol: 0.06 + 0.08 * near, slideTo: 24, when: when + 0.06, attack: 0.02 });
+  }
+  // CL-93 (P-123): the holy grenade's pin. A choir's held chord (voices a little apart, each with its own slow
+  // vibrato), a high bell over it, swelling in and ringing out over ~2 s: the blast lands at the end of it.
+  function holyChoir() {
+    const chord = [293.66, 369.99, 440, 587.33, 739.99, 880];   // D major, two octaves
+    chord.forEach((f, i) => {
+      for (const det of [-0.004, 0.004]) {
+        playTone({ freq: f * (1 + det), type: i < 3 ? 'triangle' : 'sine', dur: 1.9, vol: 0.022, slideTo: f * (1 + det) * 1.003, attack: 0.35, when: i * 0.03, rev: 0.95, pan: (i - 2.5) * 0.15 });
+      }
+    });
+    playTone({ freq: 1760, type: 'sine', dur: 1.4, vol: 0.02, attack: 0.02, when: 0.05, rev: 0.9 });
+    playTone({ freq: 2637, type: 'sine', dur: 1.0, vol: 0.012, attack: 0.02, when: 0.4, rev: 0.9 });
+  }
+  // The rabbit's scream as it goes for him: a short shrill squeal.
+  function rabbitScreech() {
+    playTone({ freq: 1800, type: 'sawtooth', dur: 0.22, vol: 0.05, slideTo: 2600, attack: 0.01, rev: 0.3 });
+    playNoise({ dur: 0.18, vol: 0.05, filterFreq: 3200, filterType: 'bandpass', attack: 0.005, rev: 0.3 });
+  }
+  // The holy blast: a bright boom with a shimmer on top.
+  function holyBlast() {
+    playNoise({ dur: 0.9, vol: 0.22, filterFreq: 700, filterType: 'lowpass', attack: 0.004, rev: 0.85 });
+    playTone({ freq: 55, type: 'sine', dur: 1.2, vol: 0.12, slideTo: 30, attack: 0.01 });
+    for (let i = 0; i < 5; i++) playTone({ freq: 1320 + i * 330, type: 'sine', dur: 0.8, vol: 0.012, attack: 0.01, when: 0.05 + i * 0.04, rev: 0.9 });
   }
   function distantGroan() {
     groan(0.22 + Math.random() * 0.15, Math.random() < 0.3);
@@ -2500,7 +2830,10 @@ export const AudioSys = (() => {
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
     updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes,
-    ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), dayCleared,
-    distantGroan: A(distantGroan)
+    ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, rabbitScreech, holyBlast, dayCleared,
+    distantGroan: A(distantGroan),
+    placesState,   // CL-82
+    heartFall,   // CL-85
+    belowState, rockGroan: A(rockGroan), guardianInWalls: A(guardianInWalls), hushDie   // CL-101
   };
 })();

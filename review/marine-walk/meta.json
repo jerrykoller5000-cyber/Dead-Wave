@@ -1,0 +1,9 @@
+{
+  "asset": "marine-walk",
+  "owner": "claude",
+  "rig": "marine",
+  "clip": "walk",
+  "reference": "Walk_Loop",
+  "design": "default",
+  "task": "CL-84"
+}

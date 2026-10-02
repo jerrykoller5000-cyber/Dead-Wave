@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>rune finish</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The rune finish · CL-111 · v1</h1>
+<p>The true ending's reward for the guns: dark oiled wood etched with the Pit's eight glyphs. By day the cuts are dark
+grooves; at night they light with the Pit's cold blue, and give off a faint light. Locked until the first true ending,
+then yours for good. Try it from the dev console: <code>rune</code> unlocks it and puts it on every gun. Your notes go in
+notes.md.</p>
+<script>
+const rows = [['By day', ['m4-day', 'ak-day']], ['At night', ['m4-night']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

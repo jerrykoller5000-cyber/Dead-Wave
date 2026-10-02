@@ -2,15 +2,8 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play needs a callsign; without a live match the swarm still spawns but AI never ticks.
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
   // Insertion owns the marine for ~9s; park him once teleports stick so the swarm ring is stable.
   {
     const pl = T.player.position;

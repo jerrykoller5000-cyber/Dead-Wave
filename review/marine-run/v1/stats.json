@@ -1,0 +1,42 @@
+{
+  "version": "v1",
+  "clip": "studio/clips/marine/run.json",
+  "rig": "marine",
+  "length": 0.9333,
+  "frames": 56,
+  "draws": 17,
+  "triangles": 816,
+  "budget": {
+    "draws": 40,
+    "triangles": 2000
+  },
+  "maxTurn": {
+    "rad": 0.333,
+    "joint": "kneeL",
+    "at": 0.52
+  },
+  "footSlide": {
+    "footL": 0,
+    "footR": 0,
+    "handL": 0,
+    "handR": 0
+  },
+  "events": [
+    [
+      0.4667,
+      "footfall"
+    ],
+    [
+      0.9333,
+      "footfall"
+    ]
+  ],
+  "stripFrames": 12,
+  "marked": [
+    1,
+    2,
+    6,
+    8
+  ],
+  "renderSeconds": 53.6
+}

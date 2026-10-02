@@ -1,0 +1,5 @@
+const fs=require('node:fs');const ts=require('C:/Users/Zero/AppData/Local/Programs/cursor/resources/app/extensions/node_modules/typescript/lib/typescript.js');
+const file='C:/Users/Zero/.cursor/projects/c-Users-Zero-Desktop-Tiny-Trek/canvases/world-story-review.canvas.tsx';const source=fs.readFileSync(file,'utf8');
+const out=ts.transpileModule(source,{fileName:file,reportDiagnostics:true,compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,jsx:ts.JsxEmit.ReactJSX}});
+const errors=(out.diagnostics||[]).filter(x=>x.category===ts.DiagnosticCategory.Error);if(errors.length)throw Error(errors.map(x=>ts.flattenDiagnosticMessageText(x.messageText,'\n')).join('\n'));
+const ast=ts.createSourceFile(file,source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);const imports=ast.statements.filter(ts.isImportDeclaration).map(s=>s.moduleSpecifier.text);if(imports.length!==1||imports[0]!=='cursor/canvas')throw Error('Unexpected imports');if(/fetch\s*\(/.test(source))throw Error('Canvas must be self contained');console.log('PASS canvas TSX syntax, single supported import and embedded data; native host rendering not verified.');

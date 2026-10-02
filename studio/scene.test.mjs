@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
-import { validateScene, loadScene, createScene } from './scene.js';
+import { validateScene, loadScene, createScene, sceneWithoutMotion, sceneClipRefs } from './scene.js';
 import { rigs } from './rigs.js';
 import { MARINE, makeMarineRig } from './marine.js';
 
@@ -211,3 +211,48 @@ test('the host lays the path, gives the ground, and hands its body over smoothly
   assert.ok(Math.abs(sp.path('p').distance - 1) < 1e-3);
   assert.ok(r.checks.speed.m.value > 0.9);
 });
+
+// CL-81: a branch, another way the moment goes from whenever the host says (the kick-free's let-go).
+test('a branch: from when it is taken, its own clips, every hold let go, each actor on from where it was', () => {
+  const json = base({
+    length: 6,
+    actors: {
+      marine: { rig: 'marine', at: [0, 0, 0], face: 180, clips: [[0, 'marine/still']], motion: 'marine/marine' },
+      guardian: { rig: 'guardian', at: [0, 0, 1.2], clips: [[0, 'guardian/stand']], path: 'p' }
+    },
+    paths: { p: { points: [[0, 0, 1.2], [0, 0, 20]], speed: [[0, 1]] } },
+    holds: [{ from: 'guardian.handR', to: 'marine.footL', reach: [[0, 1]], limp: [[0, 1]] }],
+    branches: { go: { length: 1.5, release: 0.1, actors: {
+      guardian: { clips: [[0, 'guardian/rest', { fade: 0.1 }]], ahead: [[0, 0], [1.5, 3, 'linear']] },
+      marine: { clips: [[0, 'marine/stand']], hits: [[0.02, { at: 'pelvis', dir: [0, 0.3, -1], power: 2, kind: 'crush' }]] }
+    } } }
+  });
+  assert.deepEqual(validateScene(json), []);
+  assert.deepEqual(sceneClipRefs(json).sort(), ['guardian/rest', 'guardian/stand', 'marine/stand', 'marine/still']);
+  const plain = sceneWithoutMotion(json);
+  assert.deepEqual(validateScene(plain), [], 'without motion a branch drops its hits too');
+  assert.ok(!plain.branches.go.actors.marine.hits);
+  const sp = createScene(loadScene(json, clips()));
+  for (let i = 0; i < 60; i++) sp.update(1 / 60);
+  const g0 = sp.actors.guardian.inst.group.getWorldPosition(new THREE.Vector3());
+  assert.equal(sp.actors.marine.body.state, 'held', 'held by the ankle before the branch');
+  assert.equal(sp.branched, null);
+  assert.equal(sp.branch('go'), true);
+  assert.equal(sp.branch('go'), false, 'one branch at a time');
+  assert.throws(() => sp.branch('nope'));
+  const events = [];
+  for (let i = 0; i < 30; i++) events.push(...sp.update(1 / 60).events.map((e) => e.name));
+  assert.ok(events.includes('motion:released'), 'the hold lets go: ' + events.join(','));
+  assert.ok(Math.abs(sp.branchT - 0.5) < 1e-6 && sp.branched === 'go');
+  const g1 = sp.actors.guardian.inst.group.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.abs(g1.z - g0.z - 1) < 0.05, 'the guardian goes on from where it was by "ahead", not its path: ' + (g1.z - g0.z).toFixed(3));
+  assert.equal(sp.done, false);
+  for (let i = 0; i < 61; i++) sp.update(1 / 60);
+  assert.equal(sp.done, true, 'done at the branch\'s own length');
+  // The review form: the branch taken by the scene itself at a set time, the same on every seek.
+  const auto = createScene(loadScene({ ...json, autoBranch: { name: 'go', at: 1 } }, clips()));
+  auto.seek(1.5);
+  assert.equal(auto.branched, 'go');
+  assert.ok(Math.abs(auto.branchT - 0.5) < 1e-6);
+});
+

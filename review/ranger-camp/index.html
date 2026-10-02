@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ranger camp · Dead-Wave</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#151a15;color:#f0eee0;font:16px/1.5 system-ui,sans-serif}main{max-width:1250px;margin:auto;padding:28px 24px}h1{font-size:clamp(26px,4vw,42px);letter-spacing:-.04em;line-height:1.1;margin:8px 0 12px}p{margin:0;color:#b9c2ae}.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d0b07a}.controls{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:24px 0 14px}nav{display:flex;flex-wrap:wrap;gap:7px}button{padding:9px 14px;background:#252e23;border:1px solid #46523e;color:#e5e8db;font:inherit;font-size:13px;cursor:pointer;border-radius:4px}button[aria-pressed=true]{background:#d6bd8f;color:#1a2117;border-color:#d6bd8f}button:focus-visible{outline:2px solid white;outline-offset:3px}figure{margin:0;border:1px solid #3f4d36}img{display:block;width:100%;height:auto}figcaption{padding:12px 16px;font-size:13px;color:#c1c8b8}.foot{margin-top:18px;font-size:13px;max-width:900px}@media(max-width:600px){main{padding:20px 12px}}
+</style></head><body><main>
+<p class="eyebrow">Dead-Wave · Wilderness search and rescue</p><h1>The search party left this behind.</h1>
+<p>A stranded forestry pickup and a search camp, abandoned before the PGB arrived.</p>
+<div class="controls"><nav id="views" aria-label="Camera view"></nav><nav id="versions" aria-label="Before or after"></nav></div>
+<figure><img id="shot" src="v2/after-truck-front.png" alt="Rebuilt ranger pickup, front view"><figcaption id="caption"></figcaption></figure>
+<p class="foot">The radio is still on its last channel, resting on the remaining front lip. The rescue gear and search desk remain, but the truck is visibly out of service.</p>
+</main><script>
+const views=[['Truck · front','truck-front','A missing front tire, canted hub, broken lamp and bent bonnet over a gutted engine bay.'],['Truck · bed','truck-rear','A lined bed with a rescue litter, recovery bag, rope and equipment straps.'],['Whole camp','camp','The raised bonnet and empty wheel arch make the stranded truck readable from above.'],['Search desk','workspace','A canvas shelter over the marked map, radio and abandoned cup.']];
+let view=views[0],version='after';
+function draw(){document.querySelector('#shot').src='v2/'+version+'-'+view[1]+'.png';document.querySelector('#shot').alt=(version==='after'?'Rebuilt':'Original')+' ranger camp: '+view[0];document.querySelector('#caption').textContent=version==='before'?'Previous restored-looking pickup — same camera position.':view[2];for(const b of document.querySelectorAll('#views button'))b.setAttribute('aria-pressed',String(b.dataset.view===view[1]));for(const b of document.querySelectorAll('#versions button'))b.setAttribute('aria-pressed',String(b.dataset.version===version));}
+for(const v of views){const b=document.createElement('button');b.textContent=v[0];b.dataset.view=v[1];b.onclick=()=>{view=v;draw();};document.querySelector('#views').append(b);}
+for(const [key,label] of [['before','Before'],['after','After']]){const b=document.createElement('button');b.textContent=label;b.dataset.version=key;b.onclick=()=>{version=key;draw();};document.querySelector('#versions').append(b);}draw();
+</script></body></html>

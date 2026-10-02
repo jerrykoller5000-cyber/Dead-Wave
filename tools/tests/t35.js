@@ -6,14 +6,8 @@
     while (!condition() && performance.now() < deadline) await wait(25);
     return condition();
   };
-  document.getElementById('playerName').value = 'Supply Tester';
-  document.getElementById('modeHunt').click();
-  await until(() => T.getPhase() === 'prep');
+  await startMatch(T, 'Supply Tester');
   ok(T.getPhase() === 'prep', 'named player starts preparation');
-  if (T.getPhase() !== 'prep') return out.join('\n');
-  if (!await until(() => !document.body.classList.contains('deploying'), 30000)) {
-    ok(false, 'parachute insertion completed before supply checks'); return out.join('\n');
-  }
   const p = T.player.position;
   // --- MedPens ---
   ok(T.getMedkits() === 0, 'start with no MedPens');

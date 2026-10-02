@@ -17,11 +17,14 @@
     ok(T.getBank() === bank, 'the AA-12 has nothing to buy');
     T.buySuppressor('m4');
     ok(T.getBank() === bank - T.SUPPRESSOR_PRICE.m4, 'the M4 can costs ' + T.SUPPRESSOR_PRICE.m4);
+    ok(gun.userData.suppressed !== true, 'CL-113: bought, it waits for the Armory');
+    T.armoryDbg.fit('m4', 'suppressor', true);   // CL-113: fitted at the Armory's workbench
     ok(gun.userData.suppressed === true && gun.userData.suppressor.visible === true, 'the can is on the M4');
     ok(gun.userData.muzzleLocal.z > bare, 'the muzzle point moved to the end of the can');
     const pair = T.offhandMeshes.pistol;
     const pairBare = pair.userData.muzzleLocal.z;
     T.buySuppressor('pistol');
+    T.armoryDbg.fit('pistol', 'suppressor', true);   // CL-113
     ok(pair.userData.suppressed === true && pair.userData.suppressor.visible === true, 'the off-hand pistol wears one too');
     ok(pair.userData.muzzleLocal.z > pairBare, 'and its muzzle moved');
     ok(T.weaponMeshes.pistol.userData.suppressed === true, 'so does the pistol in his hand');

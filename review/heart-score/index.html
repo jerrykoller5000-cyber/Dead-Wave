@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><title>the heart fight's music</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif;max-width:1000px} h1,h2{font-weight:normal}
+button{font:inherit;background:#2a313b;color:#e6e6e0;border:1px solid #556;border-radius:6px;padding:8px 14px;margin:4px;cursor:pointer} button.on{background:#7a5a92}</style>
+<h1>The guardian's last fight: its music · CL-85 · v1</h1>
+<p>The fight in the heart under the Marrow, the only place the guardian can die, now has its own song. It is the same
+family as every night's music, slower and heavier, in a big stone cave. A low double heartbeat thumps under it, and the
+source rings high and cold over the quiet parts. It follows the fight: phase 1 the drops; phase 2 the second drop and the
+bridge; phase 3, as the columns come down, the climax. While the Hush is flat and nothing hurts it, the break. When it
+dies the song falls away and one long falling note plays alone. Click a part to hear it loop; click again to stop.
+Your notes go in notes.md.</p>
+<div id="b"></div><p><button id="stop">Stop</button></p>
+<script>
+const secs = [["the way in", 0.0, 20.8696], ["phase 1 (a)", 20.8696, 41.7391], ["phase 1 (b)", 62.6087, 41.7391], ["phase 2 (a)", 125.2174, 41.7391], ["phase 2 (b)", 166.9565, 41.7391], ["phase 3: the columns", 208.6957, 41.7391], ["the Hush is flat", 104.3478, 20.8696]];
+const el = new Audio('../../assets/soundtrack/fight_heart_sections.ogg'); let cur = null, btn = null;
+el.addEventListener('timeupdate', () => { if (cur && el.currentTime >= cur[1] + cur[2] - 0.05) el.currentTime = cur[1]; });
+function stop() { el.pause(); cur = null; if (btn) btn.classList.remove('on'); btn = null; }
+document.getElementById('stop').onclick = stop;
+for (const s of secs) {
+  const b = document.createElement('button'); b.textContent = s[0];
+  b.onclick = () => { if (btn === b) return stop(); stop(); cur = s; btn = b; b.classList.add('on');
+    const go = () => { el.currentTime = s[1]; el.play(); }; if (el.readyState >= 1) go(); else el.addEventListener('loadedmetadata', go, { once: true }); };
+  document.getElementById('b').appendChild(b);
+}
+</script>

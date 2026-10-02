@@ -7,7 +7,7 @@ them. **The Crew Panel's Roadmap box shows how far each stage has got, live.** P
 ## Where we are
 
 ```
-  R1 ✓ ──── R2 ▶ ──── R3 ──── R4 ──── R5 ──── R6 = 1.0 ──── R7
+  R1 ✓ ──── R2 ✓ ──── R3 ✓ ──── R4 ✓ ──── R5 ▶ ──── R6 = 1.0 ──── R7
   the loop   the night  the day  the way  named    finish       co-op
   feels      has a      feeds    out      nights,  (release)    (up to 4
   right      shape      the               the                   players)
@@ -17,10 +17,10 @@ them. **The Crew Panel's Roadmap box shows how far each stage has got, live.** P
 | Stage | Status | What the player gets | Jerry plays at the end | Items |
 | --- | --- | --- | --- | --- |
 | **R1 · Trust the loop, and feel it** | ✓ Done (2026-09-27) | Skulls reach the bag, building says what it does, the dead react when they're hit, and the marine gets knocked around. | A fresh run to night 5, and his notes in the motion lab. | P-1 to P-15, P-70 to P-77 |
-| **R2 · The night has a shape** | ▶ Next | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. | P-16 to P-33, P-101 to P-103, P-117, P-118, P-147, P-148 |
-| **R3 · The day feeds the night** | Later | The relay, then one call a day. Caches restock, drums burn, you vault your walls. Guns arrive by act at fixed prices, one mod each. | Days 1-10 fresh. | P-34 to P-49, P-104 to P-109, P-110 to P-116, P-119 to P-121, P-125 to P-128 |
-| **R4 · The way out** | Later | The boat at night 20, a victory screen and badges. The relay tells the story. | A run to the boat, and a win. | P-50 to P-55, P-78, P-86, P-130 to P-133 |
-| **R5 · Named nights and bigger systems** | Later | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, and the Hollows under the caves by day. | Nights 12-20 from the debug start, and the secret. | P-56 to P-68, P-94 to P-98, P-122 to P-124, P-129, P-134 to P-146 |
+| **R2 · The night has a shape** | ✓ Done | One breather and a surge you can hear. Plates, screamers and bomber chains. Streaks heal. The best run is saved. The first catch can be escaped. | Night 5 fresh, then 10 and 13 from the debug start. | P-16 to P-33, P-101 to P-103, P-117, P-118, P-147, P-148 |
+| **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day. Caches restock, drums burn, you vault your walls. Guns arrive by act at fixed prices, one mod each. | Days 1-10 fresh. | P-34 to P-49, P-104 to P-109, P-110 to P-116, P-119 to P-121, P-125 to P-128 |
+| **R4 · The way out** | Tasks done; Jerry plays a run to the extraction | Heron (the boat in v1) at night 20, a victory screen and badges. The relay tells the story. | A run to the boat, and a win. | P-50 to P-55, P-78, P-86, P-130 to P-133 |
+| **R5 · Named nights and bigger systems** | ▶ Now | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, and the Hollows under the caves by day. | Nights 12-20 from the debug start, and the secret. | P-56 to P-68, P-94 to P-98, P-122 to P-124, P-129, P-134 to P-146 |
 | **R6 · Finish (1.0)** | Later | Balance from medians, the first hour teaching itself, sound, readability, green tests, the budgets, the package. | Three full runs, then the release. | P-79 to P-93, P-99 |
 | **R7 · Co-op (after 1.0)** | After 1.0 | Up to 4 players, one hosting (D-58). | A night with friends. | Written when R6 closes |
 
@@ -80,7 +80,7 @@ the bag, building says what it does, the dead react when they're hit and the mar
 (P-1 to P-15, P-70 to P-77) are in `docs/archive/roadmap-history.md`, and its tasks in
 `crew/archive/board-queues-2026-09-29.md`.
 
-### R2 · The night has a shape · ▶ next
+### R2 · The night has a shape · ✓ done
 
 Goal: late nights build to a surge you can hear and see, each weapon has a job, and one surprise leaves
 something behind.
@@ -113,7 +113,7 @@ something behind.
 | P-117 | Turrets stop winning the night on their own: what shoots at the horde gets the horde. | Threat memory in `updateZombies`: a zombie hit by a turret or trap targets that build for a while and pulls its pack (the `smash` tactic's target search, `builds`); brutes, demons and about a quarter of each push pick the nearest defence first (D-62); build damage from zombies up (the numbers in the handoff). The marine stays the target for the rest. | Grokbot | M | P-23 | A tNN: a turret that fires draws its target and neighbours within 2 s; a push with turrets up sends at least a quarter at the defences. nightsim with a turret base before and after (Jerry: "breeze through levels"). |
 | P-118 | Nothing yet: the table of weaknesses (D-62). | `docs/weaknesses.md`: each kind (shambler, feral, leaper, spider, drowned, military, brute, spitter, screamer, bomber, demon, colossus, guardian) × bullet, pellet, fire, blast, blade, crush: a multiplier, one clear weakness and one resistance each, the counter in a line. P-26's plates as the first row; `fireResist` folded in. | Claude | S | D-62 | Jerry reads it; GB-104 and GP-80 build from it. |
 
-### R3 · The day feeds the night · later
+### R3 · The day feeds the night · ✓ done
 
 Goal: the relay becomes the day's goal, one pick a day pays off that night, and gear arrives with the acts.
 
@@ -163,9 +163,12 @@ Jerry's play at the end: days 1-10 fresh.
 | P-127 | A suppressor for each of the six guns in the kiosk's Upgrades. | Like the extended mag (`EXT_MAG_PRICE`, `buyExtMag`, `extMag`): a `suppressor` store per gun, prices set in the handoff, the can shown on both guns of an akimbo pair, reset on a fresh run. No gameplay change until P-129. | Cursor | S | P-126 | A tNN: bought, the can shows and the muzzle point moves; the AA-12 has no row; a fresh run clears it. |
 | P-128 | A fire selector: semi-auto for the M4, AK-47 and AA-12 from the start; full auto for the pistol as an unlock, hard to control. | A per-gun `fireMode`; a key toggles it (proposed `K`: I, J, K, O, P and U are free); semi fires on the click only (`tryFire` already does this for the shotgun) with a tighter group; the pistol's auto sear bought in Upgrades: a fast rate with climb and bloom well past the Uzi's (`WEAPON_RECOIL`, `aimDirWithSpread`); the mode beside the ammo count; `docs/controls.md`. | Cursor | S | none | A tNN: semi fires once per click; the pistol on auto spreads wider than the Uzi after 10 rounds. |
 
-### R4 · The way out · later
+### R4 · The way out · tasks done, Jerry plays
 
 Goal: a run can be won, and the story is told.
+
+**Story v2 (D-70):** the way out is **Heron**, a military floatplane that lands on the lake and taxis to the dock
+(CL-110, GB-117). Where this stage says "the boat", read Heron; the code's names (`extraction`, `boat`) stay.
 
 | ID | What the player gets | How it's built (reuse) | Owner | Size | Needs | Done when |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -182,7 +185,7 @@ Goal: a run can be won, and the story is told.
 | P-132 | Hats, gloves, sleeves, shorts, boots, hair, eyes and skin, and camo on the guns. | Parts on the marine rig for each option from P-130; camo as a texture per item and per gun (the shared camo tile of CU-61 becomes one per item). | Claude | M | P-125 | Jerry's "good" in the studio review folder for each option. |
 | P-133 | Four camos to start; the rest earned. "dapper dan" unlocks everything. | `ui/unlocks.js` (pure, unit-tested) on the run events (`registerKill` streaks, dawns, badges) per P-130's plan, `tt_unlocks`, toasts, locked items in the dressing room, the console command. | ChatGPT | S | P-130 | Unit tests per rule; the cheat unlocks all; Antigravity shots. |
 
-### R5 · Named nights and bigger systems · later
+### R5 · Named nights and bigger systems · ▶ now
 
 Goal: Fog Night, the siege, the wanderer, survivors, the guardian boss on its rig, the secret, and the Hollows
 under the caves by day (D-67).
@@ -198,7 +201,7 @@ under the caves by day (D-67).
 | P-62 | The board says "A colossus is walking the east trail". COLOSSUS DOWN reads from strings. | `ui/bounties.js` row; banner (`27074`) keyed. Reward tuned against D-38. | ChatGPT | S | P-61 | `ui/bounties.test.mjs`. Antigravity shot from 30 m. |
 | P-63 | At a camp with a survivor bounty, an unarmed person sits by the fire, and is at the HQ next morning. | The marine rig without a weapon, idle, placed at the camp and later by the HQ. | Claude | S | D-47 | TT shows and hides the figure. Antigravity shots. |
 | P-64 | From night 3, at most once per camp per run, a camp bounty holds a survivor. Clear the guards and press E. | Variant in `spawnBounties` (`28005-28027`) with a `survivor` field. Zombies never target them and nothing damages them. `getSurvivors()`. | Grokbot | S | P-63 | tNN: E does nothing before the guards die, then adds the survivor; reset clears. |
-| P-65 | For the rest of the run: the hikers' medic lets regen reach 50%, the trapper cuts repairs by 25%, the ranger sets up a light turret by the HQ. | `REGEN_CAP_FRAC` (`16715`), `repairCostOf` (`22245-22247`), one free light turret. Capped with the other health levers (D-52). | Grokbot | S | P-64, D-52 | tNN for each perk; reset clears. |
+| P-65 | *(Story v2, D-70: replaced by the survivors on the roof, GB-116.)* For the rest of the run: the hikers' medic lets regen reach 50%, the trapper cuts repairs by 25%, the ranger sets up a light turret by the HQ. | `REGEN_CAP_FRAC` (`16715`), `repairCostOf` (`22245-22247`), one free light turret. Capped with the other health levers (D-52). | Grokbot | S | P-64, D-52 | tNN for each perk; reset clears. |
 | P-66 | The board says "Someone lit a fire at the trapper's camp". The victory screen counts "Survivors aboard: 2". | Board row and strings; a victory line. | ChatGPT | S | P-64, P-54 | Bounty tests; browser check of the victory line. |
 | P-67 | The guardian you can fight on nights 6, 12 and 18 looks like the one in the cave, not a stretched zombie mesh (`25692-25700`). | The studio rig and clips from CL-62 on the boss. D-13's rules and D-25 stay. | Claude | M | D-55, CL-62 | P-12-style review gate (stats under 0.3 rad, Jerry's "good", t79); fps on a guardian night. |
 | P-68 | P-32's escape gets a real let-go beat. | A studio clip in CL-62's review loop. | Claude | S | P-32, CL-62 drag clip | The review gate passes; t79 passes. |
@@ -206,7 +209,7 @@ under the caves by day (D-67).
 | P-94 | Nothing yet: the secret quest's spec. | `docs/specs/secret-quest.md`: the relay's pattern, the stones seen from the tower, the glyphs at the radio, the silenced night, the chalk-cave fight, the true ending and the rune gun. No world moves, no step in a grab zone (`7066-7068`, `30885`). | Claude | S | P-86 | Jerry says yes (or changes it). |
 | P-95 | The world side: the stones pulse in order at night, seen from the tower; the lake goes quiet when the signal is silenced. | Pit runes (`world/`), the relay's pattern as data. | Claude | S | P-94 | TT shows the pulse order; Antigravity shots from the tower. |
 | P-96 | The glyphs at the radio, the silenced night on the board, the true ending screen and the rune gun at the dock. | `ui/quest.js` (a pure model, on `ui/bounties.js`'s pattern), strings, the victory screen's second ending. | ChatGPT | M | P-94 | Unit tests: the right order silences, a wrong one doesn't; the ending shows. |
-| P-97 | The fight: on a silenced night the guardian comes out of the chalk cave on its studio rig, and can be killed there and only then. (Jerry, Q-4: the fight moves underground, deep in the chalk heart behind the rune doors, D-67.) | The guardian night's fightable kind (D-13) on the P-67 rig; the true ending on its death. | Grokbot | M | P-96, P-67 | tNN: the kill only counts on a silenced night; the ending fires once. |
+| P-97 | The fight: on a silenced night the guardian falls back to the heart in the Marrow (story v2) on its studio rig, and can be killed there and only then. (Jerry, Q-4: the fight moves underground, deep in the chalk heart behind the rune doors, D-67.) | The guardian night's fightable kind (D-13) on the P-67 rig; the true ending on its death. | Grokbot | M | P-96, P-67 | tNN: the kill only counts on a silenced night; the ending fires once. |
 | P-98 | Swarm Night: night 17's runners from every cave, faster pushes, named the day before. | `mod: 'swarm'` like P-56; a board line. | Grokbot, ChatGPT | S each | P-56 plays well | tNN and a board line; Antigravity fps. |
 | P-122 | Lightning in storms: 5 strikes a storm, a tree set burning now and then, zombies killed where it lands, and now and then a strike on the marine for 70 damage (a death if he's at 70 or less). Insulated boots hidden on the map make him immune. | A strike during a shower (`weather`): a flash, thunder, a bolt mesh; rolls 1/50 tree (`igniteTree`), 1/100 kill in a radius, 1/200 the marine (70 damage through `damagePlayer`, cause `lightning`), never under godmode. The boots: a hidden pickup (the spot in the handoff), worn for the run, visible on him, zero lightning damage. | Claude | S | D-60 | A tNN with the odds forced to 1: each outcome happens; 70 damage at 100 HP leaves 30; at 60 HP it ends the run as `lightning`; with the boots, no damage. Natural odds over 10,000 simulated strikes within 20% of the stated ones. |
 | P-123 | A rabbit mound out of the way, with bones and a skull round it. Shoot it and a white rabbit takes the marine's head off, unless he has found the knockoff holy grenade: pull the pin, an angelic choir, and the rabbit is done. | One burrow (`burrows`) picked far from the paths, dressed with bones and a skull; a shot into it spawns the rabbit, a lunge and the head off (`lastDeathCause = 'rabbit'`). The grenade: a hidden pickup (the spot in the handoff), its own model, a choir cue on the pin pull (`core/audio.js`), the only thing that kills the rabbit. Our own models, names, sounds and words. | Claude | S | none | tNNs: a shot into that mound ends the run as `rabbit`; other mounds are harmless; with the grenade thrown at it the rabbit dies and the run goes on; the choir plays on the pin. Antigravity video. |
@@ -221,7 +224,7 @@ nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, becaus
 
 **How it works.**
 - **Where.** Under five of the six caves: root, shale, iron, wet and hill. Each has its own *warren*. The chalk cave
-  stays deadly: it's the guardian's home, over the source.
+  (the Marrow cave, story v2) stays deadly: it's the heart's own, sealed by the first people's cracked carved door.
 - **Getting past the guardian: the Hush.** It's a box built from the relay's spare board. It plays the signal back
   out of step, so the guardian can't hear the man carrying it.
   - He gets it the morning after the relay is repaired, so Act 1 still teaches "don't go in" and Act 2 opens the
@@ -256,16 +259,17 @@ nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, becaus
     - a weapon mod (P-48);
     - an earned camo (D-66);
     - a rune shard.
-  - The convoy's dog tags.
+  - The dog tags of the nine Gravewalkers who died (story v2).
   - A full delve's median pays about half the same day's night in skull value, so the nights stay the main road.
 - **Passages.** Clearing a warren's Deep opens a tunnel to the next cave round the compass for the rest of the run.
   By day he can go in at one mouth and come out at the other.
 - **The story.**
-  - The convoy never arrived because the dead dragged it under. Its wreckage is in the Galleries, and twelve dog
-    tags across the five warrens each carry a line.
+  - (Story v2, `docs/story.md` §8.) The dead drag the living down to the Pit. FOB Threshold's crates and kit, the
+    hikers' packs and the rangers' gear lie where they were dragged; the husks hang from the roots; nine dog tags,
+    one for each Gravewalker who died, each carry a line.
   - The Hollows are old mine workings and barrows that the signal woke: the runes run through the rock from the pit,
     and the deeper he goes, the louder it sings.
-  - Every Deep has a sealed rune door facing the lake, toward the chalk heart. It hums, and it stays shut.
+  - Every Deep has a sealed rune door facing the lake, toward the heart in the Marrow. It hums, and it stays shut.
   - Rune shards give pieces of the pit's order, a second way into the secret (D-56).
 - **The rules it keeps.**
   - Topside nothing moves: seeds, the world's layout and the cave positions stay as they are (rule 10).
@@ -276,7 +280,7 @@ nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, becaus
 - **Jerry's answers (Q-4, 2026-09-29).**
   - Caught below ends the run.
   - The same layout every run, so the warrens can be learned.
-  - The secret's final fight (D-56, P-97) happens deep in the chalk heart, behind the rune doors, not at the chalk mouth.
+  - The secret's final fight (D-56, P-97) happens deep in the Marrow, at the heart, behind the rune doors, not at the Marrow cave's mouth.
 
 | ID | What the player gets | How it's built (reuse) | Owner | Size | Needs | Done when |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -288,7 +292,7 @@ nothing is built yet. The spec (P-134) comes first and needs Jerry's yes, becaus
 | P-139 | The stir: noise fills a meter, the Hush holds it down, and when it fills or the Hush runs flat, the guardian comes through the rock after a 10 s warning. A bolt-hole or the way out saves him; the run's one kick-free still applies. | A stir meter from GB-105's hearing rule (suppressed shots much less, D-65; blasts most). The warning (dust, a screech); the guardian's grab into the existing scripted death, `startGrabScene`; D-46's escape (P-32) reused. The Hush battery runs about 8 minutes. | Grokbot | M | P-138, P-135, P-129 | tNN: 30 unsuppressed shots in 20 s fill it and suppressed ones don't; the warning, then the grab; the kick-free leaves him below with 50 HP less and no bag; a second catch ends the run as `caveguard`; a flat Hush brings it too. |
 | P-140 | The haul: skulls, supply crates, and one strongbox a warren a run. It holds a blueprint he doesn't own, a gun before its arrival night, a mod, an earned camo or a rune shard. And the convoy's twelve dog tags. | `game/hollows-loot.js` (pure): prize tables by depth and theme against the run's state (owned, the night, D-48's arrivals, D-66's camos). Skull value tuned so a full delve's median pays about half the same day's night. | ChatGPT | S | P-134, P-46 | Unit tests: every prize is valid for the run state, with no repeats, and the same for the same seed. A budget test: a delve a day doesn't break the twenty-night budget. |
 | P-141 | The words and the HUD below: the Hush's battery and the stir; the depth; "No building down here"; the prize and tag pickups. On the board: the Hush charged, the warrens cleared and the passages open. The chalk mouth's refusal. | `ui/hollows.js` (pure, like `ui/bounties.js`), strings, the board row. | ChatGPT | M | P-139, P-140 | Unit tests; Antigravity shots at 1280 and 390 px. |
-| P-142 | What the Hollows say: the convoy went under; twelve dog tags, a line each; the relay's lines learn where the signal is loudest; the rune doors hum; rune shards give pieces of the pit's order, a second way into the secret. | `docs/story.md`: the tags, the doors and the shards, beside the relay's twenty lines (P-86) and the secret (P-94). | Claude | S | P-134, P-94 | Jerry reads it; the lines go into strings with P-141. |
+| P-142 | What the Hollows say (story v2): the husks; nine dog tags, a line each; the relay's lines learn where the signal is loudest; the rune doors hum; rune shards give pieces of the pit's order, a second way into the secret. | `docs/story.md`: the tags, the doors and the shards, beside the relay's twenty lines (P-86) and the secret (P-94). | Claude | S | P-134, P-94 | Jerry reads it; the lines go into strings with P-141. |
 | P-143 | Passages: a cleared warren opens a tunnel to the next cave round the compass for the rest of the run; in at one mouth, out at the other, by day. | The runtime's exit at the Deep, linked to the neighbour's mouth. Cleared warrens are held for the run and reset with it. | Cursor | S | P-136, P-137 | tNN: a cleared warren's passage takes him out at the neighbouring mouth; an uncleared one doesn't; a run reset closes them. |
 | P-144 | The Hollows sound alive: drips, the Hush's hum, the stir's rumble, the guardian in the walls, and an underground state for the music. | Short cues through the director and `core/audio.js`. | Claude | S | P-139 | t61 green; Jerry listens. |
 | P-145 | Measured: fps below on Jerry's GPU with 24 awake and the lights, and a scripted delve per warren headless: time, deaths, and pay against the same day's night. | `tools/nightsim.mjs --hollow`, `tools/bench.mjs` below. | Cursor | S | P-139 | Numbers in the handoff; 60 fps holds. |
@@ -327,52 +331,23 @@ machines in sync (the marines and the horde); shooting, damage, builds, Cash and
 in the desktop app (by address or through a small relay); then the scripted moments (a catch, the boat) decided
 one by one. The groundwork is P-101 to P-103 in R2.
 
-## The story: The Signal (D-44)
+## The story: The Signal, v2 (D-44, D-70)
 
-The world's props already tell it: a medical convoy failed on the road
-(`assets/world/landmark-details.js:395`), the camps went quiet, the mast carries a "silent emergency relay
-station" (`:272-273`), and the dock is an "evacuation landing left in haste" (`:350-380`). The game only has to
-say it out loud, a line at a time, and give the player a way out.
+The whole story is in `docs/story.md` (rewritten with Jerry on 2026-10-01). In short:
 
-**The premise.** Three weeks ago the relay on the mast went silent. The convoy never arrived; the camps
-stopped answering. One marine parachutes in to find out why, hold the cabin that is now his HQ, and get
-the relay talking so a boat can come for him.
-
-**What is happening.** The dead are answering a signal. The runes in the pit under the lake are a beacon, and
-every night it sings louder: more of them come out of the six caves and up from the sinkhole. That is the
-dead wave. Something in the caves guards the source, and it can't be killed while the signal sings.
-
-**How a run tells it.**
-- **Insertion.** He parachutes in (built). The relay is silent; its panel on the HQ board says so.
-- **Act 1 · Boots on the ground (nights 1-3).**
-  - Skulls, the HQ window, the kiosk.
-  - The first poke into a cave, and the first swim toward the pit, each get a line: "Something in that
-    cave woke up." "The water over the pit is moving." (P-11, P-12)
-  - The dead react when he hits them: a flinch, a stagger, a shell that puts one down (D-42).
-- **Act 2 · Get the relay talking (nights 4-10).**
-  - Repairing the relay is the day's goal. From then on it speaks one line each morning (the story, piece by
-    piece: P-86) and offers **Tonight's call**, one pick a day: a crate dropped at the mast, Scout's eye,
-    or the Lights out dare (P-36 to P-40).
-  - The supply planes fly in the new guns, so the kiosk stocks them by act, at fixed prices (P-46, P-47).
-  - Caches restock (P-41, P-42), the wrecks' fuel drums go up (P-43), and he vaults his own barricades (P-44).
-  - From night 3 a camp's bounty can hold a survivor who knows a piece of what happened (P-63 to P-66).
-- **Act 3 · The wave (nights 11-20).**
-  - Each night runs straight into one real breather, the cave eyes dim, and then the caves and the treeline
-    surge together (P-16, P-17). The score builds with it (P-19 to P-21).
-  - Fog Night when the lake surges (14), the siege (18), and a colossus that walks the trails by day (P-56 to P-62).
-  - The relay's lines turn from where the dead come from to what the pit is.
-- **The way out (night 20).**
-  - He calls the boat from the board. Flares go up at the dock and the boat comes in during the last push.
-  - He holds the dock and boards: "Got out on night 20. Survivors aboard: 2." (P-50 to P-54)
-- **The secret, for players who look (D-56).**
-  - The relay's static repeats a pattern, and from the tower at night the pit stones pulse in the same order.
-  - Entered at the radio, the glyphs silence the signal for one night, and the guardian comes out of the chalk
-    cave to fight: on the new studio rig, killable only then.
-  - Beat it and the lake goes quiet: the true ending, and a rune variant of a gun on the dock for the next run
-    (P-94 to P-97).
-- **Between runs.**
-  - The title shows his best run (P-31), lifetime badges (P-55) and the Ways to Die collection.
-  - Every Play is still a fresh day 1 (D-30).
+- **Where.** A valley deep in forest, ringed by mountains, with a lake and rivers. Everyone who came here died: the
+  first people (the eight stones, the barrow, the sealed Marrow cave), the settlers of Coldwater (the iron mine, the
+  iron-banded coffins), the trapper, the hikers who cut the mine's old bars, the rangers who searched for them.
+- **What.** In the white rock under the lake, the Marrow, the heart is waking. Its voice, the tone, runs through
+  water and rock and raises the dead. The guardian is its body and protects it.
+- **Who.** The PGB, the Paranormal Ground Branch (the Gravewalkers: "Against What Should Not Be."), walled the valley,
+  built FOB Threshold and sent twelve. It fell on the fifth night: nine died, three hid. One marine parachutes in.
+- **How a run tells it.** Act 1 the world speaks (the field notes of the twelve, the history on the map). Act 2
+  Ridgeline speaks a line each morning once the relay is up, and the survivors (Okafor the medic, Brandt on the
+  M240B, Pike the mechanic) are rescued to the HQ's roof. Act 3 the wave. Night 20: Heron, the floatplane.
+- **The secret.** The tone's five-glyph word, played back out of step through the relay, silences it until dawn; the
+  guardian falls back to the heart, where it can die. The true ending: the valley goes quiet.
+- **The rule (Jerry).** No walls of text: little things on the map show the history.
 
 ## Not now
 

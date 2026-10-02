@@ -237,6 +237,14 @@ Owner: Cursor. Callers: world props and the marine mesh. From `core/geometry.js`
 - `mergeParts(parts, material, opts)` — bake small meshes into one vertex-coloured mesh
 - `addCast(mesh)`, `rbox(w, h, d, r, seg)`, `rmesh(w, h, d, mat, r)` — beveled boxes
 - `boxProjectUV(pos, uv)` — camo UVs at one repeat per 0.42 m
+- `slab(points, width, bevel, segs)`, `lathe(profile, segs, phase)`, `curve(a, c, b, steps)`, `triangulate(pts)` —
+  profile parts (CU-81, the guns): a side outline of `[z, y]` points given a thickness along x with rounded edges,
+  and a `[r, z]` profile turned round z. Non-indexed with normals and UVs, so they merge and take camo like boxes.
+  Built here because the test build's three has no `ExtrudeGeometry` or `Shape`.
+- `slab(points, width, bevel, segs)`, `lathe(profile, segs, phase)`, `curve(a, c, b, steps)`, `triangulate(pts)` —
+  profile parts (CU-81, the guns): a side outline of `[z, y]` points given a thickness along x with rounded edges,
+  and a `[r, z]` profile turned round z. Non-indexed with normals and UVs, so they merge and take camo like boxes.
+  Built here because the test build's three has no `ExtrudeGeometry` or `Shape`.
 
 ## Audio (CU-4 slice, 2026-09-24)
 
@@ -516,6 +524,9 @@ Consumers: Grokbot (GB-81 crates, GB-82 the dare), ChatGPT itself (Field Intel).
 
 ## The boat call: extraction (GB-85, P-50; D-45; proposed by Grokbot 2026-09-29, for Claude's review)
 
+**Story v2 (D-70):** the player sees **Heron**, a military floatplane, not a boat (CL-110, GB-117). The contract's
+names (`extraction`, the `boat`, `deck()`) stay as they are; only the words and the model change.
+
 Owner of the state: Grokbot (index.html, the wave director). Consumers: ChatGPT (GP-63, P-51: the "Call the boat" button,
 the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in on `due`), Grokbot (GB-86, P-53: boarding).
 
@@ -585,29 +596,45 @@ the relay-down line and the dock blink), Claude (CL-73, P-52: the boat comes in 
 
 - From night 3 (`SURVIVOR_FROM`), each campsite bounty that `spawnBounties` posts can hold a survivor: chance
   `survivorChance` (0.5), at most once per camp per run (a camp that has held one, rescued or not, never does again).
+- **Story v2 (D-70):** the survivors are three PGB soldiers, and the camp says who: `trapper` Okafor, `ranger` Brandt,
+  `hikers` Pike (`who`: `'okafor'`, `'brandt'`, `'pike'`). Taken in, they go to the HQ's roof (GB-116, below).
 - `post.survivor` = `{ style, camp, day, state, x, z }`; `style` is the camp's (`ranger`, `hikers`, `trapper`), `state` is
   `'waiting'`, `'rescued'` or `'lost'`. `getBounties()` rows gain `survivor: { style, state } | null`; `bounty-posted` carries
   `survivor: true|false`.
 - They wait 1.5 m from the fire, facing it: a stand-in figure (a bare `makeMarine()`, no gun) until CL-75's look. They're in no
   zombie, hit or target list, so nothing targets or damages them.
 - E: `actionTarget()` returns `'survivor'` only within 2.2 m (`SURVIVOR_REACH`) and once none of the post's guards is alive, so E
-  does nothing before that. Then E takes them in: the figure goes, `dw-game` `'survivor-rescued'` `{ style, camp, day, count }`,
-  and `getSurvivors()` (plain and on `window.TT`) returns this run's `[{ style, camp, day }]`. Prompt key `survivor.rescue`
+  does nothing before that. Then E takes them in: the figure goes, `dw-game` `'survivor-rescued'` `{ style, who, camp, day, count }`,
+  and `getSurvivors()` (plain and on `window.TT`) returns this run's `[{ style, who, camp, day, roof }]` (`roof` true once
+  they're on the roof; GB-116). Prompt key `survivor.rescue`
   (placeholder copy; ChatGPT's).
 - The alarm, or the next day's posts, end a wait still at the fire: `'survivor-lost'` `{ style, camp, day, reason }` (reason
   `'alarm'` or `'new-day'`). A run reset clears the survivors and the used camps.
 - TT: `getSurvivors`, `survivorDbg` (`setChance`, `allowed`, `inReach`, `waiting`, `campsUsed`). Test: t148.
 
-## Survivors' help (GB-91, P-65, D-52; proposed by Grokbot 2026-09-30)
+## The survivors on the roof (GB-116, story v2, D-70; replaces GB-91's helps; proposed by Grokbot 2026-10-01)
 
-- The help follows the survivor's `style` from `getSurvivors()` and lasts for the run: a run reset ends it.
-- `hikers` (the medic): regen reaches `MEDIC_REGEN_CAP_FRAC` (0.5) of max hp instead of `REGEN_CAP_FRAC` (0.4): `regenCapFrac()`.
-- `trapper`: `repairCostOf(b)` is multiplied by `TRAPPER_REPAIR_MUL` (0.75), before rounding up; never under 1: `repairCostMul()`.
-- `ranger`: one free light turret, once a run, through `placeBuildAt` on the free cell nearest (-(HQ_HALF + 4), 0), clear of
-  the HQ by 2 m, dry and off the cabin. It's an ordinary build with `gift: 'ranger'`. Scrapping or selling it pays nothing back (GB-115); upgrades bought on it refund as usual. If no cell takes it, he tries again at the next prep.
-- `dw-game` `'survivor-help'`: `{ style: 'hikers', help: 'regen', cap }`, `{ style: 'trapper', help: 'repairs', mul }`,
-  `{ style: 'ranger', help: 'turret', id, x, z }`, fired when the survivor is taken in.
-- TT: `survivorHelpDbg` (`grant(style)`, `regenCapFrac`, `repairCostOf`, `setHp`, `regen(dt)`, `giftTurret()`, `owed()`). Test: t149.
+- Taken in, a survivor makes their own way back: from the next dawn (`startPrep`) they're on the HQ roof (CU-79's ladder),
+  `dw-game` `'survivor-roof'` `{ who, style, day, count }`. Posts (`ROOF_POST`, from the HQ's middle, 0.9 m in from both
+  edges): Okafor north-west, Brandt north-east, Pike south-east; the ladder lands mid-west. Each post: a sleeping bag, a crate;
+  Brandt's has the M240B on its tripod. Stand-in figures (a bare `makeMarine()`) until CL-75's.
+- By day they sleep on their bags. From the alarm (`hq.seq`) or in the wave until dawn they stand to and fire at the
+  living dead within `ROOF_FIRE_R` (26 m) of the HQ, the nearest one each can see past the roof's edge (a line through
+  the HQ's box is never fired): Brandt bursts of 4 at 14 a round (0.12 s apart, 1.4 s rest), Okafor and Pike single M4
+  shots at 19 every 0.9 s (`ROOF_GUN`). Their rounds are turret (defence) rounds and draw nothing to them. They're in no
+  zombie, hit, build or target list: nothing targets or damages them.
+- Okafor heals him to full once a day: E beside her on the roof (within 2 m of her post or bag), `dw-game`
+  `'survivor-heal'` `{ who, from, to, day }`. Prompt key `survivor.heal` `{ name }` (ChatGPT's; English fallback meanwhile).
+- Pike: `repairCostOf(b)` is multiplied by `PIKE_REPAIR_MUL` (0.75) once he's on the roof, before rounding up; never
+  under 1: `repairCostMul()`. Regen keeps `REGEN_CAP_FRAC` (0.4) whoever is up there; no survivor gives a turret.
+- E beside any of them otherwise (Okafor after her heal): `dw-game` `'survivor-talk'`
+  `{ who, style, awake, day, nameKey, lineKey }` (`story.survivor.<who>.name` / `.roof`), prompt `survivor.talk` `{ name }`.
+  Until GP-95's talk card sets `window.DW_TALK_CARD = true`, the game shows the roof line as a banner itself.
+- A run reset clears the roof (the figures go, the heal day resets).
+- GB-115 stays: any build with `gift` set refunds nothing for its own price when scrapped or sold; nothing sets it now.
+- TT: `survivorHelpDbg` (`grant(style)`: taken in and on the roof at once, `regenCapFrac`, `repairCostOf`,
+  `repairCostMul`, `setHp`, `regen(dt)`), `roofDbg` (`takeIn(style)`, `crew()`, `roots()`, `alert()`, `inReach()`,
+  `prompt()`, `act()`, `healDay()`, `lineClear`, `tick`, the constants). Tests: t156 (the roof), t149 (the helps).
 
 ## The siege on night 18 (GB-88, P-59; proposed by Grokbot 2026-09-30)
 
@@ -696,12 +723,12 @@ The facts come from two places, and nothing else: the run record and four `dw-ga
     to it; until GB-78 lands the event has no publisher.
   - `fog-survivor`: `dw-game` `'night-cleared'` `{ day, kind, runId }` at dawn (`startPrep`, before
     the day number moves on), one per night, day 1 included. **Live (CU-77, 2026-09-29).** `kind` is
-    one word, first match wins: `fog` (the night plan's `mod === 'fog'`, P-56), `siege` (night 18's
+    one word, first match wins: `fog` (the night plan's `mod === 'fog'`, P-56), `swarm` (`mod === 'swarm'`, P-98, GB-93), `siege` (night 18's
     trick), `guardian`, `colossus` (every fifth night that isn't a guardian night), `blood-moon` (Ember
     Night), `plain`. `TT.nightKindForDay(d)` gives it for any night. The badge is `kind === 'fog'` on the
     night 14 clear. `night-cleared` is also the fact behind `nightCleared`/`nightKind` in the adapter;
     the night-N badges stay on the run record. Night 14 says `plain` until Fog Night's `mod` lands
-    (P-56, GB-87); then the fog badge has its source with no change here. **Live (GB-87, 2026-09-29):** night 14's plan has `mod: 'fog'`, also on `wavePreview.night.mod` and `getWaveDirectorState().mod` from night 14's prep; `null` on every other night, the endless ones included.
+    (P-56, GB-87); then the fog badge has its source with no change here. **Live (GB-87, 2026-09-29):** night 14's plan has `mod: 'fog'`, also on `wavePreview.night.mod` and `getWaveDirectorState().mod` from night 14's prep; `null` on every other night but 17, the endless ones included. **Live (GB-93, 2026-10-01):** night 17's plan has `mod: 'swarm'` (Swarm Night) the same way (named in its prep, kept through its wave, cleared by the next prep; not on the endless nights), with its own faster `pace`; its `night-cleared` kind is `swarm`.
 - The twelve ids and their criteria are fixed as proposed: `first-bank`, `relay-online`, `night-five`,
   `night-ten`, `night-twenty`, `fog-survivor`, `kicked-free`, `out-on-the-boat`, `thousand-skulls`,
   `thousand-kills`, `hundred-headshots`, `streak-twenty`. Debug-started runs (`eligible: false`) award
@@ -771,3 +798,123 @@ Owner: ChatGPT (moved from Cursor's CU-58). Consumers: Grokbot's crates (GB-81, 
   On `landed` a guard pack claws up 6-10 m round it: 2 on nights 1-3, 3 on 4-6, 4 on 7-9, 5 from 10, one feral from
   night 4 and two from night 8 (`z.objectiveRole === 'crate-guard'`). A radio crate doesn't time out; it `expired`s at
   the alarm if it's still unclaimed. TT: `callRadioCrate`, `crateGuardPlan`, `relayUp`, `setRelayUpDbg`, `getSupplyTimer`.
+
+## The secret's quest state (GP-70, D-56; approved by Claude 2026-10-01)
+
+Owner: ChatGPT (`ui/quest.js`, a pure model; the shell wires it). Readers: Grokbot (GB-92, GB-119), Claude (the Pit's
+stones, CL-80; the carvings, CL-107), GP-83 (shards).
+- `createQuest()` → `reset({ runId, seed })`, `dawn(day)`, `hear(dispatch)`, `learn(place 0-4)`, `submit(glyphs)`,
+  `read()` / `view()`, `restore(snapshot)`, `setHeart(state)`, `complete()`. The state's fields are
+  `docs/specs/secret-quest.md` §8.
+- The shell: `TT.getQuestState()` (a copy of the state) and `TT.learnQuest(place)` (a shard read).
+- Events on `'dw-game'` `{ type: 'quest', kind }`: `word` `{ order }`, `sent` `{ ok }`, `silenced`, `dawn`, `heart`
+  `{ phase }`, `ending`.
+
+## The Hollows' haul (GP-83, D-67, D-70; approved by Claude 2026-10-01)
+
+Owner: ChatGPT (`game/hollows-loot.js`, pure and seeded). Wiring: Cursor (CU-80); skull pay below: Grokbot (GB-107).
+- `createHollowLoot({ seed, grant })` → `peekStrongbox(context)`, `claimStrongbox(context)`, `claimCrate(context)`.
+  A strongbox holds its warren's rune shard and one gear prize (a blueprint he lacks, a gun before its night, a mod,
+  an earned camo), never a repeat in a run. `grant(items)` must accept all of them or none, and the box is spent
+  only when it does.
+- `createTagCollection({ load, save, eligible, onComplete })`: nine tags, ids `root:0`, `root:1`, `shale:0`,
+  `shale:1`, `iron:0`, `iron:1`, `wet:0`, `wet:1`, `hill:0`; kept for good; all nine is the badge "Brought them home".
+- The shell's hook (CU-80): `grantHaul(items) -> { ok, rejected }`, all or nothing.
+
+## The Marrow cave's door (CL-107, D-70)
+
+Owner: Claude. The chalk cave (`theme === 'chalk'`) carries `sealed: true`: no poke (`noteCaveMouthHit` and
+`triggerCavePoke` refuse it, rounds through its mouth don't count), no walk-in grab, and a row of posts in
+`caveSealSolids` holds the local player out (the dead are not stopped: they come out through the hole at the foot,
+spawned within `MARROW_DOOR.holeHalf` of the middle). `TT.firstPeople` has the stones, the ring stone, the door and
+the offerings; `TT.updateFirstPeople(dt, { night, silenced })` drives the carvings' glow.
+
+## Lightning and the insulated boots (CL-92, P-122, D-63)
+
+- **The strike.** `publishUI('lightning', { target, x, z, killed, hurt, saved })` once per bolt. `target` is `'open'`
+  (off in the trees), `'tree'`, `'dead'` or `'marine'`; `killed` the dead it killed, `hurt` the HP it took from him,
+  `saved` true when the insulated boots took it. Five a shower, one in each fifth of it (`world/lightning.js`).
+- **His death.** A strike on him goes through `damagePlayer(70, 'lightning', …)`, so a fatal one ends the run with
+  `lastDeathCause === 'lightning'`. `DEATH_WAYS.lightning` exists with a plain label and line; the words, the tombstone
+  and the badge are GP-81's (P-124).
+- **The boots.** He walks over them at the radio mast's foot: `publishUI('pickup', { id: 'insulatedBoots' })`, then
+  `p.insulatedBoots === true` on that player for the run (cleared by a new run). Lines read through `hasText` with
+  English fallbacks until GP-81 writes them: `pickup.insulatedBoots`, `pickup.insulatedBootsSub`, `lightning.saved`,
+  `lightning.savedSub`.
+- **Tests and the console.** `TT.lightningDbg` (`strike(kind)`, `update(dt)`, `state()`, `odds({tree, dead, marine})`,
+  `boots()`, `wear()`, `worn()`, `reset()`); dev commands `strike`, `strike me`, `strike tree`, `strike dead`, `boots`.
+
+## The rabbit mound and the holy grenade (CL-93, P-123, D-63)
+
+- **The rabbit.** `publishUI('rabbit', { phase })`: `'woken'` (a round of his into the mound, `{ x, z }`), `'bite'`
+  (`{ fatal: true }` when it took his head), `'killed'` (the holy blast, `{ x, z }`). A bite is `damagePlayer(999,
+  'rabbit', …)`, so a fatal one ends the run with `lastDeathCause === 'rabbit'`; `DEATH_WAYS.rabbit` exists with a plain
+  label and line (GP-81 owns the words). Bullets don't touch it; only the holy grenade kills it.
+- **The holy grenade.** He takes it from the stone box behind the graveyard's dead tree:
+  `publishUI('pickup', { id: 'holyGrenade' })`. While the rabbit is awake and within 30 m, G throws it instead of a
+  plain grenade: `publishUI('holy-grenade', { phase: 'pin' })` (the choir, `AudioSys.holyChoir`), then
+  `{ phase: 'blast', x, z, rabbit, killed }`. Lines through `hasText` with English fallbacks: `pickup.holyGrenade`,
+  `pickup.holyGrenadeSub`, `holy.pin`, `holy.pinSub`, `rabbit.killed`, `rabbit.killedSub`.
+- **Tests and the console.** `TT.rabbitDbg`; dev commands `rabbit` (to the mound and wake it), `holy` (the grenade).
+
+## The rune finish (CL-111, docs/specs/secret-quest.md §6)
+
+- A gun finish key of its own, `'rune'`, for a gun's furniture only: not in `CAMO_KEYS`. It is his for good from the
+  first quest `'ending'` (`localStorage tt_rune_finish = '1'`, `publishUI('rune-finish', { unlocked: true })`). From
+  then a saved `guns[id] = 'rune'` loads, and `dressGuns` paints it (lit at night with the carvings' glow).
+- The CIF's gun tab (GP-97) can offer it: `TT.runeFinishDbg.unlocked()`, and `withGun(state, id, 'rune', v)` with a
+  validator that accepts `'rune'` once unlocked (as the game's `isGunFinishKey`). Dev command `rune`.
+
+## The heart in the Marrow (CL-112, docs/specs/secret-quest.md §5)
+
+- **Built like a warren.** `TT.buildHeart(opts?)` (world/heart.js) returns buildWarren's shape: `{ group, groundAt,
+  solids, nav, entry, exits: { back }, lamps, light, dispose }`, plus `columns`, `fellColumn(i)`, `source`,
+  `points: { rise, guardian }`. World coordinates, origin `HEART.ORIGIN` (0, -460, 0) unless `opts.origin`; the caller
+  adds `group` to the scene and owns going there and back (as `enterHollow` does). `TT.HEART` holds the sizes.
+- **The source** `{ x, y, z, r }` is a hole: `groundAt` is null inside `r` (nothing stands there). `points.rise` are
+  twelve spots round its lip where the dead climb out; `points.guardian` is the guardian's ground between the source
+  and the way in.
+- **The columns.** `columns[i] = { x, z, r, mesh, solid, down }`; `fellColumn(i)` lays it down toward the source,
+  replaces its standing solid in `solids` with a lying one and returns that (null if already down). GB-92 owns when they fall.
+- **Not wired yet.** Nothing in the game goes there; GB-92 owns the way in and the fight. Tests: world/heart.test.mjs, t169.
+
+## A special night's own song (CL-77, P-58)
+
+- The page tells the music director which special night it is: `state.special` in `AudioSys.updateMusic` (`'fog'` on
+  Fog Night, from the prep before it: `wavePreview.night.mod === 'fog'`, or `TT.fogNightDbg.force(v)`; null otherwise).
+- music.json `specials: { fog: 'fight_fognight' }` names the song. It is loaded in the prep that says so and played at
+  the fight instead of the day's song, but only once its sections are decoded; otherwise the day's song plays as before.
+  `AudioSys.musicState().specials` / `.special`. Another special night gets its song by adding a key here and a
+  sectioned track (tools/fog.py is the pattern). Test: t172.
+
+## The sound below (CL-101, P-144)
+
+- The page hands the audio what it needs to hear the warren: `state.below` on both `AudioSys.updateMusic` and
+  `AudioSys.updateAmbience`: `null` topside, below `{ on: true, theme, stir (0..1, the meter / 100), phase ('calm' |
+  'warning' | 'grab'), hush (the Hush still has battery) }` (index.html `belowAudioState()`, from `hollow`, `stirState()`
+  and `hush`).
+- The ambience: below, the topside beds and one-shots (wind, river, crickets, rain, birds, owls, thunder, far groans)
+  go quiet over a second; the warren's come up (the room, drips by theme, the Hush's hum and its wind-down when the
+  battery dies, the stir's rumble and the rock's groans at 0.5 and 0.8, the guardian in the walls from 0.3, a
+  grinding scream in the warning). `AudioSys.belowState()` reads the levels and counts (tests).
+- The music: below in the calm, the day's song at 40% and low-passed (650 Hz, on the section player); a fight below as
+  a day fight; none in the warning or the grab. `AudioSys.musicState().below`. Test: t174.
+
+## The caves and the pit, heard (CL-82, P-84)
+
+- `AudioSys.updateAmbience(state)` also takes `cave` and `pit` (0..1, how near the nearest cave mouth within 34 m and
+  the pit within 90 m are, by `sndAt`'s fall-off) with `cavePan` / `pitPan`; index.html `placeBeds()` fills them
+  topside (0 below, and `pit` 0 once `pitSignal.silenced`). The cave breathes (louder by night), the pit hums; CL-22's
+  one-shots (groans, rumbles, the screech) play on top as before. `AudioSys.placesState()` reads the levels.
+- `AudioSys.updateMusic(dt, state)` takes `state.dread` (0..1, the nearer of the two): in the calm the music draws back
+  to 55% at a cave mouth. `musicState().dread`. Test: t176.
+
+## The heart fight's music (CL-85, P-99)
+
+- `AudioSys.updateMusic(dt, state)` takes `state.heart` (`null`, or `{ on: true, phase: 1 | 2 | 3, flat, dead }` from
+  GB-92's `heartFight.read()`) and `state.heartSoon` (a silenced day below: the song is loaded then). In the heart the
+  director's stage is `'heart'`: `fight_heart` (tools/heart.py) by the fight's phase, music.json `flow.phases`
+  (phase 1 dropA/riffB, 2 dropA2/bridge, 3 climax), the break while `flat`. `dead`: stage `'heartend'`, the song out
+  fast and `AudioSys.heartFall()` (the long falling note) alone, then the ending's music as before. Out of the heart,
+  the calm again. Test: t178.
+

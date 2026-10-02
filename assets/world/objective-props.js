@@ -239,6 +239,27 @@
         base.box(W + 0.04, 0.05, D + 0.04, C.steelDark, 0, 0.08 + H + 0.025, -0.02);   // rain cap
         base.box(W * 0.9, 0.04, 0.02, C.pale, 0, 0.08 + H - 0.1, D / 2 - 0.01);        // pale trim over the bay
         base.box(0.62, 0.62, 0.02, C.steelDark, 0, 0.08 + 0.6, D / 2 - 0.018);          // the open bay's back
+        // GP-119: the fuse was deliberately pulled. Ceramic clips frame an empty
+        // cartridge slot, while the repaired state installs the same carrier.
+        base.box(.45,.16,.022,C.black,0,.8,.303);
+        for(const x of[-.19,.19]){
+          base.box(.07,.14,.032,C.pale,x,.8,.327);
+          base.box(.036,.07,.043,C.brass,x*.82,.8,.348);
+        }
+        const fuse=(k,x,y,z)=>{
+          k.cyl(.032,.032,.27,C.pale,x,y,z,0,0,Math.PI/2,10);
+          for(const side of[-1,1])k.cyl(.036,.036,.047,C.brass,x+side*.137,y,z,0,0,Math.PI/2,10);
+          k.box(.22,.025,.05,C.black,x,y+.04,z);
+        };
+        fuse(broken,-.2,.16,.34);fuse(repaired,0,.8,.36);
+        // Small circuits below the socket bay and a faded electrical-work symbol.
+        base.box(.33,.15,.015,0x465946,-.06,.39,.302);
+        for(let i=0;i<4;i++)base.box(.025,.05,.022,C.brass,-.17+i*.073,.39,.316);
+        for(const x of[-.29,.29])for(const y of[.43,.94])base.cyl(.015,.015,.013,C.pale,x,y,.306,Math.PI/2,0,0,6);
+        base.box(.17,.115,.012,0x9b8b4f,.14,.2,.29);
+        base.bar([.16,.245,.3],[.12,.202,.3],.008,C.black);base.bar([.12,.202,.3],[.16,.202,.3],.008,C.black);base.bar([.16,.202,.3],[.12,.157,.3],.008,C.black);
+        for(let i=0;i<5;i++)base.box(.014,.017,.21,C.black,.407,.38+i*.08,-.08);
+        for(let i=0;i<6;i++)base.box(.045,.009,.008,i%2?C.rust:C.pale,-.3+i*.11,1.08,.287);
         for (const x of [-0.14, 0.14]) base.cyl(0.05, 0.05, 0.05, C.brass, x, 0.08 + 0.55, D / 2 - 0.0, Math.PI / 2, 0, 0); // two sockets
         base.box(0.02, 0.5, 0.36, C.steel, W / 2 + 0.03, 0.08 + 0.25, 0.02, 0, 0, -0.12); // the dented panel, leaning on its side
         base.box(0.12, 0.12, 0.05, C.steelDark, 0.28, 0.08 + 0.92, D / 2 - 0.0);         // light housing

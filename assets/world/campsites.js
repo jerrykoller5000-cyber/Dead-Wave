@@ -76,6 +76,46 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
     const bed=p(width*.2,.065,0);
     box(.52,.11,depth*.7,variant===1?0x536c74:0x77714c,...bed,angle);
     const pillow=p(width*.2,.15,-depth*.23);box(.45,.1,.3,0xafa58b,...pillow,angle);
+    if(variant===0){
+      // The search team's canvas wall tent: reinforced hem, rolled doorway,
+      // vent and repair patches. All inside its established footprint.
+      for(const side of [-1,1]){
+        bar(p(side*w,wall+.025,-d),p(side*w,wall+.025,d),.035,palette.trim);
+        bar(p(side*w,.12,-d),p(side*w,.12,d),.018,palette.trim);
+        const u=side*w*.6,h=wall+(tall-wall)*.4;
+        panel([p(u,h+.012,-.5),p(u-side*.26,h+.32,-.5),p(u-side*.26,h+.32,.02),p(u,h+.012,.02)],0x858969);
+        bar(p(side*w*.78,.45,d+.065),p(side*w*.44,tall*.63,d+.065),.064,0x858969,8);
+      }
+      panel([p(-.18,tall-.38,d+.02),p(0,tall-.13,d+.02),p(.18,tall-.38,d+.02)],dark);
+      for(let k=0;k<3;k++)bar(p(-.11+k*.11,tall-.35,d+.035),p(-.07+k*.07,tall-.22,d+.035),.012,palette.trim,4);
+      // Spare blanket folded at the foot of the bed, with crossed webbing.
+      const q=p(-.55,.13,.45);box(.48,.2,.63,0x9b8060,...q,angle);
+      for(const z of [.25,.64]){const q=p(-.55,.24,z);box(.51,.025,.045,dark,...q,angle);}
+    }
+    if(variant===1){
+      // GP-114: different repair fabrics, rolled flaps and personal sleeping gear.
+      const patch=x<0?0xc18e63:0x81928b,quilt=x<0?0x887051:0x707950;
+      for(const side of [-1,1]){
+        bar(p(side*w,.13,-d),p(side*w,.13,d),.021,0x403e32,5);
+        bar(p(side*w*.76,.32,d+.07),p(side*w*.33,tall*.68,d+.07),.045,patch,8);
+        bar(p(side*w*.66,.51,d+.09),p(side*w*.49,.72,d+.09),.012,rope,4);
+      }
+      const side=x<0?1:-1,aa=side*w*.37,bb=side*w*.72,h1=tall-(tall-wall)*.37,h2=tall-(tall-wall)*.72;
+      panel([p(aa,h1+.014,-.48),p(bb,h2+.014,-.48),p(bb,h2+.014,.02),p(aa,h1+.014,.02)],patch);
+      for(let j=0;j<5;j++){const v=-.45+j*.105;bar(p(aa,h1+.021,v),p(aa+side*.04,h1-.04,v),.005,0xd3bea0,4);}
+      const q=p(width*.2,.145,.17);box(.49,.11,depth*.42,quilt,...q,angle);
+      for(let j=0;j<4;j++){const q=p(width*.2,.203,-.15+j*.19);box(.48,.01,.016,0x4f5548,...q,angle);}
+      const q2=p(-width*.23,.08,d*.36);box(.26,.1,.19,x<0?0xaaa187:0x9b704c,...q2,angle);
+      // Worn boots on the small groundsheet lip, with soles, collars and laces.
+      for(const u of [-.17,.17]){
+        const q=p(u,0,d+.27);q[1]=ground(q[0],q[2]);
+        box(.18,.045,.34,dark,q[0],q[1]+.035,q[2],angle);
+        box(.17,.12,.29,0x665b45,q[0],q[1]+.11,q[2],angle);
+        const ankle=p(u,0,d+.19);box(.16,.17,.16,0x7c6a4e,ankle[0],q[1]+.2,ankle[2],angle);
+        box(.11,.015,.11,dark,ankle[0],q[1]+.289,ankle[2],angle);
+        for(let j=0;j<3;j++){const r=p(u,0,d+.21+j*.04);box(.115,.015,.014,rope,r[0],q[1]+.174,r[2],angle);}
+      }
+    }
     for(const v of [-depth*.23,depth*.23]){const q=p(0,0,v);collider(q[0],q[2],width*.45,base,tall);}
   }
   function chair(x,z,angle,color) {
@@ -123,38 +163,187 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
     lantern(2.15,y,-2.3);chair(2.8,-.95,Math.PI,palette.canvas);
     crate(3.8,-3.3);crate(3.85,-4.1,.55,.1);jerrycan(2.75,-3.5);jerrycan(3.18,-3.5);
     roll(-1.1,ground(-1.1,-3.4),-3.4,0x637052,.2);
+    // GP-107: a covered search desk and cached rescue equipment. No new
+    // collider or random draw: camp positions, paths and destruction stay exact.
+    const roofY=y+1.38;
+    for(const x of [2.1,3.3])for(const z of [-2.5,-1.9])
+      bar([x,ground(x,z),z],[x,roofY+(z<-2.2?.12:0),z],.023,steel);
+    for(let k=0;k<3;k++){
+      const x=1.83+k*.58,xx=x+.58;
+      panel([[x,roofY+.09,-1.67],[xx,roofY+.09,-1.67],[xx,roofY+.035,-2.2],[x,roofY+.035,-2.2]],k===1?0x798266:0x8e9271);
+      panel([[x,roofY+.035,-2.2],[xx,roofY+.035,-2.2],[xx,roofY+.22,-2.76],[x,roofY+.22,-2.76]],k===1?0x798266:0x8e9271);
+    }
+    for(const z of [-1.67,-2.76])bar([1.83,roofY+(z<-2?.22:.09),z],[3.57,roofY+(z<-2?.22:.09),z],.02,palette.trim);
+    // A low side apron leaves the map visible from the fire.
+    panel([[3.57,roofY+.09,-1.67],[3.57,roofY+.22,-2.76],[3.57,roofY-.18,-2.76],[3.57,roofY-.24,-1.67]],palette.trim);
+    // Contours, a marked search route and a compass on the existing paper map.
+    for(let k=0;k<4;k++){
+      const x=2.33+k*.15;
+      bar([x,y+.022,-2.38],[x+.07,y+.022,-2.24],.007,0x8d8d6e,4);
+      bar([x+.07,y+.022,-2.24],[x+.04,y+.022,-2.04],.007,0x8d8d6e,4);
+    }
+    bar([2.38,y+.03,-2.07],[2.55,y+.03,-2.24],.009,0x984b37,4);
+    bar([2.55,y+.03,-2.24],[2.83,y+.03,-2.31],.009,0x984b37,4);
+    mesh(new THREE.CylinderGeometry(.048,.048,.025,10),0xb3995e,2.32,y+.02,-2.12);
+    box(.015,.015,.23,0xc6a455,2.91,y+.025,-2.1,.3);
+    mesh(new THREE.CylinderGeometry(.068,.059,.11,10),0xb6bbab,2.7,y+.06,-2.47);
+    mesh(new THREE.CylinderGeometry(.052,.052,.006,10),0x403327,2.7,y+.119,-2.47);
+    const mh=mesh(new THREE.TorusGeometry(.038,.012,4,8),0xb6bbab,2.785,y+.065,-2.47);mh.rotation.y=Math.PI/2;
+    // Strapped waterproof orange bag on a crate and rope coiled next to it.
+    const cy=ground(3.8,-3.3)+.65;
+    box(.51,.21,.43,0xa36b39,3.8,cy+.11,-3.3);
+    box(.46,.05,.43,0xc59458,3.8,cy+.235,-3.3);
+    for(const x of [3.64,3.95])box(.05,.235,.445,dark,x,cy+.12,-3.3);
+    for(const x of [3.65,3.95])box(.07,.07,.018,steel,x,cy+.11,-3.069);
+    const ry=ground(3.85,-4.1)+.57;
+    for(let k=0;k<4;k++){const r=mesh(new THREE.TorusGeometry(.18-k*.028,.017,4,14),rope,3.85,ry+k*.012,-4.1);r.rotation.x=Math.PI/2;}
+    // A folded rescue litter stowed upright against the same supply stack.
+    for(const x of [4.03,4.37])bar([x,ground(4.18,-3.32)+.05,-3.22],[x,ground(4.18,-3.32)+1.16,-3.5],.022,steel);
+    const ly=ground(4.18,-3.32);
+    panel([[4.04,ly+.23,-3.27],[4.36,ly+.23,-3.27],[4.36,ly+.96,-3.45],[4.04,ly+.96,-3.45]],0x9a8156);
+    for(const h of [.4,.75])bar([4.02,ly+h,-3.22-h*.25],[4.38,ly+h,-3.22-h*.25],.018,dark,4);
   } else if(variant===1) {
     tent(-3,-2,2.1,2.7,1.65,palette.canvas);
     tent(2.3,-3.4,1.9,2.5,1.5,0x536d78);
-    chair(-1.9,.4,1.5,0xaa7147);chair(1.65,.8,-1.2,0x647c6b);
+    chair(-1.9,.4,1.5,0xaa7147);chair(1.65,.8,0,0x647c6b);
     const y=ground(2.9,1.7);box(.68,.4,.43,0x9b5940,2.9,y+.2,1.7,-.2);box(.73,.09,.47,0xd1c9ad,2.9,y+.445,1.7,-.2);
     bar([2.5,y+.23,1.7],[2.5,y+.44,1.7],.025,steel);
     collider(2.9,1.7,.43,y,.5);
-    for(const [x,z,c] of [[-3.7,-.1,0x718071],[3.6,-1.9,0x9b684b]]) {
-      const g=ground(x,z);box(.42,.57,.24,c,x,g+.3,z,.2);box(.29,.23,.08,palette.trim,x,g+.2,z+.15,.2);roll(x,g+.6,z,0x777052);
+    for(const [x,z,c] of [[-3.7,-.1,0x718071],[2.32,.61,0x9b684b]]) {
+      const g=ground(x,z),geo=new THREE.CylinderGeometry(.23,.21,.52,8);geo.scale(1,1,.67);mesh(geo,c,x,g+.3,z);
+      box(.34,.22,.1,c,x,g+.22,z+.18);box(.41,.08,.28,c,x,g+.59,z);
+      for(const s of [-1,1]){box(.036,.42,.025,dark,x+s*.12,g+.32,z+.237);box(.06,.045,.027,0x959986,x+s*.12,g+.39,z+.255);bar([x+s*.13,g+.52,z-.17],[x+s*.13,g+.19,z-.17],.022,dark);}
+      roll(x,g+.64,z,0x777052);box(.1,.2,.095,0xa2a994,x+.24,g+.25,z);box(.035,.035,.04,dark,x+.24,g+.367,z);
     }
     const stump=ground(-.8,2.2);mesh(new THREE.CylinderGeometry(.3,.33,.4,9),wood,-.8,stump+.2,2.2);lantern(-.8,stump+.41,2.2);
     for(let i=0;i<2;i++){const x=-.5+i*.32;mesh(new THREE.CylinderGeometry(.065,.06,.12,8),0xc6c7aa,x,ground(x,1.35)+.06,1.35);}
-  } else {
-    // Low lean-to with a sagging canvas roof, open front, and a raised sleeping cot.
-    const x=-2.9,z=-2.6,y=Math.max(ground(x-1.3,z-1),ground(x+1.3,z+1));
-    for(const a of [-1.3,1.3])for(const b of [-1,1])bar([x+a,ground(x+a,z+b),z+b],[x+a,y+(b>0?1.9:1.35),z+b],.05,wood);
-    for(let i=0;i<4;i++){const a=-1.45+i*.725,b=a+.725;panel([[x+a,y+1.95-.1*Math.sin(i*Math.PI/4),z+1.1],[x+b,y+1.95-.1*Math.sin((i+1)*Math.PI/4),z+1.1],[x+b,y+1.35,z-1.1],[x+a,y+1.35,z-1.1]],i%2?palette.canvas:0x72694f);}
-    panel([[x-1.3,ground(x-1.3,z-1)+.03,z-1],[x+1.3,ground(x+1.3,z-1)+.03,z-1],[x+1.3,y+1.3,z-1],[x-1.3,y+1.3,z-1]],palette.trim);
-    for(const a of [-1.3,1.3]) {
-      const px=x+a*1.6,pz=z+1.8,py=ground(px,pz);
-      bar([x+a,y+1.9,z+1],[px,py+.07,pz],.009,rope,4);
-      bar([px,py-.03,pz],[px,py+.13,pz],.023,steel);
+    // A meal interrupted: open food sack, enamel plates, bread and a cold frying pan.
+    const foodY=ground(.65,1.45);
+    box(.38,.24,.29,0x9b8058,.65,foodY+.13,1.45,-.1);box(.31,.015,.22,dark,.65,foodY+.256,1.45,-.1);
+    for(const dx of [-.15,.15])box(.055,.09,.3,0xb9a37b,.65+dx,foodY+.28,1.45,-.1);
+    box(.19,.06,.11,0xb99a63,.58,foodY+.29,1.43,.15);
+    for(const [x,z]of [[.13,1.45],[.91,.97]]){
+      const h=ground(x,z);mesh(new THREE.CylinderGeometry(.14,.14,.025,12),0xb6b8a3,x,h+.03,z);
+      mesh(new THREE.CylinderGeometry(.116,.116,.014,12),0x7c8274,x,h+.049,z);
+      box(.13,.065,.08,0xb49a65,x-.025,h+.081,z,.2);bar([x+.15,h+.034,z-.09],[x+.15,h+.034,z+.08],.009,steel,4);
     }
-    bar([x-1.45,y+1.97,z+1],[x+1.45,y+1.97,z+1],.045,wood);
-    box(1.8,.12,.66,0x625e43,x,y+.37,z);box(.37,.12,.53,0x9b917a,x-.62,y+.5,z);
-    for(const a of [-.75,.75])for(const b of [-.24,.24])bar([x+a,y,z+b],[x+a,y+.34,z+b],.035,wood);
+    const panY=ground(-.65,.93);mesh(new THREE.CylinderGeometry(.18,.16,.045,12),steel,-.65,panY+.04,.93);mesh(new THREE.CylinderGeometry(.15,.15,.012,12),dark,-.65,panY+.066,.93);bar([-.8,panY+.05,.94],[-1.12,panY+.052,1.07],.024,dark);
+    for(const x of [-.5,-.18]){const h=ground(x,1.35);mesh(new THREE.CylinderGeometry(.051,.051,.006,8),0x473b2e,x,h+.123,1.35);const handle=mesh(new THREE.TorusGeometry(.04,.01,4,10),0xc6c7aa,x+.087,h+.068,1.35);handle.rotation.y=Math.PI/2;}
+    // The waiting chair faces the camp's open approach; its packed bag sits beside it.
+    const seatY=ground(1.65,.8);box(.29,.035,.2,0xb7b197,1.65,seatY+.528,.8,.1);
+    for(const dx of [-.26,.26]){bar([1.65+dx,seatY+.47,.9],[1.65+dx,seatY+.7,.82],.018,steel);box(.045,.045,.39,0x5a6250,1.65+dx,seatY+.72,.79);}
+    // GP-115: a low outcrop beyond the tents, beside an existing tree. The recess faces away from camp.
+    const sx=-13,sz=-19,sg=(x,z)=>ground(sx+x,sz+z);
+    const floor=Math.max(sg(-.8,-1.2),sg(.8,-1.2),sg(0,-.6));
+    const edge=[[-1.7,-.25],[-1.3,-1.05],[-.35,-1.43],[.8,-1.27],[1.57,-.45],[1.44,.62],[.42,1.04],[-.93,.89]];
+    const top=edge.map(([x,z],i)=>[sx+x,floor+.87+z*.19+(i%3)*.055,sz+z]);
+    const bottom=edge.map(([x,z],i)=>[sx+x*.92,z<-.3?floor+.46+(i%2)*.045:sg(x,z)-.2,sz+z*.94]);
+    const crown=[sx-.2,floor+1.43,sz+.1];
+    panel([...bottom].reverse(),0x41473c);
+    for(let i=0;i<edge.length;i++){
+      const j=(i+1)%edge.length;
+      panel([top[i],top[j],crown],[0x717368,0x666d60,0x7b7d70][i%3]);
+      panel([bottom[i],bottom[j],top[j],top[i]],i%2?0x666b5e:0x737568);
+      // Broken moss patches follow the crown's facets rather than a separate green cap.
+      if(i%3!==1){const mix=(a,b,t)=>a.map((v,k)=>v+(b[k]-v)*t);const a=mix(crown,top[i],.38),b=mix(crown,top[j],.73),c=mix(top[i],top[j],.62);for(const v of[a,b,c])v[1]+=.013;panel([a,b,c],i%2?0x626d45:0x72784c);}
+    }
+    const rock=(x,z,rx,ry,rz,color)=>{const h=sg(x,z),m=mesh(new THREE.DodecahedronGeometry(1,0),color,sx+x,h+ry*.33,sz+z);m.scale.set(rx,ry,rz);m.rotation.y=x*.6+z;return h;};
+    const left=rock(-1.2,-.65,.66,.67,.72,0x727668),right=rock(1.12,.23,.79,.68,.76,0x686e60);
+    for(const [x,z,r]of[[-1.75,.27,.25],[1.75,.65,.29],[.35,1.26,.25],[-1.4,-1.42,.14],[.85,-1.62,.13]])rock(x,z,r*1.2,r*.65,r,0x747568);
+    const groundPatch=(x,z,w,d,color,lift=.035)=>{
+      const nx=Math.ceil(w/.13),nz=Math.ceil(d/.13),positions=[];
+      const p=(i,j)=>{const a=x-w/2+w*i/nx,b=z-d/2+d*j/nz;return[sx+a,sg(a,b)+lift,sz+b];};
+      for(let i=0;i<nx;i++)for(let j=0;j<nz;j++)for(const v of[p(i,j),p(i+1,j+1),p(i+1,j),p(i,j),p(i,j+1),p(i+1,j+1)])positions.push(...v);
+      const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geo.computeVertexNormals();mesh(geo,color);
+    };
+    // A small ash-darkened sleeping hollow, only visible from the far side of the outcrop.
+    groundPatch(0,-.71,1.32,.55,0x484d3e,.032);groundPatch(-.04,-.75,1.13,.44,0x565d45,.051);
+    groundPatch(-.43,-.75,.22,.35,0x70715b,.074);
+    for(let i=0;i<4;i++)groundPatch(-.21+i*.2,-.75,.018,.35,0x444c39,.057);
+    const kitY=sg(.65,-.65);box(.2,.15,.16,0x505a3e,sx+.65,kitY+.09,sz-.65,.16);
+    box(.025,.16,.17,dark,sx+.65,kitY+.09,sz-.65,.16);
+    mesh(new THREE.CylinderGeometry(.05,.045,.15,8),0x626d51,sx+.73,sg(.73,-.87)+.083,sz-.87);
+    // Sparse bracken softens the joins, leaving the far-side crawl recess visible up close.
+    for(const [x,z,h]of[[-1.83,-.8,.62],[-1.55,1.12,.55],[1.65,.05,.69],[.76,.98,.5],[-.92,-1.6,.32]]){
+      const y=sg(x,z);for(let k=0;k<5;k++){const a=k*2.4,x2=x+Math.cos(a)*h*.58,z2=z+Math.sin(a)*h*.58;
+        bar([sx+x,y,sz+z],[sx+x2,y+h*.57,sz+z2],.009,0x59613b,4);
+        for(let j=1;j<4;j++){const t=j/4,bx=x+(x2-x)*t,bz=z+(z2-z)*t,by=y+h*.57*t,w=h*.2*(1-t*.6);for(const side of[-1,1])panel([[sx+bx,by,sz+bz],[sx+bx+Math.cos(a+side*1.1)*w,by+.05,sz+bz+Math.sin(a+side*1.1)*w],[sx+bx+(x2-x)*.21,by+h*.13,sz+bz+(z2-z)*.21]],j%2?0x5e713e:0x4f6235);}
+      }
+    }
+    collider(sx,sz+.3,1.2,Math.min(sg(-1,.5),sg(1,.5))-.2,floor+1.43-Math.min(sg(-1,.5),sg(1,.5))+.2);
+    collider(sx-1.2,sz-.65,.61,left-.2,.95);collider(sx+1.12,sz+.23,.72,right-.2,.96);
+  } else {
+    // GP-111: a repeatedly repaired trapper cabin in the original shelter footprint.
+    // Keep the old collider and random stream: this is static scenery, not a new interior.
+    const x=-2.9,z=-2.6,y=Math.max(ground(x-1.3,z-1),ground(x+1.3,z+1));
+    const aged=[0x686451,0x756b54,0x5e5948,0x82745b,0x625b49], iron=0x363b37;
+    const nail=(a,b,c)=>box(.025,.025,.012,iron,a,b,c);
+    const shoe=(a,b,c,r=.13)=>{const h=mesh(new THREE.TorusGeometry(r,.025,4,14,Math.PI*1.5),iron,a,b,c);h.rotation.z=Math.PI*.75;for(const s of [-1,1])nail(a+s*r*.77,b+r*.45,c+.025);};
+    for(const a of [-1.22,1.22])for(const b of [-.91,.91]){
+      const floor=ground(x+a,z+b);box(.23,y+2.05-floor,.23,0x514632,x+a,(floor+y+2.05)/2,z+b);
+      const rock=mesh(new THREE.DodecahedronGeometry(.23,0),0x6b6c60,x+a,floor+.1,z+b);rock.scale.set(1,.7,1);
+    }
+    // Close dark backing behind uneven boards prevents pinholes without bright interior lighting.
+    box(2.45,1.95,.045,dark,x,y+1.04,z-.93);
+    for(let i=0;i<12;i++){const a=-1.13+i*.205;box(.194,1.91,.09,aged[i%5],x+a,y+1.035,z-.97);for(let k=0;k<2;k++)box(.008,.19+(i%3)*.08,.008,0x514c3c,x+a-.045+k*.072,y+.48+k*.75+(i%4)*.055,z-1.019);}
+    for(const side of [-1,1]){
+      box(.055,1.95,1.86,dark,x+side*1.21,y+1.04,z);
+      for(let i=0;i<9;i++){box(.09,1.9,.197,aged[(i+2)%5],x+side*1.25,y+1.03,z-.82+i*.205);for(let k=0;k<2;k++)box(.008,.17+(i%3)*.09,.008,0x514c3c,x+side*1.299,y+.5+k*.86+(i%3)*.04,z-.85+i*.205+k*.055);}
+      for(const h of [.3,1.75])box(.12,.09,2.05,0x504936,x+side*1.29,y+h,z);
+      // Long diagonal replacement plank and an old shuttered slit window.
+      bar([x+side*1.32,y+.43,z-.7],[x+side*1.32,y+1.33,z+.68],.045,0x8c7b5e,4);
+      box(.028,.56,.58,iron,x+side*1.31,y+1.32,z-.26);
+      for(let k=0;k<3;k++)box(.06,.51,.17,aged[k],x+side*1.34,y+1.32,z-.44+k*.18);
+      for(const h of [1.17,1.5])box(.075,.045,.57,iron,x+side*1.375,y+h,z-.26);
+    }
+    box(2.46,1.96,.04,dark,x,y+1.05,z+.925);
+    for(let i=0;i<12;i++){const a=-1.13+i*.205;if(Math.abs(a)<.48)continue;box(.194,1.94,.08,aged[(i+1)%5],x+a,y+1.06,z+.98);for(const h of [.24,1.75])nail(x+a,y+h,z+1.027);for(let k=0;k<2;k++)box(.008,.17+(i%3)*.07,.009,0x514c3c,x+a-.045+k*.075,y+.5+k*.68+(i%3)*.08,z+1.024);}
+    // A recessed, shut plank door; no new interaction is implied.
+    for(let i=0;i<5;i++)box(.176,1.53,.045,i%2?0x564936:0x60513b,x-.36+i*.18,y+.89,z+.952);
+    for(const a of [-.51,.51])box(.11,1.76,.14,0x817258,x+a,y+.94,z+1.025);
+    box(1.13,.15,.14,0x817258,x,y+1.86,z+1.025);
+    for(const h of [.4,1.35]){box(.87,.07,.035,iron,x,y+h,z+.991);for(const a of [-.34,.34])nail(x+a,y+h,z+1.012);}
+    bar([x-.36,y+.43,z+.99],[x+.34,y+1.32,z+.99],.025,0x8a7657,4);
+    const latch=mesh(new THREE.TorusGeometry(.055,.012,4,10),iron,x+.28,y+.95,z+1.007);
+    shoe(x,y+1.87,z+1.112,.135);
+    // Earlier fasteners remain below the current horseshoe.
+    for(const a of [-.19,.18])box(.025,.025,.009,0x302e24,x+a,y+1.78,z+1.1);
+    for(let k=0;k<3;k++)box(.11,.48,.025,0x8a785c,x+.69+k*.15,y+.67+k*.025,z+1.038);
+    // Timber gables, overlapping split shakes, a canvas repair held by battens.
+    for(const b of [-1,1]){panel([[x-1.3,y+2.02,z+b],[x+1.3,y+2.02,z+b],[x,y+2.74,z+b]],0x5c5341);for(let k=-5;k<=5;k++){const a=k*.21,h=.66-Math.abs(a)*.55;box(.196,h,.025,aged[(k+5)%5],x+a,y+2.02+h/2,z+b*1.02);}bar([x-1.36,y+2.01,z+b],[x,y+2.79,z+b],.06,wood,4);bar([x,y+2.79,z+b],[x+1.36,y+2.01,z+b],.06,wood,4);}
+    for(const side of [-1,1])for(let row=0;row<3;row++)for(let k=0;k<7;k++){
+      const a=row*.49,b=(row+1)*.49+.05+.018*Math.sin(k*3+row),v=-1.19+k*.34,lift=(2-row)*.012;
+      panel([[x+side*a,y+2.79-a*.53+lift,z+v],[x+side*b,y+2.79-b*.53+lift,z+v],[x+side*b,y+2.79-b*.53+lift,z+v+.33],[x+side*a,y+2.79-a*.53+lift,z+v+.33]],aged[(k+row*2)%5]);
+    }
+    bar([x,y+2.82,z-1.26],[x,y+2.82,z+1.26],.07,0x514632,4);
+    panel([[x+.43,y+2.58,z-.87],[x+1.25,y+2.14,z-.87],[x+1.25,y+2.14,z-.05],[x+.43,y+2.58,z-.05]],0x687057);
+    for(const b of [-.84,-.08])bar([x+.4,y+2.6,z+b],[x+1.29,y+2.13,z+b],.023,0x8c7b5e,4);
+    // Cold stovepipe: this cabin has been empty for some time.
+    mesh(new THREE.CylinderGeometry(.08,.08,1.03,8),iron,x-.62,y+2.65,z-.55);
+    mesh(new THREE.ConeGeometry(.14,.11,8),iron,x-.62,y+3.2,z-.55);
+    for(let k=0;k<3;k++){const a=-.36+k*.35;const h=ground(x+a,z+1.25);box(.34,.09,.38,0x686454,x+a,h+.055,z+1.25);}
     collider(x,z,1,y,1.1);
     for(let row=0;row<2;row++)for(let i=0;i<3-row;i++){const a=2.35+i*.29+row*.14,h=ground(a,-2.8)+.15+row*.23;log([a,h,-3.35],[a,h,-2.35],.14);}
     const sy=ground(2.2,.7);mesh(new THREE.CylinderGeometry(.32,.4,.5,9),wood,2.2,sy+.25,.7);
     bar([2.2,sy+.5,.7],[2.4,sy+1.15,.7],.03,cut);box(.28,.16,.06,steel,2.16,sy+.57,.7,-.1);
     collider(2.2,.7,.4,sy,.5);
     crate(3.2,-1.2,.65,.2);jerrycan(3.8,-1.2,0x797052);
+    // A woodpile doubles as storage under a scarred outdoor repair bench.
+    const bench=ground(2.75,-2.8)+.91;
+    for(const a of [2.06,3.44])for(const b of [-3.09,-2.48])bar([a,ground(a,b),b],[a,bench,b],.043,0x584a35,4);
+    for(let k=0;k<4;k++)box(1.62,.065,.17,aged[k],2.75,bench,-3.045+k*.18);
+    for(const a of [2.14,3.35])for(const b of [-3.045,-2.505])box(.025,.01,.025,iron,a,bench+.038,b);
+    box(.36,.045,.23,0x94856b,2.4,bench+.055,-2.82,.16);
+    bar([2.76,bench+.045,-2.98],[3.04,bench+.05,-2.7],.024,0x947953,6);box(.19,.055,.07,iron,2.78,bench+.061,-2.97,-.5);
+    for(const a of [3.13,3.18,3.23])bar([a,bench+.05,-2.89],[a+.035,bench+.052,-2.76],.007,iron,4);
+    // Two stored traps on the cabin wall, with chain loops hanging below.
+    for(const a of [-.85,.86]){shoe(x+a,y+1.35,z+1.04,.16);box(.05,.22,.035,iron,x+a,y+1.24,z+1.052);box(.115,.08,.035,0x625d4c,x+a,y+1.32,z+1.074);for(const s of [-1,1])for(let k=0;k<2;k++)box(.04,.025,.03,steel,x+a+s*.11,y+1.31+k*.065,z+1.075);for(let k=0;k<4;k++){const r=mesh(new THREE.TorusGeometry(.025,.007,4,8),steel,x+a+.015*(k%2),y+1.09-k*.04,z+1.055);r.rotation.y=k%2?1:0;}}
+    // Repaired stool, water pail and a tool roll keep the route's low edges readable.
+    const stool=ground(-1.65,.4);for(const a of [-.15,.15])for(const b of [-.14,.14])bar([-1.65+a,stool,.4+b],[-1.65+a*.8,stool+.4,.4+b*.8],.027,wood,5);
+    box(.45,.07,.4,0x817258,-1.65,stool+.43,.4);box(.045,.025,.42,iron,-1.57,stool+.48,.4);
+    const by=ground(-1.15,-.7);mesh(new THREE.CylinderGeometry(.16,.115,.28,10),0x747369,-1.15,by+.15,-.7);mesh(new THREE.CylinderGeometry(.14,.14,.01,10),dark,-1.15,by+.295,-.7);
+    const handle=mesh(new THREE.TorusGeometry(.155,.011,4,12,Math.PI),iron,-1.15,by+.3,-.7);
+    roll(3.19,ground(3.2,-1.2)+.67,-1.2,0x7e7258,.2);
     const y2=ground(-.8,2);log([-1.5,y2+.18,2],[-.1,y2+.18,2],.18);lantern(-1.65,ground(-1.65,2.1),2.1);
   }
   // A few deliberate details around the hearth, with a clear route through camp.

@@ -1,6 +1,6 @@
 // t132 - GB-87 (P-56, D-54): Fog Night. Night 14's plan carries mod 'fog'; it shows in wavePreview.night.mod and
 // getWaveDirectorState().mod from night 14's prep (named the prep before the night) through its wave, and is null on
-// every other night 1-40 (the endless nights that reuse 14's base included), cleared by the next prep. Totals and
+// every other night 1-40 but 17, GB-93's Swarm Night (the endless nights that reuse 14's base included), cleared by the next prep. Totals and
 // tricks are untouched, and CU-77's night-cleared kind for 14 is now 'fog'.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -11,8 +11,8 @@
     T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
     // The plan table.
     const bad = [];
-    for (let d = 1; d <= 40; d++) { const m = T.nightPlanFor(d).mod || null; if ((d === 14) !== (m === 'fog') || (d !== 14 && m !== null)) bad.push(d + ':' + m); }
-    ok(bad.length === 0, 'nightPlanFor: mod fog on 14 and null on every other night 1-40 ' + bad.join(' '));
+    for (let d = 1; d <= 40; d++) { const m = T.nightPlanFor(d).mod || null; if ((d === 14) !== (m === 'fog') || (d !== 14 && d !== 17 && m !== null)) bad.push(d + ':' + m); }   // GB-93: 17 is Swarm Night (t166)
+    ok(bad.length === 0, 'nightPlanFor: mod fog on 14 and null on every other night 1-40 but 17 (Swarm Night, t166) ' + bad.join(' '));
     const p14 = T.nightPlanFor(14);
     ok(p14.total === 600 && p14.trick === 'lake-surge' && p14.pushes === 5 && p14.rest === true, 'night 14 keeps its total 600, trick lake-surge, 5 pushes, rest');
     const p22 = T.nightPlanFor(22);

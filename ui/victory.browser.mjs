@@ -37,17 +37,17 @@ try {
     catch (error) { console.error('boot diagnostics', errors, await page.evaluate(()=>({load:window.DWLoad?.snapshot?.(),probe:!!window.gp64Probe,body:document.body.innerText.slice(-800)}))); throw error; }
     await page.evaluate(()=>DWOpening.dismissForTesting());
     await page.waitForFunction(()=>document.getElementById('opening').hidden);
-    if (night===21) assert.match(await page.locator('#menuBestRecord').textContent(),/Got out on night 20/);
+    if (night===21) assert.match(await page.locator('#menuBestRecord').textContent(),/Heron took you out on night 20/);
     await page.fill('#playerName','Victory Tester');await page.click('#modeHunt');
     await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
     await page.evaluate(({night,hot})=>gp64Probe.win(night,hot),{night,hot});
     assert(await page.locator('#win.show.victory').count());
     assert.equal(await page.locator('#win h2').textContent(),'Evacuated');
     assert.equal(await page.locator('#winMsg .reason').textContent(),hot
-      ? `Got out on night ${night}, with the dead still on the dock.` : `Got out on night ${night}.`);
+      ? `Heron took you out on night ${night}, with the dead still on the dock.` : `Heron took you out on night ${night}.`);
     assert.equal(await page.locator('#winMsg .st').count(),5);
     assert.match(await page.locator('#winMsg .survivors-aboard').textContent(),/Survivors aboard: 0/);
-    assert.match(await page.locator('#winMsg .best-record').textContent(),new RegExp(`Got out on night ${night}`));
+    assert.match(await page.locator('#winMsg .best-record').textContent(),new RegExp(`Heron took you out on night ${night}`));
     assert.equal(await page.locator('#winMsg .deathlog').count(),0);
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('tt_best_run')).escapeNight),night);
     assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('tt_best_run')).hotEscapeNight),hot?night:0);

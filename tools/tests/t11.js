@@ -2,15 +2,8 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   // Play refuses with no callsign; wait until prep so scripted builds see a live match.
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
   T.unlockAllBuilds(); T.addCash(100000);
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
   const p = T.player.position; const gx = T.gridIndex(p.x) + 3, gz = T.gridIndex(p.z);

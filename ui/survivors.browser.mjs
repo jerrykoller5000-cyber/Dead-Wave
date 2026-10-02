@@ -40,6 +40,7 @@ try {
   await page.fill('#playerName','Survivor Tester');await page.click('#modeHunt');
   await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
   await page.evaluate(()=>gp69Probe.board());
+  await page.getByRole('button',{name:'Fieldwork',exact:true}).click();
   assert.match(await page.locator('.bounty-post').textContent(),/Someone lit a fire at the trapper's camp/);
   for(const width of [1280,390]) {
     await page.setViewportSize({width,height:width===390?844:720});

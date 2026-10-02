@@ -67,3 +67,42 @@ export function pulseAt(word, t) {
   const glow = Math.min(1, v / 0.15, (PULSE.ON - v) / 0.3);
   return { stone: word[i], glow: Math.max(0, glow) };
 }
+
+// CL-111 (docs/specs/secret-quest.md §6): the rune finish for a gun's furniture, the true ending's reward. Dark oiled
+// wood with its grain, the eight glyphs etched across it in staggered rows; the grooves dark by day and the Pit's
+// cold light by night (`level` 0..1, the carvings' own glow level). A seamless tile, the same every time.
+//   paintRuneFinish(ctx, size, level)   the colour tile
+//   paintRuneGlow(ctx, size, level)     the same glyphs alone on black, for the emissive map (night's faint light)
+export const RUNE_FINISH = Object.freeze({ WOOD: '#3b2c21', GRAIN: '#47362a', GRAIN_DARK: '#291f17', GROOVE: [22, 17, 13], GLOW: [158, 238, 255] });
+const lerpRGB = (a, b, u) => 'rgb(' + a.map((v, i) => Math.round(v + (b[i] - v) * Math.max(0, Math.min(1, u)))).join(',') + ')';
+function eachRuneSpot(size, f) {
+  const cell = size / 4;   // four rows of four, each row half a cell along from the last: every face of a stock gets some
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+    const k = (r * 3 + c * 5 + r * r) % RUNE_COUNT, x = (c + 0.5 + (r % 2) * 0.5) * cell, y = (r + 0.5) * cell;
+    for (const dx of [0, -size, size]) if (x + dx > -cell && x + dx < size + cell) f(k, x + dx, y, cell * 0.58);
+  }
+}
+export function paintRuneFinish(ctx, size, level = 0) {
+  const F = RUNE_FINISH;
+  ctx.fillStyle = F.WOOD; ctx.fillRect(0, 0, size, size);
+  let s = 1234567;
+  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+  for (let i = 0; i < 36; i++) {
+    const y0 = rnd() * size, amp = (1 + rnd() * 3) * size / 256, ph = rnd() * 6.283;
+    ctx.strokeStyle = i % 3 ? F.GRAIN : F.GRAIN_DARK; ctx.lineWidth = (0.6 + rnd() * 1.6) * size / 256;
+    for (const dy of [0, -size, size]) {
+      ctx.beginPath();
+      for (let x = 0; x <= size; x += size / 64) { const y = y0 + dy + Math.sin(x / size * Math.PI * 4 + ph) * amp; if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.stroke();
+    }
+  }
+  eachRuneSpot(size, (k, x, y, sz) => {
+    drawGlyph(ctx, k, x + 1.5 * size / 256, y + 1.5 * size / 256, sz, { color: 'rgba(255, 228, 196, 0.28)', width: 2.6 });   // the cut's lit edge
+    drawGlyph(ctx, k, x, y, sz, { color: lerpRGB(F.GROOVE, F.GLOW, level), width: 2.2 });
+  });
+}
+export function paintRuneGlow(ctx, size, level = 0) {
+  ctx.fillStyle = '#000'; ctx.fillRect(0, 0, size, size);
+  const g = Math.max(0, Math.min(1, level));
+  eachRuneSpot(size, (k, x, y, sz) => drawGlyph(ctx, k, x, y, sz, { color: lerpRGB([0, 0, 0], RUNE_FINISH.GLOW, g), width: 2.2 }));
+}

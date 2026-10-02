@@ -1,12 +1,14 @@
-// tools/shoot.mjs — before-and-after screenshots of named views.
+// tools/gunsheet.mjs — the guns' review sheet, on tools/shoot.mjs's harness.
 //
-//   node tools/shoot.mjs                     every view
-//   node tools/shoot.mjs hq river-mouth      just those
-//   node tools/shoot.mjs --list              names only
-//   node tools/shoot.mjs --out before        write to "Claude outputs/before"
-//   node tools/shoot.mjs --show              watch it work in a real window
+//   node tools/gunsheet.mjs                     every view
+//   node tools/gunsheet.mjs side-m4 lineup      just those
+//   node tools/gunsheet.mjs --list              names only
+//   node tools/gunsheet.mjs --out review/x/v1   write there
+//   node tools/gunsheet.mjs --compare A B       how far two sets moved
+//   node tools/gunsheet.mjs --page x.html       shoot another copy of the game (a before build)
 //
-// PNGs land in "Claude outputs/shots/<view>.png" at 1280x720.
+// PNGs land in "Claude outputs/shots/<view>.png" at 1280x720. The suppressor and camo views (CL-95, CL-97)
+// use the six-gun rack; lineup, side-* and three-* (CU-81) show every gun, the blades and the M240, bare.
 //
 // Shots are taken from the title screen, not from a running match. The whole world is built
 // before the title appears, so every view is reachable there, and it keeps a run of shots
@@ -49,12 +51,65 @@ const RACK = `(() => {
   }
   return window.__rack;
 })()`;
+// CU-81: every gun and the blades on a shelf of their own, away from the rack. lineup() lays them out four rows by
+// three; solo(key, 'side' | 'three') frames one by its bounding box, from its right side or from ahead and above.
+const ALL = ['m4', 'ak', 'aa12', 'shotgun', 'sniper', 'minigun', 'launcher', 'flamer', 'chainsaw', 'uzi', 'pistol', 'revolver'];
+const SHELF = `(() => {
+  if (!window.__shelf) {
+    const T = TT, THREE = T.THREE;
+    const base = new THREE.Vector3(-40, T.sampleHeight(-40, -70) + 34, -70);
+    const items = {};
+    for (const k of ${JSON.stringify(ALL)}) {
+      const src = T.weaponMeshes[k], g = src.clone(true);
+      const fx = new Set([src.userData.flash, src.userData.laser, src.userData.flare].filter(Boolean).map((o) => o.material));
+      g.traverse((o) => { o.visible = o.name !== 'suppressor' && !(o.material && fx.has(o.material)); if (o.isLight) o.intensity = 0; });
+      g.position.copy(base); g.visible = false; T.scene.add(g); items[k] = g;
+    }
+    let kn = T.knifeMesh ? T.knifeMesh() : null;
+    if (!kn) T.scene.traverse((o) => { if (!kn && o.userData && o.userData.knifeModel) kn = o; });
+    const m240 = T.spawnBuild ? T.spawnBuild('m240', base.x, base.z + 6) : null;
+    if (m240 && m240.mesh) { const g = m240.mesh; g.position.copy(base); g.visible = false; items.m240 = g; }
+    for (const [k, part] of [['knife', 'knifeModel'], ['machete', 'macheteModel']]) {
+      if (!kn || !kn.userData[part]) continue;
+      const g = kn.userData[part].clone(true); g.traverse((o) => { o.visible = true; }); g.visible = false;
+      g.position.copy(base); T.scene.add(g); items[k] = g;
+    }
+    const hideAll = () => { for (const g of Object.values(items)) g.visible = false; };
+    const box = new THREE.Box3(), c = new THREE.Vector3(), s = new THREE.Vector3();
+    const frame = (g, dir, fov) => {
+      g.updateMatrixWorld(true); box.makeEmpty(); g.traverseVisible((o) => { if (o.isMesh) box.expandByObject(o); }); box.getCenter(c); box.getSize(s);
+      const span = Math.max(s.z, s.y * 1.78, 0.3);
+      const d = span * 0.62 / Math.tan(fov * Math.PI / 360) / 1.78 + 0.25;
+      const n = dir.clone().normalize();
+      return { x: c.x + n.x * d, y: c.y + n.y * d, z: c.z + n.z * d, tx: c.x, ty: c.y, tz: c.z, fov };
+    };
+    window.__shelf = {
+      items,
+      lineup() {
+        hideAll(); TT.dressGuns({ guns: {} });
+        ${JSON.stringify(ALL)}.forEach((k, i) => { const g = items[k]; g.visible = true; g.rotation.set(0, 0, 0); g.position.set(base.x, base.y + 0.95 - Math.floor(i / 3) * 0.62, base.z + 2.2 - (i % 3) * 2.2); });
+        return { x: base.x + 4.3, y: base.y + 0.02, z: base.z, tx: base.x, ty: base.y, tz: base.z, fov: 50 };
+      },
+      solo(k, view) {
+        hideAll(); TT.dressGuns({ guns: {} });
+        const g = items[k]; if (!g) return null;
+        g.visible = true; g.rotation.set(0, 0, 0); g.position.copy(base);
+        return view === 'side' ? frame(g, new THREE.Vector3(1, 0.02, 0), 34) : frame(g, new THREE.Vector3(0.75, 0.42, 0.62), 34);
+      }
+    };
+  }
+  return window.__shelf;
+})()`;
 const VIEWS = [
   ['guns-all', `(() => { const R = ${RACK}; Object.keys(R.groups).forEach((k, i) => { const g = R.groups[k]; g.visible = true; g.position.set(R.base.x, R.base.y + 1.1 - Math.floor(i / 2) * 1.1, R.base.z - 1.0 + (i % 2) * 2.1); }); const b = R.base; return { x: b.x + 4.6, y: b.y + 0.1, z: b.z + 0.2, tx: b.x, ty: b.y, tz: b.z + 0.2, fov: 50 }; })()`],
   // CL-97 part 2: the same rack with camo on the furniture (one pick per gun), then put back bare.
   ['guns-camo', `(() => { const R = ${RACK}; TT.dressGuns({ guns: { m4: 'multicam', ak: 'tigerStripe', sniper: 'dpmDesert', shotgun: 'm81', uzi: 'marpat', pistol: 'flecktarn' } }); Object.keys(R.groups).forEach((k, i) => { const g = R.groups[k]; g.visible = true; g.position.set(R.base.x, R.base.y + 1.1 - Math.floor(i / 2) * 1.1, R.base.z - 1.0 + (i % 2) * 2.1); }); const b = R.base; return { x: b.x + 4.6, y: b.y + 0.1, z: b.z + 0.2, tx: b.x, ty: b.y, tz: b.z + 0.2, fov: 50 }; })()`],
   ['gun-m4-camo', `(() => { const R = ${RACK}; TT.dressGuns({ guns: { m4: 'multicam' } }); for (const [key, g] of Object.entries(R.groups)) { g.visible = key === 'm4'; g.position.copy(R.base); } const b = R.base; return { x: b.x + 2.1, y: b.y + 0.03, z: b.z + 0.3, tx: b.x, ty: b.y, tz: b.z + 0.3, fov: 40 }; })()`],
   ...GUNS.map((k) => ['gun-' + k, `(() => { const R = ${RACK}; for (const [key, g] of Object.entries(R.groups)) { g.visible = key === '${k}'; g.position.copy(R.base); } const b = R.base; const small = '${k}' === 'uzi' || '${k}' === 'pistol'; const zc = small ? 0.12 : 0.3; const d = small ? 1.45 : 2.1; return { x: b.x + d, y: b.y + 0.03, z: b.z + zc, tx: b.x, ty: b.y, tz: b.z + zc, fov: 40 }; })()`]),
+  ['lineup', `(() => { const R = ${SHELF}; return R.lineup(); })()`],
+  ['lineup-rune', `(() => { const R = ${SHELF}; const spec = R.lineup(); TT.runeFinishDbg.unlock(); const g = {}; for (const k of ${JSON.stringify(ALL)}) g[k] = 'rune'; TT.dressGuns({ guns: g }); return spec; })()`, { worldTime: 0.0 }],
+  ...[...ALL, 'knife', 'machete', 'm240'].map((k) => ['side-' + k, `(() => { const R = ${SHELF}; return R.solo('${k}', 'side'); })()`]),
+  ...[...ALL, 'knife', 'machete', 'm240'].map((k) => ['three-' + k, `(() => { const R = ${SHELF}; return R.solo('${k}', 'three'); })()`]),
 ];
 
 
@@ -138,7 +193,7 @@ if (argv.includes('--compare')) {
 const show = argv.includes('--show');
 const outIdx = argv.indexOf('--out');
 const outDir = outIdx >= 0 ? argv[outIdx + 1] : path.join('Claude outputs', 'shots');
-const wanted = argv.filter((a, i) => !a.startsWith('--') && !(outIdx >= 0 && i === outIdx + 1));
+const wanted = argv.filter((a, i) => !a.startsWith('--') && !(outIdx >= 0 && i === outIdx + 1) && !(argv[i - 1] === '--page'));
 const views = wanted.length ? VIEWS.filter(([n]) => wanted.includes(n)) : VIEWS;
 if (!views.length) {
   console.error('No views matched. Try --list.');
@@ -152,7 +207,9 @@ const failures = [];
 try {
   // raf=timer keeps the frame loop running even when the window is not in front, and
   // renderer=webgl is the fallback path: headless Chrome has no WebGPU adapter.
-  const url = `${server.origin}/index.html?debug=1&raf=timer&renderer=webgl`;
+  const pgIdx = argv.indexOf('--page');
+  const pageFile = pgIdx >= 0 ? argv[pgIdx + 1] : 'index.html';
+  const url = `${server.origin}/${pageFile}?debug=1&raf=timer&renderer=webgl`;
   console.log(`shoot: ${browser.exe}\nshoot: ${url}`);
   const t0 = Date.now();
   await page.goto(url);

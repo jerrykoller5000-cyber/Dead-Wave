@@ -1,15 +1,71 @@
 # ChatGPT
 
-state: active
+state: idle
 model: GPT-6 (exact variant unsure)
-task: GP-70 Secret quest model, radio Tune and true-ending UI
-touching: ui/quest.js, ui/quest.test.mjs, ui/strings.js, ui/hq-briefing.js, index.html (quest UI adapters)
-since: 2026-09-30T22:57Z
-next: waits on CL-92
+task: —
+touching: —
+since: 2026-10-02T06:19Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-09-30-chatgpt-GP-93.md
+last-report: handoffs/2026-10-02-chatgpt-GP-122.md
 
 ## Notes
+
+2026-10-02 GP-122: Jerry's church/cemetery cleanup implemented. Church farther back, yard rectangle protects all six original plots and burial approach; spaced old graves/ruins/coffins, boundary/bench moved, foliage cleared. review/coldwater/layout/index.html has six comparisons. Real renderer six burial setups PASS, plot rays 90/90 clear (baseline 13 blocked), builder1/1, original trees/paths/sites/plot coords and unrelated history parity PASS, gallery/mobile PASS. Full suite/independent QA/full cinematic playback/load FPS pending; no git. Handoff GP-122.
+
+2026-10-02 GP-121: Cordon gate/checkpoint and inner/outer approaches implemented. New world/cordon-checkpoint.js; narrow index import/history callback invoked after map drums. Inner dirt road82m round cave to relay trail, outer tyre tracks70m along hillside; two static draws, six new solids. Gate/430trees/original paths/sites/solids retained. Route minclear2.35m/trees2.68m, t52 17PASS, deterministic/terrain sampler tests and seven-view gallery/mobile PASS. review/cordon/index.html. Full suite/independent QA/load FPS pending; shovel-under-overlay untested; no git. history-props.js reserved but unchanged.
+
+2026-10-02 GP-120: Medical supply wreck art implemented: collapsed front/missing wheel and ruined engine, split bonnet, Threshold markings, burst medical cargo, stretcher and ground scrapes. Seven comparisons review/medical-wreck/index.html. Actual-renderer t52 17 PASS before/after, six geometry cases/fake THREE, exact sites/solids/utility geometry parity and gallery/mobile PASS. Full suite/independent QA/load FPS pending. Only medical landmark variant and buildWreck label planes changed; existing keyed strings reused. No git.
+
+2026-10-02 GP-119: Sato relay art implemented: mast/rack repairs, cable reel, grounding strap into rock, dropped headset/tool roll, missing versus installed fuse, boots work mat. Seven comparisons at review/relay/index.html. Actual-renderer t52 17 PASS, pickup/reset/single mat PASS, three terrain cases/fake THREE, sites/solids and other builders/models unchanged, gallery/mobile PASS. Independent QA/full suite/load FPS pending; no git. Source baselines saved in review/relay; --before captures current build, do not overwrite originals.
+
+2026-10-02 GP-118: Jerry explicitly authorized direct sightline resolution. Tower now (-25,-125), about63m onto natural overlook, same model/height. Existing pulse beams ignore atmospheric fog only, retain depth test and deck/night gate. 40/40 rays vs baseline0/40, real keyboard climb, five pulses/off-deck gate, other POI/cave/Pit parity and six-view gallery/mobile PASS. 423/430 tree sites retained; trail rerouted automatically. Latest review/tower/sightline/index.html; prior Claude sightline request superseded. Independent QA/full suite/FPS pending; no git.
+
+2026-10-02 GP-117: Brandt tower art implemented: weathered/repaired deck, iron fittings/cuffs seated to posts, binocular case/plotting tools, ammo tin/brass and keyed west-rail clue. Seven comparisons at review/tower/index.html. 14 copy tests, three geometry cases/fake THREE, production tower/deck/ladder/solids/HP/lantern parity, real WebGPU and gallery/mobile PASS. Existing trees/ridge obscure lake stones; Claude sightline request sent. Independent QA/full suite/FPS pending. No git.
+
+2026-10-02 GP-116: Jerry dock overhaul implemented: weathered/repaired boards, reinforced end, ropes, flare case, keyed crossed-out Heron timetable and flooded/broken rowboat. review/dock/index.html has six comparisons. 14 copy tests, six geometry cases/fake THREE, production deck+solids equality both sides, real WebGPU and gallery/mobile PASS. Only buildDock visuals in index; Heron/extraction/terrain/RNG untouched. Independent QA/full suite/FPS pending, no git.
+
+2026-10-02 GP-115: Jerry explicitly changed Pike to male; current story/name/pronouns corrected, name Spc. Pike, existing appearance retained. Rebuilt GP-114 shelter as low outcrop at camp-local (-13,-19) beside existing tree, opening away from tents. Latest review/hikers/v2/index.html. 20 focused units, nine geometry cases, distance/story assertions, ten real-renderer views and gallery/mobile PASS. Main camp/other camps/RNG retained; three shelter solids relocated. Independent QA/full suite/FPS pending. No git; rescue hooks unchanged.
+
+2026-10-02 GP-114: Hikers camp art implemented: tent repairs/boots/bedding, interrupted meal, waiting chair/pack and grounded Pike rock shelf with ash/mat/military kit. review/hikers/index.html has seven matched comparisons. History 1/1, nine geometry cases, real WebGPU and gallery/mobile PASS. Original RNG/layout/collider prefix retained; three rear shelf solids added; ranger/trapper hashes identical. Independent QA/survivor approach/full suite/FPS pending. No index or git edits.
+
+2026-10-02 GP-113: Jerry's mine arch revision implemented: outer segmented beams, iron joints and infill cover black margins; central doorway retained. Latest comparison review/mine/arch/index.html. History 1/1, ten mine cases, arch clearance/fake THREE, real WebGPU and gallery/mobile PASS. Index only passes real mouth profile to timber builder; no cave/physics changes. Independent QA/full suite/FPS pending; no git. GB-123 shoulder patch review acknowledged LATER with GP-106 acceptance.
+
+2026-10-02 GP-112: Old mine/hikers art implemented; seven matched comparisons at review/mine/index.html. History 1/1, ten geometry/clearance cases, actual WebGPU layout and gallery/mobile PASS. Bright bar cuts/cutters, repaired timber, legible IRON BELOW, packs/headlamp and rope routed around mouth boulder. Only index change is cache-local ropePath. Cave/terrain/colliders/triggers untouched; independent QA/full suite/FPS pending. No git; CL-114 copy still separate follow-up.
+
+2026-10-02 GP-111: Trapper cabin/workbench/belongings and reinforced iron-lined cellar implemented. Seven matched comparisons in review/trapper/index.html. Builder 1/1, nine deterministic campsite cases, actual WebGPU placement/collider checks and gallery/mobile PASS. No index edit; old RNG/colliders/history layout retained; ranger/hiker geometry identical. Static scenery, no new door/interior. Independent QA/full suite/FPS pending; no git. CL-114 copy remains a separate acknowledged follow-up.
+
+2026-10-02 GP-110: Coldwater church, three homes, chimney and iron-banded graves rebuilt; review/coldwater/index.html has 10 before/after comparisons. History builder 1/1, 25 seeded geometry cases, actual WebGPU 12 views and gallery controls/mobile checks PASS. Exact history placements/reservations and legacy RNG retained. Shared index edits only optional child-geometry terrain seating and stable house variant:k. Independent QA/full suite/FPS pending; no git. CL-114 six string keys acknowledged LATER for separate copy task; crew next empty.
+
+2026-10-02 GP-109: Jerry’s non-HQ world/story photo review complete: review/world-story/index.html has 103 photos with individual observations/recommendations, 11 categories, filters, enlarge and print. Underground/Heron staged views explicitly labeled. Photo capture and gallery checks pass; canvas syntax passes, native host unverified. No production game edits, no git; recommendations are not implementation orders. Crew next says queue empty.
+
+2026-10-02 GP-108: Pickup now visibly inoperable (missing tire/canted hub, open bent bonnet, gutted engine bay, broken lamp/cracked glass). review/ranger-camp now v2; history 1/1, layout/fake THREE and real WebGPU PASS. Independent QA/full suite/FPS pending. No index/camp/gameplay changes, no git.
+
+2026-10-02 GP-107: Ranger SAR camp/truck overhaul implemented; review/ranger-camp before/after. History builder, deterministic collider/RNG parity, fake THREE truck and real WebGPU pass. Exact world layout/collision retained; child truck geometry seated to hillside. Independent QA/full suite/FPS pending. Armory CL-113 copy acknowledged LATER; GP-84 contract blocked. No git.
+
+2026-10-02 GP-106: Marine body rebuild is default; previous via legacyBody for comparison. Exact rig/wardrobe hooks retained.29 tests and renderer checks pass. Review: review/marine-base/ (stills and walk/run clips). Both-body crouch grounding finding sent to Claude; full suite/QA/FPS pending. GP-84 runtime contract remains blocked. No git.
+
+2026-10-02 GP-105: Jerry face/balaclava revision implemented. Tapered survivor heads, fitted Brandt beard, all skull-mask pieces removed; player cloth hood stays on and takes existing mask camos. Hooks/schema/rig/core/camo untouched. 17 focused checks plus production WebGPU front/three-quarter/profile/camo/helmet/goggles pass. Shots gp105; handoff GP-105. Independent QA/full suite/FPS remain pending; no git. Pending separate copy requests: Okafor medic/Sato fuse correction and CU-82 lockdown keys.
+
+2026-10-02 GP-104: Jerry’s screenshot-directed revision implemented: front-right panel is textless smashed/sparking terminal; rear only THRESHOLD / LOCKDOWN / DO NOT OPEN.15 focused checks passed (history-props needs bare-three Node hook to vendor build), real WebGPU views and moving/bounded sparks pass. Handoff GP-104; shots gp104. Front mural/designation and interactions untouched. Independent QA/full-suite/perf pending; no git.
+
+2026-10-01 GP-103: Jerry’s Gravepost Threshold plate and painted-over NIGHTGLASS cabinet markings implemented;14 text tests and actual WebGPU before/after facade/detail shots pass. Handoff GP-103, shots gp103. New lore is in chat attachment; Claude asked to reconcile. Leaflet/dead soldier deferred. No gameplay/mural changes or git. Independent QA/full-suite/perf remain unverified.
+
+2026-10-01 GP-102: skull intake overhaul implemented and checked out for review. Deep hatch, sliding tray, specimen mounts, lettering, exact receipt readout and amber processing lamp.18 focused tests pass; actual WebGPU two deposits with exact delayed payouts and idle/process/paid/night shots pass. Claude outputs/shots/gp102; handoff GP-102. No banking/lockdown/Armory changes; Cursor CU-82 and Claude CL-113 informed. Independent QA/full suite/performance unverified under D-71. No git.
+
+2026-10-01 GP-101: Jerry’s alarm menu/cabinet overhaul is implemented. 41 focused units plus real WebGPU 1280/390, alarm launch, component relay/extraction and disabled guards PASS. Shots: Claude outputs/shots/gp101. Independent QA/full suite/performance remain unverified; D-71 no long runs. Scoped HQ model materials/sequence preserved. Handoff GP-101 has navigation-selector review details. Pending Okafor copy correction remains a separate task. No git.
+
+2026-10-01 23:00Z: GP-100 Jerry-direct mural request implemented: menu motto removed, DEADWALKERS above skull/crossed rifles and motto below in same canvas. WebGPU visual proof and14 copy tests pass. Handoff GP-100; independent QA pending. Claude Okafor medic-line correction acknowledged LATER, separate task needed. GP-84 dependency now appears landed; re-read board/contracts next session. No git.
+
+2026-10-01 16:18Z: GP-81 new death copy/pickups and Choir practice badge implemented (badge total16), GP-98 earned rune choice in CIF implemented, GP-99 Cordon/trailhead E cards implemented. Each has its own handoff and real WebGPU proof. Final UI/game239/239; independent QA/full-suite gates pending, no --done overclaim. GP-84 waits GB-108; Grokbot currently on GB-107. CL-100 tag/door/shard text stays GP-84. AG-49 survivor screenshots received; asked QA to identify any reproducible non-debug obstruction. No git or measurement pass.
+
+2026-10-01 latest: GP-97 CIF overhaul implemented; actual WebGPU checks pass desktop/390, locks, scoped edits/save/reset, keyboard and separate Armory. UI/game237/237; focused24/24. core/camo and wardrobe hashes unchanged. Report handoffs/2026-10-01-chatgpt-GP-97.md; independent visual/full-suite acceptance pending. GP-81 waits CL-92/CL-93; GP-84 waits GB-108. No git or measurement pass (D-71).
+
+2026-10-01 latest: Claude closed GP-70 and approved GP-83 scope; GP-83 now checked out DONE (8/8). GP-95 talk/rescue card and Nobody left behind are implemented against GB-116; 234/234 UI/game checks then focused31/31 including new production-record test. Visual acceptance/full suite pending with Antigravity/Cursor; report handoffs/2026-10-01-chatgpt-GP-95.md. No git. CL-111/GB-119 own quest rewards, CU-80 owns haul wiring.
+
+2026-10-01 latest: GP-95 independent story copy/title prepared per Claude clarification relayed by Jerry. Canonical Okafor/Brandt/Pike dialogue keys, talk labels, Nobody left behind wording and title motto landed; 14 catalogue checks pass. Full GP-95 awaits GB-116 talk/aboard hooks and badge award wiring. See handoffs/2026-10-01-chatgpt-GP-95-copy.md; QA title shots requested.
+
+2026-09-30 latest: GP-94 Story v2 copy DONE; GP-70 quest UI passes real WebGPU but BLOCKED on rune finish/dock keepsake and owner world/combat integration. GP-83 seeded haul/tags models ready but NOT imported: needs approved inventory/E/payout adapters; see handoff. GP-96 repairs all stale fixtures: UI/game 230/230 pass; victory and existing field-note real WebGPU checks pass at 1280/390. No git or long sims (D-71). Next says GP-81 waits CL-92; GP-95 waits GB-116, GP-84 waits GB-108/GP-83. Check owner replies next session.
 
 2026-09-30 latest: GP-68 stale active entry reconciled using its existing completion report. GP-93 dressing-room copy implemented: 56 keys, 16 focused tests pass. Awaiting standard visual/performance and full-suite verification; see GP-93 handoff. crew.mjs next says GP-81 waits on CL-92. No git.
 

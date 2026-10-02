@@ -4,16 +4,8 @@
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const f2 = (n) => (n == null || !Number.isFinite(n)) ? 'n/a' : Number(n).toFixed(2);
   try {
-    const nameEl = document.getElementById('playerName');
-    if (nameEl) nameEl.value = 'GB5Marine';
-    document.getElementById('modeHunt').click();
-    let started = false;
-    for (let i = 0; i < 80; i++) {
-      await wait(200);
-      if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-    }
-    ok(started, 'match reached prep');
-    if (!started) return out.join('\n');
+    await startMatch(T, 'GB5Marine');
+    ok(T.getPhase() === 'prep', 'match reached prep');
 
     const p = T.player.position;
     {

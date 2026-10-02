@@ -9,15 +9,8 @@
     return T.builds.find(b => b.type === 'wall' && b.gx === gx && b.gz === gz && (b.level | 0) === lv) || null;
   };
   try {
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
   const p = T.player.position;
   {
     const tx = 22, tz = -18;

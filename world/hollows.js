@@ -24,7 +24,7 @@ export const HOLLOW = Object.freeze({
   TUNNEL_ROOF: 3.4, CHAMBER_ROOF: 6.5, WALL: 1, GAP: 3,
   NAV_CELL: 1.5,
   ORIGIN: Object.freeze({ x: 0, y: -400, z: 0 }),
-  TAGS: Object.freeze({ root: 2, shale: 2, iron: 3, wet: 3, hill: 2 }),
+  TAGS: Object.freeze({ root: 2, shale: 2, iron: 2, wet: 2, hill: 1 }),   // CL-99 v3: the nine who died (story §8a; GP-83's WARREN_TAG_COUNTS)
 });
 
 // Each theme's look (colours, the props it scatters) and its set piece (hollows.md §3).
@@ -357,6 +357,148 @@ function dressSetPiece(group, plan, theme, mats, floorY, C) {
   for (const p of plan.points.sleepers) if (rnd() < 0.5) add(new THREE.BoxGeometry(0.06, 0.06, 0.45), mats.bone, p.x + (rnd() - 0.5), p.y + 0.04, p.z + (rnd() - 0.5), 0, rnd() * 3, 0);
 }
 
+// --- CL-99 v3: what the dead dragged down, and the husks (docs/story.md §8) -------------------------------------------
+let stencilTexCache = null, veinTexCache = null;
+function makeStencilTexture() {
+  if (stencilTexCache) return stencilTexCache;
+  if (typeof document === 'undefined') return null;
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 128;
+  const c = cv.getContext('2d');
+  c.fillStyle = '#4c5232'; c.fillRect(0, 0, 256, 128);
+  c.strokeStyle = 'rgba(0,0,0,0.25)'; c.lineWidth = 3; c.strokeRect(6, 6, 244, 116);
+  c.fillStyle = '#d9d4bf'; c.font = 'bold 44px monospace'; c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.fillText('PGB', 128, 50);
+  c.font = 'bold 18px monospace'; c.fillText('FOB THRESHOLD', 128, 92);
+  stencilTexCache = new THREE.CanvasTexture(cv);
+  if (THREE.SRGBColorSpace) stencilTexCache.colorSpace = THREE.SRGBColorSpace;
+  return stencilTexCache;
+}
+function makeVeinTexture() {
+  if (veinTexCache) return veinTexCache;
+  if (typeof document === 'undefined') return null;
+  const cv = document.createElement('canvas'); cv.width = 128; cv.height = 256;
+  const c = cv.getContext('2d'), rnd = mulberry32(hashStr('husk-veins'));
+  c.fillStyle = '#d6cdb8'; c.fillRect(0, 0, 128, 256);
+  for (let k = 0; k < 18; k++) {
+    let x = rnd() * 128, y = 0;
+    c.strokeStyle = k % 3 ? 'rgba(122, 52, 66, 0.55)' : 'rgba(80, 96, 120, 0.5)'; c.lineWidth = 1 + rnd() * 2.5;
+    c.beginPath(); c.moveTo(x, y);
+    while (y < 256) { x += (rnd() - 0.5) * 18; y += 8 + rnd() * 14; c.lineTo(x, y); if (rnd() < 0.15) { c.moveTo(x, y); } }
+    c.stroke();
+  }
+  veinTexCache = new THREE.CanvasTexture(cv);
+  if (THREE.SRGBColorSpace) veinTexCache.colorSpace = THREE.SRGBColorSpace;
+  if (THREE.RepeatWrapping) veinTexCache.wrapS = veinTexCache.wrapT = THREE.RepeatWrapping;
+  return veinTexCache;
+}
+// A husk: a pale veined sack hung from the roof by a twist of root, half turned, something showing through it.
+// what: 'boot' (a hiker's), 'jacket' (a ranger's, the search-and-rescue orange), 'many' (two or three grown together).
+function buildHusk(mats, what, rnd) {
+  const g = new THREE.Group(); g.name = 'husk';
+  const many = what === 'many';
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.42, 10, 8), mats.husk);
+  body.scale.set(many ? 1.6 : 1, 2.3, many ? 1.15 : 0.9); body.position.y = -1.1; g.add(body);
+  if (many) for (const s of [-1, 1]) { const lump = new THREE.Mesh(new THREE.SphereGeometry(0.34, 9, 7), mats.husk); lump.scale.set(1, 1.8, 0.9); lump.position.set(s * 0.5, -0.9 - rnd() * 0.3, 0.12); g.add(lump); }
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.12, 0.9, 6), mats.accent); neck.position.y = -0.1; g.add(neck);
+  if (what === 'boot') {
+    const boot = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.14, 0.28), mats.hikerBoot); boot.position.set(0.12, -2.08, 0.1); boot.rotation.x = 0.3; g.add(boot);
+    const lace = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.03, 0.12), mats.hikerLace); lace.position.set(0.12, -2.0, 0.16); lace.rotation.x = 0.3; g.add(lace);
+  } else if (what === 'jacket') {
+    const patch = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.5, 0.05), mats.rangerJacket); patch.position.set(0.05, -1.05, 0.37); patch.rotation.set(-0.08, 0.2, 0.1); g.add(patch);
+    const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.05, 0.055), mats.reflective); stripe.position.set(0.05, -1.12, 0.39); stripe.rotation.set(-0.08, 0.2, 0.1); g.add(stripe);
+  } else {
+    // A hand pressed out through the skin, and another, not the same person's.
+    for (const [x, y] of [[0.55, -0.8], [-0.62, -1.3]]) { const h = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.18, 0.06), mats.huskDark); h.position.set(x, y, 0.3); h.rotation.z = x > 0 ? -0.4 : 0.5; g.add(h); }
+  }
+  g.rotation.y = rnd() * Math.PI * 2;
+  g.rotation.z = (rnd() - 0.5) * 0.12;
+  return g;
+}
+function dressDraggedDown(group, plan, theme, mats, floorY, C) {
+  const rnd = mulberry32(hashStr('hollows-dragged:' + theme));
+  const add = (geo, mat, x, y, z, rx = 0, ry = 0, rz = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.rotation.set(rx, ry, rz); group.add(m); return m; };
+  // FOB Threshold's stores in the first chamber: crates stencilled PGB, one burst open, a helmet and a field radio.
+  const wc = plan.cells[plan.chambers[0]];
+  { const x = wc.i * C + C / 2, z = wc.j * C + C / 2, y = floorY(wc.depth);
+    const kit = new THREE.Group(); kit.name = 'fob-crates'; group.add(kit);
+    const crate = (cx, cz, cy, ry, lid) => {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.6, 0.7), [mats.stencil, mats.stencil, mats.crate, mats.crate, mats.stencil, mats.stencil]);   // stencilled on every side
+      b.position.set(cx, cy + 0.3, cz); b.rotation.y = ry; kit.add(b);
+      if (lid) { const l = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.06, 0.72), mats.crate); l.position.set(cx + 0.6, cy + 0.04, cz + 0.4); l.rotation.set(0, ry + 0.7, 0.05); kit.add(l); }
+    };
+    crate(x + 1.0, z - 0.6, y, 0.3, false);
+    crate(x + 1.1, z - 0.5, y + 0.6, 0.45, false);
+    crate(x - 0.9, z + 0.9, y, -0.4, true);   // burst open, its lid thrown off
+    const helmet = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), mats.helmet); helmet.position.set(x - 0.2, y + 0.02, z - 1.3); helmet.rotation.set(0.35, 0, 0.8); kit.add(helmet);
+    const radio = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.36, 0.14), mats.helmet); radio.position.set(x + 0.3, y + 0.18, z + 1.4); radio.rotation.set(0, 0.6, 0.25); kit.add(radio);
+    const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.7, 4), mats.iron); ant.position.set(x + 0.36, y + 0.62, z + 1.4); ant.rotation.z = 0.5; kit.add(ant);
+  }
+  // The husks: two or three from the roof of each chamber, three in the Deep; the hikers' boots, the rangers' jackets,
+  // and deeper down more of them grown together.
+  const kinds = ['boot', 'jacket', 'many'];
+  const chambers = plan.chambers.map((id) => plan.cells[id]);
+  const deep = plan.deep.map((id) => plan.cells[id]);
+  const hang = (c, n, rooms) => {
+    for (let k = 0; k < n; k++) {
+      const what = c.depth >= 2 && rnd() < 0.45 ? 'many' : kinds[Math.floor(rnd() * 2)];
+      const h = buildHusk(mats, what, rnd);
+      const x = c.i * C + 1.4 + rnd() * (C - 2.8), z = c.j * C + 1.4 + rnd() * (C - 2.8);
+      h.position.set(x, floorY(c.depth) + HOLLOW.CHAMBER_ROOF - 0.2, z);
+      h.userData.what = what;
+      group.add(h); rooms.push(h);
+    }
+  };
+  const husks = [];
+  for (const c of chambers) hang(c, 2 + (rnd() < 0.5 ? 1 : 0), husks);
+  for (const c of deep) if (rnd() < 0.75) hang(c, 1, husks);
+  group.userData.husks = husks;
+  // The iron warren is where it started: the settlers' iron wall across the first ramp's head, cut open with bolt
+  // cutters, the bars bent aside; the hikers' climbing rope down the ramp, a coil at its foot, their lights dropped.
+  if (theme === 'iron') {
+    const r = plan.cells[plan.ramps[0]], [di, dj] = DIRS[r.rampSide], y = floorY(r.depth);
+    const cx = r.i * C + C / 2 - di * (C / 2 - 0.4), cz = r.j * C + C / 2 - dj * (C / 2 - 0.4), across = [dj, -di];
+    const wall = new THREE.Group(); wall.name = 'iron-wall-cut'; group.add(wall);
+    const n = 9;
+    for (let k = 0; k < n; k++) {
+      const u = (k - (n - 1) / 2) * 0.32, cut = Math.abs(k - (n - 1) / 2) <= 2;   // a gap he can walk through
+      const bx = cx + across[0] * u, bz = cz + across[1] * u;
+      if (!cut) { const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, HOLLOW.TUNNEL_ROOF, 6), mats.iron); bar.position.set(bx, y + HOLLOW.TUNNEL_ROOF / 2, bz); wall.add(bar); }
+      else {
+        // Cut through near the roof and at the floor: a stub of each left, and the bar itself bent out and down
+        // to lie along the wall, either side of the gap.
+        const top = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.45, 6), mats.iron); top.position.set(bx, y + HOLLOW.TUNNEL_ROOF - 0.22, bz); wall.add(top);
+        const stub = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.22, 6), mats.iron); stub.position.set(bx, y + 0.11, bz); wall.add(stub);
+        const side = u < 0 ? -1 : 1, lx = cx + across[0] * side * (1.25 + Math.abs(u) * 0.3) + di * 0.6, lz = cz + across[1] * side * (1.25 + Math.abs(u) * 0.3) + dj * 0.6;
+        const bent = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 2.4, 6), mats.iron);
+        bent.position.set(lx, y + 0.06 + Math.abs(u) * 0.05, lz);
+        bent.rotation.order = 'YXZ'; bent.rotation.y = Math.atan2(di, dj) + side * 0.25; bent.rotation.x = Math.PI / 2 - 0.08;
+        wall.add(bent);
+      }
+    }
+    // The cross rails, cut through with the bars: a length each side of the gap.
+    const ry = Math.atan2(across[0], across[1]), half = (n * 0.32) / 2, gap = 2.5 * 0.32;
+    for (const yy of [0.5, HOLLOW.TUNNEL_ROOF - 0.4]) for (const sd of [-1, 1]) {
+      const len = half - gap, mid = sd * (gap + len / 2);
+      const rail = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.08, len), mats.iron);
+      rail.position.set(cx + across[0] * mid, y + yy, cz + across[1] * mid); rail.rotation.y = ry; wall.add(rail);
+    }
+    // The rope: pegged at the top, down the ramp, a coil at the foot.
+    const rope = new THREE.Group(); rope.name = 'hikers-rope'; group.add(rope);
+    const L = Math.hypot(C, HOLLOW.DEPTH_DROP);
+    const line = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, L, 5), mats.rope);
+    line.position.set(r.i * C + C / 2 + across[0] * 1.6, y - HOLLOW.DEPTH_DROP / 2 + 0.15, r.j * C + C / 2 + across[1] * 1.6);
+    line.rotation.order = 'YXZ'; line.rotation.y = Math.atan2(di, dj); line.rotation.x = Math.PI / 2 + Math.atan2(HOLLOW.DEPTH_DROP, C);
+    rope.add(line);
+    const coil = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.05, 6, 14), mats.rope); coil.rotation.x = Math.PI / 2;
+    coil.position.set(r.i * C + C / 2 + di * (C / 2 + 0.8) + across[0] * 1.6, y - HOLLOW.DEPTH_DROP + 0.05, r.j * C + C / 2 + dj * (C / 2 + 0.8) + across[1] * 1.6); rope.add(coil);
+    // Their lights: a headlamp and two glow sticks on the floor of the Narrows, still faintly green.
+    const lp = { x: coil.position.x + across[0] * -0.8, y: y - HOLLOW.DEPTH_DROP, z: coil.position.z + across[1] * -0.8 };
+    const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.06, 0.07), mats.helmet); lamp.position.set(lp.x, lp.y + 0.03, lp.z); lamp.name = 'hikers-headlamp'; rope.add(lamp);
+    const strap = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.012, 4, 12), mats.rope); strap.rotation.x = Math.PI / 2; strap.position.set(lp.x - 0.1, lp.y + 0.012, lp.z); rope.add(strap);
+    for (let k = 0; k < 2; k++) { const st = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.16, 6), mats.glowstick); st.rotation.set(Math.PI / 2, 0, rnd() * 3); st.position.set(lp.x + 0.5 + k * 0.7, lp.y + 0.016, lp.z + 0.3 - k * 0.5); rope.add(st); }
+  }
+}
+
 export function buildWarren(theme, opts = {}) {
   const plan = layoutWarren(theme);
   const look = WARREN_LOOKS[theme];
@@ -380,7 +522,21 @@ export function buildWarren(theme, opts = {}) {
     bone: new THREE.MeshStandardMaterial({ color: 0xcfc6ae, roughness: 0.9 }),
     day: new THREE.MeshBasicMaterial({ color: 0xfff4d8, toneMapped: false }),
     shaft: new THREE.MeshBasicMaterial({ color: 0xfff1cf, transparent: true, opacity: 0.12, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, side: THREE.DoubleSide }),
+    // CL-99 v3
+    husk: new THREE.MeshStandardMaterial({ color: 0xffffff, map: makeVeinTexture(), roughness: 0.55, metalness: 0 }),
+    huskDark: new THREE.MeshStandardMaterial({ color: 0x8a7e70, roughness: 0.8 }),
+    hikerBoot: new THREE.MeshStandardMaterial({ color: 0x5a3a26, roughness: 0.85 }),
+    hikerLace: new THREE.MeshStandardMaterial({ color: 0xc23b2a, roughness: 0.8 }),
+    rangerJacket: new THREE.MeshStandardMaterial({ color: 0xd2621f, roughness: 0.75 }),
+    reflective: new THREE.MeshStandardMaterial({ color: 0xdfe3dc, roughness: 0.3, metalness: 0.4 }),
+    crate: new THREE.MeshStandardMaterial({ color: 0x4c5232, roughness: 0.85 }),
+    stencil: new THREE.MeshStandardMaterial({ color: 0xffffff, map: makeStencilTexture(), roughness: 0.85 }),
+    helmet: new THREE.MeshStandardMaterial({ color: 0x3f4430, roughness: 0.7, metalness: 0.15 }),
+    rope: new THREE.MeshStandardMaterial({ color: 0x2f7fb8, roughness: 0.8 }),
+    glowstick: new THREE.MeshBasicMaterial({ color: 0x6dff8a, toneMapped: false }),
   };
+  if (!mats.husk.map) mats.husk.color.setHex(0xd6cdb8);
+  if (!mats.stencil.map) mats.stencil.color.setHex(0x4c5232);
   const solids = planSolids(plan);
   const groundAt = planGround(plan);
   // Floors (a ramp is a tilted slab), roofs, and the walls.
@@ -391,7 +547,23 @@ export function buildWarren(theme, opts = {}) {
     if (c.kind !== 'ramp') floors.push({ minX: x0, maxX: x0 + C, minY: y - 0.5, maxY: y, minZ: z0, maxZ: z0 + C });
     roofs.push({ minX: x0, maxX: x0 + C, minY: y + roof, maxY: y + roof + 0.8, minZ: z0, maxZ: z0 + C });
   }
-  const wallMesh = new THREE.Mesh(mergedBoxes(solids), mats.rock);
+  const lintels = [];
+  { const byKey = new Map(plan.cells.map((c) => [c.i + ',' + c.j, c]));
+    const roofOf = (c) => (c.kind === 'tunnel' || c.kind === 'mouth' || c.kind === 'pocket' || c.kind === 'ramp' ? HOLLOW.TUNNEL_ROOF : HOLLOW.CHAMBER_ROOF);
+    const W = HOLLOW.WALL;
+    for (const c of plan.cells) for (let s = 0; s < 4; s++) {
+      if (!c.open[s]) continue;
+      const [di, dj] = DIRS[s], n = byKey.get((c.i + di) + ',' + (c.j + dj));
+      if (!n) continue;
+      const top = floorY(c.depth) + roofOf(c) + 0.8, nTop = floorY(n.depth) + roofOf(n) + (n.kind === 'ramp' && n.rampSide === OPP[s] ? 0 : 0.8);
+      if (top - nTop < 0.05) continue;
+      const x0 = c.i * C, z0 = c.j * C;
+      const ax = di ? (di > 0 ? x0 + C - W : x0) : x0, bx = di ? (di > 0 ? x0 + C : x0 + W) : x0 + C;
+      const az = dj ? (dj > 0 ? z0 + C - W : z0) : z0, bz = dj ? (dj > 0 ? z0 + C : z0 + W) : z0 + C;
+      lintels.push({ minX: ax, maxX: bx, minZ: az, maxZ: bz, minY: nTop - 0.8, maxY: top });
+    }
+  }
+  const wallMesh = new THREE.Mesh(mergedBoxes(solids.concat(lintels)), mats.rock);
   const floorMesh = new THREE.Mesh(mergedBoxes(floors), mats.floor);
   const roofMesh = new THREE.Mesh(mergedBoxes(roofs), mats.rock);
   roofMesh.userData.roof = true;   // the review sheet lifts it off for the view from above
@@ -429,11 +601,9 @@ export function buildWarren(theme, opts = {}) {
   }
   if (props.length) group.add(new THREE.Mesh(mergedBoxes(props), mats.accent));
   for (const g of glows) { const m = new THREE.Mesh(new THREE.SphereGeometry(g.s, 8, 6), mats.glow); m.position.set(g.x, g.y, g.z); m.scale.y = 0.5; group.add(m); }
-  // The convoy's wreckage in the Galleries: a crumpled ambulance box and stretchers in its first chamber.
-  const wc = plan.cells[plan.chambers[0]];
-  { const x = wc.i * C + C / 2, z = wc.j * C + C / 2, y = floorY(wc.depth);
-    const van = new THREE.Mesh(new THREE.BoxGeometry(1.9, 1.6, 3.4), mats.wreck); van.position.set(x + 0.6, y + 0.8, z); van.rotation.set(0.1, 0.5, 0.22); group.add(van);
-    for (let k = 0; k < 2; k++) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.12, 1.9), mats.accent); st.position.set(x - 1.6, y + 0.1, z - 1 + k * 1.3); st.rotation.y = 0.3 + k * 0.6; group.add(st); } }
+  // CL-99 v3 (story §8): what the dead dragged down with the living. FOB Threshold's crates and kit in the first
+  // chamber (stencilled PGB crates, one burst, a helmet, a radio), and the husks hanging from the roof of the chambers.
+  dressDraggedDown(group, plan, theme, mats, floorY, C);
   // The rune door: a slab carved with the Pit's glyphs, glowing (world/runes.js draws them; see makeDoorTexture).
   const d = plan.doors.rune;
   const door = new THREE.Group(); door.name = 'rune-door';

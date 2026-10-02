@@ -44,6 +44,34 @@ if (process.argv.includes('--inside')) {
   VIEWS.push(['warren-iron-galleries', inside('iron', 'galleries')]);
 }
 
+// CL-99 v3: the warren built high in the sky instead (the camera far below takes the game's under-water path and times
+// out headless), its roof on, and shot from inside: the husks over the first chamber, FOB Threshold's crates, and the
+// iron warren's cut wall and the hikers' rope.
+const HIGH = (theme) => `(() => {
+  window.__warrensHigh = window.__warrensHigh || {};
+  let w = window.__warrensHigh['${theme}'];
+  if (!w) { w = window.__warrensHigh['${theme}'] = TT.buildWarren('${theme}', { origin: { x: 0, y: 260, z: 0 } }); TT.scene.add(w.group); }
+  // A lantern's worth of warm light at each of its lamps, for the sheet only (the runtime lends effect lights).
+  if (!w.__lit) { w.__lit = true; for (const l of w.lamps) { const L = new TT.THREE.PointLight(0xffc488, 6, 16, 1.2); L.position.set(l.x, l.y, l.z); w.group.parent.add(L); } }
+  return w; })()`;
+const v3 = (theme, what) => `(() => { const w = ${HIGH(theme)}, C = TT.HOLLOW.CELL, o = w.group.position, p = w.plan;
+  if ('${what}' === 'breach') {
+    const r = p.cells[p.ramps[0]], D = [[0, -1], [1, 0], [0, 1], [-1, 0]][r.rampSide];
+    const cx = o.x + r.i * C + C / 2, cz = o.z + r.j * C + C / 2, top = o.y + w.groundAt(cx - D[0] * 2.6, cz - D[1] * 2.6) - o.y;
+    const ex = cx - D[0] * 5.5, ez = cz - D[1] * 5.5;
+    return { x: ex, y: (w.groundAt(ex, ez) ?? top) + 1.6, z: ez, tx: cx, ty: top + 1.0, tz: cz, fov: 70 };
+  }
+  const c = p.cells[p.chambers[0]], x = o.x + c.i * C + C / 2, z = o.z + c.j * C + C / 2, y = w.groundAt(x, z);
+  const e = w.entry, dx = x - e.x, dz = z - e.z, l = Math.hypot(dx, dz) || 1;
+  const cam = { x: x - dx / l * 2.6, z: z - dz / l * 2.6 };
+  return { x: cam.x, y: (w.groundAt(cam.x, cam.z) ?? y) + 1.6, z: cam.z, tx: x, ty: y + ${what === 'up' ? 4.2 : 0.6}, tz: z, fov: 75 }; })()`;
+if (process.argv.includes('--v3')) {
+  VIEWS.length = 0;
+  for (const t of THEMES) VIEWS.push(['v3-' + t + '-chamber', v3(t, 'up')]);
+  VIEWS.push(['v3-root-crates', v3('root', 'floor')]);
+  VIEWS.push(['v3-iron-breach', v3('iron', 'breach')]);
+}
+
 const argv = process.argv.slice(2);
 if (argv.includes('--list')) {
   for (const [name] of VIEWS) console.log(name);

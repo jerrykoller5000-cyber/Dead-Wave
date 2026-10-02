@@ -121,7 +121,7 @@ test('HQ copy never calls the base a cabin, while landmark cabins keep their nam
   for (const key of ['mortar.noRoom','mortar.noRoomEdge','mortar.noRoomBlocked','build.message.stairsOccupied','build.message.stairsStepOff']) assert(hasText(key));
 });
 
-test('Harbor Nine has twenty ordered dispatches and the site and survivor notes', () => {
+test('Ridgeline has twenty ordered dispatches and the site and survivor notes', () => {
   for (let n = 1; n <= 20; n++) {
     const line = text(`story.relay.${n}`);
     assert(line.length > 35, `relay dispatch ${n}`);
@@ -130,4 +130,13 @@ test('Harbor Nine has twenty ordered dispatches and the site and survivor notes'
     assert(hasText(`story.prop.${id}`), `prop ${id}`);
   for (const id of ['reyes','voss','kettle']) for (const moment of ['found','morning','aboard'])
     assert(hasText(`story.survivor.${id}.${moment}`), `${id} ${moment}`);
+});
+
+test('Story v2 keeps narrative names and both sides of the skull-to-Cash loop', () => {
+  for (const value of Object.values(STRINGS)) for (const line of typeof value === 'string' ? [value] : Object.values(value))
+    assert.doesNotMatch(line, /Harbor Nine|Medic-4|\bisland\b|\bboats?\b/i);
+  assert.match(text('hq.empty'), /skull samples/);
+  assert.match(text('tips.economy.bank'), /Cash.*requisition credit/);
+  assert.equal(text('shop.title'), 'Supply Terminal');
+  assert.equal(text('world.hq'), 'FOB Threshold');
 });

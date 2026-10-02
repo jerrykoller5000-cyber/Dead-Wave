@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>fog night</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>Fog Night · CL-76 · v1</h1>
+<p>Night 14: the lake breathes out. While its wave is on, a cold mist closes in to about 30 m, goggles down or not,
+and the sky and the ridgeline sink into it. It rolls in over five seconds at the alarm and lifts at dawn; the night
+keeps its own music. The same view from the HQ toward the treeline: a plain night, then Fog Night. (Shot at the title
+screen's light, which is lighter than a real night.) Your notes go in notes.md.</p>
+<script>
+const rows = [['A plain night, then Fog Night', ['night-plain', 'night-fog']], ['Fog Night, a lighter sky', ['dusk-fog']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

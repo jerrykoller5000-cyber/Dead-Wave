@@ -4,10 +4,10 @@ state: idle
 model: Grokbot
 task: —
 touching: —
-since: 2026-09-30T23:47Z
-next: GB-94 R6 · P-79. Balance from medians over 20 nights: skull value 
+since: 2026-10-02T06:32Z
+next: GB-94 R6 · P-79. Balance by Jerry's notes (D-71): he plays, says w
 blocked-on: —
-last-report: handoffs/2026-09-30-grokbot-GB-106.md
+last-report: handoffs/2026-10-02-grokbot-GB-125.md
 
 ## Notes
 

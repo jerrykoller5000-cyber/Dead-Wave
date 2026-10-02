@@ -31,6 +31,8 @@ export function createBadgeAdapter({store,getEligible=()=>undefined,onAward=()=>
         return award({firstBank:true},true,event.eligible);
       if(event.type==='guardian-kick-free'&&receipt(event.receiptId)&&count(event.day)&&event.day>0)
         return award({kickedFree:true},true,event.eligible);
+      if(event.type==='rabbit'&&event.phase==='killed'&&Number.isFinite(event.x)&&Number.isFinite(event.z))
+        return award({rabbitKilled:true},true,event.eligible);
       if(event.type==='night-cleared'&&event.day===14&&event.kind==='fog')
         return award({nightCleared:event.day,nightKind:event.kind},true,event.eligible);
       return [];
@@ -43,7 +45,7 @@ export function createBadgeAdapter({store,getEligible=()=>undefined,onAward=()=>
       if(id!==runId||finished.has(id)||!record||!['day','kills','streak','headshots','skulls'].every(k=>count(record[k]))||record.day<1||typeof record.evacuated!=='boolean')return [];
       finished.add(id);
       return award({nightReached:record.day,kills:record.kills,headshots:record.headshots,
-        streak:record.streak,skullsBanked:record.skulls,evacuated:record.evacuated},false,record.eligible);
+        streak:record.streak,skullsBanked:record.skulls,evacuated:record.evacuated,trueEnding:record.trueEnding===true,survivorsAboard:record.survivorsAboard},false,record.eligible);
     }
   };
 }

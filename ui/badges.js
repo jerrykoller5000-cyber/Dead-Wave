@@ -3,6 +3,10 @@ export const BADGES_KEY = 'tt_badges';
 const count = n => Number.isSafeInteger(n) && n >= 0;
 const atLeast = (n,threshold) => count(n) && n >= threshold;
 const RULES = Object.freeze({
+  'choir-practice': f => f.rabbitKilled === true,
+  'brought-them-home': f => f.tagsRecovered === 9,
+  'nobody-left-behind': f => f.evacuated === true && f.trueEnding !== true && Array.isArray(f.survivorsAboard) && ['okafor','brandt','pike'].every(id=>f.survivorsAboard.includes(id)),
+  'silence': f => f.trueEnding === true,
   'first-bank': f => f.firstBank === true,
   'relay-online': f => f.relayOnline === true,
   'night-five': f => atLeast(f.nightReached,5),

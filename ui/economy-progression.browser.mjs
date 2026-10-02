@@ -14,11 +14,11 @@ try{
   const base=await page.evaluate(()=>TT.WEAPON_PRICE);
   for(let night=1;night<=20;night++){
    await page.evaluate(n=>econProbe.setup(n),night);const q=await page.evaluate(()=>econProbe.quotes());
-   for(const [w,price]of Object.entries(q.weapons)){assert.equal(price,base[w]);if(w!=='pistol'){const button=page.locator('[data-weapon="'+w+'"] .weapon-actions button').first(),label=equipmentStocked(w,night)?'$'+price:'Arrives night '+GUN_STOCK_NIGHT[w];assert.equal(await button.textContent(),label);assert.equal(await button.isDisabled(),!equipmentStocked(w,night),w+' stock night '+night);assert.equal((await page.evaluate(()=>econProbe.wheel())).find(item=>item.key===w).meta,label);}}
+   for(const [w,price]of Object.entries(q.weapons)){assert.equal(price,base[w]);if(w!=='pistol'){const button=page.locator('[data-weapon="'+w+'"] .weapon-actions button').first();/* CL-114 (Jerry): a gun not in stock yet has no kiosk row; it arrives on its night */if(equipmentStocked(w,night)){assert.equal(await button.textContent(),'$'+price);assert.equal(await button.isDisabled(),false,w+' stock night '+night);}else assert.equal(await page.locator('[data-weapon="'+w+'"]').count(),0,w+' hidden before night '+GUN_STOCK_NIGHT[w]);/* CL-113: the wheel holds only the carried loadout (five spaces); an unbought gun's arrival night lives on the kiosk row */assert.equal((await page.evaluate(()=>econProbe.wheel())).some(item=>item.key===w),false);}}
    assert.equal(await page.locator('[data-shop-page="perks"]').count(),0);assert.deepEqual([q.med,q.pistol,q.gas,q.tank],[35,8,18,85]);
   }
   await page.evaluate(()=>{econProbe.setup(3,10000);window.economyReceipts=[];window.addEventListener('dw-game',({detail:e})=>{if(e.type==='purchase-delivered')economyReceipts.push(e);});});
-  const m4=page.locator('[data-weapon="m4"] .weapon-actions button').first();assert(await m4.isDisabled());await page.evaluate(()=>TT.buyWeapon('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),10000,'unstocked API purchase refused');
+  const m4=page.locator('[data-weapon="m4"] .weapon-actions button').first();/* CL-114: unstocked, no row */assert.equal(await page.locator('[data-weapon="m4"]').count(),0);await page.evaluate(()=>TT.buyWeapon('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),10000,'unstocked API purchase refused');
   await page.evaluate(()=>econProbe.setup(4,179));assert(await m4.isDisabled());await page.evaluate(()=>TT.buyWeapon('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),179);
   await page.evaluate(()=>econProbe.cash(180));await m4.click();assert.equal(await page.evaluate(()=>TT.getBank()),0);assert.equal(await page.evaluate(()=>economyReceipts.at(-1).cashSpent),180);await page.evaluate(()=>TT.buyWeapon('m4'));assert.equal(await page.evaluate(()=>TT.getBank()),0);
   await page.evaluate(()=>econProbe.setup(20,10000));
@@ -27,7 +27,7 @@ try{
   await check(()=>econProbe.buyMed(),35,'medpen');await check(()=>econProbe.buyMag(),45,'magazine:pistol');await check(()=>econProbe.buyPair(),120,'dual:pistol');await check(()=>econProbe.buyMachete(),85,'machete');
   await check(()=>TT.buyGear(TT.GEAR.find(g=>g.key==='helmet')),70,'gear:helmet');
   await page.evaluate(()=>{econProbe.reset();TT.openShop(true);});assert.equal(await page.evaluate(()=>econProbe.quotes().weapons.m4),180,'new run keeps fixed price');
-  for(const [completed,expected]of [[1,'New at the kiosk: Uzi, Shotgun.'],[3,'New at the kiosk: M4, Chainsaw.'],[9,'New at the kiosk: AA-12.'],[10,''],[19,'']]){
+  for(const [completed,expected]of [[1,'New at the kiosk: Wasp SMG, Shotgun.'],[3,'New at the kiosk: GW-4 Carbine, Chainsaw.'],[9,'New at the kiosk: Breacher-12.'],[10,''],[19,'']]){
    await page.evaluate(n=>econProbe.dawn(n),completed);assert.equal(await page.locator('#dawnCard .dawn-stock').textContent(),expected);assert.equal(await page.locator('#dawnCard .dawn-stock').isHidden(),!expected);
    if(completed===9){await page.evaluate(()=>{TT.closeShop();document.getElementById('perf').style.display='none';});await page.waitForTimeout(600);await page.locator('#dawnCard').screenshot({path:path.join(shots,'after-dawn-aa12-1280.png')});}
   }

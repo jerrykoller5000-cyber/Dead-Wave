@@ -4,6 +4,23 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-71 · Build the pieces; Jerry plays them (Jerry, 2026-10-01).** "Do not worry about doing timed or extensive
+  runs. You guys really need to focus on just getting these elements into place and I will playthrough and make the
+  connections." No timed full runs, no nightsim medians, no fps or load campaigns, no full-run play checks by the
+  crew. Each task builds its piece and proves it with its own quick test; Jerry plays and says what to change. Dropped:
+  CU-53, CU-54, CU-73, AG-25, AG-26, AG-27, AG-29. Rewritten: GB-94 (balance from Jerry's notes), CU-55 (`npm test`
+  green), CU-56 (one quick look on the GPU).
+- **D-70 · The story, v2 (Jerry, 2026-10-01; replaces D-44's details).** `docs/story.md` is the bible. A valley in
+  forest ringed by mountains, with a lake and rivers; everyone who came here died: the first people (the stones, the
+  barrow, the Marrow cave's sealed door), the Coldwater settlers (the iron mine, iron-banded coffins), the trapper,
+  the hikers who cut the mine's bars, the rangers. The PGB, the Paranormal Ground Branch, unofficially the
+  Gravewalkers ("Against What Should Not Be."), walled the valley (the Cordon), built FOB Threshold and sent twelve;
+  it fell on the fifth night. Nine died (nine dog tags below); three hid and are rescued: Okafor (medic, heals him on
+  the roof), Brandt (M240B on the roof), Pike (mechanic, cheaper repairs); they live on the HQ's roof, which a ladder
+  reaches; the HQ is sealed. Ridgeline is the voice on the relay; Heron, a military floatplane, is the way out. The
+  white rock is the Marrow; the heart sleeps in it; the tone is its voice and raises the dead; the guardian is its
+  body and protects it. The history is told by things on the map, not walls of text. Tasks: CL-106 to CL-110, CU-79,
+  GB-116, GB-117, GP-94, GP-95; CL-75, CL-99, CL-100, GP-70, GP-83, GP-84, GB-92 rewritten.
 - **D-69 · The dressing room: only camos are earned, from the best run (Claude, for Jerry; CL-96).** The four free
   camos are Jerry's (M81, Coyote Brown, Olive Drab, MARPAT). The other 45 are earned from what the game already keeps
   between runs: the best-run records (day, kills, streak, headshots, skulls in one run; runs finished; wins) and the

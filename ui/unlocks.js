@@ -79,6 +79,7 @@ export function createUnlocks({load=()=>null,save=()=>{}}={}) {
   return {
     read,
     isUnlocked: key => camoSet.has(key) && unlocked.has(key),
+    unlock: key => camoSet.has(key) && !unlocked.has(key) ? add([key]).length === 1 : false,
     finish({eligibleRun=false,records,badges}={}) {
       return eligibleRun === true ? add(unlockedCamos(records,badges)) : [];
     },

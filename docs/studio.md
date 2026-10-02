@@ -198,6 +198,13 @@ poseReference(man, ref.clip('Push_Loop'), t);
 The guardian isn't human, so a reference is a guide for timing, weight and spacing, not a pose to
 copy; our humanoids (the marine, the zombies) can be retargeted onto these later.
 
+**The marine's walk and run (CL-84).** `studio/retarget-ual.mjs` bakes `studio/clips/marine/walk.json` (from
+`Walk_Loop`) and `run.json` (from `Jog_Fwd_Loop`): the mannequin's hip-to-ankle lines scaled to his legs (0.52 m
+against 0.82) as foot IK from his own hips, the knees' direction as poles, the soles eased flat while down, the hips'
+bob and sway, and the chest's swing and lean kept in part (`yaw`, `lean` per job: his rifle is in his hands) with the
+head looking ahead against it. No arms: in the game they hold the gun. The reference faces -Z; the tool turns it half
+round. Run it after changing a job: `node --import ./studio/node-three.mjs studio/retarget-ual.mjs [walk|run]`.
+
 `studio/preview.html?clip=drag&n=6&row=rig` (or `row=ref`) draws a quick strip of a clip or of its
 reference, served from the repo root: Claude's quick look, and a starting point for CU-44.
 
@@ -428,6 +435,33 @@ tests' stand-in three blends quaternions component by component and would otherw
 the long way round at a partial weight. `sp.path(name)` says how far along a path the scene is, so the
 host can end a haul on arrival; past the scene's length a path carries on at its last speed.
 `sp.dispose()` hands the host's bodies back exactly as they were given and removes the rest.
+
+**Branches** (CL-81): another way the moment can go, from whenever the host says. The kick-free is
+the first: the haul runs until he has kicked five times, then the grab-drag scene takes its `letGo`
+branch, on whatever frame that is.
+
+```json
+"branches": {
+  "letGo": {
+    "length": 1.9, "release": 0.08,
+    "actors": {
+      "guardian": { "clips": [[0, "guardian/stand", { "fade": 0.12 }]], "ahead": [[0, 0], [1.9, 2.1]] },
+      "marine": { "clips": [[0, "marine/stand"]], "tilt": [[0, [82, 0, 0]], [1.15, [0, 0, 0], "inout"]],
+                  "hits": [[0.02, { "at": "pelvis", "dir": [0, 0.35, -1], "power": 2.4, "kind": "crush" }]] }
+    }
+  }
+}
+```
+
+`sp.branch(name)` takes it (once; `sp.branched`, `sp.branchT`). From then every time in the branch
+counts from that moment: each actor plays the branch's clips (faded from what it was playing), keeps
+its place and heading from when the branch was taken and moves `ahead` metres along that heading
+(no path, aim or "at" any more), takes the branch's `tilt`, `rise` and `hits`, and every hold lets go
+over `release` seconds (a limp body held by one falls, lies and gets up: §10). `sp.done` is the
+branch's end. A branch has no speed check (it bolts and tumbles by design). A review render can't
+press E, so `"autoBranch": { "name", "at" }` takes it at a set time: `studio/make-let-go.mjs` writes
+`scenes/guardian-let-go.json` (the grab-drag with the let-go 3.4 s in) for `review/guardian-let-go`.
+`sceneClipRefs(json)` lists every clip a scene plays, its branches' too, for a loader to fetch.
 Adopted bodies take the studio's rest pose joint by joint, so the game plays exactly what the review
 folder shows. `fetchScene(name)` (browser) loads a scene and its clips relative to the studio's own
 folder.

@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>the heart</title>
+<style>body{margin:24px;background:#14181f;color:#e6e6e0;font-family:Georgia,serif} h1{font-weight:normal} h2{font-weight:normal;margin:28px 0 6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px} figure{margin:0} img{width:100%;display:block} figcaption{font-size:14px;opacity:.7;margin:4px 0}</style>
+<h1>The heart in the Marrow · CL-112 · v1</h1>
+<p>The secret's last room, far under the Marrow. A long tunnel slopes down into one big round cave. In the middle is the
+source: a glowing pool with the Pit's runes round it. Six stone columns hold up the roof. In Grokbot's fight (GB-92)
+the guardian can knock columns down; a fallen column lies across the floor. These shots are taken without the GPU, so
+the glow is flatter than in the game. Your notes go in notes.md.</p>
+<script>
+const rows = [['The heart', ['heart-from-tunnel', 'heart-column-down']]];
+for (const [h, ks] of rows) document.write(`<h2>${h}</h2><div class="row">` + ks.map((k) => `<figure><figcaption>${k} (v1)</figcaption><img src="v1/${k}.png"></figure>`).join('') + '</div>');
+</script>

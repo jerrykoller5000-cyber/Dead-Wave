@@ -1,9 +1,13 @@
 # The secret: silencing the signal (D-56)
 
+**Story v2 (D-70, 2026-10-01):** the names follow `docs/story.md`: the valley (not an island), Ridgeline (not Harbor
+Nine), Heron (not the boat), the Marrow (the chalk; code ids like `chalk` stay). The clues come from the twelve of
+FOB Threshold, and the Hush is built with Ridgeline's help (story.md §9).
+
 Owner: Claude (CL-79, P-94, P-69). For Jerry to read and say yes to, and for the builders: Claude (CL-80 the world
 side, CL-100 the words below), ChatGPT (GP-70 the radio and the ending), Grokbot (GB-92 the fight), Antigravity (AG-26).
 Written 2026-09-30 from D-44 (the story), D-56, D-67 (the Hollows) and Jerry's answer to Q-4 (the fight is deep in
-the chalk heart, behind the rune doors).
+the heart in the Marrow, behind the rune doors).
 
 ## The short version
 
@@ -15,8 +19,8 @@ the chalk heart, behind the rune doors).
 - He **enters the word at the HQ radio**, one try a day. Right, and the tone stops until the next dawn: a
   **silenced day**. That night the dead come without the tone's pull: half the pushes, and no guardian night.
 - On a silenced day, the **rune door** at the back of any warren he has cleared opens onto a tunnel down to **the
-  chalk heart**, where the guardian sits over the source. There, and only there, it can be killed.
-- Kill it and the tone dies for good: every dead on the island drops, the lake goes quiet, and the run ends in the
+  heart in the Marrow**, where the guardian falls back to protect the source. There, and only there, it can be killed.
+- Kill it and the tone dies for good: every dead in the valley drops, the lake goes quiet, and the run ends in the
   **true ending**. Lose, and it's the cave death: the run is over, as any caught-below is (Q-4).
 - Nothing in the world moves, and no step of it enters a grab zone: the stones sit inside the Pit's reach
   (`LAKE_HOLE.grabR`), and every clue is read from outside it.
@@ -44,8 +48,9 @@ water, big enough to read from the tower with the NVG or without it (CL-80 check
 letter: "The third is ◇" (the shard's picture shows the glyph and three notches for the third place). All five
 spell the word without the tower. They are for this run only (the word changes).
 
-**The old notes.** One of the props' notes (story.md §4, the ranger post) gains a line in pencil: "Count them from the
-tower. Five."
+**The old notes.** The field notes of the twelve (story.md §6): Brandt's pencil on the watchtower rail, "Count them
+from the tower. Five." And Brandt himself, once rescued, on the roof: "From the tower the stones under the lake blink.
+In order. Every night."
 
 ## 3. Entering it (GP-70)
 
@@ -54,7 +59,7 @@ tower. Five."
 - **One try a day** (a try spends the day's). Wrong: a shriek of feedback, the slots flash red and clear, "The tone
   swallows it. Tomorrow." Right: the static stops, the board's relay panel goes still, "The tone stops. The lake
   holds its breath." and today is a **silenced day**.
-- The last try day is day 19: a word sent on the morning of day 20 stays the boat's day (the boat and the secret
+- The last try day is day 19: a word sent on the morning of day 20 stays Heron's day (Heron and the secret
   don't mix).
 - Nothing tells him which letters were right. The shards and the tower are the way.
 
@@ -67,19 +72,19 @@ tower. Five."
 - **The rune doors open** (section 5) for the silenced day's delve.
 - A silenced day can happen more than once a run (another right send on a later morning); the word stays the same.
 
-## 5. The chalk heart (GB-92, CL-99, CU-71)
+## 5. The heart in the Marrow (GB-92, CL-99, CU-71)
 
 - **The way in.** On a silenced day, the rune door at the back of a warren's Deep stands open if that warren is
   cleared this run (D-67: the set piece dead, the strongbox open). He needs the day's Hush charge to go down, as for
   any delve; through the door, a long tunnel slopes down toward the lake (a fade after 20 m), and he is in the heart.
   The rune door of an uncleared warren stays shut ("It's open. Somewhere.").
-- **The heart.** One cave, big, round, under the chalk cave: the Pit's roots come through the ceiling as rune-cut
-  columns of chalk; in the middle, the source, a shaft of cold light going down toward the Pit. No sleepers, no nests:
+- **The heart.** One cave, big, round, under the Marrow cave: the Pit's roots come through the ceiling as rune-cut
+  columns of the Marrow's white rock; in the middle, the source, a shaft of cold light going down toward the Pit. No sleepers, no nests:
   the guardian and the dead it calls.
 - **The fight** (GB-92): the guardian on its studio rig and clips (CL-78, D-55), fightable here and only here. It
   grabs as it does everywhere (the one kick-free of the run applies, D-46); between its lunges it calls the dead up
   out of the source (at most 12 awake). It has three phases by its health (full, two-thirds, a third): its reach
-  grows, and in the last it pulls the chalk columns down. Its health is set so a well-armed marine with ammunition
+  grows, and in the last it pulls the white columns down. Its health is set so a well-armed marine with ammunition
   to spare kills it in about three minutes (Grokbot tunes it with nightsim's medians).
 - **The stir** doesn't run in the heart: there's no hiding from it here. The Hush's battery still counts down: when
   it runs flat, the source roars and the guardian can't be hurt until he's out (the tunnel back). He can come back up
@@ -89,10 +94,10 @@ tower. Five."
 ## 6. The true ending (GP-70, CL-80)
 
 - The guardian dies: the source goes dark, a long falling note, and the tone dies for good. **Topside**, every dead on
-  the island drops where it stands. He comes up at the warren's mouth into a quiet island: the lake flat and clear,
+  the valley drops where it stands. He comes up at the warren's mouth into a quiet valley: the lake flat and clear,
   the Pit's stones dark, birdsong.
 - **The victory screen's second ending**, "The lake is quiet." with the run's numbers and the day it happened; the
-  relay's last line: "Harbor Nine. Your tone's gone. Everyone's tone is gone. We're coming to get you. Walk to the
+  relay's last line: "Ridgeline. Your tone's gone. Everyone's tone is gone. Heron's coming to get you. Walk to the
   dock." The run is won (a win for the records and GP-52's best run) and marked as the true ending.
 - **For good** (the profile): a lifetime badge, "Silence" (GP-65's list), and a **rune finish** in the dressing room's
   Guns tab: gun furniture etched with the pit's glyphs, faintly glowing (CL-97's gun camo, one more camo key, `rune`).

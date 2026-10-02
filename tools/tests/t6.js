@@ -10,15 +10,8 @@
   };
   const platAt = (gx, gz, lv = 1) => T.cellOccupant(gx, gz, lv, 'base');
   try {
-  const nameEl = document.getElementById('playerName');
-  if (nameEl) nameEl.value = 'TestMarine';
-  document.getElementById('modeHunt').click();
-  let started = false;
-  for (let i = 0; i < 80; i++) {
-    await wait(200);
-    if (T.getPhase && T.getPhase() === 'prep') { started = true; break; }
-  }
-  ok(started, 'match reached prep after Play');
+  await startMatch(T, 'TestMarine');
+  ok(T.getPhase() === 'prep', 'match reached prep after Play');
   T.unlockAllBuilds(); T.addCash(100000);
   const p = T.player.position;
   {

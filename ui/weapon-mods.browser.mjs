@@ -43,32 +43,31 @@ try {
   assert.equal(await heavy.locator('button').textContent(), '$100');
   await page.screenshot({ path: path.join(shots, `before-1280${gpu ? '-gpu' : ''}.png`) });
 
+  // CL-113 (Jerry, 2026-10-01): the kiosk sells attachments; they go on at the Armory's workbench (TT.armoryDbg.fit).
   await ext.locator('button').click();
-  assert.deepEqual(await page.evaluate(() => TT.weaponMods('ak')), { fitted: 'ext', ext: true, heavy: false, canExt: true, canHeavy: true });
-  assert.equal(await ext.locator('button').textContent(), 'FITTED');
+  assert.deepEqual(await page.evaluate(() => TT.weaponMods('ak')), { fitted: null, ext: true, heavy: false, canExt: true, canHeavy: true });
+  assert.equal(await ext.locator('button').textContent(), 'OWNED');
   assert(await ext.locator('button').isDisabled());
+  assert.match(await ext.locator('.name').textContent(), /Armory/i, 'the row says to fit it at the Armory');
   assert.equal(await page.evaluate(() => TT.getBank()), 100);
   await heavy.locator('button').click();
-  assert.deepEqual(await page.evaluate(() => TT.weaponMods('ak')), { fitted: 'heavy', ext: true, heavy: true, canExt: true, canHeavy: true });
-  assert.equal(await heavy.locator('button').textContent(), 'FITTED');
-  assert.equal(await ext.locator('button').textContent(), 'Fit free');
-  assert(await ext.locator('button').isEnabled());
+  assert.deepEqual(await page.evaluate(() => TT.weaponMods('ak')), { fitted: null, ext: true, heavy: true, canExt: true, canHeavy: true });
+  assert.equal(await heavy.locator('button').textContent(), 'OWNED');
   assert.equal(await page.evaluate(() => TT.getBank()), 0);
   assert.deepEqual(await page.evaluate(() => modReceipts.map(x => [x.itemId, x.cashSpent])), [['magazine:ak', 100], ['mod:heavy:ak', 100]]);
+  assert.equal(await page.evaluate(() => TT.armoryDbg.fit('ak', 'heavy', true) && TT.weaponMods('ak').fitted), 'heavy');
+  await page.evaluate(() => TT.setShopTabDbg('upgrades'));
+  assert.match(await heavy.locator('.name').textContent(), /fitted/i);
   await page.screenshot({ path: path.join(shots, `heavy-1280${gpu ? '-gpu' : ''}.png`) });
 
-  await ext.locator('button').click();
-  assert.equal(await page.evaluate(() => TT.weaponMods('ak').fitted), 'ext');
-  assert.equal(await heavy.locator('button').textContent(), 'Fit free');
-  assert(await heavy.locator('button').isEnabled(), 'owned heavy barrel stays selectable at zero Cash');
-  await heavy.locator('button').click();
-  assert.equal(await page.evaluate(() => TT.weaponMods('ak').fitted), 'heavy');
+  assert.equal(await page.evaluate(() => TT.armoryDbg.fit('ak', 'ext', true) && TT.weaponMods('ak').fitted), 'ext');
+  assert.equal(await page.evaluate(() => TT.armoryDbg.fit('ak', 'heavy', true) && TT.weaponMods('ak').fitted), 'heavy', 'owned heavy barrel goes back on at zero Cash');
   assert.equal(await page.evaluate(() => TT.getBank()), 0);
   assert.equal(await page.evaluate(() => modReceipts.length), 2, 'switches issue no new purchase');
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: path.join(shots, `heavy-390${gpu ? '-gpu' : ''}.png`) });
   assert.deepEqual(errors, []);
-  console.log(`PASS GP-62 (${gpu ? 'WebGPU' : 'stand-in renderer'}): two visible AK mod rows, fitted state, paid first purchases, free switches at zero Cash, receipts, 1280/390, no page errors.`);
+  console.log(`PASS GP-62 (${gpu ? 'WebGPU' : 'stand-in renderer'}): two visible AK mod rows, bought not fitted (CL-113), paid first purchases, free Armory switches at zero Cash, receipts, 1280/390, no page errors.`);
 } finally {
   if (browser) await browser.close();
   server.close();

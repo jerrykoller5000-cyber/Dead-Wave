@@ -1,4 +1,8 @@
 import test from 'node:test';
+import {webcrypto} from 'node:crypto';
+import {createQuest} from './quest.js';
+import {createRelayStory} from './relay-story.js';
+import {createPropNotes} from './prop-notes.js';
 import assert from 'node:assert/strict';
 import { restockRows } from './cache-intel.js';
 import { drawCalls, createDailyCall, cheapestTurretBlueprint, buildRadioCallView } from './radio-call.js';
@@ -84,12 +88,14 @@ test('actual HQ adapter consumes the objective receipt, grants Intel once, and r
  const code=source.slice(source.indexOf('    // UI-owned modal adapter;'),source.indexOf('    // Sound the alarm: three klaxon blasts'));
  assert(code.includes('dailyRadioCall.pick'));
  const model=createObjectives(1),events=[];let receive;
- const ctx={createDailyCall:options=>createDailyCall({...options,rng:()=>0}),cheapestTurretBlueprint,restockRows,
+ const ctx={createQuest,createRelayStory,createPropNotes,crypto:webcrypto,document:{},
+   mountPropNoteCard:()=>({hide(){},show(){}}),EXTRACTION_NIGHT:20,relayUp:()=>model.snapshot().radioCall.repaired,
+   createDailyCall:options=>createDailyCall({...options,rng:()=>0}),cheapestTurretBlueprint,restockRows,
    objectiveRuntime:{read:()=>model.snapshot(),snapshot:()=>model.snapshot(),beginRadioCall:r=>model.beginRadioCall(r)},
    uiRunId:1,day:2,phase:'prep',fieldIntelOwned:false,buildUnlocked:{},
    BUILD_UNLOCK_PRICE:{light:55,flame:75,heavy:110,mortar:120},hq:{seq:null},
    gameStarted:true,gameOver:false,won:false,paused:false,devNoZombies:false,
-   getWaveDirectorState:()=>({day:ctx.day,phase:ctx.phase}),getWavePreview:()=>null,getBounties:()=>[],nearHQPanel:()=>true,
+   getWaveDirectorState:()=>({day:ctx.day,phase:ctx.phase,extraction:{state:"idle"}}),getWavePreview:()=>null,getBounties:()=>[],nearHQPanel:()=>true,
    publishPrepState:()=>model.setRadioDay({runId:ctx.uiRunId,day:ctx.day,phase:ctx.phase,alarm:!!ctx.hq.seq}),
    setPaused:v=>{ctx.paused=v;},publishUI:(type,details={})=>events.push({type,...details}),
    window:{addEventListener:(_,fn)=>{receive=fn;}},console};
