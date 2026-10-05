@@ -1,0 +1,133 @@
+      hAdd(cyl(0.065, 0.085, 0.13, skinW, 10), 0, 1.24, 0);                                // neck
+      headG.add(buildMarineHead(THREE, skinW));
+      // Hair and ears are visible only on unmasked survivors. Keep their group
+      // separate through rigid merging so no wardrobe/rig contract changes.
+      const bareFaceDetails = new THREE.Group();bareFaceDetails.visible = false;headG.add(bareFaceDetails);
+      g.userData.bareFaceDetails = bareFaceDetails;
+      const bareAdd = (mesh, x, y, z) => { hAdd(mesh, x, y, z);bareFaceDetails.add(mesh);return mesh; };
+      for (const sx of [-1, 1]) bareAdd(rmesh(0.03, 0.07, 0.05, skinW, 0.014), sx * 0.13, 1.4, 0);
+      hAdd(rmesh(0.2, 0.03, 0.035, skinW, 0.012), 0, 1.455, 0.14);                          // brow
+      hAdd(rmesh(0.034, 0.052, 0.044, skinW, 0.015), 0, 1.397, 0.154);                           // nose
+      // Cropped hair, so the bare head reads as a head before the helmet is bought
+      // (it sits inside the crown once it is).
+      bareAdd(rmesh(0.265, 0.07, 0.285, hairW, 0.035), 0, 1.525, 0.01);
+      bareAdd(rmesh(0.225, 0.085, 0.035, hairW, 0.016), 0, 1.47, -0.117);                          // back of the crop
+      for (const sx of [-1, 1]) bareAdd(rmesh(0.016, 0.06, 0.11, hairW, 0.007), sx * 0.12, 1.46, -0.03);
+      // The hat — the bare-head look, hidden under the helmet. CL-97: the 8-point cover (field cap: crown, band,
+      // brim), a boonie, or a ballcap worn forwards or backwards. All take the cap's camo.
+      const hatG = new THREE.Group();
+      hatG.position.y = -HEAD_PIVOT_Y;
+      headG.add(hatG);
+      gearParts.bareHead.push(hatG);
+      const hatAt = (grp, mesh, x, y, z, rx = 0, ry = 0, rz = 0) => put(grp, mesh, x, y, z, rx, ry, rz);
+      const cover = dress.hats.cover = part(hatG);
+      hatAt(cover, rmesh(0.29, 0.1, 0.31, capW, 0.05), 0, 1.565, 0.0);                             // crown
+      hatAt(cover, rmesh(0.3, 0.04, 0.32, capBandW, 0.012), 0, 1.515, 0.0);                        // band
+      hatAt(cover, rmesh(0.26, 0.018, 0.14, capW, 0.006), 0, 1.51, 0.2, 0.12);                     // brim
+      hatAt(cover, rmesh(0.07, 0.03, 0.02, patchInk, 0.004), 0, 1.57, 0.158);                      // cap badge
+      const boonie = dress.hats.boonie = part(hatG);
+      hatAt(boonie, cyl(0.148, 0.156, 0.1, capW, 16), 0, 1.575, 0.005);                            // crown
+      hatAt(boonie, rmesh(0.22, 0.02, 0.24, capW, 0.01), 0, 1.626, 0.005);                         // flat top
+      hatAt(boonie, cyl(0.16, 0.16, 0.032, capBandW, 16), 0, 1.54, 0.005);                         // foliage band
+      hatAt(boonie, cyl(0.255, 0.27, 0.014, capW, 22), 0, 1.522, 0.012, 0.05);                      // the wide brim, drooping a touch
+      for (const sx of [-1, 1]) hatAt(boonie, rmesh(0.006, 0.12, 0.006, strapMat, 0.002), sx * 0.142, 1.46, 0.03, 0, 0, sx * -0.12);   // chin cord
+      const ballcap = (grp) => {
+        hatAt(grp, rmesh(0.272, 0.11, 0.292, capW, 0.07), 0, 1.56, 0.0);                            // crown, rounder than the cover
+        hatAt(grp, rmesh(0.2, 0.08, 0.02, capW, 0.02), 0, 1.565, 0.14);                             // front panel
+        hatAt(grp, rmesh(0.03, 0.016, 0.03, capBandW, 0.008), 0, 1.62, 0.0);                        // button
+        hatAt(grp, rmesh(0.21, 0.014, 0.14, capW, 0.007), 0, 1.522, 0.205, 0.2);                    // the curved bill
+        hatAt(grp, rmesh(0.07, 0.03, 0.012, strapMat, 0.004), 0, 1.53, -0.148);                     // strap at the back
+      };
+      ballcap(dress.hats.ballcap = part(hatG));
+      const back = dress.hats.ballcapBack = part(hatG);
+      back.rotation.y = Math.PI;
+      ballcap(back);
+      // Helmet: a rounded high-cut shell in a camo cover, with a trim edge, side rails,
+      // a shroud for the NVG mount, a velcro crown patch and a counterweight pouch.
+      const hlAdd = (mesh, x, y, z) => { hAdd(mesh, x, y, z); gearParts.helmet.push(mesh); return mesh; };
+      const shell = hlAdd(addCast(new THREE.Mesh(new THREE.SphereGeometry(0.2, 20, 10, 0, Math.PI * 2, 0, Math.PI * 0.52), shellW)), 0, 1.455, 0.005);
+      shell.scale.set(1.0, 0.95, 1.1);
+      const trim = hlAdd(addCast(new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.013, 6, 28), helmetMat)), 0, 1.445, 0.005);
+      trim.rotation.x = Math.PI / 2; trim.scale.set(1.0, 1.1, 1.0);
+      for (const sx of [-1, 1]) {
+        hlAdd(rmesh(0.025, 0.035, 0.22, nvgMat, 0.008), sx * 0.198, 1.5, 0.01);              // ARC rails
+        hlAdd(rmesh(0.018, 0.1, 0.03, strapMat, 0.006), sx * 0.15, 1.38, 0.05);             // chin strap
+      }
+      hlAdd(rmesh(0.09, 0.055, 0.025, nvgMat, 0.01), 0, 1.575, 0.2);                           // NVG shroud
+      hlAdd(rmesh(0.1, 0.012, 0.08, pouchMat, 0.004), 0, 1.65, 0.0);                           // velcro crown patch
+      hlAdd(rmesh(0.14, 0.08, 0.05, pouchMat, 0.015), 0, 1.53, -0.215);                        // counterweight pouch
+      hlAdd(rmesh(0.02, 0.02, 0.02, new THREE.MeshStandardMaterial({ color: 0x2a3a2a, emissive: 0x33ff55, emissiveIntensity: 0.6 }), 0.004), 0, 1.6, -0.19);  // IR strobe
+
+      // NVG mount + dual tubes (pivot group: flip down over eyes)
+      const nvgPivot = new THREE.Group();
+      nvgPivot.position.set(0, 1.58 - HEAD_PIVOT_Y, 0.1);
+      headG.add(nvgPivot);
+      // Deployed is the reference pose, not stowed. The tubes used to be placed for
+      // the stowed position and then swung 66 degrees to "flip down", which pointed
+      // them at the marine's boots instead of through his eyes. Now the children sit
+      // where they belong with the goggles ON — lenses at eye height (the eye slits
+      // are at head-local y 0.20, z 0.18), tubes lying along +Z so they look where he
+      // looks — and stowing rotates the whole assembly UP onto the helmet brow.
+      put(nvgPivot, rmesh(0.12, 0.06, 0.1, nvgMat, 0.012), 0, 0.02, 0.0);
+      put(nvgPivot, rmesh(0.035, 0.17, 0.045, nvgMat, 0.01), 0, -0.07, 0.08, -0.42);
+      put(nvgPivot, rmesh(0.16, 0.04, 0.05, nvgMat, 0.012), 0, -0.14, 0.09);                 // bridge
+      for (const sx of [-0.055, 0.055]) {
+        put(nvgPivot, cyl(0.035, 0.04, 0.12, nvgMat, 12), sx, -0.16, 0.10, Math.PI / 2);   // cylinder axis along +Z: straight ahead
+        put(nvgPivot, cyl(0.042, 0.042, 0.025, goggleMat, 12), sx, -0.16, 0.155, Math.PI / 2);   // eyepiece ring
+        put(nvgPivot, addCast(new THREE.Mesh(new THREE.CircleGeometry(0.028, 12), lensMat)), sx, -0.16, 0.169);
+      }
+      const NVG_STOW_RX = -1.35;   // swung up and back, sitting on the helmet front
+      nvgPivot.rotation.x = NVG_STOW_RX;
+      gearParts.nvg.push(nvgPivot);
+
+      // Headset: ear cups, band, boom mic. The ear defenders come with the helmet (D-64): the band
+      // runs under its shell, so a bare head never wears them.
+      for (const sx of [-1, 1]) {
+        hlAdd(rmesh(0.065, 0.11, 0.1, nvgMat, 0.03), sx * 0.21, 1.41, 0.0);
+        hlAdd(rmesh(0.018, 0.075, 0.065, padMat, 0.01), sx * 0.245, 1.41, 0.0);
+      }
+      hlAdd(rmesh(0.4, 0.028, 0.028, nvgMat, 0.01), 0, 1.5, -0.05);
+      const micBoom = hlAdd(rmesh(0.018, 0.018, 0.13, nvgMat, 0.006), 0.175, 1.34, 0.12);
+      micBoom.rotation.y = -0.4;
+      hlAdd(rmesh(0.028, 0.028, 0.028, nvgMat, 0.01), 0.13, 1.33, 0.18);
+
+      // Goggles stowed up on the helmet.
+      const gogFrame = hlAdd(rmesh(0.3, 0.07, 0.07, goggleMat, 0.025), 0, 1.6, 0.16);
+      gogFrame.rotation.x = -0.45;
+      for (const sx of [-0.07, 0.07]) {
+        const lens = hlAdd(rmesh(0.1, 0.05, 0.03, lensMat, 0.01), sx, 1.6, 0.195);
+        lens.rotation.x = -0.45;
+      }
+      hlAdd(rmesh(0.4, 0.025, 0.012, strapMat, 0.005), 0, 1.585, 0.0).rotation.x = -0.1;      // goggle strap round the shell
+
+      // Face (CL-32, Jerry): what shows above the mask when he has no helmet or goggles on.
+      // Eyes with whites, brown irises, pupils and a catchlight, set in shaded sockets under
+      // heavy lids; brows angled down at the middle; a nose bridge, cheekbones, sideburns,
+      // and an old scar through the left brow.
+      const skinShade = new THREE.MeshStandardMaterial({ color: 0x9c7f5e, roughness: 0.9 });
+      const scarMat = new THREE.MeshStandardMaterial({ color: 0xcfb28e, roughness: 0.6 });
+      dress.mats.skinShade = skinShade; dress.mats.scar = scarMat;
+      const glintMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const eyeMat = new THREE.MeshBasicMaterial({ color: 0x0a0a0a });
+      const hRot = (mesh, rx, ry, rz) => { mesh.rotation.set(rx, ry, rz); return mesh; };
+      for (const sx of [-1, 1]) {
+        const ex = sx * 0.06;
+        hAdd(rmesh(0.074, 0.046, 0.012, skinShade, 0.01), ex, 1.419, 0.144);                  // socket shadow
+        hAdd(rmesh(0.05, 0.024, 0.012, jawPrint, 0.009), ex, 1.419, 0.148);                    // white of the eye
+        hAdd(rmesh(0.022, 0.022, 0.008, irisW, 0.008), ex - sx * 0.003, 1.419, 0.153);         // iris (looking a touch inward)
+        hAdd(new THREE.Mesh(rbox(0.011, 0.011, 0.006, 0.004), eyeMat), ex - sx * 0.003, 1.419, 0.156);   // pupil
+        hAdd(new THREE.Mesh(rbox(0.005, 0.005, 0.003, 0.001), glintMat), ex - sx * 0.003 + 0.004, 1.423, 0.1585);  // catchlight
+        hRot(hAdd(rmesh(0.055, 0.009, 0.012, skinW, 0.004), ex, 1.4325, 0.152), 0.25, 0, 0);  // heavy upper lid
+        hAdd(rmesh(0.052, 0.008, 0.01, skinShade, 0.004), ex, 1.4045, 0.151);                  // under the eye
+        hRot(hAdd(rmesh(0.065, 0.012, 0.016, hairW, 0.005), ex + sx * 0.004, 1.4545, 0.162), 0, 0, sx * 0.16);   // brow
+        hAdd(rmesh(0.045, 0.017, 0.019, skinW, 0.008), sx * 0.082, 1.398, 0.138);               // cheekbone
+        bareAdd(rmesh(0.018, 0.06, 0.035, hairW, 0.006), sx * 0.127, 1.405, 0.045);             // sideburn
+        bareAdd(rmesh(0.012, 0.035, 0.02, skinShade, 0.005), sx * 0.142, 1.4, 0.0);               // inner ear
+      }
+      hAdd(rmesh(0.025, 0.045, 0.026, skinW, 0.01), 0, 1.428, 0.158);                           // nose bridge
+      hAdd(rmesh(0.02, 0.012, 0.012, skinShade, 0.004), 0, 1.44, 0.158);                       // frown line between the brows
+      hRot(hAdd(rmesh(0.006, 0.036, 0.004, scarMat, 0.002), -0.076, 1.449, 0.171), 0, 0, 0.3);   // scar through the left brow
+      // Jerry: a fitted cloth balaclava, always worn by the player. Every
+      // surface uses maskW so the entire hood follows the existing camo item.
+      headG.add(buildBalaclava(THREE, maskW));
+

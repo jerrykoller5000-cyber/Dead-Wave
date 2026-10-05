@@ -1,15 +1,33 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6 (exact variant unsure)
-task: —
-touching: —
-since: 2026-10-02T06:19Z
+task: GP-72 One voice: player-facing wording, Armory and Training Ground copy, and control labels
+touching: ui/strings.js, ui/strings.test.mjs, index.html (shop and armory copy)
+since: 2026-10-05T22:51Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-02-chatgpt-GP-122.md
+last-report: handoffs/2026-10-02-chatgpt-GP-137.md
 
 ## Notes
+
+2026-10-02 GP-137 implemented per Jerry final request:20s marks/4s fade; facility24s synth loop/ventilation and all training action cues; world music/ambience/zombie/weather cues blocked only indoors. Real WebGPU audio isolation/mute/exit/fade/pool tests PASS;6 units PASS; range5/5/scoped click and0 first-use impact shader builds PASS. Review/listen review/training-sound/index.html. Coordinated with Claude CL-118 simulation split; audio owns core/audio.js narrow facade, ui/training-audio.js. Independent listening/full suite/FPS pending; no git. See GP-137 handoff.
+
+2026-10-02 GP-132/133/134/135/136 implemented: no unarmed flashlight; compact full armory at1280x720; range5/5, persistent holes, stable scope-in/real sniper hit; curved/fitted shoulder straps and shirt/carrier/pack band profiles; impact shader prewarm. Default WebGPU functional check PASS after Claude loop-pause fix;0 first-use impact programs/pipelines,0 page errors.17 carry checks/12 gear comparison pairs,6 range units,3 wardrobe units PASS. Marine-idle unit unavailable (Node ESM package three absent). Independent QA/full suite/FPS pending. Claude owns4s pending-compile timeout risk and2 residual ShadowMaterial builds; Grok owns new gun sizes/stow fit. Galleries review/range-usability and review/marine-fit; handoffs GP-132 through136.
+
+2026-10-02 GP-131 implemented: shared medium fade; survivor upright pack-edge rifles with connecting straps; exact existing UNARMED_ARMS rest.13 pairs review/survivor-fit/index.html. Model/mount/light/color/wardrobe checks pass; gallery26 images/3 modes/mobile pass. Units7pass/1 unrelated survivor-record fixture failure (training missing) sent to Cursor. No player hold/roof logic/pose constants/pivots edits. Independent QA/roof animation/full suite/FPS pending. Handoff GP-131.
+
+2026-10-02 GP-130 reference pass implemented: fixed pack Uzis, muzzle-down lower revolvers, fitted retention, lower-face wrap, four shaped hats, linked rhino NVG/rail headset, draped bands, belt/boots/pads/soft pack/pouches and Brandt/Okafor accessories. review/marine-reference/index.html has27 pairs.17 carry+24 mount/direction+8 units PASS;54 gallery images/3 modes/mobile PASS. Claude owns weapon-specific draw reach follow-up; independent QA/full suite/FPS pending. GB-129 shoulder-roll request acknowledged DONE; no hold/arm pivot/gun builder/light/camo changes. Handoff GP-130.
+
+2026-10-02 GP-127/128/129 overnight equipment pass implemented and review handed off. Combined review/equipment-night/index.html links lowered hatch (5 pairs), gear/carry (15 pairs) and weapons (40 pairs). Primaries flank pack; stowed akimbo copies visible; center X plus lower extra pair, opposite-hip spare pistol. Uzi magazine seated in grip; continuous upgrades, shotgun/flamer upgrade visuals, assembled display copies, M240 tripod/mortar seating, adaptive full-size armory spacing. Final148 rack checks+17 carry+36 mod+7 emplacement+8 units and11 upgrade/seven reload/10 copy checks PASS. t180 retains2 known old stored-only failures; tests unchanged. Independent visual acceptance/full suite/FPS and lower-pair draw choreography pending. No git, holdWeapon/WEAPON_HOLD, frame/performance, camo hooks or PointLight changes. Claude/Grokbot coordinated via board; reports GP-127/128/129.
+
+2026-10-02 GP-126: HQ/Training armory now has centered sign, bolted wall surround, diamond mesh and small clear central hatch. Removed redundant Training CIF/SUPPLY/ARMORY wall sign only. Five pairs review/armory/mesh/index.html;148 renderer checks+6 units and gallery/mobile PASS. Original rack/inventory/layout unchanged;3 extra static draws per cabinet, FPS unverified. Independent QA/full suite pending; GP-125 t180 expectations still awaiting owner. No git/weapon-hold/input changes.
+
+2026-10-02 GP-125: Full-size HQ/Training armory cabinet implemented. Eleven eligible gun types at1:1 model scale (owned including carried; chainsaw excluded). Inventory/loadout unchanged. review/armory/display/index.html five pairs;148 renderer placement/attachment checks+6 units PASS. Existing t18027 PASS,2 obsolete stored-only display expectations FAIL; owner request sent. Independent QA/full suite/FPS pending. No git. GB-128 labels acknowledged LATER separately.
+
+2026-10-02 GP-124: Jerry shoulder revision implemented in studio/marine-body.js only. Smaller inward-sloping sleeve caps, torso shoulder overlap fills notch, PGB patch reseated. Original joints/grips/clothing unchanged. review/marine-base/shoulders/index.html eight pairs. Rig/wardrobe29 and production crouch29 PASS, renderer parity/grips/13 views and gallery/mobile PASS; independent acceptance/full suite/perf pending. No index, clips or git edits.
+
+2026-10-02 GP-123: shared player/survivor anatomy refinement implemented in studio/marine-body.js plus makeMarine facial details. Smoother shoulders/torso/hips, shaped limbs/hands/boots, smaller facial surrounds and continuous nose; joint/grip/wardrobe contracts unchanged. review/marine-base/anatomy/index.html has13 pairs. Existing29 units and production crouch t18429/29 PASS; renderer joints/masks/grips/gear equality,13 views and gallery/mobile PASS. Full suite/independent QA/performance pending; no git. CL-115 training-copy request acknowledged LATER, separate task.
 
 2026-10-02 GP-122: Jerry's church/cemetery cleanup implemented. Church farther back, yard rectangle protects all six original plots and burial approach; spaced old graves/ruins/coffins, boundary/bench moved, foliage cleared. review/coldwater/layout/index.html has six comparisons. Real renderer six burial setups PASS, plot rays 90/90 clear (baseline 13 blocked), builder1/1, original trees/paths/sites/plot coords and unrelated history parity PASS, gallery/mobile PASS. Full suite/independent QA/full cinematic playback/load FPS pending; no git. Handoff GP-122.
 

@@ -18,6 +18,8 @@
 //   clampToRects(rects, x, z) -> { x, z, moved }   keeps a point inside the union of rects (nearest edge if outside)
 //   segmentBox(a, b, box) -> t in [0, 1] or null   where the segment a->b first enters the box
 
+import { bakeStatic } from './bake.js';   // CL-117
+
 export const TRAINING = Object.freeze({
   ORIGIN: Object.freeze({ x: 0, y: -200, z: -640 }),   // past the map's edge (the land ends at 220 m)
   WALL_H: 6,
@@ -109,8 +111,11 @@ export function buildTrainingGround(T, opts = {}) {
   // --- materials
   const tileW = keep(tileTex(T, '#dfe3e5', '#b3babf', [1, 1]));
   const floorMat = (w, d, base, grout) => { const t = keep(tileTex(T, base, grout, [w / 4, d / 4])); return std({ color: 0xffffff, map: t, roughness: 0.55, metalness: 0.02 }); };
-  const wallMat = (len) => { const t = tileW ? tileW.clone() : null; if (t) { keep(t); t.needsUpdate = true; t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(len / 4, H / 4); }
-    return std({ color: 0xffffff, map: t, roughness: 0.6 }); };
+  // One material for every wall (CL-117: so they bake to one draw); the tiling is in each wall's uvs, not the texture.
+  if (tileW) { tileW.wrapS = tileW.wrapT = T.RepeatWrapping; tileW.repeat.set(1, 1); }
+  const wallMatOne = std({ color: 0xffffff, map: tileW, roughness: 0.6 });
+  const wallMat = () => wallMatOne;
+  const tileUv = (geo, w, h) => { const uv = geo.attributes.uv; if (uv) { for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * w / 4, uv.getY(i) * h / 4); uv.needsUpdate = true; } return geo; };
   const steel = std({ color: 0x3a4046, roughness: 0.45, metalness: 0.6 });
   const steelLight = std({ color: 0x9aa2a8, roughness: 0.35, metalness: 0.7 });
   const yellow = std({ color: 0xe8b50c, roughness: 0.5 });
@@ -121,9 +126,9 @@ export function buildTrainingGround(T, opts = {}) {
   const band = std({ color: 0x2f6e8e, roughness: 0.6 });
 
   // --- the dark box it all sits in (the world never shows) and the floors
-  const voidMat = std({ color: 0x0b0d0f, roughness: 1, side: T.BackSide });
+  const voidMat = keep(new T.MeshBasicMaterial({ color: 0x0b0d0f, side: T.BackSide }));   // unlit: it fills the screen behind everything (CL-116)
   const voidBox = add(new T.BoxGeometry(150, 70, 150), voidMat, 9, 20, 9); voidBox.name = 'training-void';
-  const outer = add(new T.PlaneGeometry(150, 150), std({ color: 0x15181b, roughness: 1 }), 9, -0.02, 9); outer.rotation.x = -Math.PI / 2;
+  const outer = add(new T.PlaneGeometry(150, 150), keep(new T.MeshBasicMaterial({ color: 0x15181b })), 9, -0.02, 9); outer.rotation.x = -Math.PI / 2;
   const rangeFloor = add(new T.PlaneGeometry(R.maxX - R.minX, R.maxZ - R.minZ), floorMat(R.maxX - R.minX, R.maxZ - R.minZ, '#c9ced1', '#9aa2a7'),
     (R.minX + R.maxX) / 2, 0, (R.minZ + R.maxZ) / 2);
   rangeFloor.rotation.x = -Math.PI / 2; rangeFloor.receiveShadow = true; rangeFloor.name = 'training-range-floor';
@@ -138,12 +143,13 @@ export function buildTrainingGround(T, opts = {}) {
     const len = Math.hypot(x1 - x0, z1 - z0);
     if (len < 0.01) return;
     const cx = (x0 + x1) / 2, cz = (z0 + z1) / 2, yaw = Math.atan2(nx, nz);
-    const m = add(new T.PlaneGeometry(len, H), wallMat(len), cx, H / 2, cz); m.rotation.y = yaw; m.receiveShadow = true;
+    const m = add(tileUv(new T.PlaneGeometry(len, H), len, H), wallMat(len), cx, H / 2, cz); m.rotation.y = yaw; m.receiveShadow = true;
     const b = add(new T.PlaneGeometry(len, 0.16), band, cx + nx * 0.004, 1.05, cz + nz * 0.004); b.rotation.y = yaw;
     const l = add(new T.PlaneGeometry(len, 0.1), lampMat, cx + nx * 0.01, H - 0.25, cz + nz * 0.01); l.rotation.y = yaw;   // a plane: unseen from outside
     const th = 0.3;
     solids.push({ minX: Math.min(x0, x1) - (nx < 0 ? th : 0) + O.x, maxX: Math.max(x0, x1) + (nx > 0 ? th : 0) + O.x,
-      minY: O.y - 1, maxY: O.y + H, minZ: Math.min(z0, z1) - (nz < 0 ? th : 0) + O.z, maxZ: Math.max(z0, z1) + (nz > 0 ? th : 0) + O.z, wall: true });
+      minY: O.y - 1, maxY: O.y + H, minZ: Math.min(z0, z1) - (nz < 0 ? th : 0) + O.z, maxZ: Math.max(z0, z1) + (nz > 0 ? th : 0) + O.z, wall: true,
+      surface: { x:cx+O.x, z:cz+O.z, nx, nz } });
   };
   // The range: back (behind him), far end, his left (+x, the terminals); his right (-x) has the doorway.
   wall(R.minX, R.minZ, R.maxX, R.minZ, 0, 1);
@@ -159,7 +165,7 @@ export function buildTrainingGround(T, opts = {}) {
   wall(B.minX, B.minZ, B.minX, B.maxZ, 1, 0);
   // Over the doorway, the wall above the opening (both faces), and a hazard-striped frame.
   for (const [x, ny] of [[R.minX + 0.002, 1], [B.maxX - 0.002, -1]]) {
-    const top = add(new T.PlaneGeometry(D.maxZ - D.minZ, H - 3), wallMat(D.maxZ - D.minZ), x, 3 + (H - 3) / 2, (D.minZ + D.maxZ) / 2);
+    const top = add(tileUv(new T.PlaneGeometry(D.maxZ - D.minZ, H - 3), D.maxZ - D.minZ, H - 3), wallMat(), x, 3 + (H - 3) / 2, (D.minZ + D.maxZ) / 2);
     top.rotation.y = Math.atan2(ny, 0);
   }
   for (const z of [D.minZ, D.maxZ]) box(0.5, 3.0, 0.14, hazard, D.x, 1.5, z);
@@ -174,7 +180,6 @@ export function buildTrainingGround(T, opts = {}) {
   sign('TRAINING GROUND', 9, 2.2, 0, 4.1, R.minZ + 0.02, 0, { color: '#1d2a33' });
   sign('BUILD ROOM', 2.6, 0.62, R.minX + 0.03, 3.6, (D.minZ + D.maxZ) / 2, Math.PI / 2, { bg: '#f2c418', color: '#16181a', size: 170 });
   sign('INFIRMARY', 2.2, 0.5, B.minX + 1.6, 2.6, B.minZ + 0.02, 0, { bg: '#ffffff', color: '#c01f1f', size: 170 });
-  sign('CIF · SUPPLY · ARMORY', 5, 0.6, R.maxX - 0.03, 4.3, -6.6, -Math.PI / 2, { color: '#1d2a33', size: 120 });
 
   // --- the firing line, its stencil, and a lane number past it for each target
   const line = add(new T.PlaneGeometry(R.maxX - R.minX, 0.26), yellow, 0, 0.012, TRAINING.LINE_Z); line.rotation.x = -Math.PI / 2; line.name = 'firing-line';
@@ -186,6 +191,7 @@ export function buildTrainingGround(T, opts = {}) {
   });
   // A rubber backstop across the far end.
   box(R.maxX - R.minX - 0.4, 3.4, 0.5, std({ color: 0x24282b, roughness: 0.95 }), 0, 1.7, R.maxZ - 0.3);
+  solids.push({minX:O.x+R.minX+.2,maxX:O.x+R.maxX-.2,minY:O.y,maxY:O.y+3.4,minZ:O.z+R.maxZ-.55,maxZ:O.z+R.maxZ-.05,backstop:true});
 
   // --- the targets: a steel base, a pivot at its top, a silhouette plate on an arm. Shot, it falls back flat, waits,
   // and stands up again.
@@ -302,8 +308,13 @@ export function buildTrainingGround(T, opts = {}) {
   const bed = { x: O.x + bedAt.x + 0.98, y: O.y + 0.68, z: O.z + bedAt.z, yaw: Math.PI / 2, centre: W(bedAt.x, bedAt.z), stand: { ...W(bedAt.x + 0.6, bedAt.z + 1.3), yaw: 0 } };
   const throat = { x: O.x + B.minX - 0.26, y: O.y + 1.6, z: O.z - 1.5 };
 
+  // CL-117: the still parts (frames, pegs, the bed, the gate's bars, the lamp strips) baked to one mesh per material;
+  // the targets' pivots keep their own meshes, they turn.
+  const pivots = new Set(targets.map((t) => t.pivot));
+  const baked = bakeStatic(T, g, { skip: (o) => pivots.has(o) });
+
   return {
-    group: g, origin: O, floorY: O.y, walk, zombieRect, solids, stations, bed, throat, lights,
+    group: g, origin: O, floorY: O.y, walk, zombieRect, solids, stations, bed, throat, lights, baked,
     gate: W(gate.x, gate.z), spawn: { ...W(0, -8.5), yaw: 0 },
     targets, hitTarget, resetTargets, update,
     // Inside the training ground's footprint (and a margin): the floor height, for every body and drop.

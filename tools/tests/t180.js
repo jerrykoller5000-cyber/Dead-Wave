@@ -1,6 +1,6 @@
 // t180 - CL-113 (Jerry): the Armory overhaul.
 //  - The kiosk sells attachments; buying one doesn't put it on. The Armory's workbench does (and takes it off).
-//  - The Armory shows pictures of the real guns, with what they wear; the HQ hatch's rack holds the stored guns.
+//  - The Armory shows pictures of the real guns, with what they wear; the HQ hatch's rack holds every owned gun (GP-125).
 //  - The weapon wheel never has more than five spaces (2 primaries, 2 secondaries, the hip pistol); Q steps only
 //    through those; unarmed is the hub. The Bigtex shooter cheat alone shows every gun.
 (async () => {
@@ -78,11 +78,13 @@
     T.closeCIF();
     T.openWheel('weapon'); keys = T.getWheelState().keys; T.closeWheelDbg();
     ok(!!want && keys.includes(want) && keys.length === 5, 'the gun taken from the shelf is on the wheel (' + want + ': ' + keys.join(',') + ')');
-    // --- the HQ hatch's rack: the stored guns, real copies
+    // --- the HQ hatch's rack: since GP-125 (Jerry, 2026-10-02) every owned firearm, stored or carried, real copies;
+    //     the chainsaw is melee and stays off it.
     A.refreshRack();
-    const rack = A.rack(), storedKinds = A.stored();
-    ok(Array.isArray(rack) && rack.length === storedKinds.length && storedKinds.length > 0 && storedKinds.every((k) => rack.includes(k)), 'the HQ rack holds the stored guns (' + (rack || []).join(',') + ')');
-    ok(!rack.includes(keys.find((k) => !k.startsWith('empty') && k !== 'pistol')), 'not the ones he carries');
+    const rack = A.rack() || [], storedKinds = A.stored();
+    const carried = keys.filter((k) => !k.startsWith('empty') && k !== 'chainsaw');
+    ok(storedKinds.length > 0 && storedKinds.filter((k) => k !== 'chainsaw').every((k) => rack.includes(k)), 'the HQ rack holds the stored guns (' + rack.join(',') + ')');
+    ok(carried.length > 0 && carried.every((k) => rack.includes(k)) && !rack.includes('chainsaw'), 'and the ones he carries too, never the chainsaw (' + carried.join(',') + ')');
     // --- unarmed is the hub
     T.openWheel('weapon');
     const cx = innerWidth / 2, cy = innerHeight / 2;

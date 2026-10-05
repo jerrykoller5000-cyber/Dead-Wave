@@ -17,3 +17,5 @@ Claude Commit.bat
 # Jerry's Suno originals (WAV, ~550 MB). The game plays the mp3s made from them.
 assets/soundtrack/incoming/*.wav
 
+# One page per test run (tools/tests/run-all.mjs): a killed run can leave one behind
+tools/tests/test*.html

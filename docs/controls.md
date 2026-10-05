@@ -8,7 +8,7 @@
 | `Shift` | Run |
 | `Space` | Jump. Beside your own sandbag, wire, barricade or an unbarred window, hops you over it |
 | `V` | Dodge roll. Untouchable mid-roll, about 1 s cooldown |
-| `C` (hold) | Crouch: slower, tighter shot groups, lower profile |
+| `C` (hold) | Crouch: slower (2.2 m/s, so the planted boots keep pace with the ground), tighter shot groups, lower profile |
 
 Crouch is on `C` rather than `Ctrl` on purpose: `Ctrl+W` (crouch-walk forward) is the browser's
 own "close tab" shortcut, which no web page can override. `Ctrl+N` and `Ctrl+T` are reserved the
@@ -19,9 +19,9 @@ same way.
 | Input | Action |
 | --- | --- |
 | Mouse | Aim anywhere, 360 degrees. The marine turns to face the reticle |
-| `LMB` | Fire. Hold for full auto, the chainsaw and the flamethrower. The M4, AK-47 and AA-12 start on semi: one shot a click |
-| `K` | Fire selector on the M4, AK-47 and AA-12 (SEMI / AUTO). The pistol stays semi until the auto sear is bought, then K switches that too |
-| `U` | Holster the gun in his hands. U again draws it. Unarmed, he cannot shoot and moves 10% faster (never past ×1.30 with Fleet foot) |
+| `LMB` | Fire. Hold for full auto, the chainsaw and the flamethrower. Every gun that can fire full auto starts on AUTO (GB-127, Jerry) |
+| `X` | Fire selector on the GW-4, KR-7 and Breacher-12 (AUTO / SEMI). The choice is kept for that gun until a new run. The pistol stays semi until the auto sear is fitted, then it starts on AUTO and `X` switches it too. In build mode `X` sells instead (below) |
+| `4` | Holster the gun in his hands. `4` again draws it. Unarmed, he cannot shoot and moves 10% faster (never past ×1.30 with Fleet foot) |
 | `RMB` | Zoom. A real first-person scope on the sniper rifle |
 | Hold `Q` | Weapon wheel: time slows, point at a gun, release to draw it. A quick tap steps to the next one |
 | `R` | Reload from the reserve. While a build ghost is up it rotates the piece; on Upgrade it selects the part instead |
@@ -57,7 +57,8 @@ it. Changing power keeps the picture centred where it was. Look sensitivity scal
 | `E` | Whatever the prompt at the bottom of the screen says (below) |
 | Hold `B` | Build wheel, the same way. A quick tap enters or leaves build mode |
 | `Y` | Switch between one gun and two, once you own the pair (pistol, Uzi, revolver) |
-| `T` / `X` | Repair / sell. While a build ghost is up these act on the cell you are pointing at, not the nearest piece |
+| `T` | Repair. While a build ghost is up it acts on the cell you are pointing at, not the nearest piece |
+| `X` (build mode only) | Sell: hold to preview, release to scrap the piece under the reticle, hold and drag for a box. Outside build mode `X` is the fire selector and never sells |
 | `Enter` | During prep: reminds you to use the HQ alarm panel; it does not start a wave |
 | `Tab` | Full map (north-up, whole world). `Tab` or `Esc` closes it; the game keeps running |
 
@@ -93,15 +94,17 @@ leave build mode.
 
 | Key | Action |
 | --- | --- |
-| `N` | Night vision (needs the helmet first, it mounts on the helmet rails) |
-| `Z` | Laser sight |
-| `L` | Gun flashlight |
+| `1` | Night vision (needs the helmet first, it mounts on the helmet rails) |
+| `2` | Gun flashlight |
+| `3` | Laser sight |
 | `M` | Mute |
 | `Esc` | Pause and Settings |
 | `~` | Dev console. `bigtex shooter` gives unlimited cash, `broke` turns it back off |
 | `F11` | Fullscreen |
 
-`N`, `Z` and `L` do nothing until the gear is bought at the kiosk.
+`1`, `2` and `3` do nothing until the gear is bought at the kiosk. With `B` held, `1` to `9` turn the build wheel's pages
+instead. None of the number keys or `X` act while you are typing in a text field. `N`, `L`, `Z`, `K` and `U` are free
+(GB-128, Jerry, 2026-10-02).
 
 ## Camera
 

@@ -1,32 +1,40 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-10-01 03:30Z by Claude (the story, v2; the crew back at work; D-70, D-71).
+Lead: Claude. Last updated 2026-10-05 22:40Z by Claude (the board cleared and reorganized for Jerry; back to work).
 
-This is the one place to look before you work. `AGENTS.md` has the rules and the check-in
-steps; this board has what to work on and what has been decided. **Claude (lead) and Jerry
-edit this file.** The one exception: each agent ticks the box of its *own* tasks, which
-`crew.mjs in` (▶) and `crew.mjs out --done` (✓) do for you. Everyone else reports through
-their check-in card, `crew.mjs note`, their handoff note, and `handoffs/requests.md`.
+This is the one place to look before you work. `AGENTS.md` has the rules and the check-in steps; this board has what
+to work on and what has been decided. **Claude (lead) and Jerry edit this file.** The one exception: each agent ticks
+the box of its *own* tasks, which `crew.mjs in` (▶) and `crew.mjs out --done` (✓) do for you. Everyone else reports
+through their check-in card, `crew.mjs note`, their handoff note, and `handoffs/requests.md`.
 
-**The work from here to 1.0 is the roadmap (D-43):** six phases, R1 to R6, below and in `docs/roadmap.md`
-(every task's details: what the player gets, how it's built, what proves it). Your queue lists your tasks
-phase by phase; the current phase is the Mission.
-
-Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal:
-`node crew/crew.mjs`. The motion lab (D-42): `Open Motion Lab.bat`.
+Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal: `node crew/crew.mjs`.
 
 **Told to "check in with the crew work board and complete your tasks"?** This is the board.
-1. Read `AGENTS.md` if you haven't this session. It has the rules, and its "Every session"
-   steps say exactly how to check in, post notes and check out.
-2. Run `node crew/crew.mjs next <you>` (`claude`, `cursor`, `chatgpt`, `grokbot`,
-   `antigravity`) for your first task, or read your queue below.
-3. Work the queue top to bottom, one check-in and one handoff per task, until it's empty or
-   you're blocked. Don't stop to ask Jerry whether to continue. A task that says "after XX-n"
-   waits for it; take the next one meanwhile.
+1. Read `AGENTS.md` if you haven't this session. Its "Every session" steps say how to check in, post notes and check out.
+2. Find your row in **Start here** below. Or run `node crew/crew.mjs next <you>` (`claude`, `cursor`, `chatgpt`,
+   `grokbot`, `antigravity`).
+3. Work your queue's **Now** list top to bottom, one check-in and one handoff per task. Don't stop to ask Jerry whether
+   to continue. A task that says "after XX-n" waits for it; a task that has left the board is done.
+
+## Start here
+
+Each agent's queue (below, under Queues) is in three parts: **Now** (start it), **Waiting** (it says on what) and
+**Later** (R6, the road to 1.0). Take them in this order:
+
+| Agent | Now, in this order | Waiting | Later (R6) |
+| --- | --- | --- | --- |
+| Cursor | CU-84 (the tests boot), CU-85 (commit what's waiting), CU-86 (the Hollows' snapshot for GP-84), CU-72, CU-87 (the M240's stray arc) | — | CU-55, CU-56, CU-57 |
+| Claude | CL-120 (the crouch), CL-84 (the reload), CL-122 (the hands), CL-123 (a first-use hitch) | CL-121 (Jerry's answer, Q-6) | CL-86 |
+| ChatGPT | GP-72 (one voice) | GP-84 (after CU-86) | — |
+| Grokbot | GB-131 (t80 on game time) | GB-94 (Jerry's balance notes) | — |
+| Antigravity | AG-50 (eyes on 10-01/02's work) | — | AG-28 (after CU-57) |
+
+Not sure a task is yours (the table under "Who does what")? Say so with `crew.mjs request`; don't start it.
 
 ## Who runs on what (current)
 
-Jerry moves agents between models; this table is the current truth (2026-09-29, from Jerry, for tonight's R2 run).
+Jerry moves agents between models; this table is from 2026-09-29. Each check-in's `--model` is the truth, and Jerry
+tells Claude when the table should change.
 Each agent's card (`crew/status/<you>.md`, `model:`) and its next check-in `--model` should match it.
 Older notes and decisions below that name other models are history.
 
@@ -54,30 +62,19 @@ someone else, say so with `crew.mjs request`; don't start it.
 
 ## Mission
 
-**The roadmap, phase R5, with the story, v2 (D-70).** Jerry rewrote the story with Claude on 2026-10-01:
-`docs/story.md` is the bible now (a valley, not an island; the PGB, the Gravewalkers; FOB Threshold; Ridgeline;
-Heron; the Marrow; three survivors on the roof). **Read it before any task that touches words, props, survivors,
-the extraction or the Hollows.** Jerry's rule (D-71): build the pieces and put them in place; no timed runs, no long
-sims, no measurement passes; each piece gets its own quick test, and Jerry plays and makes the connections.
-**Go (Jerry, 2026-10-01 ~03:00Z): "check the board and let's get to work!"** Take your queue top to bottom; the
-Story v2 tasks are in R5 with the rest. Tick your box with `crew.mjs`; never save this board or the LOG from a copy.
-- Claude: CL-106 (the docs follow the story), CL-107 to CL-110 (the valley's history, the stencils, Heron), CL-75 (the
-  survivors), CL-99 v3, CL-100; then CL-76, CL-92, CL-93, CL-78, CL-81.
-- Cursor: CU-71 (the Hollows' runtime: most of the Hollows wait on it), CU-79 (the ladder); then R6.
-- Grokbot: GB-116 (the roof), GB-117 (Heron), GB-107 and GB-108 after CU-71; GB-92, GB-93.
-- ChatGPT: GP-94 (the story's words), GP-70 (the radio), GP-95 (the survivors' words), GP-83, GP-81, GP-84.
-- Antigravity: AG-28 later; shots only when someone asks.
-- **Claude** · CL-106 · handoffs/claude-CL-106.md
-- **Claude** · CL-107 · handoffs/claude-CL-107.md
-- **Claude** · CL-110 · handoffs/claude-CL-110.md
-- **Claude** · CL-75 · handoffs/claude-CL-75.md
-- **Cursor** · CU-71 · handoffs/cursor-CU-71.md
-- **Cursor** · CU-79 · handoffs/cursor-CU-79.md
-- **Grokbot** · GB-116 · handoffs/grokbot-GB-116.md
-- **Grokbot** · GB-117 · handoffs/grokbot-GB-117.md
-- **ChatGPT** · GP-94 · handoffs/chatgpt-GP-94.md
-- **ChatGPT** · GP-70 · handoffs/chatgpt-GP-70.md
-Then: the rest of R5, then R6.
+**Back to the board (Jerry, 2026-10-05): close R5, then R6.**
+The board is cleared and each queue starts with what can be done now. D-71 still holds: build the pieces and put them in
+place; no timed runs or long sims; each piece gets its own quick test, and Jerry plays and makes the connections. The
+story is `docs/story.md` (D-70). Tick your box with `crew.mjs`; never save this board or the LOG from a copy.
+- **Cursor** · CU-84 · handoffs/cursor-CU-84.md
+- **Cursor** · CU-85 · handoffs/cursor-CU-85.md
+- **Cursor** · CU-86 · handoffs/cursor-CU-86.md
+- **Claude** · CL-119 · handoffs/claude-CL-119.md
+- **Claude** · CL-120 · handoffs/claude-CL-120.md
+- **ChatGPT** · GP-72 · handoffs/chatgpt-GP-72.md
+- **Grokbot** · GB-131 · handoffs/grokbot-GB-131.md
+- **Antigravity** · AG-50 · handoffs/antigravity-AG-50.md
+Then: CU-72 and GP-84 close R5; then the rest of R6 (CU-55, CU-56, CU-57, AG-28, CL-86).
 
 ## Waiting on
 
@@ -99,19 +96,33 @@ counts a listed id that has left the board as done).
 | **R2 · The night has a shape** | ✓ Done | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, CU-77, CL-102, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, GP-85, CU-78, AG-30, GP-86, CL-104, CL-105, GB-112 |
 | **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | GP-88, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, GP-87, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, GP-89, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69, GB-111, CL-103 |
 | **R4 · The way out** | Jerry plays | The extraction at night 20 (Heron, story v2); the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
-| **R5 · Named nights and bigger systems** | ▶ Now | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91, CL-106, CL-107, CL-108, CL-109, CL-110, CU-79, GB-116, GB-117, GP-94, GP-95, CL-111, GB-119, CU-80 |
-| **R6 · Finish (1.0)** | Later | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28 |
+| **R5 · Named nights and bigger systems** | ▶ Closing: CU-86, CU-72, GP-84 left | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91, CL-106, CL-107, CL-108, CL-109, CL-110, CU-79, GB-116, GB-117, GP-94, GP-95, CL-111, GB-119, CU-80, CU-86 |
+| **R6 · Finish (1.0)** | ▶ Started | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28, CU-84, CU-85, GB-131, AG-50, CL-119, CL-120, CL-121, CL-122, CL-123, CU-87 |
 | **R7 · Co-op, up to 4 players** | After 1.0 | Up to 4 players, one hosting, through the desktop app (D-58). | A night with friends. | Written when R6 closes. |
 
-**The story it tells (D-44, "The Signal").** The relay on the mast went silent three weeks ago; the convoy never
-came; the camps stopped answering. One marine parachutes in to hold the HQ and get the relay talking. The dead
-answer a signal from the runes under the lake, louder every night. Act 1 teaches the loop; in Act 2 the repaired
-relay speaks each morning and offers one call a day, and the supply planes fly in new guns; Act 3 is the wave,
-with Fog Night, the siege and a colossus walking by day. On night 20 the boat comes: hold the dock and board it.
-For players who look, the relay's static and the pit stones hide a way to silence the signal and fight the
-guardian for the true ending. `docs/roadmap.md` has it in full.
+**The story (D-70, story v2).** `docs/story.md` is the bible: a valley in the forest ringed by mountains, with a lake and
+rivers, not an island; the PGB (the Gravewalkers), FOB Threshold, Ridgeline on the relay, Heron the floatplane on night 20,
+the Marrow, three survivors on the roof. Read it before any task that touches words, props, survivors, the extraction or
+the Hollows. D-44's outline (the relay, one call a day, the three acts, the secret) still holds where story.md doesn't
+change it.
 
 ## Orders from Jerry
+
+Newest first. Claude writes these down when Jerry gives them in chat. Older ones: `crew/archive/board-queues-2026-10-05.md`
+(2026-09-25 to 09-30) and `crew/archive/board-queues-2026-09-26.md` (before that).
+
+- **2026-10-05 · Back to the board.** "We are going to get back to crew board work. Can you please clear finish tasks
+  and reorganize so that the agents can get their tasks easily." Done by Claude: 37 finished tasks off the board, and
+  the 64 tasks Jerry gave agents directly on 10-01/02 written down, in `crew/archive/board-queues-2026-10-05.md`; GP-81
+  and GP-95 closed (built; their checks are AG-50 and CU-85); a **Start here** table; each queue in Now, Waiting and
+  Later; new tasks CU-84 to CU-86, GB-131, AG-50, CL-119 to CL-121; the older orders and D-0 to D-39 moved to the
+  archive (every decision stays in full in `docs/decisions.md`); the 37 older review flags (from before the 10-01 board clear) closed; Q-6 for
+  Jerry (the marine's handedness).
+
+- **2026-10-02 · Board work halted; commit first.** Jerry stopped the board to work through fundamental issues agent by
+  agent, and gave them their tasks directly (CL-113 to CL-118, GB-120 to GB-130, GP-97 to GP-137, CU-82, CU-83). First
+  priority: everything committed and pushed; the checkpoint ("everything since 321aef8") went up at 06:33Z. His plan for
+  the Training Ground (CL-115): it becomes part of a bigger tutorial later, so most tips can come out of the main game.
 
 - **2026-10-01, ~07:45Z · Jerry sleeps; Claude has the crew.** "I'm going to sleep. You have the agents for tonight."
   "If you guys get done with R5 move to R6." When R5's tasks are done, Claude clears the mission and writes R6's.
@@ -138,92 +149,13 @@ guardian for the true ending. `docs/roadmap.md` has it in full.
   guys really need to focus on just getting these elements into place and I will playthrough and make the
   connections." (D-71.) Jerry halted the crew (~01:10Z) to reorganize.
 
-- **2026-10-01, ~00:20Z · CU-53: about 2 hours, not 10.** "It's running but we probably don't need it to do 10 hours worth. We need
-  to condense that down to about 2." The full-run timing goes parallel (Claude's request to Cursor).
-
 - **2026-09-30, ~23:25Z · The Hollows and the secret: Claude's judgement.** "For the hollows and the secret, use your best
   judgement." Q-5 closed: both specs stand (docs/specs/hollows.md, docs/specs/secret-quest.md); build them as written.
-
-- **2026-09-30, ~22:20Z · On to R5.** "Great work please continue. If you guys get done with R4 move to R5." R4's
-  tasks are done but CU-53 (running), so the mission is R5 now; R4 closes when Jerry has played a run to the boat.
-
-- **2026-09-30, ~07:20Z · The fidelity pass is good; the crew works the night.** "Fidelity pass looks good to me nice
-  work. I am going to go to sleep so you got the work for the rest of the night." CL-94 closed. R3's tasks are done, so
-  the mission is R4 (his standing order).
 
 - **2026-09-30, ~04:45Z · One stage after another.** "If you guys finish R3 continue to R4. Same as before once one
   mission is done, clear it and move to the next." Standing order: when a stage's tasks are all done, Claude clears
   the mission and writes the next stage's (R4, then R5, R6); nobody waits for the stage to close before taking the
   next stage's tasks whose "after" is met.
-
-- **2026-09-30, ~03:00Z · The mission is R3.** "Clear out the mission and change it to R3." Earlier (~02:30Z), after a
-  short break: "Start them on their tasks please." R2's mission is cleared; the R3 mission above lists what is left.
-
-- **2026-09-29, ~17:50Z · Jerry's review.** Suppressors good except the shotgun's: a big round can, "think No Country
-  for Old Men" (Claude, CL-95). The CIF moves to the wall opposite the kiosk and skull window, with the Armory window
-  beside it (CL-103). The guardian: comes out of the cave too slowly and not fluidly; the toss one-handed; the marine
-  must sit in the guardian's hand, never off beside it; the kick-free needs the marine struggling and pulling against
-  the drag (CL-104). After an escape the grab can happen again, and each escape takes more presses (GB-112). The
-  burial detail always wears woodland MARPAT, whatever his camo (CL-105). Later, in the CIF: shades (aviators, a
-  pit-viper style, a Wayfarer style) and the GWOT ballistic goggles (CL-97).
-
-- **2026-09-29, ~08:15Z · R2 is go.** "Lift the hold and delegate tasks." Tonight: Cursor on Grok 4.7 High, Claude on
-  Opus 5.5 High, Antigravity on Gemini 3.1 Pro High, Grokbot on Grokbot, ChatGPT on GPT-6 Sol High. Claude spread the
-  load: GB-97 to Cursor (CU-77), GB-98 to Claude (CL-102), CU-76 to ChatGPT (GP-85); new CU-78 (commit what's waiting)
-  and AG-30 (eyes on the work done during the halt).
-
-- **2026-09-29, ~08:00Z · Clear the board, make the roadmap easy to see, improve the board.** "Clear the Board of all
-  completed tasks. And make the roadmap easier to visualize all the stages. Clean it up." He picked all four board
-  fixes Claude offered. Done by Claude: finished tasks to `crew/archive/board-queues-2026-09-29.md`; decisions one
-  line each here, in full in `docs/decisions.md`; `docs/roadmap.md` cleaned (a stage map on top, history to
-  `docs/archive/roadmap-history.md`); the Crew Panel's Roadmap box; `crew.mjs tidy` and `crew.mjs newid`.
-
-- **2026-09-29, ~07:06Z · An underground cave system, on the board only.** "Someway to get past the cave Guardian.
-  Underground cave system accessible through the cave entrances. Players can fight through underground caves during
-  the daytime only... play underground for some extra cash... maybe they can unlock blueprints or weapons... They
-  cannot build under there. We need to work it into the story... Don't actually do any work, just come up with a
-  cohesive plan and put it on the board." Planned by Cursor as D-67 (the Hollows), R5, P-134 to P-146.
-
-- **2026-09-27, ~18:00Z · Finish R1, then halt.** "After we finish Phase R1 we are going to halt work for a few days
-  until some of the usage can reset." So: R1 closes (GB-70 and CL-68 once Jerry's lab notes are in; AG-20 and AG-21 on
-  his GPU), everything waiting is committed, and then nobody starts anything until Jerry says so. R2 and R3 work
-  already done stays; don't take new R2/R3 tasks once R1 is closed. The mission line says when the halt is on.
-
-- **2026-09-26 · A reaction tool, the roadmap to finish the game, and the open calls.** "Create a hybrid
-  animation/ragdoll tool similar to Euphoria, specifically tailored to be light enough to use in this game; work
-  that into our current plan. The agents need to easily be able to use this tool and I need to be able to review
-  and make notes on animation." Then the board as "a giant roadmap for the completion of this game with tasks for
-  all the agents in each phase" that "plays to each model's strengths", and the plan's calls he'd left open:
-  "use your best discretion to make it fun and tell a fun narrative." Done as CL-65 (D-42), the roadmap (D-43,
-  `docs/roadmap.md`), the story (D-44) and D-45 to D-56. The compiled suggestions it grew from are its Coverage
-  table (now `docs/archive/roadmap-history.md`).
-
-Newest first. Claude writes these down when Jerry gives them in chat. The older ones (the showcase and
-before) are in `crew/archive/board-queues-2026-09-26.md`.
-
-- **2026-09-26, ~04:40Z · Face the prey, then turn and drag.** On the first scene preview: the guardian grabs the
-  marine while facing away from him. A creature grabs facing its target, whatever way the target lies, aiming for the
-  leg; then it turns round and heads for its cave, dragging him. Into CL-64. Also: other agents have suggested a
-  ragdoll hybrid like the Euphoria engine; maybe some time in the future (Claude's view: as a layer on scenes, for the
-  body being thrown about, after CL-64; `docs/studio.md` Later).
-
-- **2026-09-26, ~04:30Z · Scenes: the grab is the problem, and build it to reuse.** After seeing the studio's guardian
-  strips: "the problem may not have been as much with animation but the position of the two models' limbs (placement
-  on grab) and the speed and movement. It's very hard to tell from the strips and video, but the tool is cool and
-  works." He agreed to both steps (the studio shows the real moment with both bodies; then fix it in the game), and:
-  "make sure we can reuse whatever we develop here for future development. Not a one-off thing but a robust tool we
-  can transfer from scene to scene." D-41.
-
-- **2026-09-26, 01:40Z · The studio (future development).** Jerry has his showcase copy and is happy with it. His
-  long-held idea: bridge the gap between a human developer and a creation suite agents can understand. Jerry is the
-  critic ("we need this or that"); the agents can see what they have to do instead of a million blind attempts. Start
-  with modeling and animation for this game, then textures and sound. The guardian's model is great; its animation is
-  poor; it is the first job once the tool exists and Jerry's part is explained. The marine's animation is fine for now.
-  He linked the Quaternius Universal Animation Library 1 and 2 (`Desktop\Animation Assets`, CC0) as a guide for
-  character animation, and his earlier Caracal Studio texturer. D-40, `docs/studio.md`.
-
-- **2026-09-25, 01:15Z · Git is shared.** Jerry overrides AGENTS.md rule 6: Claude may now commit
-  and push too, not only Cursor. D-27.
 
 ## Decisions
 
@@ -231,6 +163,9 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first. **
 of every decision is in `docs/decisions.md`.** Read the full text of any decision your task names before you start.
 Claude adds each new decision in both places.
 
+- **D-74** · Nothing the player reads names a real brand or product (Jerry, 2026-10-02; GB-120 to GB-122)
+- **D-73** · The key layout: 1 to 4 and X (Jerry, 2026-10-02; GB-128)
+- **D-72** · Full auto by default; replaces D-65's start on semi (Jerry, 2026-10-02; GB-127)
 - **D-71** · Build the pieces; Jerry plays them; no timed or long runs (Jerry, 2026-10-01)
 - **D-70** · The story, v2: the valley, the PGB, FOB Threshold, three survivors on the roof (Jerry, 2026-10-01)
 - **D-69** · The dressing room: only camos are earned, from the best run (Claude, for Jerry; CL-96)
@@ -263,45 +198,7 @@ Claude adds each new decision in both places.
 - **D-42** · Reactions: light active ragdolls (Jerry, 2026-09-26: "similar to Euphoria")
 - **D-41** · Scenes (Jerry, ~04:30Z; extends D-40)
 - **D-40** · The studio (Jerry, 01:40Z; `docs/studio.md`)
-- **D-39** · The loop's two transitions (Jerry, 22:45Z; revises D-34, CL-49 and CL-51)
-- **D-38** · Bounty rewards (Claude, for Jerry; GB-57 asked)
-- **D-37** · Daytime: a scouting report and bounties (Claude, for Jerry)
-- **D-36** · The load budget is met by the splash (Claude, for Jerry)
-- **D-35** · Loop feel first (Jerry)
-- **D-34** · The end of a night is a choice (Jerry)
-- **D-33** · No alarm stinger (Jerry)
-- **D-32** · Claude's calls from the plan (Jerry did not overrule)
-- **D-31** · Ways to die is a lifetime collection (Jerry)
-- **D-30** · No saves (Jerry)
-- **D-29** · Day 1 is 15 zombies, half out of the ground (Jerry, revising "horde sizes stay")
-- **D-28** · The sky follows the loop (Jerry)
-- **D-27** · Cursor and Claude both commit and push (Jerry, 01:15Z; replaces "only Cursor")
-- **D-26** · The guardian chase (Jerry 22:52Z, revises D-25; built as GB-35)
-- **D-25** · A cave poke is the cave grab (superseded by D-26 on the trigger and the chase)
-- **D-23** · Performance: fewer things per frame, measured
-- **D-22** · Shooting into a cave brings the guardian out (GB-25, approved with changes)
-- **D-21** · Claude owns the music director
-- **D-20** · The death replay comes out
-- **D-19** · The plan is `docs/plan.md`
-- **D-18** · Scripted-death replays (GB-18) are approved
-- **D-17** · Cursor's objective interaction (CU-10) is approved
-- **D-16** · Grokbot's GB-16 helpers are contracts, with three fixes
-- **D-15** · The split goes a slice at a time
-- **D-14** · Every check-in names its model
-- **D-13** · The guardian night (GB-13 spec) is approved, with two changes
-- **D-12** · Floors follow aim
-- **D-11** · The repair helpers are contracts
-- **D-10** · OpenCode leaves; five agents
-- **D-9** · Six agents; tasks by strength
-- **D-8** · Until the split, UI hooks are window events that each owner adds in their own part
-- **D-7** · A test whose expectations change gets a second pair of eyes
-- **D-6** · Crew board, round two
-- **D-5** · Pit view
-- **D-4** · `sampleHeight` and `POI` become read-only exports of `world/terrain.js`
-- **D-3** · Test triage
-- **D-2** · Load time: the fix is the title gate, not the bake
-- **D-1** · Apply the loader patch now, not after the split
-- **D-0** · Earlier calls
+- **D-0 to D-39** · Earlier calls: one line each in `crew/archive/board-queues-2026-10-05.md`, in full in `docs/decisions.md`
 
 ## The split freeze
 
@@ -314,197 +211,119 @@ checked in on the whole file, wait or pick another task. Re-read before you save
 
 ## Queues
 
-Each agent's work, phase by phase, top to bottom. `[ ]` to do, `[>]` in progress, `[!]` blocked, `[~]` parked.
-A finished task (`[x]`) leaves the board: `node crew/crew.mjs tidy` moves it to `crew/archive/` (Claude runs it).
-A task whose "after XX-n" names a task no longer on the board can start: that task is done. New task ids come
-from `node crew/crew.mjs newid <agent>`, never by guessing. R1 is finished (`crew/archive/board-queues-2026-09-29.md`).
+Each agent's work in three parts: **Now** (top to bottom), **Waiting** (on the task or the person it names) and
+**Later** (R6). `[ ]` to do, `[>]` in progress, `[!]` blocked, `[~]` parked. A finished task (`[x]`) leaves the board:
+`node crew/crew.mjs tidy` moves it to `crew/archive/` (Claude runs it). A task whose "after XX-n" names a task no longer
+on the board can start: that task is done. New task ids come from `node crew/crew.mjs newid <agent>`, never by guessing.
+R1 to R4's tasks are all finished (`crew/archive/`).
 
-### Cursor — integration, git, tools, engine core (Grok 4.7 High)
+### Cursor — integration, git, tools, engine core
 
-#### R5 · Named nights and bigger systems
+#### Now
 
-- [x] **CU-71** **R5 · P-136.** The Hollows' runtime (D-67): going down and coming up, topside frozen and hidden, the
-  ground, colliders and a nav grid switched to the warren, building refused, players list aware. After CL-98; after
-  CU-63. Details: `docs/roadmap.md` P-136.
-- [x] **CU-80** **R5 · P-140.** The Hollows' haul goes live (contracts: the Hollows' haul, GP-83): an atomic grant
-  hook `grantHaul(items) -> { ok, rejected }` that gives all of a strongbox's items or none (blueprint, gun, mod,
-  camo, ammo, med pack, grenade) through the inventory's own adders, and the E adapters below: open a strongbox, take
-  a crate, pick up a tag (`createHollowLoot`, `createTagCollection`). After CU-71.
+- [x] **CU-84** **First: the tests boot again.** Since GP-106 and GP-131 no test page boots: `tools/tests/fakethree.mjs`
+  lacks `Shape`, `ExtrudeGeometry` (a box round the shape's bounds is enough) and `CatmullRomCurve3.getPointAt` (= getPoint;
+  add getTangent and getTangentAt). `ui/survivors.test.mjs`'s run-record fixture needs a `training` state since CL-115
+  (ChatGPT's GP-131 finding). Claude's two requests of 2026-10-02 have the details. (CU-83 is closed: its checkpoint
+  went up at 2026-10-02 06:33Z, and Claude set your card idle in the board clear.)
+- [x] **CU-85** **Commit and push what's waiting.** Everything checked out since the checkpoint (2026-10-02 06:33Z): CL-116
+  to CL-118, GB-125 to GB-130, GP-123 to GP-137, and this board. One full `npm test` first, then the integration looks
+  ChatGPT asked for in `handoffs/requests.md` (GP-97 to GP-137: one pass over them, not one each). A failure goes to its
+  owner with `crew.mjs request` (t80 is GB-131, t167 is CL-119); don't fix it here. After CU-84.
+- [ ] **CU-86** **R5 · P-141 · for GP-84.** The Hollows' snapshot and pickup receipts (ChatGPT's request, 2026-10-02):
+  `core/hollow.js` `state()` gives the live depth from where the player stands (not `warren.entry`) and every warren's
+  and passage's clearance for the run; `claimHollowHere`'s tag and prize or shard receipts go out as an event the UI can
+  hear, instead of being dropped in doAction. Propose it in `docs/contracts.md` for Claude's yes (rule 9).
 - [ ] **CU-72** **R5 · P-143.** Passages: a cleared warren's Deep opens a tunnel to the next cave round the compass,
-  for the run. After CU-71; after CL-99. Details: `docs/roadmap.md` P-143.
-- [x] **CU-79** **R5 · Story v2.** A ladder up the HQ's side (`docs/story.md` §5): the marine climbs it and stands on
-  the roof; the roof is walkable ground with an edge; the HQ's door stays shut (sealed). Players list aware (co-op).
-  For GB-116 and CL-75.
-- [x] **CU-81** **Jerry, 2026-10-01.** Overhaul every gun's look (Claude okayed; Grokbot stays on GB-92): the same
-  names, grips, moving parts and furniture materials, so camo, the rune finish and the survivors' M4s still work.
-  Re-run t102, t159, t165; before-and-after shots of each gun (review/guns).
-- [x] **CU-82** **Jerry, 2026-10-01.** The night lockdown: from the alarm to the morning no kiosk, Armory, CIF, HQ
-  panel or skull window, and no build menu (B, the wheel, a picked piece); a build in hand is put away; every light
-  on the HQ turns red. t179, review/night-lockdown.
+  for the run. Details: `docs/roadmap.md` P-143.
+- [ ] **CU-87** **R6 · found in CU-81.** While he is on the M240 (the Watchman MG), updateMortarArc still runs (it has no
+  type check), so the mortar's dotted arc shows. Gate it to the mortar.
 
-#### R6 · Finish (1.0)
+#### Later · R6 (1.0)
 
-- [ ] **CU-55** **R6 · P-87.** Every test green: t41 and friends onto startMatch; `npm test` passes. (No full runs:
-  D-71.) Details: `docs/roadmap.md` P-87.
+- [ ] **CU-55** **R6 · P-87.** Every test green: 29 older checks are on startMatch (handoffs/2026-10-01-cursor-CU-55.md); left: t1, t3,
+  t36, t37 and the dump probes; then `npm test` twice, the same. (No long runs: D-71.) Details: `docs/roadmap.md` P-87.
 - [ ] **CU-56** **R6 · P-88.** One quick check on Jerry's GPU: the title loads in about 15 s cold, 5 s warm; a night
   with 48 holds about 60 fps. A single look, not a measurement campaign (D-71). Details: `docs/roadmap.md` P-88.
 - [ ] **CU-57** **R6 · P-89.** The 1.0 package as a desktop app (D-57): a Tauri or Electron shell round the folder
   (a custom protocol for the module imports, saves in a real folder, an icon, fullscreen, an installer), a version
   on the title, and the browser build kept for the crew. After CU-55; after CU-56. Details: `docs/roadmap.md` P-89.
 
-### Grokbot — combat (Grokbot)
+### Grokbot — combat
 
-#### R5 · Named nights and bigger systems
+#### Now
 
-- [x] **GB-92** **R5 · P-97.** The secret's fight: on a silenced day the guardian falls back to the heart in the
-  Marrow, and only there can it die (`docs/story.md` §9). After GP-70; after CL-78. Details: `docs/roadmap.md` P-97.
-- [x] **GB-93** **R5 · P-98.** Swarm Night on 17: runners from every cave, faster pushes. After CL-76. Details:
-  `docs/roadmap.md` P-98.
-- [x] **GB-107** **R5 · P-138.** Fighting below: sleepers that wake to noise and light, nests to blow up, each Deep's
-  set piece, cave roles, 24 awake at most. After CU-71; after CL-99; after CL-91. Details: `docs/roadmap.md` P-138.
-- [x] **GB-108** **R5 · P-139.** The stir: noise fills a meter (suppressed much less), the Hush holds it; full or flat,
-  the guardian comes through the rock; bolt-holes, the kick-free, else the cave death. After GB-107; after GB-106;
-  after GB-105. Details: `docs/roadmap.md` P-139.
-- [x] **GB-116** **R5 · Story v2.** The survivors on the roof (D-70, `docs/story.md` §5), in place of GB-91's three
-  helps: the rescue (GB-90) brings Okafor, Brandt or Pike; on the roof they sleep by day and stand to at the alarm:
-  Brandt fires the M240B, Okafor and Pike their M4s, at the dead near the HQ; Okafor heals him to full once a day (E
-  beside her); Pike makes repairs cheaper (GB-91's cut, moved to her). Nothing targets them. Reset clears. After CL-75
-  for the figures (stand-ins meanwhile); after CU-79 for the ladder.
-- [x] **GB-119** **R5 · P-96 · Story v2.** The true ending in the world (`docs/specs/secret-quest.md` §6): on
-  `'quest'` `{ kind: 'ending' }` every dead in the valley drops where it stands (no pay, no skulls); from the next run
-  a rune-etched pistol lies on the dock planks by day (E to take it; the pistol, as good as the pistol, with the rune
-  finish once CL-111 is in). After GB-92.
-- [x] **GB-117** **R5 · Story v2.** Heron in the extraction (GB-86's flow): **CL-110 put Heron behind the boat's own API, so the flow already works (t145, t147, t158 pass); what is left is a check of GB-85/GB-86's wording and timings with Heron in, and anything that still says "boat" in combat code.** Called from the board as the boat was;
-  Heron lands and taxis to the dock on CL-110's path and timing; boarding as before. After CL-110.
+- [x] **GB-131** **R6 · P-87.** t80's two spider lines (round the house; the corner-grazing line) watch 12 s and 10 s of
+  wall clock, so they fail when the PC is busy (Cursor's CU-55 suite; Grokbot's reply, 2026-10-01). Move those windows to
+  game time as Grokbot offered: the same thresholds, nothing weakened. t80 alone, twice, in the handoff.
 
-#### R6 · Finish (1.0)
+#### Waiting
 
-- [ ] **GB-94** **R6 · P-79.** Balance by Jerry's notes (D-71): he plays, says which nights or prices feel off, and
-  Grokbot tunes skull value and packs (never horde size). No medians, no long sims. Takes a list from Jerry when he
-  has one.
+- [~] **GB-94** **R6 · P-79.** Balance by Jerry's notes (D-71): he plays, says which nights or prices feel off, and
+  Grokbot tunes skull value and packs (never horde size). No medians, no long sims. Parked until Jerry has a list; then it
+  goes back to [ ].
 
-### ChatGPT — what the player reads and decides (GPT-6 Sol High)
+### ChatGPT — what the player reads and decides
 
-#### R5 · Named nights and bigger systems
+#### Now
 
-- [!] **GP-81** **R5 · P-124.** Two new deaths on the tombstone (D-63): `lightning` and `rabbit` in the death catalogue,
-  their lines and their unlock; the names and pickup lines for the boots and the grenade; a badge for killing the
-  rabbit. After CL-92, CL-93. Details: `docs/roadmap.md` P-124.
-- [x] **GP-70** **R5 · P-96.** The secret's UI: the glyphs at the radio, the silenced night on the board, the true
-  ending, the rune pistol at the dock. Story v2 names: Ridgeline, Heron, the Marrow (`docs/story.md` §9). After CL-79.
-  Details: `docs/roadmap.md` P-96.
-  **Done as UI and model (Claude, 2026-10-01):** the radio, the board and the ending screen are live; the rune finish
-  is CL-111, the rune pistol at the dock and every dead dropping at the ending are GB-119. GB-92 builds on
-  `TT.getQuestState` now.
-- [x] **GP-83** **R5 · P-140.** The Hollows' haul (D-67): `game/hollows-loot.js`: skulls, crates, one strongbox a
-  warren a run (a blueprint, an early gun, a mod, a camo, a rune shard), **nine** dog tags (story v2: root 2, shale 2,
-  iron 2, wet 2, hill 1); a delve pays about half a night. After CL-98; after GP-60. Details: `docs/roadmap.md` P-140,
-  `docs/story.md` §8. **Claude (2026-10-01):** every strongbox holds its warren's shard and one gear prize (no repeats);
-  the model is approved as written (contracts: the Hollows' haul); it goes live through CU-80's grant hook; skull pay
-  below is GB-107's. Check it out done once the model and tests are in.
-- [!] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
-  here", pickups; the board's warrens and passages; the Marrow cave's sealed door (story v2). After GB-108; after GP-83. Details:
-  `docs/roadmap.md` P-141.
-- [x] **GP-94** **R5 · Story v2.** The story's words (D-70, `docs/story.md` §3-4, §6, §9): Ridgeline's twenty morning
-  lines (replacing Harbor Nine's), the field notes as E cards where CL-109 puts them, the ending lines (Heron, the
-  true ending), and the names everywhere in strings: Ridgeline, Heron, FOB Threshold, the PGB, the Marrow; no
-  "island", no "boat", no Medic-4. The sample window and the supply terminal's labels (skulls are samples, Cash is
-  requisition credit).
-- [!] **GP-95** **R5 · Story v2.** The survivors' words and their badge (`docs/story.md` §5): found, on-the-roof and
-  aboard lines for Okafor, Brandt and Pike; the talk card on the roof; the victory screen's "Survivors aboard: 3"; the
-  lifetime badge "Nobody left behind" (all three aboard); the motto "Against What Should Not Be." on the title. After
-  GB-116 for the talk hook.
+- [>] **GP-72** **R6 · P-82.** One voice: every line read once, the same words for the same things. R5's words are all in now: story v2 (GP-94),
+  Jerry's renames (GB-120 to GB-122: Gravewalker, no real brands) and the new HQ, Armory and Training Ground text.
+  A list of changed keys. Details: `docs/roadmap.md` P-82.
 
-#### R6 · Finish (1.0)
+#### Waiting
 
-- [!] **GP-72** **R6 · P-82.** One voice: every line read once, the same words for the same things. Details:
-  `docs/roadmap.md` P-82.
+- [ ] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
+  here", pickups; the board's warrens and passages; the Marrow cave's sealed door (story v2). After CU-86 (the live depth, the clearances and the pickup
+  receipts: handoffs/2026-10-02-chatgpt-GP-84-contract-check.md). Details: `docs/roadmap.md` P-141.
 
-### Antigravity — the crew's eyes (Gemini 3.1 Pro High)
+### Antigravity — the crew's eyes
 
-#### R6 · Finish (1.0)
+#### Now
+
+- [>] **AG-50** **The eyes pass on 2026-10-01/02's work**, one sweep on Jerry's GPU (shots, no timed runs: D-71). Every
+  request to Antigravity in `handoffs/requests.md` since 2026-10-01, grouped: the deaths and cards (GP-81, GP-95, GP-98,
+  GP-99); the HQ (GP-100 to GP-104, CU-82's lockdown, CL-113's window, wheel and rack); the marine and the survivors
+  (GP-105, GP-106, GP-123, GP-124, GP-130, GP-131, GP-134; CU-81's guns in his hands); the valley's places (GP-107 to
+  GP-122; CL-83's dangerous kinds at night); the Armory (GP-97, GP-125, GP-126, GP-132); the Training Ground (CL-115,
+  GP-133 to GP-137) and CL-117/CL-118's perf HUD at the HQ and in the Training Ground, before and after. One report in
+  `qa/` with a shot per item; each finding goes to its owner with `crew.mjs request`.
+
+#### Later · R6 (1.0)
 
 - [ ] **AG-28** **R6 · P-91.** The showcase shots and a trailer's worth of clips. After CU-57. Details:
   `docs/roadmap.md` P-91.
 
-### Claude — lead; the world, the studio and the reactions (Opus 5.5 High)
+### Claude — lead; the world, the studio and the reactions
 
-#### R5 · Named nights and bigger systems
+#### Now
 
-- [x] **CL-92** **R5 · P-122.** Lightning in storms (D-63): 5 strikes a storm; 1 in 50 burns a tree, 1 in 100 kills the
-  zombies where it lands, 1 in 200 hits the marine for 70 (never under godmode); insulated boots hidden on the map
-  make him immune. Details: `docs/roadmap.md` P-122.
-- [x] **CL-93** **R5 · P-123.** The rabbit mound (D-63): an out-of-the-way burrow with bones and a skull; shoot it and a
-  white rabbit takes the marine's head off. The one answer: our knockoff holy grenade, hidden on the map, an angelic
-  choir on the pin pull, and it kills the rabbit. Our own models, names, sounds and words. Details: `docs/roadmap.md`
-  P-123.
-- [x] **CL-75** **R5 · P-63 · Story v2.** The three survivors as PGB soldiers (D-70, `docs/story.md` §5): Okafor
-  (medic), Brandt (M240B gunner), Pike (mechanic), each a marine-rig figure in PGB kit with their own look, hidden at
-  their camp (the trapper's cellar, the watchtower and rangers' truck, the hikers' rock shelf); then on the HQ roof: a
-  sleeping bag, a crate and a post each, the M240B on its mount, asleep by day, standing to at the alarm. TT shows
-  each at the camp and on the roof.
-- [x] **CL-76** **R5 · P-57.** Fog Night's fog: about 30 m, goggles or not; the night keeps its music arc. After
-  GB-87. Details: `docs/roadmap.md` P-57.
-- [x] **CL-112** **R5 · P-97 · Story v2.** The heart in the Marrow (`docs/specs/secret-quest.md` §5): one big round cave
-  under the Marrow cave, the Pit's roots through its roof as rune-cut columns of white rock (they can come down in
-  the fight's third phase), the source in the middle (a shaft of cold light going down, where the dead come up), the
-  long tunnel from a warren's rune door. Built like a warren (`buildHeart`: group, groundAt, solids, nav, entry,
-  columns, source). Unblocks GB-92 (Grokbot's request).
-- [x] **CL-77** **R5 · P-58.** Fog Night's own sectioned score. After CL-76. Details: `docs/roadmap.md` P-58.
-- [x] **CL-78** **R5 · P-67.** The guardian boss on the studio rig and clips (D-55). After CL-62. Details:
-  `docs/roadmap.md` P-67.
-- [x] **CL-81** **R5 · P-68.** The kick-free gets a real let-go beat in the studio. After GB-78; after CL-62. Details:
-  `docs/roadmap.md` P-68.
-- [x] **CL-99** **R5 · P-137.** The five warrens: a tile kit per theme (root, shale, iron, wet, hill), the set pieces,
-  a sealed rune door in each Deep; nothing topside moves. v1 and v2 are in. **v3 (story v2, `docs/story.md` §8):** the
-  husks (pale veined sacks on the roots, a hiker's boot or a ranger's jacket showing, some holding two or three bodies
-  grown together); the iron warren's cut settler wall, the hikers' rope and lights; FOB Threshold's crates and kit for
-  the dragged-down gear (no Medic-4). Then seen below on the GPU, after CU-71.
-- [x] **CL-100** **R5 · P-142 · Story v2.** What the Hollows say (`docs/story.md` §8): nine dog tags of the nine
-  Gravewalkers who died (Sato, signals, among them), a name and one last thing each; the rune doors' line; the shards;
-  Ridgeline's "the Marrow" line after the first delve. In docs/story.md, for GP-83 and GP-84.
-- [x] **CL-111** **R5 · P-96 · Story v2.** The rune finish (`docs/specs/secret-quest.md` §6): one more camo key,
-  `rune`, for the gun furniture (CL-97's gun camo): dark wood or polymer etched with the Pit's glyphs, faintly lit at
-  night; granted for good by the true ending (GP-70's flag). Review folder.
-- [x] **CL-101** **R5 · P-144.** The Hollows sound alive: drips, the Hush's hum, the stir, the guardian in the walls,
-  the music's underground state. After GB-108. Details: `docs/roadmap.md` P-144.
-- [x] **CL-106** **R5 · Story v2.** The docs follow the story (D-70, `docs/story.md`): "island" becomes the valley,
-  Harbor Nine becomes Ridgeline, the boat becomes Heron, the chalk cave and heart become the Marrow, Medic-4 goes; in
-  `docs/roadmap.md` (its story section points to story.md), `docs/specs/secret-quest.md` (the clues are the twelve's;
-  the Hush built with Ridgeline's help), `docs/specs/hollows.md` (nine tags, the husks, the Marrow cave's sealed
-  door), `docs/contracts.md`. Words only; code ids like `chalk` stay.
-- [x] **CL-107** **R5 · Story v2.** The valley's history, part 1, no words (`docs/story.md` §7): the first people: a
-  few lichen-covered standing stones carved with the Pit's glyphs on high ground, a cliff carving of the ring of eight
-  round a dark shape, offerings at the hill barrow; and **the Marrow cave's mouth sealed** by a carved stone door, its
-  glyphs faintly lit at night. The door is cracked (the waking): the dead still squeeze out at night as they do now;
-  only the marine can't go in or poke it (Grokbot is told). Review folder for
-  Jerry.
-- [x] **CL-108** **R5 · Story v2.** The valley's history, part 2 (`docs/story.md` §7): Coldwater, the ghost town: a
-  few ruined foundations and a chimney, the parish church's stone shell by the cemetery, iron bands showing on the
-  coffins where the ground has slumped, one grave open from below, horseshoes over the ruined doors; the iron cave as
-  the old mine: timbering, the settlers' cut and bent iron bars, IRON BELOW boards; the trapper's camp: horseshoes,
-  traps, the iron-ringed cellar hatch. Review folder.
-- [x] **CL-109** **R5 · Story v2.** The recent dead and the PGB (`docs/story.md` §6-7): the hikers' missing-person
-  posters at the Cordon's gate, their packs and rope at the mine mouth; the rangers' truck and radio; FOB Threshold's
-  fall (sandbagged spots with brass, a dropped helmet, drag marks toward a cave); the stencils: the HQ door "FOB
-  THRESHOLD · PGB · LOCKDOWN · DO NOT OPEN" with claw marks, the Cordon's gate "CORDON · PGB · NOTHING LEAVES", a PGB
-  survey board at each of the five warren caves ("SURVEY · WARREN 3 · IRON · DO NOT ENTER"), the motto "AGAINST WHAT
-  SHOULD NOT BE" on the HQ. The field-note props where §6 puts them (GP-94 writes the cards). Review folder.
-- [x] **CL-110** **R5 · Story v2.** Heron, the floatplane (`docs/story.md` §1, §3): a military amphibious transport
-  model, our own design; its arrival: in low over the trees, down on the lake, a taxi to the dock, engines idling
-  while he holds; replaces the boat's model and path (CL-73's flares and the dock stay). Hand GB-117 the path and
-  timing. Review folder.
+- [x] **CL-119** **The review pile.** The handoffs of 2026-10-01/02 waiting on the panel (`crew.mjs reviewed` on each), and
+  the questions to Claude in `handoffs/requests.md`: the rig (GB-124, GB-125, GB-129, GB-130: the forearm doesn't roll to
+  the grip, the knife arm, the flamer's support hand 2.6 cm short); t180's rack (GP-125); `docs/controls.md` and D-65 for
+  auto by default and the new keys (GB-127, GB-128); t167's motto, which left the HQ wall for GP-100's mural (settle it
+  with ChatGPT); GP-84's contract when CU-86 proposes it.
+- [>] **CL-120** **The crouch: no clipping through the ground** (Jerry, through Antigravity, 2026-10-02). GB-125's crouch
+  leg IK is in Claude's player rig; GP-106 found the ground misaligned in the crouch. Before and after in a review folder.
+- [ ] **CL-84** **R6 · P-93.** The marine's own animation through the studio: walk, run, reload. The walk and the run are in review
+  (review/marine-walk, review/marine-run; handoffs/2026-10-01-claude-CL-84-part1.md) and go in the game on Jerry's "good";
+  the reload is left, now that the Armory is in (CL-113). Details: `docs/roadmap.md` P-93.
+- [ ] **CL-122** **R6 · the hands (from the CL-119 review).** The arm IK puts the hand on each gun's anchor but doesn't roll the
+  forearm, so the palm's angle is loose: roll it onto the grip. The left arm gets a knife swing of its own. The flamer's
+  support hand reaches its front grip (2.6 cm short). The draw and holster moves reach for the fitted stowed guns, the
+  fixed Uzi and revolver mounts included, not the spot origins. GB-130, GP-128, GP-130; checks t187, t188, t189.
+- [ ] **CL-123** **R6 · a first-use hitch (from GP-135).** After the Training Ground's warm-up two ShadowMaterial programs
+  still compile on first use; warm them with the rest (trainingWarmCompile).
 
-#### R6 · Finish (1.0)
+#### Waiting
 
-- [x] **CL-82** **R6 · P-84.** The caves and the pit sound alive: the screech, cave groans, the pit's rumble. Details:
-  `docs/roadmap.md` P-84.
-- [x] **CL-83** **R6 · P-85.** Night dark but readable: threats, attack sides and hurt builds picked out (after Jerry
-  answers CL-11). Details: `docs/roadmap.md` P-85.
-- [>] **CL-84** **R6 · P-93.** The marine's own animation through the studio: walk, run, reload. After CL-62. Details:
-  `docs/roadmap.md` P-93.
-- [x] **CL-85** **R6 · P-99.** The guardian's final fight gets its own music. After GB-92. Details: `docs/roadmap.md`
-  P-99.
+- [~] **CL-121** **The marine right-handed, if Jerry says so (Q-6).** Grokbot found the gun arm is the marine's anatomical
+  left, so the stock sits in his left shoulder (GB-129). If Jerry wants him mirrored: swap armRG and armLG and everything
+  keyed to them (holsters, the draw's reach, the reload pouch, ChatGPT's carry), keeping GB-129's side-agnostic hold.
+  Parked until Jerry answers; then it goes back to [ ].
+
+#### Later · R6 (1.0)
+
 - [ ] **CL-86** **R6 · P-92.** The last sweep: every report reviewed, the docs true, the board ready for after 1.0.
   After CU-57. Details: `docs/roadmap.md` P-92.
 

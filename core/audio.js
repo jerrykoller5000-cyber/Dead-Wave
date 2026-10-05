@@ -1,6 +1,8 @@
 // Web Audio engine: music and sound effects. No game state.
 // CU-4 slice. Callers keep using AudioSys from the page module.
+import { createTrainingAudio } from '../ui/training-audio.js';
 export const AudioSys = (() => {
+  let trainingMode=false,trainingSound=null;
   let ctx = null;
   let masterGain = null;
   let sfxGain = null;
@@ -76,6 +78,7 @@ export const AudioSys = (() => {
   // (an <audio> element, see updateMusic) by musicDuck, both easing back after.
   let musicShotDuck = 1;
   function duckForShot(ambDepth, musicDepth, hold = 0.06) {
+    if(trainingMode)return;
     if (!ctx || !ambBus) return;
     const t = ctx.currentTime;
     try {
@@ -1334,6 +1337,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
+    if(trainingMode){trainingSound?.update(muted?0:userMusic,!!state.paused);return;}
     lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
@@ -1482,6 +1486,7 @@ export const AudioSys = (() => {
     }
   }
   function startMusic() {
+    if(trainingMode)return;
     if (window.DWOpening?.active) return;
     ensure(); // unlock AudioContext for SFX
     if (muted || musicPlaying) return;
@@ -1748,6 +1753,7 @@ export const AudioSys = (() => {
   // state: { dt, wind (0..1), water (0..1), night (bool), rain (0..1), started, forest (0..1),
   //         below: null | { on, theme, stir (0..1), phase, hush (bool) } (CL-101) }
   function updateAmbience(st) {
+    if(trainingMode)return;
     if (!amb || !ctx) return;
     const dt = st.dt;
     const top = updateBelowAmbience(st, dt);   // CL-101: 1 topside, 0 below
@@ -2805,7 +2811,20 @@ export const AudioSys = (() => {
   const BIG = [0.18, 0.42, 0.25];
   const W = (fn, duck) => onBus('weap', fn, duck);
   const A = (fn) => onBus('amb', fn);
-  return {
+  function setTraining(on){
+    on=!!on;if(on===trainingMode)return;trainingMode=on;
+    if(on){
+      stopMusic();rainStop();setSolo(false);
+      const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,masterGain,fxBus);trainingSound.update(userMusic);}
+    }else{
+      trainingSound?.dispose();trainingSound=null;
+      if(ctx){ambBus.gain.cancelScheduledValues(ctx.currentTime);ambBus.gain.setTargetAtTime(BUS_AMB,ctx.currentTime,.15);}
+      if(unlocked&&!muted)startMusic();
+    }
+  }
+  const api = {
+    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted)trainingSound?.cue(kind);},
+    trainingState:()=>({enabled:trainingMode,...trainingSound?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
     emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
@@ -2836,4 +2855,12 @@ export const AudioSys = (() => {
     heartFall,   // CL-85
     belowState, rockGroan: A(rockGroan), guardianInWalls: A(guardianInWalls), hushDie   // CL-101
   };
+  // Training has no horror announcements, creature voices or outdoor one-shots.
+  // Weapon, reload, impact, equipment, construction and ordinary UI sounds stay live.
+  for(const name of ['groan','zombieVoice','zombieHit','zombieDeath','headshot','gore','scream','bossRoar','bossSlam','guardianGrowl','emerge','heavyStep','spit','acidHit','caveScreech','caveGroan','pitRumble','alarmRumble','klaxon','heartbeat','waveStart','win','gameOver','streak','expand','holyChoir','rabbitScreech','holyBlast','dayCleared','heartFall','hushDie','musicCue','setMood','distantGroan','birdChirp','owlHoot','thunder','lightningStrike','rockGroan','guardianInWalls','graveAmbience','rainStart','rainSetIntensity']){
+    const original=api[name];api[name]=(...args)=>{if(!trainingMode)return original(...args);};
+  }
+  const outdoorStep=api.footstep;
+  api.footstep=(...args)=>trainingMode?api.trainingCue('step'):outdoorStep(...args);
+  return api;
 })();

@@ -638,6 +638,18 @@ export class CatmullRomCurve3 {
     return out.set(c(p0.x, p1.x, p2.x, p3.x), c(p0.y, p1.y, p2.y, p3.y), c(p0.z, p1.z, p2.z, p3.z));
   }
   getPoints(n = 5) { const r = []; for (let i = 0; i <= n; i++) r.push(this.getPoint(i / n)); return r; }
+  // CU-84: the marine's face, body and webbing curves (ui/marine-face.js, ui/marine-webbing.js, index.html) ask by
+  // arc length and for tangents. Here u is the same parameter as getPoint's (the real one is by length), and a tangent
+  // is the unit chord across a small step: close enough for placing straps and hems.
+  getPointAt(u, out = new Vector3()) { return this.getPoint(u, out); }
+  getTangent(t, out = new Vector3()) {
+    const e = 1e-3, a = this.getPoint(Math.max(0, t - e)), b = this.getPoint(Math.min(1, t + e));
+    out.set(b.x - a.x, b.y - a.y, b.z - a.z);
+    return out.lengthSq() > 0 ? out.normalize() : out.set(0, 0, 1);
+  }
+  getTangentAt(u, out = new Vector3()) { return this.getTangent(u, out); }
+  getLength() { let len = 0, prev = this.getPoint(0); for (let i = 1; i <= 24; i++) { const p = this.getPoint(i / 24); len += Math.hypot(p.x - prev.x, p.y - prev.y, p.z - prev.z); prev = p; } return len; }
+  getSpacedPoints(n = 5) { return this.getPoints(n); }
 }
 // CU-82: the marine's fitted plates (studio/marine-body.js, GP-106) draw a Shape and extrude it. The outline is kept;
 // the extrusion is its bounding box, depth deep, which is all the checks can see of it.

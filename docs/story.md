@@ -281,6 +281,12 @@ later runs.
   the chalk renamed **the Marrow**; the survivors **Okafor (medic), Brandt (M240B gunner),
   Pike (mechanic)**: three lived, all PGB.
 - Jerry (2026-10-01): Pike is a man. Use Spc. Pike; his hiding place is a concealed natural outcrop away from the tents.
+- Jerry's HQ lettering (2026-10-01/02, GP-100, GP-103, GP-104): the mural over the skull and crossed rifles reads
+  **DEADWALKERS** with the motto beneath it (his exact spelling, painted by the crew; the branch's name stays the
+  Gravewalkers everywhere else); a bolted plate above it reads **PGB / GRAVEPOST THRESHOLD** (the post's
+  designation; FOB Threshold stays its name in words); the back door reads THRESHOLD / LOCKDOWN / DO NOT OPEN and the
+  motto no longer hangs on the back wall.
+- On screen the player is a Gravewalker, not a Marine, and no gun or pattern carries a real brand name (D-74).
 - Nine died and three lived, so the Hollows hold nine dog tags.
 - The HQ stays sealed: nobody goes inside, the survivors live on its roof.
 - The settlers' iron is the old answer to the tone: it's why the graveyard's dead stay down and why Okafor lived.

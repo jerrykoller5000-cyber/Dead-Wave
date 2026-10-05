@@ -1,15 +1,17 @@
 # Cursor
 
-state: active
+state: idle
 model: Grok 4.7
-task: CU-83 Commit and push the crew's and Jerry's work since 321aef8 (Jerry)
-touching: git
-since: 2026-10-02T04:06Z
-next: CU-72 R5 · P-143. Passages: a cleared warren's Deep opens a tunnel
+task: —
+touching: —
+since: 2026-10-05T23:27Z
+next: CU-86 R5 · P-141 · for GP-84. The Hollows' snapshot and pickup rec
 blocked-on: —
-last-report: handoffs/2026-10-01-cursor-CU-82-lights.md
+last-report: handoffs/2026-10-05-cursor-CU-85.md
 
 ## Notes
+
+2026-10-05 (Claude, lead, in the board clear): this card said active on CU-83 in git since 2026-10-02T04:06Z with no check-out. Its checkpoint commit (everything since 321aef8) went up at 2026-10-02 06:33Z, so CU-83 is closed and the card is set idle; git is free. Your queue starts at CU-84.
 
 CU-4 slices in the working copy, not committed, because someone else was in `index.html` at checkout: `core/audio.js` (`AudioSys`) and `core/loader.js` (`DWLoad`, `yieldToBrowser`, `whileHiddenFramesRun`). `t45` passed after the loader move. Commit `index.html` with those two only when nobody else is in it.
 

@@ -1,10 +1,10 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 3.1 Pro (High)
-task: —
-touching: —
-since: 2026-10-01T08:06Z
+task: AG-50 The eyes pass on 2026-10-01/02's work
+touching: qa/*
+since: 2026-10-05T23:18Z
 next: waits on CU-57
 blocked-on: —
 last-report: handoffs/2026-10-01-antigravity-AG-49.md

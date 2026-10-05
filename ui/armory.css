@@ -113,3 +113,55 @@
 @media(max-width:900px) { #cif.armory-show { justify-content:center; } #cif.armory-show > .card { display:none; } #cif #armoryPanel { flex-basis:min(620px, 94vw); }
   #cif.armory-only .armory-body { grid-template-columns:minmax(0, 1fr); } }
 @media(max-width:640px) { #cif #armoryPanel { max-height:94vh; } #cif .armory-shelf { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+
+/* GP-132: a single work surface. Carried / locker / workbench fit together on a laptop. */
+#cif.armory-only #armoryPanel { flex-basis:min(1240px, 96vw); padding-bottom:10px; }
+#cif.armory-only .armory-head { padding:18px 16px 10px; }
+#cif.armory-only #armoryPanel h2 { font-size:24px; }
+#cif.armory-only .armory-head .hint { max-width:none; margin-top:5px; }
+#cif.armory-only .armory-body { grid-template-columns:minmax(0, 1.85fr) minmax(290px, 1fr); gap:14px; padding:0 14px; }
+#cif.armory-only .armory-left { display:grid; grid-template-columns:minmax(150px, .8fr) minmax(0, 1.35fr); grid-template-rows:auto auto 1fr; column-gap:12px; align-items:start; }
+#cif.armory-only .armory-left > h3:first-child { grid-area:1 / 1; }
+#cif.armory-only .armory-slots { grid-area:2 / 1; grid-template-columns:1fr; gap:6px; }
+#cif.armory-only .armory-hip { grid-area:3 / 1; }
+#cif.armory-only .armory-left > h3:nth-of-type(2) { grid-area:1 / 2; }
+#cif.armory-only .armory-shelf { grid-area:2 / 2 / 4; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px 6px; padding:4px 6px 12px; }
+#cif.armory-only #armoryPanel h3 { margin:10px 0 7px; }
+#cif.armory-only .armory-slots button { grid-template-columns:48px minmax(0,1fr); padding:7px; gap:2px 6px; min-height:73px; }
+#cif.armory-only .armory-slots button > strong { grid-column:1 / -1; }
+#cif.armory-only .armory-slots .armory-pic { grid-column:1; grid-row:2 / 5; height:38px; margin:0; }
+#cif.armory-only .armory-slots .armory-name,
+#cif.armory-only .armory-slots small,
+#cif.armory-only .armory-slots .armory-chips { grid-column:2; }
+#cif.armory-only .armory-name { font-size:12px; }
+#cif.armory-only .armory-shelf .armory-pic { height:34px; margin:7px 0 0; }
+#cif.armory-only .armory-shelf .armory-pic svg { height:30px; }
+#cif.armory-only .armory-item > button[data-gun] { padding:3px 4px; }
+#cif.armory-only .armory-tune { font-size:9px; top:0; right:0; padding:1px 4px; }
+#cif.armory-only .armory-item::after { bottom:-5px; height:3px; left:0; right:0; }
+#cif.armory-only .armory-chips i { padding:0 3px; font-size:9px; }
+#cif.armory-only .armory-hip-tile { flex-wrap:wrap; gap:4px; padding:6px; font-size:11px; }
+#cif.armory-only .armory-hip .armory-pic { width:44px; height:26px; }
+#cif.armory-only .armory-bench { margin-top:10px; padding:0 10px 10px; }
+#cif.armory-only .armory-bench .armory-pic.big { height:72px; }
+#cif.armory-only .armory-bench-ammo { margin-bottom:7px; }
+#cif.armory-only .armory-mods { gap:4px; }
+#cif.armory-only .armory-mods li { padding:5px 6px; gap:1px 6px; }
+#cif.armory-only .armory-mods button { min-width:64px; padding:6px; }
+#cif.armory-only .armory-mod-text strong { font-size:12px; }
+#cif.armory-only .armory-mod-text small { font-size:10px; }
+#cif.armory-only .armory-finish { margin-top:8px; padding-top:7px; }
+#cif.armory-only .armory-finish-grid { grid-template-columns:repeat(auto-fill,minmax(32px,1fr)); }
+#cif.armory-only .armory-swatch { height:25px; }
+#cif.armory-only .armory-actions { margin:10px 14px 0; }
+#cif.armory-only .armory-actions button { padding:8px; }
+@media(max-width:1000px) {
+  #cif.armory-only .armory-body { grid-template-columns:minmax(0,1.55fr) minmax(250px,1fr); gap:10px; }
+  #cif.armory-only .armory-left { grid-template-columns:minmax(135px,.8fr) minmax(0,1fr); gap:8px; }
+  #cif.armory-only .armory-shelf { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:760px) {
+  #cif.armory-only .armory-body { grid-template-columns:1fr; }
+  #cif.armory-only .armory-left { grid-template-columns:minmax(130px,.8fr) minmax(0,1fr); }
+  #cif.armory-only .armory-actions { position:sticky; bottom:0; margin-top:10px; padding:6px 0; background:#171c13; }
+}

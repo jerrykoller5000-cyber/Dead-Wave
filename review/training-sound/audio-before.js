@@ -1,0 +1,2839 @@
+// Web Audio engine: music and sound effects. No game state.
+// CU-4 slice. Callers keep using AudioSys from the page module.
+export const AudioSys = (() => {
+  let ctx = null;
+  let masterGain = null;
+  let sfxGain = null;
+  let musicGain = null;
+  let muted = false;
+  let unlocked = false;
+  let musicPlaying = false;
+  let musicStepTimer = null;
+  let musicOscs = [];
+  let musicStep = 0;
+  let lastSpinWasUp = false;
+  let emptyClickCd = 0;
+  let leafSfxCd = 0;
+  let trunkBumpCd = 0;
+  let brassTinkCd = 0;
+
+  function ensure() {
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    masterGain = ctx.createGain();
+    masterGain.gain.value = window.DWOpening?.active ? 0 : 1;
+    masterGain.connect(ctx.destination);
+    // The mix. Everything used to share one SFX bus, so a rain bed, the wind and
+    // the river sat at the same level as — and in the same 2-4 kHz band as — the
+    // crack of a rifle, and nothing gave way when you fired. Now:
+    //   weapons  guns, impacts, reloads, blades, explosions — lifted, and they duck
+    //            the other two for a moment every time they fire (see duckForShot);
+    //   fx       zombies, the marine, UI;
+    //   ambience wind, rain, river, crickets, birds, thunder — pulled right down.
+    // All three meet at the user's SFX fader, then a gentle compressor glues them
+    // and keeps a grenade in a crowd from clipping.
+    glue = ctx.createDynamicsCompressor();
+    glue.threshold.value = -16; glue.knee.value = 10; glue.ratio.value = 3.5;
+    glue.attack.value = 0.004; glue.release.value = 0.2;
+    glue.connect(masterGain);
+    sfxGain = ctx.createGain();
+    sfxGain.gain.value = 0.5 * userSfx;
+    // CL-26: the relief sting clears every other sound. soloGain sits after the SFX fader
+    // so the user's volume and the solo never fight over one gain.
+    soloGain = ctx.createGain();
+    soloGain.gain.value = 1;
+    sfxGain.connect(soloGain);
+    soloGain.connect(glue);
+    weapBus = ctx.createGain(); weapBus.gain.value = BUS_WEAP; weapBus.connect(sfxGain);
+    fxBus = ctx.createGain(); fxBus.gain.value = BUS_FX; fxBus.connect(sfxGain);
+    ambBus = ctx.createGain(); ambBus.gain.value = BUS_AMB; ambBus.connect(sfxGain);
+    musicGain = ctx.createGain();
+    musicGain.gain.value = 0.14;
+    musicGain.connect(masterGain);
+    // Outdoor reverb send for the SFX: a short synthetic impulse (decaying noise,
+    // darkened over time) so shots and explosions get a tail off the treeline
+    // instead of stopping dead. Sources opt in with a `rev` amount.
+    try {
+      reverbNode = ctx.createConvolver();
+      reverbNode.buffer = makeImpulse(1.6, 2.4);
+      reverbGain = ctx.createGain();
+      reverbGain.gain.value = 0.42;
+      reverbNode.connect(reverbGain);
+      reverbGain.connect(sfxGain);
+    } catch (_) { reverbNode = null; }
+    applyMuteGains();
+    return ctx;
+  }
+  let reverbNode = null, reverbGain = null;
+  let glue = null, weapBus = null, fxBus = null, ambBus = null, soloGain = null;
+  const BUS_WEAP = 1.35, BUS_FX = 0.8, BUS_AMB = 0.5;
+  // Which bus the next playTone/playNoise lands on; set by onBus() around a voice.
+  let routeBus = null;
+  function outBus() { return routeBus || fxBus || sfxGain; }
+  // Momentary ducking when something fires: ambience dips hard and fast, the music
+  // (an <audio> element, see updateMusic) by musicDuck, both easing back after.
+  let musicShotDuck = 1;
+  function duckForShot(ambDepth, musicDepth, hold = 0.06) {
+    if (!ctx || !ambBus) return;
+    const t = ctx.currentTime;
+    try {
+      ambBus.gain.cancelScheduledValues(t);
+      ambBus.gain.setValueAtTime(Math.max(0.0001, ambBus.gain.value), t);
+      ambBus.gain.linearRampToValueAtTime(BUS_AMB * ambDepth, t + 0.012);
+      ambBus.gain.setTargetAtTime(BUS_AMB, t + 0.012 + hold, 0.35);
+    } catch (_) {}
+    musicShotDuck = Math.min(musicShotDuck, musicDepth);
+  }
+  function onBus(bus, fn, duck) {
+    return function (...args) {
+      const prev = routeBus;
+      routeBus = bus === 'weap' ? weapBus : (bus === 'amb' ? ambBus : fxBus);
+      try { return fn.apply(null, args); }
+      finally {
+        routeBus = prev;
+        if (duck) { const d = typeof duck === 'function' ? duck(...args) : duck; if (d) duckForShot(d[0], d[1], d[2]); }
+      }
+    };
+  }
+  // User volume settings (pause > settings sliders), remembered per browser.
+  let userSfx = 0.8, userMusic = 0.3;
+  try {
+    const sv = localStorage.getItem('tt_vol_sfx'), mv = localStorage.getItem('tt_vol_music');
+    if (sv != null && isFinite(+sv)) userSfx = Math.max(0, Math.min(1, +sv));
+    if (mv != null && isFinite(+mv)) userMusic = Math.max(0, Math.min(1, +mv));
+  } catch (_) {}
+  function setSfxVolume(v) {
+    userSfx = Math.max(0, Math.min(1, +v || 0));
+    try { localStorage.setItem('tt_vol_sfx', String(userSfx)); } catch (_) {}
+    if (sfxGain && ctx) { try { sfxGain.gain.setTargetAtTime(0.5 * userSfx, ctx.currentTime, 0.03); } catch (_) {} }
+  }
+  function setMusicVolume(v) {
+    userMusic = Math.max(0, Math.min(1, +v || 0));
+    try { localStorage.setItem('tt_vol_music', String(userMusic)); } catch (_) {}
+  }
+  function getVolumes() { return { sfx: userSfx, music: userMusic }; }
+  function makeImpulse(seconds, decay) {
+    const len = Math.floor(ctx.sampleRate * seconds);
+    const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const d = buf.getChannelData(ch);
+      let lp = 0;
+      for (let i = 0; i < len; i++) {
+        const t = i / len;
+        // progressively darker: one-pole lowpass whose coefficient tightens with time
+        const k = 0.35 + 0.6 * t;
+        lp += ((Math.random() * 2 - 1) - lp) * (1 - k);
+        d[i] = lp * Math.pow(1 - t, decay) * (i < 400 ? i / 400 : 1);
+      }
+    }
+    return buf;
+  }
+  function sendToReverb(node, amount) {
+    if (!reverbNode || !(amount > 0)) return;
+    const g = ctx.createGain();
+    g.gain.value = amount;
+    node.connect(g);
+    g.connect(reverbNode);
+  }
+
+  function applyMuteGains() {
+    if (!masterGain || !ctx) return;
+    const t = ctx.currentTime;
+    masterGain.gain.cancelScheduledValues(t);
+    masterGain.gain.setTargetAtTime(muted || window.DWOpening?.active ? 0 : 1, t, 0.03);
+  }
+
+  function setMuted(m) {
+    muted = !!m;
+    applyMuteGains();
+    if (muted) { stopMusic(); chainsawStop(); rainStop(); stopFlames(); }
+    else if (unlocked) startMusic();
+  }
+
+  function toggleMute() { setMuted(!muted); }
+  function isMuted() { return muted; }
+
+  function unlock() {
+    if (window.DWOpening?.active) return;
+    const c = ensure();
+    if (!c) return;
+    if (c.state === 'suspended') c.resume().catch(() => {});
+    if (!unlocked) {
+      unlocked = true;
+      if (!muted) startMusic();
+    }
+  }
+
+  function noiseBuffer(duration) {
+    const c = ensure();
+    if (!c) return null;
+    const len = Math.max(1, Math.floor(c.sampleRate * duration));
+    const buf = c.createBuffer(1, len, c.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+
+  function playTone({ freq = 440, type = 'square', dur = 0.08, vol = 0.2, slideTo = null, when = 0, rev = 0, attack = 0.01, pan = 0 }) {
+    const c = ensure();
+    if (!c || muted) return;
+    const t0 = c.currentTime + when;
+    const osc = c.createOscillator();
+    const g = c.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    if (slideTo != null) osc.frequency.exponentialRampToValueAtTime(Math.max(20, slideTo), t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, vol), t0 + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(g);
+    const out = pan ? panNode(g, pan) : g;
+    out.connect(outBus());
+    sendToReverb(out, rev);
+    osc.start(t0); osc.stop(t0 + dur + 0.02);
+  }
+
+  function playNoise({ dur = 0.06, vol = 0.15, filterFreq = 1800, filterType = 'bandpass', when = 0, rev = 0, attack = 0.005, q = null, pan = 0 }) {
+    const c = ensure();
+    if (!c || muted) return;
+    const buf = noiseBuffer(dur + 0.02);
+    if (!buf) return;
+    const t0 = c.currentTime + when;
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    const filt = c.createBiquadFilter();
+    filt.type = filterType;
+    filt.frequency.value = filterFreq;
+    if (q != null) filt.Q.value = q;
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, vol), t0 + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    src.connect(filt); filt.connect(g);
+    const out = pan ? panNode(g, pan) : g;
+    out.connect(outBus());
+    sendToReverb(out, rev);
+    src.start(t0); src.stop(t0 + dur + 0.02);
+  }
+  function panNode(from, pan) {
+    try {
+      const p = ctx.createStereoPanner();
+      p.pan.value = Math.max(-1, Math.min(1, pan));
+      from.connect(p);
+      return p;
+    } catch (_) { return from; }
+  }
+
+  function fire() {
+    // Generic fallback crack (prefer fireWeapon)
+    playNoise({ dur: 0.04, vol: 0.12, filterFreq: 2200, filterType: 'bandpass' });
+    playTone({ freq: 180, type: 'sawtooth', dur: 0.05, vol: 0.08, slideTo: 90 });
+  }
+  function fireWeapon(id) {
+    switch (id) {
+      case 'pistol':
+        // Sharp crack, small body, a short slap off the trees.
+        playNoise({ dur: 0.028, vol: 0.15, filterFreq: 3200, filterType: 'bandpass', rev: 0.35 });
+        playTone({ freq: 420, type: 'square', dur: 0.035, vol: 0.09, slideTo: 140, rev: 0.2 });
+        playTone({ freq: 90, type: 'sine', dur: 0.05, vol: 0.06, slideTo: 50 });
+        playNoise({ dur: 0.09, vol: 0.035, filterFreq: 700, filterType: 'lowpass', when: 0.012 });
+        break;
+      case 'revolver':
+        // Deep heavy boom with a long tail.
+        playNoise({ dur: 0.07, vol: 0.2, filterFreq: 900, filterType: 'lowpass', rev: 0.55 });
+        playTone({ freq: 120, type: 'sawtooth', dur: 0.1, vol: 0.14, slideTo: 45, rev: 0.3 });
+        playTone({ freq: 70, type: 'sine', dur: 0.16, vol: 0.12, slideTo: 33 });
+        playNoise({ dur: 0.04, vol: 0.07, filterFreq: 2400, filterType: 'bandpass', when: 0.02, rev: 0.4 });
+        playNoise({ dur: 0.22, vol: 0.04, filterFreq: 500, filterType: 'lowpass', when: 0.03 });
+        break;
+      case 'm4':
+        // Supersonic rifle crack: bright snap, mid body, tail.
+        playNoise({ dur: 0.038, vol: 0.14, filterFreq: 2100, filterType: 'bandpass', rev: 0.4 });
+        playNoise({ dur: 0.02, vol: 0.07, filterFreq: 5200, filterType: 'bandpass' });
+        playTone({ freq: 240, type: 'sawtooth', dur: 0.055, vol: 0.1, slideTo: 95, rev: 0.25 });
+        playTone({ freq: 160, type: 'square', dur: 0.03, vol: 0.05 });
+        playNoise({ dur: 0.12, vol: 0.035, filterFreq: 600, filterType: 'lowpass', when: 0.015 });
+        break;
+      case 'ak':
+        // 7.62: lower and fatter than the M4's snap, with more push behind it.
+        playNoise({ dur: 0.045, vol: 0.16, filterFreq: 1700, filterType: 'bandpass', rev: 0.45 });
+        playNoise({ dur: 0.02, vol: 0.06, filterFreq: 4200, filterType: 'bandpass' });
+        playTone({ freq: 190, type: 'sawtooth', dur: 0.07, vol: 0.12, slideTo: 70, rev: 0.28 });
+        playTone({ freq: 75, type: 'sine', dur: 0.09, vol: 0.09, slideTo: 42 });
+        playNoise({ dur: 0.16, vol: 0.045, filterFreq: 520, filterType: 'lowpass', when: 0.015 });
+        break;
+      case 'aa12':
+        // Auto shotgun: the pump gun's boom, shorter and tighter so a burst stays a
+        // string of blasts instead of one long roar.
+        playNoise({ dur: 0.08, vol: 0.2, filterFreq: 600, filterType: 'lowpass', rev: 0.45 });
+        playTone({ freq: 95, type: 'sawtooth', dur: 0.1, vol: 0.13, slideTo: 38, rev: 0.25 });
+        playNoise({ dur: 0.045, vol: 0.09, filterFreq: 1900, filterType: 'bandpass', when: 0.01, rev: 0.35 });
+        playTone({ freq: 52, type: 'sine', dur: 0.14, vol: 0.09, slideTo: 30 });
+        break;
+      case 'uzi':
+        // Light rapid smack.
+        playNoise({ dur: 0.022, vol: 0.1, filterFreq: 2800, filterType: 'bandpass', rev: 0.25 });
+        playTone({ freq: 380, type: 'square', dur: 0.025, vol: 0.07, slideTo: 160 });
+        playNoise({ dur: 0.06, vol: 0.025, filterFreq: 800, filterType: 'lowpass', when: 0.01 });
+        break;
+      case 'minigun':
+        // Buzzier short burp / lower thud.
+        playNoise({ dur: 0.03, vol: 0.11, filterFreq: 1600, filterType: 'bandpass', rev: 0.2 });
+        playTone({ freq: 95, type: 'sawtooth', dur: 0.045, vol: 0.08, slideTo: 55 });
+        playTone({ freq: 55, type: 'sine', dur: 0.05, vol: 0.06 });
+        break;
+      case 'shotgun':
+        // Loud boom, low body, a wide splash of noise off the trees.
+        playNoise({ dur: 0.12, vol: 0.24, filterFreq: 550, filterType: 'lowpass', rev: 0.6 });
+        playTone({ freq: 85, type: 'sawtooth', dur: 0.16, vol: 0.16, slideTo: 32, rev: 0.3 });
+        playNoise({ dur: 0.06, vol: 0.11, filterFreq: 1800, filterType: 'bandpass', when: 0.015, rev: 0.5 });
+        playTone({ freq: 48, type: 'sine', dur: 0.22, vol: 0.11, slideTo: 28 });
+        playNoise({ dur: 0.3, vol: 0.05, filterFreq: 420, filterType: 'lowpass', when: 0.04 });
+        break;
+      case 'sniper':
+        // Huge crack and a rolling echo.
+        playNoise({ dur: 0.05, vol: 0.2, filterFreq: 2600, filterType: 'bandpass', rev: 0.7 });
+        playTone({ freq: 320, type: 'square', dur: 0.06, vol: 0.14, slideTo: 90, rev: 0.4 });
+        playTone({ freq: 110, type: 'sawtooth', dur: 0.12, vol: 0.09, slideTo: 50 });
+        playTone({ freq: 220, type: 'triangle', dur: 0.22, vol: 0.05, when: 0.08, slideTo: 80, rev: 0.6 });
+        playNoise({ dur: 0.18, vol: 0.06, filterFreq: 900, filterType: 'bandpass', when: 0.1, rev: 0.6 });
+        playNoise({ dur: 0.5, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
+        break;
+      case 'launcher':
+        // Hollow thunk / whoosh (boom on explode).
+        playTone({ freq: 140, type: 'sine', dur: 0.08, vol: 0.1, slideTo: 70, rev: 0.3 });
+        playNoise({ dur: 0.1, vol: 0.1, filterFreq: 700, filterType: 'lowpass', rev: 0.4 });
+        playTone({ freq: 60, type: 'triangle', dur: 0.14, vol: 0.08, slideTo: 35 });
+        playNoise({ dur: 0.12, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.04 });
+        break;
+      default:
+        fire();
+    }
+  }
+  function shotgunPump() {
+    // Mechanical back-forward scrape
+    playNoise({ dur: 0.07, vol: 0.09, filterFreq: 1400, filterType: 'bandpass' });
+    playTone({ freq: 260, type: 'triangle', dur: 0.06, vol: 0.08, slideTo: 140 });
+    playTone({ freq: 180, type: 'square', dur: 0.04, vol: 0.06, when: 0.055 });
+    playNoise({ dur: 0.035, vol: 0.05, filterFreq: 900, filterType: 'lowpass', when: 0.05 });
+  }
+  function revolverCylinder() {
+    // Open/close click
+    playTone({ freq: 480 + Math.random() * 80, type: 'square', dur: 0.03, vol: 0.07 });
+    playNoise({ dur: 0.03, vol: 0.045, filterFreq: 2200, filterType: 'bandpass' });
+    playTone({ freq: 220, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.02, slideTo: 160 });
+  }
+  function revolverSpin() {
+    playTone({ freq: 340, type: 'triangle', dur: 0.05, vol: 0.055, slideTo: 520 });
+    playNoise({ dur: 0.04, vol: 0.035, filterFreq: 1800, filterType: 'bandpass' });
+  }
+  function launcherDrum() {
+    // Heavier drum open/close
+    playTone({ freq: 140, type: 'sine', dur: 0.07, vol: 0.08, slideTo: 90 });
+    playNoise({ dur: 0.06, vol: 0.07, filterFreq: 500, filterType: 'lowpass' });
+    playTone({ freq: 90, type: 'triangle', dur: 0.05, vol: 0.05, when: 0.03 });
+  }
+  function launcherShellInsert() {
+    playTone({ freq: 160, type: 'sine', dur: 0.05, vol: 0.07, slideTo: 70 });
+    playNoise({ dur: 0.045, vol: 0.055, filterFreq: 650, filterType: 'lowpass' });
+    playTone({ freq: 110, type: 'triangle', dur: 0.04, vol: 0.045, when: 0.025 });
+  }
+  function emptyClick() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < emptyClickCd) return;
+    emptyClickCd = c.currentTime + 0.18;
+    playTone({ freq: 120, type: 'square', dur: 0.04, vol: 0.08 });
+  }
+  function spinUp() {
+    playTone({ freq: 90, type: 'sawtooth', dur: 0.25, vol: 0.06, slideTo: 220 });
+  }
+  function spinDown() {
+    playTone({ freq: 200, type: 'sawtooth', dur: 0.3, vol: 0.05, slideTo: 70 });
+  }
+  function slideRack() {
+    playTone({ freq: 320, type: 'triangle', dur: 0.05, vol: 0.09, slideTo: 160 });
+    playNoise({ dur: 0.045, vol: 0.06, filterFreq: 2200, filterType: 'bandpass' });
+    playTone({ freq: 480, type: 'square', dur: 0.035, vol: 0.07, when: 0.06 });
+  }
+  function jump() { playTone({ freq: 300, type: 'triangle', dur: 0.08, vol: 0.08, slideTo: 420 }); }
+  function nvgClick() {
+    playTone({ freq: 520, type: 'square', dur: 0.03, vol: 0.07 });
+    playNoise({ dur: 0.04, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
+  }
+  function coin() {
+    playTone({ freq: 880, type: 'square', dur: 0.06, vol: 0.1 });
+    playTone({ freq: 1175, type: 'square', dur: 0.08, vol: 0.08, when: 0.05 });
+  }
+  function leafHit() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < leafSfxCd) return;
+    leafSfxCd = c.currentTime + 0.08;
+    playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1400, filterType: 'bandpass' });
+  }
+  function treeFell() {
+    // The trunk giving way: a crack, a groan of splitting wood, a second crack as the
+    // hinge tears. The thump is treeThud, played when it actually lands — a tall
+    // tree takes longer to come down than a sapling.
+    playNoise({ dur: 0.07, vol: 0.16, filterFreq: 1500, filterType: 'bandpass', when: 0.02, rev: 0.5 });
+    playTone({ freq: 128, type: 'sawtooth', dur: 0.75, vol: 0.05, slideTo: 82, attack: 0.25, rev: 0.4 });
+    playTone({ freq: 193, type: 'triangle', dur: 0.5, vol: 0.022, slideTo: 150, attack: 0.2, when: 0.12, rev: 0.4 });
+    playNoise({ dur: 0.05, vol: 0.1, filterFreq: 2600, filterType: 'bandpass', when: 0.34, rev: 0.4 });
+  }
+  function treeThud(volume = 1, pan = 0, size = 1) {
+    if (volume < 0.02) return;
+    playNoise({ dur: 0.42, vol: 0.22 * volume, filterFreq: 240, filterType: 'lowpass', rev: 0.6, pan });
+    playTone({ freq: 70 / Math.sqrt(Math.max(0.5, size)), type: 'sawtooth', dur: 0.35, vol: 0.11 * volume, slideTo: 38, pan });
+    playNoise({ dur: 0.06, vol: 0.09 * volume, filterFreq: 1800, filterType: 'bandpass', when: 0.02, pan }); // branches snapping
+    playNoise({ dur: 0.75, vol: 0.07 * volume, filterFreq: 2400, filterType: 'bandpass', when: 0.04, attack: 0.08, pan }); // leaves
+  }
+  // A crown going up: a low roar that swells in.
+  function crownFire(volume = 1, pan = 0) {
+    if (volume < 0.02) return;
+    playNoise({ dur: 1.7, vol: 0.14 * volume, filterFreq: 420, filterType: 'lowpass', attack: 0.55, rev: 0.4, pan });
+    playNoise({ dur: 1.0, vol: 0.05 * volume, filterFreq: 1800, filterType: 'bandpass', attack: 0.3, when: 0.15, pan });
+  }
+  function trunkBump() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < trunkBumpCd) return;
+    trunkBumpCd = c.currentTime + 0.2;
+    playTone({ freq: 90, type: 'triangle', dur: 0.06, vol: 0.08 });
+  }
+  function win() {
+    [523, 659, 784, 1047].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.12, vol: 0.1, when: i * 0.1 }));
+  }
+  function resetBlip() {
+    playTone({ freq: 360, type: 'square', dur: 0.06, vol: 0.1 });
+    playTone({ freq: 480, type: 'square', dur: 0.07, vol: 0.09, when: 0.05 });
+  }
+  function place() {
+    playTone({ freq: 520, type: 'square', dur: 0.06, vol: 0.12 });
+    playTone({ freq: 780, type: 'square', dur: 0.08, vol: 0.1, when: 0.04 });
+    playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1600, filterType: 'bandpass' });
+  }
+  function invalid() {
+    playTone({ freq: 160, type: 'square', dur: 0.1, vol: 0.1 });
+    playTone({ freq: 120, type: 'square', dur: 0.12, vol: 0.08, when: 0.08 });
+  }
+  function turretShot() {
+    playNoise({ dur: 0.035, vol: 0.09, filterFreq: 1800, filterType: 'bandpass' });
+    playTone({ freq: 240, type: 'square', dur: 0.04, vol: 0.06 });
+  }
+  // Flesh hit: a thump you feel, a wet slap, and a little grit. It fires for every
+  // pellet and every flame tick, so it is rate-limited, and it scales and pans with
+  // where the body is. Heavier kinds hit heavier.
+  let fleshCd = 0;
+  function zombieHit(v = 1, pan = 0, heavy = false) {
+    const c = ensure();
+    if (!c || muted || v < 0.03) return;
+    if (c.currentTime < fleshCd) return;
+    fleshCd = c.currentTime + 0.028;
+    const k = heavy ? 1.35 : 1;
+    playTone({ freq: (heavy ? 95 : 120) + Math.random() * 20, type: 'sine', dur: 0.07, vol: 0.13 * v * k, slideTo: 48, pan });
+    playNoise({ dur: 0.05, vol: 0.12 * v * k, filterFreq: 950 + Math.random() * 300, filterType: 'bandpass', q: 1.3, pan });
+    playNoise({ dur: 0.07, vol: 0.05 * v, filterFreq: 420, filterType: 'lowpass', when: 0.012, pan });
+    playTone({ freq: 150, type: 'sawtooth', dur: 0.05, vol: 0.04 * v, slideTo: 70, pan });
+  }
+  // Bullet meeting the world. `surface`: dirt, wood, rock, metal, water, sand.
+  let impactCd = 0;
+  function bulletImpact(surface, v = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted || v < 0.03) return;
+    if (c.currentTime < impactCd) return;
+    impactCd = c.currentTime + 0.022;
+    const p = 0.9 + Math.random() * 0.25;
+    if (surface === 'rock' || surface === 'metal') {
+      const metal = surface === 'metal';
+      playNoise({ dur: 0.025, vol: 0.13 * v, filterFreq: (metal ? 4200 : 3200) * p, filterType: 'bandpass', q: 2, pan });
+      playTone({ freq: (metal ? 2400 : 1500) * p, type: 'triangle', dur: metal ? 0.18 : 0.05, vol: (metal ? 0.07 : 0.05) * v, slideTo: (metal ? 1900 : 900) * p, pan, rev: 0.3 });
+      // The odd ricochet whine off stone and steel.
+      if (Math.random() < (metal ? 0.35 : 0.22)) playTone({ freq: 2600 * p, type: 'sine', dur: 0.28, vol: 0.045 * v, slideTo: 900 * p, when: 0.015, pan, rev: 0.45 });
+    } else if (surface === 'wood') {
+      playTone({ freq: 210 * p, type: 'triangle', dur: 0.06, vol: 0.12 * v, slideTo: 120 * p, pan });
+      playNoise({ dur: 0.04, vol: 0.09 * v, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.5, pan });
+      playNoise({ dur: 0.06, vol: 0.035 * v, filterFreq: 2600 * p, filterType: 'bandpass', when: 0.01, pan });
+    } else if (surface === 'water') {
+      playNoise({ dur: 0.07, vol: 0.08 * v, filterFreq: 1300 * p, filterType: 'bandpass', pan });
+      playTone({ freq: 600 * p, type: 'sine', dur: 0.06, vol: 0.05 * v, slideTo: 1400 * p, when: 0.01, pan });
+    } else if (surface === 'sand') {
+      playNoise({ dur: 0.08, vol: 0.1 * v, filterFreq: 700 * p, filterType: 'lowpass', pan });
+      playNoise({ dur: 0.05, vol: 0.04 * v, filterFreq: 2400 * p, filterType: 'bandpass', when: 0.01, pan });
+    } else {
+      // dirt: a dull thud and the patter of what it kicked up
+      playTone({ freq: 90 * p, type: 'sine', dur: 0.06, vol: 0.1 * v, slideTo: 45, pan });
+      playNoise({ dur: 0.05, vol: 0.09 * v, filterFreq: 520 * p, filterType: 'lowpass', pan });
+      playNoise({ dur: 0.09, vol: 0.035 * v, filterFreq: 1900 * p, filterType: 'bandpass', when: 0.02, pan });
+    }
+  }
+  // A blade that lands: the zip of the edge and a wet chunk.
+  function knifeHit() {
+    playNoise({ dur: 0.05, vol: 0.14, filterFreq: 800, filterType: 'bandpass', q: 1.4, when: 0.03 });
+    playTone({ freq: 190, type: 'sawtooth', dur: 0.06, vol: 0.07, slideTo: 80, when: 0.03 });
+    playNoise({ dur: 0.08, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
+  }
+  // Gore: a limb or head coming away (small) or a body bursting (big).
+  let goreCd = 0;
+  function gore(v = 1, pan = 0, big = false) {
+    const c = ensure();
+    if (!c || muted || v < 0.04) return;
+    if (c.currentTime < goreCd) return;
+    goreCd = c.currentTime + (big ? 0.05 : 0.035);
+    const k = big ? 1.4 : 1;
+    playNoise({ dur: big ? 0.22 : 0.12, vol: 0.14 * v * k, filterFreq: 650 + Math.random() * 250, filterType: 'bandpass', q: 0.9, pan });
+    playTone({ freq: big ? 70 : 110, type: 'sine', dur: big ? 0.2 : 0.1, vol: 0.11 * v * k, slideTo: 38, pan });
+    playNoise({ dur: 0.06, vol: 0.06 * v, filterFreq: 1800, filterType: 'bandpass', when: 0.02, pan });
+    // spatter landing
+    const n = big ? 5 : 2;
+    for (let i = 0; i < n; i++) playNoise({ dur: 0.025, vol: (0.02 + Math.random() * 0.025) * v, filterFreq: 900 + Math.random() * 1400, filterType: 'bandpass', when: 0.12 + Math.random() * 0.35, pan: Math.max(-1, Math.min(1, pan + (Math.random() - 0.5) * 0.6)) });
+  }
+  function grenadeThrow() {
+    playTone({ freq: 1500, type: 'square', dur: 0.02, vol: 0.05 });                       // pin
+    playNoise({ dur: 0.18, vol: 0.09, filterFreq: 1300, filterType: 'bandpass', when: 0.05 }); // throw whoosh
+    playTone({ freq: 900, type: 'triangle', dur: 0.03, vol: 0.04, when: 0.06 });          // spoon flying off
+  }
+  let bounceCd = 0;
+  function grenadeBounce(v = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted || v < 0.04) return;
+    if (c.currentTime < bounceCd) return;
+    bounceCd = c.currentTime + 0.08;
+    playTone({ freq: 700 + Math.random() * 200, type: 'triangle', dur: 0.05, vol: 0.06 * v, slideTo: 450, pan });
+    playNoise({ dur: 0.04, vol: 0.05 * v, filterFreq: 500, filterType: 'lowpass', pan });
+  }
+  // Footfall of something heavy: brute, demon, colossus.
+  let stompCd = 0;
+  function heavyStep(v = 1, pan = 0, huge = false) {
+    const c = ensure();
+    if (!c || muted || v < 0.05) return;
+    if (c.currentTime < stompCd) return;
+    stompCd = c.currentTime + 0.06;
+    playTone({ freq: huge ? 42 : 58, type: 'sine', dur: huge ? 0.3 : 0.16, vol: (huge ? 0.2 : 0.12) * v, slideTo: huge ? 26 : 34, pan });
+    playNoise({ dur: huge ? 0.2 : 0.1, vol: (huge ? 0.1 : 0.06) * v, filterFreq: 240, filterType: 'lowpass', pan, rev: huge ? 0.3 : 0 });
+  }
+  // A zombie clawing up out of the ground nearby: earth tearing and a rasp.
+  let emergeCd = 0;
+  function emerge(v = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted || v < 0.05) return;
+    if (c.currentTime < emergeCd) return;
+    emergeCd = c.currentTime + 0.25;
+    playNoise({ dur: 0.5, vol: 0.08 * v, filterFreq: 330, filterType: 'lowpass', attack: 0.08, pan });
+    for (let i = 0; i < 3; i++) playNoise({ dur: 0.04, vol: 0.04 * v, filterFreq: 1200 + Math.random() * 900, filterType: 'bandpass', when: 0.1 + i * 0.12 + Math.random() * 0.05, pan });
+    playTone({ freq: 85 + Math.random() * 25, type: 'sawtooth', dur: 0.45, vol: 0.05 * v, slideTo: 60, when: 0.25, attack: 0.08, pan, rev: 0.3 });
+  }
+  // The kiosk hatch: a roll-up shutter going up (open) or down (close).
+  function shutter(open) {
+    for (let i = 0; i < 6; i++) playNoise({ dur: 0.025, vol: 0.05, filterFreq: 1700 + i * (open ? 120 : -90), filterType: 'bandpass', when: i * 0.04 });
+    playTone({ freq: open ? 180 : 140, type: 'square', dur: 0.05, vol: 0.05, when: 0.25, slideTo: open ? 120 : 90 });
+  }
+  // Burial: the back of a shovel patting loose earth down.
+  function gravePat(v = 1, pan = 0) {
+    playNoise({ dur: 0.09, vol: 0.16 * v, filterFreq: 260, filterType: 'lowpass', pan, rev: 0.25 });
+    playTone({ freq: 95, type: 'triangle', dur: 0.1, vol: 0.08 * v, slideTo: 60, pan });
+    playNoise({ dur: 0.14, vol: 0.04 * v, filterFreq: 2400, filterType: 'bandpass', when: 0.02, pan });
+  }
+  // A letter cut into the stone.
+  function chisel() {
+    playTone({ freq: 2600 + Math.random() * 600, type: 'square', dur: 0.03, vol: 0.05, rev: 0.3 });
+    playNoise({ dur: 0.05, vol: 0.05, filterFreq: 4200, filterType: 'bandpass' });
+  }
+  // Two men swinging a weight between them: a grunt and a whump of canvas.
+  function heave(v = 1) {
+    playTone({ freq: 118 + Math.random() * 20, type: 'sawtooth', dur: 0.22, vol: 0.035 * v, slideTo: 92, attack: 0.04, rev: 0.2 });
+    playNoise({ dur: 0.25, vol: 0.05 * v, filterFreq: 700, filterType: 'bandpass', attack: 0.06 });
+  }
+  function bigSplash(v = 1, pan = 0) {
+    playNoise({ dur: 0.5, vol: 0.2 * v, filterFreq: 900, filterType: 'lowpass', pan, rev: 0.5 });
+    playNoise({ dur: 0.9, vol: 0.08 * v, filterFreq: 3000, filterType: 'bandpass', when: 0.08, attack: 0.1, pan, rev: 0.5 });
+    playTone({ freq: 70, type: 'sine', dur: 0.4, vol: 0.12 * v, slideTo: 40, pan });
+    for (let i = 0; i < 6; i++) playTone({ freq: 500 + Math.random() * 700, type: 'sine', dur: 0.05, vol: 0.025 * v, when: 0.5 + i * 0.18 + Math.random() * 0.1, slideTo: 1200, pan });
+  }
+  // The graveyard: no tune. A low drone that beats against itself, wind moving
+  // through, a few glassy notes hanging in the dark, and one far-off bell.
+  function graveAmbience(dur = 16) {
+    const c = ensure();
+    if (!c || muted) return;
+    const t0 = c.currentTime + 0.05, end = t0 + dur;
+    const env = (g, peak, a, r) => { g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(peak, t0 + a); g.gain.setValueAtTime(peak, end - r); g.gain.exponentialRampToValueAtTime(0.0001, end); };
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 420;
+    const dg = c.createGain(); env(dg, 0.06, 3.5, 5);
+    lp.connect(dg); dg.connect(outBus()); sendToReverb(dg, 0.7);
+    for (const [f, ty, v] of [[55, 'sine', 1], [55.7, 'sine', 0.9], [82.4, 'triangle', 0.35], [116.5, 'sine', 0.18]]) {
+      const o = c.createOscillator(); o.type = ty; o.frequency.value = f;
+      o.frequency.linearRampToValueAtTime(f * 0.985, end);
+      const og = c.createGain(); og.gain.value = v;
+      o.connect(og); og.connect(lp); o.start(t0); o.stop(end + 0.1);
+    }
+    // Wind: noise through a band that slowly drifts.
+    const buf = noiseBuffer(dur + 0.2);
+    if (buf) {
+      const src = c.createBufferSource(); src.buffer = buf;
+      const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.4;
+      bp.frequency.setValueAtTime(380, t0);
+      for (let k = 1; k <= 6; k++) bp.frequency.linearRampToValueAtTime(300 + Math.random() * 900, t0 + dur * k / 6);
+      const wg = c.createGain(); env(wg, 0.05, 4, 4);
+      src.connect(bp); bp.connect(wg); wg.connect(outBus()); sendToReverb(wg, 0.5);
+      src.start(t0); src.stop(end + 0.1);
+    }
+    // Glass: sparse high notes, a minor second apart, slow to bloom.
+    for (const [f, w] of [[880, 2.2], [932.3, 5.1], [1318.5, 8.4], [1244.5, 11.6]]) {
+      playTone({ freq: f, type: 'sine', dur: 3.2, vol: 0.018, when: w, attack: 0.9, rev: 0.9 });
+      playTone({ freq: f * 2.01, type: 'sine', dur: 2.4, vol: 0.006, when: w + 0.05, attack: 1.0, rev: 0.9 });
+    }
+    // A bell, a long way off.
+    for (const w of [6.5, 13.5]) for (const [f, v] of [[110, 0.05], [264, 0.025], [349, 0.018], [521, 0.01]]) playTone({ freq: f, type: 'sine', dur: 4.5, vol: v, when: w, attack: 0.01, rev: 0.9 });
+  }
+  // Coming up out of the water: bubbles breaking, a pour of runoff.
+  function surface() {
+    for (let i = 0; i < 9; i++) playTone({ freq: 380 + Math.random() * 600, type: 'sine', dur: 0.06, vol: 0.03, when: i * 0.09 + Math.random() * 0.05, slideTo: 1100, rev: 0.4 });
+    playNoise({ dur: 1.2, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.5, attack: 0.15, rev: 0.5 });
+    playNoise({ dur: 0.35, vol: 0.09, filterFreq: 500, filterType: 'lowpass', when: 0.45, rev: 0.5 });
+  }
+  // MedPen: cap flicked off, the spring-loaded jab (thump + click), a pneumatic hiss, a breath out.
+  function medPen() {
+    playTone({ freq: 2400, type: 'square', dur: 0.025, vol: 0.05 });                               // cap pop
+    playNoise({ dur: 0.04, vol: 0.05, filterFreq: 3200, filterType: 'bandpass', when: 0.01 });
+    playNoise({ dur: 0.08, vol: 0.16, filterFreq: 180, filterType: 'lowpass', when: 0.34 });        // jab into the thigh
+    playTone({ freq: 1800, type: 'square', dur: 0.03, vol: 0.09, when: 0.34, slideTo: 1200 });      // spring click
+    playNoise({ dur: 0.32, vol: 0.07, filterFreq: 6000, filterType: 'highpass', when: 0.36, attack: 0.02 }); // hiss
+    playTone({ freq: 520, type: 'sine', dur: 0.14, vol: 0.04, when: 0.62, slideTo: 780 });           // done blip
+    playNoise({ dur: 0.45, vol: 0.05, filterFreq: 900, filterType: 'bandpass', when: 0.7, attack: 0.12 }); // exhale
+  }
+  // A four-engine cargo plane crossing overhead: rising drone, a Doppler droop as it
+  // passes, then away. Built on its own nodes so the envelope can run for seconds.
+  function planeFlyover(dur = 8) {
+    const c = ensure();
+    if (!c || muted) return;
+    const t0 = c.currentTime, mid = t0 + dur * 0.5, end = t0 + dur;
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(260, t0);
+    lp.frequency.linearRampToValueAtTime(700, mid); lp.frequency.linearRampToValueAtTime(220, end);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(0.09, mid - dur * 0.05);
+    g.gain.exponentialRampToValueAtTime(0.11, mid);
+    g.gain.exponentialRampToValueAtTime(0.0001, end);
+    lp.connect(g); g.connect(outBus()); sendToReverb(g, 0.4);
+    for (const [f, ty] of [[62, 'sawtooth'], [64.5, 'sawtooth'], [93, 'square'], [124, 'triangle']]) {
+      const o = c.createOscillator(); o.type = ty;
+      o.frequency.setValueAtTime(f * 1.06, t0);
+      o.frequency.linearRampToValueAtTime(f * 1.04, mid - 0.4);
+      o.frequency.linearRampToValueAtTime(f * 0.93, mid + 0.6);   // Doppler as it passes
+      o.frequency.linearRampToValueAtTime(f * 0.92, end);
+      const og = c.createGain(); og.gain.value = ty === 'sawtooth' ? 0.5 : 0.3;
+      o.connect(og); og.connect(lp); o.start(t0); o.stop(end + 0.05);
+    }
+    playNoise({ dur, vol: 0.03, filterFreq: 400, filterType: 'lowpass', attack: dur * 0.45 });  // prop wash
+  }
+  // The chute cracks open: a canvas snap, the whoomph of the canopy filling, lines creaking taut.
+  function chuteOpen() {
+    playNoise({ dur: 0.06, vol: 0.14, filterFreq: 1500, filterType: 'bandpass', rev: 0.3 });
+    playNoise({ dur: 0.45, vol: 0.12, filterFreq: 240, filterType: 'lowpass', when: 0.04, attack: 0.08, rev: 0.4 });
+    playTone({ freq: 70, type: 'triangle', dur: 0.35, vol: 0.08, when: 0.05, slideTo: 45 });
+    playNoise({ dur: 0.2, vol: 0.03, filterFreq: 700, filterType: 'bandpass', when: 0.35, q: 8 });
+  }
+  function medkit() {
+    playNoise({ dur: 0.12, vol: 0.08, filterFreq: 2800, filterType: 'bandpass' });            // velcro
+    playNoise({ dur: 0.35, vol: 0.05, filterFreq: 5000, filterType: 'highpass', when: 0.15, attack: 0.05 }); // spray / hiss
+    playTone({ freq: 640, type: 'sine', dur: 0.12, vol: 0.05, when: 0.5, slideTo: 880 });
+  }
+  // Idle horde groans: a low sawtooth wobble with a breathy noise tail, pitched
+  // per body so a crowd doesn't chorus.
+  function groan(vol = 1, deep = false) {
+    const base = (deep ? 48 : 70) + Math.random() * (deep ? 30 : 60);
+    const dur = 0.5 + Math.random() * 0.45;
+    const pan = (Math.random() * 2 - 1) * 0.6;
+    playTone({ freq: base, type: 'sawtooth', dur, vol: 0.055 * vol, slideTo: base * (0.7 + Math.random() * 0.5), rev: 0.35, attack: 0.06, pan });
+    playTone({ freq: base * 2.01, type: 'triangle', dur: dur * 0.8, vol: 0.028 * vol, slideTo: base * 1.5, when: 0.05, rev: 0.3, attack: 0.05, pan });
+    playNoise({ dur: 0.35, vol: 0.035 * vol, filterFreq: 450 + Math.random() * 500, filterType: 'bandpass', when: dur * 0.3, rev: 0.3, pan });
+  }
+  function headshot() {
+    playNoise({ dur: 0.09, vol: 0.2, filterFreq: 950, filterType: 'bandpass', rev: 0.3 });
+    playTone({ freq: 1500, type: 'square', dur: 0.07, vol: 0.06, slideTo: 320 });
+    playNoise({ dur: 0.14, vol: 0.06, filterFreq: 400, filterType: 'lowpass', when: 0.03 });
+  }
+  function heartbeat(vol = 1) {
+    playTone({ freq: 62, type: 'sine', dur: 0.12, vol: 0.14 * vol, slideTo: 40 });
+    playTone({ freq: 58, type: 'sine', dur: 0.1, vol: 0.1 * vol, slideTo: 36, when: 0.16 });
+  }
+  function footstep(wet, running) {
+    const p = 0.85 + Math.random() * 0.3;
+    if (wet) {
+      playNoise({ dur: 0.07, vol: running ? 0.07 : 0.05, filterFreq: 1700 * p, filterType: 'bandpass' });
+    } else {
+      playNoise({ dur: 0.045, vol: running ? 0.065 : 0.04, filterFreq: 380 * p, filterType: 'lowpass' });
+      playNoise({ dur: 0.02, vol: 0.02, filterFreq: 2600 * p, filterType: 'bandpass' });
+    }
+  }
+  function dodgeRoll() {
+    playNoise({ dur: 0.2, vol: 0.1, filterFreq: 520, filterType: 'lowpass' });
+    playNoise({ dur: 0.08, vol: 0.06, filterFreq: 2400, filterType: 'bandpass', when: 0.16 });
+  }
+  function streak(level) {
+    const f = 480 + level * 110;
+    playTone({ freq: f, type: 'triangle', dur: 0.12, vol: 0.1, slideTo: f * 1.5 });
+    playTone({ freq: f * 1.5, type: 'triangle', dur: 0.2, vol: 0.09, when: 0.1 });
+    playTone({ freq: f * 2, type: 'square', dur: 0.14, vol: 0.04, when: 0.2 });
+  }
+  // Death: the last rattle, then the body hitting the ground.
+  let deathCd = 0;
+  function zombieDeath(v = 1, pan = 0, heavy = false) {
+    const c = ensure();
+    if (!c || muted || v < 0.03) return;
+    if (c.currentTime < deathCd) return;
+    deathCd = c.currentTime + 0.03;
+    playNoise({ dur: 0.15, vol: 0.13 * v, filterFreq: 400, filterType: 'lowpass', pan });
+    playTone({ freq: 100, type: 'sawtooth', dur: 0.18, vol: 0.08 * v, slideTo: 45, pan });
+    const fall = heavy ? 0.42 : 0.3;
+    playTone({ freq: heavy ? 55 : 72, type: 'sine', dur: heavy ? 0.22 : 0.12, vol: (heavy ? 0.16 : 0.1) * v, slideTo: 32, when: fall, pan });
+    playNoise({ dur: 0.1, vol: 0.07 * v, filterFreq: 300, filterType: 'lowpass', when: fall, pan });
+  }
+  function waveStart(boss) {
+    // A long horn over a deep hit; the boss version drops a fifth and doubles up.
+    playTone({ freq: boss ? 73 : 110, type: 'sawtooth', dur: 1.1, vol: 0.11, slideTo: boss ? 65 : 100, attack: 0.08, rev: 0.7 });
+    playTone({ freq: boss ? 110 : 165, type: 'sawtooth', dur: 0.9, vol: 0.07, slideTo: boss ? 98 : 150, attack: 0.1, when: 0.05, rev: 0.7 });
+    playNoise({ dur: 0.5, vol: 0.16, filterFreq: 160, filterType: 'lowpass', rev: 0.8 });
+    playTone({ freq: 48, type: 'sine', dur: 0.7, vol: 0.14, slideTo: 28 });
+    if (boss) { playNoise({ dur: 0.5, vol: 0.14, filterFreq: 140, filterType: 'lowpass', when: 0.55, rev: 0.8 }); playTone({ freq: 44, type: 'sine', dur: 0.7, vol: 0.12, slideTo: 26, when: 0.55 }); }
+  }
+  function expand() {
+    playTone({ freq: 300, type: 'triangle', dur: 0.1, vol: 0.1 });
+    playTone({ freq: 450, type: 'triangle', dur: 0.12, vol: 0.09, when: 0.08 });
+    playTone({ freq: 600, type: 'triangle', dur: 0.14, vol: 0.08, when: 0.16 });
+  }
+  function gameOver() {
+    playTone({ freq: 200, type: 'sawtooth', dur: 0.25, vol: 0.12, slideTo: 60 });
+    playTone({ freq: 150, type: 'sawtooth', dur: 0.35, vol: 0.1, slideTo: 40, when: 0.2 });
+  }
+  function playerHurt() {
+    playNoise({ dur: 0.1, vol: 0.14, filterFreq: 500, filterType: 'bandpass' });
+    playTone({ freq: 180, type: 'sawtooth', dur: 0.12, vol: 0.1, slideTo: 80 });
+  }
+  function grenadeBoom() {
+    playNoise({ dur: 0.35, vol: 0.24, filterFreq: 180, filterType: 'lowpass', rev: 0.8 });
+    playNoise({ dur: 0.08, vol: 0.12, filterFreq: 1800, filterType: 'bandpass', rev: 0.6 });
+    playTone({ freq: 70, type: 'sawtooth', dur: 0.4, vol: 0.14, slideTo: 30, rev: 0.4 });
+    playTone({ freq: 40, type: 'sine', dur: 0.7, vol: 0.12, slideTo: 24 });
+    // debris patter after the blast
+    for (let i = 0; i < 5; i++) playNoise({ dur: 0.03, vol: 0.02 + Math.random() * 0.02, filterFreq: 1200 + Math.random() * 2000, filterType: 'bandpass', when: 0.25 + Math.random() * 0.6, pan: Math.random() * 2 - 1 });
+  }
+  function knifeSwing() {
+    playNoise({ dur: 0.06, vol: 0.1, filterFreq: 2500, filterType: 'bandpass' });
+    playTone({ freq: 420, type: 'triangle', dur: 0.05, vol: 0.07, slideTo: 200 });
+  }
+  // Machete: a longer, lower whoosh — more air moved — and a wet chop on contact.
+  function macheteSwing() {
+    playNoise({ dur: 0.16, vol: 0.13, filterFreq: 1100, filterType: 'bandpass' });
+    playNoise({ dur: 0.1, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', when: 0.03 });
+    playTone({ freq: 300, type: 'triangle', dur: 0.12, vol: 0.06, slideTo: 120 });
+  }
+  function macheteChop() {
+    playNoise({ dur: 0.08, vol: 0.16, filterFreq: 520, filterType: 'bandpass', when: 0.04 });
+    playTone({ freq: 160, type: 'sawtooth', dur: 0.09, vol: 0.09, slideTo: 60, when: 0.04 });
+    playTone({ freq: 1900, type: 'triangle', dur: 0.03, vol: 0.04, slideTo: 900, when: 0.04 });
+  }
+  // Armour: a strap-and-buckle rustle when a piece goes on, a plate ring when it takes a hit.
+  function armorDon() {
+    playNoise({ dur: 0.12, vol: 0.07, filterFreq: 1400, filterType: 'bandpass' });
+    playTone({ freq: 640, type: 'square', dur: 0.03, vol: 0.05, when: 0.08 });
+    playTone({ freq: 420, type: 'square', dur: 0.04, vol: 0.05, when: 0.14 });
+    playNoise({ dur: 0.08, vol: 0.05, filterFreq: 900, filterType: 'bandpass', when: 0.16 });
+  }
+  function armorHit(fullSoak) {
+    playTone({ freq: 1100 + Math.random() * 300, type: 'triangle', dur: 0.12, vol: fullSoak ? 0.09 : 0.06, slideTo: 500 });
+    playNoise({ dur: 0.05, vol: 0.08, filterFreq: 2200, filterType: 'bandpass' });
+    playTone({ freq: 240, type: 'square', dur: 0.05, vol: 0.05, slideTo: 120 });
+  }
+  function rockBreak() {
+    playNoise({ dur: 0.2, vol: 0.16, filterFreq: 500, filterType: 'bandpass' });
+    playTone({ freq: 90, type: 'square', dur: 0.12, vol: 0.08, slideTo: 40 });
+  }
+  function brassTink() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < brassTinkCd) return;
+    brassTinkCd = c.currentTime + 0.07;
+    playTone({ freq: 1400 + Math.random() * 500, type: 'triangle', dur: 0.025, vol: 0.018 });
+    playNoise({ dur: 0.02, vol: 0.012, filterFreq: 3200, filterType: 'bandpass' });
+  }
+  let magThudCd = 0;
+  function magThud() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < magThudCd) return;
+    magThudCd = c.currentTime + 0.18;
+    playTone({ freq: 110 + Math.random() * 40, type: 'sine', dur: 0.05, vol: 0.035, slideTo: 55 });
+    playNoise({ dur: 0.04, vol: 0.02, filterFreq: 420, filterType: 'lowpass' });
+  }
+
+  // Resolved from this module (core/audio.js), so it's right from any page, the test pages
+  // in tools/tests/ included.
+  const SOUNDTRACK = (() => { try { return new URL('../assets/soundtrack/', import.meta.url).href; } catch (_) { return 'assets/soundtrack/'; } })();
+  // --- The music director (owner: Claude, D-21) --------------------------------------
+  //
+  // Jerry's rhythm (CL-24, tuned in CL-25, 2026-09-24). One piece of music at a time, never two:
+  //   - Calm music between fights. Changing it fades the old one right out, then fades the
+  //     new one in. The briefing board halves whatever is playing while it's open.
+  //   - The alarm cuts the music. The alarm sting plays alone; the moment it ends the wave's
+  //     fight track (by day, CL-27: days 1-2 day skirmish B, 3-7 A, 8-11 Tier 1, 12-15 Tier 2,
+  //     16+ Tier 3) fades in from silence over 10 s to 50% (CL-30), then loops: 50% with
+  //     nobody within 150 m, climbing to full at 20 m.
+  //   - The last kill of a wave is the finisher (CL-26): the fight track is cut dead, the
+  //     relief sting plays with every other sound cleared, while the page runs the red
+  //     pulse, the slow motion and the kill cam; the moment the sting ends the regular calm
+  //     music starts fading back in, slowly. A day fight still ends with a fast fade.
+  //   - A fight in daylight (no alarm) picks its track by horde size, smallest to largest:
+  //     day skirmish B, day skirmish A, Tier 1, Tier 2, Tier 3. It steps up if the horde
+  //     grows, never down, and ends like a wave: fast fade, relief sting, calm.
+  // The pools, hit points, stings, per-track gains and the day-fight sizes are in
+  // assets/soundtrack/music.json, so this file doesn't change when the music does.
+  const MUSIC_POOLS = {
+    menu:     ['menu_treeline'],
+    dawnprep: ['day_morning_watch', 'day_long_grass'],
+    day:      ['day_riverside', 'day_open_ground', 'day_long_grass', 'day_morning_watch'],
+    dusk:     ['night_lanterns', 'night_long_watch'],
+    night:    ['night_embers', 'night_lanterns', 'night_long_watch'],
+    fight:    ['metal_breach_the_line'],
+    aftermath:['aftermath_hold'],
+    fallen:   ['end_fallen'],
+    dawn:     ['end_dawn']
+  };
+  const MUSIC_HITS = {};     // track -> seconds where it hits (fights start and loop there)
+  const MUSIC_STINGS = {};   // cue -> track
+  const MUSIC_GAIN = {};     // track -> loudness multiplier (Jerry's tracks are boosted)
+  // Day fights: a track per horde size. sizes[i] is the smallest horde that gets tracks[i].
+  const DAY_FIGHT = { tracks: ['chip_skirmish_b', 'chip_skirmish_a', 'chip_fight_1', 'chip_fight_2', 'chip_fight_3'], sizes: [1, 4, 9, 16, 26] };
+  // Waves: a track per day (Jerry, CL-27). from is the first day that gets the track. Until the
+  // special nights have their own music, they play their day's track too.
+  // CL-34: the chiptune loops made from Jerry's Suno fight tracks (tools/chip.py).
+  let WAVE_BY_DAY = [{ from: 1, track: 'fight_day01' }, { from: 2, track: 'chip_skirmish_b' }, { from: 3, track: 'chip_skirmish_a' }, { from: 8, track: 'chip_fight_1' }, { from: 12, track: 'chip_fight_2' }, { from: 16, track: 'chip_fight_3' }];
+  // CL-77 (P-58): a special night can have its own song (music.json specials: { fog: 'fight_fognight' }). The page says
+  // which (state.special); it plays only once its sections are decoded, else the night's own song plays as before.
+  const SPECIAL_TRACKS = { fog: 'fight_fognight' };
+  // CL-85 (P-99): the guardian's last fight, in the heart, has its own song (tools/heart.py), played by the fight's phase.
+  const HEART_TRACK = 'fight_heart';
+  function specialTrack(state) {
+    const t = state && state.special ? SPECIAL_TRACKS[state.special] : null;
+    return t && SECTIONED[t] ? t : null;
+  }
+  function waveTrackForDay(d) {
+    let t = null;
+    for (const w of WAVE_BY_DAY) if ((d || 1) >= w.from) t = w.track;
+    return t;
+  }
+  let manifestLoaded = false;
+  function loadMusicManifest() {
+    if (manifestLoaded || typeof fetch !== 'function') return;
+    manifestLoaded = true;
+    fetch(SOUNDTRACK + 'music.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).then((m) => {
+      if (!m || typeof m !== 'object') return;
+      if (m.pools && typeof m.pools === 'object') {
+        for (const k of Object.keys(m.pools)) if (Array.isArray(m.pools[k]) && m.pools[k].length) MUSIC_POOLS[k] = m.pools[k].slice();
+      }
+      if (m.hits && typeof m.hits === 'object') for (const k of Object.keys(m.hits)) if (isFinite(+m.hits[k])) MUSIC_HITS[k] = +m.hits[k];
+      if (m.stings && typeof m.stings === 'object') for (const k of Object.keys(m.stings)) if (typeof m.stings[k] === 'string') MUSIC_STINGS[k] = m.stings[k];
+      if (m.gain && typeof m.gain === 'object') for (const k of Object.keys(m.gain)) if (isFinite(+m.gain[k]) && +m.gain[k] > 0) MUSIC_GAIN[k] = +m.gain[k];
+      if (m.fadeIn && typeof m.fadeIn === 'object') for (const k of Object.keys(m.fadeIn)) if (isFinite(+m.fadeIn[k]) && +m.fadeIn[k] >= 0) FIGHT_FADE[k] = +m.fadeIn[k];
+      if (m.specials && typeof m.specials === 'object') for (const k of Object.keys(m.specials)) if (typeof m.specials[k] === 'string') SPECIAL_TRACKS[k] = m.specials[k];
+      if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
+        WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
+      }
+      // CL-42: a track cut into sections the director moves between as the wave goes.
+      if (m.sections && typeof m.sections === 'object') {
+        for (const k of Object.keys(m.sections)) {
+          const S = m.sections[k];
+          if (!S || typeof S.file !== 'string' || !isFinite(+S.barSeconds) || !Array.isArray(S.list) || !S.list.length) continue;
+          SECTIONED[k] = {
+            file: S.file, barS: +S.barSeconds,
+            list: Object.fromEntries(S.list.map((s) => [s.name, { t0: s.bar * +S.barSeconds, dur: s.bars * +S.barSeconds }])),
+            flow: Object.assign({ stalk: 'stalk', fight: ['dropA'], lull: 'break', last: 'climax', surge: 'bridge', lastAt: 3, near: 45, far: 70, lullAfter: 4 }, S.flow || {})
+          };
+        }
+        secWantDay(lastDay);
+      }
+      const df = m.dayFight;
+      if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
+        DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
+      }
+    }).catch(() => {});
+  }
+  const MUSIC_VOL = 0.3;
+  // CL-35 (Jerry: "use your best judgement"): the fight songs carry their own dynamics now (a
+  // built intro, drops, a breakdown), so the director swings less: 70% with nobody within
+  // PROX_FAR, full within PROX_NEAR. A song can set its own fade-in (music.json fadeIn); the
+  // day-1 song's intro is its fade, so it starts almost at once.
+  const FIGHT_FLOOR = 0.7;           // the fight track with nobody within PROX_FAR (nights 1-8)
+  const FIGHT_IN_RANGE = 0.7;        // ... with one at PROX_FAR: a smooth climb from there
+  // CL-70 (P-20): night 19 sounds bigger than night 2. The fight music gains up to +2.5 dB over the
+  // run (none on nights 1-2, climbing to night 19), and its floor rises from 70% to 85% from night 8,
+  // so the late waves never drop back to a quiet bed. Never less than the night before.
+  const NIGHT_GAIN_DB_MAX = 2.5, NIGHT_GAIN_FROM = 2, NIGHT_GAIN_TO = 19;
+  const FLOOR_LATE = 0.85, FLOOR_FROM = 8, FLOOR_TO = 19;
+  function nightMusic(day) {
+    const d = Math.max(1, Math.floor(+day || 1));
+    const g = Math.max(0, Math.min(1, (d - NIGHT_GAIN_FROM) / (NIGHT_GAIN_TO - NIGHT_GAIN_FROM)));
+    const f = Math.max(0, Math.min(1, (d - FLOOR_FROM) / (FLOOR_TO - FLOOR_FROM)));
+    const db = NIGHT_GAIN_DB_MAX * g;
+    return { day: d, db, gain: Math.pow(10, db / 20), floor: FIGHT_FLOOR + (FLOOR_LATE - FIGHT_FLOOR) * f };
+  }
+  const FIGHT_FADE_IN_S = 10;        // the default fade after the alarm sting (CL-30)
+  const FIGHT_FADE = {};             // per-track fade-in seconds, from music.json
+  const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
+  const GAP_AFTER_ALARM = 0;         // the fight starts the moment the alarm sting ends
+  const FAST_FADE_S = 0.35;          // the fight making way for the relief sting
+  const DAY_FIGHT_RANGE = 100;       // a zombie this close in daylight prep starts a day fight
+  const FADE_OUT_S = 2.0;            // calm music making way
+  const FADE_IN_S = 6.0;             // calm music arriving
+  const FADE_IN_SLOW_S = 12.0;       // the first music after the relief sting: very slow
+
+  let deck = null;          // the one <audio> element that plays music
+  let deckTrack = null;     // what it's playing
+  let deckLevel = 0;        // 0..1 fade level
+  let deckTarget = 0;       // where the fade is heading
+  let deckRate = 1;         // fade speed, level units per second
+  let deckLoopAt = -1;      // >= 0: loop from here when it ends (the fight)
+  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | campclear | release | relief | end
+  const CAMP_FADE_S = 1.6;   // CL-52: a camp cleared: the fight fades out under the camp stinger
+  const CAMP_S = 2.0;        //        which is this long, then the calm music comes back
+  const CAMP_FADE_IN_S = 6.0;
+  let campUntil = 0;
+  let dayBand = -1;         // the day fight's track index
+  let pendingDay = -1;      // a day-fight band waiting for the deck to fade out
+  let lastCalm = 'day';
+  let lastDay = 1;          // the day the story is on, for the wave's track
+  let lastDeckError = null; // the last load error, for the tests     // the calm pool the story wants, for after the relief sting
+  let mood = null;          // the pool the deck is playing from
+  let nextMood = null;      // a calm pool waiting for the deck to fade out
+  let gapT = 0;             // silence left (after the alarm sting, between calm tracks)
+  let prox = FIGHT_FLOOR;   // 0.6..1, how close the nearest zombie is
+  let briefingOpen = false;
+  let briefDuck = 1;
+  let duck = 1;             // pause, shop, low health
+  let lastTrack = {};       // pool -> last track (no immediate repeats)
+  let sting = null;         // the one <audio> element for stings: never under music
+  let stingName = null;     // the cue playing, or null
+  let stingLeft = 0;        // seconds until it counts as finished, if 'ended' never comes
+  let stingNext = null;     // what to do when it finishes
+  let alarmPending = false;
+  const nowMs = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+  let alarmHoldS = 3.4;       // D-33: how long the alarm holds the music back (from 'alarm-started')
+  let alarmUntil = 0;
+  let finalePending = false;  // the page's finisher asked for the cut and the sting
+  let soloOn = false;
+  let prevPhase = null, prevStarted = false;
+  let lastCue = null, cueCount = 0;
+  let overlapFrames = 0;    // frames with a sting and audible music together (must stay 0)
+
+  function trackUrl(name) { return SOUNDTRACK + name + '.mp3'; }
+
+  // --- CL-42: the section player ------------------------------------------------------
+  // Day 1's song is cut into sections (tools/day1.py), all one tempo and each its own circle.
+  // They sit end to end in one Opus file, decoded once into a Web Audio buffer and looped with
+  // loopStart/loopEnd, which is sample-accurate: no seam, unlike <audio loop> on an mp3. The
+  // director picks the section from the wave (stalk while the horde is out of sight, the drops
+  // in rotation while it's on you, the break when it goes quiet, the climax for the last few)
+  // and cuts on the next bar line, so every change lands on a downbeat. If Web Audio or the
+  // file isn't there, the same track plays whole on the <audio> deck as before.
+  const SECTIONED = {};      // track -> { file, barS, list: { name: { t0, dur } }, flow }
+  const secBuf = {};         // file -> AudioBuffer (or 'loading' / 'failed')
+  let secOut = null;         // the section player's gain, straight to the speakers like the deck
+  let secLp = null;          // CL-101: its low-pass (the music heard through the rock while he's below)
+  // CL-101 (P-144): the music below. In the calm, the day's song is far off through the rock (BELOW_MUSIC of its level,
+  // low-passed to BELOW_LP Hz on the section player); a fight below plays as a day fight does; while the rock screams
+  // (the stir's warning) and while the guardian holds him, no music at all.
+  const BELOW_MUSIC = 0.4, BELOW_LP = 650;
+  let belowMusic = 1;
+  // CL-82: near a cave mouth or the pit (state.dread 0..1) the calm music draws back (to PLACE_DREAD at the mouth).
+  const PLACE_DREAD = 0.55;
+  let placeDread = 1;
+  let sec = null;            // { track, name, src, g, startAt, dur, t0 }
+  let secPending = null;     // { name, at }
+  let secMode = 'stalk', secRot = -1, secQuietT = 0, secLoops = 0;
+  function loadSections(track) {
+    const S = SECTIONED[track];
+    if (!S || secBuf[S.file] || !ctx || typeof fetch !== 'function') return;
+    secBuf[S.file] = 'loading';
+    fetch(SOUNDTRACK + S.file).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status))))
+      .then((ab) => new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.catch) p.catch(rej); }))
+      .then((buf) => { secBuf[S.file] = buf; })
+      .catch(() => { secBuf[S.file] = 'failed'; });
+  }
+  // CL-38: hold only what the run can reach soon (tonight's and tomorrow's song, the day track,
+  // whatever is playing); drop the other decoded songs, they come back when their night does.
+  let secWantedFor = -1;
+  function secWantDay(d) {
+    d = d || 1;
+    const waveTracks = new Set(WAVE_BY_DAY.map((w) => w.track).concat(Object.values(SPECIAL_TRACKS), [HEART_TRACK]));   // CL-85: loaded when it's near
+    const keep = new Set([waveTrackForDay(d), waveTrackForDay(d + 1)]);
+    const sp = specialTrack(lastState); if (sp) keep.add(sp);   // CL-77: tonight's special song
+    if (stage === 'heart' || (lastState && (lastState.heartSoon || lastState.heart))) keep.add(HEART_TRACK);   // CL-85
+    if (sec && sec.track) keep.add(sec.track);
+    for (const k of Object.keys(SECTIONED)) {
+      const S = SECTIONED[k];
+      if (!waveTracks.has(k) || keep.has(k)) loadSections(k);
+      else if (secBuf[S.file] && typeof secBuf[S.file] === 'object') delete secBuf[S.file];
+    }
+    secWantedFor = d;
+  }
+  function sectionsReady(track) {
+    const S = SECTIONED[track];
+    return !!(S && ctx && ctx.state !== 'closed' && secBuf[S.file] && typeof secBuf[S.file] === 'object');
+  }
+  function secPlay(name, when) {
+    const S = SECTIONED[sec ? sec.track : deckTrack]; const buf = S && secBuf[S.file];
+    const part = S && S.list[name];
+    if (!part || !buf || typeof buf !== 'object') return false;
+    if (!secOut) {
+      secOut = ctx.createGain(); secOut.gain.value = 0;
+      secLp = ctx.createBiquadFilter(); secLp.type = 'lowpass'; secLp.frequency.value = 20000; secLp.Q.value = 0.5;   // CL-101: shut below
+      secOut.connect(secLp); secLp.connect(ctx.destination);
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = buf; src.loop = true; src.loopStart = part.t0; src.loopEnd = part.t0 + part.dur;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + 0.012);
+    src.connect(g); g.connect(secOut);
+    src.start(when, part.t0);
+    if (sec && sec.src) {                     // the old one out over the same 30 ms
+      try { sec.g.gain.setValueAtTime(1, when); sec.g.gain.linearRampToValueAtTime(0, when + 0.03); sec.src.stop(when + 0.05); } catch (_) {}
+    }
+    sec = { track: sec ? sec.track : deckTrack, name, src, g, startAt: when, dur: part.dur, t0: part.t0 };
+    secLoops = 0;
+    return true;
+  }
+  function secStop(fade) {
+    if (sec && sec.src && ctx) {
+      const t = ctx.currentTime;
+      try { sec.g.gain.cancelScheduledValues(t); sec.g.gain.setValueAtTime(sec.g.gain.value, t); sec.g.gain.linearRampToValueAtTime(0, t + (fade || 0.03)); sec.src.stop(t + (fade || 0.03) + 0.02); } catch (_) {}
+    }
+    sec = null; secPending = null;
+  }
+  // Where in the flow the wave is, from what the page tells the director every frame.
+  function secWant(state, dt) {
+    const F = SECTIONED[sec.track].flow;
+    if (stage === 'heart' && state.heart) {   // CL-85: the heart fight's phase, not the wave's
+      if (state.heart.flat) return 'lull';
+      return 'h' + Math.max(1, Math.min(3, (state.heart.phase | 0) || 1));
+    }
+    const live = state.threat || 0, near = state.nearest == null ? 999 : state.nearest;
+    if (state.spawnedAll && state.remaining > 0 && state.remaining <= F.lastAt) return 'last';
+    if (secMode === 'last') return 'last';
+    // CL-69 (P-19): the score follows the night's shape (the wave director's pace, GB-71). The last
+    // push of a night with several is the surge: the bridge, once through, then the climax to the end.
+    const pace = state.pace;
+    if (secMode === 'surge') {
+      const into = ctx ? ctx.currentTime - sec.startAt : 0;
+      return sec.name === F.surge && into >= sec.dur - 0.4 ? 'last' : 'surge';
+    }
+    if (pace && pace.pushes > 1 && pace.push === pace.pushes - 1 && !pace.inLull && live > 0 && SECTIONED[sec.track].list[F.surge]) { secQuietT = 0; return 'surge'; }
+    // The director's breather: the break at once (on the next bar), not after lullAfter seconds of quiet.
+    if (pace && pace.inLull && !(live > 0 && near <= F.near)) { secQuietT = F.lullAfter; return 'lull'; }
+    if (live > 0 && near <= F.near) { secQuietT = 0; return 'fight'; }
+    if (secMode === 'fight' || secMode === 'lull') {
+      if (live === 0 || near > F.far) secQuietT += dt; else secQuietT = 0;
+      return secQuietT >= F.lullAfter ? 'lull' : 'fight';
+    }
+    return 'stalk';
+  }
+  const secPhaseList = (F, mode) => (F.phases && F.phases[+mode.slice(1) - 1]) || F.fight;   // CL-85: 'h1'..'h3'
+  const secRotates = (mode) => mode === 'fight' || /^h\d$/.test(mode);
+  function secSectionFor(mode) {
+    const F = SECTIONED[sec.track].flow;
+    if (/^h\d$/.test(mode)) { const L = secPhaseList(F, mode); secRot = (secRot + 1) % L.length; return L[secRot]; }
+    if (mode === 'fight') { secRot = (secRot + 1) % F.fight.length; return F.fight[secRot]; }
+    return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk;
+  }
+  function secFits(mode, name) {
+    const F = SECTIONED[sec.track].flow;
+    if (/^h\d$/.test(mode)) return secPhaseList(F, mode).includes(name);   // CL-85
+    return mode === 'fight' ? F.fight.includes(name) : name === secSectionFor.peek(mode);
+  }
+  secSectionFor.peek = (mode) => { const F = SECTIONED[sec.track].flow; if (/^h\d$/.test(mode)) return secPhaseList(F, mode)[0]; return mode === 'last' ? F.last : mode === 'surge' ? F.surge : mode === 'lull' ? F.lull : F.stalk; };
+  function secUpdate(state, dt) {
+    if (!sec || !ctx) return;
+    const now = ctx.currentTime, S = SECTIONED[sec.track];
+    const mode = secWant(state, dt);
+    const into = now - sec.startAt;
+    if (into > 0) secLoops = Math.floor(into / sec.dur);
+    if (secPending) {
+      if (now >= secPending.at - 0.005) { secPending = null; }
+      return;
+    }
+    const nextBar = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / S.barS)) * S.barS;
+    const endOfSec = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / sec.dur)) * sec.dur;
+    if (mode !== secMode || !secFits(mode, sec.name)) {
+      // A new part of the fight: cut on the next bar line.
+      const name = secSectionFor(mode);
+      secMode = mode;
+      if (name !== sec.name && secPlay(name, nextBar)) secPending = { name, at: nextBar };
+    } else if (secRotates(mode) && (mode === 'fight' ? S.flow.fight : secPhaseList(S.flow, mode)).length > 1 && endOfSec - now < 0.35 && now - sec.startAt > sec.dur * 0.5) {
+      // Still fighting at the end of a section: on to the next one in the rotation (CL-85: the heart's phase too).
+      const name = secSectionFor(mode);
+      if (name !== sec.name && secPlay(name, endOfSec)) secPending = { name, at: endOfSec };
+    }
+  }
+  function secStart(name, state) {
+    // The first section: straight into the fight if they're already on you.
+    secMode = 'stalk'; secRot = -1; secQuietT = 0;
+    sec = { track: name, name: null, src: null, g: null, startAt: 0, dur: 1, t0: 0 };
+    const mode = state ? secWant(state, 0) : 'stalk';
+    secMode = mode;
+    const first = secSectionFor(mode);
+    const ok = secPlay(first, ctx.currentTime + 0.04);
+    if (!ok) sec = null;
+    return ok;
+  }
+  function gainOf(name) { return MUSIC_GAIN[name] || 1; }
+  function pickTrack(pool) {
+    const list = MUSIC_POOLS[pool] || MUSIC_POOLS.menu;
+    let choice = lastTrack[pool] === undefined ? list[0] : list[Math.floor(Math.random() * list.length)];
+    if (list.length > 1 && choice === lastTrack[pool]) choice = list[(list.indexOf(choice) + 1 + Math.floor(Math.random() * (list.length - 1))) % list.length];
+    lastTrack[pool] = choice;
+    return choice;
+  }
+  function ensureDeck() {
+    if (deck) return deck;
+    deck = new Audio();
+    deck.preload = 'auto';
+    deck.volume = 0;
+    deck.addEventListener('ended', onDeckEnded);
+    // A real load failure moves on; an abort (a new src replacing one still loading) is not one.
+    deck.addEventListener('error', () => {
+      const e = deck.error;
+      lastDeckError = { code: e ? e.code : 0, src: deck.src, track: deckTrack };
+      if (!deckTrack || (e && e.code === 1)) return;
+      if (deck.src && !deck.src.endsWith('/' + deckTrack + '.mp3')) return;
+      deckTrack = null; gapT = 1.5;
+    });
+    return deck;
+  }
+  function stopDeck() {
+    secStop();
+    if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
+    deckTrack = null; deckLevel = 0; deckTarget = 0; deckLoopAt = -1;
+  }
+  // Start a track on the deck. from: seconds in; level/target/seconds: the fade.
+  function startDeck(name, opts) {
+    const o = opts || {};
+    secStop();
+    if (sectionsReady(name) && secStart(name, o.state)) {
+      if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
+      deckTrack = name;
+      deckLevel = o.level != null ? o.level : 0;
+      deckTarget = 1;
+      deckRate = 1 / Math.max(0.05, o.fadeIn || FADE_IN_S);
+      deckLoopAt = 0;
+      return;
+    }
+    const el = ensureDeck();
+    try { el.pause(); } catch (_) {}
+    el.src = trackUrl(name);
+    // CL-34: a track that loops from its very start (the chip loops) loops natively, which
+    // is gapless in the browser; one that loops from a later hit still seeks on 'ended'.
+    el.loop = o.loopAt === 0;
+    deckTrack = name;
+    deckLevel = o.level != null ? o.level : 0;
+    deckTarget = 1;
+    deckRate = 1 / Math.max(0.05, o.fadeIn || FADE_IN_S);
+    deckLoopAt = o.loopAt != null ? o.loopAt : -1;
+    const from = o.from || 0;
+    if (from > 0) {
+      const seek = () => { try { if (el.duration && from < el.duration - 5) el.currentTime = from; } catch (_) {} };
+      if (el.readyState >= 1) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
+    }
+    el.volume = 0;
+    const p = el.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  }
+  function onDeckEnded() {
+    if (!musicPlaying || muted) return;
+    if (deckLoopAt >= 0 && deck) {             // the fight loops from its hit
+      try { deck.currentTime = deckLoopAt; } catch (_) {}
+      const p = deck.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
+      return;
+    }
+    deckTrack = null; deckLevel = 0;
+    if (mood === 'fallen' || mood === 'dawn') return;                         // endings play once
+    gapT = 2.5 + Math.random() * 4;                                           // calm pools breathe
+  }
+  // A sting plays alone. Whatever else is on is cut first; then() runs when it's over.
+  function playSting(name, then) {
+    stopDeck();
+    stopSting();
+    const file = MUSIC_STINGS[name];
+    cueCount++;
+    lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
+    stingNext = then || null;
+    if (!file || !musicPlaying || muted) { finishSting(); return; }
+    try {
+      if (!sting) {
+        sting = new Audio();
+        sting.addEventListener('ended', () => { if (stingName) finishSting(); });
+        sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) finishSting(); });
+      }
+      sting.src = trackUrl(file);
+      stingName = name;
+      stingLeft = 9;          // until its length is known; covers a blocked play() too
+      sting.addEventListener('loadedmetadata', () => { if (stingName === name && sting.duration) stingLeft = sting.duration + 0.25; }, { once: true });
+      sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file) * briefDuck));
+      const p = sting.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch (_) { finishSting(); }
+  }
+  function stopSting() {
+    if (sting) { try { sting.pause(); } catch (_) {} }
+    stingName = null; stingLeft = 0;
+    setSolo(false);
+  }
+  // Everything but the music off (or back on). Ramped, so it's a clean cut, not a click.
+  function setSolo(on) {
+    if (soloOn === on) return;
+    soloOn = on;
+    if (!soloGain || !ctx) return;
+    try {
+      const t = ctx.currentTime;
+      soloGain.gain.cancelScheduledValues(t);
+      soloGain.gain.setValueAtTime(Math.max(0.0001, soloGain.gain.value), t);
+      soloGain.gain.linearRampToValueAtTime(on ? 0.0001 : 1, t + (on ? 0.06 : 0.6));
+    } catch (_) {}
+  }
+  // The finisher: the fight is cut dead, the relief sting plays with nothing else heard.
+  function startFinale() {
+    finalePending = false;
+    stopDeck();
+    stage = 'relief';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    playSting('clear', () => {
+      stage = 'calm';
+      mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
+    });
+    if (stingName === 'clear') setSolo(true);
+  }
+  // How long a cue runs, so the page can time its slow motion to it.
+  const cueLens = {};
+  function cueLength(name) {
+    const file = MUSIC_STINGS[name];
+    if (!file) return 0;
+    if (cueLens[file]) return cueLens[file];
+    try {
+      const el = new Audio(); el.preload = 'metadata';
+      el.addEventListener('loadedmetadata', () => { if (el.duration && isFinite(el.duration)) cueLens[file] = el.duration; }, { once: true });
+      el.src = trackUrl(file);
+    } catch (_) {}
+    return 0;
+  }
+  function finishSting() {
+    stopSting();
+    const next = stingNext; stingNext = null;
+    if (next) next();
+  }
+  // Small cues for other owners' moments (D-21): 'achievement', 'airdrop', 'objective',
+  // 'poi_cleared'. They're a couple of seconds, played like a sound effect, so they don't
+  // stop the music; the fight and the two stings above are the only music moments.
+  let cueEl = null;
+  function musicCue(name) {
+    if (typeof name !== 'string' || !name) return;
+    const file = MUSIC_STINGS[name];
+    cueCount++;
+    lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
+    if (!file || !musicPlaying || muted) return;
+    try {
+      if (!cueEl) cueEl = new Audio();
+      cueEl.src = trackUrl(file);
+      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(file)));
+      const p = cueEl.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch (_) {}
+  }
+  function startAlarm() {
+    alarmPending = false;
+    dayBand = -1; pendingDay = -1;
+    stage = 'alarm';
+    mood = null; nextMood = null;
+    // D-33 (Jerry): no alarm sting; the klaxon is the alarm. Silence under it, then the fight.
+    stopSting(); stopDeck();
+    alarmUntil = nowMs() + alarmHoldS * 1000;
+  }
+  let lastState = null;
+  function startFight() {
+    stage = 'fight';
+    mood = 'fight';
+    const sp = specialTrack(lastState);
+    const name = (sp && sectionsReady(sp) ? sp : null) || waveTrackForDay(lastDay) || pickTrack('fight');   // CL-77
+    const hit = MUSIC_HITS[name] || 0;
+    // CL-30 (Jerry): a 10 s fade in from silence to the floor; proximity does the rest.
+    startDeck(name, { from: hit, loopAt: hit, level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : FIGHT_FADE_IN_S, state: lastState });
+  }
+  // The last kill: the fight fades out fast (update() finishes it), then the relief sting,
+  // then the calm music fades back in slowly the moment the sting ends.
+  // CL-85: into the heart: its song from the top (sectioned when it's loaded, else the guardian's pool), no alarm.
+  let heartEndUntil = 0;
+  function startHeart() {
+    stopSting(); stopDeck();
+    stage = 'heart'; mood = 'fight'; nextMood = null;
+    const name = SECTIONED[HEART_TRACK] && sectionsReady(HEART_TRACK) ? HEART_TRACK : pickTrack('guardian');
+    startDeck(name, { level: 0, fadeIn: FIGHT_FADE[name] != null ? FIGHT_FADE[name] : 1.2, state: lastState });
+  }
+  // It dies: the song falls away fast and the long falling note plays alone (secret-quest.md 6), then the ending.
+  function startHeartEnd() {
+    stopSting();
+    stage = 'heartend'; mood = null; nextMood = null;
+    deckTarget = 0; deckRate = 1 / FAST_FADE_S;
+    heartEndUntil = nowMs() + 6000;
+    heartFall();
+  }
+  function heartFall() {
+    const c = ensure(); if (!c || muted) return;
+    for (const [f, v, d] of [[440, 0.06, 5.5], [329.63, 0.045, 5.2], [220, 0.07, 6], [110, 0.06, 6.5], [55, 0.07, 7]]) playTone({ freq: f, type: 'sine', dur: d, vol: v, slideTo: f / 4, attack: 0.15, rev: 0.9 });
+    playTone({ freq: 880, type: 'triangle', dur: 3.5, vol: 0.02, slideTo: 220, attack: 0.3, rev: 0.95 });
+    playNoise({ dur: 4.5, vol: 0.045, filterFreq: 260, filterType: 'lowpass', attack: 1.2, rev: 0.9 });
+    heartFalls++;
+  }
+  let heartFalls = 0;
+  function startRelease() {
+    stage = 'release';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    deckTarget = 0; deckRate = 1 / FAST_FADE_S;
+  }
+  function startCampClear() {
+    stage = 'campclear';
+    mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    deckTarget = 0; deckRate = 1 / CAMP_FADE_S;
+    musicCue('camp');
+    campUntil = (typeof performance !== 'undefined' ? performance.now() : Date.now()) + CAMP_S * 1000;
+  }
+  function startRelief() {
+    stopDeck();
+    stage = 'relief';
+    playSting('clear', () => {
+      stage = 'calm';
+      mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
+    });
+  }
+  function bandFor(size) {
+    let b = 0;
+    for (let i = 0; i < DAY_FIGHT.sizes.length; i++) if (size >= DAY_FIGHT.sizes[i]) b = i;
+    return b;
+  }
+  function startDayTrack(band) {
+    stage = 'dayfight';
+    dayBand = band; pendingDay = -1;
+    mood = 'dayfight';
+    const name = DAY_FIGHT.tracks[band];
+    const hit = MUSIC_HITS[name] || 0;
+    startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+  }
+  function calmMoodFor(state) {
+    if (!state.started) return 'menu';
+    if (state.night) return state.dusk ? 'dusk' : 'night';
+    return state.dawn ? 'dawnprep' : 'day';
+  }
+  // Called every frame by the game loop with the current state.
+  function updateMusic(dt, state) {
+    lastState = state;
+    const started = !!state.started;
+    const phaseNow = state.phase;
+    if (state.day) lastDay = state.day;
+    if (lastDay !== secWantedFor && ctx) secWantDay(lastDay);
+    { const sp = specialTrack(state); if (sp && ctx) loadSections(sp); }   // CL-77: once (loadSections returns if it's loading or held)
+    if ((state.heartSoon || state.heart) && ctx) loadSections(HEART_TRACK);   // CL-85: a silenced day below, the heart is near
+    // The last kill: the wave hands back to prep with the run still on.
+    const cleared = prevStarted && started && !state.over && !state.won && prevPhase === 'wave' && phaseNow === 'prep';
+    const waveBegan = started && prevPhase !== 'wave' && phaseNow === 'wave';
+    prevPhase = phaseNow; prevStarted = started;
+    if (!started) briefingOpen = false;
+    if (!musicPlaying || muted) return;
+
+    // --- what the story says ---
+    if (!started) {
+      if (stage !== 'calm' || mood !== 'menu') { if (stage !== 'calm') { stopSting(); stage = 'calm'; } nextMood = 'menu'; }
+    } else if (state.over && !state.won) {
+      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'fallen'; startDeck(pickTrack('fallen'), { level: 0, fadeIn: 1 }); }
+    } else if (state.won) {
+      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'dawn'; startDeck(pickTrack('dawn'), { level: 0, fadeIn: 1 }); }
+    } else if (finalePending) {
+      startFinale();
+    } else if (alarmPending || (waveBegan && stage !== 'alarm' && stage !== 'gap' && stage !== 'fight')) {
+      startAlarm();
+    } else if (cleared && (stage === 'alarm' || stage === 'gap' || stage === 'fight')) {
+      if (stage === 'fight') startRelease(); else { stopSting(); startRelief(); }
+    } else if (state.heart && state.heart.on) {   // CL-85: the last fight
+      if (state.heart.dead) { if (stage !== 'heartend') startHeartEnd(); }
+      else if (stage !== 'heart') startHeart();
+    } else if (stage === 'heart' || (stage === 'heartend' && nowMs() >= heartEndUntil)) {
+      stopDeck(); stage = 'calm'; mood = null; nextMood = null;   // back up the tunnel, or it's over: the calm again
+    } else if (stage === 'end' || stage === 'idle') {
+      stage = 'calm'; mood = null;
+    }
+    lastCalm = calmMoodFor(state);
+    // --- a fight in daylight: no alarm, zombies in prep ---
+    const liveN = state.threat || 0;
+    const nearD = state.nearest == null ? 999 : state.nearest;
+    if (started && !state.over && !state.won && state.phase === 'prep') {
+      if (stage === 'calm' && liveN > 0 && nearD < DAY_FIGHT_RANGE) {
+        pendingDay = bandFor(liveN);
+        stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
+        if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; }
+      } else if (stage === 'dayfight') {
+        if (liveN === 0) startCampClear();
+        else {
+          const b = bandFor(liveN);
+          const cur = pendingDay >= 0 ? pendingDay : dayBand;
+          if (b > cur) { pendingDay = b; if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; } }   // step up, never down
+        }
+      }
+    }
+    if (stage === 'calm') {
+      const want = lastCalm;
+      if (want !== mood) nextMood = want;
+    }
+    // --- the fast fades finishing ---
+    if (stage === 'release' && (!deckTrack || deckLevel <= 0.001)) startRelief();
+    if (stage === 'campclear' && (typeof performance !== 'undefined' ? performance.now() : Date.now()) >= campUntil) {
+      stopDeck();
+      stage = 'calm'; mood = lastCalm; nextMood = null;
+      startDeck(pickTrack(mood), { level: 0, fadeIn: CAMP_FADE_IN_S });
+    }
+    if (stage === 'dayfight' && pendingDay >= 0 && (!deckTrack || deckLevel <= 0.001)) { stopDeck(); startDayTrack(pendingDay); }
+
+    // --- the sting (alone) ---
+    if (stingName) {
+      stingLeft -= dt;
+      if (stingLeft <= 0) finishSting();
+      else if (sting) sting.volume = Math.max(0, Math.min(1, MUSIC_VOL * userMusic * gainOf(MUSIC_STINGS[stingName] || '') * briefDuck));
+    }
+    // --- the gap after the alarm sting ---
+    if (stage === 'alarm' && !stingName && nowMs() >= alarmUntil) { stage = 'gap'; gapT = GAP_AFTER_ALARM; }
+    if (stage === 'gap') { gapT -= dt; if (gapT <= 0) startFight(); }
+    // --- calm music: fade the old one right out, then the new one in ---
+    if (stage === 'calm') {
+      if (nextMood && deckTrack) { deckTarget = 0; deckRate = 1 / FADE_OUT_S; if (deckLevel <= 0.001) { stopDeck(); } }
+      if (nextMood && !deckTrack) { mood = nextMood; nextMood = null; gapT = 0; startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S }); }
+      else if (!deckTrack && mood && gapT > 0) { gapT -= dt; if (gapT <= 0) startDeck(pickTrack(mood), { level: 0, fadeIn: 3 }); }
+      else if (!deckTrack && mood && gapT <= 0 && !nextMood) startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
+    }
+    // --- the fight follows the nearest zombie ---
+    const live = state.threat || 0;
+    const near = state.nearest == null ? 999 : state.nearest;
+    const k = Math.max(0, Math.min(1, (PROX_FAR - near) / (PROX_FAR - PROX_NEAR)));
+    const nm = nightMusic(lastDay);
+    const floorTonight = nm.floor, inRangeTonight = Math.max(FIGHT_IN_RANGE, nm.floor);
+    const proxTarget = live > 0 && near <= PROX_FAR ? inRangeTonight + (1 - inRangeTonight) * k : floorTonight;
+    prox += (proxTarget - prox) * Math.min(1, dt * 1.5);
+
+    // --- levels ---
+    const briefTarget = briefingOpen && started ? 0.5 : 1;
+    briefDuck += (briefTarget - briefDuck) * Math.min(1, dt * 2);
+    const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.8 : 1) * (state.shop ? 0.8 : 1);
+    duck += (targetDuck - duck) * Math.min(1, dt * 2.5);
+    musicShotDuck += (1 - musicShotDuck) * Math.min(1, dt * 1.8);
+    { // CL-101: below
+      const B = state.below && state.below.on ? state.below : null;
+      const calmBelow = !!B && stage === 'calm';
+      const want = !B ? 1 : (B.phase === 'warning' || B.phase === 'grab') ? 0 : calmBelow ? BELOW_MUSIC : 1;
+      belowMusic += (want - belowMusic) * Math.min(1, dt * (want < belowMusic ? 1.6 : 0.6));
+      const dr = stage === 'calm' ? Math.max(0, Math.min(1, +state.dread || 0)) : 0;   // CL-82
+      placeDread += ((1 - (1 - PLACE_DREAD) * dr) - placeDread) * Math.min(1, dt * 0.8);
+      if (secLp && ctx) { try { secLp.frequency.setTargetAtTime(calmBelow ? BELOW_LP : 20000, ctx.currentTime, 0.5); } catch (_) {} }
+    }
+    if (deckLevel !== deckTarget) {
+      const step = deckRate * dt;
+      deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
+    }
+    if (deckTrack && (deck || sec)) {
+      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
+      const nightMul = (stage === 'fight' || stage === 'release') ? nm.gain : 1;   // CL-70: the wave only, not day fights
+      const v = MUSIC_VOL * userMusic * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck * belowMusic * placeDread;
+      const out = Math.max(0, Math.min(1, v));
+      if (sec && secOut && ctx) {
+        try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
+        if (stage === 'fight' || stage === 'heart') secUpdate(state, dt);   // CL-85
+      } else if (deck && Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
+    }
+    if (stingName && deckTrack && ((deck && deck.volume > 0.001 && !deck.paused) || (sec && secOut && secOut.gain.value > 0.001))) overlapFrames++;
+  }
+  // The alarm and the briefing board, from the page's 'dw-game' events (D-8).
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('dw-game', (ev) => {
+      const d = ev && ev.detail;
+      if (!d) return;
+      if (d.type === 'alarm-started') { alarmPending = true; alarmHoldS = isFinite(+d.hold) && +d.hold > 0 ? +d.hold : 3.4; }
+      else if (d.type === 'wave-last-kill') finalePending = true;
+      else if (d.type === 'briefing-open') briefingOpen = true;
+      else if (d.type === 'briefing-closed') briefingOpen = false;
+      else if (d.type === 'run-reset') { briefingOpen = false; alarmPending = false; }
+    });
+  }
+  function setMood(next) { if (MUSIC_POOLS[next]) { stage = 'calm'; nextMood = next; } }
+
+  function clearMusicNodes() {
+    for (const n of musicOscs) {
+      try { n.stop(); } catch (_) {}
+      try { n.disconnect(); } catch (_) {}
+    }
+    musicOscs = [];
+    if (musicStepTimer != null) {
+      clearTimeout(musicStepTimer);
+      musicStepTimer = null;
+    }
+  }
+  function startMusic() {
+    if (window.DWOpening?.active) return;
+    ensure(); // unlock AudioContext for SFX
+    if (muted || musicPlaying) return;
+    musicPlaying = true;
+    loadMusicManifest();
+    secWantDay(lastDay);   // CL-42/CL-38: decode tonight's and tomorrow's song before the wave
+    clearMusicNodes(); // kill any leftover synth nodes
+    stopDeck(); stopSting();
+    // The next updateMusic picks up the story from the game state.
+    stage = 'idle'; mood = null; nextMood = null; gapT = 0;
+    setTimeout(() => { try { cueLength('clear'); } catch (_) {} }, 1500);   // learn the sting's length early
+  }
+  function stopMusic() {
+    musicPlaying = false;
+    clearMusicNodes();
+    stopDeck(); stopSting();
+  }
+  function musicState() {
+    return {
+      stage, mood, nextMood, front: sec ? SOUNDTRACK + SECTIONED[sec.track].file : (deck && deckTrack ? deck.src : null), frontTime: deck ? deck.currentTime : 0,
+      deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
+      waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
+      night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
+      deckLoop: !!(sec || (deck && deck.loop)),
+      section: sec ? sec.name : null, sectionMode: sec ? secMode : null, sectionPending: secPending ? secPending.name : null,
+      specials: Object.assign({}, SPECIAL_TRACKS), special: lastState ? lastState.special || null : null,
+      below: { music: belowMusic, lp: secLp ? secLp.frequency.value : null },   // CL-101
+      dread: placeDread,   // CL-82
+      heartFalls,   // CL-85
+      sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
+      sectionLoop: sec && sec.src ? { start: sec.src.loopStart, end: sec.src.loopEnd, loop: sec.src.loop } : null,
+      sting: stingName, overlapFrames, playing: musicPlaying, alarmPending, solo: soloOn,
+      lastCue: lastCue ? Object.assign({}, lastCue) : null,
+      pools: JSON.parse(JSON.stringify(MUSIC_POOLS)), hits: Object.assign({}, MUSIC_HITS),
+      stings: Object.assign({}, MUSIC_STINGS), gains: Object.assign({}, MUSIC_GAIN)
+    };
+  }
+  function noteSpin(spinningUp) {
+    if (spinningUp && !lastSpinWasUp) { lastSpinWasUp = true; spinUp(); }
+    else if (!spinningUp && lastSpinWasUp) { lastSpinWasUp = false; spinDown(); }
+  }
+
+  // Continuous chainsaw idle/rev loop (sustained oscillators; stop cleanly)
+  let sawLoop = null; // { osc, osc2, noise, filt, gain, rev }
+  let sawGritCd = 0;
+
+  function chainsawGrit() {
+    const c = ensure();
+    if (!c || muted) return;
+    if (c.currentTime < sawGritCd) return;
+    sawGritCd = c.currentTime + 0.09;
+    playNoise({ dur: 0.07, vol: 0.13, filterFreq: 650, filterType: 'bandpass' });
+    playTone({ freq: 85, type: 'sawtooth', dur: 0.05, vol: 0.07, slideTo: 48 });
+  }
+
+  // --- New-world SFX ---
+  function spit() {
+    playNoise({ dur: 0.12, vol: 0.12, filterFreq: 700, filterType: 'bandpass' });
+    playTone({ freq: 220, type: 'sawtooth', dur: 0.14, vol: 0.07, slideTo: 90 });
+  }
+  function acidHit() {
+    playNoise({ dur: 0.2, vol: 0.14, filterFreq: 1200, filterType: 'bandpass' });
+    playTone({ freq: 340, type: 'triangle', dur: 0.18, vol: 0.07, slideTo: 120 });
+  }
+  function scream() {
+    playTone({ freq: 620, type: 'sawtooth', dur: 0.55, vol: 0.16, slideTo: 1450 });
+    playTone({ freq: 880, type: 'square', dur: 0.4, vol: 0.07, slideTo: 1800, when: 0.08 });
+    playNoise({ dur: 0.4, vol: 0.08, filterFreq: 2600, filterType: 'bandpass', when: 0.05 });
+  }
+  function bossSlam() {
+    playNoise({ dur: 0.4, vol: 0.26, filterFreq: 140, filterType: 'lowpass', rev: 0.7 });
+    playTone({ freq: 55, type: 'sine', dur: 0.5, vol: 0.22, slideTo: 26 });
+    playNoise({ dur: 0.1, vol: 0.1, filterFreq: 900, filterType: 'bandpass', rev: 0.5 });
+  }
+  function bossRoar() {
+    playTone({ freq: 90, type: 'sawtooth', dur: 0.9, vol: 0.2, slideTo: 45, rev: 0.6 });
+    playTone({ freq: 140, type: 'square', dur: 0.7, vol: 0.1, slideTo: 60, when: 0.1, rev: 0.5 });
+    playNoise({ dur: 0.7, vol: 0.12, filterFreq: 320, filterType: 'lowpass', when: 0.05, rev: 0.6 });
+  }
+  // CL-62 (Jerry: "a low growl"): the cave guardian in the dark. A throat flutter of short, low saw pulses
+  // (55-75 Hz, drifting down) over a rumble of filtered noise: about 1.6 s, quiet, felt more than heard.
+  function guardianGrowl(volume = 1, pan = 0) {
+    const v = Math.max(0, Math.min(1, volume));
+    if (v < 0.03) return;
+    for (let i = 0; i < 9; i++) {
+      const f = 72 - i * 1.8 + (Math.random() - 0.5) * 6;
+      playTone({ freq: f, type: 'sawtooth', dur: 0.2, vol: 0.09 * v * (i < 2 ? 0.6 : 1), slideTo: f * 0.86, when: i * 0.16, attack: 0.04, rev: 0.45, pan });
+    }
+    playTone({ freq: 48, type: 'triangle', dur: 1.6, vol: 0.12 * v, slideTo: 40, attack: 0.25, rev: 0.5, pan });
+    playNoise({ dur: 1.5, vol: 0.07 * v, filterFreq: 190, filterType: 'lowpass', attack: 0.2, rev: 0.5, pan });
+  }
+  function spikeSnap() {
+    playTone({ freq: 900, type: 'square', dur: 0.03, vol: 0.09 });
+    playNoise({ dur: 0.04, vol: 0.09, filterFreq: 3200, filterType: 'highpass' });
+  }
+  // Refreshed envelopes on a persistent noise voice: a pressure jet, not a
+  // succession of impact sounds. Four nearby emitters share the voice budget.
+  const flameVoices = new Map();
+  let flameNoise = null;
+  function stopFlames() {
+    for (const v of flameVoices.values()) {
+      try { v.src.stop(); } catch (_) {}
+      v.src.disconnect(); v.low.disconnect(); v.body.disconnect(); v.gain.disconnect(); v.pan.disconnect();
+    }
+    flameVoices.clear();
+  }
+  function flameBurst(key = 'player', volume = 1, pan = 0, hold = 0.28) {
+    const c = ensure();
+    if (!c || muted || volume < 0.025) return;
+    const now = c.currentTime;
+    for (const [id, v] of flameVoices) {
+      if (now < v.until + 0.3) continue;
+      try { v.src.stop(); } catch (_) {}
+      v.src.disconnect(); v.low.disconnect(); v.body.disconnect(); v.gain.disconnect(); v.pan.disconnect();
+      flameVoices.delete(id);
+    }
+    let v = flameVoices.get(key);
+    if (!v) {
+      if (flameVoices.size >= 4) return;
+      if (!flameNoise) {
+        flameNoise = noiseBuffer(2.7);
+        const a = flameNoise.getChannelData(0);
+        let low = 0;
+        for (let i = 0; i < a.length; i++) {
+          low += (a[i] - low) * 0.12;
+          a[i] = (a[i] * 0.32 + low * 2.2) * (0.82 + 0.12 * Math.sin(i * 0.0017) + 0.06 * Math.sin(i * 0.00053));
+        }
+      }
+      const src = c.createBufferSource(), low = c.createBiquadFilter(), body = c.createBiquadFilter();
+      const gain = c.createGain(), p = c.createStereoPanner();
+      src.buffer = flameNoise; src.loop = true;
+      low.type = 'lowpass'; low.frequency.value = 2400; low.Q.value = 0.45;
+      body.type = 'highpass'; body.frequency.value = 65;
+      gain.gain.value = 0;
+      src.connect(low); low.connect(body); body.connect(gain); gain.connect(p); p.connect(weapBus);
+      src.start(0, Math.random() * 2);
+      v = { src, low, body, gain, pan: p, until: now }; flameVoices.set(key, v);
+    }
+    v.until = now + Math.min(0.6, hold);
+    v.pan.pan.setTargetAtTime(Math.max(-1, Math.min(1, pan)), now, 0.04);
+    v.low.frequency.setTargetAtTime(1900 + Math.random() * 650, now, 0.08);
+    v.gain.gain.cancelScheduledValues(now);
+    v.gain.gain.setTargetAtTime(0.24 * Math.min(1, volume), now, 0.035);   // CL-35: was 0.48 (Jerry: too loud)
+    v.gain.gain.setTargetAtTime(0, v.until, 0.075);
+  }
+  function fireHiss(volume = 1, pan = 0) {
+    if (volume < 0.025) return;
+    if (ctx && ctx.currentTime < (fireHiss.next || 0)) return;
+    fireHiss.next = (ctx ? ctx.currentTime : 0) + 0.22;
+    playNoise({ dur: 0.35, vol: 0.06 * volume, filterFreq: 3600, filterType: 'highpass', attack: 0.025, pan });
+  }
+  function fireCrackle(volume = 1, pan = 0) {
+    if (volume < 0.025) return;
+    if (ctx && ctx.currentTime < (fireCrackle.next || 0)) return;
+    fireCrackle.next = (ctx ? ctx.currentTime : 0) + 0.13;
+    playNoise({ dur: 0.045, vol: 0.07 * volume, filterFreq: 1600, filterType: 'bandpass', pan });
+    playNoise({ dur: 0.3, vol: 0.04 * volume, filterFreq: 550, filterType: 'lowpass', attack: 0.045, pan });
+  }
+  function crateLand() {
+    playNoise({ dur: 0.18, vol: 0.18, filterFreq: 220, filterType: 'lowpass', rev: 0.5 });
+    playTone({ freq: 120, type: 'triangle', dur: 0.16, vol: 0.12, slideTo: 60 });
+    playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1200, filterType: 'bandpass', when: 0.02, rev: 0.4 });
+  }
+  function pickup() {
+    [520, 700, 1040].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.07, vol: 0.09, when: i * 0.06 }));
+  }
+  function repairClank() {
+    playTone({ freq: 620, type: 'square', dur: 0.05, vol: 0.1 });
+    playTone({ freq: 480, type: 'square', dur: 0.06, vol: 0.08, when: 0.07 });
+    playNoise({ dur: 0.05, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', when: 0.02 });
+  }
+  function sellChime() {
+    playTone({ freq: 700, type: 'triangle', dur: 0.08, vol: 0.1 });
+    playTone({ freq: 520, type: 'triangle', dur: 0.1, vol: 0.09, when: 0.07 });
+  }
+
+  // Rain ambience: a filtered noise loop whose volume/brightness tracks the
+  // weather system's 0..1 intensity, the same shape as the chainsaw loop above.
+  let rainLoop = null;
+  function rainStart() {
+    const c = ensure();
+    if (!c || rainLoop) return;
+    const t0 = c.currentTime;
+    const buf = noiseBuffer(2.5);
+    const noise = c.createBufferSource();
+    if (buf) { noise.buffer = buf; noise.loop = true; }
+    const filt = c.createBiquadFilter();
+    filt.type = 'bandpass';
+    filt.frequency.setValueAtTime(3000, t0);
+    filt.Q.value = 0.5;
+    const gain = c.createGain();
+    gain.gain.setValueAtTime(0.0001, t0);
+    if (buf) noise.connect(filt);
+    filt.connect(gain);
+    gain.connect(ambBus || sfxGain);
+    if (buf) noise.start(t0);
+    rainLoop = { noise, filt, gain };
+  }
+  function rainSetIntensity(amount) {
+    amount = Math.max(0, Math.min(1, +amount || 0));
+    if (!rainLoop || !ctx) return;
+    const t = ctx.currentTime;
+    // Was 0.018 + 0.08: a heavy shower was a wall of 3 kHz noise right where a
+    // gunshot's crack lives. It sits under the fight now (and on the ducked bus).
+    const vol = muted ? 0.0001 : Math.max(0.0001, (0.012 + amount * 0.048) * (1 - belowK));   // CL-101: none below
+    try {
+      rainLoop.gain.gain.setTargetAtTime(vol, t, 0.45);
+      rainLoop.filt.frequency.setTargetAtTime(2400 + amount * 1600, t, 0.6);
+    } catch (_) {}
+  }
+  function rainStop() {
+    if (!rainLoop || !ctx) return;
+    const t = ctx.currentTime;
+    try { rainLoop.gain.gain.setTargetAtTime(0.0001, t, 0.5); } catch (_) {}
+    const nodes = rainLoop;
+    rainLoop = null;
+    setTimeout(() => { try { nodes.noise.stop(); } catch (_) {} }, 900);
+  }
+  function isRainRunning() { return !!rainLoop; }
+
+  // --- Ambience bed ---
+  // Wind through the trees (two filtered noise layers with a slow wander), the
+  // river when you are near it, and crickets after dark. All continuous nodes;
+  // the game feeds levels in through updateAmbience() and the one-shots (birds,
+  // owls, thunder, far groans) are cued from there too.
+  let amb = null;
+  function ambienceStart() {
+    const c = ensure();
+    if (!c || amb) return;
+    const t0 = c.currentTime;
+    const mkNoise = (filterType, freq, q, vol) => {
+      const buf = noiseBuffer(3.1);
+      const src = c.createBufferSource();
+      if (buf) { src.buffer = buf; src.loop = true; }
+      const filt = c.createBiquadFilter();
+      filt.type = filterType; filt.frequency.value = freq; filt.Q.value = q;
+      const g = c.createGain(); g.gain.value = 0.0001;
+      src.connect(filt); filt.connect(g); g.connect(ambBus || sfxGain);
+      if (buf) src.start(t0);
+      return { src, filt, g, vol };
+    };
+    const windLow = mkNoise('lowpass', 260, 0.7, 0.05);
+    const windLeaves = mkNoise('bandpass', 1400, 0.6, 0.02);
+    const water = mkNoise('bandpass', 1700, 0.5, 0.06);
+    const waterLow = mkNoise('lowpass', 500, 0.8, 0.04);
+    // crickets: two trilled carriers
+    const crickets = [];
+    for (const [f, rate] of [[4300, 27], [3900, 22]]) {
+      const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.value = f;
+      const trill = c.createOscillator(); trill.type = 'square'; trill.frequency.value = rate;
+      const tg = c.createGain(); tg.gain.value = 0.5;
+      const am = c.createGain(); am.gain.value = 0.5;
+      trill.connect(tg); tg.connect(am.gain);
+      const g = c.createGain(); g.gain.value = 0.0001;
+      osc.connect(am); am.connect(g); g.connect(ambBus || sfxGain);
+      osc.start(t0); trill.start(t0);
+      crickets.push({ osc, trill, g, vol: 0.012, on: false, timer: Math.random() * 3 });
+    }
+    amb = { windLow, windLeaves, water, waterLow, crickets, wander: 0, birdT: 2 + Math.random() * 4, owlT: 6 + Math.random() * 10, thunderT: 4 + Math.random() * 8, groanT: 8 + Math.random() * 10 };
+  }
+  function setG(node, vol, tc) {
+    try { node.g.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {}
+  }
+  // state: { dt, wind (0..1), water (0..1), night (bool), rain (0..1), started, forest (0..1),
+  //         below: null | { on, theme, stir (0..1), phase, hush (bool) } (CL-101) }
+  function updateAmbience(st) {
+    if (!amb || !ctx) return;
+    const dt = st.dt;
+    const top = updateBelowAmbience(st, dt);   // CL-101: 1 topside, 0 below
+    updatePlaces(st, dt, top);   // CL-82
+    amb.wander += dt * (0.25 + Math.random() * 0.1);
+    const gust = 0.72 + 0.28 * Math.sin(amb.wander) * Math.sin(amb.wander * 0.37 + 1.3);
+    const w = Math.max(0, Math.min(1, st.wind)) * gust;
+    setG(amb.windLow, amb.windLow.vol * (0.25 + w) * top, 0.8);
+    setG(amb.windLeaves, amb.windLeaves.vol * w * (0.4 + 0.6 * st.forest) * (st.night ? 0.6 : 1) * top, 0.6);
+    try { amb.windLow.filt.frequency.setTargetAtTime(200 + 260 * w, ctx.currentTime, 1.2); } catch (_) {}
+    const wl = Math.max(0, Math.min(1, st.water));
+    setG(amb.water, amb.water.vol * wl * top, 0.5);
+    setG(amb.waterLow, amb.waterLow.vol * wl * top, 0.5);
+    // crickets: only after dark, each voice chirping in irregular bursts
+    for (const cr of amb.crickets) {
+      cr.timer -= dt;
+      if (cr.timer <= 0) { cr.on = !cr.on; cr.timer = cr.on ? 1.5 + Math.random() * 4 : 0.6 + Math.random() * 2.5; }
+      setG(cr, (st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) * top : 0.0001, 0.25);
+    }
+    if (muted) return;
+    // one-shots, all on the ambience bus
+    const prevBus = routeBus; routeBus = ambBus;
+    try { if (top > 0.5) ambienceOneShots(st, dt); else belowOneShots(st.below, dt); } finally { routeBus = prevBus; }
+  }
+
+  // --- CL-101 (P-144): the Hollows' sound ---
+  // Below, the topside beds (wind, river, crickets, rain, birds, owls, thunder) go quiet over a second and the
+  // warren's own come up: the room's low air; drips (each theme its own: the wet warren drips most, the iron rings);
+  // the Hush's hum while its battery lasts (it winds down when it dies); the stir as a rumble in the rock that grows
+  // with the meter, a grinding scream over it in the warning; and from a third of the meter, the guardian moving in
+  // the walls: a scrape and a few knocks somewhere off to one side, closer and more often as it climbs.
+  const BELOW_AMB = {
+    ROOM: 0.024, HUM: 0.012, RUMBLE: 0.075, RUMBLE_WARN: 0.13, GRIND: 0.05, SUB: 0.05,
+    DRIP: { wet: [0.3, 1.2], iron: [0.9, 2.8], root: [1.3, 3.6], shale: [1.0, 3.0], hill: [1.5, 4.2], chalk: [0.8, 2.6] },
+    WALLS_FROM: 0.3, WALLS_S: [22, 6], TRICKLE_S: [9, 22]
+  };
+  let below = null, belowK = 0;
+  const belowCount = { drips: 0, trickles: 0, walls: 0, groans: 0, hushDie: 0, creaks: 0 };
+  function belowStart() {
+    const c = ensure();
+    if (!c || below) return;
+    const t0 = c.currentTime;
+    const noiseLoop = (type, freq, q) => {
+      const buf = noiseBuffer(3.3);
+      const src = c.createBufferSource(); if (buf) { src.buffer = buf; src.loop = true; }
+      const filt = c.createBiquadFilter(); filt.type = type; filt.frequency.value = freq; filt.Q.value = q;
+      const g = c.createGain(); g.gain.value = 0.0001;
+      src.connect(filt); filt.connect(g); g.connect(ambBus || sfxGain);
+      if (buf) src.start(t0);
+      return { src, filt, g };
+    };
+    const room = noiseLoop('lowpass', 170, 0.6);
+    const rumble = noiseLoop('lowpass', 60, 0.9);
+    const grind = noiseLoop('bandpass', 380, 1.4);
+    // the Hush: a low hum, two tones a breath apart so it beats, an octave over them, a slow swell
+    const humG = c.createGain(); humG.gain.value = 0.0001;
+    const humLp = c.createBiquadFilter(); humLp.type = 'lowpass'; humLp.frequency.value = 700;
+    const swell = c.createGain(); swell.gain.value = 0.8;
+    const lfo = c.createOscillator(); lfo.frequency.value = 0.23; const lfoG = c.createGain(); lfoG.gain.value = 0.2;
+    lfo.connect(lfoG); lfoG.connect(swell.gain); lfo.start(t0);
+    const hums = [[110, 'sine', 1], [110.55, 'sine', 0.9], [220.4, 'triangle', 0.35], [55, 'sine', 0.5]].map(([f, type, v]) => {
+      const o = c.createOscillator(); o.type = type; o.frequency.value = f;
+      const g = c.createGain(); g.gain.value = v;
+      o.connect(g); g.connect(humLp); o.start(t0);
+      return { o, f };
+    });
+    humLp.connect(swell); swell.connect(humG); humG.connect(ambBus || sfxGain);
+    const sub = c.createOscillator(); sub.type = 'sine'; sub.frequency.value = 36;
+    const subG = c.createGain(); subG.gain.value = 0.0001; sub.connect(subG); subG.connect(ambBus || sfxGain); sub.start(t0);
+    below = { room, rumble, grind, hum: { g: humG, hums }, sub: { g: subG }, hushWas: null, dripT: 0.5, trickleT: 6, wallsT: 8, creakT: 4, stirWas: 0, grindT: 0 };
+  }
+  function bg(node, vol, tc) { try { node.g.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {} }
+  // Sets the Hollows' beds from the page's state; returns how much of the topside is left (1 up top, 0 below).
+  function updateBelowAmbience(st, dt) {
+    const B = st.below && st.below.on ? st.below : null;
+    belowK += ((B ? 1 : 0) - belowK) * Math.min(1, dt * 1.6);
+    if (belowK < 0.002 && !B) { belowK = 0; if (below) { for (const n of [below.room, below.rumble, below.grind, below.hum, below.sub]) bg(n, 0, 0.3); } return 1; }
+    if (!below) belowStart();
+    if (!below) return 1 - belowK;
+    const k = belowK, s = B ? Math.max(0, Math.min(1, +B.stir || 0)) : 0, ph = B ? B.phase : 'calm';
+    const warn = ph === 'warning', grab = ph === 'grab';
+    bg(below.room, BELOW_AMB.ROOM * k, 0.6);
+    // the Hush
+    const hushOn = !!(B && B.hush);
+    if (B && below.hushWas === true && !hushOn) hushDie();
+    below.hushWas = B ? hushOn : null;
+    bg(below.hum, hushOn ? BELOW_AMB.HUM * k : 0, hushOn ? 0.8 : 0.5);
+    // the stir: the rock's rumble, and its scream in the warning
+    const rum = warn || grab ? BELOW_AMB.RUMBLE_WARN : BELOW_AMB.RUMBLE * (0.04 + 0.96 * s * s);
+    bg(below.rumble, rum * k, warn ? 0.25 : 1.2);
+    bg(below.sub, (warn || grab ? BELOW_AMB.SUB : BELOW_AMB.SUB * s * s) * k, 0.8);
+    try { below.rumble.filt.frequency.setTargetAtTime(50 + 90 * s + (warn ? 60 : 0), ctx.currentTime, 0.8); } catch (_) {}
+    below.grindT -= dt;
+    if (warn) {
+      if (below.grindT <= 0) { below.grindT = 0.12 + Math.random() * 0.25; bg(below.grind, BELOW_AMB.GRIND * k * (0.3 + 0.7 * Math.random()), 0.05);
+        try { below.grind.filt.frequency.setTargetAtTime(260 + Math.random() * 380, ctx.currentTime, 0.08); } catch (_) {} }
+    } else bg(below.grind, 0, 0.4);
+    // the meter crossing half and four-fifths: the rock settles round him (a groan you can read)
+    if (B && !muted) {
+      for (const at of [0.5, 0.8]) if (below.stirWas < at && s >= at) { const prev = routeBus; routeBus = ambBus; try { rockGroan(0.6 + 0.4 * s); } finally { routeBus = prev; } }
+      below.stirWas = s;
+    }
+    if (!B) below.stirWas = 0;
+    return 1 - k;
+  }
+  function belowOneShots(B, dt) {
+    if (!below || !B) return;
+    const theme = B.theme || 'shale', s = Math.max(0, Math.min(1, +B.stir || 0));
+    below.dripT -= dt;
+    if (below.dripT <= 0) { const r = BELOW_AMB.DRIP[theme] || BELOW_AMB.DRIP.shale; below.dripT = r[0] + Math.random() * (r[1] - r[0]); drip(theme); }
+    below.trickleT -= dt;
+    if (below.trickleT <= 0) { const r = BELOW_AMB.TRICKLE_S; below.trickleT = (r[0] + Math.random() * (r[1] - r[0])) * (1 - 0.6 * s); trickle(); }
+    if (theme === 'root' || theme === 'iron') {
+      below.creakT -= dt;
+      if (below.creakT <= 0) { below.creakT = 7 + Math.random() * 12; creak(theme); }
+    }
+    if (s >= BELOW_AMB.WALLS_FROM && B.phase !== 'grab') {
+      below.wallsT -= dt;
+      if (below.wallsT <= 0) {
+        const f = (s - BELOW_AMB.WALLS_FROM) / (1 - BELOW_AMB.WALLS_FROM);
+        below.wallsT = BELOW_AMB.WALLS_S[0] + (BELOW_AMB.WALLS_S[1] - BELOW_AMB.WALLS_S[0]) * f + Math.random() * 4;
+        guardianInWalls(f);
+      }
+    } else below.wallsT = Math.max(below.wallsT, 4);
+  }
+  function drip(theme) {
+    belowCount.drips++;
+    const pan = Math.random() * 1.6 - 0.8, near = Math.random();
+    const vol = 0.008 + near * 0.016;
+    if (theme === 'iron') {   // onto old iron: a small ring
+      playTone({ freq: 2300 + Math.random() * 1400, type: 'triangle', dur: 0.12, vol: vol * 0.8, attack: 0.002, pan, rev: 0.8 });
+      return;
+    }
+    const f = 900 + Math.random() * 1300;
+    playTone({ freq: f, type: 'sine', dur: 0.045, vol, slideTo: f * 1.7, attack: 0.002, pan, rev: 0.85 });   // the plink
+    if (Math.random() < 0.35) playTone({ freq: f * 1.3, type: 'sine', dur: 0.03, vol: vol * 0.5, slideTo: f * 2, attack: 0.002, when: 0.09 + Math.random() * 0.1, pan, rev: 0.85 });
+  }
+  function trickle() {   // grit and small stones off the roof
+    belowCount.trickles++;
+    const pan = Math.random() * 1.6 - 0.8, n = 3 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < n; i++) playNoise({ dur: 0.02 + Math.random() * 0.03, vol: 0.012 + Math.random() * 0.012, filterFreq: 2400 + Math.random() * 2000, filterType: 'bandpass', q: 1.2, when: i * (0.05 + Math.random() * 0.09), pan, rev: 0.7 });
+    playNoise({ dur: 0.4, vol: 0.008, filterFreq: 1800, filterType: 'highpass', when: 0.02, attack: 0.05, pan, rev: 0.7 });
+  }
+  function creak(theme) {   // the roots working in the roof, or the iron warren's old timbers and props
+    belowCount.creaks++;
+    const pan = Math.random() * 1.6 - 0.8;
+    const f = theme === 'iron' ? 240 + Math.random() * 120 : 130 + Math.random() * 80;
+    for (let i = 0; i < 5; i++) playTone({ freq: f * (1 + i * 0.015), type: 'sawtooth', dur: 0.05, vol: 0.006, slideTo: f * 0.94, attack: 0.01, when: i * 0.07, pan, rev: 0.75 });
+  }
+  function rockGroan(v = 1) {   // the rock settling under the weight of the noise
+    belowCount.groans++;
+    playNoise({ dur: 2.2, vol: 0.06 * v, filterFreq: 140, filterType: 'lowpass', attack: 0.6, rev: 0.9 });
+    playTone({ freq: 48, type: 'sine', dur: 2, vol: 0.05 * v, slideTo: 34, attack: 0.5 });
+    playTone({ freq: 96, type: 'triangle', dur: 1.6, vol: 0.012 * v, slideTo: 70, attack: 0.5, when: 0.3, rev: 0.8 });
+  }
+  function guardianInWalls(f) {   // it is moving in the rock: a long scrape, then a few heavy knocks, off to one side
+    belowCount.walls++;
+    const pan = (Math.random() < 0.5 ? -1 : 1) * (0.4 + Math.random() * 0.5);
+    const v = 0.4 + 0.6 * f;
+    playNoise({ dur: 1.1 + Math.random() * 0.8, vol: 0.05 * v, filterFreq: 260 + Math.random() * 160, filterType: 'bandpass', q: 0.9, attack: 0.35, pan, rev: 0.9 });
+    const knocks = 2 + Math.floor(Math.random() * 3), at = 1 + Math.random() * 0.6;
+    for (let i = 0; i < knocks; i++) {
+      playTone({ freq: 58, type: 'sine', dur: 0.16, vol: 0.06 * v, slideTo: 40, attack: 0.004, when: at + i * (0.32 + Math.random() * 0.12), pan, rev: 0.7 });
+      playNoise({ dur: 0.06, vol: 0.025 * v, filterFreq: 420, filterType: 'lowpass', when: at + i * 0.36, pan, rev: 0.7 });
+    }
+    if (f > 0.6 && Math.random() < 0.5) guardianGrowl(0.15 + 0.25 * f, pan);
+  }
+  function hushDie() {   // the battery's gone: the hum winds down and a little crackle goes out of it
+    belowCount.hushDie++;
+    if (muted) return;
+    const prev = routeBus; routeBus = ambBus;
+    try {
+      playTone({ freq: 220, type: 'triangle', dur: 1.4, vol: 0.02, slideTo: 60, attack: 0.01, rev: 0.6 });
+      playTone({ freq: 110, type: 'sine', dur: 1.6, vol: 0.025, slideTo: 30, attack: 0.01 });
+      for (let i = 0; i < 4; i++) playNoise({ dur: 0.02, vol: 0.02, filterFreq: 3000, filterType: 'bandpass', when: 0.2 + i * 0.18 + Math.random() * 0.1 });
+    } finally { routeBus = prev; }
+  }
+  // --- CL-82 (P-84): the places that are alive, as beds under CL-22's one-shots ---
+  // Near a cave mouth the cave breathes: a dark rush of air in and out of it every seven seconds or so, a low hum under
+  // it, from the mouth's side; more at night. Near the pit the lake has a floor that hums: a sub drone, slowly swelling,
+  // with the rumbles CL-22 already throws on it. Silenced (the signal, CL-80), the pit is quiet. Both 0 below.
+  const PLACE_BED = { CAVE: 0.07, CAVE_LOW: 0.025, CAVE_DAY: 0.6, BREATH_S: 7.2, PIT: 0.07, PIT_NOISE: 0.03 };
+  let places = null;
+  const placeCount = { breaths: 0 };
+  function placesStart() {
+    const c = ensure();
+    if (!c || places) return;
+    const t0 = c.currentTime;
+    const bus = ambBus || sfxGain;
+    const panner = (p) => { if (c.createStereoPanner) { const n = c.createStereoPanner(); n.pan.value = p; return n; } return null; };
+    const loop = (type, f, q) => { const buf = noiseBuffer(3.7), src = c.createBufferSource(); if (buf) { src.buffer = buf; src.loop = true; }
+      const filt = c.createBiquadFilter(); filt.type = type; filt.frequency.value = f; filt.Q.value = q; src.connect(filt); if (buf) src.start(t0); return { src, filt }; };
+    const air = loop('bandpass', 240, 0.9);
+    const caveG = c.createGain(); caveG.gain.value = 0.0001;
+    const cavePan = panner(0);
+    air.filt.connect(caveG);
+    const low = c.createOscillator(); low.type = 'sine'; low.frequency.value = 41;
+    const lowG = c.createGain(); lowG.gain.value = 0.0001; low.connect(lowG); low.start(t0);
+    if (cavePan) { caveG.connect(cavePan); lowG.connect(cavePan); cavePan.connect(bus); } else { caveG.connect(bus); lowG.connect(bus); }
+    const sub = c.createOscillator(); sub.type = 'sine'; sub.frequency.value = 28;
+    const sub2 = c.createOscillator(); sub2.type = 'sine'; sub2.frequency.value = 28.35;
+    const pitG = c.createGain(); pitG.gain.value = 0.0001;
+    const water = loop('lowpass', 75, 0.7);
+    const waterG = c.createGain(); waterG.gain.value = 0.0001;
+    const pitPan = panner(0);
+    sub.connect(pitG); sub2.connect(pitG); water.filt.connect(waterG); sub.start(t0); sub2.start(t0);
+    if (pitPan) { pitG.connect(pitPan); waterG.connect(pitPan); pitPan.connect(bus); } else { pitG.connect(bus); waterG.connect(bus); }
+    places = { air, caveG, lowG, cavePan, pitG, waterG, pitPan, breathT: 0, breathIn: true };
+  }
+  function pg(node, vol, tc) { try { node.gain.setTargetAtTime(muted ? 0.0001 : Math.max(0.0001, vol), ctx.currentTime, tc); } catch (_) {} }
+  function updatePlaces(st, dt, top) {
+    const cave = Math.max(0, Math.min(1, +st.cave || 0)) * top, pit = Math.max(0, Math.min(1, +st.pit || 0)) * top;
+    if (!places && cave < 0.01 && pit < 0.01) return;
+    if (!places) placesStart();
+    if (!places) return;
+    const P = places, t = ctx.currentTime;
+    // the cave's breath: in (the air rises and brightens), out (it falls), each half BREATH_S / 2
+    P.breathT -= dt;
+    if (P.breathT <= 0) {
+      P.breathIn = !P.breathIn; P.breathT = PLACE_BED.BREATH_S * (0.4 + Math.random() * 0.2);
+      if (P.breathIn) placeCount.breaths++;
+      try { P.air.filt.frequency.setTargetAtTime(P.breathIn ? 330 : 170, t, 1.4); } catch (_) {}
+    }
+    const nightK = st.night ? 1 : PLACE_BED.CAVE_DAY;
+    pg(P.caveG, PLACE_BED.CAVE * cave * nightK * (P.breathIn ? 1 : 0.45), 1.2);
+    pg(P.lowG, PLACE_BED.CAVE_LOW * cave * nightK, 1.5);
+    if (P.cavePan) try { P.cavePan.pan.setTargetAtTime(+st.cavePan || 0, t, 0.3); } catch (_) {}
+    pg(P.pitG, PLACE_BED.PIT * pit, 2);
+    pg(P.waterG, PLACE_BED.PIT_NOISE * pit, 2);
+    if (P.pitPan) try { P.pitPan.pan.setTargetAtTime(+st.pitPan || 0, t, 0.3); } catch (_) {}
+  }
+  function placesState() {
+    return { built: !!places, cave: places ? places.caveG.gain.value : 0, caveLow: places ? places.lowG.gain.value : 0,
+      pit: places ? places.pitG.gain.value : 0, breaths: placeCount.breaths, dread: placeDread };
+  }
+  function belowState() {
+    return { k: belowK, built: !!below, hum: below ? below.hum.g.gain.value : 0, rumble: below ? below.rumble.g.gain.value : 0,
+      room: below ? below.room.g.gain.value : 0, grind: below ? below.grind.g.gain.value : 0,
+      wind: amb ? amb.windLow.g.gain.value : 0, counts: Object.assign({}, belowCount) };
+  }
+  function ambienceOneShots(st, dt) {
+    if (!st.night && st.rain < 0.5) {
+      amb.birdT -= dt;
+      if (amb.birdT <= 0) { birdChirp(); amb.birdT = 3 + Math.random() * 9; }
+    } else {
+      amb.owlT -= dt;
+      if (st.night && amb.owlT <= 0) { owlHoot(); amb.owlT = 14 + Math.random() * 22; }
+    }
+    if (st.rain > 0.5) {
+      amb.thunderT -= dt;
+      if (amb.thunderT <= 0) { thunder(); amb.thunderT = 12 + Math.random() * 24; }
+    }
+    if (st.night && st.started) {
+      amb.groanT -= dt;
+      if (amb.groanT <= 0) { distantGroan(); amb.groanT = 10 + Math.random() * 18; }
+    }
+  }
+  function birdChirp() {
+    const base = 2200 + Math.random() * 1400;
+    const n = 2 + Math.floor(Math.random() * 3);
+    const pan = Math.random() * 2 - 1;
+    const vol = 0.014 + Math.random() * 0.012;
+    for (let i = 0; i < n; i++) {
+      const up = Math.random() < 0.6;
+      playTone({ freq: base * (up ? 0.85 : 1.15), type: 'sine', dur: 0.07 + Math.random() * 0.05, vol, slideTo: base * (up ? 1.25 : 0.8), when: i * (0.11 + Math.random() * 0.06), attack: 0.012, pan, rev: 0.5 });
+    }
+  }
+  function owlHoot() {
+    const pan = Math.random() * 2 - 1;
+    playTone({ freq: 390, type: 'sine', dur: 0.32, vol: 0.03, slideTo: 340, attack: 0.09, pan, rev: 0.7 });
+    playTone({ freq: 370, type: 'sine', dur: 0.5, vol: 0.028, slideTo: 300, attack: 0.1, when: 0.5, pan, rev: 0.7 });
+  }
+  function thunder() {
+    const far = Math.random() < 0.6;
+    const vol = far ? 0.08 : 0.16;
+    const when = far ? 0.6 : 0.1;
+    playNoise({ dur: 1.4 + Math.random(), vol, filterFreq: far ? 160 : 260, filterType: 'lowpass', when, attack: far ? 0.5 : 0.05, rev: 0.9 });
+    playTone({ freq: 40, type: 'sine', dur: 1.2, vol: vol * 0.6, slideTo: 24, when: when + 0.05, attack: far ? 0.4 : 0.03 });
+    if (!far) playNoise({ dur: 0.25, vol: 0.08, filterFreq: 900, filterType: 'bandpass', when: 0.02, rev: 0.8 });
+  }
+  // CL-92 (P-122): a strike of lightning `dist` m away. Close: the sky tears (a white crack) and the boom is on top of
+  // you; far: the flash first, then the roll a beat later (sound's ~343 m/s), lower and softer. `pan` -1..1.
+  function lightningStrike(dist = 60, pan = 0) {
+    const d = Math.max(0, dist), near = Math.max(0, Math.min(1, 1 - d / 140));
+    const when = Math.min(0.45, d / 343);
+    if (near > 0.55) playNoise({ dur: 0.18, vol: 0.2 * near, filterFreq: 2600, filterType: 'highpass', when, attack: 0.002, rev: 0.6, pan });
+    playNoise({ dur: 0.5, vol: 0.12 + 0.12 * near, filterFreq: 500 + 900 * near, filterType: 'lowpass', when: when + 0.02, attack: 0.004, rev: 0.8, pan });
+    playNoise({ dur: 2.4 + Math.random(), vol: 0.07 + 0.09 * near, filterFreq: 170 + 120 * near, filterType: 'lowpass', when: when + 0.12, attack: 0.08, rev: 0.95, pan: pan * 0.5 });
+    playTone({ freq: 46, type: 'sine', dur: 1.6, vol: 0.06 + 0.08 * near, slideTo: 24, when: when + 0.06, attack: 0.02 });
+  }
+  // CL-93 (P-123): the holy grenade's pin. A choir's held chord (voices a little apart, each with its own slow
+  // vibrato), a high bell over it, swelling in and ringing out over ~2 s: the blast lands at the end of it.
+  function holyChoir() {
+    const chord = [293.66, 369.99, 440, 587.33, 739.99, 880];   // D major, two octaves
+    chord.forEach((f, i) => {
+      for (const det of [-0.004, 0.004]) {
+        playTone({ freq: f * (1 + det), type: i < 3 ? 'triangle' : 'sine', dur: 1.9, vol: 0.022, slideTo: f * (1 + det) * 1.003, attack: 0.35, when: i * 0.03, rev: 0.95, pan: (i - 2.5) * 0.15 });
+      }
+    });
+    playTone({ freq: 1760, type: 'sine', dur: 1.4, vol: 0.02, attack: 0.02, when: 0.05, rev: 0.9 });
+    playTone({ freq: 2637, type: 'sine', dur: 1.0, vol: 0.012, attack: 0.02, when: 0.4, rev: 0.9 });
+  }
+  // The rabbit's scream as it goes for him: a short shrill squeal.
+  function rabbitScreech() {
+    playTone({ freq: 1800, type: 'sawtooth', dur: 0.22, vol: 0.05, slideTo: 2600, attack: 0.01, rev: 0.3 });
+    playNoise({ dur: 0.18, vol: 0.05, filterFreq: 3200, filterType: 'bandpass', attack: 0.005, rev: 0.3 });
+  }
+  // The holy blast: a bright boom with a shimmer on top.
+  function holyBlast() {
+    playNoise({ dur: 0.9, vol: 0.22, filterFreq: 700, filterType: 'lowpass', attack: 0.004, rev: 0.85 });
+    playTone({ freq: 55, type: 'sine', dur: 1.2, vol: 0.12, slideTo: 30, attack: 0.01 });
+    for (let i = 0; i < 5; i++) playTone({ freq: 1320 + i * 330, type: 'sine', dur: 0.8, vol: 0.012, attack: 0.01, when: 0.05 + i * 0.04, rev: 0.9 });
+  }
+  function distantGroan() {
+    groan(0.22 + Math.random() * 0.15, Math.random() < 0.3);
+  }
+  // Day cleared: a four-note brass-ish call with a soft swell under it.
+  function dayCleared() {
+    const seq = [392, 523, 659, 784];
+    seq.forEach((f, i) => {
+      playTone({ freq: f, type: 'sawtooth', dur: i === 3 ? 0.9 : 0.28, vol: 0.06, when: i * 0.22, attack: 0.03, rev: 0.6 });
+      playTone({ freq: f / 2, type: 'triangle', dur: i === 3 ? 0.9 : 0.28, vol: 0.05, when: i * 0.22, attack: 0.03, rev: 0.5 });
+    });
+    playNoise({ dur: 1.2, vol: 0.03, filterFreq: 600, filterType: 'lowpass', attack: 0.5, rev: 0.8 });
+  }
+
+  // ================================================================
+  // Sound pass: engine, reloads, turrets, mines, builds, zombies, NVG,
+  // kiosk, doors, floors. All synthesised like the rest of the mix.
+  // ================================================================
+  const rr = (a, b) => a + Math.random() * (b - a);
+
+  // --- Chainsaw engine: pull-start on equip, idle rumble, rev to cut, shut off.
+  // The engine runs whenever the saw is in hand with gas in it; cutting only revs
+  // it. chainsawStop() (called whenever the trigger is let go) drops it back to
+  // idle while the engine is on, and kills it outright otherwise.
+  let sawEngineOn = false, sawQuietOff = false;
+  const SAW_IDLE = { f: 44, f2: 22, filt: 380, vol: 0.036, lfo: 11, depth: 0.42 };
+  const SAW_FULL = { f: 126, f2: 62, filt: 1530, vol: 0.13, lfo: 36, depth: 0.08 };
+  const sawMix = (a, k) => SAW_IDLE[k] + (SAW_FULL[k] - SAW_IDLE[k]) * a;
+  function ensureSawLoop(delay = 0) {
+    const c = ensure();
+    if (!c || muted) return null;
+    if (c.state === 'suspended') c.resume().catch(() => {});
+    if (sawLoop) return sawLoop;
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(); osc.type = 'sawtooth';
+    const osc2 = c.createOscillator(); osc2.type = 'square';
+    osc.frequency.setValueAtTime(SAW_IDLE.f, t0);
+    osc2.frequency.setValueAtTime(SAW_IDLE.f2, t0);
+    const buf = noiseBuffer(2.0);
+    const noise = c.createBufferSource();
+    if (buf) { noise.buffer = buf; noise.loop = true; }
+    const filt = c.createBiquadFilter();
+    filt.type = 'bandpass'; filt.Q.value = 0.9;
+    filt.frequency.setValueAtTime(SAW_IDLE.filt, t0);
+    // The two-stroke putter: the whole engine voice is amplitude-modulated at the
+    // firing rate, deep and slow at idle, shallow and fast flat out.
+    const am = c.createGain(); am.gain.value = 1 - SAW_IDLE.depth;
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.setValueAtTime(SAW_IDLE.lfo, t0);
+    const lfoAmt = c.createGain(); lfoAmt.gain.setValueAtTime(SAW_IDLE.depth, t0);
+    lfo.connect(lfoAmt); lfoAmt.connect(am.gain);
+    const gain = c.createGain();
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.setValueAtTime(0.0001, t0 + delay);
+    gain.gain.exponentialRampToValueAtTime(SAW_IDLE.vol, t0 + delay + 0.06);
+    osc.connect(filt); osc2.connect(filt); if (buf) noise.connect(filt);
+    filt.connect(am); am.connect(gain);
+    gain.connect(weapBus || sfxGain);
+    osc.start(t0); osc2.start(t0); lfo.start(t0); if (buf) noise.start(t0);
+    sawLoop = { osc, osc2, noise, filt, gain, am, lfo, lfoAmt, rev: 0 };
+    return sawLoop;
+  }
+  function killSawLoop(slow) {
+    if (!sawLoop) return;
+    const n = sawLoop; sawLoop = null;
+    const c = ctx; if (!c) return;
+    const t = c.currentTime, tail = slow ? 0.75 : 0.12;
+    try {
+      n.gain.gain.cancelScheduledValues(t);
+      n.gain.gain.setTargetAtTime(0.0001, t, slow ? 0.17 : 0.04);
+      if (slow) {
+        n.osc.frequency.cancelScheduledValues(t); n.osc.frequency.setTargetAtTime(18, t, 0.22);
+        n.osc2.frequency.cancelScheduledValues(t); n.osc2.frequency.setTargetAtTime(9, t, 0.22);
+        n.lfo.frequency.cancelScheduledValues(t); n.lfo.frequency.setTargetAtTime(3, t, 0.2);
+        n.lfoAmt.gain.setTargetAtTime(0.7, t, 0.1);
+      }
+    } catch (_) {}
+    for (const o of [n.osc, n.osc2, n.noise, n.lfo]) { try { o.stop(t + tail); } catch (_) {} }
+    setTimeout(() => { for (const o of [n.osc, n.osc2, n.noise, n.lfo, n.lfoAmt, n.filt, n.am, n.gain]) { try { o.disconnect(); } catch (_) {} } }, tail * 1000 + 120);
+  }
+  function chainsawStop() {
+    if (sawEngineOn && sawLoop) { chainsawSetRev(0); return; }
+    if (!sawEngineOn) killSawLoop(false);
+  }
+  function chainsawStart() { ensureSawLoop(0); }
+  function chainsawSetRev(amount) {
+    amount = Math.max(0, Math.min(1, +amount || 0));
+    if (!sawLoop || !ctx) return;
+    const t = ctx.currentTime;
+    sawLoop.rev = amount;
+    try {
+      sawLoop.osc.frequency.setTargetAtTime(sawMix(amount, 'f'), t, 0.07);
+      sawLoop.osc2.frequency.setTargetAtTime(sawMix(amount, 'f2'), t, 0.07);
+      sawLoop.filt.frequency.setTargetAtTime(sawMix(amount, 'filt'), t, 0.09);
+      sawLoop.lfo.frequency.setTargetAtTime(sawMix(amount, 'lfo'), t, 0.08);
+      sawLoop.lfoAmt.gain.setTargetAtTime(sawMix(amount, 'depth'), t, 0.08);
+      sawLoop.am.gain.setTargetAtTime(1 - sawMix(amount, 'depth'), t, 0.08);
+      sawLoop.gain.gain.cancelScheduledValues(t);
+      sawLoop.gain.gain.setTargetAtTime(muted ? 0.0001 : sawMix(amount, 'vol'), t, 0.06);
+    } catch (_) {}
+  }
+  // The cord: a zip of rope with the recoil ratchet under it, then the engine
+  // coughs. `catches` false is a dry tank — it coughs once and dies.
+  function sawPullCord(catches) {
+    playNoise({ dur: 0.3, vol: 0.09, filterFreq: 1300, filterType: 'bandpass', q: 1.8, attack: 0.06 });
+    playNoise({ dur: 0.22, vol: 0.05, filterFreq: 2600, filterType: 'bandpass', q: 2.5, when: 0.05, attack: 0.05 });
+    for (let i = 0; i < 8; i++) playTone({ freq: rr(1500, 2200), type: 'square', dur: 0.01, vol: 0.028, when: 0.03 + i * 0.032 });
+    playTone({ freq: 58, type: 'square', dur: 0.07, vol: 0.08, when: 0.3, slideTo: 40 });
+    playNoise({ dur: 0.07, vol: 0.06, filterFreq: 520, filterType: 'lowpass', when: 0.3 });
+    if (!catches) {
+      playTone({ freq: 50, type: 'sawtooth', dur: 0.12, vol: 0.05, when: 0.44, slideTo: 30 });
+      playNoise({ dur: 0.1, vol: 0.04, filterFreq: 400, filterType: 'lowpass', when: 0.44 });
+      return;
+    }
+    for (let i = 0; i < 3; i++) {
+      playTone({ freq: 46 + i * 7, type: 'sawtooth', dur: 0.075, vol: 0.085, when: 0.4 + i * 0.085, slideTo: 36 });
+      playNoise({ dur: 0.05, vol: 0.05, filterFreq: 620, filterType: 'lowpass', when: 0.4 + i * 0.085 });
+    }
+  }
+  function sawShutdown() {
+    playTone({ freq: 62, type: 'sawtooth', dur: 0.65, vol: 0.05, slideTo: 20, attack: 0.02 });
+    for (const [w, v] of [[0.14, 0.07], [0.3, 0.055], [0.48, 0.04], [0.62, 0.03]]) {
+      playTone({ freq: rr(40, 52), type: 'square', dur: 0.05, vol: v, when: w, slideTo: 30 });
+      playNoise({ dur: 0.04, vol: v * 0.7, filterFreq: 480, filterType: 'lowpass', when: w });
+    }
+    playTone({ freq: 900, type: 'square', dur: 0.015, vol: 0.02, when: 0.72 }); // kill-switch tick
+  }
+  // Called every frame with whether the engine should be running. `quiet` is for
+  // a pause or the kiosk: it cuts out with no shutdown, and comes straight back
+  // to idle (no pull) when play resumes.
+  function chainsawEngine(on, quiet = false) {
+    if (on) {
+      if (!sawEngineOn) {
+        sawEngineOn = true;
+        if (sawQuietOff) { sawQuietOff = false; if (ensureSawLoop(0)) chainsawSetRev(0); }
+        else if (!muted && ensure()) {
+          sawPullCord(true);
+          if (ensureSawLoop(0.62) && ctx) {
+            // It catches with a blip of revs and settles to idle.
+            const t = ctx.currentTime + 0.62;
+            try {
+              sawLoop.osc.frequency.setTargetAtTime(90, t, 0.05); sawLoop.osc.frequency.setTargetAtTime(SAW_IDLE.f, t + 0.28, 0.14);
+              sawLoop.osc2.frequency.setTargetAtTime(45, t, 0.05); sawLoop.osc2.frequency.setTargetAtTime(SAW_IDLE.f2, t + 0.28, 0.14);
+            } catch (_) {}
+          }
+        }
+      } else if (!sawLoop && !muted) { if (ensureSawLoop(0)) chainsawSetRev(0); }
+    } else if (sawEngineOn) {
+      sawEngineOn = false;
+      if (quiet) { sawQuietOff = true; killSawLoop(false); }
+      else { if (sawLoop && !muted) sawShutdown(); killSawLoop(true); }
+    } else if (!quiet) sawQuietOff = false;
+  }
+  function chainsawDryPull() {
+    const c = ensure(); if (!c || muted) return;
+    if (c.currentTime < (chainsawDryPull._cd || 0)) return;
+    chainsawDryPull._cd = c.currentTime + 0.7;
+    sawPullCord(false);
+  }
+  function isChainsawRunning() { return !!sawLoop; }
+
+  // --- Reloads: every weapon's own mechanics, cued off its reload animation.
+  function reloadCue(name, heft = 1) {
+    const h = heft, lo = 1 / Math.sqrt(h);   // heavier kit, lower and louder
+    switch (name) {
+      case 'magRelease':
+        playTone({ freq: 1900 * lo, type: 'square', dur: 0.012, vol: 0.05 });
+        playNoise({ dur: 0.018, vol: 0.04, filterFreq: 4200, filterType: 'highpass' });
+        break;
+      case 'magOut':
+        playNoise({ dur: 0.07, vol: 0.06 * h, filterFreq: 1500 * lo, filterType: 'bandpass', q: 1.4, attack: 0.02 });
+        playTone({ freq: 420 * lo, type: 'triangle', dur: 0.05, vol: 0.04, slideTo: 300 * lo, when: 0.03 });
+        break;
+      case 'magIn':
+        playNoise({ dur: 0.05, vol: 0.05 * h, filterFreq: 1200 * lo, filterType: 'bandpass', q: 1.4, attack: 0.02 });
+        playTone({ freq: 950 * lo, type: 'square', dur: 0.018, vol: 0.06, when: 0.05 });
+        break;
+      case 'magSlap':
+        playTone({ freq: 190 * lo, type: 'sine', dur: 0.06, vol: 0.09 * h, slideTo: 90 * lo });
+        playNoise({ dur: 0.04, vol: 0.06 * h, filterFreq: 1600, filterType: 'lowpass' });
+        playTone({ freq: 2300 * lo, type: 'square', dur: 0.012, vol: 0.05, when: 0.008 });
+        break;
+      case 'slideBack':
+        playNoise({ dur: 0.055, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', q: 1.2, attack: 0.02 });
+        playTone({ freq: 720 * lo, type: 'triangle', dur: 0.05, vol: 0.045, slideTo: 520 * lo });
+        break;
+      case 'slideFwd':
+        playTone({ freq: 1150 * lo, type: 'square', dur: 0.02, vol: 0.08 });
+        playNoise({ dur: 0.03, vol: 0.07, filterFreq: 3200, filterType: 'highpass' });
+        playTone({ freq: 300 * lo, type: 'triangle', dur: 0.05, vol: 0.05, when: 0.005, slideTo: 200 * lo });
+        break;
+      case 'charge':      // charging handle / cocking lever: back, then slam home
+        reloadCue('slideBack', h); setTimeout(() => reloadCue('slideFwd', h), 120);
+        break;
+      case 'akRockOut':   // mag rocked forward out of the well
+        playTone({ freq: 640, type: 'square', dur: 0.02, vol: 0.06 });
+        playNoise({ dur: 0.09, vol: 0.07, filterFreq: 1100, filterType: 'bandpass', q: 1.1, when: 0.015, attack: 0.03 });
+        break;
+      case 'akRockIn':
+        playNoise({ dur: 0.08, vol: 0.07, filterFreq: 1000, filterType: 'bandpass', q: 1.1, attack: 0.03 });
+        playTone({ freq: 520, type: 'square', dur: 0.025, vol: 0.08, when: 0.08 });
+        playTone({ freq: 150, type: 'sine', dur: 0.05, vol: 0.06, when: 0.08, slideTo: 90 });
+        break;
+      case 'drumOut':
+        playTone({ freq: 360, type: 'square', dur: 0.02, vol: 0.05 });
+        playNoise({ dur: 0.1, vol: 0.08, filterFreq: 700, filterType: 'bandpass', q: 1, when: 0.02, attack: 0.03 });
+        playTone({ freq: 120, type: 'triangle', dur: 0.08, vol: 0.05, when: 0.06, slideTo: 80 });
+        break;
+      case 'drumIn':
+        playNoise({ dur: 0.08, vol: 0.07, filterFreq: 650, filterType: 'bandpass', q: 1, attack: 0.03 });
+        playTone({ freq: 110, type: 'sine', dur: 0.09, vol: 0.1, when: 0.07, slideTo: 60 });
+        playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.06, when: 0.07 });
+        break;
+      case 'boltUp':
+        playTone({ freq: 880, type: 'square', dur: 0.018, vol: 0.06 });
+        playNoise({ dur: 0.025, vol: 0.04, filterFreq: 3000, filterType: 'bandpass' });
+        break;
+      case 'boltBack':
+        playNoise({ dur: 0.09, vol: 0.06, filterFreq: 2200, filterType: 'bandpass', q: 1.5, attack: 0.03 });
+        playTone({ freq: 600, type: 'triangle', dur: 0.08, vol: 0.035, slideTo: 420 });
+        break;
+      case 'boltFwd':
+        playNoise({ dur: 0.08, vol: 0.06, filterFreq: 2000, filterType: 'bandpass', q: 1.5, attack: 0.03 });
+        playTone({ freq: 460, type: 'triangle', dur: 0.07, vol: 0.035, slideTo: 640 });
+        break;
+      case 'boltDown':
+        playTone({ freq: 1250, type: 'square', dur: 0.018, vol: 0.07 });
+        playTone({ freq: 260, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.01, slideTo: 180 });
+        break;
+      case 'boxLatch':
+        playTone({ freq: 760, type: 'square', dur: 0.022, vol: 0.06 });
+        playTone({ freq: 380, type: 'square', dur: 0.03, vol: 0.05, when: 0.03 });
+        break;
+      case 'belt':        // a belt of rounds rattling link by link
+        for (let i = 0; i < 9; i++) playTone({ freq: rr(1800, 2800), type: 'triangle', dur: 0.02, vol: 0.035, when: i * 0.028 + rr(0, 0.01) });
+        playNoise({ dur: 0.26, vol: 0.03, filterFreq: 3500, filterType: 'bandpass', attack: 0.04 });
+        break;
+      case 'boxSeat':
+        playTone({ freq: 95, type: 'sine', dur: 0.1, vol: 0.11, slideTo: 55 });
+        playNoise({ dur: 0.06, vol: 0.06, filterFreq: 700, filterType: 'lowpass' });
+        break;
+      case 'motorBlip':
+        playTone({ freq: 110, type: 'sawtooth', dur: 0.28, vol: 0.05, slideTo: 260 });
+        playTone({ freq: 260, type: 'sawtooth', dur: 0.2, vol: 0.035, when: 0.26, slideTo: 90 });
+        break;
+      case 'valveShut':
+        playTone({ freq: 1400, type: 'sine', dur: 0.09, vol: 0.03, slideTo: 900 });
+        playNoise({ dur: 0.22, vol: 0.05, filterFreq: 5000, filterType: 'highpass', attack: 0.01 });
+        break;
+      case 'tankOff':
+        playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.05 });
+        playTone({ freq: 160, type: 'sine', dur: 0.12, vol: 0.07, when: 0.05, slideTo: 110 });
+        playNoise({ dur: 0.1, vol: 0.05, filterFreq: 600, filterType: 'lowpass', when: 0.05 });
+        break;
+      case 'tankOn':
+        playTone({ freq: 140, type: 'sine', dur: 0.14, vol: 0.1, slideTo: 85 });
+        playNoise({ dur: 0.08, vol: 0.06, filterFreq: 800, filterType: 'lowpass' });
+        playTone({ freq: 680, type: 'square', dur: 0.02, vol: 0.06, when: 0.1 });
+        break;
+      case 'valveOpen':
+        playNoise({ dur: 0.35, vol: 0.05, filterFreq: 5200, filterType: 'highpass', attack: 0.05 });
+        playTone({ freq: 900, type: 'sine', dur: 0.1, vol: 0.025, slideTo: 1500 });
+        break;
+      case 'igniter':
+        playTone({ freq: 2600, type: 'square', dur: 0.01, vol: 0.05 });
+        playTone({ freq: 2600, type: 'square', dur: 0.01, vol: 0.05, when: 0.06 });
+        playNoise({ dur: 0.2, vol: 0.06, filterFreq: 700, filterType: 'lowpass', when: 0.08, attack: 0.04 });
+        break;
+      case 'shell':       // a shotgun shell thumbed into the tube
+        playNoise({ dur: 0.04, vol: 0.06, filterFreq: 1700, filterType: 'bandpass', q: 1.3, attack: 0.012 });
+        playTone({ freq: 520, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.03, slideTo: 300 });
+        playTone({ freq: 1500, type: 'square', dur: 0.01, vol: 0.035, when: 0.05 });
+        break;
+      case 'brass':       // spent cases tumbling out onto the ground
+        for (let i = 0; i < 6; i++) {
+          playTone({ freq: rr(1700, 3200), type: 'triangle', dur: 0.03, vol: 0.03, when: 0.05 + i * rr(0.04, 0.07) });
+          playNoise({ dur: 0.015, vol: 0.015, filterFreq: 3800, filterType: 'bandpass', when: 0.05 + i * 0.05 });
+        }
+        break;
+      case 'bigBrass':    // fat launcher cases, fewer and duller
+        for (let i = 0; i < 4; i++) playTone({ freq: rr(500, 900), type: 'triangle', dur: 0.06, vol: 0.05, when: 0.06 + i * rr(0.07, 0.11), slideTo: 380 });
+        break;
+      case 'grab':        // hand to the pouch
+        playNoise({ dur: 0.08, vol: 0.03, filterFreq: 2400, filterType: 'bandpass', q: 0.8, attack: 0.03 });
+        break;
+    }
+  }
+  // Reload finished: a tiny settle instead of the old two-note UI beep.
+  function reloadDone() {
+    playNoise({ dur: 0.03, vol: 0.025, filterFreq: 1800, filterType: 'bandpass' });
+  }
+  function reloadStart() { reloadCue('grab'); }
+
+  // --- Turret servos: a low motor per turret, up to four at once — the nearest
+  // and fastest-turning. Each gun has its own pitch, so a bank of them sounds like
+  // a bank of them rather than one buzz.
+  const servoVoices = [];
+  function makeServoVoice(c) {
+    const t0 = c.currentTime;
+    const o1 = c.createOscillator(); o1.type = 'sawtooth'; o1.frequency.value = 40;
+    const o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 80;
+    const whine = c.createOscillator(); whine.type = 'triangle'; whine.frequency.value = 240;
+    const wg = c.createGain(); wg.gain.value = 0.12;                 // a hint of gear whine
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 320; lp.Q.value = 0.8;
+    // Cogging: the motor beats a few times a revolution.
+    const am = c.createGain(); am.gain.value = 0.82;
+    const lfo = c.createOscillator(); lfo.type = 'sine'; lfo.frequency.value = 17;
+    const lfoAmt = c.createGain(); lfoAmt.gain.value = 0.18;
+    lfo.connect(lfoAmt); lfoAmt.connect(am.gain);
+    const g = c.createGain(); g.gain.setValueAtTime(0.0001, t0);
+    const pan = c.createStereoPanner ? c.createStereoPanner() : null;
+    o1.connect(lp); o2.connect(lp); whine.connect(wg); wg.connect(lp);
+    lp.connect(am); am.connect(g);
+    if (pan) { g.connect(pan); pan.connect(fxBus || sfxGain); } else g.connect(fxBus || sfxGain);
+    o1.start(t0); o2.start(t0); whine.start(t0); lfo.start(t0);
+    return { o1, o2, whine, lp, am, lfo, g, pan, key: null };
+  }
+  // `list`: up to four { key, level, freq, pan }, loudest first.
+  function turretServos(list) {
+    const c = ctx;
+    if (!c || muted) {
+      for (const v of servoVoices) { try { v.g.gain.setTargetAtTime(0.0001, c ? c.currentTime : 0, 0.05); } catch (_) {} }
+      return;
+    }
+    const t = c.currentTime;
+    for (let i = 0; i < 4; i++) {
+      const want = list && list[i];
+      if (!want && !servoVoices[i]) continue;
+      if (!servoVoices[i]) {
+        if (!want || want.level < 0.004) continue;
+        servoVoices[i] = makeServoVoice(c);
+      }
+      const v = servoVoices[i];
+      const lvl = want ? Math.min(0.05, want.level * 0.055) : 0;
+      const f = want ? want.freq : 40;
+      try {
+        // A voice that has changed turret jumps rather than slides to the new pitch.
+        const jump = want && v.key !== want.key;
+        if (jump) { v.key = want.key; v.o1.frequency.setValueAtTime(f, t); v.o2.frequency.setValueAtTime(f * 2, t); v.whine.frequency.setValueAtTime(f * 6, t); }
+        else {
+          v.o1.frequency.setTargetAtTime(f, t, 0.08);
+          v.o2.frequency.setTargetAtTime(f * 2, t, 0.08);
+          v.whine.frequency.setTargetAtTime(f * 6, t, 0.08);
+        }
+        v.lfo.frequency.setTargetAtTime(f * 0.42, t, 0.1);
+        v.lp.frequency.setTargetAtTime(220 + f * 3.4, t, 0.1);
+        v.g.gain.setTargetAtTime(Math.max(0.0001, lvl), t, 0.06);
+        if (v.pan && want) v.pan.pan.setTargetAtTime(Math.max(-1, Math.min(1, want.pan || 0)), t, 0.08);
+      } catch (_) {}
+    }
+  }
+
+  // --- Landmine: the click-beep of a pressure plate taking weight.
+  function mineBeep(v = 1, pan = 0) {
+    if (v < 0.03) return;
+    playTone({ freq: 1400, type: 'square', dur: 0.015, vol: 0.06 * v, pan });
+    playTone({ freq: 2350, type: 'square', dur: 0.11, vol: 0.09 * v, when: 0.03, pan, attack: 0.005 });
+    playTone({ freq: 2350, type: 'sine', dur: 0.11, vol: 0.05 * v, when: 0.03, pan });
+  }
+
+  // --- Builds under attack, and coming apart. `mat`: wood, metal, steel, sand,
+  // wire, turret.
+  const buildHitCd = {};
+  function buildHit(mat, v = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted || v < 0.04) return;
+    if (c.currentTime < (buildHitCd[mat] || 0)) return;
+    buildHitCd[mat] = c.currentTime + 0.07;
+    if (mat === 'wood') {
+      playTone({ freq: rr(120, 160), type: 'sine', dur: 0.09, vol: 0.12 * v, slideTo: 70, pan });
+      playNoise({ dur: 0.07, vol: 0.08 * v, filterFreq: rr(600, 900), filterType: 'bandpass', q: 1.2, pan });
+      if (Math.random() < 0.35) playNoise({ dur: 0.05, vol: 0.05 * v, filterFreq: 2600, filterType: 'bandpass', q: 2, when: 0.03, pan }); // splinter
+    } else if (mat === 'stone') {
+      playTone({ freq: rr(90, 120), type: 'sine', dur: 0.08, vol: 0.12 * v, slideTo: 55, pan });
+      playNoise({ dur: 0.06, vol: 0.09 * v, filterFreq: rr(1800, 2600), filterType: 'bandpass', q: 1.5, pan });   // chip
+      if (Math.random() < 0.4) for (let i = 0; i < 3; i++) playTone({ freq: rr(900, 1600), type: 'triangle', dur: 0.025, vol: 0.02 * v, when: 0.05 + i * 0.04, pan }); // grit falling
+    } else if (mat === 'sand') {
+      playNoise({ dur: 0.1, vol: 0.1 * v, filterFreq: 320, filterType: 'lowpass', pan });
+      playNoise({ dur: 0.12, vol: 0.025 * v, filterFreq: 4200, filterType: 'highpass', when: 0.03, attack: 0.03, pan }); // grit trickle
+    } else if (mat === 'wire') {
+      for (let i = 0; i < 4; i++) playTone({ freq: rr(2200, 3400), type: 'triangle', dur: 0.05, vol: 0.03 * v, when: i * 0.03, pan });
+      playTone({ freq: rr(500, 700), type: 'sawtooth', dur: 0.12, vol: 0.03 * v, slideTo: 380, pan });
+    } else {
+      // metal / steel / turret: a clang with a ring to it
+      const f = mat === 'turret' ? rr(520, 700) : rr(700, 1000);
+      playTone({ freq: f, type: 'triangle', dur: 0.18, vol: 0.07 * v, pan });
+      playTone({ freq: f * 2.76, type: 'sine', dur: 0.12, vol: 0.03 * v, pan });
+      playNoise({ dur: 0.04, vol: 0.07 * v, filterFreq: 3000, filterType: 'bandpass', pan });
+      playTone({ freq: 110, type: 'sine', dur: 0.06, vol: 0.06 * v, slideTo: 60, pan });
+    }
+  }
+  function buildBreak(mat, v = 1, pan = 0) {
+    if (muted || v < 0.03) return;
+    if (mat === 'wood') {
+      playNoise({ dur: 0.12, vol: 0.18 * v, filterFreq: 1800, filterType: 'bandpass', q: 0.9, pan });         // crack
+      playTone({ freq: 90, type: 'sine', dur: 0.25, vol: 0.14 * v, slideTo: 40, pan });
+      playTone({ freq: 240, type: 'sawtooth', dur: 0.3, vol: 0.04 * v, slideTo: 150, when: 0.04, pan });    // creak
+      for (let i = 0; i < 5; i++) playTone({ freq: rr(130, 260), type: 'triangle', dur: 0.07, vol: 0.06 * v, when: 0.15 + i * rr(0.06, 0.1), slideTo: 90, pan }); // planks landing
+      playNoise({ dur: 0.35, vol: 0.05 * v, filterFreq: 500, filterType: 'lowpass', when: 0.1, pan, rev: 0.3 });
+    } else if (mat === 'stone') {
+      playTone({ freq: 55, type: 'sine', dur: 0.4, vol: 0.16 * v, slideTo: 30, pan, rev: 0.3 });              // the fall
+      playNoise({ dur: 0.6, vol: 0.12 * v, filterFreq: 700, filterType: 'lowpass', attack: 0.02, pan, rev: 0.4 }); // rubble
+      for (let i = 0; i < 7; i++) playTone({ freq: rr(140, 320), type: 'triangle', dur: 0.06, vol: 0.05 * v, when: 0.1 + i * rr(0.05, 0.1), slideTo: 90, pan }); // blocks landing
+    } else if (mat === 'sand') {
+      playNoise({ dur: 0.1, vol: 0.12 * v, filterFreq: 3000, filterType: 'bandpass', q: 1.5, pan });          // burlap tearing
+      playNoise({ dur: 0.9, vol: 0.08 * v, filterFreq: 900, filterType: 'lowpass', when: 0.05, attack: 0.1, pan }); // sand pouring out
+      playTone({ freq: 70, type: 'sine', dur: 0.2, vol: 0.1 * v, slideTo: 40, pan });
+    } else if (mat === 'wire') {
+      playTone({ freq: 1400, type: 'sawtooth', dur: 0.18, vol: 0.06 * v, slideTo: 180, pan });               // snap-twang
+      playTone({ freq: 1100, type: 'sawtooth', dur: 0.2, vol: 0.05 * v, slideTo: 150, when: 0.08, pan });
+      for (let i = 0; i < 6; i++) playTone({ freq: rr(2400, 3800), type: 'triangle', dur: 0.04, vol: 0.025 * v, when: 0.1 + i * 0.04, pan });
+    } else if (mat === 'turret') {
+      playNoise({ dur: 0.2, vol: 0.16 * v, filterFreq: 1400, filterType: 'bandpass', pan, rev: 0.3 });
+      playTone({ freq: 480, type: 'triangle', dur: 0.5, vol: 0.08 * v, slideTo: 300, pan });
+      playTone({ freq: 1600, type: 'sine', dur: 0.8, vol: 0.04 * v, slideTo: 90, when: 0.05, pan });        // power dying
+      for (let i = 0; i < 5; i++) playNoise({ dur: 0.02, vol: 0.05 * v, filterFreq: 6000, filterType: 'highpass', when: 0.05 + i * rr(0.04, 0.09), pan }); // sparks
+      playTone({ freq: 80, type: 'sine', dur: 0.3, vol: 0.12 * v, slideTo: 40, when: 0.2, pan });           // hits the deck
+    } else {
+      // metal / steel: a crash and a grind
+      playNoise({ dur: 0.25, vol: 0.14 * v, filterFreq: 2200, filterType: 'bandpass', q: 0.8, pan, rev: 0.3 });
+      playTone({ freq: rr(300, 420), type: 'triangle', dur: 0.5, vol: 0.07 * v, pan });
+      playTone({ freq: 160, type: 'sawtooth', dur: 0.35, vol: 0.04 * v, slideTo: 80, when: 0.08, pan });
+      playTone({ freq: 90, type: 'sine', dur: 0.2, vol: 0.1 * v, slideTo: 45, when: 0.15, pan });
+    }
+  }
+
+  // --- Putting things up. Every kind of piece has its own work sound.
+  function buildSound(kind) {
+    const knock = (w, f = 1) => {
+      playTone({ freq: rr(200, 250) * f, type: 'sine', dur: 0.06, vol: 0.1, when: w, slideTo: 120 * f });
+      playNoise({ dur: 0.035, vol: 0.08, filterFreq: 1900 * f, filterType: 'bandpass', q: 1.3, when: w });
+    };
+    const clank = (w, f = 1) => {
+      playTone({ freq: rr(650, 850) * f, type: 'triangle', dur: 0.12, vol: 0.06, when: w });
+      playNoise({ dur: 0.03, vol: 0.06, filterFreq: 3200 * f, filterType: 'bandpass', when: w });
+    };
+    const thump = (w, v = 1) => {
+      playTone({ freq: 75, type: 'sine', dur: 0.12, vol: 0.13 * v, when: w, slideTo: 45 });
+      playNoise({ dur: 0.08, vol: 0.07 * v, filterFreq: 350, filterType: 'lowpass', when: w });
+    };
+    const dig = (w) => {
+      playNoise({ dur: 0.12, vol: 0.09, filterFreq: 600, filterType: 'bandpass', q: 0.7, when: w, attack: 0.02 });
+      playNoise({ dur: 0.18, vol: 0.05, filterFreq: 300, filterType: 'lowpass', when: w + 0.08 });
+    };
+    switch (kind) {
+      case 'wall': case 'floor': case 'platform': case 'stairs': case 'pillar':
+        thump(0, 0.8); knock(0.1); knock(0.21); knock(0.3, 1.05); break;
+      case 'window':
+        playTone({ freq: 380, type: 'sawtooth', dur: 0.22, vol: 0.04, slideTo: 250 });   // boards prised off
+        playNoise({ dur: 0.1, vol: 0.07, filterFreq: 2000, filterType: 'bandpass', when: 0.18 });
+        knock(0.32); break;
+      case 'door':
+        knock(0); knock(0.1);
+        playTone({ freq: 520, type: 'sawtooth', dur: 0.2, vol: 0.025, when: 0.2, slideTo: 700 }); // hinge
+        playTone({ freq: 900, type: 'square', dur: 0.02, vol: 0.05, when: 0.42 });              // latch
+        break;
+      case 'sandbag': thump(0); thump(0.16, 0.9); playNoise({ dur: 0.18, vol: 0.03, filterFreq: 4000, filterType: 'highpass', when: 0.05 }); break;
+      case 'barricade': clank(0); clank(0.12, 0.9); playNoise({ dur: 0.2, vol: 0.04, filterFreq: 1200, filterType: 'bandpass', when: 0.2 }); break;
+      case 'railing': clank(0, 1.2); clank(0.1, 1.25); break;
+      case 'wire':
+        playNoise({ dur: 0.3, vol: 0.05, filterFreq: 2600, filterType: 'bandpass', q: 2, attack: 0.1 }); // unspooling
+        playTone({ freq: 900, type: 'sawtooth', dur: 0.2, vol: 0.035, when: 0.28, slideTo: 1200 });       // pulled taut
+        break;
+      case 'spikes': dig(0); dig(0.18); playTone({ freq: 1200, type: 'square', dur: 0.02, vol: 0.04, when: 0.4 }); break;
+      case 'mine':
+        dig(0);
+        playTone({ freq: 1500, type: 'square', dur: 0.04, vol: 0.05, when: 0.3 });
+        playTone({ freq: 1500, type: 'square', dur: 0.04, vol: 0.05, when: 0.4 });
+        playTone({ freq: 2000, type: 'square', dur: 0.08, vol: 0.05, when: 0.5 });              // armed
+        break;
+      case 'barrel':
+        playTone({ freq: 140, type: 'triangle', dur: 0.2, vol: 0.09, slideTo: 100 });
+        playNoise({ dur: 0.25, vol: 0.04, filterFreq: 500, filterType: 'lowpass', when: 0.08, attack: 0.05 }); // slosh
+        break;
+      case 'lure':
+        clank(0, 1.3);
+        [900, 1200, 1500].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.05, vol: 0.04, when: 0.15 + i * 0.07 }));
+        break;
+      case 'light': case 'heavy': case 'flame': case 'mortar': {
+        const deep = kind === 'heavy' || kind === 'mortar' ? 0.7 : 1;
+        thump(0, 1.1);
+        for (let i = 0; i < 6; i++) playTone({ freq: 1500 * deep, type: 'square', dur: 0.008, vol: 0.035, when: 0.12 + i * 0.03 }); // ratchet
+        clank(0.32, deep);
+        if (kind === 'flame') playNoise({ dur: 0.3, vol: 0.06, filterFreq: 700, filterType: 'lowpass', when: 0.45, attack: 0.05 }); // pilot lights
+        else if (kind !== 'mortar') playTone({ freq: 300 * deep, type: 'sine', dur: 0.45, vol: 0.03, when: 0.42, slideTo: 1200 * deep }); // powers up
+        break;
+      }
+      case 'shovel': dig(0); dig(0.15); break;
+      default: knock(0); knock(0.12);
+    }
+  }
+
+  // --- Zombie voices: what they sound like depends on what they are and what they
+  // are doing — shuffling about, hunting you down, or swinging.
+  let voiceCd = 0;
+  function zombieVoice(type, state, v = 1, pan = 0) {
+    const c = ensure();
+    if (!c || muted || v < 0.04) return;
+    if (c.currentTime < voiceCd) return;
+    voiceCd = c.currentTime + (state === 'attack' ? 0.09 : 0.28);
+    const rv = 0.3;
+    const growl = (f0, f1, dur, vol, type = 'sawtooth', w = 0) => playTone({ freq: f0, type, dur, vol: vol * v, slideTo: f1, rev: rv, attack: 0.04, pan, when: w });
+    const breath = (freq, dur, vol, w = 0) => playNoise({ dur, vol: vol * v, filterFreq: freq, filterType: 'bandpass', q: 0.9, rev: rv, attack: dur * 0.3, pan, when: w });
+    switch (type) {
+      case 'feral':
+        if (state === 'attack') { growl(rr(260, 320), 140, 0.2, 0.08); breath(1800, 0.15, 0.08); }
+        else if (state === 'chase') { for (let i = 0; i < 3; i++) breath(rr(1400, 2000), 0.09, 0.05, i * 0.16); growl(rr(200, 240), 170, 0.3, 0.04, 'sawtooth', 0.05); }
+        else { growl(rr(150, 190), 120, 0.5, 0.04); breath(1200, 0.3, 0.03, 0.1); }
+        break;
+      case 'leaper':
+        if (state === 'attack' || state === 'leap') { growl(700, 1500, 0.32, 0.08); breath(3000, 0.3, 0.07); }
+        else if (state === 'chase') { breath(2600, 0.25, 0.05); growl(rr(420, 520), 300, 0.2, 0.03, 'square'); }
+        else breath(2200, 0.4, 0.035);                                              // hiss
+        break;
+      case 'spider': {
+        const n = state === 'attack' ? 10 : (state === 'chase' ? 7 : 4);            // chitter
+        for (let i = 0; i < n; i++) playTone({ freq: rr(2600, 4200), type: 'square', dur: 0.008, vol: 0.04 * v, when: i * rr(0.025, 0.045), pan });
+        if (state !== 'idle') breath(4500, 0.25, 0.04, 0.05);
+        break;
+      }
+      case 'drowned':
+        growl(rr(70, 95), 55, 0.7, 0.05);
+        for (let i = 0; i < (state === 'idle' ? 4 : 7); i++) playTone({ freq: rr(300, 700), type: 'sine', dur: 0.04, vol: 0.035 * v, slideTo: rr(700, 1100), when: 0.05 + i * rr(0.05, 0.1), pan }); // bubbles
+        if (state === 'attack') breath(700, 0.2, 0.08);
+        break;
+      case 'military':
+        // Breathing through a gas mask, and the odd burst from a dead radio.
+        breath(900, 0.45, 0.05); breath(700, 0.5, 0.045, 0.55);
+        if (state !== 'idle' || Math.random() < 0.4) playNoise({ dur: 0.25, vol: 0.03 * v, filterFreq: 2400, filterType: 'bandpass', q: 3, when: 0.2, pan });
+        if (state === 'attack') growl(160, 90, 0.2, 0.08);
+        break;
+      case 'brute':
+        if (state === 'attack') { growl(95, 55, 0.35, 0.12); playNoise({ dur: 0.2, vol: 0.08 * v, filterFreq: 300, filterType: 'lowpass', pan }); }
+        else if (state === 'chase') { growl(70, 50, 0.6, 0.09); growl(141, 100, 0.5, 0.04, 'triangle'); }
+        else growl(rr(55, 70), 45, 0.8, 0.07);
+        break;
+      case 'spitter':
+        if (state === 'attack') breath(900, 0.2, 0.08);
+        else { growl(rr(110, 140), 90, 0.5, 0.04); for (let i = 0; i < 5; i++) playNoise({ dur: 0.03, vol: 0.04 * v, filterFreq: rr(500, 900), filterType: 'bandpass', when: 0.1 + i * 0.06, pan }); } // phlegm rattle
+        break;
+      case 'screamer':
+        if (state === 'attack') growl(900, 1300, 0.25, 0.06);
+        else if (state === 'chase') { growl(rr(500, 600), 750, 0.5, 0.045, 'triangle'); breath(2400, 0.4, 0.03); }
+        else growl(rr(380, 440), 300, 0.9, 0.035, 'triangle');                    // a thin moan
+        break;
+      case 'bomber':
+        // The charge it carries fizzes and bubbles; faster the closer it gets.
+        playNoise({ dur: state === 'idle' ? 0.5 : 0.7, vol: 0.05 * v, filterFreq: 5500, filterType: 'highpass', attack: 0.05, pan });
+        for (let i = 0; i < (state === 'idle' ? 2 : 5); i++) playTone({ freq: 2000, type: 'square', dur: 0.02, vol: 0.03 * v, when: i * (state === 'idle' ? 0.35 : 0.14), pan }); // ticking
+        growl(rr(90, 120), 70, 0.4, 0.035);
+        break;
+      case 'demon':
+        growl(rr(60, 75), 40, 0.7, 0.09); growl(rr(122, 150), 80, 0.6, 0.05, 'square', 0.03);
+        playNoise({ dur: 0.5, vol: 0.05 * v, filterFreq: 220, filterType: 'lowpass', rev: 0.5, pan });
+        if (state === 'attack') breath(1200, 0.2, 0.06);
+        break;
+      case 'colossus':
+        growl(rr(38, 46), 28, 1.1, 0.13); growl(rr(78, 90), 50, 0.9, 0.05, 'triangle', 0.05);
+        break;
+      default:            // shambler and anything new: the plain groan, meaner up close
+        if (state === 'attack') { growl(rr(150, 190), 90, 0.25, 0.08); breath(1100, 0.15, 0.06); }
+        else if (state === 'chase') { growl(rr(90, 120), 70, 0.6, 0.06); breath(700, 0.4, 0.03, 0.15); }
+        else groan(v * 0.9, false);
+    }
+  }
+
+  // --- Night vision: the tube whines up when the goggles come down, a faint
+  // low hum while they are on, and whines away when they go up.
+  let nvgHumNode = null;
+  function nvgToggle(on) {
+    playTone({ freq: on ? 420 : 520, type: 'square', dur: 0.03, vol: 0.07 });                   // mount clicks
+    playNoise({ dur: 0.05, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
+    if (on) playTone({ freq: 700, type: 'sine', dur: 0.7, vol: 0.035, slideTo: 7200, when: 0.05, attack: 0.1 });
+    else playTone({ freq: 6800, type: 'sine', dur: 0.5, vol: 0.03, slideTo: 500, when: 0.03 });
+  }
+  function nvgHum(on) {
+    const c = ctx;
+    if (!c) return;
+    if (on && !muted) {
+      if (nvgHumNode) return;
+      const t0 = c.currentTime;
+      // (Only the low hum stays on; the tube's whine is just the flip up and down.)
+      const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = 7200;
+      const o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 120;
+      const g = c.createGain(); g.gain.setValueAtTime(0, t0);
+      const g2 = c.createGain(); g2.gain.setValueAtTime(0.0001, t0); g2.gain.setTargetAtTime(0.006, t0 + 0.6, 0.2);
+      o.connect(g); o2.connect(g2); g.connect(fxBus || sfxGain); g2.connect(fxBus || sfxGain);
+      o.start(t0); o2.start(t0);
+      nvgHumNode = { o, o2, g, g2 };
+    } else if (nvgHumNode) {
+      const n = nvgHumNode; nvgHumNode = null;
+      const t = c.currentTime;
+      try { n.g.gain.setTargetAtTime(0.0001, t, 0.06); n.g2.gain.setTargetAtTime(0.0001, t, 0.06); n.o.stop(t + 0.4); n.o2.stop(t + 0.4); } catch (_) {}
+    }
+  }
+
+  // --- Kiosk: the register when you buy, a thunk as it drops in the tray, and a
+  // button click as you flip between the tabs.
+  function kioskBuy() {
+    const c = ensure(); if (!c || muted) return;
+    if (c.currentTime < (kioskBuy._cd || 0)) return;
+    kioskBuy._cd = c.currentTime + 0.12;
+    playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.05 });                                   // key
+    playNoise({ dur: 0.1, vol: 0.06, filterFreq: 1500, filterType: 'bandpass', when: 0.04 });        // drawer
+    playTone({ freq: 2093, type: 'sine', dur: 0.5, vol: 0.06, when: 0.08, rev: 0.2 });               // bell
+    playTone({ freq: 2637, type: 'sine', dur: 0.4, vol: 0.035, when: 0.08 });
+    for (let i = 0; i < 3; i++) playTone({ freq: rr(3000, 4200), type: 'triangle', dur: 0.03, vol: 0.025, when: 0.16 + i * 0.05 }); // coins
+    playTone({ freq: 120, type: 'sine', dur: 0.12, vol: 0.08, when: 0.32, slideTo: 70 });            // into the tray
+    playNoise({ dur: 0.06, vol: 0.05, filterFreq: 600, filterType: 'lowpass', when: 0.32 });
+  }
+  function kioskTab() {
+    playTone({ freq: 1200, type: 'square', dur: 0.012, vol: 0.04 });
+    playTone({ freq: 800, type: 'square', dur: 0.015, vol: 0.03, when: 0.03 });
+  }
+
+  // --- Doors: the latch, the hinge, and the leaf meeting the frame.
+  function doorSound(open, v = 1, pan = 0) {
+    if (open) {
+      playTone({ freq: 850, type: 'square', dur: 0.02, vol: 0.06 * v, pan });                        // latch
+      playTone({ freq: rr(300, 360), type: 'sawtooth', dur: 0.45, vol: 0.025 * v, when: 0.05, slideTo: rr(520, 640), attack: 0.08, pan }); // creak
+      playNoise({ dur: 0.3, vol: 0.02 * v, filterFreq: 1400, filterType: 'bandpass', when: 0.08, attack: 0.1, pan });
+    } else {
+      playTone({ freq: rr(560, 620), type: 'sawtooth', dur: 0.3, vol: 0.022 * v, slideTo: 380, attack: 0.06, pan });
+      playTone({ freq: 110, type: 'sine', dur: 0.12, vol: 0.12 * v, when: 0.3, slideTo: 60, pan });   // thud into the frame
+      playNoise({ dur: 0.06, vol: 0.07 * v, filterFreq: 700, filterType: 'lowpass', when: 0.3, pan });
+      playTone({ freq: 950, type: 'square', dur: 0.02, vol: 0.05 * v, when: 0.33, pan });            // latch catches
+    }
+  }
+
+  // --- Boots on boards: a hollow knock instead of the grass scuff.
+  function footstepWood(running) {
+    const p = 0.9 + Math.random() * 0.2;
+    playTone({ freq: 150 * p, type: 'sine', dur: 0.06, vol: running ? 0.08 : 0.055, slideTo: 95 * p });
+    playNoise({ dur: 0.035, vol: running ? 0.06 : 0.04, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.4 });
+    if (Math.random() < 0.15) playTone({ freq: rr(280, 340), type: 'sawtooth', dur: 0.12, vol: 0.012, when: 0.04, slideTo: 250 }); // a board creaks
+  }
+
+  // --- HQ sounds ---------------------------------------------------------------
+  // The klaxon: three long, loud two-tone blasts, the air-raid kind.
+  // The alarm: three long blasts two octaves down — a detuned growl with a tritone
+  // over it, a sub underneath, and a rasp of air through the horn.
+  function klaxon() {
+    for (let i = 0; i < 3; i++) {
+      const w = i * 1.1;
+      playTone({ freq: 105, type: 'sawtooth', dur: 0.9, vol: 0.2, when: w, slideTo: 92, attack: 0.05, rev: 0.7 });
+      playTone({ freq: 109, type: 'sawtooth', dur: 0.9, vol: 0.14, when: w, slideTo: 95, attack: 0.05, rev: 0.6 });
+      playTone({ freq: 148, type: 'square', dur: 0.9, vol: 0.07, when: w, slideTo: 131, attack: 0.05, rev: 0.6 });
+      playTone({ freq: 52, type: 'sine', dur: 0.95, vol: 0.2, when: w, slideTo: 44, attack: 0.04, rev: 0.4 });
+      playNoise({ dur: 0.9, vol: 0.07, filterFreq: 320, filterType: 'bandpass', q: 2.5, when: w, attack: 0.06, rev: 0.6 });
+      playNoise({ dur: 0.12, vol: 0.06, filterFreq: 180, filterType: 'lowpass', when: w, rev: 0.3 });
+    }
+  }
+  // CL-29: the alarm's rumble, a deep sub-bass swell and a ground roar for `sec` seconds.
+  function alarmRumble(sec = 3) {
+    const c = ensure(); if (!c || muted) return;
+    playTone({ freq: 34, type: 'sine', dur: sec, vol: 0.3, slideTo: 30, attack: 0.25 });
+    playTone({ freq: 47, type: 'sine', dur: sec * 0.9, vol: 0.18, slideTo: 41, attack: 0.35 });
+    playNoise({ dur: sec, vol: 0.2, filterFreq: 95, filterType: 'lowpass', attack: 0.4, rev: 0.3 });
+    playNoise({ dur: sec * 0.8, vol: 0.06, filterFreq: 220, filterType: 'bandpass', q: 1.2, attack: 0.6 });
+  }
+  // CL-22: the cave guardian's warning when a poke sets it off (D-25): a torn, rising shriek
+  // over a chest-deep snarl, from the mouth's side. v is distance loudness, pan its side.
+  function caveScreech(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0.25, Math.min(1, v));
+    playTone({ freq: 70, type: 'sawtooth', dur: 1.5, vol: 0.14 * v, slideTo: 48, attack: 0.08, pan, rev: 0.7 });
+    playNoise({ dur: 1.4, vol: 0.12 * v, filterFreq: 260, filterType: 'bandpass', q: 1.6, attack: 0.1, pan, rev: 0.8 });
+    for (const [f0, f1, when, vol] of [[620, 1450, 0.12, 0.08], [880, 1900, 0.18, 0.06], [540, 1250, 0.3, 0.05]]) {
+      playTone({ freq: f0, type: 'sawtooth', dur: 0.75, vol: vol * v, slideTo: f1, when, attack: 0.05, pan, rev: 0.9 });
+      playTone({ freq: f1, type: 'square', dur: 0.55, vol: vol * 0.5 * v, slideTo: f0 * 0.7, when: when + 0.7, attack: 0.02, pan, rev: 0.9 });
+    }
+    playNoise({ dur: 0.9, vol: 0.08 * v, filterFreq: 3200, filterType: 'bandpass', q: 3, when: 0.15, attack: 0.08, pan, rev: 0.9 });
+  }
+  // CL-22: a cave breathing, now and then, when you are close to one: a long low moan.
+  function caveGroan(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0, Math.min(1, v)); if (v < 0.05) return;
+    const f = rr(46, 62);
+    playTone({ freq: f, type: 'sawtooth', dur: 2.6, vol: 0.07 * v, slideTo: f * 0.78, attack: 0.7, pan, rev: 0.9 });
+    playTone({ freq: f * 1.5, type: 'sine', dur: 2.2, vol: 0.04 * v, slideTo: f * 1.2, attack: 0.9, pan, rev: 0.9 });
+    playNoise({ dur: 2.4, vol: 0.05 * v, filterFreq: 180, filterType: 'lowpass', attack: 0.8, pan, rev: 0.9 });
+  }
+  // CL-22: the pit under the lake. Near it, a slow deep rumble with bubbles breaking in it;
+  // when the grab starts, the same thing at full strength.
+  function pitRumble(v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted) return;
+    v = Math.max(0, Math.min(1, v)); if (v < 0.04) return;
+    const dur = 1.8 + v * 1.4;
+    playTone({ freq: 31, type: 'sine', dur, vol: 0.28 * v, slideTo: 27, attack: 0.4, pan });
+    playTone({ freq: 44, type: 'sine', dur: dur * 0.8, vol: 0.14 * v, slideTo: 38, attack: 0.5, pan });
+    playNoise({ dur, vol: 0.14 * v, filterFreq: 110, filterType: 'lowpass', attack: 0.5, pan, rev: 0.4 });
+    const n = 3 + Math.floor(v * 6);
+    for (let i = 0; i < n; i++) {
+      const f = rr(260, 520), w = 0.2 + Math.random() * dur * 0.8;
+      playTone({ freq: f, type: 'sine', dur: 0.07, vol: 0.05 * v, slideTo: f * 1.9, when: w, attack: 0.005, pan, rev: 0.5 });
+    }
+  }
+  // A flare going up: the thump of the launch and a falling whistle.
+  function flareWhistle() {
+    const c = ensure(); if (!c || muted) return;
+    playNoise({ dur: 0.08, vol: 0.12, filterFreq: 400, filterType: 'lowpass' });
+    playTone({ freq: rr(2200, 2800), type: 'sine', dur: 1.8, vol: 0.05, slideTo: rr(900, 1300), attack: 0.08, rev: 0.4 });
+    playNoise({ dur: 1.4, vol: 0.02, filterFreq: 3500, filterType: 'bandpass', q: 4, attack: 0.1 });
+  }
+  function flareBurst(v = 1, pan = 0) {
+    playNoise({ dur: 0.35, vol: 0.2 * v, filterFreq: 1500, filterType: 'bandpass', q: 0.7, pan, rev: 0.8 });
+    playTone({ freq: 80, type: 'sine', dur: 0.4, vol: 0.12 * v, slideTo: 40, pan, rev: 0.6 });
+    for (let i = 0; i < 6; i++) playNoise({ dur: 0.03, vol: 0.05 * v, filterFreq: 5000, filterType: 'highpass', when: 0.2 + i * rr(0.06, 0.14), pan, rev: 0.5 }); // crackle
+  }
+  // Inside the HQ: gears winding up, a hopper clanking, a press — then a bell.
+  function hqMachine(dur = 3.4) {
+    playTone({ freq: 60, type: 'sawtooth', dur: dur, vol: 0.05, slideTo: 140, attack: 0.4, rev: 0.3 });
+    playTone({ freq: 120, type: 'square', dur: dur * 0.9, vol: 0.02, slideTo: 260, attack: 0.5 });
+    playNoise({ dur: dur, vol: 0.03, filterFreq: 600, filterType: 'bandpass', q: 1, attack: 0.5 });
+    for (let t = 0.3; t < dur - 0.2; t += rr(0.25, 0.5)) {
+      playTone({ freq: rr(500, 900), type: 'square', dur: 0.04, vol: 0.05, when: t });
+      playNoise({ dur: 0.05, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: t });
+    }
+    for (const t of [dur * 0.5, dur * 0.8]) { playTone({ freq: 70, type: 'sine', dur: 0.2, vol: 0.12, when: t, slideTo: 40 }); playNoise({ dur: 0.18, vol: 0.08, filterFreq: 300, filterType: 'lowpass', when: t }); }
+    playNoise({ dur: 0.5, vol: 0.05, filterFreq: 5000, filterType: 'highpass', when: dur * 0.85, attack: 0.05 });   // steam
+  }
+  function hqDing() {
+    playTone({ freq: 1568, type: 'sine', dur: 1.4, vol: 0.12, rev: 0.4 });
+    playTone({ freq: 2093, type: 'sine', dur: 1.1, vol: 0.06, when: 0.02, rev: 0.4 });
+    playTone({ freq: 3136, type: 'sine', dur: 0.6, vol: 0.025, when: 0.02 });
+  }
+  function bagThrow() {
+    playNoise({ dur: 0.25, vol: 0.06, filterFreq: 900, filterType: 'bandpass', q: 0.8, attack: 0.08 });   // whoosh
+    for (let i = 0; i < 4; i++) playTone({ freq: rr(700, 1100), type: 'triangle', dur: 0.03, vol: 0.03, when: i * 0.05 });   // bones rattling in it
+  }
+  function skullPickup() {
+    playTone({ freq: rr(500, 650), type: 'triangle', dur: 0.05, vol: 0.07 });
+    playTone({ freq: rr(800, 1000), type: 'triangle', dur: 0.04, vol: 0.05, when: 0.04 });
+    playNoise({ dur: 0.05, vol: 0.04, filterFreq: 1800, filterType: 'bandpass', when: 0.01 });
+  }
+
+  // Duck depths [ambience, music, hold s] per shot: bigger guns push the rest of the
+  // mix further down. Explosions hardest of all.
+  const SHOT_DUCK = {
+    pistol: [0.5, 0.78], uzi: [0.55, 0.8], revolver: [0.35, 0.62], m4: [0.45, 0.7], ak: [0.4, 0.66],
+    minigun: [0.5, 0.72], shotgun: [0.3, 0.58, 0.08], aa12: [0.35, 0.62], sniper: [0.25, 0.52, 0.12],
+    launcher: [0.45, 0.7]
+  };
+  const BIG = [0.18, 0.42, 0.25];
+  const W = (fn, duck) => onBus('weap', fn, duck);
+  const A = (fn) => onBus('amb', fn);
+  return {
+    unlock, toggleMute, isMuted, setMuted,
+    fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
+    emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
+    shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
+    launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
+    jump, nvgClick, coin, leafHit: W(leafHit), treeFell, treeThud, crownFire, trunkBump,
+    win, resetBlip, noteSpin, startMusic, stopMusic,
+    place, invalid, turretShot: W(turretShot, [0.7, 0.88]), zombieHit: W(zombieHit), zombieDeath: W(zombieDeath),
+    groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
+    waveStart, expand, gameOver, playerHurt, grenadeBoom: W(grenadeBoom, BIG), knifeSwing: W(knifeSwing),
+    macheteSwing: W(macheteSwing), macheteChop: W(macheteChop), armorDon, armorHit, rockBreak: W(rockBreak),
+    brassTink: W(brassTink), magThud: W(magThud),
+    chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit: W(chainsawGrit), isChainsawRunning,
+    chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
+    turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
+    zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
+    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
+    crateLand, pickup, repairClank, sellChime,
+    bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
+    grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
+    // Read-only view of the mix, for tests and the perf overlay.
+    mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
+    rainStart, rainStop, rainSetIntensity, isRainRunning,
+    updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes,
+    ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, rabbitScreech, holyBlast, dayCleared,
+    distantGroan: A(distantGroan),
+    placesState,   // CL-82
+    heartFall,   // CL-85
+    belowState, rockGroan: A(rockGroan), guardianInWalls: A(guardianInWalls), hushDie   // CL-101
+  };
+})();

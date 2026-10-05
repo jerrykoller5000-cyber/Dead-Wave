@@ -82,7 +82,7 @@ test('actual record hook awards once, suppresses debug moments and gives the dea
  let receive;const cues=[];
  const ctx={createRecords,RECORDS_KEY,renderBestRecord,createBadges,BADGES_KEY,createBadgeAdapter,renderBadgeCollection,document:doc,
    localStorage:{getItem:()=>null,setItem:()=>{}},window:{addEventListener:(_,f)=>{receive=f;}},AudioSys:{musicCue:name=>cues.push(name)},
-   gameStarted:true,gameOver:false,won:false,day:5,uiRunId:1,matchStats:{kills:1000,headshots:100,skullsTurnedIn:1000},comboBest:20,
+   gameStarted:true,training:{active:false},gameOver:false,won:false,day:5,uiRunId:1,matchStats:{kills:1000,headshots:100,skullsTurnedIn:1000},comboBest:20,
    quest:{read:()=>({done:false})},victory:false,trueEnding:false,newCamos:[],
    objectiveRuntime:{read:()=>({runId:1,radioCall:{repaired:true}})},dwText:text};
  const code=source.slice(source.indexOf('    const runRecords = createRecords('),source.indexOf('    let hitPingT = 0;'));

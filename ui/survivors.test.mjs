@@ -40,7 +40,7 @@ test('production run-record hook passes authoritative survivors only on evacuati
  assert(code.startsWith('    function recordFinishedRun('));
  for(const [evacuated,done,eligible,expected] of [[true,false,true,true],[false,false,true,false],[true,true,true,false],[true,false,false,false]]){
   const store=createBadges(),adapter=createBadgeAdapter({store});adapter.reset(3);
-  const ctx={gameStarted:true,day:20,uiRunId:3,matchStats:{kills:1,headshots:0,skullsTurnedIn:0},comboBest:0,
+  const ctx={gameStarted:true,training:{active:false},day:20,uiRunId:3,matchStats:{kills:1,headshots:0,skullsTurnedIn:0},comboBest:0,
    quest:{read:()=>({done})},getSurvivors:()=>[{who:'pike'},{who:'okafor'},{who:'brandt'}],aboardSurvivors,
    badgeRunEligible:()=>eligible,runRecords:createRecords(),badgeAdapter:adapter,lifetimeBadges:store,
    menuBestRecord:null,menuBadges:null,renderBestRecord(){},renderBadgeCollection(){}};

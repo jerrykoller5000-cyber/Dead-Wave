@@ -4,6 +4,17 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-74 · Nothing the player reads names a real brand or product (Jerry, 2026-10-02).** The guns, the camo patterns
+  and the eyewear take made-up names: GW-4 Carbine, KR-7 Rifle, Breacher-12, Wasp SMG, Rotary Gun and Watchman MG;
+  Classic Woodland, Arid Blend, Jungle Blend, Digital Woodland, Boreal Digital; the CIF's shades by shape. The player is
+  a Gravewalker on screen, not a Marine. Ids, string keys, mesh names, save keys and code comments keep the old words.
+  GB-120, GB-121, GB-122 (the full table is in handoffs/2026-10-02-grokbot-GB-121.md).
+- **D-73 · The key layout: 1 to 4 and X (Jerry, 2026-10-02).** 1 night vision, 2 flashlight, 3 laser, 4 holster and
+  draw; X the fire selector, and X sells only in build mode. N, L, Z, K and U are free. With B held, 1 to 9 still turn
+  the build wheel's pages; nothing fires while typing in a field. GB-128; docs/controls.md.
+- **D-72 · Full auto by default (Jerry, 2026-10-02; replaces D-65's "semi from the start").** Every gun that can fire
+  full auto starts each run on AUTO; a press of the selector is kept for that gun until a new run. The pistol fires semi
+  until its auto sear is fitted, then AUTO. GB-127.
 - **D-71 · Build the pieces; Jerry plays them (Jerry, 2026-10-01).** "Do not worry about doing timed or extensive
   runs. You guys really need to focus on just getting these elements into place and I will playthrough and make the
   connections." No timed full runs, no nightsim medians, no fps or load campaigns, no full-run play checks by the
@@ -73,7 +84,7 @@ details. Moved here from the board on 2026-09-29 so the board stays short. Nothi
 - **D-65 · Suppressors and fire selectors (Jerry, 2026-09-29).** A suppressor upgrade for the M4, AK-47, pistol,
   sniper, Uzi and shotgun (not the AA-12), each one styled to belong on its gun. Zombies will notice suppressed fire
   less, and suppressed rounds hit a little softer: that balance comes later, with a hearing rule for the horde (the
-  "Suppressor" row comes back out of Not now). Fire selectors: semi-auto for the M4, AK-47 and AA-12 from the start; a
+  "Suppressor" row comes back out of Not now). Fire selectors: semi-auto for the M4, AK-47 and AA-12 from the start (**replaced by D-72: they start on AUTO**); a
   full-auto unlock for the pistol that is hard to hold on target, much less controllable than the Uzi. CL-95, CU-68,
   CU-69, GB-105.
 - **D-64 · A fidelity pass on the marine, his gear and the guns (Jerry, 2026-09-29).** A little less bulky and a touch

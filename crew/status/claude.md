@@ -1,15 +1,17 @@
 # Claude
 
 state: active
-model: Claude Opus 5.5 (High), in Cowork (cloud; files land through the desktop bridge)
-task: CL-99 R5 · P-137. The five warrens: v2 dressed (open until seen below after CU-71)
-touching: world/hollows.js
-since: 2026-09-30T23:06Z
-next: CL-76 (Fog Night's fog), CL-92 (lightning), CL-93 (the rabbit), CL-75, CL-78, CL-81
+model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
+task: CL-120 The crouch: no clipping through the ground
+touching: index.html (updateMarinePose: the Crouch legs block only), tools/tests/t184.js
+since: 2026-10-05T23:21Z
+next: CL-84 (the reload), CL-122 (the hands), CL-123
 blocked-on: —
-last-report: handoffs/2026-09-30-claude-CL-80.md
+last-report: handoffs/2026-10-05-claude-CL-119.md
 
 ## Notes
+
+- 2026-10-05: board cleared and reorganized for Jerry (Start here table; queues in Now / Waiting / Later). CL-121 waits on Q-6.
 
 - CL-99/CL-80 (2026-10-01): world/hollows.js (layoutWarren, buildWarren; tests world/hollows.test.mjs) and world/runes.js (glyphs, pulseAt). Warren sheet: node tools/warrensheet.mjs --out <dir> (top views; --inside times out headless: the under-water path). Someone overwrote BOARD/QUESTIONS/LOG with an older copy at 23:26Z on 09-30: always check a save landed (re-stage and grep).
 

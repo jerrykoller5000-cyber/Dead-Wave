@@ -1,0 +1,17 @@
+PASS both primaries slung on his back: shotgun,launcher
+PASS both secondaries in the cross-draw holsters: uzi,revolver
+PASS the pistol in the hip holster while his hands are empty: pistol
+PASS full: 5 magazine tops with the carrier, 3 grenades: {"mags":5,"grenades":3,"shells":10,"rounds40":6,"boxes":0,"tanks":0}
+PASS the shotgun's bandolier full: 10 shells
+PASS the launcher's 40 mm belt full: 6
+PASS no minigun or flamer carried, nothing on the pack: 0, 0
+PASS the shotgun in his hands is off his back: ,launcher
+PASS the pistol in his hand leaves the hip holster empty
+PASS akimbo Uzis take both holsters: ,
+PASS empty: no tops, grenades, shells or rounds: {"mags":0,"grenades":0,"shells":0,"rounds40":0,"boxes":0,"tanks":0}
+PASS the empty bandolier and belt still worn while the guns are carried
+PASS half the shells, half the loops: 5 of 10
+PASS one grenade left, one on the hip: 1
+PASS minigun and flamer carried dry: no boxes or tanks, no holsters: {"mags":0,"grenades":0,"shells":0,"rounds40":0,"boxes":0,"tanks":0}
+PASS full belt boxes and tanks on the pack: 2, 2
+PASS the live rig answers for the real loadout: minigun,m4

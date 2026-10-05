@@ -48,7 +48,9 @@
     };
     const bare = headWidth(a, false), lid = headWidth(a, true);
     ok(bare < 0.4, 'no ear defenders on a bare head: head ' + bare.toFixed(3) + ' m wide');
-    ok(lid > 0.47, 'the helmet brings the headset (its ear cups are the widest thing on it): ' + lid.toFixed(3) + ' m wide with it');
+    // GP-130 (Jerry's references, 2026-10-02) fitted slimmer oval ear cups to side-rail yokes: 0.436 m, was over 0.47.
+    // What this check is for is that the headset comes with the helmet and stands out past the bare head.
+    ok(lid > bare + 0.03, 'the helmet brings the headset (its ear cups are the widest thing on it): ' + lid.toFixed(3) + ' m wide with it, ' + bare.toFixed(3) + ' bare');
 
     // Front to back, full kit (helmet, carrier, pads), in marine space.
     const gp = b.userData.gearParts;

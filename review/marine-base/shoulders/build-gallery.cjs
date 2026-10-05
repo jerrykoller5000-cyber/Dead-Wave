@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),dir=__dirname;
+const css=fs.readFileSync('review/trapper/index.html','utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
+const views=[
+ ['uniform','Smaller shoulders, a closer fit','The sleeve caps are narrower and slope inward. The shirt fills the notch between the moving arm and the chest.'],
+ ['quarter','The chest-to-arm connection','The shoulder fabric overlaps beneath the sleeve, softening the detached-looking join. The arm pivot stays in its original place.'],
+ ['profile','Less bulk from the side','A slimmer upper arm and shoulder cap, with the existing forearm, hand and equipment retained.'],
+ ['survivors','The same fix for the survivors','Okafor, Brandt and Pike share this revised shoulder construction.'],
+ ['kit','With armor','The fitted shoulder sits beside the vest and its straps. The PGB patch follows the smaller sleeve.'],
+ ['walk','Existing walking pose','A posed frame from the existing walk clip, showing the shoulder as the arm swings.'],
+ ['rifle','Rifle hold','The original arm joints and weapon attachment remain unchanged.'],
+ ['crouch','Current crouched hold','The current crouch checks pass with the revised geometry. This pass changes the shoulder shape, not the crouch animation.']
+];
+const article=([id,title,note])=>`<article><h2>${title}</h2><figure><div class="pair">${['before','after'].map(p=>`<div class="${p}"><div class="label">${p==='before'?'Before':'After'}</div><img loading="lazy" src="data:image/jpeg;base64,${fs.readFileSync(path.join(dir,p+'-'+id+'.jpg')).toString('base64')}" alt="${title} ${p}"></div>`).join('')}</div><figcaption>${note}</figcaption></figure></article>`;
+fs.writeFileSync(path.join(dir,'index.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Soldier shoulders · Before and after</title><style>${css}</style><main><header><small>DEAD-WAVE / SHOULDER REFINEMENT / OCTOBER 2, 2026</small><h1>A more natural shoulder</h1><p>Smaller sleeve caps and a closer connection to the chest, on the existing rig.</p></header><nav>${[['after','After'],['before','Before'],['compare','Side by side']].map(([id,label])=>`<button data-mode="${id}" aria-pressed="${id==='after'}">${label}</button>`).join('')}</nav>${article(views[0])}<div class="grid">${views.slice(1).map(article).join('')}</div><footer><p>Matched views of production models staged in the game renderer. Foreground rocks and grass hidden only for the review. Existing joints, wardrobe, masks and rifle grips verified unchanged; 29 rig/wardrobe checks and 29 current crouch checks pass.</p><p>Independent crew acceptance, full integration and load/FPS verification remain pending.</p></footer></main><script>for(const b of document.querySelectorAll('[data-mode]'))b.onclick=()=>{document.body.className=b.dataset.mode==='after'?'':b.dataset.mode+'-mode';for(const x of document.querySelectorAll('[data-mode]'))x.setAttribute('aria-pressed',String(x===b));};</script></html>`);
+console.log('Built eight shoulder comparisons.');

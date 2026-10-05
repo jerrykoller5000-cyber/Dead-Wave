@@ -1,0 +1,247 @@
+{
+  "mounts": [
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": null,
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "uzi",
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "y": 1.01,
+      "muzzleY": 0.7518057291408948
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "revolver"
+      ],
+      "inHand": null,
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    },
+    {
+      "kind": "revolver",
+      "secondary": [
+        "revolver",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "y": 0.76,
+      "muzzleY": -0.9928086358538664
+    }
+  ],
+  "maskTop": 1.402509958744049,
+  "maskBottom": 1.205000000335276,
+  "hair": true
+}

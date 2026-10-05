@@ -1200,8 +1200,9 @@
     import { createIntakeDisplay } from './ui/skull-intake.js';
     import { drawHQDesignation } from './ui/hq-markings.js';
     import { buildDamagedTerminal } from './ui/hq-damaged-terminal.js';
-    import { buildMarineHead, buildBalaclava, buildSurvivorBeard } from './ui/marine-face.js';
+    import { buildMarineHead, buildMarineHair, buildBalaclava, buildSurvivorBeard } from './ui/marine-face.js';
     import { buildMarineBody } from './studio/marine-body.js';
+    import { webbingGeometry, bandolierFit } from './ui/marine-webbing.js';
     import { hasText as dwHasText } from './ui/strings.js';   // CL-92: a line that may not be written yet falls back
     import { LIGHTNING, BOOTS_HEX, stormTimes, rollStrike, strikeTarget, boltPoints, buildBoltGeometry, buildInsulatedBoots } from './world/lightning.js';
     import * as History from './world/history-props.js';   // CL-108, CL-109: the valley's history in things
@@ -1224,7 +1225,10 @@
     import { mountGuardianEscapeFeedback } from './ui/guardian-escape.js';
     import { mountEnemyCounterCards } from './ui/enemy-counter.js';
     import { mountArmory } from './ui/armory.js';
+    import { createLightPool } from './world/light-pool.js';   // CL-116
+    import { bakeStatic } from './world/bake.js';   // CL-117
     import { TRAINING, buildTrainingGround, clampToRects, segmentBox } from './world/training.js';   // CL-115
+    import { trainingFloorHit, traceTraining, createTrainingImpacts } from './world/training-ballistics.js';
     import { mountTrainingPanel, mountTrainingHud } from './ui/training-panel.js';   // CL-115
     import { createArmory, slotType } from './game/armory.js';
     import { WARDROBE_STORE, CAMO_ITEMS, DRESS_TABS, GUNS, BODY_CHOICES, BOOT_COLOURS, BOOT_HEX, CAP_STYLES, EYEWEAR_STYLES, SLEEVES, TROUSER_CUTS, defaultWardrobe, normalizeWardrobe, withItem, withBody, withGun, resetTab } from './game/wardrobe.js';
@@ -1740,7 +1744,22 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     }
 
     // Every frame goes through here, whichever path is live.
+    // CL-116: a fixed set of four real point lights stands in for every other one (world/light-pool.js). Thirteen
+    // point lights, nearly always dark, were costing every pixel of every frame.
+    let lightPool = null, lightPoolScan = 0;
+    function ensureLightPool() {
+      if (lightPool) return lightPool;
+      lightPool = createLightPool(THREE, scene, { size: 4 });
+      lightPool.adopt(scene);
+      return lightPool;
+    }
+    function updateLightPool() {
+      ensureLightPool();
+      if (++lightPoolScan >= 120) { lightPoolScan = 0; lightPool.adopt(scene); }   // lights made since (a copy, a new prop)
+      lightPool.update(gameStarted ? localPlayer.position : camera.position);
+    }
     function renderFrame() {
+      updateLightPool();   // CL-116
       if (postProcessing) postProcessing.render();
       else renderer.render(scene, camera);
     }
@@ -3995,7 +4014,45 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       else geo.computeVertexNormals();
     }
     ground.receiveShadow = true;
+    // CL-118: the terrain was one 266k-triangle mesh, so every frame drew all of it: the half behind the camera and the
+    // far side of the valley too. It is drawn as wedges now (12 around, 5 bands out) that share the one geometry's
+    // attributes — every edit of the surface (the shovel, a site levelled, the land's tint) still goes through
+    // ground.geometry and shows in all of them — but each wedge has its own index and bounds, so the renderer culls
+    // the ones out of view. The outermost band (past 222 m, beyond the land) takes every second ring and column: a
+    // quarter of its triangles, with a strip of half-steps along the seam so it stays watertight. `ground` itself
+    // stays, unseen, as the geometry's keeper.
+    const groundSectors = new THREE.Group(); groundSectors.name = 'ground-sectors';
+    {
+      const WEDGES = 12, BANDS = [1, 30, 80, 140, 170, TERRAIN_RINGS], COARSE = BANDS.length - 2, segs = TERRAIN_SEGS, rings = TERRAIN_RINGS;
+      const src = ground.geometry, pos = src.attributes.position.array;
+      const lists = []; for (let n = 0; n < (BANDS.length - 1) * WEDGES; n++) lists.push([]);
+      const bandOf = (i) => { let b = 0; while (b < BANDS.length - 2 && i >= BANDS[b + 1]) b++; return b; };
+      const at = (i, j) => bandOf(i) * WEDGES + ((j * WEDGES / segs) | 0);
+      const R = (i, j) => 1 + (i - 1) * segs + (j % segs);   // ring i (1-based), column j
+      for (let j = 0; j < segs; j++) lists[at(1, j)].push(0, R(1, j + 1), R(1, j));
+      const c0 = BANDS[COARSE];   // the first ring of the coarse band: the seam
+      for (let i = 1; i < c0; i++) for (let j = 0; j < segs; j++) lists[at(i, j)].push(R(i, j), R(i, j + 1), R(i + 1, j + 1), R(i, j), R(i + 1, j + 1), R(i + 1, j));
+      for (let j = 0; j < segs; j += 2) {   // the seam: two fine columns to one coarse
+        const L = lists[at(c0, j)];
+        L.push(R(c0, j), R(c0, j + 1), R(c0 + 2, j),  R(c0, j + 1), R(c0 + 2, j + 2), R(c0 + 2, j),  R(c0, j + 1), R(c0, j + 2), R(c0 + 2, j + 2));
+      }
+      for (let i = c0 + 2; i < rings; i += 2) for (let j = 0; j < segs; j += 2) lists[at(i, j)].push(R(i, j), R(i, j + 2), R(i + 2, j + 2), R(i, j), R(i + 2, j + 2), R(i + 2, j));
+      for (const list of lists) {
+        const g = new THREE.BufferGeometry();
+        for (const name of ['position', 'normal', 'color', 'gworn', 'gwear']) if (src.attributes[name]) g.setAttribute(name, src.attributes[name]);
+        g.setIndex(new THREE.BufferAttribute(new Uint32Array(list), 1));
+        let x0 = Infinity, y0 = Infinity, z0 = Infinity, x1 = -Infinity, y1 = -Infinity, z1 = -Infinity;
+        for (const vi of list) { const x = pos[vi * 3], y = pos[vi * 3 + 1], z = pos[vi * 3 + 2]; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; if (z < z0) z0 = z; if (z > z1) z1 = z; }
+        g.boundingBox = new THREE.Box3(new THREE.Vector3(x0, y0 - 14, z0), new THREE.Vector3(x1, y1 + 14, z1));   // room for the shovel
+        const c = new THREE.Vector3((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);   // (by hand: the test build's three has no Box3.getBoundingSphere)
+        g.boundingSphere = THREE.Sphere ? new THREE.Sphere(c, Math.hypot(x1 - x0, y1 - y0 + 28, z1 - z0) / 2) : { center: c, radius: Math.hypot(x1 - x0, y1 - y0 + 28, z1 - z0) / 2 };
+        const m = new THREE.Mesh(g, groundMat); m.receiveShadow = true; m.raycast = () => {};   // a ray asks `ground`
+        groundSectors.add(m);
+      }
+    }
+    ground.visible = false;
     scene.add(ground);
+    scene.add(groundSectors);
 
     // Land outside the purchased radius stays visible but is tinted, so expanding
     // reveals ground you could already see rather than popping new scenery in.
@@ -16067,12 +16124,13 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       K.slab(gunBand([[0.088, -0.04], [0.09, -0.068], [0.078, -0.079], [0.03, -0.079], [0.018, -0.07]], 0.005), 0.014, gunDark, { bevel: 0.003 });
       K.slab(gunBand([[0.052, -0.04], [0.05, -0.056], [0.044, -0.066]], 0.0035), 0.01, gunAccent, { bevel: 0.002 });
       K.box(0.006, 0.02, 0.02, gunDark, -0.052, -0.02, 0.0);
-      // Long stick mag (in front of the grip), with its baseplate.
-      const mag = K.group(0, -0.22, 0.06);
-      mag.rotation.x = 0.08;
-      K.slab([[-0.04, 0.14], [0.04, 0.14], [0.04, -0.138], [-0.04, -0.138]], 0.05, gunAccent, { bevel: 0.006, parent: mag });
-      for (const sx of [-1, 1]) K.box(0.004, 0.22, 0.01, gunDark, sx * 0.026, 0.0, 0.0, 0, 0, 0, mag);
-      K.slab([[-0.044, -0.136], [0.046, -0.136], [0.046, -0.152], [-0.044, -0.154]], 0.058, gunDark, { bevel: 0.004, parent: mag });
+      // The narrow magazine passes through the grip. Bake its rake into the inner
+      // assembly: reload animates the outer group back to zero at insertion.
+      const mag = K.group(0, -0.205, -0.0435);
+      const stick = new THREE.Group(); stick.rotation.x = 0.22; mag.add(stick);
+      K.slab([[-0.022, 0.115], [0.022, 0.115], [0.022, -0.109], [-0.022, -0.109]], 0.036, gunAccent, { bevel: 0.003, parent: stick });
+      for (const sx of [-1, 1]) K.box(0.003, 0.18, 0.006, gunDark, sx * 0.0185, 0, 0, 0, 0, 0, stick);
+      K.slab([[-0.026, -0.106], [0.026, -0.106], [0.026, -0.119], [-0.026, -0.119]], 0.042, gunDark, { bevel: 0.003, parent: stick });
       gun.userData.mag = mag;
       gun.userData.baseMagPos = mag.position.clone();
       gun.userData.baseMagRot = mag.rotation.clone();
@@ -16451,6 +16509,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       pilot.position.set(0, 0.05, 0.72); gun.add(pilot);
       gun.userData.pilot = pilot.material;
       // Fuel tanks with domed ends: straps, caps, a valve and a pressure gauge.
+      const tanks = K.group(0, 0, 0), tankStart = gun.children.length;
       const dome = (r, z0, z1) => [[0, z0], [r * 0.55, z0 + r * 0.06], [r * 0.85, z0 + r * 0.2], [r, z0 + r * 0.45], [r, z1 - r * 0.45], [r * 0.85, z1 - r * 0.2], [r * 0.55, z1 - r * 0.06], [0, z1]];
       K.lathe(dome(0.075, -0.2, 0.16), fuelRedMat, { y: -0.09, seg: 16 });
       K.lathe(dome(0.056, -0.155, 0.115), fuelRedMat, { x: 0.11, y: -0.05, seg: 14 });
@@ -16465,6 +16524,10 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // Hose loop from the tanks up into the body.
       K.tor(0.09, 0.012, gunRubber, 0, -0.02, -0.2, 0, Math.PI / 2, 0, null, Math.PI, 12);
       K.tor(0.05, 0.01, gunRubber, 0.06, -0.02, 0.2, Math.PI / 2, 0, 0, null, Math.PI, 10);
+      for (const part of gun.children.slice(tankStart)) tanks.add(part);
+      gun.userData.mag = tanks;
+      gun.userData.baseMagPos = tanks.position.clone();
+      gun.userData.baseMagRot = tanks.rotation.clone();
       // Rear grip, trigger guard, trigger; the front grip with finger grooves.
       K.slab(gripOutline(-0.16, -0.09, 0.16, 0.08, 0.22), 0.06, gunPoly, { bevel: 0.013, segs: 3 });
       K.slab(gunBand([[-0.068, -0.034], [-0.068, -0.058], [-0.078, -0.068], [-0.112, -0.066]], 0.004), 0.014, gunDark, { bevel: 0.002 });
@@ -17303,19 +17366,25 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
 
       hAdd(cyl(0.065, 0.085, 0.13, skinW, 10), 0, 1.24, 0);                                // neck
       headG.add(buildMarineHead(THREE, skinW));
-      // Hair and ears are visible only on unmasked survivors. Keep their group
+      // The lower-face wrap leaves hair and ears exposed. Keep their group
       // separate through rigid merging so no wardrobe/rig contract changes.
-      const bareFaceDetails = new THREE.Group();bareFaceDetails.visible = false;headG.add(bareFaceDetails);
+      const bareFaceDetails = new THREE.Group();bareFaceDetails.visible = true;headG.add(bareFaceDetails);
       g.userData.bareFaceDetails = bareFaceDetails;
       const bareAdd = (mesh, x, y, z) => { hAdd(mesh, x, y, z);bareFaceDetails.add(mesh);return mesh; };
       for (const sx of [-1, 1]) bareAdd(rmesh(0.03, 0.07, 0.05, skinW, 0.014), sx * 0.13, 1.4, 0);
-      hAdd(rmesh(0.2, 0.03, 0.035, skinW, 0.012), 0, 1.455, 0.14);                          // brow
-      hAdd(rmesh(0.034, 0.052, 0.044, skinW, 0.015), 0, 1.397, 0.154);                           // nose
+      hAdd(rmesh(0.176, 0.019, 0.024, skinW, 0.009), 0, 1.452, 0.137);                      // brow ridge follows the forehead
+      // GP-123: one tapered bridge/tip surface instead of two stacked nose blocks.
+      const noseGeo = new THREE.SphereGeometry(1, 12, 8), nosePos = noseGeo.attributes.position;
+      for (let i = 0; i < nosePos.count; i++) {
+        const y = nosePos.getY(i);
+        nosePos.setXYZ(i, nosePos.getX(i) * .015 * (1 - .22 * y), y * .038,
+          nosePos.getZ(i) * .019 * (1 - .25 * y) - .003 * y);
+      }
+      noseGeo.computeVertexNormals();
+      hAdd(addCast(new THREE.Mesh(noseGeo, skinW)), 0, 1.413, .15);
       // Cropped hair, so the bare head reads as a head before the helmet is bought
       // (it sits inside the crown once it is).
-      bareAdd(rmesh(0.265, 0.07, 0.285, hairW, 0.035), 0, 1.525, 0.01);
-      bareAdd(rmesh(0.225, 0.085, 0.035, hairW, 0.016), 0, 1.47, -0.117);                          // back of the crop
-      for (const sx of [-1, 1]) bareAdd(rmesh(0.016, 0.06, 0.11, hairW, 0.007), sx * 0.12, 1.46, -0.03);
+      bareFaceDetails.add(buildMarineHair(THREE,hairW));
       // The hat — the bare-head look, hidden under the helmet. CL-97: the 8-point cover (field cap: crown, band,
       // brim), a boonie, or a ballcap worn forwards or backwards. All take the cap's camo.
       const hatG = new THREE.Group();
@@ -17324,21 +17393,34 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       gearParts.bareHead.push(hatG);
       const hatAt = (grp, mesh, x, y, z, rx = 0, ry = 0, rz = 0) => put(grp, mesh, x, y, z, rx, ry, rz);
       const cover = dress.hats.cover = part(hatG);
-      hatAt(cover, rmesh(0.29, 0.1, 0.31, capW, 0.05), 0, 1.565, 0.0);                             // crown
-      hatAt(cover, rmesh(0.3, 0.04, 0.32, capBandW, 0.012), 0, 1.515, 0.0);                        // band
-      hatAt(cover, rmesh(0.26, 0.018, 0.14, capW, 0.006), 0, 1.51, 0.2, 0.12);                     // brim
-      hatAt(cover, rmesh(0.07, 0.03, 0.02, patchInk, 0.004), 0, 1.57, 0.158);                      // cap badge
+      const crown=(rings,mat,n=24)=>{
+        const p=[],uv=[],ix=[];
+        for(const[y,rx,rz]of rings)for(let j=0;j<=n;j++){const a=(j/n+.0625)*Math.PI*2;p.push(Math.sin(a)*rx,y,Math.cos(a)*rz);uv.push(j/n,y*4);}
+        for(let r=0;r<rings.length-1;r++)for(let j=0;j<n;j++){const a=r*(n+1)+j,b=a+n+1;ix.push(a,a+1,b,a+1,b+1,b);}
+        const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(p,3));geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));geo.setIndex(ix);geo.computeVertexNormals();return addCast(new THREE.Mesh(geo,mat));
+      };
+      const bill=(w,d)=>{
+        const s=new THREE.Shape();s.moveTo(-w*.5,0);s.quadraticCurveTo(-w*.56,d*.7,-w*.34,d);s.quadraticCurveTo(0,d*1.13,w*.34,d);s.quadraticCurveTo(w*.56,d*.7,w*.5,0);s.closePath();
+        const edge=s.getPoints(12);edge.pop();const v=[],ix=[],n=edge.length;
+        for(const h of[0,.008]){v.push(0,d*.45,h);for(const p of edge)v.push(p.x,p.y,h);}
+        for(let j=0;j<n;j++){const a=j+1,b=(j+1)%n+1,q=n+1;ix.push(0,b,a,q,q+a,q+b,a,b,q+a,b,q+b,q+a);}
+        const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(v,3));geo.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(v.length/3*2),2));geo.setIndex(ix);const p=geo.attributes.position;
+        for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getY(i),t=p.getZ(i);p.setXYZ(i,x,1.536-t-.012*(x/(w*.5))**2-.025*z/d,z+.098);}geo.computeVertexNormals();return addCast(new THREE.Mesh(geo,capW));
+      };
+      cover.add(crown([[1.505,.145,.151],[1.535,.146,.152],[1.61,.137,.144],[1.628,.122,.13],[1.628,0,0]],capW,8));
+      cover.add(crown([[1.508,.147,.153],[1.532,.148,.154]],capBandW,8),bill(.255,.142));
+      hatAt(cover,rmesh(.045,.026,.006,patchInk,.003),0,1.573,.145);
       const boonie = dress.hats.boonie = part(hatG);
-      hatAt(boonie, cyl(0.148, 0.156, 0.1, capW, 16), 0, 1.575, 0.005);                            // crown
-      hatAt(boonie, rmesh(0.22, 0.02, 0.24, capW, 0.01), 0, 1.626, 0.005);                         // flat top
-      hatAt(boonie, cyl(0.16, 0.16, 0.032, capBandW, 16), 0, 1.54, 0.005);                         // foliage band
-      hatAt(boonie, cyl(0.255, 0.27, 0.014, capW, 22), 0, 1.522, 0.012, 0.05);                      // the wide brim, drooping a touch
+      boonie.add(crown([[1.511,.15,.161],[1.55,.149,.158],[1.612,.135,.145],[1.626,.111,.12],[1.629,0,0]],capW));
+      boonie.add(crown([[1.524,.153,.164],[1.548,.153,.163]],capBandW));
+      const brimGeo=new THREE.RingGeometry(.146,.238,32,4),brimP=brimGeo.attributes.position;
+      for(let i=0;i<brimP.count;i++){const x=brimP.getX(i),z=brimP.getY(i),t=(Math.hypot(x,z)-.146)/.092,a=Math.atan2(x,z);brimP.setXYZ(i,x,1.512-.025*t+.01*Math.sin(3*a)*t,z*1.1);}brimGeo.computeVertexNormals();capW.side=THREE.DoubleSide;boonie.add(addCast(new THREE.Mesh(brimGeo,capW)));
+      for(const sx of[-1,1])for(const z of[-.055,.055])hatAt(boonie,cyl(.009,.009,.006,patchInk,8),sx*.146,1.57,z,0,0,Math.PI/2);
       for (const sx of [-1, 1]) hatAt(boonie, rmesh(0.006, 0.12, 0.006, strapMat, 0.002), sx * 0.142, 1.46, 0.03, 0, 0, sx * -0.12);   // chin cord
       const ballcap = (grp) => {
-        hatAt(grp, rmesh(0.272, 0.11, 0.292, capW, 0.07), 0, 1.56, 0.0);                            // crown, rounder than the cover
-        hatAt(grp, rmesh(0.2, 0.08, 0.02, capW, 0.02), 0, 1.565, 0.14);                             // front panel
-        hatAt(grp, rmesh(0.03, 0.016, 0.03, capBandW, 0.008), 0, 1.62, 0.0);                        // button
-        hatAt(grp, rmesh(0.21, 0.014, 0.14, capW, 0.007), 0, 1.522, 0.205, 0.2);                    // the curved bill
+        grp.add(crown([[1.511,.135,.147],[1.551,.137,.147],[1.59,.12,.127],[1.625,.074,.077],[1.641,0,0]],capW),bill(.224,.155));
+        hatAt(grp,cyl(.012,.013,.008,capBandW,8),0,1.642,0);
+        for(let j=0;j<6;j++){const a=j/6*Math.PI*2,points=[[.132,1.516],[.133,1.55],[.115,1.59],[.07,1.627],[.007,1.642]].map(([r,y])=>new THREE.Vector3(Math.sin(a)*r,y,Math.cos(a)*r*1.08));grp.add(addCast(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),12,.0012,3,false),capBandW)));}
         hatAt(grp, rmesh(0.07, 0.03, 0.012, strapMat, 0.004), 0, 1.53, -0.148);                     // strap at the back
       };
       ballcap(dress.hats.ballcap = part(hatG));
@@ -17355,15 +17437,20 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       for (const sx of [-1, 1]) {
         hlAdd(rmesh(0.025, 0.035, 0.22, nvgMat, 0.008), sx * 0.198, 1.5, 0.01);              // ARC rails
         hlAdd(rmesh(0.018, 0.1, 0.03, strapMat, 0.006), sx * 0.15, 1.38, 0.05);             // chin strap
+        const chinTop = new THREE.Vector3(sx * 0.15, 1.34, 0.05), chinEnd = new THREE.Vector3(sx * 0.06, 1.25, 0.135);
+        const chinMid = chinTop.clone().add(chinEnd).multiplyScalar(0.5);
+        const chin = hlAdd(rmesh(0.018, chinTop.distanceTo(chinEnd), 0.025, strapMat, 0.005), chinMid.x, chinMid.y, chinMid.z);
+        chin.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), chinEnd.sub(chinTop).normalize());
       }
+      hlAdd(rmesh(0.14, 0.022, 0.025, strapMat, 0.006), 0, 1.25, 0.135);
       hlAdd(rmesh(0.09, 0.055, 0.025, nvgMat, 0.01), 0, 1.575, 0.2);                           // NVG shroud
       hlAdd(rmesh(0.1, 0.012, 0.08, pouchMat, 0.004), 0, 1.65, 0.0);                           // velcro crown patch
       hlAdd(rmesh(0.14, 0.08, 0.05, pouchMat, 0.015), 0, 1.53, -0.215);                        // counterweight pouch
-      hlAdd(rmesh(0.02, 0.02, 0.02, new THREE.MeshStandardMaterial({ color: 0x2a3a2a, emissive: 0x33ff55, emissiveIntensity: 0.6 }), 0.004), 0, 1.6, -0.19);  // IR strobe
+      hlAdd(rmesh(0.02, 0.02, 0.02, new THREE.MeshStandardMaterial({ color: 0x2a3a2a, emissive: 0x33ff55, emissiveIntensity: 0.6 }), 0.004), 0, 1.583, -0.169);  // seated IR strobe
 
       // NVG mount + dual tubes (pivot group: flip down over eyes)
       const nvgPivot = new THREE.Group();
-      nvgPivot.position.set(0, 1.58 - HEAD_PIVOT_Y, 0.1);
+      nvgPivot.position.set(0, 1.58 - HEAD_PIVOT_Y, 0.218);
       headG.add(nvgPivot);
       // Deployed is the reference pose, not stowed. The tubes used to be placed for
       // the stowed position and then swung 66 degrees to "flip down", which pointed
@@ -17371,37 +17458,40 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // where they belong with the goggles ON — lenses at eye height (the eye slits
       // are at head-local y 0.20, z 0.18), tubes lying along +Z so they look where he
       // looks — and stowing rotates the whole assembly UP onto the helmet brow.
-      put(nvgPivot, rmesh(0.12, 0.06, 0.1, nvgMat, 0.012), 0, 0.02, 0.0);
-      put(nvgPivot, rmesh(0.035, 0.17, 0.045, nvgMat, 0.01), 0, -0.07, 0.08, -0.42);
-      put(nvgPivot, rmesh(0.16, 0.04, 0.05, nvgMat, 0.012), 0, -0.14, 0.09);                 // bridge
+      // Rhino linkage: shroud axle, paired lifting arms, sliding shoe, bridge.
+      const link=(parent,a,b,w,d,mat)=>{const av=new THREE.Vector3(...a),bv=new THREE.Vector3(...b),mid=av.clone().add(bv).multiplyScalar(.5),mesh=put(parent,rmesh(w,av.distanceTo(bv),d,mat,.003),mid.x,mid.y,mid.z);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),bv.sub(av).normalize());return mesh;};
+      put(nvgPivot,cyl(.017,.017,.078,nvgMat,10),0,0,0,0,0,Math.PI/2);
+      for(const sx of[-1,1]){
+        link(nvgPivot,[sx*.027,0,0],[sx*.027,-.089,.035],.012,.02,nvgMat);
+        put(nvgPivot,cyl(.013,.013,.012,buckleMat,10),sx*.034,-.089,.035,0,0,Math.PI/2);
+        link(nvgPivot,[sx*.025,-.089,.035],[sx*.018,-.13,.016],.012,.018,nvgMat);
+      }
+      put(nvgPivot,rmesh(.043,.036,.057,nvgMat,.005),0,-.128,.027);
+      put(nvgPivot,rmesh(.148,.023,.033,nvgMat,.006),0,-.14,.035);
       for (const sx of [-0.055, 0.055]) {
-        put(nvgPivot, cyl(0.035, 0.04, 0.12, nvgMat, 12), sx, -0.16, 0.10, Math.PI / 2);   // cylinder axis along +Z: straight ahead
-        put(nvgPivot, cyl(0.042, 0.042, 0.025, goggleMat, 12), sx, -0.16, 0.155, Math.PI / 2);   // eyepiece ring
-        put(nvgPivot, addCast(new THREE.Mesh(new THREE.CircleGeometry(0.028, 12), lensMat)), sx, -0.16, 0.169);
+        put(nvgPivot,cyl(.033,.038,.12,nvgMat,12),sx,-.16,.055,Math.PI/2);
+        put(nvgPivot,cyl(.04,.04,.022,goggleMat,12),sx,-.16,.109,Math.PI/2);
+        put(nvgPivot,cyl(.037,.037,.02,goggleMat,12),sx,-.16,-.006,Math.PI/2);
+        put(nvgPivot,addCast(new THREE.Mesh(new THREE.CircleGeometry(.028,12),lensMat)),sx,-.16,.121);
       }
       const NVG_STOW_RX = -1.35;   // swung up and back, sitting on the helmet front
       nvgPivot.rotation.x = NVG_STOW_RX;
       gearParts.nvg.push(nvgPivot);
 
-      // Headset: ear cups, band, boom mic. The ear defenders come with the helmet (D-64): the band
-      // runs under its shell, so a bare head never wears them.
+      // Rail-mounted ear defenders: sealed cushions, pivot hubs and two yoke arms.
       for (const sx of [-1, 1]) {
-        hlAdd(rmesh(0.065, 0.11, 0.1, nvgMat, 0.03), sx * 0.21, 1.41, 0.0);
-        hlAdd(rmesh(0.018, 0.075, 0.065, padMat, 0.01), sx * 0.245, 1.41, 0.0);
+        const cushion=hlAdd(addCast(new THREE.Mesh(new THREE.SphereGeometry(1,12,10),padMat)),sx*.157,1.398,-.003);cushion.scale.set(.021,.059,.045);
+        const cup=hlAdd(addCast(new THREE.Mesh(new THREE.SphereGeometry(1,12,10),pouchMat)),sx*.18,1.399,-.003);cup.scale.set(.026,.056,.043);
+        hlAdd(cyl(.016,.016,.016,nvgMat,10),sx*.21,1.488,-.033).rotation.z=Math.PI/2;
+        for(const z of[-.033,.028]){const arm=link(headG,[sx*.214,1.488-HEAD_PIVOT_Y,-.033],[sx*.204,1.41-HEAD_PIVOT_Y,z],.008,.009,nvgMat);gearParts.helmet.push(arm);}
+        for(let k=0;k<3;k++)hlAdd(rmesh(.004,.004,.021,nvgMat,.001),sx*.205,1.373+k*.008,.001);
       }
-      hlAdd(rmesh(0.4, 0.028, 0.028, nvgMat, 0.01), 0, 1.5, -0.05);
-      const micBoom = hlAdd(rmesh(0.018, 0.018, 0.13, nvgMat, 0.006), 0.175, 1.34, 0.12);
-      micBoom.rotation.y = -0.4;
-      hlAdd(rmesh(0.028, 0.028, 0.028, nvgMat, 0.01), 0.13, 1.33, 0.18);
+      const boomPath=new THREE.CatmullRomCurve3([[.188,1.38,.018],[.18,1.342,.075],[.13,1.326,.171],[.061,1.329,.193]].map(([x,y,z])=>new THREE.Vector3(x,y-HEAD_PIVOT_Y,z)));
+      const micBoom=addCast(new THREE.Mesh(new THREE.TubeGeometry(boomPath,14,.004,5,false),nvgMat));headG.add(micBoom);gearParts.helmet.push(micBoom);
+      hlAdd(rmesh(.043,.024,.023,nvgMat,.011),.061,1.329,.193);
 
-      // Goggles stowed up on the helmet.
-      const gogFrame = hlAdd(rmesh(0.3, 0.07, 0.07, goggleMat, 0.025), 0, 1.6, 0.16);
-      gogFrame.rotation.x = -0.45;
-      for (const sx of [-0.07, 0.07]) {
-        const lens = hlAdd(rmesh(0.1, 0.05, 0.03, lensMat, 0.01), sx, 1.6, 0.195);
-        lens.rotation.x = -0.45;
-      }
-      hlAdd(rmesh(0.4, 0.025, 0.012, strapMat, 0.005), 0, 1.585, 0.0).rotation.x = -0.1;      // goggle strap round the shell
+      // Selected protective eyewear remains in dress.eyes; the crown stays clear
+      // for the rhino linkage rather than carrying a second floating goggle set.
 
       // Face (CL-32, Jerry): what shows above the mask when he has no helmet or goggles on.
       // Eyes with whites, brown irises, pupils and a catchlight, set in shaded sockets under
@@ -17415,21 +17505,20 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const hRot = (mesh, rx, ry, rz) => { mesh.rotation.set(rx, ry, rz); return mesh; };
       for (const sx of [-1, 1]) {
         const ex = sx * 0.06;
-        hAdd(rmesh(0.074, 0.046, 0.012, skinShade, 0.01), ex, 1.419, 0.144);                  // socket shadow
-        hAdd(rmesh(0.05, 0.024, 0.012, jawPrint, 0.009), ex, 1.419, 0.148);                    // white of the eye
-        hAdd(rmesh(0.022, 0.022, 0.008, irisW, 0.008), ex - sx * 0.003, 1.419, 0.153);         // iris (looking a touch inward)
-        hAdd(new THREE.Mesh(rbox(0.011, 0.011, 0.006, 0.004), eyeMat), ex - sx * 0.003, 1.419, 0.156);   // pupil
-        hAdd(new THREE.Mesh(rbox(0.005, 0.005, 0.003, 0.001), glintMat), ex - sx * 0.003 + 0.004, 1.423, 0.1585);  // catchlight
-        hRot(hAdd(rmesh(0.055, 0.009, 0.012, skinW, 0.004), ex, 1.4325, 0.152), 0.25, 0, 0);  // heavy upper lid
-        hAdd(rmesh(0.052, 0.008, 0.01, skinShade, 0.004), ex, 1.4045, 0.151);                  // under the eye
-        hRot(hAdd(rmesh(0.065, 0.012, 0.016, hairW, 0.005), ex + sx * 0.004, 1.4545, 0.162), 0, 0, sx * 0.16);   // brow
-        hAdd(rmesh(0.045, 0.017, 0.019, skinW, 0.008), sx * 0.082, 1.398, 0.138);               // cheekbone
-        bareAdd(rmesh(0.018, 0.06, 0.035, hairW, 0.006), sx * 0.127, 1.405, 0.045);             // sideburn
+        hAdd(rmesh(0.06, 0.033, 0.01, skinShade, 0.009), ex, 1.419, 0.144);                    // restrained socket shadow
+        hAdd(rmesh(0.044, 0.019, 0.01, jawPrint, 0.008), ex, 1.419, 0.148);                   // white of the eye
+        hAdd(rmesh(0.018, 0.018, 0.007, irisW, 0.007), ex - sx * 0.002, 1.419, 0.153);        // iris
+        hAdd(new THREE.Mesh(rbox(0.009, 0.01, 0.005, 0.003), eyeMat), ex - sx * 0.002, 1.419, 0.156);  // pupil
+        hAdd(new THREE.Mesh(rbox(0.003, 0.003, 0.002, 0.001), glintMat), ex - sx * 0.002 + 0.003, 1.422, 0.159); // catchlight
+        hRot(hAdd(rmesh(0.049, 0.008, 0.01, skinW, 0.0035), ex, 1.43, 0.152), 0.2, 0, 0);   // upper lid
+        hAdd(rmesh(0.044, 0.005, 0.007, skinShade, 0.0025), ex, 1.4075, 0.15);                // lower lid
+        hRot(hAdd(rmesh(0.055, 0.009, 0.011, hairW, 0.004), ex + sx * 0.002, 1.45, 0.153), 0, 0, sx * 0.1); // brow
+        hAdd(rmesh(0.03, 0.009, 0.008, skinW, 0.004), sx * 0.082, 1.398, 0.13);               // cheekbone blends into the head
+        // The medium fade supplies the temple transition; no separate sideburn block.
         bareAdd(rmesh(0.012, 0.035, 0.02, skinShade, 0.005), sx * 0.142, 1.4, 0.0);               // inner ear
       }
-      hAdd(rmesh(0.025, 0.045, 0.026, skinW, 0.01), 0, 1.428, 0.158);                           // nose bridge
-      hAdd(rmesh(0.02, 0.012, 0.012, skinShade, 0.004), 0, 1.44, 0.158);                       // frown line between the brows
-      hRot(hAdd(rmesh(0.006, 0.036, 0.004, scarMat, 0.002), -0.076, 1.449, 0.171), 0, 0, 0.3);   // scar through the left brow
+      hAdd(rmesh(0.01, 0.008, 0.007, skinShade, 0.003), 0, 1.441, 0.151);                    // frown crease
+      hRot(hAdd(rmesh(0.004, 0.027, 0.003, scarMat, 0.0015), -0.076, 1.445, 0.16), 0, 0, 0.3); // scar through the left brow
       // Jerry: a fitted cloth balaclava, always worn by the player. Every
       // surface uses maskW so the entire hood follows the existing camo item.
       headG.add(buildBalaclava(THREE, maskW));
@@ -17647,7 +17736,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // the crouched stance (front foot flat, rear foot back on its ball, knees a touch wide); the crouch-walk step
     // (half step length, share of the cycle the foot is planted, swing lift); and the unarmed arms over the thighs.
     const CROUCH = { drop: 0.2, lean: 0.36, hipY: 0.62, L1: 0.27, L2: 0.25, ankleH: 0.104, toe: 0.174, heel: 0.107,
-      frontZ: 0.15, rearZ: -0.07, rearPitch: 0.45, splay: 0.09, step: 0.2, stance: 0.62, lift: 0.07,
+      frontZ: 0.15, rearZ: -0.07, rearPitch: 0.45, splay: 0.09, step: 0.25, stance: 0.55, lift: 0.045, maxCad: 15,
       armFwd: 0.1, armBend: 0.3, armOut: 0.06 };
 
     function updateTacticalHud() {
@@ -17656,7 +17745,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       tacticalLineEl.textContent =
         'NVG ' + (!g.nvg ? '—' : (nvgDown ? (isNight ? 'ON' : 'down') : 'off')) +
         ' · Laser ' + (!g.laser ? '—' : (lasersEnabled ? 'ON' : 'off')) +
-        ' · Light ' + (!g.flashlight ? '—' : (flashlightOn ? 'ON' : 'off'));
+        ' · Light ' + (!g.flashlight ? '—' : (flashlightActive() ? 'ON' : 'off'));
     }
 
     // Tactical gear is bought, not issued. Toggling something you don't own just
@@ -17678,8 +17767,12 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     scene.add(flashlight);
     scene.add(flashlight.target);
     const _flashDir = new THREE.Vector3();
+    function flashlightActive() {
+      return flashlightOn && gearOwned.flashlight && gameStarted && !gameOver && !won &&
+        !unarmed && weaponMount.visible;
+    }
     function updateFlashlight() {
-      const on = flashlightOn && gearOwned.flashlight && gameStarted && !gameOver && !won;
+      const on = flashlightActive();
       // Brighter when it's actually dark; barely-there in daylight so it doesn't
       // bleach the ground in front of you at noon.
       flashlight.intensity = on ? (isNight ? 42 : 6) : 0;
@@ -17691,7 +17784,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       flashlight.target.updateMatrixWorld();
     }
     function toggleFlashlight() {
-      if (!gameStarted || gameOver || won) return;
+      if (!gameStarted || gameOver || won || unarmed) return;
       if (!needGear('flashlight', 'Flashlight')) return;
       flashlightOn = !flashlightOn;
       AudioSys.nvgClick();
@@ -17975,8 +18068,11 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         POSE.strideDir = _ease(POSE.strideDir, backpedal ? -1 : 1, dt, 10);
         lowerYawTarget = Math.max(-1.05, Math.min(1.05, rel));
 
-        // GB-125: crouched, quicker shorter steps paced by the ground speed (the feet are planted by "Crouch legs").
-        const cadence = running ? 14 : 9.5 + (Math.max(5, Math.min(13, spd * 3.4)) - 9.5) * POSE.crouch;
+        // GB-125: crouched, the step rate is set so a planted foot moves back exactly at the ground speed (no slide:
+        // the foot covers 2 x step in the stance share of the cycle), capped at maxCad so it never turns into a scurry.
+        // Above maxCad * 2 * step / (2 PI * stance) = 2.2 m/s the feet would slide by the rest; PHYS.crouch is 2.2 (GB-126), so a plain crouch-walk does not slide.
+        const crouchCad = Math.max(4, Math.min(CROUCH.maxCad, spd * Math.PI * CROUCH.stance / CROUCH.step));
+        const cadence = running ? 14 : 9.5 + (crouchCad - 9.5) * POSE.crouch;
         const stride = running ? 0.7 : 0.5 - 0.2 * POSE.crouch;
         walkPhase += dt * cadence * (backpedal ? -1 : 1);
         const p = walkPhase;
@@ -18416,7 +18512,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     weaponMount.add(chainsaw);
 
     const knife = makeKnife();
-    knife.position.set(0.0, -0.05, 0.05);
+    knife.position.set(0.0, 0.0, 0.04);   // GB-130: = KNIFE_REST_POS
     knife.scale.setScalar(1.15);
     (marine.userData.gripL || weaponMount).add(knife); // left hand
     // Machete upgrade: bought once at the kiosk, replaces the knife for the run.
@@ -18443,6 +18539,82 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     }
 
     const weaponMeshes = { minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, sniper, launcher, flamer, chainsaw };
+    // GB-130 (Jerry): each gun at its real size for this marine. He stands 1.655 units to the crown
+    // (no helmet), a 1.80 m man, so a metre is 0.919 units (MARINE_UPM). len = the model's overall
+    // length (butt to muzzle, visible parts) at its old in-hand scale, in units; m = the real overall
+    // length of a generic gun of its class. Each model is scaled once by m * MARINE_UPM / len, here,
+    // before the off-hand and carry copies are cloned, so akimbo, holsters and the armory match.
+    // Builders untouched; holdWeapon reads the gun's world scale, so the grips, the forend, the
+    // shoulder butt, the eye point and the muzzle all follow. The minigun keeps its size (Jerry).
+    // sizeK lets the muzzle flash and the laser keep their own world size (fireFlash, updateLasers).
+    // look: set by eye in the game, against the Uzi (Jerry: the Uzi reads right). This marine is a
+    // stylised one: gloves ~1.25x a real hand, broad armoured shoulders, a chunky Uzi; at their bare
+    // real lengths the slim guns read toy-sized beside him. look scales each gun up until its grip
+    // fills the glove and its bulk sits with the Uzi's: the slim pistols most, the chunky shotguns,
+    // launcher, flamer and saw least. So a gun's length on him is m * look metres.
+    const MARINE_UPM = 1.655 / 1.80;
+    const WEAPON_SIZE = {
+      pistol:   { len: 0.431, m: 0.195, look: 1.45 },   // service pistol 0.19-0.20 m
+      revolver: { len: 0.538, m: 0.27,  look: 1.4 },    // 4-6 inch revolver 0.25-0.30 m
+      uzi:      { len: 0.725, m: 0.47,  look: 1.0 },    // compact SMG, stock folded (the reference)
+      m4:       { len: 1.423, m: 0.84,  look: 1.35 },   // carbine, stock extended
+      ak:       { len: 1.464, m: 0.88,  look: 1.35 },   // AK-pattern rifle
+      aa12:     { len: 1.393, m: 0.96,  look: 1.2 },    // drum-fed auto shotgun
+      shotgun:  { len: 1.376, m: 1.0,   look: 1.25 },   // pump shotgun
+      sniper:   { len: 1.608, m: 1.15,  look: 1.25 },   // bolt sniper 1.1-1.2 m
+      launcher: { len: 1.091, m: 0.75,  look: 1.2 },    // 40 mm revolver launcher 0.7-0.8 m
+      flamer:   { len: 1.094, m: 0.95,  look: 1.05 },   // hand-held flame gun
+      chainsaw: { len: 1.356, m: 0.85,  look: 1.2 }     // saw on a 16-18 inch bar
+    };
+    const weaponSizeFactor = (k) => { const s = WEAPON_SIZE[k]; return s ? s.m * (s.look || 1) * MARINE_UPM / s.len : 1; };
+    for (const k in WEAPON_SIZE) { const f = weaponSizeFactor(k); weaponMeshes[k].scale.multiplyScalar(f); weaponMeshes[k].userData.sizeK = f; }
+    // The blade group holds two models, each sized on its own: issue knife 0.30 m, machete 0.62 m (look as above).
+    const BLADE_SIZE = { knifeModel: { len: 0.603, m: 0.30, look: 1.3 }, macheteModel: { len: 0.92, m: 0.62, look: 1.15 } };
+    for (const k in BLADE_SIZE) if (knife.userData[k]) knife.userData[k].scale.multiplyScalar(BLADE_SIZE[k].m * BLADE_SIZE[k].look * MARINE_UPM / BLADE_SIZE[k].len);
+    // Stowed (GB-130, Jerry): a gun on his back, in a holster or at the hip is the same gun he holds, so
+    // it keeps its size there. The carry spots were sized for the old oversized models (0.68-0.85 on
+    // the spot, a sling shrinking some again by CARRY_SLING_SCALE) and would shrink the new sizes a
+    // second time. fitCarriedGuns (end of applyCarryPlan) sizes each copy to s x the gun in his hand
+    // and moves it inside its spot ([on his +x side, on his -x side], spot units, measured in the game)
+    // so it lies snug against the pack, the carrier or the leg: no air, no clipping (t188 measures it).
+    // sling: the slung primaries; holster: the secondaries on the pack (holsterBand: the same when the
+    // shell bandolier or the 40 mm belt crosses the pack under them); hip: the drop-leg pistol.
+    // The minigun has no entry: it keeps its old carry exactly (Jerry). Spots, shells, straps untouched.
+    const CARRY_FIT = {
+      pistol:   { s: 1 },
+      revolver: { s: 1, holster: [[0.004, -0.008, 0], [-0.004, -0.007, 0]], holsterBand: [[0.006, -0.011, -0.001], [-0.005, -0.01, -0.001]] },
+      uzi:      { s: 1, holster: [[-0.001, -0.009, 0.001], [0.002, -0.034, 0.002]], holsterBand: [[0.003, 0.04, -0.003], [0.001, -0.02, 0.001]] },
+      m4:       { s: 1, sling: [[-0.034, -0.03, -0.004], [0.002, -0.001, 0]] },
+      ak:       { s: 1, sling: [[0.008, 0.008, 0.001], [0.001, -0.001, 0]] },
+      aa12:     { s: 1, sling: [[0.021, 0.017, 0.003], [-0.021, 0.017, 0.003]] },
+      shotgun:  { s: 1, sling: [[-0.047, -0.038, -0.006], [0.041, -0.034, -0.005]] },
+      sniper:   { s: 1, sling: [[0.017, 0.016, 0.002], [0.002, -0.002, 0]] },
+      launcher: { s: 1, sling: [[-0.006, -0.004, -0.001], [0.021, -0.014, -0.003]] },
+      flamer:   { s: 1, sling: [[0.062, 0.057, 0.007], [0.004, -0.003, 0]] },
+      chainsaw: { s: 1, sling: [[0.004, 0.003, 0.001], [-0.016, 0.014, 0.002]] }
+    };
+    const _fitA = new THREE.Vector3(), _fitB = new THREE.Vector3();
+    function fitCarriedGun(spot, cls, band) {
+      const gun = spot && spot.gun, f = gun && CARRY_FIT[spot.kind];
+      if (!f) return;
+      let m = spot.g;
+      while (m && !(m.userData && m.userData.weaponMount)) m = m.parent;
+      const mount = m && m.userData.weaponMount;
+      let rel = 1;
+      if (mount) {
+        mount.updateWorldMatrix(true, false); spot.g.updateWorldMatrix(true, false);
+        rel = mount.getWorldScale(_fitA).x / (spot.g.getWorldScale(_fitB).x || 1);
+      }
+      gun.scale.setScalar(rel * (f.s || 1));
+      const set = (band && f[cls + 'Band']) || f[cls], o = set && set[spot.g.position.x < 0 ? 1 : 0];
+      if (o) gun.position.set(o[0], o[1], o[2]); else gun.position.set(0, 0, 0);
+    }
+    function fitCarriedGuns(rig) {
+      rig.slings.forEach((s) => fitCarriedGun(s, 'sling'));
+      const band = !!(rig.bandolier && rig.bandolier.visible) || !!(rig.belt40 && rig.belt40.visible);   // a chest band across the pack under them
+      for (const h of rig.holsters.concat(rig.pairs)) fitCarriedGun(h, 'holster', band);
+      fitCarriedGun(rig.hip, 'hip'); fitCarriedGun(rig.hipPair, 'hip');
+    }
     gunFurniture = registerGunFurniture(weaponMeshes);   // CL-97 part 2, before the offhand copies are cloned
     dressGuns(wardrobeState);
 
@@ -18631,19 +18803,24 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // screaming. It now sweeps a full half-circle at arm's length plus a body.
       chainsaw: { name: 'Chainsaw', maxAmmo: Infinity, reload: 0, interval: 0.12, damage: 14, spin: false, auto: true, melee: true, reach: 3.1, arc: 0.20 }   // GB-52: was 17 and arc -0.05
     };
-    // CU-69 (P-128, D-65): the M4, AK and AA-12 start on semi. The pistol's auto sear is a kiosk buy;
+    // CU-69 (P-128, D-65): the M4, AK and AA-12 have a fire selector (K). The pistol's auto sear is a kiosk buy;
     // on auto it climbs and wanders past the Uzi. Semi tightens the cone.
+    // GB-127 (Jerry, overrides D-65's "start on semi"): every gun that can fire full auto starts on AUTO. That covers
+    // a new run, a buy, a swap, a reload and a holster, and the pistol as soon as its sear is fitted. A K press is
+    // kept for that gun for the rest of the run, and only a new run puts them all back on AUTO. Guns with no auto
+    // (shotgun, revolver, sniper, launcher) are unchanged; the Uzi, minigun, flamer and chainsaw were always auto.
+    const FIRE_MODE_DEFAULT = 'auto';
     const FIRE_SELECT = { m4: 1, ak: 1, aa12: 1 };
     const PISTOL_AUTO_PRICE = 70;
     const PISTOL_AUTO_INTERVAL = 0.05;
     const PISTOL_AUTO_RECOIL = [0.016, 0.014, 0.05];
     let pistolAutoOwned = false;
     let pistolAutoFitted = false;   // CL-113: bought at the kiosk, fitted in the Armory
-    let fireMode = { m4: 'semi', ak: 'semi', aa12: 'semi', pistol: 'semi' };
+    let fireMode = { m4: FIRE_MODE_DEFAULT, ak: FIRE_MODE_DEFAULT, aa12: FIRE_MODE_DEFAULT, pistol: FIRE_MODE_DEFAULT };
     function selectorGun(w) { return !!FIRE_SELECT[w] || w === 'pistol'; }
     function weaponIsAuto(w) {
-      if (FIRE_SELECT[w]) return (fireMode[w] || 'semi') === 'auto';
-      if (w === 'pistol') return pistolAutoFitted && (fireMode.pistol || 'semi') === 'auto';
+      if (FIRE_SELECT[w]) return (fireMode[w] || FIRE_MODE_DEFAULT) === 'auto';
+      if (w === 'pistol') return pistolAutoFitted && (fireMode.pistol || FIRE_MODE_DEFAULT) === 'auto';
       const st = WEAPON_STATS[w];
       return !!(st && st.auto);
     }
@@ -18672,7 +18849,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     }
     function resetFireModes() {
       pistolAutoOwned = false; pistolAutoFitted = false;
-      fireMode = { m4: 'semi', ak: 'semi', aa12: 'semi', pistol: 'semi' };
+      fireMode = { m4: FIRE_MODE_DEFAULT, ak: FIRE_MODE_DEFAULT, aa12: FIRE_MODE_DEFAULT, pistol: FIRE_MODE_DEFAULT };
     }
     let ammoByWeapon = { minigun: 300, m4: 30, ak: 30, aa12: 20, pistol: 12, uzi: 32, shotgun: 8, revolver: 6, sniper: 5, launcher: 6, flamer: 60, chainsaw: Infinity };
     let grenades = 3;
@@ -18901,6 +19078,17 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       src.traverse((o) => { if (!o.isLight) orig.push(o); });
       g.traverse((o) => copy.push(o));
       orig.forEach((o, i) => { if (fx.has(o) && copy[i]) copy[i].visible = false; });
+      // Display/carry copies are assembled even when created halfway through a
+      // reload or shot. Reset only the clone; fitted attachments stay fitted.
+      for (const [key, base] of [['mag', 'Mag'], ['ammoBox', 'Ammo'], ['slide', 'Slide'], ['bolt', 'Bolt'],
+        ['pump', 'Pump'], ['cylinder', 'Cylinder'], ['hammer', 'Hammer'], ['drum', 'Drum']]) {
+        const part = src.userData[key], clone = part && copy[orig.indexOf(part)];
+        if (!clone) continue;
+        const pos = src.userData['base' + base + 'Pos'], rot = src.userData['base' + base + 'Rot'];
+        if (pos) clone.position.copy(pos);
+        if (rot) clone.rotation.copy(rot);
+        clone.visible = true;
+      }
       g.userData = { carryKind: kind };
       g.visible = true;
       g.position.set(0, 0, 0); g.rotation.set(0, 0, 0);
@@ -18909,11 +19097,11 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       g.updateMatrixWorld(true);
       inv.copy(g.matrixWorld).invert();
       const lo = new THREE.Vector3(Infinity, Infinity, Infinity), hi = new THREE.Vector3(-Infinity, -Infinity, -Infinity);
-      g.traverse((o) => {
+      g.traverseVisible((o) => {
         if (!o.isMesh || !o.visible || !o.geometry || !o.geometry.attributes || !o.geometry.attributes.position) return;
         m.multiplyMatrices(inv, o.matrixWorld);
         const P = o.geometry.attributes.position;
-        for (let i = 0; i < P.count; i += 3) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(m); lo.min(v); hi.max(v); }
+        for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(m); lo.min(v); hi.max(v); }
       });
       const wrap = new THREE.Group();
       if (Number.isFinite(lo.x)) g.position.set(-(lo.x + hi.x) / 2 * g.scale.x, -(lo.y + hi.y) / 2 * g.scale.y, -(lo.z + hi.z) / 2 * g.scale.z);
@@ -18934,16 +19122,19 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // Built once, on the player's marine. Everything hangs off the joints makeMarine() already has, so it moves
     // with his torso, hips and the roll.
     function buildCarryRig(m) {
+      const rmesh=(w,h,d,mat,r)=>addCast(new THREE.Mesh(rbox(w,h,d,r),mat));
+      const put=(parent,mesh,x,y,z)=>{mesh.position.set(x,y,z);parent.add(mesh);return mesh;};
+      const strapMat=webMat,buckleMat=carryMats.mag;
       const ud = m.userData, torso = ud.torsoG, hipsG = ud.lowerBody;
       const tp = ud.torsoPivotY || 0.7;
       const T = (x, y, z) => new THREE.Vector3(x, y - tp, z);   // marine space into the torso's
-      const rig = { slings: [], holsters: [], copies: new Map(), sig: '', t: 0 };
+      const rig = { slings: [], holsters: [], pairs: [], copies: new Map(), sig: '', t: 0 };
       // Slung primaries: crossed over the pack, stock at the waist, muzzle up over the shoulder, sights facing out,
       // each on its sling (a strap along the gun).
       for (const sx of [1, -1]) {
         const g = new THREE.Group();
-        g.position.copy(T(sx * 0.03, 1.04, sx > 0 ? -0.36 : -0.405));
-        g.rotation.set(-Math.PI / 2, 0, -sx * 0.8, 'ZXY');
+        g.position.copy(T(sx * 0.29, 1.04, -0.255));
+        g.rotation.set(-Math.PI / 2, 0, -sx * 0.12, 'ZXY');
         g.scale.setScalar(0.85);
         torso.add(g);
         const sling = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.012, 0.9), webMat));
@@ -18958,11 +19149,25 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         g.rotation.set(-0.35, Math.PI, 0);
         g.scale.setScalar(0.8);
         torso.add(g);
-        const shell = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.1, 0.15), leatherMat));
+        const shell = rmesh(.085,.09,.23,leatherMat,.016);
         shell.position.set(0, -0.005, 0.05);   // over the muzzle half (the gun faces back, so +z is its muzzle end here)
         g.add(shell);
         rig.holsters.push({ g, shell, kind: null });
+        const extra = new THREE.Group(); torso.add(extra);
+        const extraShell = shell.clone(); extra.add(extraShell);
+        rig.pairs.push({ g: extra, shell: extraShell, kind: null });
       }
+      // Mounts follow the weapon, never the Armory slot or which pair was unlocked first.
+      rig.placeSecondary = (spot, side, lower = false) => {
+        spot.g.position.copy(T(lower ? side * 0.19 : side * 0.015, lower ? 0.76 : 1.01, lower ? -0.39 : (side > 0 ? -0.365 : -0.465)));
+        spot.g.rotation.set(lower ? Math.PI / 2 : -Math.PI / 2, 0, lower ? side * -.12 : side * .72, 'ZXY');
+        spot.g.scale.setScalar(lower ? 0.68 : 0.72);
+        if (spot.gun) spot.gun.rotation.z = side > 0 ? Math.PI / 2 : -Math.PI / 2;
+        spot.shell.scale.set(lower?1:.8,lower?1:.28,lower?1:.3);
+        spot.shell.position.set(lower?-side*.055:0,lower?0:.025,lower?.11:-.03);
+        if(!spot.loop){spot.loop=rmesh(.032,.02,.258,leatherMat,.006);spot.loop.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.15,-.21).normalize());spot.g.add(spot.loop);}
+        spot.loop.visible=lower;spot.loop.position.set(-side*.055,.075,-.105);
+      };
       const harness = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.032, 0.014), leatherMat));
       harness.position.copy(T(0, 0.95, -0.19));
       torso.add(harness);
@@ -18974,8 +19179,13 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       hip.scale.setScalar(0.8);
       hipsG.add(hip);
       rig.hip = { g: hip, kind: null };
+      const hipPair = new THREE.Group(); hipPair.position.set(0.228, 0.57, 0.035);
+      hipPair.rotation.set(Math.PI / 2, 0, -0.1); hipPair.scale.setScalar(0.8); hipsG.add(hipPair);
+      const hipShell = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.07, 0.15), leatherMat));
+      hipShell.position.set(0, 0, 0.05); hipPair.add(hipShell);
+      rig.hipPair = { g: hipPair, shell: hipShell, kind: null };
       // Magazine tops: the belt's two pouches first, then the carrier's three.
-      const MAG_AT = [[-0.115, 0.69, 0.155], [0.115, 0.69, 0.155], [-0.12, 0.99, 0.217], [0, 0.99, 0.217], [0.12, 0.99, 0.217]];
+      const MAG_AT = [[-0.125, 0.705, 0.142], [0.125, 0.705, 0.142], [-0.098, 0.975, 0.191], [0, 0.975, 0.191], [0.098, 0.975, 0.191]];
       rig.mags = carryInstanced(new THREE.BoxGeometry(0.045, 0.05, 0.024), carryMats.mag, CARRY_SLOTS.mags, (o, i) => o.position.copy(T(...MAG_AT[i])));
       torso.add(rig.mags);
       // Grenades on the right hip, below the belt.
@@ -18984,18 +19194,35 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // The shell bandolier (left shoulder to right hip) and the 40 mm belt (the other way): bands across the chest.
       const band = (dir) => {
         const g = new THREE.Group();
-        g.position.copy(T(0, 0.98, 0.2));
+        g.position.copy(T(0, 0.98, 0));
         g.rotation.z = dir * 0.62;
-        const strip = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.66, 0.012), webMat));
-        g.add(strip);
+        const points=[[0,-.33,.14],[0,-.27,.225],[0,0,.255],[0,.22,.22],[0,.25,.02],[0,.22,-.15],[0,0,-.25],[0,-.31,-.14],[0,-.35,0]];
+        const variants=[false,true].map(vest=>{
+          const v=new THREE.Group(),fit=bandolierFit(dir,vest,dir===1?.032:0);
+          v.add(addCast(new THREE.Mesh(webbingGeometry(THREE,points,.06,.007,{closed:true,segments:64,fit}),webMat)));
+          for(let j=0;j<10;j++){const y=-.27+j*.054,p=fit(new THREE.Vector3(0,y,.2));put(v,rmesh(.065,.012,.012,strapMat,.003),0,y,p.z+.008);}
+          const p=fit(new THREE.Vector3(0,-.235,.2));
+          put(v,rmesh(.074,.043,.015,buckleMat,.005),0,p.y,p.z+.01);
+          put(v,rmesh(.052,.026,.016,webMat,.003),0,p.y,p.z+.019);
+          mergeRigidMeshes(v,{},new Set());g.add(v);return v;
+        });
+        g.userData.fit=(vest,ammo)=>{
+          variants[0].visible=!vest;variants[1].visible=!!vest;
+          const fit=bandolierFit(dir,vest,dir===1?.032:0),o=new THREE.Object3D();
+          for(let i=0;i<ammo.instanceMatrix.count;i++){
+            o.position.copy(fit(new THREE.Vector3(0,dir===1?-.25+i*.09:-.27+i*.054,.2)));
+            o.position.z+=dir===1?.025:.016;o.rotation.z=Math.PI/2;o.updateMatrix();ammo.setMatrixAt(i,o.matrix);
+          }
+          ammo.instanceMatrix.needsUpdate=true;ammo.computeBoundingSphere();
+        };
         torso.add(g);
         return g;
       };
       rig.bandolier = band(-1);
-      rig.shells = carryInstanced(new THREE.CylinderGeometry(0.011, 0.011, 0.05, 8), carryMats.shell, CARRY_SLOTS.shells, (o, i) => { o.position.set(0, -0.27 + i * 0.06, 0.012); o.rotation.z = Math.PI / 2; });
+      rig.shells = carryInstanced(new THREE.CylinderGeometry(0.011, 0.011, 0.05, 8), carryMats.shell, CARRY_SLOTS.shells, (o, i) => { const y=-.27+i*.054;o.position.set(0,y,.27-.035*(y/.24)**2); o.rotation.z = Math.PI / 2; });
       rig.bandolier.add(rig.shells);
       rig.belt40 = band(1);
-      rig.rounds40 = carryInstanced(new THREE.CylinderGeometry(0.02, 0.02, 0.045, 10), carryMats.brass, CARRY_SLOTS.rounds40, (o, i) => { o.position.set(0, -0.25 + i * 0.1, 0.02); o.rotation.x = Math.PI / 2; });
+      rig.rounds40 = carryInstanced(new THREE.CylinderGeometry(0.02, 0.02, 0.045, 10), carryMats.brass, CARRY_SLOTS.rounds40, (o, i) => { const y=-.25+i*.09;o.position.set(0,y,.279-.035*(y/.24)**2);o.rotation.z=Math.PI/2; });
       rig.belt40.add(rig.rounds40);
       // On the pack: the minigun's belt boxes down its left side, the flamer's tanks across its top.
       rig.boxes = carryInstanced(new THREE.BoxGeometry(0.09, 0.1, 0.13), carryMats.box, CARRY_SLOTS.boxes, (o, i) => o.position.copy(T(-0.195, 0.9 + i * 0.11, -0.245)));
@@ -19009,11 +19236,15 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     const carrySuppressed = (kind) => !!(kind && weaponMeshes[kind] && weaponMeshes[kind].userData.suppressed);
     function carryCopy(rig, key, token) {
       const k = key + ':' + token;
-      if (!rig.copies.has(k)) rig.copies.set(k, carryGunCopy(token.split('+')[0]));   // copied as it is now, can and all
+      if (!rig.copies.has(k)) {
+        // One live appearance per mount; repeated workbench/camo changes must not grow the cache forever.
+        for (const old of rig.copies.keys()) if (old.startsWith(key + ':')) rig.copies.delete(old);
+        rig.copies.set(k, carryGunCopy(token.split('+')[0]));
+      }
       return rig.copies.get(k);
     }
     function mountCarryGun(rig, spot, key, kind) {
-      const token = kind ? kind + (carrySuppressed(kind) ? '+can' : '') : null;
+      const token = kind ? kind + '+' + gunLookKey(kind) : null;
       if (spot.token === token) return;
       if (spot.gun) spot.g.remove(spot.gun);
       spot.gun = token ? carryCopy(rig, key, token) : null;
@@ -19047,15 +19278,21 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const akimbo = o.akimbo !== undefined ? o.akimbo : akimboOn();
       let hide = inHand ? (akimbo ? 2 : 1) : 0;
       const take = (kind) => { if (hide > 0 && kind && kind === inHand) { hide--; return null; } return kind; };
+      const pairsOwned = o.dualOwned || dualOwned;
+      const copiesOf = (kind) => load.secondary.filter((k) => k === kind).length + (kind === 'pistol' ? 1 : 0);
+      const pairKinds = load.secondary.map((k, i) => k && pairsOwned[k] && copiesOf(k) < 2 && load.secondary.indexOf(k) === i ? k : null);
+      const hipExtra = pairsOwned.pistol && copiesOf('pistol') < 2 ? 'pistol' : null;
       const hip = take('pistol');
       const primary = load.primary.map(take), secondary = load.secondary.map(take);
+      const paired = pairKinds.map(take), hipPair = take(hipExtra);
       const carried = [...load.primary, ...load.secondary, 'pistol'].filter(Boolean);
       const magGuns = carried.filter((w) => isMagazineWeapon(w) && w !== 'minigun' && w !== 'flamer');
       const magFrac = magGuns.length ? magGuns.reduce((s, w) => s + carryFrac(w), 0) / magGuns.length : 0;
       const vest = o.vest !== undefined ? o.vest : !!gearOwned.vest;
       const has = (w) => carried.includes(w);
       return {
-        primary, secondary, hip, holsterOn: load.secondary.map(Boolean),
+        primary, secondary, paired, hip, hipPair, hipPairOn: !!hipExtra, pairOn: pairKinds.map(Boolean), holsterOn: load.secondary.map(Boolean),
+        packPair: pairKinds.findIndex(Boolean), secondaryKinds: load.secondary,
         mags: carryFill(magFrac, vest ? 5 : 2),
         grenades: Math.max(0, Math.min(CARRY_SLOTS.grenades, (o.grenades !== undefined ? o.grenades : grenades) | 0)),
         shells: has('shotgun') ? carryFill(carryFrac('shotgun'), CARRY_SLOTS.shells) : 0,
@@ -19063,22 +19300,30 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         boxes: has('minigun') ? carryFill(carryFrac('minigun'), CARRY_SLOTS.boxes) : 0,
         tanks: has('flamer') ? carryFill(carryFrac('flamer'), CARRY_SLOTS.tanks) : 0,
         bandolier: has('shotgun'), belt40: has('launcher'), vest,
-        cans: carried.filter(carrySuppressed)   // a can fitted since changes the copy
+        cans: carried.filter(carrySuppressed), looks: carried.map(gunLookKey)
       };
     }
     function applyCarryPlan(rig, p) {
       rig.slings.forEach((s, i) => { mountCarryGun(rig, s, 'sling' + i, p.primary[i]); s.sling.visible = !!p.primary[i]; });
       // A holster stays on him, empty, while its gun is in his hands.
       rig.holsters.forEach((h, i) => { mountCarryGun(rig, h, 'holster' + i, p.secondary[i]); h.g.visible = !!p.holsterOn[i]; });
+      rig.pairs.forEach((h, i) => { mountCarryGun(rig, h, 'pair' + i, p.paired[i]); h.g.visible = !!p.pairOn[i]; });
+      for (let i = 0; i < 2; i++) {
+        const kind=p.secondaryKinds[i],side=p.secondaryKinds.indexOf(kind)===i?1:-1;
+        rig.placeSecondary(rig.holsters[i],side,kind!=='uzi');
+        rig.placeSecondary(rig.pairs[i],-side,kind!=='uzi');
+      }
       rig.harness.visible = p.holsterOn.some(Boolean);
       mountCarryGun(rig, rig.hip, 'hip', p.hip);
+      mountCarryGun(rig, rig.hipPair, 'hipPair', p.hipPair); rig.hipPair.g.visible = p.hipPairOn;
       rig.mags.count = p.mags; rig.grenades.count = p.grenades;
       rig.shells.count = p.shells; rig.rounds40.count = p.rounds40;
       rig.boxes.count = p.boxes; rig.tanks.count = p.tanks;
       rig.bandolier.visible = p.bandolier; rig.belt40.visible = p.belt40;
-      // Over the carrier the bands and tops sit further out than on the shirt.
-      const z = p.vest ? 0.2 : 0.145;
-      rig.bandolier.position.z = z; rig.belt40.position.z = z + 0.004;
+      // Over the carrier the bands follow its pouches; on the shirt they follow the fabric.
+      rig.bandolier.userData.fit(p.vest,rig.shells);
+      rig.belt40.userData.fit(p.vest,rig.rounds40);
+      fitCarriedGuns(rig);   // GB-130: stowed guns at their in-hand size, snug in their spots
     }
     let carryRig = null;
     function updateCarriedGear(dt, force = false) {
@@ -19269,8 +19514,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         if (on) suppressor[w] = true; else delete suppressor[w];
         fitSuppressors();
       } else if (id === 'auto') {
-        pistolAutoFitted = on;
-        if (!on) fireMode.pistol = 'semi';
+        pistolAutoFitted = on;   // GB-127: unfitted it fires semi whatever fireMode says; fitted again, his last choice (AUTO by default)
       } else if (id === 'tank') {
         sawTankFitted = on;
         sawFuel = Math.min(sawFuel, sawFuelMax());
@@ -19288,37 +19532,43 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     const EXT_GROWS = { aa12: 1, minigun: 1, flamer: 1 };
     function gunExtLook(gun, w, on) {
       const ud = gun.userData, mag = ud.mag;
-      if (!mag) return;
-      if (EXT_GROWS[w]) {
-        if (!ud.magBaseScale) ud.magBaseScale = mag.scale.clone();
-        mag.scale.copy(ud.magBaseScale);
-        if (on) { if (w === 'aa12') mag.scale.multiplyScalar(1.22); else mag.scale.y *= 1.45; }
+      if (w === 'shotgun') {
+        if (!ud.tubeExt) {
+          const tube = new THREE.Group(), K = gunKit(tube);
+          K.lathe([[0, 0.816], [0.022, 0.816], [0.022, 0.914], [0.026, 0.914], [0.026, 0.931], [0, 0.931]], gunDark, { y: -0.04, seg: 12 });
+          tube.name = 'extendedTube'; gun.add(tube); ud.tubeExt = tube;
+        }
+        ud.tubeExt.visible = !!on;
         return;
       }
-      if (ud.extLook === undefined) {
-        ud.extLook = null;
-        // The magazine's own extent (it is a group of parts), in its own frame.
-        const lo = new THREE.Vector3(Infinity, Infinity, Infinity), hi = new THREE.Vector3(-Infinity, -Infinity, -Infinity), v = new THREE.Vector3();
-        mag.updateMatrixWorld(true);
-        const inv = new THREE.Matrix4().copy(mag.matrixWorld).invert(), m = new THREE.Matrix4();
-        mag.traverse((o) => {
+      if (!mag) return;
+      if (!ud.magStretch) {
+        // Keep the base-scale diagnostic used by the armory's existing checks.
+        ud.magBaseScale = mag.scale.clone();
+        // One continuous body, extended along its own insertion axis. The top
+        // remains fixed in the grip/feed tower instead of cloning another mag
+        // below the floorplate or expanding the whole assembly from its centre.
+        const shape = new THREE.Group(), tilt = w === 'uzi' ? 0.22 : w === 'pistol' ? 0.25 : 0;
+        shape.name = 'magazineBody'; shape.rotation.x = tilt;
+        const unrotate = new THREE.Matrix4().makeRotationX(-tilt);
+        for (const part of [...mag.children]) { shape.add(part); part.applyMatrix4(unrotate); }
+        mag.add(shape);
+        const hi = new THREE.Vector3(-Infinity, -Infinity, -Infinity), v = new THREE.Vector3();
+        shape.updateWorldMatrix(true, true);
+        const inv = new THREE.Matrix4().copy(shape.matrixWorld).invert(), m = new THREE.Matrix4();
+        shape.traverseVisible((o) => {
           if (!o.isMesh || !o.geometry) return;
           if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
           const bb = o.geometry.boundingBox; if (!bb) return;
           m.multiplyMatrices(inv, o.matrixWorld);
-          for (const x of [bb.min.x, bb.max.x]) for (const y of [bb.min.y, bb.max.y]) for (const z of [bb.min.z, bb.max.z]) { v.set(x, y, z).applyMatrix4(m); lo.min(v); hi.max(v); }
+          for (const x of [bb.min.x, bb.max.x]) for (const y of [bb.min.y, bb.max.y]) for (const z of [bb.min.z, bb.max.z]) { v.set(x, y, z).applyMatrix4(m); hi.max(v); }
         });
-        if (Number.isFinite(lo.y)) {
-          const h = hi.y - lo.y;
-          const ext = mag.clone(true);
-          ext.userData = {}; ext.name = 'extMagLook';
-          ext.position.set(0, lo.y + h * 0.06 - hi.y * 0.48, 0); ext.rotation.set(0, 0, 0); ext.scale.set(1, 0.48, 1);
-          ext.traverse((o) => { if (o.isMesh) o.castShadow = true; });
-          mag.add(ext);
-          ud.extLook = ext;
-        }
+        shape.userData.feedY = Number.isFinite(hi.y) ? hi.y : 0;
+        ud.magStretch = shape;
       }
-      if (ud.extLook) ud.extLook.visible = !!on;
+      const shape = ud.magStretch, scale = on ? (w === 'aa12' ? 1.22 : EXT_GROWS[w] ? 1.45 : 1.48) : 1;
+      shape.scale.set(w === 'aa12' ? scale : 1, scale, w === 'aa12' ? scale : 1);
+      shape.position.set(0, shape.userData.feedY * (1 - scale), 0).applyEuler(shape.rotation);
     }
     function gunHeavyLook(gun, w, on) {
       const ud = gun.userData, H = HEAVY_LOOK[w];
@@ -21406,21 +21656,70 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         sign.position.set(0, 2.68, 0.06); cif.add(sign);
         house.lockSigns = [sign.material];   // CU-82: tinted red at night
       }
-      // --- CL-103: the Armory's window beside the CIF: a steel hatch with a gun rack inside (rifles upright on pegs,
-      // two pistols on hooks) and a stencilled plate over it. E during prep opens the Armory (GP-78's panel).
+      // GP-125: a full-size issue cabinet. GP-126 adds a wall collar and mesh service screen;
+      // the centered sign and opening share the cabinet axis. Approach coordinates remain unchanged.
       {
         const arm = new THREE.Group(); arm.name = 'hq-armory'; arm.position.set(W + 0.02, 0, HQ_ARMORY_Z); arm.rotation.y = Math.PI / 2; g.add(arm);
-        box(1.22, 1.14, 0.02, new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 1 }), 0, 1.65, 0.03, arm);   // the dark back
-        box(1.5, 0.16, 0.3, steelDark, 0, 2.3, 0.05, arm);                                    // lintel
-        box(1.5, 0.14, 0.42, hazard, 0, 1.02, 0.12, arm);                                     // counter
-        for (const sx of [-0.68, 0.68]) box(0.14, 1.42, 0.3, steelDark, sx, 1.63, 0.05, arm);
-        box(1.1, 0.04, 0.05, steel, 0, 1.2, 0.06, arm);                                       // the rack's foot rail
-        box(1.1, 0.04, 0.05, steel, 0, 2.02, 0.06, arm);                                      // and its top rail
-        const gunDarkM = new THREE.MeshStandardMaterial({ color: 0x1c1e20, roughness: 0.55, metalness: 0.5 });
-        const woodM = new THREE.MeshStandardMaterial({ color: 0x6b4526, roughness: 0.7 });
-        // CL-113 (Jerry): the rack holds the real guns he keeps in the Armory, with their attachments
-        // (refreshArmoryRack): long guns upright on the pegs, the small ones on the hooks under the lintel.
-        void gunDarkM; void woodM;
+        const back = new THREE.MeshStandardMaterial({ color: 0x333e40, roughness: 0.88, metalness: 0.15, emissive: 0x162023, emissiveIntensity: 0.22 });
+        const rail = new THREE.MeshStandardMaterial({ color: 0x737d79, roughness: 0.6, metalness: 0.45 });
+        // Stand clear of the HQ wall piers; no world geometry or approach coordinates move.
+        box(4.12, 3.02, 0.08, back, 0.76, 2.28, 0.32, arm);
+        box(4.26, 0.16, 0.54, steelDark, 0.76, 3.86, 0.51, arm);
+        box(4.26, 0.12, 0.6, steelDark, 0.76, 0.78, 0.51, arm);
+        box(4.16, 0.055, 0.035, hazard, 0.76, 0.82, 0.825, arm);
+        for (const sx of [-1.31, 2.83]) box(0.12, 3.02, 0.54, steelDark, sx, 2.30, 0.51, arm);
+        for (const y of [1.04, 2.10, 3.02, 3.48]) box(4.0, 0.045, 0.035, rail, 0.76, y, 0.385, arm);
+        // A shallow lip separates the pistol/SMG hooks from the upright long-gun cradles.
+        box(4.0, 0.035, 0.12, steelDark, 0.76, 2.99, 0.42, arm);
+        const strip = new THREE.MeshBasicMaterial({ color: 0xb8d0c7 });
+        box(3.82, 0.035, 0.055, strip, 0.76, 3.745, 0.55, arm);
+        // A bolted steel reveal closes the gap to the wall, with a matching sign plinth and lower apron.
+        // All framing is one static draw, and the expanded-metal screen is another.
+        const casing = new THREE.MeshStandardMaterial({ color: 0x50585c, roughness: 0.8, metalness: 0.35 });
+        const frameParts = [];
+        const frame = (w, h, d, x, y, z) => {
+          const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), casing);
+          m.position.set(x, y, z); frameParts.push(m);
+        };
+        for (const x of [-1.39, 2.91]) frame(0.20, 3.48, 0.90, x, 2.20, 0.42);
+        frame(4.50, 0.20, 0.90, 0.76, 3.91, 0.42);
+        frame(4.50, 0.34, 0.90, 0.76, 0.60, 0.42);
+        frame(1.72, 0.64, 0.22, 0.76, 4.23, 0.64);
+        // A clear central hatch through the mesh, with a narrow counter below it.
+        for (const x of [0.18, 1.34]) frame(0.07, 0.86, 0.09, x, 1.48, 0.90);
+        for (const y of [1.085, 1.875]) frame(1.23, 0.07, 0.09, 0.76, y, 0.90);
+        frame(1.30, 0.07, 0.26, 0.76, 1.06, 0.97);
+        const surround = mergeParts(frameParts, casing, { castShadow: false, receiveShadow: true });
+        surround.name = 'armory-wall-surround'; arm.add(surround);
+        // Clipped diagonal strips form real holes; the small hatch is entirely open, not painted black.
+        const meshVertices = [], zMesh = 0.865;
+        const wire = (x0, y0, x1, y1) => {
+          const len = Math.hypot(x1 - x0, y1 - y0); if (len < 0.001) return;
+          const dx = -(y1 - y0) / len * 0.005, dy = (x1 - x0) / len * 0.005;
+          const a = [x0 + dx, y0 + dy, zMesh], b = [x0 - dx, y0 - dy, zMesh];
+          const c = [x1 - dx, y1 - dy, zMesh], d = [x1 + dx, y1 + dy, zMesh];
+          meshVertices.push(...a, ...b, ...c, ...a, ...c, ...d);
+        };
+        for (const [left, right, bottom, top] of [[-1.25, 0.18, 0.86, 3.76], [1.34, 2.77, 0.86, 3.76], [0.18, 1.34, 0.86, 1.085], [0.18, 1.34, 1.875, 3.76]]) {
+          for (const slope of [-1, 1]) for (let c = -5; c <= 7; c += 0.14) {
+            // y = slope*x + c, clipped to this panel rectangle.
+            const xa = Math.max(left, slope > 0 ? bottom - c : c - top);
+            const xb = Math.min(right, slope > 0 ? top - c : c - bottom);
+            if (xb > xa) wire(xa, slope * xa + c, xb, slope * xb + c);
+          }
+        }
+        const screenGeo = new THREE.BufferGeometry();
+        screenGeo.setAttribute('position', new THREE.Float32BufferAttribute(meshVertices, 3)); screenGeo.computeVertexNormals();
+        const screen = new THREE.Mesh(screenGeo, new THREE.MeshStandardMaterial({ color: 0x68726e, roughness: 0.65, metalness: 0.5, side: THREE.DoubleSide }));
+        screen.name = 'armory-security-mesh'; screen.raycast = rackNoRay; arm.add(screen);
+        // Anchor heads read as a wall-mounted frame without adding one draw per bolt.
+        const boltPoints = [];
+        for (const x of [-1.39, 2.91]) for (const y of [0.64, 1.25, 2.3, 3.3, 3.91]) boltPoints.push([x, y, 0.89]);
+        for (const x of [-0.75, 0.76, 2.27]) for (const y of [0.60, 3.91]) boltPoints.push([x, y, 0.89]);
+        const bolts = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.027, 0.027, 0.018, 6), rail, boltPoints.length);
+        const boltPose = new THREE.Object3D(); boltPose.rotation.x = Math.PI / 2;
+        boltPoints.forEach(([x, y, z], i) => { boltPose.position.set(x, y, z); boltPose.updateMatrix(); bolts.setMatrixAt(i, boltPose.matrix); });
+        bolts.name = 'armory-frame-bolts'; arm.add(bolts);
         const rack = new THREE.Group(); rack.name = 'armoryRack'; arm.add(rack);
         house.armoryRack = rack;
         const cv = document.createElement('canvas'); cv.width = 256; cv.height = 96;
@@ -21434,11 +21733,24 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         if (THREE.SRGBColorSpace) signTex.colorSpace = THREE.SRGBColorSpace;
         const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.44, 0.54),
           new THREE.MeshStandardMaterial({ map: signTex, emissiveMap: signTex, emissive: 0xffffff, emissiveIntensity: 0.45, roughness: 0.6 }));
-        sign.position.set(0, 2.68, 0.06); arm.add(sign);
+        sign.name = 'armory-sign'; sign.position.set(0.76, 4.23, 0.765); arm.add(sign);
         house.lockSigns.push(sign.material);
       }
       // Lamps, for night.
       const hqLight = new THREE.PointLight(0xffe2b0, 0, 12, 2); hqLight.position.set(0, 3.2, -(W + 1.2)); g.add(hqLight);
+      // CL-117: the still boxes, one mesh per material; the parts that move stay their own.
+      try {
+        const moving = new Set([shutter, intakeTray, ...fans, ...muzzles.map((m) => m.cap)]);
+        const baked = bakeStatic(THREE, g, { skip: (o) => moving.has(o) });
+        // Each hatch baked within itself (the Training Ground clones them by name).
+        for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet']) {
+          const h = g.getObjectByName(name);
+          if (h) { const r = bakeStatic(THREE, h, { skip: (o) => moving.has(o) || o === house.armoryRack }); baked.merged += r.merged; baked.removed += r.removed; }
+        }
+        // The parts that move as one (each fan, the shutter, the tray): baked within themselves.
+        for (const part of [shutter, intakeTray, ...fans]) { if (part) { const r = bakeStatic(THREE, part); baked.merged += r.merged; baked.removed += r.removed; } }
+        house.baked = baked;
+      } catch (e) { console.warn('Dead-Wave: HQ bake skipped.', e); }
       g.visible = false;
       scene.add(g);
       house.group = g;
@@ -21456,14 +21768,17 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       return g;
     }
     const smokeMat = new THREE.MeshBasicMaterial({ color: 0x3a3a3a, transparent: true, opacity: 0.32, depthWrite: false });
-    // CL-113: what stands in the Armory hatch: every gun he owns that isn't carried (the Armory's shelves), each a
-    // still copy of the real gun with its attachments. Rebuilt only when that changes; hidden from far off.
+    // GP-125: display every owned firearm, including carried ones, at its actual model scale.
+    // Storage/loadout still use armoryStoredKinds; display copies are not extra inventory.
     let armoryRackKey = '', armoryRackT = 0;
     const RACK_PEG_GEO = new THREE.BoxGeometry(0.035, 0.035, 0.07), RACK_PEG_MAT = new THREE.MeshStandardMaterial({ color: 0x8a9096, roughness: 0.4, metalness: 0.75 });
     function armoryStoredKinds() {
       const carried = new Set(['pistol']);
       for (const k of wheelLoadoutKeys()) if (k) carried.add(k);
       return WEAPON_ORDER.filter((k) => weaponOwned[k] && !carried.has(k) && weaponMeshes[k]);
+    }
+    function armoryDisplayKinds() {
+      return WEAPON_ORDER.filter((k) => weaponOwned[k] && weaponMeshes[k] && k !== 'chainsaw');
     }
     // A rack copy baked flat: one mesh per material (a gun is dozens of parts; seven of them were ~400 draws).
     const _rkV = new THREE.Vector3(), _rkN = new THREE.Vector3(), _rkNM = new THREE.Matrix3(), _rkM = new THREE.Matrix4(), _rkI = new THREE.Matrix4();
@@ -21485,7 +21800,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const flat = new THREE.Group();
       for (const [mat, list] of byMat) {
         let total = 0;
-        const prep = list.map((o) => { const geo = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry; total += geo.attributes.position.count; return { geo, m: new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld) }; });
+        const prep = list.map((o) => { const temporary = !!o.geometry.index, geo = temporary ? o.geometry.toNonIndexed() : o.geometry; total += geo.attributes.position.count; return { geo, temporary, m: new THREE.Matrix4().multiplyMatrices(_rkI, o.matrixWorld) }; });
         const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = new Float32Array(total * 2);
         let at = 0;
         for (const { geo, m } of prep) {
@@ -21505,6 +21820,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
         geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
         if (!prep.some(({ geo: g2 }) => g2.attributes.normal)) geo.computeVertexNormals();
+        for (const p of prep) if (p.temporary) p.geo.dispose();
         geo.computeBoundingSphere();
         const mesh = new THREE.Mesh(geo, mat);
         mesh.castShadow = false; mesh.receiveShadow = false; mesh.raycast = rackNoRay;   // looked at, never shot at or stood on: a raycast through 66 baked meshes halved the frame rate
@@ -21514,36 +21830,38 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       return flat;
     }
     function rackNoRay() {}
-    function disposeRackCopy(g) { g.traverse((o) => { if (o.isMesh && o.geometry) o.geometry.dispose(); }); }
+    function disposeRackCopy(g) { g.traverse((o) => { if (o.isMesh && o.geometry && o.geometry !== RACK_PEG_GEO) o.geometry.dispose(); }); }
     function refreshArmoryRack(force) {
       const rack = house.armoryRack;
       if (!rack) return;
-      const kinds = armoryStoredKinds();
+      const kinds = armoryDisplayKinds();
       const key = kinds.map(gunLookKey).join(',');
       if (!force && key === armoryRackKey) return;
       armoryRackKey = key;
       for (const c of rack.children.slice()) { rack.remove(c); disposeRackCopy(c); }
-      const longs = kinds.filter((k) => slotType(k) === 'primary'), smalls = kinds.filter((k) => slotType(k) !== 'primary');
-      const n = Math.max(1, longs.length), w = 1.04 / n;
-      longs.forEach((k, i) => {
-        const g = rackGunCopy(k); if (!g) return;
-        const L = g.userData.length || 0.8, sc = Math.min(1, 0.76 / L, (w * 2.6) / L);
-        g.scale.setScalar(sc);
-        g.rotation.set(-Math.PI / 2, 0, Math.PI / 2);   // muzzle up, side to the window
-        g.position.set(-0.52 + w * (i + 0.5), 1.27 + (L * sc) / 2, 0.12);
-        g.userData.rackKind = k;
-        rack.add(g);
-        const peg = new THREE.Mesh(RACK_PEG_GEO, RACK_PEG_MAT); peg.position.set(g.position.x, 1.245, 0.11); peg.userData.rackKind = null; peg.raycast = rackNoRay; rack.add(peg);
-      });
-      smalls.forEach((k, i) => {
-        const g = rackGunCopy(k); if (!g) return;
-        const L = g.userData.length || 0.3, sc = Math.min(1, 0.24 / L);
-        g.scale.setScalar(sc);
-        g.rotation.set(0, Math.PI / 2, -0.25);   // on a hook, muzzle down a little
-        g.position.set(-0.32 + i * 0.32, 2.13, 0.12);
-        g.userData.rackKind = k;
-        rack.add(g);
-      });
+      const mountRow = (row, small) => {
+        const copies = row.map((k) => {
+          const g = rackGunCopy(k); if (!g) return null;
+          g.rotation.set(small ? 0 : -Math.PI / 2, small ? Math.PI / 2 : 0, small ? 0 : Math.PI / 2);
+          const b = new THREE.Box3().setFromObject(g);
+          return { k, g, b, w: b.max.x - b.min.x };
+        }).filter(Boolean);
+        const bodyWidth = copies.reduce((s, c) => s + c.w, 0), spaces = Math.max(0, copies.length - 1);
+        const gap = small ? 0.32 : Math.min(0.075, spaces ? Math.max(0.025, (4.0 - bodyWidth) / spaces) : 0);
+        const width = bodyWidth + spaces * gap;
+        let x = 0.76 - width / 2;
+        for (const { k, g, b, w } of copies) {
+          // Bounds, not nominal gun length: attachments and asymmetric stocks seat correctly.
+          const back = Math.min(0.40, 0.799 - (b.max.z - b.min.z));
+          g.position.set(x - b.min.x, small ? 3.34 - (b.min.y + b.max.y) / 2 : 0.96 - b.min.y, back - b.min.z);
+          g.userData.rackKind = k; rack.add(g);
+          const peg = new THREE.Mesh(RACK_PEG_GEO, RACK_PEG_MAT);
+          peg.position.set(x + w / 2, small ? 3.34 : 0.945, 0.43); peg.raycast = rackNoRay; rack.add(peg);
+          x += w + gap;
+        }
+      };
+      mountRow(kinds.filter((k) => slotType(k) === 'primary'), false);
+      mountRow(kinds.filter((k) => slotType(k) !== 'primary'), true);
       mirrorTrainingRack();   // CL-115
     }
     function updateArmoryRack(dt) {
@@ -21552,7 +21870,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       armoryRackT -= dt;
       if (armoryRackT > 0) return;
       armoryRackT = 0.5;
-      const near = training.active || Math.hypot(localPlayer.position.x - HQ_ARMORY_FRONT.x, localPlayer.position.z - HQ_ARMORY_FRONT.z) < 45;   // CL-115
+      const near = training.active || Math.hypot(localPlayer.position.x - HQ_ARMORY_FRONT.x, localPlayer.position.z - HQ_ARMORY_FRONT.z) < 24;   // CL-115; CL-117: it is inside a hatch
       rack.visible = near;
       if (near) refreshArmoryRack(false);
     }
@@ -21776,10 +22094,26 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       }
       return { x, z };
     }
+    const _skullDropBaked = new Map(), _skullDropPool = new Map();   // CL-117: kind -> the baked template; kind -> spare drops
+    function skullDropMesh(kind) {
+      const pool = _skullDropPool.get(kind);
+      if (pool && pool.length) { const g = pool.pop(); g.rotation.set(0, 0, 0); g.scale.setScalar(1.35); g.userData.bob = Math.random() * Math.PI * 2; return g; }
+      let tpl = _skullDropBaked.get(kind);
+      if (!tpl) { tpl = makeSkullMesh(kind); try { bakeStatic(THREE, tpl.children[0] || tpl); } catch (_) {} _skullDropBaked.set(kind, tpl); }   // baked inside the head group: the bone comes first (t37 reads it)
+      const g = tpl.clone(true);
+      g.userData = { eyeMat: tpl.userData.eyeMat, bob: Math.random() * Math.PI * 2, skullKind: kind };
+      return g;
+    }
+    function releaseSkullDrop(c) {
+      const k = c && c.skull && c.mesh && c.mesh.userData.skullKind;
+      if (!k) return;
+      let pool = _skullDropPool.get(k); if (!pool) { pool = []; _skullDropPool.set(k, pool); }
+      if (pool.length < 48) pool.push(c.mesh);
+    }
     function spawnSkullDrop(x, z, value, kind, bodyY) {
       const v = Math.max(1, value | 0);
       ({ x, z } = skullSafeSpot(x, z, bodyY));
-      const mesh = makeSkullMesh(SKULL_LOOK[kind] ? kind : 'shambler');
+      const mesh = skullDropMesh(SKULL_LOOK[kind] ? kind : 'shambler');
       const y = sampleHeight(x, z) + 0.12;
       mesh.position.set(x + (Math.random() - 0.5) * 0.4, y, z + (Math.random() - 0.5) * 0.4);
       mesh.rotation.y = Math.random() * Math.PI * 2;
@@ -21848,7 +22182,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       for (const c of cashDrops) {
         scene.remove(c.mesh);
         dropSkullRing(c);
-        if (c.skull) continue;              // shared geometry and materials
+        if (c.skull) { releaseSkullDrop(c); continue; }              // shared geometry and materials
         c.mesh.traverse((ch) => {
           if (ch.isMesh) {
             if (ch.material) {
@@ -21895,7 +22229,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
             updateSkullHud();
             publishUI('skull-pickup', { count: 1, value: c.value, carriedCount: skullBag.count, carriedValue: skullBag.value, ...(c.zip ? { zipped: true } : { recalled: true }) });
             if (c.zip) AudioSys.skullPickup();   // GP-85: a last-kill recall plays one chime for the batch, from the UI
-            scene.remove(c.mesh);
+            scene.remove(c.mesh); releaseSkullDrop(c);
             cashDrops.splice(i, 1);
           }
           continue;
@@ -21907,7 +22241,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         // keeps speeding up as the clock runs out, then it's gone — go and get it.
         const life = c.skull ? SKULL_LIFE : CASH_LIFE;   // GB-61
         if (c.age >= life) {
-          scene.remove(c.mesh);
+          scene.remove(c.mesh); releaseSkullDrop(c);
           dropSkullRing(c);
           if (!c.skull) c.mesh.traverse((ch) => { if (ch.isMesh) { try { ch.material.dispose(); } catch (_) {} try { ch.geometry.dispose(); } catch (_) {} } });
           cashDrops.splice(i, 1);
@@ -21941,7 +22275,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
             updateSkullHud();
             publishUI('skull-pickup', { count: 1, value: c.value, carriedCount: skullBag.count, carriedValue: skullBag.value });
             AudioSys.skullPickup();
-            scene.remove(c.mesh);
+            scene.remove(c.mesh); releaseSkullDrop(c);
             dropSkullRing(c);
             cashDrops.splice(i, 1);
             continue;
@@ -23724,6 +24058,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const glow = new THREE.PointLight(0x5cff9a, 0.9, 6, 1.6);
       glow.position.set(0, 1.8, 0.8); g.add(glow);
       g.userData.glow = glow;
+      try { bakeStatic(THREE, g, { skip: (o) => o === bulb || o === scr || o === bezel }); } catch (e) { console.warn('Dead-Wave: kiosk bake skipped.', e); }   // CL-117
       return g;
     }
     {
@@ -26749,9 +27084,15 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.6, roughness: 0.5 });
       const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.46, 0.08, 12), steel);
       if (collapsed) { plate.position.set(0, 0.16, -0.1); plate.rotation.x = Math.PI / 2; }
-      else plate.position.y = 0.04;
+      else plate.position.set(0, 0.04, 0.5);
       g.add(plate);
-      const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12), matOverride || gunMetal);
+      const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.13, 1.25, 12, 1, true), matOverride || gunMetal);
+      const boreMat = (matOverride || gunDark).clone(); boreMat.side = THREE.BackSide;
+      const bore = new THREE.Mesh(new THREE.CylinderGeometry(0.083, 0.102, 1.22, 12, 1, true), boreMat);
+      const lip = new THREE.Mesh(new THREE.RingGeometry(0.083, 0.11, 12), matOverride || gunMetal);
+      lip.rotation.x = -Math.PI / 2; lip.position.y = 0.626; tube.add(bore, lip);
+      const breech = new THREE.Mesh(new THREE.CircleGeometry(0.102, 12), matOverride || gunDark);
+      breech.rotation.x = -Math.PI / 2; breech.position.y = -0.59; tube.add(breech);
       if (collapsed) { tube.position.set(0, 0.62, 0); tube.rotation.x = 0; }
       else { tube.position.set(0, 0.62, 0.18); tube.rotation.x = -0.72; }
       tube.castShadow = true;
@@ -26765,6 +27106,17 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       bipod2.position.x = -bipod.position.x;
       if (!collapsed) bipod2.rotation.z = -0.5;
       g.add(bipod2);
+      if (!collapsed) {
+        const joint = new THREE.Vector3(0, 0.82, 0), up = new THREE.Vector3(0, 1, 0);
+        for (const [leg, sx] of [[bipod, 1], [bipod2, -1]]) {
+          const foot = new THREE.Vector3(sx * 0.35, 0.035, -0.32), delta = joint.clone().sub(foot);
+          leg.position.copy(foot).add(joint).multiplyScalar(0.5);
+          leg.quaternion.setFromUnitVectors(up, delta.clone().normalize());
+          leg.scale.y = delta.length() / 0.9;
+        }
+        const cup = new THREE.Mesh(new THREE.SphereGeometry(0.11, 10, 6), steel);
+        cup.position.set(0, 0.11, 0.59); g.add(cup);
+      }
       root.userData.tube = g.userData.tube;
       return root;
     }
@@ -27807,9 +28159,11 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // feeding from an ammo can on the left. The barrel is userData.barrel (not .tube, which the mortar's aim tips).
       for (let i = 0; i < 3; i++) {
         const a = i / 3 * Math.PI * 2;
-        const l = K.cyl(0.022, 0.028, 0.9, gunDark, Math.cos(a) * 0.28, 0.4, Math.sin(a) * 0.28, null, 8, 'y');
-        l.rotation.z = Math.cos(a) * 0.5;
-        l.rotation.x = Math.sin(a) * 0.5;
+        const foot = new THREE.Vector3(Math.cos(a) * 0.46, 0.035, Math.sin(a) * 0.46);
+        const hub = new THREE.Vector3(0, 0.74, 0), delta = hub.clone().sub(foot), mid = hub.clone().add(foot).multiplyScalar(0.5);
+        const l = K.cyl(0.022, 0.028, delta.length(), gunDark, mid.x, mid.y, mid.z, null, 8, 'y');
+        l.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), delta.normalize());
+        K.box(0.09, 0.025, 0.075, gunDark, foot.x, 0.022, foot.z, 0, -a, 0, null, 0.006);
       }
       K.cyl(0.06, 0.075, 0.12, gunBody, 0, 0.74, 0, null, 14, 'y');
       K.cyl(0.024, 0.024, 0.1, gunDark, 0, 0.82, 0, null, 10, 'y');
@@ -32971,15 +33325,22 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       };
       if (look.kit === 'aidBag' && hip) {
         const bag = new THREE.Group(); bag.name = 'survivor-aid-bag'; bag.position.set(0.25, 0.0, 0.04); hip.add(bag);
-        box(bag, 0.13, 0.24, 0.3, K.olive, 0, 0, 0);
-        box(bag, 0.135, 0.05, 0.305, K.white, 0, 0.05, 0);    // the medic's white band
+        const body=rmesh(.13,.24,.23,K.olive,.038);bag.add(body);geos.push(body.geometry);
+        const band=rmesh(.135,.039,.236,K.white,.017);band.position.y=.037;bag.add(band);geos.push(band.geometry);
+        box(bag,.025,.15,.02,K.olive,-.037,.158,-.045);
+        box(bag,.025,.15,.02,K.olive,.037,.158,-.045);
       }
       if (look.kit === 'belt' && torso) {
         const belt = new THREE.Group(); belt.name = 'survivor-ammo-belt'; torso.add(belt);
+        const path=new THREE.CatmullRomCurve3([[-.16,.43,.208],[0,.23,.256],[.16,.03,.208],[.18,.015,0],[.16,.04,-.16],[0,.24,-.17],[-.16,.43,-.15],[-.16,.45,0]].map(p=>new THREE.Vector3(...p)),true);
+        const verts=[],uv=[],idx=[];
+        for(let j=0;j<=48;j++){const p=path.getPointAt(j/48);for(const s of[-1,1]){verts.push(p.x+s*.021,p.y+s*.016,p.z);uv.push((s+1)/2,j/48);}}
+        for(let j=0;j<48;j++){const a=j*2;idx.push(a,a+1,a+2,a+1,a+3,a+2);}K.link.side=THREE.DoubleSide;
+        const web=new THREE.BufferGeometry();web.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));web.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));web.setIndex(idx);web.computeVertexNormals();geos.push(web);belt.add(addCast(new THREE.Mesh(web,K.link)));
         for (let i = 0; i < 12; i++) {
-          const u = i / 11, x = -0.19 + 0.38 * u, y = 0.5 - 0.5 * u;
-          box(belt, 0.03, 0.075, 0.03, K.brass, x, y, 0.2, 0, 0, -0.9);
-          box(belt, 0.045, 0.02, 0.035, K.link, x, y - 0.035, 0.2, 0, 0, -0.9);
+          const u=i/11,x=-.16+.32*u,y=.43-.4*u,z=.208+.048*Math.sin(Math.PI*u);
+          const geo=new THREE.CylinderGeometry(.009,.012,.064,8);geos.push(geo);const round=addCast(new THREE.Mesh(geo,K.brass));round.position.set(x,y,z+.013);round.rotation.z=-.9;belt.add(round);
+          box(belt,.037,.012,.02,K.link,x+.014,y-.017,z+.015,0,0,-.9);
         }
       }
       if (look.kit === 'wrench' && hip) {
@@ -32988,9 +33349,20 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         box(w, 0.07, 0.05, 0.014, K.steel, 0, 0.07, 0);
       }
       if (look.rifle && torso && weaponMeshes.m4) {
-        const r = weaponMeshes.m4.clone(); r.name = 'survivor-rifle';
-        r.position.set(0.02, 0.22, -0.2); r.rotation.set(0, Math.PI / 2, 0.85);   // slung across the back
-        r.visible = true; torso.add(r);
+        const r=new THREE.Group();r.name='survivor-rifle';
+        r.position.set(.245,1.04-(m.userData.torsoPivotY||.7),-.275);
+        r.rotation.set(-Math.PI/2,0,-.1,'ZXY');r.scale.setScalar(.85);
+        r.add(carryGunCopy('m4'));torso.add(r);
+        // The same upright carry orientation as the player's pack-edge mounts.
+        box(r,.026,.012,.73,webMat,0,.065,0);
+        box(r,.04,.09,.027,webMat,0,.032,-.29);
+        box(r,.04,.09,.027,webMat,0,.032,.29);
+        r.updateMatrix();
+        for(const [z,y]of[[-.29,.85],[.29,1.145]]){
+          const a=new THREE.Vector3(.125,y-(m.userData.torsoPivotY||.7),-.245),b=new THREE.Vector3(0,.032,z).applyMatrix4(r.matrix),mid=a.clone().add(b).multiplyScalar(.5);
+          const strap=box(torso,.026,a.distanceTo(b),.012,webMat,mid.x,mid.y,mid.z);
+          strap.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),b.sub(a).normalize());
+        }
       }
       // The survivors expose the actual tapered head: no mask fragments and
       // no cover-up boxes. Their existing skin, hair and eye choices still apply.
@@ -33015,6 +33387,10 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       }
       m.userData.survivorWho = who;
       m.userData.survivorGeos = geos;
+      // Use the player's established unarmed rest, not an empty rifle hold.
+      const U=UNARMED_ARMS,u=m.userData;
+      u.armLG.rotation.set(U.x,U.y,-U.z);u.armRG.rotation.set(U.x,-U.y,U.z);
+      u.elbowLG.rotation.set(U.elbow,0,0);u.elbowRG.rotation.set(U.elbow,0,0);
       return m;
     }
     const SURVIVOR_NAME = { okafor: 'Cpl. Okafor', brandt: 'Sgt. Brandt', pike: 'Spc. Pike' };   // fallbacks for story.survivor.<who>.name
@@ -37307,6 +37683,15 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       }
     }
 
+    // GB-128: a focused text field (any input you type into) keeps the game's toggles off its keys.
+    function typingInField(el) {
+      if (!el || el === window || el === document) return false;
+      if (el.isContentEditable) return true;
+      const tag = el.tagName;
+      if (tag === 'TEXTAREA' || tag === 'SELECT') return true;
+      if (tag !== 'INPUT') return false;
+      return /^(text|search|email|number|password|url|tel|)$/i.test(el.type || '');
+    }
     addEventListener('keydown', (e) => {
       // Typing a name: the game keeps its hands off the keyboard; Enter plays.
       if (menuCamera.deploying) { e.preventDefault(); return; }
@@ -37378,11 +37763,15 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // R turns the piece while a ghost is up: there is nothing to reload mid-place.
       if (e.code === 'KeyR') { if (placeMode) rotateBuild(); else if (!e.repeat) startReload(); e.preventDefault(); }
       if (e.code === 'KeyM') { AudioSys.toggleMute(); e.preventDefault(); }
-      if (e.code === 'KeyN') { toggleNvg(); e.preventDefault(); }
-      if (e.code === 'KeyZ') { toggleLasers(); e.preventDefault(); }
-      if (e.code === 'KeyL') { toggleFlashlight(); e.preventDefault(); }
-      if (e.code === 'KeyK' && !e.repeat) { toggleFireMode(); e.preventDefault(); }
-      if (e.code === 'KeyU' && !e.repeat) { toggleHolster(); e.preventDefault(); }
+      // GB-128 (Jerry): 1 night vision, 2 flashlight, 3 laser, 4 holster/draw, X fire mode (outside build mode).
+      // The old N, L, Z, K and U are left free. One toggle per press (e.repeat ignored), and never while typing
+      // in a text field. While B is held the digits turn the build wheel's pages instead (the gate above).
+      if (!e.repeat && !typingInField(e.target)) {
+        if (e.code === 'Digit1') { toggleNvg(); e.preventDefault(); }
+        if (e.code === 'Digit2') { toggleFlashlight(); e.preventDefault(); }
+        if (e.code === 'Digit3') { toggleLasers(); e.preventDefault(); }
+        if (e.code === 'Digit4') { if (gameStarted && !gameOver && !won) toggleHolster(); e.preventDefault(); }
+      }
       if (e.code === 'KeyH') { useMedkit(); e.preventDefault(); }
       if (e.code === 'KeyQ') { if (!e.repeat && !openWheel('weapon')) cycleWeapon(1); e.preventDefault(); }
       if (e.code === 'KeyE') { objEDown = true; if (!e.repeat) { objEPressed = true; armObjectiveHold(); doAction(); } e.preventDefault(); }
@@ -37393,7 +37782,14 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       if (e.code === 'KeyY') { toggleDualWield(); e.preventDefault(); }
       if (e.code === 'KeyT') { if (mortarMounted) shoulderMortar(); else repairNearestBuild(); e.preventDefault(); }
       // X: in build mode, hold to see exactly what will be scrapped, release to scrap it.
-      if (e.code === 'KeyX') { if (!e.repeat) { if (placeMode && !mortarCarried) { scrapHeld = true; updateGhostPreview(); } else sellNearestBuild(); } e.preventDefault(); }
+      // GB-128 (Jerry): outside build mode X is the fire selector (SEMI / AUTO) and never sells anything.
+      if (e.code === 'KeyX') {
+        if (!e.repeat && !typingInField(e.target)) {
+          if (placeMode || buildMode) { if (placeMode && !mortarCarried) { scrapHeld = true; updateGhostPreview(); } else sellNearestBuild(); }
+          else if (gameStarted && !gameOver && !won) toggleFireMode();
+        }
+        e.preventDefault();
+      }
       if (e.code === 'Escape') {
         e.preventDefault();
         if (wheelIsOpen()) { closeWheel(false); return; }
@@ -37547,6 +37943,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     const muzzleWorld = new THREE.Vector3();
     const muzzleDir = new THREE.Vector3();
     const _laserOrigin = new THREE.Vector3();
+    const _laserScale = new THREE.Vector3();
     const _laserDir = new THREE.Vector3();
 
     // Empty-magazine prompt: "reload" while there are still spares to reload from,
@@ -37846,6 +38243,11 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     }
 
     function raycastTerrain(ray, out) {
+      if (training.active && training.tg) {
+        const hit = trainingFloorHit(training.tg, ray.origin, ray.direction);
+        if (!hit) return false;
+        out.set(hit.x, hit.y, hit.z); return true;
+      }
       // Binary-search along ray where ray.y crosses sampleHeight(x,z)
       let tLo = 0.2, tHi = Math.max(landRadius * 2.5, 280);
       const o = ray.origin, d = ray.direction;
@@ -37937,6 +38339,10 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // something is in the way.
     const _losFrom = new THREE.Vector3();
     function shotBlocked(from, to) {
+      if (training.active && training.tg) {
+        const hit = traceTraining(training.tg, from, to);
+        if (hit && hit.t < 1 - .3 / Math.max(.3, from.distanceTo(to))) return true;
+      }
       const dx = to.x - from.x, dy = to.y - from.y, dz = to.z - from.z;
       const flat = Math.hypot(dx, dz);
       if (flat < 0.4) return false;
@@ -38028,16 +38434,31 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         const dx = aimTarget.x - m.x, dy = aimTarget.y - m.y, dz = aimTarget.z - m.z;
         scopeYaw = Math.atan2(dx, dz);
         scopePitch = Math.atan2(dy, Math.hypot(dx, dz));
-        scopeAnchor = { nx: aimPointerNdc.x, ny: aimPointerNdc.y, yaw: scopeYaw, pitch: scopePitch };
+        scopeAnchor = { nx: aimPointerNdc.x, ny: aimPointerNdc.y, yaw: scopeYaw, pitch: scopePitch, edgeArmed: false, raiseTarget: aimTarget.clone() };
       }
       const half = THREE.MathUtils.degToRad(SCOPE_ZOOM_FOV[scopeZoomLevel]) / 2;
       const g = SCOPE_GAIN * lookSens;
       const nx = aimPointerNdc.x, ny = aimPointerNdc.y;
+      // Scoping a target already near the screen edge must not start a pan by
+      // itself. Arm edge travel only after a deliberate movement in the scope.
+      if (Math.hypot(nx - scopeAnchor.nx, ny - scopeAnchor.ny) > .025) scopeAnchor.edgeArmed = true;
+      // Raising the rifle moves its muzzle. Keep the selected world point through
+      // that short transition, rather than translating a frozen low-muzzle ray
+      // upward. Deliberate mouse travel immediately hands control back to the player.
+      if (scopeAnchor.raiseTarget) {
+        if (scopeAnchor.edgeArmed) scopeAnchor.raiseTarget = null;
+        else {
+          const m = getMuzzleWorld(), t = scopeAnchor.raiseTarget;
+          scopeAnchor.yaw = Math.atan2(t.x-m.x,t.z-m.z);
+          scopeAnchor.pitch = Math.atan2(t.y-m.y,Math.hypot(t.x-m.x,t.z-m.z));
+          if (scopeAmt > .995) scopeAnchor.raiseTarget = null;
+        }
+      }
       // Edge swing: past SCOPE_EDGE the anchor itself drifts, up to about one field of
       // view a second at the very edge, so the turn accumulates and survives the hand
       // coming back in.
-      const ex = Math.abs(nx) > SCOPE_EDGE ? Math.sign(nx) * (Math.abs(nx) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
-      const ey = Math.abs(ny) > SCOPE_EDGE ? Math.sign(ny) * (Math.abs(ny) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
+      const ex = scopeAnchor.edgeArmed && Math.abs(nx) > SCOPE_EDGE ? Math.sign(nx) * (Math.abs(nx) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
+      const ey = scopeAnchor.edgeArmed && Math.abs(ny) > SCOPE_EDGE ? Math.sign(ny) * (Math.abs(ny) - SCOPE_EDGE) / (1 - SCOPE_EDGE) : 0;
       scopeAnchor.yaw -= ex * half * 2 * dt;
       scopeAnchor.pitch += ey * half * 2 * dt;
       // Screen-right turns you toward decreasing yaw (facing +z, screen-right is -x).
@@ -38074,13 +38495,23 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       let groundT = Infinity;
       if (raycastTerrain(ray, aimHit)) groundT = aimHit.distanceTo(ray.origin);
       aimGroundDist = groundT;
+      // Target plates and range walls are aimable surfaces, exactly as for bullets.
+      let trainingHit = null;
+      if (training.active && training.tg) {
+        _trainingAimEnd.copy(ray.origin).addScaledVector(ray.direction, TRAINING.FAR);
+        trainingHit = traceTraining(training.tg, ray.origin, _trainingAimEnd);
+        if (trainingHit && trainingHit.t * TRAINING.FAR <= groundT) {
+          groundT = trainingHit.t * TRAINING.FAR;
+          aimHit.set(trainingHit.point.x, trainingHit.point.y, trainingHit.point.z);
+        } else trainingHit = null;
+      }
       // Then any zombie in front of that: the reticle over a body aims at the body, not
       // the ground behind it. Same cylinders the bullets use (see updateProjectiles).
       const zt = rayPickZombie(ray, groundT);
       if (zt !== Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, zt);
       else if (groundT === Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, AIM_SKY_DIST);
       aimTarget.copy(aimHit);
-      updateShotLos(zt !== Infinity);
+      updateShotLos(zt !== Infinity || trainingHit?.solid.target != null);
       // GB-50: a stumble throws the aim off a little, easing back over HIT_AIM_S.
       if (hitStumble.aimT > 0 && hitStumble.aimOff) {
         const off = hitStumble.aimOff * Math.pow(hitStumble.aimT / HIT_AIM_S, 2);
@@ -38285,7 +38716,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       const light = gun.userData.flashLight;
       if (flash) {
         flash.material.opacity = 1;
-        flash.scale.setScalar((1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1));   // CL-95: a can smothers it
+        flash.scale.setScalar((1.2 + Math.random() * 0.6) * (gun.userData.suppressed ? 0.35 : 1) / (gun.userData.sizeK || 1));   // CL-95: a can smothers it; GB-130: same flash at any gun size
       }
       if (light) {
         // Scene-parented now, so it has to be placed rather than inherited from the gun.
@@ -38367,8 +38798,9 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
             if (hit !== null) fraction = Math.min(fraction, hit);
           }
           len = Math.max(0.01, len * fraction);
-          laser.scale.y = len / gun.userData.laserLen;
-          laser.position.z = gun.userData.laserBaseZ + len * 0.5;
+          const ws = gun.getWorldScale(_laserScale).z || 1;   // GB-130: the beam is drawn in gun space
+          laser.scale.y = len / ws / gun.userData.laserLen;
+          laser.position.z = gun.userData.laserBaseZ + len * 0.5 / ws;
         }
       }
     }
@@ -38388,19 +38820,41 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // sat ~1 m from the left shoulder against a 0.57 m reach. Twisted ~40°, a rifle's
     // butt lands in the right shoulder and the support hand sits just ahead of the mag.
     const WEAPON_HOLD = {
-      pistol:   { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.08, -0.02], fore: [-0.05, -0.1, 0.0] },
-      revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.08, -0.04], fore: [-0.05, -0.1, -0.02] },
-      uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.1, -0.02], fore: [0, -0.13, 0.06] },
-      m4:       { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.11, -0.08], fore: [0, -0.05, 0.16] },
-      ak:       { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.14, -0.10], fore: [0, -0.05, 0.38] },
-      aa12:     { twist: 0.7, hold: [-0.24, -0.13, 0.26], grip: [0, -0.16, -0.10], fore: [0, -0.04, 0.36] },
-      shotgun:  { twist: 0.7, hold: [-0.24, -0.12, 0.24], grip: [0, -0.1, -0.06], fore: 'pump' },
-      sniper:   { twist: 0.7, hold: [-0.24, -0.12, 0.28], grip: [0, -0.1, -0.12], fore: [0, -0.05, 0.13] },
-      launcher: { twist: 0.7, hold: [-0.24, -0.14, 0.26], grip: [0, -0.1, -0.05], fore: [0, -0.1, 0.14] },
+      pistol:   { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.066, -0.016], trig: [0, -0.05, 0.073], fore: [-0.137, -0.112, 0.007] },
+      revolver: { twist: 0.1, hold: [-0.32, -0.08, 0.4], grip: [0, -0.07, -0.04], trig: [0, -0.02, 0.035], fore: [-0.12, -0.11, -0.02] },
+      uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.017], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },
+      m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.076], trig: [0, -0.078, -0.011], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },
+      ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.126, -0.095], trig: [0, -0.062, -0.019], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.09, -0.30] } },
+      aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.26], grip: [0, -0.145, -0.096], trig: [0, -0.104, -0.016], fore: [0, -0.015, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },
+      shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
+      sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
+      launcher: { twist: 0.8, hold: [-0.24, -0.14, 0.26], grip: [0, -0.088, -0.046], trig: [0, -0.074, 0.014], fore: [0, -0.075, 0.42], sh: { butt: [0, 0.008, -0.504], eye: [0, 0.19, -0.18] } },
       minigun:  { twist: 0.6, hold: [-0.3, -0.3, 0.2], grip: [0, 0.2, -0.28], fore: [0, 0.14, -0.05] },
-      flamer:   { twist: 0.6, hold: [-0.26, -0.26, 0.22], grip: [0, -0.09, -0.16], fore: [0, -0.04, 0.12] },
-      chainsaw: { twist: 0.5, hold: [-0.24, -0.34, 0.22], grip: [0, -0.1, -0.18], fore: [0, 0.18, 0.02], level: true }
+      flamer:   { twist: 0.6, hold: [-0.26, -0.26, 0.22], grip: [0, -0.078, -0.157], trig: [0, -0.048, -0.09], fore: [0, -0.07, 0.28] },
+      chainsaw: { twist: 0.5, hold: [-0.24, -0.34, 0.22], grip: [0, -0.086, -0.176], trig: [0, -0.075, -0.115], fore: [0, 0.18, 0.02], level: true }
     };
+    // GB-130 (Jerry): the grip and support points are read off each model, not guessed (gun space,
+    // so they hold at any WEAPON_SIZE). The hand point (gripR/gripL, the front of the palm where the
+    // curled fingers close) goes on:
+    //   grip: the pistol grip's centre line, 42% of the way down it (gripOutline(cz, cy, h, d, rake):
+    //     cz + 0.08h*sin(rake), cy + 0.08h*cos(rake)), so the web of the hand rides high under the
+    //     tang and the index finger reaches the trigger (trig: the trigger blade, 3-4 cm ahead).
+    //     The revolver's wooden grip is not a gripOutline; its centre line runs (-0.02,-0.005) to
+    //     (-0.065,-0.155). The chainsaw's is the rear handle, the flamer's the rear grip.
+    //   fore: the support hand.
+    //     m4: the handguard's axis is y 0.02 (r 0.047, z 0.21-0.58); just under it, mid-length.
+    //     ak / aa12: the middle of the lower handguard (z 0.24-0.53 / 0.23-0.49).
+    //     shotgun: on the pump (its centre is 0.003 under the pump group; pumpDy puts the hand there).
+    //     sniper: the fore-end just ahead of the action (z 0.19-0.65, +-0.042). launcher: the vertical foregrip under the
+    //     barrel tube (z 0.42, y -0.02..-0.156). flamer: the front grip (z 0.28, y -0.03..-0.13).
+    //     chainsaw: the top of the front wrap handle (a half torus r 0.11 about (0, 0.07, 0.02)).
+    //     uzi: the magazine is in the grip, so under the front of the receiver / barrel shroud.
+    //     pistol / revolver: cupping the firing hand from the support side (-x), a hand's width over
+    //     and a little under (-0.06, -0.02, +0.01 m at the gun's size).
+    //   The minigun is left exactly as it was (Jerry).
+    // sh (GB-129): a shouldered long gun. butt = the centre of the butt plate, eye = the point on
+    // the sight line the eye wants for the cheek weld (both gun space); see SHOULDER_HOLD.
+    // The Watchman MG (m240) is a tripod build, never in his hands, so it has no hold here.
     const IK_UPPER = 0.28; // shoulder -> elbow pivot (elbow groups sit at (0,-0.28,0))
     const _hv = { a: new THREE.Vector3(), b: new THREE.Vector3(), c: new THREE.Vector3(), d: new THREE.Vector3(), e: new THREE.Vector3(),
       f: new THREE.Vector3(), g: new THREE.Vector3(), anchor: new THREE.Vector3(), origin: new THREE.Vector3(), fore: new THREE.Vector3() };
@@ -38457,12 +38911,148 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     const _HAND_R = new THREE.Vector3(-0.01, -0.26, 0.12); // gripR in elbowRG
     const _HAND_L = new THREE.Vector3(0.02, -0.27, 0.13);  // gripL in elbowLG
 
+    // GB-129 (Jerry): shoulder-fired long guns are shouldered. The butt sits in the
+    // gun-side shoulder pocket (inside the shoulder joint, on the vest), the firing hand on
+    // the pistol grip, the support hand on the forend, and the barrel lies exactly on the
+    // aim. The gun pivots about the butt, so recoil kicks it about the shoulder.
+    // The marine's arms (0.57 m from shoulder to palm) are short for these guns, so while
+    // one is shouldered both shoulders roll forward a little (rollR/rollL, torso space),
+    // as a shooter's do. Cheek weld only while RMB-zoomed: the stock rises up the pocket
+    // and the head bends about the base of the neck to bring the gun-side eye toward the
+    // sight line, blended with the zoom's own transition (shoulderAds); not zoomed, the
+    // head keeps its pose. All in torso space with the gun side on +x (armRG), so a
+    // mirrored rig only flips the signs here.
+    const SHOULDER_HOLD = {
+      pocket: [0.20, 0.33, 0.17],      // where the butt seats (torso space)
+      adsPocket: [0.17, 0.40, 0.18],   // ...aiming down the sights: up toward the cheek
+      rollR: [-0.04, -0.02, 0.10],     // shoulders forward while shouldered
+      rollL: [0.03, 0, 0.06],
+      neck: [0, 0.40, -0.02],          // the head bends about here for the cheek weld
+      eye: [0.045, 0.215, 0.125],      // the gun-side eye, head space
+      cheekMax: 0.5,                   // radians the head may bend toward the stock
+      reach: 0.54                      // keep the grip inside the arm (palm reach 0.567)
+    };
+    let shoulderHoldW = 0, shoulderAdsW = 0, shoulderCheekAng = 0;
+    const _sh = { ud: null, baseR: null, baseL: null, headUd: null, headBase: null, headQ0: new THREE.Quaternion(), headQW: new THREE.Quaternion(), headMoved: false,
+      v: new THREE.Vector3(), w: new THREE.Vector3(), m: new THREE.Vector3(), n: new THREE.Vector3(), q: new THREE.Quaternion(), id: new THREE.Quaternion() };
+    // How far the RMB zoom has gone in, 0..1, on the zoom's own easing: the camera
+    // pull-in for most guns, the scope for the sniper.
+    function shoulderAds() {
+      if (currentWeapon === 'sniper') return scopeAmt;
+      return _clamp01((CAM_DIST_DEFAULT - camDistCurrent) / (CAM_DIST_DEFAULT - CAM_DIST_ZOOM));
+    }
+    function shoulderRoll(ud, w) {
+      const aR = ud.armRG, aL = ud.armLG;
+      if (!aR || !aL) return;
+      if (_sh.ud !== ud) { _sh.ud = ud; _sh.baseR = aR.position.clone(); _sh.baseL = aL.position.clone(); }
+      const R = SHOULDER_HOLD.rollR, L = SHOULDER_HOLD.rollL;
+      aR.position.set(_sh.baseR.x + R[0] * w, _sh.baseR.y + R[1] * w, _sh.baseR.z + R[2] * w);
+      aL.position.set(_sh.baseL.x + L[0] * w, _sh.baseL.y + L[1] * w, _sh.baseL.z + L[2] * w);
+    }
+    // holdWeapon runs twice a frame (again after the shot), so the weld is undone first
+    // and laid on fresh each time. The pose writes the head's rotation every frame but
+    // never its position; a rotation still the welded one is put back to the pose's.
+    function cheekWeldReset(ud) {
+      shoulderCheekAng = 0; shoulderAdsW = 0;
+      const head = ud.headG;
+      if (!head) return;
+      if (_sh.headUd !== ud) { _sh.headUd = ud; _sh.headBase = head.position.clone(); _sh.headMoved = false; }
+      if (!_sh.headMoved) return;
+      head.position.copy(_sh.headBase);
+      const hq = head.quaternion, wq = _sh.headQW;
+      if (hq.x === wq.x && hq.y === wq.y && hq.z === wq.z && hq.w === wq.w) hq.copy(_sh.headQ0);
+      _sh.headMoved = false;
+    }
+    function cheekWeld(ud, gun, eyeOnGun, a) {
+      const head = ud.headG, torso = ud.torsoG;
+      if (!head || a < 0.001) return;
+      const S = SHOULDER_HOLD;
+      const N = _sh.n.set(S.neck[0], S.neck[1], S.neck[2]);
+      // The eye where the pose put it, and the point on the sight line it wants (torso space).
+      const eye = _sh.v.set(S.eye[0], S.eye[1], S.eye[2]).multiply(head.scale).applyQuaternion(head.quaternion).add(head.position).sub(N).normalize();
+      gun.updateMatrixWorld(true);
+      const want = gun.localToWorld(_sh.w.set(eyeOnGun[0], eyeOnGun[1], eyeOnGun[2]));
+      torso.worldToLocal(want).sub(N).normalize();
+      const q = _sh.q.setFromUnitVectors(eye, want);
+      const ang = 2 * Math.acos(Math.min(1, Math.abs(q.w)));
+      const t = (ang > S.cheekMax ? S.cheekMax / ang : 1) * a;
+      _hq.b.copy(q); q.identity().slerp(_hq.b, t);
+      shoulderCheekAng = ang * t;
+      _sh.headQ0.copy(head.quaternion);
+      head.quaternion.premultiply(q);
+      _sh.headQW.copy(head.quaternion);
+      head.position.copy(_sh.headBase).sub(N).applyQuaternion(q).add(N);
+      head.updateMatrixWorld(true);
+      _sh.headMoved = true;
+    }
+    function holdShoulderGun(ud, gun, H, k) {
+      const S = SHOULDER_HOLD, sh = H.sh, torso = ud.torsoG, armR = ud.armRG;
+      const ads = shoulderAds(), a = ads * ads * (3 - 2 * ads);
+      shoulderAdsW = a;
+      // The seat, in torso space, then the world.
+      const P = _hv.anchor.set(S.pocket[0] + (S.adsPocket[0] - S.pocket[0]) * a, S.pocket[1] + (S.adsPocket[1] - S.pocket[1]) * a,
+        S.pocket[2] + (S.adsPocket[2] - S.pocket[2]) * a);
+      P.y += walkBob * 0.25;
+      P.z += bodyRecoil.gripR * 0.5;
+      torso.localToWorld(P);
+      gun.getWorldScale(_hScale);
+      const s = _hScale.x;
+      const butt = _sh.m.set(sh.butt[0], sh.butt[1], sh.butt[2]);
+      const mz = gun.userData.muzzleLocal || _hv.fore.set(0, 0, 1);
+      // Barrel on the aim: the muzzle sits off the line from the butt, so point the gun
+      // from where its muzzle is at the reticle, twice over (it settles in two).
+      const f = _hv.c.subVectors(aimTarget, P);
+      for (let i = 0; i < 3; i++) {
+        if (f.lengthSq() < 1) f.set(Math.sin(aimYaw), 0, Math.cos(aimYaw)); // reticle on top of him: level
+        f.normalize();
+        const x = _hv.d.crossVectors(_AXIS_Y, f);
+        if (x.lengthSq() < 1e-6) x.set(1, 0, 0);
+        x.normalize();
+        const y = _hv.e.crossVectors(f, x);
+        _hm.a.makeBasis(x, y, f);
+        _hq.gun.setFromRotationMatrix(_hm.a);
+        if (i === 2) break;
+        const muzzle = _hv.g.copy(mz).sub(butt).multiplyScalar(s).applyQuaternion(_hq.gun).add(P);
+        f.subVectors(aimTarget, muzzle);
+      }
+      const fx = f.x, fy = f.y, fz = f.z;
+      // Reload tilt and recoil kick in the gun's frame, about the butt.
+      _hE.set(reloadMountOff.rx + recoilKick.rx, reloadMountOff.ry + recoilKick.ry, reloadMountOff.rz + recoilKick.rz);
+      _hq.gun.multiply(_hq.a.setFromEuler(_hE));
+      const origin = _hv.origin.copy(butt).multiplyScalar(-s).applyQuaternion(_hq.gun).add(P);
+      origin.x += fx * recoilKick.z; origin.y += fy * recoilKick.z; origin.z += fz * recoilKick.z; // negative = back into the shoulder
+      // The grip, kept inside the firing arm's reach (slides the gun back if a pose asks too much).
+      const sw = _hv.b.copy(armR.position); torso.localToWorld(sw);
+      const grip = _hv.f;
+      for (let i = 0; i < 2; i++) {
+        grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
+        const over = grip.distanceTo(sw) - S.reach;
+        if (over <= 0) break;
+        origin.x -= fx * over; origin.y -= fy * over; origin.z -= fz * over;
+      }
+      grip.set(H.grip[0], H.grip[1], H.grip[2]).multiplyScalar(s).applyQuaternion(_hq.gun).add(origin);
+      solveArmIK(armR, ud.elbowRG, _HAND_R, grip, _POLE_R, k);
+      armR.updateMatrixWorld(true);
+      _hm.a.compose(origin, _hq.gun, _hScale);                            // desired gun world
+      _hm.b.compose(gun.position, gun.quaternion, gun.scale).invert();  // gun in mount
+      _hm.a.multiply(_hm.b);                                              // desired mount world
+      _hm.c.copy(weaponMount.parent.matrixWorld).invert().multiply(_hm.a); // mount local
+      _hm.c.decompose(weaponMount.position, weaponMount.quaternion, weaponMount.scale);
+      weaponMount.updateMatrixWorld(true);
+      cheekWeld(ud, gun, sh.eye, a * k);
+    }
+
     function holdWeapon(dt) {
       const ud = marine.userData;
       const gun = getActiveGun();
       const H = WEAPON_HOLD[currentWeapon];
       const on = !!H && weaponMount.visible && !gameOver && !won && !playerSwimming && !mortarMounted && !mortarCarried;
       holdW += ((on ? 1 : 0) - holdW) * Math.min(1, dt * 10);
+      // GB-129: the shoulders' roll-forward eases with a shouldered gun; the cheek weld is redone each call.
+      const shoulderOn = !!(H && H.sh) && on && !akimboOn();
+      shoulderHoldW += ((shoulderOn ? 1 : 0) - shoulderHoldW) * Math.min(1, dt * 10);
+      shoulderRoll(ud, shoulderHoldW);
+      cheekWeldReset(ud);
       if (!H || holdW < 0.01) return;
       const k = on ? 1 : holdW;
       player.updateMatrixWorld(true);
@@ -38479,47 +39069,50 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       // under its own shoulder and the pair reads as two guns.
       const aki = akimboOn();
       const holdX = aki ? -0.10 : H.hold[0];
-      const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
       const pairReload = aki && reloading ? _pulse(1 - reloadTimer / reloadAnimDuration, 0.22, 0.46, 0.85) : 0;
-      off.y += walkBob * 0.25 - pairReload * 0.48;
-      off.z += bodyRecoil.gripR - pairReload * 0.12;
-      const anchor = _hv.anchor.copy(armR.position).add(off);
-      torso.localToWorld(anchor);
+      if (H.sh && !aki) holdShoulderGun(ud, gun, H, k);   // GB-129
+      else {
+        const off = _hv.origin.set(holdX, H.hold[1], H.hold[2]).applyAxisAngle(_AXIS_X, -pitch * 0.7);
+        off.y += walkBob * 0.25 - pairReload * 0.48;
+        off.z += bodyRecoil.gripR - pairReload * 0.12;
+        const anchor = _hv.anchor.copy(armR.position).add(off);
+        torso.localToWorld(anchor);
 
-      // Gun orientation: barrel from the grip at the reticle, kept upright; melee tools
-      // are carried level along the facing instead.
-      const f = _hv.c.subVectors(aimTarget, anchor);
-      if (H.level || f.lengthSq() < 0.04) f.set(Math.sin(aimYaw), H.level ? -0.08 : 0, Math.cos(aimYaw));
-      f.normalize();
-      const x = _hv.d.crossVectors(_AXIS_Y, f);
-      if (x.lengthSq() < 1e-6) x.set(1, 0, 0);
-      x.normalize();
-      const y = _hv.e.crossVectors(f, x);
-      _hm.a.makeBasis(x, y, f);
-      _hq.gun.setFromRotationMatrix(_hm.a);
-      // Reload tilt and recoil kick, in the gun's own frame (the old mount's offsets).
-      const mainKick = aki && lastFiredGun === offhandMeshes[currentWeapon] ? 0.08 : 1;
-      _hE.set(reloadMountOff.rx + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
-      _hq.gun.multiply(_hq.a.setFromEuler(_hE));
+        // Gun orientation: barrel from the grip at the reticle, kept upright; melee tools
+        // are carried level along the facing instead.
+        const f = _hv.c.subVectors(aimTarget, anchor);
+        if (H.level || f.lengthSq() < 0.04) f.set(Math.sin(aimYaw), H.level ? -0.08 : 0, Math.cos(aimYaw));
+        f.normalize();
+        const x = _hv.d.crossVectors(_AXIS_Y, f);
+        if (x.lengthSq() < 1e-6) x.set(1, 0, 0);
+        x.normalize();
+        const y = _hv.e.crossVectors(f, x);
+        _hm.a.makeBasis(x, y, f);
+        _hq.gun.setFromRotationMatrix(_hm.a);
+        // Reload tilt and recoil kick, in the gun's own frame (the old mount's offsets).
+        const mainKick = aki && lastFiredGun === offhandMeshes[currentWeapon] ? 0.08 : 1;
+        _hE.set(reloadMountOff.rx + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
+        _hq.gun.multiply(_hq.a.setFromEuler(_hE));
 
-      // Solve the right arm onto the grip before placing the gun, so the gun's parent
-      // chain is where it will be drawn.
-      solveArmIK(armR, ud.elbowRG, _HAND_R, anchor, _POLE_R, k);
-      armR.updateMatrixWorld(true);
+        // Solve the right arm onto the grip before placing the gun, so the gun's parent
+        // chain is where it will be drawn.
+        solveArmIK(armR, ud.elbowRG, _HAND_R, anchor, _POLE_R, k);
+        armR.updateMatrixWorld(true);
 
-      // Place the gun so its grip point sits on the anchor (plus recoil pushback), then
-      // express that as the mount's local transform under the hand.
-      gun.getWorldScale(_hScale);
-      const grip = _hv.f.set(H.grip[0], H.grip[1], H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun);
-      const origin = _hv.origin.copy(anchor).sub(grip);
-      origin.addScaledVector(f, recoilKick.z * mainKick); // negative = kicked back along the barrel
-      if (currentWeapon === 'chainsaw' && fireHeld) origin.add(_hv.g.set((Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.015, (Math.random() - 0.5) * 0.01));
-      _hm.a.compose(origin, _hq.gun, _hScale);                            // desired gun world
-      _hm.b.compose(gun.position, gun.quaternion, gun.scale).invert();  // gun in mount
-      _hm.a.multiply(_hm.b);                                              // desired mount world
-      _hm.c.copy(weaponMount.parent.matrixWorld).invert().multiply(_hm.a); // mount local
-      _hm.c.decompose(weaponMount.position, weaponMount.quaternion, weaponMount.scale);
-      weaponMount.updateMatrixWorld(true);
+        // Place the gun so its grip point sits on the anchor (plus recoil pushback), then
+        // express that as the mount's local transform under the hand.
+        gun.getWorldScale(_hScale);
+        const grip = _hv.f.set(H.grip[0], H.grip[1], H.grip[2]).multiply(_hScale).applyQuaternion(_hq.gun);
+        const origin = _hv.origin.copy(anchor).sub(grip);
+        origin.addScaledVector(f, recoilKick.z * mainKick); // negative = kicked back along the barrel
+        if (currentWeapon === 'chainsaw' && fireHeld) origin.add(_hv.g.set((Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.015, (Math.random() - 0.5) * 0.01));
+        _hm.a.compose(origin, _hq.gun, _hScale);                            // desired gun world
+        _hm.b.compose(gun.position, gun.quaternion, gun.scale).invert();  // gun in mount
+        _hm.a.multiply(_hm.b);                                              // desired mount world
+        _hm.c.copy(weaponMount.parent.matrixWorld).invert().multiply(_hm.a); // mount local
+        _hm.c.decompose(weaponMount.position, weaponMount.quaternion, weaponMount.scale);
+        weaponMount.updateMatrixWorld(true);
+      }
 
       // Akimbo: the left hand is not supporting this gun, it is pointing its own.
       // Mirror the hold across the torso centreline, solve the arm onto it, then place
@@ -38561,7 +39154,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       holdWL += (wantL - holdWL) * Math.min(1, dt * 16);
       if (holdWL < 0.01) return;
       const fore = _hv.fore;
-      if (H.fore === 'pump' && gun.userData.pump) { fore.copy(gun.userData.pump.position); fore.y -= 0.045; }
+      if (H.fore === 'pump' && gun.userData.pump) { fore.copy(gun.userData.pump.position); fore.y += H.pumpDy != null ? H.pumpDy : -0.045; }
       else fore.set(H.fore[0], H.fore[1], H.fore[2]);
       gun.localToWorld(fore);
       if (reloading && gun.userData.mag !== undefined) {
@@ -40057,7 +40650,8 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // the old fixed-wall-clock setTimeout, so a paused/hitched frame can't leave the
     // blade stuck showing or hide it early. Hit detection above still resolves
     // instantly on press; this only draws the character actually swinging it.
-    const KNIFE_REST_POS = { x: 0.0, y: -0.05, z: 0.05 };
+    const KNIFE_REST_POS = { x: 0.0, y: 0.0, z: 0.04 };   // GB-130: the handle's middle on the hand point, at the blades' new sizes
+    const KNIFE_SLIDE = 0.2;
     function updateKnifeAnim(dt) {
       if (knifeAnimT <= 0) {
         if (knife.visible) {
@@ -40089,7 +40683,9 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       }
 
       knife.rotation.set(tilt, -yaw, -roll); // mirrored: left hand sweeps right-to-left across the body
-      knife.position.set(KNIFE_REST_POS.x, KNIFE_REST_POS.y + lift, KNIFE_REST_POS.z + reach);
+      // GB-130: the blade turns about the handle in his fist; only a little of the old slide along the hand is kept,
+      // so the handle never leaves it (the arm itself is not animated for the slash).
+      knife.position.set(KNIFE_REST_POS.x, KNIFE_REST_POS.y + lift * KNIFE_SLIDE, KNIFE_REST_POS.z + reach * KNIFE_SLIDE);
 
       // A little of the swing shows in the arm/shoulder too, on top of whatever the
       // base aim/walk pose and reload offsets already set this frame (same additive
@@ -41730,7 +42326,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
           continue;
         }
 
-        if (Math.hypot(p.pos.x, p.pos.z) > TERRAIN_RADIUS || p.pos.y > 20) {
+        if (!training.active && (Math.hypot(p.pos.x, p.pos.z) > TERRAIN_RADIUS || p.pos.y > 20)) {
           endRoundPoke(p); releaseTracerMesh(p.mesh);
           projectiles.splice(i, 1);
         }
@@ -41789,7 +42385,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       }
     }
     function propsNear(x, z, r) {
-      const stamp = _zgFrame + ':' + trees.length + ':' + rocks.length + ':' + worldSolids.length;
+      const stamp = ((_zgFrame / 12) | 0) + ':' + trees.length + ':' + rocks.length + ':' + worldSolids.length;   // CL-117: not every frame
       if (stamp !== propGridStamp) {
         propGridStamp = stamp;
         for (const a of propGrid.values()) a.length = 0;
@@ -43393,7 +43989,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       if (lastShotNoise && lastShotNoise !== belowNoise) { belowNoise = lastShotNoise; belowFight.noise(lastShotNoise.x, lastShotNoise.z, lastShotNoise.r); }
       for (const z of zombies) if (z.below && z.sleeping && z.alive && z.hp < z.maxHp) belowFight.touch(z.belowSleeper);   // shot in its sleep
       let light = null;
-      if (flashlightOn && gearOwned.flashlight) {
+      if (flashlightActive()) {
         const fx = flashlight.target.position.x - flashlight.position.x, fz = flashlight.target.position.z - flashlight.position.z;
         if (Math.hypot(fx, fz) > 1e-3) light = { on: true, x: p.x, z: p.z, dx: fx, dz: fz };
       }
@@ -45082,7 +45678,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     const PHYS = {
       walk: 7.4,
       run: 11.8,
-      crouch: 3.6,
+      crouch: 2.2,          // GB-126 (Jerry): was 3.6; at 2.2 the crouch-walk feet keep pace with the ground (GB-125)
       accelGround: 15,      // exponential approach rate, per second
       accelStop: 12,
       accelAir: 3.0,
@@ -45384,9 +45980,11 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       .map((k) => ({ key: k, name: sayText('enemy.' + k, {}, ZOMBIE_TYPES[k].name) }));
     function ensureTrainingUi() {
       if (!training.hud) training.hud = mountTrainingHud({ doc: document });
-      if (!training.panel) training.panel = mountTrainingPanel({ doc: document, types: TRAINING_KINDS(),
+      if (!training.panel) { training.panel = mountTrainingPanel({ doc: document, types: TRAINING_KINDS(),
         onSpawn: (k, n) => trainingSpawn(k, n), onClear: () => trainingClear(), alive: () => trainingAlive(),
         onClose: () => { if (training.active && !shopOpen && !cifOpen) { paused = false; syncReticleVisibility(); } } });
+        training.panel.element.addEventListener('click',e=>{if(e.target.closest('[data-kind],[data-count],.tp-close'))AudioSys.trainingCue('open');});
+      }
       if (!training.blackout) { const b = document.createElement('div'); b.id = 'trainingBlackout'; document.body.append(b); training.blackout = b; }
     }
     // Copies of the HQ's hatches, built from the HQ's own pieces (they share its materials and textures), so a
@@ -45419,13 +46017,20 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       out.moving = [];
       if (out.skullWindow) for (const n of [house.shutter, house.intakeTray]) { const c = twin(out.skullWindow.from, n, out.skullWindow.copy); if (c) out.moving.push([n, c]); }
       if (out.armory) out.rack = twin(out.armory.from, house.armoryRack, out.armory.copy);
+      // CL-117: one mesh per material for each copy; the shutter, the tray and the rack stay their own.
+      const keep = new Set(out.moving.map(([, c]) => c)); if (out.rack) keep.add(out.rack);
+      for (const k of Object.keys(src)) if (out[k] && out[k].copy) { try { bakeStatic(THREE, out[k].copy, { skip: (o) => keep.has(o) }); } catch (_) {} }
       return out;
     }
     function mirrorTrainingRack() {
       const r = training.copies && training.copies.rack, src = house.armoryRack;
       if (!r || !src) return;
       for (const c of r.children.slice()) r.remove(c);
-      for (const c of src.children) r.add(c.clone(true));
+      for (const c of src.children) {
+        const copy = c.clone(true);
+        copy.traverse((o) => { if (o.isMesh) o.raycast = rackNoRay; });
+        r.add(copy);
+      }
     }
     function startTraining() {
       if (menuCamera.deploying || !validatedPlayerName()) return;
@@ -45438,9 +46043,14 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       if (!gameStarted) return;
       ensureTrainingUi();
       if (!training.tg) { training.tg = buildTrainingGround(THREE); training.copies = trainingCopies(training.tg); }
+      if (!training.impacts) training.impacts = createTrainingImpacts(THREE, training.tg);
+      training.impacts.clear();
       const tg = training.tg;
       if (!tg.group.parent) scene.add(tg.group);
+      ensureLightPool().adopt(tg.group);   // CL-116
       training.active = true;
+      AudioSys.setTraining(true);
+      AudioSys.trainingCue('enter');
       trainingFloor = (x, z) => tg.floorAt(x, z);
       document.body.classList.add('training');
       debugTouched = true;   // no badges, camos or records from in here
@@ -45459,14 +46069,35 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       scopeOrbitPosition = camera.position.clone();
       camera.far = TRAINING.FAR; camera.updateProjectionMatrix();
       refreshArmoryRack(true);
+      trainingWarmCompile();   // CL-117
       training.hud.show(true);
       updateWaveHud();
       showBanner(sayText('training.title', {}, 'Training Ground'), sayText('training.welcome', {}, 'Terminals on the left wall · the build room through the door'), 2.6, '#f2c418');
       publishUI('training', { phase: 'enter' });
     }
+    function trainingWarmCompile() {
+      const tg = training.tg;
+      if (!tg || !renderer || typeof renderer.compileAsync !== 'function') return;
+      ensureTrainingUi();
+      const b = training.blackout; b.classList.add('on');
+      const meshes = [];
+      tg.group.traverse((o) => { if (o.isMesh && o.frustumCulled) { o.frustumCulled = false; meshes.push(o); } });
+      camera.updateMatrixWorld(true);
+      // CL-117 fix (ChatGPT, GP-133): the render loop stops while the pipelines build. On WebGPU compileAsync creates
+      // them asynchronously, and a live frame that drew one before it was finished handed setPipeline nothing
+      // (ShadowNode.renderShadow -> setPipeline not a GPURenderPipeline, then scene.background null). The load-time
+      // warm-up is safe only because the loop has not started yet; here it had.
+      renderer.setAnimationLoop(null);
+      const restoreImpacts = training.impacts?.prepareWarmup();
+      let done = false;
+      const finish = () => { if (done) return; done = true; restoreImpacts?.(); renderer.setAnimationLoop(tick); for (const m of meshes) m.frustumCulled = true; if (!training.wake) b.classList.remove('on'); };
+      Promise.resolve().then(() => renderer.compileAsync(scene, camera)).then(() => { warmFrame('training-impacts'); finish(); }, finish);
+      setTimeout(finish, 10000);   // CL-118: a last resort only (a real GPU takes well under a second); without it a hung compile would freeze the game
+    }
     function leaveTraining() {
       if (!training.active) return;
       training.active = false;
+      AudioSys.setTraining(false);
       trainingFloor = null;
       if (training.tg && training.tg.group.parent) training.tg.group.parent.remove(training.tg.group);
       document.body.classList.remove('training');
@@ -45507,6 +46138,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       for (const k of Object.keys(keys)) keys[k] = false;
       syncReticleVisibility();
       training.panel.open();
+      AudioSys.trainingCue('open');
     }
     addEventListener('keydown', (e) => {   // Esc shuts the panel before anything else hears it
       if (e.code === 'Escape' && training.panel && training.panel.isOpen()) { e.preventDefault(); e.stopImmediatePropagation(); training.panel.close(); }
@@ -45521,7 +46153,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         const zm = spawnZombie(x, z, kind, true, true);
         if (zm) { zm.trainingZ = true; made++; }
       }
-      if (made) { AudioSys.scream && AudioSys.scream(); spawnDust(tg.gate.x, tg.floorY, tg.gate.z, 6); }
+      if (made) { AudioSys.trainingCue('spawn'); spawnDust(tg.gate.x, tg.floorY, tg.gate.z, 6); }
       publishUI('training-spawn', { kind, count: made });
       return made;
     }
@@ -45535,7 +46167,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         zombies.splice(i, 1);
       }
     }
-    function trainingClear() { const n = trainingAlive(); clearZombies(); publishUI('training-clear', { count: n }); return n; }
+    function trainingClear() { const n = trainingAlive(); clearZombies(); AudioSys.trainingCue('clear'); publishUI('training-clear', { count: n }); return n; }
     function trainingKeepZombie(z) {
       const r = training.tg && training.tg.zombieRect;
       if (!r) return;
@@ -45553,17 +46185,14 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     // A round this frame: the nearest of the targets and the walls takes it, unless a zombie is nearer (then the
     // usual pass has it). A target that is down lets it by.
     const _trA = { x: 0, y: 0, z: 0 }, _trB = { x: 0, y: 0, z: 0 };
+    const _trainingAimEnd = new THREE.Vector3();
     function trainingRound(p) {
       const tg = training.tg;
       if (!tg) return false;
       _trA.x = p.prev.x; _trA.y = p.prev.y; _trA.z = p.prev.z; _trB.x = p.pos.x; _trB.y = p.pos.y; _trB.z = p.pos.z;
-      let best = null, bt = 2;
-      for (const s of tg.solids) {
-        if (s.target != null && tg.targets[s.target].state !== 'up') continue;
-        const t = segmentBox(_trA, _trB, s);
-        if (t !== null && t < bt) { bt = t; best = s; }
-      }
-      if (!best) return false;
+      const hit = traceTraining(tg, _trA, _trB);
+      if (!hit) return false;
+      const best = hit.solid, bt = hit.t;
       for (const z of zombies) {
         if (!z.alive) continue;
         const zy = z.mesh.position.y;
@@ -45571,14 +46200,15 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
         if (t !== null && t <= bt) return false;
       }
       const hx = _trA.x + (_trB.x - _trA.x) * bt, hy = _trA.y + (_trB.y - _trA.y) * bt, hz = _trA.z + (_trB.z - _trA.z) * bt;
+      training.impacts?.add(hit);
       if (best.target != null) {
         if (tg.hitTarget(best.target)) {
           training.hits++;
           spawnEmbers(hx, hy, hz, 6, 0.6);
-          AudioSys.armorHit && AudioSys.armorHit(true);
+          AudioSys.trainingCue('target');
           publishUI('training-target', { lane: best.target + 1, range: tg.targets[best.target].range, hits: training.hits });
         }
-      } else spawnDust(hx, hy, hz, 2);
+      } else { spawnDust(hx, hy, hz, 2); AudioSys.trainingCue('impact'); }
       p.hit = true;
       return true;
     }
@@ -45594,6 +46224,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
       ensureTrainingUi();
       training.blackout.classList.add('on');
       training.wake = { t: 0, lit: false };
+      AudioSys.trainingCue('blackout');
       const b = training.tg.bed;
       localPlayer.position.set(b.x, b.y, b.z); velX = 0; velZ = 0;
       publishUI('training-blackout', {});
@@ -45601,7 +46232,10 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     function updateTraining(dt) {
       if (!training.active || !training.tg) return;
       const tg = training.tg;
+      const rising = tg.targets.some(t=>t.state==='rising');
       tg.update(dt);
+      if(!rising&&tg.targets.some(t=>t.state==='rising'))AudioSys.trainingCue('reset');
+      training.impacts?.update(dt);
       if (training.sweepT > 0) { training.sweepT -= dt; trainingSweep(); }
       weather.raining = false; weather.intensity = 0;
       for (const [from, copy] of (training.copies && training.copies.moving) || []) { copy.position.copy(from.position); copy.scale.copy(from.scale); copy.rotation.copy(from.rotation); }
@@ -45620,6 +46254,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
           aimYaw = b.stand.yaw;
           showBanner(sayText('training.wakeTitle', {}, 'You came to'), sayText('training.wakeHint', {}, 'The infirmary patched you up.'), 2.2, '#f2c418');
           publishUI('training-wake', {});
+          AudioSys.trainingCue('wake');
         }
       }
       if (training.hud) training.hud.set({ hits: training.hits, alive: trainingAlive() });
@@ -45722,6 +46357,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     function resetGame() {
       leaveTraining();   // CL-115
       debugTouched = false;
+      simTime = 0;   // GB-131
       clearDummyPlayers();
       resetSkills(localPlayer); PLAYER_MAX_HP = 100;
       nightClearedDay = 0; nightKindNow = 'plain';   // CU-77: a fresh run counts its dawns again
@@ -45966,6 +46602,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     });
 
     const clock = new THREE.Clock();
+    let simTime = 0;   // GB-131: accumulated simulated seconds (tests wait on this, not wall clock)
     // Audio direction: music mood + ambience levels from the world state, every frame.
     const _audioState = { started: false, over: false, won: false, phase: 'idle', boss: false, night: false,
       paused: false, lowHp: false, shop: false, threat: 0, nearest: null, day: 1, dawn: false, dusk: false,
@@ -45996,6 +46633,7 @@ import { createHeartFight, HEART as HEART_FIGHT } from './game/heart-fight.js'; 
     let _ambForestT = 0, _ambForest = 0.5;
     function updateAudioDirection(dt) {
       if (window.DWOpening?.active) return;
+      if(training.active){AudioSys.updateMusic(dt,{paused});return;}
       const a = _audioState;
       a.started = gameStarted; a.over = gameOver; a.won = won; a.phase = phase; a.paused = paused;
       a.night = isNight;
@@ -46065,7 +46703,28 @@ live++;
       placeBeds(b); a.dread = Math.max(b.cave, b.pit * 0.8);   // CL-82: the music hears it too
       AudioSys.updateAmbience(b);
     }
+    function updateWorldAnimationsIndoors(dt) {   // CL-118: the Training Ground's frame
+      weather.raining = false; weather.timer = Math.max(weather.timer, 8);   // the storm waits outside
+      updateMotes(dt);          // whatever dust was in the air settles
+      updateFlameStream(dt);    // the flamer
+      updateBanner(dt);
+      updateCampfires(dt);
+      updateHouse(dt);          // the HQ's hatches, which the room's copies follow
+      updateAcid(dt);           // a spitter's pools
+      updateBuildBars();
+      flushGroundNormals();
+      updateDoors(dt);
+      updateSpikeTraps(dt);
+      updateFirePools(dt);
+      updateShadowLOD();
+      updateWeather(dt);        // runs the shower down to nothing and stops its sound
+      updateLightning(dt);      // lets a bolt or flash already in the air finish; no new strike (it is not raining)
+      skyDome.position.copy(camera.position);
+      updateTreeFade(dt);
+      updateFallingTrees(dt);
+    }
     function updateWorldAnimations(dt) {
+      if (training.active) { updateWorldAnimationsIndoors(dt); return; }   // CL-118
       // Keep the same scenery clock during insertion and normal play. Combat and
       // player physics still wait for the camera to finish the parachute shot.
       updateMotes(dt);
@@ -46105,8 +46764,7 @@ live++;
       updateTreeFade(dt);
       updateTreeSway(dt);
       updateFallingTrees(dt);
-      updateFallingLeaves(dt);
-      updateTreeBatches();
+      if (!training.active) { updateFallingLeaves(dt); updateTreeBatches(); }   // CL-118: no trees in the room
     }
     function tick() {
       maybePreRollFromLoop();
@@ -46182,6 +46840,7 @@ live++;
         return;
       }
 
+      simTime += dt;   // GB-131: only while the sim runs (not while paused)
       updateMarineIdle(dt);
       updateCarriedGear(dt);   // CL-90
       if (extractionBoat) extractionBoat.update(dt);   // CL-73
@@ -46883,7 +47542,7 @@ live++;
       graceActiveDbg: () => zombieGraceActive(), restartGraceDbg: () => { hoursSinceMatchStart = 0; },   // GB-51 (t76)
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, zombieBody, motionDown, flushShotHits, getMotionStats: () => ({ ...motionStats, active: motionPool.active, reacting: motionZs.size }), setMotionEnabledDbg: (v) => setMotionEnabled(v), getCorpses: () => corpses, marineBody: () => marineBody(), marineDown, marineHitDbg: (kind, power, dx, dz, y = 1.2) => marineHit({ kind, power, y }, dx, dz), bomberBlast, getMarineHits: () => ({ ...marineHits, events: marineHits.events.slice(), state: marineBodyV ? marineBodyV.state : null }), updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, zombieBody, motionDown, flushShotHits, getMotionStats: () => ({ ...motionStats, active: motionPool.active, reacting: motionZs.size }), setMotionEnabledDbg: (v) => setMotionEnabled(v), getCorpses: () => corpses, marineBody: () => marineBody(), marineDown, marineHitDbg: (kind, power, dx, dz, y = 1.2) => marineHit({ kind, power, y }, dx, dz), bomberBlast, getMarineHits: () => ({ ...marineHits, events: marineHits.events.slice(), state: marineBodyV ? marineBodyV.state : null }), updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getShoulderDbg: () => ({ w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
@@ -46956,7 +47615,7 @@ live++;
           // Debug-only: end the opening no-attack grace period immediately.
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getQuestState: () => quest.read(), learnQuest: place => quest.learn(place), restoreQuestDbg: state => quest.restore(state),
-          getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, hollowState: () => hollow.state(), belowDbg,   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ grantHaul, claimHollowHere,   /* CU-80 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-115 */ trainingDbg: { start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
+          getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, hollowState: () => hollow.state(), belowDbg,   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ grantHaul, claimHollowHere,   /* CU-80 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), alive: () => trainingAlive(), blackout: () => trainingBlackout(),
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
@@ -47011,8 +47670,15 @@ live++;
     // else uses — each compiled its pipeline mid-fight, on the frame it appeared. On
     // the real GPU that showed as 80–140ms stalls in the first big wave. So each pool
     // is primed with one of everything here, hidden, before the compile runs.
+    let _warmAirborne = [];
     function warmEffectPools() {
       const px = player.position.x, py = player.position.y + 1, pz = player.position.z;
+      try {   // CL-117: a chute (one fading, the transparent variant) and the aircraft
+        const c1 = airborne.chute(), c2 = airborne.chute(), pl = makeCargoPlane();
+        airborne.prepare(c1); airborne.prepare(c2); airborne.fade(c2, 0.5);
+        for (const o of [c1, c2, pl]) { o.position.set(px, py + 6, pz); o.visible = false; scene.add(o); }
+        _warmAirborne = [c1, c2, pl];
+      } catch (_) {}
       try {
         spawnMote(px, py, pz, dustMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
         spawnMote(px, py, pz, splashMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
@@ -47212,7 +47878,7 @@ live++;
       const hidden = [];
       const culled = [];
       try {
-        scene.traverse((o) => { if (o.isMesh && !o.visible) { hidden.push(o); o.visible = true; } if (o.isMesh && o.frustumCulled) { culled.push(o); o.frustumCulled = false; } });
+        scene.traverse((o) => { if ((o.isMesh || o.isGroup) && !o.visible) { hidden.push(o); o.visible = true; } if (o.isMesh && o.frustumCulled) { culled.push(o); o.frustumCulled = false; } });   // CL-117: groups too (the HQ)
         preRollFight(warmFrame);
       } catch (e) { console.info('Dead-Wave: pre-roll fight skipped.', e); }
       for (const o of culled) o.frustumCulled = true;
@@ -47370,6 +48036,7 @@ live++;
     }
 
     function finishEffectWarmup() {
+      for (const o of _warmAirborne.splice(0)) { try { airborne.dispose(o); } catch (_) {} }   // CL-117
       // Undo the staged fight, touching only what it spawned — not resetGame(), which
       // would also wipe a match the player may already have started.
       try { clearZombies(); clearCorpses(); clearGroundFires(); clearFlameStream(); clearMedDrops(); clearCashDrops(); clearDroppedMags(); clearSmoke(); clearZombieFires(); clearFireWarmup(); } catch (e) { console.info('Dead-Wave: pre-roll cleanup skipped a step.', e); }
@@ -47392,6 +48059,7 @@ live++;
     const _wtPost = performance.now();
     warmEffectPools();
     const _wtPools = performance.now();
+    ensureLightPool();   // CL-116: compile against the pool, not the stand-ins
     let _wtCompile = _wtPools, _wtFrame = _wtPools;
     try {
       if (typeof renderer.compileAsync === 'function') {

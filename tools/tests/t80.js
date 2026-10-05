@@ -7,6 +7,8 @@
 // GB-58: the night-12 spider was not the ammo kiosk (it stops nothing); the line check now also sees
 // what else stops his rounds (his own pieces, the landmark solids), checked with a wall he built.
 // And a round now meets his wall or the house before any body behind it, whatever its step.
+// GB-131: the two spider watches that used to time wall clock (round the house; the corner-grazing line)
+// wait on T.getSimTime() instead, same thresholds, so a busy PC still gives the spider its full walk.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -26,19 +28,20 @@
       for (let i = 1; i < 40; i++) { const u = i / 40, x = ax + (bx - ax) * u, z = az + (bz - az) * u; if (Math.abs(x - hx) < hh && Math.abs(z - hz) < hh) return true; }
       return false;
     };
+    // GB-131: wait on game time (same thresholds, nothing weakened). Wall clock is only a safety cap.
     const watch = async (kind, x, z, secs, at) => {
       const stand = at || post;
       p.set(stand.x, T.sampleHeight(stand.x, stand.z), stand.z);
       const zz = T.spawnZombie(x, z, kind, true, true);
       zz.mesh.position.set(x, T.sampleHeight(x, z), z);
       const s = { z: zz, blocked0: crossesHouse(x, z, p.x, p.z), clearAt: null, minD: 1e9, endD: 0, after: 0, afterClear: 0 };
-      const t0 = Date.now();
-      while (Date.now() - t0 < secs * 1000 && zz.alive) {
-        await wait(100);
+      const t0 = T.getSimTime(), wall0 = Date.now();
+      while (T.getSimTime() - t0 < secs && zz.alive && Date.now() - wall0 < Math.max(90000, secs * 20000)) {
+        await wait(50);
         p.set(stand.x, T.sampleHeight(stand.x, stand.z), stand.z);   // he stays put (no knockback drift)
         const q = zz.mesh.position, d = Math.hypot(q.x - p.x, q.z - p.z);
         s.minD = Math.min(s.minD, d); s.endD = d;
-        if (s.clearAt === null && !crossesHouse(q.x, q.z, p.x, p.z)) s.clearAt = (Date.now() - t0) / 1000;
+        if (s.clearAt === null && !crossesHouse(q.x, q.z, p.x, p.z)) s.clearAt = T.getSimTime() - t0;
         else if (s.clearAt !== null) { s.after++; if (!crossesHouse(q.x, q.z, p.x, p.z)) s.afterClear++; }
       }
       s.end = crossesHouse(zz.mesh.position.x, zz.mesh.position.z, p.x, p.z) ? 'still behind the house' : 'clear of the house';
@@ -93,12 +96,19 @@
     const g0x = hx - hh + 0.3, g0z = hz - hh - 0.8;
     const gz = T.spawnZombie(g0x, g0z, 'spider', true, true);
     gz.mesh.position.set(g0x, T.sampleHeight(g0x, g0z), g0z);
-    const c0 = clearance(g0x, g0z); let tight = 0, n6 = 0, gMin = 1e9; const g0 = Date.now();
-    while (Date.now() - g0 < 10000 && gz.alive) {
+    const c0 = clearance(g0x, g0z); let tight = 0, n6 = 0, gMin = 1e9; const g0 = T.getSimTime(), gWall = Date.now();   // GB-131: game time
+    // Sample once per 0.1 s of game time (same cadence as the old 100 ms wall polls), so a busy PC
+    // does not inflate the tight-% by stacking extra polls in one sim step.
+    let gSample = -1;
+    while (T.getSimTime() - g0 < 10 && gz.alive && Date.now() - gWall < 90000) {
       p.set(post4.x, T.sampleHeight(post4.x, post4.z), post4.z);
-      await wait(100);
+      await wait(50);
       const q = gz.mesh.position; gMin = Math.min(gMin, Math.hypot(q.x - p.x, q.z - p.z));
-      if (Date.now() - g0 > 3000) { n6++; if (clearance(q.x, q.z) < 0.45) tight++; }
+      const elapsed = T.getSimTime() - g0;
+      if (elapsed > 3) {
+        const bucket = Math.floor(elapsed * 10);
+        if (bucket !== gSample) { gSample = bucket; n6++; if (clearance(q.x, q.z) < 0.45) tight++; }
+      }
     }
     const cEnd = clearance(gz.mesh.position.x, gz.mesh.position.z);
     ok(c0 < 0.45 && tight / Math.max(1, n6) < 0.25 && cEnd >= 0.45 && gMin > 3, 'a spider on a line that grazes the corner takes one with room (start ' + c0.toFixed(2) + ' m clear, end ' + cEnd.toFixed(2) + ' m; tight ' + Math.round(100 * tight / Math.max(1, n6)) + '% of the time after 3 s; closest ' + gMin.toFixed(1) + ' m)');

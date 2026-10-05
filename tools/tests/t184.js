@@ -5,6 +5,7 @@
 //  - Crouch-walking: the soles never sink below the ground, one foot is always planted while the other lifts,
 //    and the knees stay above the ground.
 //  - Unarmed and crouched: the hands come down in front, near the knees, not straight out and not into the legs.
+//  - Crouch-walking for real (GB-126, crouch speed 2.2 m/s): a planted boot does not slide along the ground.
 //  - Letting go of C blends back up to the standing height.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -78,6 +79,39 @@
     ok(liftL > 0.03 && liftR > 0.03, 'and each foot lifts for its step (' + f3(liftL) + ', ' + f3(liftR) + ' m)');
     ok(minKnee > 0.1, 'the knees stay above the ground (lowest ' + f2(minKnee) + ' m)');
     await wait(600);
+    // GB-126: no foot slide. Crouch-walk for real (not pinned) and follow each boot while it is planted: it should
+    // stay where it is on the ground while the body moves on (crouch speed 2.2 m/s, step rate from ground speed).
+    {
+      p.set(px, T.sampleHeight(px, pz), pz);
+      key('KeyW', true);
+      await wait(700);
+      const prev = { L: null, R: null }; let footMove = 0, bodyMove = 0, frames = 0, last = null, speed = 0;
+      const t0 = performance.now(), start = { x: p.x, z: p.z };
+      while (performance.now() - t0 < 1400) {
+        await new Promise((r) => requestAnimationFrame(r));
+        T.player.updateMatrixWorld(true);
+        const body = { x: p.x, z: p.z };
+        for (const s of ['L', 'R']) {
+          const an = ud['ankle' + s + 'G'], box = new T.THREE.Box3().setFromObject(an), w = an.getWorldPosition(new V());
+          const planted = box.min.y - gy() < 0.012;
+          if (planted && prev[s] && last) {
+            footMove += Math.hypot(w.x - prev[s].x, w.z - prev[s].z);
+            bodyMove += Math.hypot(body.x - last.x, body.z - last.z);
+            frames++;
+          }
+          prev[s] = planted ? { x: w.x, z: w.z } : null;
+        }
+        last = body;
+      }
+      speed = Math.hypot(p.x - start.x, p.z - start.z) / ((performance.now() - t0) / 1000);
+      key('KeyW', false);
+      const slide = footMove / Math.max(1e-6, bodyMove);
+      ok(frames > 10 && bodyMove > 0.3, 'crouch-walked for real (' + frames + ' planted-foot frames, body moved ' + f2(bodyMove) + ' m in them)');
+      out.push('INFO crouch-walk slide ' + f2(slide * 100) + '% (at ' + f2(speed) + ' m/s ground speed)');
+      ok(slide < 0.25, 'a planted boot stays put: it slid ' + f2(slide * 100) + '% of the distance the body moved');
+      await wait(400);
+      p.set(px, T.sampleHeight(px, pz), pz);
+    }
     // Unarmed and crouched: hands down in front, near the knees.
     T.toggleHolster();
     await until(() => !T.drawDbg().active, 10000);

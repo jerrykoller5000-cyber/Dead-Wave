@@ -1,4 +1,4 @@
-// t103 - CU-75 (P-147, D-68): the gun flashlight is his from a fresh run. L still toggles it,
+// t103 - CU-75 (P-147, D-68): the gun flashlight is his from a fresh run. 2 toggles it (GB-128: was L),
 // and the kiosk no longer sells it.
 (async () => {
   const T = window.TT; const out = [];
@@ -8,12 +8,12 @@
     await startMatch(T, 'Flashlight');
     ok(T.getGearOwned().flashlight === true, 'a fresh run already has the flashlight');
     ok(T.flashlight.intensity === 0, 'it starts off');
-    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyL', key: 'l' }));
+    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', key: '2' }));
     await wait(200);
-    ok(T.flashlight.intensity > 0, 'L turns it on (' + T.flashlight.intensity + ')');
-    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyL', key: 'l' }));
+    ok(T.flashlight.intensity > 0, '2 turns it on (' + T.flashlight.intensity + ')');
+    window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Digit2', key: '2' }));
     await wait(200);
-    ok(T.flashlight.intensity === 0, 'L turns it off again');
+    ok(T.flashlight.intensity === 0, '2 turns it off again');
     T.setShopTabDbg('gear');
     const text = document.getElementById('shopList').textContent;
     ok(!/flashlight/i.test(text), 'the kiosk has no flashlight row');

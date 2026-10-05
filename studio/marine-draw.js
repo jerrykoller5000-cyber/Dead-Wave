@@ -37,12 +37,12 @@ export function drawSourceOf(kind, loadout) {
 const REACH = {
   hip: [{ x: -0.17, y: 0.67, z: 0.11, twistY: 0.42, bend: 0.22 }],
   chest: [
-    { x: 0.2, y: 0.95, z: 0.03, twistY: -0.08, bend: 0.04 },   // the holster under his right arm
-    { x: -0.19, y: 0.97, z: 0.04, twistY: 0.3, bend: 0.06 },   // under his left arm: the cross-draw proper
+    { x: 0.17, y: 1.02, z: -0.32, twistY: -0.32, bend: 0.08 }, // pack-mounted secondary
+    { x: -0.17, y: 1.02, z: -0.36, twistY: 0.36, bend: 0.08 },
   ],
   back: [
-    { x: 0.19, y: 1.36, z: -0.14, twistY: -0.12, bend: -0.05 },   // over the right shoulder
-    { x: 0.1, y: 1.38, z: -0.17, twistY: -0.2, bend: -0.06 },    // the other gun, reached behind the neck
+    { x: 0.29, y: 1.36, z: -0.21, twistY: -0.12, bend: -0.05 }, // right edge of pack
+    { x: -0.27, y: 1.36, z: -0.21, twistY: 0.30, bend: -0.06 }, // left edge of pack
   ],
 };
 export function reachPoint(at, slot = 0) {

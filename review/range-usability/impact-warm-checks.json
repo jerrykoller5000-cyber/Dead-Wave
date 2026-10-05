@@ -1,0 +1,37 @@
+{
+  "initial": {
+    "count": 0,
+    "ranges": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "warm": {
+    "initialPrograms": 2,
+    "names": [
+      {
+        "name": "ShadowMaterial",
+        "stage": "vertex"
+      },
+      {
+        "name": "ShadowMaterial",
+        "stage": "vertex"
+      }
+    ],
+    "pipelines": [
+      {
+        "object": "",
+        "material": "ShadowMaterial"
+      },
+      {
+        "object": "",
+        "material": "ShadowMaterial"
+      }
+    ],
+    "marks": 6
+  }
+}
