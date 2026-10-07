@@ -150,6 +150,32 @@ class Page {
   }
 }
 
+// CU-57: a browser that is already running with --remote-debugging-port (the desktop game's WebView2, started with
+// WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=<port>): the same Page, on its first page whose url
+// contains `urlPart`. close() only lets go of the socket; the window is the caller's to end.
+export async function attach(port, urlPart = '') {
+  const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
+  const ws = new WebSocket(version.webSocketDebuggerUrl);
+  await new Promise((resolve, reject) => {
+    ws.addEventListener('open', resolve, { once: true });
+    ws.addEventListener('error', () => reject(new Error('could not open the CDP socket')), { once: true });
+  });
+  const conn = new Connection(ws);
+  let target = null;
+  for (let i = 0; i < 120 && !target; i++) {
+    const { targetInfos } = await conn.send('Target.getTargets', {});
+    target = targetInfos.find((t) => t.type === 'page' && t.url.includes(urlPart)) || null;
+    if (!target) await sleep(500);
+  }
+  if (!target) throw new Error('no page matching ' + JSON.stringify(urlPart) + ' on port ' + port);
+  const { sessionId } = await conn.send('Target.attachToTarget', { targetId: target.targetId, flatten: true });
+  const page = new Page(conn, sessionId);
+  await page.send('Page.enable', {});
+  await page.send('Runtime.enable', {});
+  await page.send('Log.enable', {});
+  return { page, url: target.url, close() { try { ws.close(); } catch { /* gone */ } } };
+}
+
 export async function launch({ headless = true, args = [] } = {}) {
   const exe = findChrome();
   const profile = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'dw-chrome-'));

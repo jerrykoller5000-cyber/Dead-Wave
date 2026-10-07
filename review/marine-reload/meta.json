@@ -1,0 +1,9 @@
+{
+  "asset": "marine-reload",
+  "owner": "claude",
+  "rig": "marine",
+  "clip": "reload-rifle",
+  "reference": null,
+  "design": "default",
+  "task": "CL-84"
+}

@@ -1,4 +1,5 @@
 import { text } from './strings.js';
+import { mountNoticeRail } from './notice-rail.js';
 import { GUN_STOCK_NIGHT } from '../game/economy.js';
 const count = n => Number.isSafeInteger(n) && n >= 0;
 export function dawnStockLine(completedNight) {
@@ -31,6 +32,7 @@ export function createNightRecord() {
 // goes on its own after DAWN_BANNER_S. The next night is started at the briefing panel only.
 const DAWN_BANNER_S = 14;
 export function mountDawn({doc=document,bus=window,onShow=()=>{}}={}) {
+ mountNoticeRail(doc);
  const el=doc.createElement('aside');el.id='dawnCard';el.className='dawn-banner';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
  const heading=doc.createElement('h2');heading.id='dawnTitle';const stats=doc.createElement('dl');
  for(const key of ['kills','skulls','best']){const row=doc.createElement('div'),label=doc.createElement('dt'),value=doc.createElement('dd');label.textContent=text('dawn.'+key);value.dataset.stat=key;row.append(label,value);stats.append(row);}

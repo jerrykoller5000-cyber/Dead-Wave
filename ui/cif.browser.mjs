@@ -38,13 +38,13 @@ try {
   assert.equal(await page.locator('[data-camo="marpat"]').getAttribute('aria-pressed'),'true');
   assert.equal(changed.bank,original.bank);delete changed.w.items.cap.camo;delete original.w.items.cap.camo;
   assert.deepEqual(changed.w,original.w);
-  await page.locator('[data-filter="locked"]').click();
+  assert.equal(await page.locator('[data-filter="locked"]').count(),0,'GP-138: no locked-items browsing control');
   assert(await page.locator('[data-camo="dcu"]').isDisabled());
-  assert(await page.locator('[data-camo="dcu"]').isVisible());
+  assert.equal(await page.locator('[data-camo="dcu"]').isVisible(),false,'GP-138: unearned finishes stay hidden');
   const lockedBefore=await page.evaluate(()=>JSON.stringify(TT.getWardrobe()));
   await page.locator('[data-camo="dcu"]').dispatchEvent('click');
   assert.equal(await page.evaluate(()=>JSON.stringify(TT.getWardrobe())),lockedBefore);
-  await page.screenshot({path:path.join(shots,'locked-1280.png')});
+  await page.screenshot({path:path.join(shots,'unlocked-only-1280.png')});
   await page.locator('[data-cif-tab="body"]').click();
   await page.locator('[data-cif-item="shirt"]').click();
   await page.locator('#cifOptions button').last().click();

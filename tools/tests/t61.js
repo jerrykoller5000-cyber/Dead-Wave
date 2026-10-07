@@ -25,7 +25,7 @@
     T.clearZombies && T.clearZombies();
     T.spawnZombie(T.player.position.x + 140, T.player.position.z + 140, 'shambler', true, true);   // ~200 m
     const gapOk = ms().stage === 'fight';
-    ok(gapOk && ms().deckTrack === 'fight_n07', 'day 9: night 9\'s song (CL-38), right after the alarm: ' + ms().stage + '/' + ms().deckTrack);
+    ok(gapOk && ms().deckTrack === 'fight_night09', 'day 9: night 9\'s own song (CL-128), right after the alarm: ' + ms().stage + '/' + ms().deckTrack);
     await until(() => Math.abs(ms().prox - 0.7) < 0.03, 6000);
     ok(Math.abs(ms().prox - 0.7) < 0.03, '70% with nobody within 150 m: ' + ms().prox.toFixed(2));
 

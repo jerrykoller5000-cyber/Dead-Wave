@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grokbot
-task: —
-touching: —
-since: 2026-10-05T23:10Z
+task: GB-140 integration run: npm test x2 + real-renderer smoke; reds to owners
+touching: crew/tests.json, handoffs/2026-10-07-grokbot-GB-140.md
+since: 2026-10-07T01:51Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-05-grokbot-GB-131.md
+last-report: handoffs/2026-10-06-grokbot-GB-137.md
 
 ## Notes
 

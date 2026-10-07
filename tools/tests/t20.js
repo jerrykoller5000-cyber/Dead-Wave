@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = [];
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   T.devBaseBuild(); await wait(300);
   const bs = T.builds.filter(b => b.type === 'barricade');
   const e = new T.THREE.Euler();

@@ -205,6 +205,24 @@ bob and sway, and the chest's swing and lean kept in part (`yaw`, `lean` per job
 head looking ahead against it. No arms: in the game they hold the gun. The reference faces -Z; the tool turns it half
 round. Run it after changing a job: `node --import ./studio/node-three.mjs studio/retarget-ual.mjs [walk|run]`.
 
+**The marine's reload (CL-84 part 2): a hand path clip.** The reference library has no reload, and a reload is mostly
+where one hand goes, so it isn't a joint clip but a path: `studio/clips/marine/reload-rifle.json` (format
+`dw-hand-path/1`, read by `studio/marine-reload.js`). Each key is `{ t, at, off }`: `t` 0..1 of the gun's reload time,
+`at` a named place the game turns into a point every frame (`fore` the gun's support grip, `well` the seated magazine's
+foot, `pouch` a magazine pouch on his support side, the carrier's or the belt's, `below` the new magazine lined up under
+the well), `off` metres in his own axes (his support side, up, forward). Between keys the hand eases along a
+Catmull-Rom curve through the keys either side (`handPointAt`), so it swings round his body instead of cutting through
+it; the game's arm IK follows it. `mag` keys say what the magazine does from then on: `seated`, `drop`, `gone`, `hand`
+(it rides in his palm, its foot where the palm is). It plays for the GW-4, KR-7 and Breacher-12 (`weapons`). To change
+the reload, change the JSON: `node --test studio/marine-reload.test.mjs` checks the path, t194 checks it in the game, and
+`TT.reloadClipDbg.hold(u)` holds a reload at `u` to look at it.
+
+**The knife arm (CL-122): the same format.** `studio/clips/marine/knife-slash.json` is a hand path for the hand the blade
+rides in: places `rest` (where the pose has the hand that frame, so the swing starts and ends there) and `chest` (in
+front of his upper chest), keys for the wind-up out to the knife side, the cut in front at arm's length and the
+follow-through across, over the 0.26 s slash. The game's `knifeArm()` reaches it by IK after the hold; the blade's own
+turn in the fist stays in `updateKnifeAnim`. Tests: `studio/marine-knife.test.mjs`.
+
 `studio/preview.html?clip=drag&n=6&row=rig` (or `row=ref`) draws a quick strip of a clip or of its
 reference, served from the repo root: Claude's quick look, and a starting point for CU-44.
 

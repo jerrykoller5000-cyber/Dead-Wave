@@ -19,3 +19,8 @@ assets/soundtrack/incoming/*.wav
 
 # One page per test run (tools/tests/run-all.mjs): a killed run can leave one behind
 tools/tests/test*.html
+
+# The shipped copy and the desktop shell's build output (tools/package.mjs, desktop/)
+dist/
+desktop/node_modules/
+desktop/src-tauri/target/

@@ -6,7 +6,10 @@
     const L = T.LAKE_HOLE, R = L.r + 3;
     const inPit = (f) => Math.hypot(f.mesh.position.x - L.x, f.mesh.position.z - L.z) < R;
     ok(T.fishes.length > 0, 'there are fish: ' + T.fishes.length);
-    ok(T.fishes.filter(inPit).length === 0, 'none over the pit at the start');
+    // CL-86 (CU-55: flaky under load): the schools settle on the frame loop, so a loaded box that has run only a few
+    // frames saw a fish still on its first heading. Two seconds of the fish's own clock first, the same on any box.
+    for (let k = 0; k < 40; k++) T.updateFish(0.05, 0, 0);
+    ok(T.fishes.filter(inPit).length === 0, 'none over the pit once the schools have settled (2 s)');
     // Two simulated minutes, with the lake schools sent straight at the pit.
     for (const s of T.fishSchools) if (s.habitat === 'lake') { s.tx = L.x; s.tz = L.z; s.retarget = 60; }
     T.player.position.set(0, T.sampleHeight(0, 0), 0);

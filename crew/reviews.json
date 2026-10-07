@@ -23,6 +23,13 @@
       "reference": null
     },
     {
+      "asset": "crouch-slope",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "demo-drag",
       "owner": "claude",
       "rig": "guardian",
@@ -177,10 +184,31 @@
       "reference": null
     },
     {
+      "asset": "marine-gait",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "walk",
+      "reference": "Walk_Loop"
+    },
+    {
+      "asset": "marine-hands",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "knife-slash",
+      "reference": null
+    },
+    {
       "asset": "marine-knocked",
       "owner": "grokbot",
       "rig": "marine",
       "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "marine-reload",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": "reload-rifle",
       "reference": null
     },
     {
@@ -213,6 +241,13 @@
     },
     {
       "asset": "night-lockdown",
+      "owner": "cursor",
+      "rig": null,
+      "clip": null,
+      "reference": null
+    },
+    {
+      "asset": "passages",
       "owner": "cursor",
       "rig": null,
       "clip": null,

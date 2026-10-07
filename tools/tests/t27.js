@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = [];
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const visible = (o) => { let p = o; while (p) { if (p.visible === false) return false; p = p.parent; } return true; };
   const countIn = (root) => { let n = 0; root.traverse(o => { if (o.isMesh && visible(o)) n++; }); return n; };
   const tally = () => {

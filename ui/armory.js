@@ -1,3 +1,4 @@
+import { createArmoryPreview } from './armory-preview.js';
 import { createArmory, slotType } from '../game/armory.js';
 import { text, hasText } from './strings.js';
 
@@ -13,10 +14,12 @@ import { text, hasText } from './strings.js';
 // CL-114 (Jerry, 2026-10-02): a gun's camo is chosen here too, not in the CIF.
 //   getFinishes(kind)    -> { current, list: [{ key, name, locked, hint, swatch }] }   key '' is the factory finish
 //   onFinish(kind, key)  -> boolean                                     paint it
+// GP-141 (Claude approved 2026-10-06): preview(kind, {yaw,pitch}) -> Promise<dataURL|null>.
+// Called only for a visible workbench and an interaction/refresh; angles are radians.
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
   getMods = () => [], onFit = () => false, picture = async () => null, icon = () => '', describe = () => '',
-  getFinishes = () => null, onFinish = () => false } = {}) {
+  getFinishes = () => null, onFinish = () => false, preview = null } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
   // A line ChatGPT hasn't written yet falls back to its English (CL-113: the strings are hers to word).
   const t = (key, params, fallback) => {
@@ -44,6 +47,13 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   const shelf = el('div', 'armory-shelf');
   left.append(carryTitle, slotGrid, hip, shelfTitle, shelf);
   const benchEl = el('aside', 'armory-bench'); benchEl.setAttribute('aria-live', 'polite');
+  // GP-141 stays on the still picture until its owner supplies the renderer and catalogue copy.
+  const previewKeys = ['label','hint','left','right','unavailable'];
+  const previewer = typeof preview === 'function' && previewKeys.every(key=>hasText('armory.preview.'+key))
+    ? createArmoryPreview({doc, render:preview, labels:{
+      hint:text('armory.preview.hint'), left:text('armory.preview.left'), right:text('armory.preview.right'),
+      front:text('cif.menu.front'), unavailable:text('armory.preview.unavailable')
+    }}) : null;
   body.append(left, benchEl);
   const actions = el('div', 'armory-actions');
   const stow = el('button', null, text('armory.stow')); stow.type = 'button';
@@ -98,10 +108,12 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     benchEl.replaceChildren();
     benchEl.append(el('h3', null, t('armory.bench', {}, 'Workbench')));
     if (!kind) {
+      previewer?.hide();
       benchEl.append(el('p', 'armory-bench-empty', t('armory.benchEmpty', {}, 'Pick a gun to see its attachments.')));
       return;
     }
-    const pic = gunPicture(kind, 'armory-pic big');
+    const pic = previewer ? previewer.element : gunPicture(kind, 'armory-pic big');
+    if (previewer) previewer.show(kind, text('armory.preview.label',{gun:text('weapon.'+kind+'.name')}));
     const name = el('p', 'armory-bench-name', text(`weapon.${kind}.name`));
     const ammo = el('p', 'armory-bench-ammo', describe(kind) || '');
     benchEl.append(pic, name, ammo);
@@ -197,6 +209,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   }
   function close() {
     if (!open) return;
+    previewer?.hide();
     open = false; panel.hidden = true; cif.classList.remove('armory-show');
     onApply(armory.loadout(), armory.read());
     button.focus({ preventScroll: true });
@@ -221,5 +234,5 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   bus.addEventListener('dw-game', listener);
   return { get armory() { return armory; }, element: panel, open: () => button.click(), close, render,
     bench: (kind) => { bench = kind; render(); },
-    dispose() { bus.removeEventListener('dw-game', listener); observer.disconnect(); close(); panel.remove(); button.remove(); } };
+    dispose() { bus.removeEventListener('dw-game', listener); observer.disconnect(); close(); previewer?.dispose(); panel.remove(); button.remove(); } };
 }

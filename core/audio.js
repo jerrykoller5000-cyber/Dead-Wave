@@ -234,7 +234,9 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.04, vol: 0.12, filterFreq: 2200, filterType: 'bandpass' });
     playTone({ freq: 180, type: 'sawtooth', dur: 0.05, vol: 0.08, slideTo: 90 });
   }
+  const shotCount = Object.create(null);   // CL-131: for the test page, how often each gun has been heard
   function fireWeapon(id) {
+    shotCount[id] = (shotCount[id] || 0) + 1;
     switch (id) {
       case 'pistol':
         // Sharp crack, small body, a short slap off the trees.
@@ -304,6 +306,19 @@ export const AudioSys = (() => {
         playNoise({ dur: 0.18, vol: 0.06, filterFreq: 900, filterType: 'bandpass', when: 0.1, rev: 0.6 });
         playNoise({ dur: 0.5, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
         break;
+      case 'm240': {
+        // CL-131: the Watchman, a belt-fed 7.62 on a tripod. Deeper and heavier than the AK (a longer barrel, a heavy
+        // bolt slamming home), with a hard mechanical clack in front and a long low tail, so a burst at 11 a second
+        // runs together into the MG's chug rather than a string of rifle cracks. Each round a touch different.
+        const v = 0.94 + Math.random() * 0.12;
+        playNoise({ dur: 0.012, vol: 0.045, filterFreq: 4200 * v, filterType: 'bandpass' });                 // the bolt
+        playNoise({ dur: 0.055, vol: 0.19, filterFreq: 1250 * v, filterType: 'bandpass', rev: 0.5 });        // the report
+        playTone({ freq: 150 * v, type: 'sawtooth', dur: 0.08, vol: 0.13, slideTo: 52, rev: 0.3 });
+        playTone({ freq: 58 * v, type: 'sine', dur: 0.13, vol: 0.13, slideTo: 34 });                         // the push
+        playNoise({ dur: 0.024, vol: 0.035, filterFreq: 2400 * v, filterType: 'bandpass', when: 0.03 });      // the slap off the trees
+        playNoise({ dur: 0.24, vol: 0.05, filterFreq: 420, filterType: 'lowpass', when: 0.02, rev: 0.35 });
+        break;
+      }
       case 'launcher':
         // Hollow thunk / whoosh (boom on explode).
         playTone({ freq: 140, type: 'sine', dur: 0.08, vol: 0.1, slideTo: 70, rev: 0.3 });
@@ -595,6 +610,17 @@ export const AudioSys = (() => {
     for (let i = 0; i < 9; i++) playTone({ freq: 380 + Math.random() * 600, type: 'sine', dur: 0.06, vol: 0.03, when: i * 0.09 + Math.random() * 0.05, slideTo: 1100, rev: 0.4 });
     playNoise({ dur: 1.2, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.5, attack: 0.15, rev: 0.5 });
     playNoise({ dur: 0.35, vol: 0.09, filterFreq: 500, filterType: 'lowpass', when: 0.45, rev: 0.5 });
+  }
+  // CL-126: his own breath when he is winded after a run (k 0..1, how winded). In: a short, bright draw through the mouth;
+  // out: a longer, lower push with a little chest in it. Quiet: it sits under everything, close to the camera.
+  function playerBreath(k = 1, inhale = true) {
+    const v = Math.max(0, Math.min(1, k));
+    if (v < 0.05) return;
+    if (inhale) playNoise({ dur: 0.34 + 0.12 * v, vol: 0.012 + 0.03 * v, filterFreq: 2100 + Math.random() * 300, filterType: 'bandpass', q: 1.3, attack: 0.16, rev: 0.04 });
+    else {
+      playNoise({ dur: 0.46 + 0.16 * v, vol: 0.014 + 0.04 * v, filterFreq: 850 + Math.random() * 150, filterType: 'bandpass', q: 0.8, attack: 0.05, rev: 0.04 });
+      playNoise({ dur: 0.28, vol: 0.016 * v, filterFreq: 280, filterType: 'lowpass', attack: 0.04 });
+    }
   }
   // MedPen: cap flicked off, the spring-loaded jab (thump + click), a pneumatic hiss, a breath out.
   function medPen() {
@@ -2557,6 +2583,133 @@ export const AudioSys = (() => {
     }
   }
 
+  // --- CL-130 (Jerry's playthrough 1: "We need unique sounds for the different zombies"). The voices were tones
+  // sliding about: a sawtooth groan reads as a machine, and the kinds blurred together. A throat is a buzz (the vocal
+  // folds) shaped by the mouth: so deadVoice is a sawtooth and its slightly detuned twin through three bandpass
+  // formants (a vowel), with a slow pitch wobble, a rasp (the buzz chopped at 20-80 Hz: a growl, a death rattle), a
+  // breath of noise, and an envelope. Each kind is its own throat in DEAD_VOICES: how high, which vowel (an "uh" moan,
+  // an "ah" snarl, an "oo" through water or a gas mask, an "ee" shriek), how rough, how long, and what it does when it
+  // hunts you and when it swings. The kinds' own extras stay over it (the drowned's bubbles, the mask's breath, the
+  // bomber's fizz, the spider's chitter).
+  const VOWEL = { u: [[300, 6, 1], [870, 8, 0.45], [2240, 10, 0.12]], uh: [[640, 6, 1], [1190, 8, 0.5], [2390, 10, 0.16]],
+    a: [[730, 5, 1], [1090, 7, 0.6], [2440, 10, 0.2]], o: [[450, 6, 1], [800, 8, 0.45], [2830, 10, 0.08]],
+    e: [[530, 6, 1], [1840, 9, 0.45], [2480, 10, 0.18]], i: [[300, 7, 0.7], [2300, 10, 0.6], [3000, 12, 0.3]] };
+  // f: pitch [from lo, from hi] and the slide ratio; dur: [lo, hi] s; vowel (to vowel2 over the sound); rough: depth
+  // and Hz of the rasp; vib: pitch wobble (fraction); breath: the noise under it; muffle: a lowpass (a mask, water).
+  const DEAD_VOICES = {
+    shambler: { idle: { f: [82, 108, 0.74], dur: [1.0, 1.5], vowel: 'uh', vowel2: 'u', rough: [0.35, 27], vib: 0.02, breath: 0.25, vol: 0.06 },
+                chase: { f: [108, 136, 0.82], dur: [0.6, 0.9], vowel: 'a', vowel2: 'uh', rough: [0.5, 38], vib: 0.03, breath: 0.3, vol: 0.07 },
+                attack: { f: [160, 190, 0.7], dur: [0.28, 0.36], vowel: 'a', rough: [0.6, 52], vib: 0.02, breath: 0.5, vol: 0.085 } },
+    feral: { idle: { f: [120, 150, 0.9], dur: [0.5, 0.7], vowel: 'e', rough: [0.7, 64], vib: 0.01, breath: 0.4, vol: 0.05 },
+             chase: { f: [190, 250, 0.85], dur: [0.12, 0.16], vowel: 'a', rough: [0.8, 72], vib: 0, breath: 0.6, vol: 0.06, repeat: [3, 0.17] },
+             attack: { f: [300, 360, 1.5], dur: [0.26, 0.32], vowel: 'a', vowel2: 'e', rough: [0.7, 80], vib: 0.02, breath: 0.6, vol: 0.09 } },
+    leaper: { idle: { f: [380, 440, 0.8], dur: [0.3, 0.4], vowel: 'i', rough: [0.3, 60], vib: 0.04, breath: 1.2, vol: 0.03 },
+              chase: { f: [420, 520, 1.2], dur: [0.25, 0.32], vowel: 'i', rough: [0.4, 70], vib: 0.05, breath: 1.0, vol: 0.04 },
+              attack: { f: [600, 700, 1.9], dur: [0.3, 0.36], vowel: 'e', vowel2: 'i', rough: [0.5, 75], vib: 0.04, breath: 0.8, vol: 0.07 } },
+    drowned: { idle: { f: [70, 88, 0.8], dur: [1.0, 1.4], vowel: 'u', vowel2: 'o', rough: [0.45, 9], vib: 0.04, breath: 0.2, vol: 0.06, muffle: 900 },
+               chase: { f: [86, 104, 0.85], dur: [0.7, 1.0], vowel: 'o', vowel2: 'u', rough: [0.55, 11], vib: 0.05, breath: 0.25, vol: 0.065, muffle: 1100 },
+               attack: { f: [130, 150, 0.7], dur: [0.3, 0.4], vowel: 'o', rough: [0.6, 13], vib: 0.03, breath: 0.4, vol: 0.08, muffle: 1300 } },
+    military: { idle: { f: [92, 112, 0.85], dur: [0.8, 1.1], vowel: 'u', rough: [0.3, 30], vib: 0.02, breath: 0.4, vol: 0.05, muffle: 650 },
+                chase: { f: [110, 130, 0.9], dur: [0.5, 0.7], vowel: 'uh', rough: [0.4, 36], vib: 0.02, breath: 0.5, vol: 0.055, muffle: 700 },
+                attack: { f: [150, 170, 0.7], dur: [0.25, 0.3], vowel: 'uh', rough: [0.6, 44], vib: 0.02, breath: 0.6, vol: 0.075, muffle: 800 } },
+    brute: { idle: { f: [52, 64, 0.8], dur: [1.2, 1.6], vowel: 'o', rough: [0.4, 21], vib: 0.015, breath: 0.2, vol: 0.09 },
+             chase: { f: [62, 74, 0.85], dur: [0.8, 1.1], vowel: 'o', vowel2: 'a', rough: [0.5, 25], vib: 0.02, breath: 0.25, vol: 0.1 },
+             attack: { f: [84, 96, 0.62], dur: [0.4, 0.5], vowel: 'a', rough: [0.75, 30], vib: 0.01, breath: 0.4, vol: 0.13 } },
+    spitter: { idle: { f: [118, 140, 0.8], dur: [0.6, 0.8], vowel: 'e', vowel2: 'uh', rough: [0.6, 16], vib: 0.03, breath: 0.5, vol: 0.05 },
+               chase: { f: [130, 150, 0.85], dur: [0.5, 0.7], vowel: 'e', rough: [0.65, 18], vib: 0.03, breath: 0.6, vol: 0.055 },
+               attack: { f: [170, 200, 0.6], dur: [0.22, 0.28], vowel: 'e', rough: [0.8, 22], vib: 0, breath: 1.4, vol: 0.075 } },
+    screamer: { idle: { f: [360, 420, 0.75], dur: [1.0, 1.3], vowel: 'i', vowel2: 'e', rough: [0.15, 40], vib: 0.05, breath: 0.3, vol: 0.035 },
+                chase: { f: [480, 560, 1.35], dur: [0.5, 0.7], vowel: 'e', vowel2: 'i', rough: [0.2, 45], vib: 0.06, breath: 0.3, vol: 0.045 },
+                attack: { f: [880, 980, 1.3], dur: [0.25, 0.3], vowel: 'i', rough: [0.3, 50], vib: 0.04, breath: 0.4, vol: 0.06 } },
+    bomber: { idle: { f: [68, 82, 0.78], dur: [0.8, 1.1], vowel: 'o', vowel2: 'u', rough: [0.5, 14], vib: 0.03, breath: 0.15, vol: 0.05 },
+              chase: { f: [76, 90, 0.8], dur: [0.6, 0.8], vowel: 'o', rough: [0.55, 16], vib: 0.03, breath: 0.2, vol: 0.055 },
+              attack: { f: [100, 120, 0.6], dur: [0.3, 0.4], vowel: 'a', rough: [0.6, 20], vib: 0.02, breath: 0.3, vol: 0.07 } }
+  };
+  function deadVoice(spec, v = 1, pan = 0, when = 0) {
+    const c = ensure();
+    if (!c || muted || !spec) return;
+    const n = spec.repeat ? spec.repeat[0] : 1;
+    for (let r = 0; r < n; r++) {
+      const t0 = c.currentTime + when + (spec.repeat ? r * spec.repeat[1] : 0);
+      const dur = rr(spec.dur[0], spec.dur[1]), f0 = rr(spec.f[0], spec.f[1]), f1 = Math.max(25, f0 * spec.f[2]);
+      const vol = spec.vol * v * (spec.repeat ? 1 - r * 0.15 : 1);
+      if (vol < 0.002) continue;
+      const env = c.createGain();
+      env.gain.setValueAtTime(0.0001, t0);
+      env.gain.exponentialRampToValueAtTime(vol, t0 + Math.min(0.08, dur * 0.25));
+      env.gain.setTargetAtTime(vol * 0.7, t0 + dur * 0.4, dur * 0.2);
+      env.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      // The rasp: the buzz chopped by a low LFO (rough[0] deep, rough[1] Hz, drifting a little).
+      const am = c.createGain(); am.gain.setValueAtTime(1 - spec.rough[0] * 0.5, t0);
+      const lfo = c.createOscillator(); lfo.type = 'triangle'; lfo.frequency.setValueAtTime(spec.rough[1] * rr(0.9, 1.1), t0);
+      lfo.frequency.linearRampToValueAtTime(spec.rough[1] * rr(0.7, 1.2), t0 + dur);
+      const lfoG = c.createGain(); lfoG.gain.value = spec.rough[0] * 0.5; lfo.connect(lfoG); lfoG.connect(am.gain);
+      // The folds: a saw and its twin a few cents off (a ragged, doubled throat), with a slow wobble in pitch.
+      const oscs = [];
+      for (const det of [1, 1.012]) {
+        const o = c.createOscillator(); o.type = 'sawtooth';
+        o.frequency.setValueAtTime(f0 * det, t0); o.frequency.exponentialRampToValueAtTime(f1 * det, t0 + dur);
+        if (spec.vib) {
+          const vb = c.createOscillator(); vb.frequency.value = rr(4, 6.5);
+          const vg = c.createGain(); vg.gain.value = f0 * spec.vib; vb.connect(vg); vg.connect(o.frequency);
+          vb.start(t0); vb.stop(t0 + dur + 0.05);
+        }
+        o.connect(am); oscs.push(o);
+      }
+      // The mouth: three formants of the vowel, moving to vowel2 over the sound.
+      const sum = c.createGain(); sum.gain.value = 1;
+      const A = VOWEL[spec.vowel] || VOWEL.uh, B = VOWEL[spec.vowel2 || spec.vowel] || A;
+      A.forEach(([F, Q, g], k) => {
+        const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = Q;
+        bp.frequency.setValueAtTime(F, t0); bp.frequency.linearRampToValueAtTime(B[k][0], t0 + dur);
+        const fg = c.createGain(); fg.gain.value = g * 2.2;
+        am.connect(bp); bp.connect(fg); fg.connect(sum);
+      });
+      let tail = sum;
+      if (spec.muffle) { const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = spec.muffle; sum.connect(lp); tail = lp; }
+      tail.connect(env);
+      const out = pan ? panNode(env, pan) : env;
+      out.connect(outBus()); sendToReverb(out, 0.3);
+      for (const o of oscs) { o.start(t0); o.stop(t0 + dur + 0.05); }
+      lfo.start(t0); lfo.stop(t0 + dur + 0.05);
+      // The breath through it.
+      if (spec.breath) playNoise({ dur: dur * 0.9, vol: vol * 0.35 * spec.breath, filterFreq: (B[1] || A[1])[0], filterType: 'bandpass', q: 1.2, attack: dur * 0.3, rev: 0.25, pan, when: when + (t0 - c.currentTime - when) });
+    }
+  }
+  const voiceCount = Object.create(null);   // CL-130: for the test page, how often each kind has spoken
+  // CL-130: the dead on their feet (close up only; index.html throttles them across the horde). i: the step's count,
+  // so a shambler drags every other foot.
+  const stepCount = Object.create(null);
+  function deadStep(kind, v = 1, pan = 0, i = 0) {
+    stepCount[kind] = (stepCount[kind] || 0) + 1;
+    const p = rr(0.88, 1.12), V = v * 0.9;
+    switch (kind) {
+      case 'feral': case 'leaper':   // bare feet, quick
+        playNoise({ dur: 0.03, vol: 0.05 * V, filterFreq: 900 * p, filterType: 'bandpass', q: 1.2, pan });
+        playNoise({ dur: 0.02, vol: 0.025 * V, filterFreq: 3000 * p, filterType: 'bandpass', pan, when: 0.01 });
+        break;
+      case 'drowned':   // waterlogged
+        playNoise({ dur: 0.09, vol: 0.05 * V, filterFreq: 1500 * p, filterType: 'bandpass', q: 1.5, pan });
+        playNoise({ dur: 0.06, vol: 0.04 * V, filterFreq: 300, filterType: 'lowpass', pan });
+        break;
+      case 'military':   // boots
+        playNoise({ dur: 0.05, vol: 0.06 * V, filterFreq: 420 * p, filterType: 'lowpass', pan });
+        playNoise({ dur: 0.02, vol: 0.03 * V, filterFreq: 2400 * p, filterType: 'bandpass', pan, when: 0.005 });
+        break;
+      case 'hop':   // the whole body coming down on one foot
+        playNoise({ dur: 0.1, vol: 0.09 * V, filterFreq: 180 * p, filterType: 'lowpass', pan });
+        playNoise({ dur: 0.04, vol: 0.03 * V, filterFreq: 1200 * p, filterType: 'bandpass', pan, when: 0.01 });
+        break;
+      case 'crawl':   // a hand slapped down, then the body dragged up to it
+        playNoise({ dur: 0.04, vol: 0.06 * V, filterFreq: 600 * p, filterType: 'bandpass', q: 1.4, pan });
+        playNoise({ dur: 0.32, vol: 0.035 * V, filterFreq: 800 * p, filterType: 'bandpass', q: 0.8, attack: 0.12, pan, when: 0.08 });
+        break;
+      default:   // a shambler and its like: a scuff, and every other step the foot dragged
+        playNoise({ dur: 0.05, vol: 0.05 * V, filterFreq: 350 * p, filterType: 'lowpass', pan });
+        if (i % 2) playNoise({ dur: 0.22, vol: 0.03 * V, filterFreq: 1300 * p, filterType: 'bandpass', q: 0.9, attack: 0.08, pan, when: 0.04 });
+    }
+  }
+
   // --- Zombie voices: what they sound like depends on what they are and what they
   // are doing — shuffling about, hunting you down, or swinging.
   let voiceCd = 0;
@@ -2566,6 +2719,13 @@ export const AudioSys = (() => {
     if (c.currentTime < voiceCd) return;
     voiceCd = c.currentTime + (state === 'attack' ? 0.09 : 0.28);
     const rv = 0.3;
+    voiceCount[type] = (voiceCount[type] || 0) + 1;
+    // CL-130: the throat first (DEAD_VOICES), then each kind's own extras below; the old sawtooth growls are gone from
+    // the kinds that have a throat now, and kept for the bosses and the spider.
+    const throat = DEAD_VOICES[type] || (type === 'demon' || type === 'colossus' || type === 'spider' || type === 'guardian' ? null : DEAD_VOICES.shambler);
+    if (throat) { deadVoice(throat[state === 'leap' ? 'attack' : state] || throat.idle, v, pan); if (type !== 'drowned' && type !== 'military' && type !== 'bomber' && type !== 'spider') return; }
+    // The growl: kept for the bosses (the demon, the colossus) and the kinds' extras. CL-130 took it out with the old
+    // throats and left them calling it (a ReferenceError the first time a colossus or a demon spoke; t164).
     const growl = (f0, f1, dur, vol, type = 'sawtooth', w = 0) => playTone({ freq: f0, type, dur, vol: vol * v, slideTo: f1, rev: rv, attack: 0.04, pan, when: w });
     const breath = (freq, dur, vol, w = 0) => playNoise({ dur, vol: vol * v, filterFreq: freq, filterType: 'bandpass', q: 0.9, rev: rv, attack: dur * 0.3, pan, when: w });
     switch (type) {
@@ -2586,7 +2746,6 @@ export const AudioSys = (() => {
         break;
       }
       case 'drowned':
-        growl(rr(70, 95), 55, 0.7, 0.05);
         for (let i = 0; i < (state === 'idle' ? 4 : 7); i++) playTone({ freq: rr(300, 700), type: 'sine', dur: 0.04, vol: 0.035 * v, slideTo: rr(700, 1100), when: 0.05 + i * rr(0.05, 0.1), pan }); // bubbles
         if (state === 'attack') breath(700, 0.2, 0.08);
         break;
@@ -2594,7 +2753,6 @@ export const AudioSys = (() => {
         // Breathing through a gas mask, and the odd burst from a dead radio.
         breath(900, 0.45, 0.05); breath(700, 0.5, 0.045, 0.55);
         if (state !== 'idle' || Math.random() < 0.4) playNoise({ dur: 0.25, vol: 0.03 * v, filterFreq: 2400, filterType: 'bandpass', q: 3, when: 0.2, pan });
-        if (state === 'attack') growl(160, 90, 0.2, 0.08);
         break;
       case 'brute':
         if (state === 'attack') { growl(95, 55, 0.35, 0.12); playNoise({ dur: 0.2, vol: 0.08 * v, filterFreq: 300, filterType: 'lowpass', pan }); }
@@ -2614,7 +2772,6 @@ export const AudioSys = (() => {
         // The charge it carries fizzes and bubbles; faster the closer it gets.
         playNoise({ dur: state === 'idle' ? 0.5 : 0.7, vol: 0.05 * v, filterFreq: 5500, filterType: 'highpass', attack: 0.05, pan });
         for (let i = 0; i < (state === 'idle' ? 2 : 5); i++) playTone({ freq: 2000, type: 'square', dur: 0.02, vol: 0.03 * v, when: i * (state === 'idle' ? 0.35 : 0.14), pan }); // ticking
-        growl(rr(90, 120), 70, 0.4, 0.035);
         break;
       case 'demon':
         growl(rr(60, 75), 40, 0.7, 0.09); growl(rr(122, 150), 80, 0.6, 0.05, 'square', 0.03);
@@ -2806,7 +2963,7 @@ export const AudioSys = (() => {
   const SHOT_DUCK = {
     pistol: [0.5, 0.78], uzi: [0.55, 0.8], revolver: [0.35, 0.62], m4: [0.45, 0.7], ak: [0.4, 0.66],
     minigun: [0.5, 0.72], shotgun: [0.3, 0.58, 0.08], aa12: [0.35, 0.62], sniper: [0.25, 0.52, 0.12],
-    launcher: [0.45, 0.7]
+    launcher: [0.45, 0.7], m240: [0.42, 0.68]
   };
   const BIG = [0.18, 0.42, 0.25];
   const W = (fn, duck) => onBus('weap', fn, duck);
@@ -2844,7 +3001,7 @@ export const AudioSys = (() => {
     spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
     crateLand, pickup, repairClank, sellChime,
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
-    grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
+    grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, playerBreath, deadVoice, DEAD_VOICES, voiceCount, deadStep, stepCount, shotCount, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
     // Read-only view of the mix, for tests and the perf overlay.
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,

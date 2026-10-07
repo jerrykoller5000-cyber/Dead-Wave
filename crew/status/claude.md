@@ -1,15 +1,21 @@
 # Claude
 
-state: active
+state: idle
 model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
-task: CL-120 The crouch: no clipping through the ground
-touching: index.html (updateMarinePose: the Crouch legs block only), tools/tests/t184.js
-since: 2026-10-05T23:21Z
-next: CL-84 (the reload), CL-122 (the hands), CL-123
+task: —
+touching: —
+since: 2026-10-07T02:22Z
+next: reviews; keeping the crew moving while Jerry is away
 blocked-on: —
-last-report: handoffs/2026-10-05-claude-CL-119.md
+last-report: handoffs/2026-10-07-claude-CL-131.md
 
 ## Notes
+
+- Test ids: check tools/tests for tNNN.js before naming a new one (I overwrote Grokbot's twice on 2026-10-05).
+
+- CL-122 (2026-10-05): HANDS/rollForearm/drawPlace/knifeArm in index.html, TT.handsDbg (drawHold, knifeHold, knifeClip). Bridge lesson: device_commit_files sends the synced copy of /mnt/user-data/outputs, which lags a rewrite of the same path: commit each version under a new file name, then re-stage and cmp.
+
+- CL-120 / CL-84 part 2 (2026-10-05): feet on slopes = footGround and the "Feet on the ground under them" block in updateMarinePose (t193); the reload = studio/marine-reload.js + studio/clips/marine/reload-rifle.json, driven from holdWeapon (TT.reloadClipDbg, t194). Real-renderer strips: /tmp scripts crouchshots/reloadshots (aim from his own yaw, or the arms twist).
 
 - 2026-10-05: board cleared and reorganized for Jerry (Start here table; queues in Now / Waiting / Later). CL-121 waits on Q-6.
 

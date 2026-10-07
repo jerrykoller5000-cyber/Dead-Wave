@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
+state: active
 model: Grok 4.7
-task: —
-touching: —
-since: 2026-10-05T23:27Z
-next: CU-86 R5 · P-141 · for GP-84. The Hollows' snapshot and pickup rec
+task: CU-92 Commit the pile since 71ebd9d
+touching: git
+since: 2026-10-07T04:05Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-05-cursor-CU-85.md
+last-report: handoffs/2026-10-06-cursor-CU-57.md
 
 ## Notes
 

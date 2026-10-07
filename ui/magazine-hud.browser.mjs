@@ -37,7 +37,8 @@ try {
   await page.waitForFunction(() => TT.getPhase() === 'prep' && !document.body.classList.contains('deploying'), null, { timeout:45000 });
 
   await page.evaluate(() => hudProbe.set('pistol', 5, [12,6,1]));
-  assert.match(await page.locator('#ammoDetail').textContent(), /3 mags/);
+  assert.match(await page.locator('#ammoDetail').textContent(), /19 Bullets/);
+  assert.match(await page.locator('#ammoMags .mag-count').textContent(), /3 mags/);
   assert.deepEqual(await page.locator('#ammoMags .mag-glyph').evaluateAll(els => els.map(e => [e.dataset.rounds,e.style.getPropertyValue('--fill')])),
     [['12','100%'],['6','50%'],['1','8%']]);
   assert.match(await page.locator('#ammoMags').getAttribute('aria-label'), /12 of 12 rounds, 6 of 12 rounds, 1 of 12 rounds/);
@@ -47,13 +48,14 @@ try {
     console.log('GPU HUD screenshot: Claude outputs/shots/gp79/after-pistol-mag-hud.png');
   }
   await page.evaluate(() => hudProbe.set('revolver', 2, [6,3]));
-  assert.match(await page.locator('#ammoDetail').textContent(), /2 loaders/);
+  assert.match(await page.locator('#ammoDetail').textContent(), /9 Bullets/);
+  assert.match(await page.locator('#ammoMags .mag-count').textContent(), /2 loaders/);
   assert.equal(await page.locator('#ammoMags .loader').count(),2);
   await page.evaluate(() => hudProbe.set('shotgun', 2, [11]));
-  assert.match(await page.locator('#ammoDetail').textContent(), /11 shells/);
+  assert.match(await page.locator('#ammoDetail').textContent(), /11 Bullets/);
   assert.equal(await page.locator('#ammoMags .mag-glyph').count(),0);
   await page.evaluate(() => hudProbe.set('launcher', 1, [5]));
-  assert.match(await page.locator('#ammoDetail').textContent(), /5 rounds/);
+  assert.match(await page.locator('#ammoDetail').textContent(), /5 Bullets/);
   await page.setViewportSize({ width:390, height:844 });
   await page.evaluate(() => hudProbe.set('pistol', 12, Array(14).fill(12)));
   assert.equal(await page.locator('#ammoMags .mag-glyph').count(),14);

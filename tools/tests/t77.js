@@ -8,7 +8,8 @@
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
   try {
     const B = T.BLADE_STATS, W = T.WEAPON_STATS;
-    ok(B.knife.cd === 0.55 && B.knife.dmg === 22 && B.machete.cd === 0.5 && B.machete.maxHits === 3, 'blades: knife cd ' + B.knife.cd + ', machete cd ' + B.machete.cd + ' max ' + B.machete.maxHits);
+    // GB-94 follow-up (Jerry 2026-10-05: "Buff the knife a little"): the knife's damage is 26 (was 22); the GB-52 checks are the same.
+    ok(B.knife.cd === 0.55 && B.knife.dmg === 26 && B.machete.cd === 0.5 && B.machete.maxHits === 3, 'blades: knife cd ' + B.knife.cd + ', machete cd ' + B.machete.cd + ' max ' + B.machete.maxHits);
     ok(W && W.chainsaw.damage === 14 && W.chainsaw.arc === 0.2, 'saw: ' + (W && W.chainsaw.damage) + ' a tick, arc ' + (W && W.chainsaw.arc));
     ok(T.meleeSizeMul({ typeKey: 'shambler' }) === 1 && T.meleeSizeMul({ typeKey: 'brute' }) === 0.6 && T.meleeSizeMul({ typeKey: 'colossus' }) === 0.35, 'size: shambler 1, brute 0.6, colossus 0.35');
     await startMatch(T, 'Blades');
@@ -19,7 +20,7 @@
     const px = 10, pz = 10;
     const hold = () => T.player.position.set(px, T.sampleHeight(px, pz), pz);
     hold(); await wait(200); hold();
-    // (1) The knife on a shambler: 22 x its Blade weakness 1.5 (GB-104, D-62) = 33. On a brute: 22 x (1 - 0.55 plates, GB-75) x 0.6 = 5.9 (9.5 before the plates).
+    // (1) The knife on a shambler: 26 x its Blade weakness 1.5 (GB-104, D-62) = 39. On a brute: 26 x (1 - 0.55 plates, GB-75) x 0.6 = 7.0 (at 22: 33 and 5.9).
     const hitOnce = async (kind) => {
       T.clearZombies(); await wait(50);
       const z = T.spawnZombie(px, pz + 1.6, kind, true, true);
@@ -29,8 +30,8 @@
       return 1000 - z.hp;
     };
     const ds = await hitOnce('shambler'), db = await hitOnce('brute');
-    ok(Math.abs(ds - 22 * T.WEAKNESS.shambler.blade) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (22 x its Blade weakness ' + T.WEAKNESS.shambler.blade + ', GB-104)');
-    ok(Math.abs(db - 22 * 0.45 * 0.6) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (was ' + (22 * 0.72).toFixed(1) + ' before GB-52, ' + (22 * 0.72 * 0.6).toFixed(1) + ' before the plates)');
+    ok(Math.abs(ds - 26 * T.WEAKNESS.shambler.blade) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (26 x its Blade weakness ' + T.WEAKNESS.shambler.blade + ', GB-104)');
+    ok(Math.abs(db - 26 * 0.45 * 0.6) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (was ' + (22 * 0.72).toFixed(1) + ' before GB-52, ' + (22 * 0.72 * 0.6).toFixed(1) + ' before the plates)');
     // (1b) The saw no longer takes the head off anything in a second: ten saw ticks on a brute
     // (8.4 after its size, 3.8 after its plates since GB-75) leave it standing with its head on; twenty-five at most kill it.
     {

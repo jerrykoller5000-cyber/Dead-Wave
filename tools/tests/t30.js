@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const p = T.player.position; T.unlockAllBuilds(); T.addCash(100000);
   const gx = T.gridIndex(p.x), gz = T.gridIndex(p.z);
   const t = T.placeBuildAt('heavy', gx + 2, gz - 2, 0);

@@ -1,15 +1,40 @@
 # ChatGPT
 
-state: active
+state: blocked
 model: GPT-6 (exact variant unsure)
-task: GP-72 One voice: player-facing wording, Armory and Training Ground copy, and control labels
-touching: ui/strings.js, ui/strings.test.mjs, index.html (shop and armory copy)
-since: 2026-10-05T22:51Z
+task: GP-148 Catalogue GB-137 reload refusal banners
+touching: —
+since: 2026-10-07T01:54Z
 next: —
-blocked-on: —
-last-report: handoffs/2026-10-02-chatgpt-GP-137.md
+blocked-on: GB-140 integration suite (Antigravity map and AK reload-banner visual reports received)
+last-report: handoffs/2026-10-06-chatgpt-GP-148.md
 
 ## Notes
+
+2026-10-07 GP-84: narrow-screen QA now PASSED per updated AG-52-GP84 report; all eight 390px screenshot files verified present. Earlier desktop pass stands. Visual blocker cleared and request acknowledged; GB-140 integration closure remains. No code changes or new tests.
+
+2026-10-07 check-in: AG-52-Batch2 confirms GP-145/146/147 static GPU visuals; AG-52-GP148 confirms AK no-fuller heading/help. Reports and requests acknowledged. GP-148 implementation remains unchanged, 14 catalogue checks and desktop/narrow fixture previously passed. GB-140 run1 still active, with multiple failing test files; Grokbot owns triage and no new request is addressed to ChatGPT. No full-suite, video or performance pass claimed. Ready queue empty; no code checked out. Model GPT-6 (exact variant unsure).
+
+2026-10-07 UTC: GP-148 implemented and checked out; only three ui/strings.js keys added, existing GB-137 callers unchanged. Help accurately includes equal/lower spares. Catalogue14/0 plus actual-call and 1280/390 banner checks pass. Handoff 2026-10-06-chatgpt-GP-148.md. Grokbot GB-140 now owns full integration (actively running); Antigravity actively checks GB-137/maps and has GP-148 copy request. Claude approved GP-145/146/147 and fixed check-players allowance. GP-144 live result acknowledged. All files released; no git/long runs or changed test expectations. Model GPT-6 (exact variant unsure).
+
+2026-10-06 D-78: GP-145, GP-146, GP-147 implemented in order and separately checked out. All code reservations released. New ui/map-enemies, map-landmarks and map-missions modules; index map-only integration; catalogue keys. Combined focused run 52 pass/0 fail; production canvas before/after and actual map HTML/CSS at1280/390 pass; embedded module syntax passes. Separate handoffs 2026-10-06-chatgpt-GP-145.md, GP-146.md, GP-147.md. GP-146 changes old HQ expectation to FOB Threshold, flagged for lead review. Waiting only on live QA/FPS and committer full suite; no git/no long runs. next chatgpt says queue empty. Earlier GP-144 now has AG live confirmation; its full suite still pending. Model GPT-6 (exact variant unsure).
+
+2026-10-06 17:58Z check-in: GB-139 wired all GP-142 tips (owner t212 18/0); no longer waiting on Grok wiring, only live/full suite. GP-143 Watchman six keys supplied, catalogue14/0 + counts/remap assertions + 1280/390 banner fixture pass. GP-144 found GP-79 helper/tests and approved docs/loadout section4 orphaned from index; restored per-spare count/fullness icons directly via existing magazineSnapshot, kept Jerry's later GB-109 Bullets total and GB-138 mounted branch. 20 units + production updateAmmoHud/store DOM fixture pass; narrow 30-mag reserve/action clearance inspected. Old browser smoke expectations adjusted for GB-109, --review filed. All code released. Reports GP-142-checkin, GP-143, GP-144. Still no completed AG52 report or Cursor full-suite result; earlier GP-84/138/139/140/141 also remain awaiting checks. No git, no long runs; model GPT-6 (exact variant unsure).
+
+
+2026-10-06 13:53Z: Claude released shared files and approved preview callback (08:46Z); old Claude-reservation blockers are CLEARED. GP-138 insulated-boot copy integrated with CL-125; 20 units pass. GP-140 Guns child label wired; desktop/narrow renderer fixture passes. GP-141 actual carryGunCopy preview wired to shared renderer; 2 adapter tests (15 angles, no source/resource mutation), prior armory3/catalogue14 and control lifecycle fixture pass. New reports end -integration.md. All three await AG52/Cursor, as do GP-139 and GP-84 (8 new QA screenshots, no finished report). GP-142 provides upgrade hint/build tip/grenadeHold keys; 14 catalogue tests + remapped controls pass, exact keys sent Grokbot for first-use/combat wiring. All code reservations released; next says queue empty because remaining tasks blocked. No git, no long runs; npm test not run due documented CDP limitation. Model GPT-6 (exact variant unsure).
+
+
+2026-10-06 check-in: GP-139 implemented (18 units + 1280/390 DOM fixture pass), awaiting AG-52/integration. GP-138 UI/unlocked finishes implemented (8 units + fixture pass), awaiting Claude CL-125 getGear/default pause/boot-tint hooks. GP-140 tab colours implemented (fixture pass), Guns child label awaits reserved index/strings. GP-141 UI controls/lifecycle implemented (3 units + fixture pass), gated OFF until preview callback approval/wiring and five catalogue keys. Reports handoffs/2026-10-06-chatgpt-GP-{138,139,140,141}.md. None marked done prematurely. Claude still reserves whole index.html and ui/strings.js under CL-127; requests sent to narrow/release; do not bypass state working checker omission. GB-133 upgrade copy remains LATER until strings released. GP-84 awaits Cursor full suite + AG52 live; CU-88 fixes entry bug. No git. Model GPT-6 (exact variant unsure).
+
+
+2026-10-06 07:58Z check-in: GP-84 still awaits Cursor/Antigravity sign-off; CU-88 owns the reported Hush entry/alarm bug. New playthrough work acknowledged LATER per Claude explicit after-GP-84 instruction. Asked Claude if independent GP-139 can proceed while verification waits. Start here order is GP-139, GP-138, GP-140, GP-141 (next command currently lists GP-138 first). Implementation handoff remains 2026-10-06-chatgpt-GP-84.md; no new code changes or test run.
+
+2026-10-06 GP-84 implemented: ui/hollows.js/css/test plus keyed strings and narrow index/HQ hooks. 50 Node checks pass; production-UI fixtures at 1280/390px fit and were inspected. Live WebGL attempts were obscured by opening or timed out, so no live/full-suite/GPU claim. Await Cursor integration and Antigravity final visuals/performance; report handoffs/2026-10-06-chatgpt-GP-84.md. GP-72 CLOSED on CU-55 two full green runs and AG-51 visual pass. No existing tests, gameplay or git changes.
+
+2026-10-05 GP-72 follow-up: AG-51 local WebGL visual pass received; Claude reviewed copy and approved CU-86. Fixed t182 wording by using later, without changing its test. Machete shop text now keyed and reflects current 69 damage / 2.45m / 3 targets, narrower and quicker. 35 focused checks pass; 44 changed keys/63 new/14 call-sites all verified after stale-file restore. Cursor asked to rerun t182. GP-84 can now start; GP-72 still awaits integration verification.
+
+2026-10-05 GP-72 implemented: 43 corrected keys, 63 new keys, 13 narrow index text replacements; 35 focused checks pass before/after, catalogue coverage and actual armoryMods/SHOP_HINT assertions pass. Standard screenshot failed CDP Page.enable; visual/full-suite/performance verification requested from Antigravity/Cursor. Not ticked done. See handoffs/2026-10-05-chatgpt-GP-72.md and exact copy JSON. Current controls 1/2/3/4/X; preserve Jerry mural/sign exceptions. GP-84 still needs Claude approval of CU-86 contract; t134 follow-up remains LATER. No git, tests or gameplay logic changed.
 
 2026-10-02 GP-137 implemented per Jerry final request:20s marks/4s fade; facility24s synth loop/ventilation and all training action cues; world music/ambience/zombie/weather cues blocked only indoors. Real WebGPU audio isolation/mute/exit/fade/pool tests PASS;6 units PASS; range5/5/scoped click and0 first-use impact shader builds PASS. Review/listen review/training-sound/index.html. Coordinated with Claude CL-118 simulation split; audio owns core/audio.js narrow facade, ui/training-audio.js. Independent listening/full suite/FPS pending; no git. See GP-137 handoff.
 

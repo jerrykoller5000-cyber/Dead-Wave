@@ -24,10 +24,14 @@
     await until(() => ms().stage === 'calm' && ms().deckTrack, 3000);
     const s1 = ms();
     const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
-    // CL-38: every night has a song in First Blood's family, on GB-53's 20-night table (the
-    // Ember nights 4, 8, 16 and the Guardian nights 6, 12, 18 have their own).
-    ok(wb === '1:fight_day01 2:fight_n02 4:fight_ember 5:fight_n04 6:fight_guardian 7:fight_n04 8:fight_ember 9:fight_n07 11:fight_n10 12:fight_guardian 13:fight_n10 14:fight_n14 16:fight_ember_late 17:fight_n14 18:fight_guardian_late 19:fight_n18', 'waves by day: a song for every night (CL-38; CL-71: 16 and 18 their own late tiers): ' + wb);
-    ok(['fight_ember_late', 'fight_guardian_late'].every((k) => s1.sectioned.includes(k)), 'CL-71: the late Ember and Guardian tiers are section songs: ' + s1.sectioned.filter((k) => /late/.test(k)).join(', '));
+    // CL-128 (Jerry's playthrough 1): every night has its own song (tools/nights.py). Night 1 is First Blood; night 14 is Fog
+    // Night, which plays its own song (specials) and falls back to night 13's while that one decodes.
+    const want = ['1:fight_day01'].concat([2,3,4,5,6,7,8,9,10,11,12,13].map((n) => n + ':fight_night' + String(n).padStart(2, '0')),
+      ['14:fight_night13'], [15,16,17,18,19,20].map((n) => n + ':fight_night' + n)).join(' ');
+    ok(wb === want, 'waves by day: a song of its own for every night (CL-128): ' + wb);
+    const nightSongs = s1.waveByDay.map((w) => w.track).filter((t) => /^fight_night/.test(t));
+    ok(nightSongs.length >= 18 && nightSongs.every((k) => s1.sectioned.includes(k)), 'CL-128: every night song is a section song (' + nightSongs.filter((k) => s1.sectioned.includes(k)).length + ' of ' + nightSongs.length + ')');
+    ok(!s1.sectioned.some((k) => /^fight_n\d|^fight_(ember|guardian)(_late)?$/.test(k)), 'CL-128: the old First Blood family is out of the sections (not decoded at start): ' + s1.sectioned.join(', '));
     // CL-70 (P-20): night 19 sounds bigger than night 2: the wave's music gains up to +2.5 dB over the run
     // and its floor rises from 70% to 85% from night 8, and neither ever drops from one night to the next.
     const nc = s1.nightCurve || [];

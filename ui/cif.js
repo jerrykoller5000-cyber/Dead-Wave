@@ -1,15 +1,22 @@
 // Presentation only. Wardrobe validation, saving and unlock ownership stay with their owners.
-export function filterFinishes(entries, filter) {
-  return entries.filter(entry => filter === 'all' || (filter === 'locked' ? entry.locked : !entry.locked));
+export function filterFinishes(entries) {
+  return entries.filter(entry => !entry.locked);
 }
 
-export function createCifMenu({root, text, freeCamos}) {
+export function availableCifItems(items, gear) {
+  const required = {helmet:'helmet', carrier:'vest', pads:'pads'};
+  return items.filter(id => gear == null || !Object.hasOwn(required,id) || gear[required[id]] === true);
+}
+
+export function createCifMenu({root, text, freeCamos, getGear=()=>null}) {
   const $ = id => root.querySelector('#' + id);
   const list = $('cifList'), options = $('cifOptions'), filters = $('cifFilters');
-  let filter = 'available', focus = null, selection = '';
+  let focus = null, selection = '';
+  const countLabel = document.createElement('span');
+  countLabel.className = 'cif-available-count'; filters.replaceChildren(countLabel);
   function applyFilter() {
     const entries = [...list.querySelectorAll('[data-camo]')].map(button => ({button, locked: button.disabled}));
-    const visible = new Set(filterFinishes(entries, filter).map(entry => entry.button));
+    const visible = new Set(filterFinishes(entries).map(entry => entry.button));
     for (const {button} of entries) button.hidden = !visible.has(button);
     for (const heading of list.querySelectorAll('.cif-group')) {
       let sibling = heading.nextElementSibling, any = false;
@@ -18,16 +25,8 @@ export function createCifMenu({root, text, freeCamos}) {
       }
       heading.hidden = !any;
     }
-    for (const button of filters.querySelectorAll('button')) {
-      const key = button.dataset.filter;
-      button.textContent = text('cif.menu.count', {label:text('cif.menu.' + key), count:filterFinishes(entries,key).length});
-      button.setAttribute('aria-pressed', String(key === filter));
-    }
+    countLabel.textContent = text('cif.menu.count', {label:text('cif.menu.available'), count:visible.size});
     $('cifEmpty').hidden = entries.length === 0 || visible.size > 0;
-  }
-  for (const key of ['available','locked','all']) {
-    const button = document.createElement('button');button.type = 'button';button.dataset.filter = key;
-    button.addEventListener('click', () => {filter = key;applyFilter();root.querySelector('.cif-scroll').scrollTop = 0;});filters.append(button);
   }
   return {
     prepare() {
@@ -36,6 +35,14 @@ export function createCifMenu({root, text, freeCamos}) {
       options.replaceChildren();
     },
     refresh({tab, item, current}) {
+      const itemButtons = [...root.querySelectorAll('#cifItems [data-cif-item]')];
+      const available = new Set(availableCifItems(itemButtons.map(b=>b.dataset.cifItem), getGear()));
+      for (const button of itemButtons) button.hidden = !available.has(button.dataset.cifItem);
+      // Reuse the owner's selection handler; never mutate wardrobe or unlock data here.
+      if (itemButtons.some(button=>button.dataset.cifItem===item && button.hidden)) {
+        const first = itemButtons.find(button=>!button.hidden);
+        if (first) { first.click(); return; }
+      }
       if (selection !== tab + ':' + item) root.querySelector('.cif-scroll').scrollTop = 0;
       selection = tab + ':' + item;
       const camos = [...list.querySelectorAll('[data-camo]')];

@@ -3,11 +3,11 @@
 (async () => {
   const T = window.TT; const out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
-  document.getElementById('modeHunt').click();
-  await new Promise(r => setTimeout(r, 1500));
+  await startMatch(T, 'TestMarine');
   T.unlockAllBuilds(); T.addCash(50000);
   const p = T.player.position;
-  let gx = T.gridIndex(p.x) + 3; const gz0 = T.gridIndex(p.z) - 3;
+  // Fixed cells beside the cabin (the HQ stands at 0,0), where the match opens: not counted from wherever he is.
+  let gx = 3; const gz0 = -3;
   const stacks = [['wall','platform'],['wall','wall','platform'],['wall','floor'],['sandbag','platform'],['wall','platform','railing'],['wall','floor','railing'],['wall','platform','wire']];
   const placed = [], cells = [];
   for (const st of stacks) {

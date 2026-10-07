@@ -4,6 +4,9 @@
   const T = window.TT; const out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // Hold the trigger for so many seconds of the GAME's clock, not the wall's: a loaded box runs fewer frames, and a
+  // wall-clock hold fires fewer rounds than the check counts (CU-55). The expectations are the same.
+  const hold = async (sec) => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < sec && Date.now() - w0 < 8000) await wait(20); };
   const hud = () => (document.getElementById('ammoDetail') || {}).textContent || '';
   try {
     await startMatch(T, 'FireSelect');
@@ -17,7 +20,7 @@
     ok(/AUTO/i.test(hud()), 'GB-127: the ammo line says AUTO from the start (' + hud().trim() + ')');
     const a0 = T.getAmmo().m4;
     T.setMouseFireDbg(true);
-    await wait(400);
+    await hold(0.4);
     T.setMouseFireDbg(false);
     const burst = a0 - T.getAmmo().m4;
     ok(burst > 2, 'GB-127: it starts on AUTO, holding the button fires a burst (' + burst + ' rounds)');
@@ -26,13 +29,13 @@
     ok(/SEMI/i.test(hud()), 'K: the ammo line says SEMI');
     const a1 = T.getAmmo().m4;
     T.setMouseFireDbg(true);
-    await wait(350);
+    await hold(0.35);
     const dropped = a1 - T.getAmmo().m4;
     ok(dropped === 1, 'semi fires once while the button is held (dropped ' + dropped + ')');
     T.setMouseFireDbg(false);
     await wait(80);
     T.setMouseFireDbg(true);
-    await wait(200);
+    await hold(0.2);
     ok(a1 - T.getAmmo().m4 === 2, 'a second click fires again');
     T.setMouseFireDbg(false);
     await wait(80);
@@ -40,7 +43,7 @@
     await wait(100);
     const p0 = T.getAmmo().pistol;
     T.setMouseFireDbg(true);
-    await wait(300);
+    await hold(0.3);
     T.setMouseFireDbg(false);
     ok(p0 - T.getAmmo().pistol === 1, 'the pistol is semi until the sear is fitted');
     T.buyPistolAuto();

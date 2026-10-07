@@ -1,0 +1,16 @@
+{
+  "name": "dead-wave-desktop",
+  "private": true,
+  "version": "0.0.0",
+  "description": "CU-57 (P-89): the Tauri shell round the packaged game. The game itself has no dependencies; this folder is the one place with any, and only builds the .exe.",
+  "scripts": {
+    "stage": "node ../tools/package.mjs",
+    "icon": "node make-icon.mjs && tauri icon src-tauri/icons/source.png --output src-tauri/icons",
+    "build": "node ../tools/package.mjs --no-check && tauri build",
+    "build:exe": "node ../tools/package.mjs --no-check && tauri build --no-bundle",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

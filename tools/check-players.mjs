@@ -22,7 +22,7 @@ ok nearestDoor toggleDoor nearestFoldStairs canReachMortar nearestMortar mountMo
 onBoards nearestGrave nearHQWindow nearHQPanel nearCIF nearKiosk updateKioskPrompt actionTarget
 objectiveReach beginScriptedKill updateCaveKill setupCaveDrag toScene updateGrabScene updateCaveDrag
 finishScriptedKill snd beginMarineInsertion makeKnife updateTentacleKill kickFree startGrabScene
-drawFullMap updateMarineIdle loopCineCamera resolveTarget ankleIntoHand nearArmory
+drawFullMap mapEnemyVisible drawMapBlips currentMapMissions updateMarineIdle loopCineCamera resolveTarget ankleIntoHand nearArmory
 devBaseBuild hordeReport devSwarm pulseGuardianFailsafeForTest cineSetup getCaveChase
 stepSetA maybePreRollFromLoop stepLivePreRoll preRollFight stampDebugHooks
 `.split(/\s+/).filter(Boolean));

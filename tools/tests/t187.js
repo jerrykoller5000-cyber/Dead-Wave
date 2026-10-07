@@ -16,7 +16,11 @@
   const take = async (w) => {
     for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
     await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0) || Date.now() - t0 > 4000 ? r() : setTimeout(f, 50); f(); });
+    const s0 = T.getSimTime ? T.getSimTime() : 0, w0 = Date.now();
     await wait(2600);   // the draw from the pack, then the hold settles
+    // Counted in game time too: the first draw of the run can stall the page for ~3 s (seen headless), and a
+    // wall-clock wait alone then measured the m4 mid-draw (GB-138's t187 report).
+    while (T.getSimTime && T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 20000) await wait(100);
     return T.getCurrentWeapon() === w;
   };
   let aimAt = [0, 1.25, 10];

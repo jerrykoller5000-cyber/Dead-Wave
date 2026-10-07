@@ -3,11 +3,11 @@
 (async () => {
   const T = window.TT;
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
-  document.getElementById('modeHunt').click();
-  await new Promise(r => setTimeout(r, 1500));
+  await startMatch(T, 'TestMarine');
   T.unlockAllBuilds(); T.addCash(5000);
   const p = T.player.position;
-  const gx0 = T.gridIndex(p.x) + 2, gz0 = T.gridIndex(p.z);
+  // The cells are the cabin's own (the HQ stands at 0,0, 5 m each way): this check reads the cabin, wherever he is.
+  const gx0 = 2, gz0 = 0;
   const out = [];
   const place = (k, gx, gz) => { const b = T.placeBuildAt(k, gx, gz); out.push(k + '@' + gx + ',' + gz + ' -> ' + (b ? ('lv' + b.level + ' ' + b.slot + ' y=' + b.mesh.position.y.toFixed(2)) : 'REFUSED ' + JSON.stringify(T.resolveTarget(k, gx, gz)) + ' / ' + T.placeRefusalFor(k, gx, gz))); return b; };
   const w1 = place('wall', gx0, gz0), w2 = place('wall', gx0, gz0 + 1);

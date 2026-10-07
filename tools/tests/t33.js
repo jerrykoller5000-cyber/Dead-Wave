@@ -1,7 +1,7 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const p = T.player.position;
   for (const t of T.trees) { t.alive = false; t.stump = false; } for (const r of T.rocks) r.alive = false;
   const gx = T.gridIndex(p.x), gz = T.gridIndex(p.z);

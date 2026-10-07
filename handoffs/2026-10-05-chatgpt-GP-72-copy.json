@@ -1,0 +1,426 @@
+{
+  "controls": {
+    "before": {
+      "fire": "LMB",
+      "aim": "RMB",
+      "move": "WASD",
+      "forward": "W",
+      "pause": "Esc",
+      "map": "Tab",
+      "run": "Shift",
+      "jump": "Space",
+      "fullscreen": "F11",
+      "confirm": "Enter",
+      "reload": "R",
+      "rotate": "R",
+      "melee": "F",
+      "grenade": "G",
+      "heal": "H",
+      "weaponWheel": "Q",
+      "interact": "E",
+      "buildWheel": "B",
+      "repair": "T",
+      "carry": "T",
+      "scrap": "X",
+      "nightVision": "N",
+      "akimbo": "Y",
+      "laser": "Z",
+      "flashlight": "L",
+      "mute": "M",
+      "dodge": "V",
+      "crouch": "C"
+    },
+    "after": {
+      "fire": "LMB",
+      "aim": "RMB",
+      "move": "WASD",
+      "forward": "W",
+      "pause": "Esc",
+      "map": "Tab",
+      "run": "Shift",
+      "jump": "Space",
+      "fullscreen": "F11",
+      "confirm": "Enter",
+      "reload": "R",
+      "rotate": "R",
+      "melee": "F",
+      "grenade": "G",
+      "heal": "H",
+      "weaponWheel": "Q",
+      "interact": "E",
+      "buildWheel": "B",
+      "repair": "T",
+      "carry": "T",
+      "scrap": "X",
+      "nightVision": "1",
+      "akimbo": "Y",
+      "laser": "3",
+      "flashlight": "2",
+      "mute": "M",
+      "dodge": "V",
+      "crouch": "C",
+      "fireMode": "X",
+      "holster": "4"
+    }
+  },
+  "changed": [
+    {
+      "key": "guide.weapons.body",
+      "before": "{fire} fire · {aim} aim · {reload} reload. Hold {weaponWheel} for the weapon wheel; tap to switch.",
+      "after": "{fire} fire · {aim} aim · {reload} reload. Hold {weaponWheel} for the weapon wheel; tap to switch. {fireMode} switches SEMI / AUTO outside build mode; {holster} holsters or draws."
+    },
+    {
+      "key": "cif.item.carrier",
+      "before": "Armour",
+      "after": "Armor"
+    },
+    {
+      "key": "cif.menu.gunNote",
+      "before": "Finishes apply to the selected weapon. This preview shows your Gravewalker.",
+      "after": "Choose weapon finishes at the Armory workbench."
+    },
+    {
+      "key": "cif.menu.close",
+      "before": "Done · E / Esc",
+      "after": "Done · {interact} / {pause}"
+    },
+    {
+      "key": "cif.prompt",
+      "before": "E — CIF (swap your camo)",
+      "after": "{interact} — CIF (dress your Gravewalker)"
+    },
+    {
+      "key": "armory.prompt",
+      "before": "E — Armory (set your loadout)",
+      "after": "{interact} — Armory (set your loadout)"
+    },
+    {
+      "key": "cif.close",
+      "before": "Back to the fight (E / Esc)",
+      "after": "Back to the fight ({interact} / {pause})"
+    },
+    {
+      "key": "shop.findTitle",
+      "before": "FIND THE KIOSK",
+      "after": "FIND THE SUPPLY TERMINAL"
+    },
+    {
+      "key": "shop.lockedTitle",
+      "before": "KIOSK LOCKED",
+      "after": "SUPPLY TERMINAL LOCKED"
+    },
+    {
+      "key": "shop.hint.weapons",
+      "before": "One-time unlocks. Bought guns join the {weaponWheel} rotation and come with full ammo: a loaded magazine and a full reserve.",
+      "after": "Guns arrive with full ammo. Empty loadout slots fill first; extra guns stay at the Armory. Choose what you carry there, then use {weaponWheel} to switch."
+    },
+    {
+      "key": "shop.hint.gear",
+      "before": "Tactical kit. Nothing here is issued; the nights are dark until you pay for eyes.",
+      "after": "Armor, night vision and laser sights. Every gun starts with a flashlight; night vision needs the helmet."
+    },
+    {
+      "key": "shop.hint.upgrades",
+      "before": "Improve guns you own. Each gun fits one barrel or magazine mod at a time; switch between owned mods for free.",
+      "after": "Buy attachments here; fit or remove them free at the Armory workbench. The heavy barrel and extended magazine share one slot."
+    },
+    {
+      "key": "weapon.message.draw",
+      "before": "{weaponWheel} to bring it up",
+      "after": "Set your loadout at the Armory; {weaponWheel} selects a carried gun."
+    },
+    {
+      "key": "coach.return",
+      "before": "Bring them to the HQ window to bank Cash.",
+      "after": "Bring the skulls to the HQ window. Bank them for Cash."
+    },
+    {
+      "key": "coach.loop",
+      "before": "Collect skulls. Bank Cash. Resupply.",
+      "after": "Collect skulls. Bank them at the HQ window. Spend Cash."
+    },
+    {
+      "key": "wave.prep",
+      "before": "Use the prep — repair, build, resupply, turn in skulls",
+      "after": "Bank skulls at the HQ window, then repair, build and resupply"
+    },
+    {
+      "key": "wave.prepBest",
+      "before": "Use the prep — repair, build, resupply, turn in skulls · best streak {streak}",
+      "after": "Bank skulls at the HQ window, then repair, build and resupply · best streak {streak}"
+    },
+    {
+      "key": "wave.colossusReward",
+      "before": "{value} skull value — turn the skulls in at HQ",
+      "after": "{value} skull value — turn the skulls in at HQ window for Cash"
+    },
+    {
+      "key": "hud.house",
+      "before": "House {hp} / {max}",
+      "after": "HQ {hp} / {max}"
+    },
+    {
+      "key": "gameOver.houseLost",
+      "before": "The house was destroyed!",
+      "after": "The HQ was destroyed!"
+    },
+    {
+      "key": "dawn.tipBank",
+      "before": "Bank your skulls at the HQ window, resupply, then sound the next alarm at the briefing panel.",
+      "after": "Bank your skulls at the HQ window for Cash, resupply, then sound the next alarm at the HQ panel."
+    },
+    {
+      "key": "dawn.tipResupply",
+      "before": "Restock at the supply terminal, then sound the next alarm at the briefing panel.",
+      "after": "Restock at the supply terminal, then sound the next alarm at the HQ panel."
+    },
+    {
+      "key": "wavePreview.prompt",
+      "before": "{interact} — HQ briefing",
+      "after": "{interact} — HQ panel"
+    },
+    {
+      "key": "wavePreview.hudBasic",
+      "before": "Wave Day {day} · Prep · HQ briefing",
+      "after": "Wave Day {day} · Prep · HQ panel"
+    },
+    {
+      "key": "wavePreview.hudFull",
+      "before": "Wave Day {day} · Prep · Next: {count} · HQ briefing",
+      "after": "Wave Day {day} · Prep · Next: {count} · HQ panel"
+    },
+    {
+      "key": "alarm.station",
+      "before": "FOB Threshold / Perimeter defence",
+      "after": "FOB Threshold / Perimeter defense"
+    },
+    {
+      "key": "build.message.boxUpgrade",
+      "before": {
+        "one": "Release to upgrade {count} of {total} piece — {cost} Cash",
+        "other": "Release to upgrade {count} of {total} pieces — {cost} Cash"
+      },
+      "after": {
+        "one": "Release to upgrade {count} piece (of {total}) — {cost} Cash",
+        "other": "Release to upgrade {count} pieces (of {total}) — {cost} Cash"
+      }
+    },
+    {
+      "key": "tips.combat.weapons",
+      "before": "Hold {weaponWheel} — weapon wheel: time slows, point at a gun, let go to draw it · tap {weaponWheel} to step to the next one",
+      "after": "Hold {weaponWheel} for the weapon wheel; tap to switch carried guns. {holster} holsters or draws. Outside build mode, {fireMode} switches SEMI / AUTO on supported guns; the pistol needs its auto sear fitted at the Armory."
+    },
+    {
+      "key": "tips.interaction.kiosk",
+      "before": "{interact} at the supply terminal (the supply hatch in the east wall of the HQ, yellow square on the map) — weapons, ammo, gear, upgrades, blueprints. Open any time; time stops while you shop. {interact} or {pause} closes it",
+      "after": "{interact} at the supply terminal (the supply hatch in the east wall of the HQ, yellow square on the map) — weapons, ammo, gear, upgrades, blueprints. Open during prep; locked during the alarm and wave. Time stops while you shop. {interact} or {pause} closes it"
+    },
+    {
+      "key": "tips.interaction.bank",
+      "before": "{interact} at the HQ sample window (front of the HQ) — turn in collected skulls for Cash. Kill → pick up glowing skulls → turn in → spend at the supply terminal",
+      "after": "{interact} at the HQ sample window (front of the HQ) — bank collected skulls for Cash. Kill → collect skulls → bank at the HQ window → spend Cash"
+    },
+    {
+      "key": "tips.interaction.alarm",
+      "before": "{interact} at the HQ start panel (front wall) — sound the alarm to start the next wave. Prep lasts until you call it",
+      "after": "{interact} at the HQ panel (front wall) — sound the alarm to start the next wave. Prep lasts until you call it"
+    },
+    {
+      "key": "tips.waves.caves",
+      "before": "Waves pour out of the six cave mouths at the map rim — the red arcs on the map point at the mouths in use. You can't build within 25m of a mouth, and do NOT walk into one: something lives in there, and it does not lose",
+      "after": "Waves emerge from the six cave mouths; red map arcs mark active approaches. You cannot build within 25m of a mouth. Explore unsealed caves by day for the Hollows; at night, keep clear of the guardian."
+    },
+    {
+      "key": "story.prop.relayBroken",
+      "before": "Maintenance tag: Tone on all channels 02:14. Pulled the fuse to make it stop. Didn't. — Okafor",
+      "after": "Maintenance tag: Tone on all channels 02:14. Pulled the fuse to make it stop. Didn't. — Sato, signals"
+    },
+    {
+      "key": "story.survivor.okafor.roof",
+      "before": "I pulled the relay's fuse that night. Thought I was shutting the tone out. I was shutting us out.",
+      "after": "Sit. Hold still. I had eleven people to keep alive here. I'm keeping the one I've got."
+    },
+    {
+      "key": "story.survivor.okafor.aboard",
+      "before": "Cpl. Okafor, signals. She'll be the one explaining it to Ridgeline.",
+      "after": "Cpl. Okafor, medic. Still counting the ones she couldn't reach."
+    },
+    {
+      "key": "story.survivor.brandt.found",
+      "before": "I watched it happen from up there. Couldn't hit enough of them. Got one more rifle if you want it.",
+      "after": "I watched it happen from up there. Couldn't hit enough of them. Get me a gun with a belt and I'll fix that."
+    },
+    {
+      "key": "story.survivor.brandt.aboard",
+      "before": "Sgt. Brandt. Counted every shot. Says he still owes nine.",
+      "after": "Sgt. Brandt. Counted every round. Says he still owes nine."
+    },
+    {
+      "key": "story.survivor.pike.roof",
+      "before": "I built that wall. Built it to keep things out. Turns out it keeps us in.",
+      "after": "I kept the trucks running that hauled this wall in. Built to keep things out. Turns out it keeps us in."
+    },
+    {
+      "key": "story.survivor.kettle.morning",
+      "before": "I pulled the relay's fuse that night. Thought I was shutting the tone out. I was shutting us out.",
+      "after": "Sit. Hold still. I had eleven people to keep alive here. I'm keeping the one I've got."
+    },
+    {
+      "key": "story.survivor.kettle.aboard",
+      "before": "Cpl. Okafor, signals. She'll be the one explaining it to Ridgeline.",
+      "after": "Cpl. Okafor, medic. Still counting the ones she couldn't reach."
+    },
+    {
+      "key": "story.survivor.voss.found",
+      "before": "I watched it happen from up there. Couldn't hit enough of them. Got one more rifle if you want it.",
+      "after": "I watched it happen from up there. Couldn't hit enough of them. Get me a gun with a belt and I'll fix that."
+    },
+    {
+      "key": "story.survivor.voss.aboard",
+      "before": "Sgt. Brandt. Counted every shot. Says he still owes nine.",
+      "after": "Sgt. Brandt. Counted every round. Says he still owes nine."
+    },
+    {
+      "key": "story.survivor.reyes.morning",
+      "before": "I built that wall. Built it to keep things out. Turns out it keeps us in.",
+      "after": "I kept the trucks running that hauled this wall in. Built to keep things out. Turns out it keeps us in."
+    },
+    {
+      "key": "shop.upgrade.macheteHelp",
+      "before": "A proper blade for {melee}: {reach}m reach, {damage} damage and a wider arc (knife: {knifeReach}m, {knifeDamage}). Swings a touch slower.",
+      "after": "A heavier blade for {melee}: {reach}m reach and {damage} damage (knife: {knifeReach}m, {knifeDamage}). Narrower swing, up to {maxHits} targets, slightly quicker recovery."
+    }
+  ],
+  "added": {
+    "armory.eyebrow": "HQ · Weapons locker",
+    "armory.hint2": "Pick a slot, then a stored gun. Buy attachments at the supply terminal; fit them and choose finishes at the workbench.",
+    "armory.carried": "Carried guns",
+    "armory.bench": "Workbench",
+    "armory.benchEmpty": "Pick a gun to see its attachments and finishes.",
+    "armory.noMods": "This gun takes no attachments.",
+    "armory.fitted": "Fitted",
+    "armory.inStore": "Owned · not fitted",
+    "armory.atKiosk": "Buy at the supply terminal",
+    "armory.remove": "Remove",
+    "armory.fit": "Fit",
+    "armory.tune": "Workbench",
+    "armory.wrongSlot": "Pick a matching loadout slot first",
+    "armory.carryThis": "Carry this gun",
+    "armory.pair": "{gun} · second gun",
+    "armory.boughtTitle": "Bought: {item}",
+    "armory.boughtHint": "Fit it at the Armory workbench",
+    "armory.kioskFitted": "fitted",
+    "armory.kioskOwned": "owned · fit at the Armory",
+    "armory.wheelPair": "{gun} pair · {akimbo}",
+    "armory.wheelEmpty": "Empty · fill at the Armory",
+    "armory.unarmed": "Unarmed",
+    "armory.unarmedMeta": "Holster / draw · {holster}",
+    "armory.hubHint": "Center: unarmed",
+    "armory.finish": "Weapon finish",
+    "armory.finishMore": {
+      "one": "Show {count} locked finish",
+      "other": "Show {count} locked finishes"
+    },
+    "armory.finishHide": "Hide locked finishes",
+    "armory.mod.extended": "Extended magazine",
+    "armory.mod.tank": "Bigger tank",
+    "armory.mod.magHelp": "Rounds {before} → {after}. Shares its slot with the heavy barrel.",
+    "armory.mod.fuelHelp": "Fuel {before} → {after}. Shares its slot with the heavy barrel.",
+    "armory.mod.heavy": "Heavy barrel",
+    "armory.mod.heavyHelp": "Halves recoil climb; slower to ready. Shares its slot with the extended magazine.",
+    "armory.mod.suppressor": "Suppressor",
+    "armory.mod.suppressorHelp": "Quieter shots, slightly less damage.",
+    "armory.mod.auto": "Auto sear",
+    "armory.mod.autoHelp": "Enables full auto. {fireMode} switches SEMI / AUTO outside build mode.",
+    "armory.mod.sawTank": "Bigger gas tank",
+    "armory.mod.sawTankHelp": "+50% fuel capacity.",
+    "shop.upgrade.auto": "Pistol auto sear",
+    "shop.upgrade.autoHelp": "Enables full auto. Climbs harder than the Wasp SMG. {fireMode} switches SEMI / AUTO outside build mode.",
+    "shop.weaponNew": "new tonight",
+    "shop.stockNoticeTitle": "New at the supply terminal",
+    "shop.stockNoticeHint": "Available tonight · buy at the HQ supply terminal",
+    "menu.training": "Training Ground",
+    "training.title": "Training Ground",
+    "training.welcome": "Terminals on the left wall · zombie practice through the door",
+    "training.panelPrompt": "{interact} — HQ panel: call in zombies",
+    "training.panelEyebrow": "Training Ground · HQ panel",
+    "training.panelTitle": "Call in zombies",
+    "training.panelHint": "Choose a kind and count. They enter through the gate and stay in the build room.",
+    "training.kind": "Zombie kind",
+    "training.count": "How many",
+    "training.spawn": "Send in {count} · {kind}",
+    "training.clear": "Clear all zombies",
+    "training.close": "Close",
+    "training.alive": {
+      "one": "{count} zombie in the build room",
+      "other": "{count} zombies in the build room"
+    },
+    "training.none": "The build room is empty.",
+    "training.hudHits": "Targets down: {count}",
+    "training.hudAlive": {
+      "one": "{count} zombie loose",
+      "other": "{count} zombies loose"
+    },
+    "training.noBuild": "Building comes to the Training Ground later.",
+    "training.wakeTitle": "You're back",
+    "training.wakeHint": "The infirmary patched you up."
+  },
+  "callSites": [
+    {
+      "before": "name: w === 'flamer' ? 'Bigger tank' : 'Extended magazine',",
+      "after": "name: dwText(w === 'flamer' ? 'armory.mod.tank' : 'armory.mod.extended'),"
+    },
+    {
+      "before": "desc: (w === 'flamer' ? 'Fuel ' : 'Rounds ') + WEAPON_STATS[w].maxAmmo + ' → ' + Math.round(WEAPON_STATS[w].maxAmmo * 1.5) + '. Shares its slot with the heavy barrel.',",
+      "after": "desc: dwText(w === 'flamer' ? 'armory.mod.fuelHelp' : 'armory.mod.magHelp', { before: WEAPON_STATS[w].maxAmmo, after: Math.round(WEAPON_STATS[w].maxAmmo * 1.5) }),"
+    },
+    {
+      "before": "name: 'Heavy barrel', desc: 'Half the climb; slower to bring up. Shares its slot with the extended magazine.'",
+      "after": "name: dwText('armory.mod.heavy'), desc: dwText('armory.mod.heavyHelp')"
+    },
+    {
+      "before": "name: 'Suppressor', desc: 'Heard much less far; a little less punch.'",
+      "after": "name: dwText('armory.mod.suppressor'), desc: dwText('armory.mod.suppressorHelp')"
+    },
+    {
+      "before": "name: 'Auto sear', desc: 'Full auto (K switches).'",
+      "after": "name: dwText('armory.mod.auto'), desc: dwText('armory.mod.autoHelp')"
+    },
+    {
+      "before": "name: 'Bigger gas tank', desc: '+50% fuel.'",
+      "after": "name: dwText('armory.mod.sawTank'), desc: dwText('armory.mod.sawTankHelp')"
+    },
+    {
+      "before": "gear: 'Tactical kit. Nothing here is issued; the nights are dark until you pay for eyes.'",
+      "after": "gear: dwText('shop.hint.gear')"
+    },
+    {
+      "before": "build: 'Blueprints put a build type into the B menu. Placing each piece still costs cash on the spot.'",
+      "after": "build: dwText('shop.hint.build')"
+    },
+    {
+      "before": "fortify: 'Upgrade blueprints, tier by tier. Then take the Upgrade tool (B menu, Structure) to anything you have built and click it: each piece is upgraded one at a time, for the price shown.'",
+      "after": "fortify: dwText('shop.hint.fortify')"
+    },
+    {
+      "before": "modRow('Pistol auto sear', pistolAutoOwned, pistolAutoFitted, 'Full auto. Fast, and it climbs harder than the Wasp. K switches SEMI and AUTO.',",
+      "after": "modRow(dwText('shop.upgrade.auto'), pistolAutoOwned, pistolAutoFitted, dwText('shop.upgrade.autoHelp'),"
+    },
+    {
+      "before": "showBanner(WEAPON_STATS[w].name.toUpperCase() + ' ACQUIRED', 'Q to bring it up', 1.8, '#7cdea0');",
+      "after": "showBanner(dwText('weapon.message.acquired', { weapon: WEAPON_STATS[w].name.toUpperCase() }), dwText('weapon.message.draw'), 1.8, '#7cdea0');"
+    },
+    {
+      "before": "showBanner('KIOSK LOCKED', 'It only trades during prep — clear the wave first', 1.8, '#ffb347');",
+      "after": "showBanner(dwText('shop.lockedTitle'), dwText('shop.lockedReason'), 1.8, '#ffb347');"
+    },
+    {
+      "before": "sayText('enemy.' + k, {}, ZOMBIE_TYPES[k].name)",
+      "after": "sayText('enemy.' + k + '.name', {}, ZOMBIE_TYPES[k].name)"
+    },
+    {
+      "before": "shopRow('Machete', macheteOwned ? 'owned' : 'replaces the knife', 'A proper blade for F: ' + BLADE_STATS.machete.reach.toFixed(1) + 'm reach, ' + BLADE_STATS.machete.dmg + ' damage and a wider arc (knife: ' + BLADE_STATS.knife.reach.toFixed(1) + 'm, ' + BLADE_STATS.knife.dmg + '). Swings a touch slower.',",
+      "after": "shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),"
+    }
+  ]
+}

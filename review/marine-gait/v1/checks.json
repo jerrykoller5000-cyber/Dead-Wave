@@ -1,0 +1,110 @@
+{
+  "walk-0-before": {
+    "shot": "walk-0-before",
+    "w": 0,
+    "run": 0,
+    "soles": [
+      -0.019,
+      0.032
+    ]
+  },
+  "walk-0-after": {
+    "shot": "walk-0-after",
+    "w": 1,
+    "run": 0,
+    "soles": [
+      0.014,
+      0.021
+    ]
+  },
+  "walk-25-before": {
+    "shot": "walk-25-before",
+    "w": 0,
+    "run": 0,
+    "soles": [
+      -0.024,
+      0.001
+    ]
+  },
+  "walk-25-after": {
+    "shot": "walk-25-after",
+    "w": 1,
+    "run": 0,
+    "soles": [
+      0.003,
+      0.118
+    ]
+  },
+  "walk-50-before": {
+    "shot": "walk-50-before",
+    "w": 0,
+    "run": 0,
+    "soles": [
+      0.032,
+      -0.019
+    ]
+  },
+  "walk-50-after": {
+    "shot": "walk-50-after",
+    "w": 1,
+    "run": 0,
+    "soles": [
+      0.018,
+      0.014
+    ]
+  },
+  "run-0-before": {
+    "shot": "run-0-before",
+    "w": 0,
+    "run": 0.9868587612873534,
+    "soles": [
+      -0.028,
+      0.124
+    ]
+  },
+  "run-0-after": {
+    "shot": "run-0-after",
+    "w": 1,
+    "run": 0.9999957474850624,
+    "soles": [
+      0.05,
+      0.227
+    ]
+  },
+  "run-25-before": {
+    "shot": "run-25-before",
+    "w": 0,
+    "run": 0.9999999998183248,
+    "soles": [
+      -0.025,
+      -0.006
+    ]
+  },
+  "run-25-after": {
+    "shot": "run-25-after",
+    "w": 1,
+    "run": 0.9999999999999892,
+    "soles": [
+      0.127,
+      0.16
+    ]
+  },
+  "run-50-before": {
+    "shot": "run-50-before",
+    "w": 0,
+    "run": 0.9999999999999999,
+    "soles": [
+      0.124,
+      -0.028
+    ]
+  },
+  "run-50-after": {
+    "shot": "run-50-after",
+    "w": 1,
+    "run": 0.9999999999999999,
+    "soles": [
+      0.227,
+      0.05
+    ]
+  }
+}

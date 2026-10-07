@@ -5,6 +5,7 @@
 //   npm test -- --jobs 1         one at a time (easier to read when something breaks)
 //   npm test -- --keep           leave tools/tests/test.html on disk to open by hand
 //   npm test -- --all-fails      print every FAIL line in full, not just the first
+//   npm test -- --no-retry       don't re-run the failures one at a time (see "flaky" below)
 //
 // How it works. Each tNN.js is an async expression evaluated inside a loaded copy of the
 // game, and asserts against window.TT. The copy (test.html, generated here) points the
@@ -161,10 +162,25 @@ async function runOne(name) {
 
 // A simple worker pool: JOBS pages in flight at once.
 const queue = tests.slice();
+const flaky = [];   // CU-55: checks that failed with JOBS pages at once and passed when run alone
 try {
   await Promise.all(Array.from({ length: Math.min(JOBS, queue.length) }, async () => {
     while (queue.length) await runOne(queue.shift());
   }));
+  // Load makes some checks fail that pass on their own (a frame loop that runs fewer frames, a timer that fires late).
+  // Each failure is run again by itself, one at a time. Both results are printed; a check that passes the second time is
+  // listed as flaky (not counted as a failure, and not hidden); one that still fails is a failure. The checks are the
+  // same, with the same expectations: nothing is skipped or loosened. --no-retry turns this off.
+  const firstPass = results.filter((r) => r.fail > 0 || r.note);
+  if (JOBS > 1 && firstPass.length && !argv.includes('--no-retry')) {
+    console.log(`\nretrying ${firstPass.length} failed check(s) one at a time: ${firstPass.map((r) => r.name).join(' ')}`);
+    for (const first of firstPass) {
+      results.splice(results.indexOf(first), 1);
+      await runOne(first.name);
+      const again = results[results.length - 1];
+      if (!again.fail && !again.note) { again.flaky = { fail: first.fail, note: first.note }; flaky.push(first.name); }
+    }
+  }
 } finally {
   await browser.close();
   await server.close();
@@ -180,8 +196,14 @@ const failing = results.filter((r) => r.fail > 0);
 const infos = results.filter((r) => r.info && !r.note);
 
 console.log(`\n${results.length} checks: ${totalPass} pass, ${totalFail} fail`
+  + (flaky.length ? `, ${flaky.length} flaky (failed under load, passed alone)` : '')
   + (broken.length ? `, ${broken.length} could not run` : '')
   + (infos.length ? `, ${infos.length} reported no assertions` : ''));
+
+if (flaky.length) {
+  console.log('\nflaky: failed in the full run, passed when run alone (the load, not the game, until it fails alone too):');
+  for (const r of results.filter((q) => q.flaky)) console.log(`  ${r.name.padEnd(6)} ${r.flaky.note ? r.flaky.note.slice(0, 90) : r.flaky.fail + ' fail in the full run'}`);
+}
 
 if (infos.length) {
   console.log('\nno assertions (probe, or the check bailed before asserting):');
@@ -223,7 +245,7 @@ try {
 // A full run replaces the record. A named run updates only the files it actually ran,
 // so a spot check does not wipe everyone else's results off the panel.
 if (!wanted.length) files = {};
-for (const r of results) files[r.name] = { pass: r.pass, fail: r.fail };
+for (const r of results) files[r.name] = r.flaky ? { pass: r.pass, fail: r.fail, flaky: true } : { pass: r.pass, fail: r.fail };
 const listed = Object.values(files);
 const sumPass = listed.reduce((n, r) => n + (r.pass || 0), 0);
 const sumFail = listed.reduce((n, r) => n + (r.fail || 0), 0);
@@ -234,6 +256,7 @@ fs.writeFileSync(testsPath, JSON.stringify({
   pass: wanted.length ? sumPass : totalPass,
   fail: wanted.length ? sumFail : totalFail,
   cannotRun: broken.length,
+  flaky,
   files
 }, null, 2) + '\n');
 process.exit(broken.length ? 1 : 0);

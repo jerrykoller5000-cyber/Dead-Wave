@@ -1,0 +1,4 @@
+A before R {"w":"revolver","detail":"6 / 6  Ã‚Â·  48 Bullets","mags":[6,6,6,6,6,6,6,6]}
+A after R  {"w":"revolver","detail":"6 / 6  Ã‚Â·  6 Bullets","mags":[6]}
+B before R {"w":"ak","detail":"30 / 30  Ã‚Â·  20 Bullets  Ã‚Â·  AUTO","mags":[20]}
+B after R  (reload started: true) {"w":"ak","detail":"20 / 30  Ã‚Â·  25 Bullets  Ã‚Â·  AUTO","mags":[25]}

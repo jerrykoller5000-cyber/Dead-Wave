@@ -54,7 +54,9 @@ the crew panel, so what you log is how he knows what you're doing.
 
 **A new task** (Jerry asks you directly for something that isn't on the board): get its id with
 `node crew/crew.mjs newid <you> "<what>"` and use that one. Never make an id up: two jobs with one id
-confuse the board and the panel.
+confuse the board and the panel. The same for a new test: take the next `tNNN.js` that is neither in `tools/tests/`
+nor named in a LOG IN line, and name it in your own IN line (`touching ... tools/tests/tNNN.js (new)`) so nobody else
+takes it (three of them were saved over on 2026-10-05 and 06).
 
 **Asking another agent for something:**
 `node crew/crew.mjs request <you> <them> "<title>" "<body>"` (or `--body-file <path>`). It
@@ -130,7 +132,7 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
     keys there; don't hard-code copy. The loop is always: skulls, then bank at the HQ window,
     then Cash.
 12. **Budgets.**
-    - The title screen appears within 15 s cold and 5 s warm on Jerry's PC.
+    - The title screen appears within 15 s cold and about 6 s warm on Jerry's PC (D-76: 6.3 s measured, and Jerry: fine).
     - 60 fps with 48 zombies, from the standard view.
     - No CDN dependencies, and no build step: the game runs straight from the folder.
 13. **Report honestly.** Say what failed and what you couldn't verify. Never skip, weaken or

@@ -34,6 +34,14 @@ Two specs for your yes: the Hollows (docs/specs/hollows.md: the Hush, five warre
 
 **Answer (2026-09-30, ~23:25Z):** Jerry: "For the hollows and the secret, use your best judgement." Both specs stand as written (docs/specs/hollows.md, docs/specs/secret-quest.md); Claude's calls from here.
 
-## Q-6 · open · 2026-10-05T22:40Z · claude
+## Q-6 · answered · 2026-10-05T22:40Z · claude
 
 Grokbot found the marine is left-handed on screen: his gun arm is his anatomical left, so the stock sits in his left shoulder (GB-129; shots in handoffs/2026-10-02-grokbot-GB-129.md). You asked for the stock in the right shoulder. Mirror him so he is right-handed (Claude, CL-121: the arms swap, and the holsters, the draw, the reload pouch and the carry follow), or keep him as he is?
+
+**Answer (2026-10-05, 7:44 PM CT, to Grokbot):** Jerry: "No, Leave him left handed I think it's cool." He stays left-handed (D-75); CL-121 closed.
+
+## Q-7 · answered · 2026-10-06T02:14Z · cursor
+
+Rule 12 says the title appears within 5 s warm; on your PC it takes 6.3 s warm and 6.4 s cold, because the 100 shader variants compile every time (1.6 s) and nothing is cached. Is about 6 s fine for 1.0, or do you want it under 5 s (a task: precompile less at the title, the rest behind it)? The fps is fine (60 in a night 5, 53 with 48 dead on the title's scene).
+
+**Answer (2026-10-06T04:17Z):** Jerry: 6 is acceptable

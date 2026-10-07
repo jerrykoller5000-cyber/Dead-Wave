@@ -98,3 +98,59 @@ body:is(.opening,.frontend,.deploying,.cine,.dawn) #campCleared { display:none; 
 .lifetime-badge .badge-description { grid-column:1/-1; font-size:11px; font-weight:400; }
 .badges-new { display:block; margin-top:5px; color:#ead399; font-size:11px; }
 @media(max-width:440px) { .lifetime-badges .badge-grid { grid-template-columns:1fr; max-height:170px; } }
+
+/* GP-139: notifications extend the left status panel. Streaks keep their own HUD. */
+#noticeRail { position:absolute; z-index:6; display:flex; flex-direction:column; gap:4px; overflow:auto; scrollbar-width:thin; pointer-events:auto; overscroll-behavior:contain; }
+#noticeRail > :is(#bigBanner,#stockNotice,#dawnCard,#hollowPickup,.prop-note-card) { position:relative; inset:auto; box-sizing:border-box; width:100%; min-width:0; max-width:none; max-height:none; margin:0; flex-shrink:0; transform:none; text-align:left; border-radius:0 0 3px 3px; padding:10px 12px; background:#101913f2; box-shadow:0 5px 14px #0005; overflow-wrap:anywhere; }
+#noticeRail > #bigBanner { order:0; border:1px solid #84917355; border-left:3px solid #d7bd75; }
+#noticeRail > #stockNotice { order:1; border-top:0; }
+#noticeRail > #dawnCard { order:2; }
+#noticeRail > :is(#hollowPickup,.prop-note-card) { order:3; }
+#noticeRail > :is(#bigBanner,#stockNotice):not(.show), #noticeRail > #dawnCard:not(.on), #noticeRail > [hidden] { display:none; }
+#noticeRail > #bigBanner.show, #noticeRail > #stockNotice.show { transform:none; animation:noticeDrop .2s ease-out; }
+#noticeRail #bigBanner .t { font:700 15px/1.25 var(--font-hud); letter-spacing:.03em; }
+#noticeRail #bigBanner .s { margin-top:4px; font-size:11px; line-height:1.4; }
+#noticeRail #stockNotice ul { display:block; margin:5px 0; }
+#noticeRail #stockNotice li { margin:3px 0; font-size:13px; }
+#noticeRail #stockNotice b { font-size:10px; letter-spacing:.06em; }
+#noticeRail #dawnCard h2 { font-size:14px; }
+#noticeRail #dawnCard dd { font-size:13px; }
+body.loopcine #hud > #noticeRail { visibility:visible !important; }
+body:is(.opening,.frontend,.deploying,.cine) #noticeRail { visibility:hidden !important; pointer-events:none; }
+@keyframes noticeDrop { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion:reduce) { #noticeRail > #bigBanner.show, #noticeRail > #stockNotice.show { animation:none; } }
+@media(max-width:600px) { #noticeRail > :is(#bigBanner,#stockNotice,#dawnCard,#hollowPickup,.prop-note-card) { padding:8px 9px; } #noticeRail #bigBanner .t { font-size:13px; } #noticeRail #stockNotice li { font-size:11px; } }
+
+/* GP-140: category colours and named sub-pages have separate visual levels. */
+#shopTabs [data-shop-page="weapons"] { --tab-ink:#f0d787; --tab-bg:#544621; --tab-edge:#c5a857; }
+#shopTabs [data-shop-page="ammo"] { --tab-ink:#c4def5; --tab-bg:#29465d; --tab-edge:#7caace; }
+#shopTabs [data-shop-page="build"] { --tab-ink:#f1c393; --tab-bg:#583c29; --tab-edge:#cb9464; }
+#shopTabs [data-shop-page="gear"] { --tab-ink:#b6e5d6; --tab-bg:#214c42; --tab-edge:#73b7a1; }
+#shopTabs button { background:#182019; color:var(--tab-ink); border:1px solid var(--tab-edge); border-top-width:3px; min-height:40px; }
+#shopTabs button.on { background:var(--tab-bg); color:var(--tab-ink); border-color:var(--tab-edge); box-shadow:inset 0 -3px var(--tab-edge); }
+#shopSubtabs { gap:8px; padding:8px; margin:0 0 12px; background:#090f0c; border:1px solid #69795a66; border-radius:0 0 5px 5px; }
+#shopSubtabs [data-shop-page="weapons"] { --sub-ink:#c1e6ae; --sub-bg:#2d4b2b; --sub-edge:#83b771; }
+#shopSubtabs [data-shop-page="upgrades"] { --sub-ink:#f0d0ae; --sub-bg:#59402c; --sub-edge:#bc9270; }
+#shopSubtabs [data-shop-page="build"] { --sub-ink:#bcdce9; --sub-bg:#284953; --sub-edge:#7faab9; }
+#shopSubtabs [data-shop-page="fortify"] { --sub-ink:#f2c0b1; --sub-bg:#56382e; --sub-edge:#c18c77; }
+#shopSubtabs button { flex:1; min-width:0; min-height:36px; padding:8px 10px; border:1px solid var(--sub-edge); border-radius:3px; color:var(--sub-ink); background:color-mix(in srgb,var(--sub-bg) 45%,#0b100b); font-size:11px; letter-spacing:.07em; }
+#shopSubtabs button.on { color:var(--sub-ink); background:var(--sub-bg); border-color:var(--sub-edge); box-shadow:inset 0 -3px var(--sub-edge); }
+#shopTabs button:hover, #shopSubtabs button:hover { filter:brightness(1.2); }
+#shopTabs button:focus-visible, #shopSubtabs button:focus-visible { outline:2px solid #f8efcf; outline-offset:2px; }
+@media(max-width:420px) { #shopSubtabs { padding:6px; gap:6px; } #shopSubtabs button { padding:8px 4px; font-size:10px; } }
+
+/* GP-144: per-spare fullness alongside the preserved Bullets total. */
+#ammoMags { grid-column:1 / -1; display:flex; gap:7px; align-items:flex-start; padding-top:5px; border-top:1px solid #72896766; max-width:380px; }
+#ammoMags[hidden] { display:none; }
+#ammoMags .mag-count { font-size:10px; line-height:24px; color:#becdab; flex:none; }
+#ammoMags .mag-list { display:flex; flex-wrap:wrap; gap:3px; min-width:0; }
+#ammoMags .mag-glyph { display:inline-flex; justify-content:center; align-items:center; width:24px; height:24px; flex:none; border:1px solid #a4b988; border-radius:2px 2px 5px 2px; background:linear-gradient(to top,#455c31 var(--fill),#101a12 var(--fill)); font-size:10px; font-weight:700; font-variant-numeric:tabular-nums; color:#f5f1d7; text-shadow:0 1px 2px #000; }
+#ammoMags .mag-glyph.partial { border-style:dashed; }
+#ammoMags .mag-glyph.loader { border-radius:50%; }
+#hud { --ammo-notice-bottom:max(112px,calc(var(--ammo-hud-height,80px) + 28px)); }
+#hudNotices { bottom:var(--ammo-notice-bottom); }
+@media(max-width:600px) {
+ #hud { --ammo-notice-bottom:max(110px,calc(var(--ammo-hud-height,80px) + 24px)); }
+ #objectiveHud { bottom:var(--ammo-notice-bottom); }
+ body:has(#kioskPrompt.on, #firstMinuteCoach:not([hidden])) #objectiveHud { bottom:calc(var(--ammo-notice-bottom) + 8px + 20vh); }
+}

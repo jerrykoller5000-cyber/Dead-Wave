@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = [];
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const r = T.devBaseBuild();
   out.push('pieces ' + r.n + ' failed: ' + r.failed.join('|'));
   const tally = {};

@@ -2,10 +2,11 @@
 // (tools/studio.mjs) import from here and nowhere deeper, so the pieces behind it can move.
 export { CLIP_FORMAT, EASES, validateClip, loadClip, sampleClip, blendPoses, clipEvents, clipTime, applyPose, solveChain, createPlayer } from './clip.js';
 export { SCENE_FORMAT, validateScene, loadScene, createScene, sceneWithoutMotion, sceneClipRefs } from './scene.js';
-export { fetchScene } from './load.js';
+export { fetchScene, fetchClipJson } from './load.js';
 export { MARINE, makeMarineRig, adoptMarine } from './marine.js';
 export { rigs, registerRig, rigCost } from './rigs.js';
 export { ikLimb } from './ik.js';
 export { loadReference, makeMannequin, poseReference } from './reference.js';
 export { MOTION_FORMAT, HIT_KINDS, validateMotion, loadMotion, createBody, createMotionPool } from './motion.js';
 export { ZOMBIE, makeZombieRig, adoptZombie } from './zombie.js';
+export { HAND_PATH_FORMAT, validateHandPath, handKeysAt, handPointAt, catmullRom, magAt, fetchHandPath } from './marine-reload.js';

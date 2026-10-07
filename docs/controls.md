@@ -99,7 +99,7 @@ leave build mode.
 | `3` | Laser sight |
 | `M` | Mute |
 | `Esc` | Pause and Settings |
-| `~` | Dev console. `bigtex shooter` gives unlimited cash, `broke` turns it back off |
+| `~` | Dev console. `bigtex shooter` gives unlimited cash, `broke` turns it back off. `night 5` jumps the run to the day before night 5 (shop and build, then sound the alarm); `night 5 now` starts night 5 at once (any night 1 to 20; no badges after a jump) |
 | `F11` | Fullscreen |
 
 `1`, `2` and `3` do nothing until the gear is bought at the kiosk. With `B` held, `1` to `9` turn the build wheel's pages

@@ -5,7 +5,8 @@
     ok(!!T.BLADE_STATS && !!T.BLADE_STATS.knife, 'BLADE_STATS exported');
     const k = T.BLADE_STATS.knife;
     // GB-52: the recovery went from 0.42 to 0.55 s (Jerry: still a bit too strong).
-    ok(k.dmg === 22 && k.cd === 0.55 && k.reach === 2.4 && k.arc === 0.40 && k.maxHits === 2,
+    // GB-94 follow-up (Jerry 2026-10-05: "Buff the knife a little"): damage 22 -> 26; the rest as GB-52 left it.
+    ok(k.dmg === 26 && k.cd === 0.55 && k.reach === 2.4 && k.arc === 0.40 && k.maxHits === 2,
       'knife stats nerfed (dmg/cd/reach/arc/maxHits) got ' + JSON.stringify(k));
 
     await startMatch(T, 'Knife');
@@ -18,13 +19,14 @@
     T.setAimYawDbg(0);
 
     const s = T.spawnZombie(px(), pz() + 2.0, 'shambler', true, true);
-    // GB-104 (D-62, docs/weaknesses.md): a shambler takes blades at 1.5, so a knife swing takes 33 off it. Its body
-    // here is 36 (24 x 1.5), so the knife is still the GB-52 two swings, and the first must take exactly the table's 33.
-    if (s) { s.mesh.position.set(px(), T.sampleHeight(px(), pz() + 2.0), pz() + 2.0); s.hp = 36; s.maxHp = 36; }
+    // GB-104 (D-62, docs/weaknesses.md): a shambler takes blades at 1.5, so a knife swing takes 39 off it (26 since GB-94;
+    // 33 at 22). Its body here is 42 (was 36; moved with the knife so the check is the same: the GB-52 two swings, the
+    // first exactly the table's 39, 3 left).
+    if (s) { s.mesh.position.set(px(), T.sampleHeight(px(), pz() + 2.0), pz() + 2.0); s.hp = 42; s.maxHp = 42; }
     hold(); await wait(30);
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20); hold();
-    ok(!!s && s.alive && Math.abs(s.hp - 3) < 0.01, 'first swing wounds shambler by 22 x blade 1.5 = 33 (hp=' + (s && s.hp) + ' of 36)');
+    ok(!!s && s.alive && Math.abs(s.hp - 3) < 0.01, 'first swing wounds shambler by 26 x blade 1.5 = 39 (hp=' + (s && s.hp) + ' of 42)');
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20);
     ok(!!s && !s.alive, 'second swing kills shambler');

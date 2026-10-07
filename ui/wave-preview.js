@@ -1,3 +1,4 @@
+import { renderHollowBoard } from './hollows.js';
 import { renderQuestPanel } from './quest-panel.js';
 import { text, hasText, STRINGS } from './strings.js';
 import { renderPrepRows } from './prep-checklist.js';
@@ -153,6 +154,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
         site:row.name,reward:row.collected?text('cache.collected'):row.reward}));
       if(data.restocks.some(row=>!row.collected))line(caches,'p',text('cache.mapLegend'),'briefing-muted');
     }
+    renderHollowBoard(fieldPage, data, doc);
     const bounties = buildBountyBoard(data);
     if(bounties) {
       const board=doc.createElement('section');board.className='briefing-bounties';fieldPage.append(board);

@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const r = T.devBaseBuild(); await wait(200);
   const gates = T.builds.filter(b => b.opening === 'gate' || (b.opening === 'door' && b.level === 0));
   // the road: gates on the line of the perimeter door

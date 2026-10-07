@@ -4,6 +4,25 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-78 · Cursor's map work moves to ChatGPT (Claude, 2026-10-06).** Cursor's CU-88 fix landed at 08:17 (its NOTE; t203
+  12/0, again 12/0 for Claude at 22:10Z) but it never checked out, and it has not been heard from since its 17:44 check-in.
+  Jerry is away for a few hours and left Claude to keep the crew moving; ChatGPT's queue is empty. So CU-88 is closed by
+  Claude, and CU-89, CU-90 and CU-91 (the minimap's enemies, the map, the mission markers) are ChatGPT's as GP-145, GP-146
+  and GP-147, with the same wording. Cursor keeps git, the commits and the integration suite.
+
+- **D-77 · The dead, from Jerry's playthrough 1 (2026-10-06).** "Zombies need to all be faster on average... reach up to
+  90% of players speed while sprinting. Sprinters need to outpace player on sprint. 70% of the zombies need to
+  congregate while the other half attempts to flank the player." (Read as 70% closing in together and the other 30%
+  flanking; Jerry, asked, 2026-10-06: "Basically.") He wants a horde, not a trickle (night 20 was "a slow boring trickle"). The maimed: no legs, they crawl;
+  one leg, they hop at 75% speed; no limbs, they die. GB-135, GB-136, CL-129; his notes in
+  handoffs/2026-10-06-jerry-playthrough-1.md.
+- **D-76 · The title in about 6 s warm (Jerry, 2026-10-05).** CU-56 measured the title at 6.3 s warm and 6.4 s cold on
+  Jerry's PC (the 100 shader variants compile every time, 1.6 s, and nothing is cached). Asked (Q-7) whether that is
+  fine for 1.0 or a task to get under 5 s, Jerry: "Those times are fine." Rule 12 and P-88 say about 6 s warm; no task.
+- **D-75 · The marine stays left-handed (Jerry, 2026-10-05).** Grokbot found (GB-129) that his gun arm is his
+  anatomical left, so the stock sits in his left shoulder. Asked whether to mirror him (Q-6), Jerry: "No, Leave him
+  left handed I think it's cool." The arms, the holsters, the draw, the reload pouch and the carry stay as they are;
+  CL-121 closed with nothing to change.
 - **D-74 · Nothing the player reads names a real brand or product (Jerry, 2026-10-02).** The guns, the camo patterns
   and the eyewear take made-up names: GW-4 Carbine, KR-7 Rifle, Breacher-12, Wasp SMG, Rotary Gun and Watchman MG;
   Classic Woodland, Arid Blend, Jungle Blend, Digital Woodland, Boreal Digital; the CIF's shades by shape. The player is

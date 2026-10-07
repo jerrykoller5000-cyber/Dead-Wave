@@ -79,3 +79,37 @@ body:has(#cif.show:not(.armory-only)) #enemyCounterCard { visibility:hidden; }
  #cifReset { max-width:45%; padding:6px; }
 }
 @media(max-height:620px) and (max-width:720px) { #cif .cif-preview { display:none; } }
+
+/* GP-138: a field locker, with the owned kit and its finishes in one clear workspace. */
+#cif:not(.armory-only) > .card { width:min(1080px,calc(100vw - 32px)); background:#111b18; border:1px solid #66766b; border-top:4px solid #d5bc7c; box-shadow:0 24px 100px #000c,inset 0 0 0 4px #0a1210; }
+#cif:not(.armory-only) .cif-header { background:linear-gradient(110deg,#303a2e,#17231f); padding:20px 26px 18px; }
+#cif:not(.armory-only) .cif-eyebrow { color:#ddc78f; letter-spacing:.2em; }
+#cif:not(.armory-only) .card h2 { color:#eee6cd; font-size:30px; }
+#cif:not(.armory-only) #cifStage { grid-template-columns:minmax(250px,33%) minmax(0,1fr); }
+#cif:not(.armory-only) .cif-preview { background:radial-gradient(ellipse at 50% 50%,#2f3c32,#101b17 75%); border-color:#65746966; padding:18px; }
+#cif:not(.armory-only) #cifMarine { width:100%; height:390px; max-height:calc(100dvh - 325px); object-fit:contain; }
+#cif:not(.armory-only) .cif-preview h3 { color:#d5c598; }
+#cif:not(.armory-only) #cifTabs { background:#0b1511; border-bottom-color:#60765e66; }
+#cif:not(.armory-only) #cifTabs button.on { color:#e9d29b; border-color:#dcc38a; background:#d4bc6b10; }
+#cif:not(.armory-only) #cifItems { padding:13px 22px; background:#17251f; }
+#cif:not(.armory-only) #cifItems button { border:1px solid #607466; background:#202e27; color:#c8d5c6; border-radius:3px; }
+#cif:not(.armory-only) #cifItems button.on { border-color:#dec68b; background:#42472f; color:#fff0c7; }
+#cif:not(.armory-only) .cif-selection { padding:16px 22px; background:#1b2b23; border-color:#5e71634d; }
+#cif:not(.armory-only) #cifSelection { color:#e8dfc2; font-size:24px; }
+#cif:not(.armory-only) .cif-scroll { background:#111c17; }
+#cif:not(.armory-only) .cif-available-count { color:#b5cba9; border:1px solid #617356; padding:5px 9px; font:10px var(--font-hud); letter-spacing:.05em; }
+#cif:not(.armory-only) #cifList { grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:9px; }
+#cif:not(.armory-only) #cifList button { border-radius:3px; background:#1d2c22; border-color:#4d6554; }
+#cif:not(.armory-only) #cifList button.on { border-color:#e0c583; background:#36432c; }
+#cif:not(.armory-only) .cif-footer { background:#17271e; border-color:#68755b; }
+@media(max-width:720px) {
+ #cif:not(.armory-only) > .card { width:100%; }
+ #cif:not(.armory-only) .cif-header { padding:13px 16px; }
+ #cif:not(.armory-only) .card h2 { font-size:23px; }
+ #cif:not(.armory-only) .cif-preview { height:164px; padding:0 14px; grid-template-columns:112px 1fr; }
+ #cif:not(.armory-only) #cifMarine { width:106px; height:159px; max-height:none; }
+ #cif:not(.armory-only) #cifItems { padding:9px 12px; }
+ #cif:not(.armory-only) .cif-selection { padding:10px 14px; }
+ #cif:not(.armory-only) #cifSelection { font-size:20px; }
+ #cif:not(.armory-only) #cifList { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}

@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const out = []; const wait = (ms) => new Promise(r => setTimeout(r, ms));
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   const p = T.player.position; p.set(40, T.sampleHeight(40, 40), 40); await wait(100);
   const before = T.landmarks.filter(l => l.kind === 'barrel').length;
   const r = T.devBaseBuild(); await wait(300);

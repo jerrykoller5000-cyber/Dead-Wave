@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 3.1 Pro (High)
-task: AG-50 The eyes pass on 2026-10-01/02's work
-touching: qa/*
-since: 2026-10-05T23:18Z
-next: waits on CU-57
+task: —
+touching: —
+since: 2026-10-07T03:03Z
+next: AG-52 Eyes on playthrough 1's fixes. As each of CU-88 to CU-91, GB
 blocked-on: —
-last-report: handoffs/2026-10-01-antigravity-AG-49.md
+last-report: handoffs/2026-10-06-antigravity-AG-52-GP84.md
 
 ## Notes
 

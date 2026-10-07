@@ -4,6 +4,10 @@ export const WARDROBE_STORE = 'tt_wardrobe';
 export const CAMO_ITEMS = Object.freeze(['cap', 'helmet', 'mask', 'shirt', 'trousers', 'gloves', 'carrier', 'pads', 'holster', 'belt', 'pack']);
 export const BOOT_COLOURS = Object.freeze(['black', 'brown', 'tan']);
 export const BOOT_HEX = Object.freeze({ black: 0x1c1c16, brown: 0x5a3a24, tan: 0xa07a48 });
+// CL-125 (Jerry's playthrough 1): the insulated (lightning) boots take their own colour, picked in the CIF once he has them.
+// Yellow is the lineman's rubber they come in (world/lightning.js BOOTS_HEX).
+export const RUBBER_COLOURS = Object.freeze(['yellow', 'black', 'olive', 'orange']);
+export const RUBBER_HEX = Object.freeze({ yellow: 0xe0b020, black: 0x1e1e1c, olive: 0x4a5530, orange: 0xd8641c });
 export const DRESS_TABS = Object.freeze([
   { id: 'head', items: ['cap', 'helmet', 'mask', 'eyewear'] },
   { id: 'body', items: ['shirt', 'trousers', 'gloves', 'boots'] },
@@ -36,7 +40,7 @@ export function defaultWardrobe(seedCamo = 'm81') {
   items.trousers.cut = 'trousers';
   items.gloves.worn = true;
   items.eyewear = { style: 'none' };
-  items.boots = { colour: 'black' };
+  items.boots = { colour: 'black', rubber: 'yellow' };
   return {
     version: 1,
     items,
@@ -64,7 +68,8 @@ export function normalizeWardrobe(raw, seedCamo = 'm81', isCamo = () => true) {
   const eye = raw.items.eyewear && raw.items.eyewear.style;
   items.eyewear = { style: EYEWEAR_STYLES.includes(eye) ? eye : 'none' };
   const colour = raw.items.boots && raw.items.boots.colour;
-  items.boots = { colour: BOOT_COLOURS.includes(colour) ? colour : 'black' };
+  const rubber = raw.items.boots && raw.items.boots.rubber;
+  items.boots = { colour: BOOT_COLOURS.includes(colour) ? colour : 'black', rubber: RUBBER_COLOURS.includes(rubber) ? rubber : 'yellow' };
   const guns = {};
     if (raw.guns && typeof raw.guns === 'object') {
     for (const id of GUNS) if (ok(raw.guns[id])) guns[id] = raw.guns[id];
@@ -91,8 +96,10 @@ export function withItem(state, id, patch, isCamo = () => true) {
     return next;
   }
   if (id === 'boots') {
-    if (!BOOT_COLOURS.includes(patch.colour)) return null;
-    next.items.boots = { colour: patch.colour };
+    if (patch.colour == null && patch.rubber == null) return null;
+    if (patch.colour != null && !BOOT_COLOURS.includes(patch.colour)) return null;
+    if (patch.rubber != null && !RUBBER_COLOURS.includes(patch.rubber)) return null;
+    next.items.boots = { colour: patch.colour ?? next.items.boots.colour, rubber: patch.rubber ?? next.items.boots.rubber };
     return next;
   }
   if (!CAMO_ITEMS.includes(id)) return null;

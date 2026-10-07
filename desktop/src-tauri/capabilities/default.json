@@ -1,0 +1,8 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "The game's window: its own commands (fullscreen, quit, saves) and nothing from the system.",
+  "windows": ["main"],
+  "remote": { "urls": ["http://dw.localhost/*", "https://dw.localhost/*"] },
+  "permissions": []
+}

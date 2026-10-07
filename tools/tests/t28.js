@@ -1,6 +1,6 @@
 (async () => {
   const T = window.TT; const wait = (ms) => new Promise(r => setTimeout(r, ms)); const out = [];
-  document.getElementById('modeHunt').click(); await wait(1200);
+  await startMatch(T, 'TestMarine');
   for (const tk of ['shambler', 'brute', 'military', 'spider']) {
     const z = T.spawnZombie(T.player.position.x + 20, T.player.position.z, tk, true);
     const ud = z.mesh.userData;

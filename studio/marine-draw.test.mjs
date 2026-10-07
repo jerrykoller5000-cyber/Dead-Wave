@@ -69,3 +69,17 @@ test('one big step fires both events once, and a cancel ends it', () => {
   d.start('pistol', 'uzi', load); d.step(0.05); d.cancel();
   assert.equal(d.state.active, false); assert.equal(d.frame().w, 0);
 });
+
+test('CL-122: with a place lookup the hand goes to where the gun really is, keeping the table\'s twist', () => {
+  const asked = [];
+  const place = (kind, at, slot) => { asked.push(kind + '@' + at + slot); return kind === 'uzi' ? { x: 0.05, y: 1.1, z: -0.3 } : null; };
+  const d = createDraw({ place }); d.start('m4', 'uzi', load);
+  d.step(DRAW_TIMES.stow - 0.001);
+  const stow = d.frame().target;
+  assert.deepEqual([stow.x, stow.y, stow.z], [reachPoint('back', 0).x, reachPoint('back', 0).y, reachPoint('back', 0).z], 'no place for the m4: the table');
+  d.step(0.002 + DRAW_TIMES.reach.chest - 0.002);
+  const grab = d.frame().target;
+  assert.ok(Math.abs(grab.x - 0.05) < 1e-3 && Math.abs(grab.y - 1.1) < 1e-3 && Math.abs(grab.z + 0.3) < 1e-3, 'at the Uzi itself: ' + JSON.stringify(grab));
+  assert.ok(Math.abs(grab.twistY - reachPoint('chest', 0).twistY) < 0.02, 'the table\'s twist: ' + grab.twistY);
+  assert.ok(asked.includes('m4@back0') && asked.includes('uzi@chest0'));
+});

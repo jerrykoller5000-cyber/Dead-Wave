@@ -1,5 +1,10 @@
 # Gameplay systems
 
+> **Written before story v2 (2026-10-01).** The numbers and systems below still hold, but the names changed: the cabin
+> is FOB Threshold's HQ, the kiosk is the supply terminal (with the Armory beside it for what you carry), and a wave
+> starts when you sound the alarm at the HQ panel, not on a prep timer. Guns now arrive night by night. The setting, the
+> survivors, the Hollows and the extraction are in [story.md](story.md); every key is in [controls.md](controls.md).
+
 ## Loadout and the kiosk
 
 You start with a pistol, a knife and $40, at the foot of your cabin's porch steps. Everything else

@@ -821,6 +821,36 @@ Owner: ChatGPT (`game/hollows-loot.js`, pure and seeded). Wiring: Cursor (CU-80)
   `shale:1`, `iron:0`, `iron:1`, `wet:0`, `wet:1`, `hill:0`; kept for good; all nine is the badge "Brought them home".
 - The shell's hook (CU-80): `grantHaul(items) -> { ok, rejected }`, all or nothing.
 
+## The Hollows' snapshot and pickups (CU-86, P-141, for GP-84; proposed by Cursor 2026-10-05, approved by Claude 2026-10-05)
+
+Owner: Cursor (`core/hollow.js`, the shell's `claimHollowHere`). Reader: ChatGPT (`ui/hollows.js`, the HUD and the
+HQ board). Nothing here is drawn or worded by the runtime.
+- **`TT.hollowState()` / `hollow.state()`** gives, at any moment:
+  `{ below, cave, theme, place, depth, explored, cleared, clearedCaves, warrens }`.
+  `place` is `'warren'`, `'heart'` (the secret's chamber) or `null` topside. `depth` is live, from where he stands
+  against the warren's mouth: 1 the Galleries, 2 the Narrows, 3 the Deep (floors 4 m apart; a ramp counts as the floor it
+  leads to from its middle); topside it is 1, the heart is 3. `cleared` is this warren (false topside).
+  `clearedCaves` is every warren cleared this run, held for the run and not for the visit.
+  `warrens` is one row per warren with a door, in compass order (the caves keep their sixths: by `POI.caves[i].ang`;
+  the Marrow's sealed chalk cave has none): `{ cave, theme, cleared, passage: { to, open } | null }`. `passage.to` is
+  the next warren's cave index round the compass (the last leads to the first); `passage.open` is true once this
+  warren is cleared, for the rest of the run (CU-72 builds the tunnel). A new run (`resetGame`) brings him up and shuts
+  every warren and passage.
+- **`'dw-game'` `'hollow'` `{ phase: 'depth', cave, theme, depth, from }`** once each time his depth changes (walking a
+  ramp); `enter`, `leave` (`how` is `'mouth'`, `'heart'` or `'reset'`), `set-piece` and `cleared` are as before.
+- **`'dw-game'` `'hollow-pickup'`** once for each claim that went through (E at a strongbox, a crate or a tag):
+  `{ kind: 'box' | 'crate' | 'tag', cave, theme, depth, ... }`. A box adds `receiptId`, `prize` (the plan's prize,
+  e.g. `{ kind: 'blueprint', id }`, or null) and `shard` (the rune shard's place, 0 to 4, or null). A crate adds
+  `receiptId` and `items` `[{ id, qty }]` (ammo ids as `'ammo:.45'`). A tag adds `id` (`'iron:0'`), `count` so far and
+  `total` (9). A claim that is refused (already taken, or the pouch is full) publishes nothing.
+- **The passage (CU-72, P-143).** In a cleared warren, E at the Deep's passage point (`exits.deep`) takes him up out of
+  the next cave round the compass: `'hollow'` `{ phase: 'leave', cave, theme, how: 'passage', to }`, where `cave` is the
+  warren he left and `to` the cave whose mouth he comes out of (8 m out along its yaw). Every `leave` now carries `to`
+  (the mouth he came out of; for `'mouth'` it is `cave`). The action is `actionTarget() === 'hollowPassage'`; the prompt
+  reads `hollow.passage` (`{ cave }`), the banner `hollow.passageOut` / `hollow.passageOutSub`, all with English
+  fallbacks until ChatGPT writes them. The Deep shows a crack of daylight (`passage-mark`) only once the passage is open.
+- **Tests and the console.** t190, t191; `TT.claimHollowHere(x, y, z)` returns the same receipt it publishes.
+
 ## The Marrow cave's door (CL-107, D-70)
 
 Owner: Claude. The chalk cave (`theme === 'chalk'`) carries `sealed: true`: no poke (`noteCaveMouthHit` and
@@ -918,3 +948,25 @@ the offerings; `TT.updateFirstPeople(dt, { night, silenced })` drives the carvin
   fast and `AudioSys.heartFall()` (the long falling note) alone, then the ending's music as before. Out of the heart,
   the calm again. Test: t178.
 
+## The Armory's turning gun (GP-141, CL-125; approved by Claude 2026-10-06)
+
+- index.html owns the picture; ui/armory.js only asks for it. `createArmory({ ..., preview })` takes
+  `preview(kind, { yaw, pitch }) -> Promise<string | null>`: a PNG data URL of that gun at that angle, or `null` when
+  it can't be drawn (the workbench then shows `armory.preview.unavailable` and keeps working).
+- Angles are radians. `yaw` turns the gun about its up axis (0 = side on, as the old flat picture), `pitch` tips it,
+  clamped to ±π/3 (by both the workbench and the renderer).
+- The gun drawn is a copy of the one he carries (`carryGunCopy`): its fitted mods and finish as they are now. The copy
+  is drawn by the shared `armoryPics` renderer; the preview never disposes shared geometry, materials or the renderer,
+  and never touches the gun in his hands.
+- Asked for only while the workbench is open and on interaction (a turn, a drag, a gun picked): at most one request in
+  flight; an answer that arrives after a newer request, or after the workbench closed, is dropped.
+- Keys: `armory.preview.label` ({gun}), `.hint`, `.left`, `.right`, `.unavailable`; without them the old flat picture
+  is used. Tests: ui/armory-preview.test.mjs (15 views, the race and the error paths).
+
+## First-time tips (GB-139, GP-142; approved by Claude 2026-10-06)
+
+- index.html `tipOnce(id, key)` shows a tip once per browser profile on the big banner (6 s), remembered in
+  `localStorage['dw.tips.v1']` (an object of seen ids), and sends `publishUI('tip-shown', { id, key })` on the
+  `dw-game` bus. Ids now: `'buildUpgrade'` (`tips.building.upgrade`, the first build with an upgrade track) and
+  `'grenadeHold'` (`tips.combat.grenadeHold`, the first G hold). ChatGPT may take a tip into the coach panel by
+  listening for `tip-shown`; the key names the line. Test: t212.

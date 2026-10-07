@@ -43,6 +43,14 @@ from chip import pulse, tri_stepped, lfsr_noise
 
 BPM = 96.0
 DRIVE = 0                   # CL-38: 0 is First Blood as it was; the later nights' songs push it (tools/hordes.py)
+# CL-128: each later night has its own song (tools/nights.py), which sets these. Their defaults are First Blood as it was.
+GROOVE = {}        # section -> drum groove: 'half' 'four' 'break' 'dbeat' 'gallop' 'shuffle' 'blast' 'march' (unset: First Blood's)
+BASS_PAT = None    # the engine's 16 octave offsets a bar (None in it is a rest); unset: First Blood's
+ARP_ORDER = None   # indices into the chord tones, one per 16th, cycled; unset: up and down
+ARP_SECS = ('dropA2', 'climax')
+LEAD = None        # the lead's voice: {'d1': duty, 'd2': its twin's duty, 'vib': cents}; unset: First Blood's
+CLIMAX_HOOK = None # (hook, answer) the climax sings; unset: the hook an octave up
+STAB_STEPS = None  # where the chord stabs hit in the drops (16ths); unset: the offbeat 8ths; () for none
 SPB = 60.0 / BPM            # seconds per beat
 S16 = SPB / 4               # seconds per 16th
 BARS = 108
@@ -150,11 +158,13 @@ def v_stab(root, n):
     return y
 
 def v_lead(m, n, dark=0.0):
-    key = ('l', m, n, dark)
+    Lv = LEAD or {}
+    d1, d2, vib = Lv.get('d1', 0.25), Lv.get('d2', 0.125), Lv.get('vib', 16)
+    key = ('l', m, n, dark, d1, d2, vib)
     if key in _cache: return _cache[key]
     f = midi_to_hz(m)
-    a = pulse(f, n, 0.25, vib_hz=5.2, vib_cents=16, vib_delay=0.22)
-    b = pulse(f * 2 ** (7 / 1200), n, 0.125, vib_hz=5.0, vib_cents=14, vib_delay=0.25)
+    a = pulse(f, n, d1, vib_hz=5.2, vib_cents=vib, vib_delay=0.22)
+    b = pulse(f * 2 ** (7 / 1200), n, d2, vib_hz=5.0, vib_cents=vib * 0.875, vib_delay=0.25)
     x = 0.65 * a + 0.45 * b
     x = lowpass(x, 5200 - 3600 * dark)
     x = np.tanh(1.3 * x) * adsr(n, 0.006, 0.12, 0.8, 0.09)
@@ -173,7 +183,7 @@ def v_arp(m, n):
 def v_pad(chord, n):
     x = np.zeros(n)
     r = ROOT[chord] + 24
-    for iv in (0, 7, 12, 15 if chord in ('Em', 'Am') else 16):
+    for iv in TONES[chord]:
         f = midi_to_hz(r + iv)
         x += pulse(f, n, 0.5) + pulse(f * 2 ** (6 / 1200), n, 0.5)
     t = np.arange(n) / SR
@@ -263,6 +273,57 @@ def render(sections=None, circle=True, master_mode='song'):
     def hat(pos, g=1.0, open_=False, pan=0.3):
         add_at(bus['drums'], d_hat(open_), pos, (0.22 if open_ else 0.2) * g, pan); note('drums', pos, int(0.05 * SR), 46 if open_ else 42, g)
 
+    def groove_bar(gv, b, i, sec):
+        """CL-128: the later nights' grooves. Every one keeps a backbeat the director can cut on."""
+        big = sec in ('climax', 'bridge')
+        if gv == 'four':
+            for st in (0, 4, 8, 12): kick(smp(b, st), 1.0 if st in (0, 8) else 0.88)
+            if i % 2 == 1: kick(smp(b, 14), 0.7)
+            snare(smp(b, 4), 0.92); snare(smp(b, 12), 1.0)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.72 if st % 4 == 2 else 0.48, open_=(st == 14))
+            for st in range(1, 16, 2): hat(smp(b, st), 0.22 + 0.1 * big, pan=-0.3)
+        elif gv == 'half':
+            kick(smp(b, 0), 1.0); kick(smp(b, 6), 0.85); kick(smp(b, 10), 0.9)
+            if i % 4 == 3: kick(smp(b, 14), 0.8); kick(smp(b, 15), 0.7)
+            snare(smp(b, 8), 1.0)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.62 if st % 4 == 0 else 0.42, open_=(st == 14 and i % 2 == 1))
+            for st in range(1, 16, 2): hat(smp(b, st), 0.2, pan=-0.35)
+            if i % 2 == 1: kick(smp(b, 13), 0.55)
+        elif gv == 'break':
+            kick(smp(b, 0), 1.0); kick(smp(b, 6), 0.8); kick(smp(b, 10), 0.92)
+            if i % 2 == 1: kick(smp(b, 11), 0.6)
+            snare(smp(b, 4), 0.95); snare(smp(b, 12), 1.0)
+            snare(smp(b, 7), 0.22, big=False); snare(smp(b, 15), 0.3, big=False)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.66 if st % 4 == 2 else 0.45, open_=(st == 6 and i % 2 == 0))
+            if big:
+                for st in range(1, 16, 2): hat(smp(b, st), 0.24, pan=-0.3)
+        elif gv == 'dbeat':
+            kick(smp(b, 0), 1.0); kick(smp(b, 2), 0.8); kick(smp(b, 8), 0.95); kick(smp(b, 10), 0.8)
+            snare(smp(b, 4), 0.95); snare(smp(b, 12), 1.0)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.6 if st % 4 == 0 else 0.48, open_=(st % 4 == 2 and big))
+        elif gv == 'gallop':
+            for st in (0, 3, 4, 8, 11, 12): kick(smp(b, st), 1.0 if st in (0, 8) else 0.72)
+            snare(smp(b, 4), 0.92); snare(smp(b, 12), 1.0)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.62 if st % 4 == 0 else 0.44, open_=(st == 14))
+        elif gv == 'shuffle':
+            kick(smp(b, 0), 1.0); kick(smp(b, 10), 0.85)
+            if i % 2 == 1: kick(smp(b, 7), 0.6)
+            snare(smp(b, 4), 0.9); snare(smp(b, 12), 1.0)
+            for st in (0, 3, 4, 7, 8, 11, 12, 15): hat(smp(b, st), 0.6 if st % 4 == 0 else 0.4, open_=(st == 15 and i % 2 == 1))
+        elif gv == 'blast':
+            for st in range(0, 16, 2): kick(smp(b, st), 0.9 if st % 4 == 0 else 0.72)
+            for st in range(2, 16, 4): snare(smp(b, st), 0.85)
+            snare(smp(b, 12), 0.6)
+            for st in range(0, 16, 2): hat(smp(b, st), 0.55, open_=(st == 0 and i % 4 == 0))
+        elif gv == 'march':
+            kick(smp(b, 0), 1.0); kick(smp(b, 8), 0.95)
+            if i % 2 == 1: kick(smp(b, 14), 0.6)
+            snare(smp(b, 4), 0.95); snare(smp(b, 12), 1.0)
+            for st in (2, 3, 6, 10, 11, 14, 15): snare(smp(b, st), 0.2 + 0.06 * (st % 2), big=False)
+            for st in range(0, 16, 4): hat(smp(b, st), 0.5)
+        else:
+            raise ValueError('unknown groove ' + gv)
+
     rng = np.random.default_rng(1)
     phrase_bar = {}
     for b, (sec, i, ch) in enumerate(bar_info):
@@ -284,8 +345,9 @@ def render(sections=None, circle=True, master_mode='song'):
             bright = 0.8 if sec in ('climax', 'bridge') else 0.7
         n16 = int(S16 * SR)
         if bright is not None:
-            pat = [0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 12, 0, 12]
+            pat = BASS_PAT or [0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 12, 0, 12]
             for st, o in enumerate(pat):
+                if o is None: continue
                 vel = 1.0 if st in (0, 8) else (0.8 if o else 0.72)
                 add_at(bus['bass'], v_bass(root + o, int(n16 * 0.92), bright), smp(b, st), vel, 0); note('bass', smp(b, st), n16 * 0.92, root + o, vel)
         else:
@@ -296,7 +358,10 @@ def render(sections=None, circle=True, master_mode='song'):
             add_at(bus['sub'], v_sub(root, int(SPB * 2 * SR * 0.95)), smp(b, 8), 0.7, 0); note('sub', smp(b, 8), SPB * 2 * SR * 0.95, root - 12, 0.7)
 
         # ---- drums
-        if sec == 'stalk':
+        gv = GROOVE.get(sec)
+        if gv and sec in ('dropA', 'riffB', 'dropA2', 'bridge', 'climax'):
+            groove_bar(gv, b, i, sec)   # CL-128: the night's own groove
+        elif sec == 'stalk':
             # a heartbeat, ba-dum, and a far tick on the 4; the last bar leans in
             kick(smp(b, 0), 0.75, heavy=1.3); kick(smp(b, 3), 0.5, heavy=1.3)
             hat(smp(b, 12), 0.35, pan=-0.4)
@@ -372,7 +437,7 @@ def render(sections=None, circle=True, master_mode='song'):
 
         # ---- stabs (offbeat 8ths in the drops, quarters in the bridge)
         if sec in ('dropA', 'dropA2', 'riffB', 'climax'):
-            for st in (2, 6, 10, 14):
+            for st in (STAB_STEPS if STAB_STEPS is not None else (2, 6, 10, 14)):
                 add_at(bus['stab'], v_stab(root, int(S16 * SR * 1.6)), smp(b, st), 0.8, -0.25 if st % 8 == 2 else 0.25)
                 for iv in (0, 7, 12): note('stabs', smp(b, st), S16 * SR * 1.6, root + 24 + iv, 0.8)
         elif sec == 'bridge':
@@ -383,17 +448,17 @@ def render(sections=None, circle=True, master_mode='song'):
         # ---- pad (break and climax, and a thin one in riff B)
         if sec in ('break', 'climax', 'riffB', 'stalk') and (i % 1 == 0):
             p = v_pad(ch, int(BAR_S * SR * 1.05))
-            for iv in (0, 7, 12, 15 if ch in ('Em', 'Am') else 16): note('pad', smp(b), BAR_S * SR * 1.05, ROOT[ch] + 24 + iv, 0.6)
+            for iv in TONES[ch]: note('pad', smp(b), BAR_S * SR * 1.05, ROOT[ch] + 24 + iv, 0.6)
             g = 0.9 if sec == 'break' else (0.45 if sec == 'climax' else (0.42 if sec == 'stalk' else 0.3))
             add_at(bus['pad'], p, smp(b), g, -0.2); add_at(bus['pad'], p, smp(b), g, 0.2)
             add_at(send_rev, p, smp(b), g * 0.5, 0)
 
         # ---- arps (drop A' and climax): 16ths of the chord, up and up
-        if sec in ('dropA2', 'climax') or (sec == 'build' and i >= 4):
+        if sec in ARP_SECS or (sec == 'build' and i >= 4):
             tones = [root + 24 + t for t in TONES[ch]] + [root + 36]
-            order = [0, 1, 2, 3, 4, 3, 2, 1]
+            order = ARP_ORDER or [0, 1, 2, 3, 4, 3, 2, 1]
             for st in range(16):
-                m = tones[order[st % 8] % len(tones)] + (12 if sec == 'climax' and st % 8 >= 4 else 0)
+                m = tones[order[st % len(order)] % len(tones)] + (12 if sec == 'climax' and st % 8 >= 4 else 0)
                 add_at(bus['arp'], v_arp(m, int(S16 * SR * 0.9)), smp(b, st), 0.8 if st % 4 == 0 else 0.55, 0.4 * np.sin(st)); note('arp', smp(b, st), S16 * SR * 0.9, m, 0.7)
                 add_at(send_dly, v_arp(m, int(S16 * SR * 0.9)), smp(b, st), 0.25, 0)
 
@@ -438,8 +503,9 @@ def render(sections=None, circle=True, master_mode='song'):
         for k in range(2):
             lay(BRIDGE_LINE, s + 8 * k, g=0.9, echo=0.8)
     for s in sec_starts('climax'):
+        ch_a, ch_b, ch_oct = (CLIMAX_HOOK[0], CLIMAX_HOOK[1], CLIMAX_HOOK[2] if len(CLIMAX_HOOK) > 2 else 1) if CLIMAX_HOOK else (HOOK_A, HOOK_A2, 1)
         for k in range(4):
-            lay(HOOK_A, s + 4 * k, octave=1, g=0.85, harmony=True); lay(HOOK_A2, s + 2 + 4 * k, octave=1, g=0.85, harmony=True)
+            lay(ch_a, s + 4 * k, octave=ch_oct, g=0.85, harmony=True); lay(ch_b, s + 2 + 4 * k, octave=ch_oct, g=0.85, harmony=True)
 
     # ---- sidechain pump on the tonal buses
     pump = np.ones(L)

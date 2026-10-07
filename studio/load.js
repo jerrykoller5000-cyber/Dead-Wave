@@ -19,3 +19,8 @@ export async function fetchScene(name, { transform } = {}) {
   const clips = new Map(await Promise.all(refs.map(async (r) => [r, await getJson(`clips/${r}.json`)])));
   return loadScene(json, (r) => clips.get(r));
 }
+
+// CL-84: one clip's JSON by its ref ('marine/walk'), from the same place; the caller loads it (loadClip).
+export async function fetchClipJson(ref) {
+  return getJson(`clips/${ref}.json`);
+}

@@ -115,7 +115,7 @@ test('HQ copy never calls the base a cabin, while landmark cabins keep their nam
   for (const key of ['shop.find','build.reason.cabin','tips.interaction.kiosk','tips.interaction.bank']) {
     assert.match(text(key), /HQ/); assert.doesNotMatch(text(key), /cabin/i);
   }
-  assert.equal(text('map.hq'), 'HQ'); assert.equal(text('map.cabin'), 'CABIN');
+  assert.equal(text('map.hq'), 'FOB Threshold'); assert.equal(text('map.cabin'), 'CABIN');
   assert.equal(text('world.cabin'), 'Cabin'); assert.equal(text('build.obstacle.cabin'), 'a cabin');
   for (const key of ['tree','stump','rock','hq']) assert(hasText('build.obstacle.' + key));
   for (const key of ['mortar.noRoom','mortar.noRoomEdge','mortar.noRoomBlocked','build.message.stairsOccupied','build.message.stairsStepOff']) assert(hasText(key));

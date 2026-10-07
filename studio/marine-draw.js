@@ -61,7 +61,10 @@ const smooth = (x) => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 *
 //   target  the reach point the hand is heading for (a blend between the old place and the new one)
 //   inHand  which gun is in his hand right now: `from` until it is put away, then nothing, then `to`
 //   events  'release' (the old gun is on him again) and 'grab' (the new one is in his hand), once each
-export function createDraw() {
+// CL-122: `place(kind, at, slot)` (optional) says where that gun's grip really is on him right now, in marine space
+// ({x, y, z}, or null for the table's point): the stowed guns are fitted into their spots (GB-130, GP-128's Uzis and
+// revolvers), so the hand goes to the gun, not to the spot. The twist and the bend still come from the table.
+export function createDraw({ place } = {}) {
   const s = { active: false, from: null, to: null, fromAt: null, toAt: null, segs: [], t: 0, total: 0, fired: new Set() };
   function start(from, to, loadout) {
     const a = drawSourceOf(from, loadout), b = drawSourceOf(to, loadout);
@@ -94,7 +97,7 @@ export function createDraw() {
     for (let i = 0; i < s.segs.length; i++) {
       const g = s.segs[i];
       const k = g.dur > 0 ? Math.min(1, t / g.dur) : 1;
-      const here = reachPoint(g.at, g.slot);
+      const here = placed(g.at, g.slot, g.kind === 'stow' ? s.from : s.to);
       if (g.kind === 'stow') {
         out.w = smooth(k); out.target = here;
         if (k >= 1) { out.passed.push('release'); out.inHand = null; }
@@ -115,6 +118,12 @@ export function createDraw() {
     }
     if (out.target) { out.twistY = out.target.twistY * out.w; out.bend = out.target.bend * out.w; }
     return out;
+  }
+  function placed(at, slot, kind) {
+    const r = reachPoint(at, slot);
+    if (!r || !place || !kind) return r;
+    const p = place(kind, at, slot);
+    return p ? { x: p.x, y: p.y, z: p.z, twistY: r.twistY, bend: r.bend } : r;
   }
   return { state: s, start, cancel, step, frame };
 }

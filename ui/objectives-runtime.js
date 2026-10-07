@@ -73,7 +73,8 @@ export function mountObjectiveRuntime({runId,getProps,getInteraction,listChoices
     const display={runId:state.runId,sequence:state.sequence,active,player,sites:state.sites.map(site=>{
       const prop=world.props[site.id],pack=choosePack(site),opts=site.pack?[site.pack]:options(site.id);
       if(prop){const next=world.stateFor(site.state,site.id,site.feedback==='partial');if(next&&prop.state!==next)prop.setState(next);}
-      return {...site,position:prop?{x:prop.centre.x,z:prop.centre.z}:{x:0,z:0},progress:site.progress/6,
+      const at=prop?.pickup&&site.id===RADIO&&['ready-to-claim','claimed'].includes(site.state)?prop.pickup.centre:prop?.centre;   // CL-127: the radio's supplies wait in a locker apart
+      return {...site,position:at?{x:at.x,z:at.z}:{x:0,z:0},progress:site.progress/6,
         reward:description(pack),remaining:site.remaining===null?null:description(pack,site.remaining),
         choices:fixed[site.id]||site.restockDay?[]:opts.map(p=>({id:p.id,reward:choiceDescription(p)})),choiceId:pack?.id,choiceLocked:!!site.pack};
     })};
