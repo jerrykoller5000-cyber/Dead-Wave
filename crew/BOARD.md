@@ -1,6 +1,6 @@
 # Dead-Wave crew board
 
-Lead: Claude. Last updated 2026-10-07T02:22Z by Claude (CL-131 done).
+Lead: Claude. Last updated 2026-10-07T04:51Z by Claude (GB-140 closed from its logs; GB-141 to GB-143 to Grokbot).
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in steps; this board has what
 to work on and what has been decided. **Claude (lead) and Jerry edit this file.** The one exception: each agent ticks
@@ -24,9 +24,9 @@ Each agent's queue (below, under Queues) is in three parts: **Now** (start it), 
 | Agent | Now, in this order | Waiting | Later (R6) |
 | --- | --- | --- | --- |
 | Cursor | commit everything waiting since the last push, then the integration suite (GP-84, GP-138 to GP-144 wait on it) | — | — |
-| Claude | — (lead: reviews, the crew while Jerry is away) | — | — |
-| ChatGPT | GP-148 (GB-137's reload banners); GP-84, GP-138 to GP-147 wait on Grokbot's GB-140 run and Antigravity | — | — |
-| Grokbot | GB-140 (the integration run while Cursor is away) | — | — |
+| Claude | t208's flaky swing check; reviews | — | — |
+| ChatGPT | close GP-84 and GP-138 to GP-148 (the run and Antigravity's checks are in) | — | — |
+| Grokbot | GB-141 (t23, t68 vs GB-137), GB-142 (t98 ragdolls), GB-143 (t185 the M4) | — | — |
 | Antigravity | AG-52 (eyes on the fixes as they land) | — | — |
 
 Not sure a task is yours (the table under "Who does what")? Say so with `crew.mjs request`; don't start it.
@@ -258,7 +258,12 @@ R1 to R4's tasks are all finished (`crew/archive/`).
   die (no more crawling torsos). Claude makes the crawl and the hop in CL-129; the rules and the speeds here.
 - [x] **GB-137** **The true magazine and reload system.** Jerry: it never got implemented. `game/magazines.js` (D-61) keeps each
   magazine's rounds; find what of it the game and the HUD don't use yet and finish it, so a reload swaps a real magazine.
-- [>] **GB-140** **The integration run while Cursor is away** (Claude, 2026-10-07). `npm test` twice on Jerry's PC (check-players
+- [x] **GB-141** **t23 and t68 against GB-137's rules** (from GB-140). t23's reload is refused now (no fuller magazine) and t68
+  expects buying the AK never to lower a 999 reserve, which is now the spares exactly. Change the rule or the test; say which.
+- [>] **GB-142** **t98: something moves more than 4 m in 100 ms,** ragdolls on and off (it failed before CL-129 too).
+- [ ] **GB-143** **t185: the M4 sometimes fires one round on a held trigger** (run 2 and its retry). Likely the first-draw
+  stall t187 had: count the hold in game time.
+- [x] **GB-140** **The integration run while Cursor is away** (Claude, 2026-10-07). `npm test` twice on Jerry's PC (check-players
   passes again), the real-renderer smoke run, each red to its owner with the failing lines; flaky ones listed apart. GP-84,
   GP-138 to GP-147 and GB-137 wait on this. No git: Cursor still commits when it is back.
 - [x] **GB-138** **The Watchman MG.** Jerry: it never got created. Make the M240 on its tripod real: bought, placed, manned, with
@@ -268,26 +273,26 @@ R1 to R4's tasks are all finished (`crew/archive/`).
 
 #### Now
 
-- [!] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
+- [x] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
   here", pickups; the board's warrens and passages; the Marrow cave's sealed door (story v2). After CU-86 (the live depth, the clearances and the pickup
   receipts: handoffs/2026-10-02-chatgpt-GP-84-contract-check.md). Details: `docs/roadmap.md` P-141.
 
-- [!] **GP-138** **The CIF window** (Jerry's playthrough): "Your Gravewalker" starts with the turning paused; only items he has
+- [x] **GP-138** **The CIF window** (Jerry's playthrough): "Your Gravewalker" starts with the turning paused; only items he has
   unlocked are listed; a new look for the window; the colour of the lightning-proof boots can be changed. Claude does the
   figure itself in CL-125.
-- [!] **GP-139** **Notifications move left.** The new-gun unlock and the skulls processed drop down from the Dead-Wave/prep panel
+- [x] **GP-139** **Notifications move left.** The new-gun unlock and the skulls processed drop down from the Dead-Wave/prep panel
   on the left, as part of it, not mid-screen. Every other notice that can go there goes there; the kill streaks stay.
-- [!] **GP-140** **The supply terminal's tabs.** Each tab's sub-tabs named and coloured apart so they catch the eye (Jerry's
+- [x] **GP-140** **The supply terminal's tabs.** Each tab's sub-tabs named and coloured apart so they catch the eye (Jerry's
   example: Weapons in yellow over GUNS in green and UPGRADES in brown), on every tab.
-- [!] **GP-141** **The Armory: the gun in 3D.** A small view of the selected gun that he can turn, like the CIF's figure.
-- [!] **GP-145** **The minimap's enemy indicator** (was CU-89, D-78). True direction every time, including after the camera
+- [x] **GP-141** **The Armory: the gun in 3D.** A small view of the selected gun that he can turn, like the CIF's figure.
+- [x] **GP-145** **The minimap's enemy indicator** (was CU-89, D-78). True direction every time, including after the camera
   turns (it lies now); several directions at once; smaller. By day it shows only the dead he has been near or seen; at night,
   the direction of any within 50 m. index.html drawMinimap; check in on index.html (minimap).
-- [!] **GP-146** **The map** (was CU-90, D-78). His facing and the camera's facing, as on the minimap. Every place a `?` until he
+- [x] **GP-146** **The map** (was CU-90, D-78). His facing and the camera's facing, as on the minimap. Every place a `?` until he
   has found it (FOB Threshold always shown); the caves by their real names once found (Root Warren...); the HQ is FOB
   Threshold on both maps.
-- [!] **GP-147** **Mission indicators** (was CU-91, D-78) on the minimap and the map: where the current objectives are.
-- [!] **GP-148** **GB-137's reload banners in the catalogue.** R with no fuller magazine now refuses with a banner through
+- [x] **GP-147** **Mission indicators** (was CU-91, D-78) on the minimap and the map: where the current objectives are.
+- [x] **GP-148** **GB-137's reload banners in the catalogue.** R with no fuller magazine now refuses with a banner through
   `sayText` and English fallbacks: `hud.ammo.noFullerMag` (NO FULLER MAGAZINE), `hud.ammo.noFullerLoader` (NO FULLER LOADER)
   and `hud.ammo.noFullerHelp`. Your wording, in ui/strings.js; no index.html change needed.
 
@@ -314,6 +319,9 @@ R1 to R4's tasks are all finished (`crew/archive/`).
 - [x] **CL-129** **The dead look and move better.** Better models and animation for every kind, more engaging to look at; the
   crawl (no legs) and the hop (one leg) for GB-136.
 - [x] **CL-130** **The dead sound like themselves.** Each kind its own sounds.
+- [x] **CL-132** **The broken characters** (Jerry, 2026-10-07: "whats the deal with all these alien like symbols?"). index.html's text was
+  double-encoded once (UTF-8 read as Windows-1252): `Â·` for ·, `GÃƒâ€"3` for G×3, `Ã¢â‚¬â€` for —, on the HUD and in 720 lines. Put
+  back exactly, and a test that fails on any of it in the game's files.
 - [x] **CL-131** **The Watchman MG, carried and fired.** From GB-138: shouldered (T) it still shows the mortar; give it its own carried
   model, tip its barrel up and down with the aim, throw links and brass, and give it its own report if the AK's isn't right.
 

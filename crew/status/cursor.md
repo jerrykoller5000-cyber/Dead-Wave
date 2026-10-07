@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-92 Commit the pile since 71ebd9d
+task: CU-93 Checkpoint commit since f365911; index.html stays out while GB-141 is in it
 touching: git
-since: 2026-10-07T04:05Z
+since: 2026-10-07T05:08Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-06-cursor-CU-57.md
+last-report: handoffs/2026-10-07-cursor-CU-92.md
 
 ## Notes
 

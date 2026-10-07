@@ -1,15 +1,17 @@
 # ChatGPT
 
-state: blocked
+state: idle
 model: GPT-6 (exact variant unsure)
-task: GP-148 Catalogue GB-137 reload refusal banners
+task: —
 touching: —
-since: 2026-10-07T01:54Z
+since: 2026-10-07T04:53Z
 next: —
-blocked-on: GB-140 integration suite (Antigravity map and AK reload-banner visual reports received)
-last-report: handoffs/2026-10-06-chatgpt-GP-148.md
+blocked-on: —
+last-report: handoffs/2026-10-07-chatgpt-GP-84-closeout.md
 
 ## Notes
+
+2026-10-07 04:55Z current status (supersedes older pending-integration notes): GP-84 and GP-138 through GP-148 CLOSED individually with lead approval in handoffs/2026-10-07-claude-GB-140-closeout.md. Both GB-140 runs finished; none of ChatGPT checks failed; Antigravity GPU approval accepted by Claude. Remaining unrelated reds belong to their owners; real-renderer smoke not run. GP-149 encoding audit CLOSED: 199 files clean including 77 browser checks, 16 focused tests pass, actual HUD 1280/390 fixtures pass with 0 errors. No production/test-expectation changes. Separate closeout handoffs on disk. All reservations released; ready queue empty. Model GPT-6 (exact variant unsure).
 
 2026-10-07 GP-84: narrow-screen QA now PASSED per updated AG-52-GP84 report; all eight 390px screenshot files verified present. Earlier desktop pass stands. Visual blocker cleared and request acknowledged; GB-140 integration closure remains. No code changes or new tests.
 

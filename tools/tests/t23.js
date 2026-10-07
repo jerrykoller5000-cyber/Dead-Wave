@@ -50,7 +50,13 @@
   const res = [];
   for (const w of ['pistol','uzi','m4','ak','aa12','sniper','minigun','flamer','shotgun','revolver','launcher']) {
     T.setWeapon(W.indexOf(w)); await wait(250);
-    const am = T.getAmmo(); am[w] = 0; T.getReserve()[T.caliberOf ? T.caliberOf(w) : w] = 999;
+    // GB-141: since D-61 / GB-137 a magazine gun's count and its calibre's reserve are read-outs of its magazines, and R
+    // refuses to swap in a magazine no fuller than the one in the gun. So empty the loaded magazine and pocket two full
+    // spares (a genuine reload); the loose-fed guns (shotgun, launcher) keep the old setup.
+    T.setAmmoDbg(w, 0);
+    const mz = T.magazinesDbg && T.magazinesDbg(w);
+    if (mz) T.setMagazinesDbg(w, 0, [mz.size, mz.size], 0);
+    else { const am = T.getAmmo(); am[w] = 0; T.getReserve()[T.caliberOf ? T.caliberOf(w) : w] = 999; }
     calls.length = 0;
     T.startReload(); const t0 = performance.now();
     while (T.isReloading() && performance.now() - t0 < 8000) await wait(50);

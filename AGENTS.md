@@ -104,6 +104,11 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 4. **Start from the freshest file and never overwrite.** Re-read a file before you edit it.
    Before you save, check it hasn't changed underneath you (modified time or hash). If it has,
    three-way merge onto the new version.
+   **Every file is UTF-8 with no BOM; read and write it as UTF-8.** Windows PowerShell's `Get-Content`,
+   `Set-Content` and `Out-File` use the system code page by default and turn `·` into `Â·`, `×` into `Ã—` and `—`
+   into `â€”`: that happened to all of index.html once (2026-10-06, about 09:09Z) and the HUD showed it to Jerry
+   (CL-132). Edit with your editor, Node or Python; in PowerShell use `Get-Content -Encoding UTF8` and
+   `[IO.File]::WriteAllText($p, $t, [Text.UTF8Encoding]::new($false))`. t215 fails on any such pair.
 5. **The split freeze.** While Cursor has the freeze on (the panel shows **SPLIT FREEZE ON**),
    nobody else edits `index.html`. Use that time for specs and tests in new files.
 6. **Only Cursor and Claude commit and push** (Jerry, 2026-09-25, D-27). Nobody else touches

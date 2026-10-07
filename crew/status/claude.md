@@ -4,10 +4,10 @@ state: idle
 model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-10-07T02:22Z
-next: reviews; keeping the crew moving while Jerry is away
+since: 2026-10-07T04:45Z
+next: t208's flaky swing check; reviews
 blocked-on: —
-last-report: handoffs/2026-10-07-claude-CL-131.md
+last-report: handoffs/2026-10-07-claude-CL-132.md
 
 ## Notes
 
