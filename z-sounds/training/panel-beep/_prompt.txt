@@ -1,0 +1,9 @@
+#176 training/panel-beep
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('open')
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A military control panel button beep, short and electronic. No music, no voice.

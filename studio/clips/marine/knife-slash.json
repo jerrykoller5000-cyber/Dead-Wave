@@ -1,16 +1,17 @@
 {
   "format": "dw-hand-path/1",
   "name": "knife-slash",
-  "note": "CL-122: the marine's knife arm. The blade rides his left hand (gripL); this is where that hand goes through one slash (t is 0..1 of KNIFE_ANIM_DUR, 0.26 s): from wherever the pose has it, up and out to his knife side, then the cut across in front of him at arm's length, through to the other side low, and back. Offsets in his own axes (x out to the knife side, y up, z forward), metres. The arm reaches it by IK; the blade's turn in the fist is the game's (updateKnifeAnim).",
+  "note": "CU-107: the issue knife. A short cock, a thrust at arm's length, a small cut across, then back to the pose. t is 0..1 of the knife swing (0.22 s). Offsets in his own axes (x out to the knife side, y up, z forward), metres. The arm reaches the point by IK; the blade's turn in the fist is updateKnifeAnim.",
   "places": {
     "rest": "where the pose has the hand this frame (the swing starts and ends there)",
     "chest": "a point in front of his upper chest (torso space 0, 1.22 m, 0.12 m)"
   },
   "hand": [
     { "t": 0.00, "at": "rest" },
-    { "t": 0.22, "at": "chest", "off": [0.32, 0.20, 0.02] },
-    { "t": 0.40, "at": "chest", "off": [0.06, 0.04, 0.36] },
-    { "t": 0.55, "at": "chest", "off": [-0.12, -0.14, 0.26] },
+    { "t": 0.14, "at": "chest", "off": [0.16, 0.06, -0.04] },
+    { "t": 0.30, "at": "chest", "off": [0.06, 0.02, 0.22] },
+    { "t": 0.40, "at": "chest", "off": [0.02, -0.01, 0.40] },
+    { "t": 0.58, "at": "chest", "off": [-0.14, -0.06, 0.20] },
     { "t": 1.00, "at": "rest" }
   ]
 }

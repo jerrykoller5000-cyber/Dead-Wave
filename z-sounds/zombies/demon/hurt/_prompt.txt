@@ -1,0 +1,9 @@
+#56 demon-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.7 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short, deep, angry, distorted snarl from a demon when struck, with a spit of embers. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('demon', 'hurt')

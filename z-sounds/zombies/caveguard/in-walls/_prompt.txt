@@ -1,0 +1,9 @@
+#83 caveguard-in-walls
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Something large moving inside the rock walls of a cave: a long scraping drag of claws on stone, then three heavy knocks, muffled. No words, no music.
+
+In the game: AudioSys.guardianInWalls()

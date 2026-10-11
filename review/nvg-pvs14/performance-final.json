@@ -1,0 +1,115 @@
+{
+  "states": [
+    {
+      "mode": "after",
+      "samples": [
+        {
+          "fps": 36.4114493781357,
+          "low": 31.055900625429526,
+          "worst": 32.19999999552965,
+          "hitches": 0,
+          "frames": 36
+        },
+        {
+          "fps": 36.633764119429905,
+          "low": 22.522522523278404,
+          "worst": 44.399999998509884,
+          "hitches": 0,
+          "frames": 36
+        },
+        {
+          "fps": 36.6412213740458,
+          "low": 29.850746268656717,
+          "worst": 33.5,
+          "hitches": 0,
+          "frames": 36
+        }
+      ],
+      "filter": "url(\"#nvgImageTube\")"
+    },
+    {
+      "mode": "before",
+      "samples": [
+        {
+          "fps": 37.46456055077377,
+          "low": 34.129692827557285,
+          "worst": 29.30000000447035,
+          "hitches": 0,
+          "frames": 37
+        },
+        {
+          "fps": 36.42618638076349,
+          "low": 22.22222222222222,
+          "worst": 45,
+          "hitches": 0,
+          "frames": 36
+        },
+        {
+          "fps": 37.48353763544134,
+          "low": 34.01360544390082,
+          "worst": 29.399999998509884,
+          "hitches": 0,
+          "frames": 37
+        }
+      ],
+      "filter": "grayscale(1) brightness(1.5) contrast(1.14) sepia(0.1) hue-rotate(92deg) saturate(0.38)"
+    },
+    {
+      "mode": "before",
+      "samples": [
+        {
+          "fps": 38.69259749539826,
+          "low": 33.898305084745765,
+          "worst": 29.5,
+          "hitches": 0,
+          "frames": 38
+        },
+        {
+          "fps": 34.81109859747683,
+          "low": 22.883295192947426,
+          "worst": 43.70000000298023,
+          "hitches": 0,
+          "frames": 34
+        },
+        {
+          "fps": 37.929267042542286,
+          "low": 32.051282055874374,
+          "worst": 31.19999999552965,
+          "hitches": 0,
+          "frames": 37
+        }
+      ],
+      "filter": "grayscale(1) brightness(1.5) contrast(1.14) sepia(0.1) hue-rotate(92deg) saturate(0.38)"
+    },
+    {
+      "mode": "after",
+      "samples": [
+        {
+          "fps": 39.51768162940408,
+          "low": 34.72222222581529,
+          "worst": 28.799999997019768,
+          "hitches": 0,
+          "frames": 39
+        },
+        {
+          "fps": 37.18219274439212,
+          "low": 27.247956401057078,
+          "worst": 36.70000000298023,
+          "hitches": 0,
+          "frames": 37
+        },
+        {
+          "fps": 34.747061829330605,
+          "low": 17.54385964912281,
+          "worst": 57,
+          "hitches": 2,
+          "frames": 34
+        }
+      ],
+      "filter": "url(\"#nvgImageTube\")"
+    }
+  ],
+  "zombies": 48,
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

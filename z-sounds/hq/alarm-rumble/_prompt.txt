@@ -1,0 +1,9 @@
+#110 hq/alarm-rumble
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: alarmRumble()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A deep distant rumble rolling across a valley at night, the ground trembling. No music, no voice.

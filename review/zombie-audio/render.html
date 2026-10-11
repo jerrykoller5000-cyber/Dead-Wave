@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><title>Zombie audio verification</title>
+<script type="module">
+let seq=0;
+const b64=f=>{const u=new Uint8Array(f.buffer);let s='';for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode(...u.subarray(i,i+32768));return btoa(s);};
+window.renderZombie=async(type,state,before=false,training=false)=>{
+  const random=Math.random;let seed=175;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  let oc;window.AudioContext=function(){oc=new OfflineAudioContext(2,48000*3,48000);return oc;};window.webkitAudioContext=window.AudioContext;
+  let url='/core/audio.js?zombieReview='+ ++seq;
+  if(before){const source=(await(await fetch('before-core.txt')).text()).replace("'../ui/training-audio.js'",JSON.stringify(location.origin+'/ui/training-audio.js')).replace("'./gunsynth.js'",JSON.stringify(location.origin+'/core/gunsynth.js'));url=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));}
+  try{
+    const A=(await import(url)).AudioSys;A.setMuted(true);A.emptyClick();A.setMuted(false);A.setMusicVolume(0);
+    await new Promise(r=>setTimeout(r,50));
+    if(training)A.setTraining(true);
+    oc.suspend(128*20/48000).then(()=>{
+      try{if(state==='hurt')A.zombieHit(1,0,false,type);else if(state==='death')A.zombieDeath(1,0,['brute','demon','colossus','guardian'].includes(type),type);else A.zombieVoice(type,state,1,0);}finally{oc.resume();}
+    });
+    const out=await oc.startRendering();return {sr:48000,L:b64(out.getChannelData(0)),R:b64(out.getChannelData(1)),counts:{...A.voiceCount},voices:A.DEAD_VOICES};
+  }finally{Math.random=random;if(before)URL.revokeObjectURL(url);}
+};window.ready=true;
+</script>

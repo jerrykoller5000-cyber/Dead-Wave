@@ -1,0 +1,13 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t188 --jobs 1 --all-fails
+
+check-players: 287 player.position reads, all in the allowed places
+FAIL  t188    90 pass   1 fail  56.5s
+
+1 checks: 90 pass, 1 fail
+
+by owner:
+  unassigned
+    t188   1 fail  FAIL flamer: barrel on the reticle from the muzzle (2.84 deg)
+           FAIL flamer: barrel on the reticle from the muzzle (2.84 deg)

@@ -1,0 +1,140 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "what": "F knife strike drops target"
+    },
+    {
+      "pass": true,
+      "what": "already dropped target cannot score twice"
+    },
+    {
+      "pass": true,
+      "what": "knife target rises automatically"
+    },
+    {
+      "pass": true,
+      "what": "knife misses outside blade reach"
+    },
+    {
+      "pass": true,
+      "what": "knife misses behind player"
+    },
+    {
+      "pass": true,
+      "what": "machete purchased from practice funds"
+    },
+    {
+      "pass": true,
+      "what": "machete strike drops target"
+    },
+    {
+      "pass": true,
+      "what": "running chainsaw drops target"
+    },
+    {
+      "pass": true,
+      "what": "grenade explosion drops target"
+    },
+    {
+      "pass": true,
+      "what": "blast leaves distant target upright"
+    },
+    {
+      "pass": true,
+      "what": "blast target rises automatically"
+    },
+    {
+      "pass": true,
+      "what": "G key releases a carried grenade"
+    },
+    {
+      "pass": true,
+      "what": "player-thrown grenade knocks down pop-up target"
+    },
+    {
+      "pass": true,
+      "what": "real frames show all five recovery phases"
+    },
+    {
+      "pass": true,
+      "what": "recovery finishes beside bed on floor"
+    },
+    {
+      "pass": true,
+      "what": "cannot throw during recovery"
+    },
+    {
+      "pass": true,
+      "what": "root moves continuously through recovery"
+    },
+    {
+      "pass": true,
+      "what": "weapon stowed during recovery"
+    },
+    {
+      "pass": true,
+      "what": "blackout clears before stand"
+    },
+    {
+      "pass": true,
+      "what": "recovery leaves security door unlocked"
+    },
+    {
+      "pass": true,
+      "what": "no browser runtime errors"
+    }
+  ],
+  "frames": 60,
+  "loadSeconds": 12.869,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "perf": {
+    "idle": {
+      "fps": 59.946048556388575,
+      "low": 57.142857142857146,
+      "worst": 17.5,
+      "hitches": 0,
+      "frames": 60
+    },
+    "recovery": {
+      "fps": 59.98800239978821,
+      "low": 58.139534873647136,
+      "worst": 17.200000002980232,
+      "hitches": 0,
+      "frames": 60
+    }
+  },
+  "unitTests": {
+    "pass": 22,
+    "fail": 0
+  },
+  "focused": {
+    "t215": {
+      "pass": 4,
+      "fail": 0
+    },
+    "t219": {
+      "pass": 22,
+      "fail": 0
+    },
+    "t63": {
+      "pass": 6,
+      "fail": 0
+    },
+    "t77": {
+      "pass": 17,
+      "fail": 0
+    },
+    "t182": {
+      "pass": 27,
+      "fail": 7,
+      "reason": "five earlier loadout/countdown assumptions; two old bed root/instant recovery expectations"
+    },
+    "t128": {
+      "pass": 28,
+      "fail": 0,
+      "note": "latest isolated retry after concurrent settings-key startup overlap"
+    }
+  },
+  "fullSuite": "not run; current CU-101 settings/reaction work is concurrent"
+}

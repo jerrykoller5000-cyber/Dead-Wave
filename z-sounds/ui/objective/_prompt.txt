@@ -1,0 +1,9 @@
+#169 ui/objective
+MISSING: the game makes no sound here now
+Now: (the cue mp3 only in some places)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short confident radio chirp and a soft chime for completing an objective. No music.

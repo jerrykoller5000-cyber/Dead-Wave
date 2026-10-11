@@ -1,0 +1,9 @@
+#178 training/clear-all
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('clear')
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A control room confirmation tone and a short air hiss, a room being cleared. No music, no voice.

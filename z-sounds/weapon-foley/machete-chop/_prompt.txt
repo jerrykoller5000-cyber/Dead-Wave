@@ -1,0 +1,9 @@
+#57 weapon-foley/machete-chop
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley macheteChop
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A machete chopping into a body, a heavy wet crunch. No music, no voice.

@@ -1,0 +1,9 @@
+#6 player/jump
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: jump()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier jumping: a short effort exhale and the rustle and clink of gear and webbing. No music, no voice.

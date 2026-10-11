@@ -1,0 +1,9 @@
+#27 player/burial-heave
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: heave()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A male soldier straining to lift something heavy, a deep effort grunt. No words.

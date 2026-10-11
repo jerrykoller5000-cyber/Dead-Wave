@@ -1,0 +1,15 @@
+{
+  "walk": {
+    "triggered": true,
+    "travel": 1.9800760123347345,
+    "direction": {
+      "active": true,
+      "elapsed": 0,
+      "x": 0.48438391845374396,
+      "z": -0.8748555421001782,
+      "strike": 0,
+      "started": true
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,153 @@
+t184
+PASS C held: crouching
+PASS the hips drop (0.58 -> 0.39 m)
+PASS L boot on the ground, not sunk or floating (sole 0.001 m; standing -0.003)
+PASS L knee above the ground (0.33 m)
+PASS L knee bends forward (0.23 m ahead of hip-ankle line)
+PASS R boot on the ground, not sunk or floating (sole 0.001 m; standing -0.002)
+PASS R knee above the ground (0.18 m)
+PASS R knee bends forward (0.22 m ahead of hip-ankle line)
+PASS the chest leans in (0.38 rad)
+PASS the head stays up (look pitch -0.05)
+PASS armed crouch: the gun hand is out in front (0.39 m, standing 0.44)
+PASS the gun points where it did standing (0.01 rad apart)
+PASS crouch-walk: no sole sinks into the ground (lowest -0.019 m)
+PASS one foot is always planted (worst -0.003 m)
+PASS and each foot lifts for its step (0.035, 0.035 m)
+PASS the knees stay above the ground (lowest 0.12 m)
+PASS crouch-walked for real (107 planted-foot frames, body moved 3.95 m in them)
+INFO crouch-walk slide 25.05% (at 2.19 m/s ground speed)
+FAIL a planted boot stays put: it slid 25.05% of the distance the body moved
+PASS U while crouched: unarmed, still crouching
+PASS unarmed crouch: the L hand hangs below the shoulder (0.48 m)
+PASS near the knee (0.31 m)
+PASS and clear of the ground (0.33 m)
+PASS not reaching out in front (0.06 m ahead of the shoulder)
+PASS unarmed crouch: the R hand hangs below the shoulder (0.48 m)
+PASS near the knee (0.35 m)
+PASS and clear of the ground (0.34 m)
+PASS not reaching out in front (0.06 m ahead of the shoulder)
+PASS standing up, the boots stay on the ground mid-blend (-0.005, -0.012)
+PASS C released: back to the standing height (0.58 m, was 0.58)
+t189
+PASS CARRY_FIT is exported and leaves the minigun out
+PASS m4@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS m4@sling+: snug, gap 0.006 m, clipping 0.000 m
+PASS ak@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL ak@sling-: snug, gap 0.042 m, clipping 0.000 m
+PASS uzi@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS uzi@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS revolver@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS revolver@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS uzi@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL uzi@pair-: snug, gap 0.033 m, clipping 0.000 m
+PASS revolver@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS revolver@pair-: snug, gap 0.000 m, clipping 0.000 m
+PASS pistol@hip-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS pistol@hipPair+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling+: snug, gap 0.006 m, clipping 0.000 m
+PASS shotgun@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS shotgun@sling-: snug, gap 0.003 m, clipping 0.000 m
+PASS sniper@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS sniper@sling+: snug, gap 0.000 m, clipping 0.000 m
+PASS launcher@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS launcher@sling-: snug, gap 0.004 m, clipping 0.000 m
+PASS pistol@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS pistol@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS flamer@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS flamer@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS chainsaw@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS chainsaw@sling-: snug, gap 0.000 m, clipping 0.000 m
+PASS ak@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS ak@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS m4@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL m4@sling-: snug, gap 0.033 m, clipping 0.000 m
+PASS shotgun@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS shotgun@sling+: snug, gap 0.004 m, clipping 0.000 m
+PASS aa12@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling-: snug, gap 0.003 m, clipping 0.000 m
+PASS launcher@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS launcher@sling+: snug, gap 0.003 m, clipping 0.000 m
+PASS sniper@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS sniper@sling-: snug, gap 0.001 m, clipping 0.000 m
+PASS chainsaw@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS chainsaw@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS flamer@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL flamer@sling-: snug, gap 0.014 m, clipping 0.000 m
+PASS stowed: 23 gun/spot pairs checked (21 gaps measured)
+PASS minigun: its carry is untouched (sling scale 0.62, not moved)
+t224
+PASS the rig carries the revolver's pack spot ({"x":0.115,"z":-0.336})
+PASS m4/ak/uzi/revolver revolver+: in on the pack corner (x 0.115, z -0.336)
+PASS m4/ak/uzi/revolver revolver+: grip turned in (-0.99 along his side-to-side), barrel upright (-0.99)
+PASS m4/ak/uzi/revolver revolver+: inside his outline (-0.7 cm past it)
+PASS m4/ak/uzi/revolver revolver+: snug on the pack, air 0.007 m, clipping 0.000 m (542 of 843 points over the pack)
+PASS m4/ak/uzi/revolver revolver-: in on the pack corner (x -0.115, z -0.336)
+PASS m4/ak/uzi/revolver revolver-: grip turned in (0.99 along his side-to-side), barrel upright (-0.99)
+PASS m4/ak/uzi/revolver revolver-: inside his outline (-1.1 cm past it)
+PASS m4/ak/uzi/revolver revolver-: snug on the pack, air 0.012 m, clipping 0.000 m (541 of 843 points over the pack)
+PASS ak/m4/revolver/pistol revolver+: in on the pack corner (x 0.115, z -0.336)
+PASS ak/m4/revolver/pistol revolver+: grip turned in (-0.99 along his side-to-side), barrel upright (-0.99)
+PASS ak/m4/revolver/pistol revolver+: inside his outline (-0.7 cm past it)
+PASS ak/m4/revolver/pistol revolver+: snug on the pack, air 0.007 m, clipping 0.000 m (542 of 843 points over the pack)
+PASS ak/m4/revolver/pistol pistol+: the pistol's low holster is where it was
+PASS ak/m4/revolver/pistol revolver-: in on the pack corner (x -0.115, z -0.336)
+PASS ak/m4/revolver/pistol revolver-: grip turned in (0.99 along his side-to-side), barrel upright (-0.99)
+PASS ak/m4/revolver/pistol revolver-: inside his outline (-1.1 cm past it)
+PASS ak/m4/revolver/pistol revolver-: snug on the pack, air 0.012 m, clipping 0.000 m (541 of 843 points over the pack)
+PASS minigun/m4/uzi/revolver revolver+: in on the pack corner (x 0.115, z -0.336)
+PASS minigun/m4/uzi/revolver revolver+: grip turned in (-0.99 along his side-to-side), barrel upright (-0.99)
+PASS minigun/m4/uzi/revolver revolver+: inside his outline (-0.7 cm past it)
+PASS minigun/m4/uzi/revolver revolver+: snug on the pack, air 0.007 m, clipping 0.000 m (542 of 843 points over the pack)
+PASS minigun/m4/uzi/revolver revolver-: in on the pack corner (x -0.115, z -0.336)
+PASS minigun/m4/uzi/revolver revolver-: grip turned in (0.99 along his side-to-side), barrel upright (-0.99)
+PASS minigun/m4/uzi/revolver revolver-: inside his outline (-1.1 cm past it)
+PASS minigun/m4/uzi/revolver revolver-: snug on the pack, air 0.012 m, clipping 0.000 m (541 of 843 points over the pack)
+PASS shotgun/aa12/revolver/ revolver+: in on the pack corner (x 0.115, z -0.336)
+PASS shotgun/aa12/revolver/ revolver+: grip turned in (-0.99 along his side-to-side), barrel upright (-0.99)
+PASS shotgun/aa12/revolver/ revolver+: inside his outline (-0.5 cm past it)
+PASS shotgun/aa12/revolver/ revolver+: snug on the pack, air 0.009 m, clipping 0.000 m (540 of 843 points over the pack)
+PASS shotgun/aa12/revolver/ revolver-: in on the pack corner (x -0.115, z -0.336)
+PASS shotgun/aa12/revolver/ revolver-: grip turned in (0.99 along his side-to-side), barrel upright (-0.99)
+PASS shotgun/aa12/revolver/ revolver-: inside his outline (-1.1 cm past it)
+PASS shotgun/aa12/revolver/ revolver-: snug on the pack, air 0.000 m, clipping 0.010 m (549 of 843 points over the pack)
+PASS revolvers on the pack checked: 8
+PASS and the pistol's low holster: 1
+PASS the tick is a knock and a muted click, level 0.032 (knock + clank)
+PASS soft: 1.9% of it above 2 kHz
+PASS short: 100.0% of it in the first 50 ms
+PASS twelve ticks at once: heard once (1)
+PASS a quick run of ticks is softer (0.64 of a lone tick)
+PASS a fast sweep: 9 ticks in 520 ms of audio clock (at most one per 50 ms)
+Page/renderer errors: ["Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.","Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.","Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.","Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."]
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
++   "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
++   "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
++   "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."
++ ]
+- []
+
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/ui/player-fidelity.browser.mjs:75:92 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.",
+    "Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'."
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0

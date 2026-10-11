@@ -1,0 +1,34 @@
+✔ a press loads the legs before launch and holding does not requeue (1.3521ms)
+✔ landing recovery blocks rapid presses, then honors one fresh queued press (0.2803ms)
+✔ early air press buffers until near landing but a stale air press expires (0.3022ms)
+✔ disabled actions and loss of coyote footing cancel preparation (0.2576ms)
+✔ a short press launches after loading even if released during preparation (0.1952ms)
+✔ knees compact near apex and extend for touchdown; no exaggerated leg split (0.9628ms)
+✔ landing compression is continuous, peaks early and settles with stronger hard falls (0.3965ms)
+✔ push-off duration and landing envelope agree at 30/60/144Hz (0.2513ms)
+✔ recovery progresses from lying through sit, side swing, foot plant and upright (1.9751ms)
+✔ no root, facing or joint discontinuity at any phase boundary (1.5324ms)
+✔ boots remain planted while the pelvis rises over them (0.4689ms)
+✔ clamps late/hitched sampling to the final standing pose (1.2164ms)
+✔ small aim changes retain stance; left/right/180 turns settle both feet (6.7423ms)
+✔ yaw wrap takes the short path and simulation is independent of frame rate (1.4541ms)
+✔ reversing a turn and continuous rotation never strands a foot (3.9025ms)
+✔ support boots stay on the ground turning on the heel or the ball, swing clears ground, root and aim untouched (17.0588ms)
+✔ teleport and excluded actions discard the planted stance (0.7449ms)
+✔ initial pose transitions cannot leave hovering boots; both feet settle on the sampled floor (5.8729ms)
+✔ armed flicks keep the chest on aim while the hips and feet step round (0.6798ms)
+✔ crouched pivots use smaller steps and settle both feet at every tested frame rate (2.1752ms)
+✔ crouched support feet stay fixed with bent knees, low swing and unchanged body height (5.8129ms)
+✔ crouched pivots plant the entire sole on a slope after changing facing (9.234ms)
+✔ small turns pivot on the ground without a step, standing and crouched (2.4588ms)
+✔ bigger turns take few steps and still settle both feet on the aim (13.7809ms)
+✔ a step slides round on the ground before it lifts; a flick far behind lifts at once (0.516ms)
+✔ a planted boot turns on its heel when it leads the turn and on its ball when it trails; its knee follows the toes (2.3103ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 293.935

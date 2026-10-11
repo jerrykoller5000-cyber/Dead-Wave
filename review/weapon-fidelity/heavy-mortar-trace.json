@@ -1,0 +1,1090 @@
+{
+  "before-deployed": [
+    {
+      "path": "root/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 76,
+      "min": [
+        -0.4600000083446502,
+        8.940696724635266e-10,
+        -0.9600000083446503
+      ],
+      "max": [
+        0.4600000083446503,
+        0.07999999910593034,
+        -0.03999999165534973
+      ],
+      "position": [
+        0,
+        0.04,
+        0.5
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.12999999523162833,
+        0.06440141507484021,
+        -0.689850161185598
+      ],
+      "max": [
+        0.1299999952316285,
+        1.1624108942368976,
+        0.314814049739558
+      ],
+      "position": [
+        0,
+        0.62,
+        0.18
+      ],
+      "tube": true
+    },
+    {
+      "path": "root/0/1/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 1,
+      "vertices": 26,
+      "min": [
+        -0.10199999809265128,
+        0.09414125918597305,
+        -0.6589088422735876
+      ],
+      "max": [
+        0.10199999809265145,
+        1.1333304312212187,
+        0.28462453247887726
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1/1",
+      "type": "RingGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.10999999940395358,
+        1.0180980729183622,
+        0.15007617489675484
+      ],
+      "max": [
+        0.10999999940395352,
+        1.1631626999660383,
+        0.31547343441152953
+      ],
+      "position": [
+        0,
+        0.626,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1/2",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        -0.1019999980926513,
+        0.10917738452345814,
+        -0.6457211394015848
+      ],
+      "max": [
+        0.10199999809265144,
+        0.24369185509028568,
+        -0.49235277352475343
+      ],
+      "position": [
+        0,
+        -0.59,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/2",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 40,
+      "min": [
+        -0.3750181846052988,
+        0.019851354847705893,
+        -0.028032115399719754
+      ],
+      "max": [
+        0.025018184605298754,
+        0.835148645152294,
+        0.3480321153997197
+      ],
+      "position": [
+        0.175,
+        0.4275,
+        -0.16
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/3",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 40,
+      "min": [
+        -0.02501818460529881,
+        0.019851354847705893,
+        -0.028032115399719754
+      ],
+      "max": [
+        0.37501818460529873,
+        0.835148645152294,
+        0.3480321153997198
+      ],
+      "position": [
+        -0.175,
+        0.4275,
+        -0.16
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/4",
+      "type": "SphereGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 77,
+      "min": [
+        -0.10999999940395348,
+        5.960464483090178e-10,
+        -0.694616217315197
+      ],
+      "max": [
+        0.10999999940395362,
+        0.21999999940395354,
+        -0.485383782684803
+      ],
+      "position": [
+        0,
+        0.11,
+        0.59
+      ],
+      "tube": false
+    }
+  ],
+  "after-deployed": [
+    {
+      "path": "root/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.12999999523162833,
+        0.06440141507484021,
+        -0.689850161185598
+      ],
+      "max": [
+        0.1299999952316285,
+        1.1624108942368976,
+        0.314814049739558
+      ],
+      "position": [
+        0,
+        0.62,
+        0.18
+      ],
+      "tube": true
+    },
+    {
+      "path": "root/0/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 1,
+      "vertices": 26,
+      "min": [
+        -0.10199999809265128,
+        0.09414125918597305,
+        -0.6589088422735876
+      ],
+      "max": [
+        0.10199999809265145,
+        1.1333304312212187,
+        0.28462453247887726
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/1",
+      "type": "RingGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.10999999940395358,
+        1.0180980729183622,
+        0.15007617489675484
+      ],
+      "max": [
+        0.10999999940395352,
+        1.1631626999660383,
+        0.31547343441152953
+      ],
+      "position": [
+        0,
+        0.626,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/2",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        -0.1019999980926513,
+        0.10917738452345814,
+        -0.6457211394015848
+      ],
+      "max": [
+        0.10199999809265144,
+        0.24369185509028568,
+        -0.49235277352475343
+      ],
+      "position": [
+        0,
+        -0.59,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/0",
+      "type": "TorusGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "5c6068",
+      "side": 0,
+      "vertices": 175,
+      "min": [
+        -0.1150000020861626,
+        1.0039028063154745,
+        0.13706214978388787
+      ],
+      "max": [
+        0.11500000208616254,
+        1.1578110176112628,
+        0.3113434580531381
+      ],
+      "position": [
+        0,
+        0.613,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/1",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "e8e4d8",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        0.159,
+        0.8138991517647692,
+        -0.010962112613805162
+      ],
+      "max": [
+        0.159,
+        0.8305723305130323,
+        0.005711066134457786
+      ],
+      "position": [
+        -0.159,
+        0.269,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/2",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "17181a",
+      "side": 0,
+      "vertices": 64,
+      "min": [
+        -0.2624999995827675,
+        0.7382481440128006,
+        -0.10268362499606637
+      ],
+      "max": [
+        -0.23350000041723248,
+        0.7538538037226656,
+        -0.08675082177590279
+      ],
+      "position": [
+        0.248,
+        0.151,
+        0.019
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/3",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 1152,
+      "min": [
+        -0.13400000333786002,
+        0.10348906714132577,
+        -0.6562615600816222
+      ],
+      "max": [
+        0.1340000033378602,
+        1.1574379731937912,
+        0.3113198637877747
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/4",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 2448,
+      "min": [
+        -0.23806217312812802,
+        0.609830249198742,
+        -0.21216596291438305
+      ],
+      "max": [
+        0.153999999165535,
+        0.8531435865050416,
+        0.027127058262508497
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/5",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "b0b6bd",
+      "side": 0,
+      "vertices": 192,
+      "min": [
+        -0.16200000047683713,
+        0.7017689457688979,
+        -0.1102457913945766
+      ],
+      "max": [
+        0.16200000047683719,
+        0.7337005366379566,
+        -0.07831420018122265
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/6",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 408,
+      "min": [
+        -0.1624999940395355,
+        0.7102561908377811,
+        -0.10227610482990468
+      ],
+      "max": [
+        0.16249999403953555,
+        0.8339399903201643,
+        0.009324083114335219
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 5676,
+      "min": [
+        -0.4600000083446502,
+        5.9604643443123e-10,
+        -0.9600000381469727
+      ],
+      "max": [
+        0.4600000083446503,
+        0.8510000109672546,
+        0.34990948438644415
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/2",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "b0b6bd",
+      "side": 0,
+      "vertices": 384,
+      "min": [
+        -0.3311910033226014,
+        0.15302127599716187,
+        -0.020999999716877955
+      ],
+      "max": [
+        0.25193956494331354,
+        0.8410000205039978,
+        0.27216938138008123
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/3",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 576,
+      "min": [
+        -0.3294359147548676,
+        0.1568562537431717,
+        -0.011025000363588349
+      ],
+      "max": [
+        0.25018450617790217,
+        0.8236749768257141,
+        0.26930370926857
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    }
+  ],
+  "before-carried": [
+    {
+      "path": "root/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 76,
+      "min": [
+        -0.46000000834465027,
+        -0.30000000834465024,
+        -0.13999999910593044
+      ],
+      "max": [
+        0.46000000834465027,
+        0.6200000083446503,
+        -0.06000000089406959
+      ],
+      "position": [
+        0,
+        0.16,
+        -0.1
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.12999999523162842,
+        -0.0050000000000000044,
+        -0.12999999523162842
+      ],
+      "max": [
+        0.12999999523162842,
+        1.245,
+        0.12999999523162842
+      ],
+      "position": [
+        0,
+        0.62,
+        0
+      ],
+      "tube": true
+    },
+    {
+      "path": "root/0/1/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 1,
+      "vertices": 26,
+      "min": [
+        -0.10199999809265137,
+        0.00999998569488525,
+        -0.10199999809265137
+      ],
+      "max": [
+        0.10199999809265137,
+        1.2300000143051149,
+        0.10199999809265137
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1/1",
+      "type": "RingGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.10999999940395355,
+        1.246,
+        -0.10999999940395355
+      ],
+      "max": [
+        0.10999999940395355,
+        1.246,
+        0.10999999940395355
+      ],
+      "position": [
+        0,
+        0.626,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1/2",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        -0.10199999809265137,
+        0.030000000000000002,
+        -0.10199999809265137
+      ],
+      "max": [
+        0.10199999809265137,
+        0.03000000000000005,
+        0.10199999809265137
+      ],
+      "position": [
+        0,
+        -0.59,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/2",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 40,
+      "min": [
+        0.11401923872530462,
+        0.17000001192092895,
+        -0.009999999329447746
+      ],
+      "max": [
+        0.1659807612746954,
+        1.0699999880790712,
+        0.04999999932944775
+      ],
+      "position": [
+        0.14,
+        0.62,
+        0.02
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/3",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 40,
+      "min": [
+        -0.1659807612746954,
+        0.17000001192092895,
+        -0.009999999329447746
+      ],
+      "max": [
+        -0.11401923872530462,
+        1.0699999880790712,
+        0.04999999932944775
+      ],
+      "position": [
+        -0.14,
+        0.62,
+        0.02
+      ],
+      "tube": false
+    }
+  ],
+  "after-carried": [
+    {
+      "path": "root/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.12999999523162842,
+        -0.0050000000000000044,
+        -0.12999999523162842
+      ],
+      "max": [
+        0.12999999523162842,
+        1.245,
+        0.12999999523162842
+      ],
+      "position": [
+        0,
+        0.62,
+        0
+      ],
+      "tube": true
+    },
+    {
+      "path": "root/0/0/0",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 1,
+      "vertices": 26,
+      "min": [
+        -0.10199999809265137,
+        0.00999998569488525,
+        -0.10199999809265137
+      ],
+      "max": [
+        0.10199999809265137,
+        1.2300000143051149,
+        0.10199999809265137
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/1",
+      "type": "RingGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 26,
+      "min": [
+        -0.10999999940395355,
+        1.246,
+        -0.10999999940395355
+      ],
+      "max": [
+        0.10999999940395355,
+        1.246,
+        0.10999999940395355
+      ],
+      "position": [
+        0,
+        0.626,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/2",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        -0.10199999809265137,
+        0.030000000000000002,
+        -0.10199999809265137
+      ],
+      "max": [
+        0.10199999809265137,
+        0.03000000000000005,
+        0.10199999809265137
+      ],
+      "position": [
+        0,
+        -0.59,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/0",
+      "type": "TorusGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "5c6068",
+      "side": 0,
+      "vertices": 175,
+      "min": [
+        -0.11500000208616257,
+        1.2299689110293985,
+        -0.11500000208616257
+      ],
+      "max": [
+        0.11500000208616257,
+        1.2360310889706017,
+        0.11500000208616257
+      ],
+      "position": [
+        0,
+        0.613,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/1",
+      "type": "CircleGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "e8e4d8",
+      "side": 0,
+      "vertices": 14,
+      "min": [
+        -0.159,
+        0.880499999538064,
+        -0.008500000461935997
+      ],
+      "max": [
+        -0.159,
+        0.897500000461936,
+        0.008500000461935997
+      ],
+      "position": [
+        -0.159,
+        0.269,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/2",
+      "type": "CylinderGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "17181a",
+      "side": 0,
+      "vertices": 64,
+      "min": [
+        0.2335000004172325,
+        0.7633915476538241,
+        0.010999999620020389
+      ],
+      "max": [
+        0.2624999995827675,
+        0.7786084523461759,
+        0.02700000037997961
+      ],
+      "position": [
+        0.248,
+        0.151,
+        0.019
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/3",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3a3f48",
+      "side": 0,
+      "vertices": 1152,
+      "min": [
+        -0.1289999932050705,
+        0.050499970912933345,
+        -0.1289999932050705
+      ],
+      "max": [
+        0.1289999932050705,
+        1.2340000224113465,
+        0.1289999932050705
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/4",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 2448,
+      "min": [
+        -0.15399999916553497,
+        0.6560000021755695,
+        -0.12800000607967377
+      ],
+      "max": [
+        0.23806217312812805,
+        0.9185000014305115,
+        0.12800000607967377
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/5",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "b0b6bd",
+      "side": 0,
+      "vertices": 192,
+      "min": [
+        -0.16200000047683716,
+        0.7340000000596046,
+        -0.01600000075995922
+      ],
+      "max": [
+        0.16200000047683716,
+        0.7659999978542328,
+        0.01600000075995922
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/0/3/6",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 408,
+      "min": [
+        -0.16249999403953552,
+        0.7472000074386597,
+        -0.012000000104308128
+      ],
+      "max": [
+        0.16249999403953552,
+        0.9004126739501953,
+        0.012000000104308128
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/1",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "3e4a3a",
+      "side": 0,
+      "vertices": 4896,
+      "min": [
+        -0.46000000834465027,
+        -0.30000001192092896,
+        -0.14000000059604645
+      ],
+      "max": [
+        0.46000000834465027,
+        1.0699999332427979,
+        0.05999999865889549
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/2",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "b0b6bd",
+      "side": 0,
+      "vertices": 192,
+      "min": [
+        -0.0989999994635582,
+        0.32499998807907104,
+        0.012999999336898327
+      ],
+      "max": [
+        0.1850000023841858,
+        0.33899998664855957,
+        0.027000000700354576
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/3",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "27292d",
+      "side": 0,
+      "vertices": 288,
+      "min": [
+        -0.09950000047683716,
+        0.3307749927043915,
+        0.016325000673532486
+      ],
+      "max": [
+        0.18549999594688416,
+        0.3332250118255615,
+        0.02367500029504299
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/4",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "525a3b",
+      "side": 0,
+      "vertices": 1440,
+      "min": [
+        -0.1720000058412552,
+        0.28349998593330383,
+        -0.13899999856948853
+      ],
+      "max": [
+        0.1720000058412552,
+        0.9365000128746033,
+        0.12999999523162842
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    },
+    {
+      "path": "root/0/5",
+      "type": "BufferGeometry",
+      "material": "MeshStandardMaterial",
+      "color": "5c6068",
+      "side": 0,
+      "vertices": 288,
+      "min": [
+        0.08500000089406967,
+        0.2809999883174896,
+        0.12700000405311584
+      ],
+      "max": [
+        0.13099999725818634,
+        0.9390000104904175,
+        0.1289999932050705
+      ],
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "tube": false
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-"""CL-34: chiptune fight loops for Dead-Wave, in the house style of tools/compose.py.
+"""CL-34: chiptune fight loops for Grave Shift, in the house style of tools/compose.py.
 
 Each loop follows one of Jerry's Suno fight tracks: its tempo, key and drive, measured from
 the audio (see extract.py). The arrangement is compose.py's engine with the instruments

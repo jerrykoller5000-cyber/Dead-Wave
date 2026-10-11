@@ -1,0 +1,9 @@
+#70 weapons/sniper
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN sniper
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single high-powered sniper rifle shot outdoors, a massive crack echoing across a valley. No music, no voice.

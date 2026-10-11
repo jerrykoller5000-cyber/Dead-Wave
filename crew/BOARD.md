@@ -1,6 +1,6 @@
-# Dead-Wave crew board
+# Grave Shift crew board
 
-Lead: Claude. Last updated 2026-10-07T04:51Z by Claude (GB-140 closed from its logs; GB-141 to GB-143 to Grokbot).
+Lead: Claude. Last updated 2026-10-10T06:00Z by Claude (the board brought up to date: 31 finished tasks archived, Start here and the queues rewritten for what is open now).
 
 This is the one place to look before you work. `AGENTS.md` has the rules and the check-in steps; this board has what
 to work on and what has been decided. **Claude (lead) and Jerry edit this file.** The one exception: each agent ticks
@@ -23,11 +23,11 @@ Each agent's queue (below, under Queues) is in three parts: **Now** (start it), 
 
 | Agent | Now, in this order | Waiting | Later (R6) |
 | --- | --- | --- | --- |
-| Cursor | commit everything waiting since the last push, then the integration suite (GP-84, GP-138 to GP-144 wait on it) | — | — |
-| Claude | t208's flaky swing check; reviews | — | — |
-| ChatGPT | close GP-84 and GP-138 to GP-148 (the run and Antigravity's checks are in) | — | — |
-| Grokbot | GB-141 (t23, t68 vs GB-137), GB-142 (t98 ragdolls), GB-143 (t185 the M4) | — | — |
-| Antigravity | AG-52 (eyes on the fixes as they land) | — | — |
+| Cursor | CU-110: the full suite (its preflight passes again, CL-150), then commit and push everything waiting | — | — |
+| Claude | reviews as they land; the story v3 cards wait for Jerry (`handoffs/2026-10-07-claude-story-v3-cards.md`) | — | — |
+| ChatGPT | GP-180 (the words CU-109 and CL-151 left), GP-181 (the demons take turns: Jerry said yes) | — | — |
+| Grokbot | GB-156: resume; t244 now runs (16 pass, 4 fail: the "no jump" limits, see the task) | — | — |
+| Antigravity | AG-64 (eyes on GP-179 and the Training Ground changes), AG-52 | — | — |
 
 Not sure a task is yours (the table under "Who does what")? Say so with `crew.mjs request`; don't start it.
 
@@ -40,7 +40,7 @@ Older notes and decisions below that name other models are history.
 
 | Agent | Model now | Where it runs |
 | --- | --- | --- |
-| Claude (lead) | Claude Opus 5.5 (High) | Cowork, writing through the desktop bridge |
+| Claude (lead) | Claude Opus 5.5 | Cowork, writing through the desktop bridge |
 | Cursor | Grok 4.7 (High) | Cursor IDE on Jerry's PC |
 | ChatGPT | GPT-6 Sol (High) | ChatGPT / Codex app on Jerry's PC |
 | Grokbot | Grokbot | Grok Bot app on Jerry's PC |
@@ -62,15 +62,16 @@ someone else, say so with `crew.mjs request`; don't start it.
 
 ## Mission
 
-**Jerry's playthrough 1 (2026-10-06): fix what he found.** His notes, verbatim: `handoffs/2026-10-06-jerry-playthrough-1.md`. Bugs first (CU-88, GB-133),
-then each agent's list in the Start here order above. D-71 still holds: build the pieces,
-a quick test each, and Jerry plays. The zombie rules are D-77. Antigravity looks at each piece as it lands (AG-52).
-- **Cursor** · CU-88 · handoffs/cursor-CU-88.md
-- **Grokbot** · GB-133 · handoffs/grokbot-GB-133.md
-- **ChatGPT** · GP-84 · handoffs/chatgpt-GP-84.md
-- **Antigravity** · AG-52 · handoffs/antigravity-AG-52.md
-Then: GP-84 closes R5; these close Jerry's first run (P-90); then his next runs and the release.
-After 1.0: R7, co-op for up to 4 (D-58, `docs/coop.md`), written as tasks once Jerry has played R6.
+**Jerry's direct work, 2026-10-09 and 10 (he has been giving agents tasks in chat): close it out.** Every change since the
+last push gets the full suite and a commit (CU-110); what is half done gets finished (GB-156); what changed on screen
+gets eyes (AG-64); the words catch up (GP-180). Jerry is making the zombie sounds himself (ElevenLabs, CL-145): they go
+into `z-sounds/` and play as they land (CL-148), so nothing waits on them. D-71 still holds: build the pieces, a quick
+test each, and Jerry plays.
+- **Cursor** · CU-110 · handoffs/cursor-CU-110.md
+- **Grokbot** · GB-156 · handoffs/2026-10-09-grokbot-GB-156.md
+- **ChatGPT** · GP-180 · handoffs/chatgpt-GP-180.md
+- **Antigravity** · AG-64 · handoffs/antigravity-AG-64.md
+Then: Jerry's next playthrough (R6), and the release. After 1.0: R7, co-op for up to 4 (D-58, `docs/coop.md`).
 
 ## Waiting on
 
@@ -78,6 +79,8 @@ The panel's "Right now" box draws this. Claude keeps it current: one line for ea
 others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A line whose task
 ids are all finished drops off the panel by itself. The panel also works out waits it can see:
 a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
+
+- **Antigravity** · AG-64 · waiting: Cursor (CU-110's suite run first, so the shots are of what gets committed)
 
 ## The roadmap (D-43)
 
@@ -93,7 +96,7 @@ counts a listed id that has left the board as done).
 | **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | GP-88, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, GP-87, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, GP-89, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69, GB-111, CL-103 |
 | **R4 · The way out** | Jerry plays | The extraction at night 20 (Heron, story v2); the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
 | **R5 · Named nights and bigger systems** | ▶ Closing: GP-84 left | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91, CL-106, CL-107, CL-108, CL-109, CL-110, CU-79, GB-116, GB-117, GP-94, GP-95, CL-111, GB-119, CU-80, CU-86 |
-| **R6 · Finish (1.0)** | ▶ Jerry's playthrough 1: 21 fixes | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28, CU-84, CU-85, GB-131, AG-50, CL-119, CL-120, CL-121, CL-122, CL-123, CU-87, CU-88, CU-89, CU-90, CU-91, GB-133, GB-134, GB-135, GB-136, GB-137, GB-138, GP-138, GP-139, GP-140, GP-141, CL-125, CL-126, CL-127, CL-128, CL-129, CL-130, CL-131, AG-52 |
+| **R6 · Finish (1.0)** | ▶ Jerry's direct work: close it out (the mission) | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28, CU-84, CU-85, GB-131, AG-50, CL-119, CL-120, CL-121, CL-122, CL-123, CU-87, CU-88, CU-89, CU-90, CU-91, GB-133, GB-134, GB-135, GB-136, GB-137, GB-138, GP-138, GP-139, GP-140, GP-141, CL-125, CL-126, CL-127, CL-128, CL-129, CL-130, CL-131, AG-52, GB-156, CU-110, GP-180, GP-181, AG-64 |
 | **R7 · Co-op, up to 4 players** | After 1.0 | Up to 4 players, one hosting, through the desktop app (D-58). | A night with friends. | Written when R6 closes. |
 
 **The story (D-70, story v2).** `docs/story.md` is the bible: a valley in the forest ringed by mountains, with a lake and
@@ -107,6 +110,20 @@ change it.
 Newest first. Claude writes these down when Jerry gives them in chat. Older ones: `crew/archive/board-queues-2026-10-05.md`
 (2026-09-25 to 09-30) and `crew/archive/board-queues-2026-09-26.md` (before that).
 
+- **2026-10-10 · Claude's list.** Jerry, asked what Claude would like to work on next: "Yeah everything except 5": the
+  GP-179 review, a look at CU-109, Grokbot's t244 on the camera, and this board (not z-sounds in the package: he is still
+  making the sounds). Done by Claude; the review is in handoffs/2026-10-10-claude-GP-179-review.md.
+- **2026-10-10 · Systematically.** Jerry, on Claude's four next jobs: "I would work through each systematically." Done by
+  Claude: CL-148 (his takes play from z-sounds/), D-79 (Grave Shift), CL-150 (the suite's preflight), CL-151 (test builds).
+- **2026-10-09 and 10 · Direct tasks.** Jerry gave agents work in chat: Claude CL-142 to CL-147 (the planes and the
+  parachute, build mode in the Training Ground and its hangar, bigger targets and a score, the zombie sound prompts and
+  folders, the hangar's flicker and the door keypad, his training clips); Cursor CU-107 to CU-109 (the blades, the lasers,
+  the flashlight and laser bought at the kiosk); ChatGPT GP-175 to GP-179 (the zombie voices, three new zombie abilities);
+  Grokbot GB-155 and GB-156 (the rename to Grave Shift, D-79; the mortar and Watchman crew). Reports in handoffs/.
+- **2026-10-09 · The camera.** "Expand that tool to easily be able to take any picture needed on my machine so that the other agents can use quickly take any picture they need from the game. I am going to be doing many passes in the future and collecting a lot of images." Done by Claude: `tools/camera.mjs`, guide `tools/CAMERA.md`.
+- **2026-10-09 · Weapon sounds, take two.** "Good job on the low end. Definitely keep that. The reloads though sound like bones clinking together or a xylophone. We need realism for them. The weapons switching should sound like a CRT Tv static switching. The high end of the weapons sounds like a xylophone as well, it needs realistic sound of the high end." Done by Claude: CL-135 (`handoffs/2026-10-09-claude-CL-135.md`; listen in `review/weapon-sounds-2/`).
+- **2026-10-09 · Weapon sounds.** "I would like you to overhaul all weapons sounds. We are going for impactful and fun to hear. Player do a ton of shooting and sound is so integral to gameplay." Done by Claude: CL-134 (`handoffs/2026-10-09-claude-CL-134.md`; listen in `review/weapon-sounds/`).
+- **2026-10-08 · One task.** "I only have one task for you right now. Make all of the Players movements and animations smooth and fluid. Make that shit smoove as hell." Done by Claude: CL-133 (`handoffs/2026-10-08-claude-CL-133.md`). The story v3 cards (2026-10-07) wait.
 - **2026-10-06 · Playthrough 1.** "Tons of stuff for the board on the playthorugh": the CIF, the minimap, the map,
   notifications, the grenade and launcher arcs, the Gravewalker's walk, the terminal's tabs, the Armory, mission markers,
   the radio mast, the music, a Hush/warrens bug, the zombies (speed, the horde, the maimed, models, sounds), two bugs, and
@@ -170,6 +187,7 @@ Claude's calls as lead. They stand unless Jerry overrides them. Newest first. **
 of every decision is in `docs/decisions.md`.** Read the full text of any decision your task names before you start.
 Claude adds each new decision in both places.
 
+- **D-79** · The game is Grave Shift: everything read says so; file names, the repo, save keys, the profile folder and ids keep Dead-Wave (Jerry, 2026-10-09)
 - **D-78** · Cursor's CU-89 to CU-91 move to ChatGPT as GP-145 to GP-147; CU-88 closed for Cursor (Claude, 2026-10-06)
 - **D-77** · The dead: faster, up to 90% of his sprint, sprinters outrun him; 70% close in, 30% flank; no legs crawl, one leg hops at 75%, no limbs dies (Jerry, 2026-10-06)
 - **D-76** · The title in about 6 s warm is fine (Jerry, 2026-10-05; Q-7, CU-56)
@@ -232,98 +250,48 @@ R1 to R4's tasks are all finished (`crew/archive/`).
 
 #### Now
 
-- [x] **CU-88** **Bug: the Hush and the warrens.** Jerry: charge the Hush, go to a cave, press E to go down: nothing happens, and
-  after that the alarm can't be sounded. Find it, fix it, and a test that walks that path (handoffs/2026-10-06-jerry-playthrough-1.md).
-- [~] **CU-89** Moved to ChatGPT as GP-145 (D-78). **The minimap's enemy indicator.** True direction every time, including after the camera turns (it lies now);
-  several directions at once; smaller. By day it shows only the dead he has been near or seen; at night, the direction of
-  any within 50 m.
-- [~] **CU-90** Moved to ChatGPT as GP-146 (D-78). **The map.** His facing and the camera's facing, as on the minimap. Every place a `?` until he has found it
-  (FOB Threshold always shown); the caves by their real names once found (Root Warren...); the HQ is FOB Threshold on both
-  maps. The words through ChatGPT's catalogue.
-- [~] **CU-91** Moved to ChatGPT as GP-147 (D-78). **Mission indicators** on the minimap and the map: where the current objectives are.
+- [>] **CU-110** **The full suite, then commit.** Its preflight passes again (CL-150: GB-156's crew helpers are his own body).
+  Run `npm test`; send each red to its owner; then commit and push everything checked out since the last push (rule 6).
+  Note CU-109 changed t103's expectation (Jerry's order) and CL-148/CL-150 touched your tools (serve.py, serve.mjs,
+  check-players.mjs, the new zsounds-index.mjs).
 
 ### Grokbot — combat
 
 #### Now
 
-- [x] **GB-133** **Bugs.** (1) Reloading the 40 mm launcher throws six casings for every one. (2) Jerry found no way to upgrade
-  a build: the Upgrade slot on the build wheel exists, so make it findable (the prompt, the wheel, the first-use card) or
-  say what's missing (handoffs/2026-10-06-jerry-playthrough-1.md).
-- [x] **GB-134** **The grenade's arc, and the launcher's.** Hold G: an arc grows from a short lob (a tap) to the longest throw at 3 s;
-  where terrain cuts it, the arc shows that. The 40 mm launcher gets an arc like the mortar's.
-- [x] **GB-135** **The horde (D-77).** Faster dead on average, up to 90% of his sprint; sprinters outrun his sprint. 70% close in
-  together, 30% flank. A mass, not single fights: Jerry never felt a horde, and night 20 was "a slow boring trickle". Look
-  at the waves' pacing and sizes as well as the walk.
-- [x] **GB-136** **The maimed dead (D-77).** No legs: they crawl. One leg: they hop at 75% of their speed. No limbs at all: they
-  die (no more crawling torsos). Claude makes the crawl and the hop in CL-129; the rules and the speeds here.
-- [x] **GB-137** **The true magazine and reload system.** Jerry: it never got implemented. `game/magazines.js` (D-61) keeps each
-  magazine's rounds; find what of it the game and the HUD don't use yet and finish it, so a reload swaps a real magazine.
-- [x] **GB-141** **t23 and t68 against GB-137's rules** (from GB-140). t23's reload is refused now (no fuller magazine) and t68
-  expects buying the AK never to lower a 999 reserve, which is now the spares exactly. Change the rule or the test; say which.
-- [>] **GB-142** **t98: something moves more than 4 m in 100 ms,** ragdolls on and off (it failed before CL-129 too).
-- [ ] **GB-143** **t185: the M4 sometimes fires one round on a held trigger** (run 2 and its retry). Likely the first-draw
-  stall t187 had: count the hold in game time.
-- [x] **GB-140** **The integration run while Cursor is away** (Claude, 2026-10-07). `npm test` twice on Jerry's PC (check-players
-  passes again), the real-renderer smoke run, each red to its owner with the failing lines; flaky ones listed apart. GP-84,
-  GP-138 to GP-147 and GB-137 wait on this. No git: Cursor still commits when it is back.
-- [x] **GB-138** **The Watchman MG.** Jerry: it never got created. Make the M240 on its tripod real: bought, placed, manned, with
-  its own feed, and Brandt's on the roof.
+- [ ] **GB-156** **The mortar and Watchman crew (Jerry, 2026-10-09).** Resume: the preflight block is gone (CL-150). Claude ran
+  t244 on the camera's real renderer (2026-10-10): 16 pass, 4 fail, all the "no jump" limits by a hair: mortar mount head
+  6.2 cm in a frame (limit 6), mortar dismount head 6.9, Watchman mount head 6.8, Watchman dismount left wrist 11.2 (limit
+  10). Ease those four transitions; keep the limits. Report: handoffs/2026-10-09-grokbot-GB-156.md.
 
 ### ChatGPT — what the player reads and decides
 
 #### Now
 
-- [x] **GP-84** **R5 · P-141.** The words and the HUD below: the Hush's battery, the stir, the depth, "No building down
-  here", pickups; the board's warrens and passages; the Marrow cave's sealed door (story v2). After CU-86 (the live depth, the clearances and the pickup
-  receipts: handoffs/2026-10-02-chatgpt-GP-84-contract-check.md). Details: `docs/roadmap.md` P-141.
+- [x] **GP-180** **The words CU-109 and CL-151 left.** The flashlight and the laser are bought at the gear kiosk now (CU-109,
+  Jerry): guide.gear.body, shop.hint.gear, tips.misc.gear still say the flashlight comes with every gun. The Training
+  Ground's test-builds button (CL-151): training.layout, training.layoutAgain, training.layoutHint (English fallbacks in
+  ui/training-panel.js).
 
-- [x] **GP-138** **The CIF window** (Jerry's playthrough): "Your Gravewalker" starts with the turning paused; only items he has
-  unlocked are listed; a new look for the window; the colour of the lightning-proof boots can be changed. Claude does the
-  figure itself in CL-125.
-- [x] **GP-139** **Notifications move left.** The new-gun unlock and the skulls processed drop down from the Dead-Wave/prep panel
-  on the left, as part of it, not mid-screen. Every other notice that can go there goes there; the kill streaks stay.
-- [x] **GP-140** **The supply terminal's tabs.** Each tab's sub-tabs named and coloured apart so they catch the eye (Jerry's
-  example: Weapons in yellow over GUNS in green and UPGRADES in brown), on every tab.
-- [x] **GP-141** **The Armory: the gun in 3D.** A small view of the selected gun that he can turn, like the CIF's figure.
-- [x] **GP-145** **The minimap's enemy indicator** (was CU-89, D-78). True direction every time, including after the camera
-  turns (it lies now); several directions at once; smaller. By day it shows only the dead he has been near or seen; at night,
-  the direction of any within 50 m. index.html drawMinimap; check in on index.html (minimap).
-- [x] **GP-146** **The map** (was CU-90, D-78). His facing and the camera's facing, as on the minimap. Every place a `?` until he
-  has found it (FOB Threshold always shown); the caves by their real names once found (Root Warren...); the HQ is FOB
-  Threshold on both maps.
-- [x] **GP-147** **Mission indicators** (was CU-91, D-78) on the minimap and the map: where the current objectives are.
-- [x] **GP-148** **GB-137's reload banners in the catalogue.** R with no fuller magazine now refuses with a banner through
-  `sayText` and English fallbacks: `hud.ammo.noFullerMag` (NO FULLER MAGAZINE), `hud.ammo.noFullerLoader` (NO FULLER LOADER)
-  and `hud.ammo.noFullerHelp`. Your wording, in ui/strings.js; no index.html change needed.
+- [x] **GP-181** **Stagger the demons' fireballs (GP-179 follow-up). Jerry, 2026-10-10: "Yes on the demons."** In Claude's review three demons cast
+  together: 72 damage inside one second from 36 m. A shared turn so the casts of a pack come one at a time (Claude's
+  suggestion: no two demons start a cast within 1.2 s of each other). The rest of GP-179 stands as Jerry approved it.
 
 ### Antigravity — the crew's eyes
 
 #### Now
 
+- [ ] **AG-64** **Eyes on GP-179 and the Training Ground, after CU-110.** The demon's fists and fireball, the spitter's acid
+  trail, the colossus's lift and throw (in a real night and in the Training Ground); and Claude's CL-146 to CL-151 in
+  there: the hangar walls (no flicker from the range side), the door keypads, the test builds. One report.
 - [>] **AG-52** **Eyes on playthrough 1's fixes.** As each of CU-88 to CU-91, GB-133 to GB-138, GP-138 to GP-141 and CL-125 to
   CL-130 lands: shots (and a clip where it moves) on Jerry's GPU, one report per batch.
 
 ### Claude — lead; the world, the studio and the reactions
 
-#### Now
+#### Waiting
 
-- [x] **CL-125** **The CIF's Gravewalker.** Arms relaxed at his sides, not held out; the whole of him in view with a slight zoom on
-  the part being changed (the boots can't be seen now); the NVGs on his head only when the helmet is worn and the NVGs are
-  unlocked. With GP-138.
-- [x] **CL-126** **The walk and the run.** He bobs side to side oddly; the legs and the body's turn look goofy and stiff. And he
-  breathes hard at idle after a run.
-- [x] **CL-127** **The radio mast.** How to repair it is obvious, the repair bar easy to see while repairing, and the supply pickup
-  in its own spot away from the repair point.
-- [x] **CL-128** **Music: each night its own.** A score that gives each night special attention. Jerry's inspiration:
-  https://www.youtube.com/watch?v=zjyQWpJc6qk
-- [x] **CL-129** **The dead look and move better.** Better models and animation for every kind, more engaging to look at; the
-  crawl (no legs) and the hop (one leg) for GB-136.
-- [x] **CL-130** **The dead sound like themselves.** Each kind its own sounds.
-- [x] **CL-132** **The broken characters** (Jerry, 2026-10-07: "whats the deal with all these alien like symbols?"). index.html's text was
-  double-encoded once (UTF-8 read as Windows-1252): `Â·` for ·, `GÃƒâ€"3` for G×3, `Ã¢â‚¬â€` for —, on the HUD and in 720 lines. Put
-  back exactly, and a test that fails on any of it in the game's files.
-- [x] **CL-131** **The Watchman MG, carried and fired.** From GB-138: shouldered (T) it still shows the mortar; give it its own carried
-  model, tip its barrel up and down with the aim, throw links and brass, and give it its own report if the AK's isn't right.
+- [ ] **CL-86** **The story v3 cards**, when Jerry has read them (`handoffs/2026-10-07-claude-story-v3-cards.md`).
 
 ## Where things live
 

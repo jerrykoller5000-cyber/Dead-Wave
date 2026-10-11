@@ -1,0 +1,44 @@
+{
+  "night": {
+    "filter": "grayscale(1) brightness(1.5) contrast(1.14) sepia(0.1) hue-rotate(92deg) saturate(0.38)",
+    "overlay": "block",
+    "grain": "tubeGrain"
+  },
+  "off": {
+    "filter": "none",
+    "overlay": "none",
+    "grain": "tubeGrain"
+  },
+  "samples": [
+    {
+      "fps": 59.608001616218964,
+      "low": 47.84688995556447,
+      "worst": 20.899999998509884,
+      "hitches": 0,
+      "frames": 59
+    },
+    {
+      "fps": 60.575466935890965,
+      "low": 57.471264348129,
+      "worst": 17.400000005960464,
+      "hitches": 0,
+      "frames": 60
+    },
+    {
+      "fps": 60.52047609450291,
+      "low": 54.94505495855074,
+      "worst": 18.19999999552965,
+      "hitches": 0,
+      "frames": 60
+    },
+    {
+      "fps": 59.98800239934135,
+      "low": 46.29629630907164,
+      "worst": 21.599999994039536,
+      "hitches": 0,
+      "frames": 60
+    }
+  ],
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

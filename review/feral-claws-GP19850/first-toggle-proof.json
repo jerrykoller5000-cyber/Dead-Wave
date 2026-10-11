@@ -1,0 +1,44 @@
+{
+  "performance": {
+    "off": {
+      "fps": 59.70891901977858,
+      "p95Ms": 18.69999998807907,
+      "effects": {
+        "enabled": false,
+        "actors": 0,
+        "echoes": 0
+      },
+      "alive": 48
+    },
+    "on": {
+      "fps": 56.148231330634786,
+      "p95Ms": 22.099999994039536,
+      "effects": {
+        "enabled": true,
+        "actors": 8,
+        "echoes": 20
+      },
+      "alive": 48
+    },
+    "offAgain": {
+      "fps": 59.92658992724982,
+      "p95Ms": 17.19999998807907,
+      "effects": {
+        "enabled": false,
+        "actors": 0,
+        "echoes": 0
+      },
+      "alive": 48
+    },
+    "onAgain": {
+      "fps": 60.057054201670574,
+      "p95Ms": 17.69999998807907,
+      "effects": {
+        "enabled": true,
+        "actors": 8,
+        "echoes": 22
+      },
+      "alive": 48
+    }
+  }
+}

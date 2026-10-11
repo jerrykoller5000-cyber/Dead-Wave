@@ -1,0 +1,84 @@
+{
+  "beforeHash": "ed68ba58be98a280316589820f85f6cb6f39df9ca3516f62b062d04eee8d14b0",
+  "afterHash": "c8dde6c10990cd6f3faeaf3b94f8b7b4d143b356e066e94c1738d3b2ac37fb6a",
+  "calls": [
+    {
+      "name": "zombieVoice",
+      "line": 44733,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46390,
+      "before": "AudioSys.zombieVoice('leaper', 'leap', Math.max(0.3, sa.v), sa.pan)",
+      "after": "AudioSys.zombieVoice('leaper', 'leap', Math.max(0.3, sa.v), sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46440,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'charge', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'charge', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46502,
+      "before": "AudioSys.zombieVoice('spitter', 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice('spitter', 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46523,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46537,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46605,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 46882,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'step', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'step', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 47060,
+      "before": "AudioSys.zombieVoice(z.typeKey, chasing ? 'chase' : 'idle', v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, chasing ? 'chase' : 'idle', v, sa.pan, z)"
+    },
+    {
+      "name": "zombieVoice",
+      "line": 47310,
+      "before": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan)",
+      "after": "AudioSys.zombieVoice(z.typeKey, 'attack', sa.v, sa.pan, z)"
+    },
+    {
+      "name": "zombieHit",
+      "line": 43169,
+      "before": "AudioSys.zombieHit(sa.v, sa.pan, kind === 'pellet' || kind === 'explosive' || z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus', z.hp > 0 ? z.typeKey : null)",
+      "after": "AudioSys.zombieHit(sa.v, sa.pan, kind === 'pellet' || kind === 'explosive' || z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus', z.hp > 0 ? z.typeKey : null, z)"
+    },
+    {
+      "name": "zombieDeath",
+      "line": 32785,
+      "before": "AudioSys.zombieDeath(sa.v, sa.pan, z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian', z.typeKey)",
+      "after": "AudioSys.zombieDeath(sa.v, sa.pan, z.typeKey === 'brute' || z.typeKey === 'demon' || z.typeKey === 'colossus' || z.typeKey === 'guardian', z.typeKey, z)"
+    },
+    {
+      "name": "deadStep",
+      "line": 46896,
+      "before": "AudioSys.deadStep(z.crawling ? 'crawl' : z.hopping ? 'hop' : z.typeKey, sa.v, sa.pan, fi)",
+      "after": "AudioSys.deadStep(z.crawling ? 'crawl' : z.hopping ? 'hop' : z.typeKey, sa.v, sa.pan, fi, z)"
+    }
+  ]
+}

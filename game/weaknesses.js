@@ -7,8 +7,8 @@ const rows = {
   feral:    { bullet: 1,    pellet: 1.4,  fire: 1,    blast: 0.6,  blade: 1,    crush: 1 },
   leaper:   { bullet: 1.3,  pellet: 1,    fire: 1,    blast: 1,    blade: 0.6,  crush: 1 },
   spider:   { bullet: 0.7,  pellet: 1.1,  fire: 1.6,  blast: 0.92, blade: 0.92, crush: 0.92 },
-  drowned:  { bullet: 0.96, pellet: 1.3,  fire: 0.4,  blast: 0.96, blade: 0.96, crush: 0.96 },
-  military: { bullet: 0.7,  pellet: 0.88, fire: 0.88, blast: 1.4,  blade: 0.88, crush: 0.88 },
+  drowned:  { bullet: 0.96, pellet: 1.3,  fire: 0.1,  blast: 0.96, blade: 0.96, crush: 0.96 },
+  military: { bullet: 0.8,  pellet: 0.8, fire: 0.88, blast: 0.6,  blade: 0.88, crush: 0.88 },
   spitter:  { bullet: 1.3,  pellet: 1,    fire: 1,    blast: 1,    blade: 0.6,  crush: 1 },
   screamer: { bullet: 1.4,  pellet: 0.6,  fire: 1,    blast: 1,    blade: 1,    crush: 1 },
   bomber:   { bullet: 1,    pellet: 1,    fire: 1.5,  blast: 1,    blade: 0.5,  crush: 1 },
@@ -24,7 +24,7 @@ export const WEAKNESS = Object.freeze(Object.fromEntries(
 const counters = {
   brute: ['blast', 'bullet'], shambler: ['blade', 'crush'], feral: ['pellet', 'blast'],
   leaper: ['bullet', 'blade'], spider: ['fire', 'bullet'], drowned: ['pellet', 'fire'],
-  military: ['blast', 'bullet'], spitter: ['bullet', 'blade'], screamer: ['bullet', 'pellet'],
+  military: ['blade', 'blast'], spitter: ['bullet', 'blade'], screamer: ['bullet', 'pellet'],
   bomber: ['fire', 'blade'], demon: ['bullet', 'fire'], colossus: ['blast', 'bullet'],
   guardian: ['fire', 'bullet']
 };

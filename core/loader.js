@@ -40,7 +40,7 @@ export const DWLoad = window.DWLoad = (() => {
       completedUnits: g ? g.completedUnits : undefined, totalUnits: g ? g.totalUnits : undefined,
       unitId: substageId, at: performance.now(), ...extra };
     const snap = clone();
-    for (const fn of subs) { try { fn(snap, ev); } catch (e) { console.info('Dead-Wave: load subscriber failed.', e); } }
+    for (const fn of subs) { try { fn(snap, ev); } catch (e) { console.info('Grave Shift: load subscriber failed.', e); } }
     try { window.dispatchEvent(new CustomEvent('dw-load', { detail: ev })); } catch (_) {}
   }
   function begin(i) {
@@ -77,7 +77,7 @@ export const DWLoad = window.DWLoad = (() => {
     loadId,
     stageIds: Object.keys(stages),
     snapshot: clone,
-    subscribe(fn) { subs.add(fn); try { fn(clone(), null); } catch (e) { console.info('Dead-Wave: load subscriber failed.', e); } return () => subs.delete(fn); },
+    subscribe(fn) { subs.add(fn); try { fn(clone(), null); } catch (e) { console.info('Grave Shift: load subscriber failed.', e); } return () => subs.delete(fn); },
     // Engine side only (the loader); not for UI.
     _endMark(mark) { const i = LOAD_STEPS.findIndex(s => s.mark === mark); if (i < 0) return false; end(i); return true; },
     _endStep(id) { const i = LOAD_STEPS.findIndex(s => s.id === id); if (i >= 0) end(i); },
@@ -115,7 +115,7 @@ export async function whileHiddenFramesRun(work) {
       q.delete(id);
       const r = real.get(id); real.delete(id);
       if (r != null) realCAF.call(window, r);
-      try { f(t); } catch (e) { console.info('Dead-Wave: frame callback failed during load.', e); }
+      try { f(t); } catch (e) { console.info('Grave Shift: frame callback failed during load.', e); }
     };
     q.set(id, run); real.set(id, realRAF.call(window, run)); kick();
     return id;

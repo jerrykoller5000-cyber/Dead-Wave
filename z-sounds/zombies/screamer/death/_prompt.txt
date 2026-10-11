@@ -1,0 +1,9 @@
+#46 screamer-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A screamer zombie's dying shriek that cracks and breaks, falling into a raspy wheeze. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('screamer', 'death')

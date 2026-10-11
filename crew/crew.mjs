@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// crew/crew.mjs — the Dead-Wave crew board from the command line. No dependencies (Node 22+).
+// crew/crew.mjs — the Grave Shift crew board from the command line. No dependencies (Node 22+).
 //
 //   node crew/crew.mjs                          who is doing what, clashes, questions, reviews
 //   node crew/crew.mjs next <agent>             your next task you can start now (skips ones that
@@ -422,7 +422,7 @@ function flowSummary(all) {
 function panel() {
   const all = Object.keys(AGENTS).map(readStatus);
   const pad = (s, n) => (s + ' '.repeat(n)).slice(0, n);
-  console.log('\nDEAD-WAVE CREW   ·   ' + freezeLine(all));
+  console.log('\nGRAVE SHIFT CREW   ·   ' + freezeLine(all));
   console.log('─'.repeat(78));
   printMission();
   console.log('─'.repeat(78));

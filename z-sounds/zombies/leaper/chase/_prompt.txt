@@ -1,0 +1,9 @@
+#12 leaper-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Fast, excited clicking and chittering from a mutant creature, rapid wet tongue clicks speeding up. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('leaper', 'chase')

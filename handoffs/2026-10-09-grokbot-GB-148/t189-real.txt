@@ -1,0 +1,47 @@
+PASS CARRY_FIT is exported and leaves the minigun out
+PASS m4@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS m4@sling+: snug, gap 0.006 m, clipping 0.000 m
+PASS ak@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL ak@sling-: snug, gap 0.042 m, clipping 0.000 m
+PASS uzi@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS uzi@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS revolver@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS revolver@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS uzi@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL uzi@pair-: snug, gap 0.033 m, clipping 0.000 m
+PASS revolver@pair-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS revolver@pair-: snug, gap 0.000 m, clipping 0.000 m
+PASS pistol@hip-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS pistol@hipPair+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling+: snug, gap 0.006 m, clipping 0.000 m
+PASS shotgun@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS shotgun@sling-: snug, gap 0.003 m, clipping 0.000 m
+PASS sniper@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS sniper@sling+: snug, gap 0.000 m, clipping 0.000 m
+PASS launcher@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS launcher@sling-: snug, gap 0.004 m, clipping 0.000 m
+PASS pistol@holster+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS pistol@holster+: snug, gap 0.000 m, clipping 0.000 m
+PASS flamer@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS flamer@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS chainsaw@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS chainsaw@sling-: snug, gap 0.000 m, clipping 0.000 m
+PASS ak@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS ak@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS m4@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL m4@sling-: snug, gap 0.033 m, clipping 0.000 m
+PASS shotgun@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS shotgun@sling+: snug, gap 0.004 m, clipping 0.000 m
+PASS aa12@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS aa12@sling-: snug, gap 0.003 m, clipping 0.000 m
+PASS launcher@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS launcher@sling+: snug, gap 0.003 m, clipping 0.000 m
+PASS sniper@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS sniper@sling-: snug, gap 0.001 m, clipping 0.000 m
+PASS chainsaw@sling+: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+PASS chainsaw@sling+: snug, gap 0.001 m, clipping 0.000 m
+PASS flamer@sling-: stowed at 1.000 x its in-hand size (CARRY_FIT 1)
+FAIL flamer@sling-: snug, gap 0.014 m, clipping 0.000 m
+PASS stowed: 23 gun/spot pairs checked (21 gaps measured)
+PASS minigun: its carry is untouched (sling scale 0.62, not moved)

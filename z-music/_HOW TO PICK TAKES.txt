@@ -1,0 +1,28 @@
+HOW TO PICK MUSIC TAKES  (CL-163, 2026-10-10)
+
+This folder holds every piece of music the game plays, one folder per track:
+
+    z-music \ <group> \ <track> \ <track>-take1-xxxxxxxxxx.mp3, <track>-take2-..., ...
+
+    calm\        menu, day, dawn-prep, dusk, night, aftermath   (between fights; they loop)
+    day-fights\  horde-1 ... horde-5                            (daylight fights, picked by horde size)
+    nights\      night-01-first-blood ... night-20-last-stand   (the wave song for each night)
+    specials\    heart-guardian-finale                          (the guardian's last fight)
+    endings\     game-over, victory
+    stings\      wave-alarm, wave-cleared, dawn, night-falls, ... (a few seconds each)
+
+In every track folder:
+    _prompt.txt       what was asked of ElevenLabs for this track
+    _now-playing.txt  what the game plays there today
+
+MAKING THE MUSIC
+    Double-click  review\elevenlabs-music\Start music batch.cmd  (in the game folder).
+    Start with choice 1 (a 2-track test), listen, then choose 2, 3 or 4 for one, two or four takes of everything.
+    The takes land straight in these folders. Ctrl+C stops it; start it again later and it carries on.
+    One take of everything is 96 minutes of music (about 96,036 credits by our estimate).
+
+PICKING
+    Play the takes (double-click an mp3) and delete the ones you don't like.
+    Whatever is left in a folder is what the game will use. Deleted takes are never made again,
+    even if you run the batch again for more takes.
+    The game doesn't play these yet: tell Claude when you've picked, and they go in.

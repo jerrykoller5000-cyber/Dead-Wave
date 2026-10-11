@@ -1,4 +1,4 @@
-# Dead-Wave plan, from 2026-09-24
+# Grave Shift plan, from 2026-09-24
 
 Jerry played the game and wrote his notes; he and Claude turned them into this. The board carries
 the current phase as tasks; this file is the whole plan. Claude keeps it current.

@@ -1,0 +1,121 @@
+PASS TT.getWeaponSizeDbg is exported
+PASS marine scale: 1.655 units = 1.80 m (0.919 units/m)
+PASS minigun: size untouched (0.88)
+PASS pistol: real length 0.195 m in the class range 0.18-0.21
+PASS pistol: look 1.45 (1-1.6 against the Uzi)
+PASS pistol: model scale 0.633 = 1.05 x 0.603
+PASS pistol: the akimbo copy is the same size
+PASS revolver: real length 0.27 m in the class range 0.24-0.31
+PASS revolver: look 1.4 (1-1.6 against the Uzi)
+PASS revolver: model scale 0.698 = 1.08 x 0.646
+PASS revolver: the akimbo copy is the same size
+PASS uzi: real length 0.47 m in the class range 0.42-0.52
+PASS uzi: look 1 (the reference)
+PASS uzi: model scale 0.596 = 1 x 0.596
+PASS uzi: the akimbo copy is the same size
+PASS m4: real length 0.84 m in the class range 0.8-0.9
+PASS m4: look 1.35 (1-1.6 against the Uzi)
+PASS m4: model scale 0.674 = 0.92 x 0.733
+PASS ak: real length 0.88 m in the class range 0.84-0.93
+PASS ak: look 1.35 (1-1.6 against the Uzi)
+PASS ak: model scale 0.686 = 0.92 x 0.746
+PASS aa12: real length 0.96 m in the class range 0.92-1
+PASS aa12: look 1.2 (1-1.6 against the Uzi)
+PASS aa12: model scale 0.684 = 0.9 x 0.760
+PASS shotgun: real length 1 m in the class range 0.95-1.06
+PASS shotgun: look 1.25 (1-1.6 against the Uzi)
+PASS shotgun: model scale 0.793 = 0.95 x 0.835
+PASS sniper: real length 1.15 m in the class range 1.08-1.22
+PASS sniper: look 1.25 (1-1.6 against the Uzi)
+PASS sniper: model scale 0.723 = 0.88 x 0.822
+PASS launcher: real length 0.75 m in the class range 0.68-0.82
+PASS launcher: look 1.2 (1-1.6 against the Uzi)
+PASS launcher: model scale 0.698 = 0.92 x 0.758
+PASS flamer: real length 0.95 m in the class range 0.85-1.05
+PASS flamer: look 1.05 (1-1.6 against the Uzi)
+PASS flamer: model scale 0.838 = 1 x 0.838
+PASS chainsaw: real length 0.85 m in the class range 0.75-0.95
+PASS chainsaw: look 1.2 (1-1.6 against the Uzi)
+PASS chainsaw: model scale 0.816 = 1.18 x 0.692
+PASS knifeModel: 0.3 m (model scale 0.595)
+PASS macheteModel: 0.62 m (model scale 0.713)
+PASS pistol: measured 0.283 m long next to him (m x look 0.283)
+PASS pistol: grip anchor on the grip (0.014 m to its surface at the glove scale)
+PASS pistol: trigger a finger ahead of the grip anchor (0.043 m)
+PASS pistol: support hand cupping the firing hand from the support side (0.093 m over)
+PASS pistol: firing hand on the grip anchor (0.000)
+PASS pistol: support hand on its anchor (0.000)
+PASS pistol: barrel on the reticle from the muzzle (0.45 deg)
+PASS revolver: measured 0.378 m long next to him (m x look 0.378)
+PASS revolver: grip anchor on the grip (0.017 m to its surface at the glove scale)
+PASS revolver: trigger a finger ahead of the grip anchor (0.049 m)
+PASS revolver: support hand cupping the firing hand from the support side (0.089 m over)
+PASS revolver: firing hand on the grip anchor (0.000)
+PASS revolver: support hand on its anchor (0.000)
+PASS revolver: barrel on the reticle from the muzzle (0.52 deg)
+PASS uzi: measured 0.470 m long next to him (m x look 0.470)
+PASS uzi: grip anchor on the grip (0.017 m to its surface at the glove scale)
+PASS uzi: trigger a finger ahead of the grip anchor (0.048 m)
+PASS uzi: support anchor on the gun (0.018 m to it, 0.122 m ahead of the grip)
+PASS uzi: firing hand on the grip anchor (0.000)
+PASS uzi: support hand on its anchor (0.000)
+PASS uzi: barrel on the reticle from the muzzle (1.68 deg)
+PASS m4: measured 1.134 m long next to him (m x look 1.134)
+PASS m4: grip anchor on the grip (0.020 m to its surface at the glove scale)
+PASS m4: trigger a finger ahead of the grip anchor (0.038 m)
+PASS m4: support anchor on the gun (0.015 m to it, 0.302 m ahead of the grip)
+PASS m4: firing hand on the grip anchor (0.000)
+PASS m4: support hand on its anchor (0.000)
+FAIL m4: barrel on the reticle from the muzzle (3.67 deg)
+PASS ak: measured 1.188 m long next to him (m x look 1.188)
+PASS ak: grip anchor on the grip (0.020 m to its surface at the glove scale)
+PASS ak: trigger a finger ahead of the grip anchor (0.055 m)
+PASS ak: support anchor on the gun (0.033 m to it, 0.327 m ahead of the grip)
+PASS ak: firing hand on the grip anchor (0.000)
+PASS ak: support hand on its anchor (0.000)
+FAIL ak: barrel on the reticle from the muzzle (4.82 deg)
+PASS aa12: measured 1.152 m long next to him (m x look 1.152)
+PASS aa12: grip anchor on the grip (0.023 m to its surface at the glove scale)
+PASS aa12: trigger a finger ahead of the grip anchor (0.056 m)
+PASS aa12: support anchor on the gun (0.025 m to it, 0.324 m ahead of the grip)
+PASS aa12: firing hand on the grip anchor (0.000)
+PASS aa12: support hand on its anchor (0.000)
+PASS aa12: barrel on the reticle from the muzzle (0.54 deg)
+PASS shotgun: measured 1.250 m long next to him (m x look 1.250)
+PASS shotgun: grip anchor on the grip (0.025 m to its surface at the glove scale)
+PASS shotgun: trigger a finger ahead of the grip anchor (0.058 m)
+PASS shotgun: support hand on the pump (0.029 m)
+PASS shotgun: firing hand on the grip anchor (0.000)
+PASS shotgun: support hand on its anchor (0.000)
+FAIL shotgun: barrel on the reticle from the muzzle (3.71 deg)
+PASS sniper: measured 1.437 m long next to him (m x look 1.438)
+PASS sniper: grip anchor on the grip (0.020 m to its surface at the glove scale)
+PASS sniper: trigger a finger ahead of the grip anchor (0.044 m)
+PASS sniper: support anchor on the gun (0.029 m to it, 0.343 m ahead of the grip)
+PASS sniper: firing hand on the grip anchor (0.000)
+PASS sniper: support hand on its anchor (0.000)
+FAIL sniper: barrel on the reticle from the muzzle (4.55 deg)
+PASS launcher: measured 0.900 m long next to him (m x look 0.900)
+PASS launcher: grip anchor on the grip (0.023 m to its surface at the glove scale)
+PASS launcher: trigger a finger ahead of the grip anchor (0.039 m)
+PASS launcher: support anchor on the gun (0.022 m to it, 0.325 m ahead of the grip)
+PASS launcher: firing hand on the grip anchor (0.000)
+PASS launcher: support hand on its anchor (0.000)
+PASS launcher: barrel on the reticle from the muzzle (0.37 deg)
+PASS flamer: measured 0.971 m long next to him (m x look 0.997)
+PASS flamer: grip anchor on the grip (0.030 m to its surface at the glove scale)
+PASS flamer: trigger a finger ahead of the grip anchor (0.064 m)
+PASS flamer: support anchor on the gun (0.021 m to it, 0.366 m ahead of the grip)
+PASS flamer: firing hand on the grip anchor (0.000)
+PASS flamer: support hand on its anchor (0.000)
+FAIL flamer: barrel on the reticle from the muzzle (3.19 deg)
+PASS chainsaw: measured 1.020 m long next to him (m x look 1.020)
+PASS chainsaw: grip anchor on the grip (0.030 m to its surface at the glove scale)
+PASS chainsaw: trigger a finger ahead of the grip anchor (0.046 m)
+PASS chainsaw: support anchor on the gun (0.013 m to it, 0.270 m ahead of the grip)
+FAIL chainsaw: firing hand on the grip anchor (0.216)
+FAIL chainsaw: support hand on its anchor (0.203)
+PASS uzi-akimbo: firing hand on the grip anchor (0.000)
+PASS uzi-akimbo: the other hand on the second gun's grip
+PASS uzi-akimbo: barrel on the reticle from the muzzle (0.43 deg)
+PASS knife: handle in the left hand (0.021 m from the handle centre; the hand closes on the handle off-centre)

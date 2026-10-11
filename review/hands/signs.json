@@ -1,0 +1,200 @@
+[
+ {
+  "name": "signP-m4",
+  "weapon": "m4",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-ak",
+  "weapon": "ak",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-aa12",
+  "weapon": "aa12",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-shotgun",
+  "weapon": "shotgun",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-sniper",
+  "weapon": "sniper",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-uzi",
+  "weapon": "uzi",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-launcher",
+  "weapon": "launcher",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-flamer",
+  "weapon": "flamer",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signP-chainsaw",
+  "weapon": "chainsaw",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = 1;"
+ },
+ {
+  "name": "signM-m4",
+  "weapon": "m4",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-ak",
+  "weapon": "ak",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-aa12",
+  "weapon": "aa12",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-shotgun",
+  "weapon": "shotgun",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-sniper",
+  "weapon": "sniper",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-uzi",
+  "weapon": "uzi",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-launcher",
+  "weapon": "launcher",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-flamer",
+  "weapon": "flamer",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ },
+ {
+  "name": "signM-chainsaw",
+  "weapon": "chainsaw",
+  "settle": 1.5,
+  "views": [
+   "gripL-side",
+   "gripL-under",
+   "gripL-front"
+  ],
+  "eval": "window.__foreSign = -1;"
+ }
+]

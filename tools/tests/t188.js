@@ -90,16 +90,29 @@
         if (H.trig) { const d = V(...H.grip).distanceTo(V(...H.trig)) * ws / S.upm / lk; ok(d > 0.015 && d < 0.07, gw + ': trigger a finger ahead of the grip anchor (' + d.toFixed(3) + ' m)'); }
         if (H.fore && H.fore !== 'pump') {
           const fd = V(...H.fore).distanceTo(V(...H.grip)) * ws;
-          if (gw === 'pistol' || gw === 'revolver') ok(fd / S.upm / lk > 0.045 && fd / S.upm / lk < 0.09 && H.fore[0] < 0, gw + ': support hand cupping the firing hand from the support side (' + fd.toFixed(3) + ' m over)');
+          if (gw === 'pistol' || gw === 'revolver') ok(fd / S.upm / lk > 0.015 && fd / S.upm / lk < 0.06 && H.fore[0] < 0, gw + ': support fist wrapped round the firing fingers from the support side (' + fd.toFixed(3) + ' m over; GB-151, was a hand\'s width beside it)');
           else { const fN = nearest(pts, H.fore) * ws; ok(fN < 0.035 && fd > 0.08, gw + ': support anchor on the gun (' + fN.toFixed(3) + ' m to it, ' + fd.toFixed(3) + ' m ahead of the grip)'); }
         }
         if (H.fore === 'pump') { const p = gun.userData.pump.position.clone(); p.y += H.pumpDy; const fN = nearest(pts, p.toArray()) * ws; ok(fN < 0.03, gw + ': support hand on the pump (' + fN.toFixed(3) + ' m)'); }
       }
-      // Hands, where the arm IK runs.
-      const handR = ud.elbowRG.localToWorld(V(-0.01, -0.26, 0.12)), handL = ud.elbowLG.localToWorld(V(0.02, -0.27, 0.13));
+      // Hands, where the arm IK runs. CU-100: each hand where the game says it closes (the middle of the fist's channel;
+      // the hand point for the holds that still aim it), and a long gun's support hand may sit back along its forend
+      // (by up to WRIST.slideMax) when the anchor is out of the arm's reach: there, measured off the forend's line.
+      const HD = T.handsDbg, gp = HD && HD.gripPoint;
+      const handR = gp ? gp('R', V()) : ud.elbowRG.localToWorld(V(-0.01, -0.26, 0.12)), handL = gp ? gp('L', V()) : ud.elbowLG.localToWorld(V(0.02, -0.27, 0.13));
       handOk(handR.distanceTo(gun.localToWorld(V(...H.grip))) < 0.035, w + ': firing hand on the grip anchor (' + handR.distanceTo(gun.localToWorld(V(...H.grip))).toFixed(3) + ')');
       if (aki) { const og = T.offhandMeshes[gw]; handOk(handL.distanceTo(og.localToWorld(V(...H.grip))) < 0.035, w + ': the other hand on the second gun\'s grip'); }
-      else if (H.fore) { const fl = H.fore === 'pump' ? gun.userData.pump.position.clone().add(V(0, H.pumpDy, 0)) : V(...H.fore); const d = handL.distanceTo(gun.localToWorld(fl)); handOk(d < 0.045, w + ': support hand on its anchor (' + d.toFixed(3) + ')'); }
+      else if (H.fore) {
+        const fl = H.fore === 'pump' ? gun.userData.pump.position.clone().add(V(0, H.pumpDy, 0)) : V(...H.fore);
+        if (gp && !HD.HANDS.fore[gw]) fl.y -= gun.userData.cu100Drop || 0;   // the fist closes round the forend's (the pump's) lower edge
+        const fw = gun.localToWorld(fl), rel = handL.clone().sub(fw);
+        let d = rel.length(), back = 0;
+        if (gp && H.sh && Array.isArray(H.fore) && !HD.HANDS.fore[gw]) {
+          const c = V(0, 0, 1).transformDirection(gun.matrixWorld), along = rel.dot(c);
+          if (along < 0) { back = -along; d = rel.addScaledVector(c, -along).length(); }
+        }
+        handOk(d < 0.045 && back <= (HD && HD.WRIST ? HD.WRIST.slideMax + 0.005 : 0), w + ': support hand on its anchor (' + d.toFixed(3) + (back ? ', ' + back.toFixed(3) + ' back along the forend' : '') + ')');
+      }
       if (!H.level) {
         const fwd = V(0, 0, 1).transformDirection(gun.matrixWorld), muz = gun.localToWorld(gun.userData.muzzleLocal.clone());
         const err = Math.acos(Math.max(-1, Math.min(1, fwd.dot(V().subVectors(T.aimTarget, muz).normalize())))) * 180 / Math.PI;

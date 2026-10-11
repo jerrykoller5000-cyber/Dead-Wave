@@ -1,0 +1,9 @@
+#58 colossus-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A colossal giant zombie's enormous, extremely deep, slow moan, like a huge beast breathing, with rumbling sub-bass. Dry. No words, no music.
+
+In the game: zombieVoice('colossus', 'idle')

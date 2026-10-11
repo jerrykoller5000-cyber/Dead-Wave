@@ -1,0 +1,25 @@
+{
+  "task": "GP-183",
+  "command": "node --test review/elevenlabs-batch/batch.test.mjs",
+  "exitCode": 0,
+  "tests": 26,
+  "pass": 26,
+  "fail": 0,
+  "skipped": 0,
+  "duration_ms": 408.5361,
+  "realRequestsDuringRepair": 0,
+  "creditsSpentDuringRepair": 0,
+  "payloadChanged": false,
+  "existingProgressChanged": false,
+  "sampleInspection": {
+    "done": 0,
+    "uncertain": 0,
+    "conflicts": 0,
+    "pending": 3
+  },
+  "files": {
+    "batch.mjs": "c55421df5e446482135bd468ddb469a4f7d0e56ddd54f78d8de6a3d86659994f",
+    "batch.test.mjs": "73c6bd71500ee887f04c25d6d02285d0eb6b2c16a807e8655764597dd3a6c9fe",
+    "README.md": "8af64b46b00a99fbb5823ab982aa2e817611409bb264a3158768ca5217c0b829"
+  }
+}

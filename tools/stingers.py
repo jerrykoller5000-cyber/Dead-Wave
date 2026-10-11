@@ -1,4 +1,4 @@
-"""Dead-Wave chiptune stingers and cues (CL-36), in the voices of the day-1 fight song.
+"""Grave Shift chiptune stingers and cues (CL-36), in the voices of the day-1 fight song.
 
   python3 stingers.py out/   ->  sting_*.wav and cue_*.wav
 Each one is a short, finished phrase: it plays alone (the director cuts all music first).

@@ -1,0 +1,9 @@
+#84 footsteps-shuffle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single slow dragging zombie footstep on dirt: a scuff of a shoe and the drag of a limp foot. No voice, no music.
+
+In the game: deadStep(shambler / spitter / screamer / bomber / default)

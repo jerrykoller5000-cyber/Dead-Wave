@@ -1,0 +1,37 @@
+{
+  "before": {
+    "label": "Lay out test builds",
+    "title": "A barricade, sandbags, three walls, wire and a light turret in front of the gate",
+    "visible": true,
+    "file": "review/crew-copy-GP180/before.png"
+  },
+  "after": {
+    "label": "Place test defenses",
+    "title": "Place a barricade, sandbags, walls, wire and a light turret in front of the zombie gate.",
+    "visible": true,
+    "file": "review/crew-copy-GP180/after.png"
+  },
+  "rebuild": {
+    "label": "Rebuild test defenses",
+    "pieces": 10
+  },
+  "errors": [],
+  "changes": [
+    {
+      "key": "guide.gear.body",
+      "before": "Every gun starts with a flashlight ({flashlight}). Buy the helmet before night vision ({nightVision}); buy the laser ({laser}) separately. {akimbo} switches to an owned pair.",
+      "after": "Buy the flashlight ({flashlight}) and laser sight ({laser}) at the gear kiosk. Night vision ({nightVision}) requires the helmet. {akimbo} switches to an owned pair."
+    },
+    {
+      "key": "shop.hint.gear",
+      "before": "Armor, night vision and laser sights. Every gun starts with a flashlight; night vision needs the helmet.",
+      "after": "Armor, flashlights, laser sights and night vision. Night vision requires a helmet."
+    },
+    {
+      "key": "tips.misc.gear",
+      "before": "{nightVision} — night vision (buy after the helmet) · {laser} — laser sight (supply terminal) · {flashlight} — flashlight (on every gun from the start)",
+      "after": "{nightVision} — night vision (buy after the helmet) · {laser} — laser sight (gear kiosk) · {flashlight} — flashlight (gear kiosk)"
+    }
+  ],
+  "summary": "PASS: live keyed layout label/title and rebuilt label; zero browser errors; six copy-only catalogue edits."
+}

@@ -14,11 +14,24 @@ test('the slash starts and ends where the pose has the hand', () => {
   for (const u of [0, 1]) { const p = at(u); assert.ok(Math.hypot(p.x - P.rest.x, p.y - P.rest.y, p.z - P.rest.z) < 1e-9); }
 });
 
-test('wind-up out to the knife side and high, the cut in front at reach, the follow-through across and low', () => {
-  const w = at(0.22), c = at(0.40), f = at(0.55);
-  assert.ok(w.x > 0.25 && w.y > 1.35, 'wind-up ' + JSON.stringify(w));
-  assert.ok(c.z > 0.4 && Math.abs(c.x) < 0.15, 'the cut ' + JSON.stringify(c));
-  assert.ok(f.x < -0.05 && f.y < c.y, 'follow-through ' + JSON.stringify(f));
+test('a short cock, a thrust out in front, then a small cut across', () => {
+  const cock = at(0.14), thrust = at(0.40), cut = at(0.58);
+  assert.ok(cock.x > 0.1 && cock.z < 0.15, 'cock ' + JSON.stringify(cock));
+  assert.ok(thrust.z > 0.45 && Math.abs(thrust.x) < 0.12, 'thrust ' + JSON.stringify(thrust));
+  assert.ok(cut.x < -0.05 && cut.z < thrust.z, 'cut ' + JSON.stringify(cut));
+});
+
+const chop = validateHandPath(JSON.parse(fs.readFileSync(new URL('./clips/marine/machete-chop.json', import.meta.url), 'utf8')));
+const atChop = (u) => handPointAt(chop, u, (k) => P[k], axes);
+
+test('the machete chop rises, comes down in front, and follows through low', () => {
+  const high = atChop(0.34), down = atChop(0.50), through = atChop(0.66);
+  assert.ok(high.y > 1.5 && high.z < down.z, 'raised ' + JSON.stringify(high));
+  assert.ok(down.z > 0.45 && down.y < high.y - 0.2, 'the chop ' + JSON.stringify(down));
+  assert.ok(through.x < -0.15 && through.y < down.y, 'follow-through ' + JSON.stringify(through));
+  let prev = atChop(0), worst = 0;
+  for (let i = 1; i <= 1000; i++) { const p = atChop(i / 1000); worst = Math.max(worst, Math.hypot(p.x - prev.x, p.y - prev.y, p.z - prev.z)); prev = p; }
+  assert.ok(worst < 0.01, 'machete path jumps ' + worst.toFixed(4));
 });
 
 test('no jump: the path is continuous (1000 steps over the swing, none over 1 cm)', () => {

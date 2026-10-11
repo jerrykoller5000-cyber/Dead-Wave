@@ -1,0 +1,9 @@
+#108 turrets/machine-gun-mount
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier grabbing a tripod-mounted machine gun, the tripod legs creaking and a charging handle pulled. No music, no voice.

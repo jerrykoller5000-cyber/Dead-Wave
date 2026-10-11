@@ -1,0 +1,9 @@
+#36 brute-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A giant brute zombie's long, deep dying groan sinking lower and lower, a last heavy exhale. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('brute', 'death')

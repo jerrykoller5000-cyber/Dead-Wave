@@ -1,0 +1,12 @@
+{
+  "player": {
+    "expected": 0.4,
+    "hits": [
+      {
+        "damage": 23.040000000000873,
+        "direct": true
+      }
+    ],
+    "ammo": "pistol"
+  }
+}

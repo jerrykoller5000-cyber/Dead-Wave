@@ -1,0 +1,4604 @@
+{
+  "schema": "grave-shift-elevenlabs-music-v1",
+  "source": "CL-163 gen.py",
+  "model": "music_v2_5",
+  "outputFormat": "mp3_44100_192",
+  "creditsPerMinute": 1000,
+  "variants": 4,
+  "tracks": [
+    {
+      "folder": "calm/menu",
+      "title": "Title theme",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Title-screen theme for a zombie-survival game set in a dark forest ringed by mountains, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 72 BPM, D dorian. Opens on a lone FM-synth melody over a low drone; a clean guitar answers, then the distorted guitars and drums land for a big, memorable hook in the middle; it winds back down to the drone so it can loop. Ominous, proud, unhurried. No vocals.",
+      "nowPlaying": "menu_theme (pool \"menu\")",
+      "usedFor": "Title screen",
+      "n": 1
+    },
+    {
+      "folder": "calm/day",
+      "title": "Day prep",
+      "mode": "prompt",
+      "seconds": 150,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime building-and-scavenging music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios, but laid back: clean and lightly overdriven guitars, a walking bass, soft square-wave arpeggios and a gentle FM lead. 96 BPM, G dorian. Hopeful but uneasy, never fully relaxed. Mid-tempo groove that stays in the background, steady from start to end so it loops. No vocals.",
+      "nowPlaying": "calm_day (pool \"day\")",
+      "usedFor": "Day, between fights",
+      "n": 2
+    },
+    {
+      "folder": "calm/dawn-prep",
+      "title": "Morning",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Early-morning music after surviving the night, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios, quiet version: a slow FM-synth melody, chiming square-wave arpeggios, a clean guitar with long delay, sparse soft drums. 84 BPM, E minor. Tired relief with a little dread underneath. Even level throughout so it loops. No vocals.",
+      "nowPlaying": "calm_day (pool \"dawnprep\")",
+      "usedFor": "Morning, the first hour of the day",
+      "n": 3
+    },
+    {
+      "folder": "calm/dusk",
+      "title": "Dusk",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Dusk music: the light is going and the horde is coming, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 80 BPM, A phrygian. A low, slow palm-muted chug under a mournful FM lead, a ticking hi-hat, eerie square-wave pulses, the tension slowly building but never exploding. Steady level so it loops. No vocals.",
+      "nowPlaying": "night pool (\"dusk\")",
+      "usedFor": "Evening, before night falls",
+      "n": 4
+    },
+    {
+      "folder": "calm/night",
+      "title": "Night prep",
+      "mode": "prompt",
+      "seconds": 150,
+      "loop": true,
+      "start": false,
+      "prompt": "Night-time waiting music between attacks, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios, dark and restrained: a deep drone, slow heavy guitar swells, a lonely FM-synth melody and a faint square-wave heartbeat pulse, half-time drums that come and go. 84 BPM, G minor. Watchful, cold, menacing. Even level throughout so it loops. No vocals.",
+      "nowPlaying": "night pool (\"night\")",
+      "usedFor": "Night, between waves",
+      "n": 5
+    },
+    {
+      "folder": "calm/aftermath",
+      "title": "Aftermath",
+      "mode": "prompt",
+      "seconds": 90,
+      "loop": true,
+      "start": false,
+      "prompt": "Aftermath music right after a wave is beaten, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios, quiet and slow: ringing guitar feedback fading, a soft FM-synth chorale melody, slow chiptune arpeggios, no full drums. 70 BPM, C minor. Exhausted, grim relief. Steady level so it loops. No vocals.",
+      "nowPlaying": "aftermath_hold (pool \"aftermath\")",
+      "usedFor": "Just after a wave",
+      "n": 6
+    },
+    {
+      "folder": "day-fights/horde-1",
+      "title": "Skirmish (1-3 zombies)",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime combat music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 112 BPM, E minor. Light and nimble: chugging guitar, bouncy square-wave bass, a playful FM hook, half the band. Starts straight in at full energy (no long intro), keeps the same energy for the whole track and ends where it began so it loops seamlessly. No vocals.",
+      "nowPlaying": "chip_skirmish_b (dayFight)",
+      "usedFor": "Fights in daylight, picked by horde size",
+      "n": 7
+    },
+    {
+      "folder": "day-fights/horde-2",
+      "title": "Skirmish (4-8 zombies)",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime combat music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 120 BPM, A minor. The full band but restrained: tight riff, driving eighth-note bass, the FM lead and chiptune arpeggios trading. Starts straight in at full energy (no long intro), keeps the same energy for the whole track and ends where it began so it loops seamlessly. No vocals.",
+      "nowPlaying": "chip_skirmish_a (dayFight)",
+      "usedFor": "Fights in daylight, picked by horde size",
+      "n": 8
+    },
+    {
+      "folder": "day-fights/horde-3",
+      "title": "Fight (9-15 zombies)",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime combat music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 130 BPM, D minor. A real fight: galloping riff, double-kick bursts, the FM hook doubled by guitar. Starts straight in at full energy (no long intro), keeps the same energy for the whole track and ends where it began so it loops seamlessly. No vocals.",
+      "nowPlaying": "chip_fight_1 (dayFight)",
+      "usedFor": "Fights in daylight, picked by horde size",
+      "n": 9
+    },
+    {
+      "folder": "day-fights/horde-4",
+      "title": "Big fight (16-25 zombies)",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime combat music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 140 BPM, C# minor. Heavy and fast: thrash riff, constant double-kick, screaming FM lead and racing 8-bit arpeggios. Starts straight in at full energy (no long intro), keeps the same energy for the whole track and ends where it began so it loops seamlessly. No vocals.",
+      "nowPlaying": "chip_fight_2 (dayFight)",
+      "usedFor": "Fights in daylight, picked by horde size",
+      "n": 10
+    },
+    {
+      "folder": "day-fights/horde-5",
+      "title": "Horde (26+ zombies)",
+      "mode": "prompt",
+      "seconds": 120,
+      "loop": true,
+      "start": false,
+      "prompt": "Daytime combat music for a zombie-survival game, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios. 152 BPM, F# minor. All-out: relentless thrash riff, blast-beat bursts, the FM lead and guitar in harmony at full power. Starts straight in at full energy (no long intro), keeps the same energy for the whole track and ends where it began so it loops seamlessly. No vocals.",
+      "nowPlaying": "chip_fight_3 (dayFight)",
+      "usedFor": "Fights in daylight, picked by horde size",
+      "n": 11
+    },
+    {
+      "folder": "nights/night-01-first-blood",
+      "title": "Night 1: First Blood",
+      "mode": "plan",
+      "seconds": 240.0,
+      "loop": false,
+      "start": false,
+      "bpm": 96,
+      "key": "E minor",
+      "groove": "heavy half-time",
+      "story": "the first night: dread turning into a fight, a hook to remember",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 20000
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 40000
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 40000
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 20000
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 40000
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 40000
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 40000
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 20000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight, a hook to remember"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, heavy half-time drums, the FM lead states the hook}",
+            "duration_ms": 40000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 40000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 20000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 40000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 40000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 40000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "96 BPM, E minor",
+              "the first night: dread turning into a fight"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_day01_sections",
+      "usedFor": "The wave on night 1",
+      "n": 12
+    },
+    {
+      "folder": "nights/night-02-runners",
+      "title": "Night 2: Runners",
+      "mode": "plan",
+      "seconds": 213.34,
+      "loop": false,
+      "start": false,
+      "bpm": 108,
+      "key": "A minor (aeolian)",
+      "groove": "d-beat",
+      "story": "fast zombies sprinting out of the trees, urgent and jittery",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 17778
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 35556
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 35556
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 17778
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 35556
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 35556
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 35556
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 17778,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees, urgent and jittery"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, d-beat drums, the FM lead states the hook}",
+            "duration_ms": 35556,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 35556,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 17778,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 35556,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 35556,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 35556,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "108 BPM, A minor (aeolian)",
+              "fast zombies sprinting out of the trees"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night02_sections",
+      "usedFor": "The wave on night 2",
+      "n": 13
+    },
+    {
+      "folder": "nights/night-03-the-lake-wakes",
+      "title": "Night 3: The Lake Wakes",
+      "mode": "plan",
+      "seconds": 221.54,
+      "loop": false,
+      "start": false,
+      "bpm": 104,
+      "key": "D dorian",
+      "groove": "shuffle",
+      "story": "drowned dead rising from the lake, murky and rolling",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 18462
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 18462
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 36923
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 18462,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake, murky and rolling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, shuffle drums, the FM lead states the hook}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 18462,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, D dorian",
+              "drowned dead rising from the lake"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night03_sections",
+      "usedFor": "The wave on night 3",
+      "n": 14
+    },
+    {
+      "folder": "nights/night-04-two-fronts",
+      "title": "Night 4: Two Fronts",
+      "mode": "plan",
+      "seconds": 198.62,
+      "loop": false,
+      "start": false,
+      "bpm": 116,
+      "key": "F phrygian",
+      "groove": "four-on-the-floor with a gallop riff",
+      "story": "burning zombies from two sides at once, hot and frantic",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 16552
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 33103
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 33103
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 16552
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 33103
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 33103
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 33103
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 16552,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once, hot and frantic"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, four-on-the-floor with a gallop riff drums, the FM lead states the hook}",
+            "duration_ms": 33103,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 33103,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 16552,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 33103,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 33103,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 33103,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "116 BPM, F phrygian",
+              "burning zombies from two sides at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night04_sections",
+      "usedFor": "The wave on night 4",
+      "n": 15
+    },
+    {
+      "folder": "nights/night-05-the-first-nest",
+      "title": "Night 5: The First Nest",
+      "mode": "plan",
+      "seconds": 205.72,
+      "loop": false,
+      "start": false,
+      "bpm": 112,
+      "key": "C# harmonic minor",
+      "groove": "breakbeat",
+      "story": "a nest of crawling things, creepy and skittering",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 17143
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 17143
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 34286
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 17143,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things, creepy and skittering"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, breakbeat drums, the FM lead states the hook}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 17143,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, C# harmonic minor",
+              "a nest of crawling things"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night05_sections",
+      "usedFor": "The wave on night 5",
+      "n": 16
+    },
+    {
+      "folder": "nights/night-06-chalk",
+      "title": "Night 6: Chalk",
+      "mode": "plan",
+      "seconds": 250.44,
+      "loop": false,
+      "start": false,
+      "bpm": 92,
+      "key": "C harmonic minor",
+      "groove": "crushing half-time",
+      "story": "a towering guardian marches out of the chalk caves, slow and huge",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 20870
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 20870
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 41739
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 20870,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves, slow and huge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, crushing half-time drums, the FM lead states the hook}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 20870,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C harmonic minor",
+              "a towering guardian marches out of the chalk caves"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night06_sections",
+      "usedFor": "The wave on night 6",
+      "n": 17
+    },
+    {
+      "folder": "nights/night-07-treeline",
+      "title": "Night 7: Treeline",
+      "mode": "plan",
+      "seconds": 202.1,
+      "loop": false,
+      "start": false,
+      "bpm": 114,
+      "key": "G dorian",
+      "groove": "breakbeat with a shuffle riff",
+      "story": "the horde pours out of the forest edge, rolling and relentless",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 16842
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 33684
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 33684
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 16842
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 33684
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 33684
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 33684
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 16842,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge, rolling and relentless"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, breakbeat with a shuffle riff drums, the FM lead states the hook}",
+            "duration_ms": 33684,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 33684,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 16842,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 33684,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 33684,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 33684,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "114 BPM, G dorian",
+              "the horde pours out of the forest edge"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night07_sections",
+      "usedFor": "The wave on night 7",
+      "n": 18
+    },
+    {
+      "folder": "nights/night-08-fuse",
+      "title": "Night 8: Fuse",
+      "mode": "plan",
+      "seconds": 188.85,
+      "loop": false,
+      "start": false,
+      "bpm": 122,
+      "key": "E phrygian",
+      "groove": "four-on-the-floor",
+      "story": "exploding zombies, a ticking fuse feel, sharp stabs",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 15738
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 31475
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 31475
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 15738
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 31475
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 31475
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 31475
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 15738,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "122 BPM, E phrygian",
+              "exploding zombies, a ticking fuse feel, sharp stabs"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, four-on-the-floor drums, the FM lead states the hook}",
+            "duration_ms": 31475,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 31475,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 15738,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 31475,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 31475,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 31475,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "122 BPM, E phrygian",
+              "exploding zombies"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night08_sections",
+      "usedFor": "The wave on night 8",
+      "n": 19
+    },
+    {
+      "folder": "nights/night-09-eight-packs",
+      "title": "Night 9: Eight Packs",
+      "mode": "plan",
+      "seconds": 180.0,
+      "loop": false,
+      "start": false,
+      "bpm": 128,
+      "key": "B minor (aeolian)",
+      "groove": "d-beat",
+      "story": "eight packs at once, fast and chaotic",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 15000
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 30000
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 30000
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 15000
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 30000
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 30000
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 30000
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 15000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once, fast and chaotic"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, d-beat drums, the FM lead states the hook}",
+            "duration_ms": 30000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 30000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 15000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 30000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 30000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 30000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "128 BPM, B minor (aeolian)",
+              "eight packs at once"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night09_sections",
+      "usedFor": "The wave on night 9",
+      "n": 20
+    },
+    {
+      "folder": "nights/night-10-brute-force",
+      "title": "Night 10: Brute Force",
+      "mode": "plan",
+      "seconds": 230.4,
+      "loop": false,
+      "start": false,
+      "bpm": 100,
+      "key": "D harmonic minor",
+      "groove": "half-time with a gallop riff",
+      "story": "hulking brutes smashing the walls, heavy and stomping",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 19200
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 38400
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 38400
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 19200
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 38400
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 38400
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 38400
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 19200,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls, heavy and stomping"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, half-time with a gallop riff drums, the FM lead states the hook}",
+            "duration_ms": 38400,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 38400,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 19200,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 38400,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 38400,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 38400,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "100 BPM, D harmonic minor",
+              "hulking brutes smashing the walls"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night10_sections",
+      "usedFor": "The wave on night 10",
+      "n": 21
+    },
+    {
+      "folder": "nights/night-11-every-cave",
+      "title": "Night 11: Every Cave",
+      "mode": "plan",
+      "seconds": 185.81,
+      "loop": false,
+      "start": false,
+      "bpm": 124,
+      "key": "A dorian",
+      "groove": "breakbeat",
+      "story": "zombies from every cave mouth, echoing and restless",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 15484
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 30968
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 30968
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 15484
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 30968
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 30968
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 30968
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 15484,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth, echoing and restless"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, breakbeat drums, the FM lead states the hook}",
+            "duration_ms": 30968,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 30968,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 15484,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 30968,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 30968,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 30968,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "124 BPM, A dorian",
+              "zombies from every cave mouth"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night11_sections",
+      "usedFor": "The wave on night 11",
+      "n": 22
+    },
+    {
+      "folder": "nights/night-12-red-guardian",
+      "title": "Night 12: Red Guardian",
+      "mode": "plan",
+      "seconds": 221.54,
+      "loop": false,
+      "start": false,
+      "bpm": 104,
+      "key": "F# phrygian",
+      "groove": "half-time with a gallop riff",
+      "story": "a burning guardian, molten and menacing",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 18462
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 18462
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 36923
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 36923
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 18462,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "104 BPM, F# phrygian",
+              "a burning guardian, molten and menacing"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, half-time with a gallop riff drums, the FM lead states the hook}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 18462,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 36923,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "104 BPM, F# phrygian",
+              "a burning guardian"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night12_sections",
+      "usedFor": "The wave on night 12",
+      "n": 23
+    },
+    {
+      "folder": "nights/night-13-artillery",
+      "title": "Night 13: Artillery",
+      "mode": "plan",
+      "seconds": 192.0,
+      "loop": false,
+      "start": false,
+      "bpm": 120,
+      "key": "G minor (aeolian)",
+      "groove": "military march snare",
+      "story": "mortar shells falling, a war march",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 16000
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 32000
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 32000
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 16000
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 32000
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 32000
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 32000
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 16000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling, a war march"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, military march snare drums, the FM lead states the hook}",
+            "duration_ms": 32000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 32000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 16000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 32000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 32000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 32000,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "120 BPM, G minor (aeolian)",
+              "mortar shells falling"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night13_sections",
+      "usedFor": "The wave on night 13",
+      "n": 24
+    },
+    {
+      "folder": "nights/night-14-fog-night",
+      "title": "Night 14: Fog Night",
+      "mode": "plan",
+      "seconds": 205.72,
+      "loop": false,
+      "start": false,
+      "bpm": 112,
+      "key": "D minor",
+      "groove": "half-time that opens into a gallop",
+      "story": "thick fog, shapes you only hear, cold and ghostly",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 17143
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 17143
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 34286
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 34286
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 17143,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "112 BPM, D minor",
+              "thick fog, shapes you only hear, cold and ghostly"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, half-time that opens into a gallop drums, the FM lead states the hook}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 17143,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 34286,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "112 BPM, D minor",
+              "thick fog"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_fognight_sections (specials.fog)",
+      "usedFor": "The wave on night 14 (the fog night)",
+      "n": 25
+    },
+    {
+      "folder": "nights/night-15-brood",
+      "title": "Night 15: Brood",
+      "mode": "plan",
+      "seconds": 174.54,
+      "loop": false,
+      "start": false,
+      "bpm": 132,
+      "key": "A# harmonic minor",
+      "groove": "breakbeat with a blast-beat bridge",
+      "story": "spiders and their brood, fast, crawling, venomous",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 14545
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 29091
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 29091
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 14545
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 29091
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 29091
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 29091
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 14545,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood, fast, crawling, venomous"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, breakbeat with a blast-beat bridge drums, the FM lead states the hook}",
+            "duration_ms": 29091,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 29091,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 14545,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 29091,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 29091,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 29091,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "132 BPM, A# harmonic minor",
+              "spiders and their brood"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night15_sections",
+      "usedFor": "The wave on night 15",
+      "n": 26
+    },
+    {
+      "folder": "nights/night-16-demon-night",
+      "title": "Night 16: Demon Night",
+      "mode": "plan",
+      "seconds": 169.41,
+      "loop": false,
+      "start": false,
+      "bpm": 136,
+      "key": "F phrygian",
+      "groove": "four-on-the-floor with a gallop riff",
+      "story": "a demon leads the fire horde, infernal and furious",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 14118
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 28235
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 28235
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 14118
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 28235
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 28235
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 28235
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 14118,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde, infernal and furious"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, four-on-the-floor with a gallop riff drums, the FM lead states the hook}",
+            "duration_ms": 28235,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 28235,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 14118,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 28235,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 28235,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 28235,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "136 BPM, F phrygian",
+              "a demon leads the fire horde"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night16_sections",
+      "usedFor": "The wave on night 16",
+      "n": 27
+    },
+    {
+      "folder": "nights/night-17-swarm",
+      "title": "Night 17: Swarm",
+      "mode": "plan",
+      "seconds": 155.68,
+      "loop": false,
+      "start": false,
+      "bpm": 148,
+      "key": "C# minor (aeolian)",
+      "groove": "blast beat",
+      "story": "a swarm too big to count, overwhelming speed",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 12973
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 25946
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 25946
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 12973
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 25946
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 25946
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 25946
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 12973,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count, overwhelming speed"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, blast beat drums, the FM lead states the hook}",
+            "duration_ms": 25946,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 25946,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 12973,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 25946,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 25946,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 25946,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "148 BPM, C# minor (aeolian)",
+              "a swarm too big to count"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night17_sections",
+      "usedFor": "The wave on night 17",
+      "n": 28
+    },
+    {
+      "folder": "nights/night-18-the-siege",
+      "title": "Night 18: The Siege",
+      "mode": "plan",
+      "seconds": 209.46,
+      "loop": false,
+      "start": false,
+      "bpm": 110,
+      "key": "G harmonic minor",
+      "groove": "gallop",
+      "story": "the guardian lays siege to the base, epic and grinding",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 17455
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 34909
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 34909
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 17455
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 34909
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 34909
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 34909
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 17455,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base, epic and grinding"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, gallop drums, the FM lead states the hook}",
+            "duration_ms": 34909,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 34909,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 17455,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 34909,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 34909,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 34909,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "110 BPM, G harmonic minor",
+              "the guardian lays siege to the base"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night18_sections",
+      "usedFor": "The wave on night 18",
+      "n": 29
+    },
+    {
+      "folder": "nights/night-19-the-gauntlet",
+      "title": "Night 19: The Gauntlet",
+      "mode": "plan",
+      "seconds": 160.0,
+      "loop": false,
+      "start": false,
+      "bpm": 144,
+      "key": "F# minor (aeolian)",
+      "groove": "d-beat",
+      "story": "every type of zombie in a row, a gauntlet run",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 13333
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 26667
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 26667
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 13333
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 26667
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 26667
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 26667
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 13333,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row, a gauntlet run"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, d-beat drums, the FM lead states the hook}",
+            "duration_ms": 26667,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 26667,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 13333,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 26667,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 26667,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 26667,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "144 BPM, F# minor (aeolian)",
+              "every type of zombie in a row"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night19_sections",
+      "usedFor": "The wave on night 19",
+      "n": 30
+    },
+    {
+      "folder": "nights/night-20-last-stand",
+      "title": "Night 20: Last Stand",
+      "mode": "plan",
+      "seconds": 151.58,
+      "loop": false,
+      "start": true,
+      "bpm": 152,
+      "key": "E minor (aeolian)",
+      "groove": "four-on-the-floor with a d-beat riff",
+      "story": "the final night, heroic and desperate, the biggest song of all",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 12632
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 25263
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 25263
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 12632
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 25263
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 25263
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 25263
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 12632,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "152 BPM, E minor (aeolian)",
+              "the final night, heroic and desperate, the biggest song of all"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, four-on-the-floor with a d-beat riff drums, the FM lead states the hook}",
+            "duration_ms": 25263,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 25263,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 12632,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 25263,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 25263,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 25263,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "152 BPM, E minor (aeolian)",
+              "the final night"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_night20_sections",
+      "usedFor": "The wave on night 20",
+      "n": 31
+    },
+    {
+      "folder": "specials/heart-guardian-finale",
+      "title": "The heart: the guardian's last fight",
+      "mode": "plan",
+      "seconds": 250.44,
+      "loop": false,
+      "start": false,
+      "bpm": 92,
+      "key": "C minor",
+      "groove": "crushing half-time that doubles up in the climax",
+      "story": "the guardian's final fight deep in its lair, colossal and dreadful",
+      "sections": [
+        {
+          "name": "stalk",
+          "bars": 8,
+          "ms": 20870
+        },
+        {
+          "name": "dropA",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "riffB",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "break",
+          "bars": 8,
+          "ms": 20870
+        },
+        {
+          "name": "dropA2",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "bridge",
+          "bars": 16,
+          "ms": 41739
+        },
+        {
+          "name": "climax",
+          "bars": 16,
+          "ms": 41739
+        }
+      ],
+      "plan": {
+        "chunks": [
+          {
+            "text": "[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}",
+            "duration_ms": 20870,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "drop-tuned palm-muted rhythm guitars",
+              "tight punchy drums, heavy mix",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair, colossal and dreadful"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, crushing half-time that doubles up in the climax drums, the FM lead states the hook}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}",
+            "duration_ms": 20870,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          },
+          {
+            "text": "[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}",
+            "duration_ms": 41739,
+            "positive_styles": [
+              "instrumental metal and chiptune hybrid",
+              "1990s PC shooter soundtrack, modern production",
+              "FM synthesis lead, old sound card tone",
+              "8-bit square-wave arpeggios",
+              "92 BPM, C minor",
+              "the guardian's final fight deep in its lair"
+            ],
+            "negative_styles": [
+              "vocals",
+              "singing",
+              "lyrics",
+              "spoken word",
+              "choir",
+              "orchestral strings",
+              "lo-fi hiss"
+            ]
+          }
+        ]
+      },
+      "nowPlaying": "fight_heart_sections",
+      "usedFor": "The guardian's last fight in the heart (plays by phase)",
+      "n": 32
+    },
+    {
+      "folder": "endings/game-over",
+      "title": "Game over",
+      "mode": "prompt",
+      "seconds": 60,
+      "loop": false,
+      "start": false,
+      "prompt": "Game-over music, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios, slow and mournful: 66 BPM, A minor. A single heavy guitar chord left to feed back, a sad FM-synth melody, slow square-wave arpeggios dying away, one last drum hit, then silence. Plays once, does not loop. No vocals.",
+      "nowPlaying": "end_fallen (pool \"fallen\")",
+      "usedFor": "You died",
+      "n": 33
+    },
+    {
+      "folder": "endings/victory",
+      "title": "Victory",
+      "mode": "prompt",
+      "seconds": 90,
+      "loop": false,
+      "start": false,
+      "prompt": "Victory music for surviving the final night, an instrumental metal and chiptune hybrid in the style of early-1990s PC shooter soundtracks brought up to date: drop-tuned palm-muted rhythm guitars and a modern heavy mix, with a bright FM-synthesis lead (the sound of an old PC sound card) and 8-bit square-wave arpeggios: triumphant and huge, 120 BPM, G major then E minor. A heroic riff, the FM lead and guitar playing a soaring melody in harmony, bright chiptune arpeggios, big drums, building to a final held chord. Plays once, does not loop. No vocals.",
+      "nowPlaying": "end_dawn (pool \"dawn\")",
+      "usedFor": "You won",
+      "n": 34
+    },
+    {
+      "folder": "stings/wave-alarm",
+      "title": "Wave alarm",
+      "mode": "prompt",
+      "seconds": 6,
+      "loop": false,
+      "start": true,
+      "prompt": "A 6-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): the horde is coming: a blaring FM-synth alarm figure over a heavy drop-tuned guitar chord stab and a crash, ends ringing. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_alarm (stings.alarm)",
+      "usedFor": "A short cue: the horde is coming",
+      "n": 35
+    },
+    {
+      "folder": "stings/wave-cleared",
+      "title": "Wave cleared",
+      "mode": "prompt",
+      "seconds": 5,
+      "loop": false,
+      "start": false,
+      "prompt": "A 5-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): the wave is beaten: a victorious guitar and FM-synth flourish rising to a bright final chord. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_clear (stings.clear)",
+      "usedFor": "A short cue: the wave is beaten",
+      "n": 36
+    },
+    {
+      "folder": "stings/dawn",
+      "title": "Dawn",
+      "mode": "prompt",
+      "seconds": 6,
+      "loop": false,
+      "start": false,
+      "prompt": "A 6-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): the sun comes up after a night: a hopeful major-key FM-synth phrase with chiming square-wave arpeggios and a soft guitar chord. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_dawn (stings.dawn)",
+      "usedFor": "A short cue: the sun comes up after a night",
+      "n": 37
+    },
+    {
+      "folder": "stings/night-falls",
+      "title": "Night falls",
+      "mode": "prompt",
+      "seconds": 7,
+      "loop": false,
+      "start": false,
+      "prompt": "A 7-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): night falls: a low, ominous guitar swell, a falling FM-synth line and one deep drum hit. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_night_falls (stings.night_falls)",
+      "usedFor": "A short cue: night falls",
+      "n": 38
+    },
+    {
+      "folder": "stings/ember-night",
+      "title": "Ember night",
+      "mode": "prompt",
+      "seconds": 6,
+      "loop": false,
+      "start": false,
+      "prompt": "A 6-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): a fire horde is coming: a fast, hot guitar riff burst with a rising square-wave run and a crash. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_ember (stings.ember)",
+      "usedFor": "A short cue: a fire horde is coming",
+      "n": 39
+    },
+    {
+      "folder": "stings/guardian-night",
+      "title": "Guardian night",
+      "mode": "prompt",
+      "seconds": 6,
+      "loop": false,
+      "start": false,
+      "prompt": "A 6-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): a giant boss approaches: two crushing slow guitar chords and a menacing low FM-synth growl. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_guardian (stings.guardian)",
+      "usedFor": "A short cue: a giant boss approaches",
+      "n": 40
+    },
+    {
+      "folder": "stings/camp-cleared",
+      "title": "Camp cleared",
+      "mode": "prompt",
+      "seconds": 4,
+      "loop": false,
+      "start": false,
+      "prompt": "A 4-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): a zombie camp is cleared: a short punchy guitar and chiptune fanfare. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "sting_camp (stings.camp)",
+      "usedFor": "A short cue: a zombie camp is cleared",
+      "n": 41
+    },
+    {
+      "folder": "stings/achievement",
+      "title": "Achievement",
+      "mode": "prompt",
+      "seconds": 4,
+      "loop": false,
+      "start": false,
+      "prompt": "A 4-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): an achievement unlocked: a bright, catchy 8-bit jingle topped with one heavy guitar chord. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "cue_achievement (stings.achievement)",
+      "usedFor": "A short cue: an achievement unlocked",
+      "n": 42
+    },
+    {
+      "folder": "stings/airdrop",
+      "title": "Airdrop",
+      "mode": "prompt",
+      "seconds": 4,
+      "loop": false,
+      "start": false,
+      "prompt": "A 4-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): a supply airdrop is incoming: a quick ascending FM-synth signal over a palm-muted chug. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "cue_airdrop (stings.airdrop)",
+      "usedFor": "A short cue: a supply airdrop is incoming",
+      "n": 43
+    },
+    {
+      "folder": "stings/objective",
+      "title": "Objective",
+      "mode": "prompt",
+      "seconds": 3,
+      "loop": false,
+      "start": false,
+      "prompt": "A 3-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): an objective is done: a short, satisfying square-wave arpeggio and a guitar stab. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "cue_objective (stings.objective)",
+      "usedFor": "A short cue: an objective is done",
+      "n": 44
+    },
+    {
+      "folder": "stings/poi-cleared",
+      "title": "Poi cleared",
+      "mode": "prompt",
+      "seconds": 4,
+      "loop": false,
+      "start": false,
+      "prompt": "A 4-second instrumental music sting for a game, metal and chiptune hybrid (early-1990s PC game soundtrack sound with modern production): a place is cleared: a short triumphant chiptune phrase with a power chord. Starts instantly, no build-up. No vocals.",
+      "nowPlaying": "cue_poi_cleared (stings.poi_cleared)",
+      "usedFor": "A short cue: a place is cleared",
+      "n": 45
+    }
+  ],
+  "sourceSha256": "09ab1e289edcad614f01aaa8c6adbd853dfdbaccbf46ff1c597bf6987506887e"
+}

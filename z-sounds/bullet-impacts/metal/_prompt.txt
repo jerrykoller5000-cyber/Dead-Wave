@@ -1,0 +1,9 @@
+#80 bullet-impacts/metal  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: impactMetal
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet hitting a steel plate, a loud bright clang. No music, no voice.

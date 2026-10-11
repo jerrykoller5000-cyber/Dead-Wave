@@ -1,0 +1,9 @@
+#22 player/nvg-hum
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: nvgHum()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A very quiet, steady high electronic hum of night vision goggles running, seamless. No music, no voice.

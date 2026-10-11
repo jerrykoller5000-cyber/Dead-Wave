@@ -1,0 +1,9 @@
+#42 screamer-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A thin, eerie, high-pitched whining moan from a gaunt female zombie, raspy and unsettling. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('screamer', 'idle')

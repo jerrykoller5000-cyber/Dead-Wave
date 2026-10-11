@@ -1,0 +1,4 @@
+{
+  "cmd": "eval",
+  "code": "\nconst D=T.trainingDbg,tg=D.tg();D.clear();D.panel().close();D.state().security.reset();R.release();\nconst checks=[];\nfor(const [x,z] of [[-42,-10],[-42,26],[-10,26]]){T.player.position.set(tg.origin.x+x,tg.floorY,tg.origin.z+z);await wait(250);checks.push({x,z,reached:Math.abs(T.player.position.x-tg.origin.x-x)<.1&&Math.abs(T.player.position.z-tg.origin.z-z)<.1,grounded:Math.abs(T.player.position.y-tg.floorY)<.1});}\nT.player.position.set(-24,tg.floorY,-638);await wait(1200);T.resetPerf();const samples=[];for(let i=0;i<4;i++){await wait(1000);samples.push(T.perfSnapshot());}\nreturn {corners:checks,room:tg.zombieRoom,samples,errors:window.trainingDoorErrors};\n"
+}

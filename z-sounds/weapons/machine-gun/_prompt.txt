@@ -1,0 +1,9 @@
+#71 weapons/machine-gun
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN m240 (Watchman MG)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short burst of three shots from a belt-fed machine gun outdoors, heavy and rhythmic, with echo. No music, no voice.

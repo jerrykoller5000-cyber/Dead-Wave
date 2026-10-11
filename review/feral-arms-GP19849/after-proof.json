@@ -1,0 +1,16 @@
+{
+  "loadSec": 19.12,
+  "rig": {
+    "floor": -200,
+    "speed": 10.604560493405579,
+    "skins": 1,
+    "bones": 11
+  },
+  "fps": 59.61548015283654,
+  "effects": {
+    "enabled": true,
+    "actors": 1,
+    "echoes": 3
+  },
+  "errors": []
+}

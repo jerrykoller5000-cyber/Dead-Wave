@@ -1,0 +1,4 @@
+{
+ "cmd":"eval",
+ "code":"const base=new T.THREE.Vector3(-40,T.sampleHeight(-40,-70)+34,-70),disabled=[];for(const o of T.scene.children){if(o.geometry?.type==='SphereGeometry'&&o.geometry.parameters.radius===10&&o.material?.color?.getHex()===0x73818b){o.visible=false;disabled.push('photo background');}if(o.isHemisphereLight&&o.intensity===1.6){o.intensity=0;disabled.push('photo fill');}if(o.isDirectionalLight&&o.intensity===2.5){o.intensity=0;disabled.push('photo key');}}const parts=[];for(const g of T.scene.children.filter(o=>o.visible&&o.position.distanceTo(base)<.001&&o.userData.tube)){g.updateWorldMatrix(true,true);g.traverse(o=>{if(o.isMesh)parts.push({geometry:o.geometry.type,pos:o.getWorldPosition(new T.THREE.Vector3()).toArray(),visible:o.visible,side:o.material.side,children:o.children.length,vertices:o.geometry.attributes.position.count});});}return {disabled,parts};"
+}

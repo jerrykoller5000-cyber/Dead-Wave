@@ -1,0 +1,9 @@
+#47 bomber-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bloated zombie's hollow, low, gassy moan, its swollen belly gurgling and creaking, slow and heavy. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('bomber', 'idle')

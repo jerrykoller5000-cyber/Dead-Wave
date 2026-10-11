@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-09T20:46:45.620Z",
+  "sources": {
+    "index.html": "b3b866f68ff4d2c33a36d93f64027a40ad0f6f59efd0e33860cb460c2c78590f",
+    "ui/night-vision.css": "6a39bfd531841042c41f675dc8f94ae66557ccbecbbbbf6cf40d3946e92f2e3c",
+    "ui/nvg-review.mjs": "fe5075bf9d4c041536714b4123f02bf589dcf1bebeb62482e542045d881fb850"
+  },
+  "nvgFunctionsUnchanged": true,
+  "externalChanges": "Initial full-script equality passed. Later GB-151 pistol-grip edits changed the shared inline game script; they were preserved. GP-165 only edits CSS/SVG/markup.",
+  "quietFps": {
+    "before": 60.17298676148855,
+    "after": 59.79716067259254
+  },
+  "crowdedFps": {
+    "before": 37.13454128373266,
+    "after": 36.85556184578971
+  },
+  "crowdedBodies": 48,
+  "errors": [],
+  "tests": "5 existing checks: 64 pass, 0 fail; full suite not rerun",
+  "screenshots": [
+    {
+      "file": "review/nvg-pvs14/before/training.png",
+      "sha256": "1ef8cc62c5ebe355d7d471b64930f1d9067a9682d4550fee15763d120d0246eb"
+    },
+    {
+      "file": "review/nvg-pvs14/after/training.png",
+      "sha256": "e480e2ecf22fe25a7d29e8270b3c6b130b19f218ba08382b45698c09cb7d75fa"
+    },
+    {
+      "file": "review/nvg-pvs14/before/wide.png",
+      "sha256": "e51edd10ca3b2c40c1c755217e77b22192c4574e6859987bc1670ca0f7851f18"
+    },
+    {
+      "file": "review/nvg-pvs14/after/wide.png",
+      "sha256": "3f3c0434d60753f34342e6bb101c9e75314bef14a827a6e4ceaef0576a989d69"
+    },
+    {
+      "file": "review/nvg-pvs14/before/outdoor.png",
+      "sha256": "dbcc5d0e07f300396a534cbfe9e7f12368f47bee75939c546c410157027aa8a7"
+    },
+    {
+      "file": "review/nvg-pvs14/after/outdoor.png",
+      "sha256": "d150a1974f77194c7f539805042d61ebd2bd543311ab50e7c7828dbb8d6506b6"
+    },
+    {
+      "file": "review/nvg-pvs14/after/flashlight.png",
+      "sha256": "5dda770c73994b2cebcf25142791c5d7981273217b809a026ac6620e3543a54c"
+    }
+  ]
+}

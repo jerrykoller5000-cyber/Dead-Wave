@@ -1,0 +1,19 @@
+node --test ui/training-security.test.mjs world/training.test.mjs world/training-ballistics.test.mjs ui/training-deployment.test.mjs
+tests14 pass14 fail0 (final source)
+npm test -- t182 t219 t215 --jobs 2 --all-fails
+check-players:287 player.position reads, all in the allowed places
+t18229 pass5 fail, repeated identically on isolated retry
+t21922 pass0 fail
+t2154 pass0 fail
+3 checks:55 pass5 fail
+Existing t182 failures:
+every gun owned, Cash to spare
+three shamblers called in (0)
+they stay in the build room while he is on the range ()
+in the build room they come for him (Infinity m -> Infinity m)
+clear all
+These are the unchanged prior pistol-only/countdown expectations recorded by CU-100 and GP-155; tests were not edited.
+Live proof:21 pass, errors[] (live-proof.json).
+Expanded corner/grounding checks:3 locations pass, errors[] (final-proof.json).
+Normal-view FPS samples:61.18,60.85,60.99,61.01; no hitches.
+Harness development: first attempt used wrong camera-relative movement direction; second passed behavior but dispatched keyboard events at window and hit existing Node.contains event assumptions. Final document-body event rerun passed all21 with no errors. No production workaround applied.

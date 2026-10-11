@@ -6,7 +6,6 @@
 // hips height; the leaper and the spider are untouched.
 (async () => {
   const T = window.TT; const out = [];
-  T.setMotionEnabledDbg(true);   // Claude 2026-09-27: reactions are a Settings toggle, off by default
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const f2 = (v) => (+v).toFixed(2);
@@ -80,7 +79,7 @@
     // (A tall brute, variant height up to 1.07, can need a centimetre or two more.)
     ok(hb[2] >= 2.05 * 1.38 - 0.001 && hb[2] < 2.05 * 1.38 * 1.04 && hcl[2] > 4.7 && hcl[2] < 4.72, 'hitH (about) unchanged where the head already fitted (brute ' + f2(hb[2]) + ', colossus ' + f2(hcl[2]) + ')');
 
-    // Two pellets: its body reacts (studio/motion.js) with a stagger (studio/motion.js), and its feet stay on the ground through it and after.
+    // Two pellets: no reacting body, and its feet stay on the ground.
     {
       T.clearZombies();
       const r = T.spawnZombie(px, pz + 3, 'shambler', true, true);
@@ -91,14 +90,12 @@
       const rnd = Math.random; Math.random = () => 0.99;
       try { for (let k = 0; k < 2; k++) T.damageZombie(r, 9, { kind: 'pellet', dir: { x: 0, z: 1 }, hitY: r.mesh.position.y + 1.1, shotId: 930001 }); } finally { Math.random = rnd; }
       T.flushShotHits && T.flushShotHits();
-      let mn = 9, reacted = false; const states = new Set();
-      const t1 = performance.now(); while (performance.now() - t1 < 3000) { await wait(30); const st = r.body && r.body.state; if (st) { reacted = true; states.add(st); } if (st !== 'fall' && st !== 'down' && st !== 'land') mn = Math.min(mn, sole()); }
-      // (Under load two pellets now and then put it down; then it gets up, and its feet are checked after.)
-      const t2 = performance.now(); while (performance.now() - t2 < 5000 && r.body && r.body.state !== 'animated') await wait(50);
-      await wait(500);
+      ok(!r.body, 'two pellets do not give it a reacting body');
+      let mn = 9;
+      const t1 = performance.now(); while (performance.now() - t1 < 1000) { await wait(30); mn = Math.min(mn, sole()); }
+      await wait(200);
       const end = sole();
-      ok(reacted, 'two pellets wake its body (' + [...states].join(' ') + ')');
-      ok(mn > -0.08 && Math.abs(end) < 0.05, 'its feet stay on the ground while it is on them (deepest ' + f2(mn) + ' m) and after (' + f2(end) + ' m)');
+      ok(mn > -0.08 && Math.abs(end) < 0.05, 'its feet stay on the ground (deepest ' + f2(mn) + ' m) and after (' + f2(end) + ' m)');
     }
 
     // A crawler keeps its old hips height: 0.55*s*0.45 plus a little bob.

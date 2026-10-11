@@ -17,6 +17,7 @@
 // existing rigDamp smoothing in index.html can ease them frame to frame.
 import * as THREE from 'three';
 import { rbox } from '../core/geometry.js';
+import { applyGuardianConcept } from '../studio/zombie-concepts.js';
 
 const UP = new THREE.Vector3(0, 1, 0);
 const _v1 = new THREE.Vector3(), _v2 = new THREE.Vector3(), _v3 = new THREE.Vector3(), _v4 = new THREE.Vector3();
@@ -236,6 +237,7 @@ export function makeCaveGuardianRig(design) {
   // fours. Shadows on, no receive (it moves too fast for a static lightmap to matter).
   g.traverse((o) => { if (o.isMesh) o.receiveShadow = false; });
   rig.eyeMat = M.eye;
+  applyGuardianConcept({ THREE, g, rbox, kind: d.conceptKind || 'caveguard' });
   // What index.html's damping walks: every joint group.
   return g;
 }

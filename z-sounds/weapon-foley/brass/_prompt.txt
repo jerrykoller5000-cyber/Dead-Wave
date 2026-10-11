@@ -1,0 +1,9 @@
+#48 weapon-foley/brass  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley brass
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single spent brass rifle casing falling on dirt and a stone, a small tinkling bounce. No music, no voice.

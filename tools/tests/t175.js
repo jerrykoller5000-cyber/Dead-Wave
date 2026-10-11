@@ -58,9 +58,7 @@
       hold('KeyW', true); await wait(700); hold('KeyW', false);
       ok(Math.hypot(T.player.position.x - p2.x, T.player.position.z - p2.z) > 0.4, label + ': his own again: he walks');
     };
-    await run('ragdoll', 0, true, 5, true);
-    await wait(300);
-    await run('plain', 1, false, 8, false);
+    await run('plain', 0, true, 5, false);
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');
 })()

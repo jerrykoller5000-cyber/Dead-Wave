@@ -1,0 +1,40 @@
+<!doctype html><meta charset="utf-8"><title>Zombie character voice verification</title>
+<script type="module">
+let seq=0;
+const sr=48000;
+const b64=f=>{const u=new Uint8Array(f.buffer);let s='';for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode(...u.subarray(i,i+32768));return btoa(s);};
+const heavy=type=>['brute','demon','colossus','guardian'].includes(type);
+function cue(A,type,state,actor){
+  if(state==='hurt')A.zombieHit(1,0,false,type,actor);
+  else if(state==='death')A.zombieDeath(1,0,heavy(type),type,actor);
+  else A.zombieVoice(type,state,1,0,actor);
+}
+window.renderZombie=async({type,state,training=false,mixed=false,reel=false})=>{
+  const random=Math.random;let seed=177;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const seconds=reel?16.5:mixed?6:4.5;
+  let oc;window.AudioContext=function(){oc=new OfflineAudioContext(2,Math.ceil(sr*seconds),sr);return oc;};window.webkitAudioContext=window.AudioContext;
+  try{
+    const A=(await import('/core/audio.js?zombieReviewV3='+ ++seq)).AudioSys;
+    A.setMuted(true);A.emptyClick();A.setMuted(false);A.setMusicVolume(0);
+    await new Promise(r=>setTimeout(r,30));
+    if(training)A.setTraining(true);
+    const kinds=mixed?type:reel?Array(4).fill(type):[type],actors=new Map();
+    const gap=reel?3.8:state==='death'?.045:.11;
+    const scheduled=kinds.map((kind,i)=>({kind,time:128*Math.ceil((128*20/sr+i*gap)*sr/128)/sr}));
+    const failures=[],choices=[];
+    for(const event of scheduled)oc.suspend(event.time).then(()=>{
+      try{
+        if(!actors.has(event.kind))actors.set(event.kind,{});
+        const before={...A.voiceCount};
+        cue(A,event.kind,state,actors.get(event.kind));
+        const prefix=event.kind+':'+state+':phrase:';
+        const selected=Object.keys(A.voiceCount).filter(k=>k.startsWith(prefix)&&A.voiceCount[k]>(before[k]||0));
+        choices.push({type:event.kind,state,time:event.time,phraseKeys:selected});
+      }catch(e){failures.push(String(e.stack||e));}finally{oc.resume();}
+    });
+    const out=await oc.startRendering();
+    if(failures.length)throw new Error(failures.join('\n'));
+    return{sr,L:b64(out.getChannelData(0)),R:b64(out.getChannelData(1)),counts:{...A.voiceCount},scheduled,choices};
+  }finally{Math.random=random;}
+};window.ready=true;
+</script>

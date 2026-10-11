@@ -1,0 +1,9 @@
+#12 player/hurt  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: playerHurt()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short pained grunt from a tough male soldier who has just been hit, through clenched teeth. No words.

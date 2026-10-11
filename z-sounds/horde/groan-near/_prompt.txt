@@ -1,0 +1,9 @@
+#99 horde-groan-near
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A few zombies groaning together nearby, overlapping low moans in the open air at night. No words, no music.
+
+In the game: groan() — the night's ambience, near

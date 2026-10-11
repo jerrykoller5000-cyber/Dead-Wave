@@ -1,0 +1,9 @@
+#82 caveguard-cave-groan
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A distant, deep, mournful groan rising from far below in a cave, faint, with long rocky echo. No words, no music.
+
+In the game: AudioSys.caveGroan()

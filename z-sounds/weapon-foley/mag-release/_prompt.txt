@@ -1,0 +1,9 @@
+#31 weapon-foley/mag-release
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley magRelease
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A pistol magazine release button pressed, a small sharp click. No music, no voice.

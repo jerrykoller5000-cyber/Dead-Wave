@@ -1,0 +1,9 @@
+#103 turrets/servo
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: turretServos()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A gun turret's servo motors swiveling to track a target, a short electric whir. No music, no voice.

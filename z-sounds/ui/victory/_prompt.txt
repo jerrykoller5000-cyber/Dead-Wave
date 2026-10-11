@@ -1,0 +1,9 @@
+#168 ui/victory
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: win()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A swelling triumphant orchestral brass sting for a victory.

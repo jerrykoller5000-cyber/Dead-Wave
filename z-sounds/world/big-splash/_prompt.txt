@@ -1,0 +1,9 @@
+#143 world/big-splash
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: bigSplash()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A person falling into a lake, a big deep splash. No music, no voice.

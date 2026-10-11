@@ -1,0 +1,2051 @@
+{
+  "at": "2026-10-11T04:15:57.254Z",
+  "cases": {
+    "before": {
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loadSeconds": 12.823,
+      "stations": {
+        "bounds": {
+          "min": [
+            -44.06801412582397,
+            -199.39547383785248,
+            -643.1582143306732
+          ],
+          "max": [
+            -43.08500001907348,
+            -196.46749997138977,
+            -639.8450000023842
+          ]
+        },
+        "columnOverlaps": 1,
+        "action": "hqWindow",
+        "front": {
+          "x": -42.779999999999994,
+          "z": -641.5
+        }
+      },
+      "build": {
+        "x": -10,
+        "z": -636,
+        "gx": -5,
+        "gz": -318,
+        "reason": null,
+        "built": true,
+        "wallGap": 1,
+        "inverse": true
+      },
+      "release": [
+        {
+          "time": 0.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.900000000000006,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.800000000000011,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.700000000000017,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.600000000000023,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.500000000000028,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.400000000000034,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.30000000000004,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.2000000000000455,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.100000000000051,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.000000000000057,
+            "seconds": 5
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.90000000000006,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.800000000000063,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.700000000000066,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.600000000000069,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.500000000000072,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.400000000000075,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.300000000000078,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.200000000000081,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.100000000000084,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.000000000000087,
+            "seconds": 4
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.90000000000009,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.800000000000093,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.700000000000096,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.600000000000099,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.500000000000102,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.400000000000105,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.300000000000108,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.200000000000111,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.100000000000114,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.0000000000001172,
+            "seconds": 3
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.9000000000001203,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.8000000000001233,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.7000000000001156,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.600000000000108,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.5000000000001004,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.4000000000000927,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.300000000000085,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.2000000000000774,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.1000000000000698,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.0000000000000622,
+            "seconds": 2
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.9000000000000552,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.8000000000000482,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.7000000000000413,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.6000000000000343,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.5000000000000273,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.40000000000002,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.3000000000000127,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.2000000000000054,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.09999999999999809,
+            "seconds": 1
+          },
+          "gate": null,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 5,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -613.4,
+              "entry": false
+            },
+            {
+              "z": -613.4,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.1,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -614.6202343232104,
+              "entry": false
+            },
+            {
+              "z": -614.0036991210651,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.2,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -615.8828621618862,
+              "entry": false
+            },
+            {
+              "z": -614.6188023785706,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.3,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -617.1400700709013,
+              "entry": false
+            },
+            {
+              "z": -615.2185632789136,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.4,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -618.39171337337,
+              "entry": false
+            },
+            {
+              "z": -615.8144862288724,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.5,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -619.6433566758386,
+              "entry": false
+            },
+            {
+              "z": -616.2382344152143,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.6,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -620.8949999783073,
+              "entry": false
+            },
+            {
+              "z": -616.5869455526735,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.7,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -622.146643280776,
+              "entry": false
+            },
+            {
+              "z": -617.0803377907451,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.8,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -623.3982865832446,
+              "entry": false
+            },
+            {
+              "z": -617.6611322896043,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 5.9,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -624.6499298857133,
+              "entry": false
+            },
+            {
+              "z": -618.2419267884635,
+              "entry": false
+            }
+          ]
+        },
+        {
+          "time": 6,
+          "pending": null,
+          "gate": null,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -625.9015731881819,
+              "entry": false
+            },
+            {
+              "z": -618.7917322113915,
+              "entry": false
+            }
+          ]
+        }
+      ],
+      "errors": []
+    },
+    "after": {
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loadSeconds": 13.061,
+      "stations": {
+        "bounds": {
+          "min": [
+            -44.06801412582397,
+            -199.39547383785248,
+            -644.6582143306732
+          ],
+          "max": [
+            -43.08500001907348,
+            -196.46749997138977,
+            -641.3450000023842
+          ]
+        },
+        "columnOverlaps": 0,
+        "action": "hqWindow",
+        "front": {
+          "x": -42.779999999999994,
+          "z": -643
+        }
+      },
+      "build": {
+        "x": -9,
+        "z": -637,
+        "gx": -5,
+        "gz": -319,
+        "reason": null,
+        "built": true,
+        "wallGap": 0,
+        "inverse": true
+      },
+      "release": [
+        {
+          "time": 0.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.900000000000006,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.800000000000011,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.700000000000017,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.600000000000023,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.500000000000028,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.400000000000034,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.30000000000004,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.2000000000000455,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 0.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.100000000000051,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 4.000000000000057,
+            "seconds": 5
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.90000000000006,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.800000000000063,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.700000000000066,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.600000000000069,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.500000000000072,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.400000000000075,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.300000000000078,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.200000000000081,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 1.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.100000000000084,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 3.000000000000087,
+            "seconds": 4
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.90000000000009,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.800000000000093,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.700000000000096,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.600000000000099,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.500000000000102,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.400000000000105,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.300000000000108,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.200000000000111,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 2.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.100000000000114,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 2.00000000000011,
+            "seconds": 3
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.9000000000001025,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.8000000000000949,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.7000000000000872,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.6000000000000796,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.500000000000072,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.4000000000000643,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.3000000000000567,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.200000000000049,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 3.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.1000000000000414,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.08333333333329881,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 1.0000000000000338,
+            "seconds": 2
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.1666666666666385,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.1,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.9000000000000268,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.24999999999997766,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.2,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.8000000000000198,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.33333333333331683,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.3,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.7000000000000128,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.41666666666665597,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.4,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.6000000000000059,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.4999999999999951,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.5,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.49999999999999883,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.5833333333333343,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.6,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.39999999999999153,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.6666666666666737,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.7,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.2999999999999842,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.7500000000000131,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.8,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.19999999999997692,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.8333333333333526,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 4.9,
+          "pending": {
+            "kind": "shambler",
+            "count": 2,
+            "remaining": 0.09999999999996961,
+            "seconds": 1
+          },
+          "gate": {
+            "active": true,
+            "amount": 0.9166666666666919,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 0,
+          "entries": []
+        },
+        {
+          "time": 5,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -609,
+              "entry": true
+            },
+            {
+              "z": -609,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.1,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -609.2999999999997,
+              "entry": true
+            },
+            {
+              "z": -609.2999999999997,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.2,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -609.5999999999995,
+              "entry": true
+            },
+            {
+              "z": -609.5999999999995,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.3,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -609.8999999999992,
+              "entry": true
+            },
+            {
+              "z": -609.8999999999992,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.4,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -610.1999999999989,
+              "entry": true
+            },
+            {
+              "z": -610.1999999999989,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.5,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -610.4999999999986,
+              "entry": true
+            },
+            {
+              "z": -610.4999999999986,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.6,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -610.7999999999984,
+              "entry": true
+            },
+            {
+              "z": -610.7999999999984,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.7,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -611.0999999999981,
+              "entry": true
+            },
+            {
+              "z": -611.0999999999981,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.8,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -611.3999999999978,
+              "entry": true
+            },
+            {
+              "z": -611.3999999999978,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 5.9,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": false
+          },
+          "lamp": 0.06,
+          "beacon": 0.06,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -611.6999999999975,
+              "entry": true
+            },
+            {
+              "z": -611.6999999999975,
+              "entry": true
+            }
+          ]
+        },
+        {
+          "time": 6,
+          "pending": null,
+          "gate": {
+            "active": true,
+            "amount": 1,
+            "flashing": true,
+            "lit": true
+          },
+          "lamp": 3.5,
+          "beacon": 3.5,
+          "alive": 2,
+          "entries": [
+            {
+              "z": -611.9999999999973,
+              "entry": true
+            },
+            {
+              "z": -611.9999999999973,
+              "entry": true
+            }
+          ]
+        }
+      ],
+      "finish": {
+        "gate": {
+          "active": false,
+          "amount": 0,
+          "flashing": false,
+          "lit": false
+        },
+        "entries": 0,
+        "alive": 2
+      },
+      "cancel": {
+        "alive": 0,
+        "gate": {
+          "active": false,
+          "amount": 0,
+          "flashing": false,
+          "lit": false
+        }
+      },
+      "light": {
+        "gate": 3.5,
+        "panel": 3.5,
+        "original": 0.35
+      },
+      "errors": []
+    }
+  }
+}

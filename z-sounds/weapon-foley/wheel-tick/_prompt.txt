@@ -1,0 +1,9 @@
+#51 weapon-foley/wheel-tick
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley wheelTick
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.15 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A tiny soft mechanical tick, like a selection dial clicking one notch. No music, no voice.

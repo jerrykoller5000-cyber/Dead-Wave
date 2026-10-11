@@ -1,0 +1,552 @@
+{
+  "before": true,
+  "readyMs": 14034,
+  "sourceHashes": {
+    "review/player-fidelity/baseline-marine-body.js": "d02763638a50286d3d1798974c2f81563719742954078031f6b3adbdeac36f91",
+    "review/player-fidelity/baseline-marine-face.js": "2bd46b055ecd6f947ae354286cc7be196140512ee076507f73c42ea302aca9c1",
+    "review/player-fidelity/baseline-makeMarine.js": "69d778cb25516b94a4ad1db475ea75298051d9ae0753d7b32944373cded40f83"
+  },
+  "sourceUnchanged": true,
+  "initial": {
+    "joints": {
+      "lowerBody": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": null
+      },
+      "hip": {
+        "position": [
+          0,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "torsoG": {
+        "position": [
+          0,
+          0.7,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": null
+      },
+      "headG": {
+        "position": [
+          0,
+          0.52,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          0.94,
+          0.97,
+          0.94
+        ],
+        "parent": "spine"
+      },
+      "legLG": {
+        "position": [
+          -0.13,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "legRG": {
+        "position": [
+          0.13,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "kneeLG": {
+        "position": [
+          0,
+          -0.27,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "hipL"
+      },
+      "kneeRG": {
+        "position": [
+          0,
+          -0.27,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "hipR"
+      },
+      "ankleLG": {
+        "position": [
+          0,
+          -0.25,
+          0.01
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "kneeL"
+      },
+      "ankleRG": {
+        "position": [
+          0,
+          -0.25,
+          0.01
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "kneeR"
+      },
+      "armLG": {
+        "position": [
+          -0.34,
+          0.3800000000000001,
+          0.02
+        ],
+        "quaternion": [
+          -0.3771755108213828,
+          0.1773485572212865,
+          0.21696012059750683,
+          0.8827312327987905
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "spine"
+      },
+      "armRG": {
+        "position": [
+          0.34,
+          0.3800000000000001,
+          0.02
+        ],
+        "quaternion": [
+          -0.4944501552707861,
+          -0.08393114516832453,
+          -0.0954190553769095,
+          0.8598661585935381
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "spine"
+      },
+      "elbowLG": {
+        "position": [
+          0,
+          -0.28,
+          0
+        ],
+        "quaternion": [
+          -0.17410813759359595,
+          0,
+          0,
+          0.9847265389049334
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "shoulderL"
+      },
+      "elbowRG": {
+        "position": [
+          0,
+          -0.28,
+          0
+        ],
+        "quaternion": [
+          -0.09983341664682815,
+          0,
+          0,
+          0.9950041652780258
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "shoulderR"
+      },
+      "gripL": {
+        "position": [
+          0.02,
+          -0.27,
+          0.13
+        ],
+        "quaternion": [
+          0.5778252545485077,
+          -0.07398637882919021,
+          -0.10332401538224098,
+          0.8062060151096532
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "elbowL"
+      },
+      "gripR": {
+        "position": [
+          -0.01,
+          -0.26,
+          0.12
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "elbowR"
+      },
+      "weaponMount": {
+        "position": [
+          0.12826,
+          0.15981,
+          -0.10022
+        ],
+        "quaternion": [
+          0.5778252545485077,
+          0.07398637882919021,
+          0.10332401538224098,
+          0.8062060151096532
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "handR"
+      },
+      "hipGrip": {
+        "position": [
+          -0.218,
+          0.602,
+          0.037
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      }
+    },
+    "wardrobe": [
+      "belt",
+      "boots",
+      "cap",
+      "carrier",
+      "gloves",
+      "helmet",
+      "holster",
+      "mask",
+      "pack",
+      "pads",
+      "shirt",
+      "trousers"
+    ],
+    "gear": [
+      "bareHead",
+      "bareTorso",
+      "helmet",
+      "nvg",
+      "pads",
+      "vest"
+    ],
+    "meshes": 55,
+    "triangles": 12910,
+    "vertices": 33382,
+    "finite": true
+  },
+  "states": {
+    "front": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.3478180965855265e-13,
+      "support": 2.2148949341271873e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.021620833132450744,
+        "rootOffset": -0.03962083313188236,
+        "feetLift": 5.684341886080801e-13,
+        "footY": [
+          -0.0018483939932139037,
+          -0.00212170212790852
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 97,
+      "triangles": 22472,
+      "vertices": 56651,
+      "finite": true
+    },
+    "pistol-crouch": {
+      "camera": {
+        "x": 0,
+        "y": -199.16,
+        "z": -643.5,
+        "tx": 0,
+        "ty": -199.32,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.1397535728152972e-13,
+      "support": 6.010245434732103e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.22301965466479987,
+        "rootOffset": -0.23101965466514895,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.0009999998808041255,
+          0.0009999998808041255
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 97,
+      "triangles": 22472,
+      "vertices": 56651,
+      "finite": true
+    },
+    "pistol-run": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.2071514730982865e-13,
+      "support": 3.669064541148466e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.04692166666136535,
+        "rootOffset": -0.0469216666613369,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.016499605003161832,
+          0.14736822571236985
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 97,
+      "triangles": 22472,
+      "vertices": 56651,
+      "finite": true
+    }
+  },
+  "motion": [
+    {
+      "name": "stand",
+      "finite": true,
+      "frames": 120
+    },
+    {
+      "name": "walk",
+      "finite": true,
+      "frames": 120
+    },
+    {
+      "name": "run",
+      "finite": true,
+      "frames": 120
+    }
+  ],
+  "errors": []
+}

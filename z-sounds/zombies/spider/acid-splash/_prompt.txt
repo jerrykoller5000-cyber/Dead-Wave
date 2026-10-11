@@ -1,0 +1,9 @@
+#76 spider-acid-splash
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A glob of acid splattering onto the ground and sizzling, hissing and bubbling as it burns. No words, no music.
+
+In the game: AudioSys.acidHit()

@@ -1,0 +1,13 @@
+FAIL slide front (190.0 mm) flush with the barrel crown (310.5 mm): crown 120.5 mm proud
+FAIL nothing but the barrel in front of the slide (widest part ahead of it 127.0 mm from the bore)
+PASS the muzzle point is unchanged (0, 50, 320 mm) and at the crown (9.5 mm ahead)
+PASS the frame's dust cover runs on under the slide (front 184.1 mm, 5.9 mm short of the slide's front)
+PASS the front sight rides at the slide's front (22.0 mm back)
+FAIL regular: the magazine is inside the grip above its bottom (worst 19.5 mm out; 66 points)
+FAIL regular: the regular baseplate closes the grip's bottom (43.7 mm below it)
+FAIL extended: the magazine is inside the grip above its bottom (worst 16.8 mm out; 66 points)
+PASS extended: the extended magazine comes out below the grip (119.1 mm below it)
+PASS extended reaches 75.4 mm further below than the regular one
+FAIL the pistol can is fatter: 44.0 mm across (CL-95 had 44.0 mm; +0%)
+PASS the can is on the bore line
+PASS its back face (308.0 mm) is on the crown, in front of the slide (190.0 mm)

@@ -1,0 +1,9 @@
+#85 footsteps-barefoot
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single fast bare-foot slap on hard dirt, a running step. No voice, no music.
+
+In the game: deadStep(feral, leaper)

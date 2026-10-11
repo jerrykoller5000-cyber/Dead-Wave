@@ -1,0 +1,9 @@
+#74 screamer-call
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A screamer zombie's long, piercing, blood-curdling scream calling the horde, very loud and raw, ringing out across an open valley. No words, no music.
+
+In the game: AudioSys.scream()

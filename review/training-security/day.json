@@ -1,0 +1,1 @@
+{"cmd":"eval","code":"R.release();T.trainingDbg.clear();if(!T.trainingDbg.lights().on)T.trainingDbg.toggleLights();return T.trainingDbg.state().active;"}

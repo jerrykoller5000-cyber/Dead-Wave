@@ -1,0 +1,9 @@
+#30 weapon-foley/mag-slap
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley magSlap
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A palm slapping the bottom of a seated rifle magazine, a firm plastic and metal thump. No music, no voice.

@@ -1,4 +1,4 @@
-// CU-57 (P-89): Dead-Wave as a desktop game. A window round the packaged game, nothing else.
+// CU-57 (P-89): Grave Shift as a desktop game. A window round the packaged game, nothing else.
 //
 //  * The game is the folder tools/package.mjs stages (index.html, assets/, core/, ...), installed next to the exe as
 //    game/. A custom protocol, dw: (http://dw.localhost/ on Windows), serves it, because file:// won't carry the module
@@ -259,7 +259,7 @@ fn main() {
                 if debug { "?debug=1" } else { "" }
             );
             WebviewWindowBuilder::new(app, "main", WebviewUrl::External(url.parse().unwrap()))
-                .title("Dead-Wave")
+                .title("Grave Shift")
                 .inner_size(1280.0, 720.0)
                 .fullscreen(true)
                 .initialization_script(&script)
@@ -274,5 +274,5 @@ fn main() {
             }
         })
         .run(tauri::generate_context!())
-        .expect("Dead-Wave could not start");
+        .expect("Grave Shift could not start");
 }

@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-10T10:16:30.011Z",
+  "source": "Claude outputs/PROMPTS-3.md",
+  "sourceSha256": "ac3ebc40f5d71de09c63315b47dedbba54d2457d27c3642ddae7427f211d27e4",
+  "catalogue": "z-sounds/manifest-3.json",
+  "matchedTuples": 80,
+  "sounds": 80,
+  "clips": 320,
+  "fixedSeconds": 852,
+  "autoDurationClips": 0,
+  "shortClipsAdjusted": 16,
+  "estimatedCredits": 17040,
+  "prioritySounds": 19,
+  "loopSounds": 8,
+  "categories": 10,
+  "output": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\elevenlabs-batch\\Generated-3",
+  "inspection": {
+    "done": 0,
+    "exported": 0,
+    "uncertain": 0,
+    "conflicts": 0,
+    "pending": 320,
+    "estimatedRemainingCredits": 17040
+  },
+  "preservedBatch2": [
+    {
+      "file": "manifest.json",
+      "hash": "b132332d846dad600a8f17cb7cf38373f4cf45a35082f35e9f7f7dad2e83fa09"
+    },
+    {
+      "file": "plan.json",
+      "hash": "211260a49d7a4786071350a2300e3499a4dad51f9e867b54d285d7410d75e73b"
+    }
+  ],
+  "tests": {
+    "command": "node --test review/elevenlabs-batch/batch.test.mjs review/elevenlabs-batch/batch-3.test.mjs",
+    "pass": 41,
+    "fail": 0,
+    "skipped": 0,
+    "network": "mocked in generation tests; launchers decline before key prompt"
+  },
+  "paidGenerationRequests": 0
+}

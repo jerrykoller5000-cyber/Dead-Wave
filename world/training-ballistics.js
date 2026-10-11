@@ -11,12 +11,19 @@ export function trainingFloorHit(tg, origin, direction) {
   return {distance, x, y:tg.floorY, z};
 }
 
-export function traceTraining(tg, a, b) {
+export function traceTraining(tg, a, b, opts) {
   const d={x:b.x-a.x,y:b.y-a.y,z:b.z-a.z};
+  // The range walls face inward. From outside, the camera looks through the near one;
+  // that face is not an aim surface. A round fired from inside still hits it.
+  const glass=opts&&opts.throughGlass;
   let hit=null, fraction=Infinity;
   for(const solid of tg.solids) {
+    if(glass && tg.cutaway?.ignoreSolid(solid))continue;
     if(solid.target!=null && tg.targets[solid.target].state!=='up')continue;
+    if(glass&&solid.wall&&solid.surface&&d.x*solid.surface.nx+d.z*solid.surface.nz>1e-6)continue;
     const t=segmentBox(a,b,solid);
+    // CL-144: a plate is hit only on its silhouette; through the cut-away corners the round goes on
+    if(t!==null && solid.target!=null && tg.onPlate && !tg.onPlate(solid.target,{x:a.x+d.x*t,y:a.y+d.y*t,z:a.z+d.z*t}))continue;
     if(t!==null && t<fraction){fraction=t;hit={solid,t};}
   }
   const floor=trainingFloorHit(tg,a,d);

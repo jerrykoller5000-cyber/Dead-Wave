@@ -1,4 +1,4 @@
-# Dead-Wave: player interface specification
+# Grave Shift: player interface specification
 
 Author: ChatGPT. Date: 2026-09-23. Status: Phase 0 specification, not implemented.
 Authority: Jerry's task order and AGENTS.md. Claude leads; Cursor integrates.

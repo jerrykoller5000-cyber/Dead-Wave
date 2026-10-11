@@ -1,0 +1,9 @@
+#24 player/chute-land
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A paratrooper landing on grass: boots thumping down, a stumble and the parachute canopy collapsing with a flutter. No music, no voice.

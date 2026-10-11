@@ -1,4 +1,4 @@
-"""Dead-Wave · the horde soundtrack for nights 2 to 20 (CL-38, Jerry 2026-09-25: "perfecting the
+"""Grave Shift · the horde soundtrack for nights 2 to 20 (CL-38, Jerry 2026-09-25: "perfecting the
 soundtrack for hordes 1-20").
 
 Night 1 is First Blood (tools/day1.py). The later nights are First Blood's own family: the same

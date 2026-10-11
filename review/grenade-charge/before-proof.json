@@ -1,0 +1,104 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "what": "full charge setting is 1.6 seconds"
+    },
+    {
+      "pass": true,
+      "what": "G starts charge"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "actual charge saturates within one-frame tolerance"
+    },
+    {
+      "pass": true,
+      "what": "full throw strength unchanged"
+    },
+    {
+      "pass": true,
+      "what": "holding longer remains capped"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "released grenade uses full preview strength"
+    },
+    {
+      "pass": true,
+      "what": "release clears charge and preview"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "condition reached"
+    },
+    {
+      "pass": true,
+      "what": "tap remains a short lob"
+    }
+  ],
+  "atEight": {
+    "t": 0.8165999999940392,
+    "speed": {
+      "h": 10.634874999951567,
+      "vy": 6.0311249999888235,
+      "k": 0.5103749999962744
+    },
+    "hit": {
+      "x": -0.2871442571771586,
+      "y": -199.88,
+      "z": -632.9319336644478,
+      "t": 0.9222656249999999,
+      "kind": "ground"
+    }
+  },
+  "full": {
+    "elapsed": 1.6162999999970165,
+    "t": 1.6,
+    "speed": {
+      "h": 17,
+      "vy": 7.5,
+      "k": 1
+    },
+    "hit": {
+      "x": -0.3254373823239316,
+      "y": -199.88,
+      "z": -624.4319962278813,
+      "t": 1.0769531250000002,
+      "kind": "ground"
+    }
+  },
+  "thrown": {
+    "h": 17,
+    "vy": 7.5,
+    "charge": 1.6,
+    "releaseDelay": 0.09960000000149005
+  },
+  "cam": {
+    "x": 8,
+    "y": -188,
+    "z": -641,
+    "tx": 0,
+    "ty": -199,
+    "tz": -640,
+    "fov": 50
+  },
+  "loadSeconds": 17.937,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

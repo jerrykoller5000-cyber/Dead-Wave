@@ -1,0 +1,33 @@
+✔ shambler: cosmetic rebuild preserves every animated joint and finite geometry (304.7562ms)
+✔ feral: cosmetic rebuild preserves every animated joint and finite geometry (23.4676ms)
+✔ brute: cosmetic rebuild preserves every animated joint and finite geometry (31.4373ms)
+✔ military: cosmetic rebuild preserves every animated joint and finite geometry (34.6973ms)
+✔ spitter: cosmetic rebuild preserves every animated joint and finite geometry (19.9553ms)
+✔ bomber: cosmetic rebuild preserves every animated joint and finite geometry (26.0773ms)
+✔ screamer: cosmetic rebuild preserves every animated joint and finite geometry (18.1926ms)
+✔ drowned: cosmetic rebuild preserves every animated joint and finite geometry (17.9398ms)
+✔ leaper: cosmetic rebuild preserves every animated joint and finite geometry (14.7411ms)
+✔ spider: cosmetic rebuild preserves every animated joint and finite geometry (13.4588ms)
+✔ colossus: cosmetic rebuild preserves every animated joint and finite geometry (20.3373ms)
+✔ demon: cosmetic rebuild preserves every animated joint and finite geometry (20.8226ms)
+✔ guardian: cosmetic rebuild preserves every animated joint and finite geometry (13.944ms)
+✔ caveguard: cosmetic rebuild preserves every animated joint and finite geometry (12.6496ms)
+✔ unreferenced zombie types remain untouched (0.2937ms)
+✔ cached bodies share immutable geometry but isolate hit, burn and fuse materials (0.8086ms)
+✔ Demon charge flare still targets a visible material after template reuse (0.5043ms)
+✔ Bomber fuse retains textured wet skin after glow batching and template reuse (0.8949ms)
+✔ surface shapes are deterministic regardless of Three UUID randomness (9.418ms)
+✔ surface atlas pixels are reproducible without consuming gameplay randomness (259.3359ms)
+✔ surface UVs stay in separate atlas regions and never mutate shared geometry (0.4656ms)
+✔ torn cloth UV fallback remains finite for thin and collapsed geometry (0.2386ms)
+✔ material atlas preserves color space and physically distinct surfaces (0.3947ms)
+✔ all detailed batches have usable UVs and normals without extra material groups (80.2815ms)
+✔ cached texture maps remain shared while zombie damage tint stays independent (0.6234ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1036.3615

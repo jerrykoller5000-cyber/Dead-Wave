@@ -1,0 +1,9 @@
+#34 weapon-foley/slide-forward  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley slideFwd
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A pistol slide snapping forward into battery, a sharp metallic clack. No music, no voice.

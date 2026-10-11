@@ -1,0 +1,9 @@
+#152 vehicles/cargo-plane-flyover  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: planeFlyover()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A four-engine military propeller cargo plane flying low overhead and away. No music, no voice.

@@ -1,0 +1,3 @@
+Aftermath
+Used for: Just after a wave
+The game plays now: assets/soundtrack/aftermath_hold (pool "aftermath")

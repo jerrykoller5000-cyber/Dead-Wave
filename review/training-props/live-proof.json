@@ -1,0 +1,94 @@
+{
+  "ok": true,
+  "value": {
+    "checks": [
+      {
+        "pass": true,
+        "what": "alarm is left of intake on same west wall"
+      },
+      {
+        "pass": true,
+        "what": "alarm faces into room"
+      },
+      {
+        "pass": true,
+        "what": "reachable and distinct hqPanel interaction"
+      },
+      {
+        "pass": true,
+        "what": "reachable and distinct skullWindow interaction"
+      },
+      {
+        "pass": true,
+        "what": "E opens alarm at new placement"
+      },
+      {
+        "pass": true,
+        "what": "moved alarm preserves countdown security lock"
+      },
+      {
+        "pass": true,
+        "what": "two zombies deployed at larger gate"
+      },
+      {
+        "pass": true,
+        "what": "gate occupants remain in room"
+      },
+      {
+        "pass": true,
+        "what": "blackout clears enemies"
+      },
+      {
+        "pass": true,
+        "what": "lying pose lands on new bed"
+      },
+      {
+        "pass": true,
+        "what": "wake animation completes"
+      },
+      {
+        "pass": true,
+        "what": "stands clear beside fitted bed"
+      },
+      {
+        "pass": true,
+        "what": "infirmary return leaves door unlocked"
+      },
+      {
+        "pass": true,
+        "what": "all real mesh positions finite"
+      }
+    ],
+    "samples": [
+      {
+        "fps": 56.14597954648621,
+        "low": 43.29004328725077,
+        "worst": 23.100000001490116,
+        "hitches": 0,
+        "frames": 56
+      },
+      {
+        "fps": 50.694514853646034,
+        "low": 42.19409282169839,
+        "worst": 23.700000002980232,
+        "hitches": 0,
+        "frames": 50
+      },
+      {
+        "fps": 54.96152693139372,
+        "low": 44.8430493333472,
+        "worst": 22.299999997019768,
+        "hitches": 0,
+        "frames": 55
+      }
+    ],
+    "geometry": {
+      "meshes": 133,
+      "triangles": 28390,
+      "invalid": 0
+    },
+    "errors": []
+  },
+  "loadSeconds": 14.232,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

@@ -12,13 +12,13 @@ where node >nul 2>&1
 if %errorlevel%==0 goto usenode
 where py >nul 2>&1
 if %errorlevel%==0 goto usepy
-start "Dead-Wave Crew Panel server" /min python -m http.server %PORT% --bind 127.0.0.1
+start "Grave Shift Crew Panel server" /min python -m http.server %PORT% --bind 127.0.0.1
 goto wait
 :usenode
-start "Dead-Wave Crew Panel server" /min node tools/serve.mjs %PORT%
+start "Grave Shift Crew Panel server" /min node tools/serve.mjs %PORT%
 goto wait
 :usepy
-start "Dead-Wave Crew Panel server" /min py -m http.server %PORT% --bind 127.0.0.1
+start "Grave Shift Crew Panel server" /min py -m http.server %PORT% --bind 127.0.0.1
 :wait
 ping 127.0.0.1 -n 3 >nul
 

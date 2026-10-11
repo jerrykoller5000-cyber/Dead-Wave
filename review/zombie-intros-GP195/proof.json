@@ -1,0 +1,3260 @@
+{
+  "tracks": {
+    "shambler": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "shambler",
+          "tracks": {
+            "shambler": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.9961398105188657,
+          "angle": 14.890750000104301,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 169.63328199929225
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "shambler",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8325000000000002,
+          "pulse": 0.397554162328258,
+          "angle": 15.515500000044696,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 93.87906481313614
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 104.2,
+        "error": null
+      }
+    },
+    "feral": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "feral",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.11899280529501949,
+          "angle": 34.765000000074465,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 86.30431650302685
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "feral",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8325,
+          "pulse": 0.20932704080695813,
+          "angle": 35.39050000004466,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 78.99265233982031
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 171.44,
+        "error": null
+      }
+    },
+    "leaper": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "leaper",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.5168621942564785,
+          "angle": 54.63775000005949,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 124.10190845436546
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "leaper",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8339999999850989,
+          "pulse": 0.9967305787762917,
+          "angle": 55.262000000104194,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 141.52096375391702
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 106.72,
+        "error": null
+      }
+    },
+    "spider": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "spider",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.854837146234531,
+          "angle": 74.51425000004454,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 156.20952889228045
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "spider",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8325,
+          "pulse": 0.11899280529513356,
+          "angle": 75.14000000007434,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 71.84834348877887
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 206.72,
+        "error": null
+      }
+    },
+    "drowned": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "drowned",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.029615650517639536,
+          "angle": 94.27550000004521,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 77.81348679917576
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "drowned",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.833125,
+          "pulse": 0.37661621440677717,
+          "angle": 94.90575000003035,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 92.2923714446264
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 193.6,
+        "error": null
+      }
+    },
+    "military": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "military",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.6482049904825334,
+          "angle": 114.11375000007595,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 136.57947409584068
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "military",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8343749999999999,
+          "pulse": 0.9660954318476286,
+          "angle": 114.73375000007594,
+          "lights": 4,
+          "red": 16740977,
+          "fill": 139.15628321504715
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 203.6,
+        "error": null
+      }
+    },
+    "brute": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "brute",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.7532386925702756,
+          "angle": 133.98675000004687,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 146.5576757941762
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "brute",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8336250000074508,
+          "pulse": 0.04857693728559648,
+          "angle": 134.61325000003197,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 66.3688951883402
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 175.26772916666667,
+        "error": null
+      }
+    },
+    "spitter": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "spitter",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.003157132488840586,
+          "angle": 153.82375000007758,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 75.29992758643985
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "spitter",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8333749999850988,
+          "pulse": 0.5959635003883922,
+          "angle": 154.44800000004784,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 109.68592780097552
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 220,
+        "error": null
+      }
+    },
+    "screamer": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "screamer",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.8769084790084514,
+          "angle": 173.6977500000625,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 158.30630550580287
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "screamer",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            }
+          }
+        },
+        "alive": 2,
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.8021239229419428,
+          "angle": 174.31725000001774,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 151.20177267948458
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 207.2,
+        "error": null
+      }
+    },
+    "bomber": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "bomber",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.5455724318873885,
+          "angle": 193.5280000000466,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 126.82938102930191
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "bomber",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8314999999850987,
+          "pulse": 0.000008858011660062282,
+          "angle": 194.15400000006144,
+          "lights": 4,
+          "red": 16741234,
+          "fill": 62.36319971536845
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 17.16,
+        "error": null
+      }
+    },
+    "demon": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "demon",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.07140688773786608,
+          "angle": 213.3607500000306,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 81.78365433509728
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "demon",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8331250000000001,
+          "pulse": 0.7933572951449317,
+          "angle": 213.98700000003058,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 125.27612566917404
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 125.6,
+        "error": null
+      }
+    },
+    "colossus": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "colossus",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.9778235205983888,
+          "angle": 233.23075000002945,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 167.89323445684693
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "colossus",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.834375,
+          "pulse": 0.6027694933033272,
+          "angle": 233.85925000004434,
+          "lights": 4,
+          "red": 16740977,
+          "fill": 110.35702561762153
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 114.24,
+        "error": null
+      }
+    },
+    "guardian": {
+      "alarm": {
+        "accepted": 2,
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            },
+            "guardian": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 226.8,
+              "error": null
+            }
+          }
+        }
+      },
+      "release": {
+        "audio": {
+          "selected": "guardian",
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            },
+            "guardian": {
+              "wanted": true,
+              "playing": true,
+              "looping": true,
+              "fading": false,
+              "ready": true,
+              "seconds": 226.8,
+              "error": null
+            }
+          }
+        },
+        "danger": {
+          "active": true,
+          "amount": 1,
+          "pulse": 0.37693670840804233,
+          "angle": 253.03150000005826,
+          "lights": 4,
+          "red": 16713731,
+          "fill": 110.80898729876402
+        },
+        "gate": {
+          "active": true,
+          "amount": 1,
+          "flashing": true,
+          "lit": true
+        },
+        "alive": 2
+      },
+      "partial": "guardian",
+      "dead": {
+        "audio": {
+          "selected": null,
+          "tracks": {
+            "shambler": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 104.2,
+              "error": null
+            },
+            "feral": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 171.44,
+              "error": null
+            },
+            "leaper": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 106.72,
+              "error": null
+            },
+            "spider": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 206.72,
+              "error": null
+            },
+            "drowned": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 193.6,
+              "error": null
+            },
+            "military": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 203.6,
+              "error": null
+            },
+            "brute": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 175.26772916666667,
+              "error": null
+            },
+            "spitter": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 220,
+              "error": null
+            },
+            "screamer": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 207.2,
+              "error": null
+            },
+            "bomber": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 17.16,
+              "error": null
+            },
+            "demon": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 125.6,
+              "error": null
+            },
+            "colossus": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": false,
+              "ready": true,
+              "seconds": 114.24,
+              "error": null
+            },
+            "guardian": {
+              "wanted": false,
+              "playing": false,
+              "looping": false,
+              "fading": true,
+              "ready": true,
+              "seconds": 226.8,
+              "error": null
+            }
+          }
+        },
+        "alive": 0,
+        "danger": {
+          "active": false,
+          "amount": 0.8333749999850988,
+          "pulse": 0.02719885875448408,
+          "angle": 253.6565000000582,
+          "lights": 4,
+          "red": 16740978,
+          "fill": 64.65647564572313
+        }
+      },
+      "faded": {
+        "wanted": false,
+        "playing": false,
+        "looping": false,
+        "fading": false,
+        "ready": true,
+        "seconds": 226.8,
+        "error": null
+      }
+    }
+  },
+  "roster": [
+    "shambler",
+    "feral",
+    "leaper",
+    "spider",
+    "drowned",
+    "military",
+    "brute",
+    "spitter",
+    "screamer",
+    "bomber",
+    "demon",
+    "colossus",
+    "guardian"
+  ],
+  "left": {
+    "enabled": false
+  },
+  "errors": []
+}

@@ -1,0 +1,9 @@
+#136 world/birds-day
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: birdChirp()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A few forest songbirds chirping in the morning, distant, sparse. No music, no voice.

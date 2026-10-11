@@ -1,4 +1,4 @@
-# Dead-Wave: the roadmap
+# Grave Shift: the roadmap
 
 The plan for finishing the game: seven stages, R1 to R7. R6 is 1.0; R7 (co-op) comes after it. Each stage ends
 when Jerry has played it. Every item here (P-1, P-2, ...) is one task on `crew/BOARD.md`; the table at the end maps

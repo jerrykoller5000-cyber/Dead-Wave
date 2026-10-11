@@ -1,0 +1,9 @@
+#106 turrets/mortar-incoming
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A mortar shell whistling down through the air before impact, a falling whistle. No music, no voice.

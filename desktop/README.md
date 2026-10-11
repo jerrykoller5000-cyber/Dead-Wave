@@ -1,4 +1,4 @@
-# Dead-Wave, the desktop game (CU-57, P-89)
+# Grave Shift, the desktop game (CU-57, P-89)
 
 A Tauri shell (Rust + the WebView2 that comes with Windows 10/11) round the packaged game. The game itself has no
 dependencies and no build step; this folder is the one place with any, and it only makes the `.exe` and the installer.
@@ -9,7 +9,7 @@ dependencies and no build step; this folder is the one place with any, and it on
     npm run build:exe        the exe only, no installer
     node smoke.mjs           start the built exe and check it (WebGPU, the title, a match, the profile file, Quit)
 
-- The installer: `src-tauri/target/release/bundle/nsis/Dead-Wave_<version>_x64-setup.exe` (about 226 MB, per-user, no admin).
+- The installer: `src-tauri/target/release/bundle/nsis/Grave Shift_<version>_x64-setup.exe` (about 226 MB, per-user, no admin).
   It is not signed, so Windows SmartScreen will ask before the first run ("More info", "Run anyway").
 - The game's files are installed next to the exe in `game/` and served by the `dw:` protocol (`http://dw.localhost/`).
   `tools/package.mjs` decides what ships (no qa/, review/, handoffs/, tests, the WAV originals) and checks the copy by booting it.

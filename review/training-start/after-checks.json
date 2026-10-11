@@ -1,0 +1,21 @@
+{
+  "initial": {
+    "owned": {
+      "pistol": true
+    },
+    "gear": {
+      "helmet": false,
+      "vest": false,
+      "pads": false,
+      "nvg": false,
+      "laser": false,
+      "flashlight": false
+    },
+    "armor": 0,
+    "current": "pistol",
+    "cash": 999999,
+    "machete": false,
+    "grenades": 0
+  },
+  "errors": []
+}

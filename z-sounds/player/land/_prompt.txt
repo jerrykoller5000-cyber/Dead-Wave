@@ -1,0 +1,9 @@
+#7 player/land  (start here)
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier landing from a jump onto dirt: a heavy boot thud and a rattle of gear. No music, no voice.

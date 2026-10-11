@@ -98,15 +98,22 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
   }
   function pose(dt) {
     const bored = smooth((s.quiet - BORED_AFTER) / 1.2);
+    u.idleSway = 0;
     if (bored <= 0) return;
     const shift = Math.sin((s.quiet - BORED_AFTER) * .85) * bored;
-    u.lowerBody.rotation.z += shift * .045;
+    // CU-99: while the standing turn steps hold his legs (studio/marine-turn.js, u.turn.active), the weight shift is
+    // theirs to make: they tilt his hips by u.idleSway over boots that stay planted. Bending his hips and knees here,
+    // after they had planted the boots, slid the boots about.
+    if (u.turn && u.turn.active) u.idleSway = shift * .045;
+    else {
+      u.lowerBody.rotation.z += shift * .045;
+      u.kneeLG.rotation.x += Math.max(0, shift) * .11;
+      u.kneeRG.rotation.x += Math.max(0, -shift) * .11;
+    }
     u.torsoG.rotation.z -= shift * .055;
     u.torsoG.rotation.x += bored * .045;
     u.headG.rotation.y += Math.sin((s.quiet - BORED_AFTER) * .53) * .3 * bored;
     u.headG.rotation.x += (.04 + .035 * Math.sin(s.quiet * .7)) * bored;
-    u.kneeLG.rotation.x += Math.max(0, shift) * .11;
-    u.kneeRG.rotation.x += Math.max(0, -shift) * .11;
     if (s.phase !== 'pack' && s.phase !== 'smoking') return;
     root.visible = true;
     const packing = s.phase === 'pack', t = s.time;

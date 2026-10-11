@@ -1,0 +1,90 @@
+{
+  "loadSec": 15.015,
+  "touch": {
+    "hits": 3,
+    "damage": 24,
+    "state": {
+      "active": false,
+      "elapsed": 1.5000999999940392,
+      "x": 1,
+      "z": 0,
+      "strike": 0,
+      "started": false
+    },
+    "hp": 1
+  },
+  "rearm": {
+    "hits": 6,
+    "direction": {
+      "active": false,
+      "elapsed": 1.5164000000059603,
+      "x": 0,
+      "z": 1,
+      "strike": 0,
+      "started": false
+    },
+    "frames": [
+      {
+        "state": {
+          "active": true,
+          "elapsed": 0.3164000000059605,
+          "x": 0,
+          "z": 1,
+          "strike": 1,
+          "started": false
+        },
+        "yaw": 0.6047906524729121,
+        "delta": [
+          0,
+          1.080000000000041
+        ],
+        "height": 0,
+        "canHit": true
+      },
+      {
+        "state": {
+          "active": true,
+          "elapsed": 0.7000999999940395,
+          "x": 0,
+          "z": 1,
+          "strike": 1,
+          "started": false
+        },
+        "yaw": 0.10683441178050901,
+        "delta": [
+          0,
+          1.080000000000041
+        ],
+        "height": 0,
+        "canHit": true
+      },
+      {
+        "state": {
+          "active": true,
+          "elapsed": 1.1168000000119205,
+          "x": 0,
+          "z": 1,
+          "strike": 1,
+          "started": false
+        },
+        "yaw": 0.01649868243098097,
+        "delta": [
+          0,
+          1.080000000000041
+        ],
+        "height": 0,
+        "canHit": true
+      }
+    ]
+  },
+  "height": {
+    "active": false,
+    "hits": 0
+  },
+  "cover": {
+    "active": true,
+    "hits": 2,
+    "wallBefore": 130,
+    "wallAfter": 130
+  }
+}

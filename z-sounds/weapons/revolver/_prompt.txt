@@ -1,0 +1,9 @@
+#64 weapons/revolver
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN revolver
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single .357 revolver shot outdoors, a loud booming crack with echo. No music, no voice.

@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-10T09:03:38.460Z",
+  "before": {
+    "poses": [
+      {
+        "stage": "windup",
+        "elapsed": 0.27159999999403944
+      },
+      {
+        "stage": "windup",
+        "elapsed": 0.27159999999403944
+      },
+      {
+        "stage": "windup",
+        "elapsed": 0.27159999999403944
+      }
+    ],
+    "timing": {
+      "starts": [
+        3.345300000011924,
+        3.345300000011924,
+        3.345300000011924
+      ],
+      "clock": 7.760700000002987,
+      "end": 7.751000000000003,
+      "shots": 3,
+      "hp": 9928,
+      "stages": [
+        "cooldown",
+        "cooldown",
+        "cooldown"
+      ]
+    },
+    "errors": []
+  },
+  "after": {
+    "poses": [
+      {
+        "stage": "windup",
+        "elapsed": 0.2677999999970198
+      },
+      {
+        "stage": "cooldown",
+        "elapsed": 0
+      },
+      {
+        "stage": "cooldown",
+        "elapsed": 0
+      }
+    ],
+    "timing": {
+      "starts": [
+        0.5095000000298023,
+        1.7238000000268217,
+        2.924300000026821
+      ],
+      "clock": 4.924800000026824,
+      "end": 4.908600000023841,
+      "shots": 3,
+      "hp": 9952,
+      "stages": [
+        "cooldown",
+        "cooldown",
+        "cooldown"
+      ]
+    },
+    "errors": []
+  },
+  "gaps": [
+    1.2142999999970194,
+    1.2004999999999992
+  ],
+  "summary": "PASS: baseline three simultaneous tells; revised one initial tell, all three casts serviced about1.2s apart, zero browser errors."
+}

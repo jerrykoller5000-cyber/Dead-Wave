@@ -1,0 +1,9 @@
+#166 ui/day-cleared
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: dayCleared()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short triumphant brass fanfare for surviving the night, four notes, military.

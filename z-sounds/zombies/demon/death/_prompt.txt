@@ -1,0 +1,9 @@
+#57 demon-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A demon zombie's long, deep, distorted dying roar fading into the hiss of embers going out. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('demon', 'death')

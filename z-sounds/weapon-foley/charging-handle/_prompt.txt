@@ -1,0 +1,9 @@
+#35 weapon-foley/charging-handle
+MISSING: the game makes no sound here now
+Now: (slide sounds now)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+An assault rifle charging handle pulled back and released, a springy metallic clack. No music, no voice.

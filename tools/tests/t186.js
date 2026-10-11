@@ -51,7 +51,7 @@
     await wait(200);
 
     // Gear on 1 / 2 / 3.
-    T.setGearDbg('helmet'); T.setGearDbg('nvg'); T.setGearDbg('laser');
+    T.setGearDbg('helmet'); T.setGearDbg('nvg'); T.setGearDbg('laser'); T.setGearDbg('flashlight');
     ok(!light() && !laser() && !nvg(), 'all gear starts off (' + tac() + ')');
     key('Digit2'); ok(light(), '2 turns the flashlight on (' + tac() + ')');
     key('Digit2', { repeat: true }); ok(light(), 'a held 2 (auto-repeat) does not flicker it off');

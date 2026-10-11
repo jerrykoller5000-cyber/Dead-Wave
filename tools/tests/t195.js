@@ -50,14 +50,23 @@
     for (const w of ['m4', 'pistol']) {
       if (!(await take(w))) { ok(false, w + ': in hand'); continue; }
       const gq = T.weaponMeshes[w].getWorldQuaternion(new THREE.Quaternion());
+      // CU-100: the hand turns at the wrist too, so its channel is the wrist's (the forearm's where there is none);
+      // a forend may lie in the fist either way (the support hand wraps a forend as the arm brings it).
+      const handQ = (elbow) => (elbow.userData.wrist || elbow).getWorldQuaternion(new THREE.Quaternion());
+      const either = w === 'm4';
       const meas = () => {
         T.marine.updateMatrixWorld(true);
-        const chR = V(1, 0, 0).applyQuaternion(ud.elbowRG.getWorldQuaternion(new THREE.Quaternion())), chL = V(1, 0, 0).applyQuaternion(ud.elbowLG.getWorldQuaternion(new THREE.Quaternion()));
-        return { r: ang(chR, D.gripDownDir(V()).applyQuaternion(gq)), l: ang(chL, D.foreChannelDir(w, V()).applyQuaternion(gq)) };
+        const chR = V(1, 0, 0).applyQuaternion(handQ(ud.elbowRG)), chL = V(1, 0, 0).applyQuaternion(handQ(ud.elbowLG));
+        const l = ang(chL, D.foreChannelDir(w, V()).applyQuaternion(gq));
+        return { r: ang(chR, D.gripDownDir(V()).applyQuaternion(gq)), l: either ? Math.min(l, 180 - l) : l };
       };
       const after = meas(); const keep = H.rollMax; H.rollMax = 0; await wait(600); const before = meas(); H.rollMax = keep; await wait(600);
-      handOk(after.r < 70 && after.r < before.r - 20, w + ': the gun hand rolled onto the grip (' + before.r.toFixed(0) + ' -> ' + after.r.toFixed(0) + ' deg)');
-      handOk(after.l < 80 && after.l < before.l - 20, w + ': the support hand rolled onto the gun (' + before.l.toFixed(0) + ' -> ' + after.l.toFixed(0) + ' deg)');
+      const wristed = !!ud.elbowLG.userData.wrist;
+      // With the wrist, the roll is no longer all of it (the wrist takes what the roll leaves), so no before/after margin.
+      handOk(after.r < 70 && (wristed || after.r < before.r - 20), w + ': the gun hand rolled onto the grip (' + before.r.toFixed(0) + ' -> ' + after.r.toFixed(0) + ' deg)');
+      // (The pistol's support hand still cups the firing fist by the roll alone.)
+      if (wristed && either) handOk(after.l < 45, w + ': the support hand turned onto the gun, along its forend (' + after.l.toFixed(0) + ' deg)');
+      else handOk(after.l < 80 && after.l < before.l - 20, w + ': the support hand rolled onto the gun (' + before.l.toFixed(0) + ' -> ' + after.l.toFixed(0) + ' deg)');
     }
     // The draw: from a gun he doesn't stow (the chainsaw) to each stowed one, held at the end of the reach.
     await take('chainsaw');

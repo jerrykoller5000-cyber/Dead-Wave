@@ -1,0 +1,313 @@
+{
+  "at": "2026-10-10T05:00:33.592Z",
+  "url": "index.html",
+  "lethal": [
+    {
+      "type": "demon",
+      "waking": true,
+      "hp": 100,
+      "after": {
+        "clock": 5.318899999991066,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 0,
+          "trailDrops": 0,
+          "directHits": 1,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 0,
+          "trails": 0
+        }
+      },
+      "directHits": 1,
+      "fireballs": 1,
+      "stones": 0,
+      "alive": 0
+    },
+    {
+      "type": "colossus",
+      "waking": true,
+      "hp": 100,
+      "after": {
+        "clock": 8.553099999994059,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 1,
+          "trailDrops": 0,
+          "directHits": 2,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 1,
+          "trails": 0
+        }
+      },
+      "directHits": 1,
+      "fireballs": 0,
+      "stones": 1,
+      "alive": 0
+    }
+  ],
+  "cover": [
+    {
+      "when": "before windup",
+      "type": "demon",
+      "shots": 0,
+      "hpLost": 0,
+      "busy": false,
+      "stage": "cooldown",
+      "blocked": 0
+    },
+    {
+      "when": "before windup",
+      "type": "colossus",
+      "shots": 0,
+      "hpLost": 0,
+      "busy": false,
+      "stage": "cooldown",
+      "blocked": 0
+    },
+    {
+      "when": "after launch",
+      "type": "demon",
+      "activeAtInsert": 1,
+      "shots": 1,
+      "hpLost": 0,
+      "directHits": 0,
+      "blocked": 1
+    },
+    {
+      "when": "after launch",
+      "type": "colossus",
+      "activeAtInsert": 1,
+      "shots": 1,
+      "hpLost": 0,
+      "directHits": 0,
+      "blocked": 1
+    }
+  ],
+  "loadSeconds": 21.381,
+  "lethalAcid": {
+    "waking": true,
+    "hp": 100,
+    "alive": 0,
+    "drops": 3,
+    "acidHits": 1,
+    "after": {
+      "clock": 9.089700000003,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 1,
+        "stones": 1,
+        "trailDrops": 3,
+        "directHits": 2,
+        "blocked": 0,
+        "acidHits": 1
+      },
+      "pools": {
+        "fireballs": 1,
+        "stones": 1,
+        "trails": 3
+      }
+    }
+  },
+  "acidBatch": {
+    "trails": 6,
+    "totalMeshes": 1,
+    "activeMeshes": 1,
+    "itemSize": 4,
+    "alpha": [
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929
+    ],
+    "visible": true,
+    "material": "MeshBasicNodeMaterial",
+    "explicitAlphaNode": true,
+    "shot": {
+      "file": "review/zombie-abilities/after/spitter-trail.png",
+      "cam": {
+        "x": -35.98536938266573,
+        "y": -194.03572706026034,
+        "z": -623.918186369578,
+        "tx": -28.2,
+        "ty": -199.03197235557934,
+        "tz": -632,
+        "fov": 35
+      },
+      "label": "live spitter",
+      "thumb": null
+    }
+  },
+  "acidFade": {
+    "fading": {
+      "trails": 6,
+      "alpha": [
+        0.07267691940069199,
+        0.07267691940069199,
+        0.07267691940069199,
+        0.07267691940069199,
+        0.07267691940069199,
+        0.07267691940069199,
+        0.10320000350475311,
+        0.10320000350475311,
+        0.10320000350475311,
+        0.10320000350475311,
+        0.10320000350475311,
+        0.10320000350475311,
+        0.1339692324399948,
+        0.1339692324399948,
+        0.1339692324399948,
+        0.1339692324399948,
+        0.1339692324399948,
+        0.1339692324399948,
+        0.1648000031709671,
+        0.1648000031709671,
+        0.1648000031709671,
+        0.1648000031709671,
+        0.1648000031709671,
+        0.1648000031709671,
+        0.1955076903104782,
+        0.1955076903104782,
+        0.1955076903104782,
+        0.1955076903104782,
+        0.1955076903104782,
+        0.1955076903104782,
+        0.2263384610414505,
+        0.2263384610414505,
+        0.2263384610414505,
+        0.2263384610414505,
+        0.2263384610414505,
+        0.2263384610414505
+      ],
+      "visible": true
+    },
+    "expired": {
+      "trails": 0,
+      "visible": false,
+      "drawCount": 0,
+      "alpha": []
+    }
+  },
+  "armour": {
+    "hp": 72,
+    "armor": 48,
+    "directHits": 1
+  },
+  "throwShot": {
+    "file": "review/zombie-abilities/after/colossus-throw.png",
+    "cam": {
+      "x": -26.46581122585739,
+      "y": -190.66031194281027,
+      "z": -621.9196432760106,
+      "tx": -14.452509885411729,
+      "ty": -197.6425,
+      "tz": -632,
+      "fov": 35
+    },
+    "label": "live colossus",
+    "thumb": null
+  },
+  "throwPose": {
+    "stage": "windup",
+    "elapsed": 1.35140000000596,
+    "heldVisible": true,
+    "movingPack": true,
+    "batchedPack": false,
+    "plantedSpeed": 0,
+    "shots": 0
+  },
+  "farTell": {
+    "idle": {
+      "hand": [
+        -10.714676601632249,
+        -198.78826039901836,
+        -631.3296372867763
+      ],
+      "matrixAutoUpdate": false,
+      "armMatrixAutoUpdate": false,
+      "farLod": true,
+      "visible": true,
+      "stage": "cooldown",
+      "playerDistance": 28,
+      "cameraDistance": 53.600373133029585
+    },
+    "early": {
+      "hand": [
+        -10.88176495353809,
+        -198.73996095712954,
+        -631.4546396890578
+      ],
+      "matrixAutoUpdate": true,
+      "armMatrixAutoUpdate": true,
+      "farLod": false,
+      "visible": true,
+      "stage": "windup",
+      "playerDistance": 28,
+      "cameraDistance": 53.600373133029585
+    },
+    "late": {
+      "hand": [
+        -11.174609834230369,
+        -198.4197772869326,
+        -631.3605455571718
+      ],
+      "matrixAutoUpdate": true,
+      "armMatrixAutoUpdate": true,
+      "farLod": false,
+      "visible": true,
+      "stage": "windup",
+      "playerDistance": 28,
+      "cameraDistance": 53.600373133029585
+    },
+    "movement": 0.4439925815414422
+  },
+  "errors": [],
+  "summary": "PASS: lethal Training projectile/acid recovery, 80-raw armour mitigation, launch LOS, earliest midflight cover and distant cast joint/anchor animation; zero browser errors."
+}

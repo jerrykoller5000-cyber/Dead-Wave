@@ -1,0 +1,74 @@
+{
+  "indexHash": "9d83b08c66185379aa2039fd0774474cb0920f691631d27159639c37271444ef",
+  "copiedAt": "2026-10-09T10:58:17.033Z",
+  "dependencies": {
+    "Pistol": [
+      "THREE",
+      "gunKit",
+      "gunBand",
+      "gripOutline",
+      "gunEffects",
+      "gunSuppressor",
+      "finishGun",
+      "gunBody",
+      "gunDark",
+      "gunMid",
+      "gunPoly",
+      "gunRubber",
+      "gunAccent",
+      "magPoly",
+      "gaugeFace",
+      "sightDotMat",
+      "glassMat"
+    ],
+    "Revolver": [
+      "THREE",
+      "gunKit",
+      "gunBand",
+      "gunEffects",
+      "finishGun",
+      "steelMat",
+      "woodMat",
+      "woodDark",
+      "gunDark",
+      "gunAccent",
+      "gunRubber"
+    ],
+    "Uzi": [
+      "THREE",
+      "gunKit",
+      "gunBand",
+      "gripOutline",
+      "gunEffects",
+      "gunSuppressor",
+      "finishGun",
+      "gunBody",
+      "gunMid",
+      "gunDark",
+      "gunAccent",
+      "gunPoly",
+      "gunRubber"
+    ],
+    "Knife": [
+      "THREE",
+      "gunKit",
+      "mergeRigidMeshes",
+      "gunDark",
+      "gunPoly",
+      "gunAccent",
+      "bladeMat",
+      "edgeMat",
+      "gloveMat",
+      "brassMat"
+    ]
+  },
+  "baselineDependencies": {
+    "Pistol": "THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunDark, gunMid, gunPoly, gunRubber, gunAccent, magPoly, gaugeFace, sightDotMat, glassMat",
+    "Revolver": "THREE, gunKit, gunBand, gunArc, gunEffects, finishGun, steelMat, woodMat, woodDark, gunDark, gunAccent, gunRubber, brassMat",
+    "Uzi": "THREE, gunKit, gunBand, gripOutline, gunEffects, gunSuppressor, finishGun, gunBody, gunMid, gunDark, gunAccent, gunPoly",
+    "Knife": "THREE, gunKit, gunBand, mergeRigidMeshes, gunDark, gunPoly, gunAccent, bladeMat, edgeMat, gloveMat, brassMat"
+  },
+  "moduleHash": "9fb3936f9ee16f1373dedc07df53a4a05c067579a734f9d4fed3e72991d26be6",
+  "readyAt": "2026-10-09T11:21:35.818Z",
+  "finalCorrection": "Reduced revolver thin-bridge bevels and simplified top strap to remove pointed inset-cap seams; dimensions and animation refs unchanged."
+}

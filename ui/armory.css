@@ -177,3 +177,23 @@
 #cif .armory-preview-actions button { flex:1; min-width:0; min-height:30px; padding:5px; font:10px var(--font-hud); color:#e0d8b9; border:1px solid #798566; background:#303d2b; cursor:pointer; }
 #cif .armory-preview-actions button:disabled { opacity:.5; cursor:default; }
 #cif .armory-preview-stage:focus-visible, #cif .armory-preview-actions button:focus-visible { outline:2px solid #f1d596; outline-offset:-3px; }
+
+/* CL-139 (Jerry, 2026-10-09): the Armory alone is its own window, so it sits in the middle of the screen, and its
+   Done / Move to shelf bar stays in view at the bottom however much the workbench holds (at 1280x720 it was below the
+   fold, and the window ran off the left edge). A stored gun for the other kind of slot reads as such, but still
+   answers a click; each one says which slot it goes in. */
+#cif.armory-only { justify-content:center; padding:2vh 2vw; background:rgba(5,7,4,.6); }
+#cif.armory-only #armoryPanel { padding-bottom:0; }
+#cif.armory-only .armory-actions { position:sticky; bottom:0; z-index:2; margin:10px 0 0; padding:8px 14px 10px;
+  background:linear-gradient(180deg, #13170fee, #13170f); border-top:1px solid #cbdcb722; box-shadow:0 -10px 18px #0007; }
+#cif .armory-item > button[data-gun].other-slot { opacity:.6; }
+#cif .armory-item > button[data-gun].other-slot:hover { opacity:.9; }
+#cif .armory-fits { justify-self:start; margin-top:2px; font:normal 9px var(--font-hud); letter-spacing:.1em; text-transform:uppercase;
+  color:#cfd8c0aa; border:1px solid #cbdcb733; border-radius:2px; padding:0 4px; }
+#cif .armory-item > button[data-gun]:not(.other-slot) .armory-fits { color:#e3b62bcc; border-color:#e3b62b55; }
+@media(max-height:800px) {
+  #cif.armory-only #armoryPanel { max-height:96vh; }
+  #cif.armory-only .armory-head { padding:14px 16px 6px; }
+  #cif.armory-only .armory-preview-stage { height:120px; }
+  #cif.armory-only .armory-preview-actions button { min-height:26px; }
+}

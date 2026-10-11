@@ -1,0 +1,155 @@
+{
+  "beforeLoadSeconds": 13.096,
+  "beforeSetup": {
+    "training": true,
+    "room": {
+      "minX": -44,
+      "maxX": -8,
+      "minZ": -652,
+      "maxZ": -612
+    },
+    "floor": -200
+  },
+  "beforePerf": {
+    "fps": 59.772863119877265,
+    "low": 45.871559639298525,
+    "worst": 21.799999997019768,
+    "hitches": 0,
+    "frames": 60
+  },
+  "beforeErrors": [],
+  "afterLoadSeconds": 20.651,
+  "setup": {
+    "training": true,
+    "room": {
+      "minX": -44,
+      "maxX": -8,
+      "minZ": -652,
+      "maxZ": -612
+    },
+    "floor": -200
+  },
+  "attacks": [
+    {
+      "type": "demon",
+      "winding": "windup",
+      "damage": 24,
+      "shots": 1,
+      "state": {
+        "clock": 8.582199999995536,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 0,
+          "trailDrops": 0,
+          "directHits": 1,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 0,
+          "trails": 0
+        }
+      },
+      "delta": {
+        "fireballs": 1,
+        "stones": 0
+      },
+      "movement": 0,
+      "props": true
+    },
+    {
+      "type": "colossus",
+      "winding": "windup",
+      "damage": 80,
+      "shots": 1,
+      "state": {
+        "clock": 12.66529999999705,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 1,
+          "trailDrops": 0,
+          "directHits": 2,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 1,
+          "trails": 0
+        }
+      },
+      "delta": {
+        "fireballs": 0,
+        "stones": 1
+      },
+      "movement": 0,
+      "props": true
+    }
+  ],
+  "closeDemon": {
+    "stage": "cooldown",
+    "fireballs": 0,
+    "charging": true
+  },
+  "trail": {
+    "drops": 4,
+    "stationary": 4,
+    "damage": 12,
+    "elevatedDamage": 0,
+    "cleared": {
+      "clock": 15.047399999998554,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 1,
+        "stones": 1,
+        "trailDrops": 4,
+        "directHits": 2,
+        "blocked": 0,
+        "acidHits": 4
+      },
+      "pools": {
+        "fireballs": 1,
+        "stones": 1,
+        "trails": 4
+      }
+    }
+  },
+  "death": true,
+  "clear": {
+    "clock": 18.18029999999705,
+    "domain": "training",
+    "shots": 0,
+    "trails": 0,
+    "counts": {
+      "fireballs": 1,
+      "stones": 1,
+      "trailDrops": 13,
+      "directHits": 2,
+      "blocked": 0,
+      "acidHits": 4
+    },
+    "pools": {
+      "fireballs": 1,
+      "stones": 1,
+      "trails": 9
+    }
+  },
+  "afterPerf": {
+    "fps": 54.04864377932085,
+    "low": 37.45318352686999,
+    "worst": 26.69999999552965,
+    "hitches": 0,
+    "frames": 54
+  },
+  "errors": [],
+  "summary": "PASS: demon fireball24, charge priority, colossus raw80 hit, planted tells, walking acid/floor immunity/cleanup, dead fists extinguish; zero browser errors."
+}

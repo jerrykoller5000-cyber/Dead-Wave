@@ -348,6 +348,8 @@ export class Scene extends Object3D { constructor() { super(); this.isScene = tr
 export class Mesh extends Object3D {
   constructor(geometry, material) { super(); this.isMesh = true; this.type = 'Mesh'; this.geometry = geometry || new BufferGeometry(); this.material = material || new MeshBasicMaterial(); }
   raycast() {}
+  // As three.js: a mesh's copy takes its geometry and material (and its name and visibility) as well as its place.
+  copy(src) { super.copy(src); if (src.geometry) this.geometry = src.geometry; if (src.material) this.material = src.material; this.name = src.name; this.visible = src.visible; return this; }
 }
 export class InstancedMesh extends Mesh {
   constructor(g, m, count) { super(g, m); this.isInstancedMesh = true; this.count = count; this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(count * 16), 16); this.instanceColor = null; this._mats = []; }
@@ -544,13 +546,31 @@ export class Box3 {
   getCenter(v) { return v.addVectors(this.min, this.max).multiplyScalar(0.5); }
   containsPoint(p) { return p.x >= this.min.x && p.x <= this.max.x && p.y >= this.min.y && p.y <= this.max.y && p.z >= this.min.z && p.z <= this.max.z; }
   isEmpty() { return this.max.x < this.min.x; }
+  getBoundingSphere(s) {
+    this.getCenter(s.center);
+    s.radius = this.isEmpty() ? 0 : s.center.distanceTo(this.max);
+    return s;
+  }
   union(b) { this.min.min(b.min); this.max.max(b.max); return this; }
   clone() { return new Box3(this.min.clone(), this.max.clone()); }
   copy(b) { this.min.copy(b.min); this.max.copy(b.max); return this; }
   intersectsBox(b) { return !(b.max.x < this.min.x || b.min.x > this.max.x || b.max.y < this.min.y || b.min.y > this.max.y || b.max.z < this.min.z || b.min.z > this.max.z); }
   expandByScalar(s) { this.min.addScalar(-s); this.max.addScalar(s); return this; }
+  // As three.js: the box round the eight corners, moved (CL-136's limb stumps take a limb's box in its own frame).
+  applyMatrix4(m) {
+    if (this.isEmpty()) return this;
+    const a = this.min.clone(), b = this.max.clone(), pts = [];
+    for (const x of [a.x, b.x]) for (const y of [a.y, b.y]) for (const z of [a.z, b.z]) pts.push(new Vector3(x, y, z).applyMatrix4(m));
+    this.makeEmpty(); for (const p of pts) this.expandByPoint(p);
+    return this;
+  }
 }
 export class Sphere { constructor(c = new Vector3(), r = -1) { this.center = c; this.radius = r; } }
+// CL-140 scene cull. Tests keep every object in view: intersectsSphere is always true.
+export class Frustum {
+  setFromProjectionMatrix() { return this; }
+  intersectsSphere() { return true; }
+}
 export class Ray {
   constructor(o = new Vector3(), d = new Vector3(0, 0, -1)) { this.origin = o; this.direction = d; }
   at(t, v) { return v.copy(this.origin).addScaledVector(this.direction, t); }

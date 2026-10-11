@@ -1,4 +1,4 @@
-"""Generative soundtrack for Dead-Wave.
+"""Generative soundtrack for Grave Shift.
 
 Each track is a real arrangement: a key and chord progression, a song form built
 from sections (intro / verse / chorus / break / climax / outro) that add and drop

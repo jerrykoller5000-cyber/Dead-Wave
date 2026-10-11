@@ -1,0 +1,9 @@
+#103 build-attacks-stone-hit
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Zombie fists hammering a stone wall: a dull heavy thud and a little grit trickling. No voice, no music.
+
+In the game: buildHit('stone')

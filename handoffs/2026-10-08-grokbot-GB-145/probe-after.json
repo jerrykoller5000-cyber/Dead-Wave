@@ -1,0 +1,4402 @@
+[
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   -0.021,
+   -2.229,
+   -8.059
+  ],
+  "hR": [
+   0.066,
+   -2.2,
+   -8.074
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.114,
+    "dHandR": 0.101,
+    "wellHL": 0.114,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.093
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.067,
+   -2.298,
+   -8.063
+  ],
+  "hR": [
+   0.067,
+   -2.2,
+   -8.074
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.004,
+    "dHandR": 0.101,
+    "wellHL": 0.004,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.098
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.048,
+   -2.339,
+   -8.066
+  ],
+  "hR": [
+   0.067,
+   -2.199,
+   -8.074
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.051,
+    "dHandL": 0.002,
+    "dHandR": 0.143,
+    "wellHL": 0.049,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.141
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.083,
+   -2.24,
+   -8.221
+  ],
+  "hR": [
+   0.067,
+   -2.199,
+   -8.075
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.236,
+    "dHandL": 0.002,
+    "dHandR": 0.215,
+    "wellHL": 0.235,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.214
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.061,
+   -2.254,
+   -8.197
+  ],
+  "hR": [
+   0.068,
+   -2.198,
+   -8.075
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.201,
+    "dHandL": 0.002,
+    "dHandR": 0.187,
+    "wellHL": 0.2,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.186
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.047,
+   -2.338,
+   -8.066
+  ],
+  "hR": [
+   0.068,
+   -2.197,
+   -8.076
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.052,
+    "dHandL": 0.002,
+    "dHandR": 0.144,
+    "wellHL": 0.051,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.143
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.066,
+   -2.289,
+   -8.06
+  ],
+  "hR": [
+   0.068,
+   -2.195,
+   -8.076
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.01,
+    "dHandR": 0.101,
+    "wellHL": 0.01,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.095
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.064,
+   -2.097,
+   -8.104
+  ],
+  "hR": [
+   0.069,
+   -2.194,
+   -8.077
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.202,
+    "dHandR": 0.101,
+    "wellHL": 0.202,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.101
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.065,
+   -2.105,
+   -8.145
+  ],
+  "hR": [
+   0.069,
+   -2.192,
+   -8.077
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.206,
+    "dHandR": 0.101,
+    "wellHL": 0.206,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.11
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.065,
+   -2.111,
+   -8.173
+  ],
+  "hR": [
+   0.069,
+   -2.191,
+   -8.078
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.213,
+    "dHandR": 0.101,
+    "wellHL": 0.213,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.124
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.002,
+   -2.191,
+   -8.068
+  ],
+  "hR": [
+   0.07,
+   -2.19,
+   -8.079
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.122,
+    "dHandR": 0.101,
+    "wellHL": 0.122,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.069
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0,
+  "started": true,
+  "hL": [
+   -0.186,
+   -2.184,
+   -8.052
+  ],
+  "hR": [
+   0.291,
+   -2.189,
+   -8.107
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.492,
+    "dHandR": 0.101,
+    "wellHL": 0.492,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.489,
+    "wellHL": 0.101,
+    "wellHR": 0.489,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   -0.186,
+   -2.184,
+   -8.051
+  ],
+  "hR": [
+   0.273,
+   -2.182,
+   -8.129
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.475,
+    "dHandR": 0.101,
+    "wellHL": 0.475,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.465
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.481,
+    "wellHL": 0.101,
+    "wellHR": 0.481,
+    "gripHR": 0.465,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   -0.186,
+   -2.185,
+   -8.051
+  ],
+  "hR": [
+   0.166,
+   -2.153,
+   -8.297
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.404,
+    "dHandR": 0.101,
+    "wellHL": 0.404,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.43
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.464,
+    "wellHL": 0.101,
+    "wellHR": 0.464,
+    "gripHR": 0.43,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.185,
+   -2.185,
+   -8.05
+  ],
+  "hR": [
+   0.148,
+   -2.152,
+   -8.328
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.401,
+    "dHandR": 0.101,
+    "wellHL": 0.401,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.435
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.47,
+    "wellHL": 0.101,
+    "wellHR": 0.47,
+    "gripHR": 0.435,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.185,
+   -2.186,
+   -8.05
+  ],
+  "hR": [
+   0.193,
+   -2.158,
+   -8.249
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.414,
+    "dHandR": 0.101,
+    "wellHL": 0.414,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.429
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.46,
+    "wellHL": 0.101,
+    "wellHR": 0.46,
+    "gripHR": 0.429,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   -0.182,
+   -2.185,
+   -8.056
+  ],
+  "hR": [
+   0.291,
+   -2.192,
+   -8.105
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.49,
+    "dHandR": 0.101,
+    "wellHL": 0.49,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.476
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.492,
+    "wellHL": 0.101,
+    "wellHR": 0.492,
+    "gripHR": 0.476,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   -0.109,
+   -2.155,
+   -8.226
+  ],
+  "hR": [
+   0.292,
+   -2.193,
+   -8.105
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.45,
+    "dHandR": 0.101,
+    "wellHL": 0.45,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.42
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.413,
+    "wellHL": 0.101,
+    "wellHR": 0.413,
+    "gripHR": 0.42,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   -0.082,
+   -2.152,
+   -8.298
+  ],
+  "hR": [
+   0.292,
+   -2.194,
+   -8.104
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.457,
+    "dHandR": 0.101,
+    "wellHL": 0.457,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.423
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.401,
+    "wellHL": 0.101,
+    "wellHR": 0.401,
+    "gripHR": 0.423,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   -0.098,
+   -2.155,
+   -8.254
+  ],
+  "hR": [
+   0.292,
+   -2.195,
+   -8.104
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.451,
+    "dHandR": 0.101,
+    "wellHL": 0.451,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.419
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.407,
+    "wellHL": 0.101,
+    "wellHR": 0.407,
+    "gripHR": 0.419,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   -0.18,
+   -2.19,
+   -8.055
+  ],
+  "hR": [
+   0.292,
+   -2.197,
+   -8.103
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.489,
+    "dHandR": 0.101,
+    "wellHL": 0.489,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.475
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.491,
+    "wellHL": 0.101,
+    "wellHR": 0.491,
+    "gripHR": 0.475,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "pistol",
+  "aki": true,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   -0.185,
+   -2.194,
+   -8.046
+  ],
+  "hR": [
+   0.292,
+   -2.198,
+   -8.103
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.492,
+    "dHandR": 0.101,
+    "wellHL": 0.492,
+    "wellHR": 0.101,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.101,
+    "dHandR": 0.491,
+    "wellHL": 0.101,
+    "wellHR": 0.491,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.103,
+   -2.232,
+   -8.047
+  ],
+  "hR": [
+   0.104,
+   -2.271,
+   -8.163
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.224,
+    "dHandR": 0.144,
+    "wellHL": 0.224,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.122
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.104,
+   -2.406,
+   -8.153
+  ],
+  "hR": [
+   0.111,
+   -2.272,
+   -8.157
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.016,
+    "dHandR": 0.144,
+    "wellHL": 0.016,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.134
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.082,
+   -2.43,
+   -8.149
+  ],
+  "hR": [
+   0.113,
+   -2.271,
+   -8.156
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.041,
+    "dHandL": 0.003,
+    "dHandR": 0.162,
+    "wellHL": 0.041,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.162
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.052,
+   -2.24,
+   -8.22
+  ],
+  "hR": [
+   0.112,
+   -2.27,
+   -8.157
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.256,
+    "dHandL": 0.003,
+    "dHandR": 0.179,
+    "wellHL": 0.255,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.178
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.02,
+   -2.282,
+   -8.203
+  ],
+  "hR": [
+   0.112,
+   -2.269,
+   -8.157
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.2,
+    "dHandL": 0.003,
+    "dHandR": 0.141,
+    "wellHL": 0.199,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.14
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.08,
+   -2.433,
+   -8.153
+  ],
+  "hR": [
+   0.112,
+   -2.268,
+   -8.158
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.046,
+    "dHandL": 0.003,
+    "dHandR": 0.168,
+    "wellHL": 0.046,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.168
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.103,
+   -2.399,
+   -8.151
+  ],
+  "hR": [
+   0.112,
+   -2.268,
+   -8.158
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.02,
+    "dHandR": 0.144,
+    "wellHL": 0.02,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.132
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.114,
+   -2.325,
+   -8.105
+  ],
+  "hR": [
+   0.111,
+   -2.267,
+   -8.159
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.094,
+    "dHandR": 0.144,
+    "wellHL": 0.094,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.079
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.108,
+   -2.206,
+   -8.053
+  ],
+  "hR": [
+   0.111,
+   -2.267,
+   -8.159
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.224,
+    "dHandR": 0.144,
+    "wellHL": 0.224,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.122
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.107,
+   -2.206,
+   -8.053
+  ],
+  "hR": [
+   0.11,
+   -2.266,
+   -8.16
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.224,
+    "dHandR": 0.144,
+    "wellHL": 0.224,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.122
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.102,
+   -2.221,
+   -8.051
+  ],
+  "hR": [
+   0.103,
+   -2.263,
+   -8.166
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.224,
+    "dHandR": 0.144,
+    "wellHL": 0.224,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.122
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0,
+  "started": true,
+  "hL": [
+   -0.157,
+   -2.272,
+   -8.091
+  ],
+  "hR": [
+   0.312,
+   -2.269,
+   -8.194
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.504,
+    "dHandR": 0.144,
+    "wellHL": 0.504,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.499,
+    "wellHL": 0.144,
+    "wellHR": 0.499,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   -0.158,
+   -2.273,
+   -8.09
+  ],
+  "hR": [
+   0.293,
+   -2.247,
+   -8.206
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.48,
+    "dHandR": 0.144,
+    "wellHL": 0.48,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.466
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.502,
+    "wellHL": 0.144,
+    "wellHR": 0.502,
+    "gripHR": 0.466,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   -0.158,
+   -2.275,
+   -8.09
+  ],
+  "hR": [
+   0.183,
+   -2.127,
+   -8.329
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.386,
+    "dHandR": 0.144,
+    "wellHL": 0.386,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.442
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.519,
+    "wellHL": 0.144,
+    "wellHR": 0.519,
+    "gripHR": 0.442,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.158,
+   -2.276,
+   -8.09
+  ],
+  "hR": [
+   0.164,
+   -2.112,
+   -8.356
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.38,
+    "dHandR": 0.144,
+    "wellHL": 0.38,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.449
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.53,
+    "wellHL": 0.144,
+    "wellHR": 0.53,
+    "gripHR": 0.449,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.158,
+   -2.278,
+   -8.089
+  ],
+  "hR": [
+   0.21,
+   -2.156,
+   -8.29
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.4,
+    "dHandR": 0.144,
+    "wellHL": 0.4,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.437
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.507,
+    "wellHL": 0.144,
+    "wellHR": 0.507,
+    "gripHR": 0.437,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   -0.155,
+   -2.272,
+   -8.094
+  ],
+  "hR": [
+   0.31,
+   -2.274,
+   -8.191
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.501,
+    "dHandR": 0.144,
+    "wellHL": 0.501,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.476
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.506,
+    "wellHL": 0.144,
+    "wellHR": 0.506,
+    "gripHR": 0.476,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   -0.085,
+   -2.152,
+   -8.237
+  ],
+  "hR": [
+   0.31,
+   -2.274,
+   -8.19
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.485,
+    "dHandR": 0.144,
+    "wellHL": 0.485,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.416
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.402,
+    "wellHL": 0.144,
+    "wellHR": 0.402,
+    "gripHR": 0.416,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   -0.059,
+   -2.117,
+   -8.303
+  ],
+  "hR": [
+   0.31,
+   -2.275,
+   -8.19
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.497,
+    "dHandR": 0.144,
+    "wellHL": 0.497,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.417
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.379,
+    "wellHL": 0.144,
+    "wellHR": 0.379,
+    "gripHR": 0.417,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   -0.075,
+   -2.139,
+   -8.262
+  ],
+  "hR": [
+   0.31,
+   -2.275,
+   -8.19
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.489,
+    "dHandR": 0.144,
+    "wellHL": 0.489,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.415
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.391,
+    "wellHL": 0.144,
+    "wellHR": 0.391,
+    "gripHR": 0.415,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   -0.156,
+   -2.274,
+   -8.095
+  ],
+  "hR": [
+   0.309,
+   -2.276,
+   -8.189
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.5,
+    "dHandR": 0.144,
+    "wellHL": 0.5,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.474
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.504,
+    "wellHL": 0.144,
+    "wellHR": 0.504,
+    "gripHR": 0.474,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "uzi",
+  "aki": true,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   -0.16,
+   -2.282,
+   -8.088
+  ],
+  "hR": [
+   0.309,
+   -2.276,
+   -8.189
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.502,
+    "dHandR": 0.144,
+    "wellHL": 0.502,
+    "wellHR": 0.144,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.144,
+    "dHandR": 0.502,
+    "wellHL": 0.144,
+    "wellHR": 0.502,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.243,
+   -2.139,
+   -7.892
+  ],
+  "hR": [
+   0.25,
+   -2.217,
+   -8.185
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.274,
+    "dHandR": 0.15,
+    "wellHL": 0.274,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.302
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.252,
+   -2.288,
+   -8.068
+  ],
+  "hR": [
+   0.252,
+   -2.167,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.006,
+    "dHandL": 0.015,
+    "dHandR": 0.155,
+    "wellHL": 0.021,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.164
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.218,
+   -2.263,
+   -8.052
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.226,
+    "dHandL": 0.214,
+    "dHandR": 0.353,
+    "wellHL": 0.042,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.174
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.122,
+   -2.204,
+   -8.2
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": false,
+    "dWell": 0.226,
+    "dHandL": 0.357,
+    "dHandR": 0.353,
+    "wellHL": 0.195,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.143
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.178,
+   -2.223,
+   -8.133
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.105,
+    "dHandL": 0.002,
+    "dHandR": 0.115,
+    "wellHL": 0.106,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.115
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.265,
+   -2.326,
+   -8.033
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.089,
+    "dHandL": 0.002,
+    "dHandR": 0.231,
+    "wellHL": 0.089,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.23
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.254,
+   -2.244,
+   -8.064
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.002,
+    "dHandR": 0.15,
+    "wellHL": 0.002,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.15
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.254,
+   -2.254,
+   -8.064
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.012,
+    "dHandR": 0.15,
+    "wellHL": 0.012,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.156
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.247,
+   -2.112,
+   -7.971
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.16,
+    "dHandR": 0.15,
+    "wellHL": 0.16,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.213
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.242,
+   -2.008,
+   -7.904
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.18
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.283,
+    "dHandR": 0.15,
+    "wellHL": 0.283,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.31
+   }
+  ]
+ },
+ {
+  "w": "m4",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.242,
+   -2.11,
+   -7.893
+  ],
+  "hR": [
+   0.25,
+   -2.203,
+   -8.183
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.277,
+    "dHandR": 0.15,
+    "wellHL": 0.277,
+    "wellHR": 0.15,
+    "gripHR": 0,
+    "gripHL": 0.305
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.242,
+   -2.105,
+   -7.85
+  ],
+  "hR": [
+   0.25,
+   -2.183,
+   -8.168
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.291,
+    "dHandR": 0.19,
+    "wellHL": 0.291,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.327
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.251,
+   -2.274,
+   -8.021
+  ],
+  "hR": [
+   0.251,
+   -2.133,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.008,
+    "dHandL": 0.012,
+    "dHandR": 0.195,
+    "wellHL": 0.02,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.203
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.216,
+   -2.258,
+   -8.022
+  ],
+  "hR": [
+   0.251,
+   -2.115,
+   -8.168
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.266,
+    "dHandL": 0.249,
+    "dHandR": 0.41,
+    "wellHL": 0.048,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.207
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.119,
+   -2.212,
+   -8.195
+  ],
+  "hR": [
+   0.252,
+   -2.116,
+   -8.168
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": false,
+    "dWell": 0.266,
+    "dHandL": 0.384,
+    "dHandR": 0.41,
+    "wellHL": 0.225,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.167
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.175,
+   -2.226,
+   -8.114
+  ],
+  "hR": [
+   0.252,
+   -2.116,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.127,
+    "dHandL": 0,
+    "dHandR": 0.144,
+    "wellHL": 0.127,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.144
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.264,
+   -2.313,
+   -7.983
+  ],
+  "hR": [
+   0.252,
+   -2.117,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.09,
+    "dHandL": 0,
+    "dHandR": 0.27,
+    "wellHL": 0.09,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.27
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.253,
+   -2.23,
+   -8.014
+  ],
+  "hR": [
+   0.252,
+   -2.117,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0,
+    "dHandR": 0.19,
+    "wellHL": 0,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.19
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.254,
+   -2.24,
+   -8.014
+  ],
+  "hR": [
+   0.252,
+   -2.117,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.01,
+    "dHandR": 0.19,
+    "wellHL": 0.01,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.196
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.246,
+   -2.083,
+   -7.928
+  ],
+  "hR": [
+   0.252,
+   -2.117,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.171,
+    "dHandR": 0.19,
+    "wellHL": 0.171,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.241
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.241,
+   -1.968,
+   -7.866
+  ],
+  "hR": [
+   0.252,
+   -2.117,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.301,
+    "dHandR": 0.19,
+    "wellHL": 0.301,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.335
+   }
+  ]
+ },
+ {
+  "w": "ak",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.242,
+   -2.076,
+   -7.849
+  ],
+  "hR": [
+   0.251,
+   -2.171,
+   -8.164
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.294,
+    "dHandR": 0.19,
+    "wellHL": 0.294,
+    "wellHR": 0.19,
+    "gripHR": 0,
+    "gripHL": 0.33
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.244,
+   -2.15,
+   -7.878
+  ],
+  "hR": [
+   0.252,
+   -2.246,
+   -8.188
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.366,
+    "dHandR": 0.198,
+    "wellHL": 0.366,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.324
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.257,
+   -2.388,
+   -8.078
+  ],
+  "hR": [
+   0.255,
+   -2.197,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.008,
+    "dHandL": 0.012,
+    "dHandR": 0.206,
+    "wellHL": 0.02,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.216
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.219,
+   -2.323,
+   -8.055
+  ],
+  "hR": [
+   0.256,
+   -2.179,
+   -8.178
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.282,
+    "dHandL": 0.31,
+    "dHandR": 0.47,
+    "wellHL": 0.048,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.193
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.117,
+   -2.201,
+   -8.2
+  ],
+  "hR": [
+   0.256,
+   -2.179,
+   -8.178
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": false,
+    "dWell": 0.282,
+    "dHandL": 0.492,
+    "dHandR": 0.47,
+    "wellHL": 0.241,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.142
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.176,
+   -2.25,
+   -8.134
+  ],
+  "hR": [
+   0.256,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.143,
+    "dHandL": 0,
+    "dHandR": 0.116,
+    "wellHL": 0.143,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.116
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.271,
+   -2.43,
+   -8.038
+  ],
+  "hR": [
+   0.257,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.091,
+    "dHandL": 0,
+    "dHandR": 0.288,
+    "wellHL": 0.091,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.288
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.261,
+   -2.345,
+   -8.069
+  ],
+  "hR": [
+   0.257,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0,
+    "dHandR": 0.198,
+    "wellHL": 0,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.198
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.261,
+   -2.355,
+   -8.07
+  ],
+  "hR": [
+   0.257,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.01,
+    "dHandR": 0.198,
+    "wellHL": 0.01,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.207
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.252,
+   -2.158,
+   -7.964
+  ],
+  "hR": [
+   0.257,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.216,
+    "dHandR": 0.198,
+    "wellHL": 0.216,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.216
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.246,
+   -2.014,
+   -7.889
+  ],
+  "hR": [
+   0.257,
+   -2.18,
+   -8.179
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.378,
+    "dHandR": 0.198,
+    "wellHL": 0.378,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.334
+   }
+  ]
+ },
+ {
+  "w": "aa12",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.245,
+   -2.121,
+   -7.878
+  ],
+  "hR": [
+   0.254,
+   -2.233,
+   -8.186
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.37,
+    "dHandR": 0.198,
+    "wellHL": 0.37,
+    "wellHR": 0.198,
+    "gripHR": 0,
+    "gripHL": 0.328
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.245,
+   -2.138,
+   -7.81
+  ],
+  "hR": [
+   0.254,
+   -2.205,
+   -8.146
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.279,
+    "dHandR": 0.13,
+    "wellHL": 0.279,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.343
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.254,
+   -2.222,
+   -8.032
+  ],
+  "hR": [
+   0.255,
+   -2.155,
+   -8.143
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.001,
+    "dHandR": 0.13,
+    "wellHL": 0.001,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.129
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.236,
+   -2.258,
+   -8.043
+  ],
+  "hR": [
+   0.256,
+   -2.132,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.071,
+    "dHandL": 0.001,
+    "dHandR": 0.163,
+    "wellHL": 0.07,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.163
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.092,
+   -2.234,
+   -8.231
+  ],
+  "hR": [
+   0.256,
+   -2.132,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": false,
+    "dWell": 0,
+    "dHandL": 0.264,
+    "dHandR": 0.13,
+    "wellHL": 0.264,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.212
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.187,
+   -2.25,
+   -8.107
+  ],
+  "hR": [
+   0.256,
+   -2.133,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.12,
+    "dHandL": 0.001,
+    "dHandR": 0.142,
+    "wellHL": 0.12,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.141
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.257,
+   -2.222,
+   -8.022
+  ],
+  "hR": [
+   0.256,
+   -2.133,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.03,
+    "dHandL": 0.001,
+    "dHandR": 0.151,
+    "wellHL": 0.03,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.151
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.29,
+   -2.112,
+   -8.12
+  ],
+  "hR": [
+   0.256,
+   -2.133,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.126,
+    "dHandR": 0.13,
+    "wellHL": 0.126,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.046
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.306,
+   -2.006,
+   -8.218
+  ],
+  "hR": [
+   0.256,
+   -2.132,
+   -8.144
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.27,
+    "dHandR": 0.13,
+    "wellHL": 0.27,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.154
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.303,
+   -2.018,
+   -8.283
+  ],
+  "hR": [
+   0.256,
+   -2.132,
+   -8.145
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.311,
+    "dHandR": 0.13,
+    "wellHL": 0.311,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.185
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.306,
+   -2.006,
+   -8.219
+  ],
+  "hR": [
+   0.256,
+   -2.132,
+   -8.145
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.27,
+    "dHandR": 0.13,
+    "wellHL": 0.27,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.154
+   }
+  ]
+ },
+ {
+  "w": "sniper",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.285,
+   -2.084,
+   -8.006
+  ],
+  "hR": [
+   0.255,
+   -2.182,
+   -8.145
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.179,
+    "dHandR": 0.13,
+    "wellHL": 0.179,
+    "wellHR": 0.13,
+    "gripHR": 0,
+    "gripHL": 0.173
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   -0.026,
+   -2.215,
+   -8.065
+  ],
+  "hR": [
+   0.058,
+   -2.187,
+   -8.079
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.111,
+    "dHandR": 0.057,
+    "wellHL": 0.111,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.089
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.087,
+   -2.122,
+   -8.055
+  ],
+  "hR": [
+   0.058,
+   -2.187,
+   -8.079
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.046,
+    "dHandL": 0.029,
+    "dHandR": 0.074,
+    "wellHL": 0.037,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.074
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.085,
+   -2.141,
+   -8.081
+  ],
+  "hR": [
+   0.058,
+   -2.186,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.075,
+    "dHandL": 0.062,
+    "dHandR": 0.095,
+    "wellHL": 0.045,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.053
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.096,
+   -2.223,
+   -8.239
+  ],
+  "hR": [
+   0.058,
+   -2.186,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.071,
+    "dHandL": 0.31,
+    "dHandR": 0.092,
+    "wellHL": 0.259,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.225
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.019,
+   -2.187,
+   -8.17
+  ],
+  "hR": [
+   0.059,
+   -2.186,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.108,
+    "dHandL": 0.228,
+    "dHandR": 0.129,
+    "wellHL": 0.152,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.119
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.096,
+   -2.12,
+   -8.065
+  ],
+  "hR": [
+   0.059,
+   -2.186,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.12,
+    "dHandL": 0.076,
+    "dHandR": 0.151,
+    "wellHL": 0.047,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.077
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.096,
+   -2.12,
+   -8.065
+  ],
+  "hR": [
+   0.059,
+   -2.186,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.103,
+    "dHandL": 0.069,
+    "dHandR": 0.145,
+    "wellHL": 0.047,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.077
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.096,
+   -2.12,
+   -8.065
+  ],
+  "hR": [
+   0.059,
+   -2.187,
+   -8.08
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.063,
+    "dHandL": 0.047,
+    "dHandR": 0.113,
+    "wellHL": 0.047,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.077
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.096,
+   -2.121,
+   -8.065
+  ],
+  "hR": [
+   0.059,
+   -2.187,
+   -8.079
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.035,
+    "dHandL": 0.03,
+    "dHandR": 0.083,
+    "wellHL": 0.047,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.077
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   -0.003,
+   -2.198,
+   -8.058
+  ],
+  "hR": [
+   0.059,
+   -2.188,
+   -8.079
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.027,
+    "dHandL": 0.088,
+    "dHandR": 0.077,
+    "wellHL": 0.084,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.067
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   -0.024,
+   -2.216,
+   -8.064
+  ],
+  "hR": [
+   0.059,
+   -2.188,
+   -8.078
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.044,
+    "dHandL": 0.104,
+    "dHandR": 0.083,
+    "wellHL": 0.111,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.089
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0,
+  "started": true,
+  "hL": [
+   -0.198,
+   -2.199,
+   -8.05
+  ],
+  "hR": [
+   0.28,
+   -2.201,
+   -8.093
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.478,
+    "dHandR": 0.057,
+    "wellHL": 0.478,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.057,
+    "dHandR": 0.486,
+    "wellHL": 0.057,
+    "wellHR": 0.486,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   -0.198,
+   -2.199,
+   -8.049
+  ],
+  "hR": [
+   0.257,
+   -2.214,
+   -8.118
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.046,
+    "dHandL": 0.5,
+    "dHandR": 0.073,
+    "wellHL": 0.456,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.461
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.046,
+    "dHandL": 0.073,
+    "dHandR": 0.426,
+    "wellHL": 0.057,
+    "wellHR": 0.469,
+    "gripHR": 0.461,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   -0.198,
+   -2.199,
+   -8.049
+  ],
+  "hR": [
+   0.099,
+   -2.297,
+   -8.239
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.075,
+    "dHandL": 0.41,
+    "dHandR": 0.095,
+    "wellHL": 0.348,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.366
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.075,
+    "dHandL": 0.095,
+    "dHandR": 0.346,
+    "wellHL": 0.057,
+    "wellHR": 0.396,
+    "gripHR": 0.366,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   -0.198,
+   -2.198,
+   -8.049
+  ],
+  "hR": [
+   0.081,
+   -2.31,
+   -8.256
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.071,
+    "dHandL": 0.402,
+    "dHandR": 0.092,
+    "wellHL": 0.346,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.364
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.071,
+    "dHandL": 0.092,
+    "dHandR": 0.353,
+    "wellHL": 0.057,
+    "wellHR": 0.398,
+    "gripHR": 0.364,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   -0.198,
+   -2.198,
+   -8.05
+  ],
+  "hR": [
+   0.144,
+   -2.274,
+   -8.213
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.108,
+    "dHandL": 0.472,
+    "dHandR": 0.129,
+    "wellHL": 0.372,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.387
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.108,
+    "dHandL": 0.129,
+    "dHandR": 0.331,
+    "wellHL": 0.057,
+    "wellHR": 0.411,
+    "gripHR": 0.387,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   -0.197,
+   -2.2,
+   -8.057
+  ],
+  "hR": [
+   0.28,
+   -2.198,
+   -8.095
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.12,
+    "dHandL": 0.584,
+    "dHandR": 0.151,
+    "wellHL": 0.476,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.478
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.12,
+    "dHandL": 0.151,
+    "dHandR": 0.389,
+    "wellHL": 0.057,
+    "wellHR": 0.481,
+    "gripHR": 0.478,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   -0.172,
+   -2.274,
+   -8.195
+  ],
+  "hR": [
+   0.28,
+   -2.197,
+   -8.096
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.103,
+    "dHandL": 0.562,
+    "dHandR": 0.145,
+    "wellHL": 0.485,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.47
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.103,
+    "dHandL": 0.145,
+    "dHandR": 0.408,
+    "wellHL": 0.057,
+    "wellHR": 0.459,
+    "gripHR": 0.47,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   -0.163,
+   -2.301,
+   -8.237
+  ],
+  "hR": [
+   0.28,
+   -2.196,
+   -8.096
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.063,
+    "dHandL": 0.54,
+    "dHandR": 0.113,
+    "wellHL": 0.497,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.477
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.063,
+    "dHandL": 0.113,
+    "dHandR": 0.443,
+    "wellHL": 0.057,
+    "wellHR": 0.465,
+    "gripHR": 0.477,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   -0.169,
+   -2.283,
+   -8.213
+  ],
+  "hR": [
+   0.28,
+   -2.194,
+   -8.097
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.035,
+    "dHandL": 0.523,
+    "dHandR": 0.083,
+    "wellHL": 0.489,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.472
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.035,
+    "dHandL": 0.083,
+    "dHandR": 0.431,
+    "wellHL": 0.057,
+    "wellHR": 0.461,
+    "gripHR": 0.472,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   -0.194,
+   -2.197,
+   -8.061
+  ],
+  "hR": [
+   0.28,
+   -2.193,
+   -8.098
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.027,
+    "dHandL": 0.459,
+    "dHandR": 0.077,
+    "wellHL": 0.475,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.476
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.027,
+    "dHandL": 0.077,
+    "dHandR": 0.498,
+    "wellHL": 0.057,
+    "wellHR": 0.479,
+    "gripHR": 0.476,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "revolver",
+  "aki": true,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   -0.197,
+   -2.191,
+   -8.052
+  ],
+  "hR": [
+   0.28,
+   -2.192,
+   -8.098
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.044,
+    "dHandL": 0.443,
+    "dHandR": 0.083,
+    "wellHL": 0.478,
+    "wellHR": 0.057,
+    "gripHR": 0,
+    "gripHL": 0.48
+   },
+   {
+    "gi": 1,
+    "magShown": true,
+    "dWell": 0.044,
+    "dHandL": 0.083,
+    "dHandR": 0.526,
+    "wellHL": 0.057,
+    "wellHR": 0.486,
+    "gripHR": 0.48,
+    "gripHL": 0
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.244,
+   -2.157,
+   -7.907
+  ],
+  "hR": [
+   0.251,
+   -2.205,
+   -8.172
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.078,
+    "gripHR": 0,
+    "gripHL": 0.27
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.229,
+   -2.093,
+   -7.945
+  ],
+  "hR": [
+   0.253,
+   -2.159,
+   -8.169
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.052,
+    "gripHR": 0,
+    "gripHL": 0.234
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.128,
+   -2.191,
+   -8.167
+  ],
+  "hR": [
+   0.253,
+   -2.15,
+   -8.169
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.248,
+    "gripHR": 0,
+    "gripHL": 0.131
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.096,
+   -2.227,
+   -8.236
+  ],
+  "hR": [
+   0.253,
+   -2.145,
+   -8.168
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": true,
+    "shellHL": 0,
+    "gripHR": 0,
+    "gripHL": 0.189
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.139,
+   -2.186,
+   -8.164
+  ],
+  "hR": [
+   0.253,
+   -2.142,
+   -8.168
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": true,
+    "shellHL": 0,
+    "gripHR": 0,
+    "gripHL": 0.122
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.236,
+   -2.092,
+   -8.002
+  ],
+  "hR": [
+   0.253,
+   -2.14,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": true,
+    "shellHL": 0,
+    "gripHR": 0,
+    "gripHL": 0.173
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.262,
+   -2.068,
+   -7.958
+  ],
+  "hR": [
+   0.253,
+   -2.141,
+   -8.167
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": true,
+    "shellHL": 0.024,
+    "gripHR": 0,
+    "gripHL": 0.222
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.262,
+   -2.074,
+   -7.956
+  ],
+  "hR": [
+   0.253,
+   -2.145,
+   -8.166
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": true,
+    "shellHL": 0.001,
+    "gripHR": 0,
+    "gripHL": 0.222
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.257,
+   -2.077,
+   -7.943
+  ],
+  "hR": [
+   0.252,
+   -2.15,
+   -8.165
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.041,
+    "gripHR": 0,
+    "gripHL": 0.234
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.245,
+   -2.072,
+   -7.91
+  ],
+  "hR": [
+   0.252,
+   -2.155,
+   -8.165
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.077,
+    "gripHR": 0,
+    "gripHL": 0.268
+   }
+  ]
+ },
+ {
+  "w": "shotgun",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.243,
+   -2.139,
+   -7.902
+  ],
+  "hR": [
+   0.251,
+   -2.194,
+   -8.166
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "shellShown": false,
+    "shellHL": 0.078,
+    "gripHR": 0,
+    "gripHL": 0.27
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.242,
+   -2.2,
+   -7.876
+  ],
+  "hR": [
+   0.25,
+   -2.216,
+   -8.201
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0,
+    "dHandL": 0.22,
+    "dHandR": 0.125,
+    "wellHL": 0.22,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.325
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.232,
+   -2.117,
+   -7.907
+  ],
+  "hR": [
+   0.253,
+   -2.169,
+   -8.195
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.056,
+    "dHandL": 0.196,
+    "dHandR": 0.144,
+    "wellHL": 0.189,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.293
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.143,
+   -2.186,
+   -8.127
+  ],
+  "hR": [
+   0.254,
+   -2.158,
+   -8.194
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.093,
+    "dHandL": 0.214,
+    "dHandR": 0.165,
+    "wellHL": 0.123,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.133
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.099,
+   -2.232,
+   -8.234
+  ],
+  "hR": [
+   0.254,
+   -2.159,
+   -8.194
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.083,
+    "dHandL": 0.297,
+    "dHandR": 0.159,
+    "wellHL": 0.228,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.176
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.15,
+   -2.211,
+   -8.198
+  ],
+  "hR": [
+   0.254,
+   -2.159,
+   -8.193
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.085,
+    "dHandL": 0.232,
+    "dHandR": 0.157,
+    "wellHL": 0.165,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.116
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.31,
+   -2.142,
+   -8.087
+  ],
+  "hR": [
+   0.254,
+   -2.16,
+   -8.193
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.09,
+    "dHandL": 0.06,
+    "dHandR": 0.153,
+    "wellHL": 0.075,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.121
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.335,
+   -2.132,
+   -8.069
+  ],
+  "hR": [
+   0.254,
+   -2.16,
+   -8.193
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.096,
+    "dHandL": 0.061,
+    "dHandR": 0.149,
+    "wellHL": 0.099,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.15
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.335,
+   -2.133,
+   -8.069
+  ],
+  "hR": [
+   0.254,
+   -2.161,
+   -8.192
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.1,
+    "dHandL": 0.062,
+    "dHandR": 0.146,
+    "wellHL": 0.099,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.15
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.324,
+   -2.127,
+   -8.044
+  ],
+  "hR": [
+   0.254,
+   -2.161,
+   -8.192
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.102,
+    "dHandL": 0.083,
+    "dHandR": 0.146,
+    "wellHL": 0.097,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.167
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.249,
+   -2.129,
+   -7.898
+  ],
+  "hR": [
+   0.253,
+   -2.18,
+   -8.192
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.061,
+    "dHandL": 0.21,
+    "dHandR": 0.13,
+    "wellHL": 0.195,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.299
+   }
+  ]
+ },
+ {
+  "w": "launcher",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.243,
+   -2.193,
+   -7.872
+  ],
+  "hR": [
+   0.251,
+   -2.215,
+   -8.196
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "magShown": true,
+    "dWell": 0.036,
+    "dHandL": 0.221,
+    "dHandR": 0.128,
+    "wellHL": 0.22,
+    "wellHR": 0.125,
+    "gripHR": 0,
+    "gripHL": 0.325
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0,
+  "started": true,
+  "hL": [
+   0.158,
+   -2.451,
+   -8.134
+  ],
+  "hR": [
+   0.162,
+   -2.409,
+   -8.338
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.209
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.1,
+  "started": true,
+  "hL": [
+   0.165,
+   -2.462,
+   -8.133
+  ],
+  "hR": [
+   0.162,
+   -2.409,
+   -8.338
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.212
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.2,
+  "started": true,
+  "hL": [
+   0.156,
+   -2.475,
+   -8.135
+  ],
+  "hR": [
+   0.162,
+   -2.41,
+   -8.338
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.213
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.3,
+  "started": true,
+  "hL": [
+   0.099,
+   -2.549,
+   -8.197
+  ],
+  "hR": [
+   0.162,
+   -2.411,
+   -8.338
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.207
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.4,
+  "started": true,
+  "hL": [
+   0.015,
+   -2.575,
+   -8.269
+  ],
+  "hR": [
+   0.161,
+   -2.412,
+   -8.338
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.229
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.5,
+  "started": true,
+  "hL": [
+   0.099,
+   -2.551,
+   -8.197
+  ],
+  "hR": [
+   0.161,
+   -2.413,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.207
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.6,
+  "started": true,
+  "hL": [
+   0.151,
+   -2.482,
+   -8.13
+  ],
+  "hR": [
+   0.161,
+   -2.413,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.218
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.7,
+  "started": true,
+  "hL": [
+   0.157,
+   -2.472,
+   -8.121
+  ],
+  "hR": [
+   0.161,
+   -2.414,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.223
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.8,
+  "started": true,
+  "hL": [
+   0.164,
+   -2.466,
+   -8.126
+  ],
+  "hR": [
+   0.161,
+   -2.414,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.217
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.9,
+  "started": true,
+  "hL": [
+   0.162,
+   -2.473,
+   -8.136
+  ],
+  "hR": [
+   0.161,
+   -2.415,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.209
+   }
+  ]
+ },
+ {
+  "w": "minigun",
+  "aki": false,
+  "u": 0.97,
+  "started": true,
+  "hL": [
+   0.165,
+   -2.466,
+   -8.131
+  ],
+  "hR": [
+   0.161,
+   -2.415,
+   -8.337
+  ],
+  "guns": [
+   {
+    "gi": 0,
+    "gripHR": 0,
+    "gripHL": 0.212
+   }
+  ]
+ }
+]

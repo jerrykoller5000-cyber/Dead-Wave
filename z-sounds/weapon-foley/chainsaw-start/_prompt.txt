@@ -1,0 +1,9 @@
+#58 weapon-foley/chainsaw-start
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: chainsawStart()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A chainsaw pull-started: a cord yank, the engine catching and sputtering into idle. No music, no voice.

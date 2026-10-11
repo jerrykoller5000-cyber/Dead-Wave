@@ -1,0 +1,9 @@
+#112 hq/flare-burst
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: flareBurst()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A signal flare bursting high in the sky, a soft pop and a crackling fizz. No music, no voice.

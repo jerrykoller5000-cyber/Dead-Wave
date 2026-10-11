@@ -1,0 +1,10 @@
+PASS TT.gaitDbg is exported
+PASS the studio walk and run clips are loaded
+PASS the gait samples the clip (thigh 0.05, knee 0.04)
+PASS walking, the clip has the legs (weight 1.00, run 0.00)
+PASS the legs swing through the cycle (thigh range 0.98 rad)
+PASS walking, the lowest sole is not in the ground (-0.058 m)
+PASS running, the run clip takes over (run 1.00)
+PASS running, the lowest sole is not in the ground (0.026 m)
+PASS crouch-walking, the crouch keeps the legs (clip weight 0.00)
+PASS with the clips off the old gait has the legs

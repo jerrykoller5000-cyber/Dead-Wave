@@ -1,0 +1,9 @@
+#105 build-attacks-sand-hit
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Zombie fists punching sandbags: a muffled soft thump and sand hissing. No voice, no music.
+
+In the game: buildHit('sand')

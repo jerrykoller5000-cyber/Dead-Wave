@@ -1,0 +1,41 @@
+PASS TT.reloadClipDbg is exported
+PASS the reload clip is loaded for the GW-4, KR-7 and Breacher-12
+PASS m4: the reload runs the clip
+PASS m4: starts on the forend (0.000 m)
+PASS m4: then at the magazine (0.020 m)
+PASS m4: at the pouch (0.036 m)
+PASS m4: the carrier's pouch (torso height 0.265)
+PASS m4: the hand swings out in front of the body (nearest 0.366 m in front of the torso's pivot)
+PASS m4: the empty drops
+PASS m4: and is gone
+PASS m4: the new one is out, in his hand
+PASS m4: the magazine's foot is in his palm (0.000 m)
+PASS m4: the hand is on the path (0.000 m)
+PASS m4: seated
+PASS m4: back on the forend (0.000 m)
+PASS ak: the reload runs the clip
+PASS ak: starts on the forend (0.000 m)
+PASS ak: then at the magazine (0.020 m)
+PASS ak: at the pouch (0.036 m)
+PASS ak: the carrier's pouch (torso height 0.265)
+PASS ak: the hand swings out in front of the body (nearest 0.365 m in front of the torso's pivot)
+PASS ak: the empty drops
+PASS ak: and is gone
+PASS ak: the new one is out, in his hand
+PASS ak: the magazine's foot is in his palm (0.000 m)
+PASS ak: the hand is on the path (0.000 m)
+PASS ak: seated
+PASS ak: back on the forend (0.000 m)
+PASS aa12: the reload runs the clip
+PASS aa12: starts on the forend (0.000 m)
+PASS aa12: then at the magazine (0.020 m)
+PASS aa12: at the pouch (0.036 m)
+PASS aa12: the carrier's pouch (torso height 0.265)
+PASS aa12: the hand swings out in front of the body (nearest 0.365 m in front of the torso's pivot)
+PASS aa12: the empty drops
+PASS aa12: and is gone
+PASS aa12: the new one is out, in his hand
+PASS aa12: the magazine's foot is in his palm (0.000 m)
+PASS aa12: the hand is on the path (0.000 m)
+PASS aa12: seated
+PASS aa12: back on the forend (0.000 m)

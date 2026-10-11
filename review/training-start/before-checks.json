@@ -1,0 +1,32 @@
+{
+  "initial": {
+    "owned": {
+      "pistol": true,
+      "minigun": true,
+      "m4": true,
+      "ak": true,
+      "uzi": true,
+      "shotgun": true,
+      "aa12": true,
+      "revolver": true,
+      "sniper": true,
+      "launcher": true,
+      "flamer": true,
+      "chainsaw": true
+    },
+    "gear": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true,
+      "laser": true,
+      "flashlight": true
+    },
+    "armor": 90,
+    "current": "pistol",
+    "cash": 999999,
+    "machete": true,
+    "grenades": 3
+  },
+  "errors": []
+}

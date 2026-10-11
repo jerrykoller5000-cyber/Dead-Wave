@@ -1,0 +1,20 @@
+{
+  "command": "node review/watchman-menu/check.mjs",
+  "selected": "m240",
+  "placed": false,
+  "refusals": {
+    "cannot be built": 3721
+  },
+  "player": [
+    0,
+    -3.1686761379241943,
+    -8.5
+  ],
+  "training": false,
+  "source": "Observed actual match tryPlace diagnostic stdout; BUILD_RULES lacks m240",
+  "focusedTests": {
+    "command": "npm test -- t18 t141 t211 t215 --jobs 2 --all-fails --no-retry",
+    "passed": 44,
+    "failed": 0
+  }
+}

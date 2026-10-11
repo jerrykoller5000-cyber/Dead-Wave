@@ -1,0 +1,3 @@
+Night 5: The First Nest
+Used for: The wave on night 5
+The game plays now: assets/soundtrack/fight_night05_sections

@@ -1,0 +1,39 @@
+{
+  "before": true,
+  "readyMs": 14000,
+  "models": [],
+  "guardian": [
+    {
+      "kind": "guardian",
+      "valid": true,
+      "eyes": 6,
+      "meshes": 150,
+      "vertices": 12454,
+      "triangles": 5808,
+      "finite": true
+    },
+    {
+      "kind": "caveguard",
+      "valid": true,
+      "eyes": 6,
+      "meshes": 150,
+      "vertices": 12454,
+      "triangles": 5808,
+      "finite": true
+    }
+  ],
+  "horde": {
+    "spawnMs": 106.5,
+    "meshes": 841,
+    "triangles": 103392,
+    "onScreen": 48
+  },
+  "perf": {
+    "fps": 13.915649754865472,
+    "low": 10.881392821103729,
+    "worst": 91.89999997615814,
+    "hitches": 93,
+    "frames": 13
+  },
+  "errors": []
+}

@@ -1,0 +1,9 @@
+#164 ui/wave-start  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: waveStart()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A deep ominous horn blast signalling an attack, with a heavy drum hit under it.

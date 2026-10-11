@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8"><title>Zombie voice revision verification</title>
+<script type="module">
+let seq=0;
+const b64=f=>{const u=new Uint8Array(f.buffer);let s='';for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode(...u.subarray(i,i+32768));return btoa(s);};
+const heavy=type=>['brute','demon','colossus','guardian'].includes(type);
+function cue(A,type,state){
+  if(state==='hurt')A.zombieHit(1,0,false,type);
+  else if(state==='death')A.zombieDeath(1,0,heavy(type),type);
+  else if(state==='step')A.deadStep(type,1,0,0);
+  else A.zombieVoice(type,state,1,0);
+}
+window.renderZombie=async(type,state,before=false,training=false,mixed=false)=>{
+  const random=Math.random;let seed=176;Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const seconds=mixed?4.5:3.5;
+  let oc;window.AudioContext=function(){oc=new OfflineAudioContext(2,Math.ceil(48000*seconds),48000);return oc;};window.webkitAudioContext=window.AudioContext;
+  let url='/core/audio.js?zombieReviewV2='+ ++seq,profileUrl;
+  if(before){
+    profileUrl=URL.createObjectURL(new Blob([await(await fetch('before-profiles.txt')).text()],{type:'text/javascript'}));
+    const source=(await(await fetch('before-core.txt')).text())
+      .replace("'../ui/zombie-audio.js'",JSON.stringify(profileUrl))
+      .replace("'../ui/training-audio.js'",JSON.stringify(location.origin+'/ui/training-audio.js'))
+      .replace("'./gunsynth.js'",JSON.stringify(location.origin+'/core/gunsynth.js'))
+      .replace("new URL('./gunsynth-worker.js', import.meta.url)",JSON.stringify(location.origin+'/core/gunsynth-worker.js'));
+    url=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));
+  }
+  try{
+    const A=(await import(url)).AudioSys;A.setMuted(true);A.emptyClick();A.setMuted(false);A.setMusicVolume(0);
+    await new Promise(r=>setTimeout(r,50));
+    if(training)A.setTraining(true);
+    const types=mixed?type:[type],gap=state==='death'?.045:.11;
+    const scheduled=types.map((kind,i)=>({kind,time:128*Math.ceil((128*20/48000+i*gap)*48000/128)/48000}));
+    const failures=[];
+    for(const event of scheduled)oc.suspend(event.time).then(()=>{
+      try{cue(A,event.kind,state);}catch(e){failures.push(String(e.stack||e));}finally{oc.resume();}
+    });
+    const out=await oc.startRendering();
+    if(failures.length)throw new Error(failures.join('\n'));
+    return {sr:48000,L:b64(out.getChannelData(0)),R:b64(out.getChannelData(1)),counts:{...A.voiceCount},scheduled};
+  }finally{Math.random=random;if(before){URL.revokeObjectURL(url);URL.revokeObjectURL(profileUrl);}}
+};window.ready=true;
+</script>

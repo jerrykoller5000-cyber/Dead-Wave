@@ -1,0 +1,13 @@
+{
+  "t119": {
+    "raw": "PASS the table is game/weaknesses.js's frozen WEAKNESS (13 kinds)\nPASS brute: all six types take the table share\nPASS shambler: all six types take the table share\nPASS feral: all six types take the table share\nPASS leaper: all six types take the table share\nPASS spider: all six types take the table share\nPASS drowned: all six types take the table share\nPASS military: all six types take the table share\nPASS spitter: all six types take the table share\nPASS screamer: all six types take the table share\nPASS bomber: all six types take the table share\nPASS demon: all six types take the table share\nPASS colossus: all six types take the table share\nPASS guardian: weakShare gives its row\nPASS an iron-cave military takes 0.63 of a bullet (0.630)\nPASS a wet-cave demon's fire stays at the floor 0.2 (0.200)\nPASS the burn: brute full, spider and demon their Fire column\nPASS a shock (no type) keeps the flat armour: 0.880 (1 - 0.12)\nPASS no page errors",
+    "pass": 19,
+    "fail": []
+  },
+  "t215": {
+    "raw": "PASS read index.html and the scripts and styles the game loaded (196 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 08:15 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)",
+    "pass": 4,
+    "fail": []
+  },
+  "errors": []
+}

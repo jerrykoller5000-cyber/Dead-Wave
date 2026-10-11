@@ -1,7 +1,8 @@
 // t162 - CL-92 (P-122, D-63): lightning in storms. A shower brings five strikes. With the odds forced: a strike on
 // the marine takes 70 (100 HP leaves 30; at 60 HP it ends the run as 'lightning'); under godmode, nothing; in the
 // insulated boots, nothing, and his boots turn yellow. A strike into a tree sets it burning; a strike among the dead
-// kills those round it. The boots wait at the radio mast and he takes them by walking over them.
+// kills those round it. CL-178: the boots are on the feet of a skeleton on a platform high up the radio mast; he takes
+// them by reaching them (from the ground he can't). Up the mast a strike kills him outright, unless he has the boots.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const errs = []; window.addEventListener('error', (e) => errs.push(String(e.message || e.error)));
@@ -29,7 +30,11 @@
     const boots = L.boots();
     ok(!!boots && boots.visible && boots.name === 'insulated-boots', 'the boots wait by the mast');
     const mast = T.POI.mast;
-    ok(!!mast && Math.hypot(boots.position.x - mast.x, boots.position.z - mast.z) < 3.2, 'at the mast\'s foot (' + Math.hypot(boots.position.x - mast.x, boots.position.z - mast.z).toFixed(1) + ' m)');
+    ok(!!mast && Math.hypot(boots.position.x - mast.x, boots.position.z - mast.z) < 3.2, 'at the mast (' + Math.hypot(boots.position.x - mast.x, boots.position.z - mast.z).toFixed(1) + ' m)');
+    ok(boots.position.y - mast.gy > 10 && !!L.mast().perch, 'high up it, on the skeleton (' + (boots.position.y - mast.gy).toFixed(1) + ' m)');
+    T.player.position.set(boots.position.x, mast.gy + 0.2, boots.position.z);
+    L.update(0.016);
+    ok(!L.worn() && boots.visible, 'from the ground under them, out of reach');
     T.player.position.set(boots.position.x, boots.position.y, boots.position.z);
     L.update(0.016);
     ok(L.worn() && !boots.visible, 'walking over them, he wears them');
@@ -56,6 +61,16 @@
     T.clearZombies(); T.setArmor(0); T.setHp(60);
     L.strike('marine');
     ok(T.getHp() === 0 && T.getDeathCause() === 'lightning', 'at 60 HP it kills him: ' + T.getDeathCause());
+    // CL-178: up the mast. In the boots, nothing; without them, a full-health, full-armour marine dies and lets go.
+    L.odds(null); T.resetGame();
+    await startMatch(T, 'Mast');
+    T.clearZombies(); L.reset();
+    L.wear(); L.climbMast(8); T.setArmor(100); T.setHp(100);
+    const m1 = L.strike('mast');
+    ok(m1.mast && m1.saved && T.getHp() === 100 && L.mast().climb.on, 'up the mast in the boots: nothing (' + T.getHp() + ')');
+    L.leaveMast(); L.reset(); L.climbMast(8); T.setArmor(100); T.setHp(100);
+    const m2 = L.strike('mast');
+    ok(m2.mast && T.getHp() === 0 && T.getDeathCause() === 'lightning' && !L.mast().climb.on, 'up the mast without them: dead, and off the ladder (' + T.getHp() + ')');
     ok(errs.length === 0, 'no errors' + (errs.length ? ': ' + errs[0] : ''));
     L.odds(null);
     T.resetGame();

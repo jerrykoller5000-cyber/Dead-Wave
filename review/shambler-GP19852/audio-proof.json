@@ -1,0 +1,112 @@
+{
+  "synth": [
+    {
+      "kind": "shambler",
+      "early": 0.10178571194410324,
+      "late": 0
+    },
+    {
+      "kind": "feral",
+      "early": 0.09385842084884644,
+      "late": 0
+    },
+    {
+      "kind": "leaper",
+      "early": 0.07677283883094788,
+      "late": 0
+    },
+    {
+      "kind": "brute",
+      "early": 0.21327877044677734,
+      "late": 0
+    },
+    {
+      "kind": "military",
+      "early": 0.08923419564962387,
+      "late": 0
+    },
+    {
+      "kind": "drowned",
+      "early": 0.05658099427819252,
+      "late": 0
+    },
+    {
+      "kind": "spitter",
+      "early": 0.052553676068782806,
+      "late": 0
+    },
+    {
+      "kind": "bomber",
+      "early": 0.07879555225372314,
+      "late": 0
+    },
+    {
+      "kind": "screamer",
+      "early": 0.11177477985620499,
+      "late": 0
+    },
+    {
+      "kind": "spider",
+      "early": 0.06814057379961014,
+      "late": 0
+    },
+    {
+      "kind": "colossus",
+      "early": 0.27149152755737305,
+      "late": 0
+    },
+    {
+      "kind": "demon",
+      "early": 0.1939934492111206,
+      "late": 0
+    },
+    {
+      "kind": "guardian",
+      "early": 0.15281322598457336,
+      "late": 0
+    },
+    {
+      "kind": "caveguard",
+      "early": 0.10039146989583969,
+      "late": 0
+    }
+  ],
+  "takes": [
+    {
+      "id": "zombies/shambler/death",
+      "duration": 5,
+      "pitchedSeconds": 6.801076288794864,
+      "early": 0.11000000685453415,
+      "late": 0
+    },
+    {
+      "id": "zombies/guardian/death",
+      "duration": 5,
+      "pitchedSeconds": 3.7889000321409854,
+      "early": 0.11000000685453415,
+      "late": 0
+    },
+    {
+      "id": "zombies/feral/death",
+      "duration": 0.65,
+      "pitchedSeconds": 0.8260959651465555,
+      "early": 0.11000000685453415,
+      "late": 0
+    },
+    {
+      "id": "zombies/shambler/hurt",
+      "duration": 3,
+      "pitchedSeconds": 2.9353198688229667,
+      "early": 0.11000000685453415,
+      "late": 0.11000000685453415
+    },
+    {
+      "id": "impacts/body-fall",
+      "duration": 3,
+      "pitchedSeconds": 3.022339661063482,
+      "early": 0.11000000685453415,
+      "late": 0.11000000685453415
+    }
+  ],
+  "errors": []
+}

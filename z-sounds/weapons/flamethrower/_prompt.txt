@@ -1,0 +1,9 @@
+#77 weapons/flamethrower
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: flameOn / flameBurst / fireHiss
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A flamethrower spraying a jet of fire, a roaring whoosh with a hissing gas jet, seamless. No music, no voice.

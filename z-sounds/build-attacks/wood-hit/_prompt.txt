@@ -1,0 +1,9 @@
+#101 build-attacks-wood-hit
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Zombie fists pounding a wooden barricade: a heavy thump and wood creaking and splintering a little. No voice, no music.
+
+In the game: buildHit('wood')

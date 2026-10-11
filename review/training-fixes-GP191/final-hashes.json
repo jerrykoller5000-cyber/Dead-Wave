@@ -1,0 +1,14 @@
+[
+  {
+    "path": "index.html",
+    "sha": "71e1111a689260c0f8dd8ca4b41af5ba390134d4ed4140b5d18bed8da0cf6b82"
+  },
+  {
+    "path": "world/training.js",
+    "sha": "f0bde76982f7530aad46578b69a0fc32e5404cd84ba3ac37ecff0442c0b14921"
+  },
+  {
+    "path": "world/training-props.js",
+    "sha": "34f2197de4d5b4815254b14a3dae992cfeba457bd7400ea8991813e5377f3edd"
+  }
+]

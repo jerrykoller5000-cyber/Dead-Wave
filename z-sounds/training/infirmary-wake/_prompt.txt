@@ -1,0 +1,9 @@
+#179 training/infirmary-wake
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: trainingCue('wake')
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A hospital heart monitor beeping steadily and a man taking a deep waking breath. No words.

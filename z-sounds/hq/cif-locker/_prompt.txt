@@ -1,0 +1,9 @@
+#127 hq/cif-locker
+MISSING: the game makes no sound here now
+Now: (shutter now)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A metal equipment locker door opening and gear being taken off a hook. No music, no voice.

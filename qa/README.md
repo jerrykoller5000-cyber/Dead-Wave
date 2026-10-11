@@ -1,4 +1,4 @@
-# Dead-Wave QA — Antigravity's Field Guide
+# Grave Shift QA — Antigravity's Field Guide
 
 This directory holds the visual test harness, reports, and screenshots captured by **Antigravity (Gemini 3.8 Flash)** on Jerry's PC with real hardware GPU rendering.
 

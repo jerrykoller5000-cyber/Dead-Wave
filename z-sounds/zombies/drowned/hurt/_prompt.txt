@@ -1,0 +1,9 @@
+#25 drowned-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short wet gurgling grunt from a drowned zombie when struck, a splash of water in the throat. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('drowned', 'hurt')

@@ -1,0 +1,9 @@
+#147 world/pit-rumble
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: pitRumble()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A deep rumble from under a lake, with large bubbles breaking the surface. No music, no voice.

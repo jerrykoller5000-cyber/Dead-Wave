@@ -1,0 +1,76 @@
+{
+  "loadSec": 17.412,
+  "height": {
+    "active": false,
+    "hits": 0
+  },
+  "cover": {
+    "active": false,
+    "hits": 0,
+    "position": [
+      -30,
+      -200,
+      -631.5
+    ]
+  },
+  "death": {
+    "grabbed": true,
+    "released": true,
+    "travel": 0
+  },
+  "limb": {
+    "grabbed": true,
+    "released": true,
+    "phase": {
+      "phase": "recover",
+      "t": 0,
+      "cd": 5.8,
+      "x": 0,
+      "z": 1,
+      "yaw": 0,
+      "pulled": 0.015119999983880916,
+      "miss": false
+    },
+    "lost": true
+  },
+  "aura": {
+    "self": 0,
+    "ally": 0,
+    "far": 2.7334000000059606,
+    "steam": 1,
+    "afterDeath": 1.7344000000059607
+  },
+  "auraCover": {
+    "burn": 2.732699999988079
+  },
+  "ground": {
+    "out": true,
+    "seconds": 0.681,
+    "patchY": -200,
+    "zombieY": -200
+  },
+  "perf": {
+    "results": [
+      {
+        "on": false,
+        "fps": 59.987145611143966
+      },
+      {
+        "on": true,
+        "fps": 60.352172677961
+      },
+      {
+        "on": false,
+        "fps": 60.15569709837226
+      },
+      {
+        "on": true,
+        "fps": 60.02824858757062
+      }
+    ],
+    "state": null,
+    "lost": false,
+    "grip": false
+  },
+  "errors": []
+}

@@ -1,8 +1,8 @@
 [package]
 name = "dead-wave"
 version = "0.1.0"
-description = "Dead-Wave"
-authors = ["Dead-Wave crew"]
+description = "Grave Shift"
+authors = ["Grave Shift crew"]
 edition = "2021"
 
 [build-dependencies]

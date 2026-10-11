@@ -1,0 +1,170 @@
+[
+ {
+  "target": "build:light",
+  "view": "three",
+  "time": "day",
+  "caption": "Light turret",
+  "out": "review/turrets/light-mk1-three.png"
+ },
+ {
+  "target": "build:light",
+  "view": "side",
+  "time": "day",
+  "caption": "Light turret",
+  "out": "review/turrets/light-mk1-side.png"
+ },
+ {
+  "target": "build:light:1",
+  "view": "three",
+  "time": "day",
+  "caption": "Light turret Mk II",
+  "out": "review/turrets/light-mk2-three.png"
+ },
+ {
+  "target": "build:light:1",
+  "view": "side",
+  "time": "day",
+  "caption": "Light turret Mk II",
+  "out": "review/turrets/light-mk2-side.png"
+ },
+ {
+  "target": "build:light:2",
+  "view": "three",
+  "time": "day",
+  "caption": "Light turret Mk III",
+  "out": "review/turrets/light-mk3-three.png"
+ },
+ {
+  "target": "build:light:2",
+  "view": "side",
+  "time": "day",
+  "caption": "Light turret Mk III",
+  "out": "review/turrets/light-mk3-side.png"
+ },
+ {
+  "target": "build:heavy",
+  "view": "three",
+  "time": "day",
+  "caption": "Heavy turret",
+  "out": "review/turrets/heavy-mk1-three.png"
+ },
+ {
+  "target": "build:heavy",
+  "view": "side",
+  "time": "day",
+  "caption": "Heavy turret",
+  "out": "review/turrets/heavy-mk1-side.png"
+ },
+ {
+  "target": "build:heavy:1",
+  "view": "three",
+  "time": "day",
+  "caption": "Heavy turret Mk II",
+  "out": "review/turrets/heavy-mk2-three.png"
+ },
+ {
+  "target": "build:heavy:1",
+  "view": "side",
+  "time": "day",
+  "caption": "Heavy turret Mk II",
+  "out": "review/turrets/heavy-mk2-side.png"
+ },
+ {
+  "target": "build:heavy:2",
+  "view": "three",
+  "time": "day",
+  "caption": "Heavy turret Mk III",
+  "out": "review/turrets/heavy-mk3-three.png"
+ },
+ {
+  "target": "build:heavy:2",
+  "view": "side",
+  "time": "day",
+  "caption": "Heavy turret Mk III",
+  "out": "review/turrets/heavy-mk3-side.png"
+ },
+ {
+  "target": "build:flame",
+  "view": "three",
+  "time": "day",
+  "caption": "Flame turret",
+  "out": "review/turrets/flame-mk1-three.png"
+ },
+ {
+  "target": "build:flame",
+  "view": "side",
+  "time": "day",
+  "caption": "Flame turret",
+  "out": "review/turrets/flame-mk1-side.png"
+ },
+ {
+  "target": "build:flame:1",
+  "view": "three",
+  "time": "day",
+  "caption": "Flame turret Mk II",
+  "out": "review/turrets/flame-mk2-three.png"
+ },
+ {
+  "target": "build:flame:1",
+  "view": "side",
+  "time": "day",
+  "caption": "Flame turret Mk II",
+  "out": "review/turrets/flame-mk2-side.png"
+ },
+ {
+  "target": "build:flame:2",
+  "view": "three",
+  "time": "day",
+  "caption": "Flame turret Mk III",
+  "out": "review/turrets/flame-mk3-three.png"
+ },
+ {
+  "target": "build:flame:2",
+  "view": "side",
+  "time": "day",
+  "caption": "Flame turret Mk III",
+  "out": "review/turrets/flame-mk3-side.png"
+ },
+ {
+  "target": "build:mortar",
+  "view": "three",
+  "time": "day",
+  "caption": "Mortar",
+  "out": "review/turrets/mortar-mk1-three.png"
+ },
+ {
+  "target": "build:mortar",
+  "view": "side",
+  "time": "day",
+  "caption": "Mortar",
+  "out": "review/turrets/mortar-mk1-side.png"
+ },
+ {
+  "target": "build:mortar:1",
+  "view": "three",
+  "time": "day",
+  "caption": "Mortar Mk II",
+  "out": "review/turrets/mortar-mk2-three.png"
+ },
+ {
+  "target": "build:mortar:1",
+  "view": "side",
+  "time": "day",
+  "caption": "Mortar Mk II",
+  "out": "review/turrets/mortar-mk2-side.png"
+ },
+ {
+  "target": "build:mortar:2",
+  "view": "three",
+  "time": "day",
+  "caption": "Mortar Mk III",
+  "out": "review/turrets/mortar-mk3-three.png"
+ },
+ {
+  "target": "build:mortar:2",
+  "view": "side",
+  "time": "day",
+  "caption": "Mortar Mk III",
+  "out": "review/turrets/mortar-mk3-side.png"
+ }
+]

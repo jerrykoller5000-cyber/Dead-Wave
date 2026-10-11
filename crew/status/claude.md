@@ -4,12 +4,14 @@ state: idle
 model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
 task: —
 touching: —
-since: 2026-10-07T04:45Z
-next: t208's flaky swing check; reviews
+since: 2026-10-10T06:00Z
+next: reviews as they land (AG-64's report, CU-110's suite run, GB-156's t244); the story v3 cards wait for Jerry
 blocked-on: —
-last-report: handoffs/2026-10-07-claude-CL-132.md
+last-report: handoffs/2026-10-10-claude-GP-179-review.md
 
 ## Notes
+
+- 2026-10-10: Jerry's zombie takes: core/takes.js + hooks at the top of each zombie sound in core/audio.js (CL-148); z-sounds/listen.html to audition; /__zsounds in both servers. Running a tNNN that needs the real renderer: a camera eval of tools/tests/lib.js + the test (`const __p = <test>; return await __p;`), after a reload (t244 that way). A python str.replace with a trailing comment ate a `ledge.rotation.y` once (CL-146): put comments on their own line.
 
 - Test ids: check tools/tests for tNNN.js before naming a new one (I overwrote Grokbot's twice on 2026-10-05).
 

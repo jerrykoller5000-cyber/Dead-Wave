@@ -1,4 +1,4 @@
-"""Dead-Wave · day 1's calm music in First Blood's voices (CL-47).
+"""Grave Shift · day 1's calm music in First Blood's voices (CL-47).
 
 Jerry's orders: chiptune is the way, and day 1's music as good as it can be. The fights and the
 stings were already chip; the menu and the prep music were the older synth tracks, so day 1

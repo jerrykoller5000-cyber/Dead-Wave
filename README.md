@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/images/dead-wave-key-art.jpg" alt="Dead-Wave key art: a blocky marine firing a rifle from behind a crate as glowing-eyed zombies close in under a red moon" width="560">
+  <img src="docs/images/dead-wave-key-art.jpg" alt="Grave Shift key art: a blocky marine firing a rifle from behind a crate as glowing-eyed zombies close in under a red moon" width="560">
 </p>
 
-# Dead-Wave
+# Grave Shift
 
 A third-person zombie survival game. You are one Gravewalker of the PGB (the Paranormal Ground Branch), dropped into a
 forest valley ringed by mountains where FOB Threshold went dark three weeks ago. Hold the base through twenty nights of

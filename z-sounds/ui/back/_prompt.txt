@@ -1,0 +1,9 @@
+#161 ui/back
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soft low interface click for closing a menu. No music.

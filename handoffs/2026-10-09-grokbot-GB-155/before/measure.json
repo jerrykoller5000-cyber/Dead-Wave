@@ -1,0 +1,24 @@
+{
+ "menu": {
+  "title": "Dead Wave",
+  "wordmark": "DEAD / WAVE",
+  "w": 1050,
+  "h": 237,
+  "right": 1165,
+  "parentRight": 1280,
+  "vw": 1280
+ },
+ "hud": {
+  "text": "DEAD WAVE",
+  "w": 218,
+  "h": 19,
+  "parentW": 248,
+  "overflow": false
+ },
+ "hudPanel": [
+  16,
+  14,
+  248,
+  160
+ ]
+}

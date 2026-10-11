@@ -1,0 +1,15 @@
+PASS slide front (310.0 mm) flush with the barrel crown (315.0 mm): crown 5.0 mm proud
+PASS nothing but the barrel in front of the slide (widest part ahead of it 14.5 mm from the bore)
+PASS the muzzle point is unchanged (0, 50, 320 mm) and at the crown (5.0 mm ahead)
+PASS the frame's dust cover runs on under the slide (front 272.0 mm, 38.0 mm short of the slide's front)
+PASS the front sight rides at the slide's front (22.0 mm back)
+PASS regular: the magazine is inside the grip above its bottom (worst 3.0 mm in; 84 points)
+PASS regular: it sits on the grip's rake (its middle drifts 0.0 mm from top to bottom)
+PASS regular: the regular baseplate closes the grip's bottom (12.0 mm below it)
+PASS extended: the magazine is inside the grip above its bottom (worst 8.5 mm in; 66 points)
+PASS extended: it grows only down its own axis, on the grip's rake (tilt 0.250, scale 1.00/1.48/1.00)
+PASS extended: the extended magazine comes out below the grip (102.4 mm below it)
+PASS extended reaches 90.4 mm further below than the regular one
+PASS the pistol can is fatter: 55.0 mm across (CL-95 had 44.0 mm; +25%)
+PASS the can is on the bore line
+PASS its back face (312.0 mm) is on the crown, in front of the slide (310.0 mm)

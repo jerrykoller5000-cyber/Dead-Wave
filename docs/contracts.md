@@ -970,3 +970,66 @@ the offerings; `TT.updateFirstPeople(dt, { night, silenced })` drives the carvin
   `dw-game` bus. Ids now: `'buildUpgrade'` (`tips.building.upgrade`, the first build with an upgrade track) and
   `'grenadeHold'` (`tips.combat.grenadeHold`, the first G hold). ChatGPT may take a tip into the coach panel by
   listening for `tip-shown`; the key names the line. Test: t212.
+
+## The marine's smoothing (CL-133; Jerry, 2026-10-08: "smooth and fluid")
+
+- Every ease in the player's code is frame-rate free: `_lerpK(rate, dt)` (the share of the way to go) and
+  `_decayK(rate, dt)` (what is left of a kick), both `e^(-rate dt)`. Never `Math.min(1, dt * rate)` on the marine, his
+  gun or his camera again: it lands in a different time at 30, 60 and 144 Hz and snaps whole on a slow frame.
+- `MOVE_FEEL` holds the knobs: the wish (the wanted velocity is eased before the velocity follows it; `wishVX/Z`), the
+  step glide (a rise of his root the ground does not explain is given back over a few frames; `POSE.stepGlide`), the
+  camera's look height (`camLookYS`), the run blend (`POSE.gaitRun`, now the one weight for cadence, stride, knees, lean
+  and the gun's bounce), his body's pitch into the water, and the cross-fade lengths per pose state.
+- `poseXfade(key, dt)` runs LAST in updateMarinePose with the state key (`idle`, `loco`, `air`, `swim`, `roll`,
+  `death`): on a change of key it keeps the last frame's whole rig (the joints' rotations, his height and pitch, the
+  torso pivot) and fades it out over `MOVE_FEEL.xfade[key]`. Anything layered on his pose (a hit, the crouch, recoil,
+  the carry) goes BEFORE it; a new pose state gets its own key and its own length in `MOVE_FEEL.xfade`. `XFADE.fades`
+  counts the fades (t216 reads it).
+- The gun has inertia: `gunLag` (GUN_LAG, torso space, a damped spring on his acceleration and his turn) is added to
+  the hold's anchor in holdWeapon (0.6 of it to a shouldered gun's pocket). The gun still aims from where it is at the
+  reticle, so the shot is unchanged.
+- `TT.smoothDbg` exposes all of it (MOVE_FEEL, GUN_LAG, xfade(), gunLag(), wish(), vel(), lookY(), pose(), phase(),
+  lerpK, decayK). Test: t216 (the eases, the S-curve start and the crisp stop, the fades, the run blend, the step
+  glide, the gun's lag, the phase on one turn), and no transition may be sharper than the gait itself (angular
+  acceleration of the joints, measured against the steady walk and run).
+
+## The guns' sound (CL-134; Jerry, 2026-10-09: "impactful and fun to hear")
+
+- `core/gunsynth.js` is pure DSP (no Web Audio, no DOM): `GUN_DEFS` (every gun, the turrets, the mortar, the
+  explosion), `FOLEY_DEFS` (handling, hits, blades, dry fire, brass), `suppressedDef`, `defForKey('m4' | 'm4:s' | ...)`,
+  `buildBank(key, def, sampleRate)` (deterministic per key and rate: variants of the dry shot, mono at the context's
+  rate, and of its stereo tail at `TAIL_SR` 16 kHz). A shot is layers (crack, pop, blast, thump, sub, clank, knock,
+  scrape, rattle, static, whoosh, wet, crunch) driven in three groups, an EQ voice per gun, normalized; `level` sets
+  its loudness (`supLevel` evens out a gun's suppressed bank).
+- CL-135 (Jerry: the reloads and the guns' high end sounded "like bones clinking together or a xylophone"): nothing
+  is a sine but the low end (thump, sub: CL-134's, untouched). Metal is `clank` (a noise strike through ~20 bands
+  scattered at random over a range, each ringing a millisecond or three, over a dull body), `knock` (a noise thud),
+  `scrape` (grainy noise through a moving band), `rattle` (a run of small clanks), `static` (a CRT's snow). The test
+  for it: no bank's 2-14 kHz repeats itself at a pitch period (`core/gunsynth.test.mjs`, t223); keep new sounds under
+  that bar.
+- `core/gunsynth-worker.js` builds every bank off the main thread as soon as the audio context exists. A sound asked
+  for before its bank is in moves to the front of the worker's queue and plays a stand-in (a gun) or nothing (a hit):
+  the game never stalls for a sound. An OfflineAudioContext (tools/soundlab) builds in place.
+- `AudioSys.fireWeapon(id, { suppressed, hand })`: the gun's bank; `hand` 0/1 puts a pair of guns left and right.
+  Bursts are evened out to the gun's `interval` (at most 25 ms late; two rounds in one frame are spread). The tail is
+  turned down under sustained fire (heat over 0.4 s). `turretShot(kind, v, pan)` ('turret', 'heavy', 'rifle', 'm240')
+  and `grenadeBoom(v, pan)` take `sndAt`'s level and pan: further off is quieter, darker, later (explosions) and more
+  tail. `minigunSpin(k)` (barrelSpinVel / SPIN_MAX, every frame, from updateGearSounds) is the rotary gun's motor loop.
+  `magThud(v, pan)`. Every reload cue is a bank (`BANKED_CUES`, the flamer's and the rotary gun's included; CL-135),
+  and so are `bulletImpact` (rock, metal, wood, dirt, water, sand, the odd ricochet), `grenadeThrow`/`grenadeBounce`
+  and `reloadDone` ('settle'). None of them starts an oscillator.
+- Weapon changes (CL-135, Jerry: "should sound like a CRT TV static switching"): `AudioSys.weaponSwitch()` (the dial's
+  detent, ~150 ms of flickering static, cut) plays from `setWeapon` whenever the game is on, from `toggleHolster` and
+  from the wheel's holster/draw (once per change: it won't play twice within 60 ms). `AudioSys.wheelTick()` is the
+  dial ticking past a choice: the weapon wheel's moves, the build wheel's pages and the build rotate/upgrade-part keys
+  (all of which played `brassTink`, a case landing). `brassTink` is the casings only.
+- The sniper's bolt (CL-135 over GB-146): `updateSniperBoltCycle` plays boltUp, boltBack, boltFwd, boltDown on the
+  cycle's beats (lift, back and forward as each starts, down as it locks); the sniper's shot no longer carries a bolt.
+- Levels: the weapons are about 10 dB louder than before CL-134 and the handling a few dB (peaking 8 to 10 dB under a
+  shot); the targets are at the top
+  of `tools/soundlab.mjs` (`node tools/soundlab.mjs out m4 fire:m4:s burst:uzi boom:0.3 --all` renders and measures
+  through the real mix). A last limiter (-1.5 dB) sits after the master gain; the glue's attack is 8 ms so the front of
+  a shot gets through.
+- Read-only for tests: `AudioSys.bankStats()` (banks, worker and main-thread builds, misses, live voices),
+  `bankDbg(key)` (the last round's gap, heat, plays), `calibPlay(key)`, `GUN_KEYS`, `FOLEY_KEYS`. Tests: t220, t223
+  and `node --test core/gunsynth.test.mjs`.

@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-10T11:39:28.343Z",
+  "unchangedPaidFiles": 302,
+  "oldJobIdsPreserved": 320,
+  "summary": {
+    "done": 320,
+    "exported": 19,
+    "uncertain": 0,
+    "conflicts": 0,
+    "pending": 16,
+    "estimatedRemainingCredits": 480
+  },
+  "proxyOutput": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\elevenlabs-batch\\Generated-3",
+  "launcherDeclinedBeforeKey": true
+}

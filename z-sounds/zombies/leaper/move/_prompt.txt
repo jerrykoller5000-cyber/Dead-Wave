@@ -1,0 +1,9 @@
+#16 leaper-move
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A shrill, piercing squeal-chirp as a mutant creature launches itself into a leap, with quick clicks after it. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('leaper', 'move')

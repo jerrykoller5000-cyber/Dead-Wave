@@ -1,0 +1,9 @@
+#5 shambler-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie's final death rattle: a long gurgling groan collapsing into a wet, bubbling last breath. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('shambler', 'death')

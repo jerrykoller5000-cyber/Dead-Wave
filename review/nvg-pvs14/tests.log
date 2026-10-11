@@ -1,0 +1,12 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t101 t161 t177 t186 t215 --jobs 2 --all-fails
+
+check-players: 287 player.position reads, all in the allowed places
+ok    t161     7 pass   0 fail  15.0s
+ok    t101     9 pass   0 fail  26.0s
+ok    t177    10 pass   0 fail  26.9s
+ok    t215     4 pass   0 fail  24.6s
+ok    t186    34 pass   0 fail  54.0s
+
+5 checks: 64 pass, 0 fail

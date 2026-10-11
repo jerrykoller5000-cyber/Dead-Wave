@@ -1,0 +1,9 @@
+#159 ui/click  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: menu buttons)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.15 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A short crisp interface click, like a heavy military switch, game menu. No music.

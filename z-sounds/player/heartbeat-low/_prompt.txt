@@ -1,0 +1,9 @@
+#16 player/heartbeat-low
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: heartbeat()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A slow, heavy, muffled heartbeat heard from inside the body, two beats, for low health. No music, no voice.

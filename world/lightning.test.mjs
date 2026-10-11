@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import { LIGHTNING, stormTimes, rollStrike, strikeTarget, boltPoints, buildBoltGeometry, buildInsulatedBoots, mulberry } from './lightning.js';
+import { LIGHTNING, stormTimes, rollStrike, strikeTarget, boltPoints, buildBoltGeometry, buildInsulatedBoots, mulberry, MAST_PERCH, mastStrikeFinds, buildWornBoots, buildMastPerchParts, buildRubberBoot } from './lightning.js';
 
 test('five strikes a storm, spread through it, never at its edges', () => {
   for (const dur of [22, 45, 70]) {
@@ -55,4 +55,45 @@ test('the bolt runs from the cloud to the very spot, and builds as one geometry'
   const boots = buildInsulatedBoots(THREE);
   assert.equal(boots.name, 'insulated-boots');
   assert.equal(boots.children.length, 2);
+});
+
+// CL-178: the boots on the skeleton up the radio mast, and the mast's 1-in-3.
+test('up the mast a strike finds him 1 time in 3', () => {
+  assert.equal(LIGHTNING.MAST_ODDS, 1 / 3);
+  const r = mulberry(7); let n = 0; const N = 30000;
+  for (let i = 0; i < N; i++) if (mastStrikeFinds(r)) n++;
+  assert.ok(Math.abs(n / N - 1 / 3) < 0.01, 'found ' + n + ' of ' + N);
+  assert.equal(mastStrikeFinds(() => 0.2), true);
+  assert.equal(mastStrikeFinds(() => 0.5), false);
+});
+
+test('the worn boots stand side by side, toes out, and the perch is plain meshes high on the ladder side', () => {
+  const boots = buildWornBoots(THREE);
+  assert.equal(boots.name, 'insulated-boots');
+  assert.equal(boots.children.length, 2);
+  assert.ok(Math.abs(boots.children[0].position.x - boots.children[1].position.x) > 0.2, 'apart');
+  const parts = buildMastPerchParts(THREE);
+  assert.ok(parts.length > 30 && parts.every((m) => m.isMesh && m.children.length === 0), 'flat meshes, ready to merge');
+  const box = new THREE.Box3();
+  for (const m of parts) { m.updateMatrixWorld(true); box.expandByObject(m); }
+  assert.ok(box.min.y > MAST_PERCH.deckY - 1.2 && box.max.y < MAST_PERCH.deckY + 1.2, 'up by the platform: ' + box.min.y.toFixed(2) + '..' + box.max.y.toFixed(2));
+  assert.ok(box.max.z < -0.5, 'on the ladder face (-z): ' + box.max.z.toFixed(2));
+  // The boots on his feet are in reach from the top of the climb (within the pickup's 1.3 m and 1.6 m), not from below.
+  const b = MAST_PERCH.boots, reach = Math.hypot(b.x, b.z + MAST_PERCH.ladderOut);
+  assert.ok(reach < 1.3, 'reach from the ladder ' + reach.toFixed(2));
+  assert.ok(MAST_PERCH.climbTop - b.y < 1.6 && b.y > 10, 'at the top, not the ground');
+});
+
+// CL-179: the remodelled boot is one vertex-coloured mesh: yellow rubber with black on it, its sole at the ground.
+test('a rubber boot is one mesh, yellow and black, standing on its sole', () => {
+  const boot = buildRubberBoot(THREE);
+  assert.ok(boot.isMesh && boot.material.vertexColors, 'one mesh, vertex-coloured');
+  const c = boot.geometry.attributes.color.array;
+  let yellow = 0, black = 0;
+  for (let i = 0; i < c.length; i += 3) { if (c[i] > 0.6 && c[i + 1] > 0.3 && c[i + 2] < 0.2) yellow++; else if (c[i] < 0.1 && c[i + 1] < 0.1) black++; }
+  assert.ok(yellow > 0 && black > 0, 'yellow ' + yellow + ', black ' + black);
+  boot.geometry.computeBoundingBox();
+  const bb = boot.geometry.boundingBox;
+  assert.ok(bb.min.y > -0.02 && bb.min.y < 0.01 && bb.max.y > 0.38 && bb.max.y < 0.45, 'height ' + bb.min.y.toFixed(3) + '..' + bb.max.y.toFixed(3));
+  assert.ok(bb.max.z > 0.15, 'toe toward +z');
 });

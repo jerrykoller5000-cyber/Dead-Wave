@@ -1,0 +1,6 @@
+Recorded checks for GP-19866 (2026-10-11):
+node --check game/brute-behavior.js -> exit 0
+node --test review/brute-GP19866/behavior.test.mjs game/weaknesses.test.mjs -> 11 tests, 11 pass, 0 fail, exit 0
+node tools/check-players.mjs -> 295 reads, all allowed, exit 0
+Native browser: node review/brute-GP19866/live-check.mjs -> exit 0, detailed output in live-proof.json
+Native unchanged t215: node review/brute-GP19866/encoding-check.mjs -> 4 pass, 0 fail, exit 0; details in encoding-proof.json

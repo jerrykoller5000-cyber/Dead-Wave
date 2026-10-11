@@ -1,0 +1,19 @@
+{
+  "task": "GP-184",
+  "command": "node --test review/elevenlabs-batch/batch.test.mjs",
+  "tests": 29,
+  "pass": 29,
+  "fail": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "launcherCheck": "Start batch.ps1 -FullBatch with mocked confirmation NO",
+  "full": {
+    "sounds": 179,
+    "takes": 716,
+    "previouslyCompletedMoved": 3,
+    "pending": 713,
+    "estimateCredits": 26850
+  },
+  "paidRequestsDuringRepair": 0,
+  "existingReceiptsChanged": false
+}

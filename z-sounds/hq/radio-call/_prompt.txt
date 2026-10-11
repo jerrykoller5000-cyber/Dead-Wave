@@ -1,0 +1,9 @@
+#124 hq/radio-call  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: the radio calls are text)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A military field radio crackling on with static and a squelch beep, no voice.

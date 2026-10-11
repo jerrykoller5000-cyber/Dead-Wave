@@ -1,0 +1,3 @@
+Day prep
+Used for: Day, between fights
+The game plays now: assets/soundtrack/calm_day (pool "day")

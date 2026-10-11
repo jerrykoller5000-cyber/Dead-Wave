@@ -1,0 +1,9 @@
+#53 demon-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A demon zombie's deep snarling growl rising in anger, gravelly and distorted, with a crackling fire whoosh. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('demon', 'chase')

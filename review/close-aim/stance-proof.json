@@ -1,0 +1,198 @@
+{
+  "ok": true,
+  "value": {
+    "checks": [
+      {
+        "pass": true,
+        "what": "crouch active"
+      },
+      {
+        "pass": true,
+        "what": "pistol crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "pistol crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "pistol crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "m4 crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "m4 crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "m4 crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "ak crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "ak crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "ak crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "shotgun crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "shotgun crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "shotgun crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "sniper crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "sniper crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "sniper crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "minigun crouch cursor over body"
+      },
+      {
+        "pass": true,
+        "what": "minigun crouch gun remains forward above floor"
+      },
+      {
+        "pass": true,
+        "what": "minigun crouch hand remains attached"
+      },
+      {
+        "pass": true,
+        "what": "scope starts with cursor over torso"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise stays forward at 50"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise hand remains attached at 50"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise stays forward at 150"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise hand remains attached at 150"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise stays forward at 300"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise hand remains attached at 300"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise stays forward at 650"
+      },
+      {
+        "pass": true,
+        "what": "sniper scope raise hand remains attached at 650"
+      },
+      {
+        "pass": true,
+        "what": "scoped ray remains exact after safe raise"
+      }
+    ],
+    "poses": [
+      {
+        "w": "pistol",
+        "forward": 0.9980057009466256,
+        "muzzleY": 0.6627638672836724,
+        "handError": 0.00015539585416415562
+      },
+      {
+        "w": "m4",
+        "forward": 0.9910532990998692,
+        "muzzleY": 0.7447216293147108,
+        "handError": 0.00029944122215722524
+      },
+      {
+        "w": "ak",
+        "forward": 0.9913100128077162,
+        "muzzleY": 0.7774538911612012,
+        "handError": 0.0003225434979564952
+      },
+      {
+        "w": "shotgun",
+        "forward": 0.9915819058002129,
+        "muzzleY": 0.7679796106986316,
+        "handError": 0.00028558521759859185
+      },
+      {
+        "w": "sniper",
+        "forward": 1,
+        "muzzleY": 0.8329164425817908,
+        "handError": 0.00022754842793786418
+      },
+      {
+        "w": "minigun",
+        "forward": 0.9939382816446636,
+        "muzzleY": 0.40617238988309623,
+        "handError": 1.2716770295754905e-13
+      },
+      {
+        "scopeMs": 50,
+        "w": "sniper",
+        "forward": 0.99064884452247,
+        "muzzleY": 1.0972479480523702,
+        "handError": 0.00019697005804850115
+      },
+      {
+        "scopeMs": 150,
+        "w": "sniper",
+        "forward": 0.956600538721644,
+        "muzzleY": 1.127364606672927,
+        "handError": 0.0008330743925861871
+      },
+      {
+        "scopeMs": 300,
+        "w": "sniper",
+        "forward": 0.8656097952871806,
+        "muzzleY": 1.0275664932478037,
+        "handError": 0.0007343439177714459
+      },
+      {
+        "scopeMs": 650,
+        "w": "sniper",
+        "forward": 0.8553515328467085,
+        "muzzleY": 1.0931848862471156,
+        "handError": 0.0007384525430458729
+      }
+    ],
+    "perf": {
+      "fps": 59.910134797803295,
+      "low": 56.81818181337127,
+      "worst": 17.600000001490116,
+      "hitches": 0,
+      "frames": 60
+    }
+  },
+  "loadSeconds": 12.543,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

@@ -1,0 +1,3 @@
+Game over
+Used for: You died
+The game plays now: assets/soundtrack/end_fallen (pool "fallen")

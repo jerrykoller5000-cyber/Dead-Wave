@@ -1,0 +1,9 @@
+#59 weapon-foley/chainsaw-idle
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: chainsawEngine (synth loop)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A chainsaw idling, a steady rattling two-stroke engine, seamless. No music, no voice.

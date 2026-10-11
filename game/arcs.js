@@ -1,13 +1,14 @@
-// GB-134 (Jerry's playthrough 1, 2026-10-06): the grenade's arc, and the 40 mm launcher's.
+// GB-134 (Jerry's playthrough 1, 2026-10-06): the grenade's arc.
 // "Hold G: an arc grows from a short lob (a tap) to the longest throw at 3 s; where terrain cuts it, the arc shows
-// that. The 40 mm launcher gets an arc like the mortar's."
+// that." The 40 mm launcher does not use this: it flies the cursor (Jerry, 2026-10-09).
 // Pure: the throw speeds for a charge, and the flight the game will fly (the same step as updateGrenades: gravity
 // first, then the move), stopped where the ground or a solid first takes it, or at the fuse.
 
+// GP-171 (Jerry, 2026-10-09): maximum arc in half the current charge time (1.6 s -> 0.8 s).
 export const THROW = {
-  FULL_S: 3,              // held this long: the longest throw
+  FULL_S: 0.8,            // held this long: the longest throw
   LOB: { h: 4, vy: 4.5 }, // a tap: a short lob, about 3 m on the flat
-  FAR: { h: 17, vy: 7.5 },// 3 s: about 19 m on the flat
+  FAR: { h: 17, vy: 7.5 },// held FULL_S: about 19 m on the flat
   OLD: { h: 12, vy: 6 },  // the throw before GB-134 (still what a bare throwGrenade() does)
   G: 16,                  // updateGrenades' gravity
   GROUND_LIFT: 0.12,      // a grenade touches down at the terrain + 0.12 (updateGrenades)

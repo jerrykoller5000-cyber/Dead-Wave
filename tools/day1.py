@@ -1,4 +1,4 @@
-"""Dead-Wave · Day 1 fight song, "First Blood" (CL-35).
+"""Grave Shift · Day 1 fight song, "First Blood" (CL-35).
 
 Jerry: aggressive but simple for the first day. Heavy. Slow. Adrenaline. Chiptune. 4-5 minutes,
 and it loops. The reference he gave is how Hotline Miami's music made that game.

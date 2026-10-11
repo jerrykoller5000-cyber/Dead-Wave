@@ -1,0 +1,9 @@
+#96 builds/door-close
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: doorSound(close)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy reinforced wooden door slamming shut, a solid thump and latch. No music, no voice.

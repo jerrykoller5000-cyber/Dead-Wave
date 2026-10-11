@@ -1,10 +1,15 @@
+import { scheduleDeathCryFade } from '../ui/zombie-death-envelope.js';
 // Web Audio engine: music and sound effects. No game state.
 // CU-4 slice. Callers keep using AudioSys from the page module.
+import { createZombieVocalizer, createZombieVoiceGate, zombieDriveCurve, zombieFoldCoefficients } from '../ui/zombie-audio.js';
 import { createTrainingAudio } from '../ui/training-audio.js';
+import { createTakeBank, LAYERED, LAYER_TAKE_V, ORIGINAL_ONLY } from './takes.js';   // CL-148: Jerry's z-sounds takes; CL-168 the layered ones
+import { buildBank, GUN_DEFS, FOLEY_DEFS, TAIL_SR, defForKey, SUPPRESSIBLE } from './gunsynth.js';   // CL-134
 export const AudioSys = (() => {
   let trainingMode=false,trainingSound=null;
   let ctx = null;
   let masterGain = null;
+  let koGain = null;   // CL-171: the Training Ground knockout: everything fades under it (the ringing goes round it)
   let sfxGain = null;
   let musicGain = null;
   let muted = false;
@@ -26,7 +31,13 @@ export const AudioSys = (() => {
     ctx = new AC();
     masterGain = ctx.createGain();
     masterGain.gain.value = window.DWOpening?.active ? 0 : 1;
-    masterGain.connect(ctx.destination);
+    // CL-134: a last limiter on everything, so the louder guns (and a grenade in a crowd) never clip the output.
+    try {
+      limiter = ctx.createDynamicsCompressor();
+      limiter.threshold.value = -1.5; limiter.knee.value = 0; limiter.ratio.value = 20;
+      limiter.attack.value = 0.0015; limiter.release.value = 0.12;
+      koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(limiter); limiter.connect(ctx.destination);
+    } catch (_) { koGain = ctx.createGain(); masterGain.connect(koGain); koGain.connect(ctx.destination); limiter = null; }
     // The mix. Everything used to share one SFX bus, so a rain bed, the wind and
     // the river sat at the same level as — and in the same 2-4 kHz band as — the
     // crack of a rifle, and nothing gave way when you fired. Now:
@@ -37,8 +48,9 @@ export const AudioSys = (() => {
     // All three meet at the user's SFX fader, then a gentle compressor glues them
     // and keeps a grenade in a crowd from clipping.
     glue = ctx.createDynamicsCompressor();
-    glue.threshold.value = -16; glue.knee.value = 10; glue.ratio.value = 3.5;
-    glue.attack.value = 0.004; glue.release.value = 0.2;
+    // CL-134: a slower attack (8 ms) lets the front of every shot through before the glue reacts: that front is the punch.
+    glue.threshold.value = -14; glue.knee.value = 10; glue.ratio.value = 3;
+    glue.attack.value = 0.008; glue.release.value = 0.2;
     glue.connect(masterGain);
     sfxGain = ctx.createGain();
     sfxGain.gain.value = 0.5 * userSfx;
@@ -66,14 +78,19 @@ export const AudioSys = (() => {
       reverbGain.connect(sfxGain);
     } catch (_) { reverbNode = null; }
     applyMuteGains();
+    setTimeout(warmBanks, 0);   // CL-134: the gun sounds, built in the background
     return ctx;
   }
   let reverbNode = null, reverbGain = null;
-  let glue = null, weapBus = null, fxBus = null, ambBus = null, soloGain = null;
+  let glue = null, weapBus = null, fxBus = null, ambBus = null, soloGain = null, limiter = null;
   const BUS_WEAP = 1.35, BUS_FX = 0.8, BUS_AMB = 0.5;
   // Which bus the next playTone/playNoise lands on; set by onBus() around a voice.
   let routeBus = null;
-  function outBus() { return routeBus || fxBus || sfxGain; }
+  // Only the current death cry, including its wet tail, shares this envelope.
+  let deathRoute = null;
+  const cryStop = at => deathRoute ? Math.min(at, deathRoute.end + .02) : at;
+  let measureTap = null, measuringSynth = false;   // CL-161: levelDbg's tap (the synth's own loudness, for core/take-levels.js)
+  function outBus() { return deathRoute?.dry || measureTap || routeBus || fxBus || sfxGain; }
   // Momentary ducking when something fires: ambience dips hard and fast, the music
   // (an <audio> element, see updateMusic) by musicDuck, both easing back after.
   let musicShotDuck = 1;
@@ -138,7 +155,16 @@ export const AudioSys = (() => {
     const g = ctx.createGain();
     g.gain.value = amount;
     node.connect(g);
-    g.connect(reverbNode);
+    if (deathRoute) {
+      if (!deathRoute.wet) {
+        const wet = ctx.createGain(), verb = ctx.createConvolver();
+        verb.buffer = reverbNode.buffer; verb.normalize = reverbNode.normalize;
+        verb.connect(wet); wet.connect(sfxGain);
+        scheduleDeathCryFade(wet.gain, deathRoute.start, 2, reverbGain.gain.value);
+        deathRoute.wet = wet; deathRoute.verb = verb;
+      }
+      g.connect(deathRoute.verb); deathRoute.sends.push(g);
+    } else g.connect(reverbNode);
   }
 
   function applyMuteGains() {
@@ -167,6 +193,7 @@ export const AudioSys = (() => {
       unlocked = true;
       if (!muted) startMusic();
     }
+    try { takes.init(); } catch (_) { /* CL-148: no takes, no change */ }
   }
 
   function noiseBuffer(duration) {
@@ -183,6 +210,7 @@ export const AudioSys = (() => {
     const c = ensure();
     if (!c || muted) return;
     const t0 = c.currentTime + when;
+    if (deathRoute && t0 >= deathRoute.end) return;
     const osc = c.createOscillator();
     const g = c.createGain();
     osc.type = type;
@@ -195,7 +223,7 @@ export const AudioSys = (() => {
     const out = pan ? panNode(g, pan) : g;
     out.connect(outBus());
     sendToReverb(out, rev);
-    osc.start(t0); osc.stop(t0 + dur + 0.02);
+    osc.start(t0); osc.stop(cryStop(t0 + dur + 0.02));
   }
 
   function playNoise({ dur = 0.06, vol = 0.15, filterFreq = 1800, filterType = 'bandpass', when = 0, rev = 0, attack = 0.005, q = null, pan = 0 }) {
@@ -204,6 +232,7 @@ export const AudioSys = (() => {
     const buf = noiseBuffer(dur + 0.02);
     if (!buf) return;
     const t0 = c.currentTime + when;
+    if (deathRoute && t0 >= deathRoute.end) return;
     const src = c.createBufferSource();
     src.buffer = buf;
     const filt = c.createBiquadFilter();
@@ -218,7 +247,7 @@ export const AudioSys = (() => {
     const out = pan ? panNode(g, pan) : g;
     out.connect(outBus());
     sendToReverb(out, rev);
-    src.start(t0); src.stop(t0 + dur + 0.02);
+    src.start(t0); src.stop(cryStop(t0 + dur + 0.02));
   }
   function panNode(from, pan) {
     try {
@@ -229,159 +258,400 @@ export const AudioSys = (() => {
     } catch (_) { return from; }
   }
 
+  // --- CL-134: the guns, played from banks (see core/gunsynth.js) ---------------------------------------------------
+  // Each sound is rendered once into a few AudioBuffers (variants of the dry shot, and of its stereo tail at a low sample
+  // rate); a shot is then two buffer sources and two gains. Banks are built the first time they are wanted, and all of
+  // them in the background shortly after the audio unlocks (warmBanks), so the first shot of a gun is not a hitch.
+  const banks = new Map();
+  let activeVoices = 0, bankBuildMs = 0, bankSyncBuilds = 0, bankWorkerBuilds = 0;
+  const bankSyncKeys = [];
+  let bankMisses = 0, warmList = [];
+  const VOICE_TAIL_CAP = 56, VOICE_CAP = 110;
+  function bankFromRaw(key, raw) {
+    const c = ctx;
+    const mono = (a, sr) => { const b = c.createBuffer(1, a.length, sr); b.getChannelData(0).set(a); return b; };
+    return { key, level: raw.level, tailLevel: raw.tailLevel, interval: raw.interval, pitchJ: raw.pitchJ, rev: raw.rev,
+      dry: raw.dry.map((a) => mono(a, c.sampleRate)),
+      tail: raw.tail.map(([l, r]) => { const b = c.createBuffer(2, l.length, TAIL_SR); b.getChannelData(0).set(l); b.getChannelData(1).set(r); return b; }),
+      last: -1, lastT: -9, heat: 0, heatT: 0, plays: 0 };
+  }
+  // A bank, now. While the worker is still building, a bank it has not delivered yet is moved to the front of its queue
+  // and null comes back (the caller plays a cheap stand-in or nothing): the game never stalls for a sound. Without a
+  // worker (or for the calibration) it is built here, on the main thread.
+  function bankFor(key, sync = false) {
+    let B = banks.get(key);
+    if (B) return B;
+    const c = ensure(); if (!c) return null;
+    // (an offline render, the review page's and the tests', always builds here: it has no frames to keep smooth)
+    if (!sync && bankWorker && !(typeof OfflineAudioContext !== 'undefined' && c instanceof OfflineAudioContext)) {
+      const i = warmList.indexOf(key);
+      if (i > 0) { warmList.splice(i, 1); warmList.unshift(key); } else if (i < 0 && defForKey(key)) warmList.unshift(key);
+      bankMisses++;
+      return null;
+    }
+    const def = defForKey(key); if (!def) return null;
+    const t0 = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+    B = bankFromRaw(key, buildBank(key, def, c.sampleRate));
+    banks.set(key, B);
+    bankSyncBuilds++; bankSyncKeys.push(key);
+    bankBuildMs += (typeof performance !== 'undefined' ? performance.now() : Date.now()) - t0;
+    return B;
+  }
+  // Every bank is built off the main thread as soon as there is an audio context, in the order they are first heard
+  // (core/gunsynth-worker.js). Without a module worker (an old browser) they are built here instead, one at a time
+  // between frames.
+  let warmTimer = null, bankWorker = null, warmStarted = false;
+  const WARM_ORDER = ['hit', 'pistol', 'm4', 'impactDirt', 'impactWood', 'weaponSwitch', 'wheelTick', 'boom', 'impactRock', 'grab', 'hitHeavy', 'headshot', 'dryFire', 'brass', 'magOut', 'magIn', 'magSlap', 'magRelease', 'slideBack', 'slideFwd',
+    'shotgun', 'pumpBack', 'pumpFwd', 'ak', 'uzi', 'hitHeavy', 'boom', 'knifeSwing', 'knifeHit', 'revolver', 'sniper', 'aa12', 'minigun', 'm240',
+    'launcher', 'mortar', 'turret', 'turretHeavy', 'macheteSwing', 'macheteChop', 'magDrop'];
+  function warmQueue() {
+    return WARM_ORDER.concat(Object.keys(GUN_DEFS), Object.keys(FOLEY_DEFS), SUPPRESSIBLE.map((k) => k + ':s'))
+      .filter((k, i, a) => a.indexOf(k) === i && !banks.has(k));
+  }
+  function warmBanks() {
+    if (warmStarted || !ctx) return;
+    warmStarted = true;
+    const queue = warmList = warmQueue();
+    try {
+      bankWorker = new Worker(new URL('./gunsynth-worker.js', import.meta.url), { type: 'module' });
+      let inFlight = 0;
+      const pump = () => { while (inFlight < 2 && queue.length) { const k = queue.shift(); if (banks.has(k)) continue; inFlight++; bankWorker.postMessage({ key: k, sr: ctx.sampleRate }); } };
+      bankWorker.onmessage = (e) => {
+        inFlight--;
+        const { key, bank, error } = e.data || {};
+        if (bank && !banks.has(key) && ctx) { banks.set(key, bankFromRaw(key, bank)); bankWorkerBuilds++; }
+        else if (error) console.warn('bank ' + key + ': ' + error);
+        if (queue.length) pump(); else if (!inFlight) { bankWorker.terminate(); bankWorker = null; }
+      };
+      bankWorker.onerror = () => { try { bankWorker.terminate(); } catch (_) {} bankWorker = null; warmOnMain(queue); };
+      pump();
+    } catch (_) { bankWorker = null; warmOnMain(queue); }
+  }
+  function warmOnMain(queue) {
+    const step = () => {
+      let k; while ((k = queue.shift()) && banks.has(k)) {}
+      if (!k) { warmTimer = null; return; }
+      try { bankFor(k); } catch (e) { console.warn('bank ' + k, e); }
+      warmTimer = setTimeout(step, 40);
+    };
+    warmTimer = setTimeout(step, 400);
+  }
+  function track(src) { activeVoices++; src.onended = () => { activeVoices--; }; }
+  // Play one sound from a bank. o: { at (ctx time), v (level), pan, rate, lp (Hz, a distance lowpass), tail (0..),
+  // revK, bus, tailPan }.
+  function playBank(B, o = {}) {
+    const c = ctx;
+    if (!c || !B || activeVoices > VOICE_CAP) return null;
+    const at = Math.max(c.currentTime, o.at || 0);
+    const n = B.dry.length;
+    let i = n > 1 ? Math.floor(Math.random() * (n - 1)) : 0;
+    if (n > 1 && i >= B.last) i++;
+    B.last = i; B.plays++;
+    const rate = (o.rate || 1) * (1 + (Math.random() * 2 - 1) * B.pitchJ);
+    const g = B.level * (o.v != null ? o.v : 1) * (1 + (Math.random() * 2 - 1) * 0.06);
+    const bus = o.bus || outBus();
+    const src = c.createBufferSource(); src.buffer = B.dry[i]; src.playbackRate.value = rate;
+    const gn = c.createGain(); gn.gain.value = g;
+    let head = src;
+    if (o.lp) { const f = c.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; f.Q.value = 0.6; src.connect(f); head = f; }
+    head.connect(gn);
+    const out = o.pan ? panNode(gn, o.pan) : gn;
+    out.connect(bus);
+    if (B.rev) sendToReverb(out, B.rev * (o.revK != null ? o.revK : 1));
+    src.start(at); track(src);
+    if (B.tail.length && o.tail !== 0) {
+      // Sustained fire turns each tail down (heat counts the recent rounds, falling over 0.4 s), so a burst rolls.
+      B.heat *= Math.exp(-Math.max(0, at - B.heatT) / 0.4); B.heatT = at;
+      const tk = (o.tail != null ? o.tail : 1) / (1 + 0.35 * B.heat);
+      B.heat += 1;
+      if (activeVoices < VOICE_TAIL_CAP && tk > 0.02) {
+        const ts = c.createBufferSource(); ts.buffer = B.tail[i % B.tail.length]; ts.playbackRate.value = rate * (1 + (Math.random() - 0.5) * 0.03);
+        const tg = c.createGain(); tg.gain.value = g * B.tailLevel * tk;
+        let th = ts;
+        if (o.lp && o.lp < 3000) { const f = c.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = Math.max(900, o.lp * 1.4); ts.connect(f); th = f; }
+        th.connect(tg);
+        const tp = o.tailPan != null ? o.tailPan : (o.pan || 0) * 0.5;
+        (tp ? panNode(tg, tp) : tg).connect(bus);
+        ts.start(at); track(ts);
+      }
+    }
+    return { at, rate };
+  }
+  // A one-shot from a FOLEY bank by name: v, pan, delay (s), rate. CL-161: a bank with a folder of Jerry's takes plays a
+  // take instead; the bolt's four motions and the belt's three are one recording each, so the first of a set plays it
+  // and the rest of that set stay quiet for its length. synthOnly: always the bank (the rotary gun's clutch).
+  const FOLEY_TAKE = { magOut: 'mag-out', magIn: 'mag-in', magSlap: 'mag-slap', magRelease: 'mag-release', magDrop: 'mag-drop',
+    akRockOut: 'mag-out', akRockIn: 'mag-in', slideBack: 'slide-back', slideFwd: 'slide-forward', pumpBack: 'pump-back', pumpFwd: 'pump-forward',
+    shell: 'shell-insert', cylinderOpen: 'cylinder-open', cylinderSpin: 'cylinder-spin', drumOut: 'drum-out', drumIn: 'drum-in',
+    tubeOpen: 'launcher-open', tubeShell: 'launcher-shell', dryFire: 'dry-fire', brass: 'brass', weaponSwitch: 'weapon-switch',
+    wheelTick: 'wheel-tick', grenadePin: 'grenade-pin', grenadeBounce: 'grenade-bounce', knifeSwing: 'knife-swing', knifeHit: 'knife-hit',
+    macheteSwing: 'machete-swing', macheteChop: 'machete-chop',
+    boltUp: 'bolt-cycle', boltBack: 'bolt-cycle', boltFwd: 'bolt-cycle', boltDown: 'bolt-cycle',
+    boxLatch: 'belt-feed', belt: 'belt-feed', boxSeat: 'belt-feed',
+    impactDirt: '../bullet-impacts/dirt', impactRock: '../bullet-impacts/rock', impactMetal: '../bullet-impacts/metal',
+    impactWood: '../bullet-impacts/wood', impactWater: '../bullet-impacts/water', impactSand: '../bullet-impacts/sand', ricochet: '../bullet-impacts/ricochet' };
+  const FOLEY_SET_S = { 'bolt-cycle': 1.15, 'belt-feed': 1.3 };   // one take covers the whole set for this long
+  const foleySetUntil = {};
+  const foleyFolder = (name) => { const f = FOLEY_TAKE[name]; return f ? (f.startsWith('../') ? f.slice(3) : 'weapon-foley/' + f) : null; };
+  function foley(name, v = 1, pan = 0, delay = 0, rate = 1, synthOnly = false) {
+    const c = ensure(); if (!c || muted) return;
+    const id = !synthOnly && foleyFolder(name);
+    if (id) {
+      const set = FOLEY_SET_S[FOLEY_TAKE[name]];
+      if (set && c.currentTime + delay < (foleySetUntil[id] || 0)) { if (takes.ready(id)) return; }
+      else {
+        // on the Training Ground's concrete the cases ring on concrete
+        const tid = id === 'weapon-foley/brass' && trainingMode && takes.ready('weapon-foley/brass-concrete') ? 'weapon-foley/brass-concrete' : id;
+        if (tk(tid, v, pan, delay, 0, rate)) { if (set) foleySetUntil[id] = c.currentTime + delay + set; return; }
+      }
+    }
+    const B = bankFor(name); if (!B) return;
+    playBank(B, { v, pan, at: c.currentTime + delay, rate });
+  }
+
+  // CL-147: recorded clips (Jerry's own sounds, assets/sfx/). Each is fetched and decoded once, then played like a
+  // foley one-shot (level, pan, a hair of pitch so repeats aren't identical). preloadClips() fetches ahead; a clip
+  // asked for before it has loaded plays when it arrives if that is within a quarter second, else it is skipped.
+  const CLIP_ROOT = 'assets/sfx/';
+  const CLIPS = {
+    keypadPress: { file: 'training/keypad-press.wav', v: 0.55, jitter: 0.04 },
+    securityDoorOpen: { file: 'training/security-door-open.wav', v: 0.8, jitter: 0.02 },
+    securityDoorClose: { file: 'training/security-door-close.wav', v: 0.8, jitter: 0.02 },
+  };
+  const clipBufs = new Map(), clipLoads = new Map(), clipPlays = {};
+  function loadClip(name) {
+    const def = CLIPS[name], c = ensure();
+    if (!def || !c) return Promise.resolve(null);
+    if (clipLoads.has(name)) return clipLoads.get(name);
+    const p = fetch(CLIP_ROOT + def.file).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status))))
+      .then((ab) => new Promise((res, rej) => { const q = c.decodeAudioData(ab, res, rej); if (q && q.catch) q.catch(rej); }))
+      .then((buf) => { clipBufs.set(name, buf); return buf; })
+      .catch(() => { clipBufs.set(name, null); return null; });
+    clipLoads.set(name, p);
+    return p;
+  }
+  function preloadClips(names = Object.keys(CLIPS)) { for (const n of names) loadClip(n); }
+  function playClipNow(name, buf, v, pan) {
+    const c = ensure(); if (!c || muted || !buf) return;
+    const def = CLIPS[name];
+    const src = c.createBufferSource(); src.buffer = buf;
+    if (def.jitter) src.playbackRate.value = 1 + (Math.random() * 2 - 1) * def.jitter;
+    const gn = c.createGain(); gn.gain.value = def.v * Math.max(0, Math.min(1.5, v));
+    src.connect(gn);
+    (pan ? panNode(gn, pan) : gn).connect(outBus());
+    src.start(); track(src);
+    clipPlays[name] = (clipPlays[name] || 0) + 1;
+  }
+  // CL-162: Jerry's batch-3 takes stand in for the CL-147 clips when they're there
+  const CLIP_TAKE = { keypadPress: 'training/keypad-press', securityDoorOpen: 'training/hangar-door', securityDoorClose: 'training/hangar-door' };
+  function clip(name, v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted || !CLIPS[name]) return;
+    if (CLIP_TAKE[name] && tk(CLIP_TAKE[name], v, pan)) return;
+    const buf = clipBufs.get(name);
+    if (buf) { playClipNow(name, buf, v, pan); return; }
+    if (buf === null) return;   // failed to load: stay quiet
+    const asked = c.currentTime;
+    loadClip(name).then((b) => { if (b && c.currentTime - asked < 0.25) playClipNow(name, b, v, pan); });
+  }
+  // CL-159 replaced the old clip with a synthesized siren. CU-119 (Jerry): that siren is the one he
+  // hears only on the first pull, before his training/alarm take has decoded, and he does not want it.
+  // Every pull, including the first, plays the take. If it is still decoding, it plays when it arrives.
+  // CL-171 (Jerry: "When the player dies in training I need a few more seconds of black as all the sounds including
+  // zombies fade out. Maybe a tinnitus sound."): knockout(hold) fades the whole mix (music, zombies, guns, the room) to
+  // nothing over about a second and rings a tinnitus over the silence for `hold` seconds; knockoutEnd() brings the mix
+  // back. The ring is two close high tones beating slowly with a faint, darker one under them, on its own path to the
+  // output so the fade does not take it, and the SFX fader sets its level.
+  let koRing = null;
+  function knockout(hold = 3.5) {
+    const c = ensure(); if (!c || !koGain) return false;
+    const t = c.currentTime;
+    koGain.gain.cancelScheduledValues(t); koGain.gain.setValueAtTime(koGain.gain.value, t); koGain.gain.setTargetAtTime(0, t, 0.32);
+    if (koRing) { try { koRing.stop(); } catch (_) {} koRing = null; }
+    if (muted) return true;
+    const out = limiter || c.destination, g = c.createGain(), v = 0.05 * Math.max(0.15, userSfx);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(v, t + 0.5);
+    g.gain.setTargetAtTime(v * 0.55, t + 0.9, 1.1);
+    g.gain.setTargetAtTime(0, t + Math.max(0.8, hold - 0.4), 0.45);
+    g.connect(out);
+    const end = t + hold + 2.5, oscs = [];
+    for (const [f, a, type] of [[6180, 1, 'sine'], [6187, 0.7, 'sine'], [3950, 0.22, 'sine'], [12360, 0.05, 'triangle']]) {
+      const o = c.createOscillator(), og = c.createGain();
+      o.type = type; o.frequency.value = f; og.gain.value = a;
+      o.connect(og); og.connect(g); o.start(t); o.stop(end); oscs.push(o);
+    }
+    const lfo = c.createOscillator(), lg = c.createGain(); lfo.frequency.value = 0.35; lg.gain.value = 9;
+    lfo.connect(lg); lg.connect(oscs[0].frequency); lfo.start(t); lfo.stop(end);
+    koRing = { stop: () => { const n = c.currentTime; g.gain.cancelScheduledValues(n); g.gain.setTargetAtTime(0, n, 0.2); } };
+    oscs[0].onended = () => { try { g.disconnect(); } catch (_) {} };
+    return true;
+  }
+  function knockoutEnd(fade = 1.6) {
+    const c = ctx; if (!c || !koGain) return;
+    const t = c.currentTime;
+    koGain.gain.cancelScheduledValues(t); koGain.gain.setValueAtTime(koGain.gain.value, t); koGain.gain.setTargetAtTime(1, t, Math.max(0.05, fade / 3));
+    if (koRing) { koRing.stop(); koRing = null; }
+  }
+  function trainingAlarm(v = 1) {
+    if (muted) return;
+    v = Math.max(0, Math.min(1.5, v));
+    if (tk('training/alarm', v, 0, 0, 0.5)) return;   // CL-161: his take, once it is decoded
+    // Still decoding on the first pull. Play it when it arrives; never the old siren.
+    const c = ensure();
+    if (!c) return;
+    const asked = c.currentTime;
+    Promise.resolve(takes.init()).then(() => takes.load('training/alarm')).then((list) => {
+      if (!list || muted || measuringSynth || c.currentTime - asked > 4) return;
+      playTake('training/alarm', v, 0, 0, null, 0.5);
+    }).catch(() => {});
+  }
+  // CL-148: Jerry's takes in z-sounds/ (core/takes.js). playTake(id, ...) plays one and returns true, and each sound
+  // below then skips its synthesized version; with no takes in that folder it returns false and nothing changes.
+  const takes = createTakeBank({
+    getCtx: () => ensure(),
+    connect: (g, pan, rev, bus) => { const out = pan ? panNode(g, pan) : g; out.connect(bus || outBus()); if (rev) sendToReverb(out, rev); },
+    track,
+    fetchJson: (u) => fetch(u, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : Promise.reject(new Error('http ' + r.status)))),
+    fetchBytes: (u) => fetch(u).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('http ' + r.status)))),
+  });
+  function playTake(id, v = 1, pan = 0, when = 0, emitter = null, rev = 0, rate = 1) {
+    if (muted || measuringSynth) return false;
+    try { return takes.play(id, v, pan, when, emitter, rev, rate); } catch (_) { return false; }
+  }
+  // CL-161: the rest of Jerry's recorded sounds (batch 2, z-sounds/PROMPTS-2.md). tk(id, v, pan, when, rev, rate) plays a
+  // take of the folder and is true, and the synthesized sound it stands in for is skipped; false (the synth plays as
+  // before) while the folder has no takes, before they have loaded, or when Jerry has switched it off on the listen page.
+  // CL-168: a LAYERED folder (the bullet guns, HQ, the skull pickup, the UI) plays its take and answers false, so the original
+  // synthesized sound under it plays as well: the two together. layerDbg counts them for the checks.
+  const LAYER_SET = new Set(LAYERED), layerDbg = { layered: 0, last: null };
+  const ORIGINAL_SET = new Set(ORIGINAL_ONLY);   // CL-172: the HQ alarm and the flares: the original sound alone
+  const tk = (id, v = 1, pan = 0, when = 0, rev = 0, rate = 1) => {
+    if (ORIGINAL_SET.has(id)) return false;
+    if (!LAYER_SET.has(id)) return playTake(id, v, pan, when, null, rev, rate);
+    if (playTake(id, v * LAYER_TAKE_V, pan, when, null, rev, rate)) { layerDbg.layered++; layerDbg.last = id; }
+    return false;
+  };
+  // Beds: a looping take kept running at a level (wind, rain, the river, an engine). bed(key, id, vol, o) sets it and is
+  // true while the recording carries it (the caller turns its synthesized layer to nothing); vol is in the synth layer's
+  // units (BED_K: how loud that layer is at 1, measured, so the recording sits where it did). o: { bus, pan, rate, tc }.
+  // A bed not set for a while (pulse beds: a campfire, the lure) fades and stops by itself.
+  const beds = new Map();
+  const BED_K = { 'world/wind-day': 0.008, 'world/wind-night': 0.008, 'world/crickets-night': 0.008, 'world/frogs-night': 0.01, 'world/river': 0.016, 'world/lake-shore': 0.016,
+    'world/rain': 0.02, 'world/campfire': 0.006, 'world/fire-burning': 0.008, 'world/cave-mouth': 0.018, 'below/warren-ambience': 0.012,
+    'player/nvg-hum': 0.006, 'weapon-foley/chainsaw-idle': 0.03, 'builds/lure': 0.036, 'vehicles/floatplane-idle': 0.04, 'training/ventilation': 0.01,
+    'world/graveyard-ambience': 0.03 };
+  function bed(key, id, vol, o = {}) {
+    const c = ctx; if (!c) return false;
+    let b = beds.get(key);
+    const want = muted ? 0 : Math.max(0, vol) * (BED_K[id] || 0.05);
+    if (!b || b.h.stopped || b.id !== id) {
+      if (b && !b.h.stopped) b.h.stop(0.4);
+      if (!(want > 0.00002)) { beds.delete(key); return takes.ready(id) && !muted; }
+      let h = null;
+      try { h = takes.loop(id, { bus: o.bus || ambBus || sfxGain, pan: o.pan || 0 }); } catch (_) { h = null; }
+      if (!h) { beds.delete(key); return false; }
+      b = { h, id, quietAt: 0, last: c.currentTime }; beds.set(key, b);
+    }
+    b.last = c.currentTime;
+    b.h.set(want / (TARGET_LOOP_RMS), o.tc != null ? o.tc : 0.5);
+    if (o.rate) b.h.rate(o.rate, 0.08);
+    if (want <= 0.00002) { if (!b.quietAt) b.quietAt = c.currentTime; else if (c.currentTime - b.quietAt > 5) { b.h.stop(0.3); beds.delete(key); } }
+    else b.quietAt = 0;
+    return true;
+  }
+  const TARGET_LOOP_RMS = 0.05;   // the beds' takes are evened to this (core/take-levels.js), so a level is want / this
+  // Pulse beds: kept alive by being set (each frame, or every few frames); one not set for `hold` s fades out and stops.
+  function pulseBeds() {
+    const c = ctx; if (!c || !beds.size) return;
+    for (const [key, b] of beds) {
+      if (!b.pulse) continue;
+      if (c.currentTime - b.last > b.hold) { b.h.stop(0.6); beds.delete(key); }
+    }
+  }
+  function pulse(key, id, vol, pan = 0, hold = 0.6, bus = null) {
+    const ok = bed(key, id, vol, { pan, bus: bus || fxBus || sfxGain, tc: 0.15 });
+    const b = beds.get(key); if (b) { b.pulse = true; b.hold = hold; try { b.h.pan && b.h.pan(pan); } catch (_) {} }
+    return ok;
+  }
+  function stopBed(key, fade = 0.4) { const b = beds.get(key); if (b) { b.h.stop(fade); beds.delete(key); } }
+  const clipState = () => ({ loaded: [...clipBufs].filter(([, b]) => b).map(([n, b]) => [n, +b.duration.toFixed(2)]), failed: [...clipBufs].filter(([, b]) => !b).map(([n]) => n), plays: { ...clipPlays } });
+
   function fire() {
     // Generic fallback crack (prefer fireWeapon)
     playNoise({ dur: 0.04, vol: 0.12, filterFreq: 2200, filterType: 'bandpass' });
     playTone({ freq: 180, type: 'sawtooth', dur: 0.05, vol: 0.08, slideTo: 90 });
   }
   const shotCount = Object.create(null);   // CL-131: for the test page, how often each gun has been heard
-  function fireWeapon(id) {
+  // CL-161: each gun's folder of Jerry's recorded shots (single shots; the bursts batch 2 recorded can't play round by round)
+  const GUN_TAKE = { pistol: 'weapons/pistol', revolver: 'weapons/revolver', uzi: 'weapons/smg', m4: 'weapons/carbine', ak: 'weapons/rifle',
+    shotgun: 'weapons/shotgun', aa12: 'weapons/auto-shotgun', sniper: 'weapons/sniper', launcher: 'weapons/grenade-launcher',
+    mortar: 'weapons/mortar-launch', m240: 'weapons/machine-gun-shot' };
+  const GUN_TAKE_S = { pistol: 'weapons/pistol-suppressed', m4: 'weapons/carbine-suppressed' };
+  // CL-134: a shot of gun id, from its bank. opts: { suppressed (the can is fitted), hand (0/1 for a pair of guns: each
+  // hand a little to its own side), v }. Bursts are evened out: a round that lands a little early or late against the
+  // gun's rate (the game fires on frame boundaries) is placed on the beat, at most 25 ms late, and two rounds in one
+  // frame are spread instead of stacked.
+  function fireWeapon(id, opts = {}) {
     shotCount[id] = (shotCount[id] || 0) + 1;
-    switch (id) {
-      case 'pistol':
-        // Sharp crack, small body, a short slap off the trees.
-        playNoise({ dur: 0.028, vol: 0.15, filterFreq: 3200, filterType: 'bandpass', rev: 0.35 });
-        playTone({ freq: 420, type: 'square', dur: 0.035, vol: 0.09, slideTo: 140, rev: 0.2 });
-        playTone({ freq: 90, type: 'sine', dur: 0.05, vol: 0.06, slideTo: 50 });
-        playNoise({ dur: 0.09, vol: 0.035, filterFreq: 700, filterType: 'lowpass', when: 0.012 });
-        break;
-      case 'revolver':
-        // Deep heavy boom with a long tail.
-        playNoise({ dur: 0.07, vol: 0.2, filterFreq: 900, filterType: 'lowpass', rev: 0.55 });
-        playTone({ freq: 120, type: 'sawtooth', dur: 0.1, vol: 0.14, slideTo: 45, rev: 0.3 });
-        playTone({ freq: 70, type: 'sine', dur: 0.16, vol: 0.12, slideTo: 33 });
-        playNoise({ dur: 0.04, vol: 0.07, filterFreq: 2400, filterType: 'bandpass', when: 0.02, rev: 0.4 });
-        playNoise({ dur: 0.22, vol: 0.04, filterFreq: 500, filterType: 'lowpass', when: 0.03 });
-        break;
-      case 'm4':
-        // Supersonic rifle crack: bright snap, mid body, tail.
-        playNoise({ dur: 0.038, vol: 0.14, filterFreq: 2100, filterType: 'bandpass', rev: 0.4 });
-        playNoise({ dur: 0.02, vol: 0.07, filterFreq: 5200, filterType: 'bandpass' });
-        playTone({ freq: 240, type: 'sawtooth', dur: 0.055, vol: 0.1, slideTo: 95, rev: 0.25 });
-        playTone({ freq: 160, type: 'square', dur: 0.03, vol: 0.05 });
-        playNoise({ dur: 0.12, vol: 0.035, filterFreq: 600, filterType: 'lowpass', when: 0.015 });
-        break;
-      case 'ak':
-        // 7.62: lower and fatter than the M4's snap, with more push behind it.
-        playNoise({ dur: 0.045, vol: 0.16, filterFreq: 1700, filterType: 'bandpass', rev: 0.45 });
-        playNoise({ dur: 0.02, vol: 0.06, filterFreq: 4200, filterType: 'bandpass' });
-        playTone({ freq: 190, type: 'sawtooth', dur: 0.07, vol: 0.12, slideTo: 70, rev: 0.28 });
-        playTone({ freq: 75, type: 'sine', dur: 0.09, vol: 0.09, slideTo: 42 });
-        playNoise({ dur: 0.16, vol: 0.045, filterFreq: 520, filterType: 'lowpass', when: 0.015 });
-        break;
-      case 'aa12':
-        // Auto shotgun: the pump gun's boom, shorter and tighter so a burst stays a
-        // string of blasts instead of one long roar.
-        playNoise({ dur: 0.08, vol: 0.2, filterFreq: 600, filterType: 'lowpass', rev: 0.45 });
-        playTone({ freq: 95, type: 'sawtooth', dur: 0.1, vol: 0.13, slideTo: 38, rev: 0.25 });
-        playNoise({ dur: 0.045, vol: 0.09, filterFreq: 1900, filterType: 'bandpass', when: 0.01, rev: 0.35 });
-        playTone({ freq: 52, type: 'sine', dur: 0.14, vol: 0.09, slideTo: 30 });
-        break;
-      case 'uzi':
-        // Light rapid smack.
-        playNoise({ dur: 0.022, vol: 0.1, filterFreq: 2800, filterType: 'bandpass', rev: 0.25 });
-        playTone({ freq: 380, type: 'square', dur: 0.025, vol: 0.07, slideTo: 160 });
-        playNoise({ dur: 0.06, vol: 0.025, filterFreq: 800, filterType: 'lowpass', when: 0.01 });
-        break;
-      case 'minigun':
-        // Buzzier short burp / lower thud.
-        playNoise({ dur: 0.03, vol: 0.11, filterFreq: 1600, filterType: 'bandpass', rev: 0.2 });
-        playTone({ freq: 95, type: 'sawtooth', dur: 0.045, vol: 0.08, slideTo: 55 });
-        playTone({ freq: 55, type: 'sine', dur: 0.05, vol: 0.06 });
-        break;
-      case 'shotgun':
-        // Loud boom, low body, a wide splash of noise off the trees.
-        playNoise({ dur: 0.12, vol: 0.24, filterFreq: 550, filterType: 'lowpass', rev: 0.6 });
-        playTone({ freq: 85, type: 'sawtooth', dur: 0.16, vol: 0.16, slideTo: 32, rev: 0.3 });
-        playNoise({ dur: 0.06, vol: 0.11, filterFreq: 1800, filterType: 'bandpass', when: 0.015, rev: 0.5 });
-        playTone({ freq: 48, type: 'sine', dur: 0.22, vol: 0.11, slideTo: 28 });
-        playNoise({ dur: 0.3, vol: 0.05, filterFreq: 420, filterType: 'lowpass', when: 0.04 });
-        break;
-      case 'sniper':
-        // Huge crack and a rolling echo.
-        playNoise({ dur: 0.05, vol: 0.2, filterFreq: 2600, filterType: 'bandpass', rev: 0.7 });
-        playTone({ freq: 320, type: 'square', dur: 0.06, vol: 0.14, slideTo: 90, rev: 0.4 });
-        playTone({ freq: 110, type: 'sawtooth', dur: 0.12, vol: 0.09, slideTo: 50 });
-        playTone({ freq: 220, type: 'triangle', dur: 0.22, vol: 0.05, when: 0.08, slideTo: 80, rev: 0.6 });
-        playNoise({ dur: 0.18, vol: 0.06, filterFreq: 900, filterType: 'bandpass', when: 0.1, rev: 0.6 });
-        playNoise({ dur: 0.5, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
-        break;
-      case 'm240': {
-        // CL-131: the Watchman, a belt-fed 7.62 on a tripod. Deeper and heavier than the AK (a longer barrel, a heavy
-        // bolt slamming home), with a hard mechanical clack in front and a long low tail, so a burst at 11 a second
-        // runs together into the MG's chug rather than a string of rifle cracks. Each round a touch different.
-        const v = 0.94 + Math.random() * 0.12;
-        playNoise({ dur: 0.012, vol: 0.045, filterFreq: 4200 * v, filterType: 'bandpass' });                 // the bolt
-        playNoise({ dur: 0.055, vol: 0.19, filterFreq: 1250 * v, filterType: 'bandpass', rev: 0.5 });        // the report
-        playTone({ freq: 150 * v, type: 'sawtooth', dur: 0.08, vol: 0.13, slideTo: 52, rev: 0.3 });
-        playTone({ freq: 58 * v, type: 'sine', dur: 0.13, vol: 0.13, slideTo: 34 });                         // the push
-        playNoise({ dur: 0.024, vol: 0.035, filterFreq: 2400 * v, filterType: 'bandpass', when: 0.03 });      // the slap off the trees
-        playNoise({ dur: 0.24, vol: 0.05, filterFreq: 420, filterType: 'lowpass', when: 0.02, rev: 0.35 });
-        break;
-      }
-      case 'launcher':
-        // Hollow thunk / whoosh (boom on explode).
-        playTone({ freq: 140, type: 'sine', dur: 0.08, vol: 0.1, slideTo: 70, rev: 0.3 });
-        playNoise({ dur: 0.1, vol: 0.1, filterFreq: 700, filterType: 'lowpass', rev: 0.4 });
-        playTone({ freq: 60, type: 'triangle', dur: 0.14, vol: 0.08, slideTo: 35 });
-        playNoise({ dur: 0.12, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.04 });
-        break;
-      default:
-        fire();
+    const c = ensure();
+    if (!c || muted) return;
+    if (!GUN_DEFS[id]) { fire(); return; }
+    const B = bankFor(opts.suppressed ? id + ':s' : id) || (opts.suppressed ? bankFor(id) : null);
+    if (!B) { fire(); return; }
+    const now = c.currentTime;
+    let at = now;
+    if (B.interval) {
+      const iv = B.interval * (opts.hand === 0 || opts.hand === 1 ? 0.5 : 1), gap = now - B.lastT;
+      if (gap > iv * 0.55 && gap < iv * 1.5) at = Math.max(now, Math.min(now + 0.025, B.lastT + iv));
+      else if (gap <= iv * 0.55) at = Math.min(now + 0.06, B.lastT + iv * 0.55);
     }
+    B.gap = at - B.lastT; B.lastT = at;
+    const pan = opts.hand === 0 ? -0.2 : opts.hand === 1 ? 0.2 : 0;
+    const tid = opts.suppressed ? GUN_TAKE_S[id] : GUN_TAKE[id];   // CL-161
+    if (tid && tk(tid, opts.v != null ? opts.v : 1, pan, at - now)) return;
+    playBank(B, { at, pan, v: opts.v != null ? opts.v : 1, tailPan: 0 });
   }
+  // CL-134: the pump is called twice a cycle (back, then forward): each call is its half.
+  let pumpHalf = 0, pumpT = -9;
   function shotgunPump() {
-    // Mechanical back-forward scrape
-    playNoise({ dur: 0.07, vol: 0.09, filterFreq: 1400, filterType: 'bandpass' });
-    playTone({ freq: 260, type: 'triangle', dur: 0.06, vol: 0.08, slideTo: 140 });
-    playTone({ freq: 180, type: 'square', dur: 0.04, vol: 0.06, when: 0.055 });
-    playNoise({ dur: 0.035, vol: 0.05, filterFreq: 900, filterType: 'lowpass', when: 0.05 });
+    const c = ensure(); if (!c || muted) return;
+    if (c.currentTime - pumpT > 0.9) pumpHalf = 0;
+    pumpT = c.currentTime;
+    foley(pumpHalf === 0 ? 'pumpBack' : 'pumpFwd');
+    pumpHalf ^= 1;
   }
-  function revolverCylinder() {
-    // Open/close click
-    playTone({ freq: 480 + Math.random() * 80, type: 'square', dur: 0.03, vol: 0.07 });
-    playNoise({ dur: 0.03, vol: 0.045, filterFreq: 2200, filterType: 'bandpass' });
-    playTone({ freq: 220, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.02, slideTo: 160 });
-  }
-  function revolverSpin() {
-    playTone({ freq: 340, type: 'triangle', dur: 0.05, vol: 0.055, slideTo: 520 });
-    playNoise({ dur: 0.04, vol: 0.035, filterFreq: 1800, filterType: 'bandpass' });
-  }
-  function launcherDrum() {
-    // Heavier drum open/close
-    playTone({ freq: 140, type: 'sine', dur: 0.07, vol: 0.08, slideTo: 90 });
-    playNoise({ dur: 0.06, vol: 0.07, filterFreq: 500, filterType: 'lowpass' });
-    playTone({ freq: 90, type: 'triangle', dur: 0.05, vol: 0.05, when: 0.03 });
-  }
-  function launcherShellInsert() {
-    playTone({ freq: 160, type: 'sine', dur: 0.05, vol: 0.07, slideTo: 70 });
-    playNoise({ dur: 0.045, vol: 0.055, filterFreq: 650, filterType: 'lowpass' });
-    playTone({ freq: 110, type: 'triangle', dur: 0.04, vol: 0.045, when: 0.025 });
-  }
+
+  function revolverCylinder() { foley('cylinderOpen'); }   // CL-134
+
+  function revolverSpin() { foley('cylinderSpin'); }
+
+  function launcherDrum() { foley('tubeOpen'); }
+
+  function launcherShellInsert() { foley('tubeShell'); }
+
   function emptyClick() {
     const c = ensure();
     if (!c || muted) return;
     if (c.currentTime < emptyClickCd) return;
     emptyClickCd = c.currentTime + 0.18;
-    playTone({ freq: 120, type: 'square', dur: 0.04, vol: 0.08 });
+    foley('dryFire');   // CL-134: the hammer falling on nothing, not a beep
   }
-  function spinUp() {
-    playTone({ freq: 90, type: 'sawtooth', dur: 0.25, vol: 0.06, slideTo: 220 });
-  }
-  function spinDown() {
-    playTone({ freq: 200, type: 'sawtooth', dur: 0.3, vol: 0.05, slideTo: 70 });
-  }
-  function slideRack() {
-    playTone({ freq: 320, type: 'triangle', dur: 0.05, vol: 0.09, slideTo: 160 });
-    playNoise({ dur: 0.045, vol: 0.06, filterFreq: 2200, filterType: 'bandpass' });
-    playTone({ freq: 480, type: 'square', dur: 0.035, vol: 0.07, when: 0.06 });
-  }
-  function jump() { playTone({ freq: 300, type: 'triangle', dur: 0.08, vol: 0.08, slideTo: 420 }); }
+
+  // CL-134: the rotary gun's motor is a loop (minigunSpin); spinning up only adds the clutch biting.
+  function spinUp() { foley('boxLatch', 0.7, 0, 0, 0.8, true); }
+
+  function spinDown() {}
+
+  function slideRack() { foley('slideBack'); foley('slideFwd', 1, 0, 0.07); }
+
+  function jump() { if (tk('player/jump', 0.9)) return; playTone({ freq: 300, type: 'triangle', dur: 0.08, vol: 0.08, slideTo: 420 }); }
   function nvgClick() {
+    if (tk('player/flashlight-click', 0.8)) return;   // CL-161
     playTone({ freq: 520, type: 'square', dur: 0.03, vol: 0.07 });
     playNoise({ dur: 0.04, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
   }
   function coin() {
+    if (tk('hq/cash')) return;   // CL-161
     playTone({ freq: 880, type: 'square', dur: 0.06, vol: 0.1 });
     playTone({ freq: 1175, type: 'square', dur: 0.08, vol: 0.08, when: 0.05 });
   }
@@ -390,9 +660,11 @@ export const AudioSys = (() => {
     if (!c || muted) return;
     if (c.currentTime < leafSfxCd) return;
     leafSfxCd = c.currentTime + 0.08;
+    if (tk('bullet-impacts/leaves', 0.8)) return;   // CL-161
     playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1400, filterType: 'bandpass' });
   }
   function treeFell() {
+    if (tk('world/tree-fall', 1, 0, 0, 0.4)) return;   // CL-161
     // The trunk giving way: a crack, a groan of splitting wood, a second crack as the
     // hinge tears. The thump is treeThud, played when it actually lands — a tall
     // tree takes longer to come down than a sapling.
@@ -403,6 +675,7 @@ export const AudioSys = (() => {
   }
   function treeThud(volume = 1, pan = 0, size = 1) {
     if (volume < 0.02) return;
+    if (tk('world/tree-thud', volume, pan, 0, 0.4, 1 / Math.pow(Math.max(0.5, size), 0.25))) return;   // CL-161
     playNoise({ dur: 0.42, vol: 0.22 * volume, filterFreq: 240, filterType: 'lowpass', rev: 0.6, pan });
     playTone({ freq: 70 / Math.sqrt(Math.max(0.5, size)), type: 'sawtooth', dur: 0.35, vol: 0.11 * volume, slideTo: 38, pan });
     playNoise({ dur: 0.06, vol: 0.09 * volume, filterFreq: 1800, filterType: 'bandpass', when: 0.02, pan }); // branches snapping
@@ -411,6 +684,7 @@ export const AudioSys = (() => {
   // A crown going up: a low roar that swells in.
   function crownFire(volume = 1, pan = 0) {
     if (volume < 0.02) return;
+    if (tk('world/tree-crown-fire', volume, pan, 0, 0.3)) return;   // CL-161 (batch 3)
     playNoise({ dur: 1.7, vol: 0.14 * volume, filterFreq: 420, filterType: 'lowpass', attack: 0.55, rev: 0.4, pan });
     playNoise({ dur: 1.0, vol: 0.05 * volume, filterFreq: 1800, filterType: 'bandpass', attack: 0.3, when: 0.15, pan });
   }
@@ -419,9 +693,11 @@ export const AudioSys = (() => {
     if (!c || muted) return;
     if (c.currentTime < trunkBumpCd) return;
     trunkBumpCd = c.currentTime + 0.2;
+    if (tk('world/trunk-bump', 0.8)) return;   // CL-161 (batch 3)
     playTone({ freq: 90, type: 'triangle', dur: 0.06, vol: 0.08 });
   }
   function win() {
+    if (tk('ui/victory')) return;   // CL-161
     [523, 659, 784, 1047].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.12, vol: 0.1, when: i * 0.1 }));
   }
   function resetBlip() {
@@ -429,33 +705,49 @@ export const AudioSys = (() => {
     playTone({ freq: 480, type: 'square', dur: 0.07, vol: 0.09, when: 0.05 });
   }
   function place() {
+    if (tk('builds/place-wood')) return;   // CL-161
     playTone({ freq: 520, type: 'square', dur: 0.06, vol: 0.12 });
     playTone({ freq: 780, type: 'square', dur: 0.08, vol: 0.1, when: 0.04 });
     playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1600, filterType: 'bandpass' });
   }
   function invalid() {
+    if (tk('builds/invalid')) return;   // CL-161
     playTone({ freq: 160, type: 'square', dur: 0.1, vol: 0.1 });
     playTone({ freq: 120, type: 'square', dur: 0.12, vol: 0.08, when: 0.08 });
   }
-  function turretShot() {
-    playNoise({ dur: 0.035, vol: 0.09, filterFreq: 1800, filterType: 'bandpass' });
-    playTone({ freq: 240, type: 'square', dur: 0.04, vol: 0.06 });
+  // CL-134: a turret or a man on the roof firing, from where they are. kind: 'turret', 'heavy', 'rifle', 'm240'.
+  // Further off it is quieter and darker and more of it is tail.
+  let turretCd = 0;
+  function turretShot(kind = 'turret', v = 1, pan = 0) {
+    const c = ensure(); if (!c || muted || !(v > 0.01)) return;
+    if (c.currentTime < turretCd) return;
+    turretCd = c.currentTime + 0.035;
+    const id = kind === 'heavy' ? 'turretHeavy' : kind === 'rifle' ? 'm4' : kind === 'm240' ? 'm240' : 'turret';
+    const near = Math.max(0, Math.min(1, v));
+    const tid = kind === 'heavy' ? 'turrets/heavy-turret-shot' : kind === 'rifle' ? 'weapons/carbine' : kind === 'm240' ? 'weapons/machine-gun-shot' : 'turrets/light-turret-shot';
+    if (tk(tid, (kind === 'rifle' || kind === 'm240' ? 0.62 : 1) * (0.2 + 0.8 * Math.pow(near, 0.8)), pan, 0, (1 - near) * 0.4)) return;   // CL-161
+    const B = bankFor(id); if (!B) return;
+    playBank(B, { v: (kind === 'rifle' || kind === 'm240' ? 0.62 : 1) * (0.2 + 0.8 * Math.pow(near, 0.8)), pan,
+      lp: near > 0.85 ? null : 1400 + 16000 * near * near, tail: 1 + (1 - near) * 0.8, revK: 1 + (1 - near) * 2 });
   }
+
   // Flesh hit: a thump you feel, a wet slap, and a little grit. It fires for every
   // pellet and every flame tick, so it is rate-limited, and it scales and pans with
   // where the body is. Heavier kinds hit heavier.
   let fleshCd = 0;
-  function zombieHit(v = 1, pan = 0, heavy = false) {
+  // CL-134: a flesh hit from the bank (a punch, a wet slap, a little crunch), heavier for the big kinds and pellets.
+  const zombieVoiceGate = createZombieVoiceGate();
+  const chooseZombieVoice = createZombieVocalizer();
+  function zombieHit(v = 1, pan = 0, heavy = false, type = null, emitter = null) {
     const c = ensure();
     if (!c || muted || v < 0.03) return;
     if (c.currentTime < fleshCd) return;
     fleshCd = c.currentTime + 0.028;
-    const k = heavy ? 1.35 : 1;
-    playTone({ freq: (heavy ? 95 : 120) + Math.random() * 20, type: 'sine', dur: 0.07, vol: 0.13 * v * k, slideTo: 48, pan });
-    playNoise({ dur: 0.05, vol: 0.12 * v * k, filterFreq: 950 + Math.random() * 300, filterType: 'bandpass', q: 1.3, pan });
-    playNoise({ dur: 0.07, vol: 0.05 * v, filterFreq: 420, filterType: 'lowpass', when: 0.012, pan });
-    playTone({ freq: 150, type: 'sawtooth', dur: 0.05, vol: 0.04 * v, slideTo: 70, pan });
+    if (!playTake(heavy ? 'impacts/flesh-hit-heavy' : 'impacts/flesh-hit', Math.min(1, v), pan)) foley(heavy ? 'hitHeavy' : 'hit', Math.min(1, v), pan);
+    // The first hit has a reaction. Per-kind spacing limits bursts without randomly silencing pain.
+    if (type && zombieVoiceGate(c.currentTime, type, 'hurt')) playZombieCry(type, 'hurt', v, pan, 0.01, emitter);
   }
+
   // Bullet meeting the world. `surface`: dirt, wood, rock, metal, water, sand.
   let impactCd = 0;
   function bulletImpact(surface, v = 1, pan = 0) {
@@ -463,36 +755,19 @@ export const AudioSys = (() => {
     if (!c || muted || v < 0.03) return;
     if (c.currentTime < impactCd) return;
     impactCd = c.currentTime + 0.022;
+    if (surface === 'leaves' && tk('bullet-impacts/leaves', v, pan)) return;   // CL-161: Jerry's impacts come through foley()
+    // CL-135: from banks (stone cracks and chips, steel clangs, wood thocks and splinters, dirt thuds, water slaps):
+    // no more tones, which made stone and wood a xylophone under sustained fire.
     const p = 0.9 + Math.random() * 0.25;
-    if (surface === 'rock' || surface === 'metal') {
-      const metal = surface === 'metal';
-      playNoise({ dur: 0.025, vol: 0.13 * v, filterFreq: (metal ? 4200 : 3200) * p, filterType: 'bandpass', q: 2, pan });
-      playTone({ freq: (metal ? 2400 : 1500) * p, type: 'triangle', dur: metal ? 0.18 : 0.05, vol: (metal ? 0.07 : 0.05) * v, slideTo: (metal ? 1900 : 900) * p, pan, rev: 0.3 });
-      // The odd ricochet whine off stone and steel.
-      if (Math.random() < (metal ? 0.35 : 0.22)) playTone({ freq: 2600 * p, type: 'sine', dur: 0.28, vol: 0.045 * v, slideTo: 900 * p, when: 0.015, pan, rev: 0.45 });
-    } else if (surface === 'wood') {
-      playTone({ freq: 210 * p, type: 'triangle', dur: 0.06, vol: 0.12 * v, slideTo: 120 * p, pan });
-      playNoise({ dur: 0.04, vol: 0.09 * v, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.5, pan });
-      playNoise({ dur: 0.06, vol: 0.035 * v, filterFreq: 2600 * p, filterType: 'bandpass', when: 0.01, pan });
-    } else if (surface === 'water') {
-      playNoise({ dur: 0.07, vol: 0.08 * v, filterFreq: 1300 * p, filterType: 'bandpass', pan });
-      playTone({ freq: 600 * p, type: 'sine', dur: 0.06, vol: 0.05 * v, slideTo: 1400 * p, when: 0.01, pan });
-    } else if (surface === 'sand') {
-      playNoise({ dur: 0.08, vol: 0.1 * v, filterFreq: 700 * p, filterType: 'lowpass', pan });
-      playNoise({ dur: 0.05, vol: 0.04 * v, filterFreq: 2400 * p, filterType: 'bandpass', when: 0.01, pan });
-    } else {
-      // dirt: a dull thud and the patter of what it kicked up
-      playTone({ freq: 90 * p, type: 'sine', dur: 0.06, vol: 0.1 * v, slideTo: 45, pan });
-      playNoise({ dur: 0.05, vol: 0.09 * v, filterFreq: 520 * p, filterType: 'lowpass', pan });
-      playNoise({ dur: 0.09, vol: 0.035 * v, filterFreq: 1900 * p, filterType: 'bandpass', when: 0.02, pan });
-    }
+    const key = surface === 'rock' ? 'impactRock' : surface === 'metal' ? 'impactMetal' : surface === 'wood' ? 'impactWood'
+      : surface === 'water' ? 'impactWater' : surface === 'sand' ? 'impactSand' : 'impactDirt';
+    foley(key, v, pan, 0, p);
+    // The odd ricochet off stone and steel.
+    if ((surface === 'rock' || surface === 'metal') && Math.random() < (surface === 'metal' ? 0.35 : 0.22)) foley('ricochet', v * (0.6 + Math.random() * 0.4), pan, 0.012, p);
   }
   // A blade that lands: the zip of the edge and a wet chunk.
-  function knifeHit() {
-    playNoise({ dur: 0.05, vol: 0.14, filterFreq: 800, filterType: 'bandpass', q: 1.4, when: 0.03 });
-    playTone({ freq: 190, type: 'sawtooth', dur: 0.06, vol: 0.07, slideTo: 80, when: 0.03 });
-    playNoise({ dur: 0.08, vol: 0.05, filterFreq: 380, filterType: 'lowpass', when: 0.05 });
-  }
+  function knifeHit() { foley('knifeHit'); }
+
   // Gore: a limb or head coming away (small) or a body bursting (big).
   let goreCd = 0;
   function gore(v = 1, pan = 0, big = false) {
@@ -500,6 +775,7 @@ export const AudioSys = (() => {
     if (!c || muted || v < 0.04) return;
     if (c.currentTime < goreCd) return;
     goreCd = c.currentTime + (big ? 0.05 : 0.035);
+    if (playTake(big ? 'impacts/gore-big' : 'impacts/gore-small', v, pan)) return;   // CL-148
     const k = big ? 1.4 : 1;
     playNoise({ dur: big ? 0.22 : 0.12, vol: 0.14 * v * k, filterFreq: 650 + Math.random() * 250, filterType: 'bandpass', q: 0.9, pan });
     playTone({ freq: big ? 70 : 110, type: 'sine', dur: big ? 0.2 : 0.1, vol: 0.11 * v * k, slideTo: 38, pan });
@@ -508,19 +784,14 @@ export const AudioSys = (() => {
     const n = big ? 5 : 2;
     for (let i = 0; i < n; i++) playNoise({ dur: 0.025, vol: (0.02 + Math.random() * 0.025) * v, filterFreq: 900 + Math.random() * 1400, filterType: 'bandpass', when: 0.12 + Math.random() * 0.35, pan: Math.max(-1, Math.min(1, pan + (Math.random() - 0.5) * 0.6)) });
   }
-  function grenadeThrow() {
-    playTone({ freq: 1500, type: 'square', dur: 0.02, vol: 0.05 });                       // pin
-    playNoise({ dur: 0.18, vol: 0.09, filterFreq: 1300, filterType: 'bandpass', when: 0.05 }); // throw whoosh
-    playTone({ freq: 900, type: 'triangle', dur: 0.03, vol: 0.04, when: 0.06 });          // spoon flying off
-  }
+  function grenadeThrow() { foley('grenadePin'); tk('player/grenade-throw', 0.9, 0, 0.1); }   // CL-162: + Jerry's throw   // CL-135: the pin, the spoon flying, the throw
   let bounceCd = 0;
   function grenadeBounce(v = 1, pan = 0) {
     const c = ensure();
     if (!c || muted || v < 0.04) return;
     if (c.currentTime < bounceCd) return;
     bounceCd = c.currentTime + 0.08;
-    playTone({ freq: 700 + Math.random() * 200, type: 'triangle', dur: 0.05, vol: 0.06 * v, slideTo: 450, pan });
-    playNoise({ dur: 0.04, vol: 0.05 * v, filterFreq: 500, filterType: 'lowpass', pan });
+    foley('grenadeBounce', v, pan, 0, 0.9 + Math.random() * 0.2);   // CL-135
   }
   // Footfall of something heavy: brute, demon, colossus.
   let stompCd = 0;
@@ -529,6 +800,7 @@ export const AudioSys = (() => {
     if (!c || muted || v < 0.05) return;
     if (c.currentTime < stompCd) return;
     stompCd = c.currentTime + 0.06;
+    if (playTake(huge ? 'footsteps/huge' : 'footsteps/heavy', v, pan)) return;   // CL-148
     playTone({ freq: huge ? 42 : 58, type: 'sine', dur: huge ? 0.3 : 0.16, vol: (huge ? 0.2 : 0.12) * v, slideTo: huge ? 26 : 34, pan });
     playNoise({ dur: huge ? 0.2 : 0.1, vol: (huge ? 0.1 : 0.06) * v, filterFreq: 240, filterType: 'lowpass', pan, rev: huge ? 0.3 : 0 });
   }
@@ -539,32 +811,38 @@ export const AudioSys = (() => {
     if (!c || muted || v < 0.05) return;
     if (c.currentTime < emergeCd) return;
     emergeCd = c.currentTime + 0.25;
+    if (playTake('horde/emerge', v, pan)) return;   // CL-148
     playNoise({ dur: 0.5, vol: 0.08 * v, filterFreq: 330, filterType: 'lowpass', attack: 0.08, pan });
     for (let i = 0; i < 3; i++) playNoise({ dur: 0.04, vol: 0.04 * v, filterFreq: 1200 + Math.random() * 900, filterType: 'bandpass', when: 0.1 + i * 0.12 + Math.random() * 0.05, pan });
     playTone({ freq: 85 + Math.random() * 25, type: 'sawtooth', dur: 0.45, vol: 0.05 * v, slideTo: 60, when: 0.25, attack: 0.08, pan, rev: 0.3 });
   }
   // The kiosk hatch: a roll-up shutter going up (open) or down (close).
-  function shutter(open) {
+  function shutter(open, synthOnly = false) {   // CL-168: synthOnly: just the original (the CIF locker's take is on top)
+    if (!synthOnly && tk(open ? 'hq/kiosk-shutter-open' : 'hq/kiosk-shutter-close')) return;   // CL-161
     for (let i = 0; i < 6; i++) playNoise({ dur: 0.025, vol: 0.05, filterFreq: 1700 + i * (open ? 120 : -90), filterType: 'bandpass', when: i * 0.04 });
     playTone({ freq: open ? 180 : 140, type: 'square', dur: 0.05, vol: 0.05, when: 0.25, slideTo: open ? 120 : 90 });
   }
   // Burial: the back of a shovel patting loose earth down.
   function gravePat(v = 1, pan = 0) {
+    if (tk('player/burial-dig', v, pan, 0, 0.25)) return;   // CL-161
     playNoise({ dur: 0.09, vol: 0.16 * v, filterFreq: 260, filterType: 'lowpass', pan, rev: 0.25 });
     playTone({ freq: 95, type: 'triangle', dur: 0.1, vol: 0.08 * v, slideTo: 60, pan });
     playNoise({ dur: 0.14, vol: 0.04 * v, filterFreq: 2400, filterType: 'bandpass', when: 0.02, pan });
   }
   // A letter cut into the stone.
   function chisel() {
+    if (tk('player/burial-chisel', 0.9, 0, 0, 0.3)) return;   // CL-161
     playTone({ freq: 2600 + Math.random() * 600, type: 'square', dur: 0.03, vol: 0.05, rev: 0.3 });
     playNoise({ dur: 0.05, vol: 0.05, filterFreq: 4200, filterType: 'bandpass' });
   }
   // Two men swinging a weight between them: a grunt and a whump of canvas.
   function heave(v = 1) {
+    if (tk('player/burial-heave', v, 0, 0, 0.2)) return;   // CL-161
     playTone({ freq: 118 + Math.random() * 20, type: 'sawtooth', dur: 0.22, vol: 0.035 * v, slideTo: 92, attack: 0.04, rev: 0.2 });
     playNoise({ dur: 0.25, vol: 0.05 * v, filterFreq: 700, filterType: 'bandpass', attack: 0.06 });
   }
   function bigSplash(v = 1, pan = 0) {
+    if (tk('world/big-splash', v, pan, 0, 0.5)) return;   // CL-161
     playNoise({ dur: 0.5, vol: 0.2 * v, filterFreq: 900, filterType: 'lowpass', pan, rev: 0.5 });
     playNoise({ dur: 0.9, vol: 0.08 * v, filterFreq: 3000, filterType: 'bandpass', when: 0.08, attack: 0.1, pan, rev: 0.5 });
     playTone({ freq: 70, type: 'sine', dur: 0.4, vol: 0.12 * v, slideTo: 40, pan });
@@ -575,6 +853,9 @@ export const AudioSys = (() => {
   function graveAmbience(dur = 16) {
     const c = ensure();
     if (!c || muted) return;
+    if (takes.ready('world/graveyard-ambience')) {   // CL-161 (batch 3): a bed for the length of the shot, then away
+      if (bed('grave', 'world/graveyard-ambience', 1, { bus: outBus(), tc: 1.2 })) { setTimeout(() => stopBed('grave', 3), Math.max(1, dur - 3) * 1000); return; }
+    }
     const t0 = c.currentTime + 0.05, end = t0 + dur;
     const env = (g, peak, a, r) => { g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(peak, t0 + a); g.gain.setValueAtTime(peak, end - r); g.gain.exponentialRampToValueAtTime(0.0001, end); };
     const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 420;
@@ -607,15 +888,20 @@ export const AudioSys = (() => {
   }
   // Coming up out of the water: bubbles breaking, a pour of runoff.
   function surface() {
+    if (tk('world/surface-gasp', 1, 0, 0, 0.3)) return;   // CL-161
     for (let i = 0; i < 9; i++) playTone({ freq: 380 + Math.random() * 600, type: 'sine', dur: 0.06, vol: 0.03, when: i * 0.09 + Math.random() * 0.05, slideTo: 1100, rev: 0.4 });
     playNoise({ dur: 1.2, vol: 0.07, filterFreq: 1400, filterType: 'bandpass', when: 0.5, attack: 0.15, rev: 0.5 });
     playNoise({ dur: 0.35, vol: 0.09, filterFreq: 500, filterType: 'lowpass', when: 0.45, rev: 0.5 });
   }
   // CL-126: his own breath when he is winded after a run (k 0..1, how winded). In: a short, bright draw through the mouth;
   // out: a longer, lower push with a little chest in it. Quiet: it sits under everything, close to the camera.
+  let breathTakeUntil = 0;
   function playerBreath(k = 1, inhale = true) {
     const v = Math.max(0, Math.min(1, k));
     if (v < 0.05) return;
+    // CL-161: Jerry's take is three hard breaths: one of them for a hard-winded run, the synth's single breaths under it
+    if (ctx && ctx.currentTime < breathTakeUntil) return;
+    if (v > 0.45 && inhale && tk('player/breath-tired', 0.55 + 0.45 * v)) { breathTakeUntil = ctx.currentTime + 2.1; return; }
     if (inhale) playNoise({ dur: 0.34 + 0.12 * v, vol: 0.012 + 0.03 * v, filterFreq: 2100 + Math.random() * 300, filterType: 'bandpass', q: 1.3, attack: 0.16, rev: 0.04 });
     else {
       playNoise({ dur: 0.46 + 0.16 * v, vol: 0.014 + 0.04 * v, filterFreq: 850 + Math.random() * 150, filterType: 'bandpass', q: 0.8, attack: 0.05, rev: 0.04 });
@@ -624,6 +910,7 @@ export const AudioSys = (() => {
   }
   // MedPen: cap flicked off, the spring-loaded jab (thump + click), a pneumatic hiss, a breath out.
   function medPen() {
+    if (tk('player/medpen')) return;   // CL-161
     playTone({ freq: 2400, type: 'square', dur: 0.025, vol: 0.05 });                               // cap pop
     playNoise({ dur: 0.04, vol: 0.05, filterFreq: 3200, filterType: 'bandpass', when: 0.01 });
     playNoise({ dur: 0.08, vol: 0.16, filterFreq: 180, filterType: 'lowpass', when: 0.34 });        // jab into the thigh
@@ -637,6 +924,7 @@ export const AudioSys = (() => {
   function planeFlyover(dur = 8) {
     const c = ensure();
     if (!c || muted) return;
+    if (tk('vehicles/cargo-plane-flyover', 1, 0, 0, 0.4)) return;   // CL-161
     const t0 = c.currentTime, mid = t0 + dur * 0.5, end = t0 + dur;
     const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(260, t0);
     lp.frequency.linearRampToValueAtTime(700, mid); lp.frequency.linearRampToValueAtTime(220, end);
@@ -659,12 +947,14 @@ export const AudioSys = (() => {
   }
   // The chute cracks open: a canvas snap, the whoomph of the canopy filling, lines creaking taut.
   function chuteOpen() {
+    if (tk('vehicles/chute-open', 1, 0, 0, 0.3)) return;   // CL-161
     playNoise({ dur: 0.06, vol: 0.14, filterFreq: 1500, filterType: 'bandpass', rev: 0.3 });
     playNoise({ dur: 0.45, vol: 0.12, filterFreq: 240, filterType: 'lowpass', when: 0.04, attack: 0.08, rev: 0.4 });
     playTone({ freq: 70, type: 'triangle', dur: 0.35, vol: 0.08, when: 0.05, slideTo: 45 });
     playNoise({ dur: 0.2, vol: 0.03, filterFreq: 700, filterType: 'bandpass', when: 0.35, q: 8 });
   }
   function medkit() {
+    if (tk('player/medkit')) return;   // CL-161 (batch 3)
     playNoise({ dur: 0.12, vol: 0.08, filterFreq: 2800, filterType: 'bandpass' });            // velcro
     playNoise({ dur: 0.35, vol: 0.05, filterFreq: 5000, filterType: 'highpass', when: 0.15, attack: 0.05 }); // spray / hiss
     playTone({ freq: 640, type: 'sine', dur: 0.12, vol: 0.05, when: 0.5, slideTo: 880 });
@@ -672,6 +962,7 @@ export const AudioSys = (() => {
   // Idle horde groans: a low sawtooth wobble with a breathy noise tail, pitched
   // per body so a crowd doesn't chorus.
   function groan(vol = 1, deep = false) {
+    if (playTake('horde/groan-near', vol, (Math.random() * 2 - 1) * 0.6, 0, null, 0.3)) return;   // CL-148
     const base = (deep ? 48 : 70) + Math.random() * (deep ? 30 : 60);
     const dur = 0.5 + Math.random() * 0.45;
     const pan = (Math.random() * 2 - 1) * 0.6;
@@ -679,16 +970,15 @@ export const AudioSys = (() => {
     playTone({ freq: base * 2.01, type: 'triangle', dur: dur * 0.8, vol: 0.028 * vol, slideTo: base * 1.5, when: 0.05, rev: 0.3, attack: 0.05, pan });
     playNoise({ dur: 0.35, vol: 0.035 * vol, filterFreq: 450 + Math.random() * 500, filterType: 'bandpass', when: dur * 0.3, rev: 0.3, pan });
   }
-  function headshot() {
-    playNoise({ dur: 0.09, vol: 0.2, filterFreq: 950, filterType: 'bandpass', rev: 0.3 });
-    playTone({ freq: 1500, type: 'square', dur: 0.07, vol: 0.06, slideTo: 320 });
-    playNoise({ dur: 0.14, vol: 0.06, filterFreq: 400, filterType: 'lowpass', when: 0.03 });
-  }
+  function headshot() { if (!playTake('impacts/headshot')) foley('headshot'); }   // CL-148: a take if there is one   // CL-134: a skull cracking, a wet burst, a thud
+
   function heartbeat(vol = 1) {
+    if (tk('player/heartbeat-low', 0.5 + 0.5 * vol)) return;   // CL-161
     playTone({ freq: 62, type: 'sine', dur: 0.12, vol: 0.14 * vol, slideTo: 40 });
     playTone({ freq: 58, type: 'sine', dur: 0.1, vol: 0.1 * vol, slideTo: 36, when: 0.16 });
   }
   function footstep(wet, running) {
+    if (tk(wet ? 'player/footstep-water' : running ? 'player/footstep-run-dirt' : 'player/footstep-dirt', running ? 1 : 0.85)) return;   // CL-161
     const p = 0.85 + Math.random() * 0.3;
     if (wet) {
       playNoise({ dur: 0.07, vol: running ? 0.07 : 0.05, filterFreq: 1700 * p, filterType: 'bandpass' });
@@ -698,10 +988,12 @@ export const AudioSys = (() => {
     }
   }
   function dodgeRoll() {
+    if (tk('player/dodge-roll')) return;   // CL-161
     playNoise({ dur: 0.2, vol: 0.1, filterFreq: 520, filterType: 'lowpass' });
     playNoise({ dur: 0.08, vol: 0.06, filterFreq: 2400, filterType: 'bandpass', when: 0.16 });
   }
   function streak(level) {
+    if (tk('ui/streak', 1, 0, 0, 0, 1 + Math.min(4, level | 0) * 0.04)) return;   // CL-161: a hair higher each step
     const f = 480 + level * 110;
     playTone({ freq: f, type: 'triangle', dur: 0.12, vol: 0.1, slideTo: f * 1.5 });
     playTone({ freq: f * 1.5, type: 'triangle', dur: 0.2, vol: 0.09, when: 0.1 });
@@ -709,18 +1001,21 @@ export const AudioSys = (() => {
   }
   // Death: the last rattle, then the body hitting the ground.
   let deathCd = 0;
-  function zombieDeath(v = 1, pan = 0, heavy = false) {
+  function zombieDeath(v = 1, pan = 0, heavy = false, type = null, emitter = null) {
     const c = ensure();
     if (!c || muted || v < 0.03) return;
     if (c.currentTime < deathCd) return;
     deathCd = c.currentTime + 0.03;
     playNoise({ dur: 0.15, vol: 0.13 * v, filterFreq: 400, filterType: 'lowpass', pan });
-    playTone({ freq: 100, type: 'sawtooth', dur: 0.18, vol: 0.08 * v, slideTo: 45, pan });
+    if (!type || !playZombieCry(type, 'death', v, pan, 0.02, emitter))
+      playTone({ freq: 100, type: 'sawtooth', dur: 0.18, vol: 0.08 * v, slideTo: 45, pan });
     const fall = heavy ? 0.42 : 0.3;
+    if (playTake('impacts/body-fall', heavy ? Math.min(1.3, v * 1.25) : v, pan, fall)) return;   // CL-148
     playTone({ freq: heavy ? 55 : 72, type: 'sine', dur: heavy ? 0.22 : 0.12, vol: (heavy ? 0.16 : 0.1) * v, slideTo: 32, when: fall, pan });
     playNoise({ dur: 0.1, vol: 0.07 * v, filterFreq: 300, filterType: 'lowpass', when: fall, pan });
   }
   function waveStart(boss) {
+    if (tk('ui/wave-start', 1, 0, 0, 0.5, boss ? 0.84 : 1)) return;   // CL-161: the boss's a fifth or so down
     // A long horn over a deep hit; the boss version drops a fifth and doubles up.
     playTone({ freq: boss ? 73 : 110, type: 'sawtooth', dur: 1.1, vol: 0.11, slideTo: boss ? 65 : 100, attack: 0.08, rev: 0.7 });
     playTone({ freq: boss ? 110 : 165, type: 'sawtooth', dur: 0.9, vol: 0.07, slideTo: boss ? 98 : 150, attack: 0.1, when: 0.05, rev: 0.7 });
@@ -729,54 +1024,54 @@ export const AudioSys = (() => {
     if (boss) { playNoise({ dur: 0.5, vol: 0.14, filterFreq: 140, filterType: 'lowpass', when: 0.55, rev: 0.8 }); playTone({ freq: 44, type: 'sine', dur: 0.7, vol: 0.12, slideTo: 26, when: 0.55 }); }
   }
   function expand() {
+    if (tk('ui/expand')) return;   // CL-161 (batch 3)
     playTone({ freq: 300, type: 'triangle', dur: 0.1, vol: 0.1 });
     playTone({ freq: 450, type: 'triangle', dur: 0.12, vol: 0.09, when: 0.08 });
     playTone({ freq: 600, type: 'triangle', dur: 0.14, vol: 0.08, when: 0.16 });
   }
   function gameOver() {
+    if (tk('ui/game-over')) return;   // CL-161
     playTone({ freq: 200, type: 'sawtooth', dur: 0.25, vol: 0.12, slideTo: 60 });
     playTone({ freq: 150, type: 'sawtooth', dur: 0.35, vol: 0.1, slideTo: 40, when: 0.2 });
   }
-  function playerHurt() {
+  function playerHurt(heavy = false) {
+    if (tk(heavy ? 'player/hurt-heavy' : 'player/hurt') || (heavy && tk('player/hurt'))) return;   // CL-161
     playNoise({ dur: 0.1, vol: 0.14, filterFreq: 500, filterType: 'bandpass' });
     playTone({ freq: 180, type: 'sawtooth', dur: 0.12, vol: 0.1, slideTo: 80 });
   }
-  function grenadeBoom() {
-    playNoise({ dur: 0.35, vol: 0.24, filterFreq: 180, filterType: 'lowpass', rev: 0.8 });
-    playNoise({ dur: 0.08, vol: 0.12, filterFreq: 1800, filterType: 'bandpass', rev: 0.6 });
-    playTone({ freq: 70, type: 'sawtooth', dur: 0.4, vol: 0.14, slideTo: 30, rev: 0.4 });
-    playTone({ freq: 40, type: 'sine', dur: 0.7, vol: 0.12, slideTo: 24 });
-    // debris patter after the blast
-    for (let i = 0; i < 5; i++) playNoise({ dur: 0.03, vol: 0.02 + Math.random() * 0.02, filterFreq: 1200 + Math.random() * 2000, filterType: 'bandpass', when: 0.25 + Math.random() * 0.6, pan: Math.random() * 2 - 1 });
+  // CL-134: an explosion from the bank. v, pan: how near (sndAt); far off it arrives a little late, darker, more tail.
+  function grenadeBoom(v = 1, pan = 0, folder = 'weapons/explosion') {
+    const c = ensure(); if (!c || muted) return;
+    const near = Math.max(0, Math.min(1, v));
+    if (tk(folder, 0.3 + 0.7 * near, pan * 0.7, (1 - near) * 0.22, 0.3 + (1 - near) * 0.5)) return;   // CL-161
+    const B = bankFor('boom'); if (!B) return;
+    playBank(B, { v: 0.3 + 0.7 * near, pan: pan * 0.7, at: c.currentTime + (1 - near) * 0.22,
+      lp: near > 0.8 ? null : 500 + 14000 * Math.pow(near, 1.5), tail: 1 + (1 - near) * 0.6, tailPan: pan * 0.3, revK: 1 + (1 - near) });
   }
-  function knifeSwing() {
-    playNoise({ dur: 0.06, vol: 0.1, filterFreq: 2500, filterType: 'bandpass' });
-    playTone({ freq: 420, type: 'triangle', dur: 0.05, vol: 0.07, slideTo: 200 });
-  }
+
+  function knifeSwing() { foley('knifeSwing'); }
+
   // Machete: a longer, lower whoosh — more air moved — and a wet chop on contact.
-  function macheteSwing() {
-    playNoise({ dur: 0.16, vol: 0.13, filterFreq: 1100, filterType: 'bandpass' });
-    playNoise({ dur: 0.1, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', when: 0.03 });
-    playTone({ freq: 300, type: 'triangle', dur: 0.12, vol: 0.06, slideTo: 120 });
-  }
-  function macheteChop() {
-    playNoise({ dur: 0.08, vol: 0.16, filterFreq: 520, filterType: 'bandpass', when: 0.04 });
-    playTone({ freq: 160, type: 'sawtooth', dur: 0.09, vol: 0.09, slideTo: 60, when: 0.04 });
-    playTone({ freq: 1900, type: 'triangle', dur: 0.03, vol: 0.04, slideTo: 900, when: 0.04 });
-  }
+  function macheteSwing() { foley('macheteSwing'); }
+
+  function macheteChop() { foley('macheteChop'); }
+
   // Armour: a strap-and-buckle rustle when a piece goes on, a plate ring when it takes a hit.
   function armorDon() {
+    if (tk('player/armor-don')) return;   // CL-161
     playNoise({ dur: 0.12, vol: 0.07, filterFreq: 1400, filterType: 'bandpass' });
     playTone({ freq: 640, type: 'square', dur: 0.03, vol: 0.05, when: 0.08 });
     playTone({ freq: 420, type: 'square', dur: 0.04, vol: 0.05, when: 0.14 });
     playNoise({ dur: 0.08, vol: 0.05, filterFreq: 900, filterType: 'bandpass', when: 0.16 });
   }
   function armorHit(fullSoak) {
+    if (tk('player/armor-hit', fullSoak ? 1 : 0.75)) return;   // CL-161
     playTone({ freq: 1100 + Math.random() * 300, type: 'triangle', dur: 0.12, vol: fullSoak ? 0.09 : 0.06, slideTo: 500 });
     playNoise({ dur: 0.05, vol: 0.08, filterFreq: 2200, filterType: 'bandpass' });
     playTone({ freq: 240, type: 'square', dur: 0.05, vol: 0.05, slideTo: 120 });
   }
   function rockBreak() {
+    if (tk('world/rock-break', 1, 0, 0, 0.3)) return;   // CL-161
     playNoise({ dur: 0.2, vol: 0.16, filterFreq: 500, filterType: 'bandpass' });
     playTone({ freq: 90, type: 'square', dur: 0.12, vol: 0.08, slideTo: 40 });
   }
@@ -785,18 +1080,40 @@ export const AudioSys = (() => {
     if (!c || muted) return;
     if (c.currentTime < brassTinkCd) return;
     brassTinkCd = c.currentTime + 0.07;
-    playTone({ freq: 1400 + Math.random() * 500, type: 'triangle', dur: 0.025, vol: 0.018 });
-    playNoise({ dur: 0.02, vol: 0.012, filterFreq: 3200, filterType: 'bandpass' });
+    foley('brass', 0.7 + Math.random() * 0.3, (Math.random() - 0.5) * 0.5, 0, 0.9 + Math.random() * 0.25);   // CL-134: a case ringing and bouncing
   }
+
+  // CL-135 (Jerry: "the weapons switching should sound like a CRT TV static switching"). A weapon change is a channel
+  // change: the detent, a burst of static, cut, the picture on. The wheel (and the other menus) moving over a choice
+  // ticks the dial: a detent and a blip of snow.
+  let switchCd = 0, tickCd = 0;
+  function weaponSwitch() {
+    const c = ensure(); if (!c || muted) return;
+    if (c.currentTime < switchCd) return;
+    switchCd = c.currentTime + 0.06;
+    foley('weaponSwitch', 1, 0, 0, 0.97 + Math.random() * 0.06);
+  }
+  // GB-148: the wheel's tick is gentle (gunsynth's wheelTick) and never a rattle: at most one every 50 ms, and a pointer
+  // sweeping fast over the ring (ticks under 120 ms apart) is heard softer still.
+  let tickLast = -1;
+  function wheelTick() {
+    const c = ensure(); if (!c || muted) return;
+    if (c.currentTime < tickCd) return;
+    tickCd = c.currentTime + 0.05;
+    const quick = c.currentTime - tickLast < 0.12;
+    tickLast = c.currentTime;
+    foley('wheelTick', (quick ? 0.6 : 1) * (0.92 + Math.random() * 0.08), 0, 0, 0.97 + Math.random() * 0.06);
+  }
+
   let magThudCd = 0;
-  function magThud() {
+  function magThud(v = 1, pan = 0) {
     const c = ensure();
     if (!c || muted) return;
     if (c.currentTime < magThudCd) return;
     magThudCd = c.currentTime + 0.18;
-    playTone({ freq: 110 + Math.random() * 40, type: 'sine', dur: 0.05, vol: 0.035, slideTo: 55 });
-    playNoise({ dur: 0.04, vol: 0.02, filterFreq: 420, filterType: 'lowpass' });
+    foley('magDrop', v, pan);   // CL-134
   }
+
 
   // Resolved from this module (core/audio.js), so it's right from any page, the test pages
   // in tools/tests/ included.
@@ -1316,6 +1633,7 @@ export const AudioSys = (() => {
   }
   function heartFall() {
     const c = ensure(); if (!c || muted) return;
+    if (tk('story/heart-fall')) return;   // CL-162
     for (const [f, v, d] of [[440, 0.06, 5.5], [329.63, 0.045, 5.2], [220, 0.07, 6], [110, 0.06, 6.5], [55, 0.07, 7]]) playTone({ freq: f, type: 'sine', dur: d, vol: v, slideTo: f / 4, attack: 0.15, rev: 0.9 });
     playTone({ freq: 880, type: 'triangle', dur: 3.5, vol: 0.02, slideTo: 220, attack: 0.3, rev: 0.95 });
     playNoise({ dur: 4.5, vol: 0.045, filterFreq: 260, filterType: 'lowpass', attack: 1.2, rev: 0.9 });
@@ -1555,39 +1873,92 @@ export const AudioSys = (() => {
     else if (!spinningUp && lastSpinWasUp) { lastSpinWasUp = false; spinDown(); }
   }
 
+  // CL-134: the rotary gun's motor and barrels, a loop driven every frame by how fast the barrels turn (k 0..1, from
+  // the page: barrelSpinVel / SPIN_MAX). A motor (two detuned saws, darkened), a gear whine an octave and a half up,
+  // and the barrels' rattle (noise through a band, chopped at the barrel rate). It winds up and down with k and goes
+  // away entirely a second after it stops.
+  let spinV = null, spinIdleT = 0;
+  function minigunSpin(k = 0) {
+    const c = ctx;
+    if (!c) return;
+    k = Math.max(0, Math.min(1, +k || 0));
+    if (muted) k = 0;
+    const t = c.currentTime;
+    if (!spinV) {
+      if (k < 0.02) return;
+      const g = c.createGain(); g.gain.value = 0;
+      const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.Q.value = 0.9;
+      const o1 = c.createOscillator(); o1.type = 'sawtooth';
+      const o2 = c.createOscillator(); o2.type = 'sawtooth'; o2.detune.value = 18;
+      const wh = c.createOscillator(); wh.type = 'triangle';
+      const whG = c.createGain(); whG.gain.value = 0.16;
+      o1.connect(lp); o2.connect(lp); wh.connect(whG); whG.connect(lp);
+      const nb = noiseBuffer(1.5); const ns = c.createBufferSource(); ns.buffer = nb; ns.loop = true;
+      const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 2600; bp.Q.value = 1.6;
+      const chop = c.createGain(); chop.gain.value = 0.5;
+      const lfo = c.createOscillator(); lfo.type = 'square'; const lfoG = c.createGain(); lfoG.gain.value = 0.5;
+      lfo.connect(lfoG); lfoG.connect(chop.gain);
+      const rG = c.createGain(); rG.gain.value = 0.55;
+      ns.connect(bp); bp.connect(chop); chop.connect(rG);
+      lp.connect(g); rG.connect(g); g.connect(weapBus || outBus());
+      for (const o of [o1, o2, wh, ns, lfo]) o.start(t);
+      spinV = { g, lp, o1, o2, wh, lfo, ns, nodes: [g, lp, o1, o2, wh, whG, ns, bp, chop, lfo, lfoG, rG] };
+    }
+    const f = 34 + 150 * k;
+    spinV.o1.frequency.setTargetAtTime(f, t, 0.05);
+    spinV.o2.frequency.setTargetAtTime(f * 1.5, t, 0.05);
+    spinV.wh.frequency.setTargetAtTime(f * 5.6, t, 0.05);
+    spinV.lfo.frequency.setTargetAtTime(4 + 52 * k, t, 0.05);
+    spinV.lp.frequency.setTargetAtTime(500 + 1600 * k, t, 0.08);
+    spinV.g.gain.setTargetAtTime(0.016 * Math.pow(k, 0.8), t, 0.06);
+    if (k < 0.02) {
+      if (!spinIdleT) spinIdleT = t;
+      else if (t - spinIdleT > 1.2) { for (const o of [spinV.o1, spinV.o2, spinV.wh, spinV.lfo, spinV.ns]) { try { o.stop(); } catch (_) {} } for (const nd of spinV.nodes) { try { nd.disconnect(); } catch (_) {} } spinV = null; spinIdleT = 0; }
+    } else spinIdleT = 0;
+  }
+
   // Continuous chainsaw idle/rev loop (sustained oscillators; stop cleanly)
   let sawLoop = null; // { osc, osc2, noise, filt, gain, rev }
   let sawGritCd = 0;
 
+  let sawCutUntil = 0;
   function chainsawGrit() {
     const c = ensure();
     if (!c || muted) return;
     if (c.currentTime < sawGritCd) return;
     sawGritCd = c.currentTime + 0.09;
+    // CL-161: Jerry's bite is two seconds of grinding: one at a time, the next as it runs out
+    if (c.currentTime < sawCutUntil && takes.ready('weapon-foley/chainsaw-cut')) return;
+    if (tk('weapon-foley/chainsaw-cut', 0.9)) { sawCutUntil = c.currentTime + 1.7; return; }
     playNoise({ dur: 0.07, vol: 0.13, filterFreq: 650, filterType: 'bandpass' });
     playTone({ freq: 85, type: 'sawtooth', dur: 0.05, vol: 0.07, slideTo: 48 });
   }
 
   // --- New-world SFX ---
   function spit() {
+    if (playTake('zombies/spider/spit', 0.9)) return;   // CL-148
     playNoise({ dur: 0.12, vol: 0.12, filterFreq: 700, filterType: 'bandpass' });
     playTone({ freq: 220, type: 'sawtooth', dur: 0.14, vol: 0.07, slideTo: 90 });
   }
   function acidHit() {
+    if (playTake('zombies/spider/acid-splash', 0.9)) return;   // CL-148
     playNoise({ dur: 0.2, vol: 0.14, filterFreq: 1200, filterType: 'bandpass' });
     playTone({ freq: 340, type: 'triangle', dur: 0.18, vol: 0.07, slideTo: 120 });
   }
   function scream() {
+    if (playTake('zombies/screamer/call', 1, 0, 0, null, 0.4)) return;   // CL-148
     playTone({ freq: 620, type: 'sawtooth', dur: 0.55, vol: 0.16, slideTo: 1450 });
     playTone({ freq: 880, type: 'square', dur: 0.4, vol: 0.07, slideTo: 1800, when: 0.08 });
     playNoise({ dur: 0.4, vol: 0.08, filterFreq: 2600, filterType: 'bandpass', when: 0.05 });
   }
   function bossSlam() {
+    if (playTake('zombies/guardian/slam', 1, 0, 0, null, 0.5)) return;   // CL-148
     playNoise({ dur: 0.4, vol: 0.26, filterFreq: 140, filterType: 'lowpass', rev: 0.7 });
     playTone({ freq: 55, type: 'sine', dur: 0.5, vol: 0.22, slideTo: 26 });
     playNoise({ dur: 0.1, vol: 0.1, filterFreq: 900, filterType: 'bandpass', rev: 0.5 });
   }
   function bossRoar() {
+    if (playTake('zombies/guardian/roar', 1, 0, 0, null, 0.5)) return;   // CL-148
     playTone({ freq: 90, type: 'sawtooth', dur: 0.9, vol: 0.2, slideTo: 45, rev: 0.6 });
     playTone({ freq: 140, type: 'square', dur: 0.7, vol: 0.1, slideTo: 60, when: 0.1, rev: 0.5 });
     playNoise({ dur: 0.7, vol: 0.12, filterFreq: 320, filterType: 'lowpass', when: 0.05, rev: 0.6 });
@@ -1597,6 +1968,7 @@ export const AudioSys = (() => {
   function guardianGrowl(volume = 1, pan = 0) {
     const v = Math.max(0, Math.min(1, volume));
     if (v < 0.03) return;
+    if (playTake('zombies/caveguard/growl', v, pan, 0, null, 0.45)) return;   // CL-148
     for (let i = 0; i < 9; i++) {
       const f = 72 - i * 1.8 + (Math.random() - 0.5) * 6;
       playTone({ freq: f, type: 'sawtooth', dur: 0.2, vol: 0.09 * v * (i < 2 ? 0.6 : 1), slideTo: f * 0.86, when: i * 0.16, attack: 0.04, rev: 0.45, pan });
@@ -1605,6 +1977,7 @@ export const AudioSys = (() => {
     playNoise({ dur: 1.5, vol: 0.07 * v, filterFreq: 190, filterType: 'lowpass', attack: 0.2, rev: 0.5, pan });
   }
   function spikeSnap() {
+    if (tk('builds/spike-snap')) return;   // CL-161
     playTone({ freq: 900, type: 'square', dur: 0.03, vol: 0.09 });
     playNoise({ dur: 0.04, vol: 0.09, filterFreq: 3200, filterType: 'highpass' });
   }
@@ -1632,6 +2005,7 @@ export const AudioSys = (() => {
     let v = flameVoices.get(key);
     if (!v) {
       if (flameVoices.size >= 4) return;
+      if (key === 'player') foley('flameOn', Math.min(1, volume), pan);   // CL-134: the burst catching
       if (!flameNoise) {
         flameNoise = noiseBuffer(2.7);
         const a = flameNoise.getChannelData(0);
@@ -1660,31 +2034,37 @@ export const AudioSys = (() => {
   }
   function fireHiss(volume = 1, pan = 0) {
     if (volume < 0.025) return;
+    if (pulse('fire-burning', 'world/fire-burning', volume * 2, pan, 0.5)) return;   // CL-161: a bed while things burn
     if (ctx && ctx.currentTime < (fireHiss.next || 0)) return;
     fireHiss.next = (ctx ? ctx.currentTime : 0) + 0.22;
     playNoise({ dur: 0.35, vol: 0.06 * volume, filterFreq: 3600, filterType: 'highpass', attack: 0.025, pan });
   }
   function fireCrackle(volume = 1, pan = 0) {
     if (volume < 0.025) return;
+    if (pulse('campfire', 'world/campfire', volume * 2.5, pan, 1.2)) return;   // CL-161: the fire's own bed while it's near
     if (ctx && ctx.currentTime < (fireCrackle.next || 0)) return;
     fireCrackle.next = (ctx ? ctx.currentTime : 0) + 0.13;
     playNoise({ dur: 0.045, vol: 0.07 * volume, filterFreq: 1600, filterType: 'bandpass', pan });
     playNoise({ dur: 0.3, vol: 0.04 * volume, filterFreq: 550, filterType: 'lowpass', attack: 0.045, pan });
   }
   function crateLand() {
+    if (tk('hq/crate-land', 1, 0, 0, 0.5)) return;   // CL-161
     playNoise({ dur: 0.18, vol: 0.18, filterFreq: 220, filterType: 'lowpass', rev: 0.5 });
     playTone({ freq: 120, type: 'triangle', dur: 0.16, vol: 0.12, slideTo: 60 });
     playNoise({ dur: 0.05, vol: 0.06, filterFreq: 1200, filterType: 'bandpass', when: 0.02, rev: 0.4 });
   }
   function pickup() {
+    if (tk('hq/pickup')) return;   // CL-161
     [520, 700, 1040].forEach((f, i) => playTone({ freq: f, type: 'square', dur: 0.07, vol: 0.09, when: i * 0.06 }));
   }
   function repairClank() {
+    if (tk('builds/repair')) return;   // CL-161
     playTone({ freq: 620, type: 'square', dur: 0.05, vol: 0.1 });
     playTone({ freq: 480, type: 'square', dur: 0.06, vol: 0.08, when: 0.07 });
     playNoise({ dur: 0.05, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', when: 0.02 });
   }
   function sellChime() {
+    if (tk('builds/sell')) return;   // CL-161
     playTone({ freq: 700, type: 'triangle', dur: 0.08, vol: 0.1 });
     playTone({ freq: 520, type: 'triangle', dur: 0.1, vol: 0.09, when: 0.07 });
   }
@@ -1717,7 +2097,8 @@ export const AudioSys = (() => {
     const t = ctx.currentTime;
     // Was 0.018 + 0.08: a heavy shower was a wall of 3 kHz noise right where a
     // gunshot's crack lives. It sits under the fight now (and on the ducked bus).
-    const vol = muted ? 0.0001 : Math.max(0.0001, (0.012 + amount * 0.048) * (1 - belowK));   // CL-101: none below
+    let vol = muted ? 0.0001 : Math.max(0.0001, (0.012 + amount * 0.048) * (1 - belowK));   // CL-101: none below
+    if (bed('rain', 'world/rain', vol / 0.06, { tc: 0.45 })) vol = 0.0001;   // CL-161: Jerry's rain, the synth's hiss out
     try {
       rainLoop.gain.gain.setTargetAtTime(vol, t, 0.45);
       rainLoop.filt.frequency.setTargetAtTime(2400 + amount * 1600, t, 0.6);
@@ -1727,6 +2108,7 @@ export const AudioSys = (() => {
     if (!rainLoop || !ctx) return;
     const t = ctx.currentTime;
     try { rainLoop.gain.gain.setTargetAtTime(0.0001, t, 0.5); } catch (_) {}
+    stopBed('rain', 1.2);   // CL-161
     const nodes = rainLoop;
     rainLoop = null;
     setTimeout(() => { try { nodes.noise.stop(); } catch (_) {} }, 900);
@@ -1787,18 +2169,33 @@ export const AudioSys = (() => {
     amb.wander += dt * (0.25 + Math.random() * 0.1);
     const gust = 0.72 + 0.28 * Math.sin(amb.wander) * Math.sin(amb.wander * 0.37 + 1.3);
     const w = Math.max(0, Math.min(1, st.wind)) * gust;
-    setG(amb.windLow, amb.windLow.vol * (0.25 + w) * top, 0.8);
-    setG(amb.windLeaves, amb.windLeaves.vol * w * (0.4 + 0.6 * st.forest) * (st.night ? 0.6 : 1) * top, 0.6);
+    // CL-161: Jerry's wind (day and night cross over) in place of the two noise layers, when it has loaded
+    const windAmt = (0.25 + w) * top, nightK = st.night ? 1 : 0;
+    amb.nightX = (amb.nightX == null ? nightK : amb.nightX) + (nightK - (amb.nightX == null ? nightK : amb.nightX)) * Math.min(1, dt * 0.25);
+    const recDay = bed('wind-day', 'world/wind-day', windAmt * (1 - amb.nightX), { tc: 0.8 });
+    const recNight = bed('wind-night', 'world/wind-night', windAmt * amb.nightX, { tc: 0.8 });
+    const recWind = recDay && recNight;
+    setG(amb.windLow, recWind ? 0 : amb.windLow.vol * (0.25 + w) * top, 0.8);
+    setG(amb.windLeaves, recWind ? 0 : amb.windLeaves.vol * w * (0.4 + 0.6 * st.forest) * (st.night ? 0.6 : 1) * top, 0.6);
     try { amb.windLow.filt.frequency.setTargetAtTime(200 + 260 * w, ctx.currentTime, 1.2); } catch (_) {}
     const wl = Math.max(0, Math.min(1, st.water));
-    setG(amb.water, amb.water.vol * wl * top, 0.5);
-    setG(amb.waterLow, amb.waterLow.vol * wl * top, 0.5);
+    // CL-161: the river (or, by the lake, the shore) as Jerry recorded it
+    const lake = Math.max(0, Math.min(1, +st.lake || 0));
+    const recRiver = bed('river', 'world/river', wl * (1 - lake) * top, { tc: 0.5 });
+    const recShore = bed('shore', 'world/lake-shore', wl * lake * top, { tc: 0.5 });
+    const recWater = recRiver && (lake < 0.05 || recShore);
+    setG(amb.water, recWater ? 0 : amb.water.vol * wl * top, 0.5);
+    setG(amb.waterLow, recWater ? 0 : amb.waterLow.vol * wl * top, 0.5);
     // crickets: only after dark, each voice chirping in irregular bursts
+    const crK = (st.night && st.rain < 0.4) ? (1 - st.rain) * top : 0;
+    const recCrickets = bed('crickets', 'world/crickets-night', crK, { tc: 1.5 });   // CL-161
+    bed('frogs', 'world/frogs-night', (st.night && st.rain < 0.6) ? Math.min(1, wl * 1.4) * (1 - st.rain) * top : 0, { tc: 2 });   // CL-162: by the water after dark
     for (const cr of amb.crickets) {
       cr.timer -= dt;
       if (cr.timer <= 0) { cr.on = !cr.on; cr.timer = cr.on ? 1.5 + Math.random() * 4 : 0.6 + Math.random() * 2.5; }
-      setG(cr, (st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) * top : 0.0001, 0.25);
+      setG(cr, (!recCrickets && st.night && st.rain < 0.4 && cr.on) ? cr.vol * (1 - st.rain) * top : 0.0001, 0.25);
     }
+    pulseBeds();   // CL-161: the campfire's, the lure's, Heron's: gone when nothing keeps them
     if (muted) return;
     // one-shots, all on the ambience bus
     const prevBus = routeBus; routeBus = ambBus;
@@ -1856,12 +2253,13 @@ export const AudioSys = (() => {
   function updateBelowAmbience(st, dt) {
     const B = st.below && st.below.on ? st.below : null;
     belowK += ((B ? 1 : 0) - belowK) * Math.min(1, dt * 1.6);
-    if (belowK < 0.002 && !B) { belowK = 0; if (below) { for (const n of [below.room, below.rumble, below.grind, below.hum, below.sub]) bg(n, 0, 0.3); } return 1; }
+    if (belowK < 0.002 && !B) { belowK = 0; stopBed('warren', 1); if (below) { for (const n of [below.room, below.rumble, below.grind, below.hum, below.sub]) bg(n, 0, 0.3); } return 1; }
     if (!below) belowStart();
     if (!below) return 1 - belowK;
     const k = belowK, s = B ? Math.max(0, Math.min(1, +B.stir || 0)) : 0, ph = B ? B.phase : 'calm';
     const warn = ph === 'warning', grab = ph === 'grab';
-    bg(below.room, BELOW_AMB.ROOM * k, 0.6);
+    const recRoom = bed('warren', 'below/warren-ambience', k, { tc: 0.6 });   // CL-161: Jerry's warren air
+    bg(below.room, recRoom ? 0 : BELOW_AMB.ROOM * k, 0.6);
     // the Hush
     const hushOn = !!(B && B.hush);
     if (B && below.hushWas === true && !hushOn) hushDie();
@@ -1909,6 +2307,7 @@ export const AudioSys = (() => {
     belowCount.drips++;
     const pan = Math.random() * 1.6 - 0.8, near = Math.random();
     const vol = 0.008 + near * 0.016;
+    if (tk('below/drip', 0.35 + 0.65 * near, pan, 0, 0.85, theme === 'iron' ? 1.25 : 1)) return;   // CL-161
     if (theme === 'iron') {   // onto old iron: a small ring
       playTone({ freq: 2300 + Math.random() * 1400, type: 'triangle', dur: 0.12, vol: vol * 0.8, attack: 0.002, pan, rev: 0.8 });
       return;
@@ -1931,6 +2330,7 @@ export const AudioSys = (() => {
   }
   function rockGroan(v = 1) {   // the rock settling under the weight of the noise
     belowCount.groans++;
+    if (tk('below/rock-groan', v, 0, 0, 0.9)) return;   // CL-161
     playNoise({ dur: 2.2, vol: 0.06 * v, filterFreq: 140, filterType: 'lowpass', attack: 0.6, rev: 0.9 });
     playTone({ freq: 48, type: 'sine', dur: 2, vol: 0.05 * v, slideTo: 34, attack: 0.5 });
     playTone({ freq: 96, type: 'triangle', dur: 1.6, vol: 0.012 * v, slideTo: 70, attack: 0.5, when: 0.3, rev: 0.8 });
@@ -1939,6 +2339,7 @@ export const AudioSys = (() => {
     belowCount.walls++;
     const pan = (Math.random() < 0.5 ? -1 : 1) * (0.4 + Math.random() * 0.5);
     const v = 0.4 + 0.6 * f;
+    if (playTake('zombies/caveguard/in-walls', v, pan, 0, null, 0.6)) return;   // CL-148
     playNoise({ dur: 1.1 + Math.random() * 0.8, vol: 0.05 * v, filterFreq: 260 + Math.random() * 160, filterType: 'bandpass', q: 0.9, attack: 0.35, pan, rev: 0.9 });
     const knocks = 2 + Math.floor(Math.random() * 3), at = 1 + Math.random() * 0.6;
     for (let i = 0; i < knocks; i++) {
@@ -1950,6 +2351,7 @@ export const AudioSys = (() => {
   function hushDie() {   // the battery's gone: the hum winds down and a little crackle goes out of it
     belowCount.hushDie++;
     if (muted) return;
+    if (tk('story/hush-dying', 1, 0, 0, 0.6)) return;   // CL-161 (batch 3)
     const prev = routeBus; routeBus = ambBus;
     try {
       playTone({ freq: 220, type: 'triangle', dur: 1.4, vol: 0.02, slideTo: 60, attack: 0.01, rev: 0.6 });
@@ -2004,8 +2406,10 @@ export const AudioSys = (() => {
       try { P.air.filt.frequency.setTargetAtTime(P.breathIn ? 330 : 170, t, 1.4); } catch (_) {}
     }
     const nightK = st.night ? 1 : PLACE_BED.CAVE_DAY;
-    pg(P.caveG, PLACE_BED.CAVE * cave * nightK * (P.breathIn ? 1 : 0.45), 1.2);
-    pg(P.lowG, PLACE_BED.CAVE_LOW * cave * nightK, 1.5);
+    const recCave = bed('cave', 'world/cave-mouth', cave * nightK, { pan: +st.cavePan || 0, tc: 1.2 });   // CL-161
+    if (recCave) { const b = beds.get('cave'); try { b.h.pan && b.h.pan(+st.cavePan || 0); } catch (_) {} }
+    pg(P.caveG, recCave ? 0 : PLACE_BED.CAVE * cave * nightK * (P.breathIn ? 1 : 0.45), 1.2);
+    pg(P.lowG, recCave ? 0 : PLACE_BED.CAVE_LOW * cave * nightK, 1.5);
     if (P.cavePan) try { P.cavePan.pan.setTargetAtTime(+st.cavePan || 0, t, 0.3); } catch (_) {}
     pg(P.pitG, PLACE_BED.PIT * pit, 2);
     pg(P.waterG, PLACE_BED.PIT_NOISE * pit, 2);
@@ -2038,6 +2442,7 @@ export const AudioSys = (() => {
     }
   }
   function birdChirp() {
+    if (tk('world/birds-day', 0.7, Math.random() * 1.2 - 0.6, 0, 0.5)) { amb && (amb.birdT += 4); return; }   // CL-161: a few birds, so the next a bit later
     const base = 2200 + Math.random() * 1400;
     const n = 2 + Math.floor(Math.random() * 3);
     const pan = Math.random() * 2 - 1;
@@ -2048,11 +2453,13 @@ export const AudioSys = (() => {
     }
   }
   function owlHoot() {
+    if (tk('world/owl', 0.8, Math.random() * 1.6 - 0.8, 0, 0.7)) return;   // CL-161
     const pan = Math.random() * 2 - 1;
     playTone({ freq: 390, type: 'sine', dur: 0.32, vol: 0.03, slideTo: 340, attack: 0.09, pan, rev: 0.7 });
     playTone({ freq: 370, type: 'sine', dur: 0.5, vol: 0.028, slideTo: 300, attack: 0.1, when: 0.5, pan, rev: 0.7 });
   }
   function thunder() {
+    if (tk('world/thunder', 0.7 + Math.random() * 0.3, Math.random() * 1.2 - 0.6, Math.random() * 0.5, 0.9)) return;   // CL-161
     const far = Math.random() < 0.6;
     const vol = far ? 0.08 : 0.16;
     const when = far ? 0.6 : 0.1;
@@ -2065,6 +2472,7 @@ export const AudioSys = (() => {
   function lightningStrike(dist = 60, pan = 0) {
     const d = Math.max(0, dist), near = Math.max(0, Math.min(1, 1 - d / 140));
     const when = Math.min(0.45, d / 343);
+    if (tk('world/lightning-strike', 0.35 + 0.65 * near, pan, when, 0.6 + 0.3 * (1 - near))) return;   // CL-161
     if (near > 0.55) playNoise({ dur: 0.18, vol: 0.2 * near, filterFreq: 2600, filterType: 'highpass', when, attack: 0.002, rev: 0.6, pan });
     playNoise({ dur: 0.5, vol: 0.12 + 0.12 * near, filterFreq: 500 + 900 * near, filterType: 'lowpass', when: when + 0.02, attack: 0.004, rev: 0.8, pan });
     playNoise({ dur: 2.4 + Math.random(), vol: 0.07 + 0.09 * near, filterFreq: 170 + 120 * near, filterType: 'lowpass', when: when + 0.12, attack: 0.08, rev: 0.95, pan: pan * 0.5 });
@@ -2072,7 +2480,19 @@ export const AudioSys = (() => {
   }
   // CL-93 (P-123): the holy grenade's pin. A choir's held chord (voices a little apart, each with its own slow
   // vibrato), a high bell over it, swelling in and ringing out over ~2 s: the blast lands at the end of it.
+  // CU-103: the chapel cross. A short ethereal choir, about a second, softer than the holy grenade's.
+  function chapelChoir() {
+    if (tk('world/chapel-choir', 1, 0, 0, 0.9)) return;   // CL-161 (batch 3)
+    const chord = [261.63, 329.63, 392, 523.25, 659.25];   // C major
+    chord.forEach((f, i) => {
+      for (const det of [-0.003, 0.003]) {
+        playTone({ freq: f * (1 + det), type: 'sine', dur: 1.15, vol: 0.03, attack: 0.2, when: i * 0.025, rev: 0.96, pan: (i - 2) * 0.14 });
+      }
+    });
+    playTone({ freq: 1046.5, type: 'sine', dur: 0.95, vol: 0.014, attack: 0.28, when: 0.06, rev: 0.96 });
+  }
   function holyChoir() {
+    if (tk('world/heavenly-choir', 1, 0, 0, 0.9)) return;   // CL-161 (batch 3)
     const chord = [293.66, 369.99, 440, 587.33, 739.99, 880];   // D major, two octaves
     chord.forEach((f, i) => {
       for (const det of [-0.004, 0.004]) {
@@ -2084,20 +2504,24 @@ export const AudioSys = (() => {
   }
   // The rabbit's scream as it goes for him: a short shrill squeal.
   function rabbitScreech() {
+    if (tk('world/rabbit-screech', 1, 0, 0, 0.3)) return;   // CL-161
     playTone({ freq: 1800, type: 'sawtooth', dur: 0.22, vol: 0.05, slideTo: 2600, attack: 0.01, rev: 0.3 });
     playNoise({ dur: 0.18, vol: 0.05, filterFreq: 3200, filterType: 'bandpass', attack: 0.005, rev: 0.3 });
   }
   // The holy blast: a bright boom with a shimmer on top.
   function holyBlast() {
+    if (tk('world/holy-blast', 1, 0, 0, 0.8)) return;   // CL-161 (batch 3)
     playNoise({ dur: 0.9, vol: 0.22, filterFreq: 700, filterType: 'lowpass', attack: 0.004, rev: 0.85 });
     playTone({ freq: 55, type: 'sine', dur: 1.2, vol: 0.12, slideTo: 30, attack: 0.01 });
     for (let i = 0; i < 5; i++) playTone({ freq: 1320 + i * 330, type: 'sine', dur: 0.8, vol: 0.012, attack: 0.01, when: 0.05 + i * 0.04, rev: 0.9 });
   }
   function distantGroan() {
+    if (playTake('horde/distant', 0.5 + Math.random() * 0.3, (Math.random() * 2 - 1) * 0.7, 0, null, 0.5)) return;   // CL-148
     groan(0.22 + Math.random() * 0.15, Math.random() < 0.3);
   }
   // Day cleared: a four-note brass-ish call with a soft swell under it.
   function dayCleared() {
+    if (tk('ui/day-cleared', 1, 0, 0, 0.5)) return;   // CL-161
     const seq = [392, 523, 659, 784];
     seq.forEach((f, i) => {
       playTone({ freq: f, type: 'sawtooth', dur: i === 3 ? 0.9 : 0.28, vol: 0.06, when: i * 0.22, attack: 0.03, rev: 0.6 });
@@ -2151,9 +2575,19 @@ export const AudioSys = (() => {
     gain.connect(weapBus || sfxGain);
     osc.start(t0); osc2.start(t0); lfo.start(t0); if (buf) noise.start(t0);
     sawLoop = { osc, osc2, noise, filt, gain, am, lfo, lfoAmt, rev: 0 };
+    if (delay > 0) setTimeout(() => { if (sawLoop) sawBed(sawLoop.rev); }, delay * 1000); else sawBed(0);   // CL-161
     return sawLoop;
   }
+  // CL-161: Jerry's idle take as the engine: looped, pitched and pushed up with the revs; the synth engine goes quiet under it.
+  function sawBed(rev) {
+    const on = !!sawLoop && !muted;
+    const ok = on && bed('saw', 'weapon-foley/chainsaw-idle', 0.6 + 0.9 * rev, { bus: weapBus || sfxGain, rate: 1 + 0.85 * rev, tc: 0.07 });
+    if (sawLoop) sawLoop.recorded = ok;
+    if (ok && sawLoop) { try { sawLoop.gain.gain.cancelScheduledValues(ctx.currentTime); sawLoop.gain.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.05); } catch (_) {} }
+    return ok;
+  }
   function killSawLoop(slow) {
+    stopBed('saw', slow ? 0.6 : 0.12);   // CL-161
     if (!sawLoop) return;
     const n = sawLoop; sawLoop = null;
     const c = ctx; if (!c) return;
@@ -2181,6 +2615,7 @@ export const AudioSys = (() => {
     if (!sawLoop || !ctx) return;
     const t = ctx.currentTime;
     sawLoop.rev = amount;
+    sawBed(amount);   // CL-161
     try {
       sawLoop.osc.frequency.setTargetAtTime(sawMix(amount, 'f'), t, 0.07);
       sawLoop.osc2.frequency.setTargetAtTime(sawMix(amount, 'f2'), t, 0.07);
@@ -2189,12 +2624,13 @@ export const AudioSys = (() => {
       sawLoop.lfoAmt.gain.setTargetAtTime(sawMix(amount, 'depth'), t, 0.08);
       sawLoop.am.gain.setTargetAtTime(1 - sawMix(amount, 'depth'), t, 0.08);
       sawLoop.gain.gain.cancelScheduledValues(t);
-      sawLoop.gain.gain.setTargetAtTime(muted ? 0.0001 : sawMix(amount, 'vol'), t, 0.06);
+      sawLoop.gain.gain.setTargetAtTime(muted || sawLoop.recorded ? 0.0001 : sawMix(amount, 'vol'), t, 0.06);   // CL-161: quiet under Jerry's engine
     } catch (_) {}
   }
   // The cord: a zip of rope with the recoil ratchet under it, then the engine
   // coughs. `catches` false is a dry tank — it coughs once and dies.
   function sawPullCord(catches) {
+    if (tk(catches ? 'weapon-foley/chainsaw-start' : 'weapon-foley/chainsaw-dry-pull', 1) || (!catches && tk('weapon-foley/chainsaw-start', 0.6))) return;   // CL-161
     playNoise({ dur: 0.3, vol: 0.09, filterFreq: 1300, filterType: 'bandpass', q: 1.8, attack: 0.06 });
     playNoise({ dur: 0.22, vol: 0.05, filterFreq: 2600, filterType: 'bandpass', q: 2.5, when: 0.05, attack: 0.05 });
     for (let i = 0; i < 8; i++) playTone({ freq: rr(1500, 2200), type: 'square', dur: 0.01, vol: 0.028, when: 0.03 + i * 0.032 });
@@ -2211,6 +2647,7 @@ export const AudioSys = (() => {
     }
   }
   function sawShutdown() {
+    if (tk('weapon-foley/chainsaw-stop')) return;   // CL-161
     playTone({ freq: 62, type: 'sawtooth', dur: 0.65, vol: 0.05, slideTo: 20, attack: 0.02 });
     for (const [w, v] of [[0.14, 0.07], [0.3, 0.055], [0.48, 0.04], [0.62, 0.03]]) {
       playTone({ freq: rr(40, 52), type: 'square', dur: 0.05, vol: v, when: w, slideTo: 30 });
@@ -2253,135 +2690,21 @@ export const AudioSys = (() => {
   function isChainsawRunning() { return !!sawLoop; }
 
   // --- Reloads: every weapon's own mechanics, cued off its reload animation.
+  // CL-134: the handling cues play from their banks (heavier kit: lower, slower, louder); 'charge' is the handle back
+  // then home, 'brass' a handful of cases landing. CL-135: all of them now, the flamer's valves and tank, its piezo
+  // and the rotary gun's motor included: no beeps left in a reload.
+  const BANKED_CUES = { magRelease: 1, magOut: 1, magIn: 1, magSlap: 1, slideBack: 1, slideFwd: 1, akRockOut: 1, akRockIn: 1, drumOut: 1,
+    drumIn: 1, boltUp: 1, boltBack: 1, boltFwd: 1, boltDown: 1, boxLatch: 1, belt: 1, boxSeat: 1, shell: 1, bigBrass: 1,
+    grab: 1, valveShut: 1, valveOpen: 1, tankOff: 1, tankOn: 1, igniter: 1, motorBlip: 1 };
   function reloadCue(name, heft = 1) {
-    const h = heft, lo = 1 / Math.sqrt(h);   // heavier kit, lower and louder
-    switch (name) {
-      case 'magRelease':
-        playTone({ freq: 1900 * lo, type: 'square', dur: 0.012, vol: 0.05 });
-        playNoise({ dur: 0.018, vol: 0.04, filterFreq: 4200, filterType: 'highpass' });
-        break;
-      case 'magOut':
-        playNoise({ dur: 0.07, vol: 0.06 * h, filterFreq: 1500 * lo, filterType: 'bandpass', q: 1.4, attack: 0.02 });
-        playTone({ freq: 420 * lo, type: 'triangle', dur: 0.05, vol: 0.04, slideTo: 300 * lo, when: 0.03 });
-        break;
-      case 'magIn':
-        playNoise({ dur: 0.05, vol: 0.05 * h, filterFreq: 1200 * lo, filterType: 'bandpass', q: 1.4, attack: 0.02 });
-        playTone({ freq: 950 * lo, type: 'square', dur: 0.018, vol: 0.06, when: 0.05 });
-        break;
-      case 'magSlap':
-        playTone({ freq: 190 * lo, type: 'sine', dur: 0.06, vol: 0.09 * h, slideTo: 90 * lo });
-        playNoise({ dur: 0.04, vol: 0.06 * h, filterFreq: 1600, filterType: 'lowpass' });
-        playTone({ freq: 2300 * lo, type: 'square', dur: 0.012, vol: 0.05, when: 0.008 });
-        break;
-      case 'slideBack':
-        playNoise({ dur: 0.055, vol: 0.06, filterFreq: 2600, filterType: 'bandpass', q: 1.2, attack: 0.02 });
-        playTone({ freq: 720 * lo, type: 'triangle', dur: 0.05, vol: 0.045, slideTo: 520 * lo });
-        break;
-      case 'slideFwd':
-        playTone({ freq: 1150 * lo, type: 'square', dur: 0.02, vol: 0.08 });
-        playNoise({ dur: 0.03, vol: 0.07, filterFreq: 3200, filterType: 'highpass' });
-        playTone({ freq: 300 * lo, type: 'triangle', dur: 0.05, vol: 0.05, when: 0.005, slideTo: 200 * lo });
-        break;
-      case 'charge':      // charging handle / cocking lever: back, then slam home
-        reloadCue('slideBack', h); setTimeout(() => reloadCue('slideFwd', h), 120);
-        break;
-      case 'akRockOut':   // mag rocked forward out of the well
-        playTone({ freq: 640, type: 'square', dur: 0.02, vol: 0.06 });
-        playNoise({ dur: 0.09, vol: 0.07, filterFreq: 1100, filterType: 'bandpass', q: 1.1, when: 0.015, attack: 0.03 });
-        break;
-      case 'akRockIn':
-        playNoise({ dur: 0.08, vol: 0.07, filterFreq: 1000, filterType: 'bandpass', q: 1.1, attack: 0.03 });
-        playTone({ freq: 520, type: 'square', dur: 0.025, vol: 0.08, when: 0.08 });
-        playTone({ freq: 150, type: 'sine', dur: 0.05, vol: 0.06, when: 0.08, slideTo: 90 });
-        break;
-      case 'drumOut':
-        playTone({ freq: 360, type: 'square', dur: 0.02, vol: 0.05 });
-        playNoise({ dur: 0.1, vol: 0.08, filterFreq: 700, filterType: 'bandpass', q: 1, when: 0.02, attack: 0.03 });
-        playTone({ freq: 120, type: 'triangle', dur: 0.08, vol: 0.05, when: 0.06, slideTo: 80 });
-        break;
-      case 'drumIn':
-        playNoise({ dur: 0.08, vol: 0.07, filterFreq: 650, filterType: 'bandpass', q: 1, attack: 0.03 });
-        playTone({ freq: 110, type: 'sine', dur: 0.09, vol: 0.1, when: 0.07, slideTo: 60 });
-        playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.06, when: 0.07 });
-        break;
-      case 'boltUp':
-        playTone({ freq: 880, type: 'square', dur: 0.018, vol: 0.06 });
-        playNoise({ dur: 0.025, vol: 0.04, filterFreq: 3000, filterType: 'bandpass' });
-        break;
-      case 'boltBack':
-        playNoise({ dur: 0.09, vol: 0.06, filterFreq: 2200, filterType: 'bandpass', q: 1.5, attack: 0.03 });
-        playTone({ freq: 600, type: 'triangle', dur: 0.08, vol: 0.035, slideTo: 420 });
-        break;
-      case 'boltFwd':
-        playNoise({ dur: 0.08, vol: 0.06, filterFreq: 2000, filterType: 'bandpass', q: 1.5, attack: 0.03 });
-        playTone({ freq: 460, type: 'triangle', dur: 0.07, vol: 0.035, slideTo: 640 });
-        break;
-      case 'boltDown':
-        playTone({ freq: 1250, type: 'square', dur: 0.018, vol: 0.07 });
-        playTone({ freq: 260, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.01, slideTo: 180 });
-        break;
-      case 'boxLatch':
-        playTone({ freq: 760, type: 'square', dur: 0.022, vol: 0.06 });
-        playTone({ freq: 380, type: 'square', dur: 0.03, vol: 0.05, when: 0.03 });
-        break;
-      case 'belt':        // a belt of rounds rattling link by link
-        for (let i = 0; i < 9; i++) playTone({ freq: rr(1800, 2800), type: 'triangle', dur: 0.02, vol: 0.035, when: i * 0.028 + rr(0, 0.01) });
-        playNoise({ dur: 0.26, vol: 0.03, filterFreq: 3500, filterType: 'bandpass', attack: 0.04 });
-        break;
-      case 'boxSeat':
-        playTone({ freq: 95, type: 'sine', dur: 0.1, vol: 0.11, slideTo: 55 });
-        playNoise({ dur: 0.06, vol: 0.06, filterFreq: 700, filterType: 'lowpass' });
-        break;
-      case 'motorBlip':
-        playTone({ freq: 110, type: 'sawtooth', dur: 0.28, vol: 0.05, slideTo: 260 });
-        playTone({ freq: 260, type: 'sawtooth', dur: 0.2, vol: 0.035, when: 0.26, slideTo: 90 });
-        break;
-      case 'valveShut':
-        playTone({ freq: 1400, type: 'sine', dur: 0.09, vol: 0.03, slideTo: 900 });
-        playNoise({ dur: 0.22, vol: 0.05, filterFreq: 5000, filterType: 'highpass', attack: 0.01 });
-        break;
-      case 'tankOff':
-        playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.05 });
-        playTone({ freq: 160, type: 'sine', dur: 0.12, vol: 0.07, when: 0.05, slideTo: 110 });
-        playNoise({ dur: 0.1, vol: 0.05, filterFreq: 600, filterType: 'lowpass', when: 0.05 });
-        break;
-      case 'tankOn':
-        playTone({ freq: 140, type: 'sine', dur: 0.14, vol: 0.1, slideTo: 85 });
-        playNoise({ dur: 0.08, vol: 0.06, filterFreq: 800, filterType: 'lowpass' });
-        playTone({ freq: 680, type: 'square', dur: 0.02, vol: 0.06, when: 0.1 });
-        break;
-      case 'valveOpen':
-        playNoise({ dur: 0.35, vol: 0.05, filterFreq: 5200, filterType: 'highpass', attack: 0.05 });
-        playTone({ freq: 900, type: 'sine', dur: 0.1, vol: 0.025, slideTo: 1500 });
-        break;
-      case 'igniter':
-        playTone({ freq: 2600, type: 'square', dur: 0.01, vol: 0.05 });
-        playTone({ freq: 2600, type: 'square', dur: 0.01, vol: 0.05, when: 0.06 });
-        playNoise({ dur: 0.2, vol: 0.06, filterFreq: 700, filterType: 'lowpass', when: 0.08, attack: 0.04 });
-        break;
-      case 'shell':       // a shotgun shell thumbed into the tube
-        playNoise({ dur: 0.04, vol: 0.06, filterFreq: 1700, filterType: 'bandpass', q: 1.3, attack: 0.012 });
-        playTone({ freq: 520, type: 'triangle', dur: 0.04, vol: 0.05, when: 0.03, slideTo: 300 });
-        playTone({ freq: 1500, type: 'square', dur: 0.01, vol: 0.035, when: 0.05 });
-        break;
-      case 'brass':       // spent cases tumbling out onto the ground
-        for (let i = 0; i < 6; i++) {
-          playTone({ freq: rr(1700, 3200), type: 'triangle', dur: 0.03, vol: 0.03, when: 0.05 + i * rr(0.04, 0.07) });
-          playNoise({ dur: 0.015, vol: 0.015, filterFreq: 3800, filterType: 'bandpass', when: 0.05 + i * 0.05 });
-        }
-        break;
-      case 'bigBrass':    // fat launcher cases, fewer and duller
-        for (let i = 0; i < 4; i++) playTone({ freq: rr(500, 900), type: 'triangle', dur: 0.06, vol: 0.05, when: 0.06 + i * rr(0.07, 0.11), slideTo: 380 });
-        break;
-      case 'grab':        // hand to the pouch
-        playNoise({ dur: 0.08, vol: 0.03, filterFreq: 2400, filterType: 'bandpass', q: 0.8, attack: 0.03 });
-        break;
-    }
+    const h = heft;   // heavier kit, lower and louder
+    const hv = Math.min(1.3, Math.sqrt(h)), hr = 1 / Math.pow(h, 0.35);
+    if (BANKED_CUES[name]) { foley(name, hv, 0, 0, hr); return; }
+    if (name === 'charge') { if (tk('weapon-foley/charging-handle', hv, 0, 0, 0, hr)) return; foley('slideBack', hv, 0, 0, hr); foley('slideFwd', hv, 0, 0.12, hr); return; }   // CL-161
+    if (name === 'brass') { let t = 0.05; for (let i = 0; i < 6; i++) { foley('brass', 0.55 + Math.random() * 0.4, (Math.random() - 0.5) * 0.6, t, 0.9 + Math.random() * 0.25); t += rr(0.035, 0.07); } }
   }
-  // Reload finished: a tiny settle instead of the old two-note UI beep.
-  function reloadDone() {
-    playNoise({ dur: 0.03, vol: 0.025, filterFreq: 1800, filterType: 'bandpass' });
-  }
+  // Reload finished: the gun settling in the hands (CL-135: a dull knock and a tick, not a noise burst).
+  function reloadDone() { foley('settle', 0.8, 0, 0, 0.95 + Math.random() * 0.1); }
   function reloadStart() { reloadCue('grab'); }
 
   // --- Turret servos: a low motor per turret, up to four at once — the nearest
@@ -2409,6 +2732,7 @@ export const AudioSys = (() => {
     return { o1, o2, whine, lp, am, lfo, g, pan, key: null };
   }
   // `list`: up to four { key, level, freq, pan }, loudest first.
+  const servoWas = new Map();   // CL-161: each turret's last level, for the servo whir
   function turretServos(list) {
     const c = ctx;
     if (!c || muted) {
@@ -2416,6 +2740,14 @@ export const AudioSys = (() => {
       return;
     }
     const t = c.currentTime;
+    // CL-161: Jerry's servo whir as a turret starts to swing (per turret, at most every 0.7 s); the hum stays under it
+    const servoRec = takes.ready('turrets/servo');
+    if (servoRec && list) for (const w of list) {
+      if (!w || !w.key) continue;
+      const was = servoWas.get(w.key) || { level: 0, at: -9 };
+      if (w.level > 0.35 && was.level <= 0.2 && t - was.at > 0.7) { tk('turrets/servo', Math.min(1, 0.4 + w.level), w.pan || 0); was.at = t; }
+      was.level = w.level; servoWas.set(w.key, was);
+    }
     for (let i = 0; i < 4; i++) {
       const want = list && list[i];
       if (!want && !servoVoices[i]) continue;
@@ -2424,7 +2756,7 @@ export const AudioSys = (() => {
         servoVoices[i] = makeServoVoice(c);
       }
       const v = servoVoices[i];
-      const lvl = want ? Math.min(0.05, want.level * 0.055) : 0;
+      const lvl = want ? Math.min(0.05, want.level * 0.055) * (servoRec ? 0.45 : 1) : 0;
       const f = want ? want.freq : 40;
       try {
         // A voice that has changed turret jumps rather than slides to the new pitch.
@@ -2446,6 +2778,7 @@ export const AudioSys = (() => {
   // --- Landmine: the click-beep of a pressure plate taking weight.
   function mineBeep(v = 1, pan = 0) {
     if (v < 0.03) return;
+    if (tk('builds/mine-beep', v, pan)) return;   // CL-161
     playTone({ freq: 1400, type: 'square', dur: 0.015, vol: 0.06 * v, pan });
     playTone({ freq: 2350, type: 'square', dur: 0.11, vol: 0.09 * v, when: 0.03, pan, attack: 0.005 });
     playTone({ freq: 2350, type: 'sine', dur: 0.11, vol: 0.05 * v, when: 0.03, pan });
@@ -2459,6 +2792,7 @@ export const AudioSys = (() => {
     if (!c || muted || v < 0.04) return;
     if (c.currentTime < (buildHitCd[mat] || 0)) return;
     buildHitCd[mat] = c.currentTime + 0.07;
+    if (BUILD_TAKE[mat] && playTake('build-attacks/' + BUILD_TAKE[mat] + '-hit', v, pan)) return;   // CL-148
     if (mat === 'wood') {
       playTone({ freq: rr(120, 160), type: 'sine', dur: 0.09, vol: 0.12 * v, slideTo: 70, pan });
       playNoise({ dur: 0.07, vol: 0.08 * v, filterFreq: rr(600, 900), filterType: 'bandpass', q: 1.2, pan });
@@ -2482,8 +2816,10 @@ export const AudioSys = (() => {
       playTone({ freq: 110, type: 'sine', dur: 0.06, vol: 0.06 * v, slideTo: 60, pan });
     }
   }
+  const BUILD_TAKE = { wood: 'wood', stone: 'stone', sand: 'sand', wire: 'wire', metal: 'metal', steel: 'metal', turret: 'turret' };   // CL-148
   function buildBreak(mat, v = 1, pan = 0) {
     if (muted || v < 0.03) return;
+    if (BUILD_TAKE[mat] && playTake('build-attacks/' + BUILD_TAKE[mat] + '-break', v, pan)) return;   // CL-148
     if (mat === 'wood') {
       playNoise({ dur: 0.12, vol: 0.18 * v, filterFreq: 1800, filterType: 'bandpass', q: 0.9, pan });         // crack
       playTone({ freq: 90, type: 'sine', dur: 0.25, vol: 0.14 * v, slideTo: 40, pan });
@@ -2518,7 +2854,12 @@ export const AudioSys = (() => {
   }
 
   // --- Putting things up. Every kind of piece has its own work sound.
+  // CL-161: Jerry's placing sounds, by what the piece is made of (spikes, mines, barrels and the lure keep their own)
+  const PLACE_TAKE = { wall: 'place-wood', floor: 'place-wood', platform: 'place-wood', stairs: 'place-wood', pillar: 'place-wood',
+    window: 'place-wood', door: 'place-wood', railing: 'place-metal', sandbag: 'place-sandbag', barricade: 'place-metal',
+    wire: 'place-wire', light: 'place-turret', heavy: 'place-turret', flame: 'place-turret', mortar: 'place-turret', m240: 'place-turret' };
   function buildSound(kind) {
+    if (PLACE_TAKE[kind] && tk('builds/' + PLACE_TAKE[kind])) return;
     const knock = (w, f = 1) => {
       playTone({ freq: rr(200, 250) * f, type: 'sine', dur: 0.06, vol: 0.1, when: w, slideTo: 120 * f });
       playNoise({ dur: 0.035, vol: 0.08, filterFreq: 1900 * f, filterType: 'bandpass', q: 1.3, when: w });
@@ -2625,63 +2966,222 @@ export const AudioSys = (() => {
               chase: { f: [76, 90, 0.8], dur: [0.6, 0.8], vowel: 'o', rough: [0.55, 16], vib: 0.03, breath: 0.2, vol: 0.055 },
               attack: { f: [100, 120, 0.6], dur: [0.3, 0.4], vowel: 'a', rough: [0.6, 20], vib: 0.02, breath: 0.3, vol: 0.07 } }
   };
+  // CL-136 (Jerry, 2026-10-09: "zombies need unique sounds"): the kinds had their own voices (CL-130) but they all died
+  // and took hits with the same two sounds, which is most of what a fight is. Each throat now has a death cry (its
+  // attack voice falling away, choked and ragged, longer) and a hurt grunt (short, pitched up), made from its own
+  // attack spec; the fall thud underneath stays shared.
+  for (const k of Object.keys(DEAD_VOICES)) {
+    const t = DEAD_VOICES[k], a = t.attack;
+    if (!t.death) t.death = { f: [a.f[0] * 1.08, a.f[1] * 1.12, 0.4], dur: [a.dur[1] * 1.7, a.dur[1] * 2.6], vowel: a.vowel, vowel2: 'uh', rough: [Math.min(1, a.rough[0] + 0.2), a.rough[1] * 0.75], vib: (a.vib || 0) + 0.035, breath: (a.breath || 0) + 0.5, vol: a.vol * 1.2, muffle: a.muffle };
+    if (!t.hurt) t.hurt = { f: [a.f[0] * 1.2, a.f[1] * 1.3, 1.12], dur: [0.1, 0.16], vowel: a.vowel, rough: [a.rough[0], a.rough[1] * 1.2], vib: 0, breath: (a.breath || 0) + 0.2, vol: a.vol * 0.8, muffle: a.muffle };
+  }
+  // The bosses and the spider have no throat: their death is the growl falling, their hurt a bark.
+  const GROWL_DEATH = { demon: [150, 40, 0.7, 0.14], colossus: [80, 24, 1.0, 0.18], guardian: [120, 36, 0.8, 0.14], spider: [900, 300, 0.35, 0.07], caveguard: [110, 34, 0.7, 0.12] };
+  let zombieNoise = null;
+  const zombieCurves = new Map();
+  const zombieFolds = new Map();
+  function zombieFold(c, family) {
+    if (!zombieFolds.has(family)) {
+      const {real,imag} = zombieFoldCoefficients(family);
+      zombieFolds.set(family,c.createPeriodicWave(real,imag));
+    }
+    return zombieFolds.get(family);
+  }
+  function vocalContour(param, points, scale, t0, dur, floor = .0001) {
+    points.forEach(([at,value],i) => {
+      const level = Math.max(floor,value*scale), time = t0+at*dur;
+      if (!i) param.setValueAtTime(level,time); else param.exponentialRampToValueAtTime(level,time);
+    });
+  }
+  function zombieAirSource(c) {
+    if (!zombieNoise) zombieNoise = noiseBuffer(3);
+    const src = c.createBufferSource(); src.buffer = zombieNoise; src.loop = true;
+    return src;
+  }
+  // Sustained, irregular air/tissue noise. No pitched chirps or periodic robot tremolo.
+  function playZombieTexture(a, v, pan, when) {
+    const c = ensure(); if (!c || muted || v < 0.002) return;
+    const t0 = c.currentTime + when, dur = a.dur;
+    if (deathRoute && t0 >= deathRoute.end) return;
+    const src = zombieAirSource(c), filter = c.createBiquadFilter();
+    filter.type = a.filterType || 'bandpass'; filter.Q.value = a.q;
+    filter.frequency.setValueAtTime(a.freq * rr(.93, 1.07), t0);
+    filter.frequency.exponentialRampToValueAtTime(a.freq2 || a.freq * rr(.85, 1.12), t0 + dur);
+    const flutter = c.createGain(); flutter.gain.setValueAtTime(.8, t0);
+    if (a.flutter) for (let at=.035; at<dur; at+=rr(.65,1.35)/a.flutter)
+      flutter.gain.linearRampToValueAtTime(rr(.24,1.15), t0 + at);
+    const env = c.createGain(), level = a.vol * v;
+    if (a.gainContour) vocalContour(env.gain,a.gainContour,level,t0,dur);
+    else {
+      env.gain.setValueAtTime(.0001, t0);
+      env.gain.exponentialRampToValueAtTime(Math.max(.0002,level), t0 + Math.min(a.attack,dur*.25));
+      env.gain.linearRampToValueAtTime(level*.7, t0 + dur*.5);
+      env.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    }
+    const dc = c.createBiquadFilter(); dc.type = 'highpass'; dc.frequency.value = 18;
+    src.connect(filter); filter.connect(dc); dc.connect(flutter); flutter.connect(env);
+    const out = pan ? panNode(env, pan) : env; out.connect(outBus()); sendToReverb(out, a.rev);
+    src.start(t0,rr(0,2.5)); src.stop(cryStop(t0 + dur + .025));
+  }
   function deadVoice(spec, v = 1, pan = 0, when = 0) {
     const c = ensure();
     if (!c || muted || !spec) return;
     const n = spec.repeat ? spec.repeat[0] : 1;
     for (let r = 0; r < n; r++) {
       const t0 = c.currentTime + when + (spec.repeat ? r * spec.repeat[1] : 0);
-      const dur = rr(spec.dur[0], spec.dur[1]), f0 = rr(spec.f[0], spec.f[1]), f1 = Math.max(25, f0 * spec.f[2]);
+      if (deathRoute && t0 >= deathRoute.end) continue;
+      const dur = rr(spec.dur[0], spec.dur[1]), f0 = rr(spec.f[0], spec.f[1]), f1 = Math.max(20, f0 * spec.f[2]);
       const vol = spec.vol * v * (spec.repeat ? 1 - r * 0.15 : 1);
       if (vol < 0.002) continue;
       const env = c.createGain();
-      env.gain.setValueAtTime(0.0001, t0);
-      env.gain.exponentialRampToValueAtTime(vol, t0 + Math.min(0.08, dur * 0.25));
-      env.gain.setTargetAtTime(vol * 0.7, t0 + dur * 0.4, dur * 0.2);
-      env.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      if (spec.gainContour) vocalContour(env.gain,spec.gainContour,vol,t0,dur);
+      else {
+        env.gain.setValueAtTime(0.0001, t0);
+        env.gain.exponentialRampToValueAtTime(vol, t0 + Math.min(spec.attack ?? 0.08, dur * 0.25));
+        env.gain.setTargetAtTime(vol * 0.7, t0 + dur * 0.4, dur * 0.2);
+        env.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      }
       // The rasp: the buzz chopped by a low LFO (rough[0] deep, rough[1] Hz, drifting a little).
       const am = c.createGain(); am.gain.setValueAtTime(1 - spec.rough[0] * 0.5, t0);
-      const lfo = c.createOscillator(); lfo.type = 'triangle'; lfo.frequency.setValueAtTime(spec.rough[1] * rr(0.9, 1.1), t0);
-      lfo.frequency.linearRampToValueAtTime(spec.rough[1] * rr(0.7, 1.2), t0 + dur);
-      const lfoG = c.createGain(); lfoG.gain.value = spec.rough[0] * 0.5; lfo.connect(lfoG); lfoG.connect(am.gain);
-      // The folds: a saw and its twin a few cents off (a ragged, doubled throat), with a slow wobble in pitch.
+      let lfo = null;
+      if (spec.organic) {
+        // Contractions vary in spacing and strength; a fixed LFO made every monster buzz the same way.
+        for (let at=.013;at<dur;at+=rr(.65,1.45)/Math.max(8,spec.rough[1]))
+          am.gain.linearRampToValueAtTime(1-spec.rough[0]*rr(.12,.85),t0+at);
+      } else {
+        lfo=c.createOscillator();lfo.type='triangle';lfo.frequency.setValueAtTime(spec.rough[1]*rr(.9,1.1),t0);
+        lfo.frequency.linearRampToValueAtTime(spec.rough[1]*rr(.7,1.2),t0+dur);
+        const lfoG=c.createGain();lfoG.gain.value=spec.rough[0]*.5;lfo.connect(lfoG);lfoG.connect(am.gain);
+      }
+      const tune=(param, ratio=1)=>{
+        if (spec.pitchContour) vocalContour(param,spec.pitchContour,f0*ratio,t0,dur,20);
+        else {param.setValueAtTime(f0*ratio,t0);param.exponentialRampToValueAtTime(f1*ratio,t0+dur);}
+      };
+      // Fold shape carries the species character. The second fold is quiet and imperfect, never a chorus twin.
       const oscs = [];
-      for (const det of [1, 1.012]) {
-        const o = c.createOscillator(); o.type = 'sawtooth';
-        o.frequency.setValueAtTime(f0 * det, t0); o.frequency.exponentialRampToValueAtTime(f1 * det, t0 + dur);
-        if (spec.vib) {
+      for (const [det,weight] of (spec.organic ? [[1,1.35],[.997,.23]] : [[1,1],[1.012,1]])) {
+        const o = c.createOscillator();
+        if (spec.organic) o.setPeriodicWave(zombieFold(c,spec.fold || 'ragged')); else o.type='sawtooth';
+        tune(o.frequency,det);
+        if (spec.organic) {
+          // Broken vocal folds wander irregularly, rather than following a musical vibrato.
+          for (let at=0; at<dur; at+=rr(.023,.067)) o.detune.linearRampToValueAtTime(rr(-1,1)*1200*spec.jitter, t0+at);
+        } else if (spec.vib) {
           const vb = c.createOscillator(); vb.frequency.value = rr(4, 6.5);
           const vg = c.createGain(); vg.gain.value = f0 * spec.vib; vb.connect(vg); vg.connect(o.frequency);
-          vb.start(t0); vb.stop(t0 + dur + 0.05);
+          vb.start(t0); vb.stop(cryStop(t0 + dur + 0.05));
         }
-        o.connect(am); oscs.push(o);
+        const foldGain=c.createGain();foldGain.gain.value=weight;o.connect(foldGain);foldGain.connect(am);oscs.push(o);
       }
-      // The mouth: three formants of the vowel, moving to vowel2 over the sound.
+      let excitation = am;
+      if (spec.organic) {
+        const air = zombieAirSource(c), tissue = c.createBiquadFilter(), grit = c.createGain();
+        tissue.type = 'lowpass'; tissue.frequency.value = Math.min(7000,Math.max(500,f0*22));
+        grit.gain.value = spec.grit * .6; air.connect(tissue); tissue.connect(grit); grit.connect(am);
+        air.start(t0,rr(0,2.5)); air.stop(cryStop(t0+dur+.05));
+        const drive = Math.round(spec.drive*2)/2;
+        if (!zombieCurves.has(drive)) zombieCurves.set(drive,zombieDriveCurve(drive));
+        const folds = c.createWaveShaper(); folds.curve = zombieCurves.get(drive); folds.oversample = '2x';
+        const dc = c.createBiquadFilter(); dc.type = 'highpass'; dc.frequency.value = 18;
+        am.connect(folds); folds.connect(dc); excitation = dc;
+      }
+      // Lower, broader resonances and a chest path keep the growls out of the thin speech band.
       const sum = c.createGain(); sum.gain.value = 1;
       const A = VOWEL[spec.vowel] || VOWEL.uh, B = VOWEL[spec.vowel2 || spec.vowel] || A;
       A.forEach(([F, Q, g], k) => {
-        const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = Q;
-        bp.frequency.setValueAtTime(F, t0); bp.frequency.linearRampToValueAtTime(B[k][0], t0 + dur);
-        const fg = c.createGain(); fg.gain.value = g * 2.2;
-        am.connect(bp); bp.connect(fg); fg.connect(sum);
+        const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = Q * (spec.formantQ || 1);
+        if (spec.vowelPath) {
+          spec.vowelPath.forEach(([at,vowel],i)=>{
+            const mouth=(VOWEL[vowel]||A)[k][0]*(spec.formantScale||1);
+            if(!i)bp.frequency.setValueAtTime(mouth,t0+at*dur);else bp.frequency.exponentialRampToValueAtTime(mouth,t0+at*dur);
+          });
+        } else {bp.frequency.setValueAtTime(F*(spec.formantScale||1),t0);bp.frequency.linearRampToValueAtTime(B[k][0]*(spec.formantScale||1),t0+dur);}
+        const fg = c.createGain(); fg.gain.value = g * (spec.formantGain || 2.2);
+        excitation.connect(bp); bp.connect(fg); fg.connect(sum);
       });
+      if (spec.organic && spec.chest) {
+        const body = c.createBiquadFilter(), weight = c.createGain(); body.type = 'lowpass'; body.frequency.value = spec.bodyHz || 230;
+        weight.gain.value = spec.chest * .55; excitation.connect(body); body.connect(weight); weight.connect(sum);
+        const chest = c.createOscillator(), root = c.createGain();chest.setPeriodicWave(zombieFold(c,'chest'));
+        tune(chest.frequency);
+        root.gain.value=spec.chest*(spec.bodyMix ?? .72);chest.connect(root);root.connect(sum);oscs.push(chest);
+      }
       let tail = sum;
       if (spec.muffle) { const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = spec.muffle; sum.connect(lp); tail = lp; }
       tail.connect(env);
       const out = pan ? panNode(env, pan) : env;
-      out.connect(outBus()); sendToReverb(out, 0.3);
-      for (const o of oscs) { o.start(t0); o.stop(t0 + dur + 0.05); }
-      lfo.start(t0); lfo.stop(t0 + dur + 0.05);
+      out.connect(outBus()); sendToReverb(out, spec.rev ?? 0.3);
+      for (const o of oscs) { o.start(t0); o.stop(cryStop(t0 + dur + 0.05)); }
+      if(lfo){lfo.start(t0);lfo.stop(cryStop(t0+dur+.05));}
       // The breath through it.
-      if (spec.breath) playNoise({ dur: dur * 0.9, vol: vol * 0.35 * spec.breath, filterFreq: (B[1] || A[1])[0], filterType: 'bandpass', q: 1.2, attack: dur * 0.3, rev: 0.25, pan, when: when + (t0 - c.currentTime - when) });
+      if (spec.breath) playZombieTexture({dur:dur*.9,vol:vol*.35*spec.breath,freq:(B[1]||A[1])[0]*(spec.formantScale||1),freq2:(A[1]||B[1])[0]*(spec.formantScale||1),q:1.2,attack:dur*.22,rev:(spec.rev??.3)*.7,flutter:spec.organic?7:0},1,pan,t0-c.currentTime);
     }
   }
   const voiceCount = Object.create(null);   // CL-130: for the test page, how often each kind has spoken
+  function recordZombieVoice(type, state) {
+    voiceCount[type] = (voiceCount[type] || 0) + 1;
+    const key = type + ':' + state; voiceCount[key] = (voiceCount[key] || 0) + 1;
+  }
+  function playZombieCry(type, state, v, pan, when = 0, emitter = null) {
+    if (playTake('zombies/' + type + '/' + state, v, pan, when, emitter)) { recordZombieVoice(type, state); return true; }   // CL-148
+    if (state !== 'death') return synthZombieCry(type, state, v, pan, when, emitter);
+    const c = ensure(); if (!c || muted) return false;
+    const previousBus = routeBus, previousDeath = deathRoute;
+    const dry = c.createGain(); dry.connect(outBus());
+    const start = c.currentTime + Math.max(0, when);
+    const scope = { dry, start, end: scheduleDeathCryFade(dry.gain, start, 2), wet: null, verb: null, sends: [] };
+    routeBus = dry; deathRoute = scope;
+    try { return synthZombieCry(type, state, v, pan, when, emitter); }
+    finally {
+      routeBus = previousBus; deathRoute = previousDeath;
+      setTimeout(() => { for (const node of [dry, scope.wet, scope.verb, ...scope.sends]) { try { node?.disconnect(); } catch (_) {} } }, (Math.max(0, when) + 2.2) * 1000);
+    }
+  }
+  function synthZombieCry(type, state, v, pan, when, emitter) {
+    const call = chooseZombieVoice(type,state,emitter);
+    if (call) {
+      const {actions:recipe,identity:id,variant}=call;
+      recordZombieVoice(type, state);
+      const choiceKey=type+':'+state+':phrase:'+variant;voiceCount[choiceKey]=(voiceCount[choiceKey]||0)+1;
+      const personal=spec=>({...spec,
+        f:[spec.f[0]*id.pitch,spec.f[1]*id.pitch,spec.f[2]],dur:spec.dur.map(d=>d*id.tempo),
+        formantScale:(spec.formantScale||1)*id.formant,breath:(spec.breath||0)*id.breath,
+        grit:(spec.grit||0)*id.grit,chest:(spec.chest||0)*id.body,
+        repeat:spec.repeat?[spec.repeat[0],spec.repeat[1]*id.tempo]:undefined});
+      for (const a of recipe) {
+        const at=when+a.when*id.tempo,level=v*id.level;
+        if (a.kind==='voice')deadVoice(personal(a.spec),level,pan,at);
+        else if(a.kind==='base')deadVoice(personal({...DEAD_VOICES[type]?.[state],...a.spec}),level,pan,at);
+        else if(a.kind==='texture')playZombieTexture({...a,dur:a.dur*id.tempo,freq:a.freq*id.formant,freq2:a.freq2?a.freq2*id.formant:undefined},level,pan,at);
+        else if(a.kind==='tone')playTone({...a,dur:a.dur*id.tempo,vol:a.vol*level,freq:a.freq*id.pitch,slideTo:a.slideTo?a.slideTo*id.pitch:undefined,when:at,pan});
+        else playNoise({...a,vol:a.vol*level,when:at,pan});
+      }
+      if (type === 'drowned' && (state === 'idle' || state === 'chase' || state === 'attack')) {
+        // Keep the previously approved bubble layer; the new recipe only adds a little throat gurgle.
+        for (let i=0; i<(state==='idle'?4:7); i++) playTone({freq:rr(300,700),type:'sine',dur:.04,vol:.035*v,slideTo:rr(700,1100),when:when+.05+i*rr(.05,.1),pan});
+        if (state==='attack') playNoise({dur:.2,vol:.08*v,filterFreq:700,filterType:'bandpass',q:.9,rev:.3,attack:.06,pan,when});
+      }
+      return true;
+    }
+    if (state !== 'hurt' && state !== 'death') return false;
+    const throat = DEAD_VOICES[type];
+    if (throat?.[state]) { recordZombieVoice(type, state); deadVoice(throat[state], v, pan, when); return true; }
+    const g = GROWL_DEATH[type];
+    if (!g) return false;
+    recordZombieVoice(type, state);
+    if (state === 'hurt') playTone({ freq: g[0] * 1.3, type: 'sawtooth', dur: 0.12, vol: g[3] * 0.6 * v, slideTo: g[0] * 0.9, pan, attack: 0.01, when });
+    else { playTone({ freq: g[0], type: 'sawtooth', dur: g[2], vol: g[3] * v, slideTo: g[1], pan, attack: 0.03, rev: 0.3, when }); playNoise({ dur: g[2] * 0.8, vol: 0.05 * v, filterFreq: 900, filterType: 'bandpass', q: 0.8, pan, when: when + 0.05 }); }
+    return true;
+  }
   // CL-130: the dead on their feet (close up only; index.html throttles them across the horde). i: the step's count,
   // so a shambler drags every other foot.
   const stepCount = Object.create(null);
-  function deadStep(kind, v = 1, pan = 0, i = 0) {
+  const STEP_TAKE = { feral: 'barefoot', leaper: 'barefoot', drowned: 'waterlogged', military: 'boots', hop: 'hop', crawl: 'crawl' };   // CL-148: the rest shuffle
+  function deadStep(kind, v = 1, pan = 0, i = 0, emitter = null) {
+    if (kind === 'leaper' && i % 3 === 0) zombieVoice('leaper', 'move', v * .5, pan, emitter);
+    if (kind === 'colossus') { zombieVoice('colossus', 'step', v, pan, emitter); stepCount[kind] = (stepCount[kind] || 0) + 1; return; }
     stepCount[kind] = (stepCount[kind] || 0) + 1;
+    if (playTake('footsteps/' + (STEP_TAKE[kind] || 'shuffle'), v, pan, 0, emitter)) return;   // CL-148
     const p = rr(0.88, 1.12), V = v * 0.9;
     switch (kind) {
       case 'feral': case 'leaper':   // bare feet, quick
@@ -2712,14 +3212,14 @@ export const AudioSys = (() => {
 
   // --- Zombie voices: what they sound like depends on what they are and what they
   // are doing — shuffling about, hunting you down, or swinging.
-  let voiceCd = 0;
-  function zombieVoice(type, state, v = 1, pan = 0) {
+  function zombieVoice(type, state, v = 1, pan = 0, emitter = null) {
     const c = ensure();
     if (!c || muted || v < 0.04) return;
-    if (c.currentTime < voiceCd) return;
-    voiceCd = c.currentTime + (state === 'attack' ? 0.09 : 0.28);
+    state = state === 'hit' ? 'hurt' : state === 'leap' ? 'attack' : state;
+    if (!zombieVoiceGate(c.currentTime, type, state)) return;
+    if (playZombieCry(type, state, v, pan, 0, emitter)) return;
     const rv = 0.3;
-    voiceCount[type] = (voiceCount[type] || 0) + 1;
+    recordZombieVoice(type, state);
     // CL-130: the throat first (DEAD_VOICES), then each kind's own extras below; the old sawtooth growls are gone from
     // the kinds that have a throat now, and kept for the bosses and the spider.
     const throat = DEAD_VOICES[type] || (type === 'demon' || type === 'colossus' || type === 'spider' || type === 'guardian' ? null : DEAD_VOICES.shambler);
@@ -2792,6 +3292,7 @@ export const AudioSys = (() => {
   // low hum while they are on, and whines away when they go up.
   let nvgHumNode = null;
   function nvgToggle(on) {
+    if (tk(on ? 'player/nvg-on' : 'player/nvg-off')) return;   // CL-161
     playTone({ freq: on ? 420 : 520, type: 'square', dur: 0.03, vol: 0.07 });                   // mount clicks
     playNoise({ dur: 0.05, vol: 0.05, filterFreq: 2400, filterType: 'bandpass', when: 0.01 });
     if (on) playTone({ freq: 700, type: 'sine', dur: 0.7, vol: 0.035, slideTo: 7200, when: 0.05, attack: 0.1 });
@@ -2800,6 +3301,9 @@ export const AudioSys = (() => {
   function nvgHum(on) {
     const c = ctx;
     if (!c) return;
+    // CL-161: Jerry's hum as a bed while the goggles are down; the synth's stays off then
+    const rec = bed('nvg', 'player/nvg-hum', on && !muted ? 1 : 0, { bus: fxBus || sfxGain, tc: 0.25 });
+    if (rec && on) { if (nvgHumNode) { const n = nvgHumNode; nvgHumNode = null; try { n.g2.gain.setTargetAtTime(0.0001, c.currentTime, 0.06); n.o.stop(c.currentTime + 0.3); n.o2.stop(c.currentTime + 0.3); } catch (_) {} } return; }
     if (on && !muted) {
       if (nvgHumNode) return;
       const t0 = c.currentTime;
@@ -2824,6 +3328,7 @@ export const AudioSys = (() => {
     const c = ensure(); if (!c || muted) return;
     if (c.currentTime < (kioskBuy._cd || 0)) return;
     kioskBuy._cd = c.currentTime + 0.12;
+    if (tk('hq/kiosk-buy')) return;   // CL-161
     playTone({ freq: 700, type: 'square', dur: 0.02, vol: 0.05 });                                   // key
     playNoise({ dur: 0.1, vol: 0.06, filterFreq: 1500, filterType: 'bandpass', when: 0.04 });        // drawer
     playTone({ freq: 2093, type: 'sine', dur: 0.5, vol: 0.06, when: 0.08, rev: 0.2 });               // bell
@@ -2833,12 +3338,14 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.06, vol: 0.05, filterFreq: 600, filterType: 'lowpass', when: 0.32 });
   }
   function kioskTab() {
+    if (tk('hq/kiosk-tab', 0.8)) return;   // CL-161
     playTone({ freq: 1200, type: 'square', dur: 0.012, vol: 0.04 });
     playTone({ freq: 800, type: 'square', dur: 0.015, vol: 0.03, when: 0.03 });
   }
 
   // --- Doors: the latch, the hinge, and the leaf meeting the frame.
   function doorSound(open, v = 1, pan = 0) {
+    if (tk(open ? 'builds/door-open' : 'builds/door-close', v, pan)) return;   // CL-161
     if (open) {
       playTone({ freq: 850, type: 'square', dur: 0.02, vol: 0.06 * v, pan });                        // latch
       playTone({ freq: rr(300, 360), type: 'sawtooth', dur: 0.45, vol: 0.025 * v, when: 0.05, slideTo: rr(520, 640), attack: 0.08, pan }); // creak
@@ -2853,6 +3360,7 @@ export const AudioSys = (() => {
 
   // --- Boots on boards: a hollow knock instead of the grass scuff.
   function footstepWood(running) {
+    if (tk('player/footstep-wood', running ? 1 : 0.85)) return;   // CL-161
     const p = 0.9 + Math.random() * 0.2;
     playTone({ freq: 150 * p, type: 'sine', dur: 0.06, vol: running ? 0.08 : 0.055, slideTo: 95 * p });
     playNoise({ dur: 0.035, vol: running ? 0.06 : 0.04, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.4 });
@@ -2864,6 +3372,8 @@ export const AudioSys = (() => {
   // The alarm: three long blasts two octaves down — a detuned growl with a tritone
   // over it, a sub underneath, and a rasp of air through the horn.
   function klaxon() {
+    // CL-161: Jerry's blast, three times as the synth's
+    if (takes.ready('hq/alarm-klaxon')) { let ok = false; for (let i = 0; i < 3; i++) ok = tk('hq/alarm-klaxon', 1, 0, i * 1.1, 0.6) || ok; if (ok) return; }
     for (let i = 0; i < 3; i++) {
       const w = i * 1.1;
       playTone({ freq: 105, type: 'sawtooth', dur: 0.9, vol: 0.2, when: w, slideTo: 92, attack: 0.05, rev: 0.7 });
@@ -2877,6 +3387,7 @@ export const AudioSys = (() => {
   // CL-29: the alarm's rumble, a deep sub-bass swell and a ground roar for `sec` seconds.
   function alarmRumble(sec = 3) {
     const c = ensure(); if (!c || muted) return;
+    if (tk('hq/alarm-rumble', 1, 0, 0, 0.3)) return;   // CL-161
     playTone({ freq: 34, type: 'sine', dur: sec, vol: 0.3, slideTo: 30, attack: 0.25 });
     playTone({ freq: 47, type: 'sine', dur: sec * 0.9, vol: 0.18, slideTo: 41, attack: 0.35 });
     playNoise({ dur: sec, vol: 0.2, filterFreq: 95, filterType: 'lowpass', attack: 0.4, rev: 0.3 });
@@ -2887,6 +3398,7 @@ export const AudioSys = (() => {
   function caveScreech(v = 1, pan = 0) {
     const c = ensure(); if (!c || muted) return;
     v = Math.max(0.25, Math.min(1, v));
+    if (playTake('zombies/caveguard/screech', v, pan, 0, null, 0.7)) return;   // CL-148
     playTone({ freq: 70, type: 'sawtooth', dur: 1.5, vol: 0.14 * v, slideTo: 48, attack: 0.08, pan, rev: 0.7 });
     playNoise({ dur: 1.4, vol: 0.12 * v, filterFreq: 260, filterType: 'bandpass', q: 1.6, attack: 0.1, pan, rev: 0.8 });
     for (const [f0, f1, when, vol] of [[620, 1450, 0.12, 0.08], [880, 1900, 0.18, 0.06], [540, 1250, 0.3, 0.05]]) {
@@ -2899,6 +3411,7 @@ export const AudioSys = (() => {
   function caveGroan(v = 1, pan = 0) {
     const c = ensure(); if (!c || muted) return;
     v = Math.max(0, Math.min(1, v)); if (v < 0.05) return;
+    if (playTake('zombies/caveguard/cave-groan', v, pan, 0, null, 0.8)) return;   // CL-148
     const f = rr(46, 62);
     playTone({ freq: f, type: 'sawtooth', dur: 2.6, vol: 0.07 * v, slideTo: f * 0.78, attack: 0.7, pan, rev: 0.9 });
     playTone({ freq: f * 1.5, type: 'sine', dur: 2.2, vol: 0.04 * v, slideTo: f * 1.2, attack: 0.9, pan, rev: 0.9 });
@@ -2909,6 +3422,7 @@ export const AudioSys = (() => {
   function pitRumble(v = 1, pan = 0) {
     const c = ensure(); if (!c || muted) return;
     v = Math.max(0, Math.min(1, v)); if (v < 0.04) return;
+    if (tk('world/pit-rumble', v, pan, 0, 0.4)) return;   // CL-161
     const dur = 1.8 + v * 1.4;
     playTone({ freq: 31, type: 'sine', dur, vol: 0.28 * v, slideTo: 27, attack: 0.4, pan });
     playTone({ freq: 44, type: 'sine', dur: dur * 0.8, vol: 0.14 * v, slideTo: 38, attack: 0.5, pan });
@@ -2922,17 +3436,21 @@ export const AudioSys = (() => {
   // A flare going up: the thump of the launch and a falling whistle.
   function flareWhistle() {
     const c = ensure(); if (!c || muted) return;
+    if (tk('hq/flare-launch', 1, 0, 0, 0.4)) return;   // CL-161
     playNoise({ dur: 0.08, vol: 0.12, filterFreq: 400, filterType: 'lowpass' });
     playTone({ freq: rr(2200, 2800), type: 'sine', dur: 1.8, vol: 0.05, slideTo: rr(900, 1300), attack: 0.08, rev: 0.4 });
     playNoise({ dur: 1.4, vol: 0.02, filterFreq: 3500, filterType: 'bandpass', q: 4, attack: 0.1 });
   }
   function flareBurst(v = 1, pan = 0) {
+    if (tk('hq/flare-burst', v, pan, 0, 0.7)) return;   // CL-161
     playNoise({ dur: 0.35, vol: 0.2 * v, filterFreq: 1500, filterType: 'bandpass', q: 0.7, pan, rev: 0.8 });
     playTone({ freq: 80, type: 'sine', dur: 0.4, vol: 0.12 * v, slideTo: 40, pan, rev: 0.6 });
     for (let i = 0; i < 6; i++) playNoise({ dur: 0.03, vol: 0.05 * v, filterFreq: 5000, filterType: 'highpass', when: 0.2 + i * rr(0.06, 0.14), pan, rev: 0.5 }); // crackle
   }
   // Inside the HQ: gears winding up, a hopper clanking, a press — then a bell.
   function hqMachine(dur = 3.4) {
+    // CL-161: Jerry's machine, as many times as fit the processing
+    if (takes.ready('hq/hq-machine')) { let ok = false; for (let w = 0; w < dur - 0.4; w += 1.4) ok = tk('hq/hq-machine', 1, 0, w, 0.3) || ok; if (ok) return; }
     playTone({ freq: 60, type: 'sawtooth', dur: dur, vol: 0.05, slideTo: 140, attack: 0.4, rev: 0.3 });
     playTone({ freq: 120, type: 'square', dur: dur * 0.9, vol: 0.02, slideTo: 260, attack: 0.5 });
     playNoise({ dur: dur, vol: 0.03, filterFreq: 600, filterType: 'bandpass', q: 1, attack: 0.5 });
@@ -2944,15 +3462,18 @@ export const AudioSys = (() => {
     playNoise({ dur: 0.5, vol: 0.05, filterFreq: 5000, filterType: 'highpass', when: dur * 0.85, attack: 0.05 });   // steam
   }
   function hqDing() {
+    if (tk('hq/hq-ding', 1, 0, 0, 0.4)) return;   // CL-161
     playTone({ freq: 1568, type: 'sine', dur: 1.4, vol: 0.12, rev: 0.4 });
     playTone({ freq: 2093, type: 'sine', dur: 1.1, vol: 0.06, when: 0.02, rev: 0.4 });
     playTone({ freq: 3136, type: 'sine', dur: 0.6, vol: 0.025, when: 0.02 });
   }
   function bagThrow() {
+    if (tk('hq/bag-throw')) return;   // CL-161
     playNoise({ dur: 0.25, vol: 0.06, filterFreq: 900, filterType: 'bandpass', q: 0.8, attack: 0.08 });   // whoosh
     for (let i = 0; i < 4; i++) playTone({ freq: rr(700, 1100), type: 'triangle', dur: 0.03, vol: 0.03, when: i * 0.05 });   // bones rattling in it
   }
   function skullPickup() {
+    if (tk('hq/skull-pickup')) return;   // CL-161
     playTone({ freq: rr(500, 650), type: 'triangle', dur: 0.05, vol: 0.07 });
     playTone({ freq: rr(800, 1000), type: 'triangle', dur: 0.04, vol: 0.05, when: 0.04 });
     playNoise({ dur: 0.05, vol: 0.04, filterFreq: 1800, filterType: 'bandpass', when: 0.01 });
@@ -2963,13 +3484,17 @@ export const AudioSys = (() => {
   const SHOT_DUCK = {
     pistol: [0.5, 0.78], uzi: [0.55, 0.8], revolver: [0.35, 0.62], m4: [0.45, 0.7], ak: [0.4, 0.66],
     minigun: [0.5, 0.72], shotgun: [0.3, 0.58, 0.08], aa12: [0.35, 0.62], sniper: [0.25, 0.52, 0.12],
-    launcher: [0.45, 0.7], m240: [0.42, 0.68]
+    launcher: [0.45, 0.7], m240: [0.42, 0.68], mortar: [0.4, 0.66]
   };
   const BIG = [0.18, 0.42, 0.25];
   const W = (fn, duck) => onBus('weap', fn, duck);
   const A = (fn) => onBus('amb', fn);
+  // CL-161: the Training Ground's cues Jerry recorded (the rest stay ui/training-audio.js's tones)
+  const TRAIN_TAKE = { step: 'player/footstep-tile', target: 'training/target-hit', reset: 'training/target-rise', impact: 'training/wall-impact',
+    open: 'training/panel-beep', spawn: 'training/gate-open', clear: 'training/clear-all', wake: 'training/infirmary-wake' };
   function setTraining(on){
     on=!!on;if(on===trainingMode)return;trainingMode=on;
+    try { if (on) setTimeout(() => { if (trainingMode) bed('vent', 'training/ventilation', 1, { bus: fxBus || sfxGain, tc: 1.5 }); }, 400); else stopBed('vent', 0.8); } catch (_) {}   // CL-161
     if(on){
       stopMusic();rainStop();setSolo(false);
       const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,masterGain,fxBus);trainingSound.update(userMusic);}
@@ -2979,11 +3504,24 @@ export const AudioSys = (() => {
       if(unlocked&&!muted)startMusic();
     }
   }
+  let uiHoverCd = 0;
+  // CL-161: Heron (world/heron.js): coming in, the floats touching, idling at the dock, going.
+  function heronSound(phase, arg) {
+    if (phase === 'arrive') { if (!tk('vehicles/floatplane-approach', 1, 0, 0, 0.5)) planeFlyover(arg || 12); }
+    else if (phase === 'touch') tk('vehicles/floatplane-landing', 1, 0, 0, 0.4);
+    else if (phase === 'idle') pulse('heron', 'vehicles/floatplane-idle', arg == null ? 1 : arg, 0, 1.0);
+    else if (phase === 'leave') { stopBed('heron', 2); if (!tk('vehicles/floatplane-takeoff', 1, 0, 0, 0.5)) planeFlyover(arg || 14); }
+    else if (phase === 'stop') stopBed('heron', 1);
+  }
   const api = {
-    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted)trainingSound?.cue(kind);},
+    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted){if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
     trainingState:()=>({enabled:trainingMode,...trainingSound?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
+    minigunSpin, bankStats: () => ({ banks: banks.size, buildMs: Math.round(bankBuildMs), sync: bankSyncBuilds, syncKeys: bankSyncKeys.slice(), worker: bankWorkerBuilds, misses: bankMisses, voices: activeVoices, keys: [...banks.keys()], pending: warmQueue().length }),   // CL-134
+    warmBanks, GUN_KEYS: Object.keys(GUN_DEFS), FOLEY_KEYS: Object.keys(FOLEY_DEFS),
+    calibPlay: W((key, o) => { const c = ensure(); if (!c || muted) return; const B = bankFor(key, true); if (B) playBank(B, o || {}); }),   // one bank, as it is (the listening page, the calibration)
+    bankDbg: (key) => { const B = banks.get(key); return B ? { gap: B.gap, lastT: B.lastT, heat: B.heat, plays: B.plays, variants: B.dry.length, tails: B.tail.length } : null; },
     emptyClick: W(emptyClick), reloadStart: W(reloadStart), reloadDone: W(reloadDone), slideRack: W(slideRack),
     shotgunPump: W(shotgunPump), revolverCylinder: W(revolverCylinder), revolverSpin: W(revolverSpin),
     launcherDrum: W(launcherDrum), launcherShellInsert: W(launcherShellInsert),
@@ -2993,7 +3531,7 @@ export const AudioSys = (() => {
     groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
     waveStart, expand, gameOver, playerHurt, grenadeBoom: W(grenadeBoom, BIG), knifeSwing: W(knifeSwing),
     macheteSwing: W(macheteSwing), macheteChop: W(macheteChop), armorDon, armorHit, rockBreak: W(rockBreak),
-    brassTink: W(brassTink), magThud: W(magThud),
+    brassTink: W(brassTink), magThud: W(magThud), weaponSwitch: W(weaponSwitch), wheelTick: W(wheelTick),
     chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit: W(chainsawGrit), isChainsawRunning,
     chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
     turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
@@ -3006,15 +3544,62 @@ export const AudioSys = (() => {
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
     rainStart, rainStop, rainSetIntensity, isRainRunning,
     updateMusic, musicState, musicCue, cueLength, setMood, setSfxVolume, setMusicVolume, getVolumes,
-    ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, rabbitScreech, holyBlast, dayCleared,
+    ambienceStart, updateAmbience, birdChirp: A(birdChirp), owlHoot: A(owlHoot), thunder: A(thunder), lightningStrike: A(lightningStrike), holyChoir, chapelChoir, rabbitScreech, holyBlast, dayCleared,
     distantGroan: A(distantGroan),
+    clip, preloadClips, clipState,   // CL-147
+    trainingAlarm,   // CL-159
+    knockout, knockoutEnd, knockoutDbg: () => ({ gain: koGain ? koGain.gain.value : null, ringing: !!koRing }),   // CL-171
+    take: playTake, takesInit: () => takes.init(), takesRefresh: () => takes.refresh(), takesState: () => takes.state(), takesPreload: (ids) => takes.preload(ids),   // CL-148
+    // CL-161: the sounds the game had none of (index.html and world/heron.js call these; each is true if a take played)
+    land: (v = 1) => tk('player/land', v), vault: () => tk('player/vault'), ladderStep: () => tk('player/ladder-climb', 0.8),
+    swimStroke: (v = 1) => tk('player/swim-stroke', v), playerDeath: () => tk('player/death'), chuteLand: () => tk('player/chute-land'),
+    upgrade: () => tk('builds/upgrade'), stairsFold: () => { if (!tk('builds/stairs-fold')) buildSound('railing'); },
+    lureBed: (key, s) => (s ? pulse('lure:' + key, 'builds/lure', s.v * 1.4, s.pan, 0.4) : (stopBed('lure:' + key, 0.5), false)),
+    mountGun: (mg) => tk(mg ? 'turrets/machine-gun-mount' : 'turrets/mortar-mount'), dismountGun: (mg) => !mg && tk('turrets/mortar-dismount'),
+    mortarRoundDrop: () => tk('turrets/mortar-round-drop', 0.8), mortarIncoming: (v = 1, pan = 0) => tk('turrets/mortar-incoming', v, pan, 0, 0.4),
+    radioCall: () => { const ok = tk('hq/radio-call'); if (ok) tk('hq/radio-off', 0.9, 0, 2.2); return ok; },
+    armoryBench: () => tk('hq/armory-bench'), cifLocker: (open) => { const n = layerDbg.layered; if (!tk('hq/cif-locker', open ? 1 : 0.8)) shutter(open, layerDbg.layered > n); },   // CL-168: its take over the original shutter, not the kiosk's take as well
+    barrelBoom: W((v = 1, pan = 0) => grenadeBoom(v, pan, 'world/barrel-explode'), BIG),
+    uiClick: (back = false) => tk(back ? 'ui/back' : 'ui/click', 0.8) || (back && tk('ui/click', 0.8)),
+    uiHover: () => { const c = ctx; if (!c || c.currentTime < uiHoverCd) return false; uiHoverCd = c.currentTime + 0.06; return tk('ui/hover', 0.6); },
+    mapToggle: (open) => tk(open ? 'ui/map-open' : 'ui/map-close'), objective: () => tk('ui/objective'),
+    targetFall: (v = 1, pan = 0) => tk('training/target-fall', v, pan), lightSwitch: () => { if (!tk('training/light-switch')) nvgClick(); },
+    heronSound,
+    // CL-162: batch 3
+    laserClick: () => { if (!tk('weapon-foley/laser-click', 0.8)) nvgClick(); },
+    suppressorOn: (on) => tk('weapon-foley/suppressor-on', on ? 1 : 0.8, 0, 0, 0, on ? 1 : 0.94),
+    ammoPickup: () => { if (!tk('player/ammo-pickup')) pickup(); },
+    keypadResult: (ok) => tk(ok ? 'training/keypad-accept' : 'training/keypad-deny', 0.9, 0, 0.12),
+    // CL-164: Jerry's badge sting (instead of the achievement cue when it's there) and the dawn card's slide
+    badge: () => tk('ui/badge'),
+    dawnCard: () => tk('ui/dawn-card', 0.9, 0, 0.15),
+    // CL-161: how loud a sound is where the takes come in (outBus): fn() plays it (the synth: no takes while it runs), and
+    // the RMS over the part that sounds (above 2% of its peak, as takes.js evens a take) comes back after `seconds`.
+    levelDbg: (fn, seconds = 2, withTakes = false) => new Promise((res) => {
+      const c = ensure(); if (!c) { res(null); return; }
+      const an = c.createAnalyser(); an.fftSize = 1024; const sink = c.createGain(); sink.gain.value = 0; an.connect(sink); sink.connect(c.destination);
+      const tap = c.createGain(); tap.connect(an);
+      const wasMuted = muted; muted = false;
+      measuringSynth = !withTakes; measureTap = tap;
+      try { fn(); } catch (_) {} finally { measureTap = null; }
+      const buf = new Float32Array(an.fftSize), all = [];
+      const iv = setInterval(() => { an.getFloatTimeDomainData(buf); all.push(Float32Array.from(buf)); }, 1000 * an.fftSize / c.sampleRate);
+      setTimeout(() => {
+        clearInterval(iv); measuringSynth = false; muted = wasMuted;
+        let peak = 0; for (const b of all) for (const x of b) { const a = Math.abs(x); if (a > peak) peak = a; }
+        let sum = 0, n = 0; for (const b of all) for (const x of b) if (Math.abs(x) > peak * 0.02) { sum += x * x; n++; }
+        try { tap.disconnect(); an.disconnect(); sink.disconnect(); } catch (_) {}
+        res({ rms: n ? Math.sqrt(sum / n) : 0, peak, frames: all.length, state: c.state });
+      }, seconds * 1000);
+    }),
+    takesUse: (id, on) => takes.setUse(id, on), layerDbg: () => Object.assign({}, layerDbg),   /* CL-168 */ takeBedsDbg: () => [...beds].map(([k, b]) => ({ key: k, id: b.id, level: +b.h.level().toFixed(3), pulse: !!b.pulse })),
     placesState,   // CL-82
     heartFall,   // CL-85
     belowState, rockGroan: A(rockGroan), guardianInWalls: A(guardianInWalls), hushDie   // CL-101
   };
-  // Training has no horror announcements, creature voices or outdoor one-shots.
+  // Summoned zombies keep their combat voices in Training. Horror announcements and outdoor ambience stay quiet.
   // Weapon, reload, impact, equipment, construction and ordinary UI sounds stay live.
-  for(const name of ['groan','zombieVoice','zombieHit','zombieDeath','headshot','gore','scream','bossRoar','bossSlam','guardianGrowl','emerge','heavyStep','spit','acidHit','caveScreech','caveGroan','pitRumble','alarmRumble','klaxon','heartbeat','waveStart','win','gameOver','streak','expand','holyChoir','rabbitScreech','holyBlast','dayCleared','heartFall','hushDie','musicCue','setMood','distantGroan','birdChirp','owlHoot','thunder','lightningStrike','rockGroan','guardianInWalls','graveAmbience','rainStart','rainSetIntensity']){
+  for(const name of ['groan','headshot','gore','scream','bossRoar','bossSlam','guardianGrowl','emerge','heavyStep','spit','acidHit','caveScreech','caveGroan','pitRumble','alarmRumble','klaxon','heartbeat','waveStart','win','gameOver','streak','expand','holyChoir','chapelChoir','rabbitScreech','holyBlast','dayCleared','heartFall','hushDie','musicCue','setMood','distantGroan','birdChirp','owlHoot','thunder','lightningStrike','rockGroan','guardianInWalls','graveAmbience','rainStart','rainSetIntensity']){
     const original=api[name];api[name]=(...args)=>{if(!trainingMode)return original(...args);};
   }
   const outdoorStep=api.footstep;

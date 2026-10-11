@@ -1,0 +1,9 @@
+{
+  "loadSec": 19.521,
+  "fire": {
+    "direct": 8,
+    "burn": 0.4,
+    "demon": 0.2
+  },
+  "errors": []
+}

@@ -1,0 +1,9 @@
+#92 builds/repair
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: repairClank()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Repairing a damaged barricade: two hammer blows and a wrench ratchet. No music, no voice.

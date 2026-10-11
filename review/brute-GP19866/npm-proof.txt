@@ -1,0 +1,6 @@
+npm test -- t215 --jobs 1 --all-fails -> exit 1 before test assertions
+check-players: 295 reads, all allowed
+Error: Chrome never reported a debugging port.
+Crashpad: TransactNamedPipe: The pipe has been ended. (0x6D)
+Crash server failed to launch, self-terminating.
+Full npm suite not run. Native direct Engine checks succeeded separately.

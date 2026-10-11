@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {ZOMBIE_AUDIO_ADDITIONS,zombieAudioRecipe,createZombieVoiceGate} from './zombie-audio.js';
+test('both guardians have distinct, complete four-state identities and a chase',()=>{
+  for(const type of ['guardian','caveguard'])for(const state of ['idle','attack','hurt','death','chase'])assert(zombieAudioRecipe(type,state)?.length);
+  for(const state of ['idle','attack','hurt','death'])assert.notDeepEqual(zombieAudioRecipe('guardian',state),zombieAudioRecipe('caveguard',state));
+});
+test('existing unique special and walker sounds stay with their original renderer',()=>{
+  for(const type of ['shambler','feral','leaper','drowned','military','brute','spitter','screamer','bomber'])for(const state of ['idle','attack','hurt','death'])assert.equal(zombieAudioRecipe(type,state),null);
+  for(const type of ['demon','colossus','spider'])assert.equal(zombieAudioRecipe(type,'idle'),null);
+  for(const type of ['demon','colossus'])for(const state of ['hurt','death'])assert.equal(zombieAudioRecipe(type,state),null);
+});
+test('special attacks/pain/deaths have different signatures instead of reusing idle',()=>{
+  assert(zombieAudioRecipe('demon','attack'));assert(zombieAudioRecipe('colossus','attack'));
+  assert.notDeepEqual(zombieAudioRecipe('demon','attack'),zombieAudioRecipe('colossus','attack'));
+  const death=zombieAudioRecipe('spider','death');assert(death.filter(x=>x.kind==='tone').length>=7);assert.notDeepEqual(death,zombieAudioRecipe('spider','hurt'));
+});
+test('sound recipes are finite, bounded, immutable and safe for inherited/unknown keys',()=>{
+  const scan=x=>{if(typeof x==='number')assert(Number.isFinite(x));else if(x&&typeof x==='object')for(const v of Object.values(x))scan(v);};scan(ZOMBIE_AUDIO_ADDITIONS);
+  for(const states of Object.values(ZOMBIE_AUDIO_ADDITIONS))for(const recipe of Object.values(states))for(const a of recipe){assert(a.when>=0&&a.when<2);if(a.spec){assert(a.spec.dur[1]<2);assert(a.spec.vol<=.18);}else{assert(a.dur>0&&a.dur<1);assert(a.vol<=.1);}}
+  assert.throws(()=>{ZOMBIE_AUDIO_ADDITIONS.guardian.idle[0].spec.vol=9;});
+  assert.equal(zombieAudioRecipe('constructor','idle'),null);assert.equal(zombieAudioRecipe('guardian','toString'),null);
+  assert.equal(zombieAudioRecipe('guardian','hit'),zombieAudioRecipe('guardian','hurt'));assert.equal(zombieAudioRecipe('demon','leap'),zombieAudioRecipe('demon','attack'));
+});
+test('ambient chatter does not swallow attack or hit feedback; bursts stay bounded',()=>{
+  const gate=createZombieVoiceGate();assert(gate(1,'shambler','idle'));assert(!gate(1.1,'feral','idle'));
+  assert(gate(1.01,'guardian','attack'));assert(!gate(1.02,'guardian','attack'));
+  assert(gate(1.011,'feral','hurt'));assert(gate(1.012,'guardian','death'));
+  assert(gate(1.05,'shambler','hurt'));for(let i=1;i<16;i++)assert(!gate(1.05+i*.01,'shambler','hurt'));
+  assert(gate(1.34,'shambler','hurt'));assert(gate(1.4,'shambler','death'));assert(!gate(NaN,'shambler','death'));
+});

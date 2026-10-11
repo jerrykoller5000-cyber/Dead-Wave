@@ -1,0 +1,9 @@
+#135 world/lightning-strike
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: lightningStrike()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A close lightning strike: a sharp crackling snap and an immediate huge thunder crack. No music, no voice.

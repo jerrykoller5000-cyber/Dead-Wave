@@ -1,0 +1,9 @@
+#35 brute-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.7 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A deep, short, angry grunt from a giant brute zombie that has been shot, more annoyed than hurt. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('brute', 'hurt')

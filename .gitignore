@@ -24,3 +24,11 @@ tools/tests/test*.html
 dist/
 desktop/node_modules/
 desktop/src-tauri/target/
+
+# The camera's inbox (tools/CAMERA.md) and Claude's launcher for it
+review/camera/jobs/
+Claude Camera.bat
+
+# CL-163: ElevenLabs music takes while Jerry picks them (45 tracks x up to 4 takes, hundreds of MB).
+# The picked ones go into the game as their own files; the prompts, guides and receipts here stay tracked.
+z-music/**/*.mp3

@@ -1,0 +1,9 @@
+#156 vehicles/floatplane-landing
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A floatplane touching down on a lake: floats skimming and spraying water, engines easing. No music, no voice.

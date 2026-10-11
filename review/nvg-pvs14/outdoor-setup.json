@@ -1,0 +1,5 @@
+{
+  "cmd": "eval",
+  "code": "R.release();T.trainingDbg.leave();await wait(300);document.getElementById('playerName').value='NVG field review';document.getElementById('modeHunt').click();for(let i=0;i<600&&(T.getPhase()!=='prep'||document.body.classList.contains('deploying'));i++)await wait(100);T.runDevCommand('godmode');T.clearZombies();T.setGearDbg('helmet');T.setGearDbg('nvg');T.setWorldTime(0);await wait(300);if(!T.renderer.domElement.classList.contains('nvg-phosphor'))T.toggleNvgDbg();await wait(500);return {phase:T.getPhase(),position:T.player.position.toArray(),nvg:T.renderer.domElement.classList.contains('nvg-phosphor')};",
+  "timeout": 180000
+}

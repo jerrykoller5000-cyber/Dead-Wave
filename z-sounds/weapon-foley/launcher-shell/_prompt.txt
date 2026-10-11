@@ -1,0 +1,9 @@
+#46 weapon-foley/launcher-shell
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley tubeShell
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A 40mm grenade round pushed into a launcher tube and the breech snapped shut. No music, no voice.

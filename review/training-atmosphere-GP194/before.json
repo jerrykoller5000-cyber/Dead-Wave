@@ -1,0 +1,38 @@
+{
+  "combat": {
+    "alive": 1,
+    "release": {
+      "active": false,
+      "amount": 0,
+      "flashing": false,
+      "lit": false
+    },
+    "audio": {
+      "enabled": true,
+      "loopSeconds": 24,
+      "active": true,
+      "looping": true,
+      "cues": {
+        "enter": 4.432,
+        "clear": 8.08,
+        "spawn": 13.770666666666667
+      },
+      "musicGain": 0.09600000083446503,
+      "encounters": {
+        "selected": "demon",
+        "tracks": {
+          "demon": {
+            "wanted": true,
+            "playing": true,
+            "looping": true,
+            "fading": false,
+            "ready": true,
+            "seconds": 125.6,
+            "error": null
+          }
+        }
+      }
+    }
+  },
+  "errors": []
+}

@@ -1,13 +1,13 @@
 # Antigravity
 
 state: idle
-model: Gemini 3.1 Pro (High)
+model: Claude Sonnet 5.5 (High)
 task: —
 touching: —
-since: 2026-10-07T03:03Z
+since: 2026-10-09T10:50Z
 next: AG-52 Eyes on playthrough 1's fixes. As each of CU-88 to CU-91, GB
 blocked-on: —
-last-report: handoffs/2026-10-06-antigravity-AG-52-GP84.md
+last-report: handoffs/2026-10-09-antigravity-AG-63.md
 
 ## Notes
 

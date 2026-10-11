@@ -1,0 +1,52 @@
+// Additional identities only. The established walker throats and special idle sounds stay in AudioSys.
+const throat=(f,dur,vowel,rough,vol,extra={})=>({f,dur,vowel,rough,vol,vib:.025,breath:.45,...extra});
+const voice=(spec,when=0)=>({kind:'voice',spec,when});
+const noise=(freq,dur,vol,when=0,filterType='bandpass')=>({kind:'noise',filterFreq:freq,dur,vol,when,filterType,q:.8,attack:Math.min(.04,dur*.2),rev:.3});
+const tone=(freq,slideTo,dur,vol,when=0,type='sawtooth')=>({kind:'tone',freq,slideTo,dur,vol,when,type,attack:Math.min(.035,dur*.15),rev:.3});
+const profiles={
+  // Broad, hollow chest with a gravelly double exhale; not a human shambler moan.
+  guardian:{
+    idle:[voice(throat([44,52,.76],[1.25,1.55],'o',[.78,19],.10,{vowel2:'u',muffle:1500})),noise(480,.55,.035,.28),noise(370,.4,.028,.85)],
+    chase:[voice(throat([58,69,.92],[.65,.82],'a',[.8,24],.11,{vowel2:'o'})),noise(650,.18,.04,.04),noise(420,.22,.03,.36)],
+    attack:[voice(throat([95,116,.48],[.43,.55],'a',[.9,33],.15,{vowel2:'o',breath:.9})),tone(49,31,.32,.05,.025,'triangle'),noise(820,.15,.065)],
+    hurt:[voice(throat([130,155,.63],[.17,.23],'o',[.9,41],.11,{vowel2:'uh',breath:.75})),noise(500,.055,.035)],
+    death:[voice(throat([76,91,.36],[1.2,1.45],'a',[.92,15],.13,{vowel2:'u',vib:.06,breath:1.1})),noise(520,.28,.05,.65),noise(330,.35,.035,1.05)]
+  },
+  // Gaunt cave predator: fluttering nasal hiss, short bone clicks and a torn intake of breath.
+  caveguard:{
+    idle:[voice(throat([155,184,.86],[.65,.8],'u',[.82,47],.06,{vowel2:'i',muffle:2600,breath:1.25})),noise(2900,.045,.035,.22),noise(2100,.04,.028,.38)],
+    chase:[voice(throat([192,230,1.07],[.33,.45],'i',[.86,63],.075,{breath:1.4})),noise(3500,.08,.04,.12)],
+    attack:[voice(throat([275,330,1.65],[.3,.4],'e',[.92,78],.10,{vowel2:'i',breath:1.7})),noise(3900,.13,.05),noise(1500,.08,.045,.14)],
+    hurt:[voice(throat([345,405,.74],[.12,.18],'i',[.9,88],.075,{breath:1.2})),noise(2400,.06,.035)],
+    death:[voice(throat([235,280,.25],[.7,.95],'i',[.94,39],.095,{vowel2:'u',breath:1.6,vib:.08})),noise(1600,.17,.04,.46),noise(750,.22,.025,.73)]
+  },
+  // Keep its established dry chitter at rest/attack. Pain is a brittle snap; death an unraveling click train.
+  spider:{
+    hurt:[tone(3100,1900,.026,.045),noise(4100,.065,.04),tone(2300,1500,.018,.027,.05)],
+    death:[noise(2900,.22,.055),...Array.from({length:7},(_,i)=>tone(3200-i*340,2500-i*310,.015+i*.004,.038*(1-i*.085),.04+i*.066,'square')),noise(1100,.23,.025,.39)]
+  },
+  // A charge has a sharp, two-part roar instead of repeating the idle rumble.
+  demon:{attack:[voice(throat([110,142,1.25],[.16,.22],'a',[.9,66],.13,{breath:1.0})),voice(throat([85,108,.44],[.4,.52],'a',[.94,31],.14,{vowel2:'o',breath:.8}),.16),noise(1800,.12,.065),tone(53,34,.42,.045,.1,'triangle')]},
+  // The slam's warning is a chest bellows with cracking breath; ground-impact audio remains separate.
+  colossus:{attack:[voice(throat([34,42,1.8],[.38,.45],'o',[.82,12],.17,{vowel2:'a',breath:.8})),voice(throat([61,74,.38],[.55,.68],'a',[.96,23],.16,{vowel2:'o',breath:1.2}),.24),noise(280,.3,.08,.07,'lowpass'),noise(1100,.12,.06,.32)]}
+};
+function freeze(x){if(x&&typeof x==='object'){for(const v of Object.values(x))freeze(v);Object.freeze(x);}return x;}
+export const ZOMBIE_AUDIO_ADDITIONS=freeze(profiles);
+export const ZOMBIE_AUDIO_STATES=Object.freeze(['idle','attack','hurt','death']);
+export function zombieAudioRecipe(type,state){
+  state=state==='hit'?'hurt':state==='leap'?'attack':state;
+  return Object.hasOwn(profiles,type)&&Object.hasOwn(profiles[type],state)?profiles[type][state]:null;
+}
+// Ambient chatter must never consume an attack/pain/death slot. Caps bound a horde's voices without random misses.
+export function createZombieVoiceGate(){
+  let ambientAt=-Infinity,attackAt=-Infinity,hurtAt=-Infinity,deathAt=-Infinity;
+  const next=new Map();
+  return (now,type,state)=>{
+    if(!Number.isFinite(now))return false;
+    const ambient=state==='idle'||state==='chase',key=type+':'+state;
+    if(now<(next.get(key)??-Infinity)||now<(ambient?ambientAt:state==='death'?deathAt:state==='hurt'?hurtAt:attackAt))return false;
+    next.set(key,now+(ambient?.65:state==='hurt'?.28:state==='death'?.03:.12));
+    if(ambient)ambientAt=now+.28;else if(state==='death')deathAt=now+.03;else if(state==='hurt')hurtAt=now+.028;else attackAt=now+.09;
+    return true;
+  };
+}

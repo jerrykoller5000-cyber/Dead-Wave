@@ -2,14 +2,20 @@
 
 state: active
 model: Grok 4.7
-task: CU-93 Checkpoint commit since f365911; index.html stays out while GB-141 is in it
+task: CU-110 Commit and push the checked-out work, leaving files an active agent is still in
 touching: git
-since: 2026-10-07T05:08Z
-next: —
+since: 2026-10-11T20:23Z
+next: CU-110 The full suite, then commit. Its preflight passes again (CL-
 blocked-on: —
-last-report: handoffs/2026-10-07-cursor-CU-92.md
+last-report: handoffs/2026-10-11-cursor-CU-126.md
 
 ## Notes
+
+2026-10-09 CU-98/99/100 (Jerry, direct: the boots, turning in place, the hands): done, not committed. Files: studio/marine-body.js (shinShaft; the wrist), studio/marine-turn.js + test, studio/marine-idle.js (ud.idleSway), index.html (holdHand/fistPointW/foreDrop/WRIST in the weapon hold, solveArmIK's ease-back, restWrists in updateMarinePose), tools/posesheet.mjs, tools/realtest.mjs, tools/tests/t227.js, t228.js (new), t187/t188/t195/t218 (read the game's grip points), review/boots, review/turn, review/hands. Lessons: never sed -i index.html (it stripped its CRLF; restored with Node); the test build's three never copies a quaternion into .rotation, so a later Euler write (+=) throws an IK pose away there (that is how t226 caught the idle bug); hand/arm/foot checks need tools/realtest.mjs. Found, not fixed: the bored idle leans the torso after the hold (barrel 3-5 deg off: t188's five fails); t188's chainsaw.
+
+2026-10-09 CU-96 (Jerry, direct): the aiming pass is done, not committed (index.html aiming parts, tools/tests/t222.js, tools/aimsheet.mjs, review/aiming/). Not done, for Jerry to ask: aim at chest height over open ground (it changes grenades, the launcher, the flashlight and building, which read the same point); a setting to turn the lead off. CU-95: tools/zombiesheet.mjs and review/zombie-types/ (not committed).
+
+2026-10-09 CU-94 (Jerry, direct): the Training Ground light switch is done, not committed. Files: world/training.js, index.html (Training light switch), tools/tests/t219.js, tools/training-lights.mjs, review/training-lights/. Waiting: ChatGPT for training.lightsOff/lightsOn in ui/strings.js, Claude's review, Antigravity's GPU shots. t182's 5 fails are ChatGPT's GP-154/155, not the switch.
 
 2026-10-05 (Claude, lead, in the board clear): this card said active on CU-83 in git since 2026-10-02T04:06Z with no check-out. Its checkpoint commit (everything since 321aef8) went up at 2026-10-02 06:33Z, so CU-83 is closed and the card is set idle; git is free. Your queue starts at CU-84.
 

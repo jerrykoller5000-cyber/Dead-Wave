@@ -1,0 +1,23 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t170 t178 t182 t188 --jobs 1 --no-retry --all-fails
+
+check-players: 287 player.position reads, all in the allowed places
+ok    t170    20 pass   0 fail  67.1s
+FAIL  t178     6 pass   2 fail  43.6s
+FAIL  t182    29 pass   5 fail  19.4s
+ok    t188    91 pass   0 fail  54.4s
+
+4 checks: 146 pass, 7 fail
+
+by owner:
+  unassigned
+    t178   2 fail  FAIL back up the tunnel: the calm again (end)
+           FAIL back up the tunnel: the calm again (end)
+           FAIL threw TypeError: Cannot read properties of null (reading 'damage')
+    t182   5 fail  FAIL every gun owned, Cash to spare
+           FAIL every gun owned, Cash to spare
+           FAIL three shamblers called in (0)
+           FAIL they stay in the build room while he is on the range ()
+           FAIL in the build room they come for him (Infinity m -> Infinity m)
+           FAIL clear all

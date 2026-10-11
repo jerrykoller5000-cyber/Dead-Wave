@@ -1,0 +1,9 @@
+#167 ui/game-over
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: gameOver()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A low mournful brass sting with a deep drum hit for a defeat.

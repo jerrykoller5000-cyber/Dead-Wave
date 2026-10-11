@@ -1,0 +1,41 @@
+{
+  "startedAt": "2026-10-10T03:48:24.078Z",
+  "method": "Two sequential title loads in one real GPU Engine: baseline then revised; warm:none, 1440x900. Both baseline audio modules are intercepted at their original routes.",
+  "loads": [
+    {
+      "version": "baseline",
+      "engineLoadSeconds": 9.131,
+      "mode": "title",
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "ready": true,
+      "openingDismissed": true,
+      "domContentLoadedSeconds": 0.328,
+      "loadEventSeconds": 0.418,
+      "elapsedSinceNavigationSeconds": 9.18839999999851
+    },
+    {
+      "version": "revised",
+      "engineLoadSeconds": 9.708,
+      "mode": "title",
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "ready": true,
+      "openingDismissed": true,
+      "domContentLoadedSeconds": 0.5853000000044704,
+      "loadEventSeconds": 0.587,
+      "elapsedSinceNavigationSeconds": 9.76110000000149
+    }
+  ],
+  "limitations": "Only one load per version; first uses a newly launched browser, second may benefit from browser/OS warm caches. Engine includes opening-screen dismissal and its fixed settling waits. This is a short regression check, not a cold/warm benchmark.",
+  "baselineRoutes": [
+    "/core/audio.js",
+    "/ui/zombie-audio.js"
+  ],
+  "baselineHashes": {
+    "/core/audio.js": "83bb8723fc3cf0dbcd2bb070c1c4ef9f2fbcbc7dec1c453c79073601b274aa2a",
+    "/ui/zombie-audio.js": "3e24f4e37635889105528853bd891c56508b9fb044e951520e833e63128cfe07"
+  },
+  "errors": [],
+  "fetchErrors": [],
+  "engineDifferenceSeconds": 0.577,
+  "completedAt": "2026-10-10T03:48:43.437Z"
+}

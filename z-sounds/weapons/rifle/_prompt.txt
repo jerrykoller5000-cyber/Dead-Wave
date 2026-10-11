@@ -1,0 +1,9 @@
+#67 weapons/rifle
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN ak (KR-7 Rifle)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single 7.62 battle rifle shot outdoors, a deep heavy crack with a rolling echo. No music, no voice.

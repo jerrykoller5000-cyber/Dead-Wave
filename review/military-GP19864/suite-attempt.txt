@@ -1,0 +1,6 @@
+npm test -- --jobs 8
+check-players: 295 player.position reads, all in the allowed places
+Parallel startup failures observed: t1, t6a, t5, t2, t4, tfish, t3, t0 (240.2 s each), then t9 121.2 s, t8 121.5 s, t7 124.2 s, t11 124.3 s, t6 124.6 s. Each reported ERROR: window.TT never appeared: no page error reported.
+The eight-worker attempt was ended after repeated startup failures; this is not a full-suite pass or a completed run.
+Earlier serial attempt reached real assertions: t0 2 pass / 0 fail; t6a 2 / 0; tfish 7 / 0; t1 2 / 2; t2 5 / 0. That sample was stopped to switch to parallel workers.
+A sandboxed attempt passed preflight but Chrome's crash server could not launch (npm-proof.txt). Browser-enabled native camera fixtures pass; direct unchanged t119 and t215 remain in their separate proof files.

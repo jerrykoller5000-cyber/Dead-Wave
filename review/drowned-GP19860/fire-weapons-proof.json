@@ -1,0 +1,55 @@
+{
+  "player": {
+    "expected": 0.4,
+    "hits": [
+      {
+        "damage": 0.3999999999996362,
+        "direct": true
+      },
+      {
+        "damage": 0.012879999994765967,
+        "direct": false
+      },
+      {
+        "damage": 0.012879999994765967,
+        "direct": false
+      },
+      {
+        "damage": 0.013840000008713105,
+        "direct": false
+      },
+      {
+        "damage": 0.013199999999415013,
+        "direct": false
+      },
+      {
+        "damage": 0.013040000008913921,
+        "direct": false
+      },
+      {
+        "damage": 0.3999999999996362,
+        "direct": true
+      },
+      {
+        "damage": 0.013359999989916105,
+        "direct": false
+      }
+    ],
+    "ammo": "flamer",
+    "flameHitAt": 1.9341999999582768,
+    "burn": 2.4
+  },
+  "turret": {
+    "expected": 0.5,
+    "hits": [
+      {
+        "damage": 0.5,
+        "direct": true
+      }
+    ],
+    "damage": 5,
+    "burn": 0,
+    "range": 7.5
+  },
+  "errors": []
+}

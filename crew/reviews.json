@@ -261,6 +261,13 @@
       "reference": null
     },
     {
+      "asset": "player-survivors",
+      "owner": "claude",
+      "rig": "marine",
+      "clip": null,
+      "reference": null
+    },
+    {
       "asset": "rabbit",
       "owner": "claude",
       "rig": null,

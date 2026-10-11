@@ -1,0 +1,42 @@
+✔ all attached prompts agree with the existing independent catalogue (2.1761ms)
+✔ full plan makes 716 unique take paths and preserves all prompt text (6.0555ms)
+✔ sample spreads across sounds and priority selection starts with starred entries (2.187ms)
+✔ short generation length is explicit while requested length is retained (0.8615ms)
+✔ loop and Auto metadata become the correct API fields (0.4747ms)
+✔ edited prompts get new paths; extra document instructions never become requests (7.6286ms)
+✔ invalid traversal, duplicate folders and malformed prompt blocks fail closed (1.1277ms)
+✔ plan inspection does not create files or call the network (5.3342ms)
+✔ a generation needs both a key and a sufficient explicit budget before requesting (7.9611ms)
+✔ success uses correct request parameters, saves MP3 and resumes without spending again (43.1647ms)
+✔ 401 response stops safely and never logs the response body or API key (10.3272ms)
+✔ 400 shows the selected server explanation and can resume after a rejected request (29.4053ms)
+✔ server explanations remove echoed credentials and terminal control sequences before saving (8.2655ms)
+✔ validation arrays show only messages; HTML and oversized error bodies stay hidden (22.5066ms)
+✔ explicit rate limit retries with Retry-After; quota exhaustion never retries (20.3974ms)
+✔ network ambiguity and server errors do not automatically repeat a potentially charged POST (34.0872ms)
+✔ a crash after the paid response and completed file is recovered by hash without regeneration (10.6296ms)
+✔ interrupted sending, missing paid files and corrupt completed files require review (21.6984ms)
+✔ an existing untracked recording is never overwritten (7.2618ms)
+✔ two simultaneous runners cannot generate from the same output folder (12.4161ms)
+✔ reported charges exceeding the estimate stop before another request (13.6168ms)
+✔ aborted batches preserve progress without starting later jobs (6.4311ms)
+✔ invalid or oversized response audio is flagged for review rather than saved or retried (24.6289ms)
+✔ a symlink output cannot redirect writes outside the chosen output root (5.9637ms)
+✔ matching History download repairs an uncertain take without a new generation (15.9706ms)
+✔ recovery preserves existing different audio and rejects invalid downloads (12.4071ms)
+✔ approved moved clips skip completed receipts without generating or altering those receipts (18.6687ms)
+✔ moved-clip continuation does not skip ambiguous requests, damaged files or incomplete receipts (35.5492ms)
+✔ full selection continues with 713 new clips after three completed samples are moved (372.4973ms)
+✔ transient Windows progress locks retry the same rename and keep the old state until replacement (4.8712ms)
+✔ persistent progress-save failure retains the paid MP3 and receipt; resume does not make a second POST (20.6799ms)
+✔ paid receipt journals recover the exact missing take and reject the wrong download (17.7249ms)
+✔ journals from another attempt and truncated journals cannot clear an uncertain record (6.6946ms)
+✔ explicitly verified reencoded History download keeps the original paid receipt (13.6684ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 909.2187

@@ -1,0 +1,41 @@
+{
+  "reviewedAt": "2026-10-09T11:21:35.819Z",
+  "moduleHash": "9fb3936f9ee16f1373dedc07df53a4a05c067579a734f9d4fed3e72991d26be6",
+  "images": [
+    "review/weapon-fidelity/after/pistol-side.png",
+    "review/weapon-fidelity/after/pistol-three.png",
+    "review/weapon-fidelity/after/revolver-side.png",
+    "review/weapon-fidelity/after/revolver-three.png",
+    "review/weapon-fidelity/after/uzi-side.png",
+    "review/weapon-fidelity/after/uzi-three.png",
+    "review/weapon-fidelity/after/knife-side.png",
+    "review/weapon-fidelity/after/knife-three.png",
+    "review/weapon-fidelity/after/machete-side.png",
+    "review/weapon-fidelity/after/machete-three.png"
+  ],
+  "additionalImages": [
+    "review/weapon-fidelity/after/m4-side.png",
+    "review/weapon-fidelity/after/m4-three.png",
+    "review/weapon-fidelity/after/aa12-side.png",
+    "review/weapon-fidelity/after/aa12-three.png"
+  ],
+  "findings": [
+    {
+      "weapon": "revolver",
+      "finding": "Thin top-bridge inset cap produced little pointed ears at barrel lug join in initial after and bright studio captures.",
+      "action": "Simplified bridge profile; bevel .006 to .0025, lower bridge .006 to .003, lug .012 to .008. CPU audit passed; final visual confirmation awaits parent recapture."
+    },
+    {
+      "weapon": "pistol",
+      "finding": "Grip texture reads as a shallow molded side panel; no new detached details. Long shelf under muzzle already present in before capture and retained for slide-rack contract.",
+      "action": "No additional change."
+    },
+    {
+      "weapon": "knife",
+      "finding": "Exact side view is edge-on by original blade orientation. Three-quarter capture shows closed fuller/bevel geometry and attached guard.",
+      "action": "No additional change."
+    }
+  ],
+  "additionalReview": "M4 and AA12 visible handguards, stocks, mags and small accessories appear attached in both captures; no concrete assembly defect identified.",
+  "validation": "node --check studio/weapon-sidearms.js; node review/weapon-fidelity/sidearms-audit.mjs -> PASS. All dimensions and userData animation states preserved; custom helper normals/winding pass. Final revolver 10 meshes / 5406 triangles."
+}

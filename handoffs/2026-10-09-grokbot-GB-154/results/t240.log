@@ -1,0 +1,17 @@
+PASS right hand: a fingered rig (palm, 4 x 3 finger segments, 2 thumb segments: 15 joints)
+PASS right hand: index finger and thumb on the +x*side edge, little finger on the other
+PASS right hand: nothing under the wrist drawn mirrored
+PASS right hand: one rig moves the glove (and its guards) and the bare hand (3 skins)
+PASS right hand: the index finger curls on its own (tip 0.115 m, middle tip 0.0000 m)
+PASS right hand: the glove mesh follows the pose (0.107 m)
+PASS left hand: a fingered rig (palm, 4 x 3 finger segments, 2 thumb segments: 15 joints)
+PASS left hand: index finger and thumb on the +x*side edge, little finger on the other
+PASS left hand: nothing under the wrist drawn mirrored
+PASS left hand: one rig moves the glove (and its guards) and the bare hand (3 skins)
+PASS left hand: the index finger curls on its own (tip 0.115 m, middle tip 0.0000 m)
+PASS left hand: the glove mesh follows the pose (0.107 m)
+PASS cost: 4 visible meshes, 1784 triangles for both hands (the mitt: 4 meshes, 1472)
+PASS M4: both holding hands closed (knuckle curl 1.05, 1.05)
+PASS holstered: both hands relaxed (0.38, 0.38)
+PASS survivor: the same fingered hands, relaxed (curl 0.38)
+PASS no errors

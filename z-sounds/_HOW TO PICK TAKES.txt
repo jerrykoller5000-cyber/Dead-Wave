@@ -1,0 +1,30 @@
+HOW TO PICK TAKES  (CL-162, 2026-10-10)
+
+Every ElevenLabs sound the game has is in this z-sounds folder, sorted the same way everywhere:
+
+    z-sounds \ <category> \ <sound> \ <sound>-1.ogg, <sound>-2.ogg, ...
+
+  for example  weapons\pistol\pistol-1.ogg ... pistol-4.ogg
+               zombies\brute\death\brute-death-1.ogg ... brute-death-4.ogg
+
+There are 371 sound folders and 1,348 takes. 328 folders have more than one take.
+The categories are: below, build-attacks, builds, bullet-impacts, burial, crew, footsteps, horde, hq,
+impacts, player, story, training, turrets, ui, vehicles, weapon-foley, weapons, world, zombies.
+
+ALL TAKES ARE THE SAME LOUDNESS NOW
+  Every take has been evened to the same loudness, so nothing jumps out or disappears while you compare.
+  The game's own mix doesn't change: the game sets each sound to its own level when it plays it.
+
+TO GET RID OF A BAD TAKE
+  1. Open a sound's folder and play the takes (double-click, or use "Listen to Z-Sounds.bat").
+  2. Delete the ones you don't like, in Explorer.
+  3. Whatever is left in the folder is what the game plays. It picks one of them at random each time.
+     The game sees the change the next time it starts (or when you refresh the Training Ground).
+
+  If you delete every take in a folder, the game goes back to its own built-in sound for it.
+  Leave the _prompt.txt files: they hold the ElevenLabs prompt for that folder (the game ignores
+  anything starting with _ ).
+
+"Listen to Z-Sounds.bat" (in the game folder) opens a page that lists every folder and plays each take,
+plus one "as in the game". It also has an "in the game" switch for each sound if you want to hear the
+game's own sound there instead without deleting anything.

@@ -1,0 +1,9 @@
+#128 world/wind-day  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: ambience (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+Gentle daytime wind through a pine forest valley, rustling needles, calm, seamless. No music, no voice.

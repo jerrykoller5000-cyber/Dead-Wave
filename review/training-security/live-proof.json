@@ -1,0 +1,89 @@
+{
+ "checks": [
+  {
+   "pass": true,
+   "what": "range side selects security door"
+  },
+  {
+   "pass": true,
+   "what": "E closes unlocked door"
+  },
+  {
+   "pass": true,
+   "what": "closed door blocks actual leftward walking"
+  },
+  {
+   "pass": true,
+   "what": "E raises door"
+  },
+  {
+   "pass": true,
+   "what": "open door permits actual walking to build room"
+  },
+  {
+   "pass": true,
+   "what": "build side selects security door"
+  },
+  {
+   "pass": true,
+   "what": "E closes from build side"
+  },
+  {
+   "pass": true,
+   "what": "E opens relocated HQ panel"
+  },
+  {
+   "pass": true,
+   "what": "calling zombies immediately closes and locks"
+  },
+  {
+   "pass": true,
+   "what": "lock covers five-second countdown"
+  },
+  {
+   "pass": true,
+   "what": "countdown denies reopening"
+  },
+  {
+   "pass": true,
+   "what": "deployed zombies keep door locked"
+  },
+  {
+   "pass": true,
+   "what": "actual E is denied while zombies remain"
+  },
+  {
+   "pass": true,
+   "what": "locked door blocks actual walking back to range"
+  },
+  {
+   "pass": true,
+   "what": "one remaining zombie holds lock"
+  },
+  {
+   "pass": true,
+   "what": "last actual kill unlocks without automatic opening"
+  },
+  {
+   "pass": true,
+   "what": "E opens after final kill"
+  },
+  {
+   "pass": true,
+   "what": "clear cancels countdown and unlocks"
+  },
+  {
+   "pass": true,
+   "what": "blackout releases lock"
+  },
+  {
+   "pass": true,
+   "what": "leave resets door and pending lock"
+  },
+  {
+   "pass": true,
+   "what": "leave cancels deployment"
+  }
+ ],
+ "errors": []
+}

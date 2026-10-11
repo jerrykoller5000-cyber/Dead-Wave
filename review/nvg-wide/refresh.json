@@ -1,0 +1,4 @@
+{
+  "cmd": "eval",
+  "code": "const l=document.querySelector('link[href^=\"ui/night-vision.css\"]'); await new Promise((resolve,reject)=>{l.onload=resolve;l.onerror=reject;l.href='ui/night-vision.css?review=gp166';}); await wait(300);return {active:T.renderer.domElement.classList.contains('nvg-phosphor'),background:getComputedStyle(document.getElementById('nvgOverlay')).backgroundImage,grainClip:getComputedStyle(document.getElementById('nvgOverlay'),'::after').clipPath};"
+}

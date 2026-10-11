@@ -19,7 +19,8 @@ import { text, hasText } from './strings.js';
 export function mountArmory({ doc = document, bus = window, cif = doc.getElementById('cif'),
   getPhase = () => 'prep', getOwned = () => [], onApply = () => {}, onReset = null, armory: shared = null,
   getMods = () => [], onFit = () => false, picture = async () => null, icon = () => '', describe = () => '',
-  getFinishes = () => null, onFinish = () => false, preview = null } = {}) {
+  getFinishes = () => null, onFinish = () => false, preview = null,
+  getLaser = () => null, onLaser = () => false } = {}) {
   if (!cif?.querySelector('.card > .modes')) throw new Error('CIF window is missing');
   // A line ChatGPT hasn't written yet falls back to its English (CL-113: the strings are hers to word).
   const t = (key, params, fallback) => {
@@ -98,10 +99,17 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   function syncOwned() {
     for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun);
   }
-  function benchKind() {
-    if (bench) return bench;
+  function gunKindOf(id) { return String(id || '').replace(/:second$/, ''); }
+  // bench holds a gun id ('m4', 'pistol', 'pistol:second') so an akimbo pair can
+  // wear a different laser colour from its mate. Callers that pass a kind still work.
+  function benchGun() {
+    if (bench) return { id: bench, kind: gunKindOf(bench) };
     const gun = armory.read().slots[selected.type][selected.index];
-    return gun ? gun.kind : null;
+    return gun ? { id: gun.id, kind: gun.kind } : null;
+  }
+  function benchKind() {
+    const g = benchGun();
+    return g ? g.kind : null;
   }
   function renderBench() {
     const kind = benchKind();
@@ -118,7 +126,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     const ammo = el('p', 'armory-bench-ammo', describe(kind) || '');
     benchEl.append(pic, name, ammo);
     const mods = modsOf(kind);
-    if (!mods.length) { benchEl.append(el('p', 'armory-bench-empty', t('armory.noMods', {}, 'This gun takes no attachments.'))); renderFinishes(kind); return; }
+    if (!mods.length) { benchEl.append(el('p', 'armory-bench-empty', t('armory.noMods', {}, 'This gun takes no attachments.'))); renderFinishes(kind); renderLaser(benchGun()); return; }
     const list = el('ul', 'armory-mods');
     for (const m of mods) {
       const li = el('li', m.fitted ? 'fitted' : (m.owned ? 'owned' : 'missing'));
@@ -134,6 +142,33 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     }
     benchEl.append(list);
     renderFinishes(kind);
+    renderLaser(benchGun());
+  }
+  // CU-108: one colour per gun, including the second of an akimbo pair.
+  function renderLaser(gun) {
+    if (!gun) return;
+    let data = null;
+    try { data = getLaser(gun.id); } catch (_) { data = null; }
+    if (!data || !data.list || !data.list.length) return;
+    const wrap = el('section', 'armory-finish armory-laser');
+    const cur = data.list.find((f) => f.id === data.current) || data.list[0];
+    const head = el('div', 'armory-finish-head');
+    head.append(el('h4', null, t('armory.laser', {}, 'Laser colour')), el('span', 'armory-finish-current', cur ? cur.name : ''));
+    wrap.append(head);
+    const grid = el('div', 'armory-finish-grid');
+    for (const f of data.list) {
+      const b = el('button', 'armory-swatch' + (f.id === data.current ? ' on' : '') + (f.locked ? ' locked' : ''));
+      b.type = 'button'; b.dataset.laser = f.id;
+      b.title = f.locked ? f.name + (f.hint ? ' · ' + f.hint : '') : f.name;
+      b.setAttribute('aria-label', b.title);
+      b.setAttribute('aria-pressed', String(f.id === data.current));
+      b.style.background = f.hex || '#ff2b2b';
+      if (f.locked) b.disabled = true;
+      b.addEventListener('click', () => { if (!f.locked && onLaser(gun.id, f.id)) render(); });
+      grid.append(b);
+    }
+    wrap.append(grid);
+    benchEl.append(wrap);
   }
   // CL-114: the gun's finish (camo), a row of swatches; the ones still to earn fold away.
   function renderFinishes(kind) {
@@ -192,14 +227,26 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     hip.append(hipBtn);
     // The storage shelves: a plank every row.
     for (const gun of state.shelf) {
-      const item = el('div', 'armory-item' + (bench === gun.kind ? ' benched' : ''));
-      const tile = el('button'); tile.type = 'button'; tile.dataset.gun = gun.id;
-      tile.disabled = slotType(gun.kind) !== selected.type;
-      tile.title = tile.disabled ? t('armory.wrongSlot', {}, 'Pick a matching slot first') : t('armory.carryThis', {}, 'Carry this one');
-      tile.append(gunPicture(gun.kind), el('strong', 'armory-name', labelGun(gun)), el('small', null, detailGun(gun)), chips(gun.kind));
-      tile.addEventListener('click', () => { armory.take(gun.id, selected.type, selected.index); bench = null; render(); });
+      const item = el('div', 'armory-item' + (bench === gun.id ? ' benched' : ''));
+      // CL-139 (Jerry, 2026-10-09: "anything you can make better"): a gun for the other kind of slot is not a dead
+      // button any more. Clicking it carries it in a free slot of its kind, or, with none free, picks that kind's
+      // first slot so the next click swaps it in. Each stored gun says which kind of slot it goes in.
+      const fits = slotType(gun.kind), here = fits === selected.type;
+      const fitsName = t(fits === 'primary' ? 'armory.kindPrimary' : 'armory.kindSecondary', {}, fits === 'primary' ? 'Primary' : 'Secondary');
+      const tile = el('button', here ? null : 'other-slot'); tile.type = 'button'; tile.dataset.gun = gun.id; tile.dataset.fits = fits;
+      tile.title = here ? t('armory.carryThis', {}, 'Carry this one') : t('armory.carryOther', { slot: fitsName }, 'Carry this in a {slot} slot');
+      tile.append(gunPicture(gun.kind), el('strong', 'armory-name', labelGun(gun)), el('small', null, detailGun(gun)), chips(gun.kind), el('em', 'armory-fits', fitsName));
+      tile.addEventListener('click', () => {
+        if (fits === selected.type) armory.take(gun.id, selected.type, selected.index);
+        else {
+          const free = state.slots[fits].findIndex((g) => !g);
+          if (free >= 0) armory.take(gun.id, fits, free);
+          selected = { type: fits, index: free >= 0 ? free : 0 };
+        }
+        bench = null; render();
+      });
       const tune = el('button', 'armory-tune', t('armory.tune', {}, 'Workbench')); tune.type = 'button'; tune.dataset.bench = gun.id;
-      tune.addEventListener('click', () => { bench = gun.kind; render(); });
+      tune.addEventListener('click', () => { bench = gun.id; render(); });
       item.append(tile, tune);
       shelf.append(item);
     }

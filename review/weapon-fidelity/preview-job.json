@@ -1,0 +1,152 @@
+{
+  "shots": [
+    {
+      "target": "weapon:pistol",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Pistol",
+      "out": "review/weapon-fidelity/preview/pistol.png"
+    },
+    {
+      "target": "weapon:revolver",
+      "view": "threeR",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Revolver",
+      "out": "review/weapon-fidelity/preview/revolver.png"
+    },
+    {
+      "target": "weapon:uzi",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Uzi",
+      "out": "review/weapon-fidelity/preview/uzi.png"
+    },
+    {
+      "target": "weapon:m4",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "M4",
+      "out": "review/weapon-fidelity/preview/m4.png"
+    },
+    {
+      "target": "weapon:ak",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "AK",
+      "out": "review/weapon-fidelity/preview/ak.png"
+    },
+    {
+      "target": "weapon:aa12",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "AA-12",
+      "out": "review/weapon-fidelity/preview/aa12.png"
+    },
+    {
+      "target": "weapon:shotgun",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Shotgun",
+      "out": "review/weapon-fidelity/preview/shotgun.png"
+    },
+    {
+      "target": "weapon:sniper",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Sniper",
+      "out": "review/weapon-fidelity/preview/sniper.png"
+    },
+    {
+      "target": "weapon:minigun",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Minigun",
+      "out": "review/weapon-fidelity/preview/minigun.png"
+    },
+    {
+      "target": "weapon:launcher",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Launcher",
+      "out": "review/weapon-fidelity/preview/launcher.png"
+    },
+    {
+      "target": "weapon:flamer",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Flamer",
+      "out": "review/weapon-fidelity/preview/flamer.png"
+    },
+    {
+      "target": "weapon:chainsaw",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Chainsaw",
+      "out": "review/weapon-fidelity/preview/chainsaw.png"
+    },
+    {
+      "target": "weapon:knife",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Knife",
+      "out": "review/weapon-fidelity/preview/knife.png"
+    },
+    {
+      "target": "weapon:machete",
+      "view": "three",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Machete",
+      "out": "review/weapon-fidelity/preview/machete.png"
+    },
+    {
+      "target": "weapon:m240",
+      "view": "threeR",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "M240",
+      "out": "review/weapon-fidelity/preview/m240.png"
+    },
+    {
+      "target": "weapon:mortar",
+      "view": "threeR",
+      "time": "noon",
+      "size": "1200x900",
+      "margin": 1.15,
+      "caption": "Mortar",
+      "out": "review/weapon-fidelity/preview/mortar.png"
+    }
+  ],
+  "out": "review/weapon-fidelity/preview",
+  "cols": 4,
+  "tile": 440,
+  "sheet": true
+}

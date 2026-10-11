@@ -1,8 +1,8 @@
 {
-  "name": "dead-wave",
+  "name": "grave-shift",
   "version": "0.1.0",
   "private": true,
-  "description": "Dead-Wave — a browser survival game. Native ES modules, no build step.",
+  "description": "Grave Shift — a browser survival game. Native ES modules, no build step.",
   "type": "module",
   "scripts": {
     "test": "node tools/tests/run-all.mjs",

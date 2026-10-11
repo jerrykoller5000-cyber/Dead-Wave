@@ -1,0 +1,10 @@
+{
+  "pool": {
+    "gearSources": 1,
+    "atlasRetained": true,
+    "reset": true,
+    "skins": 2,
+    "finite": true
+  },
+  "errors": []
+}

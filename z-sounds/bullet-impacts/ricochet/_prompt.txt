@@ -1,0 +1,9 @@
+#84 bullet-impacts/ricochet  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: ricochet
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet ricocheting off stone, a whining zing flying away. No music, no voice.

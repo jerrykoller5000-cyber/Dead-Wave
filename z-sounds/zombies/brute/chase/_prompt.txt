@@ -1,0 +1,9 @@
+#33 brute-chase
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A massive brute zombie's deep, swelling bellow as it starts towards its prey, slow and powerful. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('brute', 'chase')

@@ -1,0 +1,26 @@
+{
+  "focusedEdits": true,
+  "preflightExisting": [
+    {
+      "name": "updateMouseAimBody",
+      "text": "const ox = aimTarget.x - player.position.x, oz = aimTarget.z - player.position.z;"
+    },
+    {
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.x = player.position.x + ox * c + oz * s;"
+    },
+    {
+      "name": "updateMouseAimBody",
+      "text": "aimTarget.z = player.position.z - ox * s + oz * c;"
+    },
+    {
+      "name": "updateMouseAimBody",
+      "text": "const dx = aimTarget.x - player.position.x;"
+    },
+    {
+      "name": "updateMouseAimBody",
+      "text": "const dz = aimTarget.z - player.position.z;"
+    }
+  ],
+  "newPreflightViolations": 0
+}

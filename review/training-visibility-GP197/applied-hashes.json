@@ -1,0 +1,18 @@
+[
+  {
+    "path": "index.html",
+    "sha256": "148277ebddfbc881cb0debd1ecf593447af211b355ec6c0b2dbccf31a164e084"
+  },
+  {
+    "path": "world/training.js",
+    "sha256": "093ef957af9fba639c0d570496b65acb7bda9ba4cfa6435e24238a0ea3d3282a"
+  },
+  {
+    "path": "world/training-ballistics.js",
+    "sha256": "2a7d42d7def41bb7c0428427e6cf0d1f2ba970e1a31d9e18b9a25286c6f23a37"
+  },
+  {
+    "path": "world/training-cutaway.js",
+    "sha256": "453bbeb2d9139c9aa4be42597ef311a0478378e6cd7aec3184555aecbf24169d"
+  }
+]

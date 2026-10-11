@@ -1,0 +1,27 @@
+{
+  "loadSec": 15.495,
+  "touch": {
+    "hits": 3,
+    "damage": 24,
+    "state": {
+      "active": false,
+      "elapsed": 1.5018999999761573,
+      "x": 1,
+      "z": 0,
+      "strike": 0,
+      "started": false
+    },
+    "hp": 1
+  },
+  "rearm": {
+    "hits": 3,
+    "direction": {
+      "active": false,
+      "elapsed": 1.5164000000059596,
+      "x": 0,
+      "z": 1,
+      "strike": 0,
+      "started": false
+    }
+  }
+}

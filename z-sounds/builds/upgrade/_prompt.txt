@@ -1,0 +1,9 @@
+#91 builds/upgrade  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: upgradeTarget)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+Reinforcing a fortification: a power drill, a wrench tightening, a satisfying final clank. No music, no voice.

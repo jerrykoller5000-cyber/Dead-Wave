@@ -1,0 +1,17 @@
+{
+  "format": "dw-hand-path/1",
+  "name": "machete-chop",
+  "note": "CU-107: the machete. The hand chambers back, rises for the chop, comes down in front of him, and follows through low across the body. t is 0..1 of the machete swing (0.40 s). Offsets in his own axes (x out to the knife side, y up, z forward), metres. Kept inside an arm's reach of the chest point so the IK can get there.",
+  "places": {
+    "rest": "where the pose has the hand this frame (the swing starts and ends there)",
+    "chest": "a point in front of his upper chest (torso space 0, 1.22 m, 0.12 m)"
+  },
+  "hand": [
+    { "t": 0.00, "at": "rest" },
+    { "t": 0.16, "at": "chest", "off": [0.24, 0.10, -0.08] },
+    { "t": 0.34, "at": "chest", "off": [0.16, 0.36, 0.06] },
+    { "t": 0.50, "at": "chest", "off": [0.00, 0.02, 0.42] },
+    { "t": 0.66, "at": "chest", "off": [-0.26, -0.18, 0.14] },
+    { "t": 1.00, "at": "rest" }
+  ]
+}

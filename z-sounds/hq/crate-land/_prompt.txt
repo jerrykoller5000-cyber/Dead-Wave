@@ -1,0 +1,9 @@
+#123 hq/crate-land
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: crateLand()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy supply crate on a parachute landing on dirt, a big wooden thud and a canopy flutter. No music, no voice.

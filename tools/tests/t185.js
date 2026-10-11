@@ -16,10 +16,19 @@
     return T.getCurrentWeapon() === w;
   };
   // Rounds fired while the button is held for `ms` (the magazine topped up first so a reload cannot get in the way).
+  // GB-143: the hold is counted in game time (T.getSimTime, GB-131), as t187's take() is: the first shots of a run can
+  // stall the page for seconds headless, and a 450 ms wall-clock hold then spanned a single game frame, so the M4 got
+  // one round off (GB-140 run 2). Wall time is only a cap. Each hold's wall and game time go out as INFO.
+  const holds = [];
   const held = async (w, ms) => {
     T.setAmmoDbg(w, 20); await wait(150);
     const a = T.getAmmo()[w];
-    T.setMouseFireDbg(true); await wait(ms); T.setMouseFireDbg(false);
+    const s0 = T.getSimTime ? T.getSimTime() : null, w0 = Date.now();
+    T.setMouseFireDbg(true);
+    if (s0 == null) await wait(ms);
+    else while (T.getSimTime() - s0 < ms / 1000 && Date.now() - w0 < 20000) await wait(20);
+    T.setMouseFireDbg(false);
+    holds.push(w + ' ' + (Date.now() - w0) + ' ms wall / ' + (s0 == null ? '?' : Math.round((T.getSimTime() - s0) * 1000)) + ' ms game');
     await wait(120);
     return a - T.getAmmo()[w];
   };
@@ -78,5 +87,6 @@
     await take('pistol');
     ok(/SEMI/.test(hud()), 'a new run: the pistol has no sear again, so it is semi (' + hud() + ')');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
+  out.push('INFO holds: ' + holds.join(', '));
   return out.join('\n');
 })()

@@ -1,0 +1,9 @@
+#4 shambler-hurt
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A brief pained zombie grunt when struck, a choked wet 'uhk', low and rough. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('shambler', 'hurt')

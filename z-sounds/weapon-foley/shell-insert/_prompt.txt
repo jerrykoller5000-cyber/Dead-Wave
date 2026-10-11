@@ -1,0 +1,9 @@
+#39 weapon-foley/shell-insert
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley shell
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single shotgun shell pushed into the loading port, a short brass and spring click. No music, no voice.

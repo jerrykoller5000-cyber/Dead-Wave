@@ -1,0 +1,9 @@
+#149 below/warren-ambience
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: belowState ambience (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+An underground tunnel network: low distant rumbles, water dripping, stale air, oppressive, seamless. No music, no voice.

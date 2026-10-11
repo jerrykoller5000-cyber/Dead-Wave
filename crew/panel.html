@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dead-Wave Crew</title>
+<title>Grave Shift Crew</title>
 <link rel="icon" href="data:,">
 <!--
   The crew panel. A live, read-only view of: crew/status/*.md, crew/LOG.md, crew/BOARD.md,
@@ -305,7 +305,7 @@ function gateOf(t, tasks) {
   }
   return null;
 }
-const PROMPT = (a, id) => `Dead-Wave: check in as ${a}. Read AGENTS.md and follow its session steps: look at the crew board, answer requests addressed to you, then work down your queue — check in (with --model, the model you run on), post notes as you go, check out with a handoff note, and take the next task — until your queue is empty or you're blocked. Questions only Jerry can answer go through crew.mjs ask.` + (id ? ` Today, do ${id} first.` : '');
+const PROMPT = (a, id) => `Grave Shift: check in as ${a}. Read AGENTS.md and follow its session steps: look at the crew board, answer requests addressed to you, then work down your queue — check in (with --model, the model you run on), post notes as you go, check out with a handoff note, and take the next task — until your queue is empty or you're blocked. Questions only Jerry can answer go through crew.mjs ask.` + (id ? ` Today, do ${id} first.` : '');
 async function copyText(btn, text) {
   try { await navigator.clipboard.writeText(text); }
   catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch {} ta.remove(); }

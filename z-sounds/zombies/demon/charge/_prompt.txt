@@ -1,0 +1,9 @@
+#55 demon-charge
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A demon zombie winding up to charge: a rising whoosh of fire, a sharp snort, then a huge deep bellowing roar. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('demon', 'charge')

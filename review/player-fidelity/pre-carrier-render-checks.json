@@ -1,0 +1,2179 @@
+{
+  "before": false,
+  "readyMs": 27805,
+  "sourceHashes": {
+    "studio/marine-body.js": "c4bb56f8ecac3b305cfc8967c36fcc251a23f08cfe53eeb5557b58b5836f57ad",
+    "ui/marine-face.js": "fe2db293cf8205894ad0f2e06499f8433d526edafd8bec0e79abffd0bba2fd5b",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/marine-headgear.js": "23363fe21d47cd152df80bfd0aeed545c51ec7e5ce4672da8714018c5e244f1d",
+    "index.html (makeMarine)": "080aba097bc135ec487863c02db5f6556571643edfd23bed08d17ef2591beb46"
+  },
+  "sourceUnchanged": true,
+  "initial": {
+    "joints": {
+      "lowerBody": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": null
+      },
+      "hip": {
+        "position": [
+          0,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "torsoG": {
+        "position": [
+          0,
+          0.7,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": null
+      },
+      "headG": {
+        "position": [
+          0,
+          0.52,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          0.94,
+          0.97,
+          0.94
+        ],
+        "parent": "spine"
+      },
+      "legLG": {
+        "position": [
+          -0.13,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "legRG": {
+        "position": [
+          0.13,
+          0.62,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      },
+      "kneeLG": {
+        "position": [
+          0,
+          -0.27,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "hipL"
+      },
+      "kneeRG": {
+        "position": [
+          0,
+          -0.27,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "hipR"
+      },
+      "ankleLG": {
+        "position": [
+          0,
+          -0.25,
+          0.01
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "kneeL"
+      },
+      "ankleRG": {
+        "position": [
+          0,
+          -0.25,
+          0.01
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "kneeR"
+      },
+      "armLG": {
+        "position": [
+          -0.34,
+          0.3800000000000001,
+          0.02
+        ],
+        "quaternion": [
+          -0.3771755108213828,
+          0.1773485572212865,
+          0.21696012059750683,
+          0.8827312327987905
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "spine"
+      },
+      "armRG": {
+        "position": [
+          0.34,
+          0.3800000000000001,
+          0.02
+        ],
+        "quaternion": [
+          -0.4944501552707861,
+          -0.08393114516832453,
+          -0.0954190553769095,
+          0.8598661585935381
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "spine"
+      },
+      "elbowLG": {
+        "position": [
+          0,
+          -0.28,
+          0
+        ],
+        "quaternion": [
+          -0.17410813759359595,
+          0,
+          0,
+          0.9847265389049334
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "shoulderL"
+      },
+      "elbowRG": {
+        "position": [
+          0,
+          -0.28,
+          0
+        ],
+        "quaternion": [
+          -0.09983341664682815,
+          0,
+          0,
+          0.9950041652780258
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "shoulderR"
+      },
+      "gripL": {
+        "position": [
+          0.02,
+          -0.27,
+          0.13
+        ],
+        "quaternion": [
+          0.5778252545485077,
+          -0.07398637882919021,
+          -0.10332401538224098,
+          0.8062060151096532
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "elbowL"
+      },
+      "gripR": {
+        "position": [
+          -0.01,
+          -0.26,
+          0.12
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "elbowR"
+      },
+      "weaponMount": {
+        "position": [
+          0.12826,
+          0.15981,
+          -0.10022
+        ],
+        "quaternion": [
+          0.5778252545485077,
+          0.07398637882919021,
+          0.10332401538224098,
+          0.8062060151096532
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "handR"
+      },
+      "hipGrip": {
+        "position": [
+          -0.218,
+          0.602,
+          0.037
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "parent": "pelvis"
+      }
+    },
+    "wardrobe": [
+      "belt",
+      "boots",
+      "cap",
+      "carrier",
+      "gloves",
+      "helmet",
+      "holster",
+      "mask",
+      "pack",
+      "pads",
+      "shirt",
+      "trousers"
+    ],
+    "gear": [
+      "bareHead",
+      "bareTorso",
+      "helmet",
+      "nvg",
+      "pads",
+      "vest"
+    ],
+    "meshes": 60,
+    "triangles": 18434,
+    "vertices": 50228,
+    "finite": true
+  },
+  "states": {
+    "front": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.324471588629614e-13,
+      "support": 2.959689682724331e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.021854112547098604,
+        "rootOffset": -0.0398541125469849,
+        "feetLift": 1.1368683772161603e-13,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 1061,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      },
+      "perf": {
+        "meanFps": 57.25487167150852,
+        "minFps": 55.917039445574254,
+        "worstMs": 25.200000047683716,
+        "samples": [
+          {
+            "fps": 58.402980564502634,
+            "low": 50.50505062668022,
+            "worst": 19.799999952316284,
+            "hitches": 0,
+            "frames": 58
+          },
+          {
+            "fps": 58.35010060362173,
+            "low": 46.082949460650205,
+            "worst": 21.699999928474426,
+            "hitches": 0,
+            "frames": 58
+          },
+          {
+            "fps": 56.34936607233543,
+            "low": 46.72897201467783,
+            "worst": 21.399999976158142,
+            "hitches": 0,
+            "frames": 56
+          },
+          {
+            "fps": 55.917039445574254,
+            "low": 39.68253960745195,
+            "worst": 25.200000047683716,
+            "hitches": 0,
+            "frames": 55
+          }
+        ]
+      }
+    },
+    "back": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 6.132377578190629e-14,
+      "support": 1.1423306116984767e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.02156098227482853,
+        "rootOffset": -0.039560982274800094,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 6401,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "quarter": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 3.7969627442180354e-14,
+      "support": 1.1553221925964502e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.02368684774078127,
+        "rootOffset": -0.04168684774075282,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 6686,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "left": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 2.297161773438474e-13,
+      "support": 3.455256637837263e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000000000033748,
+        "rootOffset": -0.03800000000000536,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965122018912,
+          -0.002170009183515731
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 6956,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "right": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.7260787897064692e-13,
+      "support": 1.1875012109496688e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000010033025456,
+        "rootOffset": -0.03800001003299702,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 7256,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "top": {
+      "camera": {
+        "x": 0,
+        "y": -196.17,
+        "z": -643.2,
+        "tx": 0,
+        "ty": -199.07,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.4218502787691135e-13,
+      "support": 2.2917751894128635e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.02145149874647824,
+        "rootOffset": -0.03945149874644982,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 7541,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "face": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 7.704949790579567e-14,
+      "support": 1.1750116333530327e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.023682630440784933,
+        "rootOffset": -0.041682630440756485,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965122018912,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 7826,
+        "frameCalls": 15,
+        "drawCalls": 247,
+        "triangles": 106663,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "face-side": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 1.6373482444883266e-13,
+      "support": 2.491673474803959e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000000000016286,
+        "rootOffset": -0.03799999999998793,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 8126,
+        "frameCalls": 15,
+        "drawCalls": 252,
+        "triangles": 109119,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "nvg": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 3.4234148223582716e-13,
+      "support": 3.4238746295941095e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.02000000522338235,
+        "rootOffset": -0.038000005223353894,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 8411,
+        "frameCalls": 15,
+        "drawCalls": 248,
+        "triangles": 106783,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "boots": {
+      "camera": {
+        "x": 0,
+        "y": -199.76999999999998,
+        "z": -645.95,
+        "tx": 0,
+        "ty": -199.85,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 2.6027161438324295e-13,
+      "support": 1.347906801283133e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020974058128447846,
+        "rootOffset": -0.038974058128419475,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965122018912,
+          -0.002170009183515731
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 8726,
+        "frameCalls": 15,
+        "drawCalls": 235,
+        "triangles": 97515,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "pack": {
+      "camera": {
+        "x": 0,
+        "y": -198.85,
+        "z": -645.3,
+        "tx": 0,
+        "ty": -198.97,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.1996813305301672e-13,
+      "support": 1.1372418573986716e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.0239387893905738,
+        "rootOffset": -0.041938789390545406,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 8996,
+        "frameCalls": 15,
+        "drawCalls": 291,
+        "triangles": 115501,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "vest": {
+      "camera": {
+        "x": 0,
+        "y": -198.91,
+        "z": -645.55,
+        "tx": 0,
+        "ty": -198.96,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 7.271960811294775e-15,
+      "support": 1.329289945041685e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020128868768525945,
+        "rootOffset": -0.038128868768497526,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965122018912,
+          -0.002170009183515731
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 9326,
+        "frameCalls": 15,
+        "drawCalls": 283,
+        "triangles": 113671,
+        "points": 0,
+        "lines": 8,
+        "timestamp": 0
+      }
+    },
+    "belt": {
+      "camera": {
+        "x": 0,
+        "y": -199.18,
+        "z": -645.6,
+        "tx": 0,
+        "ty": -199.22,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.2861158968629198e-13,
+      "support": 2.6645352591003757e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000000287617524,
+        "rootOffset": -0.0380000002875891,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.0021700091834588875
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 9626,
+        "frameCalls": 15,
+        "drawCalls": 274,
+        "triangles": 108511,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "pistol-aim": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.0784570968346557e-13,
+      "support": 1.5526588078978872e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020031942848282358,
+        "rootOffset": -0.03803194284825395,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.0018009965121734695,
+          -0.002170009183487309
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 9956,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "pistol-crouch": {
+      "camera": {
+        "x": 0,
+        "y": -199.16,
+        "z": -643.5,
+        "tx": 0,
+        "ty": -199.32,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.2808857437128394e-13,
+      "support": 1.1817583577600892e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.22389237850559957,
+        "rootOffset": -0.23189237850594857,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.0009999998808325472,
+          0.0009999998808325472
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 10226,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "pistol-run": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.1919909129039717e-13,
+      "support": 1.2076863991681212e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.046921666661179064,
+        "rootOffset": -0.04692166666115061,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.013669070499275904,
+          0.144518766736212
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 105,
+      "triangles": 30432,
+      "vertices": 85040,
+      "finite": true,
+      "renderInfo": {
+        "calls": 10466,
+        "frameCalls": 15,
+        "drawCalls": 310,
+        "triangles": 120661,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "rifle-aim": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "m4",
+      "grip": 1.4381378416859444e-13,
+      "support": 6.139693935002175e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020893599136177155,
+        "rootOffset": -0.03889359913614876,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670162485960418,
+          -0.008172508184571825
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": "pistol"
+      },
+      "meshes": 115,
+      "triangles": 35888,
+      "vertices": 101386,
+      "finite": true,
+      "renderInfo": {
+        "calls": 10721,
+        "frameCalls": 15,
+        "drawCalls": 330,
+        "triangles": 131573,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "rifle-crouch": {
+      "camera": {
+        "x": 0,
+        "y": -199.16,
+        "z": -643.5,
+        "tx": 0,
+        "ty": -199.32,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "m4",
+      "grip": 1.1235457009206584e-13,
+      "support": 1.2424680421675464e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.22000000003181203,
+        "rootOffset": -0.22800000003216114,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.0009999998808325472,
+          0.000999999880860969
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": "pistol"
+      },
+      "meshes": 115,
+      "triangles": 35888,
+      "vertices": 101386,
+      "finite": true,
+      "renderInfo": {
+        "calls": 11006,
+        "frameCalls": 15,
+        "drawCalls": 329,
+        "triangles": 131513,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "rifle-run": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "m4",
+      "grip": 1.2738919063027044e-13,
+      "support": 1.1370250336367356e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.04692166666685387,
+        "rootOffset": -0.0469216666668254,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          0.013669115158592149,
+          0.14451872183732917
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": "pistol"
+      },
+      "meshes": 115,
+      "triangles": 35888,
+      "vertices": 101386,
+      "finite": true,
+      "renderInfo": {
+        "calls": 11321,
+        "frameCalls": 15,
+        "drawCalls": 330,
+        "triangles": 131573,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "shirt": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.2158721387986512e-13,
+      "support": 4.052314039881821e-15,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020015237099546366,
+        "rootOffset": -0.03801523709951793,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384821429,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 78,
+      "triangles": 21504,
+      "vertices": 58894,
+      "finite": true,
+      "renderInfo": {
+        "calls": 11591,
+        "frameCalls": 15,
+        "drawCalls": 256,
+        "triangles": 102733,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "rolled-shorts": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 1.2680020729340498e-13,
+      "support": 1.138753867559364e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.02387675564931354,
+        "rootOffset": -0.04187675564928517,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 80,
+      "triangles": 20416,
+      "vertices": 54286,
+      "finite": true,
+      "renderInfo": {
+        "calls": 11846,
+        "frameCalls": 15,
+        "drawCalls": 260,
+        "triangles": 100557,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "cover": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 1.669840041621985e-13,
+      "support": 1.1403759169362792e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020720967067059396,
+        "rootOffset": -0.03872096706703099,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 96,
+      "triangles": 24496,
+      "vertices": 67202,
+      "finite": true,
+      "renderInfo": {
+        "calls": 12116,
+        "frameCalls": 15,
+        "drawCalls": 230,
+        "triangles": 94911,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "boonie": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 4.709610857355653e-14,
+      "support": 1.1786762949868358e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000000118072497,
+        "rootOffset": -0.03800000011804405,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.008172468446986159
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 97,
+      "triangles": 24940,
+      "vertices": 68470,
+      "finite": true,
+      "renderInfo": {
+        "calls": 12401,
+        "frameCalls": 15,
+        "drawCalls": 233,
+        "triangles": 95799,
+        "points": 0,
+        "lines": 8,
+        "timestamp": 0
+      }
+    },
+    "ballcap": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 3.93574062229618e-14,
+      "support": 1.1885421343989081e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020041534053030566,
+        "rootOffset": -0.038041534053002146,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 96,
+      "triangles": 25072,
+      "vertices": 68960,
+      "finite": true,
+      "renderInfo": {
+        "calls": 12701,
+        "frameCalls": 15,
+        "drawCalls": 230,
+        "triangles": 96063,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "ballcap-back": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 1.290607912983213e-13,
+      "support": 2.8138582299573056e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.023928496400538943,
+        "rootOffset": -0.04192849640051055,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 96,
+      "triangles": 25072,
+      "vertices": 68960,
+      "finite": true,
+      "renderInfo": {
+        "calls": 12971,
+        "frameCalls": 15,
+        "drawCalls": 246,
+        "triangles": 100353,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "bare-face": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 1.7264196501742464e-13,
+      "support": 1.1874032481299889e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020358330833574096,
+        "rootOffset": -0.03835833083354567,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 95,
+      "triangles": 23456,
+      "vertices": 64082,
+      "finite": true,
+      "renderInfo": {
+        "calls": 13226,
+        "frameCalls": 15,
+        "drawCalls": 228,
+        "triangles": 92831,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "goggles": {
+      "camera": {
+        "x": 0,
+        "y": -198.51,
+        "z": -645.9,
+        "tx": 0,
+        "ty": -198.54,
+        "tz": -647,
+        "fov": 35
+      },
+      "weapon": "pistol",
+      "grip": 1.2772884298189368e-13,
+      "support": 2.8426601471689954e-14,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020000000183338806,
+        "rootOffset": -0.0380000001833104,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384821429,
+          -0.008172468446986159
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          null
+        ],
+        "holsters": [
+          null,
+          null
+        ],
+        "hip": null
+      },
+      "meshes": 99,
+      "triangles": 24688,
+      "vertices": 67778,
+      "finite": true,
+      "renderInfo": {
+        "calls": 13526,
+        "frameCalls": 15,
+        "drawCalls": 236,
+        "triangles": 95295,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "slung-loadout": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "pistol",
+      "grip": 4.3626893686549865e-14,
+      "support": 1.3544640136011173e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.020065255841198136,
+        "rootOffset": -0.03806525584116971,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384821429,
+          -0.008172468446986159
+        ]
+      },
+      "carry": {
+        "slings": [
+          "m4",
+          "shotgun"
+        ],
+        "holsters": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": null
+      },
+      "meshes": 158,
+      "triangles": 46002,
+      "vertices": 128508,
+      "finite": true,
+      "renderInfo": {
+        "calls": 13766,
+        "frameCalls": 15,
+        "drawCalls": 416,
+        "triangles": 152377,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    "rifle-drawn": {
+      "camera": {
+        "x": 0,
+        "y": -198.94,
+        "z": -643,
+        "tx": 0,
+        "ty": -199.1,
+        "tz": -647,
+        "fov": 32
+      },
+      "weapon": "m4",
+      "grip": 1.5394736791110652e-13,
+      "support": 2.2915091981385475e-13,
+      "wardrobe": {
+        "sleevesDown": true,
+        "sleevesRolled": true,
+        "longLegs": true,
+        "shortLegs": true,
+        "gloves": true,
+        "bareHands": true,
+        "mask": true,
+        "hat": true,
+        "boots": true,
+        "nvgPose": true
+      },
+      "pose": {
+        "grounded": true,
+        "bodyDip": -0.023939472677934774,
+        "rootOffset": -0.04193947267790632,
+        "feetLift": 2.842170943040401e-14,
+        "footY": [
+          -0.006670115384849851,
+          -0.00817246844701458
+        ]
+      },
+      "carry": {
+        "slings": [
+          null,
+          "shotgun"
+        ],
+        "holsters": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": "pistol"
+      },
+      "meshes": 155,
+      "triangles": 45394,
+      "vertices": 128170,
+      "finite": true,
+      "renderInfo": {
+        "calls": 14021,
+        "frameCalls": 15,
+        "drawCalls": 410,
+        "triangles": 151161,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  },
+  "motion": [
+    {
+      "name": "stand",
+      "finite": true,
+      "frames": 120
+    },
+    {
+      "name": "walk",
+      "finite": true,
+      "frames": 120
+    },
+    {
+      "name": "run",
+      "finite": true,
+      "frames": 120
+    }
+  ],
+  "errors": []
+}

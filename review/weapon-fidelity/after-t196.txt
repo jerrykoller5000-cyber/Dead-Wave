@@ -1,0 +1,17 @@
+PASS knife: 22 -> 26 damage (+18%), the rest as before {"reach":2.4,"dmg":26,"cd":0.55,"arc":0.4,"maxHits":2,"name":"Knife"}
+PASS machete damage 69 (Jerry 9:18 PM, in place of exactly 2x the knife): 69 = x2.65 the knife's 26
+PASS machete reach 3.8 -> 2.45 m (36% less)
+PASS machete cone half-angle 93 -> 46 degrees (x0.50)
+PASS machete recovery and max hits as before
+PASS machete on a shambler at 2 m: 103.5 (69 x Blade 1.5)
+PASS knife there: 39.0 (26 x 1.5), 26/69 of the machete
+PASS machete no longer reaches 3.2 m (it did at 3.8 + its radius): 0.0
+PASS machete cone: misses 60 degrees off (the knife still hits there: 39.0), hits 35 degrees off (103.5)
+PASS forty kills, no MedPen on the ground (0 -> 0)
+PASS sprinters: 3% on night 1, 19% on night 20
+PASS a body rolls its pace for its night (20; tonight 1)
+PASS a hit staggers it (0.40 s), and a second hit at once does not restart it
+PASS staggered, it does not close in: 10.88 -> 11.12 m in 0.4 s (unstaggered it walks 1.4 m)
+PASS and then it comes on again (11.12 -> 9.27 m)
+PASS one that ducks ducks instead (0.45 s), no stagger
+PASS a brute neither ducks nor staggers

@@ -1,0 +1,18 @@
+{
+  "before": true,
+  "sourceHashes": {
+    "review/player-fidelity/baseline-marine-body.js": "d02763638a50286d3d1798974c2f81563719742954078031f6b3adbdeac36f91",
+    "review/player-fidelity/baseline-marine-face.js": "2bd46b055ecd6f947ae354286cc7be196140512ee076507f73c42ea302aca9c1",
+    "review/player-fidelity/baseline-makeMarine.js": "69d778cb25516b94a4ad1db475ea75298051d9ae0753d7b32944373cded40f83"
+  },
+  "sourceUnchanged": true,
+  "results": {
+    "fit": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "errors": [],
+  "pageErrorDetails": []
+}

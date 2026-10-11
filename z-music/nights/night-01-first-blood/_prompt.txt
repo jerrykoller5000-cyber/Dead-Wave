@@ -1,0 +1,10 @@
+Night 1: First Blood - 96 BPM, E minor, heavy half-time. the first night: dread turning into a fight, a hook to remember.
+
+Sent as a composition plan (instrumental, styles: instrumental metal and chiptune hybrid, 1990s PC shooter soundtrack, modern production, FM synthesis lead, old sound card tone, 8-bit square-wave arpeggios, drop-tuned palm-muted rhythm guitars, tight punchy drums, heavy mix):
+[Stalk] {tense intro without full drums: a low drone, muted palm-muted chugs, a ticking hi-hat; the FM lead hints at the hook}  (20.0 s)
+[Drop A] {the band slams in: the main riff on drop-tuned guitars doubled by a square-wave line, heavy half-time drums, the FM lead states the hook}  (40.0 s)
+[Riff B] {a second, more syncopated riff; chiptune arpeggios race over the chugs; the guitar and the FM lead call and answer}  (40.0 s)
+[Break] {a breather, still in tempo: drums drop to toms and ride, bass and a lone square-wave melody, eerie and sparse}  (20.0 s)
+[Drop A2] {the main riff returns heavier: an extra guitar layer, double-kick, the hook an octave higher}  (40.0 s)
+[Bridge] {new chords and a shredding guitar solo traded bar for bar with a fast 8-bit arpeggio solo}  (40.0 s)
+[Climax] {everything at once: the hook on guitar and FM lead in harmony, full double-kick, ending on one big final hit that rings out}  (40.0 s)

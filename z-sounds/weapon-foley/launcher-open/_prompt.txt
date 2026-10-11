@@ -1,0 +1,9 @@
+#45 weapon-foley/launcher-open
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley tubeOpen
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A grenade launcher breech opened, a heavy metal hinge clack. No music, no voice.

@@ -1,0 +1,9 @@
+#101 turrets/light-turret-fire
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: turretShot (GUN turret)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+An automated sentry gun firing a short burst, a fast mechanical rattle of small caliber shots. No music, no voice.

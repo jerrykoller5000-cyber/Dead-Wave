@@ -1,0 +1,8 @@
+{
+  "t215": {
+    "raw": "PASS read index.html and the scripts and styles the game loaded (199 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 08:16 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)",
+    "pass": 4,
+    "fail": []
+  },
+  "errors": []
+}

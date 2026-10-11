@@ -1,0 +1,347 @@
+{
+  "before": false,
+  "readyMs": 10223,
+  "models": [
+    {
+      "k": "shambler",
+      "hp": 21,
+      "maxHp": 21,
+      "hitH": 2.020018234673126,
+      "meshes": 13,
+      "vertices": 15308,
+      "triangles": 5190,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "shambler"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 15308,
+        "triangles": 5190,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "feral",
+      "hp": 13,
+      "maxHp": 13,
+      "hitH": 1.5236242530185915,
+      "meshes": 13,
+      "vertices": 16352,
+      "triangles": 5538,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "feral"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 16352,
+        "triangles": 5538,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "brute",
+      "hp": 73,
+      "maxHp": 73,
+      "hitH": 2.8289999999999997,
+      "meshes": 13,
+      "vertices": 18260,
+      "triangles": 6174,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "brute"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 18260,
+        "triangles": 6174,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "military",
+      "hp": 43,
+      "maxHp": 43,
+      "hitH": 2.070416870659561,
+      "meshes": 13,
+      "vertices": 20006,
+      "triangles": 6756,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "military"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 20006,
+        "triangles": 6756,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "spitter",
+      "hp": 29,
+      "maxHp": 29,
+      "hitH": 2.178081638930612,
+      "meshes": 15,
+      "vertices": 17756,
+      "triangles": 6006,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "spitter"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 15,
+        "vertices": 17756,
+        "triangles": 6006,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "bomber",
+      "hp": 29,
+      "maxHp": 29,
+      "hitH": 2.2126215611863596,
+      "meshes": 15,
+      "vertices": 19526,
+      "triangles": 6596,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "bomber"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 15,
+        "vertices": 19526,
+        "triangles": 6596,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "screamer",
+      "hp": 24,
+      "maxHp": 24,
+      "hitH": 1.8499106969313932,
+      "meshes": 13,
+      "vertices": 16028,
+      "triangles": 5430,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "screamer"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 16028,
+        "triangles": 5430,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "drowned",
+      "hp": 34,
+      "maxHp": 34,
+      "hitH": 2.0258905417921484,
+      "meshes": 13,
+      "vertices": 18668,
+      "triangles": 6310,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "drowned"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 18668,
+        "triangles": 6310,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "leaper",
+      "hp": 26,
+      "maxHp": 26,
+      "hitH": 1.104,
+      "meshes": 13,
+      "vertices": 15212,
+      "triangles": 5158,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "leaper"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 13,
+        "vertices": 15212,
+        "triangles": 5158,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "spider",
+      "hp": 38,
+      "maxHp": 38,
+      "hitH": 0.95,
+      "meshes": 16,
+      "vertices": 9968,
+      "triangles": 3410,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "spider"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 16,
+        "vertices": 9968,
+        "triangles": 3410,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "colossus",
+      "hp": 445,
+      "maxHp": 445,
+      "hitH": 4.714999999999999,
+      "meshes": 14,
+      "vertices": 19130,
+      "triangles": 6464,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "colossus"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 14,
+        "vertices": 19130,
+        "triangles": 6464,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "demon",
+      "hp": 111,
+      "maxHp": 111,
+      "hitH": 3.2666046895812535,
+      "meshes": 14,
+      "vertices": 18818,
+      "triangles": 6360,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "demon"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 14,
+        "vertices": 18818,
+        "triangles": 6360,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "guardian",
+      "hp": 359,
+      "maxHp": 359,
+      "hitH": 3.4849999999999994,
+      "meshes": 43,
+      "vertices": 17268,
+      "triangles": 5756,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "guardian"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 43,
+        "vertices": 17268,
+        "triangles": 5756,
+        "finite": true,
+        "restored": true
+      }
+    },
+    {
+      "k": "caveguard",
+      "hp": 854963,
+      "maxHp": 854963,
+      "hitH": 2.9660721496448748,
+      "meshes": 41,
+      "vertices": 16956,
+      "triangles": 5652,
+      "finite": true,
+      "concept": {
+        "version": 1,
+        "type": "caveguard"
+      },
+      "pool": {
+        "sameMesh": true,
+        "meshes": 41,
+        "vertices": 16956,
+        "triangles": 5652,
+        "finite": true,
+        "restored": true
+      }
+    }
+  ],
+  "guardian": [
+    {
+      "kind": "guardian",
+      "valid": true,
+      "eyes": 4,
+      "meshes": 43,
+      "vertices": 17268,
+      "triangles": 5756,
+      "finite": true
+    },
+    {
+      "kind": "caveguard",
+      "valid": true,
+      "eyes": 2,
+      "meshes": 41,
+      "vertices": 16956,
+      "triangles": 5652,
+      "finite": true
+    }
+  ],
+  "horde": {
+    "spawnMs": 165.29999995231628,
+    "meshes": 656,
+    "triangles": 291168
+  },
+  "perf": {
+    "fps": 39.647140450931964,
+    "low": 24.330900229194796,
+    "worst": 41.10000002384186,
+    "hitches": 0,
+    "frames": 40
+  },
+  "errors": []
+}

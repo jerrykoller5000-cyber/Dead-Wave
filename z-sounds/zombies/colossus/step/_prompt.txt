@@ -1,0 +1,9 @@
+#63 colossus-step
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single gigantic footstep of a colossal creature on dirt, a deep earth-shaking thud with a low boom and debris settling. No music.
+
+In the game: zombieVoice('colossus', 'step')

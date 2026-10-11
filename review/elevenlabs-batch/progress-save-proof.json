@@ -1,0 +1,54 @@
+{
+  "task": "GP-185",
+  "cause": "Windows EPERM replacing progress file after70 new saved takes; temporary journal contained paid wheel-tick receipt",
+  "originalDone": 73,
+  "recovered": "weapon-foley/wheel-tick/01_eleven_24fab04c92f8caac.mp3",
+  "receipt": {
+    "status": "done",
+    "folder": "weapon-foley/wheel-tick",
+    "take": 1,
+    "estimatedCredits": 10,
+    "attempts": 1,
+    "requestedSeconds": 0.15,
+    "generatedSeconds": 0.5,
+    "sha256": "475006fbe1bbc9723637d6bbe8163096822129231fcfe3431ed0f1d3ccfb77de",
+    "bytes": 13209,
+    "actualCredits": 6,
+    "requestId": null,
+    "at": "2026-10-10T09:16:12.106Z",
+    "originalSha256": "949d765983e98c18219996eb686cbc06577fd0fb741e8abe8733f790bbb7f0df",
+    "originalBytes": 8821,
+    "recoveredEncodingDifferent": true,
+    "recoveredFromHistory": true
+  },
+  "verification": {
+    "exactPrompt": "A tiny soft mechanical tick, like a selection dial clicking one notch. No music, no voice.",
+    "historyUrl": "https://elevenlabs.io/app/sound-effects/history?q=selection+dial",
+    "take": 1,
+    "durationSeconds": 0.5,
+    "downloadName": "A_tiny_soft_mechanic_#1-1791623555280.mp3",
+    "screenshot": "history-recovery.png",
+    "other73ReceiptsUnchanged": true
+  },
+  "after": {
+    "done": 74,
+    "pending": 642,
+    "uncertain": 0,
+    "conflicts": 0
+  },
+  "tests": {
+    "command": "node --test review/elevenlabs-batch/batch.test.mjs",
+    "pass": 34,
+    "fail": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "log": "progress-save-tests.log"
+  },
+  "launcherVerified": "FullBatch with mocked NO:74 saved/642 pending, no review blocker",
+  "paidRequestsDuringRepair": 0,
+  "files": {
+    "batch.mjs": "11a63083585f83bba239d641f9240a515d6b57c0c18012bfa327298bb2455c47",
+    "batch.test.mjs": "f7513dea9dd407218a804e6d1cc583be8f9d4296549fcfd5cffebea267497378",
+    "README.md": "283e14b6ec486f2a20efdf8c539b1b65273b4555494fe17082270c62cef82327"
+  }
+}

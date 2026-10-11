@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-10T04:48:17.668Z",
+  "sourceHash": "17862d178062bb8f77a10eb6f4d45600ab2fe321e96fa2dda54dc241d173175a",
+  "resultHash": "c1a52e2ea6d0cc5f1dad1936b17f652a05ad48d8762d99116c409757fbb8d68c",
+  "hooks": [
+    "imports",
+    "runtime host",
+    "attach props",
+    "pooled props reset",
+    "charge priority",
+    "slam priority",
+    "planted attacks",
+    "melee priority",
+    "below planted attacks",
+    "below melee priority",
+    "below planted leg pose",
+    "visible attack tells",
+    "animate distant tells",
+    "frame update",
+    "clear clearZombies",
+    "clear stopBelowFight",
+    "clear leaveTraining",
+    "clear trainingBlackout",
+    "death props cleanup",
+    "review inspection"
+  ],
+  "preview": ".tmp-zombie-abilities.html",
+  "productionWritten": true
+}

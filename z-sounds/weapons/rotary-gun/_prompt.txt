@@ -1,0 +1,9 @@
+#72 weapons/rotary-gun
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: GUN minigun (Rotary Gun)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A rotary machine gun firing a two second burst, a continuous ripping roar. No music, no voice.

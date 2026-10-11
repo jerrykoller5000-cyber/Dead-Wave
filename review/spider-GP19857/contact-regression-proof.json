@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "baseline",
+    "pass": 15,
+    "fail": [
+      "FAIL over within a moment (speedK 0.934375)"
+    ],
+    "raw": "PASS GB-50 hooks exported\nPASS knocked back along the blow (kv -2.44, 0.00)\nPASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26\nPASS a shambler does not put him on a knee\nPASS a short slide: 0.34 m (dz 0.00)\nFAIL over within a moment (speedK 0.934375)\nPASS a brute puts him on one knee (0.55 s)\nPASS slowed, never stopped: walk speed x0.46 at worst\nPASS more for a brute: 1.03 m vs 0.34 m\nPASS back on his feet within 0.55 s\nPASS no knee lock: the next heavy hit within 3 s only knocks him back\nPASS five spawned inside the marine (5)\nPASS nobody inside him: the worst gap is 0.040 m (feral, 305 samples)\nPASS they crowd him: 3 of 5 at arm’s length\nPASS and their blows land from the ring (6 hits, -60 hp)\nPASS no page errors ()",
+    "errors": []
+  },
+  {
+    "mode": "current",
+    "pass": 16,
+    "fail": [],
+    "raw": "PASS GB-50 hooks exported\nPASS knocked back along the blow (kv -2.44, 0.00)\nPASS a stumble: lurch 0.73, aim off -0.064 rad, jolt 0.26\nPASS a shambler does not put him on a knee\nPASS a short slide: 0.41 m (dz 0.00)\nPASS over within a moment (speedK 1)\nPASS a brute puts him on one knee (0.55 s)\nPASS slowed, never stopped: walk speed x0.45 at worst\nPASS more for a brute: 1.02 m vs 0.41 m\nPASS back on his feet within 0.55 s\nPASS no knee lock: the next heavy hit within 3 s only knocks him back\nPASS five spawned inside the marine (5)\nPASS nobody inside him: the worst gap is 0.040 m (feral, 360 samples)\nPASS they crowd him: 4 of 5 at arm’s length\nPASS and their blows land from the ring (6 hits, -40 hp)\nPASS no page errors ()",
+    "errors": []
+  }
+]

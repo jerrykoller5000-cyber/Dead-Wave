@@ -1,0 +1,63 @@
+comparing 57 view(s): review/zombie-fidelity/before → review/zombie-fidelity/after
+
+view                   mean%   max%  verdict
+bomber-back              1.42   66.3  CHANGED slightly
+bomber-face              6.87   71.8  CHANGED
+bomber-front             1.65   75.6  CHANGED slightly
+bomber-gameplay          1.51   72.9  CHANGED slightly
+brute-back               1.28   66.1  CHANGED slightly
+brute-face               4.78   65.1  CHANGED
+brute-front              1.36   67.5  CHANGED slightly
+brute-gameplay           1.31   66.5  CHANGED slightly
+caveguard-back           3.04   68.2  CHANGED
+caveguard-face           8.97   82.5  CHANGED
+caveguard-front          3.20   81.3  CHANGED
+caveguard-gameplay       2.48   77.0  CHANGED slightly
+colossus-back            1.86   67.3  CHANGED slightly
+colossus-face            6.24   72.9  CHANGED
+colossus-front           1.85   68.8  CHANGED slightly
+colossus-gameplay        2.02   70.7  CHANGED slightly
+demon-back               1.17   69.5  CHANGED slightly
+demon-face               2.57   70.3  CHANGED slightly
+demon-front              1.27   68.4  CHANGED slightly
+demon-gameplay           0.82   67.2  CHANGED slightly
+drowned-back             0.92   67.3  CHANGED slightly
+drowned-face             3.87   66.7  CHANGED
+drowned-front            0.89   66.0  CHANGED slightly
+drowned-gameplay         0.67   64.6  CHANGED slightly
+feral-back               0.95   68.5  CHANGED slightly
+feral-face               3.99   64.6  CHANGED
+feral-front              1.02   68.0  CHANGED slightly
+feral-gameplay           0.85   67.1  CHANGED slightly
+guardian-back            2.38   67.7  CHANGED slightly
+guardian-face            4.54   66.3  CHANGED
+guardian-front           2.04   70.1  CHANGED slightly
+guardian-gameplay        1.54   76.1  CHANGED slightly
+horde-48                 1.00   89.8  CHANGED slightly
+leaper-back              0.76   66.5  CHANGED slightly
+leaper-face              4.58   64.6  CHANGED
+leaper-front             0.82   62.9  CHANGED slightly
+leaper-gameplay          0.72   65.0  CHANGED slightly
+military-back            1.05   66.9  CHANGED slightly
+military-face            4.94   65.9  CHANGED
+military-front           1.04   67.7  CHANGED slightly
+military-gameplay        0.81   77.6  CHANGED slightly
+screamer-back            0.92   68.5  CHANGED slightly
+screamer-face            3.67   68.5  CHANGED
+screamer-front           0.94   68.5  CHANGED slightly
+screamer-gameplay        0.75   67.3  CHANGED slightly
+shambler-back            0.92   67.1  CHANGED slightly
+shambler-face            5.36   60.4  CHANGED
+shambler-front           0.92   66.1  CHANGED slightly
+shambler-gameplay        0.76   65.1  CHANGED slightly
+spider-back              0.46   67.8  same (animation noise)
+spider-face              3.87   68.1  CHANGED
+spider-front             0.57   68.1  CHANGED slightly
+spider-gameplay          0.72   65.9  CHANGED slightly
+spitter-back             1.10   66.7  CHANGED slightly
+spitter-face             4.42   57.5  CHANGED
+spitter-front            1.20   67.6  CHANGED slightly
+spitter-gameplay         0.92   63.0  CHANGED slightly
+
+worst mean difference: 8.97%
+Under ~0.5% is the noise floor for this game: wind, water and wildlife move between runs.

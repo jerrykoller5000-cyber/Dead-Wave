@@ -1,0 +1,9 @@
+#52 weapon-foley/grenade-pin
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley grenadePin
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A hand grenade pin pulled and the spoon flying off with a metallic ping. No music, no voice.

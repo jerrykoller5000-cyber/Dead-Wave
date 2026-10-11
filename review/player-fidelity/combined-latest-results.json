@@ -1,0 +1,2169 @@
+{
+  "label": "Combined latest results across an interrupted full run and its four separately resumed retries; not a completed single full-suite run.",
+  "writtenAt": "2026-10-09T10:19:38.206Z",
+  "totals": {
+    "checks": 228,
+    "pass": 3628,
+    "fail": 8,
+    "flaky": 10,
+    "noAssertions": 8
+  },
+  "original": {
+    "status": "interrupted",
+    "suiteCompleted": false,
+    "startedAt": "2026-10-09T09:17:17.153Z",
+    "finishedAt": "2026-10-09T10:10:46.555Z",
+    "exitCode": 1073807364,
+    "log": "review/player-fidelity/full-suite.log"
+  },
+  "resume": {
+    "checks": 4,
+    "pass": 146,
+    "fail": 7,
+    "exitCode": 0,
+    "log": "review/player-fidelity/full-suite-resume.log",
+    "finishedAt": "2026-10-09T10:18:44.965Z"
+  },
+  "exitCodeQualification": "run-all.mjs exits nonzero only for checks that cannot run; assertion failures are retained in log totals even when exitCode is 0.",
+  "failures": [
+    {
+      "id": "t39",
+      "pass": 14,
+      "fail": 1,
+      "kind": "FAIL",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 236,
+      "exactMessages": null,
+      "messageQualification": "The interrupted original run retained the 14 pass / 1 fail retry count but did not emit its final detailed failure report. No extra t39 rerun was authorized.",
+      "priorBaselineExactMessage": "FAIL it lands and lies as a log (theta 1.33 of rest 1.36)"
+    },
+    {
+      "id": "t178",
+      "pass": 6,
+      "fail": 2,
+      "kind": "FAIL",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 7,
+      "exactMessages": [
+        "FAIL back up the tunnel: the calm again (end)",
+        "FAIL threw TypeError: Cannot read properties of null (reading 'damage')"
+      ],
+      "sameMessagesPresentInBaseline": true
+    },
+    {
+      "id": "t182",
+      "pass": 29,
+      "fail": 5,
+      "kind": "FAIL",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 8,
+      "exactMessages": [
+        "FAIL every gun owned, Cash to spare",
+        "FAIL three shamblers called in (0)",
+        "FAIL they stay in the build room while he is on the range ()",
+        "FAIL in the build room they come for him (Infinity m -> Infinity m)",
+        "FAIL clear all"
+      ],
+      "sameMessagesPresentInBaseline": true
+    }
+  ],
+  "flaky": [
+    "t59",
+    "t85",
+    "t91",
+    "t97",
+    "t147",
+    "t155",
+    "t160",
+    "t170",
+    "t171",
+    "t188"
+  ],
+  "cosmeticsUnchangedAcrossBothRuns": true,
+  "sourceQualification": {
+    "wholeIndexUnchanged": true,
+    "originalChangedSources": [
+      "studio/marine-turn.js"
+    ],
+    "resumeChangedSources": [],
+    "harnessAtResume": {
+      "modifiedAt": "2026-10-09T09:10:56.347Z",
+      "matrix4Transpose": "transpose() { return this; }"
+    },
+    "harnessHash": "ee2952439d6061976a941af08f0c91cd57cbee8aaa1a9a0e5017feff6b39999b",
+    "note": "The original run did not hash fakethree. Its recorded resume mtime predates original start, so no harness change during the original suite is inferred. Actual-renderer checks remain the authority for grip and model fit."
+  },
+  "results": [
+    {
+      "id": "t0",
+      "pass": 2,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 6
+    },
+    {
+      "id": "t1",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 8
+    },
+    {
+      "id": "t2",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 11
+    },
+    {
+      "id": "t3",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 10
+    },
+    {
+      "id": "t4",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 12
+    },
+    {
+      "id": "t5",
+      "pass": 31,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 13
+    },
+    {
+      "id": "t6",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 17
+    },
+    {
+      "id": "t12",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 21
+    },
+    {
+      "id": "t13",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 22
+    },
+    {
+      "id": "t14",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 20
+    },
+    {
+      "id": "t17",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 26
+    },
+    {
+      "id": "t19",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 28
+    },
+    {
+      "id": "t21",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 30
+    },
+    {
+      "id": "t23",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 34
+    },
+    {
+      "id": "t24",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 33
+    },
+    {
+      "id": "t25",
+      "pass": 29,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 32
+    },
+    {
+      "id": "t27",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 38
+    },
+    {
+      "id": "t32",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 41
+    },
+    {
+      "id": "t33",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 40
+    },
+    {
+      "id": "t36",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 44
+    },
+    {
+      "id": "t37",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 51
+    },
+    {
+      "id": "t38",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 46
+    },
+    {
+      "id": "t41",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 49
+    },
+    {
+      "id": "t42",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 48
+    },
+    {
+      "id": "t46",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 55
+    },
+    {
+      "id": "t47",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 54
+    },
+    {
+      "id": "t49",
+      "pass": 32,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 58
+    },
+    {
+      "id": "t51",
+      "pass": 19,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 60
+    },
+    {
+      "id": "t53",
+      "pass": 76,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 62
+    },
+    {
+      "id": "t6a",
+      "pass": 2,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 9
+    },
+    {
+      "id": "t7",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 14
+    },
+    {
+      "id": "t8",
+      "pass": 3,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 16
+    },
+    {
+      "id": "t9",
+      "pass": 19,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 15
+    },
+    {
+      "id": "t10",
+      "pass": 30,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 18
+    },
+    {
+      "id": "t11",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 19
+    },
+    {
+      "id": "t15",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 25
+    },
+    {
+      "id": "t16",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 23
+    },
+    {
+      "id": "t18",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 24
+    },
+    {
+      "id": "t20",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 27
+    },
+    {
+      "id": "t22",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 29
+    },
+    {
+      "id": "t26",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 31
+    },
+    {
+      "id": "t28",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 35
+    },
+    {
+      "id": "t29",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 37
+    },
+    {
+      "id": "t30",
+      "pass": 0,
+      "fail": 0,
+      "kind": "info",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 36
+    },
+    {
+      "id": "t31",
+      "pass": 26,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 39
+    },
+    {
+      "id": "t34",
+      "pass": 20,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 42
+    },
+    {
+      "id": "t35",
+      "pass": 28,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 43
+    },
+    {
+      "id": "t39",
+      "pass": 14,
+      "fail": 1,
+      "kind": "FAIL",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 236,
+      "exactMessages": null,
+      "messageQualification": "The interrupted original run retained the 14 pass / 1 fail retry count but did not emit its final detailed failure report. No extra t39 rerun was authorized.",
+      "priorBaselineExactMessage": "FAIL it lands and lies as a log (theta 1.33 of rest 1.36)"
+    },
+    {
+      "id": "t40",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 47
+    },
+    {
+      "id": "t43",
+      "pass": 35,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 50
+    },
+    {
+      "id": "t44",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 52
+    },
+    {
+      "id": "t45",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 53
+    },
+    {
+      "id": "t48",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 56
+    },
+    {
+      "id": "t50",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 57
+    },
+    {
+      "id": "t52",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 59
+    },
+    {
+      "id": "t54",
+      "pass": 32,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 64
+    },
+    {
+      "id": "t55",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 63
+    },
+    {
+      "id": "t56",
+      "pass": 1,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 61
+    },
+    {
+      "id": "t57",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 65
+    },
+    {
+      "id": "t58",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 66
+    },
+    {
+      "id": "t59",
+      "pass": 48,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 237
+    },
+    {
+      "id": "t60",
+      "pass": 42,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 68
+    },
+    {
+      "id": "t61",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 67
+    },
+    {
+      "id": "t62",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 69
+    },
+    {
+      "id": "t63",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 71
+    },
+    {
+      "id": "t64",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 72
+    },
+    {
+      "id": "t65",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 73
+    },
+    {
+      "id": "t66",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 74
+    },
+    {
+      "id": "t67",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 76
+    },
+    {
+      "id": "t68",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 75
+    },
+    {
+      "id": "t69",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 77
+    },
+    {
+      "id": "t70",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 79
+    },
+    {
+      "id": "t71",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 78
+    },
+    {
+      "id": "t72",
+      "pass": 24,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 80
+    },
+    {
+      "id": "t73",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 81
+    },
+    {
+      "id": "t74",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 83
+    },
+    {
+      "id": "t75",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 82
+    },
+    {
+      "id": "t76",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 84
+    },
+    {
+      "id": "t77",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 86
+    },
+    {
+      "id": "t78",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 85
+    },
+    {
+      "id": "t79",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 88
+    },
+    {
+      "id": "t80",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 95
+    },
+    {
+      "id": "t81",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 87
+    },
+    {
+      "id": "t82",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 89
+    },
+    {
+      "id": "t83",
+      "pass": 31,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 90
+    },
+    {
+      "id": "t84",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 91
+    },
+    {
+      "id": "t85",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 238
+    },
+    {
+      "id": "t86",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 93
+    },
+    {
+      "id": "t87",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 94
+    },
+    {
+      "id": "t88",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 96
+    },
+    {
+      "id": "t89",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 97
+    },
+    {
+      "id": "t90",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 98
+    },
+    {
+      "id": "t91",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 239
+    },
+    {
+      "id": "t92",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 99
+    },
+    {
+      "id": "t93",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 101
+    },
+    {
+      "id": "t94",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 100
+    },
+    {
+      "id": "t95",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 103
+    },
+    {
+      "id": "t96",
+      "pass": 19,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 104
+    },
+    {
+      "id": "t97",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 240
+    },
+    {
+      "id": "t98",
+      "pass": 20,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 108
+    },
+    {
+      "id": "t99",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 114
+    },
+    {
+      "id": "t100",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 106
+    },
+    {
+      "id": "t101",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 107
+    },
+    {
+      "id": "t102",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 110
+    },
+    {
+      "id": "t103",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 109
+    },
+    {
+      "id": "t104",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 111
+    },
+    {
+      "id": "t105",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 113
+    },
+    {
+      "id": "t106",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 118
+    },
+    {
+      "id": "t107",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 112
+    },
+    {
+      "id": "t108",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 117
+    },
+    {
+      "id": "t109",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 115
+    },
+    {
+      "id": "t110",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 116
+    },
+    {
+      "id": "t111",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 119
+    },
+    {
+      "id": "t112",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 120
+    },
+    {
+      "id": "t113",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 123
+    },
+    {
+      "id": "t114",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 121
+    },
+    {
+      "id": "t115",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 122
+    },
+    {
+      "id": "t116",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 124
+    },
+    {
+      "id": "t117",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 125
+    },
+    {
+      "id": "t119",
+      "pass": 19,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 126
+    },
+    {
+      "id": "t120",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 128
+    },
+    {
+      "id": "t121",
+      "pass": 31,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 127
+    },
+    {
+      "id": "t122",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 129
+    },
+    {
+      "id": "t123",
+      "pass": 3,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 130
+    },
+    {
+      "id": "t124",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 131
+    },
+    {
+      "id": "t125",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 132
+    },
+    {
+      "id": "t126",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 134
+    },
+    {
+      "id": "t127",
+      "pass": 28,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 135
+    },
+    {
+      "id": "t128",
+      "pass": 28,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 137
+    },
+    {
+      "id": "t129",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 133
+    },
+    {
+      "id": "t130",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 136
+    },
+    {
+      "id": "t131",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 138
+    },
+    {
+      "id": "t132",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 139
+    },
+    {
+      "id": "t133",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 141
+    },
+    {
+      "id": "t134",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 140
+    },
+    {
+      "id": "t135",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 142
+    },
+    {
+      "id": "t136",
+      "pass": 36,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 144
+    },
+    {
+      "id": "t137",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 143
+    },
+    {
+      "id": "t138",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 145
+    },
+    {
+      "id": "t139",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 147
+    },
+    {
+      "id": "t140",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 146
+    },
+    {
+      "id": "t141",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 148
+    },
+    {
+      "id": "t142",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 149
+    },
+    {
+      "id": "t143",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 153
+    },
+    {
+      "id": "t144",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 150
+    },
+    {
+      "id": "t145",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 151
+    },
+    {
+      "id": "t146",
+      "pass": 43,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 152
+    },
+    {
+      "id": "t147",
+      "pass": 19,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 241
+    },
+    {
+      "id": "t148",
+      "pass": 23,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 154
+    },
+    {
+      "id": "t149",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 158
+    },
+    {
+      "id": "t150",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 156
+    },
+    {
+      "id": "t151",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 155
+    },
+    {
+      "id": "t152",
+      "pass": 27,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 162
+    },
+    {
+      "id": "t153",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 159
+    },
+    {
+      "id": "t154",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 160
+    },
+    {
+      "id": "t155",
+      "pass": 5,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 242
+    },
+    {
+      "id": "t156",
+      "pass": 34,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 165
+    },
+    {
+      "id": "t157",
+      "pass": 6,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 164
+    },
+    {
+      "id": "t158",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 163
+    },
+    {
+      "id": "t159",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 166
+    },
+    {
+      "id": "t160",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 243
+    },
+    {
+      "id": "t161",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 167
+    },
+    {
+      "id": "t162",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 168
+    },
+    {
+      "id": "t163",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 170
+    },
+    {
+      "id": "t164",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 171
+    },
+    {
+      "id": "t165",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 172
+    },
+    {
+      "id": "t166",
+      "pass": 11,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 173
+    },
+    {
+      "id": "t167",
+      "pass": 20,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 174
+    },
+    {
+      "id": "t168",
+      "pass": 39,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 176
+    },
+    {
+      "id": "t169",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 175
+    },
+    {
+      "id": "t170",
+      "pass": 20,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 6
+    },
+    {
+      "id": "t171",
+      "pass": 23,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original serial retry",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 244
+    },
+    {
+      "id": "t172",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 177
+    },
+    {
+      "id": "t173",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 180
+    },
+    {
+      "id": "t174",
+      "pass": 14,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 181
+    },
+    {
+      "id": "t175",
+      "pass": 25,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 183
+    },
+    {
+      "id": "t176",
+      "pass": 8,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 184
+    },
+    {
+      "id": "t177",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 182
+    },
+    {
+      "id": "t178",
+      "pass": 6,
+      "fail": 2,
+      "kind": "FAIL",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 7,
+      "exactMessages": [
+        "FAIL back up the tunnel: the calm again (end)",
+        "FAIL threw TypeError: Cannot read properties of null (reading 'damage')"
+      ],
+      "sameMessagesPresentInBaseline": true
+    },
+    {
+      "id": "t179",
+      "pass": 27,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 185
+    },
+    {
+      "id": "t180",
+      "pass": 29,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 186
+    },
+    {
+      "id": "t181",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 188
+    },
+    {
+      "id": "t182",
+      "pass": 29,
+      "fail": 5,
+      "kind": "FAIL",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 8,
+      "exactMessages": [
+        "FAIL every gun owned, Cash to spare",
+        "FAIL three shamblers called in (0)",
+        "FAIL they stay in the build room while he is on the range ()",
+        "FAIL in the build room they come for him (Infinity m -> Infinity m)",
+        "FAIL clear all"
+      ],
+      "sameMessagesPresentInBaseline": true
+    },
+    {
+      "id": "t183",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 190
+    },
+    {
+      "id": "t184",
+      "pass": 29,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 191
+    },
+    {
+      "id": "t185",
+      "pass": 36,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 192
+    },
+    {
+      "id": "t186",
+      "pass": 34,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 193
+    },
+    {
+      "id": "t187",
+      "pass": 75,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 195
+    },
+    {
+      "id": "t188",
+      "pass": 91,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "resumed",
+      "file": "review/player-fidelity/full-suite-resume.log",
+      "line": 9
+    },
+    {
+      "id": "t189",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 202
+    },
+    {
+      "id": "t190",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 194
+    },
+    {
+      "id": "t191",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 198
+    },
+    {
+      "id": "t192",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 197
+    },
+    {
+      "id": "t193",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 199
+    },
+    {
+      "id": "t194",
+      "pass": 35,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 203
+    },
+    {
+      "id": "t195",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 201
+    },
+    {
+      "id": "t196",
+      "pass": 17,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 200
+    },
+    {
+      "id": "t197",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 204
+    },
+    {
+      "id": "t198",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 205
+    },
+    {
+      "id": "t199",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 207
+    },
+    {
+      "id": "t200",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 206
+    },
+    {
+      "id": "t201",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 208
+    },
+    {
+      "id": "t202",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 209
+    },
+    {
+      "id": "t203",
+      "pass": 12,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 210
+    },
+    {
+      "id": "t204",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 211
+    },
+    {
+      "id": "t205",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 212
+    },
+    {
+      "id": "t206",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 214
+    },
+    {
+      "id": "t207",
+      "pass": 20,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 213
+    },
+    {
+      "id": "t208",
+      "pass": 10,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 215
+    },
+    {
+      "id": "t209",
+      "pass": 13,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 216
+    },
+    {
+      "id": "t210",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 217
+    },
+    {
+      "id": "t211",
+      "pass": 26,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 218
+    },
+    {
+      "id": "t212",
+      "pass": 18,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 219
+    },
+    {
+      "id": "t213",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 220
+    },
+    {
+      "id": "t214",
+      "pass": 29,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 222
+    },
+    {
+      "id": "t215",
+      "pass": 4,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 221
+    },
+    {
+      "id": "t216",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 224
+    },
+    {
+      "id": "t217",
+      "pass": 54,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 223
+    },
+    {
+      "id": "t218",
+      "pass": 44,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 230
+    },
+    {
+      "id": "t219",
+      "pass": 22,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 225
+    },
+    {
+      "id": "t220",
+      "pass": 16,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 226
+    },
+    {
+      "id": "t221",
+      "pass": 27,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 227
+    },
+    {
+      "id": "t222",
+      "pass": 9,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 229
+    },
+    {
+      "id": "t223",
+      "pass": 15,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 228
+    },
+    {
+      "id": "t224",
+      "pass": 26,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 232
+    },
+    {
+      "id": "t225",
+      "pass": 21,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 231
+    },
+    {
+      "id": "t226",
+      "pass": 38,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 233
+    },
+    {
+      "id": "tfish",
+      "pass": 7,
+      "fail": 0,
+      "kind": "ok",
+      "origin": "original",
+      "file": "review/player-fidelity/full-suite.log",
+      "line": 7
+    }
+  ]
+}

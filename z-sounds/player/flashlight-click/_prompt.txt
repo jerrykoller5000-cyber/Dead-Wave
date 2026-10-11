@@ -1,0 +1,9 @@
+#23 player/flashlight-click
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: nvgClick()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A weapon-mounted flashlight's tactical tail switch clicking on, a crisp plastic click. No music, no voice.

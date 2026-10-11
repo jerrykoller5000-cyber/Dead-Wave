@@ -1,0 +1,8 @@
+# antigravity — AG-61 refine the remaining weapon concepts — 2026-10-09
+Changed:          Refined concept renders for the nine weapons that had none: M4 (GW-4 Carbine), Revolver, Shotgun, Sniper, Launcher, Flamethrower, Chainsaw, Knife and Machete. Every weapon in review/weapon-photos now has at least one refined image in its own AG-Weapons folder (with AG-54/56: AA-12, AK, Mini-Gun, Pistol, Uzi, Watchman MG, Mortar). Each is made from that weapon's in-game photo, keeping its silhouette and parts and adding bevels, panel lines, screws, textures and wear. I also removed an empty duplicate `Minigun` folder; the Rotary Gun image is in `Mini-Gun`.
+Files:            review/weapon-photos/AG-Weapons/M4/m4-refined.jpg, Revolver/revolver-refined.jpg, Shotgun/shotgun-refined.jpg, Sniper/sniper-refined.jpg, Launcher/launcher-refined.jpg, Flamer/flamer-refined.jpg, Chainsaw/chainsaw-refined.jpg, Knife/knife-refined.jpg, Machete/machete-refined.jpg
+Tests:            not run (concept art only, no game code)
+Screenshots:      the nine files above (references: review/weapon-photos/<Weapon>/side-<weapon>.png and three-<weapon>.png)
+Not verified:     Concept art only, not modelled in game; Jerry hasn't reviewed them yet. Knife: the in-game blade is a thin spike, and the render drew a wider double-edged dagger blade with a crossguard, so it departs from the in-game silhouette. Launcher and Flamer add small details (cartridge markings, a fuel gauge plate with text) that are decoration only. The Launcher is rendered from a slight three-quarter angle, not a pure side view. M4: the reference stock is a fixed angular one and the render drew an adjustable one.
+Requests:         none
+Contract changes: none

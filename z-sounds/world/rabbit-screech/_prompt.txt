@@ -1,0 +1,9 @@
+#145 world/rabbit-screech
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: rabbitScreech()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A rabid rabbit's shrill, unnatural screech, small and nasty. No music, no voice.

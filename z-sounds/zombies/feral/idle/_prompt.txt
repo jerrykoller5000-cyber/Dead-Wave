@@ -1,0 +1,9 @@
+#6 feral-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A feral zombie's quick ragged panting with two short animal snarls, like a rabid dog breathing through clenched teeth, restless. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('feral', 'idle')

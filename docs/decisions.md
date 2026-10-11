@@ -1,9 +1,19 @@
-# Dead-Wave decisions
+# Grave Shift decisions
 
 Every call made for the game and the crew, in full, newest first. Claude writes them (as lead, or for Jerry);
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-79 · The game is Grave Shift (Jerry, 2026-10-09).** Jerry, 21:42 CT: "the name Dead-Wave is taken by another
+  zombie TPS, so the game is now called Grave Shift. If you could rename everything Dead Wave that would be
+  wonderful." Everything a player or the crew reads says Grave Shift (GRAVE SHIFT where a title is in capitals):
+  the title and its wordmark, the HUD, the error card, the menus and credits, the docs' and galleries' headings, the
+  crew panel, the console log prefixes. What anything looks up by name stays as it is, so nothing breaks and no save
+  is lost: file and folder names (Play Dead-Wave.bat, dist/dead-wave, docs/images/dead-wave-key-art.jpg), the repo
+  jerrykoller5000-cyber/Dead-Wave, the tt_* save keys, the Documents\Dead-Wave profile folder, the desktop app's
+  identifier com.deadwave.game and its dead-wave crate and exe, string keys and code names. Older entries on the
+  board, in the log and in these decisions keep the old name as history. New copy says Grave Shift. Done by Grokbot
+  (GB-155, handoffs/2026-10-09-grokbot-GB-155.md); ChatGPT for ui/strings.js; Cursor for desktop/.
 - **D-78 · Cursor's map work moves to ChatGPT (Claude, 2026-10-06).** Cursor's CU-88 fix landed at 08:17 (its NOTE; t203
   12/0, again 12/0 for Claude at 22:10Z) but it never checked out, and it has not been heard from since its 17:44 check-in.
   Jerry is away for a few hours and left Claude to keep the crew moving; ChatGPT's queue is empty. So CU-88 is closed by

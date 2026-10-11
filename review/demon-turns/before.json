@@ -1,0 +1,32 @@
+{
+ "target": "live:demon",
+ "label": "live demon",
+ "view": "three",
+ "cam": {
+  "x": -25.675402578585544,
+  "y": -191.1822404246356,
+  "z": -622.4205296814538,
+  "tx": -14,
+  "ty": -198.5035,
+  "tz": -634,
+  "fov": 35
+ },
+ "time": 0.5,
+ "size": [
+  1440,
+  900
+ ],
+ "center": {
+  "x": -14,
+  "y": -198.5035,
+  "z": -634
+ },
+ "boxSize": {
+  "x": 1.32,
+  "y": 2.993,
+  "z": 1.32
+ },
+ "mode": "training",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-10T09:03:56.095Z"
+}

@@ -1,0 +1,39 @@
+{
+  "combat": {
+    "state": {
+      "active": true,
+      "amount": 1,
+      "pulse": 0.7113923802243595,
+      "angle": 21.539999999999967,
+      "lights": 4,
+      "red": 16713731,
+      "fill": 35.64556903032854
+    },
+    "redLights": [
+      {
+        "kind": "PointLight",
+        "intensity": 35.64556903032854
+      },
+      {
+        "kind": "SpotLight",
+        "intensity": 94.51265711009617
+      },
+      {
+        "kind": "SpotLight",
+        "intensity": 94.51265711009617
+      }
+    ],
+    "lamp": 0.5854746661570516,
+    "beacon": 1.0835442851682695
+  },
+  "clear": {
+    "active": false,
+    "amount": 0,
+    "pulse": 0.8997926849301496,
+    "angle": 24.58725000001489,
+    "lights": 4,
+    "red": 16777215,
+    "fill": 0
+  },
+  "errors": []
+}

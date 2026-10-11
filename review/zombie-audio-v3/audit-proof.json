@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-10T04:10:51.231Z",
+  "sourceHashes": {
+    "core/audio.js": "83decda1cf1faded3a3b6243ad4f8887c76948f13fb39906bbfd1e8775fd0a8a",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847"
+  },
+  "retainedCallerHooks": 13,
+  "actualZombieIdentityPaths": 14,
+  "gameplayErrors": [],
+  "summary": "Production render hashes match; all13 zombie emitter hooks remain after concurrent saves; all14 live identity paths pass."
+}

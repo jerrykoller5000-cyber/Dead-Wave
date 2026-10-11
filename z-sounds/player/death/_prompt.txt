@@ -1,0 +1,9 @@
+#14 player/death
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A male soldier's last choked gasp as he collapses, and his body and gear hitting the ground. No words.

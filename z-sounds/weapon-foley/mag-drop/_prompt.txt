@@ -1,0 +1,9 @@
+#32 weapon-foley/mag-drop
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley magDrop
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+An empty metal magazine dropping onto dirt and bouncing once. No music, no voice.

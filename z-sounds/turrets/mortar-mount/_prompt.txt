@@ -1,0 +1,9 @@
+#104 turrets/mortar-mount  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: mountMortar)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier kneeling down behind a mortar tube, gear settling and a hand grabbing the metal tube. No music, no voice.

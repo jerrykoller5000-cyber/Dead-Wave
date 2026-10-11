@@ -1,0 +1,9 @@
+#100 builds/lure  (start here)
+MISSING: the game makes no sound here now
+Now: (silent: the lure build)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 4 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A battery-powered noise lure: a loud repeating electronic siren chirp meant to attract attention, seamless. No music, no voice.

@@ -1,0 +1,20 @@
+PASS TT.handsDbg is exported (roll cap 0.85 rad, support reach 0.520 m)
+PASS flamer: the support anchor within the support arm's reach (0.520 m, reach 0.520)
+PASS flamer: the barrel still on the reticle (0.68 deg)
+PASS uzi: the support anchor within the support arm's reach (0.520 m, reach 0.520)
+PASS uzi: the barrel still on the reticle (0.43 deg)
+PASS chainsaw: the support anchor within the support arm's reach (0.520 m, reach 0.520)
+FAIL m4: the gun hand rolled onto the grip (175 -> 180 deg)
+PASS m4: the support hand turned onto the gun, along its forend (23 deg)
+FAIL pistol: the gun hand rolled onto the grip (179 -> 180 deg)
+FAIL pistol: the support hand rolled onto the gun (179 -> 180 deg)
+PASS stowed guns to draw: m4@back@1, uzi@chest@0, revolver@chest@1, pistol@hip@0
+PASS m4 (back1): the fitted copy is found
+PASS m4: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)
+PASS uzi (chest0): the fitted copy is found
+PASS uzi: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)
+PASS revolver (chest1): the fitted copy is found
+PASS revolver: at the end of the reach the hand goes to the gun on him (0.000 m from it; reach+raise)
+PASS the knife arm's slash clip is loaded (studio/clips/marine/knife-slash.json)
+PASS the slash holds at the cut (u 0.40)
+FAIL at the cut the knife hand's target is out in front of his chest (0.22 m ahead)

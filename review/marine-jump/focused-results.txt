@@ -1,0 +1,14 @@
+
+> dead-wave@0.1.0 test
+> node tools/tests/run-all.mjs t216 t142 t64 t193 t215 --jobs 2 --all-fails --no-retry
+
+check-players: 277 player.position reads, all in the allowed places
+ok    t64      8 pass   0 fail  29.4s
+ok    t142    10 pass   0 fail  39.1s
+ok    t215     4 pass   0 fail  31.2s
+           INFO on the flat, walking, the lowest sole is -0.007 m
+ok    t193    18 pass   0 fail  62.7s
+           INFO angular acceleration, rad/s^2: walk 222, run 768, jump 884, walk2 192, stop 153
+ok    t216    22 pass   0 fail  43.0s
+
+5 checks: 62 pass, 0 fail

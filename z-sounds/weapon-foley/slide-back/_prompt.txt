@@ -1,0 +1,9 @@
+#33 weapon-foley/slide-back  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley slideBack
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.4 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A pistol slide racked back, a crisp metallic scrape. No music, no voice.

@@ -1,0 +1,9 @@
+#137 world/owl
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: owlHoot()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A single owl hooting twice at night in a forest, distant. No music, no voice.

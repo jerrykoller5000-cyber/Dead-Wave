@@ -1,0 +1,9 @@
+#85 bullet-impacts/leaves
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: leafHit
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.5 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bullet ripping through tree leaves and twigs, a quick rustle and snap. No music, no voice.

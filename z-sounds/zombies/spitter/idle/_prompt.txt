@@ -1,0 +1,9 @@
+#37 spitter-idle
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie with a throat full of acid phlegm: wet bubbling gurgles, slurping and a sizzling hiss, slow and disgusting. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('spitter', 'idle')

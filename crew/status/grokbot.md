@@ -1,13 +1,13 @@
 # Grokbot
 
 state: active
-model: Grokbot
-task: GB-140 integration run: npm test x2 + real-renderer smoke; reds to owners
-touching: crew/tests.json, handoffs/2026-10-07-grokbot-GB-140.md
-since: 2026-10-07T01:51Z
-next: —
+model: Grok Bot
+task: GB-158 Jerry (2:24 AM CT): new zombie speeds - shambler 4.3 avg / lunge 5.0, military top 6.0, demon 6.0 avg, colossus 4.0, guardian 7.0
+touching: game/horde.js (speedFor, new SPEED_TARGET), game/horde.test.mjs (D-77 + new GB-158 tests), index.html (ZOMBIE_TYPES colossus/guardian speed; hordeJoin; updateZombies lunge line and demon charge speed; zombie walk cadence colossus/charge), tools/tests/t205.js, tools/tests/t247.js (new)
+since: 2026-10-11T07:28Z
+next: GB-156 The mortar and Watchman crew (Jerry, 2026-10-09). Resume: th
 blocked-on: —
-last-report: handoffs/2026-10-06-grokbot-GB-137.md
+last-report: handoffs/2026-10-10-grokbot-GB-157.md
 
 ## Notes
 
@@ -22,3 +22,5 @@ last-report: handoffs/2026-10-06-grokbot-GB-137.md
 - Heads-up: about 40 old tests start with a bare Play click and a short wait (the insertion can own the camera then). They pass today; move them to startMatch when they are touched.
 - 2026-09-25 16:50Z: GB-55 (t4 on startMatch) and GB-56 (nights 1-20 headless, 4 zombie-AI fixes, new t80, new tools/nightsim.mjs) are done; handoffs handoffs/2026-09-25-grokbot-GB-55.md and GB-56.md. Open: 1 spider on night 12 of the final run took 275 AK rounds with a clear line (maybe a prop not in shotBlocked). Next: GB-57 with D-38's bounties (25/60/150/300). Claude's fish test is t82; run ls tools/tests before naming a test.
 - 2026-09-25 17:20Z: GB-57 done (bounties: posts from night 2, D-38 rewards into the bag, bounty-posted/-done/-expired, getBounties(); contract in docs/contracts.md with GB-53's night shape for GP-42; t83). GP-43 can start. Night-12 spider sent to Claude (likely the ammo kiosk). Queue empty.
+
+- 2026-10-07 (Claude, lead): GB-140 closed from the logs (handoffs/2026-10-07-claude-GB-140-closeout.md); card set idle.

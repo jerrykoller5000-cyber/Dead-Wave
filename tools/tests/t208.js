@@ -4,6 +4,8 @@
 //    and the legs turn at most 49 degrees off the aim.
 //  - "Needs heavy breathing after running on idle": a run winds him, and standing winded he breathes fast and you
 //    hear it; rested, he does not.
+//  CL-133 (2026-10-08): the sweeps reset the idle layer each beat; the bored look-about (5 s of standing) was what made
+//  the second sweep's head swing larger than the first's whenever the page ran slow.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -20,7 +22,8 @@
       const tilt = [], yaw = [], ys = [];
       for (let i = 0; i < 8; i++) {
         G.GAIT.holdU = i / 8;
-        await wait(350);
+        T.marineIdleDbg().reset();   // CL-133: the bored idle (BORED_AFTER 5 s) looked about and swung the head 17 degrees in the second sweep
+        { const s0 = T.getSimTime(), w0 = Date.now(); await wait(350); while (T.getSimTime() - s0 < 0.6 && Date.now() - w0 < 8000) await wait(50); }   // the pose eases in: counted in game time (GB-140 saw it short under load)
         T.marine.updateMatrixWorld(true);
         const qm = T.marine.getWorldQuaternion(new THREE.Quaternion()).invert();
         const qh = ud.headG.getWorldQuaternion(new THREE.Quaternion()).premultiply(qm);

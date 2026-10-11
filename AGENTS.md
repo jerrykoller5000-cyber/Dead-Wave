@@ -1,4 +1,4 @@
-# AGENTS.md — how the Dead-Wave crew works
+# AGENTS.md — how the Grave Shift crew works
 
 Every agent reads this first, every session: Cursor, ChatGPT, Grokbot, Claude and
 Antigravity. Jerry has the final say. Claude leads.
@@ -123,7 +123,10 @@ card in `crew/status/`, appends to `crew/LOG.md`, and writes their own handoff n
 7. **Done means all of these:**
    - `npm test` passes, or fails only where it already failed.
    - Anything visible has before-and-after shots from `tools/shoot.mjs`
-     (`--compare`: under 1% is unchanged, over 3% is a regression).
+     (`--compare`: under 1% is unchanged, over 3% is a regression), or from `tools/camera.mjs`, which
+     takes any picture of the game quickly: any weapon, zombie, survivor, buildable or place, from any angle,
+     moved round step by step, or a whole group at once (`turrets`, `zombie:*`) with one contact sheet; agents
+     without a shell drop a job file in `review/camera/jobs/` (`tools/CAMERA.md`).
    - Load time and frame rate are no worse.
    - A handoff note is written, and you have checked out.
 8. **Every task ends with a handoff note** at `handoffs/YYYY-MM-DD-<agent>-<task>.md`, using the

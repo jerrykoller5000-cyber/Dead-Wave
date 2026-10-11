@@ -1,0 +1,9 @@
+#153 vehicles/cargo-plane-interior
+MISSING: the game makes no sound here now
+Now: (silent: the drop-in)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+The inside of a military propeller cargo plane in flight: loud engine drone and wind roar through an open ramp, seamless. No music, no voice.

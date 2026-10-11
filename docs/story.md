@@ -1,8 +1,16 @@
-# The Signal: the story bible, v2 (D-44)
+# The Signal: the story bible, v3 (D-44)
 
 Owner: Claude (CL-74, P-86). Rewritten 2026-10-01 from Jerry's answers on the narrative (the valley, the PGB and its
 Gravewalkers, the twelve of FOB Threshold, the survivors on the roof, the floatplane). The first version is in
 `docs/archive/story-v1.md`. Every line here is a first draft for Jerry's red pen. Names are Jerry's (2026-10-01).
+
+**v3 (2026-10-07, the story audit):** the same story, with the holes closed and the Branch given a voice. What changed:
+why nothing lands before night 20 (section 1, Heron); what "Gravewalker" means (section 1); the drop briefing
+(section 3); who buries him (section 3); the Hush's origin (section 9); the guardian is driven back, never defeated
+(section 1); the road notes are three, not one (section 6); the Branch's paper (section 11); the survivors' fourth
+pool (section 5); the wall of tags and the tally (section 7); and what is never said (section 12). The audit itself
+and Jerry's six decisions are in the story audit doc (2026-10-07); the cards are in
+`handoffs/2026-10-07-claude-story-v3-cards.md`.
 
 **The rule for telling it (Jerry):** no walls of text. The history is in the world: little things on the map that show
 who lived here and what happened to them. Words come in short pieces: a field note, a radio line, a survivor talking.
@@ -22,8 +30,20 @@ happened, get the relay talking again, and hold out for the floatplane on night 
 - **The PGB, the Paranormal Ground Branch.** Unofficially, the **Gravewalkers**. Motto: *"Against What Should Not Be."*
   Strange things have been turning up all over the world, and these are the people sent to put them down. Hard,
   quiet, military. The marine is one of them.
+  **What the name means (v3, Jerry):** every Branch field soldier is a Gravewalker, not only the player. The name is
+  the job: they walk into the places everyone died in, put the thing down, and bring their own home. The twelve of
+  Threshold were Gravewalkers. He is the thirteenth into this valley. Bringing the nine tags back up is not a side
+  quest; it is what Gravewalkers do for their own.
+  **The Branch on paper (v3):** it is also a government department, under-funded and over-proceduralised: forms,
+  requisition credit, a procedures binder nobody has read and a dispatcher who has. That is where the humour lives
+  (section 11). The dead, the valley and the marine are never funny. The Branch is funny because somebody wrote a form.
 - **Ridgeline.** The PGB command on the far side of the mountains: the voice on the relay. Tired and decent.
   It can't send a team in (it sent one). It can send supply drops (one call a day) and, on night 20, the floatplane.
+  **Why night 20 (v3, Jerry):** nothing can land on the lake while the thing in it is awake. Chutes come down fine
+  (he came by one; the crates do); Heron needs the water, and the water has that in it. The Branch's file says it goes
+  under one night in twenty, and Ridgeline is betting on the file. Said once by Ridgeline (line 12) and once on the
+  orders card (section 3). Nobody says why one in twenty: that stays in the file (section 12). The true ending then
+  explains itself: the lake goes quiet, so Heron can come now.
 - **The marine.** The player. Never named, never unmasked (D-66). He doesn't talk; the world talks to him.
 - **FOB Threshold.** The HQ: a cold, industrial forward operating base the PGB dropped into the valley, built at the
   edge of an anomalous zone, with the relay, the sample window and the supply terminal. It fell three weeks ago. It is
@@ -36,6 +56,8 @@ happened, get the relay talking again, and hold out for the floatplane on night 
   them. Every night it is louder.
 - **The guardian.** There is only one. It is the heart's own body: it comes up through any cave, which is why every
   guardian looks the same. While the tone sings, the heart rebuilds it, so it can't die. It protects the heart.
+  **In words (v3):** on nights 6, 12 and 18 it is **driven back**, never defeated or killed. The reward cards say
+  "Guardian driven back" and keep their unlocks. The only place the word "killed" is true is the heart (section 9).
 - **The Pit and the ring.** The sinkhole under the lake, ringed with eight carved stones. The ring is what held the
   heart asleep.
 - **Heron**. The floatplane: a military amphibious transport. It lands on the lake and taxis to the dock.
@@ -65,6 +87,15 @@ Told only through the world (section 7) and in pieces (the relay, the notes, the
 ## 3. How a run tells it
 
 - **Insertion.** He parachutes in. The relay panel on the HQ board: "RELAY · SILENT".
+  **The orders card (v3).** In the plane, before the chute: a PGB orders card in his hand for a few seconds, then on
+  the HQ board for the run (the one new piece of text the game needs; the player can read it or not):
+
+  > **PGB · FIELD ORDERS · SITE 9**
+  > Gravewalker, you are the thirteenth into this valley. Twelve went before you. Three weeks of silence.
+  > Get the relay up. Hold Threshold. Bring ours home.
+  > Extraction: Heron, night twenty. The lake is not safe to land on before then.
+  > Return of issued equipment is expected. Return of personnel is encouraged.
+
 - **Act 1 · Boots on the ground (nights 1-3).** No voice yet. The world speaks: the field notes of the twelve
   (section 6) and the places themselves (section 7). The first poke into a cave and the first swim toward the Pit each
   get their line.
@@ -75,6 +106,14 @@ Told only through the world (section 7) and in pieces (the relay, the notes, the
 - **The way out (night 20).** He calls Heron from the board. Flares at the dock; she comes in low over the trees,
   lands on the lake and taxis in during the last push. He holds the dock and boards.
 - **The secret (for players who look).** `docs/specs/secret-quest.md`, with the changes in section 9.
+- **The night's name (v3).** Each night already has a title in the music (`tools/nights.py`: Runners, The Lake
+  Wakes, Two Fronts, The First Nest, Chalk, Treeline, Fuse, Eight Packs, Brute Force, Every Cave, Red Guardian,
+  Artillery, Brood, Demon Night, Swarm, The Siege, The Gauntlet, Last Stand…). The morning scouting card carries it:
+  "Night 6 · Red Guardian". The HUD says "Night 6", never "Wave Day 6".
+- **When he dies (v3, Jerry).** The burial on the hill: the survivors he rescued hold the shovels, and the tags he
+  brought up go into the ground with him. With nobody rescued, nobody pats the earth down: the grave fills on its own,
+  the earth settling while the camera holds. The two marines of the old cine are gone (he came alone; the base is
+  dead).
 
 **Skulls and Cash.** Every risen skull carries a faint rune mark, proof the tone was in it. He drops them through the
 sample window; the PGB pays for them and uses the bone for research and weapons (the rune finish is the first
@@ -97,14 +136,14 @@ mornings. Each is a burst of static and the text.
 | 5 | "Night shift says it gets louder after dark. Your nights getting worse? Thought so." |
 | 6 | "Supply's stretched thin. One call a day, that's what we can spare. Make it count." |
 | 7 | "The skulls you're sending all carry the same mark. Research is very happy with you. Keep them coming." |
-| 8 | "We triangulated the tone. It's coming from under your lake. Through the water. Through the rock." |
+| 8 | "We triangulated the tone. It's coming from under your lake. Through the water. Through the rock. It's not the first one we've heard. It's the loudest." |
 | 9 | "Our file on that valley is a hundred years old. A mining town, Coldwater. Empty in one winter. They buried their dead in iron." |
 | 10 | "The dead walk toward the tone like moths to a lamp. Every night it's stronger, every night there are more. That's your wave." |
 | 11 | "Six caves, all running down toward the lake. The white one's sealed with carved stone older than our files. Leave it shut." |
-| 12 | "We can't send a team in. We sent one. We can send a plane. Night twenty. Stay alive until then." |
+| 12 | "We can't send a team in. We sent one. Heron can't put down on that water with that in it. The file says it goes under one night in twenty. We're betting on the file. Stay alive until then." |
 | 13 | "When the lake breathes out, the fog comes with it. Keep your back to a wall and your ears open." |
 | 14 | "The tone has a rhythm. It repeats, over and over. Our tech swears it's almost a word." |
-| 15 | "Something big is walking your trails by day. Tracks the size of a truck. Give it room, or give it everything." |
+| 15 | "Something big is walking your trails by day. Tracks the size of a truck. Give it room, or give it everything. That contrail at dawn is Heron, looking. She can't stop yet." |
 | 16 | "If anything could shut that tone off, it's down where it starts. We don't know how. We're sorry." |
 | 17 | "Heron's crew volunteered. All of them. Don't make them wait." |
 | 18 | "Heron's fuelled. Two nights out. The dead will throw everything at your walls tonight; they can hear her coming too." |
@@ -113,6 +152,19 @@ mornings. Each is a burst of static and the text.
 
 After his first delve, line 8 is replaced if unheard (or added that morning): "Your trip below lit up our board. The
 tone's loudest under the white rock. We're calling it the Marrow."
+
+**The morning after the relay repair (v3, the Hush's origin).** Before line 1 that morning, Ridgeline's one extra
+line: "Relay's up. There's a spare board in the mast locker. Pull it, wire it the way I tell you, and it'll play the
+tone back at itself. Won't stop it. Will make a hole in it big enough for one man." The spare board is a prop on the
+HQ table until the Hush is built; the board's line "The Hush charges at the following dawn" stays.
+
+**Ridgeline, dry (v3).** Three in twenty, never two in a row. Keyed to the day, not to a line number:
+- The sixth morning: "Sixth night. Threshold never saw one. I'm putting that in the file, if it's any comfort. It
+  isn't, is it. Thought so."
+- Any morning after the ammo count passes what Supply would allow: "Supply says you've drawn eleven days of
+  ammunition in four. Supply is not here. I am. Draw what you need."
+- The morning after a Report press with nothing to report (section 11): "Nothing to report. Best report I've had all
+  week."
 
 ## 5. The survivors: on the roof
 
@@ -136,6 +188,27 @@ climb that ladder.
 
 - The victory screen: "Survivors aboard: 3" and their lines. All three: the badge **"Nobody left behind"**.
 - Brandt's roof line is a hint toward the secret (section 9).
+
+**The fourth pool (v3).** Each survivor's roof talk draws first from a pool keyed to what happened, so no two runs
+sound the same; the standing line above is the fallback. Three kinds of funny: Okafor is exact and unimpressed and
+counts everything; Brandt sees things and is sorry about it; Pike lost the walker and names the dead after people
+who owe him money.
+
+| When | Okafor | Brandt | Pike |
+| --- | --- | --- | --- |
+| A tag came up yesterday (any) | "Whose? … Right. Put it on the wall. I'll do the rest." | "I counted them going down. Thank you for counting them coming back." | "That's one. Don't tell me the rest. I'll do them one at a time." |
+| Sato's tag | "Sato pulled the fuse. If he hadn't, there'd be no relay to fix." | "Sato was on the radio when it started. He never stopped talking. I never heard what he said." | "He owed me twenty. Keep the tag. We're square." |
+| Hale's tag | "The captain. Four marks on the back. He was counting too." | "Hale sent me up the tower. That's why I'm here and he isn't." | "Captain Hale. Never saw him sit down. Not once in four days." |
+| Clarke's tag | "That ring goes over the mountains. Not to you." | "Clarke drove the wall in. Every panel. She'd want to know it held." | "Not yours. The ring. Don't ask." |
+| Price's tag | "Price. Pike's bunkmate. Tell him yourself." | "Jonah fixed my gun the day before. It's the one I've got." | "You found Jonah. Thank you. Don't tell Brandt I cried." |
+| Kowalski's tag | "Nineteen. He lied about that on the form. Everyone knew." | "The kid. Mended his own chain with wire the first night. Said it was for luck." | "Kowalski. He thought the wall was for bears." |
+| The twelve passed (night 6 survived) | "Six nights. That's one more than we got. Don't get used to it." | "Threshold never saw a sixth night. You did. I watched it." | "Six. That's a record. I checked. There was nobody to check with, but I checked." |
+| A named night, the morning after | "Brute Force. They said that about the fourth night too." | "Demon Night. I heard the name come up on the radio once. Didn't know it was a thing yet." | "Red Guardian. It's the same one. I keep telling people it's the same one." |
+| The wall has every tag | "Nine. All of them. Now bring yourself home too, and that's twelve." | "Nine. You brought all nine back up. I owed them that. Now I owe you." | "Nine. That's the whole platoon on one wall. Don't let it fall off." |
+| The siege survived (night 18) | "Two nights. I'm not sleeping. Neither are you." | "Heron can see us from up there. I hope she likes what she sees." | "Two nights. If that plane's late I'm swimming." |
+
+Lines stay dry; nothing from the marine; nothing at the expense of the nine. The tag lines are the heavy ones and
+the night lines are the light ones, and they never play on the same morning.
 - **Jerry (2026-10-01):** three survivors, all military, each with a job. They replace the old helps GB-91 built: the
   medic's regen becomes Okafor's heal on the roof, the trapper's cheaper repairs become Pike's, and the ranger's turret
   becomes Brandt's M240B on the roof.
@@ -155,10 +228,15 @@ quiet days and the night it fell. No reward, no objective. One line each, signed
 | The mine (the iron cave's mouth) | Settlers' boards, IRON BELOW painted on them, and: "Somebody cut the old bars off this mine. Recently. Bolt cutters. — Pike" |
 | The watchtower | Pencil on the rail: "Count them from the tower. Five." (Brandt; the secret's hint, section 9) |
 | A cave mouth (each of the five) | A stencilled PGB board: "SURVEY · WARREN 3 · IRON · DO NOT ENTER". (How he learns the word "warren".) |
-| The supply wrecks on the road | "Threshold's stores. Signed for: twelve. Need: fewer every night." |
+| The supply wreck (the convoy) | "Threshold's stores. Signed for: twelve. Need: fewer every night. — Hale" |
+| The utility truck (v3) | Spray-painted on the door: "RAN DRY AT THE BEND. WALKED. — Clarke" |
+| The fuel sheds (v3) | A clipboard: "Fuel log. Day 4: topped off everything, nowhere to drive it. — Price" |
 | The dock | A laminated notice: "EXTRACTION POINT · HERON · EVERY 6 HRS". Someone has crossed out every time. |
 | The HQ door | Stencilled "FOB THRESHOLD · PGB · LOCKDOWN · DO NOT OPEN", and claw marks. No card: it speaks for itself. |
-| The Cordon's gate | Stencilled "CORDON · PGB · NOTHING LEAVES". |
+| The Cordon's gate | Stencilled "CORDON · PGB · NOTHING LEAVES". Under it (v3), a bolted PGB sign: "SITE 9 · AUTHORISED PERSONNEL ONLY", and in marker beneath: "there is no authorised personnel". |
+| The rangers' truck (v3) | No card. E on the dash: the last transmission, looping on the ranger band: a man reading plate numbers off the hikers' cars, slower each time, then a dog, then nothing. |
+| The hikers' camera (v3) | In their cache. E: one clip, eight seconds. A tent at night, two people laughing, the one holding it going quiet and turning toward the lake. Nothing is shown. |
+| The HQ door, fifth night only (v3) | E knocks three times. A pause. Three knocks back, from inside. Once per run, never explained. |
 
 ## 7. The history in the world: what to build (no words)
 
@@ -176,6 +254,35 @@ Little things on the map, each telling one part of section 2 without a line of t
 - **The rangers:** the search board, the rangers' truck, a radio left on its last channel.
 - **FOB Threshold's fall:** sandbagged positions with brass round them, a dropped helmet, a burst door, drag marks
   toward the nearest cave.
+
+**v3: the story you can see.** Each keyed to the night or to what he did, none of them a line of text.
+
+- **The wall of tags.** Nine nails on the HQ's outside wall by the door, under the mural. Each tag he brings up hangs
+  there the next morning, name outward. A player who went everywhere has nine; a player who didn't sees empty nails.
+  On the true ending and on Heron the tags go into his pack and the victory card counts them: "Brought home: 7 of 9."
+- **The tally.** Hale's four marks and his unfinished fifth are on the HQ board (his tag says so). The marine's own
+  marks appear beside them, one per night survived, in a different hand. On the sixth morning his row is longer than
+  the captain's. Nobody says anything.
+- **The valley gets worse.** Four slow changes keyed to the night: the Pit's glow reaches further up through the water
+  (a smudge on night 1, the whole lake floor by night 15); the stones' pulse from the tower brightens; the morning fog
+  sits lower on the lake; crows on the Cordon wire multiply (two on night 1, a line of them by night 12, none on
+  night 20).
+- **Heron's shadow.** From night 15, a high contrail at dawn, once, crossing the valley and not turning. Line 15 says
+  what it is.
+- **02:14.** The HQ clock stops at 02:14 every night, for one second, then runs on. The relay tag, the bell, Hale's
+  watch and the clock all say the same time.
+- **The Cordon.** A fence line, posts and wire with the state's sign every hundred metres, running from the gate over
+  both ridges and out of sight. He can walk it and never find a way through. (Jerry, 2026-10-07: no fence exists
+  beyond the gate today; this is the one big build.)
+- **The twelve.** A group photo on the HQ wall: twelve soldiers at Threshold's gate on the day they arrived, three
+  circled in pencil later. No names on it.
+- **The first people, above ground.** One trace that is not a stone: a cairn on the ridge with the ring of eight
+  scratched on its cap, or a hand-print in the Marrow cave's mouth. Something that says people lived here, not only
+  prayed here.
+- **Coldwater's name.** Cast in iron on the church bell's crown and the mine's lintel. The only place the town is
+  named.
+- **The old marker.** In one warren's Deep, a PGB survey stake of the old pattern, stamped with a date before the
+  Branch should have existed. Never mentioned by anyone.
 
 ## 8. The Hollows
 
@@ -243,7 +350,12 @@ falls back to the heart to protect it: the one time and place it can be killed.
 **The Hush.** The same trick, small. A box Ridgeline talks him through building from the relay's spare board: it
 listens to the tone and plays it back out of step, so for a few metres round him the tone goes quiet. The heart and
 the guardian sense the living through the tone; inside the Hush he isn't there for them. Its battery lasts one delve,
-and the HQ charges it once a dawn.
+and the HQ charges it once a dawn. **v3:** the game now says so. Ridgeline's line the morning after the relay repair
+(section 4) and the spare board on the HQ table are its origin; until then the Hush is a box from nowhere.
+
+**Brandt's notebook (v3).** Once Brandt is on the roof, his notebook lies on the HQ table: a page a night, the stones'
+order as he saw it from the tower, in his own shorthand (the glyphs drawn badly). A fourth way to the word, and a man
+with a hobby. "I wrote it down somewhere" was true.
 
 **How he learns the word** (the clues are the twelve's, not a ranger's):
 - Ridgeline's line 14: "almost a word". The board shows five empty marks.
@@ -258,9 +370,10 @@ the ladder, the crown, the drop, the gate.
 **The true ending.** The guardian dies in the heart; the tone dies for good; every dead in the valley drops where it
 stands; the lake goes flat and clear; birdsong. Ridgeline: "Ridgeline. Your tone's gone. Everyone's tone is gone.
 Heron's coming to get you. Walk to the dock." The badge "Silence", the rune finish, and the rune pistol on the dock in
-later runs.
+later runs. **v3:** the lake is quiet, so Heron can land now: the ending needs no other explanation. And one more
+thing for the player who walks to the stones before the dock: E on one, and the card says only "Warm."
 
-## 10. What this changes on the board (when the crew restarts)
+## 10. What v2 changed on the board (2026-10-01; v3's cards are in the handoff)
 
 - Everywhere: "island" becomes "the valley"; "Harbor Nine" becomes "Ridgeline"; "the boat" becomes "Heron" (the
   floatplane); "the chalk cave/heart" becomes "the Marrow" in words (code ids like `chalk` stay as they are).
@@ -273,6 +386,59 @@ later runs.
 - **The Hollows (CL-100, GP-83):** nine dog tags, not twelve; the husks; Medic-4 is gone from the story (its wreck is
   FOB Threshold's supply wrecks now).
 - **The secret spec:** the clues come from the twelve (section 9); the hint note is Brandt's, not a ranger's.
+
+## 11. The Branch's paper (v3)
+
+The humour, all of it on paper the player chooses to read, in the Branch's voice: an agency that is brave and broke
+and procedural. Never from the dead, the valley or the marine. Never a joke on a death card.
+
+**Crate slips.** One supply drop in three carries a slip (a card on E at the crate, no reward). Drawn without repeats
+in a run:
+- "Requisition 7-C approved in part. The part is the crate."
+- "Please retain packaging for return. We know. Please retain it anyway."
+- "Contents checked against manifest by: (blank). Manifest checked against contents by: (blank)."
+- "Night shift packed this one. If anything's missing it was Dave."
+- "Ammunition, 5.56, qty as requested. Requested qty exceeded. Sent anyway. Don't tell Supply."
+- "Enclosed: one (1) morale item. It's a chocolate bar. It's from the dispatcher. It's not on the form."
+- "Weather, your valley, tomorrow: fog. Weather, your valley, every day since we started watching: fog."
+- "The file has a page about the one night in twenty. It's water-damaged. Of course it is."
+- "This crate was packed by someone who has read your reports. Good luck. She means it."
+- "Return of this slip is not required. Return of you is."
+
+**The duty board** (the HQ board, in Pike's and Hale's hands, under the tally): "Sample window 02:00–02:30. Bring
+a friend." / "Relay check: daily. Radio fuse: spare in the drawer." (The drawer is empty; Sato has it.)
+
+**Report.** One button on the HQ radio, once a day. Ridgeline answers with a line keyed to the day's state (a tag up,
+a survivor found, a warren cleared, the relay just fixed, a named night survived, nothing), twenty canned answers and
+a default. He never speaks; the button is the report. Examples:
+- A tag came up: "Noted. Name's going in the file. The file's getting long."
+- A survivor found: "Three weeks. Tell them Ridgeline said well done, and that they're still on the clock."
+- A warren cleared: "That's one less hole. Four to go. Don't count them in the dark."
+- Nothing: "Nothing to report. Best report I've had all week."
+
+**Signs.** The Cordon's PGB sign (section 6). On the HQ's supply terminal: "ORDERS PLACED AFTER 16:00 SHIP NEXT
+DAWN. ORDERS PLACED BEFORE 16:00 ALSO SHIP NEXT DAWN."
+
+## 12. What is never said (v3)
+
+The rule for a mystery people come back for: two or three facts the player can find, the facts agree, and the game
+never says the fourth. These stay open for good; no line, note, slip or survivor may close them.
+
+| Mystery | What the player can find | Never said |
+| --- | --- | --- |
+| What the heart is | the stones, the glyphs, the shaft of light, "it can't die" | what it wants, whether it is alive, what the word means |
+| The word | five glyphs, a new order every run, his own names for them | its meaning; it is a key, not a sentence |
+| One night in twenty | Ridgeline's line 12, the orders card, a water-damaged slip | why; what sleeps and what wakes |
+| "Not the first one we've heard" | line 8, "everyone's tone is gone" at the end | where the others are |
+| The first people | the stones, the mural, the cairn or the hand-print | who they were, where they went |
+| The hundred-year file | line 9, Ade's folded page, the old survey stake | who opened it, and when the Branch really began |
+| The coffin open from inside | the graveyard, bent nails, B.'s note | whose, and where they went |
+| The trapper | the horseshoes, the cellar, Okafor's note | how he knew; whether he was already dead when he knew it |
+| The rabbit | one white rabbit, by the lake, at dawn, never where you look | anything at all |
+| "Some stay" | line 20, the Stay choice | who stayed before, and what became of them |
+| Clarke's ring | the tag, "someone over the mountains is waiting for it", Pike's "Not yours." | the story behind it |
+| The HQ | the sealed door; three knocks back on the fifth night | anything inside, ever |
+| "Warm." | the stones after the true ending | whether it is over |
 
 ## Calls made here (Jerry can overrule)
 
@@ -290,3 +456,9 @@ later runs.
 - Nine died and three lived, so the Hollows hold nine dog tags.
 - The HQ stays sealed: nobody goes inside, the survivors live on its roof.
 - The settlers' iron is the old answer to the tone: it's why the graveyard's dead stay down and why Okafor lived.
+- **Jerry (2026-10-07, the story audit):** the Branch is allowed to be funny (on paper, never the dead or the marine);
+  no "Threshold Protocol": the reason nothing lands before night 20 is the thing in the lake; **Gravewalker is the
+  unit's name**, the twelve included, not a title for the player; the survivors bury him; heavy and funny can share
+  the game (the photo of the twelve stays); no fence exists beyond the Cordon's gate today, so the Cordon is the one
+  big build.
+- The one night in twenty is never explained. "Everyone's tone is gone" now has a seed (line 8).

@@ -1,0 +1,9 @@
+#157 vehicles/floatplane-idle
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 8 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+A twin-engine floatplane idling on the water at a dock, propellers ticking over, water lapping, seamless. No music, no voice.

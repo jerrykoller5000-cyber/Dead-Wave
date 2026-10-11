@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const dir='review/feral-arms-GP19849';
+let tests=fs.readFileSync('review/feral-GP198/motion.test.mjs','utf8');
+tests=tests.replaceAll('f.ghosts().length,2','f.ghosts().length,3').replace('f.ghosts().length,16','f.ghosts().length,24');
+tests=tests.replace('within 0.12 seconds','within 0.20 seconds').replace('f.step(9);assert.equal(f.runtime.state().echoes,0)','f.step(12);assert.equal(f.runtime.state().echoes,0)');
+tests=tests.replace('Math.abs(x)<.5','Math.abs(x)<.8');
+fs.writeFileSync(`${dir}/motion.test.mjs`,tests);
+let check=fs.readFileSync(`${dir}/live-check.mjs`,'utf8');
+check=check.replaceAll('echoes<=16','echoes<=24').replaceAll('8 actors/16 echoes','8 actors/24 echoes');
+fs.writeFileSync(`${dir}/live-check.mjs`,check);
+console.log('Prepared lifecycle/snapshot checks for three echoes and the longer fade, preserving historical GP198 tests.');

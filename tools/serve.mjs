@@ -24,12 +24,32 @@ const TYPES = {
   '.mp3': 'audio/mpeg',
   '.ogg': 'audio/ogg',
   '.wav': 'audio/wav',
+  '.flac': 'audio/flac',
+  '.m4a': 'audio/mp4',
+  '.opus': 'audio/ogg',
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
   '.woff2': 'font/woff2',
   '.woff': 'font/woff',
   '.ttf': 'font/ttf'
 };
+
+// CL-148: Jerry's recorded zombie takes, relative to z-sounds/ with / separators (tools/zsounds-index.mjs uses it too).
+const AUDIO = /\.(mp3|wav|ogg|oga|opus|m4a|aac|flac|webm)$/i;
+export function listZSounds(root) {
+  const base = path.join(root, 'z-sounds'), out = [];
+  const walk = (dir, rel) => {
+    let ents = [];
+    try { ents = fs.readdirSync(dir, { withFileTypes: true }); } catch { return; }
+    for (const e of ents) {
+      const r = rel ? rel + '/' + e.name : e.name;
+      if (e.isDirectory()) walk(path.join(dir, e.name), r);
+      else if (AUDIO.test(e.name) && !/^[._]/.test(e.name)) out.push(r);
+    }
+  };
+  walk(base, '');
+  return out.sort();
+}
 
 export function serve(root, port = 0) {
   const base = path.resolve(root);
@@ -42,6 +62,11 @@ export function serve(root, port = 0) {
       return;
     }
     if (req.method === 'POST' && pathname === '/__studio/note') { handleStudioNote(req, res, base); return; }
+    if (pathname === '/__zsounds') {   // CL-148: the audio files under z-sounds/ (core/takes.js)
+      const body = JSON.stringify({ root: 'z-sounds', files: listZSounds(base) });
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(body);
+      return;
+    }
     if (pathname.endsWith('/')) pathname += 'index.html';
     const file = path.resolve(base, '.' + pathname);
     // Never serve outside the root, however the path is spelled.

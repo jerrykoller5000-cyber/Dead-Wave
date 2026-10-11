@@ -1,0 +1,17 @@
+✔ all thirteen fightable kinds share the six approved damage columns and counters (1.3383ms)
+✔ the distinct approved weaknesses and resistances retain their combat shares (0.171ms)
+✔ requested armor uses absolute shares instead of stacking reductions (1.5242ms)
+✔ soldier turn has acceleration and cannot instantly attack behind itself (1.2415ms)
+✔ return changes grenade velocity toward thrower without changing fuse or age (0.3453ms)
+✔ shells, short fuses, high grenades, barriers and missing legs prevent return (1.2168ms)
+✔ one grenade cannot be kicked by multiple soldiers or returned twice (0.29ms)
+✔ bash has a readable tell, one impact, and can be dodged or blocked (0.8513ms)
+✔ lateral pursuit follows the player after a perception delay (0.2335ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 113.7964

@@ -1,0 +1,19 @@
+PASS an AK round in the back: it dies on its body (dead, facing z -0.71)
+FAIL it lies within 0.35 m of the ground and has settled in 4.71 s (undefined, hips 0.12 m up, frozen false)
+FAIL shot in the back, it pitched forward (head -0.59 m past the hips along the shot, hips moved 0.47 m; undefined)
+FAIL settled: its joints stop updating and the body sleeps
+FAIL its pool slot is back (1)
+PASS a cleared corpse hands the pooled mesh back with its joints live again (0 still, 0 before it died)
+PASS a close shell kill: the body takes it (6.50 m/s)
+PASS the body ends 1.49 m back (1-2 m, its pelvis)
+PASS the zombie behind is knocked down by it (fall)
+PASS killed by the first pellet, thrown by the whole shell (6.50 m/s)
+PASS an AK kill throws nobody (2.50 m/s)
+PASS bodies off: today's topple, with a slide (1.60 m)
+FAIL it slides 0.89 m back
+PASS the zombie behind gets knockT (2.02)
+FAIL once landed, the topple freezes too
+corpses: 18 toppling 23.281 ms a frame; 18 settled (18 on bodies) 33.901 ms
+FAIL 18 settled corpses (18 old, 18 new, 18 on bodies, all frozen false) cost 33.901 ms a frame, 18 toppling ones 23.281 ms
+FAIL all their slots are back (8)
+PASS no page errors

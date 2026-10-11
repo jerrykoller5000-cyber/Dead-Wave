@@ -1,0 +1,888 @@
+{
+  "renders": [
+    {
+      "type": "shambler",
+      "state": "idle",
+      "peak": 0.028349243104457855,
+      "rms": 0.0026000090136654753,
+      "activeSeconds": 1.2144166666666667,
+      "hash": "079e3bc1f5353d2624baf0b0eb8f1271337e41416eb9fc9d2f1dcd066da1f867",
+      "counts": {
+        "shambler": 1,
+        "shambler:idle": 1
+      }
+    },
+    {
+      "type": "shambler",
+      "state": "attack",
+      "peak": 0.03095797635614872,
+      "rms": 0.001502523001634625,
+      "activeSeconds": 0.8481458333333334,
+      "hash": "625ee12d783f997bbb0a84f35a7b6b261740af2ca54e83a6e0e2ffd204984e8c",
+      "counts": {
+        "shambler": 1,
+        "shambler:attack": 1
+      }
+    },
+    {
+      "type": "shambler",
+      "state": "hurt",
+      "peak": 0.06894385814666748,
+      "rms": 0.003950997012419483,
+      "activeSeconds": 0.7270833333333333,
+      "hash": "eff3c1d186459b2961be008d38600f7ced54b092f27eff23e9b9d963ee87232b",
+      "counts": {
+        "shambler": 1,
+        "shambler:hurt": 1
+      }
+    },
+    {
+      "type": "shambler",
+      "state": "death",
+      "peak": 0.1290326714515686,
+      "rms": 0.007529368343351156,
+      "activeSeconds": 1.2936666666666667,
+      "hash": "625453f28ae288924481a46049934342bbef89dbcdbc0d9a5d2e907eadd41afb",
+      "counts": {
+        "shambler": 1,
+        "shambler:death": 1
+      }
+    },
+    {
+      "type": "feral",
+      "state": "idle",
+      "peak": 0.019397733733057976,
+      "rms": 0.001348314990407232,
+      "activeSeconds": 0.8572916666666667,
+      "hash": "781129ee544517b5636025d2f498843152d4f7d31f34bf387d79261715fbf186",
+      "counts": {
+        "feral": 1,
+        "feral:idle": 1
+      }
+    },
+    {
+      "type": "feral",
+      "state": "attack",
+      "peak": 0.030978985130786896,
+      "rms": 0.0014005949622952775,
+      "activeSeconds": 0.8417291666666666,
+      "hash": "2e3aadb4217d1e5c3d1817b437061bc93b89d9ebf4e94494b4de73ef8e8f5cae",
+      "counts": {
+        "feral": 1,
+        "feral:attack": 1
+      }
+    },
+    {
+      "type": "feral",
+      "state": "hurt",
+      "peak": 0.06586368381977081,
+      "rms": 0.004023131578352506,
+      "activeSeconds": 0.7764375,
+      "hash": "fcdd3f8ce1f295697c2ebf180a800b79d040502fb9aa879466c949f5d1e6df4d",
+      "counts": {
+        "feral": 1,
+        "feral:hurt": 1
+      }
+    },
+    {
+      "type": "feral",
+      "state": "death",
+      "peak": 0.13344788551330566,
+      "rms": 0.00872821886187398,
+      "activeSeconds": 1.33325,
+      "hash": "9d816f3ed4ecf29e9b1d273c1519153cab3c25cefb7ec1cbb7dce47568c38294",
+      "counts": {
+        "feral": 1,
+        "feral:death": 1
+      }
+    },
+    {
+      "type": "leaper",
+      "state": "idle",
+      "peak": 0.007763251196593046,
+      "rms": 0.0003752792176541759,
+      "activeSeconds": 0.3496458333333333,
+      "hash": "3e46611e5e91377bfb8ee9b76761476b4ea9805d66a73728a2fb1c23134217eb",
+      "counts": {
+        "leaper": 1,
+        "leaper:idle": 1
+      }
+    },
+    {
+      "type": "leaper",
+      "state": "attack",
+      "peak": 0.012171575799584389,
+      "rms": 0.0005651413036154399,
+      "activeSeconds": 0.477375,
+      "hash": "d43f26748c6b98840c8d28494a036f13007efc8ad738a70e1782b8fcc5506ca3",
+      "counts": {
+        "leaper": 1,
+        "leaper:attack": 1
+      }
+    },
+    {
+      "type": "leaper",
+      "state": "hurt",
+      "peak": 0.06551685929298401,
+      "rms": 0.003721692203170514,
+      "activeSeconds": 0.6173541666666666,
+      "hash": "5c0eed32e4927d8e396fb71dfb57f05bbc39490869c5d4725f45a03607791b15",
+      "counts": {
+        "leaper": 1,
+        "leaper:hurt": 1
+      }
+    },
+    {
+      "type": "leaper",
+      "state": "death",
+      "peak": 0.14125077426433563,
+      "rms": 0.013250150148581075,
+      "activeSeconds": 1.4320208333333333,
+      "hash": "9e7ad0768785ed6c929b3afe01fa584f77a00a42e2cb8ed087ae4566077b5652",
+      "counts": {
+        "leaper": 1,
+        "leaper:death": 1
+      }
+    },
+    {
+      "type": "drowned",
+      "state": "idle",
+      "peak": 0.03131639212369919,
+      "rms": 0.00288934739215709,
+      "activeSeconds": 1.2406041666666667,
+      "hash": "1b1976dc34a294d360c67ac17cb83fe6264d6d13209ad96ef44313d4ff049814",
+      "counts": {
+        "drowned": 1,
+        "drowned:idle": 1
+      }
+    },
+    {
+      "type": "drowned",
+      "state": "attack",
+      "peak": 0.02954825572669506,
+      "rms": 0.0016167353514027888,
+      "activeSeconds": 0.7827916666666667,
+      "hash": "c7dcadea211ac4c6f96fbe998f7a804540e8b9535700d455506183db0216a240",
+      "counts": {
+        "drowned": 1,
+        "drowned:attack": 1
+      }
+    },
+    {
+      "type": "drowned",
+      "state": "hurt",
+      "peak": 0.06558465212583542,
+      "rms": 0.0038842613567803505,
+      "activeSeconds": 0.726375,
+      "hash": "d1eee70c5cebef87f8be65b04617b4534e0ece3a9bcf82944b28c858d2cab0b3",
+      "counts": {
+        "drowned": 1,
+        "drowned:hurt": 1
+      }
+    },
+    {
+      "type": "drowned",
+      "state": "death",
+      "peak": 0.11607963591814041,
+      "rms": 0.007385227244564077,
+      "activeSeconds": 1.3246458333333333,
+      "hash": "5ba3437beaf551606af914bfc20e0a7dafbbd841cf960fea57c4131d9e2f0702",
+      "counts": {
+        "drowned": 1,
+        "drowned:death": 1
+      }
+    },
+    {
+      "type": "military",
+      "state": "idle",
+      "peak": 0.027393590658903122,
+      "rms": 0.0033552244406532795,
+      "activeSeconds": 1.2738541666666667,
+      "hash": "e0654d3e833b31e5f44cb39ea0c2ceeba790bd61e46522f12fcaa468bef4e5c7",
+      "counts": {
+        "military": 1,
+        "military:idle": 1
+      }
+    },
+    {
+      "type": "military",
+      "state": "attack",
+      "peak": 0.022680018097162247,
+      "rms": 0.0011188971351114784,
+      "activeSeconds": 0.9696666666666667,
+      "hash": "f07b17b8879cdb049609218d857374abf368e6e13b609ab2f4d060eedc0fd602",
+      "counts": {
+        "military": 1,
+        "military:attack": 1
+      }
+    },
+    {
+      "type": "military",
+      "state": "hurt",
+      "peak": 0.06572245061397552,
+      "rms": 0.003933509912798751,
+      "activeSeconds": 0.7454166666666666,
+      "hash": "144a853dcd68605b56d41568a570cd761e94e675d6f6b08cd3456b5d7ca469bb",
+      "counts": {
+        "military": 1,
+        "military:hurt": 1
+      }
+    },
+    {
+      "type": "military",
+      "state": "death",
+      "peak": 0.09696679562330246,
+      "rms": 0.00662098093239416,
+      "activeSeconds": 1.2141666666666666,
+      "hash": "8b2ad9956cb8cc54f2d2c978fd787d8cebbf579e8f43e69ac169513528f7c9fb",
+      "counts": {
+        "military": 1,
+        "military:death": 1
+      }
+    },
+    {
+      "type": "brute",
+      "state": "idle",
+      "peak": 0.04253607615828514,
+      "rms": 0.0032783285930462398,
+      "activeSeconds": 1.3541666666666667,
+      "hash": "d116d227d6aabdb9419400ef0ee943dfbf3676d1ea6b7a35aea977ae94c835d9",
+      "counts": {
+        "brute": 1,
+        "brute:idle": 1
+      }
+    },
+    {
+      "type": "brute",
+      "state": "attack",
+      "peak": 0.0696699321269989,
+      "rms": 0.00220992532777571,
+      "activeSeconds": 0.9826041666666666,
+      "hash": "ae3ef9b756b475750f8a54e05f3323e6da6831fcefb0d76a3740f316377b6afb",
+      "counts": {
+        "brute": 1,
+        "brute:attack": 1
+      }
+    },
+    {
+      "type": "brute",
+      "state": "hurt",
+      "peak": 0.0653754323720932,
+      "rms": 0.0039114290642761045,
+      "activeSeconds": 0.7447708333333334,
+      "hash": "4b2f4ff2e38f45e5268039c33f3784f5281b112323890801f7e5efcb2be00990",
+      "counts": {
+        "brute": 1,
+        "brute:hurt": 1
+      }
+    },
+    {
+      "type": "brute",
+      "state": "death",
+      "peak": 0.1398974508047104,
+      "rms": 0.0105752151036923,
+      "activeSeconds": 1.4456875,
+      "hash": "149fe83c93d34aff3f17e85139ca7ec5002beac9c485d3143c294bc83c07e140",
+      "counts": {
+        "brute": 1,
+        "brute:death": 1
+      }
+    },
+    {
+      "type": "spitter",
+      "state": "idle",
+      "peak": 0.016318190842866898,
+      "rms": 0.0012103344588760996,
+      "activeSeconds": 0.8809791666666666,
+      "hash": "11bf714104e8b4bdb58b2e07a5673edce1915013bf16ab3288426488a1cb7982",
+      "counts": {
+        "spitter": 1,
+        "spitter:idle": 1
+      }
+    },
+    {
+      "type": "spitter",
+      "state": "attack",
+      "peak": 0.02220463939011097,
+      "rms": 0.000761624094727387,
+      "activeSeconds": 0.61025,
+      "hash": "9b783189ef11c5066c4824f2fd3de13d9797ee011154556e676496dc5d73e0b6",
+      "counts": {
+        "spitter": 1,
+        "spitter:attack": 1
+      }
+    },
+    {
+      "type": "spitter",
+      "state": "hurt",
+      "peak": 0.06518685072660446,
+      "rms": 0.0038236554717835914,
+      "activeSeconds": 0.6985833333333333,
+      "hash": "e75ec67aac7e1f2582b6406948e6a73e0aa394d52254f1a620430f2230dd744e",
+      "counts": {
+        "spitter": 1,
+        "spitter:hurt": 1
+      }
+    },
+    {
+      "type": "spitter",
+      "state": "death",
+      "peak": 0.1294201910495758,
+      "rms": 0.005056011135894482,
+      "activeSeconds": 1.0976041666666667,
+      "hash": "d9792627a11f8a0b9baa4a0ffe8577c98e9654a97e6619c38c794dfdad701e2d",
+      "counts": {
+        "spitter": 1,
+        "spitter:death": 1
+      }
+    },
+    {
+      "type": "screamer",
+      "state": "idle",
+      "peak": 0.028789663687348366,
+      "rms": 0.003070875168584117,
+      "activeSeconds": 1.2773125,
+      "hash": "c64b3a9226a9438727b14591332d3d986270ea1263b623105ecdec6eb896a92b",
+      "counts": {
+        "screamer": 1,
+        "screamer:idle": 1
+      }
+    },
+    {
+      "type": "screamer",
+      "state": "attack",
+      "peak": 0.017769893631339073,
+      "rms": 0.0009003579404741156,
+      "activeSeconds": 0.6623333333333333,
+      "hash": "e96eeb726571c7e6b985c1d6dc98422870e856420a8f0c6489b8f2cebd85f79d",
+      "counts": {
+        "screamer": 1,
+        "screamer:attack": 1
+      }
+    },
+    {
+      "type": "screamer",
+      "state": "hurt",
+      "peak": 0.06516876816749573,
+      "rms": 0.003927021620486706,
+      "activeSeconds": 0.711875,
+      "hash": "b7a77c1c9caf648f2fb86f16620ae36d7c18bf06e8df1dd33a4f446d36e252a0",
+      "counts": {
+        "screamer": 1,
+        "screamer:hurt": 1
+      }
+    },
+    {
+      "type": "screamer",
+      "state": "death",
+      "peak": 0.11381024867296219,
+      "rms": 0.004417090553588158,
+      "activeSeconds": 1.0162916666666666,
+      "hash": "86a5eda67ee1814fed321619512a3a56cc3b1b1e54c2d21792449fd43078c5b0",
+      "counts": {
+        "screamer": 1,
+        "screamer:death": 1
+      }
+    },
+    {
+      "type": "bomber",
+      "state": "idle",
+      "peak": 0.037375036627054214,
+      "rms": 0.00219476426907491,
+      "activeSeconds": 1.0193541666666666,
+      "hash": "7c9e1cc4308cb8d106153b6ab369f108da9a0b0a927dc352ab207ca460a9be92",
+      "counts": {
+        "bomber": 1,
+        "bomber:idle": 1
+      }
+    },
+    {
+      "type": "bomber",
+      "state": "attack",
+      "peak": 0.043877653777599335,
+      "rms": 0.002396223188652075,
+      "activeSeconds": 0.8111041666666666,
+      "hash": "e72c7af1ab3880edbaaf4c542e3e4c21eeceb9bcfaf7a48892273786c0f87c83",
+      "counts": {
+        "bomber": 1,
+        "bomber:attack": 1
+      }
+    },
+    {
+      "type": "bomber",
+      "state": "hurt",
+      "peak": 0.06553246825933456,
+      "rms": 0.003794773193998223,
+      "activeSeconds": 0.6774166666666667,
+      "hash": "7e3bc3b31f049ea1e2dfcee5a87829b944b31a447e69a7c794ed41bf8f34f8d6",
+      "counts": {
+        "bomber": 1,
+        "bomber:hurt": 1
+      }
+    },
+    {
+      "type": "bomber",
+      "state": "death",
+      "peak": 0.10195678472518921,
+      "rms": 0.005725755857441306,
+      "activeSeconds": 1.2193125,
+      "hash": "b311b1cc9e6e7f8f62d2b32bd03b827cdec35361bd7495b4bc5a48e1653fb998",
+      "counts": {
+        "bomber": 1,
+        "bomber:death": 1
+      }
+    },
+    {
+      "type": "spider",
+      "state": "idle",
+      "peak": 0.04070524126291275,
+      "rms": 0.0024882920796986986,
+      "activeSeconds": 0.07352083333333333,
+      "hash": "8535d8676d6e0574d89d0bb24b560cce6d37ab65e22aa83a31d9dbe016a1c1a7",
+      "counts": {
+        "spider": 1,
+        "spider:idle": 1
+      }
+    },
+    {
+      "type": "spider",
+      "state": "attack",
+      "peak": 0.041546788066625595,
+      "rms": 0.0042173230984592705,
+      "activeSeconds": 0.4017291666666667,
+      "hash": "eee0ac4ce99bb071252e5eab36a37b0366ce975d56cd3a5f97956eb28abee544",
+      "counts": {
+        "spider": 1,
+        "spider:attack": 1
+      }
+    },
+    {
+      "type": "spider",
+      "state": "hurt",
+      "peak": 0.07098128646612167,
+      "rms": 0.0037418643474274715,
+      "activeSeconds": 0.6147916666666666,
+      "hash": "0b0b4101ea9827ad00c35506e94ef35bf407dfbb0594ac3dc14e54f7b943d0ed",
+      "counts": {
+        "spider": 1,
+        "spider:hurt": 1
+      }
+    },
+    {
+      "type": "spider",
+      "state": "death",
+      "peak": 0.08464204519987106,
+      "rms": 0.004111401157061116,
+      "activeSeconds": 0.8792708333333333,
+      "hash": "72c647ebcb570427ca9a6e5eed0404bee19f25bee8d40ce4f55f23aa2f30df7a",
+      "counts": {
+        "spider": 1,
+        "spider:death": 1
+      }
+    },
+    {
+      "type": "demon",
+      "state": "idle",
+      "peak": 0.05153316259384155,
+      "rms": 0.0041130052192646024,
+      "activeSeconds": 1.1721041666666667,
+      "hash": "dfad865bbff05066889c34fd821acf52592e1d25969d370eb7bb726ee98b8d60",
+      "counts": {
+        "demon": 1,
+        "demon:idle": 1
+      }
+    },
+    {
+      "type": "demon",
+      "state": "attack",
+      "peak": 0.07189697027206421,
+      "rms": 0.003335875989457137,
+      "activeSeconds": 1.2681666666666667,
+      "hash": "e012f15093c0f26432a72635e7588f0097af0d967e33391b39ddd4ac790accac",
+      "counts": {
+        "demon": 1,
+        "demon:attack": 1
+      }
+    },
+    {
+      "type": "demon",
+      "state": "hurt",
+      "peak": 0.08076449483633041,
+      "rms": 0.004011483157118225,
+      "activeSeconds": 0.5919583333333334,
+      "hash": "2e6efd1dcd856922dce85d252e4632d1c6262562639e08574584ac605cb2b5ac",
+      "counts": {
+        "demon": 1,
+        "demon:hurt": 1
+      }
+    },
+    {
+      "type": "demon",
+      "state": "death",
+      "peak": 0.13893845677375793,
+      "rms": 0.010527935963894019,
+      "activeSeconds": 1.1822916666666667,
+      "hash": "9d301d1cae9a2455820a126834917f185906e406557ce2466ced8b1657ebfe33",
+      "counts": {
+        "demon": 1,
+        "demon:death": 1
+      }
+    },
+    {
+      "type": "colossus",
+      "state": "idle",
+      "peak": 0.06592810899019241,
+      "rms": 0.005555499779716855,
+      "activeSeconds": 1.2964375,
+      "hash": "c1022dfe545d49eec42a0a93b19b37b9288174b13100d0cce736439a23c5eb69",
+      "counts": {
+        "colossus": 1,
+        "colossus:idle": 1
+      }
+    },
+    {
+      "type": "colossus",
+      "state": "attack",
+      "peak": 0.08871380239725113,
+      "rms": 0.003177558174563485,
+      "activeSeconds": 1.3551458333333333,
+      "hash": "60275d473cc26249882f042d5a5fb95216a45715922575a9c0a35976254bbfc6",
+      "counts": {
+        "colossus": 1,
+        "colossus:attack": 1
+      }
+    },
+    {
+      "type": "colossus",
+      "state": "hurt",
+      "peak": 0.09390366822481155,
+      "rms": 0.004076103822570014,
+      "activeSeconds": 0.592,
+      "hash": "4f0f42128f6850d97069fc915aa9fa3504d0b1696b28fc824c47cecc14560e9c",
+      "counts": {
+        "colossus": 1,
+        "colossus:hurt": 1
+      }
+    },
+    {
+      "type": "colossus",
+      "state": "death",
+      "peak": 0.1367911547422409,
+      "rms": 0.013652797328091517,
+      "activeSeconds": 1.2940625,
+      "hash": "9369c059b541ba0ef06f27d343ec147a0d3dd664f5e2fc711e67e82a2b16d549",
+      "counts": {
+        "colossus": 1,
+        "colossus:death": 1
+      }
+    },
+    {
+      "type": "guardian",
+      "state": "idle",
+      "peak": 0.037836622446775436,
+      "rms": 0.002763515940269985,
+      "activeSeconds": 1.3370208333333333,
+      "hash": "3332b3e34f8506cc1589a1fcba429a9d56df25f3752def71b2f5f9f999185fd3",
+      "counts": {
+        "guardian": 1,
+        "guardian:idle": 1
+      }
+    },
+    {
+      "type": "guardian",
+      "state": "attack",
+      "peak": 0.08169330656528473,
+      "rms": 0.0030364130912981847,
+      "activeSeconds": 1.0963125,
+      "hash": "378f7933339aa190d14533a755888cc54d4af720a7d57ea53b4e23ac151daf8e",
+      "counts": {
+        "guardian": 1,
+        "guardian:attack": 1
+      }
+    },
+    {
+      "type": "guardian",
+      "state": "hurt",
+      "peak": 0.06396035850048065,
+      "rms": 0.004027656509714263,
+      "activeSeconds": 0.7884166666666667,
+      "hash": "eb1a4d268645abb190e85555b15fa0c098160150856d5a15c047d33329240bbd",
+      "counts": {
+        "guardian": 1,
+        "guardian:hurt": 1
+      }
+    },
+    {
+      "type": "guardian",
+      "state": "death",
+      "peak": 0.17518572509288788,
+      "rms": 0.010433718366557293,
+      "activeSeconds": 1.5291041666666667,
+      "hash": "33ad87c44a14f26ede48692f1fe8f519653c412f38e1e5315a195f0aa815cc3c",
+      "counts": {
+        "guardian": 1,
+        "guardian:death": 1
+      }
+    },
+    {
+      "type": "caveguard",
+      "state": "idle",
+      "peak": 0.03003825806081295,
+      "rms": 0.002237789812372649,
+      "activeSeconds": 1.1180833333333333,
+      "hash": "4dc78695257c9c1bbe850dc7cfc24b457005c486e40084f7505287a5df430421",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:idle": 1
+      }
+    },
+    {
+      "type": "caveguard",
+      "state": "attack",
+      "peak": 0.043639227747917175,
+      "rms": 0.0016378758593795105,
+      "activeSeconds": 0.8821666666666667,
+      "hash": "c5c7cfe1569ebade8ddaafbaf92c809b9314133cef751b44d7c9c46a435fe5e4",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:attack": 1
+      }
+    },
+    {
+      "type": "caveguard",
+      "state": "hurt",
+      "peak": 0.11531946063041687,
+      "rms": 0.004189436162168148,
+      "activeSeconds": 0.8462083333333333,
+      "hash": "a5730a4ccffe33751b2690328780341c9eb96e88469b2204436fd1f3ee32ffc3",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:hurt": 1
+      }
+    },
+    {
+      "type": "caveguard",
+      "state": "death",
+      "peak": 0.10850346833467484,
+      "rms": 0.005753535662990676,
+      "activeSeconds": 1.2371041666666667,
+      "hash": "94eb53bc48f927349c289e1cb7335c457951b75758d93fb1aaf2d4188e2887ce",
+      "counts": {
+        "caveguard": 1,
+        "caveguard:death": 1
+      }
+    }
+  ],
+  "preserved": [
+    {
+      "type": "shambler",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "shambler",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "shambler",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "feral",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": true
+    },
+    {
+      "type": "feral",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "feral",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "leaper",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "leaper",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "leaper",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "drowned",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "drowned",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "drowned",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "military",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "military",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "military",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "brute",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "brute",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": true
+    },
+    {
+      "type": "brute",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "spitter",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "spitter",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "spitter",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "screamer",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": true
+    },
+    {
+      "type": "screamer",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "screamer",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "bomber",
+      "state": "idle",
+      "specificationsUnchanged": true,
+      "identicalWaveform": true
+    },
+    {
+      "type": "bomber",
+      "state": "attack",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    },
+    {
+      "type": "bomber",
+      "state": "death",
+      "specificationsUnchanged": true,
+      "identicalWaveform": false
+    }
+  ],
+  "training": [
+    {
+      "state": "idle",
+      "peak": 0.04235554486513138,
+      "rms": 0.0052848195407806196,
+      "activeSeconds": 2.9789791666666665,
+      "hash": "a0ae55692899c38e438baf478d299df5c23891534216742fff32460151f5e139",
+      "counts": {
+        "guardian": 1,
+        "guardian:idle": 1
+      }
+    },
+    {
+      "state": "attack",
+      "peak": 0.07563776522874832,
+      "rms": 0.005465700384726595,
+      "activeSeconds": 2.979604166666667,
+      "hash": "ae28da23e10927ff3cec25fa0a1cace9b261627cce046a814d4cdb4e7fbdb9f7",
+      "counts": {
+        "guardian": 1,
+        "guardian:attack": 1
+      }
+    },
+    {
+      "state": "hurt",
+      "peak": 0.06020326167345047,
+      "rms": 0.0059319503777740925,
+      "activeSeconds": 2.9785625,
+      "hash": "32ddf61489f5f92695ed0bfa4b3983b3864ec21747e5a7e7c60a14ec188b92a9",
+      "counts": {
+        "guardian": 1,
+        "guardian:hurt": 1
+      }
+    },
+    {
+      "state": "death",
+      "peak": 0.17629867792129517,
+      "rms": 0.011566066444953482,
+      "activeSeconds": 2.97975,
+      "hash": "f04ab0281d8a70f4cc36a45b99c2f79fc4ebaf5608f35bcc833506f383ade7c1",
+      "counts": {
+        "guardian": 1,
+        "guardian:death": 1
+      }
+    }
+  ],
+  "errors": [],
+  "summary": "56 audible, finite, distinct state renders; 27 established walker voice specifications unchanged; 4 Training states audible; zero browser errors"
+}

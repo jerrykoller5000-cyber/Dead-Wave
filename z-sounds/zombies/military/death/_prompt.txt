@@ -1,0 +1,9 @@
+#31 military-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A zombie soldier's dying groan muffled through a gas mask, fading into a filtered wheezing last breath. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('military', 'death')

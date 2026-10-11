@@ -1,0 +1,9 @@
+#102 turrets/heavy-turret-fire
+TRY: synthesized and already decent; record it, compare, keep the better one
+Now: turretShot (GUN turretHeavy)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy automated turret firing two big shots, deep thumping booms. No music, no voice.

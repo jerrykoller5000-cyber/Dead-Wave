@@ -1,0 +1,12 @@
+PASS off-hand pistol animates its own parts (slide, mag, flash, laser)
+PASS off-hand uzi animates its own parts (mag, flash, laser)
+PASS off-hand revolver animates its own parts (mag, flash, laser, cylinder, hammer)
+PASS all twelve guns: 236 meshes after merging
+PASS ak: reload moves the magazine
+PASS m4: reload moves the magazine
+PASS pistol: reload moves the magazine
+PASS shotgun: reload moves the pump
+PASS sniper: reload moves the magazine
+PASS revolver: reload moves the magazine
+PASS launcher: reload moves the magazine
+PASS minigun: reload moves the magazine

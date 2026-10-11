@@ -1,0 +1,9 @@
+#130 world/crickets-night  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: ambience crickets (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+Crickets and night insects in a forest clearing, steady, seamless. No music, no voice.

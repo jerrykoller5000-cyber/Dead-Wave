@@ -1,0 +1,9 @@
+#60 weapon-foley/chainsaw-rev
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: chainsawSetRev (synth)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 2 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A chainsaw revving to full throttle and holding, a loud screaming two-stroke engine. No music, no voice.

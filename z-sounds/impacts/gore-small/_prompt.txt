@@ -1,0 +1,9 @@
+#95 impacts-gore-small
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A limb tearing off a zombie: a wet rip, a crunch of bone and a splatter. No voice, no music.
+
+In the game: gore(big=false) — a limb or head coming off

@@ -46,11 +46,15 @@
     for (let i = 0; i < pts.length; i += 3) if (pts[i + 2] < minZ + 0.025) { bx += pts[i]; bn++; ymin = Math.min(ymin, pts[i + 1]); ymax = Math.max(ymax, pts[i + 1]); }
     const tInv = new THREE.Matrix4().copy(ud.torsoG.matrixWorld).invert();
     const butt = gun.localToWorld(new THREE.Vector3(bx / bn, (ymin + ymax) / 2, minZ)).applyMatrix4(tInv);
-        const handR = ud.elbowRG.localToWorld(new THREE.Vector3(-0.01, -0.26, 0.12)), handL = ud.elbowLG.localToWorld(new THREE.Vector3(0.02, -0.27, 0.13));
+    // CU-100: each hand where the game says it closes (the middle of the fist's channel; the hand point where a hold still
+    // aims it); before, the hand point every hold aimed.
+    const gp = T.handsDbg && T.handsDbg.gripPoint;
+    const handR = gp ? gp('R', V()) : ud.elbowRG.localToWorld(new THREE.Vector3(-0.01, -0.26, 0.12)), handL = gp ? gp('L', V()) : ud.elbowLG.localToWorld(new THREE.Vector3(0.02, -0.27, 0.13));
     // The hold's own grip and forend points on the gun (the test page's geometry is not the real mesh, so not the nearest vertex).
     const hold = T.getShoulderDbg().holds[w];
     const gripW = gun.localToWorld(new THREE.Vector3(...hold.grip));
     const foreL = hold.fore === 'pump' ? gun.userData.pump.position.clone().add(new THREE.Vector3(0, -0.045, 0)) : new THREE.Vector3(...hold.fore);
+    if (T.handsDbg && T.handsDbg.gripPoint && !T.handsDbg.HANDS.fore[w]) foreL.y -= gun.userData.cu100Drop || 0;   // CU-100: the forend's lower edge
     const foreW = gun.localToWorld(foreL);
     const fwd = new THREE.Vector3(0, 0, 1).transformDirection(gun.matrixWorld);
     const muz = gun.localToWorld(gun.userData.muzzleLocal.clone());
@@ -60,7 +64,14 @@
     const eye = ud.headG.localToWorld(new THREE.Vector3(0.045, 0.215, 0.125));
     const d = V().subVectors(eye, sight); const eyeToSight = d.addScaledVector(fwd, -d.dot(fwd)).length();
     const sh = T.getShoulderDbg();
-    return { butt, shoulder: ud.armRG.position.clone(), handR: handR.distanceTo(gripW), handL: handL.distanceTo(foreW), aimErr, eyeToSight, sh,
+    // CU-100: a long gun's support hand may sit back along its forend when the anchor is out of reach (by up to
+    // WRIST.slideMax); there it is measured off the forend's line.
+    let dL = handL.distanceTo(foreW);
+    if (gp && Array.isArray(hold.fore) && !T.handsDbg.HANDS.fore[w]) {
+      const rel = handL.clone().sub(foreW), a = rel.dot(fwd);
+      if (a < 0 && -a <= T.handsDbg.WRIST.slideMax + 0.005) dL = rel.addScaledVector(fwd, -a).length();
+    }
+    return { butt, shoulder: ud.armRG.position.clone(), handR: handR.distanceTo(gripW), handL: dL, aimErr, eyeToSight, sh,
       headPos: ud.headG.position.clone() };
   };
   // The arm IK needs Matrix4.transpose; the test page's three stand-in (tools/tests/fakethree.mjs) has it as a stub

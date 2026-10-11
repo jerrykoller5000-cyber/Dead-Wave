@@ -1,0 +1,1082 @@
+[
+ {
+  "gun": "pistol",
+  "state": "stand",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "run",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "crouch",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol",
+  "state": "fire",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "stand",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "run",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.17,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "crouch",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver",
+  "state": "fire",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "stand",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "ads",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "walk",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "run",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "crouch",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "turn",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi",
+  "state": "fire",
+  "R": 0.018,
+  "L": 0.001,
+  "barrel": 10.68,
+  "slide": 0
+ },
+ {
+  "gun": "m4",
+  "state": "stand",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "m4",
+  "state": "ads",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0.001
+ },
+ {
+  "gun": "m4",
+  "state": "walk",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0.001
+ },
+ {
+  "gun": "m4",
+  "state": "run",
+  "R": 0,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0.043
+ },
+ {
+  "gun": "m4",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "m4",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "m4",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0.023
+ },
+ {
+  "gun": "m4",
+  "state": "turn",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0.014
+ },
+ {
+  "gun": "m4",
+  "state": "fire",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 21.88,
+  "slide": 0
+ },
+ {
+  "gun": "ak",
+  "state": "stand",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0.018
+ },
+ {
+  "gun": "ak",
+  "state": "ads",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0.044
+ },
+ {
+  "gun": "ak",
+  "state": "walk",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.035
+ },
+ {
+  "gun": "ak",
+  "state": "run",
+  "R": 0,
+  "L": 0.007,
+  "barrel": 0,
+  "slide": 0.08
+ },
+ {
+  "gun": "ak",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.018
+ },
+ {
+  "gun": "ak",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0.029
+ },
+ {
+  "gun": "ak",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.006,
+  "barrel": 0,
+  "slide": 0.061
+ },
+ {
+  "gun": "ak",
+  "state": "turn",
+  "R": 0,
+  "L": 0.005,
+  "barrel": 0,
+  "slide": 0.046
+ },
+ {
+  "gun": "ak",
+  "state": "fire",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 18.7,
+  "slide": 0
+ },
+ {
+  "gun": "aa12",
+  "state": "stand",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.007
+ },
+ {
+  "gun": "aa12",
+  "state": "ads",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0.02
+ },
+ {
+  "gun": "aa12",
+  "state": "walk",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0.015
+ },
+ {
+  "gun": "aa12",
+  "state": "run",
+  "R": 0,
+  "L": 0.005,
+  "barrel": 0,
+  "slide": 0.052
+ },
+ {
+  "gun": "aa12",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "aa12",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "aa12",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.03
+ },
+ {
+  "gun": "aa12",
+  "state": "turn",
+  "R": 0,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0.031
+ },
+ {
+  "gun": "aa12",
+  "state": "fire",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 30.28,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "stand",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "ads",
+  "R": 0,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "walk",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "run",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "turn",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "shotgun",
+  "state": "fire",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.01,
+  "slide": 0
+ },
+ {
+  "gun": "sniper",
+  "state": "stand",
+  "R": 0,
+  "L": 0.005,
+  "barrel": 0,
+  "slide": 0.069
+ },
+ {
+  "gun": "sniper",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0.085
+ },
+ {
+  "gun": "sniper",
+  "state": "walk",
+  "R": 0,
+  "L": 0.005,
+  "barrel": 0,
+  "slide": 0.073
+ },
+ {
+  "gun": "sniper",
+  "state": "run",
+  "R": 0,
+  "L": 0.009,
+  "barrel": 0,
+  "slide": 0.116
+ },
+ {
+  "gun": "sniper",
+  "state": "strafe",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.055
+ },
+ {
+  "gun": "sniper",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.003,
+  "barrel": 0,
+  "slide": 0.05
+ },
+ {
+  "gun": "sniper",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.007,
+  "barrel": 0,
+  "slide": 0.096
+ },
+ {
+  "gun": "sniper",
+  "state": "turn",
+  "R": 0,
+  "L": 0.009,
+  "barrel": 0,
+  "slide": 0.099
+ },
+ {
+  "gun": "sniper",
+  "state": "fire",
+  "R": 0,
+  "L": 0.005,
+  "barrel": 0,
+  "slide": 0.065
+ },
+ {
+  "gun": "launcher",
+  "state": "stand",
+  "R": 0,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "ads",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "walk",
+  "R": 0,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "run",
+  "R": 0,
+  "L": 0.013,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "strafe",
+  "R": 0,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.004,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "turn",
+  "R": 0,
+  "L": 0.015,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "launcher",
+  "state": "fire",
+  "R": 0,
+  "L": 0.002,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "stand",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "ads",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "walk",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "run",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "strafe",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "crouch",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "turn",
+  "R": 0,
+  "L": 0.021,
+  "barrel": 0.35,
+  "slide": 0
+ },
+ {
+  "gun": "minigun",
+  "state": "fire",
+  "R": 0.016,
+  "L": 0,
+  "barrel": 6.77,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "stand",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "ads",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "walk",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "run",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "strafe",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "crouch",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "turn",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "flamer",
+  "state": "fire",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.21,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "stand",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "run",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "crouch",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "chainsaw",
+  "state": "fire",
+  "R": 0.011,
+  "L": 0,
+  "barrel": 0,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "stand",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "walk",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "run",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "pistol*2",
+  "state": "fire",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "stand",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "ads",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "walk",
+  "R": 0,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "run",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "crouch-walk",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0,
+  "barrel": 0.14,
+  "slide": 0
+ },
+ {
+  "gun": "uzi*2",
+  "state": "fire",
+  "R": 0.025,
+  "L": 0.024,
+  "barrel": 13.53,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "stand",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "ads",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "walk",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "run",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.17,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "strafe",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "crouch",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "crouch-walk",
+  "R": 0,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "turn",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ },
+ {
+  "gun": "revolver*2",
+  "state": "fire",
+  "R": 0.001,
+  "L": 0.001,
+  "barrel": 0.16,
+  "slide": 0
+ }
+]

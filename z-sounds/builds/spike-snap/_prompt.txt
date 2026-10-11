@@ -1,0 +1,9 @@
+#99 builds/spike-snap
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: spikeSnap()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A spike trap snapping shut on something, a sharp spring and a wet crunch. No music, no voice.

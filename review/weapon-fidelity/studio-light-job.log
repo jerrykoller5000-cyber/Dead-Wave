@@ -1,0 +1,5 @@
+{
+ "background": "world hidden for review; plain scene background",
+ "lighting": "game sunlight plus photo fill",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

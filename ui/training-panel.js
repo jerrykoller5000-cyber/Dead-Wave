@@ -11,8 +11,10 @@ const say = (key, params, fallback) => {
 
 export const TRAINING_COUNTS = Object.freeze([1, 3, 5, 10]);
 
-// types: [{ key, name }]; onSpawn(key, count) -> number spawned; onClear() -> number cleared; onClose()
-export function mountTrainingPanel({ doc = document, types = [], onSpawn = () => 0, onClear = () => 0, onClose = () => {}, alive = () => 0 } = {}) {
+// onSpawn queues a deployment; pending returns its countdown while it is queued.
+// CL-151: onLayout lays the standard test builds in front of the gate (laidOut: how many of them still stand).
+// CU-123: onClearLayout takes that set away. The button shows only while some of it is still standing.
+export function mountTrainingPanel({ doc = document, types = [], onSpawn = () => 0, onClear = () => 0, onClose = () => {}, alive = () => 0, pending = () => null, onLayout = null, onClearLayout = null, laidOut = () => 0 } = {}) {
   const el = (tag, cls, txt) => { const e = doc.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
   const root = el('section'); root.id = 'trainingPanel'; root.hidden = true;
   root.setAttribute('role', 'dialog'); root.setAttribute('aria-labelledby', 'trainingPanelTitle');
@@ -26,10 +28,18 @@ export function mountTrainingPanel({ doc = document, types = [], onSpawn = () =>
   const countRow = el('div', 'tp-counts');
   const status = el('p', 'tp-status'); status.setAttribute('aria-live', 'polite');
   const actions = el('div', 'tp-actions');
+  const callRow = el('div', 'tp-row');
+  const toolRow = el('div', 'tp-row tp-tools');
   const spawnBtn = el('button', 'tp-spawn'); spawnBtn.type = 'button';
   const clearBtn = el('button', 'tp-clear', say('training.clear', {}, 'Clear all')); clearBtn.type = 'button';
   const closeBtn = el('button', 'tp-close', say('training.close', {}, 'Close')); closeBtn.type = 'button';
-  actions.append(spawnBtn, clearBtn, closeBtn);
+  const layoutBtn = onLayout ? el('button', 'tp-layout') : null;
+  if (layoutBtn) layoutBtn.type = 'button';
+  const clearLayoutBtn = onClearLayout ? el('button', 'tp-clear tp-clear-layout') : null;
+  if (clearLayoutBtn) clearLayoutBtn.type = 'button';
+  callRow.append(spawnBtn, closeBtn);
+  toolRow.append(clearBtn, ...(layoutBtn ? [layoutBtn] : []), ...(clearLayoutBtn ? [clearLayoutBtn] : []));
+  actions.append(callRow, toolRow);
   card.append(head, el('h3', null, say('training.kind', {}, 'Kind')), typeGrid, el('h3', null, say('training.count', {}, 'How many')), countRow, status, actions);
   root.append(card);
   doc.body.append(root);
@@ -52,14 +62,27 @@ export function mountTrainingPanel({ doc = document, types = [], onSpawn = () =>
     }
     const name = (types.find((t) => t.key === pick) || {}).name || '';
     spawnBtn.textContent = say('training.spawn', { count, kind: name }, 'Send in {count} · {kind}');
-    spawnBtn.disabled = !pick;
-    const n = alive();
-    status.textContent = n ? say('training.alive', { count: n }, '{count} in the build room') : say('training.none', {}, 'The build room is empty.');
+    const queued = pending(), n = alive();
+    spawnBtn.disabled = !pick || !!queued || n > 0;
+    spawnBtn.title = n > 0 ? text('training.finishGroup') : '';
+    clearBtn.textContent = say(queued ? 'training.cancelClear' : 'training.clear', {}, queued ? 'Cancel / clear all' : 'Clear all zombies');
+    if (layoutBtn) {
+      const laid = laidOut();
+      layoutBtn.textContent = laid ? say('training.layoutAgain', {}, 'Rebuild the test builds') : say('training.layout', {}, 'Lay out test builds');
+      layoutBtn.title = say('training.layoutHint', {}, 'A barricade, sandbags, three walls, wire and a light turret in front of the gate');
+      if (clearLayoutBtn) {
+        clearLayoutBtn.hidden = laid <= 0;
+        clearLayoutBtn.textContent = say('training.layoutClear', {}, 'Clear test defenses');
+      }
+    }
+    status.textContent = queued ? text('training.queued', { seconds: queued.seconds, count: queued.count }) : n ? say('training.alive', { count: n }, '{count} in the build room') + ' · ' + text('training.finishGroup') : say('training.none', {}, 'The build room is empty.');
   }
   function show() { if (open) return; open = true; root.hidden = false; render(); spawnBtn.focus({ preventScroll: true }); }
   function hide() { if (!open) return; open = false; root.hidden = true; onClose(); }
-  spawnBtn.addEventListener('click', () => { if (pick) onSpawn(pick, count); hide(); });
+  spawnBtn.addEventListener('click', () => { if (!pick || pending() || alive() > 0) { render(); return; } onSpawn(pick, count); hide(); });
   clearBtn.addEventListener('click', () => { onClear(); render(); });
+  if (layoutBtn) layoutBtn.addEventListener('click', () => { onLayout(); render(); });
+  if (clearLayoutBtn) clearLayoutBtn.addEventListener('click', () => { onClearLayout(); render(); });
   closeBtn.addEventListener('click', hide);
   root.addEventListener('keydown', (e) => { if (e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); hide(); } });
   return { open: show, close: hide, isOpen: () => open, render, element: root, pick: (k, n) => { if (k) pick = k; if (n) count = n; render(); },
@@ -67,18 +90,43 @@ export function mountTrainingPanel({ doc = document, types = [], onSpawn = () =>
 }
 
 // The strip at the top: where he is, the targets he's dropped, and what's loose in the build room.
+// CL-144: and the score: this string's, the best of the visit's strings, and each hit's points as it lands (a pop
+// under the strip: the zone, its points, the lane's multiplier, the total).
 export function mountTrainingHud({ doc = document } = {}) {
   const el = doc.createElement('div'); el.id = 'trainingHud'; el.hidden = true;
   const name = doc.createElement('b'); name.textContent = say('training.title', {}, 'Training Ground');
   const stats = doc.createElement('span');
-  el.append(name, stats);
-  (doc.getElementById('hud') || doc.body).append(el);
+  const score = doc.createElement('span'); score.className = 'training-score';
+  el.append(name, stats, score);
+  const pop = doc.createElement('div'); pop.id = 'trainingScorePop'; pop.hidden = true; pop.setAttribute('aria-live', 'polite');
+  let popId = 0;
+  const countdown = doc.createElement('div'); countdown.id = 'trainingCountdown'; countdown.hidden = true;
+  countdown.setAttribute('role','status'); countdown.setAttribute('aria-live','polite'); countdown.setAttribute('aria-atomic','true');
+  const label=doc.createElement('b');label.textContent=text('training.countdownTitle');
+  const number=doc.createElement('strong'), detail=doc.createElement('span');
+  countdown.append(label,number,detail);
+  (doc.getElementById('hud') || doc.body).append(el,countdown,pop);
   return {
     element: el,
-    show(on) { el.hidden = !on; },
-    set({ hits = 0, alive = 0 } = {}) {
+    show(on) { el.hidden = !on; if(!on){countdown.hidden=true;pop.hidden=true;} },
+    setDeployment(plan) {
+      countdown.hidden=!plan||el.hidden;
+      if(!plan)return;
+      number.textContent=String(plan.seconds);
+      detail.textContent=text('training.countdownDetail',{count:plan.count,kind:say('enemy.'+plan.kind+'.name',{},plan.kind)});
+    },
+    set({ hits = 0, alive = 0, score: pts = null, best = 0, last = null } = {}) {
       const t = say('training.hudHits', { count: hits }, 'Targets down {count}') + (alive ? ' · ' + say('training.hudAlive', { count: alive }, '{count} zombies loose') : '');
       if (stats.textContent !== t) stats.textContent = t;
+      const st = pts == null ? '' : say('training.hudScore', { score: pts }, 'Score {score}') + (best ? ' · ' + say('training.hudBest', { score: best }, 'Best {score}') : '');
+      if (score.textContent !== st) score.textContent = st;
+      if (last && last.id !== popId && !el.hidden) {
+        popId = last.id;
+        const zone = say('training.zone.' + last.zone, {}, ({ head: 'Head ring', bull: 'Bullseye', ring: 'Chest ring', plate: 'Plate' })[last.zone] || last.zone);
+        pop.textContent = '+' + last.total + '  ' + zone + ' ' + last.points + (last.mult !== 1 ? ' × ' + last.mult : '');
+        pop.dataset.zone = last.zone;
+        pop.hidden = false; pop.classList.remove('on'); void pop.offsetWidth; pop.classList.add('on');
+      }
     }
   };
 }

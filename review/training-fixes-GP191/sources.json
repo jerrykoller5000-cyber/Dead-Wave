@@ -1,0 +1,17 @@
+[
+  {
+    "path": "index.html",
+    "before": "ef601a1c233d6ce3b862fbf3aa1bb962118d0a62392922520b5db193d5b3c4d4",
+    "after": "d5a6b734d1c3933894ecff73f1c96379a6f2459a2c22ab28e5c0b535389838e2"
+  },
+  {
+    "path": "world/training.js",
+    "before": "1520e7590282d4e7600cbb47d388a7bc45d453d301e05d0b39f749f4ff004658",
+    "after": "741befb2acd5e403509ec826aa767413b91db0663fb667db666ef6544f73ef7d"
+  },
+  {
+    "path": "world/training-props.js",
+    "before": "ff79e7d3a116566841951d752aa0b8b47ef4ddbf804de9935aa04c6be71fadd0",
+    "after": "efd98d57808f78340e3a161bef5b59e9a017132bf861e0ed2d56343f37b22f19"
+  }
+]

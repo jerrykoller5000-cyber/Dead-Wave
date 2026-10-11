@@ -1,0 +1,9 @@
+#158 vehicles/floatplane-takeoff
+MISSING: the game makes no sound here now
+Now: (silent)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A floatplane throttling up and taking off from a lake, engines roaring and spray, flying away. No music, no voice.

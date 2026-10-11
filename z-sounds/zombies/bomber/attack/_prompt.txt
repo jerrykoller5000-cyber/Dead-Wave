@@ -1,0 +1,9 @@
+#49 bomber-attack
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A bloated zombie's swelling, strained groan as its belly stretches and creaks, about to burst. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('bomber', 'attack')

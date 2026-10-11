@@ -1,0 +1,5 @@
+[
+  { "name": "idle", "weapon": "pistol", "settle": 0.2, "eval": "if (!T.isUnarmed()) T.toggleHolster(); __step(50);", "views": ["body", "hands-front"] },
+  { "name": "walk", "weapon": "pistol", "keys": ["KeyW"], "settle": 0.2, "eval": "if (!T.isUnarmed()) T.toggleHolster(); __step(40);", "frames": [0, 15], "views": ["body"] },
+  { "name": "run", "weapon": "pistol", "keys": ["KeyW", "ShiftLeft"], "settle": 0.2, "eval": "if (!T.isUnarmed()) T.toggleHolster(); __step(40);", "frames": [0, 10], "views": ["body"] }
+]

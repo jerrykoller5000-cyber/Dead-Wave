@@ -1,4 +1,4 @@
-"""Dead-Wave · Fog Night's own score (CL-77, P-58).
+"""Grave Shift · Fog Night's own score (CL-77, P-58).
 
 Night 14 is Fog Night (GB-87): the mist rolls in at the alarm and you can't see past 30 m. Its score is the run's own
 song (First Blood's family, tools/hordes.py) on night 14's tier, D minor, a little slower (112 bpm), heard through

@@ -1,0 +1,48 @@
+PASS poke APIs exported
+PASS getCavePokeState exported
+PASS beginScriptedKill exported
+PASS GB-35 chase APIs exported
+PASS startMatch leaves prep
+PASS at least two caves
+PASS refuse when player far from mouth
+PASS refuse beyond 20 m (26 m out front)
+PASS a shot into the mouth from 26 m does nothing
+PASS nor does it count as the warning
+PASS a new run starts unwarned
+PASS the first shot within 20 m is taken: the warning
+PASS the first poke of the run brings nothing out
+PASS warning publishes the aggro (screech) cue with warning:true [aggro:true]
+PASS run marked warned at cave 0
+PASS the eyes: warn level 2 (was 0)
+PASS the camera nudge: shake 0.27000000000000024
+PASS the warning does not spend the cave
+PASS the rest of the burst lands in the grace (2.5 s) and does nothing
+PASS the eyes close after 3 s, back to level 0 (now 0)
+PASS the second shot within 20 m brings the guardian out
+PASS guardian chase running
+PASS no crawl-in snatch: the kill waits until he reaches the marine
+PASS far too fast to outrun: 27 m/s vs sprint 11.8
+PASS cave-guardian aggro event, warning:false
+PASS no fightable poke guardian spawned
+PASS cave marked used for the day
+PASS same cave blocked after poke
+PASS caught while running at 1.3x sprint (ran 43.1 m)
+PASS it went round the solid on its line (closest 1.92 m, steered 22)
+PASS crashed through the wall put in its way (placed d 15.4, smashed 1, down at 9.3 m)
+PASS leg grab plays the drag variant
+PASS grabbed out on the apron, not at the lip
+PASS cave-guardian grab event
+FAIL drag finished, kill timeline resumed at the fade
+FAIL dragged to the mouth (closest 13.47 m from the lip)
+PASS camera follows the drag (234/234 frames within 10 m)
+PASS thrown-out cutscene plays after the drag
+PASS cine aborted for second cave
+PASS second cave poke ok
+PASS second cave guardian out on its first poke: the warning is once a run
+PASS second aggro event
+PASS abort clears a running chase
+PASS both caves spent for the day
+PASS explosive also blocked when spent
+PASS startPrep clears used caves
+PASS the run stays warned across the day
+PASS poke works again after day reset, and comes straight out

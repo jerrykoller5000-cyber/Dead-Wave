@@ -1,0 +1,3 @@
+Guardian night
+Used for: A short cue: a giant boss approaches
+The game plays now: assets/soundtrack/sting_guardian (stings.guardian)

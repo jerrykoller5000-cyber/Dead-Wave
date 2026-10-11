@@ -1,0 +1,9 @@
+#10 feral-death
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+
+Duration: 1.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A feral zombie's dying shriek breaking into a hoarse falling wheeze and a last choked breath. Close-up, dry. No words, no music.
+
+In the game: zombieVoice('feral', 'death')

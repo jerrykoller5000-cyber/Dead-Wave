@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "target": "player",
+      "cam": {
+        "fov": 48,
+        "x": 7,
+        "y": -187,
+        "z": -635.5,
+        "tx": 0,
+        "ty": -199.6,
+        "tz": -651.5
+      },
+      "ui": true,
+      "time": "midnight",
+      "size": "1440x900",
+      "out": "review/nvg-pvs14/after/training.png"
+    },
+    {
+      "target": "player",
+      "cam": {
+        "fov": 48,
+        "x": 12,
+        "y": -178,
+        "z": -625.5,
+        "tx": 0,
+        "ty": -199.5,
+        "tz": -654.5
+      },
+      "ui": true,
+      "time": "midnight",
+      "size": "1440x900",
+      "out": "review/nvg-pvs14/after/wide.png"
+    }
+  ],
+  "out": "review/nvg-pvs14/after",
+  "cols": 2,
+  "tile": 720,
+  "sheet": true
+}

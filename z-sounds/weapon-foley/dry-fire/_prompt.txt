@@ -1,0 +1,9 @@
+#47 weapon-foley/dry-fire  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: foley dryFire
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.3 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A gun's hammer falling on an empty chamber, a hollow dry click. No music, no voice.

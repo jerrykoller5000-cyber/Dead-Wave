@@ -1,0 +1,9 @@
+#107 turrets/mortar-dismount
+MISSING: the game makes no sound here now
+Now: (silent: dismountMortar)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A soldier standing up from a mortar, gear rattling. No music, no voice.

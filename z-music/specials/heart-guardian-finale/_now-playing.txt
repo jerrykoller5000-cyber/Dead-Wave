@@ -1,0 +1,3 @@
+The heart: the guardian's last fight
+Used for: The guardian's last fight in the heart (plays by phase)
+The game plays now: assets/soundtrack/fight_heart_sections

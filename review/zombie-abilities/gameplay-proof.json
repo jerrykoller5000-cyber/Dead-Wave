@@ -1,0 +1,127 @@
+{
+  "beforeLoadSeconds": 13.096,
+  "beforeSetup": {
+    "training": true,
+    "room": {
+      "minX": -44,
+      "maxX": -8,
+      "minZ": -652,
+      "maxZ": -612
+    },
+    "floor": -200
+  },
+  "beforePerf": {
+    "fps": 59.772863119877265,
+    "low": 45.871559639298525,
+    "worst": 21.799999997019768,
+    "hitches": 0,
+    "frames": 60
+  },
+  "beforeErrors": [],
+  "afterLoadSeconds": 20.182,
+  "setup": {
+    "training": true,
+    "room": {
+      "minX": -44,
+      "maxX": -8,
+      "minZ": -652,
+      "maxZ": -612
+    },
+    "floor": -200
+  },
+  "attacks": [
+    {
+      "type": "demon",
+      "winding": "windup",
+      "damage": 24,
+      "shots": 1,
+      "state": {
+        "clock": 8.681599999994042,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 0,
+          "trailDrops": 0,
+          "directHits": 1,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 0,
+          "trails": 0
+        }
+      },
+      "delta": {
+        "fireballs": 1,
+        "stones": 0
+      },
+      "movement": 0,
+      "props": true
+    },
+    {
+      "type": "colossus",
+      "winding": "windup",
+      "damage": 80,
+      "shots": 1,
+      "state": {
+        "clock": 12.751999999992597,
+        "domain": "training",
+        "shots": 0,
+        "trails": 0,
+        "counts": {
+          "fireballs": 1,
+          "stones": 1,
+          "trailDrops": 0,
+          "directHits": 2,
+          "blocked": 0,
+          "acidHits": 0
+        },
+        "pools": {
+          "fireballs": 1,
+          "stones": 1,
+          "trails": 0
+        }
+      },
+      "delta": {
+        "fireballs": 0,
+        "stones": 1
+      },
+      "movement": 0,
+      "props": true
+    }
+  ],
+  "closeDemon": {
+    "stage": "cooldown",
+    "fireballs": 0,
+    "charging": true
+  },
+  "trail": {
+    "drops": 4,
+    "stationary": 4,
+    "damage": 12,
+    "elevatedDamage": 0,
+    "cleared": {
+      "clock": 15.115299999997088,
+      "domain": "training",
+      "shots": 0,
+      "trails": 0,
+      "counts": {
+        "fireballs": 1,
+        "stones": 1,
+        "trailDrops": 4,
+        "directHits": 2,
+        "blocked": 0,
+        "acidHits": 4
+      },
+      "pools": {
+        "fireballs": 1,
+        "stones": 1,
+        "trails": 4
+      }
+    }
+  },
+  "failure": "Error: evaluate failed: TypeError: Cannot read properties of null (reading 'userData')\n    at <anonymous>:1:307\n    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:131:13)\n    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/zombie-abilities/check.mjs:33:15"
+}

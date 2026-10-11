@@ -1,0 +1,9 @@
+#134 world/thunder  (start here)
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: thunder()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 6 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A distant rolling thunder clap rumbling across mountains. No music, no voice.

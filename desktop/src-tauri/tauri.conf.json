@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Dead-Wave",
+  "productName": "Grave Shift",
   "version": "../../package.json",
   "identifier": "com.deadwave.game",
   "build": { "frontendDist": "./boot" },

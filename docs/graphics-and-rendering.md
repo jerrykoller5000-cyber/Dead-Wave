@@ -42,7 +42,7 @@ stays at 5-10 ms a frame even in a fight, so the game is GPU-bound there, not dr
 
 ## The renderer
 
-Dead-Wave runs on Three.js `WebGPURenderer`. Given WebGPU it uses it; without it the same renderer
+Grave Shift runs on Three.js `WebGPURenderer`. Given WebGPU it uses it; without it the same renderer
 falls back to WebGL2 on its own: one renderer, two backends, one set of materials. The backend
 that actually came up is printed in the debug overlay. The Three.js version is one line at the top
 of `index.html`, in the import map.

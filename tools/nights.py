@@ -1,4 +1,4 @@
-"""Dead-Wave · a song for every night (CL-128).
+"""Grave Shift · a song for every night (CL-128).
 
 Jerry, after his first full run (2026-10-06): "Better Music deserving special attention each night." His reference is a
 chiptune mix ("BEST OF CHIPTUNE MIX", Final Discovery, youtube.com/watch?v=zjyQWpJc6qk), and what he likes in it is

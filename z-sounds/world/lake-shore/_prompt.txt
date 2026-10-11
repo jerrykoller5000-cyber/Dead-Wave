@@ -1,0 +1,9 @@
+#132 world/lake-shore
+MISSING: the game makes no sound here now
+Now: (ambience water)
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 10 s   Loop: on   Prompt influence: ~0.6
+
+Prompt:
+Small waves lapping on a lake shore and a wooden dock, gentle, seamless. No music, no voice.

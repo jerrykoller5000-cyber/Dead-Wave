@@ -1,0 +1,133 @@
+{
+ "states": {
+  "pistol": {
+   "samples": [
+    {
+     "fps": 30.31834259727135,
+     "low": 27.027027027027028,
+     "worst": 37,
+     "hitches": 0,
+     "frames": 30
+    },
+    {
+     "fps": 28.880866425992778,
+     "low": 21.097046413543563,
+     "worst": 47.39999999990687,
+     "hitches": 0,
+     "frames": 28
+    },
+    {
+     "fps": 30.546787496178755,
+     "low": 27.322404371515177,
+     "worst": 36.60000000009313,
+     "hitches": 0,
+     "frames": 30
+    },
+    {
+     "fps": 30.321406913283628,
+     "low": 24.630541871864683,
+     "worst": 40.60000000009313,
+     "hitches": 0,
+     "frames": 30
+    }
+   ],
+   "meanFps": 30.016850858181627,
+   "render": {
+    "calls": 6175,
+    "frameCalls": 15,
+    "drawCalls": 1970,
+    "triangles": 1319769,
+    "points": 0,
+    "lines": 0,
+    "timestamp": 0
+   }
+  },
+  "m4": {
+   "samples": [
+    {
+     "fps": 27.786353812899893,
+     "low": 18.832391713714618,
+     "worst": 53.10000000009313,
+     "hitches": 1,
+     "frames": 27
+    },
+    {
+     "fps": 27.223230490023262,
+     "low": 18.315018314987075,
+     "worst": 54.60000000009313,
+     "hitches": 2,
+     "frames": 27
+    },
+    {
+     "fps": 30.593514174991995,
+     "low": 26.80965147466471,
+     "worst": 37.299999999813735,
+     "hitches": 2,
+     "frames": 30
+    },
+    {
+     "fps": 31.51367286773826,
+     "low": 26.38522427447117,
+     "worst": 37.89999999990687,
+     "hitches": 2,
+     "frames": 31
+    }
+   ],
+   "meanFps": 29.279192836413355,
+   "render": {
+    "calls": 9595,
+    "frameCalls": 15,
+    "drawCalls": 1964,
+    "triangles": 1318553,
+    "points": 0,
+    "lines": 0,
+    "timestamp": 0
+   }
+  },
+  "minigun": {
+   "samples": [
+    {
+     "fps": 31.932426864432507,
+     "low": 28.328611898166475,
+     "worst": 35.299999999813735,
+     "hitches": 0,
+     "frames": 31
+    },
+    {
+     "fps": 31.05590062111801,
+     "low": 27.24795640313146,
+     "worst": 36.700000000186265,
+     "hitches": 0,
+     "frames": 30
+    },
+    {
+     "fps": 30.2999697000417,
+     "low": 24.154589372035012,
+     "worst": 41.39999999990687,
+     "hitches": 0,
+     "frames": 30
+    },
+    {
+     "fps": 27.394480519490873,
+     "low": 19.011406844072802,
+     "worst": 52.60000000009313,
+     "hitches": 1,
+     "frames": 27
+    }
+   ],
+   "meanFps": 30.17069442627077,
+   "render": {
+    "calls": 13135,
+    "frameCalls": 15,
+    "drawCalls": 1964,
+    "triangles": 1318553,
+    "points": 0,
+    "lines": 0,
+    "timestamp": 0
+   }
+  }
+ },
+ "onScreen": 48,
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "errors": []
+}

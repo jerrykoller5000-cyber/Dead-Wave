@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "name": "hordeJoin",
+      "unchanged": true
+    },
+    {
+      "name": "cadence",
+      "unchanged": true
+    },
+    {
+      "name": "jump trajectory",
+      "unchanged": true
+    },
+    {
+      "name": "leap vertical arc",
+      "unchanged": true
+    },
+    {
+      "name": "authored Leaper stats",
+      "unchanged": true
+    }
+  ],
+  "publicContractsChanged": false,
+  "encodingBOM": false
+}

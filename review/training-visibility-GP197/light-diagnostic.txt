@@ -1,0 +1,22 @@
+PASS the Training Ground has a light switch
+PASS on the range side of the build room wall, facing in (x -7.98)
+PASS right beside the doorway, downrange of its frame (0.55 m)
+PASS at hand height (1.37 m)
+PASS he can stand at it (the rooms do not push him off)
+PASS at it, E is the lights (trainingLights)
+PASS a few steps from where he starts (7.6 m)
+PASS the prompt says so (E — Lights off)
+PASS it starts lit: noon ({"on":true,"night":false,"room":true}, 0.5)
+PASS E puts the lights out: the night ({"on":false,"night":true,"room":false}, 0)
+PASS the light really drops (sun 1.73 -> 0.03, sky 0.68 -> 0.15)
+PASS the lever drops (0.50)
+PASS the lamp strips go out (glow 0, tube 50565b)
+PASS the UI hears it (training-lights, on: false)
+PASS and it stays dark frame after frame
+PASS the prompt turns round (E — Lights on)
+PASS in the dark the goggles work as they do at night
+PASS E again: noon, and the lever is up ({"on":true,"night":false,"room":true})
+PASS the light is what it was, the strips lit again {"sun":1.73,"sunLit":1.73,"glow":0.8,"color":"ffffff","buildGlow":0.8,"buildColor":"ffffff"}
+PASS the goggles stop glaring green once the lights are on
+PASS off again
+PASS leaving in the dark: the next visit starts lit and the night stays in the room ({"on":true,"night":false,"room":true}, 0.5)

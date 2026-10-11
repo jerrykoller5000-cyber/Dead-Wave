@@ -8,13 +8,18 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // Kind 1 (the local view), kind 3 (what he does) and the debug/warm-up helpers.
+// CL-150: GB-156's mortar/Watchman crew (dismountMortar, crewFeet, crewLateFeet, updateMortarCrew) are kind 3, like
+// mountMortar and updateMortar: his own body walking in, kneeling at the tube and stepping off it (Claude, lead).
+// CL-181: his own body on the mast's ladder and in its fall (onMastHigh, updateMastClimb, poseLadder, startMastFall,
+// updateMastFall), the smoke off him (updateZapSmoke), the dev console's mast command, and the floating E prompt
+// over his head (promptAnchor, the local view). Kinds 1 and 3 (Claude, lead).
 const ALLOWED = new Set(`
 tick updateWater updateAmbientLife updateAudioDirection updateWindSway updateRoofCutaway ease
 warmEffectPools finishEffectWarmup updateCaveEyes destroyLandmark campsiteMapName drawMinimap
 toFull updateCampfires updateRainDroplets updatePuddles cullFoliageByDistance updateTreeBatchesInner
-updatePitBubbles updateWorldVoices flushShotHits sndAt damageZombie updateTreeFade updateShadowLOD
+updatePitBubbles updateWorldVoices flushShotHits sndAt damageZombie updateTreeFade updateShadowLOD sceneCull
 resolveTreeCollisions updateTowerClimb updateSlopeSlide tryRoll tryVault updateVault enterHollow leaveHollow updateHqLadder stepHqLadder pushOutOfHouse inLot sendMarineToSpawn resetGame
-startMode tipAt smooth updateMarineBody marineBody marineHit damagePlayer updateMouseAim
+startMode tipAt smooth updateMarineBody marineBody marineHit damagePlayer updateMouseAim updateMouseAimBody
 raycastTerrain triggerMuzzleFlash knifeAttack chainsawTick updateFlameStream throwGrenade meleeBugs
 meleeWildlife updateMedPenUse cycleWeapon getPlacePoint updateGhostPreview cancelPlaceMode
 buildReachable pickBuildOnRay upgradeTarget scrapTarget nearestOnMyStorey storeyBand playerUpstairs
@@ -25,6 +30,8 @@ finishScriptedKill snd beginMarineInsertion makeKnife updateTentacleKill kickFre
 drawFullMap mapEnemyVisible drawMapBlips currentMapMissions updateMarineIdle loopCineCamera resolveTarget ankleIntoHand nearArmory
 devBaseBuild hordeReport devSwarm pulseGuardianFailsafeForTest cineSetup getCaveChase
 stepSetA maybePreRollFromLoop stepLivePreRoll preRollFight stampDebugHooks
+dismountMortar crewFeet crewLateFeet updateMortarCrew
+onMastHigh updateMastClimb poseLadder startMastFall updateMastFall updateZapSmoke runDevCommand promptAnchor
 `.split(/\s+/).filter(Boolean));
 
 export function scan(src) {

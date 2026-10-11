@@ -6,13 +6,15 @@ import { THROW, throwSpeed, flyArc, arcDots } from './arcs.js';
 const flat = () => 0;
 const rangeOf = (s, sy = 1.6) => { const r = flyArc({ sx: 0, sy, sz: 0, vx: s.h, vy: s.vy, vz: 0, ground: flat, tMax: 5 }); return r.hit.x; };
 
-test('a tap lobs short, 3 s throws furthest, and it grows in between', () => {
-  const tap = throwSpeed(0), full = throwSpeed(3), over = throwSpeed(9);
+test('a tap lobs short, 0.8 s throws furthest (GP-171, half of 1.6 s), and it grows in between', () => {
+  assert.equal(THROW.FULL_S, 0.8, 'Jerry: full distance in half the previous 1.6 seconds');
+  const tap = throwSpeed(0), full = throwSpeed(0.8), over = throwSpeed(9);
   assert.deepEqual([tap.h, tap.vy], [THROW.LOB.h, THROW.LOB.vy]);
   assert.deepEqual([full.h, full.vy], [THROW.FAR.h, THROW.FAR.vy]);
-  assert.deepEqual([over.h, over.vy], [full.h, full.vy], 'held past 3 s: still the longest');
+  assert.deepEqual([over.h, over.vy], [full.h, full.vy], 'held past 0.8 s: still the longest');
+  assert.ok(throwSpeed(0.79).h < full.h, 'not there before 0.8 s');
   let last = -1;
-  for (let s = 0; s <= 3.0001; s += 0.25) { const r = rangeOf(throwSpeed(s)); assert.ok(r > last, 'longer at ' + s + ' s'); last = r; }
+  for (let s = 0; s <= 0.8001; s += 0.1) { const r = rangeOf(throwSpeed(s)); assert.ok(r > last, 'longer at ' + s + ' s'); last = r; }
   assert.ok(rangeOf(tap) > 2 && rangeOf(tap) < 4.5, 'a tap is a lob: ' + rangeOf(tap).toFixed(1) + ' m');
   assert.ok(rangeOf(full) > 17 && rangeOf(full) < 22, 'the longest throw: ' + rangeOf(full).toFixed(1) + ' m');
   assert.ok(rangeOf(full) > rangeOf(THROW.OLD), 'further than the old fixed throw');

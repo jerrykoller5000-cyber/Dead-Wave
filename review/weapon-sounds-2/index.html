@@ -1,0 +1,94 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weapon sounds, take two</title>
+<style>
+:root{color-scheme:light dark;--bg:#16181b;--fg:#e8e6e1;--mut:#9a9890;--b:#3a3d42;--a:#c98a2b}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
+main{max-width:880px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:22px;margin:0 0 4px} p{color:var(--mut);margin:0 0 14px}
+table{width:100%;border-collapse:collapse} th{text-align:left;font-weight:600;padding:8px 8px 8px 0;width:52%}
+td{padding:6px 4px;border-top:1px solid #2a2d31} th{border-top:1px solid #2a2d31}
+button{font:inherit;font-size:13px;margin:2px 6px 2px 0;padding:6px 14px;border-radius:6px;border:1px solid var(--b);background:#222529;color:var(--fg);cursor:pointer}
+button.a{border-color:var(--a);color:#f3c27a} button.playing{background:#333;outline:2px solid var(--a)}
+.n{color:var(--mut);font-size:13px} h2{font-size:16px;margin:28px 0 6px}
+@media (max-width:600px){th{display:block;width:auto;border:0;padding-bottom:0} td{display:inline-block;border:0}}
+</style>
+<main>
+<h1>Weapon sounds, take two</h1>
+<p>CL-135, after Jerry's listen: the low end stays; the reloads, the guns' high end and the impacts are rebuilt from noise
+(steel, polymer, hands, dirt: no tones at all), and switching weapons is an old TV changing channel. Grey "before" is
+CL-134 (what you heard), gold "now" is this. Everything is straight out of the game's audio engine at the default volume.
+The whole thing in one file: <a href="weapon-sounds-2-reel.mp3" style="color:#f3c27a">weapon-sounds-2-reel.mp3</a>
+(timestamps in README.md).</p>
+<h2>Switching weapons</h2><p>Before, the wheel ticked with the sound of a spent case landing and a change made no sound. Now the wheel ticks like a TV dial (a detent and a blip of snow) and every change of weapon is a channel change: the knob, a burst of static, cut, the picture on.</p><table>
+<tr><th>The wheel moving over three guns, then the change</th><td><button class="b" data-src="clips/switch-before.mp3">before</button></td><td><button class="a" data-src="clips/switch-after.mp3">now</button></td></tr>
+<tr><th>Three changes in a row</th><td><span class="n">(new)</span></td><td><button class="a" data-src="clips/switch3-after.mp3">now</button></td></tr>
+</table>
+<h2>Reloads</h2><p>Each weapon&#x27;s whole reload as the game cues it: the hand to the pouch, the magazine out (and hitting the ground), the new one in and slapped home, the slide, bolt or handle, the settle at the end.</p><table>
+<tr><th>Pistol</th><td><button class="b" data-src="clips/reload-pistol-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-pistol-after.mp3">now</button></td></tr>
+<tr><th>Wasp SMG</th><td><button class="b" data-src="clips/reload-uzi-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-uzi-after.mp3">now</button></td></tr>
+<tr><th>GW-4 Carbine</th><td><button class="b" data-src="clips/reload-m4-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-m4-after.mp3">now</button></td></tr>
+<tr><th>KR-7 Rifle</th><td><button class="b" data-src="clips/reload-ak-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-ak-after.mp3">now</button></td></tr>
+<tr><th>Breacher-12 (drum)</th><td><button class="b" data-src="clips/reload-aa12-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-aa12-after.mp3">now</button></td></tr>
+<tr><th>Sniper</th><td><button class="b" data-src="clips/reload-sniper-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-sniper-after.mp3">now</button></td></tr>
+<tr><th>Rotary gun (box and belt)</th><td><button class="b" data-src="clips/reload-minigun-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-minigun-after.mp3">now</button></td></tr>
+<tr><th>Flamethrower (valve, tank, igniter)</th><td><button class="b" data-src="clips/reload-flamer-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-flamer-after.mp3">now</button></td></tr>
+<tr><th>Shotgun (shells, then the pump)</th><td><button class="b" data-src="clips/reload-shotgun-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-shotgun-after.mp3">now</button></td></tr>
+<tr><th>Revolver</th><td><button class="b" data-src="clips/reload-revolver-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-revolver-after.mp3">now</button></td></tr>
+<tr><th>Launcher</th><td><button class="b" data-src="clips/reload-launcher-before.mp3">before</button></td><td><button class="a" data-src="clips/reload-launcher-after.mp3">now</button></td></tr>
+</table>
+<h2>Handling</h2><table>
+<tr><th>Dry fire (twice)</th><td><button class="b" data-src="clips/emptyClick-before.mp3">before</button></td><td><button class="a" data-src="clips/emptyClick-after.mp3">now</button></td></tr>
+<tr><th>Shotgun pump</th><td><button class="b" data-src="clips/pump-before.mp3">before</button></td><td><button class="a" data-src="clips/pump-after.mp3">now</button></td></tr>
+<tr><th>Spent cases landing</th><td><button class="b" data-src="clips/brass-before.mp3">before</button></td><td><button class="a" data-src="clips/brass-after.mp3">now</button></td></tr>
+<tr><th>A magazine hitting the ground</th><td><button class="b" data-src="clips/magThud-before.mp3">before</button></td><td><button class="a" data-src="clips/magThud-after.mp3">now</button></td></tr>
+<tr><th>Grenade: the pin and spoon, two bounces</th><td><button class="b" data-src="clips/grenade-before.mp3">before</button></td><td><button class="a" data-src="clips/grenade-after.mp3">now</button></td></tr>
+</table>
+<h2>Bullets landing</h2><p>Four rounds into each. These play constantly while you shoot; stone and wood were tones.</p><table>
+<tr><th>Rock</th><td><button class="b" data-src="clips/impact-rock-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-rock-after.mp3">now</button></td></tr>
+<tr><th>Metal</th><td><button class="b" data-src="clips/impact-metal-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-metal-after.mp3">now</button></td></tr>
+<tr><th>Wood</th><td><button class="b" data-src="clips/impact-wood-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-wood-after.mp3">now</button></td></tr>
+<tr><th>Dirt</th><td><button class="b" data-src="clips/impact-dirt-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-dirt-after.mp3">now</button></td></tr>
+<tr><th>Water</th><td><button class="b" data-src="clips/impact-water-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-water-after.mp3">now</button></td></tr>
+<tr><th>Sand</th><td><button class="b" data-src="clips/impact-sand-before.mp3">before</button></td><td><button class="a" data-src="clips/impact-sand-after.mp3">now</button></td></tr>
+</table>
+<h2>The guns</h2><p>The boom and the sub are CL-134&#x27;s, untouched. What changed is the action behind each shot (the slide, the bolt, the links), which rang like a xylophone, and the Wasp&#x27;s bark, which was a little too much of a note.</p><table>
+<tr><th>Pistol: one</th><td><button class="b" data-src="clips/pistol-1-before.mp3">before</button></td><td><button class="a" data-src="clips/pistol-1-after.mp3">now</button></td></tr>
+<tr><th>Pistol: burst</th><td><button class="b" data-src="clips/pistol-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/pistol-burst-after.mp3">now</button></td></tr>
+<tr><th>Wasp SMG: one</th><td><button class="b" data-src="clips/uzi-1-before.mp3">before</button></td><td><button class="a" data-src="clips/uzi-1-after.mp3">now</button></td></tr>
+<tr><th>Wasp SMG: burst</th><td><button class="b" data-src="clips/uzi-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/uzi-burst-after.mp3">now</button></td></tr>
+<tr><th>GW-4 Carbine: one</th><td><button class="b" data-src="clips/m4-1-before.mp3">before</button></td><td><button class="a" data-src="clips/m4-1-after.mp3">now</button></td></tr>
+<tr><th>GW-4 Carbine: burst</th><td><button class="b" data-src="clips/m4-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/m4-burst-after.mp3">now</button></td></tr>
+<tr><th>KR-7 Rifle: one</th><td><button class="b" data-src="clips/ak-1-before.mp3">before</button></td><td><button class="a" data-src="clips/ak-1-after.mp3">now</button></td></tr>
+<tr><th>KR-7 Rifle: burst</th><td><button class="b" data-src="clips/ak-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/ak-burst-after.mp3">now</button></td></tr>
+<tr><th>Watchman MG: one</th><td><button class="b" data-src="clips/m240-1-before.mp3">before</button></td><td><button class="a" data-src="clips/m240-1-after.mp3">now</button></td></tr>
+<tr><th>Watchman MG: burst</th><td><button class="b" data-src="clips/m240-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/m240-burst-after.mp3">now</button></td></tr>
+<tr><th>Rotary gun: one</th><td><button class="b" data-src="clips/minigun-1-before.mp3">before</button></td><td><button class="a" data-src="clips/minigun-1-after.mp3">now</button></td></tr>
+<tr><th>Rotary gun: burst</th><td><button class="b" data-src="clips/minigun-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/minigun-burst-after.mp3">now</button></td></tr>
+<tr><th>Shotgun: one</th><td><button class="b" data-src="clips/shotgun-1-before.mp3">before</button></td><td><button class="a" data-src="clips/shotgun-1-after.mp3">now</button></td></tr>
+<tr><th>Shotgun: burst</th><td><button class="b" data-src="clips/shotgun-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/shotgun-burst-after.mp3">now</button></td></tr>
+<tr><th>Breacher-12: one</th><td><button class="b" data-src="clips/aa12-1-before.mp3">before</button></td><td><button class="a" data-src="clips/aa12-1-after.mp3">now</button></td></tr>
+<tr><th>Breacher-12: burst</th><td><button class="b" data-src="clips/aa12-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/aa12-burst-after.mp3">now</button></td></tr>
+<tr><th>Revolver: one</th><td><button class="b" data-src="clips/revolver-1-before.mp3">before</button></td><td><button class="a" data-src="clips/revolver-1-after.mp3">now</button></td></tr>
+<tr><th>Revolver: burst</th><td><button class="b" data-src="clips/revolver-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/revolver-burst-after.mp3">now</button></td></tr>
+<tr><th>Sniper: one</th><td><button class="b" data-src="clips/sniper-1-before.mp3">before</button></td><td><button class="a" data-src="clips/sniper-1-after.mp3">now</button></td></tr>
+<tr><th>Sniper: burst</th><td><button class="b" data-src="clips/sniper-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/sniper-burst-after.mp3">now</button></td></tr>
+<tr><th>Launcher: one</th><td><button class="b" data-src="clips/launcher-1-before.mp3">before</button></td><td><button class="a" data-src="clips/launcher-1-after.mp3">now</button></td></tr>
+<tr><th>Launcher: burst</th><td><button class="b" data-src="clips/launcher-burst-before.mp3">before</button></td><td><button class="a" data-src="clips/launcher-burst-after.mp3">now</button></td></tr>
+<tr><th>Sniper: a round and the bolt on the animation&#x27;s beats</th><td><button class="b" data-src="clips/sniper-bolt-before.mp3">before</button></td><td><button class="a" data-src="clips/sniper-bolt-after.mp3">now</button></td></tr>
+<tr><th>Pistol, suppressed</th><td><button class="b" data-src="clips/pistol-sup-before.mp3">before</button></td><td><button class="a" data-src="clips/pistol-sup-after.mp3">now</button></td></tr>
+<tr><th>GW-4 Carbine, suppressed</th><td><button class="b" data-src="clips/m4-sup-before.mp3">before</button></td><td><button class="a" data-src="clips/m4-sup-after.mp3">now</button></td></tr>
+<tr><th>KR-7 Rifle, suppressed</th><td><button class="b" data-src="clips/ak-sup-before.mp3">before</button></td><td><button class="a" data-src="clips/ak-sup-after.mp3">now</button></td></tr>
+<tr><th>Sniper, suppressed</th><td><button class="b" data-src="clips/sniper-sup-before.mp3">before</button></td><td><button class="a" data-src="clips/sniper-sup-after.mp3">now</button></td></tr>
+<tr><th>Headshot</th><td><button class="b" data-src="clips/headshot-before.mp3">before</button></td><td><button class="a" data-src="clips/headshot-after.mp3">now</button></td></tr>
+<tr><th>Knife hit</th><td><button class="b" data-src="clips/knifeHit-before.mp3">before</button></td><td><button class="a" data-src="clips/knifeHit-after.mp3">now</button></td></tr>
+</table>
+<script>
+let cur = null, curB = null;
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (cur) { cur.pause(); curB && curB.classList.remove('playing'); }
+  cur = new Audio(b.dataset.src); curB = b; b.classList.add('playing');
+  cur.onended = () => b.classList.remove('playing'); cur.play();
+});
+</script>

@@ -1,0 +1,9 @@
+#87 builds/place-sandbag
+UPGRADE: the game synthesizes this now; a recording would sound better
+Now: place()
+
+Drop the ElevenLabs takes for this prompt in this folder (any file names).
+Duration: 0.8 s   Loop: off   Prompt influence: ~0.6
+
+Prompt:
+A heavy sandbag dropped and patted into place, a soft heavy thump. No music, no voice.
