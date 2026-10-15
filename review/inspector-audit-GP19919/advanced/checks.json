@@ -1,0 +1,833 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 15.392,
+  "results": [
+    {
+      "name": "crew-served-isolation",
+      "ok": true,
+      "a": [
+        {
+          "id": "m240-carry",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": true,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": "m240-carry",
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          }
+        },
+        {
+          "id": "m240-carry-stopped",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": null,
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          },
+          "ghost": false,
+          "builds": 0
+        },
+        {
+          "id": "mortar",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": "mortar",
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": "mortar",
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          }
+        },
+        {
+          "id": "mortar-stopped",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": null,
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          },
+          "ghost": false,
+          "builds": 0
+        },
+        {
+          "id": "mortar-carry",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": true,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": "mortar-carry",
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          }
+        },
+        {
+          "id": "mortar-carry-stopped",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": null,
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          },
+          "ghost": false,
+          "builds": 0
+        },
+        {
+          "id": "stand",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": "stand",
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          }
+        },
+        {
+          "id": "stand-stopped",
+          "state": {
+            "weapon": "pistol",
+            "unarmed": true,
+            "reloading": false,
+            "crouching": false,
+            "grounded": true,
+            "dive": "idle",
+            "vault": false,
+            "akimbo": false,
+            "mortar": null,
+            "carried": false,
+            "zoom": false,
+            "ots": false,
+            "training": true,
+            "wake": false,
+            "grenades": 6,
+            "medkits": 0,
+            "hp": 100,
+            "god": true,
+            "paused": false,
+            "move": null,
+            "loop": false,
+            "treadmill": false,
+            "running": false,
+            "holds": {},
+            "error": null,
+            "blade": "machete",
+            "camo": "m81"
+          },
+          "ghost": false,
+          "builds": 0
+        }
+      ]
+    },
+    {
+      "name": "knockout-cleanup",
+      "ok": true,
+      "state": {
+        "weapon": "pistol",
+        "unarmed": true,
+        "reloading": false,
+        "crouching": false,
+        "grounded": true,
+        "dive": "idle",
+        "vault": false,
+        "akimbo": false,
+        "mortar": null,
+        "carried": false,
+        "zoom": false,
+        "ots": false,
+        "training": true,
+        "wake": false,
+        "grenades": 6,
+        "medkits": 0,
+        "hp": 100,
+        "god": true,
+        "paused": false,
+        "move": null,
+        "loop": false,
+        "treadmill": false,
+        "running": false,
+        "holds": {},
+        "error": null,
+        "blade": "machete",
+        "camo": "m81"
+      },
+      "backdrop": "studio"
+    },
+    {
+      "name": "dive-bookmark-framing",
+      "ok": true,
+      "headGap": 0.2166871477498955,
+      "view": {
+        "follow": true,
+        "bookmark": "head",
+        "offset": {
+          "dx": 0,
+          "dy": 0,
+          "dz": 0
+        }
+      },
+      "after": {
+        "follow": true,
+        "bookmark": "head",
+        "offset": {
+          "dx": 0,
+          "dy": 0,
+          "dz": 0
+        }
+      },
+      "corners": [
+        [
+          0.12432576264300181,
+          -0.033734527857215604,
+          0.986939859177333
+        ],
+        [
+          -0.4706973429049075,
+          -0.49311033914246083,
+          0.9819231397213181
+        ],
+        [
+          0.13522127494776645,
+          0.5041101257476429,
+          0.9857368466849423
+        ],
+        [
+          -0.5288866581405316,
+          0.20880300840176438,
+          0.979605941858059
+        ],
+        [
+          0.3700905885926081,
+          -0.15194479349657936,
+          0.9856489167180977
+        ],
+        [
+          -0.2022989771553707,
+          -0.7213545343692984,
+          0.9794305463657529
+        ],
+        [
+          0.4058691421456011,
+          0.4299418621217403,
+          0.9841970308838451
+        ],
+        [
+          -0.2311072223971313,
+          0.054689229827233295,
+          0.9764063680806179
+        ]
+      ]
+    },
+    {
+      "name": "same-target-camera-preserves-move",
+      "ok": true,
+      "before": "walk"
+    },
+    {
+      "name": "saved-shot-recipe",
+      "ok": true,
+      "state": {
+        "weapon": "pistol",
+        "unarmed": false,
+        "reloading": false,
+        "crouching": false,
+        "grounded": true,
+        "dive": "idle",
+        "vault": false,
+        "akimbo": false,
+        "mortar": null,
+        "carried": false,
+        "zoom": false,
+        "ots": false,
+        "training": true,
+        "wake": false,
+        "grenades": 6,
+        "medkits": 0,
+        "hp": 100,
+        "god": true,
+        "paused": false,
+        "move": "walk",
+        "loop": false,
+        "treadmill": true,
+        "running": false,
+        "holds": {},
+        "error": null,
+        "blade": "machete",
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "actual-sidecar-restore",
+      "ok": true,
+      "state": {
+        "weapon": "pistol",
+        "unarmed": false,
+        "reloading": false,
+        "crouching": false,
+        "grounded": true,
+        "dive": "idle",
+        "vault": false,
+        "akimbo": false,
+        "mortar": null,
+        "carried": false,
+        "zoom": false,
+        "ots": false,
+        "training": true,
+        "wake": false,
+        "grenades": 6,
+        "medkits": 0,
+        "hp": 100,
+        "god": true,
+        "paused": false,
+        "move": "walk",
+        "loop": false,
+        "treadmill": true,
+        "running": false,
+        "holds": {},
+        "error": null,
+        "blade": "machete",
+        "camo": "m81"
+      }
+    },
+    {
+      "name": "static-model-switch-recipe",
+      "ok": true,
+      "before": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": true,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "weapon.m4",
+          "variant": null,
+          "mode": null
+        },
+        "camera": {
+          "x": -24.608278450806793,
+          "y": -197.99719702416934,
+          "z": -630.234299638036,
+          "tx": -25.9909327518335,
+          "ty": -198.9548964997123,
+          "tz": -631.8820828686004,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "model": {
+          "switches": {
+            "suppressor": true,
+            "ext": true,
+            "heavy": false,
+            "flash": false,
+            "laser": false
+          },
+          "turntable": 0,
+          "yaw": 0
+        },
+        "marine": {
+          "weapon": "pistol",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": false,
+          "holds": {}
+        }
+      },
+      "after": {
+        "schema": "dw-inspector-session",
+        "schemaVersion": 1,
+        "inspectorVersion": "1.1.0",
+        "view": {
+          "follow": true,
+          "bookmark": null,
+          "offset": {
+            "dx": 0,
+            "dy": 0,
+            "dz": 0
+          }
+        },
+        "subject": {
+          "id": "weapon.m4",
+          "variant": null,
+          "mode": null
+        },
+        "camera": {
+          "x": -24.608278450806793,
+          "y": -197.99719702416934,
+          "z": -630.234299638036,
+          "tx": -25.9909327518335,
+          "ty": -198.9548964997123,
+          "tz": -631.8820828686004,
+          "fov": 35
+        },
+        "display": {
+          "backdrop": "studio",
+          "light": "studio",
+          "overlays": {
+            "bounds": false,
+            "axes": false,
+            "stick": false,
+            "joints": false,
+            "wire": false,
+            "grid": true,
+            "labels": true
+          }
+        },
+        "clock": {
+          "speed": 1,
+          "paused": false
+        },
+        "model": {
+          "switches": {
+            "suppressor": true,
+            "ext": true,
+            "heavy": false,
+            "flash": false,
+            "laser": false
+          },
+          "turntable": 0,
+          "yaw": 0
+        },
+        "marine": {
+          "weapon": "pistol",
+          "akimbo": false,
+          "blade": "machete",
+          "camo": "m81",
+          "gear": {
+            "helmet": true,
+            "vest": true,
+            "pads": true,
+            "nvg": true,
+            "laser": true,
+            "flashlight": true
+          },
+          "wardrobe": {
+            "version": 1,
+            "items": {
+              "cap": {
+                "camo": "m81",
+                "style": "cover"
+              },
+              "helmet": {
+                "camo": "m81"
+              },
+              "mask": {
+                "camo": "coyoteBrown"
+              },
+              "shirt": {
+                "camo": "m81",
+                "sleeves": "down"
+              },
+              "trousers": {
+                "camo": "m81",
+                "cut": "trousers"
+              },
+              "gloves": {
+                "camo": "m81",
+                "worn": true
+              },
+              "carrier": {},
+              "pads": {},
+              "holster": {},
+              "belt": {},
+              "pack": {},
+              "eyewear": {
+                "style": "none"
+              },
+              "boots": {
+                "colour": "black",
+                "rubber": "yellow"
+              }
+            },
+            "guns": {},
+            "body": {
+              "hair": "darkBrown",
+              "eyes": "brown",
+              "skin": 3
+            }
+          },
+          "mods": {
+            "minigun": {
+              "ext": false,
+              "heavy": false
+            },
+            "m4": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "ak": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "pistol": {
+              "ext": false,
+              "suppressor": false,
+              "auto": false
+            },
+            "uzi": {
+              "ext": false,
+              "heavy": false,
+              "suppressor": false
+            },
+            "shotgun": {
+              "ext": false,
+              "suppressor": false
+            },
+            "aa12": {
+              "ext": false
+            },
+            "revolver": {},
+            "sniper": {
+              "ext": false,
+              "suppressor": false
+            },
+            "launcher": {},
+            "flamer": {
+              "ext": false
+            },
+            "chainsaw": {
+              "tank": false
+            }
+          },
+          "move": null,
+          "loop": false,
+          "holds": {}
+        }
+      }
+    },
+    {
+      "name": "legacy-alias-and-rejected-world-target",
+      "ok": true,
+      "id": "weapon.m240",
+      "rejected": true
+    },
+    {
+      "name": "live-review-note",
+      "ok": true,
+      "file": "review/inspect-audit-gp19919/notes.md",
+      "picture": "review/inspect-audit-gp19919/2026-10-14T16-21-19-086Z-c2fc48d3.jpg"
+    },
+    {
+      "name": "viewport-1000",
+      "ok": true,
+      "overflow": [
+        {
+          "tag": "SPAN",
+          "class": "dwi-dim",
+          "text": "40°"
+        }
+      ],
+      "panel": {
+        "right": 990,
+        "bottom": 734
+      },
+      "bar": {
+        "right": 990,
+        "top": 744,
+        "bottom": 790
+      }
+    },
+    {
+      "name": "viewport-800",
+      "ok": true,
+      "overflow": [
+        {
+          "tag": "SPAN",
+          "class": "dwi-dim",
+          "text": "40°"
+        }
+      ],
+      "panel": {
+        "right": 790,
+        "bottom": 554
+      },
+      "bar": {
+        "right": 790,
+        "top": 564,
+        "bottom": 640
+      }
+    },
+    {
+      "name": "final-error-journal",
+      "ok": true,
+      "errors": []
+    }
+  ]
+}

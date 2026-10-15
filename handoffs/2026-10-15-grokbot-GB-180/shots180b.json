@@ -1,0 +1,110 @@
+[
+    {
+        "out":  "review/gb180b/pistol-left.png",
+        "view":  "left",
+        "target":  "weapon:pistol",
+        "size":  "1000x750",
+        "settle":  1500
+    },
+    {
+        "out":  "review/gb180b/pistol-right.png",
+        "view":  "right",
+        "target":  "weapon:pistol",
+        "size":  "1000x750",
+        "settle":  1500
+    },
+    {
+        "out":  "review/gb180b/pistol-three.png",
+        "view":  "three",
+        "target":  "weapon:pistol",
+        "size":  "1000x750",
+        "settle":  1500
+    },
+    {
+        "out":  "review/gb180b/pistol-top.png",
+        "view":  "top",
+        "target":  "weapon:pistol",
+        "size":  "1000x750",
+        "settle":  1500
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/revolver-left.png",
+        "margin":  0.9,
+        "target":  "weapon:revolver",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/revolver-three.png",
+        "margin":  0.9,
+        "target":  "weapon:revolver",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/ak-left.png",
+        "margin":  0.9,
+        "target":  "weapon:ak",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/ak-three.png",
+        "margin":  0.9,
+        "target":  "weapon:ak",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/m4-left.png",
+        "margin":  0.9,
+        "target":  "weapon:m4",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/launcher-three.png",
+        "margin":  0.9,
+        "target":  "weapon:launcher",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/m240-left.png",
+        "margin":  0.9,
+        "target":  "weapon:m240",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/minigun-left.png",
+        "margin":  0.9,
+        "target":  "weapon:minigun",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/shotgun-three.png",
+        "margin":  0.9,
+        "target":  "weapon:shotgun",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180b/uzi-three.png",
+        "margin":  0.9,
+        "target":  "weapon:uzi",
+        "view":  "three"
+    }
+]

@@ -1,0 +1,98 @@
+{
+  "initial": {
+    "skin": 10462542,
+    "belly": 10462542,
+    "bellyGlow": 0,
+    "vein": 10462542,
+    "veinGlow": 10462542,
+    "bellyGeometry": "e2d0ca69-e124-49d6-877a-86dd8e2d535a",
+    "veinGeometry": "665bfe0f-85bf-4d03-a8a2-f828444061e2",
+    "veinVertices": 2208,
+    "veinParent": true,
+    "scale": [
+      1,
+      1.0004894641761095,
+      1
+    ]
+  },
+  "motion": {
+    "lo": [
+      0.9824344733745326,
+      0.6200015695133857
+    ],
+    "hi": [
+      1.0199210635408997,
+      1.6983914892541885
+    ]
+  },
+  "pool": {
+    "sameMesh": true,
+    "detonated": false,
+    "skin": 10462542,
+    "belly": 10462542,
+    "bellyGlow": 0,
+    "vein": 10462542,
+    "veinGlow": 10462542,
+    "bellyGeometry": "e2d0ca69-e124-49d6-877a-86dd8e2d535a",
+    "veinGeometry": "665bfe0f-85bf-4d03-a8a2-f828444061e2",
+    "veinVertices": 2208,
+    "veinParent": true,
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "fresh": {
+    "distinct": true,
+    "skin": 10462542,
+    "belly": 10462542,
+    "bellyGlow": 0,
+    "vein": 10462542,
+    "veinGlow": 10462542,
+    "bellyGeometry": "a58732f5-a57a-4007-983d-306f4c1a6232",
+    "veinGeometry": "5e0014ff-0859-4982-9592-8453074c7c53",
+    "veinVertices": 2208,
+    "veinParent": true,
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "idempotent": {
+    "before": {
+      "skin": 10462542,
+      "belly": 10462542,
+      "bellyGlow": 0,
+      "vein": 10462542,
+      "veinGlow": 10462542,
+      "bellyGeometry": "a58732f5-a57a-4007-983d-306f4c1a6232",
+      "veinGeometry": "5e0014ff-0859-4982-9592-8453074c7c53",
+      "veinVertices": 2208,
+      "veinParent": true,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "after": {
+      "skin": 10462542,
+      "belly": 10462542,
+      "bellyGlow": 0,
+      "vein": 10462542,
+      "veinGlow": 10462542,
+      "bellyGeometry": "a58732f5-a57a-4007-983d-306f4c1a6232",
+      "veinGeometry": "5e0014ff-0859-4982-9592-8453074c7c53",
+      "veinVertices": 2208,
+      "veinParent": true,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "errors": []
+}

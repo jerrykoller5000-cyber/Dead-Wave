@@ -1,0 +1,13 @@
+{
+  "movingPhase": 2.3119129207689038,
+  "movingWeight": 0.9962213935452778,
+  "noHeadShot": true,
+  "noHeadWind": true,
+  "reset": true,
+  "cleanTrails": true,
+  "recycledJaw": true,
+  "singleSkin": true,
+  "deathReset": true,
+  "reusedMesh": false,
+  "errors": []
+}

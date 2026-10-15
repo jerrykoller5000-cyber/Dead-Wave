@@ -1,0 +1,14 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';
+const d='review/spitter-dissolve-GP19871',E=new Engine({training:true,warm:'none',size:'1200x800'});
+try{await E.open();const out=await E.ev(`R.release();const D=T.trainingDbg;D.panel().close();D.clear();T.AudioSys.setMuted(true);T.runDevCommand('godmode');const f=D.tg().floorY;T.player.position.set(-35,f,-620);
+ const old=await import('/review/spitter-dissolve-GP19871/baseline-runtime.js'),cur=await import('/game/zombie-ability-runtime.js');const sets=[];
+ for(const [factory,offset]of [[old.createZombieAbilityRuntime,-33],[cur.createZombieAbilityRuntime,-27]]){const z={typeKey:'spitter',mesh:new T.THREE.Group(),alive:true},actors=[z],scene=new T.THREE.Group();T.scene.add(scene);
+ const rt=factory({THREE:T.THREE,TSL:T.TSL,scene,actors:()=>actors,active:()=>true,domain:()=>1,canAct:()=>true,inDomain:()=>true,ground:()=>f,wet:()=>false,world:()=>({belowSolids:[],builds:[],buildGrid:2.5}),box:()=>null,cylinder:()=>null,build:()=>null,players:()=>[],acidMote:()=>{}});
+ z.mesh.position.set(offset,f,-637);rt.update(.01);for(let i=1;i<=140;i++){const t=i/140;z.mesh.position.set(offset+Math.sin(t*5)*.9,f,-637+t*5.4);rt.update(1/60);}actors.length=0;sets.push({rt,scene});}
+ T.setShotView({x:-30,y:f+10,z:-627,tx:-30,ty:f,tz:-634.5,fov:46});window.__acidSets=sets;
+ const chunks=[],rec=new MediaRecorder(T.renderer.domElement.captureStream(60),{mimeType:'video/webm;codecs=vp9',videoBitsPerSecond:6000000});rec.ondataavailable=e=>chunks.push(e.data);const done=new Promise(r=>rec.onstop=r);rec.start();
+ const begin=performance.now(),samples=[];let last=begin,lastSample=-1;while(performance.now()-begin<6500){await new Promise(r=>requestAnimationFrame(r));const now=performance.now(),dt=(now-last)/1000;last=now;for(const s of sets)s.rt.update(dt);
+ const t=(now-begin)/1000;if(t-lastSample>.05){samples.push({t,states:sets.map(s=>s.rt.read())});lastSample=t;}}
+ rec.stop();await done;const video=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result.split(',')[1]);fr.readAsDataURL(new Blob(chunks,{type:rec.mimeType}));});return {video,samples,remaining:sets.map(s=>s.rt.read().trails),geometry:sets.map(s=>s.scene.children.find(m=>m.name==='spitter-acid-trail-batch').geometry.attributes.position.count)};`,15000);
+ fs.writeFileSync(d+'/comparison.webm',Buffer.from(out.video,'base64'));delete out.video;out.errors=E.page.errors;out.loadSeconds=E.loadSec;fs.writeFileSync(d+'/proof.json',JSON.stringify(out,null,2)+'\n');assert.deepEqual(out.remaining,[0,0]);assert.deepEqual(out.geometry,[576,576]);assert.equal(out.errors.length,0);console.log('PASS native paired evaporation',JSON.stringify({remaining:out.remaining,geometry:out.geometry,errors:out.errors}));
+}finally{await E.close();}process.exit(0);

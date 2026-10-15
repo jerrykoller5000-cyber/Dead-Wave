@@ -1,0 +1,1068 @@
+{
+  "stowed": [
+    {
+      "kind": "uzi",
+      "visible": true,
+      "gun": true,
+      "x": 0.12,
+      "z": -0.295
+    },
+    {
+      "kind": null,
+      "visible": false,
+      "gun": false,
+      "x": 0.19,
+      "z": -0.39
+    },
+    {
+      "kind": "uzi",
+      "visible": true,
+      "gun": true,
+      "x": -0.12,
+      "z": -0.295
+    },
+    {
+      "kind": null,
+      "visible": false,
+      "gun": false,
+      "x": -0.19,
+      "z": -0.39
+    }
+  ],
+  "single": {
+    "spots": [
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": 0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": 0.19,
+        "z": -0.39
+      },
+      {
+        "kind": "uzi",
+        "visible": true,
+        "gun": true,
+        "x": -0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": -0.19,
+        "z": -0.39
+      }
+    ],
+    "gaps": [
+      0.0008200490050300561,
+      0.0761645694417012
+    ]
+  },
+  "pair": {
+    "spots": [
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": 0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": 0.19,
+        "z": -0.39
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": -0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": -0.19,
+        "z": -0.39
+      }
+    ],
+    "gaps": [
+      0.00027356768266822306,
+      0.00022567781512364385
+    ],
+    "dual": true
+  },
+  "moving": [
+    {
+      "running": false,
+      "spots": [
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": 0.19,
+          "z": -0.39
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": -0.12,
+          "z": -0.295
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": -0.19,
+          "z": -0.39
+        }
+      ],
+      "gaps": [
+        0.0001836409729060663,
+        0.0008495913265454848
+      ]
+    },
+    {
+      "running": true,
+      "spots": [
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": 0.19,
+          "z": -0.39
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": -0.12,
+          "z": -0.295
+        },
+        {
+          "kind": null,
+          "visible": false,
+          "gun": false,
+          "x": -0.19,
+          "z": -0.39
+        }
+      ],
+      "gaps": [
+        0.0008437817994320376,
+        0.0006136182879542236
+      ]
+    }
+  ],
+  "holstered": {
+    "unarmed": true,
+    "spots": [
+      {
+        "kind": "uzi",
+        "visible": true,
+        "gun": true,
+        "x": 0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": 0.19,
+        "z": -0.39
+      },
+      {
+        "kind": "uzi",
+        "visible": true,
+        "gun": true,
+        "x": -0.12,
+        "z": -0.295
+      },
+      {
+        "kind": null,
+        "visible": false,
+        "gun": false,
+        "x": -0.19,
+        "z": -0.39
+      }
+    ]
+  },
+  "loadouts": [
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        null
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        null,
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "revolver",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": null,
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "uzi",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": []
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "revolver",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": false,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    },
+    {
+      "secondary": [
+        "pistol",
+        "uzi"
+      ],
+      "inHand": "pistol",
+      "akimbo": true,
+      "emptyWaspVisible": false,
+      "wasps": [
+        {
+          "x": 0.12,
+          "z": -0.295
+        },
+        {
+          "x": -0.12,
+          "z": -0.295
+        }
+      ]
+    }
+  ],
+  "encoding": "PASS read index.html and the scripts and styles the game loaded (223 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG off · Laser off · Light off\", grenadeChips \"G×0H×0\", ammoDetail \"64 / 64  ·  288 Bullets\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG off · Laser off · Light off / G×0H×0)",
+  "performance": {
+    "alive": 48,
+    "fps": 55.31457678432042,
+    "worst": 33.10000002384186,
+    "over50": 0,
+    "drawCalls": 11081
+  },
+  "errors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:519\n    at <anonymous>:1:1325",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:183\n    at <anonymous>:1:608",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:424",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:500",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:183",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:270",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:424",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:25758/ui/prep-checklist.js:116:15\n    at <anonymous>:1:500"
+  ]
+}

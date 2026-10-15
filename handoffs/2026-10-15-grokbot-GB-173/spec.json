@@ -1,0 +1,240 @@
+[
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab([[-0.26, 0.066], [-0.497, 0.052], [-0.532, 0.068], [-0.55, 0.066], [-0.55, -0.075], [-0.527, -0.08], [-0.51, -0.064], [-0.468, -0.014], [-0.298, -0.013], [-0.26, -0.061]], 0.1, gunPoly, { bevel: 0.011, segs: 3 });",
+"new": [
+"  // GB-173 (Jerry: the stock was a boxy flared block): the AA-12's fixed stock. A moulded nose steps the receiver's",
+"  // width down; the top and comb run straight back off the receiver, the underside slopes from the wrist to a deep butt.",
+"  K.slab([[-0.255, 0.074], [-0.31, 0.072], [-0.31, -0.07], [-0.282, -0.074], [-0.255, -0.078]], 0.118, gunPoly, { bevel: 0.012, segs: 3 });",
+"  K.slab([[-0.3, 0.07], [-0.535, 0.064], [-0.553, 0.058], [-0.553, -0.1], [-0.538, -0.106], [-0.47, -0.092], [-0.36, -0.07], [-0.3, -0.066]], 0.086, gunPoly, { bevel: 0.014, segs: 3 });",
+"  K.slab([[-0.34, 0.078], [-0.522, 0.073], [-0.532, 0.064], [-0.34, 0.068]], 0.062, gunPoly, { bevel: 0.006, segs: 2 });   // the comb"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  for (const sx of [-1, 1]) K.slab([[-0.32, 0.035], [-0.448, 0.031], [-0.435, 0.005], [-0.32, 0.009]], 0.003, gunPoly, { x: sx * 0.05, bevel: 0.002 });",
+"new": [
+"  for (const sx of [-1, 1]) K.slab([[-0.335, 0.04], [-0.5, 0.034], [-0.5, -0.042], [-0.42, -0.054], [-0.335, -0.038]], 0.003, gunPoly, { x: sx * 0.044, bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab([[-0.572, 0.072], [-0.55, 0.072], [-0.55, -0.078], [-0.57, -0.082]], 0.106, gunRubber, { bevel: 0.008 });",
+"new": [
+"  K.slab([[-0.576, 0.058], [-0.553, 0.06], [-0.553, -0.102], [-0.573, -0.108], [-0.579, -0.09], [-0.579, 0.044]], 0.092, gunRubber, { bevel: 0.008 });   // butt pad"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab(gripOutline(-0.1, -0.16, 0.19, 0.09, 0.3), 0.072, gunPoly, { bevel: 0.015, segs: 3 });",
+"new": [
+"  // GB-173 (Jerry: grip and trigger too close to the drum): grip, guard, trigger and panels 70 mm further back, so the",
+"  // guard clears the drum's rear face by ~13 mm (WEAPON_HOLD.aa12 grip/trig/hold follow in index.html).",
+"  K.slab(gripOutline(-0.17, -0.16, 0.19, 0.09, 0.3), 0.072, gunPoly, { bevel: 0.015, segs: 3 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  for (const sx of [-1, 1]) K.slab([[-0.098, -0.098], [-0.151, -0.241], [-0.091, -0.257], [-0.051, -0.112]], 0.003, gunRubber, { x: sx * 0.035, bevel: 0.002 });",
+"new": [
+"  for (const sx of [-1, 1]) K.slab([[-0.168, -0.098], [-0.221, -0.241], [-0.161, -0.257], [-0.121, -0.112]], 0.003, gunRubber, { x: sx * 0.035, bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab(gunBand([[0.002, -0.088], [0.0, -0.118], [-0.018, -0.13], [-0.04, -0.124]], 0.004), 0.014, gunMid, { bevel: 0.002 });",
+"new": [
+"  K.slab(gunBand([[-0.068, -0.088], [-0.07, -0.118], [-0.088, -0.13], [-0.11, -0.124]], 0.004), 0.014, gunMid, { bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab(gunBand([[-0.014, -0.088], [-0.016, -0.104], [-0.022, -0.116]], 0.0032), 0.009, gunAccent, { bevel: 0.002 });",
+"new": [
+"  K.slab(gunBand([[-0.084, -0.088], [-0.086, -0.104], [-0.092, -0.116]], 0.0032), 0.009, gunAccent, { bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.box(0.012, 0.05, 0.02, gunDark, 0, 0.07, 0.75);",
+"new": [
+"  // GB-173 (Jerry: the sights did not line up): the front post rises on the bore's centre line to the height of the",
+"  // carry handle's rear aperture (its centre y 0.168), with a clamp under it and protective ears either side.",
+"  K.box(0.03, 0.016, 0.026, gunDark, 0, 0.064, 0.75, 0, 0, 0, null, 0.003);",
+"  K.box(0.008, 0.098, 0.012, gunDark, 0, 0.119, 0.75, 0, 0, 0, null, 0.002);",
+"  for (const sx of [-1, 1]) K.box(0.004, 0.06, 0.016, gunDark, sx * 0.013, 0.142, 0.75, 0, 0, 0, null, 0.0015);"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.lathe([[0, 0.74], [0.03, 0.74], [0.03, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 12 });",
+"new": [
+"  // GB-173 (Jerry: no barrel inside the shroud): the barrel runs from the receiver through the vented shroud to the brake.",
+"  K.lathe([[0, 0.25], [0.021, 0.25], [0.021, 0.74], [0.03, 0.75], [0.03, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 16 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.lathe([[0, 0.902], [0.034, 0.902], [0.038, 0.91], [0.038, 0.97], [0.034, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 });",
+"new": [
+"  K.lathe([[0, 0.902], [0.034, 0.902], [0.038, 0.91], [0.038, 0.97], [0.034, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 });",
+"  K.disc(0.0095, gunRubber, 0, 0.015, 0.9765, 0, null, 12);   // GB-173: the bore at the muzzle"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.box(0.04, 0.02, 0.1, gunTan, 0, -0.03, -0.26, 0, 0, 0, null, 0.006);",
+"new": [
+"  K.box(0.04, 0.02, 0.1, gunTan, 0, -0.03, -0.26, 0, 0, 0, null, 0.006);",
+"  // GB-173 (Jerry: a gap in the stock above the grip): the chassis is solid through the wrist, rear block to magwell,",
+"  // under the action and above the grip and trigger.",
+"  K.slab([[-0.245, 0.014], [-0.026, 0.014], [-0.026, -0.04], [-0.245, -0.04]], 0.07, gunTan, { bevel: 0.006 });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[-.098, .025], [-.097, .071], [-.091, .094], [-.079, .105], [-.057, .111], [-.02, .112], [-.02, -.007], [-.005, -.02], [-.013, -.04], [-.034, -.053], [-.063, -.037], [-.083, -.018], [-.096, .002]], .078, steelMat, {bevel: .014, segs: 4});",
+"new": [
+"  // GB-173 (Jerry: the rear looked blocky): a slimmer frame whose back runs from the top strap round the hammer seat",
+"  // and down a curved backstrap into the grip; a round recoil shield stands behind the cylinder.",
+"  K.slab([[-.02, .112], [-.056, .11], [-.068, .104], [-.074, .094], [-.077, .078], [-.08, .058], [-.08, .036], [-.076, .016], [-.07, 0], [-.066, -.009], [-.052, -.024], [-.034, -.036], [-.016, -.036], [-.005, -.02], [-.02, -.007]], .066, steelMat, {bevel: .012, segs: 4});",
+"  K.lathe([[0, -.03], [.052, -.03], [.055, -.027], [.052, -.022], [0, -.022]], steelMat, {y: .05, seg: 28});   // recoil shield"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.058, .111], [.072, .11], [.087, .098], [.095, .084], [.095, .013], [.09, -.002], [.075, -.011], [.058, -.012]], .06, steelMat, {bevel: .008, segs: 4});",
+"new": [
+"  // GB-173: the frame's front starts 6 mm ahead of the cylinder, so the barrel's forcing cone shows in the gap.",
+"  K.slab([[.066, .111], [.072, .11], [.087, .098], [.095, .084], [.095, .013], [.09, -.002], [.075, -.011], [.066, -.012]], .06, steelMat, {bevel: .008, segs: 4});",
+"  K.lathe([[0, .058], [.011, .058], [.016, .068], [.016, .09], [0, .09]], steelMat, {y: .083, seg: 16});   // forcing cone"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.025, -.008], [.02, -.026], [.012, -.043], [.01, -.06], [.005, -.083], [-.001, -.103], [-.01, -.125], [-.02, -.147], [-.032, -.16], [-.046, -.166], [-.06, -.165], [-.075, -.157], [-.087, -.144], [-.088, -.127], [-.085, -.101], [-.079, -.076], [-.071, -.052], [-.066, -.027], [-.066, -.009], [-.062, -.002], [-.043, -.003], [-.02, -.004]], .068, woodMat, {bevel: .016, segs: 4});",
+"new": [
+"  // GB-173 (Jerry: the grip): rounder (bigger bevel), a touch slimmer than the frame so the frame overhangs nothing.",
+"  K.slab([[.025, -.008], [.02, -.026], [.012, -.043], [.01, -.06], [.005, -.083], [-.001, -.103], [-.01, -.125], [-.02, -.147], [-.032, -.16], [-.046, -.166], [-.06, -.165], [-.075, -.157], [-.087, -.144], [-.088, -.127], [-.085, -.101], [-.079, -.076], [-.071, -.052], [-.066, -.027], [-.066, -.009], [-.062, -.002], [-.043, -.003], [-.02, -.004]], .064, woodMat, {bevel: .018, segs: 5});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "    K.slab(woodPanel, .0016, woodDark, {x: sx * .0335, bevel: .0006});",
+"new": [
+"    K.slab(woodPanel, .0016, woodDark, {x: sx * .0315, bevel: .0006});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "    checkeredPanel(THREE, gun, woodMat, woodPanel, sx * .0344, .0048, .0014);",
+"new": [
+"    checkeredPanel(THREE, gun, woodMat, woodPanel, sx * .0324, .0048, .0014);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab(gunBand([[.037, -.01], [.044, -.022], [.043, -.039], [.037, -.052], [.028, -.059]], .0033), .01, steelMat, {bevel: .002, segs: 3});",
+"new": [
+"  // GB-173 (Jerry: the trigger curved the wrong way): the finger's face is concave toward the front; the blade drops",
+"  // and bows back toward the grip, its tip curling forward inside the guard.",
+"  K.slab(gunBand([[.037, -.01], [.031, -.024], [.03, -.039], [.035, -.051], [.045, -.058]], .0033), .01, steelMat, {bevel: .002, segs: 3});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "    const a = i * Math.PI / 3;",
+"new": [
+"    const a = Math.PI / 6 + i * Math.PI / 3;   // GB-173: a chamber at the top, on the bore's axis (y 0.083)"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.lathe([[0, .09], [.025, .09], [.025, .11], [.023, .134], [.022, .17], [.022, .371], [.021, .378], [.019, .382], [0, .382]], steelMat, {y: .05, seg: 24});",
+"new": [
+"  // GB-173 (Jerry: the barrel did not line up with the cylinder): the bore is on the top chamber's axis (y 0.083),",
+"  // 33 mm above the cylinder's centre; the underlug, rib, sight, muzzle and laser moved up with it.",
+"  K.lathe([[0, .09], [.025, .09], [.025, .11], [.023, .134], [.022, .17], [.022, .371], [.021, .378], [.019, .382], [0, .382]], steelMat, {y: .083, seg: 24});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.09, .044], [.12, .039], [.2, .036], [.37, .036], [.379, .03], [.38, .021], [.376, .012], [.365, .008], [.15, .006], [.125, .004], [.105, -.002], [.09, .0]], .034, steelMat, {bevel: .009, segs: 4});",
+"new": [
+"  K.slab([[.09, .077], [.12, .072], [.2, .069], [.37, .069], [.379, .063], [.38, .054], [.376, .045], [.365, .041], [.15, .039], [.125, .037], [.105, .031], [.09, .033]], .034, steelMat, {bevel: .009, segs: 4});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[.081, .087], [.102, .081], [.133, .076], [.37, .077], [.378, .081], [.375, .071], [.15, .069], [.105, .07], [.085, .076]], .016, steelMat, {bevel: .003, segs: 3});",
+"new": [
+"  K.slab([[.081, .111], [.102, .105], [.133, .1], [.37, .101], [.378, .105], [.375, .095], [.15, .093], [.105, .094], [.085, .1]], .016, steelMat, {bevel: .003, segs: 3});"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[0.35, 0.08], [0.375, 0.08], [0.375, 0.1], [0.362, 0.1]], 0.006, gunDark, { bevel: 0.001 });",
+"new": [
+"  // GB-173 (Jerry: the sights did not line up): the front blade's top is level with the rear notch (y 0.121) on x 0.",
+"  K.slab([[0.348, 0.097], [0.376, 0.097], [0.376, 0.121], [0.36, 0.121]], 0.005, gunDark, { bevel: 0.001 });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.cyl(0.006, 0.006, 0.1, steelMat, 0, 0.0, 0.1, null, 12);",
+"new": [
+"  // the ejector rod on the cylinder's axis, inside the underlug",
+"  K.cyl(0.006, 0.006, 0.1, steelMat, 0, 0.046, 0.1, null, 12);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.cyl(.007, .007, .018, gunAccent, 0, 0, .143, null, 12);",
+"new": [
+"  K.cyl(.007, .007, .018, gunAccent, 0, .046, .143, null, 12);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.disc(0.013, gunRubber, 0, 0.05, 0.3825, 0, null, 10);",
+"new": [
+"  K.disc(0.013, gunRubber, 0, 0.083, 0.3825, 0, null, 10);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[-0.012, -0.03], [0.014, -0.03], [0.016, 0.006], [0.004, 0.024], [-0.028, 0.038], [-0.034, 0.03], [-0.016, 0.012]], 0.022, gunDark, { bevel: 0.004, parent: hammer });",
+"new": [
+"  // GB-173: a slimmer hammer with a proper spur swept back over the frame's hammer seat.",
+"  K.slab([[-0.012, -0.03], [0.012, -0.03], [0.014, 0.0], [0.008, 0.016], [-0.006, 0.028], [-0.03, 0.044], [-0.04, 0.04], [-0.036, 0.03], [-0.018, 0.014], [-0.014, -0.004]], 0.016, gunDark, { bevel: 0.003, parent: hammer });"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.box(0.026, 0.006, 0.02, gunAccent, 0, 0.034, -0.026, -0.5, 0, 0, hammer, 0.002);",
+"new": [
+"  K.box(0.018, 0.005, 0.018, gunAccent, 0, 0.041, -0.031, -0.55, 0, 0, hammer, 0.002);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  for (let i = 0; i < 4; i++) K.box(.022, .0015, .0015, gunDark, 0, .036, -.033 + i * .004, -.5, 0, 0, hammer);",
+"new": [
+"  for (let i = 0; i < 4; i++) K.box(.016, .0015, .0015, gunDark, 0, .0435, -.038 + i * .004, -.55, 0, 0, hammer);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  gunEffects(gun, new THREE.Vector3(0, 0.05, 0.4), 0.045, 2.8, 6, 0.005);",
+"new": [
+"  gunEffects(gun, new THREE.Vector3(0, 0.083, 0.4), 0.045, 2.8, 6, 0.005);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  gun.userData.laser.position.set(0, 0.05, 3.4);",
+"new": [
+"  gun.userData.laser.position.set(0, 0.083, 3.4);"
+]
+}
+]

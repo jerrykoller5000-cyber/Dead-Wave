@@ -1,0 +1,23 @@
+✔ shield follows actual scream completion; opening lasts 2.4 seconds (0.9537ms)
+✔ each completed scream creates a fresh opening (0.1462ms)
+✔ head loss and death remove shield and cancel scream (0.1408ms)
+✔ shield never affects another species (0.0993ms)
+✔ half turn is accelerated and bounded at multiple frame rates (1.4265ms)
+✔ scream commits facing, then exhausted pose relaxes (0.1913ms)
+✔ room clear removes private state and hides effects (0.1913ms)
+✔ protected pursuit closes; exposed retreat increases separation and still faces the player (0.4857ms)
+✔ exposed movement tries another safe route, and holds when boxed in (0.1683ms)
+✔ exposed side changes are held, not random frame to frame; retreat never accelerates past original pace (0.4758ms)
+✔ retreat holds a gap rather than running forever; invalid/alternate targets and injuries keep normal movement (0.1964ms)
+✔ committed scream/attack and downed bodies are not redirected (0.153ms)
+✔ protected hover blends to exposed footwork and back, with no accumulating pose offsets (2.8086ms)
+✔ shielded travel is one fifth pace, while exposed and headless travel keep their existing speed (0.1753ms)
+✔ protected bob lifts the body in a smooth sustained cycle without moving its collision root (3.1022ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.8632

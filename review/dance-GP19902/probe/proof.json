@@ -1,0 +1,105 @@
+{
+  "mode": "probe",
+  "alpha": false,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 0,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19902\\probe",
+  "started": "2026-10-13T11:22:01.405Z",
+  "camera": {
+    "position": [
+      2.6,
+      2,
+      5.5
+    ],
+    "look": [
+      0,
+      0.75,
+      0
+    ],
+    "fov": 43
+  },
+  "samples": [
+    {
+      "seconds": 0,
+      "state": null,
+      "bounds": {
+        "min": [
+          -0.4950020452590161,
+          -0.0030000001192093118,
+          -0.31949999928474426
+        ],
+        "max": [
+          0.5051990787372397,
+          1.6157600203514098,
+          0.2803086302391534
+        ]
+      },
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "drawCalls": 3,
+      "file": "probe.png"
+    }
+  ],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 11.742,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "cover",
+      "eyewear": "none",
+      "rolled": false,
+      "shorts": false,
+      "gloves": true,
+      "skin": 3,
+      "hair": "darkBrown",
+      "eyes": "brown"
+    },
+    "wardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 0,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 0,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 0,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 4,
+        "sourceCount": 4
+      }
+    },
+    "motionMissing": true,
+    "duration": 60,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Camera uses an isolated browser profile; null wardrobe means factory/default profile, not a snapshot of the user game save."
+  },
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T11:22:15.525Z"
+}

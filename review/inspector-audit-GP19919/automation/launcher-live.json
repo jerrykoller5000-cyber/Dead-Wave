@@ -1,0 +1,32 @@
+{
+  "first": {
+    "ok": true,
+    "service": "dead-wave-inspector",
+    "version": 1,
+    "root": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "pid": 14192,
+    "fingerprint": "c89977f7df9d54331f518934b8024a2fb2452beff93324ab8e9b1155f45174d9",
+    "port": 11002,
+    "origin": "http://127.0.0.1:11002",
+    "reused": false
+  },
+  "second": {
+    "ok": true,
+    "service": "dead-wave-inspector",
+    "version": 1,
+    "root": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "pid": 14192,
+    "fingerprint": "c89977f7df9d54331f518934b8024a2fb2452beff93324ab8e9b1155f45174d9",
+    "port": 11002,
+    "origin": "http://127.0.0.1:11002",
+    "reused": true
+  },
+  "health": {
+    "ok": true,
+    "service": "dead-wave-inspector",
+    "version": 1,
+    "root": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+    "pid": 14192,
+    "fingerprint": "c89977f7df9d54331f518934b8024a2fb2452beff93324ab8e9b1155f45174d9"
+  }
+}

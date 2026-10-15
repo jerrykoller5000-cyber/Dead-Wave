@@ -1,13 +1,13 @@
 # Cursor
 
-state: active
-model: Grok 4.7
-task: CU-110 Commit and push the checked-out work, leaving files an active agent is still in
-touching: git
-since: 2026-10-11T20:23Z
-next: CU-110 The full suite, then commit. Its preflight passes again (CL-
+state: idle
+model: GPT-5.6 Sol
+task: —
+touching: —
+since: 2026-10-15T09:53Z
+next: CU-148 Bench numbers for budgets. `tools/bench.mjs`: add draw calls
 blocked-on: —
-last-report: handoffs/2026-10-11-cursor-CU-126.md
+last-report: handoffs/2026-10-15-cursor-CU-153.md
 
 ## Notes
 

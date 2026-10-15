@@ -1,0 +1,10 @@
+[
+ {
+  "old": "  for (const sx of [-1, 1]) K.slab([[0.104, -0.056], [0.14, -0.064], [0.124, -0.04], [0.15, -0.03], [0.124, -0.016], [0.15, -0.004], [0.124, 0.006], [0.104, 0.01]], 0.014, gunDark, { x: sx * 0.1, bevel: 0.002 });",
+  "new": [
+   "  // GB-180 pass 7 (the pass-6 spikes read as a dark clump under the bar): steel spike plates flat on the housing face,",
+   "  // either side of the bar, three big forward teeth each.",
+   "  for (const sx of [-1, 1]) K.slab([[0.104, -0.034], [0.13, -0.034], [0.165, -0.012], [0.13, 0.004], [0.165, 0.026], [0.13, 0.042], [0.165, 0.064], [0.13, 0.08], [0.104, 0.09]], 0.01, steelMat, { x: sx * 0.1, bevel: 0.002 });"
+  ]
+ }
+]

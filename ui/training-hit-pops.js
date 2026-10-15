@@ -12,6 +12,7 @@ const ZONE_CLASS = { head: 'gold', bull: 'gold', ring: 'amber', plate: 'grey' };
 // What a pop says: the points scored, and under it the zone (and the lane's multiplier when it is not 1).
 export function hitPopText(sc, label = (zone) => ZONE_LABEL[zone] || zone) {
   if (!sc) return null;
+  if (sc.popup) return sc.popup; // timed drill contact can be real but earn no points
   const total = Math.round(sc.total || 0);
   const sub = label(sc.zone) + (sc.mult && sc.mult !== 1 ? ' ×' + sc.mult : '');
   return { main: '+' + total, sub, tone: ZONE_CLASS[sc.zone] || 'grey' };
@@ -32,7 +33,7 @@ const CSS = `
   font:700 22px/1 var(--font-hud,Impact,'Arial Black',sans-serif);letter-spacing:.04em;will-change:transform,opacity;
   text-shadow:0 2px 0 #000c,0 0 10px #000a;transform-origin:50% 100%}
 .training-hit-pop small{display:block;margin-top:3px;font:600 11px/1 var(--font-hud,sans-serif);letter-spacing:.14em;text-transform:uppercase;opacity:.9}
-.training-hit-pop.gold{color:#ffd24a}.training-hit-pop.amber{color:#ffab3d}.training-hit-pop.grey{color:#e4e6e0}
+.training-hit-pop.red{color:#ff7868}.training-hit-pop.gold{color:#ffd24a}.training-hit-pop.amber{color:#ffab3d}.training-hit-pop.grey{color:#e4e6e0}
 `;
 
 export function createHitPops({ doc = document, parent = null } = {}) {

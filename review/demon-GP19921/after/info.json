@@ -1,0 +1,75 @@
+{
+  "load": 10.839,
+  "info": {
+    "id": "zombie.demon",
+    "name": "Demon",
+    "kind": "zombie",
+    "variant": null,
+    "mode": "statue",
+    "center": {
+      "x": -26,
+      "y": -198.2713018990215,
+      "z": -632
+    },
+    "size": {
+      "x": 2.1001178481739338,
+      "y": 3.457396201957067,
+      "z": 1.1710291014414906
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 6,
+      "drawables": 6,
+      "tris": 12812,
+      "points": 0,
+      "segments": 0,
+      "materials": 5
+    }
+  },
+  "live": {
+    "info": {
+      "id": "zombie.demon",
+      "name": "Demon",
+      "kind": "zombie",
+      "variant": null,
+      "mode": "walk",
+      "center": {
+        "x": -27.884712499998393,
+        "y": -198.28253137803517,
+        "z": -632
+      },
+      "size": {
+        "x": 1.6303473577776124,
+        "y": 3.4225643830335457,
+        "z": 2.12844688662949
+      },
+      "yaw": 1.5707963267948966,
+      "info": {
+        "meshes": 6,
+        "drawables": 6,
+        "tris": 12812,
+        "points": 0,
+        "segments": 0,
+        "materials": 5
+      }
+    },
+    "keys": [
+      "killZombie",
+      "zombies",
+      "spawnZombie",
+      "damageZombie",
+      "LATE_CASH_FACTOR",
+      "zombieFeetDbg",
+      "pickZombieType",
+      "clearZombies",
+      "ZOMBIE_TYPES",
+      "MAX_ZOMBIES",
+      "updateZombieFires",
+      "zombieFireSets",
+      "igniteZombie",
+      "isNoZombies",
+      "zombiePoolDbg"
+    ],
+    "errors": []
+  }
+}

@@ -6,7 +6,7 @@
 <title>Grave Shift Crew</title>
 <link rel="icon" href="data:,">
 <!--
-  The crew panel. A live, read-only view of: crew/status/*.md, crew/LOG.md, crew/BOARD.md,
+  The crew panel (Jerry's screen; CL-199 put "Needs you" first). A live, read-only view of: crew/status/*.md, crew/LOG.md, crew/BOARD.md,
   crew/QUESTIONS.md, handoffs/requests.md, the handoff notes named in the log, the git log in
   .git/logs, and crew/tests.json when the test runner writes one. Open it with
   "crew/Open Crew Panel.bat" (it needs the folder served). It refreshes every 10 seconds.
@@ -205,44 +205,55 @@
   .md p { margin: 6px 0; } .md ul { margin: 4px 0; padding-left: 18px; } .md li { margin: 2px 0; }
   .offline { padding: 16px 18px; }
   @media (max-width: 560px) { header, main { padding-left: 16px; padding-right: 16px; } .grid2 { grid-template-columns: 1fr; } .mission .mr { grid-template-columns: 12px 1fr auto; } .mission .mr .sf { grid-column: 2 / -1; } .you .yi { grid-template-columns: 12px 1fr; } .you .yi > :last-child { grid-column: 2; justify-self: start; } }
+  /* CL-199: needs you, done today, the owners table */
+  .need { border-left: 6px solid var(--accent); }
+  .need .clear { margin: 0; font-size: 15px; color: var(--ok); font-weight: 600; }
+  .need .later { margin-top: 6px; border-top: 1px dashed var(--line); padding-top: 4px; }
+  .need .later .yi { opacity: .8; }
+  .you .yi.bad .nm { color: var(--danger); }
+  .card.slot::before { opacity: .8; background: var(--warn); }
+  .slot .dot, .card.slot .dot { background: var(--warn); }
+  .card.slot .state { color: var(--warn); }
+  .warnt { color: var(--warn); }
+  .done .feed { max-height: none; }
+  table.own { border-collapse: collapse; font-size: 12.5px; width: 100%; }
+  table.own th, table.own td { text-align: left; vertical-align: top; border-top: 1px solid var(--line); padding: 4px 8px 4px 0; }
+  details.box > summary, .box > details > summary { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  details .n2 { text-transform: none; letter-spacing: 0; color: var(--faint); font-weight: 400; }
 </style>
 </head>
 <body>
 <header>
-  <h1>DEAD<span>-</span>WAVE CREW</h1>
-  <span class="badge" id="freeze">split freeze off</span>
+  <h1>GRAVE <span>SHIFT</span> CREW</h1>
+  <span class="badge" id="slotBadge">test slot…</span>
   <span class="badge" id="push">…</span>
   <span class="badge" id="tests" hidden></span>
-  <span class="badge" id="slotBadge">test slot…</span>
   <span class="stamp" id="stamp">loading…</span>
   <p class="summary" id="summary"></p>
 </header>
 <main>
-  <section class="box slot" id="slotBox"><h3>Game-test slot <small>automatic, exclusive per computer · Jerry has priority</small></h3><div id="slot"></div></section>
+  <section class="box you need"><h3>Needs you <small id="needN"></small></h3><div id="you"></div></section>
   <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
-  <section class="box roadmap" id="roadBox" hidden><h3>Roadmap <small>every stage to 1.0 and after, live from crew/BOARD.md · details in docs/roadmap.md</small></h3><div id="roadmap"></div></section>
-  <section class="box you"><h3>Your move <small>what only you can do right now</small></h3><div id="you"></div></section>
-  <section class="box rev" id="revBox" hidden><h3>Review folders <small>the studio: watch it, then write in its notes.md</small></h3><div id="reviews"></div></section>
-  <section class="box flow"><h3>Right now <small>who's working, who everyone is waiting on, who's up next</small></h3><div id="flow"></div></section>
-  <div class="attn" id="attn"></div>
   <div class="agents" id="agents"></div>
-  <section class="box"><h3>Today <small id="tlnote"></small></h3><div id="timeline"></div></section>
+  <section class="box slot" id="slotBox"><h3>Game-test slot <small>one game test at a time on this computer · Jerry first · automatic</small></h3><div id="slot"></div></section>
+  <section class="box done"><h3>Done today <small id="doneN"></small> <small>what changed, and what nobody could check</small></h3><ul class="feed" id="doneToday"></ul></section>
+  <section class="box"><h3>Who worked when <small id="tlnote"></small></h3><div id="timeline"></div></section>
   <div class="grid2">
-    <section class="box"><h3>What happened <small>newest first</small></h3><ul class="feed" id="feed"></ul></section>
-    <section class="box q"><h3>Queues <small>from crew/BOARD.md</small></h3><div id="queues"></div></section>
+    <section class="box q"><details><summary>Queues <span class="n2">every agent's open tasks</span></summary><div id="queues"></div><div id="backlog"></div></details></section>
+    <section class="box req"><details><summary>Between agents <span class="n2" id="reqN"></span></summary><div id="requests"></div></details></section>
   </div>
   <div class="grid2">
-    <section class="box req"><h3>Open requests <small>handoffs/requests.md</small></h3><div id="requests"></div></section>
-    <section class="box md"><details><summary>Orders from Jerry and decisions</summary><div id="orders"></div><div id="decisions"></div></details></section>
+    <section class="box"><details><summary>Everything that happened <span class="n2">newest first</span></summary><ul class="feed" id="feed"></ul></details></section>
+    <section class="box rev"><details><summary>Review folders <span class="n2" id="revN"></span></summary><div id="reviews"></div></details></section>
   </div>
+  <section class="box md"><details><summary>Your orders, who owns what, decisions</summary><div id="orders"></div></details></section>
   <section class="box help"><details><summary>How to read this panel</summary><ul>
-    <li><b>The top line</b> says it in one sentence: who is working, who needs you, whether anything is waiting to be committed.</li>
-    <li><b>Mission</b> is the one job the whole crew is on now, and where each agent is with it. <span class="st in">DONE</span> means finished and checked out; green chips are done, grey ones not started.</li>
-    <li><b>Roadmap</b> is every stage of the game to 1.0 (and co-op after it): how many of its tasks are done, and each agent's share.</li>
-    <li><b>Your move</b> lists what only you can do: start an agent (press <b>Copy prompt</b>, paste it into that agent's chat), or answer a question.</li>
-    <li><b>Right now</b> shows who is working, who is waiting on whom, and who is ready.</li>
-    <li><b>The cards</b> are each agent's own status. <b>Today</b> is who worked when; green lines are commits.</li>
-    <li>Nothing here changes anything: it only reads the crew files. Claude runs the board.</li>
+    <li><b>The top line</b> says it in one sentence: who is working, who is waiting for the test slot, and whether anything needs you.</li>
+    <li><b>Needs you</b> is the only list you have to act on: questions, agents to start or resume (press <b>Copy prompt</b>, paste it into that agent's chat), notes to look at, two agents in one file. "When you have time" is the slow stuff.</li>
+    <li><b>The cards</b> are each agent: what it's on, for how long, its latest note and what's next. <b>Waiting for test slot</b> means its changes are ready and it is in line for the game.</li>
+    <li><b>Game-test slot</b> is who has the game right now and who is next. Your own game or inspector always goes first.</li>
+    <li><b>Done today</b> is every finished task with what changed, what nobody could check, and whether it's committed.</li>
+    <li>The folded boxes at the bottom are for when you want the detail. Nothing here changes anything: it only reads the crew files.</li>
   </ul></details></section>
 </main>
 <script>
@@ -318,7 +329,7 @@ function gateOf(t, tasks) {
   }
   return null;
 }
-const PROMPT = (a, id) => `Grave Shift: check in as ${a}. Read AGENTS.md and follow its session steps: look at the crew board, answer requests addressed to you, then work down your queue — check in (with --model, the model you run on), post notes as you go, check out with a handoff note, and take the next task — until your queue is empty or you're blocked. Questions only Jerry can answer go through crew.mjs ask.` + (id ? ` Today, do ${id} first.` : '');
+const PROMPT = (a, id) => `Grave Shift: check in as ${a}. Read AGENTS.md and follow its session steps: run node crew/crew.mjs me ${(BY_NAME[a.toLowerCase()] || a)}, answer the requests it lists (crew.mjs reply), then work down your queue — check in (with --model, the model you run on), post notes as you go, check out with a handoff note, and take the next task — until your queue is empty or you're blocked. Questions only Jerry can answer go through crew.mjs ask.` + (id ? ` Today, do ${id} first.` : '');
 async function copyText(btn, text) {
   try { await navigator.clipboard.writeText(text); }
   catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch {} ta.remove(); }
@@ -399,7 +410,7 @@ function requests(text) {
     const to = h[3].split(/,|\band\b/).map((s) => s.trim().toLowerCase()).map((s) => s === 'all' ? 'all' : BY_NAME[s.replace(/\s*\(.*\)/, '')] || s).filter(Boolean);
     const st = [...body.matchAll(/\b(DONE|WONT|LATER)\b/g)].map((x) => x[1]);
     const replied = to.some((a) => a !== 'all' && new RegExp('\\*\\*' + (NAME[a] || a) + '[ ,]', 'i').test(body));
-    out.push({ date: h[1], from: h[2].replace(/\s*\(.*\)/, ''), to, title: h[4], status: st.length ? st[st.length - 1] : replied ? 'ANSWERED' : (to.includes('all') || /\bFYI\b/i.test(h[4])) ? 'FYI' : 'OPEN' });
+    out.push({ at: i, date: h[1], from: h[2].replace(/\s*\(.*\)/, ''), to, title: h[4], status: st.length ? st[st.length - 1] : replied ? 'ANSWERED' : (to.includes('all') || /\bFYI\b/i.test(h[4])) ? 'FYI' : 'OPEN' });
   });
   return out;
 }
@@ -414,90 +425,6 @@ function reportSummary(text) {
 }
 const reportCache = new Map();
 async function report(p) { if (!reportCache.has(p)) reportCache.set(p, reportSummary(await opt('../' + p))); return reportCache.get(p); }
-
-// ---- flow: who is working, who everyone is waiting on, who is up next.
-// Three sources, all already on disk: the cards (blocked-on names an agent), the queues (a
-// next task that says "after the split" or "after GB-3" waits on that task's owner), and the
-// board's "## Waiting on" list, which Claude keeps for gates the other two can't see.
-function flowModel(board, tasks, statuses) {
-  const byId = Object.fromEntries(tasks.map((t) => [t.id, t]));
-  const isDone = (id) => byId[id] && (byId[id].box === 'x' || byId[id].box === '~');
-  const namesIn = (s) => AGENTS.filter(([, n]) => new RegExp('\\b' + n + '\\b', 'i').test(s || '')).map(([a]) => a).concat(/\bjerry\b/i.test(s || '') ? ['jerry'] : []);
-  const gates = [];
-  for (const line of section(board, 'Waiting on').replace(/\r\n/g, '\n').split('\n')) {
-    const m = /^- \*\*(\w+)\*\* · (.+?) · waiting: (.+)$/.exec(line.trim());
-    if (!m) continue;
-    const on = m[1].toLowerCase() === 'jerry' ? 'jerry' : BY_NAME[m[1].toLowerCase()];
-    const ids = [...m[2].matchAll(/\b([A-Z]{2}-\d+)\b/g)].map((x) => x[1]);
-    if (!on || (ids.length && ids.every(isDone))) continue;       // its task is done: the gate is over
-    gates.push({ on, what: m[2], waiters: namesIn(m[3]).filter((a) => a !== on) });
-  }
-  const per = {};
-  for (const [a] of AGENTS) {
-    const f = statuses[a]; const st = (f.state || 'unknown').toLowerCase();
-    const next = tasks.find((t) => t.agent === a && (t.box === '>' || t.box === ' ' || t.box === '!')) || null;
-    const waitOn = [], staleOn = []; let why = '';
-    if (st === 'blocked') {
-      why = f['blocked-on'] || '';
-      // "blocked on ChatGPT in index.html (HUD prep)": if ChatGPT is no longer in that file,
-      // the block has probably cleared and the card just hasn't been updated yet.
-      const files = [...why.matchAll(/[\w./-]+\.(?:html|m?js|md|json|css)(?:\s*\([^)]*\))?/g)].map((x) => x[0]);
-      for (const b of namesIn(why)) {
-        if (b === a) continue;
-        const bs = statuses[b] || {};
-        const still = !files.length || b === 'jerry' || (bs.state === 'active' && files.some((x) => splitList(bs.touching).some((y) => clash(x, y))));
-        (still ? waitOn : staleOn).push(b);
-      }
-    }
-    if (st !== 'active' && next) {
-      for (const d of next.text.matchAll(/\b(?:after|once|until|waits? (?:for|on))\s+(?:the\s+)?(?:(split)\b|([A-Z]{2}-\d+))/gi)) {
-        const id = d[1] ? 'CU-4' : d[2].toUpperCase();
-        if (id !== next.id && byId[id] && !isDone(id) && byId[id].agent !== a) { waitOn.push(byId[id].agent); why = why || (id + ' ' + byId[id].text.replace(/\*\*/g, '').split(/[.:(]/)[0]); }
-      }
-    }
-    if (st !== 'active') for (const g of gates) if (g.waiters.includes(a)) { waitOn.push(g.on); why = why || g.what; }
-    per[a] = { st, next, waitOn: [...new Set(waitOn)], staleOn, why };
-  }
-  const waiting = new Map();
-  for (const [a] of AGENTS) for (const b of per[a].waitOn) { if (!waiting.has(b)) waiting.set(b, new Set()); waiting.get(b).add(a); }
-  const bottlenecks = [...waiting.entries()].map(([on, w]) => ({ on, waiters: [...w], gate: gates.find((g) => g.on === on) }))
-    .sort((x, y) => y.waiters.length - x.waiters.length);
-  return { per, bottlenecks };
-}
-function renderFlow(board, tasks, statuses, now) {
-  const { per, bottlenecks } = flowModel(board, tasks, statuses);
-  const who = (a) => a === 'jerry' ? '<span class="n">you</span>' : `<span class="n" ${cvar(a)}>${esc(NAME[a] || a)}</span>`;
-  const clean = (s, n = 90) => inline(cut(s, n));
-  const gatesHtml = bottlenecks.map(({ on, waiters, gate }) => {
-    const f = on === 'jerry' ? {} : statuses[on]; const st = (f.state || '').toLowerCase();
-    const task = gate ? gate.what : st === 'active' ? f.task : (per[on] && per[on].next ? per[on].next.id + ' ' + per[on].next.text : f.task);
-    const since = Date.parse(f.since);
-    const state = on === 'jerry' ? '<b class="warnt">Waiting on your answer</b>: reply in chat to Claude, or in <code>crew/QUESTIONS.md</code>.'
-      : st === 'active' ? `<b class="okt">${esc(NAME[on])} is on it</b>, ${dur(now - since)} so far · ${clean(f.task, 70)}`
-      : st === 'blocked' && per[on].waitOn.length ? `<b class="warnt">${esc(NAME[on])} is blocked too</b>, on ${clean(f['blocked-on'], 90)}`
-      : st === 'blocked' ? `<b class="warnt">Probably free to start:</b> ${esc(NAME[on])}'s card says blocked on ${per[on].staleOn.map((b) => esc(NAME[b] || b)).join(', ')}, who ${per[on].staleOn.length > 1 ? 'are' : 'is'} out of that file now. Give ${esc(NAME[on])} the check-in prompt.`
-      : `<b class="warnt">Not started.</b> Give ${esc(NAME[on])} the check-in prompt.`;
-    const many = waiters.length >= 2 ? `${waiters.length} agents can't go on until this is done` : 'holding up one agent';
-    return `<div class="gate ${st === 'active' ? 'on' : 'stalled'}" ${on === 'jerry' ? '' : cvar(on)}>
-      <div class="big">Waiting on ${who(on)} <span class="what">· ${clean(task, 80)}</span></div>
-      <div class="sub">${state}</div>
-      <div class="sub">${many}: ${waiters.map(who).join(', ')}</div></div>`;
-  }).join('');
-  const row = (a, d) => `<div class="ag" ${cvar(a)}><span class="dot"></span><div>${who(a)} <span class="m">${esc(statuses[a].model && statuses[a].model !== '—' ? statuses[a].model.split(/,| \(/)[0] : '')}</span><div class="d">${d}</div></div></div>`;
-  const working = [], ready = [], waitingOn = [], empty = [];
-  for (const [a] of AGENTS) {
-    const p = per[a], f = statuses[a];
-    if (p.st === 'active') working.push(row(a, `${clean(f.task)} · ${dur(now - Date.parse(f.since))}`));
-    else if (p.waitOn.length) waitingOn.push(row(a, `on ${p.waitOn.map(who).join(', ')}${p.next ? ' · then ' + esc(p.next.id) : ''}<br><span class="faint">${clean(p.why, 80)}</span>`));
-    else if (p.staleOn.length) ready.push(row(a, `${esc((f.task || '').split(' ')[0])} ${clean((f.task || '').split(' ').slice(1).join(' '), 60)}<br><span class="faint">card says blocked on ${p.staleOn.map((b) => esc(NAME[b] || b)).join(', ')}, who ${p.staleOn.length > 1 ? 'are' : 'is'} out of that file now</span>`));
-    else if (p.next) ready.push(row(a, `${esc(p.next.id)} ${clean(firstSentence(p.next.text), 70)}`));
-    else empty.push(row(a, 'queue empty: Claude adds work'));
-  }
-  const col = (title, items, none) => `<div class="col"><h4>${title}</h4>${items.join('') || `<div class="none">${none}</div>`}</div>`;
-  document.getElementById('flow').innerHTML =
-    (gatesHtml || '<div class="gate clear"><div class="big">Nobody is waiting on anyone</div><div class="sub">Everyone with work can go.</div></div>') +
-    `<div class="cols">${col('Working now', working, 'Nobody is checked in.')}${col('Ready · start them from Your move', ready, 'Nobody is ready and idle.')}${col('Waiting', waitingOn, 'Nobody is waiting.')}${empty.length ? col('Nothing queued', empty, '') : ''}</div>`;
-}
 
 function renderGameTestSlot(S) {
   const box = document.getElementById('slotBox');
@@ -521,11 +448,35 @@ function renderGameTestSlot(S) {
     : `<b>Free.</b> The first live waiter is granted atomically; a prepared-only entry stays visible until its agent resumes the saved command.${queue}`;
 }
 
+// ---- CL-199: the panel is Jerry's screen. Top: what needs him. Then the crew, the test slot, what got done today.
+// Everything else (queues, requests, the full feed, review folders, orders) is folded at the bottom.
+const SLOT_WAIT = /(test(ing)?|validation) slot/i;
+const SETTLED = '<!-- crew: settled above -->';
+const FYI_TITLE = /^(FYI|GRANT|RELEASE|ACK|Record)\b|\bFYI\b/i;
+function jerryGates(board, tasks) {
+  const isDone = (id) => { const t = tasks.find((x) => x.id === id); return t && (t.box === 'x' || t.box === '~'); };
+  const out = [];
+  for (const line of section(board, 'Waiting on').replace(/\r\n/g, '\n').split('\n')) {
+    const m = /^- \*\*(\w+)\*\* · (.+?) · waiting: (.+)$/.exec(line.trim());
+    if (!m || m[1].toLowerCase() !== 'jerry') continue;
+    const ids = [...m[2].matchAll(/\b([A-Z]{2}-\d+)\b/g)].map((x) => x[1]);
+    if (ids.length && ids.every(isDone)) continue;
+    out.push({ what: m[2], waiters: m[3] });
+  }
+  return out;
+}
+function cardState(f) {
+  const st = (f.state || 'unknown').toLowerCase();
+  if (st === 'blocked' && SLOT_WAIT.test(f['blocked-on'] || '')) return 'slot';
+  return st;
+}
+const STATE_WORD = { active: 'WORKING', slot: 'WAITING FOR TEST SLOT', blocked: 'BLOCKED', idle: 'IDLE', away: 'AWAY', unknown: '?' };
+
 async function refresh() {
   let board;
   try { board = await get('BOARD.md'); }
   catch (e) {
-    document.getElementById('attn').innerHTML = `<div class="item bad offline"><b>The panel needs the game folder served.</b>
+    document.getElementById('you').innerHTML = `<div class="item bad offline"><b>The panel needs the game folder served.</b>
       Double-click <code>crew/Open Crew Panel.bat</code>, or run <code>node tools/serve.mjs 8971</code> in the game folder and open
       <code>http://127.0.0.1:8971/crew/panel.html</code>. <span class="faint">(${esc(e.message)})</span></div>`;
     document.getElementById('stamp').textContent = 'offline · retrying every 10 s';
@@ -560,141 +511,130 @@ async function refresh() {
   const missionFiles = [...section(board, 'Mission').matchAll(/^- \*\*\w+\*\* · [A-Z]{2}-\d+ · (\S+)\s*$/gm)].map((m) => m[1]);
   const exists = Object.fromEntries(await Promise.all(missionFiles.map(async (f) => [f, !!(await opt('../' + f))])));
   const qs = questions(qText);
-  const reqs = requests(reqText);
+  const settledAt = reqText.lastIndexOf(SETTLED);
+  const reqs = requests(reqText).map((r) => (r.status === 'OPEN' && (r.at < settledAt || FYI_TITLE.test(r.title)) ? { ...r, status: 'SETTLED' } : r));
   const now = Date.now();
+  const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
+  const cs = Object.fromEntries(AGENTS.map(([a]) => [a, cardState(statuses[a])]));
 
   // ---- header badges
-  const active = AGENTS.filter(([a]) => statuses[a].state === 'active');
-  const freezer = active.find(([a]) => /freeze/i.test(statuses[a].touching || ''));
-  const fz = document.getElementById('freeze');
-  fz.textContent = freezer ? `SPLIT FREEZE ON · ${freezer[1]}` : 'split freeze off'; fz.classList.toggle('on', !!freezer);
   const lastPush = pushes.length ? pushes[pushes.length - 1].t : 0;
-  const waiting = log.filter((e) => e.report && /^(OUT|DONE)$/.test(e.kind) && e.t > lastCommit);
-  const waitingReports = [...new Set(waiting.map((e) => e.report))];
+  const waitingReports = [...new Set(log.filter((e) => e.report && /^(OUT|DONE)$/.test(e.kind) && e.t > lastCommit).map((e) => e.report))];
   const pb = document.getElementById('push');
-  pb.textContent = (lastPush ? 'pushed ' + ago(new Date(lastPush).toISOString()) : 'never pushed') + (waitingReports.length ? ` · ${waitingReports.length} finished report${waitingReports.length > 1 ? 's' : ''} not yet committed` : ' · nothing waiting to commit');
+  pb.textContent = (lastPush ? 'pushed ' + ago(new Date(lastPush).toISOString()) : 'never pushed') + (waitingReports.length ? ` · ${waitingReports.length} finished, not committed yet` : ' · everything committed');
   pb.className = 'badge ' + (waitingReports.length ? 'warnb' : 'good');
   const tb = document.getElementById('tests');
-  try { const T = JSON.parse(testsJson); tb.hidden = false; tb.textContent = `npm test: ${T.pass} pass · ${T.fail} fail${T.cannotRun ? ' · ' + T.cannotRun + " can't run" : ''} · ${ago(T.at)}`; tb.className = 'badge ' + (T.fail ? 'warnb' : 'good'); } catch { tb.hidden = true; }
+  try { const T = JSON.parse(testsJson); tb.hidden = false; tb.textContent = `last full suite: ${T.pass} pass · ${T.fail} fail · ${ago(T.at)}`; tb.className = 'badge ' + (T.fail ? 'warnb' : 'good'); } catch { tb.hidden = true; }
 
-  // ---- needs attention
-  const attn = [];
-  for (const q of qs.filter((q) => q.state === 'open')) attn.push(`<div class="item q"><b>Question for Jerry · ${esc(q.id)}</b> from <span class="who" ${cvar(q.agent)}>${esc(NAME[q.agent] || q.agent)}</span> <span class="faint">${esc(ago(q.at))}</span><div>${inline(q.body.split('\n').filter(Boolean).join(' '))}</div><div class="faint">Answer in chat to Claude, or under the question in <code>crew/QUESTIONS.md</code>.</div></div>`);
-  for (const [a, n] of AGENTS) {
-    const f = statuses[a];
-    if (f.state === 'blocked') attn.push(`<div class="item"><b>${n} is blocked</b> on ${inline(f['blocked-on'] || '—')} <span class="faint">(${esc(f.task || '')})</span></div>`);
-    if (f.state === 'active' && (hoursSince(f.since) ?? 0) > STALE_HOURS) attn.push(`<div class="item bad"><b>${n} checked in ${ago(f.since)} and never checked out.</b> Probably stopped mid-task: ${inline(f.task || '')}</div>`);
-  }
+  // ---- NEEDS YOU: only what Jerry has to do. Each line says what and, where it can, gives the button.
+  const need = [], later = [];
+  const yi = (a, title, detail, action = '', cls = '') => `<div class="yi ${cls}" ${a && NAME[a] ? cvar(a) : ''}><span class="dot"></span><div class="d"><span class="nm">${title}</span>${detail ? ' ' + detail : ''}</div>${action}</div>`;
+  const copyBtn = (prompt) => `<button class="copy" type="button" data-prompt="${esc(prompt)}">Copy prompt</button>`;
+  for (const q of qs.filter((q) => q.state === 'open')) need.push(yi(q.agent, `Answer ${esc(q.id)}`, `from ${esc(NAME[q.agent] || q.agent)}: ${inline(cut(q.body.split('\n').filter(Boolean).join(' '), 220))}`, '<span class="faint">tell Claude in chat</span>'));
+  const active = AGENTS.filter(([a]) => cs[a] === 'active');
   for (let i = 0; i < active.length; i++) for (let j = i + 1; j < active.length; j++)
     for (const x of splitList(statuses[active[i][0]].touching)) for (const y of splitList(statuses[active[j][0]].touching))
-      if (clash(x, y)) attn.push(`<div class="item bad"><b>Clash:</b> ${active[i][1]} (${esc(x)}) and ${active[j][1]} (${esc(y)}) are in the same file.</div>`);
-  const reviewWant = new Map();
-  for (const e of log) { if (!e.report) continue; if (e.kind === 'REVIEW') reviewWant.set(e.report, e); if (e.kind === 'REVIEWED') reviewWant.delete(e.report); }
-  if (reviewWant.size) attn.push(`<div class="item"><details class="fold"><summary><b>${reviewWant.size} handoff${reviewWant.size > 1 ? 's' : ''} waiting for Claude's review</b> <span class="faint">(Claude's job, not yours: changes to test expectations and the like)</span></summary><div class="faint">${[...reviewWant.values()].map((e) => `<a href="../${esc(e.report)}">${esc(e.report.replace('handoffs/', ''))}</a> — ${inline(e.text.split(' · ').slice(1).join(' · '))}`).join('<br>')}</div></details></div>`);
-  // reviews: one folded line instead of a long list
-  document.getElementById('attn').innerHTML = attn.join('');
-  renderFlow(board, tasks, statuses, now);
-
-  // ---- mission
-  const ms = mission(board, tasks, statuses, exists);
-  const mb = document.getElementById('missionBox'); mb.hidden = !ms || !ms.rows.length;
-  if (ms && ms.rows.length) {
-    const lab = { in: ['in', 'DONE'], work: ['work', 'WORKING'], wrote: ['wrote', 'REPORT WRITTEN'], none: ['none', 'NOT STARTED'] };
-    const nIn = ms.rows.filter((r) => r.state === 'in').length;
-    document.getElementById('mission').innerHTML = `<h3 style="margin:0 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Mission <small style="text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400">what the whole crew is on now</small></h3>
-      <p class="mt">${esc(ms.title)} <span class="faint" style="font-size:14px;font-weight:400">· ${nIn} of ${ms.rows.length} done</span></p>
-      <p class="goal">${inline(ms.goal)}</p>
-      <div class="rows">${missionRows(ms, lab)}</div>
-      <div class="bar"><i style="width:${Math.round(100 * nIn / ms.rows.length)}%"></i></div>
-      ${ms.then ? `<div class="then"><b>Then:</b> ${inline(ms.then)}</div>` : ''}`;
-  }
-
-  // ---- roadmap
-  const rm = roadmap(board, tasks);
-  document.getElementById('roadBox').hidden = !rm.length;
-  if (rm.length) {
-    const pct = (n, t) => (t ? (100 * n / t).toFixed(1) : 0) + '%';
-    document.getElementById('roadmap').innerHTML = '<div class="stages">' + rm.map((r) => {
-      const all = r.total > 0 && r.done === r.total;
-      const cls = all || /done/i.test(r.status) ? 'done' : /now|next|▶/i.test(r.status) ? 'now' : '';
-      const tag = cls === 'done' ? 'Done' : (r.status.replace(/[✓▶]/g, '').trim() || 'Later');
-      const agents = AGENTS.filter(([a]) => r.by[a]).map(([a, n]) => `<span ${cvar(a)}><b>${esc(n)}</b> ${r.by[a][0]}/${r.by[a][1]}</span>`).join('');
-      return `<div class="stage ${cls}"><div class="rn">${cls === 'done' ? '✓' : esc(r.n)}</div>
-        <div class="sh"><span class="sn">${esc(r.n)} · ${esc(r.name)}</span><span class="tag">${esc(tag)}</span>
-          <span class="cnt">${r.total ? `<b>${r.done}</b> of ${r.total} done${r.work ? ` · ${r.work} working` : ''}${r.blocked ? ` · ${r.blocked} blocked` : ''}` : 'tasks written later'}</span></div>
-        <div class="sbar"><i class="d" style="width:${pct(r.done, r.total)}"></i><i class="w" style="width:${pct(r.work, r.total)}"></i><i class="b" style="width:${pct(r.blocked, r.total)}"></i></div>
-        <div class="sg">${inline(r.goal)} <span class="faint">· Jerry plays: ${inline(r.plays)}</span></div>
-        ${agents ? `<div class="sa">${agents}</div>` : ''}</div>`;
-    }).join('') + '</div><div class="key">Bar:<i style="background:var(--ok)"></i>done<i style="background:color-mix(in srgb, var(--ok) 45%, var(--chip))"></i>working<i style="background:var(--warn)"></i>blocked</div>';
-  }
-
-  // ---- your move: agents that are ready and idle need Jerry's prompt; questions need his answer
-  const you = [];
-  const readyAgents = [], waitingAgents = [];
+      if (clash(x, y)) need.push(yi('', `Two agents in one file`, `${esc(active[i][1])} (${esc(x)}) and ${esc(active[j][1])} (${esc(y)}). Tell one to wait.`, '', 'bad'));
   for (const [a, n] of AGENTS) {
-    const f = statuses[a]; if ((f.state || '') === 'active') continue;
-    const open = tasks.filter((t) => t.agent === a && (t.box === ' ' || t.box === '>'));
-    const next = open.find((t) => !gateOf(t, tasks));
-    if (next) { readyAgents.push(n); you.push(`<div class="yi" ${cvar(a)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(n)}</span> on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}</div><button class="copy" type="button" data-prompt="${esc(PROMPT(a, next.id))}">Copy prompt</button></div>`); }
-    else if (open.length) waitingAgents.push(n);
+    const f = statuses[a];
+    if (cs[a] === 'active' && (hoursSince(f.since) ?? 0) > STALE_HOURS) need.push(yi(a, `${esc(n)} stopped mid-task?`, `checked in ${esc(ago(f.since))} and never checked out: ${clean2(f.task, 90)}. If its chat has ended, start it again:`, copyBtn(PROMPT(a, (f.task || '').split(' ')[0])), 'bad'));
   }
-  for (const q of (slotState?.queue || []).filter(q => !q.ready)) {
+  // Prepared test batches whose agent has gone away (Cursor's queue knows): they need a prompt to run.
+  const live = new Set([...(slotState?.queue || []).filter((q) => q.ready).map((q) => q.agent), slotState?.holder?.agent].filter(Boolean));
+  for (const q of (slotState?.queue || []).filter((q) => !q.ready)) {
     const prompt = `Resume ${NAME[q.agent] || q.agent} on ${q.task}. Its prepared game-test queue request is ${q.id}. Read AGENTS.md and the Crew Board, then run: node tools/game-test-slot.mjs wait ${q.agent} ${q.task} ${q.id} --checks ${JSON.stringify(q.checks || 'prepared game checks')} -- ${q.command || '<command was not recorded; reconstruct the prepared batch>'}. The command waits for the atomic slot, runs automatically on grant with one worker, closes its owned game process, and releases.`;
-    you.unshift(`<div class="yi" ${q.agent === 'jerry' ? '' : cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Resume ${esc(NAME[q.agent] || q.agent)}</span> for queued game checks <b>${esc(q.task)}</b>: ${esc(q.checks || 'prepared batch')}</div><button class="copy" type="button" data-prompt="${esc(prompt)}">Copy prompt</button></div>`);
+    need.push(yi(q.agent, `Resume ${esc(NAME[q.agent] || q.agent)}`, `its game checks for <b>${esc(q.task)}</b> are queued but its session ended: ${esc(cut(q.checks || 'prepared batch', 120))}`, copyBtn(prompt)));
   }
-  // A note Jerry wrote that nobody has picked up: the owner needs starting (agents only run when prompted).
-  for (const r of revs.filter((r) => r.state === 'waiting' && (statuses[r.owner] || {}).state !== 'active')) {
+  // "Changes ready; waiting for testing slot" on a card, with nothing of theirs in the queue: someone has to restart them.
+  const slotFree = slotState?.ok && !slotState.holder;
+  for (const [a, n] of AGENTS) {
+    if (cs[a] !== 'slot' || live.has(a) || (slotState?.queue || []).some((q) => q.agent === a)) continue;
+    const id = (statuses[a].task || '').split(' ')[0];
+    const prompt = `Grave Shift: resume ${n} on ${id}. Its changes are ready and were waiting for the game-test slot. Run node crew/crew.mjs me ${a}, then queue the prepared checks with node crew/crew.mjs slot run ${a} ${id} --checks "<the batch>" -- <command> (it waits its turn, runs one instance with --jobs 1, closes it and releases). Then check out with the report.`;
+    (slotFree ? need : later).push(yi(a, `${slotFree ? 'Resume' : 'Later: resume'} ${esc(n)}`, `${clean2(statuses[a].task, 80)}: changes ready, waiting for the test slot, but nothing of ${esc(n)}'s is in the queue.${slotFree ? ' The slot is free.' : ''}`, copyBtn(prompt)));
+  }
+  // Idle agents with a task they can start.
+  const readyAgents = [];
+  for (const [a, n] of AGENTS) {
+    if (cs[a] !== 'idle' && cs[a] !== 'away' && cs[a] !== 'unknown') continue;
+    const next = tasks.find((t) => t.agent === a && (t.box === ' ' || t.box === '>') && !gateOf(t, tasks));
+    if (!next) continue;
+    readyAgents.push(n);
+    need.push(yi(a, `Start ${esc(n)}`, `on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}`, copyBtn(PROMPT(a, next.id))));
+  }
+  for (const r of revs.filter((r) => r.state === 'look')) need.push(yi(r.owner, `Look at ${esc(r.asset)} ${esc(r.lookAt)}`, `: ${esc(NAME[r.owner] || r.owner)} answered your note. ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 160))}`, `<a class="copy" href="${r.at}index.html" target="_blank">Open</a>`));
+  for (const r of revs.filter((r) => r.state === 'waiting' && cs[r.owner] !== 'active')) {
     const n = r.open[0];
-    you.push(`<div class="yi" ${cvar(r.owner)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(NAME[r.owner] || r.owner)}</span> on your note on <b>${esc(r.asset)}</b> ${esc(n.version)}: “${esc(n.text.slice(0, 120))}”</div><button class="copy" type="button" data-prompt="${esc(PROMPT(r.owner, `Jerry's note on review/${r.asset}/ (crew.mjs next ${r.owner} says how)`))}">Copy prompt</button></div>`);
+    need.push(yi(r.owner, `Start ${esc(NAME[r.owner] || r.owner)}`, `on your note on <b>${esc(r.asset)}</b> ${esc(n.version)}: “${esc(n.text.slice(0, 120))}”`, copyBtn(PROMPT(r.owner, `Jerry's note on review/${r.asset}/ (crew.mjs next ${r.owner} says how)`))));
   }
-  for (const r of revs.filter((r) => r.state === 'look')) you.push(`<div class="yi" ${cvar(r.owner)}><span class="dot"></span><div class="d"><span class="nm">Look at ${esc(r.asset)} ${esc(r.lookAt)}</span>: ${esc(NAME[r.owner] || r.owner)} answered your note. ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 160))}</div><a class="copy" href="${r.at}index.html" target="_blank">Open</a></div>`);
-  for (const q of qs.filter((q) => q.state === 'open')) you.push(`<div class="yi" ${cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Answer ${esc(q.id)}</span> from ${esc(NAME[q.agent] || q.agent)}: ${inline(q.body.split('\n').filter(Boolean).join(' ').slice(0, 200))}</div><span class="faint">tell Claude in chat</span></div>`);
-  document.getElementById('you').innerHTML = you.length
-    ? you.join('') + (readyAgents.length ? `<div class="howto">Press <b>Copy prompt</b>, open that agent's chat, paste, send. The agent reads the board and does the rest.</div>` : '')
-    : '<p class="muted" style="margin:0">Nothing needs you right now.' + (waitingAgents.length ? ` ${esc(waitingAgents.join(', '))} ${waitingAgents.length > 1 ? 'are' : 'is'} waiting on the board, not on you.` : '') + '</p>';
+  for (const [a, n] of AGENTS) if (cs[a] === 'blocked' && /\bjerry\b/i.test(statuses[a]['blocked-on'] || '')) need.push(yi(a, `${esc(n)} is waiting on you`, inline(cut(statuses[a]['blocked-on'], 200))));
+  for (const g of jerryGates(board, tasks)) later.push(yi('', 'When you have time', `${inline(g.what)} <span class="faint">(${esc(g.waiters)} waits)</span>`));
+  document.getElementById('you').innerHTML = (need.length ? need.join('') : '<p class="clear">Nothing needs you right now.</p>')
+    + (later.length ? `<div class="later">${later.join('')}</div>` : '')
+    + (need.some((x) => x.includes('copy')) ? '<div class="howto">Press <b>Copy prompt</b>, open that agent\'s chat, paste, send. It reads the board and does the rest.</div>' : '');
+  document.getElementById('needN').textContent = need.length ? `${need.length} thing${need.length > 1 ? 's' : ''}` : 'nothing';
 
   // ---- the one-line summary
-  const workingNames = AGENTS.filter(([a]) => statuses[a].state === 'active').map(([, n]) => n);
   const list = (xs) => xs.length <= 1 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1];
+  const names = (k) => AGENTS.filter(([a]) => cs[a] === k).map(([, n]) => n);
   const bits = [];
-  bits.push(workingNames.length ? `<b>${esc(list(workingNames))}</b> ${workingNames.length > 1 ? 'are' : 'is'} working` : '<b>Nobody</b> is working');
-  if (readyAgents.length) bits.push(`<b>${esc(list(readyAgents))}</b> ${readyAgents.length > 1 ? 'are' : 'is'} ready and need${readyAgents.length > 1 ? '' : 's'} your prompt`);
-  if (waitingAgents.length) bits.push(`${esc(list(waitingAgents))} ${waitingAgents.length > 1 ? 'are' : 'is'} waiting`);
-  const oq = qs.filter((q) => q.state === 'open').length; if (oq) bits.push(`<b>${oq} question${oq > 1 ? 's' : ''}</b> for you`);
-  document.getElementById('summary').innerHTML = (ms && ms.rows.length ? `${esc(ms.title)}: ${ms.rows.filter((r) => r.state === 'in').length} of ${ms.rows.length} done. ` : '') + bits.join(' · ') + '.';
+  const w = names('active'), s = names('slot'), b = names('blocked');
+  bits.push(w.length ? `<b>${esc(list(w))}</b> ${w.length > 1 ? 'are' : 'is'} working` : '<b>Nobody</b> is working');
+  if (s.length) bits.push(`${esc(list(s))} ${s.length > 1 ? 'have' : 'has'} changes ready, waiting for the test slot`);
+  if (b.length) bits.push(`${esc(list(b))} ${b.length > 1 ? 'are' : 'is'} blocked`);
+  bits.push(need.length ? `<b class="warnt">${need.length} thing${need.length > 1 ? 's' : ''} need${need.length > 1 ? '' : 's'} you</b>` : 'nothing needs you');
+  document.getElementById('summary').innerHTML = bits.join(' · ') + '.';
 
   // ---- agent cards
-  const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
-  document.getElementById('agents').innerHTML = AGENTS.map(([a, n, pre]) => {
-    const f = statuses[a]; const st = (f.state || 'unknown').toLowerCase();
-    const mine = tasks.filter((t) => t.agent === a && t.box !== '~');
-    const done = mine.filter((t) => t.box === 'x').length;
+  document.getElementById('agents').innerHTML = AGENTS.map(([a, n]) => {
+    const f = statuses[a]; const st = cs[a];
     const since = Date.parse(f.since);
-    const latest = st === 'active' ? [...log].reverse().find((e) => e.agent === a && e.kind === 'NOTE' && e.t >= since) : null;
-    const today = log.filter((e) => e.agent === a && e.t >= dayStart.getTime());
-    const finishedToday = today.filter((e) => /^(OUT|DONE)$/.test(e.kind) && e.report).length;
-    const curId = st === 'active' ? (f.task || '').split(' ')[0] : '';
-    const openMine = mine.filter((t) => (t.box === '>' || t.box === ' ') && t.id !== curId);
-    const next = openMine.find((t) => !gateOf(t, tasks)) || null;
-    const gatedNext = !next && openMine.length ? { t: openMine[0], on: gateOf(openMine[0], tasks) } : null;
+    const latest = (st === 'active' || st === 'slot') ? [...log].reverse().find((e) => e.agent === a && e.kind === 'NOTE' && e.t >= since - 6 * 36e5) : null;
+    const finishedToday = new Set(log.filter((e) => e.agent === a && e.t >= dayStart.getTime() && /^(OUT|DONE)$/.test(e.kind) && e.report).map((e) => e.report)).size;
+    const curId = (st === 'active' || st === 'slot' || st === 'blocked') ? (f.task || '').split(' ')[0] : '';
+    const openMine = tasks.filter((t) => t.agent === a && (t.box === '>' || t.box === ' ' || t.box === '!') && t.id !== curId);
+    const next = openMine.find((t) => t.box !== '!' && !gateOf(t, tasks)) || null;
     const chips = splitList(f.touching).map((t) => `<span class="chip">${esc(t)}</span>`).join('');
+    const inQueue = (slotState?.queue || []).find((q) => q.agent === a);
+    const holds = slotState?.holder?.agent === a;
     return `<div class="card ${esc(st)}" ${cvar(a)}>
-      <h2><span class="dot"></span>${n}<span class="state">${esc(st.toUpperCase())}</span></h2>
-      <div class="model">${f.model && f.model !== '—' ? 'on <b>' + esc(f.model) + '</b>' : '<span class="nomodel">model not given: it is set at the next check-in</span>'}</div>
-      ${st === 'active' ? `<div class="task">${inline(f.task || '—')}</div>
-        <div class="row">working for <b>${dur(now - since)}</b> · since ${clock(since)}</div>
-        <div class="chips">${chips}</div>
-        ${latest ? `<div class="latest"><span class="faint">${clock(latest.t)} ·</span> ${inline(latest.text)}</div>` : ''}`
-      : st === 'blocked' ? `<div class="task">${inline(f.task || '—')}</div><div class="row">blocked on <b>${inline(f['blocked-on'] || '—')}</b></div>`
-      : `<div class="task muted">Not working right now</div><div class="row">last seen <b>${esc(ago(f.since))}</b></div>`}
-      <div class="row">next <b>${next ? esc(next.id) + '</b> ' + clean2(firstSentence(next.text), 80) : gatedNext ? esc(gatedNext.t.id) + '</b> waits on <b>' + esc(gatedNext.on.id) + '</b> (' + esc(NAME[gatedNext.on.agent] || '') + ')' : '<b>queue empty</b>'}</div>
-      <div class="bar"><i style="width:${mine.length ? Math.round(100 * done / mine.length) : 0}%"></i></div>
-      <div class="stats"><span><b>${done}</b>/${mine.length} board tasks done</span><span><b>${finishedToday}</b> reports today</span></div>
+      <h2><span class="dot"></span>${n}<span class="state">${esc(holds ? 'TESTING NOW' : STATE_WORD[st] || st.toUpperCase())}</span></h2>
+      <div class="model">${f.model && f.model !== '—' ? esc(f.model.split(/,| \(/)[0]) : '<span class="nomodel">model not given</span>'}</div>
+      ${st === 'active' || st === 'slot' || st === 'blocked' ? `<div class="task">${inline(cut(f.task || '—', 140))}</div>` : `<div class="task muted">Not working right now</div>`}
+      <div class="row">${st === 'active' ? `working for <b>${dur(now - since)}</b>` : st === 'slot' ? `waiting since <b>${clock(since)}</b>${inQueue ? ` · <b>#${inQueue.position}</b> in the queue` : holds ? '' : ' · <span class="warnt">not in the queue</span>'}` : st === 'blocked' ? `blocked on <b>${inline(cut(f['blocked-on'] || '—', 120))}</b>` : `last seen <b>${esc(ago(f.since))}</b>`}</div>
+      ${st === 'active' && chips ? `<div class="chips">${chips}</div>` : ''}
+      ${latest ? `<div class="latest"><span class="faint">${clock(latest.t)} ·</span> ${inline(cut(latest.text, 220))}</div>` : ''}
+      <div class="row">next: ${next ? '<b>' + esc(next.id) + '</b> ' + clean2(firstSentence(next.text), 80) : openMine.length ? `<b>${esc(openMine[0].id)}</b> ${openMine[0].box === '!' ? 'waits for the test slot' : 'waits on ' + esc(gateOf(openMine[0], tasks)?.id || '')}` : '<span class="faint">nothing on the board</span>'}</div>
+      <div class="stats"><span><b>${finishedToday}</b> finished today</span></div>
     </div>`;
   }).join('');
 
-  // ---- timeline (last 12 h, or since the first event today)
-  // From a little before the first check-in in the last 12 hours, so the bars fill the width.
+  // ---- done today: each finished task once, with what changed and what nobody could check
+  const doneEv = new Map();
+  for (const e of log) if (e.report && /^(OUT|DONE|WAIT|BLOCKED)$/.test(e.kind) && e.t >= Math.min(dayStart.getTime(), now - 12 * 36e5)) doneEv.set(e.report, e);
+  const doneList = [...doneEv.values()].sort((x, y) => y.t - x.t);
+  const doneLis = await Promise.all(doneList.map(async (e) => {
+    const r = await report(e.report);
+    const a = e.agent; const task = e.text.split(' · ')[0];
+    const tag = e.kind === 'BLOCKED' || e.kind === 'WAIT' ? (SLOT_WAIT.test(e.text) ? '<span class="pill wait">changes ready, waiting for the test slot</span>' : '<span class="pill wait">blocked</span>') : e.t > lastCommit ? '<span class="pill wait">not committed yet</span>' : '<span class="pill okp">committed</span>';
+    return `<li><span class="t">${clock(e.t)}</span><div><div class="head"><span class="who" ${cvar(a)}>${esc(NAME[a] || a)}</span> ${inline(cut(task, 110))} <a href="../${esc(e.report)}">report</a>${tag}</div>${r ? `<div class="body">${inline(r.changed || '')}${r.nv ? `<div class="nv">Not checked: ${inline(r.nv)}</div>` : ''}</div>` : ''}</div></li>`;
+  }));
+  document.getElementById('doneToday').innerHTML = doneLis.join('') || '<li class="faint">Nothing finished yet today.</li>';
+  document.getElementById('doneN').textContent = doneList.length ? `${doneList.length} today` : '';
+
+  // ---- mission (only while there is one with open rows)
+  const ms = mission(board, tasks, statuses, exists);
+  const mb = document.getElementById('missionBox'); mb.hidden = !ms || !ms.rows.length || ms.rows.every((r) => r.state === 'in');
+  if (!mb.hidden) {
+    const lab = { in: ['in', 'DONE'], work: ['work', 'WORKING'], wrote: ['wrote', 'REPORT WRITTEN'], none: ['none', 'NOT STARTED'] };
+    const nIn = ms.rows.filter((r) => r.state === 'in').length;
+    document.getElementById('mission').innerHTML = `<h3 style="margin:0 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Mission</h3>
+      <p class="mt">${esc(ms.title)} <span class="faint" style="font-size:14px;font-weight:400">· ${nIn} of ${ms.rows.length} done</span></p>
+      <p class="goal">${inline(ms.goal)}</p><div class="rows">${missionRows(ms, lab)}</div>
+      <div class="bar"><i style="width:${Math.round(100 * nIn / ms.rows.length)}%"></i></div>`;
+  }
+
+  // ---- timeline (last 12 h)
   const firstIn = log.filter((e) => e.kind === 'IN' && e.t >= now - 12 * 36e5).reduce((m, e) => Math.min(m, e.t), now);
   const t1 = now, t0 = Math.max(now - 12 * 36e5, Math.min(firstIn - 20 * 60000, now - 2 * 36e5));
   const W = 1000, laneH = 26, top = 18, left = 78, H = top + AGENTS.length * (laneH + 8) + 6;
@@ -708,85 +648,79 @@ async function refresh() {
     let open = null; const segs = [];
     for (const e of log.filter((e) => e.agent === a)) {
       if (e.kind === 'IN') { if (open) segs.push([open.t, e.t, open.text]); open = e; }
-      else if (/^(OUT|DONE|BLOCKED)$/.test(e.kind) && open) { segs.push([open.t, e.t, open.text, e.kind]); open = null; }
+      else if (/^(OUT|DONE|BLOCKED|WAIT)$/.test(e.kind) && open) { segs.push([open.t, e.t, open.text, e.kind]); open = null; }
     }
-    if (open && statuses[a].state === 'active') segs.push([open.t, now, open.text, 'NOW']);
+    if (open && cs[a] === 'active') segs.push([open.t, now, open.text, 'NOW']);
     for (const [s, e, text, kind] of segs) {
       if (e < t0) continue;
       const w = Math.max(3, x(e) - x(s));
       svg += `<rect x="${x(s)}" y="${y + 3}" width="${w}" height="${laneH - 6}" rx="3" fill="var(--${a})" opacity="${kind === 'NOW' ? 1 : .75}"><title>${esc(clock(s) + '–' + (kind === 'NOW' ? 'now' : clock(e)) + ' · ' + text.split(' · ')[0])}</title></rect>`;
     }
+    for (const e of log.filter((e) => e.agent === a && /^SLOT_GRANT$/.test(e.kind) && e.t >= t0)) svg += `<rect x="${x(e.t) - 1}" y="${y}" width="3" height="${laneH}" fill="var(--accent)"><title>${esc(clock(e.t) + ' · got the test slot · ' + e.text)}</title></rect>`;
     for (const e of log.filter((e) => e.agent === a && /^(NOTE|ASK|REQUEST)$/.test(e.kind) && e.t >= t0)) svg += `<circle cx="${x(e.t)}" cy="${y + laneH - 3}" r="2.6" fill="var(--ink)" opacity=".55"><title>${esc(clock(e.t) + ' · ' + e.kind + ' · ' + e.text)}</title></circle>`;
   });
   for (const c of commits.filter((c) => c.t >= t0)) svg += `<line x1="${x(c.t)}" x2="${x(c.t)}" y1="${top - 2}" y2="${H - 4}" stroke="var(--ok)" stroke-width="1.5" opacity=".7"><title>${esc(clock(c.t) + ' · commit ' + c.sha + ' · ' + c.msg)}</title></line>`;
   svg += `<line class="now" x1="${x(now)}" x2="${x(now)}" y1="${top - 4}" y2="${H - 4}"/></svg>`;
-  document.getElementById('timeline').innerHTML = svg + `<div class="legend">${AGENTS.map(([a, n]) => `<span><i style="background:var(--${a})"></i>${n} checked in</span>`).join('')}<span><i style="background:var(--ok)"></i>commit</span><span>• note / question / request</span><span class="faint">Hover for details.</span></div>`;
+  document.getElementById('timeline').innerHTML = svg + `<div class="legend">${AGENTS.map(([a, n]) => `<span><i style="background:var(--${a})"></i>${n} checked in</span>`).join('')}<span><i style="background:var(--accent)"></i>got the test slot</span><span><i style="background:var(--ok)"></i>commit</span><span>• note / request</span><span class="faint">Hover for details.</span></div>`;
   document.getElementById('tlnote').textContent = 'since ' + clock(t0);
 
-  // ---- feed: finished work, notes, questions, requests, commits
+  // ---- folded: everything that happened
   const items = [];
-  for (const e of log) {
-    if (/^(IN)$/.test(e.kind)) continue;
-    items.push({ t: e.t, e });
-  }
+  for (const e of log) if (!/^(IN|ID|SLOT_\w+)$/.test(e.kind)) items.push({ t: e.t, e });
   for (const c of commits) items.push({ t: c.t, c });
   items.sort((a, b) => b.t - a.t);
-  const shown = items.slice(0, 60);
-  const lis = await Promise.all(shown.map(async ({ t, e, c }) => {
+  document.getElementById('feed').innerHTML = items.slice(0, 80).map(({ t, e, c }) => {
     if (c) return `<li><span class="t">${clock(t)}</span><div><div class="head"><span class="kind COMMIT">COMMIT</span><b>${esc(c.msg)}</b> <span class="faint">${esc(c.sha)}</span>${pushes.some((p) => p.t >= t) ? '<span class="pill okp">pushed</span>' : '<span class="pill wait">not pushed</span>'}</div></div></li>`;
-    const a = e.agent; const who = `<span class="who" ${cvar(a)}>${esc(NAME[a] || a)}</span>`;
-    let body = '';
-    if (e.report && /^(OUT|DONE|BLOCKED)$/.test(e.kind)) {
-      const r = await report(e.report);
-      if (r) body = `<div class="body">${inline(r.changed || '')}${r.nv ? `<div class="nv">Not verified: ${inline(r.nv)}</div>` : ''}${!r.template ? '<div class="faint">(report not in the AGENTS.md template)</div>' : ''}</div>`;
-    }
-    const task = e.text.split(' · ')[0];
-    const commitPill = e.report && /^(OUT|DONE)$/.test(e.kind) ? (e.t > lastCommit ? '<span class="pill wait">waiting for commit</span>' : '<span class="pill okp">before last commit</span>') : '';
-    const link = e.report ? ` <a href="../${esc(e.report)}">report</a>` : '';
-    return `<li><span class="t">${clock(t)}</span><div><div class="head">${who} <span class="kind ${esc(e.kind)}">${esc(e.kind === 'OUT' ? 'FINISHED' : e.kind)}</span>${inline(e.kind === 'NOTE' || e.kind === 'ASK' || e.kind === 'REQUEST' || e.kind === 'ANSWER' || e.kind === 'MODEL' ? e.text : task)}${link}${commitPill}</div>${body}</div></li>`;
-  }));
-  document.getElementById('feed').innerHTML = lis.join('') || '<li class="faint">Nothing yet.</li>';
+    const a = e.agent;
+    return `<li><span class="t">${clock(t)}</span><div><div class="head"><span class="who" ${cvar(a)}>${esc(NAME[a] || a)}</span> <span class="kind ${esc(e.kind)}">${esc(e.kind === 'OUT' ? 'FINISHED' : e.kind)}</span>${inline(cut(e.text, 220))}</div></div></li>`;
+  }).join('') || '<li class="faint">Nothing yet.</li>';
 
-  // ---- queues
+  // ---- folded: queues
   document.getElementById('queues').innerHTML = AGENTS.map(([a, n]) => {
-    const mine = tasks.filter((t) => t.agent === a);
-    if (!mine.length) return '';
-    const done = mine.filter((t) => t.box === 'x').length;
-    const open = mine.filter((t) => t.box !== 'x' && t.box !== '~');
-    const closed = mine.filter((t) => t.box === 'x' || t.box === '~');
-    const row = (t) => { const mk = { ' ': ['todo', '○'], x: ['done', '✓'], '>': ['doing', '▶'], '!': ['blocked', '!'], '~': ['done', '–'] }[t.box]; return `<li class="${mk[0]}"><span class="mk">${mk[1]}</span><span><b>${esc(t.id)}</b> ${inline(t.text.replace(/\*\*/g, '').slice(0, 150))}${t.text.length > 150 ? '…' : ''}</span></li>`; };
-    return `<h4 ${cvar(a)}><span class="dot" style="background:var(--${a})"></span>${n}<span class="n">${done} of ${mine.length} done</span></h4>
-      <ul>${open.map(row).join('')}</ul>${closed.length ? `<details><summary class="more">${closed.length} done or parked</summary><ul>${closed.map(row).join('')}</ul></details>` : ''}`;
-  }).join('');
+    const mine = tasks.filter((t) => t.agent === a && t.box !== 'x');
+    if (!mine.length) return `<h4 ${cvar(a)}><span class="dot" style="background:var(--${a})"></span>${n}<span class="n">nothing on the board</span></h4>`;
+    const row = (t) => { const mk = { ' ': ['todo', '○'], x: ['done', '✓'], '>': ['doing', '▶'], '!': ['blocked', '⏸'], '~': ['done', '–'] }[t.box]; return `<li class="${mk[0]}"><span class="mk">${mk[1]}</span><span><b>${esc(t.id)}</b> ${inline(cut(t.text, 150))}</span></li>`; };
+    return `<h4 ${cvar(a)}><span class="dot" style="background:var(--${a})"></span>${n}<span class="n">${mine.length} open</span></h4><ul>${mine.map(row).join('')}</ul>`;
+  }).join('') + '<p class="faint">▶ working · ○ to do · ⏸ waiting (test slot or blocked) · – parked. From crew/BOARD.md.</p>';
 
-  // ---- review folders
-  const WORD = { 'no-notes': 'no notes yet', waiting: 'your note is waiting', taken: 'being worked on', look: 'look at the new version', 'answered-seen': 'answered', approved: 'approved' };
-  document.getElementById('revBox').hidden = !revs.length;
-  document.getElementById('reviews').innerHTML = revs.map((r) => {
-    const detail = r.state === 'waiting' || r.state === 'taken' ? [...r.open, ...r.taken].map((n) => `${esc(n.version)}: “${esc(n.text.slice(0, 140))}”`).join(' · ')
-      : r.state === 'look' ? `${esc(NAME[r.owner] || r.owner)} made ${esc(r.lookAt)}: ${esc((r.notes.find((n) => n.answer && n.answer.version === r.lookAt) || { answer: { text: '' } }).answer.text.slice(0, 140))}`
-      : r.state === 'approved' ? `approved at ${esc(r.approvedAt)}` : `${esc(r.clip ? 'clip ' + r.clip : 'rig turntable')}${r.reference ? ' · reference ' + esc(r.reference) : ''}`;
-    return `<div class="ri"><div><a href="${r.at}index.html" target="_blank">${esc(r.asset)}</a> <span class="faint">${esc(r.latest || '')} · ${esc(NAME[r.owner] || r.owner)}</span></div><div><span class="st ${esc(r.state)}">${esc(WORD[r.state] || r.state)}</span><span class="nt">${detail}</span></div></div>`;
-  }).join('') + `<p class="faint" style="margin:8px 0 0">Open a folder, watch, then write in its <code>notes.md</code> under a line like <code>## ${new Date().toISOString().slice(0, 10)} - Jerry - v2</code> (the version is the big one at the top of the folder's page; the guide is <code>docs/studio-guide.md</code>). Plain sentences; "good" when it's right. The owner picks it up from the board.</p>`;
-
-  // ---- requests
+  // ---- folded: requests between agents
   const recentDay = new Date(now - 36 * 36e5).toISOString().slice(0, 10);
-  const allOpen = reqs.filter((r) => r.status === 'OPEN');
-  const openReqs = allOpen.filter((r) => r.date >= recentDay);
-  const olderOpen = allOpen.length - openReqs.length;
+  const openReqs = reqs.filter((r) => r.status === 'OPEN' && r.date >= recentDay);
   const groups = {};
   for (const r of openReqs) for (const to of r.to) (groups[to] ||= []).push(r);
+  document.getElementById('reqN').textContent = openReqs.length ? `(${openReqs.length} open)` : '(none open)';
   document.getElementById('requests').innerHTML = Object.keys(groups).length
     ? Object.entries(groups).map(([to, rs]) => `<h4>For ${esc(NAME[to] || to)} <span class="faint">(${rs.length})</span></h4><ul>${rs.slice(-8).reverse().map((r) => `<li>${inline(r.title)} <span class="faint">— from ${esc(r.from)}, ${esc(r.date)}</span></li>`).join('')}</ul>`).join('')
-      + `<p class="faint">Open requests from the last day and a half. "Open" means nobody has marked it DONE, WONT or LATER, or replied under it.${olderOpen ? ` ${olderOpen} older ones are hidden: most were settled in later work.` : ''}</p>`
-    : `<p class="muted">No open requests from the last day and a half.${olderOpen ? ` <span class="faint">(${olderOpen} older ones hidden.)</span>` : ''}</p>`;
+      + '<p class="faint">Agents answer with <code>crew.mjs reply</code>; they see theirs in <code>crew.mjs me</code>.</p>'
+    : '<p class="muted">No open requests between agents.</p>';
 
-  document.getElementById('orders').innerHTML = '<h4>Orders from Jerry</h4>' + md(section(board, 'Orders from Jerry'));
-  document.getElementById('decisions').innerHTML = '<h4>Decisions</h4>' + md(section(board, 'Decisions'));
+  // ---- folded: Claude's review backlog, and review folders
+  const reviewWant = new Map();
+  for (const e of log) {
+    const day = e.kind === 'REVIEWED' && (/^before (\d{4}-\d{2}-\d{2})\b/.exec(e.text) || [])[1];
+    if (day) { for (const [k, v] of reviewWant) if (v.at < day) reviewWant.delete(k); continue; }
+    if (!e.report) continue; if (e.kind === 'REVIEW') reviewWant.set(e.report, e); if (e.kind === 'REVIEWED') reviewWant.delete(e.report);
+  }
+  document.getElementById('backlog').innerHTML = reviewWant.size ? `<p class="faint">Claude's review backlog (${reviewWant.size}): ${[...reviewWant.values()].map((e) => `<a href="../${esc(e.report)}">${esc(e.report.replace('handoffs/', ''))}</a>`).join(', ')}</p>` : '';
+  const WORD = { 'no-notes': 'no notes yet', waiting: 'your note is waiting', taken: 'being worked on', look: 'look at the new version', 'answered-seen': 'answered', approved: 'approved' };
+  const withNotes = revs.filter((r) => r.state !== 'no-notes'), noNotes = revs.filter((r) => r.state === 'no-notes');
+  document.getElementById('revN').textContent = `(${withNotes.length} with notes · ${noNotes.length} not looked at)`;
+  document.getElementById('reviews').innerHTML = withNotes.map((r) => {
+    const detail = r.state === 'waiting' || r.state === 'taken' ? [...r.open, ...r.taken].map((n) => `${esc(n.version)}: “${esc(n.text.slice(0, 140))}”`).join(' · ')
+      : r.state === 'look' ? `${esc(NAME[r.owner] || r.owner)} made ${esc(r.lookAt)}` : r.state === 'approved' ? `approved at ${esc(r.approvedAt)}` : '';
+    return `<div class="ri"><div><a href="${r.at}index.html" target="_blank">${esc(r.asset)}</a> <span class="faint">${esc(r.latest || '')} · ${esc(NAME[r.owner] || r.owner)}</span></div><div><span class="st ${esc(r.state)}">${esc(WORD[r.state] || r.state)}</span><span class="nt">${detail}</span></div></div>`;
+  }).join('') + (noNotes.length ? `<p class="faint">Not looked at yet: ${noNotes.map((r) => `<a href="${r.at}index.html" target="_blank">${esc(r.asset)}</a>`).join(', ')}.</p>` : '')
+    + `<p class="faint" style="margin:8px 0 0">To leave a note: open a folder, then write in its <code>notes.md</code> under a line like <code>## ${new Date().toISOString().slice(0, 10)} - Jerry - v2</code>. The owner picks it up.</p>`;
+
+  document.getElementById('orders').innerHTML = '<h4>Orders from Jerry</h4>' + md(section(board, 'Orders from Jerry')) + '<h4>Who owns what</h4>' + mdTable(section(board, 'Who owns what')) + '<h4>Decisions</h4>' + md(section(board, 'Decisions'));
   document.getElementById('stamp').textContent = 'updated ' + new Date().toLocaleTimeString() + ' · refreshes every 10 s';
+}
+function mdTable(text) {
+  const rows = text.replace(/\r\n/g, '\n').split('\n').filter((l) => /^\|/.test(l) && !/^\|\s*-/.test(l)).map((l) => l.replace(/^\||\|\s*$/g, '').split('|').map((c) => c.trim()));
+  if (!rows.length) return '';
+  return `<table class="own"><tr>${rows[0].map((c) => `<th>${inline(c)}</th>`).join('')}</tr>${rows.slice(1).map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</table>`;
 }
 refresh().catch((e) => { document.getElementById('stamp').textContent = 'error: ' + e.message; console.error(e); });
 setInterval(() => refresh().catch((e) => { document.getElementById('stamp').textContent = 'error: ' + e.message; console.error(e); }), 10000);
 </script>
 </body>
-</html>

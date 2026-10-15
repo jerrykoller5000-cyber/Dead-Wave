@@ -1,0 +1,26 @@
+[
+  {
+    "kind": "guardian",
+    "before": {
+      "tris": 20508,
+      "draws": 43
+    },
+    "after": {
+      "tris": 20444,
+      "draws": 5
+    },
+    "poses": 120
+  },
+  {
+    "kind": "caveguard",
+    "before": {
+      "tris": 19918,
+      "draws": 41
+    },
+    "after": {
+      "tris": 20062,
+      "draws": 3
+    },
+    "poses": 120
+  }
+]

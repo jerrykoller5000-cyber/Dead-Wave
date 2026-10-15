@@ -1,0 +1,15 @@
+✔ shield follows actual scream completion; opening lasts 2.4 seconds (1.1896ms)
+✔ each completed scream creates a fresh opening (0.1416ms)
+✔ head loss and death remove shield and cancel scream (0.1143ms)
+✔ shield never affects another species (0.0939ms)
+✔ half turn is accelerated and bounded at multiple frame rates (1.195ms)
+✔ scream commits facing, then exhausted pose relaxes (0.1744ms)
+✔ room clear removes private state and hides effects (0.1763ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.8085

@@ -118,6 +118,7 @@ export function install() {
     return [{ target: spec }];
   }
   async function targets(filter = '') {
+    if (window.DWInspect && window.DWInspect.ready) return window.DWInspect.list().map((e) => e.id).filter((t) => t.includes(filter));   // CL-196
     const all = [
       ...WEAPONS().map((k) => 'weapon:' + k), ...BUILDS.map((k) => 'build:' + k),
       ...zombieTypes().map((k) => 'zombie:' + k), 'survivor:okafor', 'survivor:brandt', 'survivor:pike', 'marine', 'player',
@@ -135,7 +136,40 @@ export function install() {
     box.getCenter(v3); box.getSize(s3);
     return { center: { x: v3.x, y: v3.y, z: v3.z }, size: { x: s3.x, y: s3.y, z: s3.z }, yaw, label };
   }
-  async function target(spec) {
+  // CL-196: in the inspector (camera.mjs --inspect, index.html?inspect) every subject in its catalog is a target, by its
+  // id (zombie.brute, weapon.m4, animal.rabbit, build.wall:3, zombie.brute:statue), and the old kinds map onto it:
+  // weapon:<id>, build:<kind>[:<tier>], zombie:<type> (a statue, as before), survivor:<who>, marine (a fresh one),
+  // player (the live marine). The picture is taken in the inspector's studio.
+  function inspectTarget(spec) {
+    const I = window.DWInspect;
+    if (!I || !I.ready) return null;
+    const s = String(spec);
+    if (I.has(s)) return { id: s };
+    const [kind, a, b] = s.split(':');
+    if (I.has(kind)) return { id: kind, variant: a };   // id:variant (zombies: id:live|walk|rise|statue)
+    const weaponAliases = { m240Carried: 'm240-folded', mortarCarried: 'mortar-collapsed' };
+    const map = { weapon: 'weapon.' + (weaponAliases[a] || a), build: a === 'm240' ? 'weapon.m240' : 'build.' + a, zombie: 'zombie.' + String(a || '').toLowerCase(), survivor: 'person.' + a };
+    if (kind === 'marine') return { id: 'marine.fresh' };
+    if (kind === 'player') return { id: 'marine' };
+    if (map[kind] && I.has(map[kind])) return { id: map[kind], variant: kind === 'build' ? b : kind === 'zombie' ? 'statue' : undefined, suppressor: kind === 'weapon' && b === 'can' };
+    return null;
+  }
+  async function target(spec, { reset = false } = {}) {
+    const it = inspectTarget(spec);
+    if (it) {
+      const I = window.DWInspect, e = I.list().find((x) => x.id === it.id);
+      const o = { view: false, instant: true };
+      if (it.variant != null) { if (e && e.kind === 'zombie') o.mode = it.variant; else o.variant = it.variant; }
+      // GP-19919: framing the current subject must preserve its move, kit and animation phase.
+      const now = I.current();
+      const sameVariant = it.variant == null || (e && e.kind === 'zombie' ? now && now.mode === it.variant : now && String(now.variant) === String(it.variant));
+      const r = !reset && now && now.id === it.id && sameVariant ? now : await I.show(it.id, o);
+      if (it.suppressor) I.model.set('suppressor', true);
+      await new Promise((ok) => setTimeout(ok, 60));
+      const c = I.current() || r;
+      return { center: c.center, size: c.size, yaw: c.yaw || 0, label: c.name + (c.variant ? ' (' + c.variant + ')' : c.mode ? ' (' + c.mode + ')' : '') };
+    }
+    if (window.DWInspect?.ready) throw new Error('No inspector target "' + spec + '". Use targets, or reload --title for world places.');
     const [kind, a, b] = String(spec).split(':');
     hideShelf();
     if (T.dressGuns) T.dressGuns({ guns: {} });
@@ -290,6 +324,15 @@ export function install() {
   }
   let uiHidden = false;
   function ui(show) {
+    if (window.DWInspect?.ready) {
+      // Keep the inspector's compositor tree attached. Restoring display:none after a clean model shot can show
+      // the previous WebGPU canvas surface under freshly updated panels. The inspector already owns its HUD mask.
+      document.getElementById('dwi')?.classList.toggle('shooting', !show);
+      uiHidden = !show;
+      const perf = document.getElementById('perf');
+      if (perf) perf.style.visibility = show && perfWanted ? '' : 'hidden';
+      return;
+    }
     const c = [...document.querySelectorAll('canvas')].sort((a, b) => b.clientWidth * b.clientHeight - a.clientWidth * a.clientHeight)[0];
     if (!c) return;
     const keep = new Set(); for (let el = c; el && el !== document.body; el = el.parentElement) keep.add(el);
@@ -332,7 +375,7 @@ export function install() {
       lastMeta = { label: 'the play camera' };
       return { cam: last, target: 'the play camera', time: T.getWorldTime ? T.getWorldTime() : null };
     }
-    if (req.target) meta = await target(req.target);   // stages it (a shelf item shown, the others hidden)
+    if (req.target) meta = await target(req.target, { reset: !!req.reset });   // stages it (or preserves the active inspector subject)
     if (req.cam) cam = { fov: 35, ...req.cam };
     else if (meta) cam = frame(meta, req);
     else if (last) { cam = last; meta = lastMeta; }

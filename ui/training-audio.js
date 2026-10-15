@@ -2,6 +2,7 @@
 // audio context: no samples, downloads or per-frame audio synthesis work.
 import { createTrainingEncounters } from './training-encounter.js';
 import { createTrainingDoorAudio } from './training-door-audio.js';
+import { createRangeStartAudio } from './range-start-audio.js';
 const scoreCache=new WeakMap();
 export function buildTrainingScore(rate){
   const seconds=24,n=Math.round(seconds*rate),left=new Float32Array(n),right=new Float32Array(n),TAU=2*Math.PI;
@@ -65,7 +66,7 @@ export function createTrainingAudio(ctx,musicOut,fxOut){
   const buffer=trainingScore(ctx),length=buffer.duration;
   const loop=ctx.createBufferSource();loop.buffer=buffer;loop.loop=true;const ambient=ctx.createGain();ambient.connect(music);loop.connect(ambient);loop.start();sources.push(loop);
   const intro=ctx.createGain();intro.gain.value=0;intro.connect(musicOut);
-  const door=createTrainingDoorAudio(ctx,fx);
+  const door=createTrainingDoorAudio(ctx,fx),rangeStart=createRangeStartAudio(ctx,fx);
   const encounters=createTrainingEncounters(ctx,intro);let encounterActive=false;
   const vent=ctx.createOscillator(),vg=ctx.createGain();vent.frequency.value=60;vg.gain.value=.012;vent.connect(vg);vg.connect(fx);vent.start();sources.push(vent);
   function tone(freq,dur,vol,delay=0,type='sine'){
@@ -84,14 +85,15 @@ export function createTrainingAudio(ctx,musicOut,fxOut){
       return;
     }
     const t=ctx.currentTime;if(t-(last.get(kind)??-Infinity)<(kind==='step'?.1:.06))return;last.set(kind,t);
-    if(kind==='target'){tone(1450,.18,.13);tone(2170,.11,.035);tone(170,.08,.08);}
+    if(kind==='range-start'){if(!rangeStart.play())tone(2350,.18,.12);}
+    else if(kind==='target'){tone(1450,.18,.13);tone(2170,.11,.035);tone(170,.08,.08);}
     else if(kind==='impact'){tone(125,.075,.12,0,'triangle');tone(720,.035,.025);}
     else if(kind==='step'){tone(95,.07,.07,0,'triangle');tone(420,.03,.025);}
     else if(kind==='reset'){tone(180,.16,.045,0,'triangle');tone(660,.07,.035,.14);}
     else {const seq=kind==='spawn'?[440,440]:kind==='clear'?[660,440]:kind==='wake'?[440,550,660]:kind==='blackout'?[330,220]:kind==='open'?[550]:[440,660];seq.forEach((f,i)=>tone(f,.12,.06,i*.16));}
   }
   return{cue,update(volume,paused=false){music.gain.setTargetAtTime(volume*(paused?.16:.32),ctx.currentTime,.12);intro.gain.setTargetAtTime(volume*(paused?.5:1),ctx.currentTime,.12);},
-    state:()=>({loopSeconds:length,active:!disposed,looping:loop.loop,cues:Object.fromEntries(last),musicGain:music.gain.value,introGain:intro.gain.value,door:door.state(),encounters:encounters.state()}),
-    dispose(){if(disposed)return;disposed=true;encounters.dispose();door.dispose();intro.disconnect();ambient.disconnect();for(const s of [...sources,...oneShots]){try{s.stop();s.disconnect();}catch{}}music.disconnect();fx.disconnect();}
+    state:()=>({loopSeconds:length,active:!disposed,looping:loop.loop,cues:Object.fromEntries(last),musicGain:music.gain.value,introGain:intro.gain.value,door:door.state(),rangeStart:rangeStart.state(),encounters:encounters.state()}),
+    dispose(){if(disposed)return;disposed=true;encounters.dispose();door.dispose();rangeStart.dispose();intro.disconnect();ambient.disconnect();for(const s of [...sources,...oneShots]){try{s.stop();s.disconnect();}catch{}}music.disconnect();fx.disconnect();}
   };
 }

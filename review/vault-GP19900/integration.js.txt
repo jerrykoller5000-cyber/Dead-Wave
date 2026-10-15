@@ -1,0 +1,102 @@
+    // GP-19900: short cover vault with a checked route and a free firing hand.
+    let vaultPoseFrame = null, vaultHoldU = null;
+    function pieceVaultable(b) { return !!b?.mesh && vaultEligible(b); }
+    function vaultClearAt(x,y,z,bodyHeight,ignore) {
+      if(Math.hypot(x,z)>LAND_MAX-PLAYER_RADIUS && !training.active)return false;
+      const ceiling=deckCeilingAt(x,z,y);
+      if(ceiling!==null && ceiling<y+bodyHeight+.06)return false;
+      for(const b of buildsNear(x,z,2,[])) {
+        if(b===ignore||b.hp<=0||!b.mesh)continue;
+        const p=pushOutOfBuild(b,x,z,PLAYER_RADIUS,true,y);
+        if(Math.hypot(p.x-x,p.z-z)>.015)return false;
+      }
+      const p=resolveStaticProps(x,z,PLAYER_RADIUS,y);
+      if(Math.hypot(p.x-x,p.z-z)>.015)return false;
+      if(house.present) { const p=pushOutOfHouse(x,z,PLAYER_RADIUS);if(Math.hypot(p.x-x,p.z-z)>.015)return false; }
+      if(training.active && training.tg) {
+        const tg=training.tg;
+        // Architectural, station and protective-fence solids remain solid during a vault.
+        const blockers=tg.solids;
+        for(const b of blockers)if(y<b.maxY && y+bodyHeight>b.minY &&
+          x>b.minX-PLAYER_RADIUS && x<b.maxX+PLAYER_RADIUS && z>b.minZ-PLAYER_RADIUS && z<b.maxZ+PLAYER_RADIUS)return false;
+      }
+      return waterDepthAt(x,z)<.7;
+    }
+    function tryVault() {
+      if(vault||marineDown()||!gameStarted||gameOver||won||paused||placeMode||buildMode||uiBlocksFire()||
+        reloading||swapT>0||knifeAnimT>0||grenadeCharging||grenadeAnimBusy()||playerSwimming||onAnyLadder()||
+        rollT>0||mortarMounted||mortarCarried||scriptedKill||training.wake||drownedPace(localPlayer)<1)return false;
+      if(!grounded&&coyoteT<=0)return false;
+      const speed=Math.hypot(velX,velZ),position=player.position;
+      const direction=speed>.65?{x:velX,z:velZ}:{x:Math.sin(aimYaw),z:Math.cos(aimYaw)};
+      let best=null,bestDist=Infinity;
+      for(const b of buildsNear(position.x,position.z,2.6,[])) {
+        if(!pieceVaultable(b))continue;
+        const box=thinBoxFor(b),baseY=b.mesh.position.y;
+        const topY=baseY+(b.type==='wall'&&b.opening==='window'?1.0:pieceHeight(b.type));
+        const plan=planVault({piece:b,box,position,direction,baseY,topY,speed,groundAt:playerGroundY,clearAt:vaultClearAt});
+        if(!plan)continue;
+        const d=Math.hypot(plan.x1-position.x,plan.z1-position.z);
+        if(d<bestDist){best=plan;bestDist=d;}
+      }
+      if(!best)return false;
+      best.exitSpeed=Math.min(speed,PHYS.walk);vault=best;vaultPoseFrame=sampleVault(best,0);
+      velX=0;velZ=0;wishVX=0;wishVZ=0;vy=0;grounded=false;coyoteT=0;
+      jumpBufferT=0;resetJump(jumpFeel);akimboHand=0;offhandMount.visible=false;
+      if(!vaultCanFire(currentWeapon,unarmed))fireHeld=false;
+      AudioSys.vault?.();return true;
+    }
+    function updateVault(dt) {
+      if(!vault)return;
+      const v=vault;
+      if(marineDown()||gameOver||scriptedKill||training.wake){vault=null;vaultPoseFrame=null;return;}
+      v.t=vaultHoldU==null?Math.min(v.dur,v.t+dt):v.dur*vaultHoldU;
+      const p=sampleVault(v);
+      if(!vaultClearAt(p.x,p.y,p.z,p.bodyHeight,v.piece)) {
+        player.position.set(v.x0,v.y0,v.z0);vault=null;vaultPoseFrame=null;grounded=true;vy=0;return;
+      }
+      player.position.set(p.x,p.y,p.z);vaultPoseFrame=p;vy=0;grounded=false;
+      if(p.u>=1) {
+        vault=null;vaultPoseFrame=null;grounded=true;coyoteT=.12;
+        velX=v.nx*v.exitSpeed*.6;velZ=v.nz*v.exitSpeed*.6;wishVX=velX;wishVZ=velZ;
+        landJump(jumpFeel,3.2);AudioSys.land?.(.45);
+      }
+    }
+    function poseVault() {
+      if(!vault||!vaultPoseFrame)return;
+      const P=vaultPoseFrame,ud=marine.userData;
+      const yaw=Math.atan2(vault.nx,vault.nz),turn=_wrapAngle(yaw-player.rotation.y);
+      const k=_smooth(Math.min(1,P.u/.14))*(1-_smooth(Math.max(0,(P.u-.84)/.16)));
+      const mix=(o,x,y,z)=>{o.rotation.x+=(x-o.rotation.x)*k;o.rotation.y+=(y-o.rotation.y)*k;o.rotation.z+=(z-o.rotation.z)*k;};
+      mix(ud.lowerBody,0,turn,0);
+      const aimTurn=Math.max(-1.15,Math.min(1.15,_wrapAngle(aimYaw-yaw)));
+      mix(ud.torsoG,P.lean,aimTurn*.55,P.roll);
+      ud.headG.rotation.x+=(-P.lean*.55-ud.headG.rotation.x)*k;
+      marine.position.y+=(-ROLL_PIVOT_Y+P.dip-marine.position.y)*k;
+      mix(ud.legLG,P.thighL,0,-.12*P.over);
+      mix(ud.kneeLG,P.kneeL,0,0);mix(ud.ankleLG,-.35*P.lead,0,0);
+      mix(ud.legRG,P.thighR,0,.14*P.over);
+      mix(ud.kneeRG,P.kneeR,0,0);mix(ud.ankleRG,-.3*P.trail,0,0);
+    }
+    const _vaultPalm=new THREE.Vector3(),_vaultPole=new THREE.Vector3(),_vaultCarryAim=new THREE.Vector3();
+    const _vaultWristQ=new THREE.Quaternion(),_vaultParentQ=new THREE.Quaternion(),_vaultBasis=new THREE.Matrix4();
+    const _vaultX=new THREE.Vector3(),_vaultY=new THREE.Vector3(),_vaultZ=new THREE.Vector3(0,-1,0);
+    function vaultHands() {
+      if(!vault||!vaultPoseFrame)return;
+      const P=vaultPoseFrame,ud=marine.userData,wr=wristOf(ud.elbowLG);
+      offhandMount.visible=false;
+      if(P.brace<.001||!wr)return;
+      player.updateMatrixWorld(true);
+      _vaultPalm.set(vault.contact.x-vault.nx*.025,vault.contact.y+.034,vault.contact.z-vault.nz*.025);
+      _vaultPole.set(-.75,-.65,-.2);
+      solveArmIK(ud.armLG,ud.elbowLG,wr.position,_vaultPalm,_vaultPole,P.brace);
+      ud.elbowLG.updateMatrixWorld(true);
+      _vaultY.set(-vault.nx,0,-vault.nz);_vaultX.crossVectors(_vaultY,_vaultZ);
+      _vaultBasis.makeBasis(_vaultX,_vaultY,_vaultZ);_vaultWristQ.setFromRotationMatrix(_vaultBasis);
+      ud.elbowLG.getWorldQuaternion(_vaultParentQ).invert();_vaultWristQ.premultiply(_vaultParentQ);
+      wr.quaternion.slerp(_vaultWristQ,P.brace);
+      _vaultHandPose=lerpPose(HAND_POSES.relaxed,HAND_POSES.open,P.brace,_vaultHandPose);
+      wr.userData.hand?.set(_vaultHandPose).update();
+      wr.updateMatrixWorld(true);
+    }
+    let _vaultHandPose = null;

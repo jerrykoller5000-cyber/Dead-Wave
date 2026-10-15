@@ -1,0 +1,119 @@
+{
+  "loadSec": 19.726,
+  "menu": {
+    "counts": [
+      {
+        "w": "pistol",
+        "n": 8
+      },
+      {
+        "w": "uzi",
+        "n": 5
+      },
+      {
+        "w": "m4",
+        "n": 6
+      },
+      {
+        "w": "ak",
+        "n": 5
+      },
+      {
+        "w": "shotgun",
+        "n": 6
+      },
+      {
+        "w": "aa12",
+        "n": 5
+      },
+      {
+        "w": "revolver",
+        "n": 5
+      },
+      {
+        "w": "sniper",
+        "n": 5
+      }
+    ],
+    "retired": {
+      "ok": false,
+      "reason": "drill-unavailable"
+    }
+  },
+  "high": {
+    "preview": {
+      "x": -0.28272632052335867,
+      "y": -197.41036549579746,
+      "z": -639.42,
+      "t": 0.16590139167409412,
+      "kind": "solid"
+    },
+    "first": {
+      "pos": {
+        "x": -0.24427623648957833,
+        "y": -198.26944444444442,
+        "z": -641.9566989382666
+      },
+      "from": {
+        "x": -0.24,
+        "y": -198.39,
+        "z": -642.24
+      },
+      "vx": -0.25657418937468135,
+      "vy": 7.233333333333314,
+      "vz": 16.998063704003073,
+      "fuse": 1.35
+    },
+    "reverse": {
+      "pos": {
+        "x": -0.28270737670283036,
+        "y": -197.38548030961303,
+        "z": -639.4264236098934
+      },
+      "vz": -5.779341659361045,
+      "age": 0.16666666666667881,
+      "fuse": 1.35
+    },
+    "maxZ": -639.4264236098934,
+    "cues": 1
+  },
+  "low": {
+    "preview": {
+      "x": -0.30465961686754667,
+      "y": -199.01999999999998,
+      "z": -639.4366689947582,
+      "t": 0.6565642775881679,
+      "kind": "solid"
+    },
+    "maxZ": -637.4674250339409,
+    "reverse": false,
+    "cues": 1
+  },
+  "drillThrow": {
+    "id": "1791961164388-1",
+    "state": "DISQUALIFIED",
+    "reason": "grenade",
+    "valid": false,
+    "score": 0,
+    "time": 1.3333333333331385,
+    "firstShot": null,
+    "efficiency": 0,
+    "weapon": "pistol",
+    "drill": "first-steps",
+    "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+    "at": 1791961169515,
+    "base": 0,
+    "bonuses": 0,
+    "deductions": 0,
+    "shots": 0,
+    "units": 0,
+    "attackSeconds": 0,
+    "contactSeconds": 0,
+    "cleared": 0,
+    "missed": 0,
+    "draws": 0,
+    "reloads": 0
+  },
+  "startVisible": true,
+  "errors": []
+}

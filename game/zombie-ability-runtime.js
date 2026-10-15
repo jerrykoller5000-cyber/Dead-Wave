@@ -1,5 +1,6 @@
 // GP-179: bounded special attacks. The host supplies its established world and damage contracts.
 import {ABILITY_CONFIG,createRangedAbility,stepRangedAbility,createAcidTrail,sampleAcidTrail,solveBallisticLaunch,stepBallistic,sweptSphereHit,colossusImpactDamage} from './zombie-abilities.js';
+import {makeAcidTexture,acidJoin,acidTrailDissolveNode} from './spitter-acid.js'; // GP-19870
 import {createAbilityCollision} from './zombie-ability-collision.js';
 import {updateZombieAbilityVisuals,getZombieAbilityLaunch} from './zombie-ability-visuals.js';
 
@@ -16,17 +17,7 @@ export function createZombieAbilityRuntime(env){
   const live=token=>token===epoch&&env.active();
   function resources(){
     if(assets)return assets;
-    const cv=document.createElement('canvas');cv.width=cv.height=64;const ctx=cv.getContext('2d');
-    // CL-171 (Jerry: "Spitter trails need to fade out a lot more gracefully ... like a slug leaving a trail behind"): a
-    // slime streak, not a blob. Across its width (u) it is clear at the edges, a thick green body and a wet sheen down the
-    // middle; along it (v) it never changes, so one segment runs into the next without a seam.
-    for(let x=0;x<64;x++){
-      const u=Math.abs(x-31.5)/31.5,edge=Math.max(0,1-u),body=Math.pow(edge,.55)*Math.min(1,edge*3.2);
-      const sheen=Math.exp(-Math.pow((u-.18)/.07,2))*.55+Math.exp(-Math.pow(u/.05,2))*.3;
-      const r=Math.round(118+sheen*120),gr=Math.round(162+sheen*80),b=Math.round(24+sheen*110);
-      ctx.fillStyle='rgba('+r+','+gr+','+b+','+(body*.85+sheen*.15).toFixed(3)+')';ctx.fillRect(x,0,1,64);
-    }
-    const map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;
+    const map=makeAcidTexture(T,'trail');
     assets={stoneGeo:new T.DodecahedronGeometry(.8,1),stoneMat:new T.MeshStandardMaterial({color:0x786e61,roughness:.96}),fireGeo:new T.SphereGeometry(.27,10,6),fireMat:new T.MeshBasicMaterial({color:0xffcf54}),haloGeo:new T.SphereGeometry(.4,8,5),haloMat:new T.MeshBasicMaterial({color:0xff5b0c,transparent:true,opacity:.48,depthWrite:false,blending:T.AdditiveBlending}),map};
     return assets;
   }
@@ -42,16 +33,20 @@ export function createZombieAbilityRuntime(env){
       uv[vertex*2]=trailCorners[i][0]/1.6+.5;uv[vertex*2+1]=trailCorners[i][1]/1.6+.5;
     }
     geometry.setAttribute('position',positions);geometry.setAttribute('color',colors);
-    geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geometry.setDrawRange(0,0);
+    geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+    const caps=new T.Float32BufferAttribute(new Float32Array(capacity*12),2);caps.setUsage(T.DynamicDrawUsage);geometry.setAttribute('acidCaps',caps);
+    const ages=new T.Float32BufferAttribute(new Float32Array(capacity*6),1);ages.setUsage(T.DynamicDrawUsage);geometry.setAttribute('acidAge',ages);geometry.setDrawRange(0,0);
     const Material=T.MeshBasicNodeMaterial&&env.TSL?T.MeshBasicNodeMaterial:T.MeshBasicMaterial;
     const material=new Material({map:resources().map,vertexColors:true,transparent:true,opacity:1,depthWrite:false,side:T.DoubleSide,forceSinglePass:true,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
-    // This vendored WebGPU material reads only vertex RGB by default. Explicitly
-    // multiply its normal mapped opacity by vertex alpha on either GPU backend.
-    if(T.MeshBasicNodeMaterial&&env.TSL)material.opacityNode=env.TSL.attribute('color','vec4').a.mul(env.TSL.materialOpacity);
+    // The GPU material reads only vertex RGB by default; consume lifetime alpha too.
+    // Material color already consumes map alpha. Add soft spill ends.
+    if(T.MeshBasicNodeMaterial&&env.TSL){const N=env.TSL,v=N.attribute('uv','vec2').y,c=N.attribute('acidCaps','vec2');
+      const start=N.mix(1,N.smoothstep(0,.28,v),c.x),end=N.mix(1,N.smoothstep(0,.28,N.float(1).sub(v)),c.y);
+      material.opacityNode=N.attribute('color','vec4').a.mul(N.materialOpacity).mul(start).mul(end).mul(acidTrailDissolveNode(N));}
     material.userData.pooled=true;
     const mesh=new T.Mesh(geometry,material);mesh.name='spitter-acid-trail-batch';mesh.userData.enemyAbility=true;
     mesh.frustumCulled=false;mesh.visible=false;scene.add(mesh);
-    trailBatch={mesh,geometry,positions,colors,capacity};return trailBatch;
+    trailBatch={mesh,geometry,positions,colors,caps,ages,capacity};return trailBatch;
   }
   function trailAlpha(slot,alpha){
     for(let i=0;i<6;i++)trailBatch.colors.setW(slot*6+i,alpha);
@@ -99,14 +94,15 @@ export function createZombieAbilityRuntime(env){
   }
   // CL-171: each drop is a segment of one ribbon, from the spitter's last drop to this one (a short one, pointing the way
   // it walks, after a gap). Its ends share the joint, so a corner bends instead of stacking two blobs.
-  const SLIME={halfWidth:.24,thin:.3,hold:.2,fresh:[1,1,1],dry:[.62,.66,.42]};
+  const SLIME={halfWidth:.4,thin:0,hold:.2,fresh:[.76,.84,.68],dry:[.52,.58,.36]};
   function slimeAlpha(age){const u=Math.min(1,Math.max(0,(age/ABILITY_CONFIG.spitter.life-SLIME.hold)/(1-SLIME.hold)));return .8*(1-u*u*(3-2*u));}
   function placeSlime(p){
     const u=Math.min(1,p.age/ABILITY_CONFIG.spitter.life),w=SLIME.halfWidth*(1-SLIME.thin*u);
-    const ax=p.ax,az=p.az,bx=p.x,bz=p.z,dx=bx-ax,dz=bz-az,l=Math.hypot(dx,dz)||1,nx=-dz/l*w,nz=dx/l*w,ya=p.ay+.025,yb=p.y+.025;
+    const ax=p.ax,az=p.az,bx=p.x,bz=p.z,dx=bx-ax,dz=bz-az,l=Math.hypot(dx,dz)||1,nx=(p.startNX??-dz/l)*w,nz=(p.startNZ??dx/l)*w,ex=(p.endNX??-dz/l)*w,ez=(p.endNZ??dx/l)*w,ya=p.ay+.025,yb=p.y+.025;
     // corners in trailCorners order: (-,-) (+,-) (+,+) (-,-) (+,+) (-,+) with x across the ribbon and z along it
-    const pts=[[ax-nx,ya,az-nz],[ax+nx,ya,az+nz],[bx+nx,yb,bz+nz],[ax-nx,ya,az-nz],[bx+nx,yb,bz+nz],[bx-nx,yb,bz-nz]];
-    for(let i=0;i<6;i++)trailBatch.positions.setXYZ(p.slot*6+i,pts[i][0],pts[i][1],pts[i][2]);
+    const pts=[[ax-nx,ya,az-nz],[ax+nx,ya,az+nz],[bx+ex,yb,bz+ez],[ax-nx,ya,az-nz],[bx+ex,yb,bz+ez],[bx-ex,yb,bz-ez]];
+    const startAge=Math.min(1,Math.max(0,(clock-p.startBorn)/ABILITY_CONFIG.spitter.life)),endAge=Math.min(1,Math.max(0,(clock-p.born)/ABILITY_CONFIG.spitter.life));
+    for(let i=0;i<6;i++){trailBatch.ages.setX(p.slot*6+i,i===2||i===4||i===5?endAge:startAge);trailBatch.positions.setXYZ(p.slot*6+i,pts[i][0],pts[i][1],pts[i][2]);trailBatch.caps.setXY(p.slot*6+i,p.capStart?1:0,p.capEnd?1:0);}trailBatch.caps.needsUpdate=true;trailBatch.ages.needsUpdate=true;
     const k=u*u,c=SLIME.fresh.map((f,j)=>f+(SLIME.dry[j]-f)*k);
     for(let i=0;i<6;i++)trailBatch.colors.setXYZ(p.slot*6+i,c[0],c[1],c[2]);
   }
@@ -120,8 +116,15 @@ export function createZombieAbilityRuntime(env){
       if(fl<1e-3){const ang=counts.trailDrops*2.39996;fx=Math.sin(ang);fz=Math.cos(ang);fl=1;}
       a={x:p.x-fx/fl*ABILITY_CONFIG.spitter.spacing*.6,y,z:p.z-fz/fl*ABILITY_CONFIG.spitter.spacing*.6};
     }
-    Object.assign(record,{mesh:batch.mesh,x:p.x,y,z:p.z,ax:a.x,ay:a.y,az:a.z,age:0});
-    if(st)st.lastDrop={x:p.x,y,z:p.z};
+    const dx=p.x-a.x,dz=p.z-a.z,l=Math.hypot(dx,dz)||1;
+    Object.assign(record,{mesh:batch.mesh,x:p.x,y,z:p.z,ax:a.x,ay:a.y,az:a.z,age:0,born:clock,startBorn:clock,capStart:true,capEnd:true,startNX:-dz/l,startNZ:dx/l,endNX:-dz/l,endNZ:dx/l,generation:counts.trailDrops});
+    const prior=a.record;
+    if(prior&&prior!==record&&prior.generation===a.generation&&prior.age<ABILITY_CONFIG.spitter.life){
+      record.capStart=false;record.startBorn=prior.born;prior.capEnd=false;
+      const join=acidJoin(prior.x-prior.ax,prior.z-prior.az,dx,dz);
+      prior.endNX=record.startNX=join.x;prior.endNZ=record.startNZ=join.z;placeSlime(prior);
+    }
+    if(st)st.lastDrop={x:p.x,y,z:p.z,record,generation:record.generation};
     placeSlime(record);batch.positions.needsUpdate=true;batch.colors.needsUpdate=true;trailAlpha(record.slot,slimeAlpha(0));
     trails.push(record);counts.trailDrops++;batch.mesh.visible=true;batch.geometry.setDrawRange(0,batch.capacity*6);
   }
@@ -199,7 +202,7 @@ export function createZombieAbilityRuntime(env){
   function updateTrails(dt,token){
     for(let i=trails.length-1;i>=0;i--){
       const p=trails[i];p.age+=dt;if(p.age>=ABILITY_CONFIG.spitter.life){releaseTrail(i);continue;}
-      trailAlpha(p.slot,slimeAlpha(p.age));placeSlime(p);trailBatch.positions.needsUpdate=true;   // CL-171: it thins, dulls and dries away
+      trailAlpha(p.slot,slimeAlpha(p.age));placeSlime(p);trailBatch.positions.needsUpdate=true;   // CL-171/GP-19870: preserve the joins while it dulls and dries away
       for(const target of env.players(p.x,p.z,ABILITY_CONFIG.spitter.radius+(env.playerRadius||.4))){
         if(Math.abs(target.position.y-p.y)>.55||clock<(hurtAt.get(target)||0))continue;
         hurtAt.set(target,clock+.4);counts.acidHits++;env.damage(target,4,'acid',null);if(!live(token))return;

@@ -1,0 +1,107 @@
+{
+  "loadSeconds": 10.588,
+  "death": {
+    "alive": false,
+    "released": true,
+    "detached": false,
+    "flames": [
+      false,
+      false
+    ],
+    "errors": []
+  },
+  "cached": {
+    "id": "zombie.demon",
+    "name": "Demon",
+    "kind": "zombie",
+    "variant": null,
+    "mode": "statue",
+    "center": {
+      "x": -26,
+      "y": -198.34214790235313,
+      "z": -632
+    },
+    "size": {
+      "x": 1.970446756598534,
+      "y": 3.3157041952937334,
+      "z": 1.0792302110276069
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 6,
+      "drawables": 6,
+      "tris": 13540,
+      "points": 0,
+      "segments": 0,
+      "materials": 5
+    }
+  },
+  "catalog": {
+    "ok": true,
+    "check": {
+      "subjects": 1,
+      "broken": []
+    },
+    "sheet": "review/demon-GP19921/finish/catalog/sheet.jpg",
+    "file": "review/demon-GP19921/finish/catalog/check.json",
+    "ms": 302
+  },
+  "crowd": {
+    "spawned": 48,
+    "alive": 48,
+    "samples": [
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      },
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      },
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      },
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      },
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      },
+      {
+        "fps": 0,
+        "low": 0,
+        "worst": 0,
+        "hitches": 0,
+        "frames": 0
+      }
+    ],
+    "renderer": {
+      "calls": 7621,
+      "frameCalls": 15,
+      "drawCalls": 106,
+      "triangles": 396523,
+      "points": 0,
+      "lines": 0,
+      "timestamp": 0
+    },
+    "errors": []
+  }
+}

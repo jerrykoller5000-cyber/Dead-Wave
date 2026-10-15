@@ -1,0 +1,8 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+const dir='review/dive-clearance-GP19918',read=n=>JSON.parse(fs.readFileSync(dir+'/'+n,'utf8'));
+const before=read('before-native.json'),after=read('after-native.json'),extra=read('extra-native.json'),pb=read('before-perf.json'),pa=read('after-perf.json');
+assert(extra.weapons.length===6&&extra.blades.length===3&&extra.prone.length===2);assert.equal(extra.wall.phase,'idle');assert(extra.wall.contact);assert(extra.wall.max<7.8);
+assert(/34\s*\nℹ fail 0|pass 34/.test(fs.readFileSync(dir+'/unit.log','utf8')));assert(/24 pass, 0 fail/.test(fs.readFileSync(dir+'/npm-focused.log','utf8')));
+const manifest={sources:{},baselineMaxInside:Math.max(...before.runs.flatMap(r=>r.samples.map(s=>s.inside))),finalMaxInside:Math.max(...after.runs.flatMap(r=>r.samples.map(s=>s.inside))),finalMaxGrip:Math.max(...after.runs.flatMap(r=>r.samples.map(s=>s.gripError))),weapons:extra.weapons.map(w=>({weapon:w.w,dual:w.dual,maxGrip:Math.max(...w.samples.map(s=>s.r)),spent:w.spent})),blades:extra.blades.map(b=>({blade:b.blade,visibleFrames:b.samples.filter(s=>s.visible).length,maxGrip:Math.max(...b.samples.filter(s=>s.visible).map(s=>s.grip)),maxInside:Math.max(...b.samples.filter(s=>s.visible).map(s=>s.inside))})),wall:extra.wall,perf:{before:pb,after:pa}};
+for(const p of['index.html','studio/marine-dive-aim.js']){const b=fs.readFileSync(p);assert(!(b[0]===239&&b[1]===187&&b[2]===191));manifest.sources[p]={sha256:crypto.createHash('sha256').update(b).digest('hex'),bytes:b.length};}
+fs.writeFileSync(dir+'/manifest.json',JSON.stringify(manifest,null,2));console.log(JSON.stringify(manifest,null,2));

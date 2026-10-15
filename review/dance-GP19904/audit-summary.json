@@ -1,0 +1,35 @@
+{
+  "sourceHash": "76edb5ead645021d3cff53087597089af002ee2bd6c79d7d04b50955d462f6a3",
+  "poses": 601,
+  "seekChecks": 13,
+  "transitionChecks": 27,
+  "quality": {
+    "noFloorPenetration": true,
+    "noElbowHyperextension": true,
+    "handsOutsideTorsoProxy": true,
+    "plantedHandsWithin25mm": true,
+    "freeWristsWithin30Degrees": true,
+    "plantedWristsWithin92Degrees": true,
+    "fullyInsideFrame": true,
+    "framingMarginAtLeast24px": true,
+    "deterministicSeek": true,
+    "note": "Numerical diagnostics are necessary checks, not a substitute for viewing the animation."
+  },
+  "browserErrors": [],
+  "minFrameMarginPixels": 73.24160640272737,
+  "clippedFrames": 0,
+  "hipTravelPixels": 434.18111717812576,
+  "uprightDepthRange": [
+    4.109529040241653,
+    5.182913516346718
+  ],
+  "nearFarScaleRatio": 1.261194036006118,
+  "minimumBootGap": 0.03467860595794292,
+  "minimumFloorClearance": 0.0014729461493869847,
+  "maxPlantedPalmError": 0.0008667130514637601,
+  "maxBoundaryDisplacement": 0.00011450141891024203,
+  "limitations": [
+    "Torso proxy and sampled boot intervals are not exhaustive triangle self-collision.",
+    "Human normal-speed playback and live intro startup/decode performance remain for integration."
+  ]
+}

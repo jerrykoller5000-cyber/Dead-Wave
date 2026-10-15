@@ -1,0 +1,7 @@
+{
+  "staged": true,
+  "sourceHash": "e84b1a34fbf9820db59874453ce36af32b2420609ce200f88db353aa4705366b",
+  "candidateHash": "20fb503c1dc59301c1bf0f5a62e01cd08ce9e036ffb9a6080dfb5880a86d8c01",
+  "productionUntouched": true,
+  "guard": "Apply bomberPatch to freshly read production; never restore source or preview."
+}

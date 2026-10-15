@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "game/training-containment.js",
+      "sha256": "94fe61999956f495943581267e9b9de5c0f8dc0cde366f9178cf1192b4e5a05a"
+    },
+    {
+      "path": "game/training-containment.test.mjs",
+      "sha256": "e97693d311d1a47ab541c151462c7c7f0dedd39ca579ed2698a30597a99d7539"
+    }
+  ],
+  "indexEdited": false,
+  "scope": "per-wall count/center spacing and actual instance counts; tests count/time"
+}

@@ -1,0 +1,321 @@
+{
+  "stations": [
+    {
+      "key": "cif",
+      "d": 0.6,
+      "actual": [
+        7.2,
+        -200,
+        -650.2
+      ],
+      "action": "cif",
+      "block": [],
+      "prompt": {
+        "text": "ECIF",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "cif",
+      "d": 1,
+      "actual": [
+        6.98,
+        -200,
+        -650.2
+      ],
+      "action": "cif",
+      "block": [],
+      "prompt": {
+        "text": "ECIF",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "cif",
+      "d": 1.5,
+      "actual": [
+        6.48,
+        -200,
+        -650.2
+      ],
+      "action": "cif",
+      "block": [],
+      "prompt": {
+        "text": "ECIF",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "cif",
+      "d": 2,
+      "actual": [
+        5.98,
+        -200,
+        -650.2
+      ],
+      "action": "cif",
+      "block": [],
+      "prompt": {
+        "text": "ECIF",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "cif",
+      "d": 2.4,
+      "actual": [
+        5.58,
+        -200,
+        -650.2
+      ],
+      "action": "cif",
+      "block": [],
+      "prompt": {
+        "text": "ECIF",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "kiosk",
+      "d": 0.6,
+      "actual": [
+        7.2,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk",
+      "block": [],
+      "prompt": {
+        "text": "ESupply kiosk",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "kiosk",
+      "d": 1,
+      "actual": [
+        6.98,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk",
+      "block": [],
+      "prompt": {
+        "text": "ESupply kiosk",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "kiosk",
+      "d": 1.5,
+      "actual": [
+        6.48,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk",
+      "block": [],
+      "prompt": {
+        "text": "ESupply kiosk",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "kiosk",
+      "d": 2,
+      "actual": [
+        5.98,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk",
+      "block": [],
+      "prompt": {
+        "text": "ESupply kiosk",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "kiosk",
+      "d": 2.4,
+      "actual": [
+        5.58,
+        -200,
+        -646.6
+      ],
+      "action": "kiosk",
+      "block": [],
+      "prompt": {
+        "text": "ESupply kiosk",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "armory",
+      "d": 0.6,
+      "actual": [
+        7.2,
+        -200,
+        -643
+      ],
+      "action": "armory",
+      "block": [],
+      "prompt": {
+        "text": "EArmory",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "armory",
+      "d": 1,
+      "actual": [
+        6.98,
+        -200,
+        -643
+      ],
+      "action": "armory",
+      "block": [],
+      "prompt": {
+        "text": "EArmory",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "armory",
+      "d": 1.5,
+      "actual": [
+        6.48,
+        -200,
+        -643
+      ],
+      "action": "armory",
+      "block": [],
+      "prompt": {
+        "text": "EArmory",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "armory",
+      "d": 2,
+      "actual": [
+        5.98,
+        -200,
+        -643
+      ],
+      "action": "armory",
+      "block": [],
+      "prompt": {
+        "text": "EArmory",
+        "on": "floating on offscreen"
+      }
+    },
+    {
+      "key": "armory",
+      "d": 2.4,
+      "actual": [
+        5.58,
+        -200,
+        -643
+      ],
+      "action": "armory",
+      "block": [],
+      "prompt": {
+        "text": "EArmory",
+        "on": "floating on offscreen"
+      }
+    }
+  ],
+  "bed": {
+    "x": -39.870000000000005,
+    "y": -199.32,
+    "z": -650,
+    "yaw": 1.5707963267948966,
+    "centre": {
+      "x": -40.85,
+      "z": -650
+    },
+    "stand": {
+      "x": -40.25,
+      "z": -648.7,
+      "yaw": 0
+    }
+  },
+  "walk": [
+    {
+      "minX": -7.58,
+      "maxX": 7.2,
+      "minZ": -651.58,
+      "maxZ": -610.9
+    },
+    {
+      "minX": -8.47,
+      "maxX": -7.53,
+      "minZ": -649.08,
+      "maxZ": -646.92
+    },
+    {
+      "minX": -43.2,
+      "maxX": -8.42,
+      "minZ": -651.58,
+      "maxZ": -612.75
+    }
+  ],
+  "cutaway": [
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "south",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "west",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "overhead",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "east",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "north",
+      "opacity": 1,
+      "hidden": false
+    },
+    {
+      "side": "rangeSouth",
+      "opacity": 1,
+      "hidden": false
+    }
+  ]
+}

@@ -1,0 +1,918 @@
+{
+  "wallPass": true,
+  "wallRetreat": true,
+  "samples": [
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    },
+    {
+      "x": -30,
+      "z": -635.5,
+      "push": 0,
+      "mode": "retreat",
+      "attack": 0
+    }
+  ],
+  "luredMode": "pursue",
+  "errors": []
+}

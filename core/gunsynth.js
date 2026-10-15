@@ -656,5 +656,9 @@ export const FOLEY_DEFS = {
   // more pleasant?"): it was CL-135's dial detent and a blip of snow (81% of it above 2 kHz, half above 4 kHz), heard on
   // every gun the pointer crosses. Now a soft, rounded tock, a small plastic detent felt more than heard: a dull knock
   // round 620 Hz over a muted, short click (98% of it under 2 kHz), about 4.7 dB quieter. Still noise, no tone.
-  wheelTick: { level: 0.032, dryLen: 0.07, variants: 4, layers: [{ k: 'knock', f: 620, d: 7, q: 1.2, g: 1 }, { k: 'clank', f: [800, 3200], tau: 0.4, n: 18, click: 0.15, ex: 0.9, body: 0.6, bodyF: 800, g: 0.35 }] }
+  wheelTick: { level: 0.032, dryLen: 0.07, variants: 4, layers: [{ k: 'knock', f: 620, d: 7, q: 1.2, g: 1 }, { k: 'clank', f: [800, 3200], tau: 0.4, n: 18, click: 0.15, ex: 0.9, body: 0.6, bodyF: 800, g: 0.35 }] },
+  // GB-167: the fire selector's detent, a small crisp steel click (audio.js plays it twice, the lever leaving one notch
+  // and dropping into the next). Full auto sits a touch higher and firmer than semi.
+  selectorSemi: { level: 0.028, dryLen: 0.05, variants: 3, layers: [{ k: 'knock', f: 1400, d: 9, q: 1.6, g: 1 }, { k: 'clank', f: [1500, 5200], tau: 0.25, n: 12, click: 0.35, ex: 0.9, body: 0.5, bodyF: 1400, g: 0.5 }] },
+  selectorAuto: { level: 0.032, dryLen: 0.05, variants: 3, layers: [{ k: 'knock', f: 1750, d: 10, q: 1.8, g: 1 }, { k: 'clank', f: [1800, 6000], tau: 0.22, n: 12, click: 0.45, ex: 0.9, body: 0.5, bodyF: 1700, g: 0.55 }] }
 };

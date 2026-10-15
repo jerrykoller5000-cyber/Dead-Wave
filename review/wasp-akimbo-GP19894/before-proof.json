@@ -1,0 +1,1219 @@
+{
+  "states": [
+    {
+      "weapon": "uzi",
+      "dual": false,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.93112289905669,
+            -199.1076643998938,
+            -631.6920481458785
+          ],
+          "grip": [
+            -26.93077716658011,
+            -199.10782059644222,
+            -631.6913197432415
+          ],
+          "gap": 0.0008212787034530102,
+          "shoulder": [
+            -26.660940183297807,
+            -198.96009161035886,
+            -632.0458985861139
+          ],
+          "wrist": [
+            -26.88054549745098,
+            -199.10275623098988,
+            -631.7145389512182
+          ],
+          "scale": [
+            0.5960536398467382,
+            0.5960536398467421,
+            0.5960536398467393
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -26.931056695493474,
+            -199.0692707604305,
+            -631.5753890893986
+          ],
+          "grip": [
+            -26.856695549595663,
+            -199.06173367266152,
+            -631.5897709553915
+          ],
+          "gap": 0.07611324313619147,
+          "shoulder": [
+            -27.324536105384556,
+            -198.95847397435864,
+            -631.8974471279075
+          ],
+          "wrist": [
+            -26.970381201492152,
+            -199.1051926143494,
+            -631.591238494403
+          ],
+          "scale": [
+            0.5960536398467434,
+            0.5960536398467436,
+            0.5960536398467435
+          ]
+        }
+      ],
+      "pieces": {
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.904176568375686,
+            -199.0956113612935,
+            -631.5484094089051
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.606270408826845,
+            -198.95931233073193,
+            -631.4501236189216
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -25.090270008736717,
+            -198.44842997985228,
+            -630.0926249638314
+          ]
+        },
+        "suppressor": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.614884047463722,
+            -198.96221507136192,
+            -631.4578366794619
+          ]
+        },
+        "magStretch": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.904176568375686,
+            -199.0956113612935,
+            -631.5484094089051
+          ]
+        },
+        "heavyLook": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.822245927800623,
+            -199.03667850515887,
+            -631.6220110842725
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            null,
+            "revolver"
+          ],
+          "paired": [
+            "uzi",
+            "revolver"
+          ],
+          "hip": "pistol",
+          "hipPair": "pistol",
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          null,
+          "revolver"
+        ],
+        "hip": "pistol",
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.6282221065818455,
+        "l": 1.2999999958756592,
+        "needR": 0.6282221065818455,
+        "needL": 2.0134506153298783
+      }
+    },
+    {
+      "weapon": "uzi",
+      "dual": true,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.687141868472047,
+            -199.11560713144834,
+            -631.695312599425
+          ],
+          "grip": [
+            -26.68734705592652,
+            -199.11556648406736,
+            -631.6955082843982
+          ],
+          "gap": 0.00028643796846108304,
+          "shoulder": [
+            -26.663574835924656,
+            -198.95755535010863,
+            -632.0500042125853
+          ],
+          "wrist": [
+            -26.64847229197788,
+            -199.1070137200944,
+            -631.734284603929
+          ],
+          "scale": [
+            0.5960536398467383,
+            0.5960536398467431,
+            0.5960536398467382
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -27.156134215052433,
+            -199.11651430933668,
+            -631.5916961302902
+          ],
+          "grip": [
+            -27.156038542863794,
+            -199.1164635887786,
+            -631.5919347101838
+          ],
+          "gap": 0.0002620040234478442,
+          "shoulder": [
+            -27.327554442419284,
+            -198.95882624844964,
+            -631.9032749824482
+          ],
+          "wrist": [
+            -27.207818444397155,
+            -199.1120895395064,
+            -631.6116250502055
+          ],
+          "scale": [
+            0.5960536398467442,
+            0.596053639846743,
+            0.5960536398467439
+          ]
+        }
+      ],
+      "pieces": {
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.156230678180084,
+            -199.18676854419397,
+            -631.604976902762
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.15171894845531,
+            -199.03454601775832,
+            -631.2987195781438
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.120837184138928,
+            -198.95212323836697,
+            -629.2024578124868
+          ]
+        },
+        "suppressor": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.15189441302529,
+            -199.03501432900487,
+            -631.3106301563579
+          ]
+        },
+        "magStretch": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.156230678180084,
+            -199.18676854419397,
+            -631.604976902762
+          ]
+        },
+        "heavyLook": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.155919750637654,
+            -199.06365329357627,
+            -631.5838710646237
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            null,
+            "revolver"
+          ],
+          "paired": [
+            null,
+            "revolver"
+          ],
+          "hip": "pistol",
+          "hipPair": "pistol",
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          null,
+          "revolver"
+        ],
+        "hip": "pistol",
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.6314874446000286,
+        "l": 0.5688756029253154,
+        "needR": 0.6314874446000286,
+        "needL": 0.5688756029253154
+      }
+    },
+    {
+      "weapon": "pistol",
+      "dual": false,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.93701113383666,
+            -199.04570267872904,
+            -631.5747467389164
+          ],
+          "grip": [
+            -26.93677478000476,
+            -199.04578619558478,
+            -631.5743670697775
+          ],
+          "gap": 0.00045495807943336965,
+          "shoulder": [
+            -26.6632018032972,
+            -198.9568468782236,
+            -632.005699452335
+          ],
+          "wrist": [
+            -26.889410908254437,
+            -199.03946053300697,
+            -631.6027334168418
+          ],
+          "scale": [
+            0.6333446925753987,
+            0.6333446925754045,
+            0.6333446925754008
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -26.97381476639908,
+            -199.0604986981977,
+            -631.5559146686921
+          ],
+          "grip": [
+            -26.972182348948547,
+            -199.06558654471846,
+            -631.5627843175091
+          ],
+          "gap": 0.008703047961494743,
+          "shoulder": [
+            -27.33910221393447,
+            -198.96502697117586,
+            -631.9315933056286
+          ],
+          "wrist": [
+            -27.02480933736775,
+            -199.05580229003772,
+            -631.5774900593518
+          ],
+          "scale": [
+            0.6333446925754067,
+            0.6333446925754066,
+            0.6333446925754067
+          ]
+        }
+      ],
+      "pieces": {
+        "slide": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.969295600259436,
+            -199.00893325759006,
+            -631.5001191825562
+          ]
+        },
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.972587746717654,
+            -199.07700940557706,
+            -631.5726187390422
+          ]
+        },
+        "frame": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.97143601015275,
+            -199.02907507911212,
+            -631.5400610549376
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.958068988037184,
+            -199.06252426805514,
+            -631.3381191341082
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.834160453139756,
+            -199.6540102354104,
+            -629.5501185993855
+          ]
+        },
+        "suppressor": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.958401628399326,
+            -199.0609363862636,
+            -631.3429191355438
+          ]
+        },
+        "magStretch": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.972587746717654,
+            -199.07700940557706,
+            -631.5726187390422
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            "uzi",
+            "revolver"
+          ],
+          "paired": [
+            "uzi",
+            "revolver"
+          ],
+          "hip": null,
+          "hipPair": "pistol",
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": null,
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.5153392125551063,
+        "l": 0.4459717924482036,
+        "needR": 0.5153392125551063,
+        "needL": 0.44597179245827734
+      }
+    },
+    {
+      "weapon": "pistol",
+      "dual": true,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.71172174781774,
+            -199.05456529405996,
+            -631.5920186124141
+          ],
+          "grip": [
+            -26.712013904395185,
+            -199.05447041109628,
+            -631.5923541937506
+          ],
+          "gap": 0.00045494293699259827,
+          "shoulder": [
+            -26.651957540060657,
+            -198.96383415400055,
+            -631.99803670755
+          ],
+          "wrist": [
+            -26.66929567695476,
+            -199.04663077696938,
+            -631.6270196402514
+          ],
+          "scale": [
+            0.6333446925753985,
+            0.6333446925754,
+            0.6333446925754006
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -27.189562581609113,
+            -199.04687893140496,
+            -631.5427307144156
+          ],
+          "grip": [
+            -27.189408188164208,
+            -199.04681569686764,
+            -631.5429972978319
+          ],
+          "gap": 0.00031448793361445177,
+          "shoulder": [
+            -27.328266108733484,
+            -198.9529899755101,
+            -631.928114438332
+          ],
+          "wrist": [
+            -27.23785640665944,
+            -199.03833325201353,
+            -631.5688588185517
+          ],
+          "scale": [
+            0.6333446925754058,
+            0.6333446925754062,
+            0.6333446925754079
+          ]
+        }
+      ],
+      "pieces": {
+        "slide": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.18622593758053,
+            -198.97353688427788,
+            -631.5009861528134
+          ]
+        },
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.189967907875978,
+            -199.0607212568681,
+            -631.5488010948093
+          ]
+        },
+        "frame": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.187873900110926,
+            -199.00507304502284,
+            -631.5327411883674
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.182764416151596,
+            -198.97415745044972,
+            -631.3300192504936
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.144559475935935,
+            -198.9810066622723,
+            -629.443051217482
+          ]
+        },
+        "suppressor": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.182866979749488,
+            -198.97413906330388,
+            -631.3350849364882
+          ]
+        },
+        "magStretch": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.189967907875978,
+            -199.0607212568681,
+            -631.5488010948093
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            "uzi",
+            "revolver"
+          ],
+          "paired": [
+            "uzi",
+            "revolver"
+          ],
+          "hip": null,
+          "hipPair": null,
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          "uzi",
+          "revolver"
+        ],
+        "hip": null,
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.7404890630452216,
+        "l": 0.7552343375042243,
+        "needR": 0.7404890630452216,
+        "needL": 0.7552343375042243
+      }
+    },
+    {
+      "weapon": "revolver",
+      "dual": false,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.933460053402175,
+            -199.06797296775304,
+            -631.5612918131663
+          ],
+          "grip": [
+            -26.933231989363993,
+            -199.06808235237136,
+            -631.560910213171
+          ],
+          "gap": 0.00045781738352472534,
+          "shoulder": [
+            -26.64910293378794,
+            -198.97105231238774,
+            -631.9835872188364
+          ],
+          "wrist": [
+            -26.885202587160013,
+            -199.0625834803446,
+            -631.5883134781292
+          ],
+          "scale": [
+            0.697684014869885,
+            0.697684014869884,
+            0.6976840148698865
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -26.974699945708277,
+            -199.08775095165032,
+            -631.5426341124898
+          ],
+          "grip": [
+            -26.97774506292825,
+            -199.10129527105966,
+            -631.5706172132723
+          ],
+          "gap": 0.031237401565184487,
+          "shoulder": [
+            -27.32602127752711,
+            -198.9567505729905,
+            -631.9205236306129
+          ],
+          "wrist": [
+            -27.02489185271326,
+            -199.0799475731085,
+            -631.5651703001563
+          ],
+          "scale": [
+            0.6976840148698886,
+            0.6976840148698892,
+            0.6976840148698907
+          ]
+        }
+      ],
+      "pieces": {
+        "cylinder": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.95718801630554,
+            -199.0480769217616,
+            -631.4964083940185
+          ]
+        },
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.95718801630554,
+            -199.0480769217616,
+            -631.4964083940185
+          ]
+        },
+        "hammer": {
+          "type": "Group",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.964592029402638,
+            -198.98401809492083,
+            -631.5402967136652
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.90864089076826,
+            -199.1754058462467,
+            -631.2689900645715
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -26.525374110210816,
+            -200.18063419744487,
+            -629.4735822005158
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "paired": [
+            "uzi",
+            "revolver"
+          ],
+          "hip": "pistol",
+          "hipPair": "pistol",
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          "uzi",
+          null
+        ],
+        "hip": "pistol",
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.5107492877060114,
+        "l": 0.4434614868069273,
+        "needR": 0.5107492877060114,
+        "needL": 0.4434614868149597
+      }
+    },
+    {
+      "weapon": "revolver",
+      "dual": true,
+      "channels": [
+        {
+          "side": "R",
+          "hand": [
+            -26.731602769046667,
+            -199.05065353960856,
+            -631.5817249462773
+          ],
+          "grip": [
+            -26.73188435772254,
+            -199.05057141335564,
+            -631.5820532037135
+          ],
+          "gap": 0.00044021568374494704,
+          "shoulder": [
+            -26.667938687640067,
+            -198.95053039820777,
+            -631.9849213540629
+          ],
+          "wrist": [
+            -26.689049962613847,
+            -199.04033237448235,
+            -631.6159409106087
+          ],
+          "scale": [
+            0.6976840148698882,
+            0.6976840148698861,
+            0.6976840148698901
+          ]
+        },
+        {
+          "side": "L",
+          "hand": [
+            -27.210190636241222,
+            -199.06362915445865,
+            -631.5417692008182
+          ],
+          "grip": [
+            -27.210036322587754,
+            -199.06355703904606,
+            -631.5420273118303
+          ],
+          "gap": 0.0003092484938966556,
+          "shoulder": [
+            -27.34532063786567,
+            -198.96892670126914,
+            -631.9282180072283
+          ],
+          "wrist": [
+            -27.258264160797154,
+            -199.05698770285596,
+            -631.5688399850214
+          ],
+          "scale": [
+            0.6976840148698913,
+            0.6976840148698937,
+            0.6976840148698927
+          ]
+        }
+      ],
+      "pieces": {
+        "cylinder": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.210854074437915,
+            -198.98045074976324,
+            -631.4989644544421
+          ]
+        },
+        "mag": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.210854074437915,
+            -198.98045074976324,
+            -631.4989644544421
+          ]
+        },
+        "hammer": {
+          "type": "Group",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.212808024742085,
+            -198.9445900845366,
+            -631.5682084583361
+          ]
+        },
+        "flash": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": true,
+          "position": [
+            -27.205949884523452,
+            -198.98419920562728,
+            -631.2339163965792
+          ]
+        },
+        "laser": {
+          "type": "Mesh",
+          "inside": true,
+          "visible": false,
+          "position": [
+            -27.167232595725043,
+            -199.01379227823813,
+            -629.1414317292408
+          ]
+        }
+      },
+      "carry": {
+        "plan": {
+          "primary": [
+            "minigun",
+            "m4"
+          ],
+          "secondary": [
+            "uzi",
+            null
+          ],
+          "paired": [
+            "uzi",
+            null
+          ],
+          "hip": "pistol",
+          "hipPair": "pistol",
+          "hipPairOn": true,
+          "pairOn": [
+            true,
+            true
+          ],
+          "holsterOn": [
+            true,
+            true
+          ],
+          "packPair": 0,
+          "secondaryKinds": [
+            "uzi",
+            "revolver"
+          ],
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0,
+          "bandolier": false,
+          "belt40": false,
+          "vest": true,
+          "cans": [],
+          "looks": [
+            "minigun||",
+            "m4||",
+            "uzi||",
+            "revolver||",
+            "pistol||"
+          ]
+        },
+        "slung": [
+          "minigun",
+          "m4"
+        ],
+        "holstered": [
+          "uzi",
+          null
+        ],
+        "hip": "pistol",
+        "counts": {
+          "mags": 5,
+          "grenades": 0,
+          "shells": 0,
+          "rounds40": 0,
+          "boxes": 2,
+          "tanks": 0
+        },
+        "bands": {
+          "bandolier": false,
+          "belt40": false
+        }
+      },
+      "wrist": {
+        "r": 0.7386134809670896,
+        "l": 0.7474508303349797,
+        "needR": 0.7386134809670896,
+        "needL": 0.7474508303349797
+      }
+    }
+  ],
+  "errors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:2305/ui/prep-checklist.js:116:15\n    at <anonymous>:1:322\n    at <anonymous>:1:617"
+  ]
+}

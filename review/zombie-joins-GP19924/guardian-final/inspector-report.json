@@ -1,0 +1,465 @@
+{
+  "at": "2026-10-15T08:52:40.865Z",
+  "sources": {
+    "studio/zombie-concepts.js": "1271a866c9645f44a4f30c46d2cda3e2e58724723d790bbb8dae4aadc64fdac1",
+    "studio/zombie-guardian-detail.js": "5430be783010b94b79d1f9f3e883585279a26945e11c09c6835def3b02994db3",
+    "combat/zombie-fidelity.js": "2cc6f45b64c5d2e0e474680699736f2f7690adce1c5edd0ecf766f422d8b00d8",
+    "combat/demon-visual.js": "2bffc41bb52910ec44dbe800b959b5649cc65f175e05887120a5391d0f624597",
+    "game/screamer-appearance.js": "de3fb1ffa24ca507d82c0c26db8192be7f9b9cc16006d31fc159633cc96cf8c7",
+    "game/zombie-ability-visuals.js": "6829f67382b3750a5971630ba5d072f970fc077c527b7075c1af8d95b2c03c83",
+    "combat/zombie-joins.js": "f3beae745f3b9c056c4270d5d586b51e7bf69e7004c1bf223c3de54a95743f07"
+  },
+  "passes": {
+    "before": {
+      "loadSeconds": 10.793,
+      "models": [
+        {
+          "type": "guardian",
+          "entry": {
+            "id": "zombie.guardian",
+            "name": "Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.29653071271144,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5381167436520897,
+              "y": 3.40693857457714,
+              "z": 1.2218884248958375
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9768,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.80253558044194,
+              "z": -624.9355404809735,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.869076354645856,
+              "y": -198.04751337182879,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.80253558044194,
+              "z": -639.0644595190265,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 420,
+              "speed": 6.086956521739131,
+              "damage": 25,
+              "armor": 0.3,
+              "reward": 150,
+              "radius": 0.7,
+              "scale": 1.7,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.guardian",
+              "name": "Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -19.373816538941057,
+                "y": -199.0311740525269,
+                "z": -631.8747617796989
+              },
+              "size": {
+                "x": 3.0776431749271183,
+                "y": 4.2836932650349695,
+                "z": 3.3312479594119395
+              },
+              "yaw": -1.5703334778409666,
+              "info": {
+                "meshes": 43,
+                "drawables": 43,
+                "tris": 20508,
+                "points": 0,
+                "segments": 0,
+                "materials": 40
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 0,
+            "skins": 0,
+            "blended": 0
+          }
+        },
+        {
+          "type": "caveguard",
+          "entry": {
+            "id": "zombie.caveguard",
+            "name": "Cave Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.46360784731115,
+              "z": -632
+            },
+            "size": {
+              "x": 1.4536551060834633,
+              "y": 3.072784305377837,
+              "z": 1.4249264889814413
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9768,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.00396468553222,
+              "z": -625.4267965462196,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -19.531099285109775,
+              "y": -198.23770885658146,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.00396468553222,
+              "z": -638.5732034537804,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 999999,
+              "speed": 14,
+              "damage": 999,
+              "armor": 1,
+              "reward": 0,
+              "radius": 0.5,
+              "scale": 1.52,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.caveguard",
+              "name": "Cave Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -19.944955682821902,
+                "y": -199.20394365677518,
+                "z": -631.8748744402161
+              },
+              "size": {
+                "x": 2.4256943762857546,
+                "y": 3.208979716911756,
+                "z": 2.7721461824005473
+              },
+              "yaw": 1.571020908049541,
+              "info": {
+                "meshes": 41,
+                "drawables": 41,
+                "tris": 19918,
+                "points": 0,
+                "segments": 0,
+                "materials": 40
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 0,
+            "vertices": 0,
+            "skins": 0,
+            "blended": 0
+          }
+        }
+      ],
+      "catalog": {
+        "ok": true,
+        "check": {
+          "subjects": 6,
+          "broken": []
+        },
+        "sheet": "review/zombie-joins-GP19924/guardian-final/before/catalog/sheet.jpg",
+        "file": "review/zombie-joins-GP19924/guardian-final/before/catalog/check.json",
+        "ms": 934
+      }
+    },
+    "after": {
+      "loadSeconds": 9.998,
+      "models": [
+        {
+          "type": "guardian",
+          "entry": {
+            "id": "zombie.guardian",
+            "name": "Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.29428946587603,
+              "z": -632
+            },
+            "size": {
+              "x": 1.5381167436520897,
+              "y": 3.4114210682479893,
+              "z": 1.2218884248958375
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9880,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -197.80253558044194,
+              "z": -624.9355404809735,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -18.869076354645856,
+              "y": -198.04751337182879,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -197.80253558044194,
+              "z": -639.0644595190265,
+              "tx": -26,
+              "ty": -198.29653071271144,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 420,
+              "speed": 6.086956521739131,
+              "damage": 25,
+              "armor": 0.3,
+              "reward": 150,
+              "radius": 0.7,
+              "scale": 1.7,
+              "tactics": "boss"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.guardian",
+              "name": "Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -19.373816538941057,
+                "y": -199.00361282604752,
+                "z": -631.8747617796989
+              },
+              "size": {
+                "x": 2.992066929698108,
+                "y": 4.194875820351001,
+                "z": 3.096518817973333
+              },
+              "yaw": -1.5703334778409666,
+              "info": {
+                "meshes": 5,
+                "drawables": 5,
+                "tris": 20444,
+                "points": 0,
+                "segments": 0,
+                "materials": 2
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 66072,
+            "skins": 1,
+            "blended": 32225
+          }
+        },
+        {
+          "type": "caveguard",
+          "entry": {
+            "id": "zombie.caveguard",
+            "name": "Cave Guardian",
+            "kind": "zombie",
+            "variant": null,
+            "mode": "statue",
+            "center": {
+              "x": -26,
+              "y": -198.46927287315756,
+              "z": -632
+            },
+            "size": {
+              "x": 1.4536551060834633,
+              "y": 3.0614542536849285,
+              "z": 1.4249264889814413
+            },
+            "yaw": 0,
+            "info": {
+              "meshes": 3,
+              "drawables": 3,
+              "tris": 9880,
+              "points": 0,
+              "segments": 0,
+              "materials": 3
+            }
+          },
+          "cameras": {
+            "front": {
+              "x": -26,
+              "y": -198.00396468553222,
+              "z": -625.4267965462196,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            },
+            "left": {
+              "x": -19.531099285109775,
+              "y": -198.23770885658146,
+              "z": -632,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            },
+            "back": {
+              "x": -26,
+              "y": -198.00396468553222,
+              "z": -638.5732034537804,
+              "tx": -26,
+              "ty": -198.46360784731115,
+              "tz": -632,
+              "fov": 35
+            }
+          },
+          "walk": {
+            "stats": {
+              "hp": 999999,
+              "speed": 14,
+              "damage": 999,
+              "armor": 1,
+              "reward": 0,
+              "radius": 0.5,
+              "scale": 1.52,
+              "tactics": "direct"
+            },
+            "bad": 0,
+            "info": {
+              "id": "zombie.caveguard",
+              "name": "Cave Guardian",
+              "kind": "zombie",
+              "variant": null,
+              "mode": "walk",
+              "center": {
+                "x": -19.944955682821902,
+                "y": -199.09960689904148,
+                "z": -631.8748744402161
+              },
+              "size": {
+                "x": 2.168239491142991,
+                "y": 3.474107390559965,
+                "z": 2.4053985422871165
+              },
+              "yaw": 1.571020908049541,
+              "info": {
+                "meshes": 3,
+                "drawables": 3,
+                "tris": 20062,
+                "points": 0,
+                "segments": 0,
+                "materials": 2
+              }
+            },
+            "errors": []
+          },
+          "joins": {
+            "bad": 0,
+            "maxWeightError": 2.9802322387695312e-8,
+            "vertices": 65244,
+            "skins": 1,
+            "blended": 29649
+          }
+        }
+      ],
+      "catalog": {
+        "ok": true,
+        "check": {
+          "subjects": 6,
+          "broken": []
+        },
+        "sheet": "review/zombie-joins-GP19924/guardian-final/after/catalog/sheet.jpg",
+        "file": "review/zombie-joins-GP19924/guardian-final/after/catalog/check.json",
+        "ms": 1089
+      }
+    }
+  },
+  "complete": true
+}

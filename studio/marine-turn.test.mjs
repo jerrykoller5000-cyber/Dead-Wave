@@ -100,7 +100,7 @@ test('crouched support feet stay fixed with bent knees, low swing and unchanged 
     const v=new THREE.Vector3();for(const foot of [u.ankleLG,u.ankleRG])near(foot.getWorldPosition(v).y,.104);
     turn.restore();near(marine.position.y,-.2);
     turn.apply(.016,{...options,eligible:false});marine.position.y=0;
-    turn.apply(.016,{eligible:true,yaw,ground,crouch:0,aimLocked:true});near(marine.position.y,-.018);
+    turn.apply(.016,{eligible:true,yaw,ground,crouch:0,aimLocked:true});near(marine.position.y,0);   // GP-19920 (Jerry, 2026-10-15: no standing squat): standing keeps its full height; the crouch keeps its dip (approved CL-199)
   }
 });
 test('crouched pivots plant the entire sole on a slope after changing facing', () => {

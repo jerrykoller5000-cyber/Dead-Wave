@@ -25,8 +25,9 @@
     const hold = () => { p.set(S.x, T.sampleHeight(S.x, S.z), S.z); T.setHp && T.setHp(100000); };
     hold();
     // (1) Speeds, night 20.
-    const BASE = 3.19 * 1.15, sh = [];
-    for (let k = 0; k < 40; k++) { const z = T.spawnZombie(S.x + 50 + (k % 8) * 2, S.z + 50 + ((k / 8) | 0) * 2, 'shambler', true, true); if (z) { H.join(z, 20); sh.push(z); } }
+    // GB-158: on screamers, a crowd kind D-77 still sets (the shambler, soldier and demon have Jerry's own speeds: t247).
+    const BASE = 3.5 * 1.15, sh = [];
+    for (let k = 0; k < 40; k++) { const z = T.spawnZombie(S.x + 50 + (k % 8) * 2, S.z + 50 + ((k / 8) | 0) * 2, 'screamer', true, true); if (z) { H.join(z, 20); sh.push(z); } }
     const walk = sh.filter((z) => z.paceBand !== 'sprint'), spr = sh.filter((z) => z.paceBand === 'sprint');
     ok(walk.length > 0 && walk.every((z) => z.speed <= RUN * 0.9 + 1e-6 && Math.abs(z.hzCap - RUN * 0.9) < 1e-6), 'walkers never past 90% of his sprint (top ' + f2(Math.max(...walk.map((z) => z.speed))) + ' of ' + f2(RUN * 0.9) + ')');
     ok(spr.every((z) => z.speed >= RUN * 1.04 - 1e-6 && z.speed <= RUN * 1.12 + 1e-6), spr.length + ' sprinters, all past his sprint (' + spr.map((z) => f2(z.speed)).join(', ') + ')');

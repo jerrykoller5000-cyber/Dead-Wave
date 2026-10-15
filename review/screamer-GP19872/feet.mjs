@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';
+const E=new Engine({training:true,warm:'none',size:'1200x800'}),dir='review/screamer-GP19872';
+try{await E.open();const proof=await E.ev(`R.release();const D=T.trainingDbg;D.panel().close();D.clear();T.AudioSys.setMuted(true);T.runDevCommand('godmode');const floor=D.tg().floorY;
+ T.player.position.set(-30,floor,-626);T.setVelDbg(0,0);const z=T.spawnZombie(-30,-634,'screamer',true,true);z.trainingZ=true;z.riseT=0;z.mesh.position.y=floor;z.hp=z.maxHp=10000;z.attackCd=100;z.screamCd=100;
+ const u=z.mesh.userData,skin=u.skinMesh,A=skin.geometry.attributes.skinIndex,sets=[u.legLG,u.legRG].map(leg=>new Set(skin.skeleton.bones.map((b,i)=>{for(let p=b;p;p=p.parent)if(p===leg)return i;return -1;}).filter(i=>i>=0))),ids=sets.map(set=>Array.from({length:A.count},(_,i)=>i).filter(i=>set.has(A.getX(i))));const v=z.mesh.position.clone(),samples=[];const start=performance.now();
+ while(performance.now()-start<6000){await new Promise(r=>requestAnimationFrame(r));const t=(performance.now()-start)/1000;T.player.position.set(-30+Math.sin(t*.6)*8,floor,-634+Math.cos(t*.6)*8);T.setVelDbg(0,0);
+  if(samples.length&&t-samples[samples.length-1].t<.08)continue;z.mesh.updateMatrixWorld(true);skin.skeleton.update();const soles=ids.map(vertices=>{let low=Infinity;for(const i of vertices){skin.getVertexPosition(i,v);v.applyMatrix4(skin.matrixWorld);low=Math.min(low,v.y-floor);}return low;});samples.push({t,soles,yaw:z.mesh.rotation.y});}
+ D.clear();return {samples,vertices:ids.map(a=>a.length),min:Math.min(...samples.flatMap(s=>s.soles)),max:Math.max(...samples.flatMap(s=>s.soles))};`,10000);
+ fs.writeFileSync(dir+'/skinned-feet.json',JSON.stringify({...proof,errors:E.page.errors},null,2)+'\n');console.log(JSON.stringify({min:proof.min,max:proof.max,samples:proof.samples.length,vertices:proof.vertices,errors:E.page.errors}));assert(proof.min>-.055);assert(proof.max<.2);assert.equal(E.page.errors.length,0);console.log('PASS actual deformed leg vertices stay planted and lift within 20cm');
+}finally{await E.close();}process.exit(0);

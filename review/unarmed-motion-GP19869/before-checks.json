@@ -1,0 +1,30 @@
+{
+  "results": {
+    "t183": {
+      "pass": 14,
+      "fail": 2
+    },
+    "t184": {
+      "pass": 29,
+      "fail": 0
+    },
+    "t195": {
+      "pass": 16,
+      "fail": 4
+    },
+    "t215": {
+      "pass": 4,
+      "fail": 0
+    }
+  },
+  "performance": {
+    "frames": 300,
+    "seconds": 5.00559999999404,
+    "fps": 59.93287517986999,
+    "p95": 17.5
+  },
+  "loadSeconds": 8.926,
+  "errors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:48010/ui/prep-checklist.js:116:15\n    at <anonymous>:61:12\n    at async <anonymous>:140:9"
+  ]
+}

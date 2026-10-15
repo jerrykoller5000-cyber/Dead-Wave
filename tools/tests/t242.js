@@ -9,8 +9,9 @@
 //    the regular one's baseplate closes the grip's bottom and the extended one only comes out below it;
 //  - the pistol can is about a quarter fatter than CL-95's 22 mm radius, on the bore, its back on the crown in front
 //    of the slide. (t217 checks it against the barrel like the other five cans.)
-// The grip's outline is gripOutline(-0.02, -0.08, 0.18, 0.1, 0.25, 1.6) in makePistolModel (studio/weapon-sidearms.js),
-// rebuilt here; the slab's 14 mm bevel rounds its sides. The akimbo left gun is a clone of this model (offhandMeshes).
+// GB-172: the grip is narrower than GB-154's. Its outline is shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.25, pistolGrip)
+// in makePistolModel (studio/weapon-sidearms.js), rebuilt here; the slab is 46 mm wide with an 8 mm bevel.
+// The centre line is unchanged, so the hand anchor stays. The akimbo left gun is a clone of this model.
 (async () => {
   const T = window.TT, THREE = T.THREE, out = [];
   const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
@@ -55,19 +56,19 @@
     const front = max(slide.filter((p) => p[1] > topY - 0.008 && p[2] > 0), (p) => p[2]);
     ok(front >= slideFront - 0.05, `the front sight rides at the slide's front (${mm(slideFront - front)} back)`);
     // 2) magazines in the grip
-    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.1, rake = 0.25, tang = 1.6, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;
-    const P = [[-0.06, 0.04], [0.28, 0.038], [0.42, 0.031], [0.53, 0.039], [0.64, 0.032], [0.94, 0.036], [0.985, 0.033], [1.0, 0.022],
-      [1.0, -0.03], [0.985, -0.04], [0.55, -0.041], [0.16, -0.039], [0.04, -0.04 - 0.012 * tang], [-0.06, -0.04 - 0.012 * tang]];
+    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.1, rake = 0.3, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;   // GB-179: 17 deg; GB-180 v2: d 0.1
+    const P = [[0.00, 0.026], [0.08, 0.032], [0.20, 0.030], [0.30, 0.035], [0.42, 0.029], [0.54, 0.034], [0.68, 0.030], [0.84, 0.031], [0.96, 0.029], [1.00, 0.024], [1.00, -0.026], [0.96, -0.030], [0.70, -0.031], [0.40, -0.030], [0.18, -0.029], [0.08, -0.033], [0.05, -0.024]];   // GB-180 v2
     const poly = P.map(([u, v]) => { const uu = (u - 0.5) * h, vv = v * k; return [cz - uu * sr + vv * cr, cy - uu * cr - vv * sr]; });
     const uv = (z, y) => { const dz = z - cz, dy = y - cy; return [-(dz * sr + dy * cr) / h + 0.5, (dz * cr - dy * sr) / k]; };   // grip (u down the grip 0..1, v forward in outline units)
     const inside = (z, y) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [zi, yi] = poly[i], [zj, yj] = poly[j]; if ((yi > y) !== (yj > y) && z < (zj - zi) * (y - yi) / (yj - yi) + zi) c = !c; } return c; };
     const edge = (z, y) => { let m = 1e9; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [ax, ay] = poly[j], [bx2, by2] = poly[i], ex = bx2 - ax, ey = by2 - ay, t = Math.max(0, Math.min(1, ((z - ax) * ex + (y - ay) * ey) / (ex * ex + ey * ey))); m = Math.min(m, Math.hypot(z - ax - ex * t, y - ay - ey * t)); } return m; };
-    const R = 0.014, HW = 0.033;
+    const R = 0.009, HW = 0.026;   // GB-180: the grip is 52 mm wide, 9 mm bevel
     const halfW = (m) => HW - (m >= R ? 0 : R - Math.sqrt(R * R - (R - m) * (R - m)));
     const magCheck = (g, label, ext) => {
       g.userData.mag.position.copy(g.userData.baseMagPos);
+      if (g.userData.baseMagRot) g.userData.mag.rotation.copy(g.userData.baseMagRot);   // GB-179: a reload swing left over from startMatch tilted it (offline: in by 8.5 mm at rest)
       const V = verts(g.userData.mag);
-      let poke = -1e9, n = 0, low = -1e9;
+      let poke = -1e9, n = 0, low = -1e9, where = '';
       const fr = [], bk = [];
       for (const [x, y, z] of V) {
         const [u, v] = uv(z, y);
@@ -75,10 +76,11 @@
         if (u > 0.985) continue;
         n++;
         const m = inside(z, y) ? edge(z, y) : -edge(z, y);
-        poke = Math.max(poke, 0.001 - m, Math.abs(x) - (halfW(Math.max(0, m)) - 0.0005));
+        const pk = Math.max(0.001 - m, Math.abs(x) - (halfW(Math.max(0, m)) - 0.0005));
+        if (pk > poke) { poke = pk; where = `at u ${u.toFixed(3)} v ${(v * k * 1000).toFixed(1)} mm x ${(x * 1000).toFixed(1)} mm`; }
         (u < 0.45 ? fr : bk).push(v * k);
       }
-      ok(n > 8 && poke <= 0, `${label}: the magazine is inside the grip above its bottom (worst ${poke > 0 ? mm(poke) + ' out' : mm(-poke) + ' in'}; ${n} points)`);
+      ok(n > 8 && poke <= 0, `${label}: the magazine is inside the grip above its bottom (worst ${poke > 0 ? mm(poke) + ' out' : mm(-poke) + ' in'} ${where}; ${n} points)`);
       // the rake: the middle of the magazine's front-to-back extent is the same high in the grip as low in it (the
       // slabs' rounded corners make the caps' outer rings narrower, so compare the middles, not the faces)
       const mid = (A) => (Math.min(...A) + Math.max(...A)) / 2;

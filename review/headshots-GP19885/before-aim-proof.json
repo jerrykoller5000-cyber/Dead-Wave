@@ -1,0 +1,20 @@
+{
+  "head": {
+    "reticle": "los-clear los-head",
+    "aim": [
+      -30,
+      -198.33796000759708,
+      -632
+    ],
+    "headBonus": 1
+  },
+  "wide": {
+    "reticle": "los-clear los-head",
+    "aim": [
+      -29.994502795739308,
+      -198.03556475157723,
+      -632.1710564299264
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,82 @@
+[
+    {
+        "target":  "weapon:aa12",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-aa12-left.png"
+    },
+    {
+        "target":  "weapon:aa12",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-aa12-three.png"
+    },
+    {
+        "target":  "weapon:knife",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-knife-left.png"
+    },
+    {
+        "target":  "weapon:knife",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-knife-three.png"
+    },
+    {
+        "target":  "weapon:machete",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-machete-left.png"
+    },
+    {
+        "target":  "weapon:machete",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-machete-three.png"
+    },
+    {
+        "target":  "weapon:chainsaw",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-chainsaw-left.png"
+    },
+    {
+        "target":  "weapon:chainsaw",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180p7/after7-chainsaw-three.png"
+    },
+    {
+        "target":  "weapon:revolver",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  1.6,
+        "out":  "review/gb180p7/after7-revolver-left.png"
+    },
+    {
+        "target":  "weapon:revolver",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  1.6,
+        "out":  "review/gb180p7/after7-revolver-three.png"
+    }
+]

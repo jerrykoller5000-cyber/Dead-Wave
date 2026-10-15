@@ -44,3 +44,18 @@ test('the camera ray looks through the near wall and aims at the floor; a round 
   const plate=traceTraining(tg,low,{x:o.x+lane.x,y:o.y+1.3,z:o.z+lane.z},{throughGlass:true});
   assert.equal(plate.solid.target,2);
 });
+test('GP-19910: a round meets a target on its drawn plate, not the front of its box, and the mark faces the side it came from',()=>{
+  const tg=buildTrainingGround(T),o=tg.origin;
+  for(const i of [0,2,4]){
+    const t=tg.targets[i],plane=o.z+t.z,box=tg.solids.find(s=>s.target===i);
+    assert.ok(box.minZ<plane-0.05&&box.maxZ>plane+0.05,'the broad-phase box is thicker than the plate');
+    const front=traceTraining(tg,{x:o.x+t.x,y:o.y+1.35,z:o.z-1},{x:o.x+t.x,y:o.y+1.22,z:plane+1});
+    assert.equal(front.solid.target,i);
+    assert.ok(Math.abs(front.point.z-plane)<1e-9,'on the plate, not its box front ('+(front.point.z-plane).toFixed(3)+' m)');
+    assert.equal(front.normal.z,-1,'faces the firing line');
+    const back=traceTraining(tg,{x:o.x+t.x,y:o.y+1.22,z:plane+1},{x:o.x+t.x,y:o.y+1.35,z:o.z-1});
+    assert.equal(back.solid.target,i);
+    assert.ok(Math.abs(back.point.z-plane)<1e-9,'from behind, also on the plate');
+    assert.equal(back.normal.z,1,'and faces downrange, the way the round came');
+  }
+});

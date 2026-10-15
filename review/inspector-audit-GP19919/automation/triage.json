@@ -1,0 +1,129 @@
+{
+  "at": "2026-10-14T16:31:08.973Z",
+  "fixture": "tools/tests/test-31404.html",
+  "fixtureSha256": "cafd0c6de0f378276ee242e14e572f90ad0a8fe840dfd85b081bfc354bc4d80d",
+  "source": [
+    {
+      "name": "resolveTarget",
+      "oldHash": "1438205e9027cfd1f354dda2a34d0bfab6b85e7b66a40c9494e980f84b41dcbb",
+      "currentHash": "1438205e9027cfd1f354dda2a34d0bfab6b85e7b66a40c9494e980f84b41dcbb",
+      "unchanged": true
+    },
+    {
+      "name": "placeRefusal",
+      "oldHash": "883df0078a9c3c5c0b28cf7dac407d6a1b3dbbb6b62eb8392eceeafacdcf841c",
+      "currentHash": "883df0078a9c3c5c0b28cf7dac407d6a1b3dbbb6b62eb8392eceeafacdcf841c",
+      "unchanged": true
+    },
+    {
+      "name": "placeBuildAt",
+      "oldHash": "45ddaf8890a8019686207573a33b355cb247f142cd4fe9dda6a521e0db6835cc",
+      "currentHash": "45ddaf8890a8019686207573a33b355cb247f142cd4fe9dda6a521e0db6835cc",
+      "unchanged": true
+    },
+    {
+      "name": "tbParts",
+      "oldHash": "dc0b883f01408ba519a707e0727bee48c0ced8403dcd99302cbe4e2dae477b47",
+      "currentHash": "dc0b883f01408ba519a707e0727bee48c0ced8403dcd99302cbe4e2dae477b47",
+      "unchanged": true
+    },
+    {
+      "name": "buildTreeBatches",
+      "oldHash": "1dc644e8bc96b7ef345194bd80d6170b423afe5685fe65ebdcd1d47ee107669e",
+      "currentHash": "1dc644e8bc96b7ef345194bd80d6170b423afe5685fe65ebdcd1d47ee107669e",
+      "unchanged": true
+    },
+    {
+      "name": "updateTreeBatches",
+      "oldHash": "87568eb2a4f918d44dc0a31049eb26cf2aa742d7d297f197603d2ab8977ab92b",
+      "currentHash": "87568eb2a4f918d44dc0a31049eb26cf2aa742d7d297f197603d2ab8977ab92b",
+      "unchanged": true
+    },
+    {
+      "name": "zombieRoundHit",
+      "oldHash": "3ee0029afa946be75de54a0eac0e8fd3d8279060ad8a8cf7a0d43839804ad5df",
+      "currentHash": "3ee0029afa946be75de54a0eac0e8fd3d8279060ad8a8cf7a0d43839804ad5df",
+      "unchanged": true
+    },
+    {
+      "name": "damageZombie",
+      "oldHash": "5605bd6ab06e4fd348ada3854c09b28f73073dafc72b81eb17b1bbe1c089a9d5",
+      "currentHash": "5605bd6ab06e4fd348ada3854c09b28f73073dafc72b81eb17b1bbe1c089a9d5",
+      "unchanged": true
+    }
+  ],
+  "heightOnly": [
+    {
+      "typeKey": "brute",
+      "confirmed": false
+    },
+    {
+      "typeKey": "shambler",
+      "confirmed": false
+    },
+    {
+      "typeKey": "feral",
+      "confirmed": false
+    },
+    {
+      "typeKey": "leaper",
+      "confirmed": false
+    },
+    {
+      "typeKey": "spider",
+      "confirmed": false
+    }
+  ],
+  "rayIntersections": 0,
+  "zombieSurface": null,
+  "plateSequence": [
+    {
+      "kind": "bullet",
+      "amount": 27,
+      "factor": 1,
+      "plateHp": {
+        "front": 45,
+        "back": 13,
+        "left": 30,
+        "right": 30
+      },
+      "expectedDamageFromCurrentWeakness": 12.15
+    },
+    {
+      "kind": "pellet",
+      "amount": 20,
+      "factor": 1,
+      "plateHp": {
+        "front": 45,
+        "back": 0,
+        "left": 30,
+        "right": 30
+      },
+      "expectedDamageFromCurrentWeakness": 9
+    },
+    {
+      "kind": "melee",
+      "amount": 40,
+      "factor": 2,
+      "plateHp": {
+        "front": 45,
+        "back": 0,
+        "left": 30,
+        "right": 30
+      },
+      "expectedDamageFromCurrentWeakness": 36
+    },
+    {
+      "kind": "chainsaw",
+      "amount": 30,
+      "factor": 2,
+      "plateHp": {
+        "front": 45,
+        "back": 0,
+        "left": 30,
+        "right": 30
+      },
+      "expectedDamageFromCurrentWeakness": 27
+    }
+  ]
+}

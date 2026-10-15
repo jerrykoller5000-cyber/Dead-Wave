@@ -1,0 +1,83 @@
+✔ bench and overhead fence seal both wall ends; the shot slot is truly open (3.5713ms)
+✖ permanent containment stops runs, airborne crossings and wall-end bypasses without a scoring foul (5.3578ms)
+✔ fixture geometry is bounded to the line and below the range ceiling (13.9767ms)
+✖ low shots hit the bench; high shots hit the upper fence; camera aiming sees through the upper mesh (2.1266ms)
+✔ rear-origin strikes and blast direction keep the plate falling toward the firing line (0.7788ms)
+✔ exact twelve weapons, five distinct drills each; all copy keys exist (1.3019ms)
+✔ eight full seconds down; beep/timer/raise occur at the same transition (1.4077ms)
+✔ COUNTDOWN: wrong gun misses voids immediately (0.3789ms)
+✔ COUNTDOWN: thrown grenade misses voids immediately (0.1636ms)
+✔ COUNTDOWN: wrong launcher voids immediately (0.182ms)
+✔ COUNTDOWN: position has no line-crossing disqualification (0.1865ms)
+✔ COUNTDOWN: leaving the room still aborts (0.1773ms)
+✔ ACTIVE: wrong gun misses voids immediately (0.6295ms)
+✔ ACTIVE: thrown grenade misses voids immediately (0.5335ms)
+✔ ACTIVE: wrong launcher voids immediately (0.4973ms)
+✔ ACTIVE: position has no line-crossing disqualification (0.4251ms)
+✔ ACTIVE: leaving the room still aborts (0.4158ms)
+✔ 40 mm selected launcher is legal, weapon switching alone is inert (0.5464ms)
+✔ invalid starting position refuses preparation (0.1448ms)
+✔ preparation validates the room, not a removed line rule (0.222ms)
+✔ pause freezes countdown and timeline (0.4472ms)
+✔ pre-start, previous activation/run, duplicate and post-end attacks cannot score (1.3906ms)
+✔ not-yet-upright target never scores (0.2967ms)
+✔ a late projectile or blast from an earlier activation cannot score the next wave (0.5258ms)
+✔ a wrong-zone shotgun discharge incurs one deduction per target, not one per pellet (0.2534ms)
+✔ seven legitimate pellets retained, duplicate callbacks and eighth pellet capped; accuracy <=100 (0.371ms)
+✔ piercing and blast score distinct plates once and collateral accuracy stays <=100 (1.0606ms)
+✔ continuous scoring equal at 30/60/144 Hz and holding cleared plate cannot farm (3.6815ms)
+✔ continuous empty firing costs fuel/time, stale flames do not earn contact (0.3753ms)
+✔ limited ammunition stops at exact budget and completes after flight drain (0.6004ms)
+✔ death, leave, loadout change and cancellation are never valid runs (0.9076ms)
+✔ all 60 patterns can be played to a finite completion with scoring (70.2633ms)
+✔ saw bank legally within actual 3.1m reach; flame bank within actual 7.5m range (0.3596ms)
+✔ records survive reload, cap top10, separate config/loadout and exclude VOID/aborted (1.0826ms)
+✔ records reject duplicates, malformed data; deterministic ties; quota gracefully retains in memory (0.2756ms)
+✔ clampToRects: inside stays, outside goes to the nearest edge of the nearest room (1.8164ms)
+✔ segmentBox: where a round first meets a box (0.3501ms)
+✔ the build: two rooms past the map, five targets downrange, every station on a wall facing in (675.7506ms)
+✔ CL-143: the build room is a hangar, and building stays five squares clear of the zombie gate (597.8025ms)
+✔ CL-144: the plates are twice the size, and a hit scores by its ring and the lane (534.5479ms)
+✔ CL-146: the door has a keypad each side, and nothing in the hangar touches the shared wall (657.8559ms)
+ℹ tests 41
+ℹ suites 0
+ℹ pass 39
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2613.7823
+
+✖ failing tests:
+
+test at review\range-barrier-GP19907\barrier.test.mjs:11:1
+✖ permanent containment stops runs, airborne crossings and wall-end bypasses without a scoring foul (5.3578ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(q.z<=O.z+FIRING_LINE.front-.42+.00001)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/range-barrier-GP19907/barrier.test.mjs:12:116)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at review\range-barrier-GP19907\barrier.test.mjs:20:1
+✖ low shots hit the bench; high shots hit the upper fence; camera aiming sees through the upper mesh (2.1266ms)
+  TypeError: Cannot read properties of null (reading 'solid')
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/range-barrier-GP19907/barrier.test.mjs:23:75)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7)

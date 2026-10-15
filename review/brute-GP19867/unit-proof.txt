@@ -1,0 +1,28 @@
+✔ all thirteen fightable kinds share the six approved damage columns and counters (1.2238ms)
+✔ the distinct approved weaknesses and resistances retain their combat shares (0.1498ms)
+✔ windup provides a dodge window before one physical impact (1.7155ms)
+✔ a sideways escape produces longer miss recovery and does not track (0.3064ms)
+✔ rolling, intervening cover and height changes each defeat a committed smash (0.3171ms)
+✔ cover or high target prevents winding up (0.5174ms)
+✔ pursuit takes time to accelerate its turn and cannot instantly reverse (0.8173ms)
+✔ near-180 target jitter retains a turn direction (0.2016ms)
+✔ death, missing arms or legs, knockdown and water release the smash (0.3218ms)
+✔ cooldown and other attack reservations are honored; other types unaffected (0.3179ms)
+✔ dead victim cancels a pending hit and room reset forgets turn state (0.1572ms)
+✔ threshold bullet stays protected; a later shot reaches flesh without damaging other plates (1.1322ms)
+✔ exposed limbs/head do not consume plate durability; fire and generic effects leave steel intact (0.7535ms)
+✔ blasts break each plate once, preserve blast share and pool reset restores protection (0.2338ms)
+✔ directional fallback follows body facing; low and high hits remain exposed (0.154ms)
+✔ other zombie kinds never acquire Brute protection (0.1344ms)
+✔ demolition slowly aligns then plants for one delayed hit against the original build (0.9333ms)
+✔ removing or opening the committed build during wind cancels contact (0.8543ms)
+✔ a maimed brute falls back to its old attacks instead of beginning a two-arm smash (0.113ms)
+✔ destroying the build with the connected strike keeps its successful follow-through (0.2909ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.2094

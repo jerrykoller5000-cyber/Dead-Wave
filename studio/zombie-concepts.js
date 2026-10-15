@@ -1,7 +1,11 @@
 // GP-161: cosmetic meshes from review/zombie-types/GPT-Concepts. Joint transforms,
 // hit logic and animation remain owned by the original rigs. No random/world state.
 import {detailUV,detailMaterial} from './zombie-detail.js';
+import {skinMergeGroup} from '../core/skin-merge.js';
+import {blendZombieJoins} from '../combat/zombie-joins.js';
 import {sculptGuardian} from './zombie-guardian-detail.js';
+import {sculptDemon} from '../combat/demon-visual.js';
+import {zombieSurfaceTools,refineZombieFace,refineHeavyArmor} from '../combat/zombie-fidelity.js';
 export const CONCEPT_TYPES = Object.freeze(['shambler','feral','brute','military','spitter','bomber','screamer','drowned','leaper','spider','colossus','demon','guardian','caveguard']);
 const templates = new WeakMap();
 function bones(u){
@@ -39,7 +43,8 @@ function sculpt(T, s, rbox) {
   };
   const egg = (p,m,x,y,z,w,h,d,rz=0) => {
     const large=Math.min(w,h,d)>.12;
-    const geo=new T.SphereGeometry(1,large?12:8,large?8:5);
+    const smooth=large&&m.userData.surface==='skin';
+    const geo=new T.SphereGeometry(1,smooth?16:large?12:8,smooth?10:large?8:5);
     const o=put(p,geo,m,x,y,z,0,0,rz);o.scale.set(w*s/2,h*s/2,d*s/2);return o;
   };
   const rock = (p,m,x,y,z,w,h,d,rz=0) => {
@@ -51,22 +56,10 @@ function sculpt(T, s, rbox) {
     const o=put(p,new T.CylinderGeometry(rb*s,ra*s,v.length(),n,1),m);
     o.position.copy(A).add(B).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;
   };
-  const path = (p,m,pts,r=.025) => pts.slice(1).forEach((b,i)=>rod(p,m,pts[i],b,r*(1-i/pts.length),r*(1-(i+1)/pts.length)));
+  const surface=zombieSurfaceTools(T,s,put),path=surface.sweep;
   const spike = (p,m,a,b,r=.035) => rod(p,m,a,b,r,0,5);
   // Connected tapered masses replace stacked oval limbs. Rings stay in bone-local space.
-  const loft=(p,m,rings,n=12)=>{
-    if(rings[0][0]>rings[rings.length-1][0])rings=[...rings].reverse();
-    const pos=[],uv=[],idx=[];
-    for(let j=0;j<rings.length;j++)for(let i=0;i<=n;i++){
-      const [y,rx,rz,cz=0,cx=0]=rings[j],a=i/n*Math.PI*2;
-      pos.push((cx+Math.sin(a)*rx)*s,y*s,(cz+Math.cos(a)*rz)*s);uv.push(i/n,j/(rings.length-1));
-    }
-    for(let j=0;j<rings.length-1;j++)for(let i=0;i<n;i++){const a=j*(n+1)+i,b=a+n+1;idx.push(a,a+1,b,b,a+1,b+1);}
-    // All callers order rings bottom to top; cap both ends without leaving open sockets.
-    for(const end of [0,rings.length-1]){const [y,, ,cz=0,cx=0]=rings[end],c=pos.length/3;pos.push(cx*s,y*s,cz*s);uv.push(.5,end?1:0);
-      for(let i=0;i<n;i++){const a=end*(n+1)+i;if(end)idx.push(c,a,a+1);else idx.push(c,a+1,a);}}
-    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);geo.computeVertexNormals();return put(p,geo,m);
-  };
+  const loft=surface.profile;
   const ribbon=(p,m,pts,w=.025)=>{
     const pos=[],uv=[],idx=[];
     for(let i=0;i<pts.length;i++){const [x,y,z]=pts[i],rw=w*(1-i/(pts.length+1));pos.push((x-rw)*s,y*s,z*s,(x+rw)*s,y*s,(z+.005)*s);uv.push(0,i/(pts.length-1),1,i/(pts.length-1));if(i){const a=(i-1)*2;idx.push(a,a+2,a+1,a+1,a+2,a+3,a+1,a+2,a,a+3,a+2,a+1);}}
@@ -81,7 +74,7 @@ function sculpt(T, s, rbox) {
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.computeVertexNormals();
     return put(p,geo,m,x,y,z,0,0,rz);
   };
-  return {mat,mats,put,egg,rock,box,rod,path,spike,rag,loft,ribbon};
+  return {mat,mats,put,egg,rock,box,rod,path,spike,rag,loft,ribbon,sweep:surface.sweep,plate:surface.plate};
 }
 
 function stripMeshes(root, keep = new Set()) {
@@ -108,11 +101,14 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
   const wide=heavy?.68:acid?.65:k==='screamer'?.35:k==='feral'||k==='leaper'?.4:.48;
   const deep=heavy?.4:acid?.48:.3;
   torso.userData.bodyMat=skin;u.bodyMats=[skin];
-  egg(hips,cloth,0,.1,0,wide*.82,.28,deep*.87);
+  // A continuous pelvic waistband reaches inside the abdomen and both hip sockets.
+  loft(hips,cloth,[[-.035,wide*.34,deep*.36],[.04,wide*.41,deep*.43],[.17,wide*.40,deep*.43],[.255,wide*.30,deep*.34]],12);
   loft(torso,skin,[[-.08,wide*.29,deep*.32],[.03,wide*.36,deep*.40],[.17,wide*.43,deep*.47],[.31,wide*.5,deep*.5],[.42,wide*.44,deep*.42],[.48,wide*.22,deep*.28],[.51,.064,.065]],12);
   // Trapezius and collarbone flow into the shoulders instead of exposing ball joints.
   for(const side of [-1,1]){
     egg(torso,skin,side*wide*.25,.425,-.015,wide*.51,.18,deep*.8,side*.27);
+    // A deltoid root reaches the actual shoulder pivot; no detached upper arm.
+    path(torso,skin,[[side*wide*.29,.40,0],[side*.255,.42,0],[side*.32,.42,0]],.082,.09);
     path(torso,pale,[[side*.025,.455,.078],[side*.11,.435,.12],[side*wide*.39,.40,.08]],.019);
     egg(torso,skin,side*wide*.19,.27,-deep*.43,wide*.33,.30,.07,side*.3);
   }
@@ -122,9 +118,10 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     const muscle=heavy?1.6:k==='feral'||k==='leaper'?1.08:.92;
     arm.userData.upper=loft(arm,skin,[[-.355,.053*muscle,.06*muscle],[-.29,.06*muscle,.063*muscle],[-.20,.085*muscle,.095*muscle,.014],[-.10,.102*muscle,.104*muscle,.008],[0,.11*muscle,.103*muscle],[.08,.063*muscle,.075*muscle]],10);
     egg(el,skin,0,0,-.015,.14*muscle,.13,.15*muscle);
-    loft(el,skin,[[-.34,.048*muscle,.044*muscle,.012],[-.28,.052*muscle,.054*muscle],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle], [.025,.055*muscle,.061*muscle]],10);
+    // The wrist and palm are one continuous surface, with a gentle heel flare.
+    loft(el,skin,[[-.425,.034*muscle,.028*muscle,.024],[-.39,.068*muscle,.045*muscle,.02],[-.35,.075*muscle,.050*muscle,.02],[-.308,.052*muscle,.049*muscle,.012],[-.26,.055*muscle,.058*muscle],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle],[.025,.055*muscle,.061*muscle]],10);
     rod(el,pale,[-.018,-.03,.063],[.018,-.29,.042],.021,.014);
-    egg(el,skin,0,-.354,.02,.15*muscle,.16,.10*muscle);
+    // Palm volume is included in the forearm loft above.
     for(let f=0;f<4;f++){
       const x=(f-1.5)*.031*muscle,len=(f===0||f===3)?.08:.11;
       path(el,skin,[[x,-.37,.025],[x,-.4-len*.45,.047],[x,-.4-len,.015]],.021*muscle);
@@ -139,10 +136,11 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     const lm=heavy?1.35:1;
     leg.userData.thigh=loft(leg,legcloth?cloth:skin,[[-.38,.067*lm,.067*lm,.01],[-.29,.080*lm,.10*lm],[-.13,.104*lm,.119*lm,-.01],[.02,.098*lm,.09*lm]],10);
     egg(shin,pale,0,-.015,.03,.15,.13,.16);
-    loft(shin,skin,[[-.34,.048*lm,.051,.01],[-.23,.054*lm,.066,-.015],[-.12,.083*lm,.085,-.02],[-.045,.067*lm,.069],[.018,.063*lm,.07]],10);
+    const bareFoot=['feral','leaper','demon','guardian','caveguard'].includes(k);
+    loft(shin,skin,[...(bareFoot?[[-.405,.065*lm,.102,.055],[-.375,.092*lm,.139,.043],[-.34,.061*lm,.080,.016],[-.29,.048*lm,.057]]:[[-.34,.048*lm,.051,.01]]),[-.23,.054*lm,.066,-.015],[-.12,.083*lm,.085,-.02],[-.045,.067*lm,.069],[.018,.063*lm,.07]],10);
     rod(shin,shadow,[.02,-.06,.066],[.008,-.31,.052],.015,.01);
     const booted=!['feral','leaper','demon','guardian','caveguard'].includes(k);
-    egg(shin,booted?leather:skin,0,-.355,.043,.185*(heavy?1.35:1),.114,.278);
+    if(booted)egg(shin,leather,0,-.355,.043,.185*(heavy?1.35:1),.114,.278);
     if(booted){
       box(shin,hair,0,-.403,.04,.176*(heavy?1.35:1),.027,.263);
       loft(shin,leather,[[-.38,.083,.10,.045],[-.32,.077,.089,.005],[-.235,.078,.080],[ -.20,.066,.069]],9);
@@ -192,6 +190,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     ribbon(head,tip,[[0,-.24,.22],[.017,-.32,.273],[.035,-.39,.330],[.023,-.43,.40],[-.015,-.40,.451]],.013);
     for(const side of [-1,1])path(head,pale,[[side*.135,-.07,.085],[side*.11,-.24,.089],[side*.06,-.33,.06]],.020);
   }
+  refineZombieFace(A,T,g,s,k,{skin,shadow,pale,wound,mouth,teeth});
   if(['shambler','feral','spitter','screamer','drowned'].includes(k)){
     egg(head,hair,-.032,.183,-.045,.24,.040,.23);
     for(let i=0;i<(scream?13:9);i++){
@@ -364,6 +363,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       }
     }
   }
+  if(k==='brute'||k==='colossus')refineHeavyArmor(A,T,g,s,k,{steel,rust,hair,leather,wound,cloth});
   if(k==='guardian'||k==='caveguard'){
     const stone=k==='caveguard';
     for(const side of [-1,1]){rock(side<0?armLG:armRG,stone?pale:skin,0,-.12,.015,.28,.4,.26);rock(torso,pale,side*.24,.40,0,.27,.2,.29);}
@@ -371,6 +371,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
     box(head,stone?pale:shadow,0,.15,.11,.39,.10,.2);
   }
   if(k==='spider')buildSpider(A,T,g,s);
+  if(k==='demon')sculptDemon(A,T,g,s,{skin,shadow,mouth,teeth,hair,rust,cloth});
   // The pulsing belly remains emissive, but still needs its stretched wet skin.
   if(k==='bomber'){
     const belly=u.pulseMats[0];Object.assign(belly,detailMaterial(T));
@@ -444,28 +445,29 @@ function batchGlow(T,g){
 }
 
 function buildSpider(A,T,g,s){
-  const {mat,egg,rock,box,rod,spike,path}=A,u=g.userData,{torso,head}=u;
+  const {mat,egg,rock,box,rod,spike,path,loft}=A,u=g.userData,{torso,head}=u;
   // Strip the generic replacement, retaining the original eyes and all six limb joints.
   stripMeshes(g,new Set(u.eyes));
   const shell=mat(0xc5c8b9,false,0,'bone'),edge=mat(0x929b8a,false,0,'bone'),joint=mat(0x41423a,false,0,'root'),claw=mat(0x292e29,false,0,'bone'),pink=mat(0xd77b9b,false,0,'wet');
   egg(torso,joint,0,.07,-.17,.66,.35,1.03);
   for(let i=0;i<5;i++){
     const z=.32-i*.205,w=.48+Math.sin(i/4*Math.PI)*.24;
-    rock(torso,shell,0,.16,z,w,.27,.29);
+    egg(torso,shell,0,.16,z,w,.27,.29);
     spike(torso,shell,[0,.23,z],[0,.40+(i%2)*.05,z-.09],.066);
     for(const side of [-1,1])egg(torso,edge,side*w*.35,.235,z,.071,.063,.068);
     path(torso,joint,[[0,.295,z+.095],[0,.31,z],[0,.29,z-.095]],.009);
     for(const side of [-1,1]){rock(torso,edge,side*w*.36,.12,z-.025,w*.26,.20,.235,-side*.35);spike(torso,shell,[side*w*.42,.15,z],[side*w*.55,.17,z-.13],.042);}
   }
-  egg(head,shell,0,0,.01,.33,.24,.31);box(head,joint,0,.12,.07,.32,.061,.18);
-  box(head,joint,0,-.08,.139,.20,.074,.039);
+  egg(head,shell,0,0,.01,.33,.24,.31);
+  path(head,edge,[[-.14,.075,.09],[-.07,.10,.136],[.07,.10,.136],[.14,.075,.09]],.017);
+  egg(head,joint,0,-.075,.139,.19,.065,.043);
   for(const side of [-1,1]){
     egg(head,pink,side*.041,-.014,.174,.034,.027,.014);
     rock(head,edge,side*.137,-.025,.065,.14,.16,.17,side*.3);
     path(head,shell,[[side*.10,-.064,.155],[side*.15,-.14,.196],[side*.11,-.205,.24]],.037);
-    path(head,claw,[[side*.11,-.205,.24],[side*.055,-.19,.29],[side*.037,-.12,.28]],.024);
+    A.sweep(head,claw,[[side*.11,-.205,.24],[side*.055,-.19,.29],[side*.037,-.12,.28]],.024,0);
   }
-  for(const e of u.eyes){e.position.set(Math.sign(e.position.x)*.103*s,.04*s,.145*s);e.scale.set(.8,.7,.7);}
+  for(const e of u.eyes){e.position.set(Math.sign(e.position.x)*.103*s,.04*s,.145*s);e.scale.set(.65,.50,.45);}
   for(const limb of u.crawlLimbs||[]){
     const L1=limb.knee.position.y/s;
     // Existing lower joints encode the exact ground reach; recover it from the rest axis.
@@ -473,17 +475,16 @@ function buildSpider(A,T,g,s){
     const upperY=new T.Vector3(0,L1,0).applyQuaternion(limb.baseQ).y;
     const L2=(.52+upperY-.05)/-dir.y;
     egg(limb.root,joint,0,0,0,.21,.21,.21);
-    rod(limb.root,shell,[0,.04,0],[0,L1-.03,0],.10,.065);
-    rod(limb.root,edge,[0,.08,.072],[0,L1-.05,.045],.026,.012);
-    egg(limb.root,joint,0,L1,0,.19,.19,.19);
+    loft(limb.root,shell,[[.02,.095,.085],[L1*.24,.112,.093],[L1*.65,.091,.075],[L1-.02,.065,.06]],10);
+    path(limb.root,edge,[[0,.05,.08],[0,L1*.45,.094],[0,L1-.035,.055]],.017);
+    egg(limb.knee,joint,0,0,0,.19,.19,.19); // socket follows the moving knee, not the upper plate
     for(let i=0;i<3;i++){
-      const a=.06+i*(L1-.1)/3,b=Math.min(L1-.035,a+(L1-.1)/3+.035);
-      rod(limb.root,i%2?shell:edge,[0,a,0],[0,b,0],.114-i*.014,.095-i*.012,7);
+      const a=.06+i*(L1-.1)/3;
       spike(limb.root,shell,[.065,a+.025,0],[.15,a+.07,-.07],.033);
     }
-    rod(limb.knee,shell,[0,.05,0],[0,L2-.08,0],.082,.035);
-    for(let i=0;i<2;i++){const a=.045+i*(L2-.12)/2;rod(limb.knee,i?edge:shell,[0,a,0],[0,a+(L2-.12)/2,0],.093-i*.027,.073-i*.026,7);}
-    path(limb.knee,claw,[[0,L2-.1,0],[0,L2,.022],[0,L2+.035,.13],[0,L2+.028,.20]],.039);
+    loft(limb.knee,shell,[[.025,.08,.075],[L2*.25,.09,.074],[L2*.62,.06,.052],[L2-.07,.035,.03]],10);
+    path(limb.knee,edge,[[0,.05,.068],[0,L2*.45,.072],[0,L2-.10,.027]],.012);
+    A.sweep(limb.knee,claw,[[0,L2-.1,0],[0,L2,.022],[0,L2+.035,.13],[0,L2+.028,.20]],.039,0);
   }
   torso.userData.bodyMat=shell;u.bodyMats=[shell];
 }
@@ -494,6 +495,9 @@ export function applyGuardianConcept({THREE:T,g,rbox,kind='caveguard'}){
   const eye=sculptGuardian(A,T,g,kind);
   g.userData.mats=A.mats;g.userData.concept={version:2,type:kind};
   batchSurfaces(T,g,new Set([eye]));
+  // Same articulated skeleton, with shared deformation at shoulders, wrists and fingers.
+  const merged=skinMergeGroup(T,g,{keep:new Set([eye]),name:'guardian-skin'});
+  if(merged){for(const skin of merged.meshes)blendZombieJoins(T,g,skin);g.userData.mats=[...merged.meshes.map(m=>m.material),eye];}
 }
 
 // Guardians don't pass through the zombie compactor. Merge opaque surfaces per bone,

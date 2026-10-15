@@ -1,0 +1,93 @@
+GP-19905 — 20-second articulated-hop and ground-finale refinement
+STAGED ONLY. No live assets/intro, assets/disclaimer, or index.html edits.
+
+Verified final metadata:
+  duration: 20
+  fps: 30
+  frames: 600
+  frame: [1280, 720]
+  crop: [0, 0, 1280, 720]
+  silent alpha: marine-dance-transparent.webm
+  presentation with music: marine-dance.mp4
+  separate unchanged excerpt: audio-dance.mp3
+
+Music clock:
+  The unchanged excerpt covers Been Warned source seconds 9.151494–29.151494.
+  Original pitch and playback speed; estimated tempo 103.322299 BPM.
+  Excerpt fade is 19.55–20.00 seconds.
+  If the live controller plays the original complete song, dancer.start remains 9.151494.
+  If Claude chooses the pre-trimmed audio-dance.mp3, dancer.start must be 0.
+  Do not delay the pre-trimmed excerpt's dancer by another 9.151494 seconds.
+  Keep loop false and pause on the final grounded pose. Do not stretch video speed to fit previous cue times.
+
+What changed from GP-19904:
+  More articulated side hops at beats 9–12 and 18–20: loading, flight tuck, and landing absorption.
+  The handstand now leads into the final backspin.
+  The backspin brakes into a side roll and supported reclining pose rather than returning to standing.
+  Final pose is reached at beat 33.2 (19.279478 seconds), held for the remaining 0.720522 seconds.
+  The side roll begins during the last spin rotation at beat30.75 (17.856746 seconds).
+  The spin rotation integral stops at beat31.25; the quadratic pose blend keeps rolling through beat33.2.
+  There is no intermediate frozen catch. Choreography and the supported final pose are now frozen.
+  Same exact 20-second audio, outfit, accepted lighting, fixed camera, and full-frame transparency.
+
+Full-frame placement:
+  Do not reuse the original CL-190 physical crop [352,104,612,560].
+  Full source video requires crop [0,0,1280,720] in the controller, yielding left0%, top0%, width100%, height100%.
+  Old crop metadata would shrink and reposition a full-frame video into a narrow subrectangle;
+  physically cropping the source would discard lateral/depth travel.
+  Preserve the 16:9 stage and object-fit:contain. The actor's travel comes from rendered 3D movement.
+  Never follow or recenter the actor with CSS.
+
+Initial stage recommendation:
+  Retain CL-190's centered frame with translate(-50%, -57%) scale(.9),
+  width min(100vw,177.78vh) and height min(56.25vw,100vh).
+  This unchanged composition passes the final GP-19905 extremes at 1280x720 and 900x900.
+  Keep the existing stationary ambient floor pool. Character lighting/materials are unchanged.
+  Only if new final captures show text overlap should Claude consider a small whole-stage lift or scale reduction.
+  Do not crop the actor or change the lighting to solve layout.
+
+Claude's integration work:
+  Re-time the existing five voice/text cards, siren, chirps, shot, ducking, and ending together.
+  The old minute-long dance cue list cannot be reused.
+  This proposal assigns no new card cues and changes no disclaimer words.
+  Preserve existing audio-clock scheduling and compositor animations during game startup.
+  Choose the published asset filename/cache version and align the closing shot with the new floor-pose ending.
+
+Private preview:
+  /review/dance-GP19905/disclaimer-preview.html imports the existing disclaimer CSS/fonts, the new alpha clip,
+  and the unchanged 20-second music excerpt. No live controller, game, voice, or siren is loaded.
+  A selected original card remains visible for overlap inspection; it is not a replacement card timeline.
+  Query ?clean&card=1&time=4 hides controls and seeks. Card -1 hides text.
+  The preview buffers media into local blob URLs for reliable seeks under a private static server without byte ranges.
+  window.disclaimerPreview.ready / seek(seconds) / setCard(index) / proof() are isolated QA hooks.
+
+Final GP-19905 evidence:
+  Final motion hash: 732005e7e52293ef76f3be09512aabb31695c9ece4b80027ee395e44498aacbc.
+  Native pose audit: 601 poses, 26 boundaries, 13 exact repeated seeks; nine of nine quality gates pass.
+  Planted-palm error maximum: 0.877mm. Free-wrist bend maximum: 28.591degrees.
+  Minimum source-vertex frame margin: 75.601px; no clipped vertices or browser errors.
+  Floor tolerance is 2mm; worst measured intersection is a 1.242mm boot/toe contact at12.7s during kick-up.
+  This is within the tolerance, not a claim of mathematically zero floor penetration.
+  Audit file: final-audit/proof.json; bright visual sheet: final-sheet-v2/contact-sheet.png.
+  Both final exports: PASS, 600 decoded frames each, exactly 20.000s, 1280x720.
+  Opaque audio alignment: zero lag samples, correlation 0.998701. Silent WebM alpha range: 0–255.
+  Native composite command: node review/dance-GP19905/composite-check.mjs
+  Viewports: 1280x720 and 900x900; actual left/right, upright near/far, lowest/highest-screen, and final-freeze poses.
+  Fourteen native captures passed; final freeze captured at 19.8s with the longest existing card.
+  Minimum decoded source margin: 75px.
+  Minimum viewport margin: 65.700px.
+  Minimum gap above existing text: 21.853px, with the longest card visible at the lowest pose.
+  Cropping/text-overlap/browser-error result: none in all fourteen captures. All decoded corners have alpha0.
+  Contact sheet visually inspected: composite-proof/contact-sheet.png. Detailed result: composite-proof/proof.json.
+  Square layout preserves the full frame and renders a smaller dancer; no recentering is applied.
+  No GP-19904 measurements are asserted as GP-19905 results.
+
+Preserved evidence and regeneration:
+  Complete render-proof.json and render-alpha-proof.json; final-audit/proof.json; final-sheet-v2; 28 selected final-stills.
+  Both verification JSON files and all fourteen composite screenshots remain.
+  Temporary frames/ and frames-alpha/ folders were removed only after full decode verification.
+  Verify existing outputs: node review/dance-GP19905/encode.mjs --verify
+  Verify existing alpha: node review/dance-GP19905/encode.mjs --alpha --verify
+  Regenerate opaque: node review/dance-GP19905/capture.mjs --render --motionblur, then node review/dance-GP19905/encode.mjs
+  Regenerate alpha: node review/dance-GP19905/capture.mjs --render --alpha --motionblur, then node review/dance-GP19905/encode.mjs --alpha
+  Shared npm results belong in the root handoff. Production startup, voice/card timing, and real-time decode performance are not established by the private composite.

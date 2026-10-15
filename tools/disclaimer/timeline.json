@@ -1,0 +1,85 @@
+{
+ "note": "CL-191 disclaimer timeline. sirenAt, drop, sirenFade, song.leadFade and tail are video seconds; everything under lines (in, out, voiceAt) is seconds after the drop (song time: the drop is where Been Warned 9.151494 s, GPT's beat 0 and the dancer's frame 0 land). chirps[].at and shotAt are seconds after that line's voice starts; a chirp's lead is the silence at the head of its file (so at + lead is when the distant guy speaks), its text the subtitle. render.mjs and mix.py both read this file.",
+ "fps": 60,
+ "width": 1920,
+ "height": 1080,
+ "sirenAt": 0.1,
+ "drop": 1.95,
+ "sirenFade": [
+  1.86,
+  2.02
+ ],
+ "song": {
+  "file": "been-warned.mp3",
+  "sourceAtDrop": 9.151494,
+  "leadIn": 1.5,
+  "leadFade": [
+   0.45,
+   1.75
+  ],
+  "bpm": 103.322299
+ },
+ "dance": {
+  "file": "marine-dance-transparent.webm",
+  "fps": 30,
+  "frames": 600,
+  "freezeAt": 19.279478
+ },
+ "lines": [
+  {
+   "id": "attention",
+   "voice": "1-attention.mp3",
+   "voiceAt": -0.07,
+   "in": 0.0,
+   "out": 2.03
+  },
+  {
+   "id": "made",
+   "voice": "2-this-game.mp3",
+   "voiceAt": 2.37,
+   "in": 2.323,
+   "out": 6.39,
+   "chirps": [
+    {
+     "at": 1.58,
+     "file": "b1.mp3",
+     "lead": 0.274,
+     "text": "( you heard? )"
+    }
+   ]
+  },
+  {
+   "id": "slop",
+   "voice": "3-whether-you-like-it.mp3",
+   "voiceAt": 6.72,
+   "in": 6.68,
+   "out": 11.62,
+   "chirps": [
+    {
+     "at": 3.354,
+     "file": "b2.mp3",
+     "lead": 0.116,
+     "text": "( tell em! )"
+    }
+   ]
+  },
+  {
+   "id": "fun",
+   "voice": "4-have-fun.mp3",
+   "voiceAt": 11.95,
+   "in": 11.904,
+   "out": 14.86
+  },
+  {
+   "id": "git",
+   "voice": "5-git.mp3",
+   "voiceAt": 17.73,
+   "in": 17.69,
+   "shotAt": 1.55
+  }
+ ],
+ "shot": {
+  "file": "gunshot.ogg"
+ },
+ "tail": 0.6
+}

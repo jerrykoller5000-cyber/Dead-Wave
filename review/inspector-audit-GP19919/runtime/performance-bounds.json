@@ -1,0 +1,120 @@
+{
+  "ok": true,
+  "value": {
+    "rows": [
+      {
+        "label": "original-bounds",
+        "seconds": 5.02760000000149,
+        "fps": 52.51014400507633,
+        "inspectorCpu": {
+          "count": 264,
+          "mean": 4.291666666723111,
+          "p95": 23.099999997764826,
+          "max": 47.80000000074506
+        },
+        "boundsCpu": {
+          "count": 45,
+          "mean": 24.022222221642732,
+          "p95": 27.5,
+          "max": 46.79999999701977
+        },
+        "shadowCpu": {
+          "count": 45,
+          "mean": 23.511111111028328,
+          "p95": 26.600000001490116,
+          "max": 46.19999999925494
+        },
+        "render": {
+          "calls": 112516,
+          "frameCalls": 15,
+          "drawCalls": 240,
+          "triangles": 85517,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "heldCanvases": 0
+      },
+      {
+        "label": "camera-layer-aware-bounds",
+        "seconds": 5.006800000000745,
+        "fps": 58.919868978180894,
+        "inspectorCpu": {
+          "count": 295,
+          "mean": 0.2576271186945802,
+          "p95": 0.8999999985098839,
+          "max": 1.3999999985098839
+        },
+        "boundsCpu": {
+          "count": 48,
+          "mean": 0.4854166665269683,
+          "p95": 0.6999999992549419,
+          "max": 1
+        },
+        "shadowCpu": {
+          "count": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "render": {
+          "calls": 116941,
+          "frameCalls": 15,
+          "drawCalls": 241,
+          "triangles": 85585,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "heldCanvases": 0
+      }
+    ],
+    "skins": [
+      {
+        "name": "marine-shadow",
+        "vertices": 237474,
+        "mainCamera": false
+      }
+    ],
+    "visibleInfo": {
+      "meshes": 211,
+      "drawables": 211,
+      "tris": 81138,
+      "points": 0,
+      "segments": 0,
+      "materials": 66
+    },
+    "graphInfo": {
+      "meshes": 212,
+      "drawables": 212,
+      "tris": 160332,
+      "points": 0,
+      "segments": 0,
+      "materials": 67
+    },
+    "bounds": {
+      "center": {
+        "x": -26.08270641657606,
+        "y": -199.1331853940752,
+        "z": -632.0191193335364
+      },
+      "size": {
+        "x": 1.058212840018566,
+        "y": 1.7763700693107864,
+        "z": 0.7935837045636163
+      },
+      "min": {
+        "x": -26.61181283658534,
+        "y": -200.02137042873062,
+        "z": -632.4159111858182
+      },
+      "max": {
+        "x": -25.553599996566774,
+        "y": -198.24500035941983,
+        "z": -631.6223274812546
+      }
+    },
+    "at": "2026-10-14T17:16:04.146Z",
+    "renderer": "WebGPURenderer"
+  }
+}

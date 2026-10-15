@@ -1,0 +1,109 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 11.605,
+  "state": {
+    "weapon": "pistol",
+    "unarmed": true,
+    "reloading": false,
+    "crouching": false,
+    "grounded": true,
+    "dive": "idle",
+    "vault": false,
+    "akimbo": false,
+    "mortar": null,
+    "carried": false,
+    "zoom": false,
+    "ots": false,
+    "training": true,
+    "wake": false,
+    "grenades": 6,
+    "medkits": 0,
+    "hp": 100,
+    "god": true,
+    "paused": false,
+    "move": "smoke",
+    "loop": true,
+    "treadmill": false,
+    "running": false,
+    "holds": {},
+    "error": null,
+    "blade": "machete",
+    "camo": "coyoteBrown"
+  },
+  "carry": {
+    "plan": {
+      "primary": [
+        "minigun",
+        "m4"
+      ],
+      "secondary": [
+        "uzi",
+        "revolver"
+      ],
+      "paired": [
+        "uzi",
+        "revolver"
+      ],
+      "hip": "pistol",
+      "hipPair": "pistol",
+      "hipPairOn": true,
+      "pairOn": [
+        true,
+        true
+      ],
+      "holsterOn": [
+        true,
+        true
+      ],
+      "packPair": 0,
+      "secondaryKinds": [
+        "uzi",
+        "revolver"
+      ],
+      "mags": 2,
+      "grenades": 4,
+      "shells": 0,
+      "rounds40": 0,
+      "boxes": 2,
+      "tanks": 0,
+      "bandolier": false,
+      "belt40": false,
+      "vest": false,
+      "cans": [],
+      "looks": [
+        "minigun||",
+        "m4||",
+        "uzi||",
+        "revolver||",
+        "pistol||"
+      ]
+    },
+    "slung": [
+      "minigun",
+      "m4"
+    ],
+    "holstered": [
+      "uzi",
+      "revolver"
+    ],
+    "hip": "pistol",
+    "counts": {
+      "mags": 2,
+      "grenades": 4,
+      "shells": 0,
+      "rounds40": 0,
+      "boxes": 2,
+      "tanks": 0
+    },
+    "bands": {
+      "bandolier": false,
+      "belt40": false
+    }
+  },
+  "idleKeys": [
+    "updateSmoke",
+    "smokePuffs",
+    "marineIdleDbg"
+  ],
+  "errors": []
+}

@@ -1,0 +1,420 @@
+{
+  "ok": true,
+  "value": {
+    "rows": [
+      {
+        "label": "marine-running-baseline",
+        "seconds": 5.01610000000149,
+        "fps": 52.03245549329608,
+        "inspectorCpu": {
+          "count": 261,
+          "mean": 4.415325670492375,
+          "p95": 24.699999999254942,
+          "max": 36.20000000298023
+        },
+        "focusCpu": {
+          "count": 522,
+          "mean": 2.1147509578586883,
+          "p95": 22.399999998509884,
+          "max": 35.599999997764826
+        },
+        "measureCpu": {
+          "count": 45,
+          "mean": 24.484444444461,
+          "p95": 32,
+          "max": 35.599999997764826
+        },
+        "render": {
+          "calls": 69421,
+          "frameCalls": 15,
+          "drawCalls": 240,
+          "triangles": 85517,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "memory": {
+          "geometries": 710,
+          "textures": 137
+        },
+        "clock": {
+          "k": 1,
+          "paused": false,
+          "step": 0,
+          "gameTime": 62.80969999999537,
+          "frames": 3314,
+          "rewind": {
+            "nodes": 930,
+            "capacity": 900,
+            "frames": 528,
+            "mb": 35.927
+          },
+          "span": 10.016999999999946,
+          "scrubbing": false
+        },
+        "host": {
+          "weapon": "pistol",
+          "unarmed": true,
+          "reloading": false,
+          "crouching": false,
+          "grounded": true,
+          "dive": "idle",
+          "vault": false,
+          "akimbo": false,
+          "mortar": null,
+          "carried": false,
+          "zoom": false,
+          "ots": false,
+          "training": true,
+          "wake": false,
+          "grenades": 6,
+          "medkits": 0,
+          "hp": 100,
+          "god": true,
+          "paused": false
+        },
+        "viewport": [
+          1440,
+          1000,
+          1
+        ],
+        "canvas": [
+          1440,
+          1000
+        ],
+        "heldCanvases": 0
+      },
+      {
+        "label": "marine-history-disabled",
+        "seconds": 5.007800000000745,
+        "fps": 53.51651423778109,
+        "inspectorCpu": {
+          "count": 268,
+          "mean": 3.83358208960228,
+          "p95": 23,
+          "max": 24.799999997019768
+        },
+        "focusCpu": {
+          "count": 536,
+          "mean": 1.8848880597028825,
+          "p95": 22,
+          "max": 24.599999997764826
+        },
+        "measureCpu": {
+          "count": 45,
+          "mean": 22.362222221990425,
+          "p95": 23.300000000745058,
+          "max": 24.599999997764826
+        },
+        "render": {
+          "calls": 73441,
+          "frameCalls": 15,
+          "drawCalls": 240,
+          "triangles": 85517,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "memory": {
+          "geometries": 710,
+          "textures": 137
+        },
+        "clock": {
+          "k": 1,
+          "paused": false,
+          "step": 0,
+          "gameTime": 67.81899999999607,
+          "frames": 3582,
+          "rewind": {
+            "nodes": 930,
+            "capacity": 900,
+            "frames": 528,
+            "mb": 35.927
+          },
+          "span": 10.016999999999946,
+          "scrubbing": false
+        },
+        "host": {
+          "weapon": "pistol",
+          "unarmed": true,
+          "reloading": false,
+          "crouching": false,
+          "grounded": true,
+          "dive": "idle",
+          "vault": false,
+          "akimbo": false,
+          "mortar": null,
+          "carried": false,
+          "zoom": false,
+          "ots": false,
+          "training": true,
+          "wake": false,
+          "grenades": 6,
+          "medkits": 0,
+          "hp": 100,
+          "god": true,
+          "paused": false
+        },
+        "viewport": [
+          1440,
+          1000,
+          1
+        ],
+        "canvas": [
+          1440,
+          1000
+        ],
+        "heldCanvases": 0
+      },
+      {
+        "label": "marine-frozen-focus",
+        "seconds": 5.0155999999977645,
+        "fps": 59.21524842494066,
+        "inspectorCpu": {
+          "count": 297,
+          "mean": 0.16599326590797314,
+          "p95": 0.3999999985098839,
+          "max": 0.6000000014901161
+        },
+        "focusCpu": {
+          "count": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "measureCpu": {
+          "count": 0,
+          "mean": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "render": {
+          "calls": 77896,
+          "frameCalls": 15,
+          "drawCalls": 241,
+          "triangles": 85519,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "memory": {
+          "geometries": 710,
+          "textures": 137
+        },
+        "clock": {
+          "k": 1,
+          "paused": false,
+          "step": 0,
+          "gameTime": 72.85829999999665,
+          "frames": 3879,
+          "rewind": {
+            "nodes": 930,
+            "capacity": 900,
+            "frames": 825,
+            "mb": 35.927
+          },
+          "span": 20.065600000001226,
+          "scrubbing": false
+        },
+        "host": {
+          "weapon": "pistol",
+          "unarmed": true,
+          "reloading": false,
+          "crouching": false,
+          "grounded": true,
+          "dive": "idle",
+          "vault": false,
+          "akimbo": false,
+          "mortar": null,
+          "carried": false,
+          "zoom": false,
+          "ots": false,
+          "training": true,
+          "wake": false,
+          "grenades": 6,
+          "medkits": 0,
+          "hp": 100,
+          "god": true,
+          "paused": false
+        },
+        "viewport": [
+          1440,
+          1000,
+          1
+        ],
+        "canvas": [
+          1440,
+          1000
+        ],
+        "heldCanvases": 0
+      },
+      {
+        "label": "marine-paused",
+        "seconds": 5.0045,
+        "fps": 55.15036467179538,
+        "inspectorCpu": {
+          "count": 276,
+          "mean": 3.706884057962916,
+          "p95": 21.800000000745058,
+          "max": 24.200000002980232
+        },
+        "focusCpu": {
+          "count": 552,
+          "mean": 1.817210144923487,
+          "p95": 21.5,
+          "max": 24.200000002980232
+        },
+        "measureCpu": {
+          "count": 46,
+          "mean": 21.715217391271953,
+          "p95": 22.399999998509884,
+          "max": 24.200000002980232
+        },
+        "render": {
+          "calls": 82036,
+          "frameCalls": 15,
+          "drawCalls": 241,
+          "triangles": 85519,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "memory": {
+          "geometries": 710,
+          "textures": 137
+        },
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 72.85829999999665,
+          "frames": 3879,
+          "rewind": {
+            "nodes": 930,
+            "capacity": 900,
+            "frames": 825,
+            "mb": 35.927
+          },
+          "span": 20.065600000001226,
+          "scrubbing": false
+        },
+        "host": {
+          "weapon": "pistol",
+          "unarmed": true,
+          "reloading": false,
+          "crouching": false,
+          "grounded": true,
+          "dive": "idle",
+          "vault": false,
+          "akimbo": false,
+          "mortar": null,
+          "carried": false,
+          "zoom": false,
+          "ots": false,
+          "training": true,
+          "wake": false,
+          "grenades": 6,
+          "medkits": 0,
+          "hp": 100,
+          "god": true,
+          "paused": false
+        },
+        "viewport": [
+          1440,
+          1000,
+          1
+        ],
+        "canvas": [
+          1440,
+          1000
+        ],
+        "heldCanvases": 0
+      },
+      {
+        "label": "m4-running",
+        "seconds": 5.0106000000014905,
+        "fps": 59.07476150559054,
+        "inspectorCpu": {
+          "count": 296,
+          "mean": 0.07060810795204865,
+          "p95": 0.19999999925494194,
+          "max": 0.30000000074505806
+        },
+        "focusCpu": {
+          "count": 296,
+          "mean": 0.018581080992983,
+          "p95": 0.10000000149011612,
+          "max": 0.19999999925494194
+        },
+        "measureCpu": {
+          "count": 296,
+          "mean": 0.016216216130635223,
+          "p95": 0.10000000149011612,
+          "max": 0.10000000149011612
+        },
+        "render": {
+          "calls": 87391,
+          "frameCalls": 15,
+          "drawCalls": 26,
+          "triangles": 9893,
+          "points": 0,
+          "lines": 0,
+          "timestamp": 0
+        },
+        "memory": {
+          "geometries": 719,
+          "textures": 137
+        },
+        "clock": {
+          "k": 1,
+          "paused": false,
+          "step": 0,
+          "gameTime": 78.87439999999789,
+          "frames": 4235,
+          "rewind": {
+            "nodes": 22,
+            "capacity": 900,
+            "frames": 356,
+            "mb": 0.857
+          },
+          "span": 5.999400000001984,
+          "scrubbing": false
+        },
+        "host": {
+          "weapon": "pistol",
+          "unarmed": true,
+          "reloading": false,
+          "crouching": false,
+          "grounded": true,
+          "dive": "idle",
+          "vault": false,
+          "akimbo": false,
+          "mortar": null,
+          "carried": false,
+          "zoom": false,
+          "ots": false,
+          "training": true,
+          "wake": false,
+          "grenades": 6,
+          "medkits": 0,
+          "hp": 100,
+          "god": true,
+          "paused": false
+        },
+        "viewport": [
+          1440,
+          1000,
+          1
+        ],
+        "canvas": [
+          1440,
+          1000
+        ],
+        "heldCanvases": 0
+      }
+    ],
+    "at": "2026-10-14T17:10:57.486Z",
+    "renderer": "WebGPURenderer",
+    "version": "1.1.0"
+  }
+}

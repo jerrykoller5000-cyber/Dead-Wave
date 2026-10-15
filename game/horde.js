@@ -14,7 +14,8 @@
 //   leadOffset(vx, vz, dist, spd, wit[, out])   where he'll be, as an offset from where he is
 //   approachPoint(px, pz, zx, zz, ang, lx, lz[, out])   the point it walks at: swung out to its slot, closing as it nears
 //   wanderAngle(bearing, slotAng)      (test helper) the signed gap between two angles, -PI..PI
-//   GB-135 (D-77): speedFor(typeKey, pacedSpeed, pace, run)   { speed, cap }: faster, up to 90% of his sprint; sprinters past it
+//   GB-135 (D-77): speedFor(typeKey, pacedSpeed, pace, run[, roleMul])   { speed, cap }: faster, up to 90% of his sprint; sprinters past it
+//   GB-158 (Jerry 2026-10-11): SPEED_TARGET   per-kind walking speeds in m/s on the ground (shambler, military, demon)
 //                  nextRole(typeKey, acc)                     'mass' (70%) or 'flank' (30%), an even quota
 //                  massBearing(sumCos, sumSin, n)             the mass's bearing from him, or null
 //                  roleSlot(role, bearing, massAng, loads)    the mass's front or a flank; else pickSlot
@@ -49,6 +50,18 @@ export const HORDE = Object.freeze({
 });
 
 const BANDS = Object.freeze({ shamble: [0.78, 0.92], jog: [0.98, 1.14], sprint: [1.28, 1.45] });
+// GB-158 (Jerry 2026-10-11, 2:24 AM CT, after the speed table; supersedes D-77's FAST x for these kinds): "set the baseline
+// speed of the shambler at 4.3 with a lunge speed of 5.0 ... Pull Military top speed down to a 6.0 ... Crank demon up to
+// 6.0 on average." Final m/s on the ground for a body that is not a sprinter, normal chase, no blood moon. range: where its
+// pace roll lands (its spot in its band, u, spread evenly over the range, so the shamble and jog bands fold into one
+// range); top: its ceiling (rushes and buffs stop there; a lunge is the only burst); lunge: an absolute lunge speed (not
+// LUNGE_MUL). A cave role's speedMul still scales all three. Sprinters are untouched (SPRINT_RUN, sprintShare). The
+// colossus (4.0) and the guardian (7.0) are bosses outside the horde: their speeds are in index.html's ZOMBIE_TYPES.
+export const SPEED_TARGET = Object.freeze({
+  shambler: Object.freeze({ range: [3.9, 4.7], top: 5.0, lunge: 5.0 }),
+  military: Object.freeze({ range: [5.0, 6.0], top: 6.0, lunge: 6.0 }),
+  demon: Object.freeze({ range: [5.6, 6.4] }),
+});
 // Pace kinds: weights over shamble/jog/sprint, or a flat narrow spread [lo, hi], or 1.
 const PACE = Object.freeze({
   crowd: { w: [0.40, 0.48, 0.12], bands: BANDS },
@@ -160,7 +173,10 @@ export function approachPoint(px, pz, zx, zz, ang, lx = 0, lz = 0, out = { x: 0,
 // while sprinting. Sprinters need to outpace player on sprint." pacedSpeed: its type speed times its pace roll (m/s);
 // run: his sprint (PHYS.run). A sprinter runs 1.04-1.12 of his sprint, whatever its type; everyone else FAST x what it
 // walked before, at most CAP_RUN of his sprint. cap: its ceiling while it walks (the game holds rushes under it).
-export function speedFor(typeKey, pacedSpeed, pace, run) {
+// GB-158: a kind in SPEED_TARGET walks inside its range instead (roleMul: its cave role's speedMul, 1 without), its cap is
+// its top (never past CAP_RUN), and it also gets lunge (absolute m/s, 0: LUNGE_MUL as before) and legacy (the D-77 speed
+// it would have had: the demon's charge keeps its old pace off it).
+export function speedFor(typeKey, pacedSpeed, pace, run, roleMul = 1) {
   const s = Math.max(0, +pacedSpeed || 0);
   if (!PROFILE[typeKey] || !(run > 0) || !pace) return { speed: s, cap: Infinity };
   if (pace.band === 'sprint') {
@@ -168,7 +184,13 @@ export function speedFor(typeKey, pacedSpeed, pace, run) {
     return { speed: v, cap: v };
   }
   const cap = run * HORDE.CAP_RUN;
-  return { speed: Math.min(cap, s * HORDE.FAST), cap };
+  const legacy = Math.min(cap, s * HORDE.FAST);
+  const t = SPEED_TARGET[typeKey];
+  if (!t) return { speed: legacy, cap };
+  const m = roleMul > 0 ? roleMul : 1;
+  const top = Math.min(cap, t.top ? t.top * m : cap);
+  const v = Math.min(top, lerp(t.range[0], t.range[1], clamp01(pace.u != null ? pace.u : 0.5)) * m);
+  return { speed: v, cap: top, lunge: t.lunge ? Math.min(cap, t.lunge * m) : 0, legacy };
 }
 
 // "70% of the zombies need to congregate while the other [30%] attempts to flank the player": an even quota, not a

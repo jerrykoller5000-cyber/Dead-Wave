@@ -1,0 +1,239 @@
+--- fresh-index-before
++++ live-index
+@@ -1328,6 +1328,7 @@
+     import { militaryActive, militaryCanReach, stepMilitary, restoreMilitaryPose, resetMilitary, applyMilitaryPose, militaryProjectileHit, militaryBulletShare } from './game/military-behavior.js';
+     import { prepareMilitaryAppearance, cycleMilitaryCamo } from './game/military-appearance.js';
+     import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose, beginBruteBuild } from './game/brute-behavior.js'; // GP-19866
++    import { confirmedHead, canSeverHead, headSurface, zombieSurface } from './game/zombie-headshots.js'; // GP-19885
+     import { prepareBomberAppearance, restoreBomberPose, resetBomber, stepBomber, applyBomberPose } from './game/bomber-behavior.js'; // GP-19884
+     import { makeBruteArmor, resetBruteArmor, hitBruteArmor, bruteProjectileHit } from './game/brute-armor.js'; // GP-19867
+     import { steerSpitter, spitterFacing, prepareSpitterJaw, restoreSpitterMotion, resetSpitterMotion, applySpitterMotion } from './game/spitter-motion.js'; // GP-19870
+@@ -14196,7 +14197,7 @@
+       if (!z || !z.alive || z.hp <= 0) return;
+       if (!z.partsLost) z.partsLost = emptyPartsLost();
+       const pickAvail = (keys) => {
+-        const a = keys.filter((k) => !z.partsLost[k]);
++        const a = keys.filter((k) => !z.partsLost[k] && (k!=='head' || (kind!=='bullet'&&kind!=='pellet') || canSeverHead(z,upperHit))); // GP-19885
+         if (!a.length) return null;
+         return a[(Math.random() * a.length) | 0];
+       };
+@@ -40809,14 +40810,8 @@
+       camElev = Math.max(CAM_ELEV_MIN, Math.min(CAM_ELEV_MAX, camElev + dElev));
+     }
+     function rotateCamera(dYaw) { camYawTarget += dYaw; }
+-    // CU-96 (Jerry): what the cursor is on is what the round lands on. Distance along the ray to the nearest zombie
+-    // under the cursor (where the ray first enters it), or Infinity; `out` gets the point to shoot at, and `pick.z` the
+-    // zombie. That point is the middle of its hit column at the height the ray passes its axis, kept inside the column:
+-    // the head when the cursor is on the head, the legs on the legs. The old point, the middle of the ray's chord
+-    // through the column, sank whenever the chord was cut by the column's top: looking down at a head it sat at chest
+-    // height, and pointing at a head was a headshot about one time in four. The head is also found where the model
+-    // really has it: a hunched kind's head leans out past its column, and a cursor on it used to miss the column and aim
+-    // at the ground behind.
++    // GP-19885: cursor and rounds use the actual posed body surfaces. A head bonus
++    // requires the central skull, with Military face/helmet and Brute armor classification.
+     // How fast each zombie is going over the ground, eased over about a tenth of a second (a shot at it is led by this;
+     // see updateMouseAim). Timed on simTime; a gap or a jump (a pool reuse, a teleport) starts it again from still.
+     function trackZombieMotion() {
+@@ -40832,60 +40827,28 @@
+     }
+     const _brutePickEnd = new THREE.Vector3(); // posed surface, including his lowered head
+     const _pickHead = new THREE.Vector3(), rayPick = { z: null, head: false };
++    // GP-19885: use retained rigid bone surfaces, as Military/Brute already do.
++    function zombieRoundHit(z,a,b) {
++      const p=z.mesh.position,H=z.hitH||1.45,extra=z.mesh.userData.bossRig?4:1.5;
++      if(segmentHitsCylinder(a.x,a.y,a.z,b.x,b.y,b.z,p.x,p.z,z.radius+extra,p.y-.5,p.y+H+2)===null)return null;
++      if(z.typeKey==='military'||z.typeKey==='brute'){
++        const m=z.typeKey==='military'?militaryProjectileHit(THREE,z,a,b):null;
++        const h=z.typeKey==='brute'?bruteProjectileHit(THREE,z,a,b):null;
++        const hit=m||h;if(!hit)return null;const head=(m?.part==='head'||h?.part==='head')?headSurface(THREE,z,a,b):null;
++        const t=hit.t;return {t,headHit:!!head?.headHit,militaryHit:m,bruteHit:h,point:{x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,z:a.z+(b.z-a.z)*t}};
++      }
++      return zombieSurface(THREE,z,a,b);
++    }
+     function rayPickZombie(ray, maxT, out) {
+-      const o = ray.origin, d = ray.direction;
+-      const a = d.x * d.x + d.z * d.z;
+-      let best = Infinity;
+-      rayPick.z = null; rayPick.head = false;
+-      for (const z of zombies) {
+-        if (!z.alive) continue;
+-        const p = z.mesh.position, H = z.hitH || 1.45;
+-        const r = z.radius + 0.15;
+-        const ox = o.x - p.x, oz = o.z - p.z;
+-        const tc = a > 1e-8 ? -(ox * d.x + oz * d.z) / a : 0;   // where the ray passes closest to the column's axis
+-        const miss = Math.hypot(ox + d.x * tc, oz + d.z * tc);
+-        if(z.typeKey==='brute'){
+-          if(miss>r+1.8||tc>maxT+4)continue;
+-          const far=Math.min(maxT,200);_brutePickEnd.copy(d).multiplyScalar(far).add(o);
+-          const hit=bruteProjectileHit(THREE,z,o,_brutePickEnd),distance=hit?hit.t*far:Infinity;
+-          if(distance>.3&&distance<best){best=distance;rayPick.z=z;rayPick.head=hit.part==='head'&&!z.partsLost?.head;out.set(hit.aim.x,hit.aim.y,hit.aim.z);}
+-          if(hit)continue; // empty space in the low column can still select a nearby shin
+-        }
+-        if (miss > r + 0.9 || tc > maxT + 4) continue;   // nowhere near it, or well behind the ground the ray meets
+-        let t = Infinity, y = 0;
+-        if (miss <= r) {
+-          const half = a > 1e-8 ? Math.sqrt((r * r - miss * miss) / a) : Infinity;
+-          let tIn = tc - half, tOut = tc + half;
+-          if (Math.abs(d.y) > 1e-8) {
+-            let ta = (p.y - o.y) / d.y, tb = (p.y + H - o.y) / d.y;
+-            if (ta > tb) { const tmp = ta; ta = tb; tb = tmp; }
+-            tIn = Math.max(tIn, ta); tOut = Math.min(tOut, tb);
+-          } else if (o.y < p.y || o.y > p.y + H) tIn = Infinity;
+-          const tEnter = Math.max(tIn, 0.3);
+-          if (tIn <= tOut && tOut > 0.3 && tEnter < maxT) {   // past maxT the ground is in the way
+-            t = tEnter;
+-            y = Math.max(p.y + 0.05, Math.min(p.y + H - 0.03, o.y + d.y * tc));
+-          }
+-        }
+-        const head = z.mesh.userData.head;
+-        if (head && !(z.partsLost && z.partsLost.head)) {
+-          head.getWorldPosition(_pickHead);
+-          const hr = 0.24 * (ZOMBIE_TYPES[z.typeKey] ? ZOMBIE_TYPES[z.typeKey].scale || 1 : 1) * (z.mesh.scale.x || 1);
+-          const hx = o.x - _pickHead.x, hy = o.y - _pickHead.y, hz = o.z - _pickHead.z;
+-          const b = hx * d.x + hy * d.y + hz * d.z, disc = b * b - (hx * hx + hy * hy + hz * hz - hr * hr);
+-          const th = disc >= 0 ? -b - Math.sqrt(disc) : Infinity;
+-          if (th > 0.3 && th < maxT && th < t + 0.4) {   // on the head (it can sit just in front of the column's own entry)
+-            t = Math.min(t, th);
+-            y = Math.max(p.y + H * headLineOf(z) + 0.05, Math.min(p.y + H - 0.03, _pickHead.y));
+-          }
+-        }
+-        if(z.typeKey==='brute'&&t<best&&y<p.y+H*.4){
+-          const u=z.mesh.userData,left=u.legLG.userData.shinG,right=u.legRG.userData.shinG;
+-          const point=new THREE.Vector3(0,-.18*z.scale,.035*z.scale).applyMatrix4(left.matrixWorld),other=new THREE.Vector3(0,-.18*z.scale,.035*z.scale).applyMatrix4(right.matrixWorld);
+-          const rayX=o.x+d.x*tc,rayZ=o.z+d.z*tc,rightNear=Math.hypot(other.x-rayX,other.z-rayZ)<Math.hypot(point.x-rayX,point.z-rayZ);if(rightNear)point.copy(other);
+-          if(!z.partsLost?.[rightNear?'legR':'legL']){best=t;rayPick.z=z;rayPick.head=false;out.copy(point);continue;}
+-        }
+-        if (t < best) { best = t; rayPick.z = z; rayPick.head = y >= p.y + H * headLineOf(z) && !(z.partsLost && z.partsLost.head); out.set(p.x, y, p.z); }
++      const o=ray.origin,d=ray.direction,a=d.x*d.x+d.z*d.z;let best=Infinity;
++      rayPick.z=null;rayPick.head=false;
++      for(const z of zombies){
++        if(!z.alive||!z.mesh)continue;const p=z.mesh.position,ox=o.x-p.x,oz=o.z-p.z,tc=a>1e-8?-(ox*d.x+oz*d.z)/a:0;
++        const extra=z.mesh.userData.bossRig?4:1.5;
++        if(Math.hypot(ox+d.x*tc,oz+d.z*tc)>z.radius+extra||tc>maxT+4)continue;
++        const far=Math.min(maxT,200,best+1);_brutePickEnd.copy(d).multiplyScalar(far).add(o);
++        const hit=zombieRoundHit(z,o,_brutePickEnd),distance=hit?hit.t*far:Infinity;
++        if(distance>.3&&distance<best){best=distance;rayPick.z=z;rayPick.head=confirmedHead(z,{headHit:hit.headHit,militaryZone:hit.militaryHit?.zone,brutePart:hit.bruteHit?.part});out.set(hit.point.x,hit.point.y,hit.point.z);}
+       }
+       return best;
+     }
+@@ -41166,10 +41129,7 @@
+           if (ll > 2.5) { lx *= 2.5 / ll; lz *= 2.5 / ll; }
+           _pickAim.x += lx; _pickAim.z += lz;
+         }
+-        // A round enters the column short of its axis, so the slope from the muzzle puts it in higher or lower than it
+-        // is aimed (low on a head close in, the muzzle being under it): aim so it goes in at the height picked.
+-        const D = Math.hypot(_pickAim.x - m.x, _pickAim.z - m.z), rr = pz.radius + 0.1;
+-        if (D > rr + 0.6) _pickAim.y = m.y + (_pickAim.y - m.y) * Math.min(1.6, D / (D - rr));
++        // GP-19885: aim at the actual surface; no cylinder-axis elevation correction.
+         aimHit.copy(_pickAim);
+       }
+       else if (groundT === Infinity) aimHit.copy(ray.origin).addScaledVector(ray.direction, AIM_SKY_DIST);
+@@ -45146,6 +45106,7 @@
+     }
+     function damageZombie(z, amount, info = null) {
+       if (!z.alive) return;
++      const preciseHead = confirmedHead(z,info); // GP-19885: height alone never counts
+       const kind = (info && info.kind) || 'generic';
+       if (kind === 'melee' || kind === 'chainsaw') releaseDrowned(z); // GP-19860: a landed blade breaks the grip
+       let dx = (info && info.dir && info.dir.x) || 0;
+@@ -45200,7 +45161,7 @@
+       // A shield impact cannot sever limbs or throw her out of her own scream.
+       if (screamerProtected(z)) {
+         const shieldSid=info?.shotId||0;
+-        const shieldHead=(kind==='bullet'||kind==='pellet')&&info?.hitY!=null&&(info.hitY-z.mesh.position.y)/(z.hitH||1.4)>headLineOf(z)&&!(shieldSid&&z._shotHead===shieldSid);
++        const shieldHead=(kind==='bullet'||kind==='pellet')&&preciseHead&&!(shieldSid&&z._shotHead===shieldSid);
+         if(shieldHead) { dmg*=1+(kind==='pellet'?.5:.85)*(z.headshotMul||1); if(shieldSid) z._shotHead=shieldSid; }
+         const absorbed=dmg * SCREAMER.damageShare; z.hp-=absorbed; z.sonicHitT=.18;
+         if ((kind==='bullet'||kind==='pellet')&&!info?.defense) reticleHitMark(z.hp<=0?'kill':'hit');
+@@ -45219,12 +45180,12 @@
+       if (info && info.hitY != null) {
+         hitFrac = (info.hitY - z.mesh.position.y) / hitH;
+       }
+-      const upperHit = info?.brutePart ? info.brutePart === 'head' : militaryZone ? militaryZone === 'face' : hitFrac > 0.62;
++      const upperHit = preciseHead; // GP-19885: shoulder hits cannot roll a head sever
+       // Headshot: a bullet that lands in the top slice of the body. Hits harder, bleeds
+       // more, and is far more likely to take the head clean off.
+       // P-6: a shell's pellets share a shot id; only one of them earns the headshot bonus.
+       const sid = (info && info.shotId) || 0;
+-      const headshot = (kind === 'bullet' || kind === 'pellet') && (info?.brutePart ? info.brutePart === 'head' : militaryZone ? militaryZone === 'face' : hitFrac > headLineOf(z)) && !(z.partsLost && z.partsLost.head) && info && info.hitY != null && !(sid && z._shotHead === sid);
++      const headshot = (kind === 'bullet' || kind === 'pellet') && preciseHead && !(sid && z._shotHead === sid);
+       if (headshot) {
+         if (sid) z._shotHead = sid;
+         const bonus = dmg * (kind === 'pellet' ? 0.5 : 0.85) * (z.headshotMul || 1);
+@@ -45233,7 +45194,7 @@
+         matchStats.headshots += 1;
+         AudioSys.headshot();
+         showHitPing(z.hp <= 0 ? 'HEADSHOT' : 'HEADSHOT', z.hp <= 0 ? '#ff5544' : '#ffd24a');
+-        if (z.hp <= 0 || Math.random() < 0.5) {
++        if (z.hp <= 0 || (canSeverHead(z,preciseHead) && Math.random() < 0.18)) { // GP-19885: no healthy-enemy coin-flip decap
+           detachZombiePart(z, 'head', dx, dz);
+           spawnGibBurst(z.mesh.position.x, z.mesh.position.y + hitH * 0.85, z.mesh.position.z,
+             z.mesh.userData.skinColor, z.mesh.userData.eyeColor, dx, dz, 'shred');
+@@ -45246,7 +45207,7 @@
+       if (z.alive && info && info.hitY != null && kind !== 'fire' && kind !== 'generic') {
+         const yaw = z.mesh.rotation.y, lat = dx * Math.cos(yaw) - dz * Math.sin(yaw);
+         z.hitSide = lat < 0 ? 1 : -1;   // +1: it came in on its right
+-        z.hitPart = hitFrac > headLineOf(z) ? 'head' : hitFrac < 0.42 ? (z.hitSide > 0 ? 'legR' : 'legL') : (Math.random() < 0.33 ? (z.hitSide > 0 ? 'armR' : 'armL') : 'torso');
++        z.hitPart = preciseHead ? 'head' : hitFrac < 0.42 ? (z.hitSide > 0 ? 'legR' : 'legL') : (Math.random() < 0.33 ? (z.hitSide > 0 ? 'armR' : 'armL') : 'torso');
+         if (militaryZone && info.militaryPart) z.hitPart = info.militaryPart;
+         if (z.typeKey === 'brute' && info.brutePart) z.hitPart = info.brutePart;
+         z.hitPartT = 0.45;
+@@ -45489,21 +45450,16 @@
+             if (!z.alive) continue;
+             if (p.pierced && p.pierced.has(z)) continue;
+             const zy = z.mesh.position.y;
+-            let t = segmentHitsCylinder(
+-              p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
+-              z.mesh.position.x, z.mesh.position.z, z.radius + (z.typeKey === 'brute' ? 1.25 : z.typeKey === 'military' ? .3 : .1), zy, zy + (z.hitH || 1.45) + (z.typeKey === 'brute' ? 1.5 : z.typeKey === 'military' ? .4 : 0)
+-            );
+-            let militaryHit = null;
+-            if (t !== null && z.typeKey === 'military') { militaryHit=militaryProjectileHit(THREE,z,p.prev,p.pos); t=militaryHit?.t ?? null; }
+-            let bruteHit=null;if(t!==null && z.typeKey==='brute'){bruteHit=bruteProjectileHit(THREE,z,p.prev,p.pos);t=bruteHit?.t??null;}
+-            if (t !== null && t < wallT) _pierceHits.push({ z, t, militaryHit, bruteHit });
++            const located=zombieRoundHit(z,p.prev,p.pos);
++            const t=located?.t??null,militaryHit=located?.militaryHit,bruteHit=located?.bruteHit,headHit=!!located?.headHit;
++            if (t !== null && t < wallT) _pierceHits.push({ z, t, militaryHit, bruteHit, headHit });
+           }
+           if (_pierceHits.length) {
+             _pierceHits.sort((a, b) => a.t - b.t);
+             if (!p.pierced) p.pierced = new Set();
+             for (const h of _pierceHits) {
+               const hy = p.prev.y + (p.pos.y - p.prev.y) * h.t;
+-              p.hitZombie = true; damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, militaryZone:h.militaryHit?.zone, militaryPart:h.militaryHit?.part, bruteZone:h.bruteHit?.zone, brutePart:h.bruteHit?.part, defense: !!p.fromTurret, shotId: p.shotId || 0, hitWeapon: p.hitWeapon, hitBase: p.hitBase, pelletOf: p.pelletOf });
++              p.hitZombie = true; damageZombie(h.z, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, headHit:h.headHit, militaryZone:h.militaryHit?.zone, militaryPart:h.militaryHit?.part, bruteZone:h.bruteHit?.zone, brutePart:h.bruteHit?.part, defense: !!p.fromTurret, shotId: p.shotId || 0, hitWeapon: p.hitWeapon, hitBase: p.hitBase, pelletOf: p.pelletOf });
+               p.pierced.add(h.z);
+               if (p.pierce <= 0) { pierceSpent = true; break; } // that was the last body it can take
+               p.pierce -= 1;
+@@ -45525,19 +45481,14 @@
+             // from absolute y=0, so anything standing on the 2.2-unit central hill sat
+             // completely outside its own hitbox and could not be shot.
+             const zy = z.mesh.position.y;
+-            let t = segmentHitsCylinder(
+-              p.prev.x, p.prev.y, p.prev.z, p.pos.x, p.pos.y, p.pos.z,
+-              z.mesh.position.x, z.mesh.position.z, z.radius + (z.typeKey === 'brute' ? 1.25 : z.typeKey === 'military' ? .3 : .1), zy, zy + (z.hitH || 1.45) + (z.typeKey === 'brute' ? 1.5 : z.typeKey === 'military' ? .4 : 0)
+-            );
+-            let militaryHit = null;
+-            if (t !== null && z.typeKey === 'military') { militaryHit=militaryProjectileHit(THREE,z,p.prev,p.pos); t=militaryHit?.t ?? null; }
+-            let bruteHit=null;if(t!==null && z.typeKey==='brute'){bruteHit=bruteProjectileHit(THREE,z,p.prev,p.pos);t=bruteHit?.t??null;}
+-            if (t !== null && t < hitZT && t < wallT) { hitZT = t; hitZ = z; z._militaryRound=militaryHit;z._bruteRound=bruteHit; }
++            const located=zombieRoundHit(z,p.prev,p.pos);
++            const t=located?.t??null,militaryHit=located?.militaryHit,bruteHit=located?.bruteHit,headHit=!!located?.headHit;
++            if (t !== null && t < hitZT && t < wallT) { hitZT = t; hitZ = z; z._militaryRound=militaryHit;z._bruteRound=bruteHit;z._headRound=headHit; }
+           }
+         }
+         if (hitZ) {
+           const hy = p.prev.y + (p.pos.y - p.prev.y) * hitZT;
+-          p.hitZombie = true; damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, militaryZone:hitZ._militaryRound?.zone, militaryPart:hitZ._militaryRound?.part, bruteZone:hitZ._bruteRound?.zone, brutePart:hitZ._bruteRound?.part, defense: !!p.fromTurret, shotId: p.shotId || 0, hitWeapon: p.hitWeapon, hitBase: p.hitBase, pelletOf: p.pelletOf });
++          p.hitZombie = true; damageZombie(hitZ, p.damage, { kind: p.kind || 'bullet', dir: { x: p.dir.x, z: p.dir.z }, hitY: hy, headHit:hitZ._headRound, militaryZone:hitZ._militaryRound?.zone, militaryPart:hitZ._militaryRound?.part, bruteZone:hitZ._bruteRound?.zone, brutePart:hitZ._bruteRound?.part, defense: !!p.fromTurret, shotId: p.shotId || 0, hitWeapon: p.hitWeapon, hitBase: p.hitBase, pelletOf: p.pelletOf });
+           p.hit = true;
+           endRoundPoke(p); releaseTracerMesh(p.mesh);
+           projectiles.splice(i, 1);
+@@ -50698,7 +50649,7 @@
+       for (const z of zombies) {
+         if (!z.alive) continue;
+         const zy = z.mesh.position.y;
+-        const t = segmentHitsCylinder(_trA.x, _trA.y, _trA.z, _trB.x, _trB.y, _trB.z, z.mesh.position.x, z.mesh.position.z, z.radius + 0.1, zy, zy + (z.hitH || 1.45));
++        const t = zombieRoundHit(z,_trA,_trB)?.t ?? null; // GP-19885: same surface ordering as live bullets
+         if (t !== null && t <= bt) return false;
+       }
+       const hx = _trA.x + (_trB.x - _trA.x) * bt, hy = _trA.y + (_trB.y - _trA.y) * bt, hz = _trA.z + (_trB.z - _trA.z) * bt;

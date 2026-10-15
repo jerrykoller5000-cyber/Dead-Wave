@@ -1,15 +1,24 @@
 # Antigravity
 
 state: idle
-model: Claude Sonnet 5.5 (High)
+model: Gemini 4 Argon (High)
 task: —
 touching: —
-since: 2026-10-09T10:50Z
-next: AG-52 Eyes on playthrough 1's fixes. As each of CU-88 to CU-91, GB
+since: 2026-10-15T08:43Z
+next: AG-81 Eyes on CL-198 (the marine's fabric) in the inspector, in th
 blocked-on: —
-last-report: handoffs/2026-10-09-antigravity-AG-63.md
+last-report: handoffs/2026-10-15-antigravity-AG-80.md
 
 ## Notes
+
+### STANDING RULE (Jerry, 2026-10-15, effective immediately): ONE active game-testing session per computer
+1. Do NOT launch the game without owning the shared testing slot (includes Marine Inspector, screenshots, `tools/camera.mjs`, `tools/shoot.mjs`, automated browser tests, and hidden/headless game instances).
+2. Until an enforced queue exists and is verified, request the slot through Crew Board and wait for Claude's explicit grant. An apparently idle computer is NOT permission. Do not claim the automated queue exists until verified.
+3. Jerry's personal game or Marine Inspector session takes priority. Never close his windows or processes.
+4. While holding the slot, use ONE game instance and ONE test worker (`--jobs 1`). Do not launch overlapping helpers or additional game tabs.
+5. Prepare and batch checks before claiming the slot. Record results, close your own test processes (`node tools/camera.mjs stop`), and release the slot promptly.
+6. While waiting, continue coding, reading, reviewing, or lightweight non-browser checks. Do not run heavy parallel jobs or repeatedly retry failed launches.
+7. Full-suite testing is one coordinated integration job; do not independently run the entire suite after small changes.
 
 Written by Claude when you joined; this card is yours from now on.
 
@@ -35,3 +44,6 @@ a real GPU the way you can.
 - AG-11: PASS. Megaswarm and Day 5 benchmarks on Jerry's GPU after GB-28 and CL-28. Measured 65.5% drop in megaswarm hitches (58 down to 20) and 57.1% drop in Day 5 hitches (28 down to 12). Report in qa/2026-09-24-AG-11.md, handoff in handoffs/2026-09-24-antigravity-AG-11.md.
 - AG-15: PASS. Complete Day 1 audit on Jerry's RTX 5080 GPU across two full runs (survive and death/restart). Documented 9 problems (2 S1, 4 S2, 3 S3) with 18 screenshot proofs. Report in handoffs/audit-day1/antigravity.md, shots in qa/shots/2026-09-25-AG-15/.
 - 2026-09-25 22:05Z (Claude, from Jerry): back on Gemini 3.1 Pro. AG-16 and AG-17 are parked or moved; next is AG-18.
+- 2026-10-15 AG-78: Changes ready; waiting for testing slot. All 12 wildlife & habitat subjects upgraded in `index.html` and `world/rabbit.js` (16/16 pure-Node checks pass; batched camera job ready in `qa/2026-10-15-AG-78/after-job.json` including `animal.fish:3` roach).
+- 2026-10-15 AG-79: Changes ready; waiting for testing slot. Upgraded Skeletal Marine (`325 -> 54` meshes compacted per pivot via `mergeStatic`), Bone Raft (`294 -> 35` meshes compacted via `mergeStatic`), Wood wall (5 tiers), Wood floor (3 tiers), Barricade (3 tiers), and Sandbag Wall (3 tiers) in `index.html` (18/18 pure-Node checks pass; batched camera job ready in `qa/2026-10-15-AG-79/after-job.json`).
+- 2026-10-15 AG-80: Changes ready; waiting for testing slot. Upgraded all 8 buildables & 24 tier variants in `index.html`: Barbed wire (Tiers 0–2), Railing (Tiers 0–2), Platform (Tiers 0–2), Structural pillar (Tiers 0–2), Stairs (Tiers 0–2), Spike trap (Tiers 0–2), Land mine (Tiers 0–2), and Decoy beacon (Tiers 0–2) (26/26 pure-Node checks pass; batched camera job ready in `qa/2026-10-15-AG-80/after-job.json`).

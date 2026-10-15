@@ -59,6 +59,22 @@ const DEFAULT_OUT = 'review/camera';
 const INBOX = path.join(ROOT, 'review', 'camera', 'jobs');
 const HEART = path.join(INBOX, '_camera.json');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function processAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false;
+  try { process.kill(pid, 0); return true; }
+  catch (error) {
+    // On Windows, access denied can still mean the process is alive. Only
+    // ESRCH proves the detached daemon has actually exited.
+    return error?.code !== 'ESRCH';
+  }
+}
+export async function waitForCameraExit(pid, { timeout = 30000, interval = 50, alive = processAlive } = {}) {
+  const started = Date.now();
+  while (alive(pid)) {
+    if (Date.now() - started >= timeout) throw new Error(`camera daemon PID ${pid} did not exit after ${timeout} ms`);
+    await sleep(interval);
+  }
+}
 
 // --- arguments ------------------------------------------------------------------------------------------------------
 // `cmd target --key value --flag`: numbers become numbers, "a,b" lists, --flag true.
@@ -685,7 +701,17 @@ else if (cmd === 'start') {
     if (Date.now() - t0 > 600000) { console.error('\ncamera: not ready after 10 minutes; see ' + LOG); process.exit(1); }
   }
 }
-else if (cmd === 'stop') { const s = await session(); if (!s) console.log('camera: not running'); else { await post(s.port, { cmd: 'stop' }); console.log('camera: stopped'); } }
+else if (cmd === 'stop') {
+  const s = await session();
+  if (!s) console.log('camera: not running');
+  else {
+    await post(s.port, { cmd: 'stop' });
+    // The POST only acknowledges shutdown. The daemon still has to close
+    // Chrome and unregister both PIDs before a batched next check may launch.
+    await waitForCameraExit(Number(s.pid));
+    console.log('camera: stopped');
+  }
+}
 else if (cmd === 'status') { const s = await session(); console.log(s ? `camera: running on ${s.port}, ${s.mode}, ${s.renderer}, ${s.size.join('x')}, ${s.shots} pictures, ${s.frozen ? 'frozen (idle)' : 'awake'}, up since ${s.started}` : 'camera: not running (node tools/camera.mjs start)'); }
 else {
   let req;

@@ -1,0 +1,22 @@
+[
+{
+"file": "tools/tests/t224.js",
+"old": "        ok(Math.abs(P.x) <= 0.13 && P.z >= -0.35, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', z ' + P.z.toFixed(3) + ')');",
+"new": [
+"        // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face",
+"        // (z -0.345, the pack ends at -0.333), not its origin; so check that surface: on the pack, not floating behind it.",
+"        const sb = new THREE.Box3(), sinv = new THREE.Matrix4().copy(sp.g.parent.matrixWorld).invert();",
+"        sp.gun.traverseVisible((o) => { const pa = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !pa) return; const sm = new THREE.Matrix4().multiplyMatrices(sinv, o.matrixWorld); for (let q = 0; q < pa.count; q++) sb.expandByPoint(V(pa.getX(q), pa.getY(q), pa.getZ(q)).applyMatrix4(sm)); });",
+"        ok(Math.abs(P.x) <= 0.13 && sb.max.z >= -0.36 && sb.max.z <= -0.333, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', front surface z ' + sb.max.z.toFixed(3) + ', origin z ' + P.z.toFixed(3) + ')');"
+]
+},
+{
+"file": "studio/inspector/catalog.js",
+"old": "      g.visible = true;   // the game keeps the blade group hidden until he draws it",
+"new": [
+"      // GB-177: the knife's blade is built edge-sideways (groundBlade rotate) for its hold; show it edge-down like the machete.",
+"      if (key === 'knife') model.rotation.z = -Math.PI / 2;",
+"      g.visible = true;   // the game keeps the blade group hidden until he draws it"
+]
+}
+]

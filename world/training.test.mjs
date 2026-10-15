@@ -3,7 +3,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as T from '../tools/tests/fakethree.mjs';
-import { TRAINING, clampToRects, segmentBox, buildTrainingGround } from './training.js';
+import { TRAINING, clampToRects, segmentBox, buildTrainingGround, fallSign } from './training.js';
+import { FIRING_LINE } from './training-firing-line.js';
 
 test('clampToRects: inside stays, outside goes to the nearest edge of the nearest room', () => {
   const rooms = [{ minX: 0, maxX: 10, minZ: 0, maxZ: 10 }, { minX: 10, maxX: 12, minZ: 4, maxZ: 6 }, { minX: 12, maxX: 20, minZ: 0, maxZ: 10 }];
@@ -61,6 +62,14 @@ test('the build: two rooms past the map, five targets downrange, every station o
   assert.equal(tg.targets[2].state, 'up');
   assert.equal(tg.targets[2].pivot.rotation.x, 0);
   assert.equal(tg.targets[2].hits, 1);
+  assert.ok(tg.hitTarget(0, -1));
+  tg.update(0.05);
+  assert.ok(tg.targets[0].pivot.rotation.x < 0, 'shot from behind, it falls the other way');
+  const O2 = TRAINING.ORIGIN, line = O2.z + TRAINING.LINE_Z;
+  assert.ok(clampToRects(tg.walk, O2.x, line + 1).moved, 'firing bench keeps bodies on the shooter side');
+  assert.ok(tg.solids.some(s=>s.firingFence), 'upper fence has a physical shot surface');
+  assert.equal(fallSign(O2.z + tg.targets[4].z + 2, O2.z, tg.targets[4].z), -1);
+  assert.equal(fallSign(line - 1, O2.z, tg.targets[4].z), 1);
   // Every wall stops rounds; a round fired down lane 3 meets its target before the far wall.
   const a = { x: O.x, y: O.y + 1.6, z: O.z - 4 }, b = { x: O.x, y: O.y + 1.6, z: O.z + 40 };   // CL-144: the doubled plates' chest
   let first = null, ft = 2;
@@ -132,9 +141,13 @@ test('CL-146: the door has a keypad each side, and nothing in the hangar touches
   // and nothing of the hangar's leaks over the range at the height of its wall tops (a ledge lost its turn once and ran
   // 17 m out across the range)
   let over = 0; const v = new T.Vector3();
+  const firingFixture = tg.group.getObjectByName('training-firing-bench');
   tg.group.traverse((m) => {
     const P = m.isMesh && m.geometry && m.geometry.attributes && m.geometry.attributes.position;
     if (!P) return;
+    // GP-19907 intentionally adds overhead fencing at the existing firing line.
+    let owner=m;while(owner&&owner!==firingFixture)owner=owner.parent;
+    if(owner===firingFixture&&firingFixture)return;
     for (let i = 0; i < P.count; i++) {
       v.fromBufferAttribute(P, i).applyMatrix4(m.matrixWorld);
       const lx = v.x - O.x, ly = v.y - O.y;
@@ -142,4 +155,21 @@ test('CL-146: the door has a keypad each side, and nothing in the hangar touches
     }
   });
   assert.equal(over, 0, 'nothing hangs over the range at 6 m');
+  // GP-19907's firing fixture is the one thing let off that check, so it is held to its own slab: every vertex of it
+  // over the bench (the line's z, front to back, with the posts' foot plates), floor to wall top, wall to wall. Anything
+  // else put in its group, or the fixture itself drifting off the line, fails here instead of hiding behind the exemption.
+  if (firingFixture) {
+    const zLo = O.z + TRAINING.LINE_Z + FIRING_LINE.front - 0.02, zHi = O.z + TRAINING.LINE_Z + FIRING_LINE.back + 0.06;
+    let outside = 0, seen = 0;
+    firingFixture.traverse((m) => {
+      const P = m.isMesh && m.geometry && m.geometry.attributes && m.geometry.attributes.position;
+      if (!P) return;
+      for (let i = 0; i < P.count; i++) {
+        v.fromBufferAttribute(P, i).applyMatrix4(m.matrixWorld); seen++;
+        if (v.z < zLo || v.z > zHi || v.y < O.y - 0.01 || v.y > O.y + TRAINING.WALL_H + 0.01
+          || v.x < O.x + TRAINING.RANGE.minX - 0.15 || v.x > O.x + TRAINING.RANGE.maxX + 0.15) outside++;
+      }
+    });
+    assert.ok(seen > 0 && outside === 0, 'the firing fixture stays over the bench (' + outside + ' of ' + seen + ' vertices outside)');
+  }
 });

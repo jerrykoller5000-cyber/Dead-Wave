@@ -1,0 +1,90 @@
+{
+ "at": "2026-10-15T08:53:25.885Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "person.cave-guardian",
+   "variant": "wet",
+   "mode": null,
+   "ok": true,
+   "ms": 168,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "hill",
+   "mode": null,
+   "ok": true,
+   "ms": 159,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "root",
+   "mode": null,
+   "ok": true,
+   "ms": 161,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "shale",
+   "mode": null,
+   "ok": true,
+   "ms": 155,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "iron",
+   "mode": null,
+   "ok": true,
+   "ms": 164,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  },
+  {
+   "id": "person.cave-guardian",
+   "variant": "chalk",
+   "mode": null,
+   "ok": true,
+   "ms": 166,
+   "tris": 20062,
+   "size": [
+    2.478,
+    4.014,
+    2.625
+   ],
+   "error": null
+  }
+ ]
+}

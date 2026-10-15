@@ -1,0 +1,26 @@
+{
+  "batches": [
+    {
+      "fps": 60.12290317223053,
+      "p95": 17.5,
+      "worst": 20.599999994039536
+    },
+    {
+      "fps": 60.346828475625955,
+      "p95": 17.5,
+      "worst": 19.400000005960464
+    },
+    {
+      "fps": 60.204896221275,
+      "p95": 17.900000005960464,
+      "worst": 19.5
+    }
+  ],
+  "alive": 48,
+  "bodyDraws": 0,
+  "containmentMeshes": 0,
+  "sweep": null,
+  "loadSeconds": 17.561,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": []
+}

@@ -1,0 +1,6 @@
+import fs from 'node:fs';
+const p='ui/range-drills.test.mjs',s=fs.readFileSync(p,'utf8');let n=s;
+n=n.replace('exact twelve weapons, five distinct drills each; all copy keys exist','twelve weapons retain their five original drills, plus five new progressive challenges; all copy exists').replace('assert.equal(RANGE_DRILLS.length,60)','assert.equal(RANGE_DRILLS.length,65)').replace('assert.equal(rows.length,5);','assert.equal(rows.length,w===\'pistol\'?8:w===\'m4\'||w===\'shotgun\'?6:5);').replace('new Set(rows.map(d=>','new Set(rows.slice(0,5).map(d=>');
+n=n.replace('all 60 patterns can be played to a finite completion with scoring','all 65 patterns complete with real draw/reload gates and called weapon stages');
+n=n.replace("const token=r.s.attack(d.weapon,{units:d.continuous?.01:1,seconds:d.continuous?1/60:0});", "if(d.startHolstered)r.s.tick(.001,{weapon:ss.expectedWeapon,holstered:false});if(d.requireReload){r.s.tick(.001,{weapon:ss.expectedWeapon,reloading:true,loaded:0});r.s.tick(.001,{weapon:ss.expectedWeapon,reloading:false,loaded:30});}const token=r.s.attack(ss.expectedWeapon,{units:d.continuous?.01:1,seconds:d.continuous?1/60:0});");
+if(fs.readFileSync(p,'utf8')!==s)throw Error('test changed');fs.writeFileSync('review/range-console-GP19912/range-drills.test.before.mjs',s);fs.writeFileSync(p,n);

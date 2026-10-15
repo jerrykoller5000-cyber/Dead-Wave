@@ -1,0 +1,17 @@
+[
+  {
+    "file": "ui/range-feature.js",
+    "before": "ae9d46acf9f7c55b8ba15387a0e648a0a622c3a6212f30626c119eba3157a279",
+    "after": "91ed63747012ea8f08a2a46f130f0ed25860d0a394325d7760b21aca0e6a1820"
+  },
+  {
+    "file": "ui/training-audio.js",
+    "before": "b33b63ffdf38f983860467f7a10382b13c00ec9a6e5123c262bc92f7ad0cb147",
+    "after": "6396d9b2e651430f962e0a6992f4ce3ce40e41b2b259c28a37d286b6cce7a665"
+  },
+  {
+    "file": "ui/range-targets.js",
+    "before": "f84e956cf4ea1886b17dc559bfe3e966ec6f8bd3a514e2fde15db93f9a0d8d17",
+    "after": "94f3254b5b05c75ebf85f095e6689d592d84927c2046d8fabf9368db615d0f7f"
+  }
+]

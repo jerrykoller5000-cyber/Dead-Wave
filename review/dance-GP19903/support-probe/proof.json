@@ -1,0 +1,2613 @@
+{
+  "mode": "audit",
+  "alpha": false,
+  "diagnosticLight": true,
+  "motionBlur": false,
+  "motionBlurSamples": 1,
+  "motionBlurShutterFrames": 0,
+  "deliveryDuration": 32.53333333333333,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 0,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19903\\support-probe",
+  "outfitPath": "review/dance-GP19903/outfit.json",
+  "started": "2026-10-13T12:25:01.966Z",
+  "motionSourceHash": "1d664bf33f4ae0586cd44d0046fece0c6f7a27eae9c2f70b7d085929b4a5550d",
+  "camera": {
+    "position": [
+      1.9,
+      1.65,
+      4.1
+    ],
+    "look": [
+      0,
+      0.78,
+      0
+    ],
+    "fov": 34
+  },
+  "samples": [],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 12.38,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "ballcapBack",
+      "eyewear": "aviators",
+      "rolled": true,
+      "shorts": false,
+      "gloves": true,
+      "skin": 0,
+      "hair": "darkBrown",
+      "eyes": "blue"
+    },
+    "wardrobe": {
+      "version": 1,
+      "items": {
+        "cap": {
+          "camo": "papDigital",
+          "style": "ballcapBack"
+        },
+        "helmet": {
+          "camo": "papDigital"
+        },
+        "mask": {
+          "camo": "papDigital"
+        },
+        "shirt": {
+          "camo": "papDigital",
+          "sleeves": "rolled"
+        },
+        "trousers": {
+          "camo": "papDigital",
+          "cut": "trousers"
+        },
+        "gloves": {
+          "camo": "feldgrau",
+          "worn": true
+        },
+        "carrier": {
+          "camo": "papDigital"
+        },
+        "pads": {
+          "camo": "papDigital"
+        },
+        "holster": {
+          "camo": "papDigital"
+        },
+        "belt": {
+          "camo": "papDigital"
+        },
+        "pack": {
+          "camo": "papDigital"
+        },
+        "eyewear": {
+          "style": "aviators"
+        },
+        "boots": {
+          "colour": "black",
+          "rubber": "yellow"
+        }
+      },
+      "guns": {
+        "m4": "papDigital",
+        "shotgun": "papDigital",
+        "sniper": "m14Woodland",
+        "minigun": "dpmDesert",
+        "uzi": "papDigital",
+        "pistol": "teloMimetico"
+      },
+      "body": {
+        "hair": "darkBrown",
+        "eyes": "blue",
+        "skin": 0
+      }
+    },
+    "storedWardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 7,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 10,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 12,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 0,
+        "sourceCount": 4
+      }
+    },
+    "gearOwned": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true
+    },
+    "motionMissing": false,
+    "duration": 32.53333333333333,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766"
+  },
+  "audit": {
+    "floorY": -0.025,
+    "rate": 6,
+    "frames": [
+      {
+        "seconds": 13.3,
+        "phrase": "handstand",
+        "beat": 22.903109611666668,
+        "root": [
+          -0.055909037442876564,
+          0.6991988663047256,
+          -0.24388816894185858
+        ],
+        "shoulderCenter": [
+          0,
+          0.4969721808077544,
+          0.22496115818904933
+        ],
+        "anatomy": [
+          {
+            "side": "L",
+            "shoulder": [
+              0.5233224018314101,
+              0.9528956799997496,
+              -2.29391217474095
+            ],
+            "elbow": [
+              -0.4514338885800653,
+              0,
+              0
+            ],
+            "wrist": [
+              1.4009589239312041,
+              2.7279305669057408,
+              -0.71786101748435
+            ],
+            "wristSwing": 1.4431400135275307,
+            "wristTwist": -2.9425335007762716,
+            "palmNormal": [
+              0,
+              -1,
+              4.0245584642661925e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": 5.481260120834559,
+            "minHandPoint": [
+              -0.2768578782661787,
+              0.4651021314152778,
+              0.507004354617195
+            ],
+            "minForearmTorso": null
+          },
+          {
+            "side": "R",
+            "shoulder": [
+              0.6017542935576417,
+              -0.7088695311108122,
+              2.564832007763824
+            ],
+            "elbow": [
+              -0.41266683705546553,
+              0,
+              0
+            ],
+            "wrist": [
+              1.4382343465892662,
+              -1.7052438726832246,
+              1.4997616440651873
+            ],
+            "wristSwing": 1.5614151396103275,
+            "wristTwist": -3.073395111122739,
+            "palmNormal": [
+              2.220446049250313e-16,
+              -1,
+              1.3877787807814457e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          }
+        ],
+        "vertices": 86222,
+        "lowest": [
+          {
+            "y": -0.019000000000000072,
+            "point": [
+              -0.0033941168583062203,
+              -0.019000000000000072,
+              0.6224805571415285
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01871152212988586,
+            "point": [
+              -0.006076842160774025,
+              -0.01871152212988586,
+              0.6158213024583481
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.009386165517718481,
+            "point": [
+              -0.002712050580986808,
+              -0.009386165517718481,
+              0.6284785030520801
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": -0.001180273478910976,
+            "point": [
+              -0.006787164356428711,
+              -0.001180273478910976,
+              0.5942763015293526
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.004458208704005567,
+            "point": [
+              -0.3697757345379344,
+              0.004458208704005567,
+              0.29173661568970716
+            ],
+            "mesh": "(unnamed)",
+            "part": "elbowL",
+            "parent": "Group",
+            "material": "",
+            "vertices": 80
+          }
+        ],
+        "supportLowest": [
+          {
+            "y": -0.019000000000000072,
+            "point": [
+              -0.0033941168583062203,
+              -0.019000000000000072,
+              0.6224805571415285
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01871152212988586,
+            "point": [
+              -0.006076842160774025,
+              -0.01871152212988586,
+              0.6158213024583481
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.009386165517718481,
+            "point": [
+              -0.002712050580986808,
+              -0.009386165517718481,
+              0.6284785030520801
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": -0.001180273478910976,
+            "point": [
+              -0.006787164356428711,
+              -0.001180273478910976,
+              0.5942763015293526
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.08146239781053415,
+            "point": [
+              0.03426546493054834,
+              0.08146239781053415,
+              0.5753113138053777
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 336
+          }
+        ],
+        "penetration": 0,
+        "hands": [
+          {
+            "point": [
+              -0.3036218655071652,
+              0.011148055057376541,
+              0.22003705979593954
+            ],
+            "target": [
+              -0.30361071404231804,
+              0.012,
+              0.21996115818904935
+            ],
+            "error": 0.0008553920705491951,
+            "planted": 1,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.30360139249004914,
+              0.011791307090729324,
+              0.21998979544020095
+            ],
+            "target": [
+              0.30361071404231804,
+              0.012,
+              0.21996115818904935
+            ],
+            "error": 0.00021085472219061207,
+            "planted": 1,
+            "side": "R"
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.25832615007112925,
+              0.3100198118511429,
+              -0.7034803505711853
+            ],
+            "target": [
+              -0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 0.4844692933246579,
+            "ground": false,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.13638735160671914,
+              0.32991621007466826,
+              -0.7508723661398248
+            ],
+            "target": [
+              0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 0.5309066181832505,
+            "ground": false,
+            "side": "R"
+          }
+        ]
+      },
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "beat": 22.960510314876117,
+        "root": [
+          -0.054001593896845945,
+          0.7915824969221201,
+          -0.24751132066404227
+        ],
+        "shoulderCenter": [
+          5.551115123125783e-17,
+          0.5361216596301902,
+          0.20284799036192036
+        ],
+        "anatomy": [
+          {
+            "side": "L",
+            "shoulder": [
+              0.6405630726684952,
+              1.1294336141398025,
+              -2.272666645038366
+            ],
+            "elbow": [
+              0.14599736203869268,
+              0,
+              0
+            ],
+            "wrist": [
+              1.3810774225779023,
+              0.3561035107239616,
+              -3.1010413823656315
+            ],
+            "wristSwing": 1.7603573687829157,
+            "wristTwist": -2.834565176265666,
+            "palmNormal": [
+              -1.3877787807814457e-16,
+              -1,
+              1.1102230246251565e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          },
+          {
+            "side": "R",
+            "shoulder": [
+              0.7214513974517771,
+              -0.8133719053683545,
+              2.553901574942534
+            ],
+            "elbow": [
+              0.10208481464367317,
+              0,
+              0
+            ],
+            "wrist": [
+              1.2823499150427227,
+              -0.4524712081232531,
+              2.7706027880058453
+            ],
+            "wristSwing": 1.839115193400231,
+            "wristTwist": -3.1014360550022566,
+            "palmNormal": [
+              1.6653345369377348e-16,
+              -1,
+              -1.249000902703301e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          }
+        ],
+        "vertices": 86222,
+        "lowest": [
+          {
+            "y": -0.019000000000000156,
+            "point": [
+              -0.012173441326494214,
+              -0.019000000000000156,
+              0.5307658294898917
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01788489520788622,
+            "point": [
+              -0.014853006583432068,
+              -0.01788489520788622,
+              0.5241929778407273
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.010173939105989543,
+            "point": [
+              -0.011338176971913513,
+              -0.010173939105989543,
+              0.537855918738868
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": 0.0020778513075167537,
+            "point": [
+              -0.015292145830967038,
+              0.0020778513075167537,
+              0.5048711712430667
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.016220835730937383,
+            "point": [
+              -0.33420676956535006,
+              0.016220835730937383,
+              0.197666202501465
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristL",
+            "parent": "Group",
+            "material": "wear:gloves",
+            "vertices": 2496
+          }
+        ],
+        "supportLowest": [
+          {
+            "y": -0.019000000000000156,
+            "point": [
+              -0.012173441326494214,
+              -0.019000000000000156,
+              0.5307658294898917
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01788489520788622,
+            "point": [
+              -0.014853006583432068,
+              -0.01788489520788622,
+              0.5241929778407273
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.010173939105989543,
+            "point": [
+              -0.011338176971913513,
+              -0.010173939105989543,
+              0.537855918738868
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": 0.0020778513075167537,
+            "point": [
+              -0.015292145830967038,
+              0.0020778513075167537,
+              0.5048711712430667
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.08573000491582004,
+            "point": [
+              0.02705473484718684,
+              0.08573000491582004,
+              0.4957137075045198
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 336
+          }
+        ],
+        "penetration": 0,
+        "hands": [
+          {
+            "point": [
+              -0.30200515328449845,
+              0.01898267410745944,
+              0.1977378937854885
+            ],
+            "target": [
+              -0.3014793243722333,
+              0.012,
+              0.19784799036192033
+            ],
+            "error": 0.007003310288149486,
+            "planted": 1,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.30192910529829997,
+              0.026400424674557436,
+              0.19554294562513538
+            ],
+            "target": [
+              0.3014793243722333,
+              0.012,
+              0.19784799036192033
+            ],
+            "error": 0.014590673902450018,
+            "planted": 1,
+            "side": "R"
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.27442810372257037,
+              0.4769770899341659,
+              -0.7570568849024901
+            ],
+            "target": [
+              -0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 0.6266491460448507,
+            "ground": false,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.13120585783698335,
+              0.4899139433484389,
+              -0.7996889922681338
+            ],
+            "target": [
+              0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 0.6621868746563665,
+            "ground": false,
+            "side": "R"
+          }
+        ]
+      },
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "beat": 23.19011657179055,
+        "root": [
+          -0.04077894559486245,
+          1.0418232800006622,
+          -0.20455696682142455
+        ],
+        "shoulderCenter": [
+          -5.551115123125783e-17,
+          0.5987465546168173,
+          0.1152957746368949
+        ],
+        "anatomy": [
+          {
+            "side": "L",
+            "shoulder": [
+              0.4148076936647398,
+              0.9155711783510981,
+              -2.6964189496805795
+            ],
+            "elbow": [
+              0.14599736203869268,
+              0,
+              0
+            ],
+            "wrist": [
+              1.3867727169302844,
+              0.388783575487163,
+              -3.0681428280306418
+            ],
+            "wristSwing": 1.7543181130451362,
+            "wristTwist": -2.841173762643069,
+            "palmNormal": [
+              -1.3877787807814457e-16,
+              -1,
+              -9.71445146547012e-17
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          },
+          {
+            "side": "R",
+            "shoulder": [
+              0.4169050156603255,
+              -0.6374792455513582,
+              2.8887247726628185
+            ],
+            "elbow": [
+              0.10208481464367317,
+              0,
+              0
+            ],
+            "wrist": [
+              1.3009648946372492,
+              -0.4767509470914966,
+              2.7449766244555955
+            ],
+            "wristSwing": 1.8192198198871539,
+            "wristTwist": -3.1019884002655256,
+            "palmNormal": [
+              3.885780586188048e-16,
+              -1.0000000000000002,
+              -2.914335439641036e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          }
+        ],
+        "vertices": 86222,
+        "lowest": [
+          {
+            "y": -0.019000000000000128,
+            "point": [
+              0.0509671981862046,
+              -0.019000000000000128,
+              0.1297550746416463
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01489646758006885,
+            "point": [
+              0.05211718926544766,
+              -0.01489646758006885,
+              0.12397022808691877
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.014394312493261452,
+            "point": [
+              0.052348971324169755,
+              -0.014394312493261452,
+              0.14003830023436448
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": 0.011643780548091898,
+            "point": [
+              0.04931997482218285,
+              0.011643780548091898,
+              0.11623542863454697
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.07746353235223634,
+            "point": [
+              -0.33034384507380404,
+              0.07746353235223634,
+              0.10893547245895249
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristL",
+            "parent": "Group",
+            "material": "wear:gloves",
+            "vertices": 2496
+          }
+        ],
+        "supportLowest": [
+          {
+            "y": -0.019000000000000128,
+            "point": [
+              0.0509671981862046,
+              -0.019000000000000128,
+              0.1297550746416463
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01489646758006885,
+            "point": [
+              0.05211718926544766,
+              -0.01489646758006885,
+              0.12397022808691877
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": -0.014394312493261452,
+            "point": [
+              0.052348971324169755,
+              -0.014394312493261452,
+              0.14003830023436448
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": 0.011643780548091898,
+            "point": [
+              0.04931997482218285,
+              0.011643780548091898,
+              0.11623542863454697
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.08811828586882922,
+            "point": [
+              0.011318667771906068,
+              0.08811828586882922,
+              0.15601420371647834
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 336
+          }
+        ],
+        "penetration": 0,
+        "hands": [
+          {
+            "point": [
+              -0.2981422287929525,
+              0.08022537072875839,
+              0.10900716374297603
+            ],
+            "target": [
+              -0.29304055659150796,
+              0.012,
+              0.11029577463689494
+            ],
+            "error": 0.06842798249520031,
+            "planted": 1,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.2963352858726161,
+              0.08954896169574353,
+              0.09922151440382876
+            ],
+            "target": [
+              0.29304055659150796,
+              0.012,
+              0.11029577463689494
+            ],
+            "error": 0.07840494844608573,
+            "planted": 1,
+            "side": "R"
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.3124419677505076,
+              1.2277130133315652,
+              -0.7577925710581995
+            ],
+            "target": [
+              -0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.2556552813555637,
+            "ground": false,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.1450836519429176,
+              1.0790462565279433,
+              -0.8362187781600792
+            ],
+            "target": [
+              0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.1479322509579513,
+            "ground": false,
+            "side": "R"
+          }
+        ]
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "beat": 23.419721106666668,
+        "root": [
+          -0.02321785153892153,
+          1.0862122455287775,
+          -0.10916936696579718
+        ],
+        "shoulderCenter": [
+          0,
+          0.5363703688783582,
+          0.042367006880215836
+        ],
+        "anatomy": [
+          {
+            "side": "L",
+            "shoulder": [
+              0.19215830606485523,
+              0.8299139043466394,
+              -2.9998636677202937
+            ],
+            "elbow": [
+              0.14599736203869268,
+              0,
+              0
+            ],
+            "wrist": [
+              1.38975835512071,
+              0.515985972841786,
+              -2.9405347219470186
+            ],
+            "wristSwing": 1.7481483067373582,
+            "wristTwist": -2.8664519073013235,
+            "palmNormal": [
+              -8.326672684688674e-17,
+              -1,
+              -9.71445146547012e-17
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          },
+          {
+            "side": "R",
+            "shoulder": [
+              0.12285398639889039,
+              -0.5827562116849683,
+              3.1290793094783527
+            ],
+            "elbow": [
+              0.10208481464367317,
+              0,
+              0
+            ],
+            "wrist": [
+              1.288060844187863,
+              -0.5541968863029679,
+              2.6686942325783196
+            ],
+            "wristSwing": 1.8217889922756811,
+            "wristTwist": -3.0747126003054364,
+            "palmNormal": [
+              2.7755575615628914e-16,
+              -1,
+              -1.249000902703301e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          }
+        ],
+        "vertices": 86222,
+        "lowest": [
+          {
+            "y": -0.01899999999999985,
+            "point": [
+              0.01725760688727044,
+              -0.01899999999999985,
+              -0.18557917632235044
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01872793070430076,
+            "point": [
+              0.018938603714034052,
+              -0.01872793070430076,
+              -0.17435569152608443
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": -0.013474115025195688,
+            "point": [
+              0.018143010482938343,
+              -0.013474115025195688,
+              -0.17968779680153535
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": 0.014148645460952194,
+            "point": [
+              -0.31876399466710686,
+              0.014148645460952194,
+              0.03725114122762266
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristL",
+            "parent": "Group",
+            "material": "wear:gloves",
+            "vertices": 2496
+          },
+          {
+            "y": 0.014524102709602846,
+            "point": [
+              0.01715481616543484,
+              0.014524102709602846,
+              -0.18639122978819472
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          }
+        ],
+        "supportLowest": [
+          {
+            "y": -0.01899999999999985,
+            "point": [
+              0.01725760688727044,
+              -0.01899999999999985,
+              -0.18557917632235044
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": -0.01872793070430076,
+            "point": [
+              0.018938603714034052,
+              -0.01872793070430076,
+              -0.17435569152608443
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": -0.013474115025195688,
+            "point": [
+              0.018143010482938343,
+              -0.013474115025195688,
+              -0.17968779680153535
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": 0.014524102709602846,
+            "point": [
+              0.01715481616543484,
+              0.014524102709602846,
+              -0.18639122978819472
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 864
+          },
+          {
+            "y": 0.06162899068675699,
+            "point": [
+              0.017477286866386405,
+              0.06162899068675699,
+              -0.08921482340382984
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 336
+          }
+        ],
+        "penetration": 0,
+        "hands": [
+          {
+            "point": [
+              -0.28656237838625526,
+              0.016910483837474267,
+              0.037322832511646156
+            ],
+            "target": [
+              -0.2860112777715871,
+              0.012,
+              0.037367006880215825
+            ],
+            "error": 0.004941509362575587,
+            "planted": 1,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.2871275630180693,
+              0.030196200120897375,
+              0.03445745965594263
+            ],
+            "target": [
+              0.2860112777715871,
+              0.012,
+              0.037367006880215825
+            ],
+            "error": 0.01846112826025363,
+            "planted": 1,
+            "side": "R"
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.28544885923284113,
+              1.6069830387080444,
+              -0.38558071878304506
+            ],
+            "target": [
+              -0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.5435582259807388,
+            "ground": false,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.17182671196641053,
+              1.515367731470529,
+              -0.5689516848258832
+            ],
+            "target": [
+              0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.4720627446820131,
+            "ground": false,
+            "side": "R"
+          }
+        ]
+      },
+      {
+        "seconds": 13.8,
+        "phrase": "handstand",
+        "beat": 23.764128770000003,
+        "root": [
+          -0.0034767500977624932,
+          1.0835426206889385,
+          -0.010278925057722866
+        ],
+        "shoulderCenter": [
+          0,
+          0.4950000000000001,
+          -0.014340019792912828
+        ],
+        "anatomy": [
+          {
+            "side": "L",
+            "shoulder": [
+              -0.2642174309440971,
+              0.8300552684801867,
+              3.0568986947484107
+            ],
+            "elbow": [
+              -0.48784733296285193,
+              0,
+              0
+            ],
+            "wrist": [
+              1.3372603652240904,
+              2.664394538784637,
+              -0.772586104270985
+            ],
+            "wristSwing": 1.4043073004961986,
+            "wristTwist": -2.996979698500852,
+            "palmNormal": [
+              -8.326672684688674e-17,
+              -1.0000000000000002,
+              -1.3877787807814457e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          },
+          {
+            "side": "R",
+            "shoulder": [
+              -0.32379737214797727,
+              -0.6201164887784302,
+              -2.973410248365328
+            ],
+            "elbow": [
+              -0.39182489687989486,
+              0,
+              0
+            ],
+            "wrist": [
+              1.3983890656385196,
+              -1.7805242180614096,
+              1.4196682253714974
+            ],
+            "wristSwing": 1.5449653414079378,
+            "wristTwist": -3.0319195428205328,
+            "palmNormal": [
+              1.1102230246251565e-16,
+              -1,
+              2.7755575615628914e-16
+            ],
+            "planted": 1,
+            "handVertices": 2676,
+            "insideHandVertices": 0,
+            "minHandTorso": null,
+            "minHandPoint": null,
+            "minForearmTorso": null
+          }
+        ],
+        "vertices": 86222,
+        "lowest": [
+          {
+            "y": 0.0010293402737337476,
+            "point": [
+              -0.34494408287163425,
+              0.0010293402737337476,
+              0.052426631465008484
+            ],
+            "mesh": "(unnamed)",
+            "part": "elbowL",
+            "parent": "Group",
+            "material": "",
+            "vertices": 80
+          },
+          {
+            "y": 0.008125858241324141,
+            "point": [
+              0.3577747733529372,
+              0.008125858241324141,
+              0.03494841188034647
+            ],
+            "mesh": "(unnamed)",
+            "part": "elbowR",
+            "parent": "Group",
+            "material": "",
+            "vertices": 80
+          },
+          {
+            "y": 0.00837920194003533,
+            "point": [
+              -0.3127328851655158,
+              0.00837920194003533,
+              -0.01931392229504217
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristL",
+            "parent": "Group",
+            "material": "wear:gloves",
+            "vertices": 2496
+          },
+          {
+            "y": 0.009031391031404074,
+            "point": [
+              0.3238945636313074,
+              0.009031391031404074,
+              -0.030380151336731137
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristR",
+            "parent": "Group",
+            "material": "wear:gloves",
+            "vertices": 2496
+          },
+          {
+            "y": 0.035441040596699266,
+            "point": [
+              -0.2900271764850712,
+              0.035441040596699266,
+              -0.054627414235501826
+            ],
+            "mesh": "gb152-hand",
+            "part": "wristL",
+            "parent": "Group",
+            "material": "",
+            "vertices": 180
+          }
+        ],
+        "supportLowest": [
+          {
+            "y": 0.035976830561843684,
+            "point": [
+              -0.09259618679736026,
+              0.035976830561843684,
+              -0.3099191596275418
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 576
+          },
+          {
+            "y": 0.0372344494889507,
+            "point": [
+              -0.09421211989216663,
+              0.0372344494889507,
+              -0.3210585332679169
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 72
+          },
+          {
+            "y": 0.041603072347247375,
+            "point": [
+              -0.09393046478540862,
+              0.041603072347247375,
+              -0.3057675347927201
+            ],
+            "mesh": "(unnamed)",
+            "part": "nvg",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2712
+          },
+          {
+            "y": 0.04448177606347109,
+            "point": [
+              -0.0008885774995450739,
+              0.04448177606347109,
+              0.03420651237153543
+            ],
+            "mesh": "(unnamed)",
+            "part": "head",
+            "parent": "Group",
+            "material": "",
+            "vertices": 3852
+          },
+          {
+            "y": 0.04744387899595848,
+            "point": [
+              -0.0067607024090941764,
+              0.04744387899595848,
+              -0.00718014303291334
+            ],
+            "mesh": "(unnamed)",
+            "part": "head",
+            "parent": "Group",
+            "material": "",
+            "vertices": 2448
+          }
+        ],
+        "penetration": 0,
+        "hands": [
+          {
+            "point": [
+              -0.2805312688846642,
+              0.011141040316557403,
+              -0.019242231011018657
+            ],
+            "target": [
+              -0.2805455402609241,
+              0.012,
+              -0.019340019792912833
+            ],
+            "error": 0.000864625962959999,
+            "planted": 1,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.28053022938247,
+              0.011793231494088709,
+              -0.01930658387694316
+            ],
+            "target": [
+              0.2805455402609241,
+              0.012,
+              -0.019340019792912833
+            ],
+            "error": 0.0002100133293687675,
+            "planted": 1,
+            "side": "R"
+          }
+        ],
+        "feet": [
+          {
+            "point": [
+              -0.32303798299631886,
+              1.649149647477195,
+              -0.16661717503843104
+            ],
+            "target": [
+              -0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.590407744951747,
+            "ground": false,
+            "side": "L"
+          },
+          {
+            "point": [
+              0.2987905024500009,
+              1.654182522659098,
+              0.10240091889436492
+            ],
+            "target": [
+              0.18,
+              0.07,
+              -0.29
+            ],
+            "error": 1.6363752411106718,
+            "ground": false,
+            "side": "R"
+          }
+        ]
+      }
+    ],
+    "seek": {
+      "seeks": [
+        {
+          "seconds": 0,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 2.3,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 4.6,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 7,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 9.3,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 12,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 14,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 18.5,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 20,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 23.2,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 27.9,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 30,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 31.7,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 32.4,
+          "max": 0,
+          "where": ""
+        },
+        {
+          "seconds": 32.53333333333333,
+          "max": 0,
+          "where": ""
+        }
+      ],
+      "boundaries": [
+        {
+          "seconds": 4.64565737159991,
+          "section": 8,
+          "maxPosition": 0.000050005218285421924,
+          "positionJoint": "wristL",
+          "maxAngle": 0.00013145137875354723,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 9.29131474319982,
+          "section": 16,
+          "maxPosition": 0.000028663588354370648,
+          "positionJoint": "kneeR",
+          "maxAngle": 0.00014384228830836086,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 11.614143428999775,
+          "section": 20,
+          "maxPosition": 0.00003615628122411853,
+          "positionJoint": "wristL",
+          "maxAngle": 0.000058852697828523954,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 12.775557771899752,
+          "section": 22,
+          "maxPosition": 5.4472175146465526e-14,
+          "positionJoint": "marine",
+          "maxAngle": 4.2146848510894035e-8,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 13.93697211479973,
+          "section": 24,
+          "maxPosition": 0.000030033840580204233,
+          "positionJoint": "ankleL",
+          "maxAngle": 0.00007811750385375646,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 16.259800800599685,
+          "section": 28,
+          "maxPosition": 0.000030033840609750135,
+          "positionJoint": "ankleL",
+          "maxAngle": 0.00007811751522353035,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 17.421215143499662,
+          "section": 30,
+          "maxPosition": 0.000057251135397632353,
+          "positionJoint": "nvg",
+          "maxAngle": 0.00006317521578083686,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 22.066872515099572,
+          "section": 38,
+          "maxPosition": 0.000051718668440610624,
+          "positionJoint": "nvg",
+          "maxAngle": 0.000057428015835737737,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 23.22828685799955,
+          "section": 40,
+          "maxPosition": 0.000028663588343566635,
+          "positionJoint": "kneeR",
+          "maxAngle": 0.00014384228522102666,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 27.87394422959946,
+          "section": 48,
+          "maxPosition": 0.00005000521826802248,
+          "positionJoint": "wristL",
+          "maxAngle": 0.00013145138213190057,
+          "interval": 0.00002
+        },
+        {
+          "seconds": 30.196772915399414,
+          "section": 52,
+          "maxPosition": 0.00003615628119959937,
+          "positionJoint": "wristL",
+          "maxAngle": 0.00005885270537429837,
+          "interval": 0.00002
+        }
+      ]
+    },
+    "worstVertices": [
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "y": -0.019000000000000156,
+        "point": [
+          -0.012173441326494214,
+          -0.019000000000000156,
+          0.5307658294898917
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 576
+      },
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "y": -0.019000000000000128,
+        "point": [
+          0.0509671981862046,
+          -0.019000000000000128,
+          0.1297550746416463
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 576
+      },
+      {
+        "seconds": 13.3,
+        "phrase": "handstand",
+        "y": -0.019000000000000072,
+        "point": [
+          -0.0033941168583062203,
+          -0.019000000000000072,
+          0.6224805571415285
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 576
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "y": -0.01899999999999985,
+        "point": [
+          0.01725760688727044,
+          -0.01899999999999985,
+          -0.18557917632235044
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 576
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "y": -0.01872793070430076,
+        "point": [
+          0.018938603714034052,
+          -0.01872793070430076,
+          -0.17435569152608443
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 72
+      },
+      {
+        "seconds": 13.3,
+        "phrase": "handstand",
+        "y": -0.01871152212988586,
+        "point": [
+          -0.006076842160774025,
+          -0.01871152212988586,
+          0.6158213024583481
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 2712
+      },
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "y": -0.01788489520788622,
+        "point": [
+          -0.014853006583432068,
+          -0.01788489520788622,
+          0.5241929778407273
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 2712
+      },
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "y": -0.01489646758006885,
+        "point": [
+          0.05211718926544766,
+          -0.01489646758006885,
+          0.12397022808691877
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 2712
+      },
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "y": -0.014394312493261452,
+        "point": [
+          0.052348971324169755,
+          -0.014394312493261452,
+          0.14003830023436448
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 72
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "y": -0.013474115025195688,
+        "point": [
+          0.018143010482938343,
+          -0.013474115025195688,
+          -0.17968779680153535
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 2712
+      },
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "y": -0.010173939105989543,
+        "point": [
+          -0.011338176971913513,
+          -0.010173939105989543,
+          0.537855918738868
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 72
+      },
+      {
+        "seconds": 13.3,
+        "phrase": "handstand",
+        "y": -0.009386165517718481,
+        "point": [
+          -0.002712050580986808,
+          -0.009386165517718481,
+          0.6284785030520801
+        ],
+        "mesh": "(unnamed)",
+        "part": "nvg",
+        "parent": "Group",
+        "material": "",
+        "vertices": 72
+      }
+    ],
+    "handOutliers": [
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "point": [
+          0.2963352858726161,
+          0.08954896169574353,
+          0.09922151440382876
+        ],
+        "target": [
+          0.29304055659150796,
+          0.012,
+          0.11029577463689494
+        ],
+        "error": 0.07840494844608573,
+        "planted": 1,
+        "side": "R"
+      },
+      {
+        "seconds": 13.466667,
+        "phrase": "handstand",
+        "point": [
+          -0.2981422287929525,
+          0.08022537072875839,
+          0.10900716374297603
+        ],
+        "target": [
+          -0.29304055659150796,
+          0.012,
+          0.11029577463689494
+        ],
+        "error": 0.06842798249520031,
+        "planted": 1,
+        "side": "L"
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "point": [
+          0.2871275630180693,
+          0.030196200120897375,
+          0.03445745965594263
+        ],
+        "target": [
+          0.2860112777715871,
+          0.012,
+          0.037367006880215825
+        ],
+        "error": 0.01846112826025363,
+        "planted": 1,
+        "side": "R"
+      },
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "point": [
+          0.30192910529829997,
+          0.026400424674557436,
+          0.19554294562513538
+        ],
+        "target": [
+          0.3014793243722333,
+          0.012,
+          0.19784799036192033
+        ],
+        "error": 0.014590673902450018,
+        "planted": 1,
+        "side": "R"
+      },
+      {
+        "seconds": 13.333333,
+        "phrase": "handstand",
+        "point": [
+          -0.30200515328449845,
+          0.01898267410745944,
+          0.1977378937854885
+        ],
+        "target": [
+          -0.3014793243722333,
+          0.012,
+          0.19784799036192033
+        ],
+        "error": 0.007003310288149486,
+        "planted": 1,
+        "side": "L"
+      },
+      {
+        "seconds": 13.6,
+        "phrase": "handstand",
+        "point": [
+          -0.28656237838625526,
+          0.016910483837474267,
+          0.037322832511646156
+        ],
+        "target": [
+          -0.2860112777715871,
+          0.012,
+          0.037367006880215825
+        ],
+        "error": 0.004941509362575587,
+        "planted": 1,
+        "side": "L"
+      },
+      {
+        "seconds": 13.8,
+        "phrase": "handstand",
+        "point": [
+          -0.2805312688846642,
+          0.011141040316557403,
+          -0.019242231011018657
+        ],
+        "target": [
+          -0.2805455402609241,
+          0.012,
+          -0.019340019792912833
+        ],
+        "error": 0.000864625962959999,
+        "planted": 1,
+        "side": "L"
+      },
+      {
+        "seconds": 13.3,
+        "phrase": "handstand",
+        "point": [
+          -0.3036218655071652,
+          0.011148055057376541,
+          0.22003705979593954
+        ],
+        "target": [
+          -0.30361071404231804,
+          0.012,
+          0.21996115818904935
+        ],
+        "error": 0.0008553920705491951,
+        "planted": 1,
+        "side": "L"
+      }
+    ],
+    "groundFootOutliers": [],
+    "boundaryOutliers": [
+      {
+        "seconds": 17.421215143499662,
+        "section": 30,
+        "maxPosition": 0.000057251135397632353,
+        "positionJoint": "nvg",
+        "maxAngle": 0.00006317521578083686,
+        "interval": 0.00002
+      },
+      {
+        "seconds": 22.066872515099572,
+        "section": 38,
+        "maxPosition": 0.000051718668440610624,
+        "positionJoint": "nvg",
+        "maxAngle": 0.000057428015835737737,
+        "interval": 0.00002
+      },
+      {
+        "seconds": 4.64565737159991,
+        "section": 8,
+        "maxPosition": 0.000050005218285421924,
+        "positionJoint": "wristL",
+        "maxAngle": 0.00013145137875354723,
+        "interval": 0.00002
+      },
+      {
+        "seconds": 27.87394422959946,
+        "section": 48,
+        "maxPosition": 0.00005000521826802248,
+        "positionJoint": "wristL",
+        "maxAngle": 0.00013145138213190057,
+        "interval": 0.00002
+      },
+      {
+        "seconds": 11.614143428999775,
+        "section": 20,
+        "maxPosition": 0.00003615628122411853,
+        "positionJoint": "wristL",
+        "maxAngle": 0.000058852697828523954,
+        "interval": 0.00002
+      }
+    ],
+    "anatomy": {
+      "note": "Torso proxy uses source shirt cross-sections; any penetration is a candidate for visual review, not an exact mesh collision.",
+      "positiveElbows": [
+        {
+          "seconds": 13.333333,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.6405630726684952,
+            1.1294336141398025,
+            -2.272666645038366
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3810774225779023,
+            0.3561035107239616,
+            -3.1010413823656315
+          ],
+          "wristSwing": 1.7603573687829157,
+          "wristTwist": -2.834565176265666,
+          "palmNormal": [
+            -1.3877787807814457e-16,
+            -1,
+            1.1102230246251565e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.333333,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.7214513974517771,
+            -0.8133719053683545,
+            2.553901574942534
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.2823499150427227,
+            -0.4524712081232531,
+            2.7706027880058453
+          ],
+          "wristSwing": 1.839115193400231,
+          "wristTwist": -3.1014360550022566,
+          "palmNormal": [
+            1.6653345369377348e-16,
+            -1,
+            -1.249000902703301e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.466667,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.4148076936647398,
+            0.9155711783510981,
+            -2.6964189496805795
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3867727169302844,
+            0.388783575487163,
+            -3.0681428280306418
+          ],
+          "wristSwing": 1.7543181130451362,
+          "wristTwist": -2.841173762643069,
+          "palmNormal": [
+            -1.3877787807814457e-16,
+            -1,
+            -9.71445146547012e-17
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.466667,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.4169050156603255,
+            -0.6374792455513582,
+            2.8887247726628185
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3009648946372492,
+            -0.4767509470914966,
+            2.7449766244555955
+          ],
+          "wristSwing": 1.8192198198871539,
+          "wristTwist": -3.1019884002655256,
+          "palmNormal": [
+            3.885780586188048e-16,
+            -1.0000000000000002,
+            -2.914335439641036e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.6,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.19215830606485523,
+            0.8299139043466394,
+            -2.9998636677202937
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.38975835512071,
+            0.515985972841786,
+            -2.9405347219470186
+          ],
+          "wristSwing": 1.7481483067373582,
+          "wristTwist": -2.8664519073013235,
+          "palmNormal": [
+            -8.326672684688674e-17,
+            -1,
+            -9.71445146547012e-17
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.6,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.12285398639889039,
+            -0.5827562116849683,
+            3.1290793094783527
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.288060844187863,
+            -0.5541968863029679,
+            2.6686942325783196
+          ],
+          "wristSwing": 1.8217889922756811,
+          "wristTwist": -3.0747126003054364,
+          "palmNormal": [
+            2.7755575615628914e-16,
+            -1,
+            -1.249000902703301e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        }
+      ],
+      "handBodyOutliers": [
+        {
+          "seconds": 13.3,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.5233224018314101,
+            0.9528956799997496,
+            -2.29391217474095
+          ],
+          "elbow": [
+            -0.4514338885800653,
+            0,
+            0
+          ],
+          "wrist": [
+            1.4009589239312041,
+            2.7279305669057408,
+            -0.71786101748435
+          ],
+          "wristSwing": 1.4431400135275307,
+          "wristTwist": -2.9425335007762716,
+          "palmNormal": [
+            0,
+            -1,
+            4.0245584642661925e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": 5.481260120834559,
+          "minHandPoint": [
+            -0.2768578782661787,
+            0.4651021314152778,
+            0.507004354617195
+          ],
+          "minForearmTorso": null
+        }
+      ],
+      "forearmBodyOutliers": [],
+      "freeWristOutliers": [],
+      "plantWristOutliers": [
+        {
+          "seconds": 13.333333,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.7214513974517771,
+            -0.8133719053683545,
+            2.553901574942534
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.2823499150427227,
+            -0.4524712081232531,
+            2.7706027880058453
+          ],
+          "wristSwing": 1.839115193400231,
+          "wristTwist": -3.1014360550022566,
+          "palmNormal": [
+            1.6653345369377348e-16,
+            -1,
+            -1.249000902703301e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.6,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.12285398639889039,
+            -0.5827562116849683,
+            3.1290793094783527
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.288060844187863,
+            -0.5541968863029679,
+            2.6686942325783196
+          ],
+          "wristSwing": 1.8217889922756811,
+          "wristTwist": -3.0747126003054364,
+          "palmNormal": [
+            2.7755575615628914e-16,
+            -1,
+            -1.249000902703301e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.466667,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.4169050156603255,
+            -0.6374792455513582,
+            2.8887247726628185
+          ],
+          "elbow": [
+            0.10208481464367317,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3009648946372492,
+            -0.4767509470914966,
+            2.7449766244555955
+          ],
+          "wristSwing": 1.8192198198871539,
+          "wristTwist": -3.1019884002655256,
+          "palmNormal": [
+            3.885780586188048e-16,
+            -1.0000000000000002,
+            -2.914335439641036e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.333333,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.6405630726684952,
+            1.1294336141398025,
+            -2.272666645038366
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3810774225779023,
+            0.3561035107239616,
+            -3.1010413823656315
+          ],
+          "wristSwing": 1.7603573687829157,
+          "wristTwist": -2.834565176265666,
+          "palmNormal": [
+            -1.3877787807814457e-16,
+            -1,
+            1.1102230246251565e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.466667,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.4148076936647398,
+            0.9155711783510981,
+            -2.6964189496805795
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3867727169302844,
+            0.388783575487163,
+            -3.0681428280306418
+          ],
+          "wristSwing": 1.7543181130451362,
+          "wristTwist": -2.841173762643069,
+          "palmNormal": [
+            -1.3877787807814457e-16,
+            -1,
+            -9.71445146547012e-17
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.6,
+          "phrase": "handstand",
+          "side": "L",
+          "shoulder": [
+            0.19215830606485523,
+            0.8299139043466394,
+            -2.9998636677202937
+          ],
+          "elbow": [
+            0.14599736203869268,
+            0,
+            0
+          ],
+          "wrist": [
+            1.38975835512071,
+            0.515985972841786,
+            -2.9405347219470186
+          ],
+          "wristSwing": 1.7481483067373582,
+          "wristTwist": -2.8664519073013235,
+          "palmNormal": [
+            -8.326672684688674e-17,
+            -1,
+            -9.71445146547012e-17
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.3,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            0.6017542935576417,
+            -0.7088695311108122,
+            2.564832007763824
+          ],
+          "elbow": [
+            -0.41266683705546553,
+            0,
+            0
+          ],
+          "wrist": [
+            1.4382343465892662,
+            -1.7052438726832246,
+            1.4997616440651873
+          ],
+          "wristSwing": 1.5614151396103275,
+          "wristTwist": -3.073395111122739,
+          "palmNormal": [
+            2.220446049250313e-16,
+            -1,
+            1.3877787807814457e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        },
+        {
+          "seconds": 13.8,
+          "phrase": "handstand",
+          "side": "R",
+          "shoulder": [
+            -0.32379737214797727,
+            -0.6201164887784302,
+            -2.973410248365328
+          ],
+          "elbow": [
+            -0.39182489687989486,
+            0,
+            0
+          ],
+          "wrist": [
+            1.3983890656385196,
+            -1.7805242180614096,
+            1.4196682253714974
+          ],
+          "wristSwing": 1.5449653414079378,
+          "wristTwist": -3.0319195428205328,
+          "palmNormal": [
+            1.1102230246251565e-16,
+            -1,
+            2.7755575615628914e-16
+          ],
+          "planted": 1,
+          "handVertices": 2676,
+          "insideHandVertices": 0,
+          "minHandTorso": null,
+          "minHandPoint": null,
+          "minForearmTorso": null
+        }
+      ]
+    },
+    "quality": {
+      "noFloorPenetration": true,
+      "noElbowHyperextension": false,
+      "handsOutsideTorsoProxy": true,
+      "plantedHandsWithin25mm": false,
+      "freeWristsWithin30Degrees": true,
+      "plantedWristsWithin92Degrees": false,
+      "deterministicSeek": true,
+      "note": "Numerical diagnostics are necessary checks, not a substitute for viewing the animation."
+    }
+  },
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T12:25:15.380Z"
+}

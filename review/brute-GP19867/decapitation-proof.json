@@ -1,0 +1,126 @@
+{
+  "loadSec": 17.11,
+  "front": [
+    {
+      "hit": {
+        "t": 0.5103381059021217,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 30,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.5140292153106619,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 15,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": false,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.512907564648098,
+        "zone": "front",
+        "part": "torso"
+      },
+      "damage": 6.75,
+      "armor": {
+        "front": 0,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": true,
+      "skins": 1
+    },
+    {
+      "hit": {
+        "t": 0.5383346029686512,
+        "zone": "exposed",
+        "part": "torso"
+      },
+      "damage": 13.5,
+      "armor": {
+        "front": 0,
+        "back": 40,
+        "left": 30,
+        "right": 30
+      },
+      "collapsed": true,
+      "skins": 1
+    }
+  ],
+  "surface": [
+    {
+      "name": "side",
+      "expected": 4.5,
+      "hit": {
+        "t": 0.46742187926691453,
+        "zone": "left",
+        "part": "armL"
+      },
+      "damage": 4.5,
+      "headLost": false
+    },
+    {
+      "name": "back",
+      "expected": 4.5,
+      "hit": {
+        "t": 0.5011528696854649,
+        "zone": "back",
+        "part": "torso"
+      },
+      "damage": 4.5,
+      "headLost": false
+    },
+    {
+      "name": "arm",
+      "expected": 9,
+      "hit": {
+        "t": 0.46086887215971506,
+        "zone": "exposed",
+        "part": "armL"
+      },
+      "damage": 9,
+      "headLost": false
+    },
+    {
+      "name": "leg",
+      "expected": 9,
+      "hit": {
+        "t": 0.4666206267272249,
+        "zone": "exposed",
+        "part": "legL"
+      },
+      "damage": 9,
+      "headLost": false
+    },
+    {
+      "name": "head",
+      "expected": 16.65,
+      "hit": {
+        "t": 0.45770738448766224,
+        "zone": "exposed",
+        "part": "head"
+      },
+      "damage": 9999,
+      "headLost": true
+    }
+  ]
+}

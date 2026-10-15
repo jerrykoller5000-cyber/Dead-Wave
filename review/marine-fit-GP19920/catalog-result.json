@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "check": {
+    "subjects": 3,
+    "broken": []
+  },
+  "sheet": "review/marine-fit-GP19920/catalog/sheet.jpg",
+  "file": "review/marine-fit-GP19920/catalog/check.json",
+  "ms": 1242
+}

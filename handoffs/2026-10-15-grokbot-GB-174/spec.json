@@ -1,0 +1,131 @@
+[
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.box(0.006, 0.012, 0.02, gunDark, -0.04, 0.004, -0.04);",
+"new": [
+"  // GB-174 (Jerry: small parts floated): the latch and screws sit on the frame's side faces (half-width 0.033).",
+"  K.box(0.004, 0.012, 0.02, gunDark, -0.0345, 0.004, -0.04, 0, 0, 0, null, 0.0012);   // cylinder release latch",
+"  for (const sx of [-1, 1]) for (const [y, z] of [[0.086, -0.062], [0.02, -0.058]]) K.cyl(0.0032, 0.0032, 0.0016, gunAccent, sx * 0.0338, y, z, null, 10, 'x');   // side-plate screws"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "    K.cyl(.003, .003, .002, gunAccent, sx * .0391, .024, -.07, null, 10, 'x');",
+"new": [
+"    K.cyl(.003, .003, .0016, gunAccent, sx * .0331, -.072, -.03, null, 10, 'x');   // GB-174: grip screw on the wood panel's face"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  // GB-173: a slimmer hammer with a proper spur swept back over the frame's hammer seat.",
+"new": [
+"  // GB-174 (Jerry: the hammer was a crude bent slab): a hammer body seated in the frame's slot behind the recoil shield,",
+"  // its short spur curving back and down over the backstrap, chequered across the top. Same pivot (0, 0.1, -0.08).",
+"  K.slab([[0.01, -0.03], [0.012, -0.004], [0.008, 0.01], [0.002, 0.016], [-0.008, 0.019], [-0.018, 0.02], [-0.027, 0.018], [-0.033, 0.013], [-0.035, 0.008], [-0.03, 0.006], [-0.02, 0.006], [-0.012, 0.002], [-0.009, -0.01], [-0.008, -0.03]], 0.011, gunDark, { bevel: 0.002, parent: hammer });",
+"  for (const [z, y, a] of [[-0.006, 0.0185, -0.35], [-0.012, 0.0205, -0.12], [-0.018, 0.0212, 0], [-0.024, 0.0202, 0.2], [-0.029, 0.0178, 0.45]]) K.box(0.0112, 0.0012, 0.0012, gunAccent, 0, y, z, a, 0, 0, hammer);"
+]
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.slab([[-0.012, -0.03], [0.012, -0.03], [0.014, 0.0], [0.008, 0.016], [-0.006, 0.028], [-0.03, 0.044], [-0.04, 0.04], [-0.036, 0.03], [-0.018, 0.014], [-0.014, -0.004]], 0.016, gunDark, { bevel: 0.003, parent: hammer });",
+"new": []
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  K.box(0.018, 0.005, 0.018, gunAccent, 0, 0.041, -0.031, -0.55, 0, 0, hammer, 0.002);",
+"new": []
+},
+{
+"file": "studio/weapon-sidearms.js",
+"old": "  for (let i = 0; i < 4; i++) K.box(.016, .0015, .0015, gunDark, 0, .0435, -.038 + i * .004, -.55, 0, 0, hammer);",
+"new": []
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  for (const z of [0.447, 0.787]) K.lathe([[0.03, z - 0.006], [0.047, z - 0.006], [0.047, z + 0.005], [0.03, z + 0.005]], gunMid, { y: 0.015, seg: 16 });",
+"new": [
+"  for (const z of [0.447, 0.787]) K.lathe([[0.03, z - 0.006], [0.047, z - 0.006], [0.047, z + 0.005], [0.03, z + 0.005]], gunMid, { y: 0.015, seg: 16 });",
+"  // GB-174 (Jerry: a gap between the receiver and the shield): a barrel-nut sleeve runs from the receiver face (z 0.26)",
+"  // to the shield's rear ring, so no bare barrel shows.",
+"  K.lathe([[0.022, 0.255], [0.045, 0.255], [0.047, 0.262], [0.047, 0.27], [0.044, 0.275], [0.044, 0.444], [0.022, 0.444]], gunMid, { y: 0.015, seg: 16 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.box(0.03, 0.016, 0.026, gunDark, 0, 0.064, 0.75, 0, 0, 0, null, 0.003);",
+"new": [
+"  // GB-174 (Jerry: the ears floated): a clamp ring round the shroud carries a solid base; the post and both ears rise from it.",
+"  K.lathe([[0.044, 0.737], [0.05, 0.737], [0.051, 0.74], [0.051, 0.76], [0.05, 0.763], [0.044, 0.763]], gunDark, { y: 0.015, seg: 18 });",
+"  K.box(0.036, 0.018, 0.026, gunDark, 0, 0.07, 0.75, 0, 0, 0, null, 0.003);"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.box(0.008, 0.098, 0.012, gunDark, 0, 0.119, 0.75, 0, 0, 0, null, 0.002);",
+"new": [
+"  K.box(0.008, 0.092, 0.012, gunDark, 0, 0.122, 0.75, 0, 0, 0, null, 0.002);"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  for (const sx of [-1, 1]) K.box(0.004, 0.06, 0.016, gunDark, sx * 0.013, 0.142, 0.75, 0, 0, 0, null, 0.0015);",
+"new": [
+"  for (const sx of [-1, 1]) K.box(0.005, 0.098, 0.018, gunDark, sx * 0.0145, 0.126, 0.75, 0, 0, 0, null, 0.0015);"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab(gunBand([[-0.084, -0.088], [-0.086, -0.104], [-0.092, -0.116]], 0.0032), 0.009, gunAccent, { bevel: 0.002 });",
+"new": [
+"  // GB-174: the trigger's face toward the grip, its tip curling forward (it was backwards).",
+"  K.slab(gunBand([[-0.084, -0.088], [-0.088, -0.1], [-0.086, -0.11], [-0.08, -0.117]], 0.0032), 0.009, gunAccent, { bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  K.slab(gunBand([[-0.05, -0.05], [-0.052, -0.064], [-0.058, -0.074]], 0.0032), 0.008, gunAccent, { bevel: 0.002 });",
+"new": [
+"  // GB-174 (Jerry: the trigger was backwards): face toward the grip, tip curling forward.",
+"  K.slab(gunBand([[-0.05, -0.05], [-0.054, -0.062], [-0.052, -0.072], [-0.046, -0.078]], 0.0032), 0.008, gunAccent, { bevel: 0.002 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "  for (const z of [-0.06, 0.15]) {",
+"new": [
+"  // GB-174 (Jerry: the rings floated): each ring's base sits flush on the rail top (0.092), jaws hug the rail's sides",
+"  // with a cross-bolt through a rail slot; a split ring clamps the 0.0255 tube on its axis (y 0.14).",
+"  for (const z of [-0.061, 0.147]) {"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "    K.box(0.06, 0.018, 0.035, gunDark, 0, 0.1, z, 0, 0, 0, null, 0.003);",
+"new": [
+"    K.box(0.05, 0.016, 0.022, gunDark, 0, 0.1, z, 0, 0, 0, null, 0.003);",
+"    for (const sx of [-1, 1]) K.box(0.006, 0.02, 0.022, gunDark, sx * 0.025, 0.092, z, 0, 0, 0, null, 0.0015);",
+"    K.cyl(0.003, 0.003, 0.062, gunMid, 0, 0.088, z, null, 8, 'x');"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "    K.box(0.045, 0.018, 0.018, gunMid, 0, 0.117, z, 0, 0, 0, null, 0.003);",
+"new": [
+"    K.box(0.03, 0.01, 0.018, gunDark, 0, 0.11, z, 0, 0, 0, null, 0.002);"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "    K.tor(0.028, 0.006, gunMid, 0, 0.14, z);",
+"new": [
+"    K.lathe([[0.0255, z - 0.009], [0.0315, z - 0.009], [0.033, z - 0.007], [0.033, z + 0.007], [0.0315, z + 0.009], [0.0255, z + 0.009]], gunDark, { y: 0.14, seg: 20 });"
+]
+},
+{
+"file": "studio/weapon-longarms.js",
+"old": "    for (const sx of [-1, 1]) K.cyl(0.004, 0.004, 0.008, gunDark, sx * 0.03, 0.149, z, null, 8, 'x');",
+"new": [
+"    for (const sx of [-1, 1]) K.cyl(0.0035, 0.0035, 0.006, gunMid, sx * 0.0335, 0.14, z, null, 8, 'x');"
+]
+}
+]

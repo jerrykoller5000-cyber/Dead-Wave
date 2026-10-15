@@ -1,0 +1,26 @@
+== t194 2026-10-15T04:34:37.7845870-05:00
+check-players: 294 player.position reads, all in the allowed places
+ok    t194    35 pass   0 fail  77.1s
+
+1 checks: 35 pass, 0 fail
+== t218 2026-10-15T04:35:55.7906144-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t218    42 pass   2 fail  194.1s
+
+1 checks: 42 pass, 2 fail
+
+by owner:
+  unassigned
+    t218   2 fail  FAIL uzi akimbo: each gun's well comes onto its own side's pouch (0.048 / 0.148 m)
+           FAIL uzi akimbo: each gun's well comes onto its own side's pouch (0.048 / 0.148 m)
+           FAIL revolver akimbo: each gun's well comes onto its own side's pouch (0.021 / 0.107 m)
+== t121 2026-10-15T04:39:10.7932250-05:00
+check-players: 294 player.position reads, all in the allowed places
+ok    t121    31 pass   0 fail  22.7s
+
+1 checks: 31 pass, 0 fail
+== t192 2026-10-15T04:39:34.4299298-05:00
+check-players: 294 player.position reads, all in the allowed places
+ok    t192    10 pass   0 fail  41.3s
+
+1 checks: 10 pass, 0 fail

@@ -45,3 +45,21 @@ Grokbot found the marine is left-handed on screen: his gun arm is his anatomical
 Rule 12 says the title appears within 5 s warm; on your PC it takes 6.3 s warm and 6.4 s cold, because the 100 shader variants compile every time (1.6 s) and nothing is cached. Is about 6 s fine for 1.0, or do you want it under 5 s (a task: precompile less at the title, the rest behind it)? The fps is fine (60 in a night 5, 53 with 48 dead on the title's scene).
 
 **Answer (2026-10-06T04:17Z):** Jerry: 6 is acceptable
+
+## Q-8 · answered · 2026-10-13T10:01Z · chatgpt
+
+Apply GP-19901 tested range integration to the owner-reserved index/world hooks, preserving active GB-167 selector work? Exact37+5patches,34unit/nativeproofs and screenshots ready; owner approvals pending.
+
+**Answer (2026-10-13T10:11Z):** Jerry explicitly approved: Apply the tested range integration. Authorizes the focused 37 index and five world hooks while preserving GB-167 selector edits; owner reviews remain requested.
+
+## Q-9 · answered · 2026-10-13T15:40Z · chatgpt
+
+GP-19907 tested firing-line barrier is ready; awaiting Jerry's reply to the chat approval for focused Claude/Cursor-owned world and index integration (AGENTS2), plus changed line-rule/overhead fixture expectations for lead review. Fifty focused tests,12 weapons,21 movement cases pass; preview after-overview.png.
+
+**Answer (2026-10-14T01:29Z):** Jerry explicitly approved in chat: Apply the tested firing-line changes. Authorizes the focused world/index integration and changed barrier/line-rule tests; preserve current Claude intro and Grokbot selector changes.
+
+## Q-10 · answered · 2026-10-14T04:01Z · chatgpt
+
+GP19910: authorize the two tested world/training-ballistics.js target-plane edits? Claude ownership approval pending;43tests/90realimpacts pass. Async approval in chat ready.
+
+**Answer (2026-10-14T04:04Z):** Jerry approved in chat: Apply the tested scoring fix. Two target-plane edits applied under that override.

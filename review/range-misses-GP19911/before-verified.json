@@ -1,0 +1,357 @@
+{
+  "cases": [
+    {
+      "weapon": "pistol",
+      "id": "bullseye",
+      "lane": 0,
+      "zone": "head",
+      "started": {
+        "ok": true,
+        "id": "1791952202125-1"
+      },
+      "aim": [
+        5.999999833150452,
+        -197.45000006506476,
+        -632
+      ],
+      "view": [
+        -2.3243364038758268e-8,
+        1.4409337365745377e-8,
+        0.9923079237217467
+      ],
+      "before": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "pistol",
+          "id": "bullseye",
+          "mode": "precision",
+          "duration": 35,
+          "waves": 10,
+          "exposure": 2,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "zone": "bull",
+          "speedBonus": 0
+        },
+        "id": "1791952202125-1",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 0.4833333333333686,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "exposed",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 0,
+          "shots": 0,
+          "units": 0,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "after": {
+        "state": "ACTIVE",
+        "drill": {
+          "weapon": "pistol",
+          "id": "bullseye",
+          "mode": "precision",
+          "duration": 35,
+          "waves": 10,
+          "exposure": 2,
+          "gap": 0.45,
+          "group": 1,
+          "minHits": 1,
+          "maxEvents": 1,
+          "clearBonus": 10,
+          "missPenalty": 3,
+          "wrongZonePenalty": 2,
+          "contact": 0.6,
+          "zone": "bull",
+          "speedBonus": 0
+        },
+        "id": "1791952202125-1",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "elapsed": 1.083333333333411,
+        "countdown": 0,
+        "wave": 1,
+        "activation": 1,
+        "plan": {
+          "ids": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "zone": "bull",
+          "priority": null,
+          "exposure": 35
+        },
+        "phase": "exposed",
+        "score": 0,
+        "efficiency": 0,
+        "stats": {
+          "base": 0,
+          "bonuses": 0,
+          "deductions": 2,
+          "shots": 1,
+          "units": 1,
+          "attackSeconds": 0,
+          "contactSeconds": 0,
+          "cleared": 0,
+          "missed": 0
+        },
+        "result": null,
+        "targets": [
+          {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 1,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 2,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 3,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          {
+            "index": 4,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          }
+        ]
+      },
+      "shots": [
+        {
+          "from": [
+            3.2605083655538913,
+            -198.89540000271182,
+            -639.9746015491713
+          ],
+          "dir": [
+            0.32022057137230203,
+            0.168953544615674,
+            0.9321552904059474
+          ],
+          "packet": {
+            "run": "1791952202125-1",
+            "phase": "ACTIVE",
+            "weapon": "pistol",
+            "shot": 1,
+            "activation": 1
+          },
+          "event": 3
+        }
+      ],
+      "hits": [
+        {
+          "index": 5,
+          "point": {
+            "x": 5.999999833150525,
+            "y": -197.45000006506467,
+            "z": -632
+          },
+          "token": {
+            "run": "1791952202125-1",
+            "phase": "ACTIVE",
+            "weapon": "pistol",
+            "shot": 1,
+            "activation": 1
+          },
+          "sc": {
+            "zone": "head",
+            "points": 10,
+            "mult": 1,
+            "total": 10,
+            "lane": 1,
+            "range": 8
+          },
+          "ok": false,
+          "state": "ACTIVE",
+          "phase": "exposed",
+          "activation": 1,
+          "plan": {
+            "ids": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "zone": "bull",
+            "priority": null,
+            "exposure": 35
+          },
+          "slot": {
+            "index": 0,
+            "hits": 0,
+            "contact": 0,
+            "done": false,
+            "clearAt": null,
+            "bonus": false
+          },
+          "base": 0,
+          "deduction": 2
+        }
+      ],
+      "pops": [],
+      "safe": {
+        "self": false,
+        "yaw": 0.33745605185238475
+      },
+      "bank": [
+        {
+          "state": "down",
+          "visible": false,
+          "x": 6,
+          "z": 8
+        },
+        {
+          "state": "down",
+          "visible": false,
+          "x": 3,
+          "z": 12
+        },
+        {
+          "state": "down",
+          "visible": false,
+          "x": 0,
+          "z": 16
+        },
+        {
+          "state": "down",
+          "visible": false,
+          "x": -3,
+          "z": 20
+        },
+        {
+          "state": "down",
+          "visible": false,
+          "x": -6,
+          "z": 25
+        },
+        {
+          "state": "up",
+          "visible": true,
+          "x": 6,
+          "z": 8
+        },
+        {
+          "state": "up",
+          "visible": true,
+          "x": 3,
+          "z": 12
+        },
+        {
+          "state": "up",
+          "visible": true,
+          "x": 0,
+          "z": 16
+        },
+        {
+          "state": "up",
+          "visible": true,
+          "x": -3,
+          "z": 20
+        },
+        {
+          "state": "up",
+          "visible": true,
+          "x": -6,
+          "z": 25
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

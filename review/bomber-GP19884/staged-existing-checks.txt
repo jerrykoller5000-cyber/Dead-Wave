@@ -1,0 +1,12 @@
+t109
+PASS the chain takes the crowd: 6/6
+PASS the streak rises by the whole chain: 6 (want 6)
+PASS a bomber a turret kills: the chain still goes off, the streak stays 0
+PASS a bomber he shoots at a cave mouth never pokes the cave 
+PASS no page errors
+t215
+PASS read index.html and the scripts and styles the game loaded (213 files)
+PASS no broken characters in them
+PASS the HUD reads clean: timeLine "Daylight · 08:16 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+Errors []

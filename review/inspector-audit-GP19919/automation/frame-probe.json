@@ -1,0 +1,64 @@
+{
+  "value": {
+    "subject": {
+      "id": "marine",
+      "name": "The marine (live)",
+      "kind": "marine",
+      "variant": null,
+      "mode": null,
+      "center": {
+        "x": -26.0677910859864,
+        "y": -199.1362029368195,
+        "z": -632.0049203113458
+      },
+      "size": {
+        "x": 1.1554035193675567,
+        "y": 1.783981750692078,
+        "z": 0.8139000703390593
+      },
+      "yaw": 0,
+      "info": {
+        "meshes": 212,
+        "drawables": 212,
+        "tris": 160296,
+        "points": 0,
+        "segments": 0,
+        "materials": 67
+      }
+    },
+    "showMarine": true,
+    "playerVisible": true,
+    "loop": false,
+    "renderer": "WebGPURenderer",
+    "hostCam": {
+      "x": -23.416372858922742,
+      "y": -197.29969048130667,
+      "z": -628.845083113773,
+      "tx": -26.0677910859864,
+      "ty": -199.1362029368195,
+      "tz": -632.0049203113458,
+      "fov": 40
+    },
+    "errors": []
+  },
+  "shot": {
+    "ok": true,
+    "shots": [
+      {
+        "file": "review/inspector-audit-GP19919/automation/frame-cdp.png",
+        "cam": {
+          "x": -23.097258474327777,
+          "y": -197.1007546427569,
+          "z": -628.4997571974648,
+          "tx": -26.036871409669164,
+          "ty": -199.13688599126914,
+          "tz": -632.0030514739942,
+          "fov": 35
+        },
+        "label": "The marine (live)",
+        "thumb": null
+      }
+    ],
+    "ms": 562
+  }
+}

@@ -68,12 +68,12 @@ export function fitWeaponSling(T, spot, vest, clipMaterial) {
   // Short leads leave each gun toward the body, clear of the receiver/optic/drum.
   // The rest of the sling runs under the arm, across the chest and over that
   // shoulder, returning to the forward mount. Both carry slots mirror the route.
-  const lower=at(.225,.86,-.17);
+  const lower=at(.222,.89,-.19);
   const rear=a.clone().lerp(lower,.3);
-  const shoulder=at(.205,1.185,-.145);
+  const shoulder=at(.205,1.155,-.135);
   const front=b.clone().lerp(shoulder,.28);
   const points=[a,rear,lower,at(.235,.98,.115),
-    at(.17,1.12,vest?.22:.16),at(.175,1.185,.12),at(.18,1.205,-.035),
+    at(.19,1.09,vest?.224:.158),at(.205,1.151,.105),at(.212,1.177,-.015),
     shoulder,front,b];
   const inverse=spot.g.matrix.clone().invert();
   const geometry=ribbon(T,points);geometry.applyMatrix4(inverse);

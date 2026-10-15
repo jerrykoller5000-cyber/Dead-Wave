@@ -1,0 +1,17 @@
+{
+  "indexOnlyOneHook": true,
+  "files": [
+    {
+      "file": "index.html",
+      "hash": "b14e2e4f71dd4834d963ff89e2b730876e20a25167e145c81c9a465f947486d1"
+    },
+    {
+      "file": "game/screamer-behavior.js",
+      "hash": "81b5480a6ff228f128455f2d3bea6e7f504d2267666dfc9cc4bde34ea13692e9"
+    },
+    {
+      "file": "game/bomber-behavior.js",
+      "hash": "573c92e679c3b286e0358b368d44da885adc4661e944faa3e263aa3370ba79c2"
+    }
+  ]
+}

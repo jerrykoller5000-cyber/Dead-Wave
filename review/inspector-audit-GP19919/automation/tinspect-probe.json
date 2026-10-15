@@ -1,0 +1,572 @@
+{
+  "url": "/tools/tests/test-31404.html",
+  "at": "2026-10-14T15:35:50.013Z",
+  "snapshots": [
+    {
+      "tt": false,
+      "inspect": false,
+      "title": "Grave Shift",
+      "load": {
+        "loadId": "mv89uwz5-dwxvm",
+        "state": "loading",
+        "sequence": 14,
+        "errorCode": null,
+        "stages": {
+          "terrain": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          "world": {
+            "state": "active",
+            "completedUnits": 2,
+            "totalUnits": 5,
+            "startedAt": 1388.699999999255,
+            "finishedAt": null
+          },
+          "zombies": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          "shaders": {
+            "state": "waiting",
+            "completedUnits": 0,
+            "totalUnits": 3,
+            "startedAt": null,
+            "finishedAt": null
+          }
+        },
+        "steps": [
+          {
+            "id": "terrain",
+            "stageId": "terrain",
+            "state": "complete",
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          {
+            "id": "rocks",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1388.699999999255,
+            "finishedAt": 1508.8999999985099
+          },
+          {
+            "id": "trees",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1509,
+            "finishedAt": 2229.89999999851
+          },
+          {
+            "id": "actors",
+            "stageId": "zombies",
+            "state": "complete",
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          {
+            "id": "foliage",
+            "stageId": "world",
+            "state": "active",
+            "startedAt": 4507.29999999702,
+            "finishedAt": null
+          },
+          {
+            "id": "pois",
+            "stageId": "world",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "setup",
+            "stageId": "world",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "compile",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "loop",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "warmup",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          }
+        ]
+      },
+      "opening": true,
+      "phase": "video",
+      "percent": "55%",
+      "status": "Preparing equipment",
+      "err": [],
+      "body": "PRESS ANY KEY OR CLICK TO BEGIN\n\nGRAVE SHIFT\n\nPREPARING THE WORLD…\n\nTerrain\nComplete · 1 / 1\nWorld\nIn progress · 2 / 5\nEnemies\nComplete · 1 / 1\nGraphics\nWaiting · 0 / 3\nSOUND ON\n2X\nHEADSHOT"
+    },
+    {
+      "tt": false,
+      "inspect": false,
+      "title": "Grave Shift",
+      "load": {
+        "loadId": "mv89uwz5-dwxvm",
+        "state": "loading",
+        "sequence": 18,
+        "errorCode": null,
+        "stages": {
+          "terrain": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          "world": {
+            "state": "active",
+            "completedUnits": 4,
+            "totalUnits": 5,
+            "startedAt": 1388.699999999255,
+            "finishedAt": null
+          },
+          "zombies": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          "shaders": {
+            "state": "waiting",
+            "completedUnits": 0,
+            "totalUnits": 3,
+            "startedAt": null,
+            "finishedAt": null
+          }
+        },
+        "steps": [
+          {
+            "id": "terrain",
+            "stageId": "terrain",
+            "state": "complete",
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          {
+            "id": "rocks",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1388.699999999255,
+            "finishedAt": 1508.8999999985099
+          },
+          {
+            "id": "trees",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1509,
+            "finishedAt": 2229.89999999851
+          },
+          {
+            "id": "actors",
+            "stageId": "zombies",
+            "state": "complete",
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          {
+            "id": "foliage",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 4507.29999999702,
+            "finishedAt": 5224.099999997765
+          },
+          {
+            "id": "pois",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 5224.39999999851,
+            "finishedAt": 9415.199999999255
+          },
+          {
+            "id": "setup",
+            "stageId": "world",
+            "state": "active",
+            "startedAt": 9415.39999999851,
+            "finishedAt": null
+          },
+          {
+            "id": "compile",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "loop",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "warmup",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          }
+        ]
+      },
+      "opening": true,
+      "phase": "video",
+      "percent": "72%",
+      "status": "Preparing scene",
+      "err": [],
+      "body": "PRESS ANY KEY OR CLICK TO BEGIN\n\nGRAVE SHIFT\n\nPREPARING THE WORLD…\n\nTerrain\nComplete · 1 / 1\nWorld\nIn progress · 4 / 5\nEnemies\nComplete · 1 / 1\nGraphics\nWaiting · 0 / 3\nSOUND ON\n2X\nHEADSHOT"
+    },
+    {
+      "tt": false,
+      "inspect": false,
+      "title": "Grave Shift",
+      "load": {
+        "loadId": "mv89uwz5-dwxvm",
+        "state": "loading",
+        "sequence": 22,
+        "errorCode": null,
+        "stages": {
+          "terrain": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          "world": {
+            "state": "complete",
+            "completedUnits": 5,
+            "totalUnits": 5,
+            "startedAt": 1388.699999999255,
+            "finishedAt": 9849.29999999702
+          },
+          "zombies": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          "shaders": {
+            "state": "active",
+            "completedUnits": 0,
+            "totalUnits": 3,
+            "startedAt": 9849.599999997765,
+            "finishedAt": null
+          }
+        },
+        "steps": [
+          {
+            "id": "terrain",
+            "stageId": "terrain",
+            "state": "complete",
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          {
+            "id": "rocks",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1388.699999999255,
+            "finishedAt": 1508.8999999985099
+          },
+          {
+            "id": "trees",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1509,
+            "finishedAt": 2229.89999999851
+          },
+          {
+            "id": "actors",
+            "stageId": "zombies",
+            "state": "complete",
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          {
+            "id": "foliage",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 4507.29999999702,
+            "finishedAt": 5224.099999997765
+          },
+          {
+            "id": "pois",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 5224.39999999851,
+            "finishedAt": 9415.199999999255
+          },
+          {
+            "id": "setup",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 9415.39999999851,
+            "finishedAt": 9849.29999999702
+          },
+          {
+            "id": "compile",
+            "stageId": "shaders",
+            "state": "active",
+            "startedAt": 9849.599999997765,
+            "finishedAt": null
+          },
+          {
+            "id": "loop",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          },
+          {
+            "id": "warmup",
+            "stageId": "shaders",
+            "state": "waiting",
+            "startedAt": null,
+            "finishedAt": null
+          }
+        ]
+      },
+      "opening": true,
+      "phase": "video",
+      "percent": "80%",
+      "status": "Preparing scene",
+      "err": [],
+      "body": "PRESS ANY KEY OR CLICK TO BEGIN\n\nGRAVE SHIFT\n\nPREPARING GRAPHICS…\n\nTerrain\nComplete · 1 / 1\nWorld\nComplete · 5 / 5\nEnemies\nComplete · 1 / 1\nGraphics\nIn progress · 0 / 3\nSOUND ON\n2X\nHEADSHOT"
+    },
+    {
+      "tt": true,
+      "inspect": false,
+      "title": "Grave Shift",
+      "load": {
+        "loadId": "mv89uwz5-dwxvm",
+        "state": "ready",
+        "sequence": 29,
+        "errorCode": null,
+        "stages": {
+          "terrain": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          "world": {
+            "state": "complete",
+            "completedUnits": 5,
+            "totalUnits": 5,
+            "startedAt": 1388.699999999255,
+            "finishedAt": 9849.29999999702
+          },
+          "zombies": {
+            "state": "complete",
+            "completedUnits": 1,
+            "totalUnits": 1,
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          "shaders": {
+            "state": "complete",
+            "completedUnits": 3,
+            "totalUnits": 3,
+            "startedAt": 9849.599999997765,
+            "finishedAt": 13409.599999997765
+          }
+        },
+        "steps": [
+          {
+            "id": "terrain",
+            "stageId": "terrain",
+            "state": "complete",
+            "startedAt": 514.3999999985099,
+            "finishedAt": 1388.5
+          },
+          {
+            "id": "rocks",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1388.699999999255,
+            "finishedAt": 1508.8999999985099
+          },
+          {
+            "id": "trees",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 1509,
+            "finishedAt": 2229.89999999851
+          },
+          {
+            "id": "actors",
+            "stageId": "zombies",
+            "state": "complete",
+            "startedAt": 2230.199999999255,
+            "finishedAt": 4507.099999997765
+          },
+          {
+            "id": "foliage",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 4507.29999999702,
+            "finishedAt": 5224.099999997765
+          },
+          {
+            "id": "pois",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 5224.39999999851,
+            "finishedAt": 9415.199999999255
+          },
+          {
+            "id": "setup",
+            "stageId": "world",
+            "state": "complete",
+            "startedAt": 9415.39999999851,
+            "finishedAt": 9849.29999999702
+          },
+          {
+            "id": "compile",
+            "stageId": "shaders",
+            "state": "complete",
+            "startedAt": 9849.599999997765,
+            "finishedAt": 12588.199999999255
+          },
+          {
+            "id": "loop",
+            "stageId": "shaders",
+            "state": "complete",
+            "startedAt": 12588.29999999702,
+            "finishedAt": 12597.39999999851
+          },
+          {
+            "id": "warmup",
+            "stageId": "shaders",
+            "state": "complete",
+            "startedAt": 12597.5,
+            "finishedAt": 13409.599999997765
+          }
+        ]
+      },
+      "opening": true,
+      "phase": "video",
+      "percent": "59%",
+      "status": "Preparing scene",
+      "err": [],
+      "body": "PRESS ANY KEY OR CLICK TO BEGIN\n\nGRAVE SHIFT\n\nREADY\n\nTerrain\nComplete · 1 / 1\nWorld\nComplete · 5 / 5\nEnemies\nComplete · 1 / 1\nGraphics\nComplete · 3 / 3\nSOUND ON\n2X\nHEADSHOT"
+    }
+  ],
+  "network": [
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/assets/insignia/pgb-patch.png"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/version.json"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/package.json"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/__zsounds"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/z-sounds/index.json"
+    },
+    {
+      "status": 404,
+      "url": "http://127.0.0.1:38483/tools/tests/z-sounds/levels.json"
+    },
+    {
+      "failure": "net::ERR_ABORTED",
+      "type": "Media"
+    }
+  ],
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "No available adapters."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer:\nWebGPU unavailable.\nUsing WebGL2 fallback."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: ? shader variants compiled, 38 bodies pooled, 1 warm frames, lights visible 23/23, shadows true | post 6ms pools 2688ms compile 38ms warm frame 0ms | load:?"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 121ms | trees 842ms | player+weapons+zombie types 3119ms | foliage scattered 3836ms | POIs+minimap+foliage chunks 8027ms | contact shading + rest of setup 8461ms | post + pools + compile + warm frame 11200ms | ready 11209ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: ? variants after 9 warm frames | load:? a-fresh:? a-flash:? a-faded:? a-kill-generic:? a-kill-melee:? a-kill-explosive:? a-fx:? a-corpse:?"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: ? shader variants compiled after 30 warm frames | load:? a-fresh:? a-flash:? a-faded:? a-kill-generic:? a-kill-melee:? a-kill-explosive:? a-fx:? a-corpse:? fresh:? flash:? faded:? tree-fade:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? kill-melee:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? kill-melee:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? effects:? corpses:? corpses2:?"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 30 warm frames, ? variants | load:? a-fresh:? a-flash:? a-faded:? a-kill-generic:? a-kill-melee:? a-kill-explosive:? a-fx:? a-corpse:? fresh:? flash:? faded:? tree-fade:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? kill-melee:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? kill-melee:? kill-explosive:? kill-chainsaw:? kill-pellet:? kill-generic:? effects:? corpses:? corpses2:?"
+    }
+  ],
+  "tinspect": "PASS TT.inspectHost is there\nPASS every builder the inspector needs is in the game\nFAIL threw TypeError: Cannot read properties of undefined (reading 'attribute')\n    at fadedMaterial (http://127.0.0.1:38483/game/training-containment.js:71:21)\n    at http://127.0.0.1:38483/game/training-containment.js:83:60\n    at Proxy.traverse (http://127.0.0.1:38483/tools/tests/fakethree.mjs:306:18)\n    at Proxy.traverse (http://127.0.0.1:38483/tools/tests/fakethree.mjs:306:69)\n    at createTrainingContainment (http://127.0.0.1:38483/game/training-containment.js:82:26)\n    at ensureTrainingContainment (http://127.0.0.1:38483/tools/tests/test-31404.html?debug=1&raf=timer:51496:70)\n    at enterTraining (http://127.0.0.1:38483/tools/tests/test-31404.html?debug=1&raf=timer:50973:7)\n    at Object.enterTraining (http://127.0.0.1:38483/tools/tests/test-31404.html?debug=1&raf=timer:52229:11)\n    at start (http://127.0.0.1:38483/studio/inspector/inspector.js:98:8)\n    at async <anonymous>:17:17"
+}

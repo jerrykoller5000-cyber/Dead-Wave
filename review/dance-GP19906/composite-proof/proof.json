@@ -1,0 +1,1347 @@
+{
+  "started": "2026-10-13T14:52:21.861Z",
+  "videoSha256": "e9fbb4c5e0ac158d18420bf4252ab14274b546d8e7a9b03946e0382b0f373d4f",
+  "auditSha256": "79e95c6a4cfc51b8d7a74bd56ce8d8b32a65ca743b0a2ece7740ff114d446ad5",
+  "auditSourceHash": "d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070",
+  "selection": "Native pose audit: hip left/right; standing near/far; lowest/highest visible source vertex; final freeze at 19.8 seconds.",
+  "candidates": [
+    {
+      "label": "left",
+      "seconds": 0,
+      "beat": 0,
+      "hipProjection": {
+        "world": [
+          -0.80625,
+          0.486,
+          0.042899999999999994
+        ],
+        "pixels": [
+          461.7701577059818,
+          415.15737509498433
+        ],
+        "depth": 4.9520804476396805
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            -0.49689964356062727,
+            -0.5032258343128745
+          ],
+          "max": [
+            -0.11194645842867335,
+            0.5394360070195199
+          ]
+        },
+        "pixels": {
+          "left": 321.9842281211986,
+          "right": 568.3542666056491,
+          "top": 165.80303747297285,
+          "bottom": 541.1613003526347
+        },
+        "minDepth": 4.296120671527079,
+        "maxDepth": 5.336187525880514,
+        "outsideVertices": 0,
+        "minMarginPixels": 165.80303747297285
+      }
+    },
+    {
+      "label": "right",
+      "seconds": 9.433333333333334,
+      "beat": 16.24456145388889,
+      "hipProjection": {
+        "world": [
+          0.9279740506506575,
+          0.507855551098247,
+          0.18060449460727554
+        ],
+        "pixels": [
+          859.5050026960781,
+          466.5916141713854
+        ],
+        "depth": 4.109236861644619
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            0.10285668393730203,
+            -0.7258764206305592
+          ],
+          "max": [
+            0.7044622430605569,
+            0.5401509749229841
+          ]
+        },
+        "pixels": {
+          "left": 705.8282777198733,
+          "right": 1090.8558355587566,
+          "top": 165.54564902772572,
+          "bottom": 621.3155114270013
+        },
+        "minDepth": 3.417157460492736,
+        "maxDepth": 4.340164903754153,
+        "outsideVertices": 0,
+        "minMarginPixels": 98.6844885729987
+      }
+    },
+    {
+      "label": "near",
+      "seconds": 9.433333333333334,
+      "beat": 16.24456145388889,
+      "hipProjection": {
+        "world": [
+          0.9279740506506575,
+          0.507855551098247,
+          0.18060449460727554
+        ],
+        "pixels": [
+          859.5050026960781,
+          466.5916141713854
+        ],
+        "depth": 4.109236861644619
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            0.10285668393730203,
+            -0.7258764206305592
+          ],
+          "max": [
+            0.7044622430605569,
+            0.5401509749229841
+          ]
+        },
+        "pixels": {
+          "left": 705.8282777198733,
+          "right": 1090.8558355587566,
+          "top": 165.54564902772572,
+          "bottom": 621.3155114270013
+        },
+        "minDepth": 3.417157460492736,
+        "maxDepth": 4.340164903754153,
+        "outsideVertices": 0,
+        "minMarginPixels": 98.6844885729987
+      }
+    },
+    {
+      "label": "far",
+      "seconds": 7.966666666666667,
+      "beat": 13.718905256111112,
+      "hipProjection": {
+        "world": [
+          -0.9198536863038359,
+          0.5182416037019377,
+          -0.170382039485234
+        ],
+        "pixels": [
+          466.6643386280063,
+          395.1446617678205
+        ],
+        "depth": 5.182912888100744
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            -0.44348375223131875,
+            -0.420104976497286
+          ],
+          "max": [
+            -0.14963304530783375,
+            0.5760542428381651
+          ]
+        },
+        "pixels": {
+          "left": 356.170398571956,
+          "right": 544.2348510029864,
+          "top": 152.62047257826057,
+          "bottom": 511.23779153902296
+        },
+        "minDepth": 4.540251578114013,
+        "maxDepth": 5.581095294883379,
+        "outsideVertices": 0,
+        "minMarginPixels": 152.62047257826057
+      }
+    },
+    {
+      "label": "lowest-screen",
+      "seconds": 3.5,
+      "beat": 6.027134108333334,
+      "hipProjection": {
+        "world": [
+          0.8009948131707176,
+          0.5207390356678382,
+          0.23474002288226795
+        ],
+        "pixels": [
+          819.8920808482399,
+          462.6910091795278
+        ],
+        "depth": 4.110996214361895
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            0.07596494046303225,
+            -0.7899968242067341
+          ],
+          "max": [
+            0.5051200783791094,
+            0.5469269287497911
+          ]
+        },
+        "pixels": {
+          "left": 688.6175618963407,
+          "right": 963.27685016263,
+          "top": 163.1063056500752,
+          "bottom": 644.3988567144243
+        },
+        "minDepth": 3.3999152494751588,
+        "maxDepth": 4.54759013590362,
+        "outsideVertices": 0,
+        "minMarginPixels": 75.60114328557574
+      }
+    },
+    {
+      "label": "highest-screen",
+      "seconds": 14.6,
+      "beat": 25.141759423333333,
+      "hipProjection": {
+        "world": [
+          -0.04181635336065557,
+          1.1869233651760447,
+          -0.09071230352688792
+        ],
+        "pixels": [
+          640.0510855341905,
+          253.41308914535122
+        ],
+        "depth": 4.622990793481475
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            -0.19100939486838767,
+            -0.5473030590543845
+          ],
+          "max": [
+            0.18218617053532854,
+            0.7498998108548799
+          ]
+        },
+        "pixels": {
+          "left": 517.7539872842319,
+          "right": 756.5991491426103,
+          "top": 90.03606809224324,
+          "bottom": 557.0291012595784
+        },
+        "minDepth": 4.26155376427114,
+        "maxDepth": 5.21871862996811,
+        "outsideVertices": 0,
+        "minMarginPixels": 90.03606809224324
+      }
+    },
+    {
+      "label": "final-freeze",
+      "seconds": 19.8,
+      "beat": 34.09635867,
+      "hipProjection": {
+        "world": [
+          -0.042,
+          0.3926130823790973,
+          -0.0907
+        ],
+        "pixels": [
+          640.0070968748861,
+          449.17956400976703
+        ],
+        "depth": 4.773223948589055
+      },
+      "sourceFraming": {
+        "ndc": {
+          "min": [
+            -0.2529335444031586,
+            -0.5342330058929097
+          ],
+          "max": [
+            0.43998574508415655,
+            0.027197079264071708
+          ]
+        },
+        "pixels": {
+          "left": 478.1225315819785,
+          "right": 921.5908768538602,
+          "top": 350.2090514649342,
+          "bottom": 552.3238821214475
+        },
+        "minDepth": 4.314457173962808,
+        "maxDepth": 5.084075884975302,
+        "outsideVertices": 0,
+        "minMarginPixels": 167.67611787855253
+      }
+    }
+  ],
+  "screens": [
+    {
+      "label": "left",
+      "file": "1280x720-left-0.000s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 0,
+      "audioTime": 0,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 47638,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 320,
+        "right": 569,
+        "top": 165,
+        "bottom": 543
+      },
+      "sourceMargin": 165,
+      "actorRect": {
+        "left": 352,
+        "right": 577,
+        "top": 134.10000610351562,
+        "bottom": 475.2000061035156
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 134.10000610351562,
+      "textGap": 112.75311889648441,
+      "textOverlap": {
+        "width": 225,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "right",
+      "file": "1280x720-right-9.433s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 9.433333,
+      "audioTime": 9.433333,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 67042,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 705,
+        "right": 1091,
+        "top": 164,
+        "bottom": 621
+      },
+      "sourceMargin": 98,
+      "actorRect": {
+        "left": 698.5,
+        "right": 1046.8000000000002,
+        "top": 133.20000610351562,
+        "bottom": 545.4000061035157
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 133.20000610351562,
+      "textGap": 42.55311889648431,
+      "textOverlap": {
+        "width": 348.3000000000002,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "near",
+      "file": "1280x720-near-9.433s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 9.433333,
+      "audioTime": 9.433333,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 67042,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 705,
+        "right": 1091,
+        "top": 164,
+        "bottom": 621
+      },
+      "sourceMargin": 98,
+      "actorRect": {
+        "left": 698.5,
+        "right": 1046.8000000000002,
+        "top": 133.20000610351562,
+        "bottom": 545.4000061035157
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 133.20000610351562,
+      "textGap": 42.55311889648431,
+      "textOverlap": {
+        "width": 348.3000000000002,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "far",
+      "file": "1280x720-far-7.967s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 7.966666,
+      "audioTime": 7.966666,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 37872,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 353,
+        "right": 554,
+        "top": 152,
+        "bottom": 520
+      },
+      "sourceMargin": 152,
+      "actorRect": {
+        "left": 381.7,
+        "right": 563.5,
+        "top": 122.40000610351564,
+        "bottom": 454.5000061035156
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 122.40000610351564,
+      "textGap": 133.4531188964844,
+      "textOverlap": {
+        "width": 181.8,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "lowest-screen",
+      "file": "1280x720-lowest-screen-3.500s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 3.5,
+      "audioTime": 3.5,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 66744,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 686,
+        "right": 964,
+        "top": 160,
+        "bottom": 644
+      },
+      "sourceMargin": 75,
+      "actorRect": {
+        "left": 681.4,
+        "right": 932.5,
+        "top": 129.60000610351562,
+        "bottom": 566.1000061035156
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 129.60000610351562,
+      "textGap": 21.853118896484375,
+      "textOverlap": {
+        "width": 251.10000000000002,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "highest-screen",
+      "file": "1280x720-highest-screen-14.600s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 14.6,
+      "audioTime": 14.6,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 56035,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 512,
+        "right": 766,
+        "top": 90,
+        "bottom": 556
+      },
+      "sourceMargin": 90,
+      "actorRect": {
+        "left": 524.8,
+        "right": 754.3000000000001,
+        "top": 66.60000610351562,
+        "bottom": 486.90000610351564
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 66.60000610351562,
+      "textGap": 101.05311889648436,
+      "textOverlap": {
+        "width": 229.5000000000001,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "final-freeze",
+      "file": "1280x720-final-freeze-19.800s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 19.8,
+      "audioTime": 19.8,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "stageBox": {
+        "x": 64,
+        "y": -14.399993896484375,
+        "width": 1152,
+        "height": 648
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        1280,
+        720
+      ],
+      "decodedAlpha": {
+        "pixels": 47667,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 478,
+        "right": 921,
+        "top": 346,
+        "bottom": 552
+      },
+      "sourceMargin": 167,
+      "actorRect": {
+        "left": 494.2,
+        "right": 893.8000000000001,
+        "top": 297.00000610351566,
+        "bottom": 483.30000610351567
+      },
+      "cardRect": {
+        "left": 177.5625,
+        "top": 587.953125,
+        "right": 1102.4375,
+        "bottom": 687.609375,
+        "width": 924.875,
+        "height": 99.65625
+      },
+      "screenMargin": 236.69999389648433,
+      "textGap": 104.65311889648433,
+      "textOverlap": {
+        "width": 399.6000000000001,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "left",
+      "file": "900x900-left-0.000s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 0,
+      "audioTime": 0,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 47638,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 320,
+        "right": 569,
+        "top": 165,
+        "bottom": 543
+      },
+      "sourceMargin": 165,
+      "actorRect": {
+        "left": 247.5,
+        "right": 405.703125,
+        "top": 291.1640625,
+        "bottom": 531
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 247.5,
+      "textGap": 258.40625,
+      "textOverlap": {
+        "width": 158.203125,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "right",
+      "file": "900x900-right-9.433s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 9.433333,
+      "audioTime": 9.433333,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 67042,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 705,
+        "right": 1091,
+        "top": 164,
+        "bottom": 621
+      },
+      "sourceMargin": 98,
+      "actorRect": {
+        "left": 491.1328125,
+        "right": 736.03125,
+        "top": 290.53125,
+        "bottom": 580.359375
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 163.96875,
+      "textGap": 209.046875,
+      "textOverlap": {
+        "width": 244.8984375,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "near",
+      "file": "900x900-near-9.433s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 9.433333,
+      "audioTime": 9.433333,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 67042,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 705,
+        "right": 1091,
+        "top": 164,
+        "bottom": 621
+      },
+      "sourceMargin": 98,
+      "actorRect": {
+        "left": 491.1328125,
+        "right": 736.03125,
+        "top": 290.53125,
+        "bottom": 580.359375
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 163.96875,
+      "textGap": 209.046875,
+      "textOverlap": {
+        "width": 244.8984375,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "far",
+      "file": "900x900-far-7.967s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 7.966666,
+      "audioTime": 7.966666,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 37872,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 353,
+        "right": 554,
+        "top": 152,
+        "bottom": 520
+      },
+      "sourceMargin": 152,
+      "actorRect": {
+        "left": 268.3828125,
+        "right": 396.2109375,
+        "top": 282.9375,
+        "bottom": 516.4453125
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 268.3828125,
+      "textGap": 272.9609375,
+      "textOverlap": {
+        "width": 127.828125,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "lowest-screen",
+      "file": "900x900-lowest-screen-3.500s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 3.5,
+      "audioTime": 3.5,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 66744,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 686,
+        "right": 964,
+        "top": 160,
+        "bottom": 644
+      },
+      "sourceMargin": 75,
+      "actorRect": {
+        "left": 479.10937499999994,
+        "right": 655.6640625,
+        "top": 288,
+        "bottom": 594.9140625
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 244.3359375,
+      "textGap": 194.4921875,
+      "textOverlap": {
+        "width": 176.55468750000006,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "highest-screen",
+      "file": "900x900-highest-screen-14.600s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 14.6,
+      "audioTime": 14.6,
+      "running": false,
+      "selectedCard": 1,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "This game was made entirely using artificial intelligence.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 56035,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 512,
+        "right": 766,
+        "top": 90,
+        "bottom": 556
+      },
+      "sourceMargin": 90,
+      "actorRect": {
+        "left": 369,
+        "right": 530.3671875,
+        "top": 243.703125,
+        "bottom": 539.2265625
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 243.703125,
+      "textGap": 250.1796875,
+      "textOverlap": {
+        "width": 161.3671875,
+        "height": 0,
+        "area": 0
+      }
+    },
+    {
+      "label": "final-freeze",
+      "file": "900x900-final-freeze-19.800s.png",
+      "duration": 20,
+      "videoDuration": 20,
+      "audioDuration": 20,
+      "width": 1280,
+      "height": 720,
+      "crop": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "sourceStart": 9.151494,
+      "videoTime": 19.8,
+      "audioTime": 19.8,
+      "running": false,
+      "selectedCard": 2,
+      "videoBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "stageBox": {
+        "x": 45,
+        "y": 186.75,
+        "width": 810,
+        "height": 455.625
+      },
+      "errors": [],
+      "cardText": "Whether you like it...or it’s just more soulless AI slop...is up to you.",
+      "viewport": [
+        900,
+        900
+      ],
+      "decodedAlpha": {
+        "pixels": 47667,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "alphaBounds": {
+        "left": 478,
+        "right": 921,
+        "top": 346,
+        "bottom": 552
+      },
+      "sourceMargin": 167,
+      "actorRect": {
+        "left": 347.484375,
+        "right": 628.453125,
+        "top": 405.703125,
+        "bottom": 536.6953125
+      },
+      "cardRect": {
+        "left": 124.84375,
+        "top": 789.40625,
+        "right": 775.140625,
+        "bottom": 859.5,
+        "width": 650.296875,
+        "height": 70.09375
+      },
+      "screenMargin": 271.546875,
+      "textGap": 252.7109375,
+      "textOverlap": {
+        "width": 280.96875,
+        "height": 0,
+        "area": 0
+      }
+    }
+  ],
+  "errors": [],
+  "ok": true,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "summary": {
+    "sourceMargin": 75,
+    "screenMargin": 66.60000610351562,
+    "minTextGap": 21.853118896484375,
+    "maxTextOverlap": 0,
+    "correctFrame": true,
+    "correctDuration": true,
+    "transparentCorners": true
+  },
+  "finished": "2026-10-13T14:52:38.833Z"
+}

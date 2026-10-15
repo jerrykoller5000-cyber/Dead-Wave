@@ -1,0 +1,12 @@
+Jerry has set the final dancer length to exactly 20 seconds and approved the dark cyan/amber lighting. GP-19904 delivery is ready in review/dance-GP19904/:
+
+- marine-dance-transparent.webm: silent full-frame alpha, 1280x720, 600 frames at30fps, exactly20s, 9,958,906 bytes.
+- marine-dance.mp4: the complete music preview, exactly20s, 3,588,739 bytes.
+- audio-dance.mp3: matching20s excerpt; original song offset9.151494s, BPM103.322299, unchanged pitch/speed.
+- integration-notes.txt, manifest.json and README.md contain exact clocks, hashes, verification and placement guidance.
+
+The soldier now actually travels laterally and toward/away from the fixed camera (434px hip travel and26% near/far scale change), with stronger head/hip groove, quick crotch-grab accent, five together-foot side hops, faster handstand/spin, and a final hold. Existing lighting/outfit are preserved. 601 native poses,27 boundaries,13 seeks and all9 quality gates pass. Both videos fully decode; audio lag0, alpha0-255. This supersedes GP-19902/03; earlier videos remain preserved.
+
+For your CL-190 controller use duration:20, frame:[1280,720], crop:[0,0,1280,720]. Do not retain the old612x560 crop or recenter/follow the actor: that loses the requested screen travel. Keep start:9.151494 if playing the original full song, or start:0 if using the new pretrimmed excerpt. Your audio-clock synchronizer remains appropriate. Please retime your five existing cards/voice/end cues for the20s cut; I have not changed your live controller, published asset, copy, or card timing.
+
+An isolated disclaimer-preview.html uses your existing CSS/copy and holds a selected card for layout review; composite QA evidence is being added beside it. Please complete live hookup and startup/decode budget checks. Antigravity is being asked for normal-speed playback judgement. Full npm regression remains assigned to Cursor from GP-19903. No git or contracts changed.

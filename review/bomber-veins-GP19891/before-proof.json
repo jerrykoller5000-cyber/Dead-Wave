@@ -1,0 +1,2878 @@
+{
+  "loadSec": 23.783,
+  "samples": [
+    {
+      "t": 0.016200000047683717,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6720403012538454,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.0335,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6200315567861862,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.0505,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6832130734639538,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.06760000002384185,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8389953507770738,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.08380000001192092,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.060305144082958,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.09990000003576278,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.297317222673712,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.11790000003576279,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5078423168494273,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.13540000003576277,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6506654008780477,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.1525,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6999958545360614,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.16910000002384185,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6451040508624077,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.1854000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.500084557563772,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.20180000001192092,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2847256072710307,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.21810000002384186,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.0376167581192872,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.2347000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.822925711349707,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.2517000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6678554044725895,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.269,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6203801637471552,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.28590000003576277,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.682458353032114,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.3029000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8447614324046944,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.3205,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.0788385864246228,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.33680000001192095,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.318202622569956,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.378,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5295165167587583,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.39480000001192095,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6930826680932538,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.41110000002384184,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6055796553816983,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.4277000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4331572383683486,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.4444000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2043182617659576,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.4611000000238419,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9667245291995523,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.4774000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7653151055900687,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.4947000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6459147098840687,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5122000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6274982272042999,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5289000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7232012574596874,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5477000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9052162117162872,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5639000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1673135789350813,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5807000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.396651726441606,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.5978000000119209,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5845174669238389,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.614300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6904496109883649,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.6307000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6833396891330723,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.6473000000119209,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5786137797348994,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.6644000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3894446121787198,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.6807000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.146203732412168,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.6974000000357627,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9175373198273712,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.7144000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7323946960636435,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.7307000000476838,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.62915936792086,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.747300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6382961746562762,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.764,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.744579222968377,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.780800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9351149738821274,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.7974000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1729904828583395,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.8139000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4056454476817315,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.8305,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5888905943802951,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.847300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.68986620052838,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.8639000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6833776422178686,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.8809000000357627,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5740695714926896,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.8975,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.377640470218667,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.913800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.141985639959751,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.930800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9124774157770024,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.9472000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7228807422453434,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.9639000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.630008472007682,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.9805,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6378824255920209,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 0.997300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7501221809123977,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.0139000000357627,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9429563573006818,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.0308000000119208,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1786659514518696,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.047300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4196824736939995,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.0639000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.594923509707951,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.0806000000238418,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6909317218372912,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.0972000000476838,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6808122773771006,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.1139000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5675459566993528,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.130800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3724321851260388,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.1472000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.127575877281014,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.1639000000357629,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9035870699218291,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.1807000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.722116416355488,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.1975,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.628174076693405,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.214,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6413422622978922,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.230600000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7557689489011306,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.2472000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9508527118210267,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.2639000000357627,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1945300298735542,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.2805,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4208249770019026,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.2967000000476838,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.599961952372688,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.3133000000119208,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6909035841956028,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.3302000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6808529608434781,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.346800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5647650397816726,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.363,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3698901765224913,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.3796000000238418,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1335530129458893,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.396100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9088708900621983,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.4129000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7273850880212973,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.4291000000238419,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6292443299058125,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.4461000000238418,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6374344761077357,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.462600000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7499216375831839,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.479300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9413403286984678,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.4962000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1827288222574894,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.513300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4155675683809656,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.5299000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.599872603836449,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.5468000000119209,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.692407041775018,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.5635,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.677697091210875,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.580300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5600063411218787,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.596800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.353806350804481,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.6132000000476838,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1235183027228324,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.63,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8961909910926562,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.646800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7172311644287113,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.6629000000357628,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6263234374687171,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.680100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.641256575596776,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.6963000000119208,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7633872704803883,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.7136000000238418,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.961367722990526,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.7302000000476838,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2029480652837097,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.7463000000119209,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4307099454972445,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.7636000000238419,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6023069321073942,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.779800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6946274412363704,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.7964000000357627,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.676481041337845,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.8133000000119208,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.554182713112223,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.8301000000238419,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3553101478647638,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.846800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1149489848172527,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.8631000000238418,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8862087494929209,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.880100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7140053881120942,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.897,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6252812100336396,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.9132000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6486367877754405,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.929300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7692694651073637,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.9458000000119209,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9707487900953853,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.9624000000357629,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2100574370581292,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.9795,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4318374031678045,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 1.9965,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6071807895070649,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.0125,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6950090790519454,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.028700000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6747950866129553,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.044800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5512864600591996,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.061300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.358169198951599,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.078200000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1136497297339512,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.095100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8901212218639079,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.111200000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7092168693521042,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.128,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6234596139790953,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.1442000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6485873032849615,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.1605,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7711809810687182,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.177400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9678765148731885,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.193700000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2055471608560122,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.2105,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4342202922225042,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.227100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6127377211538896,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.2445,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6955651484248864,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.2607000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.669776957357391,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.278300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5412061781168793,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.295400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3364363001117514,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.312,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.1036435005602412,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.328200000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8764820022155894,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.344800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7061156991273803,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.361300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6247291234634134,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.377800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6462460166342094,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.3945,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7680524923565812,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.4105,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.9704602318662403,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.426700000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2068463145031016,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.4431000000238416,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.447783165012913,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.459400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6158073985664092,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.4765,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6970691391302628,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.4932000000476835,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6688592538527893,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.5095,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5350712981158827,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.5255,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.329676803217597,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.5416000000238417,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.0907638718929378,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.5587000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8630880707530202,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.575,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.696207547938176,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.591,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6220342488778411,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.6082000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6548773059185449,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.6252000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.7875037335236675,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.641300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.003453309164297,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.657400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2356614336343914,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.6742000000476835,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.4562383421053884,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.6905,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6256097757247965,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.7073000000119207,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6983782872142819,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.724300000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6633238677737578,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.741,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.5234834950893548,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.757600000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.320105140499114,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.7742000000476836,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.0793655275482523,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.791100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8559477005096183,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.807400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6940603429753921,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.823400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6214624220992309,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.839400000035763,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.6641085306177192,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.856,
+      "d": 11,
+      "alive": true,
+      "intensity": 0.8002490756295859,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.8726000000238416,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.0047017023760083,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.8887000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.2456005270800135,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.904800000011921,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.464590873572323,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.921200000047684,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6306201137804235,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.937100000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.698975615875634,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.9533000000119207,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.6584815660210368,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.969600000023842,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.522518130667985,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 2.9857000000476837,
+      "d": 11,
+      "alive": true,
+      "intensity": 1.3132762883296154,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.0031000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0708785144502222,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.0194000000357626,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8536691808027781,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.037,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6919415925342193,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.053100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6212663373216283,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.070200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6634726135834554,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.0867000000476836,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8012225563442193,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.103300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0115495315783027,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.119300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2540745992097324,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.1382000000476835,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4763927836761295,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.154300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6319683005535837,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.1706000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6987778935591284,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.1877000000476836,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6568436857107893,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.206100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5139057430975755,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.226,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3022057747216238,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.242100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0609804355884562,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.258300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8372057010234909,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.2745,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6828515942098592,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.290800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6201767065168197,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.307,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.664564823601381,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.323300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.808796842070721,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.339300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.022648875722151,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.355300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2625248457250406,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.371400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4833167255607256,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.3876000000238418,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6408153121004065,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.4039000000357627,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6997606339815556,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.4199000000357627,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6534144213717825,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.436,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5129198527448688,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.452100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3009474533548142,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.4685,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0625656067488678,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.4857000000476837,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8408470204092809,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.502300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6836085320489759,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.5191000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6201131160977412,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.536600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6692556561601544,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.552700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8097883494640179,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.569100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.019682016392426,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.586100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2709491255561476,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.6041000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4924614384721147,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.6202000000476837,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6427214465970035,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.6386000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6999481246426251,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.654800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6528831675410394,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.671100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5018765405857806,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.6873000000119207,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.285555374404015,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.704,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0427133916513134,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.720100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.82702505050004,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.736600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6750468085472724,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.7527000000476836,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6200432321173339,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.77,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6698011693777343,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.786800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8141295621091733,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.802800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0237612367372508,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.8189000000357627,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.266513815924157,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.8356000000238417,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4842369758774074,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.852200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6452396185177072,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.870300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.699993899283545,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.887100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6449057813270143,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.904300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4940368985141554,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.9205,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.270054669740746,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.937200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0357582522334021,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.9535,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8203018358657539,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.9695,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6751145973155237,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 3.986,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6200348479079493,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.003900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6766748727651998,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.020100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8264756064645673,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.039200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0548705054730343,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.0555,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2877112577421732,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.072200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5047138541064706,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.0883000000119205,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6477041438226117,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.104600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6999991558905883,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.120800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6417233722948905,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.137100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4825843635733853,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.154200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2673492770465042,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.170400000035762,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0302396131387561,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.186400000035762,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8125472875343156,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.203,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6665418032300735,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.219,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6202008546887601,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.236400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6832801393977352,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.2526000000238415,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8367695904216899,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.27,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0475790946618924,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.287100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.297455337622147,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.304100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5101764021248227,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.320400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.654311366826137,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.336400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6998205261762869,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.3525,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6357251267258208,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.3697000000476836,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4780131420750453,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.3865,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2574799387464992,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.403400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0176902724864705,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.4195,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8060128728514644,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.437400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6654265345574408,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.454200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6202379894061779,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.470300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6818457750788091,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.486300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8343154993602538,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.5025,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0559986095919303,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.519100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2944841929467001,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.535700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5078337104093957,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.551900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.652471169131622,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.5685,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6997853370558884,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.586100000023841,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6323071953106079,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.602700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4710275776842732,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.619,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2504529297580942,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.636800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0094185102734814,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.6535,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7984837437923866,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.670700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6598122673527411,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.6872000000476834,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.621422671199636,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.7046000000238415,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.690149652872562,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.7206000000238415,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8506996183346272,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.7367000000476835,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0687525268502314,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.752900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3098072621355712,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.770200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.526306597496558,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.787100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6631264734487785,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.803900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.698529641825659,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.82,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6288067873997345,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.836100000023841,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.463963238681977,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.854900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2462898988385074,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.871200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0067681143833407,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.887300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7878979246647178,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.905700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6561110534774273,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.921800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6217452319789285,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.9379000000357625,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6937077847300048,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.954,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8589924009011063,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.970100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.0786751504272138,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 4.986100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3194381307919403,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.004300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5336282971878767,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.020400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6635985801005309,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.037700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.697827709765717,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.053700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6252245138426664,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.069900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.456821914994216,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.085900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2320202417110135,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.103100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.9902208978792015,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.121400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7838038430996679,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.140200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6561664676907308,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.156400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6219741456487006,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.1735,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6981009315884095,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.189800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8612893681581264,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.206,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.098754556346601,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.2225,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3317807688665069,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.239400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5324627400082618,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.256200000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6645888744646415,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.272700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6984436236848548,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.289,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6289596318404922,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.305,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.461804225431111,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.321200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.239390727282566,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.337300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.9945252584235253,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.353400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7881212840091942,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.369800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.654663487108166,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.386200000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6217205665285828,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.402800000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6920900410700476,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.419100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8635941489694243,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.4372000000476834,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.09570530655802,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.453300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3330164656304984,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.4705,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5323511730807724,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.4866000000238415,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.665051816104045,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.504900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6974481396333037,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.522200000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6123231836640404,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.538300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4410716619242916,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.554400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2149523229915953,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.570700000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.9739933994006135,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.587,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7726803956042143,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.603200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6478796057596359,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.6195,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6242445319965066,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.6363000000119206,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7104416998450576,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.652300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8819809944324817,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.6726000000238415,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.1115017889686287,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.688900000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.3452496883207328,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.705,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5508049075151735,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.721100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6736922395812401,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.74,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6942885497627658,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.756200000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6091967817567372,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.7725,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4324405202871933,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.792600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.2034905259743112,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.809200000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.9659492905356295,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.825400000035763,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7677419884668104,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.842100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6426444003673781,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.858700000047683,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.6258064122275686,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.875600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.7136120792270513,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.8922000000476835,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 0.8893833010091095,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.908300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.1200667736156076,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.925600000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.35737608245391,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.942900000035762,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.5556951591755552,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.958900000035762,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.677956255344368,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.975100000023842,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.6934354037458115,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 5.991200000047684,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.604370407669817,
+      "vertices": 2208,
+      "veinParent": true
+    },
+    {
+      "t": 6.007300000011921,
+      "d": 4.4,
+      "alive": true,
+      "intensity": 1.4262557444943642,
+      "vertices": 2208,
+      "veinParent": true
+    }
+  ],
+  "errors": []
+}

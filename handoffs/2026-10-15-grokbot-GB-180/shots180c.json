@@ -1,0 +1,386 @@
+[
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/minigun-left.png",
+        "margin":  0.85,
+        "target":  "weapon:minigun",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/minigun-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:minigun",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/minigun-three.png",
+        "margin":  0.85,
+        "target":  "weapon:minigun",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m4-left.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m4-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m4-three.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/ak-left.png",
+        "margin":  0.85,
+        "target":  "weapon:ak",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/ak-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:ak",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/ak-three.png",
+        "margin":  0.85,
+        "target":  "weapon:ak",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/pistol-left.png",
+        "margin":  0.85,
+        "target":  "weapon:pistol",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/pistol-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:pistol",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/pistol-three.png",
+        "margin":  0.85,
+        "target":  "weapon:pistol",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/uzi-left.png",
+        "margin":  0.85,
+        "target":  "weapon:uzi",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/uzi-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:uzi",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/uzi-three.png",
+        "margin":  0.85,
+        "target":  "weapon:uzi",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/shotgun-left.png",
+        "margin":  0.85,
+        "target":  "weapon:shotgun",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/shotgun-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:shotgun",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/shotgun-three.png",
+        "margin":  0.85,
+        "target":  "weapon:shotgun",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/aa12-left.png",
+        "margin":  0.85,
+        "target":  "weapon:aa12",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/aa12-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:aa12",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/aa12-three.png",
+        "margin":  0.85,
+        "target":  "weapon:aa12",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/revolver-left.png",
+        "margin":  0.85,
+        "target":  "weapon:revolver",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/revolver-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:revolver",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/revolver-three.png",
+        "margin":  0.85,
+        "target":  "weapon:revolver",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/sniper-left.png",
+        "margin":  0.85,
+        "target":  "weapon:sniper",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/sniper-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:sniper",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/sniper-three.png",
+        "margin":  0.85,
+        "target":  "weapon:sniper",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/launcher-left.png",
+        "margin":  0.85,
+        "target":  "weapon:launcher",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/launcher-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:launcher",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/launcher-three.png",
+        "margin":  0.85,
+        "target":  "weapon:launcher",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/flamer-left.png",
+        "margin":  0.85,
+        "target":  "weapon:flamer",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/flamer-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:flamer",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/flamer-three.png",
+        "margin":  0.85,
+        "target":  "weapon:flamer",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/chainsaw-left.png",
+        "margin":  0.85,
+        "target":  "weapon:chainsaw",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/chainsaw-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:chainsaw",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/chainsaw-three.png",
+        "margin":  0.85,
+        "target":  "weapon:chainsaw",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/knife-left.png",
+        "margin":  0.85,
+        "target":  "weapon:knife",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/knife-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:knife",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/knife-three.png",
+        "margin":  0.85,
+        "target":  "weapon:knife",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/machete-left.png",
+        "margin":  0.85,
+        "target":  "weapon:machete",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/machete-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:machete",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/machete-three.png",
+        "margin":  0.85,
+        "target":  "weapon:machete",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m240-left.png",
+        "margin":  0.85,
+        "target":  "weapon:m240",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m240-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:m240",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/m240-three.png",
+        "margin":  0.85,
+        "target":  "weapon:m240",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/mortar-left.png",
+        "margin":  0.85,
+        "target":  "weapon:mortar",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/mortar-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:mortar",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  1200,
+        "out":  "review/gb180c/mortar-three.png",
+        "margin":  0.85,
+        "target":  "weapon:mortar",
+        "view":  "three"
+    }
+]

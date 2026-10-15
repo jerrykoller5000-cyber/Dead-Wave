@@ -1,0 +1,54 @@
+{
+  "created": "2026-10-13T12:40:11.346Z",
+  "duration": 32.53333333333333,
+  "fps": 30,
+  "frames": 976,
+  "sourceArchive": "source-final.txt",
+  "files": [
+    {
+      "file": "ui/disclaimer-dance.js",
+      "bytes": 14169,
+      "sha256": "f889537657fb8ddaea4b72c63fc1fdcd4419ae3089bad7b1f5f1478c1d2cdcf1"
+    },
+    {
+      "file": "review\\dance-GP19903\\stage.js",
+      "bytes": 8106,
+      "sha256": "b6b7eaafb4aabb7c39b8d14628d5fad29e86305e2e4c2a54ca5f22b2607e1614"
+    },
+    {
+      "file": "review\\dance-GP19903\\capture.mjs",
+      "bytes": 30887,
+      "sha256": "8583d168a764df28668b610ef84f78575b5c0643ef4f11c028b35d6a6b5954fb"
+    },
+    {
+      "file": "review\\dance-GP19903\\encode.mjs",
+      "bytes": 10125,
+      "sha256": "6f20e346034a352202b51d25896e40a99b6400c12ca5d446a2e6eae97f0f64c0"
+    },
+    {
+      "file": "review\\dance-GP19903\\outfit.json",
+      "bytes": 1444,
+      "sha256": "8e0506d7a919561f6b8bd932fdfc872dccf8d0854a15931938dbc0f3bc537aeb"
+    },
+    {
+      "file": "review\\dance-GP19903\\audio-dance.mp3",
+      "bytes": 782450,
+      "sha256": "a5d1ee6a5aa9c0a98e7029f969d89872d458a1506d1e15eb6c3b90dbd344e4ba"
+    },
+    {
+      "file": "review\\dance-GP19903\\audio-timeline.json",
+      "bytes": 13953,
+      "sha256": "6ddfa7d8f8436b0ef2cfd3858f97227319d0b6d4dfcb3000c70cd1ca20a9669c"
+    },
+    {
+      "file": "review\\dance-GP19903\\marine-dance.mp4",
+      "bytes": 6521202,
+      "sha256": "64c471a9fb83daf39b9445de7a688b1bb3d96e83ab0c9948208096ed4b050cb9"
+    },
+    {
+      "file": "review\\dance-GP19903\\marine-dance-transparent.webm",
+      "bytes": 17157792,
+      "sha256": "ba4751bc643af7ac397f541e226cf1cca7f9ef292ab89400d9044d5ed50764be"
+    }
+  ]
+}

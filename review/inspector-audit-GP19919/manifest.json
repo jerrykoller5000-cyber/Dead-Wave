@@ -1,0 +1,149 @@
+{
+  "at": "2026-10-14T17:33:13.718Z",
+  "root": "C:\\Users\\Zero\\Desktop\\Tiny Trek",
+  "task": "GP-19919",
+  "sources": [
+    {
+      "file": "Open Marine Inspector.bat",
+      "bytes": 492,
+      "sha256": "5f4be8541dbed744ea309952fc1b39b0bbac09368dad986c6d7b33d6b274504c"
+    },
+    {
+      "file": "index.html",
+      "bytes": 3193752,
+      "sha256": "6bd1e94b567a0b1647e8e83cbd5eeabbe46a756ca558234b94e4cd753e86c395"
+    },
+    {
+      "file": "studio/notes-endpoint.mjs",
+      "bytes": 8561,
+      "sha256": "f21fc34a6bbcaf475dbac60dac8653fe28b8dcd2d1c70451ec7300a814dac25e"
+    },
+    {
+      "file": "studio/inspector/api.js",
+      "bytes": 33179,
+      "sha256": "8e3964019f55fb65464cd7cb67beb3bea35f5138d5a5d610e46e43d220a31b3a"
+    },
+    {
+      "file": "studio/inspector/async.js",
+      "bytes": 1638,
+      "sha256": "86c4f3835ed57e22fc95987d68e2f3880a2572e1fab494c81de05950073f6ae6"
+    },
+    {
+      "file": "studio/inspector/AUDIT.md",
+      "bytes": 6028,
+      "sha256": "e49704c048b6e8e1e49c83d97090a49224d7856b313e45485c3e5ff726d7216d"
+    },
+    {
+      "file": "studio/inspector/catalog.js",
+      "bytes": 29206,
+      "sha256": "536e066a4fc655c7806d616b35027a24381810dbfb592adba19a3c6567dd52a5"
+    },
+    {
+      "file": "studio/inspector/inspector.css",
+      "bytes": 9645,
+      "sha256": "e357edda4a8bfcba31cecdf74352cf15ca61d8618359f3ffc1fda4eaae7d335f"
+    },
+    {
+      "file": "studio/inspector/inspector.js",
+      "bytes": 21798,
+      "sha256": "05bfd3759e9c37837e3ef772d2a9288ba25a557c6da879b7002704736ed11a43"
+    },
+    {
+      "file": "studio/inspector/marine.js",
+      "bytes": 25137,
+      "sha256": "0ddbc51c64f8b9cd1fd13e834bd8fd7da745584a6794c60a5d1f7c3222fa17bb"
+    },
+    {
+      "file": "studio/inspector/orbit.js",
+      "bytes": 12344,
+      "sha256": "c38833ec17b2fcbe3075a3c1f32a15bba06803ca99873181f2399ab62ef902e0"
+    },
+    {
+      "file": "studio/inspector/README.md",
+      "bytes": 21090,
+      "sha256": "6c39975269d6ba8248695065b86bdd547e9e0808539efd52a5f587c291880de0"
+    },
+    {
+      "file": "studio/inspector/stage.js",
+      "bytes": 17136,
+      "sha256": "2a6e81ce650fb5c066b7f302bee0266038c3a452354125138ee98558bbd869c2"
+    },
+    {
+      "file": "studio/inspector/subjects.js",
+      "bytes": 15733,
+      "sha256": "b7c885e63a86276b075f1b67f6ec3165308cbe0a61119319dbf99d157bf7ffbd"
+    },
+    {
+      "file": "studio/inspector/timeline.js",
+      "bytes": 6640,
+      "sha256": "8a50a0f1d17338d73d9e4679e0bd92abde7f90bbe771c9f10c6cd0321ba09bb1"
+    },
+    {
+      "file": "studio/inspector/ui.js",
+      "bytes": 44428,
+      "sha256": "9a9d7edd7af457a6be6880a90ce6f6a52ce0b1316ef55db25de6552ace7511a5"
+    },
+    {
+      "file": "tools/inspector-launch.mjs",
+      "bytes": 7522,
+      "sha256": "8b00a3632d277a5d2c3bba485ffff86edbc889a198c1a647144ff5cf9c176c02"
+    },
+    {
+      "file": "tools/serve.mjs",
+      "bytes": 7227,
+      "sha256": "494bdbcd5916bc4915bef4322e49513e9fa0f0d841eeaccbd7ae94cdc3d2c2de"
+    },
+    {
+      "file": "tools/camera.mjs",
+      "bytes": 42549,
+      "sha256": "ca397665ee3c5cb3b72bdda28b16d9abdd281eb7bf8650db7259f1a90c69307c"
+    },
+    {
+      "file": "tools/camera-rig.js",
+      "bytes": 26260,
+      "sha256": "c6ae212a866313e112a46a3e532dc3ca882ec62920c3329e6d794b806a09f66b"
+    },
+    {
+      "file": "tools/cdp.mjs",
+      "bytes": 11713,
+      "sha256": "674cc2b98a21cb0c2210b75fe0f4d27513e2f4bfffc6c18ef353488dcd9d3f9d"
+    },
+    {
+      "file": "tools/CAMERA.md",
+      "bytes": 13087,
+      "sha256": "09f2974cd8f03079eaf7e7ec393814d448e7228363f2778eeb2494fdeca2bbae"
+    },
+    {
+      "file": "tools/tests/fakethree.mjs",
+      "bytes": 57144,
+      "sha256": "c5720116e028d396feb7670f871d5dae5a87f73f9f9322dada37c66a1d344cba"
+    }
+  ],
+  "verification": {
+    "focused": "review/inspector-audit-GP19919/focused.json",
+    "native": "review/inspector-audit-GP19919/native/checks.json",
+    "performance": "review/inspector-audit-GP19919/runtime/performance-bounds.json",
+    "capture": "review/inspector-audit-GP19919/capture/checks.json",
+    "uiCapture": "review/inspector-audit-GP19919/automation/ui-frame-probe.json",
+    "inbox": "review/inspector-audit-GP19919/automation/inbox-live.json",
+    "suite": "review/inspector-audit-GP19919/suite-final.json"
+  },
+  "summary": {
+    "focusedCases": 201,
+    "nativeProbes": 13,
+    "variants": 182,
+    "loadSec": 10.089,
+    "fps": 60.019232682310815,
+    "gameSuite": {
+      "files": 247,
+      "pass": 3761,
+      "fail": 132,
+      "cannotRun": 0
+    }
+  },
+  "limitations": [
+    "Broader game suite failures are not all classified against a fresh equivalent baseline.",
+    "Independent Antigravity eyes and lead contract/integration review are pending.",
+    "Models and transforms built successfully do not certify all animation anatomy or scene contacts."
+  ]
+}

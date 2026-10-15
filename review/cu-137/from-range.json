@@ -1,0 +1,32 @@
+{
+ "target": "xyz:0,-196,-652",
+ "label": "point 0,-196,-652",
+ "view": null,
+ "cam": {
+  "fov": 50,
+  "x": -2,
+  "y": -197,
+  "z": -646,
+  "tx": -6,
+  "ty": -195,
+  "tz": -650
+ },
+ "time": 0.5,
+ "size": [
+  1280,
+  720
+ ],
+ "center": {
+  "x": 0,
+  "y": -196,
+  "z": -652
+ },
+ "boxSize": {
+  "x": 4,
+  "y": 2,
+  "z": 4
+ },
+ "mode": "training",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-13T04:49:51.776Z"
+}

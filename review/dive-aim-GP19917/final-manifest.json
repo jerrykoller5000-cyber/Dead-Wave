@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-14T10:00:24.804Z",
+  "source": [
+    {
+      "path": "index.html",
+      "sha256": "2463e0e84617e4df9ef6a665af5408e0c61481949e4050034cd99f196775da47",
+      "bom": false
+    },
+    {
+      "path": "studio/marine-dive-aim.js",
+      "sha256": "d61cc7f7c6afc854c9dd9f902d1b313d411305cf1e4c004013a5ec18d933cc92",
+      "bom": false
+    }
+  ],
+  "tracking": {
+    "beforeArmDegrees": 0.15292518816826062,
+    "afterArmDegrees": 27.608320410060568,
+    "beforeGunDegrees": 37.42942884962819,
+    "afterGunDegrees": 36.450955911722694
+  },
+  "hands": [
+    {
+      "pose": "forward",
+      "rightMm": 0.8176176598737317,
+      "leftMm": 8.687882566725248
+    },
+    {
+      "pose": "side",
+      "rightMm": 0.8845808230401982,
+      "leftMm": 0.8774112178263418
+    },
+    {
+      "pose": "prone",
+      "rightMm": 1.5761522210386196,
+      "leftMm": 1.6391378702869737
+    },
+    {
+      "pose": "dual",
+      "rightMm": 1.9049650359237877,
+      "leftMm": 1.3044412800271679
+    }
+  ],
+  "wall": {
+    "max": 7.507998124322539,
+    "contact": true,
+    "phase": "idle"
+  }
+}

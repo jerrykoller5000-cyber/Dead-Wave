@@ -1,0 +1,169 @@
+{
+  "loadSec": 23.144,
+  "idleAim": {
+    "updates": 120,
+    "gateLensMatrixCalls": 0,
+    "danger": {
+      "active": false,
+      "amount": 0,
+      "pulse": 0.3270578223710522,
+      "angle": 4.128279999858135,
+      "lights": 3,
+      "color": 16751154,
+      "red": 16777215,
+      "fill": 0
+    }
+  },
+  "hazards": {
+    "before": {
+      "pools": 1,
+      "flight": 1
+    },
+    "after": {
+      "pools": 0,
+      "flight": 0,
+      "visibleFlight": 0
+    },
+    "trails": 0
+  },
+  "stationReach": [
+    {
+      "name": "cif",
+      "side": "front",
+      "action": "cif"
+    },
+    {
+      "name": "cif",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "cif",
+      "side": "above",
+      "action": null
+    },
+    {
+      "name": "kiosk",
+      "side": "front",
+      "action": "kiosk"
+    },
+    {
+      "name": "kiosk",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "kiosk",
+      "side": "above",
+      "action": null
+    },
+    {
+      "name": "armory",
+      "side": "front",
+      "action": "armory"
+    },
+    {
+      "name": "armory",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "armory",
+      "side": "above",
+      "action": null
+    },
+    {
+      "name": "hqPanel",
+      "side": "front",
+      "action": "trainingPanel"
+    },
+    {
+      "name": "hqPanel",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "hqPanel",
+      "side": "above",
+      "action": null
+    },
+    {
+      "name": "skullWindow",
+      "side": "front",
+      "action": "hqWindow"
+    },
+    {
+      "name": "skullWindow",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "skullWindow",
+      "side": "above",
+      "action": null
+    },
+    {
+      "name": "lightSwitch",
+      "side": "front",
+      "action": "trainingLights"
+    },
+    {
+      "name": "lightSwitch",
+      "side": "back",
+      "action": null
+    },
+    {
+      "name": "lightSwitch",
+      "side": "above",
+      "action": null
+    }
+  ],
+  "flow": {
+    "first": {
+      "kind": "shambler",
+      "count": 2,
+      "remaining": 5,
+      "seconds": 5
+    },
+    "second": 0,
+    "pending": {
+      "kind": "shambler",
+      "count": 2,
+      "remaining": 5,
+      "seconds": 5
+    },
+    "after": {
+      "pending": null,
+      "release": {
+        "active": false,
+        "amount": 0,
+        "flashing": false,
+        "lit": false
+      },
+      "alive": 0,
+      "security": {
+        "open": false,
+        "locked": false,
+        "amount": 0,
+        "blocked": true
+      },
+      "danger": {
+        "active": false,
+        "amount": 0,
+        "pulse": 0.022273978118668047,
+        "angle": 20.51423999987841,
+        "lights": 3,
+        "color": 16751154,
+        "red": 16777215,
+        "fill": 0
+      }
+    }
+  },
+  "foreignHazard": true,
+  "leaveCleanup": {
+    "flight": false,
+    "visible": false,
+    "active": false
+  },
+  "errors": []
+}

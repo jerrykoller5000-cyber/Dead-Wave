@@ -35,9 +35,10 @@
     ok(dryCaught && !wetCaught, 'in the dry it lights its neighbour (' + dryCaught + '); in the rain it lights nobody (' + wetCaught + ')');
     T.clearZombies();
     // A campfire at night.
-    const cf = (T.campfires || []).find((f) => !f.dead && !f.beacon && !f.lantern && f.light);
+    const cf = (T.campfires || []).find((f) => f.camp && !f.dead && !f.beacon && !f.lantern && f.light);
     if (!cf) ok(true, 'no campfire on this map (skipped)');
     else {
+      T.lightCampfire(cf);   // CU-128: camps start cold; the rain check is about a fire he has lit
       T.runDevCommand('night ops');
       rain(false); await wait(400);
       const lit = cf.light.intensity;

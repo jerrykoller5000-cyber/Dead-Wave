@@ -1,0 +1,10 @@
+[
+    {
+        "target":  "weapon:knife",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  3000,
+        "margin":  0.9,
+        "out":  "review/gb180h/after-knife-left.png"
+    }
+]

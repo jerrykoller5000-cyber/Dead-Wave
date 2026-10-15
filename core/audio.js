@@ -3,10 +3,11 @@ import { scheduleDeathCryFade } from '../ui/zombie-death-envelope.js';
 // CU-4 slice. Callers keep using AudioSys from the page module.
 import { createZombieVocalizer, createZombieVoiceGate, zombieDriveCurve, zombieFoldCoefficients } from '../ui/zombie-audio.js';
 import { createTrainingAudio } from '../ui/training-audio.js';
+import { createTrainingFacilityAudio } from '../ui/training-facility-audio.js';
 import { createTakeBank, LAYERED, LAYER_TAKE_V, ORIGINAL_ONLY } from './takes.js';   // CL-148: Jerry's z-sounds takes; CL-168 the layered ones
 import { buildBank, GUN_DEFS, FOLEY_DEFS, TAIL_SR, defForKey, SUPPRESSIBLE } from './gunsynth.js';   // CL-134
 export const AudioSys = (() => {
-  let trainingMode=false,trainingSound=null;
+  let trainingMode=false,trainingSound=null,trainingFacility=null;
   let ctx = null;
   let masterGain = null;
   let koGain = null;   // CL-171: the Training Ground knockout: everything fades under it (the ringing goes round it)
@@ -24,11 +25,35 @@ export const AudioSys = (() => {
   let trunkBumpCd = 0;
   let brassTinkCd = 0;
 
+  // CL-195: nothing the game plays behind the opening may sound. Its master gain is already at zero until the opening
+  // hands over (CL-192), but the warm-up's staged fights still started their deaths, groans, fire and blasts behind it,
+  // and whatever was still ringing then (a death take, the reverb's tail) came up with the gain, so Jerry heard zombies
+  // as the menu appeared. While the opening is up a source's start() is swallowed: nothing plays, and its 'ended'
+  // follows at once so the voice counts and the clean-ups that wait for it still run. Decided at start(), not at
+  // creation, so a node made during the opening and started after it plays as normal.
+  function hushBehindOpening(c) {
+    for (const name of ['createBufferSource', 'createOscillator', 'createConstantSource']) {
+      const make = c[name];
+      if (typeof make !== 'function') continue;
+      c[name] = function (...args) {
+        const n = make.apply(c, args), start = n.start, stop = n.stop;
+        let started = false;
+        n.start = function (...a) {
+          if (window.DWOpening?.active) { setTimeout(() => { try { n.dispatchEvent(new Event('ended')); } catch (_) {} }, 0); return; }
+          started = true; return start.apply(n, a);
+        };
+        n.stop = function (...a) { if (started) return stop.apply(n, a); };
+        return n;
+      };
+    }
+  }
+
   function ensure() {
     if (ctx) return ctx;
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
     ctx = new AC();
+    hushBehindOpening(ctx);
     masterGain = ctx.createGain();
     masterGain.gain.value = window.DWOpening?.active ? 0 : 1;
     // CL-134: a last limiter on everything, so the louder guns (and a grenade in a crowd) never clip the output.
@@ -301,7 +326,8 @@ export const AudioSys = (() => {
   // (core/gunsynth-worker.js). Without a module worker (an old browser) they are built here instead, one at a time
   // between frames.
   let warmTimer = null, bankWorker = null, warmStarted = false;
-  const WARM_ORDER = ['hit', 'pistol', 'm4', 'impactDirt', 'impactWood', 'weaponSwitch', 'wheelTick', 'boom', 'impactRock', 'grab', 'hitHeavy', 'headshot', 'dryFire', 'brass', 'magOut', 'magIn', 'magSlap', 'magRelease', 'slideBack', 'slideFwd',
+  const WARM_ORDER = ['hit', 'pistol', 'm4', 'impactDirt', 'impactWood', 'weaponSwitch', 'wheelTick', 'selectorSemi', 'selectorAuto',   // GB-167
+    'boom', 'impactRock', 'grab', 'hitHeavy', 'headshot', 'dryFire', 'brass', 'magOut', 'magIn', 'magSlap', 'magRelease', 'slideBack', 'slideFwd',
     'shotgun', 'pumpBack', 'pumpFwd', 'ak', 'uzi', 'hitHeavy', 'boom', 'knifeSwing', 'knifeHit', 'revolver', 'sniper', 'aa12', 'minigun', 'm240',
     'launcher', 'mortar', 'turret', 'turretHeavy', 'macheteSwing', 'macheteChop', 'magDrop'];
   function warmQueue() {
@@ -1105,6 +1131,15 @@ export const AudioSys = (() => {
     foley('wheelTick', (quick ? 0.6 : 1) * (0.92 + Math.random() * 0.08), 0, 0, 0.97 + Math.random() * 0.06);
   }
 
+  // GB-167: the fire selector (X): two quick detent clicks, the second softer; full auto a touch brighter.
+  let selectorLast = { mode: null, at: -1 };
+  function selectorClick(mode) {
+    const c = ensure(); if (!c || muted) return;
+    const name = mode === 'auto' ? 'selectorAuto' : 'selectorSemi', r = 0.97 + Math.random() * 0.06;
+    foley(name, 1, 0, 0, r); foley(name, 0.5, 0, 0.026, r * 1.12);
+    selectorLast = { mode: mode === 'auto' ? 'auto' : 'semi', at: c.currentTime };
+  }
+
   let magThudCd = 0;
   function magThud(v = 1, pan = 0) {
     const c = ensure();
@@ -1681,7 +1716,7 @@ export const AudioSys = (() => {
   }
   // Called every frame by the game loop with the current state.
   function updateMusic(dt, state) {
-    if(trainingMode){trainingSound?.update(muted?0:userMusic,!!state.paused);return;}
+    if(trainingMode){trainingSound?.update(muted?0:userMusic,!!state.paused);trainingFacility?.tick(muted||!!state.paused);return;}
     lastState = state;
     const started = !!state.started;
     const phaseNow = state.phase;
@@ -2046,6 +2081,13 @@ export const AudioSys = (() => {
     fireCrackle.next = (ctx ? ctx.currentTime : 0) + 0.13;
     playNoise({ dur: 0.045, vol: 0.07 * volume, filterFreq: 1600, filterType: 'bandpass', pan });
     playNoise({ dur: 0.3, vol: 0.04 * volume, filterFreq: 550, filterType: 'lowpass', attack: 0.045, pan });
+  }
+  // CU-128: the flint, then the little gasp as the camp fire takes.
+  function lighterStrike() {
+    playNoise({ dur: 0.018, vol: 0.09, filterFreq: 4800, filterType: 'highpass' });
+    playTone({ freq: 2100, type: 'square', dur: 0.025, vol: 0.045, when: 0.03, slideTo: 700 });
+    playNoise({ dur: 0.16, vol: 0.06, filterFreq: 1400, filterType: 'bandpass', when: 0.06, attack: 0.02 });
+    playNoise({ dur: 0.35, vol: 0.05, filterFreq: 420, filterType: 'lowpass', when: 0.1, attack: 0.04 });
   }
   function crateLand() {
     if (tk('hq/crate-land', 1, 0, 0, 0.5)) return;   // CL-161
@@ -3124,6 +3166,9 @@ export const AudioSys = (() => {
   }
   function playZombieCry(type, state, v, pan, when = 0, emitter = null) {
     if (playTake('zombies/' + type + '/' + state, v, pan, when, emitter)) { recordZombieVoice(type, state); return true; }   // CL-148
+    // GP-19872: the old gate-exit whistle was synthesized while takes loaded.
+    // Keep recorded Screamer performances; silence their cheesy legacy fallback.
+    if (type === 'screamer') return true;
     if (state !== 'death') return synthZombieCry(type, state, v, pan, when, emitter);
     const c = ensure(); if (!c || muted) return false;
     const previousBus = routeBus, previousDeath = deathRoute;
@@ -3497,8 +3542,16 @@ export const AudioSys = (() => {
     try { if (on) setTimeout(() => { if (trainingMode) bed('vent', 'training/ventilation', 1, { bus: fxBus || sfxGain, tc: 1.5 }); }, 400); else stopBed('vent', 0.8); } catch (_) {}   // CL-161
     if(on){
       stopMusic();rainStop();setSolo(false);
-      const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,masterGain,fxBus);trainingSound.update(userMusic);}
+      const c=ensure();if(c){ambBus.gain.cancelScheduledValues(c.currentTime);ambBus.gain.setValueAtTime(0,c.currentTime);trainingSound=createTrainingAudio(c,masterGain,fxBus);trainingSound.update(userMusic);
+        trainingFacility=createTrainingFacilityAudio({clock:()=>c.currentTime,
+          move:up=>trainingSound.cue('door:'+(up?1:.9)+':0'),
+          bump:()=>tk('build-attacks/wire-hit',.6),
+          shot:()=>fireWeapon('minigun',{v:1}),
+          motor:on=>on?bed('training-containment','weapons/rotary-gun',1.4,{bus:weapBus,tc:.08}):stopBed('training-containment',.15)});
+        takes.init().then(()=>takes.preload(['build-attacks/wire-hit','weapons/rotary-gun'])).catch(()=>{});
+      }
     }else{
+      trainingFacility?.reset();trainingFacility=null;
       trainingSound?.dispose();trainingSound=null;
       if(ctx){ambBus.gain.cancelScheduledValues(ctx.currentTime);ambBus.gain.setTargetAtTime(BUS_AMB,ctx.currentTime,.15);}
       if(unlocked&&!muted)startMusic();
@@ -3513,9 +3566,129 @@ export const AudioSys = (() => {
     else if (phase === 'leave') { stopBed('heron', 2); if (!tk('vehicles/floatplane-takeoff', 1, 0, 0, 0.5)) planeFlyover(arg || 14); }
     else if (phase === 'stop') stopBed('heron', 1);
   }
+  // CL-183: the radio relay's puzzle (game/relay-puzzle.js, ui/relay-panel.js). A breaker's clunk; the sparks of a wrong
+  // one; the radio's static, which thins into the station's carrier as the dial comes onto it (relayStatic(on, clarity));
+  // the number station's beeps; the reboot's two-tone siren, loud on purpose (it calls the dead); the keypad.
+  let relayStaticNodes = null, relayBootNodes = null;
+  function relayClunk() {
+    playNoise({ dur: 0.07, vol: 0.24, filterFreq: 900, filterType: 'lowpass', attack: 0.002 });
+    playTone({ freq: 118, type: 'square', dur: 0.06, vol: 0.05 });
+  }
+  function relaySpark() {
+    for (let i = 0; i < 6; i++) playNoise({ dur: 0.04 + Math.random() * 0.06, vol: 0.2, filterFreq: 3200 + Math.random() * 3000, filterType: 'highpass', when: i * 0.05 + Math.random() * 0.02, attack: 0.001 });
+    playTone({ freq: 62, type: 'sawtooth', dur: 0.4, vol: 0.08, slideTo: 38 });
+  }
+  function relayStatic(on, clarity = 0) {
+    const c = ensure();
+    if (!c) return;
+    if (!on) {
+      const n = relayStaticNodes;
+      if (!n) return;
+      relayStaticNodes = null;
+      n.g.gain.setTargetAtTime(0, c.currentTime, 0.05); n.tg.gain.setTargetAtTime(0, c.currentTime, 0.05);
+      setTimeout(() => { try { n.src.stop(); n.osc.stop(); } catch (_) {} }, 400);
+      return;
+    }
+    if (!relayStaticNodes) {
+      const src = c.createBufferSource(); src.buffer = noiseBuffer(2); src.loop = true;
+      const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1800; bp.Q.value = 0.6;
+      const g = c.createGain(); g.gain.value = 0;
+      src.connect(bp); bp.connect(g); g.connect(outBus());
+      const osc = c.createOscillator(); osc.type = 'sine'; osc.frequency.value = 1020;
+      const tg = c.createGain(); tg.gain.value = 0;
+      osc.connect(tg); tg.connect(outBus());
+      src.start(); osc.start();
+      relayStaticNodes = { src, osc, g, tg, bp };
+    }
+    const n = relayStaticNodes, t = c.currentTime, k = Math.max(0, Math.min(1, clarity));
+    n.g.gain.setTargetAtTime(muted ? 0 : 0.15 * (1 - k) + 0.008, t, 0.04);
+    n.tg.gain.setTargetAtTime(muted ? 0 : 0.03 * k * k, t, 0.04);
+    n.bp.frequency.setTargetAtTime(1900 - 900 * k, t, 0.05);
+  }
+  function relayBeep(long = false) { playTone({ freq: 1380, type: 'sine', dur: long ? 0.55 : 0.16, vol: 0.11, attack: 0.006 }); }
+  function relayBoot(on) {
+    const c = ensure();
+    if (!c) return;
+    if (!on) {
+      const n = relayBootNodes;
+      if (!n) return;
+      relayBootNodes = null;
+      n.g.gain.setTargetAtTime(0, c.currentTime, 0.08);
+      setTimeout(() => { try { n.osc.stop(); n.lfo.stop(); } catch (_) {} }, 500);
+      return;
+    }
+    if (relayBootNodes) return;
+    const osc = c.createOscillator(); osc.type = 'square'; osc.frequency.value = 700;
+    const lfo = c.createOscillator(); lfo.type = 'square'; lfo.frequency.value = 1.7;
+    const lg = c.createGain(); lg.gain.value = 90; lfo.connect(lg); lg.connect(osc.frequency);
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+    const g = c.createGain(); g.gain.value = 0; g.gain.setTargetAtTime(muted ? 0 : 0.055, c.currentTime, 0.1);
+    osc.connect(lp); lp.connect(g); g.connect(outBus()); sendToReverb(g, 0.5);
+    osc.start(); lfo.start();
+    relayBootNodes = { osc, lfo, g };
+  }
+  function relayKey(ok = true) {
+    if (ok) playTone({ freq: 1180, type: 'square', dur: 0.05, vol: 0.05 });
+    else playTone({ freq: 140, type: 'square', dur: 0.38, vol: 0.09 });
+  }
+  function relayOpen() {
+    relayClunk();
+    playTone({ freq: 880, type: 'sine', dur: 0.18, vol: 0.08, when: 0.08 });
+    playTone({ freq: 1320, type: 'sine', dur: 0.3, vol: 0.07, when: 0.2 });
+  }
+  // CL-184: the red katana (a lighter, faster, ringing machete), the vault's roll-up door and its lift's motor, and
+  // a scrap of paper picked up.
+  let vaultLiftNodes = null;
+  function katanaSwing() {
+    foley('macheteSwing', 0.85, 0, 0, 1.25);
+    playNoise({ dur: 0.16, vol: 0.06, filterFreq: 5200, filterType: 'bandpass', attack: 0.01 });
+    playTone({ freq: 2600, type: 'sine', dur: 0.18, vol: 0.018, slideTo: 3600, attack: 0.02 });
+  }
+  function katanaHit() {
+    foley('macheteChop', 0.8, 0, 0, 1.15);
+    playTone({ freq: 3100, type: 'sine', dur: 0.5, vol: 0.022, attack: 0.002 });
+    playTone({ freq: 4650, type: 'sine', dur: 0.35, vol: 0.012, attack: 0.002 });
+  }
+  function katanaDraw() {
+    playNoise({ dur: 0.45, vol: 0.05, filterFreq: 4200, filterType: 'bandpass', attack: 0.05 });
+    playTone({ freq: 2900, type: 'sine', dur: 1.2, vol: 0.03, slideTo: 3050, attack: 0.3 });
+    playTone({ freq: 4350, type: 'sine', dur: 0.9, vol: 0.015, attack: 0.35 });
+  }
+  function vaultDoor() {
+    for (let i = 0; i < 9; i++) playNoise({ dur: 0.07, vol: 0.09, filterFreq: 700 + i * 60, filterType: 'bandpass', when: i * 0.11, attack: 0.003 });
+    playTone({ freq: 90, type: 'square', dur: 1.0, vol: 0.03, slideTo: 70 });
+    relayClunk();
+  }
+  function vaultLift(on) {
+    const c = ensure();
+    if (!c) return;
+    if (!on) {
+      const n = vaultLiftNodes;
+      if (!n) return;
+      vaultLiftNodes = null;
+      n.g.gain.setTargetAtTime(0, c.currentTime, 0.06);
+      setTimeout(() => { try { n.osc.stop(); n.osc2.stop(); } catch (_) {} }, 400);
+      playNoise({ dur: 0.1, vol: 0.2, filterFreq: 500, filterType: 'lowpass', attack: 0.002 });   // it stops on its latch
+      playTone({ freq: 70, type: 'square', dur: 0.08, vol: 0.06 });
+      return;
+    }
+    if (vaultLiftNodes) return;
+    const osc = c.createOscillator(); osc.type = 'sawtooth'; osc.frequency.value = 58;
+    const osc2 = c.createOscillator(); osc2.type = 'square'; osc2.frequency.value = 117;
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 520;
+    const g = c.createGain(); g.gain.value = 0; g.gain.setTargetAtTime(muted ? 0 : 0.07, c.currentTime, 0.12);
+    osc.connect(lp); osc2.connect(lp); lp.connect(g); g.connect(outBus());
+    osc.frequency.setTargetAtTime(74, c.currentTime, 1.2);
+    osc.start(); osc2.start();
+    vaultLiftNodes = { osc, osc2, g };
+  }
+  function paperRustle() {
+    playNoise({ dur: 0.18, vol: 0.06, filterFreq: 3800, filterType: 'highpass', attack: 0.01 });
+    playNoise({ dur: 0.12, vol: 0.04, filterFreq: 2600, filterType: 'bandpass', when: 0.14, attack: 0.01 });
+  }
   const api = {
-    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted){if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
-    trainingState:()=>({enabled:trainingMode,...trainingSound?.state()}),
+    setTraining,trainingCue:(kind)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
+    trainingState:()=>({enabled:trainingMode,...trainingSound?.state(),facility:trainingFacility?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
     minigunSpin, bankStats: () => ({ banks: banks.size, buildMs: Math.round(bankBuildMs), sync: bankSyncBuilds, syncKeys: bankSyncKeys.slice(), worker: bankWorkerBuilds, misses: bankMisses, voices: activeVoices, keys: [...banks.keys()], pending: warmQueue().length }),   // CL-134
@@ -3531,12 +3704,13 @@ export const AudioSys = (() => {
     groan, headshot: W(headshot), dodgeRoll, streak, footstep, heartbeat,
     waveStart, expand, gameOver, playerHurt, grenadeBoom: W(grenadeBoom, BIG), knifeSwing: W(knifeSwing),
     macheteSwing: W(macheteSwing), macheteChop: W(macheteChop), armorDon, armorHit, rockBreak: W(rockBreak),
-    brassTink: W(brassTink), magThud: W(magThud), weaponSwitch: W(weaponSwitch), wheelTick: W(wheelTick),
+    brassTink: W(brassTink), magThud: W(magThud), weaponSwitch: W(weaponSwitch), wheelTick: W(wheelTick), selectorClick: W(selectorClick), selectorLast: () => selectorLast,   // GB-167
+   
     chainsawStart, chainsawStop, chainsawSetRev, chainsawGrit: W(chainsawGrit), isChainsawRunning,
     chainsawEngine: W(chainsawEngine), chainsawDryPull: W(chainsawDryPull), reloadCue: W(reloadCue),
     turretServos, mineBeep: W(mineBeep), buildHit: W(buildHit), buildBreak: W(buildBreak), buildSound,
     zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
-    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle,
+    spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle, lighterStrike,
     crateLand, pickup, repairClank, sellChime,
     bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
     grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, playerBreath, deadVoice, DEAD_VOICES, voiceCount, deadStep, stepCount, shotCount, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
@@ -3548,6 +3722,8 @@ export const AudioSys = (() => {
     distantGroan: A(distantGroan),
     clip, preloadClips, clipState,   // CL-147
     trainingAlarm,   // CL-159
+    relayClunk, relaySpark, relayStatic, relayBeep, relayBoot, relayKey, relayOpen,   // CL-183
+    katanaSwing: W(katanaSwing), katanaHit: W(katanaHit), katanaDraw, vaultDoor, vaultLift, paperRustle,   // CL-184
     knockout, knockoutEnd, knockoutDbg: () => ({ gain: koGain ? koGain.gain.value : null, ringing: !!koRing }),   // CL-171
     take: playTake, takesInit: () => takes.init(), takesRefresh: () => takes.refresh(), takesState: () => takes.state(), takesPreload: (ids) => takes.preload(ids),   // CL-148
     // CL-161: the sounds the game had none of (index.html and world/heron.js call these; each is true if a take played)

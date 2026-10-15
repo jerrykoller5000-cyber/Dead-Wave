@@ -1,0 +1,39 @@
+import {text} from './strings.js';
+import {drillInstruction,targetGoal} from './range-guide.js';
+import {bakeStatic} from '../world/bake.js';
+export function createRangeMonitor(T,tg){
+ const height=3.3448; // Jerry: raise the overhead scoreboard by one foot.
+ const g=new T.Group();g.name='range-drill-monitor';g.position.set(0,height,.69);g.rotation.y=Math.PI;tg.group.add(g);
+ const owned=new Set(),keep=o=>(owned.add(o),o),dark=keep(new T.MeshStandardMaterial({color:0x202a27,metalness:.65,roughness:.6})),steel=keep(new T.MeshStandardMaterial({color:0x67776d,metalness:.8,roughness:.55}));
+ const box=(w,h,d,m,x,y,z)=>{const o=new T.Mesh(keep(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);g.add(o);};
+ box(3.55,1.4,.15,dark,0,0,0);
+ for(const x of [-1.5,1.5]){box(.12,1.66,.12,steel,x,0,-.08);for(const y of [-.63,.63])box(.05,.05,.04,steel,x,y,.09);}
+ for(const y of [-.67,.67])box(3.5,.06,.04,steel,0,y,.09);
+ const cv=document.createElement('canvas');cv.width=1024;cv.height=400;const c=cv.getContext('2d'),tex=keep(new T.CanvasTexture(cv));tex.colorSpace=T.SRGBColorSpace;
+ const mat=keep(new T.MeshBasicMaterial({map:tex,toneMapped:false})),screen=new T.Mesh(keep(new T.PlaneGeometry(3.35,1.25)),mat);screen.name='range-monitor-screen';screen.position.z=.084;g.add(screen);
+ bakeStatic(T,g);g.traverse(o=>{if(o.geometry)keep(o.geometry);});
+ let key='',lastResult=null,updates=0,cooldown=0,lastState='',lastAction='',lastWeapon='';
+ const line=(s,y,size,color='#d8ece1')=>{c.fillStyle=color;c.font=`bold ${size}px monospace`;c.fillText(s,512,y,950);};
+ function wrap(s,y){c.font='bold 32px monospace';let row='';for(const w of s.split(' ')){if(c.measureText(row+' '+w).width>900&&row){line(row,y,32);row=w;y+=42;}else row+=(row?' ':'')+w;}line(row,y,32);}
+ function update(s,dt=0){
+  cooldown=Math.max(0,cooldown-dt);
+  const urgent=s.state!==lastState||s.action!==lastAction||s.expectedWeapon!==lastWeapon;
+  if(s.state==='ACTIVE'&&!urgent&&cooldown>0)return;
+  if(s.result)lastResult={...s.result,drill:s.drill};
+  const live=['PREPARING','COUNTDOWN','ACTIVE'].includes(s.state),r=live?null:lastResult,d=live?s.drill:r?.drill;
+  const next=JSON.stringify([s.state,Math.ceil(s.countdown),Math.ceil((d?.duration||0)-s.elapsed),s.score,s.wave,s.expectedWeapon,s.action,s.plan?.zone,s.plan?.priority,s.stats?.cleared,r?.id]);if(next===key)return;key=next;
+  c.fillStyle='#061714';c.fillRect(0,0,1024,400);c.fillStyle='#c9b755';c.fillRect(0,0,1024,8);c.textAlign='center';
+  line(d?text(`range.drill.${d.weapon}.${d.id}.name`).toUpperCase():text('range.monitor.title'),65,42,'#ebd970');
+  if(s.state==='COUNTDOWN'){line(String(Math.ceil(s.countdown)),268,176,'#f4e486');wrap(d.startHolstered?text('range.guide.holster'):d.requireReload?text('range.guide.empty'):text('range.monitor.beep'),338);}
+  else if(s.state==='PREPARING'){line(text('range.preparing'),220,66);wrap(text('range.monitor.beep'),310);}
+  else if(s.state==='ACTIVE'){
+   wrap(s.action==='draw'?text('range.guide.draw'):s.action==='reload'?text('range.guide.reload'):drillInstruction(d,s.plan),135);
+   line(text('range.score',{score:s.score}),254,72,'#f4e486');
+   line(text('range.monitor.live',{time:Math.max(0,Math.ceil(d.duration-s.elapsed)),cleared:s.stats.cleared,total:targetGoal(d)}),333,35);
+  }else if(r){line(r.valid?text('range.score',{score:r.score}):text('range.void'),178,78,r.valid?'#f4e486':'#ff8778');line(text('range.monitor.result',{time:r.time.toFixed(2),accuracy:r.efficiency.toFixed(1),metric:text(d.continuous?'range.contact':'range.accuracy')}),243,34);line(text('range.monitor.cleared',{cleared:r.cleared,total:targetGoal(d),shots:r.shots}),291,31);line(r.reason?text('range.reason.'+r.reason):text('range.monitor.retry'),352,25,r.reason?'#ffb0a2':'#d8ece1');}
+  else{line(text('range.monitor.ready'),195,65);wrap(text('range.monitor.choose'),300);}
+  tex.needsUpdate=true;updates++;cooldown=.1;lastState=s.state;lastAction=s.action;lastWeapon=s.expectedWeapon;
+ }
+ update({state:'IDLE',stats:{}});
+ return {update,group:g,debug:()=>({updates,height,bottom:height-.7}),dispose(){tg.group.remove(g);for(const o of owned)o.dispose?.();}};
+}

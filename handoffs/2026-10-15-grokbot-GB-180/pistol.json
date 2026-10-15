@@ -1,0 +1,147 @@
+[
+{
+"old": "  K.slab([[-0.14, -0.036], [0.252, -0.036], [0.26, -0.028], [0.26, 0.012], [0.254, 0.020], [0.242, 0.024], [-0.126, 0.024], [-0.134, 0.018], [-0.14, 0.010]], 0.046, gunBody, { bevel: 0.005, segs: 3, parent: slide });",
+"new": [
+"  // GB-180 (Jerry: the slide floated over the frame): the slide's bottom comes down to local -0.044 (gun y 0.006), 6 mm",
+"  // over the frame's top rail (0.012), so the slide sits on the frame with no daylight under it.",
+"  K.slab([[-0.14, -0.044], [0.252, -0.044], [0.26, -0.034], [0.26, 0.012], [0.254, 0.020], [0.242, 0.024], [-0.126, 0.024], [-0.134, 0.018], [-0.14, 0.010]], 0.046, gunBody, { bevel: 0.005, segs: 3, parent: slide });"
+]
+},
+{
+"old": "  K.slab([[-0.128, 0.022], [-0.098, 0.022], [-0.102, 0.040], [-0.124, 0.040]], 0.022, gunDark, { bevel: 0.002, parent: slide });",
+"new": [
+"  // GB-180: dovetailed sights. Rear: a dovetail base across the slide and a U notch (two ears), not a bare block.",
+"  K.slab([[-0.131, 0.016], [-0.095, 0.016], [-0.098, 0.026], [-0.128, 0.026]], 0.030, gunMid, { bevel: 0.0015, parent: slide });",
+"  K.slab([[-0.128, 0.024], [-0.099, 0.024], [-0.101, 0.032], [-0.126, 0.032]], 0.024, gunDark, { bevel: 0.0015, parent: slide });",
+"  for (const sx of [-1, 1]) K.slab([[-0.128, 0.030], [-0.104, 0.030], [-0.106, 0.042], [-0.126, 0.042]], 0.0075, gunDark, { x: sx * 0.0078, bevel: 0.0012, parent: slide });"
+]
+},
+{
+"old": "  K.slab([[0.22, 0.022], [0.242, 0.022], [0.238, 0.036], [0.226, 0.036]], 0.008, gunDark, { bevel: 0.0015, parent: slide });",
+"new": [
+"  K.slab([[0.217, 0.016], [0.245, 0.016], [0.242, 0.026], [0.220, 0.026]], 0.022, gunMid, { bevel: 0.0015, parent: slide });   // GB-180: front dovetail",
+"  K.slab([[0.221, 0.024], [0.241, 0.024], [0.237, 0.037], [0.226, 0.037]], 0.008, gunDark, { bevel: 0.0015, parent: slide });"
+]
+},
+{
+"old": "  K.slab([[-0.09, 0.010], [0.27, 0.010], [0.272, -0.006], [0.268, -0.018], [0.13, -0.018], [0.12, -0.014], [0.04, -0.016], [0.022, -0.030], [-0.004, -0.034], [-0.022, -0.018], [-0.07, -0.012], [-0.09, -0.008]], 0.044, gunPoly, { bevel: 0.006, segs: 3 });",
+"new": [
+"  // GB-180: frame and slide line up. The frame's rear is flush with the slide's rear (gun z -0.09) and its dust cover",
+"  // runs to 14 mm short of the slide's front (a real pistol's proportion), its top 0.012 tucked up inside the slide.",
+"  K.slab([[-0.09, 0.012], [0.294, 0.012], [0.298, 0.000], [0.294, -0.020], [0.112, -0.020], [0.104, -0.016], [0.04, -0.016], [0.026, -0.030], [-0.004, -0.036], [-0.022, -0.020], [-0.07, -0.012], [-0.09, -0.004]], 0.044, gunPoly, { bevel: 0.006, segs: 3 });",
+"  // GB-180: a beavertail / tang that sweeps back under the slide's rear and blends down into the grip's back strap.",
+"  K.slab([[-0.06, 0.008], [-0.104, 0.006], [-0.114, 0.000], [-0.108, -0.008], [-0.080, -0.012], [-0.056, -0.020], [-0.042, -0.030], [-0.030, -0.010]], 0.042, gunPoly, { bevel: 0.007, segs: 3 });"
+]
+},
+{
+"old": "  K.rail(0.06, 0, -0.028, 0.15, null, 0.028);",
+"new": [
+"  K.rail(0.1, 0, -0.025, 0.2, null, 0.03);   // GB-180: the accessory rail along the dust cover, its top in the frame"
+]
+},
+{
+"old": "  K.slab(gunBand([[0.118, -0.014], [0.122, -0.05], [0.113, -0.064], [0.046, -0.066], [0.03, -0.057], [0.022, -0.04], [0.02, -0.014]], 0.006), 0.016, gunPoly, { bevel: 0.003 });",
+"new": [
+"  // GB-180 (Jerry: the guard was oversized and too far forward): a smaller guard, its front at z 0.104, its back",
+"  // curving up into the grip's front strap (the strap is at z ~0.02-0.027 here) so guard and grip are one moulding.",
+"  K.slab(gunBand([[0.100, -0.016], [0.104, -0.032], [0.101, -0.051], [0.092, -0.058], [0.044, -0.058], [0.030, -0.051], [0.022, -0.036], [0.024, -0.016]], 0.0055), 0.016, gunPoly, { bevel: 0.003 });",
+"  K.slab([[0.014, -0.030], [0.030, -0.030], [0.034, -0.050], [0.022, -0.058], [0.012, -0.050]], 0.03, gunPoly, { bevel: 0.006 });   // the guard's root blended into the strap"
+]
+},
+{
+"old": "  K.slab(gunBand([[0.062, -0.016], [0.054, -0.034], [0.056, -0.048], [0.066, -0.056]], 0.0032), 0.008, gunDark, { bevel: 0.0015 });",
+"new": [
+"  // GB-180 (Jerry: the trigger was a thin wire at the back of the guard): a solid curved blade in the middle of the",
+"  // guard, its face toward the grip, its tip curling forward, with a safety tab down its face.",
+"  K.slab([[0.064, -0.014], [0.072, -0.014], [0.071, -0.028], [0.073, -0.040], [0.080, -0.049], [0.076, -0.053], [0.066, -0.046], [0.061, -0.034], [0.061, -0.022]], 0.009, gunDark, { bevel: 0.002 });",
+"  K.slab([[0.064, -0.026], [0.067, -0.026], [0.069, -0.042], [0.066, -0.044]], 0.003, gunMid, { x: 0, bevel: 0.0008 });"
+]
+},
+{
+"old": "  const pistolGrip = [[-0.04, 0.016], [0.10, 0.024], [0.28, 0.020], [0.48, 0.026], [0.72, 0.022], [0.92, 0.016], [1.00, 0.004], [1.00, -0.014], [0.86, -0.028], [0.55, -0.030], [0.28, -0.026], [0.08, -0.040], [-0.02, -0.048], [-0.06, -0.016]];",
+"new": [
+"  // GB-180 (Jerry: the grip was long, thin and had no swell): same centre line and rake (hand anchor unchanged), but",
+"  // deeper (d 0.084) and 52 mm wide, full depth at the bottom, finger swells down the front strap. t242 copies these.",
+"  const pistolGrip = [[0.00, 0.018], [0.10, 0.026], [0.24, 0.021], [0.38, 0.031], [0.52, 0.024], [0.66, 0.029], [0.82, 0.026], [0.96, 0.024], [1.00, 0.018], [1.00, -0.030], [0.96, -0.034], [0.70, -0.036], [0.40, -0.034], [0.18, -0.034], [0.08, -0.040], [0.06, -0.030]];"
+]
+},
+{
+"old": "  K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.3, pistolGrip), 0.046, gunPoly, { bevel: 0.008, segs: 3 });",
+"new": [
+"  K.slab(shapedGrip(-0.02, -0.08, 0.18, 0.084, 0.3, pistolGrip), 0.052, gunPoly, { bevel: 0.009, segs: 3 });"
+]
+},
+{
+"old": "  const gripPanel = shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.3, [[0.18, 0.010], [0.42, 0.008], [0.70, 0.010], [0.88, 0.0], [0.86, -0.016], [0.62, -0.018], [0.34, -0.012], [0.16, -0.004]]);",
+"new": [
+"  const gripPanel = shapedGrip(-0.02, -0.08, 0.18, 0.084, 0.3, [[0.16, 0.012], [0.42, 0.012], [0.70, 0.014], [0.90, 0.010], [0.90, -0.020], [0.62, -0.024], [0.34, -0.022], [0.16, -0.016]]);"
+]
+},
+{
+"old": "    K.slab(gripPanel, .0018, gunPoly, { x: sx * .0232, bevel: .001 });",
+"new": [
+"    K.slab(gripPanel, .0018, gunPoly, { x: sx * .0262, bevel: .001 });"
+]
+},
+{
+"old": "    checkeredPanel(THREE, gun, gunRubber, gripPanel, sx * .0242, .006, .001);",
+"new": [
+"    checkeredPanel(THREE, gun, gunRubber, gripPanel, sx * .0272, .006, .001);"
+]
+},
+{
+"old": "  K.slab([[-0.014, -0.081], [0.012, -0.081], [0.014, -0.091], [-0.016, -0.093]], 0.034, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });",
+"new": [
+"  K.slab([[-0.022, -0.081], [0.016, -0.081], [0.018, -0.092], [-0.024, -0.092]], 0.046, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });   // GB-180: baseplate square to the mag and flush with the grip"
+]
+},
+{
+"old": "  K.box(0.022, 0.014, 0.06, gunAccent, 0.0, 0.042, 0.09, 0, 0, 0, frame, 0.004);",
+"new": [
+"  K.box(0.022, 0.014, 0.06, gunAccent, 0.0, 0.042, 0.09, 0, 0, 0, frame, 0.004);",
+"  // GB-180: the barrel hood shows in the ejection port, flush with the slide's top, sitting on the barrel.",
+"  K.box(0.026, 0.014, 0.05, gunAccent, 0, 0.068, 0.072, 0, 0, 0, frame, 0.003);"
+]
+},
+{
+"old": "  K.box(0.003, 0.006, 0.04, gunDark, 0.0236, 0.004, -0.03, 0, 0, 0, slide);",
+"new": [
+"  K.box(0.003, 0.006, 0.04, gunDark, 0.0236, 0.004, -0.03, 0, 0, 0, slide);",
+"  for (const sx of [-1, 1]) K.box(0.003, 0.003, 0.054, gunDark, sx * 0.0145, 0.0235, 0.022, 0, 0, 0, slide);   // GB-180: the ejection port's edges",
+"  K.box(0.032, 0.003, 0.003, gunDark, 0, 0.0235, -0.006, 0, 0, 0, slide);"
+]
+},
+{
+"old": "  K.box(.024, .016, .036, gunDark, 0, -.046, .15, 0, 0, 0, frame, .004);",
+"new": [
+"  // GB-180 (Jerry: the light floated): the light hangs on the rail by a clamp block with a cross-bolt.",
+"  K.box(.03, .012, .034, gunDark, 0, -.034, .19, 0, 0, 0, frame, .003);",
+"  for (const sx of [-1, 1]) K.cyl(.0035, .0035, .003, gunMid, sx * .0155, -.034, .19, frame, 10, 'x');",
+"  K.box(.026, .020, .06, gunDark, 0, -.048, .19, 0, 0, 0, frame, .005);"
+]
+},
+{
+"old": "  K.cyl(.011, .011, .016, gunAccent, 0, -.046, .174, frame, 16);",
+"new": [
+"  K.cyl(.0125, .0125, .02, gunAccent, 0, -.048, .228, frame, 16);"
+]
+},
+{
+"old": "  K.cyl(.009, .011, .004, gunDark, 0, -.046, .184, frame, 16);",
+"new": [
+"  K.cyl(.0105, .0125, .004, gunDark, 0, -.048, .24, frame, 16);"
+]
+},
+{
+"old": "  K.disc(.0075, glassMat, 0, -.046, .1864, 0, frame, 16);",
+"new": [
+"  K.disc(.009, glassMat, 0, -.048, .2425, 0, frame, 16);"
+]
+},
+{
+"old": "  for (const sx of [-1, 1]) K.cyl(.003, .003, .002, gunAccent, sx * .014, -.034, .15, frame, 10, 'x');",
+"new": [
+"  for (const sx of [-1, 1]) K.box(.002, .006, .012, gunAccent, sx * .013, -.048, .17, 0, 0, 0, frame);   // switch paddles"
+]
+}
+]

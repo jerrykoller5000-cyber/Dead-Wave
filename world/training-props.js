@@ -1,9 +1,9 @@
 // GP-168/GP-191: Training props; gate leaves stay separate for animation.
 // Dimensions are metres; no lights, timers, physics or gameplay state here.
 export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomAdd, std, texture, sign, steel, steelLight, hazard, lampMat, labels = {} }) {
-  let moving = null, staticGate = null;
+  let moving = null, staticGate = null, medicalFurniture = false;
   const gateFrame = new T.Group(); gateFrame.name = 'training-gate-frame';
-  const route = m => { const parent = moving || staticGate; if (parent) parent.add(m); return m; };
+  const route = m => { const parent = moving || staticGate; if (parent) parent.add(m); if (medicalFurniture) m.userData.trainingProp = true; return m; };
   const add = (...args) => route(roomAdd(...args));
   const box = (...args) => route(roomBox(...args));
   const gateLeaves = [-1, 1].map(side => {
@@ -126,6 +126,8 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   box(.025,2.45,3.4,olive,B.minX+.29,1.43,back+1.9);
   if(labels.infirmary)sign(labels.infirmary,3.6,.48,bx-.2,2.34,back+.11,0,{bg:'#25312b',color:'#ddd6b1',size:140});
   cross(bx-2.58,2.3,back+.13,.49);
+  // GP-19893: furniture near a wall must not become part of its architectural fade.
+  medicalFurniture = true;
   // Reinforced wheeled stretcher, segmented pad, canvas blanket and stitched hem.
   rounded(2.48,.14,1.04,dark,bx,.49,bz,.055);
   for(const dz of [-.48,.48])rod([bx-1.18,.47,bz+dz],[bx+1.18,.47,bz+dz],.046,steelLight);

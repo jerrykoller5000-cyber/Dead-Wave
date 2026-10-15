@@ -1,0 +1,50 @@
+      // GB-124 (Jerry): unarmed, his arms hang at his sides. They used to keep the empty gun hold (ARM_*_BASE) and
+      // stuck straight out in front of him. A walk swings them opposite the legs, a little bent. CU-125: a run
+      // pumps — the elbow stays bent, the hand reaches forward and trails back, and the chest turns so the
+      // forward shoulder leads. They used to sit out in front with a small sway, which read as skiing.
+      // Blended over whatever the state above chose; it eases out while the gun is still in his hand (the holster
+      // move), while the knife or a throw/jab gesture plays, swimming, on the mortar or the ladder, so every gun,
+      // melee and throw pose is exactly as it was.
+      {
+        const gunInHand = marineDraw.state.active && marineDraw.frame().inHand != null;
+        // CL-131: carrying the mortar or the Watchman he has no gun in his hands either: his arms go as unarmed (and
+        // updateCarryPose then brings the right hand up onto what is on his shoulder). They used to hold up an empty grip.
+        const relaxWant = (unarmed || !!mortarCarried) && !swimming && !mortarMounted && !climbingTower && !gameOver &&
+          !(knifeAnimT > 0) && !(gestureT > 0) && !gunInHand;
+        POSE.relax = _ease(POSE.relax || 0, relaxWant ? 1 : 0, dt, 9);
+        const rw = POSE.relax;
+        if (rw > 0.001 && armL && armR) {
+          const U = UNARMED_ARMS, t = POSE.idleT;
+          let swL = 0, swR = 0, bendL = U.elbow, bendR = U.elbow, out = 0, pitch = U.x;
+          if (airborne) { swL = swR = 0.1; out = 0.1; bendL = bendR = -0.2; }
+          else if (moving) {
+            // Thigh + is that leg back, so its arm reaches forward. The reach is longer than the trail
+            // (the hand stays beside the hip behind, t183), and a run closes the elbow on the way forward.
+            const runMix = _clamp01(POSE.gaitRun || 0);
+            const unit = (thigh) => Math.max(-1, Math.min(1, thigh / (0.48 + 0.18 * runMix)));
+            const uL = unit(POSE.thighL), uR = unit(POSE.thighR);
+            const fwd = 0.58 + 0.3 * runMix, back = 0.26 + 0.08 * runMix, quiet = 1 - 0.4 * POSE.crouch;
+            const swing = (u) => (u >= 0 ? u * fwd : u * back) * quiet;
+            swL = swing(uL); swR = swing(uR);
+            const elbowAt = (u) => {
+              const base = -0.32 - 0.85 * runMix;
+              return base - Math.max(0, u) * (0.1 + 0.28 * runMix) + Math.max(0, -u) * 0.22 * runMix;
+            };
+            bendL = elbowAt(uL); bendR = elbowAt(uR);
+            pitch = -0.08 - 0.02 * runMix;
+            out = 0.02 + 0.03 * runMix;
+            torsoTwist += -uL * (0.12 + 0.16 * runMix) * rw * quiet;
+          } else {
+            swL = Math.sin(t * 1.1) * 0.02; swR = Math.sin(t * 1.1 + 0.7) * 0.02;
+            out = Math.sin(t * 0.7) * 0.006;
+          }
+          const blend = (o, x, y, z) => { o.rotation.x += (x - o.rotation.x) * rw; o.rotation.y += (y - o.rotation.y) * rw; o.rotation.z += (z - o.rotation.z) * rw; };
+          // GB-125: crouched, the arms come forward over the thighs with softer elbows, a little wider of the knees.
+          const cr = POSE.crouch, fx = -cr * CROUCH.armFwd, fb = -cr * CROUCH.armBend;
+          out += cr * CROUCH.armOut;
+          blend(armL, pitch - swL + fx, U.y, -(U.z + out));   // armLG is on -x: out from the body is -z
+          blend(armR, pitch - swR + fx, -U.y, U.z + out);
+          if (elbowL) blend(elbowL, bendL + fb, 0, 0);
+          if (elbowR) blend(elbowR, bendR + fb, 0, 0);
+        }
+      }

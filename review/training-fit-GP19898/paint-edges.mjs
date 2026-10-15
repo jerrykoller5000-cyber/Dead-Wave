@@ -1,0 +1,5 @@
+import fs from 'node:fs';const path='world/training.js',old=fs.readFileSync(path,'utf8');let s=old;
+for(let [a,b]of[
+ ['      const cx = gc(gx) - O.x, cz = gc(gz) - O.z, h = grid / 2;', '      const rect=trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);\n      if(!rect)continue;\n      const cx=(rect.x0+rect.x1)/2-O.x,cz=(rect.z0+rect.z1)/2-O.z,w=rect.x1-rect.x0,d=rect.z1-rect.z0;'],
+ ['new T.PlaneGeometry(dx ? 0.1 : grid, dx ? grid : 0.1), edgeMat, cx + dx * (h - 0.05), 0.008, cz + dz * (h - 0.05)', 'new T.PlaneGeometry(dx ? Math.min(.1,w) : w, dx ? d : Math.min(.1,d)), edgeMat, cx + dx * Math.max(0,w/2-.05), 0.008, cz + dz * Math.max(0,d/2-.05)']
+]){if(old.includes('\r\n')){a=a.replaceAll('\n','\r\n');b=b.replaceAll('\n','\r\n');}if(s.split(a).length!==2)throw Error('Anchor');s=s.replace(a,b);}if(fs.readFileSync(path,'utf8')!==old)throw Error('Freshness');fs.writeFileSync(path,s,'utf8');console.log('Paint edges follow clipped rectangles; medical floor remains clear');

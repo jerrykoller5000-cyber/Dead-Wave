@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-15T09:43:46.090Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "person.skeletal-marine",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 151,
+   "tris": 8806,
+   "size": [
+    0.391,
+    1.701,
+    0.407
+   ],
+   "error": null
+  }
+ ]
+}

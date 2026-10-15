@@ -1,0 +1,43 @@
+{
+  "loadSec": 20.358,
+  "back": {
+    "player": [
+      -8.58,
+      -200,
+      -645.95
+    ],
+    "prompt": "ELights off",
+    "shown": false,
+    "lights": true
+  },
+  "backAction": {
+    "before": true,
+    "after": false
+  },
+  "front": {
+    "player": [
+      -7.180000000000001,
+      -200,
+      -645.95
+    ],
+    "prompt": "ELights on",
+    "shown": false,
+    "lights": false
+  },
+  "frontAction": {
+    "before": false,
+    "off": true,
+    "on": false
+  },
+  "station": {
+    "x": -7.98,
+    "y": -200,
+    "z": -645.95,
+    "yaw": 1.5707963267948966,
+    "front": {
+      "x": -7.180000000000001,
+      "z": -645.95
+    }
+  },
+  "errors": []
+}

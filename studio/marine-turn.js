@@ -234,14 +234,16 @@ export function createMarineTurn({ THREE: T, marine }) {
     marine.rotation.y = turnAngle(visualYaw - yaw);
     // CU-99: the bored weight shift (studio/marine-idle.js, ud.idleSway) tilts his hips over the planted boots.
     lower.rotation.set(0, turnAngle(s.yaw + hipLead - visualYaw), ud.idleSway || 0);
-    marine.position.y -= .018 - .01 * crouch;
+    // GP-19920: a stationary turn should not impose a permanent half squat.
+    // Keep the crouched turn clearance and the actual reach-based sink below.
+    marine.position.y -= .008 * crouch;
     marine.updateWorldMatrix(true, true);
     // CU-99: turning on planted boots carries his hips round over them; where a leg could not reach its boot, he sinks
     // into the turn by what it lacks (the knees bend a little more) instead of the boot slipping.
     let sink = 0;
     for (let i = 0; i < 2; i++) {
       legs[i].getWorldPosition(hip);
-      const reach = (knees[i].position.length() + ankles[i].position.length()) * sc * .995, f = feet[i];
+      const reach = (knees[i].position.length() + ankles[i].position.length()) * sc * (.999 - .004*crouch), f = feet[i];
       const h = Math.hypot(hip.x - f.p.x, hip.z - f.p.z), can = Math.sqrt(Math.max(0, reach * reach - h * h));
       sink = Math.max(sink, hip.y - f.p.y - can);
     }

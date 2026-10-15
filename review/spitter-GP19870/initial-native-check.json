@@ -1,0 +1,22 @@
+{
+  "context": "Initial native t80/t215 run overlapped other native captures and performance scenes.",
+  "t80": {
+    "pass": 13,
+    "fail": 1,
+    "failure": "and it stays at range: never closer than 1.5 m"
+  },
+  "t215": {
+    "pass": 4,
+    "fail": 0
+  },
+  "subsequentIsolatedRun": {
+    "t80": {
+      "pass": 14,
+      "fail": 0
+    },
+    "t215": {
+      "pass": 4,
+      "fail": 0
+    }
+  }
+}

@@ -4,6 +4,16 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-80 · The inspector is the game (Jerry, 2026-10-14; CL-196).** Jerry asked for an audit of AG-75's Marine Inspector,
+  which he means to use "for all visual inspections of models and animations for here on out", for the agents too, made
+  future-proof, robust and easy to change, and widened to every model. Asked whether it should run the real game's code
+  or keep copies of it, he chose the real game's code. The audit (studio/inspector/AUDIT.md) found the copy already
+  drifting from the game within hours (holdWeapon 0.28 similar, makeMarine 0.43) and parts of it invented. So: models and
+  animations are looked at in the inspector, `index.html?inspect` (Open Marine Inspector.bat), the game booted into a
+  studio, where every model is made by its own builder and every move is the game running at the game's own clock.
+  Nothing is copied out of the game for it. A new model is an entry in studio/inspector/catalog.js (and, if its builder
+  lives only in index.html, a line in inspectHost()); `node tools/camera.mjs check` builds and pictures every one. Agents
+  use window.DWInspect or the camera's --inspect mode. tools/marine-inspector.html stays as it was until Jerry retires it.
 - **D-79 · The game is Grave Shift (Jerry, 2026-10-09).** Jerry, 21:42 CT: "the name Dead-Wave is taken by another
   zombie TPS, so the game is now called Grave Shift. If you could rename everything Dead Wave that would be
   wonderful." Everything a player or the crew reads says Grave Shift (GRAVE SHIFT where a title is in capitals):

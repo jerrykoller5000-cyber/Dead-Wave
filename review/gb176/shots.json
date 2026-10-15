@@ -1,0 +1,548 @@
+[
+ {
+  "target": "weapon:minigun",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/minigun-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.244211631107103,
+   "y": -198.8754765279571,
+   "z": -631.7579999863624,
+   "tx": -25.946471987905106,
+   "ty": -198.90000000000003,
+   "tz": -631.7579999863624,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/minigun-side-close.png"
+ },
+ {
+  "target": "weapon:minigun",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/minigun-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.43201232453722,
+   "y": -198.5436580355411,
+   "z": -631.1448908342988,
+   "tx": -25.946471987905106,
+   "ty": -198.90000000000003,
+   "tz": -631.7579999863624,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/minigun-three-close.png"
+ },
+ {
+  "target": "weapon:m4",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/m4-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.4558411762609,
+   "y": -198.88146129189215,
+   "z": -631.8621474622868,
+   "tx": -25.986720317174957,
+   "ty": -198.89999999999998,
+   "tz": -631.8621474622868,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/m4-side-close.png"
+ },
+ {
+  "target": "weapon:m4",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/m4-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.65117173897178,
+   "y": -198.6675813128952,
+   "z": -631.4622562387233,
+   "tx": -25.986720317174957,
+   "ty": -198.89999999999998,
+   "tz": -631.8621474622868,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/m4-three-close.png"
+ },
+ {
+  "target": "weapon:ak",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/ak-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.426953373319638,
+   "y": -198.880552071601,
+   "z": -631.8637460154184,
+   "tx": -25.983869176781845,
+   "ty": -198.9,
+   "tz": -631.8637460154184,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/ak-side-close.png"
+ },
+ {
+  "target": "weapon:ak",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/ak-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.638736241798192,
+   "y": -198.66094268062452,
+   "z": -631.452432600229,
+   "tx": -25.983869176781845,
+   "ty": -198.9,
+   "tz": -631.8637460154184,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/ak-three-close.png"
+ },
+ {
+  "target": "weapon:pistol",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/pistol-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.868117451787324,
+   "y": -198.8953912424071,
+   "z": -631.9298570764298,
+   "tx": -26.000095001537844,
+   "ty": -198.90000000000003,
+   "tz": -631.9298570764298,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/pistol-side-close.png"
+ },
+ {
+  "target": "weapon:pistol",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/pistol-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.878025285643123,
+   "y": -198.81544806044056,
+   "z": -631.7843800539654,
+   "tx": -26.000095001537844,
+   "ty": -198.90000000000003,
+   "tz": -631.9298570764298,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/pistol-three-close.png"
+ },
+ {
+  "target": "weapon:uzi",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/uzi-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.737941997551285,
+   "y": -198.89108281989388,
+   "z": -631.958276249474,
+   "tx": -25.99329662564,
+   "ty": -198.9,
+   "tz": -631.958276249474,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/uzi-side-close.png"
+ },
+ {
+  "target": "weapon:uzi",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/uzi-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.771838660087564,
+   "y": -198.74660650365976,
+   "z": -631.6943529234183,
+   "tx": -25.99329662564,
+   "ty": -198.9,
+   "tz": -631.958276249474,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/uzi-three-close.png"
+ },
+ {
+  "target": "weapon:shotgun",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/shotgun-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.417153644529968,
+   "y": -198.87965348409344,
+   "z": -631.8190845932172,
+   "tx": -25.999801627454495,
+   "ty": -198.89999999999998,
+   "tz": -631.8190845932172,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/shotgun-side-close.png"
+ },
+ {
+  "target": "weapon:shotgun",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/shotgun-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.666975263482925,
+   "y": -198.66946686240675,
+   "z": -631.4224375782441,
+   "tx": -25.999801627454495,
+   "ty": -198.89999999999998,
+   "tz": -631.8190845932172,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/shotgun-three-close.png"
+ },
+ {
+  "target": "weapon:aa12",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/aa12-side.png"
+ },
+ {
+  "target": "weapon:aa12",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/aa12-three.png"
+ },
+ {
+  "target": "weapon:revolver",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/revolver-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.81383607337857,
+   "y": -198.8934990124308,
+   "z": -631.9066847630631,
+   "tx": -26,
+   "ty": -198.9,
+   "tz": -631.9066847630631,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/revolver-side-close.png"
+ },
+ {
+  "target": "weapon:revolver",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/revolver-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.840183448376713,
+   "y": -198.78930260618358,
+   "z": -631.7162228135101,
+   "tx": -26,
+   "ty": -198.9,
+   "tz": -631.9066847630631,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/revolver-three-close.png"
+ },
+ {
+  "target": "weapon:sniper",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/sniper-side.png"
+ },
+ {
+  "target": "weapon:sniper",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/sniper-three.png"
+ },
+ {
+  "target": "weapon:launcher",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/launcher-side.png"
+ },
+ {
+  "target": "weapon:launcher",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/launcher-three.png"
+ },
+ {
+  "target": "weapon:flamer",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/flamer-side.png"
+ },
+ {
+  "target": "weapon:flamer",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/flamer-three.png"
+ },
+ {
+  "target": "weapon:chainsaw",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/chainsaw-side.png"
+ },
+ {
+  "target": "weapon:chainsaw",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/chainsaw-three.png"
+ },
+ {
+  "target": "weapon:knife",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/knife-side.png"
+ },
+ {
+  "cam": {
+   "x": -25.67986308753801,
+   "y": -198.88882057267412,
+   "z": -631.8620000030845,
+   "tx": -26,
+   "ty": -198.9,
+   "tz": -631.8620000030845,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/knife-side-close.png"
+ },
+ {
+  "target": "weapon:knife",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/knife-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.803841514750005,
+   "y": -198.7641302614054,
+   "z": -631.62822742357,
+   "tx": -26,
+   "ty": -198.9,
+   "tz": -631.8620000030845,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/knife-three-close.png"
+ },
+ {
+  "target": "weapon:machete",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/machete-side.png"
+ },
+ {
+  "target": "weapon:machete",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/machete-three.png"
+ },
+ {
+  "target": "weapon:katana",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/katana-side.png"
+ },
+ {
+  "target": "weapon:katana",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/katana-three.png"
+ },
+ {
+  "target": "weapon:katana-sheathed",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/katana-sheathed-side.png"
+ },
+ {
+  "target": "weapon:katana-sheathed",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/katana-sheathed-three.png"
+ },
+ {
+  "target": "weapon:m240",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/m240-side.png"
+ },
+ {
+  "target": "weapon:m240",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/m240-three.png"
+ },
+ {
+  "target": "weapon:m240-folded",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/m240-folded-side.png"
+ },
+ {
+  "target": "weapon:m240-folded",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/m240-folded-three.png"
+ },
+ {
+  "target": "weapon:mortar",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-side.png"
+ },
+ {
+  "target": "weapon:mortar",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-three.png"
+ },
+ {
+  "target": "weapon:mortar-collapsed",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-collapsed-side.png"
+ },
+ {
+  "target": "weapon:mortar-collapsed",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-collapsed-three.png"
+ },
+ {
+  "target": "weapon:mortar-round",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-round-side.png"
+ },
+ {
+  "target": "weapon:mortar-round",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/mortar-round-three.png"
+ },
+ {
+  "target": "weapon:frag-grenade",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/frag-grenade-side.png"
+ },
+ {
+  "target": "weapon:frag-grenade",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/frag-grenade-three.png"
+ },
+ {
+  "target": "weapon:holy-grenade",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/holy-grenade-side.png"
+ },
+ {
+  "target": "weapon:holy-grenade",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/holy-grenade-three.png"
+ },
+ {
+  "target": "weapon:med-pen",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/med-pen-side.png"
+ },
+ {
+  "target": "weapon:med-pen",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/med-pen-three.png"
+ },
+ {
+  "target": "weapon:rune-pistol",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/rune-pistol-side.png"
+ },
+ {
+  "target": "weapon:rune-pistol",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/rune-pistol-three.png"
+ },
+ {
+  "target": "weapon:shovel",
+  "view": "side",
+  "size": "600x450",
+  "out": "review/gb176/after/shovel-side.png"
+ },
+ {
+  "cam": {
+   "x": -24.644161562550778,
+   "y": -199.1701530756452,
+   "z": -632,
+   "tx": -26,
+   "ty": -199.21749999718742,
+   "tz": -632,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/shovel-side-close.png"
+ },
+ {
+  "target": "weapon:shovel",
+  "view": "three",
+  "size": "600x450",
+  "out": "review/gb176/after/shovel-three.png"
+ },
+ {
+  "cam": {
+   "x": -25.153808680612485,
+   "y": -198.63138314774454,
+   "z": -630.9915484550979,
+   "tx": -26,
+   "ty": -199.21749999718742,
+   "tz": -632,
+   "fov": 35
+  },
+  "size": "600x450",
+  "out": "review/gb176/after/shovel-three-close.png"
+ }
+]

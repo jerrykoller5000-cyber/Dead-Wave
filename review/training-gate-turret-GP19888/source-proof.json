@@ -1,0 +1,12 @@
+[
+  {
+    "file": "game/training-containment.js",
+    "before": "041b9bc48bda206183a7c45a4c34fbf8b6a83c9b568a7a28fa1df6eff73f8675",
+    "after": "529622dfcdb2af9a5118bc21bc7abb87dae94b7df9c3397753275c08e4505a54"
+  },
+  {
+    "file": "game/training-containment.test.mjs",
+    "before": "e97693d311d1a47ab541c151462c7c7f0dedd39ca579ed2698a30597a99d7539",
+    "after": "36fe80627120a52199a4d8b81dfb9ea6600323dd599e1f37b0071f9f36f58a25"
+  }
+]

@@ -37,10 +37,10 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
   const filter = new THREE.MeshStandardMaterial({ color: 0xad713d, roughness: 1 });
   const ember = new THREE.MeshBasicMaterial({ color: 0xff6125, toneMapped: false });
   const ash = new THREE.MeshStandardMaterial({ color: 0x47433e, roughness: 1 });
-  const cigGeo = new THREE.CylinderGeometry(0.012, 0.012, 1, 6);
+  const cigGeo = new THREE.CylinderGeometry(0.0037, 0.0037, 1, 8);
   function cigarette() {
     const g = new THREE.Group();
-    for (const [mat, length, z] of [[filter, .035, .0175], [paper, .09, .08], [ember, .012, .131]]) {
+    for (const [mat, length, z] of [[filter, .021, .0105], [paper, .053, .0475], [ember, .004, .076]]) {
       const m = new THREE.Mesh(cigGeo, mat); m.rotation.x = Math.PI / 2;
       m.scale.y = length; m.position.z = z; g.add(m);
     }
@@ -57,8 +57,98 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
   const right = new THREE.Vector3(), left = new THREE.Vector3(), mouth = new THREE.Vector3();
   const tip = new THREE.Vector3(), local = new THREE.Vector3();
   const drops = [], pool = [];
+  const pinch=new THREE.Vector3(),middle=new THREE.Vector3(),offset=new THREE.Vector3(),want=new THREE.Vector3(),desired=new THREE.Vector3(),pinchTarget=new THREE.Vector3(),actual=new THREE.Vector3(),shoulder=new THREE.Vector3(),desiredDir=new THREE.Vector3(),actualDir=new THREE.Vector3();
+  const headQ=new THREE.Quaternion(),handQ=new THREE.Quaternion(),cigQ=new THREE.Quaternion(),parentQ=new THREE.Quaternion(),rootQ=new THREE.Quaternion(),armWorldQ=new THREE.Quaternion(),armParentQ=new THREE.Quaternion();
+  const twistQ=new THREE.Quaternion(),correctQ=new THREE.Quaternion(),axis=new THREE.Vector3();
+  const smokePose={f:[[.46,.58,.26,.08],[.5,.64,.3,-.08],[.96,1.08,.72,-.04],[1.08,1.16,.82,-.08]],t:[.7,-.08,.42]};
+  const PINCH_FROM_LIP=.018;
+  function pointOnHand(wrist,name,out){wrist.userData.hand.point(name,out);out.sub(wrist.position);return wrist.localToWorld(out);}
+  function holdPinch(target,draw){
+    const wr=u.elbowRG.userData.wrist,hand=wr?.userData.hand;if(!hand){solveArm('R',target);return;}
+    hand.set(smokePose).update();
+    // Hold the filter at the fingertips. The old PIP-joint anchor put both
+    // fingers and most of the glove through his nose and cheek.
+    hand.point('indexTip',pinch);hand.point('middleTip',middle);pinch.add(middle).multiplyScalar(.5).sub(wr.position);
+    u.headG.getWorldQuaternion(headQ);
+    // Turn the hand's finger axis up-left toward the cigarette. At -1.12 the
+    // wrist had to sit above the fingertips, which raised the elbow and spread
+    // the palm across his eye like a facepalm. This roll puts the wrist below
+    // and to the right of the pinch instead.
+    const handRoll = Number.isFinite(cig.userData.smokeRoll) ? cig.userData.smokeRoll : -2.3;
+    cig.userData.smokeRollApplied = handRoll;
+    handQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(headQ);
+    cigQ.copy(handQ);
+    offset.copy(pinch).multiply(wr.scale).applyQuaternion(handQ);
+    // `target` is the filter's lip end. Keep the fingertips outside the face,
+    // 1.8 cm down the cigarette, instead of solving the glove onto the lips.
+    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);
+    pinchTarget.copy(target).add(axis);
+    desired.copy(pinchTarget).sub(offset);
+    want.copy(desired);
+    // The generic two-bone solve uses the historical arm lengths, while the
+    // fitted sleeve/wrist rig has moved since those constants were authored.
+    // Its endpoint radius is right but its fitted shoulder basis can rotate the
+    // wrist off the requested bearing. Rotate the solved upper arm in world
+    // space by that measured angular error; this keeps the bend and reach while
+    // putting the real fitted wrist on the requested point.
+    solveArm('R',want,wr.position);
+    marine.updateWorldMatrix(true,true);
+    u.armRG.getWorldPosition(shoulder);
+    wr.getWorldPosition(actual);
+    desiredDir.copy(desired).sub(shoulder);
+    actualDir.copy(actual).sub(shoulder);
+    if(desiredDir.lengthSq()>.0001&&actualDir.lengthSq()>.0001){
+      correctQ.setFromUnitVectors(actualDir.normalize(),desiredDir.clone().normalize());
+      u.armRG.getWorldQuaternion(armWorldQ);
+      armWorldQ.premultiply(correctQ);
+      u.armRG.parent.getWorldQuaternion(armParentQ).invert();
+      u.armRG.quaternion.copy(armParentQ).multiply(armWorldQ);
+      marine.updateWorldMatrix(true,true);
+    }
+    const targetReach=shoulder.distanceTo(desired);
+    // Roll the forearm around the solved wrist line before asking the wrist to
+    // bend. Rolling preserves contact; putting all this twist in the wrist did not.
+    u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);
+    axis.copy(wr.position).normalize();
+    const projection=wr.quaternion.x*axis.x+wr.quaternion.y*axis.y+wr.quaternion.z*axis.z;
+    let angle=2*Math.atan2(projection,wr.quaternion.w);angle=Math.atan2(Math.sin(angle),Math.cos(angle));
+    twistQ.setFromAxisAngle(axis,Math.max(-1.7,Math.min(1.7,angle)));
+    u.elbowRG.quaternion.multiply(twistQ);u.elbowRG.updateWorldMatrix(true,false);
+    u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);
+    // Bound flexion during the travel between lip and resting hand. Contact
+    // follows the fingers throughout; the full draw already lies inside this limit.
+    const bend=2*Math.acos(Math.min(1,Math.abs(wr.quaternion.w)));
+    if(bend>1.05)wr.quaternion.slerp(new THREE.Quaternion(),1-1.05/bend);
+    wr.getWorldQuaternion(handQ);
+    marine.updateWorldMatrix(true,true);
+    wr.getWorldPosition(actual);
+    pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);
+    // Wrist flexion changes the fingertip offset after the arm solve. Correct
+    // the final rigid arm bearing from the measured fingertip, so the visible
+    // fingers—not merely the wrist proxy—finish on the cigarette.
+    desiredDir.copy(pinchTarget).sub(shoulder);
+    actualDir.copy(pinch).sub(shoulder);
+    if(desiredDir.lengthSq()>.0001&&actualDir.lengthSq()>.0001){
+      correctQ.setFromUnitVectors(actualDir.normalize(),desiredDir.clone().normalize());
+      u.armRG.getWorldQuaternion(armWorldQ);
+      armWorldQ.premultiply(correctQ);
+      u.armRG.parent.getWorldQuaternion(armParentQ).invert();
+      u.armRG.quaternion.copy(armParentQ).multiply(armWorldQ);
+      marine.updateWorldMatrix(true,true);
+      wr.getWorldPosition(actual);
+      pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);
+    }
+    // The prop follows the head-facing axis, not a clamped wrist quaternion:
+    // filter at the lips, ember out in front. This makes its direction explicit
+    // and prevents a bent wrist from visually reversing it.
+    root.worldToLocal(tip.copy(target));cig.position.copy(tip);
+    root.getWorldQuaternion(rootQ);cig.quaternion.copy(rootQ.invert()).multiply(cigQ);
+    cig.userData.pinch=pinch.toArray();cig.userData.mouth=target.toArray();cig.userData.draw=draw;
+    cig.userData.wristTarget=desired.toArray();cig.userData.wristActual=actual.toArray();
+    cig.userData.targetReach=targetReach;cig.userData.actualReach=shoulder.distanceTo(actual);cig.userData.handOffset=offset.length();
+  }
   let smokeT = 0;
-  function hide() { root.visible = false; }
+  function hide() { root.visible = false; u.balaclava?.userData.mouthOpen?.(0); }
   hide();
   function drop(lit) {
     if (!cig.visible || !root.visible) return;
@@ -104,18 +194,19 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     // CU-99: while the standing turn steps hold his legs (studio/marine-turn.js, u.turn.active), the weight shift is
     // theirs to make: they tilt his hips by u.idleSway over boots that stay planted. Bending his hips and knees here,
     // after they had planted the boots, slid the boots about.
-    if (u.turn && u.turn.active) u.idleSway = shift * .045;
+    if (u.turn && u.turn.active) u.idleSway = shift * .012;
     else {
-      u.lowerBody.rotation.z += shift * .045;
-      u.kneeLG.rotation.x += Math.max(0, shift) * .11;
-      u.kneeRG.rotation.x += Math.max(0, -shift) * .11;
+      u.lowerBody.rotation.z += shift * .012;
+      u.kneeLG.rotation.x += Math.max(0, shift) * .025;
+      u.kneeRG.rotation.x += Math.max(0, -shift) * .025;
     }
-    u.torsoG.rotation.z -= shift * .055;
-    u.torsoG.rotation.x += bored * .045;
+    u.torsoG.rotation.z -= shift * .014;
+    u.torsoG.rotation.x += bored * .008;
     u.headG.rotation.y += Math.sin((s.quiet - BORED_AFTER) * .53) * .3 * bored;
     u.headG.rotation.x += (.04 + .035 * Math.sin(s.quiet * .7)) * bored;
     if (s.phase !== 'pack' && s.phase !== 'smoking') return;
     root.visible = true;
+    u.balaclava?.userData.mouthOpen?.(1);
     const packing = s.phase === 'pack', t = s.time;
     const puff = t % 8;
     const draw = packing ? smooth((t - 2.1) / 1.0) :
@@ -126,23 +217,21 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     right.set(.28, .82, .2);
     if (packing) right.lerp(local.set(-.13, 1.11, .35), smooth((t - 1.0) / .5));
     marine.updateWorldMatrix(true, true);
-    u.headG.localToWorld(mouth.set(.04, .10, .19));
+    u.headG.localToWorld(mouth.set(.025, .125, .171));
     marine.worldToLocal(mouth);
     right.lerp(mouth, draw);
     if (packing && t > 2.9) left.lerp(local.set(mouth.x - .06, mouth.y - .06, mouth.z + .08), smooth((t - 2.9) / .35));
     if (packing && t > 3.65) left.lerp(local.set(-.27, .77, .12), smooth((t - 3.65) / .35));
     marine.localToWorld(right); marine.localToWorld(left);
-    solveArm('R', right); solveArm('L', left);
+    solveArm('L', left); holdPinch(right,draw);
     marine.updateWorldMatrix(true, true);
-    u.gripR.getWorldPosition(tip); root.worldToLocal(tip); cig.position.copy(tip);
-    cig.rotation.set(0, -.12 + u.headG.rotation.y * draw, 0);
     cig.visible = !packing || t > 1.55;
     const remaining = packing ? 1 : 1 - t / CIGARETTE_SECONDS;
-    cig.children[1].scale.y = .02 + .07 * remaining;
-    cig.children[1].position.z = .035 + cig.children[1].scale.y / 2;
-    cig.children[2].position.z = .041 + cig.children[1].scale.y;
+    cig.children[1].scale.y = .012 + .041 * remaining;
+    cig.children[1].position.z = .021 + cig.children[1].scale.y / 2;
+    cig.children[2].position.z = .023 + cig.children[1].scale.y;
     cig.children[2].material = s.lit || (packing && t > 3.35) ? ember : ash;
-    u.gripL.getWorldPosition(tip); root.worldToLocal(tip);
+    const wl=u.elbowLG.userData.wrist;if(wl?.userData.hand)pointOnHand(wl,'palm',tip);else u.gripL.getWorldPosition(tip);root.worldToLocal(tip);
     pack.position.copy(tip); pack.rotation.set(-.2, .1, 0); pack.visible = packing && t > .5 && t < 2.75;
     lighter.position.copy(tip); lighter.visible = packing && t > 3.1;
     spark.position.copy(tip); spark.position.y += .04; spark.visible = lighter.visible && t > 3.35 && t < 3.85;
@@ -150,7 +239,7 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     if (s.lit && smokeT <= 0) {
       smokeT = .4;
       const exhale = puff > 2.8 && puff < 4.5;
-      if (exhale) u.headG.localToWorld(tip.set(.04, .1, .21));
+      if (exhale) u.headG.localToWorld(tip.set(.025, .114, .162));
       else cig.localToWorld(tip.set(0, 0, cig.children[2].position.z));
       smoke(tip.x, tip.y, tip.z, { tone: 'pale', size: exhale ? .16 : .08, grow: exhale ? 2.2 : 1.7, vy: .24, life: 2.2, peak: .6 });
     }

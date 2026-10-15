@@ -1,0 +1,15 @@
+{
+  "out": "qa/2026-10-15-AG-80/after/",
+  "sheet": true,
+  "cols": 3,
+  "shots": [
+    { "target": "build:wire:*", "view": "three" },
+    { "target": "build:railing:*", "view": "three" },
+    { "target": "build:platform:*", "view": "three" },
+    { "target": "build:pillar:*", "view": "three" },
+    { "target": "build:stairs:*", "view": "three" },
+    { "target": "build:spikes:*", "view": "three" },
+    { "target": "build:mine:*", "view": "three" },
+    { "target": "build:lure:*", "view": "three" }
+  ]
+}

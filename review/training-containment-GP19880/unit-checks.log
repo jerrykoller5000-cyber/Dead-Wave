@@ -1,0 +1,16 @@
+✔ one centered inward mount on each wall, above heads and inside the actual room (1.0726ms)
+✔ idle fixtures do not shoot; all four spin up and shoot after a death trigger (3.9535ms)
+✔ 48 occupants are eliminated through three distinct arriving hits without stale recycled meshes (6.0668ms)
+✔ room cleanup ignores living zombies in the outdoor world and runs only after start (0.3973ms)
+✔ hidden tunnel entrants hold the sweep until they enter; they are never shot through the gate (0.8562ms)
+✔ reset cancels flying rounds and a later encounter has fresh hit counts (1.5028ms)
+✔ clear/removed targets cannot receive delayed impacts (0.6457ms)
+✔ paused time, repeated triggers and empty rooms cannot create duplicate sweeps (0.4321ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.9555

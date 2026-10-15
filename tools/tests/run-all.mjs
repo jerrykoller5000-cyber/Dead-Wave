@@ -270,10 +270,9 @@ if (failing.length || broken.length) {
     }
   }
 }
-// Exit non-zero only when something could not run at all. Known failures are tracked in
-// handoffs/requests.md and assigned to their owners; failing the whole suite on them would
-// make the suite useless as a signal for everyone else (AGENTS.md rule 13: never delete or
-// weaken a test to make the run green).
+// A coordinated full run keeps reporting the repository's tracked failures together.
+// A named spot check is an acceptance gate, though: its caller must not continue after
+// the check it explicitly requested failed (CU-147 exposed this in a batched camera run).
 let commit = '';
 try { commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { /* no git */ }
 const testsPath = path.join(ROOT, 'crew', 'tests.json');
@@ -299,4 +298,4 @@ fs.writeFileSync(testsPath, JSON.stringify({
   flaky,
   files
 }, null, 2) + '\n');
-process.exit(broken.length ? 1 : 0);
+process.exit(broken.length || (wanted.length && failing.length) ? 1 : 0);

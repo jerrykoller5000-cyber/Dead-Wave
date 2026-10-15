@@ -44,7 +44,11 @@
         if (!fit || Math.abs(sp.g.position.y - (fit.y - tp)) > 1e-6) continue;   // CL-160: the pistol rides there too
         if (sp.kind === 'pistol') pistolSeen++; else seen++;
         const P = sp.g.position;
-        ok(Math.abs(P.x) <= 0.13 && P.z >= -0.35, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', z ' + P.z.toFixed(3) + ')');
+        // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face
+        // (z -0.345, the pack ends at -0.333), not its origin; so check that surface: on the pack, not floating behind it.
+        const sb = new THREE.Box3(), sinv = new THREE.Matrix4().copy(sp.g.parent.matrixWorld).invert();
+        sp.gun.traverseVisible((o) => { const pa = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !pa) return; const sm = new THREE.Matrix4().multiplyMatrices(sinv, o.matrixWorld); for (let q = 0; q < pa.count; q++) sb.expandByPoint(V(pa.getX(q), pa.getY(q), pa.getZ(q)).applyMatrix4(sm)); });
+        ok(Math.abs(P.x) <= 0.13 && sb.max.z >= -0.36 && sb.max.z <= -0.333, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', front surface z ' + sb.max.z.toFixed(3) + ', origin z ' + P.z.toFixed(3) + ')');
         // Grip = the gun's -y; muzzle = its -z or +z: the grip points in (toward his spine), the barrel down.
         const gq = sp.gun.getWorldQuaternion(new THREE.Quaternion()), tq = torso.getWorldQuaternion(new THREE.Quaternion()).invert();
         const grip = V(0, -1, 0).applyQuaternion(gq).applyQuaternion(tq), barrel = V(0, 0, 1).applyQuaternion(gq).applyQuaternion(tq);

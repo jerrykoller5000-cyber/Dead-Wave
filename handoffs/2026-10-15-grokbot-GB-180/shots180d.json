@@ -1,0 +1,90 @@
+[
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/pistol-three.png",
+        "margin":  0.85,
+        "target":  "weapon:pistol",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/pistol-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:pistol",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/m4-left.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/m4-three.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/m4-threeR.png",
+        "margin":  0.85,
+        "target":  "weapon:m4",
+        "view":  "threeR"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/aa12-three.png",
+        "margin":  0.85,
+        "target":  "weapon:aa12",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/knife-three.png",
+        "margin":  0.85,
+        "target":  "weapon:knife",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/machete-three.png",
+        "margin":  0.85,
+        "target":  "weapon:machete",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/mortar-left.png",
+        "margin":  0.85,
+        "target":  "weapon:mortar",
+        "view":  "left"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/revolver-three.png",
+        "margin":  0.85,
+        "target":  "weapon:revolver",
+        "view":  "three"
+    },
+    {
+        "size":  "1000x750",
+        "settle":  2000,
+        "out":  "review/gb180d/flamer-left.png",
+        "margin":  0.85,
+        "target":  "weapon:flamer",
+        "view":  "left"
+    }
+]

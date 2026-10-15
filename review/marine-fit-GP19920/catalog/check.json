@@ -1,0 +1,48 @@
+{
+ "at": "2026-10-15T06:00:08.591Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "marine",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 161,
+   "tris": 91482,
+   "size": [
+    0.944,
+    1.8,
+    0.747
+   ],
+   "error": null
+  },
+  {
+   "id": "marine.fresh",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 565,
+   "tris": 31278,
+   "size": [
+    0.781,
+    1.573,
+    0.967
+   ],
+   "error": null
+  },
+  {
+   "id": "person.skeletal-marine",
+   "variant": null,
+   "mode": null,
+   "ok": true,
+   "ms": 300,
+   "tris": 2332,
+   "size": [
+    0.395,
+    1.647,
+    0.366
+   ],
+   "error": null
+  }
+ ]
+}

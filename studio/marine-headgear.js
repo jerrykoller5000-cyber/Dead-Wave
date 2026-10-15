@@ -209,3 +209,20 @@ export function detailMarineNvg(T,{pivot,put,mesh=(geo,mat)=>new T.Mesh(geo,mat)
   at(box(.017,.029,.018,.003),nvgMat,-.039,-.012,.004);
   return made;
 }
+
+// GP-19920: keep the existing hardware and cover, fitted to the shaped head.
+// Bake only these newly built meshes, before the rigid merge. Shared cached
+// geometries are cloned; the face, eyewear, and deployed NVG eye line stay put.
+export function fitMarineHelmetParts(T,parts,pivotY=1.22){
+  for(const o of parts){
+    if(!o.isMesh||!o.geometry?.attributes?.position)continue;
+    o.updateMatrix();const g=o.geometry.clone();g.applyMatrix4(o.matrix);
+    const p=g.attributes.position;
+    for(let i=0;i<p.count;i++){
+      const y=p.getY(i)+pivotY;
+      p.setXYZ(i,p.getX(i)*.84,y-.006-Math.max(0,y-1.48)*.37-pivotY,p.getZ(i)*.86);
+    }
+    g.computeVertexNormals();g.computeBoundingSphere();o.geometry=g;
+    o.position.set(0,0,0);o.rotation.set(0,0,0);o.scale.set(1,1,1);
+  }
+}

@@ -1,0 +1,240 @@
+--- index.html
++++ index.html
+@@ focused @@
+-    import { trainingFloorHit, traceTraining, createTrainingImpacts } from './world/training-ballistics.js';
++    import { createRangeFeature } from './ui/range-feature.js';   // GP-19901
++    import { trainingFloorHit, traceTraining, createTrainingImpacts } from './world/training-ballistics.js';
+@@ focused @@
+-    function ensureTrainingUi() {
++    // GP-19901: the console owns only its session and borrowed ammunition, never unlocks or weapon balance.
++    let rangeFeature=null,rangeShotPacket=null,rangeEventSerial=0;
++    function rangeSignature(w){return JSON.stringify({mode:weaponIsAuto(w)?'auto':'semi',ext:!!extMag[w],heavy:!!heavyFitted[w],can:!!suppressor[w],laser:!!gearOwned.laser&&lasersEnabled,auto:w==='pistol'&&pistolAutoFitted,skills:Object.fromEntries(Object.keys(SKILL_RANKS).map(k=>[k,skillLvl(localPlayer,k)]))});}
++    function rangeRefill(w){
++      if(!w)return;
++      fireCooldown=0; // a drill starts on a fresh weapon clock, without countdown catch-up fuel ticks
++      if(isMagazineWeapon(w)){const size=singleMagSize(w),maxSpare=magazineMaxSpare(w);issueMagazines(magazineStore,w,{size,loaded:size,spareRounds:size*maxSpare,maxSpare});syncMagazine(w);}
++      else if(w!=='chainsaw'){ammoByWeapon[w]=singleMagSize(w);reserveAmmo[caliberOf(w)]=RESERVE_CAP[caliberOf(w)]||60;}
++      else {sawFuel=sawFuelMax();sawHeat=0;sawOverheat=false;}
++      updateAmmoHud();
++    }
++    function ensureRangeFeature(){
++      if(rangeFeature||!training.tg)return;
++      rangeFeature=createRangeFeature(THREE,training.tg,{
++        owned:w=>!!weaponOwned[w],signature:rangeSignature,
++        context:()=>({position:localPlayer.position,camera:camera.position,previousZ:training.feetZ,pairChanged:dualActive,paused:paused||shopOpen||cifOpen,alive:playerHp>0&&!training.wake&&!gameOver,inTraining:training.active,busy:!!vault||!!training.wake||!!training.deployment?.read()||trainingAlive()>0||mortarMounted||mortarCarried||onAnyLadder()||!grounded}),
++        equip:w=>{
++          if(vault||!weaponOwned[w])return null;
++          const saved={weapon:currentWeapon,unarmed,holsteredKey,dual:dualActive,w,mag:magazineStore[w]?JSON.parse(JSON.stringify(magazineStore[w])):null,ammo:ammoByWeapon[w],reserve:{...reserveAmmo},fuel:sawFuel,heat:sawHeat,overheat:sawOverheat};
++          dualActive=false;if(unarmed){const was=paused;paused=false;toggleHolster();paused=was;}setWeapon(WEAPON_ORDER.indexOf(w));if(currentWeapon!==w){dualActive=saved.dual;return null;}
++          syncOffhandVisibility();rangeRefill(w);return saved;
++        },
++        refill:rangeRefill,
++        restore:s=>{
++          reloading=false;reloadTimer=0;reloadWeapon=null;resetReloadAnim();for(let i=droppedMags.length-1;i>=0;i--){const m=droppedMags[i];if(!m.rangeLoan)continue;scene.remove(m.mesh);m.mesh.material.dispose();droppedMags.splice(i,1);}if(s.mag)magazineStore[s.w]=s.mag;ammoByWeapon[s.w]=s.ammo;Object.assign(reserveAmmo,s.reserve);sawFuel=s.fuel;sawHeat=s.heat;sawOverheat=s.overheat;
++          dualActive=s.dual;setWeapon(WEAPON_ORDER.indexOf(s.weapon));if(s.unarmed!==unarmed){const was=paused;paused=false;toggleHolster();paused=was;}holsteredKey=s.holsteredKey;syncOffhandVisibility();updateAmmoHud();
++        },
++        pause:on=>{paused=on;syncReticleVisibility();},
++        stop:()=>{stopFiring();mouseFireHeld=false;zoomHeld=false;prevMouseFireHeld=false;flamerOn=false;sawCutting=false;rangeShotPacket=null;grenadeCharging=false;grenadeChargeT=0;grenadeArc.visible=false;cancelGrenadeAnim();for(const k of Object.keys(keys))keys[k]=false;},
++        cue:k=>{if(k==='start')AudioSys.relayBeep(true);else if(k==='end')AudioSys.hqDing();else if(k==='void')AudioSys.invalid();else if(k==='count')AudioSys.relayBeep(false);else if(k==='open')AudioSys.trainingCue('open');},
++        publish:(phase,s)=>publishUI('range-drill',{phase,weapon:s.drill?.weapon,drill:s.drill?.id,run:s.id,countdown:s.countdown,score:s.score,wave:s.wave,zone:s.plan?.zone,priority:s.plan?.priority}),
++        feedback:(index,point,sc)=>{const b=training.tg.targets[index].box;if(point)spawnEmbers(point.x,point.y,point.z,4,.5);AudioSys.trainingCue('target');training.pops?.add({x:(b.minX+b.maxX)/2,y:b.maxY+.18,z:(b.minZ+b.maxZ)/2},hitPopText(sc,z=>sayText('training.zone.'+z)));}
++      });
++    }
++    function rangeRound(p){
++      const tg=training.tg;if(!tg)return false;
++      const ignored=p.rangeTouched||(p.rangeTouched=new Set());let a={x:p.prev.x,y:p.prev.y,z:p.prev.z};const b={x:p.pos.x,y:p.pos.y,z:p.pos.z};
++      for(let n=0;n<5;n++){
++        const hit=traceTraining(tg,a,b,{ignoreTargets:ignored});if(!hit)return false;
++        if(hit.solid.target==null){if(hit.solid.lockerDoor)tg.wear?.hitDoor?.(hit.point,{x:p.dir.x,z:p.dir.z});if(!hit.solid.securityDoor&&!hit.solid.metal)training.impacts?.add(hit);spawnEmbers(hit.point.x,hit.point.y,hit.point.z,5,.4);p.hit=true;return true;}
++        const index=hit.solid.target;ignored.add(index);
++        if(rangeFeature?.owns())rangeFeature.hit(index,hit.point,p.rangePacket,p.rangeEvent);
++        if(p.pierce>0){p.pierce--;a={x:hit.point.x+p.dir.x*.001,y:hit.point.y+p.dir.y*.001,z:hit.point.z+p.dir.z*.001};continue;}
++        p.hit=true;return true;
++      }return false;
++    }
++
++    function ensureTrainingUi() {
+@@ focused @@
+-      training.active = true;
++      training.active = true;
++      ensureRangeFeature();
+@@ focused @@
+-    function leaveTraining() {
++    function leaveTraining() {
++      rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;
+@@ focused @@
+-      droppedMags.push({
+-        mesh,
++      droppedMags.push({
++        rangeLoan:!!rangeFeature?.owns()&&currentWeapon===rangeFeature.read().drill?.weapon,
++        mesh,
+@@ focused @@
+-['lightSwitch', 'trainingLights']];
++['lightSwitch', 'trainingLights'], ['rangeConsole', 'rangeConsole']];
+@@ focused @@
+-      if (a === 'cif') openCIF();
++      if (a === 'rangeConsole') { ensureRangeFeature();rangeFeature?.open(); }
++      else if (a === 'cif') openCIF();
+@@ focused @@
+-        else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');
++        else if (a === 'rangeConsole') text = 'E — '+sayText('range.prompt');
++        else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');
+@@ focused @@
+-UI_SKIP = '#shop,#cif,#trainingPanel,.tp-panel,
++UI_SKIP = '#rangeConsole,.range-card,#shop,#cif,#trainingPanel,.tp-panel,
+@@ focused @@
+-      if (e.code === 'Escape') {
+-        e.preventDefault();
+-        if (wheelIsOpen())
++      if (e.code === 'Escape') {
++        if(rangeFeature?.isOpen()){rangeFeature.exit();e.preventDefault();return;}
++        if(rangeFeature?.ruled()){rangeFeature.abort('cancel');e.preventDefault();return;}
++        e.preventDefault();
++        if (wheelIsOpen())
+@@ focused @@
+-      tg.update(dt);
++      tg.update(rangeFeature?.owns()&&(paused||shopOpen||cifOpen)?0:dt);
++      rangeFeature?.tick(dt);
+@@ focused @@
+-        if (!marineDown()) tryFire(dt);
++        rangeFeature?.check(); // gameplay feet after movement, before any attack
++        if (!marineDown()) tryFire(dt);
+@@ focused @@
+-    function openTrainingPanel() {
++    function openTrainingPanel() {
++      if(rangeFeature?.owns())rangeFeature.exit();
+@@ focused @@
+-    function openCIF() {
++    function openCIF() {
++      if(rangeFeature?.owns())rangeFeature.exit();
+@@ focused @@
+-    function openShop(force = false) {
++    function openShop(force = false) {
++      if(rangeFeature?.owns())rangeFeature.exit();
+@@ focused @@
+-    function beginWeaponShot() {
++    function beginWeaponShot() {
++      rangeShotPacket=rangeFeature?.attack(currentWeapon)||null;
+@@ focused @@
+-        while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {
++        while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {
++          if(rangeFeature&&!rangeFeature.canAttack('minigun'))break;
+@@ focused @@
+-        if (canShoot) {
++        if (canShoot) {
++          if(rangeFeature&&!rangeFeature.canAttack(currentWeapon))return;
+@@ focused @@
+-          flamerTick(st);
++          rangeShotPacket=rangeFeature?.attack('flamer',{units:.5,seconds:st.interval})||null;
++          flamerTick(st);
+@@ focused @@
+-        if (!fireHeld) { flamerOn = false; return; }
++        if (!fireHeld) { if(rangeFeature?.owns())fireCooldown=Math.max(0,fireCooldown);flamerOn = false; return; }
+@@ focused @@
+-        while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {
++        while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {
++          if(rangeFeature&&!rangeFeature.canAttack('flamer',.5)){flamerOn=false;break;}
+@@ focused @@
+-        AudioSys.chainsawStart();
+-        AudioSys.chainsawSetRev(1);
++        if(rangeFeature&&!rangeFeature.canAttack('chainsaw',dt))return;
++        AudioSys.chainsawStart();
++        AudioSys.chainsawSetRev(1);
+@@ focused @@
+-        sawCutting = true;
+-        sawBiteT
++        sawCutting = true;
++        if(rangeFeature?.owns()){const p=localPlayer.position;const hits=trainingMeleeHits(training.tg,{x:p.x,y:p.y+.9,z:p.z},{x:Math.sin(aimYaw),z:Math.cos(aimYaw)},st.reach,st.arc,Infinity);rangeFeature.saw(dt,hits);}
++        sawBiteT
+@@ focused @@
+-        fromTurret,
+-        kind: kind || 'bullet',
++        fromTurret,
++        rangePacket:fromTurret?null:rangeShotPacket,rangeEvent:++rangeEventSerial,
++        kind: kind || 'bullet',
+@@ focused @@
+-        isShell: true, // 40mm launcher round — distinct from Key-G throwable
++        rangePacket:rangeShotPacket,originWeapon:'launcher',
++        isShell: true, // 40mm launcher round — distinct from Key-G throwable
+@@ focused @@
+-          if (hitT <= 1) {
+-            g.pos.x = g.prev.x +
++          if(training.active&&training.tg&&rangeFeature?.owns()){const rangeHit=traceTraining(training.tg,g.prev,g.pos);if(rangeHit&&rangeHit.t<hitT)hitT=rangeHit.t;} // drill-only contact fuse on the real range solids
++          if (hitT <= 1) {
++            g.pos.x = g.prev.x +
+@@ focused @@
+-        mesh: acquireEffectMesh(flameGeo, flameCoreMat, MAX_FLAME), stage: 0,
+-        x: ox, y: oy, z: oz,
++        mesh: acquireEffectMesh(flameGeo, flameCoreMat, MAX_FLAME), stage: 0,
++        x: ox, y: oy, z: oz,rangePacket:rangeShotPacket,
+@@ focused @@
+-      const st = WEAPON_STATS.flamer;
+-
+-      for (let i = flameParticles.length - 1;
++      const st = WEAPON_STATS.flamer;
++      const rangeContacts=new Set();let rangeContactPacket=null;
++
++      for (let i = flameParticles.length - 1;
+@@ focused @@
+-        const p = flameParticles[i];
+-        stepFlameBlob(p, dt);
++        const p = flameParticles[i];
++        const rangePrev={x:p.x,y:p.y,z:p.z};
++        stepFlameBlob(p, dt);
++        if(rangeFeature?.owns()&&!p.quenched&&!p.grounded&&p.age<p.life*.7){const index=rangeFeature.flame(rangePrev,p,p.rangePacket);if(index!=null){rangeContacts.add(index);rangeContactPacket=p.rangePacket;}}
+@@ focused @@
+-        p.mesh.rotation.x += p.spin * 0.6 * dt;
+-      }
+-    }
++        p.mesh.rotation.x += p.spin * 0.6 * dt;
++      }
++      if(rangeContacts.size)rangeFeature.contact([...rangeContacts],dt,rangeContactPacket);
++    }
+@@ focused @@
+-      if (holyGrenadeReady()) { grenadeCd = 0.6; throwHolyGrenade(); return; }
++      if((holyGrenadeReady()||grenades>0)&&rangeFeature&&!rangeFeature.canAttack(currentWeapon,1,'throwable'))return;
++      if (holyGrenadeReady()) { grenadeCd = 0.6; throwHolyGrenade(); return; }
+@@ focused @@
+-      const bs = bladeStats();
+-      knifeCd = bs.cd;
++      if(rangeFeature&&!rangeFeature.canAttack(katanaOwned?'katana':macheteOwned?'machete':'knife'))return;
++      const bs = bladeStats();
++      knifeCd = bs.cd;
+@@ focused @@
+-      if (training.active && training.tg) for (const hit of trainingBlastHits(training.tg, g.pos, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z);
++      if(rangeFeature?.owns())rangeFeature.blast(g,AOE);
++      else if (!g.rangePacket&&training.active && training.tg) for (const hit of trainingBlastHits(training.tg, g.pos, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z);
+@@ focused @@
+-      if (!tg || !tg.targets[index]) return false;
++      if (!tg || !tg.targets[index]) return false;
++      if(rangeFeature?.owns())return false; // drill events use their origin token through the private adapter
+@@ focused @@
+-    function trainingMelee(reach, fx, fz, arc, limit) {
++    function trainingMelee(reach, fx, fz, arc, limit) {
++      if(rangeFeature?.owns())return 0;
+@@ focused @@
+-    function trainingRound(p) {
++    function trainingRound(p) {
++      if(rangeFeature?.owns()||p.rangePacket){const done=rangeRound(p);if(done!=null)return done;}
+@@ focused @@
+-isVaulting: () => !!vault, vaultDbg:
++rangeDbg: {read:()=>rangeFeature?.read(),open:()=>rangeFeature?.open(),exit:()=>rangeFeature?.exit(),start:d=>rangeFeature?.start(d),feature:()=>rangeFeature,packet:()=>rangeShotPacket}, isVaulting: () => !!vault, vaultDbg:
+--- world/training.js
++++ world/training.js
+@@ focused @@
+-TRAINING.LANE_MULT[i] || 1
++TRAINING.LANE_MULT[t.lane-1] || 1
+@@ focused @@
+-t.pivot.rotation.x = (t.fall || 1) * DOWN_A * u * u;
++t.pivot.rotation.x = t.drillControlled ? (t.drillFrom||0)+(DOWN_A-(t.drillFrom||0))*u*u : (t.fall || 1) * DOWN_A * u * u;
+@@ focused @@
+-if (t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }
++if (!t.drillControlled && t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }
+@@ focused @@
+-t.pivot.rotation.x = (t.fall || 1) * (DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06);
++t.pivot.rotation.x = t.drillControlled ? (t.drillFrom??DOWN_A)*(1-e)-Math.sin(u*Math.PI)*.06 : (t.fall || 1) * (DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06);
+--- world/training-ballistics.js
++++ world/training-ballistics.js
+@@ focused @@
+-    if(solid.target!=null && tg.targets[solid.target].state!=='up')continue;
++    if(solid.target!=null && (opts?.ignoreTargets?.has(solid.target)||tg.targets[solid.target].state!=='up'))continue;

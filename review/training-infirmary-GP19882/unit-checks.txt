@@ -1,0 +1,17 @@
+✔ walking into the stretcher stops outside the frame, including player width (0.9726ms)
+✔ a roll cannot tunnel through the whole bed when its endpoint is beyond it (0.1483ms)
+✔ diagonal approach preserves sideways sliding, and tangent motion does not snag corners (0.1968ms)
+✔ exact diagonal corner contact cannot pass into furniture (0.1242ms)
+✔ landing or loading inside furniture ejects into the open aisle, not the wall (0.1645ms)
+✔ IV stand and oxygen cylinder block bodies but the recovery stand point stays free (0.1224ms)
+✔ objects are constrained only where the body overlaps their vertical range (0.1304ms)
+✔ walking away after contact is unrestricted and unrelated room positions remain clear (0.1415ms)
+✔ the sagging spare cot also blocks walking without enclosing the infirmary floor (0.1229ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 75.6696

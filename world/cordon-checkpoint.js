@@ -89,17 +89,36 @@ export function buildCordonCheckpoint(T,{height,inside,outside,surface=height,do
   const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('color',new T.Float32BufferAttribute(cols,3));geo.computeVertexNormals();const fixtures=new T.Mesh(geo,new T.MeshStandardMaterial({vertexColors:true,roughness:1}));fixtures.castShadow=true;fixtures.receiveShadow=true;root.add(fixtures);
   // Ragged feathered shoulders, darker wheel ruts, and a grassy centre outside.
   const pp=[],cc=[],uv=[],bands=Array.from({length:25},(_,k)=>k/12-1);
+  // GB-164 (Jerry: "make this path/road transition at the radio tower a little better"): the inside track no longer
+  // stops in a blunt cap on the trail. It runs on JUNCTION.over m across the footpath, flares wider over its last
+  // JUNCTION.len m (fillets into the path), and fades out with a ragged, dirt-tinted edge, gravel specks scattered
+  // into the dirt past it. Vertex alpha on the same mesh; no extra draw, no collision.
+  const JUNCTION={len:5.5,over:1.6,flare:1.5,specks:150};
+  let jSeed=164;const jr=()=>(jSeed=(Math.imul(jSeed,1664525)+1013904223)>>>0)/4294967296;
+  const sstep=(t)=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
   const makeRoad=(points,outer)=>{
+    if(!outer&&points.length>1){const a=points.at(-2),b=points.at(-1),l=Math.hypot(b.x-a.x,b.z-a.z)||1;points=[...points];for(let k=1;k<=3;k++)points.push({x:b.x+(b.x-a.x)/l*JUNCTION.over*k/3,z:b.z+(b.z-a.z)/l*JUNCTION.over*k/3});}
+    const L=[0];for(let i=1;i<points.length;i++)L.push(L[i-1]+Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z));const tot=L.at(-1);
     const rows=points.map((p,i)=>{const a=points[Math.max(0,i-1)],b=points[Math.min(points.length-1,i+1)],len=Math.hypot(b.x-a.x,b.z-a.z)||1,nx=(b.z-a.z)/len,nz=-(b.x-a.x)/len;
-      const w=(outer?2.15:2.35)+(outer?0:Math.max(0,1-p.z/12)*.65);
-      return bands.map((u,k)=>{const edge=.055*Math.sin(i*.73+k*.7),x=p.x+nx*(w*u+edge*Math.abs(u)),z=p.z+nz*(w*u+edge*Math.abs(u));return{v:[x,surface(x,z)+.035,z],c:[1,1,1],uv:[(outer?.5:0)+.002+(u+1)*.248,i/(points.length-1)]};});});
+      const e=tot-L[i],jn=outer?0:1-Math.min(1,e/JUNCTION.len);
+      const w=(outer?2.15:2.35)+(outer?0:Math.max(0,1-p.z/12)*.65)+JUNCTION.flare*jn*jn;
+      return bands.map((u,k)=>{const edge=(.055+jn*.35)*Math.sin(i*.73+k*.7)+jn*.25*(jr()-.5),x=p.x+nx*(w*u+edge*Math.abs(u)),z=p.z+nz*(w*u+edge*Math.abs(u));
+        let al=1,c=[1,1,1];
+        if(jn>0){al=sstep((e-.3+(jr()-.5)*1.6-Math.abs(u)*1.4)/(JUNCTION.len*.75));const dirt=(1-al)*.75;c=[1-dirt*.08,1-dirt*.2,1-dirt*.38];}
+        return{v:[x,surface(x,z)+.035,z],c:[...c,al],uv:[(outer?.5:0)+.002+(u+1)*.248,i/(points.length-1)]};});});
     for(let i=0;i<rows.length-1;i++)for(let k=0;k<bands.length-1;k++)for(const [r,j]of[[i,k],[i+1,k],[i+1,k+1],[i,k],[i+1,k+1],[i,k+1]]){pp.push(...rows[r][j].v);cc.push(...rows[r][j].c);uv.push(...rows[r][j].uv);}
+    if(!outer)for(let n=0;n<JUNCTION.specks;n++){   // loose gravel scattered into the dirt round the end
+      const e=-0.6+Math.pow(jr(),1.6)*(JUNCTION.len+.6),i=Math.max(0,Math.min(points.length-2,L.findIndex(v=>v>=tot-e)-1)),p=points[i],q=points[i+1],len=Math.hypot(q.x-p.x,q.z-p.z)||1,dx=(q.x-p.x)/len,dz=(q.z-p.z)/len;
+      const side=(jr()*2-1)*(2.6+JUNCTION.flare),cx=p.x+dz*side,cz=p.z-dx*side,r=.04+jr()*jr()*.11,g=.75+jr()*.45,ang=jr()*6.28;
+      const cs=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b])=>{const x=cx+(a*Math.cos(ang)-b*Math.sin(ang))*r,z=cz+(a*Math.sin(ang)+b*Math.cos(ang))*r;return[x,surface(x,z)+.04,z];});
+      for(const j of[0,1,2,0,2,3]){pp.push(...cs[j]);cc.push(g,g*.97,g*.92,1);uv.push(.25,.5);}
+    }
   };
   makeRoad(inside,false);makeRoad(outside,true);
-  const roadGeo=new T.BufferGeometry();roadGeo.setAttribute('position',new T.Float32BufferAttribute(pp,3));roadGeo.setAttribute('color',new T.Float32BufferAttribute(cc,3));roadGeo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));roadGeo.computeVertexNormals();
+  const roadGeo=new T.BufferGeometry();roadGeo.setAttribute('position',new T.Float32BufferAttribute(pp,3));roadGeo.setAttribute('color',new T.Float32BufferAttribute(cc,4));roadGeo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));roadGeo.computeVertexNormals();
   let map=null;
   if(doc){const cv=doc.createElement('canvas');cv.width=512;cv.height=2048;const ctx=cv.getContext('2d'),im=ctx.createImageData(cv.width,cv.height);let seed=291;
     for(let y=0;y<cv.height;y++)for(let x=0;x<cv.width;x++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const noise=seed/4294967296,outer=x>=256,u=((x%256)/255)*2-1,wob=.035*Math.sin(y*.041)+.025*Math.sin(y*.127),r=Math.abs(u-wob),rut=Math.exp(-Math.pow((r-.49)/.17,4)),edge=Math.max(0,Math.min(1,(.99-r-noise*.07)/.15));const grain=.84+noise*.26+.04*Math.sin(y*.047+x*.1),base=outer?112-rut*18:122-rut*11,alpha=edge*(outer?.07+rut*.88:.9)*((outer&&y<200)?y/200:1),i=(y*cv.width+x)*4;im.data[i]=base*grain;im.data[i+1]=(base-15)*grain;im.data[i+2]=(base-34)*grain;im.data[i+3]=255*alpha;}
     ctx.putImageData(im,0,0);map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;map.anisotropy=4;}
-  const road=new T.Mesh(roadGeo,new T.MeshStandardMaterial({map,color:map?0xffffff:0x7f6b4e,transparent:true,depthWrite:false,roughness:1,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));road.name='convoy-approach-tracks';road.receiveShadow=true;root.add(road);root.userData.routes={inside,outside};root.userData.solids=[{x:bx,z:bz,r:1.45,y:by,h:2.75},...[[3.55,7],[3.9,11],[-3.45,12],[3.4,-4],[-3.4,-4]].map(([x,z])=>({x,z,r:.66,y:height(x,z),h:.72}))];return root;
+  const road=new T.Mesh(roadGeo,new T.MeshStandardMaterial({map,vertexColors:true,color:map?0xffffff:0x7f6b4e,transparent:true,depthWrite:false,roughness:1,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));road.name='convoy-approach-tracks';road.receiveShadow=true;root.add(road);root.userData.routes={inside,outside};root.userData.solids=[{x:bx,z:bz,r:1.45,y:by,h:2.75},...[[3.55,7],[3.9,11],[-3.45,12],[3.4,-4],[-3.4,-4]].map(([x,z])=>({x,z,r:.66,y:height(x,z),h:.72}))];return root;
 }

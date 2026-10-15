@@ -1,0 +1,125 @@
+{
+  "runs": [
+    {
+      "phase": "firstOrbit",
+      "frames": 380,
+      "fps": 58.319776543332026,
+      "p95": 17.799999982118607,
+      "p99": 19.099999994039536,
+      "worst": 199.59999999403954,
+      "over50": 1,
+      "over100": 1,
+      "materialVersions": 0,
+      "render": {
+        "calls": 6956,
+        "frameCalls": 15,
+        "drawCalls": 321,
+        "triangles": 88501,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "phase": "wearOff",
+      "frames": 391,
+      "fps": 60.02456248081056,
+      "p95": 17.400000005960464,
+      "p99": 19.19999998807907,
+      "worst": 19.599999994039536,
+      "over50": 0,
+      "over100": 0,
+      "materialVersions": 0,
+      "render": {
+        "calls": 12821,
+        "frameCalls": 15,
+        "drawCalls": 305,
+        "triangles": 88445,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "phase": "wearOn",
+      "frames": 391,
+      "fps": 60.036543983404066,
+      "p95": 17.200000017881393,
+      "p99": 17.69999998807907,
+      "worst": 17.900000005960464,
+      "over50": 0,
+      "over100": 0,
+      "materialVersions": 0,
+      "render": {
+        "calls": 18686,
+        "frameCalls": 15,
+        "drawCalls": 323,
+        "triangles": 88593,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "phase": "wearOff2",
+      "frames": 391,
+      "fps": 60.019955483920484,
+      "p95": 17.599999994039536,
+      "p99": 18.700000017881393,
+      "worst": 18.80000001192093,
+      "over50": 0,
+      "over100": 0,
+      "materialVersions": 0,
+      "render": {
+        "calls": 24551,
+        "frameCalls": 15,
+        "drawCalls": 308,
+        "triangles": 88481,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "phase": "wearOn2",
+      "frames": 390,
+      "fps": 59.94835218893835,
+      "p95": 17.399999976158142,
+      "p99": 17.700000017881393,
+      "worst": 17.799999982118607,
+      "over50": 0,
+      "over100": 0,
+      "materialVersions": 0,
+      "render": {
+        "calls": 30401,
+        "frameCalls": 15,
+        "drawCalls": 332,
+        "triangles": 88677,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  ],
+  "decals": 14,
+  "materials": 215,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "wearParts": [
+    "build-floor",
+    "build-wall-west",
+    "build-wall-east",
+    "build-wall-south",
+    "build-wall-north-w",
+    "build-wall-north-e",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web",
+    "build-web"
+  ],
+  "errors": []
+}

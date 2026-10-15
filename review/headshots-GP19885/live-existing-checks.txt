@@ -1,0 +1,27 @@
+t109
+PASS the chain takes the crowd: 6/6
+PASS the streak rises by the whole chain: 6 (want 6)
+PASS a bomber a turret kills: the chain still goes off, the streak stays 0
+PASS a bomber he shoots at a cave mouth never pokes the cave 
+PASS no page errors
+t215
+PASS read index.html and the scripts and styles the game loaded (217 files)
+PASS no broken characters in them
+PASS the HUD reads clean: timeLine "Daylight · 08:17 · Grace", tacticalLine "NVG — · Laser — · Light —", grenadeChips "G×3H×0", ammoDetail "12 / 12  ·  50 Bullets  ·  SEMI", hpNum "100 / 100"
+PASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)
+t111
+PASS a brute hit just under its head line (0.73) is a body hit: 9.00 vs 9.00
+PASS at 0.76 it is a headshot, as at the crown: 18.00 (body 9.00, crown 18.00)
+FAIL a shambler keeps 0.78: 0.76 body (20.00), 0.80 head (20.00)
+PASS a walking brute's head centre sits above its line with a margin: p10 0.798 (line 0.74, 60 samples)
+FAIL feral: 0.67 is a body hit (20.00 = chest 20.00), 0.73 a headshot (20.00)
+PASS feral's head centre sits above its line while it walks: median 0.774 (line 0.7, 45 samples)
+INFO feral head centre p10 0.691, median 0.774 of hitH (line 0.7)
+FAIL leaper: 0.52 is a body hit (26.00 = chest 26.00), 0.58 a headshot (26.00)
+PASS leaper's head centre sits above its line while it walks: median 0.659 (line 0.55, 45 samples)
+INFO leaper head centre p10 0.582, median 0.659 of hitH (line 0.55)
+FAIL spider: 0.57 is a body hit (14.00 = chest 14.00), 0.63 a headshot (14.00)
+PASS spider's head centre sits above its line while it walks: median 0.741 (line 0.6, 45 samples)
+INFO spider head centre p10 0.713, median 0.741 of hitH (line 0.6)
+PASS no page errors
+Errors []

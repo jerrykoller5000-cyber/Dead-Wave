@@ -1,0 +1,11 @@
+FAIL at rest every walker's soles are on the ground, within 3 cm (shambler 1000000003.17, feral 1000000003.17, drowned 1000000003.17, military 1000000003.17, brute 1000000003.17, spitter 1000000003.17, screamer 1000000003.17, colossus 1000000003.17, demon 1000000003.17, bomber 1000000003.17)
+FAIL walking, no foot goes more than 5 cm into the ground or lifts past 20 cm (shambler 1000000000.00/1000000200.00, feral 1000000000.00/1000000200.00, drowned 1000000000.00/1000000200.00, military 1000000000.00/1000000200.00, brute 1000000000.00/1000000200.00, spitter 1000000000.00/1000000200.00, screamer 1000000000.00/1000000200.00, colossus 1000000000.00/1000000200.00, demon 1000000000.00/1000000200.00, bomber 1000000000.00/1000000200.00)
+PASS every head is inside its hit column, give or take 4 cm of pose (shambler 1.71<2.00 feral 1.29<1.61 drowned 1.64<1.91 military 1.86<2.20 brute 2.50<2.83 spitter 1.86<2.17 screamer 1.72<1.95 colossus 3.95<4.71 demon 2.53<3.26 bomber 1.76<2.03)
+FAIL and its centre is in the headshot slice, above 0.78 of hitH, brute aside (spitter 1.86/2.17/0.75, demon 2.53/3.26/0.76)
+FAIL a bullet at the head's centre is a headshot (military 6.00/5.00, spitter 13.00/13.00, demon 12.00/12.00)
+PASS hitH (about) unchanged where the head already fitted (brute 2.83, colossus 4.71)
+PASS two pellets do not give it a reacting body
+FAIL its feet stay on the ground (deepest 9.00 m) and after (1000000200.00 m)
+PASS a crawling shambler's hips stay where they were (0.25-0.25 m, before 0.25)
+PASS leaper and spider hips unchanged (0.57, 0.50)
+PASS no page errors

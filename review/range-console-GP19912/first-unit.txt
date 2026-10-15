@@ -1,0 +1,84 @@
+✔ a real head hit rejected by a bull-only drill explains the deduction instead of going silent (1.8869ms)
+✔ a wrong priority lane explains which visible plate should be shot next (0.2516ms)
+✔ four-count shows partial progress while leaving the plate up until all four actual hits (0.3982ms)
+✔ legal single-hit credit and bull-as-ring rules retain their original feedback and score (0.2154ms)
+✔ a previous activation or run cannot generate either points or a misleading rejection popup (0.2268ms)
+✔ a duplicate accepted contact does not manufacture progress or points (0.1872ms)
+✔ a shot at the already cleared plate is identified without increasing its score (0.1844ms)
+✖ exact twelve weapons, five distinct drills each; all copy keys exist (1.3649ms)
+✔ eight full seconds down; beep/timer/raise occur at the same transition (1.1329ms)
+✔ COUNTDOWN: wrong gun misses voids immediately (0.2781ms)
+✔ COUNTDOWN: thrown grenade misses voids immediately (0.1016ms)
+✔ COUNTDOWN: wrong launcher voids immediately (0.1144ms)
+✔ COUNTDOWN: position has no line-crossing disqualification (0.1398ms)
+✔ COUNTDOWN: leaving the room still aborts (0.1317ms)
+✔ ACTIVE: wrong gun misses voids immediately (0.3193ms)
+✔ ACTIVE: thrown grenade misses voids immediately (0.3013ms)
+✔ ACTIVE: wrong launcher voids immediately (0.4442ms)
+✔ ACTIVE: position has no line-crossing disqualification (0.2822ms)
+✔ ACTIVE: leaving the room still aborts (0.2299ms)
+✔ 40 mm selected launcher is legal, weapon switching alone is inert (0.4777ms)
+✔ invalid starting position refuses preparation (0.1107ms)
+✔ preparation validates the room, not a removed line rule (0.1411ms)
+✔ pause freezes countdown and timeline (0.2874ms)
+✔ pre-start, previous activation/run, duplicate and post-end attacks cannot score (0.8154ms)
+✔ not-yet-upright target never scores (0.2031ms)
+✔ a late projectile or blast from an earlier activation cannot score the next wave (0.4568ms)
+✔ a wrong-zone shotgun discharge incurs one deduction per target, not one per pellet (0.4334ms)
+✔ seven legitimate pellets retained, duplicate callbacks and eighth pellet capped; accuracy <=100 (0.2773ms)
+✔ piercing and blast score distinct plates once and collateral accuracy stays <=100 (0.7189ms)
+✔ continuous scoring equal at 30/60/144 Hz and holding cleared plate cannot farm (2.2609ms)
+✔ continuous empty firing costs fuel/time, stale flames do not earn contact (0.2386ms)
+✔ limited ammunition stops at exact budget and completes after flight drain (0.3179ms)
+✔ death, leave, loadout change and cancellation are never valid runs (0.6245ms)
+✖ all 60 patterns can be played to a finite completion with scoring (43.9818ms)
+✔ saw bank legally within actual 3.1m reach; flame bank within actual 7.5m range (0.3984ms)
+✔ records survive reload, cap top10, separate config/loadout and exclude VOID/aborted (1.4547ms)
+✔ records reject duplicates, malformed data; deterministic ties; quota gracefully retains in memory (0.2899ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 35
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.3475
+
+✖ failing tests:
+
+test at ui\range-drills.test.mjs:7:1
+✖ exact twelve weapons, five distinct drills each; all copy keys exist (1.3649ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  65 !== 60
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/ui/range-drills.test.mjs:7:89)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 65,
+    expected: 60,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ui\range-drills.test.mjs:28:1
+✖ all 60 patterns can be played to a finite completion with scoring (43.9818ms)
+  AssertionError [ERR_ASSERTION]: pistol/draw-ready
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/ui/range-drills.test.mjs:28:637)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

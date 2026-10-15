@@ -1,0 +1,7 @@
+{
+  "approved": "Jerry: Apply the tested grenade fence fix",
+  "hooks": 4,
+  "before": "dcb36d1c8b2dd6ade98eca89f18e552b299a5c3b80abf42429c9c0a29f068a2f",
+  "after": "0ff971d21ae1655240c33a948601330fa252ba886e8d0e9b4bee28fef7ce39a1",
+  "helper": "58fe23d3cfe28f939d021e531a9ed182b8f29a313b363524abf1e0b2494336b1"
+}

@@ -1,0 +1,11 @@
+== t217 2026-10-15T04:18:37.6513806-05:00
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t217    53 pass   2 fail  23.6s
+
+1 checks: 53 pass, 2 fail
+
+by owner:
+  unassigned
+    t217   2 fail  FAIL sniper: the can is on the bore axis (off by 40.0 mm)
+           FAIL sniper: the can is on the bore axis (off by 40.0 mm)
+           FAIL sniper: the can is in proportion to the barrel (-0.00x its radius)

@@ -1,0 +1,17 @@
+{
+  "bannerBefore": "flex",
+  "started": {
+    "ok": true,
+    "id": "1791952393816-1"
+  },
+  "bannerDuring": "none",
+  "bannerAfter": "flex",
+  "performance": {
+    "fps": 60.17450606705646,
+    "low": 55.55555555555556,
+    "worst": 18,
+    "hitches": 0,
+    "frames": 60
+  },
+  "errors": []
+}

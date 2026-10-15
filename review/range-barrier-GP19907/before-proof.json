@@ -1,0 +1,44 @@
+{
+  "mode": "before",
+  "loadSeconds": 22.433,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "geometry": {
+    "walk": [
+      {
+        "minX": -7.58,
+        "maxX": 7.2,
+        "minZ": -651.58,
+        "maxZ": -610.9
+      },
+      {
+        "minX": -8.47,
+        "maxX": -7.53,
+        "minZ": -649.08,
+        "maxZ": -646.92
+      },
+      {
+        "minX": -43.2,
+        "maxX": -8.42,
+        "minZ": -651.58,
+        "maxZ": -612.75
+      }
+    ],
+    "spawn": {
+      "x": 0,
+      "z": -640.61,
+      "yaw": 0
+    },
+    "fixture": false,
+    "draws": 0,
+    "triangles": 0,
+    "solids": []
+  },
+  "performance": {
+    "fps": 60.52658125688984,
+    "low": 53.47593583100763,
+    "worst": 18.699999999254942,
+    "hitches": 0,
+    "frames": 60
+  },
+  "errors": []
+}

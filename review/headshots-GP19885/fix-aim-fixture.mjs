@@ -1,0 +1,1 @@
+import fs from 'node:fs';const p='review/headshots-GP19885/aim-check.mjs';let s=fs.readFileSync(p,'utf8');s=s.replace("i<5","i<10").replace("T.setShotView({x:-26,y:f+3,z:-627,tx:-30,ty:f+1.1,tz:-632,fov:38});","T.setShotView(null);T.camera.updateMatrixWorld(true);").replace("window.pointAt=async(local)","await wait(800);window.pointAt=async(local)");fs.writeFileSync(p,s,'utf8');

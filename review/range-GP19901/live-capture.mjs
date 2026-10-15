@@ -1,0 +1,25 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';
+const dir='review/range-GP19901',E=new Engine({training:true,warm:'none',size:'1400x900'}),proof={};
+try{
+ await E.open();
+ await E.ev(`R.release();T.trainingDbg.panel().close();T.AudioSys.setMuted(true);T.player.position.set(0,-200,-650.45);T.setVelDbg(0,0);await wait(600);`);
+ await E.shoot({live:true,ui:true,out:dir+'/live-station.png',settle:450});
+ proof.rear=await E.ev(`const g=T.trainingDbg.tg().group.getObjectByName('training-range-console');return g.children.filter(x=>x.isMesh).flatMap(x=>Array.isArray(x.material)?x.material:[x.material]).map(m=>m.opacity);`);assert(proof.rear.every(a=>a<.1));
+ await E.shoot({cam:{x:3,y:-196,z:-645,tx:0,ty:-198.6,tz:-651.82,fov:35},ui:true,out:dir+'/live-console-prop.png',settle:650});
+ proof.front=await E.ev(`const g=T.trainingDbg.tg().group.getObjectByName('training-range-console');return g.children.filter(x=>x.isMesh).flatMap(x=>Array.isArray(x.material)?x.material:[x.material]).map(m=>m.opacity);`);assert(proof.front.every(a=>a>.99));
+ if(!process.argv.includes('--prop-only')){
+ proof.station=await E.ev(`document.body.dispatchEvent(new KeyboardEvent('keydown',{code:'KeyE',bubbles:true}));await wait(200);return {action:T.trainingDbg.action(),open:!document.getElementById('rangeConsole').hidden,drills:document.querySelectorAll('[data-drill]').length};`);assert.equal(proof.station.action,'rangeConsole');assert(proof.station.open);assert.equal(proof.station.drills,5);await E.shoot({live:true,ui:true,out:dir+'/live-console.png'});
+ proof.inventory=await E.ev(`T.rangeDbg.exit();R.release();T.grantAllWeapons();T.setWeapon(T.WEAPON_ORDER.indexOf('pistol'));if(T.isUnarmed())T.toggleHolster();T.setDualOwnedDbg('pistol');await wait(650);T.toggleDualWieldDbg();T.setMagazinesDbg('pistol',4,[3,2],5);const before=T.magazinesDbg('pistol'),owned=JSON.stringify(T.getWeaponOwned());T.player.position.set(0,-200,-640.61);T.setVelDbg(0,0);const d=(await import('/ui/range-drills.js')).findDrill('pistol','pop-patrol');const r=T.rangeDbg.start(d),single=!T.vaultDbg.flags().dualActive;T.rangeDbg.exit();return {r,single,before,after:T.magazinesDbg('pistol'),dual:T.vaultDbg.flags().dualActive,sameUnlocks:owned===JSON.stringify(T.getWeaponOwned())};`);
+ assert(proof.inventory.r.ok);assert(proof.inventory.single);assert(proof.inventory.dual);assert(proof.inventory.sameUnlocks);assert.deepEqual(proof.inventory.after,proof.inventory.before);
+ proof.scene=await E.ev(`T.rangeDbg.open();T.trainingDbg.leave();const out={roots:document.querySelectorAll('#rangeConsole').length,feature:T.rangeDbg.feature()};T.trainingDbg.enter();await wait(500);return {out,in:{roots:document.querySelectorAll('#rangeConsole').length,huds:document.querySelectorAll('#rangeDrillHud').length,targets:T.trainingDbg.tg().targets.length}};`);assert.equal(proof.scene.out.roots,0);assert.equal(proof.scene.out.feature,null);assert.equal(proof.scene.in.roots,1);assert.equal(proof.scene.in.huds,1);assert.equal(proof.scene.in.targets,5);
+ }
+ if(proof.scene){
+ const measure=`const samples=[];for(let j=0;j<3;j++){let last=performance.now(),a=[];for(let i=0;i<120;i++){await new Promise(requestAnimationFrame);const now=performance.now();a.push(now-last);last=now;}samples.push({fps:1000/(a.reduce((a,b)=>a+b,0)/a.length),worst:Math.max(...a),hitches:a.filter(x=>x>50).length});}return {samples,alive:T.trainingDbg.alive()};`;
+ await E.ev(`T.trainingDbg.clear();T.runDevCommand('godmode');T.player.position.set(0,-200,-640.61);T.setVelDbg(0,0);T.setShotView({x:10,y:-184,z:-654,tx:0,ty:-199,tz:-632,fov:48});const d=(await import('/ui/range-drills.js')).RANGE_DRILLS[0];const r=T.rangeDbg.start(d);if(!r.ok)throw Error(r.reason);await wait(1800);`);await E.shoot({live:true,ui:true,out:dir+'/live-countdown.png'});
+ await E.ev('await wait(7200);');await E.shoot({live:true,ui:true,out:dir+'/live-active.png'});proof.activePerf=await E.ev(measure);
+ await E.ev(`T.rangeDbg.exit();T.player.position.set(-27,-200,-631.4);T.setVelDbg(0,0);for(let i=0;i<48;i++){const z=T.spawnZombie(-35+(i%8)*2.5,-622+Math.floor(i/8),'shambler',true,true);z.trainingZ=true;z.riseT=0;z.mesh.position.y=-200;}T.setShotView({x:-15,y:-176,z:-658,tx:-27,ty:-199,tz:-628,fov:48});await wait(1800);`);
+ proof.perf=await E.ev(measure);assert.equal(proof.perf.alive,48);console.log('LIVE PERF',JSON.stringify({active:proof.activePerf,with48:proof.perf}));
+ await E.page.evaluate(fs.readFileSync('tools/tests/lib.js','utf8'));proof.t215=await E.page.evaluate(fs.readFileSync('tools/tests/t215.js','utf8'),90000);assert(!proof.t215.includes('FAIL'));console.log(proof.t215);
+ }
+ proof.errors=E.page.errors;assert.equal(proof.errors.length,0);console.log('PASS console front/rear cutaway'+(proof.inventory?', real E prompt, partial magazines/akimbo/unlock restoration, leave/reenter cleanup, performance and t215':''));
+}finally{fs.writeFileSync(dir+(process.argv.includes('--prop-only')?'/prop-proof.json':'/live-capture-proof.json'),JSON.stringify({...proof,errors:E.page?.errors},null,2));await E.close();}process.exit(0);

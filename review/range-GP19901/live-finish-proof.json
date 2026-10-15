@@ -1,0 +1,890 @@
+{
+  "loadSec": 24.864,
+  "saw": {
+    "r": {
+      "ok": true,
+      "id": "1791886620028-1"
+    },
+    "s": {
+      "state": "COMPLETED",
+      "drill": {
+        "weapon": "chainsaw",
+        "id": "first-bite",
+        "mode": "sequence",
+        "duration": 30,
+        "waves": 8,
+        "exposure": 3.5,
+        "gap": 0.45,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.45,
+        "layout": "saw",
+        "continuous": true
+      },
+      "id": "1791886620028-1",
+      "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 13.316666666664576,
+      "countdown": 0,
+      "wave": 8,
+      "activation": 8,
+      "plan": {
+        "ids": [
+          2
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 3.5
+      },
+      "phase": "ended",
+      "score": 280,
+      "efficiency": 100,
+      "stats": {
+        "base": 199.99999999996965,
+        "bonuses": 80,
+        "deductions": 0,
+        "shots": 216,
+        "units": 3.5999999999994863,
+        "attackSeconds": 3.5999999999994863,
+        "contactSeconds": 3.5999999999994863,
+        "cleared": 8,
+        "missed": 0
+      },
+      "result": {
+        "id": "1791886620028-1",
+        "state": "COMPLETED",
+        "reason": "",
+        "valid": true,
+        "score": 280,
+        "time": 13.316666666664576,
+        "efficiency": 100,
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "at": 1791886635970,
+        "base": 199.99999999996965,
+        "bonuses": 80,
+        "deductions": 0,
+        "shots": 216,
+        "units": 3.5999999999994863,
+        "attackSeconds": 3.5999999999994863,
+        "contactSeconds": 3.5999999999994863,
+        "cleared": 8,
+        "missed": 0
+      },
+      "targets": []
+    },
+    "samples": [
+      {
+        "z": -640.61,
+        "score": 1,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 19,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 35,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 35,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 35,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 36,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 54,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 70,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 70,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 70,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 71,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 89,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 105,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 105,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 105,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 106,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 124,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 140,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 140,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 140,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 141,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 159,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 175,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 175,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 175,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 176,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 194,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 210,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 210,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 210,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 211,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 229,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 245,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 245,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 245,
+        "heat": 0
+      },
+      {
+        "z": -640.61,
+        "score": 246,
+        "heat": 0.00041666666666660603
+      },
+      {
+        "z": -640.61,
+        "score": 264,
+        "heat": 0.008749999999998728
+      },
+      {
+        "z": -640.61,
+        "score": 280,
+        "heat": 0
+      }
+    ],
+    "ui": "DRILL COMPLETEChainsaw / First Bite280280 points · 13.32s · 100.0% contact efficiencyBase 200 + bonuses 80 − deductions 0NEW PERSONAL BESTRecord saved on this device.Local recordsPersonal best: 280Rank / score / seconds / accuracy or contact efficiency / date28013.32s100.0%10/13/2026Ties: score, then faster time, better efficiency, earlier date.Retry drillDrill selectionReturn to free shooting",
+    "stored": "{\"version\":1,\"boards\":{\"chainsaw/first-bite/v1-fcb41e49/{\\\"mode\\\":\\\"auto\\\",\\\"ext\\\":false,\\\"heavy\\\":false,\\\"can\\\":false,\\\"laser\\\":false,\\\"auto\\\":false,\\\"skills\\\":{\\\"vitality\\\":0,\\\"power\\\":0,\\\"hands\\\":0,\\\"legs\\\":0,\\\"scavenger\\\":0,\\\"grenadier\\\":0}}\":[{\"id\":\"1791886620028-1\",\"score\":280,\"time\":13.317,\"efficiency\":100,\"at\":1791886635976}]}}",
+    "events": [
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 122,
+        "phase": "prepare",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 8,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 161,
+        "phase": "countdown",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 8,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 406,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 6.99999999999995,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 651,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 5.9999999999999005,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 896,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 4.999999999999851,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 1141,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 3.9999999999998006,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 1386,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 2.999999999999724,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 1631,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 1.9999999999996478,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 1876,
+        "phase": "count",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0.9999999999995716,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 2121,
+        "phase": "start",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 0,
+        "wave": 0
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 2122,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 0,
+        "wave": 1,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 2639,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 35,
+        "wave": 2,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 3046,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 70,
+        "wave": 3,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 3454,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 105,
+        "wave": 4,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 3861,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 140,
+        "wave": 5,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 4268,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 175,
+        "wave": 6,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 4675,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 210,
+        "wave": 7,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 5083,
+        "phase": "wave",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 245,
+        "wave": 8,
+        "zone": null,
+        "priority": null
+      },
+      {
+        "type": "range-drill",
+        "runId": 1,
+        "eventId": 5376,
+        "phase": "end",
+        "weapon": "chainsaw",
+        "drill": "first-bite",
+        "run": "1791886620028-1",
+        "countdown": 0,
+        "score": 280,
+        "wave": 8,
+        "zone": null,
+        "priority": null
+      }
+    ]
+  },
+  "flame": {
+    "state": "ACTIVE",
+    "drill": {
+      "weapon": "flamer",
+      "id": "hot-contact",
+      "mode": "sequence",
+      "duration": 30,
+      "waves": 8,
+      "exposure": 3.2,
+      "gap": 0.45,
+      "group": 1,
+      "minHits": 1,
+      "maxEvents": 1,
+      "clearBonus": 10,
+      "missPenalty": 3,
+      "wrongZonePenalty": 2,
+      "contact": 0.7,
+      "layout": "flame",
+      "continuous": true
+    },
+    "id": "1791886636722-2",
+    "loadout": "{\"mode\":\"auto\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+    "elapsed": 3.716666666666137,
+    "countdown": 0,
+    "wave": 2,
+    "activation": 2,
+    "plan": {
+      "ids": [
+        1
+      ],
+      "zone": null,
+      "priority": null,
+      "exposure": 3.2
+    },
+    "phase": "exposed",
+    "score": 35,
+    "efficiency": 27.343749999996014,
+    "stats": {
+      "base": 24.99999999999637,
+      "bonuses": 10,
+      "deductions": 0,
+      "shots": 32,
+      "units": 16,
+      "attackSeconds": 2.560000000000001,
+      "contactSeconds": 0.6999999999998983,
+      "cleared": 1,
+      "missed": 0
+    },
+    "result": null,
+    "targets": [
+      {
+        "index": 1,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      }
+    ]
+  },
+  "stack": {
+    "state": "ACTIVE",
+    "drill": {
+      "weapon": "sniper",
+      "id": "four-deep",
+      "mode": "groups",
+      "duration": 30,
+      "waves": 4,
+      "exposure": 4.5,
+      "gap": 0.45,
+      "group": 4,
+      "minHits": 1,
+      "maxEvents": 1,
+      "clearBonus": 10,
+      "missPenalty": 3,
+      "wrongZonePenalty": 2,
+      "contact": 0.6,
+      "layout": "stack",
+      "order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "collateralBonus": 20
+    },
+    "id": "1791886646035-3",
+    "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+    "elapsed": 1.9333333333338936,
+    "countdown": 0,
+    "wave": 2,
+    "activation": 2,
+    "plan": {
+      "ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "zone": null,
+      "priority": null,
+      "exposure": 4.5
+    },
+    "phase": "raising",
+    "score": 145,
+    "efficiency": 100,
+    "stats": {
+      "base": 45,
+      "bonuses": 100,
+      "deductions": 0,
+      "shots": 1,
+      "units": 1,
+      "attackSeconds": 0,
+      "contactSeconds": 0,
+      "cleared": 4,
+      "missed": 0
+    },
+    "result": null,
+    "targets": [
+      {
+        "index": 0,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      },
+      {
+        "index": 1,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      },
+      {
+        "index": 2,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      },
+      {
+        "index": 3,
+        "hits": 0,
+        "contact": 0,
+        "done": false,
+        "clearAt": null,
+        "bonus": false
+      }
+    ]
+  },
+  "pause": {
+    "s": {
+      "state": "ABORTED",
+      "drill": {
+        "weapon": "pistol",
+        "id": "pop-patrol",
+        "mode": "sequence",
+        "duration": 30,
+        "waves": 12,
+        "exposure": 1.65,
+        "gap": 0.45,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "order": [
+          0,
+          3,
+          1,
+          4,
+          2
+        ],
+        "speedBonus": 8
+      },
+      "id": "1791886654307-4",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0.9166666666669325,
+      "countdown": 0,
+      "wave": 1,
+      "activation": 1,
+      "plan": {
+        "ids": [
+          0
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 1.65
+      },
+      "phase": "ended",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": {
+        "id": "1791886654307-4",
+        "state": "ABORTED",
+        "reason": "cancel",
+        "valid": false,
+        "score": 0,
+        "time": 0.9166666666669325,
+        "efficiency": 0,
+        "weapon": "pistol",
+        "drill": "pop-patrol",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "at": 1791886661409,
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "targets": []
+    },
+    "open": true
+  },
+  "lineRetry": {
+    "s": {
+      "state": "DISQUALIFIED",
+      "drill": {
+        "weapon": "pistol",
+        "id": "pop-patrol",
+        "mode": "sequence",
+        "duration": 30,
+        "waves": 12,
+        "exposure": 1.65,
+        "gap": 0.45,
+        "group": 1,
+        "minHits": 1,
+        "maxEvents": 1,
+        "clearBonus": 10,
+        "missPenalty": 3,
+        "wrongZonePenalty": 2,
+        "contact": 0.6,
+        "order": [
+          0,
+          3,
+          1,
+          4,
+          2
+        ],
+        "speedBonus": 8
+      },
+      "id": "1791886662403-5",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0.9166666666669325,
+      "countdown": 0,
+      "wave": 1,
+      "activation": 1,
+      "plan": {
+        "ids": [
+          0
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 1.65
+      },
+      "phase": "ended",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": {
+        "id": "1791886662403-5",
+        "state": "DISQUALIFIED",
+        "reason": "line",
+        "valid": false,
+        "score": 0,
+        "time": 0.9166666666669325,
+        "efficiency": 0,
+        "weapon": "pistol",
+        "drill": "pop-patrol",
+        "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+        "at": 1791886669099,
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "targets": []
+    },
+    "error": "Stand inside the firing range, behind the yellow line, before starting.",
+    "stored": "{\"version\":1,\"boards\":{\"chainsaw/first-bite/v1-fcb41e49/{\\\"mode\\\":\\\"auto\\\",\\\"ext\\\":false,\\\"heavy\\\":false,\\\"can\\\":false,\\\"laser\\\":false,\\\"auto\\\":false,\\\"skills\\\":{\\\"vitality\\\":0,\\\"power\\\":0,\\\"hands\\\":0,\\\"legs\\\":0,\\\"scavenger\\\":0,\\\"grenadier\\\":0}}\":[{\"id\":\"1791886620028-1\",\"score\":280,\"time\":13.317,\"efficiency\":100,\"at\":1791886635976}]}}"
+  },
+  "death": {
+    "s": {
+      "state": "IDLE",
+      "drill": null,
+      "id": "1791886670389-6",
+      "loadout": "{\"mode\":\"semi\",\"ext\":false,\"heavy\":false,\"can\":false,\"laser\":false,\"auto\":false,\"skills\":{\"vitality\":0,\"power\":0,\"hands\":0,\"legs\":0,\"scavenger\":0,\"grenadier\":0}}",
+      "elapsed": 0.9166666666669325,
+      "countdown": 0,
+      "wave": 1,
+      "activation": 1,
+      "plan": {
+        "ids": [
+          0
+        ],
+        "zone": null,
+        "priority": null,
+        "exposure": 1.65
+      },
+      "phase": "ended",
+      "score": 0,
+      "efficiency": 0,
+      "stats": {
+        "base": 0,
+        "bonuses": 0,
+        "deductions": 0,
+        "shots": 0,
+        "units": 0,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 0,
+        "missed": 0
+      },
+      "result": null,
+      "targets": []
+    },
+    "open": false
+  },
+  "reload": {
+    "rows": [
+      {
+        "id": "1791886620028-1",
+        "score": 280,
+        "time": 13.317,
+        "efficiency": 100,
+        "at": 1791886635976
+      }
+    ],
+    "targets": 5,
+    "roots": 1
+  },
+  "errors": []
+}

@@ -1,0 +1,18 @@
+{
+  "perf": {
+    "fps": 57.940225002207576,
+    "worst": 25.600000023841858,
+    "hitches": 0,
+    "alive": 48,
+    "renderer": {
+      "calls": 5291,
+      "frameCalls": 15,
+      "drawCalls": 420,
+      "triangles": 531787,
+      "points": 0,
+      "lines": 0,
+      "timestamp": 0
+    }
+  },
+  "errors": []
+}

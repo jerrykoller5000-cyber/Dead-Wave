@@ -1,0 +1,842 @@
+[
+    {
+        "cam":  {
+                    "x":  -25.5746,
+                    "y":  -198.969584,
+                    "z":  -631.99174,
+                    "tx":  -26,
+                    "ty":  -198.989584,
+                    "tz":  -631.99174,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/aa12-grip.png",
+        "target":  "weapon:aa12"
+    },
+    {
+        "cam":  {
+                    "x":  -25.5746,
+                    "y":  -198.7782,
+                    "z":  -631.864,
+                    "tx":  -26,
+                    "ty":  -198.7982,
+                    "tz":  -631.864,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/aa12-top.png",
+        "target":  "weapon:aa12"
+    },
+    {
+        "cam":  {
+                    "x":  -25.5746,
+                    "y":  -198.85963999999998,
+                    "z":  -631.54465,
+                    "tx":  -26,
+                    "ty":  -198.87964,
+                    "tz":  -631.54465,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/aa12-front.png",
+        "target":  "weapon:aa12"
+    },
+    {
+        "cam":  {
+                    "x":  -26.223545,
+                    "y":  -198.8458765,
+                    "z":  -631.8160975000001,
+                    "tx":  -26,
+                    "ty":  -198.989584,
+                    "tz":  -631.99174,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/aa12-grip3R.png",
+        "target":  "weapon:aa12"
+    },
+    {
+        "cam":  {
+                    "x":  -25.554399999999998,
+                    "y":  -198.94556,
+                    "z":  -631.9477800000001,
+                    "tx":  -26.0286,
+                    "ty":  -198.96556,
+                    "tz":  -631.9477800000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/sniper-grip.png",
+        "target":  "weapon:sniper"
+    },
+    {
+        "cam":  {
+                    "x":  -25.554399999999998,
+                    "y":  -198.8055,
+                    "z":  -631.7892,
+                    "tx":  -26.0286,
+                    "ty":  -198.8255,
+                    "tz":  -631.7892,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/sniper-top.png",
+        "target":  "weapon:sniper"
+    },
+    {
+        "cam":  {
+                    "x":  -25.554399999999998,
+                    "y":  -198.86509999999998,
+                    "z":  -631.3927500000001,
+                    "tx":  -26.0286,
+                    "ty":  -198.8851,
+                    "tz":  -631.3927500000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/sniper-front.png",
+        "target":  "weapon:sniper"
+    },
+    {
+        "cam":  {
+                    "x":  -26.306115000000002,
+                    "y":  -198.7871575,
+                    "z":  -631.7297325000001,
+                    "tx":  -26.0286,
+                    "ty":  -198.96556,
+                    "tz":  -631.9477800000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/sniper-grip3R.png",
+        "target":  "weapon:sniper"
+    },
+    {
+        "cam":  {
+                    "x":  -25.60717,
+                    "y":  -198.94523,
+                    "z":  -631.994752,
+                    "tx":  -25.9839,
+                    "ty":  -198.96523000000002,
+                    "tz":  -631.994752,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/ak-grip.png",
+        "target":  "weapon:ak"
+    },
+    {
+        "cam":  {
+                    "x":  -25.60717,
+                    "y":  -198.805875,
+                    "z":  -631.8637,
+                    "tx":  -25.9839,
+                    "ty":  -198.825875,
+                    "tz":  -631.8637,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/ak-top.png",
+        "target":  "weapon:ak"
+    },
+    {
+        "cam":  {
+                    "x":  -25.60717,
+                    "y":  -198.865175,
+                    "z":  -631.53607,
+                    "tx":  -25.9839,
+                    "ty":  -198.885175,
+                    "tz":  -631.53607,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/ak-front.png",
+        "target":  "weapon:ak"
+    },
+    {
+        "cam":  {
+                    "x":  -26.213241,
+                    "y":  -198.81779650000001,
+                    "z":  -631.8145555,
+                    "tx":  -25.9839,
+                    "ty":  -198.96523000000002,
+                    "tz":  -631.994752,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/ak-grip3R.png",
+        "target":  "weapon:ak"
+    },
+    {
+        "cam":  {
+                    "x":  -25.61085,
+                    "y":  -198.92719,
+                    "z":  -631.95698,
+                    "tx":  -25.9998,
+                    "ty":  -198.94719,
+                    "tz":  -631.95698,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/shotgun-grip.png",
+        "target":  "weapon:shotgun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.61085,
+                    "y":  -198.82637499999998,
+                    "z":  -631.8191,
+                    "tx":  -25.9998,
+                    "ty":  -198.846375,
+                    "tz":  -631.8191,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/shotgun-top.png",
+        "target":  "weapon:shotgun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.61085,
+                    "y":  -198.869275,
+                    "z":  -631.4744000000001,
+                    "tx":  -25.9998,
+                    "ty":  -198.889275,
+                    "tz":  -631.4744000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/shotgun-front.png",
+        "target":  "weapon:shotgun"
+    },
+    {
+        "cam":  {
+                    "x":  -26.24109,
+                    "y":  -198.792075,
+                    "z":  -631.7673950000001,
+                    "tx":  -25.9998,
+                    "ty":  -198.94719,
+                    "tz":  -631.95698,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/shotgun-grip3R.png",
+        "target":  "weapon:shotgun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.365850000000002,
+                    "y":  -198.992662,
+                    "z":  -631.91112,
+                    "tx":  -25.9465,
+                    "ty":  -199.012662,
+                    "tz":  -631.91112,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/minigun-grip.png",
+        "target":  "weapon:minigun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.365850000000002,
+                    "y":  -198.751975,
+                    "z":  -631.758,
+                    "tx":  -25.9465,
+                    "ty":  -198.771975,
+                    "tz":  -631.758,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/minigun-top.png",
+        "target":  "weapon:minigun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.365850000000002,
+                    "y":  -198.85439499999998,
+                    "z":  -631.3752000000001,
+                    "tx":  -25.9465,
+                    "ty":  -198.874395,
+                    "tz":  -631.3752000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/minigun-front.png",
+        "target":  "weapon:minigun"
+    },
+    {
+        "cam":  {
+                    "x":  -26.21446,
+                    "y":  -198.840402,
+                    "z":  -631.70058,
+                    "tx":  -25.9465,
+                    "ty":  -199.012662,
+                    "tz":  -631.91112,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/minigun-grip3R.png",
+        "target":  "weapon:minigun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.733800000000002,
+                    "y":  -198.94358,
+                    "z":  -632.016668,
+                    "tx":  -25.9933,
+                    "ty":  -198.96358,
+                    "tz":  -632.016668,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/uzi-grip.png",
+        "target":  "weapon:uzi"
+    },
+    {
+        "cam":  {
+                    "x":  -25.733800000000002,
+                    "y":  -198.80775,
+                    "z":  -631.9583,
+                    "tx":  -25.9933,
+                    "ty":  -198.82775,
+                    "tz":  -631.9583,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/uzi-top.png",
+        "target":  "weapon:uzi"
+    },
+    {
+        "cam":  {
+                    "x":  -25.733800000000002,
+                    "y":  -198.86554999999998,
+                    "z":  -631.81238,
+                    "tx":  -25.9933,
+                    "ty":  -198.88555,
+                    "tz":  -631.81238,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/uzi-front.png",
+        "target":  "weapon:uzi"
+    },
+    {
+        "cam":  {
+                    "x":  -26.1473,
+                    "y":  -198.86458000000002,
+                    "z":  -631.895668,
+                    "tx":  -25.9933,
+                    "ty":  -198.96358,
+                    "tz":  -632.016668,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/uzi-grip3R.png",
+        "target":  "weapon:uzi"
+    },
+    {
+        "cam":  {
+                    "x":  -25.65192,
+                    "y":  -198.927102,
+                    "z":  -632.0372120000001,
+                    "tx":  -26,
+                    "ty":  -198.947102,
+                    "tz":  -632.0372120000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/launcher-grip.png",
+        "target":  "weapon:launcher"
+    },
+    {
+        "cam":  {
+                    "x":  -25.65192,
+                    "y":  -198.826475,
+                    "z":  -631.9379,
+                    "tx":  -26,
+                    "ty":  -198.846475,
+                    "tz":  -631.9379,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/launcher-top.png",
+        "target":  "weapon:launcher"
+    },
+    {
+        "cam":  {
+                    "x":  -25.65192,
+                    "y":  -198.869295,
+                    "z":  -631.68962,
+                    "tx":  -26,
+                    "ty":  -198.889295,
+                    "tz":  -631.68962,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/launcher-front.png",
+        "target":  "weapon:launcher"
+    },
+    {
+        "cam":  {
+                    "x":  -26.173796,
+                    "y":  -198.835376,
+                    "z":  -631.900658,
+                    "tx":  -26,
+                    "ty":  -198.947102,
+                    "tz":  -632.0372120000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/launcher-grip3R.png",
+        "target":  "weapon:launcher"
+    },
+    {
+        "cam":  {
+                    "x":  -25.58186,
+                    "y":  -198.932932,
+                    "z":  -631.8917560000001,
+                    "tx":  -25.961,
+                    "ty":  -198.952932,
+                    "tz":  -631.8917560000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/flamer-grip.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -25.58186,
+                    "y":  -198.81985,
+                    "z":  -631.7842,
+                    "tx":  -25.961,
+                    "ty":  -198.83985,
+                    "tz":  -631.7842,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/flamer-top.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -25.58186,
+                    "y":  -198.86796999999999,
+                    "z":  -631.51531,
+                    "tx":  -25.961,
+                    "ty":  -198.88797,
+                    "tz":  -631.51531,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/flamer-front.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -26.149223,
+                    "y":  -198.8319315,
+                    "z":  -631.7438665000001,
+                    "tx":  -25.961,
+                    "ty":  -198.952932,
+                    "tz":  -631.8917560000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/flamer-grip3R.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -25.54128,
+                    "y":  -198.952622,
+                    "z":  -631.902908,
+                    "tx":  -25.9759,
+                    "ty":  -198.972622,
+                    "tz":  -631.902908,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/chainsaw-grip.png",
+        "target":  "weapon:chainsaw"
+    },
+    {
+        "cam":  {
+                    "x":  -25.54128,
+                    "y":  -198.797475,
+                    "z":  -631.7906,
+                    "tx":  -25.9759,
+                    "ty":  -198.817475,
+                    "tz":  -631.7906,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/chainsaw-top.png",
+        "target":  "weapon:chainsaw"
+    },
+    {
+        "cam":  {
+                    "x":  -25.54128,
+                    "y":  -198.863495,
+                    "z":  -631.5098300000001,
+                    "tx":  -25.9759,
+                    "ty":  -198.883495,
+                    "tz":  -631.5098300000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/chainsaw-front.png",
+        "target":  "weapon:chainsaw"
+    },
+    {
+        "cam":  {
+                    "x":  -26.172439,
+                    "y":  -198.8462755,
+                    "z":  -631.7484845,
+                    "tx":  -25.9759,
+                    "ty":  -198.972622,
+                    "tz":  -631.902908,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/chainsaw-grip3R.png",
+        "target":  "weapon:chainsaw"
+    },
+    {
+        "cam":  {
+                    "x":  -25.033450000000002,
+                    "y":  -199.71157,
+                    "z":  -632.03508,
+                    "tx":  -25.885,
+                    "ty":  -199.73157,
+                    "tz":  -632.03508,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/m240-grip.png",
+        "target":  "weapon:m240"
+    },
+    {
+        "cam":  {
+                    "x":  -25.033450000000002,
+                    "y":  -199.261075,
+                    "z":  -631.875,
+                    "tx":  -25.885,
+                    "ty":  -199.28107500000002,
+                    "tz":  -631.875,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/m240-top.png",
+        "target":  "weapon:m240"
+    },
+    {
+        "cam":  {
+                    "x":  -25.033450000000002,
+                    "y":  -199.452775,
+                    "z":  -631.4748,
+                    "tx":  -25.885,
+                    "ty":  -199.472775,
+                    "tz":  -631.4748,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/m240-front.png",
+        "target":  "weapon:m240"
+    },
+    {
+        "cam":  {
+                    "x":  -26.200000000000003,
+                    "y":  -199.52907000000002,
+                    "z":  -631.78758,
+                    "tx":  -25.885,
+                    "ty":  -199.73157,
+                    "tz":  -632.03508,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/m240-grip3R.png",
+        "target":  "weapon:m240"
+    },
+    {
+        "cam":  {
+                    "x":  -25.09,
+                    "y":  -199.650632,
+                    "z":  -632.462188,
+                    "tx":  -26,
+                    "ty":  -199.670632,
+                    "tz":  -632.462188,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/mortar-grip.png",
+        "target":  "weapon:mortar"
+    },
+    {
+        "cam":  {
+                    "x":  -25.09,
+                    "y":  -199.0981,
+                    "z":  -632.305,
+                    "tx":  -26,
+                    "ty":  -199.1181,
+                    "tz":  -632.305,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/mortar-top.png",
+        "target":  "weapon:mortar"
+    },
+    {
+        "cam":  {
+                    "x":  -25.09,
+                    "y":  -199.33321999999998,
+                    "z":  -631.91203,
+                    "tx":  -26,
+                    "ty":  -199.35322,
+                    "tz":  -631.91203,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/mortar-front.png",
+        "target":  "weapon:mortar"
+    },
+    {
+        "cam":  {
+                    "x":  -26.315,
+                    "y":  -199.46813200000003,
+                    "z":  -632.214688,
+                    "tx":  -26,
+                    "ty":  -199.670632,
+                    "tz":  -632.462188,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/mortar-grip3R.png",
+        "target":  "weapon:mortar"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74435,
+                    "y":  -198.908336,
+                    "z":  -631.934312,
+                    "tx":  -26,
+                    "ty":  -198.928336,
+                    "tz":  -631.934312,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/knife-grip.png",
+        "target":  "weapon:knife"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74435,
+                    "y":  -198.8478,
+                    "z":  -631.862,
+                    "tx":  -26,
+                    "ty":  -198.86780000000002,
+                    "tz":  -631.862,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/knife-top.png",
+        "target":  "weapon:knife"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74435,
+                    "y":  -198.87356,
+                    "z":  -631.6812199999999,
+                    "tx":  -26,
+                    "ty":  -198.89356,
+                    "tz":  -631.6812199999999,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/knife-front.png",
+        "target":  "weapon:knife"
+    },
+    {
+        "cam":  {
+                    "x":  -26.154,
+                    "y":  -198.829336,
+                    "z":  -631.813312,
+                    "tx":  -26,
+                    "ty":  -198.928336,
+                    "tz":  -631.934312,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/knife-grip3R.png",
+        "target":  "weapon:knife"
+    },
+    {
+        "cam":  {
+                    "x":  -25.69525,
+                    "y":  -198.90739,
+                    "z":  -631.8344000000001,
+                    "tx":  -26,
+                    "ty":  -198.92739,
+                    "tz":  -631.8344000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/machete-grip.png",
+        "target":  "weapon:machete"
+    },
+    {
+        "cam":  {
+                    "x":  -25.69525,
+                    "y":  -198.848875,
+                    "z":  -631.724,
+                    "tx":  -26,
+                    "ty":  -198.868875,
+                    "tz":  -631.724,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/machete-top.png",
+        "target":  "weapon:machete"
+    },
+    {
+        "cam":  {
+                    "x":  -25.69525,
+                    "y":  -198.873775,
+                    "z":  -631.4480000000001,
+                    "tx":  -26,
+                    "ty":  -198.893775,
+                    "tz":  -631.4480000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/machete-front.png",
+        "target":  "weapon:machete"
+    },
+    {
+        "cam":  {
+                    "x":  -26.1932,
+                    "y":  -198.80319,
+                    "z":  -631.6826000000001,
+                    "tx":  -26,
+                    "ty":  -198.92739,
+                    "tz":  -631.8344000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/machete-grip3R.png",
+        "target":  "weapon:machete"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74475,
+                    "y":  -198.924352,
+                    "z":  -631.948352,
+                    "tx":  -26,
+                    "ty":  -198.944352,
+                    "tz":  -631.948352,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/revolver-grip.png",
+        "target":  "weapon:revolver"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74475,
+                    "y":  -198.8296,
+                    "z":  -631.9067,
+                    "tx":  -26,
+                    "ty":  -198.8496,
+                    "tz":  -631.9067,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/revolver-top.png",
+        "target":  "weapon:revolver"
+    },
+    {
+        "cam":  {
+                    "x":  -25.74475,
+                    "y":  -198.86992,
+                    "z":  -631.80257,
+                    "tx":  -26,
+                    "ty":  -198.88992000000002,
+                    "tz":  -631.80257,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/revolver-front.png",
+        "target":  "weapon:revolver"
+    },
+    {
+        "cam":  {
+                    "x":  -26.154,
+                    "y":  -198.84535200000002,
+                    "z":  -631.827352,
+                    "tx":  -26,
+                    "ty":  -198.944352,
+                    "tz":  -631.948352,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  1500,
+        "out":  "review/gb180e/revolver-grip3R.png",
+        "target":  "weapon:revolver"
+    }
+]

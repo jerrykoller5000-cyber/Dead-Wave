@@ -1,0 +1,67 @@
+// Player footprints for the medical bay in world/training-props.js and training-wear.js. Bullet solids
+// remain owned by World. Anchor to the public bed centre, including the room offset.
+// Keep these footprints in sync if that furniture's dimensions change.
+export function createTrainingInfirmary(tg) {
+  const {x,z}=tg.bed.centre, floor=tg.floorY;
+  const box=(name,cx,cz,hx,hz,top)=>({name,minX:cx-hx,maxX:cx+hx,minZ:cz-hz,maxZ:cz+hz,minY:floor,maxY:floor+top});
+  const blockers=[
+    box('bed',x,z,1.24,.52,.91),
+    box('cabinet',x+2.72,z-1.28,.89,.50,1.17),
+    box('iv',x-1.42,z-.66,.055,.055,1.94),
+    box('oxygen',x-1.49,z+.8,.16,.16,1.01),
+    box('cot',x+3.25,z+1.25,.95,.38,.54)
+  ];
+  return createTrainingBlockers(blockers);
+}
+
+// Shared swept collision for the bay enclosure; furniture behavior stays identical.
+export function createTrainingBlockers(blockers) {
+  let padding=-1,boxes=[];
+  return {constrain(p,previous=p,radius=.42) {
+    if(radius!==padding){padding=radius;boxes=blockers.map(b=>({...b,minX:b.minX-radius,maxX:b.maxX+radius,minZ:b.minZ-radius,maxZ:b.maxZ+radius}));}
+    const low=Math.min(p.y,previous.y),high=Math.max(p.y,previous.y)+1.7;
+    let x=previous.x,z=previous.z,dx=p.x-x,dz=p.z-z;
+    // A save/debug teleport or landing may start inside furniture. Eject to the
+    // closest edge; ties prefer the clear bedside/front aisle over the back wall.
+    for(let pass=0;pass<8;pass++) {
+      let overlap=false;
+      for(const b of boxes) if(low<b.maxY && high>b.minY && x>b.minX && x<b.maxX && z>b.minZ && z<b.maxZ) {
+        const edges=[{d:b.maxZ-z,z:b.maxZ,face:'maxZ'},{d:z-b.minZ,z:b.minZ,face:'minZ'},{d:x-b.minX,x:b.minX,face:'minX'},{d:b.maxX-x,x:b.maxX,face:'maxX'}].filter(e=>!b.exitFaces||b.exitFaces.includes(e.face));
+        edges.sort((a,b)=>Math.abs(a.d-b.d)<1e-8?0:a.d-b.d);const edge=edges[0];
+        if(edge.x!==undefined)x=edge.x;else z=edge.z;
+        overlap=true;
+      }
+      if(!overlap)break;
+    }
+    // Swept, expanded rectangles stop fast rolls as well as ordinary walking.
+    // Preserve the tangent displacement so walking into a bed slides along it.
+    for(let pass=0;pass<5 && (Math.abs(dx)>1e-9 || Math.abs(dz)>1e-9);pass++) {
+      let first=null;
+      for(const b of boxes) {
+        if(low>=b.maxY || high<=b.minY)continue;
+        const hit=sweep(x,z,dx,dz,b);
+        if(hit && (!first || hit.t<first.t))first=hit;
+      }
+      if(!first){x+=dx;z+=dz;dx=dz=0;break;}
+      x+=dx*first.t;z+=dz*first.t;
+      dx*=1-first.t;dz*=1-first.t;
+      if(first.nx)dx=0;if(first.nz)dz=0;
+    }
+    const blockX=Math.abs(x-p.x)>1e-7,blockZ=Math.abs(z-p.z)>1e-7;
+    return {x,z,moved:blockX||blockZ,blockX,blockZ};
+  }};
+}
+
+function sweep(x,z,dx,dz,b) {
+  let enter=-Infinity,exit=Infinity,nx=0,nz=0;
+  for(const [start,delta,lo,hi,axis] of [[x,dx,b.minX,b.maxX,'x'],[z,dz,b.minZ,b.maxZ,'z']]) {
+    // A tangent on the boundary is free: don't snag the player on a corner.
+    if(Math.abs(delta)<1e-9){if(start<=lo || start>=hi)return null;continue;}
+    let a=(lo-start)/delta,c=(hi-start)/delta;const normal=delta>0?-1:1;
+    if(a>c)[a,c]=[c,a];
+    if(a>enter+1e-9){enter=a;nx=axis==='x'?normal:0;nz=axis==='z'?normal:0;}
+    else if(Math.abs(a-enter)<1e-9){if(axis==='x')nx=normal;else nz=normal;}
+    exit=Math.min(exit,c);if(enter>exit)return null;
+  }
+  return enter>=-1e-9 && enter<=1 && exit>0 ? {t:Math.max(0,enter),nx,nz}:null;
+}

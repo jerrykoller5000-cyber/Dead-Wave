@@ -1,0 +1,15 @@
+{
+  "t215": {
+    "raw": "PASS read index.html and the scripts and styles the game loaded (201 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 08:14 · Grace\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×3H×0)",
+    "pass": 4,
+    "fail": []
+  },
+  "t222": {
+    "raw": "INFO shambler  head: head 5, body 1 | chest: body 6 | legs: legs 6\nINFO feral     head: head 6 | chest: body 5, head 1 | legs: legs 6\nINFO brute     head: body 5, head 1 | chest: body 6 | legs: legs 4, ground 1, miss 1\nINFO spider    head: head 6 | chest: head 2, body 4 | legs: -\nINFO leaper    head: head 6 | chest: head 6 | legs: -\nINFO colossus  head: head 6 | chest: body 6 | legs: legs 6\nFAIL pointing at a head is a headshot: 30/36 (was 17/64)\nPASS pointing at a chest lands in the body: body 27, head 3 (a head only where the head covers the chest from up here)\nPASS pointing at the legs lands low: 22/24\nFAIL no round aimed at a body goes into the ground or past it (2)\nPASS the reticle rings a head lined up, and not a chest (true, los-clear)\nPASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))\nPASS the ticks show the spread: pistol 7.0 px, shotgun 34.8 px\nPASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (was 7/36)\nPASS the launcher is not led (it lobs): 0.00 m off the body",
+    "pass": 7,
+    "fail": [
+      "FAIL pointing at a head is a headshot: 30/36 (was 17/64)",
+      "FAIL no round aimed at a body goes into the ground or past it (2)"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "loadSec": 19.152,
+  "runs": [
+    {
+      "frames": 183,
+      "fps": 60.89444962029519,
+      "worst": 19.099999994039536,
+      "p95": 17.200000017881393,
+      "over50": 0,
+      "alive": 48,
+      "render": {
+        "calls": 5501,
+        "frameCalls": 15,
+        "drawCalls": 503,
+        "triangles": 719351,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "frames": 183,
+      "fps": 60.71665560716656,
+      "worst": 20.599999994039536,
+      "p95": 17.100000023841858,
+      "over50": 0,
+      "alive": 48,
+      "render": {
+        "calls": 8261,
+        "frameCalls": 15,
+        "drawCalls": 503,
+        "triangles": 719351,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    },
+    {
+      "frames": 182,
+      "fps": 60.36083841891734,
+      "worst": 18.69999998807907,
+      "p95": 17.5,
+      "over50": 0,
+      "alive": 48,
+      "render": {
+        "calls": 11006,
+        "frameCalls": 15,
+        "drawCalls": 503,
+        "triangles": 719351,
+        "points": 0,
+        "lines": 0,
+        "timestamp": 0
+      }
+    }
+  ],
+  "errors": []
+}

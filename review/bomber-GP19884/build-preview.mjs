@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+export function bomberPatch(s){
+ const nl=s.includes('\r\n')?'\r\n':'\n';const add=(a,b)=>{if(s.split(a).length!==2)throw Error('anchor mismatch: '+a.slice(0,90));s=s.replace(a,b);};
+ add("    import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose, beginBruteBuild } from './game/brute-behavior.js'; // GP-19866", "    import { BRUTE, stepBrute, bruteCanReach, restoreBrutePose, resetBrute, applyBrutePose, beginBruteBuild } from './game/brute-behavior.js'; // GP-19866"+nl+"    import { prepareBomberAppearance, restoreBomberPose, resetBomber, stepBomber, applyBomberPose } from './game/bomber-behavior.js'; // GP-19884");
+ add("name: 'Bomber', hp: 34, speed: 4.32, radius: 0.58", "name: 'Bomber', hp: 34, speed: 2.8, radius: 0.78");
+ add("      applyZombieConcept({ THREE, g, typeKey, scale: s, rbox });", "      applyZombieConcept({ THREE, g, typeKey, scale: s, rbox });"+nl+"      if(typeKey==='bomber')prepareBomberAppearance(THREE,g,s); // GP-19884: sculpt the actual concept surfaces");
+ add("typeKey === 'brute' || typeKey === 'spitter' || typeKey === 'screamer') prepareShamblerFeet", "typeKey === 'brute' || typeKey === 'spitter' || typeKey === 'screamer' || typeKey === 'bomber') prepareShamblerFeet");
+ add("        if (ud.typeKey === 'brute') { resetBrute({ typeKey: ud.typeKey, mesh }); resetBruteArmor(mesh); }", "        if (ud.typeKey === 'bomber') resetBomber({ typeKey: ud.typeKey, mesh }); // GP-19884"+nl+"        if (ud.typeKey === 'brute') { resetBrute({ typeKey: ud.typeKey, mesh }); resetBruteArmor(mesh); }");
+ add("      resetBrute(z); // GP-19866: restore planted feet before the corpse", "      resetBomber(z); // GP-19884: release the live pose before rupture"+nl+"      resetBrute(z); // GP-19866: restore planted feet before the corpse");
+ add("      const kind = info.kind || 'generic';", "      const kind = z.typeKey === 'bomber' ? 'explosive' : (info.kind || 'generic'); // GP-19884: every death ruptures his belly");
+ add("      for (const z of zombies) resetBrute(z);", "      for (const z of zombies) resetBomber(z); // GP-19884"+nl+"      for (const z of zombies) resetBrute(z);");
+ add("        restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses", "        restoreBomberPose(z); // GP-19884"+nl+"        restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses");
+ add("        if (z.abilityBusy) spd = 0;   // GP-179: feet stay planted through the tell and follow-through", "        if (z.abilityBusy) spd = 0;   // GP-179: feet stay planted through the tell and follow-through"+nl+"        const bomberStep = stepBomber(z,sx,sz,spd,dt,!graceFreeze && !rising && !z.abilityBusy && !gameOver && !won && !scriptedKill);"+nl+"        if(bomberStep){sx=bomberStep.x;sz=bomberStep.z;spd=bomberStep.speed;} // GP-19884: acceleration, coast and committed turning");
+ add("z.mesh.rotation.y = bruteStep ? bruteStep.yaw", "z.mesh.rotation.y = bomberStep ? bomberStep.yaw : bruteStep ? bruteStep.yaw");
+ add("        applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash", "        applyBomberPose(z, dt); // GP-19884: low planted waddle, hip lag and belly weight"+nl+"        applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash");
+ return s;
+}
+if(process.argv[1]?.endsWith('build-preview.mjs')){const source=fs.readFileSync('index.html','utf8');fs.writeFileSync('review/bomber-GP19884/preview.html',bomberPatch(source).replace('<head>','<head><base href="/">'),'utf8');console.log('Staged bomber preview built; production index untouched.');}

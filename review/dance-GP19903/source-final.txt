@@ -1,0 +1,213 @@
+// GP-19903: faster, anatomical presentation choreography. Uses a fresh marine only.
+import * as THREE from 'three';
+import { ikLimb } from '../studio/ik.js';
+import { HAND_POSES, lerpPose } from '../studio/marine-hand.js';
+
+const PI = Math.PI, TAU = PI * 2, BEAT = 60 / 103.322299;
+export const DISCLAIMER_DANCE = Object.freeze({
+  duration: 976 / 30, bpm: 103.322299, beatSeconds: BEAT, sourceStart: 9.151494,
+  beats: 56, boundaries: [0, 8, 16, 20, 21, 22, 24, 28, 28.5, 29.5, 30, 38, 39, 40, 44, 48, 52, 56],
+  phrases: ['top rock', 'running man', 'heel-toe and wave', 'drop', 'hand plant', 'kick-up',
+    'handstand', 'palm release', 'shoulder roll', 'settle spin', 'backspin', 'kip-up',
+    'rise', 'running man', 'top rock', 'heel-toe and wave', 'finish']
+});
+const clamp = x => Math.max(0, Math.min(1, x));
+const smooth = x => { x = clamp(x); return x * x * x * (x * (x * 6 - 15) + 10); };
+const mix = (a, b, t) => a + (b - a) * t;
+const v = a => new THREE.Vector3(...a);
+const q = (x=0, y=0, z=0) => new THREE.Quaternion().setFromEuler(new THREE.Euler(x,y,z,'YXZ'));
+const X=v([1,0,0]), flipY=q(0,PI), PALM=v([0,-.048,.016]), SOLE=v([0,-.103,.03]);
+
+function footStep(b, side, mode) {
+  // One foot travels on an eighth-note, then takes weight while the other lifts.
+  const phase=(b+(side>0?.5:0))%2, moving=phase<.68||phase>=1&&phase<1.68;
+  const forward=phase<1, t=smooth(((phase%1)/.68)), w=moving?(forward?t:1-t):(forward?1:0);
+  const cross=mode==='rock'?.13:0;
+  return [mix(side*.21,side*(.24-cross),w), moving?.14*Math.sin(PI*t):0, mix(-.10,.23,w)];
+}
+function upright(b, mode='rock') {
+  const swing=Math.sin(TAU*b), groove=Math.sin(PI*b), hit=.5+.5*Math.cos(TAU*b);
+  const p={
+    hip:v([.055*groove,.54-.04*hit,0]), root:q(.035+.025*hit,.12*groove,-.045*groove),
+    torso:q(.02+.045*hit,.075*groove,-.045*groove), head:q(-.03-.035*hit,-.05*groove,.04*groove),
+    feet:[], footQ:[q(0,-.1),q(0,.1)], legFK:0, leg:[], knee:[], ankle:[],
+    upper:[], elbow:[], wrist:[], curl:[], hands:[v([-.32,.012,.40]),v([.32,.012,.40])],
+    handPlant:[0,0], palmQ:[q(PI/2),q(PI/2)], shrug:0, floorLock:0, floorSafe:0,
+    phase:mode==='run'?'running man':mode==='wave'?'heel-toe and wave':'top rock'
+  };
+  for(let i=0;i<2;i++){
+    const side=i?1:-1, pump=Math.sin(TAU*b+i*PI), lag=Math.sin(TAU*b+i*PI-.40);
+    p.feet[i]=v(footStep(b,side,mode));
+    // The shoulder stays close to its bind twist; the elbow always bends forward.
+    p.upper[i]=q(-.14-.30*pump,side*.08,side*(.20+.04*groove));
+    p.elbow[i]=q(-(.66+.24*lag));
+    p.wrist[i]=q(.16+.10*Math.sin(TAU*b+i*PI-.75),-side*(1.28+.08*lag),side*.07*Math.sin(TAU*b-.4));
+    p.curl[i]=.62+.20*Math.sin(TAU*b+i*PI-.8);
+    p.leg[i]=q(0,0,side*.15); p.knee[i]=q(.65); p.ankle[i]=q(-.12);
+  }
+  if(mode==='run'){
+    p.phase='running man';p.root=q(.11,.10*groove,-.035*swing);p.hip.y=.51+.025*Math.cos(TAU*b);
+    for(let i=0;i<2;i++){
+      const side=i?1:-1, a=TAU*b+i*PI, lift=Math.max(0,Math.sin(a));
+      p.feet[i]=v([side*.16,.20*lift,-.22*Math.cos(a)]);
+      p.upper[i]=q(-.17-.46*Math.cos(a),side*.065,side*.16);
+      p.elbow[i]=q(-(.82+.22*Math.sin(a-.25)));p.curl[i]=.78+.10*Math.sin(a-.5);
+    }
+  }else if(mode==='wave'){
+    p.phase='heel-toe and wave';p.root=q(.03,.26*groove,-.07*groove);p.hip.x=.08*groove;
+    p.feet=[v([-.23,.03*Math.max(0,swing),.03]),v([.23,.03*Math.max(0,-swing),.03])];
+    p.footQ=[q(0,-.14+.32*groove),q(0,.14+.32*groove)];
+    for(let i=0;i<2;i++){
+      const side=i?1:-1,a=PI*b-i*.8, reach=.5+.5*Math.sin(a);
+      p.upper[i]=q(-.28-.80*reach,side*.12,side*(.25+.28*reach));
+      p.elbow[i]=q(-(.38+.55*(1-reach)));p.wrist[i]=q(.20*Math.sin(a-.6),-side*1.30,side*.12*Math.sin(a-.9));
+      p.curl[i]=.24+.48*(.5+.5*Math.sin(a-1.1));
+    }
+  }
+  return p;
+}
+function blend(a,b,t){
+  a.hip.lerp(b.hip,t);
+  for(const key of ['root','torso','head'])a[key].slerp(b[key],t);
+  for(const key of ['legFK','shrug','floorLock','floorSafe'])a[key]=mix(a[key],b[key],t);
+  for(let i=0;i<2;i++){
+    for(const key of ['feet','hands'])a[key][i].lerp(b[key][i],t);
+    for(const key of ['footQ','leg','knee','ankle','upper','elbow','wrist','palmQ'])a[key][i].slerp(b[key][i],t);
+    a.handPlant[i]=mix(a.handPlant[i],b.handPlant[i],t);a.curl[i]=mix(a.curl[i],b.curl[i],t);
+  }
+  a.phase=b.phase;return a;
+}
+function drop(){
+  const p=upright(20);p.phase='drop';p.hip.set(0,.40,-.06);p.root.copy(q(.30,.12));p.torso.copy(q(.08));p.head.copy(q(-.17));
+  p.feet=[v([-.22,0,.02]),v([.22,0,.02])];
+  for(let i=0;i<2;i++){const s=i?1:-1;p.upper[i]=q(-.63,0,s*.16);p.elbow[i]=q(-.30);p.wrist[i]=q(.16,-s*1.25);p.curl[i]=.18;}
+  return p;
+}
+function launch(){
+  const p=drop();p.phase='kick-up';p.hip.set(0,.27,0);p.root.copy(q(1.45,.12));p.torso.copy(q());p.head.copy(q(-.20));
+  p.feet=[v([-.18,.07,-.29]),v([.18,.07,-.29])];p.hands=[v([-.32,.012,.39]),v([.32,.012,.39])];
+  p.handPlant=[1,1];p.palmQ=[q(PI/2,-.38),q(PI/2,.62)];p.legFK=1;
+  for(let i=0;i<2;i++){const side=i?1:-1;p.leg[i]=q(-2.10,0,side*.18);p.knee[i]=q(2.40);p.ankle[i]=q(-.50);}
+  return p;
+}
+function freeze(b){
+  const p=launch(),a=TAU*b;p.phase='handstand';p.hip.set(0,1.085,0);p.root.copy(q(PI,.12,.010*Math.sin(PI*b)));
+  p.head.copy(q(0,.035*Math.sin(PI*b)));p.shrug=.13;p.legFK=1;p.floorSafe=1;
+  p.hands=[v([-.28,.012,-.025]),v([.28,.012,-.025])];
+  for(let i=0;i<2;i++){const s=i?1:-1;p.leg[i]=q(-.12+.20*Math.sin(a+i*PI),0,s*(.27+.06*Math.cos(a)));p.knee[i]=q(.40+.18*Math.sin(a+i*PI-.4));p.ankle[i]=q(-.12);p.curl[i]=0;}
+  return p;
+}
+function release(){
+  const p=freeze(28);p.phase='release';p.handPlant=[0,0];
+  // Stay overhead while lifting palms; fold around the outside of the torso next.
+  p.upper=[q(-.25,.83,3.03),q(-.38,-.63,-2.97)];p.elbow=[q(-.44),q(-.44)];
+  p.wrist=[q(.10,1.25),q(.10,-1.25)];p.curl=[.35,.35];return p;
+}
+function shoulderRoll(){
+  const p=freeze(28);p.phase='shoulder roll';p.hip.set(.04,.55,0);p.root.copy(q(-2.08,.12,-.23));p.shrug=.015;
+  p.handPlant=[0,0];p.floorSafe=1;p.floorLock=.6;
+  for(let i=0;i<2;i++){const s=i?1:-1;p.upper[i]=q(-.35,0,s*.44);p.elbow[i]=q(-.9);p.wrist[i]=q(.08,-s*1.25);p.curl[i]=.5;p.leg[i]=q(-.6,0,s*.28);p.knee[i]=q(.80);}
+  return p;
+}
+function spin(b){
+  const p=shoulderRoll(),a=(b-30)*TAU/1.75, tuck=.5-.5*Math.cos(PI*(b-30)/2);
+  p.phase='backspin';p.root.copy(q(-PI/2+.045*Math.sin(a*2),.12+a,.055*Math.cos(a*2)));p.hip.set(0,.32,0);
+  p.head.copy(q(.14));p.torso.copy(q(-.025));p.shrug=0;p.floorLock=1;
+  for(let i=0;i<2;i++){const s=i?1:-1;p.leg[i]=q(-(.82+.30*tuck)+.12*Math.sin(a+i*PI),0,s*mix(.45,.19,tuck));p.knee[i]=q(mix(.25,1.12,tuck));p.ankle[i]=q(-.12);p.upper[i]=q(-.25-.3*tuck,0,s*mix(.68,.34,tuck));p.elbow[i]=q(-mix(.65,1.1,tuck));p.curl[i]=.5+.25*tuck;}
+  return p;
+}
+function recover(){
+  const p=drop();p.phase='rise';p.hip.set(0,.50,0);p.root.copy(q(.24,.12));p.legFK=1;p.floorSafe=1;
+  for(let i=0;i<2;i++){const side=i?1:-1;p.leg[i]=q(-1.10,0,side*.18);p.knee[i]=q(1.60);p.ankle[i]=q(-.45);}
+  return p;
+}
+function finish(b){
+  const p=upright(b,'rock'),t=smooth((b-52)/2.2);p.phase='finish';
+  const f=upright(0);f.hip.set(-.035,.54,0);f.root.copy(q(.015,-.13,-.025));f.torso.copy(q(0,.06));f.head.copy(q(-.02,.12,.025));
+  f.feet=[v([-.22,0,.045]),v([.22,0,-.025])];
+  f.upper=[q(-.08,0,-.16),q(-.83,-.12,.25)];f.elbow=[q(-.30),q(-1.15)];
+  f.wrist=[q(.10,1.25),q(.16,-1.28)];f.curl=[.52,.76];f.phase='finish';return blend(p,f,t);
+}
+function choreography(b){
+  if(b<8)return upright(b,'rock');
+  if(b<16)return blend(upright(b,'rock'),upright(b,'run'),smooth((b-8)/.65));
+  if(b<20)return blend(upright(b,'run'),upright(b,'wave'),smooth((b-16)/.65));
+  if(b<21)return blend(upright(b,'wave'),drop(),smooth(b-20));
+  if(b<22)return blend(drop(),launch(),smooth(b-21));
+  if(b<24){const k=smooth((b-22)/2),p=blend(launch(),freeze(b),k);const turn=Math.sin(PI*k);p.head.copy(q(mix(-.20,0,k)+.45*turn,1.15*turn));return p;}
+  if(b<28)return freeze(b);
+  if(b<28.5)return blend(freeze(b),release(),smooth((b-28)/.5));
+  if(b<29.5)return blend(release(),shoulderRoll(),smooth(b-28.5));
+  if(b<30)return blend(shoulderRoll(),spin(30),smooth((b-29.5)/.5));
+  if(b<38)return spin(b);
+  if(b<39)return blend(spin(38),recover(),smooth(b-38));
+  if(b<40)return blend(recover(),upright(b,'run'),smooth(b-39));
+  if(b<44)return upright(b,'run');
+  if(b<48)return blend(upright(b,'run'),upright(b,'rock'),smooth((b-44)/.65));
+  if(b<52)return blend(upright(b,'rock'),upright(b,'wave'),smooth((b-48)/.65));
+  return blend(upright(b,'wave'),finish(b),smooth((b-52)/.65));
+}
+
+export function createDisclaimerDance(marine,{floorY=-.025}={}){
+  const u=marine.userData;if(!u?.torsoG||!u.elbowLG?.userData.wrist)throw new TypeError('A fresh articulated marine is required');
+  const root=new THREE.Group();root.name='marine-disclaimer-dance';root.add(marine);marine.position.set(0,-.62,0);marine.rotation.set(0,0,0);
+  const arms=[u.armLG,u.armRG],elbows=[u.elbowLG,u.elbowRG],wrists=elbows.map(e=>e.userData.wrist);
+  const legs=[u.legLG,u.legRG],knees=[u.kneeLG,u.kneeRG],ankles=[u.ankleLG,u.ankleRG],shoulderRest=arms.map(a=>a.position.y);
+  const allMeshes=[];marine.traverseVisible(o=>{if(o.isMesh&&o.geometry?.attributes.position)allMeshes.push(o);});
+  const rest=[u.torsoG,u.headG,...arms,...elbows,...wrists,...legs,...knees,...ankles].map(o=>[o,o.quaternion.clone()]);
+  const caps=new Set(arms.flatMap(a=>(a.userData.liveShoulder?.parts||[]).map(p=>p.mesh))),limbs=new Set([...arms,...legs]),supports=[];
+  marine.traverseVisible(o=>{if(!o.isMesh||!o.geometry?.attributes.position||caps.has(o))return;for(let n=o;n&&n!==marine;n=n.parent)if(limbs.has(n))return;supports.push(o);});
+  const target=new THREE.Vector3(),corrected=new THREE.Vector3(),offset=new THREE.Vector3(),pole=new THREE.Vector3(),parentQ=new THREE.Quaternion();
+  const shoulderCenter=new THREE.Vector3(),shoulderRight=new THREE.Vector3(),plantedCenter=new THREE.Vector3();
+  const fkQ=[new THREE.Quaternion(),new THREE.Quaternion(),new THREE.Quaternion()],identity=new THREE.Quaternion();
+  const handShapes=[lerpPose(HAND_POSES.open,HAND_POSES.fist,.5),lerpPose(HAND_POSES.open,HAND_POSES.fist,.5)];
+  function bodyFloor(meshes=supports){let lo=Infinity;for(const o of meshes){const a=o.geometry.attributes.position,m=o.matrixWorld.elements;for(let i=0;i<a.count;i++)lo=Math.min(lo,m[1]*a.getX(i)+m[5]*a.getY(i)+m[9]*a.getZ(i)+m[13]);}return lo;}
+  function naturalArm(i,point,dir){
+    // Generic IK uses positive elbow flexion. Rotate its upper-arm basis and
+    // reverse the hinge, preserving the endpoint without the old axial flip.
+    const wrist=wrists[i],psi=Math.atan2(-wrist.position.z,-wrist.position.y);
+    const bend=ikLimb(arms[i],elbows[i],.28,.222,point,dir,1,wrist.position);
+    arms[i].quaternion.multiply(flipY);elbows[i].quaternion.setFromAxisAngle(X,-bend-psi);
+  }
+  let phrase='top rock';
+  function sample(seconds){
+    const b=Math.min(56,Math.max(0,Number(seconds)||0)/BEAT),p=choreography(b);
+    for(const[o,r]of rest)o.quaternion.copy(r);
+    root.position.copy(p.hip);root.quaternion.copy(p.root);u.torsoG.quaternion.copy(p.torso);u.headG.quaternion.copy(p.head);
+    for(let i=0;i<2;i++){arms[i].position.y=shoulderRest[i]+p.shrug;arms[i].quaternion.copy(p.upper[i]);elbows[i].quaternion.copy(p.elbow[i]);wrists[i].quaternion.copy(p.wrist[i]);}
+    root.updateMatrixWorld(true);
+    // Pivot the kick-up around reachable, stable shoulders. Interpolating the
+    // pelvis alone lifts planted palms off the floor during inversion.
+    const plant=Math.min(...p.handPlant);
+    if(plant>0){
+      arms[0].getWorldPosition(shoulderCenter);arms[1].getWorldPosition(shoulderRight);shoulderCenter.add(shoulderRight).multiplyScalar(.5);
+      plantedCenter.copy(p.hands[0]).add(p.hands[1]).multiplyScalar(.5);plantedCenter.y=.495;plantedCenter.z+=.005;
+      root.position.addScaledVector(plantedCenter.sub(shoulderCenter),plant);root.updateMatrixWorld(true);
+    }
+    if(p.floorSafe>0){const dy=floorY+.006-bodyFloor();root.position.y+=dy>=0?dy:dy*p.floorLock;root.updateMatrixWorld(true);}
+    for(let i=0;i<2;i++){
+      target.copy(SOLE).applyQuaternion(p.footQ[i]).negate().add(p.feet[i]);pole.set(i?.08:-.08,.04,1);
+      ikLimb(legs[i],knees[i],.27,.25,target,pole,1,ankles[i].position);
+      knees[i].getWorldQuaternion(parentQ).invert();ankles[i].quaternion.copy(parentQ).multiply(p.footQ[i]);
+      ankles[i].quaternion.slerp(identity,smooth((p.feet[i].y-.1)/.35));
+      legs[i].quaternion.slerp(p.leg[i],p.legFK);knees[i].quaternion.slerp(p.knee[i],p.legFK);ankles[i].quaternion.slerp(p.ankle[i],p.legFK);
+      if(p.handPlant[i]>0){
+        fkQ[0].copy(arms[i].quaternion);fkQ[1].copy(elbows[i].quaternion);fkQ[2].copy(wrists[i].quaternion);
+        target.copy(PALM).applyQuaternion(p.palmQ[i]).negate().add(p.hands[i]);pole.set(i?1:-1,.12,1.2);
+        naturalArm(i,target,pole);
+        elbows[i].getWorldQuaternion(parentQ);offset.set(wrists[i].position.x,0,0).applyQuaternion(parentQ);corrected.copy(target).sub(offset);
+        naturalArm(i,corrected,pole);
+        arms[i].quaternion.slerp(fkQ[0],1-p.handPlant[i]);elbows[i].quaternion.slerp(fkQ[1],1-p.handPlant[i]);
+        elbows[i].getWorldQuaternion(parentQ).invert();wrists[i].quaternion.copy(parentQ).multiply(p.palmQ[i]).slerp(fkQ[2],1-p.handPlant[i]);
+      }
+      lerpPose(HAND_POSES.open,HAND_POSES.fist,p.curl[i]*(1-p.handPlant[i]),handShapes[i]);
+      for(let f=0;f<4;f++)handShapes[i].f[f][3]+=(f-1.5)*.023*(1-p.curl[i]);
+      wrists[i].userData.hand?.set(handShapes[i]).update();
+    }
+    root.updateMatrixWorld(true);for(const a of arms)a.userData.liveShoulder?.bend();for(const l of legs)l.userData.bootShaft?.userData.bend();
+    // The airborne tuck remains above the floor until the feet take weight.
+    if(p.legFK>0&&plant<1){const lift=floorY+.006-bodyFloor(allMeshes);if(lift>0){root.position.y+=lift*(1-smooth((plant-.8)/.2));root.updateMatrixWorld(true);}}
+    phrase=p.phase;return {beat:b,phrase,hip:root.position,targets:{hands:p.hands,handPlant:p.handPlant,feet:p.feet,legFK:p.legFK},pose:p};
+  }
+  sample(0);return {root,marine,sample,duration:DISCLAIMER_DANCE.duration,get phrase(){return phrase;}};
+}

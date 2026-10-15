@@ -22,7 +22,9 @@ export const HAND_POSES = {
   open:    { f: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], t: [0, 0.35, 0] },
   relaxed: { f: [[0.3, 0.45, 0.25, 0.04], [0.38, 0.55, 0.3, 0], [0.46, 0.62, 0.32, -0.04], [0.55, 0.7, 0.36, -0.08]], t: [0.35, 0.25, 0.2] },
   // CU-112: unarmed. Fingers curl in, the thumb lies along the palm, nothing presented to the camera.
-  hang:    { f: [[1.0, 1.2, 0.9, 0], [1.02, 1.24, 0.92, 0], [1.05, 1.27, 0.94, 0], [1.08, 1.3, 0.96, 0]], t: [0.95, -0.32, 0.55] },
+  // GB-169 (Jerry): empty hands hang relaxed, the fingers gently curled and more so toward the little finger, the thumb
+  // resting forward along the index (was CU-112's loose fist).
+  hang:    { f: [[0.28, 0.38, 0.22, 0.03], [0.36, 0.48, 0.28, 0], [0.46, 0.6, 0.34, -0.03], [0.58, 0.72, 0.4, -0.07]], t: [0.25, 0.12, 0.18] },
   // fist: wrapped round a 2.6 cm bar through the wrist's grip channel (fitted: the fingers' inner faces 1.3 cm off its axis)
   fist:    { f: [[1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.08, 1.2, 1.0, 0]], t: [1.0, -0.3, 0.55] },
   point:   { f: [[0.1, 0.1, 0.05, 0.05], [1.05, 1.15, 1.0, 0], [1.05, 1.15, 1.0, 0], [1.08, 1.2, 1.0, 0]], t: [0.9, -0.2, 0.5] }
@@ -50,7 +52,8 @@ export function handLayout(s, ox, gz) {
   }));
   return {
     s, ox, gz, mcpY, mcpZ, fingers,
-    palm: [[-0.206, 0.029, 0.015, gz - 0.022], [-0.222, 0.036, 0.017, gz - 0.022], [-0.255, 0.040, 0.016, gz - 0.021], [-0.281, 0.039, 0.0145, gz - 0.02], [-0.291, 0.033, 0.010, gz - 0.02]],
+    // GB-169: a short wrist (narrow, flatter front-to-back) blending the forearm into the palm
+    palm: [[-0.214, 0.029, 0.016, gz - 0.022], [-0.222, 0.036, 0.0175, gz - 0.022], [-0.255, 0.040, 0.016, gz - 0.021], [-0.281, 0.039, 0.0145, gz - 0.02], [-0.291, 0.033, 0.010, gz - 0.02]],
     thumb: { x: ox + s * 0.03, y: -0.232, z: gz - 0.01, len: [0.034, 0.026], w: [0.02, 0.018], d: [0.019, 0.016] }
   };
 }

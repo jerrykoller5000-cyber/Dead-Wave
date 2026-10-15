@@ -1,0 +1,34 @@
+{
+  "file": "index.html",
+  "before": "467c58900cbfd1f846b93ecbe42f8cc36cae9a067c661cadd7231c6f27b8e668",
+  "patches": [
+    {
+      "oldText": "    function rangeRefill(w){\r\n      if(!w)return;\r\n      fireCooldown=0; // a drill starts on a fresh weapon clock, without countdown catch-up fuel ticks\r\n      if(isMagazineWeapon(w)){const size=singleMagSize(w),maxSpare=magazineMaxSpare(w);issueMagazines(magazineStore,w,{size,loaded:size,spareRounds:size*maxSpare,maxSpare});syncMagazine(w);}\r\n      else if(w!=='chainsaw'){ammoByWeapon[w]=singleMagSize(w);reserveAmmo[caliberOf(w)]=RESERVE_CAP[caliberOf(w)]||60;}\r\n      else {sawFuel=sawFuelMax();sawHeat=0;sawOverheat=false;}\r\n      updateAmmoHud();\r\n    }",
+      "newText": "    function rangeRefill(w,d=null){\r\n      if(!w)return;\r\n      fireCooldown=0;\r\n      for(const key of [...new Set(d?.weaponCycle||[w])]){\r\n        if(isMagazineWeapon(key)){const size=singleMagSize(key),maxSpare=magazineMaxSpare(key);issueMagazines(magazineStore,key,{size,loaded:size,spareRounds:size*maxSpare,maxSpare});syncMagazine(key);}\r\n        else if(key!=='chainsaw'){ammoByWeapon[key]=singleMagSize(key);reserveAmmo[caliberOf(key)]=RESERVE_CAP[caliberOf(key)]||60;}\r\n        else {sawFuel=sawFuelMax();sawHeat=0;sawOverheat=false;}\r\n      }\r\n      if(d?.initialRounds!=null){if(isMagazineWeapon(w)){magazineStore[w].loaded[0].rounds=Math.min(singleMagSize(w),d.initialRounds);syncMagazine(w);}else ammoByWeapon[w]=d.initialRounds;}\r\n      updateAmmoHud();\r\n    }"
+    },
+    {
+      "oldText": "        owned:w=>!!weaponOwned[w],signature:rangeSignature,",
+      "newText": "        owned:w=>!!weaponOwned[w],signature:rangeSignature,drillReady:true,"
+    },
+    {
+      "oldText": "context:()=>({position:localPlayer.position,camera:camera.position,pairChanged:dualActive,",
+      "newText": "context:()=>({position:localPlayer.position,camera:camera.position,weapon:currentWeapon,holstered:unarmed,reloading,loaded:ammoByWeapon[currentWeapon]||0,pairChanged:dualActive,"
+    },
+    {
+      "oldText": "        equip:w=>{\r\n          if(vault||!weaponOwned[w])return null;",
+      "newText": "        equip:(w,d=null)=>{\r\n          const weapons=[...new Set(d?.weaponCycle||[w])];\r\n          if(vault||weapons.some(key=>!weaponOwned[key]))return null;"
+    },
+    {
+      "oldText": "ammo:ammoByWeapon[w],reserve:{...reserveAmmo},fuel:sawFuel,heat:sawHeat,overheat:sawOverheat};",
+      "newText": "ammo:ammoByWeapon[w],pack:Object.fromEntries(weapons.map(key=>[key,{mag:magazineStore[key]?JSON.parse(JSON.stringify(magazineStore[key])):null,ammo:ammoByWeapon[key]}])),reserve:{...reserveAmmo},fuel:sawFuel,heat:sawHeat,overheat:sawOverheat};"
+    },
+    {
+      "oldText": "          syncOffhandVisibility();rangeRefill(w);return saved;",
+      "newText": "          syncOffhandVisibility();rangeRefill(w,d);if(d?.startHolstered){holsteredKey=w;unarmed=true;}return saved;"
+    },
+    {
+      "oldText": "if(s.mag)magazineStore[s.w]=s.mag;ammoByWeapon[s.w]=s.ammo;Object.assign(reserveAmmo,s.reserve);",
+      "newText": "if(s.pack)for(const[key,copy]of Object.entries(s.pack)){if(copy.mag){magazineStore[key]=copy.mag;syncMagazine(key);}ammoByWeapon[key]=copy.ammo;}if(s.mag)magazineStore[s.w]=s.mag;ammoByWeapon[s.w]=s.ammo;Object.assign(reserveAmmo,s.reserve);"
+    }
+  ]
+}

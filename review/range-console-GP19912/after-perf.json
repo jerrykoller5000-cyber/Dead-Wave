@@ -1,0 +1,16 @@
+{
+  "loadSec": 23.767,
+  "performance": {
+    "fps": 60.02400960330466,
+    "low": 56.81818183742402,
+    "worst": 17.599999994039536,
+    "hitches": 0,
+    "frames": 60
+  },
+  "monitor": {
+    "updates": 2,
+    "height": 3.3448,
+    "bottom": 2.6448
+  },
+  "errors": []
+}

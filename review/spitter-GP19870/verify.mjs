@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';
+const E=new Engine({training:true,warm:'none',size:'1200x800'}),d='review/spitter-GP19870';
+try{await E.open();const proof=await E.ev(`R.release();const D=T.trainingDbg;D.panel().close();D.clear();T.AudioSys.setMuted(true);T.runDevCommand('godmode');const floor=D.tg().floorY;
+ const M=await import('/game/spitter-motion.js');T.player.position.set(-30,floor,-626);T.setVelDbg(0,0);const spawn=()=>{const z=T.spawnZombie(-30,-634,'spitter',true,true);z.trainingZ=true;z.riseT=0;z.mesh.position.y=floor;z.hp=z.maxHp=10000;return z;};
+ const z=spawn();z.mesh.rotation.y=0;z.spitCd=100;await new Promise(r=>setTimeout(r,700));const moving=M.spitterMotionState(z),u=z.mesh.userData;
+ const mesh=z.mesh;z.partsLost.head=true;z.spitCd=0;await new Promise(r=>setTimeout(r,1300));const noHeadShot=!T.acidGlobs.some(g=>!g.web),noHeadWind=!(z.spitWind>0);
+ D.clear();const reset=M.spitterMotionState(z),cleanTrails=T.enemyAbilitiesDbg.read().trails===0,newZ=spawn(),fresh=newZ.mesh.userData;newZ.spitCd=100;
+ const recycledJaw=fresh.jaw.parent===fresh.head&&fresh.skinMesh.skeleton.bones.includes(fresh.jaw),singleSkin=fresh.skinMeshes.length===1;
+ await new Promise(r=>setTimeout(r,250));T.damageZombie(newZ,100000,{kind:'bullet',dir:{x:0,z:1},hitY:newZ.mesh.position.y+newZ.hitH*.45});await new Promise(r=>setTimeout(r,150));const deathReset=M.spitterMotionState(newZ).phase===undefined;
+ D.clear();return {movingPhase:moving.phase,movingWeight:moving.weight,noHeadShot,noHeadWind,reset:reset.phase===undefined,cleanTrails,recycledJaw,singleSkin,deathReset,reusedMesh:mesh===newZ.mesh};`,12000);
+ fs.writeFileSync(d+'/verification.json',JSON.stringify({...proof,errors:E.page.errors},null,2)+'\n');for(const k of ['noHeadShot','noHeadWind','reset','cleanTrails','recycledJaw','singleSkin','deathReset'])assert(proof[k],k);assert(proof.movingWeight>.5&&proof.movingPhase>0);assert.equal(E.page.errors.length,0);console.log('PASS native head-loss, death, room reset and pooled jaw/skin',JSON.stringify(proof));
+}finally{await E.close();}process.exit(0);

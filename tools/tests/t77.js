@@ -30,8 +30,10 @@
       return 1000 - z.hp;
     };
     const ds = await hitOnce('shambler'), db = await hitOnce('brute');
-    ok(Math.abs(ds - 26 * T.WEAKNESS.shambler.blade) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (26 x its Blade weakness ' + T.WEAKNESS.shambler.blade + ', GB-104)');
-    ok(Math.abs(db - 26 * 0.45 * 0.6) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (was ' + (22 * 0.72).toFixed(1) + ' before GB-52, ' + (22 * 0.72 * 0.6).toFixed(1) + ' before the plates)');
+    // CU-127: Jerry's sheet. A knife swing is 90.5% of a shambler's 24 HP, and 8.2% of a plated brute's 85.
+    const kSh = T.listedBodyDamage('knife', 'shambler'), kBr = T.listedBodyDamage('knife', 'brute');
+    ok(Math.abs(ds - kSh) < 0.6, 'knife on a shambler: ' + ds.toFixed(1) + ' (sheet ' + kSh.toFixed(1) + ', CU-127)');
+    ok(Math.abs(db - kBr) < 0.6, 'knife on a brute: ' + db.toFixed(1) + ' (sheet ' + kBr.toFixed(1) + ', plates on)');
     // (1b) The saw no longer takes the head off anything in a second: ten saw ticks on a brute
     // (8.4 after its size, 3.8 after its plates since GB-75) leave it standing with its head on; twenty-five at most kill it.
     {

@@ -18,10 +18,19 @@ export function traceTraining(tg, a, b, opts) {
   const glass=opts&&opts.throughGlass;
   let hit=null, fraction=Infinity;
   for(const solid of tg.solids) {
-    if(glass && tg.cutaway?.ignoreSolid(solid))continue;
-    if(solid.target!=null && tg.targets[solid.target].state!=='up')continue;
+    if(glass && (solid.firingFence||solid.firingFrame||tg.cutaway?.ignoreSolid(solid)))continue;
+    if(solid.target!=null && (opts?.ignoreTargets?.has(solid.target)||tg.targets[solid.target].state!=='up'))continue;
     if(glass&&solid.wall&&solid.surface&&d.x*solid.surface.nx+d.z*solid.surface.nz>1e-6)continue;
-    const t=segmentBox(a,b,solid);
+    let t;
+    if(solid.target!=null){
+      // A target is a thin drawn plate, not the front face of its broad-phase box.
+      // Aim, silhouette tests and scoring must share the actual upright surface.
+      if(Math.abs(d.z)<1e-10)continue;
+      t=((solid.minZ+solid.maxZ)*.5-a.z)/d.z;
+      if(t<0||t>1)continue;
+      const x=a.x+d.x*t,y=a.y+d.y*t;
+      if(x<solid.minX||x>solid.maxX||y<solid.minY||y>solid.maxY)continue;
+    }else t=segmentBox(a,b,solid);
     // CL-144: a plate is hit only on its silhouette; through the cut-away corners the round goes on
     if(t!==null && solid.target!=null && tg.onPlate && !tg.onPlate(solid.target,{x:a.x+d.x*t,y:a.y+d.y*t,z:a.z+d.z*t}))continue;
     if(t!==null && t<fraction){fraction=t;hit={solid,t};}
@@ -32,6 +41,7 @@ export function traceTraining(tg, a, b, opts) {
   hit.point={x:a.x+d.x*fraction,y:a.y+d.y*fraction,z:a.z+d.z*fraction};
   hit.normal={x:0,y:0,z:0};
   if(hit.solid.floor)hit.normal.y=1;
+  else if(hit.solid.target!=null)hit.normal.z=d.z>0?-1:1;
   else {
     let nearest=Infinity;
     for(const [axis,lo,hi]of [['x','minX','maxX'],['y','minY','maxY'],['z','minZ','maxZ']])for(const[key,sign]of [[lo,-1],[hi,1]]){

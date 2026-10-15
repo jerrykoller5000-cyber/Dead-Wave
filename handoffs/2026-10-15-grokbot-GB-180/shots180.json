@@ -1,0 +1,158 @@
+[
+    {
+        "out":  "review/gb180/pistol-left.png",
+        "view":  "left",
+        "target":  "weapon:pistol",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/pistol-right.png",
+        "view":  "right",
+        "target":  "weapon:pistol",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/pistol-three.png",
+        "view":  "three",
+        "target":  "weapon:pistol",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/pistol-top.png",
+        "view":  "top",
+        "target":  "weapon:pistol",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/m4-left.png",
+        "view":  "left",
+        "target":  "weapon:m4",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/m4-three.png",
+        "view":  "three",
+        "target":  "weapon:m4",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/ak-left.png",
+        "view":  "left",
+        "target":  "weapon:ak",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/ak-three.png",
+        "view":  "three",
+        "target":  "weapon:ak",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/aa12-left.png",
+        "view":  "left",
+        "target":  "weapon:aa12",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/aa12-three.png",
+        "view":  "three",
+        "target":  "weapon:aa12",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/shotgun-left.png",
+        "view":  "left",
+        "target":  "weapon:shotgun",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/shotgun-three.png",
+        "view":  "three",
+        "target":  "weapon:shotgun",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/sniper-left.png",
+        "view":  "left",
+        "target":  "weapon:sniper",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/sniper-three.png",
+        "view":  "three",
+        "target":  "weapon:sniper",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/launcher-left.png",
+        "view":  "left",
+        "target":  "weapon:launcher",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/launcher-three.png",
+        "view":  "three",
+        "target":  "weapon:launcher",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/flamer-left.png",
+        "view":  "left",
+        "target":  "weapon:flamer",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/flamer-three.png",
+        "view":  "three",
+        "target":  "weapon:flamer",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/m240-left.png",
+        "view":  "left",
+        "target":  "weapon:m240",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/m240-three.png",
+        "view":  "three",
+        "target":  "weapon:m240",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/uzi-left.png",
+        "view":  "left",
+        "target":  "weapon:uzi",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/uzi-three.png",
+        "view":  "three",
+        "target":  "weapon:uzi",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/revolver-left.png",
+        "view":  "left",
+        "target":  "weapon:revolver",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/revolver-three.png",
+        "view":  "three",
+        "target":  "weapon:revolver",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/minigun-left.png",
+        "view":  "left",
+        "target":  "weapon:minigun",
+        "size":  "1000x750"
+    },
+    {
+        "out":  "review/gb180/minigun-three.png",
+        "view":  "three",
+        "target":  "weapon:minigun",
+        "size":  "1000x750"
+    }
+]

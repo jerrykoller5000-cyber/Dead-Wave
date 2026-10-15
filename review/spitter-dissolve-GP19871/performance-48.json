@@ -1,0 +1,84 @@
+{
+  "before": {
+    "batches": [
+      {
+        "fps": 60.660600606967535,
+        "p95": 17.30000001192093
+      },
+      {
+        "fps": 60.86811907533677,
+        "p95": 17.19999998807907
+      },
+      {
+        "fps": 60.69853063107838,
+        "p95": 17.19999998807907
+      }
+    ],
+    "zombies": 48,
+    "ability": {
+      "clock": 19.493400000005924,
+      "domain": "training",
+      "shots": 0,
+      "trails": 72,
+      "counts": {
+        "fireballs": 0,
+        "stones": 0,
+        "trailDrops": 344,
+        "directHits": 0,
+        "blocked": 0,
+        "acidHits": 37
+      },
+      "pools": {
+        "fireballs": 0,
+        "stones": 0,
+        "trails": 24
+      }
+    },
+    "trailMeshes": 1,
+    "trailVertices": 576,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "loadSeconds": 18.239,
+    "errors": []
+  },
+  "after": {
+    "batches": [
+      {
+        "fps": 60.25299600532623,
+        "p95": 17.900000005960464
+      },
+      {
+        "fps": 60.815526236599,
+        "p95": 17.400000005960464
+      },
+      {
+        "fps": 60.64443037564942,
+        "p95": 17.099999994039536
+      }
+    ],
+    "zombies": 48,
+    "ability": {
+      "clock": 19.471299999982072,
+      "domain": "training",
+      "shots": 0,
+      "trails": 64,
+      "counts": {
+        "fireballs": 0,
+        "stones": 0,
+        "trailDrops": 336,
+        "directHits": 0,
+        "blocked": 0,
+        "acidHits": 31
+      },
+      "pools": {
+        "fireballs": 0,
+        "stones": 0,
+        "trails": 32
+      }
+    },
+    "trailMeshes": 1,
+    "trailVertices": 576,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "loadSeconds": 17.9,
+    "errors": []
+  }
+}

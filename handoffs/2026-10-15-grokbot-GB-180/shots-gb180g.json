@@ -1,0 +1,270 @@
+[
+ {
+  "cam": {
+   "x": -25.5746,
+   "y": -198.969584,
+   "z": -631.99174,
+   "tx": -26,
+   "ty": -198.989584,
+   "tz": -631.99174,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/aa12-grip.png",
+  "target": "weapon:aa12"
+ },
+ {
+  "cam": {
+   "x": -25.5746,
+   "y": -198.7782,
+   "z": -631.864,
+   "tx": -26,
+   "ty": -198.7982,
+   "tz": -631.864,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/aa12-top.png",
+  "target": "weapon:aa12"
+ },
+ {
+  "cam": {
+   "x": -25.5746,
+   "y": -198.85963999999998,
+   "z": -631.54465,
+   "tx": -26,
+   "ty": -198.87964,
+   "tz": -631.54465,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/aa12-front.png",
+  "target": "weapon:aa12"
+ },
+ {
+  "cam": {
+   "x": -26.223545,
+   "y": -198.8458765,
+   "z": -631.8160975000001,
+   "tx": -26,
+   "ty": -198.989584,
+   "tz": -631.99174,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/aa12-grip3R.png",
+  "target": "weapon:aa12"
+ },
+ {
+  "cam": {
+   "x": -25.554399999999998,
+   "y": -198.94556,
+   "z": -631.9477800000001,
+   "tx": -26.0286,
+   "ty": -198.96556,
+   "tz": -631.9477800000001,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/sniper-grip.png",
+  "target": "weapon:sniper"
+ },
+ {
+  "cam": {
+   "x": -25.554399999999998,
+   "y": -198.8055,
+   "z": -631.7892,
+   "tx": -26.0286,
+   "ty": -198.8255,
+   "tz": -631.7892,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/sniper-top.png",
+  "target": "weapon:sniper"
+ },
+ {
+  "cam": {
+   "x": -25.554399999999998,
+   "y": -198.86509999999998,
+   "z": -631.3927500000001,
+   "tx": -26.0286,
+   "ty": -198.8851,
+   "tz": -631.3927500000001,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/sniper-front.png",
+  "target": "weapon:sniper"
+ },
+ {
+  "cam": {
+   "x": -26.306115000000002,
+   "y": -198.7871575,
+   "z": -631.7297325000001,
+   "tx": -26.0286,
+   "ty": -198.96556,
+   "tz": -631.9477800000001,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/sniper-grip3R.png",
+  "target": "weapon:sniper"
+ },
+ {
+  "cam": {
+   "x": -25.61085,
+   "y": -198.92719,
+   "z": -631.95698,
+   "tx": -25.9998,
+   "ty": -198.94719,
+   "tz": -631.95698,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/shotgun-grip.png",
+  "target": "weapon:shotgun"
+ },
+ {
+  "cam": {
+   "x": -25.61085,
+   "y": -198.82637499999998,
+   "z": -631.8191,
+   "tx": -25.9998,
+   "ty": -198.846375,
+   "tz": -631.8191,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/shotgun-top.png",
+  "target": "weapon:shotgun"
+ },
+ {
+  "cam": {
+   "x": -25.61085,
+   "y": -198.869275,
+   "z": -631.4744000000001,
+   "tx": -25.9998,
+   "ty": -198.889275,
+   "tz": -631.4744000000001,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/shotgun-front.png",
+  "target": "weapon:shotgun"
+ },
+ {
+  "cam": {
+   "x": -26.24109,
+   "y": -198.792075,
+   "z": -631.7673950000001,
+   "tx": -25.9998,
+   "ty": -198.94719,
+   "tz": -631.95698,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/shotgun-grip3R.png",
+  "target": "weapon:shotgun"
+ },
+ {
+  "cam": {
+   "x": -25.365850000000002,
+   "y": -198.992662,
+   "z": -631.91112,
+   "tx": -25.9465,
+   "ty": -199.012662,
+   "tz": -631.91112,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/minigun-grip.png",
+  "target": "weapon:minigun"
+ },
+ {
+  "cam": {
+   "x": -25.365850000000002,
+   "y": -198.751975,
+   "z": -631.758,
+   "tx": -25.9465,
+   "ty": -198.771975,
+   "tz": -631.758,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/minigun-top.png",
+  "target": "weapon:minigun"
+ },
+ {
+  "cam": {
+   "x": -25.365850000000002,
+   "y": -198.85439499999998,
+   "z": -631.3752000000001,
+   "tx": -25.9465,
+   "ty": -198.874395,
+   "tz": -631.3752000000001,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/minigun-front.png",
+  "target": "weapon:minigun"
+ },
+ {
+  "cam": {
+   "x": -26.21446,
+   "y": -198.840402,
+   "z": -631.70058,
+   "tx": -25.9465,
+   "ty": -199.012662,
+   "tz": -631.91112,
+   "fov": 35
+  },
+  "size": "1000x750",
+  "settle": 1500,
+  "out": "review/gb180g/minigun-grip3R.png",
+  "target": "weapon:minigun"
+ },
+ {
+  "target": "weapon:aa12",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g/aa12-side.png"
+ },
+ {
+  "target": "weapon:sniper",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g/sniper-side.png"
+ },
+ {
+  "target": "weapon:shotgun",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g/shotgun-side.png"
+ },
+ {
+  "target": "weapon:minigun",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g/minigun-side.png"
+ }
+]

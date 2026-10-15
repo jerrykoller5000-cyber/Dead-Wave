@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "index.html": "2ac96adaaaa17a814a91ec0479860468f1119937e6fa07ae06e7c6fb3eb168b2",
+    "game/screamer-behavior.js": "7903782ddb8ded4bd038c76674c6e168f966bdc24dab0f7ab595b6770d5cf56b",
+    "game/screamer-behavior.test.mjs": "a4e4d9046cb38d5608dc4e6c73d2c682cf8c88a8521707778eca20981ec4af0a",
+    "game/screamer-appearance.js": "de3fb1ffa24ca507d82c0c26db8192be7f9b9cc16006d31fc159633cc96cf8c7",
+    "core/audio.js": "a989983fccd3cc94a184436169c7380baa547f6c51dc567d6e19839ff2236373"
+  },
+  "acceptedAppearanceUnchanged": true,
+  "audioUnchanged": true,
+  "independentIndexChange": "CU-131 radio-near banner removal (Cursor 08:44–08:48Z), preserved",
+  "indexOutsideFocusedHooksAndCU131Unchanged": true
+}

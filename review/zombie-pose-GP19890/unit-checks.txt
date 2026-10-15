@@ -1,0 +1,31 @@
+✔ starts as a slow stagger and builds pace rather than jumping to a sprint (1.7172ms)
+✔ momentum keeps moving during braking and takes several seconds to stop (0.9976ms)
+✔ a target behind cannot instantly flip facing or cancel forward momentum (0.3432ms)
+✔ behind-target jitter keeps the chosen turn instead of flipping shoulders (0.3982ms)
+✔ pace and turning agree at30,60and144Hz (1.2517ms)
+✔ spawn grace and disabled movement plant the feet; knocking down drops momentum (0.5191ms)
+✔ amputation and other species retain the existing movement path (0.1313ms)
+✔ paused and malformed elapsed time cannot create runaway momentum (0.1261ms)
+✔ shield follows actual scream completion; opening lasts 2.4 seconds (0.9289ms)
+✔ each completed scream creates a fresh opening (0.162ms)
+✔ head loss and death remove shield and cancel scream (0.1675ms)
+✔ shield never affects another species (0.1351ms)
+✔ half turn is accelerated and bounded at multiple frame rates (1.6268ms)
+✔ scream commits facing, then exhausted pose relaxes (0.1914ms)
+✔ room clear removes private state and hides effects (0.1839ms)
+✔ protected pursuit closes; exposed retreat increases separation and still faces the player (0.5182ms)
+✔ exposed movement tries another safe route, and holds when boxed in (0.1691ms)
+✔ exposed side changes are held, not random frame to frame; retreat never accelerates past original pace (0.5496ms)
+✔ retreat holds a gap rather than running forever; invalid/alternate targets and injuries keep normal movement (0.1837ms)
+✔ committed scream/attack and downed bodies are not redirected (0.155ms)
+✔ protected hover blends to exposed footwork and back, with no accumulating pose offsets (3.2233ms)
+✔ shielded travel is two fifths pace, while exposed and headless travel keep their existing speed (0.2038ms)
+✔ protected bob lifts the body in a smooth sustained cycle without moving its collision root (3.1063ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.8986

@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "value": {
+    "ok": true,
+    "before": 40,
+    "after": 40,
+    "keyboardBlocked": true,
+    "held": true,
+    "remainingCopies": 0,
+    "errors": []
+  }
+}

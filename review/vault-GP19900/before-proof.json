@@ -1,0 +1,21 @@
+{
+  "loadSec": 21.772,
+  "setup": {
+    "piece": {
+      "type": "sandbag",
+      "x": -27,
+      "z": -631,
+      "y": -200,
+      "yaw": 0
+    },
+    "p": [
+      -27,
+      -200,
+      -631.8
+    ],
+    "weapon": "pistol",
+    "errors": []
+  },
+  "vault": true,
+  "errors": []
+}

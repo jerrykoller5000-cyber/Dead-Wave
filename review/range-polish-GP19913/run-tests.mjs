@@ -1,0 +1,3 @@
+import {spawnSync} from 'node:child_process';import fs from 'node:fs';
+const args=['--test','ui/range-drills.test.mjs','review/range-polish-GP19913/grenade.test.mjs','review/range-polish-GP19913/catalog.test.mjs','review/range-console-GP19912/policy.test.mjs','review/range-misses-GP19911/feedback.test.mjs','ui/training-hit-pops.test.mjs','world/training-ballistics.test.mjs','review/range-accuracy-GP19910/plane-live.test.mjs'];
+const r=spawnSync(process.execPath,args,{encoding:'utf8',timeout:30000});fs.writeFileSync('review/range-polish-GP19913/unit-final.txt',r.stdout+r.stderr);console.log(r.stdout.slice(r.stdout.lastIndexOf('ℹ tests')));if(r.error)console.log(r.error);process.exit(r.status??1);

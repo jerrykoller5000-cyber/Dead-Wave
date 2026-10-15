@@ -145,13 +145,14 @@ test('hits: about 28% duck aside, the rest stagger; the heavies, the bombers and
 // GB-135 (D-77, Jerry's playthrough 1): "Zombies need to all be faster on average... reach up to 90% of players speed
 // while sprinting. Sprinters need to outpace player on sprint."
 test('D-77 speeds: faster on average, never past 90% of his sprint, and a sprinter outruns his sprint', () => {
-  const RUN = 11.8, SH = 3.19 * 1.15, FE = 5.4 * 1.15, BR = 1.85 * 1.15;
+  // GB-158: the walker check runs on screamers (a crowd kind D-77 still sets); the shambler has Jerry's own speeds now.
+  const RUN = 11.8, SH = 3.19 * 1.15, SC = 3.5 * 1.15, FE = 5.4 * 1.15, BR = 1.85 * 1.15;
   const rnd = seeded(77); let before = 0, after = 0, n = 0, top = 0;
   for (const night of [1, 10, 20]) for (let i = 0; i < 2000; i++) {
-    const p = rollPace('shambler', rnd(), rnd(), night), v = speedFor('shambler', SH * p.mul, p, RUN);
+    const p = rollPace('screamer', rnd(), rnd(), night), v = speedFor('screamer', SC * p.mul, p, RUN);
     if (p.band === 'sprint') { assert.ok(v.speed >= RUN * 1.04 - 1e-9 && v.speed <= RUN * 1.12 + 1e-9 && v.cap === v.speed, 'sprinter ' + v.speed); continue; }
     assert.ok(v.speed <= RUN * 0.9 + 1e-9 && v.cap === RUN * HORDE.CAP_RUN, 'walker ' + v.speed);
-    before += SH * p.mul; after += v.speed; n++;
+    before += SC * p.mul; after += v.speed; n++;
   }
   assert.ok(after / before > 1.5, 'the walkers are ' + (after / before).toFixed(2) + 'x what they were');
   for (let i = 0; i < 500; i++) { const p = rollPace('feral', rnd(), rnd(), 20); if (p.band !== 'sprint') top = Math.max(top, speedFor('feral', FE * p.mul, p, RUN).speed); }
@@ -161,6 +162,41 @@ test('D-77 speeds: faster on average, never past 90% of his sprint, and a sprint
   assert.ok(v('brute', BR, 1.06) < v('shambler', SH, 0.78, 'shamble') && v('feral', FE, 0.82, 'shamble') > v('shambler', SH, 1.14, 'jog'));
   // Bosses and the spider are not in it.
   assert.deepEqual(speedFor('spider', 3.45, { band: 'fixed', u: 0.5 }, RUN), { speed: 3.45, cap: Infinity });
+});
+
+// GB-158 (Jerry 2026-10-11, 2:24 AM CT): "set the baseline speed of the shambler at 4.3 with a lunge speed of 5.0. Feral
+// stays the same. Pull Military top speed down to a 6.0. Screamer and drowned stay the same. Crank demon up to 6.0 on average."
+test('GB-158 speeds: shambler about 4.3 (lunge 5.0), soldier no faster than 6.0, demon about 6.0; sprinters and the rest as D-77', () => {
+  const RUN = 11.8, P = 1.15, rnd = seeded(158);
+  const stats = (k, base, night) => {
+    let sum = 0, c = 0, lo = Infinity, hi = 0, last = null, spr = 0;
+    for (let i = 0; i < 4000; i++) {
+      const p = rollPace(k, rnd(), rnd(), night), v = speedFor(k, base * P * p.mul, p, RUN);
+      if (p.band === 'sprint') { spr++; assert.ok(v.speed >= RUN * 1.04 - 1e-9 && v.speed <= RUN * 1.12 + 1e-9 && v.cap === v.speed && !v.lunge, k + ' sprinter ' + v.speed); continue; }
+      sum += v.speed; c++; lo = Math.min(lo, v.speed); hi = Math.max(hi, v.speed); last = v;
+      if (k === 'demon') assert.ok(v.legacy >= 4.32 - 0.01 && v.legacy <= 4.88 + 0.01, 'demon legacy pace ' + v.legacy);
+    }
+    return { mean: sum / c, lo, hi, last, spr };
+  };
+  const sh = stats('shambler', 3.19, 1);
+  assert.ok(Math.abs(sh.mean - 4.3) < 0.03 && sh.lo >= 3.9 - 1e-9 && sh.hi <= 4.7 + 1e-9, 'shambler ' + sh.lo.toFixed(2) + '-' + sh.hi.toFixed(2) + ', mean ' + sh.mean.toFixed(3));
+  assert.ok(sh.last.lunge === 5.0 && sh.last.cap === 5.0, 'shambler lunge 5.0 and top 5.0');
+  assert.ok(sh.spr > 60 && sh.spr < 180, 'shambler sprinters still about 3% on night 1: ' + sh.spr + ' of 4000');
+  const mi = stats('military', 3.15, 10);
+  assert.ok(mi.hi <= 6.0 + 1e-9 && mi.lo >= 5.0 - 1e-9 && mi.last.cap === 6.0 && mi.last.lunge === 6.0, 'soldier ' + mi.lo.toFixed(2) + '-' + mi.hi.toFixed(2));
+  const de = stats('demon', 2.5, 10);
+  assert.ok(Math.abs(de.mean - 6.0) < 0.03 && de.lo >= 5.6 - 1e-9 && de.hi <= 6.4 + 1e-9 && de.spr === 0 && !de.last.lunge, 'demon ' + de.lo.toFixed(2) + '-' + de.hi.toFixed(2) + ', mean ' + de.mean.toFixed(3));
+  assert.ok(Math.abs(de.last.cap - RUN * 0.9) < 1e-9, 'the demon keeps the D-77 cap');
+  // The kinds Jerry did not name give the D-77 numbers exactly.
+  for (const [k, base] of [['feral', 5.4], ['screamer', 3.5], ['drowned', 2.4], ['leaper', 4.2], ['brute', 1.85], ['spitter', 2.45], ['bomber', 4.32]]) {
+    for (let i = 0; i < 300; i++) {
+      const p = rollPace(k, rnd(), rnd(), 10); if (p.band === 'sprint') continue;
+      assert.deepEqual(speedFor(k, base * P * p.mul, p, RUN), { speed: Math.min(RUN * 0.9, base * P * p.mul * 1.6), cap: RUN * 0.9 }, k);
+    }
+  }
+  // A cave role's speedMul still scales the target kinds (iron: 0.92).
+  const r = speedFor('shambler', 1, { band: 'jog', u: 0.5 }, RUN, 0.92);
+  assert.ok(Math.abs(r.speed - 4.3 * 0.92) < 1e-9 && Math.abs(r.cap - 4.6) < 1e-9 && Math.abs(r.lunge - 4.6) < 1e-9, 'iron shambler ' + JSON.stringify(r));
 });
 
 test('D-77 roles: an even 70/30 split of the mass and the flankers; slot-less kinds take none', () => {

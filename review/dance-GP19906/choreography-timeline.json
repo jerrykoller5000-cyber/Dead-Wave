@@ -1,0 +1,309 @@
+{
+  "task": "GP-19906",
+  "status": "Final native audit, both exports, and fourteen composite captures verified",
+  "motion_source_sha256": "d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070",
+  "duration_seconds": 20,
+  "fps": 30,
+  "frames": 600,
+  "music": {
+    "source": "Been Warned.mp3",
+    "source_start_seconds": 9.151494,
+    "source_end_seconds": 29.151494,
+    "bpm": 103.322299,
+    "beat_seconds": 0.5807071714499887,
+    "playback_rate": 1,
+    "fade_out_start_seconds": 19.55,
+    "fade_out_end_seconds": 20
+  },
+  "movement_end_beat": 33.2,
+  "movement_end_seconds": 19.279478092139627,
+  "delivery_end_beat": 34.440766333333336,
+  "final_pose_hold_seconds": 0.7205219078603733,
+  "segments": [
+    {
+      "start_beat": 0,
+      "end_beat": 4,
+      "start_seconds": 0,
+      "end_seconds": 2.322829,
+      "label": "Funky strut",
+      "description": "Traveling groove with hip, chest, shoulder, and head motion."
+    },
+    {
+      "start_beat": 4,
+      "end_beat": 8,
+      "start_seconds": 2.322829,
+      "end_seconds": 4.645657,
+      "label": "Running man",
+      "description": "Blend into alternating running-man footwork over the first 0.6 beat."
+    },
+    {
+      "start_beat": 8,
+      "end_beat": 8.5,
+      "start_seconds": 4.645657,
+      "end_seconds": 4.936011,
+      "label": "Quick grab accent",
+      "description": "Brief low hand accent; the other arm counters overhead."
+    },
+    {
+      "start_beat": 8.5,
+      "end_beat": 9,
+      "start_seconds": 4.936011,
+      "end_seconds": 5.226365,
+      "label": "Gather feet",
+      "description": "Bring the feet together and prepare the side hops."
+    },
+    {
+      "start_beat": 9,
+      "end_beat": 12,
+      "start_seconds": 5.226365,
+      "end_seconds": 6.968486,
+      "label": "Directional side hops",
+      "description": "Three hops with directional body lean, loading, push-off, airborne leg tuck, and landing absorption. Lateral flight has short acceleration ramps."
+    },
+    {
+      "start_beat": 12,
+      "end_beat": 14,
+      "start_seconds": 6.968486,
+      "end_seconds": 8.1299,
+      "label": "Backstep groove",
+      "description": "Blend back to the strut over 0.55 beat while traveling back."
+    },
+    {
+      "start_beat": 14,
+      "end_beat": 16,
+      "start_seconds": 8.1299,
+      "end_seconds": 9.291315,
+      "label": "Heel-toe groove",
+      "description": "Blend into heel-toe footwork and loose upper-body waves."
+    },
+    {
+      "start_beat": 16,
+      "end_beat": 17.5,
+      "start_seconds": 9.291315,
+      "end_seconds": 10.162376,
+      "label": "Shimmy entry",
+      "description": "Blend into the new alternating heel-toe shimmy over 0.75 beat."
+    },
+    {
+      "start_beat": 17.5,
+      "end_beat": 20.5,
+      "start_seconds": 10.162376,
+      "end_seconds": 11.904497,
+      "label": "Heel-toe shimmy",
+      "description": "Grounded alternating foot lifts, hip/chest counterrotation, and arm swing; replaces the second hop group."
+    },
+    {
+      "start_beat": 20.5,
+      "end_beat": 21,
+      "start_seconds": 11.904497,
+      "end_seconds": 12.194851,
+      "label": "Floorwork preparation",
+      "description": "Blend the shimmy into the upright wave pose."
+    },
+    {
+      "start_beat": 21,
+      "end_beat": 21.5,
+      "start_seconds": 12.194851,
+      "end_seconds": 12.485204,
+      "label": "Drop",
+      "description": "Lower the live upright pose into a planted crouch."
+    },
+    {
+      "start_beat": 21.5,
+      "end_beat": 22,
+      "start_seconds": 12.485204,
+      "end_seconds": 12.775558,
+      "label": "Hand plant",
+      "description": "Blend the drop into the two-hand kick-up support pose."
+    },
+    {
+      "start_beat": 22,
+      "end_beat": 23,
+      "start_seconds": 12.775558,
+      "end_seconds": 13.356265,
+      "label": "Kick-up",
+      "description": "Raise the pelvis and legs into the handstand."
+    },
+    {
+      "start_beat": 23,
+      "end_beat": 25,
+      "start_seconds": 13.356265,
+      "end_seconds": 14.517679,
+      "label": "Handstand",
+      "description": "Alternating leg motion over planted hands."
+    },
+    {
+      "start_beat": 25,
+      "end_beat": 25.18,
+      "start_seconds": 14.517679,
+      "end_seconds": 14.622207,
+      "label": "Release",
+      "description": "Brief release of the palms from the handstand."
+    },
+    {
+      "start_beat": 25.18,
+      "end_beat": 25.82,
+      "start_seconds": 14.622207,
+      "end_seconds": 14.993859,
+      "label": "Shoulder flop",
+      "description": "Accelerating fold onto the shoulder and upper back."
+    },
+    {
+      "start_beat": 25.82,
+      "end_beat": 26,
+      "start_seconds": 14.993859,
+      "end_seconds": 15.098386,
+      "label": "Backspin entry",
+      "description": "Catch the upper back and carry the leg drive into rotation."
+    },
+    {
+      "start_beat": 26,
+      "end_beat": 30,
+      "start_seconds": 15.098386,
+      "end_seconds": 17.421215,
+      "label": "Driven backspin",
+      "description": "Scissoring legs, tucked arms, chin tuck, and torso curl drive the spin."
+    },
+    {
+      "start_beat": 30,
+      "end_beat": 30.4,
+      "start_seconds": 17.421215,
+      "end_seconds": 17.653498,
+      "label": "Spin brake",
+      "description": "Ease rotational speed while staying on the upper back."
+    },
+    {
+      "start_beat": 30.4,
+      "end_beat": 31.25,
+      "start_seconds": 17.653498,
+      "end_seconds": 18.147099,
+      "label": "Brake and roll overlap",
+      "description": "Unfold into the side roll while the remaining spin brakes."
+    },
+    {
+      "start_beat": 31.25,
+      "end_beat": 31.9,
+      "start_seconds": 18.147099,
+      "end_seconds": 18.524559,
+      "label": "Side recline",
+      "description": "Rotation integral has stopped; the pose continues rolling."
+    },
+    {
+      "start_beat": 31.9,
+      "end_beat": 33.2,
+      "start_seconds": 18.524559,
+      "end_seconds": 19.279478,
+      "label": "Cheek-rest reach",
+      "description": "Blend the supported side recline into the cheek-rest pose."
+    },
+    {
+      "start_beat": 33.2,
+      "end_beat": 34.440766333333336,
+      "start_seconds": 19.279478,
+      "end_seconds": 20,
+      "label": "Ground freeze hold",
+      "description": "Hold the supported final pose through exactly 20 seconds."
+    }
+  ],
+  "late_finale_note": "The side roll starts at b30.4 while the spin brakes. Spin angle stops accumulating at b31.25; head-rest reach begins at b31.9; the smooth quadratic pose blend finishes at b33.2 without an intermediate freeze.",
+  "final_evidence": {
+    "status": "verified; production live integration/performance and shared suite outside this subtask",
+    "native_audit": {
+      "file": "final-audit/proof.json",
+      "motion_source_sha256": "d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070",
+      "poses": 601,
+      "boundaries": 28,
+      "deterministic_seeks": 13,
+      "quality_gates_passed": 9,
+      "max_seek_difference": 0,
+      "min_frame_margin_pixels": 75.60114328557574,
+      "max_planted_hand_error_mm": 0.8771575283442876,
+      "max_free_wrist_degrees": 28.166628401320764,
+      "max_floor_intersection_mm": 1.2424808363099213,
+      "floor_tolerance_mm": 2,
+      "browser_errors": []
+    },
+    "export_verification": {
+      "opaque": {
+        "file": "marine-dance.mp4.verification.json",
+        "passes": true,
+        "durationSeconds": 20,
+        "decodedFrames": 600,
+        "dimensions1280x720": true,
+        "audio_lag_samples": 0,
+        "audio_correlation": 0.9987008741652815
+      },
+      "alpha": {
+        "file": "marine-dance-transparent.webm.verification.json",
+        "passes": true,
+        "durationSeconds": 20,
+        "decodedFrames": 600,
+        "dimensions1280x720": true,
+        "alpha_minimum": 0,
+        "alpha_maximum": 255
+      }
+    },
+    "composite_check": {
+      "file": "composite-proof/proof.json",
+      "contact_sheet": "composite-proof/contact-sheet.png",
+      "passes": true,
+      "captures": 14,
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          900,
+          900
+        ]
+      ],
+      "candidates": [
+        {
+          "label": "left",
+          "seconds": 0,
+          "beat": 0
+        },
+        {
+          "label": "right",
+          "seconds": 9.433333333333334,
+          "beat": 16.24456145388889
+        },
+        {
+          "label": "near",
+          "seconds": 9.433333333333334,
+          "beat": 16.24456145388889
+        },
+        {
+          "label": "far",
+          "seconds": 7.966666666666667,
+          "beat": 13.718905256111112
+        },
+        {
+          "label": "lowest-screen",
+          "seconds": 3.5,
+          "beat": 6.027134108333334
+        },
+        {
+          "label": "highest-screen",
+          "seconds": 14.6,
+          "beat": 25.141759423333333
+        },
+        {
+          "label": "final-freeze",
+          "seconds": 19.8,
+          "beat": 34.09635867
+        }
+      ],
+      "sourceMargin": 75,
+      "screenMargin": 66.60000610351562,
+      "minTextGap": 21.853118896484375,
+      "maxTextOverlap": 0,
+      "correctFrame": true,
+      "correctDuration": true,
+      "transparentCorners": true,
+      "browser_errors": [],
+      "video_sha256": "e9fbb4c5e0ac158d18420bf4252ab14274b546d8e7a9b03946e0382b0f373d4f"
+    }
+  }
+}

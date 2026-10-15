@@ -1,0 +1,21 @@
+ok    t221    27 pass   0 fail  51.3s
+FAIL  t218    41 pass   3 fail  187.9s
+    t218   3 fail  FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.022 / 0.060 m)
+           FAIL pistol akimbo: each gun's well comes onto its own side's pouch (0.022 / 0.060 m)
+           FAIL uzi akimbo: each gun's well comes onto its own side's pouch (0.047 / 0.176 m)
+           FAIL revolver akimbo: each gun's well comes onto its own side's pouch (0.023 / 0.102 m)
+FAIL  t224    14 pass   7 fail  76.5s
+    t224   7 fail  FAIL m4/ak/uzi/revolver revolver+: in beside the pack (x 0.105, z -0.373)
+           FAIL m4/ak/uzi/revolver revolver+: in beside the pack (x 0.105, z -0.373)
+           FAIL m4/ak/uzi/revolver revolver-: in beside the pack (x -0.105, z -0.373)
+           FAIL minigun/m4/uzi/revolver revolver+: in beside the pack (x 0.105, z -0.373)
+           FAIL minigun/m4/uzi/revolver revolver-: in beside the pack (x -0.105, z -0.373)
+           FAIL shotgun/aa12/revolver/ revolver+: in beside the pack (x 0.105, z -0.371)
+           FAIL shotgun/aa12/revolver/ revolver-: in beside the pack (x -0.105, z -0.371)
+           FAIL and pistols on the pack (CL-160): 0
+ok    t229    13 pass   0 fail  76.3s
+ok    t240    17 pass   0 fail  50.6s
+FAIL  t242    14 pass   1 fail  35.9s
+    t242   1 fail  FAIL extended: the magazine is inside the grip above its bottom (worst 6.4 mm out; 66 points)
+           FAIL extended: the magazine is inside the grip above its bottom (worst 6.4 mm out; 66 points)
+ok    t252    12 pass   0 fail  49.9s

@@ -1,0 +1,188 @@
+[
+  {
+    "file": "index.html",
+    "baseHash": "4bff3f12dbbac8a2403988475c9ff81d67076c13edde482267ca90096c2d24bf",
+    "patches": [
+      {
+        "oldText": "    import { trainingFloorHit, traceTraining, createTrainingImpacts } from './world/training-ballistics.js';",
+        "newText": "    import { createRangeFeature } from './ui/range-feature.js';   // GP-19901\r\n    import { trainingFloorHit, traceTraining, createTrainingImpacts } from './world/training-ballistics.js';"
+      },
+      {
+        "oldText": "    function ensureTrainingUi() {",
+        "newText": "    // GP-19901: the console owns only its session and borrowed ammunition, never unlocks or weapon balance.\r\n    let rangeFeature=null,rangeShotPacket=null,rangeEventSerial=0;\r\n    function rangeSignature(w){return JSON.stringify({mode:weaponIsAuto(w)?'auto':'semi',ext:!!extMag[w],heavy:!!heavyFitted[w],can:!!suppressor[w],laser:!!gearOwned.laser&&lasersEnabled,auto:w==='pistol'&&pistolAutoFitted,skills:Object.fromEntries(Object.keys(SKILL_RANKS).map(k=>[k,skillLvl(localPlayer,k)]))});}\r\n    function rangeRefill(w){\r\n      if(!w)return;\r\n      fireCooldown=0; // a drill starts on a fresh weapon clock, without countdown catch-up fuel ticks\r\n      if(isMagazineWeapon(w)){const size=singleMagSize(w),maxSpare=magazineMaxSpare(w);issueMagazines(magazineStore,w,{size,loaded:size,spareRounds:size*maxSpare,maxSpare});syncMagazine(w);}\r\n      else if(w!=='chainsaw'){ammoByWeapon[w]=singleMagSize(w);reserveAmmo[caliberOf(w)]=RESERVE_CAP[caliberOf(w)]||60;}\r\n      else {sawFuel=sawFuelMax();sawHeat=0;sawOverheat=false;}\r\n      updateAmmoHud();\r\n    }\r\n    function ensureRangeFeature(){\r\n      if(rangeFeature||!training.tg)return;\r\n      rangeFeature=createRangeFeature(THREE,training.tg,{\r\n        owned:w=>!!weaponOwned[w],signature:rangeSignature,\r\n        context:()=>({position:localPlayer.position,camera:camera.position,previousZ:training.feetZ,pairChanged:dualActive,paused:paused||shopOpen||cifOpen,alive:playerHp>0&&!training.wake&&!gameOver,inTraining:training.active,busy:!!vault||!!training.wake||!!training.deployment?.read()||trainingAlive()>0||mortarMounted||mortarCarried||onAnyLadder()||!grounded}),\r\n        equip:w=>{\r\n          if(vault||!weaponOwned[w])return null;\r\n          const saved={weapon:currentWeapon,unarmed,holsteredKey,dual:dualActive,w,mag:magazineStore[w]?JSON.parse(JSON.stringify(magazineStore[w])):null,ammo:ammoByWeapon[w],reserve:{...reserveAmmo},fuel:sawFuel,heat:sawHeat,overheat:sawOverheat};\r\n          dualActive=false;if(unarmed){const was=paused;paused=false;toggleHolster();paused=was;}setWeapon(WEAPON_ORDER.indexOf(w));if(currentWeapon!==w){dualActive=saved.dual;return null;}\r\n          syncOffhandVisibility();rangeRefill(w);return saved;\r\n        },\r\n        refill:rangeRefill,\r\n        restore:s=>{\r\n          reloading=false;reloadTimer=0;reloadWeapon=null;resetReloadAnim();for(let i=droppedMags.length-1;i>=0;i--){const m=droppedMags[i];if(!m.rangeLoan)continue;scene.remove(m.mesh);m.mesh.material.dispose();droppedMags.splice(i,1);}if(s.mag)magazineStore[s.w]=s.mag;ammoByWeapon[s.w]=s.ammo;Object.assign(reserveAmmo,s.reserve);sawFuel=s.fuel;sawHeat=s.heat;sawOverheat=s.overheat;\r\n          dualActive=s.dual;setWeapon(WEAPON_ORDER.indexOf(s.weapon));if(s.unarmed!==unarmed){const was=paused;paused=false;toggleHolster();paused=was;}holsteredKey=s.holsteredKey;syncOffhandVisibility();updateAmmoHud();\r\n        },\r\n        pause:on=>{paused=on;syncReticleVisibility();},\r\n        stop:()=>{stopFiring();mouseFireHeld=false;zoomHeld=false;prevMouseFireHeld=false;flamerOn=false;sawCutting=false;rangeShotPacket=null;grenadeCharging=false;grenadeChargeT=0;grenadeArc.visible=false;cancelGrenadeAnim();for(const k of Object.keys(keys))keys[k]=false;},\r\n        cue:k=>{if(k==='start')AudioSys.relayBeep(true);else if(k==='end')AudioSys.hqDing();else if(k==='void')AudioSys.invalid();else if(k==='count')AudioSys.relayBeep(false);else if(k==='open')AudioSys.trainingCue('open');},\r\n        publish:(phase,s)=>publishUI('range-drill',{phase,weapon:s.drill?.weapon,drill:s.drill?.id,run:s.id,countdown:s.countdown,score:s.score,wave:s.wave,zone:s.plan?.zone,priority:s.plan?.priority}),\r\n        feedback:(index,point,sc)=>{const b=training.tg.targets[index].box;if(point)spawnEmbers(point.x,point.y,point.z,4,.5);AudioSys.trainingCue('target');training.pops?.add({x:(b.minX+b.maxX)/2,y:b.maxY+.18,z:(b.minZ+b.maxZ)/2},hitPopText(sc,z=>sayText('training.zone.'+z)));}\r\n      });\r\n    }\r\n    function rangeRound(p){\r\n      const tg=training.tg;if(!tg)return false;\r\n      const ignored=p.rangeTouched||(p.rangeTouched=new Set());let a={x:p.prev.x,y:p.prev.y,z:p.prev.z};const b={x:p.pos.x,y:p.pos.y,z:p.pos.z};\r\n      for(let n=0;n<5;n++){\r\n        const hit=traceTraining(tg,a,b,{ignoreTargets:ignored});if(!hit)return false;\r\n        if(hit.solid.target==null){if(hit.solid.lockerDoor)tg.wear?.hitDoor?.(hit.point,{x:p.dir.x,z:p.dir.z});if(!hit.solid.securityDoor&&!hit.solid.metal)training.impacts?.add(hit);spawnEmbers(hit.point.x,hit.point.y,hit.point.z,5,.4);p.hit=true;return true;}\r\n        const index=hit.solid.target;ignored.add(index);\r\n        if(rangeFeature?.owns())rangeFeature.hit(index,hit.point,p.rangePacket,p.rangeEvent);\r\n        if(p.pierce>0){p.pierce--;a={x:hit.point.x+p.dir.x*.001,y:hit.point.y+p.dir.y*.001,z:hit.point.z+p.dir.z*.001};continue;}\r\n        p.hit=true;return true;\r\n      }return false;\r\n    }\r\n\r\n    function ensureTrainingUi() {"
+      },
+      {
+        "oldText": "      training.active = true;",
+        "newText": "      training.active = true;\r\n      ensureRangeFeature();"
+      },
+      {
+        "oldText": "    function leaveTraining() {",
+        "newText": "    function leaveTraining() {\r\n      rangeFeature?.dispose();rangeFeature=null;rangeShotPacket=null;"
+      },
+      {
+        "oldText": "      droppedMags.push({\r\n        mesh,",
+        "newText": "      droppedMags.push({\r\n        rangeLoan:!!rangeFeature?.owns()&&currentWeapon===rangeFeature.read().drill?.weapon,\r\n        mesh,"
+      },
+      {
+        "oldText": "['lightSwitch', 'trainingLights']];",
+        "newText": "['lightSwitch', 'trainingLights'], ['rangeConsole', 'rangeConsole']];"
+      },
+      {
+        "oldText": "      if (a === 'cif') openCIF();",
+        "newText": "      if (a === 'rangeConsole') { ensureRangeFeature();rangeFeature?.open(); }\r\n      else if (a === 'cif') openCIF();"
+      },
+      {
+        "oldText": "        else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');",
+        "newText": "        else if (a === 'rangeConsole') text = 'E — '+sayText('range.prompt');\r\n        else if (a === 'trainingPanel') text = sayText('training.panelPrompt', {}, 'E — HQ panel: call in zombies');"
+      },
+      {
+        "oldText": "UI_SKIP = '#shop,#cif,#trainingPanel,.tp-panel,",
+        "newText": "UI_SKIP = '#rangeConsole,.range-card,#shop,#cif,#trainingPanel,.tp-panel,"
+      },
+      {
+        "oldText": "      if (e.code === 'Escape') {\r\n        e.preventDefault();\r\n        if (wheelIsOpen())",
+        "newText": "      if (e.code === 'Escape') {\r\n        if(rangeFeature?.isOpen()){rangeFeature.exit();e.preventDefault();return;}\r\n        if(rangeFeature?.ruled()){rangeFeature.abort('cancel');e.preventDefault();return;}\r\n        e.preventDefault();\r\n        if (wheelIsOpen())"
+      },
+      {
+        "oldText": "      tg.update(dt);",
+        "newText": "      tg.update(rangeFeature?.owns()&&(paused||shopOpen||cifOpen)?0:dt);\r\n      rangeFeature?.tick(dt);"
+      },
+      {
+        "oldText": "        if (!marineDown()) tryFire(dt);",
+        "newText": "        rangeFeature?.check(); // gameplay feet after movement, before any attack\r\n        if (!marineDown()) tryFire(dt);"
+      },
+      {
+        "oldText": "    function openTrainingPanel() {",
+        "newText": "    function openTrainingPanel() {\r\n      if(rangeFeature?.owns())rangeFeature.exit();"
+      },
+      {
+        "oldText": "    function openCIF() {",
+        "newText": "    function openCIF() {\r\n      if(rangeFeature?.owns())rangeFeature.exit();"
+      },
+      {
+        "oldText": "    function openShop(force = false) {",
+        "newText": "    function openShop(force = false) {\r\n      if(rangeFeature?.owns())rangeFeature.exit();"
+      },
+      {
+        "oldText": "    function beginWeaponShot() {",
+        "newText": "    function beginWeaponShot() {\r\n      rangeShotPacket=rangeFeature?.attack(currentWeapon)||null;"
+      },
+      {
+        "oldText": "        while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {",
+        "newText": "        while (fireCooldown <= 0 && ammoByWeapon.minigun > 0) {\r\n          if(rangeFeature&&!rangeFeature.canAttack('minigun'))break;"
+      },
+      {
+        "oldText": "        if (canShoot) {",
+        "newText": "        if (canShoot) {\r\n          if(rangeFeature&&!rangeFeature.canAttack(currentWeapon))return;"
+      },
+      {
+        "oldText": "          flamerTick(st);",
+        "newText": "          rangeShotPacket=rangeFeature?.attack('flamer',{units:.5,seconds:st.interval})||null;\r\n          flamerTick(st);"
+      },
+      {
+        "oldText": "        if (!fireHeld) { flamerOn = false; return; }",
+        "newText": "        if (!fireHeld) { if(rangeFeature?.owns())fireCooldown=Math.max(0,fireCooldown);flamerOn = false; return; }"
+      },
+      {
+        "oldText": "        while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {",
+        "newText": "        while (fireCooldown <= 0 && ammoByWeapon.flamer > 0) {\r\n          if(rangeFeature&&!rangeFeature.canAttack('flamer',.5)){flamerOn=false;break;}"
+      },
+      {
+        "oldText": "        AudioSys.chainsawStart();\r\n        AudioSys.chainsawSetRev(1);",
+        "newText": "        if(rangeFeature&&!rangeFeature.canAttack('chainsaw',dt))return;\r\n        AudioSys.chainsawStart();\r\n        AudioSys.chainsawSetRev(1);"
+      },
+      {
+        "oldText": "        sawCutting = true;\r\n        sawBiteT",
+        "newText": "        sawCutting = true;\r\n        if(rangeFeature?.owns()){const p=localPlayer.position;const hits=trainingMeleeHits(training.tg,{x:p.x,y:p.y+.9,z:p.z},{x:Math.sin(aimYaw),z:Math.cos(aimYaw)},st.reach,st.arc,Infinity);rangeFeature.saw(dt,hits);}\r\n        sawBiteT"
+      },
+      {
+        "oldText": "        fromTurret,\r\n        kind: kind || 'bullet',",
+        "newText": "        fromTurret,\r\n        rangePacket:fromTurret?null:rangeShotPacket,rangeEvent:++rangeEventSerial,\r\n        kind: kind || 'bullet',"
+      },
+      {
+        "oldText": "        isShell: true, // 40mm launcher round — distinct from Key-G throwable",
+        "newText": "        rangePacket:rangeShotPacket,originWeapon:'launcher',\r\n        isShell: true, // 40mm launcher round — distinct from Key-G throwable"
+      },
+      {
+        "oldText": "          if (hitT <= 1) {\r\n            g.pos.x = g.prev.x +",
+        "newText": "          if(training.active&&training.tg&&rangeFeature?.owns()){const rangeHit=traceTraining(training.tg,g.prev,g.pos);if(rangeHit&&rangeHit.t<hitT)hitT=rangeHit.t;} // drill-only contact fuse on the real range solids\r\n          if (hitT <= 1) {\r\n            g.pos.x = g.prev.x +"
+      },
+      {
+        "oldText": "        mesh: acquireEffectMesh(flameGeo, flameCoreMat, MAX_FLAME), stage: 0,\r\n        x: ox, y: oy, z: oz,",
+        "newText": "        mesh: acquireEffectMesh(flameGeo, flameCoreMat, MAX_FLAME), stage: 0,\r\n        x: ox, y: oy, z: oz,rangePacket:rangeShotPacket,"
+      },
+      {
+        "oldText": "      const st = WEAPON_STATS.flamer;\r\n\r\n      for (let i = flameParticles.length - 1;",
+        "newText": "      const st = WEAPON_STATS.flamer;\r\n      const rangeContacts=new Set();let rangeContactPacket=null;\r\n\r\n      for (let i = flameParticles.length - 1;"
+      },
+      {
+        "oldText": "        const p = flameParticles[i];\r\n        stepFlameBlob(p, dt);",
+        "newText": "        const p = flameParticles[i];\r\n        const rangePrev={x:p.x,y:p.y,z:p.z};\r\n        stepFlameBlob(p, dt);\r\n        if(rangeFeature?.owns()&&!p.quenched&&!p.grounded&&p.age<p.life*.7){const index=rangeFeature.flame(rangePrev,p,p.rangePacket);if(index!=null){rangeContacts.add(index);rangeContactPacket=p.rangePacket;}}"
+      },
+      {
+        "oldText": "        p.mesh.rotation.x += p.spin * 0.6 * dt;\r\n      }\r\n    }",
+        "newText": "        p.mesh.rotation.x += p.spin * 0.6 * dt;\r\n      }\r\n      if(rangeContacts.size)rangeFeature.contact([...rangeContacts],dt,rangeContactPacket);\r\n    }"
+      },
+      {
+        "oldText": "      if (holyGrenadeReady()) { grenadeCd = 0.6; throwHolyGrenade(); return; }",
+        "newText": "      if((holyGrenadeReady()||grenades>0)&&rangeFeature&&!rangeFeature.canAttack(currentWeapon,1,'throwable'))return;\r\n      if (holyGrenadeReady()) { grenadeCd = 0.6; throwHolyGrenade(); return; }"
+      },
+      {
+        "oldText": "      const bs = bladeStats();\r\n      knifeCd = bs.cd;",
+        "newText": "      if(rangeFeature&&!rangeFeature.canAttack(katanaOwned?'katana':macheteOwned?'machete':'knife'))return;\r\n      const bs = bladeStats();\r\n      knifeCd = bs.cd;"
+      },
+      {
+        "oldText": "      if (training.active && training.tg) for (const hit of trainingBlastHits(training.tg, g.pos, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z);",
+        "newText": "      if(rangeFeature?.owns())rangeFeature.blast(g,AOE);\r\n      else if (!g.rangePacket&&training.active && training.tg) for (const hit of trainingBlastHits(training.tg, g.pos, AOE)) trainingHitTarget(hit.index, hit.point, false, localPlayer.position.z);"
+      },
+      {
+        "oldText": "      if (!tg || !tg.targets[index]) return false;",
+        "newText": "      if (!tg || !tg.targets[index]) return false;\r\n      if(rangeFeature?.owns())return false; // drill events use their origin token through the private adapter"
+      },
+      {
+        "oldText": "    function trainingMelee(reach, fx, fz, arc, limit) {",
+        "newText": "    function trainingMelee(reach, fx, fz, arc, limit) {\r\n      if(rangeFeature?.owns())return 0;"
+      },
+      {
+        "oldText": "    function trainingRound(p) {",
+        "newText": "    function trainingRound(p) {\r\n      if(rangeFeature?.owns()||p.rangePacket){const done=rangeRound(p);if(done!=null)return done;}"
+      },
+      {
+        "oldText": "isVaulting: () => !!vault, vaultDbg:",
+        "newText": "rangeDbg: {read:()=>rangeFeature?.read(),open:()=>rangeFeature?.open(),exit:()=>rangeFeature?.exit(),start:d=>rangeFeature?.start(d),feature:()=>rangeFeature,packet:()=>rangeShotPacket}, isVaulting: () => !!vault, vaultDbg:"
+      }
+    ]
+  },
+  {
+    "file": "world/training.js",
+    "baseHash": "68f84ac922e25c66c1fce3638447cd61f84cf916a42067cff94e1aae0eececf0",
+    "patches": [
+      {
+        "oldText": "TRAINING.LANE_MULT[i] || 1",
+        "newText": "TRAINING.LANE_MULT[t.lane-1] || 1"
+      },
+      {
+        "oldText": "t.pivot.rotation.x = (t.fall || 1) * DOWN_A * u * u;",
+        "newText": "t.pivot.rotation.x = t.drillControlled ? (t.drillFrom||0)+(DOWN_A-(t.drillFrom||0))*u*u : (t.fall || 1) * DOWN_A * u * u;"
+      },
+      {
+        "oldText": "if (t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }",
+        "newText": "if (!t.drillControlled && t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }"
+      },
+      {
+        "oldText": "t.pivot.rotation.x = (t.fall || 1) * (DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06);",
+        "newText": "t.pivot.rotation.x = t.drillControlled ? (t.drillFrom??DOWN_A)*(1-e)-Math.sin(u*Math.PI)*.06 : (t.fall || 1) * (DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06);"
+      }
+    ]
+  },
+  {
+    "file": "world/training-ballistics.js",
+    "baseHash": "2a7d42d7def41bb7c0428427e6cf0d1f2ba970e1a31d9e18b9a25286c6f23a37",
+    "patches": [
+      {
+        "oldText": "    if(solid.target!=null && tg.targets[solid.target].state!=='up')continue;",
+        "newText": "    if(solid.target!=null && (opts?.ignoreTargets?.has(solid.target)||tg.targets[solid.target].state!=='up'))continue;"
+      }
+    ]
+  }
+]

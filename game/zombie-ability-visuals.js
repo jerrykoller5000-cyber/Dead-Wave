@@ -42,26 +42,25 @@ function coloredGeometry(THREE, entries) {
 
 function flameGeometry(THREE) {
   const xyz = [], colors = [], indices = [];
-  // Five irregular tongues, joined at the fist by overlapping rounded bases.
-  // They are deliberately asymmetric so the silhouette never reads as a cone.
-  const tongues = [[0, 0, 1.10, .3], [-.36, .04, .79, 1.5], [.35, -.04, .91, 3.2], [.04, .31, .69, 4.4], [-.07, -.31, .85, 5.5]];
-  const levels = [0, .16, .37, .61, .82, 1];
-  const widths = [.30, .34, .24, .12, .037, .002];
-  const sides = 7;
+  // Thin, interleaved tongues leave dark gaps and readable moving tips instead
+  // of merging into one solid orange cuff. All fire and embers stay in one draw.
+  const tongues = [[0, 0, 1.18, .3], [-.28, .06, .86, 1.5], [.28, -.05, 1.02, 3.2], [.04, .26, .78, 4.4], [-.06, -.27, .95, 5.5], [-.19, -.18, .69, 2.2], [.20, .18, .83, 6.2]];
+  const levels = [0, .10, .24, .40, .57, .73, .87, .96, 1];
+  const widths = [.16, .21, .20, .15, .10, .057, .028, .010, .001];
+  const sides = 6, tongueData = [], sparks = [];
   for (const [cx, cz, height, phase] of tongues) {
     const start = xyz.length / 3;
+    tongueData.push({start,cx,cz,height,phase});
     for (let r = 0; r < levels.length; r++) {
       const y = levels[r];
       for (let j = 0; j < sides; j++) {
         const angle = j / sides * Math.PI * 2;
         const radius = widths[r] * (.9 + .13 * Math.sin(j * 2.3 + phase));
-        xyz.push(cx + radius * Math.cos(angle) + Math.sin(y * 4.1 + phase) * y * .13,
-          y * height - .13,
-          cz + radius * Math.sin(angle) + Math.cos(y * 3.7 + phase) * y * .09);
+        xyz.push(cx + radius * Math.cos(angle), y * height - .08, cz + radius * Math.sin(angle));
         const color = new THREE.Color().setRGB(
-          mix(1, .48, ease((y - .60) / .40)),
-          mix(.30, .009, ease(y)),
-          mix(.028, .001, ease(y))
+          mix(1, .66, ease((y - .70) / .30)),
+          mix(.58, .025, ease(y)),
+          mix(.045, .002, ease(y))
         );
         colors.push(color.r, color.g, color.b);
         if (r < levels.length - 1) {
@@ -81,6 +80,14 @@ function flameGeometry(THREE) {
     colors.push(1, .40, .018);
   }
   core.dispose();
+  // Tiny tetrahedral embers rise and shrink away; fixed slots, no particle pool,
+  // extra materials or lights. Their reset is invisible at zero radius.
+  const emberShape = [[1,0,-.6],[-1,0,-.6],[0,0,1],[0,1.7,0]];
+  for(let i=0;i<6;i++){
+    const start=xyz.length/3;sparks.push({start,phase:i*.61803398875%1,angle:i*2.399963});
+    for(const[x,y,z]of emberShape){xyz.push(x*.018,y*.018,z*.018);colors.push(1,.45,.025);}
+    for(const a of [0,2,1,0,1,3,1,2,3,2,0,3])indices.push(start+a);
+  }
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.Float32BufferAttribute(xyz, 3));
   geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
@@ -88,6 +95,7 @@ function flameGeometry(THREE) {
   geo.computeVertexNormals();
   geo.computeBoundingSphere();
   geo.userData.movingVertices = movingVertices;
+  geo.userData.fire = {tongues:tongueData,levels,widths,sides,sparks,emberShape};
   return geo;
 }
 
@@ -96,7 +104,7 @@ function resources(THREE) {
   // Built-in material works in both the game's WebGPU renderer and its WebGL
   // fallback. A tiny shared vertex buffer animates once per frame, not per body.
   const flameMat = new THREE.MeshBasicMaterial({
-    vertexColors: true, transparent: true, opacity: .82, depthWrite: false,
+    vertexColors: true, transparent: true, opacity: .74, depthWrite: false,
     // Normal blending preserves saturated fire through bloom; additive layers
     // otherwise accumulate to a white ring and erase the flame silhouette.
     blending: THREE.NormalBlending, side: THREE.DoubleSide, forceSinglePass: true, toneMapped: false
@@ -130,7 +138,7 @@ function resources(THREE) {
   for (const y of [.10, .43, .80]) rod(rackPieces, [-.48, y, -.43], [.48, y, -.43], .026);
   for (const y of [.18, .51]) rod(strapPieces, [-.44, y, -.84], [.44, y, -.84], .026);
   const flameGeo = flameGeometry(THREE);
-  flameGeo.boundingSphere.radius += .12; // conservative room for tongue flicker
+  flameGeo.boundingSphere.radius += .85; // includes rising embers and curling tips
   const rackGeo = mergedGeometry(THREE, rackPieces), strapGeo = mergedGeometry(THREE, strapPieces);
   const rockMat = new THREE.MeshStandardMaterial({ color: 0x77756c, roughness: 1, flatShading: true });
   const rackMat = new THREE.MeshStandardMaterial({ color: 0x302b25, roughness: .82, metalness: .5 });
@@ -156,16 +164,39 @@ function resources(THREE) {
 function animateFlame(cache, time) {
   if (cache.flameTime === time) return;
   cache.flameTime = time;
-  const rest = cache.flameRest, position = cache.flameGeo.attributes.position;
-  for (let i = 0; i < cache.flameGeo.userData.movingVertices; i++) {
-    const x = rest[i * 3], y = rest[i * 3 + 1], z = rest[i * 3 + 2];
-    const heat = clamp(y + .13);
-    position.setXYZ(i,
-      x + Math.sin(time * 9.1 + y * 12 + z * 8) * heat * .055,
-      y * (.94 + .06 * Math.sin(time * 11 + x * 13)),
-      z + Math.cos(time * 7.7 + y * 11 + x * 7) * heat * .047);
+  const geo=cache.flameGeo,position=geo.attributes.position,color=geo.attributes.color;
+  const {tongues,levels,widths,sides,sparks,emberShape}=geo.userData.fire;
+  for(const tongue of tongues){
+    const {cx,cz,height,phase,start}=tongue;
+    const stretch=.94+.22*Math.sin(time*7.4+phase)+.075*Math.sin(time*12.1+phase*1.7);
+    for(let r=0;r<levels.length;r++){
+      const u=levels[r],lift=u*u,wave=Math.sin(u*15-time*17+phase),fine=Math.sin(u*23-time*26+phase*.7);
+      // Phase travels from root to tip. The base is pinned to the fist while
+      // successive hot lobes climb, thin out, curl over and disappear.
+      const radius=widths[r]*(1+u*(.34*wave+.12*fine));
+      const x=cx+lift*(.29*Math.sin(time*6.3-u*4.5+phase)+.075*wave);
+      const y=-.08+u*height*stretch+u*.055*wave;
+      const z=cz+lift*(.23*Math.cos(time*5.7-u*5+phase)+.055*fine);
+      const hot=(wave*.5+.5)*(1-u*.65);
+      for(let j=0;j<sides;j++){
+        const i=start+r*sides+j,a=j/sides*Math.PI*2;
+        position.setXYZ(i,x+Math.cos(a)*radius,y,z+Math.sin(a)*radius);
+        color.setXYZ(i,mix(1,.64,ease((u-.68)/.32)),Math.min(.8,mix(.53,.018,ease(u))+hot*.22),.008+hot*.045);
+      }
+    }
+  }
+  for(const spark of sparks){
+    const age=((time*(1.3+.1*Math.sin(spark.angle))+spark.phase)%1+1)%1;
+    const radius=.024*Math.pow(Math.max(0,Math.sin(age*Math.PI)),.65);
+    const x=Math.cos(spark.angle)*(.13+age*.30)+Math.sin(time*4+spark.angle)*age*.10;
+    const y=.08+age*1.5,z=Math.sin(spark.angle)*(.12+age*.27);
+    for(let j=0;j<emberShape.length;j++){
+      const [a,b,c]=emberShape[j],i=spark.start+j;position.setXYZ(i,x+a*radius,y+b*radius,z+c*radius);
+      color.setXYZ(i,1,.55-age*.38,.022*(1-age));
+    }
   }
   position.needsUpdate = true;
+  color.needsUpdate = true;
 }
 
 function rigOf(subject) {
@@ -214,6 +245,7 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
       anchor.position.set(0, -.354 * s, .02 * s); elbows[i].add(anchor);
       const flame = new THREE.Mesh(cache.flameGeo, cache.flameMat);
       flame.scale.set(.35 * s, .52 * s, .35 * s);
+      flame.rotation.y=i?2.1:0; // shared buffers, different silhouette on each hand
       anchor.add(flame); anchor.userData.flame = flame;
       rig.flameAnchors.push(anchor);
     }

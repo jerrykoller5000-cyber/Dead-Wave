@@ -1,0 +1,24 @@
+{
+  "stress": [
+    {
+      "alive": 48,
+      "fps": 60.5475897406579,
+      "worst": 19.30000001192093,
+      "over50": 0,
+      "drawCalls": 426
+    },
+    {
+      "alive": 48,
+      "fps": 60.52946654226368,
+      "worst": 21,
+      "over50": 0,
+      "drawCalls": 426
+    }
+  ],
+  "blackout": {
+    "flight": false,
+    "visible": false,
+    "waking": true
+  },
+  "errors": []
+}

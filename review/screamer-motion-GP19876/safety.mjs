@@ -1,0 +1,13 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {Engine} from '../../tools/camera.mjs';const E=new Engine({training:true,warm:'none',size:'1200x800'}),dir='review/screamer-motion-GP19876';
+try{await E.open();const proof=await E.ev(`R.release();const D=T.trainingDbg;D.panel().close();D.clear();T.AudioSys.setMuted(true);T.runDevCommand('godmode');const floor=D.tg().floorY,M=await import('/game/screamer-behavior.js');const pause=ms=>new Promise(r=>setTimeout(r,ms));
+ T.player.position.set(-30,floor,-632);T.setVelDbg(0,0);
+ const mk=(x=-30,zz=-635.5)=>{const z=T.spawnZombie(x,zz,'screamer',true,true);z.trainingZ=true;z.riseT=0;z.mesh.position.y=floor;z.hp=z.maxHp=100000;z.screamCd=100;z.attackCd=0;z.sonicOpenT=2.4;return z;};
+ const wall=T.spawnBuild('wall',-30,-637);wall.hp=wall.maxHp=100000;const z=mk(),samples=[],start=performance.now();while(performance.now()-start<2200){await new Promise(r=>requestAnimationFrame(r));const p=z.mesh.position,q=T.resolveHardBuildCollisions(p.x,p.z,z.radius,false,p.y);samples.push({x:p.x,z:p.z,push:Math.hypot(q.x-p.x,q.z-p.z),mode:M.screamerState(z).mode,attack:z.attackWindup||0});}
+ const wallPass=samples.every(s=>s.push<.025&&s.attack===0),wallRetreat=samples.some(s=>s.mode==='retreat');D.clear();T.removeBuild(wall,true);
+ const lure=T.spawnBuild('lure',-32,-637),a=mk();await pause(250);const luredMode=M.screamerState(a).mode;D.clear();T.removeBuild(lure,true);
+ const leg=mk();T.dismemberDbg(leg,'legL');await pause(150);const legMode=M.screamerState(leg).mode,legHover=M.screamerState(leg).hover;D.clear();
+ const down=mk();down.knockT=.8;await pause(150);const downMode=M.screamerState(down).mode,downHover=M.screamerState(down).hover;D.clear();
+ const rising=mk();rising.riseT=.8;await pause(150);const riseMode=M.screamerState(rising).mode,riseHover=M.screamerState(rising).hover;D.clear();
+ return {wallPass,wallRetreat,samples,luredMode,legMode,legHover,downMode,downHover,riseMode,riseHover};`,7000);
+ fs.writeFileSync(dir+'/safety-proof.json',JSON.stringify({...proof,errors:E.page.errors},null,2)+'\n');console.log(JSON.stringify({...proof,samples:proof.samples.length,errors:E.page.errors}));assert(proof.wallPass&&proof.wallRetreat);assert(proof.luredMode!=='retreat');assert(proof.legMode!=='retreat'&&proof.legHover===undefined);assert(proof.downMode===undefined&&proof.downHover===undefined);assert(proof.riseMode===undefined&&proof.riseHover===undefined);assert.equal(E.page.errors.length,0);console.log('PASS native wall avoidance/no attacks, lure, missing leg, knocked down and rising fallbacks');
+}finally{await E.close();}process.exit(0);

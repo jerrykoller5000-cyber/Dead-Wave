@@ -1,0 +1,5 @@
+TRACK {"weapon":"pistol","dual":false,"arm":0.4818560921011079,"gun":0.6361891961588525,"maxGrip":0.004119593571275854}
+TRACK {"weapon":"revolver","dual":false,"arm":0.4824717886452566,"gun":0.636193575577783,"maxGrip":0.004119593571459275}
+TRACK {"weapon":"uzi","dual":false,"arm":0.4091369571066974,"gun":0.635107330850272,"maxGrip":0.0036612412084718205}
+TRACK {"weapon":"m4","dual":false,"arm":0.5549739469275454,"gun":0.6443236665207049,"maxGrip":0.0029284544730024055}
+TRACK {"weapon":"pistol","dual":true,"arm":0.5965018747540717,"gun":0.6362057096099756,"maxGrip":0.004264942002274927}

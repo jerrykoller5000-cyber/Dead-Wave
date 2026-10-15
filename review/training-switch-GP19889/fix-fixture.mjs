@@ -1,0 +1,1 @@
+import fs from 'node:fs';const p='review/training-switch-GP19889/check.mjs';let s=fs.readFileSync(p,'utf8');s=s.replace("el.classList.contains('show')","getComputedStyle(el).display!=='none'&&getComputedStyle(el).visibility!=='hidden'");fs.writeFileSync(p,s,'utf8');

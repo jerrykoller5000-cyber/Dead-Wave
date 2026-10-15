@@ -1,0 +1,24 @@
+{
+ "target": null,
+ "label": null,
+ "view": null,
+ "cam": {
+  "fov": 38,
+  "x": -23.6,
+  "y": -196.6,
+  "z": -628,
+  "tx": -27,
+  "ty": -198.7,
+  "tz": -630.3
+ },
+ "time": 0.5,
+ "size": [
+  1000,
+  750
+ ],
+ "center": null,
+ "boxSize": null,
+ "mode": "training",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-13T06:36:14.174Z"
+}

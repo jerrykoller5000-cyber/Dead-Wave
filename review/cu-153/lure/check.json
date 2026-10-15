@@ -1,0 +1,48 @@
+{
+ "at": "2026-10-15T09:50:15.140Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "build.lure",
+   "variant": "0",
+   "mode": null,
+   "ok": true,
+   "ms": 118,
+   "tris": 736,
+   "size": [
+    0.739,
+    1.792,
+    0.775
+   ],
+   "error": null
+  },
+  {
+   "id": "build.lure",
+   "variant": "1",
+   "mode": null,
+   "ok": true,
+   "ms": 125,
+   "tris": 1008,
+   "size": [
+    0.739,
+    1.792,
+    0.775
+   ],
+   "error": null
+  },
+  {
+   "id": "build.lure",
+   "variant": "2",
+   "mode": null,
+   "ok": true,
+   "ms": 123,
+   "tris": 1472,
+   "size": [
+    0.739,
+    2.037,
+    0.755
+   ],
+   "error": null
+  }
+ ]
+}

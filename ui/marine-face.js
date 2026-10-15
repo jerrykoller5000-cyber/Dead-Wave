@@ -1,6 +1,21 @@
 // GP-105. Head-local surfaces; the existing rig and wardrobe own their materials.
 // Rings run bottom to top. Front is +z. A shared vertex grid keeps cloth and skin
 // softly shaded without adding an asset loader, texture or per-frame work.
+// CL-197 (Jerry, 2026-10-15: "the weird vertical line in the marine's head"): a ring surface runs round from a = -pi to
+// +pi, so its first and last columns sit on the same spot at the back of the head but are separate vertices, each
+// shaded only from its own side: a crease straight down the back. weldSeam gives both columns one shared normal.
+// cols = vertices per ring (segments + 1); the last ring may be a pole, which gets a plain up normal.
+export function weldSeam(geo, cols, pole = false) {
+  const N = geo.attributes.normal, rows = N.count / cols;
+  for (let r = 0; r < rows; r++) {
+    const a = r * cols, b = a + cols - 1;
+    const x = N.getX(a) + N.getX(b), y = N.getY(a) + N.getY(b), z = N.getZ(a) + N.getZ(b), l = Math.hypot(x, y, z) || 1;
+    N.setXYZ(a, x / l, y / l, z / l); N.setXYZ(b, x / l, y / l, z / l);
+  }
+  if (pole) for (let j = 0; j < cols; j++) N.setXYZ((rows - 1) * cols + j, 0, 1, 0);
+  N.needsUpdate = true;
+  return geo;
+}
 function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cloth = false} = {}) {
   const segments = 32, positions = [], uv = [], indices = [];
   for (let r = 0; r < rings.length; r++) {
@@ -36,11 +51,13 @@ function surface(T, rings, {opening = false, frontOnly = false, wrap = false, cl
   const g = new T.BufferGeometry();
   g.setAttribute('position', new T.Float32BufferAttribute(positions, 3));
   g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
-  g.setIndex(indices);g.computeVertexNormals();g.computeBoundingSphere();
+  g.setIndex(indices);g.computeVertexNormals();
+  if (!frontOnly) weldSeam(g, segments + 1, rings[rings.length - 1][1] < .01);
+  g.computeBoundingSphere();
   return g;
 }
 
-const HEAD_RINGS = [
+export const HEAD_RINGS = [
     [1.275,.035,.09,.048], [1.283,.052,.110,.060], [1.291,.065,.127,.07],
     [1.309,.084,.141,.083], [1.323,.094,.149,.09], [1.343,.106,.151,.101],
     [1.365,.115,.152,.111], [1.383,.122,.151,.118],
@@ -48,6 +65,13 @@ const HEAD_RINGS = [
     [1.481,.122,.140,.123], [1.50,.118,.13,.12], [1.521,.104,.115,.107],
     [1.534,.085,.094,.087], [1.544,.045,.050,.046], [1.548,.001,.001,.001]
 ];
+// Half-width, front and back radius of the head at height y (what a hat, hair or an ear is fitted to).
+export function headRadiusAt(y) {
+  const p = HEAD_RINGS; let i = 1;
+  while (i < p.length - 1 && p[i][0] < y) i++;
+  const a = p[i - 1], b = p[i], t = Math.max(0, Math.min(1, (y - a[0]) / (b[0] - a[0])));
+  return [a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t, a[3] + (b[3] - a[3]) * t];
+}
 export function buildMarineHead(T, material) {
   const mesh = new T.Mesh(surface(T, HEAD_RINGS), material);
   mesh.name = 'marine-shaped-head';mesh.castShadow = true;mesh.receiveShadow = true;
@@ -55,63 +79,104 @@ export function buildMarineHead(T, material) {
 }
 
 const fadeTextures = new WeakMap();
-// The fade shares the live hair colour; only its coverage thins toward the skin.
-// A single small local texture is reused by every marine, with no frame updates.
+// CL-197 (Jerry, 2026-10-15: "improvement to the marine's hair"). The old crop was one dark dome with a hard rim and a
+// dotted line where its two meshes met. This one follows the head surface itself: a short, thick top with swept clumps
+// and a little lift at the front, a real hairline (a crisp forehead line, a sideburn, a clear gap above and behind
+// each ear, a tapered nape) and a medium fade up the back and sides. The fade shares the live hair colour; only its
+// coverage thins toward the skin. A single small local texture is reused by every marine, with no frame updates.
+const sstep = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const HAIRLINE = [[0, 1.4895], [.5, 1.4835], [.95, 1.4725], [1.12, 1.462], [1.27, 1.43], [1.40, 1.447], [1.57, 1.452], [1.78, 1.446], [2.05, 1.428], [2.5, 1.411], [3.1416, 1.402]];
+function hairline(phi) {
+  let i = 1; while (i < HAIRLINE.length - 1 && HAIRLINE[i][0] < phi) i++;
+  const a = HAIRLINE[i - 1], b = HAIRLINE[i], t = Math.max(0, Math.min(1, (phi - a[0]) / (b[0] - a[0])));
+  return a[1] + (b[1] - a[1]) * (.5 - .5 * Math.cos(t * Math.PI));
+}
 export function buildMarineHair(T, hairMaterial) {
-  const group=new T.Group();group.name='medium-fade';
-  const n=48,rows=10,head=HEAD_RINGS.filter(r=>r[0]>=1.402);
-  const radius=y=>{let i=1;while(i<head.length-1&&head[i][0]<y)i++;const a=head[i-1],b=head[i],t=Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0])));return a.slice(1).map((v,k)=>v+(b[k+1]-v)*t);};
-  const edge=c=>1.477+.022*Math.max(0,c)**3;
-  function mesh(top,mat){const p=[],uv=[],ix=[];
-    for(let row=0;row<=rows;row++)for(let j=0;j<=n;j++){
-      const a=-Math.PI+j/n*Math.PI*2,c=Math.cos(a),s=Math.sin(a),t=row/rows,upper=edge(c);
-      const lower=c>.65?upper-.002:1.427+.065*Math.max(0,c)**3-.008*Math.max(0,-c);
-      let y=top?upper+(1.561-upper)*Math.sin(t*Math.PI/2):lower+(upper-lower)*t;
-      const r=radius(top?upper:y),lift=top?.003:.0015;
-      const taper=top?Math.max(0,Math.cos(t*Math.PI/2))**.72:1;
-      // Short, swept ridges stay part of the scalp surface, never floating spikes.
-      const ridge=top?.0018*Math.sin(t*Math.PI)**2*Math.sin(a*7+t*4):0;
-      if(top)y-=.0016*Math.sin(t*Math.PI)**2*(.5+.5*Math.sin(a*5+t*3));
-      p.push((r[0]+lift+ridge)*s*taper,y-1.22,c>=0?(r[1]+lift+ridge)*c**.55*taper:-(r[2]+lift+ridge)*(-c)**.8*taper);uv.push(j/n,t);
+  const group = new T.Group(); group.name = 'medium-fade';
+  const n = 64, APEX = HEAD_RINGS[HEAD_RINGS.length - 2][0] + .004;
+  function grid(rows, rowY, rowLift, name, cast, mat, alphaV) {
+    const p = [], uv = [], ix = [];
+    for (let row = 0; row <= rows; row++) for (let j = 0; j <= n; j++) {
+      const a = -Math.PI + j / n * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a), phi = Math.abs(a);
+      const t = row / rows, yh = rowY(phi, t), lift = rowLift(phi, t, yh, a);
+      const [w, f, b] = headRadiusAt(Math.min(yh, APEX - .004));
+      const y = yh + lift * sstep(1.46, 1.548, yh) * .9;
+      p.push((w + lift) * sn, y - 1.22, c >= 0 ? (f + lift) * c ** .55 : -(b + lift) * (-c) ** .8);
+      uv.push(j / n, alphaV ? t : t * .5);
     }
-    for(let r=0;r<rows;r++)for(let j=0;j<n;j++){const a=r*(n+1)+j,b=a+n+1;ix.push(a,a+1,b,a+1,b+1,b);}
-    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(p,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();const m=new T.Mesh(g,mat);m.castShadow=top;m.receiveShadow=true;return m;
+    for (let r = 0; r < rows; r++) for (let j = 0; j < n; j++) { const a = r * (n + 1) + j, b = a + n + 1; ix.push(a, a + 1, b, a + 1, b + 1, b); }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(p, 3)); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.setIndex(ix); g.computeVertexNormals();
+    weldSeam(g, n + 1, rows > 0 && !alphaV);
+    const m = new T.Mesh(g, mat); m.name = name; m.castShadow = cast; m.receiveShadow = true; return m;
   }
-  let fadeTexture=fadeTextures.get(T);
-  if(!fadeTexture){const size=64,data=new Uint8Array(size*size*4);for(let y=0;y<size;y++)for(let x=0;x<size;x++){const i=(y*size+x)*4,t=y/(size-1),grain=((x*17+y*31)%23)/23;const coverage=Math.max(0,Math.min(1,t**1.35+(grain-.5)*.065));data[i]=data[i+1]=data[i+2]=Math.round(coverage*255);data[i+3]=255;}fadeTexture=new T.DataTexture(data,size,size);fadeTexture.magFilter=T.LinearFilter;fadeTexture.minFilter=T.LinearFilter;fadeTexture.needsUpdate=true;fadeTextures.set(T,fadeTexture);}
-  const fade=hairMaterial.clone();fade.color=hairMaterial.color;fade.alphaMap=fadeTexture;fade.transparent=true;fade.depthWrite=false;fade.roughness=1;
-  group.add(mesh(true,hairMaterial),mesh(false,fade));return group;
+  // The solid hair starts where the fade ends: no fade at the forehead, most of it up the back.
+  const solidY = (phi) => hairline(phi) + .006 + .047 * sstep(.9, 1.75, phi);
+  const top = grid(14,
+    (phi, t) => { const y0 = solidY(phi) - .004; return y0 + (HEAD_RINGS[HEAD_RINGS.length - 2][0] - y0) * Math.sin(t * Math.PI / 2); },
+    (phi, t, yh, a) => {
+      const vol = .0032 + .0082 * sstep(1.50, 1.545, yh);                 // short at the sides, fuller on top
+      const clump = .0016 * Math.sin(a * 11 + yh * 70) * Math.sin(t * Math.PI) ** .5 * sstep(1.49, 1.52, yh);
+      const front = .004 * Math.max(0, Math.cos(a)) ** 6 * sstep(.25, .7, t) * (1 - sstep(.8, 1, t));   // a little lift in the fringe
+      return .0007 + (vol - .0007) * sstep(0, .32, t) + clump + front;
+    }, 'hair-top', true, hairMaterial, false);
+  let fadeTexture = fadeTextures.get(T);
+  if (!fadeTexture) {
+    const size = 64, data = new Uint8Array(size * size * 4);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      const i = (y * size + x) * 4, t = y / (size - 1), grain = ((x * 17 + y * 31) % 23) / 23;
+      const coverage = Math.max(0, Math.min(1, .1 + .9 * t ** 1.25 + (grain - .5) * .07));
+      data[i] = data[i + 1] = data[i + 2] = Math.round(coverage * 255); data[i + 3] = 255;
+    }
+    fadeTexture = new T.DataTexture(data, size, size); fadeTexture.magFilter = T.LinearFilter; fadeTexture.minFilter = T.LinearFilter; fadeTexture.needsUpdate = true; fadeTextures.set(T, fadeTexture);
+  }
+  const fade = hairMaterial.clone(); fade.color = hairMaterial.color; fade.alphaMap = fadeTexture; fade.transparent = true; fade.depthWrite = false; fade.roughness = 1;
+  const band = grid(7,
+    (phi, t) => hairline(phi) + (solidY(phi) + .003 - hairline(phi)) * t,
+    (phi, t) => .0009 + .0026 * sstep(0, .5, t) + .0006, 'hair-fade', false, fade, true);
+  group.add(top, band); return group;
 }
 
 export function buildBalaclava(T, material) {
-  material.roughness = .98;material.metalness = 0;material.side = T.DoubleSide;
-  const mesh = new T.Mesh(surface(T, [
-    [1.205,.094,.105,.097], [1.229,.091,.115,.101],
-    [1.253,.086,.122,.102], [1.272,.089,.141,.106], [1.29,.094,.156,.109],
-    [1.309,.108,.166,.116], [1.326,.12,.171,.122], [1.341,.128,.175,.129], [1.355,.131,.177,.132]
-  ], {wrap:true,cloth:true}), material);
-  mesh.name = 'cloth-balaclava';mesh.castShadow = true;mesh.receiveShadow = true;
-  const group = new T.Group();group.name = 'balaclava';group.add(mesh);
-  // A rolled hem follows the nose and dips beneath the ears; no hood over the scalp.
-  const edge = [];
-  for (let j = 0; j < 32; j++) {
-    const a = -Math.PI + j / 32 * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a);
-    const y = 1.355 + .046 * Math.max(0,c) ** 5;
-    edge.push(new T.Vector3(.131 * sn, y - 1.22, c >= 0 ? .178*c**.55 : -.133*(-c)**.8));
-  }
-  const hem = new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(edge, true), 48, .0016, 4, true), material);
-  hem.castShadow = true;hem.receiveShadow = true;group.add(hem);
-  // Flat-lock seams follow the cheek panels, using the live mask fabric material.
-  for(const side of [-1,1]){
-    const p=mesh.geometry.getAttribute('position'),n=mesh.geometry.getAttribute('normal');
-    const seamPoints=[[1,4],[3,4],[5,5],[7,6]].map(([row,offset])=>{
-      const i=row*33+16+side*offset;
-      return new T.Vector3().fromBufferAttribute(p,i).addScaledVector(new T.Vector3().fromBufferAttribute(n,i),.00065);
-    });
-    const seam=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(seamPoints),12,.00085,3,false),material);
-    seam.name='mask-flatlock-seam';seam.castShadow=true;seam.receiveShadow=true;group.add(seam);
-  }
-  return group;
+  material.roughness=.98;material.metalness=0;material.side=T.DoubleSide;
+  const group=new T.Group();group.name='balaclava';
+  // A tapered neck, chin pocket and cheek panels follow the head, rather than
+  // a straight cylinder flaring out above the collar.
+  const rings=[[1.205,.079,.087,.081],[1.229,.077,.092,.083],
+    [1.253,.080,.097,.084],[1.272,.077,.111,.080],[1.29,.069,.135,.077],
+    [1.309,.09,.151,.091],[1.326,.105,.16,.104],[1.341,.118,.164,.117],[1.355,.123,.166,.123]];
+  const front=new T.Mesh(surface(T,rings,{wrap:true,cloth:true}),material);
+  front.name='cloth-balaclava';front.castShadow=front.receiveShadow=true;group.add(front);
+  // Hood covers the ears, back and scalp with one eye opening. Its crown sits
+  // inside both the cover and fitted helmet; no new wardrobe item is needed.
+  const hoodGeo=surface(T,[[1.341,.118,.164,.117],[1.355,.123,.166,.123],
+    [1.38,.128,.158,.125],[1.396,.129,.157,.128],[1.403,.130,.157,.129],
+    [1.449,.131,.155,.132],[1.48,.129,.148,.130],[1.51,.12,.132,.123],
+    [1.538,.091,.101,.094],[1.555,.035,.04,.037],[1.56,.001,.001,.001]]);
+  const source=Array.from(hoodGeo.index.array),ix=[];
+  for(let tri=0;tri<source.length;tri+=6){const a=source[tri],row=Math.floor(a/33),j=a%33;
+    const angle=-Math.PI+(j+.5)/32*Math.PI*2;
+    if(row<5&&Math.abs(angle)<1.0)continue;
+    ix.push(...source.slice(tri,tri+6));}
+  hoodGeo.setIndex(ix);hoodGeo.computeVertexNormals();
+  const hood=new T.Mesh(hoodGeo,material);hood.name='balaclava-fitted-hood';hood.castShadow=hood.receiveShadow=true;group.add(hood);
+  const edge=[];for(let j=0;j<32;j++){const a=-Math.PI+j/32*Math.PI*2,c=Math.cos(a);
+    edge.push(new T.Vector3(.123*Math.sin(a),1.355+.046*Math.max(0,c)**5-1.22,c>=0?.167*c**.55:-.124*(-c)**.8));}
+  const hem=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(edge,true),48,.0014,4,true),material);
+  hem.castShadow=hem.receiveShadow=true;group.add(hem);
+  const parts=[front,hem].map(mesh=>({mesh,rest:Float32Array.from(mesh.geometry.attributes.position.array)}));
+  // Smoking lowers the stretch face panel under the lip, rather than passing
+  // a cigarette through fabric. These two meshes remain outside rigid merging.
+  for(const {mesh} of parts){mesh.add(new T.Object3D());mesh.userData.liveShape=true;}
+  let last=-1;
+  group.userData.mouthOpen=k=>{k=Math.max(0,Math.min(1,k));if(Math.abs(k-last)<.0001)return;last=k;
+    for(const{mesh,rest}of parts){const p=mesh.geometry.attributes.position;
+      for(let i=0;i<p.count;i++){const x=rest[i*3],y=rest[i*3+1],z=rest[i*3+2];
+        const frontWeight=Math.max(0,Math.min(1,(z-.045)/.085));
+        const high=Math.max(0,Math.min(1,(y-.065)/.10));
+        p.setXYZ(i,x,y-k*frontWeight*high*.083,z-k*frontWeight*high*.007);}
+      p.needsUpdate=true;mesh.geometry.computeVertexNormals();}
+  };
+  group.userData.mouthOpen(0);return group;
 }
 
 export function buildSurvivorBeard(T, material) {
@@ -121,6 +186,45 @@ export function buildSurvivorBeard(T, material) {
   ], {frontOnly:true}), material);
   mesh.name = 'survivor-fitted-beard';mesh.castShadow = true;mesh.receiveShadow = true;
   return mesh;
+}
+
+// CL-197 (Jerry, 2026-10-15: "better ears for the marine"). The ear was one flat eight-sided fan. This is a lofted ear:
+// an outline taller than it is wide (narrower at the lobe, leaned back a little), then a bowl, a raised antihelix, a
+// shallow groove and a rolled rim, all rising off the side of the head and sinking into it round the edge, with a
+// small tragus in front. A shared normal at the pole and the wrap keeps it smooth. Built in head-local space.
+function buildEar(T, side, skinW, skinShade) {
+  const M = 28, cy = 1.404, cz = -.003, lean = .2, cl = Math.cos(lean), sl = Math.sin(lean);
+  const RINGS = [[.0, .0058], [.22, .0044], [.42, .0105], [.6, .0138], [.76, .0092], [.9, .0172], [1.0, .0142], [1.05, -.0025]];
+  const p = [], uv = [], ix = [];
+  for (let r = 0; r < RINGS.length; r++) {
+    const [rho, h] = RINGS[r];
+    for (let j = 0; j <= M; j++) {
+      const th = j / M * Math.PI * 2, st = Math.sin(th), ct = Math.cos(th);
+      const lobe = st < 0 ? 1 : 0;
+      const v = .031 * st * (lobe ? .94 : 1) * rho;
+      const u = .0172 * ct * (1 + .1 * Math.max(0, st) - .3 * Math.max(0, -st)) * rho;
+      const z = cz + u * cl - v * sl, y = cy + u * sl + v * cl;
+      const flare = .0045 * rho * rho * Math.max(0, -Math.cos(th - .5));            // the rim stands off the head toward the back
+      const lobeThin = lobe * (.65 + .35 * Math.min(1, rho)) ;
+      const hh = h * (lobe ? lobeThin : 1) + (h > 0 ? flare : 0);
+      p.push(side * (headRadiusAt(y)[0] - .0022 + hh), y - 1.22, z);
+      uv.push(j / M, rho);
+    }
+  }
+  for (let r = 0; r < RINGS.length - 1; r++) for (let j = 0; j < M; j++) {
+    const a = r * (M + 1) + j, b = a + M + 1;
+    if (side > 0) ix.push(a, a + 1, b, a + 1, b + 1, b); else ix.push(a, b, a + 1, a + 1, b, b + 1);
+  }
+  const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(p, 3)); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.setIndex(ix); g.computeVertexNormals();
+  weldSeam(g, M + 1);
+  { const N = g.attributes.normal; let x = 0, y = 0, z = 0; for (let j = 0; j <= M; j++) { x += N.getX(j); y += N.getY(j); z += N.getZ(j); } const l = Math.hypot(x, y, z) || 1; for (let j = 0; j <= M; j++) N.setXYZ(j, x / l, y / l, z / l); }
+  g.computeBoundingSphere();
+  const group = new T.Group(); group.name = 'ear-' + side;
+  const ear = new T.Mesh(g, skinW); ear.name = 'ear-shell-' + side; ear.castShadow = false; ear.receiveShadow = true; group.add(ear);
+  const tragus = new T.Mesh(new T.SphereGeometry(1, 8, 6), skinW);
+  tragus.scale.set(.004, .0075, .0045); tragus.position.set(side * (headRadiusAt(cy)[0] + .0045), cy - .002 - 1.22, cz + .0125);
+  tragus.name = 'tragus-' + side; tragus.receiveShadow = true; group.add(tragus);
+  return group;
 }
 
 // GP-163. Shallow facial surfaces stay at the established eye/eyewear anchors.
@@ -207,11 +311,7 @@ export function buildMarineFeatures(T,{skinW,skinShade,hairW,irisW,eyeWhite,eyeD
     for(let j=0;j<=14;j++){const t=j/14,x=ex+(t-.5)*.060,y=1.439+.0022*Math.sin(t*Math.PI)+side*(t-.5)*.003;brow.push([x,y,faceZ(x,y)+.0015]);}
     strip(brow,t=>.0007+.0030*Math.sin(t*Math.PI)**.65,hairW,'tapered-brow-'+side);
 
-    // Fitted ear silhouette and recessed concha, kept inside the old ear envelope.
-    const ear=[[1.375,-.013],[1.369,.001],[1.378,.018],[1.399,.023],[1.424,.015],[1.436,.001],[1.428,-.017],[1.401,-.021]];
-    fan(ear.map(([y,z])=>[side*.129,y,z]),[side*.143,1.402,.001],skinW,'ear-'+side,[side,0,0]);
-    const inner=ear.map(([y,z])=>[side*.1355,1.402+(y-1.402)*.58,z*.52+.002]);
-    fan(inner,[side*.1435,1.402,.003],skinShade,'ear-concha-'+side,[side,0,0]);
+    group.add(buildEar(T, side, skinW, skinShade));
     ellipse(side*.009,1.383,.0037,.0018,(dx,dy)=>.1659-Math.abs(side*.009+dx)*1.14+dy*.65,skinShade,'nostril-'+side);
   }
   // Six connected cross-sections make a restrained bridge, tip and nasal wings.

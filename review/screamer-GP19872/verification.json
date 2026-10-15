@@ -1,0 +1,74 @@
+{
+  "ratios": [
+    {
+      "kind": "bullet",
+      "closed": 0.5879999999888241,
+      "opened": 19.599999999976717,
+      "ratio": 0.02999999999946544
+    },
+    {
+      "kind": "pellet",
+      "closed": 0.1679999999469146,
+      "opened": 5.599999999976717,
+      "ratio": 0.029999999990645197
+    },
+    {
+      "kind": "generic",
+      "closed": 0.14280000003054738,
+      "opened": 4.760000000009313,
+      "ratio": 0.03000000000635882
+    },
+    {
+      "kind": "melee",
+      "closed": 0.7803599999751896,
+      "opened": 26.011999999987893,
+      "ratio": 0.029999999999060157
+    },
+    {
+      "kind": "chainsaw",
+      "closed": 0.4200000000419095,
+      "opened": 14,
+      "ratio": 0.03000000000299354
+    },
+    {
+      "kind": "explosive",
+      "closed": 0.30000000004656613,
+      "opened": 10,
+      "ratio": 0.030000000004656614
+    },
+    {
+      "kind": "crush",
+      "closed": 0.30000000004656613,
+      "opened": 10,
+      "ratio": 0.030000000004656614
+    }
+  ],
+  "noShieldDismember": true,
+  "shieldHit": true,
+  "appearance": {
+    "singleSkin": true,
+    "jawBone": true,
+    "tongueBone": true,
+    "ankles": true,
+    "blackFraction": 0.9891156462585035,
+    "pinkVertices": 336,
+    "particles": 12
+  },
+  "singingProtected": true,
+  "opened": 2.4,
+  "hiddenDuringOpen": true,
+  "exposureSeconds": 2.4158000000119193,
+  "rebuilt": true,
+  "headlessNoPower": true,
+  "noOrphanEffects": true,
+  "resetProtected": true,
+  "corpseNoEffects": true,
+  "fallback": {
+    "rms": 0,
+    "peak": 0,
+    "frames": 38,
+    "state": "running"
+  },
+  "fallbackNoPhrase": true,
+  "errors": []
+}

@@ -32,3 +32,7 @@ Claude Camera.bat
 # CL-163: ElevenLabs music takes while Jerry picks them (45 tracks x up to 4 takes, hundreds of MB).
 # The picked ones go into the game as their own files; the prompts, guides and receipts here stay tracked.
 z-music/**/*.mp3
+
+# Leftovers from "Tidy up Tiny Trek.bat" and a crashed shell (CL-202)
+_DELETE ME/
+bash.exe.stackdump

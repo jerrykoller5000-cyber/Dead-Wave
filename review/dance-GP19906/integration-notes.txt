@@ -1,0 +1,90 @@
+GP-19906 — 20-second directional-hop, shimmy, and active-floorwork refinement
+STAGED ONLY. No live assets/intro, assets/disclaimer, or index.html edits.
+
+Verified final metadata:
+  duration: 20
+  fps: 30
+  frames: 600
+  frame: [1280, 720]
+  crop: [0, 0, 1280, 720]
+  silent alpha: marine-dance-transparent.webm
+  presentation with music: marine-dance.mp4
+  separate unchanged excerpt: audio-dance.mp3
+
+Music clock:
+  The unchanged excerpt covers Been Warned source seconds 9.151494–29.151494.
+  Original pitch and playback speed; estimated tempo 103.322299 BPM.
+  Excerpt fade is 19.55–20.00 seconds.
+  If the live controller plays the original complete song, dancer.start remains 9.151494.
+  If Claude chooses the pre-trimmed audio-dance.mp3, dancer.start must be 0.
+  Do not delay the pre-trimmed excerpt's dancer by another 9.151494 seconds.
+  Keep loop false and pause on the final grounded pose. Do not stretch video speed to fit previous cue times.
+
+What changed from GP-19905:
+  One three-hop sequence at beats 9–12, with directional body lean and near-constant lateral flight speed.
+  A new heel-toe shimmy replaces the second hop sequence; it blends in at b16 and continues through b20.5.
+  Handstand release leads into a quicker shoulder flop, then a curled, leg-driven backspin.
+  Side roll starts at b30.4 (17.653498s); spin braking completes b31.25.
+  Cheek-rest reach begins at b31.9 (18.524559s); final pose at b33.2 (19.279478s).
+  Hold through20s: 0.720522s. Choreography-timeline.json is authoritative for these timings.
+  Same exact 20-second audio, wardrobe, lighting, camera, and full-frame transparency.
+  Audio bytes are unchanged; three copied audio-timeline choreography hints are corrected to b33.2/19.279478s/0.720522s hold.
+  All track, excerpt, BPM, and decoded-audio metadata remain unchanged.
+
+Full-frame placement:
+  Do not reuse the original CL-190 physical crop [352,104,612,560].
+  Full source video requires crop [0,0,1280,720] in the controller, yielding left0%, top0%, width100%, height100%.
+  Old crop metadata would shrink and reposition a full-frame video into a narrow subrectangle;
+  physically cropping the source would discard lateral/depth travel.
+  Preserve the 16:9 stage and object-fit:contain. The actor's travel comes from rendered 3D movement.
+  Never follow or recenter the actor with CSS.
+
+Initial stage recommendation:
+  Retain CL-190's centered frame with translate(-50%, -57%) scale(.9),
+  width min(100vw,177.78vh) and height min(56.25vw,100vh).
+  This unchanged composition passes GP-19906 extremes at 1280x720 and 900x900.
+  Keep the existing stationary ambient floor pool. Character lighting/materials are unchanged.
+  Only if new final captures show text overlap should Claude consider a small whole-stage lift or scale reduction.
+  Do not crop the actor or change the lighting to solve layout.
+
+Claude's integration work:
+  Re-time the existing five voice/text cards, siren, chirps, shot, ducking, and ending together.
+  The old minute-long dance cue list cannot be reused.
+  This proposal assigns no new card cues and changes no disclaimer words.
+  Preserve existing audio-clock scheduling and compositor animations during game startup.
+  Choose the published asset filename/cache version and align the closing shot with the new floor-pose ending.
+
+Private preview:
+  /review/dance-GP19906/disclaimer-preview.html imports the existing disclaimer CSS/fonts, the new alpha clip,
+  and the unchanged 20-second music excerpt. No live controller, game, voice, or siren is loaded.
+  A selected original card remains visible for overlap inspection; it is not a replacement card timeline.
+  Query ?clean&card=1&time=4 hides controls and seeks. Card -1 hides text.
+  The preview buffers media into local blob URLs for reliable seeks under a private static server without byte ranges.
+  window.disclaimerPreview.ready / seek(seconds) / setCard(index) / proof() are isolated QA hooks.
+
+Final GP-19906 evidence:
+  Frozen motion SHA-256: d11fe67f4d07a964cd176673e990d6fd50a0158e32828f617480ffc2d95e8070.
+  Native pose audit: 601 poses, 28 boundaries, 13 exact repeated seeks; 9/9 gates pass.
+  Maximum planted-palm error0.877mm; free-wrist bend28.167degrees.
+  Minimum source vertex margin75.601px; no clipped vertices or browser errors.
+  Floor tolerance2mm; worst intersection1.242mm at12.7s during kick-up.
+  Both final exports pass:600 decoded frames each, exactly20.000s,1280x720.
+  MP4 audio lag0 samples; normalized correlation0.998701. Silent WebM alpha0–255.
+  Native composite command: node review/dance-GP19906/composite-check.mjs
+  Fourteen candidates: left/right, standing near/far, lowest/highest-screen, final freeze19.8s; two viewports1280x720 and900x900.
+  Minimum decoded source margin:75px.
+  Minimum viewport margin:66.600px.
+  Minimum text gap:21.853px, above the longest existing card at the lowest-screen pose.
+  Cropping/text-overlap/browser-error result:none in all14 native captures. Every decoded corner has alpha0.
+  Final freeze checked at19.8s. Right-travel and standing-near extrema coincide at9.433s.
+  Contact sheet visually inspected:composite-proof/contact-sheet.png; detailed proof:composite-proof/proof.json.
+  Square layout preserves the full fixed frame and displays a smaller dancer; no recentering applied.
+
+Verification and regeneration:
+  Verify opaque: node review/dance-GP19906/encode.mjs --verify
+  Verify alpha: node review/dance-GP19906/encode.mjs --alpha --verify
+  Regenerate opaque: node review/dance-GP19906/capture.mjs --render --motionblur, then node review/dance-GP19906/encode.mjs
+  Regenerate alpha: node review/dance-GP19906/capture.mjs --render --alpha --motionblur, then node review/dance-GP19906/encode.mjs --alpha
+  Preserved evidence:render-proof.json,render-alpha-proof.json,native pose audit,39 selected final-stills PNGs, both verification JSONs, and14 composite captures.
+  If source frame folders are cleaned after verification, rerun the corresponding capture command before re-encoding.
+  Shared npm results belong in the root handoff. Production startup, voice/card timing, and real-time decode performance are not established by this private check.

@@ -1,0 +1,21 @@
+[
+{
+"file": "tools/tests/t242.js",
+"oldBlock": [
+"    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.074, rake = 0.25, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;"
+],
+"new": [
+"    const cz = -0.02, cy = -0.08, h = 0.18, d = 0.074, rake = 0.3, sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;   // GB-179: 17 deg"
+]
+},
+{
+"file": "tools/tests/t242.js",
+"oldBlock": [
+"      g.userData.mag.position.copy(g.userData.baseMagPos);"
+],
+"new": [
+"      g.userData.mag.position.copy(g.userData.baseMagPos);",
+"      if (g.userData.baseMagRot) g.userData.mag.rotation.copy(g.userData.baseMagRot);   // GB-179: a reload swing left over from startMatch tilted it (offline: in by 8.5 mm at rest)"
+]
+}
+]

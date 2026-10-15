@@ -1,21 +1,30 @@
 #!/usr/bin/env node
 // crew/crew.mjs — the Grave Shift crew board from the command line. No dependencies (Node 22+).
 //
-//   node crew/crew.mjs                          who is doing what, clashes, questions, reviews
+// Start every session with:
+//   node crew/crew.mjs me <agent>               your briefing: your card, requests waiting for you, your next task,
+//                                               the game-test queue, and the commands you'll need (CL-199)
+//
+//   node crew/crew.mjs                          who is doing what, what needs Jerry, clashes, reviews
 //   node crew/crew.mjs next <agent>             your next task you can start now (skips ones that
 //                                               say "after XX-n" while XX-n is still open)
-//   node crew/crew.mjs mission                  the current mission and where everyone is on it
 //   node crew/crew.mjs newid <agent> "<what>"   the next unused task id for that agent (e.g. CU-77),
 //                                               logged so nobody else gets the same one. Always use
 //                                               this for a new task; never guess an id.
 //
 //   node crew/crew.mjs in   <agent> <task-id> "<what>" --model "<the model you run on>" --touch "index.html (part), tools/x.mjs"
+//                                               (a task Jerry gave you in chat that isn't on the board yet is added
+//                                               under your Now on the board: the board stays current by itself)
 //   node crew/crew.mjs note <agent> "<progress: what you found or finished, one line>"
+//   node crew/crew.mjs wait <agent> "<what is ready>"   changes ready, waiting for the game-test slot (card + log)
 //   node crew/crew.mjs out  <agent> --report handoffs/<note>.md [--done] [--next "<id> <what>"]
 //                                    [--review "<why the lead should look>"] [--blocked "<on what>"]
 //
+//   node crew/crew.mjs requests <agent> [--all]  requests addressed to you that nobody has answered
+//   node crew/crew.mjs reply <agent> "<words from the title>" DONE|WONT|LATER|NOTE "<one line>"
+//                                               answers it in place in handoffs/requests.md
+//   node crew/crew.mjs request <from> <to> "<title>" "<body>"     (or --body-file <path>; --fyi when you're telling, not asking)
 //   node crew/crew.mjs ask     <agent> "<a question only Jerry can answer>"
-//   node crew/crew.mjs request <from> <to> "<title>" "<body>"     (or --body-file <path>)
 //   node crew/crew.mjs check                                       exit 1 on a clash or stale check-in
 //   node crew/crew.mjs slot status
 //   node crew/crew.mjs slot request <agent> <task> --checks "<batch>" --minutes <n>
@@ -34,7 +43,11 @@
 //   node crew/crew.mjs answer   Q-<n> "<answer>"
 //   node crew/crew.mjs tidy                     move every finished [x] task off the board into
 //                                               crew/archive/board-queues-<today>.md
+//   node crew/crew.mjs settle                   every request so far counts as answered (after a clean-up)
+//   node crew/crew.mjs archive [--days 3]       move log lines and requests older than that into crew/archive/ and
+//                                               handoffs/archive/, so the files everyone reads stay small (CL-199)
 //   node crew/crew.mjs reviewed <report path> "<verdict>"
+//   node crew/crew.mjs reviewed --before <YYYY-MM-DD> "<verdict>"   every review older than that, at once
 //
 // Agents: claude, cursor, chatgpt, grokbot, antigravity. Task ids: CL-, CU-, GP-, GB-, AG-.
 // The files are the truth; this only reads and writes them (always as UTF-8). By hand is fine:
@@ -57,6 +70,8 @@ const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.
 const SHARED = ['crew/log.md', 'crew/questions.md', 'handoffs/requests.md', 'crew/status/'];
 const STALE_HOURS = 8;
+// A card blocked on the game-test slot waits on the queue, not on whoever it names ("Changes ready; waiting for testing slot").
+const SLOT_WAIT = /(test(ing)?|validation) slot/i;
 const DASH = '—';
 
 const now = () => new Date().toISOString().slice(0, 16) + 'Z';
@@ -174,6 +189,8 @@ function logLines() { return read(logPath).split(/\r?\n/).filter((l) => l.starts
 function pendingReviews() {
   const want = new Map();
   for (const e of logLines()) {
+    const day = e.kind === 'REVIEWED' && bulkBefore(e.text);
+    if (day) { for (const [k, w] of want) if (w.at < day) want.delete(k); continue; }
     const rep = (/(handoffs\/\S+\.md)/.exec(e.text) || [])[1];
     if (!rep) continue;
     if (e.kind === 'REVIEW') want.set(rep, e);
@@ -392,9 +409,11 @@ function flowSummary(all) {
   const add = (b, a) => { if (!waiting.has(b)) waiting.set(b, new Set()); waiting.get(b).add(a); };
   for (const a of Object.keys(AGENTS)) {
     const f = st[a] || {}; if (f.state === 'active') continue;
-    const next = tasks.find((t) => t.agent === a && (t.box === '>' || t.box === ' ' || t.box === '!'));
+    // A task it can start now counts first; only when every open task is gated does it wait (CL-199).
+    const open = tasks.filter((t) => t.agent === a && (t.box === '>' || t.box === ' ' || t.box === '!'));
+    const next = open.find((t) => t.box !== '!' && !gateOf(t, tasks)) || open[0];
     let waits = false;
-    if (f.state === 'blocked') {
+    if (f.state === 'blocked' && !SLOT_WAIT.test(f['blocked-on'] || '')) {
       const why = f['blocked-on'] || '';
       const files = [...why.matchAll(/[\w./-]+\.(?:html|m?js|md|json|css)(?:\s*\([^)]*\))?/g)].map((x) => x[0]);
       for (const b of namesIn(why)) {
@@ -423,43 +442,215 @@ function flowSummary(all) {
   return lines.length ? lines : ['Nobody is waiting on anyone.'];
 }
 
-function panel() {
+async function panel() {
   const all = Object.keys(AGENTS).map(readStatus);
   const pad = (s, n) => (s + ' '.repeat(n)).slice(0, n);
-  console.log('\nGRAVE SHIFT CREW   ·   ' + freezeLine(all));
+  console.log('\nGRAVE SHIFT CREW · ' + new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC · Jerry\'s view: crew/panel.html');
   console.log('─'.repeat(78));
+  // What needs Jerry first: questions, agents that need a prompt, sessions waiting for the slot, problems.
+  const need = [];
+  for (const q of questions().filter((x) => x.state === 'open')) need.push(`? Question ${q.id} from ${AGENTS[q.agent] || q.agent}: crew/QUESTIONS.md`);
+  const waitSlot = all.filter((s) => s.fields.state === 'blocked' && SLOT_WAIT.test(s.fields['blocked-on'] || ''));
+  for (const s of waitSlot) need.push(`⏸ ${AGENTS[s.agent]}: changes ready; waiting for testing slot (${s.fields.task}). Resume it when the slot is free.`);
+  const p = problems(all);
+  for (const x of p) need.push('! ' + x);
+  // Only the waits Jerry can do something about: a gate nobody is working on, or one on him.
+  const flow = flowSummary(all).filter((l) => !/^Nobody is waiting/.test(l) && !/ is on it \(/.test(l));
+  need.push(...flow);
+  const jl = reviewAssets().filter((x) => x.state === 'look');
+  if (jl.length) need.push(`◉ For Jerry to look at: ${jl.map((x) => `${x.asset} ${x.lookAt}`).join(', ')} (review/<asset>/index.html)`);
+  console.log('NEEDS JERRY');
+  console.log(need.length ? need.map((x) => '  ' + x).join('\n') : '  Nothing right now.');
   printMission();
   console.log('─'.repeat(78));
   const notes = logLines();
   for (const s of all) {
     const f = s.fields;
-    console.log(pad(AGENTS[s.agent], 12) + pad((f.state || '?').toUpperCase(), 9) + (f.task && f.task !== DASH ? f.task : '(no task)'));
-    console.log(' '.repeat(21) + 'on ' + (f.model && f.model !== DASH ? f.model : '(model not given)'));
+    const model = f.model && f.model !== DASH ? f.model.split(/,| \(/)[0] : 'model not given';
+    console.log(pad(AGENTS[s.agent], 12) + pad((f.state || '?').toUpperCase(), 9) + (f.task && f.task !== DASH ? f.task.slice(0, 57) : '(no task)'));
+    const extra = [];
     if (f.state === 'active') {
-      console.log(' '.repeat(21) + 'since ' + ago(f.since) + ' · touching: ' + (f.touching || DASH));
+      extra.push(`${ago(f.since)} · ${model} · touching ${f.touching || DASH}`);
       const last = [...notes].reverse().find((e) => e.agent === s.agent && e.kind === 'NOTE' && Date.parse(e.at) >= Date.parse(f.since));
-      if (last) console.log(' '.repeat(21) + 'latest: ' + last.text);
+      if (last) extra.push('latest: ' + last.text);
+    } else if (f.state === 'blocked') extra.push('blocked on: ' + (f['blocked-on'] || DASH));
+    else {
+      const nt = nextTask(s.agent), wt = waitingTask(s.agent);
+      extra.push(`last seen ${ago(f.since)} · next: ` + (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 50)}` : wt ? `${wt.task.id} waits on ${wt.on.id} (${ownerOf(wt.on.id)})` : 'queue empty'));
     }
-    if (f.state === 'blocked') console.log(' '.repeat(21) + 'blocked on: ' + (f['blocked-on'] || DASH));
-    const nt = nextTask(s.agent), wt = waitingTask(s.agent);
-    if (f.state !== 'active') console.log(' '.repeat(21) + 'next: ' + (nt ? `${nt.id} ${nt.text.replace(/\*\*/g, '').slice(0, 58)}` : wt ? `nothing to start: ${wt.task.id} waits on ${wt.on.id} (${ownerOf(wt.on.id)})` : 'queue empty'));
+    for (const x of extra) console.log(' '.repeat(21) + x.slice(0, 120));
   }
-  const p = problems(all);
   console.log('─'.repeat(78));
-  console.log(p.length ? p.map((x) => '! ' + x).join('\n') : 'No clashes. No stale check-ins.');
-  console.log(flowSummary(all).join('\n'));
-  const q = questions().filter((x) => x.state === 'open');
-  if (q.length) console.log(`? ${q.length} open question(s) for Jerry: crew/QUESTIONS.md (${q.map((x) => x.id).join(', ')})`);
+  console.log('Game-test slot: ' + await slotSummary());
   const r = pendingReviews();
-  if (r.length) console.log(`» ${r.length} handoff(s) waiting for the lead's review: ${r.map((x) => (/(handoffs\/\S+\.md)/.exec(x.text) || [])[1]).join(', ')}`);
+  if (r.length) console.log(`» ${r.length} handoff(s) for Claude to review (node crew/crew.mjs reviewed <report> "<verdict>")`);
   const rv = reviewAssets();
   writeReviewIndex(rv);
-  const jw = rv.filter((x) => x.state === 'waiting'), jl = rv.filter((x) => x.state === 'look');
+  const jw = rv.filter((x) => x.state === 'waiting');
   if (jw.length) console.log(`✎ Jerry's notes waiting: ${jw.map((x) => `${x.asset} ${x.open.map((n) => n.version).join(',')} (${AGENTS[x.owner]})`).join(', ')}. Take one: node crew/crew.mjs review take <asset>`);
-  if (jl.length) console.log(`◉ For Jerry to look at: ${jl.map((x) => `${x.asset} ${x.lookAt}`).join(', ')} (review/<asset>/index.html)`);
-  console.log('\nLast log lines:\n' + notes.slice(-6).map((e) => `- ${e.at} · ${e.agent} · ${e.kind} · ${e.text}`).join('\n'));
-  console.log('\nOrders, decisions and queues: crew/BOARD.md\n');
+  console.log('\nLast log lines:\n' + notes.slice(-5).map((e) => `- ${e.at} · ${e.agent} · ${e.kind} · ${e.text.slice(0, 110)}`).join('\n'));
+  console.log('\nYour briefing: node crew/crew.mjs me <you>  ·  Orders, decisions and queues: crew/BOARD.md\n');
   return p;
+}
+
+// --- requests (handoffs/requests.md): who still owes an answer (CL-199) -------------------
+// A request is its "## <date> · <from> → <to> · <title>" heading and the lines under it. It is
+// settled once its body says DONE, WONT or LATER, or one of the people it was sent to replied under
+// it ("**Grokbot, 2026-10-15: …**"). Same rules as the panel's.
+const NAME_TO = Object.fromEntries(Object.entries(AGENTS).map(([a, n]) => [n.toLowerCase(), a]));
+// "<!-- crew: settled above -->" (crew.mjs settle, lead only): every request above it counts as settled.
+const SETTLED = '<!-- crew: settled above -->';
+const FYI_TITLE = /^(FYI|GRANT|RELEASE|ACK|Record)\b|\bFYI\b/i;
+function parseRequests(text) {
+  const out = []; const idx = [];
+  const settledAt = text.lastIndexOf(SETTLED);
+  for (const m of text.matchAll(/^## (.+)$/gm)) idx.push([m.index, m[1]]);
+  idx.forEach(([i, head], k) => {
+    const end = k + 1 < idx.length ? idx[k + 1][0] : text.length;
+    const body = text.slice(i, end);
+    const h = /^(\S+)\s*·\s*(.+?)\s*→\s*(.+?)\s*·\s*(.+)$/.exec(head.trim());
+    if (!h) return;
+    const to = h[3].split(/,|\band\b/).map((s) => s.trim().toLowerCase().replace(/\s*\(.*\)/, '')).map((s) => (s === 'all' || s === 'everyone' || s === 'crew') ? 'all' : NAME_TO[s] || s).filter(Boolean);
+    const st = [...body.matchAll(/\b(DONE|WONT|LATER)\b/g)].map((x) => x[1]);
+    const replied = to.some((a) => a !== 'all' && new RegExp('\\*\\*' + (AGENTS[a] || a) + '[ ,]', 'i').test(body));
+    out.push({ start: i, end, date: h[1], from: h[2].replace(/\s*\(.*\)/, '').trim(), to, title: h[4].trim(),
+      status: i < settledAt ? 'SETTLED' : st.length ? st[st.length - 1] : replied ? 'ANSWERED' : (to.includes('all') || FYI_TITLE.test(h[4])) ? 'FYI' : 'OPEN' });
+  });
+  return out;
+}
+function requestsFor(agent, { all = false, days = 1 } = {}) {
+  const since = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
+  return parseRequests(read(requestsPath)).filter((r) => r.status === 'OPEN' && (r.to.includes(agent) || r.to.includes('all')) && (all || r.date >= since));
+}
+const reqLine = (r, n) => `  ${String(n).padStart(2)}. ${r.date} from ${r.from}: ${r.title}`;
+
+// --- the board's queues: a task Jerry gave in chat goes on the board by itself (CL-199) ----
+// Adds "- [>] **XX-n** what" as the first task under "### <Agent>" in "## Queues".
+function addTask(agent, id, what, box = '>') {
+  const text = read(boardPath), eol = eolOf(text);
+  const lines = text.replace(/\r\n/g, '\n').split('\n');
+  const q = lines.findIndex((l) => /^## Queues\b/.test(l));
+  if (q < 0) return false;
+  let h = -1;
+  for (let i = q + 1; i < lines.length && !/^## /.test(lines[i]); i++) if (new RegExp('^### ' + AGENTS[agent] + '\\b', 'i').test(lines[i])) { h = i; break; }
+  if (h < 0) return false;
+  let j = h + 1;
+  while (j < lines.length && !/^\s*- \[/.test(lines[j]) && !/^#{2,4} /.test(lines[j])) j++;
+  const line = `- [${box}] **${id}** ${what || '(from Jerry, in chat)'}`;
+  if (/^\s*- \[/.test(lines[j] || '')) lines.splice(j, 0, line);
+  else {
+    let k = j; while (k > h + 1 && !lines[k - 1].trim()) k--;
+    lines.splice(k, 0, ...(lines[k - 1].trim() ? [''] : []), line, ...(k === j ? [''] : []));
+  }
+  fs.writeFileSync(boardPath, lines.join(eol), 'utf8');
+  return true;
+}
+
+// --- reviews done in bulk: "REVIEWED · before 2026-10-14 · <verdict>" closes every review asked
+// for before that day (Jerry, CL-199: the old backlog was archived, not read one by one).
+const bulkBefore = (text) => (/^before (\d{4}-\d{2}-\d{2})\b/.exec(text || '') || [])[1];
+
+// --- the game-test slot, read-only, for the briefing ---------------------------------------
+async function slotSummary() {
+  try {
+    const { defaultGameTestSlot } = await import('../tools/game-test-slot.mjs');
+    const s = await defaultGameTestSlot.status({ reconcile: false });
+    const h = s.holder ? `${AGENTS[s.holder.agent] || s.holder.agent} has it (${s.holder.task}, since ${ago(s.holder.startedAt)})` : 'free';
+    const q = s.queue.length ? ' · queue: ' + s.queue.map((x) => `${x.position}. ${AGENTS[x.agent] || x.agent} ${x.task}${x.ready ? '' : ' (prepared; its agent must resume it)'}`).join(', ') : ' · queue empty';
+    return `${h}${q}`;
+  } catch (e) { return `unknown here (${e.message.split('\n')[0]})`; }
+}
+
+// --- archive: keep the files everyone reads small (CL-199) ---------------------------------
+// LOG lines and requests older than --days move to crew/archive/log-YYYY-MM.md and
+// handoffs/archive/requests-YYYY-MM.md (by the day in their heading). Anything another
+// agent appends while this runs is kept: the file is re-read just before the write.
+function rewriteKeepingTail(file, before, after) {
+  const again = read(file);
+  if (!again.startsWith(before)) throw new Error(`${path.relative(ROOT, file)} changed under us; run archive again`);
+  fs.writeFileSync(file, after + again.slice(before.length), 'utf8');
+}
+function archiveOld(days) {
+  const cut = new Date(Date.now() - days * 864e5).toISOString();
+  const moved = { log: 0, req: 0 };
+  // log
+  const logText = read(logPath), eol = eolOf(logText);
+  const keep = [], byMonth = {};
+  // A review Claude still owes stays in the log until it's done.
+  const owed = new Set(pendingReviews().map((e) => (/(handoffs\/\S+\.md)/.exec(e.text) || [])[1]));
+  for (const l of logText.split(/\r?\n/)) {
+    const [at, , kind, ...rest] = l.startsWith('- ') ? l.slice(2).split(' · ') : [''];
+    if (kind === 'REVIEW' && owed.has((/(handoffs\/\S+\.md)/.exec(rest.join(' · ')) || [])[1])) { keep.push(l); continue; }
+    if (at && /^\d{4}-\d{2}-\d{2}T/.test(at) && at < cut) { (byMonth[at.slice(0, 7)] ||= []).push(l); moved.log++; } else keep.push(l);
+  }
+  if (moved.log) {
+    if (!fs.existsSync(archiveDir)) fs.mkdirSync(archiveDir, { recursive: true });
+    for (const [m, ls] of Object.entries(byMonth)) append(path.join(archiveDir, `log-${m}.md`), ls, `# Crew log, ${m} (archived)\n\nMoved here from crew/LOG.md by \`node crew/crew.mjs archive\`. Oldest first.\n\n`);
+    // The text after the last line we read is kept as it is (an agent may have just appended).
+    const body = keep.join(eol);
+    rewriteKeepingTail(logPath, logText, body.endsWith(eol) || !logText.endsWith(eol) ? body : body + eol);
+  }
+  // requests
+  const reqText = read(requestsPath);
+  // Every dated section goes, requests and notes alike ("## 2026-09-23 · Claude (lead) · state of play").
+  const secs = []; const heads = [...reqText.matchAll(/^## (\d{4}-\d{2}-\d{2})\b.*$/gm)];
+  // A section runs to the next dated heading: undated "## " lines inside a request are part of it.
+  heads.forEach((m, k) => secs.push({ start: m.index, end: k + 1 < heads.length ? heads[k + 1].index : reqText.length, date: m[1] }));
+  const go = secs.filter((r) => r.date < cut.slice(0, 10));
+  if (go.length) {
+    const hd = path.join(ROOT, 'handoffs', 'archive');
+    if (!fs.existsSync(hd)) fs.mkdirSync(hd, { recursive: true });
+    const reqEol = eolOf(reqText);
+    const byM = {};
+    for (const r of go) (byM[r.date.slice(0, 7)] ||= []).push(reqText.slice(r.start, r.end).replace(/(\r?\n)+$/, ''));
+    for (const [m, parts] of Object.entries(byM)) append(path.join(hd, `requests-${m}.md`), parts.flatMap((p) => ['', ...p.split(/\r?\n/)]), `# Requests, ${m} (archived)\n\nMoved here from handoffs/requests.md by \`node crew/crew.mjs archive\`.\n`);
+    let out = '', pos = 0;
+    for (const r of go) { out += reqText.slice(pos, r.start); pos = r.end; }
+    out += reqText.slice(pos);
+    rewriteKeepingTail(requestsPath, reqText, out.replace(/(\r?\n){3,}/g, reqEol + reqEol));
+    moved.req = go.length;
+  }
+  return moved;
+}
+
+// --- me: the start-of-session briefing (CL-199) -------------------------------------------
+async function briefing(agent) {
+  const s = readStatus(agent), f = s.fields;
+  const out = [];
+  out.push(`\n${AGENTS[agent].toUpperCase()} · ${(f.state || '?')}${f.task && f.task !== DASH ? ' · ' + f.task : ''} · last seen ${ago(f.since)}`);
+  if (f.state === 'blocked') out.push(`  blocked on: ${f['blocked-on']}`);
+  out.push('─'.repeat(78));
+  const board = read(boardPath).replace(/\r\n/g, '\n');
+  const orders = (/^## Orders from Jerry\s*$([\s\S]*?)(?=^## |(?![\s\S]))/m.exec(board) || [, ''])[1].split('\n').filter((l) => /^- /.test(l)).slice(0, 4);
+  if (orders.length) { out.push("Jerry's latest orders (crew/BOARD.md):"); for (const o of orders) out.push('  ' + o.replace(/\*\*/g, '').slice(0, 150)); }
+  const reqs = requestsFor(agent);
+  out.push(reqs.length ? `Requests waiting for your answer (${reqs.length}):` : 'Requests waiting for your answer: none.');
+  reqs.slice(-8).forEach((r, i) => out.push(reqLine(r, i + 1)));
+  if (reqs.length) out.push(`  Answer each: node crew/crew.mjs reply ${agent} "<words from its title>" DONE|WONT|LATER|NOTE "<one line>"`);
+  const mineRev = reviewAssets().filter((r) => r.owner === agent && (r.state === 'waiting' || r.state === 'taken'));
+  if (mineRev.length) out.push(`Jerry's notes on your review folders: ${mineRev.map((r) => r.asset).join(', ')} (node crew/crew.mjs next ${agent} says how)`);
+  const all = boardTasks().filter((t) => t.id.startsWith(PREFIX[agent] + '-') && t.box !== 'x' && t.box !== '~');
+  out.push(all.length ? 'Your queue (crew/BOARD.md):' : 'Your queue is empty: Claude adds work to the board, or Jerry gives it in chat.');
+  const mk = { ' ': '○', '>': '▶', '!': '!' };
+  for (const t of all.slice(0, 8)) { const g = gateOf(t, boardTasks()); out.push(`  ${mk[t.box] || t.box} ${t.id} ${t.text.replace(/\*\*/g, '').slice(0, 110)}${g ? ` (waits on ${g.id})` : ''}`); }
+  out.push('Game-test slot: ' + await slotSummary());
+  const notes = s.notes.replace(/^## Notes\s*/, '').trim();
+  if (notes) {
+    const ls = notes.split('\n').filter((l) => l.trim());
+    out.push(`Your card's notes (crew/status/${agent}.md, ${ls.length} lines${notes.length > 6000 ? `, ${Math.round(notes.length / 1024)} KB: please trim it to what your next session needs` : ''}):`);
+    for (const l of ls.slice(0, 12)) out.push('  ' + l.slice(0, 150));
+    if (ls.length > 12) out.push(`  … ${ls.length - 12} more lines in the file`);
+  }
+  const p = problems(Object.keys(AGENTS).map(readStatus)).filter((x) => x.startsWith(agent) || x.includes(agent + ' ('));
+  for (const x of p) out.push('! ' + x);
+  out.push('─'.repeat(78));
+  out.push(`Work:   node crew/crew.mjs in ${agent} <id> "<what>" --model "<model>" --touch "<files>"   (new task? node crew/crew.mjs newid ${agent} "<what>")`);
+  out.push(`        node crew/crew.mjs note ${agent} "<one line>"`);
+  out.push(`Test:   node crew/crew.mjs slot run ${agent} <id> --checks "<what you check>" -- <command>   (one instance, --jobs 1; Jerry first)`);
+  out.push(`        session ending before your turn? node crew/crew.mjs wait ${agent} "<what is ready>"`);
+  out.push(`Finish: node crew/crew.mjs out ${agent} --report handoffs/<date>-${agent}-<id>.md --done`);
+  out.push(`Ask:    node crew/crew.mjs request ${agent} <to> "<title>" "<body>"   ·   Jerry only: node crew/crew.mjs ask ${agent} "<question>"`);
+  console.log(out.join('\n') + '\n');
 }
 
 function arg(name) { const i = process.argv.indexOf('--' + name); return i > 0 ? process.argv[i + 1] : undefined; }
@@ -475,11 +666,11 @@ function checkReport(rep) {
 }
 
 const [cmd, agent, ...rest] = process.argv.slice(2);
-const VALUE_FLAGS = ['--touch', '--report', '--next', '--blocked', '--model', '--review', '--body-file', '--version'];
+const VALUE_FLAGS = ['--touch', '--report', '--next', '--blocked', '--model', '--review', '--body-file', '--version', '--before', '--days'];
 const positional = rest.filter((x, i) => !x.startsWith('--') && !(i > 0 && VALUE_FLAGS.includes(rest[i - 1])));
 
 if (!cmd || cmd === 'panel') {
-  panel();
+  await panel();
 } else if (cmd === 'slot') {
   const { main: gameTestSlotMain } = await import('../tools/game-test-slot.mjs');
   await gameTestSlotMain(process.argv.slice(3));
@@ -530,13 +721,15 @@ if (!cmd || cmd === 'panel') {
   Object.assign(s.fields, { state: 'active', task: `${taskId} ${what || ''}`.trim(), touching, since: now(), 'blocked-on': DASH });
   s.fields.model = model;
   writeStatus(s);
-  markTask(agent, taskId, '>');
+  // A task Jerry gave in chat that isn't on the board yet goes under your name on it (CL-199).
+  const onBoard = markTask(agent, taskId, '>');
+  if (!onBoard && taskId.startsWith(PREFIX[agent] + '-') && addTask(agent, taskId, what)) console.log(`${taskId} was not on the board: added under ${AGENTS[agent]} in crew/BOARD.md.`);
   // "Claude Sonnet 4.6, in Antigravity (...)" and "Claude Sonnet 4.6" are the same model.
   const modelKey = (m) => String(m).split(/,| \(/)[0].trim().toLowerCase();
   if (modelKey(oldModel) !== modelKey(model)) log(agent, 'MODEL', `${oldModel} → ${model}`);
   log(agent, 'IN', `${s.fields.task} · on ${model}${touching !== DASH ? ' · touching ' + touching : ''}`);
   console.log(`${AGENTS[agent]} checked in: ${s.fields.task}`);
-  panel();
+  await panel();
 } else if (cmd === 'note') {
   need(agent);
   const text = positional.join(' ').trim();
@@ -570,7 +763,7 @@ if (!cmd || cmd === 'panel') {
   const wt = waitingTask(agent);
   console.log(blocked ? '' : nt ? `Next on your queue: ${nt.id}. Keep going unless Jerry said otherwise (AGENTS.md).`
     : wt ? `Stop here. Your next task, ${wt.task.id}, waits on ${wt.on.id} (${ownerOf(wt.on.id)}).` : 'Your queue is empty. Stop here.');
-  panel();
+  await panel();
 } else if (cmd === 'ask') {
   need(agent);
   const text = positional.join(' ').trim();
@@ -595,9 +788,18 @@ if (!cmd || cmd === 'panel') {
   log('claude', 'ANSWER', `${id} ${text.slice(0, 120)}`);
   console.log('answered ' + id);
 } else if (cmd === 'reviewed') {
-  const rep = agent, verdict = positional.join(' ').trim() || 'ok';
-  log('claude', 'REVIEWED', `${rep} · ${verdict}`);
-  console.log('review recorded');
+  const before = arg('before');
+  if (before) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(before)) { console.error('Usage: crew reviewed --before YYYY-MM-DD "<verdict>"'); process.exit(2); }
+    const n = pendingReviews().filter((w) => w.at < before).length;
+    const verdict = [agent, ...positional].filter((x) => x && x !== before).join(' ').trim() || 'archived';
+    log('claude', 'REVIEWED', `before ${before} · ${verdict}`);
+    console.log(`${n} older review${n === 1 ? '' : 's'} closed (asked for before ${before}).`);
+  } else {
+    const rep = agent, verdict = positional.join(' ').trim() || 'ok';
+    log('claude', 'REVIEWED', `${rep} · ${verdict}`);
+    console.log('review recorded');
+  }
 } else if (cmd === 'review') {
   // agent is the sub-command here: (none) | take | answer
   const sub = agent;
@@ -662,16 +864,85 @@ if (!cmd || cmd === 'panel') {
   if (!ids.length) { console.log('Nothing finished on the board.'); process.exit(0); }
   log('claude', 'NOTE', `tidy: ${ids.length} finished task${ids.length > 1 ? 's' : ''} moved to crew/archive/board-queues-${now().slice(0, 10)}.md (${ids.join(', ')})`);
   console.log(`Moved ${ids.length} finished task${ids.length > 1 ? 's' : ''} to crew/archive/board-queues-${now().slice(0, 10)}.md: ${ids.join(', ')}`);
+} else if (cmd === 'me') {
+  need(agent);
+  await briefing(agent);
+} else if (cmd === 'requests') {
+  need(agent);
+  const list = requestsFor(agent, { all: process.argv.includes('--all') });
+  if (!list.length) console.log(`No open requests for ${AGENTS[agent]}${process.argv.includes('--all') ? '' : ' from today and yesterday (--all for older ones)'}.`);
+  else { list.forEach((r, i) => console.log(reqLine(r, i + 1))); console.log(`\nAnswer: node crew/crew.mjs reply ${agent} <number or words from the title> DONE|WONT|LATER|NOTE "<one line>"`); }
+} else if (cmd === 'reply') {
+  need(agent);
+  const [which, status0, ...words] = positional;
+  const status = String(status0 || '').toUpperCase();
+  const text = words.join(' ').trim();
+  if (!which || !['DONE', 'WONT', 'LATER', 'NOTE'].includes(status) || !text) {
+    console.error('Usage: crew reply <agent> <number from `requests`, or words from the title> DONE|WONT|LATER|NOTE "<one line>"'); process.exit(2);
+  }
+  const all = process.argv.includes('--all');
+  const mine = requestsFor(agent, { all: true });
+  const recent = requestsFor(agent, { all });
+  let hit = /^\d+$/.test(which) ? recent[+which - 1] : null;
+  if (!hit) {
+    const w = which.toLowerCase();
+    const found = [...mine].reverse().filter((r) => r.title.toLowerCase().includes(w));
+    if (found.length > 1 && !found.every((r) => r.title === found[0].title)) {
+      console.error(`"${which}" matches ${found.length} requests; use more words or the number:\n` + found.slice(0, 6).map((r, i) => reqLine(r, i + 1)).join('\n')); process.exit(2);
+    }
+    hit = found[0];
+  }
+  if (!hit) {
+    // Also allow answering one already answered, or one not addressed to you by name.
+    const w = which.toLowerCase();
+    hit = [...parseRequests(read(requestsPath))].reverse().find((r) => r.title.toLowerCase().includes(w));
+    if (hit) console.log(`(Not one of your open requests: answering "${hit.title}", ${hit.from} → ${hit.to.map((a) => AGENTS[a] || a).join(', ')}.)`);
+  }
+  if (!hit) { console.error(`No request whose title has "${which}". node crew/crew.mjs requests ${agent} --all lists yours.`); process.exit(2); }
+  const cur = read(requestsPath), eol = eolOf(cur);
+  // Re-find it in the file as it is now, then add the answer at the end of its section.
+  const fresh = parseRequests(cur).find((r) => r.date === hit.date && r.title === hit.title && r.from === hit.from);
+  const end = fresh.end;
+  const sectionText = cur.slice(fresh.start, end).replace(/(\r?\n)+$/, '');
+  const word = status === 'NOTE' ? '' : ` ${status}.`;
+  const line = `**${AGENTS[agent]}, ${now().slice(0, 10)}:${word}** ${text}`;
+  const next = cur.slice(0, fresh.start) + sectionText + eol + eol + line + eol + (end < cur.length ? eol + cur.slice(end).replace(/^(\r?\n)+/, '') : '');
+  rewriteKeepingTail(requestsPath, cur, next);
+  log(agent, 'REPLY', `${status} · ${hit.from}: ${hit.title.slice(0, 90)} · ${text.slice(0, 100)}`);
+  console.log(`Answered "${hit.title}" (${hit.from}, ${hit.date}) with ${status}.`);
+} else if (cmd === 'wait') {
+  // Jerry, 2026-10-15: a session that ends before its turn in the game-test queue says so, not "done".
+  need(agent);
+  const what = positional.join(' ').trim();
+  if (!what) { console.error('Usage: crew wait <agent> "<what is ready to test>"'); process.exit(2); }
+  const s = readStatus(agent);
+  Object.assign(s.fields, { state: 'blocked', 'blocked-on': `game-test slot · changes ready: ${what}`, since: now() });
+  writeStatus(s);
+  markTask(agent, (s.fields.task || '').split(' ')[0], '!');
+  log(agent, 'WAIT', `${s.fields.task || DASH} · changes ready; waiting for testing slot · ${what}`);
+  console.log(`Changes ready; waiting for testing slot. Your card says so; Jerry's panel shows it with a resume prompt.`);
+} else if (cmd === 'settle') {
+  // Lead only: after a clean-up, every request so far counts as answered; what's still to do is on the board.
+  append(requestsPath, ['', SETTLED, '']);
+  log('claude', 'NOTE', 'requests: everything before now marked settled (crew.mjs settle); open work is on the board');
+  console.log('Every request so far is marked settled.');
+} else if (cmd === 'archive') {
+  const days = Math.max(1, +(arg('days') || 3));
+  const m = archiveOld(days);
+  if (!m.log && !m.req) console.log(`Nothing older than ${days} days to move.`);
+  else { log('claude', 'NOTE', `archive: ${m.log} log lines and ${m.req} requests older than ${days} days moved to crew/archive/ and handoffs/archive/`); console.log(`Moved ${m.log} log lines to crew/archive/log-*.md and ${m.req} requests to handoffs/archive/requests-*.md.`); }
 } else if (cmd === 'request') {
   need(agent);
   const [to, title, body] = positional;
   const text = arg('body-file') ? read(path.resolve(arg('body-file'))) : body;
   if (!to || !title || !text) { console.error('Usage: crew request <from> <to> "<title>" "<body>"  (or --body-file <path>)'); process.exit(2); }
   const toName = to.split(',').map((t) => AGENTS[t.trim()] || t.trim()).join(', ');
-  append(requestsPath, ['', `## ${now().slice(0, 10)} · ${AGENTS[agent]} → ${toName} · ${title}`, '', ...text.replace(/\r\n/g, '\n').trim().split('\n')]);
-  log(agent, 'REQUEST', `→ ${toName}: ${title}`);
+  // --fyi: telling, not asking. It shows in the log and the file but on nobody's "waiting for your answer" list.
+  const fyi = process.argv.includes('--fyi') && !/^FYI\b/i.test(title) ? 'FYI: ' : '';
+  append(requestsPath, ['', `## ${now().slice(0, 10)} · ${AGENTS[agent]} → ${toName} · ${fyi}${title}`, '', ...text.replace(/\r\n/g, '\n').trim().split('\n')]);
+  log(agent, 'REQUEST', `→ ${toName}: ${fyi}${title}`);
   console.log('request added to handoffs/requests.md');
 } else {
-  console.error('Commands: (none) | mission | next | newid | in | note | out | ask | request | check | slot | answer | reviewed | review | tidy. See the top of crew/crew.mjs.');
+  console.error('Commands: me | (none) | next | newid | in | note | wait | out | requests | reply | request | ask | slot | check | mission | review | answer | reviewed | tidy | settle | archive. See the top of crew/crew.mjs.');
   process.exit(2);
 }

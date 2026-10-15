@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-15T07:12:22.125Z",
+  "files": {
+    "studio/zombie-concepts.js": {
+      "file": "zombie-concepts.js",
+      "sha256": "517f6a157fe808cd9cbfda0843596b50534bc9ca281ba2b741553c9fbfb0196f"
+    },
+    "studio/zombie-guardian-detail.js": {
+      "file": "zombie-guardian-detail.js",
+      "sha256": "edc2bdef2201b53d830306cb61277558520c7930ccef709dc4e245f27f2b8a1c"
+    },
+    "combat/demon-visual.js": {
+      "file": "demon-visual.js",
+      "sha256": "2bffc41bb52910ec44dbe800b959b5649cc65f175e05887120a5391d0f624597"
+    },
+    "game/screamer-appearance.js": {
+      "file": "screamer-appearance.js",
+      "sha256": "de3fb1ffa24ca507d82c0c26db8192be7f9b9cc16006d31fc159633cc96cf8c7"
+    }
+  }
+}

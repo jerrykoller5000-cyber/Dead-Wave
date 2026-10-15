@@ -1,0 +1,286 @@
+{
+  "cases": [
+    {
+      "k": "shambler",
+      "direct": {
+        "head": 1,
+        "loss": 5.549999999999272,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "feral",
+      "direct": {
+        "head": 1,
+        "loss": 5.549999999999272,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 3,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "leaper",
+      "direct": {
+        "head": 1,
+        "loss": 7.2150000000001455,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 3.899999999999636,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "spider",
+      "direct": {
+        "head": 1,
+        "loss": 3.8850000000002183,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "drowned",
+      "direct": {
+        "head": 1,
+        "loss": 5.32799999999952,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "military",
+      "direct": {
+        "head": 1,
+        "loss": 4.440000000000509,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "brute",
+      "direct": {
+        "head": 1,
+        "loss": 4.9950000000008,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "spitter",
+      "direct": {
+        "head": 1,
+        "loss": 7.2150000000001455,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "screamer",
+      "direct": {
+        "head": 0,
+        "loss": 0.2330999999994674,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 0,
+        "hit": false,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "bomber",
+      "direct": {
+        "head": 1,
+        "loss": 5.549999999999272,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 3,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "demon",
+      "direct": {
+        "head": 1,
+        "loss": 6.6599999999998545,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 3.600000000000364,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "colossus",
+      "direct": {
+        "head": 1,
+        "loss": 2.774999999999636,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 1.5,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "guardian",
+      "direct": {
+        "head": 1,
+        "loss": 3.3299999999999272,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 1.7999999999992724,
+        "hit": true,
+        "headPresent": true
+      }
+    },
+    {
+      "k": "caveguard",
+      "direct": {
+        "head": 1,
+        "loss": 2.220000000001164,
+        "hit": true,
+        "headPresent": true
+      },
+      "wide": {
+        "head": 0,
+        "loss": 1.2000000000007276,
+        "hit": true,
+        "headPresent": true
+      }
+    }
+  ],
+  "damage": {
+    "heightOnlyHeads": 0,
+    "loss": 3,
+    "headPresent": true
+  },
+  "pierce": {
+    "head": 1,
+    "loss": 5.549999999999272,
+    "hit": true,
+    "headPresent": true
+  },
+  "exposed": {
+    "head": 1,
+    "loss": 7.770000000000437,
+    "hit": true,
+    "headPresent": true
+  },
+  "helmet": {
+    "head": 0,
+    "loss": 1.7999999999992724,
+    "hit": true,
+    "headPresent": true
+  },
+  "poses": [
+    {
+      "k": "shambler",
+      "head": 1,
+      "loss": 5.549999999999272,
+      "hit": true,
+      "headPresent": true
+    },
+    {
+      "k": "feral",
+      "head": 1,
+      "loss": 5.549999999999272,
+      "hit": true,
+      "headPresent": true
+    },
+    {
+      "k": "leaper",
+      "head": 1,
+      "loss": 7.2150000000001455,
+      "hit": true,
+      "headPresent": true
+    },
+    {
+      "k": "spider",
+      "head": 1,
+      "loss": 3.8850000000002183,
+      "hit": true,
+      "headPresent": true
+    },
+    {
+      "k": "drowned",
+      "head": 1,
+      "loss": 5.32799999999952,
+      "hit": true,
+      "headPresent": true
+    },
+    {
+      "k": "bomber",
+      "head": 1,
+      "loss": 5.549999999999272,
+      "hit": true,
+      "headPresent": true
+    }
+  ],
+  "headless": {
+    "heads": 0,
+    "headLost": true
+  },
+  "errors": []
+}

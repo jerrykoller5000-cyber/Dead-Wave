@@ -1,0 +1,186 @@
+{
+ "schema": "dw-camera-shot",
+ "schemaVersion": 2,
+ "target": "marine",
+ "label": "The marine (live)",
+ "view": "three",
+ "cam": {
+  "x": -22.504067949617106,
+  "y": -196.53516569380562,
+  "z": -628.847738909584,
+  "tx": -26.075088742693108,
+  "ty": -199.00864350972995,
+  "tz": -633.103515768961,
+  "fov": 35
+ },
+ "time": 0.5,
+ "size": [
+  1440,
+  1000
+ ],
+ "center": {
+  "x": -26.075088742693108,
+  "y": -199.00864350972995,
+  "z": -633.103515768961
+ },
+ "boxSize": {
+  "x": 1.0670812976352266,
+  "y": 1.4440935947739888,
+  "z": 2.7879185340410686
+ },
+ "mode": "inspect",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "at": "2026-10-14T16:21:17.408Z",
+ "inspect": {
+  "schema": "dw-inspector-session",
+  "schemaVersion": 1,
+  "inspectorVersion": "1.1.0",
+  "view": {
+   "follow": false,
+   "bookmark": null,
+   "offset": {
+    "dx": 0,
+    "dy": 0,
+    "dz": 0
+   }
+  },
+  "subject": {
+   "id": "marine",
+   "variant": null,
+   "mode": null
+  },
+  "camera": {
+   "x": -22.504067949617106,
+   "y": -196.53516569380562,
+   "z": -628.847738909584,
+   "tx": -26.075088742693108,
+   "ty": -199.00864350972995,
+   "tz": -633.103515768961,
+   "fov": 35
+  },
+  "display": {
+   "backdrop": "studio",
+   "light": "studio",
+   "overlays": {
+    "bounds": false,
+    "axes": false,
+    "stick": false,
+    "joints": false,
+    "wire": false,
+    "grid": true,
+    "labels": true
+   }
+  },
+  "clock": {
+   "speed": 1,
+   "paused": true
+  },
+  "marine": {
+   "weapon": "pistol",
+   "akimbo": false,
+   "blade": "machete",
+   "camo": "m81",
+   "gear": {
+    "helmet": true,
+    "vest": true,
+    "pads": true,
+    "nvg": true,
+    "laser": true,
+    "flashlight": true
+   },
+   "wardrobe": {
+    "version": 1,
+    "items": {
+     "cap": {
+      "camo": "m81",
+      "style": "cover"
+     },
+     "helmet": {
+      "camo": "m81"
+     },
+     "mask": {
+      "camo": "coyoteBrown"
+     },
+     "shirt": {
+      "camo": "m81",
+      "sleeves": "down"
+     },
+     "trousers": {
+      "camo": "m81",
+      "cut": "trousers"
+     },
+     "gloves": {
+      "camo": "m81",
+      "worn": true
+     },
+     "carrier": {},
+     "pads": {},
+     "holster": {},
+     "belt": {},
+     "pack": {},
+     "eyewear": {
+      "style": "none"
+     },
+     "boots": {
+      "colour": "black",
+      "rubber": "yellow"
+     }
+    },
+    "guns": {},
+    "body": {
+     "hair": "darkBrown",
+     "eyes": "brown",
+     "skin": 3
+    }
+   },
+   "mods": {
+    "minigun": {
+     "ext": false,
+     "heavy": false
+    },
+    "m4": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false
+    },
+    "ak": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false
+    },
+    "pistol": {
+     "ext": false,
+     "suppressor": false,
+     "auto": false
+    },
+    "uzi": {
+     "ext": false,
+     "heavy": false,
+     "suppressor": false
+    },
+    "shotgun": {
+     "ext": false,
+     "suppressor": false
+    },
+    "aa12": {
+     "ext": false
+    },
+    "revolver": {},
+    "sniper": {
+     "ext": false,
+     "suppressor": false
+    },
+    "launcher": {},
+    "flamer": {
+     "ext": false
+    },
+    "chainsaw": {
+     "tank": false
+    }
+   },
+   "move": "dive-back",
+   "loop": false,
+   "holds": {}
+  }
+ }
+}

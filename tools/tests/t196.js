@@ -36,11 +36,11 @@
       hold(); T.setAimYawDbg(0); T.setKnifeCd(0); T.knifeAttack(); await wait(30);
       return 1000 - z.hp;
     };
-    const wk = T.WEAKNESS.shambler.blade;
+    const mWant = T.listedBodyDamage('machete', 'shambler'), kWant = T.listedBodyDamage('knife', 'shambler');
     const mHit = await swingAt(2.0, 0, true);
-    ok(Math.abs(mHit - 69 * wk) < 0.6, 'machete on a shambler at 2 m: ' + mHit.toFixed(1) + ' (69 x Blade ' + wk + ')');
+    ok(Math.abs(mHit - mWant) < 0.6, 'machete on a shambler at 2 m: ' + mHit.toFixed(1) + ' (sheet ' + mWant.toFixed(1) + ', CU-127)');
     const kHit = await swingAt(2.0, 0, false);
-    ok(Math.abs(kHit - 26 * wk) < 0.6 && Math.abs(mHit * 26 - kHit * 69) < 26, 'knife there: ' + kHit.toFixed(1) + ' (26 x ' + wk + '), 26/69 of the machete');
+    ok(Math.abs(kHit - kWant) < 0.6, 'knife there: ' + kHit.toFixed(1) + ' (sheet ' + kWant.toFixed(1) + ')');
     const mFar = await swingAt(3.2, 0, true);
     ok(mFar === 0, 'machete no longer reaches 3.2 m (it did at 3.8 + its radius): ' + mFar.toFixed(1));
     const mWide = await swingAt(1.8, 60, true), kWide = await swingAt(1.8, 60, false), mNarrow = await swingAt(1.8, 35, true);

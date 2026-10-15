@@ -1,0 +1,242 @@
+{
+  "range": {
+    "state": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "banner": "Build mode is only available in the build room. | "
+  },
+  "prep": {
+    "wheel": {
+      "kind": "build",
+      "page": 0,
+      "keys": [
+        "upgrade",
+        "wall",
+        "floor",
+        "platform",
+        "pillar",
+        "stairs",
+        "railing",
+        "window",
+        "door",
+        "shovel"
+      ]
+    },
+    "state": {
+      "on": false,
+      "placeMode": "upgrade",
+      "buildMode": true,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    }
+  },
+  "pull": {
+    "accepted": 1,
+    "immediately": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "after": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "pending": true
+  },
+  "pendingWheel": {
+    "before": {
+      "kind": "build",
+      "page": 0,
+      "keys": [
+        "upgrade",
+        "wall",
+        "floor",
+        "platform",
+        "pillar",
+        "stairs",
+        "railing",
+        "window",
+        "door",
+        "shovel"
+      ]
+    },
+    "after": {
+      "kind": null,
+      "page": 0,
+      "keys": []
+    }
+  },
+  "living": {
+    "alive": 1,
+    "state": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    }
+  },
+  "floor": {
+    "border": 72,
+    "refused": 72,
+    "medicalPaint": 0,
+    "interior": null,
+    "paintCells": 112
+  },
+  "leaveBuild": {
+    "on": false,
+    "placeMode": null,
+    "buildMode": false,
+    "wheel": null,
+    "briefing": false,
+    "shop": false,
+    "cif": false
+  },
+  "collision": {
+    "stopped": [
+      -41.535,
+      -200,
+      -630
+    ],
+    "tests": [
+      {
+        "name": "alarm",
+        "action": "trainingPanel",
+        "p": [
+          -43.1,
+          -200,
+          -637
+        ]
+      },
+      {
+        "name": "skull",
+        "action": "hqWindow",
+        "p": [
+          -43.1,
+          -200,
+          -643
+        ]
+      },
+      {
+        "name": "securityDoor",
+        "action": "trainingDoor",
+        "p": [
+          -9.15,
+          -200,
+          -649.4
+        ]
+      },
+      {
+        "name": "kiosk",
+        "action": "kiosk",
+        "p": [
+          6.8,
+          -200,
+          -646.6
+        ]
+      },
+      {
+        "name": "cif",
+        "action": "cif",
+        "p": [
+          6.8,
+          -200,
+          -650.2
+        ]
+      },
+      {
+        "name": "armory",
+        "action": "armory",
+        "p": [
+          6.3,
+          -200,
+          -643
+        ]
+      }
+    ]
+  },
+  "zombie": {
+    "x": -41.475
+  },
+  "cutaway": {
+    "state": [
+      {
+        "side": "training-perimeter-west",
+        "opacity": 0.07999999999999996
+      },
+      {
+        "side": "training-perimeter-south",
+        "opacity": 1
+      },
+      {
+        "side": "training-perimeter-east",
+        "opacity": 1
+      }
+    ],
+    "solid": 14
+  },
+  "recovery": {
+    "during": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "bed": {
+      "wake": true,
+      "alive": 0
+    },
+    "bedBuild": {
+      "on": false,
+      "placeMode": null,
+      "buildMode": false,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "after": {
+      "on": false,
+      "placeMode": "barricade",
+      "buildMode": true,
+      "wheel": null,
+      "briefing": false,
+      "shop": false,
+      "cif": false
+    },
+    "fence": {
+      "raised": false,
+      "amount": 0,
+      "awaitExit": true
+    }
+  },
+  "reenter": {
+    "same": true,
+    "before": 14,
+    "after": 14,
+    "roots": 1
+  },
+  "errors": []
+}

@@ -1,0 +1,132 @@
+{
+  "mode": "after",
+  "loadSeconds": 22.95,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "geometry": {
+    "walk": [
+      {
+        "minX": -7.58,
+        "maxX": 7.2,
+        "minZ": -651.58,
+        "maxZ": -640.24
+      },
+      {
+        "minX": -8.47,
+        "maxX": -7.53,
+        "minZ": -649.08,
+        "maxZ": -646.92
+      },
+      {
+        "minX": -43.2,
+        "maxX": -8.42,
+        "minZ": -651.58,
+        "maxZ": -612.75
+      }
+    ],
+    "spawn": {
+      "x": 0,
+      "z": -640.61,
+      "yaw": 0
+    },
+    "fixture": true,
+    "draws": 6,
+    "triangles": 580,
+    "solids": [
+      {
+        "minX": -8,
+        "maxX": 8,
+        "minY": -200,
+        "maxY": -199.14,
+        "minZ": -639.82,
+        "maxZ": -639.18,
+        "metal": true,
+        "firingLine": true
+      },
+      {
+        "minX": -8.0375,
+        "maxX": -7.9625,
+        "minY": -200,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": -4.5375,
+        "maxX": -4.4625,
+        "minY": -197.85,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": -1.5375,
+        "maxX": -1.4625,
+        "minY": -197.85,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": 1.4625,
+        "maxX": 1.5375,
+        "minY": -197.85,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": 4.4625,
+        "maxX": 4.5375,
+        "minY": -197.85,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": 7.9625,
+        "maxX": 8.0375,
+        "minY": -200,
+        "maxY": -194,
+        "minZ": -639.2925,
+        "maxZ": -639.2175,
+        "metal": true,
+        "firingLine": true,
+        "firingFrame": true
+      },
+      {
+        "minX": -8,
+        "maxX": 8,
+        "minY": -197.85,
+        "maxY": -194,
+        "minZ": -639.3,
+        "maxZ": -639.21,
+        "metal": true,
+        "firingLine": true,
+        "firingFence": true
+      }
+    ]
+  },
+  "performance": {
+    "fps": 60.38647343008753,
+    "low": 56.497175131730245,
+    "worst": 17.700000002980232,
+    "hitches": 0,
+    "frames": 60
+  },
+  "errors": []
+}

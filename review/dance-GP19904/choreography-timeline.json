@@ -1,0 +1,208 @@
+{
+  "task": "GP-19904",
+  "duration_seconds": 20,
+  "fps": 30,
+  "frames": 600,
+  "music": {
+    "source": "C:/Users/Zero/Desktop/Jerry_Game_Related/Disclaimer/Been Warned.mp3",
+    "excerpt": "audio-dance.mp3",
+    "source_start_seconds": 9.151494,
+    "source_end_seconds": 29.151494,
+    "bpm": 103.322299,
+    "beat_seconds": 0.5807071714499887,
+    "playback_rate": 1,
+    "pitch_unchanged": true,
+    "fade_out_start_seconds": 19.55,
+    "fade_out_end_seconds": 20
+  },
+  "movement_end_beat": 34,
+  "movement_end_seconds": 19.744043829299617,
+  "delivery_end_beat": 34.440766333333336,
+  "final_pose_hold_seconds": 0.255956170700383,
+  "segments": [
+    {
+      "start_beat": 0,
+      "end_beat": 4,
+      "start_seconds": 0.0,
+      "end_seconds": 2.322829,
+      "move": "Funky strut",
+      "description": "Shoulder/head groove and traveling hips"
+    },
+    {
+      "start_beat": 4,
+      "end_beat": 8,
+      "start_seconds": 2.322829,
+      "end_seconds": 4.645657,
+      "move": "Traveling running man",
+      "description": "Blend from strut into running-man steps"
+    },
+    {
+      "start_beat": 8,
+      "end_beat": 8.5,
+      "start_seconds": 4.645657,
+      "end_seconds": 4.936011,
+      "move": "Quick grab accent",
+      "description": "Brief low hand accent with opposite arm raised"
+    },
+    {
+      "start_beat": 8.5,
+      "end_beat": 9,
+      "start_seconds": 4.936011,
+      "end_seconds": 5.226365,
+      "move": "Gather feet",
+      "description": "Prepare for lateral hops"
+    },
+    {
+      "start_beat": 9,
+      "end_beat": 12,
+      "start_seconds": 5.226365,
+      "end_seconds": 6.968486,
+      "move": "Together side hops",
+      "description": "Three lateral hops on successive beats"
+    },
+    {
+      "start_beat": 12,
+      "end_beat": 14,
+      "start_seconds": 6.968486,
+      "end_seconds": 8.1299,
+      "move": "Backstep groove",
+      "description": "Recover from hops and travel backward"
+    },
+    {
+      "start_beat": 14,
+      "end_beat": 16,
+      "start_seconds": 8.1299,
+      "end_seconds": 9.291315,
+      "move": "Heel-toe groove",
+      "description": "Foot pivots and upper-body wave"
+    },
+    {
+      "start_beat": 16,
+      "end_beat": 16.5,
+      "start_seconds": 9.291315,
+      "end_seconds": 9.581668,
+      "move": "Drop",
+      "description": "Lower body toward the floor"
+    },
+    {
+      "start_beat": 16.5,
+      "end_beat": 17,
+      "start_seconds": 9.581668,
+      "end_seconds": 9.872022,
+      "move": "Hand plant",
+      "description": "Set both hands for the kick-up"
+    },
+    {
+      "start_beat": 17,
+      "end_beat": 18,
+      "start_seconds": 9.872022,
+      "end_seconds": 10.452729,
+      "move": "Kick-up",
+      "description": "Lift into inverted pose"
+    },
+    {
+      "start_beat": 18,
+      "end_beat": 20,
+      "start_seconds": 10.452729,
+      "end_seconds": 11.614143,
+      "move": "Handstand",
+      "description": "Hold inversion with moving legs"
+    },
+    {
+      "start_beat": 20,
+      "end_beat": 20.25,
+      "start_seconds": 11.614143,
+      "end_seconds": 11.75932,
+      "move": "Release",
+      "description": "Lift palms before the roll"
+    },
+    {
+      "start_beat": 20.25,
+      "end_beat": 20.75,
+      "start_seconds": 11.75932,
+      "end_seconds": 12.049674,
+      "move": "Shoulder roll",
+      "description": "Fold around the torso toward the back"
+    },
+    {
+      "start_beat": 20.75,
+      "end_beat": 21,
+      "start_seconds": 12.049674,
+      "end_seconds": 12.194851,
+      "move": "Backspin entry",
+      "description": "Transition to back support"
+    },
+    {
+      "start_beat": 21,
+      "end_beat": 25,
+      "start_seconds": 12.194851,
+      "end_seconds": 14.517679,
+      "move": "Backspin",
+      "description": "Spin with leg tuck and spread"
+    },
+    {
+      "start_beat": 25,
+      "end_beat": 26,
+      "start_seconds": 14.517679,
+      "end_seconds": 15.098386,
+      "move": "Rise",
+      "description": "Recover from floorwork into standing"
+    },
+    {
+      "start_beat": 26,
+      "end_beat": 28,
+      "start_seconds": 15.098386,
+      "end_seconds": 16.259801,
+      "move": "Traveling running man",
+      "description": "Move out from the floorwork center"
+    },
+    {
+      "start_beat": 28,
+      "end_beat": 29.5,
+      "start_seconds": 16.259801,
+      "end_seconds": 17.130862,
+      "move": "Heel-toe groove",
+      "description": "Wave and pivot before final hops"
+    },
+    {
+      "start_beat": 29.5,
+      "end_beat": 30,
+      "start_seconds": 17.130862,
+      "end_seconds": 17.421215,
+      "move": "Gather feet",
+      "description": "Prepare for final lateral hops"
+    },
+    {
+      "start_beat": 30,
+      "end_beat": 32,
+      "start_seconds": 17.421215,
+      "end_seconds": 18.582629,
+      "move": "Together side hops",
+      "description": "Two final hops"
+    },
+    {
+      "start_beat": 32,
+      "end_beat": 34,
+      "start_seconds": 18.582629,
+      "end_seconds": 19.744044,
+      "move": "Finish pose transition",
+      "description": "Settle into the confident finish"
+    },
+    {
+      "start_beat": 34,
+      "end_beat": 34.440766333333336,
+      "start_seconds": 19.744044,
+      "end_seconds": 20.0,
+      "move": "Final pose hold",
+      "description": "Static pose through exact20-second endpoint"
+    }
+  ],
+  "motion_source": "ui/disclaimer-dance.js",
+  "motion_source_sha256_at_read": "76edb5ead645021d3cff53087597089af002ee2bd6c79d7d04b50955d462f6a3",
+  "method": "Read-only inspection of choreography(b) and its mapped powerChoreography chain. Section timestamps are beat conversion, not subjective listening labels.",
+  "notes": [
+    "Exact20-second duration is not quantized to a whole beat.",
+    "The power floorwork chain maps to source choreography at twice the beat rate; music playback remains unchanged.",
+    "Final delivery rendering uses9 subframes over13.33ms per root instruction; this file does not certify a completed render."
+  ]
+}

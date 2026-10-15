@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-14T06:36:06.369Z",
+  "files": [
+    {
+      "file": "index.html",
+      "sha256": "3ee765b2d21f57fcb136e9720d4dc1e37f092c15003cffaa2f703dd4ff6bd08a"
+    },
+    {
+      "file": "ui/range-console.js",
+      "sha256": "c56cce705b303ae4911703af37d380c52d56c154bad4696f7487ee6670bfad32"
+    },
+    {
+      "file": "ui/range-drills.css",
+      "sha256": "6789d10844c4ac2a13c7cbd5d4d514e96b04484b7c534d265d4bf9cb0e2f44cf"
+    },
+    {
+      "file": "ui/range-drills.js",
+      "sha256": "13e8c111e2e0b1ab2b4ec6a27db3fd0093906cf923c6beb67ddeffed52d2ef72"
+    },
+    {
+      "file": "ui/range-session.js",
+      "sha256": "c716c1144df0f66d670923f50c2868d269749c992c065424ddcd6f33ca18f777"
+    },
+    {
+      "file": "ui/range-records.js",
+      "sha256": "40c31e37197b023e22df5d2cd7cb554bdd622adc6f1fb49c5351b2376d024a74"
+    },
+    {
+      "file": "ui/range-feature.js",
+      "sha256": "9ba6701ffc6429486912450555929ec30833ca04f66c362c0588ede0723127ab"
+    },
+    {
+      "file": "ui/strings.js",
+      "sha256": "11ead71243c2e39d1cbfc71ac90f554a80f91e33957399882fea47cc8a492c98"
+    },
+    {
+      "file": "ui/range-monitor.js",
+      "sha256": "529d5fb10baedc23aa78d0d317ed6c86613ebd6d780e8e5bf947a5d8eef3aa08"
+    },
+    {
+      "file": "ui/range-guide.js",
+      "sha256": "e652cf6035136086008bde4def3866e58c7ae24850d1602d02cb3e573988f95a"
+    },
+    {
+      "file": "ui/range-drills.test.mjs",
+      "sha256": "f4fffb895a28f7d0aad488bfa6432975804ac68c6818cdb48b5b63cdd7317f47"
+    }
+  ]
+}

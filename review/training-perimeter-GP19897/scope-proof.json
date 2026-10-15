@@ -1,0 +1,20 @@
+[
+  {
+    "path": "index.html",
+    "before": "d1cca0e412e65f4aab0ab5e9d64d885352cfc6669e60329430c7a6e5bebe3a96",
+    "after": "b54c5cb41acc5e57f1e4d1d7e86b9327f62e5ea91370b1a3a1f67b1d6337f7ed",
+    "replacements": 12
+  },
+  {
+    "path": "world/training.js",
+    "before": "4c6454e34345c7b68e69becbfecc9a303b424f565849152a12736decc858ac01",
+    "after": "074d6cdd873a9f9c5a9e4811866d15af11d4c1bf69495df83a4f37b5a852fe3a",
+    "replacements": 8
+  },
+  {
+    "path": "ui/strings.js",
+    "before": "98e457eb323d6c883dbbc0e3c8a6371c03ac21c11ebf5d5dc7e6472015e716d8",
+    "after": "0d42ae1c016102778250c342c0c266a968353fb2069a904c14d9deeba7f2cfc8",
+    "replacements": 1
+  }
+]

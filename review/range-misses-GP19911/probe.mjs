@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import {Engine} from '../../tools/camera.mjs';
+const dir='review/range-misses-GP19911',E=new Engine({training:true,warm:'none',size:'1440x900'}),proof={cases:[]};
+let clock=fs.readFileSync('tools/posesheet.mjs','utf8').match(/const PAGE = String.raw`([\s\S]*?)`;/)[1];
+clock=clock.replace(/const pin = \(\) => \{[^\n]*\};/,"const pin=()=>{p.x=S.x;p.z=S.z;};");
+try{
+ await E.open();await E.ev(`R.release();T.trainingDbg.panel().close();T.trainingDbg.clear();T.runDevCommand('godmode');T.AudioSys.setMuted(true);T.grantAllWeapons();if(T.isUnarmed())T.toggleHolster();window.__S={x:3,y:-200,z:-640.55};T.player.position.set(__S.x,__S.y,__S.z);T.setVelDbg(0,0);T.setAimYawDbg(0);window.B=await import('/world/training-ballistics.js');window.__born=[];const push=T.projectiles.push;T.projectiles.push=function(...ps){for(const p of ps)__born.push({from:p.pos.toArray(),dir:p.dir.toArray(),packet:p.rangePacket,event:p.rangeEvent,life:p.life,speed:p.speed});return push.apply(this,ps);};`);
+ await E.page.evaluate(clock);await E.ev(`__step(2);T.setZoomHeldDbg(true);__step(240);window.__aimCamera=(q)=>{for(let j=0;j<12;j++){const o=T.otsDbg(),c=T.camera.position,dx=q.x-c.x,dy=q.y-c.y,dz=q.z-c.z;let dyaw=o.yaw-Math.atan2(dx,dz);while(dyaw>Math.PI)dyaw-=Math.PI*2;while(dyaw< -Math.PI)dyaw+=Math.PI*2;T.otsLook(dyaw/.0022,(o.pitch-Math.atan2(dy,Math.hypot(dx,dz)))/.0022);__step(10);}};`);
+ for(const weapon of ['pistol','m4','ak'])for(const lane of [0,2,4])for(const zone of ['head','bull']){
+  const r=await E.ev(`T.setMouseFireDbg(false);__weapon('${weapon}');T.setAmmoDbg('${weapon}',30);T.trainingDbg.tg().resetTargets();__step(45);T.setZoomHeldDbg(true);__step(150);const tg=T.trainingDbg.tg(),t=tg.targets[${lane}],q=new T.THREE.Vector3(t.x,-200+2.9-${zone==='head'?70:260}*.005,-640+t.z);__aimCamera(q);T.resetSprayDbg();__step(20);const view=q.clone().project(T.camera),aim=T.aimTarget.clone(),effective=T.getWeaponAimDbg(),safe=T.aimSafetyDbg(),before=T.trainingDbg.state().hits;__born.length=0;T.setMouseFireDbg(true);__step(1);T.setMouseFireDbg(false);const shots=__born.slice();__step(65);return {weapon:'${weapon}',lane:${lane},zone:'${zone}',point:q.toArray(),view:view.toArray(),aim:aim.toArray(),effective:effective.toArray(),safe,ots:T.otsDbg(),shots,flags:T.vaultDbg.flags(),hits:T.trainingDbg.state().hits-before,range:T.rangeDbg.read()?.state,states:tg.targets.map(t=>t.state),traces:shots.map(s=>{const a=new T.THREE.Vector3(...s.from),b=new T.THREE.Vector3(...s.dir).multiplyScalar(s.life*s.speed).add(a),h=B.traceTraining(tg,a,b);return h?{kind:h.solid.target!=null?'target':Object.keys(h.solid).filter(k=>h.solid[k]===true),target:h.solid.target,point:h.point}:null;})};`);
+  proof.cases.push(r);console.log(JSON.stringify({weapon,lane,zone,hits:r.hits,shots:r.shots.length,self:r.safe.self,aim:r.aim,effective:r.effective,view:r.view.slice(0,2),trace:r.traces}));
+ }
+ await E.run({cmd:'shot',live:true,ui:true,out:dir+'/baseline-shoulder.png'});
+ proof.errors=E.page.errors;
+}finally{fs.writeFileSync(dir+'/baseline.json',JSON.stringify({...proof,errors:E.page?.errors},null,2));await E.close();}process.exit(0);

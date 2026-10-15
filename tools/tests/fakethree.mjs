@@ -1,5 +1,7 @@
 // Minimal stand-in for three.js so the game's CPU-side logic can run headless.
 // Math + scene graph are real enough; everything else is a permissive stub.
+// GP-19919: three/webgpu exposes this namespace; training containment reads THREE.TSL.
+export * as TSL from './faketsl.mjs';
 const STUB_CACHE = Symbol('stubcache');
 function makeStub(name = 'stub') {
   const fn = function () {};
@@ -352,12 +354,23 @@ export class Mesh extends Object3D {
   copy(src) { super.copy(src); if (src.geometry) this.geometry = src.geometry; if (src.material) this.material = src.material; this.name = src.name; this.visible = src.visible; return this; }
 }
 export class InstancedMesh extends Mesh {
-  constructor(g, m, count) { super(g, m); this.isInstancedMesh = true; this.count = count; this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(count * 16), 16); this.instanceColor = null; this._mats = []; }
+  constructor(g, m, count) { super(g, m); this.isInstancedMesh = true; this.count = count; this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(count * 16), 16); this.instanceColor = null; this._mats = []; this.boundingBox = null; }
   setMatrixAt(i, m) { this._mats[i] = m.clone(); }
   getMatrixAt(i, m) { if (this._mats[i]) m.copy(this._mats[i]); return m; }
   setColorAt(i, c) { if (!this.instanceColor) this.instanceColor = new InstancedBufferAttribute(new Float32Array(this.count * 3), 3); c.toArray(this.instanceColor.array, i * 3); }
   getColorAt(i, c) { if (this.instanceColor) c.fromArray(this.instanceColor.array, i * 3); return c; }
-  computeBoundingSphere() {} computeBoundingBox() {} dispose() {}
+  // GP-19919: the same local instance bounds as Three; the inspector must measure real instance transforms.
+  computeBoundingBox() {
+    if (this.boundingBox === null) this.boundingBox = new Box3();
+    if (this.geometry.boundingBox === null) this.geometry.computeBoundingBox();
+    this.boundingBox.makeEmpty();
+    const matrix = new Matrix4(), box = new Box3();
+    for (let i = 0; i < this.count; i++) {
+      matrix.identity(); this.getMatrixAt(i, matrix);
+      box.copy(this.geometry.boundingBox).applyMatrix4(matrix); this.boundingBox.union(box);
+    }
+  }
+  computeBoundingSphere() {} dispose() {}
 }
 export class LineSegments extends Mesh { constructor(g, m) { super(g, m); this.isLineSegments = true; } }
 export class Line extends Mesh {}

@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+const dir='review/dive-clearance-GP19918';if(!fs.existsSync(dir+'/index.html.before'))fs.writeFileSync(dir+'/index.html.before',fs.readFileSync('index.html','utf8'));
+fs.writeFileSync(dir+'/index-before.html',fs.readFileSync(dir+'/index.html.before','utf8').replace('<head>','<head><base href="/">'));
+let cam=fs.readFileSync('tools/camera.mjs','utf8').replace("from './serve.mjs'","from '../../tools/serve.mjs'").replace("from './cdp.mjs'","from '../../tools/cdp.mjs'").replace("new URL('..', import.meta.url)","new URL('../..', import.meta.url)").replace('${this.server.origin}/index.html?','${this.server.origin}/review/dive-clearance-GP19918/index-before.html?');fs.writeFileSync(dir+'/camera-before.mjs',cam);
+const html=fs.readFileSync('index.html','utf8'),script=[...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)].map(m=>m[1]).join('\n');fs.writeFileSync(dir+'/syntax.mjs',script);const r=spawnSync(process.execPath,['--check',dir+'/syntax.mjs'],{encoding:'utf8'});console.log(r.stdout+r.stderr);process.exit(r.status);

@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "e2790c94ad1415ddf7f23f04c36ebc3655321d1383d1808ac4360ebbfc16f6e5"
+    },
+    {
+      "path": "game/training-containment.js",
+      "sha256": "21db1be56e46670162926aec20d2e3513404b8107b508362893d7b68d75c6757"
+    },
+    {
+      "path": "game/training-containment.test.mjs",
+      "sha256": "e6d3ffcf78988731a2f4a131140ee88f1419dfec2019eb6f8128ae019a4bd74e"
+    },
+    {
+      "path": "game/screamer-behavior.js",
+      "sha256": "136d913d82d17793366a11e178863996e3d6c2bac51fdc71f62f2ce5d7a7f591"
+    }
+  ],
+  "indexHooks": 11,
+  "studioAndWorldModulesEdited": false,
+  "scope": "private mounted model/controller and training lifecycle hooks; two player recovery guards"
+}

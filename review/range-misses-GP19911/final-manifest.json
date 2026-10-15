@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-14T04:35:58.751Z",
+  "files": [
+    {
+      "file": "ui/range-feature.js",
+      "sha256": "a6ec1e3ef3cfe30811ec8fcfca7e659f18c089d5d9600aaab7697f54068cefac"
+    },
+    {
+      "file": "ui/range-hit-feedback.js",
+      "sha256": "7368464c04725f737f074baa1f2f9c1da1da26a9f03db8f92122e9e7f36b5154"
+    },
+    {
+      "file": "ui/training-hit-pops.js",
+      "sha256": "a4f51de7f54e753f1f40cf24eead8bf1535e447d190ffb38f6f97092c6862ca2"
+    },
+    {
+      "file": "ui/strings.js",
+      "sha256": "6e0b3c6612b65de5a91364dce32dc1f2e1a1470195cfb0473c8267e15d6559cb"
+    },
+    {
+      "file": "ui/range-drills.css",
+      "sha256": "ee5a295cb29c4839e8c8cb24be2ec077ca660f950ee662490a879b19eb4c8c8a"
+    }
+  ]
+}

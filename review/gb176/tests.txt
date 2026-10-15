@@ -1,0 +1,14 @@
+FAIL  t221    26 pass   1 fail  53.9s
+    t221   1 fail  FAIL thrown out to the gun's right (gun-local vx -0.220)
+           FAIL thrown out to the gun's right (gun-local vx -0.220)
+FAIL  t224    20 pass   1 fail  82.0s
+    t224   1 fail  FAIL and pistols on the pack (CL-160): 0
+           FAIL and pistols on the pack (CL-160): 0
+ok    t229    13 pass   0 fail  78.3s
+ok    t240    17 pass   0 fail  54.5s
+FAIL  t242    14 pass   1 fail  38.8s
+    t242   1 fail  FAIL extended: the magazine is inside the grip above its bottom (worst 6.4 mm out at u 0.141 v 2
+           FAIL extended: the magazine is inside the grip above its bottom (worst 6.4 mm out at u 0.141 v 26.8 mm x -11.0 mm; 66 points)
+FAIL  t252    11 pass   1 fail  53.7s
+    t252   1 fail  FAIL M4 fires a burst through the flick (1 rounds)
+           FAIL M4 fires a burst through the flick (1 rounds)

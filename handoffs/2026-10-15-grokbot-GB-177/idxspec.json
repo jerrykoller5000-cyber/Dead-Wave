@@ -1,0 +1,27 @@
+[
+{
+"file": "index.html",
+"oldBlock": [
+"      put(new THREE.CylinderGeometry(0.02, 0.022, 1.2, 8), wood, 0.6);",
+"      put(new THREE.BoxGeometry(0.14, 0.03, 0.03), wood, 0.0);",
+"      put(new THREE.CylinderGeometry(0.03, 0.05, 0.12, 8), steelM, 1.2);",
+"      put(new THREE.BoxGeometry(0.24, 0.3, 0.025), steelM, 1.4);"
+],
+"new": [
+"      // GB-177 (pass 2: a flat plate on a pole): a GI spade. D-handle (a grip bar and two straps), an ash shaft, a steel",
+"      // socket and frog strap, a dished round-point blade with rolled treads. Same length (userData.len) for the dig.",
+"      const rod = (a, b, r, mat) => { const d = new THREE.Vector3().subVectors(b, a), m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 8), mat); m.position.copy(a).addScaledVector(d, 0.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); m.castShadow = true; g.add(m); return m; };",
+"      const v3 = (x, y, z = 0) => new THREE.Vector3(x, y, z);",
+"      rod(v3(-0.06, 0.02), v3(0.06, 0.02), 0.016, wood);",
+"      for (const sx of [-1, 1]) rod(v3(sx * 0.058, 0.02), v3(sx * 0.014, 0.17), 0.009, steelM);",
+"      put(new THREE.CylinderGeometry(0.019, 0.021, 1.0, 10), wood, 0.66);",
+"      put(new THREE.CylinderGeometry(0.023, 0.03, 0.13, 10), steelM, 1.205);",
+"      const bs = new THREE.Shape(); bs.moveTo(-0.115, 0); bs.lineTo(0.115, 0); bs.lineTo(0.112, 0.17); bs.quadraticCurveTo(0.1, 0.26, 0, 0.31); bs.quadraticCurveTo(-0.1, 0.26, -0.112, 0.17); bs.lineTo(-0.115, 0);",
+"      const bg = new THREE.ExtrudeGeometry(bs, { depth: 0.004, bevelEnabled: true, bevelThickness: 0.0015, bevelSize: 0.0015, bevelSegments: 1, curveSegments: 8 });",
+"      bg.translate(0, 0, -0.002); { const p = bg.attributes.position; for (let i = 0; i < p.count; i++) p.setZ(i, p.getZ(i) + 0.9 * p.getX(i) * p.getX(i)); } bg.computeVertexNormals();",
+"      const blade = new THREE.Mesh(bg, steelM); blade.position.y = 1.25; blade.castShadow = true; g.add(blade);",
+"      for (const sx of [-1, 1]) rod(v3(sx * 0.115, 1.256, 0.0119), v3(sx * 0.012, 1.256, 0.0001), 0.006, steelM);",
+"      const frog = put(new THREE.BoxGeometry(0.05, 0.13, 0.01), steelM, 1.315); frog.position.z = -0.004;"
+]
+}
+]

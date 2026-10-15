@@ -1,0 +1,31 @@
+✔ shield follows actual scream completion; opening lasts 2.4 seconds (1.1979ms)
+✔ each completed scream creates a fresh opening (0.1911ms)
+✔ head loss and death remove shield and cancel scream (0.1621ms)
+✔ shield never affects another species (0.1126ms)
+✔ half turn is accelerated and bounded at multiple frame rates (2.013ms)
+✔ scream commits facing, then exhausted pose relaxes (0.2071ms)
+✔ room clear removes private state and hides effects (0.2045ms)
+✔ protected pursuit closes; exposed retreat increases separation and still faces the player (0.5271ms)
+✔ exposed movement tries another safe route, and holds when boxed in (0.1925ms)
+✔ exposed side changes are held, not random frame to frame; retreat never accelerates past original pace (0.5206ms)
+✔ retreat holds a gap rather than running forever; invalid/alternate targets and injuries keep normal movement (0.2067ms)
+✔ committed scream/attack and downed bodies are not redirected (0.1665ms)
+✔ protected hover blends to exposed footwork and back, with no accumulating pose offsets (2.9937ms)
+✔ shielded travel is two fifths pace, while exposed and headless travel keep their existing speed (0.1892ms)
+✔ protected bob lifts the body in a smooth sustained cycle without moving its collision root (3.3976ms)
+✔ four inward mounts on each wall, above heads and inside the actual room (0.9299ms)
+✔ idle fixtures do not shoot; all sixteen spin up and shoot after a death trigger (3.8497ms)
+✔ 48 occupants are eliminated through three distinct arriving hits without stale recycled meshes (4.619ms)
+✔ room cleanup ignores living zombies in the outdoor world and runs only after start (0.2975ms)
+✔ hidden tunnel entrants hold the sweep until they enter; they are never shot through the gate (2.0304ms)
+✔ reset cancels flying rounds and a later encounter has fresh hit counts (2.4828ms)
+✔ clear/removed targets cannot receive delayed impacts (1.2914ms)
+✔ paused time, repeated triggers and empty rooms cannot create duplicate sweeps (0.6763ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.5715

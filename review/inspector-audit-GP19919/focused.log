@@ -1,0 +1,856 @@
+$ node --test --test-reporter=tap review/inspector-audit-GP19919/async.test.mjs review/inspector-audit-GP19919/cdp.test.mjs review/inspector-audit-GP19919/automation/automation.test.mjs review/inspector-audit-GP19919/automation/input.test.mjs review/inspector-audit-GP19919/automation/instance-bounds.test.mjs review/inspector-audit-GP19919/usability/marine-controls.test.mjs review/inspector-audit-GP19919/usability/ui-controls.test.mjs review/inspector-audit-GP19919/usability/startup-cleanup.test.mjs
+TAP version 13
+# Subtest: game wait only resolves at its time and removes the finished entry
+ok 1 - game wait only resolves at its time and removes the finished entry
+  ---
+  duration_ms: 1.6191
+  type: 'test'
+  ...
+# Subtest: aborted move wait rejects immediately and cannot mutate a later move
+ok 2 - aborted move wait rejects immediately and cannot mutate a later move
+  ---
+  duration_ms: 0.6947
+  type: 'test'
+  ...
+# Subtest: stalled frame wait expires without leaving a pending callback
+ok 3 - stalled frame wait expires without leaving a pending callback
+  ---
+  duration_ms: 19.7493
+  type: 'test'
+  ...
+# Subtest: a failing frame rejects all dependents and still accepts subsequent requests
+ok 4 - a failing frame rejects all dependents and still accepts subsequent requests
+  ---
+  duration_ms: 0.3519
+  type: 'test'
+  ...
+# Subtest: bad finite/count parameters are rejected before operations allocate or loop
+ok 5 - bad finite/count parameters are rejected before operations allocate or loop
+  ---
+  duration_ms: 0.234
+  type: 'test'
+  ...
+# Subtest: duplicate catalog IDs fail explicitly instead of renaming public agent IDs
+ok 6 - duplicate catalog IDs fail explicitly instead of renaming public agent IDs
+  ---
+  duration_ms: 1.2479
+  type: 'test'
+  ...
+# Subtest: launcher proves the server belongs to this checkout
+ok 7 - launcher proves the server belongs to this checkout
+  ---
+  duration_ms: 15.0599
+  type: 'test'
+  ...
+# Subtest: launcher refuses an old server fingerprint without stopping it
+ok 8 - launcher refuses an old server fingerprint without stopping it
+  ---
+  duration_ms: 12.7576
+  type: 'test'
+  ...
+# Subtest: static server preserves full response, cache and MIME contracts
+ok 9 - static server preserves full response, cache and MIME contracts
+  ---
+  duration_ms: 9.6832
+  type: 'test'
+  ...
+# Subtest: static byte range bytes=2-5
+ok 10 - static byte range bytes=2-5
+  ---
+  duration_ms: 4.5668
+  type: 'test'
+  ...
+# Subtest: static byte range bytes=7-
+ok 11 - static byte range bytes=7-
+  ---
+  duration_ms: 2.9843
+  type: 'test'
+  ...
+# Subtest: static byte range bytes=-3
+ok 12 - static byte range bytes=-3
+  ---
+  duration_ms: 2.6277
+  type: 'test'
+  ...
+# Subtest: static byte range bytes=0-999
+ok 13 - static byte range bytes=0-999
+  ---
+  duration_ms: 2.7242
+  type: 'test'
+  ...
+# Subtest: static byte range bytes=-999
+ok 14 - static byte range bytes=-999
+  ---
+  duration_ms: 1.7953
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=10- returns 416
+ok 15 - static invalid byte range bytes=10- returns 416
+  ---
+  duration_ms: 1.7454
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=5-2 returns 416
+ok 16 - static invalid byte range bytes=5-2 returns 416
+  ---
+  duration_ms: 1.0079
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=-0 returns 416
+ok 17 - static invalid byte range bytes=-0 returns 416
+  ---
+  duration_ms: 0.9735
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=- returns 416
+ok 18 - static invalid byte range bytes=- returns 416
+  ---
+  duration_ms: 0.8739
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=0-2,4-5 returns 416
+ok 19 - static invalid byte range bytes=0-2,4-5 returns 416
+  ---
+  duration_ms: 1.2966
+  type: 'test'
+  ...
+# Subtest: static invalid byte range bytes=9999999999999999999999- returns 416
+ok 20 - static invalid byte range bytes=9999999999999999999999- returns 416
+  ---
+  duration_ms: 0.8042
+  type: 'test'
+  ...
+# Subtest: static invalid byte range wrong=0-1 returns 416
+ok 21 - static invalid byte range wrong=0-1 returns 416
+  ---
+  duration_ms: 0.7067
+  type: 'test'
+  ...
+# Subtest: HEAD and empty files have correct lengths without reading a body
+ok 22 - HEAD and empty files have correct lengths without reading a body
+  ---
+  duration_ms: 2.651
+  type: 'test'
+  ...
+# Subtest: range requests preserve root containment and missing-file responses
+ok 23 - range requests preserve root containment and missing-file responses
+  ---
+  duration_ms: 1.038
+  type: 'test'
+  ...
+# Subtest: a slow foreign listener cannot hold the readiness probe indefinitely
+ok 24 - a slow foreign listener cannot hold the readiness probe indefinitely
+  ---
+  duration_ms: 96.5618
+  type: 'test'
+  ...
+# Subtest: occupied foreign port remains alive and inspector chooses a free port
+ok 25 - occupied foreign port remains alive and inspector chooses a free port
+  ---
+  duration_ms: 6.5734
+  type: 'test'
+  ...
+# Subtest: launcher starts a hidden owned server, waits for readiness and reuses it
+ok 26 - launcher starts a hidden owned server, waits for readiness and reuses it
+  ---
+  duration_ms: 175.1097
+  type: 'test'
+  ...
+# Subtest: /__inspect/note rejects malformed/non-object JSON without crashing
+ok 27 - /__inspect/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 4.114
+  type: 'test'
+  ...
+# Subtest: /__inspect/note rejects malformed/non-object JSON without crashing
+ok 28 - /__inspect/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.4501
+  type: 'test'
+  ...
+# Subtest: /__inspect/note rejects malformed/non-object JSON without crashing
+ok 29 - /__inspect/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.7846
+  type: 'test'
+  ...
+# Subtest: /__inspect/note rejects malformed/non-object JSON without crashing
+ok 30 - /__inspect/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 2.1174
+  type: 'test'
+  ...
+# Subtest: /__inspect/note blocks cross-origin and non-JSON requests
+ok 31 - /__inspect/note blocks cross-origin and non-JSON requests
+  ---
+  duration_ms: 2.3693
+  type: 'test'
+  ...
+# Subtest: /__studio/note rejects malformed/non-object JSON without crashing
+ok 32 - /__studio/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.2019
+  type: 'test'
+  ...
+# Subtest: /__studio/note rejects malformed/non-object JSON without crashing
+ok 33 - /__studio/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.1237
+  type: 'test'
+  ...
+# Subtest: /__studio/note rejects malformed/non-object JSON without crashing
+ok 34 - /__studio/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.0472
+  type: 'test'
+  ...
+# Subtest: /__studio/note rejects malformed/non-object JSON without crashing
+ok 35 - /__studio/note rejects malformed/non-object JSON without crashing
+  ---
+  duration_ms: 1.0696
+  type: 'test'
+  ...
+# Subtest: /__studio/note blocks cross-origin and non-JSON requests
+ok 36 - /__studio/note blocks cross-origin and non-JSON requests
+  ---
+  duration_ms: 1.9263
+  type: 'test'
+  ...
+# Subtest: motion-lab UTF-8 byte limit returns 413
+ok 37 - motion-lab UTF-8 byte limit returns 413
+  ---
+  duration_ms: 0.9484
+  type: 'test'
+  ...
+# Subtest: legacy motion-lab note contract and unicode survive
+ok 38 - legacy motion-lab note contract and unicode survive
+  ---
+  duration_ms: 5.2972
+  type: 'test'
+  ...
+# Subtest: same-second inspector notes keep distinct pictures and both entries
+ok 39 - same-second inspector notes keep distinct pictures and both entries
+  ---
+  duration_ms: 6.3995
+  type: 'test'
+  ...
+# Subtest: inspector path traversal cannot write a review note
+ok 40 - inspector path traversal cannot write a review note
+  ---
+  duration_ms: 0.7695
+  type: 'test'
+  ...
+# Subtest: filesystem failures are returned without terminating the static server
+ok 41 - filesystem failures are returned without terminating the static server
+  ---
+  duration_ms: 3.5942
+  type: 'test'
+  ...
+# Subtest: camera blocks cross-origin/non-JSON jobs before eval
+ok 42 - camera blocks cross-origin/non-JSON jobs before eval
+  ---
+  duration_ms: 3.7614
+  type: 'test'
+  ...
+# Subtest: camera rejects oversized jobs and accepts CLI JSON with unicode
+ok 43 - camera rejects oversized jobs and accepts CLI JSON with unicode
+  ---
+  duration_ms: 5.4512
+  type: 'test'
+  ...
+# check: 1 subjects, 1 broken:
+#   fixture
+# Subtest: camera non-object jobs return errors without executing
+ok 44 - camera non-object jobs return errors without executing
+  ---
+  duration_ms: 1.0721
+  type: 'test'
+  ...
+# Subtest: failed check and batch reports give a nonzero CLI exit code
+ok 45 - failed check and batch reports give a nonzero CLI exit code
+  ---
+  duration_ms: 0.2392
+  type: 'test'
+  ...
+# Subtest: camera includes contact-sheet failures in the batch failure result
+ok 46 - camera includes contact-sheet failures in the batch failure result
+  ---
+  duration_ms: 0.5386
+  type: 'test'
+  ...
+# Subtest: camera rejects turnarounds and sheet dimensions that could hang or exhaust memory
+ok 47 - camera rejects turnarounds and sheet dimensions that could hang or exhaust memory
+  ---
+  duration_ms: 0.4943
+  type: 'test'
+  ...
+# Subtest: camera never reports an empty model check as success
+ok 48 - camera never reports an empty model check as success
+  ---
+  duration_ms: 0.1337
+  type: 'test'
+  ...
+# Subtest: separate checkouts never overwrite the camera session/log files
+ok 49 - separate checkouts never overwrite the camera session/log files
+  ---
+  duration_ms: 0.6316
+  type: 'test'
+  ...
+# Subtest: framing the same live inspector subject preserves its move unless reset is requested
+ok 50 - framing the same live inspector subject preserves its move unless reset is requested
+  ---
+  duration_ms: 131.935
+  type: 'test'
+  ...
+# Subtest: legacy weapon suppressor targets retain their attachment in inspector mode
+ok 51 - legacy weapon suppressor targets retain their attachment in inspector mode
+  ---
+  duration_ms: 61.1559
+  type: 'test'
+  ...
+# Subtest: --from retains the inspector recipe and camera without reselecting the target
+ok 52 - --from retains the inspector recipe and camera without reselecting the target
+  ---
+  duration_ms: 2.3269
+  type: 'test'
+  ...
+# Subtest: inspector PNG, thumbnail and versioned recipe share one held frame
+ok 53 - inspector PNG, thumbnail and versioned recipe share one held frame
+  ---
+  duration_ms: 1.8499
+  type: 'test'
+  ...
+# Subtest: constructor accepts supported array/string viewports and the exact pixel budget
+ok 54 - constructor accepts supported array/string viewports and the exact pixel budget
+  ---
+  duration_ms: 1.4723
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport "0x0"
+ok 55 - constructor rejects invalid viewport "0x0"
+  ---
+  duration_ms: 0.3892
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport "90000x90000"
+ok 56 - constructor rejects invalid viewport "90000x90000"
+  ---
+  duration_ms: 0.1837
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport "8192x8192"
+ok 57 - constructor rejects invalid viewport "8192x8192"
+  ---
+  duration_ms: 0.0903
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [0,900]
+ok 58 - constructor rejects invalid viewport [0,900]
+  ---
+  duration_ms: 0.1035
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [900,0]
+ok 59 - constructor rejects invalid viewport [900,0]
+  ---
+  duration_ms: 0.0855
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [1600.5,900]
+ok 60 - constructor rejects invalid viewport [1600.5,900]
+  ---
+  duration_ms: 0.0854
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [null,900]
+ok 61 - constructor rejects invalid viewport [null,900]
+  ---
+  duration_ms: 0.1049
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [null,900]
+ok 62 - constructor rejects invalid viewport [null,900]
+  ---
+  duration_ms: 1.142
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [null,900]
+ok 63 - constructor rejects invalid viewport [null,900]
+  ---
+  duration_ms: 0.193
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [900]
+ok 64 - constructor rejects invalid viewport [900]
+  ---
+  duration_ms: 0.1099
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport [900,900,900]
+ok 65 - constructor rejects invalid viewport [900,900,900]
+  ---
+  duration_ms: 0.0823
+  type: 'test'
+  ...
+# Subtest: constructor rejects invalid viewport true
+ok 66 - constructor rejects invalid viewport true
+  ---
+  duration_ms: 0.0872
+  type: 'test'
+  ...
+# Subtest: CLI rejects nonfinite framing before JSON can convert it to null
+ok 67 - CLI rejects nonfinite framing before JSON can convert it to null
+  ---
+  duration_ms: 0.5309
+  type: 'test'
+  ...
+# Subtest: CLI rejects invalid viewport, camera coordinates, FOV and pitch
+ok 68 - CLI rejects invalid viewport, camera coordinates, FOV and pitch
+  ---
+  duration_ms: 0.3999
+  type: 'test'
+  ...
+# Subtest: valid negative angles and large world coordinates survive CLI normalization
+ok 69 - valid negative angles and large world coordinates survive CLI normalization
+  ---
+  duration_ms: 0.1992
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"size":[0,900]}
+ok 70 - HTTP/Engine shot rejects invalid framing before viewport allocation {"size":[0,900]}
+  ---
+  duration_ms: 0.4252
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"size":[8192,8192]}
+ok 71 - HTTP/Engine shot rejects invalid framing before viewport allocation {"size":[8192,8192]}
+  ---
+  duration_ms: 0.1211
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"pitch":90}
+ok 72 - HTTP/Engine shot rejects invalid framing before viewport allocation {"pitch":90}
+  ---
+  duration_ms: 0.0786
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"yaw":null}
+ok 73 - HTTP/Engine shot rejects invalid framing before viewport allocation {"yaw":null}
+  ---
+  duration_ms: 0.0747
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"dist":0}
+ok 74 - HTTP/Engine shot rejects invalid framing before viewport allocation {"dist":0}
+  ---
+  duration_ms: 0.0792
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"fov":null}
+ok 75 - HTTP/Engine shot rejects invalid framing before viewport allocation {"fov":null}
+  ---
+  duration_ms: 0.0803
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"cam":{"x":100000000,"y":2,"z":3,"tx":null,"ty":1,"tz":0,"fov":35}}
+ok 76 - HTTP/Engine shot rejects invalid framing before viewport allocation {"cam":{"x":100000000,"y":2,"z":3,"tx":null,"ty":1,"tz":0,"fov":35}}
+  ---
+  duration_ms: 0.0901
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"cam":{"x":100000000,"y":2,"z":3,"tx":99999999,"ty":1,"tz":0,"fov":null}}
+ok 77 - HTTP/Engine shot rejects invalid framing before viewport allocation {"cam":{"x":100000000,"y":2,"z":3,"tx":99999999,"ty":1,"tz":0,"fov":null}}
+  ---
+  duration_ms: 0.0692
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"zoom":0}}
+ok 78 - HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"zoom":0}}
+  ---
+  duration_ms: 0.0831
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"fov":"NaN"}}
+ok 79 - HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"fov":"NaN"}}
+  ---
+  duration_ms: 0.115
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"fov":0}}
+ok 80 - HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"fov":0}}
+  ---
+  duration_ms: 0.1274
+  type: 'test'
+  ...
+# Subtest: HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"pan":[1,null]}}
+ok 81 - HTTP/Engine shot rejects invalid framing before viewport allocation {"move":{"pan":[1,null]}}
+  ---
+  duration_ms: 0.0941
+  type: 'test'
+  ...
+# Subtest: HTTP daemon invalid viewport fails without touching browser allocation
+ok 82 - HTTP daemon invalid viewport fails without touching browser allocation
+  ---
+  duration_ms: 41.5439
+  type: 'test'
+  ...
+# Subtest: check passes explicit zero dimensions through to strict API validation
+ok 83 - check passes explicit zero dimensions through to strict API validation
+  ---
+  duration_ms: 0.2084
+  type: 'test'
+  ...
+# Subtest: fake instance bounds match pinned Three for translated instances
+ok 84 - fake instance bounds match pinned Three for translated instances
+  ---
+  duration_ms: 3.1814
+  type: 'test'
+  ...
+# Subtest: fake instance bounds match Three for rotation and nonuniform/negative scale
+ok 85 - fake instance bounds match Three for rotation and nonuniform/negative scale
+  ---
+  duration_ms: 0.6037
+  type: 'test'
+  ...
+# Subtest: recomputing bounds follows changed instance matrices and active instance count
+ok 86 - recomputing bounds follows changed instance matrices and active instance count
+  ---
+  duration_ms: 0.9024
+  type: 'test'
+  ...
+# Subtest: zero instances produce the same empty box as Three
+ok 87 - zero instances produce the same empty box as Three
+  ---
+  duration_ms: 0.3301
+  type: 'test'
+  ...
+# Subtest: fake namespace supports the native THREE.TSL attribute chain
+ok 88 - fake namespace supports the native THREE.TSL attribute chain
+  ---
+  duration_ms: 0.1561
+  type: 'test'
+  ...
+# Subtest: a successful CDP reply clears its long deadline and pending request
+ok 89 - a successful CDP reply clears its long deadline and pending request
+  ---
+  duration_ms: 2.1141
+  type: 'test'
+  ...
+# Subtest: protocol errors clear deadlines as well
+ok 90 - protocol errors clear deadlines as well
+  ---
+  duration_ms: 1.804
+  type: 'test'
+  ...
+# Subtest: disconnect rejects pending work and releases its timers
+ok 91 - disconnect rejects pending work and releases its timers
+  ---
+  duration_ms: 0.9181
+  type: 'test'
+  ...
+# Subtest: synchronous socket send failure cannot leave a timer or pending request
+ok 92 - synchronous socket send failure cannot leave a timer or pending request
+  ---
+  duration_ms: 0.8538
+  type: 'test'
+  ...
+# Subtest: damaged and incompatible persisted settings use safe defaults
+ok 93 - damaged and incompatible persisted settings use safe defaults
+  ---
+  duration_ms: 1.4961
+  type: 'test'
+  ...
+# Subtest: move and loop getters reflect the running desk rather than copied initial values
+ok 94 - move and loop getters reflect the running desk rather than copied initial values
+  ---
+  duration_ms: 1.5223
+  type: 'test'
+  ...
+# Subtest: stop clears each debug hold, and values stay finite and within the control domain
+ok 95 - stop clears each debug hold, and values stay finite and within the control domain
+  ---
+  duration_ms: 0.5921
+  type: 'test'
+  ...
+# Subtest: a cancelled dive cannot press V or release a new move key later
+ok 96 - a cancelled dive cannot press V or release a new move key later
+  ---
+  duration_ms: 3.5969
+  type: 'test'
+  ...
+# Subtest: cancelling a charged grenade cancels via blur before releasing G, without throwing
+ok 97 - cancelling a charged grenade cancels via blur before releasing G, without throwing
+  ---
+  duration_ms: 0.7187
+  type: 'test'
+  ...
+# Subtest: cancelling aimed fire prevents the delayed old burst
+ok 98 - cancelling aimed fire prevents the delayed old burst
+  ---
+  duration_ms: 0.6179
+  type: 'test'
+  ...
+# [inspector] move reload-ak Error: no gun "ak" (m4, pistol, chainsaw)
+#     at Object.weapon (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:106:22)
+#     at Object.setup (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:45:112)
+#     at Object.play (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:322:28)
+#     at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/inspector-audit-GP19919/usability/marine-controls.test.mjs:89:31)
+#     at Test.runInAsyncScope (node:async_hooks:214:14)
+#     at Test.run (node:internal/test_runner/test:1106:25)
+#     at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+#     at Test.postRun (node:internal/test_runner/test:1235:19)
+#     at Test.run (node:internal/test_runner/test:1163:12)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:788:7)
+# Subtest: cancelled prop and medpen sequences cannot mount or use gear after switching subjects
+ok 99 - cancelled prop and medpen sequences cannot mount or use gear after switching subjects
+  ---
+  duration_ms: 1.0253
+  type: 'test'
+  ...
+# Subtest: a failed setup rejects to its caller and leaves a visible error without continuing the move
+ok 100 - a failed setup rejects to its caller and leaves a visible error without continuing the move
+  ---
+  duration_ms: 1.0032
+  type: 'test'
+  ...
+# Subtest: stopping carried M240 uses the existing set-down export and removes the fresh owned piece
+ok 101 - stopping carried M240 uses the existing set-down export and removes the fresh owned piece
+  ---
+  duration_ms: 1.1868
+  type: 'test'
+  ...
+# [inspector] move m240 Error: the game did not mount the m240
+#     at Object.mount (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:243:69)
+#     at async runOnce (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:306:11)
+#     at async Object.play (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:329:19)
+#     at async waitForActual (node:assert:646:5)
+#     at async strict.rejects (node:assert:769:25)
+# Subtest: silent mount failure rejects rather than reporting that a crew-served move ran
+ok 102 - silent mount failure rejects rather than reporting that a crew-served move ran
+  ---
+  duration_ms: 0.7125
+  type: 'test'
+  ...
+# [inspector] move m240-carry Error: the game did not shoulder the m240
+#     at Object.carry (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:249:97)
+#     at async runOnce (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:306:11)
+#     at async Object.play (file:///C:/Users/Zero/Desktop/Tiny%20Trek/studio/inspector/marine.js:329:19)
+#     at async waitForActual (node:assert:646:5)
+#     at async strict.rejects (node:assert:769:25)
+# Subtest: silent shoulder failure rejects rather than reporting a carried weapon
+ok 103 - silent shoulder failure rejects rather than reporting a carried weapon
+  ---
+  duration_ms: 0.5773
+  type: 'test'
+  ...
+# Subtest: stopping knockout restores the captured live body transforms and clears blackout and wake
+ok 104 - stopping knockout restores the captured live body transforms and clears blackout and wake
+  ---
+  duration_ms: 0.4883
+  type: 'test'
+  ...
+# Subtest: camera closes only owned resources after server startup failure
+ok 105 - camera closes only owned resources after server startup failure
+  ---
+  duration_ms: 1.9601
+  type: 'test'
+  ...
+# Subtest: camera closes only owned resources after browser startup failure
+ok 106 - camera closes only owned resources after browser startup failure
+  ---
+  duration_ms: 0.5687
+  type: 'test'
+  ...
+# Subtest: camera closes only owned resources after page startup failure
+ok 107 - camera closes only owned resources after page startup failure
+  ---
+  duration_ms: 0.2314
+  type: 'test'
+  ...
+# Subtest: camera closes only owned resources after load startup failure
+ok 108 - camera closes only owned resources after load startup failure
+  ---
+  duration_ms: 0.2302
+  type: 'test'
+  ...
+# Subtest: a failed browser close does not mask the startup error or prevent server cleanup
+ok 109 - a failed browser close does not mask the startup error or prevent server cleanup
+  ---
+  duration_ms: 0.2339
+  type: 'test'
+  ...
+# Subtest: successful camera startup retains resources until explicit close
+ok 110 - successful camera startup retains resources until explicit close
+  ---
+  duration_ms: 0.1741
+  type: 'test'
+  ...
+# Subtest: validated boot retry removes the prior failure panel and stale error before initializing
+ok 111 - validated boot retry removes the prior failure panel and stale error before initializing
+  ---
+  duration_ms: 1.8855
+  type: 'test'
+  ...
+# Subtest: failure cleanup does not remove a healthy live inspector or an unowned root
+ok 112 - failure cleanup does not remove a healthy live inspector or an unowned root
+  ---
+  duration_ms: 0.1353
+  type: 'test'
+  ...
+# Subtest: the real UI boots with corrupted persisted groups and a removed tab
+ok 113 - the real UI boots with corrupted persisted groups and a removed tab
+  ---
+  duration_ms: 4.9565
+  type: 'test'
+  ...
+# Subtest: loop checkbox keeps the real false readback after a refresh
+ok 114 - loop checkbox keeps the real false readback after a refresh
+  ---
+  duration_ms: 15.9311
+  type: 'test'
+  ...
+# Subtest: rebuilding View repeatedly does not retain obsolete refresh callbacks
+ok 115 - rebuilding View repeatedly does not retain obsolete refresh callbacks
+  ---
+  duration_ms: 10.7132
+  type: 'test'
+  ...
+# Subtest: a failed note and failed clipboard preserve the author’s text
+ok 116 - a failed note and failed clipboard preserve the author’s text
+  ---
+  duration_ms: 1.4447
+  type: 'test'
+  ...
+# Subtest: duplicate ctrl+Enter notes issue one save, and batch Escape cancels without a pose change
+ok 117 - duplicate ctrl+Enter notes issue one save, and batch Escape cancels without a pose change
+  ---
+  duration_ms: 1.4112
+  type: 'test'
+  ...
+# Subtest: Save setup downloads one versioned JSON recipe
+ok 118 - Save setup downloads one versioned JSON recipe
+  ---
+  duration_ms: 2.5243
+  type: 'test'
+  ...
+# Subtest: Load setup rejects oversized or malformed files before changing the current stage
+ok 119 - Load setup rejects oversized or malformed files before changing the current stage
+  ---
+  duration_ms: 1.0662
+  type: 'test'
+  ...
+# Subtest: Load setup passes valid JSON to the validated restore API and permits reloading the same file
+ok 120 - Load setup passes valid JSON to the validated restore API and permits reloading the same file
+  ---
+  duration_ms: 1.033
+  type: 'test'
+  ...
+# Subtest: focused native toggle/select/range and transport controls cannot bypass a busy stage lock
+ok 121 - focused native toggle/select/range and transport controls cannot bypass a busy stage lock
+  ---
+  duration_ms: 1.2356
+  type: 'test'
+  ...
+# Subtest: failed asynchronous select and slider setters restore actual control readbacks while focused
+ok 122 - failed asynchronous select and slider setters restore actual control readbacks while focused
+  ---
+  duration_ms: 1.207
+  type: 'test'
+  ...
+1..122
+# tests 122
+# suites 0
+# pass 122
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1014.1815
+
+$ node review/inspector-audit-GP19919/runtime/runtime.test.mjs
+PASS clock pauses and runs exactly six 60 Hz steps
+PASS zero steps does not unexpectedly advance time
+PASS clock rejects non-finite and negative input without mutating state
+PASS clock speed agrees with the documented 0.05x to 2x range
+PASS rewind restores pose and the present
+PASS rewind survives gun-style reparenting and restores both hierarchies
+PASS rewind ignores an entire opted-out subtree
+PASS rewind capacity respects a small explicit budget and maxFrames
+PASS rewind rejects impossible budgets and non-finite frames
+PASS subject disposal releases new geometry, material and texture exactly once
+PASS subject disposal preserves detached game weapon resources
+PASS subject disposal respects explicit shared geometry and shared material maps
+PASS subject disposal preserves unattached materials from the game weapon context
+PASS subject disposal preserves resources borrowed by a concurrently accepted model
+PASS superseded async builders cannot relocate the marine or attach a stale model
+PASS failing model control initialization releases its resources
+PASS failing model measurements release the already attached holder
+PASS statue respawn releases old resources while live zombies stay in the game pool
+PASS camera rejects invalid settings without poisoning its existing view
+PASS drive mode leaves the game camera released until inspection resumes
+PASS selecting a view restores following after an external tool camera
+PASS bounds include InstancedMesh instance transforms
+PASS bounds refresh after the vertex buffer changes
+PASS bounds do not resurrect hidden or NaN geometry
+PASS bounds and visible statistics exclude shadow-only skins without CPU-skinning them
+PASS visible skinned geometry still measures its actual moved bones
+PASS pose bounds include all eight transformed corners and cache unchanged local geometry
+PASS axes use the model world position and orientation inside its stage holder
+PASS stage teardown releases overlays, floor materials and hidden grid texture
+PASS point and line geometry do not inflate the triangle count
+PASS marine focus fits the real prone rig instead of a fixed upright box
+PASS marine bounds measurement is throttled while joint centers follow every frame
+PASS head and hands bookmarks follow posed world joints during a dive
+PASS hands bookmark widens for separated grips without per-frame breathing zoom
+PASS follow state retains an anatomical bookmark through sheet-style camera changes
+PASS a corrupt joint transform cannot poison the camera bookmark
+PASS restored turntable yaw updates its internal spin before the next tick
+RESULT 37 runtime checks passed
+
+$ node review/inspector-audit-GP19919/runtime/api.test.mjs
+PASS versioned capabilities and JSON session recipe are discoverable
+PASS session round trip restores selection, kit, clock, view and holds
+PASS invalid recipes are rejected before any mutation
+PASS prototype keys cannot enter imported recipes
+PASS camera setters return the requested immediate view and reject NaN
+PASS stepAsync resolves only after all requested frames have run
+PASS zero async steps is a no-op and moves require the live marine
+PASS failed recipe application restores the previous review settings
+PASS catalog checks test every variant and zombie statue geometry, then restore prior recipe
+PASS unmatched catalog filters and invalid bounds fail before changing the stage
+PASS runtime errors during a check make that variant fail
+PASS screenshot jobs lock mutations but keep getters readable
+PASS cancelled screenshot rejects and releases the lock
+PASS cancelled catalog batch restores the previous subject, kit and holds
+PASS turnaround sheets freeze the pose and restore play/follow/view
+PASS turnaround sheets retain the anatomical follow bookmark
+PASS old schema-one recipes remain valid while invalid follow states reject before mutation
+PASS sheet bounds prevent accidental unbounded canvases and loops
+PASS contact sheets retain variant IDs and restore the original selection
+PASS notes include a reproducible session recipe
+PASS note HTTP and endpoint errors are never reported as success
+PASS named head probes use posed head position and actual classifier metadata
+PASS standalone model switches and turntable survive recipe round trip
+PASS model setters enforce toggle/select types and stage lock
+PASS unsupported model switch restores prior variant and switch values
+PASS invalid model JSON rejects before any stage mutation and old recipes still load
+PASS geometry smoke checks suppress history and restore its flag after cancel
+PASS the eight canonical catalog switches have stable unique IDs
+PASS paused model yaw survives restore and old recipes without yaw remain supported
+PASS held screenshots draw, fence and publish current pixels before returning; repeated holds are idempotent
+PASS a failed held-frame draw resumes rendering and rejects instead of saving stale pixels
+PASS a failed GPU presentation fence resumes rendering and releases the job lock
+PASS held-frame presentation works with renderers that have no GPU fence method
+PASS cancelling a GPU presentation wait resumes the loop promptly
+PASS GPU presentation has a real 15-second wall timeout and restores the loop on timeout
+PASS a failed held pixel copy clears the presentation, resumes and rejects
+PASS cancellation after publishing a held copy removes it before resuming
+RESULT 37 API checks passed
+
+$ node review/inspector-audit-GP19919/runtime/presentation.test.mjs
+PASS held surface reads the actual renderer canvas before appending beneath the inspector
+PASS replace and clear remove the held DOM canvas and release its backing memory
+PASS held allocation rejects excessive, empty or non-finite pixels before creating a canvas
+PASS held placement rejects invisible and non-finite viewport rectangles
+PASS failed GPU readback never publishes a stale surface and releases its memory
+RESULT 5 held presentation checks passed

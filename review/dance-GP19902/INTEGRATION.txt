@@ -1,0 +1,51 @@
+GP-19902 — marine dance for Claude's intro
+
+DELIVERIES
+marine-dance.mp4: 60-second staged preview, with the music already synchronized.
+marine-dance-transparent.webm: same 60-second performance, silent RGBA overlay.
+audio-dance-60s.mp3: soundtrack for the transparent overlay.
+outfit.json: wardrobe read from Jerry's own Grave Shift Edge profile, plus the full training kit.
+../../ui/disclaimer-dance.js: deterministic, seekable motion source using the actual marine joints.
+
+TIMING
+The excerpt begins 9.151494 seconds into Been Warned.mp3. The animation starts on
+that excerpt's first beat; use the supplied cut at t=0, not the full track at t=0.
+60 seconds total; approximately 103.322299 BPM. Thirteen 8-beat phrases. Footwork
+builds into downrock at 18.583s, kick-up/freeze at 37.165s, shoulder roll/spins at
+41.811s, recovery at 51.102s and the last pose at 55.748s. Music fades58.8–60s.
+audio-timeline.json contains every beat and source-time mapping.
+
+INTRO INTEGRATION
+For the simplest first screen, play the MP4 in the intro's existing media area.
+It already contains music; do not play the MP3 simultaneously.
+The transparent WebM is for layering over Claude's own backdrop and disclaimer.
+It contains no music. Start it with the supplied MP3 from the same user gesture;
+keep audio.currentTime as the clock and resync video on seek/resume, or mux the
+supplied audio into the WebM if the intro will use a single media element.
+Handle the existing skip/stop/mute controls and pause audio along with the clip.
+Use the intro's normal play gesture and handle a rejected video.play() promise.
+
+No disclaimer copy is baked into either video, so Claude can place and revise
+the text independently. The prerecorded clip does not need the game to boot or
+the marine factory to run before the first screen appears. It has no new CDN or
+package dependency. The live game and Claude's intro files were not modified.
+
+LIVE / FUTURE WARDROBE OPTION
+import {createDisclaimerDance, DISCLAIMER_DANCE} from './ui/disclaimer-dance.js';
+const actor = TT.makeMarine();
+TT.dressMarine(actor, desiredWardrobe); // fresh actor, not the live player
+// Apply desired gear visibility to actor.userData.gearParts, as capture.mjs does.
+const dance = createDisclaimerDance(actor);
+presentationScene.add(dance.root);
+dance.sample(audio.currentTime); // same result regardless of prior sample order
+// Renderer, stage, audio, lifecycle and resource ownership remain with caller.
+// Do not dispose shared factory materials or detach the real gameplay marine.
+
+RENDER / VERIFY
+node review/dance-GP19902/capture.mjs --render --outfit review/dance-GP19902/outfit.json --camera 1.9,1.65,4.1 --look 0,.78,0 --fov 34 --out review/dance-GP19902/frames
+node review/dance-GP19902/encode.mjs
+Use --alpha and --out review/dance-GP19902/frames-alpha for the transparent pass,
+then encode.mjs --alpha. Both encoders require1800 contiguous30fps1280x720 frames.
+The native harness uses tools/camera.mjs and an isolated browser profile.
+The encoder's verification JSON checks frame count, duration, audio alignment
+and (for WebM) the decoded alpha channel. Intermediate PNG frames are disposable.

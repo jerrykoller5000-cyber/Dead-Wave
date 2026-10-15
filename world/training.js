@@ -33,8 +33,12 @@
 //   propSolids(THREE, root, floorY, opts?) -> [box]   CL-158: the still meshes' boxes, for the solids (the HQ copies too)
 
 import { partitionTrainingShell } from './training-cutaway.js';
+import { buildFiringLine } from './training-firing-line.js';
+import { isTrainingBorderCell, trainingBorderPaintRect } from '../game/training-perimeter.js';
 import { dressTrainingProps } from './training-props.js';   // GP-168
 import { bakeStatic } from './bake.js';   // CL-117
+import { dressTrainingWear } from './training-wear.js';   // GB-159
+import { dressBuildWear } from './training-build-wear.js';   // GB-162
 
 export const TRAINING = Object.freeze({
   ORIGIN: Object.freeze({ x: 0, y: -200, z: -640 }),   // past the map's edge (the land ends at 220 m)
@@ -86,6 +90,10 @@ export function scoreZone(u, v) {
   if (dc <= A.chest.bull) return { zone: 'bull', points: S.bull };
   if (dc <= A.chest.ring) return { zone: 'ring', points: S.ring };
   return { zone: 'plate', points: S.plate };
+}
+// +1 falls downrange (shot from the line). -1 falls back toward the line (shot from behind the plate).
+export function fallSign(playerZ, originZ, targetZ) {
+  return playerZ > originZ + targetZ ? -1 : 1;
 }
 
 // Keep a point inside the union of axis-aligned rectangles: unchanged when it is in one, otherwise moved to the
@@ -169,7 +177,8 @@ function textTex(T, text, opts = {}) {
   return canvasTex(T, w, h, (c) => {
     if (opts.bg) { c.fillStyle = opts.bg; c.fillRect(0, 0, w, h); }
     c.fillStyle = opts.color || '#1c1f22'; c.textAlign = 'center'; c.textBaseline = 'middle';
-    c.font = `${opts.weight || 'bold'} ${opts.size || 150}px Impact, "Arial Black", sans-serif`;
+    let px = opts.size || 150; const font = () => `${opts.weight || 'bold'} ${px}px Impact, "Arial Black", sans-serif`; c.font = font();
+    while (px > 10 && c.measureText && c.measureText(text).width > w * 0.9) { px -= 4; c.font = font(); }   // GB-161: every sign's words fit inside it
     c.fillText(text, w / 2, h / 2 + (opts.dy || 0));
   });
 }
@@ -266,10 +275,13 @@ export function buildTrainingGround(T, opts = {}) {
     if (len < 0.01) return;
     const cx = (x0 + x1) / 2, cz = (z0 + z1) / 2, yaw = Math.atan2(nx, nz);
     const m = add(tileUv(new T.PlaneGeometry(len, Math.min(h, H)), len, Math.min(h, H)), wallMat(len), cx, Math.min(h, H) / 2, cz); m.rotation.y = yaw; m.receiveShadow = true;
-    if (h > H) {   // CL-143: the hangar's walls: steel siding above the tiles, a steel ledge where they meet
-      const up = add(sidingUv(new T.PlaneGeometry(len, h - H), len, h - H), siding, cx, H + (h - H) / 2, cz); up.rotation.y = yaw; up.receiveShadow = true;
-      // CL-146: the ledge stands 2 cm off its wall (its back face fought the far side's tiles)
-      const ledge = add(new T.BoxGeometry(len, 0.22, 0.16), steel, cx + nx * 0.1, H, cz + nz * 0.1); ledge.rotation.y = yaw; ledge.receiveShadow = true;
+    if (h > H) {   // The siding laps the tile and sits proud of it. A shared edge on one plane flickered above the light.
+      const lap = 0.16;
+      const shy = h - H + lap;
+      const up = add(sidingUv(new T.PlaneGeometry(len, shy), len, shy), siding, cx + nx * 0.025, H + (h - H - lap) / 2, cz + nz * 0.025);
+      up.rotation.y = yaw; up.receiveShadow = true;
+      const ledge = add(new T.BoxGeometry(len, 0.08, 0.06), steel, cx + nx * 0.08, H - 0.04, cz + nz * 0.08);
+      ledge.rotation.y = yaw; ledge.receiveShadow = true;
     }
     const b = add(new T.PlaneGeometry(len, 0.16), band, cx + nx * 0.004, 1.05, cz + nz * 0.004); b.rotation.y = yaw;
     const roomLamp = cx + nx * .1 < B.maxX ? buildLampMat : lampMat;
@@ -311,7 +323,9 @@ export function buildTrainingGround(T, opts = {}) {
     const top = add(tileUv(new T.PlaneGeometry(D.maxZ - D.minZ, H - 3), D.maxZ - D.minZ, H - 3), wallMat(), x, 3 + (H - 3) / 2, (D.minZ + D.maxZ) / 2);
     top.rotation.y = Math.atan2(ny, 0);
   }
-  { const up = add(sidingUv(new T.PlaneGeometry(D.maxZ - D.minZ, HB - H), D.maxZ - D.minZ, HB - H), siding, B.maxX - 0.002, H + (HB - H) / 2, (D.minZ + D.maxZ) / 2); up.rotation.y = -Math.PI / 2; }
+  { const doorW = D.maxZ - D.minZ, lap = 0.16, shy = HB - H + lap;
+    const up = add(sidingUv(new T.PlaneGeometry(doorW, shy), doorW, shy), siding, B.maxX - 0.025, H + (HB - H - lap) / 2, (D.minZ + D.maxZ) / 2);
+    up.rotation.y = -Math.PI / 2; }
   for (const z of [D.minZ, D.maxZ]) box(0.5, 3.0, 0.14, hazard, D.x, 1.5, z);
   box(0.5, 0.18, D.maxZ - D.minZ + 0.14, hazard, D.x, 3.05, (D.minZ + D.maxZ) / 2);
 
@@ -342,12 +356,12 @@ export function buildTrainingGround(T, opts = {}) {
   const keypads = [];
   for (const side of [-1, 1]) {
     const kz = D.minZ - .32;
-    box(.15, .46, .32, steel, D.x + side * .31, 1.4, kz);
-    box(.025, .12, .16, doorLamp, D.x + side * .4, 1.48, kz);
-    box(.05, .16, .14, steelLight, D.x + side * .4, 1.28, kz);
-    const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * .4255, 1.28, kz);
+    box(.15, .46, .32, steel, D.x + side * .10, 1.4, kz); // back flush with the wall face
+    box(.025, .12, .16, doorLamp, D.x + side * .19, 1.48, kz);
+    box(.05, .16, .14, steelLight, D.x + side * .19, 1.28, kz);
+    const face = add(new T.PlaneGeometry(.13, .15), keypadFace, D.x + side * .2155, 1.28, kz);
     face.rotation.y = side * Math.PI / 2;
-    keypads.push({ side, x: O.x + D.x + side * .4, y: O.y + 1.3, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
+    keypads.push({ side, x: O.x + D.x + side * .19, y: O.y + 1.3, z: O.z + kz, front: W(D.x + side * 1.0, kz) });
   }
   box(.55, .14, D.maxZ - D.minZ + .22, steel, D.x, 3.2, doorZ);
   const doorSolid = { minX: O.x+D.x-.18, maxX: O.x+D.x+.18, minY: O.y, maxY: O.y+3,
@@ -374,8 +388,8 @@ export function buildTrainingGround(T, opts = {}) {
     // Painted stencil on the back wall of the range. Matte, and tight to the tile.
     const tex = keep(paintStencilTex(T, 'PGB RANGE'));
     const m = add(new T.PlaneGeometry(7.4, 1.7), std({
-      color: 0xffffff, map: tex, transparent: true, roughness: 0.96, metalness: 0, depthWrite: false
-    }), 0, 4.05, R.minZ + 0.015);
+      color: 0xffffff, map: tex, transparent: true, roughness: 0.96, metalness: 0, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+    }), 0, 4.05, R.minZ + 0.04);
     m.rotation.y = 0;
     m.name = 'pgb-range-stencil';
   }
@@ -391,6 +405,9 @@ export function buildTrainingGround(T, opts = {}) {
     const n = sign(String(i + 1), 0.7, 0.7, lx, 0.014, TRAINING.LINE_Z + 1.1, 0, { w: 256, h: 256, color: '#9c7600', size: 200 });
     n.rotation.set(-Math.PI / 2, 0, Math.PI);
   });
+  // GP-19907: continuous firing bench and upper mesh; the open middle is for weapons, not bodies.
+  const firingLine = buildFiringLine(T, {root:g,origin:O,range:R,height:H,box,std,keep,steel,steelLight,hazard});
+  solids.push(...firingLine.solids);
   // A rubber backstop across the far end.
   box(R.maxX - R.minX - 0.4, 3.8, 0.5, std({ color: 0x24282b, roughness: 0.95 }), 0, 1.9, R.maxZ - 0.3);   // CL-144: over the doubled plates
   solids.push({minX:O.x+R.minX+.2,maxX:O.x+R.maxX-.2,minY:O.y,maxY:O.y+3.8,minZ:O.z+R.maxZ-.55,maxZ:O.z+R.maxZ-.05,backstop:true});
@@ -439,16 +456,17 @@ export function buildTrainingGround(T, opts = {}) {
     for (const s of [-1, 1]) box(0.05, 0.5, 0.05, steelLight, s * 0.35, 0.25, 0, pivot);   // two more uprights under its shoulders
     const plate = add(new T.PlaneGeometry(PLATE.w, PLATE.h), plateMat, 0, PLATE.y, 0, pivot);
     plate.rotation.y = Math.PI; plate.castShadow = true; plate.name = 'target-plate';
-    const t = { lane: i + 1, range: TRAINING.RANGES[i], state: 'up', t: 0, hits: 0, pivot, plate, x: lx, z };
+    const t = { lane: i + 1, range: TRAINING.RANGES[i], state: 'up', t: 0, hits: 0, fall: 1, pivot, plate, x: lx, z };
     t.box = { minX: O.x + lx - PLATE.w / 2, maxX: O.x + lx + PLATE.w / 2, minY: O.y + PIVOT_Y + PLATE.y - PLATE.h / 2, maxY: O.y + PIVOT_Y + PLATE.y + PLATE.h / 2,
       minZ: O.z + z - 0.07, maxZ: O.z + z + 0.07 };
     return t;
   });
   const DOWN_A = 1.45;
-  function hitTarget(i) {
+  function hitTarget(i, away) {
     const t = targets[i];
     if (!t || t.state !== 'up') return false;
     t.state = 'falling'; t.t = 0; t.hits++;
+    t.fall = away < 0 ? -1 : 1;
     return true;
   }
   // CL-144: where on its plate a world point is (PLATE_ART units), and what a hit there scores (null: off the silhouette,
@@ -461,7 +479,7 @@ export function buildTrainingGround(T, opts = {}) {
   function onPlate(i, p) { const q = plateUV(i, p); return !!q && onSilhouette(q.u, q.v); }
   function scoreHit(i, p) {
     const t = targets[i]; if (!t) return null;
-    const mult = TRAINING.LANE_MULT[i] || 1;
+    const mult = TRAINING.LANE_MULT[t.lane-1] || 1;
     const z = p ? (() => { const q = plateUV(i, p); return scoreZone(q.u, q.v); })() : { zone: 'plate', points: TRAINING.SCORE.plate };
     if (!z) return null;
     return { ...z, mult, total: Math.round(z.points * mult), lane: t.lane, range: t.range };
@@ -473,13 +491,13 @@ export function buildTrainingGround(T, opts = {}) {
       t.t += dt;
       if (t.state === 'falling') {
         const u = Math.min(1, t.t / TRAINING.FALL_S);
-        t.pivot.rotation.x = DOWN_A * u * u;
+        t.pivot.rotation.x = t.drillControlled ? (t.drillFrom||0)+(DOWN_A-(t.drillFrom||0))*u*u : (t.fall || 1) * DOWN_A * u * u;
         if (u >= 1) { t.state = 'down'; t.t = 0; }
       } else if (t.state === 'down') {
-        if (t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }
+        if (!t.drillControlled && t.t >= TRAINING.DOWN_S) { t.state = 'rising'; t.t = 0; }
       } else if (t.state === 'rising') {
         const u = Math.min(1, t.t / TRAINING.RISE_S), e = 1 - (1 - u) * (1 - u);
-        t.pivot.rotation.x = DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06;
+        t.pivot.rotation.x = t.drillControlled ? (t.drillFrom??DOWN_A)*(1-e)-Math.sin(u*Math.PI)*.06 : (t.fall || 1) * (DOWN_A * (1 - e) - Math.sin(u * Math.PI) * 0.06);
         if (u >= 1) { t.state = 'up'; t.t = 0; t.pivot.rotation.x = 0; }
       }
     }
@@ -518,6 +536,13 @@ export function buildTrainingGround(T, opts = {}) {
     }
   };
   releaseGate.setState({});
+
+  // GB-159 (Jerry): the place has been used: worn paint, pocks and patches, grime and rust, tired props, a flickering
+  // strip, faded signs (world/training-wear.js). Visual only; its decals stay out of the solids below.
+  const wear = dressTrainingWear(T, { R, B, bedAt, add, box, std, lampMat, root: g,
+    texture: (w, h, draw) => keep(canvasTex(T, w, h, draw)) });
+  // GB-162 (Jerry): the build room's history: minigun holes, old blood, acid, burns, webs (world/training-build-wear.js).
+  const buildWear = dressBuildWear(T, { B, D, gate, add, std, texture: (w, h, draw) => keep(canvasTex(T, w, h, draw)) });
 
   // --- CL-143: the hangar. The build room's walls go up to HANGAR_H; steel columns stand along them under roof trusses
   // every 6 m, with high-bay lamps hung from the trusses (lampMat: the light switch puts them out with the strips) and a
@@ -589,19 +614,27 @@ export function buildTrainingGround(T, opts = {}) {
   const refusal = (gx, gz) => {
     if (gx < minGX || gx > maxGX || gz < minGZ || gz > maxGZ) return 'outside';
     if (gateDist(gc(gx), gc(gz)) <= clear) return 'gate';
-    // Wall-adjacent cells fit; occupied support-column cells do not.
+    // Jerry GP-19897: reserve one whole cell along every wall, including access openings.
     const x = gc(gx), z = gc(gz), h = grid / 2;
     if (solids.some(s => s.column && x + h > s.minX && x - h < s.maxX && z + h > s.minZ && z - h < s.maxZ)) return 'column';
     if (inLocalRect(gx, gz, B.maxX - grid - 0.1, B.maxX, D.minZ - 0.3, D.maxZ + 0.3)) return 'door';
     if (inLocalRect(gx, gz, B.minX, B.minX + 1.8, -5.2, 4.4)) return 'terminal';
     if (inLocalRect(gx, gz, BAY.minX, BAY.maxX, BAY.minZ, BAY.maxZ)) return 'infirmary';
+    if (isTrainingBorderCell({minGX,maxGX,minGZ,maxGZ}, gx, gz)) return 'outside';
     return null;
   };
   const gateCells = [];
   for (let gx = minGX; gx <= maxGX; gx++) for (let gz = minGZ; gz <= maxGZ; gz++) if (refusal(gx, gz) === 'gate') gateCells.push([gx, gz]);
+  const medicalPaint = {minX:O.x+BAY.minX,maxX:O.x+BAY.maxX,minZ:O.z+BAY.minZ,maxZ:O.z+BAY.maxZ};
+  const paintGrid = {grid,offset,minGX,maxGX,minGZ,maxGZ};
+  const paintCells = gateCells.slice(), painted = new Set(gateCells.map(([x,z])=>x+','+z));
+  for(let gx=minGX;gx<=maxGX;gx++)for(let gz=minGZ;gz<=maxGZ;gz++) {
+    if(!isTrainingBorderCell(paintGrid,gx,gz)||!trainingBorderPaintRect(paintGrid,gx,gz,medicalPaint)||painted.has(gx+','+gz))continue;
+    paintCells.push([gx,gz]);
+  }
   // The paint: one mesh of squares, the stripes running on across them (their uvs are world positions), a yellow
   // edge round the outside of the zone, and NO BUILD ZONE stencilled in front of it.
-  if (gateCells.length) {
+  if (paintCells.length) {
     const stripeTex = keep(canvasTex(T, 128, 128, (c, w) => {
       c.fillStyle = '#f2c418'; c.fillRect(0, 0, w, w);
       c.fillStyle = '#17191b';
@@ -611,10 +644,12 @@ export function buildTrainingGround(T, opts = {}) {
     }, [1, 1]));
     const PERIOD = 1.2;   // metres per repeat of the canvas (two stripes)
     const pos = [], uv = [], idx = [];
-    const inZone = new Set(gateCells.map(([a, b]) => a + ',' + b));
+    const inZone = new Set(paintCells.map(([a, b]) => a + ',' + b));
     const inset = 0.035;   // a hair of bare floor between squares: the lattice still reads through the paint
-    for (const [gx, gz] of gateCells) {
-      const x0 = gc(gx) - O.x - grid / 2 + inset, x1 = x0 + grid - 2 * inset, z0 = gc(gz) - O.z - grid / 2 + inset, z1 = z0 + grid - 2 * inset;
+    for (const [gx, gz] of paintCells) {
+      const rect = trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);
+      if (!rect) continue;
+      const x0=rect.x0-O.x,x1=rect.x1-O.x,z0=rect.z0-O.z,z1=rect.z1-O.z;
       const k = pos.length / 3;
       for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, 0.007, z); uv.push((x + O.x) / PERIOD, -(z + O.z) / PERIOD); }
       idx.push(k, k + 2, k + 1, k, k + 3, k + 2);
@@ -628,12 +663,14 @@ export function buildTrainingGround(T, opts = {}) {
     paint.receiveShadow = true; paint.name = 'training-no-build-paint';
     // the outer edge: a yellow line along every side of a zone square that meets a buildable square
     const edgeMat = std({ color: 0xf2c418, roughness: 0.55 });
-    for (const [gx, gz] of gateCells) {
-      const cx = gc(gx) - O.x, cz = gc(gz) - O.z, h = grid / 2;
+    for (const [gx, gz] of paintCells) {
+      const rect=trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);
+      if(!rect)continue;
+      const cx=(rect.x0+rect.x1)/2-O.x,cz=(rect.z0+rect.z1)/2-O.z,w=rect.x1-rect.x0,d=rect.z1-rect.z0;
       for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const ngx = gx + dx, ngz = gz + dz;
         if (inZone.has(ngx + ',' + ngz) || ngx < minGX || ngx > maxGX || ngz < minGZ || ngz > maxGZ) continue;
-        const e = add(new T.PlaneGeometry(dx ? 0.1 : grid, dx ? grid : 0.1), edgeMat, cx + dx * (h - 0.05), 0.008, cz + dz * (h - 0.05));
+        const e = add(new T.PlaneGeometry(dx ? Math.min(.1,w) : w, dx ? d : Math.min(.1,d)), edgeMat, cx + dx * Math.max(0,w/2-.05), 0.008, cz + dz * Math.max(0,d/2-.05));
         e.rotation.x = -Math.PI / 2; e.receiveShadow = true;
       }
     }
@@ -666,6 +703,7 @@ export function buildTrainingGround(T, opts = {}) {
     lampMat.color.setHex(lit ? 0xffffff : 0x50565b);   // white with no glow still catches the night's light like a lit tube
     buildLampMat.color.copy(lampMat.color);buildLampMat.emissiveIntensity=lampMat.emissiveIntensity;
     pilotMat.emissiveIntensity = lit ? 0 : 1.8;
+    wear.update(0, lit);   // GB-161: the flickering strip goes out (and comes back) with the rest at once
     lever.rotation.x = lit ? -0.5 : 0.5;   // up is on
     cutaway?.syncMaterials();
     return lit;
@@ -684,7 +722,7 @@ export function buildTrainingGround(T, opts = {}) {
   };
   const inset = 0.42;
   const walk = [
-    { minX: O.x + R.minX + inset, maxX: O.x + R.maxX - 0.8, minZ: O.z + R.minZ + inset, maxZ: O.z + R.maxZ - 0.9 },
+    { minX: O.x + R.minX + inset, maxX: O.x + R.maxX - 0.8, minZ: O.z + R.minZ + inset, maxZ: O.z + firingLine.front - inset },
     { minX: O.x + B.maxX - inset - 0.05, maxX: O.x + R.minX + inset + 0.05, minZ: O.z + D.minZ + inset, maxZ: O.z + D.maxZ - inset },
     { minX: O.x + B.minX + 0.8, maxX: O.x + B.maxX - inset, minZ: O.z + B.minZ + inset, maxZ: O.z + B.maxZ - 0.75 }
   ];
@@ -700,8 +738,40 @@ export function buildTrainingGround(T, opts = {}) {
   // shelving, the panel, the door frame and keypads ... each still mesh's box, up to head height (the roof and its lamps
   // stay out of the aim ray coming down from the camera).
   {
-    const notProps = new Set([voidBox, outer, rangeFloor, buildFloor, shutter, lever, passageFloor, passageRoof, ...releaseProps.gateLeaves, ...targets.map((t) => t.pivot)]);
+    const notProps = new Set([firingLine.group, voidBox, outer, rangeFloor, buildFloor, shutter, lever, passageFloor, passageRoof, ...releaseProps.gateLeaves, ...targets.map((t) => t.pivot), ...wear.decals, ...wear.dead, wear.flicker, ...buildWear.decals]);
+    if (wear.door) { notProps.add(wear.door.pivot); wear.door.pivot.traverse((o) => notProps.add(o)); }   // GB-161: its own solid, it moves
     for (const s of propSolids(T, g, O.y, { skip: (o) => notProps.has(o) })) solids.push(s);
+  }
+  // GB-161 (Jerry: he walked through the lockers): the bank blocks him (keepOut, index.html trainingKeepPlayer), and the
+  // dented door is a solid that follows its swing, so a round finds it (hitDoor) as a blade does (cutDoor).
+  const wearBlock = wear.blockers.map((b) => ({ minX: b.minX + O.x, maxX: b.maxX + O.x, minY: b.minY + O.y, maxY: b.maxY + O.y, minZ: b.minZ + O.z, maxZ: b.maxZ + O.z, prop: true, block: true }));
+  const lockerSolid = wear.door ? { lockerDoor: true, prop: true } : null;
+  const syncDoor = () => { if (!lockerSolid) return; const s = wear.door.solid; lockerSolid.minX = s.minX + O.x; lockerSolid.maxX = s.maxX + O.x; lockerSolid.minY = s.minY + O.y; lockerSolid.maxY = s.maxY + O.y; lockerSolid.minZ = s.minZ + O.z; lockerSolid.maxZ = s.maxZ + O.z; };
+  syncDoor(); solids.push(...wearBlock); if (lockerSolid) solids.push(lockerSolid);
+  // GB-163 (Jerry: "Remove bullet decals from lockers, add sparks instead"): the lockers and the door are steel; a round there
+  // sparks (index.html trainingRound) and leaves no hole.
+  { const k = wear.blockers[0]; for (const s of solids) if (!s.wall && s.minX >= O.x + k.minX - 0.05 && s.maxX <= O.x + k.maxX + 0.05 && s.minZ >= O.z + k.minZ - 0.05 && s.maxZ <= O.z + k.maxZ + 0.1) s.metal = true;
+    for (const s of wearBlock) s.metal = true; if (lockerSolid) lockerSolid.metal = true; }
+  let lastKeep = null;
+  function keepOut(p, r) {   // world point, his radius -> { x, z, moved }
+    let x = p.x, z = p.z, moved = false;
+    for (const b of wearBlock) {
+      if (p.y > b.maxY || x < b.minX - r || x > b.maxX + r || z < b.minZ - r || z > b.maxZ + r) continue;
+      const dl = x - (b.minX - r), dr = b.maxX + r - x, df = b.maxZ + r - z, m = Math.min(dl, dr, df);   // never back into the wall behind it
+      if (m === dl) x = b.minX - r; else if (m === dr) x = b.maxX + r; else z = b.maxZ + r;
+      moved = true;
+    }
+    if (wear.door) wear.bumpDoor(x - O.x, z - O.z, r, lastKeep ? x - lastKeep.x : 0, lastKeep ? z - lastKeep.z : 0);
+    lastKeep = { x, z };
+    return { x, z, moved };
+  }
+  const hitDoor = (point, dir, strength = 3.2) => (wear.door ? wear.pushDoor(point.x - O.x, point.z - O.z, dir.x, dir.z, strength) : 0);
+  function cutDoor(from, dir, reach) {   // a blade swung from `from` along `dir` (world): true when it caught the door
+    if (!wear.door) return false;
+    const d = wear.door, cx = O.x + d.hx + Math.cos(d.angle) * d.w * 0.6, cz = O.z + d.hz + Math.sin(d.angle) * d.w * 0.6;
+    const dx = cx - from.x, dz = cz - from.z, len = Math.hypot(dx, dz), dl = Math.hypot(dir.x, dir.z) || 1;
+    if (len > reach + 0.35 || (dx * dir.x + dz * dir.z) / (len * dl || 1) < 0.3) return false;
+    wear.pushDoor(cx - O.x, cz - O.z, dir.x, dir.z, 2.4); return true;
   }
 
   // CL-117: the still parts (frames, pegs, the bed, the gate's bars, the lamp strips) baked to one mesh per material;
@@ -715,7 +785,10 @@ export function buildTrainingGround(T, opts = {}) {
     // CU-120 (Jerry): two feet behind the firing line, facing downrange (+z), not the back wall.
     gate: W(gate.x, gate.z), spawn: { ...W(0, TRAINING.LINE_Z - 0.61), yaw: 0 },
     build: { grid, offset, minGX, maxGX, minGZ, maxGZ, refusal, gateCells },   // CL-143
-    targets, hitTarget, resetTargets, update, setLights, lightsOn: () => lit, plateUV, onPlate, scoreHit,   // CL-144
+    wear: { parts: wear.parts, flicker: wear.flicker, dead: wear.dead, door: wear.door, doorSolid: lockerSolid, hitDoor, cutDoor, kickDoor: wear.kickDoor },   // GB-159, GB-161
+    keepOut,   // GB-161
+    buildWear: { parts: buildWear.parts, mounts: buildWear.mounts },   // GB-162
+    targets, hitTarget, resetTargets, update: (dt) => { update(dt); wear.update(dt, lit); syncDoor(); }, setLights, lightsOn: () => lit, plateUV, onPlate, scoreHit,   // CL-144
     // Inside the training ground's footprint (and a margin): the floor height, for every body and drop.
     floorAt: (x, z) => (Math.abs(x - (O.x + 9)) < 75 && Math.abs(z - (O.z + 9)) < 75 ? O.y : null),
     dispose() {

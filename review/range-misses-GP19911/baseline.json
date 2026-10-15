@@ -1,0 +1,1607 @@
+{
+  "cases": [
+    {
+      "weapon": "pistol",
+      "lane": 0,
+      "zone": "head",
+      "point": [
+        6,
+        -197.45,
+        -632
+      ],
+      "view": [
+        -2.3240601611909212e-8,
+        1.4407834191847674e-8,
+        0.9923079237217458
+      ],
+      "aim": [
+        5.999999833168795,
+        -197.45000006505796,
+        -632
+      ],
+      "effective": [
+        5.999999833168795,
+        -197.45000006505796,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.33745605185429506
+      },
+      "ots": {
+        "on": true,
+        "w": 0.9999999999999986,
+        "yaw": 0.4059343527120306,
+        "pitch": 0.08277679002913081,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.2614836740374056,
+            -198.89799627926618,
+            -639.9736020179439
+          ],
+          "dir": [
+            0.320714502471733,
+            0.16984868817692422,
+            0.931822746571947
+          ],
+          "packet": null,
+          "event": 3,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333334114,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.7,
+            "y": -196.54738173079232,
+            "z": -627.0776760723206
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "pistol",
+      "lane": 0,
+      "zone": "bull",
+      "point": [
+        6,
+        -198.4,
+        -632
+      ],
+      "view": [
+        0,
+        -9.693809706348073e-9,
+        0.9922877314501127
+      ],
+      "aim": [
+        5.999999999999353,
+        -198.39999996012898,
+        -632
+      ],
+      "effective": [
+        5.999999999999353,
+        -198.39999996012898,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.33745606922771587
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": 0.4059343696673421,
+        "pitch": -0.022120754368565893,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.2682306836268,
+            -198.9440152761883,
+            -639.9728405331526
+          ],
+          "dir": [
+            0.32242397900360303,
+            0.0638731781881774,
+            0.9444379253670543
+          ],
+          "packet": null,
+          "event": 4,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333331761,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.700000000000001,
+            "y": -198.06606819511703,
+            "z": -626.99138973723
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "pistol",
+      "lane": 2,
+      "zone": "head",
+      "point": [
+        0,
+        -197.45,
+        -624
+      ],
+      "view": [
+        7.969706433548235e-11,
+        1.3098021074825926e-12,
+        0.995594020664389
+      ],
+      "aim": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "effective": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172632694282
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.1424518486222966,
+        "pitch": 0.044591300969174574,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.95554790051021,
+            -198.92415782483573,
+            -639.9199662463625
+          ],
+          "dir": [
+            -0.18117053077294415,
+            0.08843317608451935,
+            0.9794676166913606
+          ],
+          "packet": null,
+          "event": 5,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333331761,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -2.476966950374997,
+            "y": -196.27243218082253,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "pistol",
+      "lane": 2,
+      "zone": "bull",
+      "point": [
+        0,
+        -198.4,
+        -624
+      ],
+      "view": [
+        0,
+        -1.4410803241730437e-11,
+        0.9955900221414815
+      ],
+      "aim": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "effective": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172637814517
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.14245184867382157,
+        "pitch": -0.01189833964405224,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.938043869902993,
+            -198.95036339589,
+            -639.9194496516636
+          ],
+          "dir": [
+            -0.18173228879252906,
+            0.033706615607346765,
+            0.9827701863988993
+          ],
+          "packet": null,
+          "event": 6,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333331761,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -2.492907719431621,
+            "y": -197.94306304865893,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "pistol",
+      "lane": 4,
+      "zone": "head",
+      "point": [
+        -6,
+        -197.45,
+        -615
+      ],
+      "view": [
+        1.823298155937192e-13,
+        5.229081503819872e-14,
+        0.9973306731419858
+      ],
+      "aim": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "effective": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102662444
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.315788605250725,
+        "pitch": 0.027686908156366503,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.8508138488355685,
+            -198.9446679607849,
+            -639.9318694860154
+          ],
+          "dir": [
+            -0.3352639471633328,
+            0.05817024316846434,
+            0.9403267030889764
+          ],
+          "packet": null,
+          "event": 7,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333331761,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "down"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -7.624993662064541,
+            "y": -197.1270544790758,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "pistol",
+      "lane": 4,
+      "zone": "bull",
+      "point": [
+        -6,
+        -198.4,
+        -615
+      ],
+      "view": [
+        -1.7206459198485778e-15,
+        -6.056673637866994e-14,
+        0.9973295998755153
+      ],
+      "aim": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "effective": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102668334
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.31578860525083813,
+        "pitch": -0.007384928394063108,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.8520801416926753,
+            -198.96991213549614,
+            -639.9275079525726
+          ],
+          "dir": [
+            -0.3349508551815989,
+            0.02169189403636558,
+            0.9419858737508916
+          ],
+          "packet": null,
+          "event": 8,
+          "life": 0.5333333333333333,
+          "speed": 75
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.8033333333331761,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "down"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -7.593959110081298,
+            "y": -198.29341176822183,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 0,
+      "zone": "head",
+      "point": [
+        6,
+        -197.45,
+        -632
+      ],
+      "view": [
+        -4.1244110987032515e-8,
+        1.9773269357818465e-8,
+        0.9923079237274127
+      ],
+      "aim": [
+        5.999999703933819,
+        -197.45000009148214,
+        -632
+      ],
+      "effective": [
+        5.999999703933819,
+        -197.45000009148214,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.3374560383960073
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": 0.40593433957748026,
+        "pitch": 0.08277678751678844,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.554046230219565,
+            -198.75856268761206,
+            -639.6346855010986
+          ],
+          "dir": [
+            0.3001081262334758,
+            0.16470330032131628,
+            0.9395785946007382
+          ],
+          "packet": null,
+          "event": 9,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.7,
+            "y": -196.4832085429822,
+            "z": -626.6545324303371
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 0,
+      "zone": "bull",
+      "point": [
+        6,
+        -198.4,
+        -632
+      ],
+      "view": [
+        4.319968873843016e-15,
+        -9.693816618298178e-9,
+        0.9922877314501127
+      ],
+      "aim": [
+        5.999999999999342,
+        -198.39999996012898,
+        -632
+      ],
+      "effective": [
+        5.999999999999342,
+        -198.39999996012898,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.33745606922771465
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": 0.4059343696673416,
+        "pitch": -0.022120754368565896,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.5549431441029773,
+            -198.86244679867988,
+            -639.6300930731776
+          ],
+          "dir": [
+            0.3049353779810073,
+            0.05911185083517267,
+            0.9505367979970163
+          ],
+          "packet": null,
+          "event": 10,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.7,
+            "y": -198.05892578976514,
+            "z": -626.7092273559654
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 2,
+      "zone": "head",
+      "point": [
+        0,
+        -197.45,
+        -624
+      ],
+      "view": [
+        7.969706433548235e-11,
+        1.3098021074825926e-12,
+        0.995594020664389
+      ],
+      "aim": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "effective": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172632694282
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.1424518486222966,
+        "pitch": 0.044591300969174574,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.0424121123828134,
+            -198.83906319127428,
+            -639.4838479957817
+          ],
+          "dir": [
+            -0.19478305998512252,
+            0.08477943282461219,
+            0.9771755253345069
+          ],
+          "packet": null,
+          "event": 11,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -2.725050644969324,
+            "y": -196.32877188851552,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 2,
+      "zone": "bull",
+      "point": [
+        0,
+        -198.4,
+        -624
+      ],
+      "view": [
+        0,
+        -1.4410803241730437e-11,
+        0.9955900221414815
+      ],
+      "aim": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "effective": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172637814517
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.14245184867382157,
+        "pitch": -0.01189833964405224,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.041060321763309,
+            -198.89952543783448,
+            -639.4704257087737
+          ],
+          "dir": [
+            -0.19170830383298956,
+            0.03486352171193557,
+            0.9808325346843464
+          ],
+          "packet": null,
+          "event": 12,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -2.6115720723500093,
+            "y": -197.8715539401917,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 4,
+      "zone": "head",
+      "point": [
+        -6,
+        -197.45,
+        -615
+      ],
+      "view": [
+        1.823298155937192e-13,
+        5.229081503819872e-14,
+        0.9973306731419858
+      ],
+      "aim": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "effective": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102662444
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.315788605250725,
+        "pitch": 0.027686908156366503,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.8715839163751835,
+            -198.88767785030737,
+            -639.4728221959663
+          ],
+          "dir": [
+            -0.3411490061975883,
+            0.058683030495689625,
+            0.9381757071584406
+          ],
+          "packet": null,
+          "event": 13,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "down"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -7.645627276897708,
+            "y": -197.07855100552044,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "lane": 4,
+      "zone": "bull",
+      "point": [
+        -6,
+        -198.4,
+        -615
+      ],
+      "view": [
+        -1.7206459198485778e-15,
+        -6.056673637866994e-14,
+        0.9973295998755153
+      ],
+      "aim": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "effective": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102668334
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.31578860525083813,
+        "pitch": -0.007384928394063108,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.8762225063613593,
+            -198.92591214681036,
+            -639.4773235154325
+          ],
+          "dir": [
+            -0.3406172779870441,
+            0.023453135890554946,
+            0.9399094745525208
+          ],
+          "packet": null,
+          "event": 14,
+          "life": 0.75,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9833333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "down"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -7.606857473195421,
+            "y": -198.2041017302482,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 0,
+      "zone": "head",
+      "point": [
+        6,
+        -197.45,
+        -632
+      ],
+      "view": [
+        -4.1244110987032515e-8,
+        1.9773269357818465e-8,
+        0.9923079237274127
+      ],
+      "aim": [
+        5.999999703933819,
+        -197.45000009148214,
+        -632
+      ],
+      "effective": [
+        5.999999703933819,
+        -197.45000009148214,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.3374560383960073
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": 0.40593433957748026,
+        "pitch": 0.08277678751678844,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.569626695891685,
+            -198.76358629964065,
+            -639.5792646961337
+          ],
+          "dir": [
+            0.30715931542571473,
+            0.15374324176744467,
+            0.9391571596692662
+          ],
+          "packet": null,
+          "event": 15,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.7,
+            "y": -196.69619993174487,
+            "z": -626.9504122868104
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 0,
+      "zone": "bull",
+      "point": [
+        6,
+        -198.4,
+        -632
+      ],
+      "view": [
+        4.319968873843016e-15,
+        -9.693816618298178e-9,
+        0.9922877314501127
+      ],
+      "aim": [
+        5.999999999999342,
+        -198.39999996012898,
+        -632
+      ],
+      "effective": [
+        5.999999999999342,
+        -198.39999996012898,
+        -632
+      ],
+      "safe": {
+        "self": false,
+        "yaw": 0.33745606922771465
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": 0.4059343696673416,
+        "pitch": -0.022120754368565896,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.5752307705940987,
+            -198.8812978502949,
+            -639.5729216738197
+          ],
+          "dir": [
+            0.30842727545796916,
+            0.061134771965911154,
+            0.9492813889517956
+          ],
+          "packet": null,
+          "event": 16,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "down",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": 7.699999999999999,
+            "y": -198.06370859565683,
+            "z": -626.8776545078986
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 2,
+      "zone": "head",
+      "point": [
+        0,
+        -197.45,
+        -624
+      ],
+      "view": [
+        7.969706433548235e-11,
+        1.3098021074825926e-12,
+        0.995594020664389
+      ],
+      "aim": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "effective": [
+        8.744729385057326e-10,
+        -197.45000000001397,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172632694282
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.1424518486222966,
+        "pitch": 0.044591300969174574,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.0281336836215287,
+            -198.8662003496554,
+            -639.4210151958641
+          ],
+          "dir": [
+            -0.1951432900892137,
+            0.10371676074987529,
+            0.9752753097831967
+          ],
+          "packet": null,
+          "event": 17,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333336476,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": -2.7987037837621234,
+            "y": -195.76929290663364,
+            "z": -610.3
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 2,
+      "zone": "bull",
+      "point": [
+        0,
+        -198.4,
+        -624
+      ],
+      "view": [
+        0,
+        -1.4410803241730437e-11,
+        0.9955900221414815
+      ],
+      "aim": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "effective": [
+        -7.700506898800086e-13,
+        -198.39999999990215,
+        -624
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.17932172637814517
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.14245184867382157,
+        "pitch": -0.01189833964405224,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            3.0306213011860605,
+            -198.93159748276622,
+            -639.4078004621816
+          ],
+          "dir": [
+            -0.1922977626512897,
+            0.02505211890198702,
+            0.9810167999671713
+          ],
+          "packet": null,
+          "event": 18,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333333276,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 1,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "down",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "backstop"
+          ],
+          "point": {
+            "x": -2.62605090269525,
+            "y": -198.19465898339232,
+            "z": -610.55
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 4,
+      "zone": "head",
+      "point": [
+        -6,
+        -197.45,
+        -615
+      ],
+      "view": [
+        1.823298155937192e-13,
+        5.229081503819872e-14,
+        0.9973306731419858
+      ],
+      "aim": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "effective": [
+        -5.999999999998879,
+        -197.44999999999976,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102662444
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.315788605250725,
+        "pitch": 0.027686908156366503,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.8464052335343775,
+            -198.90728679675243,
+            -639.4083265233824
+          ],
+          "dir": [
+            -0.34839129310903066,
+            0.06654013532929985,
+            0.9349844476119248
+          ],
+          "packet": null,
+          "event": 19,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333327021,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 0,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": -7.7,
+            "y": -196.8930021537163,
+            "z": -611.1047349394167
+          }
+        }
+      ]
+    },
+    {
+      "weapon": "ak",
+      "lane": 4,
+      "zone": "bull",
+      "point": [
+        -6,
+        -198.4,
+        -615
+      ],
+      "view": [
+        -1.7206459198485778e-15,
+        -6.056673637866994e-14,
+        0.9973295998755153
+      ],
+      "aim": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "effective": [
+        -6.000000000000573,
+        -198.39999999999978,
+        -615
+      ],
+      "safe": {
+        "self": false,
+        "yaw": -0.33867830102668334
+      },
+      "ots": {
+        "on": true,
+        "w": 0.999999999999999,
+        "yaw": -0.31578860525083813,
+        "pitch": -0.007384928394063108,
+        "locked": false,
+        "fov": 38,
+        "tilt": 0
+      },
+      "shots": [
+        {
+          "from": [
+            2.856437442515314,
+            -198.94810537703165,
+            -639.4187525859495
+          ],
+          "dir": [
+            -0.3542634060041497,
+            0.024080255913171325,
+            0.9348355900592871
+          ],
+          "packet": null,
+          "event": 20,
+          "life": 0.7,
+          "speed": 100
+        }
+      ],
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9733333333327021,
+        "dualActive": false,
+        "akimbo": false
+      },
+      "hits": 0,
+      "range": "IDLE",
+      "states": [
+        "up",
+        "up",
+        "up",
+        "up",
+        "up"
+      ],
+      "traces": [
+        {
+          "kind": [
+            "wall"
+          ],
+          "point": {
+            "x": -7.7,
+            "y": -198.2305553539729,
+            "z": -611.5622671058145
+          }
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

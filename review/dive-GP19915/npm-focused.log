@@ -1,0 +1,8 @@
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t253    22 pass   2 fail  94.8s
+
+1 checks: 22 pass, 2 fail
+
+by owner:
+  unassigned
+    t253   2 fail  FAIL he leaves the ground (0.25 m up)

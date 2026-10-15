@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const dir='review/range-misses-GP19911';
+fs.writeFileSync(dir+'/range-feature-before.js',fs.readFileSync(dir+'/range-feature.js.before','utf8').replace(/from '\.\/(.*?)'/g,"from '/ui/$1'").replace("from '../core/audio.js'","from '/core/audio.js'"));
+fs.writeFileSync(dir+'/before.html',fs.readFileSync('index.html','utf8').replace('<head>','<head><base href="/">').replace("from './ui/range-feature.js'","from './review/range-misses-GP19911/range-feature-before.js'"));
+fs.writeFileSync(dir+'/camera-before.mjs',fs.readFileSync('tools/camera.mjs','utf8').replace("from './serve.mjs'","from '../../tools/serve.mjs'").replace("from './cdp.mjs'","from '../../tools/cdp.mjs'").replace("new URL('..', import.meta.url)","new URL('../..', import.meta.url)").replace('/index.html?debug=1&raf=timer','/'+dir+'/before.html?debug=1&raf=timer'));
+let s=fs.readFileSync(dir+'/drill-live.mjs','utf8').replace("from '../../tools/camera.mjs'","from './camera-before.mjs'").replace('/drill-live.json','/before-verified.json').replace('/wrong-zone-after.png','/wrong-zone-before.png');
+const a=s.indexOf(" for(const [weapon,id,lane,zone]of ["),b=s.indexOf("]){",a);
+s=s.slice(0,a)+" for(const [weapon,id,lane,zone]of [['pistol','bullseye',0,'head']"+s.slice(b);
+fs.writeFileSync(dir+'/native-before.mjs',s);
+let perf=fs.readFileSync('review/range-accuracy-GP19910/perf.mjs','utf8').replace("const before=process.argv.includes('--before'),{Engine}=await import(before?'../../tools/camera.mjs':'./camera.mjs');","const before=process.argv.includes('--before'),{Engine}=await import(before?'./camera-before.mjs':'../../tools/camera.mjs');").replace('review/range-accuracy-GP19910','review/range-misses-GP19911');
+fs.writeFileSync(dir+'/perf.mjs',perf);

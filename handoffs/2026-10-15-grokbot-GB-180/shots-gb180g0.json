@@ -1,0 +1,30 @@
+[
+ {
+  "target": "weapon:aa12",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g0/aa12-side.png"
+ },
+ {
+  "target": "weapon:sniper",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g0/sniper-side.png"
+ },
+ {
+  "target": "weapon:shotgun",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g0/shotgun-side.png"
+ },
+ {
+  "target": "weapon:minigun",
+  "view": "left",
+  "size": "1200x700",
+  "settle": 1500,
+  "out": "review/gb180g0/minigun-side.png"
+ }
+]

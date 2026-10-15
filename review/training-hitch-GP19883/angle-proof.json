@@ -1,0 +1,335 @@
+{
+  "checks": [
+    {
+      "name": "north",
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "gun": [
+        1,
+        1,
+        1,
+        0.05999999865889549
+      ]
+    },
+    {
+      "name": "west",
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "gun": [
+        0.05999999865889549,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "east",
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "gun": [
+        1,
+        0.05999999865889549,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "south",
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 0.06,
+          "hidden": true
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "gun": [
+        1,
+        1,
+        0.05999999865889549,
+        1
+      ]
+    },
+    {
+      "name": "inside",
+      "walls": [
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "south",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "west",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "overhead",
+          "opacity": 0,
+          "hidden": true
+        },
+        {
+          "side": "east",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "north",
+          "opacity": 1,
+          "hidden": false
+        },
+        {
+          "side": "rangeSouth",
+          "opacity": 1,
+          "hidden": false
+        }
+      ],
+      "gun": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "errors": []
+}

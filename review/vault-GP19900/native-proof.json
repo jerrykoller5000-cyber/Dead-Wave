@@ -1,0 +1,512 @@
+{
+  "cases": [
+    {
+      "type": "sandbag",
+      "started": true,
+      "v": {
+        "u": 0.4600000000000001,
+        "type": "sandbag",
+        "from": [
+          -27,
+          -200,
+          -631.4
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.3
+        ],
+        "contact": {
+          "x": -27.24,
+          "y": -198.92499999999998,
+          "z": -630.27
+        },
+        "pose": {
+          "u": 0.4600000000000001,
+          "x": -27,
+          "z": -630.4757311999999,
+          "y": -199.03764873972494,
+          "brace": 1,
+          "over": 0.9921147013144779,
+          "lead": 1,
+          "trail": 0.898390981891979,
+          "bodyHeight": 1.154336914277037,
+          "lean": 0.9921147013144779,
+          "dip": -0.26787096935490906,
+          "roll": -0.15873835221031646,
+          "thighL": -1.4,
+          "kneeL": 2.7,
+          "thighR": -1.1229887273649737,
+          "kneeR": 2.56041429839214,
+          "settle": 0
+        }
+      },
+      "p": [
+        -27,
+        -199.03764873972494,
+        -630.4757311999999
+      ],
+      "contactError": 0.040818927722728646,
+      "feet": [
+        [
+          -27.135731468393864,
+          -198.8078630692973,
+          -630.4482109408857
+        ],
+        [
+          -26.86078809590992,
+          -198.84530477348042,
+          -630.479381254143
+        ]
+      ],
+      "shoulder": [
+        -27.27565778249479,
+        -198.38764159529813,
+        -630.1056681981335
+      ],
+      "landed": {
+        "active": false,
+        "p": [
+          -27,
+          -200,
+          -629.3
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.3
+        ]
+      }
+    },
+    {
+      "type": "barricade",
+      "started": true,
+      "v": {
+        "u": 0.46,
+        "type": "barricade",
+        "from": [
+          -27,
+          -200,
+          -631.4
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.3
+        ],
+        "contact": {
+          "x": -27.24,
+          "y": -198.575,
+          "z": -630.13
+        },
+        "pose": {
+          "u": 0.46,
+          "x": -27,
+          "z": -630.4757311999999,
+          "y": -198.69040859426488,
+          "brace": 1,
+          "over": 0.9921147013144779,
+          "lead": 1,
+          "trail": 0.8983909818919789,
+          "bodyHeight": 1.154336914277037,
+          "lean": 0.9921147013144779,
+          "dip": -0.26787096935490906,
+          "roll": -0.15873835221031646,
+          "thighL": -1.4,
+          "kneeL": 2.7,
+          "thighR": -1.1229887273649735,
+          "kneeR": 2.5604142983921396,
+          "settle": 0
+        }
+      },
+      "p": [
+        -27,
+        -198.69040859426488,
+        -630.4757311999999
+      ],
+      "contactError": 0.00613309704101707,
+      "feet": [
+        [
+          -27.135731468393864,
+          -198.46062292383724,
+          -630.4482109408857
+        ],
+        [
+          -26.86078809590992,
+          -198.49806462802036,
+          -630.479381254143
+        ]
+      ],
+      "shoulder": [
+        -27.27565778249479,
+        -198.0404038424329,
+        -630.1056681981335
+      ],
+      "landed": {
+        "active": false,
+        "p": [
+          -27,
+          -200,
+          -629.2800013790504
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.3
+        ]
+      }
+    },
+    {
+      "type": "railing",
+      "started": true,
+      "v": {
+        "u": 0.45999999999999996,
+        "type": "railing",
+        "from": [
+          -27,
+          -200,
+          -631.4
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.26
+        ],
+        "contact": {
+          "x": -27.24,
+          "y": -199.255,
+          "z": -630.08
+        },
+        "pose": {
+          "u": 0.45999999999999996,
+          "x": -27,
+          "z": -630.4581260799999,
+          "y": -199.36504659115874,
+          "brace": 1,
+          "over": 0.9921147013144778,
+          "lead": 1,
+          "trail": 0.8983909818919787,
+          "bodyHeight": 1.154336914277037,
+          "lean": 0.9921147013144778,
+          "dip": -0.267870969354909,
+          "roll": -0.15873835221031646,
+          "thighL": -1.4,
+          "kneeL": 2.7,
+          "thighR": -1.1229887273649735,
+          "kneeR": 2.5604142983921396,
+          "settle": 0
+        }
+      },
+      "p": [
+        -27,
+        -199.36504659115874,
+        -630.4581260799999
+      ],
+      "contactError": 0.009355553573660117,
+      "feet": [
+        [
+          -27.135731468393864,
+          -199.1352609207311,
+          -630.4306058208857
+        ],
+        [
+          -26.86078809590992,
+          -199.17270262491422,
+          -630.4617761341431
+        ]
+      ],
+      "shoulder": [
+        -27.27565778249479,
+        -198.715031891924,
+        -630.0880630781335
+      ],
+      "landed": {
+        "active": false,
+        "p": [
+          -27,
+          -200,
+          -629.26
+        ],
+        "to": [
+          -27,
+          -200,
+          -629.26
+        ]
+      }
+    },
+    {
+      "gun": "pistol",
+      "started": true,
+      "before": {
+        "size": 12,
+        "maxSpare": 14,
+        "loaded": [
+          12,
+          12
+        ],
+        "spare": [
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12
+        ]
+      },
+      "after": {
+        "size": 12,
+        "maxSpare": 14,
+        "loaded": [
+          11,
+          12
+        ],
+        "spare": [
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12
+        ]
+      },
+      "projectiles": 0,
+      "flags": {
+        "fireHeld": true,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0.04880000001192099,
+        "dualActive": false,
+        "akimbo": false
+      }
+    },
+    {
+      "gun": "revolver",
+      "started": true,
+      "before": {
+        "size": 6,
+        "maxSpare": 8,
+        "loaded": [
+          6,
+          6
+        ],
+        "spare": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "after": {
+        "size": 6,
+        "maxSpare": 8,
+        "loaded": [
+          5,
+          6
+        ],
+        "spare": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "projectiles": 0,
+      "flags": {
+        "fireHeld": true,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0.2173000000119208,
+        "dualActive": false,
+        "akimbo": false
+      }
+    },
+    {
+      "gun": "uzi",
+      "started": true,
+      "before": {
+        "size": 32,
+        "maxSpare": 9,
+        "loaded": [
+          20,
+          32
+        ],
+        "spare": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ]
+      },
+      "after": {
+        "size": 32,
+        "maxSpare": 9,
+        "loaded": [
+          17,
+          32
+        ],
+        "spare": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ]
+      },
+      "projectiles": 2,
+      "flags": {
+        "fireHeld": true,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": 0.005528571452413283,
+        "dualActive": false,
+        "akimbo": false
+      }
+    },
+    {
+      "gun": "m4",
+      "started": true,
+      "before": {
+        "size": 30,
+        "maxSpare": 8,
+        "loaded": [
+          20
+        ],
+        "spare": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      "after": {
+        "size": 30,
+        "maxSpare": 8,
+        "loaded": [
+          20
+        ],
+        "spare": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      "projectiles": 0,
+      "flags": {
+        "fireHeld": false,
+        "mouseFireHeld": false,
+        "unarmed": false,
+        "placeMode": null,
+        "buildMode": false,
+        "blocked": false,
+        "reloading": false,
+        "fireCooldown": -0.9194999999999999,
+        "dualActive": false,
+        "akimbo": false
+      }
+    }
+  ],
+  "loadSec": 21.472,
+  "dual": {
+    "started": true,
+    "before": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        12,
+        12
+      ],
+      "spare": [
+        12
+      ]
+    },
+    "after": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        11,
+        12
+      ],
+      "spare": [
+        12
+      ]
+    },
+    "off": false,
+    "restored": true
+  },
+  "blocked": {
+    "no": false,
+    "yes": true
+  },
+  "direction": false,
+  "alarmFence": false,
+  "dynamic": {
+    "active": false,
+    "p": [
+      -27,
+      -200,
+      -631.4725056
+    ]
+  },
+  "perf": {
+    "fps": 59.91312596627757,
+    "worst": 20.099999964237213,
+    "hitches": 0,
+    "alive": 48,
+    "draws": 26681
+  },
+  "errors": []
+}

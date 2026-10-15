@@ -1,0 +1,4787 @@
+{
+  "samples": [
+    {
+      "t": 0.02419999998807907,
+      "states": [
+        {
+          "clock": 2.367533333321409,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.367533333321409,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.0905,
+      "states": [
+        {
+          "clock": 2.43383333333333,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.43383333333333,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.14129999998211862,
+      "states": [
+        {
+          "clock": 2.4846333333154487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.4846333333154487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.207,
+      "states": [
+        {
+          "clock": 2.5503333333333305,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.5503333333333305,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.273,
+      "states": [
+        {
+          "clock": 2.6163333333333303,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.6163333333333303,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.3392999999821186,
+      "states": [
+        {
+          "clock": 2.682633333315449,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.682633333315449,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.4051999999880791,
+      "states": [
+        {
+          "clock": 2.7485333333214097,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.7485333333214097,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.4552999999821186,
+      "states": [
+        {
+          "clock": 2.798633333315449,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.798633333315449,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.5053999999761581,
+      "states": [
+        {
+          "clock": 2.8487333333094886,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.8487333333094886,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.5716999999880791,
+      "states": [
+        {
+          "clock": 2.9150333333214093,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.9150333333214093,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.622,
+      "states": [
+        {
+          "clock": 2.9653333333333305,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 2.9653333333333305,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.6877999999821186,
+      "states": [
+        {
+          "clock": 3.0311333333154487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.0311333333154487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.7537999999821186,
+      "states": [
+        {
+          "clock": 3.097133333315448,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.097133333315448,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.8038999999761581,
+      "states": [
+        {
+          "clock": 3.147233333309488,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.147233333309488,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.856199999988079,
+      "states": [
+        {
+          "clock": 3.1995333333214084,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.1995333333214084,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.9221999999880791,
+      "states": [
+        {
+          "clock": 3.2655333333214083,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.2655333333214083,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 0.9725999999940396,
+      "states": [
+        {
+          "clock": 3.315933333327369,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.315933333327369,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.0225999999940396,
+      "states": [
+        {
+          "clock": 3.3659333333273693,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.3659333333273693,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.072699999988079,
+      "states": [
+        {
+          "clock": 3.4160333333214083,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.4160333333214083,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.1395,
+      "states": [
+        {
+          "clock": 3.4828333333333292,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.4828333333333292,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.2058999999761582,
+      "states": [
+        {
+          "clock": 3.5492333333094868,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.5492333333094868,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.2560999999940394,
+      "states": [
+        {
+          "clock": 3.5994333333273683,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.5994333333273683,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.307199999988079,
+      "states": [
+        {
+          "clock": 3.6505333333214076,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.6505333333214076,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.373,
+      "states": [
+        {
+          "clock": 3.716333333333328,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.716333333333328,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.4388999999761583,
+      "states": [
+        {
+          "clock": 3.7822333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.7822333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.4893999999761582,
+      "states": [
+        {
+          "clock": 3.8327333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.8327333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.5395999999940395,
+      "states": [
+        {
+          "clock": 3.882933333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.882933333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.605699999988079,
+      "states": [
+        {
+          "clock": 3.9490333333214065,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 3.9490333333214065,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.6717999999821187,
+      "states": [
+        {
+          "clock": 4.015133333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.015133333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.722,
+      "states": [
+        {
+          "clock": 4.065333333333327,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.065333333333327,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.7722999999821185,
+      "states": [
+        {
+          "clock": 4.115633333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.115633333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.837899999976158,
+      "states": [
+        {
+          "clock": 4.1812333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.1812333333094855,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.903699999988079,
+      "states": [
+        {
+          "clock": 4.247033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.247033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 1.954,
+      "states": [
+        {
+          "clock": 4.297333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.297333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.0195999999940395,
+      "states": [
+        {
+          "clock": 4.3629333333273665,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.3629333333273665,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.0702999999821188,
+      "states": [
+        {
+          "clock": 4.413633333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.413633333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.121,
+      "states": [
+        {
+          "clock": 4.464333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.464333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.1870999999940395,
+      "states": [
+        {
+          "clock": 4.530433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.530433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.2526999999880792,
+      "states": [
+        {
+          "clock": 4.5960333333214045,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.5960333333214045,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.3187999999821187,
+      "states": [
+        {
+          "clock": 4.662133333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.662133333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.3852999999821187,
+      "states": [
+        {
+          "clock": 4.728633333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.728633333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.4365,
+      "states": [
+        {
+          "clock": 4.779833333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.779833333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.5023999999761584,
+      "states": [
+        {
+          "clock": 4.845733333309485,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.845733333309485,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.5687999999821187,
+      "states": [
+        {
+          "clock": 4.912133333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.912133333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.634199999988079,
+      "states": [
+        {
+          "clock": 4.977533333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 4.977533333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.6845999999940395,
+      "states": [
+        {
+          "clock": 5.027933333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.027933333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.734699999988079,
+      "states": [
+        {
+          "clock": 5.078033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.078033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.785899999976158,
+      "states": [
+        {
+          "clock": 5.129233333309485,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.129233333309485,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.8517999999821186,
+      "states": [
+        {
+          "clock": 5.195133333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.195133333315446,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.9020999999940393,
+      "states": [
+        {
+          "clock": 5.245433333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.245433333327367,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 2.9675999999940395,
+      "states": [
+        {
+          "clock": 5.310933333327366,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.310933333327366,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.018,
+      "states": [
+        {
+          "clock": 5.361333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.361333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.0680999999940397,
+      "states": [
+        {
+          "clock": 5.411433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.411433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.118399999976158,
+      "states": [
+        {
+          "clock": 5.461733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.461733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.1685999999940395,
+      "states": [
+        {
+          "clock": 5.511933333327366,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.511933333327366,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.2345999999940394,
+      "states": [
+        {
+          "clock": 5.5779333333273655,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.5779333333273655,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.285799999982119,
+      "states": [
+        {
+          "clock": 5.629133333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.629133333315445,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.352,
+      "states": [
+        {
+          "clock": 5.695333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.695333333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.4175999999940396,
+      "states": [
+        {
+          "clock": 5.760933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.760933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.4845999999940394,
+      "states": [
+        {
+          "clock": 5.8279333333273655,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.8279333333273655,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.550399999976158,
+      "states": [
+        {
+          "clock": 5.893733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.893733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.6005,
+      "states": [
+        {
+          "clock": 5.943833333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 5.943833333333326,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.6667999999821186,
+      "states": [
+        {
+          "clock": 6.010133333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 6.010133333315444,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.717,
+      "states": [
+        {
+          "clock": 6.060333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 6.060333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.7832999999821184,
+      "states": [
+        {
+          "clock": 6.126633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 6.126633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.850199999988079,
+      "states": [
+        {
+          "clock": 6.193533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 6.193533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.900199999988079,
+      "states": [
+        {
+          "clock": 6.243533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        },
+        {
+          "clock": 6.243533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 8,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 0
+          }
+        }
+      ]
+    },
+    {
+      "t": 3.950699999988079,
+      "states": [
+        {
+          "clock": 6.294033333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        },
+        {
+          "clock": 6.294033333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.01659999999404,
+      "states": [
+        {
+          "clock": 6.359933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        },
+        {
+          "clock": 6.359933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.081199999988079,
+      "states": [
+        {
+          "clock": 6.424533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        },
+        {
+          "clock": 6.424533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.147,
+      "states": [
+        {
+          "clock": 6.490333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        },
+        {
+          "clock": 6.490333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.197099999994039,
+      "states": [
+        {
+          "clock": 6.540433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        },
+        {
+          "clock": 6.540433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 7,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 1
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.2488999999761585,
+      "states": [
+        {
+          "clock": 6.592233333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        },
+        {
+          "clock": 6.592233333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.299,
+      "states": [
+        {
+          "clock": 6.642333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        },
+        {
+          "clock": 6.642333333333325,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.365599999994039,
+      "states": [
+        {
+          "clock": 6.708933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        },
+        {
+          "clock": 6.708933333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.431399999976158,
+      "states": [
+        {
+          "clock": 6.7747333333094835,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        },
+        {
+          "clock": 6.7747333333094835,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.4821999999880795,
+      "states": [
+        {
+          "clock": 6.825533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        },
+        {
+          "clock": 6.825533333321404,
+          "domain": 1,
+          "shots": 0,
+          "trails": 6,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 2
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.547699999988079,
+      "states": [
+        {
+          "clock": 6.891033333321405,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        },
+        {
+          "clock": 6.891033333321405,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.597899999976158,
+      "states": [
+        {
+          "clock": 6.9412333333094836,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        },
+        {
+          "clock": 6.9412333333094836,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.66409999999404,
+      "states": [
+        {
+          "clock": 7.007433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        },
+        {
+          "clock": 7.007433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.73,
+      "states": [
+        {
+          "clock": 7.073333333333324,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        },
+        {
+          "clock": 7.073333333333324,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.780399999976158,
+      "states": [
+        {
+          "clock": 7.123733333309483,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        },
+        {
+          "clock": 7.123733333309483,
+          "domain": 1,
+          "shots": 0,
+          "trails": 5,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 3
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.83109999999404,
+      "states": [
+        {
+          "clock": 7.1744333333273635,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        },
+        {
+          "clock": 7.1744333333273635,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.89809999999404,
+      "states": [
+        {
+          "clock": 7.241433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        },
+        {
+          "clock": 7.241433333327365,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        }
+      ]
+    },
+    {
+      "t": 4.965299999982118,
+      "states": [
+        {
+          "clock": 7.308633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        },
+        {
+          "clock": 7.308633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.030599999994039,
+      "states": [
+        {
+          "clock": 7.373933333327364,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        },
+        {
+          "clock": 7.373933333327364,
+          "domain": 1,
+          "shots": 0,
+          "trails": 4,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 4
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.081399999976158,
+      "states": [
+        {
+          "clock": 7.424733333309483,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        },
+        {
+          "clock": 7.424733333309483,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.146899999976158,
+      "states": [
+        {
+          "clock": 7.490233333309482,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        },
+        {
+          "clock": 7.490233333309482,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.1975,
+      "states": [
+        {
+          "clock": 7.540833333333324,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        },
+        {
+          "clock": 7.540833333333324,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.247699999988079,
+      "states": [
+        {
+          "clock": 7.591033333321402,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        },
+        {
+          "clock": 7.591033333321402,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.313399999976158,
+      "states": [
+        {
+          "clock": 7.656733333309481,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        },
+        {
+          "clock": 7.656733333309481,
+          "domain": 1,
+          "shots": 0,
+          "trails": 3,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 5
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.379299999982119,
+      "states": [
+        {
+          "clock": 7.722633333315441,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        },
+        {
+          "clock": 7.722633333315441,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.43,
+      "states": [
+        {
+          "clock": 7.773333333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        },
+        {
+          "clock": 7.773333333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.4805,
+      "states": [
+        {
+          "clock": 7.823833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        },
+        {
+          "clock": 7.823833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.546199999988079,
+      "states": [
+        {
+          "clock": 7.889533333321403,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        },
+        {
+          "clock": 7.889533333321403,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.59659999999404,
+      "states": [
+        {
+          "clock": 7.939933333327363,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        },
+        {
+          "clock": 7.939933333327363,
+          "domain": 1,
+          "shots": 0,
+          "trails": 2,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 6
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.6475,
+      "states": [
+        {
+          "clock": 7.990833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        },
+        {
+          "clock": 7.990833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.71409999999404,
+      "states": [
+        {
+          "clock": 8.057433333327362,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        },
+        {
+          "clock": 8.057433333327362,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.779,
+      "states": [
+        {
+          "clock": 8.122333333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        },
+        {
+          "clock": 8.122333333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.829799999982119,
+      "states": [
+        {
+          "clock": 8.173133333315441,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        },
+        {
+          "clock": 8.173133333315441,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.897299999982119,
+      "states": [
+        {
+          "clock": 8.240633333315442,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        },
+        {
+          "clock": 8.240633333315442,
+          "domain": 1,
+          "shots": 0,
+          "trails": 1,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 7
+          }
+        }
+      ]
+    },
+    {
+      "t": 5.9625,
+      "states": [
+        {
+          "clock": 8.305833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.305833333333323,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.013299999982118,
+      "states": [
+        {
+          "clock": 8.356633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.356633333315443,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.079399999976158,
+      "states": [
+        {
+          "clock": 8.422733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.422733333309484,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.130199999988079,
+      "states": [
+        {
+          "clock": 8.473533333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.473533333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.181,
+      "states": [
+        {
+          "clock": 8.524333333333328,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.524333333333328,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.246399999976158,
+      "states": [
+        {
+          "clock": 8.589733333309487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.589733333309487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.296899999976159,
+      "states": [
+        {
+          "clock": 8.640233333309487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.640233333309487,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.362899999976158,
+      "states": [
+        {
+          "clock": 8.706233333309486,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.706233333309486,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.428699999988079,
+      "states": [
+        {
+          "clock": 8.772033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.772033333321406,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    },
+    {
+      "t": 6.494199999988079,
+      "states": [
+        {
+          "clock": 8.837533333321407,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        },
+        {
+          "clock": 8.837533333321407,
+          "domain": 1,
+          "shots": 0,
+          "trails": 0,
+          "counts": {
+            "fireballs": 0,
+            "stones": 0,
+            "trailDrops": 8,
+            "directHits": 0,
+            "blocked": 0,
+            "acidHits": 0
+          },
+          "pools": {
+            "fireballs": 0,
+            "stones": 0,
+            "trails": 8
+          }
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    0,
+    0
+  ],
+  "geometry": [
+    576,
+    576
+  ],
+  "errors": [],
+  "loadSeconds": 17.167
+}

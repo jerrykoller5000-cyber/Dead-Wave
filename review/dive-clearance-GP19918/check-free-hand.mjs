@@ -1,0 +1,5 @@
+import fs from 'node:fs';const p='review/dive-clearance-GP19918/extra.mjs',src=fs.readFileSync(p,'utf8');let s=src;
+const edit=(a,b)=>{if(!s.includes(a))throw Error(a.slice(0,100));s=s.replace(a,b);};
+edit("phase:T.diveDbg().phase,wrist:T.handsDbg.wrist()};};", "phase:T.diveDbg().phase,wrist:T.handsDbg.wrist(),sideHold:new V(0,0,1).transformDirection(T.getMarine().userData.torsoG.matrixWorld).y<-.5,leftLocal:T.getMarine().userData.torsoG.worldToLocal(T.handsDbg.gripPoint('L')).toArray(),leftFloor:T.handsDbg.gripPoint('L').y-T.player.position.y};};");
+edit("if(w==='pistol')assert(g.l<.03,'left grip '+w+' '+g.l);", "if(w==='pistol'){if(dual||!g.sideHold)assert(g.l<.03,'left grip '+w+' '+g.l);else{assert(g.leftLocal[0]<-.25,'released balancing hand stays outside vest');assert(g.leftFloor>.08,'released balancing hand clears floor');}}");
+if(fs.readFileSync(p,'utf8')!==src)throw Error('changed');fs.writeFileSync(p,s);console.log('One-hand pose gets positive free-arm clearance assertions; cup checks retained elsewhere');

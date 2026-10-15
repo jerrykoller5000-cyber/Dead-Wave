@@ -1,0 +1,137 @@
+[
+    {
+        "cam":  {
+                    "x":  -25.554399999999998,
+                    "y":  -198.94556,
+                    "z":  -631.9477800000001,
+                    "tx":  -26.0286,
+                    "ty":  -198.96556,
+                    "tz":  -631.9477800000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/sniper-grip.png",
+        "target":  "weapon:sniper"
+    },
+    {
+        "cam":  {
+                    "x":  -25.60717,
+                    "y":  -198.865175,
+                    "z":  -631.53607,
+                    "tx":  -25.9839,
+                    "ty":  -198.885175,
+                    "tz":  -631.53607,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/ak-front.png",
+        "target":  "weapon:ak"
+    },
+    {
+        "cam":  {
+                    "x":  -25.365850000000002,
+                    "y":  -198.992662,
+                    "z":  -631.91112,
+                    "tx":  -25.9465,
+                    "ty":  -199.012662,
+                    "tz":  -631.91112,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/minigun-grip.png",
+        "target":  "weapon:minigun"
+    },
+    {
+        "cam":  {
+                    "x":  -25.58186,
+                    "y":  -198.81985,
+                    "z":  -631.7842,
+                    "tx":  -25.961,
+                    "ty":  -198.83985,
+                    "tz":  -631.7842,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/flamer-top.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -25.58186,
+                    "y":  -198.86796999999999,
+                    "z":  -631.51531,
+                    "tx":  -25.961,
+                    "ty":  -198.88797,
+                    "tz":  -631.51531,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/flamer-front.png",
+        "target":  "weapon:flamer"
+    },
+    {
+        "cam":  {
+                    "x":  -25.54128,
+                    "y":  -198.797475,
+                    "z":  -631.7906,
+                    "tx":  -25.9759,
+                    "ty":  -198.817475,
+                    "tz":  -631.7906,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/chainsaw-top.png",
+        "target":  "weapon:chainsaw"
+    },
+    {
+        "cam":  {
+                    "x":  -25.09,
+                    "y":  -199.0981,
+                    "z":  -632.305,
+                    "tx":  -26,
+                    "ty":  -199.1181,
+                    "tz":  -632.305,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/mortar-top.png",
+        "target":  "weapon:mortar"
+    },
+    {
+        "cam":  {
+                    "x":  -26.1932,
+                    "y":  -198.80319,
+                    "z":  -631.6826000000001,
+                    "tx":  -26,
+                    "ty":  -198.92739,
+                    "tz":  -631.8344000000001,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/machete-grip3R.png",
+        "target":  "weapon:machete"
+    },
+    {
+        "cam":  {
+                    "x":  -26.154,
+                    "y":  -198.84535200000002,
+                    "z":  -631.827352,
+                    "tx":  -26,
+                    "ty":  -198.944352,
+                    "tz":  -631.948352,
+                    "fov":  35
+                },
+        "size":  "1000x750",
+        "settle":  3000,
+        "out":  "review/gb180e/revolver-grip3R.png",
+        "target":  "weapon:revolver"
+    }
+]

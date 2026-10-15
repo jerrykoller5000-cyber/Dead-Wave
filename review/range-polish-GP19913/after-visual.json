@@ -1,0 +1,53 @@
+{
+  "loadSec": 19.57,
+  "weapons": [
+    {
+      "weapon": "pistol",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "uzi",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "m4",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "ak",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "shotgun",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "aa12",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "revolver",
+      "width": 251.25,
+      "height": 44
+    },
+    {
+      "weapon": "sniper",
+      "width": 251.25,
+      "height": 44
+    }
+  ],
+  "perf": {
+    "fps": 60.27122049221497,
+    "low": 56.818181789318515,
+    "worst": 17.600000008940697,
+    "hitches": 0,
+    "frames": 60
+  },
+  "errors": []
+}

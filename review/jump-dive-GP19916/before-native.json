@@ -1,0 +1,32 @@
+{
+  "runs": [
+    {
+      "name": "rise",
+      "entry": {
+        "buffer": 0,
+        "prepare": 0,
+        "recover": 0,
+        "air": 0.049999999999992724,
+        "landAge": 115.36816666666589,
+        "landDuration": 0.42,
+        "strength": 0,
+        "launches": 1,
+        "grounded": false,
+        "vy": 6.700000000000175
+      },
+      "phase": "idle",
+      "vy": 6.700000000000175,
+      "y0": -199.52333333333343,
+      "dives": 0,
+      "repeatDives": 0,
+      "spent": 1,
+      "launchDelta": 1,
+      "k": 1,
+      "peak": -198.33166666666668,
+      "grounded": true,
+      "frames": 9
+    }
+  ],
+  "loadSec": 20.635,
+  "errors": []
+}

@@ -1,0 +1,55 @@
+{
+  "rear": [
+    0.06,
+    0.06
+  ],
+  "front": [
+    1,
+    1
+  ],
+  "inventory": {
+    "r": {
+      "ok": true,
+      "id": "1791885075305-1"
+    },
+    "single": true,
+    "before": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        4,
+        5
+      ],
+      "spare": [
+        3,
+        2
+      ]
+    },
+    "after": {
+      "size": 12,
+      "maxSpare": 14,
+      "loaded": [
+        4,
+        5
+      ],
+      "spare": [
+        3,
+        2
+      ]
+    },
+    "dual": true,
+    "sameUnlocks": true
+  },
+  "scene": {
+    "out": {
+      "roots": 0,
+      "feature": null
+    },
+    "in": {
+      "roots": 1,
+      "huds": 1,
+      "targets": 5
+    }
+  },
+  "errors": []
+}

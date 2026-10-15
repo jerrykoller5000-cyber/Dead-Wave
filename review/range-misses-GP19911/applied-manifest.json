@@ -1,0 +1,17 @@
+[
+  {
+    "file": "ui/range-feature.js",
+    "before": "91ed63747012ea8f08a2a46f130f0ed25860d0a394325d7760b21aca0e6a1820",
+    "after": "a6ec1e3ef3cfe30811ec8fcfca7e659f18c089d5d9600aaab7697f54068cefac"
+  },
+  {
+    "file": "ui/training-hit-pops.js",
+    "before": "a8d0911ec7c4e6d23ca46d171654c96ba369fefd8df7b81d12c267563e27be68",
+    "after": "a4f51de7f54e753f1f40cf24eead8bf1535e447d190ffb38f6f97092c6862ca2"
+  },
+  {
+    "file": "ui/strings.js",
+    "before": "11beec5c24e527d14cbde0d01d6f8c17eba38d4d95bd53ea07295c8e49507179",
+    "after": "6e0b3c6612b65de5a91364dce32dc1f2e1a1470195cfb0473c8267e15d6559cb"
+  }
+]

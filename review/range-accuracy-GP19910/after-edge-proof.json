@@ -1,0 +1,76 @@
+{
+  "edge": {
+    "r": {
+      "ok": true,
+      "id": "1791950426642-1"
+    },
+    "score": 20,
+    "base": 20,
+    "shots": 1,
+    "pops": [
+      "+20Head ×2"
+    ],
+    "position": [
+      0,
+      -200,
+      -642
+    ]
+  },
+  "special": [
+    {
+      "w": "launcher",
+      "started": {
+        "ok": true,
+        "id": "1791950433220-2"
+      },
+      "s": {
+        "base": 14,
+        "bonuses": 70,
+        "deductions": 0,
+        "shots": 1,
+        "units": 1,
+        "attackSeconds": 0,
+        "contactSeconds": 0,
+        "cleared": 4,
+        "missed": 0
+      }
+    },
+    {
+      "w": "flamer",
+      "started": {
+        "ok": true,
+        "id": "1791950436810-3"
+      },
+      "s": {
+        "base": 24.99999999999637,
+        "bonuses": 10,
+        "deductions": 0,
+        "shots": 14,
+        "units": 7,
+        "attackSeconds": 1.1199999999999999,
+        "contactSeconds": 0.6999999999998983,
+        "cleared": 1,
+        "missed": 0
+      }
+    },
+    {
+      "w": "chainsaw",
+      "started": {
+        "ok": true,
+        "id": "1791950441687-4"
+      },
+      "s": {
+        "base": 24.999999999999993,
+        "bonuses": 10,
+        "deductions": 0,
+        "shots": 65,
+        "units": 1.0833333333335458,
+        "attackSeconds": 1.0833333333335458,
+        "contactSeconds": 0.4500000000000289,
+        "cleared": 1,
+        "missed": 0
+      }
+    }
+  ],
+  "errors": []
+}

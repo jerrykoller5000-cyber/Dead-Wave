@@ -1,0 +1,3 @@
+import fs from 'node:fs';import {Engine} from '../../tools/camera.mjs';
+const dir='review/bomber-skin-GP19886',label=process.argv[2]||'after',E=new Engine({training:true,warm:'none',size:'1000x800'}),proof={};
+try{await E.open();await E.ev('R.release();T.AudioSys.setMuted(true);');for(const view of ['front','three','side']){await E.shoot({target:'zombie:bomber',view,out:dir+'/'+label+'-'+view+'.png'});}proof.errors=E.page.errors;console.log(JSON.stringify({label,errors:proof.errors}));}finally{fs.writeFileSync(dir+'/'+label+'-capture.json',JSON.stringify(proof,null,2));await E.close();}process.exit(0);

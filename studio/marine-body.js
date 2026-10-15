@@ -1,7 +1,9 @@
 // GP-106: Jerry's fitted marine body. Uses the existing joint locations and item
 // materials; animation, purchases and dressing remain owned by their callers.
+import {wristTransition} from '../ui/marine-kit-fit.js';
 import {webbingGeometry} from '../ui/marine-webbing.js';
 import {buildHandMeshes,makeHandRig} from './marine-hand.js';   // GB-152
+import {liveCloth,loftRings,ringsIn,joinGeos,smooth01,weigh,geoIn} from './marine-cloth.js';   // CL-198
 const detailCache = new Map();
 export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dress, mats, pgbPatch}) {
   const patches=[];   // GB-123: the PGB patch meshes; the caller keeps them out of its merge so their UVs survive
@@ -18,27 +20,50 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     patchInk, webMat, nvgMat, laceMat, sockMat} = mats;
   // A soft rectangular cross-section, lofted as one surface rather than stacked
   // boxes. The radius through a joint overlaps the adjacent limb as it bends.
-  function form(rings, mat, name = '', n = 12) {
+  function form(rings, mat, name = '', n = 12, caps = 'both', e = .7) {
     const p=[], uv=[], ix=[];
     for(let r=0;r<rings.length;r++) {
       const [y,rx,rz,cx=0,cz=0]=rings[r];
       for(let j=0;j<=n;j++) {
         const a=j/n*Math.PI*2,s=Math.sin(a),c=Math.cos(a);
-        p.push(cx+rx*Math.sign(s)*Math.abs(s)**.7,y,cz+rz*Math.sign(c)*Math.abs(c)**.7);
+        p.push(cx+rx*Math.sign(s)*Math.abs(s)**e,y,cz+rz*Math.sign(c)*Math.abs(c)**e);
         uv.push(j/n,y*3);
       }
     }
     for(let r=0;r<rings.length-1;r++)for(let j=0;j<n;j++) {
       const a=r*(n+1)+j,b=a+n+1;ix.push(a,a+1,b,a+1,b+1,b);
     }
-    // The lowest/highest rings close inside neighbouring clothing/joints.
-    for(const [row,reverse] of [[0,true],[rings.length-1,false]]) {
+    // End caps close inside the next piece of clothing. 'high' leaves the low end open
+    // so a cuff can sit around a boot instead of a lid cutting through it.
+    const rows=caps==='high'?[[rings.length-1,false]]:caps==='low'?[[0,true]]:[[0,true],[rings.length-1,false]];
+    for(const [row,reverse] of rows) {
       const ring=rings[row],center=p.length/3;p.push(ring[3]||0,ring[0],ring[4]||0);uv.push(.5,.5);
       for(let j=0;j<n;j++) {const a=row*(n+1)+j;ix.push(center,...(reverse?[a+1,a]:[a,a+1]));}
     }
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(p,3));
-    geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(ix);geo.computeVertexNormals();
+    geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(ix);geo.computeVertexNormals();weldRows(geo,n+1,rings.length);
     const mesh=new T.Mesh(geo,mat);mesh.castShadow=mesh.receiveShadow=true;mesh.name=name;return mesh;
+  }
+  // The first and last column of a ring loft sit on one spot: give them one shared normal (no crease down the seam).
+  function weldRows(geo,cols,rows){
+    const N=geo.attributes.normal;
+    for(let r=0;r<rows;r++){
+      const a=r*cols,b=a+cols-1,x=N.getX(a)+N.getX(b),y=N.getY(a)+N.getY(b),z=N.getZ(a)+N.getZ(b),l=Math.hypot(x,y,z)||1;
+      N.setXYZ(a,x/l,y/l,z/l);N.setXYZ(b,x/l,y/l,z/l);
+    }
+  }
+  // CL-197 (Jerry, 2026-10-15): a coarse ring table made the torso, shoulder and sleeves read as faceted slabs (12 sides,
+  // a ring every 5 to 10 cm). subdiv() adds `steps` Catmull-Rom rings between every pair (all of y, rx, rz, cx and cz), so
+  // the same silhouette is lofted through a smooth curve instead of straight chords.
+  function subdiv(rings,steps=1){
+    const R=rings.map(r=>[r[0],r[1],r[2],r[3]||0,r[4]||0]),out=[];
+    const cr=(a,b,c,d,t)=>.5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
+    for(let i=0;i<R.length-1;i++){
+      const p0=R[Math.max(0,i-1)],p1=R[i],p2=R[i+1],p3=R[Math.min(R.length-1,i+2)];
+      out.push(p1);
+      for(let k=1;k<=steps;k++){const t=k/(steps+1);out.push([0,1,2,3,4].map(c=>cr(p0[c],p1[c],p2[c],p3[c],t)));}
+    }
+    out.push(R[R.length-1]);return out;
   }
   function plate(w,h,d,mat) {
     // Explicit closed faces also work with the lightweight test geometry.
@@ -138,6 +163,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     group.userData.bend=bend;group.userData.parts=parts;
     return group;
   }
+  // CL-188's liveShoulder (the shoulder cap worn by the chest and the upper arm) is now the top of CL-198's live sleeve.
   function sole(height,mat) {
     const s=new T.Shape();s.moveTo(-.051,-.103);s.quadraticCurveTo(-.068,-.101,-.065,-.053);s.lineTo(-.059,.008);s.quadraticCurveTo(-.084,.08,-.067,.14);s.quadraticCurveTo(-.048,.185,0,.185);s.quadraticCurveTo(.048,.185,.067,.14);s.quadraticCurveTo(.084,.08,.059,.008);s.lineTo(.065,-.053);s.quadraticCurveTo(.068,-.101,.051,-.103);s.closePath();
     const edge=s.getPoints(8);edge.pop();const v=[],ix=[],n=edge.length;
@@ -146,7 +172,13 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.setAttribute('uv',new T.Float32BufferAttribute(new Float32Array(v.length/3*2),2));geo.setIndex(ix);geo.computeVertexNormals();return new T.Mesh(geo,mat);
   }
   const lowerBody=new T.Group();root.add(lowerBody);
-  const hip=form([[-.085,.12,.084,0,.008],[-.035,.165,.12,0,-.008],[.025,.183,.124,0,-.006],[.1,.172,.111]],trouserW,'fitted-pelvis');
+  // CL-197 (Jerry, 2026-10-15: "fixing the crotch area"). The pelvis ended in a flat disc between the thighs, a shelf with
+  // the sky showing under it. It now narrows through a seat to a rounded crotch that the two thighs close round, as a
+  // pair of trousers does, and is smoothed (more rings and sides) like the rest of the body.
+  const pelvisR=[[-.138,.014,.014,0,-.004],[-.116,.052,.048,0,-.002],[-.085,.118,.088,0,.006],[-.035,.165,.12,0,-.008],[.025,.183,.124,0,-.006],[.1,.172,.111]];
+  // CL-198: `hip` stays the pelvis joint the game and the survivors' kit hang things on, but what shows is the live seat
+  // (after the legs, below); hip itself is only the waistband under the belt, a hair inside it.
+  const hip=form(subdiv([[.02,.181,.122,0,-.006],[.1,.17,.109]],1),trouserW,'fitted-pelvis',28);
   hip.position.y=.62;lowerBody.add(hip);
   put(lowerBody,form([[-.025,.185,.124],[.025,.18,.12]],beltW),0,.721,0);
   for(const y of[.698,.744])put(lowerBody,form([[-.003,.187,.126],[.003,.187,.126]],beltW),0,y,0);
@@ -163,7 +195,7 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   }
   put(lowerBody,rmesh(.125,.1,.047,beltW,.018),.08,.64,-.137);
   put(lowerBody,rmesh(.035,.026,.155,strapMat,.008),-.185,.63,0);
-  put(lowerBody,rmesh(.045,.145,.082,holsterW,.014),-.216,.526,.015,0,0,.08);
+  // GP-19920: the carry rig supplies the hollow holster on the thigh joint.
   // The drop-leg shell hangs from the belt instead of floating beside the thigh.
   put(lowerBody,rmesh(.022,.16,.018,strapMat,.005),-.204,.622,.018,0,0,.08);
   put(lowerBody,rmesh(.055,.025,.018,buckleMat,.004),-.208,.666,.03);
@@ -172,23 +204,17 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   const addGear=(key,parent,mesh,...args)=>{put(parent,mesh,...args);gearParts[key].push(mesh);return mesh;};
   function leg(side) {
     const legG=new T.Group();legG.position.set(side*.13,.62,0);lowerBody.add(legG);
-    // GP-123: the quadriceps swell above the knee, while the inner thigh narrows.
-    put(legG,form([[-.30,.064,.066],[-.265,.071,.073,0,.008],[-.243,.078,.081,side*.002,.008],[-.224,.073,.078,0,.012],[-.19,.083,.094,side*.003,.01],[-.10,.094,.104,side*.006,.006],[-.045,.098,.108],[-.025,.096,.103],[.055,.085,.096]],trouserW,'tailored-trouser-thigh',16),0,0,.007);
+    // A thigh mount and retention band support the hollow carry holster.
+    put(legG,rmesh(.012,.105,.082,holsterW,.004),side*.108,-.083,.035);
+    put(legG,form([[-.008,.101,.113],[.008,.101,.113]],strapMat,'holster-thigh-band',16,'high'),0,-.11,.012);
+    // CL-198: the trouser leg itself is worn live (after the boot, below), from inside the seat to the boot.
     put(legG,rmesh(.021,.126,.112,trouserW,.009),side*.094,-.145,.004);
     put(legG,plate(.111,.04,.009,trouserW),side*.108,-.097,.004,0,side*Math.PI/2,0);
     for(const z of[-.032,.038])put(legG,cyl(.004,.004,.004,beltW,6),side*.114,-.105,z,0,0,Math.PI/2);
     seam(legG,[[side*.09,-.055,.047],[side*.098,-.145,.061],[side*.084,-.205,.051]],trouserW);
     seam(legG,[[side*.011,.014,.114],[side*.044,-.033,.114],[side*.074,-.069,.098]],trouserW);
     // One restrained fold at the pocket and knee, not a separate thigh block.
-    put(legG,rmesh(.126,.013,.012,trouserW,.005),0,-.207,.089,0,0,side*.08);
     const knee=new T.Group();knee.position.set(0,-.27,0);legG.add(knee);
-    const shinLong=part(knee,dress.legLong),shinBare=part(knee,dress.legShort),hem=part(legG,dress.legShort);
-    // Calf volume sits high and behind the shin, tapering into the boot shaft.
-    put(shinLong,form([[-.225,.059,.061],[-.202,.069,.071,0,-.003],[-.184,.061,.066,0,-.005],[-.163,.071,.079,side*.004,-.008],[-.142,.067,.073,0,-.008],[-.105,.075,.087,side*.003,-.014],[-.055,.078,.087,side*.002,-.009],[.006,.071,.075,0,.005],[.045,.058,.061]],trouserW,'bloused-trouser-calf',16),0,0,.012);
-    put(shinLong,rmesh(.127,.024,.138,trouserW,.011),0,-.21,.007);
-    put(shinBare,form([[-.2,.043,.048],[-.155,.046,.055,0,-.004],[-.095,.061,.076,side*.004,-.014],[-.05,.064,.074,side*.003,-.01],[.004,.055,.06,0,.006],[.028,.049,.05]],skinW),0,0,.008);
-    put(shinBare,rmesh(.115,.055,.127,sockMat,.02),0,-.188,.007);
-    put(hem,rmesh(.167,.033,.186,trouserW,.012),0,-.242,.007);
     addGear('pads',knee,plate(.151,.176,.028,padW),0,-.014,.093);
     addGear('pads',knee,plate(.126,.149,.026,plateW),0,-.012,.111);
     for(const sx of[-1,1]){
@@ -196,7 +222,9 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       for(const y of[-.05,.03])addGear('pads',knee,cyl(.0035,.0035,.003,buckleMat,6),sx*.05,y,.127,Math.PI/2);
       addGear('pads',knee,rmesh(.021,.037,.022,plateW,.005),sx*.076,-.063,.018);
     }
-    for(const y of[-.065,.033])addGear('pads',knee,form([[-.01,.076,.087],[.01,.076,.087]],strapMat),0,y,.01);
+    // Each strap belongs to the limb it encircles; the upper one must not rotate into the thigh with the shin.
+    addGear('pads',knee,form([[-.011,.084,.094],[.011,.083,.093]],strapMat,'calf-pad-strap',16,'high'),0,-.065,.006);
+    addGear('pads',legG,form([[-.011,.084,.09],[.011,.087,.096]],strapMat,'thigh-pad-strap',16,'high'),side*.001,-.224,.018);
     const ankle=new T.Group();ankle.position.set(0,-.25,.01);knee.add(ankle);
     // CU-98: the shaft and what is sewn to it go on the shin (shinShaft, below); the foot keeps the upper and the sole.
     const shaft=new T.Group();shaft.position.copy(ankle.position);knee.add(shaft);
@@ -227,22 +255,86 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     put(shaft,rmesh(.034,.045,.008,bootW,.004),0,.063,-.074,-.12);
     put(shaft,rmesh(.026,.025,.012,strapMat,.003),0,.084,-.072);
     const bootShaft=shinShaft(shaft,knee,ankle,-.04,.05);
+    // CL-198 (Jerry, 2026-10-15: the trousers "natural in all their configurations and movements"). The trouser leg was a
+    // thigh tube on the thigh and a calf tube on the shin: every bend of the knee drove the calf's top out through the
+    // front of the thigh (a crouch showed a block on a block) and a stride opened the seat. It is now one leg of cloth
+    // from inside the seat to the boot, worn by four joints at once (liveCloth, studio/marine-cloth.js): the seat at the
+    // top, the thigh, the shin below the knee and, at the blousing, the foot by the same share the boot's shaft has
+    // (shinShaft), so the cuff stays round the boot when the ankle bends. The knee has room in it, as trousers do.
+    {
+      const bones=[lowerBody,legG,knee,ankle];
+      const seatW=(y)=>smooth01(-.1,.045,y), kneeW=(y)=>smooth01(.05,-.05,y), shinW=(y)=>smooth01(-.04,.05,y);
+      // [lowerBody, thigh, shin, foot] from a vertex's height in the thigh's, the knee's and the ankle's frames
+      const w4=(L)=>{const p=seatW(L[1][1]),k=kneeW(L[2][1]),s=shinW(L[3][1]);return [p*(1-k),(1-p)*(1-k),k*s,k*(1-s)];};
+      const thighR=[[.06,.088,.098,0,.007],[0,.097,.106,0,.007],[-.05,.099,.108,0,.008],[-.1,.095,.104,side*.004,.011],[-.16,.088,.097,side*.003,.014],[-.21,.081,.089,0,.016],[-.25,.077,.086,0,.018],[-.27,.076,.085,0,.02]];
+      const calfR=[[-.03,.075,.084,0,.018],[-.07,.075,.086,side*.002,.006],[-.11,.077,.089,side*.003,-.002],[-.15,.073,.085,side*.002,-.002],[-.18,.075,.088,0,.004],[-.205,.081,.094,0,.009],[-.228,.079,.092,0,.01]];
+      const longRings=[...ringsIn(T,root,legG,subdiv(thighR,1),{e:.82}),...ringsIn(T,root,knee,subdiv(calfR,1),{e:.82})];
+      const long=loftRings(T,longRings,30,{caps:'first'});
+      const trousers=liveCloth(T,{space:root,bones,geo:long.geo,weights:weigh(T,root,bones,long.geo,w4),material:trouserW,name:'live-trouser-leg'});
+      dress.legLong.push(trousers.parent);
+      // Shorts (CU-145: not rolled): the same leg cut 6 cm above the knee, with a stitched hem, over a bare knee and shin
+      // and a sock, all worn the same way so the knee bends in skin.
+      const shortR=[...thighR.slice(0,5),[-.19,.084,.093,0,.015],[-.205,.085,.094,0,.016]];
+      const shorts=loftRings(T,ringsIn(T,root,legG,subdiv(shortR,1),{e:.82}),30,{caps:'first'});
+      const stitch=[];for(let j=0;j<16;j++){const a=j/16*Math.PI*2,sn=Math.sin(a),c=Math.cos(a);stitch.push(new T.Vector3(.085*Math.sign(sn)*Math.abs(sn)**.82,-.2,.016+.094*Math.sign(c)*Math.abs(c)**.82));}
+      const hemG=geoIn(T,root,legG,new T.TubeGeometry(new T.CatmullRomCurve3(stitch,true),32,.0024,5,true));
+      const shortGeo=joinGeos(T,[shorts.geo,hemG]);
+      const short=liveCloth(T,{space:root,bones,geo:shortGeo,weights:weigh(T,root,bones,shortGeo,w4),material:trouserW,name:'live-shorts-leg'});
+      const skinR=[[-.17,.064,.07,0,.01],[-.205,.06,.066,0,.012],[-.24,.056,.062,0,.013],[-.27,.052,.058,0,.014]];
+      const shinR=[[-.035,.05,.057,0,.01],[-.075,.058,.072,side*.003,-.006],[-.11,.06,.077,side*.004,-.012],[-.15,.05,.063,0,-.005],[-.19,.044,.051,0,.003],[-.205,.043,.049,0,.004]];
+      const skin=loftRings(T,[...ringsIn(T,root,legG,subdiv(skinR,1),{e:.9}),...ringsIn(T,root,knee,subdiv(shinR,1),{e:.9})],26,{caps:'first'});
+      const bareLeg=liveCloth(T,{space:root,bones,geo:skin.geo,weights:weigh(T,root,bones,skin.geo,w4),material:skinW,name:'live-bare-leg'});
+      const sockGeo=geoIn(T,root,knee,rmesh(.115,.055,.127,sockMat,.02).geometry.clone(),0,-.188,.007);
+      liveCloth(T,{space:root,bones,geo:sockGeo,weights:weigh(T,root,bones,sockGeo,w4),material:sockMat,name:'live-sock',holder:bareLeg.parent});
+      dress.legShort.push(short.parent,bareLeg.parent);
+    }
     legG.userData.knee=knee;legG.userData.ankle=ankle;legG.userData.bootShaft=bootShaft;return legG;
   }
   const legLG=leg(-1),legRG=leg(1);
+  {
+    // CL-198 (Jerry: the trousers "natural in all ... movements"; CL-197 shaped the crotch). The seat was rigid on the
+    // pelvis, so a crouch left it hanging between thighs that had gone forward, a sack under him. Its lower half is now
+    // worn partly by each thigh (its own side more, the middle seam by both equally), so the seat and crotch go with the
+    // legs as trousers do, and the waist stays on the pelvis.
+    const bones=[lowerBody,legLG,legRG];
+    const g=geoIn(T,root,lowerBody,form(subdiv(pelvisR,1),trouserW,'',28).geometry,0,.62,0);
+    const w=(L)=>{const y=L[0][1]-.62,x=L[0][0],f=.78*smooth01(-.005,-.115,y),r=smooth01(-.06,.06,x);return [1-f,f*(1-r),f*r];};
+    const seat=liveCloth(T,{space:root,bones,geo:g,weights:weigh(T,root,bones,g,w),material:trouserW,name:'live-seat'});
+    seat.userData.aoOwners=[lowerBody,legLG,legRG];
+  }
   const torsoG=new T.Group();torsoG.position.y=.7;root.add(torsoG);
   const at=(mesh,x,y,z,...angles)=>put(torsoG,mesh,x,y-.7,z,...angles);
-  at(form([[.015,.168,.109],[.12,.178,.115],[.24,.207,.128,0,.003],[.345,.246,.135,0,.002],[.405,.257,.124],[.46,.198,.098],[.51,.092,.079]],uniformW,'fitted-uniform'),0,.7,0);
+  at(form(subdiv([[.015,.168,.109],[.12,.178,.115],[.24,.207,.128,0,.003],[.345,.246,.135,0,.002],[.405,.257,.124],[.46,.198,.098],[.51,.092,.079]],2),uniformW,'fitted-uniform',32),0,.7,0);
   // GP-124: the shirt's shoulder stays with the chest and overlaps the moving
   // sleeve. This closes the notch beside the neck without enlarging the arm cap.
   for(const side of [-1,1]) {
-    at(form([[-.07,.055,.075,side*.005],[-.02,.076,.089,side*.01],
-      [.025,.062,.071,-side*.015],[.055,.029,.047,-side*.05]],uniformW,'shirt-shoulder'),side*.225,1.125,.012);
+    at(form(subdiv([[-.07,.055,.075,side*.005],[-.02,.076,.089,side*.01],
+      [.025,.062,.071,-side*.015],[.055,.029,.047,-side*.05]],2),uniformW,'shirt-shoulder',24),side*.225,1.125,.012);
   }
-  // Collar is a low folded opening rather than a high bucket around the neck.
-  at(cyl(.079,.103,.052,uniformW,12),0,1.209,0);
+  // CL-197 (Jerry, 2026-10-15: "fixing the blouse's collar"). There was no collar: a plain cylinder under the neck wrap, and
+  // two loose boxes, with the ragged top of the shirt showing round them. This is a folded-down blouse collar, one
+  // lofted band: a flat spread over the shoulders, a rounded fold, a stand that hugs the neck, higher at the back with a
+  // V-notch at the front, closed underneath so nothing shows through. Built in torso space (y is marine height).
+  {
+    const prof=[[1.150,.166,.134],[1.172,.146,.122],[1.202,.126,.111],[1.228,.116,.104],[1.2435,.109,.1],[1.2495,.1045,.0975],[1.244,.099,.0945],[1.226,.095,.0935],[1.205,.0925,.0925],[1.178,.092,.0925]];
+    const n=40,cz=.004,p=[],uv=[],ix=[],pts=subdiv(prof,1);
+    for(let r=0;r<pts.length;r++){
+      const [y,rx,rz]=pts[r];
+      for(let j=0;j<=n;j++){
+        const a=-Math.PI+j/n*Math.PI*2,c=Math.cos(a),sn=Math.sin(a),af=Math.abs(a);
+        // notch at the front (a = 0), a little lift at the back; the fold and the stand move, the spread over the shoulders does not
+        const move=Math.max(0,Math.min(1,(y-1.18)/.065));
+        const dip=-.033*Math.max(0,1-af/.62)**1.6*move+.008*Math.max(0,(af-2.2)/(Math.PI-2.2))*move;
+        const spread=1+.05*Math.max(0,1-af/.62)**2*move;   // the notch's lapels open outward
+        p.push(rx*sn*spread,y+dip-.7,cz+rz*c*spread-(c>0?0:0));uv.push(j/n,y*3);
+      }
+    }
+    const cols=n+1,rowsN=pts.length;
+    for(let r=0;r<rowsN;r++){const q=(r+1)%rowsN;for(let j=0;j<n;j++){const a=r*cols+j,b=q*cols+j;ix.push(a,a+1,b,a+1,b+1,b);}}
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(p,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();weldRows(g,cols,rowsN);
+    const mesh=new T.Mesh(g,uniformW);mesh.name='blouse-collar';mesh.castShadow=mesh.receiveShadow=true;torsoG.add(mesh);
+  }
   for(const side of [-1,1]) {
-    const lap=at(rmesh(.072,.053,.018,uniformW,.007),side*.055,1.18,.081);lap.rotation.z=side*.36;
     at(rmesh(.122,.092,.014,uniformW,.007),side*.106,1.011,.129);
     at(rmesh(.126,.024,.018,uniformW,.006),side*.106,1.055,.132);
   }
@@ -346,14 +438,17 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     at(cyl(.038,.038,.003,packW,16),side*.128,.811,-.221).rotation.z=Math.PI/2;
     at(cyl(.021,.021,.004,packTrimW,12),side*.13,.811,-.221).rotation.z=Math.PI/2;
   }
+  const HAND_SCALE=1.18;   // GB-169
   function arm(side) {
     const armG=new T.Group();armG.position.set(side*.34,1.08-.7,.02);torsoG.add(armG);
     // Smaller, inward-sloping deltoid around the unchanged animation pivot.
-    put(armG,form([[-.302,.055,.057],[-.273,.057,.06],[-.25,.067,.07],[-.23,.06,.064],[-.207,.067,.073,-side*.005,.002],[-.175,.062,.068,-side*.008,.002],[-.09,.068,.073,-side*.022],[-.01,.075,.078,-side*.027,-.003],[.045,.069,.07,-side*.042,-.004],[.071,.043,.05,-side*.061]],uniformW,'tailored-upper-sleeve',16),0,0,0);
+    // CL-197 (Jerry, 2026-10-15: "smooth out the chopped shoulders"): the same sleeve through a smooth ring curve (the old
+    // table had a bump at the elbow pad and 16 sides). Sleeves rolled get a short cap that ends in a thick roll above the
+    // elbow, with the bare arm, a skin elbow and the forearm below, so nothing has to bend through cloth.
+    const capRings=[[-.286,.054,.057],[-.27,.0565,.0595],[-.25,.0585,.062],[-.23,.0605,.0645],[-.207,.0625,.067,-side*.005,.002],[-.175,.0645,.0685,-side*.008,.002],[-.09,.068,.073,-side*.022],[-.01,.075,.078,-side*.027,-.003],[.045,.069,.07,-side*.042,-.004],[.071,.043,.05,-side*.061]];
     put(armG,rmesh(.016,.088,.077,uniformW,.006),side*.053,-.1,0);
     put(armG,plate(.077,.029,.008,uniformW),side*.064,-.056,0,0,side*Math.PI/2,0);
     // Follow the sleeve's changing center as it slopes into the shoulder.
-    seam(armG,[[side*.0205,.045,.0391],[side*.0409,-.01,.0451],[side*.0395,-.09,.045]],uniformW,.0012);
     seam(armG,[[side*.0395,-.09,-.045],[side*.0481,-.175,-.0399],[side*.0556,-.207,-.043]],uniformW,.0012);
     // GB-123 (Jerry): the PGB unit patch on his own left shoulder (+x: he faces +z), 1 mm off the raised block,
     // facing out and reading the right way round. The right shoulder keeps its placeholder.
@@ -363,15 +458,50 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     addGear('pads',armG,plate(.099,.088,.019,plateW),0,-.261,-.087,0,Math.PI,0);
     const elbowG=new T.Group();elbowG.position.set(0,-.28,0);elbowG.rotation.set(side<0?-.35:-.2,0,0);armG.add(elbowG);
     const ox=side<0?.02:-.01,oz=side<0?.04:.03;
-    const sleeve=part(elbowG,dress.sleeveDown),bare=part(elbowG,dress.sleeveRolled),roll=part(armG,dress.sleeveRolled);
-    put(sleeve,form([[-.226,.046,.049,ox,oz],[-.17,.052,.057,ox,oz],[-.105,.063,.069,ox*.8,oz*.7],[-.05,.067,.071,ox*.35,oz*.3],[.005,.063,.06],[.05,.046,.046]],uniformW),0,0,0);
-    put(sleeve,rmesh(.109,.025,.113,uniformW,.009),ox,-.211,oz);
-    put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.059);
-    put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.064,Math.PI/2);
-    seam(sleeve,[[ox+side*.0471,-.17,oz+.0351],[ox*.8+side*.057,-.105,oz*.7+.0425],[ox*.35+side*.0606,-.05,oz*.3+.0437]],uniformW,.0012);
-    put(bare,form([[-.227,.035,.038,ox,oz],[-.17,.04,.045,ox,oz],[-.105,.053,.058,ox*.8,oz*.7],[-.055,.058,.061,ox*.35,oz*.3],[.015,.053,.049],[.041,.042,.042]],skinW),0,0,0);
-    put(roll,rmesh(.153,.051,.15,uniformW,.016),0,-.248,0);
-    put(roll,rmesh(.148,.013,.147,uniformW,.005),0,-.223,0);
+    const sleeve=part(elbowG,dress.sleeveDown),bare=part(elbowG,dress.sleeveRolled);
+    const joint=(mat,r)=>{const m=new T.Mesh(new T.SphereGeometry(1,22,16),mat);m.scale.set(r,r,r*1.02);m.castShadow=m.receiveShadow=true;return m;};
+    put(part(armG,dress.sleeveDown),joint(uniformW,.0565),0,-.28,0);
+    put(bare,joint(skinW,.0478),0,0,0);   // the skin elbow, on the elbow pivot
+    // CL-198 (Jerry, 2026-10-15: the blouse "natural in all ... movements"). The sleeve was a cap on the shoulder and a
+    // separate forearm tube on the elbow, with a ball between: bending the arm showed the joins. It is now one sleeve from
+    // the top of the shoulder to the cuff, worn by the chest (at the top of the shoulder, as CL-188's live cap was), the
+    // upper arm and the forearm (liveCloth, studio/marine-cloth.js), so it bends at the elbow as cloth does. The ball stays
+    // inside it to keep the outside of the elbow full when it closes. Sleeves rolled: the same sleeve cut above the elbow
+    // and rolled into a thick band, and the bare arm below it is one surface of skin from under the roll to the wrist
+    // (ending exactly where ChatGPT's wrist bridge, ui/marine-kit-fit.js, takes it on to the hand).
+    {
+      const bones=[torsoG,armG,elbowG],hi=.07,lo=-.12;
+      const w3=(L)=>{
+        const y=L[1][1],x=L[1][0]*side,t=Math.max(0,Math.min(1,(hi-y)/(hi-lo))),out=Math.max(0,Math.min(1,(x-.03)/.05))*.35;
+        const a=Math.min(1,t*t*(3-2*t)+out*(1-t)),e=smooth01(.045,-.045,L[2][1]);
+        return [(1-a)*(1-e),a*(1-e),e];
+      };
+      const upper=[[.071,.043,.05,-side*.061],[.045,.069,.07,-side*.042,-.004],[-.01,.075,.078,-side*.027,-.003],[-.09,.068,.073,-side*.022],[-.175,.0635,.0675,-side*.008,.002],[-.215,.061,.065,-side*.004,.002],[-.25,.0585,.0625],[-.28,.0575,.0615]];
+      const fore=[[-.025,.059,.062,ox*.15,oz*.1],[-.05,.066,.07,ox*.35,oz*.3],[-.105,.063,.069,ox*.8,oz*.7],[-.135,.0575,.0615,ox*.92,oz*.86],[-.165,.05,.052,ox,oz],[-.2,.043,.038,ox,oz],[-.226,.041,.034,ox,oz]];
+      const down=loftRings(T,[...ringsIn(T,root,armG,subdiv(upper,1),{e:.72}),...ringsIn(T,root,elbowG,subdiv(fore,1),{e:.72})],30,{caps:'first'});
+      const seamGeo=(pts)=>geoIn(T,root,armG,new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(q=>new T.Vector3(...q))),12,.0012,4,false));
+      const capSeamG=seamGeo([[side*.0205,.045,.0391],[side*.0409,-.01,.0451],[side*.0395,-.09,.045]]);
+      const downGeo=joinGeos(T,[down.geo,capSeamG]);
+      const sleeveLive=liveCloth(T,{space:root,bones,geo:downGeo,weights:weigh(T,root,bones,downGeo,w3),material:uniformW,name:'live-sleeve'});
+      dress.sleeveDown.push(sleeveLive.parent);
+      // rolled: the sleeve to 7.5 cm above the elbow, the roll (a thick fold), then skin
+      const shortR=[...upper.slice(0,5),[-.195,.0625,.0665,-side*.005,.002]];
+      const shortL=loftRings(T,ringsIn(T,root,armG,subdiv(shortR,1),{e:.72}),30,{caps:'first'});
+      const roll=geoIn(T,root,armG,new T.TorusGeometry(.0665,.0145,10,36),-side*.005,-.203,.002,Math.PI/2,0,0,1,1,1.07);
+      const rollSeam=seamGeo([[side*.0205,.045,.0391],[side*.0409,-.01,.0451],[side*.0395,-.09,.045]]);
+      const rolledGeo=joinGeos(T,[shortL.geo,roll,rollSeam]);
+      const rolled=liveCloth(T,{space:root,bones,geo:rolledGeo,weights:weigh(T,root,bones,rolledGeo,w3),material:uniformW,name:'live-sleeve-rolled'});
+      const armSkin=[[-.19,.0505,.0525,-side*.005,.002],[-.235,.0495,.0505,-side*.002,.001],[-.28,.0478,.0482]];
+      const foreSkin=[[-.03,.0505,.0515,ox*.05,oz*.04],[-.065,.0555,.0555,ox*.3,oz*.25],[-.105,.051,.0525,ox*.8,oz*.7],[-.145,.0425,.0445,ox*.95,oz*.93],[-.18,.037,.036,ox,oz]];
+      const skinRings=[...ringsIn(T,root,armG,subdiv(armSkin,1),{e:.88}),...ringsIn(T,root,elbowG,subdiv(foreSkin,1),{e:.88})];
+      const skinL=loftRings(T,skinRings,24,{caps:'first'});
+      liveCloth(T,{space:root,bones,geo:skinL.geo,weights:weigh(T,root,bones,skinL.geo,w3),material:skinW,name:'live-bare-arm',holder:rolled.parent});
+      dress.sleeveRolled.push(rolled.parent);
+    }
+    put(sleeve,rmesh(.088,.022,.076,uniformW,.008),ox,-.211,oz);   // GB-169: the cuff closes round the slimmer wrist
+    put(sleeve,rmesh(.04,.016,.007,uniformW,.003),ox+side*.02,-.211,oz+.04);
+    put(sleeve,cyl(.004,.004,.003,beltW,6),ox+side*.031,-.211,oz+.045,Math.PI/2);
+    seam(sleeve,[[ox+side*.0471,-.17,oz+.0351],[ox*.8+side*.057,-.105,oz*.7+.0425],[ox*.55+side*.0606,-.075,oz*.5+.0437]],uniformW,.0012);
     const gz=side<0?.08:.07;
     // CU-100: the hand turns at the wrist (the top of the palm, on the forearm), so a grip can lie in the fist's channel
     // whichever way the forearm comes to it. At rest the wrist is identity: the hand is exactly where it was built.
@@ -389,6 +519,10 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
       handBuilds.push(b);
     }
     wrist.userData.hand=makeHandRig(side,handBuilds);wrist.userData.handRoot=true;
+    // GB-169 (Jerry: "hands proportionally tiny"): the hand 18% larger, grown from the wrist; hand length now ~ face length.
+    wrist.scale.setScalar(HAND_SCALE);wrist.userData.handScale=HAND_SCALE;
+    const transition=wristTransition(T,elbowG,wrist,skinW,{ox,oz,gz,scale:HAND_SCALE});
+    bare.add(transition);
     if(side<0)put(elbowG,rmesh(.041,.025,.027,nvgMat,.006),ox,-.195,oz+.055);
     elbowG.userData.wrist=wrist;
     return {armG,elbowG,wrist};

@@ -1,0 +1,15 @@
+
+> grave-shift@0.1.0 test
+> node tools/tests/run-all.mjs t182 t219 t215 --jobs 1 --no-retry
+
+check-players: 294 player.position reads, all in the allowed places
+FAIL  t182    17 pass  17 fail  78.8s
+ok    t215     4 pass   0 fail  81.8s
+FAIL  t219     7 pass  15 fail  74.0s
+
+3 checks: 28 pass, 32 fail
+
+by owner:
+  unassigned
+    t182   17 fail  FAIL it starts straight away, no insertion
+    t219   15 fail  FAIL he can stand at it (the rooms do not push him off)

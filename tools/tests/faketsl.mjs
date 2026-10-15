@@ -19,3 +19,5 @@ export const attribute = makeStub(), dot = makeStub(), float = makeStub(), floor
 
 export const texture = makeStub(), positionWorld = makeStub(), cameraPosition = makeStub(), vec2 = makeStub(), vec4 = makeStub(), clamp = makeStub(), min = makeStub(), abs = makeStub(), length = makeStub(), distance = makeStub();
 export const normalWorld = makeStub(), normalLocal = makeStub(), cos = makeStub(), step = makeStub();
+// CL-196: what the screamer's appearance asks for (game/screamer-appearance.js), so the inspector's check can build one.
+export const varying = makeStub(), positionGeometry = makeStub(), uv = makeStub();

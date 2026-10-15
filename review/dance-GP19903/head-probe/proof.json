@@ -1,0 +1,3686 @@
+{
+  "mode": "head-probe",
+  "alpha": false,
+  "diagnosticLight": true,
+  "motionBlur": false,
+  "motionBlurSamples": 1,
+  "motionBlurShutterFrames": 0,
+  "deliveryDuration": 32.53333333333333,
+  "size": [
+    1280,
+    720
+  ],
+  "fps": 30,
+  "start": 0,
+  "out": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\review\\dance-GP19903\\head-probe",
+  "outfitPath": "review/dance-GP19903/outfit.json",
+  "started": "2026-10-13T12:28:57.589Z",
+  "motionSourceHash": "d77a3e6bce4d766c94af146140c14b379d393f9cce42f395526c4f8c8f0d9564",
+  "camera": {
+    "position": [
+      1.9,
+      1.65,
+      4.1
+    ],
+    "look": [
+      0,
+      0.78,
+      0
+    ],
+    "fov": 34
+  },
+  "samples": [],
+  "gameRenderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSeconds": 19.583,
+  "setup": {
+    "backend": "webgpu",
+    "picked": {
+      "hat": "ballcapBack",
+      "eyewear": "aviators",
+      "rolled": true,
+      "shorts": false,
+      "gloves": true,
+      "skin": 0,
+      "hair": "darkBrown",
+      "eyes": "blue"
+    },
+    "wardrobe": {
+      "version": 1,
+      "items": {
+        "cap": {
+          "camo": "papDigital",
+          "style": "ballcapBack"
+        },
+        "helmet": {
+          "camo": "papDigital"
+        },
+        "mask": {
+          "camo": "papDigital"
+        },
+        "shirt": {
+          "camo": "papDigital",
+          "sleeves": "rolled"
+        },
+        "trousers": {
+          "camo": "papDigital",
+          "cut": "trousers"
+        },
+        "gloves": {
+          "camo": "feldgrau",
+          "worn": true
+        },
+        "carrier": {
+          "camo": "papDigital"
+        },
+        "pads": {
+          "camo": "papDigital"
+        },
+        "holster": {
+          "camo": "papDigital"
+        },
+        "belt": {
+          "camo": "papDigital"
+        },
+        "pack": {
+          "camo": "papDigital"
+        },
+        "eyewear": {
+          "style": "aviators"
+        },
+        "boots": {
+          "colour": "black",
+          "rubber": "yellow"
+        }
+      },
+      "guns": {
+        "m4": "papDigital",
+        "shotgun": "papDigital",
+        "sniper": "m14Woodland",
+        "minigun": "dpmDesert",
+        "uzi": "papDigital",
+        "pistol": "teloMimetico"
+      },
+      "body": {
+        "hair": "darkBrown",
+        "eyes": "blue",
+        "skin": 0
+      }
+    },
+    "storedWardrobe": null,
+    "gear": {
+      "helmet": {
+        "count": 7,
+        "visible": 7,
+        "sourceCount": 7
+      },
+      "vest": {
+        "count": 10,
+        "visible": 10,
+        "sourceCount": 10
+      },
+      "pads": {
+        "count": 12,
+        "visible": 12,
+        "sourceCount": 12
+      },
+      "nvg": {
+        "count": 1,
+        "visible": 1,
+        "sourceCount": 1
+      },
+      "bareHead": {
+        "count": 1,
+        "visible": 0,
+        "sourceCount": 1
+      },
+      "bareTorso": {
+        "count": 4,
+        "visible": 0,
+        "sourceCount": 4
+      }
+    },
+    "gearOwned": {
+      "helmet": true,
+      "vest": true,
+      "pads": true,
+      "nvg": true
+    },
+    "motionMissing": false,
+    "duration": 32.53333333333333,
+    "source": "Fresh TT.makeMarine in camera browser with TT.dressMarine current page profile and matching live gear visibility",
+    "note": "Read-only latest tt_wardrobe from the Grave Shift Edge profile, port 8766"
+  },
+  "headProbe": [
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": 0.33863371161786004,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": 0.20958007275625182,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": 0.08097533130830331,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": -0.008218810039981594,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": -0.04930718920153304,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": -0.0379484266214066,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": 0.3379862401062871,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": 0.2211569710155994,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": 0.09924004104456347,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": 0.013323613128138151,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": -0.028137253986740413,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": -0.02231291621192466,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": 0.3626784405376029,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": 0.26496916375254603,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": 0.16000482089306994,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": 0.08362659669089995,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.04172008170373237,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.03907567182972976,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": 0.4057499336306607,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": 0.3324039243121486,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.2539535470645848,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.19098490211062485,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.15243032912670673,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.1413838196468665,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": 0.3994849781151537,
+      "part": "head"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": 0.38407183011903556,
+      "part": "head"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.333574414874976,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.28116323899585566,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.24452315126533095,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.22692710159698437,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": 0.36293145477223254,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": 0.26535334683167133,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": 0.16053171814893114,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": 0.08423364544905515,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.042349151380039224,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.03965314180246421,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": 0.39155871190809766,
+      "part": "head"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": 0.3329455706474215,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.25472216853461727,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.1918582167067625,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.15331738754787305,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.1,
+      "originalHead": [
+        0.3543021928975962,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.14221709060775567,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": 0.2522642534061952,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": 0.11742135031559847,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": 0.008857705268349031,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": -0.05581443515979995,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": -0.06918586596068788,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": -0.030062157044351362,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": 0.2516637677872713,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": 0.12870042980335047,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": 0.026318485561214605,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": -0.03453474327861819,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": -0.048423419020087954,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": -0.01719689218491946,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": 0.2767637667466073,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": 0.17340257389128425,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": 0.08813519617273358,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": 0.03563968996225089,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.020613158146647825,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.04464337258084777,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": 0.320634349669755,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": 0.24529509520855095,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.1837239319030942,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.14532140806582108,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.13349620802717585,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.1471441877183297,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": 0.35283582516696443,
+      "part": "head"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": 0.3073731738921106,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.2644931338281817,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.2370197579224157,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.2273384820913717,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.23429678889760364,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": 0.27713993556899275,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": 0.17397899582566187,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": 0.08891856047848284,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": 0.03655064035831235,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.021548427261766784,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.04548496190316914,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": 0.32116610744104224,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": 0.24616753675556327,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.18485639008083649,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.14661108091119252,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.13483527882656682,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.166667,
+      "originalHead": [
+        0.5313893124995944,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.14836791521934137,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": 0.14784509047281544,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": 0.025100757449130096,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": -0.057030116379479856,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": -0.08982744494491876,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": -0.07002219965756068,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": -0.0012207314691494997,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": 0.14857536841086755,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": 0.034751514449810283,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": -0.0402678607102383,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": -0.06951628411789845,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": -0.0522158023418865,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": 0.007424291047216841,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": 0.17101610789707156,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": 0.07960877393727026,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": 0.020317089252346765,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": -0.002099448231162482,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.015478217309190023,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.06740440885551999,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": 0.2107884175357511,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": 0.15063671264535022,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.11494562269126724,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.10667838937799404,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.12449053370937357,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.1661636507529459,
+      "part": "head"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": 0.24738256709240522,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": 0.211837370957506,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.19475310071499313,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.19620024666511904,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.20869353026459297,
+      "part": "head"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.20247756881035311,
+      "part": "head"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": 0.17135179852294735,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": 0.08025336822220497,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": 0.021198026714955465,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": -0.0010807614253001419,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.016524098963802136,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.06834553138239971,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": 0.21136055411601512,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": 0.15161233623217807,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.11621201459234645,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.1081403079398987,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.1259556442967938,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.233333,
+      "originalHead": [
+        0.6990726856481385,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.16686969973571328,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": 0.04186757293601423,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": -0.05344422939155913,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": -0.10183963485554134,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": -0.0980288555749736,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": -0.04244240273327071,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": 0.04283096602306585,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": 0.04160450478714575,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": -0.04486152779556807,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": -0.08648901044148044,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": -0.08015233819063286,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": -0.030008665272605317,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": 0.05633197737402783,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": 0.06345173401003557,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": -0.002228821960140237,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": -0.03061228533218746,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": -0.017890164317217627,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.031687392334808856,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.08907547502608651,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": 0.10171025766148384,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": 0.06512585060314649,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.05910626602381072,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.0825392610427827,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.1332430412431605,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.13735619091629916,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": 0.13637314334457193,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": 0.12329860871311876,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.1331703618101802,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.16676210479441136,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.16779392348953792,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.17402599105391386,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": 0.06372711239277845,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": -0.0017370385204101835,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": -0.030002178450891537,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": -0.01718465699516364,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.03239042957876481,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.08943333312146398,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": 0.1021064997098427,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": 0.06580022372228272,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.05999412921832331,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.08352010646702712,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.1336229270984909,
+      "part": "head"
+    },
+    {
+      "seconds": 13.3,
+      "originalHead": [
+        0.816049793497747,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.13782911229249023,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": -0.04285565221683518,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": -0.1048654214208575,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": -0.11539007055518771,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": -0.07348946405770473,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": 0.006502541548993462,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": 0.03144766266640231,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": -0.04385699157424938,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": -0.09737680996666509,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": -0.10212634909380963,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": -0.060589313016327,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": 0.018825226024238667,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": 0.05143449338691347,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": -0.02423793075785477,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": -0.059693454679744073,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": -0.053663448464395636,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": -0.006996760361573429,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.06695952926136431,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.0771230533888278,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": 0.010965614134320262,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": 0.0003979177412655188,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.02519195624045717,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.08187236900233588,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.10357266400000684,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.11984894616037522,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": 0.04195916484971707,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": 0.051912144976114516,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.09063932630811147,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.12037968685872802,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.13109272621564988,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.15218833723643693,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": -0.024306405090785466,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": -0.05980451962848449,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": -0.05381515485941851,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": -0.007165132456537826,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.06689127228864969,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.07703418679894752,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": 0.01086837132131857,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": 0.00023023119659459912,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.024980785851595577,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.08162847645178689,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.10348548208514016,
+      "part": "head"
+    },
+    {
+      "seconds": 13.366667,
+      "originalHead": [
+        0.8488178603492931,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.11973540092255236,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": -0.11285888320718906,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": -0.11970237910557402,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": -0.0742317318946801,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": 0.007342374233549692,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": 0.02711370846036426,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": 0.05223595733971492,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": -0.11312497471469088,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": -0.11404355008582523,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": -0.06673521740520899,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": 0.017169854548034144,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": 0.04039901337362051,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": 0.059376610439167865,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": -0.09830604822459088,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": -0.08696289101347113,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": -0.032787874535467526,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": 0.0476204983886096,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.05624189279070474,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.08406653389700453,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": -0.0716826049160221,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": -0.04211302814628967,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.02421999034057637,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.062457659971934226,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.0830288555922149,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.11784125269648604,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": -0.048595630700727616,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": -0.005463002862760191,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.06760818315576694,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.07735593583742223,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.10283983760041887,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.14256556874736853,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": -0.09923276840850623,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": -0.08846602547740912,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": -0.03472755016114823,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": 0.047224428939541846,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.055395444549773604,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.08328632649408269,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": -0.07299867290372475,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": -0.04438246983146643,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.021362045571674954,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.061613097454224275,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.08162627672767742,
+      "part": "head"
+    },
+    {
+      "seconds": 13.466667,
+      "originalHead": [
+        0.7261551313144163,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.11624679046088332,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0,
+      "minY": -0.10833946385514823,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0,
+      "minY": -0.053025497302895463,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0,
+      "minY": 0.032868155879659675,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0,
+      "minY": 0.03783463946463239,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0,
+      "minY": 0.0654885255112459,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0,
+      "minY": 0.10352131148399868,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.4,
+      "minY": -0.10766519531453611,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.4,
+      "minY": -0.05087083991024144,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.4,
+      "minY": 0.034368570867462256,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.4,
+      "minY": 0.04233308897110516,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.4,
+      "minY": 0.06720123081101159,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.4,
+      "minY": 0.10526471549045496,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 0.7,
+      "minY": -0.09989655330186986,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 0.7,
+      "minY": -0.03868537410114686,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 0.7,
+      "minY": 0.037764302687032236,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 0.7,
+      "minY": 0.04734091548428576,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 0.7,
+      "minY": 0.0752200837014857,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 0.7,
+      "minY": 0.11411513345473101,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1,
+      "minY": -0.0859827534295804,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1,
+      "minY": -0.017674143311476764,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1,
+      "minY": 0.04300244095956007,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1,
+      "minY": 0.05573267853258834,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1,
+      "minY": 0.08866207475584931,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1,
+      "minY": 0.1286052035668397,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": 1.2,
+      "minY": -0.07444091088175281,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": 1.2,
+      "minY": -0.00021689634598753837,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": 1.2,
+      "minY": 0.04666113181544096,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": 1.2,
+      "minY": 0.061972230726525857,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": 1.2,
+      "minY": 0.09594226162587965,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": 1.2,
+      "minY": 0.14054798011679803,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -0.7,
+      "minY": -0.1019004526926226,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -0.7,
+      "minY": -0.0416673873917576,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -0.7,
+      "minY": 0.03696729160549572,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -0.7,
+      "minY": 0.046619421783788306,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -0.7,
+      "minY": 0.07363517811977521,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -0.7,
+      "minY": 0.11197956715870816,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": -0.3,
+      "yaw": -1,
+      "minY": -0.08882856156511129,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0,
+      "yaw": -1,
+      "minY": -0.022270600368314408,
+      "part": "nvg"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.3,
+      "yaw": -1,
+      "minY": 0.04191659900626643,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.6,
+      "yaw": -1,
+      "minY": 0.05441950273131391,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 0.9,
+      "yaw": -1,
+      "minY": 0.08617970949582965,
+      "part": "head"
+    },
+    {
+      "seconds": 13.6,
+      "originalHead": [
+        0.38656260409973925,
+        0,
+        0
+      ],
+      "pitch": 1.2,
+      "yaw": -1,
+      "minY": 0.1254894211038159,
+      "part": "head"
+    }
+  ],
+  "ok": true,
+  "errors": [],
+  "finished": "2026-10-13T12:29:18.431Z"
+}

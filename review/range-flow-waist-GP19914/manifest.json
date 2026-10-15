@@ -1,0 +1,132 @@
+{
+  "files": [
+    {
+      "path": "ui/range-feature.js",
+      "sha256": "91677419596d77d6955f1b0e84c7a34f6b7e426bd50d940f57c6b2e188b79d7e"
+    },
+    {
+      "path": "ui/range-console.js",
+      "sha256": "155b554a719ff2b0454a447abda764dc50b678d9e90df99167a210fc04825790"
+    },
+    {
+      "path": "ui/range-monitor.js",
+      "sha256": "134eddb985d4a09cf55522b358027c3355b20dd9d8a2abf39362e42e7ba2de8a"
+    },
+    {
+      "path": "ui/range-drills.css",
+      "sha256": "94a725286674ee9b33c4ce8ea31f0d119919c16b0109932f00497f78e0194e7c"
+    },
+    {
+      "path": "ui/strings.js",
+      "sha256": "a527260d1e1888b6fe8bbe6e64bb40d30aa9e07bd4698b6d8dd70abb39e49a71"
+    },
+    {
+      "path": "studio/marine-waist.js",
+      "sha256": "3215e6ed0992596cf36330f74e7957d49d270a61f56775399357dbde35426e03"
+    },
+    {
+      "path": "index.html",
+      "sha256": "0449673213f52c814e1f3a9f6a9b5a09a226ec10a181b53639aa3c0356ddb391"
+    }
+  ],
+  "native": {
+    "loadSec": 22.885,
+    "flow": {
+      "state": "IDLE",
+      "open": false,
+      "targets": 5,
+      "magRestored": true,
+      "focus": "BODY",
+      "monitor": {
+        "updates": 18,
+        "height": 3.3448,
+        "bottom": 2.6448
+      }
+    },
+    "report": {
+      "text": "Last drill resultDraw on the Beep30DRILL COMPLETERun time: 2.60sshot accuracy: 100.0%Plates cleared: 1/1Shots fired: 1First shot after beep: 2.17sBase 10 + bonuses 20 − deductions 0New personal record: Best score · Fastest full clear · Best full-clear accuracy · Fastest draw + shot",
+      "oldModal": false
+    },
+    "movement": {
+      "before": -644,
+      "after": -647.2867677207622
+    },
+    "walk": {
+      "maxGap": 0,
+      "maxSway": 0.020998896888751107,
+      "waist": {
+        "vertices": 1656,
+        "triangles": 552,
+        "uploads": 1187
+      }
+    },
+    "cloth": [
+      {
+        "lean": 0,
+        "twist": 0,
+        "roll": 0,
+        "low": 84,
+        "high": 504,
+        "soft": 1068,
+        "error": 1.2909755597867445e-8,
+        "normalError": 3.5152362354295974e-8
+      },
+      {
+        "lean": 0.36,
+        "twist": 0.5,
+        "roll": 0.05,
+        "low": 84,
+        "high": 504,
+        "soft": 1068,
+        "error": 5.963338047079005e-8,
+        "normalError": 3.800155068400812e-8
+      },
+      {
+        "lean": 0.6,
+        "twist": -0.9,
+        "roll": -0.07,
+        "low": 84,
+        "high": 504,
+        "soft": 1068,
+        "error": 5.8736310750972843e-8,
+        "normalError": 3.850049634657182e-8
+      },
+      {
+        "lean": -0.25,
+        "twist": 0.9,
+        "roll": 0.04,
+        "low": 84,
+        "high": 504,
+        "soft": 1068,
+        "error": 5.887875300205878e-8,
+        "normalError": 4.3116133774390164e-8
+      }
+    ],
+    "errors": []
+  },
+  "performance": {
+    "base": {
+      "loadSec": 20.16,
+      "perf": {
+        "fps": 60.532687651149715,
+        "low": 56.17977529030499,
+        "worst": 17.799999997019768,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    },
+    "perf": {
+      "loadSec": 23.627,
+      "perf": {
+        "fps": 59.880239520958085,
+        "low": 56.497175131730245,
+        "worst": 17.700000002980232,
+        "hitches": 0,
+        "frames": 60
+      },
+      "errors": []
+    }
+  },
+  "approval": "Jerry: Apply the tested waist fix"
+}

@@ -29,7 +29,7 @@ export function sculptGuardian(A,T,g,kind){
       [x+.020*lean,y-length*.77,z-.003]],.019);
   };
   const talon=(p,a,b,c,r=.034)=>{
-    rod(p,claw,a,b,r,r*.57,7);spike(p,claw,b,c,r*.58);
+    A.sweep(p,claw,[a,b,c],r,0);
   };
   const wrapPlate=(p,m,y,angle,rx,rz,w,h,d,tilt=0)=>{
     const o=rock(p,m,Math.sin(angle)*rx,y,Math.cos(angle)*rz,w,h,d,tilt);
@@ -193,6 +193,8 @@ export function sculptGuardian(A,T,g,kind){
       [-.68,.12,.105,.025],[-.99,.09,.088,.005],[-1.18,.105,.10,0]],10);
     egg(sh,cave?tendon:skin,-side*.045,-.31,.065,.26,.58,.27,-side*.11);
     egg(el,cave?tendon:skin,side*.018,-.34,.055,.22,.51,.22,side*.09);
+    // A fleshy hinge buries both end caps throughout the elbow bend.
+    egg(el,skin,0,0,0,.25,.27,.25);
     egg(el,edge,0,-.015,-.055,.26,.19,.22);
     if(cave){
       rock(sh,plate,side*.04,-.045,.045,.50,.43,.47,side*.26);
@@ -244,7 +246,8 @@ export function sculptGuardian(A,T,g,kind){
       weed(el,side*.08,-.52,-.10,.39,side);
     }
     // Broad knuckles bridge the wrist to articulated fingers without covering the grip.
-    egg(wr,skin,0,-.04,.065,.36,.14,.34);
+    // Continuous wrist heel into palm: the forearm no longer ends at a flat disk.
+    loft(wr,skin,[[.10,.095,.095,-.01],[.025,.108,.105,-.005],[-.04,.18,.17,.065],[-.105,.14,.13,.085]],12);
     for(let f=0;f<4;f++){
       const x=(f-1.5)*.082;
       path(wr,cave?tendon:edge,[[x*.45,.016,-.065],[x,.025,.072],[x,-.01,.20]],.019);
@@ -292,7 +295,8 @@ export function sculptGuardian(A,T,g,kind){
       path(kn,edge,[[0,-.10,.11],[.02,-.32,.13],[0,-.61,.071]],.031);
       path(hip,tendon,[[side*.12,-.10,.105],[side*.13,-.41,.11],[side*.06,-.70,.07]],.024);
     }
-    egg(ank,skin,0,-.055,.13,.28,.125,.42);
+    // Ankle socket tapers into the broad planted foot and embedded talon roots.
+    loft(ank,skin,[[.10,.094,.095],[.015,.112,.14,.06],[-.055,.14,.21,.13],[-.115,.10,.16,.13]],12);
     if(cave)rock(ank,plate,0,-.005,.055,.28,.14,.29,side*.12);
     for(let j=0;j<3;j++){
       const x=(j-1)*.087;

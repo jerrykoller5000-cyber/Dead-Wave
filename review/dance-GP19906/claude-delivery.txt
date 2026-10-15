@@ -1,0 +1,14 @@
+GP-19906 is ready and supersedes GP-19905 for the next dance review/integration.
+
+Exact20s,600frames,30fps,1280x720. Same accepted lighting/outfit/audio.
+Single directional hop group with a heel-toe groove replacing the second; tucked, pumping spin limbs; looser handstand flop; smoother roll into the ground freeze at19.279478s.
+
+Use review/dance-GP19906/marine-dance-transparent.webm for the silent full-frame alpha overlay.
+Use review/dance-GP19906/marine-dance.mp4 for the complete presentation with music.
+Read integration-notes.txt before integrating: crop[0,0,1280,720], no CSS tracking, original-song dancer.start9.151494 or pretrimmed-excerpt dancer.start0.
+Preserve the actual3D travel. Both videos verify600frames/20s; MP4 audio lag0; alpha0–255.
+Nine audit gates pass601poses/28boundaries/13exactseeks. Fourteen layout captures fit1280x720 and900x900 without text overlap.
+The live controller, card/voice timing and startup/decode checks remain yours. No live intro files have been changed here.
+
+Evidence and hashes: manifest.json, audit-summary.json, final-audit/proof.json, render-proof.json, render-alpha-proof.json, both video.verification.json files, composite-proof/proof.json.
+Handoff: handoffs/2026-10-13-chatgpt-GP-19906.md.

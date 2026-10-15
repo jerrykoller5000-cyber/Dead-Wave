@@ -1,0 +1,4 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {spawnSync} from 'node:child_process';
+const dir='review/jump-dive-GP19916',r=spawnSync(process.execPath,['--test','studio/marine-dive.test.mjs','review/dive-GP19915/policy.test.mjs',dir+'/policy.test.mjs'],{encoding:'utf8'});fs.writeFileSync(dir+'/unit-final.log',r.stdout+r.stderr);console.log(r.stdout+r.stderr);if(r.status!==0)process.exit(1);
+const files=['index.html','studio/marine-dive.js','studio/marine-dive.test.mjs'];const source=files.map(path=>{const b=fs.readFileSync(path);return {path,sha256:crypto.createHash('sha256').update(b).digest('hex'),bom:b[0]===239&&b[1]===187&&b[2]===191};});if(source.some(s=>s.bom))throw Error('BOM');
+fs.writeFileSync(dir+'/final-manifest.json',JSON.stringify({at:new Date().toISOString(),source,screenshots:['before-rise-air.png','after-rise-air.png'],concurrentChange:'Claude CL194 added slow:false timed-drill policy, retained alongside upwardSpeed'},null,2));

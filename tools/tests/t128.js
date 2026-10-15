@@ -104,11 +104,14 @@
     ok(xp('legs') === l0, 'a roll 5 m from a swinging zombie pays nothing');
     T.clearZombies();
     await wait(1600);
+    // CL-193: V is the shootdodge now; a dive (flight, lying, getting up) outlasts the roll's 1.6 s, so wait it out.
+    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle' && T.diveDbg().cd <= 0, 15000);
     l0 = xp('legs'); const near = real('shambler', 0, 1.1); near.swingT = 0.6;
     key('keydown', 'KeyV'); key('keyup', 'KeyV');
     ok(xp('legs') - l0 === 1, 'a roll 1.1 m from a swinging zombie pays 1 (' + (xp('legs') - l0) + ')');
     T.clearZombies();
     await wait(1200);
+    if (T.diveDbg) await until(() => T.diveDbg().phase === 'idle', 15000);   // CL-193: in the air a zombie's damage misses him
 
     // Vitality: the comeback
     const zb = real('shambler', 0, 30);

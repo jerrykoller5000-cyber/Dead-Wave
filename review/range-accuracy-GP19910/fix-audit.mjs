@@ -1,0 +1,1 @@
+import fs from 'node:fs';const p='review/range-accuracy-GP19910/audit.mjs';let s=fs.readFileSync(p,'utf8');s=s.replace(/id:'audit-[^']*',/,'').replace("['pistol','uzi','m4','ak','shotgun','aa12','revolver','sniper','minigun']","['pistol','m4','ak','uzi','shotgun','aa12','revolver','sniper','minigun']");fs.writeFileSync(p,s);

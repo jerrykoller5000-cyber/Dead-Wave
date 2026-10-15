@@ -1,0 +1,114 @@
+[
+    {
+        "target":  "weapon:sniper",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-sniper-left.png"
+    },
+    {
+        "target":  "weapon:sniper",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-sniper-three.png"
+    },
+    {
+        "target":  "weapon:aa12",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-aa12-left.png"
+    },
+    {
+        "target":  "weapon:aa12",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-aa12-three.png"
+    },
+    {
+        "target":  "weapon:chainsaw",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-chainsaw-left.png"
+    },
+    {
+        "target":  "weapon:chainsaw",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-chainsaw-three.png"
+    },
+    {
+        "target":  "weapon:mortar",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-mortar-left.png"
+    },
+    {
+        "target":  "weapon:mortar",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-mortar-three.png"
+    },
+    {
+        "target":  "weapon:knife",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-knife-left.png"
+    },
+    {
+        "target":  "weapon:knife",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-knife-three.png"
+    },
+    {
+        "target":  "weapon:machete",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-machete-left.png"
+    },
+    {
+        "target":  "weapon:machete",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-machete-three.png"
+    },
+    {
+        "target":  "weapon:revolver",
+        "view":  "left",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-revolver-left.png"
+    },
+    {
+        "target":  "weapon:revolver",
+        "view":  "three",
+        "size":  "1200x700",
+        "settle":  1500,
+        "margin":  0.9,
+        "out":  "review/gb180h0/before-revolver-three.png"
+    }
+]

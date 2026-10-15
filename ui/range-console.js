@@ -1,0 +1,47 @@
+import {text} from './strings.js';
+import {RANGE_WEAPONS} from './range-drills.js';
+import {orderedDrills,drillLevel,drillSteps,drillWeapons,targetGoal,drillInstruction,drillLaneOrder} from './range-guide.js';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const t=(k,p)=>esc(text(k,p)),label=d=>text(`range.drill.${d.weapon}.${d.id}.name`);
+export function mountRangeConsole({owned,signature,records,start,exit,cancel}={}){
+ if(!document.getElementById('rangeDrillStyle')){const link=document.createElement('link');link.id='rangeDrillStyle';link.rel='stylesheet';link.href=new URL('./range-drills.css',import.meta.url).href;document.head.append(link);}
+ const root=document.createElement('section');root.id='rangeConsole';root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label',text('range.console'));
+ const hud=document.createElement('aside');hud.id='rangeDrillHud';hud.hidden=true;document.body.append(root,hud);
+ let weapon='pistol',selected=null,mode='selection',error='',last='',view=null,metric='score',detailView='briefing',lastRun=null;
+ function boards(d){
+  const b=records.summary(d,signature(d.weapon,d)),all=records.list(d,signature(d.weapon,d)),rows=metric==='score'?all:all.filter(r=>r.goal>0&&r.cleared>=r.goal&&r.missed===0).sort((a,b)=>metric==='speed'?a.time-b.time:b.efficiency-a.efficiency);
+  const cards=[['score',b.score?.score],['speed',b.speed?b.speed.time.toFixed(2)+'s':null],['accuracy',b.accuracy?b.accuracy.efficiency.toFixed(1)+'%':null]];
+  if(d.startHolstered)cards.push(['draw',b.draw?b.draw.firstShot.toFixed(2)+'s':null]);
+  return `<section class="rd-records"><h3>${t('range.records.personal')}</h3><div class="rd-best-grid">${cards.map(([k,v])=>`<div><small>${t(d.continuous&&k==='accuracy'?'range.records.contact':'range.records.'+k)}</small><b>${v??t('range.records.none')}</b></div>`).join('')}</div><p class="rd-dim">${t('range.records.fair')}</p><div class="rd-metric-tabs" role="group" aria-label="${t('range.records.sort')}">${['score','speed','accuracy'].map(k=>`<button data-metric="${k}" aria-pressed="${k===metric}">${t('range.records.'+k)}</button>`).join('')}</div>${rows.length?`<ol class="rd-history">${rows.map(r=>`<li><b>${t('range.records.runScore')}: ${r.score}</b><span>${t('range.records.time')}: ${r.time.toFixed(2)}s</span><span>${t(d.continuous?'range.contact':'range.accuracy')}: ${r.efficiency.toFixed(1)}%</span><span>${t('range.records.cleared')}: ${r.cleared==null?t('range.records.none'):r.cleared+'/'+r.goal}</span><time>${esc(new Date(r.at).toLocaleDateString())}</time></li>`).join('')}</ol>`:`<p class="rd-empty">${t(all.length?'range.records.noClean':'range.empty')}</p>`}</section>`;
+ }
+ function runReport({r,d,entry}){
+  return `<section class="rd-last-run"><header><div><small>${t('range.lastRun')}</small><h3>${esc(label(d))}</h3></div><b class="rd-run-score">${r.valid?r.score:t('range.void')}</b></header><p>${t('range.'+r.state.toLowerCase())}${r.reason?' · '+t('range.reason.'+r.reason):''}</p><div class="rd-result-metrics"><span>${t('range.records.time')}: <b>${r.time.toFixed(2)}s</b></span><span>${t(d.continuous?'range.contact':'range.accuracy')}: <b>${r.efficiency.toFixed(1)}%</b></span><span>${t('range.records.cleared')}: <b>${r.cleared}/${targetGoal(d)}</b></span><span>${t('range.records.shots')}: <b>${r.shots}</b></span>${r.firstShot!=null?`<span>${t('range.records.first')}: <b>${r.firstShot.toFixed(2)}s</b></span>`:''}</div><p>${t('range.breakdown',{base:Math.round(r.base),bonuses:Math.round(r.bonuses),deductions:Math.round(r.deductions)})}</p>${r.valid&&entry?.newBests?.length?`<p class="rd-best-announcement">${t('range.records.new',{records:entry.newBests.map(k=>text('range.records.'+k)).join(' · ')})}</p>`:''}</section>`;
+ }
+ function details(d){
+  const available=drillWeapons(d).every(owned),order=drillLaneOrder(d);
+  return `<section class="rd-details"><div class="rd-detail-heading"><div><small class="rd-level">${t('range.level.'+drillLevel(d))}</small><h3>${esc(label(d))}</h3></div><button class="rd-start" data-start ${available?'':'disabled'}>${t(available?'range.start':'range.locked')}</button></div><div class="rd-detail-tabs" role="group" aria-label="${esc(label(d))}">${['briefing','records'].map(k=>`<button data-view="${k}" aria-pressed="${detailView===k}">${t('range.menu.'+k)}</button>`).join('')}</div>${detailView==='briefing'?`<div class="rd-briefing"><p>${t(`range.drill.${d.weapon}.${d.id}.objective`)}</p><ol class="rd-steps">${drillSteps(d).map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="rd-facts"><span>${t('range.guide.goal',{targets:targetGoal(d)})}</span><span>${t('range.guide.limit',{time:d.duration})}</span><span>${t('range.guide.order',{order})}</span></div><p class="rd-dim">${t('range.guide.required',{weapons:drillWeapons(d).map(w=>text('range.weapon.'+w)).join(' + ')})}</p><details><summary>${t('range.guide.scoring')}</summary><p>${d.continuous?t('range.continuous',{contact:d.contact,clear:d.clearBonus}):t('range.points')}</p><p>${t('range.penalties',{miss:d.missPenalty,wrong:d.wrongZonePenalty})}</p><p>${t('range.guide.noSilent')}</p></details></div>`:boards(d)}${error?`<p class="rd-error" role="alert">${t('range.'+error)}</p>`:''}<p class="rd-dim">${t('range.monitor.choose')}</p></section>`;
+ }
+ function render(){
+  if(mode!=='selection')return;const ds=orderedDrills(weapon),d=selected||ds[0];selected=d;
+  root.innerHTML=`<div class="rd-panel"><header><div><small>${t('range.select')}</small><h2>${t('range.console')}</h2></div><button data-close aria-label="${t('range.close')}">×</button></header><p>${t('range.menu.intro')}</p><div class="rd-path">${[1,2,3].map(n=>`<span>${n}. ${t('range.level.'+n)}</span>`).join('<i>→</i>')}</div><section class="rd-weapon-section"><h3>${t('range.menu.weapon')}</h3><nav aria-label="${t('range.weapons')}">${RANGE_WEAPONS.map(w=>`<button data-weapon="${w}" class="${w===weapon?'selected':''}">${t('range.weapon.'+w)}${owned(w)?'':' 🔒'}</button>`).join('')}</nav></section><main class="rd-layout"><section class="rd-drill-section"><h3>${t('range.menu.drill')}</h3><div class="rd-drills">${ds.map((v,i)=>`<button class="range-card ${v===d?'selected':''}" data-drill="${v.id}" aria-pressed="${v===d}"><span class="rd-number">${i+1}</span><span><small>${t('range.level.'+drillLevel(v))}</small><b>${esc(label(v))}</b><span>${t(`range.drill.${weapon}.${v.id}.objective`)}</span></span></button>`).join('')}</div></section>${details(d)}</main>${lastRun?runReport(lastRun):''}</div>`;
+ }
+ root.addEventListener('click',e=>{
+  e.stopPropagation();const b=e.target.closest('button');if(!b)return;
+  if(b.hasAttribute('data-close')||b.hasAttribute('data-exit')){exit();return;}
+  if(b.dataset.view){detailView=b.dataset.view;render();return;}
+  if(b.dataset.metric){metric=b.dataset.metric;if(mode==='selection')render();return;}
+  if(b.dataset.weapon){weapon=b.dataset.weapon;selected=null;error='';detailView='briefing';render();return;}
+  if(b.dataset.drill){selected=orderedDrills(weapon).find(d=>d.id===b.dataset.drill);error='';detailView='briefing';render();return;}
+  if(b.hasAttribute('data-start')){const r=start(selected);if(!r.ok){error=r.reason;render();}}
+ });
+ for(const event of ['pointerdown','pointerup','mousedown','mouseup','wheel'])root.addEventListener(event,e=>e.stopPropagation());
+ const key=e=>{if(root.hidden){if(e.code==='Escape'&&view&&['PREPARING','COUNTDOWN','ACTIVE'].includes(view.state)){e.preventDefault();e.stopImmediatePropagation();cancel();}return;}if(['KeyE','KeyB','KeyG','KeyF','Space','Enter'].includes(e.code)){e.stopImmediatePropagation();if(e.code==='Enter'&&e.target?.tagName==='BUTTON')e.target.click();e.preventDefault();}if(e.code==='Escape'){e.preventDefault();e.stopImmediatePropagation();exit();}};window.addEventListener('keydown',key,true);
+
+ const api={
+  open(){mode='selection';root.hidden=false;hud.hidden=true;error='';render();root.querySelector('[data-weapon="'+weapon+'"]')?.focus();},close(){root.hidden=true;},isOpen:()=>!root.hidden,
+  setResult(r,d,entry){lastRun={r,d,entry};},
+  update(s){view=s;const live=['PREPARING','COUNTDOWN','ACTIVE'].includes(s.state);hud.hidden=!live;hud.classList.toggle('rd-countdown',s.state==='COUNTDOWN');if(!live||!s.drill)return;const d=s.drill,k=JSON.stringify([s.state,Math.ceil(d.duration-s.elapsed),s.score,s.wave,s.stats.cleared,s.plan?.weapon,s.action,s.plan?.zone,s.plan?.priority]);if(k===last)return;last=k;hud.innerHTML=`<small>${esc(label(d))}</small><strong>${t('range.'+s.state.toLowerCase())}</strong>${s.state==='ACTIVE'?`<div class="rd-numbers"><b>${t('range.score',{score:s.score})}</b><span>${t('range.time',{time:Math.max(0,Math.ceil(d.duration-s.elapsed))})}</span></div><p>${esc(s.action==='draw'?text('range.guide.draw'):s.action==='reload'?text('range.guide.reload'):drillInstruction(d,s.plan))}</p><small>${t('range.progress',{wave:s.wave,waves:d.waves,cleared:s.stats.cleared})}</small>`:`<p>${t('range.monitor.watch')}</p>`}<small>${t('range.cancelHint')}</small>`;},
+  destroy(){window.removeEventListener('keydown',key,true);root.remove();hud.remove();}
+ };
+ return api;
+}

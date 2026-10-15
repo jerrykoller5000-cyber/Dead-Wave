@@ -1,0 +1,54 @@
+{
+  "before": {
+    "loadSec": 22.468,
+    "perf": {
+      "samples": [
+        {
+          "fps": 60.67040800739686,
+          "worst": 20.5,
+          "hitches": 0
+        },
+        {
+          "fps": 59.151180559326235,
+          "worst": 24.099999964237213,
+          "hitches": 0
+        },
+        {
+          "fps": 60.16545500125345,
+          "worst": 20.900000035762787,
+          "hitches": 0
+        }
+      ],
+      "alive": 48
+    },
+    "t142": "FAIL a sandbag starts a vault\nPASS he is 652.36 m past the sandbag (want >= 0.5)\nPASS he is down and the hop is over (0 waits)\nPASS he is not still inside it (push 0.00)\nFAIL during the hop he keeps 70% of his speed (1.00 of 1.00)\nFAIL wire: 652.70 m past, grounded true\nFAIL barricade: 656.64 m past, push 0.00\nPASS a plain wall does not vault\nFAIL an unbarred window vaults (656.58 m past)\nFAIL a ring of barricades can be left (moved 660.77 m, stuck false)",
+    "t215": "PASS read index.html and the scripts and styles the game loaded (227 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×0H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×0H×0)",
+    "errors": []
+  },
+  "after": {
+    "loadSec": 22.275,
+    "perf": {
+      "samples": [
+        {
+          "fps": 60.61218304842784,
+          "worst": 21.69999998807907,
+          "hitches": 0
+        },
+        {
+          "fps": 60.28333165987938,
+          "worst": 23.299999952316284,
+          "hitches": 0
+        },
+        {
+          "fps": 59.47365812418301,
+          "worst": 24.5,
+          "hitches": 0
+        }
+      ],
+      "alive": 48
+    },
+    "t142": "FAIL a sandbag starts a vault\nPASS he is 652.36 m past the sandbag (want >= 0.5)\nPASS he is down and the hop is over (0 waits)\nPASS he is not still inside it (push 0.00)\nFAIL during the hop he keeps 70% of his speed (1.00 of 1.00)\nFAIL wire: 652.70 m past, grounded true\nFAIL barricade: 656.64 m past, push 0.00\nPASS a plain wall does not vault\nFAIL an unbarred window vaults (656.58 m past)\nFAIL a ring of barricades can be left (moved 660.77 m, stuck false)",
+    "t215": "PASS read index.html and the scripts and styles the game loaded (227 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 12:00\", tacticalLine \"NVG — · Laser — · Light —\", grenadeChips \"G×0H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG — · Laser — · Light — / G×0H×0)",
+    "errors": []
+  }
+}

@@ -1,0 +1,42 @@
+✔ flat head and boots stop before a thin wall even when the root clears it (1.1446ms)
+✔ fast swept dive cannot tunnel through a thin wall and diagonal motion slides along it (0.1603ms)
+✔ body above a short obstacle clears it; downward body at its height is blocked (0.1793ms)
+✔ tree/rock circles sweep from outside and a contacted velocity cannot keep driving into the surface (0.4931ms)
+✔ touching a wall can steer away without breaking flight or slow-motion policy (0.1503ms)
+✔ flight knees and ankles vary over time, recovery plants before extending, poses stay finite (0.8207ms)
+✔ recovery leg IK puts a reachable ankle on its plant and keeps the boot level through torso rotations (2.3102ms)
+✔ corner contact and initial overlap resolve without tunnelling or non-finite corrections (0.2656ms)
+✔ backward-dive boots overlapping a narrow trunk cannot push the root through to its far side (0.1429ms)
+✔ a backward dive turns a chest-up reach toward the aim instead of keeping it vertical (1.1296ms)
+✔ changing aim pitch moves the whole grip while preserving reach length and lateral bias (0.1968ms)
+✔ mirrored dual reaches stay separated and track together (0.1818ms)
+✔ zero weight, degenerate aims, and antiparallel aims remain finite without changing input vectors (0.1834ms)
+✔ takeoff and recovery blend smoothly through a rotation without shrinking arm reach (0.5336ms)
+✔ aiming toward the feet cannot place the pistol in the belt or carrier (2.089ms)
+✔ dual clearances keep each hand on its own side (0.132ms)
+✔ standing hold is unchanged and partial takeoff stays continuous (0.7635ms)
+✔ barrel can track nearly along the feet but never point through the back (1.6944ms)
+✔ rearward and degenerate cursor picks have finite safe fallbacks (0.1699ms)
+✔ belly-down hold clears the side instead of forcing the pistol under the chest into the floor (0.1555ms)
+✔ airborne blade stays beside the carrier, with a continuous cock, strike, and recovery (2.0563ms)
+✔ ground dive keeps its existing lift; rising jump momentum is carried (0.7929ms)
+✔ apex/descent receives the usual dive lift once, never a stacked lift (0.1762ms)
+✔ air conversion retains meter cost and cannot retrigger while diving or recovering (1.0249ms)
+✔ empty-meter and timed-drill jump dives retain lift without bullet time; kill refill stays unchanged (0.1798ms)
+✔ carrying an early jump produces more height and airtime than a ground dive (0.276ms)
+✔ a dive flies about 5 m in slow motion, lands, lies, gets up and cools down (2.6649ms)
+✔ a move key gets him up early, but not before downMin (0.3352ms)
+✔ steering bends the flight and keeps the speed in range (1.016ms)
+✔ the meter pays for slow motion; empty, the dive is at full speed; it refills idle and with kills (0.6831ms)
+✔ a dive with slow: false (a timed range drill) has no bullet time and costs no meter (0.2375ms)
+✔ the meter running dry mid-flight eases time back to normal (0.2524ms)
+✔ the body lies flat in the air, lower on the way down, flat on the ground, upright again after (0.3215ms)
+✔ the chest turns to the aim: sideways dive faces it, forward is belly down, backward is on his back (0.4675ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132.3554

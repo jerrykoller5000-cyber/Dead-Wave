@@ -1,313 +1,170 @@
 # Grave Shift crew board
 
-Lead: Claude. Last updated 2026-10-10T06:00Z by Claude (the board brought up to date: 31 finished tasks archived, Start here and the queues rewritten for what is open now).
+Lead: Claude. Rewritten 2026-10-15 (CL-199); the road to 1.0 added the same day. Jerry reads the **Crew Panel** (`crew/Open Crew Panel.bat`); agents start
+every session with **`node crew/crew.mjs me <you>`** (your card, requests waiting for you, your queue, the test slot, the
+commands). Rules: `AGENTS.md`. The old board, whole: `crew/archive/board-2026-10-15.md`.
 
-This is the one place to look before you work. `AGENTS.md` has the rules and the check-in steps; this board has what
-to work on and what has been decided. **Claude (lead) and Jerry edit this file.** The one exception: each agent ticks
-the box of its *own* tasks, which `crew.mjs in` (▶) and `crew.mjs out --done` (✓) do for you. Everyone else reports
-through their check-in card, `crew.mjs note`, their handoff note, and `handoffs/requests.md`.
+Claude and Jerry write this file. Agents change only their own task's box, which `crew.mjs in` (▶) and `out --done` (✓)
+do; a task Jerry gives you in chat goes on your queue by itself when you check in with its id.
 
-Live view for Jerry: double-click `crew/Open Crew Panel.bat`. In a terminal: `node crew/crew.mjs`.
+## Game-test slot
 
-**Told to "check in with the crew work board and complete your tasks"?** This is the board.
-1. Read `AGENTS.md` if you haven't this session. Its "Every session" steps say how to check in, post notes and check out.
-2. Find your row in **Start here** below. Or run `node crew/crew.mjs next <you>` (`claude`, `cursor`, `chatgpt`,
-   `grokbot`, `antigravity`).
-3. Work your queue's **Now** list top to bottom, one check-in and one handoff per task. Don't stop to ask Jerry whether
-   to continue. A task that says "after XX-n" waits for it; a task that has left the board is done.
-
-## Start here
-
-Each agent's queue (below, under Queues) is in three parts: **Now** (start it), **Waiting** (it says on what) and
-**Later** (R6, the road to 1.0). Take them in this order:
-
-| Agent | Now, in this order | Waiting | Later (R6) |
-| --- | --- | --- | --- |
-| Cursor | CU-110: the full suite (its preflight passes again, CL-150), then commit and push everything waiting | — | — |
-| Claude | reviews as they land; the story v3 cards wait for Jerry (`handoffs/2026-10-07-claude-story-v3-cards.md`) | — | — |
-| ChatGPT | GP-180 (the words CU-109 and CL-151 left), GP-181 (the demons take turns: Jerry said yes) | — | — |
-| Grokbot | GB-156: resume; t244 now runs (16 pass, 4 fail: the "no jump" limits, see the task) | — | — |
-| Antigravity | AG-64 (eyes on GP-179 and the Training Ground changes), AG-52 | — | — |
-
-Not sure a task is yours (the table under "Who does what")? Say so with `crew.mjs request`; don't start it.
-
-## Who runs on what (current)
-
-Jerry moves agents between models; this table is from 2026-09-29. Each check-in's `--model` is the truth, and Jerry
-tells Claude when the table should change.
-Each agent's card (`crew/status/<you>.md`, `model:`) and its next check-in `--model` should match it.
-Older notes and decisions below that name other models are history.
-
-| Agent | Model now | Where it runs |
-| --- | --- | --- |
-| Claude (lead) | Claude Opus 5.5 | Cowork, writing through the desktop bridge |
-| Cursor | Grok 4.7 (High) | Cursor IDE on Jerry's PC |
-| ChatGPT | GPT-6 Sol (High) | ChatGPT / Codex app on Jerry's PC |
-| Grokbot | Grokbot | Grok Bot app on Jerry's PC |
-| Antigravity | Gemini 3.1 Pro (High) | Antigravity editor with a browser, on Jerry's GPU |
-| OpenCode | left the crew 2026-09-23 | — |
-
-## Who does what (playing to strengths)
-
-The roadmap gives each agent the work its model is best at (D-43). If a task looks like it belongs to
-someone else, say so with `crew.mjs request`; don't start it.
-
-| Agent | Give it | Keep it away from |
-| --- | --- | --- |
-| Claude (lead) | Cross-cutting design: the world, the studio and the reactions (D-42), the music, the story (D-44), specs, contracts, reviews and decisions. | Long mechanical sweeps (hand them to Cursor). |
-| Cursor | Tools (no timed or long runs: D-71), integration plumbing (events, drops), player physics, the suite, commits, the 1.0 package. | Design calls and player-facing copy. |
-| ChatGPT | Pure modules with unit tests (`ui/*.js`, `game/*.js`: the board's cards, records, badges, the quest UI), every word the player reads, the economy's numbers. | Browser tests (his runner can't: whoever commits runs them) and big edits in `index.html`'s combat. |
-| Grokbot | Combat inside `index.html`: zombies, the director, weapons, builds, scripted deaths, the boat's flow; headless sims; tuning the reaction presets from Jerry's notes. | UI copy and world geometry. |
-| Antigravity | Eyes on Jerry's GPU when asked: shots and videos of a change (Jerry plays the runs himself: D-71). | Game code (none: D-9). |
-
-## Mission
-
-**Jerry's direct work, 2026-10-09 and 10 (he has been giving agents tasks in chat): close it out.** Every change since the
-last push gets the full suite and a commit (CU-110); what is half done gets finished (GB-156); what changed on screen
-gets eyes (AG-64); the words catch up (GP-180). Jerry is making the zombie sounds himself (ElevenLabs, CL-145): they go
-into `z-sounds/` and play as they land (CL-148), so nothing waits on them. D-71 still holds: build the pieces, a quick
-test each, and Jerry plays.
-- **Cursor** · CU-110 · handoffs/cursor-CU-110.md
-- **Grokbot** · GB-156 · handoffs/2026-10-09-grokbot-GB-156.md
-- **ChatGPT** · GP-180 · handoffs/chatgpt-GP-180.md
-- **Antigravity** · AG-64 · handoffs/antigravity-AG-64.md
-Then: Jerry's next playthrough (R6), and the release. After 1.0: R7, co-op for up to 4 (D-58, `docs/coop.md`).
+One game test at a time per computer (Jerry, 2026-10-15). Anything that starts the game goes through the automatic queue:
+`node crew/crew.mjs slot run <you> <task> --checks "<what you check>" -- <command>`. It waits for its turn, runs one
+instance with `--jobs 1`, closes it and releases. Jerry's own game or inspector always comes first. While you wait, keep
+coding. If your session ends before your turn: `node crew/crew.mjs wait <you> "<what is ready>"` (it says "Changes
+ready; waiting for testing slot" on your card and on Jerry's panel). The full suite is one coordinated job (Cursor's
+CU-110). Claude's cloud is a separate computer; it keeps to one instance there too. `AGENTS.md` rule 16 has it all.
 
 ## Waiting on
 
-The panel's "Right now" box draws this. Claude keeps it current: one line for each thing that
-others can't go on without, as `- **<who>** · <task> · waiting: <agents>`. A line whose task
-ids are all finished drops off the panel by itself. The panel also works out waits it can see:
-a card blocked on another agent, and a next task that says "after the split" or "after XX-n".
+One line per thing others can't go on without: `- **<who>** · <task> · waiting: <agents>`. The panel's "Needs you" box
+reads it; a line whose task ids are all finished drops off by itself.
 
-- **Antigravity** · AG-64 · waiting: Cursor (CU-110's suite run first, so the shots are of what gets committed)
+(Nothing right now.)
 
-## The roadmap (D-43)
-
-Seven stages. Each ends when Jerry has played it; a task can start as soon as its own "after" is met, so the lanes
-keep moving. The Crew Panel's **Roadmap** box shows each stage's progress live. Every task in full:
-`docs/roadmap.md` (the P-ids). The Tasks column lists every task of the stage, finished ones included (the panel
-counts a listed id that has left the board as done).
-
-| Stage | Status | Goal | Jerry plays | Tasks |
-| --- | --- | --- | --- | --- |
-| **R1 · Trust the loop, and feel it** | ✓ Done | Skulls reach the bag; building says what it does; the dead react when hit; the marine gets knocked around. | A fresh run to night 5; notes in the motion lab. | GB-60, GB-61, GB-62, GB-63, GB-64, GB-65, GB-66, GB-67, GB-68, GB-69, GB-70, GP-45, GP-46, GP-47, CL-66, CL-67, CL-68, CU-47, CU-48, CU-49, CU-50, AG-20, AG-21 |
-| **R2 · The night has a shape** | ✓ Done | One breather and a surge you can hear; plates, screamers, bomber chains; streaks heal; the best run saved; the first catch escapable. | Night 5 fresh, then 10 and 13 from the debug start. | GB-59, GB-71, GB-72, GB-73, GB-74, GB-75, GB-76, GB-77, GB-78, GB-96, CU-77, CL-102, GB-99, GB-100, GP-48, GP-49, GP-50, GP-51, GP-52, GP-53, CL-62, CL-69, CL-70, CL-71, CL-87, CU-51, CU-59, CU-63, AG-22, GB-103, CL-91, CU-75, GP-85, CU-78, AG-30, GP-86, CL-104, CL-105, GB-112 |
-| **R3 · The day feeds the night** | ✓ Done | The relay, then one call a day; caches, drums, the vault; guns by act at fixed prices, one mod each. | Days 1-10 fresh. | GP-88, GB-81, GB-82, GB-83, GB-84, GP-54, GP-55, GP-56, GP-57, GP-58, GP-59, GP-60, GP-61, GP-62, CL-72, CU-52, AG-23, CL-88, GP-87, GB-101, GP-76, GP-77, GB-102, CL-89, CU-64, CU-65, GP-89, CU-67, GP-78, GP-79, GP-80, CL-90, GB-104, CL-94, CL-95, CU-68, CU-69, GB-111, CL-103 |
-| **R4 · The way out** | Jerry plays | The extraction at night 20 (Heron, story v2); the victory screen and badges; the relay tells the story. | A run to the boat, and a win. | GB-85, GB-86, GP-63, GP-64, GP-65, GP-66, CL-73, CL-74, CU-53, AG-24, CL-96, CU-70, CL-97, GP-82, GP-90 |
-| **R5 · Named nights and bigger systems** | ▶ Closing: GP-84 left | Fog Night, the siege, the day colossus, survivors, the guardian boss on its rig, the secret, the Hollows under the caves by day (D-67). | Nights 12-20 from the debug start; the secret; a delve in each warren. | GB-87, GB-88, GB-89, GB-90, GB-91, GB-92, GB-93, GP-67, GP-68, GP-69, GP-70, CL-75, CL-76, CL-77, CL-78, CL-79, CL-80, CL-81, CU-54, AG-25, AG-26, CL-92, CL-93, GP-81, GB-105, CL-98, GB-106, CU-71, CL-99, GB-107, GB-108, GP-83, GP-84, CL-100, CU-72, CL-101, CU-73, AG-29, GP-91, CL-106, CL-107, CL-108, CL-109, CL-110, CU-79, GB-116, GB-117, GP-94, GP-95, CL-111, GB-119, CU-80, CU-86 |
-| **R6 · Finish (1.0)** | ▶ Jerry's direct work: close it out (the mission) | Balance from medians, the first hour teaching itself, sound and readability, green tests, the budgets, the package. | Three full runs; the release. | GB-94, GB-95, GP-71, GP-72, GP-73, CL-82, CL-83, CL-84, CL-85, CL-86, CU-55, CU-56, CU-57, AG-27, AG-28, CU-84, CU-85, GB-131, AG-50, CL-119, CL-120, CL-121, CL-122, CL-123, CU-87, CU-88, CU-89, CU-90, CU-91, GB-133, GB-134, GB-135, GB-136, GB-137, GB-138, GP-138, GP-139, GP-140, GP-141, CL-125, CL-126, CL-127, CL-128, CL-129, CL-130, CL-131, AG-52, GB-156, CU-110, GP-180, GP-181, AG-64 |
-| **R7 · Co-op, up to 4 players** | After 1.0 | Up to 4 players, one hosting, through the desktop app (D-58). | A night with friends. | Written when R6 closes. |
-
-**The story (D-70, story v2).** `docs/story.md` is the bible: a valley in the forest ringed by mountains, with a lake and
-rivers, not an island; the PGB (the Gravewalkers), FOB Threshold, Ridgeline on the relay, Heron the floatplane on night 20,
-the Marrow, three survivors on the roof. Read it before any task that touches words, props, survivors, the extraction or
-the Hollows. D-44's outline (the relay, one call a day, the three acts, the secret) still holds where story.md doesn't
-change it.
 
 ## Orders from Jerry
 
-Newest first. Claude writes these down when Jerry gives them in chat. Older ones: `crew/archive/board-queues-2026-10-05.md`
-(2026-09-25 to 09-30) and `crew/archive/board-queues-2026-09-26.md` (before that).
+Newest first, the ones still in force. Older ones: `crew/archive/board-2026-10-15.md` and the archives it names.
 
-- **2026-10-10 · Claude's list.** Jerry, asked what Claude would like to work on next: "Yeah everything except 5": the
-  GP-179 review, a look at CU-109, Grokbot's t244 on the camera, and this board (not z-sounds in the package: he is still
-  making the sounds). Done by Claude; the review is in handoffs/2026-10-10-claude-GP-179-review.md.
-- **2026-10-10 · Systematically.** Jerry, on Claude's four next jobs: "I would work through each systematically." Done by
-  Claude: CL-148 (his takes play from z-sounds/), D-79 (Grave Shift), CL-150 (the suite's preflight), CL-151 (test builds).
-- **2026-10-09 and 10 · Direct tasks.** Jerry gave agents work in chat: Claude CL-142 to CL-147 (the planes and the
-  parachute, build mode in the Training Ground and its hangar, bigger targets and a score, the zombie sound prompts and
-  folders, the hangar's flicker and the door keypad, his training clips); Cursor CU-107 to CU-109 (the blades, the lasers,
-  the flashlight and laser bought at the kiosk); ChatGPT GP-175 to GP-179 (the zombie voices, three new zombie abilities);
-  Grokbot GB-155 and GB-156 (the rename to Grave Shift, D-79; the mortar and Watchman crew). Reports in handoffs/.
-- **2026-10-09 · The camera.** "Expand that tool to easily be able to take any picture needed on my machine so that the other agents can use quickly take any picture they need from the game. I am going to be doing many passes in the future and collecting a lot of images." Done by Claude: `tools/camera.mjs`, guide `tools/CAMERA.md`.
-- **2026-10-09 · Weapon sounds, take two.** "Good job on the low end. Definitely keep that. The reloads though sound like bones clinking together or a xylophone. We need realism for them. The weapons switching should sound like a CRT Tv static switching. The high end of the weapons sounds like a xylophone as well, it needs realistic sound of the high end." Done by Claude: CL-135 (`handoffs/2026-10-09-claude-CL-135.md`; listen in `review/weapon-sounds-2/`).
-- **2026-10-09 · Weapon sounds.** "I would like you to overhaul all weapons sounds. We are going for impactful and fun to hear. Player do a ton of shooting and sound is so integral to gameplay." Done by Claude: CL-134 (`handoffs/2026-10-09-claude-CL-134.md`; listen in `review/weapon-sounds/`).
-- **2026-10-08 · One task.** "I only have one task for you right now. Make all of the Players movements and animations smooth and fluid. Make that shit smoove as hell." Done by Claude: CL-133 (`handoffs/2026-10-08-claude-CL-133.md`). The story v3 cards (2026-10-07) wait.
-- **2026-10-06 · Playthrough 1.** "Tons of stuff for the board on the playthorugh": the CIF, the minimap, the map,
-  notifications, the grenade and launcher arcs, the Gravewalker's walk, the terminal's tabs, the Armory, mission markers,
-  the radio mast, the music, a Hush/warrens bug, the zombies (speed, the horde, the maimed, models, sounds), two bugs, and
-  the magazines and the Watchman MG still missing. Verbatim in `handoffs/2026-10-06-jerry-playthrough-1.md`. Done by Claude: CU-88 to CU-91, GB-133 to GB-138,
-  GP-138 to GP-141, CL-125 to CL-130, AG-52; D-77 (the zombies).
+- **2026-10-15 · Claude runs the road to 1.0.** "I am going to let you assign tasks in a way that you think will be best for 1.0. I will stop my polishing. It is up to your discretion how we get there." Agents are prompted with "Check the board". The road: above; the plan: `docs/road-to-1.0.md`. The story v3 cards (CL-86) are folded into it: wave 1 now, the rest 1.x.
+- **2026-10-15 · Overhaul the crew board.** "Clean it up, overhaul it so it is easier for you guys to use. Easier for me
+  to understand. Better functionality for both." Claude: CL-199 (this board, `crew.mjs me/requests/reply/wait/archive`,
+  the panel's "Needs you").
+- **2026-10-15 · Agents take direct work from Jerry in chat.** Check in with a new id (`crew.mjs newid`); it lands on
+  your queue here by itself. Tell the owner of any file you need with `crew.mjs request`.
+- **2026-10-15 · One game test at a time** (above). The queue is automatic (Cursor, CU-146).
+- **2026-10-15 · Owners.** Claude: the marine's fabric (blouse, trousers, hats, gloves). Grokbot: every weapon. ChatGPT:
+  every zombie's look. Antigravity: the buildables' and props' look. The table below.
+- **2026-10-14 · The inspector** is how everyone looks at models and animations: the real game
+  (`index.html?inspect`), never a copy (D-80). `Open Marine Inspector.bat`; agents through the slot.
+- **2026-10-01 · Build the pieces; Jerry plays them.** No timed or long runs (D-71).
 
-- **2026-10-06 · Clear every finished task.** "I want every task that is already completed completely cleared from the
-  board." Done by Claude: `crew.mjs tidy` moved the last 18 finished tasks to `crew/archive/board-queues-2026-10-06.md`
-  (CU-55 to CU-57, CU-72, CU-84 to CU-87, GB-94, GB-131, AG-28, AG-50, CL-84, CL-119 to CL-123); the Start here table,
-  the mission and the queues now show only what is open: GP-84, GP-72 and CL-86.
+## Who owns what
 
-- **2026-10-05 · Back to the board.** "We are going to get back to crew board work. Can you please clear finish tasks
-  and reorganize so that the agents can get their tasks easily." Done by Claude: 37 finished tasks off the board, and
-  the 64 tasks Jerry gave agents directly on 10-01/02 written down, in `crew/archive/board-queues-2026-10-05.md`; GP-81
-  and GP-95 closed (built; their checks are AG-50 and CU-85); a **Start here** table; each queue in Now, Waiting and
-  Later; new tasks CU-84 to CU-86, GB-131, AG-50, CL-119 to CL-121; the older orders and D-0 to D-39 moved to the
-  archive (every decision stays in full in `docs/decisions.md`); the 37 older review flags (from before the 10-01 board clear) closed; Q-6 for
-  Jerry (the marine's handedness).
+Not sure a file is yours? Ask its owner with `crew.mjs request`; don't start it.
 
-- **2026-10-02 · Board work halted; commit first.** Jerry stopped the board to work through fundamental issues agent by
-  agent, and gave them their tasks directly (CL-113 to CL-118, GB-120 to GB-130, GP-97 to GP-137, CU-82, CU-83). First
-  priority: everything committed and pushed; the checkpoint ("everything since 321aef8") went up at 06:33Z. His plan for
-  the Training Ground (CL-115): it becomes part of a bigger tutorial later, so most tips can come out of the main game.
+| Agent | Owns | Model (the card's `model:` is the truth) |
+| --- | --- | --- |
+| Claude (lead) | The board and reviews; the marine's body and fabric (`studio/marine-body.js`, `marine-cloth.js`, `marine-hats.js`, gloves), the ears (`ui/marine-face.js` buildEar); the inspector (`studio/inspector/`); the studio and reactions; story and sound design | Claude Opus 5.5, Cowork (cloud) |
+| Cursor | Tools and the test queue (`tools/`), integration, the full suite, commits and pushes; direct fixes from Jerry (now: the smoking pose) | GPT-5.6 Sol, Cursor |
+| ChatGPT | Every zombie's look (`studio/zombie-*.js`, `combat/demon-visual.js`, zombie fire); the marine's fitted helpers, waist and balaclava; every word the player reads; the Training Ground's UI | GPT-6, ChatGPT/Codex |
+| Grokbot | Every weapon (`studio/weapon-*.js`, grips, hand anchors); combat in `index.html`: the director, builds' behaviour, scripted deaths | Grokbot |
+| Antigravity | The look of the buildables and props (walls, floors, barricades, sandbags, wire, railing, platform, pillar, stairs, traps, the skeletal marine); eyes on Jerry's GPU | Gemini 4 Argon (High), Antigravity |
 
-- **2026-10-01, ~07:45Z · Jerry sleeps; Claude has the crew.** "I'm going to sleep. You have the agents for tonight."
-  "If you guys get done with R5 move to R6." When R5's tasks are done, Claude clears the mission and writes R6's.
+## The road to 1.0
 
-- **2026-10-01, ~03:00Z · Back to work.** "Alright check the board and lets get to work!" The hold is lifted; the
-  mission above is the plan.
+Jerry, 2026-10-15: Claude assigns the work to 1.0; Jerry stops polishing. The plan and why: `docs/road-to-1.0.md`.
 
-- **2026-10-01, ~03:30Z · Clear the board; the story into the tasks.** "Clear the crew board of what we can and work
-  these elements into the new tasks. We will obviously have to do more polishing as we go along but I like the
-  narrative now. The more we can provide a fun and immersive story surrounding our character the more the player will
-  feel he is a part of a fleshed out (although admittedly not too serious) setting. It's unique but has fun elements
-  in it." Done by Claude: the measuring tasks dropped (D-71), finished tasks archived, the Story v2 tasks added
-  (CL-106 to CL-110, CU-79, GB-116, GB-117, GP-94, GP-95), the touched tasks rewritten, D-70 and D-71.
+**The 1.0 bar:** it works start to finish, nothing reads as a mistake or a placeholder, it stays inside its frame
+budget. "Could look better" is 1.x: put it on the **1.x list** below with `crew.mjs request <you> claude "1.x: ..." --fyi`,
+don't build it. **Model polish is frozen** (guns, zombies, the marine, buildables) except bugs and budget cuts.
 
-- **2026-10-01, ~02:00-03:20Z · The story, v2.** Jerry and Claude reworked the narrative question by question; it is
-  `docs/story.md` now (D-70). His names: the PGB, the Paranormal Ground Branch, unofficially the Gravewalkers, motto
-  "Against What Should Not Be."; FOB Threshold ("built at the edge of an anomalous zone"); Ridgeline; Heron, a military
-  floatplane; Coldwater; the Marrow; Okafor, Brandt, Pike. Three survivors, all military: a medic who heals him on the
-  roof, a mechanic, and a gunner on an M240B; the others on the roof carry M4s. Nine dog tags below. "Little things
-  around the map that show the history and heritage without directly having to explain that to the player with a
-  wall of text."
+1. **Steady the ground** (now): the suite, every red owned, everything committed; frame budgets.
+2. **Finish the run**: the story's words, then its scenes; Heron's condition said out loud; the silenced night.
+3. **The first hour**: the goal on day 1, a pointer to the Training Ground, clean Tips.
+4. **Night packs**: Jerry plays nights in 20-30 minute packs; his notes become tasks.
+5. **Ship**: the desktop build, 1.0.0, budgets met on Jerry's PC, a green suite, the tag.
 
-- **2026-10-01, ~01:20Z · Build the elements; Jerry plays.** "Do not worry about doing timed or extensive runs. You
-  guys really need to focus on just getting these elements into place and I will playthrough and make the
-  connections." (D-71.) Jerry halted the crew (~01:10Z) to reorganize.
-
-- **2026-09-30, ~23:25Z · The Hollows and the secret: Claude's judgement.** "For the hollows and the secret, use your best
-  judgement." Q-5 closed: both specs stand (docs/specs/hollows.md, docs/specs/secret-quest.md); build them as written.
-
-- **2026-09-30, ~04:45Z · One stage after another.** "If you guys finish R3 continue to R4. Same as before once one
-  mission is done, clear it and move to the next." Standing order: when a stage's tasks are all done, Claude clears
-  the mission and writes the next stage's (R4, then R5, R6); nobody waits for the stage to close before taking the
-  next stage's tasks whose "after" is met.
-
-## Decisions
-
-Claude's calls as lead. They stand unless Jerry overrides them. Newest first. **One line each here; the full text
-of every decision is in `docs/decisions.md`.** Read the full text of any decision your task names before you start.
-Claude adds each new decision in both places.
-
-- **D-79** · The game is Grave Shift: everything read says so; file names, the repo, save keys, the profile folder and ids keep Dead-Wave (Jerry, 2026-10-09)
-- **D-78** · Cursor's CU-89 to CU-91 move to ChatGPT as GP-145 to GP-147; CU-88 closed for Cursor (Claude, 2026-10-06)
-- **D-77** · The dead: faster, up to 90% of his sprint, sprinters outrun him; 70% close in, 30% flank; no legs crawl, one leg hops at 75%, no limbs dies (Jerry, 2026-10-06)
-- **D-76** · The title in about 6 s warm is fine (Jerry, 2026-10-05; Q-7, CU-56)
-- **D-75** · The marine stays left-handed (Jerry, 2026-10-05; Q-6, CL-121)
-- **D-74** · Nothing the player reads names a real brand or product (Jerry, 2026-10-02; GB-120 to GB-122)
-- **D-73** · The key layout: 1 to 4 and X (Jerry, 2026-10-02; GB-128)
-- **D-72** · Full auto by default; replaces D-65's start on semi (Jerry, 2026-10-02; GB-127)
-- **D-71** · Build the pieces; Jerry plays them; no timed or long runs (Jerry, 2026-10-01)
-- **D-70** · The story, v2: the valley, the PGB, FOB Threshold, three survivors on the roof (Jerry, 2026-10-01)
-- **D-69** · The dressing room: only camos are earned, from the best run (Claude, for Jerry; CL-96)
-- **D-68** · Night stays dark; the flashlight is standard (Jerry, 2026-09-29, CL-11 answered)
-- **D-67** · The Hollows: underground by day (Jerry, 2026-09-29; planned by Cursor at his order)
-- **D-66** · The dressing room (Jerry, 2026-09-29)
-- **D-65** · Suppressors and fire selectors (Jerry, 2026-09-29)
-- **D-64** · A fidelity pass on the marine, his gear and the guns (Jerry, 2026-09-29)
-- **D-63** · Storms, the rabbit and the 240 (Jerry, 2026-09-29)
-- **D-62** · The horde fights the defences, and every kind has a weakness (Jerry, 2026-09-29)
-- **D-61** · The loadout: an Armory, holsters and magazines (Jerry, 2026-09-29)
-- **D-60** · Rain puts fires out (Jerry, 2026-09-29)
-- **D-59** · Perks go; the marine learns by doing (Jerry, 2026-09-29)
-- **D-58** · Co-op for up to 4 players, one player hosts (Jerry, 2026-09-29)
-- **D-57** · 1.0 ships as a desktop app, not a zip (Jerry, 2026-09-27)
-- **D-56** · The secret quest is built (J-12)
-- **D-55** · The guardian boss on the studio rig (J-11)
-- **D-54** · Named nights (J-10)
-- **D-53** · One call a day (J-9)
-- **D-52** · Health comes from what he does (J-8)
-- **D-51** · The blades are measured first (J-7)
-- **D-50** · Reshape the late nights, don't shrink them (J-6)
-- **D-49** · Drops are earned (J-5)
-- **D-48** · Fixed prices; guns arrive by act (J-4; revises GP-41)
-- **D-47** · Survivors, no escort (J-3)
-- **D-46** · The first catch can be escaped (J-2; revises D-26)
-- **D-45** · The run ends at the boat (J-1)
-- **D-44** · The story: The Signal
-- **D-43** · The roadmap (Jerry's order, 2026-09-26)
-- **D-42** · Reactions: light active ragdolls (Jerry, 2026-09-26: "similar to Euphoria")
-- **D-41** · Scenes (Jerry, ~04:30Z; extends D-40)
-- **D-40** · The studio (Jerry, 01:40Z; `docs/studio.md`)
-- **D-0 to D-39** · Earlier calls: one line each in `crew/archive/board-queues-2026-10-05.md`, in full in `docs/decisions.md`
-
-## The split freeze
-
-**Off** until Cursor starts the carve. Cursor turns it on by checking in with
-`--touch "index.html (SPLIT FREEZE)"`. The panel then shows **SPLIT FREEZE ON**, and every other
-check-in on `index.html` is refused until Cursor checks out. Until then, `index.html` is open to everyone, **one agent per
-part**. Say `index.html (<which part>)` in your `--touch`. If someone else is in that part, or
-checked in on the whole file, wait or pick another task. Re-read before you save, and merge
-(AGENTS.md rule 4).
+**New text the player reads:** add its keys to `ui/strings.js` yourself, in a block headed `// <your task id>`, English
+only; ChatGPT reads every such block once (GP-19928). Re-read the file right before you save it (rule 4).
 
 ## Queues
 
-Each agent's work in three parts: **Now** (top to bottom), **Waiting** (on the task or the person it names) and
-**Later** (R6). `[ ]` to do, `[>]` in progress, `[!]` blocked, `[~]` parked. A finished task (`[x]`) leaves the board:
-`node crew/crew.mjs tidy` moves it to `crew/archive/` (Claude runs it). A task whose "after XX-n" names a task no longer
-on the board can start: that task is done. New task ids come from `node crew/crew.mjs newid <agent>`, never by guessing.
-R1 to R4's tasks are all finished (`crew/archive/`).
+`[>]` working · `[ ]` to do · `[!]` blocked or waiting for the test slot · `[~]` parked. Top to bottom. A task that
+says "after XX-n" waits for it. Finished tasks leave the board (`crew.mjs tidy`); their reports are in `handoffs/`.
+Finish what you have in progress first (and queue its game checks); then take the next.
 
-### Cursor — integration, git, tools, engine core
+### Claude
 
-#### Now
+- [>] **CL-202** **Health check, part 1: the suite, the reds, the commit.** The full suite on an exact copy of Jerry's files in Claude's cloud (one instance, `--jobs 1`), every red sorted by cause and owner (tasks below), then everything checked out committed and pushed. Replaces CU-110.
+- [ ] **CL-203** **Health check, part 2: frame budgets.** Draw calls and triangles per subject and on a busy night (cloud counts), frame time on Jerry's GPU (AG-82); a budget per owner in `docs/budgets.md`; a task for each owner over budget.
+- [ ] **CL-204** **The orders card at the drop, after GP-19925.** In the insertion, the card in his hand for about 4 s (story.md §3; skippable), then pinned on the HQ board: the goal (hold 20 nights, Heron comes for him) on day 1.
+- [ ] **CL-205** **The survivors bury him, after GP-19925.** The death cine (story.md §5): rescued survivors hold the shovels (none rescued: nobody, the earth settles), recovered tags go in the grave; the two MARPAT marines go.
+- [ ] **CL-206** **The wall of tags, after GP-19925.** Nine nails on the HQ wall; each recovered tag hangs there the next dawn; the end card says "Brought home: n of 9".
+- [ ] **CL-207** **The true ending, after GP-19925.** The guardian in the heart dies, then he walks to the dock as the card says (now it ends at once); "Warm." on a Pit stone afterwards (story.md §12).
+- [ ] **CL-208** **Orphans out.** world/boat.js (Heron replaced it) and its imports; the house game-over code (house.active is always false).
 
-- [>] **CU-110** **The full suite, then commit.** Its preflight passes again (CL-150: GB-156's crew helpers are his own body).
-  Run `npm test`; send each red to its owner; then commit and push everything checked out since the last push (rule 6).
-  Note CU-109 changed t103's expectation (Jerry's order) and CL-148/CL-150 touched your tools (serve.py, serve.mjs,
-  check-players.mjs, the new zsounds-index.mjs).
+### Cursor
 
-### Grokbot — combat
+- [x] **CU-153** Fix verified defects from Antigravity model audits
+- [x] **CU-152** Review and improve Antigravity model upgrade batches
+- [x] **CU-147** **The smoking pose (Jerry, in chat)**: the cigarette the right way round, the glove off the face. Finish it, then the tasks below in order.
+- [ ] **CU-148** **Bench numbers for budgets.** `tools/bench.mjs`: add draw calls and triangles (`renderer.info`, as scene-counts.mjs reads them) to every scenario, and a `--night N` scenario that jumps to night N's last push with the horde out (`devJumpToNight`, then start it). Prints one JSON line per scenario. Antigravity runs it on Jerry's GPU (AG-82).
+- [ ] **CU-149** **The desktop build boots.** `tools/package.mjs`: add `combat/`; keep the `.wav`s the game loads (core/audio.js, ui/range-start-audio.js); copy `z-sounds/`; `npm run build` must run the boot check, not `--no-check`. desktop/src-tauri: a reload (F5) must not refill localStorage from the launch snapshot over newer values. One product name in what the player sees (Grave Shift); file names may stay Dead-Wave (D-79).
+- [ ] **CU-150** **Don't lose a run by accident.** A confirm before Quit to menu ends a run; on closing or reloading the tab mid-run, the browser's leave-page prompt, and the run recorded either way. A "Reset profile" button in Settings with a confirm (D-31).
+- [ ] **CU-151** **End-of-day commit (standing).** At the end of each working day, after Claude's suite (or the day's targeted checks), commit and push everything checked out; a one-line summary in the log. Claude does it when you're not on.
+- [~] **CU-110** **The full suite, then commit and push.** Claude does it in CL-202 (in the cloud, so the slot on Jerry's PC stays free).
 
-#### Now
+### ChatGPT
 
-- [ ] **GB-156** **The mortar and Watchman crew (Jerry, 2026-10-09).** Resume: the preflight block is gone (CL-150). Claude ran
-  t244 on the camera's real renderer (2026-10-10): 16 pass, 4 fail, all the "no jump" limits by a hair: mortar mount head
-  6.2 cm in a frame (limit 6), mortar dismount head 6.9, Watchman mount head 6.8, Watchman dismount left wrist 11.2 (limit
-  10). Ease those four transitions; keep the limits. Report: handoffs/2026-10-09-grokbot-GB-156.md.
+- [ ] **GP-19924** **Zombie joints (Jerry, in chat).** Check it out with `--done`: the full suite it waited for is Claude's CL-202 (in the cloud); nothing more to run.
+- [ ] **GP-19922** **All zombies smoothed.** The same: check out with `--done`.
+- [ ] **GP-19923** **The demon's fire.** The same.
+- [ ] **GP-19925** **Story v3 words, one pass** (story.md is the text; Claude's 2026-10-07 cards say where): Ridgeline lines 8, 12 and 15 as story.md §4, and the Hush-origin line; the orders card's lines (`story.orders.*`, for CL-204); the three road notes, each its own text and signature (`story.prop.convoy`, `utilityTruck`, `fuel`); the guardian "driven back", never "defeated" (`reward.guardianFirstBlood`, `scouting.trick.guardian`, the "GUARDIAN DOWN" banner); `world.cabin`/`map.cabin`/`build.obstacle.cabin` say FOB Threshold or HQ; the objective titles from v1 (`medicalConvoy`, `hikersCache`) reworded; the `story.survivor.reyes/voss/kettle` keys renamed `pike/brandt/okafor` with every reader. Fix the tests that hold the old words (ui/briefing.browser.mjs "Call the boat", ui/survivors.browser.mjs fixtures).
+- [ ] **GP-19926** **One name for the night.** "Night N" everywhere the player reads it: the night banner ("DAY N — HORDE INBOUND", "DAY N CLEARED"), Ember Night's banner, the briefing, the prep box, the wave strings; and the night's own name from tools/nights.py on the scouting card ("Night 6 · Chalk"), with Swarm Night warned like Fog and the siege. One table in JS that both read.
+- [ ] **GP-19927** **What a new player reads.** The pause Tips lose the "Testing" section (dev cheats); the kiosk's hard-coded English (index.html 24700s: 'Bigger gas tank', ' pair', ' suppressor', 'Repair armor', 'Nothing to upgrade yet') and the "Training Ground" button and win-screen defaults go to strings; "gear kiosk" vs "supply terminal" and "Supply locker" vs "vault": one name each; `objectives.holdRepair`'s stale "Hold E for 6 seconds". The upgrades tab's `let any = true` (it can never say "Nothing to upgrade yet").
+- [ ] **GP-19928** **The first run.** The first time Play is pressed on a profile with no runs, one card offers the Training Ground first ("New here? Ten minutes on the range"), Play anyway or Training; never again after. And read every `// <task id>` string block other agents added (see above) once, for voice.
+- Later (1.x): the hood's soft ear bulge and the strap rims (Claude's request).
 
-### ChatGPT — what the player reads and decides
+### Grokbot
 
-#### Now
+- [>] **GB-180** **The weapon redo (Jerry, in chat).** Finish this pass and check out; the guns are frozen for 1.0 after it (bugs only).
+- [ ] **GB-181** **t221 and t252**: new reds after GB-177 (a casing thrown to the gun's right). Fix the game or the test, rule 13.
+- [ ] **GB-182** **Heron needs the relay: say so.** Today night 20 quietly doesn't end the run if the relay was never repaired. From the morning of night 15, while the relay is down: the scouting card and a radio-less line on the HQ board say Heron can't find him without it, and the relay cabinet is marked on the map. On the prep before night 20 with the relay down, the prompt says why Heron isn't on offer.
+- [ ] **GB-183** **The silenced night.** docs/specs/secret-quest.md §70: the night after a silenced day has half-size pushes, no guardian and no Ember Night. The director (`startPrep`) doesn't check it today.
+- [ ] **GB-184** **The director's leftovers.** `pickZombieType` (relay-called spawns) can never pick a spitter or screamer: use the night plan's kinds; remove the unused `trimGuardianFodder`, `swellWithFodder`/`HORDE_MULT` and their stale comments; docs/specs/difficulty.md row 13 (`ground:40`).
+- [~] **GB-156** **The mortar and Watchman crew.** t244's four "no jump" limits, by a hair. After GB-184.
 
-- [x] **GP-180** **The words CU-109 and CL-151 left.** The flashlight and the laser are bought at the gear kiosk now (CU-109,
-  Jerry): guide.gear.body, shop.hint.gear, tips.misc.gear still say the flashlight comes with every gun. The Training
-  Ground's test-builds button (CL-151): training.layout, training.layoutAgain, training.layoutHint (English fallbacks in
-  ui/training-panel.js).
+### Antigravity
 
-- [x] **GP-181** **Stagger the demons' fireballs (GP-179 follow-up). Jerry, 2026-10-10: "Yes on the demons."** In Claude's review three demons cast
-  together: 72 damage inside one second from 36 m. A shared turn so the casts of a pack come one at a time (Claude's
-  suggestion: no two demons start a cast within 1.2 s of each other). The rest of GP-179 stands as Jerry approved it.
+- [ ] **AG-79** **Buildables, part 1.** Changes ready: queue its game checks (`slot run`) and check out. Buildable visuals are frozen for 1.0 after AG-80 (bugs only).
+- [ ] **AG-80** **Buildables, part 2.** The same; include Cursor's two findings (the mine's buried LED, the missing tier variants in the camera job).
+- [ ] **AG-81** **Eyes on CL-198 (the marine's fabric)** in the inspector, in the same slot batch: crouch, run, reload, aim, grenade and dive in issue, hot-weather and full kit; the four hats.
+- [ ] **AG-82** **Frame time on Jerry's GPU, after CU-148.** Through the slot: `bench.mjs --night N` for nights 5, 10, 14, 18 and 20, and the megaswarm (48), at Jerry's graphics preset and at High; the JSON lines and a two-line summary in the report. Claude sets the budgets from them (CL-203).
+- [ ] **AG-83** **The installer on a clean profile, after CU-149.** Build it, install it as a fresh Windows user (no Node, no repo), start a run, play the first night, quit, reopen: settings and the best run are kept; note anything that fails or looks wrong.
+- [~] **AG-76** **Eyes on the inspector (CL-196).** 1.x.
 
-### Antigravity — the crew's eyes
+## Waiting on Jerry
 
-#### Now
+- **Night packs** come after stage 2 (the board will say when): five 20-30 minute sessions, nights picked with the `~` console (`docs/road-to-1.0.md`).
 
-- [ ] **AG-64** **Eyes on GP-179 and the Training Ground, after CU-110.** The demon's fists and fireball, the spitter's acid
-  trail, the colossus's lift and throw (in a real night and in the Training Ground); and Claude's CL-146 to CL-151 in
-  there: the hangar walls (no flicker from the range side), the door keypads, the test builds. One report.
-- [>] **AG-52** **Eyes on playthrough 1's fixes.** As each of CU-88 to CU-91, GB-133 to GB-138, GP-138 to GP-141 and CL-125 to
-  CL-130 lands: shots (and a clip where it moves) on Jerry's GPU, one report per batch.
+## The 1.x list (after 1.0)
 
-### Claude — lead; the world, the studio and the reactions
+Ideas and polish that are not 1.0. Claude adds them here when you send them (`--fyi`, title starting "1.x:").
+- The ears under the balaclava (CL-200), the strap rims; the lighter in the campfire kneel (CL-201).
+- Story v3 waves 2-4: the tally, 02:14, the valley getting worse, Heron's contrail, crate slips, Report, the knocks, Brandt's notebook, the Cordon fence, the rangers' radio, the hikers' camera, the photo of the twelve.
+- Key rebinding; master, ambience and voice volume.
+- The inspector's eyes pass (AG-76); the mortar crew's limits if GB-156 doesn't land first.
+- Lower-detail zombie meshes (if CL-203's budgets don't need them for 1.0).
 
-#### Waiting
+## Decisions
 
-- [ ] **CL-86** **The story v3 cards**, when Jerry has read them (`handoffs/2026-10-07-claude-story-v3-cards.md`).
+One line each; the full text is in `docs/decisions.md`. D-0 to D-69: `crew/archive/board-2026-10-15.md`.
+
+- **D-80** · Models and animations are looked at in the inspector, the game itself (`index.html?inspect`), never a copy (Jerry, 2026-10-14)
+- **D-79** · The game is Grave Shift in everything read; file names, the repo, save keys and ids keep Dead-Wave (Jerry, 2026-10-09)
+- **D-77** · The dead: up to 90% of his sprint, sprinters outrun him; 70% close in, 30% flank (Jerry, 2026-10-06)
+- **D-75** · The marine stays left-handed (Jerry, 2026-10-05)
+- **D-74** · Nothing the player reads names a real brand or product (Jerry, 2026-10-02)
+- **D-73** · Keys: 1 to 4 and X. **D-72** · Full auto by default (Jerry, 2026-10-02)
+- **D-71** · Build the pieces; Jerry plays them; no timed or long runs (Jerry, 2026-10-01)
+- **D-70** · The story, v2 (`docs/story.md`): the valley, the PGB, FOB Threshold, Heron on night 20 (Jerry, 2026-10-01)
+
+**Where the game is:** R1 to R5 of the roadmap are done; R6 (finish, 1.0) is Jerry's direct work, agent by agent; R7 is
+co-op for up to 4 after 1.0 (D-58). Every task in full: `docs/roadmap.md`.
 
 ## Where things live
 
-| What | Where | Who writes it |
-| --- | --- | --- |
-| Rules and the check-in steps | `AGENTS.md` | Claude |
-| Orders, decisions (one line each), queues | `crew/BOARD.md` (this file) | Claude, Jerry |
-| Every decision in full | `docs/decisions.md` | Claude |
-| Finished tasks | `crew/archive/board-queues-*.md` (`crew.mjs tidy`) | Claude |
-| Who is doing what, right now | `crew/status/<agent>.md` | each agent, their own only |
-| What happened, in order | `crew/LOG.md` | everyone, append only |
-| Reports | `handoffs/YYYY-MM-DD-agent-task.md` | the agent who did the work |
-| Asking another owner for something | `handoffs/requests.md` (via `crew.mjs request`) | anyone; the owner answers in place |
-| Questions only Jerry can answer | `crew/QUESTIONS.md` (via `crew.mjs ask`) | anyone asks; Claude or Jerry answers |
-| Test results for the panel | `crew/tests.json` | `npm test` (CU-8) |
-| Specs | `docs/specs/` | each owner |
-| Screenshots | `Claude outputs/shots/` (via `tools/shoot.mjs`) | anyone |
-| The roadmap: every task in full | `docs/roadmap.md` | Claude |
-| Reactions: the engine, bodies, presets, the lab | `studio/motion.js`, `studio/bodies.js`, `studio/motion/`, `studio/motion-lab.html` | Claude (presets: their `owner`) |
+| What | Where |
+| --- | --- |
+| Your briefing / everyone at a glance | `node crew/crew.mjs me <you>` / `node crew/crew.mjs` |
+| Rules and the session steps | `AGENTS.md` |
+| Your card (only you write it; keep its notes short) | `crew/status/<you>.md` |
+| What happened, in order (append only) | `crew/LOG.md`; older in `crew/archive/log-YYYY-MM.md` |
+| Asking another owner; answering | `crew.mjs request` / `crew.mjs requests <you>` and `reply`; the file is `handoffs/requests.md`, older in `handoffs/archive/` |
+| Questions only Jerry can answer | `crew.mjs ask` → `crew/QUESTIONS.md` |
+| Reports | `handoffs/YYYY-MM-DD-<agent>-<task>.md` (Changed, Tests, Not verified) |
+| Looking at a model or animation | the inspector, through the slot (`studio/inspector/README.md`) |
+| Finished tasks, old boards | `crew/archive/` |

@@ -1,0 +1,18 @@
+{
+  "studio/zombie-concepts.js": {
+    "file": "studio__zombie-concepts.js",
+    "sha256": "87f55f3eb574f926518ac463c3f91fea837927034d2f43fdb78153e2ceb08f3a"
+  },
+  "studio/zombie-guardian-detail.js": {
+    "file": "studio__zombie-guardian-detail.js",
+    "sha256": "6c84950999d95a0253dacefd04158ac024a5e8f3870169fec8c85fd2372dd81b"
+  },
+  "combat/demon-visual.js": {
+    "file": "combat__demon-visual.js",
+    "sha256": "2bffc41bb52910ec44dbe800b959b5649cc65f175e05887120a5391d0f624597"
+  },
+  "index.html": {
+    "file": "index.html",
+    "sha256": "66720d8934ad997355bf68bed4c23ab29576e97ee4746172568a2f5bdd9d3676"
+  }
+}

@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const p='ui/range-console.js',s=fs.readFileSync(p,'utf8');let n=s;
+const action='<button class="rd-start" data-start ${available?\'\':\'disabled\'}>${t(available?\'range.start\':\'range.locked\')}</button>';
+assert.equal(n.split(action).length,2);n=n.replace(action,'').replace('<small class="rd-level">${t(\'range.level.\'+drillLevel(d))}</small><h3>${esc(label(d))}</h3>','<div class="rd-detail-heading"><div><small class="rd-level">${t(\'range.level.\'+drillLevel(d))}</small><h3>${esc(label(d))}</h3></div>'+action+'</div>');
+assert.notEqual(n,s);assert.equal(fs.readFileSync(p,'utf8'),s);fs.writeFileSync(p,n);
+const css='ui/range-drills.css',old=fs.readFileSync(css,'utf8');assert.equal(fs.readFileSync(css,'utf8'),old);fs.writeFileSync(css,old+'\n#rangeConsole .rd-detail-heading{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:12px;align-items:center}#rangeConsole .rd-detail-heading h3{font-size:20px;margin:5px 0}#rangeConsole .rd-detail-heading .rd-start{margin:0}#rangeConsole .rd-path{margin:12px 0}#rangeConsole .rd-weapon-section{padding:12px}#rangeConsole .range-card{min-height:108px}\n@media(max-width:400px){#rangeConsole .rd-detail-heading{grid-template-columns:1fr}#rangeConsole .rd-detail-heading .rd-start{min-height:42px}}\n');

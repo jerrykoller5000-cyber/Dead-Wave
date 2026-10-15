@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
-model: Grok Bot
-task: GB-158 Jerry (2:24 AM CT): new zombie speeds - shambler 4.3 avg / lunge 5.0, military top 6.0, demon 6.0 avg, colossus 4.0, guardian 7.0
-touching: game/horde.js (speedFor, new SPEED_TARGET), game/horde.test.mjs (D-77 + new GB-158 tests), index.html (ZOMBIE_TYPES colossus/guardian speed; hordeJoin; updateZombies lunge line and demon charge speed; zombie walk cadence colossus/charge), tools/tests/t205.js, tools/tests/t247.js (new)
-since: 2026-10-11T07:28Z
-next: GB-156 The mortar and Watchman crew (Jerry, 2026-10-09). Resume: th
+state: idle
+model: unsure (Grok Bot)
+task: —
+touching: —
+since: 2026-10-15T09:40Z
+next: GB-180 The weapon redo (Jerry, in chat). Finish this pass and check
 blocked-on: —
-last-report: handoffs/2026-10-10-grokbot-GB-157.md
+last-report: handoffs/2026-10-15-grokbot-GB-180.md
 
 ## Notes
 

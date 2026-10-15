@@ -24,12 +24,13 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     if (b.min.x > -9.5 && b.max.x < -7.4 && b.min.z >= -12.7 && b.max.z <= 30.7) return 'east';
     if (b.max.z < -10.5 && b.min.x >= -44.7 && b.max.x <= -7.4) return 'south';
     if (b.min.z > 26.5 && b.min.x >= -44.7 && b.max.x <= -7.4) return 'north';
+    if (b.max.z < -10.5 && b.min.x >= -8.3 && b.max.x <= 8.3 && b.max.y <= 6.2) return 'rangeSouth';   // GB-161: the range's back wall and what hangs on it
     if (b.min.y > 7.5 && b.min.x >= -44.7 && b.max.x <= -7.4 && b.min.z >= -12.7 && b.max.z <= 28.7) return 'overhead';
     return null;
   };
   tgGroup.updateMatrixWorld(true);
   for (const mesh of [...tgGroup.children]) {
-    if (!mesh.isMesh || mesh.name || Array.isArray(mesh.material)) continue;
+    if (!mesh.isMesh || mesh.name || mesh.userData.trainingProp || Array.isArray(mesh.material)) continue;
     mesh.geometry.computeBoundingBox();
     const box = mesh.geometry.boundingBox.clone().applyMatrix4(mesh.matrixWorld);
     box.min.sub(origin); box.max.sub(origin);
@@ -42,7 +43,7 @@ export function partitionTrainingShell(T, tgGroup, origin) {
   const entries = [];
   const groups = [...sides];
   for (const group of tgGroup.children) {
-    if (!/^training-(gate-frame|gate-leaf-|security-shutter)/.test(group.name)) continue;
+    if (!/^training-(gate-frame|gate-leaf-|security-shutter|wear-locker-door)/.test(group.name)) continue;
     const box = new T.Box3().setFromObject(group); box.min.sub(origin); box.max.sub(origin);
     const side = classify(box);
     if (side) groups.push([side, group]);
@@ -56,6 +57,8 @@ export function partitionTrainingShell(T, tgGroup, origin) {
       let material = mats.get(source);
       if (!material) { material = source.clone(); material.transparent = true; material.depthWrite = false; mats.set(source, material); owned.push(material); }
       mesh.material = material;
+      // Blended solid bases must precede their transparent decal overlays.
+      if (!source.transparent) mesh.renderOrder = -1;
     });
     entries.push({ side, group, mats, opacity: 1, hidden: false });
   }
@@ -64,14 +67,18 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     west: ['x', -44, [['z', -12, 28], ['y', 0, 24]]],
     east: ['x', -8, [['z', -12, 30], ['y', 0, 24]]],
     south: ['z', -12, [['x', -44, -8], ['y', 0, 24]]],
-    north: ['z', 28, [['x', -44, -8], ['y', 0, 24]]]
+    north: ['z', 28, [['x', -44, -8], ['y', 0, 24]]],
+    rangeSouth: ['z', -12, [['x', -8, 8], ['y', 0, 6]]]   // GB-161
   };
   function syncMaterials() {
     for (const e of entries) for (const [source, mat] of e.mats) {
       mat.opacity = source.opacity * e.opacity;
       mat.color?.copy(source.color); if (source.emissive) { mat.emissive.copy(source.emissive); mat.emissiveIntensity = source.emissiveIntensity; }
-      const transparent = e.opacity < .995 || source.transparent;
-      if (mat.transparent !== transparent) { mat.transparent = transparent; mat.depthWrite = transparent ? false : source.depthWrite; mat.needsUpdate = true; }
+      // A solid wall stays in the opaque pass. Leaving it transparent made the tile sort against the paint
+      // and the locker, so the surface changed as the camera turned.
+      const solid = e.opacity >= .995 && !source.transparent;
+      if (mat.transparent === solid) { mat.transparent = !solid; mat.needsUpdate = true; }
+      mat.depthWrite = !mat.transparent && source.depthWrite && e.opacity >= .995;
     }
   }
   function update(camera, player, dt = 1 / 60) {
@@ -83,7 +90,20 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     const focus = { x, y: player.y - origin.y, z };
     const shared = enabled && viewCrossesPlane(c, focus, ...walls.east);
     for (const e of entries) {
-      e.hidden = enabled && (e.side === 'overhead' ? inBuild || shared : e.side === 'east' ? shared : viewCrossesPlane(c, focus, ...walls[e.side]));
+      if (e.side === 'rangeSouth') {
+        e.hidden = false; e.pend = 0;
+        e.opacity += Math.sign(1 - e.opacity) * Math.min(Math.abs(1 - e.opacity), Math.max(0, dt) * 6);
+        e.group.visible = e.opacity > .001;
+        continue;
+      }
+      // GB-163 (Jerry: "This range backwall sometimes switches back and forth from one texture to another"): the camera
+      // rides its collision against the wall it is behind; at the plane's 0.6 m margin a wall faded (so the camera ignored
+      // it and slid back) then lit (so it collided and came forward) every few frames. A faded wall now holds until the
+      // view is clear by a wider margin (1.6 m), and a change has to last a moment before it shows.
+      const margin = e.hidden ? 1.6 : .6;
+      const sharedNow = enabled && viewCrossesPlane(c, focus, ...walls.east, margin);
+      const next = enabled && (e.side === 'overhead' ? inBuild || sharedNow : e.side === 'east' ? sharedNow : viewCrossesPlane(c, focus, ...walls[e.side], margin));
+      if (next !== e.hidden) { e.pend = (e.pend || 0) + Math.max(0, dt); if (e.pend >= (next ? .06 : .35)) { e.hidden = next; e.pend = 0; } } else e.pend = 0;
       const want = e.hidden ? (e.side === 'overhead' ? 0 : .06) : 1;
       e.opacity += Math.sign(want - e.opacity) * Math.min(Math.abs(want - e.opacity), Math.max(0, dt) * 6);
       e.group.visible = e.opacity > .001;

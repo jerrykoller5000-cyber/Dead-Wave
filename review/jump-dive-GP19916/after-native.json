@@ -1,0 +1,115 @@
+{
+  "runs": [
+    {
+      "name": "ground",
+      "entry": {
+        "buffer": 0,
+        "prepare": 0,
+        "recover": 0,
+        "air": 0,
+        "landAge": 115.07440000000521,
+        "landDuration": 0.42,
+        "strength": 0,
+        "launches": 0,
+        "grounded": true,
+        "vy": 0
+      },
+      "phase": "idle",
+      "vy": 3.5,
+      "y0": -200,
+      "dives": 1,
+      "repeatDives": 1,
+      "spent": 1,
+      "launchDelta": 0,
+      "k": 0.28,
+      "peak": -199.39809604543422,
+      "grounded": true,
+      "frames": 103
+    },
+    {
+      "name": "rise",
+      "entry": {
+        "buffer": 0,
+        "prepare": 0,
+        "recover": 0,
+        "air": 0.049999999999992724,
+        "landAge": 16.229999999997442,
+        "landDuration": 0.43474930555554575,
+        "strength": 0.5921831597221612,
+        "launches": 1,
+        "grounded": false,
+        "vy": 6.700000000000175
+      },
+      "phase": "idle",
+      "vy": 6.700000000000175,
+      "y0": -199.52333333333343,
+      "dives": 2,
+      "repeatDives": 2,
+      "spent": 1,
+      "launchDelta": 1,
+      "k": 0.28,
+      "peak": -197.29691257321218,
+      "grounded": true,
+      "frames": 255
+    },
+    {
+      "name": "fall",
+      "entry": {
+        "buffer": 0,
+        "prepare": 0,
+        "recover": 0,
+        "air": 0.4500000000001307,
+        "landAge": 16.63000000000225,
+        "landDuration": 0.47368263888886686,
+        "strength": 0.8355164930554178,
+        "launches": 2,
+        "grounded": false,
+        "vy": -0.5000000000024496
+      },
+      "phase": "idle",
+      "vy": 3.5,
+      "y0": -198.34333333333345,
+      "dives": 3,
+      "repeatDives": 3,
+      "spent": 1,
+      "launchDelta": 1,
+      "k": 0.28,
+      "peak": -197.74142937876772,
+      "grounded": true,
+      "frames": 173
+    },
+    {
+      "name": "empty",
+      "entry": {
+        "buffer": 0,
+        "prepare": 0,
+        "recover": 0,
+        "air": 0.05000000000001455,
+        "landAge": 16.242000000004648,
+        "landDuration": 0.4674159722222512,
+        "strength": 0.7963498263890698,
+        "launches": 3,
+        "grounded": false,
+        "vy": 6.699999999999649
+      },
+      "phase": "idle",
+      "vy": 6.699999999999649,
+      "y0": -199.5233333333332,
+      "dives": 4,
+      "repeatDives": 4,
+      "spent": 1,
+      "launchDelta": 1,
+      "k": 1,
+      "peak": -197.33444444444456,
+      "grounded": true,
+      "frames": 45
+    }
+  ],
+  "loadSec": 22.823,
+  "wall": {
+    "maxX": 6.912947222222309,
+    "contact": true,
+    "phase": "idle"
+  },
+  "errors": []
+}

@@ -1,0 +1,8 @@
+{
+  "index.html": "17baa15f6ef7d0efb05e456a2ad0ba5a3d6290fcfc337bf4ca4fdef017dd1153",
+  "game/spitter-motion.js": "97761f62eecfb18d3c06960758fa33c40788b3c3a9d6368acff073d7fd557cab",
+  "game/spitter-motion.test.mjs": "8e604de4065cc80c95843194bf1a00a90158f0b61925e6ffc7e9da7aa0d45fe9",
+  "game/spitter-acid.js": "916e0dd6a16a8399cf90d3d6363c8c4473de7356e2c6f0171186ac396b2b0fb6",
+  "game/spitter-acid.test.mjs": "281eccc210ef4f6f2ee8fa024a5657973b808511bc3449d348ae1a27da4167f9",
+  "game/zombie-ability-runtime.js": "0a226fabd96091ca287ee08cece5d178193d353c7a56e99f4ca4f134d6cdc931"
+}
