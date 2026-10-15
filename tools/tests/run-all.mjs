@@ -1,7 +1,7 @@
 // npm test — runs Claude's behaviour checks against the real game, headless.
 //
-//   npm test                     every check
-//   npm test -- t39 t45          just those
+//   npm test -- --integration --agent cursor --task CU-110   coordinated full suite
+//   npm test -- t39 t45 --agent cursor --task CU-110         targeted batch
 //   npm test -- --jobs 1         one at a time (easier to read when something breaks)
 //   npm test -- --keep           leave tools/tests/test.html on disk to open by hand
 //   npm test -- --all-fails      print every FAIL line in full, not just the first
@@ -16,7 +16,7 @@
 //
 // Each check gets a fresh page — they mutate the world (fell trees, spawn waves, kill the
 // player) and would otherwise poison each other.
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -68,13 +68,26 @@ function buildTestPage() {
 
 // --- args -------------------------------------------------------------------------
 const argv = process.argv.slice(2);
+const optionValue = (name) => {
+  const index = argv.indexOf(`--${name}`);
+  return index >= 0 ? argv[index + 1] : undefined;
+};
 const jobsIdx = argv.indexOf('--jobs');
-const JOBS = jobsIdx >= 0 ? Math.max(1, Number(argv[jobsIdx + 1]) || 1) : 4;
+const requestedJobs = jobsIdx >= 0 ? Math.max(1, Number(argv[jobsIdx + 1]) || 1) : 1;
+if (requestedJobs !== 1) {
+  console.error(
+    'Game-test slot rule: browser tests must use exactly one worker (--jobs 1). ' +
+      'Batch checks into the one queued game instance instead of adding workers.',
+  );
+  process.exit(2);
+}
+const JOBS = 1;
 const keep = argv.includes('--keep');
 // Each run gets its own page, so two agents' runs in this folder don't delete each other's (CU-82). --keep writes
 // test.html, the name the rend/ scripts and a browser opened by hand expect.
 const PAGE_NAME = keep ? 'test.html' : `test-${process.pid}.html`;
-const wanted = argv.filter((a, i) => !a.startsWith('--') && !(jobsIdx >= 0 && i === jobsIdx + 1))
+const valueFlags = new Set(['--jobs', '--agent', '--task', '--checks', '--minutes']);
+const wanted = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && valueFlags.has(argv[i - 1])))
   .map((a) => a.replace(/\.js$/, ''));
 
 const all = fs.readdirSync(HERE).filter((f) => /^t[0-9a-z]+\.js$/.test(f)).map((f) => f.replace(/\.js$/, ''))
@@ -83,6 +96,33 @@ const tests = wanted.length ? all.filter((t) => wanted.includes(t)) : all;
 if (!tests.length) {
   console.error('No tests matched. Available: ' + all.join(' '));
   process.exit(2);
+}
+if (!wanted.length && !argv.includes('--integration')) {
+  console.error(
+    'The full browser suite is one coordinated integration job. Add --integration, --agent <name>, ' +
+      'and --task <id> only when that integration run is intended; otherwise name targeted tests.',
+  );
+  process.exit(2);
+}
+if (!process.env.DW_GAME_TEST_TOKEN) {
+  const agent = String(optionValue('agent') || process.env.DW_GAME_TEST_AGENT || '').toLowerCase();
+  const task = String(optionValue('task') || process.env.DW_GAME_TEST_TASK || '');
+  if (!agent || !task) {
+    console.error('Browser tests need --agent <name> --task <id>; the command then queues and resumes automatically.');
+    process.exit(2);
+  }
+  const checks = optionValue('checks') || (wanted.length ? `targeted tests: ${wanted.join(', ')}` : 'coordinated full suite');
+  const minutes = optionValue('minutes') || '20';
+  const slotScript = path.join(ROOT, 'tools', 'game-test-slot.mjs');
+  const child = spawn(process.execPath, [
+    slotScript, 'run', agent, task, '--checks', checks, '--minutes', minutes, '--',
+    process.execPath, fileURLToPath(import.meta.url), ...argv,
+  ], { cwd: ROOT, stdio: 'inherit', env: process.env });
+  const outcome = await new Promise((resolve, reject) => {
+    child.once('error', reject);
+    child.once('exit', (code, signal) => resolve({ code, signal }));
+  });
+  process.exit(outcome.code ?? 1);
 }
 
 // CU-63: game logic reads the players list. Fail the suite before the browser if a new

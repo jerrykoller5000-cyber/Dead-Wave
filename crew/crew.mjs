@@ -17,6 +17,10 @@
 //   node crew/crew.mjs ask     <agent> "<a question only Jerry can answer>"
 //   node crew/crew.mjs request <from> <to> "<title>" "<body>"     (or --body-file <path>)
 //   node crew/crew.mjs check                                       exit 1 on a clash or stale check-in
+//   node crew/crew.mjs slot status
+//   node crew/crew.mjs slot request <agent> <task> --checks "<batch>" --minutes <n>
+//   node crew/crew.mjs slot run <agent> <task> --checks "<batch>" -- <command>
+//   node crew/crew.mjs slot cancel <agent> <request-id>
 //
 //   Jerry's notes on the studio's review folders (D-40; review/<asset>/notes.md):
 //   node crew/crew.mjs review                          every review folder and where its notes stand
@@ -476,6 +480,9 @@ const positional = rest.filter((x, i) => !x.startsWith('--') && !(i > 0 && VALUE
 
 if (!cmd || cmd === 'panel') {
   panel();
+} else if (cmd === 'slot') {
+  const { main: gameTestSlotMain } = await import('../tools/game-test-slot.mjs');
+  await gameTestSlotMain(process.argv.slice(3));
 } else if (cmd === 'mission') {
   const ms = mission();
   if (!ms) console.log('No mission on the board right now.'); else printMission();
@@ -665,6 +672,6 @@ if (!cmd || cmd === 'panel') {
   log(agent, 'REQUEST', `→ ${toName}: ${title}`);
   console.log('request added to handoffs/requests.md');
 } else {
-  console.error('Commands: (none) | mission | next | newid | in | note | out | ask | request | check | answer | reviewed | review | tidy. See the top of crew/crew.mjs.');
+  console.error('Commands: (none) | mission | next | newid | in | note | out | ask | request | check | slot | answer | reviewed | review | tidy. See the top of crew/crew.mjs.');
   process.exit(2);
 }

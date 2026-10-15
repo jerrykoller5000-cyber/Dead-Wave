@@ -4,6 +4,20 @@ About 60 checks of real game behaviour (terrain, trees, fire, caves, water, fish
 combat, UI), run inside the game page with a stand-in for three.js so they work without a GPU
 or network.
 
+## Run through the machine-wide slot
+
+Browser checks always use one worker and the shared queue:
+
+```
+npm test -- t185 t215 --agent grokbot --task GB-177 --jobs 1
+npm test -- --integration --agent cursor --task CU-110 --jobs 1
+```
+
+The first command queues one targeted batch, waits without spinning, and resumes it automatically
+when granted. The second is the coordinated full-suite form; `--integration` is required so an
+agent cannot accidentally start the whole suite after a small change. Direct game HTML requests
+need the active lease token, so use the runner rather than opening generated `test.html` by hand.
+
 ## How it works
 - `mk.py <index.html> test.html` copies the game and points its three.js imports at
   `fakethree.mjs` / `faketsl.mjs` (math and scene graph real, rendering stubbed). Once three.js is

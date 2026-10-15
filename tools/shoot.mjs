@@ -1,7 +1,7 @@
 // tools/shoot.mjs — before-and-after screenshots of named views.
 //
-//   node tools/shoot.mjs                     every view
-//   node tools/shoot.mjs hq river-mouth      just those
+//   node tools/shoot.mjs --agent cursor --task CU-1                 every view, through the shared slot
+//   node tools/shoot.mjs hq river-mouth --agent cursor --task CU-1  just those
 //   node tools/shoot.mjs --list              names only
 //   node tools/shoot.mjs --out before        write to "Claude outputs/before"
 //   node tools/shoot.mjs --show              watch it work in a real window
@@ -17,6 +17,7 @@
 // The views are named in handoffs/requests.md by Claude; keep the two in step.
 import path from 'node:path';
 import fs from 'node:fs';
+import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
 import { launch } from './cdp.mjs';
@@ -83,6 +84,29 @@ if (argv.includes('--list')) {
   for (const [name] of VIEWS) console.log(name);
   process.exit(0);
 }
+const optionValue = (name) => {
+  const index = argv.indexOf(`--${name}`);
+  return index >= 0 ? argv[index + 1] : undefined;
+};
+if (!process.env.DW_GAME_TEST_TOKEN) {
+  const agent = String(optionValue('agent') || process.env.DW_GAME_TEST_AGENT || '').toLowerCase();
+  const task = String(optionValue('task') || process.env.DW_GAME_TEST_TASK || '');
+  if (!agent || !task) {
+    throw new Error('shoot needs --agent <name> --task <id>; it will queue, wake and run automatically');
+  }
+  const checks = optionValue('checks') || (argv.includes('--compare') ? 'screenshot comparison' : 'before/after screenshots');
+  const minutes = optionValue('minutes') || '15';
+  const slotScript = fileURLToPath(new URL('./game-test-slot.mjs', import.meta.url));
+  const child = spawn(process.execPath, [
+    slotScript, 'run', agent, task, '--checks', checks, '--minutes', minutes, '--',
+    process.execPath, fileURLToPath(import.meta.url), ...argv,
+  ], { cwd: ROOT, stdio: 'inherit', env: process.env });
+  const outcome = await new Promise((resolve, reject) => {
+    child.once('error', reject);
+    child.once('exit', (code, signal) => resolve({ code, signal }));
+  });
+  process.exit(outcome.code ?? 1);
+}
 
 // --compare <dirA> <dirB>: how different are two sets of shots?
 //
@@ -136,7 +160,8 @@ if (argv.includes('--compare')) {
 const show = argv.includes('--show');
 const outIdx = argv.indexOf('--out');
 const outDir = outIdx >= 0 ? argv[outIdx + 1] : path.join('Claude outputs', 'shots');
-const wanted = argv.filter((a, i) => !a.startsWith('--') && !(outIdx >= 0 && i === outIdx + 1));
+const valueFlags = new Set(['--out', '--agent', '--task', '--checks', '--minutes']);
+const wanted = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && valueFlags.has(argv[i - 1])));
 const views = wanted.length ? VIEWS.filter(([n]) => wanted.includes(n)) : VIEWS;
 if (!views.length) {
   console.error('No views matched. Try --list.');

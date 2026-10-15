@@ -189,6 +189,17 @@
   button.copy:hover { border-color: var(--accent); }
   button.copy.done { color: var(--ok); border-color: var(--ok); }
   .help ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); } .help li { margin: 3px 0; } .help b { color: var(--ink); }
+  .slot { border-left: 6px solid var(--ok); }
+  .slot.busy { border-left-color: var(--accent); }
+  .slot.jerry { border-left-color: var(--danger); }
+  .slot .holder { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr); gap: 6px 18px; align-items: start; }
+  .slot .holder .name { font-size: 18px; font-weight: 750; }
+  .slot .cmd { font: 12px/1.45 ui-monospace, Consolas, monospace; overflow-wrap: anywhere; background: var(--chip); border-radius: 6px; padding: 7px 9px; }
+  .slot ol { margin: 8px 0 0; padding-left: 24px; }
+  .slot li { padding: 4px 0; color: var(--muted); }
+  .slot li b { color: var(--ink); }
+  .slot .ready { color: var(--ok); font-weight: 650; }
+  .slot .prepared { color: var(--warn); font-weight: 650; }
   details.fold > summary { font-size: 13px; letter-spacing: 0; text-transform: none; }
   details > summary { cursor: pointer; color: var(--muted); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
   .md p { margin: 6px 0; } .md ul { margin: 4px 0; padding-left: 18px; } .md li { margin: 2px 0; }
@@ -202,10 +213,12 @@
   <span class="badge" id="freeze">split freeze off</span>
   <span class="badge" id="push">…</span>
   <span class="badge" id="tests" hidden></span>
+  <span class="badge" id="slotBadge">test slot…</span>
   <span class="stamp" id="stamp">loading…</span>
   <p class="summary" id="summary"></p>
 </header>
 <main>
+  <section class="box slot" id="slotBox"><h3>Game-test slot <small>automatic, exclusive per computer · Jerry has priority</small></h3><div id="slot"></div></section>
   <section class="box mission" id="missionBox" hidden><div id="mission"></div></section>
   <section class="box roadmap" id="roadBox" hidden><h3>Roadmap <small>every stage to 1.0 and after, live from crew/BOARD.md · details in docs/roadmap.md</small></h3><div id="roadmap"></div></section>
   <section class="box you"><h3>Your move <small>what only you can do right now</small></h3><div id="you"></div></section>
@@ -486,6 +499,28 @@ function renderFlow(board, tasks, statuses, now) {
     `<div class="cols">${col('Working now', working, 'Nobody is checked in.')}${col('Ready · start them from Your move', ready, 'Nobody is ready and idle.')}${col('Waiting', waitingOn, 'Nobody is waiting.')}${empty.length ? col('Nothing queued', empty, '') : ''}</div>`;
 }
 
+function renderGameTestSlot(S) {
+  const box = document.getElementById('slotBox');
+  const badge = document.getElementById('slotBadge');
+  if (!S || !S.ok) {
+    box.className = 'box slot';
+    document.getElementById('slot').innerHTML = '<span class="muted">Queue service unavailable on this computer. No automatic launch permission is implied.</span>';
+    badge.textContent = 'test slot unavailable';
+    badge.className = 'badge warnb';
+    return;
+  }
+  const h = S.holder;
+  box.className = 'box slot' + (h ? ' busy' : '') + (h?.agent === 'jerry' ? ' jerry' : '');
+  badge.textContent = h ? `test slot: ${NAME[h.agent] || h.agent} ${h.task}` : `test slot free · ${S.queue.length} queued`;
+  badge.className = 'badge ' + (h ? (h.agent === 'jerry' ? 'on' : 'warnb') : 'good');
+  const queue = S.queue.length
+    ? `<ol>${S.queue.map(q => `<li><b>${esc(NAME[q.agent] || q.agent)} · ${esc(q.task)}</b> <span class="${q.ready ? 'ready' : 'prepared'}">${q.ready ? 'waiting process ready' : 'prepared; needs resume'}</span> · queued ${esc(ago(q.queuedAt))}${q.minutes ? ` · asks ${esc(q.minutes)} min` : ''}<br><span>${esc(q.checks || 'checks not described')}</span>${q.command ? `<div class="cmd">${esc(q.command)}</div>` : ''}</li>`).join('')}</ol>`
+    : '<div class="faint" style="margin-top:8px">Queue empty.</div>';
+  document.getElementById('slot').innerHTML = h
+    ? `<div class="holder"><div><div class="name">${esc(NAME[h.agent] || h.agent)} · ${esc(h.task)}</div><div class="muted">PID ${esc(h.pid)} · started ${esc(ago(h.startedAt))} · queued ${esc(ago(h.queuedAt))}${h.minutes ? ` · planned ${esc(h.minutes)} min` : ''}</div><div>${esc(h.checks || 'checks not described')}</div></div><div><div class="cmd">${esc(h.command || '(command not recorded)')}</div><div class="faint">${(h.processes || []).map(p => `${esc(p.role)} PID ${esc(p.pid)}`).join(' · ')}</div></div></div>${S.queue.some(q => q.agent === 'jerry') ? '<div class="item bad" style="margin-top:10px"><b>Jerry is waiting.</b> Holder: finish the current batch, close owned processes and release promptly. Never close Jerry’s processes.</div>' : ''}${queue}`
+    : `<b>Free.</b> The first live waiter is granted atomically; a prepared-only entry stays visible until its agent resumes the saved command.${queue}`;
+}
+
 async function refresh() {
   let board;
   try { board = await get('BOARD.md'); }
@@ -496,9 +531,13 @@ async function refresh() {
     document.getElementById('stamp').textContent = 'offline · retrying every 10 s';
     return;
   }
-  const [logText, qText, reqText, headLog, pushLog, testsJson, revJson] = await Promise.all([
+  const [logText, qText, reqText, headLog, pushLog, testsJson, revJson, slotJson] = await Promise.all([
     opt('LOG.md'), opt('QUESTIONS.md'), opt('../handoffs/requests.md'), opt('../.git/logs/HEAD'),
-    opt('../.git/logs/refs/remotes/origin/feature/Phis-changes'), opt('tests.json'), opt('reviews.json')]);
+    opt('../.git/logs/refs/remotes/origin/feature/Phis-changes'), opt('tests.json'), opt('reviews.json'),
+    opt('../__game-test-slot')]);
+  let slotState = null;
+  try { slotState = JSON.parse(slotJson); } catch { /* rendered as unavailable below */ }
+  renderGameTestSlot(slotState);
   // Review folders: crew.mjs keeps the list (reviews.json); the notes are read live, with the same
   // parser crew.mjs uses (crew/notes.mjs), so a note Jerry just saved shows on the next refresh.
   let revs = [];
@@ -598,6 +637,10 @@ async function refresh() {
     const next = open.find((t) => !gateOf(t, tasks));
     if (next) { readyAgents.push(n); you.push(`<div class="yi" ${cvar(a)}><span class="dot"></span><div class="d"><span class="nm">Start ${esc(n)}</span> on <b>${esc(next.id)}</b> ${clean2(firstSentence(next.text), 110)}</div><button class="copy" type="button" data-prompt="${esc(PROMPT(a, next.id))}">Copy prompt</button></div>`); }
     else if (open.length) waitingAgents.push(n);
+  }
+  for (const q of (slotState?.queue || []).filter(q => !q.ready)) {
+    const prompt = `Resume ${NAME[q.agent] || q.agent} on ${q.task}. Its prepared game-test queue request is ${q.id}. Read AGENTS.md and the Crew Board, then run: node tools/game-test-slot.mjs wait ${q.agent} ${q.task} ${q.id} --checks ${JSON.stringify(q.checks || 'prepared game checks')} -- ${q.command || '<command was not recorded; reconstruct the prepared batch>'}. The command waits for the atomic slot, runs automatically on grant with one worker, closes its owned game process, and releases.`;
+    you.unshift(`<div class="yi" ${q.agent === 'jerry' ? '' : cvar(q.agent)}><span class="dot"></span><div class="d"><span class="nm">Resume ${esc(NAME[q.agent] || q.agent)}</span> for queued game checks <b>${esc(q.task)}</b>: ${esc(q.checks || 'prepared batch')}</div><button class="copy" type="button" data-prompt="${esc(prompt)}">Copy prompt</button></div>`);
   }
   // A note Jerry wrote that nobody has picked up: the owner needs starting (agents only run when prompted).
   for (const r of revs.filter((r) => r.state === 'waiting' && (statuses[r.owner] || {}).state !== 'active')) {

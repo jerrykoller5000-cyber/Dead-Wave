@@ -7,12 +7,16 @@ beside it holding its exact camera, so the same picture can be taken again after
 ## Start, shoot, stop
 
 ```
-node tools/camera.mjs start                 # load the game and keep it (prints the renderer and the port)
-node tools/camera.mjs shot weapon:m4 --view side --out review/my-task/m4-side.png
-node tools/camera.mjs move --orbit 45 --zoom 1.5 --out review/my-task/m4-closer.png
-node tools/camera.mjs stop                  # or leave it: frozen when idle, it closes after 4 idle hours (--idle <min>)
+node tools/camera.mjs start --agent grokbot --task GB-177
+node tools/camera.mjs shot weapon:m4 --agent grokbot --task GB-177 --view side --out review/my-task/m4-side.png
+node tools/camera.mjs move --agent grokbot --task GB-177 --orbit 45 --zoom 1.5 --out review/my-task/m4-closer.png
+node tools/camera.mjs stop --agent grokbot --task GB-177
 ```
 
+- `--agent` and `--task` identify the slot owner. The first game-backed command enters the machine-wide FIFO queue,
+  waits without spinning, wakes and runs automatically when granted. The Crew Panel shows its owner, task, command,
+  PID and times. Jerry's manual game/Inspector enters ahead of queued agents but never kills or preempts a live run.
+  `status` is read-only and does not need a slot.
 - `start` on Windows opens a real browser window **off screen**, so the game draws on the real GPU (it should take
   about a second a picture). `--show` puts the window on screen so you can watch. If pictures come out blank or black
   from the off-screen window, use `--show`. `--soft` is headless software rendering
@@ -24,10 +28,11 @@ node tools/camera.mjs stop                  # or leave it: frozen when idle, it 
 - `--size 1600x900` sets the default picture size (any shot can take its own `--size`).
 - Idle for 20 s, the page is frozen (no frames, no GPU or CPU use) and the next request wakes it in a blink.
   `start` also takes one throw-away picture (`--warm`, default the light turret) so the first real one is fast.
-- `start` when a camera is already up does nothing, unless the camera's own code (`camera.mjs`, `camera-rig.js`,
-  `cdp.mjs`) changed since it started: then it restarts it. `--fresh` always restarts.
-- One camera per checkout, shared by every agent on the machine. Calls are taken one at a time. `status` says what is
-  running. After you edit the game, `reload` loads it again in the same browser.
+- `start` when the owner's camera is already up does nothing. A stale or `--fresh` session is never closed
+  implicitly: its owner runs `stop`, then queues `start` again.
+- One camera can hold the computer-wide slot. Only its named owner/task may drive or stop it. Calls in that owner's
+  prepared batch are taken one at a time. `status` says what is running. After an edit, `reload` loads the game again
+  in the same browser. Stop promptly after the batch; the safety idle close defaults to 15 minutes (`--idle <min>`).
 - With no camera running, `shot`, `turnaround`, `batch`, `targets` and `eval` still work: they load the game for that
   one call and close it again. That is slow, so `start` first when you'll take more than one.
 
@@ -52,6 +57,36 @@ Groups, for `batch` and `job` (each comes back captioned with the game's own nam
 | `turrets` | Every turret at every tier (light, flame, heavy: as built, Mk II, Mk III), the mortar (one model), then the M240. |
 | `build:<kind>:*` | That buildable at every tier; `build:*:*` every buildable at every tier. |
 | any pattern with `*` | Matched against `targets`: `zombie:*`, `weapon:*`, `survivor:*`, `place:cave:*`. |
+
+## The inspector (`--inspect`, CL-196)
+
+`node tools/camera.mjs start --inspect --agent <name> --task <id>` loads the inspector
+(studio/inspector/README.md) instead of the title screen:
+the game booted straight into a studio in the Training Ground (no intro, no warm-up), with its curated models, the live marine
+and live zombies by the inspector's catalog ids. `targets` lists them (116 or so).
+
+| Target | What |
+| --- | --- |
+| `<catalog id>` | `marine` (the live player), `marine.fresh`, `zombie.<type>`, `weapon.<id>`, `animal.<id>`, `person.<who>`, `build.<kind>`, `prop.<id>`, `vehicle.<id>` |
+| `<id>:<variant>` | a variant: `build.wall:3` (a tier), `animal.fish:2`, `person.cave-guardian:iron`, `prop.skull:brute`; zombies take a mode: `zombie.brute:statue`, `:live`, `:walk`, `:rise` |
+| the old kinds | `weapon:m4`, `build:wall:2`, `zombie:brute` (a statue), `survivor:pike`, `marine`, `player`: mapped onto the catalog |
+
+- `node tools/camera.mjs check [pattern] --out review/x/` builds every model variant (or the ids containing the pattern), takes
+  a picture of each and writes `sheet.jpg` (one contact sheet, broken ones in red) and `check.json`. Run it after
+  changing a model. Without a running camera it loads the inspector for the one call.
+- `eval` has `DWInspect` (the inspector's API) as well as `T`: `node tools/camera.mjs eval "await
+  DWInspect.marine.play('reload-ak'); await new Promise(r => setTimeout(r, 700)); return DWInspect.current()"`, then a shot.
+- A running camera changes mode with `reload --inspect` (or `--title`, `--match`, `--training`); without a shell, the
+  inbox job `{"cmd":"reload","mode":"inspect"}`, then `{"cmd":"check"}` or any shot job.
+- Places (`place:`) are not in the inspector: they need the title screen's world.
+- Same-subject shots retain the current move and kit; use `--reset` to rebuild. Sidecars include a versioned inspector
+  recipe. `shot --from <sidecar.json>` restores the setup and exact camera; active moves restart, so use phase holds
+  where a matching animation pose matters. Save/Load setup in the inspector uses the same API recipe.
+- `DWInspect.apiVersion`, `capabilities()`, `busy()`, `cancel()`, `session()` and `restore()` are public. Await
+  `stepAsync(n)` for completed frame steps. `_ix` is private. Checks use statue zombies for geometry; verify live modes
+  and motion separately. No-match checks and failed jobs return errors and a nonzero CLI exit code.
+- Camera sessions/logs are checkout-specific. Reload after game edits; a running browser keeps its already loaded
+  modules. HTTP jobs accept local JSON requests; the inbox remains available for agents without a shell.
 
 ## Where to stand
 
@@ -79,9 +114,8 @@ too, applied after the framing.
 | `--fwd <m>` | Walk forward along the view, both together |
 | `--fov <deg>` | Change the lens |
 
-Several agents share one camera, and "the last picture" is the last one anyone took. If others are working at the
-same time, take a picture with `shot`, then pass its `.json` back with `shot --from <file.json> --orbit 20 ...`
-instead of `move`.
+The current slot owner may take many queued shots in one camera. `"the last picture"` means the last one in that
+owner's batch. Pass its `.json` back with `shot --from <file.json> --orbit 20 ...` when exact continuity matters.
 
 ## Light, HUD, labels
 

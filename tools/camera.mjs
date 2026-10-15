@@ -4,10 +4,12 @@
 // Loading the game is the slow part (the world is built once, ~10 s on a real GPU, a minute in software), so the camera
 // runs as a small server that keeps one game loaded, and each picture is one quick call to it:
 //
-//   node tools/camera.mjs start                      load the game once and keep it (on Windows: a real-GPU window, off
+//   node tools/camera.mjs start --agent <name> --task <id>  queue, then load one game (on Windows: a real-GPU window, off
 //                                                    screen); --show to watch it, --soft for headless software rendering,
-//                                                    --match / --training to be in a match or the Training Ground
-//   node tools/camera.mjs shot weapon:m4 --view side --out review/x/m4.png
+//                                                    --match / --training to be in a match or the Training Ground,
+//                                                    --inspect in the inspector's studio (studio/inspector/: every model
+//                                                    and the live marine and zombies, by its catalog ids)
+//   node tools/camera.mjs shot weapon:m4 --agent <name> --task <id> --view side --out review/x/m4.png
 //   node tools/camera.mjs shot place:hq --view three --time dusk
 //   node tools/camera.mjs shot zombie:brute --yaw 30 --pitch 10 --size 1000x1000
 //   node tools/camera.mjs move --orbit 45 --zoom 1.5          from the last picture: round, closer, and shoot again
@@ -18,7 +20,9 @@
 //   node tools/camera.mjs targets [zombie|place|weapon|...]  what can be pointed at
 //   node tools/camera.mjs eval "T.setWorldTime(0.5); return T.getPhase()"   anything else (T is window.TT)
 //   node tools/camera.mjs shot --live --ui                  what the player sees, HUD and all (in a --match camera)
-//   node tools/camera.mjs reload                             after an edit to the game: load it again, same browser
+//   node tools/camera.mjs reload [--inspect|--match|--training|--title]   after an edit to the game: load it again, same
+//                                                    browser (a mode flag changes the camera's mode: an inbox job can too)
+//   node tools/camera.mjs check [pattern] --out review/x/   (inspector) build every subject: a contact sheet + check.json
 //   node tools/camera.mjs release | status | stop
 //
 // The inbox: with the camera running, any agent can drop a job file in review/camera/jobs/ (no shell needed): it is
@@ -32,14 +36,25 @@ import http from 'node:http';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
 import { launch } from './cdp.mjs';
+import {
+  adoptGameTestController,
+  defaultGameTestSlot,
+  registerGameTestProcess,
+  unregisterGameTestProcess,
+} from './game-test-slot.mjs';
 
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
-const SESSION = path.join(os.tmpdir(), 'dead-wave-camera.json');
-const LOG = path.join(os.tmpdir(), 'dead-wave-camera.log');
+export function cameraSessionFiles(root = ROOT) {
+  const normalized = process.platform === 'win32' ? path.resolve(root).toLowerCase() : path.resolve(root);
+  const key = crypto.createHash('sha256').update(normalized).digest('hex').slice(0, 16);
+  return { session: path.join(os.tmpdir(), 'dead-wave-camera-' + key + '.json'), log: path.join(os.tmpdir(), 'dead-wave-camera-' + key + '.log') };
+}
+const { session: SESSION, log: LOG } = cameraSessionFiles();
 const DEFAULT_OUT = 'review/camera';
 const INBOX = path.join(ROOT, 'review', 'camera', 'jobs');
 const HEART = path.join(INBOX, '_camera.json');
@@ -58,36 +73,86 @@ function parseArgs(argv) {
   }
   return { pos, o };
 }
-const num = (v) => (v == null || v === true ? undefined : Number(v));
+function finiteNumber(value, name) {
+  if (!['number', 'string'].includes(typeof value) || typeof value === 'string' && !value.trim()) throw new Error(name + ' must be a finite number');
+  const n = Number(value); if (!Number.isFinite(n)) throw new Error(name + ' must be a finite number'); return n;
+}
+const num = (v) => (v == null ? undefined : finiteNumber(v, 'numeric option'));
 function sizeOf(s, dflt) {
-  if (!s || s === true) return dflt;
-  const m = String(s).match(/^(\d+)[x*,](\d+)$/i);
-  if (!m) throw new Error('--size wants WxH, e.g. 1600x900');
-  return [+m[1], +m[2]];
+  if (s == null) s = dflt;
+  let dimensions;
+  if (Array.isArray(s)) dimensions = s;
+  else { const m = typeof s === 'string' && s.match(/^(\d+)[x*,](\d+)$/i); if (m) dimensions = [+m[1], +m[2]]; }
+  if (!dimensions || dimensions.length !== 2) throw new Error('--size wants WxH or [width,height], e.g. 1600x900');
+  const [width, height] = dimensions.map((v) => finiteNumber(v, 'viewport dimension'));
+  if (![width, height].every((v) => Number.isInteger(v) && v >= 64 && v <= 8192) || width * height > 32000000)
+    throw new Error('viewport dimensions must be integers from 64 to 8192, at most 32 million pixels');
+  return [width, height];
+}
+function vectorValues(value, name, length) {
+  const values = Array.isArray(value) ? value : typeof value === 'string' ? value.split(',') : [];
+  if (values.length !== length) throw new Error(name + ' wants ' + length + ' comma-separated numbers');
+  return values.map((v) => finiteNumber(v, name));
+}
+function validateShot(req) {
+  if (!req || typeof req !== 'object' || Array.isArray(req)) throw new Error('shot must be an object');
+  const r = { ...req };
+  for (const k of ['yaw', 'pitch', 'dist', 'fov', 'margin', 'height', 'lookY', 'settle', 'wait']) if (r[k] !== undefined) r[k] = finiteNumber(r[k], k);
+  if (r.pitch !== undefined && (r.pitch < -89 || r.pitch > 89)) throw new Error('pitch must be from -89 to 89 degrees');
+  if (r.fov !== undefined && (r.fov < 1 || r.fov > 120)) throw new Error('fov must be from 1 to 120 degrees');
+  for (const k of ['dist', 'margin']) if (r[k] !== undefined && r[k] <= 0) throw new Error(k + ' must be greater than zero');
+  for (const k of ['wait', 'settle']) if (r[k] !== undefined && r[k] < 0) throw new Error(k + ' cannot be negative');
+  if (r.time !== undefined) {
+    const named = ['midnight', 'night', 'dawn', 'morning', 'noon', 'day', 'afternoon', 'dusk', 'evening'];
+    if (!named.includes(r.time)) { const t = finiteNumber(r.time, 'time'); if (t < 0 || t > 1) throw new Error('time must be from 0 to 1 or a named time of day'); r.time = t; }
+  }
+  if (r.cam !== undefined) {
+    if (!r.cam || typeof r.cam !== 'object' || Array.isArray(r.cam)) throw new Error('camera must be an object');
+    r.cam = { ...r.cam };
+    for (const k of ['x', 'y', 'z', 'tx', 'ty', 'tz']) r.cam[k] = finiteNumber(r.cam[k], 'camera.' + k);
+    r.cam.fov = finiteNumber(r.cam.fov !== undefined ? r.cam.fov : r.fov ?? 35, 'camera.fov');
+    if (r.cam.fov < 1 || r.cam.fov > 120) throw new Error('camera.fov must be from 1 to 120 degrees');
+    const distance = Math.hypot(r.cam.x - r.cam.tx, r.cam.y - r.cam.ty, r.cam.z - r.cam.tz);
+    if (!Number.isFinite(distance) || distance <= 0) throw new Error('camera must be separate from its target with a finite distance');
+  }
+  if (r.move !== undefined) {
+    if (!r.move || typeof r.move !== 'object' || Array.isArray(r.move)) throw new Error('camera move must be an object');
+    r.move = { ...r.move };
+    for (const k of ['orbit', 'tilt', 'zoom', 'fwd', 'fov']) if (r.move[k] !== undefined) r.move[k] = finiteNumber(r.move[k], 'move.' + k);
+    if (r.move.zoom !== undefined && r.move.zoom <= 0) throw new Error('move.zoom must be greater than zero');
+    if (r.move.fov !== undefined && (r.move.fov < 1 || r.move.fov > 120)) throw new Error('move.fov must be from 1 to 120 degrees');
+    if (r.move.pan !== undefined) r.move.pan = vectorValues(r.move.pan, 'move.pan', 2);
+  }
+  if (r.size !== undefined) r.size = sizeOf(r.size);
+  return r;
 }
 // A shot request from command-line options (everything optional but something to point at).
-function shotReq(target, o) {
+export function shotReq(target, o) {
   const r = { target: target || o.target };
   for (const k of ['view', 'time', 'caption']) if (o[k] != null && o[k] !== true) r[k] = String(o[k]);
   for (const k of ['yaw', 'pitch', 'dist', 'fov', 'margin', 'height', 'lookY', 'settle', 'wait']) if (o[k] != null) r[k] = num(o[k]);
   if (o.ui) r.ui = true;
   if (o.perf) r.perf = true;
   if (o.live) r.live = true;
-  if (o.cam) {
-    const c = String(o.cam).split(',').map(Number), l = String(o.look || '0,0,0').split(',').map(Number);
-    r.cam = { x: c[0], y: c[1], z: c[2], tx: l[0], ty: l[1], tz: l[2], fov: num(o.fov) || 35 };
+  if (o.reset) r.reset = true;
+  if (o.cam !== undefined) {
+    const c = vectorValues(o.cam, 'cam', 3), l = vectorValues(o.look ?? '0,0,0', 'look', 3);
+    r.cam = { x: c[0], y: c[1], z: c[2], tx: l[0], ty: l[1], tz: l[2], fov: num(o.fov) ?? 35 };
   }
   const mv = {};
   for (const k of ['orbit', 'tilt', 'zoom', 'fwd']) if (o[k] != null) mv[k] = num(o[k]);
-  if (o.pan) mv.pan = String(o.pan).split(',').map(Number);
+  if (o.pan !== undefined) mv.pan = vectorValues(o.pan, 'pan', 2);
   if (Object.keys(mv).length) r.move = mv;
   if (o.from) {
     const j = JSON.parse(fs.readFileSync(path.resolve(ROOT, String(o.from)), 'utf8'));
-    r.cam = j.cam; if (!r.target && j.target) r.target = j.target; if (j.time != null && r.time == null) r.time = String(j.time); if (j.size && !o.size) r.size = j.size;
+    r.cam = j.cam;
+    if (j.inspect) r.inspect = j.inspect;
+    else if (!r.target && j.target) r.target = j.target;
+    if (j.time != null && r.time == null) r.time = String(j.time); if (j.size && !o.size) r.size = j.size;
   }
-  if (o.size) r.size = sizeOf(o.size);
+  if (o.size !== undefined) r.size = sizeOf(o.size);
   if (o.out) r.out = String(o.out);
-  return r;
+  return validateShot(r);
 }
 const slug = (s) => String(s || 'shot').replace(/[^a-z0-9._-]+/gi, '-').replace(/^-|-$/g, '').slice(0, 80) || 'shot';
 
@@ -100,6 +165,7 @@ class Engine {
     this.shots = 0;
   }
   async open() {
+    try {
     const o = this.opt;
     this.server = await serve(ROOT, 0);
     // A real GPU needs a real window: --show puts it on screen, the default (on Windows and macOS) parks it off screen.
@@ -117,12 +183,14 @@ class Engine {
     this.headless = headless;
     await this.load();
     return this;
+    } catch (e) { await this.close(); throw e; }
   }
   // (Re)load the game in the page: after an edit to the game, `reload` picks it up without a new browser.
   async load() {
     const t0 = Date.now(), o = this.opt, headless = this.headless;
     this.cur = null;
     const renderer = o.renderer || (headless ? 'webgl' : '');
+    if (o.inspect) return this.loadInspector(t0, renderer);
     const url = `${this.server.origin}/index.html?debug=1&raf=timer${renderer ? '&renderer=' + renderer : ''}`;
     await this.page.goto(url, { timeout: 240000 });
     await this.page.waitFor('!!window.DWOpening || !!window.TT', { timeout: 120000 });
@@ -141,12 +209,25 @@ class Engine {
     this.loadSec = (Date.now() - t0) / 1000;
     await this.warm();
   }
+  // CL-196: the inspector (index.html?inspect): no intro, no warm-up, straight into its studio in the Training Ground.
+  async loadInspector(t0, renderer) {
+    const url = `${this.server.origin}/index.html?inspect&raf=timer${renderer ? '&renderer=' + renderer : ''}`;
+    await this.page.goto(url, { timeout: 240000 });
+    const ok = await this.page.waitFor('(window.DWInspect && window.DWInspect.ready) || !!window.DWInspectError', { timeout: 600000 });
+    const err = await this.page.evaluate('window.DWInspectError || null');
+    if (!ok || err) throw new Error('the inspector did not start: ' + (err || this.page.errors[0] || '(no page error)'));
+    await this.page.evaluate(`import('/tools/camera-rig.js').then((m) => { window.CamRig = m.install(); return true; })`);
+    this.renderer = await this.page.evaluate('CamRig.renderer()');
+    this.mode = 'inspect';
+    this.loadSec = (Date.now() - t0) / 1000;
+    await this.warm();
+  }
   // The first picture from the shelf in the sky paid ~14 s (2026-10-09: the world drawn from up there for the first
   // time, shaders compiled, the turret built). One throw-away picture at load pays it there instead. --warm a,b picks
   // the targets; --warm none skips it.
   async warm() {
     const w = this.opt.warm;
-    const list = w === 'none' || w === false ? [] : String(w && w !== true ? w : 'build:light,build:light:2').split(',').filter(Boolean);
+    const list = w === 'none' || w === false ? [] : String(w && w !== true ? w : this.opt.inspect ? 'zombie.shambler,weapon.m4' : 'build:light,build:light:2').split(',').filter(Boolean);
     const t0 = Date.now(), tmp = path.join(os.tmpdir(), 'dead-wave-camera-warm.png');
     for (const t of list) { try { await this.shoot({ target: t, out: tmp, noMeta: true }); } catch { /* a warm-up is best effort */ } }
     this.warmSec = (Date.now() - t0) / 1000;
@@ -182,10 +263,25 @@ class Engine {
       case 'targets': return { ok: true, targets: await this.page.evaluate(`CamRig.targets(${JSON.stringify(req.filter || '')})`) };
       case 'eval': return { ok: true, value: await this.ev(req.code, req.timeout || 120000) };
       case 'release': await this.page.evaluate('CamRig.release()'); return { ok: true };
-      case 'reload': await this.load(); return { ok: true, status: `camera: reloaded in ${this.loadSec.toFixed(1)} s (${this.mode})` };
+      case 'reload':
+        if (req.mode) { if (!['inspect', 'match', 'training', 'title'].includes(req.mode)) throw new Error('reload: mode is inspect, match, training or title'); for (const k of ['inspect', 'match', 'training']) this.opt[k] = req.mode === k; }
+        await this.load(); return { ok: true, status: `camera: reloaded in ${this.loadSec.toFixed(1)} s (${this.mode})` };
+      case 'check': {   // CL-196: every inspector subject built and pictured, on one sheet, and what broke
+        if (this.mode !== 'inspect') throw new Error('check needs the inspector: start the camera with --inspect (or a reload job with "mode": "inspect")');
+        const r = await this.page.evaluate(`DWInspect.contactSheet(${JSON.stringify({ only: req.only || null, cols: req.cols ?? 8, tile: req.tile ?? 260 })})`, 3600000);
+        if (!r.results.length) throw new Error('check: no subjects matched ' + JSON.stringify(req.only || 'all'));
+        const dir = path.resolve(ROOT, req.outDir || req.out || 'review/inspector');
+        await fs.promises.mkdir(dir, { recursive: true });
+        const sheet = path.join(dir, 'sheet.jpg'), json = path.join(dir, 'check.json');
+        await fs.promises.writeFile(sheet, Buffer.from(r.data.split(',')[1], 'base64'));
+        await fs.promises.writeFile(json, JSON.stringify({ at: new Date().toISOString(), renderer: this.renderer, results: r.results }, null, 1));
+        const bad = r.results.filter((x) => !x.ok);
+        return { ok: !bad.length, check: { subjects: r.results.length, broken: bad.map((x) => x.id + ': ' + x.error) }, sheet: path.relative(ROOT, sheet).split(path.sep).join('/'), file: path.relative(ROOT, json).split(path.sep).join('/'), ms: Date.now() - t0 };
+      }
       case 'shot': case 'move': return { ok: true, shots: [await this.shoot(req)], ms: Date.now() - t0 };
       case 'turnaround': {
-        const n = Math.max(2, req.n || 8), out = [], y0 = req.yaw != null ? req.yaw : 0;
+        const n = req.n == null ? 8 : Number(req.n), out = [], y0 = req.yaw != null ? req.yaw : 0;
+        if (!Number.isInteger(n) || n < 2 || n > 72) throw new Error('turnaround: n must be an integer from 2 to 72');
         for (let i = 0; i < n; i++) {
           const yaw = y0 + (360 / n) * i;
           out.push(await this.shoot({ ...req, yaw, pitch: req.pitch != null ? req.pitch : 12, out: path.join(req.out || path.join(DEFAULT_OUT, slug(req.target)), `${String(i).padStart(2, '0')}-yaw${Math.round(yaw)}.png`) }));
@@ -203,7 +299,7 @@ class Engine {
         }
         let sheet = null;
         if (thumbs && thumbs.length) sheet = await this.sheet(thumbs, req, out).catch((e) => ({ error: String(e.message || e) }));
-        return { ok: out.every((s) => !s.error), shots: out, sheet, ms: Date.now() - t0 };
+        return { ok: out.every((s) => !s.error) && !(sheet && sheet.error), shots: out, sheet, ms: Date.now() - t0 };
       }
       default: throw new Error('unknown command ' + req.cmd);
     }
@@ -221,6 +317,8 @@ class Engine {
   // One JPEG of every picture in the job, a tile each, labelled: the thing to look at first (one small file to fetch
   // instead of every PNG). Rows follow the groups (a turret's tiers side by side) unless the job sets cols.
   async sheet(thumbs, req, out) {
+    if (req.cols != null && (!Number.isInteger(+req.cols) || +req.cols < 1 || +req.cols > 24)) throw new Error('sheet: cols must be an integer from 1 to 24');
+    if (req.tile != null && (!Number.isInteger(+req.tile) || +req.tile < 64 || +req.tile > 2048)) throw new Error('sheet: tile must be an integer from 64 to 2048');
     const rows = [];
     if (req.cols) for (let i = 0; i < thumbs.length; i += +req.cols) rows.push(thumbs.slice(i, i + +req.cols));
     else for (const t of thumbs) { const last = rows[rows.length - 1]; if (last && last[0].row === t.row && t.row != null && last.length < 6) last.push(t); else rows.push([t]); }
@@ -250,8 +348,20 @@ class Engine {
     return path.relative(ROOT, abs).split(path.sep).join('/');
   }
   async shoot(req) {
-    const size = req.size ? (Array.isArray(req.size) ? req.size : sizeOf(req.size)) : this.size;
+    req = validateShot(req);
+    const size = sizeOf(req.size, this.size);
     if (size[0] !== this.cur?.[0] || size[1] !== this.cur?.[1]) { await this.page.setViewport(size[0], size[1]); this.cur = size; await sleep(250); }
+    if (this.mode === 'inspect') {
+      // Emulation changes CSS metrics before a native resize event necessarily reaches the off-screen renderer.
+      // Run the game's existing resize handler and verify its canvas before holding/copying a screenshot.
+      const viewport = await this.page.evaluate(`(() => { dispatchEvent(new Event('resize')); const c=TT.renderer.domElement, r=c.getBoundingClientRect(); return { width:innerWidth, height:innerHeight, canvasWidth:r.width, canvasHeight:r.height }; })()`);
+      if (viewport.width !== size[0] || viewport.height !== size[1] || Math.abs(viewport.canvasWidth-size[0]) > 1 || Math.abs(viewport.canvasHeight-size[1]) > 1)
+        throw new Error('Inspector canvas did not match the requested viewport: ' + JSON.stringify(viewport));
+    }
+    if (req.inspect) {
+      if (this.mode !== 'inspect') throw new Error('this shot contains an inspector recipe: reload --inspect first');
+      await this.page.evaluate(`DWInspect.restore(${JSON.stringify(req.inspect)})`, 120000);
+    }
     if (req.wait) await sleep(req.wait);
     const aimReq = { ...req, aspect: size[0] / size[1] };
     if (req.cmd === 'move' && !req.move) throw new Error('move: say how (--orbit, --tilt, --zoom, --pan, --fwd)');
@@ -260,19 +370,31 @@ class Engine {
     if (file.endsWith('/') || file.endsWith('\\') || (fs.existsSync(path.resolve(ROOT, file)) && fs.statSync(path.resolve(ROOT, file)).isDirectory())) file = path.join(file, slug((req.target || 'shot') + '-' + (req.view || 'shot')) + '.png');
     if (!file.toLowerCase().endsWith('.png')) file += '.png';
     const abs = path.isAbsolute(file) ? file : path.resolve(ROOT, file);
-    await this.page.screenshot(abs);
-    let thumb = null;
-    if (req.thumb) {   // a small JPEG of the same frame, for the sheet
-      const res = await this.page.send('Page.captureScreenshot', { format: 'jpeg', quality: 82, captureBeyondViewport: false, clip: { x: 0, y: 0, width: size[0], height: size[1], scale: 480 / size[0] } });
-      thumb = res.data;
-    }
+    // CL-196: the inspector holds the frame while the picture is taken (in software rendering a running loop kept the
+    // compositor waiting 30 to 40 s for a frame)
+    const still = this.mode === 'inspect';
+    if (still) await this.page.evaluate('DWInspect.still(true)');
+    let thumb = null, inspect = null;
+    try {
+      await this.page.screenshot(abs);
+      if (req.thumb) {   // PNG, thumbnail and recipe describe the same held frame.
+        const res = await this.page.send('Page.captureScreenshot', { format: 'jpeg', quality: 82, captureBeyondViewport: false, clip: { x: 0, y: 0, width: size[0], height: size[1], scale: 480 / size[0] } });
+        thumb = res.data;
+      }
+      if (still && !req.noMeta) inspect = await this.page.evaluate('typeof DWInspect.session === "function" ? DWInspect.session() : null');
+    } finally { if (still) await this.page.evaluate('DWInspect.still(false)').catch(() => {}); }
     if (req.noMeta) return { file: abs };
-    const meta = { target: req.target || null, label: r.target, view: req.view || null, cam: r.cam, time: r.time, size, center: r.center, boxSize: r.size, mode: this.mode, renderer: this.renderer, at: new Date().toISOString() };
+    const meta = { schema: 'dw-camera-shot', schemaVersion: 2, target: req.target || (inspect && inspect.subject.id) || null, label: r.target, view: req.view || null, cam: r.cam, time: r.time, size, center: r.center, boxSize: r.size, mode: this.mode, renderer: this.renderer, at: new Date().toISOString(), ...(inspect ? { inspect } : {}) };
     fs.writeFileSync(abs.replace(/\.png$/i, '.json'), JSON.stringify(meta, null, 1));
     this.shots++;
     return { file: path.relative(ROOT, abs).split(path.sep).join('/'), cam: r.cam, label: r.target, thumb };
   }
-  async close() { try { await this.browser.close(); } catch { /* gone */ } try { await this.server.close(); } catch { /* gone */ } }
+  async close() {
+    const browser = this.browser, server = this.server;
+    this.browser = null; this.server = null; this.page = null;
+    try { await browser?.close(); } catch { /* gone */ }
+    try { await server?.close(); } catch { /* gone */ }
+  }
 }
 // A match, as the tests start one (tools/tests/lib.js), and the Training Ground, as tools/zombiesheet.mjs enters it.
 const MATCH = `const n = document.getElementById('playerName'); if (n) n.value = 'Camera';
@@ -327,27 +449,76 @@ function inboxWatcher(eng, { dir = INBOX, onUse = () => {}, onDone = () => {}, e
 }
 
 // --- the server ------------------------------------------------------------------------------------------------------
-async function daemon(o) {
-  const eng = await new Engine(o).open();
-  const idleMin = num(o.idle) || 240;   // frozen while idle, so staying up costs next to nothing
-  let lastUse = Date.now();
-  const srv = http.createServer((req, res) => {
-    let body = '';
-    req.on('data', (d) => { body += d; });
+export function createCameraRequestHandler(eng, onStop = () => {}, onUse = () => {}) {
+  return (req, res) => {
+    // GP-19919: local browser pages must not drive arbitrary eval or file-output jobs across origins.
+    const origin = req.headers.origin, type = String(req.headers['content-type'] || '');
+    const fail = (code, error) => { if (!res.headersSent) res.writeHead(code, { 'content-type': 'application/json' }).end(JSON.stringify({ ok: false, error })); };
+    const localHost = /^(?:127\.0\.0\.1|localhost|\[::1\])(?::\d+)?$/i.test(String(req.headers.host || ''));
+    if (req.method !== 'POST' || !localHost || (origin && origin !== `http://${req.headers.host}`) || !/^application\/json(?:\s*;|\s*$)/i.test(type)) {
+      fail(403, 'camera jobs require a same-origin JSON POST'); req.resume(); return;
+    }
+    let body = '', bytes = 0, oversized = false;
+    req.setEncoding('utf8');
+    req.on('data', (d) => {
+      bytes += Buffer.byteLength(d, 'utf8');
+      if (oversized) return;
+      if (bytes > 1024 * 1024) { oversized = true; body = ''; fail(413, 'camera job exceeds 1 MiB'); return; }
+      body += d;
+    });
     req.on('end', async () => {
-      lastUse = Date.now();
+      if (oversized) return;
+      onUse();
       let out;
       try {
         const r = body ? JSON.parse(body) : { cmd: 'status' };
-        if (r.cmd === 'stop') { out = { ok: true, stopped: true }; setTimeout(shutdown, 50); }
+        if (!r || typeof r !== 'object' || Array.isArray(r)) throw new Error('camera job must be a JSON object');
+        if (r.cmd === 'stop') { out = { ok: true, stopped: true }; setTimeout(onStop, 50); }
         else out = await eng.run(r);
       } catch (e) { out = { ok: false, error: String(e && e.message || e) }; }
       res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(out));
     });
-  });
+  };
+}
+async function daemon(o) {
+  const leaseToken = process.env.DW_GAME_TEST_TOKEN;
+  if (!leaseToken) throw new Error('camera daemon requires the machine-wide game-test queue');
+  const ownsController = process.env.DW_CAMERA_ADOPT_CONTROLLER === '1';
+  if (ownsController) await adoptGameTestController(process.pid, 'camera daemon', leaseToken);
+  else await registerGameTestProcess(process.pid, 'camera daemon', leaseToken);
+  let eng;
+  try {
+    eng = await new Engine(o).open();
+  } catch (error) {
+    if (ownsController) {
+      await defaultGameTestSlot.release(leaseToken, {
+        pid: process.pid,
+        reason: `camera failed to open: ${error.message}`,
+      }).catch(() => {});
+    } else {
+      await unregisterGameTestProcess(process.pid, leaseToken).catch(() => {});
+    }
+    throw error;
+  }
+  const idleMin = num(o.idle) || 15;   // safety release; owners should normally stop after their batch
+  let lastUse = Date.now();
+  const srv = http.createServer(createCameraRequestHandler(eng, shutdown, () => { lastUse = Date.now(); }));
   await new Promise((r) => srv.listen(0, '127.0.0.1', r));
   const port = srv.address().port;
-  fs.writeFileSync(SESSION, JSON.stringify({ port, pid: process.pid, root: ROOT, mode: eng.mode, renderer: eng.renderer, size: eng.size, loadSec: eng.loadSec, started: new Date().toISOString() }, null, 1));
+  fs.writeFileSync(SESSION, JSON.stringify({
+    port,
+    pid: process.pid,
+    root: ROOT,
+    mode: eng.mode,
+    renderer: eng.renderer,
+    size: eng.size,
+    loadSec: eng.loadSec,
+    started: new Date().toISOString(),
+    leaseAgent: process.env.DW_GAME_TEST_AGENT,
+    leaseTask: process.env.DW_GAME_TEST_TASK,
+    leaseToken,
+    ownsController,
+  }, null, 1), { mode: 0o600 });
   console.log(`camera: ready on ${port} (${eng.mode}, ${eng.renderer}, loaded in ${eng.loadSec.toFixed(1)} s, warmed in ${(eng.warmSec || 0).toFixed(1)} s)`);
   const started = new Date().toISOString();
   // The heartbeat: an agent without a shell reads this file to see whether the camera is up (alive within 15 s).
@@ -358,10 +529,25 @@ async function daemon(o) {
   const taking = () => box.taking;
   // Freeze the page after 20 idle seconds.
   setInterval(() => { if (!eng.frozen && !eng.busy && !taking() && Date.now() - lastUse > 20000) eng.freeze().then(() => beat({ freezeError: eng.noFreeze || undefined })); }, 5000).unref();
+  let shutdownPromise = null;
   async function shutdown() {
+    if (shutdownPromise) return shutdownPromise;
+    shutdownPromise = (async () => {
     try { const s = JSON.parse(fs.readFileSync(SESSION, 'utf8')); if (s.pid === process.pid) fs.unlinkSync(SESSION); } catch { /* gone */ }
     try { fs.writeFileSync(HEART, JSON.stringify({ up: false, stopped: new Date().toISOString() }, null, 1)); } catch { /* gone */ }
-    srv.close(); await eng.close(); process.exit(0);
+    srv.close();
+    await eng.close();
+    if (ownsController) {
+      await defaultGameTestSlot.release(leaseToken, {
+        pid: process.pid,
+        reason: 'camera stopped and its browser closed',
+      });
+    } else {
+      await unregisterGameTestProcess(process.pid, leaseToken);
+    }
+    process.exit(0);
+    })();
+    return shutdownPromise;
   }
   setInterval(() => { if (Date.now() - lastUse > idleMin * 60000) { console.log('camera: idle, closing'); shutdown(); } }, 30000).unref();
   process.on('SIGINT', shutdown); process.on('SIGTERM', shutdown);
@@ -371,7 +557,7 @@ async function daemon(o) {
 async function session() {
   let s; try { s = JSON.parse(fs.readFileSync(SESSION, 'utf8')); } catch { return null; }
   if (path.resolve(s.root) !== ROOT) return null;   // another checkout's camera
-  try { const r = await post(s.port, { cmd: 'status' }, 4000); return r && r.ok ? { ...s, ...r } : null; } catch { return null; }
+  try { const r = await post(s.port, { cmd: 'status' }, 4000); return r && r.ok && r.root === ROOT ? { ...s, ...r } : null; } catch { return null; }
 }
 function post(port, body, timeout = 600000) {
   return new Promise((resolve, reject) => {
@@ -382,11 +568,12 @@ function post(port, body, timeout = 600000) {
     req.end(JSON.stringify(body));
   });
 }
-function report(r) {
-  if (!r.ok && r.error) { console.error('camera: ' + r.error); process.exitCode = 1; }
+export function report(r) {
+  if (!r.ok) { if (r.error) console.error('camera: ' + r.error); process.exitCode = 1; }
   if (r.shots) for (const s of r.shots) console.log(s.error ? `FAILED ${s.target}: ${s.error}` : `${s.file}   ${s.label || ''}   cam ${['x', 'y', 'z'].map((k) => s.cam[k].toFixed(2)).join(',')} -> ${['tx', 'ty', 'tz'].map((k) => s.cam[k].toFixed(2)).join(',')} fov ${s.cam.fov}`);
   if (r.sheet) console.log(typeof r.sheet === 'string' ? 'sheet: ' + r.sheet : 'sheet FAILED: ' + r.sheet.error);
   if (r.targets) console.log(r.targets.join('\n'));
+  if (r.check) console.log(`check: ${r.check.subjects} subjects, ${r.check.broken.length} broken` + (r.check.broken.length ? ':\n  ' + r.check.broken.join('\n  ') : '') + (r.file ? '\n' + r.file : ''));
   if ('value' in r) console.log(typeof r.value === 'string' ? r.value : JSON.stringify(r.value, null, 1));
   if (r.ms != null) console.log(`(${(r.ms / 1000).toFixed(1)} s)`);
   if (r.status) console.log(r.status);
@@ -402,15 +589,90 @@ if (cmd === 'help' || o.help) {
   console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\nimport ')[0].replace(/^\/\/ ?/gm, ''));
   process.exit(0);
 }
+const queuedAgent = String(o.agent || process.env.DW_GAME_TEST_AGENT || '').toLowerCase();
+const queuedTask = String(o.task || process.env.DW_GAME_TEST_TASK || '');
+if (!process.env.DW_GAME_TEST_TOKEN && cmd !== 'daemon' && cmd !== 'status') {
+  const existing = await session();
+  if (cmd === 'stop' && !existing) {
+    console.log('camera: not running');
+    process.exit(0);
+  }
+  if (existing) {
+    if (!queuedAgent || !queuedTask) {
+      throw new Error(
+        `camera is held by ${existing.leaseAgent || 'an unknown owner'} ${existing.leaseTask || ''}; ` +
+        'give --agent and --task so another agent cannot drive or stop its session',
+      );
+    }
+    if (
+      !existing.leaseToken ||
+      existing.leaseAgent !== queuedAgent ||
+      existing.leaseTask !== queuedTask
+    ) {
+      throw new Error(
+        `camera belongs to ${existing.leaseAgent || 'a legacy/manual session'} ${existing.leaseTask || ''}; ` +
+        `${queuedAgent} ${queuedTask} may not use or stop it`,
+      );
+    }
+    if (cmd === 'start' && o.fresh) {
+      throw new Error('stop the owned camera first, then queue a fresh start; replacement never closes a live session implicitly');
+    }
+    process.env.DW_GAME_TEST_TOKEN = existing.leaseToken;
+    process.env.DW_GAME_TEST_AGENT = queuedAgent;
+    process.env.DW_GAME_TEST_TASK = queuedTask;
+  } else {
+    if (!queuedAgent || !queuedTask) {
+      throw new Error(
+        `camera ${cmd} needs --agent <name> --task <id>; it will queue, wake and run automatically`,
+      );
+    }
+    const checks = String(o.checks || `camera ${cmd}${pos[1] ? ` ${pos[1]}` : ''}`);
+    const slotScript = fileURLToPath(new URL('./game-test-slot.mjs', import.meta.url));
+    const cameraScript = fileURLToPath(import.meta.url);
+    const queueArgs = [
+      slotScript,
+      'run',
+      queuedAgent,
+      queuedTask,
+      '--checks',
+      checks,
+      '--minutes',
+      String(num(o.minutes) || 15),
+      '--',
+      process.execPath,
+      cameraScript,
+      ...process.argv.slice(2),
+    ];
+    const waiter = spawn(process.execPath, queueArgs, { cwd: ROOT, stdio: 'inherit', env: process.env });
+    const outcome = await new Promise((resolve, reject) => {
+      waiter.once('error', reject);
+      waiter.once('exit', (code, signal) => resolve({ code, signal }));
+    });
+    process.exit(outcome.code ?? 1);
+  }
+}
 if (cmd === 'daemon') { await daemon(o); }
 else if (cmd === 'start') {
   const s = await session();
-  // A camera started before the last edit to the camera's own code is stale: replace it.
+  // Never replace a live camera implicitly: it may belong to another agent or Jerry.
   const newest = Math.max(...['camera.mjs', 'camera-rig.js', 'cdp.mjs'].map((f) => { try { return fs.statSync(path.join(ROOT, 'tools', f)).mtimeMs; } catch { return 0; } }));
-  if (s && (o.fresh || newest > Date.parse(s.started || 0))) { await post(s.port, { cmd: 'stop' }).catch(() => {}); await sleep(1500); console.log('camera: restarting (its code changed, or --fresh)'); }
-  else if (s) { console.log(`camera: already running on ${s.port} (${s.mode}, ${s.renderer}); 'stop' first to change mode`); process.exit(0); }
+  if (s && (o.fresh || newest > Date.parse(s.started || 0))) {
+    console.error(`camera: live session on ${s.port} needs restart; its owner must run stop, then queue start again`);
+    process.exit(1);
+  } else if (s) { console.log(`camera: already running on ${s.port} (${s.mode}, ${s.renderer}); 'stop' first to change mode`); process.exit(0); }
   const fd = fs.openSync(LOG, 'w');
-  const child = spawn(process.execPath, [fileURLToPath(import.meta.url), 'daemon', ...process.argv.slice(3)], { cwd: ROOT, detached: true, stdio: ['ignore', fd, fd], windowsHide: true, env: process.env });
+  const directQueueCommand =
+    Number(process.env.DW_GAME_TEST_CONTROLLER_PID) === process.ppid;
+  const child = spawn(process.execPath, [fileURLToPath(import.meta.url), 'daemon', ...process.argv.slice(3)], {
+    cwd: ROOT,
+    detached: true,
+    stdio: ['ignore', fd, fd],
+    windowsHide: true,
+    env: {
+      ...process.env,
+      DW_CAMERA_ADOPT_CONTROLLER: directQueueCommand ? '1' : '0',
+    },
+  });
   child.unref();
   const t0 = Date.now();
   process.stdout.write('camera: loading the game');
@@ -428,7 +690,7 @@ else if (cmd === 'status') { const s = await session(); console.log(s ? `camera:
 else {
   let req;
   if (cmd === 'shot' || cmd === 'move') req = { cmd, ...shotReq(cmd === 'move' ? null : pos[1], o) };
-  else if (cmd === 'turnaround') req = { cmd, ...shotReq(pos[1], o), n: num(o.n) || 8 };
+  else if (cmd === 'turnaround') req = { cmd, ...shotReq(pos[1], o), n: num(o.n) ?? 8 };
   else if (cmd === 'batch' || cmd === 'job') {
     const src = cmd === 'job' && /^\s*[[{]/.test(pos[1] || '') ? pos[1] : fs.readFileSync(path.resolve(ROOT, pos[1]), 'utf8');
     const list = JSON.parse(src);
@@ -439,8 +701,11 @@ else {
   }
   else if (cmd === 'targets') req = { cmd, filter: pos[1] || '' };
   else if (cmd === 'eval') req = { cmd, code: /\breturn\b/.test(pos[1] || '') ? pos[1] : 'return (' + (pos[1] || 'null') + ')' };
-  else if (cmd === 'release' || cmd === 'reload') req = { cmd };
+  else if (cmd === 'release') req = { cmd };
+  else if (cmd === 'reload') req = { cmd, mode: o.inspect ? 'inspect' : o.match ? 'match' : o.training ? 'training' : o.title ? 'title' : undefined };
+  else if (cmd === 'check') { req = { cmd, only: pos[1] || null, out: o.out ? String(o.out) : undefined, cols: num(o.cols), tile: num(o.tile) }; o.inspect = true; }
   else { console.error('camera: unknown command ' + cmd + ' (node tools/camera.mjs help)'); process.exit(2); }
+  if (req.inspect) o.inspect = true;
   const s = await session();
   if (s) report(await post(s.port, req));
   else {

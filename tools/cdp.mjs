@@ -12,6 +12,13 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {
+  assertGameTestSlot,
+  registerGameTestProcess,
+  releaseGameTestReservation,
+  reserveGameTestProcess,
+  unregisterGameTestProcess,
+} from './game-test-slot.mjs';
 
 const CHROME_CANDIDATES = [
   process.env.CHROME,
@@ -56,28 +63,34 @@ class Connection {
       let msg;
       try { msg = JSON.parse(typeof ev.data === 'string' ? ev.data : String(ev.data)); } catch { return; }
       if (msg.id && this.pending.has(msg.id)) {
-        const { resolve, reject } = this.pending.get(msg.id);
+        const { resolve, reject, timer } = this.pending.get(msg.id);
         this.pending.delete(msg.id);
+        clearTimeout(timer);
         if (msg.error) reject(new Error(msg.error.message + ' (' + JSON.stringify(msg.error.data ?? '') + ')'));
         else resolve(msg.result);
       } else if (msg.method) {
         for (const fn of this.listeners) fn(msg);
       }
     });
+    ws.addEventListener('close', () => {
+      for (const { reject, timer } of this.pending.values()) { clearTimeout(timer); reject(new Error('CDP connection closed')); }
+      this.pending.clear();
+    });
   }
   send(method, params = {}, sessionId, timeoutMs = 120000) {
     const id = this.nextId++;
     const payload = { id, method, params };
     if (sessionId) payload.sessionId = sessionId;
-    this.ws.send(JSON.stringify(payload));
     return new Promise((resolve, reject) => {
-      this.pending.set(id, { resolve, reject });
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         if (this.pending.has(id)) {
           this.pending.delete(id);
           reject(new Error('CDP timeout: ' + method));
         }
       }, timeoutMs);
+      this.pending.set(id, { resolve, reject, timer });
+      try { this.ws.send(JSON.stringify(payload)); }
+      catch (e) { clearTimeout(timer); this.pending.delete(id); reject(e); }
     });
   }
   onEvent(fn) { this.listeners.push(fn); }
@@ -115,6 +128,15 @@ class Page {
   }
   async goto(url, { waitUntil = 'load', timeout = 120000 } = {}) {
     this._loaded = false;
+    if (process.env.DW_GAME_TEST_TOKEN) {
+      try {
+        const target = new URL(url);
+        if (['127.0.0.1', 'localhost'].includes(target.hostname)) {
+          target.searchParams.set('__gameTestToken', process.env.DW_GAME_TEST_TOKEN);
+          url = target.href;
+        }
+      } catch { /* non-URL target; let Chrome report it */ }
+    }
     await this.send('Page.navigate', { url });
     if (waitUntil === 'none') return;
     const t0 = Date.now();
@@ -154,6 +176,7 @@ class Page {
 // WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=<port>): the same Page, on its first page whose url
 // contains `urlPart`. close() only lets go of the socket; the window is the caller's to end.
 export async function attach(port, urlPart = '') {
+  await assertGameTestSlot();
   const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
   const ws = new WebSocket(version.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => {
@@ -176,9 +199,42 @@ export async function attach(port, urlPart = '') {
   return { page, url: target.url, close() { try { ws.close(); } catch { /* gone */ } } };
 }
 
+async function waitForExit(proc, timeout = 8000) {
+  if (!proc || proc.exitCode !== null || proc.signalCode !== null) return;
+  await Promise.race([
+    new Promise(resolve => proc.once('exit', resolve)),
+    sleep(timeout),
+  ]);
+}
+
+async function stopOwnedChrome(proc) {
+  if (!proc || proc.exitCode !== null || proc.signalCode !== null) return;
+  try {
+    if (process.platform === 'win32' && proc.pid) {
+      const killer = spawn('taskkill', ['/F', '/T', '/PID', String(proc.pid)], { stdio: 'ignore' });
+      await new Promise(resolve => {
+        killer.once('error', resolve);
+        killer.once('exit', resolve);
+      });
+    } else {
+      proc.kill();
+    }
+  } catch { /* already gone */ }
+  await waitForExit(proc);
+}
+
 export async function launch({ headless = true, args = [] } = {}) {
-  const exe = findChrome();
-  const profile = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'dw-chrome-'));
+  await assertGameTestSlot();
+  const reservationId = await reserveGameTestProcess('Chrome/Edge');
+  let reservationPending = true;
+  let exe, profile;
+  try {
+    exe = findChrome();
+    profile = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'dw-chrome-'));
+  } catch (error) {
+    await releaseGameTestReservation();
+    throw error;
+  }
   const flags = [
     '--remote-debugging-port=0',
     `--user-data-dir=${profile}`,
@@ -195,7 +251,23 @@ export async function launch({ headless = true, args = [] } = {}) {
     ...args,
     'about:blank'
   ];
-  const proc = spawn(exe, flags, { stdio: ['ignore', 'ignore', 'pipe'] });
+  let proc;
+  let registered = false;
+  try {
+    proc = spawn(exe, flags, { stdio: ['ignore', 'ignore', 'pipe'] });
+    await new Promise((resolve, reject) => {
+      proc.once('spawn', resolve);
+      proc.once('error', reject);
+    });
+    await registerGameTestProcess(proc.pid, 'Chrome/Edge', undefined, reservationId);
+    reservationPending = false;
+    registered = true;
+  } catch (error) {
+    await stopOwnedChrome(proc);
+    if (reservationPending) await releaseGameTestReservation();
+    if (profile) await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    throw error;
+  }
   let stderr = '';
   proc.stderr.on('data', (d) => { stderr += String(d); });
   // Chrome writes the port it actually took into the profile.
@@ -209,16 +281,54 @@ export async function launch({ headless = true, args = [] } = {}) {
     } catch { await sleep(100); }
   }
   if (!port) {
-    proc.kill();
+    await stopOwnedChrome(proc);
+    if (registered) await unregisterGameTestProcess(proc.pid);
     throw new Error('Chrome never reported a debugging port.\n' + stderr.slice(0, 500));
   }
-  const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
-  const ws = new WebSocket(version.webSocketDebuggerUrl);
-  await new Promise((resolve, reject) => {
-    ws.addEventListener('open', resolve, { once: true });
-    ws.addEventListener('error', () => reject(new Error('could not open the CDP socket')), { once: true });
-  });
+  let ws;
+  try {
+    const version = await fetchJson(`http://127.0.0.1:${port}/json/version`);
+    ws = new WebSocket(version.webSocketDebuggerUrl);
+    await new Promise((resolve, reject) => {
+      ws.addEventListener('open', resolve, { once: true });
+      ws.addEventListener('error', () => reject(new Error('could not open the CDP socket')), { once: true });
+    });
+  } catch (error) {
+    await stopOwnedChrome(proc);
+    if (registered) await unregisterGameTestProcess(proc.pid);
+    await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    throw error;
+  }
   const conn = new Connection(ws);
+  let closePromise = null;
+  const close = async () => {
+    if (closePromise) return closePromise;
+    closePromise = (async () => {
+      process.off('SIGINT', onSigint);
+      process.off('SIGTERM', onSigterm);
+      try { ws.close(); } catch { /* already gone */ }
+      await stopOwnedChrome(proc);
+      if (registered) {
+        await unregisterGameTestProcess(proc.pid);
+        registered = false;
+      }
+      await fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {});
+    })();
+    return closePromise;
+  };
+  let signalClosing = false;
+  const onSignal = (signal, code) => {
+    if (signalClosing) return;
+    signalClosing = true;
+    const ownsProcessExit = process.listenerCount(signal) <= 1;
+    close().finally(() => {
+      if (ownsProcessExit) process.exit(code);
+    });
+  };
+  const onSigint = () => onSignal('SIGINT', 130);
+  const onSigterm = () => onSignal('SIGTERM', 143);
+  process.once('SIGINT', onSigint);
+  process.once('SIGTERM', onSigterm);
 
   return {
     exe,
@@ -239,17 +349,6 @@ export async function launch({ headless = true, args = [] } = {}) {
       await page.setViewport(width, height);
       return page;
     },
-    async close() {
-      try { ws.close(); } catch { /* already gone */ }
-      try {
-        if (process.platform === 'win32' && proc.pid) {
-          spawn('taskkill', ['/F', '/T', '/PID', String(proc.pid)], { stdio: 'ignore' }).unref();
-        } else proc.kill();
-      } catch { /* already gone */ }
-      try { proc.unref(); } catch { /* already gone */ }
-      try { proc.stderr && proc.stderr.unref(); } catch { /* already gone */ }
-      // A locked profile must not keep the tool from exiting.
-      setTimeout(() => { fs.promises.rm(profile, { recursive: true, force: true }).catch(() => {}); }, 300).unref();
-    }
+    close
   };
 }
