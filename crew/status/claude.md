@@ -2,12 +2,12 @@
 
 state: active
 model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
-task: CL-202 Health check: the suite, the reds, the commit (then the budgets)
-touching: crew/BOARD.md, docs/road-to-1.0.md, git
-since: 2026-10-15T09:38Z
-next: CL-201 the campfire lighter
+task: CL-209 My reds from the suite
+touching: tools/tests/t60.js, t61, t72, t73, t172, t181 (checks), world/ (as found)
+since: 2026-10-15T16:46Z
+next: CL-210 The marine and the survivors inside their budgets (`docs/bud
 blocked-on: —
-last-report: handoffs/2026-10-15-claude-CL-199.md
+last-report: docs/budgets.md
 
 ## Notes
 

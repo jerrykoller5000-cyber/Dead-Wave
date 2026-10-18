@@ -6,7 +6,7 @@
 //  * Saves: the game keeps its profile in localStorage (tt_* keys). Here the profile lives in a file the player can
 //    see and copy, Documents\Dead-Wave\profile.json: read at start and seeded into localStorage before the game's own
 //    code runs, and every later setItem / removeItem / clear is written back through. The webview's own copy is
-//    never trusted over the file.
+//    never trusted over the file when the window opens. A reload keeps what this session wrote (CU-149).
 //  * Fullscreen: the window opens fullscreen; F11 toggles it. Quit (the menu's, window.close()) ends the program.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
@@ -200,27 +200,13 @@ fn percent_decode(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
-// Runs in the page before any of the game's own code: seeds localStorage from the profile file, writes later
-// changes back, F11 for fullscreen, and a window.close() that really closes.
+// Runs in the page before any of the game's own code. The script is desktop/src-tauri/src/save-init.js:
+// the profile file is seeded once per process, later changes are written back, and a reload (F5) does not
+// put that launch snapshot back over newer values. F11 toggles fullscreen. window.close() really closes.
+// The window title and the boot page say Grave Shift. The profile folder stays Documents\Dead-Wave (D-79).
 fn init_script(profile: &BTreeMap<String, String>) -> String {
     let seed = serde_json::to_string(profile).unwrap_or_else(|_| "{}".into());
-    format!(
-        r#"(function () {{
-  var seed = {seed};
-  var invoke = function (cmd, args) {{ try {{ return window.__TAURI_INTERNALS__.invoke(cmd, args || {{}}); }} catch (e) {{ return null; }} }};
-  try {{
-    var proto = Storage.prototype, set = proto.setItem, remove = proto.removeItem, clear = proto.clear;
-    clear.call(localStorage);
-    for (var k in seed) set.call(localStorage, k, seed[k]);
-    proto.setItem = function (k, v) {{ set.call(this, k, v); if (this === localStorage) invoke('save_set', {{ key: String(k), value: String(v) }}); }};
-    proto.removeItem = function (k) {{ remove.call(this, k); if (this === localStorage) invoke('save_remove', {{ key: String(k) }}); }};
-    proto.clear = function () {{ clear.call(this); if (this === localStorage) invoke('save_clear'); }};
-  }} catch (e) {{}}
-  window.close = function () {{ invoke('quit_game'); }};
-  window.addEventListener('keydown', function (e) {{ if (e.code === 'F11') {{ e.preventDefault(); invoke('toggle_fullscreen'); }} }}, true);
-  window.__DW_DESKTOP__ = true;
-}})();"#
-    )
+    include_str!("save-init.js").replace("__DW_SEED__", &seed)
 }
 
 fn main() {

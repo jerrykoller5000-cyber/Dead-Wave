@@ -1,13 +1,13 @@
 # ChatGPT
 
 state: blocked
-model: GPT-6 (exact variant unavailable)
-task: GP-19924 Close zombie joint gaps and blend connected body transitions
+model: GPT-6.1 Sol
+task: GP-19925 Story v3 words, one pass
 touching: —
-since: 2026-10-15T08:56Z
-next: —
-blocked-on: Native checks complete; awaiting Cursor CU-110 full suite and Antigravity independent eyes
-last-report: handoffs/2026-10-15-chatgpt-GP-19924.md
+since: 2026-10-18T13:43Z
+next: GP-19926 One name for the night. "Night N" everywhere the player read
+blocked-on: Claude's cabin-label decision and independent/native browser verification; legacy Playwright script cannot launch here
+last-report: handoffs/2026-10-18-chatgpt-GP-19925.md
 
 ## Notes
 

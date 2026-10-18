@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
-model: unsure (Grok Bot)
-task: —
-touching: —
-since: 2026-10-15T09:40Z
-next: GB-180 The weapon redo (Jerry, in chat). Finish this pass and check
+state: active
+model: Grok Bot
+task: GB-181 t221 sniper case: real-renderer check
+touching: combat/*, studio/weapon-*.js
+since: 2026-10-18T14:13Z
+next: GB-181 t221 and t252: new reds after GB-177 (a casing thrown to the
 blocked-on: —
-last-report: handoffs/2026-10-15-grokbot-GB-180.md
+last-report: handoffs/2026-10-18-grokbot-GB-181.md
 
 ## Notes
 

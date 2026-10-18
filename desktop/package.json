@@ -6,8 +6,8 @@
   "scripts": {
     "stage": "node ../tools/package.mjs",
     "icon": "node make-icon.mjs && tauri icon src-tauri/icons/source.png --output src-tauri/icons",
-    "build": "node ../tools/package.mjs --no-check && tauri build",
-    "build:exe": "node ../tools/package.mjs --no-check && tauri build --no-bundle",
+    "build": "node ../tools/package.mjs && tauri build",
+    "build:exe": "node ../tools/package.mjs && tauri build --no-bundle",
     "tauri": "tauri"
   },
   "devDependencies": {

@@ -1,13 +1,13 @@
 # Antigravity
 
-state: idle
+state: active
 model: Gemini 4 Argon (High)
-task: —
-touching: —
-since: 2026-10-15T08:43Z
-next: AG-81 Eyes on CL-198 (the marine's fabric) in the inspector, in th
+task: AG-82 Frame time on Jerry's GPU, after CU-148: bench.mjs --night 5, 10, 14, 18, 20 and megaswarm (48) at default and High presets
+touching: qa/2026-10-18-AG-82/, qa/2026-10-18-GP-19925-shots/
+since: 2026-10-18T14:12Z
+next: AG-82 Frame time on Jerry's GPU, after CU-148. Through the slot: `
 blocked-on: —
-last-report: handoffs/2026-10-15-antigravity-AG-80.md
+last-report: handoffs/2026-10-18-antigravity-AG-81.md
 
 ## Notes
 

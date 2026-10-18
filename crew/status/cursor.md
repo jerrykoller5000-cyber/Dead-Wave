@@ -1,13 +1,13 @@
 # Cursor
 
-state: idle
-model: GPT-5.6 Sol
-task: —
-touching: —
-since: 2026-10-15T09:53Z
-next: CU-148 Bench numbers for budgets. `tools/bench.mjs`: add draw calls
+state: active
+model: Grok 4.7
+task: CU-151 End-of-day commit of the checked-out work
+touching: git
+since: 2026-10-18T14:31Z
+next: CU-151 End-of-day commit (standing). At the end of each working day
 blocked-on: —
-last-report: handoffs/2026-10-15-cursor-CU-153.md
+last-report: handoffs/2026-10-18-cursor-CU-150.md
 
 ## Notes
 

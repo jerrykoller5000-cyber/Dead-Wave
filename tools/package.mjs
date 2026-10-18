@@ -21,16 +21,37 @@ const OUT = path.resolve(ROOT, oi >= 0 ? argv[oi + 1] : path.join('dist', 'dead-
 
 // What goes: the entry page and the folders it imports from. Nothing else in the root.
 const FILES = ['index.html'];
-const DIRS = ['assets', 'core', 'game', 'studio', 'ui', 'vendor', 'world'];
+const DIRS = ['assets', 'combat', 'core', 'game', 'studio', 'ui', 'vendor', 'world', 'z-sounds'];
 // What stays behind inside those folders: tests and browser checks, scratch, and the soundtrack's originals.
-const SKIP_FILE = [/\.test\.mjs$/i, /\.browser\.mjs$/i, /\.md$/i, /^\.tmp-/, /\.bak$/i, /\.wav$/i];
+// The .wavs the game actually fetches are the exception (core/audio.js, ui/range-start-audio.js).
+const SKIP_FILE = [/\.test\.mjs$/i, /\.browser\.mjs$/i, /\.md$/i, /^\.tmp-/, /\.bak$/i];
 const SKIP_DIR = [/^incoming$/i, /^node_modules$/i, /^\.git$/i];
+const ZSOUND_SHIP = /\.(ogg|mp3|wav|flac|m4a|aac|opus|oga|webm|json)$/i;
+
+function wavsTheGameLoads() {
+  const keep = new Set();
+  const audio = fs.readFileSync(path.join(ROOT, 'core', 'audio.js'), 'utf8');
+  const clipRoot = (audio.match(/CLIP_ROOT\s*=\s*'([^']*)'/) || [])[1] || 'assets/sfx/';
+  for (const m of audio.matchAll(/file:\s*'([^']+\.wav)'/g)) {
+    keep.add(m[1].startsWith('assets/') ? m[1] : clipRoot + m[1]);
+  }
+  const range = fs.readFileSync(path.join(ROOT, 'ui', 'range-start-audio.js'), 'utf8');
+  for (const m of range.matchAll(/assets\/[^'")\s]+\.wav/g)) keep.add(m[0]);
+  return keep;
+}
+const KEEP_WAV = wavsTheGameLoads();
+
+function skipFile(name, rel) {
+  if (rel.startsWith('z-sounds/') && !ZSOUND_SHIP.test(name)) return true;
+  if (/\.wav$/i.test(name)) return !KEEP_WAV.has(rel);
+  return SKIP_FILE.some((re) => re.test(name));
+}
 
 function walk(dir, rel, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const r = rel + '/' + e.name;
     if (e.isDirectory()) { if (!SKIP_DIR.some((re) => re.test(e.name))) walk(path.join(dir, e.name), r, out); }
-    else if (!SKIP_FILE.some((re) => re.test(e.name))) out.push(r);
+    else if (!skipFile(e.name, r)) out.push(r);
   }
 }
 
@@ -56,8 +77,19 @@ for (const f of files) {
   fs.copyFileSync(path.join(ROOT, f), to);
 }
 fs.writeFileSync(path.join(OUT, 'version.json'), JSON.stringify({ version: pkg.version, built: new Date().toISOString() }, null, 2) + '\n');
+const { listZSounds } = await import('./serve.mjs');
+const takes = listZSounds(ROOT);
+const zIndex = path.join(OUT, 'z-sounds', 'index.json');
+if (fs.existsSync(path.dirname(zIndex))) {
+  fs.writeFileSync(zIndex, JSON.stringify({ root: 'z-sounds', files: takes }, null, 1) + '\n');
+}
+const keptWavs = files.filter((f) => KEEP_WAV.has(f));
+const absentWavs = [...KEEP_WAV].filter((f) => !files.includes(f));
 console.log(`package: ${files.length} files, ${mb(total)} -> ${path.relative(ROOT, OUT)} (version ${pkg.version})`);
 for (const [d, n] of byDir) console.log('  ' + d.padEnd(10), mb(n));
+if (keptWavs.length) console.log('  wavs kept: ' + keptWavs.join(', '));
+if (absentWavs.length) console.log('  wavs named but not on disk: ' + absentWavs.join(', '));
+if (takes.length) console.log(`  z-sounds/index.json: ${takes.length} takes`);
 
 if (argv.includes('--no-check')) process.exit(0);
 
