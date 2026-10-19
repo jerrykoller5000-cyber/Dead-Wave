@@ -24,7 +24,8 @@
 #hqBriefing h3 { margin:0 0 10px; font-size:14px; color:#eadbb7; }
 #hqBriefing h4 { margin:16px 0 7px; font-size:12px; color:#c2cbbb; text-transform:uppercase; letter-spacing:1px; }
 #hqBriefing p { margin:5px 0; }
-#hqBriefing .briefing-page > p, #hqBriefing .briefing-scouting, #hqBriefing .briefing-relay, #hqBriefing .briefing-radio, #hqBriefing .briefing-restocks, #hqBriefing .briefing-bounties { grid-column:1/-1; }
+#hqBriefing .briefing-page > p, #hqBriefing .briefing-orders, #hqBriefing .briefing-scouting, #hqBriefing .briefing-relay, #hqBriefing .briefing-radio, #hqBriefing .briefing-restocks, #hqBriefing .briefing-bounties { grid-column:1/-1; }
+#hqBriefing .briefing-orders { border-left:3px solid #899b87; }
 #hqBriefing .briefing-scouting { border-left:3px solid #d7b168; background:linear-gradient(120deg,#273025,#17201a); }
 #hqBriefing .briefing-scouting h3 { text-transform:uppercase; letter-spacing:1.5px; font-size:12px; }
 #hqBriefing .briefing-scouting > p:first-of-type { font-size:19px; color:#e4e8da; margin:12px 0; }

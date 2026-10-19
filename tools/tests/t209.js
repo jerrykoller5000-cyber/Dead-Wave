@@ -51,7 +51,7 @@
     // The reach: closing on him, both arms come up at him.
     let reach = 0, armX = 0;
     // Arms read only off its swing (the attack's own arm pose overrides the reach), the most raised seen while reaching.
-    await watch(w, 2500, () => { if (!w.alive) return; reach = Math.max(reach, w.reachK || 0); if ((w.reachK || 0) > 0.5 && !(w.attackWindup > 0) && !(w.swingT > 0) && !(w.hitReact > 0) && !(w.riseT > 0)) armX = Math.min(armX, (w.mesh.userData.armLG.rotation.x + w.mesh.userData.armRG.rotation.x) / 2); });
+    { const t0 = Date.now(), s0 = T.getSimTime(); while (Date.now() - t0 < 20000 && T.getSimTime() - s0 < 2.5 && !(reach > 0.5 && armX < -0.9)) { await wait(30); ((w) => { if (!w.alive) return; reach = Math.max(reach, w.reachK || 0); if ((w.reachK || 0) > 0.5 && !(w.attackWindup > 0) && !(w.swingT > 0) && !(w.hitReact > 0) && !(w.riseT > 0)) armX = Math.min(armX, (w.mesh.userData.armLG.rotation.x + w.mesh.userData.armRG.rotation.x) / 2); })(w); } }   // CL-209: 2.5 s of game time, not of wall clock
     ok(reach > 0.5 && armX < -0.9, 'closing on him it reaches for him (reach ' + reach.toFixed(2) + ', arms at ' + armX.toFixed(2) + ' rad)');
     T.clearZombies(); T.runDevCommand('godmode off');
     ok(errs.length === 0, 'no errors' + (errs.length ? ': ' + errs[0] : ''));

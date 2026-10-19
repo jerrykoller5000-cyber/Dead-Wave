@@ -13,7 +13,9 @@ src=src.replace('window.TT = stampDebugHooks({',`window.gp70Probe={
  prepare:()=>{day=14;phase='prep';relayUpDbg=true;hq.seq=null;devNoZombies=false;quest.dawn(14);quest.hear({number:14});
  localPlayer.position.set(HQ_PANEL_FRONT.x,house.group.position.y,HQ_PANEL_FRONT.z);openHQBriefing();},
  next:()=>{day++;quest.dawn(day);publishHQBriefing();},
- ending:()=>publishUI('quest',{kind:'ending'}),
+  ending:()=>publishUI('quest',{kind:'ending'}),
+  extraction:()=>({state:extractionState,boat:extractionBoat?.state(),won}),
+  board:()=>{const b=boatRig();b.update(999);const d=b.deck();localPlayer.position.set(d.x,d.y,d.z);objEDown=true;updateBoarding(BOARD_HOLD_S+.1);updateBoarding(0);objEDown=false;},
  stale:()=>publishUI('quest-submit-request',{runId:-1,day,glyphs:quest.read().order}),
  view:()=>quest.view()
 };window.TT = stampDebugHooks({`);
@@ -41,7 +43,8 @@ try{
  for(const k of order)await page.locator('[data-glyph="'+k+'"]').click();
  await page.getByRole('button',{name:'Send',exact:true}).click();assert.equal(await page.evaluate(()=>TT.getQuestState().silenced),true);
  for(const width of [1280,390]){await page.setViewportSize({width,height:width===390?844:720});await page.locator('.quest-panel').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(shots,'silenced-'+width+'.png')});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
- await page.evaluate(()=>gp70Probe.ending());assert.equal(await page.locator('#win h2').textContent(),'The lake is quiet.');
+  await page.evaluate(()=>gp70Probe.ending());assert.deepEqual(await page.evaluate(()=>gp70Probe.extraction()),{state:'due',boat:'arriving',won:false});
+  await page.evaluate(()=>gp70Probe.board());assert.equal(await page.locator('#win h2').textContent(),'The lake is quiet.');
  assert.match(await page.locator('.true-ending-relay').textContent(),/Ridgeline.*Heron/);
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('tt_best_run')));assert.equal(saved.trueEndings,1);assert.equal(saved.evacuated,0);
  assert((await page.evaluate(()=>JSON.parse(localStorage.getItem('tt_badges')).unlocked)).includes('silence'));

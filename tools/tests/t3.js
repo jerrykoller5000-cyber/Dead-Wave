@@ -29,7 +29,7 @@
   // cell is the ground under the deck (there is headroom); aimed at the deck it goes on the deck.
   const c0 = cells[0];
   const tNo = T.resolveTarget('heavy', c0, gz0), tUp = T.resolveTarget('heavy', c0, gz0, 0, { lv: 1 });
-  ok(tNo.level === 0 && tUp.level === 1 && tUp.slot === 'object', 'turret: no aim lv' + tNo.level + ', aimed at the deck lv' + tUp.level);
+  ok(tNo.level === 1 && tNo.slot === 'object' && tUp.level === 1 && tUp.slot === 'object', 'turret (GB-187: a set-down takes the top deck, never inside the mount): no aim lv' + tNo.level + ', aimed at the deck lv' + tUp.level);
   // A floor with no aim is laid on the ground (D-12), inside the wall; the wall then owns that
   // edge, so a railing goes on the floor's other edges. Aimed at the wall top, the floor roofs it
   // and a railing goes up on it.

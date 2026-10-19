@@ -24,12 +24,13 @@
     await until(() => ms().stage === 'calm' && ms().deckTrack, 3000);
     const s1 = ms();
     const wb = s1.waveByDay.map((w) => w.from + ':' + w.track).join(' ');
-    // CL-128 (Jerry's playthrough 1): every night has its own song (tools/nights.py). Night 1 is First Blood; night 14 is Fog
-    // Night, which plays its own song (specials) and falls back to night 13's while that one decodes.
-    const want = ['1:fight_day01'].concat([2,3,4,5,6,7,8,9,10,11,12,13].map((n) => n + ':fight_night' + String(n).padStart(2, '0')),
-      ['14:fight_night13'], [15,16,17,18,19,20].map((n) => n + ':fight_night' + n)).join(' ');
-    ok(wb === want, 'waves by day: a song of its own for every night (CL-128): ' + wb);
-    const nightSongs = s1.waveByDay.map((w) => w.track).filter((t) => /^fight_night/.test(t));
+    // CL-128 (Jerry's playthrough 1): every night has its own song. CL-209: whichever set music.json holds (CL-165's
+    // switch between the old music and ElevenLabs'), so the check is the shape, not the names: a song for each night from
+    // 1 to 20, at least 19 different (the old set reuses night 13's on night 14, where Fog Night plays its own).
+    const nightSong = (n) => { let t = null; for (const w of ms().waveByDay || []) if (w.from <= n) t = w.track; return t; };   // CL-209: whichever music music.json has (CL-165 switches it)
+    const songs = Array.from({ length: 20 }, (_, i) => nightSong(i + 1));
+    ok(songs.every(Boolean) && new Set(songs).size >= 19, 'waves by day: a song of its own for every night (CL-128): ' + wb);
+    const nightSongs = [...new Set(songs)];
     ok(nightSongs.length >= 18 && nightSongs.every((k) => s1.sectioned.includes(k)), 'CL-128: every night song is a section song (' + nightSongs.filter((k) => s1.sectioned.includes(k)).length + ' of ' + nightSongs.length + ')');
     ok(!s1.sectioned.some((k) => /^fight_n\d|^fight_(ember|guardian)(_late)?$/.test(k)), 'CL-128: the old First Blood family is out of the sections (not decoded at start): ' + s1.sectioned.join(', '));
     // CL-70 (P-20): night 19 sounds bigger than night 2: the wave's music gains up to +2.5 dB over the run
@@ -67,7 +68,7 @@
     const tGap = Date.now();
     await until(() => ms().stage === 'fight', 4000);
     const gap = (Date.now() - tGap) / 1000;
-    ok(ms().stage === 'fight' && ms().deckTrack === 'fight_day01', 'then day 1\'s own song, First Blood: ' + ms().deckTrack);
+    ok(ms().stage === 'fight' && ms().deckTrack === nightSong(1), 'then day 1\'s own song: ' + ms().deckTrack);
     ok(ms().deckLoop === true, 'and it loops natively, gapless (CL-34)');
     ok(ms().deckLevel < 0.5, 'fading in (CL-35: over 1.5 s; the song\'s intro is the build): ' + ms().deckLevel.toFixed(2));
     await until(() => ms().deckLevel >= 0.999, 8000);
@@ -105,7 +106,7 @@
     T.startPrep();
     await wait(100);
     ok(ms().stage === 'release', 'the fight fades out fast first: ' + ms().stage);
-    await wait(600);
+    await until(() => ms().stage !== 'release', 4000);   // CL-209: 0.35 s of game time, however slow the frames come
     const s3 = ms();
     ok(s3.stage === 'relief' && s3.sting === 'clear', 'then the relief sting: ' + s3.stage + '/' + s3.sting);
     ok(!s3.deckTrack, 'with nothing under it: ' + s3.deckTrack);

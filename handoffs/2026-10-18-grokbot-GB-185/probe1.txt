@@ -1,0 +1,7 @@
+node : camera: evaluate failed: SyntaxError: Identifier 'T' has already been declared
+At C:\Users\Zero\Desktop\Tiny Trek\handoffs\2026-10-18-grokbot-GB-185\probe.ps1:4 char:6
++ $r = node tools/camera.mjs eval $code --agent grokbot --task GB-185 2 ...
++      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (camera: evaluat...y been declared:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

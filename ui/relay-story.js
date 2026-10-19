@@ -3,8 +3,8 @@ import { text } from './strings.js';
 
 const validDay = day => Number.isSafeInteger(day) && day > 0;
 export function createRelayStory() {
-  let runId = null, lastMorning = 0, next = 1, current = null, delved = false, delvePending = false;
-  function reset(id) { runId = id; lastMorning = 0; next = 1; current = null; delved = false; delvePending = false; }
+  let runId = null, lastMorning = 0, next = 1, current = null, delved = false, delvePending = false, originHeard = false;
+  function reset(id) { runId = id; lastMorning = 0; next = 1; current = null; delved = false; delvePending = false; originHeard = false; }
   function morning({ runId: id, day, repaired = false } = {}) {
     if (id !== runId || !validDay(day) || day <= lastMorning) return null;
     lastMorning = day;
@@ -21,6 +21,7 @@ export function createRelayStory() {
     if (!numbers.length) return null;
     const lines = numbers.reverse().map(number => ({ number, line: text(number === 8 && delved ? 'story.relay.delve' : `story.relay.${number}`) }));
     if (delvePending && next > 8 && !numbers.includes(8)) lines.unshift({ number: null, line: text('story.relay.delve') });
+    if (!originHeard) { lines.unshift({ number: null, line: text('story.relay.hushOrigin') }); originHeard = true; }
     if (numbers.includes(8) || next > 8) delvePending = false;
     current = { number: lines[0].number, day, line: lines[0].line, lines };
     return { ...current, lines: lines.map(item => ({ ...item })) };

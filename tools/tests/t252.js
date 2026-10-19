@@ -40,7 +40,7 @@
     if (T.toggleFireMode() !== 'auto') T.toggleFireMode();
     T.setAmmoDbg('m4', 20); await wait(150);
     const a0 = T.getAmmo().m4; T.toggleFireMode(); T.toggleFireMode();
-    T.setMouseFireDbg(true); await wait(700); T.setMouseFireDbg(false);
+    T.setMouseFireDbg(true); { const s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 0.7, 10000); } T.setMouseFireDbg(false);   // GB-181: 0.7 s of game time (the page runs slow, dt is capped)
     ok(a0 - T.getAmmo().m4 >= 2, 'M4 fires a burst through the flick (' + (a0 - T.getAmmo().m4) + ' rounds)');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');

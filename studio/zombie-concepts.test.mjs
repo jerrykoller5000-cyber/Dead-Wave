@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as T from '../vendor/three/three.core.js';
 import {applyZombieConcept,CONCEPT_TYPES} from './zombie-concepts.js';
+import {resetZombieAbilityVisuals} from '../game/zombie-ability-visuals.js';
 import {detailUV,detailMaterial,generateDetailPixels,DETAIL_SURFACES} from './zombie-detail.js';
 const rbox=(w,h,d)=>new T.BoxGeometry(w,h,d);
 function rig(){
@@ -36,6 +37,21 @@ test('cached bodies share immutable geometry but isolate hit, burn and fuse mate
  assert.equal(am.geometry,bm.geometry);assert.notEqual(am.material,bm.material);am.material.color.setHex(0xff0000);assert.notEqual(am.material.color.getHex(),bm.material.color.getHex());
  assert.equal(a.userData.pulseMats.length,2);assert(a.userData.pulseMats.every((m,i)=>m!==b.userData.pulseMats[i]));
  a.userData.pulseMats[1].emissiveIntensity=0;assert(b.userData.pulseMats[1].emissiveIntensity>0);
+});
+test('paired eyes render in one batch while their existing glow material and references remain live',()=>{
+ for(const kind of ['shambler','spitter','screamer','bomber','demon'])for(let copy=0;copy<2;copy++){
+  const g=rig();applyZombieConcept({THREE:T,g,typeKey:kind,scale:1,rbox});
+  const u=g.userData,eyes=u.eyes,batch=u.eyeBatch;
+  assert(batch?.isMesh&&batch.parent===u.head,kind+' eye batch');
+  assert(eyes.every(e=>e.parent===u.head&&!e.visible),kind+' source eye references');
+  assert.equal(batch.material,eyes[0].material,kind+' shared fade material');
+  assert.equal(g.children.filter(o=>o===batch).length,0,'batch stays on the animated head');
+  eyes[0].material.emissiveIntensity=.25;
+  assert.equal(batch.material.emissiveIntensity,.25,kind+' death fade reaches the visible eyes');
+  g.traverse(node=>{node.visible=true;});
+  resetZombieAbilityVisuals(g);
+  assert(eyes.every(e=>!e.visible),kind+' pooled source eyes remain hidden');
+ }
 });
 test('Demon charge flare still targets a visible material after template reuse',()=>{
  for(let i=0;i<2;i++){const g=rig();applyZombieConcept({THREE:T,g,typeKey:'demon',scale:1,rbox});const em=g.userData.emberMat;assert(em);let found=false;g.traverse(o=>{if(o.isMesh&&o.material===em)found=true;});assert(found);}

@@ -6,7 +6,7 @@ import { text } from './strings.js';
 const fixture=()=>({day:9,phase:'prep',preview:{day:9,total:10,caveIndices:[0,2],night:{pushes:[5,5],trick:'runners-two-caves',rest:false},byTypeAndCave:[{caveIndex:0,caveName:'North Cave'},{caveIndex:2,caveName:'East Cave'}]}});
 test('scouting shows all named planned caves and pushes without exact enemy counts',()=>{
  const data=fixture(),snapshot=JSON.stringify(data);Object.freeze(data.preview.night.pushes);Object.freeze(data.preview);
- const v=buildScoutingReport(data);assert.equal(v.caves,'Caves: North Cave · East Cave');assert.equal(v.pushes,'2 pushes');assert.equal(v.trick,'Runners from two caves · keep moving between packs');assert.equal(v.rest,null);assert.equal(JSON.stringify(data),snapshot);
+ const v=buildScoutingReport(data);assert.equal(v.title,'Night 9 · Eight Packs');assert.equal(v.caves,'Caves: North Cave · East Cave');assert.equal(v.pushes,'2 pushes');assert.equal(v.trick,'Runners from two caves · keep moving between packs');assert.equal(v.rest,null);assert.equal(JSON.stringify(data),snapshot);
  data.preview={...data.preview,night:{pushes:[10],trick:'woods',rest:true}};
  assert.equal(buildScoutingReport(data).pushes,'1 push');assert.equal(buildScoutingReport(data).rest,'Rest night · lighter mix, still a fight');
 });
@@ -43,9 +43,13 @@ test('the frozen plan names each planned kind once with its shared counter, neve
  assert.equal(JSON.stringify(data),before);
  for(const kind of Object.keys(COUNTER))assert(text(`counter.${kind}`).length>12,`missing counter copy for ${kind}`);
 });
-test('Fog Night and siege get their own scouting advice from the frozen night plan',()=>{
+test('Fog Night, Swarm Night and siege get their own scouting advice from the frozen night plan',()=>{
  const fog=fixture();fog.day=fog.preview.day=14;fog.preview.night.trick='lake-surge';fog.preview.night.mod='fog';
  assert.equal(buildScoutingReport(fog).trick,'Lake surge in dense fog · keep a short route back to cover');
+ const swarm=fixture();swarm.day=swarm.preview.day=17;swarm.preview.night.trick='surround-fast';swarm.preview.night.mod='swarm';swarm.preview.night.rest=true;
+ assert.equal(buildScoutingReport(swarm).title,'Night 17 · Swarm');
+ assert.equal(buildScoutingReport(swarm).trick,'Fast attackers from every cave · keep an escape lane open');
+ assert.equal(buildScoutingReport(swarm).rest,null);
  const siege=fixture();siege.day=siege.preview.day=18;siege.preview.night.trick='siege';
  assert.equal(buildScoutingReport(siege).trick,'Brutes and soldiers will smash your walls · reinforce the weakest side');
  assert.equal(buildScoutingReport({...fog,phase:'wave'}),null);

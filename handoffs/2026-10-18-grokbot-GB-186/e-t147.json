@@ -1,0 +1,14 @@
+[
+ {
+  "old": "    key('keydown'); await wait(2600); key('keyup');",
+  "new": [
+   "    key('keydown'); await until(() => T.boardingDbg().won, 15000); key('keyup');   // GB-186: the hold runs on game time (dt is capped at 50 ms, so a slow page holds longer)"
+  ]
+ },
+ {
+  "old": "    key('keydown'); await wait(1000);",
+  "new": [
+   "    key('keydown'); await until(() => T.boardingDbg().holdT > 0.9, 8000);   // GB-186: about a second of game time"
+  ]
+ }
+]

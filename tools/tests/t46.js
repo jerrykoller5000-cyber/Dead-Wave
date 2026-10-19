@@ -13,8 +13,9 @@
     await wait(400);
     ok(!c.eyeRig.visible, 'at 55 m, unwarned: no eyes');
     ok(T.caveWarn(c, 1) === true, 'level 1 by object');
-    await wait(400);
-    const op1 = Math.max(...c.eyeSprites.map(e => e.material.opacity));
+    const opNow = () => Math.max(...c.eyeSprites.map(e => e.material.opacity));
+    for (let i = 0; i < 20 && !(c.eyeRig.visible && opNow() > 0.2); i++) await wait(200);   // CL-209: the fade is game time
+    const op1 = opNow();
     ok(c.eyeRig.visible && op1 > 0.2, 'level 1: eyes show from 55 m (' + op1.toFixed(2) + ')');
     ok(T.caveWarn('cave:' + c.theme, 1) === true && events.length === 1, 'same level again: no second event (' + events.length + ')');
     const halo0 = c.eyeSprites.find(e => e.userData.halo).scale.x;

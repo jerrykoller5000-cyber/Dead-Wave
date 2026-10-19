@@ -79,7 +79,8 @@ export function applyBrutePose(z,dt){
   for(const[i,leg]of[u.legLG,u.legRG].entries()){
     const shin=leg.userData.shinG,ankle=leg.userData.shamblerAnkle;if(!shin||!ankle)continue;
     const cycle=((ph/(2*Math.PI)+i*.5)%1+1)%1,stance=cycle<BRUTE.stance,t=stance?cycle/BRUTE.stance:(cycle-BRUTE.stance)/(1-BRUTE.stance);
-    const footZ=busy?(i?-.17:.17)*scale:(stance?.6*(1-2*t):.6*(2*ease(t)-1))*scale*w;
+    // A dropped hip leaves less reach for the planted foot. Keep the ankle inside the two-bone span.
+    const footZ=busy?(i?-.17:.17)*scale:(stance?.32*(1-2*t):.32*(2*ease(t)-1))*scale*w;
     const lift=busy||stance?0:Math.sin(t*Math.PI)*BRUTE.lift*scale*w;
     const side=i?1:-1;set(leg.position,'x',side*.185*scale);
     const ry=leg.userData.shamblerFootY+lift-u.hips.position.y-leg.position.y-Math.sin(u.hips.rotation.z)*leg.position.x;

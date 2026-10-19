@@ -173,7 +173,7 @@
     const wz = T.spawnZombie(sp8.x, sp8.z, 'spider', true, true);
     // Let a finisher from (7) play out: stand him at the spot until his gun is with him.
     for (const r0 = Date.now(); Date.now() - r0 < 10000 && !muzzleBy(st8);) { p.set(st8.x, T.sampleHeight(st8.x, st8.z), st8.z); wz.mesh.position.set(sp8.x, T.sampleHeight(sp8.x, sp8.z), sp8.z); await wait(50); }
-    const rW = await shootAt(wz, 1500, st8, sp8, 40);
+    const rW = await shootAt(wz, 2600, st8, sp8, 40);   // GB-190: 40 trigger ticks need more wall time on the slow suite page
     ok(walls.length === 3 && rW.fired >= 40 && !rW.died && rW.dmg === 0, 'three wall pieces between them stop his rounds (' + walls.length + ' walls; ' + rW.dmg + ' damage; trigger held ' + rW.fired + ' ticks, ' + rW.held + ' with his gun not by him' + (rW.held ? '; ' + rigNote() : '') + ')');
     const line8 = await lineAfter(wz, 1200, st8, sp8);
     let comeOn = false, w8 = 1e9; const t8 = Date.now();

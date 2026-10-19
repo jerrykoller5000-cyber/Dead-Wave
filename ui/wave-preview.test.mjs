@@ -6,7 +6,7 @@ const make = () => ({day:4,total:10,caveIndices:[0,1],bearings:[Math.PI/2,Math.P
   {typeKey:'brute',count:2,caveIndex:0,caveName:'North Cave'},
   {typeKey:'feral',count:4,caveIndex:1,caveName:'East Cave'}]});
 test('basic preview discloses largest approach and dominant type, no exact counts',()=>{
-  const view=buildBriefing({preview:make(),day:4});assert(view.available);assert.equal(view.sources.length,1);
+  const view=buildBriefing({preview:make(),day:4});assert(view.available);assert.equal(view.title,'Night 4 · Two Fronts briefing');assert.equal(view.sources.length,1);
   assert.equal(view.sources[0].heading,'Largest approach: North Cave · N');assert.deepEqual(view.sources[0].lines,['Main threat: Shambler']);
   assert.equal(view.total,null);assert.equal(view.sources[0].total,null);assert(!JSON.stringify(view).includes('Brute'));
 });
@@ -23,6 +23,8 @@ test('special-night warnings show without Field Intel and follow the plan, not a
   const fog=make();fog.day=14;fog.night={mod:'fog',trick:'lake-surge'};
   assert.deepEqual(buildBriefing({preview:fog,day:14}).warnings,['Fog Night']);
   assert.deepEqual(buildBriefing({preview:fog,day:14,intelOwned:true}).warnings,['Fog Night']);
+  const swarm=make();swarm.day=17;swarm.night={mod:'swarm',trick:'surround-fast'};
+  assert.deepEqual(buildBriefing({preview:swarm,day:17}).warnings,['Swarm Night · fast attackers from every cave']);
   const siege=make();siege.day=18;siege.night={mod:null,trick:'siege'};
   assert.deepEqual(buildBriefing({preview:siege,day:18}).warnings,["The siege · they'll go for your walls"]);
   assert.deepEqual(buildBriefing({preview:{...siege,night:{trick:'woods'}},day:18}).warnings,[]);

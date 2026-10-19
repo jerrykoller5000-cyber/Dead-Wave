@@ -31,7 +31,7 @@
     const b0 = ps().breaths;
     await until(() => ps().cave > 0.006, 8000);
     ok(ps().cave > 0.006 && ps().caveLow > 0.002, 'at a cave mouth the cave breathes (' + f3(ps().cave) + ', low ' + f3(ps().caveLow) + ')');
-    await wait(5000);
+    await until(() => ps().breaths > b0, 20000);   // CL-209: a breath is several seconds of game time
     ok(ps().breaths > b0, 'in and out (' + (ps().breaths - b0) + ' breaths in)');
     await until(() => A.musicState().dread < 0.85, 8000);
     ok(A.musicState().stage !== 'calm' || A.musicState().dread < 0.85, 'the calm music draws back at the mouth (' + f3(A.musicState().dread) + ', ' + A.musicState().stage + ')');

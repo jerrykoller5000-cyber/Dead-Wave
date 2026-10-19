@@ -25,10 +25,10 @@ export function prepareMilitaryAppearance(T,g,camoTex){
     if(geo!==source)geo.dispose();
   }
   const scale=Math.abs(u.head.position.y)/.58;
-  const shell=new T.Mesh(new T.SphereGeometry(.205*scale,16,10,0,Math.PI*2,0,Math.PI/2),material);
+  const shell=new T.Mesh(new T.SphereGeometry(.205*scale,10,6,0,Math.PI*2,0,Math.PI/2),material);
   weatherCloth(T,shell.geometry);shell.position.set(0,.125*scale,-.027*scale);shell.scale.set(1,.85,.95);shell.castShadow=true;u.head.add(shell);
   // The back and ear coverage leave a clear opening around the exposed face.
-  const rear=new T.Mesh(new T.CylinderGeometry(.197*scale,.17*scale,.24*scale,14,1,true,Math.PI/2,Math.PI),material);
+  const rear=new T.Mesh(new T.CylinderGeometry(.197*scale,.17*scale,.24*scale,10,1,true,Math.PI/2,Math.PI),material);
   weatherCloth(T,rear.geometry,.85);rear.position.set(0,.06*scale,-.027*scale);rear.scale.z=.95;rear.castShadow=true;u.head.add(rear);
   const gearMaterial=parts[0].material.clone();gearMaterial.vertexColors=true;gearMaterial.color.setRGB(1,1,1);
   // Preserve the atlas and vertex tints through the legacy solid-color compactor.
@@ -71,23 +71,22 @@ function wornCarrier(T,u,mat,s,gearMat){
     for(let i=0;i<outline.length;i++){const j=(i+1)%outline.length,A=[...outline[i],z],B=[...outline[j],z],C=[...inner[i],z+direction*.012],D=[...inner[j],z+direction*.012];if(direction>0){tri(A,C,B,0xbcb498);tri(B,C,D,0xaaa68b);}else{tri(A,B,C,0xbcb498);tri(B,D,C,0xaaa68b);}}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(v,3));geo.computeVertexNormals();const m=put(u.torso,geo,0xffffff);m.geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));
     // Parallel rows of webbing, worn binding and individual repair stitches.
-    for(let row=0;row<4;row++){const y=.247+row*.037;box(u.torso,0x7f8067,0,y,z+direction*.018,.287,.012,.006);for(let x=-.125;x<.13;x+=.05)box(u.torso,0xc3bba0,x,y,z+direction*.023,.003,.014,.002);}
-    for(let i=0;i<outline.length;i++){const a=outline[i],b=outline[(i+1)%outline.length];for(let t=.2;t<1;t+=.3){const x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t;rod(u.torso,0xc9c1a3,[x-.003,y-.004,z+direction*.003],[x+.003,y+.004,z+direction*.003],.0014);}}
+    // The camo texture carries the subpixel stitching; keep only the webbing silhouette.
+    for(let row=0;row<3;row++){const y=.247+row*.047;box(u.torso,0x7f8067,0,y,z+direction*.018,.287,.012,.006);}
   }
   for(const side of[-1,1]){
     // Overlaid padded shoulders have frayed ends and a scratched buckle.
     const strap=box(u.torso,0xa8a185,side*.174,.407,.221,.037,.136,.022);strap.rotation.z=side*.07;
     box(u.torso,0x454738,side*.174,.356,.24,.046,.027,.012);box(u.torso,0xc6bfaa,side*.174,.365,.247,.031,.004,.003);
-    for(let j=0;j<3;j++){const x=side*(.165+j*.005);rod(u.torso,0xbdb396,[x,.343,.235],[x+side*.004,.324-j*.006,.238],.0015);}
     // Pocket seams, worn flap corners and a torn lower tie.
-    for(let j=0;j<2;j++){const x=side*(.048+j*.1);box(u.torso,0x555842,x,.116,.273,.066,.0025,.003);box(u.torso,0xbab196,x,.189,.284,.048,.0025,.003);for(let k=0;k<3;k++)rod(u.torso,0xb7ac8b,[x-.028+k*.006,.173,.278],[x-.032+k*.006,.153-k*.006,.28],.0012);}
+    for(let j=0;j<2;j++){const x=side*(.048+j*.1);box(u.torso,0x555842,x,.116,.273,.066,.0025,.003);box(u.torso,0xbab196,x,.189,.284,.048,.0025,.003);}
     const pts=[[side*.2,.047,.181],[side*.21,.014,.186],[side*.195,-.036,.216],[side*.215,-.059,.21]],v=[];
     for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],w=.009*(1-i*.2);for(const p of[[a[0]-w,a[1],a[2]],[b[0]-w,b[1],b[2]],[a[0]+w,a[1],a[2]],[a[0]+w,a[1],a[2]],[b[0]-w,b[1],b[2]],[b[0]+w,b[1],b[2]]])v.push(...p.map(n=>n*s));}
     const faces=[...v];for(let i=0;i<v.length;i+=9)faces.push(...v.slice(i+6,i+9),...v.slice(i+3,i+6),...v.slice(i,i+3));
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(faces,3));geo.computeVertexNormals();put(u.torso,geo,0x8b886d);
   }
   // Thin shell scuffs sit on the helmet surface and do not cover the exposed face.
-  for(let j=0;j<5;j++){const a=-.9+j*.37,y=.198+(j%2)*.022,r=.205*Math.sqrt(Math.max(0,1-((y-.125)/.174)**2));rod(u.head,0xd4cbb0,[Math.sin(a)*r,y,Math.cos(a)*r*.95-.027],[Math.sin(a+.09)*r,y+.002,Math.cos(a+.09)*r*.95-.027],.0017);}
+  for(let j=0;j<2;j++){const a=-.9+j*.74,y=.198+(j%2)*.022,r=.205*Math.sqrt(Math.max(0,1-((y-.125)/.174)**2));rod(u.head,0xd4cbb0,[Math.sin(a)*r,y,Math.cos(a)*r*.95-.027],[Math.sin(a+.09)*r,y+.002,Math.cos(a+.09)*r*.95-.027],.0017);}
 }
 
 // Retain one rigid source per bone for fast transforms and precise projectile rays.

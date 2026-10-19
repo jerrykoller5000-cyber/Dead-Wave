@@ -349,7 +349,9 @@ export class Group extends Object3D { constructor() { super(); this.isGroup = tr
 export class Scene extends Object3D { constructor() { super(); this.isScene = true; this.background = null; this.fog = null; this.environment = null; } }
 export class Mesh extends Object3D {
   constructor(geometry, material) { super(); this.isMesh = true; this.type = 'Mesh'; this.geometry = geometry || new BufferGeometry(); this.material = material || new MeshBasicMaterial(); }
-  raycast() {}
+  // GB-185: a round hits the posed body by raycasting its triangles. Skinned and instanced
+  // meshes keep an empty raycast (zombieSurface skips them).
+  raycast(rc, out) { meshRaycast(this, rc, out); }
   // As three.js: a mesh's copy takes its geometry and material (and its name and visibility) as well as its place.
   copy(src) { super.copy(src); if (src.geometry) this.geometry = src.geometry; if (src.material) this.material = src.material; this.name = src.name; this.visible = src.visible; return this; }
 }
@@ -371,11 +373,12 @@ export class InstancedMesh extends Mesh {
     }
   }
   computeBoundingSphere() {} dispose() {}
+  raycast() {}
 }
-export class LineSegments extends Mesh { constructor(g, m) { super(g, m); this.isLineSegments = true; } }
-export class Line extends Mesh {}
-export class Points extends Mesh {}
-export class Sprite extends Mesh { constructor(m) { super(new BufferGeometry(), m); this.isSprite = true; this.type = "Sprite"; this.center = new Vector2(0.5, 0.5); } }
+export class LineSegments extends Mesh { constructor(g, m) { super(g, m); this.isLineSegments = true; } raycast() {} }
+export class Line extends Mesh { raycast() {} }
+export class Points extends Mesh { raycast() {} }
+export class Sprite extends Mesh { constructor(m) { super(new BufferGeometry(), m); this.isSprite = true; this.type = "Sprite"; this.center = new Vector2(0.5, 0.5); } raycast() {} }
 class LightBase extends Object3D {
   constructor(color, intensity = 1, distance = 0) {
     super(); this.isLight = true; this.color = new Color(color === undefined ? 0xffffff : color); this.intensity = intensity; this.distance = distance;
@@ -591,8 +594,37 @@ export class Ray {
   set(o, d) { this.origin.copy(o); this.direction.copy(d); return this; }
 }
 export class Plane { constructor(n = new Vector3(0, 1, 0), c = 0) { this.normal = n; this.constant = c; } setFromNormalAndCoplanarPoint(n, p) { this.normal.copy(n); this.constant = -p.dot(n); return this; } }
+// GB-185: ray against the triangles of a mesh's position attribute, in world space.
+function meshRaycast(mesh, rc, out) {
+  const P = mesh.geometry && mesh.geometry.attributes && mesh.geometry.attributes.position;
+  if (!P || !P.count || !out) return;
+  const I = mesh.geometry.index, n = I ? I.count : P.count, m = mesh.matrixWorld;
+  const o = rc.ray.origin, d = rc.ray.direction;
+  const a = new Vector3(), b = new Vector3(), c = new Vector3(), e1 = new Vector3(), e2 = new Vector3(), p = new Vector3(), q = new Vector3(), s = new Vector3();
+  const at = (v, k) => { const i = I ? I.getX(k) : k; v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(m); };
+  for (let k = 0; k + 2 < n; k += 3) {
+    at(a, k); at(b, k + 1); at(c, k + 2);
+    e1.subVectors(b, a); e2.subVectors(c, a); p.crossVectors(d, e2); const det = e1.dot(p); if (Math.abs(det) < 1e-12) continue;
+    const inv = 1 / det; s.subVectors(o, a); const u = s.dot(p) * inv; if (u < 0 || u > 1) continue;
+    q.crossVectors(s, e1); const v = d.dot(q) * inv; if (v < 0 || u + v > 1) continue;
+    const t = e2.dot(q) * inv; if (t < rc.near || t > rc.far) continue;
+    out.push({ distance: t, point: o.clone().addScaledVector(d, t), object: mesh, faceIndex: k / 3 });
+  }
+}
+function rcVisit(rc, o, rec, out) {
+  if (!o) return;
+  if (o.layers && o.layers.test && rc.layers && !o.layers.test(rc.layers)) return;
+  if (o.raycast) o.raycast(rc, out);
+  if (rec && o.children) for (const c of o.children) rcVisit(rc, c, rec, out);
+}
 export class Raycaster {
-  constructor() { this.ray = new Ray(); this.near = 0; this.far = Infinity; this.params = {}; this.camera = null; }
+  constructor(origin, direction, near = 0, far = Infinity) {
+    this.ray = new Ray();
+    if (origin && origin.isVector3) this.ray.origin.copy(origin);
+    if (direction && direction.isVector3) this.ray.direction.copy(direction);
+    this.near = near; this.far = far; this.params = {}; this.camera = null;
+    this.layers = { mask: 1, set() {}, enable() {}, disable() {}, test() { return true; } };
+  }
   setFromCamera(ndc, camera) {
     this.camera = camera;
     this.ray.origin.copy(camera.position);
@@ -602,9 +634,9 @@ export class Raycaster {
     const t = Math.tan((camera.fov || 50) * Math.PI / 360);
     this.ray.direction.copy(f).addScaledVector(right, ndc.x * t * (camera.aspect || 1)).addScaledVector(u2, ndc.y * t).normalize();
   }
-  set(o, d) { this.ray.set(o, d); }
-  intersectObject() { return []; }
-  intersectObjects() { return []; }
+  set(o, d) { this.ray.set(o, d); return this; }
+  intersectObject(o, recursive = true, out = []) { rcVisit(this, o, recursive, out); out.sort((a, b) => a.distance - b.distance); return out; }
+  intersectObjects(list, recursive = true, out = []) { for (const o of list || []) rcVisit(this, o, recursive, out); out.sort((a, b) => a.distance - b.distance); return out; }
 }
 export class Clock { constructor() { this.t = performance.now(); this.elapsedTime = 0; } getDelta() { const n = performance.now(); const d = (n - this.t) / 1000; this.t = n; this.elapsedTime += d; return d; } getElapsedTime() { this.getDelta(); return this.elapsedTime; } start() {} stop() {} }
 export class Fog { constructor(c, n, f) { this.color = new Color(c); this.near = n; this.far = f; } }

@@ -69,7 +69,7 @@
     ok(n >= 15 && V().spent.links - sp1.links === n, 'a burst: ' + n + ' cases and ' + (V().spent.links - sp1.links) + ' links');
     // Shouldered: the Watchman on his right shoulder, not the mortar.
     T.shoulderMortar();
-    await wait(300);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.3 && Date.now() - w0 < 8000) await wait(30); }   // GB-188: game time (the page runs slow)
     ok(V().carried === true && V().carriedMortar === false, 'shouldered, it is the Watchman he carries, not the mortar');
     const cg = V().carriedGun, ud = (T.marine || window.worldMarine).userData;
     cg.updateMatrixWorld(true);
@@ -84,7 +84,7 @@
     // Set down: nothing left on him.
     const fwdP = { x: p.x + pf.x * 2.5, z: p.z + pf.z * 2.5 };
     V().setDown(fwdP.x, fwdP.z);
-    await wait(150);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while ((T.getSimTime() - s0 < 0.15 || T.getMortarCarried() || V().carried) && Date.now() - w0 < 8000) await wait(30); }   // GB-188: game time; the set-down may take a frame or two
     ok(!T.getMortarCarried() && V().carried === false && V().carriedMortar === false, 'set down, nothing is left on his shoulder');
     // Brandt's gun tips down at a mark on the ground.
     T.clearZombies && T.clearZombies(); T.runDevCommand('godmode');

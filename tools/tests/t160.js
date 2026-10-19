@@ -45,7 +45,7 @@
     key('keydown'); await wait(1000);
     const p1 = prompt();
     ok(/\d+%/.test(p1) && !/boat/i.test(p1), 'holding: "' + p1 + '"');
-    await wait(1600); key('keyup');
+    await until(() => T.boardingDbg().won, 15000); key('keyup');   // GB-186: the hold runs on game time
     await until(() => T.boardingDbg().won, 8000); await wait(500);
     const win = document.getElementById('win'), msg = (document.getElementById('winMsg') || {}).textContent || '';
     ok(T.boardingDbg().won && win.classList.contains('show'), 'aboard: the run is won');

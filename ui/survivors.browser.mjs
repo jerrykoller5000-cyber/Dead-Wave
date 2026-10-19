@@ -22,7 +22,7 @@ src = src.replace('window.TT = stampDebugHooks({', `window.gp69Probe = {
     player.position.set(HQ_PANEL_FRONT.x,house.group.position.y+1,HQ_PANEL_FRONT.z);hq.seq=null;
     openHQBriefing();
   },
-  win: () => {survivors=[{style:'hikers',camp:1,day:3},{style:'ranger',camp:0,day:5},{style:'trapper',camp:2,day:7}];endGame(true);}
+  win: () => {survivors=[{who:'pike',style:'hikers',camp:1,day:3},{who:'brandt',style:'ranger',camp:0,day:5},{who:'okafor',style:'trapper',camp:2,day:7}];endGame(true);}
 };window.TT = stampDebugHooks({`);
 assert(src.includes('window.gp69Probe ='),'probe anchor missing');
 
@@ -51,9 +51,9 @@ try {
   await page.evaluate(()=>gp69Probe.win());
   assert.equal(await page.locator('#winMsg .survivors-aboard').textContent(),'Survivors aboard: 3');
   assert.deepEqual(await page.locator('#winMsg .survivor-aboard-line').allTextContents(),[
-    'Dr. Reyes, Medic-4. Still counting who she couldn\'t save.',
-    'Ranger Voss. Says the dogs are owed a better island.',
-    "Kettle, the trapper. First boat he's taken in forty years."
+    "Cpl. Okafor, medic. Still counting the ones she couldn't reach.",
+    'Sgt. Brandt. Counted every round. Says he still owes nine.',
+    'Spc. Pike, mechanic. Wants to see the wall from the outside.'
   ]);
   for(const width of [1280,390]) {
     await page.setViewportSize({width,height:width===390?844:720});

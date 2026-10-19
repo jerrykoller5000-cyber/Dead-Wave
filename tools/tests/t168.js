@@ -164,7 +164,7 @@
     await wait(500);
     ok(T.zombies.filter((z) => z.below && z.belowSet).length === 0, 'the root Deep: nothing comes when he walks in');
     T.claimHollowHere(r.points.strongbox.x, r.points.strongbox.y, r.points.strongbox.z);
-    await wait(1500);
+    await (async () => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 15000) await wait(30); })();   // GB-187: 1.5 s of game time
     const knot = T.zombies.filter((z) => z.below && z.belowSet);
     ok(knot.length === 6 && knot.every((z) => !z.alive || Math.abs(z.mesh.position.y - r.groundAt(z.mesh.position.x, z.mesh.position.z)) < 0.05), "the box opened, the climbers' knot drops and lands (" + knot.length + ')');
     T.leaveHollow('mouth');

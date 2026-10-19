@@ -1,0 +1,21 @@
+[
+    {
+        "old":  "      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c }); }",
+        "new":  [
+                    "      // GB-181: its throw as it leaves the port (the live c.vx is read seconds later, after the bounce or the settle).",
+                    "      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c, v: { x: c.vx, y: c.vy, z: c.vz }, q: gun.getWorldQuaternion(new THREE.Quaternion()).invert() }); }"
+                ]
+    },
+    {
+        "old":  "      const q = gun.getWorldQuaternion(new THREE.Quaternion()).invert();",
+        "new":  [
+                    "      const q = c1.q;"
+                ]
+    },
+    {
+        "old":  "      const vl = V().set(c1.c.vx, c1.c.vy, c1.c.vz).applyQuaternion(q);",
+        "new":  [
+                    "      const vl = V().set(c1.v.x, c1.v.y, c1.v.z).applyQuaternion(q);"
+                ]
+    }
+]

@@ -28,7 +28,7 @@ export const ZFEET = {
   liftEps: 0.006,     // a foot this far (metres at scale 1) above its ground is in the air
   // Per kind: the roll's scale, and how the step is read.
   kinds: {
-    shambler: { k: 1.0 }, military: { k: 1.0 }, bomber: { k: 0.8 }, brute: { k: 0.7 }, drowned: { k: 0.9 }, spitter: { k: 0.9 }, screamer: { k: 1.0 },
+    shambler: { k: 1.0 }, military: { k: 0.8 }, bomber: { k: 0.8 }, brute: { k: 0.7 }, drowned: { k: 0.9 }, spitter: { k: 0.9 }, screamer: { k: 1.0 },
     feral: { k: 0.9, sine: true }, demon: { k: 0.7, sine: true }, colossus: { k: 0.6, sine: true }, guardian: { k: 0.8, sine: true }, caveguard: { k: 0.8, sine: true }
     // (the leaper runs on all fours on GP-19856's own paws; the spider plants its own limbs)
   }
@@ -36,6 +36,7 @@ export const ZFEET = {
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const WALK_HIP_TRIM = { shambler: 0.012, drowned: 0.02, military: 0.012, brute: 0.04, spitter: 0.025, colossus: -0.06 };
 
 // The roll through a step. u: 0 at the strike .. 1 at toe-off (the stance); v: 0 at toe-off .. 1 at the strike
 // (the swing); exactly one of them is given. Returns the ankle pitch (radians, toe down positive).
@@ -153,6 +154,12 @@ export function applyZombieFeet(z, ctx) {
       ankle.rotation.x -= da + dk;   // the sole as it was, then the roll
     }
     ankle.rotation.x += roll;
+  }
+  // The authored stride can put the two soles just outside their contact band at once.
+  // Trim the walking hip bob after the ankle solve; resting and hit poses keep their own heights.
+  if (walking) {
+    const trim = WALK_HIP_TRIM[z.typeKey] || 0;
+    hips.position.y += trim * ctx.walkAmt;
   }
 }
 

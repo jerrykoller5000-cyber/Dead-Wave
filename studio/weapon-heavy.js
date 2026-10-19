@@ -27,8 +27,8 @@ function part(T, geo, mat, parent, x = 0, y = 0, z = 0) {
   mesh.castShadow = mesh.receiveShadow = true; parent.add(mesh); return mesh;
 }
 // A rolled steel sheet with actual oval through-holes and a closed inside wall.
-function ventTube(T, r, wall, length, rows, columns, holeA = 0.5, holeZ = 0.58) {
-  return geometry(T, ['vent', r, wall, length, rows, columns, holeA, holeZ].join(','), (quad) => {
+function ventTube(T, r, wall, length, rows, columns, holeA = 0.5, holeZ = 0.58, ringN = 12) {
+  return geometry(T, ['vent', r, wall, length, rows, columns, holeA, holeZ, ringN].join(','), (quad) => {
     const da = Math.PI * 2 / rows, dz = length / columns;
     const position = (a, z, radius) => [Math.sin(a) * radius, Math.cos(a) * radius, z];
     const normal = (a, sign) => [Math.sin(a) * sign, Math.cos(a) * sign, 0];
@@ -36,7 +36,7 @@ function ventTube(T, r, wall, length, rows, columns, holeA = 0.5, holeZ = 0.58) 
       const ax = da * (row + 0.5), zc = dz * (col + 0.5), hx = da / 2, hz = dz / 2;
       // Include every corner exactly so neighbouring patches meet without cracks.
       const corner = Math.atan2(hz, hx * r);
-      const angles = [...Array.from({ length: 12 }, (_, i) => i * Math.PI / 6), corner, Math.PI - corner, Math.PI + corner, 2 * Math.PI - corner].sort((a, b) => a - b);
+      const angles = [...Array.from({ length: ringN }, (_, i) => i * Math.PI * 2 / ringN), corner, Math.PI - corner, Math.PI + corner, 2 * Math.PI - corner].sort((a, b) => a - b);
       const ring = angles.map(a => {
         const dx = Math.cos(a), dy = Math.sin(a), outer = Math.min(hx * r / Math.max(1e-12, Math.abs(dx)), hz / Math.max(1e-12, Math.abs(dy)));
         const inner = 1 / Math.hypot(dx / (hx * r * holeA), dy / (hz * holeZ));
@@ -487,11 +487,16 @@ export function makeChainsawModel(ctx) {
   const toothPrototype = K.slab([[-0.016, -0.009], [0.016, -0.009], [0.016, 0.002], [0.009, 0.011], [-0.001, 0.011], [-0.003, 0.003], [-0.016, 0.003]], 0.053, bladeMat, { bevel: 0.001, segs: 1 });
   gun.remove(toothPrototype);
   for (let i = 0; i < toothCount; i++) {
-    const tooth = new THREE.Mesh(toothPrototype.geometry, bladeMat);
-    tooth.castShadow = tooth.receiveShadow = true;
+    // GB-189: teeth are transform-only nodes; one InstancedMesh draws all of them.
+    const tooth = new THREE.Object3D();
     chainGroup.add(tooth);
     chainTeeth.push(tooth);
   }
+  const chainInst = new THREE.InstancedMesh(toothPrototype.geometry, bladeMat, toothCount);
+  chainInst.castShadow = chainInst.receiveShadow = true;
+  chainInst.frustumCulled = false;
+  chainGroup.add(chainInst);
+  gun.userData.chainInst = chainInst;
   gun.add(chainGroup);
   gun.userData.bladeSpin = chainGroup; // kept for callers; rotation is never used for chain motion
   gun.userData.chainGroup = chainGroup;
@@ -682,8 +687,8 @@ export function makeM240Model(ctx, folded = false) {
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   K.slab([[-0.098, 0.8183], [-0.1027, 0.8056], [-0.102, 0.7979], [-0.0973, 0.7913], [-0.1027, 0.7867], [-0.11, 0.7941], [-0.1133, 0.8064], [-0.11, 0.8217]], 0.011, gunAccent, { bevel: 0.002 });
   const barrel = K.lathe([[0, 0.2], [0.024, 0.2], [0.024, 0.24], [0.019, 0.25], [0.019, 0.72], [0, 0.72]], gunAccent, { y: 0.875, seg: 12 });
-  part(THREE, ventTube(THREE, 0.028, 0.003, 0.24, 8, 7, 0.52, 0.56), gunBody, g, 0, 0.875, 0.227);
-  for (const z of [0.226, 0.469]) K.cyl(0.032, 0.032, 0.012, gunMid, 0, 0.875, z, null, 20);
+  part(THREE, ventTube(THREE, 0.028, 0.003, 0.24, 8, 7, 0.52, 0.56, 6), gunBody, g, 0, 0.875, 0.227);   // GB-189: 10-point holes (were 16)
+  for (const z of [0.226, 0.469]) K.cyl(0.032, 0.032, 0.012, gunMid, 0, 0.875, z, null, 16);
   K.lathe([[0, 0.715], [0.024, 0.72], [0.024, 0.79], [0.012, 0.792], [0.012, 0.785], [0, 0.785]], gunDark, { y: 0.875, seg: 12 });
   K.lathe([[0, 0.2], [0.014, 0.2], [0.014, 0.56], [0, 0.56]], gunDark, { y: 0.835, seg: 10 });
   K.box(0.04, 0.05, 0.05, gunDark, 0, 0.85, 0.57, 0, 0, 0, null, 0.006);

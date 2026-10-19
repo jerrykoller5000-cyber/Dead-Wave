@@ -55,9 +55,9 @@ sinkhole. Pushes include the boss.
 | 10 | build | 430 + 1 | 296 | feral 30, leaper 16, drowned 10, soldier 30, brute 24 in 4 packs, spider 10, spitter 6, bomber 6, screamer 2 (31%) | 1 cave + lake |  | colossus | 87 / 97 / 109 / 138 | 7 s | Brute night down one cave, and a colossus |
 | 11 (rest) | test | 470 | 358 | feral 50, leaper 16, drowned 10, soldier 16, spider 8, spitter 4, bomber 4, screamer 2, **demon 2 (new)** (last push) (24%) | all six (surround) + lake |  |  | 77 / 84 / 90 / 98 / 121 | 12 s | Rest night, but from every cave; the first demons |
 | 12 | test | 418 + 1 | 269 | feral 40, leaper 20, drowned 10, soldier 30, brute 10, spider 12, spitter 10, bomber 8, screamer 3, demon 6 (36%) | chalk only + lake | yes | guardian | 85 / 95 / 105 / 134 | 5 s | The guardian on Ember Night, with demons |
-| 13 | test | 560 | 364 | feral 50, leaper 24, drowned 12, soldier 50, brute 12, spider 14, spitter 20 in 4 packs, bomber 8, screamer 3, demon 3 (35%) | 2 caves + lake |  |  | 92 / 100 / 108 / 116 / 144 | 5 s | Artillery: twenty spitters behind a line of soldiers |
+| 13 | test | 560 | 324 + 40 risers | feral 50, leaper 24, drowned 12, soldier 50, brute 12, spider 14, spitter 20 in 4 packs, bomber 8, screamer 3, demon 3 (35%) | 2 caves + 40 claw up + lake |  |  | 92 / 100 / 108 / 116 / 144 | 5 s | Artillery: twenty spitters behind a line of soldiers |
 | 14 (rest) | test | 600 | 372 + 60 risers | feral 40, leaper 16, drowned 70 in 5 packs, soldier 16, brute 4, spider 10, spitter 4, bomber 4, screamer 2, demon 2 (28%) | 1 cave + 60 claw up + lake |  |  | 98 / 107 / 116 / 125 / 154 | 12 s | Rest night: the lake surges (seventy drowned) and sixty claw up |
-| 15 | test | 640 + 1 | 404 | feral 60, leaper 30, drowned 12, soldier 40, brute 14, spider 50 in 5 packs, spitter 10, bomber 10, screamer 6 in 1 pack, demon 4 (37%) | 2 caves + lake |  | colossus | 105 / 114 / 124 / 133 / 165 | 5 s | The nest: fifty spiders, a screamer pack, and a colossus |
+| 15 | test | 640 + 1 | 364 + 40 risers | feral 60, leaper 30, drowned 12, soldier 40, brute 14, spider 50 in 5 packs, spitter 10, bomber 10, screamer 6 in 1 pack, demon 4 (37%) | 2 caves + 40 claw up + lake |  | colossus | 105 / 114 / 124 / 133 / 165 | 5 s | The nest: fifty spiders, a screamer pack, and a colossus |
 | 16 | test | 680 | 428 | feral 70, leaper 30, drowned 14, soldier 60, brute 16, spider 20, spitter 12, bomber 12, screamer 4, demon 14 in 2 packs (37%) | 2 caves + lake | yes |  | 111 / 121 / 132 / 142 / 174 | 5 s | Ember Night, demon night: fourteen demons in two packs |
 | 17 (rest) | test | 720 | 514 | feral 90, leaper 30, drowned 14, soldier 20, brute 8, spider 16, spitter 6, bomber 14, screamer 4, demon 4 (29%) | all six (surround) + lake |  |  | 99 / 106 / 113 / 120 / 127 / 155 | 12 s | Rest night from every cave: the fast ones |
 | 18 | test | 631 + 1 | 381 | feral 60, leaper 30, drowned 14, soldier 50, brute 30 in 3 packs, spider 20, spitter 14, bomber 20 in 3 packs, screamer 4, demon 8 (40%) | chalk only + lake |  | guardian | 103 / 112 / 122 / 132 / 163 | 5 s | Guardian night, the siege: brutes behind a bomber screen |
@@ -182,3 +182,6 @@ The spawn step within a burst is unchanged (0.1-0.22 s), and so is `MAX_ZOMBIES`
   the numbers here are first guesses.
 - Night 20 has 36 brutes, 18 demons and 24 bombers in 851 bodies, at most 48 up at once. Performance with
   more heavy bodies on the field needs CU-38's eyes.
+
+Spawns with no kind of their own (the relay's siren calls them in, among others) draw from that night's kinds in the plan above
+(GB-184, 2026-10-18).

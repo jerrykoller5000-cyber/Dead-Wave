@@ -42,7 +42,7 @@
   const board = async (P, boat) => {
     const e = endOfDock(boat, 0.6);
     P.set(e.x, boat.deck().y + 0.2, e.z); await wait(300);
-    key('keydown'); await wait(2600); key('keyup');
+    key('keydown'); await until(() => T.boardingDbg().won, 15000); key('keyup');   // GB-186: the hold runs on game time (dt is capped at 50 ms, so a slow page holds longer)
     await until(() => T.boardingDbg().won, 8000);
     await wait(400);
   };
@@ -64,7 +64,7 @@
     const e1 = endOfDock(boat, 0.6);
     P.set(e1.x, boat.deck().y + 0.2, e1.z); await wait(300);
     ok(T.boardingDbg().reach, 'at the end of the dock he can board');
-    key('keydown'); await wait(1000);
+    key('keydown'); await until(() => T.boardingDbg().holdT > 0.9, 8000);   // GB-186: about a second of game time
     const mid = T.boardingDbg().holdT;
     key('keyup'); await wait(200);
     ok(mid > 0.6 && mid < 2 && T.boardingDbg().holdT === 0 && !T.boardingDbg().won, 'letting go after 1 s starts over (' + mid.toFixed(2) + ' s held)');

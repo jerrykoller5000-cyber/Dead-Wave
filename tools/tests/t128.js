@@ -18,7 +18,7 @@
     const P = T.player.position;
     const xp = (k) => T.players[0].skills[k].xp;
     const real = (type, dx, dz) => { const z = T.spawnZombie(P.x + dx, P.z + dz, type, true, true); z.riseT = 0; z.ttSpawn = false; z.speed = z.baseSpeed = 0; return z; };
-    const shoot = (z, amt, frac, extra) => T.damageZombie(z, amt, Object.assign({ kind: 'bullet', dir: { x: 0, z: 1 }, hitY: z.mesh.position.y + z.hitH * frac }, extra || {}));
+    const shoot = (z, amt, frac, extra) => T.damageZombie(z, amt, Object.assign({ kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, frac > 0.8 ? 'head' : z.mesh.position.y + z.hitH * frac) }, extra || {}));
 
     // Stopping power
     let p0 = xp('power');

@@ -1,0 +1,30 @@
+{
+  "gp26Checks": [
+    {
+      "night": 6,
+      "day": 6,
+      "banner": "NIGHT 5 CLEARED | ",
+      "title": "Alarm control",
+      "text": "PGB · FIELD ORDERS · SITE 9\n\nGravewalker, you are the thirteenth into this valley. Twelve went before you. Three weeks of silence.\n\nGet the relay up. Hold Threshold. Bring ours home.\n\nExtraction: Heron, night twenty. The lake is not safe to land on before then.\n\nReturn of issued equipment is expected. Return of personnel is encouraged.\n\nNIGHT 6 · CHALK\n\nCaves: Southwest Cave\n\n3 pushes\n\nGuardian from the Marrow and spitters · fire drives it back; pick off the spitters\n\nTonight’s caves are marked on the minimap. Edge arrows point to caves beyond its range.\n\nCOUNTERS IN TONIGHT’S ATTACK\n\nShambler"
+    },
+    {
+      "night": 14,
+      "day": 14,
+      "banner": "NIGHT 13 CLEARED | ",
+      "title": "Alarm control",
+      "text": "PGB · FIELD ORDERS · SITE 9\n\nGravewalker, you are the thirteenth into this valley. Twelve went before you. Three weeks of silence.\n\nGet the relay up. Hold Threshold. Bring ours home.\n\nExtraction: Heron, night twenty. The lake is not safe to land on before then.\n\nReturn of issued equipment is expected. Return of personnel is encouraged.\n\nNIGHT 14 · FOG NIGHT\n\nRest night · lighter mix, still a fight\n\nCaves: Northeast Cave\n\n5 pushes\n\nLake surge in dense fog · keep a short route back to cover\n\nTonight’s caves are marked on the minimap. Edge arrows point to caves beyond its range.\n\nCOUNTERS IN TONI"
+    },
+    {
+      "night": 17,
+      "day": 17,
+      "banner": "HERON CAN'T HEAR YOU | Heron flies on night 20, but only to a live relay. Repair the radio mast.",
+      "title": "Alarm control",
+      "text": "PGB · FIELD ORDERS · SITE 9\n\nGravewalker, you are the thirteenth into this valley. Twelve went before you. Three weeks of silence.\n\nGet the relay up. Hold Threshold. Bring ours home.\n\nExtraction: Heron, night twenty. The lake is not safe to land on before then.\n\nReturn of issued equipment is expected. Return of personnel is encouraged.\n\nNIGHT 17 · SWARM\n\nRest night · lighter mix, still a fight\n\nCaves: Northwest Cave · North Cave · Northeast Cave · East Cave · South Cave · Southwest Cave\n\n6 pushes\n\nFast attackers from every cave · keep an escape lane open\n\nTonight’s caves are marked on the mini"
+    },
+    {
+      "type": "ember-banner",
+      "day": 5,
+      "banner": "NIGHT 5 | Here they come"
+    }
+  ]
+}

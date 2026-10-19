@@ -21,6 +21,8 @@
   A.graveAmbience = (...a) => { taps++; return oT(...a); };
 
   T.setGearDbg('helmet'); T.applyGearVisibility(); T.setWeapon(0);
+  // CL-205: the survivors he rescued bury him. Two taken in (Okafor, Pike): two diggers with shovels.
+  T.roofDbg.takeIn('trapper'); T.roofDbg.takeIn('hikers');
   const p = T.player.position;
   {
     const tx = 12, tz = 12;
@@ -49,7 +51,7 @@
   const g = c.rec.g.position;
   ok(Math.hypot(T.player.position.x - g.x, T.player.position.z - (g.z + 3.5)) < 0.5, 'hidden player moved to the graveyard');
   const crew = T.getCrew();
-  ok(crew && crew.every(m => m.root.visible && m.shovel.visible), 'two marines with shovels');
+  ok(crew && crew.length === 2 && crew.every(m => m.root.visible && m.shovel.visible) && crew.map(m => m.who).join() === 'okafor,pike', 'the two survivors he rescued, with shovels: ' + (crew || []).map(m => m.who).join(', '));
   ok(c.diggers.every(d => d.aHit > 0.05 && d.aHit < 2.35), 'stroke solved: ' + c.diggers.map(d => d.aHit.toFixed(2)).join(', '));
 
   const minRel = [], lat = [];

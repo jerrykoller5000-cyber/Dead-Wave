@@ -17,7 +17,7 @@
   for (let i = 0; i < 40 && t.alive; i++) T.damageTree(t, t.x, t.z, 1, 1, 0);
   ok(!t.alive && t.falling, 'enough hits fells it');
   ok(!!t.stumpMesh, 'the stump stands from the first crack');
-  await wait(2500);
+  for (let i = 0; i < 40 && !(t.log && !t.falling); i++) await wait(200);   // CL-209: the fall is game time; up to 8 s of wall clock
   ok(t.log && !t.falling && t.stump, 'it lands and lies as a log (theta ' + (t.fallTheta || 0).toFixed(2) + ' of rest ' + (t.fallRest || 0).toFixed(2) + ')');
   ok(t.fallRest > 1.0 && t.fallRest < 2.1, 'rest angle solved against the ground');
   T.restoreTree(t);

@@ -18,7 +18,7 @@
     const sham = T.spawnZombie(p.x, p.z + 25, 'shambler', true, true);
     for (const z of [brute, sham]) { z.speed = 0; z.baseSpeed = 0; }
     R.update();
-    ok(rimOf(brute) > 0.08 && brute.mesh.userData.bodyMats[0].emissive.getHex() === brute.mesh.userData.eyeColor, 'a brute 25 m off glows in its eye colour (' + rimOf(brute).toFixed(3) + ')');
+    ok(rimOf(brute) > 0.08 && brute.mesh.userData.bodyMats[0].emissive.getHex() === (R.hex ? R.hex(brute.mesh.userData.eyeColor) : brute.mesh.userData.eyeColor), 'a brute 25 m off glows moonlight with a hint of its eye colour (CL-141) (' + rimOf(brute).toFixed(3) + ')');
     ok(rimOf(sham) === 0, 'a shambler doesn\'t');
     brute.mesh.position.set(p.x + 3, brute.mesh.position.y, p.z); R.update();
     ok(rimOf(brute) < 0.01, 'up close, nothing (' + rimOf(brute).toFixed(3) + ')');

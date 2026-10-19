@@ -11,6 +11,10 @@ async function startMatch(T, name) {
   if (nameEl) nameEl.value = name || 'TestMarine';
   const play = document.getElementById('modeHunt');
   if (play) play.click();
+  // A profile with no runs is offered the Training Ground first. The checks want a hunt.
+  const firstRun = document.getElementById('firstRunCard');
+  const playAnyway = document.getElementById('firstRunPlay');
+  if (firstRun && !firstRun.hidden && playAnyway) playAnyway.click();
   let prep = false;
   for (let i = 0; i < 80; i++) {
     await wait(200);

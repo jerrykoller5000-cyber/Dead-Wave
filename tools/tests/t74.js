@@ -42,7 +42,7 @@
     ok(woke, 'within 18 m they wake (' + gz().map((z) => z.poiWake).join(',') + ')' + (woke ? '' : dbg));
     ok(errs.length === 0, 'no page errors while guards stand (' + errs.slice(0, 1).join('').slice(0, 80) + ')');
     const d0 = Math.min(...gz().map((z) => Math.hypot(z.mesh.position.x - ax, z.mesh.position.z - az)));
-    await wait(1200);
+    await (async () => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 1.2 && Date.now() - w0 < 18000) await wait(30); })();   // GB-187: 1.2 s of game time (the page runs slow, dt is capped)
     const d1 = Math.min(...gz().map((z) => Math.hypot(z.mesh.position.x - T.player.position.x, z.mesh.position.z - T.player.position.z)));
     ok(d1 < d0 - 1, 'and come for him (' + d0.toFixed(1) + ' -> ' + d1.toFixed(1) + ' m)');
     // Normal kills, normal skulls (day 1: one each).

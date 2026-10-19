@@ -320,6 +320,11 @@
     }
     #modeSelect.show, #win.show, #pause.show { display: flex; }
     #modeSelect.credits-open .menu-content { display: none; }
+    #modeSelect.first-run-open .menu-content { display: none; }
+    #firstRunCard { width: min(440px, 88vw); box-sizing: border-box; padding: 24px 28px; border-left: 3px solid var(--accent); background: rgba(6, 12, 9, .94); box-shadow: 0 18px 48px rgba(0,0,0,.45); }
+    #firstRunCard[hidden] { display: none; }
+    #firstRunCard h2 { margin-top: 0; }
+    #firstRunCard .modes { margin-top: 20px; }
     #menuCredits { display: none; position: relative; z-index: 1; width: min(620px, 86vw); max-height: min(82vh, 680px); overflow-y: auto; padding: 24px 28px; border-left: 2px solid #a84b3d; background: rgba(6, 12, 9, .9); color: #d5d9cb; }
     #modeSelect.credits-open #menuCredits { display: block; }
     .game-version { margin-left: 14px; opacity: 0.55; font-size: 11px; letter-spacing: 0.12em; font-variant-numeric: tabular-nums; }
@@ -335,6 +340,15 @@
     #playerName:focus { border-color: var(--accent); background: rgba(255,255,255,.1); }
     /* Death cinematic: letterbox, a fade, a caption; the HUD steps aside. */
     #cine { position: fixed; inset: 0; pointer-events: none; z-index: 4; display: none; }
+    /* CL-204: the PGB orders card in his hand at the drop (story.md §3). Paper, a stamp, typewriter text; any key puts it away. */
+    #ordersCard { position: fixed; left: 50%; bottom: 9vh; width: min(560px, 88vw); transform: translate(-50%, 24px) rotate(-1.2deg);
+      padding: 18px 22px 14px; background: #e9e1cc; color: #2a2620; border-radius: 3px; box-shadow: 0 12px 40px rgba(0,0,0,.55);
+      font: 14px/1.5 'Courier New', ui-monospace, monospace; opacity: 0; pointer-events: none; z-index: 6; transition: opacity .6s ease, transform .6s ease; }
+    #ordersCard.show { opacity: .97; transform: translate(-50%, 0) rotate(-1.2deg); }
+    #ordersCard .head { font-weight: 700; letter-spacing: .12em; border-bottom: 1px solid #8a7f68; padding-bottom: 6px; margin-bottom: 8px; }
+    #ordersCard p { margin: 0 0 6px; }
+    #ordersCard .stamp { position: absolute; right: 16px; top: 10px; width: 54px; height: 54px; opacity: .8; transform: rotate(8deg); }
+    #ordersCard .skip { text-align: right; font-size: 11px; color: #7a705c; margin-top: 4px; }
     body.cine #cine { display: block; }
     #cine .fade { position: absolute; inset: 0; background: #000; opacity: 0; }
     #cine .bar { position: absolute; left: 0; right: 0; height: 0; background: #000; transition: height 1s ease; }
@@ -467,6 +481,8 @@
     #pauseSettingsView .seg button { flex: 1; padding: 8px 0; margin-left: -1px; }
     #pauseSettingsView .seg button:first-child { margin-left: 0; }
     #pauseMainView.hide { display: none; }
+    #pauseQuitView, #pauseResetView { display: none; }
+    #pauseQuitView.on, #pauseResetView.on { display: block; }
     #pauseTipsView h3 {
       font-family: var(--font-hud); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--accent); opacity: 0.95; margin: 14px 0 6px; font-weight: 700;
@@ -517,6 +533,7 @@
       text-transform: uppercase; color: var(--accent); margin-bottom: 4px; display: flex; justify-content: space-between; align-items: baseline;
     }
     #shop h2 span { font-family: var(--font-hud); font-size: 14px; color: var(--ink); letter-spacing: 0.04em; }
+    #shop h2 span.shop-heading { font: inherit; color: inherit; letter-spacing: inherit; }
     #shop p.hint { font-size: 12px; opacity: .75; margin-bottom: 12px; min-height: 16px; }
     #shopTabs { display: flex; gap: 4px; margin: 10px 0 8px; }
     #shopTabs button, #shopSubtabs button {
@@ -1003,13 +1020,21 @@
         <div id="menuBadges"></div>
         <div class="modes">
           <button id="modeHunt" type="button" data-dw-text="menu.play"></button>
-          <button id="modeTraining" class="secondary" type="button">Training Ground</button>
+          <button id="modeTraining" class="secondary" type="button" data-dw-text="menu.training"></button>
           <button id="menuSettingsBtn" class="secondary" type="button" data-dw-text="settings.title"></button>
           <button id="menuCreditsBtn" class="secondary" type="button" data-dw-text="menu.credits"></button>
           <button id="menuQuitBtn" class="danger" type="button" data-dw-text="menu.quit"></button>
         </div>
         <label id="nameRow"><span data-dw-text="menu.callsign"></span><input id="playerName" type="text" maxlength="18" placeholder="" data-dw-placeholder="menu.namePlaceholder" required aria-describedby="nameError" autocomplete="off" spellcheck="false"><span id="nameError" role="status"></span></label>
       </div>
+      <section id="firstRunCard" role="dialog" aria-modal="true" aria-labelledby="firstRunTitle" aria-describedby="firstRunBody" hidden>
+        <h2 id="firstRunTitle" data-dw-text="menu.firstRun.title"></h2>
+        <p id="firstRunBody" data-dw-text="menu.firstRun.body"></p>
+        <div class="modes">
+          <button id="firstRunTraining" type="button" data-dw-text="menu.firstRun.training"></button>
+          <button id="firstRunPlay" class="secondary" type="button" data-dw-text="menu.firstRun.play"></button>
+        </div>
+      </section>
       <section id="menuCredits" aria-labelledby="menuCreditsTitle" aria-hidden="true">
         <h2 id="menuCreditsTitle" data-dw-text="credits.title"></h2>
         <dl>
@@ -1022,18 +1047,19 @@
       </section>
       <div class="menu-footer"><span><i class="signal-dot"></i><span data-dw-text="menu.signal"></span></span><span id="gameVersion" class="game-version"></span></div>
     </div>
+    <div id="ordersCard" aria-live="polite"></div>
     <div id="cine"><div class="bar top"></div><div class="bar bot"></div><div class="fade"></div><div class="cap"></div><div class="skip">Space — skip</div></div>
     <div id="win">
       <div class="card">
-        <h2 id="winTitle">Game over</h2>
-        <p id="winMsg">Try again?</p>
+        <h2 id="winTitle" data-dw-text="gameOver.title"></h2>
+        <p id="winMsg" data-dw-text="gameOver.retry"></p>
         <section class="skills-section" aria-labelledby="deathSkillsTitle"><h3 id="deathSkillsTitle" data-dw-text="skills.title"></h3><div id="deathSkillsList" class="skills-list"></div></section>
-        <button id="again">Play again</button>
+        <button id="again" data-dw-text="gameOver.again"></button>
       </div>
     </div>
     <div id="shop">
       <div class="card">
-        <h2>Supply Kiosk <span>Cash $<em id="shopCash">0</em></span></h2>
+        <h2><span class="shop-heading" data-dw-text="shop.title"></span> <span>Cash $<em id="shopCash">0</em></span></h2>
         <div id="shopTabs"></div>
         <div id="shopSubtabs" hidden></div>
         <p class="hint" id="shopHint"></p>
@@ -1090,6 +1116,14 @@
             <button id="quitMenuBtn" class="danger" type="button" data-dw-text="pause.quit"></button>
           </div>
         </div>
+        <div id="pauseQuitView">
+          <h2 data-dw-text="pause.quit"></h2>
+          <p data-dw-text="pause.quitConfirm"></p>
+          <div class="modes">
+            <button id="quitConfirmBtn" class="danger" type="button" data-dw-text="pause.quitYes"></button>
+            <button id="quitCancelBtn" class="secondary" type="button" data-dw-text="pause.quitNo"></button>
+          </div>
+        </div>
         <div id="pauseSkillsView">
           <h2 data-dw-text="skills.title"></h2>
           <div id="pauseSkillsList" class="skills-list"></div>
@@ -1126,7 +1160,16 @@
             <span data-dw-text="settings.overlay"></span><button id="perfHudToggle" class="settingBtn" type="button"></button>
           </div>
           <div class="modes">
+            <button id="resetProfileBtn" class="danger" type="button" data-dw-text="settings.resetProfile"></button>
             <button id="settingsBackBtn" type="button" data-dw-text="common.back"></button>
+          </div>
+        </div>
+        <div id="pauseResetView">
+          <h2 data-dw-text="settings.resetProfile"></h2>
+          <p data-dw-text="settings.resetConfirm"></p>
+          <div class="modes">
+            <button id="resetConfirmBtn" class="danger" type="button" data-dw-text="settings.resetYes"></button>
+            <button id="resetCancelBtn" class="secondary" type="button" data-dw-text="settings.resetNo"></button>
           </div>
         </div>
         <div id="pauseTipsView">
@@ -1193,11 +1236,6 @@
               <li data-dw-text="tips.misc.pause"></li>
               <li data-dw-text="tips.misc.gear"></li>
               <li data-dw-text="tips.misc.settings"></li>
-            </ul>
-            <h3 data-dw-text="tips.testing.title"></h3>
-            <ul>
-              <li data-dw-text="tips.testing.commands"></li>
-              <li data-dw-text="tips.testing.switches"></li>
             </ul>
           </div>
           <div class="modes">
@@ -1288,6 +1326,7 @@
     import { RABBIT, pickMoundSite, createRabbit, wakeRabbit, holdRabbit, killRabbit, stepRabbit, rabbitAwake, lobVelocity, buildMound, buildKillerRabbit, buildHolyGrenade, buildReliquary } from './world/rabbit.js';
     import { renderBuildBanner } from './ui/build-controls.js';
     import { createRecords, RECORDS_KEY, renderBestRecord } from './ui/records.js';
+    import { createFirstRunChoice, FIRST_RUN_CHOICE_KEY } from './ui/first-run-choice.js';
     import { createBadges, BADGES_KEY } from './ui/badges.js';
     import { createCifMenu } from './ui/cif.js';
     import { dressCifExterior } from './ui/cif-exterior.js';
@@ -1349,6 +1388,7 @@
     import { createMarineTurn } from './studio/marine-turn.js';
     import { GAIT_WEIGHT, gaitExtras, leanFromAccel } from './studio/marine-gait-feel.js';   // CL-186: the weight in his walk and run
     import { bakeMarineAO, AO_DEFAULTS } from './studio/marine-ao.js';   // CL-186: baked shade, dust and wear on him
+    import { bakeRigSkin, syncRigSkins, rigSkinInfo, rigSkinCount } from './studio/marine-skin.js';   // CL-210: his rigid parts in a few skinned meshes
     import { AIR, airPose } from './studio/marine-air.js';   // CL-189: the air pose by the way he jumped
     import { sampleBedExit } from './studio/marine-bed-exit.js';
     import { SPIDER_MOTION, tickSpiderMotion, steerSpider, spiderFacing, spiderGait, spiderMouthPoint, applySpiderMotion, resetSpiderPose, beginSpiderDeath, applySpiderDeath, spiderHeadless, headlessSpiderStep, SPIDER_TOUCH, stepHeadlessSpiderTouch, spiderTouchCanHit, spiderSpitCooldown } from './game/spider-motion.js'; // GP-19857/19858/19859
@@ -1403,7 +1443,8 @@
     import { createMarineWaist, followMarineWaist } from './studio/marine-waist.js';
     import { skinMergeGroup, skinUnmerge, skinSignature } from './core/skin-merge.js';   // CL-140: a rig's parts drawn as one
     import { showVersion } from './core/version.js';   // CU-57: the version on the title
-    import { createHollowLoot, createTagCollection, TAGS_KEY } from './game/hollows-loot.js';
+    import { createHollowLoot, createTagCollection, TAGS_KEY, TAG_IDS } from './game/hollows-loot.js';
+    const TAG_TOTAL = TAG_IDS.length;   // CL-206: nine
     import { createBelowFight, navField, navStep, navOpen, SET_PIECES as BELOW_SET_PIECES } from './game/below-fight.js';   // GB-107: fighting below
     import { planSkullPayouts } from './game/hollows-loot.js';   // GB-107 part 2: skull pay below
     import { createStir } from './game/stir.js';   // GB-108: the stir
@@ -1465,8 +1506,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const pauseTipsView = document.getElementById('pauseTipsView');
     const pauseSettingsView = document.getElementById('pauseSettingsView');
     const pauseSkillsView = document.getElementById('pauseSkillsView');
+    const pauseQuitView = document.getElementById('pauseQuitView');
+    const pauseResetView = document.getElementById('pauseResetView');
     const placeBannerEl = document.getElementById('placeBanner');
     const modeHuntBtn = document.getElementById('modeHunt');
+    const firstRunCard = document.getElementById('firstRunCard');
+    const firstRunTrainingBtn = document.getElementById('firstRunTraining');
+    const firstRunPlayBtn = document.getElementById('firstRunPlay');
     const perfEl = document.getElementById('perf');
     const hurtFlashEl = document.getElementById('hurtFlash');
     const bloodScreenEl = document.getElementById('bloodScreen');
@@ -2042,6 +2088,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       PROF.mark('r:cull');
       updateLightPool();   // CL-116
       PROF.mark('r:lightPool');
+      syncRigSkins();   // CL-210: a changed part on a baked marine or survivor bakes him again
       try {
         if (postProcessing) postProcessing.render();
         else renderer.render(scene, camera);
@@ -7690,6 +7737,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (detail.kind === 'word') setPitWord(detail.order);
       else if (detail.kind === 'silenced' || detail.kind === 'ending') { setPitSilenced(true); if (detail.kind === 'ending') unlockRuneFinish(); }   // CL-111
       else if (detail.kind === 'dawn') setPitSilenced(false);
+      if (detail.kind === 'silenced' && phase === 'prep' && gameStarted && !gameOver && !won) { planNight(false); warnActiveCaves(1); }   // GB-183: tonight comes at half strength
     });
     // === CL-107 (D-70, docs/story.md §2, §7): the first people, told without words ===
     // Standing stones on the highest clear ground, each with a glyph on its lake side; the ring stone (the ring of
@@ -11754,7 +11802,42 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.add(eggG);
       }
       g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
-      return g;
+      return mergeNestParts(g);
+    }
+    // CL-209: a nest was 44 meshes (twigs, moss, eggs and their specks), about 250 draws for the five in the trees,
+    // and they stayed drawn while their trees were batched. Nothing moves inside a nest, so it is merged to one mesh a
+    // material (five). Local scratch, not mergeStatic's: the nests are built while the page is still loading.
+    function mergeNestParts(g) {
+      g.updateMatrixWorld(true);
+      const inv = new THREE.Matrix4().copy(g.matrixWorld).invert(), m = new THREE.Matrix4(), nm = new THREE.Matrix3(), v = new THREE.Vector3();
+      const byMat = new Map();
+      g.traverse((c) => { if (c.isMesh && c.geometry && c.geometry.attributes.position) { let a = byMat.get(c.material); if (!a) byMat.set(c.material, a = []); a.push(c); } });
+      const out = new THREE.Group();
+      out.position.copy(g.position); out.rotation.copy(g.rotation); out.scale.copy(g.scale);
+      for (const [mat, parts] of byMat) {
+        const geos = parts.map((c) => (c.geometry.index ? c.geometry.toNonIndexed() : c.geometry));
+        let total = 0; for (const q of geos) total += q.attributes.position.count;
+        const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3);
+        let o = 0;
+        parts.forEach((c, i) => {
+          const q = geos[i], P = q.attributes.position, N = q.attributes.normal;
+          m.multiplyMatrices(inv, c.matrixWorld); nm.getNormalMatrix(m);
+          for (let k = 0; k < P.count; k++, o++) {
+            v.fromBufferAttribute(P, k).applyMatrix4(m); pos[o * 3] = v.x; pos[o * 3 + 1] = v.y; pos[o * 3 + 2] = v.z;
+            if (N) { v.fromBufferAttribute(N, k).applyMatrix3(nm).normalize(); nrm[o * 3] = v.x; nrm[o * 3 + 1] = v.y; nrm[o * 3 + 2] = v.z; }
+          }
+          if (q !== c.geometry) q.dispose();
+          c.geometry.dispose();
+        });
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+        geo.computeBoundingSphere();
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.castShadow = false; mesh.receiveShadow = false;
+        out.add(mesh);
+      }
+      return out;
     }
 
     function makeFrogMesh() {
@@ -15109,7 +15192,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // (sniperBoltEject), not on the shot.
       sniper:   { sx: 1.05, sy: 1.05, sz: 1.28, ox: 0.08, oy: 0.05, oz: 0.08, side: -1 }
     };
-    let sniperCasePending = 0;   // GB-146: the fired case still in the sniper's chamber until the bolt is pulled
+    let sniperCasePending = 0, sniperEjectDue = false;   // GB-146: the fired case still in the sniper's chamber until the bolt is pulled
 
     function recycleOldestCasing() {
       if (!casings.length) return;
@@ -15350,6 +15433,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function updateCasings(dt) {
+      if (sniperEjectDue) { sniperEjectDue = false; spawnCasing('sniper', true); }   // GB-181
       for (let i = casings.length - 1; i >= 0; i--) {
         const c = casings[i];
         c.age += dt;
@@ -17306,6 +17390,101 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return gun;
     }
 
+    // GB-189: merge a static model's meshes by material, keeping their own UVs and vertex colours (mergeRigidMeshes
+    // box-projects UVs for camo). Meshes fold into their nearest kept ancestor (the root or an object in keep), so
+    // unreferenced sub-groups flatten; hidden meshes, kept meshes and meshes with children are left alone.
+    const _skM = new THREE.Matrix4();
+    function mergeStaticKeepUV(root, keep = new Set()) {
+      const buckets = new Map();
+      root.updateMatrix();
+      root.traverse((c) => {
+        if (!c.isMesh || c === root || c.isInstancedMesh || c.isSkinnedMesh || keep.has(c) || c.children.length || !c.geometry || !c.geometry.attributes.position || Array.isArray(c.material)) return;
+        _skM.identity();
+        let p = c, ok = true;
+        while (p && p !== root && !keep.has(p)) { if (!p.visible) { ok = false; break; } p.updateMatrix(); _skM.premultiply(p.matrix); p = p.parent; }
+        if (!ok || !p) return;
+        const key = p;
+        let byMat = buckets.get(key); if (!byMat) { byMat = new Map(); buckets.set(key, byMat); }
+        let list = byMat.get(c.material); if (!list) { list = []; byMat.set(c.material, list); }
+        list.push({ c, m: _skM.clone() });
+      });
+      for (const [anchor, byMat] of buckets) for (const [mat, list] of byMat) {
+        if (list.length < 2) continue;
+        const geos = list.map(({ c }) => (c.geometry.index ? c.geometry.toNonIndexed() : c.geometry));
+        const total = geos.reduce((s, g) => s + g.attributes.position.count, 0);
+        const hasUV = geos.some((g) => g.attributes.uv), hasCol = !!mat.vertexColors;
+        const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = hasUV ? new Float32Array(total * 2) : null, col = hasCol ? new Float32Array(total * 3).fill(1) : null;
+        let o = 0;
+        list.forEach(({ m }, k) => {
+          const g = geos[k], P = g.attributes.position, Nn = g.attributes.normal, U = g.attributes.uv, C = g.attributes.color;
+          _mgNM.getNormalMatrix(m);
+          for (let i = 0; i < P.count; i++) {
+            _mgV.fromBufferAttribute(P, i).applyMatrix4(m);
+            pos[(o + i) * 3] = _mgV.x; pos[(o + i) * 3 + 1] = _mgV.y; pos[(o + i) * 3 + 2] = _mgV.z;
+            if (Nn) { _mgN.fromBufferAttribute(Nn, i).applyMatrix3(_mgNM).normalize(); nrm[(o + i) * 3] = _mgN.x; nrm[(o + i) * 3 + 1] = _mgN.y; nrm[(o + i) * 3 + 2] = _mgN.z; }
+            if (uv && U) { uv[(o + i) * 2] = U.getX(i); uv[(o + i) * 2 + 1] = U.getY(i); }
+            if (col && C) { col[(o + i) * 3] = C.getX(i); col[(o + i) * 3 + 1] = C.getY(i); col[(o + i) * 3 + 2] = C.getZ(i); }
+          }
+          o += P.count;
+        });
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+        if (uv) geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+        if (col) geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        geo.computeBoundingSphere();
+        const merged = new THREE.Mesh(geo, mat);
+        merged.castShadow = list.some(({ c }) => c.castShadow); merged.receiveShadow = list.some(({ c }) => c.receiveShadow);
+        for (const { c } of list) c.parent.remove(c);
+        anchor.add(merged);
+      }
+      return root;
+    }
+    // GB-189: the three receiver metals (gunBody 0.28/0.48, gunDark 0.30/0.52, gunMid 0.32/0.44) are close enough to
+    // share one material with their colours per vertex. Only for the guns still over the draw budget after the
+    // per-material merge (minigun, sniper, flamer). Furniture (camo recolours) and every other metal stay as they were;
+    // moving groups and userData parts merge only within themselves.
+    let gunBodyVC = null;
+    function mergeBodyMetals(gun) {
+      gunBodyVC = gunBodyVC || new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.3, roughness: 0.48 });
+      const mats = new Set([gunBody, gunDark, gunMid]), keep = new Set();
+      for (const v of Object.values(gun.userData)) {
+        if (v && v.isObject3D) keep.add(v);
+        else if (Array.isArray(v)) for (const item of v) if (item && item.isObject3D) keep.add(item);
+      }
+      const groups = []; gun.traverse((o) => { if (o.isGroup || o === gun) groups.push(o); });
+      for (const grp of groups) {
+        const list = grp.children.filter((c) => c.isMesh && !keep.has(c) && !c.children.length && mats.has(c.material));
+        if (list.length < 2) continue;
+        const geos = list.map((c) => (c.geometry.index ? c.geometry.toNonIndexed() : c.geometry));
+        const total = geos.reduce((s, g) => s + g.attributes.position.count, 0);
+        const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), uv = new Float32Array(total * 2), col = new Float32Array(total * 3);
+        let o = 0;
+        list.forEach((c, k) => {
+          const g = geos[k], P = g.attributes.position, Nn = g.attributes.normal, U = g.attributes.uv, cc = c.material.color;
+          c.updateMatrix(); _mgNM.getNormalMatrix(c.matrix);
+          for (let i = 0; i < P.count; i++) {
+            _mgV.fromBufferAttribute(P, i).applyMatrix4(c.matrix);
+            pos[(o + i) * 3] = _mgV.x; pos[(o + i) * 3 + 1] = _mgV.y; pos[(o + i) * 3 + 2] = _mgV.z;
+            if (Nn) { _mgN.fromBufferAttribute(Nn, i).applyMatrix3(_mgNM).normalize(); nrm[(o + i) * 3] = _mgN.x; nrm[(o + i) * 3 + 1] = _mgN.y; nrm[(o + i) * 3 + 2] = _mgN.z; }
+            if (U) { uv[(o + i) * 2] = U.getX(i); uv[(o + i) * 2 + 1] = U.getY(i); }
+            col[(o + i) * 3] = cc.r; col[(o + i) * 3 + 1] = cc.g; col[(o + i) * 3 + 2] = cc.b;
+          }
+          o += P.count;
+        });
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+        geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+        geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        geo.computeBoundingSphere();
+        const merged = new THREE.Mesh(geo, gunBodyVC);
+        merged.castShadow = true; merged.receiveShadow = true;
+        for (const c of list) grp.remove(c);
+        grp.add(merged);
+      }
+      return gun;
+    }
     // GP-164: cosmetic builders share the existing materials and geometry/animation helpers.
     // Later-initialized blade materials and the M240 pivot are passed only by their wrappers.
     function weaponModelContext() {
@@ -17317,7 +17496,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function makeMinigun() {
-      return makeMinigunModel(weaponModelContext());
+      return mergeBodyMetals(makeMinigunModel(weaponModelContext()));   // GB-189
     }
 
     function makeM4() {
@@ -17351,7 +17530,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function makeSniper() {
-      return makeSniperModel(weaponModelContext());
+      return mergeBodyMetals(makeSniperModel(weaponModelContext()));   // GB-189
     }
 
     function makeLauncher() {
@@ -17390,12 +17569,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!teeth || !teeth.length) return;
       const phase = gun.userData.chainPhase || 0;
       const n = teeth.length;
+      const inst = gun.userData.chainInst;
       const tmp = layoutChainsawChain._tmp || (layoutChainsawChain._tmp = new THREE.Vector3());
       for (let i = 0; i < n; i++) {
         const ang = sampleChainsawChainPath(phase + i / n, tmp);
         teeth[i].position.copy(tmp);
         teeth[i].rotation.set(ang, 0, 0);
+        if (inst) { teeth[i].updateMatrix(); inst.setMatrixAt(i, teeth[i].matrix); }
       }
+      if (inst) inst.instanceMatrix.needsUpdate = true;
     }
     // dAngle uses the same radian deltas the old rigid bladeSpin.rotation.x used,
     // mapped to one full path circuit per 2π so cutting/idle speed feel is preserved.
@@ -17414,7 +17596,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function makeFlamer() {
-      return makeFlamerModel(weaponModelContext());
+      return mergeBodyMetals(makeFlamerModel(weaponModelContext()));   // GB-189
     }
 
     // The blade is one group with two models inside: the issue knife and the machete
@@ -17951,7 +18133,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
 
-    function makeMarine({ legacyBody = false } = {}) {
+    function makeMarine({ legacyBody = false, skin = true } = {}) {
       const g = new THREE.Group();
       const strapMat = new THREE.MeshStandardMaterial({ color: 0x2b2e24, roughness: 0.9, metalness: 0.05 });
       const buckleMat = new THREE.MeshStandardMaterial({ color: 0x7a7c74, roughness: 0.45, metalness: 0.6 });
@@ -18388,8 +18570,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.userData.ao = { mats: aoMats, bootMats: new Set([bootW, soleW]), trouserMats: new Set([trouserW]), shirtMats: new Set([uniformW]) };
         g.userData.aoInfo = bakeMarineAO(THREE, g, g.userData.ao);
       }
+      // CL-210: about 100 meshes down to about 25 (studio/marine-skin.js). Not the guns' mounts: what hangs there comes
+      // and goes. ?rigskin=0 draws him the old way, for measuring.
+      if (skin && !legacyBody && RIG_SKIN) bakeRigSkin(THREE, TSL, g, { skip: [weaponMount, gripR, gripL, hipGrip] });
       return g;
     }
+    const RIG_SKIN = new URLSearchParams(location.search).get('rigskin') !== '0';
 
     await loadMark('trees');
     const marine = makeMarine();
@@ -20263,11 +20449,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     knife.scale.setScalar(1.15);
     (marine.userData.gripL || weaponMount).add(knife); // left hand
     // CL-184: the red katana, the top of the blade line (the relay vault's final-day reward). It rides in the same group.
-    { const k = makeKatanaModel({ THREE }); k.visible = false; knife.add(k); knife.userData.katanaModel = k; }
+    { const k = mergeStaticKeepUV(makeKatanaModel({ THREE })); k.visible = false; knife.add(k); knife.userData.katanaModel = k; }
     let katanaOwned = false;
     // Worn, it rides at his left hip in its black saya, the hilt forward and up, the tip back and down; the hilt goes
     // while the drawn one is in his hand.
     const katanaWorn = makeSheathedKatana({ THREE });
+    mergeStaticKeepUV(katanaWorn, new Set([katanaWorn.userData.hilt]));   // GB-189
     { const hips = marine.userData.lowerBody || marine, at = new THREE.Group(); at.position.set(0.25, 0.76, 0.06); at.rotation.set(0, Math.PI, -0.18); hips.add(at);
       katanaWorn.rotation.x = 0.36; katanaWorn.scale.setScalar(1.05); katanaWorn.visible = false; at.add(katanaWorn); }
     // Machete upgrade: bought once at the kiosk, replaces the knife for the run.
@@ -20321,8 +20508,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const MARINE_UPM = 1.655 / 1.80;
     const WEAPON_SIZE = {
       pistol:   { len: 0.431, m: 0.195, look: 1.45 },   // service pistol 0.19-0.20 m
-      revolver: { len: 0.538, m: 0.27,  look: 1.4 },    // 4-6 inch revolver 0.25-0.30 m
-      uzi:      { len: 0.725, m: 0.47,  look: 1.0 },    // compact SMG, stock folded (the reference)
+      revolver: { len: 0.484, m: 0.27,  look: 1.4 },    // 4-6 inch revolver 0.25-0.30 m (GB-188: len re-measured after GB-180's rebuild)
+      uzi:      { len: 0.816, m: 0.47,  look: 1.0 },   // GB-188: len re-measured after GB-180's rebuild;    // compact SMG, stock folded (the reference)
       m4:       { len: 1.423, m: 0.84,  look: 1.35 },   // carbine, stock extended
       ak:       { len: 1.464, m: 0.88,  look: 1.35 },   // AK-pattern rifle
       aa12:     { len: 1.393, m: 0.96,  look: 1.2 },    // drum-fed auto shotgun
@@ -20330,7 +20517,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       sniper:   { len: 1.608, m: 1.15,  look: 1.25 },   // bolt sniper 1.1-1.2 m
       launcher: { len: 1.091, m: 0.75,  look: 1.2 },    // 40 mm revolver launcher 0.7-0.8 m
       flamer:   { len: 1.094, m: 0.95,  look: 1.05 },   // hand-held flame gun
-      chainsaw: { len: 1.356, m: 0.85,  look: 1.2 }     // saw on a 16-18 inch bar
+      chainsaw: { len: 1.376, m: 0.85,  look: 1.2 }     // GB-188: len re-measured after GB-180; saw on a 16-18 inch bar
     };
     const weaponSizeFactor = (k) => { const s = WEAPON_SIZE[k]; return s ? s.m * (s.look || 1) * MARINE_UPM / s.len : 1; };
     for (const k in WEAPON_SIZE) { const f = weaponSizeFactor(k); weaponMeshes[k].scale.multiplyScalar(f); weaponMeshes[k].userData.sizeK = f; }
@@ -20517,7 +20704,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (!dualOwned[currentWeapon]) {
         AudioSys.invalid();
-        showBanner('AKIMBO NOT BOUGHT', WEAPON_STATS[currentWeapon].name + ' pair costs $' + equipmentPrice(DUAL_PRICE[currentWeapon], day) + ' (kiosk, Upgrades)', 1.8, '#ffb347');
+        showBanner(dwText('weapon.message.akimboLocked'), dwText('weapon.message.pairCost', { weapon: WEAPON_STATS[currentWeapon].name, price: equipmentPrice(DUAL_PRICE[currentWeapon], day) }), 1.8, '#ffb347');
         return;
       }
       dualActive = !dualActive;
@@ -22271,6 +22458,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       anchor.lerp(S.out, dip);
     }
 
+    // GB-188: akimboReloadAnchor reads the well off the gun as it was last frame; the second gun then turns (its own aim,
+    // the dip's tilt, the mirrored roll), which swung its well 7-14 cm off the pouch. With the turn it will have (q, world),
+    // move the grip anchor by the difference.
+    const _akw = { a: new THREE.Vector3(), b: new THREE.Vector3(), c: new THREE.Vector3(), d: new THREE.Vector3(), s: new THREE.Vector3(), q: new THREE.Quaternion() };
+    function akimboWellFix(anchor, gun, w, q, dip) {
+      const H = WEAPON_HOLD[w], S = _akw;
+      if (!gun || !H) return;
+      gun.updateMatrixWorld(true);
+      const wl = gun.worldToLocal(reloadWellWorld(gun, w, S.a));
+      S.b.set(H.grip[0], H.grip[1], H.grip[2]);
+      gun.getWorldScale(S.s); gun.getWorldQuaternion(S.q);
+      const vOld = S.c.copy(wl).sub(S.b).multiply(S.s).applyQuaternion(S.q);
+      const vNew = S.d.copy(wl).sub(S.b).multiply(S.s).applyQuaternion(q);
+      anchor.addScaledVector(vOld.sub(vNew), dip);
+    }
+
     // GB-146 (Jerry, 2026-10-09: "The sniper bolt is on the wrong side. Move it to the other side of the gun and make an
     // animation for the bolt action in-between shots"). After a shot that leaves a round the bolt is worked inside the
     // wait the gun already has between shots: up, back (the case flies out the right), forward, down, the support hand
@@ -22287,7 +22490,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       gd.bolt.rotation.set(br.x, br.y, (br.z || 0) + side * 1.05 * open);
     }
     function sniperBoltEject() {
-      if (sniperCasePending > 0) { sniperCasePending = 0; spawnCasing('sniper', true); }
+      // GB-181: thrown at the start of the next frame (updateCasings), from the gun as it was drawn. Spawned here, mid-frame,
+      // it took the gun's matrix before this frame's bolt-work pose, and the case flew up and back instead of right.
+      if (sniperCasePending > 0) { sniperCasePending = 0; sniperEjectDue = true; }
     }
     function sniperBoltCycleState(gun) {
       return gun.userData.boltCycle || (gun.userData.boltCycle = { active: false, t: 0, from: 0, to: 0, cooldown: 0, c: 0, open: 0, back: 0, hand: 0, ejected: false, cycles: 0 });
@@ -23411,6 +23616,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         mural.position.set(0, 2.74, -(W + 0.02)); mural.rotation.y = Math.PI; mural.receiveShadow = true;
         g.add(mural);
         house.mural = mural;
+        // CL-206 (story.md §5, v3): the wall of tags. Nine nails in a row under the mural; each tag he has brought up from
+        // the warrens hangs on its nail from the next morning, name outward (refreshTagWall at the dawn).
+        {
+          const wall = new THREE.Group(); wall.name = 'tag-wall'; wall.position.set(0, 1.12, -(W + 0.03)); wall.rotation.y = Math.PI;
+          const nailMat = new THREE.MeshStandardMaterial({ color: 0x5b5d60, metalness: 0.7, roughness: 0.5 });
+          const tagMat = new THREE.MeshStandardMaterial({ color: 0xc3c6ca, metalness: 0.85, roughness: 0.28 });
+          const nailGeo = new THREE.CylinderGeometry(0.008, 0.008, 0.05, 6), chainGeo = new THREE.CylinderGeometry(0.0025, 0.0025, 0.07, 4);
+          const tagGeo = new THREE.BoxGeometry(0.05, 0.029, 0.004);
+          wall.userData.tags = [];
+          for (let i = 0; i < 9; i++) {
+            const x = (i - 4) * 0.36;
+            const nail = new THREE.Mesh(nailGeo, nailMat); nail.rotation.x = Math.PI / 2; nail.position.set(x, 0, 0.025); wall.add(nail);
+            const hang = new THREE.Group(); hang.position.set(x, 0, 0.04); hang.rotation.z = ((i * 37) % 9 - 4) * 0.02; hang.visible = false;
+            const chain = new THREE.Mesh(chainGeo, tagMat); chain.position.y = -0.035; hang.add(chain);
+            const tag = new THREE.Mesh(tagGeo, tagMat); tag.position.y = -0.085; tag.castShadow = true; hang.add(tag);
+            wall.add(hang); wall.userData.tags.push(hang);
+          }
+          g.add(wall);
+          house.tagWall = wall;
+        }
         // Load the bundled stencil faces without blocking world boot; repaint only once ready.
         if (c2 && document.fonts?.load) {
           Promise.all([document.fonts.load('102px "Black Ops One"'), document.fonts.load('600 30px "Chakra Petch"')])
@@ -24707,11 +24932,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (armorMax() > 0) {
           const missing = armorMax() - playerArmor;
           const cost = armorRepairCost();
-          shopRow('Repair armor', Math.ceil(playerArmor) + ' / ' + armorMax(), missing > 0.5 ? 'Patch the plates back up to full. Armor also comes back to full at the start of each day.' : 'Everything is in one piece.',
+           shopRow(dwText('shop.gear.repairArmor'), Math.ceil(playerArmor) + ' / ' + armorMax(), missing > 0.5 ? dwText('shop.gear.repairArmorHelp') : dwText('shop.gear.armorFull'),
             missing > 0.5 ? '$' + cost : 'FULL', missing > 0.5 && bank >= cost, () => repairArmor());
         }
       } else if (shopTab === 'upgrades') {
-        let any = true;
+         let any = false;
         shopRow(dwText('shop.upgrade.machete'), macheteOwned ? dwText('shop.owned') : dwText('shop.upgrade.replacesKnife'), dwText('shop.upgrade.macheteHelp', { reach: BLADE_STATS.machete.reach, damage: BLADE_STATS.machete.dmg, knifeReach: BLADE_STATS.knife.reach, knifeDamage: BLADE_STATS.knife.dmg, maxHits: BLADE_STATS.machete.maxHits }),
           macheteOwned ? 'OWNED' : '$' + equipmentPrice(MACHETE_PRICE, day), !macheteOwned && bank >= equipmentPrice(MACHETE_PRICE, day), macheteOwned ? null : () => buyMachete(), macheteOwned ? 'owned' : '');
         // CL-113 (Jerry): an attachment is bought here and put on in the Armory. Owned, the row says where it is.
@@ -24723,15 +24948,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (!weaponOwned[w]) continue;
           if (w === 'chainsaw') {
             any = true;
-            modRow('Bigger gas tank', sawTankUpgraded, sawTankFitted, '+50% chainsaw fuel capacity (' + Math.round(SAW_FUEL_BASE * 1.5) + 's).', SAW_TANK_PRICE, () => buySawTank());
+             modRow(dwText('shop.upgrade.tank'), sawTankUpgraded, sawTankFitted, dwText('shop.upgrade.tankHelp', { seconds: Math.round(SAW_FUEL_BASE * 1.5) }), SAW_TANK_PRICE, () => buySawTank());
             continue;
           }
           if (DUAL_CAPABLE[w]) {
             any = true;
             const got = !!dualOwned[w];
             const price = equipmentPrice(DUAL_PRICE[w], day);
-            shopRow(WEAPON_STATS[w].name + ' pair', got ? 'owned' : 'akimbo',
-              'A second ' + WEAPON_STATS[w].name + ' for the off hand. Y switches between one and two: twice the rate of fire and twice the loaded rounds, for a wider group, a slower reload, and no hand free for a grenade or the blade.',
+             shopRow(dwText('shop.upgrade.pair', { weapon: WEAPON_STATS[w].name }), got ? dwText('shop.owned') : dwText('shop.upgrade.akimbo'),
+               dwText('shop.upgrade.pairHelp', { weapon: WEAPON_STATS[w].name }),
               got ? 'OWNED' : '$' + price, !got && bank >= price, got ? null : () => buyDualWield(w), got ? 'owned' : '');
           }
           const mods = weaponMods(w);
@@ -24750,7 +24975,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
           if (SUPPRESSOR_PRICE[w]) {
             any = true;
-            modRow(WEAPON_STATS[w].name + ' suppressor', !!suppressorOwned[w], !!suppressor[w], 'A can on the muzzle: quieter, a little less punch.',
+             modRow(dwText('shop.upgrade.suppressor', { weapon: WEAPON_STATS[w].name }), !!suppressorOwned[w], !!suppressor[w], dwText('shop.upgrade.suppressorHelp'),
               equipmentPrice(SUPPRESSOR_PRICE[w], day), () => buySuppressor(w));
           }
           if (w === 'pistol') {
@@ -24759,7 +24984,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
               equipmentPrice(PISTOL_AUTO_PRICE, day), () => buyPistolAuto());
           }
         }
-        if (!any) shopRow('Nothing to upgrade yet', '', 'Buy a gun that takes an extended mag (or the chainsaw).', '—', false, null);
+         if (!any) shopRow(dwText('shop.upgrade.nothing'), '', dwText('shop.upgrade.buyFirst'), '—', false, null);
       } else if (shopTab === 'fortify') {
         // Jerry: only the tiers he owns and the one straight after them. Tier 0 is the piece's
         // own build blueprint (window mesh hangs on the window), so a track shows nothing until
@@ -26932,7 +27157,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const bob = Math.sin(radioMarks.t * 3) * 0.12, spin = radioMarks.t * 1.6;
       const near = (c) => Math.hypot(p.x - c.x, p.z - c.z) < RADIO_CUE.markerR;
       const down = st === 'available' || st === 'active' || st === 'undiscovered';
-      radioMarks.cabinet.visible = !!gameStarted && down && near(prop.centre) && !relayPuzzle.state.booting;
+      radioMarks.cabinet.visible = !!gameStarted && down && (near(prop.centre) || heronNeedsRelay()) && !relayPuzzle.state.booting;   // GB-182: from night 15 it shows from anywhere
       radioMarks.locker.visible = !!gameStarted && st === 'ready-to-claim' && near(radioLocker.centre) && !(radioLocker.vault && vaultHas(radioLocker, p));
       radioMarks.cabinet.position.y = prop.centre.y + 2.7 + bob; radioMarks.cabinet.rotation.y = spin;
       radioMarks.locker.position.y = (radioMarks.lockerY ?? radioLocker.centre.y + 2.5) + bob; radioMarks.locker.rotation.y = spin;
@@ -27127,7 +27352,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           { const s = skillState(); s.skulls += S.pendingCount | 0; const n = Math.floor(s.skulls / 10); if (n > 0) { s.skulls -= n * 10; skillXp('scavenger', n, 'banked'); } }   // GB-101: Scavenger, 1 per 10 banked
           updateCoinHud();
           AudioSys.hqDing();
-          showBanner('+$' + S.pendingValue, S.pendingCount + ' skull' + (S.pendingCount === 1 ? '' : 's') + ' processed \u2014 spend it at the kiosk', 2.4, '#7cdea0');
+          showBanner('+$' + S.pendingValue, dwText('hq.processed', { count: S.pendingCount }), 2.4, '#7cdea0');
           S.pendingValue = 0; S.pendingCount = 0;
         }
       } else if (S.dep === 'green') {
@@ -27196,12 +27421,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let preview = null;
       try { preview = getWavePreview(director.day); } catch (error) { console.warn('Grave Shift briefing unavailable:', error); }
       publishUI('briefing-open', { day: director.day, phase: director.phase, runId: uiRunId,
-        goalNight: EXTRACTION_NIGHT, extraction: director.extraction.state, relayReady: relayUp(),
+        goalNight: EXTRACTION_NIGHT, extraction: director.extraction.state, relayReady: relayUp(), heronNeedsRelay: heronNeedsRelay(),   /* GB-182 */
         preview, bounties: getBounties(), intelOwned: fieldIntelOwned, radioCall: refreshRadioCall(),
         relayStory: relayStory.read(relayUp()), quest: quest.view(),
         hollow: hollow.state(), hush: getHushState(),
         restocks: restockRows(objectiveRuntime?.snapshot(), director.day),
-        alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel() });
+        alarmActive: !!hq.seq, disabled: devNoZombies, canSoundAlarm: nearHQPanel(),
+        orders: { head: sayText('story.orders.head', {}, ''), lines: ordersLines() } });   // CL-204: the orders, on the board for the run
     }
     function closeHQBriefing() {
       if (!hqBriefingOpen) return;
@@ -27225,7 +27451,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       if (detail?.type === 'quest' && (detail.runId == null || detail.runId === uiRunId) && gameStarted && !gameOver && !won) {
         if (detail.kind === 'heart') quest.setHeart({entered:detail.entered !== false, phase:detail.phase, guardianHp:detail.guardianHp});
-        if (detail.kind === 'ending' && quest.complete()) { closeHQBriefing(); endGame(true); }
+        if (detail.kind === 'ending' && quest.complete()) { closeHQBriefing(); beginTrueEndingWalk(); }   // CL-207: he walks to the dock
       }
       if (!hqBriefingOpen) return;
       if (detail?.type === 'quest-submit-request') {
@@ -27486,7 +27712,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
           pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' });
         let text = '';
-        if (a === 'kiosk') text = okNow ? 'E — Supply kiosk' : 'Kiosk locked — opens during prep';
+        if (a === 'kiosk') text = okNow ? dwText('interaction.kiosk') : dwText('interaction.kioskLocked');
         else if (a === 'hqWindow') {
           if (hq.dep === 'open' || hq.dep === 'throw' || hq.dep === 'close' || hq.dep === 'process') text = 'Processing skulls\u2026';
           else text = skullBag.count ? 'E — Turn in ' + skullBag.count + ' skull' + (skullBag.count === 1 ? '' : 's') : 'Skull window';   // CL-181: shorter
@@ -27514,7 +27740,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (!text && !a) text = radioPromptText() || objectivePromptText();   // CL-127
         if (!text && gameStarted && !gameOver && !won) {
           const gr = nearestGrave(2.6);
-          if (gr) text = 'Here lies ' + gr.name + ' \u2014 fell on Day ' + gr.day;
+          if (gr) text = dwText('interaction.grave', { name: gr.name, day: gr.day });
         }
         // The wave preview words the HQ panel's prompt (it sets an element's text): it is handed a stand-in, so its
         // words go through the same cleaning and keycap as every other prompt.
@@ -27535,6 +27761,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // wins over whatever is nearby; between the kiosk and a mortar, the nearer one.
     // CU-80: a strongbox, crate or tag pays only if every piece fits. Nothing is given if one is refused.
     let hollowLoot = null;
+    function refreshTagWall() {   // CL-206: one tag per nail for each tag brought up so far (the profile's)
+      const w = house && house.tagWall; if (!w) return 0;
+      const n = Math.min(w.userData.tags.length, hollowTags.read().tags.length);
+      w.userData.tags.forEach((h, i) => { h.visible = i < n; });
+      return n;
+    }
+    let runTagIds = [];   // CL-205: tag ids collected in this run (the profile keeps them all; the grave takes this run's)
     const hollowTags = createTagCollection({
       load: () => { try { return localStorage.getItem(TAGS_KEY); } catch (_) { return null; } },
       save: (v) => { try { localStorage.setItem(TAGS_KEY, v); } catch (_) {} },
@@ -27647,7 +27880,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         catalog: { blueprints: BUILD_ORDER.filter((k) => k !== 'upgrade' && k !== 'shovel'), guns: ['m4', 'ak', 'shotgun', 'uzi'], mods: [], camos: [] }
       });
       if (hit.kind === 'crate') return ensureHollowLoot().claimCrate({ theme, index: hit.index, count: hit.count, ammo: [{ id: 'ammo:.45', qty: 36 }] });
-      return hollowTags.collect(theme, hit.n);
+      const tagged = hollowTags.collect(theme, hit.n);   // (the wall shows it from the next dawn: refreshTagWall)
+      if (tagged) runTagIds.push(tagged.id);   // CL-205: the tags he brought up this run go into the ground with him
+      return tagged;
     }
     function actionTarget() {
       if (!gameStarted || gameOver || won || paused) return null;
@@ -28980,7 +29215,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (mode && nightLockdown()) { refuseLockdown(); return; }   // CU-82
       if (mode && !buildUnlocked[mode]) {
         AudioSys.invalid();
-        showBanner(BUILD_NAMES[mode].toUpperCase() + ' — NO BLUEPRINT', 'Buy the plans at the kiosk ($' + BUILD_UNLOCK_PRICE[mode] + ')', 1.6, '#ffb347');
+        showBanner(dwText('build.message.noBlueprint', { name: BUILD_NAMES[mode].toUpperCase() }), dwText('build.message.buyBlueprint', { price: BUILD_UNLOCK_PRICE[mode] }), 1.6, '#ffb347');
         return;
       }
       placeMode = mode;
@@ -31017,56 +31252,59 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             for (const fz of [-0.2, 0.2]) add(_box(0.04, 0.03, 0.04, tierMats.rivet, sx, topY + 0.048, fz));
           }
         } else {
-          // Gabions: three heavy galvanized wire-mesh cages packed with multi-tone rough-quarried rock cobbles.
+          // Gabions: three heavy galvanized wire-mesh cages packed with multi-tone rough-quarried rock cobbles (AG-84: <= 1.5k tris).
           hideBuilt(mesh);
           add(_box(S, 0.42, 0.58, tierMats.stoneDark, 0, -0.18, 0));                               // buried foundation curb
           add(_box(S, 0.06, 0.66, tierMats.steelDark, 0, 0.03, 0));
-          const bw = S / 3;
+          const bw = S / 3, ch = 1.16, cd = 0.62;
+          // Continuous dark mortar/rubble core recessed slightly inside the three-cell wire cage.
+          add(_box(S - 0.09, ch - 0.06, cd - 0.08, tierMats.mortar, 0, ch / 2 + 0.02, 0));
           for (let b = 0; b < 3; b++) {
-            const cx = -S / 3 + b * bw, cw = bw - 0.025, ch = 1.16, cd = 0.62;
-            // Dark mortar/rubble core recessed slightly inside the wire cage.
-            add(_box(cw - 0.07, ch - 0.06, cd - 0.08, tierMats.mortar, cx, ch / 2 + 0.02, 0));
-            // Individual multi-tone rough-quarried rock cobbles pressing out against the wire mesh.
+            const cx = -S / 3 + b * bw, cw = bw - 0.025;
+            // Multi-tone rough-quarried through-cobbles pressing out against both front and back wire mesh faces.
             for (let ry = 0; ry < 4; ry++) {
               const y = 0.17 + ry * 0.265;
               for (let rx = 0; rx < 3; rx++) {
                 const x = cx + (rx - 1) * (cw * 0.31);
-                for (const fz of [-1, 1]) {
-                  const h1 = _hash(b * 19 + ry * 7 + rx, fz * 13 + ry);
-                  const h2 = _hash(rx * 29 + b, ry * 11 + 5);
-                  const sm = tierMats.stone[Math.floor(h1 * tierMats.stone.length) % tierMats.stone.length];
-                  const rock = add(_rbox(0.19 + h1 * 0.04, 0.22 + h2 * 0.03, 0.22, 0.045, sm, x + (h2 - 0.5) * 0.02, y, fz * 0.185));
-                  rock.rotation.set((h1 - 0.5) * 0.16, (h2 - 0.5) * 0.18, (h1 - h2) * 0.14);
-                }
+                const h1 = _hash(b * 19 + ry * 7 + rx, 13 + ry);
+                const h2 = _hash(rx * 29 + b, ry * 11 + 5);
+                const sm = tierMats.stone[Math.floor(h1 * tierMats.stone.length) % tierMats.stone.length];
+                const rock = add(_box(0.20 + h1 * 0.04, 0.23 + h2 * 0.03, 0.59, sm, x + (h2 - 0.5) * 0.02, y, 0));
+                rock.rotation.set((h1 - 0.5) * 0.14, (h2 - 0.5) * 0.14, (h1 - h2) * 0.12);
               }
             }
             // Heaped crown of boulders spilling across the top of each gabion basket.
-            for (let tx = -1; tx <= 1; tx++) for (const tz of [-0.14, 0.14]) {
-              const h = _hash(b * 13 + tx, tz * 31);
+            for (let tx = -1; tx <= 1; tx++) {
+              const h = _hash(b * 13 + tx, 31);
               const sm = tierMats.stone[Math.floor(h * tierMats.stone.length) % tierMats.stone.length];
-              const topRock = add(_rbox(0.20, 0.13 + h * 0.04, 0.24, 0.04, sm, cx + tx * 0.19, ch + 0.03, tz));
-              topRock.rotation.set((h - 0.5) * 0.2, h * 0.3, 0);
+              const topRock = add(_box(0.20, 0.14 + h * 0.04, 0.50, sm, cx + tx * 0.19, ch + 0.03, (h - 0.5) * 0.03));
+              topRock.rotation.set((h - 0.5) * 0.18, h * 0.24, 0);
             }
-            // Structural corner angle posts and horizontal steel frame hoops.
-            for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-              add(_box(0.045, ch + 0.04, 0.045, tierMats.steelDark, cx + sx * (cw / 2 - 0.01), ch / 2 + 0.02, sz * (cd / 2 - 0.01)));
-              add(_box(0.055, 0.055, 0.055, tierMats.rivet, cx + sx * (cw / 2 - 0.01), ch + 0.04, sz * (cd / 2 - 0.01)));
-            }
-            for (const y of [0.06, 0.34, 0.62, 0.90, 1.16]) {
-              for (const sz of [-1, 1]) add(_box(cw + 0.01, 0.032, 0.032, tierMats.steelDark, cx, y, sz * (cd / 2)));
-              for (const sx of [-1, 1]) add(_box(0.032, 0.032, cd + 0.01, tierMats.steelDark, cx + sx * (cw / 2), y, 0));
-            }
-            // Welded galvanized wire mesh grid bars across front, back, and top.
-            for (let wx = -2; wx <= 2; wx++) {
-              const x = cx + wx * (cw * 0.20);
+            // Welded galvanized wire mesh vertical and top grid bars per basket.
+            for (let wx = -1; wx <= 1; wx++) {
+              const x = cx + wx * (cw * 0.28);
               for (const sz of [-1, 1]) add(_box(0.018, ch, 0.018, tierMats.steelLight, x, ch / 2 + 0.02, sz * (cd / 2 + 0.006)));
               add(_box(0.018, 0.018, cd, tierMats.steelLight, x, ch + 0.05, 0));
             }
-            for (let wy = 0; wy < 4; wy++) {
-              const y = 0.20 + wy * 0.28;
-              for (const sz of [-1, 1]) add(_box(cw, 0.016, 0.016, tierMats.steelLight, cx, y, sz * (cd / 2 + 0.006)));
+          }
+          // Four structural vertical angle-post bulkheads and top corner rivets.
+          for (const px of [-S / 2 + 0.018, -S / 6, S / 6, S / 2 - 0.018]) {
+            for (const sz of [-1, 1]) {
+              add(_box(0.045, ch + 0.04, 0.045, tierMats.steelDark, px, ch / 2 + 0.02, sz * (cd / 2 - 0.01)));
+              add(_box(0.055, 0.055, 0.055, tierMats.rivet, px, ch + 0.04, sz * (cd / 2 - 0.01)));
             }
           }
+          // Full-span horizontal steel frame hoops and end-cap tie straps.
+          for (const y of [0.06, 0.34, 0.62, 0.90, 1.16]) {
+            for (const sz of [-1, 1]) add(_box(S - 0.015, 0.032, 0.032, tierMats.steelDark, 0, y, sz * (cd / 2)));
+            for (const sx of [-1, 1]) add(_box(0.032, 0.032, cd + 0.01, tierMats.steelDark, sx * (S / 2 - 0.012), y, 0));
+          }
+          // Full-span horizontal welded wire mesh bars across front and back.
+          for (let wy = 0; wy < 4; wy++) {
+            const y = 0.20 + wy * 0.28;
+            for (const sz of [-1, 1]) add(_box(S - 0.02, 0.016, 0.016, tierMats.steelLight, 0, y, sz * (cd / 2 + 0.006)));
+          }
+          mergeStatic(root);
         }
       } else if (kind === 'wire') {
         if (tier === 1) {
@@ -35332,19 +35570,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       resetZombieAbilityVisuals(mesh);   // GP-179
     }
 
-    // Every wave carries ten times the bodies it used to. The extra nine tenths are all
-    // shamblers — the specialist counts are exactly what they were, just spread thinner
-    // through a much longer wave, so the horde got bigger without the field filling up
-    // with brutes and spitters. The originals are dealt out evenly rather than left at
-    // the front, or the whole back half of a wave would be nothing but fodder.
+    // GB-184: the old day curve (zombiesForDay) times this is the size of an endless night past 20 (nightPlanFor).
     const HORDE_MULT = 10;
-    function swellWithFodder(mix) {
-      const n = mix.length;
-      if (n === 0 || HORDE_MULT <= 1) return mix;
-      const out = new Array(n * HORDE_MULT).fill('shambler');
-      for (let i = 0; i < n; i++) out[Math.floor((i + 0.5) * HORDE_MULT)] = mix[i];
-      return out;
-    }
 
     // GB-40 / D-29: day 1 is 15 shamblers; 7 or 8 of them claw up out of the ground (GROUND_RISE
     // in the working caveByIndex; -1 plus groundByIndex in the preview).
@@ -35496,38 +35723,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return out;
     }
 
+    // GB-184: a body off the night's own plan (NIGHT_PLAN kinds, weighted by their counts; the rest of the total are
+    // shamblers), so the relay's calls bring that night's spitters and screamers too. The old hand-made weights never could.
     function pickZombieType(dayNum) {
-      const r = Math.random();
       if (dayNum <= 1) return 'shambler';
-      if (dayNum === 2) {
-        if (r < 0.55) return 'shambler';
-        if (r < 0.85) return 'feral';
-        return 'leaper';
-      }
-      if (dayNum === 3) {
-        if (r < 0.3) return 'leaper';
-        if (r < 0.5) return 'shambler';
-        if (r < 0.7) return 'feral';
-        if (r < 0.85) return 'drowned';
-        return 'brute';
-      }
-      const weights = [
-        ['shambler', Math.max(0.12, 0.32 - dayNum * 0.025)],
-        ['feral', 0.2 + Math.min(0.08, dayNum * 0.008)],
-        ['leaper', 0.16],
-        ['drowned', 0.1],
-        ['spider', dayNum >= 5 ? 0.06 + Math.min(0.06, (dayNum - 5) * 0.01) : 0],
-        ['military', 0.16 + Math.min(0.14, dayNum * 0.018)],
-        ['brute', 0.12 + Math.min(0.14, dayNum * 0.016)],
-        ['bomber', dayNum >= 5 ? 0.05 + Math.min(0.07, (dayNum - 5) * 0.012) : 0],
-        ['demon', dayNum >= 6 ? 0.03 + Math.min(0.05, (dayNum - 6) * 0.01) : 0]
-      ];
-      let sum = weights.reduce((a, w) => a + w[1], 0);
+      const plan = nightPlanFor(dayNum), kinds = plan.kinds || {};
+      let named = 0;
+      const ws = [];
+      for (const k of Object.keys(kinds)) { const n = kinds[k] | 0; if (n > 0 && ZOMBIE_TYPES[k]) { ws.push([k, n]); named += n; } }
+      ws.push(['shambler', Math.max(0, (plan.total | 0) - named)]);
+      const sum = ws.reduce((a, w) => a + w[1], 0);
+      if (!(sum > 0)) return 'shambler';
       let x = Math.random() * sum;
-      for (const [k, w] of weights) {
-        x -= w;
-        if (x <= 0) return k;
-      }
+      for (const [k, w] of ws) { x -= w; if (x <= 0) return k; }
       return 'shambler';
     }
 
@@ -35708,6 +35916,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // Match stats, shown on the end screen.
     const matchStats = { kills: 0, headshots: 0, skullsTurnedIn: 0 };
     const runRecords = createRecords({ load: () => localStorage.getItem(RECORDS_KEY), save: value => localStorage.setItem(RECORDS_KEY, value) });
+    const firstRunChoice = createFirstRunChoice({ load: () => localStorage.getItem(FIRST_RUN_CHOICE_KEY), save: value => localStorage.setItem(FIRST_RUN_CHOICE_KEY, value) });
     const menuBestRecord = document.getElementById('menuBestRecord');
     renderBestRecord(menuBestRecord, runRecords.read());
     const lifetimeBadges = createBadges({ load: () => localStorage.getItem(BADGES_KEY), save: value => localStorage.setItem(BADGES_KEY, value) });
@@ -36610,7 +36819,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         if (z.typeKey === 'guardian') {
           if (z.cavePoke) publishCaveGuardian(z.caveIndex, px, pz, 'death');
-          showBanner(dwText(GUARDIAN_KEYS.name).toUpperCase() + ' DOWN', '+$' + cash + ' in skulls — turn them in at HQ', 3.2, '#bdf3ff');
+          showBanner(dwText('wave.guardianDrivenBack'), '+$' + cash + ' in skulls — turn them in at HQ', 3.2, '#bdf3ff');
           addShake(0.4);
           triggerSlowMo(1.0);
           // First-blood: only a planned guardian from a guardian night (never debug spawn).
@@ -36755,14 +36964,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (i < 0) i = POI.caves.findIndex((c) => c && c.theme === 'hill');
       if (i < 0) i = 0;
       return i;
-    }
-    /** Trim ~20% shambler fodder so guardian + specialists fit under MAX_ZOMBIES. */
-    function trimGuardianFodder(mix) {
-      const idxs = [];
-      for (let i = 0; i < mix.length; i++) if (mix[i] === 'shambler') idxs.push(i);
-      const drop = Math.max(1, Math.floor(idxs.length * 0.2));
-      const remove = new Set(idxs.slice(-drop));
-      return mix.filter((_, i) => !remove.has(i));
     }
     function getGuardianState() {
       if (!wavePreview || !wavePreview.hasGuardian) return null;
@@ -37187,6 +37388,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       MOUTH_R: HUSH_MOUTH_R, LIT_R: HUSH_LIT_R, SECONDS: HUSH_SECONDS
     };
     function startPrep() {
+      refreshTagWall();   // CL-206: the tags brought up yesterday are on the wall this morning
       restoreMapDrums();   // CL-72 (P-43): the drums are back each morning
       // Claude's CL-41 hook: camera has returned before this presentation snapshot.
       nightRecord.observe(matchStats.kills, combo);
@@ -37227,16 +37429,46 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       hushDawn();   // GB-106: the Hush charges at dawn
       survivorsDawn();   // GB-116: yesterday's rescues are on the roof
       if (armorMax() > 0 && playerArmor < armorMax()) { playerArmor = armorMax(); updateHpHud(); }
-      bloodMoon = day >= 4 && day % 4 === 0;
       lastDare = hqBlackout ? { day: day - 1, earned: Math.round(dareEarned) } : null;   // GB-82: the dare ends with its night
       nightOrder = null; hqBlackout = false; dareEarned = 0;
-      if (bloodMoon) showBanner(dwText('wave.bloodMoon'), dwText('wave.bloodMoonHelp', { day }), 4, '#ff5a44');
+      planNight(true);   // GB-183: the coming night's plan
+      announceHeronRelay();   // GB-182: no relay, no Heron: said from night 15
+
+      // GB-4 / CL-4: prep = level 1 on assault mouths (clears prior wave's 2→0 first).
+      warnActiveCaves(1);
+      // GB-43 / D-32: day 1's first fight before the alarm, two or three shamblers guarding the
+      // POI nearest the HQ.
+      // Spawned from updateZombies once the load pre-roll is over: its cleanup clears every zombie.
+      poiGuardsDue = day === 1 && !devNoZombies;
+      // GB-57 / D-37: from night 2, one or two bounty posts, placed like the day-1 guards.
+      bounties = [];
+      bountiesDue = day >= 2 && !devNoZombies;
+
+      // A ranked Grenadier receives one grenade each dawn; other runs get one every second day.
+      if (day > 1 && (day % 2 === 0 || skillLvl(localPlayer, 'grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
+      updateWaveHud();
+      updateAmmoHud();
+      quest.dawn(day);
+      const relayDispatch = relayStory.morning({ runId: uiRunId, day, repaired: relayUp() });
+      quest.hear(relayDispatch);
+      if (relayDispatch && typeof AudioSys.radioStatic === 'function') AudioSys.radioStatic();
+      if (dawnSummary) showDawnSummary(dawnSummary);
+    }
+    // GB-183 (secret-quest.md 4): the night after a silenced day comes without the tone's pull: every push at half size,
+    // no guardian night, no Ember Night (Blood Moon); a named night keeps its name. planNight is the part of startPrep
+    // that plans the coming night; a right send in the prep (quest 'silenced') plans it again.
+    function planNight(announce) {
+      const qs = quest.read();   // today's right send (GP-70: silencedDay), not yesterday's: at dawn the pit is still dark
+      const silenced = !!(qs && qs.silenced && qs.silencedDay === day);
+      bloodMoon = !silenced && day >= 4 && day % 4 === 0;
+      if (announce && bloodMoon) showBanner(dwText('wave.bloodMoon', { day }), dwText('wave.bloodMoonHelp', { day }), 4, '#ff5a44');
       waveQueue = waveComposition(day);
+      if (silenced) waveQueue = halveNight(waveQueue);   // GB-183: every push at half size
       // GB-53: the night's plan (the mix, the caves, the pushes, the trick); see NIGHT_PLAN.
       const nightPlan = nightPlanFor(day);
       const pushSizes = (waveQueue.pushSizes || [waveQueue.length]).slice();
       // GB-14 / D-13: guardian night replaces colossus + surround; Blood Moon still stacks.
-      guardianNightActive = isGuardianNight(day);
+      guardianNightActive = isGuardianNight(day) && !silenced;   // GB-183: no guardian night after a silenced day
       guardianCaveIndex = guardianNightActive ? findGuardianCaveIndex() : -1;
       // A colossus fronts every fifth day (deferred on guardian nights). GB-53: the boss walks out
       // at the head of the last push, a few bodies in, instead of trailing the whole night.
@@ -37408,26 +37640,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         };
       }
-
-      // GB-4 / CL-4: prep = level 1 on assault mouths (clears prior wave's 2→0 first).
-      warnActiveCaves(1);
-      // GB-43 / D-32: day 1's first fight before the alarm, two or three shamblers guarding the
-      // POI nearest the HQ.
-      // Spawned from updateZombies once the load pre-roll is over: its cleanup clears every zombie.
-      poiGuardsDue = day === 1 && !devNoZombies;
-      // GB-57 / D-37: from night 2, one or two bounty posts, placed like the day-1 guards.
-      bounties = [];
-      bountiesDue = day >= 2 && !devNoZombies;
-
-      // A ranked Grenadier receives one grenade each dawn; other runs get one every second day.
-      if (day > 1 && (day % 2 === 0 || skillLvl(localPlayer, 'grenadier') > 0)) grenades = Math.min(maxGrenades(), grenades + 1);
-      updateWaveHud();
-      updateAmmoHud();
-      quest.dawn(day);
-      const relayDispatch = relayStory.morning({ runId: uiRunId, day, repaired: relayUp() });
-      quest.hear(relayDispatch);
-      if (relayDispatch && typeof AudioSys.radioStatic === 'function') AudioSys.radioStatic();
-      if (dawnSummary) showDawnSummary(dawnSummary);
+      if (wavePreview && wavePreview.night) { wavePreview.night.silenced = silenced; wavePreview.night.heronNeedsRelay = heronNeedsRelay(); }   // GB-182
+    }
+    function halveNight(q) {
+      const sizes = q.pushSizes || [q.length], keep = new Array(q.length).fill(false), map = [], out = [], ns = [];
+      let s0 = 0;
+      for (const n of sizes) { const k = Math.ceil(n / 2); for (let i = 0; i < k; i++) keep[s0 + i] = true; ns.push(k); s0 += n; }
+      for (let i = 0; i < q.length; i++) if (keep[i]) { map[i] = out.length; out.push(q[i]); }
+      for (const k of Object.keys(q)) if (!/^\d+$/.test(k)) out[k] = q[k];
+      out.pushSizes = ns;
+      out.packRuns = (q.packRuns || []).map((pr) => { let n = 0, st = -1; for (let j = 0; j < pr.n; j++) if (keep[pr.start + j]) { if (st < 0) st = map[pr.start + j]; n++; } return st >= 0 ? { ...pr, start: st, n } : null; }).filter(Boolean);
+      return out;
     }
 
     /** @returns {WavePreview|null} current frozen plan; null if idle / no plan yet */
@@ -37444,7 +37667,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         prepTimer,
         bloodMoon: !!bloodMoon,
         dare: { order: nightOrder, active: hqBlackout, earned: Math.round(dareEarned), last: lastDare },   // GB-82 (P-39)
-        extraction: { state: extractionFor(day), day: extractionDay },   // GB-85 (P-50)
+        extraction: { state: extractionFor(day), day: extractionDay, needsRelay: heronNeedsRelay() },   // GB-85 (P-50); GB-182: needsRelay
         mod: (wavePreview && wavePreview.day === day && wavePreview.night) ? (wavePreview.night.mod || null) : null,   // GB-87 (P-56): tonight's night mod; cleared by the next prep and a run reset
         surround: !!waveSurround,
         guardianNight: !!guardianNightActive,
@@ -37476,6 +37699,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // offers it again. A due boat waits (P-53: through the dawn) until he boards (GB-86) or sounds the next alarm ('gone').
     // dw-game 'extraction' { phase: 'called' | 'due' | 'gone', day }.
     const EXTRACTION_NIGHT = 20;
+    // GB-182 (road-to-1.0 #2): Heron only comes on the relay. From the morning of night 15 (HERON_WARN_NIGHT) while it is
+    // down the game says so: a dawn banner (heron.* lines, English fallback until ui/strings has them), the relay
+    // cabinet's marker shows from anywhere, 'heronNeedsRelay' rides the director state, the night preview and the
+    // briefing, and dw-game 'heron-relay' { day, goalNight, nightsLeft } goes out each such prep. Nothing else changes:
+    // past night 20 the nights go on, and the first prep after the relay is up offers the boat (extractionFor).
+    const HERON_WARN_NIGHT = 15;
+    function heronNeedsRelay(d = day) { return !!gameStarted && d >= HERON_WARN_NIGHT && !devNoZombies && !relayUp(); }
+    function heronLine(key, fallback, params) { return dwHasText(key) ? dwText(key, params || {}) : fallback; }
+    function announceHeronRelay() {
+      if (!heronNeedsRelay()) return false;
+      const left = Math.max(0, EXTRACTION_NIGHT - day);
+      publishUI('heron-relay', { day, goalNight: EXTRACTION_NIGHT, nightsLeft: left });
+      showBanner(heronLine('heron.needsRelay', "HERON CAN'T HEAR YOU"),
+        day >= EXTRACTION_NIGHT
+          ? heronLine('heron.needsRelayNow', 'No relay, no boat. Repair the radio mast and Heron is on offer at the next prep.')
+          : heronLine('heron.needsRelayHelp', 'Heron flies on night ' + EXTRACTION_NIGHT + ', but only to a live relay. Repair the radio mast.', { night: EXTRACTION_NIGHT }),
+        6, '#bdf3ff');
+      return true;
+    }
     let extractionState = null, extractionDay = -1;   // null | 'called' | 'due', and the night it was called for
     function extractionFor(d) {
       if (extractionState && (extractionDay === d || extractionState === 'due')) return extractionState;
@@ -37555,7 +37797,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const cave = guardianCaveIndex >= 0 ? POI.caves[guardianCaveIndex] : null;
         const source = cave && cave.name ? cave.name : from;
         showBanner(
-          dwText(GUARDIAN_KEYS.night),
+          dwText(GUARDIAN_KEYS.night, { day }),
           dwText(GUARDIAN_KEYS.urgent, { source }),
           4.2,
           '#bdf3ff'
@@ -37987,7 +38229,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let survivorKitMats = null;
     function makeSurvivorFigure(who) {
       const look = SURVIVOR_LOOK[who] || SURVIVOR_LOOK.okafor;
-      const m = makeMarine();
+      const m = makeMarine({ skin: false });   // CL-210: baked below, with the kit and the rifle
       const st = WARDROBE_LISTS.defaultWardrobe('m81');
       st.items.cap.style = look.cap;
       st.items.eyewear = { style: look.eyewear };
@@ -38078,6 +38320,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const U=UNARMED_ARMS,u=m.userData;
       u.armLG.rotation.set(U.x,U.y,-U.z);u.armRG.rotation.set(U.x,-U.y,U.z);
       u.elbowLG.rotation.set(U.elbow,0,0);u.elbowRG.rotation.set(U.elbow,0,0);
+      if (RIG_SKIN) bakeRigSkin(THREE, TSL, m, { mergeTextured: true, bakeLive: true });   // CL-210: a survivor is a handful of draws, the rifle and the kit with him
       return m;
     }
     const SURVIVOR_NAME = { okafor: 'Cpl. Okafor', brandt: 'Sgt. Brandt', pike: 'Spc. Pike' };   // fallbacks for story.survivor.<who>.name
@@ -38875,6 +39118,35 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     // The opening insertion freezes simulation while the camera and rig play out.
     let marineInsertion = null;
+    // CL-204 (story.md §3, v3): the orders card. The one place the game says what the run is for, on day 1: twelve went
+    // before him, get the relay up, hold Threshold, Heron comes on night twenty. It's in his hand while he drops (about
+    // 4 s; any key or click puts it away), and the same lines sit on the HQ board's briefing for the run.
+    const ordersCardEl = document.getElementById('ordersCard');
+    function ordersLines() { return [1, 2, 3, 4].map((n) => sayText('story.orders.line' + n, {}, '')).filter(Boolean); }
+    function ordersCardShow() {
+      let gone = false, shown = false;
+      const away = () => { gone = true; hide(); };
+      const hide = () => { if (ordersCardEl) ordersCardEl.classList.remove('show'); window.removeEventListener('keydown', away, true); window.removeEventListener('pointerdown', away, true); };
+      if (ordersCardEl) {
+        ordersCardEl.textContent = '';
+        const head = document.createElement('div'); head.className = 'head'; head.textContent = sayText('story.orders.head', {}, 'PGB · FIELD ORDERS');
+        ordersCardEl.append(head);
+        for (const line of ordersLines()) { const p = document.createElement('p'); p.textContent = line; ordersCardEl.append(p); }
+        const patch = document.createElement('img'); patch.className = 'stamp'; patch.alt = ''; patch.src = 'assets/insignia/pgb-patch.png';
+        const skip = document.createElement('div'); skip.className = 'skip'; skip.textContent = sayText('story.orders.skip', {}, '');
+        ordersCardEl.append(patch, skip);
+      }
+      return {
+        update(t) {
+          if (!ordersCardEl || gone) return;
+          const want = t >= 0.7 && t < 5.4;
+          if (want && !shown) { shown = true; ordersCardEl.classList.add('show'); window.addEventListener('keydown', away, true); window.addEventListener('pointerdown', away, true); }
+          if (!want && shown && t >= 5.4) { gone = true; hide(); }
+        },
+        hide,
+        shown: () => shown && !gone
+      };
+    }
     function beginMarineInsertion() {
       const gy = sampleHeight(0, -8.5), chute = airborne.chute(), plane = makeCargoPlane();
       chute.name = 'marine-parachute'; plane.name = 'insertion-aircraft';
@@ -38901,9 +39173,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let opened=false, landed=false;
       const smooth = x => { x=Math.max(0,Math.min(1,x));return x*x*(3-2*x); };
       AudioSys.planeFlyover(5);
+      const orders = ordersCardShow();   // CL-204
       const view = new THREE.Vector3(), focal = new THREE.Vector3();
       const rig = {
         update(t,dt) {
+          orders.update(t);   // CL-204: in his hand from 0.7 s to 5.4 s, unless a key put it away
           plane.position.set(-1+t*12+t*t*2,gy+36,-3.5);
           plane.userData.tick(dt,48);
           plane.visible=t<5;
@@ -38950,6 +39224,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           cam.fov=53+7*settle;cam.updateProjectionMatrix();
         },
         finish() {
+          orders.hide();
           airborne.dispose(chute);airborne.dispose(plane);airborne.dispose(harness);
           player.position.set(0,gy,-8.5);marine.position.y=-ROLL_PIVOT_Y;marine.rotation.z=0;
           for(const key of parts)ud[key].quaternion.copy(neutral.get(key));
@@ -39122,7 +39397,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function useMedkit() {
       if (!gameStarted || gameOver || won || paused) return;
       if (medPenT > 0) return;                       // already mid-jab
-      if (medkits <= 0) { AudioSys.invalid(); showBanner('NO MEDPENS', 'Buy them at the kiosk, or find one in a supply drop', 1.5, '#ffb347'); return; }
+      if (medkits <= 0) { AudioSys.invalid(); showBanner(dwText('supply.noMedpens'), dwText('supply.medpenHelp'), 1.5, '#ffb347'); return; }
       if (playerHp >= PLAYER_MAX_HP - 0.5) { AudioSys.invalid(); return; }
       medkits -= 1;
       // Cap off, jab into the thigh, click, hiss — the heal lands on the jab (updateMedPenUse).
@@ -39261,7 +39536,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const shown = rec.name.slice(0, Math.round(rec.name.length * Math.max(0, Math.min(1, reveal))));
       if (shown) carve(shown, W / 2 - full / 2, 150 + size * 0.3, fontFor(size), 'left');
       if (reveal >= 1) {
-        carve('FELL ON DAY ' + rec.day, W / 2, 232, 'bold 22px Georgia, serif');
+         carve(dwText('cinematic.fell', { day: rec.day }), W / 2, 232, 'bold 22px Georgia, serif');
         carve(rec.kills + (rec.kills === 1 ? ' KILL' : ' KILLS'), W / 2, 266, '20px Georgia, serif');
       }
       if (rec.tex) rec.tex.needsUpdate = true;
@@ -39300,7 +39575,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return best;
     }
 
-    // --- The burial party: two marines, a shovel each. Built once and reused.
+    // --- The burial party's shovels (CL-205: the survivors carry them; see ensureCrew).
     function makeShovelMesh() {
       const g = new THREE.Group();
       const wood = new THREE.MeshStandardMaterial({ color: 0x7a5a36, roughness: 0.8 });
@@ -39325,38 +39600,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     let cineCrew = null;
     const DIG_LEAN = 0.3;
-    // CL-105 (Jerry, 2026-09-29): the burial detail always wears woodland MARPAT, whatever camo the player picked in
-    // the CIF. Their uniform pieces get their own copies of the uniform materials, painted once with MARPAT.
-    let marpatTex = null;
-    const marpatMats = new Map();
-    function dressInMarpat(m) {
-      if (!marpatTex) {
-        const cv = document.createElement('canvas'); cv.width = camoTex.image.width; cv.height = camoTex.image.height;
-        paintCamoTile('marpat', cv);
-        marpatTex = new THREE.CanvasTexture(cv);
-        if (THREE.SRGBColorSpace) marpatTex.colorSpace = THREE.SRGBColorSpace;
-        if (THREE.RepeatWrapping) marpatTex.wrapS = marpatTex.wrapT = THREE.RepeatWrapping;
-      }
-      m.traverse((o) => {
-        if (!o.isMesh) return;
-        const swap = (mat) => {
-          if (!mat || mat.map !== camoTex) return mat;
-          if (!marpatMats.has(mat)) { const c = mat.clone(); c.map = marpatTex; marpatMats.set(mat, c); }
-          return marpatMats.get(mat);
-        };
-        o.material = Array.isArray(o.material) ? o.material.map(swap) : swap(o.material);
-      });
-    }
-    function ensureCrew() {
-      if (cineCrew) return cineCrew;
-      cineCrew = [0, 1].map(() => {
-        const m = makeMarine();
-        const gp = m.userData.gearParts;
-        for (const k of Object.keys(gp)) { const on = k === 'helmet' || k === 'vest' || k === 'pads'; for (const o of gp[k]) o.visible = on; }
-        dressInMarpat(m);   // CL-105: the burial detail is always in woodland MARPAT
-        const root = new THREE.Group(); root.add(m); root.visible = false; scene.add(root);
-        const shovel = makeShovelMesh(); shovel.visible = false; scene.add(shovel);
-        return { root, m, shovel };
+    // CL-205 (story v3, Jerry): the survivors he rescued bury him, as themselves (makeSurvivorFigure), each with a
+    // shovel. Nobody rescued, nobody comes: the grave fills on its own. CL-105's two MARPAT marines are gone (he came
+    // alone; the base is dead). One figure per survivor, built once and reused.
+    const crewByWho = new Map();
+    function burialWhos() { return [...new Set(survivors.map((s) => s.who).filter(Boolean))].slice(0, 3); }
+    function ensureCrew(whos = burialWhos()) {
+      for (const cr of crewByWho.values()) { cr.root.visible = false; cr.shovel.visible = false; }
+      cineCrew = whos.map((who) => {
+        if (!crewByWho.has(who)) {
+          const m = makeSurvivorFigure(who);
+          m.traverse((o) => { if (o.name === 'survivor-rifle') o.visible = false; });   // both hands on the shovel; the rifle stays on the roof
+          const root = new THREE.Group(); root.add(m); root.visible = false; scene.add(root);
+          const shovel = makeShovelMesh(); shovel.visible = false; scene.add(shovel);
+          crewByWho.set(who, { who, root, m, shovel });
+        }
+        return crewByWho.get(who);
       });
       return cineCrew;
     }
@@ -39424,7 +39683,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         plot: plotted
       };
       session.graves.push(rec);
-      cine = { t: 0, rec, setup: false, panel: false, letters: 0, patPrev: [0, 0], heaves: 0, splashed: false, camYaw: 0,
+      cine = { t: 0, rec, whos: burialWhos(), tags: runTagIds.slice(), setup: false, panel: false, letters: 0, patPrev: [0, 0, 0], heaves: 0, splashed: false, camYaw: 0,
         camPos: new THREE.Vector3(), camLook: new THREE.Vector3(), panelAt: rec.kind === 'grave' ? 15.2 : 14.6 };
       // CL-179: a fall off the mast gets a few more seconds before the fade: the drop, the thump, him on his back smoking.
       if (mastFall.on) cine.t = -2.4;
@@ -39440,7 +39699,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       scopeAmt = 0; zoomHeld = false;
       flashlightOn = false; nvgDown = false; nvgFlip = 0; updateNvgVisual();
       document.body.classList.add('cinebars');
-      const crew = ensureCrew();
+      const crew = ensureCrew(c.whos);
       for (const m of crew) { m.root.visible = true; m.shovel.visible = rec.kind === 'grave'; }
       if (rec.kind === 'grave') {
         ensurePlotMarkers();
@@ -39449,11 +39708,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         c.center = g.clone();
         // Solve the stroke once, in the digger's own frame: how far down the arms go
         // for the blade to meet the earth, and so where each man has to stand.
-        const cr = crew[0];
-        cr.root.position.set(0, 0, 0); cr.root.rotation.set(0, 0, 0);
-        const tipAt = (a) => { poseCrew(cr, a, DIG_LEAN * a); return placeShovel(cr, _cv).clone(); };
         c.diggers = [];
-        for (const [k, side, v] of [[0, -1, -0.15], [1, 1, 0.3]]) {
+        // CL-205: one to three diggers, the rescued survivors; none, and the earth fills the grave by itself.
+        c.selfFill = !crew.length;
+        if (c.selfFill) rec.mound.scale.y = MOUND.ry * 0.2;
+        const cr = crew[0];
+        if (cr) { cr.root.position.set(0, 0, 0); cr.root.rotation.set(0, 0, 0); }
+        const tipAt = (a) => { poseCrew(cr, a, DIG_LEAN * a); return placeShovel(cr, _cv).clone(); };
+        for (const [k, side, v] of [[0, -1, -0.15], [1, 1, 0.3], [2, -1, 0.8]].slice(0, crew.length)) {
           // Twice over: the second pass allows for the ground he stands on being
           // higher or lower than the grave's.
           let aHit = 1, L = 1.5, x = g.x + side * L, z = g.z + v;
@@ -39465,8 +39727,21 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             L = Math.max(0.78, tipAt(aHit).z + 0.22);
             x = g.x + side * L;
           }
-          c.diggers.push({ c: crew[k], side, aHit, x, z, gy: sampleHeight(x, z), yaw: -side * Math.PI / 2, phase0: k * 0.5,
-            walkDir: new THREE.Vector2(side, -0.3).normalize() });
+          c.diggers.push({ c: crew[k], side, aHit, x, z, gy: sampleHeight(x, z), yaw: -side * Math.PI / 2, phase0: k * 0.37,
+            walkDir: new THREE.Vector2(side, k === 2 ? 0.5 : -0.3).normalize() });
+        }
+        // The tags he brought up this run, laid on the earth before it closes over them.
+        c.tagMeshes = [];
+        if (c.tags.length) {
+          const tagMat = new THREE.MeshStandardMaterial({ color: 0xb9bcc0, metalness: 0.85, roughness: 0.3 });
+          c.tagGeo = new THREE.BoxGeometry(0.05, 0.004, 0.029);
+          c.tags.forEach((id, i) => {
+            const tg = new THREE.Mesh(c.tagGeo, tagMat);
+            const u = ((i * 0.37) % 1 - 0.5) * 0.5, v = ((i * 0.61) % 1 - 0.5) * 1.1;
+            tg.position.set(g.x + u, g.y + moundHeight(u, v) * (c.selfFill ? 0.2 : 1) + 0.006, g.z + v);
+            tg.rotation.set(0, i * 1.9, 0);
+            scene.add(tg); c.tagMeshes.push(tg);
+          });
         }
         const cam0 = new THREE.Vector3(g.x + 0.4, g.y + 3.3, g.z + 6.8);
         c.camA = { pos: cam0, look: new THREE.Vector3(g.x, g.y + 0.35, g.z - 0.3) };
@@ -39492,7 +39767,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         c.edge = edge; c.dir = dir;
         const lat = { x: dir.z, z: -dir.x };
-        c.bearers = [-1, 1].map((s, k) => ({ c: crew[k], x: edge.x + lat.x * s * 0.95, z: edge.z + lat.z * s * 0.95, yaw: Math.atan2(dir.x, dir.z), s }));
+        // CL-205: two survivors carry him out; with fewer, the bag lies at the edge and the water takes it.
+        c.bearers = crew.length >= 2 ? [-1, 1].map((s, k) => ({ c: crew[k], x: edge.x + lat.x * s * 0.95, z: edge.z + lat.z * s * 0.95, yaw: Math.atan2(dir.x, dir.z), s })) : [];
+        for (let k = c.bearers.length; k < crew.length; k++) crew[k].root.visible = false;
         const shore = { x: edge.x - dir.x * 2.5, z: edge.z - dir.z * 2.5 };
         if (!c.bag) {
           const bag = new THREE.Group();
@@ -39504,10 +39781,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         c.bag.visible = true;
         // Throw solved up front from the swing itself, so the whole scene is a pure
         // function of time (and can be skipped to any point).
-        c.swingStart = 3.8; c.swingF = 0.8; c.release = c.swingStart + 2.8125;
+        c.swingStart = 3.8; c.swingF = 0.8; c.release = c.swingStart + (c.bearers.length ? 2.8125 : 2.2);
         const p1 = lakeBagPos(c, c.release, new THREE.Vector3()).clone(), p0 = lakeBagPos(c, c.release - 0.02, new THREE.Vector3()).clone();
         const v = p1.clone().sub(p0).multiplyScalar(1 / 0.02);
-        v.x += dir.x * 3.2; v.z += dir.z * 3.2; v.y = Math.max(v.y, 0) + 3.4;
+        if (c.bearers.length) { v.x += dir.x * 3.2; v.z += dir.z * 3.2; v.y = Math.max(v.y, 0) + 3.4; }
+        else { v.set(dir.x * 1.1, 0.3, dir.z * 1.1); }   // it slides off the edge
         c.relPos = p1; c.relVel = v;
         const level = LAKE.level;
         // Time to fall to the water: p.y + v.y t - 4.9 t^2 = level.
@@ -39543,6 +39821,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
     function lakeBagPos(c, t, out) {
+      if (!c.bearers.length) return out.set(c.edge.x - c.dir.x * 0.6, c.standY + 0.2, c.edge.z - c.dir.z * 0.6);
       poseBearers(c, t);
       const a = crewHands(c.bearers[0].c, _cv2).clone();
       const b = crewHands(c.bearers[1].c, out);
@@ -39594,6 +39873,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function updateBurial(c, t) {
       const rec = c.rec;
       const PAT_S = CINE.fadeIn, PAT_E = 8.6, TURN_E = 9.3;
+      // CL-205: nobody to bury him. The earth comes up over him on its own, swells a little, and settles.
+      if (c.selfFill) {
+        const u = smooth01((t - PAT_S) / (PAT_E - PAT_S)), settle = smooth01((t - PAT_E) / 1.4);
+        rec.mound.scale.y = MOUND.ry * (0.2 + 0.9 * u - 0.1 * settle);
+        if (t > PAT_S && t < PAT_E + 1 && (c.lastSettle == null || t - c.lastSettle > 0.9)) {
+          c.lastSettle = t;
+          const g = rec.g.position, u2 = (Math.random() - 0.5) * 0.6, v2 = (Math.random() - 0.5) * 1.4;
+          spawnDust(g.x + u2, g.y + moundHeight(u2, v2) * (0.2 + 0.9 * u), g.z + v2, 2);
+          if (!c.skipped) { const sn = cineSnd(g.x, g.z); AudioSys.gravePat(sn.v * 0.35, sn.pan); }
+        }
+      }
+      // The tags go under: the earth closes over them as the pats (or the fill) begin.
+      if (c.tagMeshes && c.tagMeshes.length && t > PAT_S + (c.selfFill ? 1.8 : 1.2)) {
+        for (const tg of c.tagMeshes) { scene.remove(tg); }
+        c.tagMeshes.length = 0;
+      }
       for (let k = 0; k < c.diggers.length; k++) {
         const d = c.diggers[k], cr = d.c;
         if (t < PAT_E) {
@@ -39641,13 +39936,15 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         poseBearers(c, t);
         if (t < c.release) {
           lakeBagPos(c, t, _cv);
-          const a = crewHands(c.bearers[0].c, _cv2);
           c.bag.position.copy(_cv);
-          c.bag.rotation.set(0, Math.atan2(-(a.z - _cv.z), a.x - _cv.x), 0);
+          if (c.bearers.length) {
+            const a = crewHands(c.bearers[0].c, _cv2);
+            c.bag.rotation.set(0, Math.atan2(-(a.z - _cv.z), a.x - _cv.x), 0);
+          } else c.bag.rotation.set(0, Math.atan2(c.dir.z, -c.dir.x) + Math.PI / 2, 0);
           // A grunt with every forward swing.
           const u = t - c.swingStart;
           const n = u > 0 ? Math.floor(u * c.swingF + 0.85) : 0;
-          if (n > c.heaves && n <= 3) { c.heaves = n; AudioSys.heave(); }
+          if (c.bearers.length && n > c.heaves && n <= 3) { c.heaves = n; AudioSys.heave(); }
         }
       } else {
         const turnU = smooth01((t - TURN_S) / (TURN_E - TURN_S));
@@ -39694,6 +39991,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!cine.setup) cineSetup();
       cine.skipped = true;
       cine.ambPlayed = true;
+      if (cine.selfFill && cine.rec.mound) cine.rec.mound.scale.y = MOUND.ry;
       cine.t = cine.panelAt - 0.01;
     }
     function endDeathCine() {
@@ -39704,6 +40002,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (cineCapEl) cineCapEl.classList.remove('on');
       if (cine) {
         if (cine.rec.kind === 'grave' && cine.rec.tex) drawPlaque(cine.rec, 1);
+        if (cine.rec.mound) cine.rec.mound.scale.y = MOUND.ry;   // CL-205: a self-filled grave ends full
+        if (cine.tagMeshes) for (const tg of cine.tagMeshes) scene.remove(tg);
+        if (cine.tagGeo) cine.tagGeo.dispose();
         if (cine.bag) cine.bag.visible = false;
       }
       if (cineCrew) for (const m of cineCrew) { m.root.visible = false; m.shovel.visible = false; }
@@ -42072,6 +42373,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       winMsgEl.appendChild(why); winMsgEl.appendChild(row);
       if (trueEnding) { const relay = document.createElement('span'); relay.className = 'true-ending-relay'; relay.textContent = dwText('story.ending.secretRelay'); winMsgEl.append(relay); }
+      if (victory) {   // CL-206: the nine tags, on both endings
+        const home = document.createElement('span'); home.className = 'tags-home';
+        home.textContent = sayText('story.tags.home', { count: hollowTags.read().tags.length, total: TAG_TOTAL }, '');
+        if (home.textContent) winMsgEl.append(home);
+      }
       if (victory && !trueEnding) {
         const aboard = aboardSurvivors(typeof getSurvivors === 'function' ? getSurvivors() : []);
         const count = aboard.length;
@@ -42303,7 +42609,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       wheelHubNameEl.textContent = it ? it.name : '—';
       wheelHubMetaEl.textContent = !it ? (wheelKind === 'weapon' ? sayText('armory.hubHint', {}, 'Middle: unarmed') : '')
         : it.empty ? it.meta
-        : (it.locked ? (wheelKind === 'weapon' ? 'Not bought · kiosk ' + it.meta : 'No blueprint · kiosk ' + it.meta) : (it.slot ? it.slot + ' · ' : '') + it.meta);
+        : (it.locked ? (wheelKind === 'weapon' ? 'Not bought · ' + dwText('map.kiosk') + ' ' + it.meta : 'No blueprint · ' + dwText('map.kiosk') + ' ' + it.meta) : (it.slot ? it.slot + ' · ' : '') + it.meta);
     }
 
     function openWheel(kind) {
@@ -42562,6 +42868,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(rangeFeature?.ruled()){rangeFeature.abort('cancel');e.preventDefault();return;}
         e.preventDefault();
         if (wheelIsOpen()) { closeWheel(false); return; }
+        // A confirm steps back. Esc does not end the run or erase the profile.
+        if (pauseResetView.classList.contains('on')) { showPauseView('settings'); return; }
+        if (pauseQuitView.classList.contains('on')) { showPauseView('main'); return; }
         // Settings first: from the pause menu Esc steps back to it rather than unpausing
         // the whole game, and from the title screen it just closes the panel.
         if (settingsFrom) {
@@ -42813,7 +43122,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function flashNoAmmo() {
       if (noAmmoFlashT > 0) return;
       noAmmoFlashT = 2.2;
-      showBanner('OUT OF AMMO', 'Restock at the kiosk (Ammo tab)', 1.8, '#ffb347');
+      showBanner(dwText('weapon.message.outOfAmmo'), dwText('weapon.message.restock'), 1.8, '#ffb347');
     }
 
     function startReload() {
@@ -43836,7 +44145,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       uzi:      { twist: 0.2, hold: [-0.3, -0.16, 0.34], grip: [0, -0.088, -0.017], trig: [0, -0.056, 0.05], fore: [0, -0.03, 0.18] },
       m4:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.106, -0.076], trig: [0, -0.078, -0.011], fore: [0, 0.0, 0.36], sh: { butt: [0, -0.003, -0.569], eye: [0, 0.134, -0.20] } },
       ak:       { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.126, -0.095], trig: [0, -0.062, -0.019], fore: [0, -0.02, 0.37], sh: { butt: [0, -0.078, -0.597], eye: [0, 0.09, -0.30] } },
-      aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.015, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was
+      aa12:     { twist: 0.8, hold: [-0.24, -0.13, 0.203], grip: [0, -0.145, -0.166], trig: [0, -0.104, -0.086], fore: [0, -0.035, 0.36], sh: { butt: [0, -0.005, -0.572], eye: [0, 0.16, -0.30] } },   // GB-173: the grip moved 70 mm back on the model; hold -0.057 (x0.82) keeps the gun where it was; GB-188: fore 20 mm lower, the fist round the underside of GB-180's box handguard
       shotgun:  { twist: 0.8, hold: [-0.24, -0.12, 0.24], grip: [0, -0.088, -0.056], trig: [0, -0.058, 0.023], fore: 'pump', pumpDy: -0.015, sh: { butt: [0, -0.02, -0.496], eye: [0, 0.08, -0.28] } },
       sniper:   { twist: 0.8, hold: [-0.24, -0.12, 0.28], grip: [0, -0.088, -0.117], trig: [0, -0.064, -0.052], fore: [0, -0.005, 0.35], sh: { butt: [0, -0.018, -0.622], eye: [0, 0.15, -0.40] } },
       launcher: { twist: 0.8, hold: [-0.24, -0.14, 0.26], grip: [0, -0.088, -0.046], trig: [0, -0.074, 0.014], fore: [0, -0.075, 0.42], sh: { butt: [0, 0.008, -0.504], eye: [0, 0.19, -0.18] } },
@@ -44176,6 +44485,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       head.updateMatrixWorld(true);
       _sh.headMoved = true;
     }
+    const _shAimDbg = { f: new THREE.Vector3(), t: new THREE.Vector3() };
+    const _agv = { m: new THREE.Vector3(), s: new THREE.Vector3(), f: new THREE.Vector3() };   // GB-188: aimGun's muzzle pass
     function holdShoulderGun(ud, gun, H, k) {
       const S = SHOULDER_HOLD, sh = H.sh, torso = ud.torsoG, armR = ud.armRG;
       const ads = shoulderAds(), a = ads * ads * (3 - 2 * ads);
@@ -44193,10 +44504,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const butt = _sh.m.set(sh.butt[0], sh.butt[1], sh.butt[2]);
       const mz = gun.userData.muzzleLocal || _hv.fore.set(0, 0, 1);
       // Barrel on the aim: the muzzle sits off the line from the butt, so point the gun
-      // from where its muzzle is at the reticle, twice over (it settles in two).
+      // from where its muzzle is at the reticle, over again until it settles (GB-188: five; two left a low-slung
+      // muzzle like the launcher's 3 deg off a near aim).
       const target = weaponAimPoint();
       const f = _hv.c.subVectors(target, P);
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 6; i++) {
         if (f.lengthSq() < 1) f.set(Math.sin(aimYaw), 0, Math.cos(aimYaw)); // reticle on top of him: level
         f.normalize();
         const x = _hv.d.crossVectors(diveGunUp(f,_diveGunUp), f);
@@ -44205,11 +44517,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const y = _hv.e.crossVectors(f, x);
         _hm.a.makeBasis(x, y, f);
         _hq.gun.setFromRotationMatrix(_hm.a);
-        if (i === 2) break;
+        if (i === 5) break;
         const muzzle = _hv.g.copy(mz).sub(butt).multiplyScalar(s).applyQuaternion(_hq.gun).add(P);
         f.subVectors(target, muzzle);
       }
       const fx = f.x, fy = f.y, fz = f.z;
+      _shAimDbg.f.set(fx, fy, fz).normalize(); _shAimDbg.t.copy(target);   // GB-188: what it aimed at (getShoulderDbg)
       // Reload tilt and recoil kick in the gun's frame, about the butt.
       _hE.set(reloadMountOff.rx + recoilKick.rx, reloadMountOff.ry + recoilKick.ry, reloadMountOff.rz + recoilKick.rz);
       _hq.gun.multiply(_hq.a.setFromEuler(_hE));
@@ -44474,12 +44787,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (H.level || f.lengthSq() < 0.04) f.set(Math.sin(aimYaw), H.level ? -0.08 : 0, Math.cos(aimYaw));
           f.normalize();
           if (carry > 0.001) f.lerp(akimboCarryDir(torso), carry).normalize();   // CL-188: muzzle up
-          const x = _hv.d.crossVectors(diveGunUp(f,_diveGunUp), f);
-          if (x.lengthSq() < 1e-6) x.set(1, 0, 0);
-          x.normalize();
-          const y = _hv.e.crossVectors(f, x);
-          _hm.a.makeBasis(x, y, f);
-          _hq.gun.setFromRotationMatrix(_hm.a);
+          // GB-188: the barrel on the aim from its muzzle, not from the grip (a muzzle well above or below the grip, the
+          // launcher's or the shotgun's, was 2-3 deg off a near aim): re-aimed from where the muzzle lands, three times.
+          const mzL = !H.level && !(carry > 0.001) && f.lengthSq() > 0 ? gun.userData.muzzleLocal : null;
+          if (mzL) gun.getWorldScale(_agv.s);
+          for (let it = 0; it < (mzL ? 4 : 1); it++) {
+            const x = _hv.d.crossVectors(diveGunUp(f,_diveGunUp), f);
+            if (x.lengthSq() < 1e-6) x.set(1, 0, 0);
+            x.normalize();
+            const y = _hv.e.crossVectors(f, x);
+            _hm.a.makeBasis(x, y, f);
+            _hq.gun.setFromRotationMatrix(_hm.a);
+            if (!mzL || it === 3) break;
+            const m = _agv.m.set(mzL.x - H.grip[0], mzL.y - H.grip[1], mzL.z - H.grip[2]).multiply(_agv.s).applyQuaternion(_hq.gun).add(anchor);
+            const nf = _agv.f.subVectors(target, m);
+            if (nf.lengthSq() < 0.04) break;
+            f.copy(nf).normalize();
+          }
           // Reload tilt and recoil kick, in the gun's own frame (the old mount's offsets).
           _hE.set(reloadMountOff.rx - 0.5 * dipR + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
           _hq.gun.multiply(_hq.a.setFromEuler(_hE));
@@ -44499,6 +44823,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           }
         }
         clearDiveAnchor(anchor,armR);aimGun();
+        if (dipR > 0.001) akimboWellFix(anchor, gun, currentWeapon, _hq.gun, dipR);   // GB-188: the turn it now has
         tuckDiveGrip(anchor,gun,H,_hq.gun);
         // Solve the right arm onto the grip before placing the gun, so the gun's parent
         // chain is where it will be drawn.
@@ -44548,6 +44873,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const leftKick = lastFiredGun === offGun ? 1 : 0.08;
           _hE.set(reloadMountOff.rx - 0.5 * dipL + recoilKick.rx * leftKick, reloadMountOff.ry + recoilKick.ry * leftKick, -reloadMountOff.rz + recoilKick.rz * leftKick);
           _hq.gun.setFromRotationMatrix(_hm.a).multiply(_hq.a.setFromEuler(_hE));
+          if (dipL > 0.001) akimboWellFix(anchorL, offGun, currentWeapon, _hq.gun, dipL);   // GB-188
           tuckDiveGrip(anchorL,offGun,H,_hq.gun);
           handRollL = holdDiveHand(armL, ud.elbowLG, _HAND_L, anchorL, gripDownDir(_rl.w).negate().applyQuaternion(_hq.gun), 1, diveDualPole(_akPoleL,true), k, 1);   // CL-188: the elbow in   // CL-122: the second gun's grip; CU-100
           armL.updateMatrixWorld(true);
@@ -45219,6 +45545,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       boardPending = { hot };
     }
     window.addEventListener('dw-game', ({ detail }) => { if (detail?.type === 'player-damaged') boardHoldT = 0; });
+    // CL-207 (story.md §9, the end card's "Walk to the dock"): the true ending doesn't end the run on the spot any more.
+    // The dead are down (GB-119), Ridgeline says Heron's coming, and Heron lands at the dock now, by day; he walks there
+    // and boards like any extraction (hold E), and endGame(true) shows the true ending (quest.done). If he can't get to
+    // the dock (no dock on this map, or no boat), the run ends as before.
+    function beginTrueEndingWalk() {
+      if (!gameStarted || gameOver || won) return;
+      const b = POI.dock ? boatRig() : null;
+      if (!b) { endGame(true); return; }
+      extractionState = 'due'; extractionDay = day;
+      b.arrive();
+      publishUI('extraction', { phase: 'due', day, trueEnding: true });
+      showBanner(dwText('quest.done').toUpperCase(), dwText('story.ending.secretRelay'), 9, '#bdf3ff');
+    }
     // One disc geometry for every fire, built once. This used to be a fresh
     // CircleGeometry — a whole new vertex buffer — per burning patch, and the
     // flamethrower lays them down continuously.
@@ -50317,7 +50656,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       nightRimStats.lit = lit;
     }
-    const nightRimDbg = { of: (z) => nightRimOf(z, localPlayer.position.x, localPlayer.position.z), update: () => { nightRimT = 0; updateNightRims(0); }, k: () => nightReadK, stats: () => nightRimStats, NIGHT_RIM, NIGHT_RIM_KINDS };   // CL-83 (t177)
+    const nightRimDbg = { of: (z) => nightRimOf(z, localPlayer.position.x, localPlayer.position.z), update: () => { nightRimT = 0; updateNightRims(0); }, hex: (eye) => nightRimHex(eye), k: () => nightReadK, stats: () => nightRimStats, NIGHT_RIM, NIGHT_RIM_KINDS };   // CL-83 (t177)
     const stirDbg = { state: () => stirState(), model: () => stir, grab: () => stirGrab, press: () => stirKickPress(), safe: () => stirSafeSpot(),
       drain: () => { hush.battery = 0; }, HOLD_S: STIR_HOLD_S };
     // GB-92 (P-97, D-55/D-67; secret-quest.md 5-6): the secret's fight. On a silenced day the rune door at the back
@@ -52109,7 +52448,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             if (ud.torso) ud.torso.rotation.y += (part === 'armL' ? 1 : -1) * 0.3 * k;
           } else if (part === 'legL' || part === 'legR') {
             const leg = part === 'legL' ? ud.legLG : ud.legRG, lost = part === 'legL' ? parts.legL : parts.legR;
-            if (leg && !lost) { leg.rotation.x -= 0.35 * k; if (leg.userData.shinG) leg.userData.shinG.rotation.x += 1.4 * k; }
+            if (leg && !lost) { leg.rotation.x -= 0.35 * k; if (leg.userData.shinG) leg.userData.shinG.rotation.x += 1.45 * k; }
             if (ud.hips) { ud.hips.position.y -= 0.22 * k; ud.hips.rotation.z += (part === 'legL' ? 1 : -1) * 0.16 * k; }
             if (ud.torso) ud.torso.rotation.x += 0.2 * k;
           } else if (ud.torso) { ud.torso.rotation.y += -side * 0.7 * k; ud.torso.rotation.x -= 0.12 * k; ud.torso.rotation.z += side * 0.15 * k; }
@@ -52422,6 +52761,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pauseTipsView.classList.toggle('on', view === 'tips');
       pauseSettingsView.classList.toggle('on', view === 'settings');
       pauseSkillsView.classList.toggle('on', view === 'skills');
+      pauseQuitView.classList.toggle('on', view === 'quit');
+      pauseResetView.classList.toggle('on', view === 'reset');
       pauseCard.classList.toggle('tips-open', view === 'tips');
       pauseCard.classList.toggle('skills-open', view === 'skills');
       if (view === 'skills') skillsPanel.refresh();
@@ -52478,6 +52819,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       resetGame();
     }
 
+    // CU-150: a run in progress. Closing or reloading the tab asks the browser's own
+    // leave-page prompt and writes the run down first, so it is recorded if he stays
+    // and if he leaves. A profile reset sets suppressLeavePrompt so the wipe is not
+    // written straight back.
+    let suppressLeavePrompt = false;
+    function runInProgress() { return gameStarted && !gameOver && !won && !(training && training.active); }
+    function eraseProfile() {
+      suppressLeavePrompt = true;
+      try {
+        const keys = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && k.indexOf('tt_') === 0) keys.push(k);
+        }
+        for (const k of keys) localStorage.removeItem(k);
+      } catch (_) {}
+      if (window.__DW_TEST_HOLD_RELOAD) return;
+      location.reload();
+    }
+    window.addEventListener('beforeunload', (e) => {
+      if (suppressLeavePrompt || !runInProgress()) return;
+      recordFinishedRun(false);
+      e.preventDefault();
+      e.returnValue = '';
+    });
+
     resumeBtn.addEventListener('click', () => setPaused(false));
     tipsBtn.addEventListener('click', () => showPauseView('tips'));
     tipsBackBtn.addEventListener('click', () => showPauseView('main'));
@@ -52517,7 +52884,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       }, 120);
     });
-    quitMenuBtn.addEventListener('click', quitToMenu);
+    quitMenuBtn.addEventListener('click', () => {
+      if (!runInProgress()) { quitToMenu(); return; }
+      pauseEl.classList.add('show');
+      showPauseView('quit');
+    });
+    document.getElementById('quitConfirmBtn').addEventListener('click', quitToMenu);
+    document.getElementById('quitCancelBtn').addEventListener('click', () => showPauseView('main'));
+    document.getElementById('resetProfileBtn').addEventListener('click', () => showPauseView('reset'));
+    document.getElementById('resetCancelBtn').addEventListener('click', () => showPauseView('settings'));
+    document.getElementById('resetConfirmBtn').addEventListener('click', eraseProfile);
 
     // Graphics presets apply live. Resolution, shadow resolution and draw distance cost
     // nothing to change; MSAA and bloom rebuild the post chain; switching the sun's
@@ -53561,7 +53937,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       AudioSys.unlock();
       AudioSys.resetBlip();
     }
-    modeHuntBtn.addEventListener('click', () => {
+    function beginHunt() {
       if (menuCamera.deploying || !validatedPlayerName()) return;
       Fullscreen.applyPreference();
       AudioSys.unlock();
@@ -53584,7 +53960,24 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         for (const k of Object.keys(keys)) keys[k] = false;
         mouseFireHeld = fireHeld = zoomHeld = false;
       }, destination, focus, {duration:9, update:(t,dt)=>insertion.update(t,dt), camera:(...args)=>insertion.camera(...args)});
+    }
+    function closeFirstRunCard() {
+      firstRunCard.hidden = true;
+      modeSelectEl.classList.remove('first-run-open');
+    }
+    modeHuntBtn.addEventListener('click', () => {
+      if (menuCamera.deploying || !validatedPlayerName()) return;
+      // Automated probes use debug mode and press Play directly; the invitation belongs to a normal profile launch.
+      if (!urlParams.has('debug') && !urlParams.has('inspect') && firstRunChoice.offer(runRecords.read().runs)) {
+        firstRunCard.hidden = false;
+        modeSelectEl.classList.add('first-run-open');
+        firstRunTrainingBtn.focus();
+        return;
+      }
+      beginHunt();
     });
+    firstRunTrainingBtn.addEventListener('click', () => { closeFirstRunCard(); startTraining(); });
+    firstRunPlayBtn.addEventListener('click', () => { closeFirstRunCard(); beginHunt(); });
 
     showVersion(document.getElementById('gameVersion'));   // CU-57: package.json's version, on the title (a miss leaves it blank)
     // CL-115: the title menu's Training Ground button.
@@ -53595,6 +53988,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function resetGame() {
       leaveTraining();   // CL-115
+      runTagIds = [];   // CL-205
+      refreshTagWall();   // CL-206
       resetHollows();   // CU-86
       debugTouched = false;
       simTime = 0;   // GB-131
@@ -55063,7 +55458,7 @@ live++;
       getSawHeat: () => ({ heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), setSawHeatDbg: (v) => { sawHeat = v; sawOverheat = false; }, setMouseFireDbg: (v) => { mouseFireHeld = !!v; }, MELEE_SIZE_MUL, meleeSizeMul, WEAPON_STATS,   // GB-52
       getHitStumble: () => ({ ...hitStumble, speedK: hitStumbleSpeedK(), react: hitReaction.strength * Math.pow(hitReaction.time / hitReaction.duration, 2) }), HIT_KNEE_S, HIT_AIM_S,   // GB-50
           otsDbg: () => ({ on: OTS.on, w: OTS.w, yaw: OTS.yaw, pitch: OTS.pitch, locked: document.pointerLockElement === renderer.domElement, fov: aimFov, tilt: aimTiltDeg }), otsLook: (dx, dy) => otsMouse({ movementX: dx, movementY: dy }),   /* CL-174 */
-          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
+          rotateBuildDbg: () => rotateBuild(), toggleStairs, nearestFoldStairs, emplacementRate, platforms, updateFoldingStairs, weaponMeshes, offhandMeshes, knifeMesh: () => knife, nightLockdown, lockdownState: () => ({ on: nightLockdown(), placeMode, buildMode, wheel: wheelKind, briefing: hqBriefingOpen, shop: shopOpen, cif: cifOpen }),   /* CU-82 */ setAmmoDbg: (k, n) => { if (isMagazineWeapon(k)) { if (!magazineStore[k]) issueWeaponMagazines(k, 0, 0); setLoadedMagazineRounds(magazineStore, k, n, dualActive && !!DUAL_CAPABLE[k] && !!dualOwned[k]); syncMagazine(k); } else ammoByWeapon[k] = n; }, getPlaceHint: () => placeHint, findRepairCandidate, findScrapCandidate, onMyStorey, refusalText, fireRoundDbg: (ox, oy, oz, dx, dy, dz, damage, speed, pierce) => { spawnProjectile(false, new THREE.Vector3(ox, oy, oz), new THREE.Vector3(dx, dy, dz), damage, 2, null, speed, 'bullet', pierce | 0); return projectiles[projectiles.length - 1]; }, stepProjectilesDbg: (dt) => { updateProjectiles(dt); flushShotHits(); }, /* GB-58 follow-up: one round, stepped by hand */ session, startDeathCine, skipDeathCine, endDeathCine, getCine: () => cine, plotSpot, nearestGrave, getCrew: () => cineCrew, tagWallDbg: { refresh: () => refreshTagWall(), wall: () => house.tagWall, tags: () => hollowTags.read().tags.slice(), TAG_TOTAL },   /* CL-206 */ burialDbg: { setRunTags: (ids) => { runTagIds = ids.slice(); }, runTags: () => runTagIds.slice(), whos: () => burialWhos(), MOUND },   /* CL-205 */ poseCrew, DIG_LEAN, drawPlaque, moundHeight, placeShovel, GRAVE_PLOTS, endGame, playerNameEl, hq, house, getSkullBag: () => skullBag, getSkullLedger: () => skullLedger, awardCash, skullSafeSpot, getSkullLife: () => ({ life: SKULL_LIFE, zipR: SKULL_ZIP_R, zipMax: SKULL_ZIP_MAX }), getSkullRecall: () => skullRecallUntil, updateHQ, HQ_WINDOW_FRONT, HQ_PANEL_FRONT, cashDrops, killZombie, KIOSK, SKULL_LOOK, makeSkullMesh, getGestureT: () => gestureT, mortarArcBlocked, mortarSolve, mountMortar, updateMortarArc, fireMortar, mortarCrewSpot, getMortarNoRoom: () => mortarNoRoom, onStairsRamp, dismountMortar, fireShellDbg, flushShotHits, setMotionEnabledDbg: () => {}, getCorpses: () => corpses, marineDown, bomberBlast, updateCorpsesDbg: (dt) => updateCorpses(dt), freezeCorpse, getMortarAim: () => mortarAimState, setAimTargetDbg: (x, z) => { aimTarget.x = x; aimTarget.z = z; aimTarget.y = sampleHeight(x, z); }, setZoomHeldDbg: (v) => { zoomHeld = !!v; }, getAimCamDbg: () => ({ ads: aimCamAds, pose: aimCamPose, elev: AIM_CAM_ELEV, shoulder: AIM_SHOULDER }) /* CU-114 */, getShoulderDbg: () => ({ aimF: _shAimDbg.f.clone(), aimT: _shAimDbg.t.clone(), kick: { ...recoilKick }, tilt: { ...reloadMountOff }, w: shoulderHoldW, ads: shoulderAdsW, rawAds: shoulderAds(), cheek: shoulderCheekAng, hold: SHOULDER_HOLD, holds: WEAPON_HOLD }), /* GB-129 */ getWeaponSizeDbg: () => ({ upm: MARINE_UPM, sizes: WEAPON_SIZE, blades: BLADE_SIZE, carry: CARRY_FIT, factors: Object.fromEntries(Object.keys(weaponMeshes).map((k) => [k, weaponSizeFactor(k)])) }), /* GB-130 */ resolveSoftBarricades, resolveHardBuildCollisions, PLAYER_RADIUS_DBG: PLAYER_RADIUS, upgradeBoxPieces, commitUpgradeDbg: (gx, gz) => { commitUpgradeDrag({ gx, gz }); }, beginUpgradeDragDbg: (gx, gz) => { upgradeDrag = { gx, gz }; }, landmarks, nearestAttackableBuild, buildsNear, getGameMode: () => gameMode, devBench, buildsNearDbg: (x, z, r) => buildsNear(x, z, r, []), upgradePlan, applyUpgrade, tryUpgrade, getRepairTarget, getRepairSnapshot, repairNearestBuild, getObjectiveProps, getObjectiveInteraction, buyUpgradeBlueprint, getUpgradeOwned: () => upgradeOwned, tierOf, buildBetween, UPGRADE_TRACKS, setShopTabDbg: (t) => { shopTab = t; renderShop(); }, pushOutOfBuild, upgradeTarget, getUpgradeHint: () => upgradeHint,
           knifeAttack, BLADE_STATS, bladeStats, landmarkInSquare, levelGroundRect, startReload, isReloading: () => reloading, toggleNvgDbg: () => toggleNvg(), setGearDbg: (k) => { gearOwned[k] = true; }, laserSteadies, STREAK_HEAL_CAP_FRAC, streakHealHp: () => streakHealHp(), fogCullDbg: () => ({ on: fogCullOn, far: _fcFar, margin: FOG_CULL_MARGIN, back: FOG_CULL_BACK, hidden: zombies.filter((z) => z.alive && z.fogHidden).length }), setFogCullDbg: (on) => { fogCullOn = !!on; if (!fogCullOn) for (const z of zombies) if (z.fogHidden) { z.fogHidden = false; if (z.mesh) z.mesh.visible = true; } }, fogCullDepthDbg: (z) => { fogCullPrep(); return fogCullDepth(z); }, LASER_SPREAD_MUL, setLasersDbg: (on) => { lasersEnabled = !!on; updateLasers(); }, laserAimDbg: () => laserAimReport, toggleLasers, aimDirWithSpreadDbg: (s) => aimDirWithSpread(s), getAimDirDbg: () => getAimDir().clone(), resetSprayDbg: () => { sprayHeat = 0; sprayShot = 0; }, onBoards, setAimYawDbg: (y) => { aimYaw = y; }, getKnifeCd: () => knifeCd, setKnifeCd: (v) => { knifeCd = v; },
           openWheel, closeWheelDbg: () => { wheelKind = null; wheelEl.classList.remove("show"); }, wheelTurnPage, getWheelState: () => ({ kind: wheelKind, page: wheelPage, keys: wheelItems.map((it) => it.key) }), BUILD_PAGES, BUILD_ORDER,
           applyGraphicsPreset, GFX_PRESETS, getGfx: () => gfxKey, skipPrep,
@@ -55099,7 +55494,7 @@ live++;
           setWeapon, getCurrentWeapon: () => currentWeapon,
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
@@ -55142,10 +55537,35 @@ live++;
           launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), marineShadowDbg: () => ({ proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0 }), skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, hollowState: () => hollow.state(), belowDbg,   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof,   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
-            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
+            lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */ }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
         window.TT.inspectHost = inspectHost;   // CL-196: the inspector can attach to any debug game (the suite's check does)
+        // GB-185: since GP-19885 a headshot needs the round's own ray (confirmedHead), never a height. Tests score a hit
+        // through the game's hit test: roundInfoDbg(z, y, dir) fires a level ray at height y through z and returns the
+        // damageZombie info a real round would carry (hitY plus headHit and the soldier/brute zones). y 'head' aims at its head.
+        window.TT.zombieRoundHit = zombieRoundHit;
+        window.TT.matchStatsDbg = () => ({ ...matchStats });   // GB-190: the run's tallies (headshots, kills) for a real-round check
+        window.TT.roundInfoDbg = (z, y, dir = null) => {   // dir: the round's way; by default from him to it, as he shoots
+          dir = dir || { x: z.mesh.position.x - player.position.x, z: z.mesh.position.z - player.position.z };
+          const l = Math.hypot(dir.x, dir.z) || 1, dx = dir.x / l, dz = dir.z / l;
+          z.mesh.updateMatrixWorld(true);
+          const c = { x: z.mesh.position.x, y, z: z.mesh.position.z };
+          const head = y === 'head';
+          let hh = 0, hw = 0;
+          if (y === 'head') {   // through the centre of its head's meshes, where a player aims
+            const root = z.mesh.userData.bossRig?.userData?.rig?.head || z.mesh.userData.head, lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity], v = new THREE.Vector3();
+            if (root) root.traverse((m) => { const pa = m.isMesh && m.visible !== false && m.geometry?.attributes?.position; if (!pa) return; for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld); for (let k = 0; k < 3; k++) { const q = [v.x, v.y, v.z][k]; if (q < lo[k]) lo[k] = q; if (q > hi[k]) hi[k] = q; } } });
+            if (lo[1] < Infinity) { c.x = (lo[0] + hi[0]) / 2; c.y = (lo[1] + hi[1]) / 2; c.z = (lo[2] + hi[2]) / 2; hh = (hi[1] - lo[1]) / 2; hw = Math.max(hi[0] - lo[0], hi[2] - lo[2]) / 2; } else c.y = z.mesh.position.y + (z.hitH || 1.4) * 0.85;
+          }
+          const shoot = (yy, ss = 0) => { const ox = -dz * ss, oz = dx * ss; return zombieRoundHit(z, new THREE.Vector3(c.x + ox - dx * 3, yy, c.z + oz - dz * 3), new THREE.Vector3(c.x + ox + dx * 3, yy, c.z + oz + dz * 3)); };
+          const good = (t) => !!t?.headHit && (z.typeKey !== 'military' || t.militaryHit?.zone === 'face') && (z.typeKey !== 'brute' || t.bruteHit?.part === 'head');
+          let h = shoot(c.y);
+          y = c.y;
+          // A head is not a box: aiming at it, try a little above and below its middle before calling it a miss.
+          if (head && !good(h)) search: for (const sk of [0, 0.3, -0.3]) for (const k of [0, 0.25, -0.25, 0.4, -0.4, 0.6, -0.6]) { const yy = c.y + k * hh, t = shoot(yy, sk * hw); if (good(t)) { h = t; y = yy; break search; } }
+          return { dir: { x: dx, z: dz }, hitY: y, headHit: !!h?.headHit, militaryZone: h?.militaryHit?.zone, militaryPart: h?.militaryHit?.part, bruteZone: h?.bruteHit?.zone, brutePart: h?.bruteHit?.part };
+        };
       }
       if (showPerf) {
         perfAccum += dt;

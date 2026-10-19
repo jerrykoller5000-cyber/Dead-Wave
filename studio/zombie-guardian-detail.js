@@ -172,13 +172,13 @@ export function sculptGuardian(A,T,g,kind){
   }
   R.eyes=[];
   for(const side of [-1,1]){
-    const x=side*(cave?.148:.18),z=cave?.42:.448,y=cave?.067:.115;
+    const x=side*(cave?.148:.18),z=cave?.42:.448,y=cave?.067:.160;
     egg(R.head,shadow,x,y,z-.012,.146,.113,.045);
     const e=egg(R.head,eye,x,y,z+.022,cave?.081:.075,.063,.038);
     e.castShadow=false;R.eyes.push(e);
     if(!cave){
-      egg(R.head,shadow,side*.080,.177,.439,.076,.069,.035);
-      const small=egg(R.head,eye,side*.080,.177,.460,.046,.040,.027);
+      egg(R.head,shadow,side*.080,.222,.439,.076,.069,.035);
+      const small=egg(R.head,eye,side*.080,.222,.460,.046,.040,.027);
       small.castShadow=false;R.eyes.push(small);
     }
   }

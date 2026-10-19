@@ -1,0 +1,342 @@
+{
+  "at": "2026-10-18T13:53:56.313Z",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "results": [
+    {
+      "id": "build.wire",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 148,
+      "tris": 1176,
+      "size": [
+        2.04,
+        1.197,
+        0.16
+      ],
+      "error": null
+    },
+    {
+      "id": "build.wire",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 124,
+      "tris": 2808,
+      "size": [
+        2.04,
+        1.197,
+        0.939
+      ],
+      "error": null
+    },
+    {
+      "id": "build.wire",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 119,
+      "tris": 1600,
+      "size": [
+        2.08,
+        1.393,
+        0.478
+      ],
+      "error": null
+    },
+    {
+      "id": "build.railing",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 107,
+      "tris": 288,
+      "size": [
+        2.055,
+        0.75,
+        0.155
+      ],
+      "error": null
+    },
+    {
+      "id": "build.railing",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 106,
+      "tris": 540,
+      "size": [
+        2.055,
+        0.75,
+        0.155
+      ],
+      "error": null
+    },
+    {
+      "id": "build.railing",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 105,
+      "tris": 360,
+      "size": [
+        2,
+        0.82,
+        0.337
+      ],
+      "error": null
+    },
+    {
+      "id": "build.platform",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 114,
+      "tris": 716,
+      "size": [
+        3.52,
+        0.57,
+        3.52
+      ],
+      "error": null
+    },
+    {
+      "id": "build.platform",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 111,
+      "tris": 1052,
+      "size": [
+        3.52,
+        0.723,
+        3.52
+      ],
+      "error": null
+    },
+    {
+      "id": "build.platform",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 120,
+      "tris": 2700,
+      "size": [
+        3.52,
+        0.758,
+        3.52
+      ],
+      "error": null
+    },
+    {
+      "id": "build.pillar",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 107,
+      "tris": 492,
+      "size": [
+        0.82,
+        2.5,
+        0.82
+      ],
+      "error": null
+    },
+    {
+      "id": "build.pillar",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 107,
+      "tris": 732,
+      "size": [
+        0.82,
+        2.5,
+        0.82
+      ],
+      "error": null
+    },
+    {
+      "id": "build.pillar",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 104,
+      "tris": 984,
+      "size": [
+        0.82,
+        2.5,
+        0.82
+      ],
+      "error": null
+    },
+    {
+      "id": "build.stairs",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 104,
+      "tris": 864,
+      "size": [
+        2.005,
+        2.15,
+        2.141
+      ],
+      "error": null
+    },
+    {
+      "id": "build.stairs",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 106,
+      "tris": 804,
+      "size": [
+        2.01,
+        2.211,
+        2.17
+      ],
+      "error": null
+    },
+    {
+      "id": "build.stairs",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 103,
+      "tris": 956,
+      "size": [
+        2.145,
+        2.211,
+        2.17
+      ],
+      "error": null
+    },
+    {
+      "id": "build.spikes",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 111,
+      "tris": 766,
+      "size": [
+        1.94,
+        0.13,
+        1.94
+      ],
+      "error": null
+    },
+    {
+      "id": "build.spikes",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 113,
+      "tris": 998,
+      "size": [
+        1.94,
+        0.175,
+        1.94
+      ],
+      "error": null
+    },
+    {
+      "id": "build.spikes",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 116,
+      "tris": 1510,
+      "size": [
+        1.94,
+        0.19,
+        1.94
+      ],
+      "error": null
+    },
+    {
+      "id": "build.mine",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 107,
+      "tris": 532,
+      "size": [
+        0.82,
+        0.2,
+        0.82
+      ],
+      "error": null
+    },
+    {
+      "id": "build.mine",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 112,
+      "tris": 772,
+      "size": [
+        0.87,
+        0.2,
+        0.87
+      ],
+      "error": null
+    },
+    {
+      "id": "build.mine",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 112,
+      "tris": 1056,
+      "size": [
+        0.82,
+        0.498,
+        0.82
+      ],
+      "error": null
+    },
+    {
+      "id": "build.lure",
+      "variant": "0",
+      "mode": null,
+      "ok": true,
+      "ms": 110,
+      "tris": 736,
+      "size": [
+        0.739,
+        1.792,
+        0.775
+      ],
+      "error": null
+    },
+    {
+      "id": "build.lure",
+      "variant": "1",
+      "mode": null,
+      "ok": true,
+      "ms": 111,
+      "tris": 1008,
+      "size": [
+        0.739,
+        1.792,
+        0.775
+      ],
+      "error": null
+    },
+    {
+      "id": "build.lure",
+      "variant": "2",
+      "mode": null,
+      "ok": true,
+      "ms": 108,
+      "tris": 1472,
+      "size": [
+        0.739,
+        2.037,
+        0.755
+      ],
+      "error": null
+    }
+  ]
+}

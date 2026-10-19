@@ -11,20 +11,24 @@
     T.setDay(14);
     if (!ms().playing) A.startMusic();
     ok(ms().playing === true, 'music is running');
-    ok(ms().specials && ms().specials.fog === 'fight_fognight', 'the fog night has a song of its own: ' + JSON.stringify(ms().specials));
-    await until(() => ms().sectioned.includes('fight_fognight'), 8000);
-    ok(ms().sectioned.includes('fight_fognight'), 'it is cut into sections (music.json)');
+    // CL-209: the fog song is whatever music.json names (CL-165 switches the set). The ElevenLabs set gives Fog Night
+    // night 14's own song, so it is loaded for night 14 with or without the fog.
+    const fogSong = ms().specials && ms().specials.fog;
+    const own14 = (() => { let t = null; for (const w of ms().waveByDay || []) if (w.from <= 14) t = w.track; return t; })();
+    ok(!!fogSong, 'the fog night has a song: ' + JSON.stringify(ms().specials));
+    await until(() => ms().sectioned.includes(fogSong), 8000);
+    ok(ms().sectioned.includes(fogSong), 'it is cut into sections (music.json)');
     T.fogNightDbg.force(false);
     await wait(300);
-    ok(ms().special === null && ms().sectionsReady.fight_fognight === false, 'no fog: no special, and the fog song isn\'t loaded: ' + ms().special + '/' + ms().sectionsReady.fight_fognight);
+    ok(ms().special === null && (fogSong === own14 || ms().sectionsReady[fogSong] === false), 'no fog: no special, and the fog song isn\'t loaded (unless it is night 14\'s own): ' + ms().special + '/' + ms().sectionsReady[fogSong]);
     T.fogNightDbg.force(true);
-    await until(() => ms().sectionsReady.fight_fognight === true, 20000);
-    ok(ms().special === 'fog' && ms().sectionsReady.fight_fognight === true, 'fog in the prep: the song is loaded before the alarm: ' + ms().special + '/' + ms().sectionsReady.fight_fognight);
+    await until(() => ms().sectionsReady[fogSong] === true, 20000);
+    ok(ms().special === 'fog' && ms().sectionsReady[fogSong] === true, 'fog in the prep: the song is loaded before the alarm: ' + ms().special + '/' + ms().sectionsReady[fogSong]);
     window.dispatchEvent(new CustomEvent('dw-game', { detail: { type: 'alarm-started', day: 14 } }));
     await wait(300);
     T.beginWave();
     await until(() => ms().stage === 'fight', 14000);
-    ok(ms().stage === 'fight' && ms().deckTrack === 'fight_fognight', 'the fight plays the fog song: ' + ms().stage + '/' + ms().deckTrack);
+    ok(ms().stage === 'fight' && ms().deckTrack === fogSong, 'the fight plays the fog song: ' + ms().stage + '/' + ms().deckTrack);
     await until(() => !!ms().section, 8000);
     const L = ms().sectionLoop;
     ok(!!ms().section && !!L && L.loop && L.end > L.start, 'on the section player, a section looping: ' + ms().section + ' ' + JSON.stringify(L));

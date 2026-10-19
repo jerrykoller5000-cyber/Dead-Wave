@@ -78,6 +78,7 @@ export function countInfo(root, camera = null) {
     if (!(o.isMesh || o.isSkinnedMesh || o.isSprite || o.isPoints || o.isLine) || !o.geometry) return;   // anything drawn
     for (let n = o; n; n = n.parent) { if (n.visible === false) return; if (n === root) break; }
     if (camera?.layers && o.layers && !o.layers.test(camera.layers)) return;
+    if (o.layers && o.layers.mask === 0) return;   // CL-210: a baked rig's sources draw through its skins
     meshes++;
     const g = o.geometry, idx = g.index, pos = g.attributes && g.attributes.position;
     const count = idx ? idx.count : pos ? pos.count : 0;

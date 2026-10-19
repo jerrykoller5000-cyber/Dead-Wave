@@ -6,6 +6,7 @@
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (f, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (f()) return true; await wait(30); } return !!f(); };
+  const simWait = async (s) => { const t0 = T.getSimTime(); while (T.getSimTime() - t0 < s) await wait(30); };
   const f2 = (v) => (+v).toFixed(2);
   try {
     await startMatch(T, 'Watchman');
@@ -62,29 +63,30 @@
     ok(D().feedT > 0 && /Reloading/.test(D().hud), 'R on the gun starts a belt change (' + f2(D().feedT) + ' s)');
     T.fireMortar();
     ok(gun.belt === beltNow, 'no fire while the belt is changed');
-    await until(() => D().feedT === 0, 8000);
+    await until(() => D().feedT === 0, 20000);
     const want = Math.min(1000 - beltNow, res1);
     ok(gun.belt === beltNow + want && (R['7.62 belt'] | 0) === res1 - want, 'the belt is fed from the reserve: ' + gun.belt + ' on, ' + (R['7.62 belt'] | 0) + ' left');
     // (6) Empty with nothing in reserve: the empty click; with rounds in reserve it feeds itself.
     gun.belt = 0; R['7.62 belt'] = 0;
-    await wait(400);
+    await simWait(0.5);   // GB-190: the trigger cooldown runs on game time (the suite page runs slow)
     T.fireMortar();
     ok(gun.belt === 0 && D().feedT === 0, 'empty, nothing in reserve: no feed');
     R['7.62 belt'] = 40;
-    await wait(400);
+    await simWait(0.5);
     T.fireMortar();
     ok(D().feedT > 0, 'empty with 40 in reserve: the trigger starts a belt change');
-    await until(() => D().feedT === 0, 8000);
+    await until(() => D().feedT === 0, 20000);
     ok(gun.belt === 40 && (R['7.62 belt'] | 0) === 0, 'it takes what there is: ' + gun.belt);
     // (7) Off the gun: a belt change stops, and the HUD is his own gun again.
     gun.belt = 10; R['7.62 belt'] = 100;
     T.startReload();
     ok(D().feedT > 0, 'a belt change started');
     T.shoulderMortar();
-    await wait(200);
+    await simWait(0.3);
     const carried = T.getMortarCarried();
     ok(!!carried && carried.kind === 'm240' && carried.belt === 10 && (R['7.62 belt'] | 0) === 100, 'shouldered mid-change: nothing fed, the belt goes with it (' + (carried && carried.belt) + ')');
-    ok(D().belt === null && D().hudName !== 'Watchman MG', 'off the gun the HUD is his own gun: ' + D().hudName);
+    // GB-190: since the carried-MG HUD (updateAmmoHud's carriedMg branch) the shouldered gun shows its own belt.
+    ok(D().belt === null && D().hudName === 'Watchman MG', 'off the tripod, shouldered, the HUD shows the MG he carries: ' + D().hudName);
     // (8) Brandt's roof gun (t156 has the rest of him): its rounds leave its muzzle, and it flashes there.
     T.clearZombies && T.clearZombies(); T.runDevCommand('godmode');
     const RD = T.roofDbg, L = T.hqLadderAt();

@@ -1,0 +1,2 @@
+node tools/tests/run-all.mjs t215 --no-retry --all-fails --jobs 1 *> handoffs/2026-10-18-grokbot-GB-181/t215.txt
+node handoffs/2026-10-09-grokbot-GB-146/sniper-real.mjs t221 handoffs/2026-10-18-grokbot-GB-181/t221-real.txt *> handoffs/2026-10-18-grokbot-GB-181/real-log.txt

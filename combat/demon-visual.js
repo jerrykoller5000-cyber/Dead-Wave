@@ -15,7 +15,7 @@ export function sculptDemon(A, T, g, s, materials) {
     return A.put(parent, geo, material);
   }
   // Continuous rounded sections: no stacked spheres or exposed cylinder ends.
-  function body(parent, material, rings, sides = 16) {
+  function body(parent, material, rings, sides = 8) {
     const pos = [], idx = [];
     for (const [y, rx, rz, cz = 0] of rings) for (let i = 0; i < sides; i++) {
       const a = i / sides * Math.PI * 2;
@@ -35,7 +35,8 @@ export function sculptDemon(A, T, g, s, materials) {
     return geometry(parent, material, pos, idx);
   }
   // A single swept surface makes each horn/finger/claw; no rod-to-rod seams.
-  function sweep(parent, material, points, radius, segments = 14, sides = 8) {
+  function sweep(parent, material, points, radius, segments = 5, sides = 4) {
+    segments = Math.min(segments, radius > .07 ? 8 : 6); sides = Math.min(sides, 5);
     const curve = new T.CatmullRomCurve3(points.map(p => new T.Vector3(...p)));
     const pos = [], idx = [], normal = new T.Vector3(), binormal = new T.Vector3();
     for (let j = 0; j <= segments; j++) {
@@ -59,7 +60,7 @@ export function sculptDemon(A, T, g, s, materials) {
   }
   // Curved closed armor panels fitted to the anatomy, with a recessed collar.
   function plate(parent, material, rows, thickness = .018) {
-    const pos = [], idx = [], n = 12, count = rows.length * (n + 1);
+    const pos = [], idx = [], n = 6, count = rows.length * (n + 1);
     for (const back of [false, true]) for (const [y, width, z, wrap = .04] of rows) for (let i = 0; i <= n; i++) {
       const x = i / n * 2 - 1;
       pos.push(x * width, y, z - wrap * x * x - (back ? thickness : 0));

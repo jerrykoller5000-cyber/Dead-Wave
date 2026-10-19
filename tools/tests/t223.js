@@ -107,7 +107,7 @@
     await simWait(1.1);
     const b1 = bolt();
     ok(b1.every((v, i) => v - b0[i] === 1), 'a sniper round, then the bolt: up, back, forward, down, once each (' + b1.map((v, i) => v - b0[i]).join(' ') + ')');
-    T.setAmmoDbg('sniper', 1); await simWait(0.3);
+    T.setAmmoDbg('sniper', 1); await simWait(1.3);   // GB-188: the set (2 -> 1) reads as a shot to the bolt cycle (it watches the count); let that cycle finish first
     const b2 = bolt();
     T.setMouseFireDbg(true); await simWait(0.06); T.setMouseFireDbg(false);
     await simWait(1.1);

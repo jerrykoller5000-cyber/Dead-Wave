@@ -71,7 +71,7 @@ export function applySpitterMotion(z,dt){
  for(const [i,leg]of [u.legLG,u.legRG].entries()){
   const shin=leg?.userData.shinG,ankle=leg?.userData.shamblerAnkle;if(!shin||!ankle)continue;
   const cycle=((ph/(Math.PI*2)+i*.5)%1+1)%1,stance=cycle<SPITTER_MOTION.stance;
-  const t=stance?cycle/SPITTER_MOTION.stance:(cycle-SPITTER_MOTION.stance)/(1-SPITTER_MOTION.stance),reach=SPITTER_MOTION.stride*SPITTER_MOTION.stance*.5;
+  const t=stance?cycle/SPITTER_MOTION.stance:(cycle-SPITTER_MOTION.stance)/(1-SPITTER_MOTION.stance),reach=SPITTER_MOTION.stride*SPITTER_MOTION.stance*.41;
   const footZ=(stance?reach*(1-2*t):reach*(2*smooth(t)-1))*scale*w, lift=stance?0:Math.sin(t*Math.PI)*SPITTER_MOTION.lift*scale*w;
   const ry=leg.userData.shamblerFootY+lift-u.hips.position.y-leg.position.y-Math.sin(u.hips.rotation.z)*leg.position.x;
   const pose=shamblerLeg(ry,footZ-.04*scale,.38*scale,.36*scale);

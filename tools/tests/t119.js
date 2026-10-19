@@ -16,6 +16,7 @@
     const fresh = (kind, dx) => {
       const z = T.spawnZombie(P.x + dx, P.z + 30, kind, true, true);
       z.riseT = 0; z.speed = z.baseSpeed = 0; z.hp = z.maxHp = 1e7;
+      if (kind === 'screamer') z.sonicOpenT = 1e6;   // GB-190: shielded she takes 3% (GP-19872); the table is her open share
       return z;
     };
     // One hit of 10 of a type: how much came off (the head-gone x1.15 accounted for if a hit took the head).
@@ -43,7 +44,8 @@
     const mil = fresh('military', 0);
     T.applyCaveRole(mil, 'iron');
     const milB = hit(mil, 'bullet');
-    ok(mil.roleArmorAdd > 0 && Math.abs(milB - 0.63) <= 0.0063, 'an iron-cave military takes 0.63 of a bullet (' + milB.toFixed(3) + ')');
+    const milWant = W.military.bullet * 0.9;   // GB-190: the iron role's 0.9 on the table's share (0.7 then, 0.8 now)
+    ok(mil.roleArmorAdd > 0 && Math.abs(milB - milWant) <= milWant * 0.01, 'an iron-cave military takes ' + milWant.toFixed(2) + ' of a bullet (' + milB.toFixed(3) + ')');
     T.clearZombies();
     const dem = fresh('demon', 0);
     T.applyCaveRole(dem, 'wet');

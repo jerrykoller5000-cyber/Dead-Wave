@@ -1,5 +1,6 @@
 import { text, hasText, STRINGS } from './strings.js';
 import { COUNTER } from '../game/weaknesses.js';
+import { nightTitle } from './night-names.js';
 
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
 
@@ -7,6 +8,7 @@ const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.
 // so the HQ board cannot announce a special night with stale generic tactics.
 export function scoutingSpecialNight(night) {
   if (night?.mod === 'fog') return { warning: text('scouting.warning.fog'), line: text('scouting.trick.fogNight') };
+  if (night?.mod === 'swarm') return { warning: text('scouting.warning.swarm'), line: text('scouting.trick.surroundFast') };
   if (night?.trick === 'siege') return { warning: text('scouting.warning.siege'), line: text('scouting.trick.siege') };
   return null;
 }
@@ -45,12 +47,13 @@ export function buildScoutingReport(data = {}) {
     kind, name: text(`enemy.${kind}.name`), line: text(`counter.${kind}`)
   }));
   return {
-    title: text('scouting.title', { day }),
+    title: text('scouting.title', { night: nightTitle(day) }),
     caves: text('scouting.caves', { names: names.length ? names.join(' · ') : text('scouting.noCaves') }),
     pushes: text('scouting.pushes', { count: night.pushes.length }),
     trick: special?.line || text(hasText(trickKey) ? trickKey : 'scouting.unconfirmed'),
     counters,
-    rest: night.rest === true ? text('scouting.rest') : null,
+    // Swarm uses the director's rest flag for composition, but 720 fast attackers are not a lighter fight.
+    rest: night.rest === true && night.mod !== 'swarm' ? text('scouting.rest') : null,
     legend: text('scouting.mapLegend')
   };
 }

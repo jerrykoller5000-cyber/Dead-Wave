@@ -94,8 +94,10 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
     capW.side = T.DoubleSide; boonie.add(brim);
   }
   for (const sx of [-1, 1]) for (const z of [-.05, .05]) {
-    const [w] = ringAt(boonieRings, 1.55);
-    at(boonie, cyl(.009, .009, .006, patchInk, 8), sx * (w + .001), 1.552, z, 0, 0, Math.PI / 2);
+    // On the crown where it is at z, not where it is at z = 0 (AG-81: they stood 4-6 mm off the narrowed crown).
+    const [w, f, b] = ringAt(boonieRings, 1.552), c = z >= 0 ? Math.pow(Math.min(1, z / f), 1 / .55) : -Math.pow(Math.min(1, -z / b), 1 / .8);
+    const x = w * Math.sqrt(Math.max(0, 1 - c * c));
+    at(boonie, cyl(.009, .009, .006, patchInk, 8), sx * (x + .0008), 1.552, z, 0, 0, Math.PI / 2);
   }
   for (const sx of [-1, 1]) at(boonie, rmesh(.006, .12, .006, strapMat, .002), sx * .144, 1.43, .03, 0, 0, sx * -.12);   // chin cord
 
@@ -107,10 +109,21 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
     at(grp, cyl(.012, .013, .008, capBandW, 8), 0, 1.6, 0);
     for (let j = 0; j < 6; j++) {
       const a = j / 6 * Math.PI * 2;
-      const pts = ballRings.slice(1).map(([y, w, f, b]) => { const [x, z] = planPoint(w + .0009, f + .0009, b + .0009, a); return new T.Vector3(x, y, z); });
-      grp.add(addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts), 12, .0012, 3, false), capBandW)));
+      // Along the dome as the loft draws it (straight between its rows), not a spline through the rows, which bowed out
+      // of the dome between 1.52 and 1.575 (AG-81).
+      const rows = ballRings.slice(1).map(([y, w, f, b]) => { const [x, z] = planPoint(w + .0009, f + .0009, b + .0009, a); return new T.Vector3(x, y, z); });
+      const pts = [];
+      for (let r = 0; r < rows.length - 1; r++) for (let k = 0; k < 4; k++) pts.push(rows[r].clone().lerp(rows[r + 1], k / 4));
+      pts.push(rows[rows.length - 1]);
+      grp.add(addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts, false, 'centripetal'), 24, .0012, 3, false), capBandW)));
     }
-    at(grp, rmesh(.07, .03, .012, strapMat, .004), 0, 1.525, -(ballRings[1][3] + .004));   // strap at the back
+    {   // the strap at the back, a band round the dome's own curve (a straight box stood proud at its corners: AG-81)
+      const [w, f, b] = ringAt(ballRings, 1.525), arc = [];
+      for (let k = 0; k <= 8; k++) { const [x, z] = planPoint(w + .002, f + .002, b + .002, Math.PI + (k / 8 - .5) * .7); arc.push(new T.Vector3(x, 1.525, z)); }
+      const strap = addCast(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(arc), 16, .0045, 4, false), strapMat));
+      strap.scale.set(1, 3, 1); strap.position.y = 1.525 * (1 - 3);   // a flat band about 2.7 cm tall, round the curve
+      grp.add(strap);
+    }
   };
   ballcap(dress.hats.ballcap = part(hatG));
   const back = dress.hats.ballcapBack = part(hatG);

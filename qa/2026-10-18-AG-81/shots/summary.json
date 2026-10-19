@@ -1,0 +1,252 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "results": [
+    {
+      "file": "issue-crouch.png",
+      "kit": "issue",
+      "move": "crouch",
+      "tris": 87314,
+      "meshes": 190,
+      "size": {
+        "x": 0.9192971938097614,
+        "y": 1.652415194625945,
+        "z": 1.666356203026453
+      }
+    },
+    {
+      "file": "issue-run.png",
+      "kit": "issue",
+      "move": "run",
+      "tris": 87314,
+      "meshes": 190,
+      "size": {
+        "x": 0.9356065213715219,
+        "y": 1.6777508503504066,
+        "z": 1.6705803333056792
+      }
+    },
+    {
+      "file": "issue-reload.png",
+      "kit": "issue",
+      "move": "reload",
+      "tris": 87314,
+      "meshes": 190,
+      "size": {
+        "x": 0.9156138431612142,
+        "y": 1.705947831858083,
+        "z": 1.6548906313814769
+      }
+    },
+    {
+      "file": "issue-aim.png",
+      "kit": "issue",
+      "move": "aim",
+      "tris": 87314,
+      "meshes": 190,
+      "size": {
+        "x": 0.9238926839410873,
+        "y": 1.7909793996115582,
+        "z": 1.659389020484923
+      }
+    },
+    {
+      "file": "issue-grenade.png",
+      "kit": "issue",
+      "move": "grenade",
+      "tris": 89774,
+      "meshes": 197,
+      "size": {
+        "x": 0.9242046269967048,
+        "y": 1.797097620667131,
+        "z": 1.6531406774670359
+      }
+    },
+    {
+      "file": "issue-dive.png",
+      "kit": "issue",
+      "move": "dive",
+      "tris": 87314,
+      "meshes": 190,
+      "size": {
+        "x": 1.085173385456926,
+        "y": 1.2072178003587055,
+        "z": 2.220321193040604
+      }
+    },
+    {
+      "file": "hot-crouch.png",
+      "kit": "hot",
+      "move": "crouch",
+      "tris": 93218,
+      "meshes": 196,
+      "size": {
+        "x": 0.9251995690605845,
+        "y": 1.6525649890262173,
+        "z": 1.6776161620236962
+      }
+    },
+    {
+      "file": "hot-run.png",
+      "kit": "hot",
+      "move": "run",
+      "tris": 93218,
+      "meshes": 196,
+      "size": {
+        "x": 0.9515544162608194,
+        "y": 1.6778706933828005,
+        "z": 1.6776584739942564
+      }
+    },
+    {
+      "file": "hot-reload.png",
+      "kit": "hot",
+      "move": "reload",
+      "tris": 93218,
+      "meshes": 196,
+      "size": {
+        "x": 0.9280559400636683,
+        "y": 1.7050468200750686,
+        "z": 1.6737963370145508
+      }
+    },
+    {
+      "file": "hot-aim.png",
+      "kit": "hot",
+      "move": "aim",
+      "tris": 93218,
+      "meshes": 196,
+      "size": {
+        "x": 0.925323630746469,
+        "y": 1.7907893983643532,
+        "z": 1.6571247396382205
+      }
+    },
+    {
+      "file": "hot-grenade.png",
+      "kit": "hot",
+      "move": "grenade",
+      "tris": 95678,
+      "meshes": 203,
+      "size": {
+        "x": 0.9252082487620008,
+        "y": 1.7969138230668307,
+        "z": 1.65165513307943
+      }
+    },
+    {
+      "file": "hot-dive.png",
+      "kit": "hot",
+      "move": "dive",
+      "tris": 93218,
+      "meshes": 196,
+      "size": {
+        "x": 1.072097742426962,
+        "y": 1.2076303636378611,
+        "z": 2.2204620500245937
+      }
+    },
+    {
+      "file": "full-crouch.png",
+      "kit": "full",
+      "move": "crouch",
+      "tris": 95318,
+      "meshes": 221,
+      "size": {
+        "x": 0.9244110951442295,
+        "y": 1.6516615798957162,
+        "z": 2.7937065983992397
+      }
+    },
+    {
+      "file": "full-run.png",
+      "kit": "full",
+      "move": "run",
+      "tris": 95318,
+      "meshes": 221,
+      "size": {
+        "x": 0.9524032892628647,
+        "y": 1.6772950673172318,
+        "z": 2.7927837797882376
+      }
+    },
+    {
+      "file": "full-reload.png",
+      "kit": "full",
+      "move": "reload",
+      "tris": 95318,
+      "meshes": 221,
+      "size": {
+        "x": 0.9268993285744536,
+        "y": 1.7046969235176732,
+        "z": 2.7964995090438833
+      }
+    },
+    {
+      "file": "full-aim.png",
+      "kit": "full",
+      "move": "aim",
+      "tris": 95318,
+      "meshes": 221,
+      "size": {
+        "x": 0.9240488670207583,
+        "y": 1.7895576373483095,
+        "z": 2.824772196745471
+      }
+    },
+    {
+      "file": "full-grenade.png",
+      "kit": "full",
+      "move": "grenade",
+      "tris": 97778,
+      "meshes": 228,
+      "size": {
+        "x": 0.923854427009676,
+        "y": 1.7957629807681883,
+        "z": 2.830315373535541
+      }
+    },
+    {
+      "file": "full-dive.png",
+      "kit": "full",
+      "move": "dive",
+      "tris": 95318,
+      "meshes": 221,
+      "size": {
+        "x": 1.0867406552300594,
+        "y": 1.2297526884314038,
+        "z": 3.4056038695907773
+      }
+    },
+    {
+      "file": "hat-cover.png",
+      "hat": "cover",
+      "tris": 87314,
+      "meshes": 190
+    },
+    {
+      "file": "hat-boonie.png",
+      "hat": "boonie",
+      "tris": 86830,
+      "meshes": 191
+    },
+    {
+      "file": "hat-ballcap.png",
+      "hat": "ballcap",
+      "tris": 87186,
+      "meshes": 191
+    },
+    {
+      "file": "hat-ballcap-back-front.png",
+      "hat": "ballcapBack",
+      "tris": 87186,
+      "meshes": 191
+    },
+    {
+      "file": "hat-ballcap-back-rear.png",
+      "hat": "ballcapBack",
+      "tris": 87186,
+      "meshes": 191
+    }
+  ],
+  "errors": []
+}

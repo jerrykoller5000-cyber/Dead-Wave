@@ -2,12 +2,12 @@
 
 state: active
 model: Grok 4.7
-task: CU-151 End-of-day commit of the checked-out work
-touching: git
-since: 2026-10-18T14:31Z
-next: CU-151 End-of-day commit (standing). At the end of each working day
+task: CU-156 bench --prof: mean ms of the top PROF sections, time outside them, GPU ms, and why the megaswarm counted 65
+touching: tools/bench.mjs
+since: 2026-10-19T19:49Z
+next: waits on GB-185
 blocked-on: —
-last-report: handoffs/2026-10-18-cursor-CU-150.md
+last-report: handoffs/2026-10-18-cursor-CU-155.md
 
 ## Notes
 

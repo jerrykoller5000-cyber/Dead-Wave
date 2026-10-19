@@ -31,13 +31,14 @@
     ok(!far.threatB && T.defenceTargetOf(far, 0) == null, 'a zombie 16 m off is not drawn');
     // It walks to the turret, not the marine.
     tgt.speed = tgt.baseSpeed = 3.2;
+    await (async () => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 0.8 && Date.now() - w0 < 12000) await wait(30); })();   // GB-187: it turns and gets up to speed first (its heading turns at a capped rate), then its walk is measured
     const a0 = { x: tgt.mesh.position.x, z: tgt.mesh.position.z };
-    await wait(900);
+    const trace = []; await (async () => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 0.9 && Date.now() - w0 < 13500) { await wait(30); trace.push([T.getSimTime() - t0, tgt.mesh.position.x - a0.x, tgt.mesh.position.z - a0.z, tgt.threatB === lt ? 1 : 0, +(tgt.threatT || 0), +(tgt.knockT || 0), tgt.windowClimb ? 1 : 0, +(tgt.speed || 0)].map((v) => +v.toFixed(2)).join(',')); } })();   // GB-187: 0.9 s of game time (the page runs slow, dt is capped)
     const mvx = tgt.mesh.position.x - a0.x, mvz = tgt.mesh.position.z - a0.z, ml = Math.hypot(mvx, mvz) || 1;
     const toT = [(lt.x - a0.x), (lt.z - a0.z)], tl = Math.hypot(toT[0], toT[1]) || 1;
     const toP = [(P.x - a0.x), (P.z - a0.z)], pl = Math.hypot(toP[0], toP[1]) || 1;
     const dT = (mvx * toT[0] + mvz * toT[1]) / ml / tl, dP = (mvx * toP[0] + mvz * toP[1]) / ml / pl;
-    ok(ml > 0.5 && dT > 0.9 && dT > dP + 0.2, 'the drawn zombie heads for the turret (moved ' + ml.toFixed(2) + ' m, cos to turret ' + dT.toFixed(2) + ', to marine ' + dP.toFixed(2) + ')');
+    ok(ml > 0.5 && dT > 0.9 && dT > dP + 0.2, 'the drawn zombie heads for the turret (moved ' + ml.toFixed(2) + ' m, cos to turret ' + dT.toFixed(2) + ', to marine ' + dP.toFixed(2) + ')' + (dT > 0.9 ? '' : ' trace t,dx,dz,drawn,threatT,knockT,win,speed: ' + trace.filter((_, i) => i % 3 === 0).join(' | ') + ' toT ' + toT.map((v) => v.toFixed(2)) + ' toP ' + toP.map((v) => v.toFixed(2))));
     // A defence-minded zombie hits the turret 1.5x harder.
     const hp0 = lt.hp; let drop = 0, dmgAt = 0;
     const hit = await until(() => { if (tgt._pendingAttack) dmgAt = tgt._pendingAttack.dmg; if (lt.hp < hp0) { drop = hp0 - lt.hp; return true; } return false; }, 5000);

@@ -55,9 +55,11 @@ the crew panel, so what you log is how he knows what you're doing.
    - your queue is empty, or `crew.mjs next` says your next task waits on someone else's
      (a task that says "after XX-n" can't start until XX-n is ticked);
    - you're blocked; or
-   - you need a decision only Jerry can make. Then run
-     `node crew/crew.mjs ask <you> "<the question>"`, which puts it at the top of his panel,
-     and work on something else meanwhile.
+   - you need a decision only Jerry can make. **While D-81 stands (Jerry, 2026-10-19: "Cut me out of the loop for
+     approval for the time being"), that goes to Claude instead:** `node crew/crew.mjs request <you> claude "<the
+     question>" "<the choices and what you'd pick>"`, and work on something else meanwhile; Claude answers it. Only
+     his files, money and accounts, publishing outside the repo and his own orders still go to him, with
+     `node crew/crew.mjs ask <you> "<the question>"`, which puts it at the top of his panel.
 
 **A new task** (Jerry asks you directly for something that isn't on the board): get its id with
 `node crew/crew.mjs newid <you> "<what>"` and use that one; checking in with it puts it on the board. Never make an id up: two jobs with one id

@@ -5,6 +5,7 @@ import { renderPrepRows } from './prep-checklist.js';
 import { buildScoutingReport, scoutingSpecialNight } from './scouting.js';
 import { buildBountyBoard } from './bounties.js';
 import { buildRadioCallView } from './radio-call.js';
+import { nightTitle } from './night-names.js';
 
 export const FIELD_INTEL_PRICE = 120;
 const CAVE_KEYS = Object.keys(STRINGS).filter(key => key.startsWith('world.cave.'));
@@ -19,7 +20,7 @@ export function bearingLabel(angle) {
 
 // Pure projection of Grokbot's frozen plan. It neither reads TT nor consumes RNG.
 export function buildBriefing({ preview, day, intelOwned = false } = {}) {
-  const result = { title: validCount(day) && day > 0 ? text('wavePreview.title', { day }) : text('wavePreview.unavailable'),
+  const result = { title: validCount(day) && day > 0 ? text('wavePreview.title', { night: nightTitle(day) }) : text('wavePreview.unavailable'),
     available: false, warnings: [], sources: [], total: null, earnings: null, note: text('wavePreview.unavailable') };
   if (!preview || preview.day !== day || !validCount(preview.total) || !Array.isArray(preview.byTypeAndCave)) return result;
   if (preview.bloodMoon) result.warnings.push(text('hud.bloodMoon'));
@@ -115,6 +116,11 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     const reportPage=pages.report, fieldPage=pages.fieldwork, relayPage=pages.relay;
     const state=data.disabled?'locked':data.alarmActive?'active':data.phase!=='prep'?'inProgress':data.canSoundAlarm===false?'remote':'ready';
     status.textContent=text('alarm.'+state); status.dataset.state=state;
+    if(data.orders?.head && Array.isArray(data.orders.lines)) {
+      const orders=doc.createElement('section');orders.className='briefing-orders';reportPage.append(orders);
+      line(orders,'h3',data.orders.head);
+      for(const entry of data.orders.lines) if(typeof entry==='string' && entry) line(orders,'p',entry);
+    }
     if(data.relayStory?.line) {
       const relay=doc.createElement('section');relay.className='briefing-relay';relayPage.append(relay);
       line(relay,'h3',text('story.relay.title'));

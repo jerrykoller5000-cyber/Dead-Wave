@@ -50,8 +50,8 @@
       const hp0 = z.hp; z.hp = z.maxHp = 5000;
       const rnd = Math.random; Math.random = () => 0.99; let dHead = 0, dBody = 0;
       try {
-        let h0 = z.hp; T.damageZombie(z, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, hitY: z.mesh.position.y + skullY }); dHead = h0 - z.hp;
-        h0 = z.hp; T.damageZombie(z, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, hitY: z.mesh.position.y + z.hitH * 0.45 }); dBody = h0 - z.hp;
+        let h0 = z.hp; T.damageZombie(z, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, 'head') }); dHead = h0 - z.hp;
+        h0 = z.hp; T.damageZombie(z, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, z.mesh.position.y + z.hitH * 0.45) }); dBody = h0 - z.hp;
       } finally { Math.random = rnd; }
       ok(dHead > dBody * 1.5, 'a round at its eyes is a headshot (' + dHead.toFixed(1) + ' vs ' + dBody.toFixed(1) + ')');
       z.hp = hp0;

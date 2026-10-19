@@ -13,7 +13,7 @@
   const sum = (a) => a.reduce((n, v) => n + v, 0);
   const snap = (w) => T.magazinesDbg(w);
   const hudRounds = () => [...document.querySelectorAll('#ammoMags .mag-glyph')].map((g) => +g.dataset.rounds);
-  const reload = async () => { T.startReload(); const started = T.isReloading(); await until(() => !T.isReloading(), 9000); await wait(60); return started; };
+  const reload = async () => { T.startReload(); const started = T.isReloading(); await until(() => !T.isReloading(), 30000); await wait(60); return started; };
   try {
     await startMatch(T, 'Magazines');
     T.clearZombies(); T.runDevCommand('godmode');
@@ -61,7 +61,7 @@
     T.setMagazinesDbg('ak', 10, [30]);
     T.startReload(); await wait(80); T.startReload();
     ok(!!T.getReloadDbg && T.isReloading(), 'double tap: still reloading (the faster drop)');
-    await until(() => !T.isReloading(), 9000); await wait(60);
+    await until(() => !T.isReloading(), 30000); await wait(60);
     s = snap('ak');
     ok(s.loaded[0] === 30 && s.spare.length === 0, 'the 10-round magazine went to the ground, not the pouch: loaded ' + s.loaded[0] + ', spares [' + s.spare + ']');
 
@@ -78,7 +78,7 @@
     ok(s.loaded[0] === 6 && sorted(s.spare) === '6,4', 'revolver R: a full loader in, the 4 live rounds kept in a loader: ' + s.loaded[0] + ' | ' + sorted(s.spare));
     T.setMagazinesDbg('revolver', 2, [6]);
     T.startReload(); await wait(80); T.startReload();
-    await until(() => !T.isReloading(), 9000); await wait(60);
+    await until(() => !T.isReloading(), 30000); await wait(60);
     s = snap('revolver');
     ok(s.loaded[0] === 6 && s.spare.length === 0, 'revolver double tap: the cylinder dumped, nothing pocketed: ' + s.loaded[0] + ' | [' + s.spare + ']');
 

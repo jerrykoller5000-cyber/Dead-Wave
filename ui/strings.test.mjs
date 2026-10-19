@@ -74,7 +74,7 @@ test('catalogue, plural records and default controls cannot be changed by caller
 
 test('every catalogue entry formats completely, including both plural branches', () => {
   for (const [key, entry] of Object.entries(STRINGS)) {
-    assert.match(key, /^[a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9]+)+$/, key);
+    assert.match(key, /^[a-z][A-Za-z0-9-]*(?:\.[A-Za-z0-9-]+)+$/, key);
     const branches = typeof entry === 'string' ? [entry] : [entry.one, entry.other];
     if (typeof entry !== 'string') assert.deepEqual(Object.keys(entry).sort(), ['one', 'other'], key);
     for (let i = 0; i < branches.length; i++) {
@@ -90,7 +90,7 @@ test('every catalogue entry formats completely, including both plural branches',
 
 test('source cannot silently replace an earlier duplicate key', () => {
   const source = fs.readFileSync(new URL('./strings.js', import.meta.url), 'utf8');
-  const keys = [...source.matchAll(/^  "([a-z][A-Za-z0-9]*(?:\.[A-Za-z0-9]+)+)":/gm)].map(m => m[1]);
+  const keys = [...source.matchAll(/^  "([a-z][A-Za-z0-9-]*(?:\.[A-Za-z0-9-]+)+)":/gm)].map(m => m[1]);
   assert.equal(keys.length, new Set(keys).size);
   assert.equal(keys.length, Object.keys(STRINGS).length);
 });
@@ -128,8 +128,16 @@ test('Ridgeline has twenty ordered dispatches and the site and survivor notes', 
   }
   for (const id of ['relayBroken','convoy','utilityTruck','ranger','hikers','trapper','fuel','dock','watchtower','hq'])
     assert(hasText(`story.prop.${id}`), `prop ${id}`);
-  for (const id of ['reyes','voss','kettle']) for (const moment of ['found','morning','aboard'])
+  for (const id of ['okafor','brandt','pike']) for (const moment of ['found','roof','aboard'])
     assert(hasText(`story.survivor.${id}.${moment}`), `${id} ${moment}`);
+  for (const id of ['reyes','voss','kettle']) assert(!hasText(`story.survivor.${id}.found`), `legacy survivor ${id}`);
+  assert.match(text('story.relay.8'), /It's not the first one we've heard/);
+  assert.match(text('story.relay.12'), /one night in twenty/);
+  assert.match(text('story.relay.15'), /contrail at dawn/);
+  assert.match(text('story.relay.hushOrigin'), /spare board in the mast locker/);
+  assert.notEqual(text('story.prop.convoy'),text('story.prop.utilityTruck'));
+  assert.notEqual(text('story.prop.utilityTruck'),text('story.prop.fuel'));
+  assert.match(text('reward.guardianFirstBlood'), /driven back/);
 });
 
 test('Story v2 keeps narrative names and both sides of the skull-to-Cash loop', () => {

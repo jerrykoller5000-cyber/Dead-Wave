@@ -52,7 +52,7 @@ export function attachScreamerAppearance(T,N,g,s=1){
  const pulse=N.sin(clock.mul(Math.PI)).mul(.5).add(.5); // two-second breathing cycle
  mat.opacityNode=rim.mul(.10).add(wave.mul(.034)).add(hit.mul(.035)).min(.14)
   .mul(coverage).mul(strength).mul(pulse.mul(.45).add(.55));
- const hull=new T.SphereGeometry(1,32,20);hull.computeBoundingSphere();hull.boundingSphere.radius=1.3; // includes shader displacement
+ const hull=new T.SphereGeometry(1,12,8);hull.computeBoundingSphere();hull.boundingSphere.radius=1.3; // includes shader displacement
  const shield=new T.Mesh(hull,mat);shield.name='screamer-sonic-shield';shield.position.y=1.10*s;shield.scale.set(.72*s,1.13*s,.69*s);shield.castShadow=false;g.add(shield);
  const geo=new T.PlaneGeometry(1,1),fades=new Float32Array(VAPOR_PUFFS);geo.setAttribute('mistOpacity',new T.InstancedBufferAttribute(fades,1));
  const smokeMat=new T.MeshBasicNodeMaterial({color:0x000000,transparent:true,depthWrite:false,toneMapped:false});smokeMat.opacityNode=N.texture(vaporTexture(T),N.uv()).a.mul(N.attribute('mistOpacity','float'));

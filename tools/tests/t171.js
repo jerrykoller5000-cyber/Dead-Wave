@@ -46,7 +46,7 @@
     ok(has('heart', (e) => e.phase === 'enter') && has('quest', (e) => e.kind === 'heart' && e.entered && e.phase === 1 && e.guardianHp === 3400), "'heart' enter and the quest's heart { entered, phase 1, 3400 }");
     // It walks at him.
     const gd = () => Math.hypot(g.mesh.position.x - p.x, g.mesh.position.z - p.z);
-    const d0 = gd(); await wait(1500);
+    const d0 = gd(); await (async () => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 1.5 && Date.now() - w0 < 22500) await wait(30); })();   // GB-187: 1.5 s of game time (the page runs slow, dt is capped)
     ok(gd() < d0 - 2, 'it comes at him (' + d0.toFixed(1) + ' -> ' + gd().toFixed(1) + ' m)');
     // Its health takes his hits: two-thirds, the second phase.
     g.hp -= 1200; await wait(150);
@@ -85,7 +85,7 @@
     const over = await until(() => !T.hollowState().below, 5000);
     ok(over && has('heart', (e) => e.phase === 'dead') && has('quest', (e) => e.kind === 'ending'), "it dies: 'heart' dead, then he is up and the quest's ending goes out");
     ok(top.length === 3 && top.every((z) => !z.alive), 'the dead topside dropped where they stood');
-    ok(await until(() => T.boardingDbg().won, 3000), 'the run is won');
+    ok(await until(() => T.boardingDbg().won || T.boardingDbg().state === 'due', 15000), 'the run is won, or (CL-207) Heron is due at the dock for the true ending (won ' + T.boardingDbg().won + ', extraction ' + T.boardingDbg().state + ')');   // GB-187: CL-207 made the true ending a walk to the dock
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');
 })();

@@ -39,7 +39,8 @@
     D.tick(st.t + 0.01);
     st = D.state();
     const card = document.getElementById('stockNotice');
-    ok(st.visible && card && !!card.querySelector('li[data-gun="uzi"]') && card.querySelectorAll('li').length === D.arrivals(2).length, 'then a short card names the new guns (' + (card && card.textContent) + ')');
+    // CL-181 (Jerry: "a quick 'New unlocks in terminal'"): one line now; the guns ride along in data-guns.
+    ok(st.visible && card && /new unlocks/i.test(card.textContent) && (card.dataset.guns || '').split(',').includes('uzi') && card.dataset.guns.split(',').length === D.arrivals(2).length, 'then one line says new guns are in (' + (card && card.textContent) + ', ' + (card && card.dataset.guns) + ')');
     D.tick(5);
     ok(!D.state().visible, 'and goes away by itself');
     D.queue(3); D.tick(9);
@@ -58,7 +59,7 @@
     document.getElementById('armoryOpen').click();
     const panel = document.getElementById('armoryPanel');
     T.armoryDbg.ui().bench('m4'); await wait(50);
-    const sw = panel.querySelectorAll('.armory-finish .armory-swatch');
+    const sw = panel.querySelectorAll('.armory-finish:not(.armory-laser) .armory-swatch');
     ok(sw.length > 1 && [...sw].every((b) => !b.disabled), 'swatches on the M4\'s workbench, the ones to earn folded away (' + sw.length + ')');
     ok(!!panel.querySelector('.armory-swatch img[src^="data:image/png"]'), 'each painted from the real camo');
     panel.querySelector('.armory-swatch[data-finish="' + free.key + '"]').click(); await wait(50);
@@ -71,7 +72,7 @@
       const lockedBtn = panel.querySelector('.armory-swatch.locked');
       ok(!!lockedBtn && lockedBtn.disabled, 'they show, locked');
       ok(F.paint('m4', lockedBtn.dataset.finish) === false && T.getWardrobe().guns.m4 === free.key, 'a locked camo can\'t be put on');
-    } else ok(!more && panel.querySelectorAll('.armory-finish .armory-swatch').length === list.list.length, 'every camo earned: all on the bench, no button for more');
+    } else ok(!more && panel.querySelectorAll('.armory-finish:not(.armory-laser) .armory-swatch').length === list.list.length, 'every camo earned: all on the bench, no button for more');
     ok(F.paint('m4', 'not-a-camo') === false && T.getWardrobe().guns.m4 === free.key, 'an unknown finish can\'t be put on');
     panel.querySelector('.armory-swatch[data-finish=""]').click(); await wait(50);
     ok(!T.getWardrobe().guns.m4, 'factory takes the camo off');

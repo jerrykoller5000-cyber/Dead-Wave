@@ -21,13 +21,13 @@ CU-110). Claude's cloud is a separate computer; it keeps to one instance there t
 One line per thing others can't go on without: `- **<who>** · <task> · waiting: <agents>`. The panel's "Needs you" box
 reads it; a line whose task ids are all finished drops off by itself.
 
-(Nothing right now.)
-
+- **Claude** · CL-213 (bench --prof, CU-156 taken over) · waiting: antigravity (AG-86), claude (CL-211)
 
 ## Orders from Jerry
 
 Newest first, the ones still in force. Older ones: `crew/archive/board-2026-10-15.md` and the archives it names.
 
+- **2026-10-19 · Jerry is out of the approval loop (D-81).** "Cut me out of the loop for approval for the time being. Make decisions based on what seems best." Anything that would wait for his yes (a `crew.mjs ask`, "awaiting Jerry's approval", a Q-n) goes to Claude as a request instead; Claude decides, logs it and says why in the reply. Still his alone: deleting his files or work, money and accounts, publishing anything outside the repo (the 1.0.0 release itself), and undoing one of his own orders or decisions. Until he says otherwise.
 - **2026-10-15 · Claude runs the road to 1.0.** "I am going to let you assign tasks in a way that you think will be best for 1.0. I will stop my polishing. It is up to your discretion how we get there." Agents are prompted with "Check the board". The road: above; the plan: `docs/road-to-1.0.md`. The story v3 cards (CL-86) are folded into it: wave 1 now, the rest 1.x.
 - **2026-10-15 · Overhaul the crew board.** "Clean it up, overhaul it so it is easier for you guys to use. Easier for me
   to understand. Better functionality for both." Claude: CL-199 (this board, `crew.mjs me/requests/reply/wait/archive`,
@@ -61,7 +61,7 @@ Jerry, 2026-10-15: Claude assigns the work to 1.0; Jerry stops polishing. The pl
 budget. "Could look better" is 1.x: put it on the **1.x list** below with `crew.mjs request <you> claude "1.x: ..." --fyi`,
 don't build it. **Model polish is frozen** (guns, zombies, the marine, buildables) except bugs and budget cuts.
 
-1. **Steady the ground** (now): the suite, every red owned, everything committed; frame budgets.
+1. **Steady the ground** (now): the suite, every red owned, everything committed; frame budgets. **The gap is frame time:** every night runs 31-35 fps on Jerry's 5080 at High against 60 (AG-82, AG-85), and fewer draw calls did not move it; CL-211 finds where the time goes first.
 2. **Finish the run**: the story's words, then its scenes; Heron's condition said out loud; the silenced night.
 3. **The first hour**: the goal on day 1, a pointer to the Training Ground, clean Tips.
 4. **Night packs**: Jerry plays nights in 20-30 minute packs; his notes become tasks.
@@ -78,67 +78,39 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Claude
 
-- [x] **CL-202** **Health check, part 1** done: the full suite on the 09:25 copy (3608 pass, 187 fail in 71 files), every red sorted below (`handoffs/2026-10-15-claude-CL-202-triage.md`); everything committed and pushed (e9c4612).
-- [x] **CL-204** **The orders card at the drop.** `handoffs/2026-10-15-claude-CL-204-207.md`.
-- [x] **CL-205** **The survivors bury him.**
-- [x] **CL-206** **The wall of tags.**
-- [x] **CL-207** **The true ending's walk to the dock.**
-- [x] **CL-203** **Frame budgets** set: `docs/budgets.md`. 48 dead draw 1.68 M triangles against a 1.2 M budget; every zombie kind is over its 6 k; the marine and the survivors are over on draws. Frame time on Jerry's GPU still to come (AG-82).
-- [ ] **CL-210** **The marine and the survivors inside their budgets** (`docs/budgets.md`): the marine in the game 100 draws to ≤ 40 (merge the cloth and the gear by material); each survivor on the roof 92-127 draws and 40 k triangles to ≤ 20 draws and ≤ 15 k.
-- [>] **CL-209** **My reds** (CL-202's list): the music since the ElevenLabs switch (t60, t61, t73, t172, t106), the HUD trim's stale checks (t72, t181), the world (t39, t46, t50, t176, t177, t204), the marine (t183, t184, t195, t208, t209), the Training Ground (t182), t226 (timed out).
+- [>] **CL-213** **bench --prof (CU-156, taken over, Claude, 10-19 19:50Z).** Cursor has been idle on it since 18:18Z and can't be prompted while Jerry is away (D-81). The same spec as CU-156: `tools/bench.mjs --prof`, the top PROF sections, the time outside them, the GPU ms where WebGPU gives it. Cursor: if you come back first, tell me with a reply and take it back.
+- [ ] **CL-211** **Where the night's 30 ms go, after AG-86.** Every night's last push runs 31-35 fps on Jerry's 5080 at High (the budget is 60 mean, ≥ 50 low), and CL-210/AG-84 took 32-120 draws off without moving it (`docs/budgets.md`, 2026-10-19). From CU-156's profile on his GPU: which systems take the time, the budgets reset to match, and each owner's cut on this board. GB-189 and GP-19930 carry on meanwhile (triangles still count on the GPU side); nobody starts new budget work until this lands.
+- [ ] **CL-212** **The full suite again, after GB-191.** In the cloud (one instance), as CL-202: every red sorted to an owner, the list on this board; then Cursor commits.
 
 ### Cursor
 
-- [x] **CU-153** Fix verified defects from Antigravity model audits
-- [x] **CU-152** Review and improve Antigravity model upgrade batches
-- [x] **CU-147** **The smoking pose (Jerry, in chat)**: the cigarette the right way round, the glove off the face. Finish it, then the tasks below in order.
-- [x] **CU-148** **Bench numbers for budgets.** `tools/bench.mjs`: add draw calls and triangles (`renderer.info`, as scene-counts.mjs reads them) to every scenario, and a `--night N` scenario that jumps to night N's last push with the horde out (`devJumpToNight`, then start it). Prints one JSON line per scenario. Antigravity runs it on Jerry's GPU (AG-82).
-- [x] **CU-149** **The desktop build boots.** `tools/package.mjs`: add `combat/`; keep the `.wav`s the game loads (core/audio.js, ui/range-start-audio.js); copy `z-sounds/`; `npm run build` must run the boot check, not `--no-check`. desktop/src-tauri: a reload (F5) must not refill localStorage from the launch snapshot over newer values. One product name in what the player sees (Grave Shift); file names may stay Dead-Wave (D-79).
-- [ ] **CU-154** **Your reds** (CL-202's list): t225 (the grenade hold), t228 (the support hand in a reload), t241 (the gold glow at the parish cross), t246 (the M4 aim's shoulder pose), t255 (red on the 09:25 copy; CU-147 landed after: re-run it), t222 after GB-185. Through the slot, one at a time; rule 13.
-- [x] **CU-150** **Don't lose a run by accident.** A confirm before Quit to menu ends a run; on closing or reloading the tab mid-run, the browser's leave-page prompt, and the run recorded either way. A "Reset profile" button in Settings with a confirm (D-31).
-- [>] **CU-151** **End-of-day commit (standing).** At the end of each working day, after Claude's suite (or the day's targeted checks), commit and push everything checked out; a one-line summary in the log. Claude does it when you're not on.
-- [~] **CU-110** **The full suite, then commit and push.** Claude does it in CL-202 (in the cloud, so the slot on Jerry's PC stays free).
+- [~] **CU-156** **bench --prof: where each frame's time goes. First.** `tools/bench.mjs --prof`: over the measured seconds, TT.profDbg (PROF) on; each scenario's JSON line gets `prof`: the mean ms per frame of the top 12 PROF sections, their sum, the ms outside them, and the GPU ms per frame where WebGPU can give it (timestamp queries; `unavailable` if not). And why AG-85's megaswarm (count 48) counted 65 dead and 730 draws against AG-82's 48 and 342. Antigravity runs it (AG-86). **Parked: Claude took it as CL-213 (10-19 19:50Z) while you were idle.**
+- [~] **CU-154** **Your reds** (CL-202's list): t225 (the grenade hold), t228 (the support hand in a reload), t241 (the gold glow at the parish cross), t246 (the M4 aim's shoulder pose), t255 (red on the 09:25 copy; CU-147 landed after: re-run it), t222 after GB-185. Through the slot, one at a time; rule 13. **Only t222 waits on GB-185; the rest can go now, after CU-156.** **Split (Claude, 10-19): the weapon holds and aims (t222, t225, t228, t246) are Grokbot's GB-191; t241 and t255 go into CL-212's triage.**
+- Standing (CU-151): at the end of each working day, commit and push everything checked out, one line in the log. **Owed now:** everything checked out since the 14:32Z commit on 10-18 (GB-182 to GB-188, GP-19925 to GP-19928, CL-210, AG-84, CU-155, today's board): do it first when you check in.
 
 ### ChatGPT
 
-- [x] **GP-19924** **Zombie joints (Jerry, in chat).** Check it out with `--done`: the full suite it waited for is Claude's CL-202 (in the cloud); nothing more to run.
-- [x] **GP-19922** **All zombies smoothed.** The same: check out with `--done`.
-- [x] **GP-19923** **The demon's fire.** The same.
-- [!] **GP-19925** **Story v3 words, one pass** (story.md is the text; Claude's 2026-10-07 cards say where): Ridgeline lines 8, 12 and 15 as story.md §4, and the Hush-origin line; the orders: Claude added `story.orders.*` (CL-204); show them on the HQ briefing from `briefing-open`'s new `orders` (ui/wave-preview.js); the mural says DEADWALKERS (`hq.mural.title`): the unit is the Gravewalkers; the three road notes, each its own text and signature (`story.prop.convoy`, `utilityTruck`, `fuel`); the guardian "driven back", never "defeated" (`reward.guardianFirstBlood`, `scouting.trick.guardian`, the "GUARDIAN DOWN" banner); `world.cabin`/`map.cabin`/`build.obstacle.cabin` say FOB Threshold or HQ; the objective titles from v1 (`medicalConvoy`, `hikersCache`) reworded; the `story.survivor.reyes/voss/kettle` keys renamed `pike/brandt/okafor` with every reader. Fix the tests that hold the old words (ui/briefing.browser.mjs "Call the boat", ui/survivors.browser.mjs fixtures).
-- [ ] **GP-19926** **One name for the night.** "Night N" everywhere the player reads it: the night banner ("DAY N — HORDE INBOUND", "DAY N CLEARED"), Ember Night's banner, the briefing, the prep box, the wave strings; and the night's own name from tools/nights.py on the scouting card ("Night 6 · Chalk"), with Swarm Night warned like Fog and the siege. One table in JS that both read.
-- [ ] **GP-19927** **What a new player reads.** The pause Tips lose the "Testing" section (dev cheats); the kiosk's hard-coded English (index.html 24700s: 'Bigger gas tank', ' pair', ' suppressor', 'Repair armor', 'Nothing to upgrade yet') and the "Training Ground" button and win-screen defaults go to strings; "gear kiosk" vs "supply terminal" and "Supply locker" vs "vault": one name each; `objectives.holdRepair`'s stale "Hold E for 6 seconds". The upgrades tab's `let any = true` (it can never say "Nothing to upgrade yet").
-- [ ] **GP-19928** **The first run.** The first time Play is pressed on a profile with no runs, one card offers the Training Ground first ("New here? Ten minutes on the range"), Play anyway or Training; never again after. And read every `// <task id>` string block other agents added (see above) once, for voice.
-- [ ] **GP-19929** **With Grokbot on GB-185**: your zombie bodies since GP-19922 and GP-19924 (the smoothing, the joins in `skinZombieMesh`) against the round's hit test (`zombieSurface`, GP-19885); and t93's feet (a feral's foot 2 cm into the ground). Then `ui/quest.browser.mjs`: the true ending is a walk to Heron now (CL-207).
-- [ ] **GP-19930** **The dead inside their budget, after GP-19929** (`docs/budgets.md`): every common kind ≤ 6 k triangles and ≤ 4 draws (now 10.4-17.5 k), the bosses ≤ 14 k (now 16-20 k). Fewer sides on the smoothed profiles is the big one (16 to 8-10 reads the same at 10 m). Count with `DWInspect.show('zombie.<kind>').info` before and after; the joins and the hit test (GB-185) must still pass.
+- [x] **GP-19929** **With Grokbot on GB-185**: your zombie bodies since GP-19922 and GP-19924 (the smoothing, the joins in `skinZombieMesh`) against the round's hit test (`zombieSurface`, GP-19885); and t93's feet (a feral's foot 2 cm into the ground). Then `ui/quest.browser.mjs`: the true ending is a walk to Heron now (CL-207). **Claude, 10-19:** the hit test is cleared (the suite's fakethree, CU-155). t93: the screamer's glide is authored, so she gets her own band (≤ 0.30 m up, never under -0.05 m); the pellet dip keeps its 8 cm (bend the knee); the headshot line is Grokbot's (GB-185). Re-run your 23:42Z batch: the page did not load 20:22Z-23:43Z. **Claude, 10-19 01:50Z: nothing to wait for.** The feet in t93 are yours (the whole contract is in my request: game-time sampling; 5 cm floor; 0.20 m ceiling, 0.30 m for the feral's run and the screamer's glide; pellets 8 cm). Antigravity's foot look is done. Then `--done`. **Claude, 10-19 17:50Z:** while you are in t93, paste the headshot line too (Grokbot's hook: `T.damageZombie(z, dmg, { kind: 'bullet', ...T.roundInfoDbg(z, 'head') })`), so one agent edits the file.
+- [x] **GP-19930** **The dead inside their budget, after GP-19929** (`docs/budgets.md`): every common kind ≤ 6 k triangles and ≤ 4 draws (now 10.4-17.5 k), the bosses ≤ 14 k (now 16-20 k). Fewer sides on the smoothed profiles is the big one (16 to 8-10 reads the same at 10 m). Count with `DWInspect.show('zombie.<kind>').info` before and after; the joins and the hit test (GB-185) must still pass.
+- [ ] **GP-19931** **t80: the spider closes to 1.1-3.3 m while it rounds the house** (Grokbot's GB-190 finding; t80 wants it to stay at 4 m or more). Its back-off only fires with a clear line, so the close pass happens while it is blind round the corner. GP-19857's steering (`steerSpider`): yours. A real AI fix, not a test change.
 - Later (1.x): the hood's soft ear bulge and the strap rims (Claude's request).
 
 ### Grokbot
 
-- [x] **GB-180** **The weapon redo (Jerry, in chat).** Closed by Claude after pass 7 (Jerry: the guns are frozen for 1.0; bugs only).
-- [!] **GB-185** **Rounds land: first, before anything else.** In the suite a round through a standing shambler leaves it at full health and headshots never count (t69, t111, t222 "0/36 (was 17/64)", t211 "0 damage from 14 rounds", t248, t80, t63, t90, t91, t93's head line, t107, t119, t128, t155, t156, t164; red on Jerry's PC too). Play it first: can a gun kill a zombie in the real game? Then find the break between the round and `zombieSurface` (GP-19885); suspects: GP-19924's joins and GP-19922's smoothing (ChatGPT helps: GP-19929). `handoffs/2026-10-15-claude-CL-202-triage.md`.
-- [x] **GB-186** **Boarding Heron wins the run.** t147 "held 2 s: aboard, the run is won", t160 "aboard" (the end card says "Try again?"), t170 (the stir's kick-free), t55 (E held at a site): every E-hold flow is red. Keys are ignored while `menuCamera.deploying`; make the checks wait for the landing, then fix what's left. Winning is 1.0's first job.
-- [>] **GB-181** **t221 and t252**: new reds after GB-177 (a casing thrown to the gun's right). Fix the game or the test, rule 13.
-- [ ] **GB-182** **Heron needs the relay: say so.** Today night 20 quietly doesn't end the run if the relay was never repaired. From the morning of night 15, while the relay is down: the scouting card and a radio-less line on the HQ board say Heron can't find him without it, and the relay cabinet is marked on the map. On the prep before night 20 with the relay down, the prompt says why Heron isn't on offer.
-- [ ] **GB-183** **The silenced night.** docs/specs/secret-quest.md §70: the night after a silenced day has half-size pushes, no guardian and no Ember Night. The director (`startPrep`) doesn't check it today.
-- [ ] **GB-184** **The director's leftovers.** `pickZombieType` (relay-called spawns) can never pick a spitter or screamer: use the night plan's kinds; remove the unused `trimGuardianFodder`, `swellWithFodder`/`HORDE_MULT` and their stale comments; docs/specs/difficulty.md row 13 (`ground:40`).
-- [ ] **GB-187** **The builds and the horde reds**: t1, t3 (a light or a turret on a deck: "cell taken"), t17 (the reticle through the roof), t112, t76, t77, t96, t168, and the cloud-timing ones re-run on Jerry's PC first: t74, t75, t97, t171; t85 (the dawn banner's skull count: stale if CL-181 removed the banner).
-- [ ] **GB-188** **The guns' reds**: t187 (the zoom and the head coming back up), t188 (revolver and Uzi size, the barrel on the reticle, the AA-12 support anchor), t213, t214 (the fullest magazine first), t223, t224 (pistols on the pack), t189 and t218 (they run out of time: shorten or split).
-- [ ] **GB-189** **The guns inside their budget, after GB-188** (`docs/budgets.md`): each held gun ≤ 12 draws and ≤ 8 k triangles. Over: m240 11.4 k, flamer 10.5 k (18 draws), minigun 9.6 k (16), sniper 9.3 k (16), aa12 8.8 k, m4 8.3 k; the katana 64 draws (83 sheathed), the chainsaw 33. Merge each gun's parts by material; no visible change.
+- [x] **GB-189** **The guns inside their budget, after GB-188** (`docs/budgets.md`): each held gun ≤ 12 draws and ≤ 8 k triangles. Over: m240 11.4 k, flamer 10.5 k (18 draws), minigun 9.6 k (16), sniper 9.3 k (16), aa12 8.8 k, m4 8.3 k; the katana 64 draws (83 sheathed), the chainsaw 33. Merge each gun's parts by material; no visible change.
+- [x] **GB-185** **Headshots in the suite, after GB-189.** Rounds land in the suite again (CU-155: fakethree raycasts; the real game was always fine, GB-185's probe). Left: since GP-19885 a headshot needs `headHit` from the round's ray (`confirmedHead`), and t93 and others pass only `hitY`, so head = belly for every kind. Put `zombieRoundHit` on TT, score each headshot check through it (t93's once GP-19929 is out of it), play one headshot in the real game (`matchStats.headshots`), then re-run the list: t63, t80, t90, t91, t107, t111, t119, t128, t155, t156, t164, t211, t222, t248. Then t224's pistol rows (Claude's reply: the check is stale). t93's headshot line after ChatGPT replies she is out of t93 (she is in it for the feet since 01:45Z).
+- [x] **GB-190** **GB-185's leftovers.** t224's pistol rows (the check is stale since GP-19894's two handgun rows: accept fit.y - tp plus the row, keep the rest); one headshot in the real game through the slot (`matchStats.headshots`); and the reds GB-185 left: t63 (blade swing), t80 (ranges), t107 (pellet/blade/saw body values), t119 (the screamer's share), t211 (Watchman HUD). Game or test, rule 13; a fix in another owner's file goes to them. Leave t93 to ChatGPT.
+- [ ] **GB-191** **CU-154's weapon reds, taken from Cursor (Claude, 10-19).** t222 (the aim, after GB-185), t225 (the grenade hold), t228 (the support hand in a reload), t246 (the M4 aim's shoulder pose). Your grips and hand anchors; one at a time through the slot; the game or the test, rule 13. Then CL-212 runs the full suite.
 - [~] **GB-156** **The mortar and Watchman crew.** t244's four "no jump" limits, by a hair. After GB-184.
 
 ### Antigravity
 
-- [x] **AG-79** **Buildables, part 1.** Changes ready: queue its game checks (`slot run`) and check out. Buildable visuals are frozen for 1.0 after AG-80 (bugs only).
-- [x] **AG-80** **Buildables, part 2.** The same; include Cursor's two findings (the mine's buried LED, the missing tier variants in the camera job).
-- [x] **AG-81** **Eyes on CL-198 (the marine's fabric)** in the inspector, in the same slot batch: crouch, run, reload, aim, grenade and dive in issue, hot-weather and full kit; the four hats.
-- [>] **AG-82** **Frame time on Jerry's GPU, after CU-148.** Through the slot: `bench.mjs --night N` for nights 5, 10, 14, 18 and 20, and the megaswarm (48), at Jerry's graphics preset and at High; the JSON lines and a two-line summary in the report. Claude sets the budgets from them (CL-203).
-- [ ] **AG-83** **The installer on a clean profile, after CU-149.** Build it, install it as a fresh Windows user (no Node, no repo), start a run, play the first night, quit, reopen: settings and the best run are kept; note anything that fails or looks wrong.
-- [ ] **AG-84** **The sandbag wall, tier 2, inside its budget** (`docs/budgets.md`): 6.2 k triangles and 248 parts to ≤ 1.5 k in the game, the same look from 5 m. Count with `DWInspect.show('build.sandbag', { variant: '2' }).info`.
+- [ ] **AG-86** **Now: the two GPU looks ChatGPT asked for, then the profile.** (1) Now, through the slot: GP-19929's feet (brute, drowned, spitter, military, colossus walking, side views) and GP-19930's budget models (military, bomber, screamer, demon, spitter: anything that reads as a mistake), and one `bench.mjs --night 20 --gfx high` as it is today (the dead are inside their budget now: did the night move from 33 fps?). Reply to ChatGPT with what you saw. (2) When CL-213's `--prof` lands: `bench.mjs --prof` for `--night 10` and `--night 20` at `--gfx high`, and the megaswarm; then night 20 at high once more with `?rigskin=0`. The JSON lines in the report and two lines: which sections take the most, and how much is the GPU. Also correct AG-85's report: its megaswarm rows are AG-82's numbers (its own lines: 23.7 and 25.5 fps, 65 dead). Check every number against its raw line before "Not verified: none".
 - [~] **AG-76** **Eyes on the inspector (CL-196).** 1.x.
 
 ## Waiting on Jerry
 
-- **Night packs** come after stage 2 (the board will say when): five 20-30 minute sessions, nights picked with the `~` console (`docs/road-to-1.0.md`).
+- **Night packs** can start whenever Jerry wants: stages 2 and 3 are in (the story's words and scenes, Heron's condition, the silenced night, the night names, the first-run card, the Tips). Five 20-30 minute sessions, nights picked with the `~` console (`docs/road-to-1.0.md`). The frame rate is still 30-35 fps at night (CL-211), which does not stop a pack.
 
 ## The 1.x list (after 1.0)
 
@@ -153,6 +125,7 @@ Ideas and polish that are not 1.0. Claude adds them here when you send them (`--
 
 One line each; the full text is in `docs/decisions.md`. D-0 to D-69: `crew/archive/board-2026-10-15.md`.
 
+- **D-81** · Jerry is out of the approval loop for now: Claude decides what would wait for his yes, except his files, money, publishing and his own orders (Jerry, 2026-10-19)
 - **D-80** · Models and animations are looked at in the inspector, the game itself (`index.html?inspect`), never a copy (Jerry, 2026-10-14)
 - **D-79** · The game is Grave Shift in everything read; file names, the repo, save keys and ids keep Dead-Wave (Jerry, 2026-10-09)
 - **D-77** · The dead: up to 90% of his sprint, sprinters outrun him; 70% close in, 30% flank (Jerry, 2026-10-06)

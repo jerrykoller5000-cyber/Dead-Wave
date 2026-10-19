@@ -1,0 +1,76 @@
+{
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "kitCounts": {
+    "issue": {
+      "tris": 87862,
+      "meshes": 144
+    },
+    "hot": {
+      "tris": 93766,
+      "meshes": 160
+    },
+    "full": {
+      "tris": 95850,
+      "meshes": 169
+    }
+  },
+  "results": [
+    {
+      "file": "hat-cover.png",
+      "hat": "cover",
+      "label": "8-point cover (3/4 front)",
+      "tris": 87862,
+      "meshes": 165
+    },
+    {
+      "file": "hat-boonie.png",
+      "hat": "boonie",
+      "label": "Boonie (3/4 front · grommets fixed)",
+      "tris": 87378,
+      "meshes": 166
+    },
+    {
+      "file": "hat-ballcap.png",
+      "hat": "ballcap",
+      "label": "Ball cap (3/4 front · seams fixed)",
+      "tris": 88246,
+      "meshes": 164
+    },
+    {
+      "file": "hat-ballcap-back-front.png",
+      "hat": "ballcapBack",
+      "label": "Backwards cap (front · seams fixed)",
+      "tris": 87698,
+      "meshes": 162
+    },
+    {
+      "file": "hat-ballcap-back-rear.png",
+      "hat": "ballcapBack",
+      "label": "Backwards cap (rear · curved strap)",
+      "tris": 87698,
+      "meshes": 162
+    },
+    {
+      "file": "hat-boonie-grommets-macro.png",
+      "hat": "boonie",
+      "label": "Macro · Boonie side grommets (flush at z=±0.05)",
+      "tris": 86830,
+      "meshes": 164
+    },
+    {
+      "file": "hat-ballcap-seams-macro.png",
+      "hat": "ballcap",
+      "label": "Macro · Ballcap 6-panel seams (flush on dome)",
+      "tris": 87698,
+      "meshes": 164
+    },
+    {
+      "file": "hat-ballcap-strap-macro.png",
+      "hat": "ballcapBack",
+      "label": "Macro · Backwards cap curved strap & buckle",
+      "tris": 87698,
+      "meshes": 164
+    }
+  ],
+  "errors": []
+}

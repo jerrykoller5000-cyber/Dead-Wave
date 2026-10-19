@@ -42,21 +42,21 @@ try {
 
   await page.evaluate(() => {gp63Probe.setup(19,false);gp63Probe.open();});
   assert(await page.locator('#hqBriefing').evaluate(el => el.open));
-  assert(await page.getByRole('button',{name:'Call the boat'}).isHidden());
-  assert.equal(await page.getByText('Relay down — repair the radio mast to call the boat.').count(),0);
+  assert(await page.getByRole('button',{name:'Call Heron'}).isHidden());
+  assert.equal(await page.getByText('Relay down — repair the radio mast to call Heron.').count(),0);
   await page.getByRole('button',{name:'Close',exact:true}).click();
 
   await page.evaluate(() => {gp63Probe.setup(20,false);gp63Probe.open();});
-  assert(await page.getByRole('button',{name:'Call the boat'}).isHidden());
-  assert(await page.getByText('Relay down — repair the radio mast to call the boat.').isVisible());
+  assert(await page.getByRole('button',{name:'Call Heron'}).isHidden());
+  assert(await page.getByText('Relay down — repair the radio mast to call Heron.').isVisible());
   assert(await page.getByRole('button',{name:'Sound alarm'}).isEnabled());
   await page.screenshot({path:path.join(shots,'relay-down-1280.png')});
   await page.getByRole('button',{name:'Close',exact:true}).click();
 
   await page.evaluate(() => {gp63Probe.setup(20,true);gp63Probe.open();});
-  const boat=page.getByRole('button',{name:'Call the boat'});
+  const boat=page.getByRole('button',{name:'Call Heron'});
   assert(await boat.isVisible());assert(await boat.isEnabled());
-  assert.equal(await page.getByText('Relay down — repair the radio mast to call the boat.').count(),0);
+  assert.equal(await page.getByText('Relay down — repair the radio mast to call Heron.').count(),0);
   await page.screenshot({path:path.join(shots,'boat-offered-1280.png')});
   await page.setViewportSize({width:390,height:844});
   await page.screenshot({path:path.join(shots,'boat-offered-390.png')});

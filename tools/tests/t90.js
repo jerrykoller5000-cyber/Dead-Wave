@@ -55,7 +55,7 @@
       const head = z.mesh.position.y + (z.hitH || 1.4) * 0.9;
       const hp0 = z.hp, rnd = Math.random;
       Math.random = () => 0.99;
-      try { for (let i = 0; i < 7; i++) T.damageZombie(z, 9, { kind: 'pellet', dir: { x: 0, z: 1 }, hitY: head, shotId: 987654 }); }
+      try { for (let i = 0; i < 7; i++) T.damageZombie(z, 9, { kind: 'pellet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, 'head'), shotId: 987654 }); }
       finally { Math.random = rnd; }
       T.flushShotHits();
       const loss = hp0 - z.hp, want = 63 + 9 * 0.5 * (z.headshotMul || 1) * (1 - Math.max(0, Math.min(0.6, z.armor || 0)));

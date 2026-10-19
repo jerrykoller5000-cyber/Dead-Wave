@@ -53,7 +53,7 @@
     ok(T.streakHealHp() === 0, 'at 3: 0');
 
     // (6) Regen still stops at 40%.
-    T.setCombo(0); T.setHp(35); await wait(4000);
+    T.setCombo(0); T.setHp(35); await (async () => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 4 && Date.now() - w0 < 60000) await wait(30); })();   // GB-187: 4 s of game time (the page runs slow, dt is capped)
     ok(Math.abs(T.getHp() - 0.4 * max) < 0.01, 'regen from 35 stops at 40% (' + f2(T.getHp()) + ')');
 
     ok(!errs.length, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 2).join(' | ') : ''));

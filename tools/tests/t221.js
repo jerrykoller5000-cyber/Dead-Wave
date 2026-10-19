@@ -71,7 +71,8 @@
       const t = now() - t0, S = S0(), a = ammo();
       if (a < last) shotAt.push(t);
       last = a;
-      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c }); }
+      // GB-181: its throw as it leaves the port (the live c.vx is read seconds later, after the bounce or the settle).
+      for (const c of casingList()) if (!seen.has(c)) { seen.add(c); newCases.push({ t, c, v: { x: c.vx, y: c.vy, z: c.vz }, age: c.age, b: c.bounced, s: c.settled, q: gun.getWorldQuaternion(new THREE.Quaternion()).invert() }); }
       log.push({ t, active: !!S.active, c: S.c || 0, open: S.open || 0, back: S.back || 0, hand: S.hand || 0, cd: T.getSwapDbg().fireCooldown, a });
       if (S.active && knob0) {
         const k = knobL(); kUp = Math.max(kUp, k.y - knob0.y); kBack = Math.max(kBack, knob0.z - k.z);
@@ -108,9 +109,9 @@
     ok(!!c1, 'the first shot\'s case comes out');
     if (c1) {
       ok(c1.t - t1 > 0.2 * 1000, 'on the bolt\'s pull, not on the shot (+' + ((c1.t - t1) / 1000).toFixed(3) + ' s)');
-      const q = gun.getWorldQuaternion(new THREE.Quaternion()).invert();
-      const vl = V().set(c1.c.vx, c1.c.vy, c1.c.vz).applyQuaternion(q);
-      ok(vl.x < -1, 'thrown out to the gun\'s right (gun-local vx ' + f3(vl.x) + ')');
+      const q = c1.q;
+      const vl = V().set(c1.v.x, c1.v.y, c1.v.z).applyQuaternion(q);
+      ok(vl.x < -1, 'thrown out to the gun\'s right (gun-local vx ' + f3(vl.x) + '; world ' + [c1.v.x, c1.v.y, c1.v.z].map(f3).join(',') + ' age ' + f3(c1.age) + (c1.b ? ' bounced' : '') + (c1.s ? ' settled' : '') + ')');
     }
     for (let w1 = Date.now(); (S0().cycles || 0) < cycles0 + 2 && Date.now() - w1 < 10000;) await wait(10);   // the second shot's cycle
     for (let w1 = Date.now(); S0().active && Date.now() - w1 < 30000;) await wait(20);

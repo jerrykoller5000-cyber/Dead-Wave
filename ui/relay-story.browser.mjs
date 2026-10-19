@@ -35,6 +35,7 @@ try {
   await page.fill('#playerName','Relay Tester');await page.click('#modeHunt');
   await page.waitForFunction(()=>TT.getPhase()==='prep'&&!document.body.classList.contains('deploying'),null,{timeout:45000});
   await page.evaluate(()=>{gp66Probe.advance(3,false);gp66Probe.open();});
+  assert.equal(await page.locator('.briefing-orders p').count(),4);
   await page.getByRole('button',{name:'Relay',exact:true}).click();
   assert.equal(await page.locator('.briefing-relay .relay-story-line').textContent(),'RELAY · SILENT');
   for(const width of [1280,390]) {
@@ -43,8 +44,8 @@ try {
   }
   await page.getByRole('button',{name:'Close',exact:true}).click();
   await page.evaluate(()=>gp66Probe.advance(4,true));
-  assert.deepEqual(await page.evaluate(()=>gp66Probe.read().lines.map(item=>item.number)),[2,1]);
-  for(const [night,expected] of [[4,[2,1]],[10,[10]],[16,[16]],[18,[18]],[19,[19]],[20,[20]]]) {
+  assert.deepEqual(await page.evaluate(()=>gp66Probe.read().lines.map(item=>item.number)),[null,2,1]);
+  for(const [night,expected] of [[4,[null,2,1]],[10,[10]],[16,[16]],[18,[18]],[19,[19]],[20,[20]]]) {
     await page.evaluate(({night})=>gp66Probe.advance(night,true),{night});
     assert.deepEqual(await page.evaluate(()=>gp66Probe.read().lines.map(item=>item.number)),expected);
     await page.evaluate(()=>gp66Probe.open());

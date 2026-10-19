@@ -25,8 +25,8 @@
     // (1) Four seconds of the guards standing: breath, sway, head turns, all on their own clocks.
     const p0 = G.map((z) => ({ x: z.mesh.position.x, z: z.mesh.position.z }));
     const S = G.map(() => ({ head: [], sway: [], hips: [], moved: 0 }));
-    const t0 = Date.now();
-    while (Date.now() - t0 < 4000) {
+    const t0 = T.getSimTime(), w0 = Date.now();   // GB-187: four seconds of game time
+    while (T.getSimTime() - t0 < 4 && Date.now() - w0 < 30000) {
       G.forEach((z, k) => {
         const ud = z.mesh.userData;
         S[k].head.push(ud.head ? ud.head.rotation.y : 0);

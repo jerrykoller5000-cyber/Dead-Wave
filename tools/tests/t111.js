@@ -13,13 +13,15 @@
     let k = 0;
     const fresh = (type) => { const z = T.spawnZombie(P.x - 10 + (k++ % 8) * 3, P.z + 30, type, true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; return z; };
     // Chance is held high for the shot, so no random limb or head comes off: each shot is judged on its hit line alone.
-    const at = (type, frac) => { const z = fresh(type); const h0 = z.hp; const rnd = Math.random; Math.random = () => 0.999; try { T.damageZombie(z, 20, { kind: 'bullet', dir: { x: 0, z: 1 }, hitY: z.mesh.position.y + z.hitH * frac }); } finally { Math.random = rnd; } const d = h0 - z.hp; T.clearZombies(); return d; };
-    const b50 = at('brute', 0.5), b73 = at('brute', 0.73), b76 = at('brute', 0.76), b90 = at('brute', 0.9);
-    ok(Math.abs(b73 - b50) < 1e-6, 'a brute hit just under its head line (0.73) is a body hit: ' + b73.toFixed(2) + ' vs ' + b50.toFixed(2));
+    const at = (type, frac) => { const z = fresh(type); const h0 = z.hp; const rnd = Math.random; Math.random = () => 0.999; try { T.damageZombie(z, 20, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(z, frac === 'head' ? 'head' : z.mesh.position.y + z.hitH * frac) }); } finally { Math.random = rnd; } const d = h0 - z.hp; T.clearZombies(); return d; };
+    // GB-185: since GP-19885 the round's own ray decides a headshot (confirmedHead), not a height line: a round
+    // through its head is a headshot, one through its chest a body hit.
+    const b50 = at('brute', 0.5), b40 = at('brute', 0.4), bH = at('brute', 'head'), bH2 = at('brute', 'head');
+    ok(Math.abs(b40 - b50) < 1e-6, 'a brute hit in the chest is a body hit: ' + b40.toFixed(2) + ' vs ' + b50.toFixed(2));
     // A headshot at full health can also take the head off (damage 999999, by chance), so each shot is judged on its own.
-    ok(b76 > b50 * 1.5 && b90 > b50 * 1.5, 'at 0.76 it is a headshot, as at the crown: ' + b76.toFixed(2) + ' (body ' + b50.toFixed(2) + ', crown ' + b90.toFixed(2) + ')');
-    const s50 = at('shambler', 0.5), s76 = at('shambler', 0.76), s80 = at('shambler', 0.8);
-    ok(Math.abs(s76 - s50) < 1e-6 && s80 > s50 * 1.5, 'a shambler keeps 0.78: 0.76 body (' + s76.toFixed(2) + '), 0.80 head (' + s80.toFixed(2) + ')');
+    ok(bH > b50 * 1.5 && bH2 > b50 * 1.5, 'a round through its head is a headshot: ' + bH.toFixed(2) + ', ' + bH2.toFixed(2) + ' (body ' + b50.toFixed(2) + ')');
+    const s50 = at('shambler', 0.5), s40 = at('shambler', 0.4), sH = at('shambler', 'head');
+    ok(Math.abs(s40 - s50) < 1e-6 && sH > s50 * 1.5, 'a shambler: chest a body hit (' + s40.toFixed(2) + '), its head a headshot (' + sH.toFixed(2) + ')');
     T.clearZombies();
     // Where a walking brute's head really is: the centre of its head, sampled while it walks at him.
     const zs = [0, 1, 2].map((i) => { const z = T.spawnZombie(P.x - 6 + i * 6, P.z + 35, 'brute', true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; return z; });
@@ -41,8 +43,8 @@
     // Feral 0.70, leaper 0.55, spider 0.60 (Claude): just under the line is a body hit, just over is a head,
     // and the head's centre, sampled while they come at him, sits above the line.
     for (const [type, line] of [['feral', 0.70], ['leaper', 0.55], ['spider', 0.60]]) {
-      const lo = at(type, line - 0.03), hi = at(type, line + 0.03), chest = at(type, line - 0.15);
-      ok(Math.abs(lo - chest) < 1e-6 && hi > chest * 1.5, type + ': ' + (line - 0.03).toFixed(2) + ' is a body hit (' + lo.toFixed(2) + ' = chest ' + chest.toFixed(2) + '), ' + (line + 0.03).toFixed(2) + ' a headshot (' + hi.toFixed(2) + ')');
+      const chest = at(type, line - 0.15), hi = at(type, 'head');
+      ok(hi > chest * 1.5, type + ': a round through its head is a headshot (' + hi.toFixed(2) + ' vs chest ' + chest.toFixed(2) + ')');
       const ws = [0, 1, 2].map((i) => { const z = T.spawnZombie(P.x - 6 + i * 6, P.z + 35, type, true, true); z.riseT = 0; z.hp = z.maxHp = 1e6; return z; });
       const hm = [];
       for (let t = 0; t < 15; t++) {

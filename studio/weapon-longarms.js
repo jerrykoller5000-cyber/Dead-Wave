@@ -136,7 +136,7 @@ export function makeM4Model(ctx) {
   K.slab([[-0.046, 0.108], ...profileCurve([-0.046, 0.03], [-0.042, -0.05], [-0.024, -0.104], 5), ...profileCurve([0.072, -0.098], [0.05, -0.04], [0.046, 0.03], 5), [0.046, 0.108]],
     0.058, magPoly, { bevel: 0.006, parent: mag });
   for (const sx of [-1, 1]) for (const z of [-0.027, 0, 0.027]) {
-    K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, gunDark, { x: sx * 0.0295, bevel: 0.001, parent: mag });
+    K.slab(gunBand([[z, 0.053], [z + 0.004, -0.012], [z + 0.012, -0.07], [z + 0.019, -0.095]], 0.003), 0.003, gunDark, { x: sx * 0.0295, bevel: 0, parent: mag });   // GB-189: no 1 mm bevel on a 3 mm rib
   }
   for (const y of [-0.018, -0.049, -0.08]) K.box(0.061, 0.004, 0.082, magPoly, 0, y, 0.011 - y * 0.15, 0, 0, 0, mag, 0.001);
   K.slab([[-0.03, -0.1], [0.078, -0.094], [0.08, -0.112], [-0.03, -0.118]], 0.066, magPoly, { bevel: 0.005, parent: mag });
@@ -144,7 +144,7 @@ export function makeM4Model(ctx) {
   gun.userData.baseMagPos = mag.position.clone();
   gun.userData.baseMagRot = mag.rotation.clone();
   // Sling swivel.
-  K.tor(0.012, 0.003, gunDark, 0, -0.035, 0.52, 0, Math.PI / 2, 0);
+  K.tor(0.012, 0.003, gunDark, 0, -0.035, 0.52, 0, Math.PI / 2, 0, null, Math.PI * 2, 12);
   gunEffects(gun, new THREE.Vector3(0, 0.02, 0.98), 0.06, 3.5, 8);
   gun.userData.laser.position.set(0, 0.02, 5);
   gun.userData.laserBaseZ = 1;
@@ -260,7 +260,7 @@ export function makeAa12Model(ctx) {
     K.slab([[-0.202, 0.075], [0.193, 0.075], [0.2, 0.066], [0.2, -0.053], [-0.202, -0.053]], 0.009, gunDark, { x: sx * 0.07, bevel: 0.003 });
     K.lathe([[0, -0.202], [0.046, -0.202], [0.052, -0.19], [0.052, 0.187], [0.046, 0.2], [0, 0.2]], gunBody, { x: sx * 0.03, y: -0.007, seg: 20 });
     for (const [by, bz] of [[0.03, 0.177], [-0.044, 0.177], [0.03, -0.181], [-0.044, -0.181]]) {
-      K.cyl(0.0045, 0.0045, 0.004, gunDark, sx * 0.077, by, bz, null, 10, 'x');
+      K.cyl(0.0045, 0.0045, 0.004, gunDark, sx * 0.077, by, bz, null, 8, 'x');
       K.cyl(0.002, 0.002, 0.0045, gunMid, sx * 0.078, by, bz, null, 6, 'x');
     }
     K.slab(gunBand([[-0.239, -0.063], [-0.239, 0.096], [-0.218, 0.106], [0.225, 0.106], [0.246, 0.096]], 0.003), 0.002, gunBody, { x: sx * 0.07, bevel: 0.001 });
@@ -269,7 +269,7 @@ export function makeAa12Model(ctx) {
   K.slab(gunBand([[-0.17, 0.09], [-0.153, 0.143], [-0.138, 0.151], [0.188, 0.151], [0.217, 0.13], [0.225, 0.09]], 0.009), 0.043, gunDark, { bevel: 0.003 });
   for (const z of [-0.158, 0.211]) K.cyl(0.004, 0.004, 0.047, gunMid, 0, 0.108, z, null, 8, 'x');
   K.box(0.025, 0.007, 0.025, gunDark, 0, 0.156, -0.12, 0, 0, 0, null, 0.002);
-  K.tor(0.009, 0.003, gunMid, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 16);
+  K.tor(0.009, 0.003, gunMid, 0, 0.168, -0.12, 0, 0, 0, null, Math.PI * 2, 12);
   // Ejection port, charging handle.
   K.box(0.004, 0.05, 0.12, gunRubber, 0.072, 0.045, 0.1);
   K.box(0.004, 0.014, 0.26, gunRubber, -0.072, 0.055, 0.025, 0, 0, 0, null, 0.003);
@@ -297,7 +297,7 @@ export function makeAa12Model(ctx) {
   K.lathe([[0, -0.105], [0.142, -0.105], [0.154, -0.097], [0.155, -0.082], [0.149, -0.075], [0.149, 0.075], [0.155, 0.082], [0.154, 0.097], [0.142, 0.105], [0, 0.105]], gunAccent, { parent: mag, seg: 32 });
   for (const sz of [-1, 1]) {
     K.cyl(0.137, 0.137, 0.005, gunBody, 0, 0, sz * 0.105, mag, 32);
-    K.tor(0.138, 0.003, gunDark, 0, 0, sz * 0.108, 0, 0, 0, mag, Math.PI * 2, 32);
+    K.tor(0.138, 0.003, gunDark, 0, 0, sz * 0.108, 0, 0, 0, mag, Math.PI * 2, 24);
     K.cyl(0.059, 0.062, 0.009, gunDark, 0, 0, sz * 0.111, mag, 24);
     K.cyl(0.05, 0.052, 0.004, gunBody, 0, 0, sz * 0.117, mag, 24);
     K.cyl(0.017, 0.019, 0.009, gunDark, 0, 0, sz * 0.122, mag, 12);
@@ -341,7 +341,7 @@ export function makeAa12Model(ctx) {
   K.box(0.008, 0.092, 0.012, gunDark, 0, 0.122, 0.75, 0, 0, 0, null, 0.002);
   for (const sx of [-1, 1]) K.box(0.005, 0.098, 0.018, gunDark, sx * 0.0145, 0.126, 0.75, 0, 0, 0, null, 0.0015);
   // GB-173 (Jerry: no barrel inside the shroud): the barrel runs from the receiver through the vented shroud to the brake.
-  K.lathe([[0, 0.25], [0.021, 0.25], [0.021, 0.74], [0.03, 0.75], [0.03, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 16 });
+  K.lathe([[0, 0.25], [0.021, 0.25], [0.021, 0.74], [0.03, 0.75], [0.03, 0.905], [0, 0.905]], gunAccent, { y: 0.015, seg: 12 });   // GB-189: mostly inside the shroud
   K.lathe([[0, 0.902], [0.034, 0.902], [0.038, 0.91], [0.038, 0.97], [0.034, 0.976], [0.014, 0.976], [0.014, 0.966], [0, 0.966]], gunMid, { y: 0.015, seg: 14 });
   K.disc(0.0095, gunRubber, 0, 0.015, 0.9765, 0, null, 12);   // GB-173: the bore at the muzzle
   for (let i = 0; i < 3; i++) K.box(0.08, 0.008, 0.01, gunRubber, 0, 0.015, 0.92 + i * 0.018);

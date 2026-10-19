@@ -1,0 +1,393 @@
+{
+  "installerPath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\desktop\\src-tauri\\target\\release\\bundle\\nsis\\Grave Shift_0.1.0_x64-setup.exe",
+  "installDir": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift",
+  "exePath": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\dead-wave.exe",
+  "docsProfileFile": "C:\\Users\\Zero\\Documents\\Dead-Wave\\profile.json",
+  "cleanPath": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\",
+  "run1": {
+    "initialUrl": "http://dw.localhost/index.html",
+    "titleState": {
+      "title": "Grave Shift",
+      "desktopFlag": true,
+      "versionText": "v0.1.0",
+      "wordmarkText": "GraveShift",
+      "bestRecordHidden": true,
+      "bestRecordText": "",
+      "localStorageKeys": [],
+      "outerSize": "1920x1080",
+      "screenSize": "1920x1080",
+      "isFullscreen": true
+    },
+    "defaultSettings": {
+      "volMusic": "30",
+      "volSfx": "80",
+      "lookSens": "100",
+      "lookSensNum": "1.0x",
+      "aimFov": "38",
+      "aimTilt": "0",
+      "gfxActive": "high",
+      "autoTiltActive": "gentle",
+      "followCursorOn": true,
+      "perfHudOn": false
+    },
+    "changedSettings": {
+      "volMusic": "55",
+      "volMusicNum": "55",
+      "volSfx": "65",
+      "volSfxNum": "65",
+      "lookSens": "150",
+      "lookSensNum": "1.5x",
+      "aimFov": "45",
+      "aimFovNum": "45°",
+      "aimTilt": "8",
+      "aimTiltNum": "8°",
+      "gfxActive": "medium",
+      "autoTiltActive": "strong",
+      "perfHudOn": true
+    },
+    "afterNight1": {
+      "phase": "prep",
+      "coinsText": "40",
+      "skullsText": "15 ($15)",
+      "hpText": "100 / 100"
+    },
+    "afterQuitToMenu": {
+      "phase": "idle",
+      "bestRunRaw": "{\"version\":1,\"day\":2,\"kills\":17,\"streak\":0,\"headshots\":0,\"skulls\":0,\"runs\":1,\"evacuated\":0,\"escapeNight\":0,\"hotEscapeNight\":0,\"trueEndings\":0,\"trueEndingDay\":0}",
+      "bestRun": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      },
+      "bestRecordHidden": false,
+      "bestRecordText": "Best: Night 2 · 17 kills · streak 0"
+    },
+    "afterReload": {
+      "bestRun": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      },
+      "bestRecordHidden": false,
+      "bestRecordText": "Best: Night 2 · 17 kills · streak 0",
+      "volMusic": "0.55",
+      "gfx": "medium"
+    },
+    "diskProfile": {
+      "dw.coach.v1": "{\"version\":1,\"poiShown\":true,\"pickupShown\":true,\"bankShown\":true,\"purchaseShown\":false,\"banked\":false,\"purchased\":false,\"buildShown\":false,\"pairShown\":false,\"medpenShown\":false,\"built\":false}",
+      "tt_aim_fov": "45",
+      "tt_aim_tilt": "8",
+      "tt_auto_tilt": "strong",
+      "tt_best_run": "{\"version\":1,\"day\":2,\"kills\":17,\"streak\":0,\"headshots\":0,\"skulls\":0,\"runs\":1,\"evacuated\":0,\"escapeNight\":0,\"hotEscapeNight\":0,\"trueEndings\":0,\"trueEndingDay\":0}",
+      "tt_gfx": "medium",
+      "tt_laser_night": "2",
+      "tt_look_sens": "1.5",
+      "tt_perf_hud": "1",
+      "tt_vol_music": "0.55",
+      "tt_vol_sfx": "0.65"
+    }
+  },
+  "run2": {
+    "titleState": {
+      "bestRecordHidden": false,
+      "bestRecordText": "Best: Night 2 · 17 kills · streak 0",
+      "bestRun": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      },
+      "badgesHtml": 3788,
+      "perfHudVisible": true
+    },
+    "settingsState": {
+      "volMusic": "55",
+      "volMusicNum": "55",
+      "volSfx": "65",
+      "volSfxNum": "65",
+      "lookSens": "150",
+      "lookSensNum": "1.5x",
+      "aimFov": "45",
+      "aimFovNum": "45°",
+      "aimTilt": "8",
+      "aimTiltNum": "8°",
+      "gfxActive": "medium",
+      "autoTiltActive": "strong",
+      "perfHudOn": true
+    }
+  },
+  "checks": [
+    {
+      "pass": true,
+      "msg": "Installed binary exists at %LOCALAPPDATA%\\Grave Shift\\dead-wave.exe",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Installed game/index.html exists next to dead-wave.exe",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Uninstaller uninstall.exe exists in install directory",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Documents\\Dead-Wave\\profile.json does not exist before first launch",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Desktop shell opens production URL http://dw.localhost/index.html (no ?debug=1)",
+      "detail": "http://dw.localhost/index.html"
+    },
+    {
+      "pass": true,
+      "msg": "Desktop init script ran (window.__DW_DESKTOP__ === true)",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Window title is \"Grave Shift\"",
+      "detail": "Grave Shift"
+    },
+    {
+      "pass": true,
+      "msg": "Title screen shows version v0.1.0",
+      "detail": "v0.1.0"
+    },
+    {
+      "pass": true,
+      "msg": "Clean profile has #menuBestRecord hidden on first boot",
+      "detail": ""
+    },
+    {
+      "pass": true,
+      "msg": "Window opens fullscreen on first boot",
+      "detail": "1920x1080 of 1920x1080"
+    },
+    {
+      "pass": true,
+      "msg": "Enabling Performance overlay attaches window.TT without needing ?debug=1",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Renderer is WebGPU on Jerry's GPU",
+      "detail": "WebGPURenderer"
+    },
+    {
+      "pass": true,
+      "msg": "Run started and entered Day 1 prep phase",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Helicopter insertion completed",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Night 1 alarm sequence completed and Night 1 wave started",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Night 1 cleared and transitioned to Day 2 prep",
+      "detail": {
+        "phase": "prep",
+        "coinsText": "40",
+        "skullsText": "15 ($15)",
+        "hpText": "100 / 100"
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Quit to menu shows confirmation prompt first (CU-150)",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Quitting after Night 1 records best run in localStorage (tt_best_run)",
+      "detail": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Title screen displays best run on #menuBestRecord",
+      "detail": "Best: Night 2 · 17 kills · streak 0"
+    },
+    {
+      "pass": true,
+      "msg": "In-session reload (F5) preserves newer localStorage values over empty launch snapshot (CU-149 verified)",
+      "detail": {
+        "bestRun": {
+          "version": 1,
+          "day": 2,
+          "kills": 17,
+          "streak": 0,
+          "headshots": 0,
+          "skulls": 0,
+          "runs": 1,
+          "evacuated": 0,
+          "escapeNight": 0,
+          "hotEscapeNight": 0,
+          "trueEndings": 0,
+          "trueEndingDay": 0
+        },
+        "bestRecordHidden": false,
+        "bestRecordText": "Best: Night 2 · 17 kills · streak 0",
+        "volMusic": null,
+        "gfx": "medium"
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Zero missing resources (HTTP >= 400) over dw: protocol",
+      "detail": []
+    },
+    {
+      "pass": true,
+      "msg": "Zero page errors during Run 1",
+      "detail": []
+    },
+    {
+      "pass": true,
+      "msg": "Clicking Quit on title screen cleanly terminates dead-wave.exe",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Documents\\Dead-Wave\\profile.json was created on disk",
+      "detail": "C:\\Users\\Zero\\Documents\\Dead-Wave\\profile.json"
+    },
+    {
+      "pass": true,
+      "msg": "profile.json on disk has tt_best_run with Day 2 and 15 kills",
+      "detail": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      }
+    },
+    {
+      "pass": true,
+      "msg": "profile.json on disk has all customized settings",
+      "detail": {
+        "tt_vol_music": "0.55",
+        "tt_vol_sfx": "0.65",
+        "tt_look_sens": "1.5",
+        "tt_aim_fov": "45",
+        "tt_aim_tilt": "8",
+        "tt_gfx": "medium",
+        "tt_auto_tilt": "strong",
+        "tt_perf_hud": "1"
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Reopened title screen shows saved Best Run banner",
+      "detail": "Best: Night 2 · 17 kills · streak 0"
+    },
+    {
+      "pass": true,
+      "msg": "Reopened localStorage has tt_best_run seeded from Documents\\Dead-Wave\\profile.json",
+      "detail": {
+        "version": 1,
+        "day": 2,
+        "kills": 17,
+        "streak": 0,
+        "headshots": 0,
+        "skulls": 0,
+        "runs": 1,
+        "evacuated": 0,
+        "escapeNight": 0,
+        "hotEscapeNight": 0,
+        "trueEndings": 0,
+        "trueEndingDay": 0
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Reopened game remembers Performance overlay setting (on)",
+      "detail": null
+    },
+    {
+      "pass": true,
+      "msg": "Reopened Settings UI controls match all saved settings",
+      "detail": {
+        "volMusic": "55",
+        "volMusicNum": "55",
+        "volSfx": "65",
+        "volSfxNum": "65",
+        "lookSens": "150",
+        "lookSensNum": "1.5x",
+        "aimFov": "45",
+        "aimFovNum": "45°",
+        "aimTilt": "8",
+        "aimTiltNum": "8°",
+        "gfxActive": "medium",
+        "autoTiltActive": "strong",
+        "perfHudOn": true
+      }
+    },
+    {
+      "pass": true,
+      "msg": "Zero page errors during Run 2",
+      "detail": []
+    },
+    {
+      "pass": true,
+      "msg": "Second run exited cleanly via Quit",
+      "detail": null
+    }
+  ]
+}

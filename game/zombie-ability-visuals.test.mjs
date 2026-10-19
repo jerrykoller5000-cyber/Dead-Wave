@@ -69,11 +69,8 @@ test('flame fists use a single transparent pass and stay attached while casting'
   const { z, rig, scale } = zombie('demon', 1.15);
   z.mesh.position.set(8, 2, -4); z.mesh.rotation.set(.13, 1.2, -.05);
   z.mesh.scale.set(1.04, .96, .99);
-  for (const anchor of rig.flameAnchors) {
-    anchor.traverse(node => {
-      if (node.isMesh && node.material.transparent && node.material.side === THREE.DoubleSide) assert.equal(node.material.forceSinglePass, true);
-    });
-  }
+  assert(rig.flameBatch.isInstancedMesh && rig.flameBatch.count === 2);
+  assert.equal(rig.flameBatch.material.forceSinglePass, true);
   for (let frame = 0; frame < 100; frame++) {
     legacyPose(rig);
     updateZombieAbilityVisuals(z, frame / 60, { kind: 'fireball', stage: 'windup', progress: frame / 99 });
@@ -81,11 +78,11 @@ test('flame fists use a single transparent pass and stay attached while casting'
     assert.equal(getZombieAbilityLaunch(z, 'fireball', actual), true);
     const expected = new THREE.Vector3(0, -.354 * scale, .02 * scale);
     rig.elbows[1].localToWorld(expected); pointNear(actual, expected);
-    assert.equal(extraDraws(z.mesh), 2);
-    for (const anchor of rig.flameAnchors) {
-      anchor.traverse(node => {
-        if (node.isMesh) assert([...node.geometry.attributes.position.array].every(Number.isFinite));
-      });
+    assert.equal(extraDraws(z.mesh), 1);
+    assert([...rig.flameBatch.geometry.attributes.position.array].every(Number.isFinite));
+    for (let i = 0; i < 2; i++) {
+      const matrix = new THREE.Matrix4(); rig.flameBatch.getMatrixAt(i, matrix);
+      assert([...matrix.elements].every(Number.isFinite), 'both fists keep finite instance transforms');
     }
   }
 });
@@ -132,7 +129,7 @@ for (const kind of ['demon', 'colossus']) {
     z.mesh.traverse(node => { node.visible = true; });
     z.partsLost = {}; z.mesh.userData.partsLost = {}; z.alive = true;
     resetZombieAbilityVisuals(z.mesh);
-    assert.equal(extraDraws(z.mesh), kind === 'demon' ? 2 : 1);
+    assert.equal(extraDraws(z.mesh), 1);
     if (rig.heldRock) assert.equal(rig.heldRock.visible, false);
   });
 }

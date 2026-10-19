@@ -26,7 +26,9 @@
     hold(); await wait(30);
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20); hold();
-    ok(!!s && s.alive && Math.abs(s.hp - 3) < 0.01, 'first swing wounds shambler by 26 x blade 1.5 = 39 (hp=' + (s && s.hp) + ' of 42)');
+    // GB-190: since CU-127 a tagged blade hit deals Jerry's sheet (a share of the listed health), not the table's 26 x 1.5.
+    const want = T.listedBodyDamage ? T.listedBodyDamage('knife', 'shambler') : 39;
+    ok(!!s && s.alive && Math.abs((42 - s.hp) - want) < 0.01, 'first swing wounds shambler by the sheet\'s knife hit ' + (+want).toFixed(2) + ' (hp=' + (s && s.hp) + ' of 42)');
     if (T.setKnifeCd) T.setKnifeCd(0);
     hold(); T.knifeAttack(); await wait(20);
     ok(!!s && !s.alive, 'second swing kills shambler');

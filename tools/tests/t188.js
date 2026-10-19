@@ -19,8 +19,8 @@
   const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
   const take = async (w) => {
     for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
-    await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0) || Date.now() - t0 > 4000 ? r() : setTimeout(f, 50); f(); });
-    await wait(2200);
+    await new Promise((r) => { const t0 = Date.now(); const f = () => (T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0) || Date.now() - t0 > 12000 ? r() : setTimeout(f, 50); f(); });
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 2.2 && Date.now() - w0 < 20000) await wait(30); }   // GB-188: 2.2 s of game time (the page runs slow)
     return T.getCurrentWeapon() === w;
   };
   const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
@@ -73,7 +73,7 @@
     for (const w of [...Object.keys(RANGE), 'uzi-akimbo']) {
       const [gw, mode] = w.split('-'); const aki = mode === 'akimbo';
       if (!await take(gw)) { ok(false, gw + ': could not take it'); continue; }
-      if (aki) { document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyY', key: 'y', bubbles: true })); document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyY', key: 'y', bubbles: true })); await wait(1500); }
+      if (aki) { document.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyY', key: 'y', bubbles: true })); document.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyY', key: 'y', bubbles: true })); { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 15000) await wait(30); } }   // GB-188: game time
       const gun = T.weaponMeshes[gw], H = T.getShoulderDbg().holds[gw];
       marine.updateMatrixWorld(true);
       const pts = vertsOf(gun), b = bbox(pts), ws = gun.getWorldScale(V()).x / mScale;

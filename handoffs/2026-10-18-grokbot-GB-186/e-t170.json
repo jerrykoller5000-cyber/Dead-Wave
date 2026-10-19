@@ -1,0 +1,44 @@
+[
+ {
+  "old": "    const tw = Date.now();",
+  "new": [
+   "    const tw = T.getSimTime();   // GB-186: the warning's ten seconds are game seconds (dt is capped at 50 ms)"
+  ]
+ },
+ {
+  "old": "    const outAt = await until(() => !T.hollowState().below, 13000);",
+  "new": [
+   "    const outAt = await until(() => !T.hollowState().below || T.getSimTime() - tw > 13, 60000);"
+  ]
+ },
+ {
+  "old": "    const waited = (Date.now() - tw) / 1000;",
+  "new": [
+   "    const waited = T.getSimTime() - tw;"
+  ]
+ },
+ {
+  "old": "    const caught = await until(() => !!S.grab(), 12500);",
+  "new": [
+   "    const caught = await until(() => !!S.grab(), 45000);"
+  ]
+ },
+ {
+  "old": "    const f0 = S.state().stir; await wait(2000); stand(b, o.x, o.z);",
+  "new": [
+   "    const f0 = S.state().stir, s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 2, 20000); stand(b, o.x, o.z);"
+  ]
+ },
+ {
+  "old": "    const again = await until(() => !!S.grab(), 12500);",
+  "new": [
+   "    const again = await until(() => !!S.grab(), 45000);"
+  ]
+ },
+ {
+  "old": "    const dead = await until(() => T.hushDbg.over(), 6000);",
+  "new": [
+   "    const dead = await until(() => T.hushDbg.over(), 20000);"
+  ]
+ }
+]

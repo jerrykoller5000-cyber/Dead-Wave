@@ -1,0 +1,8 @@
+[
+    {
+        "old":  "    T.setMouseFireDbg(true); await wait(700); T.setMouseFireDbg(false);",
+        "new":  [
+                    "    T.setMouseFireDbg(true); { const s0 = T.getSimTime(); await until(() =\u003e T.getSimTime() - s0 \u003e= 0.7, 10000); } T.setMouseFireDbg(false);   // GB-181: 0.7 s of game time (the page runs slow, dt is capped)"
+                ]
+    }
+]

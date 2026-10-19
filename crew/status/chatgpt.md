@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: blocked
-model: GPT-6.1 Sol
-task: GP-19925 Story v3 words, one pass
+state: idle
+model: GPT-6
+task: —
 touching: —
-since: 2026-10-18T13:43Z
-next: GP-19926 One name for the night. "Night N" everywhere the player read
-blocked-on: Claude's cabin-label decision and independent/native browser verification; legacy Playwright script cannot launch here
-last-report: handoffs/2026-10-18-chatgpt-GP-19925.md
+since: 2026-10-19T18:31Z
+next: —
+blocked-on: —
+last-report: handoffs/2026-10-19-chatgpt-GP-19930.md
 
 ## Notes
 

@@ -1,0 +1,151 @@
+{
+  "out": "qa/2026-10-18-AG-81/shots/",
+  "sheet": true,
+  "cols": 6,
+  "shots": [
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Issue · Crouch",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('crouch'); await wait(250);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Issue · Run",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('run'); DWInspect.marine.hold('run', 0.25); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Issue · Reload",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('reload', 0.45); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Issue · Aim",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('aim'); await wait(220);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Issue · Grenade",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('grenade', ['cocked', 0.2]); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "side",
+      "caption": "Issue · Dive",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('issue'); DWInspect.marine.weapon('pistol'); await DWInspect.marine.play('dive-forward', { loop: false }); DWInspect.pause();"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Hot weather · Crouch",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('crouch'); await wait(250);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Hot weather · Run",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('run'); DWInspect.marine.hold('run', 0.25); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Hot weather · Reload",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('reload', 0.45); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Hot weather · Aim",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('aim'); await wait(220);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Hot weather · Grenade",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('grenade', ['cocked', 0.2]); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "side",
+      "caption": "Hot weather · Dive",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('hot'); DWInspect.marine.weapon('pistol'); await DWInspect.marine.play('dive-forward', { loop: false }); DWInspect.pause();"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Full kit · Crouch",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('crouch'); await wait(250);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Full kit · Run",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('run'); DWInspect.marine.hold('run', 0.25); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Full kit · Reload",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('reload', 0.45); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Full kit · Aim",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('m4'); await DWInspect.marine.play('aim'); await wait(220);"
+    },
+    {
+      "target": "player",
+      "view": "three",
+      "caption": "Full kit · Grenade",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('m4'); DWInspect.marine.stop(); DWInspect.marine.hold('grenade', ['cocked', 0.2]); await wait(120);"
+    },
+    {
+      "target": "player",
+      "view": "side",
+      "caption": "Full kit · Dive",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.preset('full'); DWInspect.marine.weapon('pistol'); await DWInspect.marine.play('dive-forward', { loop: false }); DWInspect.pause();"
+    },
+    {
+      "target": "player",
+      "yaw": 28,
+      "pitch": 10,
+      "dist": 0.65,
+      "lookY": 0.62,
+      "caption": "Hat 1 · 8-point cover",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.stop(); DWInspect.marine.preset('issue'); DWInspect.marine.gear('helmet', false); DWInspect.marine.item('cap', { style: 'cover' }); DWInspect.marine.weapon('none'); await wait(120);"
+    },
+    {
+      "target": "player",
+      "yaw": 28,
+      "pitch": 10,
+      "dist": 0.65,
+      "lookY": 0.62,
+      "caption": "Hat 2 · Boonie",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.stop(); DWInspect.marine.preset('issue'); DWInspect.marine.gear('helmet', false); DWInspect.marine.item('cap', { style: 'boonie' }); DWInspect.marine.weapon('none'); await wait(120);"
+    },
+    {
+      "target": "player",
+      "yaw": 28,
+      "pitch": 10,
+      "dist": 0.65,
+      "lookY": 0.62,
+      "caption": "Hat 3 · Ballcap (forward)",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.stop(); DWInspect.marine.preset('issue'); DWInspect.marine.gear('helmet', false); DWInspect.marine.item('cap', { style: 'ballcap' }); DWInspect.marine.weapon('none'); await wait(120);"
+    },
+    {
+      "target": "player",
+      "yaw": 135,
+      "pitch": 10,
+      "dist": 0.65,
+      "lookY": 0.62,
+      "caption": "Hat 4 · Ballcap (backward)",
+      "pre": "DWInspect.play(); await DWInspect.show('marine', { view: false }); DWInspect.marine.stop(); DWInspect.marine.preset('issue'); DWInspect.marine.gear('helmet', false); DWInspect.marine.item('cap', { style: 'ballcapBack' }); DWInspect.marine.weapon('none'); await wait(120);"
+    }
+  ]
+}

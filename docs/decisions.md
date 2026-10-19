@@ -4,6 +4,16 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-81 · Jerry is out of the approval loop for now (Jerry, 2026-10-19; Claude, in chat).** Jerry: "Cut me out of the loop for approval for the time being. Make decisions based on what seems best."
+  So, until he says otherwise:
+  - Nothing waits for his yes. A question that would have gone to him (`crew.mjs ask`, a Q-n, "awaiting Jerry's
+    approval" on a card or in a report) goes to Claude as a request (`crew.mjs request <you> claude ...`). Claude
+    decides, logs it, and gives the reason in the reply; a call that changes how the game plays or looks gets a D-n here.
+  - Owners still own their files: crossing into someone else's still needs that owner, or Claude when they are away.
+  - Still his alone: deleting or overwriting his own files and work, anything that costs money or touches an account,
+    publishing anything outside the repo (the 1.0.0 release itself), and undoing one of his own orders or decisions.
+  - His standing orders stand (one game test at a time, the slot with him first, no timed or long runs, the frozen
+    model polish). What he tells an agent in chat is still his order for that agent.
 - **D-80 · The inspector is the game (Jerry, 2026-10-14; CL-196).** Jerry asked for an audit of AG-75's Marine Inspector,
   which he means to use "for all visual inspections of models and animations for here on out", for the agents too, made
   future-proof, robust and easy to change, and widened to every model. Asked whether it should run the real game's code

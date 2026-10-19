@@ -41,7 +41,8 @@
         if (!sp.gun || !sp.g.visible) continue;
         const side = sp.g.position.x >= 0 ? 1 : -1, tag = [a, b, c, d].join('/') + ' ' + sp.kind + (side > 0 ? '+' : '-');
         const fit = rig.packFit && rig.packFit[sp.kind];
-        if (!fit || Math.abs(sp.g.position.y - (fit.y - tp)) > 1e-6) continue;   // CL-160: the pistol rides there too
+        // GB-190: since GP-19894 two handgun kinds ride in two rows (applyCarryPlan: the first +0.29 m, the second -0.02 m).
+        if (!fit || ![0, 0.29, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6)) continue;   // CL-160: the pistol rides there too
         if (sp.kind === 'pistol') pistolSeen++; else seen++;
         const P = sp.g.position;
         // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face

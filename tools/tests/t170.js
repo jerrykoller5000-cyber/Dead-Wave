@@ -48,12 +48,12 @@
     // (1) fill it with rifle shots; ten seconds of warning, then out through a bolt-hole.
     for (let i = 0; i < 30 && S.state().phase === 'calm'; i++) { D.heard('m4'); await wait(120); stand(b, o.x, o.z); }
     ok(S.state().phase === 'warning' && events.some((e) => e.type === 'hollow-stir' && e.phase === 'warning'), 'about 30 rifle shots close together fill it: the warning (' + S.state().left + ' s)');
-    const tw = Date.now();
+    const tw = T.getSimTime();   // GB-186: the warning's ten seconds are game seconds (dt is capped at 50 ms)
     const bolt = b.exits.boltHoles[b.exits.boltHoles.length - 1];
     stand(b, bolt.x, bolt.z);
     ok(S.safe() === 'bolt', 'in the bolt-hole\'s circle he is safe');
-    const outAt = await until(() => !T.hollowState().below, 13000);
-    const waited = (Date.now() - tw) / 1000;
+    const outAt = await until(() => !T.hollowState().below || T.getSimTime() - tw > 13, 60000);
+    const waited = T.getSimTime() - tw;
     ok(outAt && waited > 8.5 && waited < 12, 'after the ten seconds he is out at the mouth, not grabbed (' + waited.toFixed(1) + ' s)');
     ok(events.some((e) => e.type === 'hollow-stir' && e.phase === 'out') && events.some((e) => e.type === 'hollow' && e.phase === 'leave' && e.how === 'bolt'), "the stir's 'out', and the leave by the bolt-hole");
     ok(T.getHushState().charged === false && !T.getHushState().below, 'and the Hush is spent for the day');
@@ -61,7 +61,7 @@
     T.setHp(100);
     b = down(); o = openSpot(b); stand(b, o.x, o.z);
     for (let i = 0; i < 40 && S.state().phase === 'calm'; i++) { D.heard('m4'); await wait(100); stand(b, o.x, o.z); }
-    const caught = await until(() => !!S.grab(), 12500);
+    const caught = await until(() => !!S.grab(), 45000);
     ok(caught && T.hollowState().below, 'in the open, the guardian comes through the rock and takes hold');
     const g = S.grab();
     ok(!!g && !!g.g && g.g.typeKey === 'guardian' && Math.hypot(g.g.mesh.position.x - p.x, g.g.mesh.position.z - p.z) < 6.5, 'its body is there, out of the nearest rock (' + (g && g.g ? Math.hypot(g.g.mesh.position.x - p.x, g.g.mesh.position.z - p.z).toFixed(1) : '-') + ' m)');
@@ -72,16 +72,16 @@
     ok(events.some((e) => e.type === 'guardian-kick-free' && e.below), 'the kick-free event goes out');
     // A flat Hush: the quiet no longer settles it, and it climbs 1.5 a second on its own.
     S.drain();
-    const f0 = S.state().stir; await wait(2000); stand(b, o.x, o.z);
+    const f0 = S.state().stir, s0 = T.getSimTime(); await until(() => T.getSimTime() - s0 >= 2, 20000); stand(b, o.x, o.z);
     const climbed = S.state().stir - f0;
     ok(climbed > 2.2 && climbed < 4.2, 'the Hush flat: it climbs on its own (' + climbed.toFixed(1) + ' in 2 s)');
     // (3) caught again: no kick-free left, the cave death.
     for (let i = 0; i < 40 && S.state().phase === 'calm'; i++) { D.heard('m4'); await wait(100); stand(b, o.x, o.z); }
-    const again = await until(() => !!S.grab(), 12500);
+    const again = await until(() => !!S.grab(), 45000);
     ok(again && S.grab() && !S.grab().can, 'caught a second time, there is no kick-free left');
     for (let i = 0; i < 6; i++) { document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyE', key: 'e', bubbles: true })); await wait(60); }
     ok(!!S.grab(), 'and E does nothing');
-    const dead = await until(() => T.hushDbg.over(), 6000);
+    const dead = await until(() => T.hushDbg.over(), 20000);
     ok(dead && T.getDeathCause() === 'caveguard' && !T.hollowState().below, 'it takes him: the run ends as caveguard (' + T.getDeathCause() + ')');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');

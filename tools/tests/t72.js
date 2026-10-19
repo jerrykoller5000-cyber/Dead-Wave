@@ -50,10 +50,8 @@
     ok(hour() > 7.6 && hour() < 9, 'and it is morning by itself: ' + hour().toFixed(2) + 'h');
     ok(!/Night/.test(tl()), 'day on the HUD: "' + tl() + '"');
     const card = document.getElementById('dawnCard');
-    ok(!!card && card.open === true, 'the Night Complete banner is up');
-    ok(!!card && card.querySelectorAll('button').length === 0, 'and it has no buttons');
-    ok(!!card && card.tagName !== 'DIALOG', 'and it is not a modal');
-    ok(/Night 1 Complete/i.test(card ? card.textContent : ''), 'it names the night: "' + (card ? card.textContent.replace(/\s+/g, ' ').trim().slice(0, 60) : '') + '"');
+    // CL-181 (Jerry's HUD trim, 2026-10-11): no Night Complete card any more; the morning comes on its own.
+    ok(!card || !card.open, 'no Night Complete card (CL-181)');
     ok(T.getPhase() === 'prep', 'the game goes on under it: ' + T.getPhase());
     ok(Math.abs(T.player.position.x - p.x) < 0.01, 'and the marine was not moved');
     // The next night comes from the briefing panel only; the alarm's shot holds the HQ.

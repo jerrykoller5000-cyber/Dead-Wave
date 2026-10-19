@@ -15,7 +15,8 @@
     const ak = T.WEAPON_STATS.ak.damage;
     const dAk = hit(b, ak, { kind: 'bullet' });
     ok(dAk <= ak * 0.45 + 1e-6 && dAk >= ak * 0.44, 'an AK round on a brute: ' + dAk.toFixed(1) + ' of ' + ak + ' (at most 0.45)');
-    const dPel = hit(b, 20, { kind: 'pellet' }), dBlade = hit(b, 40, { kind: 'melee' }), dSaw = hit(b, 30, { kind: 'chainsaw' });
+    // GB-190: since CU-127 a hit can break a plate (a broken plate doubles what gets through), so each kind gets a fresh brute.
+    const dPel = hit(mk('brute', -8), 20, { kind: 'pellet' }), dBlade = hit(mk('brute', -12), 40, { kind: 'melee' }), dSaw = hit(mk('brute', -16), 30, { kind: 'chainsaw' });
     ok(Math.abs(dPel - 9) < 0.01 && Math.abs(dBlade - 18) < 0.01 && Math.abs(dSaw - 13.5) < 0.01, 'pellets, blades and the saw too: ' + [dPel, dBlade, dSaw].map((v) => v.toFixed(1)).join(', '));
     const dBoom = hit(b, 100, { kind: 'explosive' });
     ok(dBoom >= 90 - 1e-6, 'a launcher shell: ' + dBoom.toFixed(1) + ' of 100 (at least 0.9)');

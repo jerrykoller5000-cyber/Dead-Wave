@@ -13,6 +13,7 @@
   const w1 = place('wall', gx0, gz0), w2 = place('wall', gx0, gz0 + 1);
   const p1 = place('platform', gx0, gz0), p2 = place('platform', gx0, gz0 + 1);
   out.push('refusal light on plat: ' + T.placeRefusalFor('light', gx0, gz0));
+  const lightRef = T.placeRefusalFor('light', gx0, gz0), onDeck = T.resolveTarget('light', gx0, gz0 + 1, 0, { lv: 1 });   // GB-187: read before the light and the turret take the deck
   place('railing', gx0, gz0);
   place('light', gx0, gz0);
   place('heavy', gx0, gz0 + 1);
@@ -21,11 +22,9 @@
   // player's check. On the menu the marine stands in the cabin (at 0,0, 5 m each way), so the
   // light's spot here is refused as the cabin, while the primitive puts it at the lowest free
   // level (the ground, under the deck: there is headroom). Aimed at the deck, it goes on the deck.
-  const lightRef = T.placeRefusalFor('light', gx0, gz0);
-  const lt = T.cellOccupant(gx0, gz0, 0, 'object');
+  const lt = T.cellOccupant(gx0, gz0, 1, 'object');   // GB-187: with no aim the game takes the top deck (resolveTarget, GB-46's later rule)
   ok(T.house && T.house.present && lightRef === 'that is the cabin' && !!lt && lt.type === 'light',
-    'cabin: the player is refused (' + lightRef + '), the primitive puts the light at lv0 (' + (lt ? lt.type : '-') + ')');
-  const onDeck = T.resolveTarget('light', gx0, gz0 + 1, 0, { lv: 1 });
+    'cabin: the player is refused (' + lightRef + '), the primitive puts the light on the deck, lv1 (' + (lt ? lt.type : '-') + ')');
   ok(onDeck.level === 1 && onDeck.slot === 'object', 'aimed at the deck, a light goes on the deck: ' + JSON.stringify(onDeck));
   ok(!!p1 && !!p2 && p1.level === 1 && p2.level === 1 && !!w1 && p1.mesh.position.y > w1.mesh.position.y + 1,
     'both platforms stack on the walls at lv1 (' + (p1 ? p1.mesh.position.y.toFixed(2) : '-') + ' over ' + (w1 ? w1.mesh.position.y.toFixed(2) : '-') + ')');

@@ -70,7 +70,8 @@ export function applyDrownedMotion(z,dt){
     const shin=leg?.userData.shinG,ankle=leg?.userData.shamblerAnkle;if(!shin||!ankle)continue;
     const cycle=((ph/(2*Math.PI)+i*.5)%1+1)%1,stance=cycle<DROWNED_MOTION.stance;
     const t=stance?cycle/DROWNED_MOTION.stance:(cycle-DROWNED_MOTION.stance)/(1-DROWNED_MOTION.stance);
-    const reach=DROWNED_MOTION.stride*DROWNED_MOTION.stance*.5;
+    // Its low, weighted hips shorten the planted reach; the old 44 cm step overextended the ankle.
+    const reach=DROWNED_MOTION.stride*DROWNED_MOTION.stance*.36;
     const footZ=(stance?reach*(1-2*t):reach*(2*smooth(t)-1))*scale*w;
     const lift=stance?0:Math.sin(t*Math.PI)*DROWNED_MOTION.lift*scale*w;
     const ry=leg.userData.shamblerFootY+lift-u.hips.position.y-leg.position.y-Math.sin(u.hips.rotation.z)*leg.position.x;

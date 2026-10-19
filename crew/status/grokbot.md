@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grok Bot
-task: GB-181 t221 sniper case: real-renderer check
-touching: combat/*, studio/weapon-*.js
-since: 2026-10-18T14:13Z
-next: GB-181 t221 and t252: new reds after GB-177 (a casing thrown to the
+task: —
+touching: —
+since: 2026-10-19T18:54Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-18-grokbot-GB-181.md
+last-report: handoffs/2026-10-19-grokbot-GB-190.md
 
 ## Notes
 

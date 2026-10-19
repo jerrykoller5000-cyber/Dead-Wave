@@ -1,0 +1,92 @@
+{
+  "morning4": {
+    "day": 4,
+    "orders": [
+      "Gravewalker, you are the thirteenth into this valley. Twelve went before you. Three weeks of silence.",
+      "Get the relay up. Hold Threshold. Bring ours home.",
+      "Extraction: Heron, night twenty. The lake is not safe to land on before then.",
+      "Return of issued equipment is expected. Return of personnel is encouraged."
+    ]
+  },
+  "checks": [
+    {
+      "view": "threat-report-desktop-1280",
+      "viewport": [
+        1280,
+        720
+      ],
+      "dialogBox": [
+        190,
+        29,
+        900,
+        662
+      ],
+      "ordersBox": [
+        221,
+        274,
+        828,
+        171
+      ],
+      "ordersCount": 4,
+      "overflowX": false
+    },
+    {
+      "view": "relay-hush-origin-desktop-1280",
+      "linesCount": 3,
+      "lines": [
+        "Relay's up. There's a spare board in the mast locker. Pull it, wire it the way I tell you, and it'll play the tone back at itself. Won't stop it. Will make a hole in it big enough for one man.",
+        "Threshold was a lockdown, nothing more. Wall up, look around, report. They had four quiet days.",
+        "Relay's up. This is Ridgeline. We lost FOB Threshold three weeks ago. All twelve. Good to hear anything. Hold where you are."
+      ],
+      "overflowX": false
+    },
+    {
+      "view": "threat-report-narrow-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "dialogBox": [
+        16,
+        25,
+        358,
+        793
+      ],
+      "ordersBox": [
+        35,
+        256,
+        310,
+        257
+      ],
+      "ordersCount": 4,
+      "overflowX": false
+    },
+    {
+      "view": "relay-hush-origin-narrow-390",
+      "linesCount": 3,
+      "lines": [
+        "Relay's up. There's a spare board in the mast locker. Pull it, wire it the way I tell you, and it'll play the tone back at itself. Won't stop it. Will make a hole in it big enough for one man.",
+        "Threshold was a lockdown, nothing more. Wall up, look around, report. They had four quiet days.",
+        "Relay's up. This is Ridgeline. We lost FOB Threshold three weeks ago. All twelve. Good to hear anything. Hold where you are."
+      ],
+      "overflowX": false
+    }
+  ],
+  "guardianCheck": {
+    "day": 6,
+    "banner": "Guardian driven back | Mortar blueprint unlocked",
+    "trick": "Guardian from the Marrow and spitters · fire drives it back; pick off the spitters",
+    "counters": [
+      "Shambler · Save your ammo: the knife does the job.",
+      "Feral · Too quick for grenades. Let it close and use the shotgun.",
+      "Leaper · Shoot it before it lands. Don't try to knife it.",
+      "Military · Vests stop bullets. They move together: throw a grenade.",
+      "Drowned · Too wet to burn. The shotgun tears it apart.",
+      "Spider · Its shell turns bullets. Burn it off the wall.",
+      "Spitter · Shoot it while it creeps in. Don't get close.",
+      "Brute · Plates stop bullets. Blow it up or burn it.",
+      "Guardian · It lives in the dark. Fire drives it back."
+    ]
+  },
+  "pageErrors": []
+}

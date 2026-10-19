@@ -26,7 +26,7 @@
     ok(s.hits === n0 + 1 && s.kvx < -1 && Math.abs(s.kvz) < 0.01, 'knocked back along the blow (kv ' + s.kvx.toFixed(2) + ', ' + s.kvz.toFixed(2) + ')');
     ok(s.stumbleT > 0 && s.aimT > 0 && Math.abs(s.aimOff) > 0.02 && s.jolt > 0.1 && s.react > 0.3, 'a stumble: lurch ' + s.react.toFixed(2) + ', aim off ' + s.aimOff.toFixed(3) + ' rad, jolt ' + s.jolt.toFixed(2));
     ok(s.kneeT === 0, 'a shambler does not put him on a knee');
-    await wait(900);
+    await (async () => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.9 && Date.now() - w0 < 12000) await wait(30); })();   // GB-187: game time (the page runs slow, dt is capped)
     const slide1 = a.x - p.x;
     ok(slide1 > 0.15 && slide1 < 0.75 && Math.abs(p.z - a.z) < 0.1, 'a short slide: ' + slide1.toFixed(2) + ' m (dz ' + (p.z - a.z).toFixed(2) + ')');
     s = T.getHitStumble();

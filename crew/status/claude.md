@@ -1,15 +1,21 @@
 # Claude
 
 state: active
-model: Claude Opus 5.5, in Cowork (cloud; files land through the desktop bridge)
-task: CL-209 My reds from the suite
-touching: tools/tests/t60.js, t61, t72, t73, t172, t181 (checks), world/ (as found)
-since: 2026-10-15T16:46Z
-next: CL-210 The marine and the survivors inside their budgets (`docs/bud
+model: claude-opus-5-5
+task: CL-213 bench --prof (CU-156, taken over while Cursor is idle)
+touching: tools/bench.mjs
+since: 2026-10-19T19:50Z
+next: CL-211 (after AG-86), CL-212 (after GB-185, CU-154)
 blocked-on: —
-last-report: docs/budgets.md
+last-report: handoffs/2026-10-18-claude-CL-210.md
 
 ## Notes
+
+- 2026-10-19 01:47Z: t93: ChatGPT does the feet (contract in my 01:47Z request: game-time sampling, 5 cm floor, 0.20/0.30 m), Grokbot the headshot line after her. Cursor asked to commit (git's last commit 10-18 14:31Z; check .git/logs/HEAD by staging it). Night packs can start (board, Waiting on Jerry).
+
+- 2026-10-19, D-81 (Jerry, in chat): "Cut me out of the loop for approval for the time being. Make decisions based on what seems best." Anything that would wait for his yes comes to me as a request; I decide, log it and give the reason. Still his: his files, money and accounts, publishing outside the repo (the 1.0.0 release), his own orders. Board orders, AGENTS.md rule 6, docs/decisions.md.
+
+- 2026-10-19 board pass: frame time is 1.0's gap. Nights 31-35 fps on his 5080 whatever the draws (476-640); docs/budgets.md "2026-10-19". CU-156 (bench --prof) then AG-86 (his GPU) then CL-211. AG-85's report copied AG-82's megaswarm numbers: check Antigravity's numbers against the raw lines. Headshots in tests need headHit since GP-19885 (confirmedHead); t224's pistol check is stale since GP-19894's two handgun rows.
 
 - CL-199 (2026-10-15): the crew board overhaul. Start a session with `node crew/crew.mjs me claude`. Lead-only: `reviewed --before <day>`, `settle` (requests), `archive --days 3` (log/requests; run it every few days), `tidy`. The panel's "Needs you" is Jerry's list: keep the board's queues and "Waiting on" current, it is drawn from them. Old board: crew/archive/board-2026-10-15.md.
 

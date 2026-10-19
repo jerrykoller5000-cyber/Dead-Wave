@@ -92,8 +92,9 @@
       D.drawHold(null); await wait(1200);
       await take('chainsaw');
     }
-    // The knife.
+    // The knife (the issue knife: grantAllWeapons gave him the machete, whose chop is its own clip).
     await take('m4');
+    if (T.setMacheteOwned) T.setMacheteOwned(false); if (T.setKatanaOwned) T.setKatanaOwned(false);
     ok(!!(D.knife().clip), 'the knife arm\'s slash clip is loaded (studio/clips/marine/knife-slash.json)');
     T.setKnifeCd(0); T.knifeAttack(); D.knifeHold(0.4); await wait(500);
     const K = D.knife();

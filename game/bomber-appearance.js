@@ -46,10 +46,13 @@ export function blendBomberSkin(T,u,scale){
   [[.13,-.25],[.08,-.24],[.06,-.29],[.03,-.31]]
  ];
  const positions=[],normals=[];
- for(let j=0;j<paths.length;j++){
+ // Three segments per branch and the first thirteen balanced paths keep the belly's
+ // branching pattern readable while avoiding thousands of subpixel tube triangles.
+ const visiblePaths=13,steps=3;
+ for(let j=0;j<visiblePaths;j++){
   const curve=new T.CatmullRomCurve3(paths[j].map(([x,y])=>new T.Vector3(x*scale,y*scale,0))),points=[];
-  for(let i=0;i<=12;i++){
-   const p=curve.getPoint(i/12);ray.set(new T.Vector3(p.x,p.y,front),down);hits.length=0;ray.intersectObject(probe,false,hits);
+  for(let i=0;i<=steps;i++){
+   const p=curve.getPoint(i/steps);ray.set(new T.Vector3(p.x,p.y,front),down);hits.length=0;ray.intersectObject(probe,false,hits);
    if(hits[0])points.push(new T.Vector3(p.x,p.y,hits[0].point.z+.004*scale));
   }
   if(points.length<3)continue;

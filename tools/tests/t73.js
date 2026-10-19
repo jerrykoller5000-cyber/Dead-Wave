@@ -11,13 +11,14 @@
     await startMatch(T, 'Sections');
     if (A.setMuted) A.setMuted(false);
     if (!ms().playing) A.startMusic();
-    await until(() => ms().sectionsReady && ms().sectionsReady.fight_day01, 20000);
-    ok(ms().sectioned.includes('fight_day01') && ms().sectionsReady.fight_day01, 'day 1\'s sections are decoded before the wave: ' + JSON.stringify(ms().sectionsReady));
+    const song1 = (() => { let t = null; for (const w of ms().waveByDay || []) if (w.from <= 1) t = w.track; return t; })();   // CL-209: night 1's song, whichever music music.json has (CL-165)
+    await until(() => ms().sectionsReady && ms().sectionsReady[song1], 20000);
+    ok(!!song1 && ms().sectioned.includes(song1) && ms().sectionsReady[song1], 'day 1\'s sections are decoded before the wave: ' + JSON.stringify(ms().sectionsReady));
     T.clearZombies && T.clearZombies();
     T.hqStartWave();
     await until(() => ms().stage === 'fight', 15000);
-    ok(ms().stage === 'fight' && ms().deckTrack === 'fight_day01', 'the fight is day 1\'s song: ' + ms().stage + '/' + ms().deckTrack);
-    ok(/fight_day01_sections\.ogg$/.test(ms().front || ''), 'played from the section file: ' + ms().front);
+    ok(ms().stage === 'fight' && ms().deckTrack === song1, 'the fight is day 1\'s song: ' + ms().stage + '/' + ms().deckTrack);
+    ok((ms().front || '').endsWith(song1 + '_sections.ogg'), 'played from the section file: ' + ms().front);
     // Nobody close yet: the stalk. The plan is drained (day 1's ground risers, D-29, would keep
     // clawing up 35-60 m out) and four are left far off, so the wave stays on and isn't down to
     // its last few.

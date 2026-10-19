@@ -1,4 +1,4 @@
-// t218 - GB-145 (Jerry, 2026-10-08: "work on all the reload animations. Especially in akimbo. There are a lot of
+// t218 - GB-145 (GB-188: the single magazine guns; the rest is t262) (Jerry, 2026-10-08: "work on all the reload animations. Especially in akimbo. There are a lot of
 // floating magazines and weird hand placements"). Held at sampled beats of the reload (TT.reloadClipDbg.hold), for
 // every magazine gun single, the pistol / Uzi / revolver in akimbo, and the shotgun and the launcher:
 //  - every visible magazine is seated in its gun's well or has its foot in the support palm; hidden only while the
@@ -24,7 +24,8 @@
   // The plans' beats (index.html RELOAD_PLAN): reach, pouch, seat.
   const PLAN = { pistol: [0.10, 0.32, 0.60], uzi: [0.10, 0.32, 0.58], sniper: [0.10, 0.30, 0.54], m4: [0.12, 0.34, 0.62], ak: [0.12, 0.34, 0.62], aa12: [0.12, 0.34, 0.62] };
   let aimer = null;
-  const ONLY = window.__t218only || null, want = (w) => !ONLY || ONLY.includes(w);
+  const ONLY = window.__t218only || ['pistol', 'uzi', 'sniper', 'm4', 'ak', 'aa12'],   // GB-188: split (180 s limit); akimbo, revolver, launcher and shotgun are t262
+  want = (w) => !ONLY || ONLY.includes(w);
   try {
     const R = T.reloadClipDbg;
     ok(!!R && typeof R.hold === 'function', 'TT.reloadClipDbg.hold is exported');
@@ -73,7 +74,7 @@
       T.startReload(); await wait(80);
       return !!T.getReloadDbg().weapon;
     };
-    const at = async (u) => { R.hold(u); await wait(200); m.updateMatrixWorld(true); };
+    const at = async (u) => { R.hold(u); const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.2 && Date.now() - w0 < 3000) await wait(20); m.updateMatrixWorld(true); };   // GB-188: 0.2 s of game time for the arms to settle
     const BEATS = Array.from({ length: 25 }, (_, k) => +(k * 0.04).toFixed(2));   // 0 .. 0.96
     const end = async () => { R.hold(null); for (let i = 0; i < 100 && T.getReloadDbg().weapon; i++) await wait(100); await wait(300); };
 

@@ -46,7 +46,7 @@
     ok(T.fogCullDbg().hidden === 1, 'one hidden (' + T.fogCullDbg().hidden + ')');
 
     // (2) Hidden, it still walks.
-    const p0 = zFar.mesh.position.clone(); await wait(1500);
+    const p0 = zFar.mesh.position.clone(); await (async () => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.5 && Date.now() - w0 < 15000) await wait(30); })();   // GB-187: 1.5 s of game time
     const moved = zFar.mesh.position.distanceTo(p0);
     ok(zFar.alive && hidden(zFar) && moved > 0.5, 'hidden, it still walks (' + f1(moved) + ' m in 1.5 s)');
 

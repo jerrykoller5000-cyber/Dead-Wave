@@ -7,7 +7,7 @@ test('all twenty Ridgeline dispatches and every planned prop and survivor line e
   for (let n = 1; n <= 20; n++) assert(text(`story.relay.${n}`).length > 35, `missing relay ${n}`);
   for (const id of ['relayBroken','convoy','utilityTruck','ranger','hikers','trapper','fuel','dock','watchtower','hq'])
     assert(text(`story.prop.${id}`).length > 20, `missing prop ${id}`);
-  for (const id of ['reyes','voss','kettle']) for (const moment of ['found','morning','aboard'])
+  for (const id of ['okafor','brandt','pike']) for (const moment of ['found','roof','aboard'])
     assert(text(`story.survivor.${id}.${moment}`).length > 15, `missing ${id}/${moment}`);
 });
 
@@ -19,10 +19,11 @@ test('an early repair catches up before 18 and keeps both lines on the board, ne
   const heard = [];
   for (let day = 4; day <= 17; day++) {
     const dispatch = story.morning({runId:7,day,repaired:true});
-    const numbers = dispatch.lines.map(entry => entry.number);
+    const numbers = dispatch.lines.map(entry => entry.number).filter(Number.isInteger);
     assert.deepEqual(numbers, day <= 6 ? [2*(day-3), 2*(day-3)-1] : [day]);
+    if (day === 4) assert.equal(dispatch.lines[0].line,text('story.relay.hushOrigin'));
     heard.push(...numbers.toReversed());
-    for (const entry of dispatch.lines) assert.equal(entry.line,text(`story.relay.${entry.number}`));
+    for (const entry of dispatch.lines) if(Number.isInteger(entry.number)) assert.equal(entry.line,text(`story.relay.${entry.number}`));
     assert.equal(dispatch.line, dispatch.lines[0].line);
     assert.deepEqual(story.read(true),{status:'heard',...dispatch});
     assert.equal(story.morning({runId:7,day,repaired:true}),null,'opening the board again does not replay');
@@ -46,7 +47,9 @@ test('boat dispatches belong to mornings 18–20 even after a late repair', () =
   for(const day of [18,19,20])assert.equal(story.morning({runId:'run',day,repaired:true}).number,day);
   story.reset('late');
   for(let day=1;day<=18;day++)story.morning({runId:'late',day,repaired:false});
-  assert.equal(story.morning({runId:'late',day:19,repaired:true}).number,19);
+  const lateFirst=story.morning({runId:'late',day:19,repaired:true});
+  assert.equal(lateFirst.lines[0].line,text('story.relay.hushOrigin'));
+  assert.equal(lateFirst.lines[1].number,19);
   assert.equal(story.morning({runId:'late',day:20,repaired:true}).number,20);
   assert.equal(story.morning({runId:'run',day:20,repaired:true}),null,'old run cannot advance new story');
   story.reset('fresh');assert.equal(story.read(true).status,'awaiting');

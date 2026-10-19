@@ -11,7 +11,7 @@ test('seven canonical keyed sites; only discovered nonterminal sites get markers
 });
 test('one tracked site, real distance, no reachability invented from proximity',()=>{
   const c=createObjectiveTracker();c.update(snapshot({sites:[site(),site(ranger)]}));
-  c.track(radio);assert.equal(c.read().tracker.distance,50);assert.equal(c.read().tracker.prompt,'Hold E for 6 seconds to restore the radio');
+  c.track(radio);assert.equal(c.read().tracker.distance,50);assert.equal(c.read().tracker.prompt,'Use the relay cabinet to restore the radio');
   c.track(ranger);assert.equal(c.read().markers.filter(m=>m.selected).length,1);assert.equal(c.read().tracker.id,ranger);
   c.untrack();assert.equal(c.read().tracker,null);
 });

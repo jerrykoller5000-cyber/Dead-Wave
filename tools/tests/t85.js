@@ -7,7 +7,8 @@
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const until = async (cond, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (cond()) return true; await wait(40); } return cond(); };
   const pickups = [];
-  window.addEventListener('dw-game', (e) => { if (e.detail && e.detail.type === 'skull-pickup') pickups.push({ ...e.detail, at: Date.now() }); });
+  const dawns = [];   // GB-187: CL-181 removed the dawn card; its numbers go out as 'dawn-summary'
+  window.addEventListener('dw-game', (e) => { if (e.detail && e.detail.type === 'skull-pickup') pickups.push({ ...e.detail, at: Date.now() }); if (e.detail && e.detail.type === 'dawn-summary') dawns.push({ ...e.detail }); });
   try {
     ok(typeof T.skullSafeSpot === 'function', 'GB-60 hook exported');
     await startMatch(T, 'SkullRecall');
@@ -91,11 +92,10 @@
     ok(bagged >= loose0, 'the bag took all ' + loose0 + ' (+' + bagged + ')');
     // Counted at dawn: the banner's skull number includes the recalled ones.
     await until(() => T.getPhase() === 'prep', 15000);
-    const card = document.getElementById('dawnCard');
-    await until(() => card && card.open === true, 6000);
-    const shown = card ? Number((card.querySelector('[data-stat="skulls"]') || {}).textContent) : NaN;
+    await until(() => dawns.length > 0, 8000);
+    const shown = dawns.length ? dawns[dawns.length - 1].skulls : NaN;
     const nightPicks = pickups.slice(nightPick0).reduce((n, e) => n + (e.count || 0), 0);
-    ok(!!card && card.open === true && shown >= nightPicks && nightPicks >= loose0, 'the dawn banner counts them: ' + shown + ' skulls (recalled ' + nightPicks + ')');
+    ok(shown >= nightPicks && nightPicks >= loose0, 'the dawn summary counts them: ' + shown + ' skulls (recalled ' + nightPicks + ')');
   } catch (e) {
     out.push('FAIL threw: ' + (e && e.stack || e.message));
   }

@@ -45,9 +45,9 @@ function flameGeometry(THREE) {
   // Thin, interleaved tongues leave dark gaps and readable moving tips instead
   // of merging into one solid orange cuff. All fire and embers stay in one draw.
   const tongues = [[0, 0, 1.18, .3], [-.28, .06, .86, 1.5], [.28, -.05, 1.02, 3.2], [.04, .26, .78, 4.4], [-.06, -.27, .95, 5.5], [-.19, -.18, .69, 2.2], [.20, .18, .83, 6.2]];
-  const levels = [0, .10, .24, .40, .57, .73, .87, .96, 1];
-  const widths = [.16, .21, .20, .15, .10, .057, .028, .010, .001];
-  const sides = 6, tongueData = [], sparks = [];
+  const levels = [0, .24, .57, .87, 1];
+  const widths = [.16, .20, .10, .028, .001];
+  const sides = 4, tongueData = [], sparks = [];
   for (const [cx, cz, height, phase] of tongues) {
     const start = xyz.length / 3;
     tongueData.push({start,cx,cz,height,phase});
@@ -72,7 +72,7 @@ function flameGeometry(THREE) {
   }
   const movingVertices = xyz.length / 3;
   // Bake the hot fist core into the same draw as the translucent fire tongues.
-  const core = new THREE.IcosahedronGeometry(1, 1);
+  const core = new THREE.IcosahedronGeometry(1, 0);
   const corePositions = core.attributes.position;
   for (let i = 0; i < corePositions.count; i++) {
     indices.push(xyz.length / 3);
@@ -83,7 +83,7 @@ function flameGeometry(THREE) {
   // Tiny tetrahedral embers rise and shrink away; fixed slots, no particle pool,
   // extra materials or lights. Their reset is invisible at zero radius.
   const emberShape = [[1,0,-.6],[-1,0,-.6],[0,0,1],[0,1.7,0]];
-  for(let i=0;i<6;i++){
+  for(let i=0;i<4;i++){
     const start=xyz.length/3;sparks.push({start,phase:i*.61803398875%1,angle:i*2.399963});
     for(const[x,y,z]of emberShape){xyz.push(x*.018,y*.018,z*.018);colors.push(1,.45,.025);}
     for(const a of [0,2,1,0,1,3,1,2,3,2,0,3])indices.push(start+a);
@@ -243,12 +243,16 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
       const anchor = new THREE.Group(); anchor.name = 'demon-fire-fist';
       anchor.userData.armIndex = i;
       anchor.position.set(0, -.354 * s, .02 * s); elbows[i].add(anchor);
-      const flame = new THREE.Mesh(cache.flameGeo, cache.flameMat);
+      const flame = new THREE.Object3D();
       flame.scale.set(.35 * s, .52 * s, .35 * s);
       flame.rotation.y=i?2.1:0; // shared buffers, different silhouette on each hand
       anchor.add(flame); anchor.userData.flame = flame;
       rig.flameAnchors.push(anchor);
     }
+    const batch = new THREE.InstancedMesh(cache.flameGeo, cache.flameMat, 2);
+    batch.name = 'demon-fire-fists'; batch.frustumCulled = false; batch.castShadow = false;
+    batch.instanceMatrix.setUsage?.(THREE.DynamicDrawUsage); g.add(batch);
+    rig.flameBatch = batch; rig.flameInverse = new THREE.Matrix4(); rig.flameMatrix = new THREE.Matrix4();
   } else {
     const pack = new THREE.Group(); pack.name = 'colossus-stone-carrier'; pack.scale.setScalar(s); torso.add(pack);
     const details = new THREE.Group(); details.name = 'colossus-carrier-moving-parts'; details.visible = false; pack.add(details);
@@ -273,8 +277,12 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
 
 /** Call after legacy pooling reset, which otherwise turns hidden props back on. */
 export function resetZombieAbilityVisuals(g) {
+  // The legacy pool reset reveals every child. Keep the source eyes hidden;
+  // their merged head mesh shares the first eye material for death fades.
+  for (const eye of g?.userData?.eyes || []) if (g.userData.eyeBatch) eye.visible = false;
   const rig = rigOf(g); if (!rig) return;
   for (const anchor of rig.flameAnchors) { anchor.visible = true; anchor.scale.setScalar(1); }
+  if (rig.flameBatch) rig.flameBatch.visible = true;
   for (let i = 0; i < rig.backRocks.length; i++) {
     rig.backRocks[i].visible = true; rig.backRocks[i].scale.set(.29, .32, .28);
     rig.stock[i].consumedAt = -Infinity;
@@ -363,6 +371,19 @@ export function updateZombieAbilityVisuals(z, time, state = {}) {
       const flicker = 1 + .06 * Math.sin(now * 13 + i * 3.7);
       anchor.scale.setScalar(flicker + flare);
     }
+    rig.g.updateMatrixWorld(true);
+    rig.flameInverse.copy(rig.g.matrixWorld).invert();
+    let active = 0;
+    for (let i = 0; i < rig.flameBatch.count; i++) {
+      const anchor = rig.flameAnchors[i];
+      if (anchor?.visible) {
+        rig.flameMatrix.multiplyMatrices(rig.flameInverse, anchor.userData.flame.matrixWorld);
+        active++;
+      } else rig.flameMatrix.makeScale(0, 0, 0);
+      rig.flameBatch.setMatrixAt(i, rig.flameMatrix);
+    }
+    rig.flameBatch.visible = active > 0;
+    rig.flameBatch.instanceMatrix.needsUpdate = true;
   } else {
     const slot = Number.isInteger(state.slot) ? ((state.slot % 3) + 3) % 3 : rig.lastSlot;
     if (!alive) { rig.heldRock.visible = false; return; }
