@@ -2041,7 +2041,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _cullM.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
       _cullFrustum.setFromProjectionMatrix(_cullM);
       const px = player.position.x, pz = player.position.z;
-      const shadowR = sun.castShadow ? SHADOW_HALF + 10 : 0;
+      const shadowR = sun.castShadow ? SHADOW_HALF + 10 : 0;   // (CL-211 tried 0 at night: no faster, worse lows)
       let spheres = 0, hidden = 0, tested = 0;
       const kids = scene.children;
       for (let i = 0; i < kids.length; i++) {
@@ -2083,16 +2083,50 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       cullStats.hidden = hidden; cullStats.tested = tested; cullStats.spheres = spheres; cullStats.ms = performance.now() - t0;
     }
     function cullShowAll() { for (const o of scene.children) { const c = o.userData && o.userData._cull; if (c && c.hidden) cullShow(o, c); } }
+    // CL-211: the sun's shadow pass draws the scene a second time: 7.8 ms of CPU in a 30 ms night frame on Jerry's
+    // 5080 (AG-86's --cpu run). At night the sun is 0.025-0.1 strong under a 0.15 sky and its shadows can't be
+    // seen, so there its map is redrawn every SUN_SHADOW_NIGHT_EVERY frames; by day, every frame as before.
+    const SUN_SHADOW_NIGHT_EVERY = 4, SUN_SHADOW_DIM = 0.12;
+    let sunShadowTick = 0;
+    function sunShadowCadence() {
+      if (!sun.castShadow) return;
+      if (sun.intensity >= SUN_SHADOW_DIM) { sun.shadow.autoUpdate = true; return; }
+      sun.shadow.autoUpdate = false;
+      if (++sunShadowTick >= SUN_SHADOW_NIGHT_EVERY) { sunShadowTick = 0; sun.shadow.needsUpdate = true; }
+    }
+    // CL-211: scene.updateMatrixWorld(), less the top-level things sceneCull has hidden: nothing draws them, and a
+    // change made while hidden waits (updateMatrix keeps matrixWorldNeedsUpdate) until they are shown, which happens
+    // in sceneCull before this walk, the same frame. getWorldPosition and Box3.setFromObject bring their own up to date.
+    function updateSceneMatrices() {
+      if (scene.matrixAutoUpdate) scene.updateMatrix();
+      let force = false;
+      if (scene.matrixWorldNeedsUpdate) { scene.matrixWorld.copy(scene.matrix); scene.matrixWorldNeedsUpdate = false; force = true; }
+      const kids = scene.children;
+      for (let i = 0; i < kids.length; i++) {
+        const c = kids[i], ud = c.userData, cu = ud._cull;
+        if (cu !== undefined && cu.hidden) continue;
+        if (ud.walkWhenShown === true && c.visible === false) continue;   // its owner opts in (the bees and butterflies)
+        c.updateMatrixWorld(force);
+      }
+    }
     function renderFrame() {
       if (gameStarted && !training.active) sceneCull(); else if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }   // CL-140
       PROF.mark('r:cull');
       updateLightPool();   // CL-116
       PROF.mark('r:lightPool');
       syncRigSkins();   // CL-210: a changed part on a baked marine or survivor bakes him again
+      PROF.mark('r:rigSkin');   // CL-211: its own line in bench --prof (it ran inside r:render)
+      sunShadowCadence();   // CL-211: at night the sun's shadow map is redrawn every 4th frame
+      // CL-211: one walk of the scene's matrices a frame. render() walks them every call, and the sun's shadow pass
+      // is a second render() inside the first: the two walks were 6.9 ms of a 30 ms night frame (AG-86 --cpu).
+      updateSceneMatrices();
+      PROF.mark('r:matrices');
       try {
+        scene.matrixWorldAutoUpdate = false;
         if (postProcessing) postProcessing.render();
         else renderer.render(scene, camera);
       } finally {
+        scene.matrixWorldAutoUpdate = true;
         PROF.mark('r:render');
         if (!scene.background) scene.background = SCENE_BG;   // CL-138 (above, at SCENE_BG)
       }
@@ -10996,6 +11030,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const gh = sampleHeight(x, z);
       const y = gh + 0.6 + Math.random() * 1.4;
       mesh.position.set(x, y, z);
+      mesh.userData.walkWhenShown = true;   // CL-211: hidden (rain, night), the matrix walk skips it
       scene.add(mesh);
       bugs.push({
         kind,
@@ -11084,7 +11119,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function bugsShouldHide() {
       // Shelter during rain storms — intensity ramps in/out with weather system
-      return !!(weather && (weather.raining || weather.intensity > 0.08));
+      // CL-211: and at night (the sun under SUN_SHADOW_DIM): bees and butterflies are day things, and the night's
+      // 20-odd of them were 930 of the scene's 9,900 nodes (AG-89's census)
+      return !!(weather && (weather.raining || weather.intensity > 0.08)) || sun.intensity < SUN_SHADOW_DIM;
     }
 
     function updateBugs(dt) {
@@ -35287,7 +35324,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function fogCullPrep() {
       const f = scene.fog;
       _fcFar = (fogCullOn && f && f.density == null && f.far > 0) ? f.far + FOG_CULL_MARGIN : Infinity;
-      if (_fcFar !== Infinity) camera.getWorldDirection(_fcFwd);
+      camera.getWorldDirection(_fcFwd);
     }
     function fogCullKeeps(z) {
       if (z.typeKey === 'guardian' || z.guardianPlanned) return true;
@@ -35298,6 +35335,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function fogCullDepth(z) {
       const p = z.mesh.position, c = camera.position;
       return (p.x - c.x) * _fcFwd.x + (p.y - c.y) * _fcFwd.y + (p.z - c.z) * _fcFwd.z;
+    }
+    function zombiePoseVisible(z) {
+      if (hollowFloor || training.active) return true;
+      if (z.fogHidden) return false;
+      if (sun.castShadow && sun.intensity >= SUN_SHADOW_DIM) return true;
+      const p = z.mesh.position, c = camera.position, dx = p.x - c.x, dz = p.z - c.z;
+      return dx * dx + dz * dz < 12 * 12 || fogCullDepth(z) > -3;
     }
     function syncZombieFogCull(z, dt) {
       if (!z || !z.mesh) return;
@@ -49670,6 +49714,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       inDomain: z => !!z.below === !!hollowFloor && (!training.active || !!z.trainingZ) });
     const enemyAbilities = createZombieAbilityRuntime({
       THREE, TSL, scene,
+      poseVisible: z => zombiePoseVisible(z),
       actors: () => zombies,
       target: zTarget,
       players: (x, z, r) => playersNear(x, z, r, { alive: true }),
@@ -51177,15 +51222,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       fogCullPrep();   // GB-59
       for (const z of zombies) {
         if (!z.alive) continue;
-        restoreBomberPose(z); // GP-19884
-        restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses
-        restoreMilitaryPose(z); // GP-19864
-        restoreSpitterMotion(z); // GP-19870
-        restoreScreamerPose(z); // GP-19872
-        updateScreamerAppearance(z, dt, camera);
-        restoreDrownedMotion(z); // GP-19863: clear prior shuffle before ordinary reactions
-        restoreDrownedPose(z); // GP-19860: restore last grab overlay before the normal rig poses
-        tickSpiderMotion(z, dt); // restore prior Spider pose before reactions
+        const kind = z.typeKey;
+        if (kind === 'bomber') restoreBomberPose(z); // GP-19884
+        if (kind === 'brute') restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses
+        if (kind === 'military') restoreMilitaryPose(z); // GP-19864
+        if (kind === 'spitter') restoreSpitterMotion(z); // GP-19870
+        if (kind === 'screamer') { restoreScreamerPose(z); updateScreamerAppearance(z, dt, camera); }
+        if (kind === 'drowned') { restoreDrownedMotion(z); restoreDrownedPose(z); }
+        if (kind === 'spider') tickSpiderMotion(z, dt); // restore prior Spider pose before reactions
         let spiderTouch = null;
         if (spiderHeadless(z)) {
           const p = zTarget(z).position, dx = p.x - z.mesh.position.x, dz = p.z - z.mesh.position.z;
@@ -51193,8 +51237,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           spiderTouch = stepHeadlessSpiderTouch(z, dt, dx, dz, touching);
         }
         const spiderWander = headlessSpiderStep(z, dt);
-        tickLeaperMotion(z, dt); // restore prior visual pose before reactions/LOD
-        const shamblerRecovering = tickShamblerRecovery(z, dt);
+        if (kind === 'leaper') tickLeaperMotion(z, dt); // restore prior visual pose before reactions/LOD
+        const shamblerRecovering = kind === 'shambler' && tickShamblerRecovery(z, dt);
         if (z.hz === undefined) { if (z.ttSpawn) z.hz = null; else hordeJoin(z); }   // GB-94: its pace and wits, once
         syncZombieFarLod(z);
         syncZombieFogCull(z, dt);   // GB-59
@@ -52485,27 +52529,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           for (const m of ud.spitMats) m.emissiveIntensity = m.userData.baseEmissive || 0;
           if (ud.jaw) ud.jaw.rotation.x = 0;
         }
-        applySpiderMotion(THREE, z); // GP-19857: brace, mouth tell and recoil over final pose
+        const poseWork = !z.farLod && (zombiePoseVisible(z) || z.abilityBusy || z.attackWindup > 0 || z.swingT > 0 || z.chargeT > 0 || z.leapT > 0 || z.spitWind > 0 || z.screamT > 0 || spiderTouch?.strike);
+        if (poseWork && kind === 'spider') applySpiderMotion(THREE, z); // GP-19857: brace, mouth tell and recoil over final pose
         if (spiderTouch?.strike && !zombieGraceActive()) {
           const victim = zTarget(z), p = victim.position, dx = p.x - z.mesh.position.x, dz = p.z - z.mesh.position.z;
           if (Math.hypot(dx, dz) < z.radius + PLAYER_RADIUS + SPIDER_TOUCH.reachPad && Math.abs(p.y - z.mesh.position.y) < SPIDER_TOUCH.height && spiderTouchCanHit(z, dx, dz) && !shotBlocked({ x: z.mesh.position.x, y: z.mesh.position.y + .5, z: z.mesh.position.z }, { x: p.x, y: p.y + .5, z: p.z })) damagePlayer(z.damage, z.typeKey, z, null, victim);
         }
         if (z.spiderShot) { const shot = z.spiderShot; z.spiderShot = null; spawnAcidGlob(z, shot.x, shot.z, true); }
-        applyLeaperMotion(THREE, z, dt, standing ? 0 : walkAmt, dist); // GP-19856
-        applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait);
-        applyShamblerRecovery(z);
-        applyBomberPose(z, dt, z.typeKey === 'bomber' ? zTarget(z).position : null); // GP-19890: belly-side arms flap faster near the player
-        applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash
-        applyMilitaryPose(z, dt); // GP-19864: planted combat stride, guard, bash and kick
-        applySpitterMotion(z, dt); // GP-19870: hunched shuffle, hip lag and final retch/recoil
-        applyScreamerPose(z, dt); // GP-19872: planted sway, open arms, scream arch and spent recovery
+        if (poseWork && kind === 'leaper') applyLeaperMotion(THREE, z, dt, standing ? 0 : walkAmt, dist); // GP-19856
+        if (poseWork && kind === 'shambler') { applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait); applyShamblerRecovery(z); }
+        if (poseWork && kind === 'bomber') applyBomberPose(z, dt, zTarget(z).position); // GP-19890: belly-side arms flap faster near the player
+        if (poseWork && kind === 'brute') applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash
+        if (poseWork && kind === 'military') applyMilitaryPose(z, dt); // GP-19864: planted combat stride, guard, bash and kick
+        if (poseWork && kind === 'spitter') applySpitterMotion(z, dt); // GP-19870: hunched shuffle, hip lag and final retch/recoil
+        if (poseWork && kind === 'screamer') applyScreamerPose(z, dt); // GP-19872: planted sway, open arms, scream arch and spent recovery
         if (z.spitterShot) { const shot=z.spitterShot; delete z.spitterShot; if (!parts.head) spawnAcidGlob(z,shot.x,shot.z,true); }
-        applyDrownedMotion(z, dt); // GP-19863: low planted shuffles and weight transfer
-        applyDrownedPose(z); // GP-19860: open two-arm reach, bent elbows and backward hauling
-        applyFeralClaws(THREE, z, phase, standing ? 0 : walkAmt);   // GP-19850: open, palms-down rakes over final torso pose
+        if (poseWork && kind === 'drowned') { applyDrownedMotion(z, dt); applyDrownedPose(z); }
+        if (poseWork && kind === 'feral') applyFeralClaws(THREE, z, phase, standing ? 0 : walkAmt);   // GP-19850: open, palms-down rakes over final torso pose
         // CL-187: the roll of each step, heel to toe, over whatever the poses above gave the legs (game/zombie-feet.js).
-        applyZombieFeet(z, { phase, walkAmt: standing ? 0 : walkAmt, standing, busy: rising || knocked || z.attackWindup > 0 || z.swingT > 0 || z.hitReact > 0 || z.hitPartT > 0 || !!(militaryStep && militaryStep.busy) || !!(bruteStep && bruteStep.busy) || !!drownedStep || !!shamblerRecovering || z.spitWind > 0 || z.screamT > 0 || z.chargeT > 0 || !!z.abilityBusy || z.leapT > 0 });
-        if (!rising && !knocked) applyZombieLean(z, dt);   // CL-187: in on a start, back on a stop, into a turn
+        if (poseWork) applyZombieFeet(z, { phase, walkAmt: standing ? 0 : walkAmt, standing, busy: rising || knocked || z.attackWindup > 0 || z.swingT > 0 || z.hitReact > 0 || z.hitPartT > 0 || !!(militaryStep && militaryStep.busy) || !!(bruteStep && bruteStep.busy) || !!drownedStep || !!shamblerRecovering || z.spitWind > 0 || z.screamT > 0 || z.chargeT > 0 || !!z.abilityBusy || z.leapT > 0 });
+        if (poseWork && !rising && !knocked) applyZombieLean(z, dt);   // CL-187: in on a start, back on a stop, into a turn
         if (z.flashT > 0) {
           z.flashT = Math.max(0, z.flashT - dt);
           const mats = ud.bodyMats;

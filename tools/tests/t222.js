@@ -10,6 +10,10 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m); const info = (m) => out.push('INFO ' + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // GB-192: the real renderer (tools/realtest.mjs) or the test page, whose fake three has a no-op transpose.
+  const real = (() => { const m = new window.TT.THREE.Matrix4().makeRotationX(0.3), e = m.elements.slice(); m.transpose(); return m.elements[6] === e[9] && m.elements[9] === e[6] && e[6] !== e[9]; })();
+  // A fresh zombie is still settling (its rise, its turn toward him) for a moment: the cursor waits for it, as a player would.
+  const SETTLE = real ? 1500 : 150;
   try {
     await startMatch(T, 'Aim');
     T.clearZombies(); T.skipGrace && T.skipGrace(); T.runDevCommand('godmode');
@@ -58,22 +62,33 @@
       });
       return Number.isFinite(lo[0]) ? new THREE.Vector3((lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2) : null;
     };
-    // The round, traced from the muzzle along the aim as updateProjectiles does (column radius + 0.1, 0.15 m of slack top
-    // and bottom), against the ground on the way.
+    // The round, from the real muzzle along the aim, through the game's own hit test (zombieRoundHit: the model's
+    // surfaces since GP-19885, a headshot only where confirmedHead would count one), stopped by the ground on the way.
     const trace = (z) => {
       const M = T.getMuzzleWorld().clone(), d = T.aimTarget.clone().sub(M);
       if (d.lengthSq() < 1e-6) return { res: 'none' };
       d.normalize();
-      const zp = z.mesh.position, r = z.radius + 0.1, y0 = zp.y, y1 = zp.y + (z.hitH || 1.45);
-      for (let s = 0; s < 70; s += 0.03) {
-        const x = M.x + d.x * s, y = M.y + d.y * s, w = M.z + d.z * s;
-        if (Math.hypot(x - zp.x, w - zp.z) <= r && y >= y0 - 0.15 && y <= y1 + 0.15) {
-          const f = (y - y0) / (y1 - y0);
-          return { res: f > headLine(z.typeKey) ? 'head' : f < 0.4 ? 'legs' : 'body', f };
-        }
-        if (s > 0.5 && y < T.sampleHeight(x, w) - 0.02) return { res: 'ground' };
+      let far = 70;
+      for (let s = 0.5; s < 70; s += 0.03) { const x = M.x + d.x * s, y = M.y + d.y * s, w = M.z + d.z * s; if (y < T.sampleHeight(x, w) - 0.02) { far = s; break; } }
+      const E = M.clone().addScaledVector(d, far), h = T.zombieRoundHit(z, M, E);
+      if (!h) return { res: far < 70 ? 'ground' : 'miss' };
+      const head = !!h.headHit && (z.typeKey !== 'military' || h.militaryHit?.zone === 'face') && (z.typeKey !== 'brute' || h.bruteHit?.part === 'head');
+      const f = (h.point.y - z.mesh.position.y) / (z.hitH || 1.45);
+      return { res: head ? 'head' : f < 0.4 ? 'legs' : 'body', f };
+    };
+    // GB-193: the legs are pointed at on the zombie's own leg, not the column's middle (since GP-19885 the pick is the
+    // model's surface, and from the front the middle is the gap between the legs): across its width near 0.2 x hitH,
+    // the point nearest the middle whose camera ray meets this zombie low (under 0.4 of its height) through the game's hit test.
+    const legPoint = (z) => {
+      const zp = z.mesh.position, H = z.hitH || 1.45, cp = cam.position;
+      const fw = new THREE.Vector3(zp.x - cp.x, 0, zp.z - cp.z).normalize(), right = new THREE.Vector3(-fw.z, 0, fw.x);
+      z.mesh.updateMatrixWorld(true);
+      for (const fy of [0.2, 0.15, 0.25, 0.3]) for (const off of [0, 0.05, -0.05, 0.09, -0.09, 0.13, -0.13, 0.18, -0.18, 0.24, -0.24, 0.3, -0.3]) {
+        const p = new THREE.Vector3(zp.x, zp.y + H * fy, zp.z).addScaledVector(right, off), dir = p.clone().sub(cp), L = dir.length();
+        const h = T.zombieRoundHit(z, cp.clone(), cp.clone().addScaledVector(dir.normalize(), L + 3));
+        if (h && (h.point.y - zp.y) / H < 0.4) return p;
       }
-      return { res: 'miss' };
+      return new THREE.Vector3(zp.x, zp.y + H * 0.2, zp.z);
     };
     const still = (type, x, zz) => { const z = T.spawnZombie(x, zz, type, true, true); if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; } return z; };
     const fmt = (o) => Object.entries(o).map(([r, n]) => r + ' ' + n).join(', ') || '-';
@@ -87,9 +102,10 @@
         T.clearZombies();
         const a = b * Math.PI / 180, z = still(type, P.x + Math.sin(a) * dist, P.z + Math.cos(a) * dist);
         if (!z) continue;
-        await wait(150);
+        await wait(SETTLE);
+        if (!z.mesh || !z.alive) { info(type + ' at ' + b + ' deg ' + dist + ' m: gone before the cursor reached it (no case)'); continue; }
         const zp = z.mesh.position, H = z.hitH || 1.45;
-        const pts = { head: headCentre(z), chest: new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z), legs: new THREE.Vector3(zp.x, zp.y + H * 0.2, zp.z) };
+        const pts = { head: headCentre(z), chest: new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z), legs: legPoint(z) };
         for (const k of ['head', 'chest', 'legs']) {
           if (!pts[k] || (k === 'legs' && (type === 'spider' || type === 'leaper'))) continue;
           await pointAt(pts[k]);
@@ -108,7 +124,7 @@
     ok(stray === 0, 'no round aimed at a body goes into the ground or past it (' + stray + ')');
     // --- The reticle while it is on them: the ring on a head, not on a chest.
     T.clearZombies();
-    const zr = still('shambler', P.x, P.z + 9); await wait(200);
+    const zr = still('shambler', P.x, P.z + 9); await wait(SETTLE + 50);
     const ret = document.getElementById('reticle');
     await pointAt(headCentre(zr)); await wait(120);
     const onHead = ret.classList.contains('los-head') && ret.classList.contains('los-clear');
@@ -138,18 +154,25 @@
       const z = still('shambler', P.x - side * 6, P.z + dist);
       if (!z) return { res: 'none' };
       const vx = side * speed;
-      let alive = true, last = performance.now();
-      (async () => { while (alive) { const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000); last = now; z.mesh.position.x += vx * dt; z.x = z.mesh.position.x; z.mesh.position.y = T.sampleHeight(z.mesh.position.x, z.mesh.position.z); await wait(16); } })();
+      // GB-193: it runs on game time, a step each frame, as the game's own zombies do (trackZombieMotion times its pace on
+      // simTime to lead it; steps between frames read as jumps and are thrown out).
+      let alive = true, last = T.getSimTime();
+      (async () => { while (alive) { const now = T.getSimTime(), dt = Math.min(0.25, now - last); last = now; z.mesh.position.x += vx * dt; z.x = z.mesh.position.x; z.mesh.position.y = T.sampleHeight(z.mesh.position.x, z.mesh.position.z); await new Promise((r) => requestAnimationFrame(() => r())); } })();
+      const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
       for (let i = 0; i < 14; i++) { const q = z.mesh.position; pointOnce(new THREE.Vector3(q.x, q.y + (z.hitH || 1.7) * 0.56, q.z)); await wait(40); }
+      { const q = z.mesh.position; pointOnce(new THREE.Vector3(q.x, q.y + (z.hitH || 1.7) * 0.56, q.z)); await frame(); }   // fired on the next frame after the cursor last moved
       const Mu = T.getMuzzleWorld().clone(), d = T.aimTarget.clone().sub(Mu).normalize(), z0 = z.mesh.position.clone(), lead = T.aimTarget.x - z0.x;
       alive = false;
-      const spd = (ST[gun] && ST[gun].speed) || 75, rr = z.radius + 0.1, H = z.hitH || 1.7;
-      for (let t = 0; t < 1.5; t += 0.002) {
-        const s = spd * t, bx = Mu.x + d.x * s, by = Mu.y + d.y * s, bz = Mu.z + d.z * s;
-        if (Math.hypot(bx - (z0.x + vx * t), bz - z0.z) <= rr && by >= z0.y - 0.15 && by <= z0.y + H + 0.15) return { res: 'hit', lead };
-        if (s > 0.5 && by < T.sampleHeight(bx, bz) - 0.02) return { res: 'ground', lead };
-      }
-      return { res: 'miss', lead };
+      const spd = (ST[gun] && ST[gun].speed) || 75;
+      // GB-193: through the game's hit test, as the still ones: the zombie held where it was when he fired and the round's
+      // path taken relative to it (it runs on at vx), the ground checked along the round's real path up to the hit.
+      await wait(40); z.mesh.position.copy(z0); z.mesh.updateMatrixWorld(true);
+      const rel = d.clone().multiplyScalar(spd).sub(new THREE.Vector3(vx, 0, 0)), TT = 1.5;
+      const h = T.zombieRoundHit(z, Mu.clone(), Mu.clone().addScaledVector(rel, TT)), tHit = h ? h.t * TT : TT;
+      const tf = Math.hypot(z0.x - Mu.x, z0.z - Mu.z) / spd;
+      const res = (() => { for (let t = 0; t < tHit; t += 0.002) { const q = spd * t, bx = Mu.x + d.x * q, by = Mu.y + d.y * q, bz = Mu.z + d.z * q; if (q > 0.5 && by < T.sampleHeight(bx, bz) - 0.02) return 'ground'; } return h ? 'hit' : 'miss'; })();
+      info(gun + ' ' + dist + ' m ' + speed + ' m/s ' + (side > 0 ? '+' : '-') + ': ' + res + ', lead ' + lead.toFixed(2) + ' m (pace x flight ' + (vx * tf).toFixed(2) + ')' + (h ? ' at ' + ((h.point.y - z0.y) / (z.hitH || 1.7)).toFixed(2) + ' of its height' : ''));
+      return { res, lead };
     };
     const cross = {};
     for (const gun of ['pistol', 'm4']) for (const dist of [8, 18]) for (const speed of [3, 6]) for (const side of [1, -1]) {

@@ -4,7 +4,7 @@ const dark=0x000000,tongueHex=[0xae6671,0xd89299];
 const VAPOR_PUFFS=36; // same instanced draw: half cling to the body, half trail behind
 export function prepareScreamerAppearance(T,g,s=1){
  const u=g.userData;if(u.typeKey!=='screamer'||u.screamerJaw)return;
- const eyes=new Set(u.eyes||[]),materials=new Map(),tongueColors=tongueHex.map(h=>new T.Color(h)),pink=new T.Color(0xff56aa);
+ const eyes=new Set([...(u.eyes||[]),u.eyeBatch].filter(Boolean)),materials=new Map(),tongueColors=tongueHex.map(h=>new T.Color(h)),pink=new T.Color(0xff56aa);
  const jaw=new T.Group(),tongue=new T.Group();jaw.name='screamer-jaw';jaw.position.set(0,-.10*s,.06*s);u.head.add(jaw);
  tongue.name='screamer-tongue';tongue.position.set(0,-.11*s,.13*s);jaw.add(tongue);
  const clone=m=>{if(!materials.has(m)){const c=m.clone();if(c.emissive)c.emissive.setHex(0);c.emissiveIntensity=0;materials.set(m,c);}return materials.get(m);};

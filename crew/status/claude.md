@@ -2,12 +2,12 @@
 
 state: active
 model: claude-opus-5-5
-task: CL-213 bench --prof (CU-156, taken over while Cursor is idle)
-touching: tools/bench.mjs
-since: 2026-10-19T19:50Z
-next: CL-211 (after AG-86), CL-212 (after GB-185, CU-154)
+task: CL-211 Where the night's 30 ms go: the profile, the cut
+touching: index.html (renderFrame), tools/bench.mjs, docs/budgets.md
+since: 2026-10-19T21:00Z
+next: waits on AG-86
 blocked-on: —
-last-report: handoffs/2026-10-18-claude-CL-210.md
+last-report: handoffs/2026-10-19-claude-CL-213.md
 
 ## Notes
 

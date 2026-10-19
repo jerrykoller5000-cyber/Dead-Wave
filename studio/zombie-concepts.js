@@ -315,7 +315,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox}) {
       for(const side of [-1,1]){box(torso,cloth,side*.245,.30,.17,.10,.36,.06,-side*.12);rag(torso,cloth,side*.25,.15,.19,.11,.18,-side*.1);}
       box(torso,cloth,0,.29,-.205,.50,.37,.045);for(let j=0;j<5;j++)rag(torso,cloth,(j-2)*.075,.14,-.23,.09,.15+(j%3)*.024,(j-2)*.05);
       for(const side of [-1,1]){path(torso,wound,[[side*.06,.43,.13],[side*.16,.39,.19],[side*.24,.27,.18]],.025);rag(torso,cloth,side*.24,.42,.196,.072,.18,-side*.25);}
-      for(let i=0;i<4;i++)path(head,wound,[[(i-1.5)*.037,-.12,.185],[(i-1.5)*.04,-.24-(i%2)*.07,.20],[(i-1.5)*.03,-.29-(i%2)*.07,.17]],.009);
+      for(let i=0;i<4;i++)path(head,ooze,[[(i-1.5)*.037,-.15,.185],[(i-1.5)*.04,-.24-(i%2)*.07,.20],[(i-1.5)*.03,-.29-(i%2)*.07,.17]],.009);
       path(torso,ooze,[[.04,.26,.307],[.02,.13,.342],[.05,-.02,.36],[.045,-.17,.315],[.015,-.24,.20]],.009);
     }else{
       // The existing fuse animation drives a belly material and a separate vein material.

@@ -68,7 +68,27 @@ export function steerSpider(z,sx,sz,tx,tz,dt){
   const panic=panics.get(z)?.active,want=Math.atan2(tx,tz);turn(s.body,want,dt,panic?SPIDER_TOUCH.rate:SPIDER_MOTION.rate,panic?SPIDER_TOUCH.accel:SPIDER_MOTION.accel);
   turn(s.move,Math.atan2(sx,sz),dt,SPIDER_MOTION.moveRate,SPIDER_MOTION.moveAccel);
   s.steps+=Math.abs(s.body.rate)*dt*1.7;
-  return {yaw:s.body.yaw,x:Math.sin(s.move.yaw),z:Math.cos(s.move.yaw),rate:s.body.rate,pace:.45+.55*Math.max(0,Math.cos(angle(want-s.body.yaw)))};
+  let mx=Math.sin(s.move.yaw),mz=Math.cos(s.move.yaw);
+  // A blind spider still follows the flow field around cover, but its turning
+  // inertia must not carry that path into melee range. Remove only the inward
+  // part of its step near the prey; the remaining tangent rounds the corner.
+  const prey=z._tp?.position;
+  if(z.tactics==='spit'&&!spiderHeadless(z)&&prey&&z.mesh?.position){
+    const dx=prey.x-z.mesh.position.x,dz=prey.z-z.mesh.position.z,d=Math.hypot(dx,dz);
+    if(d>1e-6&&d<7&&(dx*tx+dz*tz)/(d*Math.hypot(tx,tz))>.95){
+      const ux=dx/d,uz=dz/d,desiredIn=sx*ux+sz*uz;
+      if(z.lineClear===false||desiredIn<-.5){
+        const inward=Math.max(0,mx*ux+mz*uz);
+        if(inward>0){
+          mx-=inward*ux;mz-=inward*uz;
+          let side=Math.hypot(mx,mz);
+          if(side<1e-4){const sign=Math.sign(ux*sz-uz*sx)||1;mx=-uz*sign;mz=ux*sign;side=1;}
+          mx/=side;mz/=side;
+        }
+      }
+    }
+  }
+  return {yaw:s.body.yaw,x:mx,z:mz,rate:s.body.rate,pace:.45+.55*Math.max(0,Math.cos(angle(want-s.body.yaw)))};
 }
 export function spiderFacing(z,dx,dz){const n=Math.hypot(dx,dz);return n<1e-6||(Math.sin(z.mesh.rotation.y)*dx+Math.cos(z.mesh.rotation.y)*dz)/n>=.75;}
 export function spiderGait(z,phase,moving){const s=states.get(z);return {phase:phase+(s?.steps||0),amount:moving?1:Math.max(.12,Math.min(.8,Math.abs(s?.body.rate||0)/SPIDER_MOTION.rate))};}

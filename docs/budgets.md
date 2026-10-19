@@ -14,7 +14,7 @@ cloud's software renderer can count but not time.
 | A night (5, 10, 14, 18, 20), about 15-20 dead out | ≤ 700 draws, ≤ 900 k | 530-710 draws, 740-770 k |
 | 48 dead (the cap, MAX_ZOMBIES) | ≤ 800 draws, **≤ 1.2 M** | 784 draws, **1.68 M** |
 | A 100-piece base and 48 dead | ≤ 1 000 draws, ≤ 1.5 M | (665 pieces and 87 dead: 1 784 draws, 2.0 M) |
-| Frame time, Jerry's GPU, High, night 20 | 60 fps mean, ≥ 50 fps 1 % low | **33 fps, 26 low** (AG-85, 10-18); every night 5-20 is 31-35 fps |
+| Frame time, Jerry's GPU, High, night 20 | 60 fps mean, ≥ 50 fps 1 % low | **44.8 fps, 32.3 low** (AG-86, 10-19 21:08Z, after CL-211's cuts 1-2; was 33 and 26); night 10 45.4; the megaswarm 60.0 |
 
 The world is holding (CL-117 measured 561 draws and 770 k at the HQ on 10-02). What grew is what there are many of:
 the dead (each now 10-17 k triangles, drawn twice with its shadow) and the marine and his survivors.
@@ -91,3 +91,40 @@ last push, 48 dead out, High):
 - AG-85's report quotes AG-82's megaswarm (52-54 fps); its own runs counted 64-65 dead and 24-26 fps. CU-156 finds out
   why the scenario changed.
 - The budgets above stay until the profile is in; CL-211 resets them from it.
+
+## 2026-10-19: where the night's frame goes (CL-211, AG-86's profile)
+
+Antigravity, night 20's last push at High on Jerry's 5080 (`bench.mjs --prof`, then `--prof --cpu`): a 28.7-34.1 ms
+frame (29-35 fps); the GPU's own work is **0.2-0.3 ms** of it (WebGPU timestamps). The frame is the CPU, and two
+thirds of it is three's `renderer.render()` walking and submitting the scene:
+
+| Where (night 20, High, 30.4 ms frame) | ms a frame |
+| --- | --- |
+| `renderer.render()`, all of it | 19.5 |
+| the sun's shadow pass (a second render of the whole scene inside the first) | 7.8 |
+| the scene's matrices (`updateMatrixWorld`, walked by both renders) | 6.9 |
+| projecting the scene into render lists (`_projectObject`, both renders) | 4.0 |
+| the draws themselves (bindings, buffer writes, pipelines) | about 5 |
+| `updateZombies` (the 48 dead's AI and poses) | 2.5 (the `zombies` mark 2.9-4.2) |
+| the marine's cloth and waist (`bend`) | 0.8 |
+| `syncRigSkins` (CL-210) | 0.1 |
+
+- **Draw calls and triangles don't set the night's frame; the size of the scene does.** Every render walks every
+  Object3D, and the shadow pass is a whole second walk. The megaswarm at the title (198 draws) still spends 14.5 ms
+  in render.
+- **Cut 1 (CL-211, landed 10-19 20:57Z, `index.html` renderFrame):** the matrices are walked once a frame
+  (`scene.updateMatrixWorld()` before render, `matrixWorldAutoUpdate` off during it). About -3.4 ms, day and night.
+- **Cut 2 (same):** at night (the sun under 0.12; it is 0.025 under a 0.15 sky) the sun's shadow map is redrawn every
+  4th frame instead of every frame. About -5.8 ms at night; by day it is as before.
+- **Expected:** the night frame near 21 ms (about 47 fps). **Measured (AG-86/AG-88, 21:08-21:15Z):** night 20
+  44.8 fps (22.3 ms, 1% low 32.3, no hitches; was 32.5), night 10 45.4 (22.0 ms; was 34.8), the megaswarm 60.0
+  (16.7 ms; was 59). The shadow pass went 8.5 to 1.1 ms, the matrices 7.1 to 3.7 ms.
+- **Cut 3 (21:17Z):** at night sceneCull keeps nothing off-screen for the shadows (it kept everything within 44 m),
+  and the matrix walk (`updateSceneMatrices`) skips the top-level things it hid. Measured: AG-89.
+- **The census (night 20):** 9,768 Object3Ds under the scene, 7,208 recomposed every frame, 7,429 meshes (3,548
+  shown, 442 drawn), 1,832 top-level. 585 unnamed groups hold 6,757 of the nodes; the wildlife (butterflies, bees,
+  birds) 951; the relay vault 219. The next census names the unnamed groups.
+- **Left at night 20 (22.3 ms):** render() 10.4 (the render lists 2.6, bindings and draws about 4, bloom 0.8,
+  transparents 0.8, the shadow 1.1), the dead 3.6 (ChatGPT's GP-19934: to 2), the matrices 3.1.
+- **Next, from `bench.mjs --census`:** how many Object3Ds the scene holds and whose; static props that recompose
+  their matrix every frame (`matrixAutoUpdate`); the zombies' 2.5-4 ms; the daytime shadow pass.

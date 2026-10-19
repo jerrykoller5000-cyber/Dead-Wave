@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import * as T from '../vendor/three/three.core.js';
 import {applyZombieConcept,CONCEPT_TYPES} from './zombie-concepts.js';
 import {resetZombieAbilityVisuals} from '../game/zombie-ability-visuals.js';
+import {prepareScreamerAppearance} from '../game/screamer-appearance.js';
+import {prepareSpitterJaw} from '../game/spitter-motion.js';
 import {detailUV,detailMaterial,generateDetailPixels,DETAIL_SURFACES} from './zombie-detail.js';
 const rbox=(w,h,d)=>new T.BoxGeometry(w,h,d);
 function rig(){
@@ -51,6 +53,25 @@ test('paired eyes render in one batch while their existing glow material and ref
   g.traverse(node=>{node.visible=true;});
   resetZombieAbilityVisuals(g);
   assert(eyes.every(e=>!e.visible),kind+' pooled source eyes remain hidden');
+ }
+});
+test('live Screamer recolor keeps the animated eye batch pink and emissive',()=>{
+ for(let copy=0;copy<2;copy++){
+  const g=rig();g.userData.typeKey='screamer';applyZombieConcept({THREE:T,g,typeKey:'screamer',scale:1,rbox});
+  const eye=g.userData.eyeBatch,glow=eye.material.emissive.getHex();
+  prepareScreamerAppearance(T,g,1);
+  assert.equal(eye.parent,g.userData.head);
+  assert(eye.visible&&eye.material.emissiveIntensity>1);
+  assert.equal(eye.material.emissive.getHex(),glow);
+ }
+});
+test('Spitter chin keeps a visible ooze glow after surface batching and reuse',()=>{
+ for(let copy=0;copy<2;copy++){
+  const g=rig();g.userData.typeKey='spitter';applyZombieConcept({THREE:T,g,typeKey:'spitter',scale:1,rbox});
+  assert(g.userData.head.children.some(m=>m.isMesh&&m.visible&&m.material.emissive?.getHex()===0xb6cb38),'chin ooze on the animated head');
+  prepareSpitterJaw(T,g,1);
+  assert(g.userData.spitterJaw.children.some(m=>m.isMesh&&m.material.emissive?.getHex()===0xb6cb38),'ooze follows the lower jaw');
+  assert(!g.userData.head.children.some(m=>m.isMesh&&m.material.emissive?.getHex()===0xb6cb38),'no stray upper drip draw');
  }
 });
 test('Demon charge flare still targets a visible material after template reuse',()=>{

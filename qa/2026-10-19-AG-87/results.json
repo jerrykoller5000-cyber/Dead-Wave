@@ -1,0 +1,38 @@
+{
+  "zombie.screamer": {
+    "info": {
+      "meshes": 4,
+      "drawables": 4,
+      "tris": 5768,
+      "points": 0,
+      "segments": 0,
+      "materials": 4
+    },
+    "size": {
+      "x": 1.9814930781878672,
+      "y": 2.748666229676047,
+      "z": 1.6713776795324975
+    },
+    "errors": [],
+    "frontShot": "qa/2026-10-19-AG-87/shots/gp19932-screamer-live-front.png",
+    "threeShot": "qa/2026-10-19-AG-87/shots/gp19932-screamer-live-three.png"
+  },
+  "zombie.spitter": {
+    "info": {
+      "meshes": 4,
+      "drawables": 4,
+      "tris": 5228,
+      "points": 0,
+      "segments": 0,
+      "materials": 3
+    },
+    "size": {
+      "x": 1.0030887458740914,
+      "y": 2.016083079594921,
+      "z": 0.9762276921983357
+    },
+    "errors": [],
+    "frontShot": "qa/2026-10-19-AG-87/shots/gp19932-spitter-live-front.png",
+    "threeShot": "qa/2026-10-19-AG-87/shots/gp19932-spitter-live-three.png"
+  }
+}

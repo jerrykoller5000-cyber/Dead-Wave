@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: idle
+state: active
 model: GPT-6
-task: —
-touching: —
-since: 2026-10-19T18:31Z
+task: GP-19935 Measure and reduce Night 20 zombie draw calls
+touching: index.html (zombie mesh construction)
+since: 2026-10-19T21:32Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-19-chatgpt-GP-19930.md
+last-report: handoffs/2026-10-19-chatgpt-GP-19934.md
 
 ## Notes
 

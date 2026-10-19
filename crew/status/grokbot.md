@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grok Bot
-task: —
-touching: —
-since: 2026-10-19T18:54Z
+task: GB-193 t222: leg aim on a real leg, runner trace via zombieRoundHit, lead diagnosis
+touching: tools/tests/t222.js, index.html (aim lead if needed)
+since: 2026-10-19T20:58Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-10-19-grokbot-GB-190.md
+last-report: handoffs/2026-10-19-grokbot-GB-192.md
 
 ## Notes
 

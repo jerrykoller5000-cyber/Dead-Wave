@@ -68,6 +68,7 @@ export function motionIntensity(speed, angular) {
 
 export function createFeralMotion({THREE:T, scene, actors, camera, active, inDomain=()=>true}) {
   const history=new WeakMap(), records=new Map();
+  const forward=new T.Vector3();
   let enabled=true, clock=0;
   const eligible=z=>z.typeKey==='feral'&&z.alive&&z.mesh?.visible&&!z.farLod&&inDomain(z)&&
     !(z.riseT>0||z.knockT>0||z.getUpT>0||z.windowClimb||z.belowRiseT>0||z.crawling||z.hopping||z.sleeping||z.poiGuard&&!z.poiAwake);
@@ -115,9 +116,17 @@ export function createFeralMotion({THREE:T, scene, actors, camera, active, inDom
     clock+=dt;
     if(!enabled||!active()){clear();return;}
     const candidates=[];
+    camera.getWorldDirection(forward);
     for(const z of actors()){
       if(!eligible(z)){history.delete(z);continue;}
-      const p=z.mesh.position, yaw=z.mesh.rotation.y, head=z.mesh.userData.head?.rotation;
+      const p=z.mesh.position, dx=p.x-camera.position.x, dz=p.z-camera.position.z;
+      const distance=dx*dx+dz*dz;
+      // Echoes never cast shadows. Keep the near field warm for a quick turn,
+      // but do no skeleton snapshots for dead well outside the view.
+      if(distance>=FERAL_BLUR.maxDistance**2 || (distance>12*12 && dx*forward.x+(p.y-camera.position.y)*forward.y+dz*forward.z < -3)){
+        history.delete(z);continue;
+      }
+      const yaw=z.mesh.rotation.y, head=z.mesh.userData.head?.rotation;
       const prev=history.get(z);
       let speed=0,angular=0,turn=0;
       // Reset across a teleport or a skipped simulation interval; never streak across rooms.
@@ -127,8 +136,7 @@ export function createFeralMotion({THREE:T, scene, actors, camera, active, inDom
           angular=Math.max(Math.abs(turn),head?Math.hypot(wrap(head.x-prev.hx),wrap(head.y-prev.hy),wrap(head.z-prev.hz))/dt:0);}
       }
       history.set(z,{x:p.x,z:p.z,yaw,hx:head?.x||0,hy:head?.y||0,hz:head?.z||0,time:clock,turn:clamp(turn/7,-1,1)});
-      const distance=p.distanceToSquared(camera.position);
-      if(distance<FERAL_BLUR.maxDistance**2)candidates.push({z,distance,strength:motionIntensity(speed,angular)});
+      candidates.push({z,distance,strength:motionIntensity(speed,angular)});
     }
     candidates.sort((a,b)=>a.distance-b.distance);
     const selected=new Set(candidates.slice(0,FERAL_BLUR.maxActors).map(c=>c.z));

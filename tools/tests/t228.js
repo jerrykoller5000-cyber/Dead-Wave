@@ -13,6 +13,7 @@
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const simWait = async (s) => { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < s && Date.now() - w0 < 20000) await wait(30); };   // GB-191: game time (the suite page runs slow)
   const THREE = T.THREE || window.THREE;
   const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
   const tm = new THREE.Matrix4().makeRotationX(0.3), tmE = tm.elements.slice(); tm.transpose();
@@ -88,16 +89,20 @@
     // --- the wrist lets go for everything else
     if (await take('m4')) {
       if (T.setMagazinesDbg) T.setMagazinesDbg('m4', 3, [30, 30]);   // a reload with no fuller magazine is refused (GB-137)
-      T.startReload(); await wait(100); T.reloadClipDbg.hold(0.45); await wait(500);
+      T.startReload(); await wait(100); T.reloadClipDbg.hold(0.45); await simWait(0.5);
       ok(T.isReloading(), 'm4: the reload runs');
       ok(D.gripA().l < 0.05, 'through a reload the support hand is back to its hand point, the wrist at rest (grip ' + D.gripA().l.toFixed(2) + ')');
-      T.reloadClipDbg.hold(null); await wait(2500);
-      D.knifeHold(0.5); await wait(400);
+      T.reloadClipDbg.hold(null); await simWait(2.5);
+      D.knifeHold(0.5); await simWait(0.4);
       ok(D.gripA().l < 0.05 && isRest(wrL.quaternion), 'with the knife out the support wrist is at rest');
-      D.knifeHold(null); await wait(600);
-      T.toggleHolster(); await wait(1500);
-      ok(isRest(wrR.quaternion) && isRest(wrL.quaternion), 'holstered, both wrists are at rest');
-      T.toggleHolster(); await wait(1200);
+      D.knifeHold(null); await simWait(0.6);
+      T.toggleHolster(); await simWait(1.5);
+      // GB-170 (Jerry: the palms turned forward): empty hands hang palm-in, turned at the wrist (poseHands: x 0.05, y +-1.15
+      // by the relax). Holstered, each wrist is at rest or in that hang, mirrored, and nothing of the hold's turn.
+      const hangOf = (q, sg) => { const e = new THREE.Euler().setFromQuaternion(q); return isRest(q) || (Math.abs(e.z) < 0.01 && e.y * sg >= 0 && Math.abs(e.x - 0.05 / 1.15 * Math.abs(e.y)) < 0.01 && Math.abs(e.y) <= 1.15 + 0.01); };
+      const yR = new THREE.Euler().setFromQuaternion(wrR.quaternion).y, yL = new THREE.Euler().setFromQuaternion(wrL.quaternion).y;
+      ok(hangOf(wrR.quaternion, -1) && hangOf(wrL.quaternion, 1) && Math.abs(yR + yL) < 0.01, 'holstered, both wrists are at rest or in the GB-170 hang (y ' + yR.toFixed(2) + ', ' + yL.toFixed(2) + ')');
+      T.toggleHolster(); await simWait(1.2);
     } else ok(false, 'm4: in hand for the reload');
     clearInterval(busy);
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }

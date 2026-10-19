@@ -129,7 +129,7 @@ export function createZombieAbilityRuntime(env){
     trails.push(record);counts.trailDrops++;batch.mesh.visible=true;batch.geometry.setDrawRange(0,batch.capacity*6);
   }
   function updateActor(z,dt,token){
-    if(!z.mesh||!z.alive||!['demon','spitter','colossus'].includes(z.typeKey))return;
+    if(!z.mesh||!z.alive||(z.typeKey!=='demon'&&z.typeKey!=='spitter'&&z.typeKey!=='colossus'))return;
     const s=actorState(z),allowed=env.canAct(z);
     if(z.typeKey==='spitter'){
       if(allowed&&!z.inWater)for(const p of sampleAcidTrail(s.trail,z.mesh.position))dropTrail(p,s,z);
@@ -167,7 +167,8 @@ export function createZombieAbilityRuntime(env){
     if(z.abilityBusy){env.preparePose?.(z);if(!live(token))return;}
     if(z.abilityBusy&&s.aim)z.mesh.rotation.y=Math.atan2(s.aim.x-z.mesh.position.x,s.aim.z-z.mesh.position.z);
     // Place the release pose before sampling its actual hand/stone launch anchor.
-    updateZombieAbilityVisuals(z,clock,poseState(s,event.fired));
+    if(event.fired||z.abilityBusy||env.poseVisible?.(z)!==false)
+      updateZombieAbilityVisuals(z,clock,poseState(s,event.fired));
     if(event.fired)fire(z,s);
   }
   function updateShots(dt,token){
