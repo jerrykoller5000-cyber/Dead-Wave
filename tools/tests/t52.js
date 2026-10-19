@@ -11,13 +11,18 @@
     // The CL-6 table (centre x, z; approach x, z) and GP-8's facing.
     const CL6 = {
       'objective:radio-repair':   [-149.87, -1.15, -149.29, 0.23, -2.75],
-      'objective:medical-convoy': [-112.85, 50.77, -111.79, 51.83, -2.36],
+      'objective:medical-convoy': null,   // GP-19937 (CL-217): in the wreck's own frame now, worked out below
       'objective:ranger-cache':   [30.52, -19.24, 31.09, -17.85, -2.75],
       'objective:hikers-cache':   [2.02, -77.68, 3.41, -78.26, -1.18],
       'objective:trapper-cache':  [-37.49, 47.81, -38.06, 46.42, 0.39],
       'objective:fuel-depot':     [-44.13, -18.34, -43.07, -17.28, -2.36],
       'objective:wreck-salvage':  [-95.91, -45.77, -96.97, -46.83, 0.79]
     };
+    { // the medical row turns with wrecks.0: off (1.5, -1.2), approach (1.5, 0) in its frame
+      const w = T.POI.wrecks[0], y = w.mesh ? w.mesh.rotation.y : 0, c = Math.cos(y), s = Math.sin(y);
+      const x = w.x + 1.5 * c - 1.2 * s, z = w.z - 1.5 * s - 1.2 * c, ax = x + 1.5 * c, az = z - 1.5 * s;
+      CL6['objective:medical-convoy'] = [x, z, ax, az, Math.atan2(x - ax, z - az)];
+    }
     const sites = window.objectiveSitesFrom(T.POI, T.sampleHeight);
     let posOk = true, bad = [];
     for (const s of sites) {

@@ -1804,6 +1804,16 @@ const messages = {
   "objectives.track": "Track",
   "objectives.untrack": "Stop tracking",
   "objectives.interact": "{interact} — {action}",
+  // GP-19937: short words at the convoy jack and the freed cooler.
+  "convoy.jack": "E — Work the jack",
+  "convoy.pump": "E — Pump · {count}/8",
+  "convoy.take": "E — Take cooler",
+  "convoy.devTitle": "MEDICAL CONVOY",
+  "convoy.devDetail": "At the jack",
+  // GB-196: the hikers’ kit in the tree by the river.
+  "hikers.grab": "E — Grab the kit",
+  "hikers.devTitle": "HIKERS’ KIT",
+  "hikers.devDetail": "Shoot the rope",
   "objectives.repairing": "Restoring signal…",
   "objectives.interrupted": "Repair interrupted",
   "objectives.claim": "Take supplies",
@@ -2251,6 +2261,23 @@ const messages = {
   "range.drill.chainsaw.deep-teeth.objective": "Hold 1.1 seconds of contact on each plate, then cool before the next bite.",
   "range.drill.chainsaw.cooling-ladder.name": "Cooling Ladder",
   "range.drill.chainsaw.cooling-ladder.objective": "Growing nearby groups reward controlled cutting and heat management.",
+  // CL-216: the utility truck's day mission (docs/specs/day-missions.md §6)
+  "truck.chained": "Chained shut.",
+  "truck.cutters": "{interact} — Take the bolt cutters",
+  "truck.cuttersTitle": "BOLT CUTTERS",
+  "truck.cut": "Hold {interact} — Cut the chain",
+  "truck.cutting": "Cutting the chain… {pct}%",
+  // CL-217: the ranger cache's day mission (docs/specs/day-missions.md §2). Nothing says "code" or "clue".
+  "ranger.look": "{interact} — Look",
+  "ranger.lockbox": "{interact} — Lockbox",
+  "ranger.keypadTitle": "Ranger lockbox",
+  "ranger.keypadHelp": "1-9 · E leave",
+  "ranger.lookHelp": "E step back",
+  "ranger.logTitle": "SEARCH LOG",
+  "ranger.logDay": "DAY",
+  "ranger.ch": "CH",
+  "ranger.unit": "UNIT",
+  "ranger.areas": "Ridge,Creek,North trail,Lake shore,Old mine,Quarry,Pines,Dock road,Tower",
 };
 
 // Freeze plural records too: one area cannot accidentally change another's copy.

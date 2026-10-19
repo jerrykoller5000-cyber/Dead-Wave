@@ -1,0 +1,142 @@
+{
+  "burrows": [
+    {
+      "nodes": 67,
+      "meshes": 66,
+      "auto": 67,
+      "name": "",
+      "kind": 0,
+      "mouthZ": 0
+    },
+    {
+      "nodes": 69,
+      "meshes": 68,
+      "auto": 69,
+      "name": "",
+      "kind": 1,
+      "mouthZ": 0
+    },
+    {
+      "nodes": 69,
+      "meshes": 68,
+      "auto": 69,
+      "name": "",
+      "kind": 1,
+      "mouthZ": 0
+    }
+  ],
+  "lilyPads": [
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    },
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    },
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    },
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    },
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    },
+    {
+      "nodes": 38,
+      "meshes": 36,
+      "auto": 38,
+      "name": ""
+    }
+  ],
+  "plotMarkers": [
+    {
+      "nodes": 20,
+      "meshes": 18,
+      "auto": 20,
+      "name": "holy-reliquary"
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    },
+    {
+      "nodes": 9,
+      "meshes": 8,
+      "auto": 9,
+      "name": ""
+    }
+  ],
+  "sato": {
+    "note": {
+      "nodes": 4,
+      "meshes": 3,
+      "auto": 4,
+      "name": ""
+    },
+    "hat": {
+      "nodes": 4,
+      "meshes": 3,
+      "auto": 4,
+      "name": ""
+    },
+    "stool": {
+      "nodes": 5,
+      "meshes": 4,
+      "auto": 5,
+      "name": ""
+    },
+    "claws": {
+      "nodes": 13,
+      "meshes": 8,
+      "auto": 13,
+      "name": ""
+    },
+    "trail": {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 1,
+      "name": ""
+    }
+  }
+}

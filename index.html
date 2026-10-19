@@ -1294,6 +1294,8 @@
     import { MAGAZINE_WEAPONS, createMagazineStore, isMagazineWeapon, issueMagazines, issueSecondGun, addMagazineRounds, setMagazineSize, loadedMagazineRounds, spareMagazineRounds, magazineSnapshot, chooseMagazineHand, useMagazineRound, reloadMagazines, pickUpMagazine, setLoadedMagazineRounds } from './game/magazines.js';
     import { createMagazineHud } from './ui/magazine-hud.js';   // GP-144 restores GP-79
     import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
+    import { createConvoyMission, CONVOY } from './game/convoy-mission.js'; // GP-19937
+    import { createHikersKit, HIKERS, hikersSeed, roundCutsRope } from './game/hikers-kit.js'; // GB-196
     import {
       hash2, vnoise, fbm, ridged, smoothstep01, smoothBand, distPointToSeg, mulberry32, hash3, vnoise3
     } from './core/math.js';
@@ -1349,7 +1351,7 @@
     import { mountEnemyCounterCards } from './ui/enemy-counter.js';
     import { mountArmory } from './ui/armory.js';
     import { createLightPool } from './world/light-pool.js';   // CL-116
-    import { bakeStatic } from './world/bake.js';   // CL-117
+    import { bakeStatic, foldStatic } from './world/bake.js';   // CL-117; CL-218
     import { TRAINING, buildTrainingGround, clampToRects, segmentBox, propSolids, fallSign } from './world/training.js';   // CL-115, CL-158
     import { createZombieAbilityRuntime } from './game/zombie-ability-runtime.js';
     import { attachZombieAbilityVisuals, resetZombieAbilityVisuals, updateZombieAbilityVisuals } from './game/zombie-ability-visuals.js';
@@ -1382,7 +1384,7 @@
     import { cacheIntel, restockRows, drawCacheMarks } from './ui/cache-intel.js';
     import { createGroundFoliage } from './world/ground-foliage.js';
     import * as CaveGuardian from './world/cave-guardian.js';
-    import { applyZombieConcept } from './studio/zombie-concepts.js';
+    import { applyZombieConcept, prepareConvoySleeperAppearance } from './studio/zombie-concepts.js';
     import { blendZombieJoins, refreshZombieJoinLoss } from './combat/zombie-joins.js';
     import { createMarineIdle } from './studio/marine-idle.js';
     import { createMarineTurn } from './studio/marine-turn.js';
@@ -1408,6 +1410,9 @@
     import { steerDrowned, drownedCanReach, restoreDrownedMotion, resetDrownedMotion, applyDrownedMotion } from './game/drowned-motion.js'; // GP-19863
     import { steerShambler, shamblerCanReach, hasShamblerSteering } from './game/shambler-steering.js';   // GP-19854
     import { RELAY, createRelayPuzzle, stationPlan, bootHoldSeconds, relayDayPlan } from './game/relay-puzzle.js';   // CL-183, CL-184
+    import { TRUCK, createTruckMission } from './game/truck-mission.js';   // CL-216: the utility truck's day mission
+    import { RANGER, createRangerCache } from './game/ranger-cache.js';   // CL-217: the ranger cache's day mission
+    import { paintRadioLcd, paintSearchLog, paintUnit, paintLid, paintKeypad, lookImage as rangerLookImage } from './ui/ranger-clues.js';   // CL-217
     import { createRelayPanel } from './ui/relay-panel.js';   // CL-183
     import { planVault, sampleVault, vaultEligible, vaultCanFire } from './game/player-vault.js';   // GP-19900
     import { vaultReward } from './game/relay-vault.js';   // CL-184: the vault's reward by the day
@@ -2105,7 +2110,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (let i = 0; i < kids.length; i++) {
         const c = kids[i], ud = c.userData, cu = ud._cull;
         if (cu !== undefined && cu.hidden) continue;
-        if (ud.walkWhenShown === true && c.visible === false) continue;   // its owner opts in (the bees and butterflies)
+        // Hidden: nothing draws it, so its matrices wait until it shows (the night's birds and rabbits, the effect pools,
+        // the aim arcs and build ghosts: ~1,300 nodes at night 20, AG-90). getWorldPosition and Box3.setFromObject
+        // update what they read themselves.
+        if (c.visible === false) continue;
+        if (ud.walkSkip === true) continue;   // frozen while drawn from somewhere else (a batched tree, CL-28)
         c.updateMatrixWorld(force);
       }
     }
@@ -8850,8 +8859,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       ctx.restore();
     }
     const mapLandmarkIntel = createMapLandmarkIntel();
+    let mapLandmarkRows = null, mapLandmarkHq = null;
     function currentMapLandmarks() {
-      return mapLandmarks(POI, house.present ? house.group.position : null, LAKE_HOLE);
+      const hq = house.present ? house.group.position : null;
+      if (!mapLandmarkRows || mapLandmarkHq !== hq) { mapLandmarkHq = hq; mapLandmarkRows = mapLandmarks(POI, hq, LAKE_HOLE); }
+      return mapLandmarkRows;
     }
     // Every live blip, in whatever projection the caller hands in.
     const uiCaveWarnings = new Map();
@@ -8859,7 +8871,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const mapSightPoint = new THREE.Vector3(), mapSightNdc = new THREE.Vector3();
     let mapEnemySightTick = 0;
     window.addEventListener('dw-game', ({detail}) => {
-      if (detail?.type === 'run-reset') { mapEnemyIntel.reset(); mapLandmarkIntel.reset(); mapEnemySightTick = 0; }
+      if (detail?.type === 'run-reset') { mapEnemyIntel.reset(); mapLandmarkIntel.reset(); mapLandmarkRows = null; mapEnemySightTick = 0; }
     });
     function mapEnemyVisible(enemy) {
       if (!enemy.mesh.visible) return false;
@@ -8928,15 +8940,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
 
-    function currentMapMissions() {
+    function currentMapMissions(snapshot = objectiveRuntime?.snapshot()) {
       return mapMissionMarkers({active:gameStarted && !gameOver && !won && !training.active && !hollow.below(),
-        snapshot:objectiveRuntime?.snapshot(), selected:(objectiveRuntime?.markers() || []).filter(m=>m.selected).map(m=>m.id),
+        snapshot, selected:(objectiveRuntime?.markers() || []).filter(m=>m.selected).map(m=>m.id),
         player:player.position, skulls:skullBag.count, bank:HQ_WINDOW_FRONT, extraction:extractionFor(day), dock:POI.dock});
     }
 
     let minimapTick = 0;
     function drawMinimap(dt) {
-      syncTrainingMap(document, training.active);   // GB-166
       mapEnemySightTick -= dt;
       if (gameStarted && mapEnemySightTick <= 0) {
         mapEnemySightTick = .2;
@@ -8946,7 +8957,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (fullMapOpen) drawFullMap(dt);
       minimapTick -= dt;
       if (minimapTick > 0) return;
-      minimapTick = 1 / 30;
+      minimapTick = Math.max(minimapTick, -1 / 15) + 1 / 15;
+      syncTrainingMap(document, training.active);   // GB-166: the map itself runs at 15 Hz
       const ctx = minimapCtx;
       const W = MAP_PX, C = W / 2, RIM = C - 7;
       const px = player.position.x, pz = player.position.z;
@@ -8992,10 +9004,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 22 });
       drawBountyMarks(ctx, bountyIntel.markers({ day, phase, alarmActive: !!hq.seq }),
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 42 });
-      drawCacheMarks(ctx, cacheIntel.markers({ runId: uiRunId, day, sites: objectiveRuntime?.snapshot()?.sites || [] }),
+      const mapSnapshot = objectiveRuntime?.snapshot();
+      drawCacheMarks(ctx, cacheIntel.markers({ runId: uiRunId, day, sites: mapSnapshot?.sites || [] }),
         { x: px, z: pz, yaw, center: C, scale: k, rim: RIM - 56 });
       drawMapLandmarks(ctx, mapLandmarkIntel.labels(currentMapLandmarks()), toLocal, {size:W,mini:true});
-      drawMapMissions(ctx, projectMapMissions(currentMapMissions(), toLocal,
+      drawMapMissions(ctx, projectMapMissions(currentMapMissions(mapSnapshot), toLocal,
         {x:px,z:pz,yaw,center:C,scale:k,rim:RIM-32}));
       ctx.restore();
 
@@ -11352,11 +11365,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const burrowDirtMat = new THREE.MeshStandardMaterial({ color: 0x6b5238, roughness: 0.95 });
     const burrowGrassMat = new THREE.MeshStandardMaterial({ color: 0x4a6734, roughness: 0.92 });
     const burrowRootMat = new THREE.MeshStandardMaterial({ color: 0x3e2e22, roughness: 0.96 });
+    const burrowMergedMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: THREE.DoubleSide });
     const nestTwigMat = new THREE.MeshStandardMaterial({ color: 0x5f4a30, roughness: 0.92 });
     const nestEggMat = new THREE.MeshStandardMaterial({ color: 0xd9d0ae, roughness: 0.55 });
     const lilyPadMat = new THREE.MeshStandardMaterial({ color: 0x2f6b34, roughness: 0.75 });
     const lilyFlowerMat = new THREE.MeshStandardMaterial({ color: 0xf3e6f5, roughness: 0.6 });
     const lilyFlowerCoreMat = new THREE.MeshStandardMaterial({ color: 0xe8c23a, roughness: 0.6 });
+    const lilyMergedMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.68 });
     const squirrelBodyMat = new THREE.MeshStandardMaterial({ color: 0x9a5a34, roughness: 0.85 });
     const squirrelBellyMat = new THREE.MeshStandardMaterial({ color: 0xdcc09a, roughness: 0.9 });
     const squirrelTailMat = new THREE.MeshStandardMaterial({ color: 0x8a4e2c, roughness: 0.88 });
@@ -11664,7 +11679,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // deep dark throat, gnarled tree roots arching over the lip, cascading spoil fan of
     // soil clods & stones downhill (+Z), and lush grass tufts around the bank.
     function makeBurrowMesh() {
-      const g = new THREE.Group();
+      const parts = [];
       const kind = (Math.random() * 3) | 0;
       const holeR = 0.15 + Math.random() * 0.04 + kind * 0.015;
       const sx = 1.12 + Math.random() * 0.2, sy = 0.72 + Math.random() * 0.1;
@@ -11683,7 +11698,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       pad.rotation.x = -Math.PI / 2;
       pad.position.set(0, 0.012, 0.06);
       pad.scale.set(1.18, 1.05, 1);
-      g.add(throat, hole, pad);
+      parts.push(throat, hole, pad);
 
       // 3D raised earthen hood / rim mound curving around the back (-Z) and flanks of the hole
       const rimArcCount = 11;
@@ -11699,7 +11714,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         );
         mound.scale.set(1.35, 0.55 + arch * 0.35, 1.15);
         mound.position.set(rx, 0.028 + arch * 0.025, rz);
-        g.add(mound);
+        parts.push(mound);
       }
 
       // Gnarled exposed tree roots arching over the upper brow and gripping the lip
@@ -11708,7 +11723,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const root = new THREE.Mesh(new THREE.CapsuleGeometry(0.012, 0.14, 4, 6), burrowRootMat);
         root.position.set(Math.sin(ra) * holeR * sx * 0.95, 0.052, Math.cos(ra) * holeR * sy * 0.92);
         root.rotation.set(0.35, ra, Math.PI * 0.42 + (r - 1.5) * 0.25);
-        g.add(root);
+        parts.push(root);
       }
 
       // Layered spoil fan spilling downhill (+Z)
@@ -11718,7 +11733,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const d = 0.18 + (i % 3) * 0.08;
         blot.position.set(Math.sin(a) * d * 1.2, 0.014, 0.08 + Math.cos(a) * d);
         blot.scale.set(1.25, 0.12, 1.05);
-        g.add(blot);
+        parts.push(blot);
       }
 
       if (kind === 2) {
@@ -11726,7 +11741,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const small = new THREE.Mesh(new THREE.CircleGeometry(holeR * 0.46, 12), burrowHoleMat);
         small.rotation.x = Math.PI / 2;
         small.position.set(side * 0.24, 0.034, -0.06);
-        g.add(small);
+        parts.push(small);
       }
 
       const clods = 12 + kind * 2;
@@ -11740,7 +11755,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         c.position.set(spread, 0.022, 0.1 + t * 0.44);
         c.scale.set(1.25, 0.35 + (i % 3) * 0.12, 1.05);
         c.rotation.y = i * 0.7;
-        g.add(c);
+        parts.push(c);
       }
 
       const stones = 4;
@@ -11749,7 +11764,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         st.position.set((i - 1.5) * 0.14, 0.024, 0.16 + (i % 2) * 0.18);
         st.scale.set(1.15, 0.65, 0.95);
         st.rotation.set(i * 0.5, i * 1.1, 0.2);
-        g.add(st);
+        parts.push(st);
       }
 
       // Lush multi-blade grass tufts framing the back and flanks
@@ -11763,15 +11778,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           blade.position.set(tx + b * 0.014, 0.052, tz);
           blade.rotation.z = b * 0.28 + Math.sin(a) * 0.2;
           blade.rotation.x = -0.15 + Math.cos(a) * 0.25;
-          g.add(blade);
+          parts.push(blade);
         }
       }
 
-      g.scale.setScalar(0.95 + Math.random() * 0.2);
-      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = true; } });
-      g.userData.mouthZ = 0;
-      g.userData.kind = kind;
-      return g;
+      const m = mergeParts(parts, burrowMergedMat, { castShadow: false, receiveShadow: true });
+      m.name = 'burrow';
+      m.scale.setScalar(0.95 + Math.random() * 0.2);
+      m.userData.mouthZ = 0;
+      m.userData.kind = kind;
+      return m;
     }
 
     function makeNestMesh() {
@@ -11981,7 +11997,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
 
     function makeLilyPadMesh() {
-      const g = new THREE.Group();
+      const parts = [];
       const r = 0.34 + Math.random() * 0.16;
       // 3D water-lily pad with notched thickness, upturned rim, radiating veins, companion pad, and multi-petaled lotus blossom
       const pad = new THREE.Mesh(
@@ -11999,7 +12015,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const hub = new THREE.Mesh(new THREE.SphereGeometry(0.022, 8, 6), lilyRimMat);
       hub.scale.set(1, 0.45, 1);
       hub.position.y = 0.016;
-      g.add(pad, rim, hub);
+      parts.push(pad, rim, hub);
 
       // Radiating leaf veins across the pad surface
       const veinCount = 7;
@@ -12011,7 +12027,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         vein.rotation.order = 'YXZ';
         vein.rotation.y = a;
         vein.rotation.x = Math.PI / 2;
-        g.add(vein);
+        parts.push(vein);
       }
 
       // Companion small secondary lily pad for natural pond silhouette
@@ -12022,60 +12038,59 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       );
       subPad.position.set(-r * 0.72, 0.006, -r * 0.45);
       subPad.rotation.y = 2.2;
-      g.add(subPad);
+      parts.push(subPad);
 
-      // Multi-layered water-lily / lotus blossom
-      const flowerG = new THREE.Group();
-      flowerG.position.set(r * 0.16, 0.016, -r * 0.12);
+      // Multi-layered water-lily / lotus blossom (offset in pad space by fx, fy, fz)
+      const fx = r * 0.16, fy = 0.016, fz = -r * 0.12;
       // 4 green outer sepals
       for (let i = 0; i < 4; i++) {
         const a = (i / 4) * Math.PI * 2 + 0.3;
         const sep = new THREE.Mesh(new THREE.ConeGeometry(0.024, 0.068, 6), lilySepalMat);
         sep.scale.set(0.85, 1, 0.42);
-        sep.position.set(Math.cos(a) * 0.036, 0.014, Math.sin(a) * 0.036);
+        sep.position.set(fx + Math.cos(a) * 0.036, fy + 0.014, fz + Math.sin(a) * 0.036);
         sep.rotation.order = 'YXZ';
         sep.rotation.y = -a + Math.PI / 2;
         sep.rotation.x = 1.08;
-        flowerG.add(sep);
+        parts.push(sep);
       }
       // Outer ring of 8 cupped petals
       for (let i = 0; i < 8; i++) {
         const a = (i / 8) * Math.PI * 2;
         const pet = new THREE.Mesh(new THREE.SphereGeometry(0.026, 8, 6), lilyFlowerMat);
         pet.scale.set(0.62, 1.55, 0.32);
-        pet.position.set(Math.cos(a) * 0.034, 0.026, Math.sin(a) * 0.034);
+        pet.position.set(fx + Math.cos(a) * 0.034, fy + 0.026, fz + Math.sin(a) * 0.034);
         pet.rotation.order = 'YXZ';
         pet.rotation.y = -a + Math.PI / 2;
         pet.rotation.x = 0.78;
-        flowerG.add(pet);
+        parts.push(pet);
       }
       // Inner ring of 6 upright petals
       for (let i = 0; i < 6; i++) {
         const a = (i / 6) * Math.PI * 2 + 0.26;
         const pet = new THREE.Mesh(new THREE.SphereGeometry(0.021, 8, 6), lilyFlowerMat);
         pet.scale.set(0.58, 1.45, 0.3);
-        pet.position.set(Math.cos(a) * 0.02, 0.036, Math.sin(a) * 0.02);
+        pet.position.set(fx + Math.cos(a) * 0.02, fy + 0.036, fz + Math.sin(a) * 0.02);
         pet.rotation.order = 'YXZ';
         pet.rotation.y = -a + Math.PI / 2;
         pet.rotation.x = 0.42;
-        flowerG.add(pet);
+        parts.push(pet);
       }
       // Golden stamen crown
       const core = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 8), lilyFlowerCoreMat);
       core.scale.set(1, 0.75, 1);
-      core.position.y = 0.032;
-      flowerG.add(core);
+      core.position.set(fx, fy + 0.032, fz);
+      parts.push(core);
       for (let i = 0; i < 6; i++) {
         const a = (i / 6) * Math.PI * 2;
         const st = new THREE.Mesh(new THREE.CylinderGeometry(0.0025, 0.002, 0.024, 4), lilyFlowerCoreMat);
-        st.position.set(Math.cos(a) * 0.014, 0.044, Math.sin(a) * 0.014);
+        st.position.set(fx + Math.cos(a) * 0.014, fy + 0.044, fz + Math.sin(a) * 0.014);
         st.rotation.set(Math.sin(a) * 0.35, 0, -Math.cos(a) * 0.35);
-        flowerG.add(st);
+        parts.push(st);
       }
-      g.add(flowerG);
 
-      g.traverse(ch => { if (ch.isMesh) { ch.castShadow = false; ch.receiveShadow = false; } });
-      return g;
+      const m = mergeParts(parts, lilyMergedMat, { castShadow: false, receiveShadow: false });
+      m.name = 'lily-pad';
+      return m;
     }
 
     function makeSquirrelMesh() {
@@ -12426,9 +12441,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             ch.material !== frogThroatMat && ch.material !== frogRidgeMat &&
             ch.material !== frogSpotMat && ch.material !== frogIrisMat &&
             ch.material !== burrowMoundMat && ch.material !== burrowHoleMat &&
-            ch.material !== burrowDirtMat && ch.material !== burrowGrassMat && ch.material !== burrowRootMat &&
+            ch.material !== burrowDirtMat && ch.material !== burrowGrassMat && ch.material !== burrowRootMat && ch.material !== burrowMergedMat &&
             ch.material !== lilyPadMat && ch.material !== lilyRimMat && ch.material !== lilySepalMat &&
-            ch.material !== lilyFlowerMat && ch.material !== lilyFlowerCoreMat &&
+            ch.material !== lilyFlowerMat && ch.material !== lilyFlowerCoreMat && ch.material !== lilyMergedMat &&
             ch.material !== squirrelBodyMat && ch.material !== squirrelBellyMat && ch.material !== squirrelTailMat &&
             ch.material !== turtleShellMat && ch.material !== turtleShellRimMat && ch.material !== turtleSkinMat &&
             ch.material !== turtlePlastronMat && ch.material !== turtleScuteMat && ch.material !== turtleStripeMat &&
@@ -12528,6 +12543,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const mesh = makeBurrowMesh();
       mesh.position.set(x, gh, z);
       mesh.rotation.y = facing;
+      mesh.matrixAutoUpdate = false;
+      mesh.updateMatrix();
       scene.add(mesh);
       const mz = mesh.userData.mouthZ != null ? mesh.userData.mouthZ : 0.05;
       burrows.push({
@@ -12751,6 +12768,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const mesh = makeLilyPadMesh();
         mesh.position.set(x, wl + 0.015, z);
         mesh.rotation.y = Math.random() * Math.PI * 2;
+        mesh.matrixAutoUpdate = false;
+        mesh.updateMatrix();
         scene.add(mesh);
         lilyPads.push({ mesh, x, y: wl + 0.015, z });
         return;
@@ -16019,8 +16038,113 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     await loadMark('terrain+water+sky built');
     const ROCK_SCATTER_COUNT = scatterRocks();
 
+    // CL-214: the rocks are drawn from merged meshes, one per ROCK_CELL square, as the trees are (CL-28): 147 rocks
+    // were 147 draws wherever they were in view (AG-90's census of night 20). A rock's own mesh stays where it was,
+    // with its own visible and parent as the game sets them; while batched it is only off the render layers and out
+    // of the frame's matrix walk. A hit puts it back live (its pulse shows), as does anything that hides it or takes
+    // it out; resetGame builds the batches again. ?rockbatch=0 draws every rock on its own, as before.
+    const ROCK_CELL = 64;
+    const rockCells = [];
+    let rockBatchesBuilt = false;
+    const _rbNM = new THREE.Matrix3();
+    function rockOwn(r, on) {
+      const m = r.mesh;
+      if (!m) return;
+      if (on) {
+        if (m.userData.rbMask != null) { m.layers.mask = m.userData.rbMask; delete m.userData.rbMask; }
+        m.userData.walkSkip = false;
+      } else {
+        if (m.userData.rbMask == null) m.userData.rbMask = m.layers.mask;
+        m.layers.mask = 0; m.userData.walkSkip = true;
+      }
+    }
+    function rockGoLive(r) {
+      const b = r._rb;
+      if (!b) return;
+      r._rb = null;
+      const P = b.cell.mesh.geometry.attributes.position, A = P.array, k = b.start * 3;
+      const x = A[k], y = A[k + 1], z = A[k + 2];
+      for (let i = b.start; i < b.start + b.count; i++) { A[i * 3] = x; A[i * 3 + 1] = y; A[i * 3 + 2] = z; }
+      if (typeof P.addUpdateRange === 'function') P.addUpdateRange(k, b.count * 3);
+      P.needsUpdate = true;
+      b.cell.live++;
+      rockOwn(r, true);
+    }
+    function buildRockBatches() {
+      rockBatchesBuilt = true;
+      for (const c of rockCells) { if (c.mesh.parent) c.mesh.parent.remove(c.mesh); c.mesh.geometry.dispose(); }
+      rockCells.length = 0;
+      for (const r of rocks) { r._rb = null; rockOwn(r, true); }
+      if (urlParams.get('rockbatch') === '0') return;
+      const byCell = new Map();
+      for (const r of rocks) {
+        if (!r.alive || !r.mesh || !r.mesh.parent || !r.mesh.visible) continue;
+        const g = r.mesh.geometry;
+        if (!g.attributes.position || !g.attributes.normal || !g.attributes.color) continue;
+        const key = Math.floor(r.x / ROCK_CELL) + ',' + Math.floor(r.z / ROCK_CELL);
+        let list = byCell.get(key);
+        if (!list) byCell.set(key, list = []);
+        list.push(r);
+      }
+      for (const [key, list] of byCell) {
+        let n = 0;
+        for (const r of list) { const g = r.mesh.geometry; n += g.index ? g.index.count : g.attributes.position.count; }
+        const P = new Float32Array(n * 3), N = new Float32Array(n * 3), C = new Float32Array(n * 3);
+        const cell = { key, mesh: null, rocks: list, live: 0 };
+        let o = 0;
+        for (const r of list) {
+          r.mesh.updateMatrixWorld(true);
+          const g = r.mesh.geometry, ix = g.index ? g.index.array : null;
+          const pa = g.attributes.position.array, na = g.attributes.normal.array, ca = g.attributes.color.array;
+          const cs = g.attributes.color.itemSize;
+          const e = r.mesh.matrixWorld.elements, q = _rbNM.getNormalMatrix(r.mesh.matrixWorld).elements;
+          const count = ix ? ix.length : g.attributes.position.count;
+          for (let i = 0; i < count; i++) {
+            const v = ix ? ix[i] : i, s = v * 3, w = (o + i) * 3;
+            const x = pa[s], y = pa[s + 1], z = pa[s + 2];
+            P[w] = e[0] * x + e[4] * y + e[8] * z + e[12];
+            P[w + 1] = e[1] * x + e[5] * y + e[9] * z + e[13];
+            P[w + 2] = e[2] * x + e[6] * y + e[10] * z + e[14];
+            const a = na[s], b = na[s + 1], c = na[s + 2];
+            const nx = q[0] * a + q[3] * b + q[6] * c, ny = q[1] * a + q[4] * b + q[7] * c, nz = q[2] * a + q[5] * b + q[8] * c;
+            const l = Math.hypot(nx, ny, nz) || 1;
+            N[w] = nx / l; N[w + 1] = ny / l; N[w + 2] = nz / l;
+            const t = v * cs;
+            C[w] = ca[t]; C[w + 1] = ca[t + 1]; C[w + 2] = ca[t + 2];
+          }
+          r._rb = { cell, start: o, count };
+          o += count;
+        }
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(P, 3));
+        geo.setAttribute('normal', new THREE.BufferAttribute(N, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(C, 3));
+        geo.computeBoundingSphere();
+        const mesh = new THREE.Mesh(geo, rockMat);
+        mesh.name = 'rock-batch';
+        mesh.castShadow = mesh.receiveShadow = true;
+        mesh.matrixAutoUpdate = false;
+        mesh.userData.rockBatch = key;
+        scene.add(mesh);
+        cell.mesh = mesh;
+        rockCells.push(cell);
+        for (const r of list) rockOwn(r, false);
+      }
+    }
+    // Every frame: a batched rock that was hidden, broken or taken out of the scene goes live (its range collapses).
+    function updateRockBatches() {
+      if (!rockBatchesBuilt) return;
+      for (let i = 0; i < rockCells.length; i++) {
+        const list = rockCells[i].rocks;
+        for (let j = 0; j < list.length; j++) {
+          const r = list[j];
+          if (r._rb && (!r.alive || !r.mesh.parent || !r.mesh.visible)) rockGoLive(r);
+        }
+      }
+    }
     function damageRock(rock, amount, dirX = 0, dirZ = 0) {
       if (!rock.alive) return;
+      rockGoLive(rock);   // CL-214: its own mesh shows the hit
       rock.hp -= amount;
       rock.mesh.scale.setScalar(1.05);
       setTimeout(() => { if (rock.alive) rock.mesh.scale.setScalar(1); }, 40);
@@ -17087,6 +17211,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function tbGoLive(m, why) {
       if (!m.inBatch) return;
       m.inBatch = false;
+      if (m.tree.group) m.tree.group.userData.walkSkip = false;   // CL-211: back in the frame's matrix walk
       m.tree._tbInBatch = false;
       if (why === 'changed') { m.dirty = true; m.tree._tbRestored = false; }
       tbCollapse(m.cell.wood, m.woodStart, m.woodCount);
@@ -17121,6 +17246,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       m.dirty = false;
       m.snap = tbSnapshot(m.tree);
       tbFreeze(m.tree, true);
+      // CL-211: frozen and drawn from its cell, it leaves the frame's matrix walk too (400 trees, 1,600 nodes at night 20)
+      if (m.tree.group) m.tree.group.userData.walkSkip = true;
     }
 
     let treeBatchBuildMs = 0;
@@ -17165,6 +17292,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           m.snap = tbSnapshot(m.tree);
           tbShowOwn(m, false);
           tbFreeze(m.tree, true);
+          if (m.tree.group) m.tree.group.userData.walkSkip = true;   // CL-211 (as tbGoBatch)
         }
         // Bounds from one pass over the positions (three's computeBoundingSphere makes
         // two passes with a Vector3 per vertex). The sphere is the box's, a little loose,
@@ -24026,6 +24154,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // The parts that move as one (each fan, the shutter, the tray): baked within themselves.
         for (const part of [shutter, intakeTray, ...fans]) { if (part) { const r = bakeStatic(THREE, part); baked.merged += r.merged; baked.removed += r.removed; } }
         house.baked = baked;
+        // CL-218 (AG-91's census: the house was 145 of night 20's 396 draws, one a material): the plain colours are
+        // folded into one draw a side (world/bake.js foldStatic: colour, roughness and metalness per vertex). Glows,
+        // textures, the hidden tags, what moves (each fan, the shutter and the tray fold within themselves) and what is
+        // held by name stay as they were. The damaged terminal is only dressing, so it is folded in with the house.
+        // ?fold=0 leaves it as it was, to compare.
+        if (urlParams.get('fold') !== '0') {
+          const hold = new Set([lightMat, screenMat, buttonMat, bayLampMat, repeaterMat, ...(house.lockSigns || []), ..._glowMats.map((x) => x.mat)].filter(Boolean));
+          const fold = { folded: 0, removed: 0 }, sum = (r) => { fold.folded += r.folded; fold.removed += r.removed; };
+          sum(foldStatic(THREE, TSL, g, { skip: (o) => moving.has(o), enter: (o) => o.name === 'hq-damaged-terminal', hold }));
+          for (const name of ['hq-cif', 'hq-armory', 'hq-skull-intake', 'hq-alarm-cabinet']) {
+            const h = g.getObjectByName(name);
+            if (h) sum(foldStatic(THREE, TSL, h, { skip: (o) => moving.has(o) || o === house.armoryRack, hold }));
+          }
+          for (const part of [shutter, intakeTray, ...fans]) if (part) sum(foldStatic(THREE, TSL, part, { hold }));
+          house.folded = fold;
+        }
       } catch (e) { console.warn('Grave Shift: HQ bake skipped.', e); }
       g.visible = false;
       scene.add(g);
@@ -26027,10 +26171,40 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       } else if (cmd === 'boots') {
         wearInsulatedBoots(localPlayer);
         showBanner('BOOTS', 'Insulated boots on (they hang off the skeleton up the radio mast)', 2.2, '#f2d35a');
+      } else if (cmd === 'site hikers' || cmd === 'site hikers river' || cmd === 'site hikers dry') {
+        // GB-196: to the hikers' tree, the bag hanging; 'river' / 'dry' pick the run's drop.
+        debugTouched = true;
+        hikersTeardown(); hikersKit = null; hikersRetryT = 0; hikersForce = cmd.endsWith('river') ? 'river' : cmd.endsWith('dry') ? 'dry' : null;
+        const H = hikersEnsure();
+        if (H) {
+          const t = H.tree, ax = H.branch.x - t.x, az = H.branch.z - t.z, l = Math.hypot(ax, az) || 1, x = H.hang.x - az / l * 7, z = H.hang.z + ax / l * 7;   // beside the bag, the trunk out of the line
+          player.position.set(x, sampleHeight(x, z), z); velX = 0; velZ = 0; vy = 0; grounded = true;
+          showBanner(dwText('hikers.devTitle'), dwText('hikers.devDetail') + (H.river ? '' : ' (no river)'), 2.2, '#f2d35a');
+        }
+      } else if (cmd === 'site convoy') {
+        const a = convoyJackAt();
+        if (a && gameStarted && !gameOver && !won && !training.active) {
+          debugTouched = true;
+          player.position.set(a.x, a.y, a.z); velX = 0; velZ = 0; vy = 0; grounded = true;
+          showBanner(dwText('convoy.devTitle'), dwText('convoy.devDetail'), 2.2, '#f2d35a');
+        }
       } else if (cmd === 'relay') {
         // CL-183: the relay cabinet's front, to try the puzzle.
         const P = objectiveProps?.props?.[RADIO_SITE];
         if (P) { player.position.set(P.approach.x, P.approach.y, P.approach.z); velX = 0; velZ = 0; vy = 0; grounded = true; showBanner('RELAY', 'At the relay cabinet: E for the breakers', 2.2, '#f2d35a'); }
+      } else if (cmd === 'site truck' || cmd === 'site truck cutters') {
+        // CL-216: the utility truck's chained toolbox, or the bolt cutters at the mine mouth.
+        const P = truckSiteProp(), C = truck.cuttersSpot;
+        const at = cmd === 'site truck' ? P && P.approach : C && C.approach;
+        if (at) { player.position.set(at.x, at.y + 0.05, at.z); velX = 0; velZ = 0; vy = 0; grounded = true; showBanner('SITE', cmd === 'site truck' ? 'The utility truck' : 'The bolt cutters', 1.8, '#f2d35a'); }
+      } else if (cmd === 'site ranger' || cmd === 'site ranger radio' || cmd === 'site ranger board' || cmd === 'site ranger door' || cmd === 'site ranger code') {
+        // CL-217: the rangers' lockbox, or one of the three things round their camp; `code` says the digits.
+        if (cmd === 'site ranger code') showBanner('RANGER', rangerCache.state.order.join(' · ') + ' = ' + rangerCache.state.code.join(''), 3, '#f2d35a');
+        else {
+          const src = { 'site ranger radio': 'radio', 'site ranger board': 'board', 'site ranger door': 'truck' }[cmd];
+          const P = rangerSiteProp(), at = src ? ranger.clues.find((c) => c.source === src)?.spot?.approach : P && P.approach;
+          if (at) { player.position.set(at.x, at.y + 0.05, at.z); velX = 0; velZ = 0; vy = 0; grounded = true; showBanner('SITE', src ? 'The rangers\' ' + (src === 'truck' ? 'truck door' : src) : 'The rangers\' lockbox', 1.8, '#f2d35a'); }
+        }
       } else if (cmd === 'relay skip') {
         // CL-184: the breakers, the radio and the station done; E at the cabinet starts the reboot.
         for (const n of RELAY.ORDER) relayPuzzle.flip(n);
@@ -26512,6 +26686,227 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // supplies wait in a locker a few metres off on the far side of the mast (locked and red until the signal is
     // back, then open, green and marked), so repairing and taking are two places.
     const RADIO_SITE = 'objective:radio-repair';
+    // GP-19937: the jack is separate from the cooler's objective prop. The
+    // objective stays locked until eight good pumps, then its ordinary claim and
+    // later restocks use the existing objective runtime.
+    const CONVOY_SITE = 'objective:medical-convoy';
+    const convoyMission = createConvoyMission();
+    let convoyIdleVoiceT = 0, convoySleeperMesh = null, convoySleeperHp = 34;
+    const convoyRay = new THREE.Raycaster(), convoyRayDelta = new THREE.Vector3();
+    function convoyParts() { return POI.wrecks[0]?.mesh?.userData?.convoy || null; }
+    function ensureConvoySleeper() {
+      const mount = convoyParts()?.sleeperMount;
+      if (!mount) return null;
+      if (!convoySleeperMesh) {
+        convoySleeperMesh = prepareConvoySleeperAppearance(THREE, makeZombieMesh('spitter'));
+        convoySleeperMesh.name = 'convoy-sleeper-spitter';
+        mount.add(convoySleeperMesh);
+      } else if (convoySleeperMesh.parent !== mount) mount.add(convoySleeperMesh);
+      return convoySleeperMesh;
+    }
+    function convoySleeperRoundHit(a, b) {
+      if (!convoyMission.read().doorOpen || !convoyMission.read().sleeperAlive || !convoySleeperMesh?.visible) return null;
+      convoyRayDelta.copy(b).sub(a);
+      const length = convoyRayDelta.length();
+      if (length < 1e-5) return null;
+      convoySleeperMesh.updateWorldMatrix(true, true);
+      convoyRay.set(a, convoyRayDelta.multiplyScalar(1 / length)); convoyRay.near = 0; convoyRay.far = length;
+      const hit = convoyRay.intersectObject(convoySleeperMesh, true).find(h => h.object.visible !== false);
+      return hit ? { t: hit.distance / length, point: hit.point, object: hit.object } : null;
+    }
+    function damageConvoySleeper(amount, fromTurret = false) {
+      if (!convoyMission.read().doorOpen || !convoyMission.read().sleeperAlive) return false;
+      convoySleeperHp -= Math.max(0, amount);
+      if (!fromTurret) reticleHitMark(convoySleeperHp <= 0 ? 'kill' : 'hit');
+      if (convoySleeperHp <= 0) convoyMissionEvents(convoyMission.killSleeper());
+      return true;
+    }
+    function convoyJackAt() {
+      const parts = convoyParts(), prop = objectiveProps?.props?.[CONVOY_SITE];
+      return parts?.jackAt || parts?.jackApproach || prop?.approach || null;
+    }
+    function convoyJackInReach() {
+      if (!gameStarted || gameOver || won || training.active || objectiveModalOpen() || ['ready', 'warning', 'open'].includes(convoyMission.read().phase)) return false;
+      const a = convoyJackAt(), p = localPlayer.position;
+      return !!a && Math.hypot(p.x - a.x, p.z - a.z) <= 1.7 && Math.abs(p.y - a.y) < 1.5;
+    }
+    function convoySoundAt() {
+      const p = POI.wrecks[0] || convoyJackAt();
+      return p ? sndAt(p.x, p.z, 25) : { v: 0, pan: 0 };
+    }
+    function convoyCallTheDead(base) {
+      const source = POI.wrecks[0];
+      if (!source) return 0;
+      const count = base * (day >= 15 ? 3 : day >= 6 ? 2 : 1);
+      return siteCallTheDead(source, count, false, 'convoyCalled', 30, 40);
+    }
+    function convoyMissionEvents(events) {
+      if (!events?.length) return;
+      hudPromptLastMs = -Infinity;   // a beat, warning or open door changes the floating action immediately
+      const sa = convoySoundAt();
+      for (const event of events) {
+        if (event.kind === 'pump') {
+          AudioSys.buildHit('metal', Math.max(0.45, sa.v), sa.pan);
+          convoyCallTheDead(1);
+        } else if (event.kind === 'slip') { AudioSys.buildBreak('metal', Math.max(0.3, sa.v * 0.7), sa.pan); convoyCallTheDead(1); }
+        else if (event.kind === 'cab-bang') AudioSys.buildHit('metal', Math.max(0.3, sa.v * 0.65), sa.pan);
+        else if (event.kind === 'heavy-thump') AudioSys.heavyStep(Math.max(0.6, sa.v), sa.pan, true);
+        else if (event.kind === 'door-open') { convoyParts()?.setDoorOpen?.(true); AudioSys.doorSound(true, Math.max(0.4, sa.v), sa.pan); }
+        else if (event.kind === 'spit') {
+          AudioSys.zombieVoice('spitter', 'attack', Math.max(0.65, sa.v), sa.pan);
+          damagePlayer(PLAYER_MAX_HP * CONVOY.spitFraction, 'spitter');
+        } else if (event.kind === 'door-close') { convoyParts()?.setDoorOpen?.(false); AudioSys.doorSound(false, Math.max(0.4, sa.v), sa.pan); }
+        else if (event.kind === 'sleeper-killed') {
+          AudioSys.zombieVoice('spitter', 'death', Math.max(0.5, sa.v), sa.pan);
+          const m = convoySleeperMesh;
+          if (m) { m.userData.eyeBatch.material.emissiveIntensity = 0; m.userData.head.rotation.z = -0.35; }
+        }
+      }
+    }
+    function updateConvoyMission(dt) {
+      if (!gameStarted || gameOver || won || paused || training.active) return;
+      const state = convoyMission.read(), parts = convoyParts();
+      const wreck = POI.wrecks[0];
+      const nearWreck = wreck && Math.hypot(localPlayer.position.x - wreck.x, localPlayer.position.z - wreck.z) < 24;
+      if (!nearWreck && (state.phase === 'idle' || state.phase === 'ready')) return;
+      if (nearWreck) ensureConvoySleeper();
+      if (state.phase !== 'idle' && state.phase !== 'ready') {
+        convoyMissionEvents(convoyMission.step(dt, { engaged: convoyJackInReach() }));
+        if (convoyMission.read().sleeperAlive && convoyJackInReach()) {
+          convoyIdleVoiceT -= dt;
+          if (convoyIdleVoiceT <= 0) {
+            const sa = convoySoundAt();
+            AudioSys.zombieVoice('spitter', 'idle', Math.min(0.14, sa.v * 0.25), sa.pan);
+            convoyIdleVoiceT = 3.2;
+          }
+        }
+      }
+      parts?.setBeatPulse?.(convoyMission.read().pulse);
+      if (convoySleeperMesh) convoySleeperMesh.visible = convoyMission.read().doorOpen;
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type !== 'run-reset') return;
+      convoyMission.reset(); convoyIdleVoiceT = 0; convoySleeperHp = 34;
+      convoyParts()?.setBeatPulse?.(0); convoyParts()?.setDoorOpen?.(false);
+      if (convoySleeperMesh) { convoySleeperMesh.visible = false; convoySleeperMesh.userData.eyeBatch.material.emissiveIntensity = 1.8; convoySleeperMesh.userData.head.rotation.z = 0; }
+    });
+    // GB-196 (D-82, docs/specs/day-missions.md 3): the hikers' first-aid kit, in a bag hung by a rope from a branch,
+    // about 5 m up, on the big tree by the river nearest their camp (campsites.1), within 50 m; with no such tree, a tree
+    // at the camp and no river. Any round across the rope cuts it. On a river run (half the runs, the run's seed) the bag
+    // swings out and floats down with the river's flow; E within 2 m takes it (the site's own claim: 1 medpen). Not taken
+    // in 40 s, it snags where it has drifted and 3-5 drowned rise there as he comes near. The site is locked in
+    // objectiveReach until the kit is taken; its later restocks are a plain E search. Rules: game/hikers-kit.js.
+    // The tree's branch, the rope and the bag are placeholders until Antigravity's props land.
+    const HIKERS_SITE = 'objective:hikers-cache';
+    let hikersKit = null, hikers = null, hikersForce = null, hikersRetryT = 0;
+    function hikersSiteDone() { return !!hikersKit?.read().done; }
+    function hikersSiteState() { try { return objectiveRuntime?.read()?.sites?.find((x) => x.id === HIKERS_SITE)?.state ?? null; } catch (_) { return null; } }
+    function hikersBuild() {
+      const prop = objectiveProps?.props?.[HIKERS_SITE]; if (!prop?.centre) return null;
+      const c = prop.centre; let best = null, bestScore = Infinity, near = null, nearD = Infinity;
+      const outTo = (t, tx, tz) => { const l = Math.hypot(tx - t.x, tz - t.z) || 1; return { x: (tx - t.x) / l, z: (tz - t.z) / l }; };
+      const waterAlong = (x0, z0, o) => { for (let k = 0.5; k <= 9; k += 0.5) { const x = x0 + o.x * k, z = z0 + o.z * k; if (waterAt(x, z).depth > 0.25) return { x, z }; } return null; };
+      for (const t of trees) {
+        if (!t.alive || t.falling || t.stump) continue;
+        const d = Math.hypot(t.x - c.x, t.z - c.z);
+        if (d < nearD && d > 3 && d <= 50) { nearD = d; near = t; }
+        if (d > 50 && hikersForce !== 'river') continue;   // spec: a river tree within about 50 m, else the camp's own tree (no river); 'site hikers river' looks further to test the float
+        const rp = riverProject(t.x, t.z); if (rp.d > 16 || waterAt(t.x, t.z).depth > 0) continue;
+        const q = riverPointAt(rp.s), o = outTo(t, q.x, q.z);
+        if (!waterAlong(t.x + o.x * ((t.trunkRadius || 0.3) + 1.6), t.z + o.z * ((t.trunkRadius || 0.3) + 1.6), o)) continue;
+        const score = rp.d + d * 0.05 + (d > 50 ? 1000 : 0);
+        if (score < bestScore) { bestScore = score; best = t; }
+      }
+      const tree = best || near; if (!tree) return null;
+      const river = !!best, gy = sampleHeight(tree.x, tree.z), tr = tree.trunkRadius || 0.3;
+      let o;
+      if (river) { const rp = riverProject(tree.x, tree.z), q = riverPointAt(rp.s); o = outTo(tree, q.x, q.z); } else o = outTo(tree, c.x, c.z);
+      const reach = Math.max(tr + 1.6, (tree.canopyRadius || 0) * 0.9 + 0.45);   // out past the leaves: a round stops in the canopy (updateProjectiles), so the rope hangs clear of it
+      const branch = { x: tree.x + o.x * reach, y: gy + HIKERS.ropeH + 0.9, z: tree.z + o.z * reach };
+      const hang = { x: branch.x, y: gy + HIKERS.ropeH, z: branch.z };
+      const tie = { x: tree.x + o.x * (tr + 0.05), y: gy + 1.3, z: tree.z + o.z * (tr + 0.05) };
+      const wet = river ? waterAlong(branch.x, branch.z, o) : null;
+      const land = wet || { x: hang.x + o.x * 0.4, z: hang.z + o.z * 0.4 };
+      // Placeholders: a bough out from the trunk, the rope (trunk to bough to bag) and a brown pack.
+      const group = new THREE.Group(); group.name = 'hikers-kit';
+      const ropeMat = new THREE.MeshStandardMaterial({ color: 0xd8c690, roughness: 0.9 });
+      const seg = (a, b, r, mat) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, 6), mat); const v = new THREE.Vector3(b.x - a.x, b.y - a.y, b.z - a.z), l = v.length();
+        m.scale.set(1, l, 1); m.position.set((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.normalize()); group.add(m); return m; };
+      const boughFrom = { x: tree.x + o.x * tr * 0.5, y: branch.y - 0.15, z: tree.z + o.z * tr * 0.5 };
+      seg(boughFrom, { x: branch.x + o.x * 0.5, y: branch.y + 0.05, z: branch.z + o.z * 0.5 }, 0.09, new THREE.MeshStandardMaterial({ color: 0x5a4330, roughness: 1 }));
+      const top = { x: branch.x, y: branch.y + 0.08, z: branch.z };
+      const ropeA = seg(tie, top, 0.018, ropeMat), ropeB = seg(top, { x: hang.x, y: hang.y + 0.3, z: hang.z }, 0.018, ropeMat);
+      const bag = new THREE.Group(); bag.name = 'hikers-kit-bag';
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.48, 0.26), new THREE.MeshStandardMaterial({ color: 0x6b4a2c, roughness: 0.85 }));
+      const flap = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.1, 0.28), new THREE.MeshStandardMaterial({ color: 0x8a2a24, roughness: 0.8 }));
+      flap.position.y = 0.24; bag.add(body, flap); bag.position.set(hang.x, hang.y, hang.z); group.add(bag);
+      scene.add(group);
+      return { tree, river, branch, hang, tie, top, land, group, ropeA, ropeB, bag, pos: { x: hang.x, y: hang.y, z: hang.z }, from: { x: hang.x, z: hang.z },
+        ropePieces: [[tie, top], [top, { x: hang.x, y: hang.y + 0.3, z: hang.z }]] };
+    }
+    function hikersEnsure() {
+      if (!hikersKit) hikersKit = createHikersKit({ seed: hikersForce === 'river' ? 1 : hikersForce === 'dry' ? 2 : hikersSeed('hikers:' + uiRunId), river: true,
+        config: hikersForce ? {} : {} });
+      if (hikersForce) { const want = hikersForce === 'river'; for (let r = 1; r < 200 && hikersKit.read().toRiver !== want; r++) hikersKit = createHikersKit({ seed: hikersSeed('force:' + r), river: true }); }
+      if (!hikers && hikersRetryT <= 0 && gameStarted && objectiveProps?.props?.[HIKERS_SITE]) { hikers = hikersBuild(); if (!hikers) hikersRetryT = 3; }   // the world may still be building
+      return hikers;
+    }
+    function hikersTeardown() { if (hikers?.group) { scene.remove(hikers.group); hikers.group.traverse((m) => { m.geometry?.dispose?.(); }); } hikers = null; }
+    function hikersCut() {
+      if (!hikers || hikersKit.read().phase !== 'hanging') return;
+      for (const e of hikersKit.cut()) if (e.kind === 'cut') {
+        hikers.ropeB.visible = false; hikers.from = { x: hikers.pos.x, z: hikers.pos.z };
+        const sa = sndAt(hikers.pos.x, hikers.pos.z, 30); AudioSys.buildHit('wood', Math.max(0.25, sa.v * 0.6), sa.pan);
+        publishUI('hikers-kit', { kind: 'cut' });
+      }
+    }
+    function hikersRoundStep(from, to) { if (hikers && hikersKit?.read().phase === 'hanging' && roundCutsRope(from, to, hikers.ropePieces)) hikersCut(); }
+    function hikersBagDist() { if (!hikers) return Infinity; const p = localPlayer.position, b = hikers.pos; return Math.abs(p.y - b.y) > 2.2 ? Infinity : Math.hypot(p.x - b.x, p.z - b.z); }
+    function hikersGrabbable() { return !!hikers && !!hikersKit?.read().loose && !hikersSiteDone() && !objectiveModalOpen() && hikersBagDist() <= HIKERS.grabR; }
+    function updateHikersKit(dt) {
+      if (!gameStarted || gameOver || won || paused || training.active) return;
+      hikersRetryT -= dt;
+      if (!hikersEnsure() || hikersSiteDone()) return;
+      const k = hikersKit, st0 = k.read(), b = hikers.pos, wl = (x, z) => { const w = waterAt(x, z); return w.depth > 0.15 ? w.level : null; };
+      // The site's claim took the bag (E within 2 m, through the objective runtime): the kit is his.
+      const site = hikersSiteState();
+      if (st0.loose && (site === 'ready-to-claim' || site === 'claimed')) {
+        k.grab(0); hikers.bag.visible = false; publishUI('hikers-kit', { kind: 'caught' }); return;
+      }
+      let events;
+      if (st0.phase === 'falling') {
+        const lw = hikers.river ? wl(hikers.land.x, hikers.land.z) : null;
+        events = k.step(dt, { inWater: lw !== null });
+        const st = k.read(), u = 1 - st.height / HIKERS.ropeH, floor = lw !== null && st.toRiver ? lw - 0.05 : sampleHeight(hikers.land.x, hikers.land.z) + 0.24;
+        const swing = st.toRiver && lw !== null ? u : Math.min(1, u * 0.2);
+        b.x = hikers.from.x + (hikers.land.x - hikers.from.x) * swing; b.z = hikers.from.z + (hikers.land.z - hikers.from.z) * swing;
+        b.y = Math.max(floor, hikers.hang.y - (hikers.hang.y - floor) * u);
+      } else if (st0.phase === 'floating') {
+        const w = waterAt(b.x, b.z);
+        if (w.depth > 0.15) { b.x += w.current.x * dt; b.z += w.current.z * dt; b.y = w.level - 0.05; }
+        events = k.step(dt, { inWater: true });
+      } else {
+        events = k.step(dt, { poolDist: st0.phase === 'snagged' ? Math.hypot(localPlayer.position.x - b.x, localPlayer.position.z - b.z) : Infinity });   // the pool wakes on the flat distance (a bank above the water still counts)
+      }
+      hikersEvents(events);
+      if (hikers.bag.visible) { hikers.bag.position.set(b.x, b.y, b.z); if (k.read().phase === 'floating') hikers.bag.rotation.y += dt * 0.6; }
+    }
+    function hikersEvents(events) {
+      const b = hikers.pos;
+      for (const e of events || []) {
+        if (e.kind === 'splash') spawnSplash(b.x, b.y + 0.1, b.z, 8, 0.8);
+        else if (e.kind === 'land') { const sa = sndAt(b.x, b.z, 25); AudioSys.buildHit('wood', Math.max(0.2, sa.v * 0.5), sa.pan); }
+        else if (e.kind === 'snag') hikers.pool = { x: b.x, z: b.z };
+        else if (e.kind === 'drowned-rise') {
+          for (let i = 0; i < e.n; i++) { const a = i / e.n * Math.PI * 2 + 0.4, r = 2.2 + (i % 2) * 1.3; spawnZombie(b.x + Math.cos(a) * r, b.z + Math.sin(a) * r, 'drowned', true, false); }
+        }
+        publishUI('hikers-kit', { kind: e.kind });
+      }
+    }
+    window.addEventListener('dw-game', ({ detail }) => {
+      if (detail?.type !== 'run-reset') return;
+      hikersTeardown(); hikersKit = null; hikersForce = null; hikersRetryT = 0;
+    });
     const RADIO_CUE = { markerR: 60, nearR: 14, lockerR: 2.6, minFromCabinet: 7 };
     let radioLocker = null, radioMarks = null, radioBarEl = null, radioCueState = null, radioFlashT = 0, radioFlashKey = '';
     function radioSiteState() {
@@ -26793,6 +27188,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function radioPromptText() {
       const prop = objectiveProps?.props?.[RADIO_SITE];
       if (!prop || !gameStarted || gameOver || won) return null;
+      if (!nearPromptSpot(prop) && !nearPromptSpot(prop.pickup) && !nearPromptSpot(radioLocker) && !nearPromptSpot(satoNote)) return null;
       const st = radioSiteState(), p = localPlayer.position;
       const key = { interact: 'E' };
       if (satoNote && relayNear(satoNote, 1.6)) return sayText('relay.read', key, 'E — Read');   // CL-184: the scrap of paper
@@ -26840,6 +27236,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function relayNear(spot, r = 1.6) {
       const p = localPlayer.position;
       return !!spot && Math.hypot(p.x - spot.approach.x, p.z - spot.approach.z) <= r && Math.abs(p.y - spot.approach.y) < 1.25;
+    }
+    function nearPromptSpot(spot) {
+      const a = spot?.approach || spot?.centre || spot;
+      if (!a || !Number.isFinite(a.x) || !Number.isFinite(a.z)) return false;
+      const p = localPlayer.position, dx = p.x - a.x, dz = p.z - a.z;
+      return dx * dx + dz * dz < 16 && Math.abs(p.y - (a.y ?? p.y)) < 3;
     }
     // CL-185: a strip laid on the ground along a line of points (the dirt path out to the vault, the faint foot trail to
     // Sato's tree). It follows the terrain a few centimetres up, drawn over the grass and never into it.
@@ -26908,6 +27310,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // foot trail from the relay to the tree." What happened to Sato is left to the player.
     function buildSatoProps() {
       const g = new THREE.Group();
+      g.name = 'sato-note';
       const c = document.createElement('canvas'); c.width = 64; c.height = 48;
       const x = c.getContext('2d');
       if (x) {   // the sketch, too small to read from up here
@@ -26922,34 +27325,41 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const fold = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.16), paperMat); fold.position.set(0.11, 0.02, 0); fold.rotation.set(-Math.PI / 2, 0.5, 0); g.add(fold);
       const stone = new THREE.Mesh(new THREE.DodecahedronGeometry(0.045, 0), new THREE.MeshStandardMaterial({ color: 0x77736a, roughness: 1 }));
       stone.position.set(-0.06, 0.03, 0.03); stone.scale.set(1, 0.6, 0.85); stone.castShadow = true; g.add(stone);
+      bakeStatic(THREE, g);
+      g.traverse((ch) => { if (ch !== g) { ch.matrixAutoUpdate = false; ch.updateMatrix(); } });
       scene.add(g);
       const mat = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.9, metalness: 0, ...o });
+      const satoPropMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9, metalness: 0 });
       // A boonie hat, dropped crown-down.
-      const hat = new THREE.Group();
-      const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.2, 0.015, 18), mat(0x5d6640)); hat.add(brim);
-      const crown = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.12, 0.09, 14), mat(0x535b39)); crown.position.y = -0.05; hat.add(crown);
-      const band = new THREE.Mesh(new THREE.CylinderGeometry(0.122, 0.122, 0.022, 14), mat(0x3a3f28)); band.position.y = -0.012; hat.add(band);
-      hat.traverse((m) => { if (m.isMesh) m.castShadow = true; });
+      const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.2, 0.015, 18), mat(0x5d6640));
+      const crown = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.12, 0.09, 14), mat(0x535b39)); crown.position.y = -0.05;
+      const band = new THREE.Mesh(new THREE.CylinderGeometry(0.122, 0.122, 0.022, 14), mat(0x3a3f28)); band.position.y = -0.012;
+      const hat = mergeParts([brim, crown, band], satoPropMat, { castShadow: true, receiveShadow: false });
+      hat.name = 'sato-hat';
       scene.add(hat);
       // A folding field stool, knocked over: three crossed legs and a canvas triangle.
-      const stool = new THREE.Group();
+      const stoolParts = [];
       const leg = mat(0x6e5a3c), canvas = mat(0x8a7a52);
       for (let i = 0; i < 3; i++) {
         const a = i / 3 * Math.PI * 2, l = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.5, 6), leg);
-        l.position.set(Math.cos(a) * 0.08, 0.22, Math.sin(a) * 0.08); l.rotation.set(Math.sin(a) * 0.38, 0, -Math.cos(a) * 0.38); stool.add(l);
+        l.position.set(Math.cos(a) * 0.08, 0.22, Math.sin(a) * 0.08); l.rotation.set(Math.sin(a) * 0.38, 0, -Math.cos(a) * 0.38); stoolParts.push(l);
       }
-      const seat = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.012, 3), canvas); seat.position.y = 0.45; stool.add(seat);
-      stool.traverse((m) => { if (m.isMesh) m.castShadow = true; });
+      const seat = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.012, 3), canvas); seat.position.y = 0.45; stoolParts.push(seat);
+      const stool = mergeParts(stoolParts, satoPropMat, { castShadow: true, receiveShadow: false });
+      stool.name = 'sato-stool';
       scene.add(stool);
       // Claw marks: four raw gouges down the trunk, pale wood with dark edges.
-      const claws = new THREE.Group();
+      const clawParts = [];
       const raw = mat(0xe2cfa2), edge = mat(0x24170d);
       for (let i = 0; i < 4; i++) {
-        const gash = new THREE.Group(); gash.position.set((i - 1.5) * 0.055, (i === 0 || i === 3 ? 0.03 : 0), 0);
-        gash.add(new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.44 - Math.abs(i - 1.5) * 0.05, 0.012), edge));
-        const core = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.4 - Math.abs(i - 1.5) * 0.05, 0.014), raw); core.position.z = 0.002; gash.add(core);
-        gash.rotation.z = 0.32; claws.add(gash);
+        const gx = (i - 1.5) * 0.055, gy = (i === 0 || i === 3 ? 0.03 : 0);
+        const outer = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.44 - Math.abs(i - 1.5) * 0.05, 0.012), edge);
+        outer.position.set(gx, gy, 0); outer.rotation.z = 0.32; clawParts.push(outer);
+        const core = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.4 - Math.abs(i - 1.5) * 0.05, 0.014), raw);
+        core.position.set(gx, gy, 0.002); core.rotation.z = 0.32; clawParts.push(core);
       }
+      const claws = mergeParts(clawParts, satoPropMat, { castShadow: false, receiveShadow: false });
+      claws.name = 'sato-claws';
       scene.add(claws);
       return { group: g, hat, stool, claws, approach: { x: 0, y: 0, z: 0 }, trail: null, tree: null };
     }
@@ -26982,6 +27392,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const S = satoNote;
       S.group.position.set(spot.x, y, spot.z);
       S.group.rotation.y = Math.random() * Math.PI * 2;
+      S.group.matrixAutoUpdate = false;
+      S.group.updateMatrix();
       S.approach = { x: spot.x, y, z: spot.z };
       S.group.visible = true;
       S.tree = tree;
@@ -26990,19 +27402,23 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const side = out + Math.PI / 2 * (Math.random() < 0.5 ? 1 : -1);
       const hx = spot.x + Math.cos(side) * 0.75 + Math.cos(out) * 0.2, hz = spot.z + Math.sin(side) * 0.75 + Math.sin(out) * 0.2;
       S.hat.position.set(hx, sampleHeight(hx, hz) + 0.012, hz); S.hat.rotation.set(Math.PI + 0.1, Math.random() * 6, 0.08);
+      S.hat.matrixAutoUpdate = false; S.hat.updateMatrix();
       const tx = tree ? (spot.x + tree.x) / 2 - Math.cos(side) * 0.45 : spot.x - 0.6, tz = tree ? (spot.z + tree.z) / 2 - Math.sin(side) * 0.45 : spot.z;
       S.stool.position.set(tx, sampleHeight(tx, tz) + 0.17, tz); S.stool.rotation.set(0, -side, Math.PI / 2 - 0.25);
+      S.stool.matrixAutoUpdate = false; S.stool.updateMatrix();
       S.claws.visible = !!tree;
       if (tree) {   // on the trunk, the side facing the paper, about shoulder high
         const r = (tree.trunkRadius || 0.3) + 0.004;
         S.claws.position.set(tree.x + Math.cos(out) * r, sampleHeight(tree.x, tree.z) + 1.05, tree.z + Math.sin(out) * r);
         S.claws.rotation.set(0, Math.atan2(Math.cos(out), Math.sin(out)), 0);
       }
+      S.claws.matrixAutoUpdate = false; S.claws.updateMatrix();
       // The faint trail: from the cabinet, the way someone walked out to that tree and back.
       if (S.trail) { scene.remove(S.trail); S.trail.geometry.dispose(); }
       const from = prop.approach || cab, to = { x: spot.x - Math.cos(out) * 0.3, z: spot.z - Math.sin(out) * 0.3 };
       const dir = Math.atan2(to.z - from.z, to.x - from.x), start = { x: from.x + Math.cos(dir) * 1.2, z: from.z + Math.sin(dir) * 1.2 };
       S.trail = groundRibbon(bentLine(start, to, 0.5, (Math.random() < 0.5 ? 1 : -1) * 0.08, (u) => 0.85 + 0.15 * Math.sin(u * 9)), 0.42, satoTrailTex || (satoTrailTex = groundTex('trail')), 0.4, 1.25);
+      if (S.trail) { S.trail.name = 'sato-trail'; S.trail.matrixAutoUpdate = false; S.trail.updateMatrix(); }
     }
     let satoTrailTex = null, vaultPathTex = null;
     function relayOpen(mode) {
@@ -27079,9 +27495,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       return null;
     }
+    // GP-19937 (ChatGPT found it): relaySpawnSpot reads the flow field round the marine, which is only kept up while
+    // the dead are about. Before calling any in, a field centred more than four cells from him is built again (~10 ms).
+    function spawnFieldFresh() {
+      const half = FF_N * FF_CELL / 2, P = localPlayer.position;
+      if (!ffPlayer.ready || Math.abs(ffPlayer.ox + half - P.x) > FF_CELL * 4 || Math.abs(ffPlayer.oz + half - P.z) > FF_CELL * 4) updateFlowFields(0, true);
+    }
     function relayCallTheDead(n, overCap = false) {
       const M = POI.mast || objectiveProps?.props?.[RADIO_SITE]?.centre;
       if (!M) return 0;
+      if (n > 0) spawnFieldFresh();
       const mix = (relay.plan && relay.plan.mixDay) || day;
       let made = 0;
       for (let i = 0; i < n; i++) {
@@ -27167,7 +27590,333 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       e.preventDefault(); e.stopImmediatePropagation();
       relayOpen(mode);
     }, true);
-    let radioCardObs = null;
+
+    // === CL-216 (D-82; docs/specs/day-missions.md §6): the utility truck's day mission (game/truck-mission.js) ===
+    // Jerry: "This one is good." The toolbox on the utility truck (the salvage site) is chained shut. The bolt cutters
+    // lie at the mine mouth, by the iron bars the hikers cut with them (Pike's note there says so). With them, E held at
+    // the chain cuts it, and the truck's alarm wails and calls the dead in while he grabs the supplies. Once a run: after
+    // the cut the site is an ordinary cache, restocks and all. Without an iron cave on the map there is no mission.
+    const TRUCK_SITE = 'objective:wreck-salvage';
+    const truckMission = createTruckMission();
+    const truck = { run: null, built: false, off: false, chain: null, cutters: null, cuttersSpot: null, hold: false, toCall: 0, callT: 0, biteT: 0 };
+    function truckSiteProp() { return objectiveProps?.props?.[TRUCK_SITE] || null; }
+    function truckLocked() { return truck.built && !truck.off && !truckMission.unlocked(); }
+    const _truckTint = new Map();
+    function truckPart(geo, hex, x, y, z, rx = 0, ry = 0, rz = 0) {
+      let tint = _truckTint.get(hex);   // a colour carrier only: mergeParts bakes it into the vertex colours
+      if (!tint) { tint = new THREE.MeshStandardMaterial({ color: hex }); _truckTint.set(hex, tint); }
+      const m = new THREE.Mesh(geo, tint);
+      m.position.set(x, y, z); m.rotation.set(rx, ry, rz);
+      return m;
+    }
+    function buildTruckMission(prop) {
+      truck.built = true;
+      const iron = (POI.caves || []).find((c) => c && c.theme === 'iron');
+      if (!iron) { truck.off = true; return; }
+      const steel = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.42, metalness: 0.6 });
+      // The chain: over the case's lid front to back and down both faces, a padlock on the front.
+      const parts = [], link = new THREE.TorusGeometry(0.019, 0.0055, 4, 8);
+      for (let i = 0; i <= 17; i++) parts.push(truckPart(link, 0x6f7377, 0, 0.318, -0.255 + i * 0.03, 0, i % 2 ? Math.PI / 2 : 0, Math.PI / 2));
+      for (const sz of [-1, 1]) for (let i = 0; i < 8; i++) parts.push(truckPart(link, 0x6f7377, 0, 0.29 - i * 0.03, sz * 0.262, i % 2 ? Math.PI / 2 : 0, 0, 0));
+      parts.push(truckPart(new THREE.BoxGeometry(0.052, 0.062, 0.024), 0x8b6d2e, 0, 0.05, 0.278));
+      parts.push(truckPart(new THREE.TorusGeometry(0.02, 0.006, 4, 10, Math.PI), 0x9a9ea2, 0, 0.083, 0.278));
+      const chain = mergeParts(parts, steel, { castShadow: true, receiveShadow: true });
+      chain.name = 'truck-chain';
+      prop.group.add(chain);
+      truck.chain = chain;
+      // The bolt cutters, on the ground by the bars at the mine mouth: steel jaws and shafts, red grips, lying open.
+      const L = caveLocal(iron), half = iron.mouthHalf || (iron.design && iron.design.w) || 2.7;
+      const [cx, cz] = L.toWorld(half * 0.55 + 0.7, 2.4);   // far enough out that taking them never puts him in the mouth's grab (lz < 0.55)
+      const cut = [];
+      for (const s of [-1, 1]) {
+        const a = s * 0.07;
+        cut.push(truckPart(new THREE.CylinderGeometry(0.011, 0.011, 0.5, 6), 0x8c9096, Math.cos(a) * 0.12, 0.016, Math.sin(a) * 0.12 + s * 0.012, 0, -a, Math.PI / 2));
+        cut.push(truckPart(new THREE.CylinderGeometry(0.016, 0.016, 0.24, 8), 0xb3261e, Math.cos(a) * 0.3, 0.018, Math.sin(a) * 0.3 + s * 0.03, 0, -a, Math.PI / 2));
+        cut.push(truckPart(new THREE.BoxGeometry(0.12, 0.022, 0.026), 0x5d6165, -0.18, 0.014, s * 0.016, 0, s * 0.18, 0));
+      }
+      cut.push(truckPart(new THREE.CylinderGeometry(0.02, 0.02, 0.05, 8), 0x3b3e41, -0.12, 0.02, 0, Math.PI / 2, 0, 0));
+      const cutters = mergeParts(cut, steel, { castShadow: true, receiveShadow: true });
+      cutters.name = 'bolt-cutters';
+      cutters.position.set(cx, sampleHeight(cx, cz) + 0.005, cz);
+      cutters.rotation.y = iron.yaw + 0.9;
+      cutters.matrixAutoUpdate = false; cutters.updateMatrix();
+      scene.add(cutters);
+      truck.cutters = cutters;
+      truck.cuttersSpot = { approach: { x: cx, y: sampleHeight(cx, cz), z: cz }, centre: { x: cx, y: sampleHeight(cx, cz), z: cz } };
+    }
+    // The day missions' noise (D-82, docs/specs/day-missions.md): n dead called to a site, up on open ground 26-40 m
+    // round its centre (18-48 m if that fails), never by a cave mouth, as the relay's are round the mast
+    // (relaySpawnSpot). Their kinds are the next day's mix. `tag` marks them (z[tag] = true). Returns how many came.
+    // Every mission's owner calls this one: siteCallTheDead(prop.centre, n, overCap, 'convoyCalled').
+    // GP-19937: `near` and `far` set the ring (26-40 m unless given; the fallback ring is 8 m wider each way).
+    function siteCallTheDead(c, n, overCap = false, tag = 'siteCalled', near = 26, far = 40) {
+      let made = 0;
+      if (!c) return 0;
+      if (n > 0) spawnFieldFresh();
+      for (let i = 0; i < n; i++) {
+        const sp = relaySpawnSpot(c, near, far) || relaySpawnSpot(c, Math.max(12, near - 8), far + 8);
+        if (!sp) continue;
+        const z = spawnZombie(sp.x, sp.z, pickZombieType(Math.min(20, day + 1)), overCap, false);
+        if (z) { z[tag] = true; made++; }
+      }
+      return made;
+    }
+    // What the main prompt says at the truck or the cutters (null: nothing). Before the objectives' own prompt.
+    function truckPromptText() {
+      const prop = truckSiteProp();
+      if (!prop || !truck.chain || truck.off || !gameStarted || gameOver || won) return null;
+      const st = truckMission.state, key = { interact: 'E' };
+      if (st.stage !== 'chained') return null;
+      if (!st.cutters && truck.cutters && relayNear(truck.cuttersSpot, 1.4)) return sayText('truck.cutters', key, 'E — Take the bolt cutters');   // (not .visible: sceneCull hides it out of view)
+      if (!relayNear(prop)) return null;
+      if (!st.cutters) return sayText('truck.chained', key, 'Chained shut.');
+      const pct = Math.round(100 * truckMission.progress());
+      if (truck.hold || pct > 0) return sayText('truck.cutting', { pct }, 'Cutting the chain… ' + pct + '%');
+      return sayText('truck.cut', key, 'Hold E — Cut the chain');
+    }
+    function updateTruck(dt) {
+      const prop = truckSiteProp();
+      if (!prop) return;
+      if (!truck.built) buildTruckMission(prop);
+      if (truck.off) return;
+      if (truck.run !== uiRunId) {
+        truck.run = uiRunId; truckMission.reset(); truck.hold = false; truck.toCall = 0; truck.callT = 0;
+        if (truck.chain) truck.chain.visible = true;
+        if (truck.cutters) truck.cutters.visible = true;
+        if (AudioSys.truckAlarm) AudioSys.truckAlarm(false);
+      }
+      if (gameOver || won) { truck.hold = false; if (AudioSys.truckAlarm) AudioSys.truckAlarm(false); return; }
+      if (!gameStarted || paused) return;
+      if (truck.hold) {
+        if (!relayNear(prop) || truckMission.state.stage !== 'chained') truck.hold = false;
+        else {
+          const r = truckMission.hold(dt);
+          if (r === 'cutting') {
+            truck.biteT -= dt;
+            if (truck.biteT <= 0) { truck.biteT = 0.32; if (AudioSys.boltCutterBite) AudioSys.boltCutterBite(); }
+          } else if (r === 'cut') {
+            truck.hold = false;
+            if (truck.chain) truck.chain.visible = false;
+            if (AudioSys.chainSnap) AudioSys.chainSnap();
+            if (AudioSys.truckAlarm) AudioSys.truckAlarm(true);
+            const n = truckMission.calledFor(day);
+            truck.toCall = n - siteCallTheDead(prop.centre, Math.ceil(n * TRUCK.FIRST_SHARE), true, 'truckCalled');
+            truck.callT = 0;
+            publishUI('truck-cut', { day, called: n });
+          }
+        }
+      }
+      const t = truckMission.tick(dt);
+      if (t === 'alarm' && truck.toCall > 0) {
+        truck.callT += dt;
+        if (truck.callT >= 3) { truck.callT = 0; truck.toCall -= siteCallTheDead(prop.centre, 1, false, 'truckCalled'); }
+      }
+      if (t === 'quiet') { truck.toCall = 0; if (AudioSys.truckAlarm) AudioSys.truckAlarm(false); publishUI('truck-quiet', { day }); }
+    }
+    // E by the cutters takes them; E held at the chain, with them, cuts it (the objectives' own hold can't reach a
+    // locked site, so nothing else hears it there).
+    addEventListener('keydown', (e) => {
+      if (e.code !== 'KeyE' || e.repeat || relay.mode) return;
+      if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
+      const prop = truckSiteProp();
+      if (!prop || !truck.chain || truck.off || truckMission.state.stage !== 'chained') return;
+      if (!truckMission.state.cutters && truck.cutters && relayNear(truck.cuttersSpot, 1.4)) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        if (truckMission.takeCutters()) {
+          truck.cutters.visible = false;
+          if (AudioSys.boltCuttersTake) AudioSys.boltCuttersTake();
+          showBanner(sayText('truck.cuttersTitle', {}, 'BOLT CUTTERS'), '', 1.6, '#f2d35a');
+          publishUI('truck-cutters', {});
+        }
+        return;
+      }
+      if (truckMission.state.cutters && relayNear(prop)) { e.preventDefault(); e.stopImmediatePropagation(); truck.hold = true; }
+    }, true);
+    addEventListener('keyup', (e) => { if (e.code === 'KeyE') truck.hold = false; }, true);
+    addEventListener('blur', () => { truck.hold = false; });
+
+    // === CL-217 (D-82; docs/specs/day-missions.md §2): the ranger cache's day mission (game/ranger-cache.js) ===
+    // Jerry: "make sure players have to search but it is not insanely difficult." The rangers' lockbox at their camp
+    // has the hangar's keypad on its front (CL-146's look) and three small pictures on its lid, a radio, a board and a
+    // truck, in the order its digits go. Each digit is written round the camp and reads big with a quiet "E — Look"
+    // (ui/ranger-clues.js paints both): the channel their radio is still on (on the truck's bonnet), the day their
+    // search log stops at (pinned on the search board, ringed in red), the unit number stencilled on the truck's doors.
+    // A wrong code flashes WRONG, as the vault's does; no penalty. Once open it is an ordinary cache, restocks and all.
+    // New digits and a new order each run. Without the rangers' camp or truck there is no mission (an ordinary cache).
+    const RANGER_SITE = 'objective:ranger-cache';
+    const rangerCache = createRangerCache();
+    const ranger = { run: null, built: false, off: false, panel: null, mode: null, look: null, flash: 0, flashKind: null,
+      clues: [], tex: [], lm: null, log: null, led: null, looks: new Map() };
+    function rangerSiteProp() { return objectiveProps?.props?.[RANGER_SITE] || null; }
+    function rangerLocked() { return ranger.built && !ranger.off && !rangerCache.unlocked(); }
+    function rangerWords() {
+      return { log: sayText('ranger.logTitle', {}, 'SEARCH LOG'), day: sayText('ranger.logDay', {}, 'DAY'), ch: sayText('ranger.ch', {}, 'CH'),
+        unit: sayText('ranger.unit', {}, 'UNIT'), areas: String(sayText('ranger.areas', {}, 'Ridge,Creek,North trail,Lake shore,Old mine,Quarry,Pines,Dock road,Tower')).split(',') };
+    }
+    // A canvas texture the run's digits are painted on; every one is painted again when a run deals new digits.
+    function rangerTex(w, h, paint) {
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+      const t = { tex, redraw() { const c = cv.getContext('2d'); if (!c) return; c.clearRect(0, 0, w, h); paint(c, w, h); tex.needsUpdate = true; } };
+      t.redraw();
+      ranger.tex.push(t);
+      return t;
+    }
+    function rangerSpot(x, z) { const y = sampleHeight(x, z); return { approach: { x, y, z }, centre: { x, y, z } }; }
+    function buildRangerMission(prop) {
+      ranger.built = true;
+      const camp = POI.campsites?.[0];
+      const lm = camp && landmarks.find((l) => l.kind === 'campsite' && l.x === camp.x && l.z === camp.z);
+      const truckG = historyProps.group && historyProps.group.getObjectByName('ranger-truck');
+      const radio = truckG && truckG.getObjectByName('ranger-radio');
+      const lcd = radio && radio.children.find((o) => o.isMesh && o.geometry && o.geometry.type === 'PlaneGeometry');
+      if (!camp || camp.style !== 'ranger' || !lm || !lcd) { ranger.off = true; return; }
+      ranger.lm = lm;
+      truckG.updateMatrixWorld(true);
+      const body = truckG.getObjectByName('ranger-truck-body') || truckG;
+      const toW = (x, z) => body.localToWorld(new THREE.Vector3(x, 0, z));
+      // 1. The radio on the bonnet's lip: its display, still on the channel they left it on.
+      const lcdT = rangerTex(128, 56, (c, w, h) => paintRadioLcd(c, w, h, rangerCache.digitOf('radio'), rangerWords()));
+      lcd.material = new THREE.MeshBasicMaterial({ map: lcdT.tex, toneMapped: false });
+      const nose = toW(-0.3, 2.95);
+      ranger.clues.push({ source: 'radio', spot: rangerSpot(nose.x, nose.z) });
+      // 2. Both doors: "UNIT n", stencilled between the forestry badge and the front wheel.
+      const unitT = rangerTex(256, 112, (c, w, h) => paintUnit(c, w, h, rangerCache.digitOf('truck'), rangerWords()));
+      const unitMat = new THREE.MeshStandardMaterial({ map: unitT.tex, transparent: true, alphaTest: 0.1, depthWrite: false, roughness: 0.9 });
+      const unitGeo = new THREE.PlaneGeometry(0.26, 0.114);
+      for (const s of [-1, 1]) {
+        const d = new THREE.Mesh(unitGeo, unitMat); d.name = 'ranger-unit';
+        d.position.set(s * 0.934, 1.0, 0.64); d.rotation.y = s * Math.PI / 2;
+        body.add(d);
+        const side = toW(s * 1.75, 0.6);
+        ranger.clues.push({ source: 'truck', spot: rangerSpot(side.x, side.z) });
+      }
+      // 3. The search board behind the camp's table (assets/world/landmark-details.js, camp variant 0, at (0.35, -4.9)
+      // in the camp's frame): the log pinned over its lower right sheet.
+      const yaw = lm.campYaw || 0, cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const campW = (x, z) => [camp.x + x * cy + z * sy, camp.z - x * sy + z * cy];
+      const [bx, bz] = campW(0.35, -4.9), [lx, lz] = campW(0.77, -4.81);
+      const logT = rangerTex(256, 256, (c, w, h) => paintSearchLog(c, w, h, rangerCache.digitOf('board'), rangerWords()));
+      const log = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.3), new THREE.MeshStandardMaterial({ map: logT.tex, roughness: 0.95 }));
+      log.name = 'ranger-search-log';
+      log.position.set(lx, sampleHeight(bx, bz) + 1.03, lz); log.rotation.y = yaw;
+      scene.add(log);
+      ranger.log = log;
+      const [ax, az] = campW(0.55, -3.85);
+      ranger.clues.push({ source: 'board', spot: rangerSpot(ax, az), paper: true });
+      // 4. The lockbox: the hangar's keypad on its front, its lamp, and the three pictures on the lid (the closed lid's).
+      const kpT = rangerTex(64, 80, paintKeypad);
+      const kp = new THREE.Group(); kp.name = 'ranger-keypad';
+      const back = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.15, 0.014), new THREE.MeshStandardMaterial({ color: 0x7b8287, roughness: 0.55, metalness: 0.5 }));
+      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.1, 0.12), new THREE.MeshStandardMaterial({ map: kpT.tex, roughness: 0.5 }));
+      face.position.set(0, -0.008, 0.0075);
+      const led = new THREE.Mesh(new THREE.BoxGeometry(0.016, 0.01, 0.006), new THREE.MeshStandardMaterial({ color: 0x220a08, emissive: 0xff3b2a, emissiveIntensity: 2.0 }));
+      led.position.set(0.04, 0.062, 0.009);
+      kp.add(back, face, led);
+      kp.position.set(0, 0.118, 0.257);
+      prop.group.add(kp);
+      ranger.led = led;
+      const lidT = rangerTex(384, 128, (c, w, h) => paintLid(c, w, h, rangerCache.state.order));
+      const lid = new THREE.Mesh(new THREE.PlaneGeometry(0.48, 0.16), new THREE.MeshStandardMaterial({ map: lidT.tex, transparent: true, alphaTest: 0.1, depthWrite: false, roughness: 0.9 }));
+      lid.name = 'ranger-lid-pictures'; lid.rotation.x = -Math.PI / 2; lid.position.set(0, 0.3235, 0.135);
+      (prop.meshes && prop.meshes.closed || prop.group).add(lid);
+    }
+    function rangerClueNear() {
+      for (const c of ranger.clues) {
+        if (c.source === 'board' && ranger.lm && ranger.lm.alive === false) continue;   // the camp's been flattened: no board
+        if (relayNear(c.spot, 1.3)) return c;
+      }
+      return null;
+    }
+    // The big view (a data: URL image), made once for each thing and digit.
+    function rangerLook(kind) {
+      const value = kind === 'lid' ? rangerCache.state.order : rangerCache.digitOf(kind);
+      const k = kind + ':' + value;
+      if (!ranger.looks.has(k)) {
+        const url = rangerLookImage(document, kind, value, rangerWords());
+        ranger.looks.set(k, url ? '<img alt="" src="' + url + '">' : '');
+      }
+      return ranger.looks.get(k);
+    }
+    function rangerPanel() { return ranger.panel || (ranger.panel = createRelayPanel({ id: 'rangerPanel', onAction: rangerAction })); }
+    function rangerOpen(mode, clue = null) {
+      const P = rangerPanel();
+      if (mode === 'look') {
+        P.open('look', { key: clue.source + ':' + rangerCache.digitOf(clue.source), html: rangerLook(clue.source), paper: !!clue.paper, help: sayText('ranger.lookHelp', {}, 'E step back') });
+        if (clue.paper && AudioSys.paperRustle) AudioSys.paperRustle();
+      } else {
+        P.open('keypad', { key: 'lock:' + rangerCache.state.order.join(','), title: sayText('ranger.keypadTitle', {}, 'Ranger lockbox'),
+          help: sayText('ranger.keypadHelp', {}, '1-9 · E leave'), strip: rangerLook('lid') });
+      }
+      ranger.mode = mode; ranger.look = clue;
+      publishUI('ranger-panel', { mode, source: clue ? clue.source : null });
+      rangerRender();
+    }
+    function rangerClose() { if (ranger.panel) ranger.panel.close(); ranger.mode = null; ranger.look = null; }
+    function rangerAction(a) {
+      if (a.type === 'close') { rangerClose(); return; }
+      if (ranger.mode === 'keypad' && a.type === 'digit' && ranger.flash <= 0 && !rangerCache.unlocked()) {
+        const r = rangerCache.enter(a.d);
+        if (r === 'more' && AudioSys.relayKey) AudioSys.relayKey(true);
+        if (r === 'wrong') { ranger.flash = 1.0; ranger.flashKind = 'bad'; if (AudioSys.relayKey) AudioSys.relayKey(false); }
+        if (r === 'open') { ranger.flash = 0.9; ranger.flashKind = 'open'; if (AudioSys.relayOpen) AudioSys.relayOpen(); publishUI('ranger-open', { day }); }
+      }
+      rangerRender();
+    }
+    function rangerRender() {
+      if (!ranger.panel || ranger.mode !== 'keypad') return;
+      ranger.panel.render({ entry: rangerCache.state.entry, len: RANGER.LEN, bad: ranger.flash > 0 && ranger.flashKind === 'bad',
+        open: (ranger.flash > 0 && ranger.flashKind === 'open') || rangerCache.unlocked() });
+    }
+    // What the main prompt says at the lockbox or by a thing to look at (null: nothing). Before the objectives' own.
+    function rangerPromptText() {
+      const prop = rangerSiteProp();
+      if (!prop || !ranger.built || ranger.off || ranger.mode || !gameStarted || gameOver || won || rangerCache.unlocked()) return null;
+      const key = { interact: 'E' };
+      if (relayNear(prop)) return sayText('ranger.lockbox', key, 'E — Lockbox');
+      if (rangerClueNear()) return sayText('ranger.look', key, 'E — Look');
+      return null;
+    }
+    function updateRanger(dt) {
+      const prop = rangerSiteProp();
+      if (!prop) return;
+      if (!ranger.built) buildRangerMission(prop);
+      if (ranger.off) return;
+      if (ranger.run !== uiRunId) {   // a new run: new digits, a new order, everything painted again
+        ranger.run = uiRunId; rangerCache.reset(); rangerClose(); ranger.flash = 0; ranger.flashKind = null;
+        for (const t of ranger.tex) t.redraw();
+      }
+      if (ranger.log) ranger.log.visible = !ranger.lm || ranger.lm.alive !== false;
+      if (ranger.led) { const open = rangerCache.unlocked(); ranger.led.material.emissive.setHex(open ? 0x3dff6a : 0xff3b2a); }
+      if (ranger.mode) {   // walked off, died, won: the panel shuts
+        const at = ranger.mode === 'keypad' ? prop : ranger.look && ranger.look.spot;
+        if (!at || !relayNear(at, 2.4) || gameOver || won || !gameStarted) rangerClose();
+      }
+      if (ranger.flash > 0) {
+        ranger.flash -= dt;
+        if (ranger.flash <= 0) {
+          ranger.flash = 0;
+          if (ranger.flashKind === 'open') { rangerClose(); hudPromptLastMs = -Infinity; }   // open: E now searches it, as any cache
+          ranger.flashKind = null;
+        }
+        rangerRender();
+      }
+    }
+    // E at the lockbox opens its keypad; E by the radio, the board or a door looks at it. (The objectives' own E can't
+    // reach a locked site, so nothing else hears it there.)
+    addEventListener('keydown', (e) => {
+      if (e.code !== 'KeyE' || e.repeat || relay.mode || ranger.mode) return;
+      if (!gameStarted || gameOver || won || paused || objectiveModalOpen() || training.active) return;
+      const prop = rangerSiteProp();
+      if (!prop || !ranger.built || ranger.off || rangerCache.unlocked()) return;
+      let mode = null, clue = null;
+      if (relayNear(prop)) mode = 'keypad';
+      else if ((clue = rangerClueNear())) mode = 'look';
+      if (!mode) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      rangerOpen(mode, clue);
+    }, true);
+    let radioCardObs = null, radioCardRuntime = null;
     function radioCardSync() {
       const hud = document.getElementById('objectiveHud');
       if (!hud || !objectiveRuntime) return;
@@ -27176,25 +27925,35 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (hud.classList.contains('cl184-radio') !== onRadio) hud.classList.toggle('cl184-radio', onRadio);
     }
     function radioCardWatch() {
+      if (!objectiveRuntime || (radioCardObs && radioCardRuntime === objectiveRuntime)) return;
       const hud = document.getElementById('objectiveHud');
-      if (!hud || !objectiveRuntime) return;
+      if (!hud) return;
       if (!radioCardObs) { radioCardObs = new MutationObserver(radioCardSync); radioCardObs.observe(hud, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden', 'class'] }); }
-      radioCardSync();
+      if (radioCardRuntime !== objectiveRuntime) { radioCardRuntime = objectiveRuntime; radioCardSync(); }
     }
+    let radioCueSampleMs = -Infinity, radioCueCachedState = null, radioCueHeronNeeds = false;
     function updateRadioCues(dt) {
       if (!radioLocker && !radioMarks && objectiveProps?.props?.[RADIO_SITE] && !radioCueState) { radioCueState = 'built'; try { buildRadioCues(); } catch (err) { console.info('Grave Shift: radio cues skipped.', err); } }
       try { updateRelay(dt); } catch (err) { console.info('Grave Shift: relay puzzle', err); }   // CL-183
+      try { updateTruck(dt); } catch (err) { console.info('Grave Shift: truck mission', err); }   // CL-216
+      try { updateRanger(dt); } catch (err) { console.info('Grave Shift: ranger cache', err); }   // CL-217
       // CL-184 (Jerry): "Get rid of the restore the radio mast menu." The tracker's card stays away while it is on the radio.
       // CL-185 ("Walking around the breaker panel sometimes the old menu will flash in for a split second"): set from the
       // card's own changes (a MutationObserver runs before the frame is drawn), not a frame later.
       try { radioCardWatch(); } catch (_) {}
       if (!radioMarks) return;
-      const st = radioSiteState(), prop = objectiveProps.props[RADIO_SITE], p = localPlayer.position;
+      const cueNowMs = performance.now();
+      if (cueNowMs - radioCueSampleMs >= 100) {
+        radioCueSampleMs = cueNowMs;
+        radioCueCachedState = radioSiteState();
+        radioCueHeronNeeds = heronNeedsRelay();
+      }
+      const st = radioCueCachedState, prop = objectiveProps.props[RADIO_SITE], p = localPlayer.position;
       radioMarks.t += dt;
       const bob = Math.sin(radioMarks.t * 3) * 0.12, spin = radioMarks.t * 1.6;
       const near = (c) => Math.hypot(p.x - c.x, p.z - c.z) < RADIO_CUE.markerR;
       const down = st === 'available' || st === 'active' || st === 'undiscovered';
-      radioMarks.cabinet.visible = !!gameStarted && down && (near(prop.centre) || heronNeedsRelay()) && !relayPuzzle.state.booting;   // GB-182: from night 15 it shows from anywhere
+      radioMarks.cabinet.visible = !!gameStarted && down && (near(prop.centre) || radioCueHeronNeeds) && !relayPuzzle.state.booting;   // GB-182: from night 15 it shows from anywhere
       radioMarks.locker.visible = !!gameStarted && st === 'ready-to-claim' && near(radioLocker.centre) && !(radioLocker.vault && vaultHas(radioLocker, p));
       radioMarks.cabinet.position.y = prop.centre.y + 2.7 + bob; radioMarks.cabinet.rotation.y = spin;
       radioMarks.locker.position.y = (radioMarks.lockerY ?? radioLocker.centre.y + 2.5) + bob; radioMarks.locker.rotation.y = spin;
@@ -27700,6 +28459,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (a === 'hqPanel') return atHq(HQ_PANEL_FRONT, 2.2);
       if (a === 'cif') return atHq(HQ_CIF_FRONT, 2.2);
       if (a === 'armory') return atHq(HQ_ARMORY_FRONT, 2.2);
+      if (a === 'convoyJack') { const p = convoyJackAt(); if (p) return A.set(p.x, p.y + 1.2, p.z); }
       if (a === 'door') { const d = nearestDoor(); if (d && d.mesh) return A.set(d.mesh.position.x, d.mesh.position.y + 2.3, d.mesh.position.z); }
       if (a === 'mountMortar') { const b = nearestMortar(2.6); if (b) return A.set(b.x, (b.mesh ? b.mesh.position.y : player.position.y) + 1.5, b.z); }
       if (a === 'lightFire' && coldCampfire) return A.set(coldCampfire.x, coldCampfire.y + 1.2, coldCampfire.z);
@@ -27710,11 +28470,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (!el || !kioskPromptShown) return;
       const v = promptFloat.v.copy(promptAnchor(a)).project(camera);
       const off = v.z > 1 || v.x < -1.1 || v.x > 1.1 || v.y < -1.1 || v.y > 1.1;
-      el.classList.toggle('offscreen', off);
+      if (el.classList.contains('offscreen') !== off) el.classList.toggle('offscreen', off);
       if (off) return;
       const x = Math.max(80, Math.min(innerWidth - 80, (v.x + 1) / 2 * innerWidth)), y = Math.max(40, Math.min(innerHeight - 40, (1 - v.y) / 2 * innerHeight));
-      el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-50%,-100%)';
+      const transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-50%,-100%)';
+      if (el.style.transform !== transform) el.style.transform = transform;
     }
+    let hudPromptElapsed = 0, hudPromptLastMs = -Infinity, hudPromptAction = null;
+    let hudStateLastMs = -Infinity, hudStateKey = '';
     function updateKioskPrompt(dt) {
       enforceNightLockdown();   // CU-82
       if (gameStarted && !objectiveRuntime) {
@@ -27736,18 +28499,34 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const okNow = kioskOpenAllowed();
       // Green idle glow during prep; a "locked" pulse otherwise, red in the night lockdown (CU-82).
       const shut = nightLockdown();
-      sc.emissive.setHex(okNow ? 0x39ff88 : shut ? LOCKDOWN_RED : 0xff9a2a);
+      const screenColor = okNow ? 0x39ff88 : shut ? LOCKDOWN_RED : 0xff9a2a;
+      if (sc.emissive.getHex() !== screenColor) sc.emissive.setHex(screenColor);
       sc.emissiveIntensity = (okNow ? 1.0 : 0.7) + Math.sin(t * (okNow ? 2.2 : 6)) * 0.25;
-      KIOSK.group.userData.glow.color.setHex(okNow ? 0x5cff9a : shut ? LOCKDOWN_RED : 0xffa04a);
+      const glow = KIOSK.group.userData.glow, glowColor = okNow ? 0x5cff9a : shut ? LOCKDOWN_RED : 0xffa04a;
+      if (glow.color.getHex() !== glowColor) glow.color.setHex(glowColor);
       KIOSK.group.userData.bulb.emissiveIntensity = okNow ? 0.4 : 1.4 + Math.sin(t * 9) * 0.8;
+      hudPromptElapsed += Math.max(0, dt);
+      const promptNowMs = performance.now();
+      if (dt > 0 && promptNowMs - hudPromptLastMs < 100) {
+        if (kioskPromptShown) placePrompt(hudPromptAction);
+        return;
+      }
+      hudPromptLastMs = promptNowMs;
       if (kioskPromptEl) {
         // One prompt for whatever E would do right now (see actionTarget).
         const a = shopOpen ? null : actionTarget();
-        publishUI('hud-state', { dt, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
+        hudPromptAction = a;
+        const hudState = { dt: hudPromptElapsed, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
           nearWindow: a === 'hqWindow', skulls: skullBag.count,
           day, phase, cash: bank, hp: playerHp, maxHp: PLAYER_MAX_HP, medkits,
           building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
-          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' });
+          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green' };
+        const stateKey = [uiRunId, hudState.active, hudState.nearWindow, hudState.skulls, day, phase, bank, playerHp, medkits,
+          hudState.building, hudState.hasPair, hudState.akimbo, hudState.pendingDeposit].join('|');
+        if (stateKey !== hudStateKey || promptNowMs - hudStateLastMs >= 200 || dt <= 0) {
+          publishUI('hud-state', hudState);
+          hudStateKey = stateKey; hudStateLastMs = promptNowMs; hudPromptElapsed = 0;
+        }
         let text = '';
         if (a === 'kiosk') text = okNow ? dwText('interaction.kiosk') : dwText('interaction.kioskLocked');
         else if (a === 'hqWindow') {
@@ -27760,6 +28539,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (a === 'trainingDoor') { const d = training.security.read(); text = sayText(d.locked ? 'training.doorLocked' : d.open ? 'training.doorClose' : 'training.doorOpen'); }
         else if (a === 'trainingLights') text = training.lightsOff ? sayText('training.lightsOn', {}, 'E — Lights on') : sayText('training.lightsOff', {}, 'E — Lights off');   // CU-94
         else if (a === 'armory') text = armoryPrompt();   // CL-103
+        else if (a === 'convoyJack') { const st = convoyMission.read(); text = dwText(st.phase === 'idle' ? 'convoy.jack' : 'convoy.pump', { count: st.pumps }); }
         else if (a === 'hollowHaul') { const p = localPlayer.position, haul = hollowHaulTarget(p.x, p.y, p.z); if (haul) text = dwText(haul.kind === 'box' ? 'haul.open' : haul.kind === 'tag' ? 'haul.tag' : 'haul.crate'); }
         else if (a === 'hollowPassage') { const hp = hollowPassage(); if (hp) text = sayText('hollow.passage', { cave: hp.name }, hp.name ? 'E \u2014 Take the passage to ' + hp.name : 'E \u2014 Take the passage'); }   // CU-72
         else if (a === 'mountMortar') text = sayText(nearestMortar(2.6)?.type === 'm240' ? 'interaction.watchman' : 'interaction.mortar');
@@ -27769,12 +28549,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         else if (a === 'dismount') text = sayText(mortarMounted?.type === 'm240' ? 'interaction.watchmanLeave' : 'interaction.mortarLeave');
         else if (a === 'setMortar') text = sayText(mortarCarried?.kind === 'm240' ? 'm240.carrying' : 'mortar.carrying');
         if (LOCKDOWN_STATIONS.has(a) && nightLockdown()) text = lockdownText('prompt', 'Locked down until dawn');   // CU-82
+        if (!text && !a) text = truckPromptText() || rangerPromptText() || null;   // CL-216/217 (AG-94): a mission's own thing before the Hush's word at a cave mouth
         if (!text) { const hp = hushPrompt(); if (hp) text = sayText(POI.caves[hp.cave]?.theme === 'chalk' ? 'hush.chalk' : hp.key, {}, hp.fallback); }   // GB-106 (ChatGPT keys the words)
         if (!text && a === 'survivor') text = dwText('survivor.rescue');   // GB-90
         if (!text && a === 'roofSurvivor') text = roofSurvivorPrompt();   // GB-116
         if (!text && a === 'runePistol') text = dwText('quest.runePistol', { interact: 'E' });   // GB-119
         if (!text && boardingReach()) text = boardHoldT > 0 ? dwText('extraction.boarding', {pct: Math.round(100 * boardHoldT / BOARD_HOLD_S)}) : dwText('extraction.boardPrompt');   // GB-86/GB-114
-        if (!text && !a) text = radioPromptText() || objectivePromptText();   // CL-127
+        if (!text && !a) text = radioPromptText() || truckPromptText() || rangerPromptText() || objectivePromptText();   // CL-127; CL-216; CL-217
         if (!text && gameStarted && !gameOver && !won) {
           const gr = nearestGrave(2.6);
           if (gr) text = dwText('interaction.grave', { name: gr.name, day: gr.day });
@@ -27927,6 +28708,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (mortarMounted) return 'dismount';
       if (training.active) return trainingActionTarget();   // CL-115
       const px = player.position.x, py = player.position.y, pz = player.position.z;
+      if (convoyJackInReach()) return 'convoyJack';
       const kd = Math.hypot(px - KIOSK.x, pz - KIOSK.z);
       const m = (placeMode || buildMode) ? null : nearestMortar(2.6);
       const md = m ? Math.hypot(m.x - px, m.z - pz) : Infinity;
@@ -27968,6 +28750,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else if (a === 'hqPanel') { openHQBriefing(); readPropNote('hq'); }
       else if (a === 'cif') openCIF();
       else if (a === 'armory') { openCIF(); if (cifOpen) { cifEl.classList.add('armory-only'); if (armoryUI && armoryUI.open) armoryUI.open(); if (AudioSys.armoryBench) AudioSys.armoryBench(); } }   // CL-103b: the Armory alone
+      else if (a === 'convoyJack') convoyMissionEvents(convoyMission.tap());
       else if (a === 'kiosk') openShop();
       else if (a === 'door') toggleDoor(nearestDoor());
       else if (a === 'stairs') toggleStairs(nearestFoldStairs());
@@ -28004,7 +28787,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       let blockedBy = null;
       if (dead) blockedBy = 'dead';
       else if (objectiveModalOpen()) blockedBy = 'modal';
+      else if (prop === objectiveProps?.props?.[CONVOY_SITE] && !convoyMission.read().done) blockedBy = 'locked';
+      else if (prop === objectiveProps?.props?.[HIKERS_SITE] && !hikersSiteDone()) blockedBy = 'locked';   // GB-196: the kit in the tree first
       else if (spot === radioLocker && radioLocker && (!relayUnlocked() || (radioLocker.vault && radioLocker.phase !== 'open'))) blockedBy = 'locked';   // CL-183: the code first; CL-184: and the lift up
+      else if (spot.id === TRUCK_SITE && truckLocked()) blockedBy = 'locked';   // CL-216: the chain first
+      else if (spot.id === RANGER_SITE && rangerLocked()) blockedBy = 'locked';   // CL-217: the lockbox's code first
       else if (Math.abs(py - approach.y) > 1.25) blockedBy = 'height';
       else if (distance > 1.6) blockedBy = 'distance';
       else if (actionTarget()) blockedBy = 'busy';
@@ -28067,10 +28854,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function objectivePromptText() {
       const props = objectiveProps && objectiveProps.props;
       if (!props || !objectiveRuntime || !gameStarted || gameOver || won) return null;
+      if (hikersGrabbable()) return dwText('hikers.grab');   // GB-196
+      if (!Object.entries(props).some(([id, spot]) => id !== RADIO_SITE && (nearPromptSpot(spot) || nearPromptSpot(spot?.pickup)))) return null;
       let sites; try { sites = objectiveRuntime.read().sites; } catch (_) { return null; }
       for (const s of sites) {
         if (s.id === RADIO_SITE || !props[s.id] || !['available', 'ready-to-claim'].includes(s.state)) continue;
-        if (objectiveReach(props[s.id]).reachable) return sayText('objectives.interact', { interact: 'E', action: dwText('objectives.claim') }, 'E — Take supplies');
+        if (objectiveReach(props[s.id]).reachable) return s.id === CONVOY_SITE && !s.restockDay
+          ? dwText('convoy.take') : sayText('objectives.interact', { interact: 'E', action: dwText('objectives.claim') }, 'E — Take supplies');
       }
       return null;
     }
@@ -28087,6 +28877,11 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (fin) return { id, approach: reach.approach, distance: 0, reachable: true, blockedBy: null, ePressed: false, eHeld: true, holdSeconds: RELAY.HOLD_S, cancelled: null };
         return { id, approach: reach.approach, distance: reach.distance, reachable: reach.reachable, blockedBy: reach.blockedBy,
           ePressed: objEPressed, eHeld: (st === 'ready-to-claim' || st === 'claimed') ? objEDown : false, holdSeconds: 0, cancelled: null };
+      }
+      // GB-196: until the kit is taken, the hikers' claim is at the bag, within 2 m, wherever it has fallen or floated.
+      if (id === HIKERS_SITE && !hikersSiteDone()) {
+        const g = hikersGrabbable(), b = hikers?.pos;
+        if (g) return { id, approach: { x: b.x, y: b.y, z: b.z }, distance: hikersBagDist(), reachable: true, blockedBy: null, ePressed: objEPressed, eHeld: objEDown, holdSeconds: 0, cancelled: null };
       }
       return {
         id,
@@ -37862,15 +38657,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const prepClockEl = prepTimerEl ? prepTimerEl.querySelector('.clock') : null;
     const prepLabelEl = prepTimerEl ? prepTimerEl.querySelector('.label') : null;
     const prepBarEl = prepTimerEl ? prepTimerEl.querySelector('.track i') : null;
+    let prepTimerKey = '', prepTimerShown = null;
     function updatePrepTimerHud() {
       if (!prepTimerEl) return;
       const show = gameStarted && !gameOver && !won && phase === 'prep' && !devNoZombies;
-      prepTimerEl.classList.toggle('on', show);
-      if (!show) { prepTimerEl.classList.remove('warn', 'crit'); return; }
+      if (prepTimerShown !== show) { prepTimerShown = show; prepTimerEl.classList.toggle('on', show); }
+      if (!show) { if (prepTimerKey) { prepTimerKey = ''; prepTimerEl.classList.remove('warn', 'crit'); } return; }
+      const key = `${day}|${waveTotal}|${!!fieldIntelOwned}|${!!hq.seq}`;
+      if (key === prepTimerKey) return;
+      prepTimerKey = key;
       // No countdown any more: the next wave comes when you call it.
       publishUI('prep-label', { element: prepLabelEl, alarm: !!hq.seq, day, total: waveTotal, intelOwned: fieldIntelOwned });
-      prepClockEl.textContent = dwText(hq.seq ? 'prep.inbound' : 'prep.readyStatus');
-      prepBarEl.style.transform = 'scaleX(1)';
+      const clockText = dwText(hq.seq ? 'prep.inbound' : 'prep.readyStatus');
+      if (prepClockEl.textContent !== clockText) prepClockEl.textContent = clockText;
+      if (prepBarEl.style.transform !== 'scaleX(1)') prepBarEl.style.transform = 'scaleX(1)';
       prepTimerEl.classList.remove('warn');
       prepTimerEl.classList.toggle('crit', !!hq.seq);
     }
@@ -39529,6 +40329,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const graveDirtFresh = new THREE.MeshStandardMaterial({ color: 0x4e3a28, roughness: 1 });
     const plotPegMat = new THREE.MeshStandardMaterial({ color: 0x8a6a45, roughness: 0.9 });
     const plotLineMat = new THREE.MeshBasicMaterial({ color: 0xd8d2b8 });
+    const plotMarkerMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.88 });
     const _moundGeo = new THREE.SphereGeometry(1, 18, 10);
     const MOUND = { rx: 0.55, ry: 0.26, rz: 1.0 };
     function moundHeight(u, v) { const k = 1 - (u / MOUND.rx) ** 2 - (v / MOUND.rz) ** 2; return k > 0 ? MOUND.ry * Math.sqrt(k) : 0; }
@@ -39538,15 +40339,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (plotMarkers || !POI.graveyard) return;
       plotMarkers = [];
       for (let i = 0; i < GRAVE_PLOTS; i++) {
-        const p = plotSpot(i), g = new THREE.Group();
-        g.position.set(p.x, p.gy, p.z);
+        const p = plotSpot(i), parts = [];
         for (const [sx, sz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
           const peg = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.05), plotPegMat);
-          peg.position.set(sx * 0.55, 0.12, sz * 1.0); g.add(peg);
+          peg.position.set(sx * 0.55, 0.12, sz * 1.0); parts.push(peg);
         }
         for (const [w, d, x, z] of [[1.1, 0.012, 0, -1], [1.1, 0.012, 0, 1], [0.012, 2.0, -0.55, 0], [0.012, 2.0, 0.55, 0]]) {
-          const line = new THREE.Mesh(new THREE.BoxGeometry(w, 0.012, d), plotLineMat); line.position.set(x, 0.2, z); g.add(line);
+          const line = new THREE.Mesh(new THREE.BoxGeometry(w, 0.012, d), plotLineMat); line.position.set(x, 0.2, z); parts.push(line);
         }
+        const g = mergeParts(parts, plotMarkerMat, { castShadow: false, receiveShadow: false });
+        g.name = 'plot-marker';
+        g.position.set(p.x, p.gy, p.z);
+        g.matrixAutoUpdate = false;
+        g.updateMatrix();
         scene.add(g);
         plotMarkers.push(g);
       }
@@ -48316,6 +49121,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             }
           }
         }
+        hikersRoundStep(p.prev, p.pos);   // GB-196: any round across the hikers' rope cuts it (and flies on)
 
         // GB-58 follow-up: his own pieces and the house are found first, and a body only
         // counts if the round reaches it before them. A frame's travel is up to 5 m (dt is
@@ -51194,6 +52000,28 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (Math.hypot(safe.x-x, safe.z-zz) > .025) { releaseDrowned(z); return; }
       p.x = safe.x; p.z = safe.z;
     }
+    // GB-194: a crowd's far dead who are in no fight tick less often: past ZOMBIE_TICK.near metres from what they are after,
+    // every 2nd frame; behind the camera, in the fog or past ZOMBIE_TICK.far, every 3rd. The frames between are summed into
+    // the next tick's dt, so they cover the same ground; each zombie has its own phase so the load is even. A zombie that is
+    // winding up, swinging, charging, leaping, spitting or screaming, a ranged kind, a boss, and every zombie of a small
+    // group (under ZOMBIE_TICK.crowd) ticks every frame as before.
+    const ZOMBIE_TICK = { crowd: 24, near: 16, far: 30, maxDt: 0.25, ranged: new Set(['spitter', 'screamer', 'military', 'spider', 'colossus']) };
+    const _zTickFw = new THREE.Vector3();
+    function zombieTickDt(z, fdt, on) {
+      const acc = (z._tickAcc || 0) + fdt;
+      let n = 1;
+      if (on && z.mesh && z.tactics !== 'boss' && !ZOMBIE_TICK.ranged.has(z.typeKey) && !(z.leapT > 0 || z.attackWindup > 0 || z.swingT > 0 || z.chargeT > 0 || z.spitWind > 0 || z.screamT > 0 || z.abilityBusy)) {
+        const t = zTarget(z).position, p = z.mesh.position, dx = p.x - t.x, dz = p.z - t.z, d2 = dx * dx + dz * dz;
+        if (d2 > ZOMBIE_TICK.near * ZOMBIE_TICK.near) {
+          const c = camera.position, behind = (p.x - c.x) * _zTickFw.x + (p.z - c.z) * _zTickFw.z < 0;
+          n = behind || z.fogHidden || d2 > ZOMBIE_TICK.far * ZOMBIE_TICK.far ? 3 : 2;
+        }
+      }
+      if (z._tickPh === undefined) z._tickPh = (Math.random() * 6) | 0;
+      if (n > 1 && (zFrame + z._tickPh) % n !== 0 && acc < ZOMBIE_TICK.maxDt) { z._tickAcc = acc; return 0; }
+      z._tickAcc = 0;
+      return Math.min(acc, ZOMBIE_TICK.maxDt);
+    }
     function updateZombies(dt) {
       updateRunePistol();   // GB-119: the rune pistol on the dock, by day
       if (hollowFloor) { updateBelow(dt); return; }   // GB-107: below, only the warren's dead move (topside's stay frozen)
@@ -51220,8 +52048,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       deadStepThrottle -= dt;   // CL-130
       const poiPhase = phase;   // GB-43: the loop body declares its own `phase` further down
       fogCullPrep();   // GB-59
+      const zFrameDt = dt, zTickOn = zombies.length >= ZOMBIE_TICK.crowd && !training.active;   // GB-194
+      if (zTickOn) { camera.getWorldDirection(_zTickFw); _zTickFw.y = 0; }
       for (const z of zombies) {
         if (!z.alive) continue;
+        const dt = zombieTickDt(z, zFrameDt, zTickOn);   // GB-194: 0 on a far, idle zombie's off frame
+        if (dt === 0) continue;
         const kind = z.typeKey;
         if (kind === 'bomber') restoreBomberPose(z); // GP-19884
         if (kind === 'brute') restoreBrutePose(z); // GP-19866: restore before ordinary hit/crawl/death poses
@@ -54197,6 +55029,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         rock.mesh.visible = true;
         if (!rock.mesh.parent) scene.add(rock.mesh);
       }
+      buildRockBatches();   // CL-214: every rock back in its cell's batch
       gameOver = false; won = false;
       winEl.classList.remove('show');
       paused = false;
@@ -54455,7 +55288,7 @@ live++;
       updateTreeSway(dt);
       PROF.mark('w:treeFade+sway');
       updateFallingTrees(dt);
-      if (!training.active) { updateFallingLeaves(dt); updateTreeBatches(); }   // CL-118: no trees in the room
+      if (!training.active) { updateFallingLeaves(dt); updateTreeBatches(); updateRockBatches(); }   // CL-118: no trees in the room
       PROF.mark('w:treeFall+leaves+batches');
     }
     const hollowsHUD = mountHollows({ getState: () => ({
@@ -55208,6 +56041,8 @@ live++;
       updateMedDrops(dt);
       updateMedPenUse(dt);
       updateHealthRegen(dt);
+      updateConvoyMission(dt);
+      updateHikersKit(dt);   // GB-196
       updateKioskPrompt(dt);
       updatePrepTimerHud();
       updateFlashlight();
@@ -55551,7 +56386,7 @@ live++;
           ffHouseDistAt: (x, z) => { const k = ffIndexOf(ffHouse, x, z); return k < 0 ? null : ffHouse.dist[k]; },
           // Debug-only: renderer-cost hooks (shared light pool, canopy fade, puddle materials).
           effectLights, muzzleFlashLight, flashlight, applyCanopyFade, spawnGroundFire, puddleMatPool, casings,
-          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, relayDbg: { puzzle: relayPuzzle, state: () => relayPuzzle.state, relay, open: (m) => relayOpen(m), act: (a) => relayAction(a), close: () => relayClose(), RELAY, vault: () => radioLocker, note: () => satoNote, plan: (d) => relayDayPlan(d), rewardFor: (d) => { if (radioLocker) radioLocker.reward = vaultReward(d, vaultCan); if (radioLocker.phase !== "locked") vaultShowReward(radioLocker); return radioLocker && radioLocker.reward; }, spawnSpot: (r0, r1) => relaySpawnSpot(POI.mast, r0, r1) },   /* CL-183, CL-184 */ radioCuesDbg: () => ({ locker: radioLocker, marks: radioMarks, bar: radioBarEl, state: radioSiteState(), prompt: radioPromptText(), objPrompt: objectivePromptText(), runtime: objectiveRuntime, hold: { id: objHoldId, s: objHoldSeconds, down: objEDown } }), getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
+          CANOPY_LEGACY, WATER_FORCE_CPU, preRollFight, finishEffectWarmup, renderFrame, groundBaseColors, groundWornColors, groundWear, getGroundDetail: () => GROUND_DETAIL, caveApronWear, caveHillHeight, caveWarn, caveCorridor, waterNoiseTex, waterColourAt, WATER_TINT, riverSurfAt, riverProject, riverBedAt, getRiverJoin: () => RIVER_JOIN_S, terrainBase, terrainRaw, fishes, fishSchools, updateFish, waterCurrentAt, waterSurfaceTargets, waterLevelAt, waterDepthAt, LAKE, streamGroup, getTreeTex: () => ({ leaf: leafDetailTex, bark: barkDetailTex, on: treeShaderOn }), igniteTree, updateBurningTrees, updateFallingTrees, updateSmoke, updateZombieFires, smokePuffs, groundFires, spawnGroundFire, zombieFireSets, getGroundDetailTex: () => groundDetailTex, GROUND_DETAIL_SCALE, PATHS, PATH_HUBS, pathWearAt, yardWearAt, ground, POST_OFF, getPostProcessing: () => postProcessing, getBloomNode: () => bloomNode, FOLIAGE_LEGACY, foliageChunks, listFlowerPads, getFoliageWindOnGPU: () => foliageWindOnGPU, foliageWind, getWaterOnGPU: () => waterOnGPU, getWaterTimeUniform: () => waterTimeUniform, leafPieceY, leafPieceVisible, leafPieceWorldPos, leafPieceColorHex, setLeafPiece, damageTree, restoreTree, beginTreeFall, terrainSlope, waterAt, addLogSolids, removeLogSolids, TREE_LOG_LIE, treeBatchStats, updateTreeBatches, getObjectiveProps: () => objectiveProps, relayDbg: { puzzle: relayPuzzle, state: () => relayPuzzle.state, relay, open: (m) => relayOpen(m), act: (a) => relayAction(a), close: () => relayClose(), RELAY, vault: () => radioLocker, note: () => satoNote, plan: (d) => relayDayPlan(d), rewardFor: (d) => { if (radioLocker) radioLocker.reward = vaultReward(d, vaultCan); if (radioLocker.phase !== "locked") vaultShowReward(radioLocker); return radioLocker && radioLocker.reward; }, spawnSpot: (r0, r1) => relaySpawnSpot(POI.mast, r0, r1) },   /* CL-183, CL-184 */ siteCallTheDead, truckDbg: { mission: truckMission, state: () => truckMission.state, truck, prompt: () => truckPromptText(), locked: () => truckLocked(), reach: () => truckSiteProp() && objectiveReach(truckSiteProp()), TRUCK },   /* CL-216 */ rangerDbg: { cache: rangerCache, state: () => rangerCache.state, ranger, prompt: () => rangerPromptText(), locked: () => rangerLocked(), reach: () => rangerSiteProp() && objectiveReach(rangerSiteProp()), open: (m, src) => rangerOpen(m, src ? ranger.clues.find((c) => c.source === src) : null), act: (a) => rangerAction(a), close: () => rangerClose(), update: (dt) => updateRanger(dt), RANGER },   /* CL-217 */ radioCuesDbg: () => ({ locker: radioLocker, marks: radioMarks, bar: radioBarEl, state: radioSiteState(), prompt: radioPromptText(), objPrompt: objectivePromptText(), runtime: objectiveRuntime, hold: { id: objHoldId, s: objHoldSeconds, down: objEDown } }), getTreeBatches: () => ({ cells: treeBatchCells, members: treeBatchMembers, off: TREE_BATCH_OFF }),
           feralMotionDbg: feralMotion,   // GP-198
           enemyAbilitiesDbg: enemyAbilities,   // GP-179
           waterWaveTargets, motes, motePool, ripples, ripplePool, acidGlobPool, acidPuddlePool, groundFirePool, clearGroundFires, groundFires, bloodDecals, debris, bloodParticles, spawnMote, spawnRipple, spawnEmbers, dustMat, spawnGibBurst, spawnBlood, spawnChunks, runDevCommand, devJumpToNight, openDevConsole, closeDevConsole, isDevConsoleOpen: () => devConsoleOpen, isInfiniteCash: () => devInfiniteCash, kioskOpenAllowed, PREP_TIME, getPrepTimer: () => prepTimer, setPrepTimer: (t) => { prepTimer = t; }, setDay: (d) => { day = d; }, getDay: () => day,
@@ -55584,6 +56419,17 @@ live++;
           addDummyPlayer, removeDummyPlayer, nearestPlayer, playersNear, playerById, players, getPlayers: () => players, nightKindForDay: (d) => nightKindOf(d, nightPlanFor(d), isGuardianNight(d)),   /* CU-77 */
         });
         window.TT.inspectHost = inspectHost;   // CL-196: the inspector can attach to any debug game (the suite's check does)
+        window.TT.hikersDbg = () => ({ kit: hikersKit?.read() || null, site: hikersSiteState(), river: !!hikers?.river, bag: hikers ? { ...hikers.pos } : null, hang: hikers?.hang || null,
+          land: hikers?.land || null, pool: hikers?.pool || null, rope: hikers?.ropePieces || null, tree: hikers ? { x: hikers.tree.x, z: hikers.tree.z } : null, grabbable: hikersGrabbable(), reach: objectiveProps?.props?.[HIKERS_SITE] ? objectiveReach(objectiveProps.props[HIKERS_SITE]) : null });   // GB-196
+        window.TT.hikersAgeDbg = (s, opts = { inWater: true }) => { if (!hikersKit) return []; const ev = hikersKit.step(s, opts); hikersEvents(ev); return ev; };   // GB-196: a test ages the float without waiting it out
+        window.TT.convoyDbg = {
+          state: () => convoyMission.read(), jack: () => convoyJackAt(), parts: () => convoyParts(), sleeper: () => convoySleeperMesh,
+          hit: (a, b) => convoySleeperRoundHit(a, b), hp: () => convoySleeperHp,
+          reach: () => objectiveReach(objectiveProps?.props?.[CONVOY_SITE]),
+          runtime: () => objectiveRuntime, prompt: () => objectivePromptText(),
+          step: (dt, engaged = true) => { const events = convoyMission.step(dt, { engaged }); convoyMissionEvents(events); return events; },
+          kill: () => { const events = convoyMission.killSleeper(); convoyMissionEvents(events); return events; }
+        };
         // GB-185: since GP-19885 a headshot needs the round's own ray (confirmedHead), never a height. Tests score a hit
         // through the game's hit test: roundInfoDbg(z, y, dir) fires a level ray at height y through z and returns the
         // damageZombie info a real round would carry (hitY plus headHit and the soldier/brute zones). y 'head' aims at its head.
@@ -56195,6 +57041,7 @@ live++;
     }
 
     buildTreeBatches(); // CL-10: after every tree is placed, before the warm-up compiles the scene
+    buildRockBatches(); // CL-214: the rocks, the same way
     await loadMark('contact shading + rest of setup');
     // CL-191: the GPU-heavy half of the load waits for the intro videos to finish (opening.js gpuGate: the disclaimer and
     // the caracal play on an idle GPU; shader compiles during them made both stutter). The world above is already built.

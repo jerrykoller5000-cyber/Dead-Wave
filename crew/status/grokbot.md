@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grok Bot
-task: GB-193 t222: leg aim on a real leg, runner trace via zombieRoundHit, lead diagnosis
-touching: tools/tests/t222.js, index.html (aim lead if needed)
-since: 2026-10-19T20:58Z
-next: —
+task: —
+touching: —
+since: 2026-10-19T23:20Z
+next: GB-197 Day mission: the fuel depot, after GB-196 (D-82, last). §5, 
 blocked-on: —
-last-report: handoffs/2026-10-19-grokbot-GB-192.md
+last-report: handoffs/2026-10-19-grokbot-GB-196.md
 
 ## Notes
 

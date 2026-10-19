@@ -16,9 +16,13 @@
 (() => {
   // Anchor + world-axis offset (not rotated with the anchor), and where the player stands,
   // as an offset from the prop's centre. From the CL-6 table; GP-8 uses the same numbers.
+  // A row with `turn: true` is in its anchor's own frame instead: both offsets turn with the anchor's mesh
+  // (rotation.y, as the landmarks place their parts: world = (x cos + z sin, -x sin + z cos)).
   const SITES = [
     { id: 'objective:radio-repair',   anchor: 'mast',        off: [3.5, 3.0],   approach: [0.58, 1.38] },
-    { id: 'objective:medical-convoy', anchor: 'wrecks.0',    off: [4.8, 4.8],   approach: [1.06, 1.06] },
+    // GP-19937 (CL-217): the convoy's cooler is pinned by the wreck, under its right cab door by the sagging front
+    // corner, so its row is in the wreck's own frame (`turn`: the offsets turn with the wreck; +z its tail, +x its right).
+    { id: 'objective:medical-convoy', anchor: 'wrecks.0',    off: [1.5, -1.2],  approach: [1.5, 0], turn: true },
     { id: 'objective:ranger-cache',   anchor: 'campsites.0', off: [-5.0, 4.0],  approach: [0.57, 1.39] },
     { id: 'objective:hikers-cache',   anchor: 'campsites.1', off: [4.0, 4.0],   approach: [1.39, -0.58] },
     { id: 'objective:trapper-cache',  anchor: 'campsites.2', off: [-4.0, 4.0],  approach: [-0.57, -1.39] },
@@ -36,8 +40,12 @@
   window.objectiveSitesFrom = (POI, height) => SITES.map((s) => {
     const a = anchorOf(POI, s.anchor);
     if (!a) return null;
-    const x = a.x + s.off[0], z = a.z + s.off[1];
-    const ax = x + s.approach[0], az = z + s.approach[1];
+    const yaw = s.turn ? (Number.isFinite(a.yaw) ? a.yaw : (a.mesh && a.mesh.rotation ? a.mesh.rotation.y : 0)) : 0;
+    const c = Math.cos(yaw), n = Math.sin(yaw);
+    const turn = (v) => [v[0] * c + v[1] * n, -v[0] * n + v[1] * c];
+    const off = turn(s.off), app = turn(s.approach);
+    const x = a.x + off[0], z = a.z + off[1];
+    const ax = x + app[0], az = z + app[1];
     return { id: s.id, x, z, y: height ? height(x, z) : 0, ax, az, ay: height ? height(ax, az) : 0, facing: Math.atan2(x - ax, z - az) };
   }).filter(Boolean);
 

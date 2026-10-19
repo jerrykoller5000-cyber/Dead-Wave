@@ -1,0 +1,134 @@
+{
+  "burrows": [
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "burrow",
+      "kind": 0,
+      "mouthZ": 0
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "burrow",
+      "kind": 1,
+      "mouthZ": 0
+    }
+  ],
+  "lilyPads": [
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "lily-pad"
+    }
+  ],
+  "plotMarkers": [
+    {
+      "nodes": 20,
+      "meshes": 18,
+      "auto": 20,
+      "name": "holy-reliquary"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    },
+    {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "plot-marker"
+    }
+  ],
+  "sato": {
+    "note": {
+      "nodes": 3,
+      "meshes": 2,
+      "auto": 0,
+      "name": "sato-note"
+    },
+    "hat": {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "sato-hat"
+    },
+    "stool": {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "sato-stool"
+    },
+    "claws": {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "sato-claws"
+    },
+    "trail": {
+      "nodes": 1,
+      "meshes": 1,
+      "auto": 0,
+      "name": "sato-trail"
+    }
+  }
+}

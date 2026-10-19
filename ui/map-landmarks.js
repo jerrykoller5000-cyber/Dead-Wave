@@ -19,16 +19,23 @@ export function mapLandmarks(poi, hq, pit) {
 
 export function createMapLandmarkIntel({radius = 18} = {}) {
   const found = new Set();
+  let version = 0, labelRows = null, labelVersion = -1, labelCache = null;
   return {
-    reset() { found.clear(); },
+    reset() { found.clear(); version++; },
     observe(rows, player) {
-      for (const row of rows) if (Math.hypot(row.x-player.x,row.z-player.z)<=radius) found.add(row.id);
+      for (const row of rows) if (!found.has(row.id) && Math.hypot(row.x-player.x,row.z-player.z)<=radius) { found.add(row.id); version++; }
     },
-    labels(rows) { return rows.map(row=>({...row, discovered:row.always||found.has(row.id),
-      label:text(row.always||found.has(row.id)?row.key:'map.undiscovered')})); }
+    labels(rows) {
+      if (rows === labelRows && version === labelVersion) return labelCache;
+      labelRows = rows; labelVersion = version;
+      labelCache = rows.map(row=>({...row, discovered:row.always||found.has(row.id),
+        label:text(row.always||found.has(row.id)?row.key:'map.undiscovered')}));
+      return labelCache;
+    }
   };
 }
 
+const labelWidths = new Map();
 export function drawMapLandmarks(ctx, rows, toMap, {size, scale = 1, mini = false}) {
   ctx.save(); ctx.font = `600 ${Math.max(mini?14:11, 12*scale)}px sans-serif`;
   ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=3*scale;ctx.strokeStyle='#101910';
@@ -37,7 +44,10 @@ export function drawMapLandmarks(ctx, rows, toMap, {size, scale = 1, mini = fals
     const p=toMap(row.x,row.z);if(!p)continue;
     ctx.fillStyle=row.discovered?row.color:'#d8dfd5';
     if(row.discovered)ctx.fillRect(p.x-2*scale,p.y-2*scale,4*scale,4*scale);
-    const width=Math.min(size-16,ctx.measureText(row.label).width),half=width/2;
+    const widthKey=ctx.font+'|'+row.label;
+    let labelWidth=labelWidths.get(widthKey);
+    if(labelWidth==null){labelWidth=ctx.measureText(row.label).width;if(labelWidths.size>=128)labelWidths.clear();labelWidths.set(widthKey,labelWidth);}
+    const width=Math.min(size-16,labelWidth),half=width/2;
     const x=Math.max(8+half,Math.min(size-8-half,p.x));
     let y=Math.max(fontHeight,Math.min(size-fontHeight,p.y+(row.discovered?12*scale:0)));
     // Nearby structures keep their own labels; move text, never their markers.

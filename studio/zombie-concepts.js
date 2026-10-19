@@ -7,6 +7,30 @@ import {sculptGuardian} from './zombie-guardian-detail.js';
 import {sculptDemon} from '../combat/demon-visual.js';
 import {refineZombieFace,refineHeavyArmor} from '../combat/zombie-fidelity.js';
 export const CONCEPT_TYPES = Object.freeze(['shambler','feral','brute','military','spitter','bomber','screamer','drowned','leaper','spider','colossus','demon','guardian','caveguard']);
+
+// GP-19937: the one spitter found asleep in the medical convoy. Clone materials
+// before tinting so ordinary spitters (and the concept template) keep their look.
+export function prepareConvoySleeperAppearance(T, g) {
+  if (!g || g.userData?.convoySleeperLook) return g;
+  const clones = new Map(), blue = new T.Color(0x507f8d), glow = new T.Color(0x8beaff);
+  const tinted = (source) => {
+    if (!source) return source;
+    if (clones.has(source)) return clones.get(source);
+    const m = source.clone(); clones.set(source, m);
+    if (m.color) m.color.lerp(blue, m.userData?.surface === 'cloth' ? 0.62 : 0.72);
+    if (m.emissive && m.emissive.getHex() !== 0) {
+      m.color.lerp(glow, 0.42);
+      m.emissive.copy(glow); m.emissiveIntensity = Math.max(1.5, m.emissiveIntensity || 0);
+    }
+    return m;
+  };
+  g.traverse(o => { if (o.isMesh) o.material = Array.isArray(o.material) ? o.material.map(tinted) : tinted(o.material); });
+  const u = g.userData;
+  for (const key of ['bodyMats', 'pulseMats', 'eyeMats', 'mats']) if (Array.isArray(u[key])) u[key] = u[key].map(m => clones.get(m) || m);
+  if (u.torso?.userData?.bodyMat) u.torso.userData.bodyMat = clones.get(u.torso.userData.bodyMat) || u.torso.userData.bodyMat;
+  u.convoySleeperLook = true;
+  return g;
+}
 const templates = new WeakMap();
 function bones(u){
   const out={hips:u.hips,torso:u.torso,head:u.head};

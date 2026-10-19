@@ -119,8 +119,16 @@ thirds of it is three's `renderer.render()` walking and submitting the scene:
 - **Expected:** the night frame near 21 ms (about 47 fps). **Measured (AG-86/AG-88, 21:08-21:15Z):** night 20
   44.8 fps (22.3 ms, 1% low 32.3, no hitches; was 32.5), night 10 45.4 (22.0 ms; was 34.8), the megaswarm 60.0
   (16.7 ms; was 59). The shadow pass went 8.5 to 1.1 ms, the matrices 7.1 to 3.7 ms.
-- **Cut 3 (21:17Z):** at night sceneCull keeps nothing off-screen for the shadows (it kept everything within 44 m),
-  and the matrix walk (`updateSceneMatrices`) skips the top-level things it hid. Measured: AG-89.
+- **Cut 3 (21:17Z):** the matrix walk (`updateSceneMatrices`) skips the top-level things sceneCull hid: the
+  matrices 3.1 to 2.5 ms (AG-89). Keeping nothing off-screen at night for the shadows was tried with it and bought
+  nothing but worse lows (43.7 fps, 1% low 28.4), so that half is undone.
+- **Cut 4 (21:24Z):** bees and butterflies shelter at night as they do in rain, and the walk skips them hidden (930
+  of 9,900 nodes).
+- **The dead (ChatGPT, GP-19934):** idle poses behind the camera past 12 m skip their overlay work at night; the
+  `zombies` mark 3.61 to 2.77 ms. Their draws (GP-19935): 80 of the camera's 383 a frame, under the 100 line, so
+  the common kinds keep ≤ 4 draws. The AI's own tick is Grokbot's GB-194; the HUD's per-frame work ChatGPT's GP-19936.
+- **The bench varies run to run** (the night's last push is never the same: 383-623 draws, 42.5-53.9 fps on one
+  build). Compare medians of three runs, or the marks, not single fps lines.
 - **The census (night 20):** 9,768 Object3Ds under the scene, 7,208 recomposed every frame, 7,429 meshes (3,548
   shown, 442 drawn), 1,832 top-level. 585 unnamed groups hold 6,757 of the nodes; the wildlife (butterflies, bees,
   birds) 951; the relay vault 219. The next census names the unnamed groups.

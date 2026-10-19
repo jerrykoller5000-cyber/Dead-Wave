@@ -3636,6 +3636,44 @@ export const AudioSys = (() => {
     playTone({ freq: 880, type: 'sine', dur: 0.18, vol: 0.08, when: 0.08 });
     playTone({ freq: 1320, type: 'sine', dur: 0.3, vol: 0.07, when: 0.2 });
   }
+  // CL-216: the utility truck's day mission: the bolt cutters picked up, their jaws biting the chain, the chain giving,
+  // and the truck's alarm (a car alarm's two-tone whoop, until it is told to stop).
+  let truckAlarmNodes = null;
+  function boltCuttersTake() {
+    playNoise({ dur: 0.07, vol: 0.07, filterFreq: 2600, filterType: 'bandpass', attack: 0.003 });
+    playTone({ freq: 620, type: 'triangle', dur: 0.09, vol: 0.05, when: 0.04 });
+    playTone({ freq: 410, type: 'triangle', dur: 0.12, vol: 0.04, when: 0.1 });
+  }
+  function boltCutterBite() {
+    playNoise({ dur: 0.05, vol: 0.06, filterFreq: 3800, filterType: 'bandpass', attack: 0.002, q: 3 });
+    playTone({ freq: 240, type: 'square', dur: 0.04, vol: 0.03, slideTo: 180 });
+  }
+  function chainSnap() {
+    playNoise({ dur: 0.12, vol: 0.12, filterFreq: 4200, filterType: 'highpass', attack: 0.001 });
+    playTone({ freq: 1900, type: 'triangle', dur: 0.22, vol: 0.05, slideTo: 1400, when: 0.01 });
+    for (let i = 0; i < 4; i++) playNoise({ dur: 0.03, vol: 0.05 - i * 0.01, filterFreq: 3000 - i * 300, filterType: 'bandpass', when: 0.09 + i * 0.07 });
+  }
+  function truckAlarm(on) {
+    const c = ensure();
+    if (!c) return;
+    if (!on) {
+      const n = truckAlarmNodes;
+      if (!n) return;
+      truckAlarmNodes = null;
+      n.g.gain.setTargetAtTime(0, c.currentTime, 0.06);
+      setTimeout(() => { try { n.osc.stop(); n.lfo.stop(); } catch (_) {} }, 400);
+      return;
+    }
+    if (truckAlarmNodes) return;
+    const osc = c.createOscillator(); osc.type = 'sawtooth'; osc.frequency.value = 900;
+    const lfo = c.createOscillator(); lfo.type = 'triangle'; lfo.frequency.value = 2.2;
+    const lg = c.createGain(); lg.gain.value = 380; lfo.connect(lg); lg.connect(osc.frequency);
+    const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1300; bp.Q.value = 0.9;
+    const g = c.createGain(); g.gain.value = 0; g.gain.setTargetAtTime(muted ? 0 : 0.06, c.currentTime, 0.05);
+    osc.connect(bp); bp.connect(g); g.connect(outBus()); sendToReverb(g, 0.6);
+    osc.start(); lfo.start();
+    truckAlarmNodes = { osc, lfo, g };
+  }
   // CL-184: the red katana (a lighter, faster, ringing machete), the vault's roll-up door and its lift's motor, and
   // a scrap of paper picked up.
   let vaultLiftNodes = null;
@@ -3723,6 +3761,7 @@ export const AudioSys = (() => {
     clip, preloadClips, clipState,   // CL-147
     trainingAlarm,   // CL-159
     relayClunk, relaySpark, relayStatic, relayBeep, relayBoot, relayKey, relayOpen,   // CL-183
+    boltCuttersTake, boltCutterBite, chainSnap, truckAlarm,   // CL-216
     katanaSwing: W(katanaSwing), katanaHit: W(katanaHit), katanaDraw, vaultDoor, vaultLift, paperRustle,   // CL-184
     knockout, knockoutEnd, knockoutDbg: () => ({ gain: koGain ? koGain.gain.value : null, ringing: !!koRing }),   // CL-171
     take: playTake, takesInit: () => takes.init(), takesRefresh: () => takes.refresh(), takesState: () => takes.state(), takesPreload: (ids) => takes.preload(ids),   // CL-148

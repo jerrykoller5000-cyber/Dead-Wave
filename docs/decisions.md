@@ -4,6 +4,16 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-82 · The day missions are in 1.0 (Jerry, 2026-10-19; Claude, in chat).** Jerry: "If you think it is wise to bundle
+  them with 1.0 let us go ahead and do so." The six supply sites still opened with a plain E search (the medical convoy,
+  the ranger cache, the hikers' first-aid kit, the trapper's supplies, the fuel depot, the utility truck) become
+  mini-games, as the radio mast did (CL-183 to CL-185). The designs and his comments on them are his; the numbers and the
+  details are Claude's lead calls, which he can overrule: `docs/specs/day-missions.md`.
+  - Each mini-game opens its site once a run; later restocks stay a plain E search.
+  - Until its mission is done the site is `locked` in `objectiveReach`, so the objective runtime and its tests stand.
+  - The fuel depot is Claude's rework of his idea (he wasn't sure it works): only fire or a spitter's acid sets the can
+    off, it leaks a trail the dead follow, and it can be put down.
+  - The order: frame rate first (each owner finishes the cut they're on), then the missions, the fuel depot last.
 - **D-81 · Jerry is out of the approval loop for now (Jerry, 2026-10-19; Claude, in chat).** Jerry: "Cut me out of the loop for approval for the time being. Make decisions based on what seems best."
   So, until he says otherwise:
   - Nothing waits for his yes. A question that would have gone to him (`crew.mjs ask`, a Q-n, "awaiting Jerry's

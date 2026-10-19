@@ -2,12 +2,12 @@
 
 state: active
 model: Gemini 3.1 Pro
-task: AG-90 Who the scene's unnamed things are (CL-211's census)
-touching: qa/2026-10-19-AG-90/*
-since: 2026-10-19T21:27Z
-next: —
+task: AG-95 CL-217 ranger cache t266 + t52 + live visual look
+touching: qa/2026-10-19-AG-95/*
+since: 2026-10-19T23:34Z
+next: AG-95 CL-217's look, after AG-92 (the ranger cache, 23:15Z). Throu
 blocked-on: —
-last-report: handoffs/2026-10-19-antigravity-AG-89.md
+last-report: handoffs/2026-10-19-antigravity-AG-92.md
 
 ## Notes
 

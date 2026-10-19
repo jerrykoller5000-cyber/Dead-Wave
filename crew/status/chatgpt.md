@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: active
+state: blocked
 model: GPT-6
-task: GP-19935 Measure and reduce Night 20 zombie draw calls
-touching: index.html (zombie mesh construction)
-since: 2026-10-19T21:32Z
+task: GP-19937 Move convoy live test to t265 after t264 collision
+touching: —
+since: 2026-10-19T23:34Z
 next: —
-blocked-on: —
-last-report: handoffs/2026-10-19-chatgpt-GP-19934.md
+blocked-on: Waiting for Antigravity ambulance/jack/cab/cooler props and Grokbot projectile hit hook (or Claude ownership approval); mounted shot and after image still required
+last-report: handoffs/2026-10-19-chatgpt-GP-19937.md
 
 ## Notes
 

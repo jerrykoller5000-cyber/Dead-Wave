@@ -1,0 +1,168 @@
+NIGHT PACK NOTES
+Grave Shift 1.0, stage 4: what the crew needs from your playthroughs
+From Claude, 2026-10-19
+
+
+HOW TO USE THIS FILE
+--------------------
+- Play one pack, then write your notes in that pack's section below. Rough notes
+  are perfect. Short lines are fine.
+- One thing per line. Start each line with a letter so we can sort them fast:
+
+     B  = broken. Something doesn't work, or happens when it shouldn't.
+     M  = looks like a mistake or a placeholder: a wrong or floating model,
+          something missing, words that look unfinished.
+     F  = feel. Too hard, too easy, boring, confusing, too long, not fun.
+     P  = performance. A stutter or slow spot. Say where you were and what
+          was on screen.
+     I  = idea for later. It goes on the 1.x list and isn't built for 1.0.
+
+- If you can, say WHERE (the place, and which day or night) and WHAT YOU WERE
+  DOING.
+- For a bug, three parts are enough: what you did, what happened, and what you
+  expected to happen.
+- Screenshots: drop them in this same folder (Night Packs) and put the file name
+  at the end of the line.
+- When a pack is done, tell me "check the night pack notes". I'll turn every
+  line into a task for whoever owns it and tell you who has what.
+
+Examples:
+  B  Night 2: a shambler walked through the HQ's west wall. shot1.png
+  F  Day 1: I didn't know the radio mast was the first thing to do.
+  P  Night 3, at the dock with about 40 zombies: big stutter for a second.
+  I  Would love a flare gun.
+
+
+THE QUESTIONS FOR EVERY PACK
+----------------------------
+Only answer the ones you have something to say about.
+
+ 1. Did anything break or stop working?
+ 2. Did anything look wrong, unfinished or out of place?
+ 3. Did you always know what to do next? Where were you lost?
+ 4. Difficulty: too easy, about right, or too hard? Which part?
+ 5. Did it feel smooth? Any stutters or slow spots?
+ 6. Words: anything that read oddly, was misspelled, or said too much?
+ 7. Sound and music: anything too loud, too quiet, missing, or repeating badly?
+ 8. Controls: anything awkward or slow to respond?
+ 9. The best moment, and the worst moment.
+10. Anything you'd want later (an I line).
+
+A note on the console (~): jumping to a night marks the run as a test run, so it
+won't earn badges. That's expected.
+
+
+PACK 1: A FRESH RUN, NIGHTS 1 TO 3  (about 30 minutes)
+------------------------------------------------------
+Start: a normal new run from the title. No console.
+
+Look out for:
+- The first-run card that offers the Training Ground. It should only appear the
+  first time.
+- The orders card at the drop. Is the goal clear (hold out until night 20, when
+  Heron comes)?
+- Day 1: is it clear what to do during the day? The radio mast: Sato's note,
+  the breakers, the station's beeps, the vault and what came up in it.
+- The first alarm and the first horde.
+- Day 3: Brandt's rescue at the watchtower (red flares).
+- The supply sites as they are now (search them with E).
+
+Your notes:
+
+
+
+
+
+PACK 2: NIGHT 6, THE FIRST GUARDIAN  (20 to 30 minutes)
+-------------------------------------------------------
+Start: press ~ and type:  night 6
+(This puts you on the day before night 6: shop and build, then sound the alarm
+at the HQ panel when you're ready.)
+
+Look out for:
+- Day 6: Okafor's rescue at the trapper's cellar (you'll hear his megaphone),
+  if it shows up after the jump. Tell me either way.
+- The guardian: can you read what it's doing? Is the fight fair? Too long?
+
+Your notes:
+
+
+
+
+
+PACK 3: NIGHTS 10 TO 12  (20 to 30 minutes)
+-------------------------------------------
+Start: press ~ and type:  night 10
+(Optional: start with  night 9  instead, to see Pike's rescue on day 9: he's
+stuck in the creek mud and honks a truck horn.)
+
+Look out for:
+- Night 10: the brutes and the colossus.
+- Night 11: the rest night. Does it feel like a breather?
+- Night 12: the guardian with Ember.
+
+Your notes:
+
+
+
+
+
+PACK 4: NIGHTS 14 AND 15  (20 to 30 minutes)
+--------------------------------------------
+Start: press ~ and type:  night 14
+
+Look out for:
+- Night 14, Fog Night: can you still see enough to fight? Its own music.
+- Night 15: the nest, and the colossus.
+
+Your notes:
+
+
+
+
+
+PACK 5: NIGHTS 18 TO 20, THE END OF THE RUN  (20 to 30 minutes)
+---------------------------------------------------------------
+Start: press ~ and type:  relay skip
+Then walk to the relay cabinet at the radio mast and press E to reboot it. Hold
+out until the bar reads "Relay up". Heron only comes if the relay is fixed.
+Then press ~ and type:  night 18
+
+Look out for:
+- Night 18: the last guardian.
+- Night 20: calling Heron from the board, the flares at the dock, the landing,
+  getting aboard.
+- The win screen, and the survivors' lines.
+
+Your notes:
+
+
+
+
+
+PACK 6 (OPTIONAL): A DELVE INTO THE HOLLOWS  (20 to 30 minutes)
+---------------------------------------------------------------
+Start: a run where the relay is up (as in pack 5). The Hush is yours from the
+dawn after the relay comes up. By day, walk to a cave mouth (not the white,
+sealed one), press E to light the Hush, then E again to go down. The Hush lasts
+about 8 minutes below.
+
+Look out for:
+- Finding your way down there, and finding the way back up.
+- Dog tags, the strongbox and its rune shard.
+- The sounds below, and the guardian moving in the walls.
+- Anything that looks unfinished. None of us has seen a full delve on your PC
+  since the models changed.
+
+Your notes:
+
+
+
+
+
+ANYTHING ELSE
+-------------
+Notes that don't belong to one pack:
+
+
+

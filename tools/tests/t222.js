@@ -90,6 +90,26 @@
       }
       return new THREE.Vector3(zp.x, zp.y + H * 0.2, zp.z);
     };
+    // GB-195: a head the camera can see. From some sides a kind's own gear covers the middle of its head (the colossus's
+    // stone carrier, seen from its side: the camera's ray meets the stones 1.1 m short of the head and the reticle does
+    // not ring). The cursor goes on the visible head nearest its middle: points over the head's box whose camera ray the
+    // game's hit test calls a headshot. None visible: that side is not a head case (an INFO line).
+    // GB-195 (Claude's call (c)): the colossus keeps its stones; where its own gear stands between the camera and its head
+    // (the camera's ray to the head's middle meets this zombie, not as a headshot, half a metre or more short of it), that
+    // side is not a head case.
+    const headCovered = (z) => {
+      const c = headCentre(z); if (!c) return false;
+      const cp = cam.position, d = c.clone().sub(cp), L = d.length(), r = T.zombieRoundHit(z, cp.clone(), cp.clone().addScaledVector(d.normalize(), L + 3));
+      return !!r && !r.headHit && r.t * (L + 3) < L - 0.5;
+    };
+    const headPoint = (z) => {
+      const c = headCentre(z); if (!c || headCovered(z)) return null;
+      const h = z.mesh.userData.head, cp = cam.position, inv = new THREE.Matrix4().copy(h.matrixWorld);
+      const fw = c.clone().sub(cp).setY(0).normalize(), right = new THREE.Vector3(-fw.z, 0, fw.x);
+      const seen = (p) => { const d = p.clone().sub(cp), L = d.length(), r = T.zombieRoundHit(z, cp.clone(), cp.clone().addScaledVector(d.normalize(), L + 3)); return !!r && r.headHit && (z.typeKey !== 'military' || r.militaryHit?.zone === 'face') && (z.typeKey !== 'brute' || r.bruteHit?.part === 'head'); };
+      for (const dy of [0, 0.06, -0.06, 0.12, -0.12, 0.18]) for (const dx of [0, 0.08, -0.08, 0.16, -0.16, 0.24, -0.24]) { const p = c.clone().addScaledVector(right, dx); p.y += dy; if (seen(p)) return p; }
+      return null;
+    };
     const still = (type, x, zz) => { const z = T.spawnZombie(x, zz, type, true, true); if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; } return z; };
     const fmt = (o) => Object.entries(o).map(([r, n]) => r + ' ' + n).join(', ') || '-';
     // --- Still zombies: head, chest, legs, from three sides at two distances.
@@ -105,7 +125,8 @@
         await wait(SETTLE);
         if (!z.mesh || !z.alive) { info(type + ' at ' + b + ' deg ' + dist + ' m: gone before the cursor reached it (no case)'); continue; }
         const zp = z.mesh.position, H = z.hitH || 1.45;
-        const pts = { head: headCentre(z), chest: new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z), legs: legPoint(z) };
+        const hp = headPoint(z); if (!hp && headCentre(z)) info(type + ' at ' + b + ' deg ' + dist + ' m: its head is ' + (headCovered(z) ? 'covered by its own gear' : 'hidden') + ' from the camera here (no head case)');
+        const pts = { head: hp, chest: new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z), legs: legPoint(z) };
         for (const k of ['head', 'chest', 'legs']) {
           if (!pts[k] || (k === 'legs' && (type === 'spider' || type === 'leaper'))) continue;
           await pointAt(pts[k]);

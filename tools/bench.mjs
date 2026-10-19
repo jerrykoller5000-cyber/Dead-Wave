@@ -212,7 +212,7 @@ const CENSUS = `(() => {
 // --census, the draws: for two frames, every renderObject the main camera draws, counted by the top-level thing it
 // belongs to (named as above); the shadow pass's draws are counted apart.
 const CENSUS_DRAWS = `new Promise((resolve) => {
-  const r = TT.renderer, sc = TT.scene, orig = r.renderObject, rows = new Map(), names = new Map();
+  const r = TT.renderer, sc = TT.scene, orig = r.renderObject, rows = new Map(), parts = new Map(), names = new Map();
   const zm = new Set((TT.zombies || []).map((z) => z.mesh).filter(Boolean));
   const nameIn = (c) => { let n = ''; c.traverse((o) => { if (!n && o !== c && o.name) n = o.name; }); return n; };
   const keyOf = (c) => {
@@ -227,14 +227,15 @@ const CENSUS_DRAWS = `new Promise((resolve) => {
   r.renderObject = function (object, scene, camera, ...rest) {
     if (camera && camera.isPerspectiveCamera) {
       main++;
-      let t = object; while (t.parent && t.parent !== sc) t = t.parent;
+      let t = object, part = null; while (t.parent && t.parent !== sc) { if (t.name && t !== object) part = t.name; t = t.parent; }
       const k = keyOf(t); rows.set(k, (rows.get(k) || 0) + 1);
+      const pk = k + ' / ' + (part || object.name || '(unnamed)'); parts.set(pk, (parts.get(pk) || 0) + 1);
     } else shadow++;
     return orig.call(this, object, scene, camera, ...rest);
   };
-  const done = () => { r.renderObject = orig; resolve({ frames, main: main / Math.max(1, frames), shadow: shadow / Math.max(1, frames), byGroup: [...rows].sort((a, b) => b[1] - a[1]).slice(0, 30).map(([k, n]) => ({ k, n: n / Math.max(1, frames) })) }); };
+  const done = () => { r.renderObject = orig; resolve({ frames, main: main / Math.max(1, frames), shadow: shadow / Math.max(1, frames), byGroup: [...rows].sort((a, b) => b[1] - a[1]).slice(0, 30).map(([k, n]) => ({ k, n: n / Math.max(1, frames) })), byPart: [...parts].sort((a, b) => b[1] - a[1]).slice(0, 40).map(([k, n]) => ({ k, n: n / Math.max(1, frames) })) }); };
   const step = () => { frames++; if (frames >= 2) done(); else requestAnimationFrame(step); };
-  requestAnimationFrame(() => { main = shadow = 0; rows.clear(); requestAnimationFrame(step); });
+  requestAnimationFrame(() => { main = shadow = 0; rows.clear(); parts.clear(); requestAnimationFrame(step); });
   setTimeout(() => { if (r.renderObject !== orig) done(); }, 5000);
 })`;
 // --cpu: self and total time per function from a DevTools profile.

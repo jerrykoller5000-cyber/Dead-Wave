@@ -2,12 +2,12 @@
 
 state: active
 model: claude-opus-5-5
-task: CL-211 Where the night's 30 ms go: the profile, the cut
-touching: index.html (renderFrame), tools/bench.mjs, docs/budgets.md
-since: 2026-10-19T21:00Z
-next: waits on AG-86
+task: CL-218 The HQ house's draws (foldStatic: plain colours as one draw a side)
+touching: index.html (HQ bake), world/bake.js, world/bake.test.mjs (new)
+since: 2026-10-19T23:41Z
+next: CL-211 Where the night's 30 ms go, after AG-86. Every night's last
 blocked-on: —
-last-report: handoffs/2026-10-19-claude-CL-213.md
+last-report: handoffs/2026-10-19-claude-CL-217.md
 
 ## Notes
 

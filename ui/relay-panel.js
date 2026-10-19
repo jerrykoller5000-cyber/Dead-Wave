@@ -2,14 +2,19 @@
 // puzzle (game/relay-puzzle.js) and calls render(); the panel only draws it and turns keys, the wheel and clicks into
 // actions. While it is open it has the keyboard: nothing else in the game hears a key (or the wheel) until it closes.
 //
-//   createRelayPanel({ doc, onAction })   onAction({ type: 'flip', n } | { type: 'tune', d } | { type: 'digit', d } | { type: 'close' })
-//     open(mode)  'breakers' | 'radio' | 'keypad' | 'note'      close()   isOpen()   mode()   render(view)   element
+//   createRelayPanel({ doc, onAction, id })   onAction({ type: 'flip', n } | { type: 'tune', d } | { type: 'digit', d } | { type: 'close' })
+//     open(mode, opts)  'breakers' | 'radio' | 'keypad' | 'note' | 'look'      close()   isOpen()   mode()   render(view)   element
+//
+// CL-217: the ranger cache's lockbox and its "E — Look" views use a second panel (id 'rangerPanel'; ids in PANEL_IDS
+// share the look). open() takes opts: keypad { title, help, strip: html over the display }, look { html, paper, help },
+// and opts.key, which rebuilds the panel when it changes. A 'look' panel is like the note: it only shows a thing.
 //
 // CL-184 (Jerry): the panels give nothing away. No tag on the breakers (Sato's note is a scrap of paper somewhere round
 // the site: the 'note' mode reads it), no code on the radio's display and no "count the beeps" (only the dial and the
 // signal bars, which say how clear the station is), and no hint on the vault's keypad.
 
-const CSS = `
+const PANEL_IDS = ['relayPanel', 'rangerPanel'];
+const CSS_SRC = `
 #relayPanel{position:fixed;left:50%;bottom:118px;transform:translateX(-50%);z-index:30;width:min(372px,calc(100vw - 32px));box-sizing:border-box;
   padding:12px 14px 10px;border-radius:6px;background:linear-gradient(180deg,#2b302a,#1a1d18);border:1px solid #59604f;
   box-shadow:0 12px 34px #000b, inset 0 1px 0 #ffffff14;color:#dfe3d2;font-family:var(--font-hud,sans-serif);pointer-events:auto;display:none}
@@ -44,7 +49,11 @@ const CSS = `
 #relayPanel.paper .sketch{margin:2px 0 0;transform:rotate(-1.2deg)}
 #relayPanel.paper .help{color:#7d7253}
 #relayPanel .help{margin-top:8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8b917d}
+#relayPanel .look img,#relayPanel .strip img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 2px 6px #0008}
+#relayPanel .strip{margin:0 0 8px}
+#relayPanel.wide{width:min(440px,calc(100vw - 32px))}
 `;
+const CSS = CSS_SRC.replaceAll('#relayPanel', ':is(' + PANEL_IDS.map((i) => '#' + i).join(',') + ')');   // id specificity kept
 
 // CL-185 (Jerry): "Note should actually be a fuse diagram without explicitly stating what it is. Just a picture of the
 // box with the correct sequence and let the players figure it out." A pencil sketch of the breaker box: its switches,
@@ -83,11 +92,11 @@ export function fuseSketch(order, count = 4) {
   return s + '</svg>';
 }
 
-export function createRelayPanel({ doc = document, onAction = () => {} } = {}) {
+export function createRelayPanel({ doc = document, onAction = () => {}, id = 'relayPanel' } = {}) {
   if (!doc.getElementById('relayPanelCss')) { const st = doc.createElement('style'); st.id = 'relayPanelCss'; st.textContent = CSS; (doc.head || doc.body).append(st); }
-  const el = doc.createElement('div'); el.id = 'relayPanel'; el.setAttribute('role', 'dialog');
+  const el = doc.createElement('div'); el.id = id; el.setAttribute('role', 'dialog');
   (doc.getElementById('hud') || doc.body).append(el);
-  let mode = null, built = null;
+  let mode = null, built = null, opts = {};
   const win = doc.defaultView || window;
   const act = (a) => { try { onAction(a); } catch (e) { console.info('relay panel', e); } };
   const onKey = (e) => {
@@ -95,14 +104,14 @@ export function createRelayPanel({ doc = document, onAction = () => {} } = {}) {
     const c = e.code;
     let handled = true;
     if (c === 'KeyE' || c === 'Escape') { if (!e.repeat) act({ type: 'close' }); }
-    else if (mode === 'note') handled = !/^F\d+$/.test(c);
+    else if (mode === 'note' || mode === 'look') handled = !/^F\d+$/.test(c);
     else if (/^(Digit|Numpad)[0-9]$/.test(c)) { const d = +c.slice(-1); if (!e.repeat) act(mode === 'breakers' ? { type: 'flip', n: d } : { type: 'digit', d }); }
     else if (c === 'KeyA' || c === 'ArrowLeft') act({ type: 'tune', d: e.shiftKey ? -1 : -0.1 });
     else if (c === 'KeyD' || c === 'ArrowRight') act({ type: 'tune', d: e.shiftKey ? 1 : 0.1 });
     else handled = !/^F\d+$/.test(c);   // every other key is swallowed too (no walking off, no weapon swaps), but F-keys
     if (handled) { e.preventDefault(); e.stopImmediatePropagation(); }
   };
-  const onWheel = (e) => { if (!mode || mode === 'note') return; e.preventDefault(); e.stopImmediatePropagation(); if (mode === 'radio') act({ type: 'tune', d: e.deltaY < 0 ? 0.1 : -0.1 }); };
+  const onWheel = (e) => { if (!mode || mode === 'note' || mode === 'look') return; e.preventDefault(); e.stopImmediatePropagation(); if (mode === 'radio') act({ type: 'tune', d: e.deltaY < 0 ? 0.1 : -0.1 }); };
   win.addEventListener('keydown', onKey, true);
   win.addEventListener('wheel', onWheel, { capture: true, passive: false });
 
@@ -133,23 +142,34 @@ export function createRelayPanel({ doc = document, onAction = () => {} } = {}) {
       h.remove();   // CL-185: nothing says what it is
       const sk = doc.createElement('div'); sk.className = 'sketch'; el.append(sk); built.sketch = sk;
       const help = doc.createElement('div'); help.className = 'help'; help.textContent = 'E put it back'; el.append(help);
+    } else if (m === 'look') {
+      h.remove();   // CL-217: like the note, it only shows the thing
+      const look = doc.createElement('div'); look.className = 'look'; look.innerHTML = opts.html || ''; el.append(look);
+      const help = doc.createElement('div'); help.className = 'help'; help.textContent = opts.help || 'E step back'; el.append(help);
     } else {
-      h.textContent = 'Supply vault';
+      h.textContent = opts.title || 'Supply vault';
+      if (opts.strip) { const strip = doc.createElement('div'); strip.className = 'strip'; strip.innerHTML = opts.strip; el.append(strip); }
       const lcd = doc.createElement('div'); lcd.className = 'lcd'; el.append(lcd); built.lcd = lcd;
       const keys = doc.createElement('div'); keys.className = 'keys'; el.append(keys);
       for (let d = 1; d <= 9; d++) { const b = doc.createElement('button'); b.type = 'button'; b.textContent = String(d); b.addEventListener('click', () => act({ type: 'digit', d })); keys.append(b); }
-      const help = doc.createElement('div'); help.className = 'help'; help.textContent = '1-9 enter the code · E leave'; el.append(help);
+      const help = doc.createElement('div'); help.className = 'help'; help.textContent = opts.help || '1-9 enter the code · E leave'; el.append(help);
     }
   }
   return {
     element: el,
-    open(m) { if (mode !== m) build(m); mode = m; el.classList.add('on'); el.classList.toggle('paper', m === 'note'); },
-    close() { mode = null; el.classList.remove('on', 'hot', 'paper'); },
+    open(m, o = {}) {
+      const key = o.key ?? null;
+      if (mode !== m || (built && built.key !== key)) { opts = o; build(m); built.key = key; }
+      mode = m; el.classList.add('on');
+      el.classList.toggle('paper', m === 'note' || (m === 'look' && !!o.paper));
+      el.classList.toggle('wide', m === 'look');
+    },
+    close() { mode = null; el.classList.remove('on', 'hot', 'paper', 'wide'); },
     isOpen: () => !!mode,
     mode: () => mode,
-    // view: breakers { on, hot } · radio { dial, band, clarity } · keypad { entry, len, bad, open } · note { order, count }
+    // view: breakers { on, hot } · radio { dial, band, clarity } · keypad { entry, len, bad, open } · note { order, count } · look (none)
     render(v) {
-      if (!mode || !built) return;
+      if (!mode || !built || mode === 'look') return;
       if (mode === 'note') { const k = (v.order || []).join(',') + '/' + (v.count || 4); if (built.sketchKey !== k) { built.sketchKey = k; built.sketch.innerHTML = fuseSketch(v.order || [], v.count || 4); } return; }
       if (mode === 'breakers') {
         built.brk.forEach((b, i) => b.classList.toggle('on', !!v.on[i]));
