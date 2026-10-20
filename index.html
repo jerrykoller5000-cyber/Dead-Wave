@@ -36915,6 +36915,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.updateMatrixWorld(true);
         skin.bind(new THREE.Skeleton(bones));
         blendZombieJoins(THREE, g, skin, s); // GP-19924: continuous deformation across body joins
+        // CL-227: three writes the skeleton's length into the skinning vertex shader (an array of N bone matrices), so
+        // every new bone count was a new shader and a new pipeline, built on the frame that zombie was first drawn:
+        // AG-106 found 20-22 of night 20's long frames (25-45 ms each) were zombie skins with a new count. The skeleton
+        // is padded to a fixed size (32, or 64 for a bigger rig) by repeating its last bone; no vertex is weighted to
+        // the padding. Rebound after the join blend, which maps the real bones to their indices.
+        const padTo = bones.length <= 32 ? 32 : 64;
+        if (bones.length < padTo) {
+          const padded = bones.slice();
+          while (padded.length < padTo) padded.push(bones[bones.length - 1]);
+          skin.bind(new THREE.Skeleton(padded), skin.bindMatrix);
+        }
         // The frustum test: the body's reach whatever its pose, standing or lying (a skinned mesh's own sphere is
         // its bind pose).
         skin.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0.8 * s, 0), 1.9 * s + 0.4);
@@ -45192,6 +45203,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (OTS.on && OTS.w > 0.25 && !waveFinisher && !loopCine) { _otsAimRay(dt); return; }
       updateMouseAimBody(dt);
     }
+    const AIM_AXIS_PULL = 0.12;   // GB-206: metres a torso aim is drawn toward the zombie's axis
     function updateMouseAimBody(dt) {
       if (!pointerOnCanvas) return;
       // CL-50 (Jerry): while a cinematic has the camera, the cursor's ground point swings with
@@ -45233,6 +45245,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const zt = rayPickZombie(ray, groundT, _pickAim);
       if (zt !== Infinity) {
         const m = getMuzzleWorld(), st = WEAPON_STATS[currentWeapon], pz = rayPick.z;
+        // GB-206: a chest aim is drawn up to AIM_AXIS_PULL toward his axis, so the parallax of a surface point on a
+        // runner's near side does not send the round past him. Torso band only: heads sit forward of the axis and a
+        // leg aim pulled in would land between the legs.
+        if (!rayPick.head) {
+          const hk = (_pickAim.y - pz.mesh.position.y) / (pz.hitH || 1.7);
+          if (hk >= 0.45 && hk <= 0.85) {
+            const ax = pz.mesh.position.x - _pickAim.x, az = pz.mesh.position.z - _pickAim.z, ad = hypot(ax, az);
+            if (ad > 1e-4) { const k = Math.min(AIM_AXIS_PULL, ad) / ad; _pickAim.x += ax * k; _pickAim.z += az * k; }
+          }
+        }
         // A round takes a moment to get there (a fifth of a second to 15 m from the pistol), and a runner crossing in
         // front of him has gone a metre by then, twice its own width: lead it by its pace, so the round meets it where
         // the cursor has it. Bullets and pellets only; the launcher lobs, the flamer and the saw reach, and a grenade
@@ -50386,7 +50408,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // destination (unblocking it if an obstacle's margin covers it); seedR > 0 seeds
     // every open cell within that ring — how the house field starts outside its own
     // blocked footprint.
-    function* ffBuildGen(F, px, pz, seedR, extra, hk, hv) {   // GB-202: a generator, so the rebuild can be spread over frames (F.dl, the slice's deadline)
+    function updateFlowFieldOn(F, px, pz, seedR, extra, hk = ffHeapK, hv = ffHeapV) {   // GB-202: one rebuild, at once (a sliced build was tried and dropped: t80)
       const t0 = performance.now();
       const half = FF_N * FF_CELL / 2;
       const ox = Math.floor((px - half) / FF_CELL) * FF_CELL, oz = Math.floor((pz - half) / FF_CELL) * FF_CELL;
@@ -50412,7 +50434,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
         F.ox = ox; F.oz = oz;
         for (let j = 0; j < FF_N; j++) {
-          if (performance.now() > F.dl) yield;
           const wz = oz + (j + 0.5) * FF_CELL;
           for (let i = 0; i < FF_N; i++) {
             const wx = ox + (i + 0.5) * FF_CELL, k = j * FF_N + i;
@@ -50461,7 +50482,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Builds: every cell near one is tested against the exact shape a body collides
       // with (panel hubs and arms, stair sides, thin boxes), via pushOutOfBuild.
       for (const b of builds) {
-        if (performance.now() > F.dl) yield;
         if (b.type === 'spikes' || b.type === 'mine') continue;
         const reach = BUILD_GRID * 0.75 + FF_CLEAR;
         if (!inGrid(b.x, b.z, reach)) continue;
@@ -50481,7 +50501,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Dijkstra outward from the seed(s). An edge is walked by a zombie heading
       // TOWARD the destination, i.e. from the far cell into the near one, so the climb
       // that matters is near minus far.
-      if (performance.now() > F.dl) yield;
       F.dist.fill(Infinity);
       F.ready = false;
       let n = 0;
@@ -50518,7 +50537,6 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       let pops = 0;
       while (n > 0) {
-        if ((++pops & 255) === 0 && performance.now() > F.dl) yield;
         const key = hk[0], cur = hv[0];
         const lk = hk[--n], lv = hv[n];
         let c = 0;
@@ -50549,33 +50567,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       F.ready = true;
       F.lastMs = performance.now() - t0;
     }
-    function updateFlowFieldOn(F, px, pz, seedR, extra) {   // the whole rebuild at once (the house field, a forced rebuild, the first one)
-      F.dl = Infinity;
-      const g = ffBuildGen(F, px, pz, seedR, extra, ffHeapK, ffHeapV);
-      while (!g.next().done) { /* never yields with no deadline */ }
-    }
-    // GB-202 (CL-219: the zombies mark reached 8-13 ms at night 20): the 0.4 s rebuild cost 2-3 ms in one frame. It is
-    // now built into a back field, FF_SLICE_MS a frame, and swapped in whole when done (3-4 frames later), so a
-    // zombie never reads a half-built field. Forced rebuilds (a felled log, the insertion) stay immediate.
-    const FF_SLICED = false;   // GB-202 A/B for t80: the periodic refresh rebuilds at once
-    const FF_SLICE_MS = 1.0;
-    const ffBack = makeFF();
-    const ffBackK = new Float32Array(FF_CELLS * 8), ffBackV = new Int32Array(FF_CELLS * 8);
-    let ffSlice = null, ffSliceMs = 0;
-    const FF_SWAP = ['blocked', 'h', 'wet', 'dist', 'ox', 'oz', 'ready', 'h2', 'wet2', 'fresh'];
-    function ffStepSlice() {
-      const t = performance.now();
-      ffBack.dl = t + FF_SLICE_MS;
-      const done = ffSlice.next().done;
-      ffSliceMs += performance.now() - t;
-      if (!done) return;
-      ffSlice = null;
-      for (const k of FF_SWAP) { const v = ffPlayer[k]; ffPlayer[k] = ffBack[k]; ffBack[k] = v; }
-      ffPlayer.lastMs = ffSliceMs;
-    }
-
-    // GB-202 (t126): a destination change (a marine or a dummy joins, falls or leaves) rebuilds the field at once and
-    // drops any slice under way; only the periodic FF_PERIOD refresh is sliced. ffDest is reused, so no allocation.
+    // GB-202 (t126): a destination change (a marine or a dummy joins, falls or leaves) rebuilds the field at once.
+    // ffDest is reused, so no allocation.
     const ffDest = [];
     let ffDestN = -1;
     function ffDestChanged() {
@@ -50587,17 +50580,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     function updateFlowFields(dt, force) {
       ffPlayer.timer -= dt;
-      if (ffDestChanged()) force = true;   // GB-202 (t126): new destinations never wait for a slice
-      if (ffSlice && !force) { ffStepSlice(); return; }   // GB-202: a rebuild under way goes on
+      if (ffDestChanged()) force = true;   // GB-202 (t126): new destinations rebuild at once
       if (ffPlayer.timer <= 0 || force || !ffPlayer.ready) {
         ffPlayer.timer = FF_PERIOD;
         // GB-100: centred on the local marine; the other living players are extra seeds.
         let extra = null;
         if (players.length > 1) { extra = []; for (const p of players) if (p !== localPlayer && playerAlive(p)) extra.push(p.position); }
-        if (!FF_SLICED || force || !ffPlayer.ready) { ffSlice = null; updateFlowFieldOn(ffPlayer, localPlayer.position.x, localPlayer.position.z, 0, extra); return; }
-        ffSliceMs = 0;
-        ffSlice = ffBuildGen(ffBack, localPlayer.position.x, localPlayer.position.z, 0, extra, ffBackK, ffBackV);
-        ffStepSlice();
+        updateFlowFieldOn(ffPlayer, localPlayer.position.x, localPlayer.position.z, 0, extra);
       }
     }
 
@@ -53810,7 +53799,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           const want = zHyp(zTarget(z).position.x - zx, zTarget(z).position.z - zz) < 34;
           if (z._castShadow !== want) {
             z._castShadow = want;
-            z.mesh.traverse((o) => { if (o.isMesh) o.castShadow = want; });
+            // CL-227: back to each mesh's own flag, as setZombieRenderLod does (same field): this set every mesh to cast,
+            // the demon's fire fists and the glow parts too, and their first shadow draw built 18 shadow pipelines at once
+            // (AG-106, a 40 ms frame when the demons closed in).
+            z.mesh.traverse((o) => { if (o.isMesh) { if (o.userData._castLod === undefined) o.userData._castLod = o.castShadow; o.castShadow = want && o.userData._castLod; } });
           }
         }
         // Voices: each body on its own timer, throttled globally, louder the closer.

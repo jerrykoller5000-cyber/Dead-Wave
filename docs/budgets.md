@@ -218,3 +218,71 @@ one, and a scavenge of a small young generation is a few ms, not forty. three's 
 
 Also found by the way: a batched tree whose snapshot changed and changed back (the canopy fade on the camera's line
 after any teleport) stayed live for the rest of the run: a slow draw-count leak in play, fixed in CL-220 (t50).
+
+## 2026-10-20, evening: after GB-202 and GP-19941, the 1 % low has not moved (AG-103, CL-223)
+
+AG-103 ran night 20 at High three times on Jerry's 5080 with `--prof --cpu --alloc`, after Grokbot's GB-202 (the
+flow field's rebuild sliced over frames) and ChatGPT's GP-19941 (the ability trace) landed
+(`qa/2026-10-20-AG-103/bench-3x-summary.json`):
+
+| Night 20, High | fps | 1 % low | tick ms | kB a frame | draws |
+| --- | --- | --- | --- | --- | --- |
+| Run 1 | 52.3 | 21.3 | 15.42 | 893 | 269 |
+| Run 2 | 56.0 | 24.3 | 14.50 | 859 | 259 |
+| Run 3 | 49.7 | 20.5 | 16.85 | 925 | 264 |
+| Median | 52.3 | 21.3 | 15.42 (AG-97: 14.31 without `--alloc`) | 893 (from 1,558 this morning) | |
+
+What it says:
+- Allocation is down 43 % since this morning, but the 1 % low is where it was: run 1 still had eight frames of
+  50-74 ms. A 1 % low of 50 fps needs every frame but one in a hundred under 20 ms, so it is the spikes, not the mean,
+  that stand between night 20 and the budget.
+- The heap figures on the spikes repeat at about -10 MB (the heap grew 9.8, 9.9, 10.0, 10.3 MB in the frame). Most
+  likely that is Chrome's coarse `performance.memory` (it rounds unless launched with `--enable-precise-memory-info`),
+  so those figures can't say whether a spike collected garbage.
+- So the spikes' cause is still not proven. Three candidates: a collection (the 893 kB a frame still fills the young
+  generation every second or so); a pipeline built or a texture or geometry uploaded on the frame; or the game's own
+  code (the `zombies` mark reached 34 ms in one of them).
+
+CL-223 makes the bench answer that. `bench --prof` now launches Chrome with `--enable-precise-memory-info` (real
+heap figures), records spikes from 25 ms instead of 50, puts on each one the pipelines (three's render-pipeline
+cache), textures and geometries built in that frame, and counts all of them by cause in `prof.spikeCauses`
+(`pipelines`, `uploads`, `gc` for 2 MB or more freed, `code` for none of these). AG-105 runs it on the 5080.
+
+## 2026-10-20, later: the night's spikes are pipelines being built (AG-105, CL-226)
+
+AG-105 ran night 20 at High on the 5080 with CL-223's bench: three `--prof` runs (no sampler) and one with
+`--prof --cpu --alloc` (`qa/2026-10-20-AG-105/`, `handoffs/2026-10-20-antigravity-AG-105.md`).
+
+| Night 20, High | fps | 1 % low | tick ms | spikes over 25 ms | built a pipeline | gc | code |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `--prof` run 1 | 52.8 | 25.4 | 15.21 | 37 | 23 | 1 | 13 |
+| `--prof` run 2 | 53.5 | 27.1 | 14.65 | 30 | 21 | 2 | 6 |
+| `--prof` run 3 | 55.1 | 25.7 | 13.96 | 29 | 25 | 1 | 3 |
+| `--prof --cpu --alloc` | 54.7 | 28.4 | 14.40 | 28 | 26 | 1 | 1 |
+
+What it says:
+- **Most of the long frames build a render pipeline**: 70 to 93 % of the spikes. Each spends 22-48 ms in `r:render`
+  and grows the heap by about 10 MB. That is three's node builder writing a material's shaders on the frame it is
+  first drawn in that state, which is why the "-10 MB" kept repeating on the spikes (it was real, not rounding).
+- **It goes on all night**, not only at the start: pipelines are built at frames 72 to 644 of a 30-second sample,
+  one every second or so. The warm-up (`warmEffectPools`, compileAsync) covers what exists at load. So something in the
+  fight keeps making states that have no pipeline yet, or keeps handing one back and building it again. Three drops a
+  pipeline when its last user moves to another state, so a state that flips back and forth (a material switched to
+  transparent and back, for example) is rebuilt each time it comes back.
+- Garbage collection is 1-2 frames a run. The 893-904 kB a frame is no longer what makes the 1 % low.
+- The mean is about 54 fps, and the CPU tick is 14-15 ms, nearly all of a 16.7 ms frame. That is the other half of
+  the 60 fps budget, after the spikes.
+
+CL-226 makes the bench name them. `bench --prof` now keeps a journal of every pipeline built while it measures:
+the object (its name or type and three parents), the material, the state that goes into the pipeline's key, the
+camera that drew it (the scene's, or a shadow or pass camera), whether its shaders were new. It counts every release
+too, and reports the top groups in `prof.pipelines`. AG-106 runs it; the cut follows from what it names.
+
+## 2026-10-20, late: who the pipelines were for (AG-106, CL-227)
+
+CL-226's journal on the 5080 (night 20 High, two runs): 40-43 pipelines built in 30 s, 0 released, nearly all with new
+shaders. 20-22 were zombie skins with a new vertex shader each: three writes a skeleton's length into the skinning
+shader, and the one-draw bodies (CL-138) had skeletons of 10-17 bones and more in a fight. 18 were the demon's fire
+fists' shadow, all at once when the demons came close: the far-shadow toggle turned every mesh's shadow on, the
+fists' too. CL-227 pads every zombie skeleton to 32 bones (one shader per body material, warmed at load) and keeps
+each mesh's own shadow flag. AG-107 measures it.

@@ -16,7 +16,12 @@
      up on a video that has not moved for 8 s.
    - a video that cannot load falls back to the one sentence that matters, as text, for a few seconds.
    - level: the player's SFX volume (tt_vol_sfx), like the caracal intro.
-   ?disclaimer=0 on the URL skips it; DWDisclaimer.preview() plays it again over the menu. */
+   ?disclaimer=0 on the URL skips it; DWDisclaimer.preview() plays it again over the menu.
+
+   CL-225, Jerry (2026-10-20): "Could you disable the AI disclaimer in the beginning for now? I am going back and forth
+   on whether I want to include it or not." So it is off at the start until he decides (ENABLED below). Everything
+   else is kept: ENABLED = true brings it back as it was, ?disclaimer=1 on the URL plays it once anyway, and
+   DWDisclaimer.preview() still plays it over the menu. */
 (() => {
   const root = document.getElementById('disclaimer');
   if (!root) return;
@@ -24,8 +29,13 @@
   const prompt = root.querySelector('.dsc-prompt'), skipBtn = document.getElementById('disclaimerSkip'), fallback = root.querySelector('.dsc-fallback');
   let level = 0.8;
   try { const s = localStorage.getItem('tt_vol_sfx'); if (s !== null) level = Math.max(0, Math.min(1, +s || 0)); } catch (_) {}
-  let off = !video;
-  try { const q = new URLSearchParams(location.search), v = q.get('disclaimer'); if (v === '0' || v === 'off' || q.has('inspect')) off = true; } catch (_) {}   // CL-196: not in the inspector
+  const ENABLED = false;   // CL-225: off at the start while Jerry decides; true plays it before the studio intro again
+  let off = !video || !ENABLED;
+  try {
+    const q = new URLSearchParams(location.search), v = q.get('disclaimer');
+    if ((v === '1' || v === 'on') && video) off = false;   // CL-225: see it while it is switched off
+    if (v === '0' || v === 'off' || q.has('inspect')) off = true;   // CL-196: not in the inspector
+  } catch (_) {}
 
   let state = 'idle', preview = false, lastT = -1, stillFor = 0, watchdog = 0, fadeIv = 0, endTimer = 0;
   let resolveDone; const done = new Promise((r) => { resolveDone = r; });

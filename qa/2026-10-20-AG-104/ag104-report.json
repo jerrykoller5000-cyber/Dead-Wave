@@ -1,0 +1,107 @@
+{
+  "screenshots": {
+    "cover.png": {
+      "width": 630,
+      "height": 500,
+      "bytes": 266571
+    },
+    "01-day-scavenging.png": {
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1846206
+    },
+    "02-building-defence.png": {
+      "width": 1920,
+      "height": 1080,
+      "bytes": 2082304
+    },
+    "03-night-push.png": {
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1620061
+    },
+    "04-the-hollows.png": {
+      "width": 1920,
+      "height": 1080,
+      "bytes": 396506
+    },
+    "05-dawn-survived.png": {
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1538425
+    }
+  },
+  "installer": {
+    "filename": "Grave Shift_0.1.0_x64-setup.exe",
+    "relativePath": "desktop/src-tauri/target/release/bundle/nsis/Grave Shift_0.1.0_x64-setup.exe",
+    "absolutePath": "C:\\Users\\Zero\\Desktop\\Tiny Trek\\desktop\\src-tauri\\target\\release\\bundle\\nsis\\Grave Shift_0.1.0_x64-setup.exe",
+    "bytes": 402095174,
+    "mib": 383.47,
+    "mbDecimal": 402.1
+  },
+  "installed": {
+    "dir": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift",
+    "exe": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\dead-wave.exe",
+    "exeBytes": 3243520,
+    "noticesPath": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\game\\NOTICES.txt",
+    "noticesBytes": 2286
+  },
+  "openingAndMusic": {
+    "openingBeforeSkip": {
+      "hasDisclaimer": true,
+      "disclaimerState": "playing",
+      "dscVideoReady": 4,
+      "hasOpening": true,
+      "openingPhase": "video",
+      "opnVideoReady": 4
+    },
+    "runtimeCheck": {
+      "audioContextState": "unknown",
+      "audioContextTime": 0,
+      "audioState": {
+        "started": true,
+        "over": false,
+        "won": false,
+        "phase": "prep",
+        "boss": false,
+        "night": false,
+        "paused": false,
+        "lowHp": false,
+        "shop": false,
+        "threat": 0,
+        "nearest": null,
+        "day": 1,
+        "dawn": true,
+        "dusk": false,
+        "ember": false,
+        "guardian": false,
+        "special": null,
+        "remaining": 0,
+        "spawnedAll": false,
+        "pace": null,
+        "below": null,
+        "heart": null,
+        "heartSoon": false,
+        "dread": 0
+      },
+      "ambState": {
+        "dt": 0.016599999994039535,
+        "wind": 0.4164087505316318,
+        "water": 0,
+        "night": false,
+        "rain": 0,
+        "started": true,
+        "forest": 0.071428570645869,
+        "below": null,
+        "cave": 0,
+        "cavePan": 0,
+        "pit": 0,
+        "pitPan": 0.8057354086100501
+      },
+      "totalResourcesFetched": 250,
+      "failedLoadsCount": 0,
+      "failedLoads": [],
+      "pageErrorsCount": 0
+    }
+  }
+}

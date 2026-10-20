@@ -58,8 +58,12 @@
       const rnd = Math.random; Math.random = () => 0.99;
       let dHead = 0, dBody = 0;
       try {
-        let h0 = zs.hp; T.damageZombie(zs, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(zs, 'head') }); dHead = h0 - zs.hp;
-        h0 = zs.hp; T.damageZombie(zs, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(zs, zs.mesh.position.y + zs.hitH * 0.45) }); dBody = h0 - zs.hp;
+        // CL-223: both rounds into its face. It spawns facing any way, and a round from him into the back of a soldier's
+        // helmet or past a side-on colossus's head was no headshot by design (t993's probe, 2026-10-20), so the check
+        // read 6/8 or 5/5 on whichever way they happened to face.
+        const ry = zs.mesh.rotation.y, face = { x: -Math.sin(ry), z: -Math.cos(ry) };
+        let h0 = zs.hp; T.damageZombie(zs, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(zs, 'head', face) }); dHead = h0 - zs.hp;
+        h0 = zs.hp; T.damageZombie(zs, 10, { kind: 'bullet', dir: { x: 0, z: 1 }, ...T.roundInfoDbg(zs, zs.mesh.position.y + zs.hitH * 0.45, face) }); dBody = h0 - zs.hp;
       } finally { Math.random = rnd; }
       shot.push([k, dHead, dBody]);
       zz.hp = 5000;

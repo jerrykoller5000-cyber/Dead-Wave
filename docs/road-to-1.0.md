@@ -61,8 +61,11 @@ What is missing or wrong:
    - Pack 4: `night 14` and 15 (Fog, the nest).
    - Pack 5: `night 18` to 20, with `relay skip` first so Heron can come.
    His notes after each pack become the next tasks. Balance comes from these, not from simulations.
-5. **Ship.** The desktop build fixed and tested on a clean Windows profile, version 1.0.0, frame budgets met on
-   Jerry's PC, a green full suite, the tag.
+5. **Ship.** The desktop build fixed and tested on a clean Windows profile (Jerry's laptop), version 1.0.0, frame
+   budgets met on Jerry's PC, a green full suite, the tag. **Where (D-84): itch.io**, the desktop download, on a page
+   Claude prepares (the text, the screenshots, the build) and Jerry publishes; the music and sounds' commercial
+   licences checked first. His friends play it there, and their notes feed the Steam release, which comes with 1.1
+   and co-op.
 
 ## After 1.0 (1.x)
 

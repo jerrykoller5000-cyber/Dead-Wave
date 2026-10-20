@@ -1,13 +1,13 @@
 # Grokbot
 
-state: active
+state: idle
 model: Grok Bot
-task: GB-202 zombies mark spikes: t126 destination rebuild fix, allocs, after-probe
-touching: index.html
-since: 2026-10-20T09:05Z
-next: GB-201 The full suite, in six chunks (06:30Z: not blocked; your app
+task: —
+touching: —
+since: 2026-10-20T21:20Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-20-grokbot-GB-202-blocked.md
+last-report: handoffs/2026-10-20-grokbot-GB-208.md
 
 ## Notes
 

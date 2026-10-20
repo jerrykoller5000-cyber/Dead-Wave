@@ -9,7 +9,7 @@ dependencies and no build step; this folder is the one place with any, and it on
     npm run build:exe        the exe only, no installer
     node smoke.mjs           start the built exe and check it (WebGPU, the title, a match, the profile file, Quit)
 
-- The installer: `src-tauri/target/release/bundle/nsis/Grave Shift_<version>_x64-setup.exe` (about 226 MB, per-user, no admin).
+- The installer: `src-tauri/target/release/bundle/nsis/Grave Shift_<version>_x64-setup.exe` (about 400 MB at 0.1.0, AG-104; per-user, no admin).
   It is not signed, so Windows SmartScreen will ask before the first run ("More info", "Run anyway").
 - The game's files are installed next to the exe in `game/` and served by the `dw:` protocol (`http://dw.localhost/`).
   `tools/package.mjs` decides what ships (no qa/, review/, handoffs/, tests, the WAV originals) and checks the copy by booting it.
@@ -18,4 +18,8 @@ dependencies and no build step; this folder is the one place with any, and it on
   `DW_PROFILE_DIR` points it elsewhere (the smoke check does); `DW_DEBUG=1` opens the game's `?debug=1` hooks.
 - F11 toggles fullscreen; the window opens fullscreen. The icon is the PGB patch on a dark square (`npm run icon` redoes it
   from `assets/insignia/pgb-patch.png`; put real art in `src-tauri/icons/source.png` and run `tauri icon` instead).
+- The Rust crates' licences (CL-224) are `NOTICES-desktop.txt` at the root, which `tools/package.mjs` ships next to
+  `NOTICES.txt`. After a change to `Cargo.lock`, redo it: `cargo install cargo-about --locked --features cli` once,
+  then in `src-tauri`: `cargo about generate about.hbs -o ../../NOTICES-desktop.txt` (the accepted licences are in
+  `about.toml`).
 - The browser build is unchanged: `Play Dead-Wave.bat`.

@@ -57,6 +57,19 @@
   .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c); opacity: .35; }
   .card.active::before { opacity: 1; }
   .card h2 { margin: 0; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  /* Jerry's portraits of the crew (crew/faces/): the face on the card, the whole card on a click */
+  .card .top { display: flex; gap: 12px; align-items: center; }
+  .card .top .hd { flex: 1; min-width: 0; }
+  .card .top h2 { flex-wrap: wrap; row-gap: 2px; } .card .top .state { white-space: nowrap; }
+  .face { flex: none; width: 58px; height: 58px; padding: 0; border: 2px solid color-mix(in srgb, var(--c) 40%, transparent); border-radius: 12px; overflow: hidden; background: var(--chip); cursor: zoom-in; }
+  .face img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card.active .face, .card.slot .face { border-color: var(--c); }
+  .face:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  table.own td:first-child { white-space: nowrap; }
+  table.own img.mini { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; vertical-align: middle; margin-right: 6px; }
+  dialog.crewcard { padding: 0; border: 0; background: transparent; max-width: 92vw; }
+  dialog.crewcard::backdrop { background: rgba(0, 0, 0, .65); }
+  dialog.crewcard img { display: block; max-height: 88vh; max-width: 92vw; width: auto; border-radius: 10px; cursor: zoom-out; }
   .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); flex: none; }
   .active .dot { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); animation: pulse 2s infinite; }
   .blocked .dot { background: var(--warn); }
@@ -598,8 +611,10 @@ async function refresh() {
     const inQueue = (slotState?.queue || []).find((q) => q.agent === a);
     const holds = slotState?.holder?.agent === a;
     return `<div class="card ${esc(st)}" ${cvar(a)}>
+      <div class="top"><button class="face" type="button" data-card="${esc(a)}" title="${esc(n)}" aria-label="Show ${esc(n)}'s card"><img src="faces/${esc(a)}.png" alt="" onerror="this.parentNode.remove()"></button><div class="hd">
       <h2><span class="dot"></span>${n}<span class="state">${esc(holds ? 'TESTING NOW' : STATE_WORD[st] || st.toUpperCase())}</span></h2>
       <div class="model">${f.model && f.model !== '—' ? esc(f.model.split(/,| \(/)[0]) : '<span class="nomodel">model not given</span>'}</div>
+      </div></div>
       ${st === 'active' || st === 'slot' || st === 'blocked' ? `<div class="task">${inline(cut(f.task || '—', 140))}</div>` : `<div class="task muted">Not working right now</div>`}
       <div class="row">${st === 'active' ? `working for <b>${dur(now - since)}</b>` : st === 'slot' ? `waiting since <b>${clock(since)}</b>${inQueue ? ` · <b>#${inQueue.position}</b> in the queue` : holds ? '' : ' · <span class="warnt">not in the queue</span>'}` : st === 'blocked' ? `blocked on <b>${inline(cut(f['blocked-on'] || '—', 120))}</b>` : `last seen <b>${esc(ago(f.since))}</b>`}</div>
       ${st === 'active' && chips ? `<div class="chips">${chips}</div>` : ''}
@@ -718,9 +733,17 @@ async function refresh() {
 function mdTable(text) {
   const rows = text.replace(/\r\n/g, '\n').split('\n').filter((l) => /^\|/.test(l) && !/^\|\s*-/.test(l)).map((l) => l.replace(/^\||\|\s*$/g, '').split('|').map((c) => c.trim()));
   if (!rows.length) return '';
-  return `<table class="own"><tr>${rows[0].map((c) => `<th>${inline(c)}</th>`).join('')}</tr>${rows.slice(1).map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</table>`;
+  return `<table class="own"><tr>${rows[0].map((c) => `<th>${inline(c)}</th>`).join('')}</tr>${rows.slice(1).map((r) => `<tr>${r.map((c) => { const f = /^<img src="faces\/([a-z]+)\.png"[^>]*>\s*/.exec(c); return `<td>${f ? `<img class="mini" src="faces/${f[1]}.png" alt="">` : ''}${inline(f ? c.slice(f[0].length) : c)}</td>`; }).join('')}</tr>`).join('')}</table>`;
 }
 refresh().catch((e) => { document.getElementById('stamp').textContent = 'error: ' + e.message; console.error(e); });
+// The face on a card opens that agent's whole card (Jerry's art, crew/faces/<agent>-card.png).
+document.getElementById('agents').addEventListener('click', (ev) => {
+  const b = ev.target.closest('.face'); if (!b) return;
+  let d = document.getElementById('crewCard');
+  if (!d) { d = document.createElement('dialog'); d.id = 'crewCard'; d.className = 'crewcard'; d.innerHTML = '<img alt="">'; d.addEventListener('click', () => d.close()); document.body.appendChild(d); }
+  const img = d.querySelector('img'); img.src = 'faces/' + b.dataset.card + '-card.png'; img.alt = b.title + ' crew card';
+  d.showModal();
+});
 setInterval(() => refresh().catch((e) => { document.getElementById('stamp').textContent = 'error: ' + e.message; console.error(e); }), 10000);
 </script>
 </body>

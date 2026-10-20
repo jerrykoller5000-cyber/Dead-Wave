@@ -1,0 +1,11 @@
+Game-test request 24bb3b78-63ff-4755-b561-6e0f71e6e8c7 queued at position 1. Waiting...
+GRANT chatgpt GP-19943: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+FAIL  t93     10 pass   1 fail  71.8s
+
+1 checks: 10 pass, 1 fail
+
+by owner:
+  unassigned
+    t93    1 fail  FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer 
+           FAIL over 1.5 s game time, walking soles stay above -5 cm and below +20 cm (+30 cm for Screamer and Feral) (brute -0.05/0.03/1.50)

@@ -61,11 +61,11 @@
       shellAt(z);
       const c = corpseOf(mesh);
       ok(!!c && !c.body && c.slide >= 1, 'today\'s topple, with a slide (' + (c ? f2(c.slide || 0) : '-') + ' m)');
-      await wait(500);
+      { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.5 && Date.now() - w0 < 8000) await wait(30); }   // GB-204: the slide runs on game time
       const d = Math.hypot(mesh.position.x - x0, mesh.position.z - z0);
       ok(d >= 1 && d <= 2.1, 'it slides ' + f2(d) + ' m back');
       ok(c && c.shoved === b && b.knockT > 0, 'the zombie behind gets knockT (' + f2(b.knockT || 0) + ')');
-      const fr = await until(() => c.frozen, 1500);
+      const fr = await until(() => c.frozen, 6000);   // GB-204: wall-clock cap only (the slow page)
       ok(fr && frozenJoints(c), 'once landed, the topple freezes');
       T.clearZombies(); await wait(100);
     }

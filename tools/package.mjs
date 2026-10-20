@@ -20,7 +20,7 @@ const oi = argv.indexOf('--out');
 const OUT = path.resolve(ROOT, oi >= 0 ? argv[oi + 1] : path.join('dist', 'dead-wave'));
 
 // What goes: the entry page and the folders it imports from. Nothing else in the root.
-const FILES = ['index.html'];
+const FILES = ['index.html', 'NOTICES.txt', 'NOTICES-desktop.txt'].filter((f) => fs.existsSync(path.join(ROOT, f)));   // CL-221: the third-party notices (CL-224: and the desktop app's Rust crates)
 const DIRS = ['assets', 'combat', 'core', 'game', 'studio', 'ui', 'vendor', 'world', 'z-sounds'];
 // What stays behind inside those folders: tests and browser checks, scratch, and the soundtrack's originals.
 // The .wavs the game actually fetches are the exception (core/audio.js, ui/range-start-audio.js).
@@ -41,7 +41,42 @@ function wavsTheGameLoads() {
 }
 const KEEP_WAV = wavsTheGameLoads();
 
+// CL-221 (D-84): of the soundtrack, only the songs music.json plays (and any core/audio.js or index.html names): the
+// other set stays in the repo as Jerry's backup ("Switch music (old - new).bat" swaps music.json, and the package
+// follows whichever is in). Of assets/disclaimer, only what the page plays (the finished video). No music.json: all go.
+const SOUND_EXT = /\.(mp3|ogg|oga|opus|wav|flac|m4a|aac)$/i;
+function namesTheGameUses() {
+  const strs = new Set();
+  const walkJ = (o) => {
+    if (typeof o === 'string') strs.add(o);
+    else if (Array.isArray(o)) o.forEach(walkJ);
+    else if (o && typeof o === 'object') for (const [k, v] of Object.entries(o)) { strs.add(k); walkJ(v); }
+  };
+  try { walkJ(JSON.parse(fs.readFileSync(path.join(ROOT, 'assets', 'soundtrack', 'music.json'), 'utf8'))); } catch (e) { return null; }
+  const code = ['core/audio.js', 'index.html', 'assets/intro/disclaimer.js']
+    .filter((f) => fs.existsSync(path.join(ROOT, f))).map((f) => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n');
+  return { strs, code };
+}
+const USES = namesTheGameUses();
+const leftOut = [];
+function unplayed(rel) {
+  if (!USES) return false;
+  if (rel.startsWith('assets/soundtrack/') && SOUND_EXT.test(rel)) {
+    const sub = rel.slice('assets/soundtrack/'.length), stem = sub.replace(/\.[^./]+$/, '');
+    const used = USES.strs.has(sub) || USES.strs.has(stem) || USES.code.includes("'" + stem + "'") || USES.code.includes('"' + stem + '"');
+    if (!used) leftOut.push(rel);
+    return !used;
+  }
+  if (rel.startsWith('assets/disclaimer/')) {
+    const used = USES.code.includes(rel);
+    if (!used && !/\.md$/i.test(rel)) leftOut.push(rel);
+    return !used;
+  }
+  return false;
+}
+
 function skipFile(name, rel) {
+  if (unplayed(rel)) return true;
   if (rel.startsWith('z-sounds/') && !ZSOUND_SHIP.test(name)) return true;
   if (/\.wav$/i.test(name)) return !KEEP_WAV.has(rel);
   return SKIP_FILE.some((re) => re.test(name));
@@ -66,6 +101,7 @@ const mb = (n) => (n / 1048576).toFixed(1) + ' MB';
 if (argv.includes('--list')) {
   for (const [d, n] of byDir) console.log(d.padEnd(10), mb(n));
   console.log('total'.padEnd(10), mb(total), `(${files.length} files)`);
+  if (leftOut.length) console.log(`left out, not played: ${leftOut.length} files (` + mb(leftOut.reduce((s, f) => s + size(f), 0)) + ')');
   process.exit(0);
 }
 
@@ -90,6 +126,7 @@ for (const [d, n] of byDir) console.log('  ' + d.padEnd(10), mb(n));
 if (keptWavs.length) console.log('  wavs kept: ' + keptWavs.join(', '));
 if (absentWavs.length) console.log('  wavs named but not on disk: ' + absentWavs.join(', '));
 if (takes.length) console.log(`  z-sounds/index.json: ${takes.length} takes`);
+if (leftOut.length) console.log(`  left out, not played (the backup music, the old disclosure clips): ${leftOut.length} files, ` + mb(leftOut.reduce((s, f) => s + size(f), 0)));
 
 if (argv.includes('--no-check')) process.exit(0);
 

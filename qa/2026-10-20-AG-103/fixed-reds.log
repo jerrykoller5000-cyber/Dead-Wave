@@ -1,0 +1,75 @@
+# AG-103 Targeted Fixed Reds: t37 t50 t59 t96 t116 t124 t126 t193 t209 t223 t253 t266 t268 t74 t75 t76 t91 t99 t206 t222 t244
+# Started: 2026-10-20T17:43:53.593Z
+
+Game-test request 7e5781ef-0e24-4d7d-8a44-d679d9b7ddc9 queued at position 1. Waiting...
+GRANT antigravity AG-103: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t37     17 pass   0 fail  164.5s
+ok    t50     18 pass   0 fail  26.0s
+ok    t59     48 pass   0 fail  71.9s
+ok    t74     18 pass   0 fail  55.4s
+ok    t75     16 pass   0 fail  50.8s
+ok    t76     16 pass   0 fail  57.4s
+ok    t91      7 pass   0 fail  51.1s
+ok    t96     19 pass   0 fail  53.3s
+           INFO 120 spawned, 120 alive after 105.8 s and 26 legs (650 ticks)
+ok    t99      6 pass   0 fail  149.6s
+ok    t116     7 pass   0 fail  52.2s
+ok    t124     5 pass   0 fail  52.8s
+ok    t126    12 pass   0 fail  53.2s
+           INFO on the flat, walking, the lowest sole is -0.029 m
+ok    t193    18 pass   0 fail  73.3s
+ok    t206    19 pass   0 fail  66.6s
+ok    t209    13 pass   0 fail  56.1s
+           INFO shambler  head: head 5, ground 1 | chest: body 6 | legs: ground 2, legs 4
+           INFO feral     head: head 6 | chest: body 4, head 2 | legs: ground 5, legs 1
+           INFO brute     head: head 6 | chest: body 5, head 1 | legs: legs 2, ground 1, body 3
+           INFO spider    head: head 6 | chest: head 4, body 2 | legs: -
+           INFO leaper    head: head 3, body 3 | chest: body 4, head 2 | legs: -
+           INFO colossus at 90 deg 6 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus at 90 deg 14 m: its head is covered by its own gear from the camera here (no head case)
+           INFO colossus  head: head 4 | chest: body 6 | legs: legs 4, ground 1, body 1
+           INFO pistol 8 m 3 m/s +: miss, lead 0.22 m (pace x flight 0.33)
+           INFO pistol 8 m 3 m/s -: hit, lead -0.20 m (pace x flight -0.33) at 0.61 of its height
+           INFO pistol 8 m 6 m/s +: miss, lead 0.30 m (pace x flight 0.60)
+           INFO pistol 8 m 6 m/s -: miss, lead -0.30 m (pace x flight -0.60)
+           INFO pistol 18 m 3 m/s +: hit, lead 0.57 m (pace x flight 0.71) at 0.60 of its height
+           INFO pistol 18 m 3 m/s -: hit, lead -0.56 m (pace x flight -0.71) at 0.60 of its height
+           INFO pistol 18 m 6 m/s +: miss, lead 1.09 m (pace x flight 1.39)
+           INFO pistol 18 m 6 m/s -: miss, lead -1.09 m (pace x flight -1.39)
+           INFO m4 8 m 3 m/s +: hit, lead 0.09 m (pace x flight 0.23) at 0.60 of its height
+           INFO m4 8 m 3 m/s -: hit, lead -0.10 m (pace x flight -0.23) at 0.61 of its height
+           INFO m4 8 m 6 m/s +: miss, lead 0.13 m (pace x flight 0.42)
+           INFO m4 8 m 6 m/s -: miss, lead -0.13 m (pace x flight -0.42)
+           INFO m4 18 m 3 m/s +: hit, lead 0.40 m (pace x flight 0.52) at 0.64 of its height
+           INFO m4 18 m 3 m/s -: hit, lead -0.38 m (pace x flight -0.52) at 0.61 of its height
+           INFO m4 18 m 6 m/s +: miss, lead 0.72 m (pace x flight 1.02)
+           INFO m4 18 m 6 m/s -: hit, lead -0.72 m (pace x flight -1.02) at 0.61 of its height
+           INFO launcher 12 m 6 m/s +: miss, lead -0.30 m (pace x flight 2.11)
+FAIL  t222     3 pass   6 fail  195.7s
+ok    t223    15 pass   0 fail  76.0s
+FAIL  t244     3 pass   6 fail  48.3s
+ok    t253    24 pass   0 fail  77.7s
+ok    t266    32 pass   0 fail  58.9s
+ok    t268    20 pass   0 fail  50.4s
+
+21 checks: 336 pass, 12 fail
+
+by owner:
+  unassigned
+    t222   6 fail  FAIL pointing at a head is a headshot: 30/34 (was 17/64)
+           FAIL pointing at a head is a headshot: 30/34 (was 17/64)
+           FAIL pointing at a chest lands in the body: body 23, head 7 (a head only where the head covers the chest from up here)
+           FAIL pointing at the legs lands low: 11/24
+           FAIL no round aimed at a body goes into the ground or past it (10)
+           FAIL the reticle rings a head lined up, and not a chest (false, los-clear)
+           FAIL a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: miss 8, hit 8 (was 7/36)
+    t244   6 fail  FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: the body does not teleport to the crew spot (132.0 cm on the first frame)
+           FAIL he walks in and crouches beside the tube (hips moved 132.0 cm, down 0.0 cm)
+           FAIL a round is in his hand, ready (rest)
+           FAIL the round is let go into the tube on the shot
+           FAIL threw: TypeError: Cannot read properties of null (reading 'visible')
+
+# Finished: 2026-10-20T18:16:52.281Z code=1 signal=none

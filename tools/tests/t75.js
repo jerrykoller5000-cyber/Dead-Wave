@@ -39,6 +39,7 @@
     a = await stand();
     const k0 = T.getHitStumble().knees;
     T.damagePlayer(16, 'brute', fake(0, 1, { brute: true }));
+    const kHit = T.getSimTime();   // GB-204
     s = T.getHitStumble();
     ok(s.kneeT > 0 && s.knees === k0 + 1, 'a brute puts him on one knee (' + s.kneeT.toFixed(2) + ' s)');
     let minK = 1; const t0 = Date.now();
@@ -47,6 +48,7 @@
     await wait(300);
     const slide2 = a.z - p.z;
     ok(slide2 > slide1 * 1.5 && slide2 < 1.4 && Math.abs(p.x - a.x) < 0.1, 'more for a brute: ' + slide2.toFixed(2) + ' m vs ' + slide1.toFixed(2) + ' m');
+    { const w0 = Date.now(); while (T.getSimTime() - kHit < T.HIT_KNEE_S + 0.1 && Date.now() - w0 < 12000) await wait(30); }   // GB-204: the knee's 0.55 s is game time (the page runs slow)
     ok(T.getHitStumble().kneeT === 0 && T.getHitStumble().speedK === 1, 'back on his feet within ' + T.HIT_KNEE_S + ' s');
     // (3) Not knee after knee: a second heavy hit within the cooldown slides him but keeps him up.
     T.damagePlayer(16, 'brute', fake(0, 1, { brute: true }));

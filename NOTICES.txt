@@ -1,0 +1,50 @@
+THIRD-PARTY NOTICES
+
+This game includes the following software and fonts made by others, under their licences.
+
+
+three.js (vendor/three)
+-----------------------
+The MIT License
+
+Copyright © 2010-2025 three.js authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+Black Ops One and Chakra Petch (vendor/fonts)
+---------------------------------------------
+SIL Open Font License, Version 1.1. The copyright notices and the full licence are in vendor/fonts/OFL.txt.
+
+Black Ops One: Copyright (c) 2011-2012, Sorkin Type Co (www.sorkintype.com) with Reserved Font Names "Black Ops" and
+"Black Ops One".
+Chakra Petch: Copyright 2018 The Chakra Petch Project Authors (https://github.com/m4rc1e/Chakra-Petch.git)
+
+
+The desktop app
+---------------
+The desktop version is built with Tauri (https://tauri.app), licensed under the MIT License or the Apache License,
+Version 2.0, together with the Rust libraries it depends on, each under its own open-source licence. Every one of
+them, with its licence text, is in NOTICES-desktop.txt.
+
+
+Music, sound and voices
+-----------------------
+The music was made with Suno and ElevenLabs, the sound effects and voices with ElevenLabs, under the developer's paid
+plans; the rest of the game's sounds are made by its own code.

@@ -2,10 +2,10 @@
 
 state: active
 model: Grok 4.7
-task: CU-156 bench --prof: mean ms of the top PROF sections, time outside them, GPU ms, and why the megaswarm counted 65
-touching: tools/bench.mjs
-since: 2026-10-19T19:49Z
-next: waits on GB-185
+task: CU-158 t259: Quit writes the run before the menu
+touching: tools/tests/t259.js
+since: 2026-10-20T19:04Z
+next: —
 blocked-on: —
 last-report: handoffs/2026-10-18-cursor-CU-155.md
 

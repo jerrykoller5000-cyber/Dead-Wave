@@ -1,13 +1,13 @@
 # Claude
 
-state: active
+state: idle
 model: claude-opus-5-5
-task: CL-219 The night's 1 % low and the next cuts
-touching: index.html (sunShadowCadence)
-since: 2026-10-20T00:29Z
-next: CL-211 Where the night's 30 ms go, after AG-86. Every night's last
+task: —
+touching: —
+since: 2026-10-20T21:38Z
+next: CL-211 after AG-107
 blocked-on: —
-last-report: handoffs/2026-10-20-claude-CL-218.md
+last-report: handoffs/2026-10-20-claude-CL-228.md
 
 ## Notes
 

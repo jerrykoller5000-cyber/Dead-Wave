@@ -36,7 +36,7 @@ export const ZFEET = {
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
-const WALK_HIP_TRIM = { shambler: 0.012, drowned: 0.02, military: 0.012, brute: 0.04, spitter: 0.025, colossus: -0.06 };
+const WALK_HIP_TRIM = { shambler: 0.012, drowned: 0.03, military: 0.012, brute: 0.05, spitter: 0.025, colossus: -0.06 };
 
 // The roll through a step. u: 0 at the strike .. 1 at toe-off (the stance); v: 0 at toe-off .. 1 at the strike
 // (the swing); exactly one of them is given. Returns the ankle pitch (radians, toe down positive).

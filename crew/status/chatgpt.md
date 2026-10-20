@@ -1,13 +1,13 @@
 # ChatGPT
 
-state: blocked
+state: idle
 model: GPT-6
-task: GP-19941 Make ability collision trace allocation-free and verify night 20 after GB-202
-touching: game/zombie-ability-collision.js, game/zombie-ability-collision.test.mjs
-since: 2026-10-20T10:15Z
+task: —
+touching: —
+since: 2026-10-20T21:20Z
 next: —
-blocked-on: game-test slot · changes ready: GP-19941 collision sweep and 14/14 + 24/24 Node checks ready; waiting for GB-202 DONE, then queue night-20 High --prof --cpu --alloc bench through slot, update handoff and check out.
-last-report: handoffs/2026-10-19-chatgpt-GP-19940.md
+blocked-on: —
+last-report: handoffs/2026-10-20-chatgpt-GP-19944.md
 
 ## Notes
 

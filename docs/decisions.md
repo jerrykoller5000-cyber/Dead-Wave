@@ -4,6 +4,23 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-84 · 1.0 ships on itch.io; Steam comes with 1.1 (Jerry, 2026-10-20; Claude, in chat).** Jerry wanted Steam at
+  first and asked about itch.io; Claude's view: itch.io for 1.0 (free, up in minutes, no review queue, the share is
+  his to set, a safe first public release whose fixes go out the same day, and it does not stop a Steam release
+  later), then Steam with 1.1 and co-op (a far bigger audience but $100 a game, a 30% cut, a store page, trailer and
+  wishlists, and one launch boost, which "4-player co-op" earns better; Steam's free networking relay also answers
+  co-op's relay-server question). Jerry: "Yeah that sounds good to me. I can have friends play the itch.io version
+  and give us notes and criticism for the steam release."
+  - The itch.io build is the desktop download (the browser build is about 1,500 files; itch's in-browser limit is
+    500 by default).
+  - Before selling anywhere: the music and sounds' commercial licences checked (Suno, ElevenLabs): Jerry's to read,
+    Claude lists every file and where it came from.
+  - Publishing the page and the build stays Jerry's (D-81): Claude prepares it, he presses publish.
+  - The 1.0 page is restricted and password-protected (Jerry, 2026-10-20): his friends get the password; it goes
+    public when he says.
+  - The licences (Jerry, 2026-10-20): the Suno songs and the ElevenLabs music and sounds were all made on paid plans;
+    the disclosure video's song is Suno, its siren and its voices ElevenLabs; the Training Ground's clips are ElevenLabs.
+
 - **D-83 · Co-op stays after 1.0, as 1.1 (Jerry, 2026-10-20; Claude, in chat).** Jerry asked whether 4-player co-op is
   feasible and whether it belongs in 1.0. Claude's answer: feasible (the players list, `nearestPlayer`, `check-players`
   and `docs/coop.md` are the groundwork, all green), but not in 1.0: about 60 functions still assume one marine, every

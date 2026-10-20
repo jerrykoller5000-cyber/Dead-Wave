@@ -1,0 +1,5 @@
+GRANT chatgpt GP-19944: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t93     11 pass   0 fail  74.1s
+
+1 checks: 11 pass, 0 fail

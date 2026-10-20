@@ -1,0 +1,639 @@
+[
+  {
+    "id": "prof-1",
+    "fps": 52.8,
+    "draws": 256,
+    "zombies": 48,
+    "tickMs": 15.21,
+    "spikeCauses": {
+      "spikes": 37,
+      "pipelines": 23,
+      "uploads": 0,
+      "gc": 1,
+      "code": 13
+    },
+    "spikes": [
+      {
+        "frame": 79,
+        "ms": 43.4,
+        "top": [
+          "r:render 37.0",
+          "r:matrices 1.5",
+          "zombies 1.4",
+          "m:hold 0.8"
+        ],
+        "heapMB": 857,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 110,
+        "ms": 29.8,
+        "top": [
+          "r:render 15.9",
+          "zombies 4.5",
+          "r:matrices 2.9",
+          "m:hold 2.1"
+        ],
+        "heapMB": 851.8,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 128,
+        "ms": 44.2,
+        "top": [
+          "r:render 37.7",
+          "zombies 1.6",
+          "r:matrices 1.4",
+          "m:hold 0.8"
+        ],
+        "heapMB": 848.6,
+        "freedMB": -10.1,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 1
+      },
+      {
+        "frame": 224,
+        "ms": 45.4,
+        "top": [
+          "r:render 37.7",
+          "zombies 1.8",
+          "r:matrices 1.8",
+          "r:cull 0.7"
+        ],
+        "heapMB": 848.8,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 285,
+        "ms": 29.8,
+        "top": [
+          "r:render 14.5",
+          "r:matrices 3.5",
+          "zombies 3.1",
+          "m:hold 1.8"
+        ],
+        "heapMB": 841,
+        "freedMB": -0.7,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 333,
+        "ms": 38.6,
+        "top": [
+          "r:render 31.3",
+          "zombies 2.1",
+          "r:matrices 1.7",
+          "m:hold 0.9"
+        ],
+        "heapMB": 859.7,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 462,
+        "ms": 27.3,
+        "top": [
+          "r:render 13.4",
+          "zombies 4.4",
+          "r:matrices 2.8",
+          "m:hold 1.5"
+        ],
+        "heapMB": 848.5,
+        "freedMB": -0.8,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 507,
+        "ms": 43.6,
+        "top": [
+          "r:render 37.0",
+          "zombies 2.0",
+          "r:matrices 1.4",
+          "m:pose 0.7"
+        ],
+        "heapMB": 864.8,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      }
+    ],
+    "alloc": null,
+    "cpuTop": null
+  },
+  {
+    "id": "prof-2",
+    "fps": 53.5,
+    "draws": 258,
+    "zombies": 48,
+    "tickMs": 14.65,
+    "spikeCauses": {
+      "spikes": 30,
+      "pipelines": 21,
+      "uploads": 1,
+      "gc": 2,
+      "code": 6
+    },
+    "spikes": [
+      {
+        "frame": 126,
+        "ms": 40.8,
+        "top": [
+          "r:render 33.6",
+          "zombies 1.9",
+          "r:matrices 1.5",
+          "m:hold 0.9"
+        ],
+        "heapMB": 947.4,
+        "freedMB": -10,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 1
+      },
+      {
+        "frame": 213,
+        "ms": 30.1,
+        "top": [
+          "r:render 24.6",
+          "r:matrices 1.4",
+          "zombies 1.3",
+          "m:pose 0.5"
+        ],
+        "heapMB": 943.6,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 351,
+        "ms": 30.7,
+        "top": [
+          "r:render 24.6",
+          "zombies 1.5",
+          "r:matrices 1.4",
+          "m:hold 0.7"
+        ],
+        "heapMB": 953,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 515,
+        "ms": 33.4,
+        "top": [
+          "r:render 27.1",
+          "zombies 2.6",
+          "r:matrices 1.3",
+          "m:hold 0.7"
+        ],
+        "heapMB": 952.4,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 528,
+        "ms": 29.9,
+        "top": [
+          "r:render 24.1",
+          "zombies 2.0",
+          "r:matrices 1.3",
+          "m:hold 0.9"
+        ],
+        "heapMB": 971.1,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 536,
+        "ms": 30.8,
+        "top": [
+          "r:render 24.4",
+          "zombies 1.9",
+          "r:matrices 1.7",
+          "m:hold 0.7"
+        ],
+        "heapMB": 953.5,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 630,
+        "ms": 38,
+        "top": [
+          "r:render 30.8",
+          "zombies 2.8",
+          "r:matrices 1.3",
+          "m:hold 0.9"
+        ],
+        "heapMB": 957.4,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 644,
+        "ms": 32.3,
+        "top": [
+          "r:render 26.3",
+          "zombies 2.0",
+          "r:matrices 1.4",
+          "m:hold 0.6"
+        ],
+        "heapMB": 944.5,
+        "freedMB": 22.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      }
+    ],
+    "alloc": null,
+    "cpuTop": null
+  },
+  {
+    "id": "prof-3",
+    "fps": 55.1,
+    "draws": 264,
+    "zombies": 48,
+    "tickMs": 13.96,
+    "spikeCauses": {
+      "spikes": 29,
+      "pipelines": 25,
+      "uploads": 0,
+      "gc": 1,
+      "code": 3
+    },
+    "spikes": [
+      {
+        "frame": 72,
+        "ms": 42.1,
+        "top": [
+          "r:render 35.4",
+          "zombies 1.8",
+          "r:matrices 1.5",
+          "m:hold 1.0"
+        ],
+        "heapMB": 938.2,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 75,
+        "ms": 40.4,
+        "top": [
+          "r:render 35.0",
+          "zombies 1.2",
+          "r:matrices 1.2",
+          "w:minimap 0.6"
+        ],
+        "heapMB": 949.6,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 374,
+        "ms": 33,
+        "top": [
+          "r:render 26.6",
+          "r:matrices 1.8",
+          "zombies 1.5",
+          "m:hold 0.5"
+        ],
+        "heapMB": 939.1,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 387,
+        "ms": 29,
+        "top": [
+          "r:render 22.5",
+          "zombies 1.9",
+          "r:matrices 1.3",
+          "m:hold 0.8"
+        ],
+        "heapMB": 957.8,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 518,
+        "ms": 29.4,
+        "top": [
+          "r:render 23.8",
+          "zombies 1.6",
+          "r:matrices 1.2",
+          "m:hold 0.6"
+        ],
+        "heapMB": 954.1,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 559,
+        "ms": 33.4,
+        "top": [
+          "r:render 26.2",
+          "zombies 2.6",
+          "r:matrices 1.5",
+          "m:hold 1.1"
+        ],
+        "heapMB": 933.3,
+        "freedMB": 22.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 570,
+        "ms": 33.7,
+        "top": [
+          "r:render 26.6",
+          "zombies 2.4",
+          "r:matrices 1.4",
+          "m:hold 0.9"
+        ],
+        "heapMB": 950.3,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 618,
+        "ms": 30.7,
+        "top": [
+          "r:render 24.7",
+          "zombies 2.1",
+          "r:matrices 1.2",
+          "m:hold 0.7"
+        ],
+        "heapMB": 936.5,
+        "freedMB": 22.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      }
+    ],
+    "alloc": null,
+    "cpuTop": null
+  },
+  {
+    "id": "prof-cpu-alloc-4",
+    "fps": 54.7,
+    "draws": 266,
+    "zombies": 48,
+    "tickMs": 14.4,
+    "spikeCauses": {
+      "spikes": 28,
+      "pipelines": 26,
+      "uploads": 0,
+      "gc": 1,
+      "code": 1
+    },
+    "spikes": [
+      {
+        "frame": 1,
+        "ms": 25.2,
+        "top": [
+          "r:render 10.4",
+          "zombies 7.2",
+          "r:matrices 2.1",
+          "drops+hud 1.0"
+        ],
+        "heapMB": 836,
+        "freedMB": -3.2,
+        "newPipelines": 0,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 18,
+        "ms": 26.2,
+        "top": [
+          "r:render 18.5",
+          "zombies 2.3",
+          "r:matrices 1.7",
+          "r:cull 0.7"
+        ],
+        "heapMB": 823.7,
+        "freedMB": -2.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 2
+      },
+      {
+        "frame": 23,
+        "ms": 56,
+        "top": [
+          "r:render 47.0",
+          "r:matrices 2.1",
+          "zombies 1.9",
+          "m:hold 1.2"
+        ],
+        "heapMB": 836.3,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 25,
+        "ms": 55.9,
+        "top": [
+          "r:render 48.3",
+          "r:matrices 2.2",
+          "zombies 1.7",
+          "m:hold 0.7"
+        ],
+        "heapMB": 847,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 143,
+        "ms": 40.8,
+        "top": [
+          "r:render 34.9",
+          "zombies 1.6",
+          "r:matrices 1.5",
+          "m:hold 0.6"
+        ],
+        "heapMB": 832.3,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 170,
+        "ms": 44.1,
+        "top": [
+          "r:render 37.2",
+          "zombies 1.8",
+          "r:matrices 1.2",
+          "m:hold 0.7"
+        ],
+        "heapMB": 835.4,
+        "freedMB": -9.7,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 186,
+        "ms": 53.2,
+        "top": [
+          "r:render 45.3",
+          "zombies 2.4",
+          "r:matrices 1.7",
+          "m:hold 0.5"
+        ],
+        "heapMB": 829.8,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      },
+      {
+        "frame": 493,
+        "ms": 43.2,
+        "top": [
+          "r:render 36.8",
+          "zombies 2.2",
+          "r:matrices 1.5",
+          "m:hold 0.6"
+        ],
+        "heapMB": 854.9,
+        "freedMB": -9.8,
+        "newPipelines": 1,
+        "newTextures": 0,
+        "newGeometries": 0
+      }
+    ],
+    "alloc": {
+      "kbPerFrame": 903.7,
+      "topSelf": [
+        {
+          "k": "updateZombies index.html:52690",
+          "kb": 268.5
+        },
+        {
+          "k": "get three.webgpu.js:2954",
+          "kb": 82.4
+        },
+        {
+          "k": "getNodeChildren three.webgpu.js:622",
+          "kb": 34
+        },
+        {
+          "k": "trace zombie-ability-collision.js:39",
+          "kb": 27.1
+        },
+        {
+          "k": "getDynamicCacheKey three.webgpu.js:25827",
+          "kb": 26.4
+        },
+        {
+          "k": "draw three.webgpu.js:69261",
+          "kb": 21.6
+        },
+        {
+          "k": "propsNear index.html:50113",
+          "kb": 17.9
+        },
+        {
+          "k": "abs :0",
+          "kb": 17.2
+        },
+        {
+          "k": "getCacheKey$1 three.webgpu.js:592",
+          "kb": 17.1
+        },
+        {
+          "k": "update three.webgpu.js:12257",
+          "kb": 13.1
+        }
+      ]
+    },
+    "cpuTop": [
+      {
+        "k": "updateMatrixWorld three.core.js:13980",
+        "ms": 1.02
+      },
+      {
+        "k": "_projectObject three.webgpu.js:51838",
+        "ms": 0.73
+      },
+      {
+        "k": "tick index.html:56057",
+        "ms": 0.64
+      },
+      {
+        "k": "updateZombies index.html:52690",
+        "ms": 0.62
+      },
+      {
+        "k": "writeBuffer :0",
+        "ms": 0.55
+      },
+      {
+        "k": "multiplyMatrices three.core.js:11564",
+        "ms": 0.54
+      },
+      {
+        "k": "updateWorldMatrix three.core.js:14027",
+        "ms": 0.48
+      },
+      {
+        "k": "_renderObjectDirect three.webgpu.js:52172",
+        "ms": 0.44
+      },
+      {
+        "k": "bend marine-cloth.js:58",
+        "ms": 0.41
+      },
+      {
+        "k": "update three.webgpu.js:52680",
+        "ms": 0.34
+      }
+    ]
+  }
+]

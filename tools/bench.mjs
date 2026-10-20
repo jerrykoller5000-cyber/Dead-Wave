@@ -20,7 +20,10 @@
 //   tickMs    the JS the game's tick runs, the sum of every PROF section
 //   outsideMs frameMs - tickMs: the browser, the compositor, and waiting on the GPU
 //   top       the 12 heaviest sections, mean and worst ms per frame
-//   spikes    the first frames over 50 ms with their four heaviest sections
+//   spikes    the first frames over 25 ms with their four heaviest sections, the heap they freed and the pipelines,
+//             textures and geometries they built (CL-223); spikeCauses counts all of them by which it was
+//   pipelines every render pipeline built while measuring (CL-226): how many, how many three released, and the
+//             top groups by object < parents | material | state | camera, with the frames they came on
 //   gpuMs     the GPU time of one frame's render passes, from WebGPU timestamp
 //             queries ('unavailable' on the WebGL backend or without timestamp-query)
 // The game's frame is unchanged apart from the marks (a timer read each) and the
@@ -73,7 +76,8 @@ if (GFX && !['low', 'medium', 'high', 'max'].includes(GFX)) {
 }
 
 const server = await serve(ROOT, 0);
-const browser = await launch({ headless: argv.includes('--headless') });
+// CL-223: precise performance.memory, so a spike's freedMB is the heap it really freed (Chrome rounds it otherwise).
+const browser = await launch({ headless: argv.includes('--headless'), args: ['--enable-precise-memory-info'] });
 // Real animation frames. The raf=timer mode is clamped to one frame a second in a
 // throttled tab, which left every one-second window empty.
 const url = `${server.origin}/index.html?debug=1`;
@@ -151,7 +155,43 @@ const ADVANCE = `(() => {
 const PROF_START = `(() => {
   const P = TT.profDbg;
   if (!P) return { ok: false, why: 'TT.profDbg is missing' };
-  P.reset(); P.spikeMs = 50; P.on = true;
+  P.reset(); P.spikeMs = 25; P.on = true;
+  // CL-223: what each spike frame built. Pipelines (three's render-pipeline cache: a material drawn the first time in
+  // that state compiles one), textures and geometries uploaded (renderer.info.memory), counted between the frame's
+  // begin and the next one and put on the spike PROF records. A spike that built nothing and freed no heap is code.
+  const R = TT.renderer;
+  const counts = () => { const m = (R && R.info && R.info.memory) || {}; return [(R && R._pipelines && R._pipelines.caches && R._pipelines.caches.size) || 0, m.textures || 0, m.geometries || 0]; };
+  if (!P.__cl223) {
+    const begin = P.begin; let last = counts();
+    P.begin = function () { const n0 = this.spikes.length; begin.call(this); const now = counts();
+      if (this.spikes.length > n0) { const sp = this.spikes[this.spikes.length - 1]; sp.newPipelines = now[0] - last[0]; sp.newTextures = now[1] - last[1]; sp.newGeometries = now[2] - last[2]; }
+      last = now; };
+    P.__cl223 = true;
+  }
+  // CL-226: who the new pipelines are for. AG-105 found 21-26 of a night's ~30 spikes each built one (22-48 ms in
+  // r:render, about 10 MB of heap: the node builder), all through the night, not only at its start. Each one built is
+  // journalled with the object (its name or type, up to three parents), the material, the state that goes into the
+  // pipeline's key, which camera drew it (the scene's, or another: a shadow or a pass) and whether its shaders were new.
+  // A release (three drops a pipeline when its last user moves to another) is counted: a pair that keeps coming back
+  // is churn, one state toggled back and forth.
+  const PL = R && R._pipelines;
+  const J = window.__benchPipes = { made: [], released: 0, on: true };
+  if (PL && typeof PL._getRenderPipeline === 'function' && !PL.__cl226) {
+    const make = PL._getRenderPipeline, release = PL._releasePipeline;
+    PL._getRenderPipeline = function (ro, sv, sf, key, promises) {
+      const j = window.__benchPipes;
+      if (j && j.on && j.made.length < 400) { try {
+        const o = ro.object, m = ro.material, path = [];
+        for (let n = o; n && path.length < 4; n = n.parent) path.push(n.name || n.type);
+        j.made.push({ frame: P.frame, obj: path.join(' < '), kind: o ? o.type : '', mat: m ? m.type + (m.name ? ':' + m.name : '') : '',
+          state: m ? [m.transparent ? 'transparent' : 'opaque', 'side' + m.side, m.depthWrite ? 'zw' : 'no-zw', m.blending !== 1 ? 'blend' + m.blending : '', m.alphaTest > 0 ? 'alphaTest' : ''].filter(Boolean).join(' ') : '',
+          cam: ro.camera === TT.camera ? 'scene' : ((ro.camera && ro.camera.type) || '?'), newShaders: (sv.usedTimes === 0 ? 'v' : '') + (sf.usedTimes === 0 ? 'f' : '') });
+      } catch (e) {} }
+      return make.call(this, ro, sv, sf, key, promises);
+    };
+    PL._releasePipeline = function (pl) { const j = window.__benchPipes; if (j && j.on) j.released++; return release.call(this, pl); };
+    PL.__cl226 = true;
+  }
   const be = TT.renderer && TT.renderer.backend;
   let gpu = 'unavailable';
   try {
@@ -184,7 +224,13 @@ const PROF_END = `(() => {
   G.on = false;
   const be = TT.renderer && TT.renderer.backend;
   if (be && be.isWebGPUBackend) be.trackTimestamp = false;
-  return { rep, gpu: G.samples.slice() };
+  // CL-226: the pipelines journal, grouped by what they were for, the most made first.
+  const J = window.__benchPipes || { made: [], released: 0 };
+  J.on = false;
+  const groups = new Map();
+  for (const x of J.made) { const k = x.obj + ' | ' + x.mat + ' | ' + x.state + ' | ' + x.cam; const g = groups.get(k) || { k, n: 0, newShaders: 0, frames: [] }; g.n++; if (x.newShaders) g.newShaders++; if (g.frames.length < 6) g.frames.push(x.frame); groups.set(k, g); }
+  const pipes = { made: J.made.length, released: J.released, withNewShaders: J.made.filter((x) => x.newShaders).length, top: [...groups.values()].sort((a, b) => b.n - a.n).slice(0, 15), first: J.made.slice(0, 12) };
+  return { rep, gpu: G.samples.slice(), pipes };
 })()`;
 
 // --census (CL-211; on with --cpu): what the renderer walks every frame. Every Object3D under the scene, grouped by
@@ -457,8 +503,15 @@ try {
       outsideMs: r2(frameMs - tickMs),
       top: phases.slice(0, 12).map((p) => ({ k: p.k, avg: r2(p.avg), max: r2(p.max) })),
       spikes: ((got.rep && got.rep.spikes) || []).slice(0, 8),
+      // CL-223: every spike over 25 ms (up to PROF's 60) sorted by what it did: built pipelines, uploaded textures or
+      // geometry, freed 2 MB or more of heap (a garbage collection), or none of these (the game's own code).
+      spikeCauses: (() => { const all = (got.rep && got.rep.spikes) || [], c = { spikes: all.length, pipelines: 0, uploads: 0, gc: 0, code: 0 };
+        for (const sp of all) { if (sp.newPipelines > 0) c.pipelines++; else if (sp.newTextures > 0 || sp.newGeometries > 0) c.uploads++; else if (sp.freedMB >= 2) c.gc++; else c.code++; }
+        return c; })(),
       gpuMs: gpu.length ? r2(median(gpu)) : (profStart.gpu === 'on' ? 'no samples' : profStart.gpu),
-      gpuSamples: gpu.length
+      gpuSamples: gpu.length,
+      // CL-226: every pipeline built while measuring, and what for (the PROF_END journal)
+      pipelines: got.pipes || null
     };
   }
   if (cpuProfile) {
