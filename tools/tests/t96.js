@@ -68,9 +68,11 @@
     ok(shown(zA), 'mid-attack, far past the line: drawn');
     ok(shown(zS), 'a spitter that has just checked its line: drawn');
     zA.attackWindup = 0; zA.swingT = 0; zA._pendingAttack = null;
-    await wait(700);
+    // CL-220: the 2 s hold is game time, and the suite's page runs slow (dt is capped): wait on the sim clock.
+    const simWait = async (s) => { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < s && Date.now() - w0 < 20000) await wait(30); };
+    await simWait(0.7);
     const aStill = shown(zA);
-    await wait(2200);
+    await simWait(2.2);
     ok(aStill && hidden(zA), 'after the attack it stays drawn a moment, then goes (2 s)');
     ok(hidden(zS), 'the spitter too, once it stops checking a line (out of its hold range)');
 
@@ -84,7 +86,7 @@
     placeDepth(zIn, F + 18); placeDepth(zA, F + 18, 8); await wait(250);   // they walk in meanwhile
     T.setFogCullDbg(false); await wait(250);
     ok(shown(zIn) && shown(zA) && T.fogCullDbg().hidden === 0, 'switch off: every zombie drawn');
-    T.setFogCullDbg(true); await wait(250);
+    T.setFogCullDbg(true); await simWait(0.3);
     ok(hidden(zIn) && hidden(zA), 'switch on: hidden again');
 
     // (7) By day the fog is 640 m: nothing at 90 m is hidden.

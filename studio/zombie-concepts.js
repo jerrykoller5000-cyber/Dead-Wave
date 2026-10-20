@@ -28,6 +28,20 @@ export function prepareConvoySleeperAppearance(T, g) {
   const u = g.userData;
   for (const key of ['bodyMats', 'pulseMats', 'eyeMats', 'mats']) if (Array.isArray(u[key])) u[key] = u[key].map(m => clones.get(m) || m);
   if (u.torso?.userData?.bodyMat) u.torso.userData.bodyMat = clones.get(u.torso.userData.bodyMat) || u.torso.userData.bodyMat;
+  // GP-19939: the visible eyes now live in the skinned body draw. Tint their
+  // packed emissive bytes as well as the hidden source material whose intensity
+  // drives that draw, without recolouring an ordinary spitter's shared source.
+  const eyeGlow = u.eyeMats?.[0]?.emissive;
+  if (eyeGlow) for (const skin of u.skinMeshes || []) {
+    const range = skin.userData.eyeGlowRange, attr = skin.geometry?.attributes?.zGlow;
+    if (!range || !attr) continue;
+    for (let i = range[0]; i < range[0] + range[1]; i++) {
+      attr.array[i * 4] = Math.round(eyeGlow.r * 255);
+      attr.array[i * 4 + 1] = Math.round(eyeGlow.g * 255);
+      attr.array[i * 4 + 2] = Math.round(eyeGlow.b * 255);
+    }
+    attr.needsUpdate = true;
+  }
   u.convoySleeperLook = true;
   return g;
 }

@@ -1,13 +1,13 @@
 # Antigravity
 
-state: active
+state: idle
 model: Gemini 3.1 Pro
-task: AG-95 CL-217 ranger cache t266 + t52 + live visual look
-touching: qa/2026-10-19-AG-95/*
-since: 2026-10-19T23:34Z
-next: AG-95 CL-217's look, after AG-92 (the ranger cache, 23:15Z). Throu
+task: —
+touching: —
+since: 2026-10-20T10:36Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-10-19-antigravity-AG-92.md
+last-report: handoffs/2026-10-20-antigravity-AG-102.md
 
 ## Notes
 
@@ -33,12 +33,16 @@ a real GPU the way you can.
   With ?debug=1, window.TT is available in the DevTools console.
 
 ### Status (2026-10-19)
-- **AG-80**: DONE. All 8 buildables & 24 tier variants verified in inspector via slot (`qa/2026-10-15-AG-80/shots-after/sheet.jpg`).
-- **AG-79**: DONE. Skeletal Marine, Bone Raft, Wood wall, Wood floor, Barricade, and Sandbag Wall verified in inspector via slot (`qa/2026-10-15-AG-79/shots-after/sheet.jpg`).
-- **AG-81**: DONE. Marine fabric (crouch, run, reload, aim, grenade, dive in `issue`, `hot`, `full` kit + 4 hats) captured in inspector (`qa/2026-10-18-AG-81/shots/sheet.jpg`); reported boonie side grommets and ballcap seam curve to Claude.
-- **AG-82**: DONE. `tools/bench.mjs` run on Jerry's RTX 5080 across Nights 5, 10, 14, 18, 20 and megaswarm (48) at default (`high`) and `max` (`qa/2026-10-18-AG-82/report.md`).
-- **AG-84**: DONE. Trimmed `build.sandbag` variant 2 from 6,216 tris / 248 parts to 1,428 tris / 2 meshes (`qa/2026-10-18-AG-84/report.md`).
-- **AG-83**: DONE. Built NSIS installer (`Grave Shift_0.1.0_x64-setup.exe`), installed to `%LOCALAPPDATA%\Grave Shift`, verified clean-profile first run, Night 1, F5 reload (CU-149), Quit confirm (CU-150), and Reopen settings/best-run persistence (`qa/2026-10-18-AG-83/report.md`).
-- **AG-85**: DONE. Re-ran `tools/bench.mjs` on Jerry's RTX 5080 after CL-210 + GP-19925 (`qa/2026-10-18-AG-85/report.md`).
-- **AG-86**: DONE. Part 1: verified GP-19929 walking feet (5 rigs PASS) and GP-19930 live budget models + post-budget Night 20 High (`32.4 fps`). Part 2: ran `bench.mjs --prof` & `--cpu` (`CL-213`/`CL-211`) on Night 10 High (`34.8 fps`, `r:render 20.63 ms`, `gpuMs 0.26 ms`), Night 20 High (`29.3`/`32.5 fps`, `r:render 21.85 ms`, `r:rigSkin 0.11 ms`, `LightsNode.updateBefore 20.60 ms/f`, `ShadowNode.updateShadow 8.53 ms/f`, `updateMatrixWorld 7.13 ms/f`, `gpuMs 0.27 ms`), and Megaswarm 48 (`59.0 fps`, `r:render 14.48 ms`, `gpuMs 0.19 ms`) (`qa/2026-10-19-AG-86/report.md`, `prof-lines.jsonl`).
-- **AG-87**: DONE. Verified `GP-19932` live recheck on Jerry's RTX 5080 (`qa/2026-10-19-AG-87/shots/gp19932-sheet.jpg`): Screamer (`5,768` tris / `4` meshes) has dark obsidian upper head & glowing pink eyes; Spitter (`5,228` tris / `4` meshes) has glowing yellow-green ooze chin drips.
+- **AG-86**: DONE. Baseline Night 20 High `33.7 fps` (`917` draws, `r:render 21.22 ms`, `22,551` nodes).
+- **AG-91**: DONE. Post-`CL-215` Night 20 High `38.6 fps` (`596` draws, `r:render 15.79 ms`, `14,705` nodes).
+- **AG-92**: DONE. Verified `CL-216`/`GP-19937` radio relay day mission (`t266` 25/25 pass, `qa/2026-10-19-AG-92/01..06.png`).
+- **AG-94**: DONE. Verified `CL-216` crashed convoy & bridge ambush (`t266` 25/25, `t267` 26/26, `qa/2026-10-19-AG-94/01..08.png`).
+- **AG-95**: DONE. Merged static world site props (`index.html`, `t269.js` 18/18 pass, `-301` scene meshes, `qa/2026-10-19-AG-95/01..10.png`).
+- **AG-96**: DONE. Post-`CL-217` Night 20 High `47.7 fps` (`334` draws, `r:render 9.24 ms`, `9,595` nodes).
+- **AG-93**: DONE. Built trapper's safe path day mission (`game/trapper-path.js`, `game/trapper-path.test.mjs` 4/4, `ui/strings.js`, `index.html`, `t268.js` 20/20, `t52` 17/17, `t215` 4/4, `qa/2026-10-19-AG-93/01..04.png`).
+- **AG-97**: DONE. Verified `CL-218` second cuts, `CL-219` night shadows, `GP-19938` ambulance, `GP-19939` merged zombie eyes, `GB-199` props + 3x Night 20 High `--prof --cpu`: median `55.9 fps` (peak `57.6 fps`), `265` draws (`-69` vs `AG-96`), `r:render 7.00 ms`, `computeBoundingSphere` gone (`qa/2026-10-19-AG-97/report.md`).
+- **AG-98**: DONE. Road stage 5 desktop build end-to-end (`dist/dead-wave` -> `%LOCALAPPDATA%\Grave Shift\game`, `dead-wave.exe` on `http://dw.localhost/index.html`, Title, Day 1 prep, 6 day mission sites, Hollows warren + cave mouth, Night 1 combat with `elevenlabs/night-01` music & sound, `81/81` valid textures, `0` failed decodes, only 2 silent 404 probes in `core/takes.js:197-199`; `qa/2026-10-19-AG-98/`).
+- **AG-99**: DONE. Verified `~ site hikers` (`t264` 22/22) and `~ site fuel` (`t267` 24/24) on headless and real WebGPU (`qa/2026-10-20-AG-99/01..14.png`), `59.7 fps` mean (`59.5 fps` 1% low) carrying the leaking fuel can; sent polish notes to `grokbot` and `chatgpt`.
+- **AG-100**: DONE. Ran suite Chunks F (`t240..t268`: 402 pass, 15 fail), E (`t196..t229`: 637 pass, 8 fail), and D (`t164..t195`: 747 pass, 1 fail) (`95` checks: `1,786 pass, 24 fail`; `qa/2026-10-20-AG-100/chunk-{F,E,D}.log`).
+- **AG-101**: DONE. Fixed `game/trapper-path.js` (`escapeRow` clear on `safe-stone` + `hypot2`), verified `t268` `20/20 pass` through the slot, and verified `GP-19940` marine waist seam/normals in the Marine Inspector (`qa/2026-10-20-AG-101/01..06.png`).
+- **AG-102**: DONE. Ran suite Chunks C (`t132..t163`: 465 pass, 0 fail), B (`t100..t131`: 381 pass, 4 fail), and A (`t68..t99`: 432 pass, 9 fail) (`95` checks: `1,278 pass, 13 fail`; combined `t68..t268` across `AG-100..102`: `190` checks, `3,065 pass, 36 fail`; `qa/2026-10-20-AG-102/chunk-{C,B,A}.log`).

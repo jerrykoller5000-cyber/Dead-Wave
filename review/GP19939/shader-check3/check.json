@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-20T00:54:40.279Z",
+ "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "results": [
+  {
+   "id": "zombie.shambler",
+   "variant": null,
+   "mode": "statue",
+   "ok": true,
+   "ms": 159,
+   "tris": 5008,
+   "size": [
+    0.814,
+    1.945,
+    0.717
+   ],
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,317 @@
+{
+  "realtestT264": {
+    "pass": 22,
+    "fail": 0,
+    "fails": [],
+    "lines": [
+      "PASS a normal run: a river-bank tree 116.1 m from the camp (river true)",
+      "PASS the bag hangs from a tree by the river (hanging)",
+      "PASS about 5 m up: 5.32 m",
+      "PASS the site is locked while the kit hangs (locked)",
+      "PASS a round 1.5 m off the rope leaves it (hanging)",
+      "PASS a round through the rope cuts it (falling)",
+      "PASS GB-199: the rope parts there: a frayed end over the bough, a stub on the bag ({\"frayTop\":true,\"stub\":true,\"ropeB\":true,\"ropeBLen\":0.63})",
+      "PASS the dry run: it lands on the ground (ground)",
+      "PASS on the dry bank: 0.24 m over it",
+      "PASS the river run: it splashes down and floats (floating)",
+      "PASS the current carries it: 1.18 m in 1.5 s",
+      "PASS not in reach from 6 m",
+      "PASS left 40 s, it snags in the pool (snagged)",
+      "PASS nothing rises while he is far off",
+      "PASS 5 drowned rise at the pool (3-5; 5 new; risen true, he is 8.0 m off, zombies 5)",
+      "PASS within 2 m it can be taken",
+      "PASS the site itself stays locked until the kit is his; only the bag is in reach (locked)",
+      "PASS E takes the kit (caught)",
+      "PASS through the site claim (claimed)",
+      "PASS the reward: one medpen (0 -> 1)",
+      "PASS once a run: the site stays taken (claimed)",
+      "PASS no page errors"
+    ]
+  },
+  "realtestT267": {
+    "pass": 24,
+    "fail": 0,
+    "fails": [],
+    "lines": [
+      "PASS the pump and the can are at the depot (at-pump)",
+      "PASS the depot is locked until the fuel is home (locked)",
+      "PASS at the pump: \"Hold E - Fill the can\"",
+      "PASS a short hold puts some in (0.73 s of 3)",
+      "PASS held on, the can fills and he takes it (carried)",
+      "PASS carried: slowed to 0.62 and hands full (no firing)",
+      "PASS GB-199: his gun is put away while he carries the can",
+      "PASS a bite or a stray round does nothing (carried)",
+      "PASS a spitter's acid sets it off; a fresh can waits at the pump (at-pump, booms 1)",
+      "PASS 'site fuel carry': filled (carried, booms 0, last acid)",
+      "PASS a burning zombie against him sets it off (at-pump, fire)",
+      "PASS it leaks: 7 drips over 12 m",
+      "PASS the smell calls the dead: 1 came",
+      "PASS E puts it down, and it does not go up (down)",
+      "PASS down: full speed, hands free",
+      "PASS GB-199: down, the gun is back in his hand",
+      "PASS by the can: \"E - Pick up the can\"",
+      "PASS E picks it up (carried)",
+      "PASS at the generator: \"E - Pour it in\"",
+      "PASS E pours it into the generator (poured)",
+      "PASS the depot's claim pays its fuel (claimed, {\"approach\":{\"x\":-43.06753951736913,\"y\":-3.11148462425907,\"z\":-17.279649844052265},\"distance\":54.41110953310242,\"reachable\":false,\"blockedBy\":\"distance\"})",
+      "PASS the depot is unlocked (distance)",
+      "PASS poured, nothing more can go up",
+      "PASS no page errors"
+    ]
+  },
+  "hikersAudit": {
+    "hanging": {
+      "phase": "hanging",
+      "river": true,
+      "tree": {
+        "x": -94.1803644989364,
+        "z": -12.618587683763359
+      },
+      "treeGroundY": -0.19410476366166757,
+      "hang": {
+        "x": -96.88626684888827,
+        "y": 4.8058952363383325,
+        "z": -11.103282367790316
+      },
+      "bag": {
+        "x": -96.88626684888827,
+        "y": 4.8058952363383325,
+        "z": -11.103282367790316
+      },
+      "groundY": -0.5117370850886348,
+      "heightAboveGround": 5.318,
+      "waterAtHang": {
+        "level": null,
+        "depth": 0,
+        "wading": 0,
+        "current": {
+          "x": 0,
+          "z": 0
+        },
+        "speed": 0
+      },
+      "ropeSegments": [
+        [
+          {
+            "x": -94.62690250027718,
+            "y": 1.1058952363383325,
+            "z": -12.368526403012517
+          },
+          {
+            "x": -96.88626684888827,
+            "y": 5.785895236338333,
+            "z": -11.103282367790316
+          }
+        ],
+        [
+          {
+            "x": -96.88626684888827,
+            "y": 5.785895236338333,
+            "z": -11.103282367790316
+          },
+          {
+            "x": -96.88626684888827,
+            "y": 5.105895236338332,
+            "z": -11.103282367790316
+          }
+        ]
+      ],
+      "prompt": "",
+      "bannerTitle": "",
+      "bannerSub": ""
+    },
+    "cutAndFall": {
+      "phaseAfterShot": "falling",
+      "cutInfo": {
+        "frayTop": true,
+        "stub": true,
+        "ropeB": true,
+        "ropeBLen": 0.08
+      },
+      "bagPos": {
+        "x": -96.88626684888827,
+        "y": 4.8058952363383325,
+        "z": -11.103282367790316
+      }
+    },
+    "floating": {
+      "phase": "floating",
+      "bag": {
+        "x": -101.56056846559581,
+        "y": -2.711621901492866,
+        "z": -9.217000410557793
+      },
+      "water": {
+        "level": -2.6617774002158505,
+        "depth": 0.3901129356046633,
+        "wading": 0.3000868735420487,
+        "current": {
+          "x": -0.3813940494571267,
+          "z": -0.6810608026020127
+        },
+        "speed": 0.780580064953111
+      },
+      "groundY": -3.051890335820514,
+      "bagMinusWaterY": -0.05,
+      "grabbableAt3m": false
+    },
+    "beforeGrab": {
+      "phase": "floating",
+      "grabbable": true,
+      "prompt": "EGrab the kit",
+      "medkitsBefore": 0
+    },
+    "afterGrab": {
+      "phase": "caught",
+      "done": true,
+      "site": "claimed",
+      "medkitsAfter": 1,
+      "bannerTitle": "",
+      "bannerSub": ""
+    },
+    "dryGround": {
+      "phase": "ground",
+      "bag": {
+        "x": -97.23526925526815,
+        "y": -0.41904249947329664,
+        "z": -10.907841020217578
+      },
+      "groundY": -0.6590424994732967,
+      "bagMinusGroundY": 0.24,
+      "grabbable": false,
+      "prompt": "EGrab the kit"
+    }
+  },
+  "fuelAudit": {
+    "atPump": {
+      "phase": "at-pump",
+      "fill": 0,
+      "prompt": "Hold E - Fill the can",
+      "kioskPrompt": "Hold EFill the can",
+      "gunShownBeforeCarry": true,
+      "props": {
+        "pump": {
+          "x": -46.24885986092877,
+          "z": -16.21832950049262,
+          "y": -2.9904560270076592
+        },
+        "gen": {
+          "x": 6.6,
+          "z": 1.5,
+          "y": -3.1686761379241943
+        }
+      },
+      "canPos": {
+        "x": -45.49885986092877,
+        "y": -2.7604560270076592,
+        "z": -16.01832950049262
+      },
+      "pumpGroundY": -2.9904560270076592,
+      "genGroundY": -3.1686761379241943,
+      "canGroundY": -2.992832195048837,
+      "reach": {
+        "approach": {
+          "x": -43.06753951736913,
+          "y": -3.11148462425907,
+          "z": -17.279649844052265
+        },
+        "distance": 2.2935909209971856,
+        "reachable": false,
+        "blockedBy": "locked"
+      }
+    },
+    "filling": {
+      "phase": "at-pump",
+      "fill": 1.41,
+      "prompt": "Filling...",
+      "kioskPrompt": "Filling..."
+    },
+    "putDownAndDrips": {
+      "phase": "down",
+      "slowFactor": 1,
+      "fireBlocked": false,
+      "gunShownWhenDown": true,
+      "canPos": {
+        "x": -44.648859860928766,
+        "y": -2.860690925009406,
+        "z": -0.5492824605504104
+      },
+      "groundY": -3.090690925009406,
+      "canMinusGroundY": 0.23,
+      "dripsCount": 9,
+      "prompt": "E - Pick up the can",
+      "kioskPrompt": "EPick up the can"
+    },
+    "fireExplosion": {
+      "beforePhase": "carried"
+    },
+    "fireExplosionAfter": {
+      "phaseAfterFire": "at-pump",
+      "booms": 1,
+      "lastBoom": "fire",
+      "burningPools": 1
+    },
+    "atHqGenerator": {
+      "genPos": {
+        "x": 6.6,
+        "z": 1.5,
+        "y": -3.1686761379241943
+      },
+      "genGroundY": -3.1686761379241943,
+      "phase": "carried",
+      "prompt": "E - Pour it in",
+      "kioskPrompt": "EPick up the can"
+    },
+    "afterPour": {
+      "phase": "poured",
+      "done": true,
+      "siteState": "claimed",
+      "reach": {
+        "approach": {
+          "x": -43.06753951736913,
+          "y": -3.11148462425907,
+          "z": -17.279649844052265
+        },
+        "distance": 54.36418477887379,
+        "reachable": false,
+        "blockedBy": "distance"
+      },
+      "gunShownAfterPour": true,
+      "bannerTitle": "",
+      "bannerSub": ""
+    }
+  },
+  "carryFps": {
+    "framesSampled": 210,
+    "meanFps": 59.7,
+    "meanFrameMs": 16.75,
+    "low1PctFps": 59.5,
+    "worstFps": 30.1,
+    "slowFactor": 0.62,
+    "fireBlocked": true,
+    "gunShownWhileCarrying": false,
+    "dripsBefore": 0,
+    "dripsAfter": 9,
+    "dripsAdded": 9,
+    "draws": 37304,
+    "tris": 809133
+  },
+  "consoleErrors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "pageErrors": [
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:30545/ui/prep-checklist.js:116:15\n    at <anonymous>:10:12\n    at <anonymous>:57:5",
+    "TypeError: Failed to execute 'contains' on 'Node': parameter 1 is not of type 'Node'.\n    at http://127.0.0.1:30545/ui/prep-checklist.js:116:15\n    at <anonymous>:24:12"
+  ]
+}

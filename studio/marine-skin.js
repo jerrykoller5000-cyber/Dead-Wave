@@ -42,15 +42,21 @@ function bakeable(o, m, live = false) {
 }
 
 // What a source looks like now, as a flat list compared item by item.
+const STATE_N = 29;
+// CL-220: written by index into a fixed-length array (emptying and pushing it again every source every frame cost
+// 24 kB a frame of backing stores at night 20, GP-19940's allocation profile).
 function stateOf(rig, o, out) {
-  out.length = 0;
   let shown = o.visible && !!o.parent;
   for (let p = o.parent; shown && p && p !== rig.root; p = p.parent) shown = p.visible;
   const m = o.material, g = o.geometry, c = m && m.color, e = m && m.emissive;
-  out.push(shown ? 1 : 0, o.parent, m, g, g && g.attributes.position.version, g && g.attributes.color ? g.attributes.color.version : -1,
-    m && m.version, c ? c.r : 0, c ? c.g : 0, c ? c.b : 0, m && m.roughness, m && m.metalness, e ? e.getHex() : 0, m && m.emissiveIntensity,
-    m && m.transparent, m && m.opacity, m && m.side, m && m.flatShading, m && m.vertexColors,
-    o.position.x, o.position.y, o.position.z, o.quaternion.x, o.quaternion.y, o.quaternion.z, o.quaternion.w, o.scale.x, o.scale.y, o.scale.z);
+  out[0] = shown ? 1 : 0; out[1] = o.parent; out[2] = m; out[3] = g; out[4] = g && g.attributes.position.version;
+  out[5] = g && g.attributes.color ? g.attributes.color.version : -1;
+  out[6] = m && m.version; out[7] = c ? c.r : 0; out[8] = c ? c.g : 0; out[9] = c ? c.b : 0; out[10] = m && m.roughness; out[11] = m && m.metalness;
+  out[12] = e ? e.getHex() : 0; out[13] = m && m.emissiveIntensity; out[14] = m && m.transparent; out[15] = m && m.opacity; out[16] = m && m.side;
+  out[17] = m && m.flatShading; out[18] = m && m.vertexColors;
+  out[19] = o.position.x; out[20] = o.position.y; out[21] = o.position.z; out[22] = o.quaternion.x; out[23] = o.quaternion.y; out[24] = o.quaternion.z;
+  out[25] = o.quaternion.w; out[26] = o.scale.x; out[27] = o.scale.y; out[28] = o.scale.z;
+  if (out.length !== STATE_N) out.length = STATE_N;
   return out;
 }
 function same(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
@@ -171,11 +177,11 @@ export function bakeRigSkin(THREE, TSL, root, { skip = [], mergeTextured = false
   const sources = [];
   const walk = (o) => {
     if (skipSet.has(o)) return;
-    if (o.isMesh && bakeable(o, o.material, bakeLive)) sources.push({ o, state: [], baked: false, hits: [], bend: bendOf(root, o) });
+    if (o.isMesh && bakeable(o, o.material, bakeLive)) sources.push({ o, state: new Array(STATE_N), baked: false, hits: [], bend: bendOf(root, o) });
     for (const c of o.children) walk(c);
   };
   for (const c of root.children) walk(c);
-  const rig = { THREE, TSL, root, sources, byObj: new Map(sources.map((s) => [s.o, s])), out: new Set(), skins: [], plainMats: new Map(), mergeTextured, bakeLive, bakes: 0, handedBack: 0, _st: [] };
+  const rig = { THREE, TSL, root, sources, byObj: new Map(sources.map((s) => [s.o, s])), out: new Set(), skins: [], plainMats: new Map(), mergeTextured, bakeLive, bakes: 0, handedBack: 0, _st: new Array(STATE_N) };
   root.userData.rigSkin = rig;
   buildSkins(THREE, TSL, rig);
   RIGS.add(rig._ref = typeof WeakRef === 'function' ? new WeakRef(rig) : { deref: () => rig });

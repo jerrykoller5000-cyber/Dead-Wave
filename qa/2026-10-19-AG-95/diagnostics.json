@@ -1,0 +1,58 @@
+{
+  "diag": {
+    "built": true,
+    "off": false,
+    "state": {
+      "code": [
+        7,
+        1,
+        4
+      ],
+      "order": [
+        "radio",
+        "truck",
+        "board"
+      ],
+      "clues": {
+        "radio": 7,
+        "board": 4,
+        "truck": 1
+      },
+      "entry": [],
+      "unlocked": false
+    },
+    "unitsCount": 2,
+    "unitLocalPositions": [
+      {
+        "x": -0.934,
+        "y": 1,
+        "z": 0.64,
+        "ry": -1.5707963267948966
+      },
+      {
+        "x": 0.934,
+        "y": 1,
+        "z": 0.64,
+        "ry": 1.5707963267948966
+      }
+    ],
+    "logPos": {
+      "x": 40.30884744459518,
+      "y": -6.129800115456654,
+      "z": -24.12429355328278,
+      "ry": 5.0535814316883725
+    },
+    "kpPos": {
+      "x": 0,
+      "y": 0.118,
+      "z": 0.257
+    },
+    "lidPos": {
+      "x": 0,
+      "y": 0.3235,
+      "z": 0.135
+    }
+  },
+  "t52Out": "PASS props file loads: seven sites\nPASS sites match the CL-6 centres and approaches and GP-8 facings\nPASS the world builds the props at load (CL-15)\nPASS seven props, in the scene\nPASS colliders on the radio cabinet and the fuel stand only (fuel,radio)\nPASS no ground cover within 1.3 m of any prop (0)\nFAIL two draws a prop (three for the radio): 3,2,6,2,2,2,3\nFAIL every state within GP-8's footprint: salvage/closed 0.69x0.58x0.34\nPASS every prop sits on the lowest ground under it\nPASS every approach point has 0.75 m clear\nPASS radio starts broken, light amber\nPASS repaired: connectors seated, light green\nPASS a cache goes closed → open → empty (closed,open,empty)\nPASS fuel: a partial claim shows partial\nPASS unavailable and unknown ids leave a prop alone\nPASS an unknown state is refused\ninfo: 4463 triangles drawn for all seven\nPASS cheap: under 8,000 triangles for all seven",
+  "t266Out": "PASS the mission is built (the rangers' camp and truck are on the map)\nPASS three digits 1-9 and an order of the three things: truck radio board = 162\nPASS four places to look: the radio, the board, both doors\nPASS the radio's display is painted with its channel\nPASS \"UNIT n\" on both doors\nPASS the search log is pinned on the board\nPASS the keypad and the lid's three pictures are on the lockbox\nPASS the site is locked until the right digits go in\nPASS at the lockbox: \"E — Lockbox\"\nPASS the objectives cannot reach it (locked)\nPASS E opens its keypad\nPASS with the lid's pictures over the display\nPASS nothing on it says \"code\" or \"clue\": \"Ranger lockbox_ _ _1234567891-9 · E leave\"\nPASS a wrong code flashes WRONG\nPASS no penalty, still shut, the entry cleared\nPASS E leaves the keypad\nPASS radio: \"E — Look\"\nPASS radio: E shows it big\nPASS radio: E steps back\nPASS board: \"E — Look\"\nPASS board: E shows it big\nPASS board: E steps back\nPASS truck: \"E — Look\"\nPASS truck: E shows it big\nPASS truck: E steps back\nPASS the right code: OPEN\nPASS the keypad shuts by itself after\nPASS the site is open to the objectives now (null)\nPASS and the lockbox says nothing of its own any more\nPASS its lamp is green\nPASS reset deals new digits and shuts it\nPASS no errors"
+}

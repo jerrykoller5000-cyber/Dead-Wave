@@ -39,13 +39,13 @@
     { const c0 = Date.now(); let prevVy = g.vy;
       while (!land && Date.now() - c0 < 4000 && T.grenadesInFlight.includes(g)) { if (g.vy > prevVy + 0.5) land = { x: g.pos.x, z: g.pos.z }; prevVy = g.vy; await wait(10); } }
     ok(land && Math.hypot(land.x - want.x, land.z - want.z) < 2.5, 'it came down where the arc said: ' + (land ? f2(Math.hypot(land.x - want.x, land.z - want.z)) + ' m off' : 'no bounce seen'));
-    await wait(1600);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.6 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     // (2) A tap lobs it short.
     ok(T.startGrenadeCharge() === true, 'G down again');
     T.releaseGrenadeCharge();
     await until(() => D().n === n0 - 2, 1500);
     ok(D().last && D().last.h <= T.GRENADE_THROW.LOB.h + 0.5 && D().last.charge < 0.1, 'a tap is a short lob: ' + JSON.stringify(D().last));
-    await wait(1700);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.7 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     // (3) The keys: G down holds, G up throws.
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyG', key: 'g', bubbles: true }));
     const held = D().charging;
@@ -53,7 +53,7 @@
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyG', key: 'g', bubbles: true }));
     await until(() => D().n === n0 - 3, 1500);
     ok(held && !D().charging && D().last.charge > 0.1 && D().n === n0 - 3, 'G down holds, G up throws (held ' + f2(D().last.charge) + ' s)');
-    await wait(1700);
+    { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.7 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     ok(T.startGrenadeCharge() === false && !D().charging, 'none left: G does not start a hold');
     // (4) The 40 mm draws no arc. The round leaves along the cursor and stays on that line.
     const take = async (w) => {

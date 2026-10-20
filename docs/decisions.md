@@ -4,6 +4,16 @@ Every call made for the game and the crew, in full, newest first. Claude writes 
 they stand unless Jerry overrides them. `crew/BOARD.md` lists each one on a single line; this file has the
 details. Moved here from the board on 2026-09-29 so the board stays short. Nothing was cut.
 
+- **D-83 · Co-op stays after 1.0, as 1.1 (Jerry, 2026-10-20; Claude, in chat).** Jerry asked whether 4-player co-op is
+  feasible and whether it belongs in 1.0. Claude's answer: feasible (the players list, `nearestPlayer`, `check-players`
+  and `docs/coop.md` are the groundwork, all green), but not in 1.0: about 60 functions still assume one marine, every
+  mission and the Hollows would need sync and a two-machine test, the frame target isn't met yet, and internet play
+  needs a relay server (his money and account). Jerry: "I would just continue the route we have keeping in mind that we
+  will implement later and then we will plan for a possible 1.1 multiplayer." So D-58 stands: R7 is written when R6
+  closes, as 1.1, starting with a second marine on one PC, then LAN, then the internet relay. Until then the rule holds:
+  new game logic reads the players list, never `player.position`. His calls for R7 (revives, when a run ends, friendly
+  fire, breaking a catch) wait for then.
+
 - **D-82 · The day missions are in 1.0 (Jerry, 2026-10-19; Claude, in chat).** Jerry: "If you think it is wise to bundle
   them with 1.0 let us go ahead and do so." The six supply sites still opened with a plain E search (the medical convoy,
   the ranger cache, the hikers' first-aid kit, the trapper's supplies, the fuel depot, the utility truck) become

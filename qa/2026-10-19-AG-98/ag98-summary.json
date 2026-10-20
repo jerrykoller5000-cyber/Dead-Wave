@@ -1,0 +1,2148 @@
+{
+  "packageCmdOutput": "Dead Wave packaged -> dist\\dead-wave (1502 files, 567.0 MB, v0.1.0, 952 takes)",
+  "syncStats": {
+    "installDir": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift",
+    "exe": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\dead-wave.exe",
+    "gameDir": "C:\\Users\\Zero\\AppData\\Local\\Grave Shift\\game",
+    "versionJson": {
+      "version": "0.1.0",
+      "built": "2026-10-20T03:09:31.675Z"
+    }
+  },
+  "networkRequestsTotal": 307,
+  "http404AndErrors": [
+    {
+      "status": 404,
+      "statusText": "Not Found",
+      "url": "http://dw.localhost/__zsounds",
+      "initiator": "script (window.fetch @ :8:26)",
+      "stack": [
+        "window.fetch @ :9:27",
+        "fetchJson @ http://dw.localhost/core/audio.js:540:23",
+        "(anon) @ http://dw.localhost/core/takes.js:197:31",
+        "init @ http://dw.localhost/core/takes.js:208:7",
+        "ready @ http://dw.localhost/core/takes.js:248:20"
+      ]
+    },
+    {
+      "status": 404,
+      "statusText": "Not Found",
+      "url": "http://dw.localhost/z-sounds/levels.json",
+      "initiator": "script (window.fetch @ :8:26)",
+      "stack": [
+        "window.fetch @ :9:27",
+        "fetchJson @ http://dw.localhost/core/audio.js:540:23",
+        "(anon) @ http://dw.localhost/core/takes.js:199:29"
+      ]
+    }
+  ],
+  "loadingFailed": [],
+  "consoleErrors": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"foldRM\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"position\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "THREE.TSL: Vertex attribute \"normal\" not found on geometry."
+    }
+  ],
+  "pageErrors": [],
+  "titleCheck": {
+    "url": "http://dw.localhost/index.html",
+    "title": "Grave Shift",
+    "desktopFlag": true,
+    "versionText": "v0.1.0",
+    "renderer": "WebGPURenderer",
+    "musicState": {
+      "stage": "calm",
+      "mood": "menu",
+      "nextMood": null,
+      "front": "http://dw.localhost/assets/soundtrack/menu_theme.mp3",
+      "frontTime": 3.062267,
+      "deckTrack": "menu_theme",
+      "deckLevel": 0.5472000000004967,
+      "volume": 0.048925367635404,
+      "prox": 0.7,
+      "briefDuck": 1,
+      "briefingOpen": false,
+      "day": 1,
+      "lastDeckError": null,
+      "waveByDay": [
+        {
+          "from": 1,
+          "track": "elevenlabs/night-01"
+        },
+        {
+          "from": 2,
+          "track": "elevenlabs/night-02"
+        },
+        {
+          "from": 3,
+          "track": "elevenlabs/night-03"
+        },
+        {
+          "from": 4,
+          "track": "elevenlabs/night-04"
+        },
+        {
+          "from": 5,
+          "track": "elevenlabs/night-05"
+        },
+        {
+          "from": 6,
+          "track": "elevenlabs/night-06"
+        },
+        {
+          "from": 7,
+          "track": "elevenlabs/night-07"
+        },
+        {
+          "from": 8,
+          "track": "elevenlabs/night-08"
+        },
+        {
+          "from": 9,
+          "track": "elevenlabs/night-09"
+        },
+        {
+          "from": 10,
+          "track": "elevenlabs/night-10"
+        },
+        {
+          "from": 11,
+          "track": "elevenlabs/night-11"
+        },
+        {
+          "from": 12,
+          "track": "elevenlabs/night-12"
+        },
+        {
+          "from": 13,
+          "track": "elevenlabs/night-13"
+        },
+        {
+          "from": 14,
+          "track": "elevenlabs/night-14"
+        },
+        {
+          "from": 15,
+          "track": "elevenlabs/night-15"
+        },
+        {
+          "from": 16,
+          "track": "elevenlabs/night-16"
+        },
+        {
+          "from": 17,
+          "track": "elevenlabs/night-17"
+        },
+        {
+          "from": 18,
+          "track": "elevenlabs/night-18"
+        },
+        {
+          "from": 19,
+          "track": "elevenlabs/night-19"
+        },
+        {
+          "from": 20,
+          "track": "elevenlabs/night-20"
+        }
+      ],
+      "night": {
+        "day": 1,
+        "db": 0,
+        "gain": 1,
+        "floor": 0.7
+      },
+      "nightCurve": [
+        {
+          "day": 1,
+          "db": 0,
+          "gain": 1,
+          "floor": 0.7
+        },
+        {
+          "day": 2,
+          "db": 0,
+          "gain": 1,
+          "floor": 0.7
+        },
+        {
+          "day": 3,
+          "db": 0.14705882352941177,
+          "gain": 1.0170749105814363,
+          "floor": 0.7
+        },
+        {
+          "day": 4,
+          "db": 0.29411764705882354,
+          "gain": 1.0344413737342368,
+          "floor": 0.7
+        },
+        {
+          "day": 5,
+          "db": 0.44117647058823534,
+          "gain": 1.052104367692487,
+          "floor": 0.7
+        },
+        {
+          "day": 6,
+          "db": 0.5882352941176471,
+          "gain": 1.0700689556931748,
+          "floor": 0.7
+        },
+        {
+          "day": 7,
+          "db": 0.7352941176470589,
+          "gain": 1.0883402874276067,
+          "floor": 0.7
+        },
+        {
+          "day": 8,
+          "db": 0.8823529411764707,
+          "gain": 1.106923600517608,
+          "floor": 0.7
+        },
+        {
+          "day": 9,
+          "db": 1.0294117647058822,
+          "gain": 1.1258242220169277,
+          "floor": 0.7136363636363636
+        },
+        {
+          "day": 10,
+          "db": 1.1764705882352942,
+          "gain": 1.1450475699382818,
+          "floor": 0.7272727272727272
+        },
+        {
+          "day": 11,
+          "db": 1.3235294117647058,
+          "gain": 1.164599154806469,
+          "floor": 0.7409090909090909
+        },
+        {
+          "day": 12,
+          "db": 1.4705882352941178,
+          "gain": 1.1844845812380056,
+          "floor": 0.7545454545454545
+        },
+        {
+          "day": 13,
+          "db": 1.6176470588235294,
+          "gain": 1.2047095495477347,
+          "floor": 0.7681818181818182
+        },
+        {
+          "day": 14,
+          "db": 1.7647058823529413,
+          "gain": 1.2252798573828647,
+          "floor": 0.7818181818181817
+        },
+        {
+          "day": 15,
+          "db": 1.9117647058823528,
+          "gain": 1.2462014013849123,
+          "floor": 0.7954545454545454
+        },
+        {
+          "day": 16,
+          "db": 2.0588235294117645,
+          "gain": 1.2674801788800203,
+          "floor": 0.8090909090909091
+        },
+        {
+          "day": 17,
+          "db": 2.2058823529411766,
+          "gain": 1.2891222895981396,
+          "floor": 0.8227272727272728
+        },
+        {
+          "day": 18,
+          "db": 2.3529411764705883,
+          "gain": 1.3111339374215643,
+          "floor": 0.8363636363636363
+        },
+        {
+          "day": 19,
+          "db": 2.5,
+          "gain": 1.333521432163324,
+          "floor": 0.85
+        },
+        {
+          "day": 20,
+          "db": 2.5,
+          "gain": 1.333521432163324,
+          "floor": 0.85
+        }
+      ],
+      "deckLoop": false,
+      "section": null,
+      "sectionMode": null,
+      "sectionPending": null,
+      "specials": {
+        "fog": "elevenlabs/night-14"
+      },
+      "special": null,
+      "below": {
+        "music": 1,
+        "lp": null
+      },
+      "dread": 1,
+      "heartFalls": 0,
+      "sectioned": [
+        "calm_day",
+        "elevenlabs/night-01",
+        "elevenlabs/night-02",
+        "elevenlabs/night-03",
+        "elevenlabs/night-04",
+        "elevenlabs/night-05",
+        "elevenlabs/night-06",
+        "elevenlabs/night-07",
+        "elevenlabs/night-08",
+        "elevenlabs/night-09",
+        "elevenlabs/night-10",
+        "elevenlabs/night-11",
+        "elevenlabs/night-12",
+        "elevenlabs/night-13",
+        "elevenlabs/night-14",
+        "elevenlabs/night-15",
+        "elevenlabs/night-16",
+        "elevenlabs/night-17",
+        "elevenlabs/night-18",
+        "elevenlabs/night-19",
+        "elevenlabs/night-20",
+        "fight_heart"
+      ],
+      "sectionsReady": {
+        "calm_day": true,
+        "elevenlabs/night-01": true,
+        "elevenlabs/night-02": true,
+        "elevenlabs/night-03": false,
+        "elevenlabs/night-04": false,
+        "elevenlabs/night-05": false,
+        "elevenlabs/night-06": false,
+        "elevenlabs/night-07": false,
+        "elevenlabs/night-08": false,
+        "elevenlabs/night-09": false,
+        "elevenlabs/night-10": false,
+        "elevenlabs/night-11": false,
+        "elevenlabs/night-12": false,
+        "elevenlabs/night-13": false,
+        "elevenlabs/night-14": false,
+        "elevenlabs/night-15": false,
+        "elevenlabs/night-16": false,
+        "elevenlabs/night-17": false,
+        "elevenlabs/night-18": false,
+        "elevenlabs/night-19": false,
+        "elevenlabs/night-20": false,
+        "fight_heart": false
+      },
+      "sectionLoop": null,
+      "sting": null,
+      "overlapFrames": 0,
+      "playing": true,
+      "alarmPending": false,
+      "solo": false,
+      "lastCue": null,
+      "pools": {
+        "menu": [
+          "menu_theme"
+        ],
+        "dawnprep": [
+          "calm_day"
+        ],
+        "day": [
+          "calm_day"
+        ],
+        "dusk": [
+          "night_lanterns",
+          "night_long_watch"
+        ],
+        "night": [
+          "night_embers",
+          "night_lanterns",
+          "night_long_watch"
+        ],
+        "fight": [
+          "chip_fight_1"
+        ],
+        "aftermath": [
+          "aftermath_hold"
+        ],
+        "fallen": [
+          "end_fallen"
+        ],
+        "dawn": [
+          "end_dawn"
+        ],
+        "fight2": [
+          "chip_fight_2"
+        ],
+        "fight3": [
+          "chip_fight_3"
+        ],
+        "ember": [
+          "fight_ember"
+        ],
+        "guardian": [
+          "boss_guardian"
+        ],
+        "dayskirmish": [
+          "chip_skirmish_a",
+          "chip_skirmish_b"
+        ],
+        "fog": [
+          "fight_fog"
+        ],
+        "swarm": [
+          "fight_swarm"
+        ],
+        "siegenight": [
+          "fight_siege"
+        ],
+        "silent": [
+          "silent_drone"
+        ]
+      },
+      "hits": {
+        "fight_1a": 15.74,
+        "fight_2a": 2.92,
+        "fight_ember": 0,
+        "boss_guardian": 6.1,
+        "fight_siege": 15.58,
+        "fight_swarm": 1.94,
+        "fight_fog": 13.67,
+        "day_skirmish_a": 26.57,
+        "day_skirmish_b": 24.75,
+        "fight_3a": 0,
+        "chip_skirmish_b": 0,
+        "chip_skirmish_a": 0,
+        "chip_fight_1": 0,
+        "chip_fight_2": 0,
+        "chip_fight_3": 0,
+        "fight_day01": 0,
+        "fight_n02": 0,
+        "fight_guardian": 0,
+        "fight_n04": 0,
+        "fight_n07": 0,
+        "fight_n10": 0,
+        "fight_n14": 0,
+        "fight_n18": 0,
+        "fight_ember_late": 0,
+        "fight_guardian_late": 0,
+        "fight_fognight": 0,
+        "fight_heart": 0,
+        "fight_night02": 0,
+        "fight_night03": 0,
+        "fight_night04": 0,
+        "fight_night05": 0,
+        "fight_night06": 0,
+        "fight_night07": 0,
+        "fight_night08": 0,
+        "fight_night09": 0,
+        "fight_night10": 0,
+        "fight_night11": 0,
+        "fight_night12": 0,
+        "fight_night13": 0,
+        "fight_night15": 0,
+        "fight_night16": 0,
+        "fight_night17": 0,
+        "fight_night18": 0,
+        "fight_night19": 0,
+        "fight_night20": 0,
+        "elevenlabs/day-horde-1": 0,
+        "elevenlabs/day-horde-2": 0,
+        "elevenlabs/day-horde-3": 0,
+        "elevenlabs/day-horde-4": 0,
+        "elevenlabs/day-horde-5": 0,
+        "elevenlabs/night-01": 0,
+        "elevenlabs/night-02": 0,
+        "elevenlabs/night-03": 0,
+        "elevenlabs/night-04": 0,
+        "elevenlabs/night-05": 0,
+        "elevenlabs/night-06": 0,
+        "elevenlabs/night-07": 0,
+        "elevenlabs/night-08": 0,
+        "elevenlabs/night-09": 0,
+        "elevenlabs/night-10": 0,
+        "elevenlabs/night-11": 0,
+        "elevenlabs/night-12": 0,
+        "elevenlabs/night-13": 0,
+        "elevenlabs/night-14": 0,
+        "elevenlabs/night-15": 0,
+        "elevenlabs/night-16": 0,
+        "elevenlabs/night-17": 0,
+        "elevenlabs/night-18": 0,
+        "elevenlabs/night-19": 0,
+        "elevenlabs/night-20": 0
+      },
+      "stings": {
+        "alarm": "sting_alarm",
+        "clear": "sting_clear",
+        "dawn": "sting_dawn",
+        "night_falls": "sting_night_falls",
+        "ember": "sting_ember",
+        "guardian": "sting_guardian",
+        "achievement": "cue_achievement",
+        "airdrop": "cue_airdrop",
+        "objective": "cue_objective",
+        "poi_cleared": "cue_poi_cleared",
+        "camp": "sting_camp"
+      },
+      "gains": {
+        "fight_1a": 3,
+        "fight_2a": 3,
+        "fight_3a": 3,
+        "fight_ember": 1.6,
+        "boss_guardian": 3,
+        "day_skirmish_a": 3,
+        "day_skirmish_b": 3,
+        "aftermath": 3,
+        "fight_fog": 3,
+        "fight_siege": 3,
+        "fight_swarm": 3,
+        "silent_drone": 3,
+        "sting_alarm": 2,
+        "sting_clear": 2,
+        "sting_dawn": 2,
+        "sting_ember": 2,
+        "sting_guardian": 2,
+        "sting_night_falls": 2,
+        "cue_achievement": 2,
+        "cue_airdrop": 2,
+        "cue_objective": 2,
+        "cue_poi_cleared": 2,
+        "chip_skirmish_b": 3,
+        "chip_skirmish_a": 3,
+        "chip_fight_1": 3,
+        "chip_fight_2": 3,
+        "chip_fight_3": 3,
+        "fight_day01": 1.6,
+        "sting_camp": 2,
+        "fight_n02": 1.6,
+        "fight_guardian": 1.6,
+        "fight_n04": 1.6,
+        "fight_n07": 1.6,
+        "fight_n10": 1.6,
+        "fight_n14": 1.6,
+        "fight_n18": 1.6,
+        "fight_ember_late": 1.6,
+        "fight_guardian_late": 1.6,
+        "fight_fognight": 1.6,
+        "fight_heart": 1.242,
+        "fight_night02": 1.6,
+        "fight_night03": 1.6,
+        "fight_night04": 1.6,
+        "fight_night05": 1.6,
+        "fight_night06": 1.6,
+        "fight_night07": 1.6,
+        "fight_night08": 1.6,
+        "fight_night09": 1.6,
+        "fight_night10": 1.6,
+        "fight_night11": 1.6,
+        "fight_night12": 1.6,
+        "fight_night13": 1.6,
+        "fight_night15": 1.6,
+        "fight_night16": 1.6,
+        "fight_night17": 1.6,
+        "fight_night18": 1.6,
+        "fight_night19": 1.6,
+        "fight_night20": 1.6,
+        "elevenlabs/day-horde-1": 1.86,
+        "elevenlabs/day-horde-2": 1.926,
+        "elevenlabs/day-horde-3": 1.736,
+        "elevenlabs/day-horde-4": 1.818,
+        "elevenlabs/day-horde-5": 1.602,
+        "elevenlabs/night-01": 1.476,
+        "elevenlabs/night-02": 1.173,
+        "elevenlabs/night-03": 1.242,
+        "elevenlabs/night-04": 1.159,
+        "elevenlabs/night-05": 1.2,
+        "elevenlabs/night-06": 1.331,
+        "elevenlabs/night-07": 1.286,
+        "elevenlabs/night-08": 1.186,
+        "elevenlabs/night-09": 1.394,
+        "elevenlabs/night-10": 1.301,
+        "elevenlabs/night-11": 1.159,
+        "elevenlabs/night-12": 1.316,
+        "elevenlabs/night-13": 1.394,
+        "elevenlabs/night-14": 1.394,
+        "elevenlabs/night-15": 1.173,
+        "elevenlabs/night-16": 1.228,
+        "elevenlabs/night-17": 1.316,
+        "elevenlabs/night-18": 1.346,
+        "elevenlabs/night-19": 1.214,
+        "elevenlabs/night-20": 1.362
+      }
+    },
+    "mixState": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0.5,
+      "musicDuck": 0.9985720890715677,
+      "rain": null
+    },
+    "takesState": {
+      "listed": {
+        "folders": 370,
+        "takes": 952,
+        "source": "ok"
+      },
+      "loaded": [
+        [
+          "build-attacks/stone-hit",
+          1
+        ],
+        [
+          "build-attacks/metal-hit",
+          1
+        ],
+        [
+          "build-attacks/sand-hit",
+          1
+        ],
+        [
+          "build-attacks/turret-hit",
+          1
+        ],
+        [
+          "build-attacks/metal-break",
+          1
+        ],
+        [
+          "build-attacks/wire-hit",
+          1
+        ],
+        [
+          "build-attacks/wood-hit",
+          1
+        ],
+        [
+          "build-attacks/sand-break",
+          1
+        ],
+        [
+          "build-attacks/wire-break",
+          1
+        ],
+        [
+          "build-attacks/stone-break",
+          1
+        ],
+        [
+          "build-attacks/turret-break",
+          1
+        ],
+        [
+          "build-attacks/wood-break",
+          1
+        ],
+        [
+          "bullet-impacts/dirt",
+          4
+        ],
+        [
+          "bullet-impacts/leaves",
+          4
+        ],
+        [
+          "bullet-impacts/rock",
+          4
+        ],
+        [
+          "bullet-impacts/wood",
+          3
+        ],
+        [
+          "footsteps/barefoot",
+          1
+        ],
+        [
+          "footsteps/boots",
+          1
+        ],
+        [
+          "footsteps/crawl",
+          1
+        ],
+        [
+          "footsteps/heavy",
+          1
+        ],
+        [
+          "footsteps/hop",
+          1
+        ],
+        [
+          "footsteps/shuffle",
+          1
+        ],
+        [
+          "footsteps/huge",
+          1
+        ],
+        [
+          "footsteps/waterlogged",
+          1
+        ],
+        [
+          "horde/distant",
+          1
+        ],
+        [
+          "impacts/body-fall",
+          1
+        ],
+        [
+          "impacts/flesh-hit-heavy",
+          1
+        ],
+        [
+          "impacts/flesh-hit",
+          1
+        ],
+        [
+          "impacts/headshot",
+          1
+        ],
+        [
+          "impacts/gore-big",
+          1
+        ],
+        [
+          "impacts/gore-small",
+          1
+        ],
+        [
+          "horde/groan-near",
+          1
+        ],
+        [
+          "horde/emerge",
+          1
+        ],
+        [
+          "player/footstep-dirt",
+          4
+        ],
+        [
+          "player/footstep-leaves",
+          4
+        ],
+        [
+          "player/footstep-metal",
+          3
+        ],
+        [
+          "player/footstep-run-dirt",
+          4
+        ],
+        [
+          "player/footstep-mud",
+          4
+        ],
+        [
+          "player/footstep-stone",
+          4
+        ],
+        [
+          "player/footstep-tile",
+          2
+        ],
+        [
+          "player/footstep-wood",
+          3
+        ],
+        [
+          "player/footstep-water",
+          4
+        ],
+        [
+          "player/hurt",
+          4
+        ],
+        [
+          "player/hurt-heavy",
+          3
+        ],
+        [
+          "player/jump",
+          2
+        ],
+        [
+          "player/land",
+          4
+        ],
+        [
+          "weapon-foley/mag-drop",
+          4
+        ],
+        [
+          "weapon-foley/dry-fire",
+          1
+        ],
+        [
+          "weapon-foley/mag-in",
+          4
+        ],
+        [
+          "weapon-foley/brass",
+          4
+        ],
+        [
+          "weapon-foley/mag-out",
+          4
+        ],
+        [
+          "training/alarm",
+          1
+        ],
+        [
+          "weapon-foley/mag-release",
+          4
+        ],
+        [
+          "weapon-foley/mag-slap",
+          4
+        ],
+        [
+          "weapon-foley/slide-back",
+          4
+        ],
+        [
+          "weapon-foley/slide-forward",
+          3
+        ],
+        [
+          "weapon-foley/weapon-switch",
+          4
+        ],
+        [
+          "zombies/feral/chase",
+          4
+        ],
+        [
+          "zombies/feral/attack",
+          4
+        ],
+        [
+          "zombies/feral/death",
+          4
+        ],
+        [
+          "zombies/feral/hurt",
+          4
+        ],
+        [
+          "zombies/feral/idle",
+          4
+        ],
+        [
+          "zombies/shambler/attack",
+          4
+        ],
+        [
+          "zombies/shambler/chase",
+          4
+        ],
+        [
+          "zombies/shambler/death",
+          4
+        ],
+        [
+          "zombies/shambler/hurt",
+          4
+        ],
+        [
+          "zombies/shambler/idle",
+          4
+        ],
+        [
+          "ui/click",
+          1
+        ],
+        [
+          "turrets/servo",
+          4
+        ],
+        [
+          "player/nvg-hum",
+          1
+        ],
+        [
+          "player/grenade-throw",
+          1
+        ],
+        [
+          "weapon-foley/grenade-pin",
+          1
+        ],
+        [
+          "zombies/leaper/death",
+          4
+        ],
+        [
+          "zombies/spider/death",
+          4
+        ],
+        [
+          "zombies/drowned/death",
+          4
+        ],
+        [
+          "zombies/military/death",
+          4
+        ],
+        [
+          "zombies/brute/death",
+          4
+        ],
+        [
+          "zombies/spitter/death",
+          4
+        ],
+        [
+          "zombies/screamer/death",
+          4
+        ],
+        [
+          "zombies/spider/acid-splash",
+          1
+        ],
+        [
+          "zombies/demon/hurt",
+          4
+        ],
+        [
+          "zombies/bomber/death",
+          4
+        ],
+        [
+          "weapons/explosion",
+          4
+        ],
+        [
+          "zombies/bomber/burst",
+          1
+        ],
+        [
+          "zombies/demon/death",
+          4
+        ],
+        [
+          "zombies/colossus/death",
+          4
+        ],
+        [
+          "zombies/guardian/death",
+          4
+        ],
+        [
+          "zombies/caveguard/death",
+          4
+        ],
+        [
+          "world/crickets-night",
+          2
+        ],
+        [
+          "world/frogs-night",
+          2
+        ],
+        [
+          "world/river",
+          2
+        ],
+        [
+          "world/wind-night",
+          2
+        ],
+        [
+          "world/lake-shore",
+          2
+        ],
+        [
+          "world/wind-day",
+          1
+        ],
+        [
+          "ui/back",
+          1
+        ]
+      ],
+      "failed": 0,
+      "active": 0,
+      "activeFx": 0,
+      "plays": {
+        "impacts/gore-small": 11,
+        "horde/emerge": 3,
+        "impacts/flesh-hit": 3,
+        "zombies/shambler/hurt": 3,
+        "zombies/shambler/death": 4,
+        "impacts/body-fall": 18,
+        "impacts/gore-big": 6,
+        "zombies/feral/death": 2,
+        "bullet-impacts/wood": 1,
+        "impacts/flesh-hit-heavy": 2,
+        "weapon-foley/brass": 1,
+        "weapons/explosion": 1,
+        "zombies/demon/hurt": 1,
+        "zombies/bomber/burst": 1,
+        "zombies/spider/acid-splash": 1,
+        "world/wind-day": 1,
+        "ui/click": 3
+      },
+      "levels": {},
+      "use": {}
+    },
+    "bankStats": {
+      "banks": 78,
+      "buildMs": 0,
+      "sync": 0,
+      "syncKeys": [],
+      "worker": 78,
+      "misses": 0,
+      "voices": 0,
+      "keys": [
+        "hit",
+        "pistol",
+        "m4",
+        "impactDirt",
+        "impactWood",
+        "weaponSwitch",
+        "wheelTick",
+        "selectorSemi",
+        "selectorAuto",
+        "boom",
+        "impactRock",
+        "grab",
+        "hitHeavy",
+        "headshot",
+        "dryFire",
+        "brass",
+        "magOut",
+        "magIn",
+        "magSlap",
+        "magRelease",
+        "slideBack",
+        "slideFwd",
+        "shotgun",
+        "pumpBack",
+        "pumpFwd",
+        "ak",
+        "uzi",
+        "knifeSwing",
+        "knifeHit",
+        "revolver",
+        "sniper",
+        "aa12",
+        "minigun",
+        "m240",
+        "launcher",
+        "mortar",
+        "turret",
+        "turretHeavy",
+        "macheteSwing",
+        "macheteChop",
+        "magDrop",
+        "akRockOut",
+        "akRockIn",
+        "drumOut",
+        "drumIn",
+        "boltUp",
+        "boltBack",
+        "boltFwd",
+        "boltDown",
+        "boxLatch",
+        "belt",
+        "boxSeat",
+        "shell",
+        "bigBrass",
+        "cylinderOpen",
+        "cylinderSpin",
+        "tubeOpen",
+        "flameOn",
+        "tubeShell",
+        "valveShut",
+        "valveOpen",
+        "tankOff",
+        "tankOn",
+        "igniter",
+        "motorBlip",
+        "settle",
+        "impactMetal",
+        "impactWater",
+        "impactSand",
+        "ricochet",
+        "grenadePin",
+        "grenadeBounce",
+        "pistol:s",
+        "uzi:s",
+        "shotgun:s",
+        "m4:s",
+        "ak:s",
+        "sniper:s"
+      ],
+      "pending": 0
+    },
+    "clipState": {
+      "loaded": [],
+      "failed": [],
+      "plays": {}
+    }
+  },
+  "day1PrepCheck": {
+    "phase": "prep",
+    "day": 1,
+    "musicState": {
+      "stage": "calm",
+      "mood": "dawnprep",
+      "deckTrack": "calm_day",
+      "front": "http://dw.localhost/assets/soundtrack/calm_day.ogg",
+      "volume": 0.09000000357627869,
+      "playing": true,
+      "lastDeckError": null
+    },
+    "mixState": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0.5,
+      "musicDuck": 0.9999999999998865,
+      "rain": null
+    },
+    "takesState": {
+      "listed": {
+        "folders": 370,
+        "takes": 952,
+        "source": "ok"
+      },
+      "loaded": [
+        [
+          "build-attacks/stone-hit",
+          1
+        ],
+        [
+          "build-attacks/metal-hit",
+          1
+        ],
+        [
+          "build-attacks/sand-hit",
+          1
+        ],
+        [
+          "build-attacks/turret-hit",
+          1
+        ],
+        [
+          "build-attacks/metal-break",
+          1
+        ],
+        [
+          "build-attacks/wire-hit",
+          1
+        ],
+        [
+          "build-attacks/wood-hit",
+          1
+        ],
+        [
+          "build-attacks/sand-break",
+          1
+        ],
+        [
+          "build-attacks/wire-break",
+          1
+        ],
+        [
+          "build-attacks/stone-break",
+          1
+        ],
+        [
+          "build-attacks/turret-break",
+          1
+        ],
+        [
+          "build-attacks/wood-break",
+          1
+        ],
+        [
+          "bullet-impacts/dirt",
+          4
+        ],
+        [
+          "bullet-impacts/leaves",
+          4
+        ],
+        [
+          "bullet-impacts/rock",
+          4
+        ],
+        [
+          "bullet-impacts/wood",
+          3
+        ],
+        [
+          "footsteps/barefoot",
+          1
+        ],
+        [
+          "footsteps/boots",
+          1
+        ],
+        [
+          "footsteps/crawl",
+          1
+        ],
+        [
+          "footsteps/heavy",
+          1
+        ],
+        [
+          "footsteps/hop",
+          1
+        ],
+        [
+          "footsteps/shuffle",
+          1
+        ],
+        [
+          "footsteps/huge",
+          1
+        ],
+        [
+          "footsteps/waterlogged",
+          1
+        ],
+        [
+          "horde/distant",
+          1
+        ],
+        [
+          "impacts/body-fall",
+          1
+        ],
+        [
+          "impacts/flesh-hit-heavy",
+          1
+        ],
+        [
+          "impacts/flesh-hit",
+          1
+        ],
+        [
+          "impacts/headshot",
+          1
+        ],
+        [
+          "impacts/gore-big",
+          1
+        ],
+        [
+          "impacts/gore-small",
+          1
+        ],
+        [
+          "horde/groan-near",
+          1
+        ],
+        [
+          "horde/emerge",
+          1
+        ],
+        [
+          "player/footstep-dirt",
+          4
+        ],
+        [
+          "player/footstep-leaves",
+          4
+        ],
+        [
+          "player/footstep-metal",
+          3
+        ],
+        [
+          "player/footstep-run-dirt",
+          4
+        ],
+        [
+          "player/footstep-mud",
+          4
+        ],
+        [
+          "player/footstep-stone",
+          4
+        ],
+        [
+          "player/footstep-tile",
+          2
+        ],
+        [
+          "player/footstep-wood",
+          3
+        ],
+        [
+          "player/footstep-water",
+          4
+        ],
+        [
+          "player/hurt",
+          4
+        ],
+        [
+          "player/hurt-heavy",
+          3
+        ],
+        [
+          "player/jump",
+          2
+        ],
+        [
+          "player/land",
+          4
+        ],
+        [
+          "weapon-foley/mag-drop",
+          4
+        ],
+        [
+          "weapon-foley/dry-fire",
+          1
+        ],
+        [
+          "weapon-foley/mag-in",
+          4
+        ],
+        [
+          "weapon-foley/brass",
+          4
+        ],
+        [
+          "weapon-foley/mag-out",
+          4
+        ],
+        [
+          "training/alarm",
+          1
+        ],
+        [
+          "weapon-foley/mag-release",
+          4
+        ],
+        [
+          "weapon-foley/mag-slap",
+          4
+        ],
+        [
+          "weapon-foley/slide-back",
+          4
+        ],
+        [
+          "weapon-foley/slide-forward",
+          3
+        ],
+        [
+          "weapon-foley/weapon-switch",
+          4
+        ],
+        [
+          "zombies/feral/chase",
+          4
+        ],
+        [
+          "zombies/feral/attack",
+          4
+        ],
+        [
+          "zombies/feral/death",
+          4
+        ],
+        [
+          "zombies/feral/hurt",
+          4
+        ],
+        [
+          "zombies/feral/idle",
+          4
+        ],
+        [
+          "zombies/shambler/attack",
+          4
+        ],
+        [
+          "zombies/shambler/chase",
+          4
+        ],
+        [
+          "zombies/shambler/death",
+          4
+        ],
+        [
+          "zombies/shambler/hurt",
+          4
+        ],
+        [
+          "zombies/shambler/idle",
+          4
+        ],
+        [
+          "ui/click",
+          1
+        ],
+        [
+          "turrets/servo",
+          4
+        ],
+        [
+          "player/nvg-hum",
+          1
+        ],
+        [
+          "player/grenade-throw",
+          1
+        ],
+        [
+          "weapon-foley/grenade-pin",
+          1
+        ],
+        [
+          "zombies/leaper/death",
+          4
+        ],
+        [
+          "zombies/spider/death",
+          4
+        ],
+        [
+          "zombies/drowned/death",
+          4
+        ],
+        [
+          "zombies/military/death",
+          4
+        ],
+        [
+          "zombies/brute/death",
+          4
+        ],
+        [
+          "zombies/spitter/death",
+          4
+        ],
+        [
+          "zombies/screamer/death",
+          4
+        ],
+        [
+          "zombies/spider/acid-splash",
+          1
+        ],
+        [
+          "zombies/demon/hurt",
+          4
+        ],
+        [
+          "zombies/bomber/death",
+          4
+        ],
+        [
+          "weapons/explosion",
+          4
+        ],
+        [
+          "zombies/bomber/burst",
+          1
+        ],
+        [
+          "zombies/demon/death",
+          4
+        ],
+        [
+          "zombies/colossus/death",
+          4
+        ],
+        [
+          "zombies/guardian/death",
+          4
+        ],
+        [
+          "zombies/caveguard/death",
+          4
+        ],
+        [
+          "world/crickets-night",
+          2
+        ],
+        [
+          "world/frogs-night",
+          2
+        ],
+        [
+          "world/river",
+          2
+        ],
+        [
+          "world/wind-night",
+          2
+        ],
+        [
+          "world/lake-shore",
+          2
+        ],
+        [
+          "world/wind-day",
+          1
+        ],
+        [
+          "ui/back",
+          1
+        ],
+        [
+          "vehicles/cargo-plane-flyover",
+          1
+        ],
+        [
+          "vehicles/chute-open",
+          1
+        ],
+        [
+          "world/birds-day",
+          4
+        ],
+        [
+          "player/chute-land",
+          1
+        ]
+      ],
+      "failed": 0,
+      "active": 0,
+      "activeFx": 0,
+      "plays": {
+        "impacts/gore-small": 11,
+        "horde/emerge": 3,
+        "impacts/flesh-hit": 3,
+        "zombies/shambler/hurt": 3,
+        "zombies/shambler/death": 4,
+        "impacts/body-fall": 18,
+        "impacts/gore-big": 6,
+        "zombies/feral/death": 2,
+        "bullet-impacts/wood": 1,
+        "impacts/flesh-hit-heavy": 2,
+        "weapon-foley/brass": 1,
+        "weapons/explosion": 1,
+        "zombies/demon/hurt": 1,
+        "zombies/bomber/burst": 1,
+        "zombies/spider/acid-splash": 1,
+        "world/wind-day": 1,
+        "ui/click": 5,
+        "weapon-foley/weapon-switch": 1,
+        "player/footstep-dirt": 1,
+        "world/birds-day": 1
+      },
+      "levels": {},
+      "use": {}
+    },
+    "bankStats": {
+      "banks": 78,
+      "buildMs": 0,
+      "sync": 0,
+      "syncKeys": [],
+      "worker": 78,
+      "misses": 0,
+      "voices": 0,
+      "keys": [
+        "hit",
+        "pistol",
+        "m4",
+        "impactDirt",
+        "impactWood",
+        "weaponSwitch",
+        "wheelTick",
+        "selectorSemi",
+        "selectorAuto",
+        "boom",
+        "impactRock",
+        "grab",
+        "hitHeavy",
+        "headshot",
+        "dryFire",
+        "brass",
+        "magOut",
+        "magIn",
+        "magSlap",
+        "magRelease",
+        "slideBack",
+        "slideFwd",
+        "shotgun",
+        "pumpBack",
+        "pumpFwd",
+        "ak",
+        "uzi",
+        "knifeSwing",
+        "knifeHit",
+        "revolver",
+        "sniper",
+        "aa12",
+        "minigun",
+        "m240",
+        "launcher",
+        "mortar",
+        "turret",
+        "turretHeavy",
+        "macheteSwing",
+        "macheteChop",
+        "magDrop",
+        "akRockOut",
+        "akRockIn",
+        "drumOut",
+        "drumIn",
+        "boltUp",
+        "boltBack",
+        "boltFwd",
+        "boltDown",
+        "boxLatch",
+        "belt",
+        "boxSeat",
+        "shell",
+        "bigBrass",
+        "cylinderOpen",
+        "cylinderSpin",
+        "tubeOpen",
+        "flameOn",
+        "tubeShell",
+        "valveShut",
+        "valveOpen",
+        "tankOff",
+        "tankOn",
+        "igniter",
+        "motorBlip",
+        "settle",
+        "impactMetal",
+        "impactWater",
+        "impactSand",
+        "ricochet",
+        "grenadePin",
+        "grenadeBounce",
+        "pistol:s",
+        "uzi:s",
+        "shotgun:s",
+        "m4:s",
+        "ak:s",
+        "sniper:s"
+      ],
+      "pending": 0
+    },
+    "clipState": {
+      "loaded": [],
+      "failed": [],
+      "plays": {}
+    }
+  },
+  "sitesCheck": {
+    "site truck": {
+      "pos": {
+        "x": -96.97,
+        "y": -0.15,
+        "z": -46.83
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "Chained shut.",
+      "actionTarget": null
+    },
+    "site truck cutters": {
+      "pos": {
+        "x": -160.73,
+        "y": 0.68,
+        "z": 87.04
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ETake the bolt cutters",
+      "actionTarget": null
+    },
+    "site ranger": {
+      "pos": {
+        "x": 31.09,
+        "y": -5.31,
+        "z": -17.85
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELockbox",
+      "actionTarget": null
+    },
+    "site ranger radio": {
+      "pos": {
+        "x": 36.35,
+        "y": -6.8,
+        "z": -18.7
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELook",
+      "actionTarget": null
+    },
+    "site ranger board": {
+      "pos": {
+        "x": 39.31,
+        "y": -7.26,
+        "z": -24
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELook",
+      "actionTarget": null
+    },
+    "site ranger door": {
+      "pos": {
+        "x": 39.05,
+        "y": -7.33,
+        "z": -18.87
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELook",
+      "actionTarget": null
+    },
+    "site trapper": {
+      "pos": {
+        "x": -39.54,
+        "y": 0.43,
+        "z": 42.01
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELook",
+      "actionTarget": null
+    },
+    "site hikers": {
+      "pos": {
+        "x": -100.31,
+        "y": -0.89,
+        "z": -17.21
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "ELook",
+      "actionTarget": null
+    },
+    "site fuel": {
+      "pos": {
+        "x": -44.65,
+        "y": -3.02,
+        "z": -15.62
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "Hold EFill the can",
+      "actionTarget": null
+    },
+    "site convoy": {
+      "pos": {
+        "x": -117.88,
+        "y": 0.35,
+        "z": 48.98
+      },
+      "bannerTitle": "",
+      "bannerSub": "",
+      "prompt": "EWork the jack",
+      "actionTarget": "convoyJack"
+    }
+  },
+  "hollowsCheck": {
+    "caveMouthInfo": {
+      "caveIndex": 0,
+      "caveTheme": "root",
+      "cavePos": {
+        "x": 164.48,
+        "z": 69.65
+      },
+      "playerPos": {
+        "x": 170.55,
+        "z": 70.91
+      }
+    },
+    "atMouthState": {
+      "actionTarget": null,
+      "prompt": "EWork the jack",
+      "placesState": {
+        "built": true,
+        "cave": 0.006230074446648359,
+        "caveLow": 0.0019066996173933148,
+        "pit": 0.00010024791117757559,
+        "breaths": 3,
+        "dread": 0.9999995869220322
+      },
+      "hushState": {
+        "owned": false,
+        "charged": false,
+        "lit": false,
+        "cave": -1,
+        "battery": 476.41520000000224,
+        "below": false
+      }
+    },
+    "belowInfo": {
+      "hollowState": {
+        "below": true,
+        "cave": 0,
+        "theme": "root",
+        "place": "warren",
+        "depth": 1,
+        "explored": [],
+        "cleared": false,
+        "clearedCaves": [],
+        "warrens": [
+          {
+            "cave": 0,
+            "theme": "root",
+            "cleared": false,
+            "passage": {
+              "to": 1,
+              "open": false
+            }
+          },
+          {
+            "cave": 1,
+            "theme": "shale",
+            "cleared": false,
+            "passage": {
+              "to": 2,
+              "open": false
+            }
+          },
+          {
+            "cave": 2,
+            "theme": "iron",
+            "cleared": false,
+            "passage": {
+              "to": 3,
+              "open": false
+            }
+          },
+          {
+            "cave": 3,
+            "theme": "wet",
+            "cleared": false,
+            "passage": {
+              "to": 4,
+              "open": false
+            }
+          },
+          {
+            "cave": 4,
+            "theme": "hill",
+            "cleared": false,
+            "passage": {
+              "to": 0,
+              "open": false
+            }
+          }
+        ]
+      },
+      "belowAudio": {
+        "k": 0.9954804140071849,
+        "built": true,
+        "hum": 0.011379037983715534,
+        "rumble": 0.0026416031178086996,
+        "room": 0.00011022111721104011,
+        "grind": 0.00009999999747378752,
+        "wind": 0.0001000349220703356,
+        "counts": {
+          "drips": 2,
+          "trickles": 0,
+          "walls": 0,
+          "groans": 0,
+          "hushDie": 0,
+          "creaks": 0
+        }
+      },
+      "takeBeds": [
+        {
+          "key": "wind-day",
+          "id": "world/wind-day",
+          "level": 0.008,
+          "pulse": false
+        },
+        {
+          "key": "warren",
+          "id": "below/warren-ambience",
+          "level": 0.233,
+          "pulse": false
+        }
+      ],
+      "musicState": {
+        "stage": "dayfight",
+        "below": {
+          "music": 1,
+          "lp": 20000
+        }
+      }
+    }
+  },
+  "night1AudioAndMusic": {
+    "phase": "wave",
+    "day": 1,
+    "aliveZombies": 15,
+    "music": {
+      "playing": true,
+      "stage": "fight",
+      "mood": "fight",
+      "deckTrack": "elevenlabs/night-01",
+      "front": "http://dw.localhost/assets/soundtrack/elevenlabs/night-01_sections.ogg",
+      "section": "dropA",
+      "sectionMode": "fight",
+      "sectionLoop": {
+        "start": 20,
+        "end": 60,
+        "loop": true
+      },
+      "volume": 0.1301,
+      "deckLevel": 1,
+      "lastDeckError": null,
+      "sectionsReadyNight01": true,
+      "sectionsReadyCalmDay": true
+    },
+    "mix": {
+      "ctx": "running",
+      "weap": 1.350000023841858,
+      "fx": 0.800000011920929,
+      "amb": 0.4956083297729492,
+      "musicDuck": 0.9812361525063793,
+      "rain": null
+    },
+    "takes": {
+      "listed": {
+        "folders": 370,
+        "takes": 952,
+        "source": "ok"
+      },
+      "failedDecodes": 0,
+      "activeVoices": 3,
+      "activeFx": 0,
+      "loadedFoldersCount": 106,
+      "samplePlays": [
+        [
+          "impacts/gore-small",
+          11
+        ],
+        [
+          "horde/emerge",
+          3
+        ],
+        [
+          "impacts/flesh-hit",
+          3
+        ],
+        [
+          "zombies/shambler/hurt",
+          3
+        ],
+        [
+          "zombies/shambler/death",
+          4
+        ],
+        [
+          "impacts/body-fall",
+          18
+        ],
+        [
+          "impacts/gore-big",
+          6
+        ],
+        [
+          "zombies/feral/death",
+          2
+        ],
+        [
+          "bullet-impacts/wood",
+          1
+        ],
+        [
+          "impacts/flesh-hit-heavy",
+          2
+        ],
+        [
+          "weapon-foley/brass",
+          1
+        ],
+        [
+          "weapons/explosion",
+          1
+        ],
+        [
+          "zombies/demon/hurt",
+          1
+        ],
+        [
+          "zombies/bomber/burst",
+          1
+        ],
+        [
+          "zombies/spider/acid-splash",
+          1
+        ]
+      ]
+    },
+    "banks": {
+      "banksBuilt": 78,
+      "pending": 0,
+      "misses": 0,
+      "shotCount": {
+        "pistol": 6,
+        "m4": 5
+      },
+      "voiceCount": {
+        "shambler": 15,
+        "shambler:hurt": 3,
+        "shambler:death": 4,
+        "feral": 2,
+        "feral:death": 2,
+        "leaper": 1,
+        "leaper:death": 1,
+        "leaper:death:phrase:2": 1,
+        "spider": 1,
+        "spider:death": 1,
+        "spider:death:phrase:3": 1,
+        "drowned": 1,
+        "drowned:death": 1,
+        "drowned:death:phrase:1": 1,
+        "military": 1,
+        "military:death": 1,
+        "military:death:phrase:1": 1,
+        "brute": 1,
+        "brute:death": 1,
+        "brute:death:phrase:1": 1,
+        "spitter": 1,
+        "spitter:death": 1,
+        "spitter:death:phrase:0": 1,
+        "bomber": 1,
+        "bomber:death": 1,
+        "bomber:death:phrase:2": 1,
+        "demon": 3,
+        "demon:hurt": 2,
+        "demon:hurt:phrase:3": 1,
+        "demon:death": 1,
+        "demon:death:phrase:3": 1,
+        "colossus": 1,
+        "colossus:death": 1,
+        "colossus:death:phrase:2": 1,
+        "guardian": 1,
+        "guardian:death": 1,
+        "guardian:death:phrase:3": 1,
+        "caveguard": 1,
+        "caveguard:death": 1,
+        "caveguard:death:phrase:3": 1,
+        "shambler:attack": 3,
+        "shambler:chase": 4,
+        "shambler:idle": 1
+      }
+    },
+    "clips": {
+      "loaded": [],
+      "failed": [],
+      "plays": {}
+    },
+    "beds": [
+      {
+        "key": "wind-day",
+        "id": "world/wind-day",
+        "level": 0.009,
+        "pulse": false
+      },
+      {
+        "key": "wind-night",
+        "id": "world/wind-night",
+        "level": 0.072,
+        "pulse": false
+      },
+      {
+        "key": "crickets",
+        "id": "world/crickets-night",
+        "level": 0.16,
+        "pulse": false
+      }
+    ],
+    "pistolLevel": {
+      "rms": 0.028893847738018518,
+      "peak": 0.22741052508354187,
+      "frames": 29,
+      "state": "running"
+    },
+    "fetchFailsInPage": [
+      {
+        "url": "__zsounds",
+        "status": 404,
+        "stack": [
+          "at window.fetch (<anonymous>:7:22)",
+          "at fetchJson (http://dw.localhost/core/audio.js:540:23)",
+          "at http://dw.localhost/core/takes.js:197:31",
+          "at init (http://dw.localhost/core/takes.js:208:7)",
+          "at ready (http://dw.localhost/core/takes.js:248:20)"
+        ]
+      },
+      {
+        "url": "z-sounds/levels.json",
+        "status": 404,
+        "stack": [
+          "at window.fetch (<anonymous>:7:22)",
+          "at fetchJson (http://dw.localhost/core/audio.js:540:23)",
+          "at http://dw.localhost/core/takes.js:199:29"
+        ]
+      }
+    ],
+    "mediaErrorsInPage": []
+  },
+  "textureCheck": {
+    "totalTextures": 81,
+    "brokenCount": 0,
+    "broken": []
+  },
+  "cleanExit": true
+}

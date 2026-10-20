@@ -39,7 +39,9 @@ What is missing or wrong:
 
 1. **Steady the ground (now).** Full suite, every red owned, everything committed and pushed (CL-202); frame budgets
    per owner from real numbers (CL-203, with Cursor's bench and Antigravity's GPU run). From then on a commit at the
-   end of every working day.
+   end of every working day. **Frame time is the gap** (`docs/budgets.md`): night 20 at High went 32.5 to about 48-50
+   fps on 10-19 (CL-211, CL-214, CL-218, GP-19934, GB-194, AG-92); day 5 is 59.5. CL-218's second cuts and CL-219's
+   night shadows are being measured (AG-97); then the dead's eyes (GP-19939) and the scene's size.
 2. **Finish the run.** The story's words in one pass (ChatGPT), then its scenes (Claude: the orders card, the
    burial, the wall of tags, the true ending's walk); the relay/Heron condition said out loud and the silenced night
    (Grokbot); one name for the night everywhere.
@@ -47,6 +49,9 @@ What is missing or wrong:
    mini-games, as the radio mast did: the medical convoy's jack and its sleeping spitter, the ranger cache's code, the
    hikers' kit shot down, the trapper's safe path, the fuel depot's carry, the utility truck's bolt cutters
    (`docs/specs/day-missions.md`). Built after each owner's frame-rate cut; Jerry plays each one.
+   **2026-10-20:** the utility truck (CL-216) and the ranger cache (CL-217) done and checked on Jerry's PC; the hikers'
+   kit (GB-196) done; the convoy (GP-19937/GP-19938) plays 24/24 with its ambulance being built; the fuel depot (GB-197)
+   and the trapper's path (AG-93) in progress.
 3. **The first hour.** The orders card is the goal; a first-run pointer to the Training Ground; the pause Tips
    without the dev cheats; the words a new player reads checked once.
 4. **Night packs: Jerry plays in short sessions.** No full runs needed. Each pack is 20-30 minutes, from home:

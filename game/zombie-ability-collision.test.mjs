@@ -131,6 +131,9 @@ test('build shape callback preserves open doors/windows and wire while railings 
   const door = buildAt(5), collision = make({ builds: [door] });
   door.open = true; assert.equal(collision.trace(p(0), p(10), .4), null);
   door.open = false; assert.equal(collision.trace(p(0), p(10), .4).build, door);
+  door.open = true;
+  const floorHit = collision.trace(p(0, 4), p(10, 0), .5);
+  assert.equal(floorHit.surface, 'ground'); assert.equal(floorHit.build, null);
   assert.equal(make({ builds: [buildAt(5, 'wire')] }).trace(p(0), p(10)), null);
   assert.equal(make({ builds: [buildAt(5, 'railing')] }).trace(p(0), p(10)).build.type, 'railing');
   const window = buildAt(5);

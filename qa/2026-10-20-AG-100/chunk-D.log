@@ -1,0 +1,65 @@
+# AG-100 Chunk D: t164 t165 t166 t167 t168 t169 t170 t171 t172 t173 t174 t175 t176 t177 t178 t179 t180 t181 t182 t183 t184 t185 t186 t187 t188 t189 t190 t191 t192 t193 t194 t195
+# Started: 2026-10-20T08:01:39.215Z
+
+Game-test request aede5cdc-a0ec-474a-b7bc-eb675949984c queued at position 2. Waiting...
+GRANT antigravity AG-100: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t164    14 pass   0 fail  48.0s
+ok    t165    11 pass   0 fail  26.2s
+ok    t166    11 pass   0 fail  41.1s
+ok    t167    20 pass   0 fail  25.7s
+ok    t168    39 pass   0 fail  63.6s
+ok    t169     8 pass   0 fail  24.7s
+ok    t170    20 pass   0 fail  109.8s
+ok    t171    23 pass   0 fail  59.7s
+ok    t172     7 pass   0 fail  45.4s
+ok    t173    12 pass   0 fail  42.4s
+ok    t174    14 pass   0 fail  77.2s
+ok    t175    12 pass   0 fail  55.2s
+ok    t176     8 pass   0 fail  57.2s
+ok    t177    10 pass   0 fail  44.4s
+ok    t178     8 pass   0 fail  51.6s
+ok    t179    27 pass   0 fail  52.5s
+ok    t180    29 pass   0 fail  74.6s
+ok    t181    23 pass   0 fail  57.9s
+ok    t182    36 pass   0 fail  72.4s
+ok    t183    16 pass   0 fail  52.9s
+           INFO crouch-walk slide 7.88% (at 1.80 m/s ground speed)
+ok    t184    29 pass   0 fail  58.1s
+           INFO holds: m4 1550 ms wall / 500 ms game, ak 1605 ms wall / 500 ms game, aa12 1520 ms wall / 450 ms game, uzi 3362 ms wall / 400 ms game, shotgun 1377 ms wall / 300 ms game, revolver 1135 ms wall / 300 ms game, sniper 1245 ms wall / 300 ms game, pistol 407 ms wall / 300 ms game, pistol 729 ms wall / 400 ms game
+ok    t185    36 pass   0 fail  99.5s
+ok    t186    34 pass   0 fail  82.8s
+ok    t187    75 pass   0 fail  108.9s
+ok    t188    91 pass   0 fail  124.5s
+ok    t189    19 pass   0 fail  188.9s
+ok    t190    21 pass   0 fail  45.4s
+ok    t191    16 pass   0 fail  62.6s
+ok    t192    10 pass   0 fail  47.9s
+           INFO on the flat, walking, the lowest sole is -0.022 m
+FAIL  t193    17 pass   1 fail  76.4s
+ok    t194    35 pass   0 fail  86.8s
+ok    t195    16 pass   0 fail  111.9s
+
+32 checks: 747 pass, 1 fail
+
+by owner:
+  unassigned
+    t193   1 fail  FAIL walking on the hill (one way, 9 deg where he ended): no sole sinks into it, nor floats (low
+           FAIL walking on the hill (one way, 9 deg where he ended): no sole sinks into it, nor floats (lowest 0.051 m over 4 looks; -0.022 on the flat)
+node:fs:2427
+    return binding.writeFileUtf8(
+                   ^
+
+Error: UNKNOWN: unknown error, open 'C:\Users\Zero\Desktop\Tiny Trek\crew\tests.json'
+    at Object.writeFileSync (node:fs:2427:20)
+    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/tests/run-all.mjs:292:4
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errno: -4094,
+  code: 'UNKNOWN',
+  syscall: 'open',
+  path: 'C:\\Users\\Zero\\Desktop\\Tiny Trek\\crew\\tests.json'
+}
+
+Node.js v24.13.0
+
+# Finished: 2026-10-20T08:42:45.908Z code=1 signal=none

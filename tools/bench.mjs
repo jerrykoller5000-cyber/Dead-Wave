@@ -8,6 +8,7 @@
 //   node tools/bench.mjs --seconds 8 --headless  short run
 //   node tools/bench.mjs --night 20 --gfx high --prof   and where each frame's time goes
 //   node tools/bench.mjs --night 20 --gfx high --prof --cpu   and which functions (a DevTools CPU profile)
+//   node tools/bench.mjs --night 20 --gfx high --prof --alloc   and who allocates (the garbage behind GC pauses)
 //
 // One JSON line per scenario (the line AG-82 reads): fps, 1% low, worst frame,
 // frames over 50 ms, draw calls and triangles. Draw calls and triangles come
@@ -30,6 +31,9 @@
 // 30 heaviest by total time (everything they call), each with its file and line, so the
 // renderer's own cost can be split (three's render lists, node updates, matrices, skins).
 // --census (with --cpu, or alone): the scene the renderer walks: Object3Ds, meshes, bones, grouped by top-level child.
+// --alloc (CL-219): a DevTools allocation-sampling profile over the measured seconds, the garbage included, and the line
+// gets `alloc`: kB a frame allocated, by function (self) and by the function and its two callers (the 25 heaviest
+// each), so the night's garbage collections (the 40-70 ms frames GP-19940 traced) can be traced to who makes garbage.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
@@ -53,6 +57,7 @@ const SCENARIO_ARG = flag('--scenario');
 const PROF_ON = argv.includes('--prof');
 const CPU_ON = argv.includes('--cpu');
 const CENSUS_ON = CPU_ON || argv.includes('--census');
+const ALLOC_ON = argv.includes('--alloc');
 let SCENARIO = SCENARIO_ARG || 'megaswarm';
 let NIGHT = null;
 if (NIGHT_ARG !== '') {
@@ -384,6 +389,11 @@ try {
     await page.send('Profiler.start');
     console.log('bench: CPU profile on');
   }
+  if (ALLOC_ON) {
+    await page.send('HeapProfiler.enable');
+    await page.send('HeapProfiler.startSampling', { samplingInterval: 16384, includeObjectsCollectedByMajorGC: true, includeObjectsCollectedByMinorGC: true });
+    console.log('bench: allocation sampling on');
+  }
   await page.evaluate('TT.resetPerf()');
   const t0 = Date.now();
   const windows = [];
@@ -393,6 +403,7 @@ try {
     await new Promise((r) => setTimeout(r, 1000));
   }
   const cpuProfile = CPU_ON ? (await page.send('Profiler.stop', {}, 180000)).profile : null;
+  const allocProfile = ALLOC_ON ? (await page.send('HeapProfiler.stopSampling', {}, 180000)).profile : null;
   const tail = windows.slice(-10);
   const paced = tail.filter((w) => w.fps > 0);
   const use = paced.length ? paced : tail;
@@ -478,6 +489,30 @@ try {
         line.cpu.callees[k] = top(edgeList.filter((e) => e.a === k), 10).map((e) => ({ k: e.b, ms: per(e.us) }));
       }
     }
+  }
+  if (allocProfile) {
+    // Each node: a call frame, the bytes sampled as allocated in it (selfSize), its callees (children).
+    const frames = (line.prof && line.prof.frames) || Math.max(1, Math.round(line.fps * SECONDS));
+    const keyOf = (cf) => `${cf.functionName || '(anonymous)'} ${(cf.url || '').split('/').pop().split('?')[0]}:${(cf.lineNumber ?? -1) + 1}`;
+    const self = new Map(), stacks = new Map();
+    let all = 0;
+    const walk = (n, chain) => {
+      const k = keyOf(n.callFrame || {});
+      const here = chain.concat(k);
+      if (n.selfSize) {
+        all += n.selfSize;
+        self.set(k, (self.get(k) || 0) + n.selfSize);
+        const st = here.slice(-3).reverse().join(' < ');
+        stacks.set(st, (stacks.get(st) || 0) + n.selfSize);
+      }
+      for (const c of n.children || []) walk(c, here);
+    };
+    if (allocProfile.head) walk(allocProfile.head, []);
+    const kb = (b) => Math.round(b / 1024 / frames * 10) / 10;
+    const rank = (m) => [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25).map(([k, b]) => ({ k, kb: kb(b) }));
+    line.alloc = { frames, kbPerFrame: kb(all), mbPerSecond: Math.round(all / 1048576 / SECONDS * 10) / 10, self: rank(self), stacks: rank(stacks) };
+    console.log(`alloc  ${line.alloc.kbPerFrame} kB a frame (${line.alloc.mbPerSecond} MB/s); by function:`);
+    for (const a of line.alloc.self.slice(0, 15)) console.log(`  ${String(a.kb).padStart(7)} kB  ${a.k}`);
   }
   if (CENSUS_ON) { line.census = await page.evaluate(CENSUS); line.census.draws = await page.evaluate(CENSUS_DRAWS, 20000); }
   if (SCENARIO === 'megaswarm') line.count = COUNT;

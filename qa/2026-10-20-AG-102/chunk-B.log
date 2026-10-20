@@ -1,0 +1,54 @@
+# AG-102 Chunk B: t100 t101 t102 t103 t104 t105 t106 t107 t108 t109 t110 t111 t112 t113 t114 t115 t116 t117 t119 t120 t121 t122 t123 t124 t125 t126 t127 t128 t129 t130 t131
+# Started: 2026-10-20T09:26:00.285Z
+
+Game-test request 6759b20c-0859-4166-ac60-610c17c14c48 queued at position 1. Waiting...
+GRANT antigravity AG-102: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t100     7 pass   0 fail  43.1s
+ok    t101     9 pass   0 fail  43.8s
+ok    t102    17 pass   0 fail  48.0s
+ok    t103     8 pass   0 fail  41.8s
+ok    t104     5 pass   0 fail  41.1s
+ok    t105    15 pass   0 fail  54.2s
+ok    t106     9 pass   0 fail  118.8s
+ok    t107     8 pass   0 fail  42.5s
+ok    t108     9 pass   0 fail  42.0s
+ok    t109     5 pass   0 fail  42.1s
+ok    t110     4 pass   0 fail  41.7s
+           INFO feral head centre p10 0.736, median 0.791 of hitH (line 0.7)
+           INFO leaper head centre p10 0.638, median 0.654 of hitH (line 0.55)
+           INFO spider head centre p10 0.569, median 0.652 of hitH (line 0.6)
+ok    t111    11 pass   0 fail  56.3s
+ok    t112    13 pass   0 fail  46.4s
+ok    t113     5 pass   0 fail  76.0s
+ok    t114     8 pass   0 fail  44.2s
+ok    t115    10 pass   0 fail  43.8s
+FAIL  t116     6 pass   1 fail  53.1s
+ok    t117    17 pass   0 fail  48.0s
+ok    t119    19 pass   0 fail  42.5s
+ok    t120    11 pass   0 fail  44.7s
+ok    t121    31 pass   0 fail  26.8s
+ok    t122    14 pass   0 fail  42.9s
+ok    t123     6 pass   0 fail  30.3s
+FAIL  t124     3 pass   2 fail  52.2s
+ok    t125    10 pass   0 fail  45.0s
+FAIL  t126    11 pass   1 fail  51.2s
+ok    t127    28 pass   0 fail  91.6s
+ok    t128    28 pass   0 fail  122.0s
+ok    t129    22 pass   0 fail  43.3s
+ok    t130    14 pass   0 fail  43.9s
+ok    t131    18 pass   0 fail  58.5s
+
+31 checks: 381 pass, 4 fail
+
+by owner:
+  unassigned
+    t116   1 fail  FAIL in full rain it burns out at least twice as fast: 3.94 s vs 4.87 s dry (x2.8 expected)
+           FAIL in full rain it burns out at least twice as fast: 3.94 s vs 4.87 s dry (x2.8 expected)
+    t124   2 fail  FAIL his ankle in its hand while it has him: worst 0.522 m
+           FAIL his ankle in its hand while it has him: worst 0.522 m
+           FAIL carried by the chest in its right hand: worst 0.766 m
+    t126   1 fail  FAIL with the dummy gone it walks for the marine (40.9 -> 38.4 m)
+           FAIL with the dummy gone it walks for the marine (40.9 -> 38.4 m)
+
+# Finished: 2026-10-20T09:59:45.878Z code=1 signal=none

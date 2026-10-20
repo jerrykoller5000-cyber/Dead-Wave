@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createHikersKit, HIKERS, hikersSeed, riverRun, drownedCount, segmentDistance, roundCutsRope } from './hikers-kit.js';
+import { createHikersKit, HIKERS, hikersSeed, riverRun, drownedCount, segmentDistance, roundCutsRope, pickHikersTree } from './hikers-kit.js';
+
+test('the tree: a bank tree within 50 m first, else the nearest within 120 m, else the camp tree (no river)', () => {
+  const T = (id, d, bank) => ({ tree: { id }, d, bank });
+  assert.deepEqual(pickHikersTree([T('camp', 8, false), T('far', 30, true), T('near', 20, true), T('out', 60, true)]), { tree: { id: 'near' }, river: true });
+  assert.deepEqual(pickHikersTree([T('camp', 8, false), T('b90', 90, true), T('b70', 70, true), T('b130', 130, true)]), { tree: { id: 'b70' }, river: true });
+  assert.deepEqual(pickHikersTree([T('b45', 45, true), T('b10far', 100, true)]), { tree: { id: 'b45' }, river: true });
+  assert.deepEqual(pickHikersTree([T('camp', 8, false), T('camp2', 12, false), T('b130', 130, true)]), { tree: { id: 'camp' }, river: false });
+  assert.equal(pickHikersTree([T('tooClose', 2, false), T('b200', 200, true)]), null);
+});
 
 const kinds = (events) => events.map((e) => e.kind);
 const seedWith = (want) => { for (let r = 1; r < 500; r++) { const s = hikersSeed(r); if (riverRun(s) === want) return s; } throw new Error('none'); };

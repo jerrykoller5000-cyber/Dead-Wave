@@ -122,7 +122,7 @@
     // The drag: the camera follows the guardian hauling him back to the mouth.
     let samples = 0, camNear = 0, lzMin = 1e9;
     const tDrag = performance.now();
-    while (T.getScriptedKill() && !T.getScriptedKill().dragDone && performance.now() - tDrag < 20000) {
+    while (T.getScriptedKill() && !T.getScriptedKill().dragDone && performance.now() - tDrag < 32000) {   // CL-220: a 6 s haul at most, but the suite's page runs slow
       const s = T.getScriptedKill(), g = s.guardian.position, cam = T.camera ? T.camera.position : s.cam;
       samples++;
       if (Math.hypot(cam.x - g.x, cam.z - g.z) < 10) camNear++;

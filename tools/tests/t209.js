@@ -33,7 +33,7 @@
     ok(c && c.crawling && !c.hopping && c.alive, 'both legs off: it crawls (z.crawling)');
     const cu = c.mesh.userData; let al = [], ar = [], head = [];
     const x0 = c.mesh.position.x;
-    await watch(c, 3500, () => { if (!c.alive) return; al.push(cu.armLG.rotation.x); ar.push(cu.armRG.rotation.x); head.push(cu.head.rotation.x); });
+    await watch(c, 6000, () => { if (!c.alive) return; al.push(cu.armLG.rotation.x); ar.push(cu.armRG.rotation.x); head.push(cu.head.rotation.x); });   // CL-220: a haul is 2.5 s of game time; the suite's page runs slow
     ok(span(al) > 1.2 && span(ar) > 1.2, 'it hauls itself on its arms: each reaches out and drags back (' + span(al).toFixed(2) + ', ' + span(ar).toFixed(2) + ' rad)');
     // one then the other: the two arms are out of step
     let apart = 0; for (let i = 0; i < al.length; i++) apart = Math.max(apart, Math.abs(al[i] - ar[i]));

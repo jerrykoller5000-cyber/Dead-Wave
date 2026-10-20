@@ -20,10 +20,14 @@
     ok(s.code.length === 3 && s.code.every((d) => d >= 1 && d <= 9) && [...s.order].sort().join() === 'board,radio,truck', 'three digits 1-9 and an order of the three things: ' + s.order.join(' ') + ' = ' + s.code.join(''));
     const by = (src) => R.clues.filter((c) => c.source === src).length;
     ok(by('radio') === 1 && by('board') === 1 && by('truck') === 2, 'four places to look: the radio, the board, both doors');
+    // (The suite's stand-in three and a page with no 2D canvas are allowed for: the looks are then checked as opened.)
+    const canvas2d = (() => { try { return !!document.createElement('canvas').getContext('2d'); } catch (_) { return false; } })();
     const truckG = T.scene.getObjectByName('ranger-truck');
-    const lcd = truckG && truckG.getObjectByName('ranger-radio').children.find((o) => o.isMesh && o.geometry.type === 'PlaneGeometry');
-    ok(!!(lcd && lcd.material.map), 'the radio\'s display is painted with its channel');
-    ok(truckG && truckG.getObjectsByProperty('name', 'ranger-unit').length === 2, '"UNIT n" on both doors');
+    const radio = truckG && truckG.getObjectByName('ranger-radio');
+    const lcd = radio && radio.children.find((o) => o.isMesh && o.geometry && o.geometry.attributes.position && o.geometry.attributes.position.count === 4);
+    ok(!!lcd && R.tex.length >= 4 && (!canvas2d || !!lcd.material.map), 'the radio\'s display is painted with its channel');
+    let units = 0; if (truckG) truckG.traverse((o) => { if (o.name === 'ranger-unit') units++; });
+    ok(units === 2, '"UNIT n" on both doors (' + units + ')');
     ok(!!T.scene.getObjectByName('ranger-search-log') && R.log.visible, 'the search log is pinned on the board');
     ok(!!T.scene.getObjectByName('ranger-keypad') && !!T.scene.getObjectByName('ranger-lid-pictures'), 'the keypad and the lid\'s three pictures are on the lockbox');
     ok(D.locked(), 'the site is locked until the right digits go in');
@@ -49,7 +53,8 @@
       ok(/look/i.test(D.prompt() || ''), src + ': "' + D.prompt() + '"');
       await tap();
       const img = el.querySelector('.look img');
-      ok(R.mode === 'look' && R.look && R.look.source === src && !!img && /^data:image\/png/.test(img.getAttribute('src') || ''), src + ': E shows it big');
+      const lookEl = el.querySelector('.look'), why = 'mode ' + R.mode + ', look ' + (R.look && R.look.source) + ', panel ' + (el.classList.contains('on') ? 'on' : 'off') + ', .look ' + !!lookEl + ', img ' + (img ? (img.getAttribute('src') || '').slice(0, 22) : 'none') + ', canvas ' + canvas2d + ', html ' + (lookEl ? lookEl.innerHTML.length : -1);
+      ok(R.mode === 'look' && R.look && R.look.source === src && !!lookEl && (!canvas2d || (!!img && /^data:image\/png/.test(img.getAttribute('src') || ''))), src + ': E shows it big (' + why + ')');
       await tap();
       ok(!R.mode, src + ': E steps back');
     }
@@ -59,7 +64,7 @@
     await tap();
     for (const d of S().code) await digit(d);
     ok(R.flashKind === 'open' && /OPEN/.test(el.querySelector('.lcd')?.textContent || ''), 'the right code: OPEN');
-    ok(await until(() => !R.mode, 2500), 'the keypad shuts by itself after');
+    ok(await until(() => !R.mode, 6000), 'the keypad shuts by itself after');   // 0.9 s of game time; the suite's page runs slow (dt is capped)
     ok(!D.locked() && D.reach() && D.reach().blockedBy !== 'locked', 'the site is open to the objectives now (' + (D.reach() && D.reach().blockedBy) + ')');
     ok(!D.prompt(), 'and the lockbox says nothing of its own any more');
     ok(R.led.material.emissive.getHex() === 0x3dff6a, 'its lamp is green');

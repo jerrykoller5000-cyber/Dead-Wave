@@ -2,12 +2,12 @@
 
 state: active
 model: claude-opus-5-5
-task: CL-218 The HQ house's draws (foldStatic: plain colours as one draw a side)
-touching: index.html (HQ bake), world/bake.js, world/bake.test.mjs (new)
-since: 2026-10-19T23:41Z
+task: CL-219 The night's 1 % low and the next cuts
+touching: index.html (sunShadowCadence)
+since: 2026-10-20T00:29Z
 next: CL-211 Where the night's 30 ms go, after AG-86. Every night's last
 blocked-on: —
-last-report: handoffs/2026-10-19-claude-CL-217.md
+last-report: handoffs/2026-10-20-claude-CL-218.md
 
 ## Notes
 

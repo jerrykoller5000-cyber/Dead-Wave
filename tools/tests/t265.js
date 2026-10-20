@@ -1,6 +1,6 @@
 // t265 - GP-19937: medical convoy jack, sleeper and cooler.
 (async () => {
-  const T = window.TT, out = [], ok = (v, m) => out.push((v ? 'PASS ' : 'FAIL ') + m);
+  const T = window.TT, THREE = T.THREE, out = [], ok = (v, m) => out.push((v ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const until = async (f, ms = 4000) => { const start = Date.now(); while (Date.now() - start < ms) { if (f()) return true; await wait(40); } return !!f(); };
   const key = (type) => document.dispatchEvent(new KeyboardEvent(type, { code: 'KeyE', key: 'e', bubbles: true }));
@@ -31,16 +31,31 @@
     ok(S().phase === 'warning', 'door remains shut during the half-second thump');
     D.step(0.02);
     ok(S().phase === 'open' && S().doorOpen, 'door opens after the warning');
+    await wait(70); // the live pose update mounts and exposes the sleeper in the open cab
     T.runDevCommand('godmode off'); T.setArmor(0); T.setHp(100);
     D.step(0.3);
     ok(Math.abs(T.getHp() - 25) < 0.01, 'sleeper spit takes 75% health (' + T.getHp() + ')');
-    ok(D.kill().some(e => e.kind === 'sleeper-killed') && !S().sleeperAlive, 'sleeper can die only with the door open');
+    const sleeper = D.sleeper(), box = sleeper && new THREE.Box3().setFromObject(sleeper);
+    const aim = box?.getCenter(new THREE.Vector3());
+    const outward = new THREE.Vector3(1, 0, 0).applyQuaternion(T.POI.wrecks[0].mesh.quaternion);
+    const muzzle = aim?.clone().addScaledVector(outward, 2.4);
+    ok(!!(muzzle && D.hit(muzzle, aim)), 'the exposed sleeper has a bullet surface on the open-door side');
+    const fireSleeper = () => {
+      const dir = aim.clone().sub(muzzle).normalize();
+      T.fireRoundDbg(muzzle.x, muzzle.y, muzzle.z, dir.x, dir.y, dir.z, 20, 90, 0);
+      for (let i = 0; i < 20; i++) T.stepProjectilesDbg(0.016);
+    };
+    if (muzzle) { fireSleeper(); ok(D.hp() === 14, 'a live round hits the visible sleeper through the open door (' + D.hp() + ' HP)'); fireSleeper(); }
+    else ok(false, 'the open cab mounts a sleeper to shoot');
+    ok(!S().sleeperAlive, 'a second live round kills the sleeper only with the door open');
     T.runDevCommand('godmode');
     D.step(2);
     ok(S().phase === 'pumping' && !S().sleeperAlive, 'dead sleeper stays silent when door closes');
     // Auto-miss schedules a new beat; each successful tap is placed at the centre.
     for (let i = 0; i < 8; i++) { D.step(S().untilBeat); T.doAction(); }
     ok(S().done && S().pumps === 8, 'eight good pumps release the cooler');
+    await wait(70);
+    ok(D.parts()?.vehicle?.position.y >= 1.77, 'eight pumps visibly raise the ambulance on the jack');
     ok(D.reach()?.blockedBy !== 'locked', 'medical cache unlocks');
     const cooler = T.getObjectiveProps()?.props?.['objective:medical-convoy'];
     if (cooler?.approach) {

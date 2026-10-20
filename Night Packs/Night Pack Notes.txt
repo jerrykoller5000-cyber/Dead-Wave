@@ -160,6 +160,84 @@ Your notes:
 
 
 
+PACK 7 (OPTIONAL): THE SIX DAY MISSIONS  (30 to 40 minutes)
+-------------------------------------------------------------
+New since 2026-10-19 (you said to bundle them with 1.0). Each supply site is a
+little job now, like the radio mast. Start a normal run and play them on day 1
+or 2. Each one has a console shortcut that puts you right there: press ~ and
+type it. (Try to solve each one yourself before using any hint.)
+
+  1. The utility truck:  site truck cutters   then   site truck
+     The toolbox on the truck is chained. The bolt cutters are on the ground by
+     the iron mine's barred mouth. Take them (E), go back, hold E on the chain.
+     The truck's alarm goes off and calls the dead.
+  2. The ranger cache:  site ranger
+     The lockbox needs three numbers. They are written around the rangers'
+     camp: on the radio on their truck, on the search board, and on the truck's
+     doors. Walk up to each and press E to look. The pictures on the lid say
+     the order. A wrong code just says WRONG.
+  3. The trapper's safe path:  site trapper
+     Stepping stones through the leaves to his cellar. The horseshoes on the
+     posts show which stones are safe. A wrong step is a bear trap.
+  4. The hikers' first-aid kit:  site hikers
+     The bag hangs from a branch by the river. Shoot the rope. If it falls in
+     the river it floats away: catch it before it snags (about 40 seconds) or
+     the drowned come for it.
+  5. The fuel depot:  site fuel
+     Hold E at the pump to fill the jerrycan, then carry it to the generator at
+     the HQ. It drips a trail the dead follow. Fire or spitter acid makes it
+     blow up. E puts it down and picks it up.
+  6. The medical convoy:  site convoy
+     Pump the jack under the overturned ambulance on the beat (8 good pumps).
+     A miss slips it back. Two misses in a row wake the spitter asleep in the
+     cab, and he spits for a lot of damage. Shoot him while his door is open.
+
+Look out for:
+- Did you understand what to do from what you saw? Where were you stuck?
+- Too easy, about right, or too hard? Which one was the most fun?
+- Anything that looks unfinished or floats.
+
+Your notes:
+
+
+
+
+
+PACK 8 (OPTIONAL): THE HOLLOWS  (20 to 30 minutes)
+--------------------------------------------------
+Built and checked by the crew, but you have never played it. Under five of
+the six caves (not the chalk cave) there is a warren: three depths of dark
+tunnels, sleepers that wake to noise and light, nests to blow up, and loot at
+the bottom. You go down by day only, once a day.
+
+How to get in:
+  1. Repair the relay. Press ~ and type  relay skip  then press E at the
+     cabinet.
+  2. The next dawn the HQ board says THE HUSH - CHARGED.
+  3. Walk to any cave mouth except the chalk cave. Press E to light the Hush,
+     then walk in.
+  4. You have about eight minutes before the stir fills (the meter on the
+     HUD). Walk out the way you came, or duck into a bolt-hole, before it
+     does. If it fills, the guardian comes through the rock and the run ends
+     (your one kick-free still counts).
+
+Down there: no building. The gun light and the NVG matter. Bring up skulls,
+supply crates, one strongbox per warren (a blueprint, an early gun, a mod, a
+camo or a rune shard), and the dog tags of the nine Gravewalkers who died.
+Clearing the bottom opens a passage to the next cave round the compass.
+
+Look out for:
+- Could you find your way down and back up? Did you get lost?
+- Was the eight minutes enough, or too much? Did the stir feel fair?
+- Was the loot worth the trip, next to a night's pay?
+- Anything you can fall through, see through, or that looks unfinished.
+
+Your notes:
+
+
+
+
+
 ANYTHING ELSE
 -------------
 Notes that don't belong to one pack:

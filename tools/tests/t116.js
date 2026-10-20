@@ -18,7 +18,8 @@
       for (const z of [a, b]) { z.riseT = 0; z.speed = z.baseSpeed = 0; z.hp = z.maxHp = 1e6; }
       return [a, b];
     };
-    const burnFor = async (a) => { const t0 = performance.now(); T.igniteZombie(a, 3); await until(() => !(a.burnT > 0), 6000); return (performance.now() - t0) / 1000; };
+    // CL-220: measured on the sim clock (the suite's page runs slow and dt is capped; the old 6 s wall cap cut the dry burn short).
+    const burnFor = async (a) => { const t0 = T.getSimTime(); T.igniteZombie(a, 3); await until(() => !(a.burnT > 0), 30000); return T.getSimTime() - t0; };
     // Dry.
     rain(false);
     const [d1, d2] = pair(-6);

@@ -45,7 +45,7 @@ export function createMarineWaist(T,root,{lower,torso,projectUV}={}){
    pa[j]=w*(a[0]*x+a[4]*y+a[8]*z+a[12])+v*(b[0]*x+b[4]*y+b[8]*z+b[12]);
    pa[j+1]=w*(a[1]*x+a[5]*y+a[9]*z+a[13])+v*(b[1]*x+b[5]*y+b[9]*z+b[13]);
    pa[j+2]=w*(a[2]*x+a[6]*y+a[10]*z+a[14])+v*(b[2]*x+b[6]*y+b[10]*z+b[14]);
-   const nx=normal[j],ny=normal[j+1],nz=normal[j+2],xx=w*(na[0]*nx+na[3]*ny+na[6]*nz)+v*(nb[0]*nx+nb[3]*ny+nb[6]*nz),yy=w*(na[1]*nx+na[4]*ny+na[7]*nz)+v*(nb[1]*nx+nb[4]*ny+nb[7]*nz),zz=w*(na[2]*nx+na[5]*ny+na[8]*nz)+v*(nb[2]*nx+nb[5]*ny+nb[8]*nz),l=Math.hypot(xx,yy,zz)||1;
+   const nx=normal[j],ny=normal[j+1],nz=normal[j+2],xx=w*(na[0]*nx+na[3]*ny+na[6]*nz)+v*(nb[0]*nx+nb[3]*ny+nb[6]*nz),yy=w*(na[1]*nx+na[4]*ny+na[7]*nz)+v*(nb[1]*nx+nb[4]*ny+nb[7]*nz),zz=w*(na[2]*nx+na[5]*ny+na[8]*nz)+v*(nb[2]*nx+nb[5]*ny+nb[8]*nz),l=Math.sqrt(xx*xx+yy*yy+zz*zz)||1;
    nn[j]=xx/l;nn[j+1]=yy/l;nn[j+2]=zz/l;
   }
   active.attributes.position.needsUpdate=true;active.attributes.normal.needsUpdate=true;uploads++;

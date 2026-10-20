@@ -47,8 +47,10 @@
       const grass = T.foliage.filter((f) => props.some((p) => Math.hypot(f.x - p.centre.x, f.z - p.centre.z) < 1.3)).length;
       ok(grass === 0, 'no ground cover within 1.3 m of any prop (' + grass + ')');
     }
-    // Draw calls: base + one state mesh (+ the radio light).
-    const visibleMeshes = (p) => { let n = 0; p.group.traverse((o) => { if (o.isMesh) { let v = true; for (let q = o; q; q = q.parent) if (!q.visible) v = false; if (v) n++; } }); return n; };
+    // Draw calls: base + one state mesh (+ the radio light). A day mission's dressing on a prop (userData.dressing: the
+    // utility truck's chain, the ranger cache's keypad and lid pictures; D-82) is the mission's, not the prop's.
+    const dressed = (o) => { for (let q = o; q; q = q.parent) if (q.userData && q.userData.dressing) return true; return false; };
+    const visibleMeshes = (p) => { let n = 0; p.group.traverse((o) => { if (o.isMesh && !dressed(o)) { let v = true; for (let q = o; q; q = q.parent) if (!q.visible) v = false; if (v) n++; } }); return n; };
     ok(props.every((p) => visibleMeshes(p) === (p.light ? 3 : 2)), 'two draws a prop (three for the radio): ' + props.map((p) => visibleMeshes(p)).join(','));
     // Sizes: GP-8's maximum footprints and heights, in the prop's own frame.
     // GP-8's sizes (w x d x h). The radio's allowance is the 0.8 x 0.6 x 1.1 cabinet plus its
@@ -61,7 +63,7 @@
       for (const st of p.states) {
         p.setState(st);
         const box = new T.THREE.Box3();
-        for (const m of p.group.children) if (m.isMesh && m.visible && m !== p.light) { m.geometry.computeBoundingBox(); box.union(m.geometry.boundingBox.clone()); }
+        for (const m of p.group.children) if (m.isMesh && m.visible && m !== p.light && !dressed(m)) { m.geometry.computeBoundingBox(); box.union(m.geometry.boundingBox.clone()); }
         const s = [box.max.x - box.min.x, box.max.z - box.min.z, box.max.y];
         const mx = MAX[p.kind];
         // The open lid of a case stands up behind it: height is checked closed only.

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createBadges,BADGE_IDS} from './badges.js';
 import {createBadgeAdapter,badgeCollection,renderBadgeCollection} from './badges-runtime.js';
+import {createFirstRunChoice,FIRST_RUN_CHOICE_KEY} from './first-run-choice.js';
 const record=(extra={})=>({day:20,kills:1000,headshots:100,streak:20,skulls:1000,evacuated:true,...extra});
 function fixture(getEligible=()=>undefined){const store=createBadges(),awards=[];
  const adapter=createBadgeAdapter({store,getEligible,onAward:(ids,meta)=>awards.push({ids,meta})});adapter.reset(1);return {store,adapter,awards};}
@@ -80,7 +81,7 @@ test('actual record hook awards once, suppresses debug moments and gives the dea
  const source=readFileSync(new URL('../index.html',import.meta.url),'utf8'),doc=dom(),nodes=new Map();
  doc.getElementById=id=>{if(!nodes.has(id)){const n=doc.createElement('span');n.id=id;nodes.set(id,n);}return nodes.get(id);};
  let receive;const cues=[];
- const ctx={createRecords,RECORDS_KEY,renderBestRecord,createBadges,BADGES_KEY,createBadgeAdapter,renderBadgeCollection,document:doc,
+ const ctx={createRecords,RECORDS_KEY,renderBestRecord,createBadges,BADGES_KEY,createBadgeAdapter,renderBadgeCollection,createFirstRunChoice,FIRST_RUN_CHOICE_KEY,document:doc,
    localStorage:{getItem:()=>null,setItem:()=>{}},window:{addEventListener:(_,f)=>{receive=f;}},AudioSys:{musicCue:name=>cues.push(name)},
    gameStarted:true,training:{active:false},gameOver:false,won:false,day:5,uiRunId:1,matchStats:{kills:1000,headshots:100,skullsTurnedIn:1000},comboBest:20,
    quest:{read:()=>({done:false})},victory:false,trueEnding:false,newCamos:[],
@@ -94,7 +95,7 @@ test('actual record hook awards once, suppresses debug moments and gives the dea
  const stats=source.slice(source.indexOf("      const row = document.createElement('span'); row.className = 'stats';",source.indexOf('    function endGame(')),source.indexOf('      if (!victory && gameStarted) {',source.indexOf('    function endGame(')));
  ctx.why=doc.createElement('span');runInNewContext(stats,ctx);
  const row=winMsgEl.querySelector('.stats');assert.equal(row.children.length,5);
- assert.deepEqual(row.children.map(n=>n.querySelector('i').textContent),['Day','Kills','Headshots','Best streak','Skulls banked']);
+ assert.deepEqual(row.children.map(n=>n.querySelector('i').textContent),['Night','Kills','Headshots','Best streak','Skulls banked']);
  assert.equal(row.children.at(-1).querySelector('b').textContent,'1000');assert(winMsgEl.querySelector('.lifetime-badges'));
  assert.equal(winMsgEl.querySelector('.badge-toggle').textContent,'Badges · 1/16');
  // Mirror a genuine run reset, then prove clean records commit exactly once.

@@ -59,6 +59,30 @@ export function createZombieAbilityRuntime(env){
     if(kind==='fireball'){const halo=new T.Mesh(a.haloGeo,a.haloMat);mesh.add(halo);}
     mesh.userData.enemyAbility=true;scene.add(mesh);return mesh;
   }
+  // Draw the actual pooled ability meshes during the hidden fight, before a
+  // demon, colossus or spitter can first put them on screen mid-wave.
+  function primeVisuals(x,y,z){
+    const fire=shotMesh('fireball'),stone=shotMesh('stone'),batch=trails.length?null:acidBatch();
+    const restored=[];
+    for(const [mesh,dx] of [[fire,-1],[stone,1]]){
+      mesh.position.set(x+dx,y,z);
+      mesh.traverse(o=>{if(o.isMesh){restored.push([o,o.frustumCulled]);o.frustumCulled=false;}});
+    }
+    if(batch){
+      const pts=[[x-1,y-1,z-1],[x+1,y-1,z-1],[x+1,y-1,z+1],[x-1,y-1,z-1],[x+1,y-1,z+1],[x-1,y-1,z+1]];
+      for(let i=0;i<6;i++){
+        batch.positions.setXYZ(i,...pts[i]);batch.colors.setXYZW(i,.76,.84,.68,.8);
+        batch.caps.setXY(i,0,0);batch.ages.setX(i,0);
+      }
+      for(const a of [batch.positions,batch.colors,batch.caps,batch.ages])a.needsUpdate=true;
+      batch.geometry.setDrawRange(0,6);batch.mesh.visible=true;
+    }
+    return ()=>{
+      for(const [o,cull] of restored)o.frustumCulled=cull;
+      for(const [kind,mesh] of [['fireball',fire],['stone',stone]]){mesh.visible=false;shotPools[kind].push(mesh);}
+      if(batch&&!trails.length){batch.mesh.visible=false;batch.geometry.setDrawRange(0,0);}
+    };
+  }
   function releaseShot(i){const s=shots[i];s.mesh.visible=false;shotPools[s.kind].push(s.mesh);shots.splice(i,1);}
   function releaseTrail(i){
     const p=trails[i];trailAlpha(p.slot,0);trailPool.push(p);trails.splice(i,1);
@@ -100,11 +124,13 @@ export function createZombieAbilityRuntime(env){
     const u=Math.min(1,p.age/ABILITY_CONFIG.spitter.life),w=SLIME.halfWidth*(1-SLIME.thin*u);
     const ax=p.ax,az=p.az,bx=p.x,bz=p.z,dx=bx-ax,dz=bz-az,l=Math.hypot(dx,dz)||1,nx=(p.startNX??-dz/l)*w,nz=(p.startNZ??dx/l)*w,ex=(p.endNX??-dz/l)*w,ez=(p.endNZ??dx/l)*w,ya=p.ay+.025,yb=p.y+.025;
     // corners in trailCorners order: (-,-) (+,-) (+,+) (-,-) (+,+) (-,+) with x across the ribbon and z along it
-    const pts=[[ax-nx,ya,az-nz],[ax+nx,ya,az+nz],[bx+ex,yb,bz+ez],[ax-nx,ya,az-nz],[bx+ex,yb,bz+ez],[bx-ex,yb,bz-ez]];
+    const o=p.slot*6,positions=trailBatch.positions;
+    positions.setXYZ(o,ax-nx,ya,az-nz);positions.setXYZ(o+1,ax+nx,ya,az+nz);positions.setXYZ(o+2,bx+ex,yb,bz+ez);
+    positions.setXYZ(o+3,ax-nx,ya,az-nz);positions.setXYZ(o+4,bx+ex,yb,bz+ez);positions.setXYZ(o+5,bx-ex,yb,bz-ez);
     const startAge=Math.min(1,Math.max(0,(clock-p.startBorn)/ABILITY_CONFIG.spitter.life)),endAge=Math.min(1,Math.max(0,(clock-p.born)/ABILITY_CONFIG.spitter.life));
-    for(let i=0;i<6;i++){trailBatch.ages.setX(p.slot*6+i,i===2||i===4||i===5?endAge:startAge);trailBatch.positions.setXYZ(p.slot*6+i,pts[i][0],pts[i][1],pts[i][2]);trailBatch.caps.setXY(p.slot*6+i,p.capStart?1:0,p.capEnd?1:0);}trailBatch.caps.needsUpdate=true;trailBatch.ages.needsUpdate=true;
-    const k=u*u,c=SLIME.fresh.map((f,j)=>f+(SLIME.dry[j]-f)*k);
-    for(let i=0;i<6;i++)trailBatch.colors.setXYZ(p.slot*6+i,c[0],c[1],c[2]);
+    for(let i=0;i<6;i++){trailBatch.ages.setX(o+i,i===2||i===4||i===5?endAge:startAge);trailBatch.caps.setXY(o+i,p.capStart?1:0,p.capEnd?1:0);}trailBatch.caps.needsUpdate=true;trailBatch.ages.needsUpdate=true;
+    const k=u*u,c0=SLIME.fresh[0]+(SLIME.dry[0]-SLIME.fresh[0])*k,c1=SLIME.fresh[1]+(SLIME.dry[1]-SLIME.fresh[1])*k,c2=SLIME.fresh[2]+(SLIME.dry[2]-SLIME.fresh[2])*k;
+    for(let i=0;i<6;i++)trailBatch.colors.setXYZ(o+i,c0,c1,c2);
   }
   function dropTrail(p,st,z){
     const y=env.ground(p.x,p.z,p.y+.35);if(y==null||Math.abs(y-p.y)>1||env.wet?.(p.x,p.z,p.y)){if(st)st.lastDrop=null;return;}
@@ -222,6 +248,7 @@ export function createZombieAbilityRuntime(env){
       updateShots(dt,token);if(!live(token))return;updateTrails(dt,token);
     },
     clear,
+    primeVisuals,
     read:()=>({clock,domain,shots:shots.length,trails:trails.length,counts:{...counts},pools:{fireballs:shotPools.fireball.length,stones:shotPools.stone.length,trails:trailPool.length}})
   };
 }

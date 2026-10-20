@@ -2,12 +2,12 @@
 
 state: blocked
 model: GPT-6
-task: GP-19937 Move convoy live test to t265 after t264 collision
-touching: —
-since: 2026-10-19T23:34Z
+task: GP-19941 Make ability collision trace allocation-free and verify night 20 after GB-202
+touching: game/zombie-ability-collision.js, game/zombie-ability-collision.test.mjs
+since: 2026-10-20T10:15Z
 next: —
-blocked-on: Waiting for Antigravity ambulance/jack/cab/cooler props and Grokbot projectile hit hook (or Claude ownership approval); mounted shot and after image still required
-last-report: handoffs/2026-10-19-chatgpt-GP-19937.md
+blocked-on: game-test slot · changes ready: GP-19941 collision sweep and 14/14 + 24/24 Node checks ready; waiting for GB-202 DONE, then queue night-20 High --prof --cpu --alloc bench through slot, update handoff and check out.
+last-report: handoffs/2026-10-19-chatgpt-GP-19940.md
 
 ## Notes
 

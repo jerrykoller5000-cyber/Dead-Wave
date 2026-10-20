@@ -23,6 +23,11 @@
   try {
     await startMatch(T, 'HikersKit');
     T.clearZombies(); T.setHp(100000); T.runDevCommand('godmode');
+    // GB-196 follow-up (Claude): a normal run takes the nearest river-bank tree within 120 m of the camp.
+    T.runDevCommand('site hikers');
+    await until(() => !!D().bag, 4000);
+    { const d0 = D(), cc = T.getObjectiveProps().props['objective:hikers-cache'].centre, dd = d0.tree ? Math.hypot(d0.tree.x - cc.x, d0.tree.z - cc.z) : -1;
+      ok(d0.river === true && dd > 0 && dd <= 120, 'a normal run: a river-bank tree ' + dd.toFixed(1) + ' m from the camp (river ' + d0.river + ')'); }
     // Dry run: hanging, locked, a miss does nothing, a hit cuts it, it lands on the ground.
     T.runDevCommand('site hikers dry');
     await until(() => !!D().bag, 4000);
@@ -35,10 +40,11 @@
     ok(D().kit.phase === 'hanging', 'a round 1.5 m off the rope leaves it (' + D().kit.phase + ')');
     shoot(d.rope[1], 0); await wait(100);
     ok(D().kit.phase !== 'hanging', 'a round through the rope cuts it (' + D().kit.phase + ')');
+    ok(D().cut && D().cut.frayTop && D().cut.stub && D().cut.ropeB, 'GB-199: the rope parts there: a frayed end over the bough, a stub on the bag (' + JSON.stringify(D().cut) + ')');
     await until(() => D().kit.phase !== 'falling', 5000);
     d = D();
     ok(d.kit.phase === 'ground' && !d.kit.toRiver, 'the dry run: it lands on the ground (' + d.kit.phase + ')');
-    ok(Math.abs(d.bag.y - T.sampleHeight(d.bag.x, d.bag.z)) < 0.6, 'on the ground: ' + (d.bag.y - T.sampleHeight(d.bag.x, d.bag.z)).toFixed(2) + ' m over it');
+    ok(Math.abs(d.bag.y - T.sampleHeight(d.bag.x, d.bag.z)) < 0.6 && !(T.waterAt(d.bag.x, d.bag.z).depth > 0.05), 'on the dry bank: ' + (d.bag.y - T.sampleHeight(d.bag.x, d.bag.z)).toFixed(2) + ' m over it');
     // River run: it floats, ages into the pool, the drowned rise once he comes near.
     T.runDevCommand('site hikers river');
     await until(() => !!D().bag && D().kit.phase === 'hanging', 4000);

@@ -41,6 +41,12 @@ export function liveCloth(T, { space, bones, geo, weights, material, name = 'liv
   out.setAttribute('normal', new T.Float32BufferAttribute(dn, 3));
   out.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
   out.computeBoundingSphere();
+  // CL-218: the sphere is the rest pose's, padded for the joints' reach, and kept: nulling it on every bend made three
+  // walk every vertex again each frame to sort the draw (0.6 ms a frame at night 20, AG-96's profile). The mesh is
+  // never frustum-culled; the sphere only orders the draw and gates a ray.
+  const SPHERE_PAD = 0.35, padded = new WeakSet();
+  const padSphere = (g) => { if (padded.has(g)) return; if (!g.boundingSphere) g.computeBoundingSphere(); g.boundingSphere.radius += SPHERE_PAD; padded.add(g); };
+  padSphere(out);
   if (!holder) { holder = new T.Group(); holder.name = name + '-live'; space.add(holder); }
   const mesh = new T.Mesh(out, material); mesh.name = name; mesh.castShadow = mesh.receiveShadow = true; mesh.frustumCulled = false;
   mesh.userData.liveShape = true; mesh.userData.aoOwners = aoOwners || bones.slice();
@@ -76,13 +82,14 @@ export function liveCloth(T, { space, bones, geo, weights, material, name = 'liv
       P[o] = m[0] * x + m[3] * y + m[6] * z + m[9];
       P[o + 1] = m[1] * x + m[4] * y + m[7] * z + m[10];
       P[o + 2] = m[2] * x + m[5] * y + m[8] * z + m[11];
-      const nx = m[0] * a + m[3] * b + m[6] * c, ny = m[1] * a + m[4] * b + m[7] * c, nz = m[2] * a + m[5] * b + m[8] * c, l = Math.hypot(nx, ny, nz) || 1;
+      // CL-220: Math.sqrt, not Math.hypot: V8 allocates for a three-argument hypot, and this ran per vertex per bend (131 kB a frame at night 20, GP-19940's allocation profile).
+      const nx = m[0] * a + m[3] * b + m[6] * c, ny = m[1] * a + m[4] * b + m[7] * c, nz = m[2] * a + m[5] * b + m[8] * c, l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
       Q[o] = nx / l; Q[o + 1] = ny / l; Q[o + 2] = nz / l;
     }
     const pa = PA.array, na = NA.array;
     for (let i = 0; i < drawn; i++) { const o = i * 3, s = map[i] * 3; pa[o] = P[s]; pa[o + 1] = P[s + 1]; pa[o + 2] = P[s + 2]; na[o] = Q[s]; na[o + 1] = Q[s + 1]; na[o + 2] = Q[s + 2]; }
     PA.needsUpdate = true; NA.needsUpdate = true;
-    if (active.boundingSphere) active.boundingSphere = null;
+    padSphere(active);   // (a swapped-in copy gets its padded rest sphere once; it isn't thrown away each bend)
   }
   mesh.onBeforeRender = bend; mesh.onBeforeShadow = bend;
   mesh.userData.cloth = { bend, bones, weights, B, rest, count, drawn, moves: () => moves };

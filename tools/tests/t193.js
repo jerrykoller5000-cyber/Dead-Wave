@@ -71,13 +71,15 @@
       key('KeyW', true);
       await wait(250);
       let low = Infinity, n = 0;
-      const t0 = Date.now();
+      const t0 = Date.now(), x1 = p.x, z1 = p.z;
       while (Date.now() - t0 < 1000) { const l = soles(); low = Math.min(low, l.L, l.R); n++; await wait(20); }
       key('KeyW', false);
       const deg = Math.atan(Math.hypot((T.sampleHeight(p.x + 0.75, p.z) - T.sampleHeight(p.x - 0.75, p.z)) / 1.5, (T.sampleHeight(p.x, p.z + 0.75) - T.sampleHeight(p.x, p.z - 0.75)) / 1.5)) * 180 / Math.PI;
       // A slow test page steps him up to 0.4 m a frame, so the eased ground under his feet trails a little: floating is
-      // allowed a few cm more than on the flat; sinking (what Jerry saw) is not.
-      ok(low > -0.05 && low < flatWalk + 0.07, 'walking on the hill (' + name + ', ' + deg.toFixed(0) + ' deg where he ended): no sole sinks into it, nor floats (lowest ' + f3(low) + ' m over ' + n + ' looks; ' + f3(flatWalk) + ' on the flat)');
+      // allowed a few cm more than on the flat; sinking (what Jerry saw) is not. CL-220: the allowance follows the page's
+      // own step (the ground climbs step x tan(slope) between two looks; 4-8 looks a second under the suite gave 5 cm).
+      const stepLen = Math.hypot(p.x - x1, p.z - z1) / Math.max(1, n), slack = Math.max(0.07, 0.04 + stepLen * Math.tan(deg * Math.PI / 180));
+      ok(low > -0.05 && low < flatWalk + slack, 'walking on the hill (' + name + ', ' + deg.toFixed(0) + ' deg where he ended): no sole sinks into it, nor floats (lowest ' + f3(low) + ' m over ' + n + ' looks, ' + f3(stepLen) + ' m a look; ' + f3(flatWalk) + ' on the flat)');
       await wait(400);
     }
     for (const [name, fx, fz] of faces) {

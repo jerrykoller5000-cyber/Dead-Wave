@@ -56,7 +56,7 @@
     const aStart = d2(A.mesh.position, P.x, P.z);
     T.removeDummyPlayer(id);
     T.updateFlowField(0, true);
-    await wait(3000);
+    { const t0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - t0 < 3 && Date.now() - w0 < 20000) await wait(50); }   // GB-202: 3 s of game time (the slow page gave 2.5 m in 3 s of wall clock)
     const aNow = d2(A.mesh.position, P.x, P.z);
     ok(A.alive && aNow < aStart - 3, 'with the dummy gone it walks for the marine (' + aStart.toFixed(1) + ' -> ' + aNow.toFixed(1) + ' m)');
     ok(T.players.length === 1 && T.ffDistAt(dx, dz) > 30, 'and the field is his alone again');

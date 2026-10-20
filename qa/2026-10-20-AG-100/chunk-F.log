@@ -1,0 +1,64 @@
+# AG-100 Chunk F: t240 t241 t242 t243 t244 t245 t246 t247 t248 t249 t250 t251 t252 t253 t254 t255 t256 t257 t258 t259 t260 t261 t262 t263 t264 t265 t266 t267 t268
+# Started: 2026-10-20T06:37:33.520Z
+
+Game-test request cef74cd8-4b08-4627-9e87-1ea737e19c00 queued at position 2. Waiting...
+GRANT antigravity AG-100: starting one game-test command
+check-players: 303 player.position reads, all in the allowed places
+ok    t240    17 pass   0 fail  68.2s
+ok    t241     5 pass   0 fail  45.2s
+ok    t242    15 pass   0 fail  45.9s
+ok    t243    23 pass   0 fail  44.8s
+FAIL  t244     3 pass   6 fail  46.5s
+ok    t245    15 pass   0 fail  46.6s
+ok    t246    24 pass   0 fail  75.5s
+ok    t247    11 pass   0 fail  58.4s
+ok    t248    12 pass   0 fail  47.5s
+ok    t249    11 pass   0 fail  45.4s
+ok    t250    10 pass   0 fail  44.4s
+ok    t251     3 pass   0 fail  44.3s
+ok    t252    12 pass   0 fail  62.2s
+FAIL  t253    21 pass   3 fail  65.3s
+ok    t254     8 pass   0 fail  48.9s
+           INFO smoking pinch: solved 2.6 cm, sampled 2.6 cm, wrist miss 5.1 cm; shoulder target/actual 27.7/27.7 cm; hand offset 15.8 cm
+ok    t255     5 pass   0 fail  55.6s
+ok    t256    10 pass   0 fail  69.2s
+ok    t257     7 pass   0 fail  34.1s
+ok    t258     4 pass   0 fail  32.7s
+FAIL  t259     7 pass   1 fail  63.3s
+           INFO night 8: day 8 bloodMoon true preview.bloodMoon true silenced false quest {"runId":1,"day":8,"order":[5,7,1,0,6],"unlocked":true,"triedDay":6,"known":[false,false,false,false,false],"silencedDay":6,"silenced":false,"heart":null,"done":false} total 350
+ok    t260     9 pass   0 fail  47.7s
+ok    t261     9 pass   0 fail  52.8s
+ok    t262    24 pass   0 fail  147.8s
+ok    t263    17 pass   0 fail  50.9s
+ok    t264    22 pass   0 fail  53.5s
+ok    t265    27 pass   0 fail  48.3s
+FAIL  t266    28 pass   4 fail  55.1s
+ok    t267    24 pass   0 fail  81.3s
+FAIL  t268    19 pass   1 fail  49.0s
+
+29 checks: 402 pass, 15 fail
+
+by owner:
+  unassigned
+    t244   6 fail  FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: no jump - worst frame hips@1 132.0 cm (2200% of its limit)
+           FAIL mortar mount: the body does not teleport to the crew spot (132.0 cm on the first frame)
+           FAIL he walks in and crouches beside the tube (hips moved 132.0 cm, down 0.0 cm)
+           FAIL a round is in his hand, ready (rest)
+           FAIL the round is let go into the tube on the shot
+           FAIL threw: TypeError: Cannot read properties of null (reading 'visible')
+    t253   3 fail  FAIL and he is back on his feet
+           FAIL and he is back on his feet
+           FAIL a short cooldown before the next one
+           FAIL with an empty meter he still dives
+    t259   1 fail  FAIL ending it writes the run and returns to the menu (12)
+           FAIL ending it writes the run and returns to the menu (12)
+    t266   4 fail  FAIL radio: E shows it big (mode look, look radio, panel on, .look true, img /data:image/png;bas
+           FAIL radio: E shows it big (mode look, look radio, panel on, .look true, img /data:image/png;base64, canvas true, html 35574)
+           FAIL board: E shows it big (mode look, look board, panel on, .look true, img /data:image/png;base64, canvas true, html 70494)
+           FAIL truck: E shows it big (mode look, look truck, panel on, .look true, img /data:image/png;base64, canvas true, html 12554)
+           FAIL the keypad shuts by itself after
+    t268   1 fail  FAIL stepping off the stones into the leaves snaps a trap (undefined)
+           FAIL stepping off the stones into the leaves snaps a trap (undefined)
+
+# Finished: 2026-10-20T07:13:13.558Z code=1 signal=none

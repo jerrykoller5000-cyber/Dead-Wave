@@ -1814,6 +1814,15 @@ const messages = {
   "hikers.grab": "E — Grab the kit",
   "hikers.devTitle": "HIKERS’ KIT",
   "hikers.devDetail": "Shoot the rope",
+  // GB-197: the fuel depot, carry it home.
+  "fuel.fill": "Hold E - Fill the can",
+  "fuel.filling": "Filling...",
+  "fuel.pour": "E - Pour it in",
+  "fuel.pickUp": "E - Pick up the can",
+  "fuel.boomTitle": "THE FUEL WENT UP",
+  "fuel.boomDetail": "Another can at the pump",
+  "fuel.devTitle": "FUEL DEPOT",
+  "fuel.devDetail": "Fill it, carry it home",
   "objectives.repairing": "Restoring signal…",
   "objectives.interrupted": "Repair interrupted",
   "objectives.claim": "Take supplies",
@@ -2278,6 +2287,13 @@ const messages = {
   "ranger.ch": "CH",
   "ranger.unit": "UNIT",
   "ranger.areas": "Ridge,Creek,North trail,Lake shore,Old mine,Quarry,Pines,Dock road,Tower",
+  // AG-93: the trapper's safe path day mission (docs/specs/day-missions.md §4)
+  "trapper.locked": "Trapped path.",
+  "trapper.snapped": "Bear trap! ({seconds}s)",
+  "trapper.snapTitle": "BEAR TRAP",
+  "trapper.snapDetail": "Held fast — they heard the snap",
+  "trapper.devTitle": "TRAPPER'S PATH",
+  "trapper.devDetail": "Follow the horseshoes across the stones",
 };
 
 // Freeze plural records too: one area cannot accidentally change another's copy.

@@ -3,7 +3,7 @@
 //  hanging -> (a round cuts the rope) falling -> ground | floating (a river run, landing in the water)
 //  floating -> (FLOAT_S unclaimed) snagged in the pool, where the drowned rise once he comes near
 //  ground | floating | snagged -> (E within GRAB_R) caught
-export const HIKERS = Object.freeze({ ropeH: 5, gravity: 9.8, grabR: 2, floatS: 40, drownedMin: 3, drownedMax: 5,
+export const HIKERS = Object.freeze({ ropeH: 5, gravity: 9.8, grabR: 2, floatS: 40, drownedMin: 3, drownedMax: 5, treeNear: 50, treeFar: 120,
   poolWakeR: 14, ropeR: 0.09 });
 
 // A run's seed: the same run always rolls the same.
@@ -38,6 +38,22 @@ export function segmentDistance(a0, a1, b0, b1) {
 export function roundCutsRope(from, to, pieces, rule = HIKERS) {
   for (const [p, q] of pieces) if (segmentDistance(from, to, p, q) <= rule.ropeR) return true;
   return false;
+}
+
+// GB-196 follow-up (Claude): the tree. trees: [{ tree, d (to the camp), bank (a river-bank tree whose bough reaches the
+// water) }]. The nearest bank tree within treeNear wins; else the nearest bank tree within treeFar; only when there is
+// none, the nearest tree at the camp (3 m to treeNear), and then no river. Returns { tree, river } or null.
+export function pickHikersTree(trees, rule = HIKERS) {
+  let near = null, far = null, camp = null;
+  for (const c of trees) {
+    if (!c || !(c.d >= 0)) continue;
+    if (c.bank && c.d <= rule.treeNear && (!near || c.d < near.d)) near = c;
+    else if (c.bank && c.d <= rule.treeFar && (!far || c.d < far.d)) far = c;
+    if (c.d > 3 && c.d <= rule.treeNear && (!camp || c.d < camp.d)) camp = c;
+  }
+  const bank = near || far;
+  if (bank) return { tree: bank.tree, river: true };
+  return camp ? { tree: camp.tree, river: false } : null;
 }
 
 export function createHikersKit({ seed = 1, river = true, config = {} } = {}) {

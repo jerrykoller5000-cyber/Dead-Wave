@@ -1,0 +1,35 @@
+{
+  "out": "review/convoy-GP19938/beat-shots",
+  "cols": 2,
+  "tile": 600,
+  "shots": [
+    {
+      "target": "place:wreck:0",
+      "view": "front",
+      "time": "day",
+      "caption": "Ambulance, cab front",
+      "pre": "T.runDevCommand('site convoy'); await wait(200); T.convoyDbg.parts().setDoorOpen(false); T.convoyDbg.parts().setBeatPulse(0);"
+    },
+    {
+      "target": "place:wreck:0",
+      "view": "right",
+      "time": "day",
+      "caption": "Jack and pinned cooler, beat idle",
+      "pre": "T.convoyDbg.parts().setDoorOpen(false); T.convoyDbg.parts().setBeatPulse(0);"
+    },
+    {
+      "target": "place:wreck:0",
+      "view": "right",
+      "time": "day",
+      "caption": "Jack on the beat",
+      "pre": "T.convoyDbg.parts().setBeatPulse(1);"
+    },
+    {
+      "target": "place:wreck:0",
+      "view": "right",
+      "time": "day",
+      "caption": "Cab door and sleeper open",
+      "pre": "T.convoyDbg.parts().setDoorOpen(true); if (T.convoyDbg.sleeper()) T.convoyDbg.sleeper().visible = true;"
+    }
+  ]
+}

@@ -73,6 +73,38 @@ function harness(callbacks = {}, engine = THREE, tsl = null) {
   return h;
 }
 
+test('hidden ability warm-up leaves a live acid trail and combat counters untouched', () => {
+  const h = harness(), z = zombie('spitter', 3);
+  h.actors.push(z); h.tick(.01);
+  z.mesh.position.x += .8; h.tick(.02);
+  const before = h.runtime.read();
+  const trail = h.scene.children.find(m => m.name === 'spitter-acid-trail-batch');
+  const vertices = [...trail.geometry.attributes.position.array.slice(0, 18)];
+  const restore = h.runtime.primeVisuals(5, 2, 5);
+  assert.deepEqual(h.runtime.read(), before);
+  assert.deepEqual([...trail.geometry.attributes.position.array.slice(0, 18)], vertices);
+  restore();
+  assert.deepEqual(h.runtime.read().counts, before.counts);
+  assert.equal(trail.visible, true);
+  assert.equal(h.runtime.read().pools.fireballs, 1);
+  assert.equal(h.runtime.read().pools.stones, 1);
+});
+
+test('hidden ability warm-up exposes and restores the actual pooled draw meshes', () => {
+  const h = harness(), before = h.runtime.read();
+  const restore = h.runtime.primeVisuals(5, 2, 5);
+  const fire = h.scene.children.find(m => m.name === 'zombie-fireball');
+  const stone = h.scene.children.find(m => m.name === 'zombie-stone');
+  const acid = h.scene.children.find(m => m.name === 'spitter-acid-trail-batch');
+  assert(fire?.visible && stone?.visible && acid?.visible);
+  assert.equal(acid.geometry.drawRange.count, 6);
+  assert.deepEqual(h.runtime.read().counts, before.counts);
+  restore();
+  assert.equal(fire.visible, false);assert.equal(stone.visible, false);assert.equal(acid.visible, false);
+  assert.equal(acid.geometry.drawRange.count, 0);
+  assert.equal(h.runtime.read().pools.fireballs, 1);assert.equal(h.runtime.read().pools.stones, 1);
+});
+
 for (const [type, rawDamage] of [['demon', 24], ['colossus', 80]]) {
   test(type + ' lethal contact can synchronously clear the runtime without double-releasing pooled shots', () => {
     const h = harness({ damage: h => h.runtime.clear() });

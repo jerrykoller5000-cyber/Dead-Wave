@@ -241,6 +241,7 @@ export async function launch({ headless = true, args = [] } = {}) {
     '--no-first-run', '--no-default-browser-check', '--disable-extensions',
     '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
     '--disable-backgrounding-occluded-windows', '--mute-audio',
+    '--enable-precise-memory-info',   // CL-219: performance.memory exact, so the bench's spikes can say when the heap was collected
     // Headless Chrome has no real GPU: SwiftShader gives it WebGL2 so the game renders.
     // A visible window keeps the real GPU; forcing SwiftShader there made every
     // "real GPU" number a software-rendering number.

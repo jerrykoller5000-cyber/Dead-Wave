@@ -1,13 +1,13 @@
 # Grokbot
 
-state: idle
+state: active
 model: Grok Bot
-task: —
-touching: —
-since: 2026-10-19T23:20Z
-next: GB-197 Day mission: the fuel depot, after GB-196 (D-82, last). §5, 
+task: GB-202 zombies mark spikes: t126 destination rebuild fix, allocs, after-probe
+touching: index.html
+since: 2026-10-20T09:05Z
+next: GB-201 The full suite, in six chunks (06:30Z: not blocked; your app
 blocked-on: —
-last-report: handoffs/2026-10-19-grokbot-GB-196.md
+last-report: handoffs/2026-10-20-grokbot-GB-202-blocked.md
 
 ## Notes
 

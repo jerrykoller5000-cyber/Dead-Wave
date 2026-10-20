@@ -1,0 +1,1531 @@
+{
+  "beforeFold0": {
+    "gy": -3.1686761379241943,
+    "houseFolded": null,
+    "houseDraws": 157,
+    "tagWallDraws": [
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 40,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      }
+    ],
+    "lockdownDoorDraws": [
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 52,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      }
+    ]
+  },
+  "afterFolded": {
+    "gy": -3.1686761379241943,
+    "houseFolded": {
+      "folded": 10,
+      "removed": 81
+    },
+    "houseDraws": 86,
+    "tagWallDraws": [
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 28,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      }
+    ],
+    "tagWallVisibleTags": 9,
+    "lockdownDoorDraws": [
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 24,
+        "inst": 0
+      }
+    ],
+    "groundMeshCount": 0,
+    "groundDrawsSample": [],
+    "foliageChunkCount": 153,
+    "dock": {
+      "x": -86.0904168529064,
+      "z": -64.8797344398715,
+      "deckY": -2.8499999999999996
+    },
+    "lake": {
+      "x": -134,
+      "z": -107
+    }
+  },
+  "marineClothCheck": {
+    "clothMeshCount": 510,
+    "anyInvisibleSkin": [
+      "(unnamed)",
+      "calf-pad-strap",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "thigh-pad-strap",
+      "calf-pad-strap",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "thigh-pad-strap",
+      "katana-blade",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "marine-fitted-helmet-cover",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)",
+      "(unnamed)"
+    ],
+    "hpAfterZombie": 100,
+    "hpAfterRound": 90,
+    "zombieHitWorked": false,
+    "roundHitWorked": true
+  },
+  "gp19939": {
+    "shambler": [
+      {
+        "path": "zombie-skin",
+        "type": "SkinnedMesh",
+        "mat": "MeshStandardNodeMaterial",
+        "map": true,
+        "emissive": false,
+        "transparent": false,
+        "vc": true,
+        "folded": false,
+        "baked": 0,
+        "verts": 15024,
+        "inst": 0
+      }
+    ],
+    "screamer": [
+      {
+        "path": "zombie-skin",
+        "type": "SkinnedMesh",
+        "mat": "MeshStandardNodeMaterial",
+        "map": true,
+        "emissive": false,
+        "transparent": false,
+        "vc": true,
+        "folded": false,
+        "baked": 0,
+        "verts": 16584,
+        "inst": 0
+      }
+    ],
+    "spitter": [
+      {
+        "path": "spitter-jaw",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": true,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 288,
+        "inst": 0
+      },
+      {
+        "path": "(unnamed)",
+        "type": "Mesh",
+        "mat": "MeshStandardMaterial",
+        "map": false,
+        "emissive": true,
+        "transparent": false,
+        "vc": false,
+        "folded": false,
+        "baked": 0,
+        "verts": 22,
+        "inst": 0
+      },
+      {
+        "path": "zombie-skin",
+        "type": "SkinnedMesh",
+        "mat": "MeshStandardNodeMaterial",
+        "map": true,
+        "emissive": false,
+        "transparent": false,
+        "vc": true,
+        "folded": false,
+        "baked": 0,
+        "verts": 15276,
+        "inst": 0
+      }
+    ],
+    "demon": [
+      {
+        "path": "zombie-skin",
+        "type": "SkinnedMesh",
+        "mat": "MeshStandardNodeMaterial",
+        "map": true,
+        "emissive": false,
+        "transparent": false,
+        "vc": true,
+        "folded": false,
+        "baked": 0,
+        "verts": 15456,
+        "inst": 0
+      },
+      {
+        "path": "demon-fire-fists",
+        "type": "Mesh",
+        "mat": "MeshBasicMaterial",
+        "map": false,
+        "emissive": false,
+        "transparent": true,
+        "vc": true,
+        "folded": false,
+        "baked": 0,
+        "verts": 216,
+        "inst": 2
+      }
+    ]
+  },
+  "gb199": {
+    "bag": null,
+    "bough": {
+      "x": -94.38,
+      "y": 5.69,
+      "z": -12.51,
+      "draws": 3
+    },
+    "pump": {
+      "x": -46.25,
+      "y": -2.99,
+      "z": -16.22,
+      "draws": 7
+    },
+    "can": {
+      "x": -45.5,
+      "y": -2.99,
+      "z": -16.02,
+      "draws": 3
+    },
+    "gen": {
+      "x": 6.6,
+      "y": -3.17,
+      "z": 1.5,
+      "draws": 6
+    }
+  },
+  "benchRuns": [
+    {
+      "run": 1,
+      "fps": 55.9,
+      "low": 29.6,
+      "hitches": 4,
+      "draws": 265,
+      "frameMs": 17.89,
+      "gpuMs": 0.31,
+      "top": [
+        {
+          "k": "r:render",
+          "avg": 7,
+          "max": 43
+        },
+        {
+          "k": "zombies",
+          "avg": 2.48,
+          "max": 13.4
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.6,
+          "max": 4.2
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.75,
+          "max": 3.7
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.46,
+          "max": 1.2
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.44,
+          "max": 2.9
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.21,
+          "max": 1.1
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.18,
+          "max": 1.1
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.16,
+          "max": 4.1
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.12,
+          "max": 1
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.11,
+          "max": 0.4
+        },
+        {
+          "k": "tree+deck coll",
+          "avg": 0.1,
+          "max": 2.8
+        }
+      ],
+      "censusDrawsByGroup": [
+        {
+          "k": "Group>tag-wall",
+          "n": 74
+        },
+        {
+          "k": "Group>fitted-pelvis",
+          "n": 52
+        },
+        {
+          "k": "Mesh",
+          "n": 50
+        },
+        {
+          "k": "zombie (Group>zombie-eyes)",
+          "n": 21
+        },
+        {
+          "k": "ground-sectors",
+          "n": 16
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist)",
+          "n": 16
+        },
+        {
+          "k": "Group",
+          "n": 10
+        },
+        {
+          "k": "fuel-depot",
+          "n": 6
+        },
+        {
+          "k": "feral-motion-echo",
+          "n": 5.5
+        },
+        {
+          "k": "rock-batch",
+          "n": 3
+        },
+        {
+          "k": "zombie (Group>concept-surface)",
+          "n": 2
+        },
+        {
+          "k": "Group>rabbit-skin",
+          "n": 1
+        },
+        {
+          "k": "spitter-acid-trail-batch",
+          "n": 1
+        }
+      ],
+      "censusDrawsByPart": [
+        {
+          "k": "Mesh / (unnamed)",
+          "n": 50
+        },
+        {
+          "k": "Group>tag-wall / (unnamed)",
+          "n": 26
+        },
+        {
+          "k": "Group>fitted-pelvis / (unnamed)",
+          "n": 24
+        },
+        {
+          "k": "zombie (Group>zombie-eyes) / zombie-skin",
+          "n": 21
+        },
+        {
+          "k": "Group>tag-wall / hq-armory",
+          "n": 18
+        },
+        {
+          "k": "ground-sectors / (unnamed)",
+          "n": 16
+        },
+        {
+          "k": "Group>tag-wall / hq-skull-intake",
+          "n": 13
+        },
+        {
+          "k": "Group / (unnamed)",
+          "n": 10
+        },
+        {
+          "k": "Group>fitted-pelvis / rig-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / zombie-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / demon-fire-fists",
+          "n": 8
+        },
+        {
+          "k": "Group>tag-wall / fob-lockdown-door",
+          "n": 6
+        },
+        {
+          "k": "fuel-depot / hq-generator",
+          "n": 6
+        },
+        {
+          "k": "feral-motion-echo / feral-motion-echo",
+          "n": 5.5
+        },
+        {
+          "k": "Group>tag-wall / hq-alarm-cabinet",
+          "n": 5
+        }
+      ],
+      "censusNodes": 9397,
+      "hasComputeBoundingSphere": false
+    },
+    {
+      "run": 2,
+      "fps": 57.6,
+      "low": 30.8,
+      "hitches": 4,
+      "draws": 257,
+      "frameMs": 17.36,
+      "gpuMs": 0.32,
+      "top": [
+        {
+          "k": "r:render",
+          "avg": 6.93,
+          "max": 36.8
+        },
+        {
+          "k": "zombies",
+          "avg": 2.27,
+          "max": 15.2
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.64,
+          "max": 5
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.77,
+          "max": 2
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.46,
+          "max": 2.9
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.45,
+          "max": 1.3
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.22,
+          "max": 1.4
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.18,
+          "max": 1.4
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.16,
+          "max": 1.1
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.13,
+          "max": 1.4
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.11,
+          "max": 0.6
+        },
+        {
+          "k": "tree+deck coll",
+          "avg": 0.1,
+          "max": 0.4
+        }
+      ],
+      "censusDrawsByGroup": [
+        {
+          "k": "Group>tag-wall",
+          "n": 74
+        },
+        {
+          "k": "Group>fitted-pelvis",
+          "n": 52
+        },
+        {
+          "k": "Mesh",
+          "n": 46
+        },
+        {
+          "k": "zombie (Group>zombie-eyes)",
+          "n": 18
+        },
+        {
+          "k": "ground-sectors",
+          "n": 16
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist)",
+          "n": 16
+        },
+        {
+          "k": "Group",
+          "n": 10
+        },
+        {
+          "k": "fuel-depot",
+          "n": 6
+        },
+        {
+          "k": "feral-motion-echo",
+          "n": 5
+        },
+        {
+          "k": "rock-batch",
+          "n": 4
+        },
+        {
+          "k": "zombie (Group>concept-surface)",
+          "n": 2
+        },
+        {
+          "k": "spitter-acid-trail-batch",
+          "n": 1
+        }
+      ],
+      "censusDrawsByPart": [
+        {
+          "k": "Mesh / (unnamed)",
+          "n": 46
+        },
+        {
+          "k": "Group>tag-wall / (unnamed)",
+          "n": 26
+        },
+        {
+          "k": "Group>fitted-pelvis / (unnamed)",
+          "n": 24
+        },
+        {
+          "k": "Group>tag-wall / hq-armory",
+          "n": 18
+        },
+        {
+          "k": "zombie (Group>zombie-eyes) / zombie-skin",
+          "n": 18
+        },
+        {
+          "k": "ground-sectors / (unnamed)",
+          "n": 16
+        },
+        {
+          "k": "Group>tag-wall / hq-skull-intake",
+          "n": 13
+        },
+        {
+          "k": "Group / (unnamed)",
+          "n": 10
+        },
+        {
+          "k": "Group>fitted-pelvis / rig-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / zombie-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / demon-fire-fists",
+          "n": 8
+        },
+        {
+          "k": "Group>tag-wall / fob-lockdown-door",
+          "n": 6
+        },
+        {
+          "k": "fuel-depot / hq-generator",
+          "n": 6
+        },
+        {
+          "k": "Group>tag-wall / hq-alarm-cabinet",
+          "n": 5
+        },
+        {
+          "k": "feral-motion-echo / feral-motion-echo",
+          "n": 5
+        }
+      ],
+      "censusNodes": 9446,
+      "hasComputeBoundingSphere": false
+    },
+    {
+      "run": 3,
+      "fps": 51.1,
+      "low": 23.6,
+      "hitches": 12,
+      "draws": 270,
+      "frameMs": 19.57,
+      "gpuMs": 0.25,
+      "top": [
+        {
+          "k": "r:render",
+          "avg": 8.33,
+          "max": 73.5
+        },
+        {
+          "k": "zombies",
+          "avg": 2.91,
+          "max": 10
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.9,
+          "max": 5.9
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.59,
+          "max": 2.5
+        },
+        {
+          "k": "r:cull",
+          "avg": 0.56,
+          "max": 1.5
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.56,
+          "max": 1.4
+        },
+        {
+          "k": "w:stairs+roof+birds+bugs+wildlife",
+          "avg": 0.22,
+          "max": 1.6
+        },
+        {
+          "k": "m:idle",
+          "avg": 0.2,
+          "max": 2.7
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.2,
+          "max": 1
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.19,
+          "max": 4.7
+        },
+        {
+          "k": "w:minimap",
+          "avg": 0.17,
+          "max": 1.9
+        },
+        {
+          "k": "w:treeFall+leaves+batches",
+          "avg": 0.13,
+          "max": 0.9
+        }
+      ],
+      "censusDrawsByGroup": [
+        {
+          "k": "Mesh",
+          "n": 119
+        },
+        {
+          "k": "Group>tag-wall",
+          "n": 74
+        },
+        {
+          "k": "Group>fitted-pelvis",
+          "n": 54
+        },
+        {
+          "k": "zombie (Group>zombie-eyes)",
+          "n": 22
+        },
+        {
+          "k": "ground-sectors",
+          "n": 16
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist)",
+          "n": 16
+        },
+        {
+          "k": "feral-motion-echo",
+          "n": 13.5
+        },
+        {
+          "k": "Group",
+          "n": 10
+        },
+        {
+          "k": "fuel-depot",
+          "n": 6
+        },
+        {
+          "k": "rock-batch",
+          "n": 4
+        },
+        {
+          "k": "zombie (Group>concept-surface)",
+          "n": 3
+        },
+        {
+          "k": "spitter-acid-pool",
+          "n": 1
+        },
+        {
+          "k": "spitter-acid-trail-batch",
+          "n": 1
+        }
+      ],
+      "censusDrawsByPart": [
+        {
+          "k": "Mesh / (unnamed)",
+          "n": 119
+        },
+        {
+          "k": "Group>tag-wall / (unnamed)",
+          "n": 26
+        },
+        {
+          "k": "Group>fitted-pelvis / (unnamed)",
+          "n": 24
+        },
+        {
+          "k": "zombie (Group>zombie-eyes) / zombie-skin",
+          "n": 22
+        },
+        {
+          "k": "Group>tag-wall / hq-armory",
+          "n": 18
+        },
+        {
+          "k": "ground-sectors / (unnamed)",
+          "n": 16
+        },
+        {
+          "k": "feral-motion-echo / feral-motion-echo",
+          "n": 13.5
+        },
+        {
+          "k": "Group>tag-wall / hq-skull-intake",
+          "n": 13
+        },
+        {
+          "k": "Group / (unnamed)",
+          "n": 10
+        },
+        {
+          "k": "Group>fitted-pelvis / rig-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / zombie-skin",
+          "n": 8
+        },
+        {
+          "k": "zombie (Group>demon-fire-fist) / demon-fire-fists",
+          "n": 8
+        },
+        {
+          "k": "Group>tag-wall / fob-lockdown-door",
+          "n": 6
+        },
+        {
+          "k": "fuel-depot / hq-generator",
+          "n": 6
+        },
+        {
+          "k": "Group>tag-wall / hq-alarm-cabinet",
+          "n": 5
+        }
+      ],
+      "censusNodes": 9428,
+      "hasComputeBoundingSphere": false
+    }
+  ]
+}

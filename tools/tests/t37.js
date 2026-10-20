@@ -101,7 +101,7 @@
   ok(document.getElementById('winTitle').textContent === 'Rest easy, Swimmer', 'title: ' + document.getElementById('winTitle').textContent);
   // GP-52 adds Skulls banked; records and badges must not be counted as run stats.
   const stats = [...document.querySelectorAll('#winMsg .stats > .st')];
-  ok(stats.length === 5 && stats.map(s => s.querySelector('i')?.textContent).join('|') === 'Day|Kills|Headshots|Best streak|Skulls banked',
+  ok(stats.length === 5 && stats.map(s => s.querySelector('i')?.textContent).join('|') === 'Night|Kills|Headshots|Best streak|Skulls banked',
     'five run stats, including Skulls banked: ' + stats.map(s => s.querySelector('i')?.textContent).join(', '));
 
   for (let i = 0; i < 80; i++) {

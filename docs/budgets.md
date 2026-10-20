@@ -14,7 +14,7 @@ cloud's software renderer can count but not time.
 | A night (5, 10, 14, 18, 20), about 15-20 dead out | ≤ 700 draws, ≤ 900 k | 530-710 draws, 740-770 k |
 | 48 dead (the cap, MAX_ZOMBIES) | ≤ 800 draws, **≤ 1.2 M** | 784 draws, **1.68 M** |
 | A 100-piece base and 48 dead | ≤ 1 000 draws, ≤ 1.5 M | (665 pieces and 87 dead: 1 784 draws, 2.0 M) |
-| Frame time, Jerry's GPU, High, night 20 | 60 fps mean, ≥ 50 fps 1 % low | **44.8 fps, 32.3 low** (AG-86, 10-19 21:08Z, after CL-211's cuts 1-2; was 33 and 26); night 10 45.4; the megaswarm 60.0 |
+| Frame time, Jerry's GPU, High, night 20 | 60 fps mean, ≥ 50 fps 1 % low | **55.9 fps median, 29.6 low; tick 14.3 ms** (AG-97, 10-20 01:27Z); was 49.9 (AG-91), 44.8 (21:08Z) and 32.5 before CL-211; night 10 45.4; the megaswarm 60.0; **day 5 59.5 fps, 43.6 low** (AG-94) |
 
 The world is holding (CL-117 measured 561 draws and 770 k at the HQ on 10-02). What grew is what there are many of:
 the dead (each now 10-17 k triangles, drawn twice with its shadow) and the marine and his survivors.
@@ -136,3 +136,85 @@ thirds of it is three's `renderer.render()` walking and submitting the scene:
   transparents 0.8, the shadow 1.1), the dead 3.6 (ChatGPT's GP-19934: to 2), the matrices 3.1.
 - **Next, from `bench.mjs --census`:** how many Object3Ds the scene holds and whose; static props that recompose
   their matrix every frame (`matrixAutoUpdate`); the zombies' 2.5-4 ms; the daytime shadow pass.
+
+## 2026-10-19, late: the draws that are left (CL-214, CL-218)
+
+From AG-91 (three night-20 runs, 22:52Z), AG-94 (the day) and AG-92 (23:33Z), all on Jerry's 5080 at High:
+
+| | fps (1% low) | frame | render() | draws (camera) |
+| --- | --- | --- | --- | --- |
+| Night 20, before CL-214 (AG-89) | 45.5 (24.7) | 21.98 ms | 10.89 ms | 468 |
+| Night 20, CL-214's rock cells (median of 3, AG-91) | 49.9 (28.9) | 20.04 ms | 9.74 ms | 395 |
+| Night 20, AG-92's four prop merges | 50.3 (31.6) | | | 390 |
+| Day 5 (the sun's full shadows, AG-94) | 59.5 (43.6) | 16.81 ms | 8.80 ms | 314 (+13 shadow) |
+
+- **CL-214:** the 147 rocks are drawn from 47 merged cells (41 culled at night): 147 draws to 4.
+- **render() is now about 25 µs a draw.** Of night 20's 396 camera draws (AG-91's census by owner): the HQ house
+  145, loose world meshes 65 (foliage chunks, tree cells, the river's life, the landmarks), the marine 54, the ground
+  sectors 39, the dead about 77 (eyes and skin a zombie, the demon's fist and horn).
+- **CL-218 (23:40Z):** the HQ house was one draw a material (CL-117), and its hatches and props bring their own
+  colours. `world/bake.js` `foldStatic` folds every plain one (no texture, no glow, opaque) into one mesh a side,
+  its colour, roughness and metalness per vertex (a node material reads them), as CL-210 did for the marine. Expected:
+  the house from 145 to about 40 draws, about 2.5 ms off the night's frame. AG-96 measures it (`?fold=0` is the old
+  way).
+- **Next:** the loose world meshes (the river's 67 chunks of weed, reeds and pads, the boundary stations), the dead's
+  eyes (one draw with the skin, GP-19939), the marine's 32.
+
+## 2026-10-20: read the tick, not the fps (CL-219)
+
+The bench's display refreshes at 60 Hz (the megaswarm reads exactly 60.0 fps, 16.67 ms, with a 12.2 ms tick), so a
+frame is shown on a 16.7 ms beat: a tick under it is a 60 fps frame, a tick just over it waits for the next beat and is
+a 30 fps frame. That is why night 20's fps barely moved while its work fell: a 17-18 ms tick (AG-91, AG-96) is a mix of
+16.7 and 33.3 ms frames, about 48-50 fps, and a cut that leaves the tick over 16.7 shows nothing. **The measure is
+`prof.tickMs`; the bar for 60 fps is a tick under about 15 ms** (room for its swings), and the 1 % low is the
+heavy frames (the night's shadow redraw every 4th frame until CL-219, the 50 ms spikes of a material compiling or the
+marine rebaking).
+
+| Night 20, High | tick | frame | fps |
+| --- | --- | --- | --- |
+| AG-91 (CL-214), median | 17.81 ms | 20.04 ms | 49.9 |
+| AG-96 (CL-218 fold), median | 17.03 ms | 20.96 ms | 47.7 |
+| Day 5 (AG-94) | 14.99 ms | 16.81 ms | 59.5 |
+| AG-97 (CL-218's second cuts, CL-219's night shadows, GP-19939's eyes), median | 14.31 ms | 17.89 ms | 55.9 |
+| AG-97, best of 3 | 14.13 ms | 17.36 ms | 57.6 |
+
+AG-97 (01:27Z): night 20's camera draws 334 to 265 (the house 74, the marine 52, loose world meshes 50, the dead 37,
+the terrain 16), `r:render` 9.2 to 7.0 ms, and `computeBoundingSphere` gone from the profile. The tick is now under
+the beat most of the time; what keeps the 1 % low near 30 fps is the frames that aren't: the 40-70 ms first-sight
+shader builds (`r:render` 38-73 ms in `prof.spikes`; ChatGPT's GP-19940 warms them), the `zombies` mark's swings (2.5
+ms on average, 13 ms at worst) and the matrices' (1.6, at worst 4.2).
+
+
+
+## 2026-10-20, night: the long frames are garbage collection (GP-19940, CL-220)
+
+ChatGPT's traces (GP-19940) showed no new pipeline on the 40-53 ms `r:render` frames once the zombie kinds and
+effects were warmed; `bench --alloc` (a DevTools allocation sample over the measured seconds, CL-219) then found
+**1,558 kB allocated a frame at night 20 (87 MB/s)**: a young-generation scavenge every second or so and a full
+collection every few, each one a 20-70 ms frame. Two of six spikes were proven collections (22 and 74 MB freed in the
+frame); the rest grew the heap by 10 MB and are not proven either way.
+
+Where it came from (kB a frame, `alloc.self`): updateZombies 264; the marine's waist 235 and cloth 131 (the per-vertex
+`Math.hypot`); three's cache keys 160 (get/getNodeChildren/getDynamicCacheKey, the renderer's own, not ours); the
+ability collision sweep 59; marine-skin's state arrays 24; the water's `riverProject` result objects 24; tree
+collisions, sceneCull, the tree fade and sampleClip 8-14 each.
+
+**`Math.hypot` allocates.** In V8 every call builds a double array (about 64 bytes), whatever the argument count:
+5e6 calls ran 311 scavenges and 348 ms against 79 and 58 ms for `Math.sqrt(a * a + b * b)`. index.html made about
+600 such calls in its text and thousands a frame at night (every zombie's distance checks, the trees, the water, the
+sounds). Every `Math.hypot(` in index.html is `hypot(a, b, c)` now (CL-220), and the rule for per-frame code is: no
+fresh objects or arrays, no `Math.hypot`; scratch objects reused across frames.
+
+| Night 20, High, `--alloc` | kB a frame | render spikes |
+| --- | --- | --- |
+| Baseline (ChatGPT, 06:4xZ) | 1,558 | 6 (2 proven GC) |
+| The waist, the cloth, the acid ribbon cut | 1,092 | 3 |
+| The ability collision sweep cut | 954 | 7 (1 proven GC) |
+| CL-220's hypot/riverProject/marine-skin (after 07:35Z) | not benched yet | |
+
+Still to cut: updateZombies 270 (Grokbot, GB-202: objects or arrays per zombie per frame, not hypot any more); the
+ability trace 48 (ChatGPT). The target is under about 300 kB a frame: collections every few seconds instead of every
+one, and a scavenge of a small young generation is a few ms, not forty. three's 160 is a lead for a later three bump.
+
+Also found by the way: a batched tree whose snapshot changed and changed back (the canopy fade on the camera's line
+after any teleport) stayed live for the rest of the run: a slow draw-count leak in play, fixed in CL-220 (t50).

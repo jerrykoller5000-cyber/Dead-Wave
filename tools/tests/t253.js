@@ -6,6 +6,7 @@
 //  - He shoots in the air: a held trigger spends rounds mid-flight.
 //  - In the air a zombie's damage misses and fire does not.
 //  - He lands, lies (time back to normal), stays down with no key, a fresh W gets him up, then a short cooldown.
+// (CL-220: the waits are three times the game time they cover: the suite's page runs slow and dt is capped.)
 //  - An empty meter: the dive still goes, at full speed. A kill tops the meter up.
 //  - Shouldered (right mouse), the same dive, and the shoulder camera comes down with him.
 (async () => {
@@ -48,21 +49,21 @@
     T.clearZombies && T.clearZombies();
 
     // He lands and lies; with W still held from the flight he stays down.
-    ok(await until(() => D().phase === 'down', 6000), 'he lands (' + D().phase + ')');
+    ok(await until(() => D().phase === 'down', 15000), 'he lands (' + D().phase + ')');
     const travel = Math.hypot(P.x - x0, P.z - z0);
     ok(travel > 1.5 && flightSpeed > 6, 'the dive carried him ' + travel.toFixed(1) + ' m at ' + flightSpeed.toFixed(1) + ' m/s (a wall can stop it short)');
-    ok(await until(() => D().k > 0.99, 1500), 'time is back to normal on the ground (' + D().k.toFixed(2) + ')');
+    ok(await until(() => D().k > 0.99, 4500), 'time is back to normal on the ground (' + D().k.toFixed(2) + ')');
     await wait(500);
     ok(D().phase === 'down', 'a key held through the landing does not get him up');
     key('keyup', 'KeyW'); await wait(120); key('keydown', 'KeyW');
-    ok(await until(() => D().phase === 'up' || D().phase === 'idle', 1500), 'a fresh W gets him up (' + D().phase + ')');
+    ok(await until(() => D().phase === 'up' || D().phase === 'idle', 4500), 'a fresh W gets him up (' + D().phase + ')');
     key('keyup', 'KeyW');
-    ok(await until(() => D().phase === 'idle', 2000), 'and he is back on his feet');
+    ok(await until(() => D().phase === 'idle', 6000), 'and he is back on his feet');
     key('keydown', 'KeyV'); key('keyup', 'KeyV');
     ok(D().phase === 'idle', 'a short cooldown before the next one');
 
     // An empty meter: no slow motion, the dive still goes. A kill tops it up.
-    await until(() => D().cd <= 0, 2000);
+    await until(() => D().cd <= 0, 6000);
     T.setDiveMeterDbg(0);
     key('keydown', 'KeyV'); key('keyup', 'KeyV');
     ok(D().phase === 'air', 'with an empty meter he still dives');
